@@ -1,0 +1,22 @@
+# For more information about this configuration visit
+# https://docs.fastlane.tools/actions/gym/#gymfile
+
+# In general, you can use the options available
+# fastlane gym --help
+
+# Remove the # in front of the line to enable the option
+
+# scheme "Example"
+
+# sdk "iphoneos9.0"
+
+derived_data_path ENV["STAGE_BUILD_PATH"]
+buildlog_path ENV["STAGE_BUILD_PATH"]
+build_path ENV["STAGE_BUILD_PATH"]
+output_directory ENV["STAGE_ARTIFACTS_PATH"]
+output_name ENV["STAGE_ARCHIVE_NAME"]
+
+clean true
+silent false
+include_bitcode false
+skip_profile_detection true

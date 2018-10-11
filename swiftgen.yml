@@ -1,0 +1,14 @@
+strings:
+    paths:
+        - Passepartout/Resources/en.lproj/Localizable.strings
+    templateName: structured-swift4
+    output: Passepartout/Sources/SwiftGen+Strings.swift
+
+storyboards:
+    paths:
+        - Passepartout-iOS/en.lproj/Main.storyboard
+        - Passepartout-iOS/en.lproj/Organizer.storyboard
+    templateName: swift4
+    output: Passepartout-iOS/Global/SwiftGen+Storyboards.swift
+    params:
+        module: Passepartout

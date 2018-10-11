@@ -1,0 +1,223 @@
+//
+//  AccountViewController.swift
+//  Passepartout-iOS
+//
+//  Created by Davide De Rosa on 6/12/18.
+//  Copyright (c) 2018 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/keeshux
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+import UIKit
+
+protocol AccountViewControllerDelegate: class {
+    func accountController(_: AccountViewController, didEnterCredentials credentials: Credentials)
+    
+    func accountControllerDidComplete(_: AccountViewController)
+}
+
+class AccountViewController: UIViewController, TableModelHost {
+    @IBOutlet private weak var tableView: UITableView?
+    
+    private weak var cellUsername: FieldTableViewCell?
+    
+    private weak var cellPassword: FieldTableViewCell?
+    
+    private weak var cellPasswordConfirmation: FieldTableViewCell?
+    
+    var currentCredentials: Credentials?
+    
+    var usernamePlaceholder: String?
+    
+    var infrastructureName: Infrastructure.Name? {
+        didSet {
+            guard let name = infrastructureName else {
+                model.removeFooter(for: .only)
+                return
+            }
+            let V = L10n.Account.SuggestionFooter.Infrastructure.self
+            switch name {
+            case .pia:
+                model.setFooter(V.pia, for: .only)
+            }
+            tableView?.reloadData()
+        }
+    }
+
+    var credentials: Credentials {
+        let username = cellUsername?.field.text ?? ""
+        let password = cellPassword?.field.text ?? ""
+        return Credentials(username, password).trimmed()
+    }
+
+    weak var delegate: AccountViewControllerDelegate?
+
+    // MARK: TableModelHost
+    
+    let model: TableModel<SectionType, RowType> = {
+        let model: TableModel<SectionType, RowType> = TableModel()
+        model.add(.only)
+        model.set([.username, .password, .passwordConfirmation], in: .only)
+        return model
+    }()
+    
+    func reloadModel() {
+    }
+    
+    // MARK: UIViewController
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        applyDetailTitle(Theme.current)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = L10n.Service.Cells.Account.caption
+        cellUsername?.field.text = currentCredentials?.username
+        cellPassword?.field.text = currentCredentials?.password
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        cellUsername?.field.becomeFirstResponder()
+    }
+    
+    // MARK: Actions
+
+    private func commit() {
+        let newCredentials = credentials
+//        guard !credentials.isEmpty else {
+//            return
+//        }
+        currentCredentials = newCredentials
+        delegate?.accountController(self, didEnterCredentials: newCredentials)
+    }
+    
+    @IBAction private func done() {
+        guard cellPassword?.field.text == cellPasswordConfirmation?.field.text else {
+            let alert = Macros.alert(title, L10n.Account.Cells.PasswordConfirm.mismatch)
+            alert.addCancelAction(L10n.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        view.endEditing(true)
+        delegate?.accountControllerDidComplete(self)
+    }
+
+    @objc private func footerTapped() {
+    }
+}
+
+// MARK: -
+
+extension AccountViewController: UITableViewDataSource, UITableViewDelegate, FieldTableViewCellDelegate {
+    enum SectionType: Int {
+        case only
+    }
+    
+    enum RowType: Int {
+        case username
+        
+        case password
+        
+        case passwordConfirmation
+    }
+    
+    private static let footerButtonTag = 1000
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return model.footer(for: .only)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        var optButton = view.viewWithTag(AccountViewController.footerButtonTag) as? UIButton
+        if optButton == nil {
+            let button = UIButton()
+            button.frame = view.bounds
+            view.addSubview(button)
+            optButton = button
+        }
+        optButton?.addTarget(self, action: #selector(footerTapped), for: .touchUpInside)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.count(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Cells.field.dequeue(from: tableView, for: indexPath)
+        switch model.row(at: indexPath) {
+        case .username:
+            cellUsername = cell
+            cell.caption = L10n.Account.Cells.Username.caption
+            cell.field.placeholder = usernamePlaceholder ?? L10n.Account.Cells.Username.placeholder
+            cell.field.clearButtonMode = .always
+            cell.field.isSecureTextEntry = false
+            cell.field.text = currentCredentials?.username
+            cell.field.keyboardType = .emailAddress
+            cell.field.returnKeyType = .next
+
+        case .password:
+            cellPassword = cell
+            cell.caption = L10n.Account.Cells.Password.caption
+            cell.field.placeholder = L10n.Account.Cells.Password.placeholder
+            cell.field.clearButtonMode = .always
+            cell.field.isSecureTextEntry = true
+            cell.field.text = currentCredentials?.password
+            cell.field.returnKeyType = .done
+            
+        case .passwordConfirmation:
+            cellPasswordConfirmation = cell
+            cell.caption = L10n.Account.Cells.PasswordConfirm.caption
+            cell.field.placeholder = L10n.Account.Cells.Password.placeholder
+            cell.field.clearButtonMode = .always
+            cell.field.isSecureTextEntry = true
+            cell.field.text = currentCredentials?.password
+            cell.field.returnKeyType = .done
+        }
+        cell.captionWidth = 120.0
+        cell.delegate = self
+        return cell
+    }
+    
+    func fieldCellDidEdit(_: FieldTableViewCell) {
+        commit()
+    }
+    
+    func fieldCellDidEnter(_ cell: FieldTableViewCell) {
+        switch cell {
+        case cellUsername:
+            cellPassword?.field.becomeFirstResponder()
+            
+        case cellPassword:
+            cellPasswordConfirmation?.field.becomeFirstResponder()
+            
+        case cellPasswordConfirmation:
+            cellPasswordConfirmation?.field.resignFirstResponder()
+            done()
+            
+        default:
+            break
+        }
+    }
+}

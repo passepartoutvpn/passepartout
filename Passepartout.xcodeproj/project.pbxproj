@@ -1,0 +1,1231 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */; };
+		0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */; };
+		0E05C5D620D1645F006EE732 /* SwiftGen+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE320C89028004C739C /* SwiftGen+Storyboards.swift */; };
+		0E05C5D720D1645F006EE732 /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */; };
+		0E05C5DC20D198B9006EE732 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E05C5DF20D198B9006EE732 /* Localizable.strings */; };
+		0E05C5E420D1993C006EE732 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C5E320D1993C006EE732 /* SwiftGen+Strings.swift */; };
+		0E05C61D20D27C82006EE732 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C61C20D27C82006EE732 /* Theme.swift */; };
+		0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1066C820E0F84A004F98B7 /* Cells.swift */; };
+		0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */; };
+		0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */; };
+		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
+		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
+		0E2B494220FD16540094784C /* TransientStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B494120FD16540094784C /* TransientStore.swift */; };
+		0E39BCF0214B9EF10035E9DE /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCEF214B9EF10035E9DE /* WebServices.swift */; };
+		0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCF2214DA9310035E9DE /* AppConstants.swift */; };
+		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
+		0E4C9CB920DB9BC600A0C59C /* TrustedNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */; };
+		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
+		0E4FD7DE20D3E49A002221FF /* StandardVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */; };
+		0E4FD7E120D3E4C5002221FF /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */; };
+		0E4FD7EE20D539A0002221FF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
+		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
+		0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63B20C83FC5008323CF /* AppDelegate.swift */; };
+		0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63D20C83FC5008323CF /* ServiceViewController.swift */; };
+		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
+		0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64220C83FC7008323CF /* Assets.xcassets */; };
+		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
+		0E5E5DDF215119AF00E318A3 /* VPNStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */; };
+		0E5E5DE2215119DD00E318A3 /* VPNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */; };
+		0E5E5DE521511C5F00E318A3 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */; };
+		0E6BE13A20CFB76800A6DD36 /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */; };
+		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
+		0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC4213DF7AE00741BA1 /* Preferences.swift */; };
+		0E89DFC8213E8FC500741BA1 /* TunnelKitProvider+Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC7213E8FC500741BA1 /* TunnelKitProvider+Communication.swift */; };
+		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
+		0E89DFD0213F223400741BA1 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCF213F223400741BA1 /* Wizard.swift */; };
+		0E8D97E221388B52006FB4A0 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
+		0E8D97E521389277006FB4A0 /* pia.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D97E421389276006FB4A0 /* pia.json */; };
+		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
+		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
+		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
+		0EBE3A84213C6ADE00BFA2F5 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */; };
+		0EBE3A90213C6F4000BFA2F5 /* TrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */; };
+		0EBE3AA0213DC1A100BFA2F5 /* ConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */; };
+		0EBE3AA1213DC1A100BFA2F5 /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */; };
+		0EBE3AA5213DC1B000BFA2F5 /* HostConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */; };
+		0EBE3AA6213DC1B000BFA2F5 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
+		0EBE3AAC213DEB8800BFA2F5 /* ConnectionProfileHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AAB213DEB8800BFA2F5 /* ConnectionProfileHolder.swift */; };
+		0EC7F20520E24308004EA58E /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7F20420E24308004EA58E /* DebugLog.swift */; };
+		0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44D20E1122200A6BB43 /* TableModel.swift */; };
+		0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */; };
+		0ED31C1020CF09A30027975F /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C0F20CF09A30027975F /* Pool.swift */; };
+		0ED31C1220CF0ABA0027975F /* Infrastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C1120CF0ABA0027975F /* Infrastructure.swift */; };
+		0ED31C2720CF257C0027975F /* InfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2620CF257C0027975F /* InfrastructureTests.swift */; };
+		0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2820CF2A340027975F /* AccountViewController.swift */; };
+		0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */; };
+		0ED31C3720CF38D10027975F /* VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C3620CF38D10027975F /* VPN.swift */; };
+		0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
+		0ED31C3D20CF396E0027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
+		0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AD8213F33150004D387 /* WizardHostViewController.swift */; };
+		0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED38ADC213F44D00004D387 /* Organizer.storyboard */; };
+		0ED38ADE213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38ADD213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift */; };
+		0ED38AE1213F51370004D387 /* FileConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE0213F51370004D387 /* FileConfigurationTests.swift */; };
+		0ED38AE3213F517D0004D387 /* pia-hungary.ovpn in Resources */ = {isa = PBXBuildFile; fileRef = 0ED38AE2213F517D0004D387 /* pia-hungary.ovpn */; };
+		0ED38AE721404F100004D387 /* EndpointDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE621404F100004D387 /* EndpointDataSource.swift */; };
+		0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE9214054A50004D387 /* OptionViewController.swift */; };
+		0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */; };
+		0ED38AF2214177920004D387 /* VPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AF1214177920004D387 /* VPNProvider.swift */; };
+		0EDE8DC420C86910004C739C /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */; };
+		0EDE8DC820C86910004C739C /* Passepartout-iOS-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* Passepartout-iOS-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0EDE8DE720C93945004C739C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE620C93945004C739C /* Credentials.swift */; };
+		0EDE8DEE20C93E4C004C739C /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
+		0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */; };
+		0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5CF242141CE58004FF1BD /* HUD.swift */; };
+		0EF5CF292141F31F004FF1BD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
+		0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943D215BE10800529B64 /* IssueReporter.swift */; };
+		0EFD9440215BED8E00529B64 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943F215BED8E00529B64 /* CreditsViewController.swift */; };
+		390EEC911382C4814FB97475 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0C619B826C7140001C0F32 /* Pods_Passepartout_iOS_Tunnel.framework */; };
+		61E05ED5CCEEA859AD1752F3 /* Pods_Passepartout_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9FBA5419C4B758FB5D68E96 /* Pods_Passepartout_iOS.framework */; };
+		CB086D724184B22B368E5BEF /* Pods_PassepartoutTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E80C2390BBF547A62D4D277 /* Pods_PassepartoutTests_iOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0E57F64D20C83FC7008323CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E57F63720C83FC5008323CF;
+			remoteInfo = Passepartout;
+		};
+		0EDE8DC620C86910004C739C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0EDE8DBE20C86910004C739C;
+			remoteInfo = "Passepartout-iOS-Tunnel";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0EDE8DCC20C86910004C739C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0EDE8DC820C86910004C739C /* Passepartout-iOS-Tunnel.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		05C743241486C000F882DE79 /* Pods-Passepartout-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTableViewCell.swift; sourceTree = "<group>"; };
+		0E05C5DE20D198B9006EE732 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E05C5E020D198D6006EE732 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0E05C5E120D198D6006EE732 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0E05C5E320D1993C006EE732 /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
+		0E05C61C20D27C82006EE732 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0E1066C820E0F84A004F98B7 /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
+		0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointViewController.swift; sourceTree = "<group>"; };
+		0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderPresetViewController.swift; sourceTree = "<group>"; };
+		0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
+		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
+		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
+		0E39BCEF214B9EF10035E9DE /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
+		0E39BCF2214DA9310035E9DE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
+		0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworks.swift; sourceTree = "<group>"; };
+		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
+		0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardVPNProvider.swift; sourceTree = "<group>"; };
+		0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVPNProvider.swift; sourceTree = "<group>"; };
+		0E4FD7ED20D539A0002221FF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0E4FD7F020D58618002221FF /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		0E4FD80420D683A2002221FF /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
+		0E57F63820C83FC5008323CF /* Passepartout-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Passepartout-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E57F63B20C83FC5008323CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E57F64C20C83FC7008323CF /* PassepartoutTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PassepartoutTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E57F65220C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
+		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
+		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
+		0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
+		0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
+		0E89DFC4213DF7AE00741BA1 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		0E89DFC7213E8FC500741BA1 /* TunnelKitProvider+Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKitProvider+Communication.swift"; sourceTree = "<group>"; };
+		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
+		0E89DFCF213F223400741BA1 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
+		0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructurePreset.swift; sourceTree = "<group>"; };
+		0E8D97E421389276006FB4A0 /* pia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pia.json; sourceTree = "<group>"; };
+		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
+		0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerViewController.swift; sourceTree = "<group>"; };
+		0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureFactory.swift; sourceTree = "<group>"; };
+		0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustPolicy.swift; sourceTree = "<group>"; };
+		0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionProfile.swift; sourceTree = "<group>"; };
+		0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionService.swift; sourceTree = "<group>"; };
+		0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostConnectionProfile.swift; sourceTree = "<group>"; };
+		0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderConnectionProfile.swift; sourceTree = "<group>"; };
+		0EBE3AAB213DEB8800BFA2F5 /* ConnectionProfileHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionProfileHolder.swift; sourceTree = "<group>"; };
+		0EC7F20420E24308004EA58E /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		0ECEE44D20E1122200A6BB43 /* TableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
+		0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Cells.swift"; sourceTree = "<group>"; };
+		0ED31C0F20CF09A30027975F /* Pool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pool.swift; sourceTree = "<group>"; };
+		0ED31C1120CF0ABA0027975F /* Infrastructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Infrastructure.swift; sourceTree = "<group>"; };
+		0ED31C2620CF257C0027975F /* InfrastructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureTests.swift; sourceTree = "<group>"; };
+		0ED31C2820CF2A340027975F /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderPoolViewController.swift; sourceTree = "<group>"; };
+		0ED31C3620CF38D10027975F /* VPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPN.swift; sourceTree = "<group>"; };
+		0ED31C3920CF39510027975F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		0ED31C3B20CF39510027975F /* Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
+		0ED38AD8213F33150004D387 /* WizardHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardHostViewController.swift; sourceTree = "<group>"; };
+		0ED38ADB213F44D00004D387 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Organizer.storyboard; sourceTree = "<group>"; };
+		0ED38ADD213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKitProvider+FileConfiguration.swift"; sourceTree = "<group>"; };
+		0ED38AE0213F51370004D387 /* FileConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileConfigurationTests.swift; sourceTree = "<group>"; };
+		0ED38AE2213F517D0004D387 /* pia-hungary.ovpn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pia-hungary.ovpn"; sourceTree = "<group>"; };
+		0ED38AE621404F100004D387 /* EndpointDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointDataSource.swift; sourceTree = "<group>"; };
+		0ED38AE9214054A50004D387 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModificationDelegate.swift; sourceTree = "<group>"; };
+		0ED38AF1214177920004D387 /* VPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNProvider.swift; sourceTree = "<group>"; };
+		0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
+		0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		0EDE8DBF20C86910004C739C /* Passepartout-iOS-Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Passepartout-iOS-Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		0EDE8DC520C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0EDE8DD220C86978004C739C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		0EDE8DE220C86A13004C739C /* Passepartout.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Passepartout.entitlements; sourceTree = "<group>"; };
+		0EDE8DE320C89028004C739C /* SwiftGen+Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Storyboards.swift"; sourceTree = "<group>"; };
+		0EDE8DE620C93945004C739C /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		0EDE8DED20C93E4C004C739C /* GroupConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupConstants.swift; sourceTree = "<group>"; };
+		0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		0EF5CF242141CE58004FF1BD /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
+		0EFD943F215BED8E00529B64 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
+		28B2E6590DE79C3B403348DC /* Pods-Passepartout-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		2F14CE1B8BBCB7B187610A9E /* Pods-PassepartoutTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		3E7BC601C2DEB273955334A5 /* Pods-PassepartoutTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		4982BB989C57CA2A92283691 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
+		4D0C619B826C7140001C0F32 /* Pods_Passepartout_iOS_Tunnel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_iOS_Tunnel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5428008455E78CDD2DC495D7 /* Pods-Passepartout-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		5C8E20D86DFCED1B5A793273 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.release.xcconfig"; sourceTree = "<group>"; };
+		5E80C2390BBF547A62D4D277 /* Pods_PassepartoutTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PassepartoutTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DEBC5E475CE971530D3A24F /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
+		A341F6829A4440DCD6F7AFE8 /* Pods-PassepartoutTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		BA76378B386C75892BEFA73E /* Pods-Passepartout-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		C2B52DCF4BB363FEDC19E003 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.release.xcconfig"; sourceTree = "<group>"; };
+		E9FBA5419C4B758FB5D68E96 /* Pods_Passepartout_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F55E5FC695C594928582A031 /* Pods-PassepartoutTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0E57F63520C83FC5008323CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ED31C3D20CF396E0027975F /* NetworkExtension.framework in Frameworks */,
+				61E05ED5CCEEA859AD1752F3 /* Pods_Passepartout_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E57F64920C83FC7008323CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB086D724184B22B368E5BEF /* Pods_PassepartoutTests_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0EDE8DBC20C86910004C739C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */,
+				390EEC911382C4814FB97475 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E1066CA20E0F85C004F98B7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0E1066C820E0F84A004F98B7 /* Cells.swift */,
+				0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */,
+				0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */,
+				0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */,
+				0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		0E4FD7D920D3E43F002221FF /* VPN */ = {
+			isa = PBXGroup;
+			children = (
+				0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */,
+				0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */,
+				0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */,
+				0ED38ADD213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift */,
+				0ED31C3620CF38D10027975F /* VPN.swift */,
+				0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */,
+				0ED38AF1214177920004D387 /* VPNProvider.swift */,
+				0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */,
+			);
+			path = VPN;
+			sourceTree = "<group>";
+		};
+		0E57F62F20C83FC5008323CF = {
+			isa = PBXGroup;
+			children = (
+				0EDE8DEF20C93EBB004C739C /* Passepartout */,
+				0E57F63A20C83FC5008323CF /* Passepartout-iOS */,
+				0EDE8DC020C86910004C739C /* Passepartout-iOS-Tunnel */,
+				0E57F64F20C83FC7008323CF /* PassepartoutTests-iOS */,
+				0E57F63920C83FC5008323CF /* Products */,
+				374B9F085E1148C37CF9117A /* Frameworks */,
+				ECB6C4CA315B2CB2AFE7ACBB /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		0E57F63920C83FC5008323CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0E57F63820C83FC5008323CF /* Passepartout-iOS.app */,
+				0E57F64C20C83FC7008323CF /* PassepartoutTests-iOS.xctest */,
+				0EDE8DBF20C86910004C739C /* Passepartout-iOS-Tunnel.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0E57F63A20C83FC5008323CF /* Passepartout-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				0EDE8DEC20C93E3B004C739C /* Global */,
+				0E1066CA20E0F85C004F98B7 /* Cells */,
+				0ECEE44C20E1120F00A6BB43 /* Tables */,
+				0EDE8DF120C93ED8004C739C /* Scenes */,
+				0EDE8DE220C86A13004C739C /* Passepartout.entitlements */,
+				0E57F63B20C83FC5008323CF /* AppDelegate.swift */,
+				0E57F63F20C83FC5008323CF /* Main.storyboard */,
+				0ED38ADC213F44D00004D387 /* Organizer.storyboard */,
+				0E57F64220C83FC7008323CF /* Assets.xcassets */,
+				0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */,
+				0E57F64720C83FC7008323CF /* Info.plist */,
+			);
+			path = "Passepartout-iOS";
+			sourceTree = "<group>";
+		};
+		0E57F64F20C83FC7008323CF /* PassepartoutTests-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				0ED38AE2213F517D0004D387 /* pia-hungary.ovpn */,
+				0ED38AE0213F51370004D387 /* FileConfigurationTests.swift */,
+				0ED31C2620CF257C0027975F /* InfrastructureTests.swift */,
+				0E57F65220C83FC7008323CF /* Info.plist */,
+			);
+			path = "PassepartoutTests-iOS";
+			sourceTree = "<group>";
+		};
+		0E89DFCC213EEDE700741BA1 /* Organizer */ = {
+			isa = PBXGroup;
+			children = (
+				0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */,
+				0EFD943F215BED8E00529B64 /* CreditsViewController.swift */,
+				0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */,
+				0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */,
+				0ED38AD8213F33150004D387 /* WizardHostViewController.swift */,
+				0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */,
+			);
+			path = Organizer;
+			sourceTree = "<group>";
+		};
+		0E8D97C621388679006FB4A0 /* Infrastructures */ = {
+			isa = PBXGroup;
+			children = (
+				0E8D97E421389276006FB4A0 /* pia.json */,
+			);
+			path = Infrastructures;
+			sourceTree = "<group>";
+		};
+		0EBE3AA2213DC1B000BFA2F5 /* Profiles */ = {
+			isa = PBXGroup;
+			children = (
+				0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */,
+				0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */,
+			);
+			path = Profiles;
+			sourceTree = "<group>";
+		};
+		0ECEE44C20E1120F00A6BB43 /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				0ECEE44D20E1122200A6BB43 /* TableModel.swift */,
+			);
+			path = Tables;
+			sourceTree = "<group>";
+		};
+		0ED31C0E20CF09890027975F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0EBE3AA2213DC1B000BFA2F5 /* Profiles */,
+				0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */,
+				0EBE3AAB213DEB8800BFA2F5 /* ConnectionProfileHolder.swift */,
+				0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */,
+				0EDE8DE620C93945004C739C /* Credentials.swift */,
+				0EC7F20420E24308004EA58E /* DebugLog.swift */,
+				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
+				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
+				0E89DFC7213E8FC500741BA1 /* TunnelKitProvider+Communication.swift */,
+				0E2B494120FD16540094784C /* TransientStore.swift */,
+				0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */,
+				0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */,
+				0E89DFCF213F223400741BA1 /* Wizard.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0ED31C1B20CF0ACE0027975F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0ED31C1120CF0ABA0027975F /* Infrastructure.swift */,
+				0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */,
+				0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */,
+				0ED31C0F20CF09A30027975F /* Pool.swift */,
+				0E39BCEF214B9EF10035E9DE /* WebServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0ED31C1C20CF17CC0027975F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0E8D97C621388679006FB4A0 /* Infrastructures */,
+				0E05C5DF20D198B9006EE732 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0EDE8DC020C86910004C739C /* Passepartout-iOS-Tunnel */ = {
+			isa = PBXGroup;
+			children = (
+				0ED31C3B20CF39510027975F /* Tunnel.entitlements */,
+				0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */,
+				0EDE8DC520C86910004C739C /* Info.plist */,
+			);
+			path = "Passepartout-iOS-Tunnel";
+			sourceTree = "<group>";
+		};
+		0EDE8DEC20C93E3B004C739C /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				0EF5CF242141CE58004FF1BD /* HUD.swift */,
+				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
+				0E4FD7F020D58618002221FF /* Macros.swift */,
+				0ED38AE9214054A50004D387 /* OptionViewController.swift */,
+				0EDE8DE320C89028004C739C /* SwiftGen+Storyboards.swift */,
+				0E05C61C20D27C82006EE732 /* Theme.swift */,
+				0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */,
+				0E2B493F20FCFF990094784C /* Theme+Titles.swift */,
+				0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		0EDE8DEF20C93EBB004C739C /* Passepartout */ = {
+			isa = PBXGroup;
+			children = (
+				0ED31C1C20CF17CC0027975F /* Resources */,
+				0EDE8DF020C93EBB004C739C /* Sources */,
+			);
+			path = Passepartout;
+			sourceTree = "<group>";
+		};
+		0EDE8DF020C93EBB004C739C /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0ED31C0E20CF09890027975F /* Model */,
+				0ED31C1B20CF0ACE0027975F /* Services */,
+				0E4FD7D920D3E43F002221FF /* VPN */,
+				0E39BCF2214DA9310035E9DE /* AppConstants.swift */,
+				0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */,
+				0EDE8DED20C93E4C004C739C /* GroupConstants.swift */,
+				0E05C5E320D1993C006EE732 /* SwiftGen+Strings.swift */,
+				0E4FD7ED20D539A0002221FF /* Utils.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		0EDE8DF120C93ED8004C739C /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0E89DFCC213EEDE700741BA1 /* Organizer */,
+				0ED31C2820CF2A340027975F /* AccountViewController.swift */,
+				0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */,
+				0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */,
+				0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */,
+				0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */,
+				0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */,
+				0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */,
+				0E57F63D20C83FC5008323CF /* ServiceViewController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		374B9F085E1148C37CF9117A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0E4FD80420D683A2002221FF /* NetworkExtension.framework */,
+				0ED31C3920CF39510027975F /* NetworkExtension.framework */,
+				0EDE8DD220C86978004C739C /* NotificationCenter.framework */,
+				E9FBA5419C4B758FB5D68E96 /* Pods_Passepartout_iOS.framework */,
+				4D0C619B826C7140001C0F32 /* Pods_Passepartout_iOS_Tunnel.framework */,
+				5E80C2390BBF547A62D4D277 /* Pods_PassepartoutTests_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECB6C4CA315B2CB2AFE7ACBB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				28B2E6590DE79C3B403348DC /* Pods-Passepartout-iOS.debug.xcconfig */,
+				5428008455E78CDD2DC495D7 /* Pods-Passepartout-iOS.release.xcconfig */,
+				4982BB989C57CA2A92283691 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */,
+				C2B52DCF4BB363FEDC19E003 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */,
+				A341F6829A4440DCD6F7AFE8 /* Pods-PassepartoutTests-iOS.debug.xcconfig */,
+				F55E5FC695C594928582A031 /* Pods-PassepartoutTests-iOS.release.xcconfig */,
+				05C743241486C000F882DE79 /* Pods-Passepartout-iOS.debug.xcconfig */,
+				BA76378B386C75892BEFA73E /* Pods-Passepartout-iOS.release.xcconfig */,
+				8DEBC5E475CE971530D3A24F /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */,
+				5C8E20D86DFCED1B5A793273 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */,
+				2F14CE1B8BBCB7B187610A9E /* Pods-PassepartoutTests-iOS.debug.xcconfig */,
+				3E7BC601C2DEB273955334A5 /* Pods-PassepartoutTests-iOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0E57F63720C83FC5008323CF /* Passepartout-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout-iOS" */;
+			buildPhases = (
+				03F725174F868DC4FFE73BEB /* [CP] Check Pods Manifest.lock */,
+				0E57F63420C83FC5008323CF /* Sources */,
+				0E57F63520C83FC5008323CF /* Frameworks */,
+				0E57F63620C83FC5008323CF /* Resources */,
+				0EDE8DCC20C86910004C739C /* Embed App Extensions */,
+				20711B9AA062AB9C5EF57B3C /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0EDE8DC720C86910004C739C /* PBXTargetDependency */,
+			);
+			name = "Passepartout-iOS";
+			productName = Passepartout;
+			productReference = 0E57F63820C83FC5008323CF /* Passepartout-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0E57F64B20C83FC7008323CF /* PassepartoutTests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E57F65820C83FC7008323CF /* Build configuration list for PBXNativeTarget "PassepartoutTests-iOS" */;
+			buildPhases = (
+				A5984A2DF2C43505FA7E4866 /* [CP] Check Pods Manifest.lock */,
+				0E57F64820C83FC7008323CF /* Sources */,
+				0E57F64920C83FC7008323CF /* Frameworks */,
+				0E57F64A20C83FC7008323CF /* Resources */,
+				9C7DFA86B13FF0B80CFED9EF /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E57F64E20C83FC7008323CF /* PBXTargetDependency */,
+			);
+			name = "PassepartoutTests-iOS";
+			productName = PassepartoutTests;
+			productReference = 0E57F64C20C83FC7008323CF /* PassepartoutTests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "Passepartout-iOS-Tunnel" */;
+			buildPhases = (
+				AA4FF3773FA990DA571956B9 /* [CP] Check Pods Manifest.lock */,
+				0EDE8DBB20C86910004C739C /* Sources */,
+				0EDE8DBC20C86910004C739C /* Frameworks */,
+				0EDE8DBD20C86910004C739C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Passepartout-iOS-Tunnel";
+			productName = "Passepartout-iOS-Tunnel";
+			productReference = 0EDE8DBF20C86910004C739C /* Passepartout-iOS-Tunnel.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0E57F63020C83FC5008323CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Davide De Rosa";
+				TargetAttributes = {
+					0E57F63720C83FC5008323CF = {
+						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					0E57F64B20C83FC7008323CF = {
+						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
+						TestTargetID = 0E57F63720C83FC5008323CF;
+					};
+					0EDE8DBE20C86910004C739C = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 0E57F63320C83FC5008323CF /* Build configuration list for PBXProject "Passepartout" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0E57F62F20C83FC5008323CF;
+			productRefGroup = 0E57F63920C83FC5008323CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0E57F63720C83FC5008323CF /* Passepartout-iOS */,
+				0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */,
+				0E57F64B20C83FC7008323CF /* PassepartoutTests-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0E57F63620C83FC5008323CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E05C5DC20D198B9006EE732 /* Localizable.strings in Resources */,
+				0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */,
+				0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */,
+				0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */,
+				0E57F64120C83FC5008323CF /* Main.storyboard in Resources */,
+				0E8D97E521389277006FB4A0 /* pia.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E57F64A20C83FC7008323CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ED38AE3213F517D0004D387 /* pia-hungary.ovpn in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0EDE8DBD20C86910004C739C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03F725174F868DC4FFE73BEB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Passepartout-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		20711B9AA062AB9C5EF57B3C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C7DFA86B13FF0B80CFED9EF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS-frameworks.sh",
+				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5984A2DF2C43505FA7E4866 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PassepartoutTests-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA4FF3773FA990DA571956B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Passepartout-iOS-Tunnel-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E57F63420C83FC5008323CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E5E5DDF215119AF00E318A3 /* VPNStatus.swift in Sources */,
+				0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */,
+				0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */,
+				0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */,
+				0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */,
+				0E4FD7F120D58618002221FF /* Macros.swift in Sources */,
+				0E05C5E420D1993C006EE732 /* SwiftGen+Strings.swift in Sources */,
+				0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */,
+				0E05C5D720D1645F006EE732 /* ToggleTableViewCell.swift in Sources */,
+				0ED31C1020CF09A30027975F /* Pool.swift in Sources */,
+				0EBE3AA5213DC1B000BFA2F5 /* HostConnectionProfile.swift in Sources */,
+				0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */,
+				0E05C61D20D27C82006EE732 /* Theme.swift in Sources */,
+				0ED38ADE213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift in Sources */,
+				0EDE8DEE20C93E4C004C739C /* GroupConstants.swift in Sources */,
+				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
+				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
+				0E5E5DE2215119DD00E318A3 /* VPNConfiguration.swift in Sources */,
+				0EBE3AA0213DC1A100BFA2F5 /* ConnectionProfile.swift in Sources */,
+				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
+				0EBE3AA6213DC1B000BFA2F5 /* ProviderConnectionProfile.swift in Sources */,
+				0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */,
+				0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */,
+				0E05C5D620D1645F006EE732 /* SwiftGen+Storyboards.swift in Sources */,
+				0E2B494220FD16540094784C /* TransientStore.swift in Sources */,
+				0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */,
+				0E6BE13A20CFB76800A6DD36 /* ApplicationError.swift in Sources */,
+				0EFD9440215BED8E00529B64 /* CreditsViewController.swift in Sources */,
+				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
+				0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */,
+				0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */,
+				0EBE3A84213C6ADE00BFA2F5 /* InfrastructureFactory.swift in Sources */,
+				0E4FD7DE20D3E49A002221FF /* StandardVPNProvider.swift in Sources */,
+				0E89DFD0213F223400741BA1 /* Wizard.swift in Sources */,
+				0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */,
+				0EBE3AA1213DC1A100BFA2F5 /* ConnectionService.swift in Sources */,
+				0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */,
+				0ED31C1220CF0ABA0027975F /* Infrastructure.swift in Sources */,
+				0EC7F20520E24308004EA58E /* DebugLog.swift in Sources */,
+				0E4FD7E120D3E4C5002221FF /* MockVPNProvider.swift in Sources */,
+				0EBE3A90213C6F4000BFA2F5 /* TrustPolicy.swift in Sources */,
+				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
+				0E89DFC8213E8FC500741BA1 /* TunnelKitProvider+Communication.swift in Sources */,
+				0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */,
+				0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */,
+				0EBE3AAC213DEB8800BFA2F5 /* ConnectionProfileHolder.swift in Sources */,
+				0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */,
+				0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */,
+				0E39BCF0214B9EF10035E9DE /* WebServices.swift in Sources */,
+				0EDE8DE720C93945004C739C /* Credentials.swift in Sources */,
+				0ED38AF2214177920004D387 /* VPNProvider.swift in Sources */,
+				0E4C9CB920DB9BC600A0C59C /* TrustedNetworks.swift in Sources */,
+				0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */,
+				0ED38AE721404F100004D387 /* EndpointDataSource.swift in Sources */,
+				0E8D97E221388B52006FB4A0 /* InfrastructurePreset.swift in Sources */,
+				0ED31C3720CF38D10027975F /* VPN.swift in Sources */,
+				0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */,
+				0E5E5DE521511C5F00E318A3 /* GracefulVPN.swift in Sources */,
+				0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */,
+				0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */,
+				0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */,
+				0E4FD7EE20D539A0002221FF /* Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E57F64820C83FC7008323CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ED38AE1213F51370004D387 /* FileConfigurationTests.swift in Sources */,
+				0ED31C2720CF257C0027975F /* InfrastructureTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0EDE8DBB20C86910004C739C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0EDE8DC420C86910004C739C /* PacketTunnelProvider.swift in Sources */,
+				0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */,
+				0EF5CF292141F31F004FF1BD /* Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E57F64E20C83FC7008323CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E57F63720C83FC5008323CF /* Passepartout-iOS */;
+			targetProxy = 0E57F64D20C83FC7008323CF /* PBXContainerItemProxy */;
+		};
+		0EDE8DC720C86910004C739C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */;
+			targetProxy = 0EDE8DC620C86910004C739C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0E05C5DF20D198B9006EE732 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E05C5DE20D198B9006EE732 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		0E57F63F20C83FC5008323CF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E05C5E120D198D6006EE732 /* en */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E05C5E020D198D6006EE732 /* en */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		0ED38ADC213F44D00004D387 /* Organizer.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0ED38ADB213F44D00004D387 /* en */,
+			);
+			name = Organizer.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0E57F65320C83FC7008323CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 974;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		0E57F65420C83FC7008323CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 974;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0E57F65620C83FC7008323CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28B2E6590DE79C3B403348DC /* Pods-Passepartout-iOS.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS/Passepartout.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				INFOPLIST_FILE = "Passepartout-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0E57F65720C83FC7008323CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5428008455E78CDD2DC495D7 /* Pods-Passepartout-iOS.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS/Passepartout.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				INFOPLIST_FILE = "Passepartout-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0E57F65920C83FC7008323CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A341F6829A4440DCD6F7AFE8 /* Pods-PassepartoutTests-iOS.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "PassepartoutTests-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.ios.PassepartoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout-iOS.app/Passepartout-iOS";
+			};
+			name = Debug;
+		};
+		0E57F65A20C83FC7008323CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F55E5FC695C594928582A031 /* Pods-PassepartoutTests-iOS.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "PassepartoutTests-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.ios.PassepartoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout-iOS.app/Passepartout-iOS";
+			};
+			name = Release;
+		};
+		0EDE8DCA20C86910004C739C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4982BB989C57CA2A92283691 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS-Tunnel/Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				INFOPLIST_FILE = "Passepartout-iOS-Tunnel/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tunnel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0EDE8DCB20C86910004C739C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2B52DCF4BB363FEDC19E003 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS-Tunnel/Tunnel.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				INFOPLIST_FILE = "Passepartout-iOS-Tunnel/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tunnel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0E57F63320C83FC5008323CF /* Build configuration list for PBXProject "Passepartout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E57F65320C83FC7008323CF /* Debug */,
+				0E57F65420C83FC7008323CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E57F65620C83FC7008323CF /* Debug */,
+				0E57F65720C83FC7008323CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E57F65820C83FC7008323CF /* Build configuration list for PBXNativeTarget "PassepartoutTests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E57F65920C83FC7008323CF /* Debug */,
+				0E57F65A20C83FC7008323CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "Passepartout-iOS-Tunnel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0EDE8DCA20C86910004C739C /* Debug */,
+				0EDE8DCB20C86910004C739C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0E57F63020C83FC5008323CF /* Project object */;
+}

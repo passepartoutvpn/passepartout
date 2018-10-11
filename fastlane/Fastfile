@@ -1,0 +1,64 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+    desc "Archive a new build"
+    lane :create_archive do
+        ensure_git_status_clean
+        cocoapods
+        get_build_number
+        base_build_number = lane_context[SharedValues::BUILD_NUMBER].to_i
+        increment_build_number(
+            build_number: base_build_number + number_of_commits
+        )
+        match
+        gym
+    end
+
+    desc "Set build changelog"
+    lane :set_build_changelog do
+        lane_context[SharedValues::FL_CHANGELOG] = File.read("../#{ENV["BUILD_CHANGELOG_PATH"]}")
+    end
+
+    desc "Submit a build to HockeyApp"
+    lane :dev_deploy do
+        set_build_changelog
+        hockey
+    end
+
+    desc "Submit a build to TestFlight"
+    lane :beta_deploy do
+        set_build_changelog
+        pilot(
+            beta_app_description: lane_context[SharedValues::FL_CHANGELOG]
+        )
+    end
+
+    desc "Update App Store metadata"
+    lane :update_metadata do
+        deliver(
+            skip_screenshots: true
+        )
+    end
+
+    desc "Update App Store screenshots"
+    lane :update_screenshots do
+        deliver(
+            skip_metadata: true
+        )
+    end
+end
