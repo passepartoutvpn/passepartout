@@ -130,6 +130,8 @@ class AppConstants {
         
         private static let swiftyBeaver = "SwiftyBeaver - Copyright (c) 2015 Sebastian Kreutzberger"
         
+        private static let progressHUD = "MBProgressHUD - Copyright (c) 2009-2016 Matej Bukovinski"
+
         private static let openVPN = "© 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc."
 
         private static let openSSL = "This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. https://www.openssl.org/"
@@ -137,6 +139,7 @@ class AppConstants {
         static let all: [String] = [
             pia,
             swiftyBeaver,
+            progressHUD,
             openVPN,
             openSSL
         ]

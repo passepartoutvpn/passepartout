@@ -123,6 +123,9 @@ By contributing to this project you are agreeing to the terms stated in the [Con
 
 The logo is taken from the awesome Circle Icons set by Nick Roach.
 
+- SwiftyBeaver - © 2015 Sebastian Kreutzberger
+- MBProgressHUD - © 2009-2016 Matej Bukovinski
+
 © 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
 
 ## Disclaimer
