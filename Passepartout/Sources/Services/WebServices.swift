@@ -73,8 +73,8 @@ class WebServices {
     }
 
     private func get(_ endpoint: Endpoint) -> URLRequest {
-        let url = AppConstants.Providers.url(path: endpoint.path)
-        return URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: AppConstants.Providers.webTimeout)
+        let url = AppConstants.Web.url(path: endpoint.path)
+        return URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: AppConstants.Web.timeout)
     }
     
     private func parse<T: Decodable>(_ type: T.Type, request: URLRequest, completionHandler: @escaping (Response<T>?, Error?) -> Void) {

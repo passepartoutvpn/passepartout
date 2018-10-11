@@ -42,13 +42,13 @@ Keeping the VPN active in the background provides smoother operation, but may be
 
 ### No unrequested activity
 
-Passepartout is a VPN client and does absolutely nothing else without your consent. The providers infrastructures are obtained via web services only and only if you manually refresh them.
+Passepartout is a VPN client and does absolutely nothing else without your consent. The providers infrastructures are obtained via a [static GitHub API][app-api] only and only if you manually refresh them.
 
 ### Presets for major providers
 
 Passepartout can connect to a few well-known VPN providers with an existing account:
 
-- [Private Internet Access][net-pia]
+- [Private Internet Access][app-net-pia]
 - ...more soon!
 
 In preset mode, you can pick pre-resolved IPv4 endpoints when DNS is problematic.
@@ -150,7 +150,8 @@ Bitcoin address: [16w2AWamiH2SS68NYSMDcrbh5MnZ1c5eju][about-btc]
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 
-[net-pia]: https://www.privateinternetaccess.com
+[app-api]: https://github.com/keeshux/passepartout-api
+[app-net-pia]: https://www.privateinternetaccess.com
 
 [snap-home]: res/snap-home.png
 [snap-profile]: res/snap-profile.png
