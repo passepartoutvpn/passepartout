@@ -233,7 +233,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private func refreshProviderInfrastructure() {
         let hud = HUD()
-        let isUpdating = InfrastructureFactory.shared.update(uncheckedProviderProfile.name, notBeforeInterval: AppConstants.Providers.minimumUpdateInterval) { (response, error) in
+        let isUpdating = InfrastructureFactory.shared.update(uncheckedProviderProfile.name, notBeforeInterval: AppConstants.Web.minimumUpdateInterval) { (response, error) in
             hud.hide()
             guard let response = response else {
                 return

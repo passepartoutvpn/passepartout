@@ -63,14 +63,16 @@ class AppConstants {
         static let connectivityTimeout: TimeInterval = 10.0
     }
     
-    class Providers {
-        private static let baseURL = URL(string: "https://api.\(Domain.name)/v1/")!
+    class Web {
+        private static let version = "v1"
+        
+        private static let baseURL = Repos.passepartoutAPI.appendingPathComponent("api/\(version)")
         
         static func url(path: String) -> URL {
             return baseURL.appendingPathComponent(path)
         }
         
-        static let webTimeout: TimeInterval = 3.0
+        static let timeout: TimeInterval = 3.0
         
         static let minimumUpdateInterval: TimeInterval = 600.0 // 10 minutes
     }
@@ -115,13 +117,21 @@ class AppConstants {
 
     class Repos {
         private static let githubRoot = URL(string: "https://github.com/keeshux/")!
+
+        private static let githubRawRoot = URL(string: "https://keeshux.github.io/")!
         
         private static func github(repo: String) -> URL {
             return githubRoot.appendingPathComponent(repo)
         }
         
+        private static func githubRaw(repo: String) -> URL {
+            return githubRawRoot.appendingPathComponent(repo)
+        }
+        
         static let passepartout = github(repo: "passepartout-ios")
 
+        static let passepartoutAPI = githubRaw(repo: "passepartout-api")
+        
         static let tunnelKit = github(repo: "tunnelkit")
     }
 
