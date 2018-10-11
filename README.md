@@ -127,7 +127,7 @@ The logo is taken from the awesome Circle Icons set by Nick Roach.
 
 ## Disclaimer
 
-Passepartout is a VPN client based on independent work. As such, the developer -while making his best efforts to avoid this- takes no responsibility about any damage caused by the use of this software.
+Passepartout is a VPN client based on independent work. As such, the developer -while making his best efforts to avoid it- takes no responsibility about any damage caused by the use of this software.
 
 Additionally, the developer takes no responsibility about data usage, monitoring, logging etc. by the servers you connect to. Passepartout is not even involved in the above choices, as they're part of server-side policies.
 
