@@ -144,9 +144,7 @@ Website: [passepartoutvpn.app][about-website]
 
 ## Donations
 
-Passepartout is free software, donations are extremely welcome.
-
-Bitcoin address: [16w2AWamiH2SS68NYSMDcrbh5MnZ1c5eju][about-btc]
+Passepartout is free software. If you like it, please [support me on Patreon][about-patreon].
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 
@@ -170,5 +168,5 @@ Bitcoin address: [16w2AWamiH2SS68NYSMDcrbh5MnZ1c5eju][about-btc]
 
 [about-twitter]: https://twitter.com/keeshux
 [about-website]: https://passepartoutvpn.app
+[about-patreon]: https://www.patreon.com/keeshux
 [about-testflight]: https://testflight.apple.com/join/XHzgXj6m
-[about-btc]: bitcoin:16w2AWamiH2SS68NYSMDcrbh5MnZ1c5eju
