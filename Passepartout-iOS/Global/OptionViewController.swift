@@ -64,7 +64,7 @@ class OptionViewController<T: Hashable>: UIViewController, UITableViewDataSource
         let opt = options[indexPath.row]
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         cell.leftText = descriptionBlock?(opt) ?? delegate?.optionController(self, descriptionFor: opt)
-        cell.accessoryType = (opt == selectedOption) ? .checkmark : .none
+        cell.applyChecked(opt == selectedOption, Theme.current)
         return cell
     }
     

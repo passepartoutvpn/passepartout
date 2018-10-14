@@ -77,7 +77,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         cell.leftText = pool.name
 //        cell.rightText = pool.country
-        cell.accessoryType = (pool.id == currentPoolId) ? .checkmark : .none
+        cell.applyChecked(pool.id == currentPoolId, Theme.current)
         cell.isTappable = true
         return cell
     }

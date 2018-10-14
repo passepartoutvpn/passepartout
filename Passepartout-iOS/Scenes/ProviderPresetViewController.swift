@@ -108,7 +108,7 @@ extension ProviderPresetViewController: UITableViewDataSource, UITableViewDelega
         switch rows[indexPath.row] {
         case .presetDescription:
             cell.leftText = preset.comment
-            cell.accessoryType = (preset.id == currentPresetId) ? .checkmark : .none
+            cell.applyChecked(preset.id == currentPresetId, Theme.current)
 
         case .techDetails:
             cell.applyAction(Theme.current)
