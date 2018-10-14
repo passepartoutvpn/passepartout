@@ -28,7 +28,7 @@ import UIKit
 extension UITableViewCell {
     func applyChecked(_ checked: Bool, _ theme: Theme) {
         accessoryType = checked ? .checkmark : .none
-        tintColor = Theme.current.palette.colorAction.withAlphaComponent(0.7)
+        tintColor = Theme.current.palette.colorAccessory
     }
 }
 
