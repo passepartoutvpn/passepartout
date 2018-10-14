@@ -64,6 +64,10 @@ struct Theme {
             return colorAccent1
         }
 
+        var colorAccessory: UIColor {
+            return colorAccent1.withAlphaComponent(0.7)
+        }
+        
         var colorDestructive = UIColor(red: 0.8, green: 0.27, blue: 0.2, alpha: 1.0)
     }
 
@@ -95,7 +99,7 @@ extension Theme {
         toolbar.tintColor = palette.colorPrimaryLightText
         
         let toggle = UISwitch.appearance()
-        toggle.onTintColor = palette.colorAction.withAlphaComponent(0.7)
+        toggle.onTintColor = palette.colorAccessory
     }
 }
 

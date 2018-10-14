@@ -211,9 +211,9 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
             cell.isTappable = true
             if let _ = currentAddress {
-                cell.accessoryType = .none
+                cell.applyChecked(false, Theme.current)
             } else {
-                cell.accessoryType = .checkmark
+                cell.applyChecked(true, Theme.current)
                 currentAddressIndexPath = indexPath
             }
             return cell
@@ -225,10 +225,10 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
             cell.isTappable = true
             if address == currentAddress {
-                cell.accessoryType = .checkmark
+                cell.applyChecked(true, Theme.current)
                 currentAddressIndexPath = indexPath
             } else {
-                cell.accessoryType = .none
+                cell.applyChecked(false, Theme.current)
             }
             return cell
             
@@ -238,9 +238,9 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
             cell.isTappable = true
             if let _ = currentProtocol {
-                cell.accessoryType = .none
+                cell.applyChecked(false, Theme.current)
             } else {
-                cell.accessoryType = .checkmark
+                cell.applyChecked(true, Theme.current)
                 currentProtocolIndexPath = indexPath
             }
             return cell
@@ -252,10 +252,10 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
             cell.isTappable = true
             if proto == currentProtocol {
-                cell.accessoryType = .checkmark
+                cell.applyChecked(true, Theme.current)
                 currentProtocolIndexPath = indexPath
             } else {
-                cell.accessoryType = .none
+                cell.applyChecked(false, Theme.current)
             }
             return cell
         }

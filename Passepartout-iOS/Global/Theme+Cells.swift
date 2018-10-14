@@ -25,6 +25,13 @@
 
 import UIKit
 
+extension UITableViewCell {
+    func applyChecked(_ checked: Bool, _ theme: Theme) {
+        accessoryType = checked ? .checkmark : .none
+        tintColor = Theme.current.palette.colorAccessory
+    }
+}
+
 extension DestructiveTableViewCell {
     func apply(_ theme: Theme) {
         accessoryType = .none
