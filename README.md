@@ -16,25 +16,25 @@ By using a beta version of the app, you understand that the software might be un
 
 Passepartout lets you handle multiple profiles in one single place and quickly switch between them.
 
-![snap-home]
+[<img src="res/snap-home.png" width="300">](res/snap-home.png)
 
 ### Ease of use
 
 With its native look & feel, Passepartout focuses on ease of use. It does so by stripping the .ovpn flags that are today obsolete or rarely used. With good approximation, it mimics the most relevant features you will find in OpenVPN 2.4.x.
 
-![snap-profile]
+[<img src="res/snap-profile.png" width="300">](res/snap-profile.png)
 
 ### Trusted networks
 
 Trust cellular or Wi-Fi networks to fine-grain your connectivity. You can then choose to retain a VPN connection when entering a trusted network, or prevent it completely.
 
-![snap-trusted]
+[<img src="res/snap-trusted.png" width="300">](res/snap-trusted.png)
 
 ### See your connection parameters
 
 Passepartout strives for transparency, by showing a fairly detailed yet understandable resume of your connection parameters.
 
-![snap-parameters]
+[<img src="res/snap-parameters.png" width="300">](res/snap-parameters.png)
 
 ### Disconnect on sleep
 
@@ -150,11 +150,6 @@ Passepartout is free software. If you like it, please [support me on Patreon][ab
 
 [app-api]: https://github.com/keeshux/passepartout-api
 [app-net-pia]: https://www.privateinternetaccess.com
-
-[snap-home]: res/snap-home.png
-[snap-profile]: res/snap-profile.png
-[snap-trusted]: res/snap-trusted.png
-[snap-parameters]: res/snap-parameters.png
 
 [dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html
 [dep-jazzy]: https://github.com/realm/jazzy
