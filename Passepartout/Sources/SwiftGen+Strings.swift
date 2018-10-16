@@ -660,6 +660,10 @@ internal enum L10n {
         internal static let existing = L10n.tr("Localizable", "wizards.host.alerts.existing")
         /// Unable to parse the provided configuration file.
         internal static let parsing = L10n.tr("Localizable", "wizards.host.alerts.parsing")
+        /// The configuration file contains an unsupported option (%@).
+        internal static func unsupported(_ p1: String) -> String {
+          return L10n.tr("Localizable", "wizards.host.alerts.unsupported", p1)
+        }
       }
 
       internal enum Cells {

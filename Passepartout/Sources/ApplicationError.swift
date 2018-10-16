@@ -25,7 +25,7 @@
 
 import Foundation
 
-enum ApplicationError: String, Error {
+enum ApplicationError: Error {
     case missingProfile
 
     case missingCredentials
@@ -40,5 +40,5 @@ enum ApplicationError: String, Error {
 
     case emptyRemotes
     
-    case unsupportedConfiguration
+    case unsupportedConfiguration(option: String)
 }

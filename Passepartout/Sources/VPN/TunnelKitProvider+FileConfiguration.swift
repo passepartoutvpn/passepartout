@@ -113,11 +113,8 @@ extension TunnelKitProvider.Configuration {
                 case "key":
                     clientKey = CryptoContainer(pem: currentBlock.joined(separator: "\n"))
                     
-                case "tls-auth":
-                    unsupportedError = ApplicationError.unsupportedConfiguration
-                    
-                case "tls-crypt":
-                    unsupportedError = ApplicationError.unsupportedConfiguration
+                case "tls-auth", "tls-crypt":
+                    unsupportedError = ApplicationError.unsupportedConfiguration(option: blockName)
                     
                 default:
                     break
@@ -187,7 +184,7 @@ extension TunnelKitProvider.Configuration {
                 renegotiateAfterSeconds = Int(arg)
             }
             Regex.fragment.enumerateArguments(in: line) { (_) in
-                unsupportedError = ApplicationError.unsupportedConfiguration
+                unsupportedError = ApplicationError.unsupportedConfiguration(option: "fragment")
             }
 
             if let error = unsupportedError {
