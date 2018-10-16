@@ -116,6 +116,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
             nav.modalPresentationStyle = .formSheet
             root.present(nav, animated: true, completion: nil)
+        } catch ApplicationError.unsupportedConfiguration(let option) {
+            let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, L10n.Wizards.Host.Alerts.unsupported(option))
+            alert.addCancelAction(L10n.Global.ok)
+            root.present(alert, animated: true, completion: nil)
         } catch {
             let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, L10n.Wizards.Host.Alerts.parsing)
             alert.addCancelAction(L10n.Global.ok)
