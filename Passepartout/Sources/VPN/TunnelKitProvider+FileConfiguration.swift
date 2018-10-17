@@ -31,31 +31,31 @@ private let log = SwiftyBeaver.self
 
 extension TunnelKitProvider.Configuration {
     private struct Regex {
-        static let proto = Utils.regex("proto +(udp6?|tcp6?)")
+        static let proto = Utils.regex("^proto +(udp6?|tcp6?)")
 
-        static let port = Utils.regex("port +\\d+")
+        static let port = Utils.regex("^port +\\d+")
         
-        static let remote = Utils.regex("remote +[^ ]+( +\\d+)?( +(udp6?|tcp6?))?")
+        static let remote = Utils.regex("^remote +[^ ]+( +\\d+)?( +(udp6?|tcp6?))?")
 
-        static let cipher = Utils.regex("cipher +[\\w\\-]+")
+        static let cipher = Utils.regex("^cipher +[\\w\\-]+")
 
-        static let auth = Utils.regex("auth +[\\w\\-]+")
+        static let auth = Utils.regex("^auth +[\\w\\-]+")
         
-        static let compLZO = Utils.regex("comp-lzo")
+        static let compLZO = Utils.regex("^comp-lzo")
 
-        static let compress = Utils.regex("compress")
+        static let compress = Utils.regex("^compress")
         
-        static let ping = Utils.regex("ping +\\d+")
+        static let ping = Utils.regex("^ping +\\d+")
 
-        static let renegSec = Utils.regex("reneg-sec +\\d+")
+        static let renegSec = Utils.regex("^reneg-sec +\\d+")
 
-        static let fragment = Utils.regex("fragment +\\d+")
+        static let fragment = Utils.regex("^fragment +\\d+")
 
-        static let keyDirection = Utils.regex("key-direction +\\d")
+        static let keyDirection = Utils.regex("^key-direction +\\d")
         
-        static let blockBegin = Utils.regex("<[\\w\\-]+>")
+        static let blockBegin = Utils.regex("^<[\\w\\-]+>")
         
-        static let blockEnd = Utils.regex("<\\/[\\w\\-]+>")
+        static let blockEnd = Utils.regex("^<\\/[\\w\\-]+>")
     }
     
     static func parsed(from url: URL) throws -> (String, TunnelKitProvider.Configuration) {
