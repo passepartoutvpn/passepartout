@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version, .credits, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
-        model.set([.reportIssue, .writeReview], in: .feedback)
+        model.set([.discussReddit, .reportIssue, .writeReview], in: .feedback)
         return model
     }()
     
@@ -78,6 +78,10 @@ class AboutViewController: UITableViewController, TableModelHost {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
+    private func discussReddit() {
+        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
+    }
+    
     private func reportIssue() {
         IssueReporter.shared.present(in: self)
     }
@@ -114,9 +118,11 @@ extension AboutViewController {
         
         case sourceTunnelKit
         
-        case writeReview
+        case discussReddit
         
         case reportIssue
+
+        case writeReview
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -163,6 +169,11 @@ extension AboutViewController {
             cell.leftText = GroupConstants.App.tunnelKitName
             return cell
 
+        case .discussReddit:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.DiscussReddit.caption
+            return cell
+            
         case .reportIssue:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.IssueReporter.title
@@ -191,6 +202,9 @@ extension AboutViewController {
 
         case .sourceTunnelKit:
             visitRepository(AppConstants.Repos.tunnelKit)
+            
+        case .discussReddit:
+            discussReddit()
             
         case .reportIssue:
             reportIssue()

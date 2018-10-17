@@ -14,6 +14,11 @@ internal enum L10n {
 
     internal enum Cells {
 
+      internal enum DiscussReddit {
+        /// Discuss on Reddit
+        internal static let caption = L10n.tr("Localizable", "about.cells.discuss_reddit.caption")
+      }
+
       internal enum Version {
         /// Version
         internal static let caption = L10n.tr("Localizable", "about.cells.version.caption")

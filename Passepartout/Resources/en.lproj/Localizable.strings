@@ -168,6 +168,7 @@
 "about.sections.source.header" = "Source code";
 "about.sections.feedback.header" = "Feedback";
 "about.cells.version.caption" = "Version";
+"about.cells.discuss_reddit.caption" = "Discuss on Reddit";
 "about.cells.write_review.caption" = "Write a review";
 "about.cells.website.caption" = "Visit website";
 
