@@ -289,7 +289,7 @@ extension OrganizerViewController {
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             let rowProfile = profile(at: indexPath)
             cell.leftText = rowProfile.title
-            cell.applyChecked(service.isActiveProfile(rowProfile), Theme.current)
+            cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Organizer.Cells.Profile.Value.current : nil
             return cell
 
         case .addProvider:
