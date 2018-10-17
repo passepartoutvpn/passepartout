@@ -275,7 +275,7 @@ internal enum L10n {
   internal enum IssueReporter {
     /// Do you want to attach the debug log of your latest connections? The log is crucial to resolve your connectivity issues and is completely anonymous.
     internal static let message = L10n.tr("Localizable", "issue_reporter.message")
-    /// Report issue
+    /// Report an issue
     internal static let title = L10n.tr("Localizable", "issue_reporter.title")
 
     internal enum Alerts {

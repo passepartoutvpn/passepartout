@@ -155,7 +155,7 @@
 "vpn.inactive" = "Inactive";
 "vpn.disabled" = "Disabled";
 
-"issue_reporter.title" = "Report issue";
+"issue_reporter.title" = "Report an issue";
 "issue_reporter.message" = "Do you want to attach the debug log of your latest connections? The log is crucial to resolve your connectivity issues and is completely anonymous.";
 "issue_reporter.buttons.with_log" = "Attach debug log";
 "issue_reporter.buttons.without_log" = "Omit debug log";
