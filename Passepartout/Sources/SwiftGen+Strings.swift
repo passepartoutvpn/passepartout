@@ -344,6 +344,14 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "organizer.cells.add_provider.caption")
       }
 
+      internal enum Profile {
+
+        internal enum Value {
+          /// In use
+          internal static let current = L10n.tr("Localizable", "organizer.cells.profile.value.current")
+        }
+      }
+
       internal enum Uninstall {
         /// Delete VPN profile
         internal static let caption = L10n.tr("Localizable", "organizer.cells.uninstall.caption")
