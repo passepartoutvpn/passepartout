@@ -47,8 +47,8 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     var username: String?
     
-    var isConfigured: Bool {
-        return !parameters.endpointProtocols.isEmpty
+    var requiresCredentials: Bool {
+        return false
     }
     
     func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {

@@ -98,7 +98,7 @@
 "service.cells.data_count.caption" = "Exchanged bytes count";
 "service.cells.debug_log.caption" = "Debug log";
 
-"service.alerts.configuration_needed.message" = "You need to finish configuration first.";
+"service.alerts.credentials_needed.message" = "You need to enter account credentials first.";
 "service.alerts.reconnect_vpn.message" = "Do you want to reconnect to the VPN?";
 "service.alerts.trusted.no_network.message" = "You are not connected to any Wi-Fi network.";
 "service.alerts.trusted.will_disconnect_trusted.message" = "By trusting this network, the VPN may be disconnected. Continue?";

@@ -423,9 +423,9 @@ internal enum L10n {
 
     internal enum Alerts {
 
-      internal enum ConfigurationNeeded {
-        /// You need to finish configuration first.
-        internal static let message = L10n.tr("Localizable", "service.alerts.configuration_needed.message")
+      internal enum CredentialsNeeded {
+        /// You need to enter account credentials first.
+        internal static let message = L10n.tr("Localizable", "service.alerts.credentials_needed.message")
       }
 
       internal enum DataCount {

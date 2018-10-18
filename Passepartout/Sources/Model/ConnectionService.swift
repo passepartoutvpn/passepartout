@@ -180,21 +180,20 @@ class ConnectionService: Codable {
         return profile.id == activeProfileId
     }
     
-    func canActivate(_ profile: ConnectionProfile) -> Bool {
-        return profile.isConfigured && hasCredentials(for: profile)
-    }
-    
     func activateProfile(_ profile: ConnectionProfile) {
         activeProfileId = profile.id
     }
     
     // MARK: Credentials
     
-    func hasCredentials(for profile: ConnectionProfile) -> Bool {
-        guard let creds = credentials(for: profile) else {
+    func needsCredentials(for profile: ConnectionProfile) -> Bool {
+        guard profile.requiresCredentials else {
             return false
         }
-        return !creds.isEmpty
+        guard let creds = credentials(for: profile) else {
+            return true
+        }
+        return creds.isEmpty
     }
     
     func credentials(for profile: ConnectionProfile) -> Credentials? {

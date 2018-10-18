@@ -101,10 +101,10 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     var username: String?
     
-    var isConfigured: Bool {
-        return (pool != nil) && (preset != nil)
+    var requiresCredentials: Bool {
+        return true
     }
-
+    
     func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
         guard let pool = pool else {
             throw ApplicationError.providerPool
