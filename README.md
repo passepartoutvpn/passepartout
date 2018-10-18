@@ -10,6 +10,12 @@ Passepartout is in public beta. You can get early versions of the app via [TestF
 
 By using a beta version of the app, you understand that the software might be unstable, unreliable or plain broken from time to time.
 
+## Support
+
+Subscribe to the [/r/passepartout][about-reddit] subreddit for issues, feature requests and general discussion.
+
+There is also a public group on [Telegram][about-telegram].
+
 ## Overview
 
 ### All profiles in one place
@@ -165,3 +171,5 @@ Passepartout is free software. If you like it, please [support me on Patreon][ab
 [about-website]: https://passepartoutvpn.app
 [about-patreon]: https://www.patreon.com/keeshux
 [about-testflight]: https://testflight.apple.com/join/XHzgXj6m
+[about-reddit]: https://www.reddit.com/r/passepartout
+[about-telegram]: https://t.me/passepartoutvpn
