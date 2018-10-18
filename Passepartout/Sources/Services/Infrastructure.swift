@@ -43,6 +43,8 @@ struct Infrastructure: Codable {
         let preset: String
     }
     
+    let build: Int
+    
     let name: Name
     
     let pools: [Pool]
