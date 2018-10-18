@@ -58,6 +58,8 @@ struct InfrastructurePreset: Codable {
         case keepAliveSeconds = "ping"
 
         case renegotiatesAfterSeconds = "reneg"
+
+        case usesPIAPatches = "pia"
     }
     
     let id: String
@@ -93,6 +95,7 @@ struct InfrastructurePreset: Codable {
         builder.compressionFraming = try cfgContainer.decode(SessionProxy.CompressionFraming.self, forKey: .compressionFraming)
         builder.keepAliveSeconds = try cfgContainer.decodeIfPresent(Int.self, forKey: .keepAliveSeconds)
         builder.renegotiatesAfterSeconds = try cfgContainer.decodeIfPresent(Int.self, forKey: .renegotiatesAfterSeconds)
+        builder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
         configuration = builder.build()
     }
     
@@ -112,5 +115,6 @@ struct InfrastructurePreset: Codable {
         try cfgContainer.encode(configuration.compressionFraming, forKey: .compressionFraming)
         try cfgContainer.encodeIfPresent(configuration.keepAliveSeconds, forKey: .keepAliveSeconds)
         try cfgContainer.encodeIfPresent(configuration.renegotiatesAfterSeconds, forKey: .renegotiatesAfterSeconds)
+        try cfgContainer.encodeIfPresent(configuration.usesPIAPatches, forKey: .usesPIAPatches)
     }
 }
