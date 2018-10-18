@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- AES-GCM and new enpoints to PIA network preset.
+- AES-GCM and new endpoints to PIA network preset.
 - Disclosure indicators in profile organizer (Samuel Michaels).
 - Disclaimer for app usage.
 
