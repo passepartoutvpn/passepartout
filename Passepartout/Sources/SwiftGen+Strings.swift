@@ -14,6 +14,11 @@ internal enum L10n {
 
     internal enum Cells {
 
+      internal enum DiscussReddit {
+        /// Discuss on Reddit
+        internal static let caption = L10n.tr("Localizable", "about.cells.discuss_reddit.caption")
+      }
+
       internal enum Version {
         /// Version
         internal static let caption = L10n.tr("Localizable", "about.cells.version.caption")
@@ -275,7 +280,7 @@ internal enum L10n {
   internal enum IssueReporter {
     /// Do you want to attach the debug log of your latest connections? The log is crucial to resolve your connectivity issues and is completely anonymous.
     internal static let message = L10n.tr("Localizable", "issue_reporter.message")
-    /// Report issue
+    /// Report an issue
     internal static let title = L10n.tr("Localizable", "issue_reporter.title")
 
     internal enum Alerts {
@@ -387,6 +392,20 @@ internal enum L10n {
           internal static let caption = L10n.tr("Localizable", "provider.preset.cells.tech_details.caption")
         }
       }
+    }
+  }
+
+  internal enum Reddit {
+    /// Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.
+    internal static let message = L10n.tr("Localizable", "reddit.message")
+
+    internal enum Buttons {
+      /// Don't ask again
+      internal static let never = L10n.tr("Localizable", "reddit.buttons.never")
+      /// Remind me later
+      internal static let remind = L10n.tr("Localizable", "reddit.buttons.remind")
+      /// Subscribe now!
+      internal static let subscribe = L10n.tr("Localizable", "reddit.buttons.subscribe")
     }
   }
 

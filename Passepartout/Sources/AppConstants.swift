@@ -110,6 +110,8 @@ class AppConstants {
         
         static let changelog = Repos.passepartout.appendingPathComponent("blob/master/CHANGELOG.md")
         
+        static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!
+        
         static func review(withId id: String) -> URL {
             return URL(string: "https://itunes.apple.com/app/id\(id)?action=write-review")!
         }
