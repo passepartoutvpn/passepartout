@@ -58,6 +58,13 @@ extension UIAlertController {
         }
     }
     
+    func addAction(_ title: String, handler: @escaping () -> Void) {
+        let action = UIAlertAction(title: title, style: .default) { (action) in
+            handler()
+        }
+        addAction(action)
+    }
+    
     func addDestructiveAction(_ title: String, handler: @escaping () -> Void) {
         let action = UIAlertAction(title: title, style: .destructive) { (action) in
             handler()

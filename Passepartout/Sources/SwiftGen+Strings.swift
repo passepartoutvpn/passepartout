@@ -395,6 +395,20 @@ internal enum L10n {
     }
   }
 
+  internal enum Reddit {
+    /// Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.
+    internal static let message = L10n.tr("Localizable", "reddit.message")
+
+    internal enum Buttons {
+      /// Don't ask again
+      internal static let never = L10n.tr("Localizable", "reddit.buttons.never")
+      /// Remind me later
+      internal static let remind = L10n.tr("Localizable", "reddit.buttons.remind")
+      /// Subscribe now!
+      internal static let subscribe = L10n.tr("Localizable", "reddit.buttons.subscribe")
+    }
+  }
+
   internal enum Service {
 
     internal enum Alerts {

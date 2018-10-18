@@ -29,12 +29,25 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class TransientStore {
+    private struct Keys {
+        static let didHandleSubreddit = "DidHandleSubreddit"
+    }
+    
     static let shared = TransientStore()
     
     private let servicePath: URL
     
     let service: ConnectionService
     
+    var didHandleSubreddit: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.didHandleSubreddit)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.didHandleSubreddit)
+        }
+    }
+
     private init() {
         servicePath = FileManager.default.userURL(
             for: .documentDirectory,

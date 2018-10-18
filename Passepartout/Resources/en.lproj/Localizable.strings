@@ -27,6 +27,11 @@
 "global.cancel" = "Cancel";
 "global.next" = "Next";
 
+"reddit.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
+"reddit.buttons.subscribe" = "Subscribe now!";
+"reddit.buttons.remind" = "Remind me later";
+"reddit.buttons.never" = "Don't ask again";
+
 "organizer.sections.providers.header" = "Networks";
 "organizer.sections.providers.footer" = "Here you find a few public infrastructures offering preset configuration profiles.";
 "organizer.sections.hosts.header" = "Hosts";

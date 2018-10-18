@@ -35,7 +35,9 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     private var hostProfiles: [HostConnectionProfile] = []
     
     private var availableProviderNames: [Infrastructure.Name]?
-    
+
+    private var didShowSubreddit = false
+
     // MARK: TableModelHost
 
     let model: TableModel<SectionType, RowType> = {
@@ -101,6 +103,25 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         }
 
         service.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if !didShowSubreddit && !TransientStore.shared.didHandleSubreddit {
+            didShowSubreddit = true
+            
+            let alert = Macros.alert(L10n.About.Cells.DiscussReddit.caption, L10n.Reddit.message)
+            alert.addDefaultAction(L10n.Reddit.Buttons.subscribe) {
+                TransientStore.shared.didHandleSubreddit = true
+                self.subscribeSubreddit()
+            }
+            alert.addAction(L10n.Reddit.Buttons.never) {
+                TransientStore.shared.didHandleSubreddit = true
+            }
+            alert.addCancelAction(L10n.Reddit.Buttons.remind)
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -226,6 +247,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         }
         alert.addCancelAction(L10n.Global.cancel)
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func subscribeSubreddit() {
+        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
 }
 
