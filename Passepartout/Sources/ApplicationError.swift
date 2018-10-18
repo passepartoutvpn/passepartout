@@ -30,12 +30,6 @@ enum ApplicationError: Error {
 
     case missingCredentials
     
-    case providerPool
-    
-    case providerPreset
-    
-    case hostEndpoints
-    
     case missingCA
 
     case emptyRemotes

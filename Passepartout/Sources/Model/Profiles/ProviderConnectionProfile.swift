@@ -40,7 +40,7 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     }
 
     var pool: Pool? {
-        return infrastructure.pool(for: poolId)
+        return infrastructure.pool(for: poolId) ?? infrastructure.pool(for: infrastructure.defaults.pool)
     }
 
     var presetId: String {
@@ -107,10 +107,10 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
         guard let pool = pool else {
-            throw ApplicationError.providerPool
+            preconditionFailure("Nil pool?")
         }
         guard let preset = preset else {
-            throw ApplicationError.providerPreset
+            preconditionFailure("Nil preset?")
         }
 
 //        assert(!pool.numericAddresses.isEmpty)

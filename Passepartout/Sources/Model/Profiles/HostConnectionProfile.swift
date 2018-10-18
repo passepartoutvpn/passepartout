@@ -52,9 +52,7 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     }
     
     func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
-        guard !parameters.endpointProtocols.isEmpty else {
-            throw ApplicationError.hostEndpoints
-        }
+        precondition(!parameters.endpointProtocols.isEmpty)
         
         // XXX: copy paste, error prone
         var builder = parameters.builder()
