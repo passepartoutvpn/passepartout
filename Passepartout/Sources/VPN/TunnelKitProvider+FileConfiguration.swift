@@ -132,6 +132,9 @@ extension TunnelKitProvider.Configuration {
                     return
                 }
                 defaultProto = TunnelKitProvider.SocketType(protoString: str)
+                if defaultProto == nil {
+                    unsupportedError = ApplicationError.unsupportedConfiguration(option: "proto \(str)")
+                }
             }
             Regex.port.enumerateArguments(in: line) {
                 guard let str = $0.first else {
@@ -158,12 +161,18 @@ extension TunnelKitProvider.Configuration {
                     return
                 }
                 cipher = SessionProxy.Cipher(rawValue: rawValue.uppercased())
+                if cipher == nil {
+                    unsupportedError = ApplicationError.unsupportedConfiguration(option: "cipher \(rawValue)")
+                }
             }
             Regex.auth.enumerateArguments(in: line) {
                 guard let rawValue = $0.first else {
                     return
                 }
                 digest = SessionProxy.Digest(rawValue: rawValue.uppercased())
+                if digest == nil {
+                    unsupportedError = ApplicationError.unsupportedConfiguration(option: "auth \(rawValue)")
+                }
             }
             Regex.compLZO.enumerateComponents(in: line) { _ in
                 compressionFraming = .compLZO
