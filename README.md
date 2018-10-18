@@ -8,6 +8,8 @@ Passepartout relies on [TunnelKit][dep-tunnelkit] for most VPN functionality.
 
 Passepartout is in public beta. You can get early versions of the app via [TestFlight][about-testflight].
 
+<a href="https://www.patreon.com/keeshux"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"></a>
+
 By using a beta version of the app, you understand that the software might be unstable, unreliable or plain broken from time to time.
 
 ## Support
@@ -147,10 +149,6 @@ For more information about data usage by third parties, please review the privac
 Twitter: [@keeshux][about-twitter]
 
 Website: [passepartoutvpn.app][about-website]
-
-## Donations
-
-Passepartout is free software. If you like it, please [support me on Patreon][about-patreon].
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 
