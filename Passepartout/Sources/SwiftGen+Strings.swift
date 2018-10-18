@@ -666,8 +666,10 @@ internal enum L10n {
       internal enum Alerts {
         /// A host profile with the same title already exists. Replace it?
         internal static let existing = L10n.tr("Localizable", "wizards.host.alerts.existing")
-        /// Unable to parse the provided configuration file.
-        internal static let parsing = L10n.tr("Localizable", "wizards.host.alerts.parsing")
+        /// Unable to parse the provided configuration file (%@).
+        internal static func parsing(_ p1: String) -> String {
+          return L10n.tr("Localizable", "wizards.host.alerts.parsing", p1)
+        }
         /// The configuration file contains an unsupported option (%@).
         internal static func unsupported(_ p1: String) -> String {
           return L10n.tr("Localizable", "wizards.host.alerts.unsupported", p1)

@@ -120,8 +120,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, L10n.Wizards.Host.Alerts.unsupported(option))
             alert.addCancelAction(L10n.Global.ok)
             root.present(alert, animated: true, completion: nil)
-        } catch {
-            let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, L10n.Wizards.Host.Alerts.parsing)
+        } catch let e {
+            let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, L10n.Wizards.Host.Alerts.parsing(e.localizedDescription))
             alert.addCancelAction(L10n.Global.ok)
             root.present(alert, animated: true, completion: nil)
         }
