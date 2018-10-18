@@ -34,14 +34,11 @@ class GroupConstants {
         static let title = name
 //        static let title = "\u{1F511}"
 
-        static var version: String? {
-            guard let info = Bundle.main.infoDictionary else {
-                return nil
-            }
-            let versionNumber = info["CFBundleShortVersionString"] as! String
-            let buildNumber = info[kCFBundleVersionKey as String] as! String
-            return "\(versionNumber) (\(buildNumber))"
-        }
+        static let versionNumber = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+
+        static let buildNumber = Int(Bundle.main.infoDictionary![kCFBundleVersionKey as String] as! String)!
+
+        static let versionString = "\(versionNumber) (\(buildNumber))"
         
         static let teamId = "5357M5NW9W"
 

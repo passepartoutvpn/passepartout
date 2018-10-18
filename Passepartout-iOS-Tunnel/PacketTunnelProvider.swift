@@ -27,9 +27,7 @@ import TunnelKit
 
 class PacketTunnelProvider: TunnelKitProvider {
     override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        if let version = GroupConstants.App.version {
-            appVersion = "\(GroupConstants.App.name) \(version)"
-        }
+        appVersion = "\(GroupConstants.App.name) \(GroupConstants.App.versionString)"
         dnsTimeout = GroupConstants.VPN.dnsTimeout
         logSeparator = GroupConstants.VPN.sessionMarker
         super.startTunnel(options: options, completionHandler: completionHandler)

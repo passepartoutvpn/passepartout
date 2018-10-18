@@ -46,10 +46,8 @@ struct DebugLog {
     }
 
     func decoratedString() -> String {
-        guard let appVersion = GroupConstants.App.version else {
-            fatalError("Could not find bundle app version?")
-        }
         let appName = GroupConstants.App.name
+        let appVersion = GroupConstants.App.versionString
 
         var metadata: [String] = []
         let osVersion: String
