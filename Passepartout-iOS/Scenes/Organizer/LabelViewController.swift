@@ -1,5 +1,5 @@
 //
-//  CreditsViewController.swift
+//  LabelViewController.swift
 //  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 9/26/18.
@@ -25,18 +25,12 @@
 
 import UIKit
 
-class CreditsViewController: UIViewController {
+class LabelViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView?
 
-//    @IBOutlet private weak var labelTitle: UILabel?
-//
-//    @IBOutlet private weak var labelIntro: UILabel?
-//
-//    @IBOutlet private weak var buttonPassepartout: UIButton?
-//
-//    @IBOutlet private weak var buttonTunnelKit: UIButton?
-
-    @IBOutlet private weak var labelThirdParties: UILabel?
+    @IBOutlet private weak var label: UILabel?
+    
+    var text: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,15 +42,9 @@ class CreditsViewController: UIViewController {
         super.viewDidLoad()
 
         title = L10n.Credits.title
-//        labelIntro?.text = L10n.Credits.Labels.intro
-//        buttonPassepartout?.setTitle(L10n.Credits.Buttons.passepartout, for: .normal)
-//        buttonTunnelKit?.setTitle(L10n.Credits.Buttons.tunnelkit, for: .normal)
-
-        var notices = AppConstants.Notices.all
-        notices.insert(L10n.Credits.Labels.thirdParties, at: 0)
-        labelThirdParties?.text = notices.joined(separator: "\n\n")
+        label?.text = text
 
         scrollView?.applyPrimaryBackground(Theme.current)
-        labelThirdParties?.applyLight(Theme.current)
+        label?.applyLight(Theme.current)
     }
 }

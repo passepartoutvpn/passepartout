@@ -239,6 +239,16 @@ internal enum L10n {
     }
   }
 
+  internal enum Disclaimer {
+    /// Disclaimer
+    internal static let title = L10n.tr("Localizable", "disclaimer.title")
+
+    internal enum Labels {
+      /// Passepartout is a VPN client based on independent work. As such, the developer -while making his best efforts to avoid it- takes no responsibility about any damage caused by the use of this software.\n\nAdditionally, the developer takes no responsibility about data usage, monitoring, logging etc. by the servers you connect to. Passepartout is not even involved in the above choices, as they're part of server-side policies.\n\nFor more information about data usage by third parties, please review the privacy policy of your VPN provider.
+      internal static let text = L10n.tr("Localizable", "disclaimer.labels.text")
+    }
+  }
+
   internal enum Endpoint {
 
     internal enum Cells {
