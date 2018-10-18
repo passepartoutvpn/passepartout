@@ -2,8 +2,9 @@ source 'https://github.com/cocoapods/specs.git'
 use_frameworks!
 
 def shared_pods
-    pod 'TunnelKit', '~> 1.1.1'
-    #pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => '1234567'
+    #pod 'TunnelKit', '~> 1.1.1'
+    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => '961a30c'
+    #pod 'TunnelKit', :path => '../tunnelkit'
 end
 
 target 'Passepartout-iOS' do
