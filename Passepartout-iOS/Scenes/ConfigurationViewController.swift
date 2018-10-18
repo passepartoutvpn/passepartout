@@ -195,7 +195,17 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case .tlsWrapping:
             cell.leftText = L10n.Configuration.Cells.TlsWrapping.caption
             let V = L10n.Configuration.Cells.TlsWrapping.Value.self
-            cell.rightText = V.disabled
+            if let strategy = configuration.tlsWrap?.strategy {
+                switch strategy {
+                case .auth:
+                    cell.rightText = V.auth
+
+                case .crypt:
+                    cell.rightText = V.crypt
+                }
+            } else {
+                cell.rightText = V.disabled
+            }
             cell.accessoryType = .none
             cell.isTappable = false
 

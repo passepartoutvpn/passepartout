@@ -74,6 +74,10 @@ extension TunnelKitProvider.Configuration {
         var clientKey: CryptoContainer?
         var keepAliveSeconds: Int?
         var renegotiateAfterSeconds: Int?
+        var keyDirection: StaticKey.Direction?
+        var tlsStrategy: SessionProxy.TLSWrap.Strategy?
+        var tlsKeyLines: [Substring]?
+        var tlsWrap: SessionProxy.TLSWrap?
 
         var currentBlockName: String?
         var currentBlock: [String] = []
@@ -113,8 +117,13 @@ extension TunnelKitProvider.Configuration {
                 case "key":
                     clientKey = CryptoContainer(pem: currentBlock.joined(separator: "\n"))
                     
-                case "tls-auth", "tls-crypt":
-                    unsupportedError = ApplicationError.unsupportedConfiguration(option: blockName)
+                case "tls-auth":
+                    tlsKeyLines = currentBlock.map { Substring($0) }
+                    tlsStrategy = .auth
+                    
+                case "tls-crypt":
+                    tlsKeyLines = currentBlock.map { Substring($0) }
+                    tlsStrategy = .crypt
                     
                 default:
                     break
@@ -180,6 +189,12 @@ extension TunnelKitProvider.Configuration {
             Regex.compress.enumerateComponents(in: line) { _ in
                 compressionFraming = .compress
             }
+            Regex.keyDirection.enumerateArguments(in: line) {
+                guard let arg = $0.first, let value = Int(arg) else {
+                    return
+                }
+                keyDirection = StaticKey.Direction(rawValue: value)
+            }
             Regex.ping.enumerateArguments(in: line) {
                 guard let arg = $0.first else {
                     return
@@ -232,11 +247,26 @@ extension TunnelKitProvider.Configuration {
         
         assert(!endpointProtocols.isEmpty, "Must define an endpoint protocol")
 
+        if let keyLines = tlsKeyLines, let strategy = tlsStrategy {
+            let optKey: StaticKey?
+            switch strategy {
+            case .auth:
+                optKey = StaticKey(lines: keyLines, direction: keyDirection)
+
+            case .crypt:
+                optKey = StaticKey(lines: keyLines, direction: .client)
+            }
+            if let key = optKey {
+                tlsWrap = SessionProxy.TLSWrap(strategy: strategy, key: key)
+            }
+        }
+
         var builder = TunnelKitProvider.ConfigurationBuilder(ca: ca)
         builder.endpointProtocols = endpointProtocols
         builder.cipher = cipher ?? .aes128cbc
         builder.digest = digest ?? .sha1
         builder.compressionFraming = compressionFraming
+        builder.tlsWrap = tlsWrap
         builder.clientCertificate = clientCertificate
         builder.clientKey = clientKey
         builder.keepAliveSeconds = keepAliveSeconds

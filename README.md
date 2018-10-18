@@ -67,11 +67,8 @@ In preset mode, you can pick pre-resolved IPv4 endpoints when DNS is problematic
 
 Passepartout can import .ovpn configuration files. This way you can fine-tune encryption without tweaking and reimporting a new configuration. Below are a few limitations worth mentioning.
 
-Unsupported (yet):
+Unsupported:
 
-- TLS wrapping
-    - `--tls-auth`
-    - `--tls-crypt`
 - UDP fragmentation, i.e. `--fragment`
 
 Unsupported (probably ever):
