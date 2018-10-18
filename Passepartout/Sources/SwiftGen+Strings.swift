@@ -14,9 +14,9 @@ internal enum L10n {
 
     internal enum Cells {
 
-      internal enum DiscussReddit {
-        /// Discuss on Reddit
-        internal static let caption = L10n.tr("Localizable", "about.cells.discuss_reddit.caption")
+      internal enum RequestSupport {
+        /// Request support
+        internal static let caption = L10n.tr("Localizable", "about.cells.request_support.caption")
       }
 
       internal enum Version {
@@ -288,9 +288,9 @@ internal enum L10n {
   }
 
   internal enum IssueReporter {
-    /// Do you want to attach the debug log of your latest connections? The log is crucial to resolve your connectivity issues and is completely anonymous.
+    /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.
     internal static let message = L10n.tr("Localizable", "issue_reporter.message")
-    /// Report an issue
+    /// Submit debug log
     internal static let title = L10n.tr("Localizable", "issue_reporter.title")
 
     internal enum Alerts {
@@ -302,10 +302,8 @@ internal enum L10n {
     }
 
     internal enum Buttons {
-      /// Attach debug log
-      internal static let withLog = L10n.tr("Localizable", "issue_reporter.buttons.with_log")
-      /// Omit debug log
-      internal static let withoutLog = L10n.tr("Localizable", "issue_reporter.buttons.without_log")
+      /// I understand
+      internal static let accept = L10n.tr("Localizable", "issue_reporter.buttons.accept")
     }
 
     internal enum Email {
@@ -313,7 +311,7 @@ internal enum L10n {
       internal static func body(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue_reporter.email.body", p1)
       }
-      /// %@ - Report issue
+      /// %@ - Debug log
       internal static func subject(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue_reporter.email.subject", p1)
       }
@@ -408,6 +406,8 @@ internal enum L10n {
   internal enum Reddit {
     /// Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.
     internal static let message = L10n.tr("Localizable", "reddit.message")
+    /// Reddit
+    internal static let title = L10n.tr("Localizable", "reddit.title")
 
     internal enum Buttons {
       /// Don't ask again

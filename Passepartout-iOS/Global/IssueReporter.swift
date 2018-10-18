@@ -46,14 +46,11 @@ class IssueReporter: NSObject {
         self.viewController = viewController
         
         let alert = Macros.alert(L10n.IssueReporter.title, L10n.IssueReporter.message)
-        alert.addDefaultAction(L10n.IssueReporter.Buttons.withLog) {
+        alert.addDefaultAction(L10n.IssueReporter.Buttons.accept) {
             VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
                 self.composeEmail(withDebugLog: $0)
             }
         }
-        alert.addAction(UIAlertAction(title: L10n.IssueReporter.Buttons.withoutLog, style: .default) { (action) in
-            self.composeEmail(withDebugLog: nil)
-        })
         alert.addCancelAction(L10n.Global.cancel)
         viewController.present(alert, animated: true, completion: nil)
     }

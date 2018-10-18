@@ -27,6 +27,7 @@
 "global.cancel" = "Cancel";
 "global.next" = "Next";
 
+"reddit.title" = "Reddit";
 "reddit.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
 "reddit.buttons.subscribe" = "Subscribe now!";
 "reddit.buttons.remind" = "Remind me later";
@@ -160,12 +161,11 @@
 "vpn.inactive" = "Inactive";
 "vpn.disabled" = "Disabled";
 
-"issue_reporter.title" = "Report an issue";
-"issue_reporter.message" = "Do you want to attach the debug log of your latest connections? The log is crucial to resolve your connectivity issues and is completely anonymous.";
-"issue_reporter.buttons.with_log" = "Attach debug log";
-"issue_reporter.buttons.without_log" = "Omit debug log";
+"issue_reporter.title" = "Submit debug log";
+"issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.";
+"issue_reporter.buttons.accept" = "I understand";
 "issue_reporter.alerts.email_not_configured.message" = "No e-mail account is configured.";
-"issue_reporter.email.subject" = "%@ - Report issue";
+"issue_reporter.email.subject" = "%@ - Debug log";
 "issue_reporter.email.body" = "Hi,\n\ndescription of the issue:\n\n%@\n\nRegards";
 
 "about.title" = "About";
@@ -173,7 +173,7 @@
 "about.sections.source.header" = "Source code";
 "about.sections.feedback.header" = "Feedback";
 "about.cells.version.caption" = "Version";
-"about.cells.discuss_reddit.caption" = "Discuss on Reddit";
+"about.cells.request_support.caption" = "Request support";
 "about.cells.write_review.caption" = "Write a review";
 "about.cells.website.caption" = "Visit website";
 
