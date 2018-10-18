@@ -415,16 +415,17 @@
                     <connections>
                         <segue destination="2d7-Ad-AZr" kind="show" identifier="CreditsSegueIdentifier" id="tGv-dr-20P"/>
                         <segue destination="PMT-gj-ARE" kind="show" identifier="VersionSegueIdentifier" id="uYt-4N-PPL"/>
+                        <segue destination="2d7-Ad-AZr" kind="show" identifier="DisclaimerSegueIdentifier" id="HW6-RJ-VFY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AnH-Vt-JJn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3558" y="-1784"/>
         </scene>
-        <!--Credits View Controller-->
+        <!--Label View Controller-->
         <scene sceneID="1v7-O6-Ddh">
             <objects>
-                <viewController id="2d7-Ad-AZr" customClass="CreditsViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2d7-Ad-AZr" customClass="LabelViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e1G-CS-7AH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -438,7 +439,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UkA-Yl-a47">
                                                 <rect key="frame" x="23" y="30" width="329" height="18"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;third_parties&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWp-cG-SuG">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;label&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWp-cG-SuG">
                                                         <rect key="frame" x="0.0" y="0.0" width="329" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
@@ -481,7 +482,7 @@
                         <viewLayoutGuide key="safeArea" id="skL-cM-vUB"/>
                     </view>
                     <connections>
-                        <outlet property="labelThirdParties" destination="KWp-cG-SuG" id="Q8g-Wp-C1j"/>
+                        <outlet property="label" destination="KWp-cG-SuG" id="us3-ss-xAX"/>
                         <outlet property="scrollView" destination="6iI-GI-SMq" id="uWc-do-1WG"/>
                     </connections>
                 </viewController>
@@ -493,4 +494,7 @@
     <resources>
         <image name="logo" width="200" height="200"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="HW6-RJ-VFY"/>
+    </inferredMetricsTieBreakers>
 </document>

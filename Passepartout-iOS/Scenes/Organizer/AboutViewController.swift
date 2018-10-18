@@ -37,7 +37,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Info.header, for: .info)
         model.setHeader(L10n.About.Sections.Source.header, for: .source)
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
-        model.set([.version, .credits, .website], in: .info)
+        model.set([.version, .credits, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
         model.set([.discussReddit, .reportIssue, .writeReview], in: .feedback)
         return model
@@ -70,6 +70,10 @@ class AboutViewController: UITableViewController, TableModelHost {
         perform(segue: StoryboardSegue.Organizer.creditsSegueIdentifier)
     }
     
+    private func showDisclaimer() {
+        perform(segue: StoryboardSegue.Organizer.disclaimerSegueIdentifier)
+    }
+    
     private func visitWebsite() {
         UIApplication.shared.open(AppConstants.URLs.website, options: [:], completionHandler: nil)
     }
@@ -94,6 +98,28 @@ class AboutViewController: UITableViewController, TableModelHost {
     @IBAction private func dismiss() {
         dismiss(animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let sid = segue.identifier, let segueType = StoryboardSegue.Organizer(rawValue: sid) else {
+            return
+        }
+        guard let vc = segue.destination as? LabelViewController else {
+            return
+        }
+
+        switch segueType {
+        case .creditsSegueIdentifier:
+            var notices = AppConstants.Notices.all
+            notices.insert(L10n.Credits.Labels.thirdParties, at: 0)
+            vc.text = notices.joined(separator: "\n\n")
+
+        case .disclaimerSegueIdentifier:
+            vc.text = L10n.Disclaimer.Labels.text
+            
+        default:
+            break
+        }
+    }
 }
 
 // MARK: -
@@ -111,6 +137,8 @@ extension AboutViewController {
         case version
         
         case credits
+        
+        case disclaimer
         
         case website
         
@@ -154,6 +182,11 @@ extension AboutViewController {
             cell.leftText = L10n.Credits.title
             return cell
             
+        case .disclaimer:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Disclaimer.title
+            return cell
+
         case .website:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.Website.caption
@@ -193,6 +226,9 @@ extension AboutViewController {
             
         case .credits:
             showCredits()
+            
+        case .disclaimer:
+            showDisclaimer()
             
         case .website:
             visitWebsite()
