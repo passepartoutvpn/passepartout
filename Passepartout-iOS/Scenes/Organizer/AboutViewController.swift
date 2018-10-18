@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version, .credits, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
-        model.set([.discussReddit, .reportIssue, .writeReview], in: .feedback)
+        model.set([.requestSupport, .submitDebugLog, .writeReview], in: .feedback)
         return model
     }()
     
@@ -82,7 +82,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    private func discussReddit() {
+    private func requestRedditSupport() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
     
@@ -146,9 +146,9 @@ extension AboutViewController {
         
         case sourceTunnelKit
         
-        case discussReddit
+        case requestSupport
         
-        case reportIssue
+        case submitDebugLog
 
         case writeReview
     }
@@ -202,12 +202,12 @@ extension AboutViewController {
             cell.leftText = GroupConstants.App.tunnelKitName
             return cell
 
-        case .discussReddit:
+        case .requestSupport:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.DiscussReddit.caption
+            cell.leftText = L10n.About.Cells.RequestSupport.caption
             return cell
             
-        case .reportIssue:
+        case .submitDebugLog:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.IssueReporter.title
             return cell
@@ -239,10 +239,10 @@ extension AboutViewController {
         case .sourceTunnelKit:
             visitRepository(AppConstants.Repos.tunnelKit)
             
-        case .discussReddit:
-            discussReddit()
+        case .requestSupport:
+            requestRedditSupport()
             
-        case .reportIssue:
+        case .submitDebugLog:
             reportIssue()
             
         case .writeReview:
