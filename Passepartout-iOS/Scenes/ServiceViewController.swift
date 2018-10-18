@@ -350,6 +350,10 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
     }
 
+    private func requestRedditSupport() {
+        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
+    }
+
     private func reportIssue() {
         IssueReporter.shared.present(in: self)
     }
@@ -389,7 +393,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         
         case diagnostics
         
-        case contacts
+        case feedback
     }
     
     enum RowType: Int {
@@ -429,7 +433,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         
         case debugLog
         
-        case reportIssue
+        case requestSupport
+        
+        case submitDebugLog
     }
 
     private var trustedSectionIndex: Int {
@@ -635,9 +641,14 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             cell.leftText = L10n.Service.Cells.DebugLog.caption
             return cell
             
-        // contacts
+        // feedback
 
-        case .reportIssue:
+        case .requestSupport:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.RequestSupport.caption
+            return cell
+            
+        case .submitDebugLog:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.IssueReporter.title
             return cell
@@ -735,7 +746,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             perform(segue: StoryboardSegue.Main.debugLogSegueIdentifier, sender: cell)
             return true
             
-        case .reportIssue:
+        case .requestSupport:
+            requestRedditSupport()
+            
+        case .submitDebugLog:
             reportIssue()
             
         default:
@@ -806,7 +820,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.add(.trusted)
             model.add(.trustedPolicy)
             model.add(.diagnostics)
-            model.add(.contacts)
+            model.add(.feedback)
         }
 
         // headers
@@ -823,6 +837,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             model.setHeader(L10n.Service.Sections.Trusted.header, for: .trusted)
             model.setHeader(L10n.Service.Sections.Diagnostics.header, for: .diagnostics)
+            model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         }
         
         // footers
@@ -855,7 +870,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.set([.vpnSurvivesSleep], in: .vpnSurvivesSleep)
             model.set([.trustedPolicy], in: .trustedPolicy)
             model.set([.testConnectivity, .dataCount, .debugLog], in: .diagnostics)
-            model.set([.reportIssue], in: .contacts)
+            model.set([.requestSupport, .submitDebugLog], in: .feedback)
         }
 
         trustedNetworks.delegate = self
