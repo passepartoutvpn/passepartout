@@ -1,20 +1,23 @@
-# Passepartout
+<p style="text-align: center; padding: 2em"><img src="res/logo.png" /></p>
 
+# [Passepartout][about-website]
+
+![iOS 11+](https://img.shields.io/badge/ios-11+-green.svg)
+[![TunnelKit 1.1.x](https://img.shields.io/badge/tunnelkit-1.1-d69c68.svg)][dep-tunnelkit]
+[![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
+[![Join Reddit](https://img.shields.io/badge/join-Reddit-orange.svg)][about-reddit]
+[![Join Telegram](https://img.shields.io/badge/join-Telegram-blue.svg)][about-telegram]
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20an%20user-friendly%2C%20open%20source%20%23OpenVPN%20client%20for%20%23iOS%20and%20%23macOS)
+ 
 Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS.
-
-Passepartout relies on [TunnelKit][dep-tunnelkit] for most VPN functionality.
 
 ## Beta
 
-Passepartout is in public beta. You can get early versions of the app via [TestFlight][about-testflight].
+Passepartout is in [public beta][about-testflight] on TestFlight.
+
+<a href="https://www.patreon.com/keeshux"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"></a>
 
 By using a beta version of the app, you understand that the software might be unstable, unreliable or plain broken from time to time.
-
-## Support
-
-Subscribe to the [/r/passepartout][about-reddit] subreddit for issues, feature requests and general discussion.
-
-There is also a public group on [Telegram][about-telegram].
 
 ## Overview
 
@@ -147,10 +150,6 @@ For more information about data usage by third parties, please review the privac
 Twitter: [@keeshux][about-twitter]
 
 Website: [passepartoutvpn.app][about-website]
-
-## Donations
-
-Passepartout is free software. If you like it, please [support me on Patreon][about-patreon].
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 
