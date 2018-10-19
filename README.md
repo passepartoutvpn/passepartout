@@ -1,3 +1,5 @@
+<p style="text-align: center; padding: 2em"><img src="res/logo.png" /></p>
+
 # Passepartout
 
 Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS.
