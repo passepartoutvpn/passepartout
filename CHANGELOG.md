@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Support for TLS wrapping (tls-auth and tls-crypt). [#5](https://github.com/keeshux/passepartout-ios/pull/5)
+
 ### Fixed
 
-- Credentials are now optional for host profiles. [#4](https://github.com/keeshux/passepartout-ios/pull/4)
 - Fixed Mullvad abrupt disconnection. [tunnelkit#30](https://github.com/keeshux/tunnelkit/issues/30)
+- Credentials are now optional for host profiles. [#4](https://github.com/keeshux/passepartout-ios/pull/4)
 
 ## 1.0 beta 1018 (2018-10-18)
 
