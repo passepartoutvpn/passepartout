@@ -217,8 +217,11 @@ class ConnectionService: Codable {
         guard let profile = activeProfile else {
             throw ApplicationError.missingProfile
         }
-        guard let credentials = credentials(for: profile) else {
-            throw ApplicationError.missingCredentials
+        let creds = credentials(for: profile)
+        if profile.requiresCredentials {
+            guard creds != nil else {
+                throw ApplicationError.missingCredentials
+            }
         }
         
         let cfg = try profile.generate(from: tunnelConfiguration, preferences: preferences)
@@ -226,7 +229,7 @@ class ConnectionService: Codable {
             withBundleIdentifier: GroupConstants.App.tunnelIdentifier,
             appGroup: appGroup,
             hostname: profile.mainAddress,
-            credentials: credentials
+            credentials: creds
         )
         protocolConfiguration.disconnectOnSleep = preferences.disconnectsOnSleep
 
