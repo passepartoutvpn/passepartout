@@ -2,9 +2,12 @@
 
 # [Passepartout][about-website]
 
-Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS.
 
-Passepartout relies on [TunnelKit][dep-tunnelkit] for most VPN functionality.
+![iOS 11+](https://img.shields.io/badge/ios-11+-green.svg)
+[![TunnelKit 1.1.x](https://img.shields.io/badge/tunnelkit-1.1-d69c68.svg)][dep-tunnelkit]
+[![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
+
+Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS.
 
 ## Beta
 
