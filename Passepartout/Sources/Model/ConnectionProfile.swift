@@ -34,7 +34,7 @@ protocol ConnectionProfile: class, EndpointDataSource {
     
     var username: String? { get set }
     
-    var isConfigured: Bool { get }
+    var requiresCredentials: Bool { get }
     
     func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration
 }

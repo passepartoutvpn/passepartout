@@ -190,10 +190,10 @@ class ServiceViewController: UIViewController, TableModelHost {
 
     private func toggleVpnService(cell: ToggleTableViewCell) {
         if cell.isOn {
-            guard service.canActivate(uncheckedProfile) else {
+            guard !service.needsCredentials(for: uncheckedProfile) else {
                 let alert = Macros.alert(
                     L10n.Service.Sections.Vpn.header,
-                    L10n.Service.Alerts.ConfigurationNeeded.message
+                    L10n.Service.Alerts.CredentialsNeeded.message
                 )
                 alert.addCancelAction(L10n.Global.ok) {
                     cell.setOn(false, animated: true)
@@ -522,7 +522,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil)
             cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
             cell.accessoryType = .none
-            cell.isTappable = service.canActivate(uncheckedProfile) && vpn.isEnabled
+            cell.isTappable = !service.needsCredentials(for: uncheckedProfile) && vpn.isEnabled
             return cell
             
         case .useProfile:
