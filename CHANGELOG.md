@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Credentials are now optional for host profiles. [#4](https://github.com/keeshux/passepartout-ios/pull/4)
+- Fixed Mullvad abrupt disconnection. [tunnelkit#30](https://github.com/keeshux/tunnelkit/issues/30)
 
 ## 1.0 beta 1018 (2018-10-18)
 
