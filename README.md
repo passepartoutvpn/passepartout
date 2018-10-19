@@ -13,7 +13,7 @@ Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iO
 
 ## Beta
 
-Passepartout is in public beta. You can get early versions of the app via [TestFlight][about-testflight].
+Passepartout is in [public beta][about-testflight] on TestFlight.
 
 <a href="https://www.patreon.com/keeshux"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"></a>
 
