@@ -902,7 +902,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         guard service.isActiveProfile(profile) else {
             return
         }
-        tableView.reloadRows(at: [statusIndexPath], with: .automatic)
+        tableView.reloadRows(at: [statusIndexPath], with: .none)
     }
     
     func reloadSelectedRow(andRowAt indexPath: IndexPath? = nil) {

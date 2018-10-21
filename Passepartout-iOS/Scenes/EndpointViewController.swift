@@ -293,7 +293,7 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
 
         setNeedsRefresh()
         commitChanges()
-        tableView.reloadRows(at: updatedIndexPaths, with: .automatic)
+        tableView.reloadRows(at: updatedIndexPaths, with: .none)
     }
     
     // MARK: Helpers
