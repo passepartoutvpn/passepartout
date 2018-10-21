@@ -61,7 +61,7 @@
 "service.sections.status.header" = "Connection";
 "service.sections.diagnostics.header" = "Diagnostics";
 
-"service.sections.vpn.footer" = "The connection will be established whenever necessary. Tap \"Status\" to enforce a reconnection.";
+"service.sections.vpn.footer" = "The connection will be established whenever necessary.";
 "service.sections.configuration.header" = "Configuration";
 "service.sections.provider_infrastructure.footer" = "Last updated on %@.";
 "service.sections.vpn_survives_sleep.footer" = "Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.";
