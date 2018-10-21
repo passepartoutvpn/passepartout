@@ -59,8 +59,7 @@ extension TunnelKitProvider.Configuration {
     }
     
     static func parsed(from url: URL) throws -> (String, TunnelKitProvider.Configuration) {
-        let content = try String(contentsOf: url)
-        let lines = content.components(separatedBy: .newlines).map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
+        let lines = try String(contentsOf: url).trimmedLines()
 
         var defaultProto: TunnelKitProvider.SocketType?
         var defaultPort: UInt16?
