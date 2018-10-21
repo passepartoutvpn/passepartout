@@ -92,7 +92,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
         vpn.prepare(withProfile: profile) {
-//            self.reloadVpnStatus()
+            self.reloadModel()
             self.tableView.reloadData()
         }
 
@@ -206,11 +206,13 @@ class ServiceViewController: UIViewController, TableModelHost {
                     cell.setOn(false, animated: true)
                     return
                 }
-                self.reloadVpnStatus()
+                self.reloadModel()
+                self.tableView.reloadData()
             }
         } else {
             vpn.disconnect { (error) in
-                self.reloadVpnStatus()
+                self.reloadModel()
+                self.tableView.reloadData()
             }
         }
     }
@@ -530,6 +532,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil)
             cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
             cell.accessoryType = .none
+            cell.isTappable = false
             return cell
             
         case .reconnect:
@@ -861,7 +864,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         
         // rows
         if isActiveProfile {
-            model.set([.vpnService, .connectionStatus, .reconnect], in: .vpn)
+            var rows: [RowType] = [.vpnService, .connectionStatus]
+            if vpn.isEnabled {
+                rows.append(.reconnect)
+            }
+            model.set(rows, in: .vpn)
         } else {
             model.set([.useProfile], in: .vpn)
         }
