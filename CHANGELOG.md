@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Tunnel failure reporting in UI. [#8](https://github.com/keeshux/passepartout-ios/pull/8)
 - Explicit "Reconnect" button. [#9](https://github.com/keeshux/passepartout-ios/pull/9)
 
 ### Fixed
