@@ -72,9 +72,9 @@
 "service.sections.diagnostics.header" = "Diagnostics";
 //"service.sections.destruction.footer" = "Delete configuration from device settings.";
 
+"service.cells.use_profile.caption" = "Use this profile";
 "service.cells.vpn_service.caption" = "Enabled";
 "service.cells.connection_status.caption" = "Status";
-"service.cells.use_profile.caption" = "Use this profile";
 "service.cells.reconnect.caption" = "Reconnect";
 "service.cells.account.caption" = "Account";
 "service.cells.account.none" = "None configured";
