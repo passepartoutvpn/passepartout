@@ -161,6 +161,12 @@
 "vpn.inactive" = "Inactive";
 "vpn.disabled" = "Disabled";
 
+"vpn.errors.timeout" = "Timeout";
+"vpn.errors.auth" = "Auth failed";
+"vpn.errors.tls" = "TLS failed";
+"vpn.errors.dns" = "DNS failed";
+"vpn.errors.network" = "Network changed";
+
 "issue_reporter.title" = "Submit debug log";
 "issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.";
 "issue_reporter.buttons.accept" = "I understand";

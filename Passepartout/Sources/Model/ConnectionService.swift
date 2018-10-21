@@ -276,6 +276,16 @@ class ConnectionService: Codable {
         return lines.joined(separator: "\n")
     }
     
+    var vpnLastError: TunnelKitProvider.ProviderError? {
+        guard let key = tunnelConfiguration.lastErrorKey else {
+            return nil
+        }
+        guard let rawValue = defaults.string(forKey: key) else {
+            return nil
+        }
+        return TunnelKitProvider.ProviderError(rawValue: rawValue)
+    }
+    
 //    func eraseVpnLog() {
 //        defaults.removeObject(forKey: Keys.vpnLog)
 //    }

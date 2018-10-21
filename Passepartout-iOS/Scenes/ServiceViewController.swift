@@ -529,7 +529,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil)
+            cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil, error: service.vpnLastError)
             cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
             cell.accessoryType = .none
             cell.isTappable = false
