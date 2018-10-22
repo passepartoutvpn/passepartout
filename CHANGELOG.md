@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Tunnel failure reporting in UI. [#8](https://github.com/keeshux/passepartout-ios/pull/8)
 - Explicit "Reconnect" button. [#9](https://github.com/keeshux/passepartout-ios/pull/9)
+- Option to revert host parameters to original configuration (Nicholas Caito). [#10](https://github.com/keeshux/passepartout-ios/pull/10)
 
 ### Fixed
 
