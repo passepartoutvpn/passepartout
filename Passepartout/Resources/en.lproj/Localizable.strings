@@ -113,8 +113,8 @@
 "account.cells.username.placeholder" = "username";
 "account.cells.password.caption" = "Password";
 "account.cells.password.placeholder" = "secret";
-"account.cells.password_confirm.caption" = "Confirm";
-"account.cells.password_confirm.mismatch" = "Passwords don't match!";
+//"account.cells.password_confirm.caption" = "Confirm";
+//"account.cells.password_confirm.mismatch" = "Passwords don't match!";
 
 "endpoint.sections.location_addresses.header" = "Addresses";
 "endpoint.sections.location_protocols.header" = "Protocols";

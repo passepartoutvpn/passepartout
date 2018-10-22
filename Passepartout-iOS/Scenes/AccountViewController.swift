@@ -38,8 +38,6 @@ class AccountViewController: UIViewController, TableModelHost {
     
     private weak var cellPassword: FieldTableViewCell?
     
-    private weak var cellPasswordConfirmation: FieldTableViewCell?
-    
     var currentCredentials: Credentials?
     
     var usernamePlaceholder: String?
@@ -72,7 +70,7 @@ class AccountViewController: UIViewController, TableModelHost {
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.only)
-        model.set([.username, .password, .passwordConfirmation], in: .only)
+        model.set([.username, .password], in: .only)
         return model
     }()
     
@@ -113,13 +111,6 @@ class AccountViewController: UIViewController, TableModelHost {
     }
     
     @IBAction private func done() {
-        guard cellPassword?.field.text == cellPasswordConfirmation?.field.text else {
-            let alert = Macros.alert(title, L10n.Account.Cells.PasswordConfirm.mismatch)
-            alert.addCancelAction(L10n.Global.ok)
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        
         view.endEditing(true)
         delegate?.accountControllerDidComplete(self)
     }
@@ -139,8 +130,6 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
         case username
         
         case password
-        
-        case passwordConfirmation
     }
     
     private static let footerButtonTag = 1000
@@ -185,15 +174,6 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             cell.field.isSecureTextEntry = true
             cell.field.text = currentCredentials?.password
             cell.field.returnKeyType = .done
-            
-        case .passwordConfirmation:
-            cellPasswordConfirmation = cell
-            cell.caption = L10n.Account.Cells.PasswordConfirm.caption
-            cell.field.placeholder = L10n.Account.Cells.Password.placeholder
-            cell.field.clearButtonMode = .always
-            cell.field.isSecureTextEntry = true
-            cell.field.text = currentCredentials?.password
-            cell.field.returnKeyType = .done
         }
         cell.captionWidth = 120.0
         cell.delegate = self
@@ -210,10 +190,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             cellPassword?.field.becomeFirstResponder()
             
         case cellPassword:
-            cellPasswordConfirmation?.field.becomeFirstResponder()
-            
-        case cellPasswordConfirmation:
-            cellPasswordConfirmation?.field.resignFirstResponder()
+            cellPassword?.field.resignFirstResponder()
             done()
             
         default:
