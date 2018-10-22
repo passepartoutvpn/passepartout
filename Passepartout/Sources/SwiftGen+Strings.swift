@@ -639,7 +639,7 @@ internal enum L10n {
       }
 
       internal enum Vpn {
-        /// The connection will be established whenever necessary. Tap "Status" to enforce a reconnection.
+        /// The connection will be established whenever necessary.
         internal static let footer = L10n.tr("Localizable", "service.sections.vpn.footer")
         /// VPN
         internal static let header = L10n.tr("Localizable", "service.sections.vpn.header")

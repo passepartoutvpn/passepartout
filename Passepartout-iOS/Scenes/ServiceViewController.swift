@@ -92,7 +92,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
         vpn.prepare(withProfile: profile) {
-//            self.reloadVpnStatus()
+            self.reloadModel()
             self.tableView.reloadData()
         }
 
@@ -206,11 +206,13 @@ class ServiceViewController: UIViewController, TableModelHost {
                     cell.setOn(false, animated: true)
                     return
                 }
-                self.reloadVpnStatus()
+                self.reloadModel()
+                self.tableView.reloadData()
             }
         } else {
             vpn.disconnect { (error) in
-                self.reloadVpnStatus()
+                self.reloadModel()
+                self.tableView.reloadData()
             }
         }
     }
@@ -397,12 +399,14 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     }
     
     enum RowType: Int {
+        case useProfile
+        
         case vpnService
         
         case connectionStatus
         
-        case useProfile
-        
+        case reconnect
+
         case account
         
         case endpoint
@@ -503,6 +507,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = model.row(at: indexPath)
         switch row {
+        case .useProfile:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.applyAction(Theme.current)
+            cell.leftText = L10n.Service.Cells.UseProfile.caption
+            return cell
+            
         case .vpnService:
             guard service.isActiveProfile(uncheckedProfile) else {
                 fatalError("Do not show vpnService in non-active profile")
@@ -522,13 +532,15 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil)
             cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
             cell.accessoryType = .none
-            cell.isTappable = !service.needsCredentials(for: uncheckedProfile) && vpn.isEnabled
+            cell.isTappable = false
             return cell
             
-        case .useProfile:
+        case .reconnect:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.Service.Cells.UseProfile.caption
+            cell.leftText = L10n.Service.Cells.Reconnect.caption
+            cell.accessoryType = .none
+            cell.isTappable = !service.needsCredentials(for: uncheckedProfile) && vpn.isEnabled
             return cell
 
         // shared cells
@@ -695,11 +707,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     // true if enters subscreen
     private func handle(row: RowType, cell: UITableViewCell) -> Bool {
         switch row {
-        case .connectionStatus:
-            confirmVpnReconnection()
-            
         case .useProfile:
             activate()
+            
+        case .reconnect:
+            confirmVpnReconnection()
             
         case .account:
             perform(segue: StoryboardSegue.Main.accountSegueIdentifier, sender: cell)
@@ -852,7 +864,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         
         // rows
         if isActiveProfile {
-            model.set([.vpnService, .connectionStatus], in: .vpn)
+            var rows: [RowType] = [.vpnService, .connectionStatus]
+            if vpn.isEnabled {
+                rows.append(.reconnect)
+            }
+            model.set(rows, in: .vpn)
         } else {
             model.set([.useProfile], in: .vpn)
         }
