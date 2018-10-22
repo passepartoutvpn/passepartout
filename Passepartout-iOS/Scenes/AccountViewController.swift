@@ -45,13 +45,13 @@ class AccountViewController: UIViewController, TableModelHost {
     var infrastructureName: Infrastructure.Name? {
         didSet {
             guard let name = infrastructureName else {
-                model.removeFooter(for: .only)
+                model.removeFooter(for: .credentials)
                 return
             }
             let V = L10n.Account.SuggestionFooter.Infrastructure.self
             switch name {
             case .pia:
-                model.setFooter(V.pia, for: .only)
+                model.setFooter(V.pia, for: .credentials)
             }
             tableView?.reloadData()
         }
@@ -69,8 +69,8 @@ class AccountViewController: UIViewController, TableModelHost {
     
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
-        model.add(.only)
-        model.set([.username, .password], in: .only)
+        model.add(.credentials)
+        model.set([.username, .password], in: .credentials)
         return model
     }()
     
@@ -123,7 +123,7 @@ class AccountViewController: UIViewController, TableModelHost {
 
 extension AccountViewController: UITableViewDataSource, UITableViewDelegate, FieldTableViewCellDelegate {
     enum SectionType: Int {
-        case only
+        case credentials
     }
     
     enum RowType: Int {
@@ -135,7 +135,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
     private static let footerButtonTag = 1000
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: .only)
+        return model.footer(for: .credentials)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
