@@ -169,7 +169,7 @@
 "vpn.errors.dns" = "DNS failed";
 "vpn.errors.network" = "Network changed";
 
-"issue_reporter.title" = "Submit debug log";
+"issue_reporter.title" = "Report issue";
 "issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.";
 "issue_reporter.buttons.accept" = "I understand";
 "issue_reporter.alerts.email_not_configured.message" = "No e-mail account is configured.";
@@ -182,6 +182,7 @@
 "about.sections.feedback.header" = "Feedback";
 "about.cells.version.caption" = "Version";
 "about.cells.request_support.caption" = "Request support";
+"about.cells.report_issue.caption" = "Report connectivity issue";
 "about.cells.write_review.caption" = "Write a review";
 "about.cells.website.caption" = "Visit website";
 

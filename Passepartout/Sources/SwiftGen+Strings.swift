@@ -14,6 +14,11 @@ internal enum L10n {
 
     internal enum Cells {
 
+      internal enum ReportIssue {
+        /// Report connectivity issue
+        internal static let caption = L10n.tr("Localizable", "about.cells.report_issue.caption")
+      }
+
       internal enum RequestSupport {
         /// Request support
         internal static let caption = L10n.tr("Localizable", "about.cells.request_support.caption")
@@ -293,7 +298,7 @@ internal enum L10n {
   internal enum IssueReporter {
     /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.
     internal static let message = L10n.tr("Localizable", "issue_reporter.message")
-    /// Submit debug log
+    /// Report issue
     internal static let title = L10n.tr("Localizable", "issue_reporter.title")
 
     internal enum Alerts {

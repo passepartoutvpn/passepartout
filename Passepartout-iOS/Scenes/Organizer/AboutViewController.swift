@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version, .credits, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
-        model.set([.requestSupport, .submitDebugLog, .writeReview], in: .feedback)
+        model.set([.requestSupport, .reportIssue, .writeReview], in: .feedback)
         return model
     }()
     
@@ -82,11 +82,11 @@ class AboutViewController: UITableViewController, TableModelHost {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    private func requestRedditSupport() {
+    private func postSupportRequest() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
     
-    private func reportIssue() {
+    private func reportConnectivityIssue() {
         IssueReporter.shared.present(in: self)
     }
     
@@ -148,7 +148,7 @@ extension AboutViewController {
         
         case requestSupport
         
-        case submitDebugLog
+        case reportIssue
 
         case writeReview
     }
@@ -207,9 +207,9 @@ extension AboutViewController {
             cell.leftText = L10n.About.Cells.RequestSupport.caption
             return cell
             
-        case .submitDebugLog:
+        case .reportIssue:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.IssueReporter.title
+            cell.leftText = L10n.About.Cells.ReportIssue.caption
             return cell
             
         case .writeReview:
@@ -240,10 +240,10 @@ extension AboutViewController {
             visitRepository(AppConstants.Repos.tunnelKit)
             
         case .requestSupport:
-            requestRedditSupport()
+            postSupportRequest()
             
-        case .submitDebugLog:
-            reportIssue()
+        case .reportIssue:
+            reportConnectivityIssue()
             
         case .writeReview:
             writeReview()
