@@ -122,7 +122,19 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             log.warning("Resetting with no original configuration set? Bad table model?")
             return
         }
-        // TODO
+        let originalConfiguration: TunnelKitProvider.Configuration
+        do {
+            (_, originalConfiguration) = try TunnelKitProvider.Configuration.parsed(from: url)
+        } catch let e {
+            log.warning("Could not parse original configuration: \(e)")
+            return
+        }
+        initialConfiguration = originalConfiguration
+        configuration = originalConfiguration.builder()
+        itemRefresh.isEnabled = true // allow for manual reconnection
+        tableView.reloadData()
+
+        delegate?.configurationShouldReinstall()
     }
 
     @IBAction private func refresh() {
