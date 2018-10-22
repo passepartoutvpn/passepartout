@@ -41,12 +41,20 @@ class ProfileConfigurationFactory {
     }
 
     func save(url: URL, for profile: ConnectionProfile) throws -> URL {
-        let savedUrl = configurationURL(for: profile)
+        let savedUrl = targetConfigurationURL(for: profile)
         try FileManager.default.copyItem(at: url, to: savedUrl)
         return savedUrl
     }
     
-    func configurationURL(for profile: ConnectionProfile) -> URL {
+    func configurationURL(for profile: ConnectionProfile) -> URL? {
+        let url = targetConfigurationURL(for: profile)
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            return nil
+        }
+        return url
+    }
+
+    private func targetConfigurationURL(for profile: ConnectionProfile) -> URL {
         let filename = "\(profile.id).ovpn"
         return configurationsPath.appendingPathComponent(filename)
     }

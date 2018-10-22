@@ -126,6 +126,7 @@
 
 "configuration.sections.communication.header" = "Communication";
 "configuration.sections.communication.footer.editable" = "Make sure to match server communication parameters, otherwise you will end up with broken connectivity.";
+"configuration.sections.reset.footer" = "If you ended up with broken connectivity after changing the communication parameters, tap to revert to the original configuration.";
 "configuration.sections.tls.header" = "TLS";
 "configuration.sections.other.header" = "Other";
 "configuration.cells.cipher.caption" = "Cipher";
@@ -135,6 +136,7 @@
 "configuration.cells.compression_frame.value.disabled" = "None";
 "configuration.cells.compression_frame.value.lzo" = "LZO";
 "configuration.cells.compression_frame.value.compress" = "Compress";
+"configuration.cells.reset_original.caption" = "Reset configuration";
 "configuration.cells.client.caption" = "Client certificate";
 "configuration.cells.client.value.enabled" = "Verified";
 "configuration.cells.client.value.disabled" = "Not verified";

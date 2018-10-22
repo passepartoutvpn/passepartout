@@ -25,6 +25,9 @@
 
 import UIKit
 import TunnelKit
+import SwiftyBeaver
+
+private let log = SwiftyBeaver.self
 
 class ConfigurationViewController: UIViewController, TableModelHost {
     @IBOutlet private weak var tableView: UITableView!
@@ -37,15 +40,21 @@ class ConfigurationViewController: UIViewController, TableModelHost {
     
     var isEditable = false
     
+    var originalConfigurationURL: URL?
+
     weak var delegate: ConfigurationModificationDelegate?
     
     // MARK: TableModelHost
 
     lazy var model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
+        let hasConfigurationURL = isEditable && (originalConfigurationURL != nil)
         
         // sections
         model.add(.communication)
+        if hasConfigurationURL {
+            model.add(.reset)
+        }
         model.add(.tls)
         model.add(.other)
 
@@ -55,12 +64,17 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         model.setHeader(L10n.Configuration.Sections.Other.header, for: .other)
 
         // footers
-        if isEditable {
+        if hasConfigurationURL {
+            model.setFooter(L10n.Configuration.Sections.Reset.footer, for: .reset)
+        } else if isEditable {
             model.setFooter(L10n.Configuration.Sections.Communication.Footer.editable, for: .communication)
         }
         
         // rows
         model.set([.cipher, .digest, .compressionFrame], in: .communication)
+        if hasConfigurationURL {
+            model.set([.resetOriginal], in: .reset)
+        }
         model.set([.client, .tlsWrapping], in: .tls)
         model.set([.compressionAlgorithm, .keepAlive, .renegSeconds], in: .other)
 
@@ -103,6 +117,14 @@ class ConfigurationViewController: UIViewController, TableModelHost {
     
     // MARK: Actions
 
+    private func resetOriginalConfiguration() {
+        guard let url = originalConfigurationURL else {
+            log.warning("Resetting with no original configuration set? Bad table model?")
+            return
+        }
+        // TODO
+    }
+
     @IBAction private func refresh() {
         guard isEditable else {
             return
@@ -119,7 +141,9 @@ class ConfigurationViewController: UIViewController, TableModelHost {
 extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegate {
     enum SectionType: Int {
         case communication
-        
+
+        case reset
+
         case tls
         
         case other
@@ -132,6 +156,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case compressionFrame
         
+        case resetOriginal
+
         case client
         
         case tlsWrapping
@@ -153,6 +179,16 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return model.footer(for: section)
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard let title = model.header(for: section) else {
+            return 1.0
+        }
+        guard !title.isEmpty else {
+            return 0.0
+        }
+        return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,6 +221,10 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case .compressionFrame:
             cell.leftText = L10n.Configuration.Cells.CompressionFrame.caption
             cell.rightText = configuration.compressionFraming.cellDescription
+            
+        case .resetOriginal:
+            cell.leftText = L10n.Configuration.Cells.ResetOriginal.caption
+            cell.applyAction(Theme.current)
             
         case .client:
             cell.leftText = L10n.Configuration.Cells.Client.caption
@@ -283,6 +323,10 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             }
             navigationController?.pushViewController(vc, animated: true)
 
+        case .resetOriginal:
+            tableView.deselectRow(at: indexPath, animated: true)
+            resetOriginalConfiguration()
+            
         default:
             break
         }
