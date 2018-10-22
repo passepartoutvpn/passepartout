@@ -88,6 +88,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
+        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidReinstall, object: nil)
 
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
