@@ -31,8 +31,12 @@ private let log = SwiftyBeaver.self
 
 class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     private struct ParsedFile {
-        let filename: String
-        
+        let url: URL
+
+        var filename: String {
+            return url.deletingPathExtension().lastPathComponent
+        }
+
         let hostname: String
         
         let configuration: TunnelKitProvider.Configuration
@@ -106,7 +110,6 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     func setConfigurationURL(_ url: URL) throws {
         log.debug("Parsing configuration URL: \(url)")
         
-        let filename = url.deletingPathExtension().lastPathComponent
         let hostname: String
         let configuration: TunnelKitProvider.Configuration
         do {
@@ -115,7 +118,7 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
             log.error("Could not parse .ovpn configuration file: \(e)")
             throw e
         }
-        parsedFile = ParsedFile(filename: filename, hostname: hostname, configuration: configuration)
+        parsedFile = ParsedFile(url: url, hostname: hostname, configuration: configuration)
     }
     
     private func useSuggestedTitle() {
@@ -162,6 +165,15 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
         guard let profile = createdProfile else {
             fatalError("No profile created?")
         }
+        if let url = parsedFile?.url {
+            do {
+                let savedUrl = try ProfileConfigurationFactory.shared.save(url: url, for: profile)
+                log.debug("Associated .ovpn configuration file to profile '\(profile.id)': \(savedUrl)")
+            } catch let e {
+                log.error("Could not associate .ovpn configuration file to profile: \(e)")
+            }
+        }
+        
         dismiss(animated: true) {
             self.delegate?.wizard(didCreate: profile, withCredentials: credentials)
         }
