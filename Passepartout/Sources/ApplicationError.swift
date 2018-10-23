@@ -30,10 +30,8 @@ enum ApplicationError: Error {
 
     case missingCredentials
     
-    case missingCA
+    case missingConfiguration(option: String)
 
-    case emptyRemotes
-    
     case unsupportedConfiguration(option: String)
 
     case migration

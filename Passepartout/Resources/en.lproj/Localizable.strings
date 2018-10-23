@@ -51,9 +51,11 @@
 "wizards.host.cells.title_input.caption" = "Title";
 "wizards.host.cells.title_input.placeholder" = "My Profile";
 "wizards.host.sections.existing.header" = "Existing profiles";
-"wizards.host.alerts.existing" = "A host profile with the same title already exists. Replace it?";
-"wizards.host.alerts.unsupported" = "The configuration file contains an unsupported option (%@).";
-"wizards.host.alerts.parsing" = "Unable to parse the provided configuration file (%@).";
+"wizards.host.alerts.existing.message" = "A host profile with the same title already exists. Replace it?";
+"wizards.host.alerts.missing.message" = "The configuration file lacks a required option (%@).";
+"wizards.host.alerts.unsupported.message" = "The configuration file contains an unsupported option (%@).";
+"wizards.host.alerts.parsing.message" = "Unable to parse the provided configuration file (%@).";
+"wizards.host.alerts.buttons.report" = "Report an issue";
 
 "service.welcome.message" = "Welcome to Passepartout!\n\nUse the organizer to add a new profile.";
 "service.sections.general.header" = "General";
@@ -175,7 +177,8 @@
 "issue_reporter.buttons.accept" = "I understand";
 "issue_reporter.alerts.email_not_configured.message" = "No e-mail account is configured.";
 "issue_reporter.email.subject" = "%@ - Report issue";
-"issue_reporter.email.body" = "Hi,\n\ndescription of the issue:\n\n%@\n\nRegards";
+"issue_reporter.email.body" = "Hi,\n\n%@\n\n%@\n\nRegards";
+"issue_reporter.email.description" = "description of the issue:";
 
 "about.title" = "About";
 "about.sections.info.header" = "General";

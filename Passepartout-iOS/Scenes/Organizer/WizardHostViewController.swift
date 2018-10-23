@@ -134,7 +134,7 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
         profile.parameters = file.configuration
 
         guard !TransientStore.shared.service.containsProfile(profile) else {
-            let alert = Macros.alert(title, L10n.Wizards.Host.Alerts.existing)
+            let alert = Macros.alert(title, L10n.Wizards.Host.Alerts.Existing.message)
             alert.addDefaultAction(L10n.Global.ok) {
                 self.next(withProfile: profile)
             }

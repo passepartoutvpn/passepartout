@@ -255,13 +255,13 @@ extension TunnelKitProvider.Configuration {
         }
         
         guard let ca = optCA else {
-            throw ApplicationError.missingCA
+            throw ApplicationError.missingConfiguration(option: "ca")
         }
         
         // XXX: only reads first remote
 //        hostnames = remotes.map { $0.0 }
         guard !remotes.isEmpty else {
-            throw ApplicationError.emptyRemotes
+            throw ApplicationError.missingConfiguration(option: "remote")
         }
         let hostname = remotes[0].0
         

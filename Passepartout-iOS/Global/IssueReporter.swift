@@ -33,6 +33,8 @@ class IssueReporter: NSObject {
         
         let configurationURL: URL?
         
+        var description: String?
+        
         init(debugLog: Bool, configurationURL: URL?) {
             self.debugLog = debugLog
             self.configurationURL = configurationURL
@@ -66,23 +68,23 @@ class IssueReporter: NSObject {
             let alert = Macros.alert(L10n.IssueReporter.title, L10n.IssueReporter.message)
             alert.addDefaultAction(L10n.IssueReporter.Buttons.accept) {
                 VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
-                    self.composeEmail(withDebugLog: $0, configurationURL: attachments.configurationURL)
+                    self.composeEmail(withDebugLog: $0, configurationURL: attachments.configurationURL, description: attachments.description)
                 }
             }
             alert.addCancelAction(L10n.Global.cancel)
             viewController.present(alert, animated: true, completion: nil)
         } else {
-            composeEmail(withDebugLog: nil, configurationURL: attachments.configurationURL)
+            composeEmail(withDebugLog: nil, configurationURL: attachments.configurationURL, description: attachments.description)
         }
     }
     
-    private func composeEmail(withDebugLog debugLog: String?, configurationURL: URL?) {
+    private func composeEmail(withDebugLog debugLog: String?, configurationURL: URL?, description: String?) {
         let metadata = DebugLog(raw: "--").decoratedString()
         
         let vc = MFMailComposeViewController()
         vc.setToRecipients([AppConstants.IssueReporter.recipient])
         vc.setSubject(L10n.IssueReporter.Email.subject(GroupConstants.App.name))
-        vc.setMessageBody(L10n.IssueReporter.Email.body(metadata), isHTML: false)
+        vc.setMessageBody(L10n.IssueReporter.Email.body(description ?? L10n.IssueReporter.Email.description, metadata), isHTML: false)
         if let raw = debugLog {
             let attachment = DebugLog(raw: raw).decoratedData()
             vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.debugLog, fileName: AppConstants.IssueReporter.Filenames.debugLog)
