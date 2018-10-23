@@ -76,6 +76,7 @@ Unsupported (probably ever):
 - Compression
 	- `--comp-lzo` other than `no`
 	- `--compress` other than empty
+- Proxy
 - External file references (inline `<block>` only)
 
 Ignored:

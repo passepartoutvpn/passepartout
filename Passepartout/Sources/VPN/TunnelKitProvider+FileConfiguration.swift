@@ -51,6 +51,8 @@ extension TunnelKitProvider.Configuration {
 
         static let fragment = Utils.regex("^fragment +\\d+")
 
+        static let proxy = Utils.regex("^\\w+-proxy")
+        
         static let keyDirection = Utils.regex("^key-direction +\\d")
         
         static let externalFiles = Utils.regex("^(ca|cert|key|tls-auth|tls-crypt)")
@@ -210,6 +212,9 @@ extension TunnelKitProvider.Configuration {
             }
             Regex.fragment.enumerateArguments(in: line) { (_) in
                 unsupportedError = ApplicationError.unsupportedConfiguration(option: "fragment")
+            }
+            Regex.proxy.enumerateArguments(in: line) { (_) in
+                unsupportedError = ApplicationError.unsupportedConfiguration(option: "proxy: \"\(line)\"")
             }
             Regex.externalFiles.enumerateArguments(in: line) { (_) in
                 unsupportedError = ApplicationError.unsupportedConfiguration(option: "external file: \"\(line)\"")
