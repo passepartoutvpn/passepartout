@@ -19,6 +19,16 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "about.cells.request_support.caption")
       }
 
+      internal enum ShareGeneric {
+        /// Invite a friend
+        internal static let caption = L10n.tr("Localizable", "about.cells.share_generic.caption")
+      }
+
+      internal enum ShareTwitter {
+        /// Tweet about it!
+        internal static let caption = L10n.tr("Localizable", "about.cells.share_twitter.caption")
+      }
+
       internal enum Version {
         /// Version
         internal static let caption = L10n.tr("Localizable", "about.cells.version.caption")
@@ -45,6 +55,11 @@ internal enum L10n {
       internal enum Info {
         /// General
         internal static let header = L10n.tr("Localizable", "about.sections.info.header")
+      }
+
+      internal enum Share {
+        /// Share
+        internal static let header = L10n.tr("Localizable", "about.sections.share.header")
       }
 
       internal enum Source {
@@ -293,7 +308,7 @@ internal enum L10n {
   internal enum IssueReporter {
     /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.
     internal static let message = L10n.tr("Localizable", "issue_reporter.message")
-    /// Submit debug log
+    /// Report issue
     internal static let title = L10n.tr("Localizable", "issue_reporter.title")
 
     internal enum Alerts {
@@ -557,6 +572,11 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "service.cells.reconnect.caption")
       }
 
+      internal enum ReportIssue {
+        /// Report connectivity issue
+        internal static let caption = L10n.tr("Localizable", "service.cells.report_issue.caption")
+      }
+
       internal enum TestConnectivity {
         /// Test connectivity
         internal static let caption = L10n.tr("Localizable", "service.cells.test_connectivity.caption")
@@ -663,6 +683,11 @@ internal enum L10n {
       /// Welcome to Passepartout!\n\nUse the organizer to add a new profile.
       internal static let message = L10n.tr("Localizable", "service.welcome.message")
     }
+  }
+
+  internal enum Share {
+    /// Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS
+    internal static let message = L10n.tr("Localizable", "share.message")
   }
 
   internal enum Version {

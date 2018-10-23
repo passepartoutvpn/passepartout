@@ -33,13 +33,16 @@ class AboutViewController: UITableViewController, TableModelHost {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.info)
         model.add(.source)
+        model.add(.share)
         model.add(.feedback)
         model.setHeader(L10n.About.Sections.Info.header, for: .info)
         model.setHeader(L10n.About.Sections.Source.header, for: .source)
+        model.setHeader(L10n.About.Sections.Share.header, for: .share)
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version, .credits, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
-        model.set([.requestSupport, .submitDebugLog, .writeReview], in: .feedback)
+        model.set([.shareTwitter, .shareGeneric], in: .share)
+        model.set([.requestSupport, .writeReview], in: .feedback)
         return model
     }()
     
@@ -82,12 +85,19 @@ class AboutViewController: UITableViewController, TableModelHost {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    private func requestRedditSupport() {
-        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
+    private func tweetAboutApp() {
+        UIApplication.shared.open(AppConstants.URLs.twitterIntent, options: [:], completionHandler: nil)
     }
     
-    private func reportIssue() {
-        IssueReporter.shared.present(in: self)
+    private func inviteFriend(sender: UITableViewCell?) {
+        let message = "\(L10n.Share.message) \(AppConstants.URLs.website)"
+        let vc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
+        vc.popoverPresentationController?.sourceView = sender
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func postSupportRequest() {
+        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
     
     private func writeReview() {
@@ -130,6 +140,8 @@ extension AboutViewController {
         
         case source
 
+        case share
+        
         case feedback
     }
     
@@ -146,10 +158,12 @@ extension AboutViewController {
         
         case sourceTunnelKit
         
+        case shareTwitter
+        
+        case shareGeneric
+        
         case requestSupport
         
-        case submitDebugLog
-
         case writeReview
     }
 
@@ -202,14 +216,19 @@ extension AboutViewController {
             cell.leftText = GroupConstants.App.tunnelKitName
             return cell
 
+        case .shareTwitter:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.ShareTwitter.caption
+            return cell
+            
+        case .shareGeneric:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.ShareGeneric.caption
+            return cell
+            
         case .requestSupport:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.RequestSupport.caption
-            return cell
-            
-        case .submitDebugLog:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.IssueReporter.title
             return cell
             
         case .writeReview:
@@ -239,11 +258,14 @@ extension AboutViewController {
         case .sourceTunnelKit:
             visitRepository(AppConstants.Repos.tunnelKit)
             
-        case .requestSupport:
-            requestRedditSupport()
+        case .shareTwitter:
+            tweetAboutApp()
             
-        case .submitDebugLog:
-            reportIssue()
+        case .shareGeneric:
+            inviteFriend(sender: tableView.cellForRow(at: indexPath))
+            
+        case .requestSupport:
+            postSupportRequest()
             
         case .writeReview:
             writeReview()

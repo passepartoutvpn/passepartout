@@ -354,11 +354,11 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
     }
 
-    private func requestRedditSupport() {
+    private func postSupportRequest() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
 
-    private func reportIssue() {
+    private func reportConnectivityIssue() {
         IssueReporter.shared.present(in: self)
     }
     
@@ -441,7 +441,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         
         case requestSupport
         
-        case submitDebugLog
+        case reportIssue
     }
 
     private var trustedSectionIndex: Int {
@@ -662,9 +662,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             cell.leftText = L10n.About.Cells.RequestSupport.caption
             return cell
             
-        case .submitDebugLog:
+        case .reportIssue:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.IssueReporter.title
+            cell.leftText = L10n.Service.Cells.ReportIssue.caption
             return cell
         }
     }
@@ -761,10 +761,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             return true
             
         case .requestSupport:
-            requestRedditSupport()
+            postSupportRequest()
             
-        case .submitDebugLog:
-            reportIssue()
+        case .reportIssue:
+            reportConnectivityIssue()
             
         default:
             break
@@ -888,7 +888,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.set([.vpnSurvivesSleep], in: .vpnSurvivesSleep)
             model.set([.trustedPolicy], in: .trustedPolicy)
             model.set([.testConnectivity, .dataCount, .debugLog], in: .diagnostics)
-            model.set([.requestSupport, .submitDebugLog], in: .feedback)
+            model.set([.requestSupport, .reportIssue], in: .feedback)
         }
 
         trustedNetworks.delegate = self

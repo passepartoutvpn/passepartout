@@ -97,6 +97,7 @@
 "service.cells.test_connectivity.caption" = "Test connectivity";
 "service.cells.data_count.caption" = "Exchanged bytes count";
 "service.cells.debug_log.caption" = "Debug log";
+"service.cells.report_issue.caption" = "Report connectivity issue";
 
 "service.alerts.credentials_needed.message" = "You need to enter account credentials first.";
 "service.alerts.reconnect_vpn.message" = "Do you want to reconnect to the VPN?";
@@ -169,7 +170,7 @@
 "vpn.errors.dns" = "DNS failed";
 "vpn.errors.network" = "Network changed";
 
-"issue_reporter.title" = "Submit debug log";
+"issue_reporter.title" = "Report issue";
 "issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.";
 "issue_reporter.buttons.accept" = "I understand";
 "issue_reporter.alerts.email_not_configured.message" = "No e-mail account is configured.";
@@ -179,11 +180,16 @@
 "about.title" = "About";
 "about.sections.info.header" = "General";
 "about.sections.source.header" = "Source code";
+"about.sections.share.header" = "Share";
 "about.sections.feedback.header" = "Feedback";
 "about.cells.version.caption" = "Version";
+"about.cells.website.caption" = "Visit website";
+"about.cells.share_twitter.caption" = "Tweet about it!";
+"about.cells.share_generic.caption" = "Invite a friend";
 "about.cells.request_support.caption" = "Request support";
 "about.cells.write_review.caption" = "Write a review";
-"about.cells.website.caption" = "Visit website";
+
+"share.message" = "Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS";
 
 "version.labels.intro" = "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nTunnelKit is a native OpenVPN client originally forked from PIATunnel by Private Internet Access.\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.";
 "version.buttons.changelog" = "CHANGELOG";
