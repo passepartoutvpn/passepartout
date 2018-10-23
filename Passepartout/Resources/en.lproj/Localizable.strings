@@ -180,10 +180,12 @@
 "about.title" = "About";
 "about.sections.info.header" = "General";
 "about.sections.source.header" = "Source code";
+"about.sections.share.header" = "Share";
 "about.sections.feedback.header" = "Feedback";
 "about.cells.version.caption" = "Version";
 "about.cells.website.caption" = "Visit website";
 "about.cells.share_twitter.caption" = "Tweet about it!";
+"about.cells.share_generic.caption" = "Invite a friend";
 "about.cells.request_support.caption" = "Request support";
 "about.cells.write_review.caption" = "Write a review";
 

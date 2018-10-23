@@ -33,13 +33,16 @@ class AboutViewController: UITableViewController, TableModelHost {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.info)
         model.add(.source)
+        model.add(.share)
         model.add(.feedback)
         model.setHeader(L10n.About.Sections.Info.header, for: .info)
         model.setHeader(L10n.About.Sections.Source.header, for: .source)
+        model.setHeader(L10n.About.Sections.Share.header, for: .share)
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version, .credits, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
-        model.set([.shareTwitter, .requestSupport, .writeReview], in: .feedback)
+        model.set([.shareTwitter, .shareGeneric], in: .share)
+        model.set([.requestSupport, .writeReview], in: .feedback)
         return model
     }()
     
@@ -82,12 +85,19 @@ class AboutViewController: UITableViewController, TableModelHost {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    private func postSupportRequest() {
-        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
-    }
-    
     private func tweetAboutApp() {
         UIApplication.shared.open(AppConstants.URLs.twitterIntent, options: [:], completionHandler: nil)
+    }
+    
+    private func inviteFriend(sender: UITableViewCell?) {
+        let message = "\(L10n.Share.message) \(AppConstants.URLs.website)"
+        let vc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
+        vc.popoverPresentationController?.sourceView = sender
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func postSupportRequest() {
+        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
     
     private func writeReview() {
@@ -130,6 +140,8 @@ extension AboutViewController {
         
         case source
 
+        case share
+        
         case feedback
     }
     
@@ -147,6 +159,8 @@ extension AboutViewController {
         case sourceTunnelKit
         
         case shareTwitter
+        
+        case shareGeneric
         
         case requestSupport
         
@@ -207,6 +221,11 @@ extension AboutViewController {
             cell.leftText = L10n.About.Cells.ShareTwitter.caption
             return cell
             
+        case .shareGeneric:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.ShareGeneric.caption
+            return cell
+            
         case .requestSupport:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.RequestSupport.caption
@@ -241,6 +260,9 @@ extension AboutViewController {
             
         case .shareTwitter:
             tweetAboutApp()
+            
+        case .shareGeneric:
+            inviteFriend(sender: tableView.cellForRow(at: indexPath))
             
         case .requestSupport:
             postSupportRequest()

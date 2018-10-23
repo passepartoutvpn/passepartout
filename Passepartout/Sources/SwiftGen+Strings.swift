@@ -19,6 +19,11 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "about.cells.request_support.caption")
       }
 
+      internal enum ShareGeneric {
+        /// Invite a friend
+        internal static let caption = L10n.tr("Localizable", "about.cells.share_generic.caption")
+      }
+
       internal enum ShareTwitter {
         /// Tweet about it!
         internal static let caption = L10n.tr("Localizable", "about.cells.share_twitter.caption")
@@ -50,6 +55,11 @@ internal enum L10n {
       internal enum Info {
         /// General
         internal static let header = L10n.tr("Localizable", "about.sections.info.header")
+      }
+
+      internal enum Share {
+        /// Share
+        internal static let header = L10n.tr("Localizable", "about.sections.share.header")
       }
 
       internal enum Source {
