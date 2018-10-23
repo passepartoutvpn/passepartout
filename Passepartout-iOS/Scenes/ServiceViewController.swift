@@ -275,8 +275,11 @@ class ServiceViewController: UIViewController, TableModelHost {
                 self.vpn.reinstall(completionHandler: nil)
             }
         }
-
         guard !isOn else {
+            completionHandler()
+            return
+        }
+        guard vpn.isEnabled else {
             completionHandler()
             return
         }
