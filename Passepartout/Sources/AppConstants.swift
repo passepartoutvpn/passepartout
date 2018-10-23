@@ -117,13 +117,15 @@ class AppConstants {
                 return "debug-\(iso).txt"
             }
             
-            static let configuration = "profile.ovpn"
+//            static let configuration = "profile.ovpn"
+            static let configuration = "profile.ovpn.txt"
         }
         
         class MIME {
             static let debugLog = "text/plain"
 
-            static let configuration = "application/x-openvpn-profile"
+//            static let configuration = "application/x-openvpn-profile"
+            static let configuration = "text/plain"
         }
     }
     
