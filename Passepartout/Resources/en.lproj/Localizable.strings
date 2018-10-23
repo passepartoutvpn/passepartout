@@ -165,9 +165,10 @@
 "vpn.disabled" = "Disabled";
 
 "vpn.errors.timeout" = "Timeout";
+"vpn.errors.dns" = "DNS failed";
 "vpn.errors.auth" = "Auth failed";
 "vpn.errors.tls" = "TLS failed";
-"vpn.errors.dns" = "DNS failed";
+"vpn.errors.encryption" = "Encryption failed";
 "vpn.errors.network" = "Network changed";
 
 "issue_reporter.title" = "Report issue";

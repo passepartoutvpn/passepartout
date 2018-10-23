@@ -94,12 +94,15 @@ extension SettingTableViewCell {
                 case .dnsFailure:
                     disconnectionReason = L10n.Vpn.Errors.dns
                     
-                case .tlsFailed:
+                case .tlsInitialization, .tlsServerVerification, .tlsHandshake:
                     disconnectionReason = L10n.Vpn.Errors.tls
                     
-                case .authenticationFailed:
+                case .authentication:
                     disconnectionReason = L10n.Vpn.Errors.auth
                     
+                case .encryptionInitialization, .encryptionData:
+                    disconnectionReason = L10n.Vpn.Errors.encryption
+
                 case .networkChanged:
                     disconnectionReason = L10n.Vpn.Errors.network
                     

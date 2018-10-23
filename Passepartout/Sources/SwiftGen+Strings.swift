@@ -720,6 +720,8 @@ internal enum L10n {
       internal static let auth = L10n.tr("Localizable", "vpn.errors.auth")
       /// DNS failed
       internal static let dns = L10n.tr("Localizable", "vpn.errors.dns")
+      /// Encryption failed
+      internal static let encryption = L10n.tr("Localizable", "vpn.errors.encryption")
       /// Network changed
       internal static let network = L10n.tr("Localizable", "vpn.errors.network")
       /// Timeout
