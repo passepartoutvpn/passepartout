@@ -38,8 +38,6 @@ class AccountViewController: UIViewController, TableModelHost {
     
     private weak var cellPassword: FieldTableViewCell?
     
-    private weak var cellPasswordConfirmation: FieldTableViewCell?
-    
     var currentCredentials: Credentials?
     
     var usernamePlaceholder: String?
@@ -47,13 +45,13 @@ class AccountViewController: UIViewController, TableModelHost {
     var infrastructureName: Infrastructure.Name? {
         didSet {
             guard let name = infrastructureName else {
-                model.removeFooter(for: .only)
+                model.removeFooter(for: .credentials)
                 return
             }
             let V = L10n.Account.SuggestionFooter.Infrastructure.self
             switch name {
             case .pia:
-                model.setFooter(V.pia, for: .only)
+                model.setFooter(V.pia, for: .credentials)
             }
             tableView?.reloadData()
         }
@@ -71,8 +69,8 @@ class AccountViewController: UIViewController, TableModelHost {
     
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
-        model.add(.only)
-        model.set([.username, .password, .passwordConfirmation], in: .only)
+        model.add(.credentials)
+        model.set([.username, .password], in: .credentials)
         return model
     }()
     
@@ -113,13 +111,6 @@ class AccountViewController: UIViewController, TableModelHost {
     }
     
     @IBAction private func done() {
-        guard cellPassword?.field.text == cellPasswordConfirmation?.field.text else {
-            let alert = Macros.alert(title, L10n.Account.Cells.PasswordConfirm.mismatch)
-            alert.addCancelAction(L10n.Global.ok)
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        
         view.endEditing(true)
         delegate?.accountControllerDidComplete(self)
     }
@@ -132,21 +123,19 @@ class AccountViewController: UIViewController, TableModelHost {
 
 extension AccountViewController: UITableViewDataSource, UITableViewDelegate, FieldTableViewCellDelegate {
     enum SectionType: Int {
-        case only
+        case credentials
     }
     
     enum RowType: Int {
         case username
         
         case password
-        
-        case passwordConfirmation
     }
     
     private static let footerButtonTag = 1000
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: .only)
+        return model.footer(for: .credentials)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
@@ -185,15 +174,6 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             cell.field.isSecureTextEntry = true
             cell.field.text = currentCredentials?.password
             cell.field.returnKeyType = .done
-            
-        case .passwordConfirmation:
-            cellPasswordConfirmation = cell
-            cell.caption = L10n.Account.Cells.PasswordConfirm.caption
-            cell.field.placeholder = L10n.Account.Cells.Password.placeholder
-            cell.field.clearButtonMode = .always
-            cell.field.isSecureTextEntry = true
-            cell.field.text = currentCredentials?.password
-            cell.field.returnKeyType = .done
         }
         cell.captionWidth = 120.0
         cell.delegate = self
@@ -210,10 +190,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             cellPassword?.field.becomeFirstResponder()
             
         case cellPassword:
-            cellPasswordConfirmation?.field.becomeFirstResponder()
-            
-        case cellPasswordConfirmation:
-            cellPasswordConfirmation?.field.resignFirstResponder()
+            cellPassword?.field.resignFirstResponder()
             done()
             
         default:

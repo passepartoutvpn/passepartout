@@ -65,13 +65,6 @@ internal enum L10n {
         internal static let placeholder = L10n.tr("Localizable", "account.cells.password.placeholder")
       }
 
-      internal enum PasswordConfirm {
-        /// Confirm
-        internal static let caption = L10n.tr("Localizable", "account.cells.password_confirm.caption")
-        /// Passwords don't match!
-        internal static let mismatch = L10n.tr("Localizable", "account.cells.password_confirm.mismatch")
-      }
-
       internal enum Username {
         /// Username
         internal static let caption = L10n.tr("Localizable", "account.cells.username.caption")
