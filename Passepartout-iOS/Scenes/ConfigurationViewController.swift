@@ -134,7 +134,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         itemRefresh.isEnabled = true // allow for manual reconnection
         tableView.reloadData()
 
-        delegate?.configurationShouldReinstall()
+        delegate?.configuration(didUpdate: originalConfiguration)
     }
 
     @IBAction private func refresh() {
