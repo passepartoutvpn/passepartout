@@ -664,7 +664,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .reportIssue:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.ReportIssue.caption
+            cell.leftText = L10n.Service.Cells.ReportIssue.caption
             return cell
         }
     }

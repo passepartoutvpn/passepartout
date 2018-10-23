@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version, .credits, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
-        model.set([.requestSupport, .reportIssue, .writeReview], in: .feedback)
+        model.set([.requestSupport, .writeReview], in: .feedback)
         return model
     }()
     
@@ -84,10 +84,6 @@ class AboutViewController: UITableViewController, TableModelHost {
     
     private func postSupportRequest() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
-    }
-    
-    private func reportConnectivityIssue() {
-        IssueReporter.shared.present(in: self)
     }
     
     private func writeReview() {
@@ -148,8 +144,6 @@ extension AboutViewController {
         
         case requestSupport
         
-        case reportIssue
-
         case writeReview
     }
 
@@ -207,11 +201,6 @@ extension AboutViewController {
             cell.leftText = L10n.About.Cells.RequestSupport.caption
             return cell
             
-        case .reportIssue:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.ReportIssue.caption
-            return cell
-            
         case .writeReview:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.WriteReview.caption
@@ -241,9 +230,6 @@ extension AboutViewController {
             
         case .requestSupport:
             postSupportRequest()
-            
-        case .reportIssue:
-            reportConnectivityIssue()
             
         case .writeReview:
             writeReview()

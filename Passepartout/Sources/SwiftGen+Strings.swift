@@ -14,11 +14,6 @@ internal enum L10n {
 
     internal enum Cells {
 
-      internal enum ReportIssue {
-        /// Report connectivity issue
-        internal static let caption = L10n.tr("Localizable", "about.cells.report_issue.caption")
-      }
-
       internal enum RequestSupport {
         /// Request support
         internal static let caption = L10n.tr("Localizable", "about.cells.request_support.caption")
@@ -560,6 +555,11 @@ internal enum L10n {
       internal enum Reconnect {
         /// Reconnect
         internal static let caption = L10n.tr("Localizable", "service.cells.reconnect.caption")
+      }
+
+      internal enum ReportIssue {
+        /// Report connectivity issue
+        internal static let caption = L10n.tr("Localizable", "service.cells.report_issue.caption")
       }
 
       internal enum TestConnectivity {

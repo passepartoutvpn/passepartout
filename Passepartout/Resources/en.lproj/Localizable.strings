@@ -97,6 +97,7 @@
 "service.cells.test_connectivity.caption" = "Test connectivity";
 "service.cells.data_count.caption" = "Exchanged bytes count";
 "service.cells.debug_log.caption" = "Debug log";
+"service.cells.report_issue.caption" = "Report connectivity issue";
 
 "service.alerts.credentials_needed.message" = "You need to enter account credentials first.";
 "service.alerts.reconnect_vpn.message" = "Do you want to reconnect to the VPN?";
@@ -182,7 +183,6 @@
 "about.sections.feedback.header" = "Feedback";
 "about.cells.version.caption" = "Version";
 "about.cells.request_support.caption" = "Request support";
-"about.cells.report_issue.caption" = "Report connectivity issue";
 "about.cells.write_review.caption" = "Write a review";
 "about.cells.website.caption" = "Visit website";
 
