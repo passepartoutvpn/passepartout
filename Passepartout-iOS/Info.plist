@@ -13,6 +13,10 @@
 			<array/>
 			<key>CFBundleTypeName</key>
 			<string>ovpn</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>app.passepartoutvpn.formats.ovpn</string>
@@ -87,7 +91,6 @@
 				</array>
 			</dict>
 		</dict>
-		<dict/>
 	</array>
 </dict>
 </plist>

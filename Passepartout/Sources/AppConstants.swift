@@ -36,6 +36,8 @@ class AppConstants {
         static let serviceFilename = "ConnectionService.json"
         
         static let infrastructureCacheDirectory = "Infrastructures"
+
+        static let profileConfigurationsDirectory = "Configurations"
     }
     
     class VPN {

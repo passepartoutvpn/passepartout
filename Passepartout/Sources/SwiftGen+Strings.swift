@@ -172,6 +172,11 @@ internal enum L10n {
         }
       }
 
+      internal enum ResetOriginal {
+        /// Reset configuration
+        internal static let caption = L10n.tr("Localizable", "configuration.cells.reset_original.caption")
+      }
+
       internal enum TlsWrapping {
         /// Wrapping
         internal static let caption = L10n.tr("Localizable", "configuration.cells.tls_wrapping.caption")
@@ -202,6 +207,11 @@ internal enum L10n {
       internal enum Other {
         /// Other
         internal static let header = L10n.tr("Localizable", "configuration.sections.other.header")
+      }
+
+      internal enum Reset {
+        /// If you ended up with broken connectivity after changing the communication parameters, tap to revert to the original configuration.
+        internal static let footer = L10n.tr("Localizable", "configuration.sections.reset.footer")
       }
 
       internal enum Tls {

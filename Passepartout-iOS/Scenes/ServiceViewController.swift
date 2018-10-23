@@ -155,6 +155,7 @@ class ServiceViewController: UIViewController, TableModelHost {
             vc?.title = L10n.Service.Cells.Host.Parameters.caption
             vc?.initialConfiguration = uncheckedHostProfile.parameters
             vc?.isEditable = true
+            vc?.originalConfigurationURL = ProfileConfigurationFactory.shared.configurationURL(for: uncheckedHostProfile)
             vc?.delegate = self
             
         case .debugLogSegueIdentifier:
