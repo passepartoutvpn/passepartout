@@ -182,9 +182,10 @@
 "about.sections.source.header" = "Source code";
 "about.sections.feedback.header" = "Feedback";
 "about.cells.version.caption" = "Version";
+"about.cells.website.caption" = "Visit website";
+"about.cells.share_twitter.caption" = "Tweet about it!";
 "about.cells.request_support.caption" = "Request support";
 "about.cells.write_review.caption" = "Write a review";
-"about.cells.website.caption" = "Visit website";
 
 "version.labels.intro" = "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nTunnelKit is a native OpenVPN client originally forked from PIATunnel by Private Internet Access.\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.";
 "version.buttons.changelog" = "CHANGELOG";

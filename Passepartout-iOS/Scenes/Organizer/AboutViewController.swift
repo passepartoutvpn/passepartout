@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version, .credits, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
-        model.set([.requestSupport, .writeReview], in: .feedback)
+        model.set([.shareTwitter, .requestSupport, .writeReview], in: .feedback)
         return model
     }()
     
@@ -84,6 +84,10 @@ class AboutViewController: UITableViewController, TableModelHost {
     
     private func postSupportRequest() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
+    }
+    
+    private func tweetAboutApp() {
+        UIApplication.shared.open(AppConstants.URLs.twitterIntent, options: [:], completionHandler: nil)
     }
     
     private func writeReview() {
@@ -142,6 +146,8 @@ extension AboutViewController {
         
         case sourceTunnelKit
         
+        case shareTwitter
+        
         case requestSupport
         
         case writeReview
@@ -196,6 +202,11 @@ extension AboutViewController {
             cell.leftText = GroupConstants.App.tunnelKitName
             return cell
 
+        case .shareTwitter:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.ShareTwitter.caption
+            return cell
+            
         case .requestSupport:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.RequestSupport.caption
@@ -227,6 +238,9 @@ extension AboutViewController {
 
         case .sourceTunnelKit:
             visitRepository(AppConstants.Repos.tunnelKit)
+            
+        case .shareTwitter:
+            tweetAboutApp()
             
         case .requestSupport:
             postSupportRequest()
