@@ -115,7 +115,21 @@ class AppConstants {
         
         static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!
         
-        static let twitterIntent = URL(string: "https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20an%20user-friendly%2C%20open%20source%20%23OpenVPN%20client%20for%20%23iOS%20and%20%23macOS")!
+        private static let twitterHashtags = ["OpenVPN", "iOS", "macOS"]
+        
+        static var twitterIntent: URL {
+            var text = L10n.Share.message
+            for ht in twitterHashtags {
+                text = text.replacingOccurrences(of: ht, with: "#\(ht)")
+            }
+            var comps = URLComponents(string: "https://twitter.com/intent/tweet")!
+            comps.queryItems = [
+                URLQueryItem(name: "url", value: website.absoluteString),
+                URLQueryItem(name: "via", value: "keeshux"),
+                URLQueryItem(name: "text", value: text)
+            ]
+            return comps.url!
+        }
         
         static func review(withId id: String) -> URL {
             return URL(string: "https://itunes.apple.com/app/id\(id)?action=write-review")!

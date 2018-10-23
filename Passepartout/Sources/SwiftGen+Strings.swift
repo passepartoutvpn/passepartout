@@ -675,6 +675,11 @@ internal enum L10n {
     }
   }
 
+  internal enum Share {
+    /// Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS
+    internal static let message = L10n.tr("Localizable", "share.message")
+  }
+
   internal enum Version {
 
     internal enum Buttons {

@@ -187,6 +187,8 @@
 "about.cells.request_support.caption" = "Request support";
 "about.cells.write_review.caption" = "Write a review";
 
+"share.message" = "Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS";
+
 "version.labels.intro" = "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nTunnelKit is a native OpenVPN client originally forked from PIATunnel by Private Internet Access.\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.";
 "version.buttons.changelog" = "CHANGELOG";
 
