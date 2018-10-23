@@ -174,7 +174,7 @@
 "issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.";
 "issue_reporter.buttons.accept" = "I understand";
 "issue_reporter.alerts.email_not_configured.message" = "No e-mail account is configured.";
-"issue_reporter.email.subject" = "%@ - Debug log";
+"issue_reporter.email.subject" = "%@ - Report issue";
 "issue_reporter.email.body" = "Hi,\n\ndescription of the issue:\n\n%@\n\nRegards";
 
 "about.title" = "About";

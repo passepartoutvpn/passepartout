@@ -361,7 +361,8 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
 
     private func reportConnectivityIssue() {
-        IssueReporter.shared.present(in: self)
+        let attach = IssueReporter.Attachments(debugLog: true, profile: uncheckedProfile)
+        IssueReporter.shared.present(in: self, withAttachments: attach)
     }
     
     // MARK: Notifications

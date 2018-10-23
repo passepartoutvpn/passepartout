@@ -27,6 +27,22 @@ import Foundation
 import MessageUI
 
 class IssueReporter: NSObject {
+    struct Attachments {
+        let debugLog: Bool
+        
+        let configurationURL: URL?
+        
+        init(debugLog: Bool, configurationURL: URL?) {
+            self.debugLog = debugLog
+            self.configurationURL = configurationURL
+        }
+
+        init(debugLog: Bool, profile: ConnectionProfile) {
+            let url = TransientStore.shared.service.configurationURL(for: profile)
+            self.init(debugLog: debugLog, configurationURL: url)
+        }
+    }
+    
     static let shared = IssueReporter()
     
     private weak var viewController: UIViewController?
@@ -35,7 +51,7 @@ class IssueReporter: NSObject {
         super.init()
     }
 
-    func present(in viewController: UIViewController) {
+    func present(in viewController: UIViewController, withAttachments attachments: Attachments) {
         guard MFMailComposeViewController.canSendMail() else {
             let alert = Macros.alert(L10n.IssueReporter.title, L10n.IssueReporter.Alerts.EmailNotConfigured.message)
             alert.addCancelAction(L10n.Global.ok)
@@ -45,17 +61,21 @@ class IssueReporter: NSObject {
         
         self.viewController = viewController
         
-        let alert = Macros.alert(L10n.IssueReporter.title, L10n.IssueReporter.message)
-        alert.addDefaultAction(L10n.IssueReporter.Buttons.accept) {
-            VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
-                self.composeEmail(withDebugLog: $0)
+        if attachments.debugLog {
+            let alert = Macros.alert(L10n.IssueReporter.title, L10n.IssueReporter.message)
+            alert.addDefaultAction(L10n.IssueReporter.Buttons.accept) {
+                VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
+                    self.composeEmail(withDebugLog: $0, configurationURL: attachments.configurationURL)
+                }
             }
+            alert.addCancelAction(L10n.Global.cancel)
+            viewController.present(alert, animated: true, completion: nil)
+        } else {
+            composeEmail(withDebugLog: nil, configurationURL: attachments.configurationURL)
         }
-        alert.addCancelAction(L10n.Global.cancel)
-        viewController.present(alert, animated: true, completion: nil)
     }
     
-    private func composeEmail(withDebugLog debugLog: String?) {
+    private func composeEmail(withDebugLog debugLog: String?, configurationURL: URL?) {
         let metadata = DebugLog(raw: "--").decoratedString()
         
         let vc = MFMailComposeViewController()
@@ -64,7 +84,10 @@ class IssueReporter: NSObject {
         vc.setMessageBody(L10n.IssueReporter.Email.body(metadata), isHTML: false)
         if let raw = debugLog {
             let attachment = DebugLog(raw: raw).decoratedData()
-            vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.attachmentMIME, fileName: AppConstants.Log.debugFilename)
+            vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.debugLog, fileName: AppConstants.IssueReporter.Filenames.debugLog)
+        }
+        if let cfg = configurationURL, let attachment = try? Data(contentsOf: cfg) {
+            vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.configuration, fileName: AppConstants.IssueReporter.Filenames.configuration)
         }
         vc.mailComposeDelegate = self
         vc.apply(Theme.current)

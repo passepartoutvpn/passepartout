@@ -96,13 +96,6 @@ class AppConstants {
         
         static var debugSnapshot: () -> String = { TransientStore.shared.service.vpnLog }
 
-        static var debugFilename: String {
-            let fmt = DateFormatter()
-            fmt.dateFormat = "yyyyMMdd-HHmmss"
-            let iso = fmt.string(from: Date())
-            return "debug-\(iso).txt"
-        }
-        
         static let viewerRefreshInterval: TimeInterval = 3.0
         
         static func configure() {
@@ -116,7 +109,22 @@ class AppConstants {
     class IssueReporter {
         static let recipient = "issues@\(Domain.name)"
 
-        static let attachmentMIME = "text/plain"
+        class Filenames {
+            static var debugLog: String {
+                let fmt = DateFormatter()
+                fmt.dateFormat = "yyyyMMdd-HHmmss"
+                let iso = fmt.string(from: Date())
+                return "debug-\(iso).txt"
+            }
+            
+            static let configuration = "profile.ovpn"
+        }
+        
+        class MIME {
+            static let debugLog = "text/plain"
+
+            static let configuration = "application/x-openvpn-profile"
+        }
     }
     
     class URLs {

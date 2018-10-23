@@ -324,7 +324,7 @@ internal enum L10n {
       internal static func body(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue_reporter.email.body", p1)
       }
-      /// %@ - Debug log
+      /// %@ - Report issue
       internal static func subject(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue_reporter.email.subject", p1)
       }
