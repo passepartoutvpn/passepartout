@@ -58,10 +58,12 @@ class GracefulVPN {
     func prepare(withProfile profile: ConnectionProfile?, completionHandler: (() -> Void)?) {
         self.profile = profile
         log.info("Preparing...")
+        service.clearVpnLastError()
         vpn?.prepare(completionHandler: completionHandler)
     }
     
     func reconnect(completionHandler: ((Error?) -> Void)?) {
+        service.clearVpnLastError()
         do {
             log.info("Reconnecting...")
             try vpn?.reconnect(configuration: service.vpnConfiguration(), completionHandler: completionHandler)
@@ -71,6 +73,7 @@ class GracefulVPN {
     }
     
     func reinstall(completionHandler: ((Error?) -> Void)?) {
+        service.clearVpnLastError()
         do {
             log.info("Reinstalling...")
             try vpn?.install(configuration: service.vpnConfiguration(), completionHandler: completionHandler)

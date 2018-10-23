@@ -88,6 +88,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
+        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidReinstall, object: nil)
 
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
@@ -529,7 +530,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil)
+            cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil, error: service.vpnLastError)
             cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
             cell.accessoryType = .none
             cell.isTappable = false
@@ -901,7 +902,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         guard service.isActiveProfile(profile) else {
             return
         }
-        tableView.reloadRows(at: [statusIndexPath], with: .automatic)
+        tableView.reloadRows(at: [statusIndexPath], with: .none)
     }
     
     func reloadSelectedRow(andRowAt indexPath: IndexPath? = nil) {

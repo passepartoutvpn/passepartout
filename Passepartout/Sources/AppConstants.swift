@@ -47,6 +47,7 @@ class AppConstants {
 //            builder.debugLogFormat = "$DHH:mm:ss$d $N.$F:$l - $M"
             builder.debugLogFormat = Log.debugFormat
             builder.debugLogKey = "LastVPNLog"
+            builder.lastErrorKey = "LastVPNError"
             return builder.build()
         }
         

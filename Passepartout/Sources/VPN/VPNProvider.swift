@@ -53,4 +53,6 @@ extension Notification.Name {
     static let VPNDidPrepare = Notification.Name("VPNDidPrepare")
     
     static let VPNDidChangeStatus = Notification.Name("VPNDidChangeStatus")
+
+    static let VPNDidReinstall = Notification.Name("VPNDidReinstall")
 }

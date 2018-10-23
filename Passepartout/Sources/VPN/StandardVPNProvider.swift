@@ -37,7 +37,9 @@ class StandardVPNProvider: VPNProvider {
     init(bundleIdentifier: String) {
         self.bundleIdentifier = bundleIdentifier
 
-        NotificationCenter.default.addObserver(self, selector: #selector(vpnDidUpdate(_:)), name: .NEVPNStatusDidChange, object: nil)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(vpnDidUpdate(_:)), name: .NEVPNStatusDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(vpnDidReinstall(_:)), name: .NEVPNConfigurationChange, object: nil)
     }
 
     deinit {
@@ -263,5 +265,9 @@ class StandardVPNProvider: VPNProvider {
         lastNotifiedStatus = status
 
         NotificationCenter.default.post(name: .VPNDidChangeStatus, object: self)
+    }
+
+    @objc private func vpnDidReinstall(_ notification: Notification) {
+        NotificationCenter.default.post(name: .VPNDidReinstall, object: self)
     }
 }

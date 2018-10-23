@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import TunnelKit
 
 extension UITableViewCell {
     func applyChecked(_ checked: Bool, _ theme: Theme) {
@@ -66,7 +67,7 @@ extension SettingTableViewCell {
         accessoryType = .none
     }
     
-    func applyVPN(_ theme: Theme, with vpnStatus: VPNStatus?) {
+    func applyVPN(_ theme: Theme, with vpnStatus: VPNStatus?, error: TunnelKitProvider.ProviderError?) {
         leftTextColor = theme.palette.colorPrimaryText
         guard let vpnStatus = vpnStatus else {
             rightText = L10n.Vpn.disabled
@@ -83,13 +84,41 @@ extension SettingTableViewCell {
             rightText = L10n.Vpn.active
             rightTextColor = theme.palette.colorOn
             
-        case .disconnecting:
-            rightText = L10n.Vpn.disconnecting
-            rightTextColor = theme.palette.colorIndeterminate
-            
-        case .disconnected:
-            rightText = L10n.Vpn.inactive
-            rightTextColor = theme.palette.colorOff
+        case .disconnecting, .disconnected:
+            var disconnectionReason: String?
+            if let error = error {
+                switch error {
+                case .socketActivity, .timeout:
+                    disconnectionReason = L10n.Vpn.Errors.timeout
+                    
+                case .dnsFailure:
+                    disconnectionReason = L10n.Vpn.Errors.dns
+                    
+                case .tlsFailed:
+                    disconnectionReason = L10n.Vpn.Errors.tls
+                    
+                case .authenticationFailed:
+                    disconnectionReason = L10n.Vpn.Errors.auth
+                    
+                case .networkChanged:
+                    disconnectionReason = L10n.Vpn.Errors.network
+                    
+                default:
+                    break
+                }
+            }
+            switch vpnStatus {
+            case .disconnecting:
+                rightText = disconnectionReason ?? L10n.Vpn.disconnecting
+                rightTextColor = theme.palette.colorIndeterminate
+                
+            case .disconnected:
+                rightText = disconnectionReason ?? L10n.Vpn.inactive
+                rightTextColor = theme.palette.colorOff
+                
+            default:
+                break
+            }
         }
     }
 }

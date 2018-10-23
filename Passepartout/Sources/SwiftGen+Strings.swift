@@ -686,6 +686,19 @@ internal enum L10n {
     internal static let disconnecting = L10n.tr("Localizable", "vpn.disconnecting")
     /// Inactive
     internal static let inactive = L10n.tr("Localizable", "vpn.inactive")
+
+    internal enum Errors {
+      /// Auth failed
+      internal static let auth = L10n.tr("Localizable", "vpn.errors.auth")
+      /// DNS failed
+      internal static let dns = L10n.tr("Localizable", "vpn.errors.dns")
+      /// Network changed
+      internal static let network = L10n.tr("Localizable", "vpn.errors.network")
+      /// Timeout
+      internal static let timeout = L10n.tr("Localizable", "vpn.errors.timeout")
+      /// TLS failed
+      internal static let tls = L10n.tr("Localizable", "vpn.errors.tls")
+    }
   }
 
   internal enum Wizards {
