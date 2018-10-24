@@ -74,17 +74,17 @@ Unsupported:
 Unsupported (probably ever):
 
 - Compression
-	- `--comp-lzo` other than `no`
-	- `--compress` other than empty
+    - `--comp-lzo` other than `no`
+    - `--compress` other than empty
 - Proxy
 - External file references (inline `<block>` only)
 
 Ignored:
 
 - MTU overrides
-	- `--*-mtu` and variants
-	- `--mssfix`
-- Multiple `--remote` (first wins)
+    - `--*-mtu` and variants
+    - `--mssfix`
+- Multiple `--remote` with different `host` values (first wins)
 
 Other flags are ignored too but planned to be implemented.
 
