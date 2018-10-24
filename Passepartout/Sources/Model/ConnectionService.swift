@@ -267,13 +267,7 @@ class ConnectionService: Codable {
     }
     
     var vpnLog: String {
-        guard let logKey = tunnelConfiguration.debugLogKey else {
-            return ""
-        }
-        guard let lines = defaults.array(forKey: logKey) as? [String] else {
-            return ""
-        }
-        return lines.joined(separator: "\n")
+        return tunnelConfiguration.existingLog(in: appGroup) ?? ""
     }
     
     var vpnLastError: TunnelKitProvider.ProviderError? {
