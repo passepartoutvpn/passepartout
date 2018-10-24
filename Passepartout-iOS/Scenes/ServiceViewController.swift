@@ -442,7 +442,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         
         case debugLog
         
-        case requestSupport
+        case joinCommunity
         
         case reportIssue
     }
@@ -660,9 +660,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         // feedback
 
-        case .requestSupport:
+        case .joinCommunity:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.RequestSupport.caption
+            cell.leftText = L10n.About.Cells.JoinCommunity.caption
             return cell
             
         case .reportIssue:
@@ -763,7 +763,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             perform(segue: StoryboardSegue.Main.debugLogSegueIdentifier, sender: cell)
             return true
             
-        case .requestSupport:
+        case .joinCommunity:
             postSupportRequest()
             
         case .reportIssue:
@@ -891,7 +891,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.set([.vpnSurvivesSleep], in: .vpnSurvivesSleep)
             model.set([.trustedPolicy], in: .trustedPolicy)
             model.set([.testConnectivity, .dataCount, .debugLog], in: .diagnostics)
-            model.set([.requestSupport, .reportIssue], in: .feedback)
+            model.set([.joinCommunity, .reportIssue], in: .feedback)
         }
 
         trustedNetworks.delegate = self

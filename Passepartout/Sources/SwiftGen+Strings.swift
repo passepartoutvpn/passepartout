@@ -14,9 +14,9 @@ internal enum L10n {
 
     internal enum Cells {
 
-      internal enum RequestSupport {
-        /// Request support
-        internal static let caption = L10n.tr("Localizable", "about.cells.request_support.caption")
+      internal enum JoinCommunity {
+        /// Join community
+        internal static let caption = L10n.tr("Localizable", "about.cells.join_community.caption")
       }
 
       internal enum ShareGeneric {

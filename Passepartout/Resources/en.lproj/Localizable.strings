@@ -187,7 +187,7 @@
 "about.cells.website.caption" = "Visit website";
 "about.cells.share_twitter.caption" = "Tweet about it!";
 "about.cells.share_generic.caption" = "Invite a friend";
-"about.cells.request_support.caption" = "Request support";
+"about.cells.join_community.caption" = "Join community";
 "about.cells.write_review.caption" = "Write a review";
 
 "share.message" = "Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS";

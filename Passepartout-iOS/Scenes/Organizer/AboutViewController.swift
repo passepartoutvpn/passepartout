@@ -42,7 +42,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.set([.version, .credits, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
         model.set([.shareTwitter, .shareGeneric], in: .share)
-        model.set([.requestSupport, .writeReview], in: .feedback)
+        model.set([.joinCommunity, .writeReview], in: .feedback)
         return model
     }()
     
@@ -162,7 +162,7 @@ extension AboutViewController {
         
         case shareGeneric
         
-        case requestSupport
+        case joinCommunity
         
         case writeReview
     }
@@ -226,9 +226,9 @@ extension AboutViewController {
             cell.leftText = L10n.About.Cells.ShareGeneric.caption
             return cell
             
-        case .requestSupport:
+        case .joinCommunity:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.RequestSupport.caption
+            cell.leftText = L10n.About.Cells.JoinCommunity.caption
             return cell
             
         case .writeReview:
@@ -264,7 +264,7 @@ extension AboutViewController {
         case .shareGeneric:
             inviteFriend(sender: tableView.cellForRow(at: indexPath))
             
-        case .requestSupport:
+        case .joinCommunity:
             postSupportRequest()
             
         case .writeReview:
