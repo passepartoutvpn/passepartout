@@ -37,7 +37,9 @@ class AppConstants {
         
         static let infrastructureCacheDirectory = "Infrastructures"
 
-        static let profileConfigurationsDirectory = "Configurations"
+        static let providersDirectory = "Providers"
+
+        static let hostsDirectory = "Hosts"
     }
     
     class VPN {

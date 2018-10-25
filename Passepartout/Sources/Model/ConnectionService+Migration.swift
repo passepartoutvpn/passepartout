@@ -46,15 +46,19 @@ extension ConnectionService {
         }
 
         // replace migration logic here
+        // TODO: remove this code after 1.0 release
         let build = json["build"] as? Int ?? 0
         if build <= 1084 {
             try migrateToWrappedSessionConfiguration(&json)
             try migrateToBaseConfiguration(&json)
             try migrateToBuildNumber(&json)
+            try migrateHostProfileConfigurations()
         }
 
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
+    
+    // MARK: Atomic migrations
 
     static func migrateToWrappedSessionConfiguration(_ json: inout [String: Any]) throws {
         guard let profiles = json["profiles"] as? [[String: Any]] else {
@@ -96,6 +100,31 @@ extension ConnectionService {
         json["build"] = GroupConstants.App.buildNumber
     }
 
+    static func migrateHostProfileConfigurations() throws {
+        let fm = FileManager.default
+        let oldDirectory = fm.userURL(for: .documentDirectory, appending: "Configurations")
+        guard fm.fileExists(atPath: oldDirectory.path) else {
+            return
+        }
+        
+        let newDirectory = fm.userURL(for: .documentDirectory, appending: AppConstants.Store.hostsDirectory)
+        try fm.moveItem(at: oldDirectory, to: newDirectory)
+        let list = try fm.contentsOfDirectory(at: newDirectory, includingPropertiesForKeys: nil, options: [])
+        let prefix = "host."
+        for url in list {
+            let filename = url.lastPathComponent
+            guard filename.hasPrefix(prefix) else {
+                continue
+            }
+            let postPrefixIndex = filename.index(filename.startIndex, offsetBy: prefix.count)
+            let newFilename = String(filename[postPrefixIndex..<filename.endIndex])
+            var newURL = url
+            newURL.deleteLastPathComponent()
+            newURL.appendPathComponent(newFilename)
+            try fm.moveItem(at: url, to: newURL)
+        }
+    }
+    
     // MARK: Helpers
     
     private static func migrateSessionConfiguration(in map: inout [String: Any]) {
