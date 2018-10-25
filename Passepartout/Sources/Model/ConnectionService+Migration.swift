@@ -48,6 +48,7 @@ extension ConnectionService {
         // replace migration logic here
         try migrateToWrappedSessionConfiguration(&json)
         try migrateToBaseConfiguration(&json)
+        try migrateToBuildNumber(&json)
 
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
@@ -84,6 +85,10 @@ extension ConnectionService {
         migrateSessionConfiguration(in: &baseConfiguration)
         json["baseConfiguration"] = baseConfiguration
         json.removeValue(forKey: "tunnelConfiguration")
+    }
+
+    static func migrateToBuildNumber(_ json: inout [String: Any]) throws {
+        json["build"] = GroupConstants.App.buildNumber
     }
 
     // MARK: Helpers

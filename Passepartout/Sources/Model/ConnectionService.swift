@@ -38,6 +38,8 @@ protocol ConnectionServiceDelegate: class {
 
 class ConnectionService: Codable {
     enum CodingKeys: String, CodingKey {
+        case build
+        
         case appGroup
         
         case baseConfiguration
@@ -49,6 +51,8 @@ class ConnectionService: Codable {
         case preferences
     }
 
+    private var build: Int
+    
     private let appGroup: String
     
     private let defaults: UserDefaults
@@ -87,6 +91,7 @@ class ConnectionService: Codable {
         guard let defaults = UserDefaults(suiteName: appGroup) else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
+        build = GroupConstants.App.buildNumber
         self.appGroup = appGroup
         self.defaults = defaults
         keychain = Keychain(group: appGroup)
@@ -105,6 +110,7 @@ class ConnectionService: Codable {
         guard let defaults = UserDefaults(suiteName: appGroup) else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
+        build = try container.decode(Int.self, forKey: .build)
         self.appGroup = appGroup
         self.defaults = defaults
         keychain = Keychain(group: appGroup)
@@ -124,7 +130,10 @@ class ConnectionService: Codable {
     }
     
     func encode(to encoder: Encoder) throws {
+        build = GroupConstants.App.buildNumber
+        
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(build, forKey: .build)
         try container.encode(appGroup, forKey: .appGroup)
         try container.encode(baseConfiguration, forKey: .baseConfiguration)
         try container.encode(profiles.map { ConnectionProfileHolder($0.value) }, forKey: .profiles)
