@@ -40,8 +40,8 @@ class FileConfigurationTests: XCTestCase {
     
     func testPIA() throws {
         let cfg = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary")).1
-        XCTAssertEqual(cfg.cipher, .aes128cbc)
-        XCTAssertEqual(cfg.digest, .sha1)
+        XCTAssertEqual(cfg.sessionConfiguration.cipher, .aes128cbc)
+        XCTAssertEqual(cfg.sessionConfiguration.digest, .sha1)
     }
 
     private func url(withName name: String) -> URL {

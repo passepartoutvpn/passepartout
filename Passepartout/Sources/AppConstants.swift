@@ -42,7 +42,8 @@ class AppConstants {
     
     class VPN {
         static func tunnelConfiguration() -> TunnelKitProvider.Configuration {
-            var builder = TunnelKitProvider.ConfigurationBuilder(ca: CryptoContainer(pem: ""))
+            let sessionBuilder = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: ""))
+            var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
             builder.mtu = 1250
             builder.shouldDebug = true
 //            builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $L $N.$F:$l - $M"

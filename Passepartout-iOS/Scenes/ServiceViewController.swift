@@ -153,7 +153,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         case .hostParametersSegueIdentifier:
             let vc = destination as? ConfigurationViewController
             vc?.title = L10n.Service.Cells.Host.Parameters.caption
-            vc?.initialConfiguration = uncheckedHostProfile.parameters
+            vc?.initialConfiguration = uncheckedHostProfile.parameters.sessionConfiguration
             vc?.isEditable = true
             vc?.originalConfigurationURL = ProfileConfigurationFactory.shared.configurationURL(for: uncheckedHostProfile)
             vc?.delegate = self
@@ -595,10 +595,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.Host.Parameters.caption
             let V = L10n.Service.Cells.Host.Parameters.Value.self
-            if !parameters.cipher.embedsDigest {
-                cell.rightText = V.cipherDigest(parameters.cipher.genericName, parameters.digest.genericName)
+            if !parameters.sessionConfiguration.cipher.embedsDigest {
+                cell.rightText = V.cipherDigest(parameters.sessionConfiguration.cipher.genericName, parameters.sessionConfiguration.digest.genericName)
             } else {
-                cell.rightText = V.cipher(parameters.cipher.genericName)
+                cell.rightText = V.cipher(parameters.sessionConfiguration.cipher.genericName)
             }
             return cell
 
@@ -973,9 +973,11 @@ extension ServiceViewController: TrustedNetworksModelDelegate {
 // MARK: -
 
 extension ServiceViewController: ConfigurationModificationDelegate {
-    func configuration(didUpdate newConfiguration: TunnelKitProvider.Configuration) {
+    func configuration(didUpdate newConfiguration: SessionProxy.Configuration) {
         if let hostProfile = profile as? HostConnectionProfile {
-            hostProfile.parameters = newConfiguration
+            var builder = hostProfile.parameters.builder()
+            builder.sessionConfiguration = newConfiguration
+            hostProfile.parameters = builder.build()
         }
         reloadSelectedRow()
     }

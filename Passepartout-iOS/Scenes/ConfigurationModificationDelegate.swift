@@ -27,7 +27,7 @@ import Foundation
 import TunnelKit
 
 protocol ConfigurationModificationDelegate: class {
-    func configuration(didUpdate newConfiguration: TunnelKitProvider.Configuration)
+    func configuration(didUpdate newConfiguration: SessionProxy.Configuration)
     
     func configurationShouldReinstall()
 }

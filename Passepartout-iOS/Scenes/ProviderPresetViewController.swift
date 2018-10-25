@@ -129,7 +129,7 @@ extension ProviderPresetViewController: UITableViewDataSource, UITableViewDelega
         case .techDetails:
             let vc = StoryboardScene.Main.configurationIdentifier.instantiate()
             vc.title = preset.name
-            vc.initialConfiguration = preset.configuration
+            vc.initialConfiguration = preset.configuration.sessionConfiguration
             navigationController?.pushViewController(vc, animated: true)
         }
     }
