@@ -280,20 +280,11 @@ class ConnectionService: Codable {
     }
     
     var vpnLastError: TunnelKitProvider.ProviderError? {
-        guard let key = baseConfiguration.lastErrorKey else {
-            return nil
-        }
-        guard let rawValue = defaults.string(forKey: key) else {
-            return nil
-        }
-        return TunnelKitProvider.ProviderError(rawValue: rawValue)
+        return baseConfiguration.lastError(in: appGroup)
     }
     
     func clearVpnLastError() {
-        guard let key = baseConfiguration.lastErrorKey else {
-            return
-        }
-        defaults.removeObject(forKey: key)
+        baseConfiguration.clearLastError(in: appGroup)
     }
     
 //    func eraseVpnLog() {

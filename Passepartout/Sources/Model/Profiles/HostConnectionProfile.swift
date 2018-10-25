@@ -60,8 +60,6 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.mtu = configuration.mtu
         builder.shouldDebug = configuration.shouldDebug
         builder.debugLogFormat = configuration.debugLogFormat
-        builder.debugLogKey = configuration.debugLogKey
-        builder.lastErrorKey = configuration.lastErrorKey
 
         return builder.build()
     }
