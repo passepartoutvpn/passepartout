@@ -38,21 +38,22 @@ class ConfigurationViewController: UIViewController, TableModelHost {
     
     private lazy var configuration: SessionProxy.ConfigurationBuilder = initialConfiguration.builder()
     
-    var isEditable = false
-    
     var originalConfigurationURL: URL?
 
+    private var isEditable: Bool {
+        return originalConfigurationURL != nil
+    }
+        
     weak var delegate: ConfigurationModificationDelegate?
     
     // MARK: TableModelHost
 
     lazy var model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
-        let hasConfigurationURL = isEditable && (originalConfigurationURL != nil)
         
         // sections
         model.add(.communication)
-        if hasConfigurationURL {
+        if isEditable {
             model.add(.reset)
         }
         model.add(.tls)
@@ -64,15 +65,13 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         model.setHeader(L10n.Configuration.Sections.Other.header, for: .other)
 
         // footers
-        if hasConfigurationURL {
+        if isEditable {
             model.setFooter(L10n.Configuration.Sections.Reset.footer, for: .reset)
-        } else if isEditable {
-            model.setFooter(L10n.Configuration.Sections.Communication.Footer.editable, for: .communication)
         }
         
         // rows
         model.set([.cipher, .digest, .compressionFrame], in: .communication)
-        if hasConfigurationURL {
+        if isEditable {
             model.set([.resetOriginal], in: .reset)
         }
         model.set([.client, .tlsWrapping], in: .tls)
@@ -94,7 +93,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         guard let _ = initialConfiguration else {
             fatalError("Initial configuration not set")
         }

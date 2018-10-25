@@ -205,11 +205,6 @@ internal enum L10n {
       internal enum Communication {
         /// Communication
         internal static let header = L10n.tr("Localizable", "configuration.sections.communication.header")
-
-        internal enum Footer {
-          /// Make sure to match server communication parameters, otherwise you will end up with broken connectivity.
-          internal static let editable = L10n.tr("Localizable", "configuration.sections.communication.footer.editable")
-        }
       }
 
       internal enum Other {
