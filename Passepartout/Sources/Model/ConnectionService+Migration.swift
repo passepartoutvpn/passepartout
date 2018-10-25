@@ -47,11 +47,12 @@ extension ConnectionService {
 
         // replace migration logic here
         try migrateToWrappedSessionConfiguration(&json)
+        try migrateToBaseConfiguration(&json)
 
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
 
-    private static func migrateToWrappedSessionConfiguration(_ json: inout [String: Any]) throws {
+    static func migrateToWrappedSessionConfiguration(_ json: inout [String: Any]) throws {
         guard let profiles = json["profiles"] as? [[String: Any]] else {
             throw ApplicationError.migration
         }
@@ -75,6 +76,17 @@ extension ConnectionService {
         }
         json["profiles"] = newProfiles
     }
+    
+    static func migrateToBaseConfiguration(_ json: inout [String: Any]) throws {
+        guard var baseConfiguration = json["tunnelConfiguration"] as? [String: Any] else {
+            return
+        }
+        migrateSessionConfiguration(in: &baseConfiguration)
+        json["baseConfiguration"] = baseConfiguration
+        json.removeValue(forKey: "tunnelConfiguration")
+    }
+
+    // MARK: Helpers
     
     private static func migrateSessionConfiguration(in map: inout [String: Any]) {
         let scKeys = [

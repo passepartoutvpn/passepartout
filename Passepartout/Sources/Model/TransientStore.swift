@@ -53,7 +53,7 @@ class TransientStore {
             for: .documentDirectory,
             appending: AppConstants.Store.serviceFilename
         )
-        let cfg = AppConstants.VPN.tunnelConfiguration()
+        let cfg = AppConstants.VPN.baseConfiguration()
         do {
             ConnectionService.migrateJSON(at: servicePath, to: servicePath)
             
@@ -63,12 +63,12 @@ class TransientStore {
                 log.verbose(content)
             }
             service = try JSONDecoder().decode(ConnectionService.self, from: data)
-            service.tunnelConfiguration = cfg
+            service.baseConfiguration = cfg
         } catch let e {
             log.error("Could not decode service: \(e)")
             service = ConnectionService(
                 withAppGroup: GroupConstants.App.appGroup,
-                tunnelConfiguration: cfg
+                baseConfiguration: cfg
             )
 
 //            // hardcoded loading

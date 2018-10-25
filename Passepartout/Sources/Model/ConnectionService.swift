@@ -40,7 +40,7 @@ class ConnectionService: Codable {
     enum CodingKeys: String, CodingKey {
         case appGroup
         
-        case tunnelConfiguration
+        case baseConfiguration
         
         case profiles
         
@@ -55,7 +55,7 @@ class ConnectionService: Codable {
 
     private let keychain: Keychain
     
-    var tunnelConfiguration: TunnelKitProvider.Configuration
+    var baseConfiguration: TunnelKitProvider.Configuration
     
     private var profiles: [String: ConnectionProfile]
     
@@ -83,7 +83,7 @@ class ConnectionService: Codable {
     
     weak var delegate: ConnectionServiceDelegate?
     
-    init(withAppGroup appGroup: String, tunnelConfiguration: TunnelKitProvider.Configuration) {
+    init(withAppGroup appGroup: String, baseConfiguration: TunnelKitProvider.Configuration) {
         guard let defaults = UserDefaults(suiteName: appGroup) else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
@@ -91,7 +91,7 @@ class ConnectionService: Codable {
         self.defaults = defaults
         keychain = Keychain(group: appGroup)
 
-        self.tunnelConfiguration = tunnelConfiguration
+        self.baseConfiguration = baseConfiguration
         profiles = [:]
         activeProfileId = nil
         preferences = EditablePreferences()
@@ -109,7 +109,7 @@ class ConnectionService: Codable {
         self.defaults = defaults
         keychain = Keychain(group: appGroup)
 
-        tunnelConfiguration = try container.decode(TunnelKitProvider.Configuration.self, forKey: .tunnelConfiguration)
+        baseConfiguration = try container.decode(TunnelKitProvider.Configuration.self, forKey: .baseConfiguration)
         let profilesArray = try container.decode([ConnectionProfileHolder].self, forKey: .profiles).map { $0.contained }
         var profiles: [String: ConnectionProfile] = [:]
         profilesArray.forEach {
@@ -126,7 +126,7 @@ class ConnectionService: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(appGroup, forKey: .appGroup)
-        try container.encode(tunnelConfiguration, forKey: .tunnelConfiguration)
+        try container.encode(baseConfiguration, forKey: .baseConfiguration)
         try container.encode(profiles.map { ConnectionProfileHolder($0.value) }, forKey: .profiles)
         try container.encodeIfPresent(activeProfileId, forKey: .activeProfileId)
         try container.encode(preferences, forKey: .preferences)
@@ -224,7 +224,7 @@ class ConnectionService: Codable {
             }
         }
         
-        let cfg = try profile.generate(from: tunnelConfiguration, preferences: preferences)
+        let cfg = try profile.generate(from: baseConfiguration, preferences: preferences)
         let protocolConfiguration = try cfg.generatedTunnelProtocol(
             withBundleIdentifier: GroupConstants.App.tunnelIdentifier,
             appGroup: appGroup,
@@ -267,11 +267,11 @@ class ConnectionService: Codable {
     }
     
     var vpnLog: String {
-        return tunnelConfiguration.existingLog(in: appGroup) ?? ""
+        return baseConfiguration.existingLog(in: appGroup) ?? ""
     }
     
     var vpnLastError: TunnelKitProvider.ProviderError? {
-        guard let key = tunnelConfiguration.lastErrorKey else {
+        guard let key = baseConfiguration.lastErrorKey else {
             return nil
         }
         guard let rawValue = defaults.string(forKey: key) else {
@@ -281,7 +281,7 @@ class ConnectionService: Codable {
     }
     
     func clearVpnLastError() {
-        guard let key = tunnelConfiguration.lastErrorKey else {
+        guard let key = baseConfiguration.lastErrorKey else {
             return
         }
         defaults.removeObject(forKey: key)

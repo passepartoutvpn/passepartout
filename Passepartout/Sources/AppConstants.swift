@@ -41,7 +41,7 @@ class AppConstants {
     }
     
     class VPN {
-        static func tunnelConfiguration() -> TunnelKitProvider.Configuration {
+        static func baseConfiguration() -> TunnelKitProvider.Configuration {
             let sessionBuilder = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: ""))
             var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
             builder.mtu = 1250
