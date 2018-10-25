@@ -126,7 +126,6 @@
 //"provider.preset.sections.main.footer" = "Tap info button to disclose technical details.";
 
 "configuration.sections.communication.header" = "Communication";
-"configuration.sections.communication.footer.editable" = "Make sure to match server communication parameters, otherwise you will end up with broken connectivity.";
 "configuration.sections.reset.footer" = "If you ended up with broken connectivity after changing the communication parameters, tap to revert to the original configuration.";
 "configuration.sections.tls.header" = "TLS";
 "configuration.sections.other.header" = "Other";

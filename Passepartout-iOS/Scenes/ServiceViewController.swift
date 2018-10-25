@@ -154,7 +154,6 @@ class ServiceViewController: UIViewController, TableModelHost {
             let vc = destination as? ConfigurationViewController
             vc?.title = L10n.Service.Cells.Host.Parameters.caption
             vc?.initialConfiguration = uncheckedHostProfile.parameters.sessionConfiguration
-            vc?.isEditable = true
             vc?.originalConfigurationURL = ProfileConfigurationFactory.shared.configurationURL(for: uncheckedHostProfile)
             vc?.delegate = self
             
