@@ -32,6 +32,7 @@ extension ConnectionService {
     static func migrateJSON(at from: URL, to: URL) {
         do {
             let newData = try migrateJSON(at: from)
+//            log.verbose(String(data: newData, encoding: .utf8)!)
             try newData.write(to: to)
         } catch let e {
             log.warning("Could not migrate service: \(e)")

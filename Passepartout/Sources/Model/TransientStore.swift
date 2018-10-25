@@ -55,6 +55,8 @@ class TransientStore {
         )
         let cfg = AppConstants.VPN.tunnelConfiguration()
         do {
+            ConnectionService.migrateJSON(at: servicePath, to: servicePath)
+            
             let data = try Data(contentsOf: servicePath)
             if let content = String(data: data, encoding: .utf8) {
                 log.verbose("Service JSON:")
