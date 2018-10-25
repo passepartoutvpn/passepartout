@@ -313,7 +313,7 @@ extension OrganizerViewController {
         case .profile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             let rowProfile = profile(at: indexPath)
-            cell.leftText = rowProfile.title
+            cell.leftText = rowProfile.id
             cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Organizer.Cells.Profile.Value.current : nil
             return cell
 

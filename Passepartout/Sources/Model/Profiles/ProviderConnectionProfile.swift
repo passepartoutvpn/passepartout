@@ -66,7 +66,6 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         poolId = ""
         presetId = ""
 
-        id = "provider.\(name.rawValue)"
         username = nil
 
         poolId = infrastructure.defaults.pool
@@ -93,9 +92,7 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     // MARK: ConnectionProfile
     
-    let id: String
-    
-    var title: String {
+    var id: String {
         return name.rawValue
     }
     

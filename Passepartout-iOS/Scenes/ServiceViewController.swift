@@ -37,7 +37,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     var profile: ConnectionProfile? {
         didSet {
-            title = profile?.title
+            title = profile?.id
             reloadModel()
             updateViewsIfNeeded()
         }
@@ -78,7 +78,7 @@ class ServiceViewController: UIViewController, TableModelHost {
             lastInfrastructureUpdate = InfrastructureFactory.shared.modificationDate(for: providerProfile.name)
         }
 
-        title = profile?.title
+        title = profile?.id
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         navigationItem.leftItemsSupplementBackButton = true
 

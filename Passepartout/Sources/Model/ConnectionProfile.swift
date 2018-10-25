@@ -29,8 +29,6 @@ import NetworkExtension
 
 protocol ConnectionProfile: class, EndpointDataSource {
     var id: String { get }
-
-    var title: String { get }
     
     var username: String? { get set }
     
