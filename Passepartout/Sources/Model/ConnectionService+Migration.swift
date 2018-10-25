@@ -46,9 +46,12 @@ extension ConnectionService {
         }
 
         // replace migration logic here
-        try migrateToWrappedSessionConfiguration(&json)
-        try migrateToBaseConfiguration(&json)
-        try migrateToBuildNumber(&json)
+        let build = json["build"] as? Int ?? 0
+        if build <= 1084 {
+            try migrateToWrappedSessionConfiguration(&json)
+            try migrateToBaseConfiguration(&json)
+            try migrateToBuildNumber(&json)
+        }
 
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
