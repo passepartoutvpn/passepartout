@@ -41,13 +41,16 @@
 		0E6BE13A20CFB76800A6DD36 /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC4213DF7AE00741BA1 /* Preferences.swift */; };
-		0E89DFC8213E8FC500741BA1 /* TunnelKitProvider+Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC7213E8FC500741BA1 /* TunnelKitProvider+Communication.swift */; };
+		0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0E89DFD0213F223400741BA1 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCF213F223400741BA1 /* Wizard.swift */; };
 		0E8D97E221388B52006FB4A0 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
 		0E8D97E521389277006FB4A0 /* pia.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D97E421389276006FB4A0 /* pia.json */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
+		0EBBE8F221822B4D00106008 /* ConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */; };
+		0EBBE8F321822B4D00106008 /* ConnectionService.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F121822B4D00106008 /* ConnectionService.json */; };
+		0EBBE8F52182361800106008 /* ConnectionService+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */; };
 		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
 		0EBE3A84213C6ADE00BFA2F5 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */; };
 		0EBE3A90213C6F4000BFA2F5 /* TrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */; };
@@ -159,12 +162,15 @@
 		0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
 		0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
 		0E89DFC4213DF7AE00741BA1 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		0E89DFC7213E8FC500741BA1 /* TunnelKitProvider+Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKitProvider+Communication.swift"; sourceTree = "<group>"; };
+		0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionProxy+Communication.swift"; sourceTree = "<group>"; };
 		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
 		0E89DFCF213F223400741BA1 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
 		0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructurePreset.swift; sourceTree = "<group>"; };
 		0E8D97E421389276006FB4A0 /* pia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pia.json; sourceTree = "<group>"; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
+		0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionServiceTests.swift; sourceTree = "<group>"; };
+		0EBBE8F121822B4D00106008 /* ConnectionService.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ConnectionService.json; sourceTree = "<group>"; };
+		0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Migration.swift"; sourceTree = "<group>"; };
 		0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerViewController.swift; sourceTree = "<group>"; };
 		0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureFactory.swift; sourceTree = "<group>"; };
 		0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustPolicy.swift; sourceTree = "<group>"; };
@@ -324,10 +330,12 @@
 		0E57F64F20C83FC7008323CF /* PassepartoutTests-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				0EBBE8F121822B4D00106008 /* ConnectionService.json */,
 				0ED38AE2213F517D0004D387 /* pia-hungary.ovpn */,
+				0E57F65220C83FC7008323CF /* Info.plist */,
+				0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */,
 				0ED38AE0213F51370004D387 /* FileConfigurationTests.swift */,
 				0ED31C2620CF257C0027975F /* InfrastructureTests.swift */,
-				0E57F65220C83FC7008323CF /* Info.plist */,
 			);
 			path = "PassepartoutTests-iOS";
 			sourceTree = "<group>";
@@ -377,12 +385,13 @@
 				0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */,
 				0EBE3AAB213DEB8800BFA2F5 /* ConnectionProfileHolder.swift */,
 				0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */,
+				0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */,
 				0EDE8DE620C93945004C739C /* Credentials.swift */,
 				0EC7F20420E24308004EA58E /* DebugLog.swift */,
 				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
 				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
 				0E2D11B9217DBEDE0096822C /* ProfileConfigurationFactory.swift */,
-				0E89DFC7213E8FC500741BA1 /* TunnelKitProvider+Communication.swift */,
+				0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */,
 				0E2B494120FD16540094784C /* TransientStore.swift */,
 				0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */,
 				0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */,
@@ -654,6 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ED38AE3213F517D0004D387 /* pia-hungary.ovpn in Resources */,
+				0EBBE8F321822B4D00106008 /* ConnectionService.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,6 +826,7 @@
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
 				0EBE3AA6213DC1B000BFA2F5 /* ProviderConnectionProfile.swift in Sources */,
 				0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */,
+				0EBBE8F52182361800106008 /* ConnectionService+Migration.swift in Sources */,
 				0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */,
 				0E05C5D620D1645F006EE732 /* SwiftGen+Storyboards.swift in Sources */,
 				0E2B494220FD16540094784C /* TransientStore.swift in Sources */,
@@ -837,7 +848,7 @@
 				0E2D11BA217DBEDE0096822C /* ProfileConfigurationFactory.swift in Sources */,
 				0EBE3A90213C6F4000BFA2F5 /* TrustPolicy.swift in Sources */,
 				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
-				0E89DFC8213E8FC500741BA1 /* TunnelKitProvider+Communication.swift in Sources */,
+				0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */,
 				0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */,
 				0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */,
 				0EBE3AAC213DEB8800BFA2F5 /* ConnectionProfileHolder.swift in Sources */,
@@ -866,6 +877,7 @@
 			files = (
 				0ED38AE1213F51370004D387 /* FileConfigurationTests.swift in Sources */,
 				0ED31C2720CF257C0027975F /* InfrastructureTests.swift in Sources */,
+				0EBBE8F221822B4D00106008 /* ConnectionServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

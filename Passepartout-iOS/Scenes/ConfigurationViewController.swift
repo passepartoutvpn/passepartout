@@ -34,9 +34,9 @@ class ConfigurationViewController: UIViewController, TableModelHost {
     
     private lazy var itemRefresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
 
-    var initialConfiguration: TunnelKitProvider.Configuration!
+    var initialConfiguration: SessionProxy.Configuration!
     
-    private lazy var configuration: TunnelKitProvider.ConfigurationBuilder = initialConfiguration.builder()
+    private lazy var configuration: SessionProxy.ConfigurationBuilder = initialConfiguration.builder()
     
     var isEditable = false
     
@@ -129,12 +129,12 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             log.warning("Could not parse original configuration: \(e)")
             return
         }
-        initialConfiguration = originalConfiguration
-        configuration = originalConfiguration.builder()
+        initialConfiguration = originalConfiguration.sessionConfiguration
+        configuration = initialConfiguration.builder()
         itemRefresh.isEnabled = true // allow for manual reconnection
         tableView.reloadData()
 
-        delegate?.configuration(didUpdate: originalConfiguration)
+        delegate?.configuration(didUpdate: initialConfiguration)
     }
 
     @IBAction private func refresh() {
@@ -270,8 +270,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case .keepAlive:
             cell.leftText = L10n.Configuration.Cells.KeepAlive.caption
             let V = L10n.Configuration.Cells.KeepAlive.Value.self
-            if let keepAlive = configuration.keepAliveSeconds, keepAlive > 0 {
-                cell.rightText = V.seconds(keepAlive)
+            if let keepAlive = configuration.keepAliveInterval, keepAlive > 0 {
+                cell.rightText = V.seconds(Int(keepAlive))
             } else {
                 cell.rightText = V.never
             }
@@ -281,7 +281,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case .renegSeconds:
             cell.leftText = L10n.Configuration.Cells.RenegotiationSeconds.caption
             let V = L10n.Configuration.Cells.RenegotiationSeconds.Value.self
-            if let reneg = configuration.renegotiatesAfterSeconds, reneg > 0 {
+            if let reneg = configuration.renegotiatesAfter, reneg > 0 {
                 cell.rightText = V.after(TimeInterval(reneg).localized)
             } else {
                 cell.rightText = V.never

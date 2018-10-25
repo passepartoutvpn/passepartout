@@ -1,8 +1,8 @@
 //
-//  FileConfigurationTests.swift
+//  ConnectionServiceTests.swift
 //  PassepartoutTests-iOS
 //
-//  Created by Davide De Rosa on 9/5/18.
+//  Created by Davide De Rosa on 10/25/18.
 //  Copyright (c) 2018 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/keeshux
@@ -27,25 +27,35 @@ import XCTest
 import TunnelKit
 @testable import Passepartout_iOS
 
-class FileConfigurationTests: XCTestCase {
+class ConnectionServiceTests: XCTestCase {
+    let url = Bundle(for: ConnectionServiceTests.self).url(forResource: "ConnectionService", withExtension: "json")!
+
     override func setUp() {
-        super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testPIA() throws {
-        let cfg = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary")).1
-        XCTAssertEqual(cfg.sessionConfiguration.cipher, .aes128cbc)
-        XCTAssertEqual(cfg.sessionConfiguration.digest, .sha1)
     }
 
-    private func url(withName name: String) -> URL {
-        return Bundle(for: FileConfigurationTests.self).url(forResource: name, withExtension: "ovpn")!
+    func testParse() {
+        let jsonData = try! Data(contentsOf: url)
+        XCTAssertNoThrow(try JSONSerialization.jsonObject(with: jsonData, options: []))
     }
-    
+
+    func testMigrate() {
+        let migrated = try! ConnectionService.migrateJSON(at: url)
+        let json = String(data: migrated, encoding: .utf8)!
+        print(json)
+        let service = try! JSONDecoder().decode(ConnectionService.self, from: migrated)
+
+        guard let activeProfile = service.activeProfile as? HostConnectionProfile else {
+            XCTFail()
+            return
+        }
+        XCTAssert(activeProfile.id == "host.edu")
+        XCTAssert(activeProfile.hostname == "1.2.4.5")
+        XCTAssert(activeProfile.parameters.sessionConfiguration.cipher == .aes256cbc)
+        XCTAssert(activeProfile.parameters.sessionConfiguration.ca.pem == "bogus+ca")
+    }
 }

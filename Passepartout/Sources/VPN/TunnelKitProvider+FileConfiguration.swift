@@ -75,8 +75,8 @@ extension TunnelKitProvider.Configuration {
         var optCA: CryptoContainer?
         var clientCertificate: CryptoContainer?
         var clientKey: CryptoContainer?
-        var keepAliveSeconds: Int?
-        var renegotiateAfterSeconds: Int?
+        var keepAliveSeconds: TimeInterval?
+        var renegotiateAfterSeconds: TimeInterval?
         var keyDirection: StaticKey.Direction?
         var tlsStrategy: SessionProxy.TLSWrap.Strategy?
         var tlsKeyLines: [Substring]?
@@ -202,13 +202,13 @@ extension TunnelKitProvider.Configuration {
                 guard let arg = $0.first else {
                     return
                 }
-                keepAliveSeconds = Int(arg)
+                keepAliveSeconds = TimeInterval(arg)
             }
             Regex.renegSec.enumerateArguments(in: line) {
                 guard let arg = $0.first else {
                     return
                 }
-                renegotiateAfterSeconds = Int(arg)
+                renegotiateAfterSeconds = TimeInterval(arg)
             }
             Regex.fragment.enumerateArguments(in: line) { (_) in
                 unsupportedError = ApplicationError.unsupportedConfiguration(option: "fragment")
@@ -270,16 +270,17 @@ extension TunnelKitProvider.Configuration {
             }
         }
 
-        var builder = TunnelKitProvider.ConfigurationBuilder(ca: ca)
+        var sessionBuilder = SessionProxy.ConfigurationBuilder(ca: ca)
+        sessionBuilder.cipher = cipher ?? .aes128cbc
+        sessionBuilder.digest = digest ?? .sha1
+        sessionBuilder.compressionFraming = compressionFraming
+        sessionBuilder.tlsWrap = tlsWrap
+        sessionBuilder.clientCertificate = clientCertificate
+        sessionBuilder.clientKey = clientKey
+        sessionBuilder.keepAliveInterval = keepAliveSeconds
+        sessionBuilder.renegotiatesAfter = renegotiateAfterSeconds
+        var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.endpointProtocols = endpointProtocols
-        builder.cipher = cipher ?? .aes128cbc
-        builder.digest = digest ?? .sha1
-        builder.compressionFraming = compressionFraming
-        builder.tlsWrap = tlsWrap
-        builder.clientCertificate = clientCertificate
-        builder.clientKey = clientKey
-        builder.keepAliveSeconds = keepAliveSeconds
-        builder.renegotiatesAfterSeconds = renegotiateAfterSeconds
 
         return (hostname, builder.build())
     }

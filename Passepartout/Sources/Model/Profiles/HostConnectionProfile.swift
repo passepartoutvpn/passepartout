@@ -34,7 +34,8 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     init(title: String, hostname: String) {
         self.title = title
         self.hostname = hostname
-        parameters = TunnelKitProvider.ConfigurationBuilder(ca: CryptoContainer(pem: "")).build()
+        let sessionConfiguration = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: "")).build()
+        parameters = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionConfiguration).build()
     }
     
     // MARK: ConnectionProfile
@@ -59,8 +60,6 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.mtu = configuration.mtu
         builder.shouldDebug = configuration.shouldDebug
         builder.debugLogFormat = configuration.debugLogFormat
-        builder.debugLogKey = configuration.debugLogKey
-        builder.lastErrorKey = configuration.lastErrorKey
 
         return builder.build()
     }

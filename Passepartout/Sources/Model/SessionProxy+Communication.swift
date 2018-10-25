@@ -1,5 +1,5 @@
 //
-//  TunnelKitProvider+Communication.swift
+//  SessionProxy+Communication.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/4/18.
@@ -26,15 +26,16 @@
 import Foundation
 import TunnelKit
 
-extension TunnelKitProvider.ConfigurationBuilder {
-//    mutating func copyCommunication(from other: TunnelKitProvider.ConfigurationBuilder) {
+extension SessionProxy.ConfigurationBuilder {
+//    mutating func copyCommunication(from other: SessionProxy.ConfigurationBuilder) {
 //        cipher = other.cipher
 //        digest = other.digest
 //        compressionFraming = other.compressionFraming
 //    }
 
-    func canCommunicate(with other: TunnelKitProvider.Configuration) -> Bool {
-        return (cipher == other.cipher) &&
+    func canCommunicate(with other: SessionProxy.Configuration) -> Bool {
+        return
+            (cipher == other.cipher) &&
             ((digest == other.digest) || cipher.embedsDigest) &&
             (compressionFraming == other.compressionFraming)
     }

@@ -35,4 +35,6 @@ enum ApplicationError: Error {
     case emptyRemotes
     
     case unsupportedConfiguration(option: String)
+
+    case migration
 }

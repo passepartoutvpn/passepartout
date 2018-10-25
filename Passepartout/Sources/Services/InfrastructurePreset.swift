@@ -84,18 +84,21 @@ struct InfrastructurePreset: Codable {
 
         let cfgContainer = try container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
         let ca = try cfgContainer.decode(CryptoContainer.self, forKey: .ca)
-        var builder = TunnelKitProvider.ConfigurationBuilder(ca: ca)
-        builder.endpointProtocols = try cfgContainer.decode([TunnelKitProvider.EndpointProtocol].self, forKey: .endpointProtocols)
-        builder.cipher = try cfgContainer.decode(SessionProxy.Cipher.self, forKey: .cipher)
+
+        var sessionBuilder = SessionProxy.ConfigurationBuilder(ca: ca)
+        sessionBuilder.cipher = try cfgContainer.decode(SessionProxy.Cipher.self, forKey: .cipher)
         if let digest = try cfgContainer.decodeIfPresent(SessionProxy.Digest.self, forKey: .digest) {
-            builder.digest = digest
+            sessionBuilder.digest = digest
         }
-        builder.clientCertificate = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientCertificate)
-        builder.clientKey = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientKey)
-        builder.compressionFraming = try cfgContainer.decode(SessionProxy.CompressionFraming.self, forKey: .compressionFraming)
-        builder.keepAliveSeconds = try cfgContainer.decodeIfPresent(Int.self, forKey: .keepAliveSeconds)
-        builder.renegotiatesAfterSeconds = try cfgContainer.decodeIfPresent(Int.self, forKey: .renegotiatesAfterSeconds)
-        builder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
+        sessionBuilder.clientCertificate = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientCertificate)
+        sessionBuilder.clientKey = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientKey)
+        sessionBuilder.compressionFraming = try cfgContainer.decode(SessionProxy.CompressionFraming.self, forKey: .compressionFraming)
+        sessionBuilder.keepAliveInterval = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .keepAliveSeconds)
+        sessionBuilder.renegotiatesAfter = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .renegotiatesAfterSeconds)
+        sessionBuilder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
+
+        var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
+        builder.endpointProtocols = try cfgContainer.decode([TunnelKitProvider.EndpointProtocol].self, forKey: .endpointProtocols)
         configuration = builder.build()
     }
     
@@ -107,14 +110,15 @@ struct InfrastructurePreset: Codable {
 
         var cfgContainer = container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
         try cfgContainer.encode(configuration.endpointProtocols, forKey: .endpointProtocols)
-        try cfgContainer.encode(configuration.cipher, forKey: .cipher)
-        try cfgContainer.encode(configuration.digest, forKey: .digest)
-        try cfgContainer.encodeIfPresent(configuration.ca, forKey: .ca)
-        try cfgContainer.encodeIfPresent(configuration.clientCertificate, forKey: .clientCertificate)
-        try cfgContainer.encodeIfPresent(configuration.clientKey, forKey: .clientKey)
-        try cfgContainer.encode(configuration.compressionFraming, forKey: .compressionFraming)
-        try cfgContainer.encodeIfPresent(configuration.keepAliveSeconds, forKey: .keepAliveSeconds)
-        try cfgContainer.encodeIfPresent(configuration.renegotiatesAfterSeconds, forKey: .renegotiatesAfterSeconds)
-        try cfgContainer.encodeIfPresent(configuration.usesPIAPatches, forKey: .usesPIAPatches)
+
+        try cfgContainer.encode(configuration.sessionConfiguration.cipher, forKey: .cipher)
+        try cfgContainer.encode(configuration.sessionConfiguration.digest, forKey: .digest)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.ca, forKey: .ca)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientCertificate, forKey: .clientCertificate)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientKey, forKey: .clientKey)
+        try cfgContainer.encode(configuration.sessionConfiguration.compressionFraming, forKey: .compressionFraming)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.keepAliveInterval, forKey: .keepAliveSeconds)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.renegotiatesAfter, forKey: .renegotiatesAfterSeconds)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.usesPIAPatches, forKey: .usesPIAPatches)
     }
 }

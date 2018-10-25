@@ -120,8 +120,6 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.mtu = configuration.mtu
         builder.shouldDebug = configuration.shouldDebug
         builder.debugLogFormat = configuration.debugLogFormat
-        builder.debugLogKey = configuration.debugLogKey
-        builder.lastErrorKey = configuration.lastErrorKey
 
         if let address = manualAddress {
             builder.prefersResolvedAddresses = true
