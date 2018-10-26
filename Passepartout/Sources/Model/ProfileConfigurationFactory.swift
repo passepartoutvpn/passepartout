@@ -62,7 +62,9 @@ class ProfileConfigurationFactory {
 
     func save(url: URL, for profile: ProfileConfigurationSource) throws -> URL {
         let savedUrl = targetConfigurationURL(for: profile)
-        try FileManager.default.copyItem(at: url, to: savedUrl)
+        let fm = FileManager.default
+        try? fm.removeItem(at: savedUrl)
+        try fm.copyItem(at: url, to: savedUrl)
         return savedUrl
     }
     
