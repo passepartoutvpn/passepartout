@@ -34,7 +34,8 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
         let url: URL
 
         var filename: String {
-            return url.deletingPathExtension().lastPathComponent
+            let raw = url.deletingPathExtension().lastPathComponent
+            return raw.components(separatedBy: AppConstants.Store.filenameCharset.inverted).joined(separator: "_")
         }
 
         let hostname: String
@@ -44,17 +45,8 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
 
     @IBOutlet private weak var itemNext: UIBarButtonItem!
     
-    private let existingHosts: [HostConnectionProfile] = {
-        var hosts: [HostConnectionProfile] = []
-        let service = TransientStore.shared.service
-        let ids = service.profileIds()
-        for id in ids {
-            guard let host = service.profile(withId: id) as? HostConnectionProfile else {
-                continue
-            }
-            hosts.append(host)
-        }
-        return hosts.sorted { $0.title < $1.title }
+    private let existingHosts: [String] = {
+        return TransientStore.shared.service.ids(forContext: .host).sorted()
     }()
     
     private var parsedFile: ParsedFile? {
@@ -224,6 +216,7 @@ extension WizardHostViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
+            cell.allowedCharset = AppConstants.Store.filenameCharset
             cell.field.placeholder = L10n.Wizards.Host.Cells.TitleInput.placeholder
             cell.field.clearButtonMode = .always
             cell.field.returnKeyType = .done
@@ -231,10 +224,9 @@ extension WizardHostViewController {
             return cell
             
         case .existingHost:
-            let profile = existingHosts[indexPath.row]
-            
+            let hostTitle = existingHosts[indexPath.row]
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = profile.title
+            cell.leftText = hostTitle
             cell.accessoryType = .none
             cell.isTappable = true
             return cell
@@ -247,9 +239,9 @@ extension WizardHostViewController {
             guard let titleIndexPath = model.indexPath(row: .titleInput, section: .meta) else {
                 fatalError("Could not found title cell?")
             }
-            let profile = existingHosts[indexPath.row]
+            let hostTitle = existingHosts[indexPath.row]
             let cellTitle = tableView.cellForRow(at: titleIndexPath) as? FieldTableViewCell
-            cellTitle?.field.text = profile.title
+            cellTitle?.field.text = hostTitle
             tableView.deselectRow(at: indexPath, animated: true)
             
         default:

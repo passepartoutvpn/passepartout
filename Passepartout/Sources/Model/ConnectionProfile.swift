@@ -27,10 +27,16 @@ import Foundation
 import TunnelKit
 import NetworkExtension
 
-protocol ConnectionProfile: class, EndpointDataSource {
-    var id: String { get }
+enum Context: String, Codable {
+    case provider
+    
+    case host
+}
 
-    var title: String { get }
+protocol ConnectionProfile: class, EndpointDataSource {
+    var context: Context { get }
+    
+    var id: String { get }
     
     var username: String? { get set }
     
@@ -44,7 +50,7 @@ extension ConnectionProfile {
         guard let username = username else {
             return nil
         }
-        return "\(Bundle.main.bundleIdentifier!).\(id).\(username)"
+        return "\(Bundle.main.bundleIdentifier!).\(context.rawValue).\(id).\(username)"
     }
 
     func password(in keychain: Keychain) -> String? {

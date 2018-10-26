@@ -25,28 +25,50 @@
 
 import Foundation
 
+protocol ProfileConfigurationSource {
+    var id: String { get }
+
+    var profileDirectory: String { get }
+}
+
+extension ProfileConfigurationSource {
+    var profileConfigurationPath: String {
+        return "\(profileDirectory)/\(id).ovpn"
+    }
+}
+
+extension ProviderConnectionProfile: ProfileConfigurationSource {
+    var profileDirectory: String {
+        return AppConstants.Store.providersDirectory
+    }
+}
+
+extension HostConnectionProfile: ProfileConfigurationSource {
+    var profileDirectory: String {
+        return AppConstants.Store.hostsDirectory
+    }
+}
+
 class ProfileConfigurationFactory {
-    static let shared = ProfileConfigurationFactory(withDirectory: AppConstants.Store.profileConfigurationsDirectory)
-    
-    private let cachePath: URL
+    static let shared = ProfileConfigurationFactory()
     
     private let configurationsPath: URL
 
-    private init(withDirectory directory: String) {
+    private init() {
         let fm = FileManager.default
-        cachePath = fm.userURL(for: .cachesDirectory, appending: directory)
-        configurationsPath = fm.userURL(for: .documentDirectory, appending: directory)
-        try? fm.createDirectory(at: cachePath, withIntermediateDirectories: false, attributes: nil)
+        configurationsPath = fm.userURL(for: .documentDirectory, appending: nil)
         try? fm.createDirectory(at: configurationsPath, withIntermediateDirectories: false, attributes: nil)
     }
 
-    func save(url: URL, for profile: ConnectionProfile) throws -> URL {
+    func save(url: URL, for profile: ProfileConfigurationSource) throws -> URL {
         let savedUrl = targetConfigurationURL(for: profile)
-        try FileManager.default.copyItem(at: url, to: savedUrl)
+        let fm = FileManager.default
+        try? fm.removeItem(at: savedUrl)
+        try fm.copyItem(at: url, to: savedUrl)
         return savedUrl
     }
     
-    func configurationURL(for profile: ConnectionProfile) -> URL? {
+    func configurationURL(for profile: ProfileConfigurationSource) -> URL? {
         let url = targetConfigurationURL(for: profile)
         guard FileManager.default.fileExists(atPath: url.path) else {
             return nil
@@ -54,8 +76,7 @@ class ProfileConfigurationFactory {
         return url
     }
 
-    private func targetConfigurationURL(for profile: ConnectionProfile) -> URL {
-        let filename = "\(profile.id).ovpn"
-        return configurationsPath.appendingPathComponent(filename)
+    private func targetConfigurationURL(for profile: ProfileConfigurationSource) -> URL {
+        return configurationsPath.appendingPathComponent(profile.profileConfigurationPath)
     }
 }

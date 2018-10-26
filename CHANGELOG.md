@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Host parameters are read-only if there isn't an original configuration to revert to.
+- Overall serialization performance.
 
 ## 1.0 beta 1084 (2018-10-24)
 

@@ -27,6 +27,8 @@ import Foundation
 import TunnelKit
 
 class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
+    var title: String
+
     let hostname: String
     
     var parameters: TunnelKitProvider.Configuration
@@ -40,11 +42,11 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     // MARK: ConnectionProfile
     
+    let context: Context = .host
+    
     var id: String {
-        return "host.\(title)"
+        return title
     }
-
-    var title: String
     
     var username: String?
     

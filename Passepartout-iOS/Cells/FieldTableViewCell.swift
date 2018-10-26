@@ -60,6 +60,14 @@ class FieldTableViewCell: UITableViewCell {
         }
     }
     
+    var allowedCharset: CharacterSet? {
+        didSet {
+            illegalCharset = allowedCharset?.inverted
+        }
+    }
+
+    private var illegalCharset: CharacterSet?
+
     private(set) lazy var field = UITextField()
     
     weak var delegate: FieldTableViewCellDelegate?
@@ -96,6 +104,16 @@ class FieldTableViewCell: UITableViewCell {
 }
 
 extension FieldTableViewCell: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let illegalCharset = illegalCharset else {
+            return true
+        }
+        guard string.rangeOfCharacter(from: illegalCharset) == nil else {
+            return false
+        }
+        return true
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.fieldCellDidEdit(self)
     }

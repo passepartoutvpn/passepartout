@@ -44,13 +44,71 @@ class ConnectionService: Codable {
         
         case baseConfiguration
         
-        case profiles
-        
-        case activeProfileId
+        case activeProfileKey
         
         case preferences
     }
 
+    struct ProfileKey: RawRepresentable, Hashable, Codable {
+        let context: Context
+        
+        let id: String
+
+        init(_ context: Context, _ id: String) {
+            self.context = context
+            self.id = id
+        }
+
+        init(_ profile: ConnectionProfile) {
+            context = profile.context
+            id = profile.id
+        }
+        
+        fileprivate func profileURL(in service: ConnectionService) -> URL {
+            let contextURL: URL
+            switch context {
+            case .provider:
+                contextURL = service.providersURL
+                
+            case .host:
+                contextURL = service.hostsURL
+            }
+            return ConnectionService.url(in: contextURL, forProfileId: id)
+        }
+
+        fileprivate func profileData(in service: ConnectionService) throws -> Data {
+            return try Data(contentsOf: profileURL(in: service))
+        }
+
+        // MARK: RawRepresentable
+        
+        var rawValue: String {
+            return "\(context).\(id)"
+        }
+        
+        init?(rawValue: String) {
+            let comps = rawValue.components(separatedBy: ".")
+            guard comps.count == 2 else {
+                return nil
+            }
+            guard let context = Context(rawValue: comps[0]) else {
+                return nil
+            }
+            self.context = context
+            id = comps[1]
+        }
+    }
+
+    lazy var directory = FileManager.default.userURL(for: .documentDirectory, appending: nil)
+    
+    private var providersURL: URL {
+        return directory.appendingPathComponent(AppConstants.Store.providersDirectory)
+    }
+
+    private var hostsURL: URL {
+        return directory.appendingPathComponent(AppConstants.Store.hostsDirectory)
+    }
+    
     private var build: Int
     
     private let appGroup: String
@@ -61,9 +119,11 @@ class ConnectionService: Codable {
     
     var baseConfiguration: TunnelKitProvider.Configuration
     
-    private var profiles: [String: ConnectionProfile]
+    private var cache: [ProfileKey: ConnectionProfile]
     
-    private var activeProfileId: String? {
+    private var pendingRemoval: Set<ProfileKey>
+    
+    private(set) var activeProfileKey: ProfileKey? {
         willSet {
             if let oldProfile = activeProfile {
                 delegate?.connectionService(didDeactivate: oldProfile)
@@ -77,10 +137,15 @@ class ConnectionService: Codable {
     }
     
     var activeProfile: ConnectionProfile? {
-        guard let id = activeProfileId else {
+        guard let id = activeProfileKey else {
             return nil
         }
-        return profiles[id]
+        var hit = cache[id]
+        if let placeholder = hit as? PlaceholderConnectionProfile {
+            hit = profile(withContext: placeholder.context, id: placeholder.id)
+            cache[id] = hit
+        }
+        return hit
     }
     
     let preferences: EditablePreferences
@@ -97,9 +162,11 @@ class ConnectionService: Codable {
         keychain = Keychain(group: appGroup)
 
         self.baseConfiguration = baseConfiguration
-        profiles = [:]
-        activeProfileId = nil
+        activeProfileKey = nil
         preferences = EditablePreferences()
+
+        cache = [:]
+        pendingRemoval = []
     }
     
     // MARK: Codable
@@ -116,17 +183,11 @@ class ConnectionService: Codable {
         keychain = Keychain(group: appGroup)
 
         baseConfiguration = try container.decode(TunnelKitProvider.Configuration.self, forKey: .baseConfiguration)
-        let profilesArray = try container.decode([ConnectionProfileHolder].self, forKey: .profiles).map { $0.contained }
-        var profiles: [String: ConnectionProfile] = [:]
-        profilesArray.forEach {
-            guard let p = $0 else {
-                return
-            }
-            profiles[p.id] = p
-        }
-        self.profiles = profiles
-        activeProfileId = try container.decodeIfPresent(String.self, forKey: .activeProfileId)
+        activeProfileKey = try container.decodeIfPresent(ProfileKey.self, forKey: .activeProfileKey)
         preferences = try container.decode(EditablePreferences.self, forKey: .preferences)
+
+        cache = [:]
+        pendingRemoval = []
     }
     
     func encode(to encoder: Encoder) throws {
@@ -136,23 +197,126 @@ class ConnectionService: Codable {
         try container.encode(build, forKey: .build)
         try container.encode(appGroup, forKey: .appGroup)
         try container.encode(baseConfiguration, forKey: .baseConfiguration)
-        try container.encode(profiles.map { ConnectionProfileHolder($0.value) }, forKey: .profiles)
-        try container.encodeIfPresent(activeProfileId, forKey: .activeProfileId)
+        try container.encodeIfPresent(activeProfileKey, forKey: .activeProfileKey)
         try container.encode(preferences, forKey: .preferences)
     }
     
+    // MARK: Serialization
+    
+    func loadProfiles() {
+        let fm = FileManager.default
+        try? fm.createDirectory(at: providersURL, withIntermediateDirectories: false, attributes: nil)
+        try? fm.createDirectory(at: hostsURL, withIntermediateDirectories: false, attributes: nil)
+        
+        do {
+            let files = try fm.contentsOfDirectory(at: providersURL, includingPropertiesForKeys: nil, options: [])
+//            log.debug("Found \(files.count) provider files: \(files)")
+            for entry in files {
+                guard let id = ConnectionService.profileId(fromURL: entry) else {
+                    return
+                }
+                let key = ProfileKey(.provider, id)
+                cache[key] = PlaceholderConnectionProfile(key)
+            }
+        } catch let e {
+            log.warning("Could not list provider contents: \(e) (\(providersURL))")
+        }
+        do {
+            let files = try fm.contentsOfDirectory(at: hostsURL, includingPropertiesForKeys: nil, options: [])
+//            log.debug("Found \(files.count) host files: \(files)")
+            for entry in files {
+                guard let id = ConnectionService.profileId(fromURL: entry) else {
+                    continue
+                }
+                let key = ProfileKey(.host, id)
+                cache[key] = PlaceholderConnectionProfile(key)
+            }
+        } catch let e {
+            log.warning("Could not list host contents: \(e) (\(hostsURL))")
+        }
+    }
+    
+    func saveProfiles() throws {
+        let encoder = JSONEncoder()
+
+        let fm = FileManager.default
+        try? fm.createDirectory(at: providersURL, withIntermediateDirectories: false, attributes: nil)
+        try? fm.createDirectory(at: hostsURL, withIntermediateDirectories: false, attributes: nil)
+
+        for key in pendingRemoval {
+            let url = key.profileURL(in: self)
+            try? fm.removeItem(at: url)
+        }
+        for entry in cache.values {
+            if let profile = entry as? ProviderConnectionProfile {
+                do {
+                    let url = ConnectionService.url(in: providersURL, forProfileId: entry.id)
+                    let data = try encoder.encode(profile)
+                    try data.write(to: url)
+                    log.debug("Saved provider '\(profile.id)'")
+                } catch let e {
+                    log.warning("Could not save provider '\(profile.id)': \(e)")
+                    continue
+                }
+            } else if let profile = entry as? HostConnectionProfile {
+                do {
+                    let url = ConnectionService.url(in: hostsURL, forProfileId: entry.id)
+                    let data = try encoder.encode(profile)
+                    try data.write(to: url)
+                    log.debug("Saved host '\(profile.id)'")
+                } catch let e {
+                    log.warning("Could not save host '\(profile.id)': \(e)")
+                    continue
+                }
+            } else if let placeholder = entry as? PlaceholderConnectionProfile {
+                log.debug("Skipped \(placeholder.context) '\(placeholder.id)'")
+            }
+        }
+    }
+    
+    func profile(withContext context: Context, id: String) -> ConnectionProfile? {
+        let key = ProfileKey(context, id)
+        var profile = cache[key]
+        if let _ = profile as? PlaceholderConnectionProfile {
+            let decoder = JSONDecoder()
+            do {
+                let data = try key.profileData(in: self)
+                switch context {
+                case .provider:
+                    profile = try decoder.decode(ProviderConnectionProfile.self, from: data)
+                    
+                case .host:
+                    profile = try decoder.decode(HostConnectionProfile.self, from: data)
+                }
+                cache[key] = profile
+            } catch let e {
+                log.warning("Could not decode profile JSON: \(e)")
+                return nil
+            }
+        }
+        return profile
+    }
+    
+    func ids(forContext context: Context) -> [String] {
+        return cache.keys.filter { $0.context == context }.map { $0.id }
+    }
+    
+    private static func profileId(fromURL url: URL) -> String? {
+        let filename = url.lastPathComponent
+        guard let extRange = filename.range(of: ".json") else {
+            return nil
+        }
+        return String(filename[filename.startIndex..<extRange.lowerBound])
+    }
+    
+    private static func url(in directory: URL, forProfileId profileId: String) -> URL {
+        return directory.appendingPathComponent("\(profileId).json")
+    }
+    
     // MARK: Profiles
-    
-    func profileIds() -> [String] {
-        return Array(profiles.keys)
-    }
-    
-    func profile(withId id: String) -> ConnectionProfile? {
-        return profiles[id]
-    }
-    
+
     func addProfile(_ profile: ConnectionProfile, credentials: Credentials?) -> Bool {
-        guard profiles.index(forKey: profile.id) == nil else {
+        guard cache.index(forKey: ProfileKey(profile)) == nil else {
             return false
         }
         addOrReplaceProfile(profile, credentials: credentials)
@@ -160,37 +324,51 @@ class ConnectionService: Codable {
     }
     
     func addOrReplaceProfile(_ profile: ConnectionProfile, credentials: Credentials?) {
-        profiles[profile.id] = profile
+        let key = ProfileKey(profile)
+        cache[key] = profile
+        pendingRemoval.remove(key)
         try? setCredentials(credentials, for: profile)
-        if profiles.count == 1 {
-            activeProfileId = profile.id
+        if cache.count == 1 {
+            activeProfileKey = key
         }
+
+        // serialize immediately
+        try? saveProfiles()
     }
     
-    func removeProfile(_ profile: ConnectionProfile) {
-        guard let i = profiles.index(forKey: profile.id) else {
+    func removeProfile(_ key: ProfileKey) {
+        guard let i = cache.index(forKey: key) else {
             return
         }
-        profiles.remove(at: i)
-        if profiles.isEmpty {
-            activeProfileId = nil
+        cache.remove(at: i)
+        pendingRemoval.insert(key)
+        if cache.isEmpty {
+            activeProfileKey = nil
         }
     }
     
+    func containsProfile(_ key: ProfileKey) -> Bool {
+        return cache.index(forKey: key) != nil
+    }
+
     func containsProfile(_ profile: ConnectionProfile) -> Bool {
-        return profiles.index(forKey: profile.id) != nil
+        return containsProfile(ProfileKey(profile))
     }
-
+    
     func hasActiveProfile() -> Bool {
-        return activeProfileId != nil
+        return activeProfileKey != nil
     }
 
+    func isActiveProfile(_ key: ProfileKey) -> Bool {
+        return key == activeProfileKey
+    }
+    
     func isActiveProfile(_ profile: ConnectionProfile) -> Bool {
-        return profile.id == activeProfileId
+        return isActiveProfile(ProfileKey(profile))
     }
     
     func activateProfile(_ profile: ConnectionProfile) {
-        activeProfileId = profile.id
+        activeProfileKey = ProfileKey(profile)
     }
     
     // MARK: Credentials
@@ -290,4 +468,35 @@ class ConnectionService: Codable {
 //    func eraseVpnLog() {
 //        defaults.removeObject(forKey: Keys.vpnLog)
 //    }
+}
+
+private class PlaceholderConnectionProfile: ConnectionProfile {
+    let context: Context
+    
+    let id: String
+    
+    var username: String?
+    
+    var requiresCredentials: Bool = false
+    
+    func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
+        fatalError("Generating configuration from a PlaceholderConnectionProfile")
+    }
+    
+    var mainAddress: String = ""
+    
+    var addresses: [String] = []
+    
+    var protocols: [TunnelKitProvider.EndpointProtocol] = []
+    
+    var canCustomizeEndpoint: Bool = false
+    
+    var customAddress: String?
+    
+    var customProtocol: TunnelKitProvider.EndpointProtocol?
+
+    init(_ key: ConnectionService.ProfileKey) {
+        self.context = key.context
+        self.id = key.id
+    }
 }

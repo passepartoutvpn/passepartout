@@ -58,7 +58,6 @@
 		0EBE3AA1213DC1A100BFA2F5 /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */; };
 		0EBE3AA5213DC1B000BFA2F5 /* HostConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */; };
 		0EBE3AA6213DC1B000BFA2F5 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
-		0EBE3AAC213DEB8800BFA2F5 /* ConnectionProfileHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AAB213DEB8800BFA2F5 /* ConnectionProfileHolder.swift */; };
 		0EC7F20520E24308004EA58E /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7F20420E24308004EA58E /* DebugLog.swift */; };
 		0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44D20E1122200A6BB43 /* TableModel.swift */; };
 		0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */; };
@@ -178,7 +177,6 @@
 		0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionService.swift; sourceTree = "<group>"; };
 		0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostConnectionProfile.swift; sourceTree = "<group>"; };
 		0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderConnectionProfile.swift; sourceTree = "<group>"; };
-		0EBE3AAB213DEB8800BFA2F5 /* ConnectionProfileHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionProfileHolder.swift; sourceTree = "<group>"; };
 		0EC7F20420E24308004EA58E /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		0ECEE44D20E1122200A6BB43 /* TableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
 		0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Cells.swift"; sourceTree = "<group>"; };
@@ -383,7 +381,6 @@
 			children = (
 				0EBE3AA2213DC1B000BFA2F5 /* Profiles */,
 				0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */,
-				0EBE3AAB213DEB8800BFA2F5 /* ConnectionProfileHolder.swift */,
 				0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */,
 				0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */,
 				0EDE8DE620C93945004C739C /* Credentials.swift */,
@@ -851,7 +848,6 @@
 				0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */,
 				0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */,
 				0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */,
-				0EBE3AAC213DEB8800BFA2F5 /* ConnectionProfileHolder.swift in Sources */,
 				0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */,
 				0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */,
 				0E39BCF0214B9EF10035E9DE /* WebServices.swift in Sources */,

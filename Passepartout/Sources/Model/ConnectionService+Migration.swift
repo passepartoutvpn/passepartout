@@ -46,19 +46,25 @@ extension ConnectionService {
         }
 
         // replace migration logic here
+        // TODO: remove this code after 1.0 release
         let build = json["build"] as? Int ?? 0
         if build <= 1084 {
             try migrateToWrappedSessionConfiguration(&json)
             try migrateToBaseConfiguration(&json)
             try migrateToBuildNumber(&json)
+            try migrateHostProfileConfigurations()
+            try migrateSplitProfileSerialization(&json)
         }
 
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
+    
+    // MARK: Atomic migrations
 
     static func migrateToWrappedSessionConfiguration(_ json: inout [String: Any]) throws {
         guard let profiles = json["profiles"] as? [[String: Any]] else {
-            throw ApplicationError.migration
+            // migrated
+            return
         }
         var newProfiles: [[String: Any]] = []
         for var container in profiles {
@@ -83,6 +89,7 @@ extension ConnectionService {
     
     static func migrateToBaseConfiguration(_ json: inout [String: Any]) throws {
         guard var baseConfiguration = json["tunnelConfiguration"] as? [String: Any] else {
+            // migrated
             return
         }
         migrateSessionConfiguration(in: &baseConfiguration)
@@ -94,6 +101,74 @@ extension ConnectionService {
         json["build"] = GroupConstants.App.buildNumber
     }
 
+    static func migrateHostProfileConfigurations() throws {
+        let fm = FileManager.default
+        let oldDirectory = fm.userURL(for: .documentDirectory, appending: "Configurations")
+        guard fm.fileExists(atPath: oldDirectory.path) else {
+            return
+        }
+        
+        let newDirectory = fm.userURL(for: .documentDirectory, appending: AppConstants.Store.hostsDirectory)
+        try fm.moveItem(at: oldDirectory, to: newDirectory)
+        let list = try fm.contentsOfDirectory(at: newDirectory, includingPropertiesForKeys: nil, options: [])
+        let prefix = "host."
+        for url in list {
+            let filename = url.lastPathComponent
+            guard filename.hasPrefix(prefix) else {
+                continue
+            }
+            let postPrefixIndex = filename.index(filename.startIndex, offsetBy: prefix.count)
+            let newFilename = String(filename[postPrefixIndex..<filename.endIndex])
+            var newURL = url
+            newURL.deleteLastPathComponent()
+            newURL.appendPathComponent(newFilename)
+            try fm.moveItem(at: url, to: newURL)
+        }
+    }
+    
+    static func migrateSplitProfileSerialization(_ json: inout [String: Any]) throws {
+        guard let profiles = json["profiles"] as? [[String: Any]] else {
+            return
+        }
+
+        let fm = FileManager.default
+        let providersParentURL = fm.userURL(for: .documentDirectory, appending: AppConstants.Store.providersDirectory)
+        let hostsParentURL = fm.userURL(for: .documentDirectory, appending: AppConstants.Store.hostsDirectory)
+        try? fm.createDirectory(at: providersParentURL, withIntermediateDirectories: false, attributes: nil)
+        try? fm.createDirectory(at: hostsParentURL, withIntermediateDirectories: false, attributes: nil)
+
+        for p in profiles {
+            if var provider = p["provider"] as? [String: Any] {
+                guard let id = provider["name"] as? String else {
+                    continue
+                }
+//                provider["id"] = id
+//                provider.removeValue(forKey: "name")
+        
+                let url = providersParentURL.appendingPathComponent("\(id).json")
+                let data = try JSONSerialization.data(withJSONObject: provider, options: [])
+                try data.write(to: url)
+            } else if var host = p["host"] as? [String: Any] {
+                guard let id = host["title"] as? String else {
+                    continue
+                }
+//                host["id"] = id
+//                host.removeValue(forKey: "title")
+
+                let url = hostsParentURL.appendingPathComponent("\(id).json")
+                let data = try JSONSerialization.data(withJSONObject: host, options: [])
+                try data.write(to: url)
+            }
+        }
+        
+        guard let activeProfileId = json["activeProfileId"] else {
+            return
+        }
+        json["activeProfileKey"] = activeProfileId
+        json.removeValue(forKey: "activeProfileId")
+        json.removeValue(forKey: "profiles")
+    }
+    
     // MARK: Helpers
     
     private static func migrateSessionConfiguration(in map: inout [String: Any]) {
@@ -124,5 +199,8 @@ extension ConnectionService {
             sessionConfiguration["renegotiatesAfter"] = value
         }
         map["sessionConfiguration"] = sessionConfiguration
+
+        map.removeValue(forKey: "debugLogKey")
+        map.removeValue(forKey: "lastErrorKey")
     }
 }
