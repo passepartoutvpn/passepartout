@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import TunnelKit
 import MessageUI
 
 class IssueReporter: NSObject {
@@ -86,8 +87,15 @@ class IssueReporter: NSObject {
             let attachment = DebugLog(raw: raw).decoratedData()
             vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.debugLog, fileName: AppConstants.IssueReporter.Filenames.debugLog)
         }
-        if let cfg = configurationURL, let attachment = try? Data(contentsOf: cfg) {
-            vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.configuration, fileName: AppConstants.IssueReporter.Filenames.configuration)
+        if let url = configurationURL {
+            var lines: [String] = []
+            do {
+                _ = try TunnelKitProvider.Configuration.parsed(from: url, stripped: &lines)
+                if let attachment = lines.joined(separator: "\n").data(using: .utf8) {
+                    vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.configuration, fileName: AppConstants.IssueReporter.Filenames.configuration)
+                }
+            } catch {
+            }
         }
         vc.mailComposeDelegate = self
         vc.apply(Theme.current)
