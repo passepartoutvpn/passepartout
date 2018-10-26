@@ -301,7 +301,7 @@ internal enum L10n {
   }
 
   internal enum IssueReporter {
-    /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.
+    /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the email attachments if unsure.
     internal static let message = L10n.tr("Localizable", "issue_reporter.message")
     /// Report issue
     internal static let title = L10n.tr("Localizable", "issue_reporter.title")

@@ -173,7 +173,7 @@
 "vpn.errors.network" = "Network changed";
 
 "issue_reporter.title" = "Report issue";
-"issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.";
+"issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the email attachments if unsure.";
 "issue_reporter.buttons.accept" = "I understand";
 "issue_reporter.alerts.email_not_configured.message" = "No e-mail account is configured.";
 "issue_reporter.email.subject" = "%@ - Report issue";
