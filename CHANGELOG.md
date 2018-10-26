@@ -5,12 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 1.0 beta 1107 (2018-10-26)
 
 ### Changed
 
 - Host parameters are read-only if there isn't an original configuration to revert to.
 - Overall serialization performance.
+
+WARNING: this build *should not* but *might* erase all your profiles!
 
 ## 1.0 beta 1084 (2018-10-24)
 
