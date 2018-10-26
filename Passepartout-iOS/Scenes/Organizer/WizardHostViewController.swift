@@ -159,8 +159,8 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
         }
         if let url = parsedFile?.url {
             do {
-                let savedUrl = try ProfileConfigurationFactory.shared.save(url: url, for: profile)
-                log.debug("Associated .ovpn configuration file to profile '\(profile.id)': \(savedUrl)")
+                let savedURL = try TransientStore.shared.service.save(configurationURL: url, for: profile)
+                log.debug("Associated .ovpn configuration file to profile '\(profile.id)': \(savedURL)")
             } catch let e {
                 log.error("Could not associate .ovpn configuration file to profile: \(e)")
             }
