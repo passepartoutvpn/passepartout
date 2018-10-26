@@ -34,7 +34,8 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
         let url: URL
 
         var filename: String {
-            return url.deletingPathExtension().lastPathComponent
+            let raw = url.deletingPathExtension().lastPathComponent
+            return raw.components(separatedBy: AppConstants.Store.filenameCharset.inverted).joined(separator: "_")
         }
 
         let hostname: String
@@ -215,6 +216,7 @@ extension WizardHostViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
+            cell.allowedCharset = AppConstants.Store.filenameCharset
             cell.field.placeholder = L10n.Wizards.Host.Cells.TitleInput.placeholder
             cell.field.clearButtonMode = .always
             cell.field.returnKeyType = .done
