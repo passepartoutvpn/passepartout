@@ -30,9 +30,9 @@ import UIKit
 class OrganizerViewController: UITableViewController, TableModelHost {
     private let service = TransientStore.shared.service
     
-    private var providerProfiles: [ProviderConnectionProfile] = []
+    private var providers: [String] = []
 
-    private var hostProfiles: [HostConnectionProfile] = []
+    private var hosts: [String] = []
     
     private var availableProviderNames: [Infrastructure.Name]?
 
@@ -56,29 +56,16 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }()
     
     func reloadModel() {
-        providerProfiles.removeAll()
-        hostProfiles.removeAll()
+        providers = service.ids(forContext: .provider).sorted()
+        hosts = service.ids(forContext: .host).sorted()
         
-        service.profileIds().forEach {
-            let profile = service.profile(withId: $0)
-            if let p = profile as? ProviderConnectionProfile {
-                providerProfiles.append(p)
-            } else if let p = profile as? HostConnectionProfile {
-                hostProfiles.append(p)
-            } else {
-                fatalError("Unexpected profile type \(type(of: profile))")
-            }
-        }
-        providerProfiles.sort { $0.name.rawValue < $1.name.rawValue }
-        hostProfiles.sort { $0.title < $1.title }
+        var providerRows = [RowType](repeating: .profile, count: providers.count)
+        var hostRows = [RowType](repeating: .profile, count: hosts.count)
+        providerRows.append(.addProvider)
+        hostRows.append(.addHost)
         
-        var providers = [RowType](repeating: .profile, count: providerProfiles.count)
-        var hosts = [RowType](repeating: .profile, count: hostProfiles.count)
-        providers.append(.addProvider)
-        hosts.append(.addHost)
-        
-        model.set(providers, in: .providers)
-        model.set(hosts, in: .hosts)
+        model.set(providerRows, in: .providers)
+        model.set(hostRows, in: .hosts)
     }
     
     // MARK: UIViewController
@@ -163,7 +150,13 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     
     private func addNewProvider() {
         var names = Set(InfrastructureFactory.shared.allNames)
-        let createdNames = providerProfiles.map { $0.name }
+        var createdNames: [Infrastructure.Name] = []
+        providers.forEach {
+            guard let name = Infrastructure.Name(rawValue: $0) else {
+                return
+            }
+            createdNames.append(name)
+        }
         names.formSymmetricDifference(createdNames)
 
         guard !names.isEmpty else {
@@ -191,13 +184,13 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 
     private func removeProfile(at indexPath: IndexPath) {
         let sectionObject = model.section(for: indexPath.section)
-        let rowProfile = profile(at: indexPath)
+        let rowProfile = profileKey(at: indexPath)
         switch sectionObject {
         case .providers:
-            providerProfiles.remove(at: indexPath.row)
+            providers.remove(at: indexPath.row)
             
         case .hosts:
-            hostProfiles.remove(at: indexPath.row)
+            hosts.remove(at: indexPath.row)
             
         default:
             return
@@ -205,7 +198,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         
 //        var fallbackSection: SectionType?
         
-        let total = providerProfiles.count + hostProfiles.count
+        let total = providers.count + hosts.count
         
         // removed all profiles
         if total == 0 {
@@ -280,14 +273,19 @@ extension OrganizerViewController {
     }
     
     private var selectedIndexPath: IndexPath? {
-        guard let active = service.activeProfile?.id else {
+        guard let active = service.activeProfileKey else {
             return nil
         }
-        if let row = providerProfiles.index(where: { $0.id == active }) {
-            return IndexPath(row: row, section: 0)
-        }
-        if let row = hostProfiles.index(where: { $0.id == active }) {
-            return IndexPath(row: row, section: 1)
+        switch active.context {
+        case .provider:
+            if let row = providers.index(where: { $0 == active.id }) {
+                return IndexPath(row: row, section: 0)
+            }
+
+        case .host:
+            if let row = hosts.index(where: { $0 == active.id }) {
+                return IndexPath(row: row, section: 1)
+            }
         }
         return nil
     }
@@ -312,7 +310,7 @@ extension OrganizerViewController {
         switch model.row(at: indexPath) {
         case .profile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            let rowProfile = profile(at: indexPath)
+            let rowProfile = profileKey(at: indexPath)
             cell.leftText = rowProfile.id
             cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Organizer.Cells.Profile.Value.current : nil
             return cell
@@ -375,27 +373,57 @@ extension OrganizerViewController {
     
     // MARK: Helpers
     
-    private func sectionProfiles(at indexPath: IndexPath) -> [ConnectionProfile] {
-        let sectionProfiles: [ConnectionProfile]
+    private func sectionProfiles(at indexPath: IndexPath) -> [String] {
+        let ids: [String]
         let sectionObject = model.section(for: indexPath.section)
         switch sectionObject {
         case .providers:
-            sectionProfiles = providerProfiles
+            ids = providers
             
         case .hosts:
-            sectionProfiles = hostProfiles
+            ids = hosts
             
         default:
             fatalError("Unexpected section: \(sectionObject)")
         }
-        guard indexPath.row < sectionProfiles.count else {
+        guard indexPath.row < ids.count else {
             fatalError("No profile found at \(indexPath), is it an add cell?")
         }
-        return sectionProfiles
+        return ids
     }
     
+    private func profileKey(at indexPath: IndexPath) -> ConnectionService.ProfileKey {
+        let section = model.section(for: indexPath.section)
+        switch section {
+        case .providers:
+            return ConnectionService.ProfileKey(.provider, providers[indexPath.row])
+            
+        case .hosts:
+            return ConnectionService.ProfileKey(.host, hosts[indexPath.row])
+            
+        default:
+            fatalError("Profile found in unexpected section: \(section)")
+        }
+    }
+
     private func profile(at indexPath: IndexPath) -> ConnectionProfile {
-        return sectionProfiles(at: indexPath)[indexPath.row]
+        let id = sectionProfiles(at: indexPath)[indexPath.row]
+        let section = model.section(for: indexPath.section)
+        let context: ConnectionService.ProfileKey.Context
+        switch section {
+        case .providers:
+            context = .provider
+            
+        case .hosts:
+            context = .host
+            
+        default:
+            fatalError("Profile found in unexpected section: \(section)")
+        }
+        guard let found = service.profile(withContext: context, id: id) else {
+            fatalError("Profile (\(context), \(id)) could not be found, why was it returned?")
+        }
+        return found
     }
 }
 

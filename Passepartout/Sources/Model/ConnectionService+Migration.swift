@@ -160,6 +160,13 @@ extension ConnectionService {
                 try data.write(to: url)
             }
         }
+        
+        guard let activeProfileId = json["activeProfileId"] else {
+            return
+        }
+        json["activeProfileKey"] = activeProfileId
+        json.removeValue(forKey: "activeProfileId")
+        json.removeValue(forKey: "profiles")
     }
     
     // MARK: Helpers

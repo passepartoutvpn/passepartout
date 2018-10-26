@@ -35,10 +35,12 @@ class TransientStore {
     
     static let shared = TransientStore()
     
-    private let servicePath: URL
+    private let rootURL: URL
+
+    private let serviceURL: URL
     
     let service: ConnectionService
-    
+
     var didHandleSubreddit: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Keys.didHandleSubreddit)
@@ -49,27 +51,29 @@ class TransientStore {
     }
 
     private init() {
-        servicePath = FileManager.default.userURL(
-            for: .documentDirectory,
-            appending: AppConstants.Store.serviceFilename
-        )
+        rootURL = FileManager.default.userURL(for: .documentDirectory, appending: nil)
+        serviceURL = rootURL.appendingPathComponent(AppConstants.Store.serviceFilename)
+
         let cfg = AppConstants.VPN.baseConfiguration()
         do {
-            ConnectionService.migrateJSON(at: servicePath, to: servicePath)
+            ConnectionService.migrateJSON(at: serviceURL, to: serviceURL)
             
-            let data = try Data(contentsOf: servicePath)
+            let data = try Data(contentsOf: serviceURL)
             if let content = String(data: data, encoding: .utf8) {
                 log.verbose("Service JSON:")
                 log.verbose(content)
             }
             service = try JSONDecoder().decode(ConnectionService.self, from: data)
+            service.directory = rootURL
             service.baseConfiguration = cfg
+            service.loadProfiles()
         } catch let e {
             log.error("Could not decode service: \(e)")
             service = ConnectionService(
                 withAppGroup: GroupConstants.App.appGroup,
                 baseConfiguration: cfg
             )
+            service.directory = rootURL
 
 //            // hardcoded loading
 //            _ = service.addProfile(ProviderConnectionProfile(name: .pia), credentials: nil)
@@ -79,6 +83,7 @@ class TransientStore {
     }
     
     func serialize() {
-        try? JSONEncoder().encode(service).write(to: servicePath)
+        try? JSONEncoder().encode(service).write(to: serviceURL)
+        try? service.saveProfiles()
     }
 }
