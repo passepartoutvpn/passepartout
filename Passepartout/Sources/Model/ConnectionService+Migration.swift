@@ -58,7 +58,8 @@ extension ConnectionService {
 
     static func migrateToWrappedSessionConfiguration(_ json: inout [String: Any]) throws {
         guard let profiles = json["profiles"] as? [[String: Any]] else {
-            throw ApplicationError.migration
+            // migrated
+            return
         }
         var newProfiles: [[String: Any]] = []
         for var container in profiles {
@@ -83,6 +84,7 @@ extension ConnectionService {
     
     static func migrateToBaseConfiguration(_ json: inout [String: Any]) throws {
         guard var baseConfiguration = json["tunnelConfiguration"] as? [String: Any] else {
+            // migrated
             return
         }
         migrateSessionConfiguration(in: &baseConfiguration)
@@ -124,5 +126,8 @@ extension ConnectionService {
             sessionConfiguration["renegotiatesAfter"] = value
         }
         map["sessionConfiguration"] = sessionConfiguration
+
+        map.removeValue(forKey: "debugLogKey")
+        map.removeValue(forKey: "lastErrorKey")
     }
 }
