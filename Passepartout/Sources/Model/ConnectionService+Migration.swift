@@ -53,6 +53,7 @@ extension ConnectionService {
             try migrateToBaseConfiguration(&json)
             try migrateToBuildNumber(&json)
             try migrateHostProfileConfigurations()
+            try migrateSplitProfileSerialization(&json)
         }
 
         return try JSONSerialization.data(withJSONObject: json, options: [])
@@ -122,6 +123,42 @@ extension ConnectionService {
             newURL.deleteLastPathComponent()
             newURL.appendPathComponent(newFilename)
             try fm.moveItem(at: url, to: newURL)
+        }
+    }
+    
+    static func migrateSplitProfileSerialization(_ json: inout [String: Any]) throws {
+        guard let profiles = json["profiles"] as? [[String: Any]] else {
+            return
+        }
+
+        let fm = FileManager.default
+        let providersParentURL = fm.userURL(for: .documentDirectory, appending: AppConstants.Store.providersDirectory)
+        let hostsParentURL = fm.userURL(for: .documentDirectory, appending: AppConstants.Store.hostsDirectory)
+        try? fm.createDirectory(at: providersParentURL, withIntermediateDirectories: false, attributes: nil)
+        try? fm.createDirectory(at: hostsParentURL, withIntermediateDirectories: false, attributes: nil)
+
+        for p in profiles {
+            if var provider = p["provider"] as? [String: Any] {
+                guard let id = provider["name"] as? String else {
+                    continue
+                }
+//                provider["id"] = id
+//                provider.removeValue(forKey: "name")
+        
+                let url = providersParentURL.appendingPathComponent("\(id).json")
+                let data = try JSONSerialization.data(withJSONObject: provider, options: [])
+                try data.write(to: url)
+            } else if var host = p["host"] as? [String: Any] {
+                guard let id = host["title"] as? String else {
+                    continue
+                }
+//                host["id"] = id
+//                host.removeValue(forKey: "title")
+
+                let url = hostsParentURL.appendingPathComponent("\(id).json")
+                let data = try JSONSerialization.data(withJSONObject: host, options: [])
+                try data.write(to: url)
+            }
         }
     }
     
