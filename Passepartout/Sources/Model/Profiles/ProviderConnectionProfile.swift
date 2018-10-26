@@ -92,6 +92,8 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     // MARK: ConnectionProfile
     
+    let context: Context = .provider
+
     var id: String {
         return name.rawValue
     }

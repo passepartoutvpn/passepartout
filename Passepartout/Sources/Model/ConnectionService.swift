@@ -50,12 +50,6 @@ class ConnectionService: Codable {
     }
 
     struct ProfileKey: RawRepresentable, Hashable, Codable {
-        enum Context: String {
-            case provider
-            
-            case host
-        }
-        
         let context: Context
         
         let id: String
@@ -66,15 +60,7 @@ class ConnectionService: Codable {
         }
 
         init(_ profile: ConnectionProfile) {
-            if let _ = profile as? ProviderConnectionProfile {
-                context = .provider
-            } else if let _ = profile as? HostConnectionProfile {
-                context = .host
-            } else if let placeholder = profile as? PlaceholderConnectionProfile {
-                context = placeholder.context
-            } else {
-                fatalError("Unexpected profile type: \(type(of: profile))")
-            }
+            context = profile.context
             id = profile.id
         }
         
@@ -288,7 +274,7 @@ class ConnectionService: Codable {
         }
     }
     
-    func profile(withContext context: ProfileKey.Context, id: String) -> ConnectionProfile? {
+    func profile(withContext context: Context, id: String) -> ConnectionProfile? {
         let key = ProfileKey(context, id)
         var profile = cache[key]
         if let _ = profile as? PlaceholderConnectionProfile {
@@ -311,7 +297,7 @@ class ConnectionService: Codable {
         return profile
     }
     
-    func ids(forContext context: ProfileKey.Context) -> [String] {
+    func ids(forContext context: Context) -> [String] {
         return cache.keys.filter { $0.context == context }.map { $0.id }
     }
     
@@ -485,6 +471,8 @@ class ConnectionService: Codable {
 }
 
 private class PlaceholderConnectionProfile: ConnectionProfile {
+    let context: Context
+    
     let id: String
     
     var username: String?
@@ -507,8 +495,6 @@ private class PlaceholderConnectionProfile: ConnectionProfile {
     
     var customProtocol: TunnelKitProvider.EndpointProtocol?
 
-    let context: ConnectionService.ProfileKey.Context
-    
     init(_ key: ConnectionService.ProfileKey) {
         self.context = key.context
         self.id = key.id

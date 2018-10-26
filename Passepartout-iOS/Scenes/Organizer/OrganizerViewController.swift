@@ -409,7 +409,7 @@ extension OrganizerViewController {
     private func profile(at indexPath: IndexPath) -> ConnectionProfile {
         let id = sectionProfiles(at: indexPath)[indexPath.row]
         let section = model.section(for: indexPath.section)
-        let context: ConnectionService.ProfileKey.Context
+        let context: Context
         switch section {
         case .providers:
             context = .provider
