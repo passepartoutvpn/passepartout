@@ -108,7 +108,7 @@ class AppConstants {
         static func configure() {
             let console = ConsoleDestination()
             console.useNSLog = true
-            console.minLevel = .verbose
+            console.minLevel = .debug
             SwiftyBeaver.addDestination(console)
         }
     }
