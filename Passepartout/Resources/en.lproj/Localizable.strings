@@ -58,6 +58,8 @@
 "parsed_file.alerts.parsing.message" = "Unable to parse the provided configuration file (%@).";
 "parsed_file.alerts.buttons.report" = "Report an issue";
 
+"imported_hosts.title" = "Imported";
+
 "service.welcome.message" = "Welcome to Passepartout!\n\nUse the organizer to add a new profile.";
 "service.sections.general.header" = "General";
 "service.sections.vpn.header" = "VPN";

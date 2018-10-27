@@ -300,6 +300,11 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
   }
 
+  internal enum ImportedHosts {
+    /// Imported
+    internal static let title = L10n.tr("Localizable", "imported_hosts.title")
+  }
+
   internal enum IssueReporter {
     /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the email attachments if unsure.
     internal static let message = L10n.tr("Localizable", "issue_reporter.message")
