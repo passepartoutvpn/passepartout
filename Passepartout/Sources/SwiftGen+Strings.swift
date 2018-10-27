@@ -343,7 +343,7 @@ internal enum L10n {
     internal enum Alerts {
 
       internal enum AddHost {
-        /// Open an URL to an .ovpn configuration file from Safari, Mail or another app to set up a host profile.
+        /// Open an URL to an .ovpn configuration file from Safari, Mail or another app to set up a host profile.\n\nYou can also import an .ovpn with iTunes File Sharing.
         internal static let message = L10n.tr("Localizable", "organizer.alerts.add_host.message")
       }
 

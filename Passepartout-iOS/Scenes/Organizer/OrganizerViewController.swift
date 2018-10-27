@@ -174,12 +174,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
 
     private func addNewHost() {
-        let alert = Macros.alert(
-            L10n.Organizer.Sections.Hosts.header,
-            L10n.Organizer.Alerts.AddHost.message
-        )
-        alert.addCancelAction(L10n.Global.ok)
-        present(alert, animated: true, completion: nil)
+        perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
     }
 
     private func removeProfile(at indexPath: IndexPath) {
