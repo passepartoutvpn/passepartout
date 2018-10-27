@@ -99,4 +99,15 @@ extension ImportedHostsViewController {
         cell.leftText = url.normalizedFilename
         return cell
     }
+
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let url = pendingConfigurationURLs[indexPath.row]
+        try? FileManager.default.removeItem(at: url)
+        pendingConfigurationURLs.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .top)
+    }
 }
