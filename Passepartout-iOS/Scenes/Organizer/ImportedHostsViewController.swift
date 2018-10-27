@@ -33,6 +33,8 @@ class ImportedHostsViewController: UITableViewController {
     private lazy var pendingConfigurationURLs = TransientStore.shared.service.pendingConfigurationURLs()
     
     private var parsedFile: ParsedFile?
+    
+    weak var wizardDelegate: WizardDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +77,7 @@ class ImportedHostsViewController: UITableViewController {
             return
         }
         wizard.parsedFile = parsedFile
+        wizard.delegate = wizardDelegate
     }
     
     @IBAction private func close() {

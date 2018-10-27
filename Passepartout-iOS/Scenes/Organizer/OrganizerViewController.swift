@@ -139,6 +139,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
                 providerVC.availableNames = availableProviderNames ?? []
             }
             vc.delegate = self
+        } else if let vc = destination as? ImportedHostsViewController {
+            vc.wizardDelegate = self
         }
     }
 
