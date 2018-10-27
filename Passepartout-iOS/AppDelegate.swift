@@ -115,6 +115,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
         // already presented: update parsed configuration
         if let nav = target as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
+            if let oldURL = wizard.parsedFile?.url {
+                try? FileManager.default.removeItem(at: oldURL)
+            }
             wizard.parsedFile = parsedFile
             wizard.removesConfigurationOnCancel = true
             return

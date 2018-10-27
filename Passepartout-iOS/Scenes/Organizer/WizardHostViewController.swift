@@ -87,12 +87,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
     // MARK: Actions
     
     private func useSuggestedTitle() {
-        guard let field = cellTitle?.field else {
-            return
-        }
-        if field.text?.isEmpty ?? true {
-            field.text = parsedFile?.url.normalizedFilename
-        }
+        cellTitle?.field.text = parsedFile?.url.normalizedFilename
     }
     
     @IBAction private func next() {
