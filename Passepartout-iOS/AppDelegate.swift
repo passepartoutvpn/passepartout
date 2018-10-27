@@ -95,12 +95,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             try? fm.removeItem(at: url)
             return true
         }
+        handleParsedFile(parsedFile, in: root)
+        return true
+    }
+    
+    private func handleParsedFile(_ parsedFile: ParsedFile, in root: UIViewController) {
 
         // already presented: update parsed configuration
         if let nav = root.presentedViewController as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
             wizard.parsedFile = parsedFile
             wizard.removesConfigurationOnCancel = true
-            return true
+            return
         }
 
         // present now
@@ -121,7 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         nav.modalPresentationStyle = .formSheet
         root.present(nav, animated: true, completion: nil)
-        return true
     }
 }
 

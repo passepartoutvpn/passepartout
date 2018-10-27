@@ -432,6 +432,13 @@ internal enum L10n {
         }
       }
 
+      internal enum PotentiallyUnsupported {
+        /// The configuration file is correct but contains a potentially unsupported option (%@).\n\nConnectivity may break depending on server settings.
+        internal static func message(_ p1: String) -> String {
+          return L10n.tr("Localizable", "parsed_file.alerts.potentially_unsupported.message", p1)
+        }
+      }
+
       internal enum Unsupported {
         /// The configuration file contains an unsupported option (%@).
         internal static func message(_ p1: String) -> String {
