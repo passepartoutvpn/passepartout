@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Attach .ovpn when reporting a connectivity issue, stripped of sensitive data. [#13](https://github.com/keeshux/passepartout-ios/pull/13)
+- iTunes File Sharing (skythedesu). [#14](https://github.com/keeshux/passepartout-ios/pull/14)
 
 ## 1.0 beta 1107 (2018-10-26)
 
