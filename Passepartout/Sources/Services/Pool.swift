@@ -63,7 +63,7 @@ struct Pool: Codable, Comparable, CustomStringConvertible {
     // XXX: inefficient, can't easily use lazy on struct
     func addresses(sorted: Bool) -> [String] {
         var addrs = (sorted ? numericAddresses.sorted() : numericAddresses).map {
-            return DNSResolver.string(fromIPv4: $0.bigEndian)
+            return DNSResolver.string(fromIPv4: $0)
         }
         addrs.insert(hostname, at: 0)
         return addrs
