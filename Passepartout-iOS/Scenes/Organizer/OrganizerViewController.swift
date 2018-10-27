@@ -451,6 +451,20 @@ extension OrganizerViewController {
         reloadModel()
         tableView.reloadData()
 
+        // XXX: hack around bad replace when detail presented in compact view
+        if let detailNav = navigationController?.viewControllers.last as? UINavigationController {
+            var existingServiceVC: ServiceViewController?
+            for vc in detailNav.viewControllers {
+                if let found = vc as? ServiceViewController {
+                    existingServiceVC = found
+                    break
+                }
+            }
+            let serviceVC = existingServiceVC ?? (StoryboardScene.Main.serviceIdentifier.instantiate().topViewController as! ServiceViewController)
+            serviceVC.profile = profile
+            detailNav.setViewControllers([serviceVC], animated: true)
+            return
+        }
         perform(segue: StoryboardSegue.Organizer.selectProfileSegueIdentifier, sender: profile)
     }
 }
