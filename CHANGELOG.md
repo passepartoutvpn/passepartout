@@ -5,12 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 1.0 beta 1148 (2018-10-27)
 
 ### Added
 
 - Attach .ovpn when reporting a connectivity issue, stripped of sensitive data. [#13](https://github.com/keeshux/passepartout-ios/pull/13)
 - iTunes File Sharing (skythedesu). [#14](https://github.com/keeshux/passepartout-ios/pull/14)
+
+### Fixed
+
+- Warn about .ovpn containing potentially unsupported compression. [#16](https://github.com/keeshux/passepartout-ios/issues/16)
 
 ## 1.0 beta 1107 (2018-10-26)
 
