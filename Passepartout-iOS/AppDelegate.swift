@@ -90,7 +90,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             fatalError("No window.rootViewController?")
         }
 
+        let fm = FileManager.default
         guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: root) else {
+            try? fm.removeItem(at: url)
             return true
         }
 
