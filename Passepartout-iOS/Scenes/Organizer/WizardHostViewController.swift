@@ -36,7 +36,7 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
         return TransientStore.shared.service.ids(forContext: .host).sorted()
     }()
     
-    private var parsedFile: ParsedFile? {
+    var parsedFile: ParsedFile? {
         didSet {
             useSuggestedTitle()
         }
@@ -85,17 +85,6 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     }
     
     // MARK: Actions
-    
-    func setConfigurationURL(_ url: URL) throws {
-        log.debug("Parsing configuration URL: \(url)")
-        
-        do {
-            parsedFile = try TunnelKitProvider.Configuration.parsed(from: url)
-        } catch let e {
-            log.error("Could not parse .ovpn configuration file: \(e)")
-            throw e
-        }
-    }
     
     private func useSuggestedTitle() {
         guard let field = cellTitle?.field else {
