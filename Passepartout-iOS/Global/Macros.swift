@@ -33,10 +33,6 @@ class Macros {
     static func actionSheet(_ title: String?, _ message: String?) -> UIAlertController {
         return UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
     }
-
-    static var isDeviceNonPlus: Bool {
-        return (UI_USER_INTERFACE_IDIOM() == .phone) && (UIScreen.main.scale < 3.0)
-    }
 }
 
 extension UIAlertController {

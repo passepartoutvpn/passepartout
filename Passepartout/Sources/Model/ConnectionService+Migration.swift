@@ -45,7 +45,7 @@ extension ConnectionService {
             throw ApplicationError.migration
         }
 
-        // replace migration logic here
+        // put migration logic here
         // TODO: remove this code after 1.0 release
         let build = json["build"] as? Int ?? 0
         if build <= 1084 {
@@ -54,6 +54,11 @@ extension ConnectionService {
             try migrateToBuildNumber(&json)
             try migrateHostProfileConfigurations()
             try migrateSplitProfileSerialization(&json)
+        }
+        if build <= 1107 {
+            let fm = FileManager.default
+            let inbox = fm.userURL(for: .documentDirectory, appending: "Inbox")
+            try? fm.removeItem(at: inbox)
         }
 
         return try JSONSerialization.data(withJSONObject: json, options: [])
