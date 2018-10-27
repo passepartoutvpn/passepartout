@@ -41,6 +41,12 @@ class ImportedHostsViewController: UITableViewController {
 
         title = L10n.ImportedHosts.title
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        parsedFile = nil
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -56,22 +62,40 @@ class ImportedHostsViewController: UITableViewController {
             present(alert, animated: true, completion: nil)
             return
         }
+        if let selectedIP = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIP, animated: true)
+        }
     }
     
     // MARK: Actions
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
-            return false
-        }
-        let url = pendingConfigurationURLs[indexPath.row]
-        guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: self) else {
-            if let selectedIP = tableView.indexPathForSelectedRow {
-                tableView.deselectRow(at: selectedIP, animated: true)
+
+        // segue parses configuration file if not yet
+        if parsedFile == nil {
+            guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
+                return false
             }
-            return false
+            let url = pendingConfigurationURLs[indexPath.row]
+            guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: self) else {
+                deselectSelectedRow()
+                return false
+            }
+            self.parsedFile = parsedFile
+
+            // postpone segue until alert dismissal
+            if let warning = parsedFile.warning {
+                ParsedFile.alertImportWarning(url: url, in: self, withWarning: warning) {
+                    self.deselectSelectedRow()
+                    if $0 {
+                        self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
+                    } else {
+                        self.parsedFile = nil
+                    }
+                }
+                return false
+            }
         }
-        self.parsedFile = parsedFile
         return true
     }
     
@@ -85,6 +109,12 @@ class ImportedHostsViewController: UITableViewController {
     
     @IBAction private func close() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func deselectSelectedRow() {
+        if let selectedIP = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIP, animated: true)
+        }
     }
 }
 

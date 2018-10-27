@@ -95,6 +95,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             try? fm.removeItem(at: url)
             return true
         }
+        if let warning = parsedFile.warning {
+            ParsedFile.alertImportWarning(url: url, in: root, withWarning: warning) {
+                if $0 {
+                    self.handleParsedFile(parsedFile, in: root)
+                } else {
+                    try? fm.removeItem(at: url)
+                }
+            }
+            return true
+        }
         handleParsedFile(parsedFile, in: root)
         return true
     }

@@ -194,7 +194,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="oga-go-FqD" kind="show" id="kwN-PZ-Zg5"/>
+                                    <segue destination="oga-go-FqD" kind="show" identifier="ImportHostSegueIdentifier" id="kwN-PZ-Zg5"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -293,7 +293,7 @@
                     <connections>
                         <segue destination="NVA-bQ-iIE" kind="presentation" identifier="AddProviderSegueIdentifier" modalPresentationStyle="formSheet" id="Win-5U-mIc"/>
                         <segue destination="a3d-vD-Pr7" kind="presentation" identifier="AboutSegueIdentifier" id="fd4-we-46n"/>
-                        <segue destination="z6E-m6-Op0" kind="presentation" identifier="ImportHostSegueIdentifier" modalPresentationStyle="formSheet" id="TZv-OK-8vU"/>
+                        <segue destination="z6E-m6-Op0" kind="presentation" identifier="ShowImportedHostsSegueIdentifier" modalPresentationStyle="formSheet" id="TZv-OK-8vU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGp-H5-24W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -567,6 +567,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="HW6-RJ-VFY"/>
-        <segue reference="qQl-B5-moM"/>
+        <segue reference="kwN-PZ-Zg5"/>
     </inferredMetricsTieBreakers>
 </document>
