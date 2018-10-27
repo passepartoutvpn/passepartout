@@ -34,8 +34,6 @@ class ImportedHostsViewController: UITableViewController {
 
     private var parsedFile: ParsedFile?
     
-    weak var wizardDelegate: WizardDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -104,7 +102,6 @@ class ImportedHostsViewController: UITableViewController {
             return
         }
         wizard.parsedFile = parsedFile
-        wizard.delegate = wizardDelegate
 
         // retain back button
         wizard.navigationItem.leftBarButtonItem = nil

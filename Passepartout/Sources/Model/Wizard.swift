@@ -25,10 +25,12 @@
 
 import Foundation
 
-protocol Wizard: class {
-    var delegate: WizardDelegate? { get set }
+extension Notification.Name {
+    static let WizardDidCreate = Notification.Name("WizardDidCreate")
 }
 
-protocol WizardDelegate: class {
-    func wizard(didCreate profile: ConnectionProfile, withCredentials credentials: Credentials)
+enum WizardCreationKey: String {
+    case profile
+    
+    case credentials
 }

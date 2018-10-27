@@ -69,6 +69,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
     
     // MARK: UIViewController
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -90,6 +94,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         }
 
         service.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(wizardDidCreate(notification:)), name: .WizardDidCreate, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -134,13 +140,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             assert(selectedProfile != nil, "No selected profile")
 
             vc.profile = selectedProfile
-        } else if let vc = destination as? Wizard {
-            if let providerVC = vc as? WizardProviderViewController {
-                providerVC.availableNames = availableProviderNames ?? []
-            }
-            vc.delegate = self
-        } else if let vc = destination as? ImportedHostsViewController {
-            vc.wizardDelegate = self
+        } else if let providerVC = destination as? WizardProviderViewController {
+            providerVC.availableNames = availableProviderNames ?? []
         }
     }
 
@@ -436,8 +437,14 @@ extension OrganizerViewController: ConnectionServiceDelegate {
     }
 }
 
-extension OrganizerViewController: WizardDelegate {
-    func wizard(didCreate profile: ConnectionProfile, withCredentials credentials: Credentials) {
+extension OrganizerViewController {
+    @objc private func wizardDidCreate(notification: Notification) {
+        guard let profile = notification.userInfo?[WizardCreationKey.profile] as? ConnectionProfile,
+            let credentials = notification.userInfo?[WizardCreationKey.credentials] as? Credentials else {
+            
+            fatalError("WizardDidCreate notification must post profile and credentials")
+        }
+
         service.addOrReplaceProfile(profile, credentials: credentials)
         TransientStore.shared.serialize() // add
 

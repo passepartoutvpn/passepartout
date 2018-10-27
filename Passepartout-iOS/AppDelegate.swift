@@ -126,14 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         wizard.parsedFile = parsedFile
         wizard.removesConfigurationOnCancel = true
 
-        // best effort to delegate to main vc
-        let split = root as? UISplitViewController
-        let master = split?.viewControllers.first as? UINavigationController
-        master?.viewControllers.forEach {
-            if let organizerVC = $0 as? OrganizerViewController {
-                wizard.delegate = organizerVC
-            }
-        }
         nav.modalPresentationStyle = .formSheet
         root.present(nav, animated: true, completion: nil)
     }

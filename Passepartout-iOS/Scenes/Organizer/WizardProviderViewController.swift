@@ -25,12 +25,10 @@
 
 import UIKit
 
-class WizardProviderViewController: UITableViewController, Wizard {
+class WizardProviderViewController: UITableViewController {
     var availableNames: [Infrastructure.Name] = []
     
     private var createdProfile: ProviderConnectionProfile?
-
-    weak var delegate: WizardDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +53,10 @@ class WizardProviderViewController: UITableViewController, Wizard {
             fatalError("No profile created?")
         }
         dismiss(animated: true) {
-            self.delegate?.wizard(didCreate: profile, withCredentials: credentials)
+            NotificationCenter.default.post(name: .WizardDidCreate, object: nil, userInfo: [
+                WizardCreationKey.profile: profile,
+                WizardCreationKey.credentials: credentials
+            ])
         }
     }
 
