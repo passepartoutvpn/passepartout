@@ -296,9 +296,12 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             fatalError("Table should not allow selection when isEditable is false")
         }
         
+        let settingCell = tableView.cellForRow(at: indexPath) as? SettingTableViewCell
+        
         switch model.row(at: indexPath) {
         case .cipher:
             let vc = OptionViewController<SessionProxy.Cipher>()
+            vc.title = settingCell?.leftText
             vc.options = [.aes128cbc, .aes192cbc, .aes256cbc, .aes128gcm, .aes192gcm, .aes256gcm]
             vc.selectedOption = configuration.cipher
             vc.descriptionBlock = { $0.description }
@@ -314,6 +317,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             }
             
             let vc = OptionViewController<SessionProxy.Digest>()
+            vc.title = settingCell?.leftText
             vc.options = [.sha1, .sha224, .sha256, .sha384, .sha512]
             vc.selectedOption = configuration.digest
             vc.descriptionBlock = { $0.description }
@@ -325,6 +329,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case .compressionFrame:
             let vc = OptionViewController<SessionProxy.CompressionFraming>()
+            vc.title = settingCell?.leftText
             vc.options = [.disabled, .compLZO, .compress]
             vc.selectedOption = configuration.compressionFraming
             vc.descriptionBlock = { $0.cellDescription }
