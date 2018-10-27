@@ -49,6 +49,7 @@
 		0EA068F4218475F800C320AD /* ParsedFile+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ParsedFile+Alerts.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
+		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
 		0EBBE8F221822B4D00106008 /* ConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */; };
 		0EBBE8F321822B4D00106008 /* ConnectionService.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F121822B4D00106008 /* ConnectionService.json */; };
 		0EBBE8F52182361800106008 /* ConnectionService+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */; };
@@ -169,6 +170,7 @@
 		0E8D97E421389276006FB4A0 /* pia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pia.json; sourceTree = "<group>"; };
 		0EA068F3218475F800C320AD /* ParsedFile+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParsedFile+Alerts.swift"; sourceTree = "<group>"; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
+		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
 		0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionServiceTests.swift; sourceTree = "<group>"; };
 		0EBBE8F121822B4D00106008 /* ConnectionService.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ConnectionService.json; sourceTree = "<group>"; };
 		0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Migration.swift"; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */,
+				0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */,
 				0EFD943F215BED8E00529B64 /* LabelViewController.swift */,
 				0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */,
 				0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */,
@@ -852,6 +855,7 @@
 				0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */,
 				0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */,
 				0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */,
+				0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */,
 				0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */,
 				0E39BCF0214B9EF10035E9DE /* WebServices.swift in Sources */,
 				0EDE8DE720C93945004C739C /* Credentials.swift in Sources */,

@@ -90,6 +90,7 @@ internal enum StoryboardSegue {
     case addProviderSegueIdentifier = "AddProviderSegueIdentifier"
     case creditsSegueIdentifier = "CreditsSegueIdentifier"
     case disclaimerSegueIdentifier = "DisclaimerSegueIdentifier"
+    case importHostSegueIdentifier = "ImportHostSegueIdentifier"
     case selectProfileSegueIdentifier = "SelectProfileSegueIdentifier"
     case versionSegueIdentifier = "VersionSegueIdentifier"
   }

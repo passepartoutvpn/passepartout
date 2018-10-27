@@ -300,6 +300,11 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
   }
 
+  internal enum ImportedHosts {
+    /// Imported
+    internal static let title = L10n.tr("Localizable", "imported_hosts.title")
+  }
+
   internal enum IssueReporter {
     /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the email attachments if unsure.
     internal static let message = L10n.tr("Localizable", "issue_reporter.message")
@@ -338,7 +343,7 @@ internal enum L10n {
     internal enum Alerts {
 
       internal enum AddHost {
-        /// Open an URL to an .ovpn configuration file from Safari, Mail or another app to set up a host profile.
+        /// Open an URL to an .ovpn configuration file from Safari, Mail or another app to set up a host profile.\n\nYou can also import an .ovpn with iTunes File Sharing.
         internal static let message = L10n.tr("Localizable", "organizer.alerts.add_host.message")
       }
 

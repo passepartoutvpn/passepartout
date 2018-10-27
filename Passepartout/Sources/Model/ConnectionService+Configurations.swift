@@ -24,6 +24,9 @@
 //
 
 import Foundation
+import SwiftyBeaver
+
+private let log = SwiftyBeaver.self
 
 extension ConnectionService {
     func save(configurationURL: URL, for profile: ConnectionProfile) throws -> URL {
@@ -45,5 +48,15 @@ extension ConnectionService {
     private func targetConfigurationURL(for profile: ConnectionProfile) -> URL {
         let contextURL = ConnectionService.ProfileKey(profile).contextURL(in: self)
         return contextURL.appendingPathComponent(profile.id).appendingPathExtension("ovpn")
+    }
+    
+    func pendingConfigurationURLs() -> [URL] {
+        do {
+            let list = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil, options: [])
+            return list.filter { $0.pathExtension == "ovpn" }
+        } catch let e {
+            log.error("Could not list imported configurations: \(e)")
+            return []
+        }
     }
 }
