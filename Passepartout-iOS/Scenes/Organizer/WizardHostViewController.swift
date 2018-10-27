@@ -33,7 +33,7 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     @IBOutlet private weak var itemNext: UIBarButtonItem!
     
     private let existingHosts: [String] = {
-        return TransientStore.shared.service.ids(forContext: .host).sorted()
+        return TransientStore.shared.service.ids(forContext: .host).sortedCaseInsensitive()
     }()
     
     var parsedFile: ParsedFile? {

@@ -56,8 +56,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }()
     
     func reloadModel() {
-        providers = service.ids(forContext: .provider).sorted()
-        hosts = service.ids(forContext: .host).sorted()
+        providers = service.ids(forContext: .provider)
+        hosts = service.ids(forContext: .host).sortedCaseInsensitive()
         
         var providerRows = [RowType](repeating: .profile, count: providers.count)
         var hostRows = [RowType](repeating: .profile, count: hosts.count)

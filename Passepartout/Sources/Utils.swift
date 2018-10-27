@@ -222,3 +222,9 @@ extension URL {
         return filename.components(separatedBy: CharacterSet.filename.inverted).joined(separator: URL.illegalCharacterFallback)
     }
 }
+
+extension Array where Element: CustomStringConvertible {
+    public func sortedCaseInsensitive() -> [Element] {
+        return sorted { $0.description.lowercased() < $1.description.lowercased() }
+    }
+}
