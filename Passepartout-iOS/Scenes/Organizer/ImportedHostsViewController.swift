@@ -30,8 +30,8 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class ImportedHostsViewController: UITableViewController {
-    private lazy var pendingConfigurationURLs = TransientStore.shared.service.pendingConfigurationURLs()
-    
+    private lazy var pendingConfigurationURLs = TransientStore.shared.service.pendingConfigurationURLs().sorted { $0.normalizedFilename < $1.normalizedFilename }
+
     private var parsedFile: ParsedFile?
     
     weak var wizardDelegate: WizardDelegate?
