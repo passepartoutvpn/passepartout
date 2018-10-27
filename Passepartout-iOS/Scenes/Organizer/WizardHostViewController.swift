@@ -33,11 +33,6 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     private struct ParsedFile {
         let url: URL
 
-        var filename: String {
-            let raw = url.deletingPathExtension().lastPathComponent
-            return raw.components(separatedBy: AppConstants.Store.filenameCharset.inverted).joined(separator: "_")
-        }
-
         let hostname: String
         
         let configuration: TunnelKitProvider.Configuration
@@ -118,7 +113,7 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
             return
         }
         if field.text?.isEmpty ?? true {
-            field.text = parsedFile?.filename
+            field.text = parsedFile?.url.normalizedFilename
         }
     }
     
@@ -216,7 +211,7 @@ extension WizardHostViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
-            cell.allowedCharset = AppConstants.Store.filenameCharset
+            cell.allowedCharset = .filename
             cell.field.placeholder = L10n.Wizards.Host.Cells.TitleInput.placeholder
             cell.field.clearButtonMode = .always
             cell.field.returnKeyType = .done
