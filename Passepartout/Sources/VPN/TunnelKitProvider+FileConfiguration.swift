@@ -365,7 +365,7 @@ private extension NSRegularExpression {
                 return
             }
             let match = (string as NSString).substring(with: range)
-            let tokens = match.components(separatedBy: " ")
+            let tokens = match.components(separatedBy: " ").filter { !$0.isEmpty }
             block(tokens)
         }
     }
@@ -376,7 +376,7 @@ private extension NSRegularExpression {
                 return
             }
             let match = (string as NSString).substring(with: range)
-            var tokens = match.components(separatedBy: " ")
+            var tokens = match.components(separatedBy: " ").filter { !$0.isEmpty }
             tokens.removeFirst()
             block(tokens)
         }

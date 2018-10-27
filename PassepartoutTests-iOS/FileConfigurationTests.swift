@@ -39,9 +39,14 @@ class FileConfigurationTests: XCTestCase {
     }
     
     func testPIA() throws {
-        let cfg = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary")).configuration
-        XCTAssertEqual(cfg.sessionConfiguration.cipher, .aes128cbc)
-        XCTAssertEqual(cfg.sessionConfiguration.digest, .sha1)
+        let file = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary"))
+        XCTAssertEqual(file.hostname, "hungary.privateinternetaccess.com")
+        XCTAssertEqual(file.configuration.sessionConfiguration.cipher, .aes128cbc)
+        XCTAssertEqual(file.configuration.sessionConfiguration.digest, .sha1)
+        XCTAssertEqual(file.configuration.endpointProtocols, [
+            TunnelKitProvider.EndpointProtocol(.udp, 1198),
+            TunnelKitProvider.EndpointProtocol(.tcp, 502)
+        ])
     }
 
     func testStripped() throws {
