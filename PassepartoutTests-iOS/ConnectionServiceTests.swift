@@ -58,4 +58,23 @@ class ConnectionServiceTests: XCTestCase {
         XCTAssert(activeProfile.parameters.sessionConfiguration.cipher == .aes256cbc)
         XCTAssert(activeProfile.parameters.sessionConfiguration.ca.pem == "bogus+ca")
     }
+    
+    func testPathExtension() {
+        XCTAssertTrue(privateTestPathExtension("file:///foo/bar/johndoe.json"))
+        XCTAssertFalse(privateTestPathExtension("file:///foo/bar/break.json.johndoe.json"))
+    }
+    
+    private func privateTestPathExtension(_ string: String) -> Bool {
+        let url = URL(string: string)!
+        let filename = url.lastPathComponent
+        guard let extRange = filename.range(of: ".json") else {
+            return false
+        }
+        guard url.pathExtension == "json" else {
+            return false
+        }
+        let name1 = String(filename[filename.startIndex..<extRange.lowerBound])
+        let name2 = url.deletingPathExtension().lastPathComponent
+        return name1 == name2
+    }
 }

@@ -203,7 +203,7 @@ class InfrastructureFactory {
     }
     
     private func cacheURL(for name: Infrastructure.Name) -> URL {
-        return cachePath.appendingPathComponent("\(name.webName).json")
+        return cachePath.appendingPathComponent(name.webName).appendingPathExtension("json")
     }
 
     private func cacheModificationDate(for name: Infrastructure.Name) -> Date? {

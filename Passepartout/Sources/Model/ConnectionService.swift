@@ -304,15 +304,14 @@ class ConnectionService: Codable {
     }
     
     private static func profileId(fromURL url: URL) -> String? {
-        let filename = url.lastPathComponent
-        guard let extRange = filename.range(of: ".json") else {
+        guard url.pathExtension == "json" else {
             return nil
         }
-        return String(filename[filename.startIndex..<extRange.lowerBound])
+        return url.deletingPathExtension().lastPathComponent
     }
     
     private static func url(in directory: URL, forProfileId profileId: String) -> URL {
-        return directory.appendingPathComponent("\(profileId).json")
+        return directory.appendingPathComponent(profileId).appendingPathExtension("json")
     }
     
     // MARK: Profiles
