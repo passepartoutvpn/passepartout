@@ -125,7 +125,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         do {
             (_, originalConfiguration) = try TunnelKitProvider.Configuration.parsed(from: url)
         } catch let e {
-            log.warning("Could not parse original configuration: \(e)")
+            log.error("Could not parse original configuration: \(e)")
             return
         }
         initialConfiguration = originalConfiguration.sessionConfiguration

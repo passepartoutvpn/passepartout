@@ -221,7 +221,7 @@ class ConnectionService: Codable {
                 cache[key] = PlaceholderConnectionProfile(key)
             }
         } catch let e {
-            log.warning("Could not list provider contents: \(e) (\(providersURL))")
+            log.error("Could not list provider contents: \(e) (\(providersURL))")
         }
         do {
             let files = try fm.contentsOfDirectory(at: hostsURL, includingPropertiesForKeys: nil, options: [])
@@ -234,7 +234,7 @@ class ConnectionService: Codable {
                 cache[key] = PlaceholderConnectionProfile(key)
             }
         } catch let e {
-            log.warning("Could not list host contents: \(e) (\(hostsURL))")
+            log.error("Could not list host contents: \(e) (\(hostsURL))")
         }
     }
     
@@ -257,7 +257,7 @@ class ConnectionService: Codable {
                     try data.write(to: url)
                     log.debug("Saved provider '\(profile.id)'")
                 } catch let e {
-                    log.warning("Could not save provider '\(profile.id)': \(e)")
+                    log.error("Could not save provider '\(profile.id)': \(e)")
                     continue
                 }
             } else if let profile = entry as? HostConnectionProfile {
@@ -267,7 +267,7 @@ class ConnectionService: Codable {
                     try data.write(to: url)
                     log.debug("Saved host '\(profile.id)'")
                 } catch let e {
-                    log.warning("Could not save host '\(profile.id)': \(e)")
+                    log.error("Could not save host '\(profile.id)': \(e)")
                     continue
                 }
             } else if let placeholder = entry as? PlaceholderConnectionProfile {
@@ -292,7 +292,7 @@ class ConnectionService: Codable {
                 }
                 cache[key] = profile
             } catch let e {
-                log.warning("Could not decode profile JSON: \(e)")
+                log.error("Could not decode profile JSON: \(e)")
                 return nil
             }
         }

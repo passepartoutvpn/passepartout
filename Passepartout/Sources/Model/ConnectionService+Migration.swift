@@ -35,7 +35,7 @@ extension ConnectionService {
 //            log.verbose(String(data: newData, encoding: .utf8)!)
             try newData.write(to: to)
         } catch let e {
-            log.warning("Could not migrate service: \(e)")
+            log.error("Could not migrate service: \(e)")
         }
     }
     
