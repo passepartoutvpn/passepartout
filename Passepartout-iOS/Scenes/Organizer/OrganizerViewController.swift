@@ -176,7 +176,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
 
     private func addNewHost() {
-        perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
+        perform(segue: StoryboardSegue.Organizer.showImportedHostsSegueIdentifier)
     }
 
     private func removeProfile(at indexPath: IndexPath) {

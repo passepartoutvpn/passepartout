@@ -32,26 +32,19 @@ private let log = SwiftyBeaver.self
 
 extension ParsedFile {
     static func from(_ url: URL, withErrorAlertIn viewController: UIViewController) -> ParsedFile? {
+        let file: ParsedFile
         log.debug("Parsing configuration URL: \(url)")
         do {
-            return try TunnelKitProvider.Configuration.parsed(from: url)
-        } catch ApplicationError.missingConfiguration(let option) {
-            log.error("Could not parse configuration URL: missing configuration, \(option)")
-            let message = L10n.ParsedFile.Alerts.Missing.message(option)
-            alertConfigurationImportError(url: url, in: viewController, withMessage: message)
-        } catch ApplicationError.unsupportedConfiguration(let option) {
-            log.error("Could not parse configuration URL: unsupported configuration, \(option)")
-            let message = L10n.ParsedFile.Alerts.Unsupported.message(option)
-            alertConfigurationImportError(url: url, in: viewController, withMessage: message)
+            file = try TunnelKitProvider.Configuration.parsed(from: url)
         } catch let e {
-            log.error("Could not parse configuration URL: \(e)")
-            let message = L10n.ParsedFile.Alerts.Parsing.message(e.localizedDescription)
-            alertConfigurationImportError(url: url, in: viewController, withMessage: message)
+            let message = localizedMessage(forError: e)
+            alertImportError(url: url, in: viewController, withMessage: message)
+            return nil
         }
-        return nil
+        return file
     }
     
-    private static func alertConfigurationImportError(url: URL, in vc: UIViewController, withMessage message: String) {
+    private static func alertImportError(url: URL, in vc: UIViewController, withMessage message: String) {
         let alert = Macros.alert(url.normalizedFilename, message)
 //        alert.addDefaultAction(L10n.ParsedFile.Alerts.Buttons.report) {
 //            var attach = IssueReporter.Attachments(debugLog: false, configurationURL: url)
@@ -60,5 +53,49 @@ extension ParsedFile {
 //        }
         alert.addCancelAction(L10n.Global.ok)
         vc.present(alert, animated: true, completion: nil)
+    }
+
+    static func alertImportWarning(url: URL, in vc: UIViewController, withWarning warning: ApplicationError, completionHandler: @escaping (Bool) -> Void) {
+        let message = details(forWarning: warning)
+        let alert = Macros.alert(url.normalizedFilename, L10n.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
+        alert.addDefaultAction(L10n.Global.ok) {
+            completionHandler(true)
+        }
+        alert.addCancelAction(L10n.Global.cancel) {
+            completionHandler(false)
+        }
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
+    private static func localizedMessage(forError error: Error) -> String {
+        if let appError = error as? ApplicationError {
+            switch appError {
+            case .missingConfiguration(let option):
+                log.error("Could not parse configuration URL: missing configuration, \(option)")
+                return L10n.ParsedFile.Alerts.Missing.message(option)
+                
+            case .unsupportedConfiguration(let option):
+                log.error("Could not parse configuration URL: unsupported configuration, \(option)")
+                return L10n.ParsedFile.Alerts.Unsupported.message(option)
+                
+            default:
+                break
+            }
+        }
+        log.error("Could not parse configuration URL: \(error)")
+        return L10n.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
+    }
+    
+    private static func details(forWarning warning: ApplicationError) -> String {
+        switch warning {
+        case .missingConfiguration(let option):
+            return option
+            
+        case .unsupportedConfiguration(let option):
+            return option
+            
+        default:
+            fatalError("Only use .missingConfiguration or .unsupportedConfiguration for warnings")
+        }
     }
 }
