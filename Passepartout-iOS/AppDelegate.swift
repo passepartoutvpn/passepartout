@@ -99,6 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // already presented: update parsed configuration
         if let nav = root.presentedViewController as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
             wizard.parsedFile = parsedFile
+            wizard.removesConfigurationOnCancel = true
             return true
         }
 
@@ -108,6 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             fatalError("Expected WizardHostViewController from storyboard")
         }
         wizard.parsedFile = parsedFile
+        wizard.removesConfigurationOnCancel = true
 
         // best effort to delegate to main vc
         let split = root as? UISplitViewController

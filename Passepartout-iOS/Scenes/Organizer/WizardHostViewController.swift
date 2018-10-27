@@ -41,6 +41,8 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
             useSuggestedTitle()
         }
     }
+    
+    var removesConfigurationOnCancel = false
 
     private var createdProfile: HostConnectionProfile?
 
@@ -148,6 +150,9 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     }
 
     @IBAction private func close() {
+        if removesConfigurationOnCancel, let url = parsedFile?.url {
+            try? FileManager.default.removeItem(at: url)
+        }
         dismiss(animated: true, completion: nil)
     }
 }
