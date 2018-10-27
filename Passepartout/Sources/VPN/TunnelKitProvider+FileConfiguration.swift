@@ -59,17 +59,20 @@ extension TunnelKitProvider.Configuration {
 
         static let renegSec = Utils.regex("^reneg-sec +\\d+")
 
-        static let fragment = Utils.regex("^fragment +\\d+")
-
-        static let proxy = Utils.regex("^\\w+-proxy")
-        
         static let keyDirection = Utils.regex("^key-direction +\\d")
         
-        static let externalFiles = Utils.regex("^(ca|cert|key|tls-auth|tls-crypt) ")
-
         static let blockBegin = Utils.regex("^<[\\w\\-]+>")
         
         static let blockEnd = Utils.regex("^<\\/[\\w\\-]+>")
+
+        // unsupported
+
+//        static let fragment = Utils.regex("^fragment +\\d+")
+        static let fragment = Utils.regex("^fragment")
+
+        static let proxy = Utils.regex("^\\w+-proxy")
+
+        static let externalFiles = Utils.regex("^(ca|cert|key|tls-auth|tls-crypt) ")
     }
     
     static func parsed(from url: URL, returnsStripped: Bool = false) throws -> ParsedFile {
