@@ -134,6 +134,9 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
             do {
                 let savedURL = try TransientStore.shared.service.save(configurationURL: url, for: profile)
                 log.debug("Associated .ovpn configuration file to profile '\(profile.id)': \(savedURL)")
+
+                // can now delete imported file
+                try? FileManager.default.removeItem(at: url)
             } catch let e {
                 log.error("Could not associate .ovpn configuration file to profile: \(e)")
             }
