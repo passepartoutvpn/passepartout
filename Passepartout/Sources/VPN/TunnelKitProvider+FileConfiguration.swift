@@ -29,6 +29,16 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
+struct ParsedFile {
+    let url: URL
+    
+    let hostname: String
+    
+    let configuration: TunnelKitProvider.Configuration
+    
+    let strippedLines: [String]?
+}
+
 extension TunnelKitProvider.Configuration {
     private struct Regex {
         static let proto = Utils.regex("^proto +(udp6?|tcp6?)")
@@ -49,21 +59,25 @@ extension TunnelKitProvider.Configuration {
 
         static let renegSec = Utils.regex("^reneg-sec +\\d+")
 
-        static let fragment = Utils.regex("^fragment +\\d+")
-
-        static let proxy = Utils.regex("^\\w+-proxy")
-        
         static let keyDirection = Utils.regex("^key-direction +\\d")
         
-        static let externalFiles = Utils.regex("^(ca|cert|key|tls-auth|tls-crypt) ")
-
         static let blockBegin = Utils.regex("^<[\\w\\-]+>")
         
         static let blockEnd = Utils.regex("^<\\/[\\w\\-]+>")
+
+        // unsupported
+
+//        static let fragment = Utils.regex("^fragment +\\d+")
+        static let fragment = Utils.regex("^fragment")
+
+        static let proxy = Utils.regex("^\\w+-proxy")
+
+        static let externalFiles = Utils.regex("^(ca|cert|key|tls-auth|tls-crypt) ")
     }
     
-    static func parsed(from url: URL, stripped: UnsafeMutablePointer<[String]>? = nil) throws -> (String, TunnelKitProvider.Configuration) {
+    static func parsed(from url: URL, returnsStripped: Bool = false) throws -> ParsedFile {
         let lines = try String(contentsOf: url).trimmedLines()
+        var strippedLines: [String]? = returnsStripped ? [] : nil
 
         var defaultProto: TunnelKitProvider.SocketType?
         var defaultPort: UInt16?
@@ -94,7 +108,7 @@ extension TunnelKitProvider.Configuration {
             var strippedLine = line
             defer {
                 if isHandled {
-                    stripped?.pointee.append(strippedLine)
+                    strippedLines?.append(strippedLine)
                 }
             }
 
@@ -311,7 +325,7 @@ extension TunnelKitProvider.Configuration {
         var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.endpointProtocols = endpointProtocols
 
-        return (hostname, builder.build())
+        return ParsedFile(url: url, hostname: hostname, configuration: builder.build(), strippedLines: strippedLines)
     }
 }
 

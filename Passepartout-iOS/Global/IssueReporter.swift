@@ -90,10 +90,9 @@ class IssueReporter: NSObject {
             vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.debugLog, fileName: AppConstants.IssueReporter.Filenames.debugLog)
         }
         if let url = configurationURL {
-            var lines: [String] = []
             do {
-                _ = try TunnelKitProvider.Configuration.parsed(from: url, stripped: &lines)
-                if let attachment = lines.joined(separator: "\n").data(using: .utf8) {
+                let parsedFile = try TunnelKitProvider.Configuration.parsed(from: url, returnsStripped: true)
+                if let attachment = parsedFile.strippedLines?.joined(separator: "\n").data(using: .utf8) {
                     vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.configuration, fileName: AppConstants.IssueReporter.Filenames.configuration)
                 }
             } catch {

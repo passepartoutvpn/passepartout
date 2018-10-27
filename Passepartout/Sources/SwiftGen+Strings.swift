@@ -404,6 +404,38 @@ internal enum L10n {
     }
   }
 
+  internal enum ParsedFile {
+
+    internal enum Alerts {
+
+      internal enum Buttons {
+        /// Report an issue
+        internal static let report = L10n.tr("Localizable", "parsed_file.alerts.buttons.report")
+      }
+
+      internal enum Missing {
+        /// The configuration file lacks a required option (%@).
+        internal static func message(_ p1: String) -> String {
+          return L10n.tr("Localizable", "parsed_file.alerts.missing.message", p1)
+        }
+      }
+
+      internal enum Parsing {
+        /// Unable to parse the provided configuration file (%@).
+        internal static func message(_ p1: String) -> String {
+          return L10n.tr("Localizable", "parsed_file.alerts.parsing.message", p1)
+        }
+      }
+
+      internal enum Unsupported {
+        /// The configuration file contains an unsupported option (%@).
+        internal static func message(_ p1: String) -> String {
+          return L10n.tr("Localizable", "parsed_file.alerts.unsupported.message", p1)
+        }
+      }
+    }
+  }
+
   internal enum Provider {
 
     internal enum Preset {
@@ -734,35 +766,9 @@ internal enum L10n {
 
       internal enum Alerts {
 
-        internal enum Buttons {
-          /// Report an issue
-          internal static let report = L10n.tr("Localizable", "wizards.host.alerts.buttons.report")
-        }
-
         internal enum Existing {
           /// A host profile with the same title already exists. Replace it?
           internal static let message = L10n.tr("Localizable", "wizards.host.alerts.existing.message")
-        }
-
-        internal enum Missing {
-          /// The configuration file lacks a required option (%@).
-          internal static func message(_ p1: String) -> String {
-            return L10n.tr("Localizable", "wizards.host.alerts.missing.message", p1)
-          }
-        }
-
-        internal enum Parsing {
-          /// Unable to parse the provided configuration file (%@).
-          internal static func message(_ p1: String) -> String {
-            return L10n.tr("Localizable", "wizards.host.alerts.parsing.message", p1)
-          }
-        }
-
-        internal enum Unsupported {
-          /// The configuration file contains an unsupported option (%@).
-          internal static func message(_ p1: String) -> String {
-            return L10n.tr("Localizable", "wizards.host.alerts.unsupported.message", p1)
-          }
         }
       }
 

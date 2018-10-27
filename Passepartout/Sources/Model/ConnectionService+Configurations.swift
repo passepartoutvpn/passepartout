@@ -44,6 +44,6 @@ extension ConnectionService {
 
     private func targetConfigurationURL(for profile: ConnectionProfile) -> URL {
         let contextURL = ConnectionService.ProfileKey(profile).contextURL(in: self)
-        return contextURL.appendingPathComponent("\(profile.id).ovpn")
+        return contextURL.appendingPathComponent(profile.id).appendingPathExtension("ovpn")
     }
 }

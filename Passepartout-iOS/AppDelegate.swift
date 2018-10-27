@@ -24,9 +24,6 @@
 //
 
 import UIKit
-import SwiftyBeaver
-
-private let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -87,59 +84,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
 
     // MARK: URLs
-
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         guard let root = window?.rootViewController else {
             fatalError("No window.rootViewController?")
         }
 
-        do {
-
-            // already presented: update URL
-            if let nav = root.presentedViewController as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
-                try wizard.setConfigurationURL(url)
-                return true
-            }
-
-            // present now
-            let nav = StoryboardScene.Organizer.wizardHostIdentifier.instantiate()
-            guard let wizard = nav.topViewController as? WizardHostViewController else {
-                fatalError("Expected WizardHostViewController from storyboard")
-            }
-            try wizard.setConfigurationURL(url)
-
-            // best effort to delegate to main vc
-            let split = root as? UISplitViewController
-            let master = split?.viewControllers.first as? UINavigationController
-            master?.viewControllers.forEach {
-                if let organizerVC = $0 as? OrganizerViewController {
-                    wizard.delegate = organizerVC
-                }
-            }
-            nav.modalPresentationStyle = .formSheet
-            root.present(nav, animated: true, completion: nil)
-        } catch ApplicationError.missingConfiguration(let option) {
-            let message = L10n.Wizards.Host.Alerts.Missing.message(option)
-            alertConfigurationImportError(url: url, in: root, withMessage: message)
-        } catch ApplicationError.unsupportedConfiguration(let option) {
-            let message = L10n.Wizards.Host.Alerts.Unsupported.message(option)
-            alertConfigurationImportError(url: url, in: root, withMessage: message)
-        } catch let e {
-            let message = L10n.Wizards.Host.Alerts.Parsing.message(e.localizedDescription)
-            alertConfigurationImportError(url: url, in: root, withMessage: message)
+        guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: root) else {
+            return true
         }
+
+        // already presented: update parsed configuration
+        if let nav = root.presentedViewController as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
+            wizard.parsedFile = parsedFile
+            return true
+        }
+
+        // present now
+        let nav = StoryboardScene.Organizer.wizardHostIdentifier.instantiate()
+        guard let wizard = nav.topViewController as? WizardHostViewController else {
+            fatalError("Expected WizardHostViewController from storyboard")
+        }
+        wizard.parsedFile = parsedFile
+
+        // best effort to delegate to main vc
+        let split = root as? UISplitViewController
+        let master = split?.viewControllers.first as? UINavigationController
+        master?.viewControllers.forEach {
+            if let organizerVC = $0 as? OrganizerViewController {
+                wizard.delegate = organizerVC
+            }
+        }
+        nav.modalPresentationStyle = .formSheet
+        root.present(nav, animated: true, completion: nil)
         return true
-    }
-    
-    private func alertConfigurationImportError(url: URL, in vc: UIViewController, withMessage message: String) {
-        let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, message)
-//        alert.addDefaultAction(L10n.Wizards.Host.Alerts.Buttons.report) {
-//            var attach = IssueReporter.Attachments(debugLog: false, configurationURL: url)
-//            attach.description = message
-//            IssueReporter.shared.present(in: vc, withAttachments: attach)
-//        }
-        alert.addCancelAction(L10n.Global.cancel)
-        vc.present(alert, animated: true, completion: nil)
     }
 }
 

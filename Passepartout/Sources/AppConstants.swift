@@ -40,16 +40,6 @@ class AppConstants {
         static let providersDirectory = "Providers"
 
         static let hostsDirectory = "Hosts"
-        
-        static let filenameCharset: CharacterSet = {
-            var chars: CharacterSet = .decimalDigits
-            let english = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            let symbols = "-_"
-            chars.formUnion(CharacterSet(charactersIn: english))
-            chars.formUnion(CharacterSet(charactersIn: english.lowercased()))
-            chars.formUnion(CharacterSet(charactersIn: symbols))
-            return chars
-        }()
     }
     
     class VPN {

@@ -30,26 +30,13 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
-    private struct ParsedFile {
-        let url: URL
-
-        var filename: String {
-            let raw = url.deletingPathExtension().lastPathComponent
-            return raw.components(separatedBy: AppConstants.Store.filenameCharset.inverted).joined(separator: "_")
-        }
-
-        let hostname: String
-        
-        let configuration: TunnelKitProvider.Configuration
-    }
-
     @IBOutlet private weak var itemNext: UIBarButtonItem!
     
     private let existingHosts: [String] = {
         return TransientStore.shared.service.ids(forContext: .host).sorted()
     }()
     
-    private var parsedFile: ParsedFile? {
+    var parsedFile: ParsedFile? {
         didSet {
             useSuggestedTitle()
         }
@@ -99,26 +86,12 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     
     // MARK: Actions
     
-    func setConfigurationURL(_ url: URL) throws {
-        log.debug("Parsing configuration URL: \(url)")
-        
-        let hostname: String
-        let configuration: TunnelKitProvider.Configuration
-        do {
-            (hostname, configuration) = try TunnelKitProvider.Configuration.parsed(from: url)
-        } catch let e {
-            log.error("Could not parse .ovpn configuration file: \(e)")
-            throw e
-        }
-        parsedFile = ParsedFile(url: url, hostname: hostname, configuration: configuration)
-    }
-    
     private func useSuggestedTitle() {
         guard let field = cellTitle?.field else {
             return
         }
         if field.text?.isEmpty ?? true {
-            field.text = parsedFile?.filename
+            field.text = parsedFile?.url.normalizedFilename
         }
     }
     
@@ -216,7 +189,7 @@ extension WizardHostViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
-            cell.allowedCharset = AppConstants.Store.filenameCharset
+            cell.allowedCharset = .filename
             cell.field.placeholder = L10n.Wizards.Host.Cells.TitleInput.placeholder
             cell.field.clearButtonMode = .always
             cell.field.returnKeyType = .done

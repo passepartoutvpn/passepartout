@@ -201,3 +201,24 @@ extension String {
         }
     }
 }
+
+extension CharacterSet {
+    static let filename: CharacterSet = {
+        var chars: CharacterSet = .decimalDigits
+        let english = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let symbols = "-_"
+        chars.formUnion(CharacterSet(charactersIn: english))
+        chars.formUnion(CharacterSet(charactersIn: english.lowercased()))
+        chars.formUnion(CharacterSet(charactersIn: symbols))
+        return chars
+    }()
+}
+
+extension URL {
+    private static let illegalCharacterFallback = "_"
+    
+    var normalizedFilename: String {
+        let filename = deletingPathExtension().lastPathComponent
+        return filename.components(separatedBy: CharacterSet.filename.inverted).joined(separator: URL.illegalCharacterFallback)
+    }
+}

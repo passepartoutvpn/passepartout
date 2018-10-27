@@ -35,7 +35,7 @@ extension ConnectionService {
 //            log.verbose(String(data: newData, encoding: .utf8)!)
             try newData.write(to: to)
         } catch let e {
-            log.warning("Could not migrate service: \(e)")
+            log.error("Could not migrate service: \(e)")
         }
     }
     
@@ -145,7 +145,7 @@ extension ConnectionService {
 //                provider["id"] = id
 //                provider.removeValue(forKey: "name")
         
-                let url = providersParentURL.appendingPathComponent("\(id).json")
+                let url = providersParentURL.appendingPathComponent(id).appendingPathExtension("json")
                 let data = try JSONSerialization.data(withJSONObject: provider, options: [])
                 try data.write(to: url)
             } else if var host = p["host"] as? [String: Any] {
@@ -155,7 +155,7 @@ extension ConnectionService {
 //                host["id"] = id
 //                host.removeValue(forKey: "title")
 
-                let url = hostsParentURL.appendingPathComponent("\(id).json")
+                let url = hostsParentURL.appendingPathComponent(id).appendingPathExtension("json")
                 let data = try JSONSerialization.data(withJSONObject: host, options: [])
                 try data.write(to: url)
             }
