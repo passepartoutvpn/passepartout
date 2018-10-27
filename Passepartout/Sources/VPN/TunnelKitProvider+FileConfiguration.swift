@@ -37,6 +37,8 @@ struct ParsedFile {
     let configuration: TunnelKitProvider.Configuration
     
     let strippedLines: [String]?
+    
+    let warning: ApplicationError?
 }
 
 extension TunnelKitProvider.Configuration {
@@ -78,6 +80,7 @@ extension TunnelKitProvider.Configuration {
     static func parsed(from url: URL, returnsStripped: Bool = false) throws -> ParsedFile {
         let lines = try String(contentsOf: url).trimmedLines()
         var strippedLines: [String]? = returnsStripped ? [] : nil
+        var warning: ApplicationError? = nil
 
         var defaultProto: TunnelKitProvider.SocketType?
         var defaultPort: UInt16?
@@ -221,13 +224,23 @@ extension TunnelKitProvider.Configuration {
                     unsupportedError = ApplicationError.unsupportedConfiguration(option: "auth \(rawValue)")
                 }
             }
-            Regex.compLZO.enumerateComponents(in: line) { _ in
+            Regex.compLZO.enumerateArguments(in: line) {
                 isHandled = true
                 compressionFraming = .compLZO
+                
+                guard let arg = $0.first, arg == "no" else {
+                    warning = .unsupportedConfiguration(option: "compression")
+                    return
+                }
             }
-            Regex.compress.enumerateComponents(in: line) { _ in
+            Regex.compress.enumerateArguments(in: line) {
                 isHandled = true
                 compressionFraming = .compress
+
+                guard $0.isEmpty else {
+                    warning = .unsupportedConfiguration(option: "compression")
+                    return
+                }
             }
             Regex.keyDirection.enumerateArguments(in: line) {
                 isHandled = true
@@ -325,7 +338,13 @@ extension TunnelKitProvider.Configuration {
         var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.endpointProtocols = endpointProtocols
 
-        return ParsedFile(url: url, hostname: hostname, configuration: builder.build(), strippedLines: strippedLines)
+        return ParsedFile(
+            url: url,
+            hostname: hostname,
+            configuration: builder.build(),
+            strippedLines: strippedLines,
+            warning: warning
+        )
     }
 }
 
