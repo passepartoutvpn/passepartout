@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Warn about .ovpn containing potentially unsupported compression. [#16](https://github.com/keeshux/passepartout-ios/issues/16)
+- Retain credentials of replaced host profile.
 
 ## 1.0 beta 1107 (2018-10-26)
 

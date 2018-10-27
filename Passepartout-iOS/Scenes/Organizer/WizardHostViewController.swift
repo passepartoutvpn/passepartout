@@ -108,22 +108,27 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
         let profile = HostConnectionProfile(title: enteredTitle, hostname: file.hostname)
         profile.parameters = file.configuration
 
-        guard !TransientStore.shared.service.containsProfile(profile) else {
+        let service = TransientStore.shared.service
+        guard !service.containsProfile(profile) else {
+            let replacedProfile = service.profile(withContext: profile.context, id: profile.id)
             let alert = Macros.alert(title, L10n.Wizards.Host.Alerts.Existing.message)
             alert.addDefaultAction(L10n.Global.ok) {
-                self.next(withProfile: profile)
+                self.next(withProfile: profile, replacedProfile: replacedProfile)
             }
             alert.addCancelAction(L10n.Global.cancel)
             present(alert, animated: true, completion: nil)
             return
         }
-        next(withProfile: profile)
+        next(withProfile: profile, replacedProfile: nil)
     }
     
-    private func next(withProfile profile: HostConnectionProfile) {
+    private func next(withProfile profile: HostConnectionProfile, replacedProfile: ConnectionProfile?) {
         createdProfile = profile
 
         let accountVC = StoryboardScene.Main.accountIdentifier.instantiate()
+        if let replacedProfile = replacedProfile {
+            accountVC.currentCredentials = TransientStore.shared.service.credentials(for: replacedProfile)
+        }
         accountVC.delegate = self
         navigationController?.pushViewController(accountVC, animated: true)
     }
