@@ -245,6 +245,9 @@ extension TunnelKitProvider.Configuration {
             Regex.externalFiles.enumerateArguments(in: line) { (_) in
                 unsupportedError = ApplicationError.unsupportedConfiguration(option: "external file: \"\(line)\"")
             }
+            if line.contains("mtu") || line.contains("mssfix") {
+                isHandled = true
+            }
 
             if let error = unsupportedError {
                 throw error
