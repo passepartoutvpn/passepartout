@@ -248,6 +248,9 @@ class ConnectionService: Codable {
         for key in pendingRemoval {
             let url = key.profileURL(in: self)
             try? fm.removeItem(at: url)
+            if let cfg = configurationURL(for: key) {
+                try? fm.removeItem(at: cfg)
+            }
         }
         for entry in cache.values {
             if let profile = entry as? ProviderConnectionProfile {

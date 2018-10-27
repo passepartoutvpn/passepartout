@@ -29,25 +29,33 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 extension ConnectionService {
-    func save(configurationURL: URL, for profile: ConnectionProfile) throws -> URL {
-        let destinationURL = targetConfigurationURL(for: profile)
+    func save(configurationURL: URL, for key: ProfileKey) throws -> URL {
+        let destinationURL = targetConfigurationURL(for: key)
         let fm = FileManager.default
         try? fm.removeItem(at: destinationURL)
         try fm.copyItem(at: configurationURL, to: destinationURL)
         return destinationURL
     }
     
-    func configurationURL(for profile: ConnectionProfile) -> URL? {
-        let url = targetConfigurationURL(for: profile)
+    func save(configurationURL: URL, for profile: ConnectionProfile) throws -> URL {
+        return try save(configurationURL: configurationURL, for: ProfileKey(profile))
+    }
+    
+    func configurationURL(for key: ProfileKey) -> URL? {
+        let url = targetConfigurationURL(for: key)
         guard FileManager.default.fileExists(atPath: url.path) else {
             return nil
         }
         return url
     }
+    
+    func configurationURL(for profile: ConnectionProfile) -> URL? {
+        return configurationURL(for: ProfileKey(profile))
+    }
 
-    private func targetConfigurationURL(for profile: ConnectionProfile) -> URL {
-        let contextURL = ConnectionService.ProfileKey(profile).contextURL(in: self)
-        return contextURL.appendingPathComponent(profile.id).appendingPathExtension("ovpn")
+    private func targetConfigurationURL(for key: ProfileKey) -> URL {
+        let contextURL = key.contextURL(in: self)
+        return contextURL.appendingPathComponent(key.id).appendingPathExtension("ovpn")
     }
     
     func pendingConfigurationURLs() -> [URL] {
