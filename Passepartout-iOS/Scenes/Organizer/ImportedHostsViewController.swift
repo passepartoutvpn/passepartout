@@ -66,6 +66,9 @@ class ImportedHostsViewController: UITableViewController {
         }
         let url = pendingConfigurationURLs[indexPath.row]
         guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: self) else {
+            if let selectedIP = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectedIP, animated: true)
+            }
             return false
         }
         self.parsedFile = parsedFile
