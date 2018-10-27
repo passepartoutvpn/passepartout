@@ -128,9 +128,9 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             log.error("Could not parse original configuration: \(e)")
             return
         }
+        configuration = parsedFile.configuration.sessionConfiguration.builder()
+        itemRefresh.isEnabled = !configuration.canCommunicate(with: initialConfiguration)
         initialConfiguration = parsedFile.configuration.sessionConfiguration
-        configuration = initialConfiguration.builder()
-        itemRefresh.isEnabled = true // allow for manual reconnection
         tableView.reloadData()
 
         delegate?.configuration(didUpdate: initialConfiguration)
