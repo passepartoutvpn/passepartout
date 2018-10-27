@@ -39,16 +39,15 @@ class FileConfigurationTests: XCTestCase {
     }
     
     func testPIA() throws {
-        let cfg = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary")).1
+        let cfg = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary")).configuration
         XCTAssertEqual(cfg.sessionConfiguration.cipher, .aes128cbc)
         XCTAssertEqual(cfg.sessionConfiguration.digest, .sha1)
     }
 
     func testStripped() throws {
-        var lines: [String] = []
-        _ = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary"), stripped: &lines)
-        let cfg = lines.joined(separator: "\n")
-        print(cfg)
+        let lines = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary"), returnsStripped: true).strippedLines!
+        let stripped = lines.joined(separator: "\n")
+        print(stripped)
     }
     
     private func url(withName name: String) -> URL {

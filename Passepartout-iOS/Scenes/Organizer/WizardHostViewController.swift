@@ -30,14 +30,6 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
-    private struct ParsedFile {
-        let url: URL
-
-        let hostname: String
-        
-        let configuration: TunnelKitProvider.Configuration
-    }
-
     @IBOutlet private weak var itemNext: UIBarButtonItem!
     
     private let existingHosts: [String] = {
@@ -97,15 +89,12 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     func setConfigurationURL(_ url: URL) throws {
         log.debug("Parsing configuration URL: \(url)")
         
-        let hostname: String
-        let configuration: TunnelKitProvider.Configuration
         do {
-            (hostname, configuration) = try TunnelKitProvider.Configuration.parsed(from: url)
+            parsedFile = try TunnelKitProvider.Configuration.parsed(from: url)
         } catch let e {
             log.error("Could not parse .ovpn configuration file: \(e)")
             throw e
         }
-        parsedFile = ParsedFile(url: url, hostname: hostname, configuration: configuration)
     }
     
     private func useSuggestedTitle() {
