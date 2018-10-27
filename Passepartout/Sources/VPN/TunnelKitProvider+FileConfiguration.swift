@@ -62,7 +62,7 @@ extension TunnelKitProvider.Configuration {
         static let blockEnd = Utils.regex("^<\\/[\\w\\-]+>")
     }
     
-    static func parsed(from url: URL) throws -> (String, TunnelKitProvider.Configuration) {
+    static func parsed(from url: URL, stripped: UnsafeMutablePointer<[String]>? = nil) throws -> (String, TunnelKitProvider.Configuration) {
         let lines = try String(contentsOf: url).trimmedLines()
 
         var defaultProto: TunnelKitProvider.SocketType?
@@ -90,7 +90,16 @@ extension TunnelKitProvider.Configuration {
         for line in lines {
             log.verbose(line)
 
+            var isHandled = false
+            var strippedLine = line
+            defer {
+                if isHandled {
+                    stripped?.pointee.append(strippedLine)
+                }
+            }
+
             Regex.blockBegin.enumerateComponents(in: line) {
+                isHandled = true
                 let tag = $0.first!
                 let from = tag.index(after: tag.startIndex)
                 let to = tag.index(before: tag.endIndex)
@@ -99,6 +108,7 @@ extension TunnelKitProvider.Configuration {
                 currentBlock = []
             }
             Regex.blockEnd.enumerateComponents(in: line) {
+                isHandled = true
                 let tag = $0.first!
                 let from = tag.index(tag.startIndex, offsetBy: 2)
                 let to = tag.index(before: tag.endIndex)
@@ -138,8 +148,9 @@ extension TunnelKitProvider.Configuration {
                 currentBlock.append(line)
                 continue
             }
-
+            
             Regex.proto.enumerateArguments(in: line) {
+                isHandled = true
                 guard let str = $0.first else {
                     return
                 }
@@ -149,26 +160,35 @@ extension TunnelKitProvider.Configuration {
                 }
             }
             Regex.port.enumerateArguments(in: line) {
+                isHandled = true
                 guard let str = $0.first else {
                     return
                 }
                 defaultPort = UInt16(str)
             }
             Regex.remote.enumerateArguments(in: line) {
+                isHandled = true
                 guard let hostname = $0.first else {
                     return
                 }
                 var port: UInt16?
                 var proto: TunnelKitProvider.SocketType?
+                var strippedComponents = ["remote", "<hostname>"]
                 if $0.count > 1 {
                     port = UInt16($0[1])
+                    strippedComponents.append($0[1])
                 }
                 if $0.count > 2 {
                     proto = TunnelKitProvider.SocketType(protoString: $0[2])
+                    strippedComponents.append($0[2])
                 }
                 remotes.append((hostname, port, proto))
+
+                // replace private data
+                strippedLine = strippedComponents.joined(separator: " ")
             }
             Regex.cipher.enumerateArguments(in: line) {
+                isHandled = true
                 guard let rawValue = $0.first else {
                     return
                 }
@@ -178,6 +198,7 @@ extension TunnelKitProvider.Configuration {
                 }
             }
             Regex.auth.enumerateArguments(in: line) {
+                isHandled = true
                 guard let rawValue = $0.first else {
                     return
                 }
@@ -187,24 +208,29 @@ extension TunnelKitProvider.Configuration {
                 }
             }
             Regex.compLZO.enumerateComponents(in: line) { _ in
+                isHandled = true
                 compressionFraming = .compLZO
             }
             Regex.compress.enumerateComponents(in: line) { _ in
+                isHandled = true
                 compressionFraming = .compress
             }
             Regex.keyDirection.enumerateArguments(in: line) {
+                isHandled = true
                 guard let arg = $0.first, let value = Int(arg) else {
                     return
                 }
                 keyDirection = StaticKey.Direction(rawValue: value)
             }
             Regex.ping.enumerateArguments(in: line) {
+                isHandled = true
                 guard let arg = $0.first else {
                     return
                 }
                 keepAliveSeconds = TimeInterval(arg)
             }
             Regex.renegSec.enumerateArguments(in: line) {
+                isHandled = true
                 guard let arg = $0.first else {
                     return
                 }
@@ -219,6 +245,9 @@ extension TunnelKitProvider.Configuration {
             Regex.externalFiles.enumerateArguments(in: line) { (_) in
                 unsupportedError = ApplicationError.unsupportedConfiguration(option: "external file: \"\(line)\"")
             }
+            if line.contains("mtu") || line.contains("mssfix") {
+                isHandled = true
+            }
 
             if let error = unsupportedError {
                 throw error
@@ -226,13 +255,13 @@ extension TunnelKitProvider.Configuration {
         }
         
         guard let ca = optCA else {
-            throw ApplicationError.missingCA
+            throw ApplicationError.missingConfiguration(option: "ca")
         }
         
         // XXX: only reads first remote
 //        hostnames = remotes.map { $0.0 }
         guard !remotes.isEmpty else {
-            throw ApplicationError.emptyRemotes
+            throw ApplicationError.missingConfiguration(option: "remote")
         }
         let hostname = remotes[0].0
         

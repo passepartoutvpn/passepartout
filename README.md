@@ -70,14 +70,12 @@ Passepartout can import .ovpn configuration files. This way you can fine-tune en
 Unsupported:
 
 - UDP fragmentation, i.e. `--fragment`
-
-Unsupported (probably ever):
-
 - Compression
     - `--comp-lzo` other than `no`
     - `--compress` other than empty
 - Proxy
 - External file references (inline `<block>` only)
+- Encrypted certificate private key (will raise error TunnelKitNative Code=205)
 
 Ignored:
 

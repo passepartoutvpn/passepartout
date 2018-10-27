@@ -64,7 +64,7 @@ class DebugLogViewController: UIViewController {
         }
         let data = DebugLog(raw: raw).decoratedData()
 
-        let path = NSTemporaryDirectory().appending(AppConstants.Log.debugFilename)
+        let path = NSTemporaryDirectory().appending(AppConstants.IssueReporter.Filenames.debugLog)
         let url = URL(fileURLWithPath: path)
         do {
             try data.write(to: url)

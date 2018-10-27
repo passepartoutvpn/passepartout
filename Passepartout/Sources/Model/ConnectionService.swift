@@ -64,19 +64,21 @@ class ConnectionService: Codable {
             id = profile.id
         }
         
-        fileprivate func profileURL(in service: ConnectionService) -> URL {
-            let contextURL: URL
+        func contextURL(in service: ConnectionService) -> URL {
             switch context {
             case .provider:
-                contextURL = service.providersURL
+                return service.providersURL
                 
             case .host:
-                contextURL = service.hostsURL
+                return service.hostsURL
             }
-            return ConnectionService.url(in: contextURL, forProfileId: id)
+        }
+        
+        func profileURL(in service: ConnectionService) -> URL {
+            return ConnectionService.url(in: contextURL(in: service), forProfileId: id)
         }
 
-        fileprivate func profileData(in service: ConnectionService) throws -> Data {
+        func profileData(in service: ConnectionService) throws -> Data {
             return try Data(contentsOf: profileURL(in: service))
         }
 

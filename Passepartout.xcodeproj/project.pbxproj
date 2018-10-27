@@ -20,7 +20,7 @@
 		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
 		0E2B494220FD16540094784C /* TransientStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B494120FD16540094784C /* TransientStore.swift */; };
-		0E2D11BA217DBEDE0096822C /* ProfileConfigurationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D11B9217DBEDE0096822C /* ProfileConfigurationFactory.swift */; };
+		0E2D11BA217DBEDE0096822C /* ConnectionService+Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */; };
 		0E39BCF0214B9EF10035E9DE /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCEF214B9EF10035E9DE /* WebServices.swift */; };
 		0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCF2214DA9310035E9DE /* AppConstants.swift */; };
 		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
@@ -137,7 +137,7 @@
 		0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
 		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
-		0E2D11B9217DBEDE0096822C /* ProfileConfigurationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileConfigurationFactory.swift; sourceTree = "<group>"; };
+		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
 		0E39BCEF214B9EF10035E9DE /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		0E39BCF2214DA9310035E9DE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
@@ -382,12 +382,12 @@
 				0EBE3AA2213DC1B000BFA2F5 /* Profiles */,
 				0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */,
 				0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */,
+				0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */,
 				0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */,
 				0EDE8DE620C93945004C739C /* Credentials.swift */,
 				0EC7F20420E24308004EA58E /* DebugLog.swift */,
 				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
 				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
-				0E2D11B9217DBEDE0096822C /* ProfileConfigurationFactory.swift */,
 				0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */,
 				0E2B494120FD16540094784C /* TransientStore.swift */,
 				0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */,
@@ -842,7 +842,7 @@
 				0ED31C1220CF0ABA0027975F /* Infrastructure.swift in Sources */,
 				0EC7F20520E24308004EA58E /* DebugLog.swift in Sources */,
 				0E4FD7E120D3E4C5002221FF /* MockVPNProvider.swift in Sources */,
-				0E2D11BA217DBEDE0096822C /* ProfileConfigurationFactory.swift in Sources */,
+				0E2D11BA217DBEDE0096822C /* ConnectionService+Configurations.swift in Sources */,
 				0EBE3A90213C6F4000BFA2F5 /* TrustPolicy.swift in Sources */,
 				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
 				0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */,

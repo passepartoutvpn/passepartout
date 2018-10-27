@@ -44,6 +44,13 @@ class FileConfigurationTests: XCTestCase {
         XCTAssertEqual(cfg.sessionConfiguration.digest, .sha1)
     }
 
+    func testStripped() throws {
+        var lines: [String] = []
+        _ = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary"), stripped: &lines)
+        let cfg = lines.joined(separator: "\n")
+        print(cfg)
+    }
+    
     private func url(withName name: String) -> URL {
         return Bundle(for: FileConfigurationTests.self).url(forResource: name, withExtension: "ovpn")!
     }

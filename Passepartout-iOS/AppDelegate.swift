@@ -118,16 +118,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
             nav.modalPresentationStyle = .formSheet
             root.present(nav, animated: true, completion: nil)
+        } catch ApplicationError.missingConfiguration(let option) {
+            let message = L10n.Wizards.Host.Alerts.Missing.message(option)
+            alertConfigurationImportError(url: url, in: root, withMessage: message)
         } catch ApplicationError.unsupportedConfiguration(let option) {
-            let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, L10n.Wizards.Host.Alerts.unsupported(option))
-            alert.addCancelAction(L10n.Global.ok)
-            root.present(alert, animated: true, completion: nil)
+            let message = L10n.Wizards.Host.Alerts.Unsupported.message(option)
+            alertConfigurationImportError(url: url, in: root, withMessage: message)
         } catch let e {
-            let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, L10n.Wizards.Host.Alerts.parsing(e.localizedDescription))
-            alert.addCancelAction(L10n.Global.ok)
-            root.present(alert, animated: true, completion: nil)
+            let message = L10n.Wizards.Host.Alerts.Parsing.message(e.localizedDescription)
+            alertConfigurationImportError(url: url, in: root, withMessage: message)
         }
         return true
+    }
+    
+    private func alertConfigurationImportError(url: URL, in vc: UIViewController, withMessage message: String) {
+        let alert = Macros.alert(L10n.Organizer.Sections.Hosts.header, message)
+//        alert.addDefaultAction(L10n.Wizards.Host.Alerts.Buttons.report) {
+//            var attach = IssueReporter.Attachments(debugLog: false, configurationURL: url)
+//            attach.description = message
+//            IssueReporter.shared.present(in: vc, withAttachments: attach)
+//        }
+        alert.addCancelAction(L10n.Global.cancel)
+        vc.present(alert, animated: true, completion: nil)
     }
 }
 
