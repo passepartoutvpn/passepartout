@@ -29,7 +29,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
+class WizardHostViewController: UITableViewController, TableModelHost {
     @IBOutlet private weak var itemNext: UIBarButtonItem!
     
     private let existingHosts: [String] = {
@@ -46,8 +46,6 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
 
     private var createdProfile: HostConnectionProfile?
 
-    weak var delegate: WizardDelegate?
-    
     // MARK: TableModelHost
 
     lazy var model: TableModel<SectionType, RowType> = {
@@ -89,12 +87,7 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
     // MARK: Actions
     
     private func useSuggestedTitle() {
-        guard let field = cellTitle?.field else {
-            return
-        }
-        if field.text?.isEmpty ?? true {
-            field.text = parsedFile?.url.normalizedFilename
-        }
+        cellTitle?.field.text = parsedFile?.url.normalizedFilename
     }
     
     @IBAction private func next() {
@@ -150,7 +143,10 @@ class WizardHostViewController: UITableViewController, TableModelHost, Wizard {
         }
         
         dismiss(animated: true) {
-            self.delegate?.wizard(didCreate: profile, withCredentials: credentials)
+            NotificationCenter.default.post(name: .WizardDidCreate, object: nil, userInfo: [
+                WizardCreationKey.profile: profile,
+                WizardCreationKey.credentials: credentials
+            ])
         }
     }
 
