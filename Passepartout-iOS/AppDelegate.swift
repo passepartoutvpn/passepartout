@@ -89,45 +89,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         guard let root = window?.rootViewController else {
             fatalError("No window.rootViewController?")
         }
+        
+        let topmost = root.presentedViewController ?? root
 
         let fm = FileManager.default
-        guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: root) else {
+        guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: topmost) else {
             try? fm.removeItem(at: url)
             return true
         }
         if let warning = parsedFile.warning {
-            ParsedFile.alertImportWarning(url: url, in: root, withWarning: warning) {
+            ParsedFile.alertImportWarning(url: url, in: topmost, withWarning: warning) {
                 if $0 {
-                    self.handleParsedFile(parsedFile, in: root)
+                    self.handleParsedFile(parsedFile, in: topmost)
                 } else {
                     try? fm.removeItem(at: url)
                 }
             }
             return true
         }
-        handleParsedFile(parsedFile, in: root)
+        handleParsedFile(parsedFile, in: topmost)
         return true
     }
     
-    private func handleParsedFile(_ parsedFile: ParsedFile, in root: UIViewController) {
+    private func handleParsedFile(_ parsedFile: ParsedFile, in target: UIViewController) {
 
         // already presented: update parsed configuration
-        if let nav = root.presentedViewController as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
+        if let nav = target as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
             wizard.parsedFile = parsedFile
             wizard.removesConfigurationOnCancel = true
             return
         }
 
         // present now
-        let nav = StoryboardScene.Organizer.wizardHostIdentifier.instantiate()
-        guard let wizard = nav.topViewController as? WizardHostViewController else {
+        let wizardNav = StoryboardScene.Organizer.wizardHostIdentifier.instantiate()
+        guard let wizard = wizardNav.topViewController as? WizardHostViewController else {
             fatalError("Expected WizardHostViewController from storyboard")
         }
         wizard.parsedFile = parsedFile
         wizard.removesConfigurationOnCancel = true
 
-        nav.modalPresentationStyle = .formSheet
-        root.present(nav, animated: true, completion: nil)
+        wizardNav.modalPresentationStyle = .formSheet
+        target.present(wizardNav, animated: true, completion: nil)
     }
 }
 
