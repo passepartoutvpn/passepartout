@@ -105,6 +105,9 @@ class ImportedHostsViewController: UITableViewController {
         }
         wizard.parsedFile = parsedFile
         wizard.delegate = wizardDelegate
+
+        // retain back button
+        wizard.navigationItem.leftBarButtonItem = nil
     }
     
     @IBAction private func close() {
