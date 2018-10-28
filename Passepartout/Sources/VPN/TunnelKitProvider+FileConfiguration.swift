@@ -229,7 +229,7 @@ extension TunnelKitProvider.Configuration {
                 compressionFraming = .compLZO
                 
                 guard let arg = $0.first, arg == "no" else {
-                    warning = .unsupportedConfiguration(option: "compression")
+                    warning = warning ?? .unsupportedConfiguration(option: "compression")
                     return
                 }
             }
@@ -238,7 +238,7 @@ extension TunnelKitProvider.Configuration {
                 compressionFraming = .compress
 
                 guard $0.isEmpty else {
-                    warning = .unsupportedConfiguration(option: "compression")
+                    warning = warning ?? .unsupportedConfiguration(option: "compression")
                     return
                 }
             }
