@@ -129,9 +129,10 @@ class TrustedNetworksModel {
             return
         }
 
+        let isTrusted = false
         let rowIndex = rowIndexForWifi(at: index)
         let completionHandler: () -> Void = {
-            self.trustedWifis[wifiToAdd] = true
+            self.trustedWifis[wifiToAdd] = isTrusted
 
             if !isDuplicate {
                 self.sortedWifis.insert(wifiToAdd, at: index)
@@ -140,7 +141,7 @@ class TrustedNetworksModel {
                 #endif
                 self.delegate?.trustedNetworks(self, shouldInsertWifiAt: rowIndex)
             } else {
-                self.delegate?.trustedNetworks(self, shouldReloadWifiAt: rowIndex, isTrusted: true)
+                self.delegate?.trustedNetworks(self, shouldReloadWifiAt: rowIndex, isTrusted: isTrusted)
             }
 
             self.delegate?.trustedNetworksShouldReinstall(self)

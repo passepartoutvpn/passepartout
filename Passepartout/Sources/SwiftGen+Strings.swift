@@ -624,7 +624,7 @@ internal enum L10n {
       }
 
       internal enum TrustedAddWifi {
-        /// Trust current Wi-Fi
+        /// Add current Wi-Fi
         internal static let caption = L10n.tr("Localizable", "service.cells.trusted_add_wifi.caption")
       }
 
