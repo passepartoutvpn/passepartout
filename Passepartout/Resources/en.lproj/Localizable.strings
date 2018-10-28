@@ -98,7 +98,7 @@
 //"service.cells.vpn_prefers_udp.caption" = "Prefer UDP socket";
 "service.cells.trusted_mobile.caption" = "Cellular network";
 "service.cells.trusted_wifi.caption" = "%@";
-"service.cells.trusted_add_wifi.caption" = "Trust current Wi-Fi";
+"service.cells.trusted_add_wifi.caption" = "Add current Wi-Fi";
 "service.cells.trusted_policy.caption" = "Retain existing connection";
 "service.cells.test_connectivity.caption" = "Test connectivity";
 "service.cells.data_count.caption" = "Exchanged bytes count";
