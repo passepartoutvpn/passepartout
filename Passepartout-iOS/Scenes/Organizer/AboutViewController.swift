@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Source.header, for: .source)
         model.setHeader(L10n.About.Sections.Share.header, for: .share)
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
-        model.set([.version, .disclaimer, .website, .privacyPolicy], in: .info)
+        model.set([.version, .website, .disclaimer, .privacyPolicy], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
         model.set([.shareTwitter, .shareGeneric], in: .share)
         model.set([.joinCommunity, .writeReview], in: .feedback)
@@ -69,12 +69,12 @@ class AboutViewController: UITableViewController, TableModelHost {
         perform(segue: StoryboardSegue.Organizer.versionSegueIdentifier)
     }
     
-    private func showDisclaimer() {
-        perform(segue: StoryboardSegue.Organizer.disclaimerSegueIdentifier)
-    }
-    
     private func visitWebsite() {
         UIApplication.shared.open(AppConstants.URLs.website, options: [:], completionHandler: nil)
+    }
+    
+    private func visitDisclaimer() {
+        UIApplication.shared.open(AppConstants.URLs.disclaimer, options: [:], completionHandler: nil)
     }
     
     private func visitPrivacyPolicy() {
@@ -108,23 +108,6 @@ class AboutViewController: UITableViewController, TableModelHost {
     @IBAction private func dismiss() {
         dismiss(animated: true, completion: nil)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let sid = segue.identifier, let segueType = StoryboardSegue.Organizer(rawValue: sid) else {
-            return
-        }
-        guard let vc = segue.destination as? LabelViewController else {
-            return
-        }
-
-        switch segueType {
-        case .disclaimerSegueIdentifier:
-            vc.text = L10n.Disclaimer.Labels.text
-            
-        default:
-            break
-        }
-    }
 }
 
 // MARK: -
@@ -143,9 +126,9 @@ extension AboutViewController {
     enum RowType: Int {
         case version
         
-        case disclaimer
-        
         case website
+        
+        case disclaimer
         
         case privacyPolicy
         
@@ -186,14 +169,14 @@ extension AboutViewController {
             cell.rightText = Utils.versionString()
             return cell
             
-        case .disclaimer:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Disclaimer.title
-            return cell
-
         case .website:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.Website.caption
+            return cell
+            
+        case .disclaimer:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.Disclaimer.caption
             return cell
             
         case .privacyPolicy:
@@ -238,11 +221,11 @@ extension AboutViewController {
         case .version:
             showVersion()
             
-        case .disclaimer:
-            showDisclaimer()
-            
         case .website:
             visitWebsite()
+            
+        case .disclaimer:
+            visitDisclaimer()
             
         case .privacyPolicy:
             visitPrivacyPolicy()

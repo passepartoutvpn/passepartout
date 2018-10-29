@@ -497,7 +497,6 @@
                     </navigationItem>
                     <connections>
                         <segue destination="PMT-gj-ARE" kind="show" identifier="VersionSegueIdentifier" id="uYt-4N-PPL"/>
-                        <segue destination="2d7-Ad-AZr" kind="show" identifier="DisclaimerSegueIdentifier" id="HW6-RJ-VFY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AnH-Vt-JJn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -577,7 +576,6 @@
         <image name="logo" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SQ0-O9-E5E"/>
         <segue reference="kwN-PZ-Zg5"/>
     </inferredMetricsTieBreakers>
 </document>
