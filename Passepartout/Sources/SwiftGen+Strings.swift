@@ -189,7 +189,7 @@ internal enum L10n {
     /// Credits
     internal static let title = L10n.tr("Localizable", "credits.title")
     internal enum Labels {
-      /// Passepartout is a non-official client and is in no way affiliated with OpenVPN Inc.\n\nThe logo is taken from the awesome Circle Icons set by Nick Roach.
+      /// The logo is taken from the awesome Circle Icons set by Nick Roach.
       internal static let thirdParties = L10n.tr("Localizable", "credits.labels.third_parties")
     }
   }
@@ -616,7 +616,7 @@ internal enum L10n {
       internal static let credits = L10n.tr("Localizable", "version.buttons.credits")
     }
     internal enum Labels {
-      /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nTunnelKit is a native OpenVPN client originally forked from PIATunnel by Private Internet Access.\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.
+      /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.
       internal static let intro = L10n.tr("Localizable", "version.labels.intro")
     }
   }
