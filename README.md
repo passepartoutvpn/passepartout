@@ -52,7 +52,7 @@ Keeping the VPN active in the background provides smoother operation, but may be
 
 ### No unrequested activity
 
-Passepartout is a VPN client and does absolutely nothing else without your consent. The providers infrastructures are obtained via a [static GitHub API][app-api] only and only if you manually refresh them.
+Passepartout is a VPN client and does absolutely nothing else without your consent. The providers infrastructures are obtained via a [static GitHub API][app-api] if and only if you manually refresh them.
 
 ### Presets for major providers
 
@@ -84,7 +84,7 @@ Ignored:
     - `--mssfix`
 - Multiple `--remote` with different `host` values (first wins)
 
-Other flags are ignored too but planned to be implemented.
+Many other flags are ignored too but it's normally not an issue.
 
 ## Installation
 

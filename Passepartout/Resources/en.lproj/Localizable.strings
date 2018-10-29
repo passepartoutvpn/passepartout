@@ -189,8 +189,9 @@
 "about.sections.source.header" = "Source code";
 "about.sections.share.header" = "Share";
 "about.sections.feedback.header" = "Feedback";
-"about.cells.version.caption" = "Version";
 "about.cells.website.caption" = "Visit website";
+"about.cells.disclaimer.caption" = "Disclaimer";
+"about.cells.privacy_policy.caption" = "Privacy policy";
 "about.cells.share_twitter.caption" = "Tweet about it!";
 "about.cells.share_generic.caption" = "Invite a friend";
 "about.cells.join_community.caption" = "Join community";
@@ -198,11 +199,10 @@
 
 "share.message" = "Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS";
 
-"version.labels.intro" = "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nTunnelKit is a native OpenVPN client originally forked from PIATunnel by Private Internet Access.\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.";
+"version.title" = "Version";
+"version.labels.intro" = "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.";
 "version.buttons.changelog" = "CHANGELOG";
+"version.buttons.credits" = "CREDITS";
 
 "credits.title" = "Credits";
-"credits.labels.third_parties" = "Passepartout is a non-official client and is in no way affiliated with OpenVPN Inc.\n\nThe logo is taken from the awesome Circle Icons set by Nick Roach.";
-
-"disclaimer.title" = "Disclaimer";
-"disclaimer.labels.text" = "Passepartout is a VPN client based on independent work. As such, the developer -while making his best efforts to avoid it- takes no responsibility about any damage caused by the use of this software.\n\nAdditionally, the developer takes no responsibility about data usage, monitoring, logging etc. by the servers you connect to. Passepartout is not even involved in the above choices, as they're part of server-side policies.\n\nFor more information about data usage by third parties, please review the privacy policy of your VPN provider.";
+"credits.labels.third_parties" = "The logo is taken from the awesome Circle Icons set by Nick Roach.";

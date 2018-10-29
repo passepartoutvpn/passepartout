@@ -23,8 +23,6 @@ internal enum StoryboardSegue {
   internal enum Organizer: String, SegueType {
     case aboutSegueIdentifier = "AboutSegueIdentifier"
     case addProviderSegueIdentifier = "AddProviderSegueIdentifier"
-    case creditsSegueIdentifier = "CreditsSegueIdentifier"
-    case disclaimerSegueIdentifier = "DisclaimerSegueIdentifier"
     case importHostSegueIdentifier = "ImportHostSegueIdentifier"
     case selectProfileSegueIdentifier = "SelectProfileSegueIdentifier"
     case showImportedHostsSegueIdentifier = "ShowImportedHostsSegueIdentifier"
