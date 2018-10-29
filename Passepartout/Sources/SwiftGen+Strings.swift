@@ -614,6 +614,8 @@ internal enum L10n {
     internal enum Buttons {
       /// CHANGELOG
       internal static let changelog = L10n.tr("Localizable", "version.buttons.changelog")
+      /// CREDITS
+      internal static let credits = L10n.tr("Localizable", "version.buttons.credits")
     }
     internal enum Labels {
       /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nTunnelKit is a native OpenVPN client originally forked from PIATunnel by Private Internet Access.\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.

@@ -328,10 +328,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kan-Ro-DbI">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="448"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="491"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RP1-au-v0h">
-                                                <rect key="frame" x="28" y="40" width="319" height="368"/>
+                                                <rect key="frame" x="28" y="40" width="319" height="411"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="eRj-AM-Edq">
                                                         <rect key="frame" x="59.5" y="0.0" width="200" height="200"/>
@@ -362,6 +362,14 @@
                                                             <action selector="visitChangelog" destination="PMT-gj-ARE" eventType="touchUpInside" id="hSv-6o-eXI"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtK-wa-fgh">
+                                                        <rect key="frame" x="0.0" y="378" width="319" height="33"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                        <state key="normal" title="&lt;CRD&gt;"/>
+                                                        <connections>
+                                                            <segue destination="2d7-Ad-AZr" kind="show" id="SQ0-O9-E5E"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="wV2-Nx-RuF" secondAttribute="trailing" id="1jj-cq-2Ja"/>
@@ -370,14 +378,17 @@
                                                     <constraint firstItem="Zek-qD-saW" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="4r5-es-LKj"/>
                                                     <constraint firstItem="tOJ-Gb-6TL" firstAttribute="top" secondItem="Zek-qD-saW" secondAttribute="bottom" constant="5" id="5EV-6h-af6"/>
                                                     <constraint firstItem="F6g-5X-yGY" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="Bbh-jl-eyk"/>
+                                                    <constraint firstItem="rtK-wa-fgh" firstAttribute="top" secondItem="wV2-Nx-RuF" secondAttribute="bottom" constant="10" id="ChX-qg-yan"/>
                                                     <constraint firstItem="Zek-qD-saW" firstAttribute="top" secondItem="eRj-AM-Edq" secondAttribute="bottom" constant="20" id="E5v-Gd-4FH"/>
                                                     <constraint firstItem="wV2-Nx-RuF" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="Iop-zX-3fL"/>
                                                     <constraint firstItem="F6g-5X-yGY" firstAttribute="top" secondItem="tOJ-Gb-6TL" secondAttribute="bottom" constant="20" id="Vla-uy-lL8"/>
                                                     <constraint firstAttribute="trailing" secondItem="Zek-qD-saW" secondAttribute="trailing" id="WL1-SB-5gf"/>
+                                                    <constraint firstAttribute="bottom" secondItem="rtK-wa-fgh" secondAttribute="bottom" id="XDo-fJ-IOo"/>
                                                     <constraint firstAttribute="trailing" secondItem="tOJ-Gb-6TL" secondAttribute="trailing" id="a5o-c7-BD5"/>
+                                                    <constraint firstAttribute="trailing" secondItem="rtK-wa-fgh" secondAttribute="trailing" id="dBQ-XF-2mE"/>
                                                     <constraint firstItem="tOJ-Gb-6TL" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="grT-YM-rGi"/>
-                                                    <constraint firstAttribute="bottom" secondItem="wV2-Nx-RuF" secondAttribute="bottom" id="m4p-a0-sqe"/>
                                                     <constraint firstItem="eRj-AM-Edq" firstAttribute="top" secondItem="RP1-au-v0h" secondAttribute="top" id="q35-KT-uTl"/>
+                                                    <constraint firstItem="rtK-wa-fgh" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="weH-qk-nTh"/>
                                                     <constraint firstItem="wV2-Nx-RuF" firstAttribute="top" secondItem="F6g-5X-yGY" secondAttribute="bottom" constant="20" id="y5I-Du-MiY"/>
                                                 </constraints>
                                             </view>
@@ -411,6 +422,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonChangelog" destination="wV2-Nx-RuF" id="E0X-ek-Ii2"/>
+                        <outlet property="buttonCredits" destination="rtK-wa-fgh" id="56A-mE-YHa"/>
                         <outlet property="labelIntro" destination="F6g-5X-yGY" id="QSg-VO-Wf4"/>
                         <outlet property="labelTitle" destination="Zek-qD-saW" id="TL8-Vb-B58"/>
                         <outlet property="labelVersion" destination="tOJ-Gb-6TL" id="O7w-Ne-L0R"/>
@@ -419,7 +431,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7m-Yv-Puo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2551.1999999999998" y="-2224.1379310344828"/>
+            <point key="canvasLocation" x="-2551" y="-2246"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bMd-7b-j9C">
@@ -484,7 +496,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="2d7-Ad-AZr" kind="show" identifier="CreditsSegueIdentifier" id="tGv-dr-20P"/>
                         <segue destination="PMT-gj-ARE" kind="show" identifier="VersionSegueIdentifier" id="uYt-4N-PPL"/>
                         <segue destination="2d7-Ad-AZr" kind="show" identifier="DisclaimerSegueIdentifier" id="HW6-RJ-VFY"/>
                     </connections>
@@ -566,7 +577,7 @@
         <image name="logo" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HW6-RJ-VFY"/>
+        <segue reference="SQ0-O9-E5E"/>
         <segue reference="kwN-PZ-Zg5"/>
     </inferredMetricsTieBreakers>
 </document>

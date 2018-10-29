@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Source.header, for: .source)
         model.setHeader(L10n.About.Sections.Share.header, for: .share)
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
-        model.set([.version, .credits, .disclaimer, .website], in: .info)
+        model.set([.version, .disclaimer, .website], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
         model.set([.shareTwitter, .shareGeneric], in: .share)
         model.set([.joinCommunity, .writeReview], in: .feedback)
@@ -67,10 +67,6 @@ class AboutViewController: UITableViewController, TableModelHost {
 
     private func showVersion() {
         perform(segue: StoryboardSegue.Organizer.versionSegueIdentifier)
-    }
-    
-    private func showCredits() {
-        perform(segue: StoryboardSegue.Organizer.creditsSegueIdentifier)
     }
     
     private func showDisclaimer() {
@@ -118,11 +114,6 @@ class AboutViewController: UITableViewController, TableModelHost {
         }
 
         switch segueType {
-        case .creditsSegueIdentifier:
-            var notices = AppConstants.Notices.all
-            notices.insert(L10n.Credits.Labels.thirdParties, at: 0)
-            vc.text = notices.joined(separator: "\n\n")
-
         case .disclaimerSegueIdentifier:
             vc.text = L10n.Disclaimer.Labels.text
             
@@ -147,8 +138,6 @@ extension AboutViewController {
     
     enum RowType: Int {
         case version
-        
-        case credits
         
         case disclaimer
         
@@ -189,11 +178,6 @@ extension AboutViewController {
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.Version.caption
             cell.rightText = Utils.versionString()
-            return cell
-            
-        case .credits:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Credits.title
             return cell
             
         case .disclaimer:
@@ -242,9 +226,6 @@ extension AboutViewController {
         switch model.row(at: indexPath) {
         case .version:
             showVersion()
-            
-        case .credits:
-            showCredits()
             
         case .disclaimer:
             showDisclaimer()
