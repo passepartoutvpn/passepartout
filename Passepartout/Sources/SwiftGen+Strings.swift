@@ -28,10 +28,6 @@ internal enum L10n {
         /// Tweet about it!
         internal static let caption = L10n.tr("Localizable", "about.cells.share_twitter.caption")
       }
-      internal enum Version {
-        /// Version
-        internal static let caption = L10n.tr("Localizable", "about.cells.version.caption")
-      }
       internal enum Website {
         /// Visit website
         internal static let caption = L10n.tr("Localizable", "about.cells.website.caption")
@@ -611,6 +607,8 @@ internal enum L10n {
   }
 
   internal enum Version {
+    /// Version
+    internal static let title = L10n.tr("Localizable", "version.title")
     internal enum Buttons {
       /// CHANGELOG
       internal static let changelog = L10n.tr("Localizable", "version.buttons.changelog")

@@ -176,7 +176,7 @@ extension AboutViewController {
         switch model.row(at: indexPath) {
         case .version:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.Version.caption
+            cell.leftText = L10n.Version.title
             cell.rightText = Utils.versionString()
             return cell
             

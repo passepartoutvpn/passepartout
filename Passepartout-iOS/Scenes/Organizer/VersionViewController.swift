@@ -47,6 +47,7 @@ class VersionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = L10n.Version.title
         labelTitle?.text = GroupConstants.App.name
         labelVersion?.text = Utils.versionString()
         labelIntro?.text = L10n.Version.Labels.intro
