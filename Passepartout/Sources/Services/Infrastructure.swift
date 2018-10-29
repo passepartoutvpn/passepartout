@@ -27,11 +27,15 @@ import Foundation
 import TunnelKit
 
 struct Infrastructure: Codable {
-    enum Name: String, Codable {
+    enum Name: String, Codable, Comparable {
         case pia = "PIA"
         
         var webName: String {
             return rawValue.lowercased()
+        }
+
+        static func <(lhs: Name, rhs: Name) -> Bool {
+            return lhs.webName < rhs.webName
         }
     }
     

@@ -73,7 +73,7 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     }
     
     func sortedPools() -> [Pool] {
-        return infrastructure.pools.sorted { $0.name < $1.name }
+        return infrastructure.pools.sorted()
     }
     
     private func validateEndpoint() {

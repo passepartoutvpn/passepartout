@@ -56,7 +56,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }()
     
     func reloadModel() {
-        providers = service.ids(forContext: .provider)
+        providers = service.ids(forContext: .provider).sorted()
         hosts = service.ids(forContext: .host).sortedCaseInsensitive()
         
         var providerRows = [RowType](repeating: .profile, count: providers.count)
@@ -172,7 +172,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             return
         }
 
-        availableProviderNames = names.sorted { $0.rawValue < $1.rawValue }
+        availableProviderNames = names.sorted()
         perform(segue: StoryboardSegue.Organizer.addProviderSegueIdentifier)
     }
 

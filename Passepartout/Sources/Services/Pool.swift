@@ -26,7 +26,7 @@
 import Foundation
 import TunnelKit
 
-struct Pool: Codable, CustomStringConvertible {
+struct Pool: Codable, Comparable, CustomStringConvertible {
     enum CodingKeys: String, CodingKey {
         case id
 
@@ -68,7 +68,13 @@ struct Pool: Codable, CustomStringConvertible {
         addrs.insert(hostname, at: 0)
         return addrs
     }
+
+    // MARK: Comparable
     
+    static func <(lhs: Pool, rhs: Pool) -> Bool {
+        return lhs.name < rhs.name
+    }
+
     // MARK: CustomStringConvertible
     
     var description: String {
