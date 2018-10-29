@@ -122,6 +122,8 @@ class AppConstants {
     class URLs {
         static let website = URL(string: "https://\(Domain.name)")!
         
+        static let privacyPolicy = website.appendingPathComponent("privacy")
+        
         static let changelog = Repos.passepartout.appendingPathComponent("blob/master/CHANGELOG.md")
         
         static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!

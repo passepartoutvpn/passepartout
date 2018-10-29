@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Source.header, for: .source)
         model.setHeader(L10n.About.Sections.Share.header, for: .share)
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
-        model.set([.version, .disclaimer, .website], in: .info)
+        model.set([.version, .disclaimer, .website, .privacyPolicy], in: .info)
         model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
         model.set([.shareTwitter, .shareGeneric], in: .share)
         model.set([.joinCommunity, .writeReview], in: .feedback)
@@ -75,6 +75,10 @@ class AboutViewController: UITableViewController, TableModelHost {
     
     private func visitWebsite() {
         UIApplication.shared.open(AppConstants.URLs.website, options: [:], completionHandler: nil)
+    }
+    
+    private func visitPrivacyPolicy() {
+        UIApplication.shared.open(AppConstants.URLs.privacyPolicy, options: [:], completionHandler: nil)
     }
     
     private func visitRepository(_ url: URL) {
@@ -143,6 +147,8 @@ extension AboutViewController {
         
         case website
         
+        case privacyPolicy
+        
         case sourcePassepartout
         
         case sourceTunnelKit
@@ -190,6 +196,11 @@ extension AboutViewController {
             cell.leftText = L10n.About.Cells.Website.caption
             return cell
             
+        case .privacyPolicy:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.PrivacyPolicy.caption
+            return cell
+            
         case .sourcePassepartout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = GroupConstants.App.name
@@ -232,6 +243,9 @@ extension AboutViewController {
             
         case .website:
             visitWebsite()
+            
+        case .privacyPolicy:
+            visitPrivacyPolicy()
             
         case .sourcePassepartout:
             visitRepository(AppConstants.Repos.passepartout)

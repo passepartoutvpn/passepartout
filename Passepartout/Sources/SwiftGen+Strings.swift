@@ -20,6 +20,10 @@ internal enum L10n {
         /// Join community
         internal static let caption = L10n.tr("Localizable", "about.cells.join_community.caption")
       }
+      internal enum PrivacyPolicy {
+        /// Privacy policy
+        internal static let caption = L10n.tr("Localizable", "about.cells.privacy_policy.caption")
+      }
       internal enum ShareGeneric {
         /// Invite a friend
         internal static let caption = L10n.tr("Localizable", "about.cells.share_generic.caption")
