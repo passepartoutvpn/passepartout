@@ -131,26 +131,19 @@ class TrustedNetworksModel {
 
         let isTrusted = false
         let rowIndex = rowIndexForWifi(at: index)
-        let completionHandler: () -> Void = {
-            self.trustedWifis[wifiToAdd] = isTrusted
+        trustedWifis[wifiToAdd] = isTrusted
 
-            if !isDuplicate {
-                self.sortedWifis.insert(wifiToAdd, at: index)
-                #if os(iOS)
-                self.rows.insert(.trustedWiFi, at: rowIndex)
-                #endif
-                self.delegate?.trustedNetworks(self, shouldInsertWifiAt: rowIndex)
-            } else {
-                self.delegate?.trustedNetworks(self, shouldReloadWifiAt: rowIndex, isTrusted: isTrusted)
-            }
+        if !isDuplicate {
+            sortedWifis.insert(wifiToAdd, at: index)
+            #if os(iOS)
+            rows.insert(.trustedWiFi, at: rowIndex)
+            #endif
+            delegate?.trustedNetworks(self, shouldInsertWifiAt: rowIndex)
+        } else {
+            delegate?.trustedNetworks(self, shouldReloadWifiAt: rowIndex, isTrusted: isTrusted)
+        }
 
-            self.delegate?.trustedNetworksShouldReinstall(self)
-        }
-        guard !mightDisconnect() else {
-            delegate?.trustedNetworksShouldConfirmDisconnection(self, triggeredAt: rowIndex, completionHandler: completionHandler)
-            return
-        }
-        completionHandler()
+        delegate?.trustedNetworksShouldReinstall(self)
     }
     
     func removeWifi(at rowIndex: Int) {
