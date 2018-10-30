@@ -611,7 +611,7 @@ internal enum L10n {
       internal static let credits = L10n.tr("Localizable", "version.buttons.credits")
     }
     internal enum Labels {
-      /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.
+      /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.
       internal static let intro = L10n.tr("Localizable", "version.labels.intro")
     }
   }
