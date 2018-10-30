@@ -32,15 +32,14 @@ class AboutViewController: UITableViewController, TableModelHost {
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.info)
-        model.add(.source)
+        model.add(.web)
         model.add(.share)
         model.add(.feedback)
-        model.setHeader(L10n.About.Sections.Info.header, for: .info)
-        model.setHeader(L10n.About.Sections.Source.header, for: .source)
+        model.setHeader(L10n.About.Sections.Web.header, for: .web)
         model.setHeader(L10n.About.Sections.Share.header, for: .share)
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
-        model.set([.version, .website, .disclaimer, .privacyPolicy], in: .info)
-        model.set([.sourcePassepartout, .sourceTunnelKit], in: .source)
+        model.set([.version], in: .info)
+        model.set([.website, .disclaimer, .privacyPolicy], in: .web)
         model.set([.shareTwitter, .shareGeneric], in: .share)
         model.set([.joinCommunity, .writeReview], in: .feedback)
         return model
@@ -116,7 +115,7 @@ extension AboutViewController {
     enum SectionType: Int {
         case info
         
-        case source
+        case web
 
         case share
         
@@ -131,10 +130,6 @@ extension AboutViewController {
         case disclaimer
         
         case privacyPolicy
-        
-        case sourcePassepartout
-        
-        case sourceTunnelKit
         
         case shareTwitter
         
@@ -184,16 +179,6 @@ extension AboutViewController {
             cell.leftText = L10n.About.Cells.PrivacyPolicy.caption
             return cell
             
-        case .sourcePassepartout:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = GroupConstants.App.name
-            return cell
-
-        case .sourceTunnelKit:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = GroupConstants.App.tunnelKitName
-            return cell
-
         case .shareTwitter:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.ShareTwitter.caption
@@ -229,12 +214,6 @@ extension AboutViewController {
             
         case .privacyPolicy:
             visitPrivacyPolicy()
-            
-        case .sourcePassepartout:
-            visitRepository(AppConstants.Repos.passepartout)
-
-        case .sourceTunnelKit:
-            visitRepository(AppConstants.Repos.tunnelKit)
             
         case .shareTwitter:
             tweetAboutApp()

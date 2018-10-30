@@ -37,7 +37,7 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "about.cells.share_twitter.caption")
       }
       internal enum Website {
-        /// Visit website
+        /// Home page
         internal static let caption = L10n.tr("Localizable", "about.cells.website.caption")
       }
       internal enum WriteReview {
@@ -50,17 +50,13 @@ internal enum L10n {
         /// Feedback
         internal static let header = L10n.tr("Localizable", "about.sections.feedback.header")
       }
-      internal enum Info {
-        /// General
-        internal static let header = L10n.tr("Localizable", "about.sections.info.header")
-      }
       internal enum Share {
         /// Share
         internal static let header = L10n.tr("Localizable", "about.sections.share.header")
       }
-      internal enum Source {
-        /// Source code
-        internal static let header = L10n.tr("Localizable", "about.sections.source.header")
+      internal enum Web {
+        /// Web
+        internal static let header = L10n.tr("Localizable", "about.sections.web.header")
       }
     }
   }
