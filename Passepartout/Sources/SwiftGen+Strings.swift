@@ -37,7 +37,7 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "about.cells.share_twitter.caption")
       }
       internal enum Website {
-        /// Visit website
+        /// Home page
         internal static let caption = L10n.tr("Localizable", "about.cells.website.caption")
       }
       internal enum WriteReview {
@@ -50,17 +50,13 @@ internal enum L10n {
         /// Feedback
         internal static let header = L10n.tr("Localizable", "about.sections.feedback.header")
       }
-      internal enum Info {
-        /// General
-        internal static let header = L10n.tr("Localizable", "about.sections.info.header")
-      }
       internal enum Share {
         /// Share
         internal static let header = L10n.tr("Localizable", "about.sections.share.header")
       }
-      internal enum Source {
-        /// Source code
-        internal static let header = L10n.tr("Localizable", "about.sections.source.header")
+      internal enum Web {
+        /// Web
+        internal static let header = L10n.tr("Localizable", "about.sections.web.header")
       }
     }
   }
@@ -615,7 +611,7 @@ internal enum L10n {
       internal static let credits = L10n.tr("Localizable", "version.buttons.credits")
     }
     internal enum Labels {
-      /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.
+      /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.
       internal static let intro = L10n.tr("Localizable", "version.labels.intro")
     }
   }
