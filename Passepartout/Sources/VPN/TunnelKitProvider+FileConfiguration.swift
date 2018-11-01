@@ -99,6 +99,10 @@ extension TunnelKitProvider.Configuration {
         var tlsKeyLines: [Substring]?
         var tlsWrap: SessionProxy.TLSWrap?
 
+        var currentBlockName: String?
+        var currentBlock: [String] = []
+        var unsupportedError: ApplicationError? = nil
+
         log.verbose("Configuration file:")
         for line in lines {
             log.verbose(line)
@@ -111,10 +115,6 @@ extension TunnelKitProvider.Configuration {
                 }
             }
 
-            var currentBlockName: String?
-            var currentBlock: [String] = []
-            var unsupportedError: ApplicationError? = nil
-            
             Regex.blockBegin.enumerateComponents(in: line) {
                 isHandled = true
                 let tag = $0.first!
