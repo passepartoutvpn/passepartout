@@ -18,8 +18,6 @@ Passepartout is in [public beta][about-testflight] on TestFlight.
 
 <a href="https://www.patreon.com/keeshux"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"></a>
 
-By using a beta version of the app, you understand that the software might be unstable, unreliable or plain broken from time to time.
-
 ## Overview
 
 ### All profiles in one place
@@ -134,13 +132,9 @@ The logo is taken from the awesome Circle Icons set by Nick Roach.
 
 © 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
 
-## Disclaimer
+## Usage
 
-Passepartout is a VPN client based on independent work. As such, the developer -while making his best efforts to avoid it- takes no responsibility about any damage caused by the use of this software.
-
-Additionally, the developer takes no responsibility about data usage, monitoring, logging etc. by the servers you connect to. Passepartout is not even involved in the above choices, as they're part of server-side policies.
-
-For more information about data usage by third parties, please review the privacy policy of your VPN provider.
+You are strongly encouraged to read carefully both the [disclaimer][web-disclaimer] and [privacy policy][web-privacy] before using this software.
 
 ## Contacts
 
@@ -162,6 +156,9 @@ Website: [passepartoutvpn.app][about-website]
 [license-content]: LICENSE
 [contrib-cla]: CLA.rst
 [contrib-readme]: CONTRIBUTING.md
+
+[web-disclaimer]: https://passepartoutvpn.app/disclaimer/
+[web-privacy]: https://passepartoutvpn.app/privacy/
 
 [about-twitter]: https://twitter.com/keeshux
 [about-website]: https://passepartoutvpn.app
