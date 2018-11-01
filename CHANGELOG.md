@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Explicit rejection of encrypted client certificate keys. [#15](https://github.com/keeshux/passepartout-ios/issues/15)
 - Attach .ovpn when reporting a connectivity issue, stripped of sensitive data. [#13](https://github.com/keeshux/passepartout-ios/pull/13)
 - iTunes File Sharing (skythedesu). [#14](https://github.com/keeshux/passepartout-ios/pull/14)
 - Tunnel failure reporting in UI. [#8](https://github.com/keeshux/passepartout-ios/pull/8)

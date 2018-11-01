@@ -145,7 +145,11 @@ extension TunnelKitProvider.Configuration {
                     clientCertificate = CryptoContainer(pem: currentBlock.joined(separator: "\n"))
                     
                 case "key":
-                    clientKey = CryptoContainer(pem: currentBlock.joined(separator: "\n"))
+                    let container = CryptoContainer(pem: currentBlock.joined(separator: "\n"))
+                    clientKey = container
+                    if container.isEncrypted {
+                        unsupportedError = ApplicationError.unsupportedConfiguration(option: "encrypted client certificate key")
+                    }
                     
                 case "tls-auth":
                     tlsKeyLines = currentBlock.map { Substring($0) }
@@ -380,5 +384,11 @@ private extension NSRegularExpression {
             tokens.removeFirst()
             block(tokens)
         }
+    }
+}
+
+extension CryptoContainer {
+    var isEncrypted: Bool {
+        return pem.contains("ENCRYPTED")
     }
 }
