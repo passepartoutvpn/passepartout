@@ -35,10 +35,12 @@ class TransientStore {
     
     static let shared = TransientStore()
     
+    private static var serviceURL: URL {
+        return FileManager.default.userURL(for: .documentDirectory, appending: AppConstants.Store.serviceFilename)
+    }
+    
     let service: ConnectionService
 
-    private let serviceURL = FileManager.default.userURL(for: .documentDirectory, appending: AppConstants.Store.serviceFilename)
-    
     var didHandleSubreddit: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Keys.didHandleSubreddit)
@@ -51,9 +53,9 @@ class TransientStore {
     private init() {
         let cfg = AppConstants.VPN.baseConfiguration()
         do {
-            ConnectionService.migrateJSON(at: serviceURL, to: serviceURL)
+            ConnectionService.migrateJSON(at: TransientStore.serviceURL, to: TransientStore.serviceURL)
             
-            let data = try Data(contentsOf: serviceURL)
+            let data = try Data(contentsOf: TransientStore.serviceURL)
             if let content = String(data: data, encoding: .utf8) {
                 log.verbose("Service JSON:")
                 log.verbose(content)
@@ -76,7 +78,7 @@ class TransientStore {
     }
     
     func serialize() {
-        try? JSONEncoder().encode(service).write(to: serviceURL)
+        try? JSONEncoder().encode(service).write(to: TransientStore.serviceURL)
         try? service.saveProfiles()
     }
 }
