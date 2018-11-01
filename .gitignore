@@ -13,8 +13,8 @@ fastlane/metadata/review_information
 fastlane/metadata/trade_representative_contact_information
 build/
 dist/
-ci/CHANGELOG
-ci/DESCRIPTION
+ci/CHANGELOG.md
+ci/DESCRIPTION.md
 .env.secret*
 Preview.html
 Gemfile.lock
