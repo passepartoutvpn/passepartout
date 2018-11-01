@@ -29,7 +29,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 extension ConnectionService {
-    static func migrateJSON(at from: URL, to: URL) {
+    static func migrateJSON(from: URL, to: URL) {
         do {
             let newData = try migrateJSON(at: from)
 //            log.verbose(String(data: newData, encoding: .utf8)!)
@@ -39,8 +39,8 @@ extension ConnectionService {
         }
     }
     
-    private static func migrateJSON(at from: URL) throws -> Data {
-        let data = try Data(contentsOf: from)
+    static func migrateJSON(at url: URL) throws -> Data {
+        let data = try Data(contentsOf: url)
         guard var json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
             throw ApplicationError.migration
         }
