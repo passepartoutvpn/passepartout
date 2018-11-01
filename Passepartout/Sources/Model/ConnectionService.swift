@@ -83,14 +83,18 @@ class ConnectionService: Codable {
         }
     }
 
-    lazy var directory = FileManager.default.userURL(for: .documentDirectory, appending: nil)
+    var directory: String? = nil
+    
+    var rootURL: URL {
+        return FileManager.default.userURL(for: .documentDirectory, appending: directory)
+    }
     
     private var providersURL: URL {
-        return directory.appendingPathComponent(AppConstants.Store.providersDirectory)
+        return rootURL.appendingPathComponent(AppConstants.Store.providersDirectory)
     }
 
     private var hostsURL: URL {
-        return directory.appendingPathComponent(AppConstants.Store.hostsDirectory)
+        return rootURL.appendingPathComponent(AppConstants.Store.hostsDirectory)
     }
     
     private var build: Int
