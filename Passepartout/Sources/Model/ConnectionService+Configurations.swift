@@ -54,8 +54,7 @@ extension ConnectionService {
     }
 
     private func targetConfigurationURL(for key: ProfileKey) -> URL {
-        let contextURL = key.contextURL(in: self)
-        return contextURL.appendingPathComponent(key.id).appendingPathExtension("ovpn")
+        return contextURL(key).appendingPathComponent(key.id).appendingPathExtension("ovpn")
     }
     
     func pendingConfigurationURLs() -> [URL] {
