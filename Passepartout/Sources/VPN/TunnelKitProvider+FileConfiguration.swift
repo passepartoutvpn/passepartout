@@ -99,6 +99,10 @@ extension TunnelKitProvider.Configuration {
         var tlsKeyLines: [Substring]?
         var tlsWrap: SessionProxy.TLSWrap?
 
+        var currentBlockName: String?
+        var currentBlock: [String] = []
+        var unsupportedError: ApplicationError? = nil
+
         log.verbose("Configuration file:")
         for line in lines {
             log.verbose(line)
@@ -111,10 +115,6 @@ extension TunnelKitProvider.Configuration {
                 }
             }
 
-            var currentBlockName: String?
-            var currentBlock: [String] = []
-            var unsupportedError: ApplicationError? = nil
-            
             Regex.blockBegin.enumerateComponents(in: line) {
                 isHandled = true
                 let tag = $0.first!
@@ -145,7 +145,11 @@ extension TunnelKitProvider.Configuration {
                     clientCertificate = CryptoContainer(pem: currentBlock.joined(separator: "\n"))
                     
                 case "key":
-                    clientKey = CryptoContainer(pem: currentBlock.joined(separator: "\n"))
+                    let container = CryptoContainer(pem: currentBlock.joined(separator: "\n"))
+                    clientKey = container
+                    if container.isEncrypted {
+                        unsupportedError = ApplicationError.unsupportedConfiguration(option: "encrypted client certificate key")
+                    }
                     
                 case "tls-auth":
                     tlsKeyLines = currentBlock.map { Substring($0) }
@@ -380,5 +384,11 @@ private extension NSRegularExpression {
             tokens.removeFirst()
             block(tokens)
         }
+    }
+}
+
+extension CryptoContainer {
+    var isEncrypted: Bool {
+        return pem.contains("ENCRYPTED")
     }
 }

@@ -73,7 +73,7 @@ Unsupported:
     - `--compress` other than empty
 - Proxy
 - External file references (inline `<block>` only)
-- Encrypted certificate private key (will raise error TunnelKitNative Code=205)
+- Encrypted client certificate keys
 
 Ignored:
 
