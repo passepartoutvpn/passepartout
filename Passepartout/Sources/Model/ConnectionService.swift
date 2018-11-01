@@ -64,24 +64,6 @@ class ConnectionService: Codable {
             id = profile.id
         }
         
-        func contextURL(in service: ConnectionService) -> URL {
-            switch context {
-            case .provider:
-                return service.providersURL
-                
-            case .host:
-                return service.hostsURL
-            }
-        }
-        
-        func profileURL(in service: ConnectionService) -> URL {
-            return ConnectionService.url(in: contextURL(in: service), forProfileId: id)
-        }
-
-        func profileData(in service: ConnectionService) throws -> Data {
-            return try Data(contentsOf: profileURL(in: service))
-        }
-
         // MARK: RawRepresentable
         
         var rawValue: String {
@@ -101,14 +83,18 @@ class ConnectionService: Codable {
         }
     }
 
-    lazy var directory = FileManager.default.userURL(for: .documentDirectory, appending: nil)
+    var directory: String? = nil
+    
+    var rootURL: URL {
+        return FileManager.default.userURL(for: .documentDirectory, appending: directory)
+    }
     
     private var providersURL: URL {
-        return directory.appendingPathComponent(AppConstants.Store.providersDirectory)
+        return rootURL.appendingPathComponent(AppConstants.Store.providersDirectory)
     }
 
     private var hostsURL: URL {
-        return directory.appendingPathComponent(AppConstants.Store.hostsDirectory)
+        return rootURL.appendingPathComponent(AppConstants.Store.hostsDirectory)
     }
     
     private var build: Int
@@ -246,7 +232,7 @@ class ConnectionService: Codable {
         try? fm.createDirectory(at: hostsURL, withIntermediateDirectories: false, attributes: nil)
 
         for key in pendingRemoval {
-            let url = key.profileURL(in: self)
+            let url = profileURL(key)
             try? fm.removeItem(at: url)
             if let cfg = configurationURL(for: key) {
                 try? fm.removeItem(at: cfg)
@@ -255,7 +241,7 @@ class ConnectionService: Codable {
         for entry in cache.values {
             if let profile = entry as? ProviderConnectionProfile {
                 do {
-                    let url = ConnectionService.url(in: providersURL, forProfileId: entry.id)
+                    let url = profileURL(ProfileKey(.provider, entry.id))
                     let data = try encoder.encode(profile)
                     try data.write(to: url)
                     log.debug("Saved provider '\(profile.id)'")
@@ -265,7 +251,7 @@ class ConnectionService: Codable {
                 }
             } else if let profile = entry as? HostConnectionProfile {
                 do {
-                    let url = ConnectionService.url(in: hostsURL, forProfileId: entry.id)
+                    let url = profileURL(ProfileKey(.host, entry.id))
                     let data = try encoder.encode(profile)
                     try data.write(to: url)
                     log.debug("Saved host '\(profile.id)'")
@@ -285,7 +271,7 @@ class ConnectionService: Codable {
         if let _ = profile as? PlaceholderConnectionProfile {
             let decoder = JSONDecoder()
             do {
-                let data = try key.profileData(in: self)
+                let data = try profileData(key)
                 switch context {
                 case .provider:
                     profile = try decoder.decode(ProviderConnectionProfile.self, from: data)
@@ -306,15 +292,29 @@ class ConnectionService: Codable {
         return cache.keys.filter { $0.context == context }.map { $0.id }
     }
     
+    func contextURL(_ key: ProfileKey) -> URL {
+        switch key.context {
+        case .provider:
+            return providersURL
+            
+        case .host:
+            return hostsURL
+        }
+    }
+    
+    func profileURL(_ key: ProfileKey) -> URL {
+        return contextURL(key).appendingPathComponent(key.id).appendingPathExtension("json")
+    }
+    
+    func profileData(_ key: ProfileKey) throws -> Data {
+        return try Data(contentsOf: profileURL(key))
+    }
+    
     private static func profileId(fromURL url: URL) -> String? {
         guard url.pathExtension == "json" else {
             return nil
         }
         return url.deletingPathExtension().lastPathComponent
-    }
-    
-    private static func url(in directory: URL, forProfileId profileId: String) -> URL {
-        return directory.appendingPathComponent(profileId).appendingPathExtension("json")
     }
     
     // MARK: Profiles

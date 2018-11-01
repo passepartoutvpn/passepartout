@@ -35,9 +35,9 @@ class TransientStore {
     
     static let shared = TransientStore()
     
-    private let rootURL: URL
-
-    private let serviceURL: URL
+    private static var serviceURL: URL {
+        return FileManager.default.userURL(for: .documentDirectory, appending: AppConstants.Store.serviceFilename)
+    }
     
     let service: ConnectionService
 
@@ -51,20 +51,16 @@ class TransientStore {
     }
 
     private init() {
-        rootURL = FileManager.default.userURL(for: .documentDirectory, appending: nil)
-        serviceURL = rootURL.appendingPathComponent(AppConstants.Store.serviceFilename)
-
         let cfg = AppConstants.VPN.baseConfiguration()
         do {
-            ConnectionService.migrateJSON(at: serviceURL, to: serviceURL)
+            ConnectionService.migrateJSON(at: TransientStore.serviceURL, to: TransientStore.serviceURL)
             
-            let data = try Data(contentsOf: serviceURL)
+            let data = try Data(contentsOf: TransientStore.serviceURL)
             if let content = String(data: data, encoding: .utf8) {
                 log.verbose("Service JSON:")
                 log.verbose(content)
             }
             service = try JSONDecoder().decode(ConnectionService.self, from: data)
-            service.directory = rootURL
             service.baseConfiguration = cfg
             service.loadProfiles()
         } catch let e {
@@ -73,7 +69,6 @@ class TransientStore {
                 withAppGroup: GroupConstants.App.appGroup,
                 baseConfiguration: cfg
             )
-            service.directory = rootURL
 
 //            // hardcoded loading
 //            _ = service.addProfile(ProviderConnectionProfile(name: .pia), credentials: nil)
@@ -83,7 +78,7 @@ class TransientStore {
     }
     
     func serialize() {
-        try? JSONEncoder().encode(service).write(to: serviceURL)
+        try? JSONEncoder().encode(service).write(to: TransientStore.serviceURL)
         try? service.saveProfiles()
     }
 }

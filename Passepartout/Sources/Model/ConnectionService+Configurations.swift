@@ -54,13 +54,12 @@ extension ConnectionService {
     }
 
     private func targetConfigurationURL(for key: ProfileKey) -> URL {
-        let contextURL = key.contextURL(in: self)
-        return contextURL.appendingPathComponent(key.id).appendingPathExtension("ovpn")
+        return contextURL(key).appendingPathComponent(key.id).appendingPathExtension("ovpn")
     }
     
     func pendingConfigurationURLs() -> [URL] {
         do {
-            let list = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil, options: [])
+            let list = try FileManager.default.contentsOfDirectory(at: rootURL, includingPropertiesForKeys: nil, options: [])
             return list.filter { $0.pathExtension == "ovpn" }
         } catch let e {
             log.error("Could not list imported configurations: \(e)")

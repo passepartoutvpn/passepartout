@@ -246,7 +246,7 @@ internal enum L10n {
   }
 
   internal enum ImportedHosts {
-    /// Imported
+    /// Imported hosts
     internal static let title = L10n.tr("Localizable", "imported_hosts.title")
   }
 
