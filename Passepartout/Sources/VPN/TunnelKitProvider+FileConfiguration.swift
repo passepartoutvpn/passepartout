@@ -53,9 +53,9 @@ extension TunnelKitProvider.Configuration {
 
         static let auth = Utils.regex("^auth +[\\w\\-]+")
         
-        static let compLZO = Utils.regex("^comp-lzo")
+        static let compLZO = Utils.regex("^comp-lzo.*")
 
-        static let compress = Utils.regex("^compress")
+        static let compress = Utils.regex("^compress.*")
         
         static let ping = Utils.regex("^ping +\\d+")
 
