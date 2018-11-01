@@ -1,4 +1,4 @@
-<p style="text-align: center; padding: 0em 1em"><img src="res/logo.png" /></p>
+<p style="text-align: center; padding: 0em 1em"><img src="res/logo.svg" width="300" height="300" /></p>
 
 # [Passepartout][about-website]
 
