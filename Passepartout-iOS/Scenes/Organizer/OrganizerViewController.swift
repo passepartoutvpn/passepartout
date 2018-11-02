@@ -70,10 +70,6 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     
     // MARK: UIViewController
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -94,8 +90,6 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         }
 
         service.delegate = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(wizardDidCreate(notification:)), name: .WizardDidCreate, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -428,26 +422,9 @@ extension OrganizerViewController {
 // MARK: -
 
 extension OrganizerViewController: ConnectionServiceDelegate {
-    func connectionService(didDeactivate profile: ConnectionProfile) {
-        tableView.reloadData()
-    }
-    
-    func connectionService(didActivate profile: ConnectionProfile) {
-        tableView.reloadData()
-    }
-}
-
-extension OrganizerViewController {
-    @objc private func wizardDidCreate(notification: Notification) {
-        guard let profile = notification.userInfo?[WizardCreationKey.profile] as? ConnectionProfile,
-            let credentials = notification.userInfo?[WizardCreationKey.credentials] as? Credentials else {
-            
-            fatalError("WizardDidCreate notification must post profile and credentials")
-        }
-
-        service.addOrReplaceProfile(profile, credentials: credentials)
+    func connectionService(didAdd profile: ConnectionProfile) {
         TransientStore.shared.serialize() // add
-
+        
         reloadModel()
         tableView.reloadData()
 
@@ -466,5 +443,25 @@ extension OrganizerViewController {
             return
         }
         perform(segue: StoryboardSegue.Organizer.selectProfileSegueIdentifier, sender: profile)
+    }
+    
+    func connectionService(didRename profile: ConnectionProfile) {
+        TransientStore.shared.serialize() // rename
+
+        reloadModel()
+        tableView.reloadData()
+    }
+    
+    func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey) {
+        reloadModel()
+        tableView.reloadData()
+    }
+    
+    func connectionService(didDeactivate profile: ConnectionProfile) {
+        tableView.reloadData()
+    }
+    
+    func connectionService(didActivate profile: ConnectionProfile) {
+        tableView.reloadData()
     }
 }

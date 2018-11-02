@@ -31,6 +31,12 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 protocol ConnectionServiceDelegate: class {
+    func connectionService(didAdd profile: ConnectionProfile)
+
+    func connectionService(didRename profile: ConnectionProfile)
+
+    func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey)
+
     func connectionService(didActivate profile: ConnectionProfile)
 
     func connectionService(didDeactivate profile: ConnectionProfile)
@@ -338,6 +344,8 @@ class ConnectionService: Codable {
 
         // serialize immediately
         try? saveProfiles()
+        
+        delegate?.connectionService(didAdd: profile)
     }
     
     func removeProfile(_ key: ProfileKey) {
@@ -349,6 +357,8 @@ class ConnectionService: Codable {
         if cache.isEmpty {
             activeProfileKey = nil
         }
+        
+        delegate?.connectionService(didRemoveProfileWithKey: key)
     }
     
     func containsProfile(_ key: ProfileKey) -> Bool {

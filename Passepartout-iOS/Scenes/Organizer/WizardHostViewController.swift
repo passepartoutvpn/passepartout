@@ -130,9 +130,10 @@ class WizardHostViewController: UITableViewController, TableModelHost {
         guard let profile = createdProfile else {
             fatalError("No profile created?")
         }
+        let service = TransientStore.shared.service
         if let url = parsedFile?.url {
             do {
-                let savedURL = try TransientStore.shared.service.save(configurationURL: url, for: profile)
+                let savedURL = try service.save(configurationURL: url, for: profile)
                 log.debug("Associated .ovpn configuration file to profile '\(profile.id)': \(savedURL)")
 
                 // can now delete imported file
@@ -141,12 +142,8 @@ class WizardHostViewController: UITableViewController, TableModelHost {
                 log.error("Could not associate .ovpn configuration file to profile: \(e)")
             }
         }
-        
         dismiss(animated: true) {
-            NotificationCenter.default.post(name: .WizardDidCreate, object: nil, userInfo: [
-                WizardCreationKey.profile: profile,
-                WizardCreationKey.credentials: credentials
-            ])
+            service.addOrReplaceProfile(profile, credentials: credentials)
         }
     }
 
