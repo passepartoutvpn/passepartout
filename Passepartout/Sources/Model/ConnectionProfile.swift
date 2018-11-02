@@ -72,4 +72,11 @@ extension ConnectionProfile {
         }
         try keychain.set(password: password, for: key, label: key)
     }
+    
+    func removePassword(in keychain: Keychain) {
+        guard let key = passwordKey else {
+            return
+        }
+        keychain.removePassword(for: key)
+    }
 }

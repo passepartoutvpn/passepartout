@@ -395,10 +395,11 @@ class ConnectionService: Codable {
     }
     
     func removeProfile(_ key: ProfileKey) {
-        guard let i = cache.index(forKey: key) else {
+        guard let profile = cache[key] else {
             return
         }
-        cache.remove(at: i)
+        cache.removeValue(forKey: key)
+        removeCredentials(for: profile)
         pendingRemoval.insert(key)
         if cache.isEmpty {
             activeProfileKey = nil
@@ -456,6 +457,10 @@ class ConnectionService: Codable {
     func setCredentials(_ credentials: Credentials?, for profile: ConnectionProfile) throws {
         profile.username = credentials?.username
         try profile.setPassword(credentials?.password, in: keychain)
+    }
+    
+    func removeCredentials(for profile: ConnectionProfile) {
+        profile.removePassword(in: keychain)
     }
     
     // MARK: VPN
