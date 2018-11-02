@@ -206,7 +206,7 @@ extension CharacterSet {
     static let filename: CharacterSet = {
         var chars: CharacterSet = .decimalDigits
         let english = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        let symbols = "-_"
+        let symbols = "-_."
         chars.formUnion(CharacterSet(charactersIn: english))
         chars.formUnion(CharacterSet(charactersIn: english.lowercased()))
         chars.formUnion(CharacterSet(charactersIn: symbols))

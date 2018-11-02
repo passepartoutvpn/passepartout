@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Dot as a legal character in host profile title. [#22](https://github.com/keeshux/passepartout-ios/issues/22)
+
 ### Fixed
 
 - Incorrect compression warnings when importing host configurations. [#20](https://github.com/keeshux/passepartout-ios/pull/20)
