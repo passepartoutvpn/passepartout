@@ -489,7 +489,7 @@ private class PlaceholderConnectionProfile: ConnectionProfile {
     
     let id: String
     
-    var username: String?
+    var username: String? = nil
     
     var requiresCredentials: Bool = false
     
@@ -497,6 +497,10 @@ private class PlaceholderConnectionProfile: ConnectionProfile {
         fatalError("Generating configuration from a PlaceholderConnectionProfile")
     }
     
+    func with(newId: String) -> ConnectionProfile {
+        return PlaceholderConnectionProfile(ConnectionService.ProfileKey(context, newId))
+    }
+
     var mainAddress: String = ""
     
     var addresses: [String] = []

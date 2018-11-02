@@ -43,6 +43,8 @@ protocol ConnectionProfile: class, EndpointDataSource {
     var requiresCredentials: Bool { get }
     
     func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration
+
+    func with(newId: String) -> ConnectionProfile
 }
 
 extension ConnectionProfile {
