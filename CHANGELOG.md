@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Incorrect compression warnings when importing host configurations. [#20](https://github.com/keeshux/passepartout-ios/pull/20)
+- Regression in provider endpoints, IPv4 appearing reversed. [#23](https://github.com/keeshux/passepartout-ios/pull/23)
 
 ## 1.0 RC1 1194 (2018-11-01)
 
