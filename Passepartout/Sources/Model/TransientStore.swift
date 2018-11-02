@@ -79,6 +79,6 @@ class TransientStore {
     
     func serialize() {
         try? JSONEncoder().encode(service).write(to: TransientStore.serviceURL)
-        try? service.saveProfiles()
+        service.saveProfiles()
     }
 }

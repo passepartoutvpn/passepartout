@@ -33,7 +33,7 @@ private let log = SwiftyBeaver.self
 protocol ConnectionServiceDelegate: class {
     func connectionService(didAdd profile: ConnectionProfile)
 
-    func connectionService(didRename profile: ConnectionProfile)
+    func connectionService(didRename oldProfile: ConnectionProfile, to newProfile: ConnectionProfile)
 
     func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey)
 
@@ -230,7 +230,7 @@ class ConnectionService: Codable {
         }
     }
     
-    func saveProfiles() throws {
+    func saveProfiles() {
         let encoder = JSONEncoder()
 
         let fm = FileManager.default
@@ -343,9 +343,55 @@ class ConnectionService: Codable {
         }
 
         // serialize immediately
-        try? saveProfiles()
+        saveProfiles()
         
         delegate?.connectionService(didAdd: profile)
+    }
+
+    func renameProfile(_ key: ProfileKey, to newId: String) -> ConnectionProfile? {
+        precondition(newId != key.id)
+
+        // WARNING: can be a placeholder
+        guard let oldProfile = cache[key] else {
+            return nil
+        }
+
+        let fm = FileManager.default
+        let temporaryDelegate = delegate
+        delegate = nil
+
+        // 1. add renamed profile
+        let newProfile = oldProfile.with(newId: newId)
+        let newKey = ProfileKey(newProfile)
+        let sameCredentials = credentials(for: oldProfile)
+        addOrReplaceProfile(newProfile, credentials: sameCredentials)
+
+        // 2. rename .ovpn (if present)
+        if let cfgFrom = configurationURL(for: key) {
+            let cfgTo = targetConfigurationURL(for: newKey)
+            try? fm.removeItem(at: cfgTo)
+            try? fm.moveItem(at: cfgFrom, to: cfgTo)
+        }
+
+        // 3. remove old entry
+        removeProfile(key)
+
+        // 4. replace active key (if active)
+        if key == activeProfileKey {
+            activeProfileKey = newKey
+        }
+
+        // serialize immediately
+        saveProfiles()
+        
+        delegate = temporaryDelegate
+        delegate?.connectionService(didRename: oldProfile, to: newProfile)
+        
+        return newProfile
+    }
+
+    func renameProfile(_ profile: ConnectionProfile, to id: String) -> ConnectionProfile? {
+        return renameProfile(ProfileKey(profile), to: id)
     }
     
     func removeProfile(_ key: ProfileKey) {
