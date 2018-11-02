@@ -445,7 +445,7 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         perform(segue: StoryboardSegue.Organizer.selectProfileSegueIdentifier, sender: profile)
     }
     
-    func connectionService(didRename profile: ConnectionProfile) {
+    func connectionService(didRename oldProfile: ConnectionProfile, to newProfile: ConnectionProfile) {
         TransientStore.shared.serialize() // rename
 
         reloadModel()

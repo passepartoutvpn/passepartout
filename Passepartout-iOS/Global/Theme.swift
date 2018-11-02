@@ -125,6 +125,17 @@ extension UIButton {
     }
 }
 
+extension UITextField {
+    func applyProfileId(_ theme: Theme) {
+        placeholder = L10n.Global.Host.TitleInput.placeholder
+        clearButtonMode = .always
+        keyboardType = .asciiCapable
+        returnKeyType = .done
+        autocapitalizationType = .none
+        autocorrectionType = .no
+    }
+}
+
 // XXX: status bar is broken
 extension MFMailComposeViewController {
     func apply(_ theme: Theme) {

@@ -36,15 +36,16 @@ class Macros {
 }
 
 extension UIAlertController {
-    func addDefaultAction(_ title: String, handler: @escaping () -> Void) {
+    @discardableResult func addDefaultAction(_ title: String, handler: @escaping () -> Void) -> UIAlertAction {
         let action = UIAlertAction(title: title, style: .default) { (action) in
             handler()
         }
         addAction(action)
         preferredAction = action
+        return action
     }
     
-    func addCancelAction(_ title: String, handler: (() -> Void)? = nil) {
+    @discardableResult func addCancelAction(_ title: String, handler: (() -> Void)? = nil) -> UIAlertAction {
         let action = UIAlertAction(title: title, style: .cancel) { (action) in
             handler?()
         }
@@ -52,20 +53,23 @@ extension UIAlertController {
         if actions.count == 1 {
             preferredAction = action
         }
+        return action
     }
     
-    func addAction(_ title: String, handler: @escaping () -> Void) {
+    @discardableResult func addAction(_ title: String, handler: @escaping () -> Void) -> UIAlertAction {
         let action = UIAlertAction(title: title, style: .default) { (action) in
             handler()
         }
         addAction(action)
+        return action
     }
     
-    func addDestructiveAction(_ title: String, handler: @escaping () -> Void) {
+    @discardableResult func addDestructiveAction(_ title: String, handler: @escaping () -> Void) -> UIAlertAction {
         let action = UIAlertAction(title: title, style: .destructive) { (action) in
             handler()
         }
         addAction(action)
         preferredAction = action
+        return action
     }
 }

@@ -51,6 +51,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
     lazy var model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.meta)
+        model.setFooter(L10n.Global.Host.TitleInput.message, for: .meta)
         if !existingHosts.isEmpty {
             model.add(.existing)
             model.setHeader(L10n.Wizards.Host.Sections.Existing.header, for: .existing)
@@ -185,6 +186,10 @@ extension WizardHostViewController {
         return model.header(for: section)
     }
     
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return model.footer(for: section)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.count(for: section)
     }
@@ -196,9 +201,7 @@ extension WizardHostViewController {
             cell.caption = L10n.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
             cell.allowedCharset = .filename
-            cell.field.placeholder = L10n.Wizards.Host.Cells.TitleInput.placeholder
-            cell.field.clearButtonMode = .always
-            cell.field.returnKeyType = .done
+            cell.field.applyProfileId(Theme.current)
             cell.delegate = self
             return cell
             

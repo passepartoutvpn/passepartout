@@ -243,6 +243,14 @@ internal enum L10n {
     internal static let next = L10n.tr("Localizable", "global.next")
     /// OK
     internal static let ok = L10n.tr("Localizable", "global.ok")
+    internal enum Host {
+      internal enum TitleInput {
+        /// Legal characters are alphanumerics plus dash (-), underscore (_) and dot (.).
+        internal static let message = L10n.tr("Localizable", "global.host.title_input.message")
+        /// My Profile
+        internal static let placeholder = L10n.tr("Localizable", "global.host.title_input.placeholder")
+      }
+    }
   }
 
   internal enum ImportedHosts {
@@ -414,6 +422,10 @@ internal enum L10n {
       internal enum ReconnectVpn {
         /// Do you want to reconnect to the VPN?
         internal static let message = L10n.tr("Localizable", "service.alerts.reconnect_vpn.message")
+      }
+      internal enum Rename {
+        /// Rename profile
+        internal static let title = L10n.tr("Localizable", "service.alerts.rename.title")
       }
       internal enum TestConnectivity {
         /// Connectivity
@@ -655,8 +667,6 @@ internal enum L10n {
         internal enum TitleInput {
           /// Title
           internal static let caption = L10n.tr("Localizable", "wizards.host.cells.title_input.caption")
-          /// My Profile
-          internal static let placeholder = L10n.tr("Localizable", "wizards.host.cells.title_input.placeholder")
         }
       }
       internal enum Sections {
