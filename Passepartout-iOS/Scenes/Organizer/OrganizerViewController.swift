@@ -217,9 +217,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 //        }
         tableView.endUpdates()
         
-        let _ = service.removeProfile(rowProfile)
-        splitViewController?.serviceViewController?.hideProfileIfDeleted()
-        TransientStore.shared.serialize() // delete
+        service.removeProfile(rowProfile)
     }
 
     private func confirmVpnProfileDeletion() {
@@ -453,15 +451,24 @@ extension OrganizerViewController: ConnectionServiceDelegate {
     }
     
     func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey) {
+        splitViewController?.serviceViewController?.hideProfileIfDeleted()
+        TransientStore.shared.serialize() // delete
+
         reloadModel()
         tableView.reloadData()
     }
     
-    func connectionService(didDeactivate profile: ConnectionProfile) {
+    // XXX: deactivate + activate leads to a redundant serialization
+    
+    func connectionService(willDeactivate profile: ConnectionProfile) {
+        TransientStore.shared.serialize() // deactivate
+
         tableView.reloadData()
     }
     
     func connectionService(didActivate profile: ConnectionProfile) {
+        TransientStore.shared.serialize() // activate
+
         tableView.reloadData()
     }
 }

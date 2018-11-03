@@ -37,9 +37,9 @@ protocol ConnectionServiceDelegate: class {
 
     func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey)
 
-    func connectionService(didActivate profile: ConnectionProfile)
+    func connectionService(willDeactivate profile: ConnectionProfile)
 
-    func connectionService(didDeactivate profile: ConnectionProfile)
+    func connectionService(didActivate profile: ConnectionProfile)
 }
 
 class ConnectionService: Codable {
@@ -120,7 +120,7 @@ class ConnectionService: Codable {
     private(set) var activeProfileKey: ProfileKey? {
         willSet {
             if let oldProfile = activeProfile {
-                delegate?.connectionService(didDeactivate: oldProfile)
+                delegate?.connectionService(willDeactivate: oldProfile)
             }
         }
         didSet {
@@ -348,7 +348,7 @@ class ConnectionService: Codable {
         delegate?.connectionService(didAdd: profile)
     }
 
-    func renameProfile(_ key: ProfileKey, to newId: String) -> ConnectionProfile? {
+    @discardableResult func renameProfile(_ key: ProfileKey, to newId: String) -> ConnectionProfile? {
         precondition(newId != key.id)
 
         // WARNING: can be a placeholder
@@ -390,7 +390,7 @@ class ConnectionService: Codable {
         return newProfile
     }
 
-    func renameProfile(_ profile: ConnectionProfile, to id: String) -> ConnectionProfile? {
+    @discardableResult func renameProfile(_ profile: ConnectionProfile, to id: String) -> ConnectionProfile? {
         return renameProfile(ProfileKey(profile), to: id)
     }
     
