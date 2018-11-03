@@ -916,7 +916,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             model.set([.vpnSurvivesSleep], in: .vpnSurvivesSleep)
             model.set([.trustedPolicy], in: .trustedPolicy)
-            model.set([.testConnectivity, .dataCount, .debugLog], in: .diagnostics)
+            model.set([.dataCount, .debugLog], in: .diagnostics)
             model.set([.joinCommunity, .reportIssue], in: .feedback)
         }
 
