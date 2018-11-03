@@ -223,6 +223,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="itemEdit" destination="gbN-fY-AoW" id="DGl-oS-ZSe"/>
                         <outlet property="labelWelcome" destination="jEt-mV-gjN" id="kaN-fX-eRE"/>
                         <outlet property="tableView" destination="14D-an-pBY" id="qzB-YR-Pss"/>
                         <outlet property="viewWelcome" destination="p0F-IK-RD6" id="pGB-3J-Rwj"/>

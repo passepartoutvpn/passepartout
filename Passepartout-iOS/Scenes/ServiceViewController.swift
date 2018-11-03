@@ -35,10 +35,12 @@ class ServiceViewController: UIViewController, TableModelHost {
 
     @IBOutlet private weak var labelWelcome: UILabel!
     
+    @IBOutlet private weak var itemEdit: UIBarButtonItem!
+    
     var profile: ConnectionProfile? {
         didSet {
             title = profile?.id
-            navigationItem.rightBarButtonItem?.isEnabled = (profile?.context == .host)
+            navigationItem.rightBarButtonItem = (profile?.context == .host) ? itemEdit : nil
             reloadModel()
             updateViewsIfNeeded()
         }
