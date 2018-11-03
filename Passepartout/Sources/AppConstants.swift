@@ -70,7 +70,7 @@ class AppConstants {
     class Web {
         private static let version = "v2"
         
-        private static let baseURL = Repos.passepartoutAPI.appendingPathComponent("api/\(version)")
+        private static let baseURL = Repos.api.appendingPathComponent("api/\(version)")
         
         static func url(path: String) -> URL {
             return baseURL.appendingPathComponent(path)
@@ -126,7 +126,7 @@ class AppConstants {
 
         static let privacyPolicy = website.appendingPathComponent("privacy")
         
-        static let changelog = Repos.passepartout.appendingPathComponent("blob/master/CHANGELOG.md")
+        static let changelog = Repos.ios.appendingPathComponent("blob/master/CHANGELOG.md")
         
         static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!
         
@@ -152,9 +152,9 @@ class AppConstants {
     }
 
     class Repos {
-        private static let githubRoot = URL(string: "https://github.com/keeshux/")!
+        private static let githubRoot = URL(string: "https://github.com/passepartoutvpn/")!
 
-        private static let githubRawRoot = URL(string: "https://keeshux.github.io/")!
+        private static let githubRawRoot = URL(string: "https://passepartoutvpn.github.io/")!
         
         private static func github(repo: String) -> URL {
             return githubRoot.appendingPathComponent(repo)
@@ -164,11 +164,9 @@ class AppConstants {
             return githubRawRoot.appendingPathComponent(repo)
         }
         
-        static let passepartout = github(repo: "passepartout-ios")
+        static let ios = github(repo: "passepartout-ios")
 
-        static let passepartoutAPI = githubRaw(repo: "passepartout-api")
-        
-        static let tunnelKit = github(repo: "tunnelkit")
+        static let api = githubRaw(repo: "passepartout-api")
     }
 
     class Notices {
