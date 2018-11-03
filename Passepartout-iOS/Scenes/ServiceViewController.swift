@@ -293,14 +293,14 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
     }
     
-    private func toggleRetainTrustedConnection(_ isOn: Bool, sender: ToggleTableViewCell) {
+    private func toggleTrustedConnectionPolicy(_ isOn: Bool, sender: ToggleTableViewCell) {
         let completionHandler: () -> Void = {
-            self.service.preferences.trustPolicy = isOn ? .ignore : .disconnect
+            self.service.preferences.trustPolicy = isOn ? .disconnect : .ignore
             if self.vpn.isEnabled {
                 self.vpn.reinstall(completionHandler: nil)
             }
         }
-        guard !isOn else {
+        guard isOn else {
             completionHandler()
             return
         }
@@ -316,7 +316,7 @@ class ServiceViewController: UIViewController, TableModelHost {
             completionHandler()
         }
         alert.addCancelAction(L10n.Global.cancel) {
-            sender.setOn(true, animated: true)
+            sender.setOn(false, animated: true)
         }
         present(alert, animated: true, completion: nil)
     }
@@ -664,7 +664,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedPolicy:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
             cell.caption = L10n.Service.Cells.TrustedPolicy.caption
-            cell.isOn = (service.preferences.trustPolicy == .ignore)
+            cell.isOn = (service.preferences.trustPolicy == .disconnect)
             return cell
             
         // diagnostics
@@ -826,7 +826,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             
         case .trustedPolicy:
-            toggleRetainTrustedConnection(cell.isOn, sender: cell)
+            toggleTrustedConnectionPolicy(cell.isOn, sender: cell)
             
         default:
             break

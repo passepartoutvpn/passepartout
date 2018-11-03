@@ -532,7 +532,7 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "service.cells.trusted_mobile.caption")
       }
       internal enum TrustedPolicy {
-        /// Retain existing connection
+        /// Disconnect VPN when trusted
         internal static let caption = L10n.tr("Localizable", "service.cells.trusted_policy.caption")
       }
       internal enum TrustedWifi {
@@ -582,7 +582,7 @@ internal enum L10n {
         internal static let header = L10n.tr("Localizable", "service.sections.status.header")
       }
       internal enum Trusted {
-        /// When entering a trusted network, an existing VPN connection will not be shut down by default. Disable to always enforce a disconnection.
+        /// When entering a trusted network, the VPN connection is normally shut down and kept disconnected. Disable this option to allow manual VPN connections.
         internal static let footer = L10n.tr("Localizable", "service.sections.trusted.footer")
         /// Trusted networks
         internal static let header = L10n.tr("Localizable", "service.sections.trusted.header")
