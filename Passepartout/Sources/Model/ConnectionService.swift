@@ -253,7 +253,7 @@ class ConnectionService: Codable {
             } else if let hostProfile = profile as? HostConnectionProfile {
                 optData = try encoder.encode(hostProfile)
             } else if let placeholder = profile as? PlaceholderConnectionProfile {
-                log.debug("Skipped \(placeholder.context) '\(placeholder.id)'")
+                log.debug("Skipped placeholder \(placeholder)")
             } else {
                 fatalError("Attempting to add an unhandled profile type: \(type(of: profile))")
             }
@@ -261,9 +261,9 @@ class ConnectionService: Codable {
                 return
             }
             try data.write(to: url)
-            log.debug("Serialized \(profile.context) profile '\(profile.id)'")
+            log.debug("Serialized profile \(profile)")
         } catch let e {
-            log.warning("Could not serialize \(profile.context) profile '\(profile.id)': \(e)")
+            log.warning("Could not serialize profile \(profile): \(e)")
         }
     }
     

@@ -33,7 +33,7 @@ enum Context: String, Codable {
     case host
 }
 
-protocol ConnectionProfile: class, EndpointDataSource {
+protocol ConnectionProfile: class, EndpointDataSource, CustomStringConvertible {
     var context: Context { get }
     
     var id: String { get }
@@ -78,5 +78,11 @@ extension ConnectionProfile {
             return
         }
         keychain.removePassword(for: key)
+    }
+}
+
+extension ConnectionProfile {
+    var description: String {
+        return "[\(context):\(id)]"
     }
 }
