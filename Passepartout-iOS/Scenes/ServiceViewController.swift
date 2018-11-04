@@ -186,7 +186,6 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private func activateProfile() {
         service.activateProfile(uncheckedProfile)
-        TransientStore.shared.serialize() // activate
 
         reloadModel()
         tableView.reloadData()
