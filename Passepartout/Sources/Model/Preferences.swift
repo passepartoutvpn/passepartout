@@ -50,5 +50,5 @@ class EditablePreferences: Preferences, Codable {
     
     var trustedWifis: [String: Bool] = [:]
     
-    var trustPolicy: TrustPolicy = .ignore
+    var trustPolicy: TrustPolicy = .disconnect
 }
