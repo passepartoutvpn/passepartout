@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dot as a legal character in host profile title. [#22](https://github.com/keeshux/passepartout-ios/issues/22)
 - Host profiles can now be renamed. [#24](https://github.com/keeshux/passepartout-ios/issues/24)
 
+### Removed
+
+- "Test connectivity" until it's more transparent.
+
 ### Fixed
 
 - Incorrect compression warnings when importing host configurations. [#20](https://github.com/keeshux/passepartout-ios/pull/20)
