@@ -39,7 +39,7 @@ class FileConfigurationTests: XCTestCase {
     }
     
     func testPIA() throws {
-        let file = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary"))
+        let file = try TunnelKitProvider.Configuration.parsed(fromURL: url(withName: "pia-hungary"))
         XCTAssertEqual(file.hostname, "hungary.privateinternetaccess.com")
         XCTAssertEqual(file.configuration.sessionConfiguration.cipher, .aes128cbc)
         XCTAssertEqual(file.configuration.sessionConfiguration.digest, .sha1)
@@ -50,7 +50,7 @@ class FileConfigurationTests: XCTestCase {
     }
 
     func testStripped() throws {
-        let lines = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary"), returnsStripped: true).strippedLines!
+        let lines = try TunnelKitProvider.Configuration.parsed(fromURL: url(withName: "pia-hungary"), returnsStripped: true).strippedLines!
         let stripped = lines.joined(separator: "\n")
         print(stripped)
     }

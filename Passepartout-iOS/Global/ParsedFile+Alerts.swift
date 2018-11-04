@@ -35,7 +35,7 @@ extension ParsedFile {
         let file: ParsedFile
         log.debug("Parsing configuration URL: \(url)")
         do {
-            file = try TunnelKitProvider.Configuration.parsed(from: url)
+            file = try TunnelKitProvider.Configuration.parsed(fromURL: url)
         } catch let e {
             let message = localizedMessage(forError: e)
             alertImportError(url: url, in: viewController, withMessage: message)

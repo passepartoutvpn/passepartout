@@ -30,7 +30,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 struct ParsedFile {
-    let url: URL
+    let url: URL?
     
     let hostname: String
     
@@ -77,8 +77,12 @@ extension TunnelKitProvider.Configuration {
         static let externalFiles = Utils.regex("^(ca|cert|key|tls-auth|tls-crypt) ")
     }
     
-    static func parsed(from url: URL, returnsStripped: Bool = false) throws -> ParsedFile {
+    static func parsed(fromURL url: URL, returnsStripped: Bool = false) throws -> ParsedFile {
         let lines = try String(contentsOf: url).trimmedLines()
+        return try parsed(fromLines: lines, originalURL: url, returnsStripped: returnsStripped)
+    }
+
+    static func parsed(fromLines lines: [String], originalURL: URL? = nil, returnsStripped: Bool = false) throws -> ParsedFile {
         var strippedLines: [String]? = returnsStripped ? [] : nil
         var warning: ApplicationError? = nil
 
@@ -343,7 +347,7 @@ extension TunnelKitProvider.Configuration {
         builder.endpointProtocols = endpointProtocols
 
         return ParsedFile(
-            url: url,
+            url: originalURL,
             hostname: hostname,
             configuration: builder.build(),
             strippedLines: strippedLines,
