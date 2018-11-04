@@ -52,11 +52,9 @@ class WizardProviderViewController: UITableViewController {
         guard let profile = createdProfile else {
             fatalError("No profile created?")
         }
+        let service = TransientStore.shared.service
         dismiss(animated: true) {
-            NotificationCenter.default.post(name: .WizardDidCreate, object: nil, userInfo: [
-                WizardCreationKey.profile: profile,
-                WizardCreationKey.credentials: credentials
-            ])
+            service.addOrReplaceProfile(profile, credentials: credentials)
         }
     }
 

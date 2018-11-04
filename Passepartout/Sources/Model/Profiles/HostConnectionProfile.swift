@@ -65,6 +65,13 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
 
         return builder.build()
     }
+    
+    func with(newId: String) -> ConnectionProfile {
+        let profile = HostConnectionProfile(title: newId, hostname: hostname)
+        profile.username = username
+        profile.parameters = parameters
+        return profile
+    }
 }
 
 extension HostConnectionProfile {

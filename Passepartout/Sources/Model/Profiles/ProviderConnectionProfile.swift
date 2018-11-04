@@ -139,6 +139,10 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         }
         return builder.build()
     }
+
+    func with(newId: String) -> ConnectionProfile {
+        fatalError("Cannot rename a ProviderConnectionProfile")
+    }
 }
 
 extension ProviderConnectionProfile {

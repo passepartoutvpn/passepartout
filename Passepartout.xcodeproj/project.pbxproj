@@ -43,7 +43,6 @@
 		0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC4213DF7AE00741BA1 /* Preferences.swift */; };
 		0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
-		0E89DFD0213F223400741BA1 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCF213F223400741BA1 /* Wizard.swift */; };
 		0E8D97E221388B52006FB4A0 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
 		0E8D97E521389277006FB4A0 /* pia.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D97E421389276006FB4A0 /* pia.json */; };
 		0EA068F4218475F800C320AD /* ParsedFile+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ParsedFile+Alerts.swift */; };
@@ -166,7 +165,6 @@
 		0E89DFC4213DF7AE00741BA1 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionProxy+Communication.swift"; sourceTree = "<group>"; };
 		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
-		0E89DFCF213F223400741BA1 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
 		0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructurePreset.swift; sourceTree = "<group>"; };
 		0E8D97E421389276006FB4A0 /* pia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pia.json; sourceTree = "<group>"; };
 		0EA068F3218475F800C320AD /* ParsedFile+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParsedFile+Alerts.swift"; sourceTree = "<group>"; };
@@ -399,7 +397,6 @@
 				0E2B494120FD16540094784C /* TransientStore.swift */,
 				0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */,
 				0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */,
-				0E89DFCF213F223400741BA1 /* Wizard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -845,7 +842,6 @@
 				0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */,
 				0EBE3A84213C6ADE00BFA2F5 /* InfrastructureFactory.swift in Sources */,
 				0E4FD7DE20D3E49A002221FF /* StandardVPNProvider.swift in Sources */,
-				0E89DFD0213F223400741BA1 /* Wizard.swift in Sources */,
 				0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */,
 				0EBE3AA1213DC1A100BFA2F5 /* ConnectionService.swift in Sources */,
 				0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */,

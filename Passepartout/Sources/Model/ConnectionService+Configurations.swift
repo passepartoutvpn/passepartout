@@ -53,7 +53,7 @@ extension ConnectionService {
         return configurationURL(for: ProfileKey(profile))
     }
 
-    private func targetConfigurationURL(for key: ProfileKey) -> URL {
+    func targetConfigurationURL(for key: ProfileKey) -> URL {
         return contextURL(key).appendingPathComponent(key.id).appendingPathExtension("ovpn")
     }
     

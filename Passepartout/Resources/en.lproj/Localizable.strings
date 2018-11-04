@@ -26,6 +26,8 @@
 "global.ok" = "OK";
 "global.cancel" = "Cancel";
 "global.next" = "Next";
+"global.host.title_input.message" = "Legal characters are alphanumerics plus dash (-), underscore (_) and dot (.).";
+"global.host.title_input.placeholder" = "My Profile";
 
 "reddit.title" = "Reddit";
 "reddit.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
@@ -49,7 +51,6 @@
 "account.suggestion_footer.infrastructure.pia" = "Use your website credentials. Your username is usually numeric with a \"p\" prefix.";
 
 "wizards.host.cells.title_input.caption" = "Title";
-"wizards.host.cells.title_input.placeholder" = "My Profile";
 "wizards.host.sections.existing.header" = "Existing profiles";
 "wizards.host.alerts.existing.message" = "A host profile with the same title already exists. Replace it?";
 
@@ -105,6 +106,7 @@
 "service.cells.debug_log.caption" = "Debug log";
 "service.cells.report_issue.caption" = "Report connectivity issue";
 
+"service.alerts.rename.title" = "Rename profile";
 "service.alerts.credentials_needed.message" = "You need to enter account credentials first.";
 "service.alerts.reconnect_vpn.message" = "Do you want to reconnect to the VPN?";
 "service.alerts.trusted.no_network.message" = "You are not connected to any Wi-Fi network.";

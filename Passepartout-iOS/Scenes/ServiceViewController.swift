@@ -35,9 +35,12 @@ class ServiceViewController: UIViewController, TableModelHost {
 
     @IBOutlet private weak var labelWelcome: UILabel!
     
+    @IBOutlet private weak var itemEdit: UIBarButtonItem!
+    
     var profile: ConnectionProfile? {
         didSet {
             title = profile?.id
+            navigationItem.rightBarButtonItem = (profile?.context == .host) ? itemEdit : nil
             reloadModel()
             updateViewsIfNeeded()
         }
@@ -46,6 +49,8 @@ class ServiceViewController: UIViewController, TableModelHost {
     private let service = TransientStore.shared.service
     
     private lazy var vpn = GracefulVPN(service: service)
+
+    private weak var pendingRenameAction: UIAlertAction?
 
     private var lastInfrastructureUpdate: Date?
     
@@ -179,7 +184,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         viewWelcome?.isHidden = (profile != nil)
     }
     
-    @IBAction private func activate() {
+    private func activateProfile() {
         service.activateProfile(uncheckedProfile)
         TransientStore.shared.serialize() // activate
 
@@ -189,6 +194,28 @@ class ServiceViewController: UIViewController, TableModelHost {
         vpn.disconnect(completionHandler: nil)
     }
 
+    @IBAction private func renameProfile() {
+        let alert = Macros.alert(L10n.Service.Alerts.Rename.title, L10n.Global.Host.TitleInput.message)
+        alert.addTextField { (field) in
+            field.text = self.profile?.id
+            field.applyProfileId(Theme.current)
+            field.delegate = self
+        }
+        pendingRenameAction = alert.addDefaultAction(L10n.Global.ok) {
+            guard let newId = alert.textFields?.first?.text else {
+                return
+            }
+            self.doRenameCurrentProfile(to: newId)
+        }
+        alert.addCancelAction(L10n.Global.cancel)
+        pendingRenameAction?.isEnabled = false
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func doRenameCurrentProfile(to newId: String) {
+        profile = service.renameProfile(uncheckedHostProfile, to: newId)
+    }
+    
     private func toggleVpnService(cell: ToggleTableViewCell) {
         if cell.isOn {
             guard !service.needsCredentials(for: uncheckedProfile) else {
@@ -713,7 +740,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     private func handle(row: RowType, cell: UITableViewCell) -> Bool {
         switch row {
         case .useProfile:
-            activate()
+            activateProfile()
             
         case .reconnect:
             confirmVpnReconnection()
@@ -926,6 +953,25 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             return
         }
         tableView.deselectRow(at: selected, animated: true)
+    }
+}
+
+// MARK: -
+
+extension ServiceViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard string.rangeOfCharacter(from: CharacterSet.filename.inverted) == nil else {
+            return false
+        }
+        if let text = textField.text {
+            let replacement = (text as NSString).replacingCharacters(in: range, with: string)
+            pendingRenameAction?.isEnabled = (replacement != uncheckedProfile.id)
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
     }
 }
 

@@ -43,6 +43,8 @@ protocol ConnectionProfile: class, EndpointDataSource {
     var requiresCredentials: Bool { get }
     
     func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration
+
+    func with(newId: String) -> ConnectionProfile
 }
 
 extension ConnectionProfile {
@@ -69,5 +71,12 @@ extension ConnectionProfile {
             return
         }
         try keychain.set(password: password, for: key, label: key)
+    }
+    
+    func removePassword(in keychain: Keychain) {
+        guard let key = passwordKey else {
+            return
+        }
+        keychain.removePassword(for: key)
     }
 }

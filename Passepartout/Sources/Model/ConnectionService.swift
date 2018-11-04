@@ -31,6 +31,12 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 protocol ConnectionServiceDelegate: class {
+    func connectionService(didAdd profile: ConnectionProfile)
+
+    func connectionService(didRename oldProfile: ConnectionProfile, to newProfile: ConnectionProfile)
+
+    func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey)
+
     func connectionService(didActivate profile: ConnectionProfile)
 
     func connectionService(didDeactivate profile: ConnectionProfile)
@@ -224,7 +230,7 @@ class ConnectionService: Codable {
         }
     }
     
-    func saveProfiles() throws {
+    func saveProfiles() {
         let encoder = JSONEncoder()
 
         let fm = FileManager.default
@@ -337,18 +343,69 @@ class ConnectionService: Codable {
         }
 
         // serialize immediately
-        try? saveProfiles()
+        saveProfiles()
+        
+        delegate?.connectionService(didAdd: profile)
+    }
+
+    func renameProfile(_ key: ProfileKey, to newId: String) -> ConnectionProfile? {
+        precondition(newId != key.id)
+
+        // WARNING: can be a placeholder
+        guard let oldProfile = cache[key] else {
+            return nil
+        }
+
+        let fm = FileManager.default
+        let temporaryDelegate = delegate
+        delegate = nil
+
+        // 1. add renamed profile
+        let newProfile = oldProfile.with(newId: newId)
+        let newKey = ProfileKey(newProfile)
+        let sameCredentials = credentials(for: oldProfile)
+        addOrReplaceProfile(newProfile, credentials: sameCredentials)
+
+        // 2. rename .ovpn (if present)
+        if let cfgFrom = configurationURL(for: key) {
+            let cfgTo = targetConfigurationURL(for: newKey)
+            try? fm.removeItem(at: cfgTo)
+            try? fm.moveItem(at: cfgFrom, to: cfgTo)
+        }
+
+        // 3. remove old entry
+        removeProfile(key)
+
+        // 4. replace active key (if active)
+        if key == activeProfileKey {
+            activeProfileKey = newKey
+        }
+
+        // serialize immediately
+        saveProfiles()
+        
+        delegate = temporaryDelegate
+        delegate?.connectionService(didRename: oldProfile, to: newProfile)
+        
+        return newProfile
+    }
+
+    func renameProfile(_ profile: ConnectionProfile, to id: String) -> ConnectionProfile? {
+        return renameProfile(ProfileKey(profile), to: id)
     }
     
     func removeProfile(_ key: ProfileKey) {
-        guard let i = cache.index(forKey: key) else {
+        guard let profile = cache[key] else {
             return
         }
-        cache.remove(at: i)
+        cache.removeValue(forKey: key)
+        removeCredentials(for: profile)
         pendingRemoval.insert(key)
         if cache.isEmpty {
             activeProfileKey = nil
         }
+        
+        delegate?.connectionService(didRemoveProfileWithKey: key)
     }
     
     func containsProfile(_ key: ProfileKey) -> Bool {
@@ -400,6 +457,10 @@ class ConnectionService: Codable {
     func setCredentials(_ credentials: Credentials?, for profile: ConnectionProfile) throws {
         profile.username = credentials?.username
         try profile.setPassword(credentials?.password, in: keychain)
+    }
+    
+    func removeCredentials(for profile: ConnectionProfile) {
+        profile.removePassword(in: keychain)
     }
     
     // MARK: VPN
@@ -479,7 +540,7 @@ private class PlaceholderConnectionProfile: ConnectionProfile {
     
     let id: String
     
-    var username: String?
+    var username: String? = nil
     
     var requiresCredentials: Bool = false
     
@@ -487,6 +548,10 @@ private class PlaceholderConnectionProfile: ConnectionProfile {
         fatalError("Generating configuration from a PlaceholderConnectionProfile")
     }
     
+    func with(newId: String) -> ConnectionProfile {
+        return PlaceholderConnectionProfile(ConnectionService.ProfileKey(context, newId))
+    }
+
     var mainAddress: String = ""
     
     var addresses: [String] = []
