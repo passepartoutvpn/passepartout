@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Dot as a legal character in host profile title. [#22](https://github.com/keeshux/passepartout-ios/issues/22)
-- Host profiles can now be renamed. [#24](https://github.com/keeshux/passepartout-ios/issues/24)
+- Dot as a legal character in host profile title. [#22](https://github.com/passepartoutvpn/passepartout-ios/issues/22)
+- Host profiles can now be renamed. [#24](https://github.com/passepartoutvpn/passepartout-ios/issues/24)
 
 ### Changed
 
@@ -22,20 +22,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Incorrect compression warnings when importing host configurations. [#20](https://github.com/keeshux/passepartout-ios/pull/20)
-- Regression in provider endpoints, IPv4 appearing reversed. [#23](https://github.com/keeshux/passepartout-ios/pull/23)
+- Incorrect compression warnings when importing host configurations. [#20](https://github.com/passepartoutvpn/passepartout-ios/pull/20)
+- Regression in provider endpoints, IPv4 appearing reversed. [#23](https://github.com/passepartoutvpn/passepartout-ios/pull/23)
 
 ## 1.0 RC1 1194 (2018-11-01)
 
 ### Added
 
-- Explicit rejection of encrypted client certificate keys. [#15](https://github.com/keeshux/passepartout-ios/issues/15)
-- Attach .ovpn when reporting a connectivity issue, stripped of sensitive data. [#13](https://github.com/keeshux/passepartout-ios/pull/13)
-- iTunes File Sharing (skythedesu). [#14](https://github.com/keeshux/passepartout-ios/pull/14)
-- Tunnel failure reporting in UI. [#8](https://github.com/keeshux/passepartout-ios/pull/8)
-- Explicit "Reconnect" button. [#9](https://github.com/keeshux/passepartout-ios/pull/9)
-- Option to revert host parameters to original configuration (Nicholas Caito). [#10](https://github.com/keeshux/passepartout-ios/pull/10)
-- Support for TLS wrapping (tls-auth and tls-crypt). [#5](https://github.com/keeshux/passepartout-ios/pull/5)
+- Explicit rejection of encrypted client certificate keys. [#15](https://github.com/passepartoutvpn/passepartout-ios/issues/15)
+- Attach .ovpn when reporting a connectivity issue, stripped of sensitive data. [#13](https://github.com/passepartoutvpn/passepartout-ios/pull/13)
+- iTunes File Sharing (skythedesu). [#14](https://github.com/passepartoutvpn/passepartout-ios/pull/14)
+- Tunnel failure reporting in UI. [#8](https://github.com/passepartoutvpn/passepartout-ios/pull/8)
+- Explicit "Reconnect" button. [#9](https://github.com/passepartoutvpn/passepartout-ios/pull/9)
+- Option to revert host parameters to original configuration (Nicholas Caito). [#10](https://github.com/passepartoutvpn/passepartout-ios/pull/10)
+- Support for TLS wrapping (tls-auth and tls-crypt). [#5](https://github.com/passepartoutvpn/passepartout-ios/pull/5)
 - AES-GCM and new endpoints to PIA network preset. [tunnelkit#32](https://github.com/keeshux/tunnelkit/pull/32)
 - Disclosure indicators in profile organizer (Samuel Michaels).
 - Disclaimer for app usage.
@@ -53,18 +53,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Handling of extra whitespaces in .ovpn (Mike Mayer). [#17](https://github.com/keeshux/passepartout-ios/issues/17)
+- Handling of extra whitespaces in .ovpn (Mike Mayer). [#17](https://github.com/passepartoutvpn/passepartout-ios/issues/17)
 - Glitches in import wizard flow, sometimes not even appearing.
-- Warn about .ovpn containing potentially unsupported compression. [#16](https://github.com/keeshux/passepartout-ios/issues/16)
+- Warn about .ovpn containing potentially unsupported compression. [#16](https://github.com/passepartoutvpn/passepartout-ios/issues/16)
 - Retain credentials of replaced host profile.
 - Original configuration not saved after reset.
 - Connection occasionally turning inactive after a while.
 - Improved performance and privacy of debug log.
-- .ovpn files could not be imported without OpenVPN Connect installed. [#6](https://github.com/keeshux/passepartout-ios/issues/6)
+- .ovpn files could not be imported without OpenVPN Connect installed. [#6](https://github.com/passepartoutvpn/passepartout-ios/issues/6)
 - Fixed Mullvad abrupt disconnection. [tunnelkit#30](https://github.com/keeshux/tunnelkit/issues/30)
-- Credentials are now optional for host profiles. [#4](https://github.com/keeshux/passepartout-ios/pull/4)
-- Can now import .ovpn files from Apple Files app. [#1](https://github.com/keeshux/passepartout-ios/pull/1)
-- Reject unrecognized values for `cipher`, `auth` and `proto`. [#1](https://github.com/keeshux/passepartout-ios/pull/1)
+- Credentials are now optional for host profiles. [#4](https://github.com/passepartoutvpn/passepartout-ios/pull/4)
+- Can now import .ovpn files from Apple Files app. [#1](https://github.com/passepartoutvpn/passepartout-ios/pull/1)
+- Reject unrecognized values for `cipher`, `auth` and `proto`. [#1](https://github.com/passepartoutvpn/passepartout-ios/pull/1)
 - Alert unsupported configuration options.
 - Use accent color for checkmarks in table cells.
 
