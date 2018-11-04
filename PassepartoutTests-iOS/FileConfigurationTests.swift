@@ -55,6 +55,17 @@ class FileConfigurationTests: XCTestCase {
         print(stripped)
     }
     
+    func testCompression() throws {
+        let base: [String] = ["<ca>", "</ca>", "remote 1.2.3.4"]
+        
+        XCTAssertNotNil(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["comp-lzo"]).warning)
+        XCTAssertNoThrow(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["comp-lzo no"]))
+        XCTAssertThrowsError(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["comp-lzo yes"]))
+
+        XCTAssertNoThrow(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["compress"]))
+        XCTAssertThrowsError(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["compress lzo"]))
+    }
+    
     private func url(withName name: String) -> URL {
         return Bundle(for: FileConfigurationTests.self).url(forResource: name, withExtension: "ovpn")!
     }
