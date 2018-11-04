@@ -116,7 +116,7 @@ class InfrastructureFactory {
         return infra
     }
 
-    func update(_ name: Infrastructure.Name, notBeforeInterval minInterval: TimeInterval?, completionHandler: @escaping ((Infrastructure, Date?)?, Error?) -> Void) -> Bool {
+    func update(_ name: Infrastructure.Name, notBeforeInterval minInterval: TimeInterval?, completionHandler: @escaping ((Infrastructure, Date)?, Error?) -> Void) -> Bool {
         let ifModifiedSince = modificationDate(for: name)
         
         if let lastInfrastructureUpdate = lastUpdate[name] {
@@ -170,7 +170,7 @@ class InfrastructureFactory {
             self.save(name, with: infra, lastModified: lastModified)
 
             DispatchQueue.main.async {
-                completionHandler((infra, response.lastModified), nil)
+                completionHandler((infra, lastModified), nil)
             }
         }
         return true
