@@ -115,8 +115,6 @@ class ConnectionService: Codable {
     
     private var cache: [ProfileKey: ConnectionProfile]
     
-    private var pendingRemoval: Set<ProfileKey>
-    
     private(set) var activeProfileKey: ProfileKey? {
         willSet {
             if let oldProfile = activeProfile {
@@ -160,7 +158,6 @@ class ConnectionService: Codable {
         preferences = EditablePreferences()
 
         cache = [:]
-        pendingRemoval = []
     }
     
     // MARK: Codable
@@ -181,7 +178,6 @@ class ConnectionService: Codable {
         preferences = try container.decode(EditablePreferences.self, forKey: .preferences)
 
         cache = [:]
-        pendingRemoval = []
     }
     
     func encode(to encoder: Encoder) throws {
@@ -232,42 +228,42 @@ class ConnectionService: Codable {
     
     func saveProfiles() {
         let encoder = JSONEncoder()
+        ensureDirectoriesExistence()
 
+        for profile in cache.values {
+            saveProfile(profile, withEncoder: encoder, checkDirectories: false)
+        }
+    }
+    
+    private func ensureDirectoriesExistence() {
         let fm = FileManager.default
         try? fm.createDirectory(at: providersURL, withIntermediateDirectories: false, attributes: nil)
         try? fm.createDirectory(at: hostsURL, withIntermediateDirectories: false, attributes: nil)
-
-        for key in pendingRemoval {
-            let url = profileURL(key)
-            try? fm.removeItem(at: url)
-            if let cfg = configurationURL(for: key) {
-                try? fm.removeItem(at: cfg)
-            }
+    }
+    
+    private func saveProfile(_ profile: ConnectionProfile, withEncoder encoder: JSONEncoder, checkDirectories: Bool) {
+        if checkDirectories {
+            ensureDirectoriesExistence()
         }
-        for entry in cache.values {
-            if let profile = entry as? ProviderConnectionProfile {
-                do {
-                    let url = profileURL(ProfileKey(.provider, entry.id))
-                    let data = try encoder.encode(profile)
-                    try data.write(to: url)
-                    log.debug("Saved provider '\(profile.id)'")
-                } catch let e {
-                    log.error("Could not save provider '\(profile.id)': \(e)")
-                    continue
-                }
-            } else if let profile = entry as? HostConnectionProfile {
-                do {
-                    let url = profileURL(ProfileKey(.host, entry.id))
-                    let data = try encoder.encode(profile)
-                    try data.write(to: url)
-                    log.debug("Saved host '\(profile.id)'")
-                } catch let e {
-                    log.error("Could not save host '\(profile.id)': \(e)")
-                    continue
-                }
-            } else if let placeholder = entry as? PlaceholderConnectionProfile {
+        do {
+            let url = profileURL(ProfileKey(profile))
+            var optData: Data?
+            if let providerProfile = profile as? ProviderConnectionProfile {
+                optData = try encoder.encode(providerProfile)
+            } else if let hostProfile = profile as? HostConnectionProfile {
+                optData = try encoder.encode(hostProfile)
+            } else if let placeholder = profile as? PlaceholderConnectionProfile {
                 log.debug("Skipped \(placeholder.context) '\(placeholder.id)'")
+            } else {
+                fatalError("Attempting to add an unhandled profile type: \(type(of: profile))")
             }
+            guard let data = optData else {
+                return
+            }
+            try data.write(to: url)
+            log.debug("Serialized \(profile.context) profile '\(profile.id)'")
+        } catch let e {
+            log.warning("Could not serialize \(profile.context) profile '\(profile.id)': \(e)")
         }
     }
     
@@ -336,13 +332,14 @@ class ConnectionService: Codable {
     func addOrReplaceProfile(_ profile: ConnectionProfile, credentials: Credentials?) {
         let key = ProfileKey(profile)
         cache[key] = profile
-        pendingRemoval.remove(key)
         try? setCredentials(credentials, for: profile)
         if cache.count == 1 {
             activeProfileKey = key
         }
-
         delegate?.connectionService(didAdd: profile)
+
+        // serialization (can fail)
+        saveProfile(profile, withEncoder: JSONEncoder(), checkDirectories: true)
     }
 
     @discardableResult func renameProfile(_ key: ProfileKey, to newId: String) -> ConnectionProfile? {
@@ -392,14 +389,27 @@ class ConnectionService: Codable {
         guard let profile = cache[key] else {
             return
         }
+
         cache.removeValue(forKey: key)
         removeCredentials(for: profile)
-        pendingRemoval.insert(key)
         if cache.isEmpty {
             activeProfileKey = nil
         }
         
         delegate?.connectionService(didRemoveProfileWithKey: key)
+
+        // serialization (can fail)
+        do {
+            let fm = FileManager.default
+            if let cfg = configurationURL(for: key) {
+                try? fm.removeItem(at: cfg)
+            }
+            let url = profileURL(key)
+            try fm.removeItem(at: url)
+            log.debug("Deleted removed profile '\(profile.id)'")
+        } catch let e {
+            log.warning("Could not delete profile '\(profile.id)': \(e)")
+        }
     }
     
     func containsProfile(_ key: ProfileKey) -> Bool {
