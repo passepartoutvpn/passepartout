@@ -88,7 +88,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
     // MARK: Actions
     
     private func useSuggestedTitle() {
-        cellTitle?.field.text = parsedFile?.url.normalizedFilename
+        cellTitle?.field.text = parsedFile?.url?.normalizedFilename
     }
     
     @IBAction private func next() {

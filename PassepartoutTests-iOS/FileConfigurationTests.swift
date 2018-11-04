@@ -39,7 +39,7 @@ class FileConfigurationTests: XCTestCase {
     }
     
     func testPIA() throws {
-        let file = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary"))
+        let file = try TunnelKitProvider.Configuration.parsed(fromURL: url(withName: "pia-hungary"))
         XCTAssertEqual(file.hostname, "hungary.privateinternetaccess.com")
         XCTAssertEqual(file.configuration.sessionConfiguration.cipher, .aes128cbc)
         XCTAssertEqual(file.configuration.sessionConfiguration.digest, .sha1)
@@ -50,9 +50,20 @@ class FileConfigurationTests: XCTestCase {
     }
 
     func testStripped() throws {
-        let lines = try TunnelKitProvider.Configuration.parsed(from: url(withName: "pia-hungary"), returnsStripped: true).strippedLines!
+        let lines = try TunnelKitProvider.Configuration.parsed(fromURL: url(withName: "pia-hungary"), returnsStripped: true).strippedLines!
         let stripped = lines.joined(separator: "\n")
         print(stripped)
+    }
+    
+    func testCompression() throws {
+        let base: [String] = ["<ca>", "</ca>", "remote 1.2.3.4"]
+        
+        XCTAssertNotNil(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["comp-lzo"]).warning)
+        XCTAssertNoThrow(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["comp-lzo no"]))
+        XCTAssertThrowsError(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["comp-lzo yes"]))
+
+        XCTAssertNoThrow(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["compress"]))
+        XCTAssertThrowsError(try TunnelKitProvider.Configuration.parsed(fromLines: base + ["compress lzo"]))
     }
     
     private func url(withName name: String) -> URL {

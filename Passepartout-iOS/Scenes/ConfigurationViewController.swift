@@ -123,7 +123,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         }
         let parsedFile: ParsedFile
         do {
-            parsedFile = try TunnelKitProvider.Configuration.parsed(from: originalURL)
+            parsedFile = try TunnelKitProvider.Configuration.parsed(fromURL: originalURL)
         } catch let e {
             log.error("Could not parse original configuration: \(e)")
             return

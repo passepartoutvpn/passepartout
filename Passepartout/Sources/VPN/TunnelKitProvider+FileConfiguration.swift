@@ -30,7 +30,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 struct ParsedFile {
-    let url: URL
+    let url: URL?
     
     let hostname: String
     
@@ -77,8 +77,12 @@ extension TunnelKitProvider.Configuration {
         static let externalFiles = Utils.regex("^(ca|cert|key|tls-auth|tls-crypt) ")
     }
     
-    static func parsed(from url: URL, returnsStripped: Bool = false) throws -> ParsedFile {
+    static func parsed(fromURL url: URL, returnsStripped: Bool = false) throws -> ParsedFile {
         let lines = try String(contentsOf: url).trimmedLines()
+        return try parsed(fromLines: lines, originalURL: url, returnsStripped: returnsStripped)
+    }
+
+    static func parsed(fromLines lines: [String], originalURL: URL? = nil, returnsStripped: Bool = false) throws -> ParsedFile {
         var strippedLines: [String]? = returnsStripped ? [] : nil
         var warning: ApplicationError? = nil
 
@@ -232,8 +236,12 @@ extension TunnelKitProvider.Configuration {
                 isHandled = true
                 compressionFraming = .compLZO
                 
-                guard let arg = $0.first, arg == "no" else {
-                    warning = warning ?? .unsupportedConfiguration(option: "compression")
+                guard let arg = $0.first else {
+                    warning = warning ?? .unsupportedConfiguration(option: line)
+                    return
+                }
+                guard arg == "no" else {
+                    unsupportedError = .unsupportedConfiguration(option: line)
                     return
                 }
             }
@@ -242,7 +250,7 @@ extension TunnelKitProvider.Configuration {
                 compressionFraming = .compress
 
                 guard $0.isEmpty else {
-                    warning = warning ?? .unsupportedConfiguration(option: "compression")
+                    unsupportedError = .unsupportedConfiguration(option: line)
                     return
                 }
             }
@@ -343,7 +351,7 @@ extension TunnelKitProvider.Configuration {
         builder.endpointProtocols = endpointProtocols
 
         return ParsedFile(
-            url: url,
+            url: originalURL,
             hostname: hostname,
             configuration: builder.build(),
             strippedLines: strippedLines,

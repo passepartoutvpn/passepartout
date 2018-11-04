@@ -43,22 +43,6 @@ class ConnectionServiceTests: XCTestCase {
         XCTAssertNoThrow(try JSONSerialization.jsonObject(with: jsonData, options: []))
     }
 
-    func testMigrate() {
-        let migrated = try! ConnectionService.migrateJSON(at: url)
-        let json = String(data: migrated, encoding: .utf8)!
-        print(json)
-        let service = try! JSONDecoder().decode(ConnectionService.self, from: migrated)
-
-        guard let activeProfile = service.activeProfile as? HostConnectionProfile else {
-            XCTFail()
-            return
-        }
-        XCTAssert(activeProfile.id == "host.edu")
-        XCTAssert(activeProfile.hostname == "1.2.4.5")
-        XCTAssert(activeProfile.parameters.sessionConfiguration.cipher == .aes256cbc)
-        XCTAssert(activeProfile.parameters.sessionConfiguration.ca.pem == "bogus+ca")
-    }
-    
     func testPathExtension() {
         XCTAssertTrue(privateTestPathExtension("file:///foo/bar/johndoe.json"))
         XCTAssertFalse(privateTestPathExtension("file:///foo/bar/break.json.johndoe.json"))
