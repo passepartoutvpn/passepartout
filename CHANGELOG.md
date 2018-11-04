@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dot as a legal character in host profile title. [#22](https://github.com/keeshux/passepartout-ios/issues/22)
 - Host profiles can now be renamed. [#24](https://github.com/keeshux/passepartout-ios/issues/24)
 
+### Changed
+
+- Disconnect VPN by default when entering a trusted network. [#25](https://github.com/passepartoutvpn/passepartout-ios/pull/25)
+
 ### Removed
 
 - "Test connectivity" until it's more transparent.
