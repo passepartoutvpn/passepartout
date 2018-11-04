@@ -75,7 +75,7 @@
 "service.sections.vpn_resolves_hostname.footer" = "Preferred in most networks and required in some IPv6 networks. Disable where DNS is blocked, or to speed up negotiation when DNS is slow to respond.";
 //"service.sections.vpn_prefers_udp.footer" = "UDP is faster than TCP, but may not work in some networks. Disable in networks where UDP might be blocked.";
 "service.sections.trusted.header" = "Trusted networks";
-"service.sections.trusted.footer" = "When entering a trusted network, the VPN connection is normally shut down and kept disconnected. Disable this option to allow manual VPN connections.";
+"service.sections.trusted.footer" = "When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.";
 "service.sections.diagnostics.header" = "Diagnostics";
 //"service.sections.destruction.footer" = "Delete configuration from device settings.";
 
@@ -100,7 +100,7 @@
 "service.cells.trusted_mobile.caption" = "Cellular network";
 "service.cells.trusted_wifi.caption" = "%@";
 "service.cells.trusted_add_wifi.caption" = "Add current Wi-Fi";
-"service.cells.trusted_policy.caption" = "Disconnect VPN when trusted";
+"service.cells.trusted_policy.caption" = "Trust disables VPN";
 "service.cells.test_connectivity.caption" = "Test connectivity";
 "service.cells.data_count.caption" = "Exchanged bytes count";
 "service.cells.debug_log.caption" = "Debug log";
