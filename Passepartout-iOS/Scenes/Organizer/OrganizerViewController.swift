@@ -453,9 +453,6 @@ extension OrganizerViewController: ConnectionServiceDelegate {
     func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey) {
         splitViewController?.serviceViewController?.hideProfileIfDeleted()
         TransientStore.shared.serialize() // delete
-
-        reloadModel()
-        tableView.reloadData()
     }
     
     // XXX: deactivate + activate leads to a redundant serialization
