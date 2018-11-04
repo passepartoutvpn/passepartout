@@ -421,7 +421,7 @@ extension OrganizerViewController {
 
 extension OrganizerViewController: ConnectionServiceDelegate {
     func connectionService(didAdd profile: ConnectionProfile) {
-        TransientStore.shared.serialize() // add
+        TransientStore.shared.serialize(withProfiles: false) // add
         
         reloadModel()
         tableView.reloadData()
@@ -444,14 +444,14 @@ extension OrganizerViewController: ConnectionServiceDelegate {
     }
     
     func connectionService(didRename oldProfile: ConnectionProfile, to newProfile: ConnectionProfile) {
-        TransientStore.shared.serialize() // rename
+        TransientStore.shared.serialize(withProfiles: false) // rename
 
         reloadModel()
         tableView.reloadData()
     }
     
     func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey) {
-        TransientStore.shared.serialize() // delete
+        TransientStore.shared.serialize(withProfiles: false) // delete
 
         splitViewController?.serviceViewController?.hideProfileIfDeleted()
     }
@@ -459,13 +459,13 @@ extension OrganizerViewController: ConnectionServiceDelegate {
     // XXX: deactivate + activate leads to a redundant serialization
     
     func connectionService(willDeactivate profile: ConnectionProfile) {
-        TransientStore.shared.serialize() // deactivate
+        TransientStore.shared.serialize(withProfiles: false) // deactivate
 
         tableView.reloadData()
     }
     
     func connectionService(didActivate profile: ConnectionProfile) {
-        TransientStore.shared.serialize() // activate
+        TransientStore.shared.serialize(withProfiles: false) // activate
 
         tableView.reloadData()
     }
