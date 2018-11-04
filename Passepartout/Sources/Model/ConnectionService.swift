@@ -342,9 +342,6 @@ class ConnectionService: Codable {
             activeProfileKey = key
         }
 
-        // serialize immediately
-        saveProfiles()
-        
         delegate?.connectionService(didAdd: profile)
     }
 
@@ -381,9 +378,6 @@ class ConnectionService: Codable {
             activeProfileKey = newKey
         }
 
-        // serialize immediately
-        saveProfiles()
-        
         delegate = temporaryDelegate
         delegate?.connectionService(didRename: oldProfile, to: newProfile)
         
