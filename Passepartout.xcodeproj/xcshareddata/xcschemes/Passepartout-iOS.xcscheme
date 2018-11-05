@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-               BuildableName = "Passepartout-iOS.app"
+               BuildableName = "Passepartout.app"
                BlueprintName = "Passepartout-iOS"
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0EDE8DBE20C86910004C739C"
-               BuildableName = "Passepartout-iOS-Tunnel.appex"
+               BuildableName = "Passepartout-Tunnel.appex"
                BlueprintName = "Passepartout-iOS-Tunnel"
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-            BuildableName = "Passepartout-iOS.app"
+            BuildableName = "Passepartout.app"
             BlueprintName = "Passepartout-iOS"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-            BuildableName = "Passepartout-iOS.app"
+            BuildableName = "Passepartout.app"
             BlueprintName = "Passepartout-iOS"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>
@@ -99,7 +99,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-            BuildableName = "Passepartout-iOS.app"
+            BuildableName = "Passepartout.app"
             BlueprintName = "Passepartout-iOS"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>

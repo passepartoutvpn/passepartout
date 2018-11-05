@@ -80,7 +80,7 @@
 		0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */; };
 		0ED38AF2214177920004D387 /* VPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AF1214177920004D387 /* VPNProvider.swift */; };
 		0EDE8DC420C86910004C739C /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */; };
-		0EDE8DC820C86910004C739C /* Passepartout-iOS-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* Passepartout-iOS-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0EDE8DC820C86910004C739C /* Passepartout-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE8DE720C93945004C739C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE620C93945004C739C /* Credentials.swift */; };
 		0EDE8DEE20C93E4C004C739C /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */; };
@@ -118,7 +118,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0EDE8DC820C86910004C739C /* Passepartout-iOS-Tunnel.appex in Embed App Extensions */,
+				0EDE8DC820C86910004C739C /* Passepartout-Tunnel.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,7 +150,7 @@
 		0E4FD7ED20D539A0002221FF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0E4FD7F020D58618002221FF /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		0E4FD80420D683A2002221FF /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
-		0E57F63820C83FC5008323CF /* Passepartout-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Passepartout-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E57F63820C83FC5008323CF /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E57F63B20C83FC5008323CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		0ED38AF1214177920004D387 /* VPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNProvider.swift; sourceTree = "<group>"; };
 		0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		0EDE8DBF20C86910004C739C /* Passepartout-iOS-Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Passepartout-iOS-Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Passepartout-Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		0EDE8DC520C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0EDE8DD220C86978004C739C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -304,9 +304,9 @@
 		0E57F63920C83FC5008323CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0E57F63820C83FC5008323CF /* Passepartout-iOS.app */,
+				0E57F63820C83FC5008323CF /* Passepartout.app */,
 				0E57F64C20C83FC7008323CF /* PassepartoutTests-iOS.xctest */,
-				0EDE8DBF20C86910004C739C /* Passepartout-iOS-Tunnel.appex */,
+				0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -543,7 +543,7 @@
 			);
 			name = "Passepartout-iOS";
 			productName = Passepartout;
-			productReference = 0E57F63820C83FC5008323CF /* Passepartout-iOS.app */;
+			productReference = 0E57F63820C83FC5008323CF /* Passepartout.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0E57F64B20C83FC7008323CF /* PassepartoutTests-iOS */ = {
@@ -581,7 +581,7 @@
 			);
 			name = "Passepartout-iOS-Tunnel";
 			productName = "Passepartout-iOS-Tunnel";
-			productReference = 0EDE8DBF20C86910004C739C /* Passepartout-iOS-Tunnel.appex */;
+			productReference = 0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -1085,7 +1085,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1109,7 +1109,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1176,7 +1176,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tunnel;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Passepartout-Tunnel";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1199,7 +1199,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tunnel;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Passepartout-Tunnel";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
