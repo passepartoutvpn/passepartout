@@ -40,7 +40,7 @@ class GroupConstants {
 
         static let versionString = "\(versionNumber) (\(buildNumber))"
         
-        static let teamId = "5357M5NW9W"
+        static let teamId = "DTDYD63ZX9"
 
         static let appId = "1433648537"
         
