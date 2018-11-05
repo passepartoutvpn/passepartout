@@ -582,7 +582,7 @@ internal enum L10n {
         internal static let header = L10n.tr("Localizable", "service.sections.status.header")
       }
       internal enum Trusted {
-        /// When entering a trusted network, the VPN connection is normally shut down and disabled. Disable this option to not enforce this behavior.
+        /// When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.
         internal static let footer = L10n.tr("Localizable", "service.sections.trusted.footer")
         /// Trusted networks
         internal static let header = L10n.tr("Localizable", "service.sections.trusted.header")
