@@ -538,38 +538,3 @@ class ConnectionService: Codable {
 //        defaults.removeObject(forKey: Keys.vpnLog)
 //    }
 }
-
-private class PlaceholderConnectionProfile: ConnectionProfile {
-    let context: Context
-    
-    let id: String
-    
-    var username: String? = nil
-    
-    var requiresCredentials: Bool = false
-    
-    func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
-        fatalError("Generating configuration from a PlaceholderConnectionProfile")
-    }
-    
-    func with(newId: String) -> ConnectionProfile {
-        return PlaceholderConnectionProfile(ConnectionService.ProfileKey(context, newId))
-    }
-
-    var mainAddress: String = ""
-    
-    var addresses: [String] = []
-    
-    var protocols: [TunnelKitProvider.EndpointProtocol] = []
-    
-    var canCustomizeEndpoint: Bool = false
-    
-    var customAddress: String?
-    
-    var customProtocol: TunnelKitProvider.EndpointProtocol?
-
-    init(_ key: ConnectionService.ProfileKey) {
-        self.context = key.context
-        self.id = key.id
-    }
-}
