@@ -209,7 +209,7 @@ class ConnectionService: Codable {
                 cache[key] = PlaceholderConnectionProfile(key)
             }
         } catch let e {
-            log.error("Could not list provider contents: \(e) (\(providersURL))")
+            log.warning("Could not list provider contents: \(e) (\(providersURL))")
         }
         do {
             let files = try fm.contentsOfDirectory(at: hostsURL, includingPropertiesForKeys: nil, options: [])
@@ -222,7 +222,7 @@ class ConnectionService: Codable {
                 cache[key] = PlaceholderConnectionProfile(key)
             }
         } catch let e {
-            log.error("Could not list host contents: \(e) (\(hostsURL))")
+            log.warning("Could not list host contents: \(e) (\(hostsURL))")
         }
     }
     
