@@ -26,7 +26,7 @@
 "global.ok" = "OK";
 "global.cancel" = "Cancel";
 "global.next" = "Next";
-"global.host.title_input.message" = "Legal characters are alphanumerics plus dash (-), underscore (_) and dot (.).";
+"global.host.title_input.message" = "Acceptable characters are alphanumerics plus dash \"-\", underscore \"_\" and dot \".\".";
 "global.host.title_input.placeholder" = "My Profile";
 
 "reddit.title" = "Reddit";
