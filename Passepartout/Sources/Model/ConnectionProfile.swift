@@ -83,6 +83,6 @@ extension ConnectionProfile {
 
 extension ConnectionProfile {
     var description: String {
-        return "[\(context):\(id)]"
+        return "(\(context),\(id))"
     }
 }
