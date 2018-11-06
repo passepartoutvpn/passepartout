@@ -35,7 +35,7 @@ protocol ConnectionServiceDelegate: class {
 
     func connectionService(didRename oldProfile: ConnectionProfile, to newProfile: ConnectionProfile)
 
-    func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey)
+    func connectionService(didRemoveProfileWithKey key: ProfileKey)
 
     func connectionService(willDeactivate profile: ConnectionProfile)
 
@@ -53,40 +53,6 @@ class ConnectionService: Codable {
         case activeProfileKey
         
         case preferences
-    }
-
-    struct ProfileKey: RawRepresentable, Hashable, Codable {
-        let context: Context
-        
-        let id: String
-
-        init(_ context: Context, _ id: String) {
-            self.context = context
-            self.id = id
-        }
-
-        init(_ profile: ConnectionProfile) {
-            context = profile.context
-            id = profile.id
-        }
-        
-        // MARK: RawRepresentable
-        
-        var rawValue: String {
-            return "\(context).\(id)"
-        }
-        
-        init?(rawValue: String) {
-            let comps = rawValue.components(separatedBy: ".")
-            guard comps.count == 2 else {
-                return nil
-            }
-            guard let context = Context(rawValue: comps[0]) else {
-                return nil
-            }
-            self.context = context
-            id = comps[1]
-        }
     }
 
     var directory: String? = nil

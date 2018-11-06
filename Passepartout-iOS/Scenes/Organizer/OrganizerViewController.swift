@@ -382,14 +382,14 @@ extension OrganizerViewController {
         return ids
     }
     
-    private func profileKey(at indexPath: IndexPath) -> ConnectionService.ProfileKey {
+    private func profileKey(at indexPath: IndexPath) -> ProfileKey {
         let section = model.section(for: indexPath.section)
         switch section {
         case .providers:
-            return ConnectionService.ProfileKey(.provider, providers[indexPath.row])
+            return ProfileKey(.provider, providers[indexPath.row])
             
         case .hosts:
-            return ConnectionService.ProfileKey(.host, hosts[indexPath.row])
+            return ProfileKey(.host, hosts[indexPath.row])
             
         default:
             fatalError("Profile found in unexpected section: \(section)")
@@ -450,7 +450,7 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         tableView.reloadData()
     }
     
-    func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey) {
+    func connectionService(didRemoveProfileWithKey key: ProfileKey) {
         TransientStore.shared.serialize(withProfiles: false) // delete
 
         splitViewController?.serviceViewController?.hideProfileIfDeleted()
