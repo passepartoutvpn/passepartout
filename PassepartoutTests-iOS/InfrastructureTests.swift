@@ -53,21 +53,21 @@ class InfrastructureTests: XCTestCase {
     }
     
     func testStableSort() {
-        let original: [TunnelKitProvider.EndpointProtocol] = [
-            TunnelKitProvider.EndpointProtocol(.udp, 1194),
-            TunnelKitProvider.EndpointProtocol(.udp, 8080),
-            TunnelKitProvider.EndpointProtocol(.udp, 9201),
-            TunnelKitProvider.EndpointProtocol(.udp, 53),
-            TunnelKitProvider.EndpointProtocol(.udp, 1197),
-            TunnelKitProvider.EndpointProtocol(.udp, 198),
-            TunnelKitProvider.EndpointProtocol(.tcp, 443),
-            TunnelKitProvider.EndpointProtocol(.tcp, 110),
-            TunnelKitProvider.EndpointProtocol(.tcp, 80),
-            TunnelKitProvider.EndpointProtocol(.tcp, 500),
-            TunnelKitProvider.EndpointProtocol(.tcp, 501),
-            TunnelKitProvider.EndpointProtocol(.tcp, 502)
+        let original: [EndpointProtocol] = [
+            EndpointProtocol(.udp, 1194),
+            EndpointProtocol(.udp, 8080),
+            EndpointProtocol(.udp, 9201),
+            EndpointProtocol(.udp, 53),
+            EndpointProtocol(.udp, 1197),
+            EndpointProtocol(.udp, 198),
+            EndpointProtocol(.tcp, 443),
+            EndpointProtocol(.tcp, 110),
+            EndpointProtocol(.tcp, 80),
+            EndpointProtocol(.tcp, 500),
+            EndpointProtocol(.tcp, 501),
+            EndpointProtocol(.tcp, 502)
         ]
-        var preferredType: TunnelKitProvider.SocketType
+        var preferredType: SocketType
         
         preferredType = .udp
         let sorted1 = original.stableSorted {

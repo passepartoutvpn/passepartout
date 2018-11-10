@@ -1050,7 +1050,7 @@ extension ServiceViewController: AccountViewControllerDelegate {
 }
 
 extension ServiceViewController: EndpointViewControllerDelegate {
-    func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: TunnelKitProvider.EndpointProtocol?) {
+    func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: EndpointProtocol?) {
         if let providerProfile = profile as? ProviderConnectionProfile {
             providerProfile.manualAddress = newAddress
             providerProfile.manualProtocol = newProtocol

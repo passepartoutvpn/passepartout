@@ -31,11 +31,11 @@ protocol EndpointDataSource {
     
     var addresses: [String] { get }
     
-    var protocols: [TunnelKitProvider.EndpointProtocol] { get }
+    var protocols: [EndpointProtocol] { get }
     
     var canCustomizeEndpoint: Bool { get }
     
     var customAddress: String? { get }
     
-    var customProtocol: TunnelKitProvider.EndpointProtocol? { get }
+    var customProtocol: EndpointProtocol? { get }
 }

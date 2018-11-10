@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import TunnelKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -93,32 +94,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let topmost = root.presentedViewController ?? root
 
         let fm = FileManager.default
-        guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: topmost) else {
+        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: topmost) else {
             try? fm.removeItem(at: url)
             return true
         }
-        if let warning = parsedFile.warning {
-            ParsedFile.alertImportWarning(url: url, in: topmost, withWarning: warning) {
+        if let warning = parsingResult.warning {
+            ConfigurationParser.ParsingResult.alertImportWarning(url: url, in: topmost, withWarning: warning) {
                 if $0 {
-                    self.handleParsedFile(parsedFile, in: topmost)
+                    self.handleParsingResult(parsingResult, in: topmost)
                 } else {
                     try? fm.removeItem(at: url)
                 }
             }
             return true
         }
-        handleParsedFile(parsedFile, in: topmost)
+        handleParsingResult(parsingResult, in: topmost)
         return true
     }
     
-    private func handleParsedFile(_ parsedFile: ParsedFile, in target: UIViewController) {
+    private func handleParsingResult(_ parsingResult: ConfigurationParser.ParsingResult, in target: UIViewController) {
 
         // already presented: update parsed configuration
         if let nav = target as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
-            if let oldURL = wizard.parsedFile?.url {
+            if let oldURL = wizard.parsingResult?.url {
                 try? FileManager.default.removeItem(at: oldURL)
             }
-            wizard.parsedFile = parsedFile
+            wizard.parsingResult = parsingResult
             wizard.removesConfigurationOnCancel = true
             return
         }
@@ -128,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         guard let wizard = wizardNav.topViewController as? WizardHostViewController else {
             fatalError("Expected WizardHostViewController from storyboard")
         }
-        wizard.parsedFile = parsedFile
+        wizard.parsingResult = parsingResult
         wizard.removesConfigurationOnCancel = true
 
         wizardNav.modalPresentationStyle = .formSheet

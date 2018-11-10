@@ -3,7 +3,7 @@
 # [Passepartout][about-website]
 
 ![iOS 11+](https://img.shields.io/badge/ios-11+-green.svg)
-[![TunnelKit 1.3.x](https://img.shields.io/badge/tunnelkit-1.3-d69c68.svg)][dep-tunnelkit]
+[![TunnelKit 1.4.x](https://img.shields.io/badge/tunnelkit-1.3-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
 [![Join TestFlight](https://img.shields.io/badge/beta-TestFlight-5ecdf6.svg)][about-testflight]
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
@@ -63,26 +63,9 @@ In preset mode, you can pick pre-resolved IPv4 endpoints when DNS is problematic
 
 ### Import .ovpn profiles
 
-Passepartout can import .ovpn configuration files. This way you can fine-tune encryption without tweaking and reimporting a new configuration. Below are a few limitations worth mentioning.
+Passepartout can import .ovpn configuration files. This way you can fine-tune encryption without tweaking and reimporting a new configuration. 
 
-Unsupported:
-
-- UDP fragmentation, i.e. `--fragment`
-- Compression
-    - `--comp-lzo` other than `no`
-    - `--compress` other than empty
-- Proxy
-- External file references (inline `<block>` only)
-- Encrypted client certificate keys
-
-Ignored:
-
-- MTU overrides
-    - `--*-mtu` and variants
-    - `--mssfix`
-- Multiple `--remote` with different `host` values (first wins)
-
-Many other flags are ignored too but it's normally not an issue.
+You can find details on what may or may not work in the related section of the [TunnelKit README][dep-tunnelkit-ovpn].
 
 ## Installation
 
@@ -152,6 +135,7 @@ Website: [passepartoutvpn.app][about-website]
 [dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/
 [dep-tunnelkit]: https://github.com/keeshux/tunnelkit
+[dep-tunnelkit-ovpn]: https://github.com/keeshux/tunnelkit#support-for-ovpn-configuration
 [dep-openssl]: https://www.openssl.org/
 
 [license-content]: LICENSE

@@ -25,14 +25,10 @@
 
 import Foundation
 
-enum ApplicationError: Error {
+enum ApplicationError: String, Error {
     case missingProfile
 
     case missingCredentials
-    
-    case missingConfiguration(option: String)
-
-    case unsupportedConfiguration(option: String)
 
     case migration
 }
