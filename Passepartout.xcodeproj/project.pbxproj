@@ -40,6 +40,8 @@
 		0E5E5DE521511C5F00E318A3 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */; };
 		0E6BE13A20CFB76800A6DD36 /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
+		0E79D13F21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */; };
+		0E79D14121919F5600BB5FB2 /* ProfileKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D14021919F5600BB5FB2 /* ProfileKey.swift */; };
 		0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC4213DF7AE00741BA1 /* Preferences.swift */; };
 		0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
@@ -162,6 +164,8 @@
 		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
 		0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
 		0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
+		0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderConnectionProfile.swift; sourceTree = "<group>"; };
+		0E79D14021919F5600BB5FB2 /* ProfileKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileKey.swift; sourceTree = "<group>"; };
 		0E89DFC4213DF7AE00741BA1 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionProxy+Communication.swift"; sourceTree = "<group>"; };
 		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
@@ -368,6 +372,8 @@
 			isa = PBXGroup;
 			children = (
 				0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */,
+				0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */,
+				0E79D14021919F5600BB5FB2 /* ProfileKey.swift */,
 				0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */,
 			);
 			path = Profiles;
@@ -834,6 +840,7 @@
 				0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */,
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
 				0E2B494220FD16540094784C /* TransientStore.swift in Sources */,
+				0E79D14121919F5600BB5FB2 /* ProfileKey.swift in Sources */,
 				0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */,
 				0E6BE13A20CFB76800A6DD36 /* ApplicationError.swift in Sources */,
 				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,
@@ -866,6 +873,7 @@
 				0ED38AE721404F100004D387 /* EndpointDataSource.swift in Sources */,
 				0E8D97E221388B52006FB4A0 /* InfrastructurePreset.swift in Sources */,
 				0ED31C3720CF38D10027975F /* VPN.swift in Sources */,
+				0E79D13F21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift in Sources */,
 				0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */,
 				0E5E5DE521511C5F00E318A3 /* GracefulVPN.swift in Sources */,
 				0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */,
@@ -1133,7 +1141,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout-iOS.app/Passepartout-iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/Passepartout";
 			};
 			name = Debug;
 		};
@@ -1155,7 +1163,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout-iOS.app/Passepartout-iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/Passepartout";
 			};
 			name = Release;
 		};

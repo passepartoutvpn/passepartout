@@ -35,7 +35,7 @@ protocol ConnectionServiceDelegate: class {
 
     func connectionService(didRename oldProfile: ConnectionProfile, to newProfile: ConnectionProfile)
 
-    func connectionService(didRemoveProfileWithKey key: ConnectionService.ProfileKey)
+    func connectionService(didRemoveProfileWithKey key: ProfileKey)
 
     func connectionService(willDeactivate profile: ConnectionProfile)
 
@@ -53,40 +53,6 @@ class ConnectionService: Codable {
         case activeProfileKey
         
         case preferences
-    }
-
-    struct ProfileKey: RawRepresentable, Hashable, Codable {
-        let context: Context
-        
-        let id: String
-
-        init(_ context: Context, _ id: String) {
-            self.context = context
-            self.id = id
-        }
-
-        init(_ profile: ConnectionProfile) {
-            context = profile.context
-            id = profile.id
-        }
-        
-        // MARK: RawRepresentable
-        
-        var rawValue: String {
-            return "\(context).\(id)"
-        }
-        
-        init?(rawValue: String) {
-            let comps = rawValue.components(separatedBy: ".")
-            guard comps.count == 2 else {
-                return nil
-            }
-            guard let context = Context(rawValue: comps[0]) else {
-                return nil
-            }
-            self.context = context
-            id = comps[1]
-        }
     }
 
     var directory: String? = nil
@@ -209,7 +175,7 @@ class ConnectionService: Codable {
                 cache[key] = PlaceholderConnectionProfile(key)
             }
         } catch let e {
-            log.error("Could not list provider contents: \(e) (\(providersURL))")
+            log.warning("Could not list provider contents: \(e) (\(providersURL))")
         }
         do {
             let files = try fm.contentsOfDirectory(at: hostsURL, includingPropertiesForKeys: nil, options: [])
@@ -222,7 +188,7 @@ class ConnectionService: Codable {
                 cache[key] = PlaceholderConnectionProfile(key)
             }
         } catch let e {
-            log.error("Could not list host contents: \(e) (\(hostsURL))")
+            log.warning("Could not list host contents: \(e) (\(hostsURL))")
         }
     }
     
@@ -537,39 +503,4 @@ class ConnectionService: Codable {
 //    func eraseVpnLog() {
 //        defaults.removeObject(forKey: Keys.vpnLog)
 //    }
-}
-
-private class PlaceholderConnectionProfile: ConnectionProfile {
-    let context: Context
-    
-    let id: String
-    
-    var username: String? = nil
-    
-    var requiresCredentials: Bool = false
-    
-    func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
-        fatalError("Generating configuration from a PlaceholderConnectionProfile")
-    }
-    
-    func with(newId: String) -> ConnectionProfile {
-        return PlaceholderConnectionProfile(ConnectionService.ProfileKey(context, newId))
-    }
-
-    var mainAddress: String = ""
-    
-    var addresses: [String] = []
-    
-    var protocols: [TunnelKitProvider.EndpointProtocol] = []
-    
-    var canCustomizeEndpoint: Bool = false
-    
-    var customAddress: String?
-    
-    var customProtocol: TunnelKitProvider.EndpointProtocol?
-
-    init(_ key: ConnectionService.ProfileKey) {
-        self.context = key.context
-        self.id = key.id
-    }
 }

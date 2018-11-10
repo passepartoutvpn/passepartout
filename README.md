@@ -100,7 +100,7 @@ It's highly recommended to use the Git and Ruby packages provided by [Homebrew][
 
 Download the app codebase locally:
 
-    $ git clone https://github.com/keeshux/passepartout-ios.git
+    $ git clone https://github.com/passepartoutvpn/passepartout-ios.git
 
 Assuming you have a [working CocoaPods environment][dep-cocoapods], setting up the app workspace only requires installing the pod dependencies:
 
@@ -145,7 +145,7 @@ Website: [passepartoutvpn.app][about-website]
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 
-[app-api]: https://github.com/keeshux/passepartout-api
+[app-api]: https://github.com/passepartoutvpn/passepartout-api
 [app-net-pia]: https://www.privateinternetaccess.com
 
 [dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html

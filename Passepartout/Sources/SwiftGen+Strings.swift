@@ -245,7 +245,7 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "global.ok")
     internal enum Host {
       internal enum TitleInput {
-        /// Legal characters are alphanumerics plus dash (-), underscore (_) and dot (.).
+        /// Acceptable characters are alphanumerics plus dash "-", underscore "_" and dot ".".
         internal static let message = L10n.tr("Localizable", "global.host.title_input.message")
         /// My Profile
         internal static let placeholder = L10n.tr("Localizable", "global.host.title_input.placeholder")
