@@ -25,7 +25,7 @@
 
 import XCTest
 import TunnelKit
-@testable import Passepartout_iOS
+@testable import Passepartout
 
 class FileConfigurationTests: XCTestCase {
     override func setUp() {

@@ -24,7 +24,7 @@
 //
 
 import XCTest
-@testable import Passepartout_iOS
+@testable import Passepartout
 import TunnelKit
 
 class InfrastructureTests: XCTestCase {

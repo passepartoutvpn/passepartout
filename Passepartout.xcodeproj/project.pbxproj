@@ -1141,7 +1141,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout-iOS.app/Passepartout-iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/Passepartout";
 			};
 			name = Debug;
 		};
@@ -1163,7 +1163,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout-iOS.app/Passepartout-iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/Passepartout";
 			};
 			name = Release;
 		};

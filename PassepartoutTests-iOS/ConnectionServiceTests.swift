@@ -25,7 +25,7 @@
 
 import XCTest
 import TunnelKit
-@testable import Passepartout_iOS
+@testable import Passepartout
 
 class ConnectionServiceTests: XCTestCase {
     let url = Bundle(for: ConnectionServiceTests.self).url(forResource: "ConnectionService", withExtension: "json")!
