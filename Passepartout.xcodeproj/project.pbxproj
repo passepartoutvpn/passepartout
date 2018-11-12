@@ -47,7 +47,7 @@
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0E8D97E221388B52006FB4A0 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
 		0E8D97E521389277006FB4A0 /* pia.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E8D97E421389276006FB4A0 /* pia.json */; };
-		0EA068F4218475F800C320AD /* ParsedFile+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ParsedFile+Alerts.swift */; };
+		0EA068F4218475F800C320AD /* ParsingResult+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ParsingResult+Alerts.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
@@ -74,9 +74,6 @@
 		0ED31C3D20CF396E0027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
 		0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AD8213F33150004D387 /* WizardHostViewController.swift */; };
 		0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED38ADC213F44D00004D387 /* Organizer.storyboard */; };
-		0ED38ADE213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38ADD213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift */; };
-		0ED38AE1213F51370004D387 /* FileConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE0213F51370004D387 /* FileConfigurationTests.swift */; };
-		0ED38AE3213F517D0004D387 /* pia-hungary.ovpn in Resources */ = {isa = PBXBuildFile; fileRef = 0ED38AE2213F517D0004D387 /* pia-hungary.ovpn */; };
 		0ED38AE721404F100004D387 /* EndpointDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE621404F100004D387 /* EndpointDataSource.swift */; };
 		0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE9214054A50004D387 /* OptionViewController.swift */; };
 		0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */; };
@@ -171,7 +168,7 @@
 		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
 		0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructurePreset.swift; sourceTree = "<group>"; };
 		0E8D97E421389276006FB4A0 /* pia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pia.json; sourceTree = "<group>"; };
-		0EA068F3218475F800C320AD /* ParsedFile+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParsedFile+Alerts.swift"; sourceTree = "<group>"; };
+		0EA068F3218475F800C320AD /* ParsingResult+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParsingResult+Alerts.swift"; sourceTree = "<group>"; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
 		0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionServiceTests.swift; sourceTree = "<group>"; };
@@ -197,9 +194,6 @@
 		0ED31C3B20CF39510027975F /* Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
 		0ED38AD8213F33150004D387 /* WizardHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardHostViewController.swift; sourceTree = "<group>"; };
 		0ED38ADB213F44D00004D387 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Organizer.storyboard; sourceTree = "<group>"; };
-		0ED38ADD213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKitProvider+FileConfiguration.swift"; sourceTree = "<group>"; };
-		0ED38AE0213F51370004D387 /* FileConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileConfigurationTests.swift; sourceTree = "<group>"; };
-		0ED38AE2213F517D0004D387 /* pia-hungary.ovpn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pia-hungary.ovpn"; sourceTree = "<group>"; };
 		0ED38AE621404F100004D387 /* EndpointDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointDataSource.swift; sourceTree = "<group>"; };
 		0ED38AE9214054A50004D387 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModificationDelegate.swift; sourceTree = "<group>"; };
@@ -283,7 +277,6 @@
 				0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */,
 				0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */,
 				0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */,
-				0ED38ADD213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift */,
 				0ED31C3620CF38D10027975F /* VPN.swift */,
 				0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */,
 				0ED38AF1214177920004D387 /* VPNProvider.swift */,
@@ -337,10 +330,8 @@
 			isa = PBXGroup;
 			children = (
 				0EBBE8F121822B4D00106008 /* ConnectionService.json */,
-				0ED38AE2213F517D0004D387 /* pia-hungary.ovpn */,
 				0E57F65220C83FC7008323CF /* Info.plist */,
 				0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */,
-				0ED38AE0213F51370004D387 /* FileConfigurationTests.swift */,
 				0ED31C2620CF257C0027975F /* InfrastructureTests.swift */,
 			);
 			path = "PassepartoutTests-iOS";
@@ -445,7 +436,7 @@
 				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
 				0E4FD7F020D58618002221FF /* Macros.swift */,
 				0ED38AE9214054A50004D387 /* OptionViewController.swift */,
-				0EA068F3218475F800C320AD /* ParsedFile+Alerts.swift */,
+				0EA068F3218475F800C320AD /* ParsingResult+Alerts.swift */,
 				0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */,
 				0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */,
 				0E05C61C20D27C82006EE732 /* Theme.swift */,
@@ -671,7 +662,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ED38AE3213F517D0004D387 /* pia-hungary.ovpn in Resources */,
 				0EBBE8F321822B4D00106008 /* ConnectionService.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -826,7 +816,6 @@
 				0EBE3AA5213DC1B000BFA2F5 /* HostConnectionProfile.swift in Sources */,
 				0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */,
 				0E05C61D20D27C82006EE732 /* Theme.swift in Sources */,
-				0ED38ADE213F4E980004D387 /* TunnelKitProvider+FileConfiguration.swift in Sources */,
 				0EDE8DEE20C93E4C004C739C /* GroupConstants.swift in Sources */,
 				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
@@ -866,7 +855,7 @@
 				0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */,
 				0E39BCF0214B9EF10035E9DE /* WebServices.swift in Sources */,
 				0EDE8DE720C93945004C739C /* Credentials.swift in Sources */,
-				0EA068F4218475F800C320AD /* ParsedFile+Alerts.swift in Sources */,
+				0EA068F4218475F800C320AD /* ParsingResult+Alerts.swift in Sources */,
 				0ED38AF2214177920004D387 /* VPNProvider.swift in Sources */,
 				0E4C9CB920DB9BC600A0C59C /* TrustedNetworks.swift in Sources */,
 				0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */,
@@ -887,7 +876,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ED38AE1213F51370004D387 /* FileConfigurationTests.swift in Sources */,
 				0ED31C2720CF257C0027975F /* InfrastructureTests.swift in Sources */,
 				0EBBE8F221822B4D00106008 /* ConnectionServiceTests.swift in Sources */,
 			);

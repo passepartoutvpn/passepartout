@@ -27,7 +27,7 @@ import UIKit
 import TunnelKit
 
 protocol EndpointViewControllerDelegate: class {
-    func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: TunnelKitProvider.EndpointProtocol?)
+    func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: EndpointProtocol?)
 }
 
 class EndpointViewController: UIViewController, TableModelHost {
@@ -37,15 +37,15 @@ class EndpointViewController: UIViewController, TableModelHost {
     
     private var endpointAddresses: [String] = []
 
-    private var endpointProtocols: [TunnelKitProvider.EndpointProtocol] = []
+    private var endpointProtocols: [EndpointProtocol] = []
     
     private var initialAddress: String?
     
-    private var initialProtocol: TunnelKitProvider.EndpointProtocol?
+    private var initialProtocol: EndpointProtocol?
 
     private var currentAddress: String?
     
-    private var currentProtocol: TunnelKitProvider.EndpointProtocol?
+    private var currentProtocol: EndpointProtocol?
 
     private var currentAddressIndexPath: IndexPath?
 

@@ -1,5 +1,5 @@
 //
-//  ParsedFile+Alerts.swift
+//  ParsingResult+Alerts.swift
 //  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 10/27/18.
@@ -30,18 +30,18 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-extension ParsedFile {
-    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController) -> ParsedFile? {
-        let file: ParsedFile
+extension ConfigurationParser.ParsingResult {
+    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController) -> ConfigurationParser.ParsingResult? {
+        let result: ConfigurationParser.ParsingResult
         log.debug("Parsing configuration URL: \(url)")
         do {
-            file = try TunnelKitProvider.Configuration.parsed(fromURL: url)
+            result = try ConfigurationParser.parsed(fromURL: url)
         } catch let e {
             let message = localizedMessage(forError: e)
             alertImportError(url: url, in: viewController, withMessage: message)
             return nil
         }
-        return file
+        return result
     }
     
     private static func alertImportError(url: URL, in vc: UIViewController, withMessage message: String) {
@@ -55,7 +55,7 @@ extension ParsedFile {
         vc.present(alert, animated: true, completion: nil)
     }
 
-    static func alertImportWarning(url: URL, in vc: UIViewController, withWarning warning: ApplicationError, completionHandler: @escaping (Bool) -> Void) {
+    static func alertImportWarning(url: URL, in vc: UIViewController, withWarning warning: ConfigurationParser.ParsingError, completionHandler: @escaping (Bool) -> Void) {
         let message = details(forWarning: warning)
         let alert = Macros.alert(url.normalizedFilename, L10n.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
         alert.addDefaultAction(L10n.Global.ok) {
@@ -68,7 +68,7 @@ extension ParsedFile {
     }
     
     private static func localizedMessage(forError error: Error) -> String {
-        if let appError = error as? ApplicationError {
+        if let appError = error as? ConfigurationParser.ParsingError {
             switch appError {
             case .missingConfiguration(let option):
                 log.error("Could not parse configuration URL: missing configuration, \(option)")
@@ -77,25 +77,19 @@ extension ParsedFile {
             case .unsupportedConfiguration(let option):
                 log.error("Could not parse configuration URL: unsupported configuration, \(option)")
                 return L10n.ParsedFile.Alerts.Unsupported.message(option)
-                
-            default:
-                break
             }
         }
         log.error("Could not parse configuration URL: \(error)")
         return L10n.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
     }
     
-    private static func details(forWarning warning: ApplicationError) -> String {
+    private static func details(forWarning warning: ConfigurationParser.ParsingError) -> String {
         switch warning {
         case .missingConfiguration(let option):
             return option
             
         case .unsupportedConfiguration(let option):
             return option
-            
-        default:
-            fatalError("Only use .missingConfiguration or .unsupportedConfiguration for warnings")
         }
     }
 }

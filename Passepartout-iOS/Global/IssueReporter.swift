@@ -91,7 +91,7 @@ class IssueReporter: NSObject {
         }
         if let url = configurationURL {
             do {
-                let parsedFile = try TunnelKitProvider.Configuration.parsed(fromURL: url, returnsStripped: true)
+                let parsedFile = try ConfigurationParser.parsed(fromURL: url, returnsStripped: true)
                 if let attachment = parsedFile.strippedLines?.joined(separator: "\n").data(using: .utf8) {
                     vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.configuration, fileName: AppConstants.IssueReporter.Filenames.configuration)
                 }

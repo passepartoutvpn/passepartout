@@ -47,13 +47,13 @@ class PlaceholderConnectionProfile: ConnectionProfile {
     
     var addresses: [String] = []
     
-    var protocols: [TunnelKitProvider.EndpointProtocol] = []
+    var protocols: [EndpointProtocol] = []
     
     var canCustomizeEndpoint: Bool = false
     
     var customAddress: String?
     
-    var customProtocol: TunnelKitProvider.EndpointProtocol?
+    var customProtocol: EndpointProtocol?
     
     init(_ context: Context, _ id: String) {
         self.context = context

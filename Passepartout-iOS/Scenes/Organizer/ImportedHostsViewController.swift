@@ -32,7 +32,7 @@ private let log = SwiftyBeaver.self
 class ImportedHostsViewController: UITableViewController {
     private lazy var pendingConfigurationURLs = TransientStore.shared.service.pendingConfigurationURLs().sortedCaseInsensitive()
 
-    private var parsedFile: ParsedFile?
+    private var parsingResult: ConfigurationParser.ParsingResult?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class ImportedHostsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        parsedFile = nil
+        parsingResult = nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,25 +70,25 @@ class ImportedHostsViewController: UITableViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 
         // segue parses configuration file if not yet
-        if parsedFile == nil {
+        if parsingResult == nil {
             guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
                 return false
             }
             let url = pendingConfigurationURLs[indexPath.row]
-            guard let parsedFile = ParsedFile.from(url, withErrorAlertIn: self) else {
+            guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: self) else {
                 deselectSelectedRow()
                 return false
             }
-            self.parsedFile = parsedFile
+            self.parsingResult = parsingResult
 
             // postpone segue until alert dismissal
-            if let warning = parsedFile.warning {
-                ParsedFile.alertImportWarning(url: url, in: self, withWarning: warning) {
+            if let warning = parsingResult.warning {
+                ConfigurationParser.ParsingResult.alertImportWarning(url: url, in: self, withWarning: warning) {
                     self.deselectSelectedRow()
                     if $0 {
                         self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
                     } else {
-                        self.parsedFile = nil
+                        self.parsingResult = nil
                     }
                 }
                 return false
@@ -101,7 +101,7 @@ class ImportedHostsViewController: UITableViewController {
         guard let wizard = segue.destination as? WizardHostViewController else {
             return
         }
-        wizard.parsedFile = parsedFile
+        wizard.parsingResult = parsingResult
 
         // retain back button
         wizard.navigationItem.leftBarButtonItem = nil

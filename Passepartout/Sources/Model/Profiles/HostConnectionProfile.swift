@@ -89,7 +89,7 @@ extension HostConnectionProfile {
         return [hostname]
     }
     
-    var protocols: [TunnelKitProvider.EndpointProtocol] {
+    var protocols: [EndpointProtocol] {
         return parameters.endpointProtocols
     }
     
@@ -101,7 +101,7 @@ extension HostConnectionProfile {
         return nil
     }
     
-    var customProtocol: TunnelKitProvider.EndpointProtocol? {
+    var customProtocol: EndpointProtocol? {
         return nil
     }
 }

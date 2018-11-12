@@ -70,7 +70,7 @@ struct InfrastructurePreset: Codable {
 
     let configuration: TunnelKitProvider.Configuration
     
-    func hasProtocol(_ proto: TunnelKitProvider.EndpointProtocol) -> Bool {
+    func hasProtocol(_ proto: EndpointProtocol) -> Bool {
         return configuration.endpointProtocols.index(of: proto) != nil
     }
 
@@ -98,7 +98,7 @@ struct InfrastructurePreset: Codable {
         sessionBuilder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
 
         var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
-        builder.endpointProtocols = try cfgContainer.decode([TunnelKitProvider.EndpointProtocol].self, forKey: .endpointProtocols)
+        builder.endpointProtocols = try cfgContainer.decode([EndpointProtocol].self, forKey: .endpointProtocols)
         configuration = builder.build()
     }
     

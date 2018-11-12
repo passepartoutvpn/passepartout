@@ -36,7 +36,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
         return TransientStore.shared.service.ids(forContext: .host).sortedCaseInsensitive()
     }()
     
-    var parsedFile: ParsedFile? {
+    var parsingResult: ConfigurationParser.ParsingResult? {
         didSet {
             useSuggestedTitle()
         }
@@ -88,19 +88,21 @@ class WizardHostViewController: UITableViewController, TableModelHost {
     // MARK: Actions
     
     private func useSuggestedTitle() {
-        cellTitle?.field.text = parsedFile?.url?.normalizedFilename
+        cellTitle?.field.text = parsingResult?.url?.normalizedFilename
     }
     
     @IBAction private func next() {
         guard let enteredTitle = cellTitle?.field.text?.trimmingCharacters(in: .whitespaces), !enteredTitle.isEmpty else {
             return
         }
-        guard let file = parsedFile else {
+        guard let result = parsingResult else {
             return
         }
-
-        let profile = HostConnectionProfile(title: enteredTitle, hostname: file.hostname)
-        profile.parameters = file.configuration
+        
+        let profile = HostConnectionProfile(title: enteredTitle, hostname: result.hostname)
+        var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
+        builder.endpointProtocols = result.protocols
+        profile.parameters = builder.build()
 
         let service = TransientStore.shared.service
         guard !service.containsProfile(profile) else {
@@ -132,7 +134,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
             fatalError("No profile created?")
         }
         let service = TransientStore.shared.service
-        if let url = parsedFile?.url {
+        if let url = parsingResult?.url {
             do {
                 let savedURL = try service.save(configurationURL: url, for: profile)
                 log.debug("Associated .ovpn configuration file to profile '\(profile.id)': \(savedURL)")
@@ -149,7 +151,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
     }
 
     @IBAction private func close() {
-        if removesConfigurationOnCancel, let url = parsedFile?.url {
+        if removesConfigurationOnCancel, let url = parsingResult?.url {
             try? FileManager.default.removeItem(at: url)
         }
         dismiss(animated: true, completion: nil)

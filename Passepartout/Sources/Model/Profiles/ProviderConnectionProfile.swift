@@ -55,7 +55,7 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     var manualAddress: String?
 
-    var manualProtocol: TunnelKitProvider.EndpointProtocol?
+    var manualProtocol: EndpointProtocol?
     
     var usesProviderEndpoint: Bool {
         return (manualAddress != nil) || (manualProtocol != nil)
@@ -133,8 +133,8 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         } else {
             builder.endpointProtocols = preset.configuration.endpointProtocols
 //            builder.endpointProtocols = [
-//                TunnelKitProvider.EndpointProtocol(.udp, 8080),
-//                TunnelKitProvider.EndpointProtocol(.tcp, 443)
+//                EndpointProtocol(.udp, 8080),
+//                EndpointProtocol(.tcp, 443)
 //            ]
         }
         return builder.build()
@@ -161,7 +161,7 @@ extension ProviderConnectionProfile {
         return pool?.addresses(sorted: true) ?? []
     }
     
-    var protocols: [TunnelKitProvider.EndpointProtocol] {
+    var protocols: [EndpointProtocol] {
         return preset?.configuration.endpointProtocols ?? []
     }
     
@@ -173,7 +173,7 @@ extension ProviderConnectionProfile {
         return manualAddress
     }
 
-    var customProtocol: TunnelKitProvider.EndpointProtocol? {
+    var customProtocol: EndpointProtocol? {
         return manualProtocol
     }
 }

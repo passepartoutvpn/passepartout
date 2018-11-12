@@ -192,16 +192,6 @@ extension StringProtocol where Index == String.Index {
     }
 }
 
-extension String {
-    func trimmedLines() -> [String] {
-        return components(separatedBy: .newlines).map {
-            $0.trimmingCharacters(in: .whitespacesAndNewlines)
-        }.filter {
-            !$0.isEmpty
-        }
-    }
-}
-
 extension CharacterSet {
     static let filename: CharacterSet = {
         var chars: CharacterSet = .decimalDigits
