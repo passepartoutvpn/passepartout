@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sge-vR-hZB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sge-vR-hZB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,13 +13,13 @@
         <!--Wizard Provider View Controller-->
         <scene sceneID="amb-wT-98R">
             <objects>
-                <tableViewController id="Ooz-PQ-fgV" customClass="WizardProviderViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Ooz-PQ-fgV" customClass="WizardProviderViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="FrB-tA-bkJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="ZFw-Xo-SgJ" detailTextLabel="LZg-Pu-uBW" style="IBUITableViewCellStyleValue1" id="vez-pF-zsL" customClass="SettingTableViewCell" customModule="Passepartout_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="ZFw-Xo-SgJ" detailTextLabel="LZg-Pu-uBW" style="IBUITableViewCellStyleValue1" id="vez-pF-zsL" customClass="SettingTableViewCell" customModule="Passepartout" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vez-pF-zsL" id="tAg-9p-gaM">
@@ -80,13 +80,13 @@
         <!--Wizard Host View Controller-->
         <scene sceneID="cDq-OT-Nr8">
             <objects>
-                <tableViewController id="oga-go-FqD" customClass="WizardHostViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="oga-go-FqD" customClass="WizardHostViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="RpT-29-VW0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FieldTableViewCell" textLabel="aLA-eA-uGX" style="IBUITableViewCellStyleDefault" id="wnp-T1-bf6" customClass="FieldTableViewCell" customModule="Passepartout_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FieldTableViewCell" textLabel="aLA-eA-uGX" style="IBUITableViewCellStyleDefault" id="wnp-T1-bf6" customClass="FieldTableViewCell" customModule="Passepartout" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wnp-T1-bf6" id="YiA-B5-bel">
@@ -103,7 +103,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="isC-Oi-HuO" detailTextLabel="REc-9m-82J" style="IBUITableViewCellStyleValue1" id="mg5-6A-smS" customClass="SettingTableViewCell" customModule="Passepartout_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="isC-Oi-HuO" detailTextLabel="REc-9m-82J" style="IBUITableViewCellStyleValue1" id="mg5-6A-smS" customClass="SettingTableViewCell" customModule="Passepartout" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mg5-6A-smS" id="oTs-dD-rvG">
@@ -164,13 +164,13 @@
         <!--Imported Hosts View Controller-->
         <scene sceneID="0zM-zA-ZTU">
             <objects>
-                <tableViewController id="c0p-pg-Arz" customClass="ImportedHostsViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="c0p-pg-Arz" customClass="ImportedHostsViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="j8e-Ab-2SM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="h2k-uQ-JBT" detailTextLabel="Tnk-4u-fB2" style="IBUITableViewCellStyleValue1" id="4dG-dn-eeq" customClass="SettingTableViewCell" customModule="Passepartout_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="h2k-uQ-JBT" detailTextLabel="Tnk-4u-fB2" style="IBUITableViewCellStyleValue1" id="4dG-dn-eeq" customClass="SettingTableViewCell" customModule="Passepartout" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4dG-dn-eeq" id="c48-Fg-ve4">
@@ -250,13 +250,13 @@
         <!--Organizer View Controller-->
         <scene sceneID="H6i-Tl-Gnq">
             <objects>
-                <tableViewController id="hNf-xP-0pR" customClass="OrganizerViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hNf-xP-0pR" customClass="OrganizerViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ZTL-7K-8ld">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="mFP-Zm-Yaa" detailTextLabel="NYd-C0-mki" style="IBUITableViewCellStyleValue1" id="VMR-pG-t8h" customClass="SettingTableViewCell" customModule="Passepartout_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="mFP-Zm-Yaa" detailTextLabel="NYd-C0-mki" style="IBUITableViewCellStyleValue1" id="VMR-pG-t8h" customClass="SettingTableViewCell" customModule="Passepartout" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMR-pG-t8h" id="yQx-3t-6fR">
@@ -319,7 +319,7 @@
         <!--Version View Controller-->
         <scene sceneID="dbE-eJ-wli">
             <objects>
-                <viewController id="PMT-gj-ARE" customClass="VersionViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PMT-gj-ARE" customClass="VersionViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UOK-GX-kRH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -367,7 +367,7 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <state key="normal" title="&lt;CRD&gt;"/>
                                                         <connections>
-                                                            <segue destination="2d7-Ad-AZr" kind="show" id="SQ0-O9-E5E"/>
+                                                            <segue destination="duu-Yq-oor" kind="show" id="w0a-1I-6Nc"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -433,6 +433,53 @@
             </objects>
             <point key="canvasLocation" x="-2551" y="-2246"/>
         </scene>
+        <!--Credits View Controller-->
+        <scene sceneID="fCJ-0P-4HO">
+            <objects>
+                <tableViewController id="duu-Yq-oor" customClass="CreditsViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="f7p-SX-zRm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="Cs5-Oz-lZ4" detailTextLabel="6AN-wh-sIr" style="IBUITableViewCellStyleValue1" id="jQu-e3-15s" customClass="SettingTableViewCell" customModule="Passepartout" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jQu-e3-15s" id="1nY-NX-ZWl">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cs5-Oz-lZ4">
+                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6AN-wh-sIr">
+                                            <rect key="frame" x="296" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="2d7-Ad-AZr" kind="show" id="cPN-1o-GoM"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="duu-Yq-oor" id="KEN-j6-9Eb"/>
+                            <outlet property="delegate" destination="duu-Yq-oor" id="FR8-fY-ppd"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A5e-dW-BFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1786" y="-2247"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="bMd-7b-j9C">
             <objects>
@@ -452,13 +499,13 @@
         <!--About View Controller-->
         <scene sceneID="jWz-41-sji">
             <objects>
-                <tableViewController id="SuC-Dh-OPk" customClass="AboutViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="SuC-Dh-OPk" customClass="AboutViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="m0n-o6-NhG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="skM-jg-ICe" detailTextLabel="iON-s3-zdv" style="IBUITableViewCellStyleValue1" id="Ur6-zm-9xA" customClass="SettingTableViewCell" customModule="Passepartout_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTableViewCell" textLabel="skM-jg-ICe" detailTextLabel="iON-s3-zdv" style="IBUITableViewCellStyleValue1" id="Ur6-zm-9xA" customClass="SettingTableViewCell" customModule="Passepartout" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ur6-zm-9xA" id="k8G-g0-As7">
@@ -506,7 +553,7 @@
         <!--Label View Controller-->
         <scene sceneID="1v7-O6-Ddh">
             <objects>
-                <viewController id="2d7-Ad-AZr" customClass="LabelViewController" customModule="Passepartout_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2d7-Ad-AZr" customClass="LabelViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e1G-CS-7AH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -569,7 +616,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Urb-bq-a19" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2551" y="-1537"/>
+            <point key="canvasLocation" x="-1012" y="-2248"/>
         </scene>
     </scenes>
     <resources>

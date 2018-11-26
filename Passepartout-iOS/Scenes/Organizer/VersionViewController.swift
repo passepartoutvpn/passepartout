@@ -65,14 +65,4 @@ class VersionViewController: UIViewController {
     @IBAction private func visitChangelog() {
         UIApplication.shared.open(AppConstants.URLs.changelog, options: [:], completionHandler: nil)
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let vc = segue.destination as? LabelViewController else {
-            return
-        }
-        vc.title = L10n.Credits.title
-        var notices = AppConstants.Notices.all
-        notices.insert(L10n.Credits.Labels.thirdParties, at: 0)
-        vc.text = notices.joined(separator: "\n\n")
-    }
 }

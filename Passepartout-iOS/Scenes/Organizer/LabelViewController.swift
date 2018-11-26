@@ -41,7 +41,6 @@ class LabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Credits.title
         label?.text = text
 
         scrollView?.applyPrimaryBackground(Theme.current)

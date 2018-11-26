@@ -169,23 +169,67 @@ class AppConstants {
         static let api = githubRaw(repo: "passepartout-api")
     }
 
-    class Notices {
-        private static let pia = "PIATunnel - Copyright (c) 2018-Present Private Internet Access"
+    struct License {
+        let name: String
         
-        private static let swiftyBeaver = "SwiftyBeaver - Copyright (c) 2015 Sebastian Kreutzberger"
+        let type: String
         
-        private static let progressHUD = "MBProgressHUD - Copyright (c) 2009-2016 Matej Bukovinski"
+        let url: URL
 
-        private static let openVPN = "© 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc."
+        init(_ name: String, _ type: String, _ urlString: String) {
+            self.name = name
+            self.type = type
+            url = URL(string: urlString)!
+        }
 
-        private static let openSSL = "This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. https://www.openssl.org/"
+        static let all: [License] = [
+            License(
+                "MBProgressHUD",
+                "MIT",
+                "https://raw.githubusercontent.com/jdg/MBProgressHUD/master/LICENSE"
+            ),
+            License(
+                "OpenSSL",
+                "OpenSSL",
+                "https://www.openssl.org/source/license.txt"
+            ),
+            License(
+                "PIATunnel",
+                "MIT",
+                "https://raw.githubusercontent.com/pia-foss/tunnel-apple/master/LICENSE"
+            ),
+            License(
+                "SwiftGen",
+                "MIT",
+                "https://raw.githubusercontent.com/SwiftGen/SwiftGen/master/LICENSE"
+            ),
+            License(
+                "SwiftyBeaver",
+                "MIT",
+                "https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE"
+            )
+        ]
+    }
+    
+    struct Notice {
+        let name: String
         
-        static let all: [String] = [
-            pia,
-            swiftyBeaver,
-            progressHUD,
-            openVPN,
-            openSSL
+        let statement: String
+        
+        init(_ name: String, _ statement: String) {
+            self.name = name
+            self.statement = statement
+        }
+        
+        static let all: [Notice] = [
+            Notice(
+                "Circle Icons",
+                "The logo is taken from the awesome Circle Icons set by Nick Roach."
+            ),
+            Notice(
+                "OpenVPN",
+                "© 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc."
+            )
         ]
     }
 }

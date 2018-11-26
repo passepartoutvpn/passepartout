@@ -86,6 +86,7 @@
 		0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */; };
 		0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5CF242141CE58004FF1BD /* HUD.swift */; };
 		0EF5CF292141F31F004FF1BD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
+		0EFBFAC121AC464800887A8C /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFBFAC021AC464800887A8C /* CreditsViewController.swift */; };
 		0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943D215BE10800529B64 /* IssueReporter.swift */; };
 		0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943F215BED8E00529B64 /* LabelViewController.swift */; };
 		390EEC911382C4814FB97475 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0C619B826C7140001C0F32 /* Pods_Passepartout_iOS_Tunnel.framework */; };
@@ -211,6 +212,7 @@
 		0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
 		0EF5CF242141CE58004FF1BD /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		0EFBFAC021AC464800887A8C /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
 		0EFD943F215BED8E00529B64 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		28B2E6590DE79C3B403348DC /* Pods-Passepartout-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */,
+				0EFBFAC021AC464800887A8C /* CreditsViewController.swift */,
 				0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */,
 				0EFD943F215BED8E00529B64 /* LabelViewController.swift */,
 				0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */,
@@ -849,6 +852,7 @@
 				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
 				0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */,
 				0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */,
+				0EFBFAC121AC464800887A8C /* CreditsViewController.swift in Sources */,
 				0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */,
 				0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */,
 				0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */,

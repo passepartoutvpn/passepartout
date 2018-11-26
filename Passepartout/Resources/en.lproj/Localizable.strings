@@ -206,4 +206,5 @@
 "version.buttons.credits" = "CREDITS";
 
 "credits.title" = "Credits";
-"credits.labels.third_parties" = "The logo is taken from the awesome Circle Icons set by Nick Roach.";
+"credits.sections.licenses.header" = "Licenses";
+"credits.sections.notices.header" = "Notices";

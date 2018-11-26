@@ -192,9 +192,15 @@ internal enum L10n {
   internal enum Credits {
     /// Credits
     internal static let title = L10n.tr("Localizable", "credits.title")
-    internal enum Labels {
-      /// The logo is taken from the awesome Circle Icons set by Nick Roach.
-      internal static let thirdParties = L10n.tr("Localizable", "credits.labels.third_parties")
+    internal enum Sections {
+      internal enum Licenses {
+        /// Licenses
+        internal static let header = L10n.tr("Localizable", "credits.sections.licenses.header")
+      }
+      internal enum Notices {
+        /// Notices
+        internal static let header = L10n.tr("Localizable", "credits.sections.notices.header")
+      }
     }
   }
 
