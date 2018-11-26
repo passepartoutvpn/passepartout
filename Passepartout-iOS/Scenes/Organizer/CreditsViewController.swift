@@ -58,10 +58,17 @@ class CreditsViewController: UITableViewController, TableModelHost {
         guard let vc = segue.destination as? LabelViewController else {
             return
         }
-        guard let cell = sender as? SettingTableViewCell else {
+        guard let cell = sender as? SettingTableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return
         }
         vc.title = cell.leftText
+        switch model.row(at: indexPath) {
+        case .license:
+            vc.url = licenses[indexPath.row].url
+
+        case .notice:
+            vc.text = notices[indexPath.row].statement
+        }
     }
 }
 

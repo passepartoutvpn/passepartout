@@ -32,6 +32,8 @@ class LabelViewController: UIViewController {
     
     var text: String?
     
+    var url: URL?
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -41,7 +43,17 @@ class LabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        label?.text = text
+        if let url = url {
+            label?.text = nil
+            DispatchQueue(label: LabelViewController.description(), qos: .background).async { [weak self] in
+                let urlText = try? String(contentsOf: url)
+                DispatchQueue.main.async {
+                    self?.label?.text = urlText
+                }
+            }
+        } else {
+            label?.text = text
+        }
 
         scrollView?.applyPrimaryBackground(Theme.current)
         label?.applyLight(Theme.current)
