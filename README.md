@@ -115,6 +115,8 @@ The logo is taken from the awesome Circle Icons set by Nick Roach.
 - SwiftGen - © 2018 SwiftGen
 - SwiftyBeaver - © 2015 Sebastian Kreutzberger
 
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. ([https://www.openssl.org/][dep-openssl])
+
 © 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
 
 ## Usage
