@@ -136,6 +136,12 @@ extension UITextField {
     }
 }
 
+extension UIActivityIndicatorView {
+    func applyAccent(_ theme: Theme) {
+        color = theme.palette.colorAccent1
+    }
+}
+
 // XXX: status bar is broken
 extension MFMailComposeViewController {
     func apply(_ theme: Theme) {

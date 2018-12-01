@@ -599,10 +599,15 @@
                                     <constraint firstItem="Qme-Hw-Egq" firstAttribute="width" secondItem="6iI-GI-SMq" secondAttribute="width" id="urL-Uu-OBn"/>
                                 </constraints>
                             </scrollView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="piQ-gx-2Zm">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="piQ-gx-2Zm" firstAttribute="centerY" secondItem="e1G-CS-7AH" secondAttribute="centerY" id="2bL-bY-Tq7"/>
                             <constraint firstAttribute="bottom" secondItem="6iI-GI-SMq" secondAttribute="bottom" id="O7t-Z4-Wgz"/>
+                            <constraint firstItem="piQ-gx-2Zm" firstAttribute="centerX" secondItem="e1G-CS-7AH" secondAttribute="centerX" id="kec-lV-4be"/>
                             <constraint firstItem="6iI-GI-SMq" firstAttribute="top" secondItem="e1G-CS-7AH" secondAttribute="top" id="moK-Ck-mjj"/>
                             <constraint firstItem="6iI-GI-SMq" firstAttribute="leading" secondItem="e1G-CS-7AH" secondAttribute="leading" id="rLL-Mv-Pet"/>
                             <constraint firstAttribute="trailing" secondItem="6iI-GI-SMq" secondAttribute="trailing" id="smW-RU-D8F"/>
@@ -610,6 +615,7 @@
                         <viewLayoutGuide key="safeArea" id="skL-cM-vUB"/>
                     </view>
                     <connections>
+                        <outlet property="activity" destination="piQ-gx-2Zm" id="4MR-Wt-LPh"/>
                         <outlet property="label" destination="KWp-cG-SuG" id="us3-ss-xAX"/>
                         <outlet property="scrollView" destination="6iI-GI-SMq" id="uWc-do-1WG"/>
                     </connections>

@@ -28,6 +28,8 @@ import UIKit
 class LabelViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView?
 
+    @IBOutlet private weak var activity: UIActivityIndicatorView?
+    
     @IBOutlet private weak var label: UILabel?
     
     var text: String?
@@ -43,12 +45,18 @@ class LabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        activity?.hidesWhenStopped = true
+        activity?.applyAccent(Theme.current)
+
         if let url = url {
             label?.text = nil
+            activity?.startAnimating()
+
             DispatchQueue(label: LabelViewController.description(), qos: .background).async { [weak self] in
                 let urlText = try? String(contentsOf: url)
                 DispatchQueue.main.async {
                     self?.label?.text = urlText
+                    self?.activity?.stopAnimating()
                 }
             }
         } else {
