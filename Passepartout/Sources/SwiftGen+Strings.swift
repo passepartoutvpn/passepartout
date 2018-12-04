@@ -293,6 +293,13 @@ internal enum L10n {
     }
   }
 
+  internal enum Label {
+    internal enum License {
+      /// Unable to download full license content.
+      internal static let error = L10n.tr("Localizable", "label.license.error")
+    }
+  }
+
   internal enum Organizer {
     internal enum Alerts {
       internal enum AddHost {

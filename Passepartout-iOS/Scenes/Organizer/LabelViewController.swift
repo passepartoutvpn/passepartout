@@ -34,7 +34,7 @@ class LabelViewController: UIViewController {
     
     var text: String?
     
-    var url: URL?
+    var license: AppConstants.License?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,23 +47,41 @@ class LabelViewController: UIViewController {
 
         activity?.hidesWhenStopped = true
         activity?.applyAccent(Theme.current)
+        scrollView?.applyPrimaryBackground(Theme.current)
+        label?.applyLight(Theme.current)
 
-        if let url = url {
+        if let license = license {
+            
+            // try cache first
+            if let cachedContent = AppConstants.License.cachedContent[license.name] {
+                label?.text = cachedContent
+                return
+            }
+            
             label?.text = nil
             activity?.startAnimating()
 
             DispatchQueue(label: LabelViewController.description(), qos: .background).async { [weak self] in
-                let urlText = try? String(contentsOf: url)
+                let content: String
+                let couldFetch: Bool
+                do {
+                    content = try String(contentsOf: license.url)
+                    couldFetch = true
+                } catch {
+                    content = L10n.Label.License.error
+                    couldFetch = false
+                }
                 DispatchQueue.main.async {
-                    self?.label?.text = urlText
+                    self?.label?.text = content
                     self?.activity?.stopAnimating()
+                    
+                    if couldFetch {
+                        AppConstants.License.cachedContent[license.name] = content
+                    }
                 }
             }
         } else {
             label?.text = text
         }
-
-        scrollView?.applyPrimaryBackground(Theme.current)
-        label?.applyLight(Theme.current)
     }
 }

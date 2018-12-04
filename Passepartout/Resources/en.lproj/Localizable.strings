@@ -208,3 +208,5 @@
 "credits.title" = "Credits";
 "credits.sections.licenses.header" = "Licenses";
 "credits.sections.notices.header" = "Notices";
+
+"label.license.error" = "Unable to download full license content.";

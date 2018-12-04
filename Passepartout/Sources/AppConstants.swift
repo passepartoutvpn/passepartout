@@ -175,7 +175,7 @@ class AppConstants {
         let type: String
         
         let url: URL
-
+        
         init(_ name: String, _ type: String, _ urlString: String) {
             self.name = name
             self.type = type
@@ -209,6 +209,8 @@ class AppConstants {
                 "https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE"
             )
         ]
+
+        static var cachedContent: [String: String] = [:]
     }
     
     struct Notice {

@@ -64,7 +64,7 @@ class CreditsViewController: UITableViewController, TableModelHost {
         vc.title = cell.leftText
         switch model.row(at: indexPath) {
         case .license:
-            vc.url = licenses[indexPath.row].url
+            vc.license = licenses[indexPath.row]
 
         case .notice:
             vc.text = notices[indexPath.row].statement
