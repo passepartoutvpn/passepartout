@@ -192,9 +192,15 @@ internal enum L10n {
   internal enum Credits {
     /// Credits
     internal static let title = L10n.tr("Localizable", "credits.title")
-    internal enum Labels {
-      /// The logo is taken from the awesome Circle Icons set by Nick Roach.
-      internal static let thirdParties = L10n.tr("Localizable", "credits.labels.third_parties")
+    internal enum Sections {
+      internal enum Licenses {
+        /// Licenses
+        internal static let header = L10n.tr("Localizable", "credits.sections.licenses.header")
+      }
+      internal enum Notices {
+        /// Notices
+        internal static let header = L10n.tr("Localizable", "credits.sections.notices.header")
+      }
     }
   }
 
@@ -284,6 +290,13 @@ internal enum L10n {
       internal static func subject(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue_reporter.email.subject", p1)
       }
+    }
+  }
+
+  internal enum Label {
+    internal enum License {
+      /// Unable to download full license content.
+      internal static let error = L10n.tr("Localizable", "label.license.error")
     }
   }
 

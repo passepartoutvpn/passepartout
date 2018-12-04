@@ -28,10 +28,14 @@ import UIKit
 class LabelViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView?
 
+    @IBOutlet private weak var activity: UIActivityIndicatorView?
+    
     @IBOutlet private weak var label: UILabel?
     
     var text: String?
     
+    var license: AppConstants.License?
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -41,10 +45,43 @@ class LabelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Credits.title
-        label?.text = text
-
+        activity?.hidesWhenStopped = true
+        activity?.applyAccent(Theme.current)
         scrollView?.applyPrimaryBackground(Theme.current)
         label?.applyLight(Theme.current)
+
+        if let license = license {
+            
+            // try cache first
+            if let cachedContent = AppConstants.License.cachedContent[license.name] {
+                label?.text = cachedContent
+                return
+            }
+            
+            label?.text = nil
+            activity?.startAnimating()
+
+            DispatchQueue(label: LabelViewController.description(), qos: .background).async { [weak self] in
+                let content: String
+                let couldFetch: Bool
+                do {
+                    content = try String(contentsOf: license.url)
+                    couldFetch = true
+                } catch {
+                    content = L10n.Label.License.error
+                    couldFetch = false
+                }
+                DispatchQueue.main.async {
+                    self?.label?.text = content
+                    self?.activity?.stopAnimating()
+                    
+                    if couldFetch {
+                        AppConstants.License.cachedContent[license.name] = content
+                    }
+                }
+            }
+        } else {
+            label?.text = text
+        }
     }
 }
