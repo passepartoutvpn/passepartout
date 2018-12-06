@@ -136,7 +136,21 @@ class InfrastructureFactory {
                 self.lastUpdate[name] = Date()
             }
 
-            guard let response = response, let infra = response.value, let lastModified = response.lastModified else {
+            guard let response = response else {
+                log.error("No response from web service")
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+                return
+            }
+            if response.isCached {
+                log.debug("Cache is up to date")
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+                return
+            }
+            guard let infra = response.value, let lastModified = response.lastModified else {
                 log.error("No response from web service or missing Last-Modified")
                 DispatchQueue.main.async {
                     completionHandler(nil, error)

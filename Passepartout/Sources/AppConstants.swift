@@ -154,7 +154,7 @@ class AppConstants {
     class Repos {
         private static let githubRoot = URL(string: "https://github.com/passepartoutvpn/")!
 
-        private static let githubRawRoot = URL(string: "https://passepartoutvpn.github.io/")!
+        private static let githubRawRoot = URL(string: "https://\(Domain.name)/")!
         
         private static func github(repo: String) -> URL {
             return githubRoot.appendingPathComponent(repo)
