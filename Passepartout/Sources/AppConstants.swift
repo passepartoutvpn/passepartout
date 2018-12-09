@@ -68,9 +68,9 @@ class AppConstants {
     }
     
     class Web {
-        private static let version = "v2"
+        private static let version = "v1"
         
-        private static let baseURL = Repos.api.appendingPathComponent("api/\(version)")
+        private static let baseURL = Repos.api.appendingPathComponent(version)
         
         static func url(path: String) -> URL {
             return baseURL.appendingPathComponent(path)
@@ -166,7 +166,7 @@ class AppConstants {
         
         static let ios = github(repo: "passepartout-ios")
 
-        static let api = githubRaw(repo: "passepartout-api")
+        static let api = githubRaw(repo: "api")
     }
 
     struct License {
