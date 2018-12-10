@@ -7,13 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-### Fixed
+### Added
 
-- Infrastructures not refreshed. [#29](https://github.com/passepartoutvpn/passepartout-ios/issues/29)
+- Automated app rating mechanism.
 
 ### Changed
 
 - Relocated API endpoints, better before first release.
+
+### Fixed
+
+- Infrastructures not refreshed. [#29](https://github.com/passepartoutvpn/passepartout-ios/issues/29)
 
 ## 1.0 RC4 1271 (2018-12-04)
 
