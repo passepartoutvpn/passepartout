@@ -234,4 +234,8 @@ class AppConstants {
             )
         ]
     }
+    
+    struct Rating {
+        static let eventCount = 3
+    }
 }

@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         InfrastructureFactory.shared.loadCache()
         Theme.current.applyAppearance()
+        Reviewer.shared.eventCountBeforeRating = AppConstants.Rating.eventCount
 
         // Override point for customization after application launch.
         let splitViewController = window!.rootViewController as! UISplitViewController

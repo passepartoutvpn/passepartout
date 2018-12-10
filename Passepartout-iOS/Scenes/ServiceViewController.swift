@@ -395,6 +395,10 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     @objc private func vpnDidUpdate() {
         reloadVpnStatus()
+        
+        if vpn.status == .connected {
+            Reviewer.shared.reportEvent()
+        }
     }
     
     @objc private func applicationDidBecomeActive() {
