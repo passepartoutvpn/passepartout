@@ -5,56 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 1.0 GM 1281 (2018-12-15)
 
 ### Added
 
 - Automated app rating mechanism.
-
-### Changed
-
-- Relocated API endpoints, better before first release.
-
-### Fixed
-
-- Infrastructures not refreshed. [#29](https://github.com/passepartoutvpn/passepartout-ios/issues/29)
-
-## 1.0 RC4 1271 (2018-12-04)
-
-### Changed
-
-- Reorganized credits page.
-
-## 1.0 RC3 1258 (2018-11-15)
-
-### Changed
-
-- Internal refactoring (nothing visible).
-
-## 1.0 RC2 1237 (2018-11-04)
-
-### Added
-
 - Dot as a legal character in host profile title. [#22](https://github.com/passepartoutvpn/passepartout-ios/issues/22)
 - Host profiles can now be renamed. [#24](https://github.com/passepartoutvpn/passepartout-ios/issues/24)
-
-### Changed
-
-- Disconnect VPN by default when entering a trusted network. [#25](https://github.com/passepartoutvpn/passepartout-ios/pull/25)
-
-### Removed
-
-- "Test connectivity" until it's more transparent.
-
-### Fixed
-
-- Incorrect compression warnings when importing host configurations. [#20](https://github.com/passepartoutvpn/passepartout-ios/pull/20)
-- Regression in provider endpoints, IPv4 appearing reversed. [#23](https://github.com/passepartoutvpn/passepartout-ios/pull/23)
-
-## 1.0 RC1 1194 (2018-11-01)
-
-### Added
-
 - Explicit rejection of encrypted client certificate keys. [#15](https://github.com/passepartoutvpn/passepartout-ios/issues/15)
 - Attach .ovpn when reporting a connectivity issue, stripped of sensitive data. [#13](https://github.com/passepartoutvpn/passepartout-ios/pull/13)
 - iTunes File Sharing (skythedesu). [#14](https://github.com/passepartoutvpn/passepartout-ios/pull/14)
@@ -68,10 +25,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- "Test connectivity" until it's more transparent.
 - Password confirmation field, redundant with authentication failure message.
 
 ### Changed
 
+- Relocated API endpoints, better before first release.
+- Reorganized credits page.
+- Internal refactoring (nothing visible).
+- Disconnect VPN by default when entering a trusted network. [#25](https://github.com/passepartoutvpn/passepartout-ios/pull/25)
 - Host parameters are read-only if there isn't an original configuration to revert to.
 - Overall serialization performance.
 - Drive generic support requests on Reddit.
@@ -79,6 +41,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Infrastructures not refreshed. [#29](https://github.com/passepartoutvpn/passepartout-ios/issues/29)
+- Incorrect compression warnings when importing host configurations. [#20](https://github.com/passepartoutvpn/passepartout-ios/pull/20)
+- Regression in provider endpoints, IPv4 appearing reversed. [#23](https://github.com/passepartoutvpn/passepartout-ios/pull/23)
 - Handling of extra whitespaces in .ovpn (Mike Mayer). [#17](https://github.com/passepartoutvpn/passepartout-ios/issues/17)
 - Glitches in import wizard flow, sometimes not even appearing.
 - Warn about .ovpn containing potentially unsupported compression. [#16](https://github.com/passepartoutvpn/passepartout-ios/issues/16)
