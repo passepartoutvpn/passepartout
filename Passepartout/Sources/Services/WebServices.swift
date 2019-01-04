@@ -35,7 +35,7 @@ class WebServices {
         var path: String {
             switch self {
             case .network(let name):
-                return "net/\(name.webName).json"
+                return "net/\(name.webName)"
             }
         }
     }
@@ -73,7 +73,7 @@ class WebServices {
     }
 
     private func get(_ endpoint: Endpoint) -> URLRequest {
-        let url = AppConstants.Web.url(path: endpoint.path)
+        let url = AppConstants.Web.url(path: "\(endpoint.path).json")
         return URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: AppConstants.Web.timeout)
     }
     

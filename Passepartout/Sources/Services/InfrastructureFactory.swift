@@ -30,7 +30,7 @@ private let log = SwiftyBeaver.self
 
 class InfrastructureFactory {
     private static func embedded(withName name: Infrastructure.Name) -> Infrastructure {
-        guard let url = Bundle.main.url(forResource: name.webName, withExtension: "json") else {
+        guard let url = name.bundleURL else {
             fatalError("Cannot find JSON for infrastructure '\(name)'")
         }
         do {
@@ -44,7 +44,7 @@ class InfrastructureFactory {
         guard let cacheDate = FileManager.default.modificationDate(of: cachedEntry.path) else {
             return false
         }
-        guard let bundleURL = Bundle.main.url(forResource: name.webName, withExtension: "json") else {
+        guard let bundleURL = name.bundleURL else {
             return true
         }
         guard let bundleDate = FileManager.default.modificationDate(of: bundleURL.path) else {
@@ -53,7 +53,7 @@ class InfrastructureFactory {
         return cacheDate > bundleDate
     }
     
-    static let shared = InfrastructureFactory(withCacheDirectory: AppConstants.Store.infrastructureCacheDirectory)
+    static let shared = InfrastructureFactory()
 
     let allNames: [Infrastructure.Name] = [
         .pia
@@ -67,14 +67,14 @@ class InfrastructureFactory {
 
     private var lastUpdate: [Infrastructure.Name: Date]
 
-    private init(withCacheDirectory cacheDirectory: String) {
+    private init() {
         var bundle: [Infrastructure.Name: Infrastructure] = [:]
         allNames.forEach {
             bundle[$0] = InfrastructureFactory.embedded(withName: $0)
         }
         self.bundle = bundle
 
-        cachePath = FileManager.default.userURL(for: .cachesDirectory, appending: cacheDirectory)
+        cachePath = FileManager.default.userURL(for: .cachesDirectory, appending: nil)
         cache = [:]
         lastUpdate = [:]
     }
@@ -207,7 +207,8 @@ class InfrastructureFactory {
         let fm = FileManager.default
         let url = cacheURL(for: name)
         do {
-            try fm.createDirectory(at: cachePath, withIntermediateDirectories: true, attributes: nil)
+            let parent = url.deletingLastPathComponent()
+            try fm.createDirectory(at: parent, withIntermediateDirectories: true, attributes: nil)
             let data = try JSONEncoder().encode(infrastructure)
             try data.write(to: url)
             try fm.setAttributes([.modificationDate: lastModified], ofItemAtPath: url.path)
@@ -217,7 +218,7 @@ class InfrastructureFactory {
     }
     
     private func cacheURL(for name: Infrastructure.Name) -> URL {
-        return cachePath.appendingPathComponent(name.webName).appendingPathExtension("json")
+        return cachePath.appendingPathComponent(name.bundleRelativePath)
     }
 
     private func cacheModificationDate(for name: Infrastructure.Name) -> Date? {
@@ -225,12 +226,26 @@ class InfrastructureFactory {
         return FileManager.default.modificationDate(of: url.path)
     }
 
-    private func bundleURL(for name: Infrastructure.Name) -> URL {
-        return Bundle.main.url(forResource: name.webName, withExtension: "json")!
+    private func bundleModificationDate(for name: Infrastructure.Name) -> Date? {
+        guard let url = name.bundleURL else {
+            return nil
+        }
+        return FileManager.default.modificationDate(of: url.path)
+    }
+}
+
+private extension Infrastructure.Name {
+    var bundleRelativePath: String {
+        let endpoint = WebServices.Endpoint.network(self)
+        
+        // e.g. "Web", PIA="net/pia" -> "Web/net/pia.json"
+        return "\(AppConstants.Store.webCacheDirectory)/\(endpoint.path).json"
     }
 
-    private func bundleModificationDate(for name: Infrastructure.Name) -> Date? {
-        let url = bundleURL(for: name)
-        return FileManager.default.modificationDate(of: url.path)
+    var bundleURL: URL? {
+        let endpoint = WebServices.Endpoint.network(self)
+
+        // e.g. "Web", PIA="net/pia" -> "[Bundle]:Web/net/pia.json"
+        return Bundle.main.url(forResource: "\(AppConstants.Store.webCacheDirectory)/\(endpoint.path)", withExtension: "json")
     }
 }
