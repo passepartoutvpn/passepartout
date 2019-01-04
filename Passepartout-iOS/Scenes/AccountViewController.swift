@@ -55,6 +55,9 @@ class AccountViewController: UIViewController, TableModelHost {
             switch name {
             case .pia:
                 guidance = V.Infrastructure.pia
+                
+            case .tunnelBear:
+                guidance = V.Infrastructure.tunnelbear
             }
 
             if guidance != nil {

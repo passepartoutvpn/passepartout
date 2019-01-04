@@ -30,6 +30,8 @@ struct Infrastructure: Codable {
     enum Name: String, Codable, Comparable {
         case pia = "PIA"
         
+        case tunnelBear = "TunnelBear"
+        
         var webName: String {
             return rawValue.lowercased()
         }
