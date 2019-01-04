@@ -56,7 +56,8 @@ class InfrastructureFactory {
     static let shared = InfrastructureFactory()
 
     let allNames: [Infrastructure.Name] = [
-        .pia
+        .pia,
+        .tunnelBear
     ]
     
     private let bundle: [Infrastructure.Name: Infrastructure]
