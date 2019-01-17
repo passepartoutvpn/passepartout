@@ -307,7 +307,7 @@ internal enum L10n {
         internal static let message = L10n.tr("Localizable", "organizer.alerts.add_host.message")
       }
       internal enum DeleteVpnProfile {
-        /// Do you really want to delete the VPN profile from the device?
+        /// Do you really want to erase the VPN configuration from your device settings? This will not affect your network and host profiles.
         internal static let message = L10n.tr("Localizable", "organizer.alerts.delete_vpn_profile.message")
       }
       internal enum ExhaustedProviders {
@@ -337,7 +337,7 @@ internal enum L10n {
         }
       }
       internal enum Uninstall {
-        /// Delete VPN profile
+        /// Remove VPN configuration
         internal static let caption = L10n.tr("Localizable", "organizer.cells.uninstall.caption")
       }
     }
