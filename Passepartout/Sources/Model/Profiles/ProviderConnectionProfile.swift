@@ -125,7 +125,7 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
             builder.resolvedAddresses = [address]
         } else {
             builder.prefersResolvedAddresses = !preferences.resolvesHostname
-            builder.resolvedAddresses = pool.addresses(sorted: false)
+            builder.resolvedAddresses = pool.addresses()
         }
         
         if let proto = manualProtocol {
@@ -158,7 +158,7 @@ extension ProviderConnectionProfile {
     }
     
     var addresses: [String] {
-        return pool?.addresses(sorted: true) ?? []
+        return pool?.addresses() ?? []
     }
     
     var protocols: [EndpointProtocol] {
