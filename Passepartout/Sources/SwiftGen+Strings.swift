@@ -20,6 +20,10 @@ internal enum L10n {
         /// Disclaimer
         internal static let caption = L10n.tr("Localizable", "about.cells.disclaimer.caption")
       }
+      internal enum Faq {
+        /// FAQ
+        internal static let caption = L10n.tr("Localizable", "about.cells.faq.caption")
+      }
       internal enum JoinCommunity {
         /// Join community
         internal static let caption = L10n.tr("Localizable", "about.cells.join_community.caption")

@@ -39,7 +39,7 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.About.Sections.Share.header, for: .share)
         model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version], in: .info)
-        model.set([.website, .disclaimer, .privacyPolicy], in: .web)
+        model.set([.website, .faq, .disclaimer, .privacyPolicy], in: .web)
         model.set([.shareTwitter, .shareGeneric], in: .share)
         model.set([.joinCommunity, .writeReview], in: .feedback)
         return model
@@ -70,6 +70,10 @@ class AboutViewController: UITableViewController, TableModelHost {
     
     private func visitWebsite() {
         UIApplication.shared.open(AppConstants.URLs.website, options: [:], completionHandler: nil)
+    }
+    
+    private func visitFAQ() {
+        UIApplication.shared.open(AppConstants.URLs.faq, options: [:], completionHandler: nil)
     }
     
     private func visitDisclaimer() {
@@ -127,6 +131,8 @@ extension AboutViewController {
         
         case website
         
+        case faq
+        
         case disclaimer
         
         case privacyPolicy
@@ -169,6 +175,11 @@ extension AboutViewController {
             cell.leftText = L10n.About.Cells.Website.caption
             return cell
             
+        case .faq:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.About.Cells.Faq.caption
+            return cell
+
         case .disclaimer:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.Disclaimer.caption
@@ -209,6 +220,9 @@ extension AboutViewController {
         case .website:
             visitWebsite()
             
+        case .faq:
+            visitFAQ()
+
         case .disclaimer:
             visitDisclaimer()
             

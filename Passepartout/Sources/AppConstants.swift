@@ -122,6 +122,8 @@ class AppConstants {
     class URLs {
         static let website = URL(string: "https://\(Domain.name)")!
         
+        static let faq = website.appendingPathComponent("faq")
+
         static let disclaimer = website.appendingPathComponent("disclaimer")
 
         static let privacyPolicy = website.appendingPathComponent("privacy")
