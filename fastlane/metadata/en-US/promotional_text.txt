@@ -1,1 +1,1 @@
-Passepartout is a non-official, user-friendly OpenVPN® client for iOS and soon for macOS.
+Passepartout is an user-friendly OpenVPN® client.
