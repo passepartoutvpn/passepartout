@@ -191,6 +191,7 @@
 "about.sections.share.header" = "Share";
 "about.sections.feedback.header" = "Feedback";
 "about.cells.website.caption" = "Home page";
+"about.cells.faq.caption" = "FAQ";
 "about.cells.disclaimer.caption" = "Disclaimer";
 "about.cells.privacy_policy.caption" = "Privacy policy";
 "about.cells.share_twitter.caption" = "Tweet about it!";
