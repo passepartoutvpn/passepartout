@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Override DNS servers via `dhcp-option DNS`. [tunnelkit#56](https://github.com/keeshux/tunnelkit/pull/56)
 - About link to FAQ.
 
 ### Changed
