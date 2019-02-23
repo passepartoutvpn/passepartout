@@ -35,7 +35,7 @@ class AppConstants {
     class Store {
         static let serviceFilename = "ConnectionService.json"
         
-        static let infrastructureCacheDirectory = "Infrastructures"
+        static let webCacheDirectory = "Web"
 
         static let providersDirectory = "Providers"
 
