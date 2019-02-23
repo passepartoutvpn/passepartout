@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - About link to FAQ.
 
+### Changed
+
+- Only enable EKU verification if `remote-cert-tls server`. [tunnelkit#64](https://github.com/keeshux/tunnelkit/pull/64)
+
 ### Fixed
 
 - Retain DNS reply order in resolved endpoint addresses. [#31](https://github.com/passepartoutvpn/passepartout-ios/pull/31)
