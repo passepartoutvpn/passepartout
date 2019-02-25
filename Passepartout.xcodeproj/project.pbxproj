@@ -704,7 +704,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
@@ -721,7 +721,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9C7DFA86B13FF0B80CFED9EF /* [CP] Embed Pods Frameworks */ = {
@@ -732,7 +732,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS-frameworks.sh",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
@@ -747,7 +747,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A5984A2DF2C43505FA7E4866 /* [CP] Check Pods Manifest.lock */ = {

@@ -75,7 +75,7 @@ You can find details on what may or may not work in the related section of the [
 - Xcode 10+ (Swift 4.2)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
-- [CocoaPods 1.4.0][dep-cocoapods]
+- [CocoaPods = 1.5.3][dep-cocoapods] (see #34 for why later versions break)
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
