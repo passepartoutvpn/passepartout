@@ -659,6 +659,8 @@ internal enum L10n {
     internal enum Errors {
       /// Auth failed
       internal static let auth = L10n.tr("Localizable", "vpn.errors.auth")
+      /// Compression unsupported
+      internal static let compression = L10n.tr("Localizable", "vpn.errors.compression")
       /// DNS failed
       internal static let dns = L10n.tr("Localizable", "vpn.errors.dns")
       /// Encryption failed

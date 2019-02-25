@@ -176,6 +176,7 @@
 "vpn.errors.auth" = "Auth failed";
 "vpn.errors.tls" = "TLS failed";
 "vpn.errors.encryption" = "Encryption failed";
+"vpn.errors.compression" = "Compression unsupported";
 "vpn.errors.network" = "Network changed";
 
 "issue_reporter.title" = "Report issue";
