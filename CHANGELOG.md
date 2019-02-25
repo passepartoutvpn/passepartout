@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Shut down if server pushes a compression directive.
+- Shut down if server pushes a compression directive. [tunnelkit#65](https://github.com/keeshux/tunnelkit/pull/65)
 
 ## 1.0.1 beta 1299 (2019-02-25)
 
