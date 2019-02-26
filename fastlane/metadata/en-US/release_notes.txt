@@ -1,1 +1,5 @@
-
+- Shut down if server pushes a compression directive.
+- Override DNS servers via `dhcp-option DNS`.
+- About link to FAQ.
+- Only enable EKU verification if `remote-cert-tls server`.
+- Retain DNS reply order in resolved endpoint addresses.
