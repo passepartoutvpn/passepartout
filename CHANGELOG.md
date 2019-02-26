@@ -5,13 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.0.1 beta 1307 (2019-02-26)
-
-### Added
-
-- Shut down if server pushes a compression directive. [tunnelkit#65](https://github.com/keeshux/tunnelkit/pull/65)
-
-## 1.0.1 beta 1299 (2019-02-25)
+## 1.0.1 (2019-02-27)
 
 ### Added
 
@@ -24,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Shut down if server pushes a compression directive. [tunnelkit#65](https://github.com/keeshux/tunnelkit/pull/65)
 - Retain DNS reply order in resolved endpoint addresses. [#31](https://github.com/passepartoutvpn/passepartout-ios/pull/31)
 
 ## 1.0 (2019-01-16)
