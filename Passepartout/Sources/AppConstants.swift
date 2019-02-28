@@ -203,7 +203,7 @@ class AppConstants {
             License(
                 "SwiftGen",
                 "MIT",
-                "https://raw.githubusercontent.com/SwiftGen/SwiftGen/master/LICENSE"
+                "https://raw.githubusercontent.com/SwiftGen/SwiftGen/master/LICENCE"
             ),
             License(
                 "SwiftyBeaver",

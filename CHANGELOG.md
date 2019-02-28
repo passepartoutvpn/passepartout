@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Shut down if server uses compression at all.
+- Broken link to SwiftGen license.
 
 ## 1.0.1 (2019-02-27)
 
