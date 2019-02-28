@@ -2,8 +2,8 @@ source 'https://github.com/cocoapods/specs.git'
 use_frameworks!
 
 def shared_pods
-    pod 'TunnelKit', '~> 1.4.1'
-    #pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => '06a872c'
+    #pod 'TunnelKit', '~> 1.4.1'
+    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => 'c05a479'
     #pod 'TunnelKit', :path => '../../personal/tunnelkit'
 end
 
