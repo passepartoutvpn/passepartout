@@ -136,6 +136,7 @@
 "configuration.sections.communication.header" = "Communication";
 "configuration.sections.reset.footer" = "If you ended up with broken connectivity after changing the communication parameters, tap to revert to the original configuration.";
 "configuration.sections.tls.header" = "TLS";
+"configuration.sections.dns.header" = "DNS";
 "configuration.sections.other.header" = "Other";
 "configuration.cells.cipher.caption" = "Cipher";
 "configuration.cells.digest.caption" = "Authentication";
@@ -152,6 +153,7 @@
 "configuration.cells.tls_wrapping.value.auth" = "Authentication";
 "configuration.cells.tls_wrapping.value.crypt" = "Encryption";
 "configuration.cells.tls_wrapping.value.disabled" = "Disabled";
+"configuration.cells.dns_server.caption" = "Address";
 "configuration.cells.compression_algorithm.caption" = "Compression";
 "configuration.cells.compression_algorithm.value.disabled" = "Disabled";
 "configuration.cells.keep_alive.caption" = "Keep-alive";

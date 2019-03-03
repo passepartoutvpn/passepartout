@@ -57,11 +57,17 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             model.add(.reset)
         }
         model.add(.tls)
+        if let _ = configuration.dnsServers {
+            model.add(.dns)
+        }
         model.add(.other)
 
         // headers
         model.setHeader(L10n.Configuration.Sections.Communication.header, for: .communication)
         model.setHeader(L10n.Configuration.Sections.Tls.header, for: .tls)
+        if let _ = configuration.dnsServers {
+            model.setHeader(L10n.Configuration.Sections.Dns.header, for: .dns)
+        }
         model.setHeader(L10n.Configuration.Sections.Other.header, for: .other)
 
         // footers
@@ -75,6 +81,9 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             model.set([.resetOriginal], in: .reset)
         }
         model.set([.client, .tlsWrapping], in: .tls)
+        if let dnsServers = configuration.dnsServers {
+            model.set(.dnsServer, count: dnsServers.count, in: .dns)
+        }
         model.set([.compressionAlgorithm, .keepAlive, .renegSeconds], in: .other)
 
         return model
@@ -157,6 +166,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case tls
         
+        case dns
+        
         case other
     }
     
@@ -172,6 +183,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case client
         
         case tlsWrapping
+        
+        case dnsServer
         
         case compressionAlgorithm
         
@@ -257,6 +270,15 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             } else {
                 cell.rightText = V.disabled
             }
+            cell.accessoryType = .none
+            cell.isTappable = false
+            
+        case .dnsServer:
+            guard let dnsServers = configuration.dnsServers else {
+                fatalError("Showing DNS section without any custom server")
+            }
+            cell.leftText = L10n.Configuration.Cells.DnsServer.caption
+            cell.rightText = dnsServers[indexPath.row]
             cell.accessoryType = .none
             cell.isTappable = false
 

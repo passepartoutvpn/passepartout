@@ -132,6 +132,10 @@ internal enum L10n {
           internal static let embedded = L10n.tr("Localizable", "configuration.cells.digest.value.embedded")
         }
       }
+      internal enum DnsServer {
+        /// Address
+        internal static let caption = L10n.tr("Localizable", "configuration.cells.dns_server.caption")
+      }
       internal enum KeepAlive {
         /// Keep-alive
         internal static let caption = L10n.tr("Localizable", "configuration.cells.keep_alive.caption")
@@ -177,6 +181,10 @@ internal enum L10n {
       internal enum Communication {
         /// Communication
         internal static let header = L10n.tr("Localizable", "configuration.sections.communication.header")
+      }
+      internal enum Dns {
+        /// DNS
+        internal static let header = L10n.tr("Localizable", "configuration.sections.dns.header")
       }
       internal enum Other {
         /// Other
