@@ -3,7 +3,7 @@ use_frameworks!
 
 def shared_pods
     #pod 'TunnelKit', '~> 1.4.1'
-    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => 'c05a479'
+    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => '1c1547f'
     #pod 'TunnelKit', :path => '../../personal/tunnelkit'
 end
 

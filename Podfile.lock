@@ -14,7 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - MBProgressHUD
-  - TunnelKit (from `https://github.com/keeshux/tunnelkit`, commit `c05a479`)
+  - TunnelKit (from `https://github.com/keeshux/tunnelkit`, commit `1c1547f`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -24,12 +24,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   TunnelKit:
-    :commit: c05a479
+    :commit: 1c1547f
     :git: https://github.com/keeshux/tunnelkit
 
 CHECKOUT OPTIONS:
   TunnelKit:
-    :commit: c05a479
+    :commit: 1c1547f
     :git: https://github.com/keeshux/tunnelkit
 
 SPEC CHECKSUMS:
@@ -38,6 +38,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 8e67ab3cd94389cbbb7a9c7cc02748d98bfee68e
   TunnelKit: f4ee9a2a92015026a72f050fbcea99d81ae2ff5f
 
-PODFILE CHECKSUM: 7a0635c9dc17663f5b3ae01198064e8f7dd9912f
+PODFILE CHECKSUM: 89dda64c66112576d5cdc364e02279565623060f
 
 COCOAPODS: 1.6.1
