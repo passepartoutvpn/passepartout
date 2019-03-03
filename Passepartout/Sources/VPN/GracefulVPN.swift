@@ -59,14 +59,22 @@ class GracefulVPN {
         self.profile = profile
         log.info("Preparing...")
         service.clearVpnLastError()
-        vpn?.prepare(completionHandler: completionHandler)
+        guard let vpn = vpn else {
+            completionHandler?()
+            return
+        }
+        vpn.prepare(completionHandler: completionHandler)
     }
     
     func reconnect(completionHandler: ((Error?) -> Void)?) {
         service.clearVpnLastError()
+        guard let vpn = vpn else {
+            completionHandler?(nil)
+            return
+        }
         do {
             log.info("Reconnecting...")
-            try vpn?.reconnect(configuration: service.vpnConfiguration(), completionHandler: completionHandler)
+            try vpn.reconnect(configuration: service.vpnConfiguration(), completionHandler: completionHandler)
         } catch let e {
             log.error("Could not reconnect: \(e)")
         }
@@ -74,9 +82,13 @@ class GracefulVPN {
     
     func reinstall(completionHandler: ((Error?) -> Void)?) {
         service.clearVpnLastError()
+        guard let vpn = vpn else {
+            completionHandler?(nil)
+            return
+        }
         do {
             log.info("Reinstalling...")
-            try vpn?.install(configuration: service.vpnConfiguration(), completionHandler: completionHandler)
+            try vpn.install(configuration: service.vpnConfiguration(), completionHandler: completionHandler)
         } catch let e {
             log.error("Could not reinstall: \(e)")
         }
@@ -95,14 +107,26 @@ class GracefulVPN {
     }
     
     func disconnect(completionHandler: ((Error?) -> Void)?) {
-        vpn?.disconnect(completionHandler: completionHandler)
+        guard let vpn = vpn else {
+            completionHandler?(nil)
+            return
+        }
+        vpn.disconnect(completionHandler: completionHandler)
     }
 
     func uninstall(completionHandler: (() -> Void)?) {
-        vpn?.uninstall(completionHandler: completionHandler)
+        guard let vpn = vpn else {
+            completionHandler?()
+            return
+        }
+        vpn.uninstall(completionHandler: completionHandler)
     }
     
     func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void) {
-        vpn?.requestBytesCount(completionHandler: completionHandler)
+        guard let vpn = vpn else {
+            completionHandler(nil)
+            return
+        }
+        vpn.requestBytesCount(completionHandler: completionHandler)
     }
 }
