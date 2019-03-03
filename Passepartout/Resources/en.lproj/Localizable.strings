@@ -48,8 +48,6 @@
 "organizer.alerts.add_host.message" = "Open an URL to an .ovpn configuration file from Safari, Mail or another app to set up a host profile.\n\nYou can also import an .ovpn with iTunes File Sharing.";
 "organizer.alerts.delete_vpn_profile.message" = "Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your network and host profiles.";
 
-"account.suggestion_footer.infrastructure.pia" = "Use your website credentials. Your username is usually numeric with a \"p\" prefix.";
-
 "wizards.host.cells.title_input.caption" = "Title";
 "wizards.host.sections.existing.header" = "Existing profiles";
 "wizards.host.alerts.existing.message" = "A host profile with the same title already exists. Replace it?";
@@ -124,6 +122,8 @@
 "account.cells.password.placeholder" = "secret";
 //"account.cells.password_confirm.caption" = "Confirm";
 //"account.cells.password_confirm.mismatch" = "Passwords don't match!";
+"account.suggestion_footer.infrastructure.pia" = "Use your website credentials. Your username is usually numeric with a \"p\" prefix.";
+"account.suggestion_footer.referral" = "Don't have an account? Tap here to get one.";
 
 "endpoint.sections.location_addresses.header" = "Addresses";
 "endpoint.sections.location_protocols.header" = "Protocols";

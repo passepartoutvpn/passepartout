@@ -81,6 +81,8 @@ internal enum L10n {
       }
     }
     internal enum SuggestionFooter {
+      /// Don't have an account? Tap here to get one.
+      internal static let referral = L10n.tr("Localizable", "account.suggestion_footer.referral")
       internal enum Infrastructure {
         /// Use your website credentials. Your username is usually numeric with a "p" prefix.
         internal static let pia = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.pia")

@@ -151,6 +151,10 @@ class AppConstants {
         static func review(withId id: String) -> URL {
             return URL(string: "https://itunes.apple.com/app/id\(id)?action=write-review")!
         }
+        
+        static let referrals: [Infrastructure.Name: String] = [
+            .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/"
+        ]
     }
 
     class Repos {

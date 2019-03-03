@@ -48,12 +48,25 @@ class AccountViewController: UIViewController, TableModelHost {
                 model.removeFooter(for: .credentials)
                 return
             }
-            let V = L10n.Account.SuggestionFooter.Infrastructure.self
+
+            let V = L10n.Account.SuggestionFooter.self
+
+            var guidance: String?
             switch name {
             case .pia:
-                model.setFooter(V.pia, for: .credentials)
+                guidance = V.Infrastructure.pia
             }
-            tableView?.reloadData()
+
+            if guidance != nil {
+                let footer: String
+                if let _ = referralURL {
+                    footer = "\(guidance!)\n\n\(V.referral)"
+                } else {
+                    footer = guidance!
+                }
+                model.setFooter(footer, for: .credentials)
+                tableView?.reloadData()
+            }
         }
     }
 
@@ -61,6 +74,13 @@ class AccountViewController: UIViewController, TableModelHost {
         let username = cellUsername?.field.text ?? ""
         let password = cellPassword?.field.text ?? ""
         return Credentials(username, password).trimmed()
+    }
+    
+    private var referralURL: String? {
+        guard let name = infrastructureName else {
+            return nil
+        }
+        return AppConstants.URLs.referrals[name]
     }
 
     weak var delegate: AccountViewControllerDelegate?
@@ -116,6 +136,10 @@ class AccountViewController: UIViewController, TableModelHost {
     }
 
     @objc private func footerTapped() {
+        guard let url = referralURL else {
+            return
+        }
+        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
     }
 }
 
