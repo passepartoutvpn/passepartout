@@ -189,6 +189,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             cell.field.text = currentCredentials?.username
             cell.field.keyboardType = .emailAddress
             cell.field.returnKeyType = .next
+            cell.field.textContentType = .username
 
         case .password:
             cellPassword = cell
@@ -198,6 +199,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             cell.field.isSecureTextEntry = true
             cell.field.text = currentCredentials?.password
             cell.field.returnKeyType = .done
+            cell.field.textContentType = .password
         }
         cell.captionWidth = 120.0
         cell.delegate = self
