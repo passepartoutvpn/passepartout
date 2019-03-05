@@ -482,30 +482,13 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         return model.index(ofSection: .trusted)
     }
     
-    private var serviceIndexPath: IndexPath {
-        guard let ip = model.indexPath(row: .vpnService, section: .vpn) else {
-            fatalError("Could not locate serviceIndexPath")
-        }
-        return ip
-    }
-    
-    private var statusIndexPath: IndexPath {
-        guard let ip = model.indexPath(row: .connectionStatus, section: .vpn) else {
-            fatalError("Could not locate statusIndexPath")
-        }
-        return ip
+    private var statusIndexPath: IndexPath? {
+        return model.indexPath(row: .connectionStatus, section: .vpn)
     }
     
     private var endpointIndexPath: IndexPath {
         guard let ip = model.indexPath(row: .endpoint, section: .configuration) else {
             fatalError("Could not locate endpointIndexPath")
-        }
-        return ip
-    }
-    
-    private var providerPresetIndexPath: IndexPath {
-        guard let ip = model.indexPath(row: .providerPreset, section: .configuration) else {
-            fatalError("Could not locate providerPresetIndexPath")
         }
         return ip
     }
@@ -935,6 +918,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             return
         }
         guard service.isActiveProfile(profile) else {
+            return
+        }
+        guard let statusIndexPath = statusIndexPath else {
             return
         }
         tableView.reloadRows(at: [statusIndexPath], with: .none)
