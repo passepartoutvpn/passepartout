@@ -61,4 +61,9 @@ platform :ios do
             skip_metadata: true
         )
     end
+
+    desc "Update provisioning profiles"
+    lane :update_provisioning do |options|
+        match(options)
+    end
 end
