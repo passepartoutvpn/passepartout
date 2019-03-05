@@ -1,6 +1,3 @@
 ### Fixed
 
-- Profile sometimes not connecting right after add.
-- Custom DNS servers were not applied.
-- Shut down if server uses compression at all.
-- Broken link to SwiftGen license.
+- Regression in profile activation.
