@@ -123,6 +123,7 @@
 //"account.cells.password_confirm.caption" = "Confirm";
 //"account.cells.password_confirm.mismatch" = "Passwords don't match!";
 "account.suggestion_footer.infrastructure.pia" = "Use your website credentials. Your username is usually numeric with a \"p\" prefix.";
+"account.suggestion_footer.infrastructure.tunnelbear" = "Use your website credentials. Your username is usually your email.";
 "account.suggestion_footer.referral" = "Don't have an account? Tap here to get one.";
 
 "endpoint.sections.location_addresses.header" = "Addresses";

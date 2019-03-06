@@ -86,6 +86,8 @@ internal enum L10n {
       internal enum Infrastructure {
         /// Use your website credentials. Your username is usually numeric with a "p" prefix.
         internal static let pia = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.pia")
+        /// Use your website credentials. Your username is usually your email.
+        internal static let tunnelbear = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.tunnelbear")
       }
     }
   }
