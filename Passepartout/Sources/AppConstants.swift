@@ -28,6 +28,10 @@ import TunnelKit
 import SwiftyBeaver
 
 class AppConstants {
+    class Flags {
+        static let isBeta = true
+    }
+
     class Domain {
         static let name = "passepartoutvpn.app"
     }

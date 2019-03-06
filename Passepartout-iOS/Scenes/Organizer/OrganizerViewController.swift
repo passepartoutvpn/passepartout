@@ -52,6 +52,11 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         model.setFooter(L10n.Organizer.Sections.Hosts.footer, for: .hosts)
         model.set([.openAbout], in: .about)
         model.set([.uninstall], in: .destruction)
+        if AppConstants.Flags.isBeta {
+            model.add(.test)
+            model.setHeader("Beta", for: .test)
+            model.set([.testTermination], in: .test)
+        }
         return model
     }()
     
@@ -235,6 +240,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     private func subscribeSubreddit() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
+    
+    private func testTermination() {
+        exit(0)
+    }
 }
 
 // MARK: -
@@ -248,6 +257,8 @@ extension OrganizerViewController {
         case about
         
         case destruction
+
+        case test
     }
     
     enum RowType: Int {
@@ -260,6 +271,8 @@ extension OrganizerViewController {
         case openAbout
         
         case uninstall
+
+        case testTermination
     }
     
     private var selectedIndexPath: IndexPath? {
@@ -326,6 +339,11 @@ extension OrganizerViewController {
             let cell = Cells.destructive.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.Organizer.Cells.Uninstall.caption
             return cell
+            
+        case .testTermination:
+            let cell = Cells.destructive.dequeue(from: tableView, for: indexPath)
+            cell.caption = "Terminate app"
+            return cell
         }
     }
 
@@ -346,6 +364,9 @@ extension OrganizerViewController {
             
         case .uninstall:
             confirmVpnProfileDeletion()
+            
+        case .testTermination:
+            testTermination()
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
