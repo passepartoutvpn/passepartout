@@ -47,14 +47,15 @@ struct ProfileKey: RawRepresentable, Hashable, Codable {
     }
     
     init?(rawValue: String) {
-        let comps = rawValue.components(separatedBy: ".")
-        guard comps.count == 2 else {
+        var comps = rawValue.components(separatedBy: ".")
+        guard comps.count >= 2 else {
             return nil
         }
         guard let context = Context(rawValue: comps[0]) else {
             return nil
         }
         self.context = context
-        id = comps[1]
+        comps.removeFirst()
+        id = comps.joined(separator: ".")
     }
 }
