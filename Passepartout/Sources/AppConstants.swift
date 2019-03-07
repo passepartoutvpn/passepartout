@@ -86,17 +86,37 @@ class AppConstants {
     }
     
     class Log {
+        static let level: SwiftyBeaver.Level = .debug
+
         static let debugFormat = "$DHH:mm:ss$d - $M"
         
         static var debugSnapshot: () -> String = { TransientStore.shared.service.vpnLog }
 
         static let viewerRefreshInterval: TimeInterval = 3.0
+
+        private static let fileName = "Debug.log"
+        
+        static var fileURL: URL {
+            return FileManager.default.userURL(for: .cachesDirectory, appending: fileName)
+        }
+
+        private static let console: ConsoleDestination = {
+            let dest = ConsoleDestination()
+            dest.minLevel = level
+            dest.useNSLog = true
+            return dest
+        }()
+
+        private static let file: FileDestination = {
+            let dest = FileDestination()
+            dest.minLevel = level
+            dest.logFileURL = fileURL
+            return dest
+        }()
         
         static func configure() {
-            let console = ConsoleDestination()
-            console.useNSLog = true
-            console.minLevel = .debug
             SwiftyBeaver.addDestination(console)
+            SwiftyBeaver.addDestination(file)
         }
     }
     
