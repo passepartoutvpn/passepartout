@@ -55,7 +55,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         if AppConstants.Flags.isBeta {
             model.add(.test)
             model.setHeader("Beta", for: .test)
-            model.set([.testTermination], in: .test)
+            model.set([.testDisplayLog, .testTermination], in: .test)
         }
         return model
     }()
@@ -241,6 +241,17 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
     
+    //
+    
+    private func testDisplayLog() {
+        guard let log = try? String(contentsOf: AppConstants.Log.fileURL) else {
+            return
+        }
+        let alert = Macros.alert("Debug log", log)
+        alert.addCancelAction(L10n.Global.ok)
+        present(alert, animated: true, completion: nil)
+    }
+    
     private func testTermination() {
         exit(0)
     }
@@ -271,6 +282,8 @@ extension OrganizerViewController {
         case openAbout
         
         case uninstall
+        
+        case testDisplayLog
 
         case testTermination
     }
@@ -340,9 +353,14 @@ extension OrganizerViewController {
             cell.caption = L10n.Organizer.Cells.Uninstall.caption
             return cell
             
+        case .testDisplayLog:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = "Display current log"
+            return cell
+
         case .testTermination:
-            let cell = Cells.destructive.dequeue(from: tableView, for: indexPath)
-            cell.caption = "Terminate app"
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = "Terminate app"
             return cell
         }
     }
@@ -364,6 +382,9 @@ extension OrganizerViewController {
             
         case .uninstall:
             confirmVpnProfileDeletion()
+            
+        case .testDisplayLog:
+            testDisplayLog()
             
         case .testTermination:
             testTermination()
