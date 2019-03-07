@@ -157,7 +157,8 @@ class AppConstants {
         }
         
         static let referrals: [Infrastructure.Name: String] = [
-            .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/"
+            .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/",
+            .tunnelBear: "https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464"
         ]
     }
 

@@ -57,6 +57,7 @@ Passepartout is a VPN client and does absolutely nothing else without your conse
 Passepartout can connect to a few well-known VPN providers with an existing account:
 
 - [Private Internet Access][app-net-pia]
+- [TunnelBear][app-net-tunnelbear]
 - ...more soon!
 
 In preset mode, you can pick pre-resolved IPv4 endpoints when DNS is problematic.
@@ -132,7 +133,8 @@ Website: [passepartoutvpn.app][about-website]
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 
 [app-api]: https://github.com/passepartoutvpn/passepartout-api
-[app-net-pia]: https://www.privateinternetaccess.com
+[app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
+[app-net-tunnelbear]: https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464
 
 [dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html
 [dep-jazzy]: https://github.com/realm/jazzy
