@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Incorrect VPN status after renaming. [#37](https://github.com/passepartoutvpn/passepartout-ios/issues/37)
 - Profile change doesn't disconnect active VPN. [#38](https://github.com/passepartoutvpn/passepartout-ios/issues/38)
+- Some reconnection issues encountered with TunnelBear and NordVPN.
 
 ## 1.1.0 Beta 1341 (2019-03-07)
 

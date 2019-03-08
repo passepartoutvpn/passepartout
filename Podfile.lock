@@ -2,33 +2,42 @@ PODS:
   - MBProgressHUD (1.1.0)
   - OpenSSL-Apple (1.1.0i.2)
   - SwiftyBeaver (1.6.2)
-  - TunnelKit (1.4.2):
-    - TunnelKit/AppExtension (= 1.4.2)
-    - TunnelKit/Core (= 1.4.2)
-  - TunnelKit/AppExtension (1.4.2):
+  - TunnelKit (1.4.3):
+    - TunnelKit/AppExtension (= 1.4.3)
+    - TunnelKit/Core (= 1.4.3)
+  - TunnelKit/AppExtension (1.4.3):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (1.4.2):
+  - TunnelKit/Core (1.4.3):
     - OpenSSL-Apple (~> 1.1.0i.2)
     - SwiftyBeaver
 
 DEPENDENCIES:
   - MBProgressHUD
-  - TunnelKit (~> 1.4.2)
+  - TunnelKit (from `https://github.com/keeshux/tunnelkit`, commit `147cbb8`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - MBProgressHUD
     - OpenSSL-Apple
     - SwiftyBeaver
-    - TunnelKit
+
+EXTERNAL SOURCES:
+  TunnelKit:
+    :commit: 147cbb8
+    :git: https://github.com/keeshux/tunnelkit
+
+CHECKOUT OPTIONS:
+  TunnelKit:
+    :commit: 147cbb8
+    :git: https://github.com/keeshux/tunnelkit
 
 SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   OpenSSL-Apple: 37a8c0b04df4bb8971deef4671cc29222861319c
   SwiftyBeaver: 8e67ab3cd94389cbbb7a9c7cc02748d98bfee68e
-  TunnelKit: f4ee9a2a92015026a72f050fbcea99d81ae2ff5f
+  TunnelKit: 194e6f60cf5cbddfee1a24be6c7c540f70bdeb5f
 
-PODFILE CHECKSUM: c74463e7b94eef2bf92c54aa7411754af0fe20f8
+PODFILE CHECKSUM: f04a8e2af82ae2ca7466dc8a0972f249a3f9686b
 
 COCOAPODS: 1.6.1
