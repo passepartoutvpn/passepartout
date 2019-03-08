@@ -111,6 +111,7 @@ class AppConstants {
             let dest = FileDestination()
             dest.minLevel = level
             dest.logFileURL = fileURL
+            _ = dest.deleteLogFile()
             return dest
         }()
         
