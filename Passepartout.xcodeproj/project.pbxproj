@@ -602,6 +602,9 @@
 							com.apple.NetworkExtensions.iOS = {
 								enabled = 1;
 							};
+							com.apple.Siri = {
+								enabled = 1;
+							};
 						};
 					};
 					0E57F64B20C83FC7008323CF = {
