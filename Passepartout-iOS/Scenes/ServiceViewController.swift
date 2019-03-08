@@ -185,8 +185,9 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     private func activateProfile() {
+        service.activateProfile(uncheckedProfile)
+
         vpn.disconnect { (error) in
-            self.service.activateProfile(self.uncheckedProfile)
             self.vpn.prepare(withProfile: self.uncheckedProfile) {
                 self.reloadModel()
                 self.tableView.reloadData()
