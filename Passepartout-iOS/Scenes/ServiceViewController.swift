@@ -37,14 +37,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     @IBOutlet private weak var itemEdit: UIBarButtonItem!
     
-    var profile: ConnectionProfile? {
-        didSet {
-            title = profile?.id
-            navigationItem.rightBarButtonItem = (profile?.context == .host) ? itemEdit : nil
-            reloadModel()
-            updateViewsIfNeeded()
-        }
-    }
+    private var profile: ConnectionProfile?
 
     private let service = TransientStore.shared.service
     
@@ -66,6 +59,17 @@ class ServiceViewController: UIViewController, TableModelHost {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func setProfile(_ profile: ConnectionProfile?, reloadingViews: Bool = true) {
+        self.profile = profile
+        
+        title = profile?.id
+        navigationItem.rightBarButtonItem = (profile?.context == .host) ? itemEdit : nil
+        if reloadingViews {
+            reloadModel()
+            updateViewsIfNeeded()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -77,7 +81,7 @@ class ServiceViewController: UIViewController, TableModelHost {
 
         // fall back to active profile
         if profile == nil {
-            profile = service.activeProfile
+            setProfile(service.activeProfile)
         }
         if let providerProfile = profile as? ProviderConnectionProfile {
             lastInfrastructureUpdate = InfrastructureFactory.shared.modificationDate(for: providerProfile.name)
@@ -174,7 +178,7 @@ class ServiceViewController: UIViewController, TableModelHost {
             return
         }
         if !service.containsProfile(profile) {
-            self.profile = nil
+            setProfile(nil)
         }
     }
     
@@ -214,7 +218,8 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     private func doRenameCurrentProfile(to newId: String) {
-        profile = service.renameProfile(uncheckedHostProfile, to: newId)
+        let renamedProfile = service.renameProfile(uncheckedHostProfile, to: newId)
+        setProfile(renamedProfile, reloadingViews: false)
     }
     
     private func toggleVpnService(cell: ToggleTableViewCell) {

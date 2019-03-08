@@ -138,7 +138,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             }
             assert(selectedProfile != nil, "No selected profile")
 
-            vc.profile = selectedProfile
+            vc.setProfile(selectedProfile)
         } else if let providerVC = destination as? WizardProviderViewController {
             providerVC.availableNames = availableProviderNames ?? []
         }
@@ -478,7 +478,7 @@ extension OrganizerViewController: ConnectionServiceDelegate {
                 }
             }
             let serviceVC = existingServiceVC ?? (StoryboardScene.Main.serviceIdentifier.instantiate().topViewController as! ServiceViewController)
-            serviceVC.profile = profile
+            serviceVC.setProfile(profile)
             detailNav.setViewControllers([serviceVC], animated: true)
             return
         }
