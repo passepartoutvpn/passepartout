@@ -26,6 +26,8 @@
 import Foundation
 
 struct ProfileKey: RawRepresentable, Hashable, Codable {
+    private static let separator: Character = "."
+    
     let context: Context
     
     let id: String
@@ -43,19 +45,22 @@ struct ProfileKey: RawRepresentable, Hashable, Codable {
     // MARK: RawRepresentable
     
     var rawValue: String {
-        return "\(context).\(id)"
+        return "\(context)\(ProfileKey.separator)\(id)"
     }
     
     init?(rawValue: String) {
-        var comps = rawValue.components(separatedBy: ".")
-        guard comps.count >= 2 else {
+        guard let separatorIndex = rawValue.firstIndex(of: ProfileKey.separator) else {
             return nil
         }
-        guard let context = Context(rawValue: comps[0]) else {
+
+        let contextValue = rawValue[rawValue.startIndex..<separatorIndex]
+        guard let context = Context(rawValue: String(contextValue)) else {
             return nil
         }
         self.context = context
-        comps.removeFirst()
-        id = comps.joined(separator: ".")
+
+        let idStart = rawValue.index(after: separatorIndex)
+        let idEnd = rawValue.endIndex
+        id = String(rawValue[idStart..<idEnd])
     }
 }
