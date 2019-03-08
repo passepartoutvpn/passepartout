@@ -29,7 +29,7 @@ import SwiftyBeaver
 
 class AppConstants {
     class Flags {
-        static let isBeta = true
+        static let isBeta = false
     }
 
     class Domain {
