@@ -243,10 +243,22 @@ class ServiceViewController: UIViewController, TableModelHost {
                 self.reloadModel()
                 self.tableView.reloadData()
             }
+
+            if #available(iOS 12, *) {
+                InteractionsHandler.donateDisableVPN()
+            }
         } else {
             vpn.disconnect { (error) in
                 self.reloadModel()
                 self.tableView.reloadData()
+            }
+        }
+
+        if #available(iOS 12, *) {
+            if let provider = profile as? ProviderConnectionProfile, let pool = provider.pool {
+                InteractionsHandler.donateMoveToLocation(with: provider, pool: pool)
+            } else {
+                InteractionsHandler.donateConnectVPN(with: uncheckedProfile)
             }
         }
     }
@@ -763,6 +775,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             return true
             
         case .trustedAddCurrentWiFi:
+            if #available(iOS 12, *) {
+                InteractionsHandler.donateTrustCurrentNetwork()
+                InteractionsHandler.donateUntrustCurrentNetwork()
+            }
+
             guard trustedNetworks.addCurrentWifi() else {
                 let alert = Macros.alert(
                     L10n.Service.Sections.Trusted.header,
@@ -807,6 +824,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             toggleDisconnectsOnSleep(cell.isOn)
             
         case .trustedMobile:
+            if #available(iOS 12, *) {
+                InteractionsHandler.donateTrustCellularNetwork()
+                InteractionsHandler.donateUntrustCellularNetwork()
+            }
+
             trustedNetworks.setMobile(cell.isOn)
             
         case .trustedWiFi:
@@ -1066,6 +1088,10 @@ extension ServiceViewController: ProviderPoolViewControllerDelegate {
         uncheckedProviderProfile.poolId = pool.id
         reloadSelectedRow(andRowAt: endpointIndexPath)
         vpn.reinstallIfEnabled()
+
+        if #available(iOS 12, *) {
+            InteractionsHandler.donateMoveToLocation(with: uncheckedProviderProfile, pool: pool)
+        }
     }
 }
 
