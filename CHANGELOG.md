@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Custom intents, have a look at Siri suggestions for Passepartout. [#40](https://github.com/passepartoutvpn/passepartout-ios/pull/40)
+
 ### Fixed
 
 - Incorrect VPN status after renaming. [#37](https://github.com/passepartoutvpn/passepartout-ios/issues/37)
