@@ -153,3 +153,15 @@ extension UISplitViewController {
         return nil
     }
 }
+
+extension AppDelegate {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard let interaction = userActivity.interaction else {
+            return false
+        }
+        if #available(iOS 12, *) {
+            InteractionsHandler.handleInteraction(interaction)
+        }
+        return true
+    }
+}

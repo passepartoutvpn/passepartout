@@ -223,6 +223,9 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         tableView.endUpdates()
         
         service.removeProfile(rowProfile)
+        if #available(iOS 12, *) {
+            InteractionsHandler.forgetProfile(withKey: rowProfile)
+        }
     }
 
     private func confirmVpnProfileDeletion() {
@@ -468,6 +471,10 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         reloadModel()
         tableView.reloadData()
 
+        if #available(iOS 12, *) {
+            InteractionsHandler.donateConnectVPN(with: profile)
+        }
+
         // XXX: hack around bad replace when detail presented in compact view
         if let detailNav = navigationController?.viewControllers.last as? UINavigationController {
             var existingServiceVC: ServiceViewController?
@@ -510,5 +517,9 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         TransientStore.shared.serialize(withProfiles: false) // activate
 
         tableView.reloadData()
+
+        if #available(iOS 12, *) {
+            InteractionsHandler.donateConnectVPN(with: profile)
+        }
     }
 }

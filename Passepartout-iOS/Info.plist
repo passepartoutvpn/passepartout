@@ -43,6 +43,16 @@
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<false/>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>ConnectVPNIntent</string>
+		<string>DisableVPNIntent</string>
+		<string>MoveToLocationIntent</string>
+		<string>TrustCellularNetworkIntent</string>
+		<string>TrustCurrentNetworkIntent</string>
+		<string>UntrustCellularNetworkIntent</string>
+		<string>UntrustCurrentNetworkIntent</string>
+	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

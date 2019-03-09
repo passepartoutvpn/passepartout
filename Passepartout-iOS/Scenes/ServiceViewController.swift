@@ -98,6 +98,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidReinstall, object: nil)
+        nc.addObserver(self, selector: #selector(intentDidUpdateService), name: .IntentDidUpdateService, object: nil)
 
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
@@ -243,10 +244,22 @@ class ServiceViewController: UIViewController, TableModelHost {
                 self.reloadModel()
                 self.tableView.reloadData()
             }
+
+            if #available(iOS 12, *) {
+                InteractionsHandler.donateDisableVPN()
+            }
         } else {
             vpn.disconnect { (error) in
                 self.reloadModel()
                 self.tableView.reloadData()
+            }
+        }
+
+        if #available(iOS 12, *) {
+            if let provider = profile as? ProviderConnectionProfile, let pool = provider.pool {
+                InteractionsHandler.donateMoveToLocation(with: provider, pool: pool)
+            } else {
+                InteractionsHandler.donateConnectVPN(with: uncheckedProfile)
             }
         }
     }
@@ -406,6 +419,10 @@ class ServiceViewController: UIViewController, TableModelHost {
         if vpn.status == .connected {
             Reviewer.shared.reportEvent()
         }
+    }
+    
+    @objc private func intentDidUpdateService() {
+        setProfile(profile)
     }
     
     @objc private func applicationDidBecomeActive() {
@@ -763,6 +780,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             return true
             
         case .trustedAddCurrentWiFi:
+            if #available(iOS 12, *) {
+                InteractionsHandler.donateTrustCurrentNetwork()
+                InteractionsHandler.donateUntrustCurrentNetwork()
+            }
+
             guard trustedNetworks.addCurrentWifi() else {
                 let alert = Macros.alert(
                     L10n.Service.Sections.Trusted.header,
@@ -807,6 +829,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             toggleDisconnectsOnSleep(cell.isOn)
             
         case .trustedMobile:
+            if #available(iOS 12, *) {
+                InteractionsHandler.donateTrustCellularNetwork()
+                InteractionsHandler.donateUntrustCellularNetwork()
+            }
+
             trustedNetworks.setMobile(cell.isOn)
             
         case .trustedWiFi:
@@ -1066,6 +1093,10 @@ extension ServiceViewController: ProviderPoolViewControllerDelegate {
         uncheckedProviderProfile.poolId = pool.id
         reloadSelectedRow(andRowAt: endpointIndexPath)
         vpn.reinstallIfEnabled()
+
+        if #available(iOS 12, *) {
+            InteractionsHandler.donateMoveToLocation(with: uncheckedProviderProfile, pool: pool)
+        }
     }
 }
 

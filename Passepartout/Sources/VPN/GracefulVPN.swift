@@ -28,6 +28,8 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
+// FIXME: replace completionHandler?(nil) with completionHandler?(some_error)
+
 class GracefulVPN {
     private let service: ConnectionService
     
