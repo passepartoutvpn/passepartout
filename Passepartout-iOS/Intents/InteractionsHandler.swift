@@ -41,14 +41,24 @@ class InteractionsHandler {
         static let trust = "Trust"
     }
     
-    static func donateConnectVPN(with profile: ConnectionProfile) {
+    static func donateConnection(with profile: ConnectionProfile) {
         let profileKey = ProfileKey(profile)
+        let genericIntent: INIntent
         
-        let intent = ConnectVPNIntent()
-        intent.context = profileKey.context.rawValue
-        intent.profileId = profileKey.id
+        if let provider = profile as? ProviderConnectionProfile, let pool = provider.pool {
+            let intent = MoveToLocationIntent()
+            intent.providerId = profile.id
+            intent.poolId = pool.id
+            intent.poolName = pool.name
+            genericIntent = intent
+        } else {
+            let intent = ConnectVPNIntent()
+            intent.context = profileKey.context.rawValue
+            intent.profileId = profileKey.id
+            genericIntent = intent
+        }
         
-        let interaction = INInteraction(intent: intent, response: nil)
+        let interaction = INInteraction(intent: genericIntent, response: nil)
         interaction.groupIdentifier = profileKey.rawValue
         interaction.donateAndLog()
     }
@@ -61,19 +71,6 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
     
-    static func donateMoveToLocation(with profile: ProviderConnectionProfile, pool: Pool) {
-        let profileKey = ProfileKey(profile)
-        
-        let intent = MoveToLocationIntent()
-        intent.providerId = profile.id
-        intent.poolId = pool.id
-        intent.poolName = pool.name
-        
-        let interaction = INInteraction(intent: intent, response: nil)
-        interaction.groupIdentifier = profileKey.rawValue
-        interaction.donateAndLog()
-    }
-
     static func donateTrustCurrentNetwork() {
         let intent = TrustCurrentNetworkIntent()
 

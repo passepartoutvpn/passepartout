@@ -256,11 +256,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
 
         if #available(iOS 12, *) {
-            if let provider = profile as? ProviderConnectionProfile, let pool = provider.pool {
-                InteractionsHandler.donateMoveToLocation(with: provider, pool: pool)
-            } else {
-                InteractionsHandler.donateConnectVPN(with: uncheckedProfile)
-            }
+            InteractionsHandler.donateConnection(with: uncheckedProfile)
         }
     }
     
@@ -1095,7 +1091,7 @@ extension ServiceViewController: ProviderPoolViewControllerDelegate {
         vpn.reinstallIfEnabled()
 
         if #available(iOS 12, *) {
-            InteractionsHandler.donateMoveToLocation(with: uncheckedProviderProfile, pool: pool)
+            InteractionsHandler.donateConnection(with: uncheckedProviderProfile)
         }
     }
 }
