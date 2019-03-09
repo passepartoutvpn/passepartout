@@ -223,6 +223,9 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         tableView.endUpdates()
         
         service.removeProfile(rowProfile)
+        if #available(iOS 12, *) {
+            InteractionsHandler.forgetProfile(withKey: rowProfile)
+        }
     }
 
     private func confirmVpnProfileDeletion() {

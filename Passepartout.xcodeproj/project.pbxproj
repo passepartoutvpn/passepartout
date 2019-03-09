@@ -31,6 +31,8 @@
 		0E4FD7E120D3E4C5002221FF /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */; };
 		0E4FD7EE20D539A0002221FF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
+		0E50E7C322330E4900D5F76C /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E50E7C222330E4900D5F76C /* Intents.intentdefinition */; };
+		0E50E7C6223318A500D5F76C /* InteractionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E50E7C5223318A500D5F76C /* InteractionsHandler.swift */; };
 		0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63B20C83FC5008323CF /* AppDelegate.swift */; };
 		0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63D20C83FC5008323CF /* ServiceViewController.swift */; };
 		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
@@ -152,6 +154,8 @@
 		0E4FD7ED20D539A0002221FF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0E4FD7F020D58618002221FF /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		0E4FD80420D683A2002221FF /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
+		0E50E7C222330E4900D5F76C /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		0E50E7C5223318A500D5F76C /* InteractionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsHandler.swift; sourceTree = "<group>"; };
 		0E57F63820C83FC5008323CF /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E57F63B20C83FC5008323CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +293,15 @@
 			path = VPN;
 			sourceTree = "<group>";
 		};
+		0E50E7C422330E5100D5F76C /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				0E50E7C222330E4900D5F76C /* Intents.intentdefinition */,
+				0E50E7C5223318A500D5F76C /* InteractionsHandler.swift */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
 		0E57F62F20C83FC5008323CF = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +332,7 @@
 				0E1066CA20E0F85C004F98B7 /* Cells */,
 				0ECEE44C20E1120F00A6BB43 /* Tables */,
 				0EDE8DF120C93ED8004C739C /* Scenes */,
+				0E50E7C422330E5100D5F76C /* Intents */,
 				0EDE8DE220C86A13004C739C /* Passepartout.entitlements */,
 				0E57F63B20C83FC5008323CF /* AppDelegate.swift */,
 				0E57F63F20C83FC5008323CF /* Main.storyboard */,
@@ -826,6 +840,7 @@
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
 				0EBE3AA6213DC1B000BFA2F5 /* ProviderConnectionProfile.swift in Sources */,
+				0E50E7C322330E4900D5F76C /* Intents.intentdefinition in Sources */,
 				0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */,
 				0EBBE8F52182361800106008 /* ConnectionService+Migration.swift in Sources */,
 				0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */,
@@ -834,6 +849,7 @@
 				0E79D14121919F5600BB5FB2 /* ProfileKey.swift in Sources */,
 				0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */,
 				0E6BE13A20CFB76800A6DD36 /* ApplicationError.swift in Sources */,
+				0E50E7C6223318A500D5F76C /* InteractionsHandler.swift in Sources */,
 				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,
 				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
 				0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */,

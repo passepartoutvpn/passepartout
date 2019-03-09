@@ -25,7 +25,7 @@
 
 import Foundation
 
-struct ProfileKey: RawRepresentable, Hashable, Codable {
+struct ProfileKey: RawRepresentable, Hashable, Codable, CustomStringConvertible {
     private static let separator: Character = "."
     
     let context: Context
@@ -62,5 +62,11 @@ struct ProfileKey: RawRepresentable, Hashable, Codable {
         let idStart = rawValue.index(after: separatorIndex)
         let idEnd = rawValue.endIndex
         id = String(rawValue[idStart..<idEnd])
+    }
+    
+    // MARK: CustomStringConvertible
+    
+    var description: String {
+        return "{context=\(context), id=\(id)}"
     }
 }
