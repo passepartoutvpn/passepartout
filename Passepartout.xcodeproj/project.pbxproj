@@ -600,7 +600,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
 					0E57F63720C83FC5008323CF = {
@@ -1087,7 +1087,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28B2E6590DE79C3B403348DC /* Pods-Passepartout-iOS.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS/Passepartout.entitlements";
@@ -1111,7 +1110,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5428008455E78CDD2DC495D7 /* Pods-Passepartout-iOS.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS/Passepartout.entitlements";
@@ -1134,7 +1132,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A341F6829A4440DCD6F7AFE8 /* Pods-PassepartoutTests-iOS.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -1156,7 +1153,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F55E5FC695C594928582A031 /* Pods-PassepartoutTests-iOS.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -1178,7 +1174,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4982BB989C57CA2A92283691 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS-Tunnel/Tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1202,7 +1197,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C2B52DCF4BB363FEDC19E003 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS-Tunnel/Tunnel.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
