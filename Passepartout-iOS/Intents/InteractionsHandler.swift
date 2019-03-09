@@ -29,6 +29,10 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
+extension Notification.Name {
+    static let IntentDidUpdateService = Notification.Name("IntentDidUpdateService")
+}
+
 @available(iOS 12, *)
 class InteractionsHandler {
     private class Groups {
@@ -141,18 +145,19 @@ class InteractionsHandler {
             return
         }
         service.activateProfile(profile)
-
-        // FIXME: ServiceViewController is not updated
         
         let configuration: VPNConfiguration
         do {
             configuration = try service.vpnConfiguration()
         } catch let e {
             log.error("Unable to build VPN configuration: \(e)")
+            notifyServiceController()
             return
         }
         
         vpn.reconnect(configuration: configuration) { (error) in
+            notifyServiceController()
+            
             if let error = error {
                 log.error("Unable to connect to \(profileKey): \(error)")
                 return
@@ -162,7 +167,9 @@ class InteractionsHandler {
     }
 
     private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
-        VPN.shared.disconnect(completionHandler: nil)
+        VPN.shared.disconnect { (error) in
+            notifyServiceController()
+        }
     }
     
     private static func handleMoveToLocation(_ intent: MoveToLocationIntent, interaction: INInteraction) {
@@ -193,6 +200,8 @@ class InteractionsHandler {
         }
         
         vpn.reconnect(configuration: configuration) { (error) in
+            notifyServiceController()
+
             if let error = error {
                 log.error("Unable to connect to \(providerId) @ [\(poolId)]: \(error)")
                 return
@@ -229,16 +238,21 @@ class InteractionsHandler {
             configuration = try service.vpnConfiguration()
         } catch let e {
             log.error("Unable to build VPN configuration: \(e)")
+            notifyServiceController()
             return
         }
         
         let vpn = VPN.shared
         switch vpn.status {
         case .connected:
-            vpn.reconnect(configuration: configuration, completionHandler: nil)
+            vpn.reconnect(configuration: configuration) { (error) in
+                notifyServiceController()
+            }
             
         default:
-            vpn.install(configuration: configuration, completionHandler: nil)
+            vpn.install(configuration: configuration) { (error) in
+                notifyServiceController()
+            }
         }
     }
     
@@ -252,6 +266,12 @@ class InteractionsHandler {
             }
             log.debug("Removed profile \(profileKey) interactions")
         }
+    }
+    
+    //
+    
+    private static func notifyServiceController() {
+        NotificationCenter.default.post(name: .IntentDidUpdateService, object: nil)
     }
 }
 

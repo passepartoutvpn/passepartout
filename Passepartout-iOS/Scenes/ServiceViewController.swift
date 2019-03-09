@@ -98,6 +98,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidReinstall, object: nil)
+        nc.addObserver(self, selector: #selector(intentDidUpdateService), name: .IntentDidUpdateService, object: nil)
 
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
@@ -418,6 +419,10 @@ class ServiceViewController: UIViewController, TableModelHost {
         if vpn.status == .connected {
             Reviewer.shared.reportEvent()
         }
+    }
+    
+    @objc private func intentDidUpdateService() {
+        setProfile(profile)
     }
     
     @objc private func applicationDidBecomeActive() {
