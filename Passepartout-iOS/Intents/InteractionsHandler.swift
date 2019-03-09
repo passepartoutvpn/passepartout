@@ -145,25 +145,7 @@ class InteractionsHandler {
             return
         }
         service.activateProfile(profile)
-        
-        let configuration: VPNConfiguration
-        do {
-            configuration = try service.vpnConfiguration()
-        } catch let e {
-            log.error("Unable to build VPN configuration: \(e)")
-            notifyServiceController()
-            return
-        }
-        
-        vpn.reconnect(configuration: configuration) { (error) in
-            notifyServiceController()
-            
-            if let error = error {
-                log.error("Unable to connect to \(profileKey): \(error)")
-                return
-            }
-            log.info("Connecting to \(profileKey)...")
-        }
+        reconnectVPN(service: service)
     }
 
     private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
@@ -190,24 +172,7 @@ class InteractionsHandler {
 
         providerProfile.poolId = poolId
         service.activateProfile(providerProfile)
-
-        let configuration: VPNConfiguration
-        do {
-            configuration = try service.vpnConfiguration()
-        } catch let e {
-            log.error("Unable to build VPN configuration: \(e)")
-            return
-        }
-        
-        vpn.reconnect(configuration: configuration) { (error) in
-            notifyServiceController()
-
-            if let error = error {
-                log.error("Unable to connect to \(providerId) @ [\(poolId)]: \(error)")
-                return
-            }
-            log.info("Connecting to \(providerId) @ [\(poolId)]...")
-        }
+        reconnectVPN(service: service)
     }
 
     private static func handleCurrentNetwork(trust: Bool, interaction: INInteraction) {
