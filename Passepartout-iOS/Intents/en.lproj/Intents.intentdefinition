@@ -30,7 +30,7 @@
 					<key>INIntentParameterCombinationIsPrimary</key>
 					<true/>
 					<key>INIntentParameterCombinationSubtitle</key>
-					<string>On-demand VPN service</string>
+					<string></string>
 					<key>INIntentParameterCombinationSubtitleID</key>
 					<string>uMFvJW</string>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
