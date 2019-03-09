@@ -416,7 +416,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     @objc private func intentDidUpdateService() {
-        setProfile(profile)
+        setProfile(service.activeProfile)
     }
     
     @objc private func applicationDidBecomeActive() {
