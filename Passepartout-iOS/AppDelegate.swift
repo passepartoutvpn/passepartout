@@ -25,9 +25,6 @@
 
 import UIKit
 import TunnelKit
-import SwiftyBeaver
-
-private let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
