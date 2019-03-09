@@ -244,10 +244,6 @@ class ServiceViewController: UIViewController, TableModelHost {
                 self.reloadModel()
                 self.tableView.reloadData()
             }
-
-            if #available(iOS 12, *) {
-                InteractionsHandler.donateDisableVPN()
-            }
         } else {
             vpn.disconnect { (error) in
                 self.reloadModel()
@@ -256,7 +252,8 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
 
         if #available(iOS 12, *) {
-            InteractionsHandler.donateConnection(with: uncheckedProfile)
+            InteractionsHandler.donateEnableVPN()
+            InteractionsHandler.donateDisableVPN()
         }
     }
     
