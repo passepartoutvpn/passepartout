@@ -139,7 +139,7 @@ class InteractionsHandler {
             return
         }
         let profileKey = ProfileKey(context, id)
-        log.info("Connect to profile \(profileKey)")
+        log.info("Connect to profile: \(profileKey)")
         
         let service = TransientStore.shared.service
         let vpn = VPN.shared
@@ -163,7 +163,7 @@ class InteractionsHandler {
         guard let providerProfile = service.profile(withContext: .provider, id: providerId) as? ProviderConnectionProfile else {
             return
         }
-        log.info("Move to provider \(providerId) @ [\(poolId)]")
+        log.info("Move to provider location: \(providerId) @ [\(poolId)]")
         
         let vpn = VPN.shared
         guard !(service.isActiveProfile(providerProfile) && (providerProfile.poolId == poolId) && (vpn.status == .connected)) else {
@@ -183,6 +183,7 @@ class InteractionsHandler {
     }
     
     private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
+        log.info("Disabling VPN...")
         VPN.shared.disconnect { (error) in
             notifyServiceController()
         }
@@ -196,6 +197,7 @@ class InteractionsHandler {
         service.preferences.trustedWifis[currentWifi] = trust
         TransientStore.shared.serialize(withProfiles: false)
         
+        log.info("\(trust ? "Trusted" : "Untrusted") Wi-Fi: \(currentWifi)")
         refreshVPN(service: service, doReconnect: false)
     }
 
@@ -207,6 +209,7 @@ class InteractionsHandler {
         service.preferences.trustsMobileNetwork = trust
         TransientStore.shared.serialize(withProfiles: false)
         
+        log.info("\(trust ? "Trusted" : "Untrusted") cellular network")
         refreshVPN(service: service, doReconnect: false)
     }
 
@@ -222,10 +225,12 @@ class InteractionsHandler {
         
         let vpn = VPN.shared
         if doReconnect {
+            log.info("Reconnecting VPN: \(configuration)")
             vpn.reconnect(configuration: configuration) { (error) in
                 notifyServiceController()
             }
         } else {
+            log.info("Reinstalling VPN: \(configuration)")
             vpn.install(configuration: configuration) { (error) in
                 notifyServiceController()
             }
