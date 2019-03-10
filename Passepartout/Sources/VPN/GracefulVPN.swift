@@ -28,8 +28,6 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-// FIXME: replace completionHandler?(nil) with completionHandler?(some_error)
-
 class GracefulVPN {
     private let service: ConnectionService
     
@@ -70,7 +68,7 @@ class GracefulVPN {
     func reconnect(completionHandler: ((Error?) -> Void)?) {
         service.clearVpnLastError()
         guard let vpn = vpn else {
-            completionHandler?(nil)
+            completionHandler?(ApplicationError.inactiveProfile)
             return
         }
         do {
@@ -84,7 +82,7 @@ class GracefulVPN {
     func reinstall(completionHandler: ((Error?) -> Void)?) {
         service.clearVpnLastError()
         guard let vpn = vpn else {
-            completionHandler?(nil)
+            completionHandler?(ApplicationError.inactiveProfile)
             return
         }
         do {
@@ -109,7 +107,7 @@ class GracefulVPN {
     
     func disconnect(completionHandler: ((Error?) -> Void)?) {
         guard let vpn = vpn else {
-            completionHandler?(nil)
+            completionHandler?(ApplicationError.inactiveProfile)
             return
         }
         vpn.disconnect(completionHandler: completionHandler)

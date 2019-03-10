@@ -31,4 +31,6 @@ enum ApplicationError: String, Error {
     case missingCredentials
 
     case migration
+
+    case inactiveProfile
 }
