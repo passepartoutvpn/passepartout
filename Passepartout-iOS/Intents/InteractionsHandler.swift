@@ -145,15 +145,9 @@ class InteractionsHandler {
             return
         }
         service.activateProfile(profile)
-        reconnectVPN(service: service)
+        refreshVPN(service: service, doReconnect: true)
     }
 
-    private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
-        VPN.shared.disconnect { (error) in
-            notifyServiceController()
-        }
-    }
-    
     private static func handleMoveToLocation(_ intent: MoveToLocationIntent, interaction: INInteraction) {
         guard let providerId = intent.providerId, let poolId = intent.poolId else {
             return
@@ -172,9 +166,15 @@ class InteractionsHandler {
 
         providerProfile.poolId = poolId
         service.activateProfile(providerProfile)
-        reconnectVPN(service: service)
+        refreshVPN(service: service, doReconnect: true)
     }
 
+    private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
+        VPN.shared.disconnect { (error) in
+            notifyServiceController()
+        }
+    }
+    
     private static func handleCurrentNetwork(trust: Bool, interaction: INInteraction) {
         guard let currentWifi = Utils.currentWifiNetworkName() else {
             return
@@ -183,7 +183,7 @@ class InteractionsHandler {
         service.preferences.trustedWifis[currentWifi] = trust
         TransientStore.shared.serialize(withProfiles: false)
         
-        reconnectVPN(service: service)
+        refreshVPN(service: service, doReconnect: false)
     }
 
     private static func handleCellularNetwork(trust: Bool, interaction: INInteraction) {
@@ -194,10 +194,10 @@ class InteractionsHandler {
         service.preferences.trustsMobileNetwork = trust
         TransientStore.shared.serialize(withProfiles: false)
         
-        reconnectVPN(service: service)
+        refreshVPN(service: service, doReconnect: false)
     }
 
-    private static func reconnectVPN(service: ConnectionService) {
+    private static func refreshVPN(service: ConnectionService, doReconnect: Bool) {
         let configuration: VPNConfiguration
         do {
             configuration = try service.vpnConfiguration()
@@ -208,13 +208,11 @@ class InteractionsHandler {
         }
         
         let vpn = VPN.shared
-        switch vpn.status {
-        case .connected:
+        if doReconnect {
             vpn.reconnect(configuration: configuration) { (error) in
                 notifyServiceController()
             }
-            
-        default:
+        } else {
             vpn.install(configuration: configuration) { (error) in
                 notifyServiceController()
             }
