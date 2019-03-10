@@ -63,6 +63,14 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
     
+    static func donateEnableVPN() {
+        let intent = EnableVPNIntent()
+        
+        let interaction = INInteraction(intent: intent, response: nil)
+        interaction.groupIdentifier = Groups.vpn
+        interaction.donateAndLog()
+    }
+    
     static func donateDisableVPN() {
         let intent = DisableVPNIntent()
         
@@ -108,6 +116,8 @@ class InteractionsHandler {
     static func handleInteraction(_ interaction: INInteraction) {
         if let custom = interaction.intent as? ConnectVPNIntent {
             handleConnectVPN(custom, interaction: interaction)
+        } else if let custom = interaction.intent as? EnableVPNIntent {
+            handleEnableVPN(custom, interaction: interaction)
         } else if let custom = interaction.intent as? DisableVPNIntent {
             handleDisableVPN(custom, interaction: interaction)
         } else if let custom = interaction.intent as? MoveToLocationIntent {
@@ -166,6 +176,12 @@ class InteractionsHandler {
         refreshVPN(service: service, doReconnect: true)
     }
 
+    private static func handleEnableVPN(_ intent: EnableVPNIntent, interaction: INInteraction) {
+        let service = TransientStore.shared.service
+        log.info("Enabling VPN...")
+        refreshVPN(service: service, doReconnect: true)
+    }
+    
     private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
         VPN.shared.disconnect { (error) in
             notifyServiceController()
