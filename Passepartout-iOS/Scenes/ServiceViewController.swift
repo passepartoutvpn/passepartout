@@ -420,7 +420,8 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     @objc private func applicationDidBecomeActive() {
-        reloadVpnStatus()
+        reloadModel()
+        updateViewsIfNeeded()
     }
 }
 
