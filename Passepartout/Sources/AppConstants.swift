@@ -97,7 +97,7 @@ class AppConstants {
         private static let fileName = "Debug.log"
         
         static var fileURL: URL {
-            return FileManager.default.userURL(for: .cachesDirectory, appending: fileName)
+            return GroupConstants.App.cachesURL.appendingPathComponent(fileName)
         }
 
         private static let console: ConsoleDestination = {

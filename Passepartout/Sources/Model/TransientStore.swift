@@ -36,7 +36,7 @@ class TransientStore {
     static let shared = TransientStore()
     
     private static var serviceURL: URL {
-        return FileManager.default.userURL(for: .documentDirectory, appending: AppConstants.Store.serviceFilename)
+        return GroupConstants.App.documentsURL.appendingPathComponent(AppConstants.Store.serviceFilename)
     }
     
     let service: ConnectionService

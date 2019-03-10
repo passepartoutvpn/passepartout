@@ -75,7 +75,7 @@ class InfrastructureFactory {
         }
         self.bundle = bundle
 
-        cachePath = FileManager.default.userURL(for: .cachesDirectory, appending: nil)
+        cachePath = GroupConstants.App.cachesURL
         cache = [:]
         lastUpdate = [:]
     }
