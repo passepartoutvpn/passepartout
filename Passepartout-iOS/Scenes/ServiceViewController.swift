@@ -105,7 +105,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         // XXX: convenient here vs AppDelegate for updating table
         vpn.prepare() {
             self.reloadModel()
-            self.tableView.reloadData()
+            self.updateViewsIfNeeded()
         }
 
         updateViewsIfNeeded()
@@ -197,7 +197,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         vpn.profile = uncheckedProfile
         vpn.disconnect { (error) in
             self.reloadModel()
-            self.tableView.reloadData()
+            self.updateViewsIfNeeded()
         }
     }
 
@@ -243,12 +243,12 @@ class ServiceViewController: UIViewController, TableModelHost {
                     return
                 }
                 self.reloadModel()
-                self.tableView.reloadData()
+                self.updateViewsIfNeeded()
             }
         } else {
             vpn.disconnect { (error) in
                 self.reloadModel()
-                self.tableView.reloadData()
+                self.updateViewsIfNeeded()
             }
         }
 
