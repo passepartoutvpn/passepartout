@@ -33,7 +33,7 @@ private let log = SwiftyBeaver.self
 class GracefulVPN {
     private let service: ConnectionService
     
-    private var profile: ConnectionProfile?
+    var profile: ConnectionProfile?
     
     private var vpn: VPNProvider? {
         guard let profile = profile else {
@@ -57,14 +57,13 @@ class GracefulVPN {
         self.service = service
     }
     
-    func prepare(withProfile profile: ConnectionProfile?, completionHandler: (() -> Void)?) {
-        self.profile = profile
-        log.info("Preparing...")
+    func prepare(completionHandler: (() -> Void)?) {
         service.clearVpnLastError()
         guard let vpn = vpn else {
             completionHandler?()
             return
         }
+        log.info("Preparing...")
         vpn.prepare(completionHandler: completionHandler)
     }
     
