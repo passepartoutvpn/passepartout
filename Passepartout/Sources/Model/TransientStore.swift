@@ -90,6 +90,7 @@ class TransientStore {
     //
     
     private static func migrateDocumentsToAppGroup() {
+        var hasMigrated = false
         let oldDocumentsURL = FileManager.default.userURL(for: .documentDirectory, appending: nil)
         let newDocumentsURL = GroupConstants.App.documentsURL
         log.debug("App documentsURL: \(oldDocumentsURL)")
@@ -106,9 +107,14 @@ class TransientStore {
                 log.verbose("\tFROM: \(old)")
                 log.verbose("\tTO: \(new)")
                 try fm.moveItem(at: old, to: new)
+                hasMigrated = true
             }
         } catch let e {
+            hasMigrated = false
             log.error("Could not migrate documents to App Group: \(e)")
+        }
+        if hasMigrated {
+            log.debug("Documents migrated to App Group")
         }
     }
 }
