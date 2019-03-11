@@ -61,6 +61,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     func setProfile(_ profile: ConnectionProfile?, reloadingViews: Bool = true) {
         self.profile = profile
+        vpn.profile = profile
         
         title = profile?.id
         navigationItem.rightBarButtonItem = (profile?.context == .host) ? itemEdit : nil
@@ -102,9 +103,9 @@ class ServiceViewController: UIViewController, TableModelHost {
 
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
-        vpn.prepare(withProfile: profile) {
+        vpn.prepare() {
             self.reloadModel()
-            self.tableView.reloadData()
+            self.updateViewsIfNeeded()
         }
 
         updateViewsIfNeeded()
@@ -192,11 +193,11 @@ class ServiceViewController: UIViewController, TableModelHost {
     private func activateProfile() {
         service.activateProfile(uncheckedProfile)
 
+        // for vpn methods to work, must update .profile to currently active profile
+        vpn.profile = uncheckedProfile
         vpn.disconnect { (error) in
-            self.vpn.prepare(withProfile: self.uncheckedProfile) {
-                self.reloadModel()
-                self.tableView.reloadData()
-            }
+            self.reloadModel()
+            self.updateViewsIfNeeded()
         }
     }
 
@@ -242,12 +243,12 @@ class ServiceViewController: UIViewController, TableModelHost {
                     return
                 }
                 self.reloadModel()
-                self.tableView.reloadData()
+                self.updateViewsIfNeeded()
             }
         } else {
             vpn.disconnect { (error) in
                 self.reloadModel()
-                self.tableView.reloadData()
+                self.updateViewsIfNeeded()
             }
         }
 
@@ -415,11 +416,12 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     @objc private func intentDidUpdateService() {
-        setProfile(profile)
+        setProfile(service.activeProfile)
     }
     
     @objc private func applicationDidBecomeActive() {
-        reloadVpnStatus()
+        reloadModel()
+        updateViewsIfNeeded()
     }
 }
 
