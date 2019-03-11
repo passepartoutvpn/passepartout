@@ -41,15 +41,33 @@ class InteractionsHandler {
         static let trust = "Trust"
     }
     
-    static func donateConnectVPN(with profile: ConnectionProfile) {
+    static func donateConnection(with profile: ConnectionProfile) {
         let profileKey = ProfileKey(profile)
+        let genericIntent: INIntent
         
-        let intent = ConnectVPNIntent()
-        intent.context = profileKey.context.rawValue
-        intent.profileId = profileKey.id
+        if let provider = profile as? ProviderConnectionProfile, let pool = provider.pool {
+            let intent = MoveToLocationIntent()
+            intent.providerId = profile.id
+            intent.poolId = pool.id
+            intent.poolName = pool.name
+            genericIntent = intent
+        } else {
+            let intent = ConnectVPNIntent()
+            intent.context = profileKey.context.rawValue
+            intent.profileId = profileKey.id
+            genericIntent = intent
+        }
+        
+        let interaction = INInteraction(intent: genericIntent, response: nil)
+        interaction.groupIdentifier = profileKey.rawValue
+        interaction.donateAndLog()
+    }
+    
+    static func donateEnableVPN() {
+        let intent = EnableVPNIntent()
         
         let interaction = INInteraction(intent: intent, response: nil)
-        interaction.groupIdentifier = profileKey.rawValue
+        interaction.groupIdentifier = Groups.vpn
         interaction.donateAndLog()
     }
     
@@ -61,19 +79,6 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
     
-    static func donateMoveToLocation(with profile: ProviderConnectionProfile, pool: Pool) {
-        let profileKey = ProfileKey(profile)
-        
-        let intent = MoveToLocationIntent()
-        intent.providerId = profile.id
-        intent.poolId = pool.id
-        intent.poolName = pool.name
-        
-        let interaction = INInteraction(intent: intent, response: nil)
-        interaction.groupIdentifier = profileKey.rawValue
-        interaction.donateAndLog()
-    }
-
     static func donateTrustCurrentNetwork() {
         let intent = TrustCurrentNetworkIntent()
 
@@ -111,6 +116,8 @@ class InteractionsHandler {
     static func handleInteraction(_ interaction: INInteraction) {
         if let custom = interaction.intent as? ConnectVPNIntent {
             handleConnectVPN(custom, interaction: interaction)
+        } else if let custom = interaction.intent as? EnableVPNIntent {
+            handleEnableVPN(custom, interaction: interaction)
         } else if let custom = interaction.intent as? DisableVPNIntent {
             handleDisableVPN(custom, interaction: interaction)
         } else if let custom = interaction.intent as? MoveToLocationIntent {
@@ -132,7 +139,7 @@ class InteractionsHandler {
             return
         }
         let profileKey = ProfileKey(context, id)
-        log.info("Connect to profile \(profileKey)")
+        log.info("Connect to profile: \(profileKey)")
         
         let service = TransientStore.shared.service
         let vpn = VPN.shared
@@ -145,33 +152,9 @@ class InteractionsHandler {
             return
         }
         service.activateProfile(profile)
-        
-        let configuration: VPNConfiguration
-        do {
-            configuration = try service.vpnConfiguration()
-        } catch let e {
-            log.error("Unable to build VPN configuration: \(e)")
-            notifyServiceController()
-            return
-        }
-        
-        vpn.reconnect(configuration: configuration) { (error) in
-            notifyServiceController()
-            
-            if let error = error {
-                log.error("Unable to connect to \(profileKey): \(error)")
-                return
-            }
-            log.info("Connecting to \(profileKey)...")
-        }
+        refreshVPN(service: service, doReconnect: true)
     }
 
-    private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
-        VPN.shared.disconnect { (error) in
-            notifyServiceController()
-        }
-    }
-    
     private static func handleMoveToLocation(_ intent: MoveToLocationIntent, interaction: INInteraction) {
         guard let providerId = intent.providerId, let poolId = intent.poolId else {
             return
@@ -180,7 +163,7 @@ class InteractionsHandler {
         guard let providerProfile = service.profile(withContext: .provider, id: providerId) as? ProviderConnectionProfile else {
             return
         }
-        log.info("Move to provider \(providerId) @ [\(poolId)]")
+        log.info("Move to provider location: \(providerId) @ [\(poolId)]")
         
         let vpn = VPN.shared
         guard !(service.isActiveProfile(providerProfile) && (providerProfile.poolId == poolId) && (vpn.status == .connected)) else {
@@ -190,26 +173,22 @@ class InteractionsHandler {
 
         providerProfile.poolId = poolId
         service.activateProfile(providerProfile)
-
-        let configuration: VPNConfiguration
-        do {
-            configuration = try service.vpnConfiguration()
-        } catch let e {
-            log.error("Unable to build VPN configuration: \(e)")
-            return
-        }
-        
-        vpn.reconnect(configuration: configuration) { (error) in
-            notifyServiceController()
-
-            if let error = error {
-                log.error("Unable to connect to \(providerId) @ [\(poolId)]: \(error)")
-                return
-            }
-            log.info("Connecting to \(providerId) @ [\(poolId)]...")
-        }
+        refreshVPN(service: service, doReconnect: true)
     }
 
+    private static func handleEnableVPN(_ intent: EnableVPNIntent, interaction: INInteraction) {
+        let service = TransientStore.shared.service
+        log.info("Enabling VPN...")
+        refreshVPN(service: service, doReconnect: true)
+    }
+    
+    private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
+        log.info("Disabling VPN...")
+        VPN.shared.disconnect { (error) in
+            notifyServiceController()
+        }
+    }
+    
     private static func handleCurrentNetwork(trust: Bool, interaction: INInteraction) {
         guard let currentWifi = Utils.currentWifiNetworkName() else {
             return
@@ -218,7 +197,8 @@ class InteractionsHandler {
         service.preferences.trustedWifis[currentWifi] = trust
         TransientStore.shared.serialize(withProfiles: false)
         
-        reconnectVPN(service: service)
+        log.info("\(trust ? "Trusted" : "Untrusted") Wi-Fi: \(currentWifi)")
+        refreshVPN(service: service, doReconnect: false)
     }
 
     private static func handleCellularNetwork(trust: Bool, interaction: INInteraction) {
@@ -229,10 +209,11 @@ class InteractionsHandler {
         service.preferences.trustsMobileNetwork = trust
         TransientStore.shared.serialize(withProfiles: false)
         
-        reconnectVPN(service: service)
+        log.info("\(trust ? "Trusted" : "Untrusted") cellular network")
+        refreshVPN(service: service, doReconnect: false)
     }
 
-    private static func reconnectVPN(service: ConnectionService) {
+    private static func refreshVPN(service: ConnectionService, doReconnect: Bool) {
         let configuration: VPNConfiguration
         do {
             configuration = try service.vpnConfiguration()
@@ -243,13 +224,13 @@ class InteractionsHandler {
         }
         
         let vpn = VPN.shared
-        switch vpn.status {
-        case .connected:
+        if doReconnect {
+            log.info("Reconnecting VPN: \(configuration)")
             vpn.reconnect(configuration: configuration) { (error) in
                 notifyServiceController()
             }
-            
-        default:
+        } else {
+            log.info("Reinstalling VPN: \(configuration)")
             vpn.install(configuration: configuration) { (error) in
                 notifyServiceController()
             }

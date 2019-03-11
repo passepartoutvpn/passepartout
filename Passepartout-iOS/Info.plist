@@ -47,6 +47,7 @@
 	<array>
 		<string>ConnectVPNIntent</string>
 		<string>DisableVPNIntent</string>
+		<string>EnableVPNIntent</string>
 		<string>MoveToLocationIntent</string>
 		<string>TrustCellularNetworkIntent</string>
 		<string>TrustCurrentNetworkIntent</string>

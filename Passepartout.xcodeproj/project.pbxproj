@@ -31,7 +31,6 @@
 		0E4FD7E120D3E4C5002221FF /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */; };
 		0E4FD7EE20D539A0002221FF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
-		0E50E7C322330E4900D5F76C /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E50E7C222330E4900D5F76C /* Intents.intentdefinition */; };
 		0E50E7C6223318A500D5F76C /* InteractionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E50E7C5223318A500D5F76C /* InteractionsHandler.swift */; };
 		0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63B20C83FC5008323CF /* AppDelegate.swift */; };
 		0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63D20C83FC5008323CF /* ServiceViewController.swift */; };
@@ -92,6 +91,7 @@
 		0EFBFAC121AC464800887A8C /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFBFAC021AC464800887A8C /* CreditsViewController.swift */; };
 		0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943D215BE10800529B64 /* IssueReporter.swift */; };
 		0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943F215BED8E00529B64 /* LabelViewController.swift */; };
+		0EFE0D5A2233D1C7002B5E8C /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE0D5C2233D1C7002B5E8C /* Intents.intentdefinition */; };
 		390EEC911382C4814FB97475 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0C619B826C7140001C0F32 /* Pods_Passepartout_iOS_Tunnel.framework */; };
 		61E05ED5CCEEA859AD1752F3 /* Pods_Passepartout_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9FBA5419C4B758FB5D68E96 /* Pods_Passepartout_iOS.framework */; };
 		CB086D724184B22B368E5BEF /* Pods_PassepartoutTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E80C2390BBF547A62D4D277 /* Pods_PassepartoutTests_iOS.framework */; };
@@ -154,7 +154,6 @@
 		0E4FD7ED20D539A0002221FF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0E4FD7F020D58618002221FF /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		0E4FD80420D683A2002221FF /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
-		0E50E7C222330E4900D5F76C /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		0E50E7C5223318A500D5F76C /* InteractionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionsHandler.swift; sourceTree = "<group>"; };
 		0E57F63820C83FC5008323CF /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E57F63B20C83FC5008323CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +220,7 @@
 		0EFBFAC021AC464800887A8C /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
 		0EFD943F215BED8E00529B64 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		0EFE0D5B2233D1C7002B5E8C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		28B2E6590DE79C3B403348DC /* Pods-Passepartout-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		2F14CE1B8BBCB7B187610A9E /* Pods-PassepartoutTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		3E7BC601C2DEB273955334A5 /* Pods-PassepartoutTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -296,7 +296,7 @@
 		0E50E7C422330E5100D5F76C /* Intents */ = {
 			isa = PBXGroup;
 			children = (
-				0E50E7C222330E4900D5F76C /* Intents.intentdefinition */,
+				0EFE0D5C2233D1C7002B5E8C /* Intents.intentdefinition */,
 				0E50E7C5223318A500D5F76C /* InteractionsHandler.swift */,
 			);
 			path = Intents;
@@ -840,7 +840,7 @@
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
 				0EBE3AA6213DC1B000BFA2F5 /* ProviderConnectionProfile.swift in Sources */,
-				0E50E7C322330E4900D5F76C /* Intents.intentdefinition in Sources */,
+				0EFE0D5A2233D1C7002B5E8C /* Intents.intentdefinition in Sources */,
 				0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */,
 				0EBBE8F52182361800106008 /* ConnectionService+Migration.swift in Sources */,
 				0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */,
@@ -956,6 +956,14 @@
 				0ED38ADB213F44D00004D387 /* en */,
 			);
 			name = Organizer.storyboard;
+			sourceTree = "<group>";
+		};
+		0EFE0D5C2233D1C7002B5E8C /* Intents.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0EFE0D5B2233D1C7002B5E8C /* en */,
+			);
+			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
