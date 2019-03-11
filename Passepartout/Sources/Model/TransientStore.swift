@@ -97,6 +97,9 @@ class TransientStore {
         let fm = FileManager.default
         do {
             for c in try fm.contentsOfDirectory(atPath: oldDocumentsURL.path) {
+                guard c != "Inbox" else {
+                    continue
+                }
                 let old = oldDocumentsURL.appendingPathComponent(c)
                 let new = newDocumentsURL.appendingPathComponent(c)
                 log.verbose("Move:")
