@@ -191,7 +191,7 @@ public class IntentDispatcher {
     private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction?) {
         log.info("Disabling VPN...")
         VPN.shared.disconnect { (error) in
-            notifyServiceController()
+            notifyServiceUpdate()
         }
     }
     
@@ -225,7 +225,7 @@ public class IntentDispatcher {
             configuration = try service.vpnConfiguration()
         } catch let e {
             log.error("Unable to build VPN configuration: \(e)")
-            notifyServiceController()
+            notifyServiceUpdate()
             return
         }
         
@@ -233,12 +233,12 @@ public class IntentDispatcher {
         if doReconnect {
             log.info("Reconnecting VPN: \(configuration)")
             vpn.reconnect(configuration: configuration) { (error) in
-                notifyServiceController()
+                notifyServiceUpdate()
             }
         } else {
             log.info("Reinstalling VPN: \(configuration)")
             vpn.install(configuration: configuration) { (error) in
-                notifyServiceController()
+                notifyServiceUpdate()
             }
         }
     }
@@ -257,7 +257,7 @@ public class IntentDispatcher {
     
     //
     
-    private static func notifyServiceController() {
+    private static func notifyServiceUpdate() {
         NotificationCenter.default.post(name: .IntentDidUpdateService, object: nil)
     }
 }
