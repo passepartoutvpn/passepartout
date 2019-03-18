@@ -152,14 +152,20 @@ extension ShortcutsViewController {
 @available(iOS 12, *)
 extension ShortcutsViewController {
     private func addConnect() {
-        // FIXME: show hosts and providers, host delegates selection, provider requires location
-        let intent = ConnectVPNIntent()
-        guard let profileKey = TransientStore.shared.service.activeProfileKey else {
+        guard TransientStore.shared.service.hasProfiles() else {
+            let alert = Macros.alert(
+                L10n.Shortcuts.Cells.Connect.caption,
+                L10n.Shortcuts.Alerts.NoProfiles.message
+            )
+            alert.addAction(L10n.Global.ok) {
+                if let ip = self.tableView.indexPathForSelectedRow {
+                    self.tableView.deselectRow(at: ip, animated: true)
+                }
+            }
+            present(alert, animated: true, completion: nil)
             return
         }
-        intent.context = profileKey.context.rawValue
-        intent.profileId = profileKey.id
-        addShortcut(with: intent)
+        perform(segue: StoryboardSegue.Shortcuts.connectToSegueIdentifier)
     }
     
     private func addEnable() {

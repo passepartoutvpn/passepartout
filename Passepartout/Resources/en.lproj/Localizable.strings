@@ -201,6 +201,7 @@
 "shortcuts.cells.untrust_wifi.caption" = "Untrust current Wi-Fi";
 "shortcuts.cells.trust_cellular.caption" = "Trust cellular network";
 "shortcuts.cells.untrust_cellular.caption" = "Untrust cellular network";
+"shortcuts.alerts.no_profiles.message" = "There is no profile to connect to.";
 
 "about.title" = "About";
 "about.sections.web.header" = "Web";

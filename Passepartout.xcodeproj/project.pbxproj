@@ -62,6 +62,7 @@
 		0E3152DF223FA1DD00F61841 /* ConnectionService.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F121822B4D00106008 /* ConnectionService.json */; };
 		0E36D24D2240234B006AF062 /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D24C2240234B006AF062 /* ShortcutsViewController.swift */; };
 		0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36D25A22403469006AF062 /* Shortcuts.storyboard */; };
+		0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */; };
 		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
@@ -176,6 +177,7 @@
 		0E3152AC223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E36D24C2240234B006AF062 /* ShortcutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsViewController.swift; sourceTree = "<group>"; };
 		0E36D25922403469006AF062 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Shortcuts.storyboard; sourceTree = "<group>"; };
+		0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutsConnectToViewController.swift; sourceTree = "<group>"; };
 		0E39BCEF214B9EF10035E9DE /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		0E39BCF2214DA9310035E9DE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */,
 				0EFD943F215BED8E00529B64 /* LabelViewController.swift */,
 				0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */,
+				0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */,
 				0E36D24C2240234B006AF062 /* ShortcutsViewController.swift */,
 				0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */,
 				0ED38AD8213F33150004D387 /* WizardHostViewController.swift */,
@@ -989,6 +992,7 @@
 				0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */,
 				0E05C5D720D1645F006EE732 /* ToggleTableViewCell.swift in Sources */,
 				0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */,
+				0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */,
 				0E05C61D20D27C82006EE732 /* Theme.swift in Sources */,
 				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,

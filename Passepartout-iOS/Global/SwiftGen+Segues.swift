@@ -29,6 +29,10 @@ internal enum StoryboardSegue {
     case siriShortcutsSegueIdentifier = "SiriShortcutsSegueIdentifier"
     case versionSegueIdentifier = "VersionSegueIdentifier"
   }
+  internal enum Shortcuts: String, SegueType {
+    case connectToSegueIdentifier = "ConnectToSegueIdentifier"
+    case pickLocationSegueIdentifier = "PickLocationSegueIdentifier"
+  }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name
 

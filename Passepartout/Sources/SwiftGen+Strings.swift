@@ -651,6 +651,12 @@ public enum L10n {
   }
 
   public enum Shortcuts {
+    public enum Alerts {
+      public enum NoProfiles {
+        /// There is no profile to connect to.
+        public static let message = L10n.tr("Localizable", "shortcuts.alerts.no_profiles.message")
+      }
+    }
     public enum Cells {
       public enum Connect {
         /// Connect to
