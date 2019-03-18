@@ -53,6 +53,25 @@ class GroupConstants {
         
         static let tunnelIdentifier = "com.algoritmico.macos.Passepartout.Tunnel"
         #endif
+
+        private static var containerURL: URL {
+            guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+                fatalError("Unable to access App Group container")
+            }
+            return url
+        }
+
+        static let documentsURL: URL = {
+            let url = containerURL.appendingPathComponent("Documents", isDirectory: true)
+            try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            return url
+        }()
+
+        static let cachesURL: URL = {
+            let url = containerURL.appendingPathComponent("Library/Caches", isDirectory: true)
+            try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            return url
+        }()
     }
     
     class VPN {

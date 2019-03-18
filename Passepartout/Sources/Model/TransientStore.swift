@@ -36,7 +36,7 @@ class TransientStore {
     static let shared = TransientStore()
     
     private static var serviceURL: URL {
-        return FileManager.default.userURL(for: .documentDirectory, appending: AppConstants.Store.serviceFilename)
+        return GroupConstants.App.documentsURL.appendingPathComponent(AppConstants.Store.serviceFilename)
     }
     
     let service: ConnectionService
@@ -51,6 +51,7 @@ class TransientStore {
     }
 
     private init() {
+        TransientStore.migrateDocumentsToAppGroup()
 
         // this must be graceful
         ConnectionService.migrateJSON(from: TransientStore.serviceURL, to: TransientStore.serviceURL)
@@ -83,6 +84,37 @@ class TransientStore {
         try? JSONEncoder().encode(service).write(to: TransientStore.serviceURL)
         if withProfiles {
             service.saveProfiles()
+        }
+    }
+    
+    //
+    
+    private static func migrateDocumentsToAppGroup() {
+        var hasMigrated = false
+        let oldDocumentsURL = FileManager.default.userURL(for: .documentDirectory, appending: nil)
+        let newDocumentsURL = GroupConstants.App.documentsURL
+        log.debug("App documentsURL: \(oldDocumentsURL)")
+        log.debug("Group documentsURL: \(newDocumentsURL)")
+        let fm = FileManager.default
+        do {
+            for c in try fm.contentsOfDirectory(atPath: oldDocumentsURL.path) {
+                guard c != "Inbox" else {
+                    continue
+                }
+                let old = oldDocumentsURL.appendingPathComponent(c)
+                let new = newDocumentsURL.appendingPathComponent(c)
+                log.verbose("Move:")
+                log.verbose("\tFROM: \(old)")
+                log.verbose("\tTO: \(new)")
+                try fm.moveItem(at: old, to: new)
+                hasMigrated = true
+            }
+        } catch let e {
+            hasMigrated = false
+            log.error("Could not migrate documents to App Group: \(e)")
+        }
+        if hasMigrated {
+            log.debug("Documents migrated to App Group")
         }
     }
 }

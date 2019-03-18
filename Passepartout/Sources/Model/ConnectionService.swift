@@ -58,7 +58,11 @@ class ConnectionService: Codable {
     var directory: String? = nil
     
     var rootURL: URL {
-        return FileManager.default.userURL(for: .documentDirectory, appending: directory)
+        var url = GroupConstants.App.documentsURL
+        if let directory = directory {
+            url.appendPathComponent(directory)
+        }
+        return url
     }
     
     private var providersURL: URL {
