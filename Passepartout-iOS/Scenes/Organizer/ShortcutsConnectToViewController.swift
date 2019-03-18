@@ -182,6 +182,10 @@ extension ShortcutsConnectToViewController {
     private func pickProviderLocation() {
         perform(segue: StoryboardSegue.Shortcuts.pickLocationSegueIdentifier)
     }
+    
+    @IBAction private func done() {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension ShortcutsConnectToViewController: ProviderPoolViewControllerDelegate {
@@ -196,6 +200,7 @@ extension ShortcutsConnectToViewController: ProviderPoolViewControllerDelegate {
 @available(iOS 12, *)
 extension ShortcutsConnectToViewController: INUIAddVoiceShortcutViewControllerDelegate {
     func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
+        navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
