@@ -1,4 +1,5 @@
 source 'https://github.com/cocoapods/specs.git'
+platform :ios, '11.0'
 use_frameworks!
 
 def shared_pods
@@ -8,20 +9,16 @@ def shared_pods
 end
 
 target 'Passepartout-Core' do
-    platform :ios, '11.0'
     shared_pods
 end
 target 'Passepartout-CoreTests' do
-    platform :ios, '11.0'
     shared_pods
 end
 
 target 'Passepartout-iOS' do
-    platform :ios, '11.0'
     shared_pods
     pod 'MBProgressHUD'
 end
 target 'Passepartout-iOS-Tunnel' do
-    platform :ios, '11.0'
     shared_pods
 end
