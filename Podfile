@@ -7,16 +7,21 @@ def shared_pods
     #pod 'TunnelKit', :path => '../../personal/tunnelkit'
 end
 
+target 'Passepartout-Core' do
+    platform :ios, '11.0'
+    shared_pods
+end
+target 'Passepartout-CoreTests' do
+    platform :ios, '11.0'
+    shared_pods
+end
+
 target 'Passepartout-iOS' do
     platform :ios, '11.0'
     shared_pods
     pod 'MBProgressHUD'
 end
 target 'Passepartout-iOS-Tunnel' do
-    platform :ios, '11.0'
-    shared_pods
-end
-target 'PassepartoutTests-iOS' do
     platform :ios, '11.0'
     shared_pods
 end

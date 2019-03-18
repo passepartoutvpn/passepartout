@@ -49,7 +49,9 @@ class TrustedNetworksModel {
     
     private(set) var trustsMobileNetwork: Bool
 
-    private(set) var rows: [ServiceViewController.RowType]
+    // FIXME
+//    private(set) var rows: [ServiceViewController.RowType]
+    private(set) var rows: [Int]
     #endif
     
     weak var delegate: TrustedNetworksModelDelegate?
@@ -71,14 +73,15 @@ class TrustedNetworksModel {
 
         #if os(iOS)
         trustsMobileNetwork = preferences.trustsMobileNetwork
-        rows.removeAll()
-        if hasMobileNetwork {
-            rows.append(.trustedMobile)
-        }
-        for _ in sortedWifis {
-            rows.append(.trustedWiFi)
-        }
-        rows.append(.trustedAddCurrentWiFi)
+        // FIXME
+//        rows.removeAll()
+//        if hasMobileNetwork {
+//            rows.append(.trustedMobile)
+//        }
+//        for _ in sortedWifis {
+//            rows.append(.trustedWiFi)
+//        }
+//        rows.append(.trustedAddCurrentWiFi)
         #endif
     }
     
@@ -136,7 +139,8 @@ class TrustedNetworksModel {
         if !isDuplicate {
             sortedWifis.insert(wifiToAdd, at: index)
             #if os(iOS)
-            rows.insert(.trustedWiFi, at: rowIndex)
+            // FIXME
+//            rows.insert(.trustedWiFi, at: rowIndex)
             #endif
             delegate?.trustedNetworks(self, shouldInsertWifiAt: rowIndex)
         } else {

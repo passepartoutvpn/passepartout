@@ -11,25 +11,57 @@
 		0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */; };
 		0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */; };
 		0E05C5D720D1645F006EE732 /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */; };
-		0E05C5DC20D198B9006EE732 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E05C5DF20D198B9006EE732 /* Localizable.strings */; };
-		0E05C5E420D1993C006EE732 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C5E320D1993C006EE732 /* SwiftGen+Strings.swift */; };
 		0E05C61D20D27C82006EE732 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C61C20D27C82006EE732 /* Theme.swift */; };
-		0E0EABC821DF853C0069DAE7 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 0E0EABC721DF853C0069DAE7 /* Web */; };
 		0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1066C820E0F84A004F98B7 /* Cells.swift */; };
 		0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */; };
 		0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */; };
 		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
-		0E2B494220FD16540094784C /* TransientStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B494120FD16540094784C /* TransientStore.swift */; };
-		0E2D11BA217DBEDE0096822C /* ConnectionService+Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */; };
-		0E39BCF0214B9EF10035E9DE /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCEF214B9EF10035E9DE /* WebServices.swift */; };
-		0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCF2214DA9310035E9DE /* AppConstants.swift */; };
+		0E3152A4223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */; };
+		0E3152AD223F9EF500F61841 /* Passepartout_Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* Passepartout_Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0E3152B0223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */; };
+		0E3152B1223F9EF500F61841 /* Passepartout_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0E3152B9223F9F3B00F61841 /* ConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */; };
+		0E3152BA223F9F3D00F61841 /* InfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2620CF257C0027975F /* InfrastructureTests.swift */; };
+		0E3152BB223FA03D00F61841 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCF2214DA9310035E9DE /* AppConstants.swift */; };
+		0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */; };
+		0E3152BD223FA03D00F61841 /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
+		0E3152BE223FA03D00F61841 /* Reviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78179E21BE852200950C58 /* Reviewer.swift */; };
+		0E3152BF223FA03D00F61841 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C5E320D1993C006EE732 /* SwiftGen+Strings.swift */; };
+		0E3152C0223FA03D00F61841 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
+		0E3152C1223FA04800F61841 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */; };
+		0E3152C2223FA04800F61841 /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */; };
+		0E3152C3223FA04800F61841 /* StandardVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */; };
+		0E3152C4223FA04800F61841 /* VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C3620CF38D10027975F /* VPN.swift */; };
+		0E3152C5223FA04800F61841 /* VPNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */; };
+		0E3152C6223FA04800F61841 /* VPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AF1214177920004D387 /* VPNProvider.swift */; };
+		0E3152C7223FA04800F61841 /* VPNStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */; };
+		0E3152C8223FA04D00F61841 /* Infrastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C1120CF0ABA0027975F /* Infrastructure.swift */; };
+		0E3152C9223FA04D00F61841 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */; };
+		0E3152CA223FA04D00F61841 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
+		0E3152CB223FA04D00F61841 /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C0F20CF09A30027975F /* Pool.swift */; };
+		0E3152CC223FA04D00F61841 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCEF214B9EF10035E9DE /* WebServices.swift */; };
+		0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */; };
+		0E3152CE223FA05400F61841 /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */; };
+		0E3152CF223FA05400F61841 /* ConnectionService+Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */; };
+		0E3152D0223FA05400F61841 /* ConnectionService+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */; };
+		0E3152D1223FA05400F61841 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE620C93945004C739C /* Credentials.swift */; };
+		0E3152D2223FA05400F61841 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7F20420E24308004EA58E /* DebugLog.swift */; };
+		0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE621404F100004D387 /* EndpointDataSource.swift */; };
+		0E3152D4223FA05400F61841 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC4213DF7AE00741BA1 /* Preferences.swift */; };
+		0E3152D5223FA05400F61841 /* SessionProxy+Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */; };
+		0E3152D6223FA05400F61841 /* TransientStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B494120FD16540094784C /* TransientStore.swift */; };
+		0E3152D7223FA05400F61841 /* TrustedNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */; };
+		0E3152D8223FA05400F61841 /* TrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */; };
+		0E3152D9223FA05800F61841 /* HostConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */; };
+		0E3152DA223FA05800F61841 /* PlaceholderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */; };
+		0E3152DB223FA05800F61841 /* ProfileKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D14021919F5600BB5FB2 /* ProfileKey.swift */; };
+		0E3152DC223FA05800F61841 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
+		0E3152DD223FA06100F61841 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E05C5DF20D198B9006EE732 /* Localizable.strings */; };
+		0E3152DE223FA06400F61841 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 0E0EABC721DF853C0069DAE7 /* Web */; };
+		0E3152DF223FA1DD00F61841 /* ConnectionService.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F121822B4D00106008 /* ConnectionService.json */; };
 		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
-		0E4C9CB920DB9BC600A0C59C /* TrustedNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
-		0E4FD7DE20D3E49A002221FF /* StandardVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */; };
-		0E4FD7E120D3E4C5002221FF /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */; };
-		0E4FD7EE20D539A0002221FF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
 		0E50E7C6223318A500D5F76C /* InteractionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E50E7C5223318A500D5F76C /* InteractionsHandler.swift */; };
 		0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63B20C83FC5008323CF /* AppDelegate.swift */; };
@@ -37,53 +69,25 @@
 		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
 		0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64220C83FC7008323CF /* Assets.xcassets */; };
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
-		0E5E5DDF215119AF00E318A3 /* VPNStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */; };
-		0E5E5DE2215119DD00E318A3 /* VPNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */; };
-		0E5E5DE521511C5F00E318A3 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */; };
-		0E6BE13A20CFB76800A6DD36 /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
-		0E78179F21BE852200950C58 /* Reviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78179E21BE852200950C58 /* Reviewer.swift */; };
-		0E79D13F21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */; };
-		0E79D14121919F5600BB5FB2 /* ProfileKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D14021919F5600BB5FB2 /* ProfileKey.swift */; };
-		0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC4213DF7AE00741BA1 /* Preferences.swift */; };
-		0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
-		0E8D97E221388B52006FB4A0 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
 		0EA068F4218475F800C320AD /* ParsingResult+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ParsingResult+Alerts.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
-		0EBBE8F221822B4D00106008 /* ConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */; };
-		0EBBE8F321822B4D00106008 /* ConnectionService.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F121822B4D00106008 /* ConnectionService.json */; };
-		0EBBE8F52182361800106008 /* ConnectionService+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */; };
 		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
-		0EBE3A84213C6ADE00BFA2F5 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */; };
-		0EBE3A90213C6F4000BFA2F5 /* TrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */; };
-		0EBE3AA0213DC1A100BFA2F5 /* ConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */; };
-		0EBE3AA1213DC1A100BFA2F5 /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */; };
-		0EBE3AA5213DC1B000BFA2F5 /* HostConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */; };
-		0EBE3AA6213DC1B000BFA2F5 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
-		0EC7F20520E24308004EA58E /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7F20420E24308004EA58E /* DebugLog.swift */; };
 		0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44D20E1122200A6BB43 /* TableModel.swift */; };
 		0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */; };
-		0ED31C1020CF09A30027975F /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C0F20CF09A30027975F /* Pool.swift */; };
-		0ED31C1220CF0ABA0027975F /* Infrastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C1120CF0ABA0027975F /* Infrastructure.swift */; };
-		0ED31C2720CF257C0027975F /* InfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2620CF257C0027975F /* InfrastructureTests.swift */; };
 		0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2820CF2A340027975F /* AccountViewController.swift */; };
 		0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */; };
-		0ED31C3720CF38D10027975F /* VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C3620CF38D10027975F /* VPN.swift */; };
 		0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
 		0ED31C3D20CF396E0027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
 		0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AD8213F33150004D387 /* WizardHostViewController.swift */; };
 		0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED38ADC213F44D00004D387 /* Organizer.storyboard */; };
-		0ED38AE721404F100004D387 /* EndpointDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE621404F100004D387 /* EndpointDataSource.swift */; };
 		0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE9214054A50004D387 /* OptionViewController.swift */; };
 		0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */; };
-		0ED38AF2214177920004D387 /* VPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AF1214177920004D387 /* VPNProvider.swift */; };
 		0EDE8DC420C86910004C739C /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */; };
 		0EDE8DC820C86910004C739C /* Passepartout-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0EDE8DE720C93945004C739C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE620C93945004C739C /* Credentials.swift */; };
-		0EDE8DEE20C93E4C004C739C /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */; };
 		0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */; };
 		0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5CF242141CE58004FF1BD /* HUD.swift */; };
@@ -93,17 +97,25 @@
 		0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943F215BED8E00529B64 /* LabelViewController.swift */; };
 		0EFE0D5A2233D1C7002B5E8C /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE0D5C2233D1C7002B5E8C /* Intents.intentdefinition */; };
 		390EEC911382C4814FB97475 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0C619B826C7140001C0F32 /* Pods_Passepartout_iOS_Tunnel.framework */; };
+		4557767FEDE747E8096E8D2B /* Pods_Passepartout_CoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0B03FAF4A0F1620CCA4B19 /* Pods_Passepartout_CoreTests.framework */; };
 		61E05ED5CCEEA859AD1752F3 /* Pods_Passepartout_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9FBA5419C4B758FB5D68E96 /* Pods_Passepartout_iOS.framework */; };
-		CB086D724184B22B368E5BEF /* Pods_PassepartoutTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E80C2390BBF547A62D4D277 /* Pods_PassepartoutTests_iOS.framework */; };
+		EAA910699E2614284E0D80BE /* Pods_Passepartout_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9146592863A5C6062656C3D /* Pods_Passepartout_Core.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0E57F64D20C83FC7008323CF /* PBXContainerItemProxy */ = {
+		0E3152A5223F9EF500F61841 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0E57F63720C83FC5008323CF;
-			remoteInfo = Passepartout;
+			remoteGlobalIDString = 0E31529A223F9EF400F61841;
+			remoteInfo = "Passepartout-Core";
+		};
+		0E3152AE223F9EF500F61841 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E31529A223F9EF400F61841;
+			remoteInfo = "Passepartout-Core";
 		};
 		0EDE8DC620C86910004C739C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -115,6 +127,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0E3152B7223F9EF500F61841 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0E3152B1223F9EF500F61841 /* Passepartout_Core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EDE8DCC20C86910004C739C /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -144,6 +167,11 @@
 		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
 		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
 		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
+		0E31529B223F9EF400F61841 /* Passepartout_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Passepartout_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E31529D223F9EF500F61841 /* Passepartout_Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Passepartout_Core.h; sourceTree = "<group>"; };
+		0E31529E223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E3152A3223F9EF500F61841 /* Passepartout-CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Passepartout-CoreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E3152AC223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E39BCEF214B9EF10035E9DE /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		0E39BCF2214DA9310035E9DE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
@@ -160,8 +188,6 @@
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E57F64C20C83FC7008323CF /* PassepartoutTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PassepartoutTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E57F65220C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
 		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
 		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
@@ -221,37 +247,51 @@
 		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
 		0EFD943F215BED8E00529B64 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		0EFE0D5B2233D1C7002B5E8C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
+		131DAC1DE2F32A2D4B939453 /* Pods-Passepartout-Core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-Core.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-Core/Pods-Passepartout-Core.release.xcconfig"; sourceTree = "<group>"; };
 		28B2E6590DE79C3B403348DC /* Pods-Passepartout-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		2F14CE1B8BBCB7B187610A9E /* Pods-PassepartoutTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		3E7BC601C2DEB273955334A5 /* Pods-PassepartoutTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3F0B03FAF4A0F1620CCA4B19 /* Pods_Passepartout_CoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_CoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4982BB989C57CA2A92283691 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
 		4D0C619B826C7140001C0F32 /* Pods_Passepartout_iOS_Tunnel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_iOS_Tunnel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5428008455E78CDD2DC495D7 /* Pods-Passepartout-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		5C8E20D86DFCED1B5A793273 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.release.xcconfig"; sourceTree = "<group>"; };
 		5E80C2390BBF547A62D4D277 /* Pods_PassepartoutTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PassepartoutTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DEBC5E475CE971530D3A24F /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
-		A341F6829A4440DCD6F7AFE8 /* Pods-PassepartoutTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		8EE8F757C62B8D2AB705D47C /* Pods-Passepartout-CoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-CoreTests.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B9146592863A5C6062656C3D /* Pods_Passepartout_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA76378B386C75892BEFA73E /* Pods-Passepartout-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		C2B52DCF4BB363FEDC19E003 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.release.xcconfig"; sourceTree = "<group>"; };
+		C7055F40EBBCBF875EAA6D70 /* Pods-Passepartout-CoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-CoreTests.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests.release.xcconfig"; sourceTree = "<group>"; };
+		D93437539A4EC7FF79C43D13 /* Pods-Passepartout-Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-Core.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-Core/Pods-Passepartout-Core.debug.xcconfig"; sourceTree = "<group>"; };
 		E9FBA5419C4B758FB5D68E96 /* Pods_Passepartout_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F55E5FC695C594928582A031 /* Pods-PassepartoutTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0E315298223F9EF400F61841 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAA910699E2614284E0D80BE /* Pods_Passepartout_Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E3152A0223F9EF500F61841 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3152A4223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */,
+				4557767FEDE747E8096E8D2B /* Pods_Passepartout_CoreTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E57F63520C83FC5008323CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E3152B0223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */,
 				0ED31C3D20CF396E0027975F /* NetworkExtension.framework in Frameworks */,
 				61E05ED5CCEEA859AD1752F3 /* Pods_Passepartout_iOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0E57F64920C83FC7008323CF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CB086D724184B22B368E5BEF /* Pods_PassepartoutTests_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +317,26 @@
 				0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		0E31529C223F9EF500F61841 /* Passepartout-Core */ = {
+			isa = PBXGroup;
+			children = (
+				0E31529D223F9EF500F61841 /* Passepartout_Core.h */,
+				0E31529E223F9EF500F61841 /* Info.plist */,
+			);
+			path = "Passepartout-Core";
+			sourceTree = "<group>";
+		};
+		0E3152A9223F9EF500F61841 /* Passepartout-CoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				0EBBE8F121822B4D00106008 /* ConnectionService.json */,
+				0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */,
+				0ED31C2620CF257C0027975F /* InfrastructureTests.swift */,
+				0E3152AC223F9EF500F61841 /* Info.plist */,
+			);
+			path = "Passepartout-CoreTests";
 			sourceTree = "<group>";
 		};
 		0E4FD7D920D3E43F002221FF /* VPN */ = {
@@ -306,9 +366,10 @@
 			isa = PBXGroup;
 			children = (
 				0EDE8DEF20C93EBB004C739C /* Passepartout */,
+				0E31529C223F9EF500F61841 /* Passepartout-Core */,
+				0E3152A9223F9EF500F61841 /* Passepartout-CoreTests */,
 				0E57F63A20C83FC5008323CF /* Passepartout-iOS */,
 				0EDE8DC020C86910004C739C /* Passepartout-iOS-Tunnel */,
-				0E57F64F20C83FC7008323CF /* PassepartoutTests-iOS */,
 				0E57F63920C83FC5008323CF /* Products */,
 				374B9F085E1148C37CF9117A /* Frameworks */,
 				ECB6C4CA315B2CB2AFE7ACBB /* Pods */,
@@ -319,8 +380,9 @@
 			isa = PBXGroup;
 			children = (
 				0E57F63820C83FC5008323CF /* Passepartout.app */,
-				0E57F64C20C83FC7008323CF /* PassepartoutTests-iOS.xctest */,
 				0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */,
+				0E31529B223F9EF400F61841 /* Passepartout_Core.framework */,
+				0E3152A3223F9EF500F61841 /* Passepartout-CoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,17 +404,6 @@
 				0E57F64720C83FC7008323CF /* Info.plist */,
 			);
 			path = "Passepartout-iOS";
-			sourceTree = "<group>";
-		};
-		0E57F64F20C83FC7008323CF /* PassepartoutTests-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				0EBBE8F121822B4D00106008 /* ConnectionService.json */,
-				0E57F65220C83FC7008323CF /* Info.plist */,
-				0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */,
-				0ED31C2620CF257C0027975F /* InfrastructureTests.swift */,
-			);
-			path = "PassepartoutTests-iOS";
 			sourceTree = "<group>";
 		};
 		0E89DFCC213EEDE700741BA1 /* Organizer */ = {
@@ -508,6 +559,8 @@
 				E9FBA5419C4B758FB5D68E96 /* Pods_Passepartout_iOS.framework */,
 				4D0C619B826C7140001C0F32 /* Pods_Passepartout_iOS_Tunnel.framework */,
 				5E80C2390BBF547A62D4D277 /* Pods_PassepartoutTests_iOS.framework */,
+				3F0B03FAF4A0F1620CCA4B19 /* Pods_Passepartout_CoreTests.framework */,
+				B9146592863A5C6062656C3D /* Pods_Passepartout_Core.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -519,21 +572,73 @@
 				5428008455E78CDD2DC495D7 /* Pods-Passepartout-iOS.release.xcconfig */,
 				4982BB989C57CA2A92283691 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */,
 				C2B52DCF4BB363FEDC19E003 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */,
-				A341F6829A4440DCD6F7AFE8 /* Pods-PassepartoutTests-iOS.debug.xcconfig */,
-				F55E5FC695C594928582A031 /* Pods-PassepartoutTests-iOS.release.xcconfig */,
 				05C743241486C000F882DE79 /* Pods-Passepartout-iOS.debug.xcconfig */,
 				BA76378B386C75892BEFA73E /* Pods-Passepartout-iOS.release.xcconfig */,
 				8DEBC5E475CE971530D3A24F /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */,
 				5C8E20D86DFCED1B5A793273 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */,
 				2F14CE1B8BBCB7B187610A9E /* Pods-PassepartoutTests-iOS.debug.xcconfig */,
 				3E7BC601C2DEB273955334A5 /* Pods-PassepartoutTests-iOS.release.xcconfig */,
+				8EE8F757C62B8D2AB705D47C /* Pods-Passepartout-CoreTests.debug.xcconfig */,
+				C7055F40EBBCBF875EAA6D70 /* Pods-Passepartout-CoreTests.release.xcconfig */,
+				D93437539A4EC7FF79C43D13 /* Pods-Passepartout-Core.debug.xcconfig */,
+				131DAC1DE2F32A2D4B939453 /* Pods-Passepartout-Core.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		0E315296223F9EF400F61841 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3152AD223F9EF500F61841 /* Passepartout_Core.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		0E31529A223F9EF400F61841 /* Passepartout-Core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E3152B6223F9EF500F61841 /* Build configuration list for PBXNativeTarget "Passepartout-Core" */;
+			buildPhases = (
+				1FD7D034351349AD761BD201 /* [CP] Check Pods Manifest.lock */,
+				0E315296223F9EF400F61841 /* Headers */,
+				0E315297223F9EF400F61841 /* Sources */,
+				0E315298223F9EF400F61841 /* Frameworks */,
+				0E315299223F9EF400F61841 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Passepartout-Core";
+			productName = "Passepartout-Core";
+			productReference = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0E3152A2223F9EF500F61841 /* Passepartout-CoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E3152B8223F9EF500F61841 /* Build configuration list for PBXNativeTarget "Passepartout-CoreTests" */;
+			buildPhases = (
+				5DC3F2E0A22B557178D80A7F /* [CP] Check Pods Manifest.lock */,
+				0E31529F223F9EF500F61841 /* Sources */,
+				0E3152A0223F9EF500F61841 /* Frameworks */,
+				0E3152A1223F9EF500F61841 /* Resources */,
+				64E48109D84C05B528BE75C2 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E3152A6223F9EF500F61841 /* PBXTargetDependency */,
+			);
+			name = "Passepartout-CoreTests";
+			productName = "Passepartout-CoreTests";
+			productReference = 0E3152A3223F9EF500F61841 /* Passepartout-CoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0E57F63720C83FC5008323CF /* Passepartout-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout-iOS" */;
@@ -544,36 +649,18 @@
 				0E57F63620C83FC5008323CF /* Resources */,
 				0EDE8DCC20C86910004C739C /* Embed App Extensions */,
 				20711B9AA062AB9C5EF57B3C /* [CP] Embed Pods Frameworks */,
+				0E3152B7223F9EF500F61841 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				0EDE8DC720C86910004C739C /* PBXTargetDependency */,
+				0E3152AF223F9EF500F61841 /* PBXTargetDependency */,
 			);
 			name = "Passepartout-iOS";
 			productName = Passepartout;
 			productReference = 0E57F63820C83FC5008323CF /* Passepartout.app */;
 			productType = "com.apple.product-type.application";
-		};
-		0E57F64B20C83FC7008323CF /* PassepartoutTests-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0E57F65820C83FC7008323CF /* Build configuration list for PBXNativeTarget "PassepartoutTests-iOS" */;
-			buildPhases = (
-				A5984A2DF2C43505FA7E4866 /* [CP] Check Pods Manifest.lock */,
-				0E57F64820C83FC7008323CF /* Sources */,
-				0E57F64920C83FC7008323CF /* Frameworks */,
-				0E57F64A20C83FC7008323CF /* Resources */,
-				9C7DFA86B13FF0B80CFED9EF /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0E57F64E20C83FC7008323CF /* PBXTargetDependency */,
-			);
-			name = "PassepartoutTests-iOS";
-			productName = PassepartoutTests;
-			productReference = 0E57F64C20C83FC7008323CF /* PassepartoutTests-iOS.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */ = {
 			isa = PBXNativeTarget;
@@ -599,10 +686,16 @@
 		0E57F63020C83FC5008323CF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
+					0E31529A223F9EF400F61841 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					0E3152A2223F9EF500F61841 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					0E57F63720C83FC5008323CF = {
 						CreatedOnToolsVersion = 9.4;
 						LastSwiftMigration = 1000;
@@ -620,11 +713,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					0E57F64B20C83FC7008323CF = {
-						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 1000;
-						TestTargetID = 0E57F63720C83FC5008323CF;
 					};
 					0EDE8DBE20C86910004C739C = {
 						CreatedOnToolsVersion = 10.0;
@@ -652,32 +740,40 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				0E31529A223F9EF400F61841 /* Passepartout-Core */,
+				0E3152A2223F9EF500F61841 /* Passepartout-CoreTests */,
 				0E57F63720C83FC5008323CF /* Passepartout-iOS */,
 				0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */,
-				0E57F64B20C83FC7008323CF /* PassepartoutTests-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0E315299223F9EF400F61841 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3152DD223FA06100F61841 /* Localizable.strings in Resources */,
+				0E3152DE223FA06400F61841 /* Web in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E3152A1223F9EF500F61841 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3152DF223FA1DD00F61841 /* ConnectionService.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E57F63620C83FC5008323CF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E05C5DC20D198B9006EE732 /* Localizable.strings in Resources */,
 				0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */,
 				0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */,
-				0E0EABC821DF853C0069DAE7 /* Web in Resources */,
 				0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */,
 				0E57F64120C83FC5008323CF /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0E57F64A20C83FC7008323CF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0EBBE8F321822B4D00106008 /* ConnectionService.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,61 +809,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		20711B9AA062AB9C5EF57B3C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
-				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9C7DFA86B13FF0B80CFED9EF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS-frameworks.sh",
-				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
-				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PassepartoutTests-iOS/Pods-PassepartoutTests-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A5984A2DF2C43505FA7E4866 /* [CP] Check Pods Manifest.lock */ = {
+		1FD7D034351349AD761BD201 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -782,11 +824,87 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PassepartoutTests-iOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Passepartout-Core-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		20711B9AA062AB9C5EF57B3C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh",
+				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DC3F2E0A22B557178D80A7F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Passepartout-CoreTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		64E48109D84C05B528BE75C2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests-frameworks.sh",
+				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/TunnelKit/TunnelKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TunnelKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AA4FF3773FA990DA571956B9 /* [CP] Check Pods Manifest.lock */ = {
@@ -814,89 +932,96 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0E315297223F9EF400F61841 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3152BD223FA03D00F61841 /* GroupConstants.swift in Sources */,
+				0E3152C2223FA04800F61841 /* MockVPNProvider.swift in Sources */,
+				0E3152D2223FA05400F61841 /* DebugLog.swift in Sources */,
+				0E3152C4223FA04800F61841 /* VPN.swift in Sources */,
+				0E3152C6223FA04800F61841 /* VPNProvider.swift in Sources */,
+				0E3152DA223FA05800F61841 /* PlaceholderConnectionProfile.swift in Sources */,
+				0E3152D0223FA05400F61841 /* ConnectionService+Migration.swift in Sources */,
+				0E3152D5223FA05400F61841 /* SessionProxy+Communication.swift in Sources */,
+				0E3152D7223FA05400F61841 /* TrustedNetworks.swift in Sources */,
+				0E3152DB223FA05800F61841 /* ProfileKey.swift in Sources */,
+				0E3152C1223FA04800F61841 /* GracefulVPN.swift in Sources */,
+				0E3152CF223FA05400F61841 /* ConnectionService+Configurations.swift in Sources */,
+				0E3152C5223FA04800F61841 /* VPNConfiguration.swift in Sources */,
+				0E3152C8223FA04D00F61841 /* Infrastructure.swift in Sources */,
+				0E3152D8223FA05400F61841 /* TrustPolicy.swift in Sources */,
+				0E3152BF223FA03D00F61841 /* SwiftGen+Strings.swift in Sources */,
+				0E3152DC223FA05800F61841 /* ProviderConnectionProfile.swift in Sources */,
+				0E3152D9223FA05800F61841 /* HostConnectionProfile.swift in Sources */,
+				0E3152D6223FA05400F61841 /* TransientStore.swift in Sources */,
+				0E3152CC223FA04D00F61841 /* WebServices.swift in Sources */,
+				0E3152BB223FA03D00F61841 /* AppConstants.swift in Sources */,
+				0E3152CA223FA04D00F61841 /* InfrastructurePreset.swift in Sources */,
+				0E3152CE223FA05400F61841 /* ConnectionService.swift in Sources */,
+				0E3152BE223FA03D00F61841 /* Reviewer.swift in Sources */,
+				0E3152C3223FA04800F61841 /* StandardVPNProvider.swift in Sources */,
+				0E3152D1223FA05400F61841 /* Credentials.swift in Sources */,
+				0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */,
+				0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */,
+				0E3152C9223FA04D00F61841 /* InfrastructureFactory.swift in Sources */,
+				0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */,
+				0E3152D4223FA05400F61841 /* Preferences.swift in Sources */,
+				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
+				0E3152CB223FA04D00F61841 /* Pool.swift in Sources */,
+				0E3152C7223FA04800F61841 /* VPNStatus.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E31529F223F9EF500F61841 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3152BA223F9F3D00F61841 /* InfrastructureTests.swift in Sources */,
+				0E3152B9223F9F3B00F61841 /* ConnectionServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E57F63420C83FC5008323CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E5E5DDF215119AF00E318A3 /* VPNStatus.swift in Sources */,
 				0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */,
-				0E78179F21BE852200950C58 /* Reviewer.swift in Sources */,
 				0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */,
 				0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */,
 				0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */,
 				0E4FD7F120D58618002221FF /* Macros.swift in Sources */,
-				0E05C5E420D1993C006EE732 /* SwiftGen+Strings.swift in Sources */,
 				0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */,
 				0E05C5D720D1645F006EE732 /* ToggleTableViewCell.swift in Sources */,
-				0ED31C1020CF09A30027975F /* Pool.swift in Sources */,
-				0EBE3AA5213DC1B000BFA2F5 /* HostConnectionProfile.swift in Sources */,
 				0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */,
 				0E05C61D20D27C82006EE732 /* Theme.swift in Sources */,
-				0EDE8DEE20C93E4C004C739C /* GroupConstants.swift in Sources */,
 				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
-				0E5E5DE2215119DD00E318A3 /* VPNConfiguration.swift in Sources */,
-				0EBE3AA0213DC1A100BFA2F5 /* ConnectionProfile.swift in Sources */,
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
-				0EBE3AA6213DC1B000BFA2F5 /* ProviderConnectionProfile.swift in Sources */,
 				0EFE0D5A2233D1C7002B5E8C /* Intents.intentdefinition in Sources */,
 				0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */,
-				0EBBE8F52182361800106008 /* ConnectionService+Migration.swift in Sources */,
-				0E39BCF3214DA9310035E9DE /* AppConstants.swift in Sources */,
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
-				0E2B494220FD16540094784C /* TransientStore.swift in Sources */,
-				0E79D14121919F5600BB5FB2 /* ProfileKey.swift in Sources */,
-				0E89DFC5213DF7AE00741BA1 /* Preferences.swift in Sources */,
-				0E6BE13A20CFB76800A6DD36 /* ApplicationError.swift in Sources */,
 				0E50E7C6223318A500D5F76C /* InteractionsHandler.swift in Sources */,
 				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,
 				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
 				0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */,
 				0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */,
-				0EBE3A84213C6ADE00BFA2F5 /* InfrastructureFactory.swift in Sources */,
-				0E4FD7DE20D3E49A002221FF /* StandardVPNProvider.swift in Sources */,
 				0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */,
-				0EBE3AA1213DC1A100BFA2F5 /* ConnectionService.swift in Sources */,
 				0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */,
-				0ED31C1220CF0ABA0027975F /* Infrastructure.swift in Sources */,
-				0EC7F20520E24308004EA58E /* DebugLog.swift in Sources */,
-				0E4FD7E120D3E4C5002221FF /* MockVPNProvider.swift in Sources */,
-				0E2D11BA217DBEDE0096822C /* ConnectionService+Configurations.swift in Sources */,
-				0EBE3A90213C6F4000BFA2F5 /* TrustPolicy.swift in Sources */,
 				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
-				0E89DFC8213E8FC500741BA1 /* SessionProxy+Communication.swift in Sources */,
 				0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */,
 				0EFBFAC121AC464800887A8C /* CreditsViewController.swift in Sources */,
 				0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */,
 				0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */,
 				0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */,
 				0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */,
-				0E39BCF0214B9EF10035E9DE /* WebServices.swift in Sources */,
-				0EDE8DE720C93945004C739C /* Credentials.swift in Sources */,
 				0EA068F4218475F800C320AD /* ParsingResult+Alerts.swift in Sources */,
-				0ED38AF2214177920004D387 /* VPNProvider.swift in Sources */,
-				0E4C9CB920DB9BC600A0C59C /* TrustedNetworks.swift in Sources */,
 				0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */,
-				0ED38AE721404F100004D387 /* EndpointDataSource.swift in Sources */,
-				0E8D97E221388B52006FB4A0 /* InfrastructurePreset.swift in Sources */,
-				0ED31C3720CF38D10027975F /* VPN.swift in Sources */,
-				0E79D13F21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift in Sources */,
 				0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */,
-				0E5E5DE521511C5F00E318A3 /* GracefulVPN.swift in Sources */,
 				0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */,
 				0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */,
 				0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */,
-				0E4FD7EE20D539A0002221FF /* Utils.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0E57F64820C83FC7008323CF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0ED31C2720CF257C0027975F /* InfrastructureTests.swift in Sources */,
-				0EBBE8F221822B4D00106008 /* ConnectionServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,10 +1038,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0E57F64E20C83FC7008323CF /* PBXTargetDependency */ = {
+		0E3152A6223F9EF500F61841 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0E57F63720C83FC5008323CF /* Passepartout-iOS */;
-			targetProxy = 0E57F64D20C83FC7008323CF /* PBXContainerItemProxy */;
+			target = 0E31529A223F9EF400F61841 /* Passepartout-Core */;
+			targetProxy = 0E3152A5223F9EF500F61841 /* PBXContainerItemProxy */;
+		};
+		0E3152AF223F9EF500F61841 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E31529A223F9EF400F61841 /* Passepartout-Core */;
+			targetProxy = 0E3152AE223F9EF500F61841 /* PBXContainerItemProxy */;
 		};
 		0EDE8DC720C86910004C739C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -969,6 +1099,108 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0E3152B2223F9EF500F61841 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D93437539A4EC7FF79C43D13 /* Pods-Passepartout-Core.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Passepartout-Core/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.algoritmico.ios.Passepartout-Core";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0E3152B3223F9EF500F61841 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 131DAC1DE2F32A2D4B939453 /* Pods-Passepartout-Core.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Passepartout-Core/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.algoritmico.ios.Passepartout-Core";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0E3152B4223F9EF500F61841 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EE8F757C62B8D2AB705D47C /* Pods-Passepartout-CoreTests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Passepartout-CoreTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.algoritmico.ios.Passepartout-CoreTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0E3152B5223F9EF500F61841 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7055F40EBBCBF875EAA6D70 /* Pods-Passepartout-CoreTests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Passepartout-CoreTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.algoritmico.ios.Passepartout-CoreTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		0E57F65320C83FC7008323CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1136,48 +1368,6 @@
 			};
 			name = Release;
 		};
-		0E57F65920C83FC7008323CF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A341F6829A4440DCD6F7AFE8 /* Pods-PassepartoutTests-iOS.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "PassepartoutTests-iOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.ios.PassepartoutTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/Passepartout";
-			};
-			name = Debug;
-		};
-		0E57F65A20C83FC7008323CF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F55E5FC695C594928582A031 /* Pods-PassepartoutTests-iOS.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "PassepartoutTests-iOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.privateinternetaccess.ios.PassepartoutTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/Passepartout";
-			};
-			name = Release;
-		};
 		0EDE8DCA20C86910004C739C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4982BB989C57CA2A92283691 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */;
@@ -1226,6 +1416,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0E3152B6223F9EF500F61841 /* Build configuration list for PBXNativeTarget "Passepartout-Core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E3152B2223F9EF500F61841 /* Debug */,
+				0E3152B3223F9EF500F61841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E3152B8223F9EF500F61841 /* Build configuration list for PBXNativeTarget "Passepartout-CoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E3152B4223F9EF500F61841 /* Debug */,
+				0E3152B5223F9EF500F61841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0E57F63320C83FC5008323CF /* Build configuration list for PBXProject "Passepartout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1240,15 +1448,6 @@
 			buildConfigurations = (
 				0E57F65620C83FC7008323CF /* Debug */,
 				0E57F65720C83FC7008323CF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0E57F65820C83FC7008323CF /* Build configuration list for PBXNativeTarget "PassepartoutTests-iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0E57F65920C83FC7008323CF /* Debug */,
-				0E57F65A20C83FC7008323CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

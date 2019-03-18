@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-               BuildableName = "Passepartout.app"
-               BlueprintName = "Passepartout-iOS"
-               ReferencedContainer = "container:Passepartout.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0EDE8DBE20C86910004C739C"
-               BuildableName = "Passepartout-Tunnel.appex"
-               BlueprintName = "Passepartout-iOS-Tunnel"
+               BlueprintIdentifier = "0E31529A223F9EF400F61841"
+               BuildableName = "Passepartout_Core.framework"
+               BlueprintName = "Passepartout-Core"
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,16 +32,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E57F64B20C83FC7008323CF"
-               BuildableName = "PassepartoutTests-iOS.xctest"
-               BlueprintName = "PassepartoutTests-iOS"
-               ReferencedContainer = "container:Passepartout.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "0E3152A2223F9EF500F61841"
                BuildableName = "Passepartout-CoreTests.xctest"
                BlueprintName = "Passepartout-CoreTests"
@@ -66,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-            BuildableName = "Passepartout.app"
-            BlueprintName = "Passepartout-iOS"
+            BlueprintIdentifier = "0E31529A223F9EF400F61841"
+            BuildableName = "Passepartout_Core.framework"
+            BlueprintName = "Passepartout-Core"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -85,16 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-            BuildableName = "Passepartout.app"
-            BlueprintName = "Passepartout-iOS"
+            BlueprintIdentifier = "0E31529A223F9EF400F61841"
+            BuildableName = "Passepartout_Core.framework"
+            BlueprintName = "Passepartout-Core"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -104,16 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-            BuildableName = "Passepartout.app"
-            BlueprintName = "Passepartout-iOS"
+            BlueprintIdentifier = "0E31529A223F9EF400F61841"
+            BuildableName = "Passepartout_Core.framework"
+            BlueprintName = "Passepartout-Core"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

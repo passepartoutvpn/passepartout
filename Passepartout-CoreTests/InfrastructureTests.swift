@@ -1,6 +1,6 @@
 //
 //  InfrastructureTests.swift
-//  PassepartoutTests-iOS
+//  Passepartout-CoreTests
 //
 //  Created by Davide De Rosa on 6/11/18.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
@@ -24,7 +24,7 @@
 //
 
 import XCTest
-@testable import Passepartout
+@testable import Passepartout_Core
 import TunnelKit
 
 class InfrastructureTests: XCTestCase {
