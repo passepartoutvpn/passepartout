@@ -650,6 +650,39 @@ public enum L10n {
     public static let message = L10n.tr("Localizable", "share.message")
   }
 
+  public enum Shortcuts {
+    public enum Cells {
+      public enum Connect {
+        /// Connect to
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.connect.caption")
+      }
+      public enum DisableVpn {
+        /// Disable VPN
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.disable_vpn.caption")
+      }
+      public enum EnableVpn {
+        /// Enable VPN
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.enable_vpn.caption")
+      }
+      public enum TrustCellular {
+        /// Trust cellular network
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_cellular.caption")
+      }
+      public enum TrustWifi {
+        /// Trust current Wi-Fi
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_wifi.caption")
+      }
+      public enum UntrustCellular {
+        /// Untrust cellular network
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_cellular.caption")
+      }
+      public enum UntrustWifi {
+        /// Untrust current Wi-Fi
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_wifi.caption")
+      }
+    }
+  }
+
   public enum Version {
     /// Version
     public static let title = L10n.tr("Localizable", "version.title")

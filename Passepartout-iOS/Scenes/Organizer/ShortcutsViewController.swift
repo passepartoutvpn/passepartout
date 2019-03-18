@@ -27,8 +27,28 @@ import UIKit
 import IntentsUI
 import Passepartout_Core
 
-class ShortcutsViewController: UITableViewController {
+class ShortcutsViewController: UITableViewController, TableModelHost {
 
+    // MARK: TableModel
+    
+    let model: TableModel<SectionType, RowType> = {
+        let model: TableModel<SectionType, RowType> = TableModel()
+        model.add(.shortcutCreation)
+        model.set([
+            .connect,
+            .enableVPN,
+            .disableVPN,
+            .trustWiFi,
+            .untrustWiFi,
+            .trustCellular,
+            .untrustCellular
+        ], in: .shortcutCreation)
+        return model
+    }()
+    
+    func reloadModel() {
+    }
+    
     // MARK: UIViewController
     
     override func viewDidLoad() {
@@ -37,18 +57,151 @@ class ShortcutsViewController: UITableViewController {
         title = L10n.Organizer.Cells.SiriShortcuts.caption
 //        itemNext.title = L10n.Global.next
     }
+}
 
+extension ShortcutsViewController {
+    enum SectionType {
+        case shortcutCreation
+    }
+    
+    enum RowType {
+        case connect // host or provider+location
+        
+        case enableVPN
+        
+        case disableVPN
+        
+        case trustWiFi
+        
+        case untrustWiFi
+        
+        case trustCellular
+        
+        case untrustCellular
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.count(for: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+        switch model.row(at: indexPath) {
+        case .connect:
+            cell.leftText = L10n.Shortcuts.Cells.Connect.caption
+            
+        case .enableVPN:
+            cell.leftText = L10n.Shortcuts.Cells.EnableVpn.caption
+            
+        case .disableVPN:
+            cell.leftText = L10n.Shortcuts.Cells.DisableVpn.caption
+            
+        case .trustWiFi:
+            cell.leftText = L10n.Shortcuts.Cells.TrustWifi.caption
+            
+        case .untrustWiFi:
+            cell.leftText = L10n.Shortcuts.Cells.UntrustWifi.caption
+            
+        case .trustCellular:
+            cell.leftText = L10n.Shortcuts.Cells.TrustCellular.caption
+            
+        case .untrustCellular:
+            cell.leftText = L10n.Shortcuts.Cells.UntrustCellular.caption
+        }
+        cell.apply(Theme.current)
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard #available(iOS 12, *) else {
+            return
+        }
+        switch model.row(at: indexPath) {
+        case .connect:
+            addConnect()
+            
+        case .enableVPN:
+            addEnable()
+            
+        case .disableVPN:
+            addDisable()
+            
+        case .trustWiFi:
+            addTrustWiFi()
+            
+        case .untrustWiFi:
+            addUntrustWiFi()
+            
+        case .trustCellular:
+            addTrustCellular()
+            
+        case .untrustCellular:
+            addUntrustCellular()
+        }
+    }
+}
+
+// MARK: Actions
+
+@available(iOS 12, *)
+extension ShortcutsViewController {
+    private func addConnect() {
+        // FIXME: show hosts and providers, host delegates selection, provider requires location
+        let intent = ConnectVPNIntent()
+        guard let profileKey = TransientStore.shared.service.activeProfileKey else {
+            return
+        }
+        intent.context = profileKey.context.rawValue
+        intent.profileId = profileKey.id
+        addShortcut(with: intent)
+    }
+    
+    private func addEnable() {
+        addShortcut(with: EnableVPNIntent())
+    }
+
+    private func addDisable() {
+        addShortcut(with: DisableVPNIntent())
+    }
+    
+    private func addTrustWiFi() {
+        addShortcut(with: TrustCurrentNetworkIntent())
+    }
+    
+    private func addUntrustWiFi() {
+        addShortcut(with: UntrustCurrentNetworkIntent())
+    }
+    
+    private func addTrustCellular() {
+        addShortcut(with: TrustCellularNetworkIntent())
+    }
+    
+    private func addUntrustCellular() {
+        addShortcut(with: UntrustCellularNetworkIntent())
+    }
+    
+    private func addShortcut(with intent: INIntent) {
+        guard let shortcut = INShortcut(intent: intent) else {
+            return
+        }
+        let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
+    }
+    
     @IBAction private func close() {
         dismiss(animated: true, completion: nil)
     }
 }
 
-extension ShortcutsViewController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+@available(iOS 12, *)
+extension ShortcutsViewController: INUIAddVoiceShortcutViewControllerDelegate {
+    func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
+        tableView.reloadData()
+        dismiss(animated: true, completion: nil)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }

@@ -192,6 +192,14 @@
 "issue_reporter.email.body" = "Hi,\n\n%@\n\n%@\n\nRegards";
 "issue_reporter.email.description" = "description of the issue:";
 
+"shortcuts.cells.connect.caption" = "Connect to";
+"shortcuts.cells.enable_vpn.caption" = "Enable VPN";
+"shortcuts.cells.disable_vpn.caption" = "Disable VPN";
+"shortcuts.cells.trust_wifi.caption" = "Trust current Wi-Fi";
+"shortcuts.cells.untrust_wifi.caption" = "Untrust current Wi-Fi";
+"shortcuts.cells.trust_cellular.caption" = "Trust cellular network";
+"shortcuts.cells.untrust_cellular.caption" = "Untrust cellular network";
+
 "about.title" = "About";
 "about.sections.web.header" = "Web";
 "about.sections.share.header" = "Share";
