@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -86,7 +86,7 @@
 		0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE9214054A50004D387 /* OptionViewController.swift */; };
 		0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */; };
 		0ED993B1223FF8C700B0F9C9 /* IntentDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */; };
-		0ED993B2223FF92000B0F9C9 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE0D5C2233D1C7002B5E8C /* Intents.intentdefinition */; };
+		0ED993B52240105E00B0F9C9 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0ED993B32240105E00B0F9C9 /* Intents.intentdefinition */; };
 		0EDE8DC420C86910004C739C /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */; };
 		0EDE8DC820C86910004C739C /* Passepartout-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */; };
@@ -96,7 +96,6 @@
 		0EFBFAC121AC464800887A8C /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFBFAC021AC464800887A8C /* CreditsViewController.swift */; };
 		0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943D215BE10800529B64 /* IssueReporter.swift */; };
 		0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943F215BED8E00529B64 /* LabelViewController.swift */; };
-		0EFE0D5A2233D1C7002B5E8C /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0EFE0D5C2233D1C7002B5E8C /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		2774FA39ED110D958C822250 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A4ADF4EAADB11C595D7937 /* Pods_Passepartout_iOS_Tunnel.framework */; };
 		64BC3972D5FD0698BA15D741 /* Pods_Passepartout_CoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330CE87BE42AD629984E05C3 /* Pods_Passepartout_CoreTests.framework */; };
 		65923F9A7B1F49732A1B386B /* Pods_Passepartout_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EAE1FBCD7178916560C394 /* Pods_Passepartout_iOS.framework */; };
@@ -233,6 +232,7 @@
 		0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntentDispatcher.swift; path = Passepartout/Sources/Intents/IntentDispatcher.swift; sourceTree = SOURCE_ROOT; };
+		0ED993B42240105E00B0F9C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Passepartout-Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		0EDE8DC520C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -247,7 +247,6 @@
 		0EFBFAC021AC464800887A8C /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
 		0EFD943F215BED8E00529B64 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
-		0EFE0D5B2233D1C7002B5E8C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		1AA0A7801E34D3A4286280AB /* Pods-Passepartout-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		306E9009D8A771C5756ACC83 /* Pods-Passepartout-CoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-CoreTests.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests.release.xcconfig"; sourceTree = "<group>"; };
 		330CE87BE42AD629984E05C3 /* Pods_Passepartout_CoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_CoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,8 +349,8 @@
 		0E50E7C422330E5100D5F76C /* Intents */ = {
 			isa = PBXGroup;
 			children = (
+				0ED993B32240105E00B0F9C9 /* Intents.intentdefinition */,
 				0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */,
-				0EFE0D5C2233D1C7002B5E8C /* Intents.intentdefinition */,
 			);
 			path = Intents;
 			sourceTree = "<group>";
@@ -953,7 +952,7 @@
 				0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */,
 				0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */,
 				0E3152C9223FA04D00F61841 /* InfrastructureFactory.swift in Sources */,
-				0ED993B2223FF92000B0F9C9 /* Intents.intentdefinition in Sources */,
+				0ED993B52240105E00B0F9C9 /* Intents.intentdefinition in Sources */,
 				0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */,
 				0E3152D4223FA05400F61841 /* Preferences.swift in Sources */,
 				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
@@ -988,7 +987,6 @@
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
-				0EFE0D5A2233D1C7002B5E8C /* Intents.intentdefinition in Sources */,
 				0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */,
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
 				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,
@@ -1076,10 +1074,10 @@
 			name = Organizer.storyboard;
 			sourceTree = "<group>";
 		};
-		0EFE0D5C2233D1C7002B5E8C /* Intents.intentdefinition */ = {
+		0ED993B32240105E00B0F9C9 /* Intents.intentdefinition */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0EFE0D5B2233D1C7002B5E8C /* en */,
+				0ED993B42240105E00B0F9C9 /* en */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
@@ -1091,6 +1089,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D7CC6F055B1ECE468E956C00 /* Pods-Passepartout-Core.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 974;
@@ -1122,6 +1121,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0006BCD0B73ABD3B2B701604 /* Pods-Passepartout-Core.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 974;
