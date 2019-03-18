@@ -352,6 +352,10 @@ public enum L10n {
           public static let current = L10n.tr("Localizable", "organizer.cells.profile.value.current")
         }
       }
+      public enum SiriShortcuts {
+        /// Add shortcuts
+        public static let caption = L10n.tr("Localizable", "organizer.cells.siri_shortcuts.caption")
+      }
       public enum Uninstall {
         /// Remove VPN configuration
         public static let caption = L10n.tr("Localizable", "organizer.cells.uninstall.caption")
@@ -369,6 +373,10 @@ public enum L10n {
         public static let footer = L10n.tr("Localizable", "organizer.sections.providers.footer")
         /// Networks
         public static let header = L10n.tr("Localizable", "organizer.sections.providers.header")
+      }
+      public enum Siri {
+        /// Siri
+        public static let header = L10n.tr("Localizable", "organizer.sections.siri.header")
       }
     }
   }

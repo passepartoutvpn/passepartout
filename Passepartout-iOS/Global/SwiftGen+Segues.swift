@@ -26,6 +26,7 @@ internal enum StoryboardSegue {
     case importHostSegueIdentifier = "ImportHostSegueIdentifier"
     case selectProfileSegueIdentifier = "SelectProfileSegueIdentifier"
     case showImportedHostsSegueIdentifier = "ShowImportedHostsSegueIdentifier"
+    case siriShortcutsSegueIdentifier = "SiriShortcutsSegueIdentifier"
     case versionSegueIdentifier = "VersionSegueIdentifier"
   }
 }

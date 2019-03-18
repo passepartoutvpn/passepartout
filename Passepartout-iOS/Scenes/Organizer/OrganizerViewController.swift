@@ -45,12 +45,19 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.providers)
         model.add(.hosts)
+        if #available(iOS 12, *) {
+            model.add(.siri)
+        }
         model.add(.about)
         model.add(.destruction)
         model.setHeader(L10n.Organizer.Sections.Providers.header, for: .providers)
         model.setHeader(L10n.Organizer.Sections.Hosts.header, for: .hosts)
         model.setFooter(L10n.Organizer.Sections.Providers.footer, for: .providers)
         model.setFooter(L10n.Organizer.Sections.Hosts.footer, for: .hosts)
+        if #available(iOS 12, *) {
+            model.setHeader(L10n.Organizer.Sections.Siri.header, for: .siri)
+            model.set([.siriShortcuts], in: .siri)
+        }
         model.set([.openAbout], in: .about)
         model.set([.uninstall], in: .destruction)
         if AppConstants.Flags.isBeta {
@@ -179,6 +186,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     private func addNewHost() {
         perform(segue: StoryboardSegue.Organizer.showImportedHostsSegueIdentifier)
     }
+    
+    private func addShortcuts() {
+        perform(segue: StoryboardSegue.Organizer.siriShortcutsSegueIdentifier)
+    }
 
     private func removeProfile(at indexPath: IndexPath) {
         let sectionObject = model.section(for: indexPath.section)
@@ -269,6 +280,8 @@ extension OrganizerViewController {
         
         case hosts
         
+        case siri
+        
         case about
         
         case destruction
@@ -282,6 +295,8 @@ extension OrganizerViewController {
         case addProvider
         
         case addHost
+        
+        case siriShortcuts
         
         case openAbout
         
@@ -347,6 +362,12 @@ extension OrganizerViewController {
             cell.leftText = L10n.Organizer.Cells.AddHost.caption
             return cell
             
+        case .siriShortcuts:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.applyAction(Theme.current)
+            cell.leftText = L10n.Organizer.Cells.SiriShortcuts.caption
+            return cell
+            
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Organizer.Cells.About.caption(GroupConstants.App.name)
@@ -380,6 +401,9 @@ extension OrganizerViewController {
 
         case .addHost:
             addNewHost()
+            
+        case .siriShortcuts:
+            addShortcuts()
             
         case .openAbout:
             about()

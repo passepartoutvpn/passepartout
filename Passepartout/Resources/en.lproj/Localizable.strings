@@ -39,9 +39,11 @@
 "organizer.sections.providers.footer" = "Here you find a few public infrastructures offering preset configuration profiles.";
 "organizer.sections.hosts.header" = "Hosts";
 "organizer.sections.hosts.footer" = "Import hosts from raw .ovpn configuration files.";
+"organizer.sections.siri.header" = "Siri";
 "organizer.cells.profile.value.current" = "In use";
 "organizer.cells.add_provider.caption" = "Add new network";
 "organizer.cells.add_host.caption" = "Add new host";
+"organizer.cells.siri_shortcuts.caption" = "Add shortcuts";
 "organizer.cells.about.caption" = "About %@";
 "organizer.cells.uninstall.caption" = "Remove VPN configuration";
 "organizer.alerts.exhausted_providers.message" = "You have created profiles for any available network.";
