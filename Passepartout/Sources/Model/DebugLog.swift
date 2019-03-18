@@ -30,22 +30,22 @@ import UIKit
 import Cocoa
 #endif
 
-struct DebugLog {
+public struct DebugLog {
     private let raw: String
 
-    init(raw: String) {
+    public init(raw: String) {
         self.raw = raw
     }
 
-    func string() -> String {
+    public func string() -> String {
         return raw
     }
     
-    func data() -> Data? {
+    public func data() -> Data? {
         return raw.data(using: .utf8)
     }
 
-    func decoratedString() -> String {
+    public func decoratedString() -> String {
         let appName = GroupConstants.App.name
         let appVersion = GroupConstants.App.versionString
 
@@ -75,7 +75,7 @@ struct DebugLog {
         return fullText
     }
     
-    func decoratedData() -> Data {
+    public func decoratedData() -> Data {
         guard let data = decoratedString().data(using: .utf8) else {
             fatalError("Could not encode log metadata to UTF8?")
         }

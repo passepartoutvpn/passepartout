@@ -27,14 +27,14 @@ import Foundation
 import NetworkExtension
 import TunnelKit
 
-class StandardVPNProvider: VPNProvider {
+public class StandardVPNProvider: VPNProvider {
     private let bundleIdentifier: String
     
     private var manager: NETunnelProviderManager?
     
     private var lastNotifiedStatus: VPNStatus?
     
-    init(bundleIdentifier: String) {
+    public init(bundleIdentifier: String) {
         self.bundleIdentifier = bundleIdentifier
 
         let nc = NotificationCenter.default
@@ -48,18 +48,18 @@ class StandardVPNProvider: VPNProvider {
     
     // MARK: VPNProvider
     
-    var isPrepared: Bool {
+    public var isPrepared: Bool {
         return manager != nil
     }
     
-    var isEnabled: Bool {
+    public var isEnabled: Bool {
         guard let manager = manager else {
             return false
         }
         return manager.isEnabled && manager.isOnDemandEnabled
     }
     
-    var status: VPNStatus {
+    public var status: VPNStatus {
         guard let neStatus = manager?.connection.status else {
             return .disconnected
         }
@@ -78,7 +78,7 @@ class StandardVPNProvider: VPNProvider {
         }
     }
     
-    func prepare(completionHandler: (() -> Void)?) {
+    public func prepare(completionHandler: (() -> Void)?) {
         find(with: bundleIdentifier) {
             self.manager = $0
             NotificationCenter.default.post(name: .VPNDidPrepare, object: nil)
@@ -86,7 +86,7 @@ class StandardVPNProvider: VPNProvider {
         }
     }
     
-    func install(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
+    public func install(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
         guard let configuration = configuration as? NetworkExtensionVPNConfiguration else {
             fatalError("Not a NetworkExtensionVPNConfiguration")
         }
@@ -110,7 +110,7 @@ class StandardVPNProvider: VPNProvider {
         }
     }
     
-    func connect(completionHandler: ((Error?) -> Void)?) {
+    public func connect(completionHandler: ((Error?) -> Void)?) {
         do {
             try manager?.connection.startVPNTunnel()
             completionHandler?(nil)
@@ -119,14 +119,14 @@ class StandardVPNProvider: VPNProvider {
         }
     }
     
-    func disconnect(completionHandler: ((Error?) -> Void)?) {
+    public func disconnect(completionHandler: ((Error?) -> Void)?) {
         manager?.connection.stopVPNTunnel()
         manager?.isOnDemandEnabled = false
         manager?.isEnabled = false
         manager?.saveToPreferences(completionHandler: completionHandler)
     }
     
-    func reconnect(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
+    public func reconnect(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
         guard let configuration = configuration as? NetworkExtensionVPNConfiguration else {
             fatalError("Not a NetworkExtensionVPNConfiguration")
         }
@@ -147,7 +147,7 @@ class StandardVPNProvider: VPNProvider {
         }
     }
     
-    func uninstall(completionHandler: (() -> Void)?) {
+    public func uninstall(completionHandler: (() -> Void)?) {
         find(with: bundleIdentifier) { (manager) in
             manager?.connection.stopVPNTunnel()
             manager?.removeFromPreferences { (error) in
@@ -157,7 +157,7 @@ class StandardVPNProvider: VPNProvider {
         }
     }
     
-    func requestDebugLog(fallback: (() -> String)?, completionHandler: @escaping (String) -> Void) {
+    public func requestDebugLog(fallback: (() -> String)?, completionHandler: @escaping (String) -> Void) {
         guard status != .disconnected else {
             completionHandler(fallback?() ?? "")
             return
@@ -173,7 +173,7 @@ class StandardVPNProvider: VPNProvider {
         }
     }
     
-    func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void) {
+    public func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void) {
         find(with: bundleIdentifier) {
             self.manager = $0
             guard let session = self.manager?.connection as? NETunnelProviderSession else {

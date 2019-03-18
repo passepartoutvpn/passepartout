@@ -26,14 +26,14 @@
 import Foundation
 import TunnelKit
 
-class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
-    var title: String
+public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
+    public var title: String
 
-    let hostname: String
+    public let hostname: String
     
-    var parameters: TunnelKitProvider.Configuration
+    public var parameters: TunnelKitProvider.Configuration
 
-    init(title: String, hostname: String) {
+    public init(title: String, hostname: String) {
         self.title = title
         self.hostname = hostname
         let sessionConfiguration = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: "")).build()
@@ -42,19 +42,19 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     // MARK: ConnectionProfile
     
-    let context: Context = .host
+    public let context: Context = .host
     
-    var id: String {
+    public var id: String {
         return title
     }
     
-    var username: String?
+    public var username: String?
     
-    var requiresCredentials: Bool {
+    public var requiresCredentials: Bool {
         return false
     }
     
-    func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
+    public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
         precondition(!parameters.endpointProtocols.isEmpty)
         
         // XXX: copy paste, error prone
@@ -66,7 +66,7 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         return builder.build()
     }
     
-    func with(newId: String) -> ConnectionProfile {
+    public func with(newId: String) -> ConnectionProfile {
         let profile = HostConnectionProfile(title: newId, hostname: hostname)
         profile.username = username
         profile.parameters = parameters
@@ -74,13 +74,13 @@ class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     }
 }
 
-extension HostConnectionProfile {
+public extension HostConnectionProfile {
     static func ==(lhs: HostConnectionProfile, rhs: HostConnectionProfile) -> Bool {
         return lhs.id == rhs.id
     }
 }
 
-extension HostConnectionProfile {
+public extension HostConnectionProfile {
     var mainAddress: String {
         return hostname
     }

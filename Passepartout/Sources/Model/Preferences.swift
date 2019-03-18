@@ -25,7 +25,7 @@
 
 import Foundation
 
-protocol Preferences {
+public protocol Preferences {
     var resolvesHostname: Bool { get }
     
     var disconnectsOnSleep: Bool { get }
@@ -39,16 +39,16 @@ protocol Preferences {
     var trustPolicy: TrustPolicy { get }
 }
 
-class EditablePreferences: Preferences, Codable {
-    var resolvesHostname: Bool = true
+public class EditablePreferences: Preferences, Codable {
+    public var resolvesHostname: Bool = true
     
-    var disconnectsOnSleep: Bool = false
+    public var disconnectsOnSleep: Bool = false
     
     #if os(iOS)
-    var trustsMobileNetwork: Bool = false
+    public var trustsMobileNetwork: Bool = false
     #endif
     
-    var trustedWifis: [String: Bool] = [:]
+    public var trustedWifis: [String: Bool] = [:]
     
-    var trustPolicy: TrustPolicy = .disconnect
+    public var trustPolicy: TrustPolicy = .disconnect
 }

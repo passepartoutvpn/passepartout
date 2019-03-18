@@ -28,7 +28,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-extension ConnectionService {
+public extension ConnectionService {
     func save(configurationURL: URL, for key: ProfileKey) throws -> URL {
         let destinationURL = targetConfigurationURL(for: key)
         let fm = FileManager.default

@@ -26,41 +26,41 @@
 import Foundation
 import TunnelKit
 
-class PlaceholderConnectionProfile: ConnectionProfile {
-    let context: Context
+public class PlaceholderConnectionProfile: ConnectionProfile {
+    public let context: Context
     
-    let id: String
+    public let id: String
     
-    var username: String? = nil
+    public var username: String? = nil
     
-    var requiresCredentials: Bool = false
+    public var requiresCredentials: Bool = false
     
-    func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
+    public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
         fatalError("Generating configuration from a PlaceholderConnectionProfile")
     }
     
-    func with(newId: String) -> ConnectionProfile {
+    public func with(newId: String) -> ConnectionProfile {
         return PlaceholderConnectionProfile(context, newId)
     }
     
-    var mainAddress: String = ""
+    public var mainAddress: String = ""
     
-    var addresses: [String] = []
+    public var addresses: [String] = []
     
-    var protocols: [EndpointProtocol] = []
+    public var protocols: [EndpointProtocol] = []
     
-    var canCustomizeEndpoint: Bool = false
+    public var canCustomizeEndpoint: Bool = false
     
-    var customAddress: String?
+    public var customAddress: String?
     
-    var customProtocol: EndpointProtocol?
+    public var customProtocol: EndpointProtocol?
     
-    init(_ context: Context, _ id: String) {
+    public init(_ context: Context, _ id: String) {
         self.context = context
         self.id = id
     }
 
-    init(_ key: ProfileKey) {
+    public init(_ key: ProfileKey) {
         context = key.context
         id = key.id
     }

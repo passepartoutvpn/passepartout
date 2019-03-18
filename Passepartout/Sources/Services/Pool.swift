@@ -26,8 +26,8 @@
 import Foundation
 import TunnelKit
 
-struct Pool: Codable, Comparable, CustomStringConvertible {
-    enum CodingKeys: String, CodingKey {
+public struct Pool: Codable, Comparable, CustomStringConvertible {
+    public enum CodingKeys: String, CodingKey {
         case id
 
         case name
@@ -41,19 +41,19 @@ struct Pool: Codable, Comparable, CustomStringConvertible {
         case numericAddresses = "addrs"
     }
     
-    let id: String
+    public let id: String
     
-    let name: String
+    public let name: String
 
-    let country: String
+    public let country: String
     
-//    let location: (Double, Double)
+//    public let location: (Double, Double)
     
-    let hostname: String
+    public let hostname: String
     
-    let numericAddresses: [UInt32]
+    public let numericAddresses: [UInt32]
     
-    func hasAddress(_ address: String) -> Bool {
+    public func hasAddress(_ address: String) -> Bool {
         guard let ipv4 = DNSResolver.ipv4(fromString: address) else {
             return false
         }
@@ -61,7 +61,7 @@ struct Pool: Codable, Comparable, CustomStringConvertible {
     }
 
     // XXX: inefficient, can't easily use lazy on struct
-    func addresses() -> [String] {
+    public func addresses() -> [String] {
         var addrs = numericAddresses.map { DNSResolver.string(fromIPv4: $0) }
         addrs.insert(hostname, at: 0)
         return addrs
@@ -69,13 +69,13 @@ struct Pool: Codable, Comparable, CustomStringConvertible {
 
     // MARK: Comparable
     
-    static func <(lhs: Pool, rhs: Pool) -> Bool {
+    public static func <(lhs: Pool, rhs: Pool) -> Bool {
         return lhs.name < rhs.name
     }
 
     // MARK: CustomStringConvertible
     
-    var description: String {
+    public var description: String {
         return "{[\(id)] \"\(name)\"}"
     }
 }

@@ -26,42 +26,42 @@
 import Foundation
 import TunnelKit
 
-class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
-    let name: Infrastructure.Name
+public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
+    public let name: Infrastructure.Name
 
-    var infrastructure: Infrastructure {
+    public var infrastructure: Infrastructure {
         return InfrastructureFactory.shared.get(name)
     }
 
-    var poolId: String {
+    public var poolId: String {
         didSet {
             validateEndpoint()
         }
     }
 
-    var pool: Pool? {
+    public var pool: Pool? {
         return infrastructure.pool(for: poolId) ?? infrastructure.pool(for: infrastructure.defaults.pool)
     }
 
-    var presetId: String {
+    public var presetId: String {
         didSet {
             validateEndpoint()
         }
     }
     
-    var preset: InfrastructurePreset? {
+    public var preset: InfrastructurePreset? {
         return infrastructure.preset(for: presetId)
     }
     
-    var manualAddress: String?
+    public var manualAddress: String?
 
-    var manualProtocol: EndpointProtocol?
+    public var manualProtocol: EndpointProtocol?
     
-    var usesProviderEndpoint: Bool {
+    public var usesProviderEndpoint: Bool {
         return (manualAddress != nil) || (manualProtocol != nil)
     }
     
-    init(name: Infrastructure.Name) {
+    public init(name: Infrastructure.Name) {
         self.name = name
         poolId = ""
         presetId = ""
@@ -72,7 +72,7 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         presetId = infrastructure.defaults.preset
     }
     
-    func sortedPools() -> [Pool] {
+    public func sortedPools() -> [Pool] {
         return infrastructure.pools.sorted()
     }
     
@@ -92,19 +92,19 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     // MARK: ConnectionProfile
     
-    let context: Context = .provider
+    public let context: Context = .provider
 
-    var id: String {
+    public var id: String {
         return name.rawValue
     }
     
-    var username: String?
+    public var username: String?
     
-    var requiresCredentials: Bool {
+    public var requiresCredentials: Bool {
         return true
     }
     
-    func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
+    public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
         guard let pool = pool else {
             preconditionFailure("Nil pool?")
         }
@@ -140,18 +140,18 @@ class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         return builder.build()
     }
 
-    func with(newId: String) -> ConnectionProfile {
+    public func with(newId: String) -> ConnectionProfile {
         fatalError("Cannot rename a ProviderConnectionProfile")
     }
 }
 
-extension ProviderConnectionProfile {
+public extension ProviderConnectionProfile {
     static func ==(lhs: ProviderConnectionProfile, rhs: ProviderConnectionProfile) -> Bool {
         return lhs.id == rhs.id
     }
 }
 
-extension ProviderConnectionProfile {
+public extension ProviderConnectionProfile {
     var mainAddress: String {
         assert(pool != nil, "Getting provider main address but no pool set")
         return pool?.hostname ?? ""

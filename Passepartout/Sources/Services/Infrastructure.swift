@@ -26,49 +26,49 @@
 import Foundation
 import TunnelKit
 
-struct Infrastructure: Codable {
-    enum Name: String, Codable, Comparable {
+public struct Infrastructure: Codable {
+    public enum Name: String, Codable, Comparable {
         case pia = "PIA"
         
         case tunnelBear = "TunnelBear"
         
-        var webName: String {
+        public var webName: String {
             return rawValue.lowercased()
         }
 
-        static func <(lhs: Name, rhs: Name) -> Bool {
+        public static func <(lhs: Name, rhs: Name) -> Bool {
             return lhs.webName < rhs.webName
         }
     }
     
-    struct Defaults: Codable {
-        let username: String?
+    public struct Defaults: Codable {
+        public let username: String?
 
-        let pool: String
+        public let pool: String
 
-        let preset: String
+        public let preset: String
     }
     
-    let build: Int
+    public let build: Int
     
-    let name: Name
+    public let name: Name
     
-    let pools: [Pool]
+    public let pools: [Pool]
 
-    let presets: [InfrastructurePreset]
+    public let presets: [InfrastructurePreset]
 
-    let defaults: Defaults
+    public let defaults: Defaults
     
-    static func loaded(from url: URL) throws -> Infrastructure {
+    public static func loaded(from url: URL) throws -> Infrastructure {
         let json = try Data(contentsOf: url)
         return try JSONDecoder().decode(Infrastructure.self, from: json)
     }
     
-    func pool(for identifier: String) -> Pool? {
+    public func pool(for identifier: String) -> Pool? {
         return pools.first { $0.id == identifier }
     }
 
-    func preset(for identifier: String) -> InfrastructurePreset? {
+    public func preset(for identifier: String) -> InfrastructurePreset? {
         return presets.first { $0.id == identifier }
     }
 }

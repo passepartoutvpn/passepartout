@@ -25,7 +25,7 @@
 
 import Foundation
 
-enum ApplicationError: String, Error {
+public enum ApplicationError: String, Error {
     case missingProfile
 
     case missingCredentials

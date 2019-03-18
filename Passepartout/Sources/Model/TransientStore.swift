@@ -28,20 +28,20 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class TransientStore {
+public class TransientStore {
     private struct Keys {
         static let didHandleSubreddit = "DidHandleSubreddit"
     }
     
-    static let shared = TransientStore()
+    public static let shared = TransientStore()
     
     private static var serviceURL: URL {
         return GroupConstants.App.documentsURL.appendingPathComponent(AppConstants.Store.serviceFilename)
     }
     
-    let service: ConnectionService
+    public let service: ConnectionService
 
-    var didHandleSubreddit: Bool {
+    public var didHandleSubreddit: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Keys.didHandleSubreddit)
         }
@@ -80,7 +80,7 @@ class TransientStore {
         }
     }
     
-    func serialize(withProfiles: Bool) {
+    public func serialize(withProfiles: Bool) {
         try? JSONEncoder().encode(service).write(to: TransientStore.serviceURL)
         if withProfiles {
             service.saveProfiles()

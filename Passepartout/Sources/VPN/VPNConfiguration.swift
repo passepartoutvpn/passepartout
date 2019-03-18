@@ -26,11 +26,11 @@
 import Foundation
 import NetworkExtension
 
-protocol VPNConfiguration {
+public protocol VPNConfiguration {
 }
 
-struct NetworkExtensionVPNConfiguration: VPNConfiguration {
-    let protocolConfiguration: NETunnelProviderProtocol
+public struct NetworkExtensionVPNConfiguration: VPNConfiguration {
+    public let protocolConfiguration: NETunnelProviderProtocol
     
-    let onDemandRules: [NEOnDemandRule]
+    public let onDemandRules: [NEOnDemandRule]
 }

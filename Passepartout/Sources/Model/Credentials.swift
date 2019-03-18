@@ -26,9 +26,9 @@
 import Foundation
 import TunnelKit
 
-typealias Credentials = SessionProxy.Credentials
+public typealias Credentials = SessionProxy.Credentials
 
-extension Credentials {
+public extension Credentials {
     var isEmpty: Bool {
         return username.isEmpty || password.isEmpty
     }
