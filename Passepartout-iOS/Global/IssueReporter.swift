@@ -26,6 +26,7 @@
 import Foundation
 import TunnelKit
 import MessageUI
+import Passepartout_Core
 
 class IssueReporter: NSObject {
     struct Attachments {

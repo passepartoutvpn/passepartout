@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import Passepartout_Core
 
 class CreditsViewController: UITableViewController, TableModelHost {
     private let licenses = AppConstants.License.all

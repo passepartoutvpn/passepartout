@@ -26,6 +26,7 @@
 import Foundation
 import Intents
 import SwiftyBeaver
+import Passepartout_Core
 
 private let log = SwiftyBeaver.self
 

@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import Passepartout_Core
 
 class WizardProviderViewController: UITableViewController {
     var availableNames: [Infrastructure.Name] = []

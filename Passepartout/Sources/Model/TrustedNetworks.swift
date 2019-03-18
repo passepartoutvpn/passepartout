@@ -40,6 +40,14 @@ public protocol TrustedNetworksModelDelegate: class {
 }
 
 public class TrustedNetworksModel {
+    public enum RowType {
+        case trustsMobile
+        
+        case trustedWiFi
+        
+        case addCurrentWiFi
+    }
+    
     public private(set) var trustedWifis: [String: Bool]
     
     public private(set) var sortedWifis: [String]
@@ -49,9 +57,7 @@ public class TrustedNetworksModel {
     
     public private(set) var trustsMobileNetwork: Bool
 
-    // FIXME
-//    public private(set) var rows: [ServiceViewController.RowType]
-    public private(set) var rows: [Int]
+    public private(set) var rows: [RowType]
     #endif
     
     public weak var delegate: TrustedNetworksModelDelegate?
@@ -73,15 +79,14 @@ public class TrustedNetworksModel {
 
         #if os(iOS)
         trustsMobileNetwork = preferences.trustsMobileNetwork
-        // FIXME
-//        rows.removeAll()
-//        if hasMobileNetwork {
-//            rows.append(.trustedMobile)
-//        }
-//        for _ in sortedWifis {
-//            rows.append(.trustedWiFi)
-//        }
-//        rows.append(.trustedAddCurrentWiFi)
+        rows.removeAll()
+        if hasMobileNetwork {
+            rows.append(.trustsMobile)
+        }
+        for _ in sortedWifis {
+            rows.append(.trustedWiFi)
+        }
+        rows.append(.addCurrentWiFi)
         #endif
     }
     
@@ -139,8 +144,7 @@ public class TrustedNetworksModel {
         if !isDuplicate {
             sortedWifis.insert(wifiToAdd, at: index)
             #if os(iOS)
-            // FIXME
-//            rows.insert(.trustedWiFi, at: rowIndex)
+            rows.insert(.trustedWiFi, at: rowIndex)
             #endif
             delegate?.trustedNetworks(self, shouldInsertWifiAt: rowIndex)
         } else {

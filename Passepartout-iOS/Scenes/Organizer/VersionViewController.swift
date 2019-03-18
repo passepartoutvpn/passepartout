@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import Passepartout_Core
 
 class VersionViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView?
