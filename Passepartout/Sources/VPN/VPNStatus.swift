@@ -25,7 +25,7 @@
 
 import Foundation
 
-enum VPNStatus {
+public enum VPNStatus {
     case connected
     
     case connecting

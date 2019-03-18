@@ -27,6 +27,7 @@ import UIKit
 import NetworkExtension
 import CoreTelephony
 import TunnelKit
+import Passepartout_Core
 
 class ServiceViewController: UIViewController, TableModelHost {
     @IBOutlet private weak var tableView: UITableView!
@@ -511,6 +512,19 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         return ip
     }
     
+    private func mappedTrustedNetworksRow(_ from: TrustedNetworksModel.RowType) -> RowType {
+        switch from {
+        case .trustsMobile:
+            return .trustedMobile
+            
+        case .trustedWiFi:
+            return .trustedWiFi
+            
+        case .addCurrentWiFi:
+            return .trustedAddCurrentWiFi
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return model.count
     }
@@ -938,7 +952,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
 
         trustedNetworks.delegate = self
         trustedNetworks.load(from: service.preferences)
-        model.set(trustedNetworks.rows, in: .trusted)
+        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, in: .trusted)
     }
 
     private func reloadVpnStatus() {
@@ -1005,7 +1019,7 @@ extension ServiceViewController: TrustedNetworksModelDelegate {
     }
     
     func trustedNetworks(_: TrustedNetworksModel, shouldInsertWifiAt rowIndex: Int) {
-        model.set(trustedNetworks.rows, in: .trusted)
+        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, in: .trusted)
         tableView.insertRows(at: [IndexPath(row: rowIndex, section: trustedSectionIndex)], with: .bottom)
     }
     
@@ -1021,7 +1035,7 @@ extension ServiceViewController: TrustedNetworksModelDelegate {
     }
     
     func trustedNetworks(_: TrustedNetworksModel, shouldDeleteWifiAt rowIndex: Int) {
-        model.set(trustedNetworks.rows, in: .trusted)
+        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, in: .trusted)
         tableView.deleteRows(at: [IndexPath(row: rowIndex, section: trustedSectionIndex)], with: .top)
     }
     

@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import Passepartout_Core
 
 protocol ProviderPresetViewControllerDelegate: class {
     func providerPresetController(_: ProviderPresetViewController, didSelectPreset preset: InfrastructurePreset)

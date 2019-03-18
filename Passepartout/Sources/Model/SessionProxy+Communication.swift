@@ -26,7 +26,7 @@
 import Foundation
 import TunnelKit
 
-extension SessionProxy.ConfigurationBuilder {
+public extension SessionProxy.ConfigurationBuilder {
 //    mutating func copyCommunication(from other: SessionProxy.ConfigurationBuilder) {
 //        cipher = other.cipher
 //        digest = other.digest

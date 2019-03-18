@@ -28,10 +28,10 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class GracefulVPN {
+public class GracefulVPN {
     private let service: ConnectionService
     
-    var profile: ConnectionProfile?
+    public var profile: ConnectionProfile?
     
     private var vpn: VPNProvider? {
         guard let profile = profile else {
@@ -43,19 +43,19 @@ class GracefulVPN {
         return VPN.shared
     }
     
-    var isEnabled: Bool {
+    public var isEnabled: Bool {
         return vpn?.isEnabled ?? false
     }
     
-    var status: VPNStatus? {
+    public var status: VPNStatus? {
         return vpn?.status
     }
     
-    init(service: ConnectionService) {
+    public init(service: ConnectionService) {
         self.service = service
     }
     
-    func prepare(completionHandler: (() -> Void)?) {
+    public func prepare(completionHandler: (() -> Void)?) {
         service.clearVpnLastError()
         guard let vpn = vpn else {
             completionHandler?()
@@ -65,7 +65,7 @@ class GracefulVPN {
         vpn.prepare(completionHandler: completionHandler)
     }
     
-    func reconnect(completionHandler: ((Error?) -> Void)?) {
+    public func reconnect(completionHandler: ((Error?) -> Void)?) {
         service.clearVpnLastError()
         guard let vpn = vpn else {
             completionHandler?(ApplicationError.inactiveProfile)
@@ -79,7 +79,7 @@ class GracefulVPN {
         }
     }
     
-    func reinstall(completionHandler: ((Error?) -> Void)?) {
+    public func reinstall(completionHandler: ((Error?) -> Void)?) {
         service.clearVpnLastError()
         guard let vpn = vpn else {
             completionHandler?(ApplicationError.inactiveProfile)
@@ -93,7 +93,7 @@ class GracefulVPN {
         }
     }
     
-    func reinstallIfEnabled() {
+    public func reinstallIfEnabled() {
         guard isEnabled else {
             log.warning("Not reinstalling (VPN is disabled)")
             return
@@ -105,7 +105,7 @@ class GracefulVPN {
         }
     }
     
-    func disconnect(completionHandler: ((Error?) -> Void)?) {
+    public func disconnect(completionHandler: ((Error?) -> Void)?) {
         guard let vpn = vpn else {
             completionHandler?(ApplicationError.inactiveProfile)
             return
@@ -113,7 +113,7 @@ class GracefulVPN {
         vpn.disconnect(completionHandler: completionHandler)
     }
 
-    func uninstall(completionHandler: (() -> Void)?) {
+    public func uninstall(completionHandler: (() -> Void)?) {
         guard let vpn = vpn else {
             completionHandler?()
             return
@@ -121,7 +121,7 @@ class GracefulVPN {
         vpn.uninstall(completionHandler: completionHandler)
     }
     
-    func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void) {
+    public func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void) {
         guard let vpn = vpn else {
             completionHandler(nil)
             return

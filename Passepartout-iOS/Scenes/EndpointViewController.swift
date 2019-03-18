@@ -25,6 +25,7 @@
 
 import UIKit
 import TunnelKit
+import Passepartout_Core
 
 protocol EndpointViewControllerDelegate: class {
     func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: EndpointProtocol?)

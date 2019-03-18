@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import Passepartout_Core
 
 class LabelViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView?

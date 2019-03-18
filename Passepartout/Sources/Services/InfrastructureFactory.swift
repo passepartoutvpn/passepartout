@@ -28,7 +28,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class InfrastructureFactory {
+public class InfrastructureFactory {
     private static func embedded(withName name: Infrastructure.Name) -> Infrastructure {
         guard let url = name.bundleURL else {
             fatalError("Cannot find JSON for infrastructure '\(name)'")
@@ -53,9 +53,9 @@ class InfrastructureFactory {
         return cacheDate > bundleDate
     }
     
-    static let shared = InfrastructureFactory()
+    public static let shared = InfrastructureFactory()
 
-    let allNames: [Infrastructure.Name] = [
+    public let allNames: [Infrastructure.Name] = [
         .pia,
         .tunnelBear
     ]
@@ -80,7 +80,7 @@ class InfrastructureFactory {
         lastUpdate = [:]
     }
     
-    func loadCache() {
+    public func loadCache() {
         let cacheEntries: [URL]
         do {
             cacheEntries = try FileManager.default.contentsOfDirectory(at: cachePath, includingPropertiesForKeys: nil)
@@ -110,14 +110,14 @@ class InfrastructureFactory {
         }
     }
     
-    func get(_ name: Infrastructure.Name) -> Infrastructure {
+    public func get(_ name: Infrastructure.Name) -> Infrastructure {
         guard let infra = cache[name] ?? bundle[name] else {
             fatalError("No infrastructure embedded nor cached for '\(name)'")
         }
         return infra
     }
 
-    func update(_ name: Infrastructure.Name, notBeforeInterval minInterval: TimeInterval?, completionHandler: @escaping ((Infrastructure, Date)?, Error?) -> Void) -> Bool {
+    public func update(_ name: Infrastructure.Name, notBeforeInterval minInterval: TimeInterval?, completionHandler: @escaping ((Infrastructure, Date)?, Error?) -> Void) -> Bool {
         let ifModifiedSince = modificationDate(for: name)
         
         if let lastInfrastructureUpdate = lastUpdate[name] {
@@ -191,7 +191,7 @@ class InfrastructureFactory {
         return true
     }
 
-    func modificationDate(for name: Infrastructure.Name) -> Date? {
+    public func modificationDate(for name: Infrastructure.Name) -> Date? {
         let optBundleDate = bundleModificationDate(for: name)
         guard let cacheDate = cacheModificationDate(for: name) else {
             return optBundleDate
@@ -244,9 +244,10 @@ private extension Infrastructure.Name {
     }
 
     var bundleURL: URL? {
+        let bundle = Bundle(for: InfrastructureFactory.self)
         let endpoint = WebServices.Endpoint.network(self)
 
         // e.g. "Web", PIA="net/pia" -> "[Bundle]:Web/net/pia.json"
-        return Bundle.main.url(forResource: "\(AppConstants.Store.webCacheDirectory)/\(endpoint.path)", withExtension: "json")
+        return bundle.url(forResource: "\(AppConstants.Store.webCacheDirectory)/\(endpoint.path)", withExtension: "json")
     }
 }

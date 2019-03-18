@@ -28,24 +28,24 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class Reviewer {
+public class Reviewer {
     private struct Keys {
         static let eventCount = "ReviewerEventCount"
     
         static let lastVersion = "ReviewerLastVersion"
     }
     
-    static let shared = Reviewer()
+    public static let shared = Reviewer()
     
     private let defaults: UserDefaults
     
-    var eventCountBeforeRating = 3
+    public var eventCountBeforeRating = 3
     
     private init() {
         defaults = .standard
     }
     
-    func reportEvent() {
+    public func reportEvent() {
         let currentVersion = GroupConstants.App.buildNumber
         let lastVersion = defaults.integer(forKey: Keys.lastVersion)
         if lastVersion > 0 {

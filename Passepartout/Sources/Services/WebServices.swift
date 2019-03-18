@@ -28,8 +28,8 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class WebServices {
-    enum Endpoint {
+public class WebServices {
+    public enum Endpoint {
         case network(Infrastructure.Name)
         
         var path: String {
@@ -40,22 +40,22 @@ class WebServices {
         }
     }
     
-    struct Response<T> {
-        let value: T?
+    public struct Response<T> {
+        public let value: T?
         
-        let lastModifiedString: String?
+        public let lastModifiedString: String?
         
-        var lastModified: Date? {
+        public var lastModified: Date? {
             guard let string = lastModifiedString else {
                 return nil
             }
             return lmFormatter.date(from: string)
         }
         
-        let isCached: Bool
+        public let isCached: Bool
     }
     
-    static let shared = WebServices()
+    public static let shared = WebServices()
     
     private static let lmFormatter: DateFormatter = {
         let fmt = DateFormatter()
@@ -64,7 +64,7 @@ class WebServices {
         return fmt
     }()
     
-    func network(with name: Infrastructure.Name, ifModifiedSince lastModified: Date?, completionHandler: @escaping (Response<Infrastructure>?, Error?) -> Void) {
+    public func network(with name: Infrastructure.Name, ifModifiedSince lastModified: Date?, completionHandler: @escaping (Response<Infrastructure>?, Error?) -> Void) {
         var request = get(.network(name))
         if let lastModified = lastModified {
             request.addValue(WebServices.lmFormatter.string(from: lastModified), forHTTPHeaderField: "If-Modified-Since")

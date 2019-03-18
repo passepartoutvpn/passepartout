@@ -25,30 +25,30 @@
 
 import Foundation
 
-struct ProfileKey: RawRepresentable, Hashable, Codable, CustomStringConvertible {
+public struct ProfileKey: RawRepresentable, Hashable, Codable, CustomStringConvertible {
     private static let separator: Character = "."
     
-    let context: Context
+    public let context: Context
     
-    let id: String
+    public let id: String
     
-    init(_ context: Context, _ id: String) {
+    public init(_ context: Context, _ id: String) {
         self.context = context
         self.id = id
     }
     
-    init(_ profile: ConnectionProfile) {
+    public init(_ profile: ConnectionProfile) {
         context = profile.context
         id = profile.id
     }
     
     // MARK: RawRepresentable
     
-    var rawValue: String {
+    public var rawValue: String {
         return "\(context)\(ProfileKey.separator)\(id)"
     }
     
-    init?(rawValue: String) {
+    public init?(rawValue: String) {
         guard let separatorIndex = rawValue.firstIndex(of: ProfileKey.separator) else {
             return nil
         }
@@ -66,7 +66,7 @@ struct ProfileKey: RawRepresentable, Hashable, Codable, CustomStringConvertible 
     
     // MARK: CustomStringConvertible
     
-    var description: String {
+    public var description: String {
         return "{context=\(context), id=\(id)}"
     }
 }

@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import Passepartout_Core
 
 // XXX: convoluted due to the separation of provider/host profiles
 

@@ -27,27 +27,27 @@ import Foundation
 import TunnelKit
 import SwiftyBeaver
 
-class AppConstants {
-    class Flags {
-        static let isBeta = false
+public class AppConstants {
+    public class Flags {
+        public static let isBeta = false
     }
 
-    class Domain {
-        static let name = "passepartoutvpn.app"
+    public class Domain {
+        public static let name = "passepartoutvpn.app"
     }
     
-    class Store {
-        static let serviceFilename = "ConnectionService.json"
+    public class Store {
+        public static let serviceFilename = "ConnectionService.json"
         
-        static let webCacheDirectory = "Web"
+        public static let webCacheDirectory = "Web"
 
-        static let providersDirectory = "Providers"
+        public static let providersDirectory = "Providers"
 
-        static let hostsDirectory = "Hosts"
+        public static let hostsDirectory = "Hosts"
     }
     
-    class VPN {
-        static func baseConfiguration() -> TunnelKitProvider.Configuration {
+    public class VPN {
+        public static func baseConfiguration() -> TunnelKitProvider.Configuration {
             let sessionBuilder = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: ""))
             var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
             builder.mtu = 1250
@@ -66,37 +66,37 @@ class AppConstants {
             "https://www.instagram.com"
         ]
         
-        static let connectivityURL = URL(string: connectivityStrings.customRandomElement())!
+        public static let connectivityURL = URL(string: connectivityStrings.customRandomElement())!
         
-        static let connectivityTimeout: TimeInterval = 10.0
+        public static let connectivityTimeout: TimeInterval = 10.0
     }
     
-    class Web {
+    public class Web {
         private static let version = "v1"
         
         private static let baseURL = Repos.api.appendingPathComponent(version)
         
-        static func url(path: String) -> URL {
+        public static func url(path: String) -> URL {
             return baseURL.appendingPathComponent(path)
         }
         
-        static let timeout: TimeInterval = 3.0
+        public static let timeout: TimeInterval = 3.0
         
-        static let minimumUpdateInterval: TimeInterval = 600.0 // 10 minutes
+        public static let minimumUpdateInterval: TimeInterval = 600.0 // 10 minutes
     }
     
-    class Log {
-        static let level: SwiftyBeaver.Level = .debug
+    public class Log {
+        public static let level: SwiftyBeaver.Level = .debug
 
-        static let debugFormat = "$DHH:mm:ss$d - $M"
+        public static let debugFormat = "$DHH:mm:ss$d - $M"
         
-        static var debugSnapshot: () -> String = { TransientStore.shared.service.vpnLog }
+        public static var debugSnapshot: () -> String = { TransientStore.shared.service.vpnLog }
 
-        static let viewerRefreshInterval: TimeInterval = 3.0
+        public static let viewerRefreshInterval: TimeInterval = 3.0
 
         private static let fileName = "Debug.log"
         
-        static var fileURL: URL {
+        public static var fileURL: URL {
             return GroupConstants.App.cachesURL.appendingPathComponent(fileName)
         }
 
@@ -115,51 +115,51 @@ class AppConstants {
             return dest
         }()
         
-        static func configure() {
+        public static func configure() {
             SwiftyBeaver.addDestination(console)
             SwiftyBeaver.addDestination(file)
         }
     }
     
-    class IssueReporter {
-        static let recipient = "issues@\(Domain.name)"
+    public class IssueReporter {
+        public static let recipient = "issues@\(Domain.name)"
 
-        class Filenames {
-            static var debugLog: String {
+        public class Filenames {
+            public static var debugLog: String {
                 let fmt = DateFormatter()
                 fmt.dateFormat = "yyyyMMdd-HHmmss"
                 let iso = fmt.string(from: Date())
                 return "debug-\(iso).txt"
             }
             
-            static let configuration = "profile.ovpn"
-//            static let configuration = "profile.ovpn.txt"
+            public static let configuration = "profile.ovpn"
+//            public static let configuration = "profile.ovpn.txt"
         }
         
-        class MIME {
-            static let debugLog = "text/plain"
+        public class MIME {
+            public static let debugLog = "text/plain"
 
-//            static let configuration = "application/x-openvpn-profile"
-            static let configuration = "text/plain"
+//            public static let configuration = "application/x-openvpn-profile"
+            public static let configuration = "text/plain"
         }
     }
     
-    class URLs {
-        static let website = URL(string: "https://\(Domain.name)")!
+    public class URLs {
+        public static let website = URL(string: "https://\(Domain.name)")!
         
-        static let faq = website.appendingPathComponent("faq")
+        public static let faq = website.appendingPathComponent("faq")
 
-        static let disclaimer = website.appendingPathComponent("disclaimer")
+        public static let disclaimer = website.appendingPathComponent("disclaimer")
 
-        static let privacyPolicy = website.appendingPathComponent("privacy")
+        public static let privacyPolicy = website.appendingPathComponent("privacy")
         
-        static let changelog = Repos.ios.appendingPathComponent("blob/master/CHANGELOG.md")
+        public static let changelog = Repos.ios.appendingPathComponent("blob/master/CHANGELOG.md")
         
-        static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!
+        public static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!
         
         private static let twitterHashtags = ["OpenVPN", "iOS", "macOS"]
         
-        static var twitterIntent: URL {
+        public static var twitterIntent: URL {
             var text = L10n.Share.message
             for ht in twitterHashtags {
                 text = text.replacingOccurrences(of: ht, with: "#\(ht)")
@@ -173,17 +173,17 @@ class AppConstants {
             return comps.url!
         }
         
-        static func review(withId id: String) -> URL {
+        public static func review(withId id: String) -> URL {
             return URL(string: "https://itunes.apple.com/app/id\(id)?action=write-review")!
         }
         
-        static let referrals: [Infrastructure.Name: String] = [
+        public static let referrals: [Infrastructure.Name: String] = [
             .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/",
             .tunnelBear: "https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464"
         ]
     }
 
-    class Repos {
+    public class Repos {
         private static let githubRoot = URL(string: "https://github.com/passepartoutvpn/")!
 
         private static let githubRawRoot = URL(string: "https://\(Domain.name)/")!
@@ -196,25 +196,25 @@ class AppConstants {
             return githubRawRoot.appendingPathComponent(repo)
         }
         
-        static let ios = github(repo: "passepartout-ios")
+        public static let ios = github(repo: "passepartout-ios")
 
-        static let api = githubRaw(repo: "api")
+        public static let api = githubRaw(repo: "api")
     }
 
-    struct License {
-        let name: String
+    public struct License {
+        public let name: String
         
-        let type: String
+        public let type: String
         
-        let url: URL
+        public let url: URL
         
-        init(_ name: String, _ type: String, _ urlString: String) {
+        public init(_ name: String, _ type: String, _ urlString: String) {
             self.name = name
             self.type = type
             url = URL(string: urlString)!
         }
 
-        static let all: [License] = [
+        public static let all: [License] = [
             License(
                 "MBProgressHUD",
                 "MIT",
@@ -242,20 +242,20 @@ class AppConstants {
             )
         ]
 
-        static var cachedContent: [String: String] = [:]
+        public static var cachedContent: [String: String] = [:]
     }
     
-    struct Notice {
-        let name: String
+    public struct Notice {
+        public let name: String
         
-        let statement: String
+        public let statement: String
         
-        init(_ name: String, _ statement: String) {
+        public init(_ name: String, _ statement: String) {
             self.name = name
             self.statement = statement
         }
         
-        static let all: [Notice] = [
+        public static let all: [Notice] = [
             Notice(
                 "Circle Icons",
                 "The logo is taken from the awesome Circle Icons set by Nick Roach."
@@ -267,7 +267,7 @@ class AppConstants {
         ]
     }
     
-    struct Rating {
-        static let eventCount = 3
+    public struct Rating {
+        public static let eventCount = 3
     }
 }

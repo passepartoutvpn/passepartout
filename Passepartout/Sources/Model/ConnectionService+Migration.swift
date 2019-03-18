@@ -28,7 +28,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-extension ConnectionService {
+public extension ConnectionService {
     static func migrateJSON(from: URL, to: URL) {
         do {
             let newData = try migrateJSON(at: from)

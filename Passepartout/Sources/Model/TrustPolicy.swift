@@ -25,7 +25,7 @@
 
 import Foundation
 
-enum TrustPolicy: String, Codable {
+public enum TrustPolicy: String, Codable {
     case ignore
     
     case disconnect

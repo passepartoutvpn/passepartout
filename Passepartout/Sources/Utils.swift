@@ -33,7 +33,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-class Utils {
+public class Utils {
     fileprivate static let timestampFormatter: DateFormatter = {
         let fmt = DateFormatter()
         fmt.dateStyle = .medium
@@ -47,7 +47,7 @@ class Utils {
         return fmt
     }()
     
-    static func versionString() -> String {
+    public static func versionString() -> String {
         let info = Bundle.main.infoDictionary
         guard let version = info?["CFBundleShortVersionString"] else {
             fatalError("No bundle version?")
@@ -59,11 +59,11 @@ class Utils {
     }
     
     #if targetEnvironment(simulator)
-    static func hasCellularData() -> Bool {
+    public static func hasCellularData() -> Bool {
         return true
     }
     #else
-    static func hasCellularData() -> Bool {
+    public static func hasCellularData() -> Bool {
         var addrs: UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&addrs) == 0 else {
             return false
@@ -84,12 +84,12 @@ class Utils {
     #endif
 
     #if targetEnvironment(simulator)
-    static func currentWifiNetworkName() -> String? {
+    public static func currentWifiNetworkName() -> String? {
 //        return nil
         return ["FOO", "BAR", "WIFI"].customRandomElement()
     }
     #else
-    static func currentWifiNetworkName() -> String? {
+    public static func currentWifiNetworkName() -> String? {
         #if os(iOS)
         guard let interfaceNames = CNCopySupportedInterfaces() as? [CFString] else {
             return nil
@@ -109,11 +109,11 @@ class Utils {
     }
     #endif
     
-    static func regex(_ pattern: String) -> NSRegularExpression {
+    public static func regex(_ pattern: String) -> NSRegularExpression {
         return try! NSRegularExpression(pattern: pattern, options: [])
     }
     
-    static func checkConnectivityURL(_ url: URL, timeout: TimeInterval, completionHandler: @escaping (Bool) -> Void) {
+    public static func checkConnectivityURL(_ url: URL, timeout: TimeInterval, completionHandler: @escaping (Bool) -> Void) {
         let session = URLSession(configuration: .ephemeral)
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeout)
 
@@ -137,7 +137,7 @@ class Utils {
     }
 }
 
-extension FileManager {
+public extension FileManager {
     func userURL(for searchPath: SearchPathDirectory, appending: String?) -> URL {
         let paths = urls(for: .documentDirectory, in: .userDomainMask)
         var directory = paths[0]
@@ -155,13 +155,13 @@ extension FileManager {
     }
 }
 
-extension Date {
+public extension Date {
     var timestamp: String {
         return Utils.timestampFormatter.string(from: self)
     }
 }
 
-extension TimeInterval {
+public extension TimeInterval {
     var localized: String {
         guard let str = Utils.componentsFormatter.string(from: self) else {
             fatalError("Could not format a TimeInterval?")
@@ -170,7 +170,7 @@ extension TimeInterval {
     }
 }
 
-extension Sequence {
+public extension Sequence {
     func stableSorted(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows -> [Element] {
         return try enumerated().sorted {
             return try areInIncreasingOrder($0.element, $1.element) ||
@@ -179,20 +179,20 @@ extension Sequence {
     }
 }
 
-extension Array {
+public extension Array {
     func customRandomElement() -> Element {
         let i = Int(arc4random() % UInt32(count))
         return self[i]
     }
 }
 
-extension StringProtocol where Index == String.Index {
+public extension StringProtocol where Index == String.Index {
     func nsRange(from range: Range<Index>) -> NSRange {
         return NSRange(range, in: self)
     }
 }
 
-extension CharacterSet {
+public extension CharacterSet {
     static let filename: CharacterSet = {
         var chars: CharacterSet = .decimalDigits
         let english = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -204,7 +204,7 @@ extension CharacterSet {
     }()
 }
 
-extension URL {
+public extension URL {
     private static let illegalCharacterFallback = "_"
     
     var normalizedFilename: String {
@@ -213,8 +213,8 @@ extension URL {
     }
 }
 
-extension Array where Element: CustomStringConvertible {
-    public func sortedCaseInsensitive() -> [Element] {
+public extension Array where Element: CustomStringConvertible {
+    func sortedCaseInsensitive() -> [Element] {
         return sorted { $0.description.lowercased() < $1.description.lowercased() }
     }
 }

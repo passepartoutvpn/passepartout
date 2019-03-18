@@ -29,8 +29,8 @@ import TunnelKit
 // supports a subset of TunnelKitProvider.Configuration
 // ignores new JSON keys
 
-struct InfrastructurePreset: Codable {
-    enum PresetKeys: String, CodingKey {
+public struct InfrastructurePreset: Codable {
+    public enum PresetKeys: String, CodingKey {
         case id
 
         case name
@@ -40,7 +40,7 @@ struct InfrastructurePreset: Codable {
         case configuration = "cfg"
     }
 
-    enum ConfigurationKeys: String, CodingKey {
+    public enum ConfigurationKeys: String, CodingKey {
         case endpointProtocols = "ep"
 
         case cipher
@@ -62,21 +62,21 @@ struct InfrastructurePreset: Codable {
         case usesPIAPatches = "pia"
     }
     
-    let id: String
+    public let id: String
     
-    let name: String
+    public let name: String
     
-    let comment: String
+    public let comment: String
 
-    let configuration: TunnelKitProvider.Configuration
+    public let configuration: TunnelKitProvider.Configuration
     
-    func hasProtocol(_ proto: EndpointProtocol) -> Bool {
+    public func hasProtocol(_ proto: EndpointProtocol) -> Bool {
         return configuration.endpointProtocols.index(of: proto) != nil
     }
 
     // MARK: Codable
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PresetKeys.self)
         id = try container.decode(String.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
@@ -102,7 +102,7 @@ struct InfrastructurePreset: Codable {
         configuration = builder.build()
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: PresetKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)

@@ -25,7 +25,7 @@
 
 import Foundation
 
-protocol TrustedNetworksModelDelegate: class {
+public protocol TrustedNetworksModelDelegate: class {
     func trustedNetworksCouldDisconnect(_: TrustedNetworksModel) -> Bool
 
     func trustedNetworksShouldConfirmDisconnection(_: TrustedNetworksModel, triggeredAt rowIndex: Int, completionHandler: @escaping () -> Void)
@@ -39,22 +39,30 @@ protocol TrustedNetworksModelDelegate: class {
     func trustedNetworksShouldReinstall(_: TrustedNetworksModel)
 }
 
-class TrustedNetworksModel {
-    private(set) var trustedWifis: [String: Bool]
+public class TrustedNetworksModel {
+    public enum RowType {
+        case trustsMobile
+        
+        case trustedWiFi
+        
+        case addCurrentWiFi
+    }
     
-    private(set) var sortedWifis: [String]
+    public private(set) var trustedWifis: [String: Bool]
+    
+    public private(set) var sortedWifis: [String]
     
     #if os(iOS)
     private let hasMobileNetwork: Bool
     
-    private(set) var trustsMobileNetwork: Bool
+    public private(set) var trustsMobileNetwork: Bool
 
-    private(set) var rows: [ServiceViewController.RowType]
+    public private(set) var rows: [RowType]
     #endif
     
-    weak var delegate: TrustedNetworksModelDelegate?
+    public weak var delegate: TrustedNetworksModelDelegate?
     
-    init() {
+    public init() {
         trustedWifis = [:]
         sortedWifis = []
 
@@ -65,7 +73,7 @@ class TrustedNetworksModel {
         #endif
     }
 
-    func load(from preferences: Preferences) {
+    public func load(from preferences: Preferences) {
         trustedWifis = preferences.trustedWifis
         sortedWifis = trustedWifis.keys.sorted()
 
@@ -73,17 +81,17 @@ class TrustedNetworksModel {
         trustsMobileNetwork = preferences.trustsMobileNetwork
         rows.removeAll()
         if hasMobileNetwork {
-            rows.append(.trustedMobile)
+            rows.append(.trustsMobile)
         }
         for _ in sortedWifis {
             rows.append(.trustedWiFi)
         }
-        rows.append(.trustedAddCurrentWiFi)
+        rows.append(.addCurrentWiFi)
         #endif
     }
     
     #if os(iOS)
-    func setMobile(_ isTrusted: Bool) {
+    public func setMobile(_ isTrusted: Bool) {
         let completionHandler: () -> Void = {
             self.trustsMobileNetwork = isTrusted
             self.delegate?.trustedNetworksShouldReinstall(self)
@@ -96,14 +104,14 @@ class TrustedNetworksModel {
     }
     #endif
     
-    func wifi(at rowIndex: Int) -> (String, Bool) {
+    public func wifi(at rowIndex: Int) -> (String, Bool) {
         let index = indexForWifi(at: rowIndex)
         let wifiName = sortedWifis[index]
         let isTrusted = trustedWifis[wifiName] ?? false
         return (wifiName, isTrusted)
     }
 
-    func addCurrentWifi() -> Bool {
+    public func addCurrentWifi() -> Bool {
         guard let currentWifi = Utils.currentWifiNetworkName() else {
             return false
         }
@@ -111,7 +119,7 @@ class TrustedNetworksModel {
         return true
     }
     
-    func addWifi(_ wifiToAdd: String) {
+    public func addWifi(_ wifiToAdd: String) {
         var index = 0
         var isDuplicate = false
         for wifi in sortedWifis {
@@ -146,7 +154,7 @@ class TrustedNetworksModel {
         delegate?.trustedNetworksShouldReinstall(self)
     }
     
-    func removeWifi(at rowIndex: Int) {
+    public func removeWifi(at rowIndex: Int) {
         let index = indexForWifi(at: rowIndex)
         let removedWifi = sortedWifis.remove(at: index)
         trustedWifis.removeValue(forKey: removedWifi)
@@ -158,7 +166,7 @@ class TrustedNetworksModel {
         delegate?.trustedNetworksShouldReinstall(self)
     }
     
-    func enableWifi(at rowIndex: Int) {
+    public func enableWifi(at rowIndex: Int) {
         let index = indexForWifi(at: rowIndex)
         let wifi = sortedWifis[index]
 
@@ -175,7 +183,7 @@ class TrustedNetworksModel {
         completionHandler()
     }
 
-    func disableWifi(at rowIndex: Int) {
+    public func disableWifi(at rowIndex: Int) {
         let index = indexForWifi(at: rowIndex)
         let wifi = sortedWifis[index]
 
@@ -185,7 +193,7 @@ class TrustedNetworksModel {
         delegate?.trustedNetworksShouldReinstall(self)
     }
     
-    func isTrusted(wifi: String) -> Bool {
+    public func isTrusted(wifi: String) -> Bool {
         return trustedWifis[wifi] ?? false
     }
     

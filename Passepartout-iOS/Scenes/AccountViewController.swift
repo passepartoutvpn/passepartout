@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import Passepartout_Core
 
 protocol AccountViewControllerDelegate: class {
     func accountController(_: AccountViewController, didEnterCredentials credentials: Credentials)

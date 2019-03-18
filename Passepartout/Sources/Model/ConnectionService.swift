@@ -30,7 +30,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-protocol ConnectionServiceDelegate: class {
+public protocol ConnectionServiceDelegate: class {
     func connectionService(didAdd profile: ConnectionProfile)
 
     func connectionService(didRename oldProfile: ConnectionProfile, to newProfile: ConnectionProfile)
@@ -42,8 +42,8 @@ protocol ConnectionServiceDelegate: class {
     func connectionService(didActivate profile: ConnectionProfile)
 }
 
-class ConnectionService: Codable {
-    enum CodingKeys: String, CodingKey {
+public class ConnectionService: Codable {
+    public enum CodingKeys: String, CodingKey {
         case build
         
         case appGroup
@@ -55,9 +55,9 @@ class ConnectionService: Codable {
         case preferences
     }
 
-    var directory: String? = nil
+    public var directory: String? = nil
     
-    var rootURL: URL {
+    public var rootURL: URL {
         var url = GroupConstants.App.documentsURL
         if let directory = directory {
             url.appendPathComponent(directory)
@@ -81,11 +81,11 @@ class ConnectionService: Codable {
 
     private let keychain: Keychain
     
-    var baseConfiguration: TunnelKitProvider.Configuration
+    public var baseConfiguration: TunnelKitProvider.Configuration
     
     private var cache: [ProfileKey: ConnectionProfile]
     
-    private(set) var activeProfileKey: ProfileKey? {
+    public private(set) var activeProfileKey: ProfileKey? {
         willSet {
             if let oldProfile = activeProfile {
                 delegate?.connectionService(willDeactivate: oldProfile)
@@ -98,7 +98,7 @@ class ConnectionService: Codable {
         }
     }
     
-    var activeProfile: ConnectionProfile? {
+    public var activeProfile: ConnectionProfile? {
         guard let id = activeProfileKey else {
             return nil
         }
@@ -110,11 +110,11 @@ class ConnectionService: Codable {
         return hit
     }
     
-    let preferences: EditablePreferences
+    public let preferences: EditablePreferences
     
-    weak var delegate: ConnectionServiceDelegate?
+    public weak var delegate: ConnectionServiceDelegate?
     
-    init(withAppGroup appGroup: String, baseConfiguration: TunnelKitProvider.Configuration) {
+    public init(withAppGroup appGroup: String, baseConfiguration: TunnelKitProvider.Configuration) {
         guard let defaults = UserDefaults(suiteName: appGroup) else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
@@ -132,7 +132,7 @@ class ConnectionService: Codable {
     
     // MARK: Codable
 
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let appGroup = try container.decode(String.self, forKey: .appGroup)
         guard let defaults = UserDefaults(suiteName: appGroup) else {
@@ -150,7 +150,7 @@ class ConnectionService: Codable {
         cache = [:]
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         build = GroupConstants.App.buildNumber
         
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -163,7 +163,7 @@ class ConnectionService: Codable {
     
     // MARK: Serialization
     
-    func loadProfiles() {
+    public func loadProfiles() {
         let fm = FileManager.default
         try? fm.createDirectory(at: providersURL, withIntermediateDirectories: false, attributes: nil)
         try? fm.createDirectory(at: hostsURL, withIntermediateDirectories: false, attributes: nil)
@@ -196,7 +196,7 @@ class ConnectionService: Codable {
         }
     }
     
-    func saveProfiles() {
+    public func saveProfiles() {
         let encoder = JSONEncoder()
         ensureDirectoriesExistence()
 
@@ -237,7 +237,7 @@ class ConnectionService: Codable {
         }
     }
     
-    func profile(withContext context: Context, id: String) -> ConnectionProfile? {
+    public func profile(withContext context: Context, id: String) -> ConnectionProfile? {
         let key = ProfileKey(context, id)
         var profile = cache[key]
         if let _ = profile as? PlaceholderConnectionProfile {
@@ -260,11 +260,11 @@ class ConnectionService: Codable {
         return profile
     }
     
-    func ids(forContext context: Context) -> [String] {
+    public func ids(forContext context: Context) -> [String] {
         return cache.keys.filter { $0.context == context }.map { $0.id }
     }
     
-    func contextURL(_ key: ProfileKey) -> URL {
+    public func contextURL(_ key: ProfileKey) -> URL {
         switch key.context {
         case .provider:
             return providersURL
@@ -274,11 +274,11 @@ class ConnectionService: Codable {
         }
     }
     
-    func profileURL(_ key: ProfileKey) -> URL {
+    public func profileURL(_ key: ProfileKey) -> URL {
         return contextURL(key).appendingPathComponent(key.id).appendingPathExtension("json")
     }
     
-    func profileData(_ key: ProfileKey) throws -> Data {
+    public func profileData(_ key: ProfileKey) throws -> Data {
         return try Data(contentsOf: profileURL(key))
     }
     
@@ -291,7 +291,7 @@ class ConnectionService: Codable {
     
     // MARK: Profiles
 
-    func addProfile(_ profile: ConnectionProfile, credentials: Credentials?) -> Bool {
+    public func addProfile(_ profile: ConnectionProfile, credentials: Credentials?) -> Bool {
         guard cache.index(forKey: ProfileKey(profile)) == nil else {
             return false
         }
@@ -299,7 +299,7 @@ class ConnectionService: Codable {
         return true
     }
     
-    func addOrReplaceProfile(_ profile: ConnectionProfile, credentials: Credentials?) {
+    public func addOrReplaceProfile(_ profile: ConnectionProfile, credentials: Credentials?) {
         let key = ProfileKey(profile)
         cache[key] = profile
         try? setCredentials(credentials, for: profile)
@@ -312,7 +312,8 @@ class ConnectionService: Codable {
         saveProfile(profile, withEncoder: JSONEncoder(), checkDirectories: true)
     }
 
-    @discardableResult func renameProfile(_ key: ProfileKey, to newId: String) -> ConnectionProfile? {
+    @discardableResult
+    public func renameProfile(_ key: ProfileKey, to newId: String) -> ConnectionProfile? {
         precondition(newId != key.id)
 
         // WARNING: can be a placeholder
@@ -351,11 +352,12 @@ class ConnectionService: Codable {
         return newProfile
     }
 
-    @discardableResult func renameProfile(_ profile: ConnectionProfile, to id: String) -> ConnectionProfile? {
+    @discardableResult
+    public func renameProfile(_ profile: ConnectionProfile, to id: String) -> ConnectionProfile? {
         return renameProfile(ProfileKey(profile), to: id)
     }
     
-    func removeProfile(_ key: ProfileKey) {
+    public func removeProfile(_ key: ProfileKey) {
         guard let profile = cache[key] else {
             return
         }
@@ -382,33 +384,33 @@ class ConnectionService: Codable {
         }
     }
     
-    func containsProfile(_ key: ProfileKey) -> Bool {
+    public func containsProfile(_ key: ProfileKey) -> Bool {
         return cache.index(forKey: key) != nil
     }
 
-    func containsProfile(_ profile: ConnectionProfile) -> Bool {
+    public func containsProfile(_ profile: ConnectionProfile) -> Bool {
         return containsProfile(ProfileKey(profile))
     }
     
-    func hasActiveProfile() -> Bool {
+    public func hasActiveProfile() -> Bool {
         return activeProfileKey != nil
     }
 
-    func isActiveProfile(_ key: ProfileKey) -> Bool {
+    public func isActiveProfile(_ key: ProfileKey) -> Bool {
         return key == activeProfileKey
     }
     
-    func isActiveProfile(_ profile: ConnectionProfile) -> Bool {
+    public func isActiveProfile(_ profile: ConnectionProfile) -> Bool {
         return isActiveProfile(ProfileKey(profile))
     }
     
-    func activateProfile(_ profile: ConnectionProfile) {
+    public func activateProfile(_ profile: ConnectionProfile) {
         activeProfileKey = ProfileKey(profile)
     }
     
     // MARK: Credentials
     
-    func needsCredentials(for profile: ConnectionProfile) -> Bool {
+    public func needsCredentials(for profile: ConnectionProfile) -> Bool {
         guard profile.requiresCredentials else {
             return false
         }
@@ -418,7 +420,7 @@ class ConnectionService: Codable {
         return creds.isEmpty
     }
     
-    func credentials(for profile: ConnectionProfile) -> Credentials? {
+    public func credentials(for profile: ConnectionProfile) -> Credentials? {
         guard let username = profile.username, let key = profile.passwordKey else {
             return nil
         }
@@ -428,18 +430,18 @@ class ConnectionService: Codable {
         return Credentials(username, password)
     }
     
-    func setCredentials(_ credentials: Credentials?, for profile: ConnectionProfile) throws {
+    public func setCredentials(_ credentials: Credentials?, for profile: ConnectionProfile) throws {
         profile.username = credentials?.username
         try profile.setPassword(credentials?.password, in: keychain)
     }
     
-    func removeCredentials(for profile: ConnectionProfile) {
+    public func removeCredentials(for profile: ConnectionProfile) {
         profile.removePassword(in: keychain)
     }
     
     // MARK: VPN
     
-    func vpnConfiguration() throws -> NetworkExtensionVPNConfiguration {
+    public func vpnConfiguration() throws -> NetworkExtensionVPNConfiguration {
         guard let profile = activeProfile else {
             throw ApplicationError.missingProfile
         }
@@ -492,19 +494,19 @@ class ConnectionService: Codable {
         }
     }
     
-    var vpnLog: String {
+    public var vpnLog: String {
         return baseConfiguration.existingLog(in: appGroup) ?? ""
     }
     
-    var vpnLastError: TunnelKitProvider.ProviderError? {
+    public var vpnLastError: TunnelKitProvider.ProviderError? {
         return baseConfiguration.lastError(in: appGroup)
     }
     
-    func clearVpnLastError() {
+    public func clearVpnLastError() {
         baseConfiguration.clearLastError(in: appGroup)
     }
     
-//    func eraseVpnLog() {
+//    public func eraseVpnLog() {
 //        defaults.removeObject(forKey: Keys.vpnLog)
 //    }
 }

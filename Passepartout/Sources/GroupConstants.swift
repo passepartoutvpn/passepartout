@@ -25,58 +25,59 @@
 
 import Foundation
 
-class GroupConstants {
-    class App {
-        static let name = "Passepartout"
+public class GroupConstants {
+    public class App {
+        public static let name = "Passepartout"
 
-        static let tunnelKitName = "TunnelKit"
+        public static let tunnelKitName = "TunnelKit"
         
-        static let title = name
-//        static let title = "\u{1F511}"
+        public static let title = name
+//        public static let title = "\u{1F511}"
 
-        static let versionNumber = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        public static let versionNumber = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 
-        static let buildNumber = Int(Bundle.main.infoDictionary![kCFBundleVersionKey as String] as! String)!
+        public static let buildNumber = Int(Bundle.main.infoDictionary![kCFBundleVersionKey as String] as! String)!
 
-        static let versionString = "\(versionNumber) (\(buildNumber))"
+        public static let versionString = "\(versionNumber) (\(buildNumber))"
         
-        static let teamId = "DTDYD63ZX9"
+        public static let teamId = "DTDYD63ZX9"
 
-        static let appId = "1433648537"
+        public static let appId = "1433648537"
         
         #if os(iOS)
-        static let appGroup = "group.com.algoritmico.Passepartout"
+        public static let appGroup = "group.com.algoritmico.Passepartout"
         
-        static let tunnelIdentifier = "com.algoritmico.ios.Passepartout.Tunnel"
+        public static let tunnelIdentifier = "com.algoritmico.ios.Passepartout.Tunnel"
         #else
-        static let appGroup = "\(teamId).group.com.algoritmico.Passepartout"
+        public static let appGroup = "\(teamId).group.com.algoritmico.Passepartout"
         
-        static let tunnelIdentifier = "com.algoritmico.macos.Passepartout.Tunnel"
+        public static let tunnelIdentifier = "com.algoritmico.macos.Passepartout.Tunnel"
         #endif
 
         private static var containerURL: URL {
             guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
-                fatalError("Unable to access App Group container")
+                print("Unable to access App Group container")
+                return FileManager.default.userURL(for: .documentDirectory, appending: nil)
             }
             return url
         }
 
-        static let documentsURL: URL = {
+        public static let documentsURL: URL = {
             let url = containerURL.appendingPathComponent("Documents", isDirectory: true)
             try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             return url
         }()
 
-        static let cachesURL: URL = {
+        public static let cachesURL: URL = {
             let url = containerURL.appendingPathComponent("Library/Caches", isDirectory: true)
             try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             return url
         }()
     }
     
-    class VPN {
-        static let dnsTimeout = 5000
+    public class VPN {
+        public static let dnsTimeout = 5000
 
-        static let sessionMarker = "--- EOF ---"
+        public static let sessionMarker = "--- EOF ---"
     }
 }

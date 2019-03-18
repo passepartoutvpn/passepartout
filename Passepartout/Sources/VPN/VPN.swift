@@ -25,10 +25,10 @@
 
 import Foundation
 
-class VPN {
+public class VPN {
     #if targetEnvironment(simulator)
-    static let shared = MockVPNProvider()
+    public static let shared = MockVPNProvider()
     #else
-    static let shared = StandardVPNProvider(bundleIdentifier: GroupConstants.App.tunnelIdentifier)
+    public static let shared = StandardVPNProvider(bundleIdentifier: GroupConstants.App.tunnelIdentifier)
     #endif
 }

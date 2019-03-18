@@ -25,7 +25,7 @@
 
 import Foundation
 
-protocol VPNProvider: class {
+public protocol VPNProvider: class {
     var isPrepared: Bool { get }
     
     var isEnabled: Bool { get }
@@ -49,7 +49,7 @@ protocol VPNProvider: class {
     func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void)
 }
 
-extension Notification.Name {
+public extension Notification.Name {
     static let VPNDidPrepare = Notification.Name("VPNDidPrepare")
     
     static let VPNDidChangeStatus = Notification.Name("VPNDidChangeStatus")

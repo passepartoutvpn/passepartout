@@ -25,57 +25,57 @@
 
 import Foundation
 
-class MockVPNProvider: VPNProvider {
-    let isPrepared: Bool = true
+public class MockVPNProvider: VPNProvider {
+    public let isPrepared: Bool = true
 
-    private(set) var isEnabled: Bool = false
+    public private(set) var isEnabled: Bool = false
     
-    private(set) var status: VPNStatus = .disconnected
+    public private(set) var status: VPNStatus = .disconnected
     
-    func prepare(completionHandler: (() -> Void)?) {
+    public func prepare(completionHandler: (() -> Void)?) {
         NotificationCenter.default.post(name: .VPNDidPrepare, object: nil)
         completionHandler?()
     }
     
-    func install(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
+    public func install(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
         isEnabled = true
         completionHandler?(nil)
     }
     
-    func connect(completionHandler: ((Error?) -> Void)?) {
+    public func connect(completionHandler: ((Error?) -> Void)?) {
         isEnabled = true
         status = .connected
         NotificationCenter.default.post(name: .VPNDidChangeStatus, object: self)
         completionHandler?(nil)
     }
     
-    func disconnect(completionHandler: ((Error?) -> Void)?) {
+    public func disconnect(completionHandler: ((Error?) -> Void)?) {
         isEnabled = false
         status = .disconnected
         NotificationCenter.default.post(name: .VPNDidChangeStatus, object: self)
         completionHandler?(nil)
     }
     
-    func reconnect(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
+    public func reconnect(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
         isEnabled = true
         status = .connected
         NotificationCenter.default.post(name: .VPNDidChangeStatus, object: self)
         completionHandler?(nil)
     }
     
-    func uninstall(completionHandler: (() -> Void)?) {
+    public func uninstall(completionHandler: (() -> Void)?) {
         isEnabled = false
         status = .disconnected
         NotificationCenter.default.post(name: .VPNDidChangeStatus, object: self)
         completionHandler?()
     }
     
-    func requestDebugLog(fallback: (() -> String)?, completionHandler: @escaping (String) -> Void) {
+    public func requestDebugLog(fallback: (() -> String)?, completionHandler: @escaping (String) -> Void) {
         let log = [String](repeating: "lorem ipsum", count: 1000).joined(separator: " ")
         completionHandler(log)
     }
     
-    func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void) {
+    public func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void) {
         completionHandler((0, 0))
     }
 }

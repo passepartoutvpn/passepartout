@@ -27,13 +27,13 @@ import Foundation
 import TunnelKit
 import NetworkExtension
 
-enum Context: String, Codable {
+public enum Context: String, Codable {
     case provider
     
     case host
 }
 
-protocol ConnectionProfile: class, EndpointDataSource, CustomStringConvertible {
+public protocol ConnectionProfile: class, EndpointDataSource, CustomStringConvertible {
     var context: Context { get }
     
     var id: String { get }
@@ -47,7 +47,7 @@ protocol ConnectionProfile: class, EndpointDataSource, CustomStringConvertible {
     func with(newId: String) -> ConnectionProfile
 }
 
-extension ConnectionProfile {
+public extension ConnectionProfile {
     var passwordKey: String? {
         guard let username = username else {
             return nil
@@ -81,7 +81,7 @@ extension ConnectionProfile {
     }
 }
 
-extension ConnectionProfile {
+public extension ConnectionProfile {
     var description: String {
         return "(\(context):\(id))"
     }
