@@ -16,7 +16,6 @@ target 'Passepartout-CoreTests' do
 end
 
 target 'Passepartout-iOS' do
-    shared_pods
     pod 'MBProgressHUD'
 end
 target 'Passepartout-iOS-Tunnel' do
