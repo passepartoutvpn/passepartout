@@ -26,7 +26,12 @@ internal enum StoryboardSegue {
     case importHostSegueIdentifier = "ImportHostSegueIdentifier"
     case selectProfileSegueIdentifier = "SelectProfileSegueIdentifier"
     case showImportedHostsSegueIdentifier = "ShowImportedHostsSegueIdentifier"
+    case siriShortcutsSegueIdentifier = "SiriShortcutsSegueIdentifier"
     case versionSegueIdentifier = "VersionSegueIdentifier"
+  }
+  internal enum Shortcuts: String, SegueType {
+    case connectToSegueIdentifier = "ConnectToSegueIdentifier"
+    case pickLocationSegueIdentifier = "PickLocationSegueIdentifier"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

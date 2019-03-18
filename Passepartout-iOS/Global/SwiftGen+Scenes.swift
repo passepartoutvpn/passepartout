@@ -21,6 +21,8 @@ internal enum StoryboardScene {
 
     internal static let configurationIdentifier = SceneType<ConfigurationViewController>(storyboard: Main.self, identifier: "ConfigurationIdentifier")
 
+    internal static let providerPoolViewController = SceneType<ProviderPoolViewController>(storyboard: Main.self, identifier: "ProviderPoolViewController")
+
     internal static let serviceIdentifier = SceneType<UIKit.UINavigationController>(storyboard: Main.self, identifier: "ServiceIdentifier")
   }
   internal enum Organizer: StoryboardType {
@@ -31,6 +33,11 @@ internal enum StoryboardScene {
     internal static let provider = SceneType<UIKit.UINavigationController>(storyboard: Organizer.self, identifier: "Provider")
 
     internal static let wizardHostIdentifier = SceneType<UIKit.UINavigationController>(storyboard: Organizer.self, identifier: "WizardHostIdentifier")
+  }
+  internal enum Shortcuts: StoryboardType {
+    internal static let storyboardName = "Shortcuts"
+
+    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Shortcuts.self)
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

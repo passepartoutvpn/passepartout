@@ -173,7 +173,7 @@
 			<key>INIntentRestrictions</key>
 			<integer>0</integer>
 			<key>INIntentTitle</key>
-			<string>Trust current network</string>
+			<string>Trust current Wi-Fi</string>
 			<key>INIntentTitleID</key>
 			<string>m2E7SI</string>
 			<key>INIntentType</key>
@@ -317,7 +317,7 @@
 			<key>INIntentRestrictions</key>
 			<integer>0</integer>
 			<key>INIntentTitle</key>
-			<string>Untrust current network</string>
+			<string>Untrust current Wi-Fi</string>
 			<key>INIntentTitleID</key>
 			<string>rd1T8p</string>
 			<key>INIntentType</key>

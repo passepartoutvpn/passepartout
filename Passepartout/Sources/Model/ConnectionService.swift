@@ -291,6 +291,10 @@ public class ConnectionService: Codable {
     
     // MARK: Profiles
 
+    public func hasProfiles() -> Bool {
+        return !cache.isEmpty
+    }
+    
     public func addProfile(_ profile: ConnectionProfile, credentials: Credentials?) -> Bool {
         guard cache.index(forKey: ProfileKey(profile)) == nil else {
             return false

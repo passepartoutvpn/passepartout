@@ -352,6 +352,10 @@ public enum L10n {
           public static let current = L10n.tr("Localizable", "organizer.cells.profile.value.current")
         }
       }
+      public enum SiriShortcuts {
+        /// Add shortcuts
+        public static let caption = L10n.tr("Localizable", "organizer.cells.siri_shortcuts.caption")
+      }
       public enum Uninstall {
         /// Remove VPN configuration
         public static let caption = L10n.tr("Localizable", "organizer.cells.uninstall.caption")
@@ -369,6 +373,10 @@ public enum L10n {
         public static let footer = L10n.tr("Localizable", "organizer.sections.providers.footer")
         /// Networks
         public static let header = L10n.tr("Localizable", "organizer.sections.providers.header")
+      }
+      public enum Siri {
+        /// Siri
+        public static let header = L10n.tr("Localizable", "organizer.sections.siri.header")
       }
     }
   }
@@ -640,6 +648,55 @@ public enum L10n {
   public enum Share {
     /// Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS
     public static let message = L10n.tr("Localizable", "share.message")
+  }
+
+  public enum Shortcuts {
+    public enum Alerts {
+      public enum NoProfiles {
+        /// There is no profile to connect to.
+        public static let message = L10n.tr("Localizable", "shortcuts.alerts.no_profiles.message")
+      }
+    }
+    public enum Cells {
+      public enum Connect {
+        /// Connect to
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.connect.caption")
+      }
+      public enum DisableVpn {
+        /// Disable VPN
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.disable_vpn.caption")
+      }
+      public enum EnableVpn {
+        /// Enable VPN
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.enable_vpn.caption")
+      }
+      public enum TrustCellular {
+        /// Trust cellular network
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_cellular.caption")
+      }
+      public enum TrustWifi {
+        /// Trust current Wi-Fi
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_wifi.caption")
+      }
+      public enum UntrustCellular {
+        /// Untrust cellular network
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_cellular.caption")
+      }
+      public enum UntrustWifi {
+        /// Untrust current Wi-Fi
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_wifi.caption")
+      }
+    }
+    public enum Sections {
+      public enum Trust {
+        /// Trust
+        public static let header = L10n.tr("Localizable", "shortcuts.sections.trust.header")
+      }
+      public enum Vpn {
+        /// VPN
+        public static let header = L10n.tr("Localizable", "shortcuts.sections.vpn.header")
+      }
+    }
   }
 
   public enum Version {

@@ -11,6 +11,7 @@ ib:
     inputs:
         - Passepartout-iOS/en.lproj/Main.storyboard
         - Passepartout-iOS/en.lproj/Organizer.storyboard
+        - Passepartout-iOS/en.lproj/Shortcuts.storyboard
     outputs:
         - templateName: scenes-swift4
           output: Passepartout-iOS/Global/SwiftGen+Scenes.swift
