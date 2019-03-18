@@ -254,8 +254,8 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
 
         if #available(iOS 12, *) {
-            InteractionsHandler.donateEnableVPN()
-            InteractionsHandler.donateDisableVPN()
+            IntentDispatcher.donateEnableVPN()
+            IntentDispatcher.donateDisableVPN()
         }
     }
     
@@ -790,8 +790,8 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .trustedAddCurrentWiFi:
             if #available(iOS 12, *) {
-                InteractionsHandler.donateTrustCurrentNetwork()
-                InteractionsHandler.donateUntrustCurrentNetwork()
+                IntentDispatcher.donateTrustCurrentNetwork()
+                IntentDispatcher.donateUntrustCurrentNetwork()
             }
 
             guard trustedNetworks.addCurrentWifi() else {
@@ -839,8 +839,8 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .trustedMobile:
             if #available(iOS 12, *) {
-                InteractionsHandler.donateTrustCellularNetwork()
-                InteractionsHandler.donateUntrustCellularNetwork()
+                IntentDispatcher.donateTrustCellularNetwork()
+                IntentDispatcher.donateUntrustCellularNetwork()
             }
 
             trustedNetworks.setMobile(cell.isOn)
@@ -1104,7 +1104,7 @@ extension ServiceViewController: ProviderPoolViewControllerDelegate {
         vpn.reinstallIfEnabled()
 
         if #available(iOS 12, *) {
-            InteractionsHandler.donateConnection(with: uncheckedProviderProfile)
+            IntentDispatcher.donateConnection(with: uncheckedProviderProfile)
         }
     }
 }
