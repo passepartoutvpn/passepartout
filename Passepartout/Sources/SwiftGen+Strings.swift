@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
 
@@ -10,700 +10,700 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
-internal enum L10n {
+public enum L10n {
 
-  internal enum About {
+  public enum About {
     /// About
-    internal static let title = L10n.tr("Localizable", "about.title")
-    internal enum Cells {
-      internal enum Disclaimer {
+    public static let title = L10n.tr("Localizable", "about.title")
+    public enum Cells {
+      public enum Disclaimer {
         /// Disclaimer
-        internal static let caption = L10n.tr("Localizable", "about.cells.disclaimer.caption")
+        public static let caption = L10n.tr("Localizable", "about.cells.disclaimer.caption")
       }
-      internal enum Faq {
+      public enum Faq {
         /// FAQ
-        internal static let caption = L10n.tr("Localizable", "about.cells.faq.caption")
+        public static let caption = L10n.tr("Localizable", "about.cells.faq.caption")
       }
-      internal enum JoinCommunity {
+      public enum JoinCommunity {
         /// Join community
-        internal static let caption = L10n.tr("Localizable", "about.cells.join_community.caption")
+        public static let caption = L10n.tr("Localizable", "about.cells.join_community.caption")
       }
-      internal enum PrivacyPolicy {
+      public enum PrivacyPolicy {
         /// Privacy policy
-        internal static let caption = L10n.tr("Localizable", "about.cells.privacy_policy.caption")
+        public static let caption = L10n.tr("Localizable", "about.cells.privacy_policy.caption")
       }
-      internal enum ShareGeneric {
+      public enum ShareGeneric {
         /// Invite a friend
-        internal static let caption = L10n.tr("Localizable", "about.cells.share_generic.caption")
+        public static let caption = L10n.tr("Localizable", "about.cells.share_generic.caption")
       }
-      internal enum ShareTwitter {
+      public enum ShareTwitter {
         /// Tweet about it!
-        internal static let caption = L10n.tr("Localizable", "about.cells.share_twitter.caption")
+        public static let caption = L10n.tr("Localizable", "about.cells.share_twitter.caption")
       }
-      internal enum Website {
+      public enum Website {
         /// Home page
-        internal static let caption = L10n.tr("Localizable", "about.cells.website.caption")
+        public static let caption = L10n.tr("Localizable", "about.cells.website.caption")
       }
-      internal enum WriteReview {
+      public enum WriteReview {
         /// Write a review
-        internal static let caption = L10n.tr("Localizable", "about.cells.write_review.caption")
+        public static let caption = L10n.tr("Localizable", "about.cells.write_review.caption")
       }
     }
-    internal enum Sections {
-      internal enum Feedback {
+    public enum Sections {
+      public enum Feedback {
         /// Feedback
-        internal static let header = L10n.tr("Localizable", "about.sections.feedback.header")
+        public static let header = L10n.tr("Localizable", "about.sections.feedback.header")
       }
-      internal enum Share {
+      public enum Share {
         /// Share
-        internal static let header = L10n.tr("Localizable", "about.sections.share.header")
+        public static let header = L10n.tr("Localizable", "about.sections.share.header")
       }
-      internal enum Web {
+      public enum Web {
         /// Web
-        internal static let header = L10n.tr("Localizable", "about.sections.web.header")
+        public static let header = L10n.tr("Localizable", "about.sections.web.header")
       }
     }
   }
 
-  internal enum Account {
-    internal enum Cells {
-      internal enum Password {
+  public enum Account {
+    public enum Cells {
+      public enum Password {
         /// Password
-        internal static let caption = L10n.tr("Localizable", "account.cells.password.caption")
+        public static let caption = L10n.tr("Localizable", "account.cells.password.caption")
         /// secret
-        internal static let placeholder = L10n.tr("Localizable", "account.cells.password.placeholder")
+        public static let placeholder = L10n.tr("Localizable", "account.cells.password.placeholder")
       }
-      internal enum Username {
+      public enum Username {
         /// Username
-        internal static let caption = L10n.tr("Localizable", "account.cells.username.caption")
+        public static let caption = L10n.tr("Localizable", "account.cells.username.caption")
         /// username
-        internal static let placeholder = L10n.tr("Localizable", "account.cells.username.placeholder")
+        public static let placeholder = L10n.tr("Localizable", "account.cells.username.placeholder")
       }
     }
-    internal enum SuggestionFooter {
+    public enum SuggestionFooter {
       /// Don't have an account? Tap here to get one.
-      internal static let referral = L10n.tr("Localizable", "account.suggestion_footer.referral")
-      internal enum Infrastructure {
+      public static let referral = L10n.tr("Localizable", "account.suggestion_footer.referral")
+      public enum Infrastructure {
         /// Use your website credentials. Your username is usually numeric with a "p" prefix.
-        internal static let pia = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.pia")
+        public static let pia = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.pia")
         /// Use your website credentials. Your username is usually your email.
-        internal static let tunnelbear = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.tunnelbear")
+        public static let tunnelbear = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.tunnelbear")
       }
     }
   }
 
-  internal enum Configuration {
-    internal enum Cells {
-      internal enum Cipher {
+  public enum Configuration {
+    public enum Cells {
+      public enum Cipher {
         /// Cipher
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.cipher.caption")
+        public static let caption = L10n.tr("Localizable", "configuration.cells.cipher.caption")
       }
-      internal enum Client {
+      public enum Client {
         /// Client certificate
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.client.caption")
-        internal enum Value {
+        public static let caption = L10n.tr("Localizable", "configuration.cells.client.caption")
+        public enum Value {
           /// Not verified
-          internal static let disabled = L10n.tr("Localizable", "configuration.cells.client.value.disabled")
+          public static let disabled = L10n.tr("Localizable", "configuration.cells.client.value.disabled")
           /// Verified
-          internal static let enabled = L10n.tr("Localizable", "configuration.cells.client.value.enabled")
+          public static let enabled = L10n.tr("Localizable", "configuration.cells.client.value.enabled")
         }
       }
-      internal enum CompressionAlgorithm {
+      public enum CompressionAlgorithm {
         /// Compression
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.compression_algorithm.caption")
-        internal enum Value {
+        public static let caption = L10n.tr("Localizable", "configuration.cells.compression_algorithm.caption")
+        public enum Value {
           /// Disabled
-          internal static let disabled = L10n.tr("Localizable", "configuration.cells.compression_algorithm.value.disabled")
+          public static let disabled = L10n.tr("Localizable", "configuration.cells.compression_algorithm.value.disabled")
         }
       }
-      internal enum CompressionFrame {
+      public enum CompressionFrame {
         /// Framing
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.compression_frame.caption")
-        internal enum Value {
+        public static let caption = L10n.tr("Localizable", "configuration.cells.compression_frame.caption")
+        public enum Value {
           /// Compress
-          internal static let compress = L10n.tr("Localizable", "configuration.cells.compression_frame.value.compress")
+          public static let compress = L10n.tr("Localizable", "configuration.cells.compression_frame.value.compress")
           /// None
-          internal static let disabled = L10n.tr("Localizable", "configuration.cells.compression_frame.value.disabled")
+          public static let disabled = L10n.tr("Localizable", "configuration.cells.compression_frame.value.disabled")
           /// LZO
-          internal static let lzo = L10n.tr("Localizable", "configuration.cells.compression_frame.value.lzo")
+          public static let lzo = L10n.tr("Localizable", "configuration.cells.compression_frame.value.lzo")
         }
       }
-      internal enum Digest {
+      public enum Digest {
         /// Authentication
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.digest.caption")
-        internal enum Value {
+        public static let caption = L10n.tr("Localizable", "configuration.cells.digest.caption")
+        public enum Value {
           /// Embedded
-          internal static let embedded = L10n.tr("Localizable", "configuration.cells.digest.value.embedded")
+          public static let embedded = L10n.tr("Localizable", "configuration.cells.digest.value.embedded")
         }
       }
-      internal enum DnsServer {
+      public enum DnsServer {
         /// Address
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.dns_server.caption")
+        public static let caption = L10n.tr("Localizable", "configuration.cells.dns_server.caption")
       }
-      internal enum KeepAlive {
+      public enum KeepAlive {
         /// Keep-alive
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.keep_alive.caption")
-        internal enum Value {
+        public static let caption = L10n.tr("Localizable", "configuration.cells.keep_alive.caption")
+        public enum Value {
           /// Disabled
-          internal static let never = L10n.tr("Localizable", "configuration.cells.keep_alive.value.never")
+          public static let never = L10n.tr("Localizable", "configuration.cells.keep_alive.value.never")
           /// %d seconds
-          internal static func seconds(_ p1: Int) -> String {
+          public static func seconds(_ p1: Int) -> String {
             return L10n.tr("Localizable", "configuration.cells.keep_alive.value.seconds", p1)
           }
         }
       }
-      internal enum RenegotiationSeconds {
+      public enum RenegotiationSeconds {
         /// Renegotiation
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.renegotiation_seconds.caption")
-        internal enum Value {
+        public static let caption = L10n.tr("Localizable", "configuration.cells.renegotiation_seconds.caption")
+        public enum Value {
           /// after %@
-          internal static func after(_ p1: String) -> String {
+          public static func after(_ p1: String) -> String {
             return L10n.tr("Localizable", "configuration.cells.renegotiation_seconds.value.after", p1)
           }
           /// Disabled
-          internal static let never = L10n.tr("Localizable", "configuration.cells.renegotiation_seconds.value.never")
+          public static let never = L10n.tr("Localizable", "configuration.cells.renegotiation_seconds.value.never")
         }
       }
-      internal enum ResetOriginal {
+      public enum ResetOriginal {
         /// Reset configuration
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.reset_original.caption")
+        public static let caption = L10n.tr("Localizable", "configuration.cells.reset_original.caption")
       }
-      internal enum TlsWrapping {
+      public enum TlsWrapping {
         /// Wrapping
-        internal static let caption = L10n.tr("Localizable", "configuration.cells.tls_wrapping.caption")
-        internal enum Value {
+        public static let caption = L10n.tr("Localizable", "configuration.cells.tls_wrapping.caption")
+        public enum Value {
           /// Authentication
-          internal static let auth = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.auth")
+          public static let auth = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.auth")
           /// Encryption
-          internal static let crypt = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.crypt")
+          public static let crypt = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.crypt")
           /// Disabled
-          internal static let disabled = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.disabled")
+          public static let disabled = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.disabled")
         }
       }
     }
-    internal enum Sections {
-      internal enum Communication {
+    public enum Sections {
+      public enum Communication {
         /// Communication
-        internal static let header = L10n.tr("Localizable", "configuration.sections.communication.header")
+        public static let header = L10n.tr("Localizable", "configuration.sections.communication.header")
       }
-      internal enum Dns {
+      public enum Dns {
         /// DNS
-        internal static let header = L10n.tr("Localizable", "configuration.sections.dns.header")
+        public static let header = L10n.tr("Localizable", "configuration.sections.dns.header")
       }
-      internal enum Other {
+      public enum Other {
         /// Other
-        internal static let header = L10n.tr("Localizable", "configuration.sections.other.header")
+        public static let header = L10n.tr("Localizable", "configuration.sections.other.header")
       }
-      internal enum Reset {
+      public enum Reset {
         /// If you ended up with broken connectivity after changing the communication parameters, tap to revert to the original configuration.
-        internal static let footer = L10n.tr("Localizable", "configuration.sections.reset.footer")
+        public static let footer = L10n.tr("Localizable", "configuration.sections.reset.footer")
       }
-      internal enum Tls {
+      public enum Tls {
         /// TLS
-        internal static let header = L10n.tr("Localizable", "configuration.sections.tls.header")
+        public static let header = L10n.tr("Localizable", "configuration.sections.tls.header")
       }
     }
   }
 
-  internal enum Credits {
+  public enum Credits {
     /// Credits
-    internal static let title = L10n.tr("Localizable", "credits.title")
-    internal enum Sections {
-      internal enum Licenses {
+    public static let title = L10n.tr("Localizable", "credits.title")
+    public enum Sections {
+      public enum Licenses {
         /// Licenses
-        internal static let header = L10n.tr("Localizable", "credits.sections.licenses.header")
+        public static let header = L10n.tr("Localizable", "credits.sections.licenses.header")
       }
-      internal enum Notices {
+      public enum Notices {
         /// Notices
-        internal static let header = L10n.tr("Localizable", "credits.sections.notices.header")
+        public static let header = L10n.tr("Localizable", "credits.sections.notices.header")
       }
     }
   }
 
-  internal enum DebugLog {
-    internal enum Alerts {
-      internal enum EmptyLog {
+  public enum DebugLog {
+    public enum Alerts {
+      public enum EmptyLog {
         /// The debug log is empty.
-        internal static let message = L10n.tr("Localizable", "debug_log.alerts.empty_log.message")
+        public static let message = L10n.tr("Localizable", "debug_log.alerts.empty_log.message")
       }
     }
-    internal enum Buttons {
+    public enum Buttons {
       /// Next
-      internal static let next = L10n.tr("Localizable", "debug_log.buttons.next")
+      public static let next = L10n.tr("Localizable", "debug_log.buttons.next")
       /// Previous
-      internal static let previous = L10n.tr("Localizable", "debug_log.buttons.previous")
+      public static let previous = L10n.tr("Localizable", "debug_log.buttons.previous")
     }
   }
 
-  internal enum Endpoint {
-    internal enum Cells {
-      internal enum AnyAddress {
+  public enum Endpoint {
+    public enum Cells {
+      public enum AnyAddress {
         /// Any
-        internal static let caption = L10n.tr("Localizable", "endpoint.cells.any_address.caption")
+        public static let caption = L10n.tr("Localizable", "endpoint.cells.any_address.caption")
       }
-      internal enum AnyProtocol {
+      public enum AnyProtocol {
         /// Any
-        internal static let caption = L10n.tr("Localizable", "endpoint.cells.any_protocol.caption")
+        public static let caption = L10n.tr("Localizable", "endpoint.cells.any_protocol.caption")
       }
     }
-    internal enum Sections {
-      internal enum LocationAddresses {
+    public enum Sections {
+      public enum LocationAddresses {
         /// Addresses
-        internal static let header = L10n.tr("Localizable", "endpoint.sections.location_addresses.header")
+        public static let header = L10n.tr("Localizable", "endpoint.sections.location_addresses.header")
       }
-      internal enum LocationProtocols {
+      public enum LocationProtocols {
         /// Protocols
-        internal static let header = L10n.tr("Localizable", "endpoint.sections.location_protocols.header")
+        public static let header = L10n.tr("Localizable", "endpoint.sections.location_protocols.header")
       }
     }
   }
 
-  internal enum Global {
+  public enum Global {
     /// Cancel
-    internal static let cancel = L10n.tr("Localizable", "global.cancel")
+    public static let cancel = L10n.tr("Localizable", "global.cancel")
     /// Next
-    internal static let next = L10n.tr("Localizable", "global.next")
+    public static let next = L10n.tr("Localizable", "global.next")
     /// OK
-    internal static let ok = L10n.tr("Localizable", "global.ok")
-    internal enum Host {
-      internal enum TitleInput {
+    public static let ok = L10n.tr("Localizable", "global.ok")
+    public enum Host {
+      public enum TitleInput {
         /// Acceptable characters are alphanumerics plus dash "-", underscore "_" and dot ".".
-        internal static let message = L10n.tr("Localizable", "global.host.title_input.message")
+        public static let message = L10n.tr("Localizable", "global.host.title_input.message")
         /// My Profile
-        internal static let placeholder = L10n.tr("Localizable", "global.host.title_input.placeholder")
+        public static let placeholder = L10n.tr("Localizable", "global.host.title_input.placeholder")
       }
     }
   }
 
-  internal enum ImportedHosts {
+  public enum ImportedHosts {
     /// Imported hosts
-    internal static let title = L10n.tr("Localizable", "imported_hosts.title")
+    public static let title = L10n.tr("Localizable", "imported_hosts.title")
   }
 
-  internal enum IssueReporter {
+  public enum IssueReporter {
     /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the email attachments if unsure.
-    internal static let message = L10n.tr("Localizable", "issue_reporter.message")
+    public static let message = L10n.tr("Localizable", "issue_reporter.message")
     /// Report issue
-    internal static let title = L10n.tr("Localizable", "issue_reporter.title")
-    internal enum Alerts {
-      internal enum EmailNotConfigured {
+    public static let title = L10n.tr("Localizable", "issue_reporter.title")
+    public enum Alerts {
+      public enum EmailNotConfigured {
         /// No e-mail account is configured.
-        internal static let message = L10n.tr("Localizable", "issue_reporter.alerts.email_not_configured.message")
+        public static let message = L10n.tr("Localizable", "issue_reporter.alerts.email_not_configured.message")
       }
     }
-    internal enum Buttons {
+    public enum Buttons {
       /// I understand
-      internal static let accept = L10n.tr("Localizable", "issue_reporter.buttons.accept")
+      public static let accept = L10n.tr("Localizable", "issue_reporter.buttons.accept")
     }
-    internal enum Email {
+    public enum Email {
       /// Hi,\n\n%@\n\n%@\n\nRegards
-      internal static func body(_ p1: String, _ p2: String) -> String {
+      public static func body(_ p1: String, _ p2: String) -> String {
         return L10n.tr("Localizable", "issue_reporter.email.body", p1, p2)
       }
       /// description of the issue:
-      internal static let description = L10n.tr("Localizable", "issue_reporter.email.description")
+      public static let description = L10n.tr("Localizable", "issue_reporter.email.description")
       /// %@ - Report issue
-      internal static func subject(_ p1: String) -> String {
+      public static func subject(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue_reporter.email.subject", p1)
       }
     }
   }
 
-  internal enum Label {
-    internal enum License {
+  public enum Label {
+    public enum License {
       /// Unable to download full license content.
-      internal static let error = L10n.tr("Localizable", "label.license.error")
+      public static let error = L10n.tr("Localizable", "label.license.error")
     }
   }
 
-  internal enum Organizer {
-    internal enum Alerts {
-      internal enum AddHost {
+  public enum Organizer {
+    public enum Alerts {
+      public enum AddHost {
         /// Open an URL to an .ovpn configuration file from Safari, Mail or another app to set up a host profile.\n\nYou can also import an .ovpn with iTunes File Sharing.
-        internal static let message = L10n.tr("Localizable", "organizer.alerts.add_host.message")
+        public static let message = L10n.tr("Localizable", "organizer.alerts.add_host.message")
       }
-      internal enum DeleteVpnProfile {
+      public enum DeleteVpnProfile {
         /// Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your network and host profiles.
-        internal static let message = L10n.tr("Localizable", "organizer.alerts.delete_vpn_profile.message")
+        public static let message = L10n.tr("Localizable", "organizer.alerts.delete_vpn_profile.message")
       }
-      internal enum ExhaustedProviders {
+      public enum ExhaustedProviders {
         /// You have created profiles for any available network.
-        internal static let message = L10n.tr("Localizable", "organizer.alerts.exhausted_providers.message")
+        public static let message = L10n.tr("Localizable", "organizer.alerts.exhausted_providers.message")
       }
     }
-    internal enum Cells {
-      internal enum About {
+    public enum Cells {
+      public enum About {
         /// About %@
-        internal static func caption(_ p1: String) -> String {
+        public static func caption(_ p1: String) -> String {
           return L10n.tr("Localizable", "organizer.cells.about.caption", p1)
         }
       }
-      internal enum AddHost {
+      public enum AddHost {
         /// Add new host
-        internal static let caption = L10n.tr("Localizable", "organizer.cells.add_host.caption")
+        public static let caption = L10n.tr("Localizable", "organizer.cells.add_host.caption")
       }
-      internal enum AddProvider {
+      public enum AddProvider {
         /// Add new network
-        internal static let caption = L10n.tr("Localizable", "organizer.cells.add_provider.caption")
+        public static let caption = L10n.tr("Localizable", "organizer.cells.add_provider.caption")
       }
-      internal enum Profile {
-        internal enum Value {
+      public enum Profile {
+        public enum Value {
           /// In use
-          internal static let current = L10n.tr("Localizable", "organizer.cells.profile.value.current")
+          public static let current = L10n.tr("Localizable", "organizer.cells.profile.value.current")
         }
       }
-      internal enum Uninstall {
+      public enum Uninstall {
         /// Remove VPN configuration
-        internal static let caption = L10n.tr("Localizable", "organizer.cells.uninstall.caption")
+        public static let caption = L10n.tr("Localizable", "organizer.cells.uninstall.caption")
       }
     }
-    internal enum Sections {
-      internal enum Hosts {
+    public enum Sections {
+      public enum Hosts {
         /// Import hosts from raw .ovpn configuration files.
-        internal static let footer = L10n.tr("Localizable", "organizer.sections.hosts.footer")
+        public static let footer = L10n.tr("Localizable", "organizer.sections.hosts.footer")
         /// Hosts
-        internal static let header = L10n.tr("Localizable", "organizer.sections.hosts.header")
+        public static let header = L10n.tr("Localizable", "organizer.sections.hosts.header")
       }
-      internal enum Providers {
+      public enum Providers {
         /// Here you find a few public infrastructures offering preset configuration profiles.
-        internal static let footer = L10n.tr("Localizable", "organizer.sections.providers.footer")
+        public static let footer = L10n.tr("Localizable", "organizer.sections.providers.footer")
         /// Networks
-        internal static let header = L10n.tr("Localizable", "organizer.sections.providers.header")
+        public static let header = L10n.tr("Localizable", "organizer.sections.providers.header")
       }
     }
   }
 
-  internal enum ParsedFile {
-    internal enum Alerts {
-      internal enum Buttons {
+  public enum ParsedFile {
+    public enum Alerts {
+      public enum Buttons {
         /// Report an issue
-        internal static let report = L10n.tr("Localizable", "parsed_file.alerts.buttons.report")
+        public static let report = L10n.tr("Localizable", "parsed_file.alerts.buttons.report")
       }
-      internal enum Missing {
+      public enum Missing {
         /// The configuration file lacks a required option (%@).
-        internal static func message(_ p1: String) -> String {
+        public static func message(_ p1: String) -> String {
           return L10n.tr("Localizable", "parsed_file.alerts.missing.message", p1)
         }
       }
-      internal enum Parsing {
+      public enum Parsing {
         /// Unable to parse the provided configuration file (%@).
-        internal static func message(_ p1: String) -> String {
+        public static func message(_ p1: String) -> String {
           return L10n.tr("Localizable", "parsed_file.alerts.parsing.message", p1)
         }
       }
-      internal enum PotentiallyUnsupported {
+      public enum PotentiallyUnsupported {
         /// The configuration file is correct but contains a potentially unsupported option (%@).\n\nConnectivity may break depending on server settings.
-        internal static func message(_ p1: String) -> String {
+        public static func message(_ p1: String) -> String {
           return L10n.tr("Localizable", "parsed_file.alerts.potentially_unsupported.message", p1)
         }
       }
-      internal enum Unsupported {
+      public enum Unsupported {
         /// The configuration file contains an unsupported option (%@).
-        internal static func message(_ p1: String) -> String {
+        public static func message(_ p1: String) -> String {
           return L10n.tr("Localizable", "parsed_file.alerts.unsupported.message", p1)
         }
       }
     }
   }
 
-  internal enum Provider {
-    internal enum Preset {
-      internal enum Cells {
-        internal enum TechDetails {
+  public enum Provider {
+    public enum Preset {
+      public enum Cells {
+        public enum TechDetails {
           /// Technical details
-          internal static let caption = L10n.tr("Localizable", "provider.preset.cells.tech_details.caption")
+          public static let caption = L10n.tr("Localizable", "provider.preset.cells.tech_details.caption")
         }
       }
     }
   }
 
-  internal enum Reddit {
+  public enum Reddit {
     /// Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.
-    internal static let message = L10n.tr("Localizable", "reddit.message")
+    public static let message = L10n.tr("Localizable", "reddit.message")
     /// Reddit
-    internal static let title = L10n.tr("Localizable", "reddit.title")
-    internal enum Buttons {
+    public static let title = L10n.tr("Localizable", "reddit.title")
+    public enum Buttons {
       /// Don't ask again
-      internal static let never = L10n.tr("Localizable", "reddit.buttons.never")
+      public static let never = L10n.tr("Localizable", "reddit.buttons.never")
       /// Remind me later
-      internal static let remind = L10n.tr("Localizable", "reddit.buttons.remind")
+      public static let remind = L10n.tr("Localizable", "reddit.buttons.remind")
       /// Subscribe now!
-      internal static let subscribe = L10n.tr("Localizable", "reddit.buttons.subscribe")
+      public static let subscribe = L10n.tr("Localizable", "reddit.buttons.subscribe")
     }
   }
 
-  internal enum Service {
-    internal enum Alerts {
-      internal enum CredentialsNeeded {
+  public enum Service {
+    public enum Alerts {
+      public enum CredentialsNeeded {
         /// You need to enter account credentials first.
-        internal static let message = L10n.tr("Localizable", "service.alerts.credentials_needed.message")
+        public static let message = L10n.tr("Localizable", "service.alerts.credentials_needed.message")
       }
-      internal enum DataCount {
-        internal enum Messages {
+      public enum DataCount {
+        public enum Messages {
           /// Received: %llu\nSent: %llu
-          internal static func current(_ p1: Int, _ p2: Int) -> String {
+          public static func current(_ p1: Int, _ p2: Int) -> String {
             return L10n.tr("Localizable", "service.alerts.data_count.messages.current", p1, p2)
           }
           /// Information not available, are you connected?
-          internal static let notAvailable = L10n.tr("Localizable", "service.alerts.data_count.messages.not_available")
+          public static let notAvailable = L10n.tr("Localizable", "service.alerts.data_count.messages.not_available")
         }
       }
-      internal enum ReconnectVpn {
+      public enum ReconnectVpn {
         /// Do you want to reconnect to the VPN?
-        internal static let message = L10n.tr("Localizable", "service.alerts.reconnect_vpn.message")
+        public static let message = L10n.tr("Localizable", "service.alerts.reconnect_vpn.message")
       }
-      internal enum Rename {
+      public enum Rename {
         /// Rename profile
-        internal static let title = L10n.tr("Localizable", "service.alerts.rename.title")
+        public static let title = L10n.tr("Localizable", "service.alerts.rename.title")
       }
-      internal enum TestConnectivity {
+      public enum TestConnectivity {
         /// Connectivity
-        internal static let title = L10n.tr("Localizable", "service.alerts.test_connectivity.title")
-        internal enum Messages {
+        public static let title = L10n.tr("Localizable", "service.alerts.test_connectivity.title")
+        public enum Messages {
           /// Your device has no Internet connectivity, please review your profile parameters.
-          internal static let failure = L10n.tr("Localizable", "service.alerts.test_connectivity.messages.failure")
+          public static let failure = L10n.tr("Localizable", "service.alerts.test_connectivity.messages.failure")
           /// Your device is connected to the Internet!
-          internal static let success = L10n.tr("Localizable", "service.alerts.test_connectivity.messages.success")
+          public static let success = L10n.tr("Localizable", "service.alerts.test_connectivity.messages.success")
         }
       }
-      internal enum Trusted {
-        internal enum NoNetwork {
+      public enum Trusted {
+        public enum NoNetwork {
           /// You are not connected to any Wi-Fi network.
-          internal static let message = L10n.tr("Localizable", "service.alerts.trusted.no_network.message")
+          public static let message = L10n.tr("Localizable", "service.alerts.trusted.no_network.message")
         }
-        internal enum WillDisconnectPolicy {
+        public enum WillDisconnectPolicy {
           /// By changing the trust policy, the VPN may be disconnected. Continue?
-          internal static let message = L10n.tr("Localizable", "service.alerts.trusted.will_disconnect_policy.message")
+          public static let message = L10n.tr("Localizable", "service.alerts.trusted.will_disconnect_policy.message")
         }
-        internal enum WillDisconnectTrusted {
+        public enum WillDisconnectTrusted {
           /// By trusting this network, the VPN may be disconnected. Continue?
-          internal static let message = L10n.tr("Localizable", "service.alerts.trusted.will_disconnect_trusted.message")
+          public static let message = L10n.tr("Localizable", "service.alerts.trusted.will_disconnect_trusted.message")
         }
       }
     }
-    internal enum Cells {
-      internal enum Account {
+    public enum Cells {
+      public enum Account {
         /// Account
-        internal static let caption = L10n.tr("Localizable", "service.cells.account.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.account.caption")
         /// None configured
-        internal static let `none` = L10n.tr("Localizable", "service.cells.account.none")
+        public static let `none` = L10n.tr("Localizable", "service.cells.account.none")
       }
-      internal enum ConnectionStatus {
+      public enum ConnectionStatus {
         /// Status
-        internal static let caption = L10n.tr("Localizable", "service.cells.connection_status.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.connection_status.caption")
       }
-      internal enum DataCount {
+      public enum DataCount {
         /// Exchanged bytes count
-        internal static let caption = L10n.tr("Localizable", "service.cells.data_count.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.data_count.caption")
       }
-      internal enum DebugLog {
+      public enum DebugLog {
         /// Debug log
-        internal static let caption = L10n.tr("Localizable", "service.cells.debug_log.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.debug_log.caption")
       }
-      internal enum Endpoint {
+      public enum Endpoint {
         /// Endpoint
-        internal static let caption = L10n.tr("Localizable", "service.cells.endpoint.caption")
-        internal enum Value {
+        public static let caption = L10n.tr("Localizable", "service.cells.endpoint.caption")
+        public enum Value {
           /// Automatic
-          internal static let automatic = L10n.tr("Localizable", "service.cells.endpoint.value.automatic")
+          public static let automatic = L10n.tr("Localizable", "service.cells.endpoint.value.automatic")
           /// Manual
-          internal static let manual = L10n.tr("Localizable", "service.cells.endpoint.value.manual")
+          public static let manual = L10n.tr("Localizable", "service.cells.endpoint.value.manual")
         }
       }
-      internal enum Host {
-        internal enum Parameters {
+      public enum Host {
+        public enum Parameters {
           /// Parameters
-          internal static let caption = L10n.tr("Localizable", "service.cells.host.parameters.caption")
-          internal enum Value {
+          public static let caption = L10n.tr("Localizable", "service.cells.host.parameters.caption")
+          public enum Value {
             /// %@
-            internal static func cipher(_ p1: String) -> String {
+            public static func cipher(_ p1: String) -> String {
               return L10n.tr("Localizable", "service.cells.host.parameters.value.cipher", p1)
             }
             /// %@ / %@
-            internal static func cipherDigest(_ p1: String, _ p2: String) -> String {
+            public static func cipherDigest(_ p1: String, _ p2: String) -> String {
               return L10n.tr("Localizable", "service.cells.host.parameters.value.cipher_digest", p1, p2)
             }
           }
         }
       }
-      internal enum Provider {
-        internal enum Pool {
+      public enum Provider {
+        public enum Pool {
           /// Location
-          internal static let caption = L10n.tr("Localizable", "service.cells.provider.pool.caption")
+          public static let caption = L10n.tr("Localizable", "service.cells.provider.pool.caption")
         }
-        internal enum Preset {
+        public enum Preset {
           /// Preset
-          internal static let caption = L10n.tr("Localizable", "service.cells.provider.preset.caption")
+          public static let caption = L10n.tr("Localizable", "service.cells.provider.preset.caption")
         }
-        internal enum Refresh {
+        public enum Refresh {
           /// Refresh infrastructure
-          internal static let caption = L10n.tr("Localizable", "service.cells.provider.refresh.caption")
+          public static let caption = L10n.tr("Localizable", "service.cells.provider.refresh.caption")
         }
       }
-      internal enum Reconnect {
+      public enum Reconnect {
         /// Reconnect
-        internal static let caption = L10n.tr("Localizable", "service.cells.reconnect.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.reconnect.caption")
       }
-      internal enum ReportIssue {
+      public enum ReportIssue {
         /// Report connectivity issue
-        internal static let caption = L10n.tr("Localizable", "service.cells.report_issue.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.report_issue.caption")
       }
-      internal enum TestConnectivity {
+      public enum TestConnectivity {
         /// Test connectivity
-        internal static let caption = L10n.tr("Localizable", "service.cells.test_connectivity.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.test_connectivity.caption")
       }
-      internal enum TrustedAddWifi {
+      public enum TrustedAddWifi {
         /// Add current Wi-Fi
-        internal static let caption = L10n.tr("Localizable", "service.cells.trusted_add_wifi.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.trusted_add_wifi.caption")
       }
-      internal enum TrustedMobile {
+      public enum TrustedMobile {
         /// Cellular network
-        internal static let caption = L10n.tr("Localizable", "service.cells.trusted_mobile.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.trusted_mobile.caption")
       }
-      internal enum TrustedPolicy {
+      public enum TrustedPolicy {
         /// Trust disables VPN
-        internal static let caption = L10n.tr("Localizable", "service.cells.trusted_policy.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.trusted_policy.caption")
       }
-      internal enum TrustedWifi {
+      public enum TrustedWifi {
         /// %@
-        internal static func caption(_ p1: String) -> String {
+        public static func caption(_ p1: String) -> String {
           return L10n.tr("Localizable", "service.cells.trusted_wifi.caption", p1)
         }
       }
-      internal enum UseProfile {
+      public enum UseProfile {
         /// Use this profile
-        internal static let caption = L10n.tr("Localizable", "service.cells.use_profile.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.use_profile.caption")
       }
-      internal enum VpnResolvesHostname {
+      public enum VpnResolvesHostname {
         /// Resolve server hostname
-        internal static let caption = L10n.tr("Localizable", "service.cells.vpn_resolves_hostname.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.vpn_resolves_hostname.caption")
       }
-      internal enum VpnService {
+      public enum VpnService {
         /// Enabled
-        internal static let caption = L10n.tr("Localizable", "service.cells.vpn_service.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.vpn_service.caption")
       }
-      internal enum VpnSurvivesSleep {
+      public enum VpnSurvivesSleep {
         /// Keep alive on sleep
-        internal static let caption = L10n.tr("Localizable", "service.cells.vpn_survives_sleep.caption")
+        public static let caption = L10n.tr("Localizable", "service.cells.vpn_survives_sleep.caption")
       }
     }
-    internal enum Sections {
-      internal enum Configuration {
+    public enum Sections {
+      public enum Configuration {
         /// Configuration
-        internal static let header = L10n.tr("Localizable", "service.sections.configuration.header")
+        public static let header = L10n.tr("Localizable", "service.sections.configuration.header")
       }
-      internal enum Diagnostics {
+      public enum Diagnostics {
         /// Diagnostics
-        internal static let header = L10n.tr("Localizable", "service.sections.diagnostics.header")
+        public static let header = L10n.tr("Localizable", "service.sections.diagnostics.header")
       }
-      internal enum General {
+      public enum General {
         /// General
-        internal static let header = L10n.tr("Localizable", "service.sections.general.header")
+        public static let header = L10n.tr("Localizable", "service.sections.general.header")
       }
-      internal enum ProviderInfrastructure {
+      public enum ProviderInfrastructure {
         /// Last updated on %@.
-        internal static func footer(_ p1: String) -> String {
+        public static func footer(_ p1: String) -> String {
           return L10n.tr("Localizable", "service.sections.provider_infrastructure.footer", p1)
         }
       }
-      internal enum Status {
+      public enum Status {
         /// Connection
-        internal static let header = L10n.tr("Localizable", "service.sections.status.header")
+        public static let header = L10n.tr("Localizable", "service.sections.status.header")
       }
-      internal enum Trusted {
+      public enum Trusted {
         /// When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.
-        internal static let footer = L10n.tr("Localizable", "service.sections.trusted.footer")
+        public static let footer = L10n.tr("Localizable", "service.sections.trusted.footer")
         /// Trusted networks
-        internal static let header = L10n.tr("Localizable", "service.sections.trusted.header")
+        public static let header = L10n.tr("Localizable", "service.sections.trusted.header")
       }
-      internal enum Vpn {
+      public enum Vpn {
         /// The connection will be established whenever necessary.
-        internal static let footer = L10n.tr("Localizable", "service.sections.vpn.footer")
+        public static let footer = L10n.tr("Localizable", "service.sections.vpn.footer")
         /// VPN
-        internal static let header = L10n.tr("Localizable", "service.sections.vpn.header")
+        public static let header = L10n.tr("Localizable", "service.sections.vpn.header")
       }
-      internal enum VpnResolvesHostname {
+      public enum VpnResolvesHostname {
         /// Preferred in most networks and required in some IPv6 networks. Disable where DNS is blocked, or to speed up negotiation when DNS is slow to respond.
-        internal static let footer = L10n.tr("Localizable", "service.sections.vpn_resolves_hostname.footer")
+        public static let footer = L10n.tr("Localizable", "service.sections.vpn_resolves_hostname.footer")
       }
-      internal enum VpnSurvivesSleep {
+      public enum VpnSurvivesSleep {
         /// Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.
-        internal static let footer = L10n.tr("Localizable", "service.sections.vpn_survives_sleep.footer")
+        public static let footer = L10n.tr("Localizable", "service.sections.vpn_survives_sleep.footer")
       }
     }
-    internal enum Welcome {
+    public enum Welcome {
       /// Welcome to Passepartout!\n\nUse the organizer to add a new profile.
-      internal static let message = L10n.tr("Localizable", "service.welcome.message")
+      public static let message = L10n.tr("Localizable", "service.welcome.message")
     }
   }
 
-  internal enum Share {
+  public enum Share {
     /// Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS
-    internal static let message = L10n.tr("Localizable", "share.message")
+    public static let message = L10n.tr("Localizable", "share.message")
   }
 
-  internal enum Version {
+  public enum Version {
     /// Version
-    internal static let title = L10n.tr("Localizable", "version.title")
-    internal enum Buttons {
+    public static let title = L10n.tr("Localizable", "version.title")
+    public enum Buttons {
       /// CHANGELOG
-      internal static let changelog = L10n.tr("Localizable", "version.buttons.changelog")
+      public static let changelog = L10n.tr("Localizable", "version.buttons.changelog")
       /// CREDITS
-      internal static let credits = L10n.tr("Localizable", "version.buttons.credits")
+      public static let credits = L10n.tr("Localizable", "version.buttons.credits")
     }
-    internal enum Labels {
+    public enum Labels {
       /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.
-      internal static let intro = L10n.tr("Localizable", "version.labels.intro")
+      public static let intro = L10n.tr("Localizable", "version.labels.intro")
     }
   }
 
-  internal enum Vpn {
+  public enum Vpn {
     /// Active
-    internal static let active = L10n.tr("Localizable", "vpn.active")
+    public static let active = L10n.tr("Localizable", "vpn.active")
     /// Connecting
-    internal static let connecting = L10n.tr("Localizable", "vpn.connecting")
+    public static let connecting = L10n.tr("Localizable", "vpn.connecting")
     /// Disabled
-    internal static let disabled = L10n.tr("Localizable", "vpn.disabled")
+    public static let disabled = L10n.tr("Localizable", "vpn.disabled")
     /// Disconnecting
-    internal static let disconnecting = L10n.tr("Localizable", "vpn.disconnecting")
+    public static let disconnecting = L10n.tr("Localizable", "vpn.disconnecting")
     /// Inactive
-    internal static let inactive = L10n.tr("Localizable", "vpn.inactive")
-    internal enum Errors {
+    public static let inactive = L10n.tr("Localizable", "vpn.inactive")
+    public enum Errors {
       /// Auth failed
-      internal static let auth = L10n.tr("Localizable", "vpn.errors.auth")
+      public static let auth = L10n.tr("Localizable", "vpn.errors.auth")
       /// Compression unsupported
-      internal static let compression = L10n.tr("Localizable", "vpn.errors.compression")
+      public static let compression = L10n.tr("Localizable", "vpn.errors.compression")
       /// DNS failed
-      internal static let dns = L10n.tr("Localizable", "vpn.errors.dns")
+      public static let dns = L10n.tr("Localizable", "vpn.errors.dns")
       /// Encryption failed
-      internal static let encryption = L10n.tr("Localizable", "vpn.errors.encryption")
+      public static let encryption = L10n.tr("Localizable", "vpn.errors.encryption")
       /// Network changed
-      internal static let network = L10n.tr("Localizable", "vpn.errors.network")
+      public static let network = L10n.tr("Localizable", "vpn.errors.network")
       /// Timeout
-      internal static let timeout = L10n.tr("Localizable", "vpn.errors.timeout")
+      public static let timeout = L10n.tr("Localizable", "vpn.errors.timeout")
       /// TLS failed
-      internal static let tls = L10n.tr("Localizable", "vpn.errors.tls")
+      public static let tls = L10n.tr("Localizable", "vpn.errors.tls")
     }
   }
 
-  internal enum Wizards {
-    internal enum Host {
-      internal enum Alerts {
-        internal enum Existing {
+  public enum Wizards {
+    public enum Host {
+      public enum Alerts {
+        public enum Existing {
           /// A host profile with the same title already exists. Replace it?
-          internal static let message = L10n.tr("Localizable", "wizards.host.alerts.existing.message")
+          public static let message = L10n.tr("Localizable", "wizards.host.alerts.existing.message")
         }
       }
-      internal enum Cells {
-        internal enum TitleInput {
+      public enum Cells {
+        public enum TitleInput {
           /// Title
-          internal static let caption = L10n.tr("Localizable", "wizards.host.cells.title_input.caption")
+          public static let caption = L10n.tr("Localizable", "wizards.host.cells.title_input.caption")
         }
       }
-      internal enum Sections {
-        internal enum Existing {
+      public enum Sections {
+        public enum Existing {
           /// Existing profiles
-          internal static let header = L10n.tr("Localizable", "wizards.host.sections.existing.header")
+          public static let header = L10n.tr("Localizable", "wizards.host.sections.existing.header")
         }
       }
     }
@@ -716,6 +716,7 @@ internal enum L10n {
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
+    // swiftlint:disable:next nslocalizedstring_key
     let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
     return String(format: format, locale: Locale.current, arguments: args)
   }

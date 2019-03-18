@@ -4,6 +4,8 @@ strings:
     outputs:
         - templateName: structured-swift4
           output: Passepartout/Sources/SwiftGen+Strings.swift
+          params:
+            publicAccess: true
 
 ib:
     inputs:
