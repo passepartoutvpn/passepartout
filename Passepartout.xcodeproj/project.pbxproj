@@ -63,7 +63,6 @@
 		0E36D24D2240234B006AF062 /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D24C2240234B006AF062 /* ShortcutsViewController.swift */; };
 		0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36D25A22403469006AF062 /* Shortcuts.storyboard */; };
 		0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */; };
-		0E36D25D2240440B006AF062 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0ED993B32240105E00B0F9C9 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
@@ -72,6 +71,7 @@
 		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
 		0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64220C83FC7008323CF /* Assets.xcassets */; };
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
+		0E58BD9322404EF1006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0EA068F4218475F800C320AD /* ParsingResult+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ParsingResult+Alerts.swift */; };
@@ -90,7 +90,6 @@
 		0ED38AEA214054A50004D387 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE9214054A50004D387 /* OptionViewController.swift */; };
 		0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */; };
 		0ED993B1223FF8C700B0F9C9 /* IntentDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */; };
-		0ED993B52240105E00B0F9C9 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0ED993B32240105E00B0F9C9 /* Intents.intentdefinition */; };
 		0EDE8DC420C86910004C739C /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */; };
 		0EDE8DC820C86910004C739C /* Passepartout-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */; };
@@ -194,6 +193,7 @@
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E58BD9222404EF1006FB157 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
 		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
 		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
@@ -239,7 +239,6 @@
 		0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntentDispatcher.swift; path = Passepartout/Sources/Intents/IntentDispatcher.swift; sourceTree = SOURCE_ROOT; };
-		0ED993B42240105E00B0F9C9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Passepartout-Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		0EDE8DC520C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -356,7 +355,7 @@
 		0E50E7C422330E5100D5F76C /* Intents */ = {
 			isa = PBXGroup;
 			children = (
-				0ED993B32240105E00B0F9C9 /* Intents.intentdefinition */,
+				0E58BD9122404EF1006FB157 /* Intents.intentdefinition */,
 				0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */,
 			);
 			path = Intents;
@@ -963,7 +962,7 @@
 				0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */,
 				0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */,
 				0E3152C9223FA04D00F61841 /* InfrastructureFactory.swift in Sources */,
-				0ED993B52240105E00B0F9C9 /* Intents.intentdefinition in Sources */,
+				0E58BD9322404EF1006FB157 /* Intents.intentdefinition in Sources */,
 				0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */,
 				0E3152D4223FA05400F61841 /* Preferences.swift in Sources */,
 				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
@@ -986,7 +985,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */,
-				0E36D25D2240440B006AF062 /* Intents.intentdefinition in Sources */,
 				0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */,
 				0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */,
 				0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */,
@@ -1088,20 +1086,20 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		0E58BD9122404EF1006FB157 /* Intents.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E58BD9222404EF1006FB157 /* en */,
+			);
+			name = Intents.intentdefinition;
+			sourceTree = "<group>";
+		};
 		0ED38ADC213F44D00004D387 /* Organizer.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0ED38ADB213F44D00004D387 /* en */,
 			);
 			name = Organizer.storyboard;
-			sourceTree = "<group>";
-		};
-		0ED993B32240105E00B0F9C9 /* Intents.intentdefinition */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0ED993B42240105E00B0F9C9 /* en */,
-			);
-			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
