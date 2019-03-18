@@ -161,7 +161,7 @@ extension AppDelegate {
             return false
         }
         if #available(iOS 12, *) {
-            InteractionsHandler.handleInteraction(interaction)
+            IntentDispatcher.handleInteraction(interaction)
         }
         return true
     }

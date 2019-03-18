@@ -1,6 +1,6 @@
 //
-//  InteractionsHandler.swift
-//  Passepartout-iOS
+//  IntentDispatcher.swift
+//  Passepartout
 //
 //  Created by Davide De Rosa on 3/8/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
@@ -26,23 +26,22 @@
 import Foundation
 import Intents
 import SwiftyBeaver
-import Passepartout_Core
 
 private let log = SwiftyBeaver.self
 
-extension Notification.Name {
+public extension Notification.Name {
     static let IntentDidUpdateService = Notification.Name("IntentDidUpdateService")
 }
 
 @available(iOS 12, *)
-class InteractionsHandler {
+public class IntentDispatcher {
     private class Groups {
         static let vpn = "VPN"
         
         static let trust = "Trust"
     }
     
-    static func donateConnection(with profile: ConnectionProfile) {
+    public static func donateConnection(with profile: ConnectionProfile) {
         let profileKey = ProfileKey(profile)
         let genericIntent: INIntent
         
@@ -64,7 +63,7 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
     
-    static func donateEnableVPN() {
+    public static func donateEnableVPN() {
         let intent = EnableVPNIntent()
         
         let interaction = INInteraction(intent: intent, response: nil)
@@ -72,7 +71,7 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
     
-    static func donateDisableVPN() {
+    public static func donateDisableVPN() {
         let intent = DisableVPNIntent()
         
         let interaction = INInteraction(intent: intent, response: nil)
@@ -80,7 +79,7 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
     
-    static func donateTrustCurrentNetwork() {
+    public static func donateTrustCurrentNetwork() {
         let intent = TrustCurrentNetworkIntent()
 
         let interaction = INInteraction(intent: intent, response: nil)
@@ -88,7 +87,7 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
 
-    static func donateUntrustCurrentNetwork() {
+    public static func donateUntrustCurrentNetwork() {
         let intent = UntrustCurrentNetworkIntent()
         
         let interaction = INInteraction(intent: intent, response: nil)
@@ -96,7 +95,7 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
     
-    static func donateTrustCellularNetwork() {
+    public static func donateTrustCellularNetwork() {
         let intent = TrustCellularNetworkIntent()
         
         let interaction = INInteraction(intent: intent, response: nil)
@@ -104,7 +103,7 @@ class InteractionsHandler {
         interaction.donateAndLog()
     }
     
-    static func donateUntrustCellularNetwork() {
+    public static func donateUntrustCellularNetwork() {
         let intent = UntrustCellularNetworkIntent()
         
         let interaction = INInteraction(intent: intent, response: nil)
@@ -113,30 +112,36 @@ class InteractionsHandler {
     }
     
     //
-    
-    static func handleInteraction(_ interaction: INInteraction) {
-        if let custom = interaction.intent as? ConnectVPNIntent {
+
+    public static func handleInteraction(_ interaction: INInteraction) {
+        handleIntent(interaction.intent, interaction: interaction)
+    }
+
+    public static func handleIntent(_ intent: INIntent, interaction: INInteraction?) {
+        if let custom = intent as? ConnectVPNIntent {
             handleConnectVPN(custom, interaction: interaction)
-        } else if let custom = interaction.intent as? EnableVPNIntent {
+        } else if let custom = intent as? EnableVPNIntent {
             handleEnableVPN(custom, interaction: interaction)
-        } else if let custom = interaction.intent as? DisableVPNIntent {
+        } else if let custom = intent as? DisableVPNIntent {
             handleDisableVPN(custom, interaction: interaction)
-        } else if let custom = interaction.intent as? MoveToLocationIntent {
+        } else if let custom = intent as? MoveToLocationIntent {
             handleMoveToLocation(custom, interaction: interaction)
-        } else if let _ = interaction.intent as? TrustCurrentNetworkIntent {
+        } else if let _ = intent as? TrustCurrentNetworkIntent {
             handleCurrentNetwork(trust: true, interaction: interaction)
-        } else if let _ = interaction.intent as? UntrustCurrentNetworkIntent {
+        } else if let _ = intent as? UntrustCurrentNetworkIntent {
             handleCurrentNetwork(trust: false, interaction: interaction)
-        } else if let _ = interaction.intent as? TrustCellularNetworkIntent {
+        } else if let _ = intent as? TrustCellularNetworkIntent {
             handleCellularNetwork(trust: true, interaction: interaction)
-        } else if let _ = interaction.intent as? UntrustCellularNetworkIntent {
+        } else if let _ = intent as? UntrustCellularNetworkIntent {
             handleCellularNetwork(trust: false, interaction: interaction)
         }
     }
     
-    private static func handleConnectVPN(_ intent: ConnectVPNIntent, interaction: INInteraction) {
+    private static func handleConnectVPN(_ intent: ConnectVPNIntent, interaction: INInteraction?) {
         guard let contextValue = intent.context, let context = Context(rawValue: contextValue), let id = intent.profileId else {
-            INInteraction.delete(with: [interaction.identifier], completion: nil)
+            if let interactionIdentifier = interaction?.identifier {
+                INInteraction.delete(with: [interactionIdentifier], completion: nil)
+            }
             return
         }
         let profileKey = ProfileKey(context, id)
@@ -156,7 +161,7 @@ class InteractionsHandler {
         refreshVPN(service: service, doReconnect: true)
     }
 
-    private static func handleMoveToLocation(_ intent: MoveToLocationIntent, interaction: INInteraction) {
+    private static func handleMoveToLocation(_ intent: MoveToLocationIntent, interaction: INInteraction?) {
         guard let providerId = intent.providerId, let poolId = intent.poolId else {
             return
         }
@@ -177,20 +182,20 @@ class InteractionsHandler {
         refreshVPN(service: service, doReconnect: true)
     }
 
-    private static func handleEnableVPN(_ intent: EnableVPNIntent, interaction: INInteraction) {
+    private static func handleEnableVPN(_ intent: EnableVPNIntent, interaction: INInteraction?) {
         let service = TransientStore.shared.service
         log.info("Enabling VPN...")
         refreshVPN(service: service, doReconnect: true)
     }
     
-    private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction) {
+    private static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction?) {
         log.info("Disabling VPN...")
         VPN.shared.disconnect { (error) in
             notifyServiceController()
         }
     }
     
-    private static func handleCurrentNetwork(trust: Bool, interaction: INInteraction) {
+    private static func handleCurrentNetwork(trust: Bool, interaction: INInteraction?) {
         guard let currentWifi = Utils.currentWifiNetworkName() else {
             return
         }
@@ -202,7 +207,7 @@ class InteractionsHandler {
         refreshVPN(service: service, doReconnect: false)
     }
 
-    private static func handleCellularNetwork(trust: Bool, interaction: INInteraction) {
+    private static func handleCellularNetwork(trust: Bool, interaction: INInteraction?) {
         guard Utils.hasCellularData() else {
             return
         }
@@ -240,7 +245,7 @@ class InteractionsHandler {
     
     //
 
-    static func forgetProfile(withKey profileKey: ProfileKey) {
+    public static func forgetProfile(withKey profileKey: ProfileKey) {
         INInteraction.delete(with: profileKey.rawValue) { (error) in
             if let error = error {
                 log.error("Unable to forget interactions: \(error)")

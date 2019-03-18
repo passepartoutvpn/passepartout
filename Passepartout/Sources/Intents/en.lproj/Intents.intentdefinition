@@ -7,7 +7,7 @@
 	<key>INIntentDefinitionModelVersion</key>
 	<string>1.0</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>17G3025</string>
+	<string>18D42</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
 	<string>10B61</string>
 	<key>INIntentDefinitionToolsVersion</key>
@@ -74,7 +74,7 @@
 				<array>
 					<dict>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>Unable to connect</string>
+						<string></string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>uKU9RD</string>
 						<key>INIntentResponseCodeName</key>
@@ -84,7 +84,7 @@
 					</dict>
 					<dict>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>Successfully connected!</string>
+						<string></string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>WNbRl5</string>
 						<key>INIntentResponseCodeName</key>

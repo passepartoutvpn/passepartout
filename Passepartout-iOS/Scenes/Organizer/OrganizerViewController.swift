@@ -225,7 +225,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         
         service.removeProfile(rowProfile)
         if #available(iOS 12, *) {
-            InteractionsHandler.forgetProfile(withKey: rowProfile)
+            IntentDispatcher.forgetProfile(withKey: rowProfile)
         }
     }
 
@@ -473,7 +473,7 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         tableView.reloadData()
 
         if #available(iOS 12, *) {
-            InteractionsHandler.donateConnection(with: profile)
+            IntentDispatcher.donateConnection(with: profile)
         }
 
         // XXX: hack around bad replace when detail presented in compact view
@@ -520,7 +520,7 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         tableView.reloadData()
 
         if #available(iOS 12, *) {
-            InteractionsHandler.donateConnection(with: profile)
+            IntentDispatcher.donateConnection(with: profile)
         }
     }
 }
