@@ -63,6 +63,7 @@
 		0E36D24D2240234B006AF062 /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D24C2240234B006AF062 /* ShortcutsViewController.swift */; };
 		0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36D25A22403469006AF062 /* Shortcuts.storyboard */; };
 		0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */; };
+		0E36D25D2240440B006AF062 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0ED993B32240105E00B0F9C9 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
@@ -985,6 +986,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */,
+				0E36D25D2240440B006AF062 /* Intents.intentdefinition in Sources */,
 				0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */,
 				0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */,
 				0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */,
