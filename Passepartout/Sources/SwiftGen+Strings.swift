@@ -681,6 +681,16 @@ public enum L10n {
         public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_wifi.caption")
       }
     }
+    public enum Sections {
+      public enum Trust {
+        /// Trust
+        public static let header = L10n.tr("Localizable", "shortcuts.sections.trust.header")
+      }
+      public enum Vpn {
+        /// VPN
+        public static let header = L10n.tr("Localizable", "shortcuts.sections.vpn.header")
+      }
+    }
   }
 
   public enum Version {

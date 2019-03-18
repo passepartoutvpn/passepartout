@@ -192,6 +192,8 @@
 "issue_reporter.email.body" = "Hi,\n\n%@\n\n%@\n\nRegards";
 "issue_reporter.email.description" = "description of the issue:";
 
+"shortcuts.sections.vpn.header" = "VPN";
+"shortcuts.sections.trust.header" = "Trust";
 "shortcuts.cells.connect.caption" = "Connect to";
 "shortcuts.cells.enable_vpn.caption" = "Enable VPN";
 "shortcuts.cells.disable_vpn.caption" = "Disable VPN";

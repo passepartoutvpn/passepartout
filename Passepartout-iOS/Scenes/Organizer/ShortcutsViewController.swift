@@ -33,16 +33,12 @@ class ShortcutsViewController: UITableViewController, TableModelHost {
     
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
-        model.add(.shortcutCreation)
-        model.set([
-            .connect,
-            .enableVPN,
-            .disableVPN,
-            .trustWiFi,
-            .untrustWiFi,
-            .trustCellular,
-            .untrustCellular
-        ], in: .shortcutCreation)
+        model.add(.vpn)
+        model.add(.trust)
+        model.set([.connect, .enableVPN, .disableVPN], in: .vpn)
+        model.set([.trustWiFi, .untrustWiFi, .trustCellular, .untrustCellular], in: .trust)
+        model.setHeader(L10n.Shortcuts.Sections.Vpn.header, for: .vpn)
+        model.setHeader(L10n.Shortcuts.Sections.Trust.header, for: .trust)
         return model
     }()
     
@@ -61,7 +57,9 @@ class ShortcutsViewController: UITableViewController, TableModelHost {
 
 extension ShortcutsViewController {
     enum SectionType {
-        case shortcutCreation
+        case vpn
+
+        case trust
     }
     
     enum RowType {
@@ -78,6 +76,14 @@ extension ShortcutsViewController {
         case trustCellular
         
         case untrustCellular
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return model.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return model.header(for: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
