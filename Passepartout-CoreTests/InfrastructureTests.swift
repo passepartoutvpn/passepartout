@@ -39,7 +39,7 @@ class InfrastructureTests: XCTestCase {
 
     func testParsing() {
         print(infra.pools)
-        XCTAssertEqual(infra.pools.count, 53)
+        XCTAssertEqual(infra.pools.count, 48)
     }
 
     func testIdentifier() {

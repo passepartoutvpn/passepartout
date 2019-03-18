@@ -56,7 +56,8 @@ class GroupConstants {
 
         private static var containerURL: URL {
             guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
-                fatalError("Unable to access App Group container")
+                print("Unable to access App Group container")
+                return FileManager.default.userURL(for: .documentDirectory, appending: nil)
             }
             return url
         }
