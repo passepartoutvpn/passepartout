@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -838,6 +838,7 @@
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh",
@@ -848,6 +849,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
@@ -888,6 +890,7 @@
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests-frameworks.sh",
@@ -897,6 +900,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
@@ -1107,7 +1111,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 974;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1138,7 +1142,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 974;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				DYLIB_COMPATIBILITY_VERSION = 1;
