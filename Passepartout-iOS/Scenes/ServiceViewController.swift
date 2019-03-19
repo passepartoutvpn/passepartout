@@ -227,6 +227,9 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private func toggleVpnService(cell: ToggleTableViewCell) {
         if cell.isOn {
+            if #available(iOS 12, *) {
+                IntentDispatcher.donateConnection(with: uncheckedProfile)
+            }
             guard !service.needsCredentials(for: uncheckedProfile) else {
                 let alert = Macros.alert(
                     L10n.Service.Sections.Vpn.header,
@@ -247,15 +250,13 @@ class ServiceViewController: UIViewController, TableModelHost {
                 self.updateViewsIfNeeded()
             }
         } else {
+            if #available(iOS 12, *) {
+                IntentDispatcher.donateDisableVPN()
+            }
             vpn.disconnect { (error) in
                 self.reloadModel()
                 self.updateViewsIfNeeded()
             }
-        }
-
-        if #available(iOS 12, *) {
-            IntentDispatcher.donateEnableVPN()
-            IntentDispatcher.donateDisableVPN()
         }
     }
     

@@ -200,9 +200,13 @@ public class IntentDispatcher {
     
     public static func handleDisableVPN(_ intent: DisableVPNIntent, interaction: INInteraction?, completionHandler: ((Error?) -> Void)?) {
         log.info("Disabling VPN...")
-        VPN.shared.disconnect { (error) in
-            notifyServiceUpdate()
-            completionHandler?(error)
+
+        let vpn = VPN.shared
+        vpn.prepare {
+            vpn.disconnect { (error) in
+                notifyServiceUpdate()
+                completionHandler?(error)
+            }
         }
     }
     

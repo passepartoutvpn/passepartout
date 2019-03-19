@@ -269,6 +269,8 @@ public enum L10n {
   public enum Global {
     /// Cancel
     public static let cancel = L10n.tr("Localizable", "global.cancel")
+    /// Close
+    public static let close = L10n.tr("Localizable", "global.close")
     /// Next
     public static let next = L10n.tr("Localizable", "global.next")
     /// OK
@@ -383,6 +385,8 @@ public enum L10n {
         public static let header = L10n.tr("Localizable", "organizer.sections.providers.header")
       }
       public enum Siri {
+        /// Get help from Siri to speed up your most common interactions with the app.
+        public static let footer = L10n.tr("Localizable", "organizer.sections.siri.footer")
         /// Siri
         public static let header = L10n.tr("Localizable", "organizer.sections.siri.header")
       }
@@ -682,27 +686,31 @@ public enum L10n {
         /// Trust cellular network
         public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_cellular.caption")
       }
-      public enum TrustWifi {
+      public enum TrustCurrentWifi {
         /// Trust current Wi-Fi
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_wifi.caption")
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_current_wifi.caption")
       }
       public enum UntrustCellular {
         /// Untrust cellular network
         public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_cellular.caption")
       }
-      public enum UntrustWifi {
+      public enum UntrustCurrentWifi {
         /// Untrust current Wi-Fi
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_wifi.caption")
+        public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_current_wifi.caption")
       }
     }
     public enum Sections {
-      public enum Trust {
-        /// Trust
-        public static let header = L10n.tr("Localizable", "shortcuts.sections.trust.header")
+      public enum Cellular {
+        /// Cellular
+        public static let header = L10n.tr("Localizable", "shortcuts.sections.cellular.header")
       }
       public enum Vpn {
         /// VPN
         public static let header = L10n.tr("Localizable", "shortcuts.sections.vpn.header")
+      }
+      public enum Wifi {
+        /// Wi-Fi
+        public static let header = L10n.tr("Localizable", "shortcuts.sections.wifi.header")
       }
     }
   }

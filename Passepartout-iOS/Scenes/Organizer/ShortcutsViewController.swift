@@ -34,11 +34,14 @@ class ShortcutsViewController: UITableViewController, TableModelHost {
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.vpn)
-        model.add(.trust)
+        model.add(.wifi)
+        model.add(.cellular)
         model.set([.connect, .enableVPN, .disableVPN], in: .vpn)
-        model.set([.trustWiFi, .untrustWiFi, .trustCellular, .untrustCellular], in: .trust)
+        model.set([.trustCurrentWiFi, .untrustCurrentWiFi], in: .wifi)
+        model.set([.trustCellular, .untrustCellular], in: .cellular)
         model.setHeader(L10n.Shortcuts.Sections.Vpn.header, for: .vpn)
-        model.setHeader(L10n.Shortcuts.Sections.Trust.header, for: .trust)
+        model.setHeader(L10n.Shortcuts.Sections.Wifi.header, for: .wifi)
+        model.setHeader(L10n.Shortcuts.Sections.Cellular.header, for: .cellular)
         return model
     }()
     
@@ -51,7 +54,6 @@ class ShortcutsViewController: UITableViewController, TableModelHost {
         super.viewDidLoad()
         
         title = L10n.Organizer.Cells.SiriShortcuts.caption
-//        itemNext.title = L10n.Global.next
     }
 }
 
@@ -59,7 +61,9 @@ extension ShortcutsViewController {
     enum SectionType {
         case vpn
 
-        case trust
+        case wifi
+
+        case cellular
     }
     
     enum RowType {
@@ -69,9 +73,9 @@ extension ShortcutsViewController {
         
         case disableVPN
         
-        case trustWiFi
+        case trustCurrentWiFi
         
-        case untrustWiFi
+        case untrustCurrentWiFi
         
         case trustCellular
         
@@ -102,11 +106,11 @@ extension ShortcutsViewController {
         case .disableVPN:
             cell.leftText = L10n.Shortcuts.Cells.DisableVpn.caption
             
-        case .trustWiFi:
-            cell.leftText = L10n.Shortcuts.Cells.TrustWifi.caption
+        case .trustCurrentWiFi:
+            cell.leftText = L10n.Shortcuts.Cells.TrustCurrentWifi.caption
             
-        case .untrustWiFi:
-            cell.leftText = L10n.Shortcuts.Cells.UntrustWifi.caption
+        case .untrustCurrentWiFi:
+            cell.leftText = L10n.Shortcuts.Cells.UntrustCurrentWifi.caption
             
         case .trustCellular:
             cell.leftText = L10n.Shortcuts.Cells.TrustCellular.caption
@@ -132,10 +136,10 @@ extension ShortcutsViewController {
         case .disableVPN:
             addDisable()
             
-        case .trustWiFi:
+        case .trustCurrentWiFi:
             addTrustWiFi()
             
-        case .untrustWiFi:
+        case .untrustCurrentWiFi:
             addUntrustWiFi()
             
         case .trustCellular:

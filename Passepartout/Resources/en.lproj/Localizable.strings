@@ -26,6 +26,7 @@
 "global.ok" = "OK";
 "global.cancel" = "Cancel";
 "global.next" = "Next";
+"global.close" = "Close";
 "global.host.title_input.message" = "Acceptable characters are alphanumerics plus dash \"-\", underscore \"_\" and dot \".\".";
 "global.host.title_input.placeholder" = "My Profile";
 
@@ -40,6 +41,7 @@
 "organizer.sections.hosts.header" = "Hosts";
 "organizer.sections.hosts.footer" = "Import hosts from raw .ovpn configuration files.";
 "organizer.sections.siri.header" = "Siri";
+"organizer.sections.siri.footer" = "Get help from Siri to speed up your most common interactions with the app.";
 "organizer.cells.profile.value.current" = "In use";
 "organizer.cells.add_provider.caption" = "Add new network";
 "organizer.cells.add_host.caption" = "Add new host";
@@ -196,12 +198,13 @@
 "issue_reporter.email.description" = "description of the issue:";
 
 "shortcuts.sections.vpn.header" = "VPN";
-"shortcuts.sections.trust.header" = "Trust";
+"shortcuts.sections.wifi.header" = "Wi-Fi";
+"shortcuts.sections.cellular.header" = "Cellular";
 "shortcuts.cells.connect.caption" = "Connect to";
 "shortcuts.cells.enable_vpn.caption" = "Enable VPN";
 "shortcuts.cells.disable_vpn.caption" = "Disable VPN";
-"shortcuts.cells.trust_wifi.caption" = "Trust current Wi-Fi";
-"shortcuts.cells.untrust_wifi.caption" = "Untrust current Wi-Fi";
+"shortcuts.cells.trust_current_wifi.caption" = "Trust current Wi-Fi";
+"shortcuts.cells.untrust_current_wifi.caption" = "Untrust current Wi-Fi";
 "shortcuts.cells.trust_cellular.caption" = "Trust cellular network";
 "shortcuts.cells.untrust_cellular.caption" = "Untrust cellular network";
 "shortcuts.alerts.no_profiles.message" = "There is no profile to connect to.";
