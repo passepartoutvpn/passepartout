@@ -497,7 +497,7 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         tableView.reloadData()
 
         if #available(iOS 12, *) {
-            IntentDispatcher.donateConnection(with: profile)
+            IntentDispatcher.donateEnableVPN()
         }
 
         // XXX: hack around bad replace when detail presented in compact view
@@ -544,7 +544,7 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         tableView.reloadData()
 
         if #available(iOS 12, *) {
-            IntentDispatcher.donateConnection(with: profile)
+            IntentDispatcher.donateEnableVPN()
         }
     }
 }
