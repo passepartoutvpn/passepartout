@@ -114,6 +114,7 @@ The logo is taken from the awesome Circle Icons set by Nick Roach.
 - PIATunnel - © 2018-Present Private Internet Access
 - SwiftGen - © 2018 SwiftGen
 - SwiftyBeaver - © 2015 Sebastian Kreutzberger
+- lzo - © 1996-2017 Markus F.X.J. Oberhumer
 
 This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. ([https://www.openssl.org/][dep-openssl])
 
