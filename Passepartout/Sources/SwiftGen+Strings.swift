@@ -109,23 +109,27 @@ public enum L10n {
         }
       }
       public enum CompressionAlgorithm {
-        /// Compression
+        /// Algorithm
         public static let caption = L10n.tr("Localizable", "configuration.cells.compression_algorithm.caption")
         public enum Value {
           /// Disabled
           public static let disabled = L10n.tr("Localizable", "configuration.cells.compression_algorithm.value.disabled")
+          /// LZO
+          public static let lzo = L10n.tr("Localizable", "configuration.cells.compression_algorithm.value.lzo")
+          /// Unsupported
+          public static let other = L10n.tr("Localizable", "configuration.cells.compression_algorithm.value.other")
         }
       }
-      public enum CompressionFrame {
+      public enum CompressionFraming {
         /// Framing
-        public static let caption = L10n.tr("Localizable", "configuration.cells.compression_frame.caption")
+        public static let caption = L10n.tr("Localizable", "configuration.cells.compression_framing.caption")
         public enum Value {
-          /// Compress
-          public static let compress = L10n.tr("Localizable", "configuration.cells.compression_frame.value.compress")
+          /// --compress
+          public static let compress = L10n.tr("Localizable", "configuration.cells.compression_framing.value.compress")
           /// None
-          public static let disabled = L10n.tr("Localizable", "configuration.cells.compression_frame.value.disabled")
-          /// LZO
-          public static let lzo = L10n.tr("Localizable", "configuration.cells.compression_frame.value.lzo")
+          public static let disabled = L10n.tr("Localizable", "configuration.cells.compression_framing.value.disabled")
+          /// --comp-lzo
+          public static let lzo = L10n.tr("Localizable", "configuration.cells.compression_framing.value.lzo")
         }
       }
       public enum Digest {
@@ -185,6 +189,10 @@ public enum L10n {
       public enum Communication {
         /// Communication
         public static let header = L10n.tr("Localizable", "configuration.sections.communication.header")
+      }
+      public enum Compression {
+        /// Compression
+        public static let header = L10n.tr("Localizable", "configuration.sections.compression.header")
       }
       public enum Dns {
         /// DNS

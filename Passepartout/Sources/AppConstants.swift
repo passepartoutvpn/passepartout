@@ -239,6 +239,11 @@ public class AppConstants {
                 "SwiftyBeaver",
                 "MIT",
                 "https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE"
+            ),
+            License(
+                "lzo",
+                "GPLv2",
+                "https://www.gnu.org/licenses/gpl-2.0.txt"
             )
         ]
 
