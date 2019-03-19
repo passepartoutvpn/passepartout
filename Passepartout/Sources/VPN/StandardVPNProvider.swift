@@ -120,10 +120,14 @@ public class StandardVPNProvider: VPNProvider {
     }
     
     public func disconnect(completionHandler: ((Error?) -> Void)?) {
-        manager?.connection.stopVPNTunnel()
-        manager?.isOnDemandEnabled = false
-        manager?.isEnabled = false
-        manager?.saveToPreferences(completionHandler: completionHandler)
+        guard let manager = manager else {
+            completionHandler?(nil)
+            return
+        }
+        manager.connection.stopVPNTunnel()
+        manager.isOnDemandEnabled = false
+        manager.isEnabled = false
+        manager.saveToPreferences(completionHandler: completionHandler)
     }
     
     public func reconnect(configuration: VPNConfiguration, completionHandler: ((Error?) -> Void)?) {
