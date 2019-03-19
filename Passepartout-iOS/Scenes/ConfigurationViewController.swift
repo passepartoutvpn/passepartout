@@ -58,6 +58,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             model.add(.reset)
         }
         model.add(.tls)
+        model.add(.compression)
         if let _ = configuration.dnsServers {
             model.add(.dns)
         }
@@ -66,6 +67,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         // headers
         model.setHeader(L10n.Configuration.Sections.Communication.header, for: .communication)
         model.setHeader(L10n.Configuration.Sections.Tls.header, for: .tls)
+        model.setHeader(L10n.Configuration.Sections.Compression.header, for: .compression)
         if let _ = configuration.dnsServers {
             model.setHeader(L10n.Configuration.Sections.Dns.header, for: .dns)
         }
@@ -77,15 +79,16 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         }
         
         // rows
-        model.set([.cipher, .digest, .compressionFrame], in: .communication)
+        model.set([.cipher, .digest], in: .communication)
         if isEditable {
             model.set([.resetOriginal], in: .reset)
         }
         model.set([.client, .tlsWrapping], in: .tls)
+        model.set([.compressionFraming, .compressionAlgorithm], in: .compression)
         if let dnsServers = configuration.dnsServers {
             model.set(.dnsServer, count: dnsServers.count, in: .dns)
         }
-        model.set([.compressionAlgorithm, .keepAlive, .renegSeconds], in: .other)
+        model.set([.keepAlive, .renegSeconds], in: .other)
 
         return model
     }()
@@ -167,6 +170,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case tls
         
+        case compression
+        
         case dns
         
         case other
@@ -177,17 +182,17 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case digest
         
-        case compressionFrame
-        
         case resetOriginal
 
         case client
         
         case tlsWrapping
         
-        case dnsServer
+        case compressionFraming
         
         case compressionAlgorithm
+        
+        case dnsServer
         
         case keepAlive
         
@@ -243,10 +248,6 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
                 cell.isTappable = false
             }
 
-        case .compressionFrame:
-            cell.leftText = L10n.Configuration.Cells.CompressionFrame.caption
-            cell.rightText = configuration.compressionFraming.cellDescription
-            
         case .resetOriginal:
             cell.leftText = L10n.Configuration.Cells.ResetOriginal.caption
             cell.applyAction(Theme.current)
@@ -274,6 +275,23 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.accessoryType = .none
             cell.isTappable = false
             
+        case .compressionFraming:
+            cell.leftText = L10n.Configuration.Cells.CompressionFraming.caption
+            cell.rightText = configuration.compressionFraming.cellDescription
+            cell.accessoryType = .none
+            cell.isTappable = false
+
+        case .compressionAlgorithm:
+            cell.leftText = L10n.Configuration.Cells.CompressionAlgorithm.caption
+            let V = L10n.Configuration.Cells.CompressionAlgorithm.Value.self
+            if let compressionAlgorithm = configuration.compressionAlgorithm {
+                cell.rightText = compressionAlgorithm.cellDescription
+            } else {
+                cell.rightText = V.disabled
+            }
+            cell.accessoryType = .none
+            cell.isTappable = false
+            
         case .dnsServer:
             guard let dnsServers = configuration.dnsServers else {
                 fatalError("Showing DNS section without any custom server")
@@ -283,12 +301,6 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.accessoryType = .none
             cell.isTappable = false
 
-        case .compressionAlgorithm:
-            cell.leftText = L10n.Configuration.Cells.CompressionAlgorithm.caption
-            cell.rightText = L10n.Configuration.Cells.CompressionAlgorithm.Value.disabled // hardcoded because compression unsupported
-            cell.accessoryType = .none
-            cell.isTappable = false
-            
         case .keepAlive:
             cell.leftText = L10n.Configuration.Cells.KeepAlive.caption
             let V = L10n.Configuration.Cells.KeepAlive.Value.self
@@ -350,17 +362,17 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             }
             navigationController?.pushViewController(vc, animated: true)
 
-        case .compressionFrame:
-            let vc = OptionViewController<SessionProxy.CompressionFraming>()
-            vc.title = settingCell?.leftText
-            vc.options = [.disabled, .compLZO, .compress]
-            vc.selectedOption = configuration.compressionFraming
-            vc.descriptionBlock = { $0.cellDescription }
-            vc.selectionBlock = { [weak self] in
-                self?.configuration.compressionFraming = $0
-                self?.popAndCheckRefresh()
-            }
-            navigationController?.pushViewController(vc, animated: true)
+//        case .compressionFraming:
+//            let vc = OptionViewController<SessionProxy.CompressionFraming>()
+//            vc.title = settingCell?.leftText
+//            vc.options = [.disabled, .compLZO, .compress]
+//            vc.selectedOption = configuration.compressionFraming
+//            vc.descriptionBlock = { $0.cellDescription }
+//            vc.selectionBlock = { [weak self] in
+//                self?.configuration.compressionFraming = $0
+//                self?.popAndCheckRefresh()
+//            }
+//            navigationController?.pushViewController(vc, animated: true)
 
         case .resetOriginal:
             tableView.deselectRow(at: indexPath, animated: true)
@@ -386,7 +398,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
 private extension SessionProxy.CompressionFraming {
     var cellDescription: String {
-        let V = L10n.Configuration.Cells.CompressionFrame.Value.self
+        let V = L10n.Configuration.Cells.CompressionFraming.Value.self
         switch self {
         case .disabled:
             return V.disabled
@@ -396,6 +408,22 @@ private extension SessionProxy.CompressionFraming {
             
         case .compress:
             return V.compress
+        }
+    }
+}
+
+private extension SessionProxy.CompressionAlgorithm {
+    var cellDescription: String {
+        let V = L10n.Configuration.Cells.CompressionAlgorithm.Value.self
+        switch self {
+        case .disabled:
+            return V.disabled
+            
+        case .LZO:
+            return V.lzo
+            
+        case .other:
+            return V.other
         }
     }
 }
