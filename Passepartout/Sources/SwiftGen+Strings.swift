@@ -269,6 +269,8 @@ public enum L10n {
   public enum Global {
     /// Cancel
     public static let cancel = L10n.tr("Localizable", "global.cancel")
+    /// Close
+    public static let close = L10n.tr("Localizable", "global.close")
     /// Next
     public static let next = L10n.tr("Localizable", "global.next")
     /// OK

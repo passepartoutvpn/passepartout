@@ -49,7 +49,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Yck-NS-FzJ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8HE-Ax-VIa">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="8HE-Ax-VIa">
                             <connections>
                                 <action selector="close" destination="mG2-gQ-aPy" id="Eua-Wd-kuz"/>
                             </connections>

@@ -54,7 +54,6 @@ class ShortcutsViewController: UITableViewController, TableModelHost {
         super.viewDidLoad()
         
         title = L10n.Organizer.Cells.SiriShortcuts.caption
-//        itemNext.title = L10n.Global.next
     }
 }
 
