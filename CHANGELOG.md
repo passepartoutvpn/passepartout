@@ -5,53 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
-### Fixed
-
-- Profile not activating if none is active. [#42](https://github.com/passepartoutvpn/passepartout-ios/issues/42)
-
-## 1.1.0 Beta 1414 (2019-03-19)
+## 1.1.0 RC1 1425 (2019-03-20)
 
 ### Added
 
 - Support for legacy `--comp-lzo` compression. [tunnelkit#69](https://github.com/keeshux/tunnelkit/pull/69)
-
-## 1.1.0 Beta 1407 (2019-03-18)
-
-### Added
-
 - Siri shortcuts. [#41](https://github.com/passepartoutvpn/passepartout-ios/pull/41)
-
-## 1.1.0 Beta 1393 (2019-03-18)
-
-### Fixed
-
-- EKU verification enabled when it shouldn't be.
-
-## 1.1.0 Beta 1357 (2019-03-09)
-
-### Added
-
 - Custom intents, have a look at Spotlight suggestions for Passepartout. [#40](https://github.com/passepartoutvpn/passepartout-ios/pull/40)
+- TunnelBear provider. [#35](https://github.com/passepartoutvpn/passepartout-ios/pull/35)
 
 ### Fixed
 
+- Profile not activating if none is active. [#42](https://github.com/passepartoutvpn/passepartout-ios/issues/42)
+- EKU verification enabled when it shouldn't be.
 - Incorrect VPN status after renaming. [#37](https://github.com/passepartoutvpn/passepartout-ios/issues/37)
 - Profile change doesn't disconnect active VPN. [#38](https://github.com/passepartoutvpn/passepartout-ios/issues/38)
 - Some reconnection issues encountered with TunnelBear and NordVPN.
-
-## 1.1.0 Beta 1341 (2019-03-07)
-
-### Fixed
-
 - Hosts gone while connected (credit to Aston Martin). [#19](https://github.com/passepartoutvpn/passepartout-ios/issues/19)
-
-## 1.1.0 Beta 1334 (2019-03-07)
-
-### Added
-
-- TunnelBear provider. [#35](https://github.com/passepartoutvpn/passepartout-ios/pull/35)
 
 ## 1.0.3 (2019-03-06)
 
