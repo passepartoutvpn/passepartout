@@ -383,6 +383,8 @@ public enum L10n {
         public static let header = L10n.tr("Localizable", "organizer.sections.providers.header")
       }
       public enum Siri {
+        /// Get help from Siri to speed up your most common interactions with the app.
+        public static let footer = L10n.tr("Localizable", "organizer.sections.siri.footer")
         /// Siri
         public static let header = L10n.tr("Localizable", "organizer.sections.siri.header")
       }

@@ -40,6 +40,7 @@
 "organizer.sections.hosts.header" = "Hosts";
 "organizer.sections.hosts.footer" = "Import hosts from raw .ovpn configuration files.";
 "organizer.sections.siri.header" = "Siri";
+"organizer.sections.siri.footer" = "Get help from Siri to speed up your most common interactions with the app.";
 "organizer.cells.profile.value.current" = "In use";
 "organizer.cells.add_provider.caption" = "Add new network";
 "organizer.cells.add_host.caption" = "Add new host";

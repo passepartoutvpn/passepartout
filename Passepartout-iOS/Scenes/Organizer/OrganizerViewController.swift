@@ -56,6 +56,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         model.setFooter(L10n.Organizer.Sections.Hosts.footer, for: .hosts)
         if #available(iOS 12, *) {
             model.setHeader(L10n.Organizer.Sections.Siri.header, for: .siri)
+            model.setFooter(L10n.Organizer.Sections.Siri.footer, for: .siri)
             model.set([.siriShortcuts], in: .siri)
         }
         model.set([.openAbout], in: .about)
