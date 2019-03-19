@@ -1,3 +1,15 @@
+### Added
+
+- Support for LZO compression.
+- Siri shortcuts.
+- Custom intents, have a look at Spotlight suggestions for Passepartout.
+- TunnelBear provider.
+
 ### Fixed
 
-- Regression in profile activation.
+- Profile not activating if none is active.
+- EKU verification enabled when it shouldn't be.
+- Incorrect VPN status after renaming.
+- Profile change doesn't disconnect active VPN.
+- Some reconnection issues encountered with TunnelBear and NordVPN.
+- Hosts gone while connected (credit to Aston Martin).
