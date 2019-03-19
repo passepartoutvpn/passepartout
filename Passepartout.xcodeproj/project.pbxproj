@@ -72,6 +72,7 @@
 		0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64220C83FC7008323CF /* Assets.xcassets */; };
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
 		0E58BD9322404EF1006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; };
+		0E58BF65224152F9006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0EA068F4218475F800C320AD /* ParsingResult+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ParsingResult+Alerts.swift */; };
@@ -985,6 +986,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */,
+				0E58BF65224152F9006FB157 /* Intents.intentdefinition in Sources */,
 				0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */,
 				0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */,
 				0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */,
