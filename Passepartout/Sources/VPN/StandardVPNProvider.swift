@@ -91,19 +91,23 @@ public class StandardVPNProvider: VPNProvider {
             fatalError("Not a NetworkExtensionVPNConfiguration")
         }
         find(with: bundleIdentifier) {
-            self.manager = $0
-            self.manager?.protocolConfiguration = configuration.protocolConfiguration
-            self.manager?.onDemandRules = configuration.onDemandRules
-            self.manager?.isOnDemandEnabled = true
-            self.manager?.isEnabled = true
-            self.manager?.saveToPreferences { (error) in
+            guard let manager = $0 else {
+                completionHandler?(nil)
+                return
+            }
+            self.manager = manager
+            manager.protocolConfiguration = configuration.protocolConfiguration
+            manager.onDemandRules = configuration.onDemandRules
+            manager.isOnDemandEnabled = true
+            manager.isEnabled = true
+            manager.saveToPreferences { (error) in
                 guard error == nil else {
-                    self.manager?.isOnDemandEnabled = false
-                    self.manager?.isEnabled = false
+                    manager.isOnDemandEnabled = false
+                    manager.isEnabled = false
                     completionHandler?(error)
                     return
                 }
-                self.manager?.loadFromPreferences { (error) in
+                manager.loadFromPreferences { (error) in
                     completionHandler?(error)
                 }
             }
@@ -153,8 +157,12 @@ public class StandardVPNProvider: VPNProvider {
     
     public func uninstall(completionHandler: (() -> Void)?) {
         find(with: bundleIdentifier) { (manager) in
-            manager?.connection.stopVPNTunnel()
-            manager?.removeFromPreferences { (error) in
+            guard let manager = manager else {
+                completionHandler?()
+                return
+            }
+            manager.connection.stopVPNTunnel()
+            manager.removeFromPreferences { (error) in
                 self.manager = nil
                 completionHandler?()
             }
