@@ -3,9 +3,10 @@ platform :ios, '11.0'
 use_frameworks!
 
 def shared_pods
-    #pod 'TunnelKit', '~> 1.4.3'
-    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => '2f17e30'
-    pod 'TunnelKit/LZO', :git => 'https://github.com/keeshux/tunnelkit', :commit => '2f17e30'
+    pod 'TunnelKit', '~> 1.5.0'
+    pod 'TunnelKit/LZO', '~> 1.5.0'
+    #pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => '2f17e30'
+    #pod 'TunnelKit/LZO', :git => 'https://github.com/keeshux/tunnelkit', :commit => '2f17e30'
     #pod 'TunnelKit', :path => '../../personal/tunnelkit'
     #pod 'TunnelKit/LZO', :path => '../../personal/tunnelkit'
 end
