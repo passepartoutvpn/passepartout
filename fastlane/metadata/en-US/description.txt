@@ -13,9 +13,11 @@ FEATURES
 - Fine-tune encryption without tweaking any configuration file.
 - Pick pre-resolved endpoints when DNS is problematic.
 - Trust cellular or Wi-Fi networks to fine-grain your connectivity.
+- Convenient Siri Shortcuts.
 
 - Convenient presets for major VPN networks:
   - Private Internet Access
+  - TunnelBear
   - ...more soon!
 - Import .ovpn configuration files.
 - Full transparency on what servers you're connecting to.
