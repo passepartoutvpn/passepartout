@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.1.0 RC1 1425 (2019-03-20)
+## 1.1.0 RC1 1426 (2019-03-20)
 
 ### Added
 
-- Support for legacy `--comp-lzo` compression. [tunnelkit#69](https://github.com/keeshux/tunnelkit/pull/69)
+- Support for LZO compression. [#32](https://github.com/passepartoutvpn/passepartout-ios/issues/32), [tunnelkit#70](https://github.com/keeshux/tunnelkit/pull/70), [tunnelkit#69](https://github.com/keeshux/tunnelkit/pull/69)
 - Siri shortcuts. [#41](https://github.com/passepartoutvpn/passepartout-ios/pull/41)
 - Custom intents, have a look at Spotlight suggestions for Passepartout. [#40](https://github.com/passepartoutvpn/passepartout-ios/pull/40)
 - TunnelBear provider. [#35](https://github.com/passepartoutvpn/passepartout-ios/pull/35)

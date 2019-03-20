@@ -4,9 +4,10 @@ use_frameworks!
 
 def shared_pods
     #pod 'TunnelKit', '~> 1.4.3'
-    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => '8e99c91'
-    pod 'TunnelKit/LZO', :git => 'https://github.com/keeshux/tunnelkit', :commit => '8e99c91'
+    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => '2f17e30'
+    pod 'TunnelKit/LZO', :git => 'https://github.com/keeshux/tunnelkit', :commit => '2f17e30'
     #pod 'TunnelKit', :path => '../../personal/tunnelkit'
+    #pod 'TunnelKit/LZO', :path => '../../personal/tunnelkit'
 end
 
 target 'Passepartout-Core' do
