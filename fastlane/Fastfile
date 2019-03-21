@@ -34,10 +34,10 @@ platform :ios do
         lane_context[SharedValues::FL_CHANGELOG] = File.read("../#{ENV["BUILD_CHANGELOG_PATH"]}")
     end
 
-    desc "Submit a build to HockeyApp"
+    desc "Submit a build to App Center"
     lane :dev_deploy do
         set_build_changelog
-        hockey
+        appcenter_upload
     end
 
     desc "Submit a build to TestFlight"
