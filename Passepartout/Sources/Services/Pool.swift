@@ -74,7 +74,7 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
     // MARK: Comparable
     
     public static func <(lhs: Pool, rhs: Pool) -> Bool {
-        return lhs.localizedName < rhs.localizedName
+        return lhs.localizedCountryArea < rhs.localizedCountryArea
     }
 
     // MARK: CustomStringConvertible
@@ -91,6 +91,14 @@ extension Pool {
         return Utils.localizedCountry(country)
     }
 
+    public var localizedCountryArea: String {
+        let countryString = localizedCountry
+        guard let area = area else {
+            return countryString
+        }
+        return String.init(format: Pool.localizedFormat, countryString, area.uppercased())
+    }
+
     public var localizedName: String {
 
 //        // XXX: name from API is not localized
@@ -98,11 +106,7 @@ extension Pool {
 //            return name
 //        }
 
-        let countryString = localizedCountry
-        guard let area = area else {
-            return countryString
-        }
-        return String.init(format: Pool.localizedFormat, countryString, area.uppercased())
-//        return countryString
+        return localizedCountryArea
+//        return localizedCountry
     }
 }
