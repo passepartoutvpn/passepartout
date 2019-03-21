@@ -84,6 +84,8 @@ public enum L10n {
       /// Don't have an account? Tap here to get one.
       public static let referral = L10n.tr("Localizable", "account.suggestion_footer.referral")
       public enum Infrastructure {
+        /// Use your website account number and password "m".
+        public static let mullvad = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.mullvad")
         /// Use your website credentials. Your username is usually numeric with a "p" prefix.
         public static let pia = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.pia")
         /// Use your website credentials. Your username is usually your email.
