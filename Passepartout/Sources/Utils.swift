@@ -133,6 +133,11 @@ public class Utils {
         }.resume()
     }
 
+    public static func localizedCountry(_ code: String) -> String {
+        let format = NSLocalizedString(code.uppercased(), tableName: "Countries", bundle: Bundle(for: Utils.self), comment: "")
+        return String(format: format, locale: Locale.current)
+    }
+
     private init() {
     }
 }

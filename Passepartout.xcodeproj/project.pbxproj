@@ -73,6 +73,7 @@
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
 		0E58BD9322404EF1006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; };
 		0E58BF65224152F9006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
+		0E58BF68224305A8006FB157 /* Countries.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E58BF6A224305A8006FB157 /* Countries.strings */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0EA068F4218475F800C320AD /* ParsingResult+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ParsingResult+Alerts.swift */; };
@@ -195,6 +196,7 @@
 		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E58BD9222404EF1006FB157 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
+		0E58BF69224305A8006FB157 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Countries.strings; sourceTree = "<group>"; };
 		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
 		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
 		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				0E0EABC721DF853C0069DAE7 /* Web */,
+				0E58BF6A224305A8006FB157 /* Countries.strings */,
 				0E05C5DF20D198B9006EE732 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -749,6 +752,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E58BF68224305A8006FB157 /* Countries.strings in Resources */,
 				0E3152DD223FA06100F61841 /* Localizable.strings in Resources */,
 				0E3152DE223FA06400F61841 /* Web in Resources */,
 			);
@@ -1094,6 +1098,14 @@
 				0E58BD9222404EF1006FB157 /* en */,
 			);
 			name = Intents.intentdefinition;
+			sourceTree = "<group>";
+		};
+		0E58BF6A224305A8006FB157 /* Countries.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E58BF69224305A8006FB157 /* en */,
+			);
+			name = Countries.strings;
 			sourceTree = "<group>";
 		};
 		0ED38ADC213F44D00004D387 /* Organizer.storyboard */ = {

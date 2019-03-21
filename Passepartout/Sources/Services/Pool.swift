@@ -34,6 +34,8 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
 
         case country
         
+        case area
+        
 //        case location
         
         case hostname
@@ -43,9 +45,11 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
     
     public let id: String
     
-    public let name: String
+    private let name: String
 
     public let country: String
+    
+    public let area: String?
     
 //    public let location: (Double, Double)
     
@@ -70,12 +74,39 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
     // MARK: Comparable
     
     public static func <(lhs: Pool, rhs: Pool) -> Bool {
-        return lhs.name < rhs.name
+        return lhs.localizedCountryArea < rhs.localizedCountryArea
     }
 
     // MARK: CustomStringConvertible
     
     public var description: String {
         return "{[\(id)] \"\(name)\"}"
+    }
+}
+
+extension Pool {
+    private static let localizedFormat = "%@ - %@"
+
+    public var localizedCountry: String {
+        return Utils.localizedCountry(country)
+    }
+
+    public var localizedCountryArea: String {
+        let countryString = localizedCountry
+        guard let area = area else {
+            return countryString
+        }
+        return String.init(format: Pool.localizedFormat, countryString, area.uppercased())
+    }
+
+    public var localizedName: String {
+
+//        // XXX: name from API is not localized
+//        if !name.isEmpty {
+//            return name
+//        }
+
+        return localizedCountryArea
+//        return localizedCountry
     }
 }
