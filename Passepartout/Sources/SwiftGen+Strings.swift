@@ -546,6 +546,10 @@ public enum L10n {
           }
         }
       }
+      public enum MasksPrivateData {
+        /// Mask network data
+        public static let caption = L10n.tr("Localizable", "service.cells.masks_private_data.caption")
+      }
       public enum Provider {
         public enum Pool {
           /// Location
@@ -613,6 +617,8 @@ public enum L10n {
         public static let header = L10n.tr("Localizable", "service.sections.configuration.header")
       }
       public enum Diagnostics {
+        /// Masking status will be effective after reconnecting. Network data is hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.
+        public static let footer = L10n.tr("Localizable", "service.sections.diagnostics.footer")
         /// Diagnostics
         public static let header = L10n.tr("Localizable", "service.sections.diagnostics.header")
       }

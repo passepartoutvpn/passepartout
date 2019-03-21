@@ -119,6 +119,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.mtu = configuration.mtu
         builder.shouldDebug = configuration.shouldDebug
         builder.debugLogFormat = configuration.debugLogFormat
+        builder.masksPrivateData = configuration.masksPrivateData
 
         if let address = manualAddress {
             builder.prefersResolvedAddresses = true

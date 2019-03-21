@@ -62,6 +62,7 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.mtu = configuration.mtu
         builder.shouldDebug = configuration.shouldDebug
         builder.debugLogFormat = configuration.debugLogFormat
+        builder.masksPrivateData = configuration.masksPrivateData
 
         return builder.build()
     }

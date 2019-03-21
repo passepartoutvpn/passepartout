@@ -397,6 +397,11 @@ class ServiceViewController: UIViewController, TableModelHost {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    private func togglePrivateDataMasking(cell: ToggleTableViewCell) {
+        AppConstants.VPN.baseConfiguration.masksPrivateData = cell.isOn
+        service.baseConfiguration = AppConstants.VPN.baseConfiguration.build()
+    }
 
     private func postSupportRequest() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
@@ -492,6 +497,8 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case dataCount
         
         case debugLog
+        
+        case masksPrivateData
         
         case joinCommunity
         
@@ -705,6 +712,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             cell.leftText = L10n.Service.Cells.DebugLog.caption
             return cell
             
+        case .masksPrivateData:
+            let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
+            cell.caption = L10n.Service.Cells.MasksPrivateData.caption
+            cell.isOn = AppConstants.VPN.baseConfiguration.masksPrivateData ?? true
+            return cell
+            
         // feedback
 
         case .joinCommunity:
@@ -859,6 +872,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedPolicy:
             toggleTrustedConnectionPolicy(cell.isOn, sender: cell)
             
+        case .masksPrivateData:
+            togglePrivateDataMasking(cell: cell)
+            
         default:
             break
         }
@@ -922,6 +938,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             model.setFooter(L10n.Service.Sections.VpnSurvivesSleep.footer, for: .vpnSurvivesSleep)
             model.setFooter(L10n.Service.Sections.Trusted.footer, for: .trustedPolicy)
+            model.setFooter(L10n.Service.Sections.Diagnostics.footer, for: .diagnostics)
         }
         
         // rows
@@ -947,7 +964,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             model.set([.vpnSurvivesSleep], in: .vpnSurvivesSleep)
             model.set([.trustedPolicy], in: .trustedPolicy)
-            model.set([.dataCount, .debugLog], in: .diagnostics)
+            model.set([.dataCount, .debugLog, .masksPrivateData], in: .diagnostics)
             model.set([.joinCommunity, .reportIssue], in: .feedback)
         }
 
