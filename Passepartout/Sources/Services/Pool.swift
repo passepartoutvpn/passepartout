@@ -93,10 +93,10 @@ extension Pool {
 
     public var localizedName: String {
 
-        // XXX: name from API is not localized
-        if !name.isEmpty {
-            return name
-        }
+//        // XXX: name from API is not localized
+//        if !name.isEmpty {
+//            return name
+//        }
 
         let countryString = localizedCountry
         guard let area = area else {
