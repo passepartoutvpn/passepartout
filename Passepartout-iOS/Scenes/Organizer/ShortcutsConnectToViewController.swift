@@ -166,7 +166,7 @@ extension ShortcutsConnectToViewController {
         let intent = MoveToLocationIntent()
         intent.providerId = provider.id
         intent.poolId = pool.id
-        intent.poolName = pool.name
+        intent.poolName = pool.localizedName
         addShortcut(with: intent)
     }
     

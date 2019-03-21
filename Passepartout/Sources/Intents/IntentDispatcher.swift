@@ -49,7 +49,7 @@ public class IntentDispatcher {
             let intent = MoveToLocationIntent()
             intent.providerId = profile.id
             intent.poolId = pool.id
-            intent.poolName = pool.name
+            intent.poolName = pool.localizedName
             genericIntent = intent
         } else {
             let intent = ConnectVPNIntent()
