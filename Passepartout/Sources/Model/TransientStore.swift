@@ -56,7 +56,7 @@ public class TransientStore {
         // this must be graceful
         ConnectionService.migrateJSON(from: TransientStore.serviceURL, to: TransientStore.serviceURL)
 
-        let cfg = AppConstants.VPN.baseConfiguration()
+        let cfg = AppConstants.VPN.baseConfiguration.build()
         do {
             let data = try Data(contentsOf: TransientStore.serviceURL)
             if let content = String(data: data, encoding: .utf8) {

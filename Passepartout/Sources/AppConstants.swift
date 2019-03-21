@@ -47,7 +47,7 @@ public class AppConstants {
     }
     
     public class VPN {
-        public static func baseConfiguration() -> TunnelKitProvider.Configuration {
+        public static var baseConfiguration: TunnelKitProvider.ConfigurationBuilder = {
             let sessionBuilder = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: ""))
             var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
             builder.mtu = 1250
@@ -55,9 +55,9 @@ public class AppConstants {
 //            builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $L $N.$F:$l - $M"
 //            builder.debugLogFormat = "$DHH:mm:ss$d $N.$F:$l - $M"
             builder.debugLogFormat = Log.debugFormat
-            return builder.build()
-        }
-        
+            return builder
+        }()
+
         private static let connectivityStrings: [String] = [
             "https://www.amazon.com",
             "https://www.google.com",
