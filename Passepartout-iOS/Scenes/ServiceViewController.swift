@@ -48,6 +48,8 @@ class ServiceViewController: UIViewController, TableModelHost {
 
     private var lastInfrastructureUpdate: Date?
     
+    private var shouldDeleteLogOnDisconnection = false
+
     // MARK: Table
     
     var model: TableModel<SectionType, RowType> = TableModel()
@@ -401,6 +403,14 @@ class ServiceViewController: UIViewController, TableModelHost {
     private func togglePrivateDataMasking(cell: ToggleTableViewCell) {
         AppConstants.VPN.baseConfiguration.masksPrivateData = cell.isOn
         service.baseConfiguration = AppConstants.VPN.baseConfiguration.build()
+
+        // for privacy, delete potentially unmasked data
+        if vpn.status != .disconnected {
+            shouldDeleteLogOnDisconnection = true
+        } else {
+            service.eraseVpnLog()
+            shouldDeleteLogOnDisconnection = false
+        }
     }
 
     private func postSupportRequest() {
@@ -417,8 +427,21 @@ class ServiceViewController: UIViewController, TableModelHost {
     @objc private func vpnDidUpdate() {
         reloadVpnStatus()
         
-        if vpn.status == .connected {
+        guard let status = vpn.status else {
+            return
+        }
+        switch status {
+        case .connected:
             Reviewer.shared.reportEvent()
+
+        case .disconnected:
+            if shouldDeleteLogOnDisconnection {
+                service.eraseVpnLog()
+                shouldDeleteLogOnDisconnection = false
+            }
+            
+        default:
+            break
         }
     }
     
