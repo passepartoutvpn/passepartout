@@ -46,31 +46,6 @@ public class AppConstants {
         public static let hostsDirectory = "Hosts"
     }
     
-    public class VPN {
-        public static func baseConfiguration() -> TunnelKitProvider.Configuration {
-            let sessionBuilder = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: ""))
-            var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
-            builder.mtu = 1250
-            builder.shouldDebug = true
-//            builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $L $N.$F:$l - $M"
-//            builder.debugLogFormat = "$DHH:mm:ss$d $N.$F:$l - $M"
-            builder.debugLogFormat = Log.debugFormat
-            return builder.build()
-        }
-        
-        private static let connectivityStrings: [String] = [
-            "https://www.amazon.com",
-            "https://www.google.com",
-            "https://www.twitter.com",
-            "https://www.facebook.com",
-            "https://www.instagram.com"
-        ]
-        
-        public static let connectivityURL = URL(string: connectivityStrings.customRandomElement())!
-        
-        public static let connectivityTimeout: TimeInterval = 10.0
-    }
-    
     public class Web {
         private static let version = "v1"
         
@@ -83,6 +58,18 @@ public class AppConstants {
         public static let timeout: TimeInterval = 3.0
         
         public static let minimumUpdateInterval: TimeInterval = 600.0 // 10 minutes
+
+        private static let connectivityStrings: [String] = [
+            "https://www.amazon.com",
+            "https://www.google.com",
+            "https://www.twitter.com",
+            "https://www.facebook.com",
+            "https://www.instagram.com"
+        ]
+        
+        public static let connectivityURL = URL(string: connectivityStrings.customRandomElement())!
+        
+        public static let connectivityTimeout: TimeInterval = 10.0
     }
     
     public class Log {

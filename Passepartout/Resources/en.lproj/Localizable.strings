@@ -79,6 +79,7 @@
 "service.sections.trusted.header" = "Trusted networks";
 "service.sections.trusted.footer" = "When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.";
 "service.sections.diagnostics.header" = "Diagnostics";
+"service.sections.diagnostics.footer" = "Masking status will be effective after reconnecting. Network data is hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.";
 //"service.sections.destruction.footer" = "Delete configuration from device settings.";
 
 "service.cells.use_profile.caption" = "Use this profile";
@@ -106,6 +107,7 @@
 "service.cells.test_connectivity.caption" = "Test connectivity";
 "service.cells.data_count.caption" = "Exchanged bytes count";
 "service.cells.debug_log.caption" = "Debug log";
+"service.cells.masks_private_data.caption" = "Mask network data";
 "service.cells.report_issue.caption" = "Report connectivity issue";
 
 "service.alerts.rename.title" = "Rename profile";
@@ -119,6 +121,8 @@
 "service.alerts.test_connectivity.messages.failure" = "Your device has no Internet connectivity, please review your profile parameters.";
 "service.alerts.data_count.messages.current" = "Received: %llu\nSent: %llu";
 "service.alerts.data_count.messages.not_available" = "Information not available, are you connected?";
+"service.alerts.masks_private_data.messages.must_reconnect" = "In order to safely reset the current debug log and apply the new masking preference, you must reconnect to the VPN now.";
+"service.alerts.buttons.reconnect" = "Reconnect";
 
 "account.cells.username.caption" = "Username";
 "account.cells.username.placeholder" = "username";

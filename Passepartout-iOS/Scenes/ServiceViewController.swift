@@ -48,6 +48,8 @@ class ServiceViewController: UIViewController, TableModelHost {
 
     private var lastInfrastructureUpdate: Date?
     
+    private var shouldDeleteLogOnDisconnection = false
+
     // MARK: Table
     
     var model: TableModel<SectionType, RowType> = TableModel()
@@ -358,7 +360,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private func testInternetConnectivity() {
         let hud = HUD()
-        Utils.checkConnectivityURL(AppConstants.VPN.connectivityURL, timeout: AppConstants.VPN.connectivityTimeout) {
+        Utils.checkConnectivityURL(AppConstants.Web.connectivityURL, timeout: AppConstants.Web.connectivityTimeout) {
             hud.hide()
 
             let V = L10n.Service.Alerts.TestConnectivity.Messages.self
@@ -397,6 +399,34 @@ class ServiceViewController: UIViewController, TableModelHost {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    private func togglePrivateDataMasking(cell: ToggleTableViewCell) {
+        let handler = {
+            TransientStore.masksPrivateData = cell.isOn
+            self.service.baseConfiguration = TransientStore.baseVPNConfiguration.build()
+        }
+        
+        guard vpn.status == .disconnected else {
+            let alert = Macros.alert(
+                L10n.Service.Cells.MasksPrivateData.caption,
+                L10n.Service.Alerts.MasksPrivateData.Messages.mustReconnect
+            )
+            alert.addDestructiveAction(L10n.Service.Alerts.Buttons.reconnect) {
+                handler()
+                self.shouldDeleteLogOnDisconnection = true
+                self.vpn.reconnect(completionHandler: nil)
+            }
+            alert.addCancelAction(L10n.Global.cancel) {
+                cell.setOn(!cell.isOn, animated: true)
+            }
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        handler()
+        service.eraseVpnLog()
+        shouldDeleteLogOnDisconnection = false
+    }
 
     private func postSupportRequest() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
@@ -412,8 +442,21 @@ class ServiceViewController: UIViewController, TableModelHost {
     @objc private func vpnDidUpdate() {
         reloadVpnStatus()
         
-        if vpn.status == .connected {
+        guard let status = vpn.status else {
+            return
+        }
+        switch status {
+        case .connected:
             Reviewer.shared.reportEvent()
+
+        case .disconnected:
+            if shouldDeleteLogOnDisconnection {
+                service.eraseVpnLog()
+                shouldDeleteLogOnDisconnection = false
+            }
+            
+        default:
+            break
         }
     }
     
@@ -492,6 +535,8 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case dataCount
         
         case debugLog
+        
+        case masksPrivateData
         
         case joinCommunity
         
@@ -705,6 +750,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             cell.leftText = L10n.Service.Cells.DebugLog.caption
             return cell
             
+        case .masksPrivateData:
+            let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
+            cell.caption = L10n.Service.Cells.MasksPrivateData.caption
+            cell.isOn = TransientStore.masksPrivateData
+            return cell
+            
         // feedback
 
         case .joinCommunity:
@@ -859,6 +910,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedPolicy:
             toggleTrustedConnectionPolicy(cell.isOn, sender: cell)
             
+        case .masksPrivateData:
+            togglePrivateDataMasking(cell: cell)
+            
         default:
             break
         }
@@ -922,6 +976,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             model.setFooter(L10n.Service.Sections.VpnSurvivesSleep.footer, for: .vpnSurvivesSleep)
             model.setFooter(L10n.Service.Sections.Trusted.footer, for: .trustedPolicy)
+            model.setFooter(L10n.Service.Sections.Diagnostics.footer, for: .diagnostics)
         }
         
         // rows
@@ -947,7 +1002,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             model.set([.vpnSurvivesSleep], in: .vpnSurvivesSleep)
             model.set([.trustedPolicy], in: .trustedPolicy)
-            model.set([.dataCount, .debugLog], in: .diagnostics)
+            model.set([.dataCount, .debugLog, .masksPrivateData], in: .diagnostics)
             model.set([.joinCommunity, .reportIssue], in: .feedback)
         }
 

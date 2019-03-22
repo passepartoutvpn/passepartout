@@ -510,7 +510,11 @@ public class ConnectionService: Codable {
         baseConfiguration.clearLastError(in: appGroup)
     }
     
-//    public func eraseVpnLog() {
-//        defaults.removeObject(forKey: Keys.vpnLog)
-//    }
+    public func eraseVpnLog() {
+        log.info("Erasing VPN log...")
+        guard let url = baseConfiguration.urlForLog(in: appGroup) else {
+            return
+        }
+        try? FileManager.default.removeItem(at: url)
+    }
 }
