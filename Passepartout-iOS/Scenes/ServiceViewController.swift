@@ -401,16 +401,31 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     private func togglePrivateDataMasking(cell: ToggleTableViewCell) {
-        TransientStore.masksPrivateData = cell.isOn
-        service.baseConfiguration = TransientStore.baseVPNConfiguration.build()
-
-        // for privacy, delete potentially unmasked data
-        if vpn.status != .disconnected {
-            shouldDeleteLogOnDisconnection = true
-        } else {
-            service.eraseVpnLog()
-            shouldDeleteLogOnDisconnection = false
+        let handler = {
+            TransientStore.masksPrivateData = cell.isOn
+            self.service.baseConfiguration = TransientStore.baseVPNConfiguration.build()
         }
+        
+        guard vpn.status == .disconnected else {
+            let alert = Macros.alert(
+                L10n.Service.Cells.MasksPrivateData.caption,
+                L10n.Service.Alerts.MasksPrivateData.Messages.mustDisconnect
+            )
+            alert.addDestructiveAction(L10n.Service.Alerts.Buttons.disconnect) {
+                handler()
+                self.shouldDeleteLogOnDisconnection = true
+                self.vpn.disconnect(completionHandler: nil)
+            }
+            alert.addCancelAction(L10n.Global.cancel) {
+                cell.setOn(!cell.isOn, animated: true)
+            }
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        handler()
+        service.eraseVpnLog()
+        shouldDeleteLogOnDisconnection = false
     }
 
     private func postSupportRequest() {

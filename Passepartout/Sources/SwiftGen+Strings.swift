@@ -454,6 +454,10 @@ public enum L10n {
 
   public enum Service {
     public enum Alerts {
+      public enum Buttons {
+        /// Disconnect
+        public static let disconnect = L10n.tr("Localizable", "service.alerts.buttons.disconnect")
+      }
       public enum CredentialsNeeded {
         /// You need to enter account credentials first.
         public static let message = L10n.tr("Localizable", "service.alerts.credentials_needed.message")
@@ -466,6 +470,12 @@ public enum L10n {
           }
           /// Information not available, are you connected?
           public static let notAvailable = L10n.tr("Localizable", "service.alerts.data_count.messages.not_available")
+        }
+      }
+      public enum MasksPrivateData {
+        public enum Messages {
+          /// In order to safely reset the current debug log and apply the new masking preference, you must disconnect from the VPN now.
+          public static let mustDisconnect = L10n.tr("Localizable", "service.alerts.masks_private_data.messages.must_disconnect")
         }
       }
       public enum ReconnectVpn {

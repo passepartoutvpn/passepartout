@@ -121,6 +121,8 @@
 "service.alerts.test_connectivity.messages.failure" = "Your device has no Internet connectivity, please review your profile parameters.";
 "service.alerts.data_count.messages.current" = "Received: %llu\nSent: %llu";
 "service.alerts.data_count.messages.not_available" = "Information not available, are you connected?";
+"service.alerts.masks_private_data.messages.must_disconnect" = "In order to safely reset the current debug log and apply the new masking preference, you must disconnect from the VPN now.";
+"service.alerts.buttons.disconnect" = "Disconnect";
 
 "account.cells.username.caption" = "Username";
 "account.cells.username.placeholder" = "username";
