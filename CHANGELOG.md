@@ -5,13 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.1.0 RC2 1441 (2019-03-22)
-
-### Changed
-
-- Normalize localization of provider locations.
-
-## 1.1.0 RC1 1426 (2019-03-20)
+## 1.1.0 (2019-03-22)
 
 ### Added
 
@@ -19,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Siri shortcuts. [#41](https://github.com/passepartoutvpn/passepartout-ios/pull/41)
 - Custom intents, have a look at Spotlight suggestions for Passepartout. [#40](https://github.com/passepartoutvpn/passepartout-ios/pull/40)
 - TunnelBear provider. [#35](https://github.com/passepartoutvpn/passepartout-ios/pull/35)
+
+### Changed
+
+- Normalize localization of provider locations.
 
 ### Fixed
 
