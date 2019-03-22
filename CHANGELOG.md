@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Configure masking in debug log for improved diagnostics.
+- Mullvad provider. [#45](https://github.com/passepartoutvpn/passepartout-ios/pull/45)
 
 ## 1.1.0 (2019-03-22)
 
