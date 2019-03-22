@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import TunnelKit
 import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
@@ -43,7 +44,7 @@ public class TransientStore {
     
     public let service: ConnectionService
 
-    public var didHandleSubreddit: Bool {
+    public static var didHandleSubreddit: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Keys.didHandleSubreddit)
         }
@@ -52,7 +53,7 @@ public class TransientStore {
         }
     }
 
-    public var masksPrivateData: Bool {
+    public static var masksPrivateData: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Keys.masksPrivateData)
         }
@@ -61,6 +62,18 @@ public class TransientStore {
         }
     }
     
+    public static var baseVPNConfiguration: TunnelKitProvider.ConfigurationBuilder {
+        let sessionBuilder = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: ""))
+        var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
+        builder.mtu = 1250
+        builder.shouldDebug = true
+//        builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $L $N.$F:$l - $M"
+//        builder.debugLogFormat = "$DHH:mm:ss$d $N.$F:$l - $M"
+        builder.debugLogFormat = AppConstants.Log.debugFormat
+        builder.masksPrivateData = masksPrivateData
+        return builder
+    }
+
     private init() {
         UserDefaults.standard.register(defaults: [
             Keys.didHandleSubreddit: false,
@@ -72,7 +85,7 @@ public class TransientStore {
         // this must be graceful
         ConnectionService.migrateJSON(from: TransientStore.serviceURL, to: TransientStore.serviceURL)
 
-        let cfg = AppConstants.VPN.baseConfiguration.build()
+        let cfg = TransientStore.baseVPNConfiguration.build()
         do {
             let data = try Data(contentsOf: TransientStore.serviceURL)
             if let content = String(data: data, encoding: .utf8) {

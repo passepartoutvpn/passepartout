@@ -109,16 +109,16 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if !didShowSubreddit && !TransientStore.shared.didHandleSubreddit {
+        if !didShowSubreddit && !TransientStore.didHandleSubreddit {
             didShowSubreddit = true
             
             let alert = Macros.alert(L10n.Reddit.title, L10n.Reddit.message)
             alert.addDefaultAction(L10n.Reddit.Buttons.subscribe) {
-                TransientStore.shared.didHandleSubreddit = true
+                TransientStore.didHandleSubreddit = true
                 self.subscribeSubreddit()
             }
             alert.addAction(L10n.Reddit.Buttons.never) {
-                TransientStore.shared.didHandleSubreddit = true
+                TransientStore.didHandleSubreddit = true
             }
             alert.addCancelAction(L10n.Reddit.Buttons.remind)
             present(alert, animated: true, completion: nil)

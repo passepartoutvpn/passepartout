@@ -360,7 +360,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private func testInternetConnectivity() {
         let hud = HUD()
-        Utils.checkConnectivityURL(AppConstants.VPN.connectivityURL, timeout: AppConstants.VPN.connectivityTimeout) {
+        Utils.checkConnectivityURL(AppConstants.Web.connectivityURL, timeout: AppConstants.Web.connectivityTimeout) {
             hud.hide()
 
             let V = L10n.Service.Alerts.TestConnectivity.Messages.self
@@ -401,9 +401,8 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     private func togglePrivateDataMasking(cell: ToggleTableViewCell) {
-        TransientStore.shared.masksPrivateData = cell.isOn
-        AppConstants.VPN.baseConfiguration.masksPrivateData = cell.isOn
-        service.baseConfiguration = AppConstants.VPN.baseConfiguration.build()
+        TransientStore.masksPrivateData = cell.isOn
+        service.baseConfiguration = TransientStore.baseVPNConfiguration.build()
 
         // for privacy, delete potentially unmasked data
         if vpn.status != .disconnected {
@@ -739,7 +738,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .masksPrivateData:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
             cell.caption = L10n.Service.Cells.MasksPrivateData.caption
-            cell.isOn = TransientStore.shared.masksPrivateData
+            cell.isOn = TransientStore.masksPrivateData
             return cell
             
         // feedback
