@@ -161,7 +161,7 @@
 "configuration.cells.tls_wrapping.value.disabled" = "Disabled";
 "configuration.cells.dns_server.caption" = "Address";
 "configuration.cells.compression_framing.caption" = "Framing";
-"configuration.cells.compression_framing.value.disabled" = "None";
+"configuration.cells.compression_framing.value.disabled" = "Disabled";
 "configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
 "configuration.cells.compression_framing.value.compress" = "--compress";
 "configuration.cells.compression_algorithm.caption" = "Algorithm";

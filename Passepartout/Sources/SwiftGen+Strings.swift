@@ -126,7 +126,7 @@ public enum L10n {
         public enum Value {
           /// --compress
           public static let compress = L10n.tr("Localizable", "configuration.cells.compression_framing.value.compress")
-          /// None
+          /// Disabled
           public static let disabled = L10n.tr("Localizable", "configuration.cells.compression_framing.value.disabled")
           /// --comp-lzo
           public static let lzo = L10n.tr("Localizable", "configuration.cells.compression_framing.value.lzo")
