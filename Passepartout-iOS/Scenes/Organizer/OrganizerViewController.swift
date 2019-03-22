@@ -372,6 +372,7 @@ extension OrganizerViewController {
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Organizer.Cells.About.caption(GroupConstants.App.name)
+            cell.rightText = Utils.versionString()
             return cell
 
         case .uninstall:
