@@ -401,6 +401,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     private func togglePrivateDataMasking(cell: ToggleTableViewCell) {
+        TransientStore.shared.masksPrivateData = cell.isOn
         AppConstants.VPN.baseConfiguration.masksPrivateData = cell.isOn
         service.baseConfiguration = AppConstants.VPN.baseConfiguration.build()
 
@@ -738,7 +739,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .masksPrivateData:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
             cell.caption = L10n.Service.Cells.MasksPrivateData.caption
-            cell.isOn = AppConstants.VPN.baseConfiguration.masksPrivateData ?? true
+            cell.isOn = TransientStore.shared.masksPrivateData
             return cell
             
         // feedback

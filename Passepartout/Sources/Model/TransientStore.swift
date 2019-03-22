@@ -31,6 +31,8 @@ private let log = SwiftyBeaver.self
 public class TransientStore {
     private struct Keys {
         static let didHandleSubreddit = "DidHandleSubreddit"
+        
+        static let masksPrivateData = "MasksPrivateData"
     }
     
     public static let shared = TransientStore()
@@ -50,7 +52,21 @@ public class TransientStore {
         }
     }
 
+    public var masksPrivateData: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.masksPrivateData)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.masksPrivateData)
+        }
+    }
+    
     private init() {
+        UserDefaults.standard.register(defaults: [
+            Keys.didHandleSubreddit: false,
+            Keys.masksPrivateData: true
+        ])
+        
         TransientStore.migrateDocumentsToAppGroup()
 
         // this must be graceful

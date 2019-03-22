@@ -55,7 +55,7 @@ public class AppConstants {
 //            builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $L $N.$F:$l - $M"
 //            builder.debugLogFormat = "$DHH:mm:ss$d $N.$F:$l - $M"
             builder.debugLogFormat = Log.debugFormat
-            builder.masksPrivateData = true
+            builder.masksPrivateData = TransientStore.shared.masksPrivateData
             return builder
         }()
 
