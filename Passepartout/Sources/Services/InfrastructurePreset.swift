@@ -59,6 +59,8 @@ public struct InfrastructurePreset: Codable {
 
         case renegotiatesAfterSeconds = "reneg"
 
+        case tlsWrap = "wrap"
+
         case usesPIAPatches = "pia"
 
         case randomizeEndpoint = "random"
@@ -95,6 +97,7 @@ public struct InfrastructurePreset: Codable {
         sessionBuilder.clientCertificate = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientCertificate)
         sessionBuilder.clientKey = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientKey)
         sessionBuilder.compressionFraming = try cfgContainer.decode(SessionProxy.CompressionFraming.self, forKey: .compressionFraming)
+        sessionBuilder.tlsWrap = try cfgContainer.decodeIfPresent(SessionProxy.TLSWrap.self, forKey: .tlsWrap)
         sessionBuilder.keepAliveInterval = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .keepAliveSeconds)
         sessionBuilder.renegotiatesAfter = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .renegotiatesAfterSeconds)
         sessionBuilder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
@@ -120,6 +123,7 @@ public struct InfrastructurePreset: Codable {
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientCertificate, forKey: .clientCertificate)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientKey, forKey: .clientKey)
         try cfgContainer.encode(configuration.sessionConfiguration.compressionFraming, forKey: .compressionFraming)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.tlsWrap, forKey: .tlsWrap)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.keepAliveInterval, forKey: .keepAliveSeconds)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.renegotiatesAfter, forKey: .renegotiatesAfterSeconds)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.usesPIAPatches, forKey: .usesPIAPatches)
