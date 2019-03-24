@@ -130,8 +130,9 @@
 "account.sections.credentials.header" = "Credentials";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Use your %@ website account number and password \"m\".";
 "account.sections.guidance.footer.infrastructure.pia" = "Use your %@ website credentials. Your username is usually numeric with a \"p\" prefix.";
+"account.sections.guidance.footer.infrastructure.protonvpn" = "Find your %@ credentials in the \"Account > OpenVPN Login\" section of the website.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Use your %@ website credentials. Your username is usually your e-mail.";
-"account.sections.guidance.footer.infrastructure.windscribe" = "Find your credentials in the OpenVPN Config Generator on the %@ website.";
+"account.sections.guidance.footer.infrastructure.windscribe" = "Find your %@ credentials in the OpenVPN Config Generator on the website.";
 "account.sections.registration.footer" = "Go get an account on the %@ website.";
 "account.cells.username.caption" = "Username";
 "account.cells.username.placeholder" = "username";

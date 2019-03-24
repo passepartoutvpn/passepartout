@@ -106,11 +106,15 @@ public enum L10n {
             public static func pia(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.pia", p1)
             }
+            /// Find your %@ credentials in the "Account > OpenVPN Login" section of the website.
+            public static func protonvpn(_ p1: String) -> String {
+              return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.protonvpn", p1)
+            }
             /// Use your %@ website credentials. Your username is usually your e-mail.
             public static func tunnelbear(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.tunnelbear", p1)
             }
-            /// Find your credentials in the OpenVPN Config Generator on the %@ website.
+            /// Find your %@ credentials in the OpenVPN Config Generator on the website.
             public static func windscribe(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.windscribe", p1)
             }
