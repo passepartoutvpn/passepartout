@@ -28,11 +28,11 @@ import TunnelKit
 
 public struct Infrastructure: Codable {
     public enum Name: String, Codable, Comparable {
+        case mullvad = "Mullvad"
+        
         case pia = "PIA"
         
         case tunnelBear = "TunnelBear"
-        
-        case mullvad = "Mullvad"
         
         public var webName: String {
             return rawValue.lowercased()

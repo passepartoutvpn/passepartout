@@ -45,35 +45,8 @@ class AccountViewController: UIViewController, TableModelHost {
     
     var infrastructureName: Infrastructure.Name? {
         didSet {
-            guard let name = infrastructureName else {
-                model.removeFooter(for: .credentials)
-                return
-            }
-
-            let V = L10n.Account.SuggestionFooter.self
-
-            var guidance: String?
-            switch name {
-            case .pia:
-                guidance = V.Infrastructure.pia
-                
-            case .tunnelBear:
-                guidance = V.Infrastructure.tunnelbear
-
-            case .mullvad:
-                guidance = V.Infrastructure.mullvad
-            }
-
-            if guidance != nil {
-                let footer: String
-                if let _ = referralURL {
-                    footer = "\(guidance!)\n\n\(V.referral)"
-                } else {
-                    footer = guidance!
-                }
-                model.setFooter(footer, for: .credentials)
-                tableView?.reloadData()
-            }
+            reloadModel()
+            tableView?.reloadData()
         }
     }
 
@@ -83,6 +56,13 @@ class AccountViewController: UIViewController, TableModelHost {
         return Credentials(username, password).trimmed()
     }
     
+    private var guidanceURL: String? {
+        guard let name = infrastructureName else {
+            return nil
+        }
+        return AppConstants.URLs.guidances[name]
+    }
+
     private var referralURL: String? {
         guard let name = infrastructureName else {
             return nil
@@ -94,14 +74,45 @@ class AccountViewController: UIViewController, TableModelHost {
 
     // MARK: TableModelHost
     
-    let model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
-        model.add(.credentials)
-        model.set([.username, .password], in: .credentials)
-        return model
-    }()
+    var model: TableModel<SectionType, RowType> = TableModel()
     
     func reloadModel() {
+        model.clear()
+        
+        model.add(.credentials)
+        model.set([.username, .password], in: .credentials)
+
+        if let name = infrastructureName {
+            let V = L10n.Account.SuggestionFooter.self
+            
+            var guidance: String?
+            switch name {
+            case .mullvad:
+                guidance = V.Infrastructure.mullvad
+                
+            case .pia:
+                guidance = V.Infrastructure.pia
+                
+            case .tunnelBear:
+                guidance = V.Infrastructure.tunnelbear
+            }
+
+            model.add(.noAccount)
+            model.set([], in: .noAccount)
+
+            if guidance != nil {
+                let footer: String
+                if let _ = guidanceURL {
+                    footer = "\(guidance!) \(V.guidanceLink)"
+                } else {
+                    footer = guidance!
+                }
+                model.setFooter(footer, for: .credentials)
+            }
+            if let _ = referralURL {
+                model.setFooter(V.referral, for: .noAccount)
+            }
+        }
     }
     
     // MARK: UIViewController
@@ -118,6 +129,8 @@ class AccountViewController: UIViewController, TableModelHost {
         title = L10n.Service.Cells.Account.caption
         cellUsername?.field.text = currentCredentials?.username
         cellPassword?.field.text = currentCredentials?.password
+        
+        reloadModel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -141,13 +154,6 @@ class AccountViewController: UIViewController, TableModelHost {
         view.endEditing(true)
         delegate?.accountControllerDidComplete(self)
     }
-
-    @objc private func footerTapped() {
-        guard let url = referralURL else {
-            return
-        }
-        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
-    }
 }
 
 // MARK: -
@@ -155,6 +161,8 @@ class AccountViewController: UIViewController, TableModelHost {
 extension AccountViewController: UITableViewDataSource, UITableViewDelegate, FieldTableViewCellDelegate {
     enum SectionType: Int {
         case credentials
+
+        case noAccount
     }
     
     enum RowType: Int {
@@ -165,19 +173,24 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
     
     private static let footerButtonTag = 1000
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return model.count
+    }
+    
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: .credentials)
+        return model.footer(for: section)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        var optButton = view.viewWithTag(AccountViewController.footerButtonTag) as? UIButton
+        var optButton = view.viewWithTag(AccountViewController.footerButtonTag + section) as? UIButton
         if optButton == nil {
             let button = UIButton()
             button.frame = view.bounds
+            button.tag = AccountViewController.footerButtonTag + section
             view.addSubview(button)
             optButton = button
         }
-        optButton?.addTarget(self, action: #selector(footerTapped), for: .touchUpInside)
+        optButton?.addTarget(self, action: #selector(footerTapped(_:)), for: .touchUpInside)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -229,5 +242,23 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
         default:
             break
         }
+    }
+
+    @objc private func footerTapped(_ sender: Any?) {
+        guard let button = sender as? UIButton, let section = SectionType(rawValue: button.tag - AccountViewController.footerButtonTag) else {
+            return
+        }
+        var urlString: String?
+        switch section {
+        case .credentials:
+            urlString = guidanceURL
+            
+        case .noAccount:
+            urlString = referralURL
+        }
+        guard let url = urlString else {
+            return
+        }
+        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
     }
 }

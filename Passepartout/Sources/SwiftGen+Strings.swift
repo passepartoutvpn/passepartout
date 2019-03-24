@@ -81,6 +81,8 @@ public enum L10n {
       }
     }
     public enum SuggestionFooter {
+      /// Tap to open web page.
+      public static let guidanceLink = L10n.tr("Localizable", "account.suggestion_footer.guidance_link")
       /// Don't have an account? Tap here to get one.
       public static let referral = L10n.tr("Localizable", "account.suggestion_footer.referral")
       public enum Infrastructure {
