@@ -36,6 +36,10 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
         
         case area
         
+        case num
+        
+        case isFree = "free"
+        
 //        case location
         
         case hostname
@@ -50,6 +54,10 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
     public let country: String
     
     public let area: String?
+    
+    public let num: String?
+    
+    public let isFree: Bool?
     
 //    public let location: (Double, Double)
     
@@ -93,10 +101,17 @@ extension Pool {
 
     public var localizedCountryArea: String {
         let countryString = localizedCountry
-        guard let area = area else {
+        let zone: String
+        if let area = area, let num = num {
+            zone = "\(area) #\(num)"
+        } else if let area = area {
+            zone = area
+        } else if let num = num {
+            zone = "#\(num)"
+        } else {
             return countryString
         }
-        return String.init(format: Pool.localizedFormat, countryString, area.uppercased())
+        return String.init(format: Pool.localizedFormat, countryString, zone.uppercased())
     }
 
     public var localizedName: String {
