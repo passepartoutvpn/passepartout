@@ -16,6 +16,7 @@ FEATURES
 - Convenient Siri Shortcuts.
 
 - Convenient presets for major VPN networks:
+  - Mullvad
   - Private Internet Access
   - TunnelBear
   - ...more soon!
