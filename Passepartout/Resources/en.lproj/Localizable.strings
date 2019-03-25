@@ -137,6 +137,7 @@
 "account.suggestion_footer.infrastructure.mullvad" = "Use your website account number and password \"m\".";
 "account.suggestion_footer.infrastructure.pia" = "Use your website credentials. Your username is usually numeric with a \"p\" prefix.";
 "account.suggestion_footer.infrastructure.tunnelbear" = "Use your website credentials. Your username is usually your email.";
+"account.suggestion_footer.infrastructure.windscribe" = "Find your credentials in the OpenVPN Config Generator on the website.";
 "account.suggestion_footer.guidance_link" = "Tap to open web page.";
 "account.suggestion_footer.referral" = "Don't have an account? Tap here to get one.";
 

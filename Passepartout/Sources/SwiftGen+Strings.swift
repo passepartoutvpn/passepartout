@@ -92,6 +92,8 @@ public enum L10n {
         public static let pia = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.pia")
         /// Use your website credentials. Your username is usually your email.
         public static let tunnelbear = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.tunnelbear")
+        /// Find your credentials in the OpenVPN Config Generator on the website.
+        public static let windscribe = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.windscribe")
       }
     }
   }
