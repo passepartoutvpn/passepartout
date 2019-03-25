@@ -59,6 +59,9 @@ class AccountViewController: UIViewController, TableModelHost {
                 
             case .tunnelBear:
                 guidance = V.Infrastructure.tunnelbear
+
+            case .mullvad:
+                guidance = V.Infrastructure.mullvad
             }
 
             if guidance != nil {

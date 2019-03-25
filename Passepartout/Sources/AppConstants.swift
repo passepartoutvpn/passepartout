@@ -166,7 +166,8 @@ public class AppConstants {
         
         public static let referrals: [Infrastructure.Name: String] = [
             .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/",
-            .tunnelBear: "https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464"
+            .tunnelBear: "https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464",
+            .mullvad: "https://mullvad.net/en/account/create/"
         ]
     }
 

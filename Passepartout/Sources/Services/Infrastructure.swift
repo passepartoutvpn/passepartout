@@ -32,6 +32,8 @@ public struct Infrastructure: Codable {
         
         case tunnelBear = "TunnelBear"
         
+        case mullvad = "Mullvad"
+        
         public var webName: String {
             return rawValue.lowercased()
         }

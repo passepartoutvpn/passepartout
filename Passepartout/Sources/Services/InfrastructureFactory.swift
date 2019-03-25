@@ -55,9 +55,11 @@ public class InfrastructureFactory {
     
     public static let shared = InfrastructureFactory()
 
+    // manually pre-sorted
     public let allNames: [Infrastructure.Name] = [
+        .mullvad,
         .pia,
-        .tunnelBear
+        .tunnelBear,
     ]
     
     private let bundle: [Infrastructure.Name: Infrastructure]
