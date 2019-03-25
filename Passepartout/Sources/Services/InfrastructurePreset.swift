@@ -65,6 +65,8 @@ public struct InfrastructurePreset: Codable {
 
         case usesPIAPatches = "pia"
 
+        case checksEKU = "eku"
+
         case randomizeEndpoint = "random"
     }
     
@@ -104,6 +106,7 @@ public struct InfrastructurePreset: Codable {
         sessionBuilder.keepAliveInterval = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .keepAliveSeconds)
         sessionBuilder.renegotiatesAfter = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .renegotiatesAfterSeconds)
         sessionBuilder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
+        sessionBuilder.checksEKU = try cfgContainer.decodeIfPresent(Bool.self, forKey: .checksEKU) ?? false
         sessionBuilder.randomizeEndpoint = try cfgContainer.decodeIfPresent(Bool.self, forKey: .randomizeEndpoint) ?? false
 
         var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
@@ -131,6 +134,7 @@ public struct InfrastructurePreset: Codable {
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.keepAliveInterval, forKey: .keepAliveSeconds)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.renegotiatesAfter, forKey: .renegotiatesAfterSeconds)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.usesPIAPatches, forKey: .usesPIAPatches)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.checksEKU, forKey: .checksEKU)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.randomizeEndpoint, forKey: .randomizeEndpoint)
     }
 }
