@@ -32,7 +32,9 @@ import Passepartout_Core
 private let log = SwiftyBeaver.self
 
 extension ConfigurationParser.ParsingResult {
-    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphrase: String?, passphraseBlock: @escaping (String) -> Void) -> ConfigurationParser.ParsingResult? {
+    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphrase: String?,
+                     passphraseBlock: @escaping (String) -> Void, passphraseCancelBlock: (() -> Void)?) -> ConfigurationParser.ParsingResult? {
+
         let result: ConfigurationParser.ParsingResult
         let fm = FileManager.default
 
@@ -51,7 +53,7 @@ extension ConfigurationParser.ParsingResult {
                     passphraseBlock(passphrase)
                 }
                 alert.addCancelAction(L10n.Global.cancel) {
-                    try? fm.removeItem(at: url)
+                    passphraseCancelBlock?()
                 }
                 viewController.present(alert, animated: true, completion: nil)
             

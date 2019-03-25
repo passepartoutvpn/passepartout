@@ -101,7 +101,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let passphraseBlock = { (passphrase) in
             _ = self.tryParseURL(url, passphrase: passphrase, target: target)
         }
-        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: target, passphrase: passphrase, passphraseBlock: passphraseBlock) else {
+        let passphraseCancelBlock = {
+            _ = try? FileManager.default.removeItem(at: url)
+        }
+        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: target, passphrase: passphrase, passphraseBlock: passphraseBlock, passphraseCancelBlock: passphraseCancelBlock) else {
             return true
         }
         if let warning = parsingResult.warning {
