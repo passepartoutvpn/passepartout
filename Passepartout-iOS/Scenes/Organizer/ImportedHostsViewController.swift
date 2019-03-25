@@ -88,7 +88,7 @@ class ImportedHostsViewController: UITableViewController {
             }
             self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier, sender: cell)
         }
-        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: self, passphraseBlock: passphraseBlock) else {
+        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: self, passphrase: passphrase, passphraseBlock: passphraseBlock) else {
             deselectSelectedRow()
             return false
         }

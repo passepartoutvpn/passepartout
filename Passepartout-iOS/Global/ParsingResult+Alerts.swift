@@ -32,13 +32,13 @@ import Passepartout_Core
 private let log = SwiftyBeaver.self
 
 extension ConfigurationParser.ParsingResult {
-    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphraseBlock: @escaping (String) -> Void) -> ConfigurationParser.ParsingResult? {
+    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphrase: String?, passphraseBlock: @escaping (String) -> Void) -> ConfigurationParser.ParsingResult? {
         let result: ConfigurationParser.ParsingResult
         let fm = FileManager.default
 
         log.debug("Parsing configuration URL: \(url)")
         do {
-            result = try ConfigurationParser.parsed(fromURL: url)
+            result = try ConfigurationParser.parsed(fromURL: url, passphrase: passphrase)
         } catch let e as ConfigurationParser.ParsingError {
             switch e {
             case .encryptionPassphrase, .unableToDecrypt(_):

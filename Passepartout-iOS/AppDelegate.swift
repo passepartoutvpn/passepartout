@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let passphraseBlock = { (passphrase) in
             _ = self.tryParseURL(url, passphrase: passphrase, target: target)
         }
-        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: target, passphraseBlock: passphraseBlock) else {
+        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: target, passphrase: passphrase, passphraseBlock: passphraseBlock) else {
             return true
         }
         if let warning = parsingResult.warning {
