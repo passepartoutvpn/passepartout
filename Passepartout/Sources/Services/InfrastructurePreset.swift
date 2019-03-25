@@ -55,6 +55,8 @@ public struct InfrastructurePreset: Codable {
 
         case compressionFraming = "frame"
         
+        case compressionAlgorithm = "compression"
+        
         case keepAliveSeconds = "ping"
 
         case renegotiatesAfterSeconds = "reneg"
@@ -97,6 +99,7 @@ public struct InfrastructurePreset: Codable {
         sessionBuilder.clientCertificate = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientCertificate)
         sessionBuilder.clientKey = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientKey)
         sessionBuilder.compressionFraming = try cfgContainer.decode(SessionProxy.CompressionFraming.self, forKey: .compressionFraming)
+        sessionBuilder.compressionAlgorithm = try cfgContainer.decodeIfPresent(SessionProxy.CompressionAlgorithm.self, forKey: .compressionAlgorithm) ?? .disabled
         sessionBuilder.tlsWrap = try cfgContainer.decodeIfPresent(SessionProxy.TLSWrap.self, forKey: .tlsWrap)
         sessionBuilder.keepAliveInterval = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .keepAliveSeconds)
         sessionBuilder.renegotiatesAfter = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .renegotiatesAfterSeconds)
@@ -123,6 +126,7 @@ public struct InfrastructurePreset: Codable {
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientCertificate, forKey: .clientCertificate)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientKey, forKey: .clientKey)
         try cfgContainer.encode(configuration.sessionConfiguration.compressionFraming, forKey: .compressionFraming)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.compressionAlgorithm, forKey: .compressionAlgorithm)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.tlsWrap, forKey: .tlsWrap)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.keepAliveInterval, forKey: .keepAliveSeconds)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.renegotiatesAfter, forKey: .renegotiatesAfterSeconds)
