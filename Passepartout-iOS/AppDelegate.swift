@@ -94,23 +94,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         
         let topmost = root.presentedViewController ?? root
-
-        let fm = FileManager.default
-        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: topmost) else {
-            try? fm.removeItem(at: url)
+        return tryParseURL(url, passphrase: nil, target: topmost)
+    }
+    
+    private func tryParseURL(_ url: URL, passphrase: String?, target: UIViewController) -> Bool {
+        let passphraseBlock = { (passphrase) in
+            _ = self.tryParseURL(url, passphrase: passphrase, target: target)
+        }
+        let passphraseCancelBlock = {
+            _ = try? FileManager.default.removeItem(at: url)
+        }
+        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: target, passphrase: passphrase, passphraseBlock: passphraseBlock, passphraseCancelBlock: passphraseCancelBlock) else {
             return true
         }
         if let warning = parsingResult.warning {
-            ConfigurationParser.ParsingResult.alertImportWarning(url: url, in: topmost, withWarning: warning) {
+            ConfigurationParser.ParsingResult.alertImportWarning(url: url, in: target, withWarning: warning) {
                 if $0 {
-                    self.handleParsingResult(parsingResult, in: topmost)
+                    self.handleParsingResult(parsingResult, in: target)
                 } else {
-                    try? fm.removeItem(at: url)
+                    try? FileManager.default.removeItem(at: url)
                 }
             }
             return true
         }
-        handleParsingResult(parsingResult, in: topmost)
+        handleParsingResult(parsingResult, in: target)
         return true
     }
     

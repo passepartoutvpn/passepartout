@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Configure masking in debug log for improved diagnostics.
 - Mullvad provider. [#45](https://github.com/passepartoutvpn/passepartout-ios/pull/45)
+- Support for encrypted certificate private keys. [tunnelkit#72](https://github.com/keeshux/tunnelkit/issues/72)
 
 ## 1.1.0 (2019-03-22)
 
