@@ -76,24 +76,35 @@ class ImportedHostsViewController: UITableViewController {
                 return false
             }
             let url = pendingConfigurationURLs[indexPath.row]
-            guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: self) else {
-                deselectSelectedRow()
-                return false
+            return tryParseURL(url, passphrase: nil, cell: cell)
+        }
+        return true
+    }
+    
+    private func tryParseURL(_ url: URL, passphrase: String?, cell: UITableViewCell) -> Bool {
+        let passphraseBlock: (String) -> Void = { (passphrase) in
+            guard self.tryParseURL(url, passphrase: passphrase, cell: cell) else {
+                return
             }
-            self.parsingResult = parsingResult
-
-            // postpone segue until alert dismissal
-            if let warning = parsingResult.warning {
-                ConfigurationParser.ParsingResult.alertImportWarning(url: url, in: self, withWarning: warning) {
-                    self.deselectSelectedRow()
-                    if $0 {
-                        self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
-                    } else {
-                        self.parsingResult = nil
-                    }
+            self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier, sender: cell)
+        }
+        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: self, passphraseBlock: passphraseBlock) else {
+            deselectSelectedRow()
+            return false
+        }
+        self.parsingResult = parsingResult
+        
+        // postpone segue until alert dismissal
+        if let warning = parsingResult.warning {
+            ConfigurationParser.ParsingResult.alertImportWarning(url: url, in: self, withWarning: warning) {
+                self.deselectSelectedRow()
+                if $0 {
+                    self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
+                } else {
+                    self.parsingResult = nil
                 }
-                return false
             }
+            return false
         }
         return true
     }

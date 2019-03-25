@@ -59,6 +59,8 @@
 "parsed_file.alerts.missing.message" = "The configuration file lacks a required option (%@).";
 "parsed_file.alerts.unsupported.message" = "The configuration file contains an unsupported option (%@).";
 "parsed_file.alerts.potentially_unsupported.message" = "The configuration file is correct but contains a potentially unsupported option (%@).\n\nConnectivity may break depending on server settings.";
+"parsed_file.alerts.encryption_passphrase.message" = "Please enter the encryption passphrase.";
+"parsed_file.alerts.decryption.message" = "The configuration contains an encrypted private key and it could not be decrypted. Double check your entered passphrase.";
 "parsed_file.alerts.parsing.message" = "Unable to parse the provided configuration file (%@).";
 "parsed_file.alerts.buttons.report" = "Report an issue";
 

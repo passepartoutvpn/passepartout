@@ -403,6 +403,14 @@ public enum L10n {
         /// Report an issue
         public static let report = L10n.tr("Localizable", "parsed_file.alerts.buttons.report")
       }
+      public enum Decryption {
+        /// The configuration contains an encrypted private key and it could not be decrypted. Double check your entered passphrase.
+        public static let message = L10n.tr("Localizable", "parsed_file.alerts.decryption.message")
+      }
+      public enum EncryptionPassphrase {
+        /// Please enter the encryption passphrase.
+        public static let message = L10n.tr("Localizable", "parsed_file.alerts.encryption_passphrase.message")
+      }
       public enum Missing {
         /// The configuration file lacks a required option (%@).
         public static func message(_ p1: String) -> String {

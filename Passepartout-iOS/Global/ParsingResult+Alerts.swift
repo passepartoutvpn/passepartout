@@ -32,14 +32,39 @@ import Passepartout_Core
 private let log = SwiftyBeaver.self
 
 extension ConfigurationParser.ParsingResult {
-    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController) -> ConfigurationParser.ParsingResult? {
+    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphraseBlock: @escaping (String) -> Void) -> ConfigurationParser.ParsingResult? {
         let result: ConfigurationParser.ParsingResult
+        let fm = FileManager.default
+
         log.debug("Parsing configuration URL: \(url)")
         do {
             result = try ConfigurationParser.parsed(fromURL: url)
+        } catch let e as ConfigurationParser.ParsingError {
+            switch e {
+            case .encryptionPassphrase, .unableToDecrypt(_):
+                let alert = Macros.alert(url.normalizedFilename, L10n.ParsedFile.Alerts.EncryptionPassphrase.message)
+                alert.addTextField(configurationHandler: nil)
+                alert.addDefaultAction(L10n.Global.ok) {
+                    guard let passphrase = alert.textFields?.first?.text else {
+                        return
+                    }
+                    passphraseBlock(passphrase)
+                }
+                alert.addCancelAction(L10n.Global.cancel) {
+                    try? fm.removeItem(at: url)
+                }
+                viewController.present(alert, animated: true, completion: nil)
+            
+            default:
+                let message = localizedMessage(forError: e)
+                alertImportError(url: url, in: viewController, withMessage: message)
+                try? fm.removeItem(at: url)
+            }
+            return nil
         } catch let e {
             let message = localizedMessage(forError: e)
             alertImportError(url: url, in: viewController, withMessage: message)
+            try? fm.removeItem(at: url)
             return nil
         }
         return result
@@ -78,6 +103,9 @@ extension ConfigurationParser.ParsingResult {
             case .unsupportedConfiguration(let option):
                 log.error("Could not parse configuration URL: unsupported configuration, \(option)")
                 return L10n.ParsedFile.Alerts.Unsupported.message(option)
+                
+            default:
+                break
             }
         }
         log.error("Could not parse configuration URL: \(error)")
@@ -91,6 +119,9 @@ extension ConfigurationParser.ParsingResult {
             
         case .unsupportedConfiguration(let option):
             return option
+            
+        default:
+            return "" // XXX: should never get here
         }
     }
 }
