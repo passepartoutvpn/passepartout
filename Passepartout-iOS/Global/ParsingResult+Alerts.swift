@@ -45,7 +45,9 @@ extension ConfigurationParser.ParsingResult {
             switch e {
             case .encryptionPassphrase, .unableToDecrypt(_):
                 let alert = Macros.alert(url.normalizedFilename, L10n.ParsedFile.Alerts.EncryptionPassphrase.message)
-                alert.addTextField(configurationHandler: nil)
+                alert.addTextField { (field) in
+                    field.isSecureTextEntry = true
+                }
                 alert.addDefaultAction(L10n.Global.ok) {
                     guard let passphrase = alert.textFields?.first?.text else {
                         return
