@@ -29,7 +29,7 @@ import IntentsUI
 import Passepartout_Core
 
 @available(iOS 12, *)
-class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewControllerDelegate, INUIAddVoiceShortcutViewControllerDelegate, TableModelHost {
+class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewControllerDelegate, TableModelHost {
     private let service = TransientStore.shared.service
 
     private var providers: [String] = []
@@ -38,7 +38,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
 
     private var selectedProfile: ConnectionProfile?
     
-    weak var delegate: ShortcutsAddViewControllerDelegate?
+    weak var delegate: ShortcutsIntentDelegate?
     
     // MARK: TableModelHost
     
@@ -168,12 +168,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     }
     
     private func addShortcut(with intent: INIntent) {
-        guard let shortcut = INShortcut(intent: intent) else {
-            return
-        }
-        let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
-        vc.delegate = self
-        present(vc, animated: true, completion: nil)
+        delegate?.shortcutsDidSelectIntent(intent: intent)
     }
     
     private func pickProviderLocation() {
@@ -184,19 +179,5 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
 
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool) {
         addMoveToLocation(pool: pool)
-    }
-    
-    // MARK: INUIAddVoiceShortcutViewControllerDelegate
-
-    func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
-        guard let voiceShortcut = voiceShortcut else {
-            delegate?.shortcutAddControllerDidCancel(nil)
-            return
-        }
-        delegate?.shortcutAddController(nil, voiceShortcut: voiceShortcut)
-    }
-    
-    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
-        delegate?.shortcutAddControllerDidCancel(nil)
     }
 }

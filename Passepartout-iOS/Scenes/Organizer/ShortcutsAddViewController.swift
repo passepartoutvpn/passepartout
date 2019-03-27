@@ -24,19 +24,12 @@
 //
 
 import UIKit
-import IntentsUI
+import Intents
 import Passepartout_Core
 
 @available(iOS 12, *)
-protocol ShortcutsAddViewControllerDelegate: class {
-    func shortcutAddController(_ controller: UIViewController?, voiceShortcut: INVoiceShortcut)
-
-    func shortcutAddControllerDidCancel(_ controller: UIViewController?)
-}
-
-@available(iOS 12, *)
-class ShortcutsAddViewController: UITableViewController, INUIAddVoiceShortcutViewControllerDelegate, TableModelHost {
-    weak var delegate: ShortcutsAddViewControllerDelegate?
+class ShortcutsAddViewController: UITableViewController, TableModelHost {
+    weak var delegate: ShortcutsIntentDelegate?
 
     // MARK: TableModel
     
@@ -206,29 +199,6 @@ class ShortcutsAddViewController: UITableViewController, INUIAddVoiceShortcutVie
     }
     
     private func addShortcut(with intent: INIntent) {
-        guard let shortcut = INShortcut(intent: intent) else {
-            return
-        }
-        let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
-        vc.delegate = self
-        present(vc, animated: true, completion: nil)
-    }
-    
-    @IBAction private func close() {
-        dismiss(animated: true, completion: nil)
-    }
-
-    // MARK: INUIAddVoiceShortcutViewControllerDelegate
-    
-    func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
-        guard let voiceShortcut = voiceShortcut else {
-            delegate?.shortcutAddControllerDidCancel(self)
-            return
-        }
-        delegate?.shortcutAddController(self, voiceShortcut: voiceShortcut)
-    }
-    
-    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
-        delegate?.shortcutAddControllerDidCancel(self)
+        delegate?.shortcutsDidSelectIntent(intent: intent)
     }
 }

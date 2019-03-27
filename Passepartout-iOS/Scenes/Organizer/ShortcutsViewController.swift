@@ -29,6 +29,11 @@ import IntentsUI
 import Passepartout_Core
 
 @available(iOS 12, *)
+protocol ShortcutsIntentDelegate: class {
+    func shortcutsDidSelectIntent(intent: INIntent)
+}
+
+@available(iOS 12, *)
 private struct ShortcutWrapper: Comparable {
     let phrase: String
 
@@ -58,7 +63,7 @@ private struct ShortcutWrapper: Comparable {
 }
 
 @available(iOS 12, *)
-class ShortcutsViewController: UITableViewController, INUIEditVoiceShortcutViewControllerDelegate, ShortcutsAddViewControllerDelegate, TableModelHost {
+class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewControllerDelegate, INUIEditVoiceShortcutViewControllerDelegate, ShortcutsIntentDelegate, TableModelHost {
     private var wrappers: [ShortcutWrapper]?
     
     private var editedIndexPath: IndexPath?
@@ -193,28 +198,42 @@ class ShortcutsViewController: UITableViewController, INUIEditVoiceShortcutViewC
         }
     }
     
-    // MARK: ShortcutsAddViewControllerDelegate
+    // MARK: ShortcutsIntentDelegate
     
-    func shortcutAddController(_ controller: UIViewController?, voiceShortcut: INVoiceShortcut) {
+    func shortcutsDidSelectIntent(intent: INIntent) {
+        guard let shortcut = INShortcut(intent: intent) else {
+            return
+        }
+        navigationController?.popToRootViewController(animated: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
+            vc.delegate = self
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: INUIAddVoiceShortcutViewControllerDelegate
+    
+    func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
+        guard let voiceShortcut = voiceShortcut else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+
         wrappers?.append(ShortcutWrapper.from(voiceShortcut))
         wrappers?.sort()
         reloadModel()
         tableView.reloadData()
-
-        navigationController?.popToRootViewController(animated: false)
+        
         dismiss(animated: true, completion: nil)
     }
     
-    func shortcutAddControllerDidCancel(_ controller: UIViewController?) {
+    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
         dismiss(animated: true, completion: nil)
     }
 
     // MARK: INUIEditVoiceShortcutViewControllerDelegate
-    
-    func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
-        editedIndexPath = nil
-        dismiss(animated: true, completion: nil)
-    }
     
     func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {
         guard let indexPath = editedIndexPath, let voiceShortcut = voiceShortcut else {
@@ -239,5 +258,10 @@ class ShortcutsViewController: UITableViewController, INUIEditVoiceShortcutViewC
         dismiss(animated: true) {
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+
+    func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
+        editedIndexPath = nil
+        dismiss(animated: true, completion: nil)
     }
 }
