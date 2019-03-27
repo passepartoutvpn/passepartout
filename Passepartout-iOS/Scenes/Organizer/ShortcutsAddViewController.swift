@@ -175,27 +175,27 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
     }
     
     private func addEnable() {
-        addShortcut(with: EnableVPNIntent())
+        addShortcut(with: IntentDispatcher.intentEnable())
     }
 
     private func addDisable() {
-        addShortcut(with: DisableVPNIntent())
+        addShortcut(with: IntentDispatcher.intentDisable())
     }
     
     private func addTrustWiFi() {
-        addShortcut(with: TrustCurrentNetworkIntent())
+        addShortcut(with: IntentDispatcher.intentTrustWiFi())
     }
     
     private func addUntrustWiFi() {
-        addShortcut(with: UntrustCurrentNetworkIntent())
+        addShortcut(with: IntentDispatcher.intentUntrustWiFi())
     }
     
     private func addTrustCellular() {
-        addShortcut(with: TrustCellularNetworkIntent())
+        addShortcut(with: IntentDispatcher.intentTrustCellular())
     }
     
     private func addUntrustCellular() {
-        addShortcut(with: UntrustCellularNetworkIntent())
+        addShortcut(with: IntentDispatcher.intentUntrustCellular())
     }
     
     private func addShortcut(with intent: INIntent) {

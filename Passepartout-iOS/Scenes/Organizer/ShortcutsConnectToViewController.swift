@@ -150,21 +150,14 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
         guard let host = selectedProfile as? HostConnectionProfile else {
             fatalError("Not a HostConnectionProfile")
         }
-        let intent = ConnectVPNIntent()
-        intent.context = host.context.rawValue
-        intent.profileId = host.id
-        addShortcut(with: intent)
+        addShortcut(with: IntentDispatcher.intentConnect(profile: host))
     }
     
     private func addMoveToLocation(pool: Pool) {
         guard let provider = selectedProfile as? ProviderConnectionProfile else {
             fatalError("Not a ProviderConnectionProfile")
         }
-        let intent = MoveToLocationIntent()
-        intent.providerId = provider.id
-        intent.poolId = pool.id
-        intent.poolName = pool.localizedName
-        addShortcut(with: intent)
+        addShortcut(with: IntentDispatcher.intentMoveTo(profile: provider, pool: pool))
     }
     
     private func addShortcut(with intent: INIntent) {
