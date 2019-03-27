@@ -1,5 +1,5 @@
 //
-//  ShortcutsEditViewController.swift
+//  ShortcutsViewController.swift
 //  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 3/27/19.
@@ -39,7 +39,7 @@ private struct ShortcutWrapper: Comparable {
     static func from(_ vs: INVoiceShortcut) -> ShortcutWrapper {
         return ShortcutWrapper(
             phrase: vs.invocationPhrase,
-            intentDescription: vs.shortcut.intent?.suggestedInvocationPhrase,
+            intentDescription: vs.shortcut.intent?.intentDescription,
             original: vs
         )
     }
@@ -58,7 +58,7 @@ private struct ShortcutWrapper: Comparable {
 }
 
 @available(iOS 12, *)
-class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutViewControllerDelegate, ShortcutsAddViewControllerDelegate, TableModelHost {
+class ShortcutsViewController: UITableViewController, INUIEditVoiceShortcutViewControllerDelegate, ShortcutsAddViewControllerDelegate, TableModelHost {
     private var wrappers: [ShortcutWrapper]?
     
     private var editedIndexPath: IndexPath?
