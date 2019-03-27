@@ -493,7 +493,7 @@
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string>Move to ${poolName}</string>
+					<string>Connect to ${poolName}</string>
 					<key>INIntentParameterCombinationTitleID</key>
 					<string>WnTPFg</string>
 				</dict>
@@ -570,7 +570,7 @@
 			<key>INIntentRestrictions</key>
 			<integer>0</integer>
 			<key>INIntentTitle</key>
-			<string>Move to provider location</string>
+			<string>Connect to provider location</string>
 			<key>INIntentTitleID</key>
 			<string>qo3Szz</string>
 			<key>INIntentType</key>

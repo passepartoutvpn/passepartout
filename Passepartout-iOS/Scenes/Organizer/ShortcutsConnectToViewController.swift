@@ -28,7 +28,8 @@ import Intents
 import IntentsUI
 import Passepartout_Core
 
-class ShortcutsConnectToViewController: UITableViewController, TableModelHost {
+@available(iOS 12, *)
+class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewControllerDelegate, TableModelHost {
     private let service = TransientStore.shared.service
 
     private var providers: [String] = []
@@ -36,6 +37,8 @@ class ShortcutsConnectToViewController: UITableViewController, TableModelHost {
     private var hosts: [String] = []
 
     private var selectedProfile: ConnectionProfile?
+    
+    weak var delegate: ShortcutsIntentDelegate?
     
     // MARK: TableModelHost
     
@@ -65,7 +68,7 @@ class ShortcutsConnectToViewController: UITableViewController, TableModelHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Shortcuts.Cells.Connect.caption
+        title = L10n.Shortcuts.Add.Cells.Connect.caption
         reloadModel()
     }
     
@@ -89,9 +92,9 @@ class ShortcutsConnectToViewController: UITableViewController, TableModelHost {
         vc.pools = provider.sortedPools()
         vc.delegate = self
     }
-}
 
-extension ShortcutsConnectToViewController {
+    // MARK: UITableViewController
+    
     enum SectionType {
         case providers
 
@@ -130,9 +133,6 @@ extension ShortcutsConnectToViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard #available(iOS 12, *) else {
-            return
-        }
         switch model.row(at: indexPath) {
         case .providerShortcut:
             selectedProfile = service.profile(withContext: .provider, id: providers[indexPath.row])
@@ -143,68 +143,34 @@ extension ShortcutsConnectToViewController {
             addConnect()
         }
     }
-}
 
-// MARK: Actions
+    // MARK: Actions
 
-@available(iOS 12, *)
-extension ShortcutsConnectToViewController {
     private func addConnect() {
         guard let host = selectedProfile as? HostConnectionProfile else {
             fatalError("Not a HostConnectionProfile")
         }
-        let intent = ConnectVPNIntent()
-        intent.context = host.context.rawValue
-        intent.profileId = host.id
-        addShortcut(with: intent)
+        addShortcut(with: IntentDispatcher.intentConnect(profile: host))
     }
     
     private func addMoveToLocation(pool: Pool) {
         guard let provider = selectedProfile as? ProviderConnectionProfile else {
             fatalError("Not a ProviderConnectionProfile")
         }
-        let intent = MoveToLocationIntent()
-        intent.providerId = provider.id
-        intent.poolId = pool.id
-        intent.poolName = pool.localizedName
-        addShortcut(with: intent)
+        addShortcut(with: IntentDispatcher.intentMoveTo(profile: provider, pool: pool))
     }
     
     private func addShortcut(with intent: INIntent) {
-        guard let shortcut = INShortcut(intent: intent) else {
-            return
-        }
-        let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
-        vc.delegate = self
-        present(vc, animated: true, completion: nil)
+        delegate?.shortcutsDidSelectIntent(intent: intent)
     }
     
     private func pickProviderLocation() {
         perform(segue: StoryboardSegue.Shortcuts.pickLocationSegueIdentifier)
     }
     
-    @IBAction private func done() {
-        dismiss(animated: true, completion: nil)
-    }
-}
+    // MARK: ProviderPoolViewControllerDelegate
 
-extension ShortcutsConnectToViewController: ProviderPoolViewControllerDelegate {
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool) {
-        guard #available(iOS 12, *) else {
-            return
-        }
         addMoveToLocation(pool: pool)
-    }
-}
-
-@available(iOS 12, *)
-extension ShortcutsConnectToViewController: INUIAddVoiceShortcutViewControllerDelegate {
-    func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
-        dismiss(animated: true, completion: nil)
     }
 }

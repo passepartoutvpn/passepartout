@@ -373,7 +373,7 @@ public enum L10n {
         }
       }
       public enum SiriShortcuts {
-        /// Add shortcuts
+        /// Manage shortcuts
         public static let caption = L10n.tr("Localizable", "organizer.cells.siri_shortcuts.caption")
       }
       public enum Uninstall {
@@ -697,54 +697,74 @@ public enum L10n {
   }
 
   public enum Shortcuts {
-    public enum Alerts {
-      public enum NoProfiles {
-        /// There is no profile to connect to.
-        public static let message = L10n.tr("Localizable", "shortcuts.alerts.no_profiles.message")
+    public enum Add {
+      /// Add shortcut
+      public static let title = L10n.tr("Localizable", "shortcuts.add.title")
+      public enum Alerts {
+        public enum NoProfiles {
+          /// There is no profile to connect to.
+          public static let message = L10n.tr("Localizable", "shortcuts.add.alerts.no_profiles.message")
+        }
+      }
+      public enum Cells {
+        public enum Connect {
+          /// Connect to
+          public static let caption = L10n.tr("Localizable", "shortcuts.add.cells.connect.caption")
+        }
+        public enum DisableVpn {
+          /// Disable VPN
+          public static let caption = L10n.tr("Localizable", "shortcuts.add.cells.disable_vpn.caption")
+        }
+        public enum EnableVpn {
+          /// Enable VPN
+          public static let caption = L10n.tr("Localizable", "shortcuts.add.cells.enable_vpn.caption")
+        }
+        public enum TrustCellular {
+          /// Trust cellular network
+          public static let caption = L10n.tr("Localizable", "shortcuts.add.cells.trust_cellular.caption")
+        }
+        public enum TrustCurrentWifi {
+          /// Trust current Wi-Fi
+          public static let caption = L10n.tr("Localizable", "shortcuts.add.cells.trust_current_wifi.caption")
+        }
+        public enum UntrustCellular {
+          /// Untrust cellular network
+          public static let caption = L10n.tr("Localizable", "shortcuts.add.cells.untrust_cellular.caption")
+        }
+        public enum UntrustCurrentWifi {
+          /// Untrust current Wi-Fi
+          public static let caption = L10n.tr("Localizable", "shortcuts.add.cells.untrust_current_wifi.caption")
+        }
+      }
+      public enum Sections {
+        public enum Cellular {
+          /// Cellular
+          public static let header = L10n.tr("Localizable", "shortcuts.add.sections.cellular.header")
+        }
+        public enum Vpn {
+          /// VPN
+          public static let header = L10n.tr("Localizable", "shortcuts.add.sections.vpn.header")
+        }
+        public enum Wifi {
+          /// Wi-Fi
+          public static let header = L10n.tr("Localizable", "shortcuts.add.sections.wifi.header")
+        }
       }
     }
-    public enum Cells {
-      public enum Connect {
-        /// Connect to
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.connect.caption")
+    public enum Edit {
+      /// Manage shortcuts
+      public static let title = L10n.tr("Localizable", "shortcuts.edit.title")
+      public enum Cells {
+        public enum AddShortcut {
+          /// Add shortcut
+          public static let caption = L10n.tr("Localizable", "shortcuts.edit.cells.add_shortcut.caption")
+        }
       }
-      public enum DisableVpn {
-        /// Disable VPN
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.disable_vpn.caption")
-      }
-      public enum EnableVpn {
-        /// Enable VPN
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.enable_vpn.caption")
-      }
-      public enum TrustCellular {
-        /// Trust cellular network
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_cellular.caption")
-      }
-      public enum TrustCurrentWifi {
-        /// Trust current Wi-Fi
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.trust_current_wifi.caption")
-      }
-      public enum UntrustCellular {
-        /// Untrust cellular network
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_cellular.caption")
-      }
-      public enum UntrustCurrentWifi {
-        /// Untrust current Wi-Fi
-        public static let caption = L10n.tr("Localizable", "shortcuts.cells.untrust_current_wifi.caption")
-      }
-    }
-    public enum Sections {
-      public enum Cellular {
-        /// Cellular
-        public static let header = L10n.tr("Localizable", "shortcuts.sections.cellular.header")
-      }
-      public enum Vpn {
-        /// VPN
-        public static let header = L10n.tr("Localizable", "shortcuts.sections.vpn.header")
-      }
-      public enum Wifi {
-        /// Wi-Fi
-        public static let header = L10n.tr("Localizable", "shortcuts.sections.wifi.header")
+      public enum Sections {
+        public enum All {
+          /// Existing shortcuts
+          public static let header = L10n.tr("Localizable", "shortcuts.edit.sections.all.header")
+        }
       }
     }
   }

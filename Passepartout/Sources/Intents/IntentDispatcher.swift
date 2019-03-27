@@ -41,72 +41,94 @@ public class IntentDispatcher {
         static let trust = "Trust"
     }
     
+    // MARK: Intents
+    
+    public static func intentConnect(profile: ConnectionProfile) -> ConnectVPNIntent {
+        let intent = ConnectVPNIntent()
+        intent.context = profile.context.rawValue
+        intent.profileId = profile.id
+        return intent
+    }
+    
+    public static func intentMoveTo(profile: ProviderConnectionProfile, pool: Pool) -> MoveToLocationIntent {
+        let intent = MoveToLocationIntent()
+        intent.providerId = profile.id
+        intent.poolId = pool.id
+        intent.poolName = pool.localizedName
+        return intent
+    }
+    
+    public static func intentEnable() -> EnableVPNIntent {
+        return EnableVPNIntent()
+    }
+    
+    public static func intentDisable() -> DisableVPNIntent {
+        return DisableVPNIntent()
+    }
+    
+    public static func intentTrustWiFi() -> TrustCurrentNetworkIntent {
+        return TrustCurrentNetworkIntent()
+    }
+    
+    public static func intentUntrustWiFi() -> UntrustCurrentNetworkIntent {
+        return UntrustCurrentNetworkIntent()
+    }
+    
+    public static func intentTrustCellular() -> TrustCellularNetworkIntent {
+        return TrustCellularNetworkIntent()
+    }
+    
+    public static func intentUntrustCellular() -> UntrustCellularNetworkIntent {
+        return UntrustCellularNetworkIntent()
+    }
+
+    // MARK: Donations
+    
     public static func donateConnection(with profile: ConnectionProfile) {
-        let profileKey = ProfileKey(profile)
         let genericIntent: INIntent
-        
         if let provider = profile as? ProviderConnectionProfile, let pool = provider.pool {
-            let intent = MoveToLocationIntent()
-            intent.providerId = profile.id
-            intent.poolId = pool.id
-            intent.poolName = pool.localizedName
-            genericIntent = intent
+            genericIntent = intentMoveTo(profile: provider, pool: pool)
         } else {
-            let intent = ConnectVPNIntent()
-            intent.context = profileKey.context.rawValue
-            intent.profileId = profileKey.id
-            genericIntent = intent
+            genericIntent = intentConnect(profile: profile)
         }
         
         let interaction = INInteraction(intent: genericIntent, response: nil)
-        interaction.groupIdentifier = profileKey.rawValue
+        interaction.groupIdentifier = ProfileKey(profile).rawValue
         interaction.donateAndLog()
     }
     
     public static func donateEnableVPN() {
-        let intent = EnableVPNIntent()
-        
-        let interaction = INInteraction(intent: intent, response: nil)
+        let interaction = INInteraction(intent: intentEnable(), response: nil)
         interaction.groupIdentifier = Groups.vpn
         interaction.donateAndLog()
     }
     
     public static func donateDisableVPN() {
-        let intent = DisableVPNIntent()
-        
-        let interaction = INInteraction(intent: intent, response: nil)
+        let interaction = INInteraction(intent: intentDisable(), response: nil)
         interaction.groupIdentifier = Groups.vpn
         interaction.donateAndLog()
     }
     
     public static func donateTrustCurrentNetwork() {
-        let intent = TrustCurrentNetworkIntent()
-
-        let interaction = INInteraction(intent: intent, response: nil)
+        let interaction = INInteraction(intent: intentTrustWiFi(), response: nil)
         interaction.groupIdentifier = Groups.trust
         interaction.donateAndLog()
     }
 
     public static func donateUntrustCurrentNetwork() {
-        let intent = UntrustCurrentNetworkIntent()
-        
-        let interaction = INInteraction(intent: intent, response: nil)
+        let interaction = INInteraction(intent: intentUntrustWiFi(), response: nil)
         interaction.groupIdentifier = Groups.trust
         interaction.donateAndLog()
     }
     
     public static func donateTrustCellularNetwork() {
-        let intent = TrustCellularNetworkIntent()
-        
-        let interaction = INInteraction(intent: intent, response: nil)
+        let interaction = INInteraction(intent: intentTrustCellular(), response: nil)
         interaction.groupIdentifier = Groups.trust
         interaction.donateAndLog()
     }
     
     public static func donateUntrustCellularNetwork() {
-        let intent = UntrustCellularNetworkIntent()
-        
-        let interaction = INInteraction(intent: intent, response: nil)
+        let interaction = INInteraction(intent: intentUntrustCellular(), response: nil)
         interaction.groupIdentifier = Groups.trust
         interaction.donateAndLog()
     }
@@ -178,7 +200,7 @@ public class IntentDispatcher {
             completionHandler?(nil)
             return
         }
-        log.info("Move to provider location: \(providerId) @ [\(poolId)]")
+        log.info("Connect to provider location: \(providerId) @ [\(poolId)]")
         
         let vpn = VPN.shared
         guard !(service.isActiveProfile(providerProfile) && (providerProfile.poolId == poolId) && (vpn.status == .connected)) else {
