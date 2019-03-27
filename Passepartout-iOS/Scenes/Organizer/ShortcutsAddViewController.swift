@@ -29,9 +29,9 @@ import Passepartout_Core
 
 @available(iOS 12, *)
 protocol ShortcutsAddViewControllerDelegate: class {
-    func shortcutAddController(_ controller: ShortcutsAddViewController, voiceShortcut: INVoiceShortcut)
+    func shortcutAddController(_ controller: UIViewController?, voiceShortcut: INVoiceShortcut)
 
-    func shortcutAddControllerDidCancel(_ controller: ShortcutsAddViewController)
+    func shortcutAddControllerDidCancel(_ controller: UIViewController?)
 }
 
 @available(iOS 12, *)
@@ -157,6 +157,12 @@ class ShortcutsAddViewController: UITableViewController, INUIAddVoiceShortcutVie
     }
 
     // MARK: Actions
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ShortcutsConnectToViewController {
+            vc.delegate = delegate
+        }
+    }
 
     private func addConnect() {
         guard TransientStore.shared.service.hasProfiles() else {

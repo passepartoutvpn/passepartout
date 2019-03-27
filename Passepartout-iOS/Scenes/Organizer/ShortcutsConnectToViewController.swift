@@ -38,6 +38,8 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
 
     private var selectedProfile: ConnectionProfile?
     
+    weak var delegate: ShortcutsAddViewControllerDelegate?
+    
     // MARK: TableModelHost
     
     let model: TableModel<SectionType, RowType> = {
@@ -187,11 +189,14 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     // MARK: INUIAddVoiceShortcutViewControllerDelegate
 
     func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+        guard let voiceShortcut = voiceShortcut else {
+            delegate?.shortcutAddControllerDidCancel(nil)
+            return
+        }
+        delegate?.shortcutAddController(nil, voiceShortcut: voiceShortcut)
     }
     
     func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
-        dismiss(animated: true, completion: nil)
+        delegate?.shortcutAddControllerDidCancel(nil)
     }
 }

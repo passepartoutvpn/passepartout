@@ -195,7 +195,7 @@ class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutV
     
     // MARK: ShortcutsAddViewControllerDelegate
     
-    func shortcutAddController(_ controller: ShortcutsAddViewController, voiceShortcut: INVoiceShortcut) {
+    func shortcutAddController(_ controller: UIViewController?, voiceShortcut: INVoiceShortcut) {
         wrappers?.append(ShortcutWrapper.from(voiceShortcut))
         wrappers?.sort()
         reloadModel()
@@ -205,7 +205,7 @@ class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutV
         dismiss(animated: true, completion: nil)
     }
     
-    func shortcutAddControllerDidCancel(_ controller: ShortcutsAddViewController) {
+    func shortcutAddControllerDidCancel(_ controller: UIViewController?) {
         dismiss(animated: true, completion: nil)
     }
 
