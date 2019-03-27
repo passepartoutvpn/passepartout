@@ -29,7 +29,7 @@ import IntentsUI
 import Passepartout_Core
 
 @available(iOS 12, *)
-private struct ShortcutWrapper {
+private struct ShortcutWrapper: Comparable {
     let phrase: String
 
     let intentDescription: String?
@@ -42,6 +42,18 @@ private struct ShortcutWrapper {
             intentDescription: vs.shortcut.intent?.suggestedInvocationPhrase,
             original: vs
         )
+    }
+    
+    // MARK: Equatable
+    
+    static func ==(lhs: ShortcutWrapper, rhs: ShortcutWrapper) -> Bool {
+        return lhs.phrase == rhs.phrase
+    }
+
+    // MARK: Comparable
+    
+    static func <(lhs: ShortcutWrapper, rhs: ShortcutWrapper) -> Bool {
+        return lhs.phrase < rhs.phrase
     }
 }
 
@@ -112,6 +124,7 @@ class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutV
 
     private func handleShortcuts(_ shortcuts: [INVoiceShortcut]) {
         wrappers = shortcuts.map { ShortcutWrapper.from($0) }
+        wrappers?.sort()
         reloadModel()
         tableView.reloadData()
     }
@@ -183,9 +196,8 @@ class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutV
     // MARK: ShortcutsAddViewControllerDelegate
     
     func shortcutAddController(_ controller: ShortcutsAddViewController, voiceShortcut: INVoiceShortcut) {
-
-        // TODO: sort voice shortcuts by?
         wrappers?.append(ShortcutWrapper.from(voiceShortcut))
+        wrappers?.sort()
         reloadModel()
         tableView.reloadData()
 
@@ -210,6 +222,7 @@ class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutV
         }
         editedIndexPath = nil
         wrappers?[indexPath.row] = ShortcutWrapper.from(voiceShortcut)
+        wrappers?.sort()
 
         dismiss(animated: true) {
             self.tableView.reloadData()
