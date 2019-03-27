@@ -65,7 +65,7 @@ class ShortcutsConnectToViewController: UITableViewController, TableModelHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Shortcuts.Cells.Connect.caption
+        title = L10n.Shortcuts.Add.Cells.Connect.caption
         reloadModel()
     }
     

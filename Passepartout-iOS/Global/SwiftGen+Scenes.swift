@@ -38,6 +38,8 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Shortcuts"
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Shortcuts.self)
+
+    internal static let shortcutsEditViewController = SceneType<UIKit.UINavigationController>(storyboard: Shortcuts.self, identifier: "ShortcutsEditViewController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

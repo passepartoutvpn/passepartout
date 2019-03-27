@@ -45,7 +45,7 @@
 "organizer.cells.profile.value.current" = "In use";
 "organizer.cells.add_provider.caption" = "Add new network";
 "organizer.cells.add_host.caption" = "Add new host";
-"organizer.cells.siri_shortcuts.caption" = "Add shortcuts";
+"organizer.cells.siri_shortcuts.caption" = "Manage shortcuts";
 "organizer.cells.about.caption" = "About %@";
 "organizer.cells.uninstall.caption" = "Remove VPN configuration";
 "organizer.alerts.exhausted_providers.message" = "You have created profiles for any available network.";
@@ -204,17 +204,21 @@
 "issue_reporter.email.body" = "Hi,\n\n%@\n\n%@\n\nRegards";
 "issue_reporter.email.description" = "description of the issue:";
 
-"shortcuts.sections.vpn.header" = "VPN";
-"shortcuts.sections.wifi.header" = "Wi-Fi";
-"shortcuts.sections.cellular.header" = "Cellular";
-"shortcuts.cells.connect.caption" = "Connect to";
-"shortcuts.cells.enable_vpn.caption" = "Enable VPN";
-"shortcuts.cells.disable_vpn.caption" = "Disable VPN";
-"shortcuts.cells.trust_current_wifi.caption" = "Trust current Wi-Fi";
-"shortcuts.cells.untrust_current_wifi.caption" = "Untrust current Wi-Fi";
-"shortcuts.cells.trust_cellular.caption" = "Trust cellular network";
-"shortcuts.cells.untrust_cellular.caption" = "Untrust cellular network";
-"shortcuts.alerts.no_profiles.message" = "There is no profile to connect to.";
+"shortcuts.add.title" = "Add shortcut";
+"shortcuts.add.sections.vpn.header" = "VPN";
+"shortcuts.add.sections.wifi.header" = "Wi-Fi";
+"shortcuts.add.sections.cellular.header" = "Cellular";
+"shortcuts.add.cells.connect.caption" = "Connect to";
+"shortcuts.add.cells.enable_vpn.caption" = "Enable VPN";
+"shortcuts.add.cells.disable_vpn.caption" = "Disable VPN";
+"shortcuts.add.cells.trust_current_wifi.caption" = "Trust current Wi-Fi";
+"shortcuts.add.cells.untrust_current_wifi.caption" = "Untrust current Wi-Fi";
+"shortcuts.add.cells.trust_cellular.caption" = "Trust cellular network";
+"shortcuts.add.cells.untrust_cellular.caption" = "Untrust cellular network";
+"shortcuts.add.alerts.no_profiles.message" = "There is no profile to connect to.";
+
+"shortcuts.edit.title" = "Manage shortcuts";
+"shortcuts.edit.sections.all.header" = "Existing shortcuts";
 
 "about.title" = "About";
 "about.sections.web.header" = "Web";

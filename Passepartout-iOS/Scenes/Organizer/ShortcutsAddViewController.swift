@@ -1,5 +1,5 @@
 //
-//  ShortcutsViewController.swift
+//  ShortcutsAddViewController.swift
 //  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 3/18/19.
@@ -27,7 +27,7 @@ import UIKit
 import IntentsUI
 import Passepartout_Core
 
-class ShortcutsViewController: UITableViewController, TableModelHost {
+class ShortcutsAddViewController: UITableViewController, TableModelHost {
 
     // MARK: TableModel
     
@@ -39,9 +39,9 @@ class ShortcutsViewController: UITableViewController, TableModelHost {
         model.set([.connect, .enableVPN, .disableVPN], in: .vpn)
         model.set([.trustCurrentWiFi, .untrustCurrentWiFi], in: .wifi)
         model.set([.trustCellular, .untrustCellular], in: .cellular)
-        model.setHeader(L10n.Shortcuts.Sections.Vpn.header, for: .vpn)
-        model.setHeader(L10n.Shortcuts.Sections.Wifi.header, for: .wifi)
-        model.setHeader(L10n.Shortcuts.Sections.Cellular.header, for: .cellular)
+        model.setHeader(L10n.Shortcuts.Add.Sections.Vpn.header, for: .vpn)
+        model.setHeader(L10n.Shortcuts.Add.Sections.Wifi.header, for: .wifi)
+        model.setHeader(L10n.Shortcuts.Add.Sections.Cellular.header, for: .cellular)
         return model
     }()
     
@@ -53,11 +53,11 @@ class ShortcutsViewController: UITableViewController, TableModelHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Organizer.Cells.SiriShortcuts.caption
+        title = L10n.Shortcuts.Add.title
     }
 }
 
-extension ShortcutsViewController {
+extension ShortcutsAddViewController {
     enum SectionType {
         case vpn
 
@@ -98,25 +98,25 @@ extension ShortcutsViewController {
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         switch model.row(at: indexPath) {
         case .connect:
-            cell.leftText = L10n.Shortcuts.Cells.Connect.caption
+            cell.leftText = L10n.Shortcuts.Add.Cells.Connect.caption
             
         case .enableVPN:
-            cell.leftText = L10n.Shortcuts.Cells.EnableVpn.caption
+            cell.leftText = L10n.Shortcuts.Add.Cells.EnableVpn.caption
             
         case .disableVPN:
-            cell.leftText = L10n.Shortcuts.Cells.DisableVpn.caption
+            cell.leftText = L10n.Shortcuts.Add.Cells.DisableVpn.caption
             
         case .trustCurrentWiFi:
-            cell.leftText = L10n.Shortcuts.Cells.TrustCurrentWifi.caption
+            cell.leftText = L10n.Shortcuts.Add.Cells.TrustCurrentWifi.caption
             
         case .untrustCurrentWiFi:
-            cell.leftText = L10n.Shortcuts.Cells.UntrustCurrentWifi.caption
+            cell.leftText = L10n.Shortcuts.Add.Cells.UntrustCurrentWifi.caption
             
         case .trustCellular:
-            cell.leftText = L10n.Shortcuts.Cells.TrustCellular.caption
+            cell.leftText = L10n.Shortcuts.Add.Cells.TrustCellular.caption
             
         case .untrustCellular:
-            cell.leftText = L10n.Shortcuts.Cells.UntrustCellular.caption
+            cell.leftText = L10n.Shortcuts.Add.Cells.UntrustCellular.caption
         }
         cell.apply(Theme.current)
         return cell
@@ -154,12 +154,12 @@ extension ShortcutsViewController {
 // MARK: Actions
 
 @available(iOS 12, *)
-extension ShortcutsViewController {
+extension ShortcutsAddViewController {
     private func addConnect() {
         guard TransientStore.shared.service.hasProfiles() else {
             let alert = Macros.alert(
-                L10n.Shortcuts.Cells.Connect.caption,
-                L10n.Shortcuts.Alerts.NoProfiles.message
+                L10n.Shortcuts.Add.Cells.Connect.caption,
+                L10n.Shortcuts.Add.Alerts.NoProfiles.message
             )
             alert.addAction(L10n.Global.ok) {
                 if let ip = self.tableView.indexPathForSelectedRow {
@@ -211,7 +211,7 @@ extension ShortcutsViewController {
 }
 
 @available(iOS 12, *)
-extension ShortcutsViewController: INUIAddVoiceShortcutViewControllerDelegate {
+extension ShortcutsAddViewController: INUIAddVoiceShortcutViewControllerDelegate {
     func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
         tableView.reloadData()
         dismiss(animated: true, completion: nil)

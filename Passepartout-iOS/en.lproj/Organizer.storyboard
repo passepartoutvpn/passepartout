@@ -631,7 +631,7 @@
                 <viewControllerPlaceholder storyboardName="Shortcuts" id="BIO-UT-cpg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbd-BC-bBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2449" y="-280"/>
+            <point key="canvasLocation" x="-2552" y="-280"/>
         </scene>
     </scenes>
     <resources>
