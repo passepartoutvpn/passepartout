@@ -28,7 +28,15 @@ import IntentsUI
 import Passepartout_Core
 
 @available(iOS 12, *)
+protocol ShortcutsAddViewControllerDelegate: class {
+    func shortcutAddController(_ controller: ShortcutsAddViewController, voiceShortcut: INVoiceShortcut)
+
+    func shortcutAddControllerDidCancel(_ controller: ShortcutsAddViewController)
+}
+
+@available(iOS 12, *)
 class ShortcutsAddViewController: UITableViewController, INUIAddVoiceShortcutViewControllerDelegate, TableModelHost {
+    weak var delegate: ShortcutsAddViewControllerDelegate?
 
     // MARK: TableModel
     
@@ -207,10 +215,14 @@ class ShortcutsAddViewController: UITableViewController, INUIAddVoiceShortcutVie
     // MARK: INUIAddVoiceShortcutViewControllerDelegate
     
     func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
-        dismiss(animated: true, completion: nil)
+        guard let voiceShortcut = voiceShortcut else {
+            delegate?.shortcutAddControllerDidCancel(self)
+            return
+        }
+        delegate?.shortcutAddController(self, voiceShortcut: voiceShortcut)
     }
     
     func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
-        dismiss(animated: true, completion: nil)
+        delegate?.shortcutAddControllerDidCancel(self)
     }
 }

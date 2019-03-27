@@ -46,7 +46,7 @@ private struct ShortcutWrapper {
 }
 
 @available(iOS 12, *)
-class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutViewControllerDelegate, TableModelHost {
+class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutViewControllerDelegate, ShortcutsAddViewControllerDelegate, TableModelHost {
     private var wrappers: [ShortcutWrapper]?
     
     private var editedIndexPath: IndexPath?
@@ -86,6 +86,12 @@ class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutV
     }
     
     // MARK: Actions
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ShortcutsAddViewController {
+            vc.delegate = self
+        }
+    }
     
     private func addShortcut() {
         perform(segue: StoryboardSegue.Shortcuts.shortcutAddSegueIdentifier)
@@ -172,6 +178,23 @@ class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutV
         case .addShortcut:
             addShortcut()
         }
+    }
+    
+    // MARK: ShortcutsAddViewControllerDelegate
+    
+    func shortcutAddController(_ controller: ShortcutsAddViewController, voiceShortcut: INVoiceShortcut) {
+
+        // TODO: sort voice shortcuts by?
+        wrappers?.append(ShortcutWrapper.from(voiceShortcut))
+        reloadModel()
+        tableView.reloadData()
+
+        navigationController?.popToRootViewController(animated: false)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func shortcutAddControllerDidCancel(_ controller: ShortcutsAddViewController) {
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: INUIEditVoiceShortcutViewControllerDelegate

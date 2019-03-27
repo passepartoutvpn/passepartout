@@ -96,13 +96,7 @@
                             <outlet property="delegate" destination="zpj-mS-isI" id="zex-yh-op8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="kUu-WC-MJQ">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="m8u-XK-MLx">
-                            <connections>
-                                <action selector="done" destination="zpj-mS-isI" id="f5U-ko-QS3"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="kUu-WC-MJQ"/>
                     <connections>
                         <segue destination="bPc-ex-Jwe" kind="show" identifier="PickLocationSegueIdentifier" id="ah9-pc-zoh"/>
                     </connections>

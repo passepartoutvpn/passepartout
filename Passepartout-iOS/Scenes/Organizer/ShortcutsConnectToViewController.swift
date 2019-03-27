@@ -178,10 +178,6 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
         perform(segue: StoryboardSegue.Shortcuts.pickLocationSegueIdentifier)
     }
     
-    @IBAction private func done() {
-        dismiss(animated: true, completion: nil)
-    }
-
     // MARK: ProviderPoolViewControllerDelegate
 
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool) {
