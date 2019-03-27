@@ -83,12 +83,12 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         if isEditable {
             model.set([.resetOriginal], in: .reset)
         }
-        model.set([.client, .tlsWrapping], in: .tls)
+        model.set([.client, .tlsWrapping, .eku], in: .tls)
         model.set([.compressionFraming, .compressionAlgorithm], in: .compression)
         if let dnsServers = configuration.dnsServers {
             model.set(.dnsServer, count: dnsServers.count, in: .dns)
         }
-        model.set([.keepAlive, .renegSeconds], in: .other)
+        model.set([.keepAlive, .renegSeconds, .randomEndpoint], in: .other)
 
         return model
     }()
@@ -188,6 +188,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case tlsWrapping
         
+        case eku
+
         case compressionFraming
         
         case compressionAlgorithm
@@ -197,6 +199,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case keepAlive
         
         case renegSeconds
+
+        case randomEndpoint
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -275,6 +279,12 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.accessoryType = .none
             cell.isTappable = false
             
+        case .eku:
+            cell.leftText = V.Eku.caption
+            cell.rightText = (configuration.checksEKU ?? false) ? V.All.Value.enabled : V.All.Value.disabled
+            cell.accessoryType = .none
+            cell.isTappable = false
+
         case .compressionFraming:
             cell.leftText = L10n.Configuration.Cells.CompressionFraming.caption
             cell.rightText = configuration.compressionFraming.cellDescription
@@ -317,6 +327,12 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             } else {
                 cell.rightText = V.All.Value.disabled
             }
+            cell.accessoryType = .none
+            cell.isTappable = false
+
+        case .randomEndpoint:
+            cell.leftText = V.RandomEndpoint.caption
+            cell.rightText = (configuration.randomizeEndpoint ?? false) ? V.All.Value.enabled : V.All.Value.disabled
             cell.accessoryType = .none
             cell.isTappable = false
         }

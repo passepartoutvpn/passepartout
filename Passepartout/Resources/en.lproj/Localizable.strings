@@ -162,6 +162,7 @@
 "configuration.cells.tls_wrapping.caption" = "Wrapping";
 "configuration.cells.tls_wrapping.value.auth" = "Authentication";
 "configuration.cells.tls_wrapping.value.crypt" = "Encryption";
+"configuration.cells.eku.caption" = "Extended verification";
 "configuration.cells.dns_server.caption" = "Address";
 "configuration.cells.compression_framing.caption" = "Framing";
 "configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
@@ -173,6 +174,7 @@
 "configuration.cells.keep_alive.value.seconds" = "%d seconds";
 "configuration.cells.renegotiation_seconds.caption" = "Renegotiation";
 "configuration.cells.renegotiation_seconds.value.after" = "after %@";
+"configuration.cells.random_endpoint.caption" = "Randomize endpoint";
 "configuration.cells.all.value.enabled" = "Enabled";
 "configuration.cells.all.value.disabled" = "Disabled";
 

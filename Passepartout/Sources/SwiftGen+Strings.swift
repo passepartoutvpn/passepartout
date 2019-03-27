@@ -152,6 +152,10 @@ public enum L10n {
         /// Address
         public static let caption = L10n.tr("Localizable", "configuration.cells.dns_server.caption")
       }
+      public enum Eku {
+        /// Extended verification
+        public static let caption = L10n.tr("Localizable", "configuration.cells.eku.caption")
+      }
       public enum KeepAlive {
         /// Keep-alive
         public static let caption = L10n.tr("Localizable", "configuration.cells.keep_alive.caption")
@@ -161,6 +165,10 @@ public enum L10n {
             return L10n.tr("Localizable", "configuration.cells.keep_alive.value.seconds", p1)
           }
         }
+      }
+      public enum RandomEndpoint {
+        /// Randomize endpoint
+        public static let caption = L10n.tr("Localizable", "configuration.cells.random_endpoint.caption")
       }
       public enum RenegotiationSeconds {
         /// Renegotiation
