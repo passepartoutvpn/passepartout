@@ -66,6 +66,8 @@ private struct ShortcutWrapper: Comparable {
 class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewControllerDelegate, INUIEditVoiceShortcutViewControllerDelegate, ShortcutsIntentDelegate, TableModelHost {
     private var wrappers: [ShortcutWrapper]?
     
+    private var pendingShortcut: INShortcut?
+    
     private var editedIndexPath: IndexPath?
     
     // MARK: TableModel
@@ -102,6 +104,18 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        guard let shortcut = pendingShortcut else {
+            return
+        }
+        pendingShortcut = nil
+        let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
+    }
+
     // MARK: Actions
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -201,16 +215,8 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     // MARK: ShortcutsIntentDelegate
     
     func shortcutsDidSelectIntent(intent: INIntent) {
-        guard let shortcut = INShortcut(intent: intent) else {
-            return
-        }
-        navigationController?.popToRootViewController(animated: true)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
-            vc.delegate = self
-            self.present(vc, animated: true, completion: nil)
-        }
+        pendingShortcut = INShortcut(intent: intent)
+        navigationController?.popToViewController(self, animated: true)
     }
     
     // MARK: INUIAddVoiceShortcutViewControllerDelegate
