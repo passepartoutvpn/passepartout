@@ -754,6 +754,12 @@ public enum L10n {
     public enum Edit {
       /// Manage shortcuts
       public static let title = L10n.tr("Localizable", "shortcuts.edit.title")
+      public enum Cells {
+        public enum AddShortcut {
+          /// Add shortcut
+          public static let caption = L10n.tr("Localizable", "shortcuts.edit.cells.add_shortcut.caption")
+        }
+      }
       public enum Sections {
         public enum All {
           /// Existing shortcuts

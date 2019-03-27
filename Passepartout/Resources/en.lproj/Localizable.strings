@@ -219,6 +219,7 @@
 
 "shortcuts.edit.title" = "Manage shortcuts";
 "shortcuts.edit.sections.all.header" = "Existing shortcuts";
+"shortcuts.edit.cells.add_shortcut.caption" = "Add shortcut";
 
 "about.title" = "About";
 "about.sections.web.header" = "Web";

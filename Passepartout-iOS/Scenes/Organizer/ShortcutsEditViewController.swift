@@ -61,7 +61,9 @@ class ShortcutsEditViewController: UITableViewController, TableModelHost {
     }()
     
     func reloadModel() {
-        model.set(.shortcut, count: wrappers?.count ?? 0, in: .all)
+        var rows = [RowType](repeating: .shortcut, count: wrappers?.count ?? 0)
+        rows.append(.addShortcut)
+        model.set(rows, in: .all)
     }
     
     // MARK: UIViewController
@@ -83,6 +85,12 @@ class ShortcutsEditViewController: UITableViewController, TableModelHost {
                 self?.handleShortcuts(shortcuts)
             }
         }
+    }
+    
+    // MARK: Actions
+    
+    private func addShortcut() {
+        perform(segue: StoryboardSegue.Shortcuts.shortcutAddSegueIdentifier)
     }
 
     private func handleShortcutsFetchError(_ error: Error?) {
@@ -117,6 +125,8 @@ extension ShortcutsEditViewController {
     
     enum RowType {
         case shortcut
+
+        case addShortcut
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -138,10 +148,16 @@ extension ShortcutsEditViewController {
             guard let wrapper = wrappers?[indexPath.row] else {
                 break
             }
+            cell.apply(Theme.current)
             cell.leftText = wrapper.phrase
             cell.rightText = wrapper.intentDescription
+
+        case .addShortcut:
+            cell.applyAction(Theme.current)
+            cell.leftText = L10n.Shortcuts.Edit.Cells.AddShortcut.caption
+            cell.accessoryType = .none
+            cell.isTappable = true
         }
-        cell.apply(Theme.current)
         return cell
     }
     
@@ -158,6 +174,9 @@ extension ShortcutsEditViewController {
             vc.delegate = self
             editedIndexPath = indexPath
             present(vc, animated: true, completion: nil)
+            
+        case .addShortcut:
+            addShortcut()
         }
     }
 }
