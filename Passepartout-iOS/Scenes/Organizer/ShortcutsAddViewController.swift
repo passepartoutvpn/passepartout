@@ -27,7 +27,8 @@ import UIKit
 import IntentsUI
 import Passepartout_Core
 
-class ShortcutsAddViewController: UITableViewController, TableModelHost {
+@available(iOS 12, *)
+class ShortcutsAddViewController: UITableViewController, INUIAddVoiceShortcutViewControllerDelegate, TableModelHost {
 
     // MARK: TableModel
     
@@ -55,9 +56,9 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
         
         title = L10n.Shortcuts.Add.title
     }
-}
 
-extension ShortcutsAddViewController {
+    // MARK: UITableViewController
+    
     enum SectionType {
         case vpn
 
@@ -123,9 +124,6 @@ extension ShortcutsAddViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard #available(iOS 12, *) else {
-            return
-        }
         switch model.row(at: indexPath) {
         case .connect:
             addConnect()
@@ -149,12 +147,9 @@ extension ShortcutsAddViewController {
             addUntrustCellular()
         }
     }
-}
 
-// MARK: Actions
+    // MARK: Actions
 
-@available(iOS 12, *)
-extension ShortcutsAddViewController {
     private func addConnect() {
         guard TransientStore.shared.service.hasProfiles() else {
             let alert = Macros.alert(
@@ -208,12 +203,10 @@ extension ShortcutsAddViewController {
     @IBAction private func close() {
         dismiss(animated: true, completion: nil)
     }
-}
 
-@available(iOS 12, *)
-extension ShortcutsAddViewController: INUIAddVoiceShortcutViewControllerDelegate {
+    // MARK: INUIAddVoiceShortcutViewControllerDelegate
+    
     func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
-        tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     

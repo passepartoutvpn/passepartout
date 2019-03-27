@@ -28,6 +28,7 @@ import Intents
 import IntentsUI
 import Passepartout_Core
 
+@available(iOS 12, *)
 private struct ShortcutWrapper {
     let phrase: String
 
@@ -35,7 +36,6 @@ private struct ShortcutWrapper {
     
     let original: Any?
 
-    @available(iOS 12, *)
     static func from(_ vs: INVoiceShortcut) -> ShortcutWrapper {
         return ShortcutWrapper(
             phrase: vs.invocationPhrase,
@@ -45,7 +45,8 @@ private struct ShortcutWrapper {
     }
 }
 
-class ShortcutsEditViewController: UITableViewController, TableModelHost {
+@available(iOS 12, *)
+class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutViewControllerDelegate, TableModelHost {
     private var wrappers: [ShortcutWrapper]?
     
     private var editedIndexPath: IndexPath?
@@ -73,9 +74,6 @@ class ShortcutsEditViewController: UITableViewController, TableModelHost {
         
         title = L10n.Organizer.Cells.SiriShortcuts.caption
 
-        guard #available(iOS 12, *) else {
-            return
-        }
         INVoiceShortcutCenter.shared.getAllVoiceShortcuts { [weak self] (shortcuts, error) in
             DispatchQueue.main.async {
                 guard let shortcuts = shortcuts else {
@@ -106,7 +104,6 @@ class ShortcutsEditViewController: UITableViewController, TableModelHost {
 //        present(alert, animated: true, completion: nil)
     }
 
-    @available(iOS 12, *)
     private func handleShortcuts(_ shortcuts: [INVoiceShortcut]) {
         wrappers = shortcuts.map { ShortcutWrapper.from($0) }
         reloadModel()
@@ -116,9 +113,9 @@ class ShortcutsEditViewController: UITableViewController, TableModelHost {
     @IBAction private func close() {
         dismiss(animated: true, completion: nil)
     }
-}
 
-extension ShortcutsEditViewController {
+    // MARK: UITableViewController
+    
     enum SectionType {
         case all
     }
@@ -162,9 +159,6 @@ extension ShortcutsEditViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard #available(iOS 12, *) else {
-            return
-        }
         switch model.row(at: indexPath) {
         case .shortcut:
             guard let wrapper = wrappers?[indexPath.row], let shortcut = wrapper.original as? INVoiceShortcut else {
@@ -179,10 +173,9 @@ extension ShortcutsEditViewController {
             addShortcut()
         }
     }
-}
 
-@available(iOS 12, *)
-extension ShortcutsEditViewController: INUIEditVoiceShortcutViewControllerDelegate {
+    // MARK: INUIEditVoiceShortcutViewControllerDelegate
+    
     func editVoiceShortcutViewControllerDidCancel(_ controller: INUIEditVoiceShortcutViewController) {
         editedIndexPath = nil
         dismiss(animated: true, completion: nil)
