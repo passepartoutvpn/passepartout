@@ -178,7 +178,7 @@ public class IntentDispatcher {
             completionHandler?(nil)
             return
         }
-        log.info("Move to provider location: \(providerId) @ [\(poolId)]")
+        log.info("Connect to provider location: \(providerId) @ [\(poolId)]")
         
         let vpn = VPN.shared
         guard !(service.isActiveProfile(providerProfile) && (providerProfile.poolId == poolId) && (vpn.status == .connected)) else {
