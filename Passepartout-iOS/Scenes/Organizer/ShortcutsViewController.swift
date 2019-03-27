@@ -39,7 +39,7 @@ private struct ShortcutWrapper: Comparable {
 
     let intentDescription: String?
     
-    let original: Any?
+    let original: INVoiceShortcut
 
     static func from(_ vs: INVoiceShortcut) -> ShortcutWrapper {
         return ShortcutWrapper(
@@ -199,10 +199,10 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
         case .shortcut:
-            guard let wrapper = wrappers?[indexPath.row], let shortcut = wrapper.original as? INVoiceShortcut else {
+            guard let wrapper = wrappers?[indexPath.row] else {
                 break
             }
-            let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut)
+            let vc = INUIEditVoiceShortcutViewController(voiceShortcut: wrapper.original)
             vc.delegate = self
             editedIndexPath = indexPath
             present(vc, animated: true, completion: nil)
