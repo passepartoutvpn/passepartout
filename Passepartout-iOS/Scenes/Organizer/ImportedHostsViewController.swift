@@ -52,7 +52,7 @@ class ImportedHostsViewController: UITableViewController {
 
         guard !pendingConfigurationURLs.isEmpty else {
             let alert = Macros.alert(
-                L10n.ImportedHosts.title,
+                title,
                 L10n.Organizer.Alerts.AddHost.message
             )
             alert.addCancelAction(L10n.Global.ok) {
