@@ -227,6 +227,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = model.row(at: indexPath)
+        let V = L10n.Configuration.Cells.self
 
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         if !isEditable {
@@ -260,17 +261,16 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             
         case .tlsWrapping:
             cell.leftText = L10n.Configuration.Cells.TlsWrapping.caption
-            let V = L10n.Configuration.Cells.TlsWrapping.Value.self
             if let strategy = configuration.tlsWrap?.strategy {
                 switch strategy {
                 case .auth:
-                    cell.rightText = V.auth
+                    cell.rightText = V.TlsWrapping.Value.auth
 
                 case .crypt:
-                    cell.rightText = V.crypt
+                    cell.rightText = V.TlsWrapping.Value.crypt
                 }
             } else {
-                cell.rightText = V.disabled
+                cell.rightText = V.All.Value.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
@@ -283,11 +283,10 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case .compressionAlgorithm:
             cell.leftText = L10n.Configuration.Cells.CompressionAlgorithm.caption
-            let V = L10n.Configuration.Cells.CompressionAlgorithm.Value.self
             if let compressionAlgorithm = configuration.compressionAlgorithm {
                 cell.rightText = compressionAlgorithm.cellDescription
             } else {
-                cell.rightText = V.disabled
+                cell.rightText = V.All.Value.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
@@ -303,22 +302,20 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case .keepAlive:
             cell.leftText = L10n.Configuration.Cells.KeepAlive.caption
-            let V = L10n.Configuration.Cells.KeepAlive.Value.self
             if let keepAlive = configuration.keepAliveInterval, keepAlive > 0 {
-                cell.rightText = V.seconds(Int(keepAlive))
+                cell.rightText = V.KeepAlive.Value.seconds(Int(keepAlive))
             } else {
-                cell.rightText = V.never
+                cell.rightText = V.All.Value.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .renegSeconds:
             cell.leftText = L10n.Configuration.Cells.RenegotiationSeconds.caption
-            let V = L10n.Configuration.Cells.RenegotiationSeconds.Value.self
             if let reneg = configuration.renegotiatesAfter, reneg > 0 {
-                cell.rightText = V.after(TimeInterval(reneg).localized)
+                cell.rightText = V.RenegotiationSeconds.Value.after(TimeInterval(reneg).localized)
             } else {
-                cell.rightText = V.never
+                cell.rightText = V.All.Value.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
@@ -398,32 +395,32 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
 private extension SessionProxy.CompressionFraming {
     var cellDescription: String {
-        let V = L10n.Configuration.Cells.CompressionFraming.Value.self
+        let V = L10n.Configuration.Cells.self
         switch self {
         case .disabled:
-            return V.disabled
+            return V.All.Value.disabled
             
         case .compLZO:
-            return V.lzo
+            return V.CompressionFraming.Value.lzo
             
         case .compress:
-            return V.compress
+            return V.CompressionFraming.Value.compress
         }
     }
 }
 
 private extension SessionProxy.CompressionAlgorithm {
     var cellDescription: String {
-        let V = L10n.Configuration.Cells.CompressionAlgorithm.Value.self
+        let V = L10n.Configuration.Cells.self
         switch self {
         case .disabled:
-            return V.disabled
+            return V.All.Value.disabled
             
         case .LZO:
-            return V.lzo
+            return V.CompressionAlgorithm.Value.lzo
             
         case .other:
-            return V.other
+            return V.CompressionAlgorithm.Value.other
         }
     }
 }

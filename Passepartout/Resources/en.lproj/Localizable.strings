@@ -162,22 +162,19 @@
 "configuration.cells.tls_wrapping.caption" = "Wrapping";
 "configuration.cells.tls_wrapping.value.auth" = "Authentication";
 "configuration.cells.tls_wrapping.value.crypt" = "Encryption";
-"configuration.cells.tls_wrapping.value.disabled" = "Disabled";
 "configuration.cells.dns_server.caption" = "Address";
 "configuration.cells.compression_framing.caption" = "Framing";
-"configuration.cells.compression_framing.value.disabled" = "Disabled";
 "configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
 "configuration.cells.compression_framing.value.compress" = "--compress";
 "configuration.cells.compression_algorithm.caption" = "Algorithm";
-"configuration.cells.compression_algorithm.value.disabled" = "Disabled";
 "configuration.cells.compression_algorithm.value.lzo" = "LZO";
 "configuration.cells.compression_algorithm.value.other" = "Unsupported";
 "configuration.cells.keep_alive.caption" = "Keep-alive";
 "configuration.cells.keep_alive.value.seconds" = "%d seconds";
-"configuration.cells.keep_alive.value.never" = "Disabled";
 "configuration.cells.renegotiation_seconds.caption" = "Renegotiation";
 "configuration.cells.renegotiation_seconds.value.after" = "after %@";
-"configuration.cells.renegotiation_seconds.value.never" = "Disabled";
+"configuration.cells.all.value.enabled" = "Enabled";
+"configuration.cells.all.value.disabled" = "Disabled";
 
 "debug_log.buttons.previous" = "Previous";
 "debug_log.buttons.next" = "Next";

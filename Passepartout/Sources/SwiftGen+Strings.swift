@@ -98,6 +98,14 @@ public enum L10n {
 
   public enum Configuration {
     public enum Cells {
+      public enum All {
+        public enum Value {
+          /// Disabled
+          public static let disabled = L10n.tr("Localizable", "configuration.cells.all.value.disabled")
+          /// Enabled
+          public static let enabled = L10n.tr("Localizable", "configuration.cells.all.value.enabled")
+        }
+      }
       public enum Cipher {
         /// Cipher
         public static let caption = L10n.tr("Localizable", "configuration.cells.cipher.caption")
@@ -116,8 +124,6 @@ public enum L10n {
         /// Algorithm
         public static let caption = L10n.tr("Localizable", "configuration.cells.compression_algorithm.caption")
         public enum Value {
-          /// Disabled
-          public static let disabled = L10n.tr("Localizable", "configuration.cells.compression_algorithm.value.disabled")
           /// LZO
           public static let lzo = L10n.tr("Localizable", "configuration.cells.compression_algorithm.value.lzo")
           /// Unsupported
@@ -130,8 +136,6 @@ public enum L10n {
         public enum Value {
           /// --compress
           public static let compress = L10n.tr("Localizable", "configuration.cells.compression_framing.value.compress")
-          /// Disabled
-          public static let disabled = L10n.tr("Localizable", "configuration.cells.compression_framing.value.disabled")
           /// --comp-lzo
           public static let lzo = L10n.tr("Localizable", "configuration.cells.compression_framing.value.lzo")
         }
@@ -152,8 +156,6 @@ public enum L10n {
         /// Keep-alive
         public static let caption = L10n.tr("Localizable", "configuration.cells.keep_alive.caption")
         public enum Value {
-          /// Disabled
-          public static let never = L10n.tr("Localizable", "configuration.cells.keep_alive.value.never")
           /// %d seconds
           public static func seconds(_ p1: Int) -> String {
             return L10n.tr("Localizable", "configuration.cells.keep_alive.value.seconds", p1)
@@ -168,8 +170,6 @@ public enum L10n {
           public static func after(_ p1: String) -> String {
             return L10n.tr("Localizable", "configuration.cells.renegotiation_seconds.value.after", p1)
           }
-          /// Disabled
-          public static let never = L10n.tr("Localizable", "configuration.cells.renegotiation_seconds.value.never")
         }
       }
       public enum ResetOriginal {
@@ -184,8 +184,6 @@ public enum L10n {
           public static let auth = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.auth")
           /// Encryption
           public static let crypt = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.crypt")
-          /// Disabled
-          public static let disabled = L10n.tr("Localizable", "configuration.cells.tls_wrapping.value.disabled")
         }
       }
     }
