@@ -223,10 +223,9 @@ class ShortcutsEditViewController: UITableViewController, INUIEditVoiceShortcutV
         editedIndexPath = nil
         wrappers?[indexPath.row] = ShortcutWrapper.from(voiceShortcut)
         wrappers?.sort()
+        tableView.reloadData()
 
-        dismiss(animated: true) {
-            self.tableView.reloadData()
-        }
+        dismiss(animated: true)
     }
 
     func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didDeleteVoiceShortcutWithIdentifier deletedVoiceShortcutIdentifier: UUID) {
