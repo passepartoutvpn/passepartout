@@ -119,7 +119,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     // MARK: Actions
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? ShortcutsAddViewController {
+        if let nav = segue.destination as? UINavigationController, let vc = nav.topViewController as? ShortcutsAddViewController {
             vc.delegate = self
         }
     }
@@ -216,7 +216,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     
     func shortcutsDidSelectIntent(intent: INIntent) {
         pendingShortcut = INShortcut(intent: intent)
-        navigationController?.popToViewController(self, animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: INUIAddVoiceShortcutViewControllerDelegate

@@ -201,4 +201,8 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
     private func addShortcut(with intent: INIntent) {
         delegate?.shortcutsDidSelectIntent(intent: intent)
     }
+
+    @IBAction private func close() {
+        dismiss(animated: true, completion: nil)
+    }
 }
