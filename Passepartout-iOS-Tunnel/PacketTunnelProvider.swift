@@ -30,6 +30,7 @@ class PacketTunnelProvider: TunnelKitProvider {
         appVersion = "\(GroupConstants.App.name) \(GroupConstants.App.versionString)"
         dnsTimeout = GroupConstants.VPN.dnsTimeout
         logSeparator = GroupConstants.VPN.sessionMarker
+        dataCountInterval = GroupConstants.VPN.dataCountInterval
         super.startTunnel(options: options, completionHandler: completionHandler)
     }
 }

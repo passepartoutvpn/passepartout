@@ -42,6 +42,10 @@ public protocol ConnectionServiceDelegate: class {
     func connectionService(didActivate profile: ConnectionProfile)
 }
 
+public extension Notification.Name {
+    static let ConnectionServiceDidUpdateDataCount = Notification.Name("ConnectionServiceDidUpdateDataCount")
+}
+
 public class ConnectionService: Codable {
     public enum CodingKeys: String, CodingKey {
         case build
@@ -53,6 +57,10 @@ public class ConnectionService: Codable {
         case activeProfileKey
         
         case preferences
+    }
+    
+    public struct NotificationKeys {
+        public static let dataCount = "DataCount"
     }
 
     public var directory: String? = nil
@@ -84,6 +92,8 @@ public class ConnectionService: Codable {
     public var baseConfiguration: TunnelKitProvider.Configuration
     
     private var cache: [ProfileKey: ConnectionProfile]
+    
+    private var dataCountObserver: Timer?
     
     public private(set) var activeProfileKey: ProfileKey? {
         willSet {
@@ -128,6 +138,10 @@ public class ConnectionService: Codable {
         preferences = EditablePreferences()
 
         cache = [:]
+    }
+    
+    deinit {
+        dataCountObserver?.invalidate()
     }
     
     // MARK: Codable
@@ -502,6 +516,14 @@ public class ConnectionService: Codable {
         return baseConfiguration.existingLog(in: appGroup) ?? ""
     }
     
+    public func eraseVpnLog() {
+        log.info("Erasing VPN log...")
+        guard let url = baseConfiguration.urlForLog(in: appGroup) else {
+            return
+        }
+        try? FileManager.default.removeItem(at: url)
+    }
+
     public var vpnLastError: TunnelKitProvider.ProviderError? {
         return baseConfiguration.lastError(in: appGroup)
     }
@@ -509,12 +531,18 @@ public class ConnectionService: Codable {
     public func clearVpnLastError() {
         baseConfiguration.clearLastError(in: appGroup)
     }
+
+    public func observeVPNDataCount(interval: TimeInterval) {
+        dataCountObserver?.invalidate()
+        dataCountObserver = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { [weak self] (_) in
+            guard let dataCount = self?.vpnDataCount else {
+                return
+            }
+            NotificationCenter.default.post(name: .ConnectionServiceDidUpdateDataCount, object: nil, userInfo: [NotificationKeys.dataCount: dataCount])
+        })
+    }
     
-    public func eraseVpnLog() {
-        log.info("Erasing VPN log...")
-        guard let url = baseConfiguration.urlForLog(in: appGroup) else {
-            return
-        }
-        try? FileManager.default.removeItem(at: url)
+    public var vpnDataCount: (Int, Int)? {
+        return baseConfiguration.dataCount(in: appGroup)
     }
 }

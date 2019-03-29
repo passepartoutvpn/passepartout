@@ -107,7 +107,7 @@
 "service.cells.trusted_add_wifi.caption" = "Add current Wi-Fi";
 "service.cells.trusted_policy.caption" = "Trust disables VPN";
 "service.cells.test_connectivity.caption" = "Test connectivity";
-"service.cells.data_count.caption" = "Exchanged bytes count";
+"service.cells.data_count.caption" = "Exchanged data count";
 "service.cells.debug_log.caption" = "Debug log";
 "service.cells.masks_private_data.caption" = "Mask network data";
 "service.cells.report_issue.caption" = "Report connectivity issue";

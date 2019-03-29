@@ -541,7 +541,7 @@ public enum L10n {
         public static let caption = L10n.tr("Localizable", "service.cells.connection_status.caption")
       }
       public enum DataCount {
-        /// Exchanged bytes count
+        /// Exchanged data count
         public static let caption = L10n.tr("Localizable", "service.cells.data_count.caption")
       }
       public enum DebugLog {

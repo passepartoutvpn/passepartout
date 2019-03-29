@@ -50,6 +50,8 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private var shouldDeleteLogOnDisconnection = false
 
+    private var currentDataCount: (Int, Int)?
+    
     // MARK: Table
     
     var model: TableModel<SectionType, RowType> = TableModel()
@@ -103,6 +105,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidReinstall, object: nil)
         nc.addObserver(self, selector: #selector(intentDidUpdateService), name: .IntentDidUpdateService, object: nil)
+        nc.addObserver(self, selector: #selector(serviceDidUpdateDataCount(_:)), name: .ConnectionServiceDidUpdateDataCount, object: nil)
 
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
@@ -373,32 +376,32 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
     }
     
-    private func displayDataCount() {
-        guard vpn.isEnabled else {
-            let alert = Macros.alert(
-                L10n.Service.Cells.DataCount.caption,
-                L10n.Service.Alerts.DataCount.Messages.notAvailable
-            )
-            alert.addCancelAction(L10n.Global.ok)
-            present(alert, animated: true, completion: nil)
-            return
-        }
-
-        vpn.requestBytesCount {
-            let message: String
-            if let count = $0 {
-                message = L10n.Service.Alerts.DataCount.Messages.current(Int(count.0), Int(count.1))
-            } else {
-                message = L10n.Service.Alerts.DataCount.Messages.notAvailable
-            }
-            let alert = Macros.alert(
-                L10n.Service.Cells.DataCount.caption,
-                message
-            )
-            alert.addCancelAction(L10n.Global.ok)
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
+//    private func displayDataCount() {
+//        guard vpn.isEnabled else {
+//            let alert = Macros.alert(
+//                L10n.Service.Cells.DataCount.caption,
+//                L10n.Service.Alerts.DataCount.Messages.notAvailable
+//            )
+//            alert.addCancelAction(L10n.Global.ok)
+//            present(alert, animated: true, completion: nil)
+//            return
+//        }
+//
+//        vpn.requestBytesCount {
+//            let message: String
+//            if let count = $0 {
+//                message = L10n.Service.Alerts.DataCount.Messages.current(Int(count.0), Int(count.1))
+//            } else {
+//                message = L10n.Service.Alerts.DataCount.Messages.notAvailable
+//            }
+//            let alert = Macros.alert(
+//                L10n.Service.Cells.DataCount.caption,
+//                message
+//            )
+//            alert.addCancelAction(L10n.Global.ok)
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
     
     private func togglePrivateDataMasking(cell: ToggleTableViewCell) {
         let handler = {
@@ -467,6 +470,13 @@ class ServiceViewController: UIViewController, TableModelHost {
     @objc private func applicationDidBecomeActive() {
         reloadModel()
         updateViewsIfNeeded()
+    }
+    
+    @objc private func serviceDidUpdateDataCount(_ notification: Notification) {
+        guard let dataCount = notification.userInfo?[ConnectionService.NotificationKeys.dataCount] as? (Int, Int) else {
+            return
+        }
+        refreshDataCount(dataCount)
     }
 }
 
@@ -549,6 +559,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     
     private var statusIndexPath: IndexPath? {
         return model.indexPath(row: .connectionStatus, section: .vpn)
+    }
+    
+    private var dataCountIndexPath: IndexPath? {
+        return model.indexPath(row: .dataCount, section: .diagnostics)
     }
     
     private var endpointIndexPath: IndexPath {
@@ -743,6 +757,13 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .dataCount:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.DataCount.caption
+            if let count = currentDataCount, vpn.status == .connected {
+                cell.rightText = "\(count.0)/\(count.1)"
+            } else {
+                cell.rightText = nil
+            }
+            cell.accessoryType = .none
+            cell.isTappable = false
             return cell
 
         case .debugLog:
@@ -859,8 +880,8 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .testConnectivity:
             testInternetConnectivity()
             
-        case .dataCount:
-            displayDataCount()
+//        case .dataCount:
+//            displayDataCount()
 
         case .debugLog:
             perform(segue: StoryboardSegue.Main.debugLogSegueIdentifier, sender: cell)
@@ -1018,10 +1039,23 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         guard service.isActiveProfile(profile) else {
             return
         }
+        var ips: [IndexPath] = []
         guard let statusIndexPath = statusIndexPath else {
             return
         }
-        tableView.reloadRows(at: [statusIndexPath], with: .none)
+        ips.append(statusIndexPath)
+        if let dataCountIndexPath = dataCountIndexPath {
+            ips.append(dataCountIndexPath)
+        }
+        tableView.reloadRows(at: ips, with: .none)
+    }
+    
+    private func refreshDataCount(_ dataCount: (Int, Int)?) {
+        currentDataCount = dataCount
+        guard let dataCountIndexPath = dataCountIndexPath else {
+            return
+        }
+        tableView.reloadRows(at: [dataCountIndexPath], with: .none)
     }
     
     func reloadSelectedRow(andRowAt indexPath: IndexPath? = nil) {
