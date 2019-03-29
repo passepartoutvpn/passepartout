@@ -245,7 +245,7 @@
 			<key>INIntentRestrictions</key>
 			<integer>0</integer>
 			<key>INIntentTitle</key>
-			<string>Disable VPN service</string>
+			<string>Disable VPN</string>
 			<key>INIntentTitleID</key>
 			<string>1ZRTCZ</string>
 			<key>INIntentType</key>
@@ -644,7 +644,7 @@
 			<key>INIntentRestrictions</key>
 			<integer>0</integer>
 			<key>INIntentTitle</key>
-			<string>Enable VPN service</string>
+			<string>Enable VPN</string>
 			<key>INIntentTitleID</key>
 			<string>lQ6ziK</string>
 			<key>INIntentType</key>
