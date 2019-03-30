@@ -760,7 +760,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             if let count = currentDataCount, vpn.status == .connected {
                 cell.rightText = L10n.Service.Cells.DataCount.value(count.0.dataUnitDescription, count.1.dataUnitDescription)
             } else {
-                cell.rightText = nil
+                cell.rightText = L10n.Service.Cells.DataCount.none
             }
             cell.accessoryType = .none
             cell.isTappable = false
