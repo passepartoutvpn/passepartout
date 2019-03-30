@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - EKU not verified with providers (regression).
+- Occasionally overlapping footers in organizer.
 
 ## 1.2.0 Beta 1472 (2019-03-25)
 
