@@ -107,6 +107,7 @@ public class TransientStore {
 //            _ = service.addProfile(HostConnectionProfile(title: "vps"), credentials: Credentials(username: "foo", password: "bar"))
 //            service.activateProfile(service.profiles.first!)
         }
+        service.observeVPNDataCount(interval: TimeInterval(GroupConstants.VPN.dataCountInterval) / 1000.0)
     }
     
     public func serialize(withProfiles: Bool) {

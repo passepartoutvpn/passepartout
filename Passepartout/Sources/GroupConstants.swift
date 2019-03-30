@@ -79,5 +79,7 @@ public class GroupConstants {
         public static let dnsTimeout = 5000
 
         public static let sessionMarker = "--- EOF ---"
+
+        public static let dataCountInterval = 5000
     }
 }

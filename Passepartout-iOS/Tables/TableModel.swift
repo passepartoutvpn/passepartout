@@ -93,7 +93,7 @@ class TableModel<S: Hashable, R: Equatable> {
     
     func indexPath(row rowObject: R, section sectionObject: S) -> IndexPath? {
         guard let sectionIndex = sections.index(of: sectionObject) else {
-            fatalError("Missing section: \(sectionObject)")
+            return nil
         }
         guard let row = rowsBySection[sectionObject]?.index(of: rowObject) else {
             return nil
