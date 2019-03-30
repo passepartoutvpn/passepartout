@@ -1045,6 +1045,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         }
         ips.append(statusIndexPath)
         if let dataCountIndexPath = dataCountIndexPath {
+            currentDataCount = service.vpnDataCount
             ips.append(dataCountIndexPath)
         }
         tableView.reloadRows(at: ips, with: .none)
