@@ -82,6 +82,8 @@
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
 		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
+		0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB109224FECEA00E9E551 /* DataUnit.swift */; };
+		0ECEB10C224FEF9B00E9E551 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB10B224FEF9B00E9E551 /* UtilsTests.swift */; };
 		0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44D20E1122200A6BB43 /* TableModel.swift */; };
 		0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */; };
 		0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2820CF2A340027975F /* AccountViewController.swift */; };
@@ -226,6 +228,8 @@
 		0ECEB106224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Organizer.storyboard; sourceTree = "<group>"; };
 		0ECEB107224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Shortcuts.storyboard; sourceTree = "<group>"; };
 		0ECEB108224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0ECEB109224FECEA00E9E551 /* DataUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUnit.swift; sourceTree = "<group>"; };
+		0ECEB10B224FEF9B00E9E551 /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		0ECEE44D20E1122200A6BB43 /* TableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
 		0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Cells.swift"; sourceTree = "<group>"; };
 		0ED31C0F20CF09A30027975F /* Pool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pool.swift; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 				0EBBE8F121822B4D00106008 /* ConnectionService.json */,
 				0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */,
 				0ED31C2620CF257C0027975F /* InfrastructureTests.swift */,
+				0ECEB10B224FEF9B00E9E551 /* UtilsTests.swift */,
 				0E3152AC223F9EF500F61841 /* Info.plist */,
 			);
 			path = "Passepartout-CoreTests";
@@ -456,6 +461,7 @@
 				0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */,
 				0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */,
 				0EDE8DE620C93945004C739C /* Credentials.swift */,
+				0ECEB109224FECEA00E9E551 /* DataUnit.swift */,
 				0EC7F20420E24308004EA58E /* DebugLog.swift */,
 				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
 				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
@@ -942,6 +948,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E3152BD223FA03D00F61841 /* GroupConstants.swift in Sources */,
+				0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */,
 				0E3152C2223FA04800F61841 /* MockVPNProvider.swift in Sources */,
 				0E3152D2223FA05400F61841 /* DebugLog.swift in Sources */,
 				0E3152C4223FA04800F61841 /* VPN.swift in Sources */,
@@ -986,6 +993,7 @@
 			files = (
 				0E3152BA223F9F3D00F61841 /* InfrastructureTests.swift in Sources */,
 				0E3152B9223F9F3B00F61841 /* ConnectionServiceTests.swift in Sources */,
+				0ECEB10C224FEF9B00E9E551 /* UtilsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

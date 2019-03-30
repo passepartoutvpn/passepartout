@@ -758,7 +758,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.DataCount.caption
             if let count = currentDataCount, vpn.status == .connected {
-                cell.rightText = "\(count.0)/\(count.1)"
+                cell.rightText = L10n.Service.Cells.DataCount.value(count.0.dataUnitDescription, count.1.dataUnitDescription)
             } else {
                 cell.rightText = nil
             }

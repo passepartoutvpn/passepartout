@@ -543,6 +543,10 @@ public enum L10n {
       public enum DataCount {
         /// Exchanged data count
         public static let caption = L10n.tr("Localizable", "service.cells.data_count.caption")
+        /// %@ / %@
+        public static func value(_ p1: String, _ p2: String) -> String {
+          return L10n.tr("Localizable", "service.cells.data_count.value", p1, p2)
+        }
       }
       public enum DebugLog {
         /// Debug log
