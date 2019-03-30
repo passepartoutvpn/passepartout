@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Siri Shortcuts in-app manager. [#46](https://github.com/passepartoutvpn/passepartout-ios/pull/46)
+- Background data count updates in diagnostics. [#51](https://github.com/passepartoutvpn/passepartout-ios/pull/51)
 
 ### Fixed
 
