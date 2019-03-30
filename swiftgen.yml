@@ -9,9 +9,9 @@ strings:
 
 ib:
     inputs:
-        - Passepartout-iOS/en.lproj/Main.storyboard
-        - Passepartout-iOS/en.lproj/Organizer.storyboard
-        - Passepartout-iOS/en.lproj/Shortcuts.storyboard
+        - Passepartout-iOS/Base.lproj/Main.storyboard
+        - Passepartout-iOS/Base.lproj/Organizer.storyboard
+        - Passepartout-iOS/Base.lproj/Shortcuts.storyboard
     outputs:
         - templateName: scenes-swift4
           output: Passepartout-iOS/Global/SwiftGen+Scenes.swift

@@ -161,8 +161,6 @@
 		0006BCD0B73ABD3B2B701604 /* Pods-Passepartout-Core.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-Core.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-Core/Pods-Passepartout-Core.release.xcconfig"; sourceTree = "<group>"; };
 		0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTableViewCell.swift; sourceTree = "<group>"; };
 		0E05C5DE20D198B9006EE732 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E05C5E020D198D6006EE732 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0E05C5E120D198D6006EE732 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E05C5E320D1993C006EE732 /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
 		0E05C61C20D27C82006EE732 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0E0EABC721DF853C0069DAE7 /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 		0E3152A3223F9EF500F61841 /* Passepartout-CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Passepartout-CoreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E3152AC223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsAddViewController.swift; sourceTree = "<group>"; };
-		0E36D25922403469006AF062 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Shortcuts.storyboard; sourceTree = "<group>"; };
 		0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutsConnectToViewController.swift; sourceTree = "<group>"; };
 		0E39BCEF214B9EF10035E9DE /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		0E39BCF2214DA9310035E9DE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
@@ -196,7 +193,6 @@
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E58BD9222404EF1006FB157 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		0E58BF69224305A8006FB157 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Countries.strings; sourceTree = "<group>"; };
 		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
 		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
@@ -225,6 +221,11 @@
 		0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostConnectionProfile.swift; sourceTree = "<group>"; };
 		0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderConnectionProfile.swift; sourceTree = "<group>"; };
 		0EC7F20420E24308004EA58E /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		0ECEB104224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
+		0ECEB105224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0ECEB106224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Organizer.storyboard; sourceTree = "<group>"; };
+		0ECEB107224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Shortcuts.storyboard; sourceTree = "<group>"; };
+		0ECEB108224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0ECEE44D20E1122200A6BB43 /* TableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
 		0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Cells.swift"; sourceTree = "<group>"; };
 		0ED31C0F20CF09A30027975F /* Pool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pool.swift; sourceTree = "<group>"; };
@@ -236,7 +237,6 @@
 		0ED31C3920CF39510027975F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		0ED31C3B20CF39510027975F /* Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
 		0ED38AD8213F33150004D387 /* WizardHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardHostViewController.swift; sourceTree = "<group>"; };
-		0ED38ADB213F44D00004D387 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Organizer.storyboard; sourceTree = "<group>"; };
 		0ED38AE621404F100004D387 /* EndpointDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointDataSource.swift; sourceTree = "<group>"; };
 		0ED38AE9214054A50004D387 /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModificationDelegate.swift; sourceTree = "<group>"; };
@@ -736,6 +736,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
 			productRefGroup = 0E57F63920C83FC5008323CF /* Products */;
@@ -1075,7 +1076,7 @@
 		0E36D25A22403469006AF062 /* Shortcuts.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0E36D25922403469006AF062 /* en */,
+				0ECEB107224FE51400E9E551 /* Base */,
 			);
 			name = Shortcuts.storyboard;
 			sourceTree = "<group>";
@@ -1083,7 +1084,7 @@
 		0E57F63F20C83FC5008323CF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0E05C5E120D198D6006EE732 /* en */,
+				0ECEB105224FE51400E9E551 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1091,7 +1092,7 @@
 		0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0E05C5E020D198D6006EE732 /* en */,
+				0ECEB108224FE51400E9E551 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1099,7 +1100,7 @@
 		0E58BD9122404EF1006FB157 /* Intents.intentdefinition */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0E58BD9222404EF1006FB157 /* en */,
+				0ECEB104224FE51400E9E551 /* Base */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
@@ -1115,7 +1116,7 @@
 		0ED38ADC213F44D00004D387 /* Organizer.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0ED38ADB213F44D00004D387 /* en */,
+				0ECEB106224FE51400E9E551 /* Base */,
 			);
 			name = Organizer.storyboard;
 			sourceTree = "<group>";
