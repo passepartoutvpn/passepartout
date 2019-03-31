@@ -1,15 +1,16 @@
 ### Added
 
-- Support for LZO compression.
-- Siri shortcuts.
-- Custom intents, have a look at Spotlight suggestions for Passepartout.
-- TunnelBear provider.
+- Siri Shortcuts in-app manager. [#46](https://github.com/passepartoutvpn/passepartout-ios/pull/46)
+- Background data count updates in diagnostics. [#51](https://github.com/passepartoutvpn/passepartout-ios/pull/51)
+- Configure masking in debug log for improved diagnostics.
+- Mullvad provider. [#45](https://github.com/passepartoutvpn/passepartout-ios/pull/45)
+- Support for encrypted certificate private keys. [#43](https://github.com/passepartoutvpn/passepartout-ios/pull/43)
+
+### Changed
+
+- Upgraded to Swift 5.
 
 ### Fixed
 
-- Profile not activating if none is active.
-- EKU verification enabled when it shouldn't be.
-- Incorrect VPN status after renaming.
-- Profile change doesn't disconnect active VPN.
-- Some reconnection issues encountered with TunnelBear and NordVPN.
-- Hosts gone while connected (credit to Aston Martin).
+- EKU not verified with providers (regression).
+- Occasionally overlapping footers in organizer.
