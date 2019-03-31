@@ -99,6 +99,13 @@ For the VPN to work properly, the app requires:
 
 both in the main app and the tunnel extension target.
 
+Make sure to also update the following constants in `Passepartout/Sources/GroupConstants.swift` according to your developer account and your target bundle identifiers:
+
+    public static let teamId
+    public static let appId
+    public static let appGroup
+    public static let tunnelIdentifier
+
 ## License
 
 This project is licensed under the [GPLv3][license-content].
