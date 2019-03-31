@@ -5,12 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.2.0 Beta 1511 (2019-03-30)
+## 1.2.0 (2019-04-01)
 
 ### Added
 
 - Siri Shortcuts in-app manager. [#46](https://github.com/passepartoutvpn/passepartout-ios/pull/46)
 - Background data count updates in diagnostics. [#51](https://github.com/passepartoutvpn/passepartout-ios/pull/51)
+- Configure masking in debug log for improved diagnostics.
+- Mullvad provider. [#45](https://github.com/passepartoutvpn/passepartout-ios/pull/45)
+- Support for encrypted certificate private keys. [#43](https://github.com/passepartoutvpn/passepartout-ios/pull/43)
 
 ### Changed
 
@@ -20,14 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - EKU not verified with providers (regression).
 - Occasionally overlapping footers in organizer.
-
-## 1.2.0 Beta 1472 (2019-03-25)
-
-### Added
-
-- Configure masking in debug log for improved diagnostics.
-- Mullvad provider. [#45](https://github.com/passepartoutvpn/passepartout-ios/pull/45)
-- Support for encrypted certificate private keys. [#43](https://github.com/passepartoutvpn/passepartout-ios/pull/43)
 
 ## 1.1.0 (2019-03-22)
 
