@@ -19,6 +19,7 @@ FEATURES
   - Mullvad
   - Private Internet Access
   - TunnelBear
+  - Windscribe
   - ...more soon!
 - Import .ovpn configuration files.
 - Full transparency on what servers you're connecting to.
