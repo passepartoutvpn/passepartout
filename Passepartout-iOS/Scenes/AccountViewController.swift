@@ -95,6 +95,9 @@ class AccountViewController: UIViewController, TableModelHost {
                 
             case .tunnelBear:
                 guidance = V.Infrastructure.tunnelbear
+                
+            case .windscribe:
+                guidance = V.Infrastructure.windscribe
             }
 
             model.add(.noAccount)

@@ -60,6 +60,7 @@ public class InfrastructureFactory {
         .mullvad,
         .pia,
         .tunnelBear,
+        .windscribe
     ]
     
     private let bundle: [Infrastructure.Name: Infrastructure]

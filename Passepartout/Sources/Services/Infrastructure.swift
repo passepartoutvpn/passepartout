@@ -34,6 +34,8 @@ public struct Infrastructure: Codable {
         
         case tunnelBear = "TunnelBear"
         
+        case windscribe = "Windscribe"
+        
         public var webName: String {
             return rawValue.lowercased()
         }

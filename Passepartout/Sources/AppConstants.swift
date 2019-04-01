@@ -164,7 +164,9 @@ public class AppConstants {
             return URL(string: "https://itunes.apple.com/app/id\(id)?action=write-review")!
         }
         
-        public static let guidances: [Infrastructure.Name: String] = [:]
+        public static let guidances: [Infrastructure.Name: String] = [
+            .windscribe: "https://windscribe.com/getconfig/openvpn"
+        ]
 
         public static let referrals: [Infrastructure.Name: String] = [
             .mullvad: "https://mullvad.net/en/account/create/",
