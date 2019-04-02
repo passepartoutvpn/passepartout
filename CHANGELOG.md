@@ -5,18 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
-### Fixed
-
-- Infrastructures not retained after refresh. [#54](https://github.com/passepartoutvpn/passepartout-ios/issues/54)
-
-## 1.3.0 Beta 1529 (2019-04-02)
+## 1.3.0 Beta 1534 (2019-04-02)
 
 ### Fixed
 
 - Support PKCS#8 encrypted cert keys. [#43](https://github.com/passepartoutvpn/passepartout-ios/issues/43), [tunnelkit#80](https://github.com/keeshux/tunnelkit/issues/80)
 - Handle PEM with preamble. [tunnelkit#78](https://github.com/keeshux/tunnelkit/issues/78)
+- Infrastructures not retained after refresh. [#54](https://github.com/passepartoutvpn/passepartout-ios/issues/54)
 
 ## 1.3.0 Beta 1525 (2019-04-02)
 
