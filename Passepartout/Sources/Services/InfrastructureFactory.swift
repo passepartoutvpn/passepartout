@@ -85,8 +85,12 @@ public class InfrastructureFactory {
     
     public func loadCache() {
         let cacheEntries: [URL]
+        let netPath = "\(AppConstants.Store.webCacheDirectory)/\(WebServices.Group.network.rawValue)"
         do {
-            cacheEntries = try FileManager.default.contentsOfDirectory(at: cachePath, includingPropertiesForKeys: nil)
+            cacheEntries = try FileManager.default.contentsOfDirectory(
+                at: cachePath.appendingPathComponent(netPath),
+                includingPropertiesForKeys: nil
+            )
         } catch let e {
             log.verbose("Error loading cache: \(e)")
             return

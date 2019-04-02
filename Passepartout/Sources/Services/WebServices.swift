@@ -29,13 +29,17 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 public class WebServices {
+    public enum Group: String {
+        case network = "net"
+    }
+    
     public enum Endpoint {
         case network(Infrastructure.Name)
         
         var path: String {
             switch self {
             case .network(let name):
-                return "net/\(name.webName)"
+                return "\(Group.network.rawValue)/\(name.webName)"
             }
         }
     }
