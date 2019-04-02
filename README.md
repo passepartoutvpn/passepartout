@@ -58,6 +58,7 @@ Passepartout can connect to a few well-known VPN providers with an existing acco
 - [Mullvad][app-net-mullvad]
 - [Private Internet Access][app-net-pia]
 - [TunnelBear][app-net-tunnelbear]
+- [Windscribe][app-net-windscribe]
 - ...more soon!
 
 In preset mode, you can pick pre-resolved IPv4 endpoints when DNS is problematic.
@@ -144,6 +145,7 @@ Website: [passepartoutvpn.app][about-website]
 [app-net-mullvad]: https://mullvad.net/en/account/create/
 [app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
 [app-net-tunnelbear]: https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464
+[app-net-windscribe]: https://secure.link/kCsD0prd
 
 [dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html
 [dep-jazzy]: https://github.com/realm/jazzy
