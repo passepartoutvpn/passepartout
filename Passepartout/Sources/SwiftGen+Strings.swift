@@ -150,6 +150,14 @@ public enum L10n {
           public static let embedded = L10n.tr("Localizable", "configuration.cells.digest.value.embedded")
         }
       }
+      public enum DnsDomain {
+        /// Domain
+        public static let caption = L10n.tr("Localizable", "configuration.cells.dns_domain.caption")
+        public enum Value {
+          /// None
+          public static let `none` = L10n.tr("Localizable", "configuration.cells.dns_domain.value.none")
+        }
+      }
       public enum DnsServer {
         /// Address
         public static let caption = L10n.tr("Localizable", "configuration.cells.dns_server.caption")

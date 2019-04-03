@@ -63,11 +63,11 @@ public struct InfrastructurePreset: Codable {
 
         case tlsWrap = "wrap"
 
-        case usesPIAPatches = "pia"
-
         case checksEKU = "eku"
 
         case randomizeEndpoint = "random"
+
+        case usesPIAPatches = "pia"
     }
     
     public let id: String
