@@ -701,10 +701,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.Host.Parameters.caption
             let V = L10n.Service.Cells.Host.Parameters.Value.self
-            if !parameters.sessionConfiguration.cipher.embedsDigest {
-                cell.rightText = V.cipherDigest(parameters.sessionConfiguration.cipher.genericName, parameters.sessionConfiguration.digest.genericName)
+            if !parameters.sessionConfiguration.fallbackCipher.embedsDigest {
+                cell.rightText = V.cipherDigest(parameters.sessionConfiguration.fallbackCipher.genericName, parameters.sessionConfiguration.fallbackDigest.genericName)
             } else {
-                cell.rightText = V.cipher(parameters.sessionConfiguration.cipher.genericName)
+                cell.rightText = V.cipher(parameters.sessionConfiguration.fallbackCipher.genericName)
             }
             return cell
 

@@ -241,12 +241,12 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         switch row {
         case .cipher:
             cell.leftText = L10n.Configuration.Cells.Cipher.caption
-            cell.rightText = configuration.cipher.description
+            cell.rightText = configuration.fallbackCipher.description
             
         case .digest:
             cell.leftText = L10n.Configuration.Cells.Digest.caption
-            if !configuration.cipher.embedsDigest {
-                cell.rightText = configuration.digest.description
+            if !configuration.fallbackCipher.embedsDigest {
+                cell.rightText = configuration.fallbackDigest.description
             } else {
                 cell.rightText = L10n.Configuration.Cells.Digest.Value.embedded
                 cell.accessoryType = .none
@@ -287,7 +287,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case .compressionFraming:
             cell.leftText = L10n.Configuration.Cells.CompressionFraming.caption
-            cell.rightText = configuration.compressionFraming.cellDescription
+            cell.rightText = configuration.fallbackCompressionFraming.cellDescription
             cell.accessoryType = .none
             cell.isTappable = false
 
@@ -360,7 +360,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             navigationController?.pushViewController(vc, animated: true)
             
         case .digest:
-            guard !configuration.cipher.embedsDigest else {
+            guard !configuration.fallbackCipher.embedsDigest else {
                 return
             }
             

@@ -36,7 +36,7 @@ public extension SessionProxy.ConfigurationBuilder {
     func canCommunicate(with other: SessionProxy.Configuration) -> Bool {
         return
             (cipher == other.cipher) &&
-            ((digest == other.digest) || cipher.embedsDigest) &&
+            ((digest == other.digest) || fallbackCipher.embedsDigest) &&
             (compressionFraming == other.compressionFraming)
     }
 }
