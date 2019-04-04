@@ -82,6 +82,7 @@
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
 		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
+		0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */; };
 		0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB109224FECEA00E9E551 /* DataUnit.swift */; };
 		0ECEB10C224FEF9B00E9E551 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB10B224FEF9B00E9E551 /* UtilsTests.swift */; };
 		0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44D20E1122200A6BB43 /* TableModel.swift */; };
@@ -223,6 +224,7 @@
 		0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostConnectionProfile.swift; sourceTree = "<group>"; };
 		0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderConnectionProfile.swift; sourceTree = "<group>"; };
 		0EC7F20420E24308004EA58E /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
 		0ECEB104224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		0ECEB105224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0ECEB106224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Organizer.storyboard; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				0E4FD7F020D58618002221FF /* Macros.swift */,
 				0ED38AE9214054A50004D387 /* OptionViewController.swift */,
 				0EA068F3218475F800C320AD /* ConfigurationParserResult+Alerts.swift */,
+				0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */,
 				0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */,
 				0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */,
 				0E05C61C20D27C82006EE732 /* Theme.swift */,
@@ -1012,6 +1015,7 @@
 				0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */,
 				0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */,
 				0E05C61D20D27C82006EE732 /* Theme.swift in Sources */,
+				0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */,
 				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,

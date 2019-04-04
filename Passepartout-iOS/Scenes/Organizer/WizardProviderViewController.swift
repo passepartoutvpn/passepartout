@@ -74,6 +74,7 @@ extension WizardProviderViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let name = availableNames[indexPath.row]
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+        cell.imageView?.image = name.logo
         cell.leftText = name.rawValue
         return cell
     }
