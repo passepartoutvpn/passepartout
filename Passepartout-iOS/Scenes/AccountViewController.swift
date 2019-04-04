@@ -103,6 +103,7 @@ class AccountViewController: UIViewController, TableModelHost {
             model.add(.noAccount)
             model.set([], in: .noAccount)
 
+            model.setHeader("", for: .credentials)
             if guidance != nil {
                 let footer: String
                 if let _ = guidanceURL {
@@ -182,6 +183,10 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return model.footer(for: section)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return model.headerHeight(for: section)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

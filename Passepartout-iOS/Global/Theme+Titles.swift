@@ -34,3 +34,25 @@ extension UIViewController {
         navigationItem.largeTitleDisplayMode = theme.detailTitleDisplayMode
     }
 }
+
+extension TableModel {
+    func headerHeight(for section: Int) -> CGFloat {
+        guard let title = header(for: section) else {
+            return 1.0
+        }
+        guard !title.isEmpty else {
+            return 0.0
+        }
+        return UITableView.automaticDimension
+    }
+
+    func footerHeight(for section: Int) -> CGFloat {
+        guard let title = footer(for: section) else {
+            return 1.0
+        }
+        guard !title.isEmpty else {
+            return 0.0
+        }
+        return UITableView.automaticDimension
+    }
+}

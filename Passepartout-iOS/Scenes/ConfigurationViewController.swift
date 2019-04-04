@@ -219,13 +219,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard let title = model.header(for: section) else {
-            return 1.0
-        }
-        guard !title.isEmpty else {
-            return 0.0
-        }
-        return UITableView.automaticDimension
+        return model.headerHeight(for: section)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
