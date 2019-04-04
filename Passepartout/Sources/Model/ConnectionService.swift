@@ -263,7 +263,18 @@ public class ConnectionService: Codable {
                     profile = try decoder.decode(ProviderConnectionProfile.self, from: data)
                     
                 case .host:
-                    profile = try decoder.decode(HostConnectionProfile.self, from: data)
+                    let hostProfile = try decoder.decode(HostConnectionProfile.self, from: data)
+
+                    // migrate old endpointProtocols
+                    if hostProfile.parameters.sessionConfiguration.endpointProtocols == nil {
+                        var sessionBuilder = hostProfile.parameters.sessionConfiguration.builder()
+                        sessionBuilder.endpointProtocols = hostProfile.parameters.endpointProtocols
+                        var parametersBuilder = hostProfile.parameters.builder()
+                        parametersBuilder.sessionConfiguration = sessionBuilder.build()
+                        hostProfile.parameters = parametersBuilder.build()
+                    }
+
+                    profile = hostProfile
                 }
                 cache[key] = profile
             } catch let e {
