@@ -41,7 +41,7 @@ extension ConfigurationParser.ParsingResult {
         log.debug("Parsing configuration URL: \(url)")
         do {
             result = try ConfigurationParser.parsed(fromURL: url, passphrase: passphrase)
-        } catch let e as ConfigurationParser.ParsingError {
+        } catch let e as ConfigurationError {
             switch e {
             case .encryptionPassphrase, .unableToDecrypt(_):
                 let alert = Macros.alert(url.normalizedFilename, L10n.ParsedFile.Alerts.EncryptionPassphrase.message)
@@ -85,7 +85,7 @@ extension ConfigurationParser.ParsingResult {
         vc.present(alert, animated: true, completion: nil)
     }
 
-    static func alertImportWarning(url: URL, in vc: UIViewController, withWarning warning: ConfigurationParser.ParsingError, completionHandler: @escaping (Bool) -> Void) {
+    static func alertImportWarning(url: URL, in vc: UIViewController, withWarning warning: ConfigurationError, completionHandler: @escaping (Bool) -> Void) {
         let message = details(forWarning: warning)
         let alert = Macros.alert(url.normalizedFilename, L10n.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
         alert.addDefaultAction(L10n.Global.ok) {
@@ -98,8 +98,12 @@ extension ConfigurationParser.ParsingResult {
     }
     
     private static func localizedMessage(forError error: Error) -> String {
-        if let appError = error as? ConfigurationParser.ParsingError {
+        if let appError = error as? ConfigurationError {
             switch appError {
+            case .malformed(let option):
+                log.error("Could not parse configuration URL: malformed option, \(option)")
+                return L10n.ParsedFile.Alerts.Malformed.message(option)
+
             case .missingConfiguration(let option):
                 log.error("Could not parse configuration URL: missing configuration, \(option)")
                 return L10n.ParsedFile.Alerts.Missing.message(option)
@@ -116,8 +120,11 @@ extension ConfigurationParser.ParsingResult {
         return L10n.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
     }
     
-    private static func details(forWarning warning: ConfigurationParser.ParsingError) -> String {
+    private static func details(forWarning warning: ConfigurationError) -> String {
         switch warning {
+        case .malformed(let option):
+            return option
+            
         case .missingConfiguration(let option):
             return option
             

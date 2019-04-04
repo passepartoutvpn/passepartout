@@ -79,7 +79,7 @@ public struct InfrastructurePreset: Codable {
     public let configuration: TunnelKitProvider.Configuration
     
     public func hasProtocol(_ proto: EndpointProtocol) -> Bool {
-        return configuration.endpointProtocols.index(of: proto) != nil
+        return configuration.sessionConfiguration.endpointProtocols?.index(of: proto) != nil
     }
 
     // MARK: Codable
@@ -91,50 +91,56 @@ public struct InfrastructurePreset: Codable {
         comment = try container.decode(String.self, forKey: .comment)
 
         let cfgContainer = try container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
-        let ca = try cfgContainer.decode(CryptoContainer.self, forKey: .ca)
 
-        var sessionBuilder = SessionProxy.ConfigurationBuilder(ca: ca)
+        var sessionBuilder = SessionProxy.ConfigurationBuilder()
         sessionBuilder.cipher = try cfgContainer.decode(SessionProxy.Cipher.self, forKey: .cipher)
         if let digest = try cfgContainer.decodeIfPresent(SessionProxy.Digest.self, forKey: .digest) {
             sessionBuilder.digest = digest
         }
-        sessionBuilder.clientCertificate = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientCertificate)
-        sessionBuilder.clientKey = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientKey)
         sessionBuilder.compressionFraming = try cfgContainer.decode(SessionProxy.CompressionFraming.self, forKey: .compressionFraming)
         sessionBuilder.compressionAlgorithm = try cfgContainer.decodeIfPresent(SessionProxy.CompressionAlgorithm.self, forKey: .compressionAlgorithm) ?? .disabled
+        sessionBuilder.ca = try cfgContainer.decode(CryptoContainer.self, forKey: .ca)
+        sessionBuilder.clientCertificate = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientCertificate)
+        sessionBuilder.clientKey = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientKey)
         sessionBuilder.tlsWrap = try cfgContainer.decodeIfPresent(SessionProxy.TLSWrap.self, forKey: .tlsWrap)
         sessionBuilder.keepAliveInterval = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .keepAliveSeconds)
         sessionBuilder.renegotiatesAfter = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .renegotiatesAfterSeconds)
-        sessionBuilder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
+        sessionBuilder.endpointProtocols = try cfgContainer.decode([EndpointProtocol].self, forKey: .endpointProtocols)
         sessionBuilder.checksEKU = try cfgContainer.decodeIfPresent(Bool.self, forKey: .checksEKU) ?? false
         sessionBuilder.randomizeEndpoint = try cfgContainer.decodeIfPresent(Bool.self, forKey: .randomizeEndpoint) ?? false
+        sessionBuilder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
 
-        var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
-        builder.endpointProtocols = try cfgContainer.decode([EndpointProtocol].self, forKey: .endpointProtocols)
+        let builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         configuration = builder.build()
     }
     
     public func encode(to encoder: Encoder) throws {
+        guard let ca = configuration.sessionConfiguration.ca else {
+            fatalError("Could not encode nil ca")
+        }
+        guard let endpointProtocols = configuration.sessionConfiguration.endpointProtocols else {
+            fatalError("Could not encode nil endpointProtocols")
+        }
+
         var container = encoder.container(keyedBy: PresetKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
         try container.encode(comment, forKey: .comment)
 
         var cfgContainer = container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
-        try cfgContainer.encode(configuration.endpointProtocols, forKey: .endpointProtocols)
-
         try cfgContainer.encode(configuration.sessionConfiguration.cipher, forKey: .cipher)
         try cfgContainer.encode(configuration.sessionConfiguration.digest, forKey: .digest)
-        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.ca, forKey: .ca)
-        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientCertificate, forKey: .clientCertificate)
-        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientKey, forKey: .clientKey)
         try cfgContainer.encode(configuration.sessionConfiguration.compressionFraming, forKey: .compressionFraming)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.compressionAlgorithm, forKey: .compressionAlgorithm)
+        try cfgContainer.encode(ca, forKey: .ca)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientCertificate, forKey: .clientCertificate)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientKey, forKey: .clientKey)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.tlsWrap, forKey: .tlsWrap)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.keepAliveInterval, forKey: .keepAliveSeconds)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.renegotiatesAfter, forKey: .renegotiatesAfterSeconds)
-        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.usesPIAPatches, forKey: .usesPIAPatches)
+        try cfgContainer.encode(endpointProtocols, forKey: .endpointProtocols)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.checksEKU, forKey: .checksEKU)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.randomizeEndpoint, forKey: .randomizeEndpoint)
+        try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.usesPIAPatches, forKey: .usesPIAPatches)
     }
 }

@@ -56,6 +56,7 @@
 "wizards.host.sections.existing.header" = "Existing profiles";
 "wizards.host.alerts.existing.message" = "A host profile with the same title already exists. Replace it?";
 
+"parsed_file.alerts.malformed.message" = "The configuration file contains a malformed option (%@).";
 "parsed_file.alerts.missing.message" = "The configuration file lacks a required option (%@).";
 "parsed_file.alerts.unsupported.message" = "The configuration file contains an unsupported option (%@).";
 "parsed_file.alerts.potentially_unsupported.message" = "The configuration file is correct but contains a potentially unsupported option (%@).\n\nConnectivity may break depending on server settings.";

@@ -36,7 +36,7 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     public init(title: String, hostname: String) {
         self.title = title
         self.hostname = hostname
-        let sessionConfiguration = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: "")).build()
+        let sessionConfiguration = SessionProxy.ConfigurationBuilder().build()
         parameters = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionConfiguration).build()
     }
     
@@ -55,7 +55,9 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     }
     
     public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
-        precondition(!parameters.endpointProtocols.isEmpty)
+        guard let endpointProtocols = parameters.sessionConfiguration.endpointProtocols, !endpointProtocols.isEmpty else {
+            preconditionFailure("No endpointProtocols")
+        }
         
         // XXX: copy paste, error prone
         var builder = parameters.builder()
@@ -91,7 +93,7 @@ public extension HostConnectionProfile {
     }
     
     var protocols: [EndpointProtocol] {
-        return parameters.endpointProtocols
+        return parameters.sessionConfiguration.endpointProtocols ?? []
     }
     
     var canCustomizeEndpoint: Bool {

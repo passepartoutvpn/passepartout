@@ -419,6 +419,12 @@ public enum L10n {
         /// Please enter the encryption passphrase.
         public static let message = L10n.tr("Localizable", "parsed_file.alerts.encryption_passphrase.message")
       }
+      public enum Malformed {
+        /// The configuration file contains a malformed option (%@).
+        public static func message(_ p1: String) -> String {
+          return L10n.tr("Localizable", "parsed_file.alerts.malformed.message", p1)
+        }
+      }
       public enum Missing {
         /// The configuration file lacks a required option (%@).
         public static func message(_ p1: String) -> String {
