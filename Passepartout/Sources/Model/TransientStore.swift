@@ -63,7 +63,7 @@ public class TransientStore {
     }
     
     public static var baseVPNConfiguration: TunnelKitProvider.ConfigurationBuilder {
-        let sessionBuilder = SessionProxy.ConfigurationBuilder(ca: CryptoContainer(pem: ""))
+        let sessionBuilder = SessionProxy.ConfigurationBuilder()
         var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.mtu = 1250
         builder.shouldDebug = true

@@ -99,10 +99,12 @@ class WizardHostViewController: UITableViewController, TableModelHost {
         guard let result = parsingResult else {
             return
         }
-        
-        let profile = HostConnectionProfile(title: enteredTitle, hostname: result.hostname)
-        var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
-        builder.endpointProtocols = result.protocols
+        guard let hostname = result.configuration.hostname else {
+            return
+        }
+
+        let profile = HostConnectionProfile(title: enteredTitle, hostname: hostname)
+        let builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
         profile.parameters = builder.build()
 
         let service = TransientStore.shared.service

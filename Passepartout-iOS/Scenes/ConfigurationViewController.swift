@@ -59,18 +59,14 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         }
         model.add(.tls)
         model.add(.compression)
-        if let _ = configuration.dnsServers {
-            model.add(.dns)
-        }
+        model.add(.dns)
         model.add(.other)
 
         // headers
         model.setHeader(L10n.Configuration.Sections.Communication.header, for: .communication)
         model.setHeader(L10n.Configuration.Sections.Tls.header, for: .tls)
         model.setHeader(L10n.Configuration.Sections.Compression.header, for: .compression)
-        if let _ = configuration.dnsServers {
-            model.setHeader(L10n.Configuration.Sections.Dns.header, for: .dns)
-        }
+        model.setHeader(L10n.Configuration.Sections.Dns.header, for: .dns)
         model.setHeader(L10n.Configuration.Sections.Other.header, for: .other)
 
         // footers
@@ -85,9 +81,14 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         }
         model.set([.client, .tlsWrapping, .eku], in: .tls)
         model.set([.compressionFraming, .compressionAlgorithm], in: .compression)
+        var dnsRows: [RowType]
         if let dnsServers = configuration.dnsServers {
-            model.set(.dnsServer, count: dnsServers.count, in: .dns)
+            dnsRows = [RowType](repeating: .dnsServer, count: dnsServers.count)
+        } else {
+            dnsRows = []
         }
+        dnsRows.append(.dnsDomain)
+        model.set(dnsRows, in: .dns)
         model.set([.keepAlive, .renegSeconds, .randomEndpoint], in: .other)
 
         return model
@@ -196,6 +197,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case dnsServer
         
+        case dnsDomain
+        
         case keepAlive
         
         case renegSeconds
@@ -241,12 +244,12 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         switch row {
         case .cipher:
             cell.leftText = L10n.Configuration.Cells.Cipher.caption
-            cell.rightText = configuration.cipher.description
+            cell.rightText = configuration.fallbackCipher.description
             
         case .digest:
             cell.leftText = L10n.Configuration.Cells.Digest.caption
-            if !configuration.cipher.embedsDigest {
-                cell.rightText = configuration.digest.description
+            if !configuration.fallbackCipher.embedsDigest {
+                cell.rightText = configuration.fallbackDigest.description
             } else {
                 cell.rightText = L10n.Configuration.Cells.Digest.Value.embedded
                 cell.accessoryType = .none
@@ -287,7 +290,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case .compressionFraming:
             cell.leftText = L10n.Configuration.Cells.CompressionFraming.caption
-            cell.rightText = configuration.compressionFraming.cellDescription
+            cell.rightText = configuration.fallbackCompressionFraming.cellDescription
             cell.accessoryType = .none
             cell.isTappable = false
 
@@ -307,6 +310,12 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             }
             cell.leftText = L10n.Configuration.Cells.DnsServer.caption
             cell.rightText = dnsServers[indexPath.row]
+            cell.accessoryType = .none
+            cell.isTappable = false
+            
+        case .dnsDomain:
+            cell.leftText = L10n.Configuration.Cells.DnsDomain.caption
+            cell.rightText = configuration.searchDomain ?? L10n.Configuration.Cells.DnsDomain.Value.none
             cell.accessoryType = .none
             cell.isTappable = false
 
@@ -360,7 +369,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             navigationController?.pushViewController(vc, animated: true)
             
         case .digest:
-            guard !configuration.cipher.embedsDigest else {
+            guard !configuration.fallbackCipher.embedsDigest else {
                 return
             }
             

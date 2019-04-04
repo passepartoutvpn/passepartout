@@ -130,10 +130,10 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         }
         
         if let proto = manualProtocol {
-            builder.endpointProtocols = [proto]
+            builder.sessionConfiguration.endpointProtocols = [proto]
         } else {
-            builder.endpointProtocols = preset.configuration.endpointProtocols
-//            builder.endpointProtocols = [
+            builder.sessionConfiguration.endpointProtocols = preset.configuration.sessionConfiguration.endpointProtocols
+//            builder.sessionConfiguration.endpointProtocols = [
 //                EndpointProtocol(.udp, 8080),
 //                EndpointProtocol(.tcp, 443)
 //            ]
@@ -163,7 +163,7 @@ public extension ProviderConnectionProfile {
     }
     
     var protocols: [EndpointProtocol] {
-        return preset?.configuration.endpointProtocols ?? []
+        return preset?.configuration.sessionConfiguration.endpointProtocols ?? []
     }
     
     var canCustomizeEndpoint: Bool {

@@ -150,6 +150,14 @@ public enum L10n {
           public static let embedded = L10n.tr("Localizable", "configuration.cells.digest.value.embedded")
         }
       }
+      public enum DnsDomain {
+        /// Domain
+        public static let caption = L10n.tr("Localizable", "configuration.cells.dns_domain.caption")
+        public enum Value {
+          /// None
+          public static let `none` = L10n.tr("Localizable", "configuration.cells.dns_domain.value.none")
+        }
+      }
       public enum DnsServer {
         /// Address
         public static let caption = L10n.tr("Localizable", "configuration.cells.dns_server.caption")
@@ -418,6 +426,12 @@ public enum L10n {
       public enum EncryptionPassphrase {
         /// Please enter the encryption passphrase.
         public static let message = L10n.tr("Localizable", "parsed_file.alerts.encryption_passphrase.message")
+      }
+      public enum Malformed {
+        /// The configuration file contains a malformed option (%@).
+        public static func message(_ p1: String) -> String {
+          return L10n.tr("Localizable", "parsed_file.alerts.malformed.message", p1)
+        }
       }
       public enum Missing {
         /// The configuration file lacks a required option (%@).
