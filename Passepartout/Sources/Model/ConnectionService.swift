@@ -187,7 +187,7 @@ public class ConnectionService: Codable {
 //            log.debug("Found \(files.count) provider files: \(files)")
             for entry in files {
                 guard let id = ConnectionService.profileId(fromURL: entry) else {
-                    return
+                    continue
                 }
                 let key = ProfileKey(.provider, id)
                 cache[key] = PlaceholderConnectionProfile(key)
