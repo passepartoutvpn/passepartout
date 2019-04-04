@@ -33,7 +33,7 @@ private let log = SwiftyBeaver.self
 class ImportedHostsViewController: UITableViewController {
     private lazy var pendingConfigurationURLs = TransientStore.shared.service.pendingConfigurationURLs().sortedCaseInsensitive()
 
-    private var parsingResult: ConfigurationParser.ParsingResult?
+    private var parsingResult: ConfigurationParser.Result?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +88,7 @@ class ImportedHostsViewController: UITableViewController {
             }
             self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier, sender: cell)
         }
-        guard let parsingResult = ConfigurationParser.ParsingResult.from(url, withErrorAlertIn: self, passphrase: passphrase, passphraseBlock: passphraseBlock, passphraseCancelBlock: nil) else {
+        guard let parsingResult = ConfigurationParser.Result.from(url, withErrorAlertIn: self, passphrase: passphrase, passphraseBlock: passphraseBlock, passphraseCancelBlock: nil) else {
             deselectSelectedRow()
             return false
         }
@@ -96,7 +96,7 @@ class ImportedHostsViewController: UITableViewController {
         
         // postpone segue until alert dismissal
         if let warning = parsingResult.warning {
-            ConfigurationParser.ParsingResult.alertImportWarning(url: url, in: self, withWarning: warning) {
+            ConfigurationParser.Result.alertImportWarning(url: url, in: self, withWarning: warning) {
                 self.deselectSelectedRow()
                 if $0 {
                     self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)

@@ -135,7 +135,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             log.warning("Resetting with no original configuration set? Bad table model?")
             return
         }
-        let parsingResult: ConfigurationParser.ParsingResult
+        let parsingResult: ConfigurationParser.Result
         do {
             parsingResult = try ConfigurationParser.parsed(fromURL: originalURL)
         } catch let e {

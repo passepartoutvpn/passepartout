@@ -1,5 +1,5 @@
 //
-//  ParsingResult+Alerts.swift
+//  ConfigurationParserResult+Alerts.swift
 //  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 10/27/18.
@@ -31,11 +31,11 @@ import Passepartout_Core
 
 private let log = SwiftyBeaver.self
 
-extension ConfigurationParser.ParsingResult {
+extension ConfigurationParser.Result {
     static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphrase: String?,
-                     passphraseBlock: @escaping (String) -> Void, passphraseCancelBlock: (() -> Void)?) -> ConfigurationParser.ParsingResult? {
+                     passphraseBlock: @escaping (String) -> Void, passphraseCancelBlock: (() -> Void)?) -> ConfigurationParser.Result? {
 
-        let result: ConfigurationParser.ParsingResult
+        let result: ConfigurationParser.Result
         let fm = FileManager.default
 
         log.debug("Parsing configuration URL: \(url)")

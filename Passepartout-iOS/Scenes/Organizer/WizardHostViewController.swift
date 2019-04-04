@@ -37,7 +37,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
         return TransientStore.shared.service.ids(forContext: .host).sortedCaseInsensitive()
     }()
     
-    var parsingResult: ConfigurationParser.ParsingResult? {
+    var parsingResult: ConfigurationParser.Result? {
         didSet {
             useSuggestedTitle()
         }
