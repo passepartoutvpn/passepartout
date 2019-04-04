@@ -17,3 +17,10 @@ ib:
           output: Passepartout-iOS/Global/SwiftGen+Scenes.swift
         - templateName: segues-swift4
           output: Passepartout-iOS/Global/SwiftGen+Segues.swift
+
+xcassets:
+    inputs:
+        - Passepartout-iOS/Assets.xcassets
+    outputs:
+        - templateName: swift4
+          output: Passepartout-iOS/Global/SwiftGen+Assets.swift

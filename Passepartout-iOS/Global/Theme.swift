@@ -153,3 +153,18 @@ extension MFMailComposeViewController {
         bar.largeTitleTextAttributes = bar.titleTextAttributes
     }
 }
+
+extension Infrastructure.Name {
+    private static let allLogos: [Infrastructure.Name: ImageAsset] = {
+        var logos: [Infrastructure.Name: ImageAsset] = [:]
+        logos[.mullvad] = Asset.mullvad
+        logos[.pia] = Asset.pia
+        logos[.tunnelBear] = Asset.tunnelbear
+        logos[.windscribe] = Asset.windscribe
+        return logos
+    }()
+
+    var logo: UIImage? {
+        return Infrastructure.Name.allLogos[self]?.image
+    }
+}

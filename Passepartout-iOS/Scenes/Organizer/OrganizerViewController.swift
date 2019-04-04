@@ -347,6 +347,11 @@ extension OrganizerViewController {
         case .profile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             let rowProfile = profileKey(at: indexPath)
+            if rowProfile.context == .provider, let providerName = Infrastructure.Name(rawValue: rowProfile.id) {
+                cell.imageView?.image = providerName.logo
+            } else {
+                cell.imageView?.image = nil
+            }
             cell.leftText = rowProfile.id
             cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Organizer.Cells.Profile.Value.current : nil
             return cell

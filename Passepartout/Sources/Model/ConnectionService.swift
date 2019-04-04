@@ -252,13 +252,16 @@ public class ConnectionService: Codable {
     }
     
     public func profile(withContext context: Context, id: String) -> ConnectionProfile? {
-        let key = ProfileKey(context, id)
+        return profile(withKey: ProfileKey(context, id))
+    }
+    
+    public func profile(withKey key: ProfileKey) -> ConnectionProfile? {
         var profile = cache[key]
         if let _ = profile as? PlaceholderConnectionProfile {
             let decoder = JSONDecoder()
             do {
                 let data = try profileData(key)
-                switch context {
+                switch key.context {
                 case .provider:
                     profile = try decoder.decode(ProviderConnectionProfile.self, from: data)
                     
