@@ -155,16 +155,13 @@ extension MFMailComposeViewController {
 }
 
 extension Infrastructure.Name {
-    private static let allLogos: [Infrastructure.Name: ImageAsset] = {
-        var logos: [Infrastructure.Name: ImageAsset] = [:]
-        logos[.mullvad] = Asset.Providers.mullvad
-        logos[.pia] = Asset.Providers.pia
-        logos[.tunnelBear] = Asset.Providers.tunnelbear
-        logos[.windscribe] = Asset.Providers.windscribe
-        return logos
-    }()
-
     var logo: UIImage? {
-        return Infrastructure.Name.allLogos[self]?.image
+        return ImageAsset(name: rawValue.lowercased()).image
+    }
+}
+
+extension Pool {
+    var logo: UIImage? {
+        return ImageAsset(name: country.lowercased()).image
     }
 }

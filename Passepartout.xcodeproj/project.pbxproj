@@ -78,6 +78,7 @@
 		0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD7862257462800D033B4 /* Providers.xcassets */; };
+		0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD788225746B300D033B4 /* Flags.xcassets */; };
 		0EA068F4218475F800C320AD /* ConfigurationParserResult+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ConfigurationParserResult+Alerts.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
@@ -212,6 +213,7 @@
 		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
 		0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructurePreset.swift; sourceTree = "<group>"; };
 		0E9CD7862257462800D033B4 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
+		0E9CD788225746B300D033B4 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
 		0EA068F3218475F800C320AD /* ConfigurationParserResult+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConfigurationParserResult+Alerts.swift"; sourceTree = "<group>"; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				0ED38ADC213F44D00004D387 /* Organizer.storyboard */,
 				0E36D25A22403469006AF062 /* Shortcuts.storyboard */,
 				0E57F64220C83FC7008323CF /* Assets.xcassets */,
+				0E9CD788225746B300D033B4 /* Flags.xcassets */,
 				0E9CD7862257462800D033B4 /* Providers.xcassets */,
 				0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */,
 				0E57F64720C83FC7008323CF /* Info.plist */,
@@ -791,6 +794,7 @@
 				0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */,
 				0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */,
 				0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */,
+				0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */,
 				0E57F64120C83FC5008323CF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
