@@ -21,7 +21,7 @@ ib:
 xcassets:
     inputs:
         - Passepartout-iOS/Assets.xcassets
-        - Passepartout-iOS/Countries.xcassets
+        - Passepartout-iOS/Flags.xcassets
         - Passepartout-iOS/Providers.xcassets
     outputs:
         - templateName: swift4
