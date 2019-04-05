@@ -56,6 +56,26 @@ class AccountViewController: UIViewController, TableModelHost {
         return Credentials(username, password).trimmed()
     }
     
+    private var guidanceString: String? {
+        guard let name = infrastructureName else {
+            return nil
+        }
+        let V = L10n.Account.Sections.Guidance.Footer.Infrastructure.self
+        switch name {
+        case .mullvad:
+            return V.mullvad(name.rawValue)
+            
+        case .pia:
+            return V.pia(name.rawValue)
+            
+        case .tunnelBear:
+            return V.tunnelbear(name.rawValue)
+            
+        case .windscribe:
+            return V.windscribe(name.rawValue)
+        }
+    }
+    
     private var guidanceURL: String? {
         guard let name = infrastructureName else {
             return nil
@@ -80,41 +100,24 @@ class AccountViewController: UIViewController, TableModelHost {
         model.clear()
         
         model.add(.credentials)
-        model.setHeader("", for: .credentials)
+        model.setHeader(L10n.Account.Sections.Credentials.header, for: .credentials)
         model.set([.username, .password], in: .credentials)
 
         if let name = infrastructureName {
-            let V = L10n.Account.SuggestionFooter.self
-            
-            var guidance: String?
-            switch name {
-            case .mullvad:
-                guidance = V.Infrastructure.mullvad
-                
-            case .pia:
-                guidance = V.Infrastructure.pia
-                
-            case .tunnelBear:
-                guidance = V.Infrastructure.tunnelbear
-                
-            case .windscribe:
-                guidance = V.Infrastructure.windscribe
-            }
-
-            model.add(.noAccount)
-            model.set([], in: .noAccount)
-
-            if guidance != nil {
-                let footer: String
+            if let guidanceString = guidanceString {
                 if let _ = guidanceURL {
-                    footer = "\(guidance!) \(V.guidanceLink)"
+                    model.add(.guidance)
+                    model.setFooter(guidanceString, for: .guidance)
+                    model.set([.openGuide], in: .guidance)
                 } else {
-                    footer = guidance!
+                    model.setFooter(guidanceString, for: .credentials)
                 }
-                model.setFooter(footer, for: .credentials)
+                model.setHeader("", for: .registration)
             }
             if let _ = referralURL {
-                model.setFooter(V.referral, for: .noAccount)
+                model.add(.registration)
+                model.setFooter(L10n.Account.Sections.Registration.footer(name.rawValue), for: .registration)
+                model.set([.signUp], in: .registration)
             }
         }
     }
@@ -154,6 +157,20 @@ class AccountViewController: UIViewController, TableModelHost {
         delegate?.accountController(self, didEnterCredentials: newCredentials)
     }
     
+    private func openGuidanceURL() {
+        guard let urlString = guidanceURL else {
+            return
+        }
+        UIApplication.shared.open(URL(string: urlString)!, options: [:], completionHandler: nil)
+    }
+    
+    private func openReferralURL() {
+        guard let urlString = referralURL else {
+            return
+        }
+        UIApplication.shared.open(URL(string: urlString)!, options: [:], completionHandler: nil)
+    }
+    
     @IBAction private func done() {
         view.endEditing(true)
         delegate?.accountControllerDidComplete(self)
@@ -166,19 +183,29 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
     enum SectionType: Int {
         case credentials
 
-        case noAccount
+        case guidance
+
+        case registration
     }
     
     enum RowType: Int {
         case username
         
         case password
+        
+        case openGuide
+
+        case signUp
     }
     
     private static let footerButtonTag = 1000
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return model.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return model.header(for: section)
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -189,26 +216,14 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
         return model.headerHeight(for: section)
     }
     
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        var optButton = view.viewWithTag(AccountViewController.footerButtonTag + section) as? UIButton
-        if optButton == nil {
-            let button = UIButton()
-            button.frame = view.bounds
-            button.tag = AccountViewController.footerButtonTag + section
-            view.addSubview(button)
-            optButton = button
-        }
-        optButton?.addTarget(self, action: #selector(footerTapped(_:)), for: .touchUpInside)
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.count(for: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Cells.field.dequeue(from: tableView, for: indexPath)
         switch model.row(at: indexPath) {
         case .username:
+            let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cellUsername = cell
             cell.caption = L10n.Account.Cells.Username.caption
             cell.field.placeholder = usernamePlaceholder ?? L10n.Account.Cells.Username.placeholder
@@ -218,8 +233,12 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             cell.field.keyboardType = .emailAddress
             cell.field.returnKeyType = .next
             cell.field.textContentType = .username
+            cell.captionWidth = 120.0
+            cell.delegate = self
+            return cell
 
         case .password:
+            let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cellPassword = cell
             cell.caption = L10n.Account.Cells.Password.caption
             cell.field.placeholder = L10n.Account.Cells.Password.placeholder
@@ -228,10 +247,39 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             cell.field.text = currentCredentials?.password
             cell.field.returnKeyType = .done
             cell.field.textContentType = .password
+            cell.captionWidth = 120.0
+            cell.delegate = self
+            return cell
+            
+        case .openGuide:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Account.Cells.OpenGuide.caption
+            cell.applyAction(Theme.current)
+            return cell
+
+        case .signUp:
+            guard let name = infrastructureName else {
+                fatalError("Sign-up shown when not a provider profile")
+            }
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Account.Cells.Signup.caption(name.rawValue)
+            cell.applyAction(Theme.current)
+            return cell
         }
-        cell.captionWidth = 120.0
-        cell.delegate = self
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch model.row(at: indexPath) {
+        case .openGuide:
+            openGuidanceURL()
+            
+        case .signUp:
+            openReferralURL()
+            
+        default:
+            break
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func fieldCellDidEdit(_: FieldTableViewCell) {
@@ -250,23 +298,5 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
         default:
             break
         }
-    }
-
-    @objc private func footerTapped(_ sender: Any?) {
-        guard let button = sender as? UIButton, let section = SectionType(rawValue: button.tag - AccountViewController.footerButtonTag) else {
-            return
-        }
-        var urlString: String?
-        switch section {
-        case .credentials:
-            urlString = guidanceURL
-            
-        case .noAccount:
-            urlString = referralURL
-        }
-        guard let url = urlString else {
-            return
-        }
-        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
     }
 }

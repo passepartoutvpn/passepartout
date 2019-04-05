@@ -129,18 +129,20 @@
 "service.alerts.masks_private_data.messages.must_reconnect" = "In order to safely reset the current debug log and apply the new masking preference, you must reconnect to the VPN now.";
 "service.alerts.buttons.reconnect" = "Reconnect";
 
+"account.sections.credentials.header" = "Credentials";
+"account.sections.guidance.footer.infrastructure.mullvad" = "Use your %@ website account number and password \"m\".";
+"account.sections.guidance.footer.infrastructure.pia" = "Use your %@ website credentials. Your username is usually numeric with a \"p\" prefix.";
+"account.sections.guidance.footer.infrastructure.tunnelbear" = "Use your %@ website credentials. Your username is usually your email.";
+"account.sections.guidance.footer.infrastructure.windscribe" = "Find your credentials in the OpenVPN Config Generator on the %@ website.";
+"account.sections.registration.footer" = "Go get an account on the %@ website.";
 "account.cells.username.caption" = "Username";
 "account.cells.username.placeholder" = "username";
 "account.cells.password.caption" = "Password";
 "account.cells.password.placeholder" = "secret";
 //"account.cells.password_confirm.caption" = "Confirm";
 //"account.cells.password_confirm.mismatch" = "Passwords don't match!";
-"account.suggestion_footer.infrastructure.mullvad" = "Use your website account number and password \"m\".";
-"account.suggestion_footer.infrastructure.pia" = "Use your website credentials. Your username is usually numeric with a \"p\" prefix.";
-"account.suggestion_footer.infrastructure.tunnelbear" = "Use your website credentials. Your username is usually your email.";
-"account.suggestion_footer.infrastructure.windscribe" = "Find your credentials in the OpenVPN Config Generator on the website.";
-"account.suggestion_footer.guidance_link" = "Tap to open web page.";
-"account.suggestion_footer.referral" = "Don't have an account? Tap here to get one.";
+"account.cells.open_guide.caption" = "See your credentials";
+"account.cells.signup.caption" = "Register with %@";
 
 "endpoint.sections.location_addresses.header" = "Addresses";
 "endpoint.sections.location_protocols.header" = "Protocols";

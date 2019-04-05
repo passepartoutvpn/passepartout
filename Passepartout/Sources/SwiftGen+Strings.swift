@@ -67,11 +67,21 @@ public enum L10n {
 
   public enum Account {
     public enum Cells {
+      public enum OpenGuide {
+        /// Find your credentials
+        public static let caption = L10n.tr("Localizable", "account.cells.open_guide.caption")
+      }
       public enum Password {
         /// Password
         public static let caption = L10n.tr("Localizable", "account.cells.password.caption")
         /// secret
         public static let placeholder = L10n.tr("Localizable", "account.cells.password.placeholder")
+      }
+      public enum Signup {
+        /// Register with %@
+        public static func caption(_ p1: String) -> String {
+          return L10n.tr("Localizable", "account.cells.signup.caption", p1)
+        }
       }
       public enum Username {
         /// Username
@@ -80,20 +90,38 @@ public enum L10n {
         public static let placeholder = L10n.tr("Localizable", "account.cells.username.placeholder")
       }
     }
-    public enum SuggestionFooter {
-      /// Tap to open web page.
-      public static let guidanceLink = L10n.tr("Localizable", "account.suggestion_footer.guidance_link")
-      /// Don't have an account? Tap here to get one.
-      public static let referral = L10n.tr("Localizable", "account.suggestion_footer.referral")
-      public enum Infrastructure {
-        /// Use your website account number and password "m".
-        public static let mullvad = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.mullvad")
-        /// Use your website credentials. Your username is usually numeric with a "p" prefix.
-        public static let pia = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.pia")
-        /// Use your website credentials. Your username is usually your email.
-        public static let tunnelbear = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.tunnelbear")
-        /// Find your credentials in the OpenVPN Config Generator on the website.
-        public static let windscribe = L10n.tr("Localizable", "account.suggestion_footer.infrastructure.windscribe")
+    public enum Sections {
+      public enum Credentials {
+        /// Credentials
+        public static let header = L10n.tr("Localizable", "account.sections.credentials.header")
+      }
+      public enum Guidance {
+        public enum Footer {
+          public enum Infrastructure {
+            /// Use your %@ website account number and password "m".
+            public static func mullvad(_ p1: String) -> String {
+              return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.mullvad", p1)
+            }
+            /// Use your %@ website credentials. Your username is usually numeric with a "p" prefix.
+            public static func pia(_ p1: String) -> String {
+              return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.pia", p1)
+            }
+            /// Use your %@ website credentials. Your username is usually your email.
+            public static func tunnelbear(_ p1: String) -> String {
+              return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.tunnelbear", p1)
+            }
+            /// Find your credentials in the OpenVPN Config Generator on the %@ website.
+            public static func windscribe(_ p1: String) -> String {
+              return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.windscribe", p1)
+            }
+          }
+        }
+      }
+      public enum Registration {
+        /// Go get an account on the %@ website.
+        public static func footer(_ p1: String) -> String {
+          return L10n.tr("Localizable", "account.sections.registration.footer", p1)
+        }
       }
     }
   }
