@@ -18,11 +18,15 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
-  internal static let logo = ImageAsset(name: "logo")
-  internal static let mullvad = ImageAsset(name: "mullvad")
-  internal static let pia = ImageAsset(name: "pia")
-  internal static let tunnelbear = ImageAsset(name: "tunnelbear")
-  internal static let windscribe = ImageAsset(name: "windscribe")
+  internal enum Assets {
+    internal static let logo = ImageAsset(name: "logo")
+  }
+  internal enum Providers {
+    internal static let mullvad = ImageAsset(name: "mullvad")
+    internal static let pia = ImageAsset(name: "pia")
+    internal static let tunnelbear = ImageAsset(name: "tunnelbear")
+    internal static let windscribe = ImageAsset(name: "windscribe")
+  }
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

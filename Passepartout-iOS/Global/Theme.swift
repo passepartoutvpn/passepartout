@@ -157,10 +157,10 @@ extension MFMailComposeViewController {
 extension Infrastructure.Name {
     private static let allLogos: [Infrastructure.Name: ImageAsset] = {
         var logos: [Infrastructure.Name: ImageAsset] = [:]
-        logos[.mullvad] = Asset.mullvad
-        logos[.pia] = Asset.pia
-        logos[.tunnelBear] = Asset.tunnelbear
-        logos[.windscribe] = Asset.windscribe
+        logos[.mullvad] = Asset.Providers.mullvad
+        logos[.pia] = Asset.Providers.pia
+        logos[.tunnelBear] = Asset.Providers.tunnelbear
+        logos[.windscribe] = Asset.Providers.windscribe
         return logos
     }()
 
