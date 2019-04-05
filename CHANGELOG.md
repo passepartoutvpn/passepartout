@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Provider logos. [#55](https://github.com/passepartoutvpn/passepartout-ios/pull/55)
+- Country flags. [#56](https://github.com/passepartoutvpn/passepartout-ios/pull/56)
 
 ## 1.3.1 Beta 1551 (2019-04-04)
 

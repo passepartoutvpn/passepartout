@@ -260,7 +260,7 @@ public class AppConstants {
             ),
             Notice(
                 "Country flags",
-                "https://github.com/lipis/flag-icon-css"
+                "The country flags are taken from: https://github.com/lipis/flag-icon-css/"
             ),
             Notice(
                 "OpenVPN",
