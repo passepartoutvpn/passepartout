@@ -263,7 +263,14 @@ public class ConnectionService: Codable {
                 let data = try profileData(key)
                 switch key.context {
                 case .provider:
-                    profile = try decoder.decode(ProviderConnectionProfile.self, from: data)
+                    let providerProfile = try decoder.decode(ProviderConnectionProfile.self, from: data)
+                    
+                    // fix renamed presets, fall back to default
+                    if providerProfile.preset == nil {
+                        providerProfile.presetId = providerProfile.infrastructure.defaults.preset
+                    }
+
+                    profile = providerProfile
                     
                 case .host:
                     let hostProfile = try decoder.decode(HostConnectionProfile.self, from: data)
