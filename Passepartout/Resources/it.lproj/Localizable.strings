@@ -106,7 +106,7 @@
 "service.cells.trusted_add_wifi.caption" = "Aggiungi Wi-Fi corrente";
 "service.cells.trusted_policy.caption" = "Spegni VPN in rete sicura";
 "service.cells.test_connectivity.caption" = "Verifica connettività";
-"service.cells.data_count.caption" = "Contatore dati";
+"service.cells.data_count.caption" = "Dati scambiati";
 "service.cells.data_count.value" = "↓%@ / ↑%@";
 "service.cells.data_count.none" = "Non disponibile";
 "service.cells.debug_log.caption" = "Debug log";

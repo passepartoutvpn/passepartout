@@ -585,7 +585,7 @@ public enum L10n {
         public static let caption = L10n.tr("Localizable", "service.cells.connection_status.caption")
       }
       public enum DataCount {
-        /// Exchanged data count
+        /// Exchanged data
         public static let caption = L10n.tr("Localizable", "service.cells.data_count.caption")
         /// Unavailable
         public static let `none` = L10n.tr("Localizable", "service.cells.data_count.none")
