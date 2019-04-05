@@ -28,7 +28,7 @@
 "global.next" = "Next";
 "global.close" = "Close";
 "global.host.title_input.message" = "Acceptable characters are alphanumerics plus dash \"-\", underscore \"_\" and dot \".\".";
-"global.host.title_input.placeholder" = "My Profile";
+"global.host.title_input.placeholder" = "My profile";
 
 "reddit.title" = "Reddit";
 "reddit.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
@@ -70,10 +70,8 @@
 "service.welcome.message" = "Welcome to Passepartout!\n\nUse the organizer to add a new profile.";
 "service.sections.general.header" = "General";
 "service.sections.vpn.header" = "VPN";
-"service.sections.status.header" = "Connection";
-"service.sections.diagnostics.header" = "Diagnostics";
-
 "service.sections.vpn.footer" = "The connection will be established whenever necessary.";
+"service.sections.status.header" = "Connection";
 "service.sections.configuration.header" = "Configuration";
 "service.sections.provider_infrastructure.footer" = "Last updated on %@.";
 "service.sections.vpn_survives_sleep.footer" = "Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.";
