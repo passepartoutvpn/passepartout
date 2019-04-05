@@ -80,6 +80,7 @@ class AccountViewController: UIViewController, TableModelHost {
         model.clear()
         
         model.add(.credentials)
+        model.setHeader("", for: .credentials)
         model.set([.username, .password], in: .credentials)
 
         if let name = infrastructureName {
@@ -103,7 +104,6 @@ class AccountViewController: UIViewController, TableModelHost {
             model.add(.noAccount)
             model.set([], in: .noAccount)
 
-            model.setHeader("", for: .credentials)
             if guidance != nil {
                 let footer: String
                 if let _ = guidanceURL {
