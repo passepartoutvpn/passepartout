@@ -673,7 +673,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .providerPool:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.Provider.Pool.caption
-            cell.rightText = uncheckedProviderProfile.pool?.localizedName
+            cell.rightText = uncheckedProviderProfile.pool?.localizedCountryArea
             return cell
             
         case .providerPreset:

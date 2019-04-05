@@ -223,3 +223,11 @@ public extension Array where Element: CustomStringConvertible {
         return sorted { $0.description.lowercased() < $1.description.lowercased() }
     }
 }
+
+public extension UITableView {
+    func scrollToRowAsync(at indexPath: IndexPath) {
+        DispatchQueue.main.async { [weak self] in
+            self?.scrollToRow(at: indexPath, at: .middle, animated: false)
+        }
+    }
+}

@@ -259,6 +259,10 @@ public class AppConstants {
                 "The logo is taken from the awesome Circle Icons set by Nick Roach."
             ),
             Notice(
+                "Country flags",
+                "The country flags are taken from: https://github.com/lipis/flag-icon-css/"
+            ),
+            Notice(
                 "OpenVPN",
                 "© 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc."
             )

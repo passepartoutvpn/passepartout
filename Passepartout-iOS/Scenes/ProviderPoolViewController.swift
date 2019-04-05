@@ -53,7 +53,7 @@ class ProviderPoolViewController: UIViewController {
         title = L10n.Service.Cells.Provider.Pool.caption
         tableView.reloadData()
         if let ip = selectedIndexPath {
-            tableView.scrollToRow(at: ip, at: .middle, animated: false)
+            tableView.scrollToRowAsync(at: ip)
         }
     }
 }
@@ -76,8 +76,9 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         let pool = pools[indexPath.row]
         
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+        cell.imageView?.image = pool.logo
         cell.leftText = pool.localizedName
-//        cell.rightText = pool.area
+        cell.rightText = pool.area?.uppercased()
         cell.applyChecked(pool.id == currentPoolId, Theme.current)
         cell.isTappable = true
         return cell

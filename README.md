@@ -119,6 +119,8 @@ By contributing to this project you are agreeing to the terms stated in the [Con
 
 The logo is taken from the awesome Circle Icons set by Nick Roach.
 
+The country flags are taken from: <https://github.com/lipis/flag-icon-css/>
+
 - MBProgressHUD - © 2009-2016 Matej Bukovinski
 - PIATunnel - © 2018-Present Private Internet Access
 - SwiftGen - © 2018 SwiftGen

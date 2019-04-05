@@ -57,7 +57,7 @@ class ProviderPresetViewController: UIViewController {
         title = L10n.Service.Cells.Provider.Preset.caption
         tableView.reloadData()
         if let ip = selectedIndexPath {
-            tableView.scrollToRow(at: ip, at: .middle, animated: false)
+            tableView.scrollToRowAsync(at: ip)
         }
     }
     
