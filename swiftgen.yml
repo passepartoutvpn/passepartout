@@ -9,6 +9,7 @@ strings:
 
 ib:
     inputs:
+        - Passepartout-iOS/Base.lproj/About.storyboard
         - Passepartout-iOS/Base.lproj/Main.storyboard
         - Passepartout-iOS/Base.lproj/Organizer.storyboard
         - Passepartout-iOS/Base.lproj/Shortcuts.storyboard

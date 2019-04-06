@@ -16,6 +16,7 @@
 		0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */; };
 		0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */; };
 		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
+		0E24273A225950450064A1A3 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E24273C225950450064A1A3 /* About.storyboard */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
 		0E3152A4223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */; };
 		0E3152AD223F9EF500F61841 /* Passepartout_Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* Passepartout_Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -175,6 +176,7 @@
 		0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderPresetViewController.swift; sourceTree = "<group>"; };
 		0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		0E242735225944060064A1A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E24273B225950450064A1A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
 		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
 		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				0EDE8DF120C93ED8004C739C /* Scenes */,
 				0EDE8DE220C86A13004C739C /* Passepartout.entitlements */,
 				0E57F63B20C83FC5008323CF /* AppDelegate.swift */,
+				0E24273C225950450064A1A3 /* About.storyboard */,
 				0E57F63F20C83FC5008323CF /* Main.storyboard */,
 				0ED38ADC213F44D00004D387 /* Organizer.storyboard */,
 				0E36D25A22403469006AF062 /* Shortcuts.storyboard */,
@@ -798,6 +801,7 @@
 			files = (
 				0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */,
 				0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */,
+				0E24273A225950450064A1A3 /* About.storyboard in Resources */,
 				0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */,
 				0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */,
 				0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */,
@@ -1100,6 +1104,15 @@
 				0E533B142257C1DC00EF94FC /* it */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		0E24273C225950450064A1A3 /* About.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E24273B225950450064A1A3 /* Base */,
+			);
+			name = About.storyboard;
+			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 		0E36D25A22403469006AF062 /* Shortcuts.storyboard */ = {
