@@ -109,7 +109,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         // FIXME: checkmark overridden when count > 1
         if groupPools.count > 1 {
             cell.rightText = pool.area?.uppercased()
-            cell.accessoryType = .disclosureIndicator
+            cell.accessoryType = .detailDisclosureButton
         } else {
             cell.rightText = pool.areaId?.uppercased()
             cell.applyChecked(pool.id == currentPool?.id, Theme.current)
@@ -124,21 +124,28 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         guard let pool = groupPools.first else {
             fatalError("Empty pools in group \(group)")
         }
+        currentPool = pool
+        delegate?.providerPoolController(self, didSelectPool: pool)
+    }
 
-        if groupPools.count > 1 {
-            let vc = OptionViewController<Pool>()
-            vc.title = pool.localizedCountry
-            vc.options = groupPools
-            vc.selectedOption = currentPool
-            vc.descriptionBlock = { $0.areaId ?? "" } // XXX: fail gracefully
-            vc.selectionBlock = {
-                self.currentPool = $0
-                self.delegate?.providerPoolController(self, didSelectPool: $0)
-            }
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            currentPool = pool
-            delegate?.providerPoolController(self, didSelectPool: pool)
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let group = sortedGroups[indexPath.row]
+        let groupPools = poolsByGroup[group]!
+        guard let pool = groupPools.first else {
+            fatalError("Empty pools in group \(group)")
         }
+        guard groupPools.count > 1 else {
+            return
+        }
+        let vc = OptionViewController<Pool>()
+        vc.title = pool.localizedCountry
+        vc.options = groupPools
+        vc.selectedOption = currentPool
+        vc.descriptionBlock = { $0.areaId ?? "" } // XXX: fail gracefully
+        vc.selectionBlock = {
+            self.currentPool = $0
+            self.delegate?.providerPoolController(self, didSelectPool: $0)
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
