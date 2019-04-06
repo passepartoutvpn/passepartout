@@ -71,7 +71,7 @@ class ProviderPoolViewController: UIViewController {
         title = L10n.Service.Cells.Provider.Pool.caption
         tableView.reloadData()
         if let ip = selectedIndexPath {
-            tableView.scrollToRowAsync(at: ip)
+            tableView.selectRowAsync(at: ip)
         }
     }
 }
@@ -106,10 +106,9 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         cell.imageView?.image = pool.logo
         cell.leftText = pool.localizedName
-        // FIXME: checkmark overridden when count > 1
         if groupPools.count > 1 {
             cell.rightText = pool.area?.uppercased()
-            cell.accessoryType = .detailDisclosureButton
+            cell.accessoryType = .detailDisclosureButton // no checkmark!
         } else {
             cell.rightText = pool.areaId?.uppercased()
             cell.applyChecked(pool.id == currentPool?.id, Theme.current)
