@@ -45,7 +45,7 @@
 "organizer.cells.profile.value.current" = "In uso";
 "organizer.cells.add_provider.caption" = "Aggiungi rete";
 "organizer.cells.add_host.caption" = "Aggiungi host";
-"organizer.cells.siri_shortcuts.caption" = "Gestisci shortcut";
+"organizer.cells.siri_shortcuts.caption" = "Gestisci comandi rapidi";
 "organizer.cells.about.caption" = "Informazioni su %@";
 "organizer.cells.uninstall.caption" = "Rimuovi configurazione VPN";
 "organizer.alerts.exhausted_providers.message" = "Hai creato profili per tutte le reti disponibili.";
@@ -210,7 +210,7 @@
 "issue_reporter.email.body" = "Ciao,\n\n%@\n\n%@\n\nGrazie";
 "issue_reporter.email.description" = "descrizione del problema:";
 
-"shortcuts.add.title" = "Aggiungi shortcut";
+"shortcuts.add.title" = "Aggiungi comando rapido";
 "shortcuts.add.sections.vpn.header" = "VPN";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
 "shortcuts.add.sections.cellular.header" = "Cellulare";
@@ -223,9 +223,9 @@
 "shortcuts.add.cells.untrust_cellular.caption" = "Rimuovi rete mobile sicura";
 "shortcuts.add.alerts.no_profiles.message" = "Non c'è nessun profilo a cui connettersi.";
 
-"shortcuts.edit.title" = "Gestisci shortcut";
-"shortcuts.edit.sections.all.header" = "Shortcut esistenti";
-"shortcuts.edit.cells.add_shortcut.caption" = "Aggiungi shortcut";
+"shortcuts.edit.title" = "Gestisci comandi rapidi";
+"shortcuts.edit.sections.all.header" = "Comandi esistenti";
+"shortcuts.edit.cells.add_shortcut.caption" = "Aggiungi comando rapido";
 
 "about.title" = "Informazioni su";
 "about.sections.web.header" = "Web";
