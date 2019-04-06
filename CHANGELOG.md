@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Italian translations. [#58](https://github.com/passepartoutvpn/passepartout-ios/pull/58)
+
 ### Fixed
 
 - Some providers may crash on VPN activation. [#57](https://github.com/passepartoutvpn/passepartout-ios/issues/57)
