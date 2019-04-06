@@ -9,14 +9,16 @@
 	<key>INIntentDefinitionSystemVersion</key>
 	<string>18D42</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>10B61</string>
+	<string>10E125</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>10.1</string>
+	<string>10.2</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
 			<key>INIntentCategory</key>
 			<string>generic</string>
+			<key>INIntentDescription</key>
+			<string>Connects to a host profile</string>
 			<key>INIntentDescriptionID</key>
 			<string>eXXb2z</string>
 			<key>INIntentLastParameterTag</key>
@@ -114,6 +116,8 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>generic</string>
+			<key>INIntentDescription</key>
+			<string>Adds current Wi-Fi to trusted networks</string>
 			<key>INIntentDescriptionID</key>
 			<string>BKxs8X</string>
 			<key>INIntentLastParameterTag</key>
@@ -186,6 +190,8 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>generic</string>
+			<key>INIntentDescription</key>
+			<string>Disables the VPN service</string>
 			<key>INIntentDescriptionID</key>
 			<string>eQ1yzr</string>
 			<key>INIntentLastParameterTag</key>
@@ -258,6 +264,8 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>generic</string>
+			<key>INIntentDescription</key>
+			<string>Removes current Wi-Fi from trusted networks</string>
 			<key>INIntentDescriptionID</key>
 			<string>7eoAss</string>
 			<key>INIntentLastParameterTag</key>
@@ -330,6 +338,8 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>generic</string>
+			<key>INIntentDescription</key>
+			<string>Adds cellular to trusted networks</string>
 			<key>INIntentDescriptionID</key>
 			<string>9GpJt5</string>
 			<key>INIntentLastParameterTag</key>
@@ -402,6 +412,8 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>generic</string>
+			<key>INIntentDescription</key>
+			<string>Removes cellular from trusted networks</string>
 			<key>INIntentDescriptionID</key>
 			<string>0jRWn5</string>
 			<key>INIntentLastParameterTag</key>
@@ -474,6 +486,8 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>generic</string>
+			<key>INIntentDescription</key>
+			<string>Connects to a specific location of a provider profile</string>
 			<key>INIntentDescriptionID</key>
 			<string>KjkCfU</string>
 			<key>INIntentLastParameterTag</key>
@@ -584,7 +598,7 @@
 			<key>INIntentCategory</key>
 			<string>generic</string>
 			<key>INIntentDescription</key>
-			<string>With currently active profile</string>
+			<string>Enables the VPN service with the profile currently in use</string>
 			<key>INIntentDescriptionID</key>
 			<string>xY97Vu</string>
 			<key>INIntentLastParameterTag</key>
