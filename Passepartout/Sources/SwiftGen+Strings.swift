@@ -68,7 +68,7 @@ public enum L10n {
   public enum Account {
     public enum Cells {
       public enum OpenGuide {
-        /// Find your credentials
+        /// See your credentials
         public static let caption = L10n.tr("Localizable", "account.cells.open_guide.caption")
       }
       public enum Password {
@@ -106,7 +106,7 @@ public enum L10n {
             public static func pia(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.pia", p1)
             }
-            /// Use your %@ website credentials. Your username is usually your email.
+            /// Use your %@ website credentials. Your username is usually your e-mail.
             public static func tunnelbear(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.tunnelbear", p1)
             }
@@ -327,7 +327,7 @@ public enum L10n {
       public enum TitleInput {
         /// Acceptable characters are alphanumerics plus dash "-", underscore "_" and dot ".".
         public static let message = L10n.tr("Localizable", "global.host.title_input.message")
-        /// My Profile
+        /// My profile
         public static let placeholder = L10n.tr("Localizable", "global.host.title_input.placeholder")
       }
     }
@@ -339,7 +339,7 @@ public enum L10n {
   }
 
   public enum IssueReporter {
-    /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the email attachments if unsure.
+    /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the e-mail attachments if unsure.
     public static let message = L10n.tr("Localizable", "issue_reporter.message")
     /// Report issue
     public static let title = L10n.tr("Localizable", "issue_reporter.title")
@@ -585,7 +585,7 @@ public enum L10n {
         public static let caption = L10n.tr("Localizable", "service.cells.connection_status.caption")
       }
       public enum DataCount {
-        /// Exchanged data count
+        /// Exchanged data
         public static let caption = L10n.tr("Localizable", "service.cells.data_count.caption")
         /// Unavailable
         public static let `none` = L10n.tr("Localizable", "service.cells.data_count.none")
