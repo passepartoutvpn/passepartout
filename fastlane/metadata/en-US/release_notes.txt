@@ -1,9 +1,1 @@
-### Added
 
-- Windscribe provider.
-
-### Fixed
-
-- Support PKCS#8 encrypted cert keys.
-- Handle PEM with preamble.
-- Infrastructures not retained after refresh.
