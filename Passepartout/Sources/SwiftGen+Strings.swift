@@ -385,11 +385,11 @@ public enum L10n {
         public static let message = L10n.tr("Localizable", "organizer.alerts.add_host.message")
       }
       public enum DeleteVpnProfile {
-        /// Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your network and host profiles.
+        /// Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your provider and host profiles.
         public static let message = L10n.tr("Localizable", "organizer.alerts.delete_vpn_profile.message")
       }
       public enum ExhaustedProviders {
-        /// You have created profiles for any available network.
+        /// You have created profiles for any available provider.
         public static let message = L10n.tr("Localizable", "organizer.alerts.exhausted_providers.message")
       }
     }
@@ -405,7 +405,7 @@ public enum L10n {
         public static let caption = L10n.tr("Localizable", "organizer.cells.add_host.caption")
       }
       public enum AddProvider {
-        /// Add new network
+        /// Add new provider
         public static let caption = L10n.tr("Localizable", "organizer.cells.add_provider.caption")
       }
       public enum Profile {
@@ -431,9 +431,9 @@ public enum L10n {
         public static let header = L10n.tr("Localizable", "organizer.sections.hosts.header")
       }
       public enum Providers {
-        /// Here you find a few public infrastructures offering preset configuration profiles.
+        /// Here you find a few providers with preset configuration profiles.
         public static let footer = L10n.tr("Localizable", "organizer.sections.providers.footer")
-        /// Networks
+        /// Providers
         public static let header = L10n.tr("Localizable", "organizer.sections.providers.header")
       }
       public enum Siri {

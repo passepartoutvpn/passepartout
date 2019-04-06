@@ -36,21 +36,21 @@
 "reddit.buttons.remind" = "Ricordami più tardi";
 "reddit.buttons.never" = "Non chiedere più";
 
-"organizer.sections.providers.header" = "Reti";
-"organizer.sections.providers.footer" = "Qui trovi alcune delle infrastrutture pubbliche con configurazioni precompilate.";
+"organizer.sections.providers.header" = "Provider";
+"organizer.sections.providers.footer" = "Qui trovi alcuni provider con configurazioni precompilate.";
 "organizer.sections.hosts.header" = "Host";
 "organizer.sections.hosts.footer" = "Importa un host da un file di configurazione .ovpn.";
 "organizer.sections.siri.header" = "Siri";
 "organizer.sections.siri.footer" = "Chiedi aiuto a Siri per velocizzare le tue interazioni più frequenti con l'app.";
 "organizer.cells.profile.value.current" = "In uso";
-"organizer.cells.add_provider.caption" = "Aggiungi rete";
+"organizer.cells.add_provider.caption" = "Aggiungi provider";
 "organizer.cells.add_host.caption" = "Aggiungi host";
 "organizer.cells.siri_shortcuts.caption" = "Gestisci comandi rapidi";
 "organizer.cells.about.caption" = "Informazioni su %@";
 "organizer.cells.uninstall.caption" = "Rimuovi configurazione VPN";
-"organizer.alerts.exhausted_providers.message" = "Hai creato profili per tutte le reti disponibili.";
+"organizer.alerts.exhausted_providers.message" = "Hai creato profili per tutti i provider disponibili.";
 "organizer.alerts.add_host.message" = "Apri l'URL di un file di configurazione .ovpn da Safari, Mail o da un'altra app per configurare un host.\n\nPuoi anche importare un file .ovpn con iTunes File Sharing.";
-"organizer.alerts.delete_vpn_profile.message" = "Vuoi veramente cancellare la configurazione VPN dalle impostazioni del tuo dispositivo? Quest'azione potrebbe risolvere alcuni stati erronei della VPN e non altererà le tue reti e i tuoi host.";
+"organizer.alerts.delete_vpn_profile.message" = "Vuoi veramente cancellare la configurazione VPN dalle impostazioni del tuo dispositivo? Quest'azione potrebbe risolvere alcuni stati erronei della VPN e non altererà i tuoi provider e i tuoi host.";
 
 "wizards.host.cells.title_input.caption" = "Titolo";
 "wizards.host.sections.existing.header" = "Profili esistenti";

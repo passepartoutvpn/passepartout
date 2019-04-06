@@ -36,21 +36,21 @@
 "reddit.buttons.remind" = "Remind me later";
 "reddit.buttons.never" = "Don't ask again";
 
-"organizer.sections.providers.header" = "Networks";
-"organizer.sections.providers.footer" = "Here you find a few public infrastructures offering preset configuration profiles.";
+"organizer.sections.providers.header" = "Providers";
+"organizer.sections.providers.footer" = "Here you find a few providers with preset configuration profiles.";
 "organizer.sections.hosts.header" = "Hosts";
 "organizer.sections.hosts.footer" = "Import hosts from raw .ovpn configuration files.";
 "organizer.sections.siri.header" = "Siri";
 "organizer.sections.siri.footer" = "Get help from Siri to speed up your most common interactions with the app.";
 "organizer.cells.profile.value.current" = "In use";
-"organizer.cells.add_provider.caption" = "Add new network";
+"organizer.cells.add_provider.caption" = "Add new provider";
 "organizer.cells.add_host.caption" = "Add new host";
 "organizer.cells.siri_shortcuts.caption" = "Manage shortcuts";
 "organizer.cells.about.caption" = "About %@";
 "organizer.cells.uninstall.caption" = "Remove VPN configuration";
-"organizer.alerts.exhausted_providers.message" = "You have created profiles for any available network.";
+"organizer.alerts.exhausted_providers.message" = "You have created profiles for any available provider.";
 "organizer.alerts.add_host.message" = "Open an URL to an .ovpn configuration file from Safari, Mail or another app to set up a host profile.\n\nYou can also import an .ovpn with iTunes File Sharing.";
-"organizer.alerts.delete_vpn_profile.message" = "Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your network and host profiles.";
+"organizer.alerts.delete_vpn_profile.message" = "Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your provider and host profiles.";
 
 "wizards.host.cells.title_input.caption" = "Title";
 "wizards.host.sections.existing.header" = "Existing profiles";
