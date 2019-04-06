@@ -66,7 +66,7 @@ class AboutViewController: UITableViewController, TableModelHost {
     // MARK: Actions
 
     private func showVersion() {
-        perform(segue: StoryboardSegue.Organizer.versionSegueIdentifier)
+        perform(segue: StoryboardSegue.About.versionSegueIdentifier)
     }
     
     private func visitWebsite() {
