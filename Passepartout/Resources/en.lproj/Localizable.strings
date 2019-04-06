@@ -48,6 +48,7 @@
 "organizer.cells.add_host.caption" = "Add new host";
 "organizer.cells.siri_shortcuts.caption" = "Manage shortcuts";
 "organizer.cells.about.caption" = "About %@";
+"organizer.cells.donate.caption" = "Make a donation";
 "organizer.cells.patreon.caption" = "Support me on Patreon";
 "organizer.cells.uninstall.caption" = "Remove VPN configuration";
 "organizer.alerts.exhausted_providers.message" = "You have created profiles for any available provider.";

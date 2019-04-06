@@ -408,6 +408,10 @@ public enum L10n {
         /// Add new provider
         public static let caption = L10n.tr("Localizable", "organizer.cells.add_provider.caption")
       }
+      public enum Donate {
+        /// Make a donation
+        public static let caption = L10n.tr("Localizable", "organizer.cells.donate.caption")
+      }
       public enum Patreon {
         /// Support me on Patreon
         public static let caption = L10n.tr("Localizable", "organizer.cells.patreon.caption")

@@ -61,7 +61,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             model.set([.siriShortcuts], in: .siri)
         }
         model.setHeader(L10n.Organizer.Sections.Support.header, for: .support)
-        model.set([.patreon], in: .support)
+        model.set([.donate, .patreon], in: .support)
         model.set([.openAbout], in: .about)
         model.set([.uninstall], in: .destruction)
         if AppConstants.Flags.isBeta {
@@ -191,6 +191,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         perform(segue: StoryboardSegue.Organizer.siriShortcutsSegueIdentifier)
     }
 
+    private func donateToDeveloper() {
+        // TODO
+    }
+
     private func visitPatreon() {
         UIApplication.shared.open(AppConstants.URLs.patreon, options: [:], completionHandler: nil)
     }
@@ -308,8 +312,10 @@ extension OrganizerViewController {
         
         case siriShortcuts
         
-        case patreon
+        case donate
         
+        case patreon
+
         case openAbout
         
         case uninstall
@@ -385,6 +391,11 @@ extension OrganizerViewController {
             cell.leftText = L10n.Organizer.Cells.SiriShortcuts.caption
             return cell
             
+        case .donate:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Organizer.Cells.Donate.caption
+            return cell
+
         case .patreon:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Organizer.Cells.Patreon.caption
@@ -395,7 +406,7 @@ extension OrganizerViewController {
             cell.leftText = L10n.Organizer.Cells.About.caption(GroupConstants.App.name)
             cell.rightText = Utils.versionString()
             return cell
-
+            
         case .uninstall:
             let cell = Cells.destructive.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.Organizer.Cells.Uninstall.caption
@@ -428,6 +439,9 @@ extension OrganizerViewController {
         case .siriShortcuts:
             addShortcuts()
             
+        case .donate:
+            donateToDeveloper()
+
         case .patreon:
             visitPatreon()
             
