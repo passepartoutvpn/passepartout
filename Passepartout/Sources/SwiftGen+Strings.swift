@@ -298,6 +298,16 @@ public enum L10n {
   public enum Donation {
     /// Donate
     public static let title = L10n.tr("Localizable", "donation.title")
+    public enum Sections {
+      public enum OneTime {
+        /// One time
+        public static let header = L10n.tr("Localizable", "donation.sections.one_time.header")
+      }
+      public enum Recurring {
+        /// Recurring
+        public static let header = L10n.tr("Localizable", "donation.sections.recurring.header")
+      }
+    }
   }
 
   public enum Endpoint {

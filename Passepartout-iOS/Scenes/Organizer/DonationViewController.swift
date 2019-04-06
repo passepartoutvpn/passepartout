@@ -55,6 +55,8 @@ class DonationViewController: UITableViewController, TableModelHost {
         }
         model.add(.oneTime)
 //        model.add(.recurring)
+        model.setHeader(L10n.Donation.Sections.OneTime.header, for: .oneTime)
+//        model.setHeader(L10n.Donation.Sections.Recurring.header, for: .recurring)
         model.set(list, in: .oneTime)
     }
     
@@ -81,6 +83,10 @@ class DonationViewController: UITableViewController, TableModelHost {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return model.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return model.header(for: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
