@@ -493,6 +493,18 @@ public enum L10n {
   }
 
   public enum Provider {
+    public enum Pool {
+      public enum Sections {
+        public enum Free {
+          /// Free
+          public static let header = L10n.tr("Localizable", "provider.pool.sections.free.header")
+        }
+        public enum Paid {
+          /// Paid
+          public static let header = L10n.tr("Localizable", "provider.pool.sections.paid.header")
+        }
+      }
+    }
     public enum Preset {
       public enum Cells {
         public enum TechDetails {

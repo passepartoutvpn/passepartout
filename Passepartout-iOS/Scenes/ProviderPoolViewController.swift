@@ -26,6 +26,32 @@
 import UIKit
 import Passepartout_Core
 
+private class PoolModel {
+    let title: String
+    
+    var poolsByGroup: [PoolGroup: [Pool]] = [:]
+    
+    private(set) var sortedGroups: [PoolGroup] = []
+    
+    init(title: String) {
+        self.title = title
+    }
+    
+    func addPool(_ p: Pool) {
+        let group = p.group()
+        if var existingPools = poolsByGroup[group] {
+            existingPools.append(p)
+            poolsByGroup[group] = existingPools
+        } else {
+            poolsByGroup[group] = [p]
+        }
+    }
+    
+    func sort() {
+        sortedGroups = poolsByGroup.keys.sorted()
+    }
+}
+
 protocol ProviderPoolViewControllerDelegate: class {
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool)
 }
@@ -33,28 +59,35 @@ protocol ProviderPoolViewControllerDelegate: class {
 class ProviderPoolViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
 
-    private var poolsByGroup: [PoolGroup: [Pool]] = [:]
-
-    private var sortedGroups: [PoolGroup] = []
+    private var models: [PoolModel] = []
 
     private var currentPool: Pool?
     
     weak var delegate: ProviderPoolViewControllerDelegate?
 
     func setPools(_ pools: [Pool], currentPoolId: String?) {
+        let freeModel = PoolModel(title: L10n.Provider.Pool.Sections.Free.header)
+        let paidModel = PoolModel(title: L10n.Provider.Pool.Sections.Paid.header)
         for p in pools {
-            let group = p.group()
-            if var existingPools = poolsByGroup[group] {
-                existingPools.append(p)
-                poolsByGroup[group] = existingPools
+            if p.isFree ?? false {
+                freeModel.addPool(p)
             } else {
-                poolsByGroup[group] = [p]
+                paidModel.addPool(p)
             }
             if p.id == currentPoolId {
                 currentPool = p
             }
         }
-        sortedGroups = poolsByGroup.keys.sorted()
+        freeModel.sort()
+        paidModel.sort()
+
+        models = []
+        if !freeModel.sortedGroups.isEmpty {
+            models.append(freeModel)
+        }
+        if !paidModel.sortedGroups.isEmpty {
+            models.append(paidModel)
+        }
     }
     
     // MARK: UIViewController
@@ -80,25 +113,41 @@ class ProviderPoolViewController: UIViewController {
 
 extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate {
     private var selectedIndexPath: IndexPath? {
-        for entries in poolsByGroup.enumerated() {
-            guard let _ = entries.element.value.index(where: { $0.id == currentPool?.id }) else {
-                continue
+        for (i, model) in models.enumerated() {
+            for entries in model.poolsByGroup.enumerated() {
+                guard let _ = entries.element.value.index(where: { $0.id == currentPool?.id }) else {
+                    continue
+                }
+                guard let row = model.sortedGroups.index(of: entries.element.key) else {
+                    continue
+                }
+                return IndexPath(row: row, section: i)
             }
-            guard let row = sortedGroups.index(of: entries.element.key) else {
-                continue
-            }
-            return IndexPath(row: row, section: 0)
         }
         return nil
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return models.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard models.count > 1 else {
+            return nil
+        }
+        let model = models[section]
+        return model.title
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedGroups.count
+        let model = models[section]
+        return model.sortedGroups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let group = sortedGroups[indexPath.row]
-        let groupPools = poolsByGroup[group]!
+        let model = models[indexPath.section]
+        let group = model.sortedGroups[indexPath.row]
+        let groupPools = model.poolsByGroup[group]!
         guard let pool = groupPools.first else {
             fatalError("Empty pools in group \(group)")
         }
@@ -118,8 +167,9 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let group = sortedGroups[indexPath.row]
-        let groupPools = poolsByGroup[group]!
+        let model = models[indexPath.section]
+        let group = model.sortedGroups[indexPath.row]
+        let groupPools = model.poolsByGroup[group]!
         guard let pool = groupPools.first else {
             fatalError("Empty pools in group \(group)")
         }
@@ -128,8 +178,9 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let group = sortedGroups[indexPath.row]
-        let groupPools = poolsByGroup[group]!
+        let model = models[indexPath.section]
+        let group = model.sortedGroups[indexPath.row]
+        let groupPools = model.poolsByGroup[group]!
         guard let pool = groupPools.first else {
             fatalError("Empty pools in group \(group)")
         }
