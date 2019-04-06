@@ -144,6 +144,8 @@ public class AppConstants {
         
         public static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!
         
+        public static let patreon = URL(string: "https://www.patreon.com/keeshux")!
+        
         private static let twitterHashtags = ["OpenVPN", "iOS", "macOS"]
         
         public static var twitterIntent: URL {

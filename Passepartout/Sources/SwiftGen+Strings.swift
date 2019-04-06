@@ -408,6 +408,10 @@ public enum L10n {
         /// Add new provider
         public static let caption = L10n.tr("Localizable", "organizer.cells.add_provider.caption")
       }
+      public enum Patreon {
+        /// Support me on Patreon
+        public static let caption = L10n.tr("Localizable", "organizer.cells.patreon.caption")
+      }
       public enum Profile {
         public enum Value {
           /// In use
@@ -441,6 +445,10 @@ public enum L10n {
         public static let footer = L10n.tr("Localizable", "organizer.sections.siri.footer")
         /// Siri
         public static let header = L10n.tr("Localizable", "organizer.sections.siri.header")
+      }
+      public enum Support {
+        /// Support
+        public static let header = L10n.tr("Localizable", "organizer.sections.support.header")
       }
     }
   }

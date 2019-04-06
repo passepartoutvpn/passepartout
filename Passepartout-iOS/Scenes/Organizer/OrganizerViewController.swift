@@ -48,6 +48,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         if #available(iOS 12, *) {
             model.add(.siri)
         }
+        model.add(.support)
         model.add(.about)
         model.add(.destruction)
         model.setHeader(L10n.Organizer.Sections.Providers.header, for: .providers)
@@ -59,6 +60,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             model.setFooter(L10n.Organizer.Sections.Siri.footer, for: .siri)
             model.set([.siriShortcuts], in: .siri)
         }
+        model.setHeader(L10n.Organizer.Sections.Support.header, for: .support)
+        model.set([.patreon], in: .support)
         model.set([.openAbout], in: .about)
         model.set([.uninstall], in: .destruction)
         if AppConstants.Flags.isBeta {
@@ -155,10 +158,6 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 
     // MARK: Actions
     
-    @IBAction private func about() {
-        perform(segue: StoryboardSegue.Organizer.aboutSegueIdentifier, sender: nil)
-    }
-    
     private func addNewProvider() {
         var names = Set(InfrastructureFactory.shared.allNames)
         var createdNames: [Infrastructure.Name] = []
@@ -192,6 +191,14 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         perform(segue: StoryboardSegue.Organizer.siriShortcutsSegueIdentifier)
     }
 
+    private func visitPatreon() {
+        UIApplication.shared.open(AppConstants.URLs.patreon, options: [:], completionHandler: nil)
+    }
+    
+    private func about() {
+        perform(segue: StoryboardSegue.Organizer.aboutSegueIdentifier, sender: nil)
+    }
+    
     private func removeProfile(at indexPath: IndexPath) {
         let sectionObject = model.section(for: indexPath.section)
         let rowProfile = profileKey(at: indexPath)
@@ -283,6 +290,8 @@ extension OrganizerViewController {
         
         case siri
         
+        case support
+
         case about
         
         case destruction
@@ -298,6 +307,8 @@ extension OrganizerViewController {
         case addHost
         
         case siriShortcuts
+        
+        case patreon
         
         case openAbout
         
@@ -374,6 +385,11 @@ extension OrganizerViewController {
             cell.leftText = L10n.Organizer.Cells.SiriShortcuts.caption
             return cell
             
+        case .patreon:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Organizer.Cells.Patreon.caption
+            return cell
+            
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Organizer.Cells.About.caption(GroupConstants.App.name)
@@ -411,6 +427,9 @@ extension OrganizerViewController {
             
         case .siriShortcuts:
             addShortcuts()
+            
+        case .patreon:
+            visitPatreon()
             
         case .openAbout:
             about()
