@@ -65,9 +65,12 @@ class DonationViewController: UITableViewController, TableModelHost {
         
         title = L10n.Donation.title
 
-        let req = SKProductsRequest(productIdentifiers: InApp.Donation.allIdentifiers())
-        req.delegate = self
-        req.start()
+        let inApp = InAppHelper.shared
+        if inApp.products.isEmpty {
+            inApp.requestProducts { self.setProducts($0) }
+        } else {
+            setProducts(inApp.products)
+        }
     }
     
     @IBAction private func close() {
@@ -105,16 +108,5 @@ extension DonationViewController {
     
     private func productIdentifier(at indexPath: IndexPath) -> String {
         return model.row(at: indexPath).rawValue
-    }
-}
-
-extension DonationViewController: SKProductsRequestDelegate {
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        DispatchQueue.main.async {
-            self.setProducts(response.products)
-        }
-    }
-
-    func request(_ request: SKRequest, didFailWithError error: Error) {
     }
 }

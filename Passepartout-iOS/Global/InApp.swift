@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import StoreKit
 
 struct InApp {
     enum Donation: String {
@@ -51,5 +52,45 @@ struct InApp {
         static func allIdentifiers() -> Set<String> {
             return Set<String>(all.map { $0.rawValue })
         }
+    }
+}
+
+class InAppHelper: NSObject, SKProductsRequestDelegate {
+    typealias Observer = ([SKProduct]) -> Void
+    
+    static let shared = InAppHelper()
+    
+    private(set) var products: [SKProduct]
+    
+    private var observers: [Observer]
+    
+    private override init() {
+        products = []
+        observers = []
+    }
+    
+    func requestProducts(completionHandler: (([SKProduct]) -> Void)?) {
+        let req = SKProductsRequest(productIdentifiers: InApp.Donation.allIdentifiers())
+        req.delegate = self
+        if let block = completionHandler {
+            observers.append(block)
+        }
+        req.start()
+    }
+    
+    private func receiveProducts(_ products: [SKProduct]) {
+        self.products = products
+        observers.forEach { $0(products) }
+        observers.removeAll()
+    }
+    
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        DispatchQueue.main.async {
+            self.receiveProducts(response.products)
+        }
+    }
+    
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        observers.removeAll()
     }
 }
