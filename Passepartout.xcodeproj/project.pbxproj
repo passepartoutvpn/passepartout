@@ -66,6 +66,7 @@
 		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
+		0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E533B152258E03B00EF94FC /* PoolGroup.swift */; };
 		0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63B20C83FC5008323CF /* AppDelegate.swift */; };
 		0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63D20C83FC5008323CF /* ServiceViewController.swift */; };
 		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
@@ -197,6 +198,7 @@
 		0E533B0E2257BAC800EF94FC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E533B102257C0F200EF94FC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E533B142257C1DC00EF94FC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E533B152258E03B00EF94FC /* PoolGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolGroup.swift; sourceTree = "<group>"; };
 		0E57F63820C83FC5008323CF /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E57F63B20C83FC5008323CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */,
 				0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */,
 				0ED31C0F20CF09A30027975F /* Pool.swift */,
+				0E533B152258E03B00EF94FC /* PoolGroup.swift */,
 				0E39BCEF214B9EF10035E9DE /* WebServices.swift */,
 			);
 			path = Services;
@@ -965,6 +968,7 @@
 				0E3152BD223FA03D00F61841 /* GroupConstants.swift in Sources */,
 				0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */,
 				0E3152C2223FA04800F61841 /* MockVPNProvider.swift in Sources */,
+				0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */,
 				0E3152D2223FA05400F61841 /* DebugLog.swift in Sources */,
 				0E3152C4223FA04800F61841 /* VPN.swift in Sources */,
 				0E3152C6223FA04800F61841 /* VPNProvider.swift in Sources */,

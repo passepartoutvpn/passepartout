@@ -92,6 +92,10 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
         addrs.insert(hostname, at: 0)
         return addrs
     }
+    
+    public func group() -> PoolGroup {
+        return PoolGroup(country: country, area: area)
+    }
 
     // MARK: Comparable
     
