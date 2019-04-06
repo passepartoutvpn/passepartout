@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- ProtonVPN provider. [#7](https://github.com/passepartoutvpn/passepartout-ios/issues/7)
 - Italian translations. [#58](https://github.com/passepartoutvpn/passepartout-ios/pull/58)
 
 ### Fixed

@@ -165,12 +165,14 @@ public class AppConstants {
         }
         
         public static let guidances: [Infrastructure.Name: String] = [
+            .protonVPN: "https://account.protonvpn.com/settings",
             .windscribe: "https://windscribe.com/getconfig/openvpn"
         ]
 
         public static let referrals: [Infrastructure.Name: String] = [
             .mullvad: "https://mullvad.net/en/account/create/",
             .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/",
+            .protonVPN: "https://protonvpn.net/?aid=keeshux",
             .tunnelBear: "https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464",
             .windscribe: "https://secure.link/kCsD0prd"
         ]

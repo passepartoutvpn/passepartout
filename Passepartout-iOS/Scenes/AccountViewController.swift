@@ -68,6 +68,9 @@ class AccountViewController: UIViewController, TableModelHost {
         case .pia:
             return V.pia(name.rawValue)
             
+        case .protonVPN:
+            return V.protonvpn(name.rawValue)
+
         case .tunnelBear:
             return V.tunnelbear(name.rawValue)
             
