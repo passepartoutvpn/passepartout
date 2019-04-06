@@ -43,7 +43,16 @@ class ProviderPoolViewController: UIViewController {
 
     func setPools(_ pools: [Pool], currentPoolId: String?) {
         for p in pools {
-            poolsByGroup[p.group()] = [p]
+            let group = p.group()
+            if var existingPools = poolsByGroup[group] {
+                existingPools.append(p)
+                poolsByGroup[group] = existingPools
+            } else {
+                poolsByGroup[group] = [p]
+            }
+            if p.id == currentPoolId {
+                currentPool = p
+            }
         }
         sortedGroups = poolsByGroup.keys.sorted()
     }
@@ -89,24 +98,47 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let group = sortedGroups[indexPath.row]
-        let groupPools = poolsByGroup[group]
-        let pool = groupPools!.first!
-        
+        let groupPools = poolsByGroup[group]!
+        guard let pool = groupPools.first else {
+            fatalError("Empty pools in group \(group)")
+        }
+
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         cell.imageView?.image = pool.logo
         cell.leftText = pool.localizedName
-        cell.rightText = pool.areaId?.uppercased()
-        cell.applyChecked(pool.id == currentPool?.id, Theme.current)
+        // FIXME: checkmark overridden when count > 1
+        if groupPools.count > 1 {
+            cell.rightText = pool.area?.uppercased()
+            cell.accessoryType = .disclosureIndicator
+        } else {
+            cell.rightText = pool.areaId?.uppercased()
+            cell.applyChecked(pool.id == currentPool?.id, Theme.current)
+        }
         cell.isTappable = true
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let group = sortedGroups[indexPath.row]
-        let groupPools = poolsByGroup[group]
-        let pool = groupPools!.first!
+        let groupPools = poolsByGroup[group]!
+        guard let pool = groupPools.first else {
+            fatalError("Empty pools in group \(group)")
+        }
 
-        currentPool = pool
-        delegate?.providerPoolController(self, didSelectPool: pool)
+        if groupPools.count > 1 {
+            let vc = OptionViewController<Pool>()
+            vc.title = pool.localizedCountry
+            vc.options = groupPools
+            vc.selectedOption = currentPool
+            vc.descriptionBlock = { $0.areaId ?? "" } // XXX: fail gracefully
+            vc.selectionBlock = {
+                self.currentPool = $0
+                self.delegate?.providerPoolController(self, didSelectPool: $0)
+            }
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            currentPool = pool
+            delegate?.providerPoolController(self, didSelectPool: pool)
+        }
     }
 }

@@ -26,7 +26,7 @@
 import Foundation
 import TunnelKit
 
-public struct Pool: Codable, Comparable, CustomStringConvertible {
+public struct Pool: Codable, Hashable, Comparable, CustomStringConvertible {
     public enum CodingKeys: String, CodingKey {
         case id
 
@@ -95,6 +95,12 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
     
     public func group() -> PoolGroup {
         return PoolGroup(country: country, area: area)
+    }
+    
+    // MARK: Hashable
+    
+    public func hash(into hasher: inout Hasher) {
+        id.hash(into: &hasher)
     }
 
     // MARK: Comparable

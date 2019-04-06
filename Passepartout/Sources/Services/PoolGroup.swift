@@ -25,7 +25,7 @@
 
 import Foundation
 
-public struct PoolGroup: Hashable, Comparable {
+public struct PoolGroup: Hashable, Comparable, CustomStringConvertible {
     public let country: String
     
     public let area: String?
@@ -52,5 +52,11 @@ public struct PoolGroup: Hashable, Comparable {
     
     public static func <(lhs: PoolGroup, rhs: PoolGroup) -> Bool {
         return lhs.id < rhs.id
+    }
+    
+    // MARK: CustomStringConvertible
+    
+    public var description: String {
+        return "{\(country), \(area ?? "--")}"
     }
 }
