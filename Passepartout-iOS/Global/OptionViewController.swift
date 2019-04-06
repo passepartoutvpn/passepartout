@@ -46,6 +46,11 @@ class OptionViewController<T: Hashable>: UIViewController, UITableViewDataSource
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        if let selectedOption = selectedOption, let row = options.index(of: selectedOption) {
+            tableView.reloadData()
+            tableView.scrollToRowAsync(at: IndexPath(row: row, section: 0))
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
