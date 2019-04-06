@@ -57,6 +57,20 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
     
     public let num: String?
     
+    public var areaId: String? {
+        let id: String
+        if let area = area, let num = num {
+            id = "\(area) #\(num)"
+        } else if let area = area {
+            id = area
+        } else if let num = num {
+            id = "#\(num)"
+        } else {
+            return nil
+        }
+        return id.uppercased()
+    }
+    
     public let isFree: Bool?
     
 //    public let location: (Double, Double)
@@ -82,7 +96,7 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
     // MARK: Comparable
     
     public static func <(lhs: Pool, rhs: Pool) -> Bool {
-        return lhs.localizedCountryArea < rhs.localizedCountryArea
+        return lhs.localizedId < rhs.localizedId
     }
 
     // MARK: CustomStringConvertible
@@ -99,7 +113,7 @@ extension Pool {
         return Utils.localizedCountry(country)
     }
 
-    public var localizedCountryArea: String {
+    public var localizedId: String {
         let countryString = localizedCountry
         let zone: String
         if let area = area, let num = num {

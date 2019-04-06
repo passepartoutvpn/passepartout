@@ -78,7 +78,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         cell.imageView?.image = pool.logo
         cell.leftText = pool.localizedName
-        cell.rightText = pool.area?.uppercased()
+        cell.rightText = pool.areaId?.uppercased()
         cell.applyChecked(pool.id == currentPoolId, Theme.current)
         cell.isTappable = true
         return cell
