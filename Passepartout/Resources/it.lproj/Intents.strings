@@ -1,14 +1,28 @@
+"0jRWn5" = "Rimuove la rete mobile dalle reti sicure";
+
 "1ZRTCZ" = "Disabilita VPN";
 
 "66bZBE" = "Con il provider ${providerId}";
 
+"7eoAss" = "Rimuove la Wi-Fi corrente dalle reti sicure";
+
+"9GpJt5" = "Aggiunge la rete mobile alle reti sicure";
+
+"BKxs8X" = "Aggiunge la Wi-Fi corrente alle reti sicure";
+
 "H4taev" = "Aggiungi rete mobile sicura";
+
+"KjkCfU" = "Avvia una connessione ad una regione specifica di un provider";
 
 "LA99yM" = "Connetti alla VPN";
 
 "U6o81V" = "Connettiti a ${profileId}";
 
 "WnTPFg" = "Connettiti in ${poolName}";
+
+"eQ1yzr" = "Disabilita il servizio VPN";
+
+"eXXb2z" = "Avvia la connessione ad un host";
 
 "lQ6ziK" = "Abilita VPN";
 
@@ -20,5 +34,4 @@
 
 "wB1iYX" = "Rimuovi rete mobile sicura";
 
-"xY97Vu" = "Con il profilo in uso";
-
+"xY97Vu" = "Abilita il servizio VPN con il profilo attualmente in uso";
