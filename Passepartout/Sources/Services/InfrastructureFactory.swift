@@ -59,7 +59,7 @@ public class InfrastructureFactory {
     public let allNames: [Infrastructure.Name] = [
         .mullvad,
         .pia,
-        .protonVpn,
+        .protonVPN,
         .tunnelBear,
         .windscribe
     ]

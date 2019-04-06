@@ -32,7 +32,7 @@ public struct Infrastructure: Codable {
         
         case pia = "PIA"
         
-        case protonVpn = "ProtonVPN"
+        case protonVPN = "ProtonVPN"
 
         case tunnelBear = "TunnelBear"
         
