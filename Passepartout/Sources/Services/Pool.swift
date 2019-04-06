@@ -26,7 +26,7 @@
 import Foundation
 import TunnelKit
 
-public struct Pool: Codable, Comparable, CustomStringConvertible {
+public struct Pool: Codable, Hashable, Comparable, CustomStringConvertible {
     public enum CodingKeys: String, CodingKey {
         case id
 
@@ -91,6 +91,16 @@ public struct Pool: Codable, Comparable, CustomStringConvertible {
         var addrs = numericAddresses.map { DNSResolver.string(fromIPv4: $0) }
         addrs.insert(hostname, at: 0)
         return addrs
+    }
+    
+    public func group() -> PoolGroup {
+        return PoolGroup(country: country, area: area)
+    }
+    
+    // MARK: Hashable
+    
+    public func hash(into hasher: inout Hasher) {
+        id.hash(into: &hasher)
     }
 
     // MARK: Comparable

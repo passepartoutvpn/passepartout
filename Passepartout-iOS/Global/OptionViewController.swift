@@ -25,12 +25,6 @@
 
 import UIKit
 
-protocol OptionViewControllerDelegate: class {
-    func optionController<T: Hashable>(_: OptionViewController<T>, descriptionFor option: T) -> String
-
-    func optionController<T: Hashable>(_: OptionViewController<T>, didSelect option: T)
-}
-
 class OptionViewController<T: Hashable>: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private lazy var tableView = UITableView(frame: .zero, style: .grouped)
     
@@ -42,8 +36,6 @@ class OptionViewController<T: Hashable>: UIViewController, UITableViewDataSource
 
     var selectionBlock: ((T) -> Void)?
     
-    weak var delegate: OptionViewControllerDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,6 +46,11 @@ class OptionViewController<T: Hashable>: UIViewController, UITableViewDataSource
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        if let selectedOption = selectedOption, let row = options.index(of: selectedOption) {
+            tableView.reloadData()
+            tableView.scrollToRowAsync(at: IndexPath(row: row, section: 0))
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,13 +60,13 @@ class OptionViewController<T: Hashable>: UIViewController, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let opt = options[indexPath.row]
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        cell.leftText = descriptionBlock?(opt) ?? delegate?.optionController(self, descriptionFor: opt)
+        cell.leftText = descriptionBlock?(opt)
         cell.applyChecked(opt == selectedOption, Theme.current)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let opt = options[indexPath.row]
-        selectionBlock?(opt) ?? delegate?.optionController(self, didSelect: opt)
+        selectionBlock?(opt)
     }
 }

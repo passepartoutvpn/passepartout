@@ -151,8 +151,7 @@ class ServiceViewController: UIViewController, TableModelHost {
             
         case .providerPoolSegueIdentifier:
             let vc = destination as? ProviderPoolViewController
-            vc?.pools = uncheckedProviderProfile.sortedPools()
-            vc?.currentPoolId = uncheckedProviderProfile.poolId
+            vc?.setPools(uncheckedProviderProfile.pools(), currentPoolId: uncheckedProviderProfile.poolId)
             vc?.delegate = self
             
         case .endpointSegueIdentifier:
@@ -1179,7 +1178,7 @@ extension ServiceViewController: EndpointViewControllerDelegate {
 
 extension ServiceViewController: ProviderPoolViewControllerDelegate {
     func providerPoolController(_ vc: ProviderPoolViewController, didSelectPool pool: Pool) {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popToViewController(self, animated: true)
 
         guard pool.id != uncheckedProviderProfile.poolId else {
             return

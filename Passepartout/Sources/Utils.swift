@@ -230,4 +230,10 @@ public extension UITableView {
             self?.scrollToRow(at: indexPath, at: .middle, animated: false)
         }
     }
+
+    func selectRowAsync(at indexPath: IndexPath) {
+        DispatchQueue.main.async { [weak self] in
+            self?.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
+        }
+    }
 }
