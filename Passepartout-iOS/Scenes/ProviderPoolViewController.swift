@@ -160,7 +160,6 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
             cell.accessoryType = .detailDisclosureButton // no checkmark!
         } else {
             cell.rightText = pool.areaId?.uppercased()
-            cell.applyChecked(pool.id == currentPool?.id, Theme.current)
         }
         cell.isTappable = true
         return cell
