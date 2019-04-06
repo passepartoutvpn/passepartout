@@ -151,8 +151,7 @@ class ServiceViewController: UIViewController, TableModelHost {
             
         case .providerPoolSegueIdentifier:
             let vc = destination as? ProviderPoolViewController
-            vc?.setPools(uncheckedProviderProfile.pools())
-            vc?.currentPoolId = uncheckedProviderProfile.poolId
+            vc?.setPools(uncheckedProviderProfile.pools(), currentPoolId: uncheckedProviderProfile.poolId)
             vc?.delegate = self
             
         case .endpointSegueIdentifier:

@@ -37,11 +37,11 @@ class ProviderPoolViewController: UIViewController {
 
     private var sortedGroups: [PoolGroup] = []
 
-    var currentPoolId: String?
+    private var currentPool: Pool?
     
     weak var delegate: ProviderPoolViewControllerDelegate?
 
-    func setPools(_ pools: [Pool]) {
+    func setPools(_ pools: [Pool], currentPoolId: String?) {
         for p in pools {
             poolsByGroup[p.group()] = [p]
         }
@@ -72,7 +72,7 @@ class ProviderPoolViewController: UIViewController {
 extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate {
     private var selectedIndexPath: IndexPath? {
         for entries in poolsByGroup.enumerated() {
-            guard let _ = entries.element.value.index(where: { $0.id == currentPoolId }) else {
+            guard let _ = entries.element.value.index(where: { $0.id == currentPool?.id }) else {
                 continue
             }
             guard let row = sortedGroups.index(of: entries.element.key) else {
@@ -96,7 +96,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         cell.imageView?.image = pool.logo
         cell.leftText = pool.localizedName
         cell.rightText = pool.areaId?.uppercased()
-        cell.applyChecked(pool.id == currentPoolId, Theme.current)
+        cell.applyChecked(pool.id == currentPool?.id, Theme.current)
         cell.isTappable = true
         return cell
     }
@@ -106,7 +106,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         let groupPools = poolsByGroup[group]
         let pool = groupPools!.first!
 
-        currentPoolId = pool.id
+        currentPool = pool
         delegate?.providerPoolController(self, didSelectPool: pool)
     }
 }

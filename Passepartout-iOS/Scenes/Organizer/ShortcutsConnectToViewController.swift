@@ -89,7 +89,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
         guard let provider = selectedProfile as? ProviderConnectionProfile else {
             return
         }
-        vc.setPools(provider.pools())
+        vc.setPools(provider.pools(), currentPoolId: nil)
         vc.delegate = self
     }
 
