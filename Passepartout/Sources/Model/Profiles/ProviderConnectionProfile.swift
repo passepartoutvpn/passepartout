@@ -72,8 +72,8 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         presetId = infrastructure.defaults.preset
     }
     
-    public func sortedPools() -> [Pool] {
-        return infrastructure.pools.sorted()
+    public func pools() -> [Pool] {
+        return infrastructure.pools
     }
     
     private func validateEndpoint() {
