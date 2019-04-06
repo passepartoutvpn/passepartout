@@ -33,6 +33,10 @@ private class PoolModel {
     
     private(set) var sortedGroups: [PoolGroup] = []
     
+    var isEmpty: Bool {
+        return sortedGroups.isEmpty
+    }
+    
     init(title: String) {
         self.title = title
     }
@@ -82,10 +86,10 @@ class ProviderPoolViewController: UIViewController {
         paidModel.sort()
 
         models = []
-        if !freeModel.sortedGroups.isEmpty {
+        if !freeModel.isEmpty {
             models.append(freeModel)
         }
-        if !paidModel.sortedGroups.isEmpty {
+        if !paidModel.isEmpty {
             models.append(paidModel)
         }
     }
