@@ -26,17 +26,30 @@
 import Foundation
 
 struct InApp {
-    struct Donations {
-        static let tiny = "com.algoritmico.ios.Passepartout.donations.Tiny"
+    enum Donation: String {
+        static let all: [Donation] = [
+            .tiny,
+            .small,
+            .medium,
+            .big,
+            .huge,
+            .maxi
+        ]
 
-        static let small = "com.algoritmico.ios.Passepartout.donations.Small"
+        case tiny = "com.algoritmico.ios.Passepartout.donations.Tiny"
 
-        static let medium = "com.algoritmico.ios.Passepartout.donations.Medium"
+        case small = "com.algoritmico.ios.Passepartout.donations.Small"
 
-        static let big = "com.algoritmico.ios.Passepartout.donations.Big"
+        case medium = "com.algoritmico.ios.Passepartout.donations.Medium"
 
-        static let huge = "com.algoritmico.ios.Passepartout.donations.Huge"
+        case big = "com.algoritmico.ios.Passepartout.donations.Big"
 
-        static let maxi = "com.algoritmico.ios.Passepartout.donations.Maxi"
+        case huge = "com.algoritmico.ios.Passepartout.donations.Huge"
+
+        case maxi = "com.algoritmico.ios.Passepartout.donations.Maxi"
+        
+        static func allIdentifiers() -> Set<String> {
+            return Set<String>(all.map { $0.rawValue })
+        }
     }
 }

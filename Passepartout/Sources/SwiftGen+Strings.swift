@@ -295,6 +295,11 @@ public enum L10n {
     }
   }
 
+  public enum Donation {
+    /// Donate
+    public static let title = L10n.tr("Localizable", "donation.title")
+  }
+
   public enum Endpoint {
     public enum Cells {
       public enum AnyAddress {

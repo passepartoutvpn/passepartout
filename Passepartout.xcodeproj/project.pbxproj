@@ -18,6 +18,7 @@
 		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
 		0E24273A225950450064A1A3 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E24273C225950450064A1A3 /* About.storyboard */; };
 		0E242740225951B00064A1A3 /* InApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E24273F225951B00064A1A3 /* InApp.swift */; };
+		0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E242741225956AC0064A1A3 /* DonationViewController.swift */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
 		0E3152A4223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */; };
 		0E3152AD223F9EF500F61841 /* Passepartout_Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* Passepartout_Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -179,6 +180,7 @@
 		0E242735225944060064A1A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E24273B225950450064A1A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		0E24273F225951B00064A1A3 /* InApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InApp.swift; sourceTree = "<group>"; };
+		0E242741225956AC0064A1A3 /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
 		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
 		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 		0E89DFCC213EEDE700741BA1 /* Organizer */ = {
 			isa = PBXGroup;
 			children = (
+				0E242741225956AC0064A1A3 /* DonationViewController.swift */,
 				0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */,
 				0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */,
 				0ED38AD8213F33150004D387 /* WizardHostViewController.swift */,
@@ -1055,6 +1058,7 @@
 				0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */,
 				0E05C61D20D27C82006EE732 /* Theme.swift in Sources */,
 				0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */,
+				0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */,
 				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
 				0E242740225951B00064A1A3 /* InApp.swift in Sources */,

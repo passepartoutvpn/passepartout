@@ -192,7 +192,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
 
     private func donateToDeveloper() {
-        // TODO
+        perform(segue: StoryboardSegue.Organizer.donateSegueIdentifier, sender: nil)
     }
 
     private func visitPatreon() {
