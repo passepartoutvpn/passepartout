@@ -158,7 +158,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
 
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         cell.imageView?.image = pool.logo
-        cell.leftText = pool.localizedName
+        cell.leftText = pool.localizedCountry
         if groupPools.count > 1 {
             cell.rightText = pool.area?.uppercased()
             cell.accessoryType = .detailDisclosureButton // no checkmark!

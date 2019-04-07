@@ -54,7 +54,7 @@ public class IntentDispatcher {
         let intent = MoveToLocationIntent()
         intent.providerId = profile.id
         intent.poolId = pool.id
-        intent.poolName = pool.localizedName
+        intent.poolName = pool.localizedId
         return intent
     }
     

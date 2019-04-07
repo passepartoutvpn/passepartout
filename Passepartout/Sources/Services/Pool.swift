@@ -137,15 +137,4 @@ extension Pool {
         }
         return String.init(format: Pool.localizedFormat, countryString, zone.uppercased())
     }
-
-    public var localizedName: String {
-
-//        // XXX: name from API is not localized
-//        if !name.isEmpty {
-//            return name
-//        }
-
-//        return localizedCountryArea
-        return localizedCountry
-    }
 }
