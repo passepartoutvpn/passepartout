@@ -209,9 +209,9 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         }
 
         let vc = MFMailComposeViewController()
-        vc.setToRecipients([AppConstants.Translations.recipient])
-        vc.setSubject(L10n.Translations.Email.subject(GroupConstants.App.name))
-        vc.setMessageBody(L10n.Translations.Email.body(L10n.Translations.Email.description), isHTML: false)
+        vc.setToRecipients([AppConstants.Translations.Email.recipient])
+        vc.setSubject(AppConstants.Translations.Email.subject(GroupConstants.App.name))
+        vc.setMessageBody(AppConstants.Translations.Email.body(AppConstants.Translations.Email.template), isHTML: false)
         vc.mailComposeDelegate = self
         vc.apply(Theme.current)
         present(vc, animated: true, completion: nil)

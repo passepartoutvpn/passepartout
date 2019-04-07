@@ -83,9 +83,9 @@ class IssueReporter: NSObject {
         let metadata = DebugLog(raw: "--").decoratedString()
         
         let vc = MFMailComposeViewController()
-        vc.setToRecipients([AppConstants.IssueReporter.recipient])
-        vc.setSubject(L10n.IssueReporter.Email.subject(GroupConstants.App.name))
-        vc.setMessageBody(L10n.IssueReporter.Email.body(description ?? L10n.IssueReporter.Email.description, metadata), isHTML: false)
+        vc.setToRecipients([AppConstants.IssueReporter.Email.recipient])
+        vc.setSubject(AppConstants.IssueReporter.Email.subject(GroupConstants.App.name))
+        vc.setMessageBody(AppConstants.IssueReporter.Email.body(description ?? AppConstants.IssueReporter.Email.template, metadata), isHTML: false)
         if let raw = debugLog {
             let attachment = DebugLog(raw: raw).decoratedData()
             vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.debugLog, fileName: AppConstants.IssueReporter.Filenames.debugLog)

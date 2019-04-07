@@ -376,18 +376,6 @@ public enum L10n {
       /// I understand
       public static let accept = L10n.tr("Localizable", "issue_reporter.buttons.accept")
     }
-    public enum Email {
-      /// Hi,\n\n%@\n\n%@\n\nRegards
-      public static func body(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "issue_reporter.email.body", p1, p2)
-      }
-      /// description of the issue:
-      public static let description = L10n.tr("Localizable", "issue_reporter.email.description")
-      /// %@ - Report issue
-      public static func subject(_ p1: String) -> String {
-        return L10n.tr("Localizable", "issue_reporter.email.subject", p1)
-      }
-    }
   }
 
   public enum Label {
@@ -873,18 +861,6 @@ public enum L10n {
   public enum Translations {
     /// Translations
     public static let title = L10n.tr("Localizable", "translations.title")
-    public enum Email {
-      /// Hi,\n\n%@\n\nRegards
-      public static func body(_ p1: String) -> String {
-        return L10n.tr("Localizable", "translations.email.body", p1)
-      }
-      /// I offer to translate to:
-      public static let description = L10n.tr("Localizable", "translations.email.description")
-      /// %@ - Translations
-      public static func subject(_ p1: String) -> String {
-        return L10n.tr("Localizable", "translations.email.subject", p1)
-      }
-    }
   }
 
   public enum Version {
