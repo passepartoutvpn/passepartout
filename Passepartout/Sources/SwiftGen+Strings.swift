@@ -295,6 +295,29 @@ public enum L10n {
     }
   }
 
+  public enum Donation {
+    /// Donate
+    public static let title = L10n.tr("Localizable", "donation.title")
+    public enum Alerts {
+      public enum Purchase {
+        /// Unable to perform the donation. %@
+        public static func failure(_ p1: String) -> String {
+          return L10n.tr("Localizable", "donation.alerts.purchase.failure", p1)
+        }
+        /// THANK YOU!\n\nThis means a lot to me and I really hope you keep using and promoting this app.
+        public static let success = L10n.tr("Localizable", "donation.alerts.purchase.success")
+      }
+    }
+    public enum Sections {
+      public enum OneTime {
+        /// If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.
+        public static let footer = L10n.tr("Localizable", "donation.sections.one_time.footer")
+        /// One time
+        public static let header = L10n.tr("Localizable", "donation.sections.one_time.header")
+      }
+    }
+  }
+
   public enum Endpoint {
     public enum Cells {
       public enum AnyAddress {
@@ -408,6 +431,14 @@ public enum L10n {
         /// Add new provider
         public static let caption = L10n.tr("Localizable", "organizer.cells.add_provider.caption")
       }
+      public enum Donate {
+        /// Make a donation
+        public static let caption = L10n.tr("Localizable", "organizer.cells.donate.caption")
+      }
+      public enum Patreon {
+        /// Support me on Patreon
+        public static let caption = L10n.tr("Localizable", "organizer.cells.patreon.caption")
+      }
       public enum Profile {
         public enum Value {
           /// In use
@@ -441,6 +472,10 @@ public enum L10n {
         public static let footer = L10n.tr("Localizable", "organizer.sections.siri.footer")
         /// Siri
         public static let header = L10n.tr("Localizable", "organizer.sections.siri.header")
+      }
+      public enum Support {
+        /// Support
+        public static let header = L10n.tr("Localizable", "organizer.sections.support.header")
       }
     }
   }

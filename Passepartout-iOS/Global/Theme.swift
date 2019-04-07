@@ -25,6 +25,7 @@
 
 import UIKit
 import MessageUI
+import StoreKit
 import Passepartout_Core
 
 extension UIColor {
@@ -163,5 +164,14 @@ extension Infrastructure.Name {
 extension Pool {
     var logo: UIImage? {
         return ImageAsset(name: country.lowercased()).image
+    }
+}
+
+extension SKProduct {
+    var localizedPrice: String? {
+        let fmt = NumberFormatter()
+        fmt.numberStyle = .currency
+        fmt.locale = priceLocale
+        return fmt.string(from: price)
     }
 }
