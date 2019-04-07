@@ -42,10 +42,13 @@
 "organizer.sections.hosts.footer" = "Importa un host da un file di configurazione .ovpn.";
 "organizer.sections.siri.header" = "Siri";
 "organizer.sections.siri.footer" = "Chiedi aiuto a Siri per velocizzare le tue interazioni più frequenti con l'app.";
+"organizer.sections.support.header" = "Supporto";
 "organizer.cells.profile.value.current" = "In uso";
 "organizer.cells.add_provider.caption" = "Aggiungi provider";
 "organizer.cells.add_host.caption" = "Aggiungi host";
 "organizer.cells.siri_shortcuts.caption" = "Gestisci comandi rapidi";
+"organizer.cells.donate.caption" = "Fai una donazione";
+"organizer.cells.patreon.caption" = "Supportami su Patreon";
 "organizer.cells.about.caption" = "Informazioni su %@";
 "organizer.cells.uninstall.caption" = "Rimuovi configurazione VPN";
 "organizer.alerts.exhausted_providers.message" = "Hai creato profili per tutti i provider disponibili.";
@@ -130,6 +133,7 @@
 "account.sections.credentials.header" = "Credenziali";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Usa il tuo account number del sito di %@ e la password \"m\".";
 "account.sections.guidance.footer.infrastructure.pia" = "Usa le credenziali del sito di %@. Il tuo username è generalmente numerico con un prefisso \"p\".";
+"account.sections.guidance.footer.infrastructure.protonvpn" = "Trova le tue credenziali nella sezione \"Account > OpenVPN / IKEv2 Username\" del sito di %@.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Usa le credenziali del sito di %@. Il tuo username è generalmente la tua e-mail.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Trova le tue credenziali nell'OpenVPN Config Generator sul sito di %@.";
 "account.sections.registration.footer" = "Registra un account sul sito di %@.";
@@ -141,6 +145,9 @@
 //"account.cells.password_confirm.mismatch" = "Passwords don't match!";
 "account.cells.open_guide.caption" = "Vedi le tue credenziali";
 "account.cells.signup.caption" = "Registrati con %@";
+
+"provider.pool.sections.free.header" = "Gratuiti";
+"provider.pool.sections.paid.header" = "A pagamento";
 
 "endpoint.sections.location_addresses.header" = "Indirizzi";
 "endpoint.sections.location_protocols.header" = "Protocolli";
@@ -239,6 +246,12 @@
 "about.cells.share_generic.caption" = "Invita un amico";
 "about.cells.join_community.caption" = "Entra nella community";
 "about.cells.write_review.caption" = "Scrivi una recensione";
+
+"donation.title" = "Donazione";
+"donation.sections.one_time.header" = "Unica";
+"donation.sections.one_time.footer" = "Se vuoi mostrare gratitudine per il mio lavoro a titolo gratuito, qui trovi varie somme da donare all'istante.\n\nLa donazione ti sarà addebitata solo una volta, e puoi effettuare più donazioni.";
+"donation.alerts.purchase.success" = "GRAZIE!\n\nQuesto significa molto per me e spero vivamente che tu continuoi ad usare e promuovere quest'applicazione.";
+"donation.alerts.purchase.failure" = "Impossibile effettuare la donazione. %@";
 
 "share.message" = "Passepartout è un client OpenVPN user-friendly ed open source per iOS e macOS";
 
