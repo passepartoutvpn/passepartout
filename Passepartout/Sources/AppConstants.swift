@@ -120,7 +120,7 @@ public class AppConstants {
                 return "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards";
             }
             
-            public static let template = "description of the issue:";
+            public static let template = "description of the issue: ";
         }
 
         public class Filenames {
@@ -155,7 +155,7 @@ public class AppConstants {
                 return "Hi,\n\n\(description)\n\nRegards";
             }
 
-            public static let template = "I offer to translate to:";
+            public static let template = "I offer to translate to: ";
         }
     }
 
