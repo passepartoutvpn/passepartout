@@ -8,3 +8,5 @@ sed "s/Unreleased/$VERSION Beta $BUILD ($DATE)/" $TARGET >$TARGET.tmp
 mv $TARGET.tmp $TARGET
 git add $TARGET
 git commit -m "Set beta release"
+
+ci/latest-changelog.sh >ci/$TARGET
