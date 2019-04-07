@@ -48,42 +48,71 @@ struct InApp {
         case huge = "com.algoritmico.ios.Passepartout.donations.Huge"
 
         case maxi = "com.algoritmico.ios.Passepartout.donations.Maxi"
-        
-        static func allIdentifiers() -> Set<String> {
-            return Set<String>(all.map { $0.rawValue })
-        }
+    }
+
+    static func allIdentifiers() -> Set<String> {
+        return Set<String>(Donation.all.map { $0.rawValue })
     }
 }
 
-class InAppHelper: NSObject, SKProductsRequestDelegate {
-    typealias Observer = ([SKProduct]) -> Void
+class InAppHelper: NSObject {
+    enum PurchaseResult {
+        case success
+        
+        case failure
+        
+        case cancelled
+    }
+    
+    typealias ProductObserver = ([SKProduct]) -> Void
+    
+    typealias TransactionObserver = (PurchaseResult, Error?) -> Void
     
     static let shared = InAppHelper()
     
     private(set) var products: [SKProduct]
     
-    private var observers: [Observer]
+    private var productObservers: [ProductObserver]
+    
+    private var transactionObservers: [String: TransactionObserver]
     
     private override init() {
         products = []
-        observers = []
+        productObservers = []
+        transactionObservers = [:]
+        super.init()
+        
+        SKPaymentQueue.default().add(self)
     }
     
-    func requestProducts(completionHandler: (([SKProduct]) -> Void)?) {
-        let req = SKProductsRequest(productIdentifiers: InApp.Donation.allIdentifiers())
+    deinit {
+        SKPaymentQueue.default().remove(self)
+    }
+    
+    func requestProducts(completionHandler: ProductObserver?) {
+        let req = SKProductsRequest(productIdentifiers: InApp.allIdentifiers())
         req.delegate = self
-        if let block = completionHandler {
-            observers.append(block)
+        if let observer = completionHandler {
+            productObservers.append(observer)
         }
         req.start()
     }
     
     private func receiveProducts(_ products: [SKProduct]) {
         self.products = products
-        observers.forEach { $0(products) }
-        observers.removeAll()
+        productObservers.forEach { $0(products) }
+        productObservers.removeAll()
     }
     
+    func purchase(product: SKProduct, completionHandler: @escaping TransactionObserver) {
+        let queue = SKPaymentQueue.default()
+        let payment = SKPayment(product: product)
+        transactionObservers[product.productIdentifier] = completionHandler
+        queue.add(payment)
+    }
+}
+
+extension InAppHelper: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         DispatchQueue.main.async {
             self.receiveProducts(response.products)
@@ -91,6 +120,37 @@ class InAppHelper: NSObject, SKProductsRequestDelegate {
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        observers.removeAll()
+        transactionObservers.removeAll()
+    }
+}
+
+extension InAppHelper: SKPaymentTransactionObserver {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for tx in transactions {
+            let observer = transactionObservers[tx.payment.productIdentifier]
+
+            switch tx.transactionState {
+            case .purchased, .restored:
+                queue.finishTransaction(tx)
+                DispatchQueue.main.async {
+                    observer?(.success, nil)
+                }
+
+            case .failed:
+                queue.finishTransaction(tx)
+                if let skError = tx.error as? SKError, skError.code == .paymentCancelled {
+                    DispatchQueue.main.async {
+                        observer?(.cancelled, nil)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        observer?(.failure, tx.error)
+                    }
+                }
+                
+            default:
+                break
+            }
+        }
     }
 }
