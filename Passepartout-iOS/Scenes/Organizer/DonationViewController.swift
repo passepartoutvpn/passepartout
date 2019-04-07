@@ -70,7 +70,12 @@ class DonationViewController: UITableViewController, TableModelHost {
 
         let inApp = InAppHelper.shared
         if inApp.products.isEmpty {
-            inApp.requestProducts { self.setProducts($0) }
+            let hud = HUD()
+            hud.show()
+            inApp.requestProducts {
+                hud.hide()
+                self.setProducts($0)
+            }
         } else {
             setProducts(inApp.products)
         }
