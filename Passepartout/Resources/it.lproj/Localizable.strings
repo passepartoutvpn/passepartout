@@ -50,7 +50,7 @@
 "organizer.cells.siri_shortcuts.caption" = "Gestisci comandi rapidi";
 "organizer.cells.donate.caption" = "Fai una donazione";
 "organizer.cells.patreon.caption" = "Supportami su Patreon";
-"organizer.cells.translate.caption" = "Proponi una traduzione";
+"organizer.cells.translate.caption" = "Offri una traduzione";
 "organizer.cells.about.caption" = "Informazioni su %@";
 "organizer.cells.uninstall.caption" = "Rimuovi configurazione VPN";
 "organizer.alerts.exhausted_providers.message" = "Hai creato profili per tutti i provider disponibili.";
