@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ProtonVPN provider. [#7](https://github.com/passepartoutvpn/passepartout-ios/issues/7)
 - Italian translations. [#58](https://github.com/passepartoutvpn/passepartout-ios/pull/58)
 
+### Changed
+
+- Automatic protocol defaults to UDP endpoints. [#61](https://github.com/passepartoutvpn/passepartout-ios/pull/61)
+
 ### Fixed
 
 - Some providers may crash on VPN activation. [#57](https://github.com/passepartoutvpn/passepartout-ios/issues/57)
