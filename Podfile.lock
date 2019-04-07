@@ -2,21 +2,21 @@ PODS:
   - MBProgressHUD (1.1.0)
   - OpenSSL-Apple (1.1.0i.2)
   - SwiftyBeaver (1.7.0)
-  - TunnelKit (1.6.0):
-    - TunnelKit/AppExtension (= 1.6.0)
-    - TunnelKit/Core (= 1.6.0)
-  - TunnelKit/AppExtension (1.6.0):
+  - TunnelKit (1.6.1):
+    - TunnelKit/AppExtension (= 1.6.1)
+    - TunnelKit/Core (= 1.6.1)
+  - TunnelKit/AppExtension (1.6.1):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (1.6.0):
+  - TunnelKit/Core (1.6.1):
     - OpenSSL-Apple (~> 1.1.0i.2)
     - SwiftyBeaver
-  - TunnelKit/LZO (1.6.0)
+  - TunnelKit/LZO (1.6.1)
 
 DEPENDENCIES:
   - MBProgressHUD
-  - TunnelKit (~> 1.6.0)
-  - TunnelKit/LZO (~> 1.6.0)
+  - TunnelKit (~> 1.6.1)
+  - TunnelKit/LZO (~> 1.6.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -29,8 +29,8 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   OpenSSL-Apple: 37a8c0b04df4bb8971deef4671cc29222861319c
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
-  TunnelKit: cd10ff6f4368e82414a72e6a111dae369252964e
+  TunnelKit: 5dd514cc4565a1701d7474bf811b572886f6f5d0
 
-PODFILE CHECKSUM: e89a1c8dc15edb034b0b9f2eef9f2da8cf917801
+PODFILE CHECKSUM: 5e8a25e245bae42e0f054e18e753b0b62126df00
 
 COCOAPODS: 1.6.1
