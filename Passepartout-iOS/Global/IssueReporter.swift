@@ -57,7 +57,7 @@ class IssueReporter: NSObject {
 
     func present(in viewController: UIViewController, withAttachments attachments: Attachments) {
         guard MFMailComposeViewController.canSendMail() else {
-            let alert = Macros.alert(L10n.IssueReporter.title, L10n.IssueReporter.Alerts.EmailNotConfigured.message)
+            let alert = Macros.alert(L10n.IssueReporter.title, L10n.Global.emailNotConfigured)
             alert.addCancelAction(L10n.Global.ok)
             viewController.present(alert, animated: true, completion: nil)
             return

@@ -130,7 +130,11 @@ public class AppConstants {
             public static let configuration = "text/plain"
         }
     }
-    
+
+    public class Translations {
+        public static let recipient = "translate@\(Domain.name)"
+    }
+
     public class URLs {
         public static let website = URL(string: "https://\(Domain.name)")!
         

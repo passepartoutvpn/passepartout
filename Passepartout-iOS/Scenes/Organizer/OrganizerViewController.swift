@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import MessageUI
 import Passepartout_Core
 
 // XXX: convoluted due to the separation of provider/host profiles
@@ -61,7 +62,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             model.set([.siriShortcuts], in: .siri)
         }
         model.setHeader(L10n.Organizer.Sections.Support.header, for: .support)
-        model.set([.donate, .patreon], in: .support)
+        model.set([.donate, .patreon, .translate], in: .support)
         model.set([.openAbout], in: .about)
         model.set([.uninstall], in: .destruction)
         if AppConstants.Flags.isBeta {
@@ -199,6 +200,23 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         UIApplication.shared.open(AppConstants.URLs.patreon, options: [:], completionHandler: nil)
     }
     
+    private func offerTranslation() {
+        guard MFMailComposeViewController.canSendMail() else {
+            let alert = Macros.alert(L10n.IssueReporter.title, L10n.Global.emailNotConfigured)
+            alert.addCancelAction(L10n.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+
+        let vc = MFMailComposeViewController()
+        vc.setToRecipients([AppConstants.Translations.recipient])
+        vc.setSubject(L10n.Translations.Email.subject(GroupConstants.App.name))
+        vc.setMessageBody(L10n.Translations.Email.body(L10n.Translations.Email.description), isHTML: false)
+        vc.mailComposeDelegate = self
+        vc.apply(Theme.current)
+        present(vc, animated: true, completion: nil)
+    }
+    
     private func about() {
         perform(segue: StoryboardSegue.Organizer.aboutSegueIdentifier, sender: nil)
     }
@@ -315,6 +333,8 @@ extension OrganizerViewController {
         case donate
         
         case patreon
+        
+        case translate
 
         case openAbout
         
@@ -401,6 +421,11 @@ extension OrganizerViewController {
             cell.leftText = L10n.Organizer.Cells.Patreon.caption
             return cell
             
+        case .translate:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Organizer.Cells.Translate.caption
+            return cell
+
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Organizer.Cells.About.caption(GroupConstants.App.name)
@@ -444,6 +469,9 @@ extension OrganizerViewController {
 
         case .patreon:
             visitPatreon()
+            
+        case .translate:
+            offerTranslation()
             
         case .openAbout:
             about()
@@ -586,5 +614,11 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         if #available(iOS 12, *) {
             IntentDispatcher.donateEnableVPN()
         }
+    }
+}
+
+extension OrganizerViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
     }
 }

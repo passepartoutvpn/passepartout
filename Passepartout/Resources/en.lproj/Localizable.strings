@@ -29,6 +29,7 @@
 "global.close" = "Close";
 "global.host.title_input.message" = "Acceptable characters are alphanumerics plus dash \"-\", underscore \"_\" and dot \".\".";
 "global.host.title_input.placeholder" = "My profile";
+"global.email_not_configured" = "No e-mail account is configured.";
 
 "reddit.title" = "Reddit";
 "reddit.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
@@ -49,6 +50,7 @@
 "organizer.cells.siri_shortcuts.caption" = "Manage shortcuts";
 "organizer.cells.donate.caption" = "Make a donation";
 "organizer.cells.patreon.caption" = "Support me on Patreon";
+"organizer.cells.translate.caption" = "Offer to translate";
 "organizer.cells.about.caption" = "About %@";
 "organizer.cells.uninstall.caption" = "Remove VPN configuration";
 "organizer.alerts.exhausted_providers.message" = "You have created profiles for any available provider.";
@@ -212,10 +214,14 @@
 "issue_reporter.title" = "Report issue";
 "issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the e-mail attachments if unsure.";
 "issue_reporter.buttons.accept" = "I understand";
-"issue_reporter.alerts.email_not_configured.message" = "No e-mail account is configured.";
 "issue_reporter.email.subject" = "%@ - Report issue";
 "issue_reporter.email.body" = "Hi,\n\n%@\n\n%@\n\nRegards";
 "issue_reporter.email.description" = "description of the issue:";
+
+"translations.title" = "Translations";
+"translations.email.subject" = "%@ - Translations";
+"translations.email.body" = "Hi,\n\n%@\n\nRegards";
+"translations.email.description" = "I offer to translate to:";
 
 "shortcuts.add.title" = "Add shortcut";
 "shortcuts.add.sections.vpn.header" = "VPN";
