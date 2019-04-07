@@ -367,9 +367,9 @@
                     <connections>
                         <segue destination="NVA-bQ-iIE" kind="presentation" identifier="AddProviderSegueIdentifier" modalPresentationStyle="formSheet" id="Win-5U-mIc"/>
                         <segue destination="z6E-m6-Op0" kind="presentation" identifier="ShowImportedHostsSegueIdentifier" modalPresentationStyle="formSheet" id="TZv-OK-8vU"/>
-                        <segue destination="BIO-UT-cpg" kind="presentation" identifier="SiriShortcutsSegueIdentifier" id="I9b-aK-jPT"/>
-                        <segue destination="POR-9u-PsE" kind="presentation" identifier="AboutSegueIdentifier" id="78g-ra-Yhp"/>
-                        <segue destination="5ku-HX-5yk" kind="presentation" identifier="DonateSegueIdentifier" id="H4q-BS-PmK"/>
+                        <segue destination="BIO-UT-cpg" kind="presentation" identifier="SiriShortcutsSegueIdentifier" modalPresentationStyle="formSheet" id="I9b-aK-jPT"/>
+                        <segue destination="POR-9u-PsE" kind="presentation" identifier="AboutSegueIdentifier" modalPresentationStyle="formSheet" id="78g-ra-Yhp"/>
+                        <segue destination="5ku-HX-5yk" kind="presentation" identifier="DonateSegueIdentifier" modalPresentationStyle="formSheet" id="H4q-BS-PmK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGp-H5-24W" userLabel="First Responder" sceneMemberID="firstResponder"/>
