@@ -56,6 +56,7 @@ class DonationViewController: UITableViewController, TableModelHost {
         model.add(.oneTime)
 //        model.add(.recurring)
         model.setHeader(L10n.Donation.Sections.OneTime.header, for: .oneTime)
+        model.setFooter(L10n.Donation.Sections.OneTime.footer, for: .oneTime)
 //        model.setHeader(L10n.Donation.Sections.Recurring.header, for: .recurring)
         model.set(list, in: .oneTime)
     }
@@ -89,6 +90,10 @@ class DonationViewController: UITableViewController, TableModelHost {
         return model.header(for: section)
     }
     
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return model.footer(for: section)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.count(for: section)
     }
@@ -102,6 +107,34 @@ class DonationViewController: UITableViewController, TableModelHost {
         cell.leftText = product.localizedTitle
         cell.rightText = product.localizedPrice
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let productId = productIdentifier(at: indexPath)
+        guard let product = productsByIdentifier[productId] else {
+            fatalError("Row with no associated product")
+        }
+        InAppHelper.shared.purchase(product: product) {
+            self.handlePurchase(result: $0, error: $1)
+        }
+    }
+
+    private func handlePurchase(result: InAppHelper.PurchaseResult, error: Error?) {
+        let alert: UIAlertController
+        switch result {
+        case .cancelled:
+            return
+
+        case .success:
+            alert = Macros.alert(title, L10n.Donation.Alerts.Purchase.success)
+
+        case .failure:
+            alert = Macros.alert(title, L10n.Donation.Alerts.Purchase.failure(error?.localizedDescription ?? ""))
+        }
+        alert.addCancelAction(L10n.Global.ok)
+        present(alert, animated: true, completion: nil)
     }
 }
 
