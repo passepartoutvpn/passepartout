@@ -132,7 +132,15 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         if let proto = manualProtocol {
             builder.sessionConfiguration.endpointProtocols = [proto]
         } else {
-            builder.sessionConfiguration.endpointProtocols = preset.configuration.sessionConfiguration.endpointProtocols
+            
+            // restrict "Any" protocol to UDP, unless there are no UDP endpoints
+            let allEndpoints = preset.configuration.sessionConfiguration.endpointProtocols
+            var endpoints = allEndpoints?.filter { $0.socketType == .udp }
+            if endpoints?.isEmpty ?? true {
+                endpoints = allEndpoints
+            }
+            
+            builder.sessionConfiguration.endpointProtocols = endpoints
 //            builder.sessionConfiguration.endpointProtocols = [
 //                EndpointProtocol(.udp, 8080),
 //                EndpointProtocol(.tcp, 443)

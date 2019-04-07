@@ -144,8 +144,8 @@
 
 "endpoint.sections.location_addresses.header" = "Indirizzi";
 "endpoint.sections.location_protocols.header" = "Protocolli";
-"endpoint.cells.any_address.caption" = "Qualunque";
-"endpoint.cells.any_protocol.caption" = "Qualunque";
+"endpoint.cells.any_address.caption" = "Automatico";
+"endpoint.cells.any_protocol.caption" = "Automatico";
 
 "provider.preset.cells.tech_details.caption" = "Dettagli tecnici";
 //"provider.preset.sections.main.footer" = "Tap info button to disclose technical details.";

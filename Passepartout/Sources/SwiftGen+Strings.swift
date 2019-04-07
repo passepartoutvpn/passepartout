@@ -298,11 +298,11 @@ public enum L10n {
   public enum Endpoint {
     public enum Cells {
       public enum AnyAddress {
-        /// Any
+        /// Automatic
         public static let caption = L10n.tr("Localizable", "endpoint.cells.any_address.caption")
       }
       public enum AnyProtocol {
-        /// Any
+        /// Automatic
         public static let caption = L10n.tr("Localizable", "endpoint.cells.any_protocol.caption")
       }
     }
