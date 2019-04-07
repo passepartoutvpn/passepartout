@@ -250,8 +250,9 @@
 "donation.title" = "Donazione";
 "donation.sections.one_time.header" = "Unica";
 "donation.sections.one_time.footer" = "Se vuoi mostrare gratitudine per il mio lavoro a titolo gratuito, qui trovi varie somme da donare all'istante.\n\nLa donazione ti sarà addebitata solo una volta, e puoi effettuare più donazioni.";
-"donation.alerts.purchase.success" = "GRAZIE!\n\nQuesto significa molto per me e spero vivamente che tu continuoi ad usare e promuovere quest'applicazione.";
-"donation.alerts.purchase.failure" = "Impossibile effettuare la donazione. %@";
+"donation.alerts.purchase.success.title" = "Grazie";
+"donation.alerts.purchase.success.message" = "Questo significa molto per me e spero vivamente che tu continui ad usare e promuovere quest'applicazione.";
+"donation.alerts.purchase.failure.message" = "Impossibile effettuare la donazione. %@";
 
 "share.message" = "Passepartout è un client OpenVPN user-friendly ed open source per iOS e macOS";
 

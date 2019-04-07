@@ -300,12 +300,18 @@ public enum L10n {
     public static let title = L10n.tr("Localizable", "donation.title")
     public enum Alerts {
       public enum Purchase {
-        /// Unable to perform the donation. %@
-        public static func failure(_ p1: String) -> String {
-          return L10n.tr("Localizable", "donation.alerts.purchase.failure", p1)
+        public enum Failure {
+          /// Unable to perform the donation. %@
+          public static func message(_ p1: String) -> String {
+            return L10n.tr("Localizable", "donation.alerts.purchase.failure.message", p1)
+          }
         }
-        /// THANK YOU!\n\nThis means a lot to me and I really hope you keep using and promoting this app.
-        public static let success = L10n.tr("Localizable", "donation.alerts.purchase.success")
+        public enum Success {
+          /// This means a lot to me and I really hope you keep using and promoting this app.
+          public static let message = L10n.tr("Localizable", "donation.alerts.purchase.success.message")
+          /// Thank you
+          public static let title = L10n.tr("Localizable", "donation.alerts.purchase.success.title")
+        }
       }
     }
     public enum Sections {

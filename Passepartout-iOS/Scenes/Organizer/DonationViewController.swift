@@ -133,10 +133,10 @@ class DonationViewController: UITableViewController, TableModelHost {
             return
 
         case .success:
-            alert = Macros.alert(title, L10n.Donation.Alerts.Purchase.success)
+            alert = Macros.alert(L10n.Donation.Alerts.Purchase.Success.title, L10n.Donation.Alerts.Purchase.Success.message)
 
         case .failure:
-            alert = Macros.alert(title, L10n.Donation.Alerts.Purchase.failure(error?.localizedDescription ?? ""))
+            alert = Macros.alert(title, L10n.Donation.Alerts.Purchase.Failure.message(error?.localizedDescription ?? ""))
         }
         alert.addCancelAction(L10n.Global.ok)
         present(alert, animated: true, completion: nil)
