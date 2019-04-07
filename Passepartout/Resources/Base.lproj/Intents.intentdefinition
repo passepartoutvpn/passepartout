@@ -612,7 +612,7 @@
 					<key>INIntentParameterCombinationIsPrimary</key>
 					<true/>
 					<key>INIntentParameterCombinationSubtitle</key>
-					<string></string>
+					<string>With profile in use</string>
 					<key>INIntentParameterCombinationSubtitleID</key>
 					<string>NCoK9B</string>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
