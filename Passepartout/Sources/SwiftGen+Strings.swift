@@ -346,6 +346,8 @@ public enum L10n {
     public static let cancel = L10n.tr("Localizable", "global.cancel")
     /// Close
     public static let close = L10n.tr("Localizable", "global.close")
+    /// No e-mail account is configured.
+    public static let emailNotConfigured = L10n.tr("Localizable", "global.email_not_configured")
     /// Next
     public static let next = L10n.tr("Localizable", "global.next")
     /// OK
@@ -370,27 +372,9 @@ public enum L10n {
     public static let message = L10n.tr("Localizable", "issue_reporter.message")
     /// Report issue
     public static let title = L10n.tr("Localizable", "issue_reporter.title")
-    public enum Alerts {
-      public enum EmailNotConfigured {
-        /// No e-mail account is configured.
-        public static let message = L10n.tr("Localizable", "issue_reporter.alerts.email_not_configured.message")
-      }
-    }
     public enum Buttons {
       /// I understand
       public static let accept = L10n.tr("Localizable", "issue_reporter.buttons.accept")
-    }
-    public enum Email {
-      /// Hi,\n\n%@\n\n%@\n\nRegards
-      public static func body(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "issue_reporter.email.body", p1, p2)
-      }
-      /// description of the issue:
-      public static let description = L10n.tr("Localizable", "issue_reporter.email.description")
-      /// %@ - Report issue
-      public static func subject(_ p1: String) -> String {
-        return L10n.tr("Localizable", "issue_reporter.email.subject", p1)
-      }
     }
   }
 
@@ -448,6 +432,10 @@ public enum L10n {
       public enum SiriShortcuts {
         /// Manage shortcuts
         public static let caption = L10n.tr("Localizable", "organizer.cells.siri_shortcuts.caption")
+      }
+      public enum Translate {
+        /// Offer to translate
+        public static let caption = L10n.tr("Localizable", "organizer.cells.translate.caption")
       }
       public enum Uninstall {
         /// Remove VPN configuration
@@ -868,6 +856,11 @@ public enum L10n {
         }
       }
     }
+  }
+
+  public enum Translations {
+    /// Translations
+    public static let title = L10n.tr("Localizable", "translations.title")
   }
 
   public enum Version {

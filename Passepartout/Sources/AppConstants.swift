@@ -109,7 +109,19 @@ public class AppConstants {
     }
     
     public class IssueReporter {
-        public static let recipient = "issues@\(Domain.name)"
+        public class Email {
+            public static let recipient = "issues@\(Domain.name)"
+            
+            public static func subject(_ appName: String) -> String {
+                return "\(appName) - Report issue";
+            }
+            
+            public static func body(_ description: String, _ metadata: String) -> String {
+                return "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards";
+            }
+            
+            public static let template = "description of the issue: ";
+        }
 
         public class Filenames {
             public static var debugLog: String {
@@ -130,7 +142,23 @@ public class AppConstants {
             public static let configuration = "text/plain"
         }
     }
-    
+
+    public class Translations {
+        public class Email {
+            public static let recipient = "translate@\(Domain.name)"
+
+            public static func subject(_ appName: String) -> String {
+                return "\(appName) - Translations";
+            }
+            
+            public static func body(_ description: String) -> String {
+                return "Hi,\n\n\(description)\n\nRegards";
+            }
+
+            public static let template = "I offer to translate to: ";
+        }
+    }
+
     public class URLs {
         public static let website = URL(string: "https://\(Domain.name)")!
         

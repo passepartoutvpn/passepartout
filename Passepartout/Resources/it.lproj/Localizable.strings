@@ -29,6 +29,7 @@
 "global.close" = "Chiudi";
 "global.host.title_input.message" = "I caratteri ammessi sono gli alfanumerici e il trattino breve \"-\", il trattino basso \"_\" ed il punto \".\".";
 "global.host.title_input.placeholder" = "Il mio profilo";
+"global.email_not_configured" = "Nessun account e-mail configurato.";
 
 "reddit.title" = "Reddit";
 "reddit.message" = "Sapevi che Passepartout ha un subreddit? Iscriviti per aggiornamenti o per discutere problemi, aggiunte, nuove piattaforme o qualunque cosa tu voglia.\n\nÈ anche un ottimo modo per dimostrare che hai a cuore questo progetto.";
@@ -49,6 +50,7 @@
 "organizer.cells.siri_shortcuts.caption" = "Gestisci comandi rapidi";
 "organizer.cells.donate.caption" = "Fai una donazione";
 "organizer.cells.patreon.caption" = "Supportami su Patreon";
+"organizer.cells.translate.caption" = "Proponi una traduzione";
 "organizer.cells.about.caption" = "Informazioni su %@";
 "organizer.cells.uninstall.caption" = "Rimuovi configurazione VPN";
 "organizer.alerts.exhausted_providers.message" = "Hai creato profili per tutti i provider disponibili.";
@@ -212,10 +214,8 @@
 "issue_reporter.title" = "Segnala problema";
 "issue_reporter.message" = "Il debug log delle tue ultime connessioni è cruciale per risolvere i tuoi problemi di connettività ed è completamente anonimo.\n\nIl file di configurazione .ovpn, se presente, è allegato privato di ogni dato sensibile.\n\nPer favore controlla gli allegati dell'e-mail se non sei sicuro/a.";
 "issue_reporter.buttons.accept" = "Ho capito";
-"issue_reporter.alerts.email_not_configured.message" = "Nessun account e-mail configurato.";
-"issue_reporter.email.subject" = "%@ - Segnala problema";
-"issue_reporter.email.body" = "Ciao,\n\n%@\n\n%@\n\nGrazie";
-"issue_reporter.email.description" = "descrizione del problema:";
+
+"translations.title" = "Traduzioni";
 
 "shortcuts.add.title" = "Aggiungi comando rapido";
 "shortcuts.add.sections.vpn.header" = "VPN";
