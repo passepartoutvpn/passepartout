@@ -148,8 +148,8 @@
 
 "endpoint.sections.location_addresses.header" = "Addresses";
 "endpoint.sections.location_protocols.header" = "Protocols";
-"endpoint.cells.any_address.caption" = "Any";
-"endpoint.cells.any_protocol.caption" = "Any";
+"endpoint.cells.any_address.caption" = "Automatic";
+"endpoint.cells.any_protocol.caption" = "Automatic";
 
 "provider.preset.cells.tech_details.caption" = "Technical details";
 //"provider.preset.sections.main.footer" = "Tap info button to disclose technical details.";
