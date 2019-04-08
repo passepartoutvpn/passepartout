@@ -39,38 +39,38 @@ extension UIColor {
 
 struct Theme {
     struct Palette {
-        var colorPrimaryBackground = UIColor(rgb: 0x515d71, alpha: 1.0)
+        var primaryBackground = UIColor(rgb: 0x515d71, alpha: 1.0)
         
-        var colorAccent1 = UIColor(rgb: 0xd69c68, alpha: 1.0)
+        var accent1 = UIColor(rgb: 0xd69c68, alpha: 1.0)
 
-        var colorPrimaryText: UIColor = .darkText
+        var primaryText: UIColor = .darkText
         
-        var colorPrimaryLightText: UIColor = .white
+        var primaryLightText: UIColor = .white
         
-        var colorSecondaryText: UIColor = .gray
+        var secondaryText: UIColor = .gray
 
-        var colorOn: UIColor {
-            return colorAccent1
+        var on: UIColor {
+            return accent1
         }
         
-        var colorIndeterminate: UIColor {
-            return colorSecondaryText
+        var indeterminate: UIColor {
+            return secondaryText
         }
         
-        var colorOff: UIColor {
-            return colorSecondaryText
+        var off: UIColor {
+            return secondaryText
         }
         
-//        var colorAction = UIColor(red: 214.0 / 255.0, green: 156.0 / 255.0, blue: 104.0 / 255.0, alpha: 1.0)
-        var colorAction: UIColor {
-            return colorAccent1
+//        var action = UIColor(red: 214.0 / 255.0, green: 156.0 / 255.0, blue: 104.0 / 255.0, alpha: 1.0)
+        var action: UIColor {
+            return accent1
         }
 
-        var colorAccessory: UIColor {
-            return colorAccent1.withAlphaComponent(0.7)
+        var accessory: UIColor {
+            return accent1.withAlphaComponent(0.7)
         }
         
-        var colorDestructive = UIColor(red: 0.8, green: 0.27, blue: 0.2, alpha: 1.0)
+        var destructive = UIColor(red: 0.8, green: 0.27, blue: 0.2, alpha: 1.0)
     }
 
     static let current = Theme()
@@ -91,39 +91,39 @@ struct Theme {
 extension Theme {
     func applyAppearance() {
         let bar = UINavigationBar.appearance()
-        bar.barTintColor = palette.colorPrimaryBackground
-        bar.tintColor = palette.colorPrimaryLightText
-        bar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: palette.colorPrimaryLightText]
+        bar.barTintColor = palette.primaryBackground
+        bar.tintColor = palette.primaryLightText
+        bar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: palette.primaryLightText]
         bar.largeTitleTextAttributes = bar.titleTextAttributes
 
         let toolbar = UIToolbar.appearance()
-        toolbar.barTintColor = palette.colorPrimaryBackground
-        toolbar.tintColor = palette.colorPrimaryLightText
+        toolbar.barTintColor = palette.primaryBackground
+        toolbar.tintColor = palette.primaryLightText
         
         let toggle = UISwitch.appearance()
-        toggle.onTintColor = palette.colorAccessory
+        toggle.onTintColor = palette.accessory
     }
 }
 
 extension UIView {
     func applyPrimaryBackground(_ theme: Theme) {
-        backgroundColor = theme.palette.colorPrimaryBackground
+        backgroundColor = theme.palette.primaryBackground
     }
 }
 
 extension UILabel {
     func apply(_ theme: Theme) {
-        textColor = theme.palette.colorPrimaryText
+        textColor = theme.palette.primaryText
     }
 
     func applyLight(_ theme: Theme) {
-        textColor = theme.palette.colorPrimaryLightText
+        textColor = theme.palette.primaryLightText
     }
 }
 
 extension UIButton {
     func apply(_ theme: Theme) {
-        tintColor = theme.palette.colorAction
+        tintColor = theme.palette.action
     }
 }
 
@@ -140,7 +140,7 @@ extension UITextField {
 
 extension UIActivityIndicatorView {
     func applyAccent(_ theme: Theme) {
-        color = theme.palette.colorAccent1
+        color = theme.palette.accent1
     }
 }
 
@@ -148,9 +148,9 @@ extension UIActivityIndicatorView {
 extension MFMailComposeViewController {
     func apply(_ theme: Theme) {
         let bar = navigationBar
-        bar.barTintColor = theme.palette.colorPrimaryBackground
-        bar.tintColor = theme.palette.colorPrimaryLightText
-        bar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.palette.colorPrimaryLightText]
+        bar.barTintColor = theme.palette.primaryBackground
+        bar.tintColor = theme.palette.primaryLightText
+        bar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.palette.primaryLightText]
         bar.largeTitleTextAttributes = bar.titleTextAttributes
     }
 }

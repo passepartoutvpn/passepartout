@@ -30,7 +30,7 @@ import Passepartout_Core
 extension UITableViewCell {
     func applyChecked(_ checked: Bool, _ theme: Theme) {
         accessoryType = checked ? .checkmark : .none
-        tintColor = Theme.current.palette.colorAccessory
+        tintColor = Theme.current.palette.accessory
     }
 }
 
@@ -38,52 +38,52 @@ extension DestructiveTableViewCell {
     func apply(_ theme: Theme) {
         accessoryType = .none
         selectionStyle = .default
-        captionColor = theme.palette.colorDestructive
+        captionColor = theme.palette.destructive
     }
 }
 
 extension FieldTableViewCell {
     func apply(_ theme: Theme) {
-        captionColor = theme.palette.colorPrimaryText
+        captionColor = theme.palette.primaryText
     }
 }
 
 extension SettingTableViewCell {
     func apply(_ theme: Theme) {
-        leftTextColor = theme.palette.colorPrimaryText
-        rightTextColor = theme.palette.colorSecondaryText
+        leftTextColor = theme.palette.primaryText
+        rightTextColor = theme.palette.secondaryText
     }
 }
 
 extension ToggleTableViewCell {
     func apply(_ theme: Theme) {
-        captionColor = theme.palette.colorPrimaryText
+        captionColor = theme.palette.primaryText
     }
 }
 
 extension SettingTableViewCell {
     func applyAction(_ theme: Theme) {
-        leftTextColor = theme.palette.colorAction
+        leftTextColor = theme.palette.action
         rightTextColor = nil
         accessoryType = .none
     }
     
     func applyVPN(_ theme: Theme, with vpnStatus: VPNStatus?, error: TunnelKitProvider.ProviderError?) {
-        leftTextColor = theme.palette.colorPrimaryText
+        leftTextColor = theme.palette.primaryText
         guard let vpnStatus = vpnStatus else {
             rightText = L10n.Vpn.disabled
-            rightTextColor = theme.palette.colorSecondaryText
+            rightTextColor = theme.palette.secondaryText
             return
         }
         
         switch vpnStatus {
         case .connecting:
             rightText = L10n.Vpn.connecting
-            rightTextColor = theme.palette.colorIndeterminate
+            rightTextColor = theme.palette.indeterminate
             
         case .connected:
             rightText = L10n.Vpn.active
-            rightTextColor = theme.palette.colorOn
+            rightTextColor = theme.palette.on
             
         case .disconnecting, .disconnected:
             var disconnectionReason: String?
@@ -117,11 +117,11 @@ extension SettingTableViewCell {
             switch vpnStatus {
             case .disconnecting:
                 rightText = disconnectionReason ?? L10n.Vpn.disconnecting
-                rightTextColor = theme.palette.colorIndeterminate
+                rightTextColor = theme.palette.indeterminate
                 
             case .disconnected:
                 rightText = disconnectionReason ?? L10n.Vpn.inactive
-                rightTextColor = theme.palette.colorOff
+                rightTextColor = theme.palette.off
                 
             default:
                 break
