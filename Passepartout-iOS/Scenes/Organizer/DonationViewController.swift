@@ -28,6 +28,8 @@ import StoreKit
 import Passepartout_Core
 
 class DonationViewController: UITableViewController, TableModelHost {
+    private var donationList: [InApp.Donation] = []
+
     private var productsByIdentifier: [String: SKProduct] = [:]
     
     private func setProducts(_ products: [SKProduct]) {
@@ -40,25 +42,23 @@ class DonationViewController: UITableViewController, TableModelHost {
     
     // MARK: TableModel
     
-    var model: TableModel<SectionType, InApp.Donation> = TableModel()
+    var model: TableModel<SectionType, RowType> = TableModel()
     
     func reloadModel() {
+        donationList = []
         model.clear()
         
         let completeList: [InApp.Donation] = [.tiny, .small, .medium, .big, .huge, .maxi]
-        var list: [InApp.Donation] = []
         for row in completeList {
             guard let _ = productsByIdentifier[row.rawValue] else {
                 continue
             }
-            list.append(row)
+            donationList.append(row)
         }
         model.add(.oneTime)
-//        model.add(.recurring)
         model.setHeader(L10n.Donation.Sections.OneTime.header, for: .oneTime)
         model.setFooter(L10n.Donation.Sections.OneTime.footer, for: .oneTime)
-//        model.setHeader(L10n.Donation.Sections.Recurring.header, for: .recurring)
-        model.set(list, in: .oneTime)
+        model.set(.donation, count: donationList.count, in: .oneTime)
     }
     
     // MARK: UIViewController
@@ -104,25 +104,31 @@ class DonationViewController: UITableViewController, TableModelHost {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let productId = productIdentifier(at: indexPath)
-        guard let product = productsByIdentifier[productId] else {
-            fatalError("Row with no associated product")
+        switch model.row(at: indexPath) {
+        case .donation:
+            let productId = productIdentifier(at: indexPath)
+            guard let product = productsByIdentifier[productId] else {
+                fatalError("Row with no associated product")
+            }
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = product.localizedTitle
+            cell.rightText = product.localizedPrice
+            return cell
         }
-        let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        cell.leftText = product.localizedTitle
-        cell.rightText = product.localizedPrice
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let productId = productIdentifier(at: indexPath)
-        guard let product = productsByIdentifier[productId] else {
-            fatalError("Row with no associated product")
-        }
-        InAppHelper.shared.purchase(product: product) {
-            self.handlePurchase(result: $0, error: $1)
+        switch model.row(at: indexPath) {
+        case .donation:
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            let productId = productIdentifier(at: indexPath)
+            guard let product = productsByIdentifier[productId] else {
+                fatalError("Row with no associated product")
+            }
+            InAppHelper.shared.purchase(product: product) {
+                self.handlePurchase(result: $0, error: $1)
+            }
         }
     }
 
@@ -145,12 +151,19 @@ class DonationViewController: UITableViewController, TableModelHost {
 
 extension DonationViewController {
     enum SectionType {
+        case inProgress
+
         case oneTime
-        
-        case recurring
+    }
+    
+    enum RowType {
+        case donation
     }
     
     private func productIdentifier(at indexPath: IndexPath) -> String {
-        return model.row(at: indexPath).rawValue
+        guard model.row(at: indexPath) == .donation else {
+            fatalError("Not a donation row")
+        }
+        return donationList[indexPath.row].rawValue
     }
 }
