@@ -121,7 +121,6 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        cell.apply(Theme.current)
         switch model.row(at: indexPath) {
         case .providerShortcut:
             cell.leftText = providers[indexPath.row]

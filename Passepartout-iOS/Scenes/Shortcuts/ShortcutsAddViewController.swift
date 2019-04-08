@@ -120,7 +120,6 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
         case .untrustCellular:
             cell.leftText = L10n.Shortcuts.Add.Cells.UntrustCellular.caption
         }
-        cell.apply(Theme.current)
         return cell
     }
     
