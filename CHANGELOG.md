@@ -12,30 +12,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ProtonVPN provider. [#7](https://github.com/passepartoutvpn/passepartout-ios/issues/7)
 - Italian translations. [#58](https://github.com/passepartoutvpn/passepartout-ios/pull/58)
 - In-app donations.
-
-### Changed
-
-- Automatic protocol defaults to UDP endpoints. [#61](https://github.com/passepartoutvpn/passepartout-ios/pull/61)
-
-### Fixed
-
-- Some providers may crash on VPN activation. [#57](https://github.com/passepartoutvpn/passepartout-ios/issues/57)
-- Regression in PIA unable to connect.
-- Mullvad dying due to ping timeout. [#62](https://github.com/passepartoutvpn/passepartout-ios/issues/62)
-
-## 1.3.1 Beta 1573 (2019-04-05)
-
-### Added
-
 - Provider logos. [#55](https://github.com/passepartoutvpn/passepartout-ios/pull/55)
 - Country flags. [#56](https://github.com/passepartoutvpn/passepartout-ios/pull/56)
 
 ### Changed
 
+- Automatic protocol defaults to UDP endpoints. [#61](https://github.com/passepartoutvpn/passepartout-ios/pull/61)
 - Improved Account screen, footers were hardly tappable.
 
 ### Fixed
 
+- Some providers may crash on VPN activation. [#57](https://github.com/passepartoutvpn/passepartout-ios/issues/57)
+- Mullvad dying due to ping timeout. [#62](https://github.com/passepartoutvpn/passepartout-ios/issues/62)
 - Pushing DOMAIN has no effect. [#48](https://github.com/passepartoutvpn/passepartout-ios/issues/48)
 
 ## 1.3.0 (2019-04-03)
