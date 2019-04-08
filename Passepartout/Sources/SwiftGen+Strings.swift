@@ -319,6 +319,10 @@ public enum L10n {
         /// Loading donations
         public static let caption = L10n.tr("Localizable", "donation.cells.loading.caption")
       }
+      public enum Purchasing {
+        /// Performing donation
+        public static let caption = L10n.tr("Localizable", "donation.cells.purchasing.caption")
+      }
     }
     public enum Sections {
       public enum OneTime {
