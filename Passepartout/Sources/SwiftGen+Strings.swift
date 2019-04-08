@@ -314,6 +314,12 @@ public enum L10n {
         }
       }
     }
+    public enum Cells {
+      public enum Loading {
+        /// Loading donations
+        public static let caption = L10n.tr("Localizable", "donation.cells.loading.caption")
+      }
+    }
     public enum Sections {
       public enum OneTime {
         /// If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.

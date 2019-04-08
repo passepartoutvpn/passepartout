@@ -32,6 +32,8 @@ class DonationViewController: UITableViewController, TableModelHost {
 
     private var productsByIdentifier: [String: SKProduct] = [:]
     
+    private var isLoading = true
+    
     private func setProducts(_ products: [SKProduct]) {
         for p in products {
             productsByIdentifier[p.productIdentifier] = p
@@ -43,10 +45,19 @@ class DonationViewController: UITableViewController, TableModelHost {
     // MARK: TableModel
     
     var model: TableModel<SectionType, RowType> = TableModel()
-    
+
     func reloadModel() {
         donationList = []
         model.clear()
+        
+        model.add(.oneTime)
+        model.setHeader(L10n.Donation.Sections.OneTime.header, for: .oneTime)
+        model.setFooter(L10n.Donation.Sections.OneTime.footer, for: .oneTime)
+
+        guard !isLoading else {
+            model.set([.loading], in: .oneTime)
+            return
+        }
         
         let completeList: [InApp.Donation] = [.tiny, .small, .medium, .big, .huge, .maxi]
         for row in completeList {
@@ -55,9 +66,6 @@ class DonationViewController: UITableViewController, TableModelHost {
             }
             donationList.append(row)
         }
-        model.add(.oneTime)
-        model.setHeader(L10n.Donation.Sections.OneTime.header, for: .oneTime)
-        model.setFooter(L10n.Donation.Sections.OneTime.footer, for: .oneTime)
         model.set(.donation, count: donationList.count, in: .oneTime)
     }
     
@@ -67,16 +75,16 @@ class DonationViewController: UITableViewController, TableModelHost {
         super.viewDidLoad()
         
         title = L10n.Donation.title
+        reloadModel()
 
         let inApp = InAppHelper.shared
         if inApp.products.isEmpty {
-            let hud = HUD()
-            hud.show()
             inApp.requestProducts {
-                hud.hide()
+                self.isLoading = false
                 self.setProducts($0)
             }
         } else {
+            isLoading = false
             setProducts(inApp.products)
         }
     }
@@ -105,6 +113,11 @@ class DonationViewController: UITableViewController, TableModelHost {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch model.row(at: indexPath) {
+        case .loading:
+            let cell = Cells.activity.dequeue(from: tableView, for: indexPath)
+            cell.textLabel?.text = L10n.Donation.Cells.Loading.caption
+            return cell
+
         case .donation:
             let productId = productIdentifier(at: indexPath)
             guard let product = productsByIdentifier[productId] else {
@@ -129,6 +142,9 @@ class DonationViewController: UITableViewController, TableModelHost {
             InAppHelper.shared.purchase(product: product) {
                 self.handlePurchase(result: $0, error: $1)
             }
+            
+        default:
+            break
         }
     }
 
@@ -151,12 +167,12 @@ class DonationViewController: UITableViewController, TableModelHost {
 
 extension DonationViewController {
     enum SectionType {
-        case inProgress
-
         case oneTime
     }
     
     enum RowType {
+        case loading
+
         case donation
     }
     
