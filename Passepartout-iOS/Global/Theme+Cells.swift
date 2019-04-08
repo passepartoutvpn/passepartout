@@ -61,6 +61,13 @@ extension ToggleTableViewCell {
     }
 }
 
+extension ActivityTableViewCell {
+    func apply(_ theme: Theme) {
+        textLabel?.text = nil
+        detailTextLabel?.text = nil
+    }
+}
+
 extension SettingTableViewCell {
     func applyAction(_ theme: Theme) {
         leftTextColor = theme.palette.action

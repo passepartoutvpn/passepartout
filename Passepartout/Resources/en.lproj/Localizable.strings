@@ -250,7 +250,8 @@
 "donation.title" = "Donate";
 "donation.sections.one_time.header" = "One time";
 "donation.sections.one_time.footer" = "If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
-//"donation.sections.recurring.header" = "Recurring";
+"donation.cells.loading.caption" = "Loading donations";
+"donation.cells.purchasing.caption" = "Performing donation";
 "donation.alerts.purchase.success.title" = "Thank you";
 "donation.alerts.purchase.success.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
 "donation.alerts.purchase.failure.message" = "Unable to perform the donation. %@";

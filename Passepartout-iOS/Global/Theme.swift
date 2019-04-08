@@ -102,6 +102,9 @@ extension Theme {
         
         let toggle = UISwitch.appearance()
         toggle.onTintColor = palette.accessory
+        
+        let activity = UIActivityIndicatorView.appearance()
+        activity.color = palette.accessory
     }
 }
 

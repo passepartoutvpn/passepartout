@@ -28,8 +28,14 @@ import StoreKit
 import Passepartout_Core
 
 class DonationViewController: UITableViewController, TableModelHost {
+    private var donationList: [InApp.Donation] = []
+
     private var productsByIdentifier: [String: SKProduct] = [:]
     
+    private var isLoading = true
+    
+    private var isPurchasing = false
+
     private func setProducts(_ products: [SKProduct]) {
         for p in products {
             productsByIdentifier[p.productIdentifier] = p
@@ -40,25 +46,34 @@ class DonationViewController: UITableViewController, TableModelHost {
     
     // MARK: TableModel
     
-    var model: TableModel<SectionType, InApp.Donation> = TableModel()
-    
+    var model: TableModel<SectionType, RowType> = TableModel()
+
     func reloadModel() {
+        donationList = []
         model.clear()
         
+        model.add(.oneTime)
+        model.setHeader(L10n.Donation.Sections.OneTime.header, for: .oneTime)
+        model.setFooter(L10n.Donation.Sections.OneTime.footer, for: .oneTime)
+
+        guard !isLoading else {
+            model.set([.loading], in: .oneTime)
+            return
+        }
+        
         let completeList: [InApp.Donation] = [.tiny, .small, .medium, .big, .huge, .maxi]
-        var list: [InApp.Donation] = []
         for row in completeList {
             guard let _ = productsByIdentifier[row.rawValue] else {
                 continue
             }
-            list.append(row)
+            donationList.append(row)
         }
-        model.add(.oneTime)
-//        model.add(.recurring)
-        model.setHeader(L10n.Donation.Sections.OneTime.header, for: .oneTime)
-        model.setFooter(L10n.Donation.Sections.OneTime.footer, for: .oneTime)
-//        model.setHeader(L10n.Donation.Sections.Recurring.header, for: .recurring)
-        model.set(list, in: .oneTime)
+        model.set(.donation, count: donationList.count, in: .oneTime)
+
+        if isPurchasing {
+            model.add(.activity)
+            model.set([.purchasing], in: .activity)
+        }
     }
     
     // MARK: UIViewController
@@ -67,16 +82,16 @@ class DonationViewController: UITableViewController, TableModelHost {
         super.viewDidLoad()
         
         title = L10n.Donation.title
+        reloadModel()
 
         let inApp = InAppHelper.shared
         if inApp.products.isEmpty {
-            let hud = HUD()
-            hud.show()
             inApp.requestProducts {
-                hud.hide()
+                self.isLoading = false
                 self.setProducts($0)
             }
         } else {
+            isLoading = false
             setProducts(inApp.products)
         }
     }
@@ -104,25 +119,52 @@ class DonationViewController: UITableViewController, TableModelHost {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let productId = productIdentifier(at: indexPath)
-        guard let product = productsByIdentifier[productId] else {
-            fatalError("Row with no associated product")
+        switch model.row(at: indexPath) {
+        case .loading:
+            let cell = Cells.activity.dequeue(from: tableView, for: indexPath)
+            cell.textLabel?.text = L10n.Donation.Cells.Loading.caption
+            return cell
+
+        case .purchasing:
+            let cell = Cells.activity.dequeue(from: tableView, for: indexPath)
+            cell.textLabel?.text = L10n.Donation.Cells.Purchasing.caption
+            return cell
+
+        case .donation:
+            let productId = productIdentifier(at: indexPath)
+            guard let product = productsByIdentifier[productId] else {
+                fatalError("Row with no associated product")
+            }
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = product.localizedTitle
+            cell.rightText = product.localizedPrice
+            cell.isTappable = !isPurchasing
+            return cell
         }
-        let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        cell.leftText = product.localizedTitle
-        cell.rightText = product.localizedPrice
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let productId = productIdentifier(at: indexPath)
-        guard let product = productsByIdentifier[productId] else {
-            fatalError("Row with no associated product")
-        }
-        InAppHelper.shared.purchase(product: product) {
-            self.handlePurchase(result: $0, error: $1)
+        switch model.row(at: indexPath) {
+        case .donation:
+            guard !isPurchasing else {
+                return
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
+            let productId = productIdentifier(at: indexPath)
+            guard let product = productsByIdentifier[productId] else {
+                fatalError("Row with no associated product")
+            }
+
+            isPurchasing = true
+            reloadModel()
+            tableView.reloadData()
+            
+            InAppHelper.shared.purchase(product: product) {
+                self.handlePurchase(result: $0, error: $1)
+            }
+            
+        default:
+            break
         }
     }
 
@@ -130,6 +172,9 @@ class DonationViewController: UITableViewController, TableModelHost {
         let alert: UIAlertController
         switch result {
         case .cancelled:
+            isPurchasing = false
+            reloadModel()
+            tableView.reloadData()
             return
 
         case .success:
@@ -138,19 +183,34 @@ class DonationViewController: UITableViewController, TableModelHost {
         case .failure:
             alert = Macros.alert(title, L10n.Donation.Alerts.Purchase.Failure.message(error?.localizedDescription ?? ""))
         }
-        alert.addCancelAction(L10n.Global.ok)
-        present(alert, animated: true, completion: nil)
+        alert.addCancelAction(L10n.Global.ok) {
+            self.isPurchasing = false
+            self.reloadModel()
+            self.tableView.reloadData()
+        }
+        present(alert, animated: true)
     }
 }
 
 extension DonationViewController {
     enum SectionType {
         case oneTime
+
+        case activity
+    }
+    
+    enum RowType {
+        case loading
         
-        case recurring
+        case purchasing
+
+        case donation
     }
     
     private func productIdentifier(at indexPath: IndexPath) -> String {
-        return model.row(at: indexPath).rawValue
+        guard model.row(at: indexPath) == .donation else {
+            fatalError("Not a donation row")
+        }
+        return donationList[indexPath.row].rawValue
     }
 }
