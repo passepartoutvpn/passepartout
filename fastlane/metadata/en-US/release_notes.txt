@@ -11,6 +11,5 @@
 ### Fixed
 
 - Some providers may crash on VPN activation.
-- Regression in PIA unable to connect.
 - Mullvad dying due to ping timeout.
 

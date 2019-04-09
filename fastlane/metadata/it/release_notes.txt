@@ -1,1 +1,14 @@
+### Aggiunti
 
+- Provider ProtonVPN.
+- Traduzione all'italiano
+- Donazioni in-app.
+
+### Cambiati
+
+- Il protocollo automatico ora preferisce UDP di default.
+
+### Risolti
+
+- Alcuni provider possono crashare all'attivazione della VPN.
+- Mullvad dying due to ping timeout.
