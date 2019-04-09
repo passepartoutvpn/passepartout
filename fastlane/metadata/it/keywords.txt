@@ -1,1 +1,1 @@
-vpn,openvpn,client,sicure,reti,proxy,privacy,censura,sicurezza,wifi,hotspot,universale
+gratis,openvpn,connect,pia,mullvad,proton,protonvpn,tunnelbear,windscribe,nordvpn,netflix,vpn,proxy
