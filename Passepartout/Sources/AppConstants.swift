@@ -203,7 +203,9 @@ public class AppConstants {
             .windscribe: "https://secure.link/kCsD0prd"
         ]
 
-        public static let externalResources: [Infrastructure.Name: String] = [:]
+        public static let externalResources: [Infrastructure.Name: String] = [
+            .nordVPN: "https://downloads.nordcdn.com/configs/archives/certificates/servers.zip" // 9MB
+        ]
     }
 
     public class Repos {

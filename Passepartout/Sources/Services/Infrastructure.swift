@@ -30,6 +30,8 @@ public struct Infrastructure: Codable {
     public enum Name: String, Codable, Comparable {
         case mullvad = "Mullvad"
         
+        case nordVPN = "NordVPN"
+
         case pia = "PIA"
         
         case protonVPN = "ProtonVPN"
