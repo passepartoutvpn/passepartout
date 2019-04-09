@@ -121,11 +121,12 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.debugLogFormat = configuration.debugLogFormat
         builder.masksPrivateData = configuration.masksPrivateData
 
-        if builder.sessionConfiguration.hostname == nil {
-            builder.resolvedAddresses = pool.addresses()
-        } else if let address = manualAddress {
+        if let address = manualAddress {
             builder.prefersResolvedAddresses = true
             builder.resolvedAddresses = [address]
+        } else if builder.sessionConfiguration.hostname == nil {
+            builder.prefersResolvedAddresses = true
+            builder.resolvedAddresses = pool.addresses()
         } else {
             builder.prefersResolvedAddresses = !preferences.resolvesHostname
             builder.resolvedAddresses = pool.addresses()

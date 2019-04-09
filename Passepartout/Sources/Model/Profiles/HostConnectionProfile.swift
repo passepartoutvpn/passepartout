@@ -66,6 +66,9 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.debugLogFormat = configuration.debugLogFormat
         builder.masksPrivateData = configuration.masksPrivateData
 
+        // forcibly override hostname with profile hostname (never nil)
+        builder.sessionConfiguration.hostname = hostname
+
         return builder.build()
     }
     
