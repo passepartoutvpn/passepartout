@@ -96,6 +96,32 @@ public struct InfrastructurePreset: Codable {
         return configuration.sessionConfiguration.endpointProtocols?.firstIndex(of: proto) != nil
     }
 
+    public func injectExternalConfiguration(_ configuration: inout TunnelKitProvider.ConfigurationBuilder, with name: Infrastructure.Name, pool: Pool) throws {
+        guard let external = external, !external.isEmpty else {
+            return
+        }
+        
+        let baseURL = name.externalURL
+
+        var sessionBuilder = configuration.sessionConfiguration.builder()
+        if let pattern = external[.ca] {
+            let filename = pattern.replacingOccurrences(of: "${id}", with: pool.id)
+            let caURL = baseURL.appendingPathComponent(filename)
+            sessionBuilder.ca = CryptoContainer(pem: try String(contentsOf: caURL))
+        }
+        if let pattern = external[.wrapKeyData] {
+            let filename = pattern.replacingOccurrences(of: "${id}", with: pool.id)
+            let tlsKeyURL = baseURL.appendingPathComponent(filename)
+            if let dummyWrap = sessionBuilder.tlsWrap {
+                let file = try String(contentsOf: tlsKeyURL)
+                if let staticKey = StaticKey(file: file, direction: .client) {
+                    sessionBuilder.tlsWrap = SessionProxy.TLSWrap(strategy: dummyWrap.strategy, key: staticKey)
+                }
+            }
+        }
+        configuration.sessionConfiguration = sessionBuilder.build()
+    }
+    
     // MARK: Codable
     
     public init(from decoder: Decoder) throws {

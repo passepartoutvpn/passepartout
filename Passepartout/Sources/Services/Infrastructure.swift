@@ -42,6 +42,10 @@ public struct Infrastructure: Codable {
             return rawValue.lowercased()
         }
 
+        public var externalURL: URL {
+            return GroupConstants.App.externalURL.appendingPathComponent(webName)
+        }
+
         public static func <(lhs: Name, rhs: Name) -> Bool {
             return lhs.webName < rhs.webName
         }

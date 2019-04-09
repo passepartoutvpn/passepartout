@@ -73,6 +73,8 @@ public class GroupConstants {
             try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             return url
         }()
+        
+        public static let externalURL = cachesURL.appendingPathComponent("External")
     }
     
     public class VPN {
