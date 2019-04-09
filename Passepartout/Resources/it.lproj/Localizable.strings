@@ -55,6 +55,7 @@
 "organizer.cells.uninstall.caption" = "Rimuovi configurazione VPN";
 "organizer.alerts.exhausted_providers.message" = "Hai creato profili per tutti i provider disponibili.";
 "organizer.alerts.add_host.message" = "Apri l'URL di un file di configurazione .ovpn da Safari, Mail o da un'altra app per configurare un host.\n\nPuoi anche importare un file .ovpn con iTunes File Sharing.";
+"organizer.alerts.cannot_donate.message" = "Nessun metodo di pagamento configurato su questo dispositivo.";
 "organizer.alerts.delete_vpn_profile.message" = "Vuoi veramente cancellare la configurazione VPN dalle impostazioni del tuo dispositivo? Quest'azione potrebbe risolvere alcuni stati erronei della VPN e non altererà i tuoi provider e i tuoi host.";
 
 "wizards.host.cells.title_input.caption" = "Titolo";

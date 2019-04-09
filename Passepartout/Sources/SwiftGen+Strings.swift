@@ -407,6 +407,10 @@ public enum L10n {
         /// Open an URL to an .ovpn configuration file from Safari, Mail or another app to set up a host profile.\n\nYou can also import an .ovpn with iTunes File Sharing.
         public static let message = L10n.tr("Localizable", "organizer.alerts.add_host.message")
       }
+      public enum CannotDonate {
+        /// There is no payment method configured on this device.
+        public static let message = L10n.tr("Localizable", "organizer.alerts.cannot_donate.message")
+      }
       public enum DeleteVpnProfile {
         /// Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your provider and host profiles.
         public static let message = L10n.tr("Localizable", "organizer.alerts.delete_vpn_profile.message")

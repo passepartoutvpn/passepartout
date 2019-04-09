@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import StoreKit
 import MessageUI
 import Passepartout_Core
 
@@ -193,6 +194,15 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
 
     private func donateToDeveloper() {
+        guard SKPaymentQueue.canMakePayments() else {
+            let alert = Macros.alert(
+                L10n.Organizer.Cells.Donate.caption,
+                L10n.Organizer.Alerts.CannotDonate.message
+            )
+            alert.addCancelAction(L10n.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
         perform(segue: StoryboardSegue.Organizer.donateSegueIdentifier, sender: nil)
     }
 
