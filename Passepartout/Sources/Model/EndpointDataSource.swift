@@ -27,7 +27,7 @@ import Foundation
 import TunnelKit
 
 public protocol EndpointDataSource {
-    var mainAddress: String { get }
+    var mainAddress: String? { get }
     
     var addresses: [String] { get }
     

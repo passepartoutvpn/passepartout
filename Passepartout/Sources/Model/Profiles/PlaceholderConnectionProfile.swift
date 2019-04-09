@@ -43,7 +43,7 @@ public class PlaceholderConnectionProfile: ConnectionProfile {
         return PlaceholderConnectionProfile(context, newId)
     }
     
-    public var mainAddress: String = ""
+    public var mainAddress: String? = nil
     
     public var addresses: [String] = []
     

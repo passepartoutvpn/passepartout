@@ -121,7 +121,9 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.debugLogFormat = configuration.debugLogFormat
         builder.masksPrivateData = configuration.masksPrivateData
 
-        if let address = manualAddress {
+        if builder.sessionConfiguration.hostname == nil {
+            builder.resolvedAddresses = pool.addresses()
+        } else if let address = manualAddress {
             builder.prefersResolvedAddresses = true
             builder.resolvedAddresses = [address]
         } else {
@@ -161,9 +163,9 @@ public extension ProviderConnectionProfile {
 }
 
 public extension ProviderConnectionProfile {
-    var mainAddress: String {
+    var mainAddress: String? {
         assert(pool != nil, "Getting provider main address but no pool set")
-        return pool?.hostname ?? ""
+        return pool?.hostname
     }
     
     var addresses: [String] {

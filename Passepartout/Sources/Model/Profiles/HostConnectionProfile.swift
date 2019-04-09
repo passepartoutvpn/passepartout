@@ -84,7 +84,7 @@ public extension HostConnectionProfile {
 }
 
 public extension HostConnectionProfile {
-    var mainAddress: String {
+    var mainAddress: String? {
         return hostname
     }
     
