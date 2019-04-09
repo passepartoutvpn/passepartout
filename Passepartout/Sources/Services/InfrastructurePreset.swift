@@ -30,6 +30,16 @@ import TunnelKit
 // ignores new JSON keys
 
 public struct InfrastructurePreset: Codable {
+    public enum ExternalKey: String, Codable {
+        case ca
+        
+        case client
+        
+        case key
+        
+        case wrapKeyData = "wrap.key.data"
+    }
+    
     public enum PresetKeys: String, CodingKey {
         case id
 
@@ -38,6 +48,8 @@ public struct InfrastructurePreset: Codable {
         case comment
         
         case configuration = "cfg"
+        
+        case external
     }
 
     public enum ConfigurationKeys: String, CodingKey {
@@ -78,6 +90,8 @@ public struct InfrastructurePreset: Codable {
 
     public let configuration: TunnelKitProvider.Configuration
     
+    public let external: [ExternalKey: String]?
+    
     public func hasProtocol(_ proto: EndpointProtocol) -> Bool {
         return configuration.sessionConfiguration.endpointProtocols?.firstIndex(of: proto) != nil
     }
@@ -89,6 +103,18 @@ public struct InfrastructurePreset: Codable {
         id = try container.decode(String.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
         comment = try container.decode(String.self, forKey: .comment)
+        if let rawExternal = try container.decodeIfPresent([String: String].self, forKey: .external) {
+            var remapped: [ExternalKey: String] = [:]
+            for entry in rawExternal {
+                guard let key = ExternalKey(rawValue: entry.key) else {
+                    continue
+                }
+                remapped[key] = entry.value
+            }
+            external = remapped
+        } else {
+            external = nil
+        }
 
         let cfgContainer = try container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
 
@@ -99,7 +125,7 @@ public struct InfrastructurePreset: Codable {
         }
         sessionBuilder.compressionFraming = try cfgContainer.decode(SessionProxy.CompressionFraming.self, forKey: .compressionFraming)
         sessionBuilder.compressionAlgorithm = try cfgContainer.decodeIfPresent(SessionProxy.CompressionAlgorithm.self, forKey: .compressionAlgorithm) ?? .disabled
-        sessionBuilder.ca = try cfgContainer.decode(CryptoContainer.self, forKey: .ca)
+        sessionBuilder.ca = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .ca)
         sessionBuilder.clientCertificate = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientCertificate)
         sessionBuilder.clientKey = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientKey)
         sessionBuilder.tlsWrap = try cfgContainer.decodeIfPresent(SessionProxy.TLSWrap.self, forKey: .tlsWrap)
@@ -126,13 +152,14 @@ public struct InfrastructurePreset: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
         try container.encode(comment, forKey: .comment)
+        try container.encodeIfPresent(external, forKey: .external)
 
         var cfgContainer = container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
         try cfgContainer.encode(configuration.sessionConfiguration.cipher, forKey: .cipher)
         try cfgContainer.encode(configuration.sessionConfiguration.digest, forKey: .digest)
         try cfgContainer.encode(configuration.sessionConfiguration.compressionFraming, forKey: .compressionFraming)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.compressionAlgorithm, forKey: .compressionAlgorithm)
-        try cfgContainer.encode(ca, forKey: .ca)
+        try cfgContainer.encodeIfPresent(ca, forKey: .ca)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientCertificate, forKey: .clientCertificate)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.clientKey, forKey: .clientKey)
         try cfgContainer.encodeIfPresent(configuration.sessionConfiguration.tlsWrap, forKey: .tlsWrap)
