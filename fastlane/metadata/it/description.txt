@@ -1,4 +1,4 @@
-Passepartout mira alla semplicità, integrandosi in modo naturale con la piattaforma iOS. Dimentica tutti gli aspetti complicati del mettere a punto una connessione VPN ad un server OpenVPN. Passepartout è un client essenziale che focalizza totalmente su un tunnel VPN stabile, risparmiandoti ogni dettaglio che non ti serva sapere.
+Passepartout mira alla semplicità, integrandosi in modo naturale con la piattaforma iOS. Dimentica gli aspetti complicati del mettere a punto una connessione ad un server OpenVPN. Passepartout è un client essenziale che focalizza solo su un tunnel VPN stabile, risparmiandoti i dettagli che non è necessario sapere.
 
 Passepartout non avvierà in background nessuna attività non richiesta che non sia la VPN, essendo per questo motivo anche più congeniale ai firewall.
 

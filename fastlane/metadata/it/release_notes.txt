@@ -11,4 +11,4 @@
 ### Risolti
 
 - Alcuni provider possono crashare all'attivazione della VPN.
-- Mullvad dying due to ping timeout.
+- Mullvad disconnesso per ping timeout.
