@@ -81,10 +81,13 @@ struct Theme {
 
     var detailTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode
     
+    var modalPresentationStyle: UIModalPresentationStyle
+    
     private init() {
         palette = Palette()
         masterTitleDisplayMode = .never
         detailTitleDisplayMode = .never
+        modalPresentationStyle = .formSheet
     }
 }
 
@@ -150,6 +153,8 @@ extension UIActivityIndicatorView {
 // XXX: status bar is broken
 extension MFMailComposeViewController {
     func apply(_ theme: Theme) {
+        modalPresentationStyle = theme.modalPresentationStyle
+        
         let bar = navigationBar
         bar.barTintColor = theme.palette.primaryBackground
         bar.tintColor = theme.palette.primaryLightText

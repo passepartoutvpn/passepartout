@@ -104,18 +104,6 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        guard let shortcut = pendingShortcut else {
-            return
-        }
-        pendingShortcut = nil
-        let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
-        vc.delegate = self
-        present(vc, animated: true, completion: nil)
-    }
-
     // MARK: Actions
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -146,6 +134,20 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
         wrappers?.sort()
         reloadModel()
         tableView.reloadData()
+    }
+    
+    private func finishAddingPendingShortcut() {
+        guard let shortcut = pendingShortcut else {
+            return
+        }
+        if let ip = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: ip, animated: true)
+        }
+        pendingShortcut = nil
+        let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
+        vc.modalPresentationStyle = Theme.current.modalPresentationStyle
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
     }
 
     @IBAction private func close() {
@@ -203,6 +205,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
                 break
             }
             let vc = INUIEditVoiceShortcutViewController(voiceShortcut: wrapper.original)
+            vc.modalPresentationStyle = Theme.current.modalPresentationStyle
             vc.delegate = self
             editedIndexPath = indexPath
             present(vc, animated: true, completion: nil)
@@ -216,7 +219,9 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     
     func shortcutsDidSelectIntent(intent: INIntent) {
         pendingShortcut = INShortcut(intent: intent)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            self.finishAddingPendingShortcut()
+        }
     }
     
     // MARK: INUIAddVoiceShortcutViewControllerDelegate

@@ -198,7 +198,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="6Cw-6b-1Xa" kind="presentation" identifier="ShortcutAddSegueIdentifier" id="Mnc-d9-blv"/>
+                        <segue destination="6Cw-6b-1Xa" kind="presentation" identifier="ShortcutAddSegueIdentifier" modalPresentationStyle="formSheet" id="Mnc-d9-blv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4j-l7-Hi8" userLabel="First Responder" sceneMemberID="firstResponder"/>
