@@ -30,12 +30,22 @@ public struct PoolGroup: Hashable, Comparable, CustomStringConvertible {
     
     public let area: String?
     
-    private var id: String {
+    private let id: String
+    
+    private let localizedId: String
+
+    public init(country: String, area: String?) {
+        self.country = country
+        self.area = area
+        
         var id = country
+        var localizedId = Utils.localizedCountry(country)
         if let area = area {
             id += area
+            localizedId += area
         }
-        return id
+        self.id = id
+        self.localizedId = localizedId
     }
     
     public func contains(_ pool: Pool) -> Bool {
@@ -51,7 +61,7 @@ public struct PoolGroup: Hashable, Comparable, CustomStringConvertible {
     // MARK: Comparable
     
     public static func <(lhs: PoolGroup, rhs: PoolGroup) -> Bool {
-        return lhs.id < rhs.id
+        return lhs.localizedId < rhs.localizedId
     }
     
     // MARK: CustomStringConvertible
