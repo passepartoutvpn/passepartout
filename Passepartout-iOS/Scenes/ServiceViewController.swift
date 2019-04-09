@@ -247,7 +247,14 @@ class ServiceViewController: UIViewController, TableModelHost {
             }
             vpn.reconnect { (error) in
                 guard error == nil else {
-                    cell.setOn(false, animated: true)
+
+                    // XXX: delay to avoid weird toggle state
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                        cell.setOn(false, animated: true)
+                        if error as? ApplicationError == .externalResources {
+                            self.requireDownload()
+                        }
+                    }
                     return
                 }
                 self.reloadModel()
@@ -437,6 +444,27 @@ class ServiceViewController: UIViewController, TableModelHost {
     private func reportConnectivityIssue() {
         let attach = IssueReporter.Attachments(debugLog: true, profile: uncheckedProfile)
         IssueReporter.shared.present(in: self, withAttachments: attach)
+    }
+    
+    private func requireDownload() {
+        guard let providerProfile = profile as? ProviderConnectionProfile else {
+            return
+        }
+        guard let downloadURL = AppConstants.URLs.externalResources[providerProfile.name] else {
+            return
+        }
+        
+        let alert = Macros.alert(
+            L10n.Service.Alerts.Download.title,
+            L10n.Service.Alerts.Download.message(providerProfile.name.rawValue)
+        )
+        alert.addCancelAction(L10n.Global.cancel)
+        alert.addDefaultAction(L10n.Global.ok) {
+            
+            // FIXME: start external download
+            print(downloadURL)
+        }
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: Notifications

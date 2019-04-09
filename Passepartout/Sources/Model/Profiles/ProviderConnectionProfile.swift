@@ -124,7 +124,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         do {
             try preset.injectExternalConfiguration(&builder, with: name, pool: pool)
         } catch {
-            fatalError("Could not find external preset resources")
+            throw ApplicationError.externalResources
         }
 
         if let address = manualAddress {

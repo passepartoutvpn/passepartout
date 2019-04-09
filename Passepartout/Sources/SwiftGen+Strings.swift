@@ -593,6 +593,14 @@ public enum L10n {
           public static let notAvailable = L10n.tr("Localizable", "service.alerts.data_count.messages.not_available")
         }
       }
+      public enum Download {
+        /// %@ requires the download of additional configuration files.\n\nConfirm to start the download.
+        public static func message(_ p1: String) -> String {
+          return L10n.tr("Localizable", "service.alerts.download.message", p1)
+        }
+        /// Download required
+        public static let title = L10n.tr("Localizable", "service.alerts.download.title")
+      }
       public enum MasksPrivateData {
         public enum Messages {
           /// In order to safely reset the current debug log and apply the new masking preference, you must reconnect to the VPN now.

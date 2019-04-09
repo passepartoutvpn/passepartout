@@ -132,6 +132,8 @@
 "service.alerts.data_count.messages.not_available" = "Information not available, are you connected?";
 "service.alerts.masks_private_data.messages.must_reconnect" = "In order to safely reset the current debug log and apply the new masking preference, you must reconnect to the VPN now.";
 "service.alerts.buttons.reconnect" = "Reconnect";
+"service.alerts.download.title" = "Download required";
+"service.alerts.download.message" = "%@ requires the download of additional configuration files.\n\nConfirm to start the download.";
 
 "account.sections.credentials.header" = "Credentials";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Use your %@ website account number and password \"m\".";

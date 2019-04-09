@@ -33,4 +33,6 @@ public enum ApplicationError: String, Error {
     case migration
 
     case inactiveProfile
+    
+    case externalResources
 }
