@@ -26,6 +26,7 @@
 import UIKit
 import NetworkExtension
 import CoreTelephony
+import MBProgressHUD
 import TunnelKit
 import Passepartout_Core
 
@@ -460,11 +461,15 @@ class ServiceViewController: UIViewController, TableModelHost {
         )
         alert.addCancelAction(L10n.Global.cancel)
         alert.addDefaultAction(L10n.Global.ok) {
-            
-            // FIXME: start external download
-            print(downloadURL)
+            self.confirmDownload(URL(string: downloadURL)!)
         }
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func confirmDownload(_ url: URL) {
+        _ = Downloader.shared.download(url: url, in: view) { (url, error) in
+            // FIXME: handle downloaded resource into current infrastructure
+        }
     }
     
     // MARK: Notifications
