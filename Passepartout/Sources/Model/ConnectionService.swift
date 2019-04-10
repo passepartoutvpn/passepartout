@@ -269,6 +269,11 @@ public class ConnectionService: Codable {
                     if providerProfile.preset == nil {
                         providerProfile.presetId = providerProfile.infrastructure.defaults.preset
                     }
+                    
+                    // fix renamed pool, fall back to default
+                    if providerProfile.pool == nil {
+                        providerProfile.poolId = providerProfile.infrastructure.defaults.pool
+                    }
 
                     profile = providerProfile
                     
