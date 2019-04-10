@@ -362,12 +362,12 @@ extension OrganizerViewController {
         switch active.context {
         case .provider:
             if let row = providers.index(where: { $0 == active.id }) {
-                return IndexPath(row: row, section: 0)
+                return IndexPath(row: row, section: model.index(ofSection: .providers))
             }
 
         case .host:
             if let row = hosts.index(where: { $0 == active.id }) {
-                return IndexPath(row: row, section: 1)
+                return IndexPath(row: row, section: model.index(ofSection: .hosts))
             }
         }
         return nil
