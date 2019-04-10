@@ -104,9 +104,6 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         reloadModel()
         
         tableView.reloadData()
-        if let ip = selectedIndexPath {
-            tableView.scrollToRowAsync(at: ip)
-        }
 
         service.delegate = self
     }
