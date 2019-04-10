@@ -192,7 +192,15 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         }
         let vc = OptionViewController<Pool>()
         vc.title = pool.localizedCountry
-        vc.options = groupPools
+        vc.options = groupPools.sorted {
+            guard let lnum = $0.num, let ln = Int(lnum) else {
+                return true
+            }
+            guard let rnum = $1.num, let rn = Int(rnum) else {
+                return false
+            }
+            return ln < rn
+        }
         vc.selectedOption = currentPool
         vc.descriptionBlock = { $0.areaId ?? "" } // XXX: fail gracefully
         vc.selectionBlock = {
