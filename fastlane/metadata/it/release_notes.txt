@@ -3,12 +3,17 @@
 - Provider ProtonVPN.
 - Traduzione all'italiano
 - Donazioni in-app.
+- Loghi provider.
+- Bandiere nazionali.
+- Scorciatoia stato VPN, apre il profilo attivo su selezione.
 
 ### Cambiati
 
 - Il protocollo automatico ora preferisce UDP di default.
+- Migliorata la schermata Account, i footer erano difficili da selezionare.
 
 ### Risolti
 
 - Alcuni provider possono crashare all'attivazione della VPN.
 - Mullvad disconnesso per ping timeout.
+- Il push DOMAIN da server non ha effetto.
