@@ -45,6 +45,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
+        model.add(.vpn)
         model.add(.providers)
         model.add(.hosts)
         if #available(iOS 12, *) {
@@ -53,6 +54,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         model.add(.support)
         model.add(.about)
         model.add(.destruction)
+        model.setHeader(L10n.Service.Sections.Vpn.header, for: .vpn)
         model.setHeader(L10n.Organizer.Sections.Providers.header, for: .providers)
         model.setHeader(L10n.Organizer.Sections.Hosts.header, for: .hosts)
         model.setFooter(L10n.Organizer.Sections.Providers.footer, for: .providers)
@@ -63,6 +65,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             model.set([.siriShortcuts], in: .siri)
         }
         model.setHeader(L10n.Organizer.Sections.Support.header, for: .support)
+        model.set([.connectionStatus], in: .vpn)
         model.set([.donate, .patreon, .translate], in: .support)
         model.set([.openAbout], in: .about)
         model.set([.uninstall], in: .destruction)
@@ -89,6 +92,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     
     // MARK: UIViewController
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -102,10 +109,11 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         navigationItem.rightBarButtonItem = editButtonItem
         Cells.destructive.register(with: tableView)
         reloadModel()
-        
         tableView.reloadData()
 
         service.delegate = self
+
+        NotificationCenter.default.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -307,12 +315,20 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     private func testTermination() {
         exit(0)
     }
+    
+    // MARK: Notifications
+
+    @objc private func vpnDidUpdate() {
+        tableView.reloadData()
+    }
 }
 
 // MARK: -
 
 extension OrganizerViewController {
     enum SectionType: Int {
+        case vpn
+        
         case providers
         
         case hosts
@@ -329,6 +345,8 @@ extension OrganizerViewController {
     }
     
     enum RowType: Int {
+        case connectionStatus
+        
         case profile
         
         case addProvider
@@ -352,7 +370,7 @@ extension OrganizerViewController {
         case testTermination
     }
     
-    private var selectedIndexPath: IndexPath? {
+    private var activeIndexPath: IndexPath? {
         guard let active = service.activeProfileKey else {
             return nil
         }
@@ -388,6 +406,12 @@ extension OrganizerViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch model.row(at: indexPath) {
+        case .connectionStatus:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.applyVPN(Theme.current, with: VPN.shared.isEnabled ? VPN.shared.status : nil, error: nil)
+            cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
+            return cell
+
         case .profile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             let rowProfile = profileKey(at: indexPath)
@@ -458,6 +482,9 @@ extension OrganizerViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
+        case .connectionStatus:
+            break
+            
         case .profile:
 //            selectedProfileId = profile(at: indexPath).id
             break
