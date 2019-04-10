@@ -165,6 +165,13 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 
     // MARK: Actions
     
+    private func selectActiveProfile() {
+        guard let activeIndexPath = activeIndexPath, let cell = tableView.cellForRow(at: activeIndexPath) else {
+            return
+        }
+        perform(segue: StoryboardSegue.Organizer.selectProfileSegueIdentifier, sender: cell)
+    }
+    
     private func addNewProvider() {
         var names = Set(InfrastructureFactory.shared.allNames)
         var createdNames: [Infrastructure.Name] = []
@@ -483,7 +490,7 @@ extension OrganizerViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
         case .connectionStatus:
-            break
+            selectActiveProfile()
             
         case .profile:
 //            selectedProfileId = profile(at: indexPath).id
