@@ -3,13 +3,18 @@
 - ProtonVPN provider.
 - Italian translations.
 - In-app donations.
+- Provider logos.
+- Country flags.
+- VPN status shortcut, enters active profile on selection.
 
 ### Changed
 
 - Automatic protocol defaults to UDP endpoints.
+- Improved Account screen, footers were hardly tappable.
 
 ### Fixed
 
 - Some providers may crash on VPN activation.
 - Mullvad dying due to ping timeout.
+- Pushing DOMAIN has no effect.
 
