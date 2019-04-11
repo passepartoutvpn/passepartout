@@ -173,7 +173,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         let model = models[indexPath.section]
         let group = model.sortedGroups[indexPath.row]
         let groupPools = model.poolsByGroup[group]!
-        guard let pool = groupPools.first else {
+        guard let pool = groupPools.randomElement() else {
             fatalError("Empty pools in group \(group)")
         }
         currentPool = pool
