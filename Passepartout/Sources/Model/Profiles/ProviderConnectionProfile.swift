@@ -72,10 +72,6 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         presetId = infrastructure.defaults.preset
     }
     
-    public func pools() -> [Pool] {
-        return infrastructure.pools
-    }
-    
     private func validateEndpoint() {
         guard let pool = pool, let preset = preset else {
             manualAddress = nil
