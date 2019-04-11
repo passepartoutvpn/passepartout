@@ -25,6 +25,8 @@
 
 import Foundation
 
+// TODO: retain max N pool models at a time (LRU)
+
 public class InfrastructureCache {
     public static let shared = InfrastructureCache()
     

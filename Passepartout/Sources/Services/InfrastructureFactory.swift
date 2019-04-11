@@ -28,6 +28,8 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
+// TODO: retain max N infrastructures at a time (LRU)
+
 public class InfrastructureFactory {
     private static func embedded(withName name: Infrastructure.Name) -> Infrastructure {
         guard let url = name.bundleURL else {
