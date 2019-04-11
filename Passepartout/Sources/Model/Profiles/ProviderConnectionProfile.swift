@@ -120,6 +120,12 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.shouldDebug = configuration.shouldDebug
         builder.debugLogFormat = configuration.debugLogFormat
         builder.masksPrivateData = configuration.masksPrivateData
+        
+        do {
+            try preset.injectExternalConfiguration(&builder, with: name, pool: pool)
+        } catch {
+            throw ApplicationError.externalResources
+        }
 
         if let address = manualAddress {
             builder.prefersResolvedAddresses = true
@@ -137,7 +143,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         } else {
             
             // restrict "Any" protocol to UDP, unless there are no UDP endpoints
-            let allEndpoints = preset.configuration.sessionConfiguration.endpointProtocols
+            let allEndpoints = builder.sessionConfiguration.endpointProtocols
             var endpoints = allEndpoints?.filter { $0.socketType == .udp }
             if endpoints?.isEmpty ?? true {
                 endpoints = allEndpoints

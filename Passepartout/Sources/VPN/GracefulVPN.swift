@@ -75,6 +75,10 @@ public class GracefulVPN {
             log.info("Reconnecting...")
             try vpn.reconnect(configuration: service.vpnConfiguration(), completionHandler: completionHandler)
         } catch let e {
+            guard e as? ApplicationError != .externalResources else {
+                completionHandler?(e)
+                return
+            }
             log.error("Could not reconnect: \(e)")
         }
     }
@@ -89,6 +93,10 @@ public class GracefulVPN {
             log.info("Reinstalling...")
             try vpn.install(configuration: service.vpnConfiguration(), completionHandler: completionHandler)
         } catch let e {
+            guard e as? ApplicationError != .externalResources else {
+                completionHandler?(e)
+                return
+            }
             log.error("Could not reinstall: \(e)")
         }
     }

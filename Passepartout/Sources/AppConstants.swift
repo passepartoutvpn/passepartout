@@ -202,6 +202,8 @@ public class AppConstants {
             .tunnelBear: "https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464",
             .windscribe: "https://secure.link/kCsD0prd"
         ]
+
+        public static let externalResources: [Infrastructure.Name: String] = [:]
     }
 
     public class Repos {

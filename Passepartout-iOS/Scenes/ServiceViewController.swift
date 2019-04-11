@@ -26,6 +26,7 @@
 import UIKit
 import NetworkExtension
 import CoreTelephony
+import MBProgressHUD
 import TunnelKit
 import Passepartout_Core
 
@@ -247,7 +248,14 @@ class ServiceViewController: UIViewController, TableModelHost {
             }
             vpn.reconnect { (error) in
                 guard error == nil else {
-                    cell.setOn(false, animated: true)
+
+                    // XXX: delay to avoid weird toggle state
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                        cell.setOn(false, animated: true)
+                        if error as? ApplicationError == .externalResources {
+                            self.requireDownload()
+                        }
+                    }
                     return
                 }
                 self.reloadModel()
@@ -437,6 +445,49 @@ class ServiceViewController: UIViewController, TableModelHost {
     private func reportConnectivityIssue() {
         let attach = IssueReporter.Attachments(debugLog: true, profile: uncheckedProfile)
         IssueReporter.shared.present(in: self, withAttachments: attach)
+    }
+    
+    private func requireDownload() {
+        guard let providerProfile = profile as? ProviderConnectionProfile else {
+            return
+        }
+        guard let downloadURL = AppConstants.URLs.externalResources[providerProfile.name] else {
+            return
+        }
+        
+        let alert = Macros.alert(
+            L10n.Service.Alerts.Download.title,
+            L10n.Service.Alerts.Download.message(providerProfile.name.rawValue)
+        )
+        alert.addCancelAction(L10n.Global.cancel)
+        alert.addDefaultAction(L10n.Global.ok) {
+            self.confirmDownload(URL(string: downloadURL)!)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func confirmDownload(_ url: URL) {
+        _ = Downloader.shared.download(url: url, in: view) { (url, error) in
+            self.handleDownloadedProviderResources(url: url, error: error)
+        }
+    }
+    
+    private func handleDownloadedProviderResources(url: URL?, error: Error?) {
+        guard let url = url else {
+            let alert = Macros.alert(
+                L10n.Service.Alerts.Download.title,
+                L10n.Service.Alerts.Download.failed(error?.localizedDescription ?? "")
+            )
+            alert.addCancelAction(L10n.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+
+        let hud = HUD(label: L10n.Service.Alerts.Download.Hud.extracting)
+        hud.show()
+        uncheckedProviderProfile.name.importExternalResources(from: url) {
+            hud.hide()
+        }
     }
     
     // MARK: Notifications

@@ -37,14 +37,6 @@ public struct Infrastructure: Codable {
         case tunnelBear = "TunnelBear"
         
         case windscribe = "Windscribe"
-        
-        public var webName: String {
-            return rawValue.lowercased()
-        }
-
-        public static func <(lhs: Name, rhs: Name) -> Bool {
-            return lhs.webName < rhs.webName
-        }
     }
     
     public struct Defaults: Codable {
@@ -76,5 +68,38 @@ public struct Infrastructure: Codable {
 
     public func preset(for identifier: String) -> InfrastructurePreset? {
         return presets.first { $0.id == identifier }
+    }
+}
+
+extension Infrastructure.Name {
+    public var webName: String {
+        return rawValue.lowercased()
+    }
+    
+    public static func <(lhs: Infrastructure.Name, rhs: Infrastructure.Name) -> Bool {
+        return lhs.webName < rhs.webName
+    }
+}
+
+extension Infrastructure.Name {
+    public var externalURL: URL {
+        return GroupConstants.App.externalURL.appendingPathComponent(webName)
+    }
+
+    public func importExternalResources(from url: URL, completionHandler: @escaping () -> Void) {
+        switch self {
+        default:
+            break
+        }
+    }
+
+    private func execute(task: @escaping () -> Void, completionHandler: @escaping () -> Void) {
+        let queue: DispatchQueue = .global(qos: .background)
+        queue.async {
+            task()
+            DispatchQueue.main.async {
+                completionHandler()
+            }
+        }
     }
 }
