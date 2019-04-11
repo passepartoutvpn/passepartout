@@ -594,12 +594,20 @@ public enum L10n {
         }
       }
       public enum Download {
+        /// Failed to download configuration files. %@
+        public static func failed(_ p1: String) -> String {
+          return L10n.tr("Localizable", "service.alerts.download.failed", p1)
+        }
         /// %@ requires the download of additional configuration files.\n\nConfirm to start the download.
         public static func message(_ p1: String) -> String {
           return L10n.tr("Localizable", "service.alerts.download.message", p1)
         }
         /// Download required
         public static let title = L10n.tr("Localizable", "service.alerts.download.title")
+        public enum Hud {
+          /// Extracting files, please be patient...
+          public static let extracting = L10n.tr("Localizable", "service.alerts.download.hud.extracting")
+        }
       }
       public enum MasksPrivateData {
         public enum Messages {

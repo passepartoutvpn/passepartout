@@ -468,7 +468,25 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private func confirmDownload(_ url: URL) {
         _ = Downloader.shared.download(url: url, in: view) { (url, error) in
-            // FIXME: handle downloaded resource into current infrastructure
+            self.handleDownloadedProviderResources(url: url, error: error)
+        }
+    }
+    
+    private func handleDownloadedProviderResources(url: URL?, error: Error?) {
+        guard let url = url else {
+            let alert = Macros.alert(
+                L10n.Service.Alerts.Download.title,
+                L10n.Service.Alerts.Download.failed(error?.localizedDescription ?? "")
+            )
+            alert.addCancelAction(L10n.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+
+        let hud = HUD(label: L10n.Service.Alerts.Download.Hud.extracting)
+        hud.show()
+        uncheckedProviderProfile.name.importExternalResources(from: url) {
+            hud.hide()
         }
     }
     

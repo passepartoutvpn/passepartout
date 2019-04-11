@@ -40,12 +40,13 @@ import MBProgressHUD
 class HUD {
     private let backend: MBProgressHUD
     
-    init() {
+    init(label: String? = nil) {
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Could not locate front window?")
         }
         
         backend = MBProgressHUD.showAdded(to: window, animated: true)
+        backend.label.text = label
         backend.backgroundView.backgroundColor = UIColor(white: 0.0, alpha: 0.6)
         backend.mode = .indeterminate
         backend.removeFromSuperViewOnHide = true
