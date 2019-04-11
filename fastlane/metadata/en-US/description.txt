@@ -17,6 +17,7 @@ FEATURES
 
 - Convenient presets for major VPN networks:
   - Mullvad
+  - NordVPN
   - Private Internet Access
   - ProtonVPN
   - TunnelBear

@@ -56,6 +56,7 @@ Passepartout is a VPN client and does absolutely nothing else without your conse
 Passepartout can connect to a few well-known VPN providers with an existing account:
 
 - [Mullvad][app-net-mullvad]
+- [NordVPN][app-net-nordvpn]
 - [Private Internet Access][app-net-pia]
 - [ProtonVPN][app-net-protonvpn]
 - [TunnelBear][app-net-tunnelbear]
@@ -124,6 +125,7 @@ The country flags are taken from: <https://github.com/lipis/flag-icon-css/>
 
 - MBProgressHUD - © 2009-2016 Matej Bukovinski
 - PIATunnel - © 2018-Present Private Internet Access
+- SSZipArchive - © 2010-2012 Sam Soffes
 - SwiftGen - © 2018 SwiftGen
 - SwiftyBeaver - © 2015 Sebastian Kreutzberger
 - lzo - © 1996-2017 Markus F.X.J. Oberhumer
@@ -146,6 +148,7 @@ Website: [passepartoutvpn.app][about-website]
 
 [app-api]: https://github.com/passepartoutvpn/passepartout-api
 [app-net-mullvad]: https://mullvad.net/en/account/create/
+[app-net-nordvpn]: https://join.nordvpn.com/order/
 [app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
 [app-net-protonvpn]: https://protonvpn.net/?aid=keeshux
 [app-net-tunnelbear]: https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464

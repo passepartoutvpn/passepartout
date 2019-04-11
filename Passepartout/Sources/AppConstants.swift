@@ -197,6 +197,7 @@ public class AppConstants {
 
         public static let referrals: [Infrastructure.Name: String] = [
             .mullvad: "https://mullvad.net/en/account/create/",
+            .nordVPN: "https://join.nordvpn.com/order/",
             .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/",
             .protonVPN: "https://protonvpn.net/?aid=keeshux",
             .tunnelBear: "https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464",
@@ -254,6 +255,11 @@ public class AppConstants {
                 "PIATunnel",
                 "MIT",
                 "https://raw.githubusercontent.com/pia-foss/tunnel-apple/master/LICENSE"
+            ),
+            License(
+                "SSZipArchive",
+                "MIT",
+                "https://raw.githubusercontent.com/samsoffes/ssziparchive/master/LICENSE"
             ),
             License(
                 "SwiftGen",
