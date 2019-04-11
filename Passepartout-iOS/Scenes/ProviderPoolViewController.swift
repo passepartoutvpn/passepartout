@@ -119,10 +119,10 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     private var selectedIndexPath: IndexPath? {
         for (i, model) in models.enumerated() {
             for entries in model.poolsByGroup.enumerated() {
-                guard let _ = entries.element.value.index(where: { $0.id == currentPool?.id }) else {
+                guard let _ = entries.element.value.firstIndex(where: { $0.id == currentPool?.id }) else {
                     continue
                 }
-                guard let row = model.sortedGroups.index(of: entries.element.key) else {
+                guard let row = model.sortedGroups.firstIndex(of: entries.element.key) else {
                     continue
                 }
                 return IndexPath(row: row, section: i)

@@ -78,7 +78,7 @@ extension ProviderPresetViewController: UITableViewDataSource, UITableViewDelega
     }
     
     private var selectedIndexPath: IndexPath? {
-        guard let i = presets.index(where: { $0.id == currentPresetId }) else {
+        guard let i = presets.firstIndex(where: { $0.id == currentPresetId }) else {
             return nil
         }
         return IndexPath(row: 0, section: i)

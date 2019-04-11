@@ -79,7 +79,7 @@ public struct InfrastructurePreset: Codable {
     public let configuration: TunnelKitProvider.Configuration
     
     public func hasProtocol(_ proto: EndpointProtocol) -> Bool {
-        return configuration.sessionConfiguration.endpointProtocols?.index(of: proto) != nil
+        return configuration.sessionConfiguration.endpointProtocols?.firstIndex(of: proto) != nil
     }
 
     // MARK: Codable

@@ -181,7 +181,7 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     private var selectedIndexPath: IndexPath? {
-        guard let i = endpointAddresses.index(where: { $0 == currentAddress }) else {
+        guard let i = endpointAddresses.firstIndex(where: { $0 == currentAddress }) else {
             return nil
         }
         return IndexPath(row: i, section: 0)
