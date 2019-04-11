@@ -75,6 +75,9 @@ public class StandardVPNProvider: VPNProvider {
             
         case .disconnected, .invalid:
             return .disconnected
+
+        @unknown default:
+            return .disconnected
         }
     }
     
@@ -202,8 +205,8 @@ public class StandardVPNProvider: VPNProvider {
                         }
                         return
                     }
-                    let bytesIn: UInt = data.subdata(in: 0..<8).withUnsafeBytes { $0.pointee }
-                    let bytesOut: UInt = data.subdata(in: 8..<16).withUnsafeBytes { $0.pointee }
+                    let bytesIn: UInt = data.subdata(in: 0..<8).withUnsafeBytes { $0.load(as: UInt.self) }
+                    let bytesOut: UInt = data.subdata(in: 8..<16).withUnsafeBytes { $0.load(as: UInt.self) }
                     DispatchQueue.main.async {
                         completionHandler((bytesIn, bytesOut))
                     }
