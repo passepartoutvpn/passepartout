@@ -102,6 +102,10 @@ public enum L10n {
             public static func mullvad(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.mullvad", p1)
             }
+            /// Use your %@ website credentials. Your username is usually your e-mail.
+            public static func nordvpn(_ p1: String) -> String {
+              return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.nordvpn", p1)
+            }
             /// Use your %@ website credentials. Your username is usually numeric with a "p" prefix.
             public static func pia(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.pia", p1)

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- NordVPN provider. [#65](https://github.com/passepartoutvpn/passepartout-ios/pull/65)
+
 ### Fixed
 
 - VPN status cell doesn't always enter active profile. [#63](https://github.com/passepartoutvpn/passepartout-ios/issues/63)

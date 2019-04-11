@@ -58,6 +58,7 @@ public class InfrastructureFactory {
     // manually pre-sorted
     public let allNames: [Infrastructure.Name] = [
         .mullvad,
+        .nordVPN,
         .pia,
         .protonVPN,
         .tunnelBear,

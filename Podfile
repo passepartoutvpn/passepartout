@@ -9,6 +9,7 @@ def shared_pods
     pod 'TunnelKit/LZO', :git => 'https://github.com/keeshux/tunnelkit', :commit => '4af8305'
     #pod 'TunnelKit', :path => '../../personal/tunnelkit'
     #pod 'TunnelKit/LZO', :path => '../../personal/tunnelkit'
+    pod 'SSZipArchive'
 end
 
 target 'Passepartout-Core' do

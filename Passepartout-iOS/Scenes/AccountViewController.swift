@@ -65,6 +65,9 @@ class AccountViewController: UIViewController, TableModelHost {
         case .mullvad:
             return V.mullvad(name.rawValue)
             
+        case .nordVPN:
+            return V.nordvpn(name.rawValue)
+            
         case .pia:
             return V.pia(name.rawValue)
             
