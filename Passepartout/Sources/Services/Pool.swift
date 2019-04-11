@@ -77,9 +77,12 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
     
     public let hostname: String?
     
-    public let numericAddresses: [UInt32]
+    public let numericAddresses: [UInt32]?
     
     public func hasAddress(_ address: String) -> Bool {
+        guard let numericAddresses = numericAddresses else {
+            return false
+        }
         guard let ipv4 = DNSResolver.ipv4(fromString: address) else {
             return false
         }
@@ -88,7 +91,7 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
 
     // XXX: inefficient, can't easily use lazy on struct
     public func addresses() -> [String] {
-        var addrs = numericAddresses.map { DNSResolver.string(fromIPv4: $0) }
+        var addrs = numericAddresses?.map { DNSResolver.string(fromIPv4: $0) } ?? []
         if let hostname = hostname {
             addrs.insert(hostname, at: 0)
         }

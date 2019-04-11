@@ -64,10 +64,18 @@ public struct Infrastructure: Codable {
         return try JSONDecoder().decode(Infrastructure.self, from: json)
     }
     
+    public func defaultPool() -> Pool? {
+        return pool(withPrefix: defaults.pool)
+    }
+    
     public func pool(for identifier: String) -> Pool? {
         return pools.first { $0.id == identifier }
     }
 
+    public func pool(withPrefix prefix: String) -> Pool? {
+        return pools.first { $0.id.hasPrefix(prefix) }
+    }
+    
     public func preset(for identifier: String) -> InfrastructurePreset? {
         return presets.first { $0.id == identifier }
     }

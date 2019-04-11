@@ -271,8 +271,8 @@ public class ConnectionService: Codable {
                     }
                     
                     // fix renamed pool, fall back to default
-                    if providerProfile.pool == nil {
-                        providerProfile.poolId = providerProfile.infrastructure.defaults.pool
+                    if providerProfile.pool == nil, let fallbackPool = providerProfile.infrastructure.defaultPool() {
+                        providerProfile.poolId = fallbackPool.id
                     }
 
                     profile = providerProfile

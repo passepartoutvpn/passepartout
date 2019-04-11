@@ -40,7 +40,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     }
 
     public var pool: Pool? {
-        return infrastructure.pool(for: poolId) ?? infrastructure.pool(for: infrastructure.defaults.pool)
+        return infrastructure.pool(for: poolId)
     }
 
     public var presetId: String {
@@ -68,7 +68,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
 
         username = nil
 
-        poolId = infrastructure.defaults.pool
+        poolId = infrastructure.defaultPool()?.id ?? infrastructure.defaults.pool
         presetId = infrastructure.defaults.preset
     }
     
