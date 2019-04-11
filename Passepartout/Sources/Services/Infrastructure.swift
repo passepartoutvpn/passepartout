@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKit
+import SSZipArchive
 
 public struct Infrastructure: Codable {
     public enum Name: String, Codable, Comparable {
@@ -89,10 +89,17 @@ extension Infrastructure.Name {
     }
 
     public func importExternalResources(from url: URL, completionHandler: @escaping () -> Void) {
+        var task: () -> Void
         switch self {
+        case .nordVPN:
+            task = {
+                SSZipArchive.unzipFile(atPath: url.path, toDestination: self.externalURL.path)
+            }
+            
         default:
-            break
+            task = {}
         }
+        execute(task: task, completionHandler: completionHandler)
     }
 
     private func execute(task: @escaping () -> Void, completionHandler: @escaping () -> Void) {
