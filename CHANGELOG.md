@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- VPN status cell doesn't always enter active profile. [#63](https://github.com/passepartoutvpn/passepartout-ios/issues/63)
 - Masking preference not retained. [#64](https://github.com/passepartoutvpn/passepartout-ios/issues/64)
 
 ## 1.4.0 (2019-04-11)

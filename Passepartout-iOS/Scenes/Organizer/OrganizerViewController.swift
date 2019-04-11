@@ -155,7 +155,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             if selectedProfile == nil, let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                 selectedProfile = profile(at: indexPath)
             }
-            assert(selectedProfile != nil, "No selected profile")
+            guard selectedProfile != nil else {
+                assertionFailure("No selected profile")
+                return
+            }
 
             vc.setProfile(selectedProfile)
         } else if let providerVC = destination as? WizardProviderViewController {
@@ -164,12 +167,16 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
 
     // MARK: Actions
-    
-    private func selectActiveProfile() {
-        guard let activeIndexPath = activeIndexPath, let cell = tableView.cellForRow(at: activeIndexPath) else {
+
+    private func enterProfile(_ profile: ConnectionProfile) {
+        perform(segue: StoryboardSegue.Organizer.selectProfileSegueIdentifier, sender: profile)
+    }
+
+    private func enterActiveProfile() {
+        guard let activeProfile = service.activeProfile else {
             return
         }
-        perform(segue: StoryboardSegue.Organizer.selectProfileSegueIdentifier, sender: cell)
+        enterProfile(activeProfile)
     }
     
     private func addNewProvider() {
@@ -377,24 +384,6 @@ extension OrganizerViewController {
         case testTermination
     }
     
-    private var activeIndexPath: IndexPath? {
-        guard let active = service.activeProfileKey else {
-            return nil
-        }
-        switch active.context {
-        case .provider:
-            if let row = providers.index(where: { $0 == active.id }) {
-                return IndexPath(row: row, section: model.index(ofSection: .providers))
-            }
-
-        case .host:
-            if let row = hosts.index(where: { $0 == active.id }) {
-                return IndexPath(row: row, section: model.index(ofSection: .hosts))
-            }
-        }
-        return nil
-    }
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return model.count
     }
@@ -490,12 +479,11 @@ extension OrganizerViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
         case .connectionStatus:
-            selectActiveProfile()
+            enterActiveProfile()
             
         case .profile:
-//            selectedProfileId = profile(at: indexPath).id
-            break
-
+            enterProfile(profile(at: indexPath))
+            
         case .addProvider:
             addNewProvider()
 
