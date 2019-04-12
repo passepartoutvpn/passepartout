@@ -1,20 +1,10 @@
 ### Added
 
-- ProtonVPN provider.
-- Italian translations.
-- In-app donations.
-- Provider logos.
-- Country flags.
-- VPN status shortcut, enters active profile on selection.
-
-### Changed
-
-- Automatic protocol defaults to UDP endpoints.
-- Improved Account screen, footers were hardly tappable.
+- NordVPN provider.
+- Support for `dhcp-option PROXY_HTTP[S]`. [tunnelkit#74](https://github.com/keeshux/tunnelkit/issues/74)
 
 ### Fixed
 
-- Some providers may crash on VPN activation.
-- Mullvad dying due to ping timeout.
-- Pushing DOMAIN has no effect.
+- VPN status cell doesn't always enter active profile.
+- Masking preference not retained.
 
