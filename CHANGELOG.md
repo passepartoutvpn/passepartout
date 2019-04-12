@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - NordVPN provider. [#65](https://github.com/passepartoutvpn/passepartout-ios/pull/65)
+- Support for `dhcp-option PROXY_HTTP[S]`. [tunnelkit#74](https://github.com/keeshux/tunnelkit/issues/74)
 
 ### Fixed
 
