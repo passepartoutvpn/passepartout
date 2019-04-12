@@ -7,7 +7,7 @@ RELEASE_NOTES="fastlane/metadata/en-US/release_notes.txt"
 
 sed "s/Unreleased/$VERSION Beta $BUILD ($DATE)/" $CHANGELOG >$CHANGELOG.tmp
 mv $CHANGELOG.tmp $CHANGELOG
-ci/latest-changelog.sh | sed -E "s/^(.*) \[#.*$/\1/" >ci/$CHANGELOG
+ci/latest-changelog.sh | sed -E "s/^(.*) \[.*#.*$/\1/" >ci/$CHANGELOG
 cp ci/$CHANGELOG $RELEASE_NOTES
 git add $CHANGELOG $RELEASE_NOTES
 git commit -m "Set beta release"
