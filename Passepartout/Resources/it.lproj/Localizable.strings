@@ -179,7 +179,6 @@
 "configuration.cells.eku.caption" = "Verifica estesa";
 "configuration.cells.dns_server.caption" = "Indirizzo";
 "configuration.cells.dns_domain.caption" = "Dominio";
-"configuration.cells.dns_domain.value.none" = "Nessuno";
 "configuration.cells.compression_framing.caption" = "Framing";
 "configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
 "configuration.cells.compression_framing.value.compress" = "--compress";
@@ -193,6 +192,7 @@
 "configuration.cells.random_endpoint.caption" = "Endpoint casuale";
 "configuration.cells.all.value.enabled" = "Abilitato";
 "configuration.cells.all.value.disabled" = "Disabilitato";
+"configuration.cells.all.value.none" = "Nessuno";
 
 "debug_log.buttons.previous" = "Precedente";
 "debug_log.buttons.next" = "Successivo";
