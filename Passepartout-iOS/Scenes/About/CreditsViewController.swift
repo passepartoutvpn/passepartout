@@ -30,7 +30,11 @@ class CreditsViewController: UITableViewController, TableModelHost {
     private let licenses = AppConstants.License.all
     
     private let notices = AppConstants.Notice.all
-    
+
+    private let languages = AppConstants.Translations.authorByLanguage.keys.sorted {
+        return Utils.localizedCountry($0) < Utils.localizedCountry($1)
+    }
+
     // MARK: TableModelHost
     
     var model: TableModel<SectionType, RowType> = TableModel()
@@ -38,12 +42,15 @@ class CreditsViewController: UITableViewController, TableModelHost {
     func reloadModel() {
         model.add(.licenses)
         model.add(.notices)
+        model.add(.translations)
         
         model.setHeader(L10n.Credits.Sections.Licenses.header, for: .licenses)
         model.setHeader(L10n.Credits.Sections.Notices.header, for: .notices)
+        model.setHeader(L10n.Credits.Sections.Translations.header, for: .translations)
 
         model.set(.license, count: licenses.count, in: .licenses)
         model.set(.notice, count: notices.count, in: .notices)
+        model.set(.translation, count: languages.count, in: .translations)
     }
     
     // MARK: UIViewController
@@ -53,6 +60,13 @@ class CreditsViewController: UITableViewController, TableModelHost {
         
         title = L10n.Credits.title
         reloadModel()
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard let cell = sender as? SettingTableViewCell, let indexPath = tableView.indexPath(for: cell) else {
+            return false
+        }
+        return model.row(at: indexPath) != .translation
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,6 +83,9 @@ class CreditsViewController: UITableViewController, TableModelHost {
 
         case .notice:
             vc.text = notices[indexPath.row].statement
+            
+        default:
+            break
         }
     }
 }
@@ -78,12 +95,16 @@ extension CreditsViewController {
         case licenses
         
         case notices
+
+        case translations
     }
 
     enum RowType: Int {
         case license
         
         case notice
+
+        case translation
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -110,6 +131,16 @@ extension CreditsViewController {
             let obj = notices[indexPath.row]
             cell.leftText = obj.name
             cell.rightText = nil
+            
+        case .translation:
+            let lang = languages[indexPath.row]
+            guard let author = AppConstants.Translations.authorByLanguage[lang] else {
+                fatalError("Author not found for language \(lang)")
+            }
+            cell.leftText = Utils.localizedLanguage(lang)
+            cell.rightText = author
+            cell.accessoryType = .none
+            cell.isTappable = false
         }
         return cell
     }
