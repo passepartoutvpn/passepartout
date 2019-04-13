@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.5.0 Beta 1706 (2019-04-13)
+## Unreleased
 
 ### Added
 
@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - VPN status cell doesn't always enter active profile. [#63](https://github.com/passepartoutvpn/passepartout-ios/issues/63)
 - Masking preference not retained. [#64](https://github.com/passepartoutvpn/passepartout-ios/issues/64)
+- SoftEther timing out. [tunnelkit#67](https://github.com/keeshux/tunnelkit/issues/67)
 
 ## 1.4.0 (2019-04-11)
 
