@@ -1,7 +1,7 @@
 ### Added
 
 - NordVPN provider.
-- Support for `dhcp-option PROXY_HTTP[S]`. [tunnelkit#74](https://github.com/keeshux/tunnelkit/issues/74)
+- Support for `dhcp-option PROXY_HTTP[S]`.
 
 ### Fixed
 
