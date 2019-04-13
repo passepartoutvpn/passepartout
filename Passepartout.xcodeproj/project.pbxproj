@@ -78,7 +78,6 @@
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
 		0E58BD9322404EF1006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; };
 		0E58BF65224152F9006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
-		0E58BF68224305A8006FB157 /* Countries.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E58BF6A224305A8006FB157 /* Countries.strings */; };
 		0E66A270225FE25800F9C779 /* PoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A26F225FE25800F9C779 /* PoolModel.swift */; };
 		0E66A272225FE5FB00F9C779 /* InfrastructureCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A271225FE5FB00F9C779 /* InfrastructureCache.swift */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
@@ -215,7 +214,6 @@
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E58BF69224305A8006FB157 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Countries.strings; sourceTree = "<group>"; };
 		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
 		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
 		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
@@ -535,7 +533,6 @@
 			isa = PBXGroup;
 			children = (
 				0E0EABC721DF853C0069DAE7 /* Web */,
-				0E58BF6A224305A8006FB157 /* Countries.strings */,
 				0E58BD9122404EF1006FB157 /* Intents.intentdefinition */,
 				0E05C5DF20D198B9006EE732 /* Localizable.strings */,
 			);
@@ -817,7 +814,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E58BF68224305A8006FB157 /* Countries.strings in Resources */,
 				0E3152DD223FA06100F61841 /* Localizable.strings in Resources */,
 				0E3152DE223FA06400F61841 /* Web in Resources */,
 			);
@@ -1192,14 +1188,6 @@
 				0E242735225944060064A1A3 /* en */,
 			);
 			name = Intents.intentdefinition;
-			sourceTree = "<group>";
-		};
-		0E58BF6A224305A8006FB157 /* Countries.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E58BF69224305A8006FB157 /* en */,
-			);
-			name = Countries.strings;
 			sourceTree = "<group>";
 		};
 		0ED38ADC213F44D00004D387 /* Organizer.storyboard */ = {

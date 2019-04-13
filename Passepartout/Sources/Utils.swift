@@ -134,8 +134,7 @@ public class Utils {
     }
 
     public static func localizedCountry(_ code: String) -> String {
-        let format = NSLocalizedString(code.uppercased(), tableName: "Countries", bundle: Bundle(for: Utils.self), comment: "")
-        return String(format: format, locale: Locale.current)
+        return Locale.current.localizedString(forRegionCode: code) ?? code
     }
 
     public static func localizedLanguage(_ code: String) -> String? {
