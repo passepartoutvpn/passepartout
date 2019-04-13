@@ -169,7 +169,7 @@
 "configuration.sections.reset.footer" = "If you ended up with broken connectivity after changing the communication parameters, tap to revert to the original configuration.";
 "configuration.sections.tls.header" = "TLS";
 "configuration.sections.compression.header" = "Compression";
-"configuration.sections.dns.header" = "DNS";
+"configuration.sections.network.header" = "Network";
 "configuration.sections.other.header" = "Other";
 "configuration.cells.cipher.caption" = "Cipher";
 "configuration.cells.digest.caption" = "Authentication";
@@ -182,9 +182,10 @@
 "configuration.cells.tls_wrapping.value.auth" = "Authentication";
 "configuration.cells.tls_wrapping.value.crypt" = "Encryption";
 "configuration.cells.eku.caption" = "Extended verification";
-"configuration.cells.dns_server.caption" = "Address";
+"configuration.cells.dns_server.caption" = "DNS";
 "configuration.cells.dns_domain.caption" = "Domain";
-"configuration.cells.dns_domain.value.none" = "None";
+"configuration.cells.proxy_http.caption" = "Proxy";
+"configuration.cells.proxy_https.caption" = "Proxy (HTTPS)";
 "configuration.cells.compression_framing.caption" = "Framing";
 "configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
 "configuration.cells.compression_framing.value.compress" = "--compress";
@@ -198,6 +199,7 @@
 "configuration.cells.random_endpoint.caption" = "Randomize endpoint";
 "configuration.cells.all.value.enabled" = "Enabled";
 "configuration.cells.all.value.disabled" = "Disabled";
+"configuration.cells.all.value.none" = "None";
 
 "debug_log.buttons.previous" = "Previous";
 "debug_log.buttons.next" = "Next";

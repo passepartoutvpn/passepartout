@@ -59,14 +59,14 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         }
         model.add(.tls)
         model.add(.compression)
-        model.add(.dns)
+        model.add(.network)
         model.add(.other)
 
         // headers
         model.setHeader(L10n.Configuration.Sections.Communication.header, for: .communication)
         model.setHeader(L10n.Configuration.Sections.Tls.header, for: .tls)
         model.setHeader(L10n.Configuration.Sections.Compression.header, for: .compression)
-        model.setHeader(L10n.Configuration.Sections.Dns.header, for: .dns)
+        model.setHeader(L10n.Configuration.Sections.Network.header, for: .network)
         model.setHeader(L10n.Configuration.Sections.Other.header, for: .other)
 
         // footers
@@ -81,14 +81,16 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         }
         model.set([.client, .tlsWrapping, .eku], in: .tls)
         model.set([.compressionFraming, .compressionAlgorithm], in: .compression)
-        var dnsRows: [RowType]
+        var networkRows: [RowType]
         if let dnsServers = configuration.dnsServers {
-            dnsRows = [RowType](repeating: .dnsServer, count: dnsServers.count)
+            networkRows = [RowType](repeating: .dnsServer, count: dnsServers.count)
         } else {
-            dnsRows = []
+            networkRows = []
         }
-        dnsRows.append(.dnsDomain)
-        model.set(dnsRows, in: .dns)
+        networkRows.append(.dnsDomain)
+        networkRows.append(.httpProxy)
+        networkRows.append(.httpsProxy)
+        model.set(networkRows, in: .network)
         model.set([.keepAlive, .renegSeconds, .randomEndpoint], in: .other)
 
         return model
@@ -173,7 +175,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case compression
         
-        case dns
+        case network
         
         case other
     }
@@ -198,6 +200,10 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case dnsServer
         
         case dnsDomain
+        
+        case httpProxy
+        
+        case httpsProxy
         
         case keepAlive
         
@@ -309,10 +315,22 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             
         case .dnsDomain:
             cell.leftText = L10n.Configuration.Cells.DnsDomain.caption
-            cell.rightText = configuration.searchDomain ?? L10n.Configuration.Cells.DnsDomain.Value.none
+            cell.rightText = configuration.searchDomain ?? L10n.Configuration.Cells.All.Value.none
             cell.accessoryType = .none
             cell.isTappable = false
 
+        case .httpProxy:
+            cell.leftText = L10n.Configuration.Cells.ProxyHttp.caption
+            cell.rightText = configuration.httpProxy?.description ?? L10n.Configuration.Cells.All.Value.none
+            cell.accessoryType = .none
+            cell.isTappable = false
+            
+        case .httpsProxy:
+            cell.leftText = L10n.Configuration.Cells.ProxyHttps.caption
+            cell.rightText = configuration.httpsProxy?.description ?? L10n.Configuration.Cells.All.Value.none
+            cell.accessoryType = .none
+            cell.isTappable = false
+            
         case .keepAlive:
             cell.leftText = L10n.Configuration.Cells.KeepAlive.caption
             if let keepAlive = configuration.keepAliveInterval, keepAlive > 0 {

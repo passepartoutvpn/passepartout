@@ -142,6 +142,8 @@ public enum L10n {
           public static let disabled = L10n.tr("Localizable", "configuration.cells.all.value.disabled")
           /// Enabled
           public static let enabled = L10n.tr("Localizable", "configuration.cells.all.value.enabled")
+          /// None
+          public static let `none` = L10n.tr("Localizable", "configuration.cells.all.value.none")
         }
       }
       public enum Cipher {
@@ -189,13 +191,9 @@ public enum L10n {
       public enum DnsDomain {
         /// Domain
         public static let caption = L10n.tr("Localizable", "configuration.cells.dns_domain.caption")
-        public enum Value {
-          /// None
-          public static let `none` = L10n.tr("Localizable", "configuration.cells.dns_domain.value.none")
-        }
       }
       public enum DnsServer {
-        /// Address
+        /// DNS
         public static let caption = L10n.tr("Localizable", "configuration.cells.dns_server.caption")
       }
       public enum Eku {
@@ -211,6 +209,14 @@ public enum L10n {
             return L10n.tr("Localizable", "configuration.cells.keep_alive.value.seconds", p1)
           }
         }
+      }
+      public enum ProxyHttp {
+        /// Proxy
+        public static let caption = L10n.tr("Localizable", "configuration.cells.proxy_http.caption")
+      }
+      public enum ProxyHttps {
+        /// Proxy (HTTPS)
+        public static let caption = L10n.tr("Localizable", "configuration.cells.proxy_https.caption")
       }
       public enum RandomEndpoint {
         /// Randomize endpoint
@@ -250,9 +256,9 @@ public enum L10n {
         /// Compression
         public static let header = L10n.tr("Localizable", "configuration.sections.compression.header")
       }
-      public enum Dns {
-        /// DNS
-        public static let header = L10n.tr("Localizable", "configuration.sections.dns.header")
+      public enum Network {
+        /// Network
+        public static let header = L10n.tr("Localizable", "configuration.sections.network.header")
       }
       public enum Other {
         /// Other
