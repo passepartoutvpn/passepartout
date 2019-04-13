@@ -138,6 +138,10 @@ public class Utils {
         return String(format: format, locale: Locale.current)
     }
 
+    public static func localizedLanguage(_ code: String) -> String? {
+        return Locale.current.localizedString(forLanguageCode: code)
+    }
+    
     private init() {
     }
 }

@@ -137,7 +137,7 @@ extension CreditsViewController {
             guard let author = AppConstants.Translations.authorByLanguage[lang] else {
                 fatalError("Author not found for language \(lang)")
             }
-            cell.leftText = Utils.localizedCountry(lang)
+            cell.leftText = Utils.localizedLanguage(lang)
             cell.rightText = author
             cell.accessoryType = .none
             cell.isTappable = false
