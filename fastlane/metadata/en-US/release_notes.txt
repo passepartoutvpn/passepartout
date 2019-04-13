@@ -7,4 +7,5 @@
 
 - VPN status cell doesn't always enter active profile.
 - Masking preference not retained.
+- SoftEther timing out.
 
