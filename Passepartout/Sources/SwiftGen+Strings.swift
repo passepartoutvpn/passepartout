@@ -287,6 +287,10 @@ public enum L10n {
         /// Notices
         public static let header = L10n.tr("Localizable", "credits.sections.notices.header")
       }
+      public enum Translations {
+        /// Translations
+        public static let header = L10n.tr("Localizable", "credits.sections.translations.header")
+      }
     }
   }
 

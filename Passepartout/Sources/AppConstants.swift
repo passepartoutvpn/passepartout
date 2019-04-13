@@ -153,6 +153,10 @@ public class AppConstants {
 
             public static let template = "I offer to translate to: "
         }
+
+        public static let authorByLanguage: [String: String] = [
+            "it": "Davide De Rosa"
+        ]
     }
 
     public class URLs {
