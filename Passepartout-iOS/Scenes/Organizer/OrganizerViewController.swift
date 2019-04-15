@@ -52,6 +52,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             model.add(.siri)
         }
         model.add(.support)
+        model.add(.feedback)
         model.add(.about)
         model.add(.destruction)
         model.setHeader(L10n.Service.Sections.Vpn.header, for: .vpn)
@@ -65,8 +66,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             model.set([.siriShortcuts], in: .siri)
         }
         model.setHeader(L10n.Organizer.Sections.Support.header, for: .support)
+        model.setHeader(L10n.Organizer.Sections.Feedback.header, for: .feedback)
         model.set([.connectionStatus], in: .vpn)
         model.set([.donate, .patreon, .translate], in: .support)
+        model.set([.joinCommunity, .writeReview], in: .feedback)
         model.set([.openAbout], in: .about)
         model.set([.uninstall], in: .destruction)
         if AppConstants.Flags.isBeta {
@@ -315,6 +318,11 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
     
+    private func writeReview() {
+        let url = AppConstants.URLs.review(withId: GroupConstants.App.appId)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
     //
     
     private func testDisplayLog() {
@@ -350,6 +358,8 @@ extension OrganizerViewController {
         case siri
         
         case support
+        
+        case feedback
 
         case about
         
@@ -374,6 +384,10 @@ extension OrganizerViewController {
         case patreon
         
         case translate
+        
+        case joinCommunity
+        
+        case writeReview
 
         case openAbout
         
@@ -452,6 +466,16 @@ extension OrganizerViewController {
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Organizer.Cells.Translate.caption
             return cell
+            
+        case .joinCommunity:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Organizer.Cells.JoinCommunity.caption
+            return cell
+            
+        case .writeReview:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Organizer.Cells.WriteReview.caption
+            return cell
 
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
@@ -502,6 +526,12 @@ extension OrganizerViewController {
         case .translate:
             offerTranslation()
             
+        case .joinCommunity:
+            subscribeSubreddit()
+            
+        case .writeReview:
+            writeReview()
+
         case .openAbout:
             about()
             

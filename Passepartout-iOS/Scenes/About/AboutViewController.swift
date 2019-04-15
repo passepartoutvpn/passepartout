@@ -35,14 +35,11 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.add(.info)
         model.add(.web)
         model.add(.share)
-        model.add(.feedback)
         model.setHeader(L10n.About.Sections.Web.header, for: .web)
         model.setHeader(L10n.About.Sections.Share.header, for: .share)
-        model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
         model.set([.version], in: .info)
         model.set([.website, .faq, .disclaimer, .privacyPolicy], in: .web)
         model.set([.shareTwitter, .shareGeneric], in: .share)
-        model.set([.joinCommunity, .writeReview], in: .feedback)
         return model
     }()
     
@@ -100,15 +97,6 @@ class AboutViewController: UITableViewController, TableModelHost {
         present(vc, animated: true, completion: nil)
     }
     
-    private func postSupportRequest() {
-        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
-    }
-    
-    private func writeReview() {
-        let url = AppConstants.URLs.review(withId: GroupConstants.App.appId)
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
     @IBAction private func dismiss() {
         dismiss(animated: true, completion: nil)
     }
@@ -123,8 +111,6 @@ extension AboutViewController {
         case web
 
         case share
-        
-        case feedback
     }
     
     enum RowType: Int {
@@ -141,10 +127,6 @@ extension AboutViewController {
         case shareTwitter
         
         case shareGeneric
-        
-        case joinCommunity
-        
-        case writeReview
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -200,16 +182,6 @@ extension AboutViewController {
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.ShareGeneric.caption
             return cell
-            
-        case .joinCommunity:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.JoinCommunity.caption
-            return cell
-            
-        case .writeReview:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.WriteReview.caption
-            return cell
         }
     }
     
@@ -235,12 +207,6 @@ extension AboutViewController {
             
         case .shareGeneric:
             inviteFriend(sender: tableView.cellForRow(at: indexPath))
-            
-        case .joinCommunity:
-            postSupportRequest()
-            
-        case .writeReview:
-            writeReview()
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

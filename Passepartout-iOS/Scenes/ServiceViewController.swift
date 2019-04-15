@@ -830,7 +830,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
 
         case .joinCommunity:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.About.Cells.JoinCommunity.caption
+            cell.leftText = L10n.Organizer.Cells.JoinCommunity.caption
             return cell
             
         case .reportIssue:
@@ -1035,7 +1035,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             model.setHeader(L10n.Service.Sections.Trusted.header, for: .trusted)
             model.setHeader(L10n.Service.Sections.Diagnostics.header, for: .diagnostics)
-            model.setHeader(L10n.About.Sections.Feedback.header, for: .feedback)
+            model.setHeader(L10n.Organizer.Sections.Feedback.header, for: .feedback)
         }
         
         // footers

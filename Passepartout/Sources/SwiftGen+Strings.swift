@@ -24,10 +24,6 @@ public enum L10n {
         /// FAQ
         public static let caption = L10n.tr("Localizable", "about.cells.faq.caption")
       }
-      public enum JoinCommunity {
-        /// Join community
-        public static let caption = L10n.tr("Localizable", "about.cells.join_community.caption")
-      }
       public enum PrivacyPolicy {
         /// Privacy policy
         public static let caption = L10n.tr("Localizable", "about.cells.privacy_policy.caption")
@@ -44,16 +40,8 @@ public enum L10n {
         /// Home page
         public static let caption = L10n.tr("Localizable", "about.cells.website.caption")
       }
-      public enum WriteReview {
-        /// Write a review
-        public static let caption = L10n.tr("Localizable", "about.cells.write_review.caption")
-      }
     }
     public enum Sections {
-      public enum Feedback {
-        /// Feedback
-        public static let header = L10n.tr("Localizable", "about.sections.feedback.header")
-      }
       public enum Share {
         /// Share
         public static let header = L10n.tr("Localizable", "about.sections.share.header")
@@ -453,6 +441,10 @@ public enum L10n {
         /// Make a donation
         public static let caption = L10n.tr("Localizable", "organizer.cells.donate.caption")
       }
+      public enum JoinCommunity {
+        /// Join community
+        public static let caption = L10n.tr("Localizable", "organizer.cells.join_community.caption")
+      }
       public enum Patreon {
         /// Support me on Patreon
         public static let caption = L10n.tr("Localizable", "organizer.cells.patreon.caption")
@@ -475,8 +467,16 @@ public enum L10n {
         /// Remove VPN configuration
         public static let caption = L10n.tr("Localizable", "organizer.cells.uninstall.caption")
       }
+      public enum WriteReview {
+        /// Write a review
+        public static let caption = L10n.tr("Localizable", "organizer.cells.write_review.caption")
+      }
     }
     public enum Sections {
+      public enum Feedback {
+        /// Feedback
+        public static let header = L10n.tr("Localizable", "organizer.sections.feedback.header")
+      }
       public enum Hosts {
         /// Import hosts from raw .ovpn configuration files.
         public static let footer = L10n.tr("Localizable", "organizer.sections.hosts.footer")

@@ -44,10 +44,13 @@
 "organizer.sections.siri.header" = "Siri";
 "organizer.sections.siri.footer" = "Chiedi aiuto a Siri per velocizzare le tue interazioni più frequenti con l'app.";
 "organizer.sections.support.header" = "Supporto";
+"organizer.sections.feedback.header" = "Feedback";
 "organizer.cells.profile.value.current" = "In uso";
 "organizer.cells.add_provider.caption" = "Aggiungi provider";
 "organizer.cells.add_host.caption" = "Aggiungi host";
 "organizer.cells.siri_shortcuts.caption" = "Gestisci comandi rapidi";
+"organizer.cells.join_community.caption" = "Entra nella community";
+"organizer.cells.write_review.caption" = "Scrivi una recensione";
 "organizer.cells.donate.caption" = "Fai una donazione";
 "organizer.cells.patreon.caption" = "Supportami su Patreon";
 "organizer.cells.translate.caption" = "Offri una traduzione";
@@ -238,15 +241,12 @@
 "about.title" = "Informazioni su";
 "about.sections.web.header" = "Web";
 "about.sections.share.header" = "Condividi";
-"about.sections.feedback.header" = "Feedback";
 "about.cells.website.caption" = "Home page";
 "about.cells.faq.caption" = "FAQ";
 "about.cells.disclaimer.caption" = "Disclaimer";
 "about.cells.privacy_policy.caption" = "Privacy policy";
 "about.cells.share_twitter.caption" = "Manda un Tweet!";
 "about.cells.share_generic.caption" = "Invita un amico";
-"about.cells.join_community.caption" = "Entra nella community";
-"about.cells.write_review.caption" = "Scrivi una recensione";
 
 "donation.title" = "Donazione";
 "donation.sections.one_time.header" = "Unica";
