@@ -201,7 +201,7 @@ public class AppConstants {
 
         public static let referrals: [Infrastructure.Name: String] = [
             .mullvad: "https://mullvad.net/en/account/create/",
-            .nordVPN: "https://join.nordvpn.com/order/",
+            .nordVPN: "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=25807",
             .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/",
             .protonVPN: "https://protonvpn.net/?aid=keeshux",
             .tunnelBear: "https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464",

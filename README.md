@@ -148,7 +148,7 @@ Website: [passepartoutvpn.app][about-website]
 
 [app-api]: https://github.com/passepartoutvpn/passepartout-api
 [app-net-mullvad]: https://mullvad.net/en/account/create/
-[app-net-nordvpn]: https://join.nordvpn.com/order/
+[app-net-nordvpn]: https://go.nordvpn.net/aff_c?offer_id=15&aff_id=25807
 [app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
 [app-net-protonvpn]: https://protonvpn.net/?aid=keeshux
 [app-net-tunnelbear]: https://click.tunnelbear.com/aff_c?offer_id=2&aff_id=7464
