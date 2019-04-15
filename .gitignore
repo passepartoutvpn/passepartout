@@ -11,6 +11,7 @@ fastlane/report.xml
 fastlane/test_output
 fastlane/metadata/review_information
 fastlane/metadata/trade_representative_contact_information
+fastlane/metadata/*/keywords.txt
 build/
 dist/
 ci/CHANGELOG.md
