@@ -1,1 +1,1 @@
-Universal OpenVPN® Client
+Connect .ovpn & VPN providers
