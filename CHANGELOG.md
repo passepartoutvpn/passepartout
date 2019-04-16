@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Regression in DNS configuration. [#68](https://github.com/passepartoutvpn/passepartout-ios/issues/68), [tunnelkit#85](https://github.com/keeshux/tunnelkit/pull/85)
+- Issues with very long PUSH_REPLY. [tunnelkit#71](https://github.com/keeshux/tunnelkit/issues/71)
 - Missing app icon in Credits.
 
 ## 1.5.0 Beta 1716 (2019-04-13)
