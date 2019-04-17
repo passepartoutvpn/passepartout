@@ -1,11 +1,6 @@
-### Added
-
-- NordVPN provider.
-- Support for `dhcp-option PROXY_HTTP[S]`.
-
 ### Fixed
 
-- VPN status cell doesn't always enter active profile.
-- Masking preference not retained.
-- SoftEther timing out.
+- Regression in DNS configuration.
+- Issues with very long PUSH_REPLY.
+- Missing app icon in Credits.
 
