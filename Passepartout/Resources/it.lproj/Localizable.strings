@@ -135,9 +135,14 @@
 "service.alerts.data_count.messages.not_available" = "Informazione non disponibile, sei connesso/a?";
 "service.alerts.masks_private_data.messages.must_reconnect" = "Per azzerare il debug log ed applicare la nuova preferenza di mascheramento, devi riconnetterti alla VPN.";
 "service.alerts.buttons.reconnect" = "Riconnetti";
+"service.alerts.download.title" = "Download necessario";
+"service.alerts.download.message" = "%@ richiede lo scaricamento di file di configurazione aggiuntivi.\n\nConferma per avviare lo scaricamento.";
+"service.alerts.download.failed" = "Impossibile scaricare i file di configurazione. %@";
+"service.alerts.download.hud.extracting" = "Estraendo i file, un attimo di pazienza...";
 
 "account.sections.credentials.header" = "Credenziali";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Usa il tuo account number del sito di %@ e la password \"m\".";
+"account.sections.guidance.footer.infrastructure.nordvpn" = "Usa le credenziali del sito di %@. Il tuo username è generalmente la tua e-mail.";
 "account.sections.guidance.footer.infrastructure.pia" = "Usa le credenziali del sito di %@. Il tuo username è generalmente numerico con un prefisso \"p\".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Trova le tue credenziali nella sezione \"Account > OpenVPN / IKEv2 Username\" del sito di %@.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Usa le credenziali del sito di %@. Il tuo username è generalmente la tua e-mail.";
@@ -167,7 +172,7 @@
 "configuration.sections.reset.footer" = "Se ti trovi con una connettività compromessa dopo aver cambiato i parametri di comunicazione, tocca per tornare alla configurazione originale.";
 "configuration.sections.tls.header" = "TLS";
 "configuration.sections.compression.header" = "Compressione";
-"configuration.sections.dns.header" = "DNS";
+"configuration.sections.network.header" = "Rete";
 "configuration.sections.other.header" = "Altro";
 "configuration.cells.cipher.caption" = "Cifratura";
 "configuration.cells.digest.caption" = "Autenticazione";
@@ -182,6 +187,8 @@
 "configuration.cells.eku.caption" = "Verifica estesa";
 "configuration.cells.dns_server.caption" = "Indirizzo";
 "configuration.cells.dns_domain.caption" = "Dominio";
+"configuration.cells.proxy_http.caption" = "Proxy";
+"configuration.cells.proxy_https.caption" = "Proxy (HTTPS)";
 "configuration.cells.compression_framing.caption" = "Framing";
 "configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
 "configuration.cells.compression_framing.value.compress" = "--compress";
@@ -267,5 +274,6 @@
 "credits.title" = "Credits";
 "credits.sections.licenses.header" = "Licenze";
 "credits.sections.notices.header" = "Notice";
+"credits.sections.translations.header" = "Traduzioni";
 
 "label.license.error" = "Impossibile scaricare il contenuto completo della licenza.";
