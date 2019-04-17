@@ -5,15 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.5.0 Beta 1733 (2019-04-17)
-
-### Fixed
-
-- Regression in DNS configuration. [#68](https://github.com/passepartoutvpn/passepartout-ios/issues/68), [tunnelkit#85](https://github.com/keeshux/tunnelkit/pull/85)
-- Issues with very long PUSH_REPLY. [tunnelkit#71](https://github.com/keeshux/tunnelkit/issues/71)
-- Missing app icon in Credits.
-
-## 1.5.0 Beta 1716 (2019-04-13)
+## Unreleased
 
 ### Added
 
@@ -22,9 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Regression in DNS configuration. [#68](https://github.com/passepartoutvpn/passepartout-ios/issues/68), [tunnelkit#85](https://github.com/keeshux/tunnelkit/pull/85)
+- SoftEther timing out. [tunnelkit#67](https://github.com/keeshux/tunnelkit/issues/67)
 - VPN status cell doesn't always enter active profile. [#63](https://github.com/passepartoutvpn/passepartout-ios/issues/63)
 - Masking preference not retained. [#64](https://github.com/passepartoutvpn/passepartout-ios/issues/64)
-- SoftEther timing out. [tunnelkit#67](https://github.com/keeshux/tunnelkit/issues/67)
+- Issues with very long PUSH_REPLY. [tunnelkit#71](https://github.com/keeshux/tunnelkit/issues/71)
+- Missing app icon in Credits.
 
 ## 1.4.0 (2019-04-11)
 

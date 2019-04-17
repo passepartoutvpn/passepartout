@@ -17,6 +17,7 @@ FEATURE
 
 - Configurazioni per i maggiori provider VPN:
   - Mullvad
+  - NordVPN
   - Private Internet Access
   - ProtonVPN
   - TunnelBear

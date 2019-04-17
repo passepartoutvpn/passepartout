@@ -1,19 +1,14 @@
 ### Aggiunti
 
-- Provider ProtonVPN.
-- Traduzione all'italiano
-- Donazioni in-app.
-- Loghi provider.
-- Bandiere nazionali.
-- Scorciatoia stato VPN, apre il profilo attivo su selezione.
-
-### Cambiati
-
-- Il protocollo automatico ora preferisce UDP di default.
-- Migliorata la schermata Account, i footer erano difficili da selezionare.
+- Provider NordVPN.
+- Supporto per `dhcp-option PROXY_HTTP[S]`.
 
 ### Risolti
 
-- Alcuni provider possono crashare all'attivazione della VPN.
-- Mullvad disconnesso per ping timeout.
-- Il push DOMAIN da server non ha effetto.
+- Regressione nella configurazione DNS.
+- Timeout con SoftEther.
+- La cella dello stato VPN non sempre entra nel profilo attivo.
+- Preferenza di mascheramento non salvata.
+- Problemi con PUSH_REPLY molto lunght.
+- Icona mancante nella schermata Credits.
+
