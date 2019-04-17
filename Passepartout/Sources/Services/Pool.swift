@@ -30,8 +30,6 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
     public enum CodingKeys: String, CodingKey {
         case id
 
-        case name
-
         case country
         
         case area
@@ -49,8 +47,6 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
     
     public let id: String
     
-    private let name: String
-
     public let country: String
     
     public let area: String?
@@ -111,7 +107,7 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
     // MARK: CustomStringConvertible
     
     public var description: String {
-        return "{[\(id)] \"\(name)\"}"
+        return "{[\(id)] \"\(localizedCountry)\"}"
     }
 }
 
