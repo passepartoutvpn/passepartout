@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Regression in DNS configuration. [#68](https://github.com/passepartoutvpn/passepartout-ios/issues/68), [tunnelkit#85](https://github.com/keeshux/tunnelkit/pull/85)
+- Regression in DNS configuration. [#68](https://github.com/passepartoutvpn/passepartout-ios/issues/68)
 - SoftEther timing out. [tunnelkit#67](https://github.com/keeshux/tunnelkit/issues/67)
 - VPN status cell doesn't always enter active profile. [#63](https://github.com/passepartoutvpn/passepartout-ios/issues/63)
 - Masking preference not retained. [#64](https://github.com/passepartoutvpn/passepartout-ios/issues/64)
@@ -57,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Support PKCS#8 encrypted cert keys. [#43](https://github.com/passepartoutvpn/passepartout-ios/issues/43), [tunnelkit#80](https://github.com/keeshux/tunnelkit/issues/80)
+- Support PKCS#8 encrypted cert keys. [#43](https://github.com/passepartoutvpn/passepartout-ios/issues/43)
 - Handle PEM with preamble. [tunnelkit#78](https://github.com/keeshux/tunnelkit/issues/78)
 - Infrastructures not retained after refresh. [#54](https://github.com/passepartoutvpn/passepartout-ios/issues/54)
 
@@ -84,7 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Support for LZO compression. [#32](https://github.com/passepartoutvpn/passepartout-ios/issues/32), [tunnelkit#70](https://github.com/keeshux/tunnelkit/pull/70), [tunnelkit#69](https://github.com/keeshux/tunnelkit/pull/69)
+- Support for LZO compression. [#32](https://github.com/passepartoutvpn/passepartout-ios/issues/32)
 - Siri shortcuts. [#41](https://github.com/passepartoutvpn/passepartout-ios/pull/41)
 - Custom intents, have a look at Spotlight suggestions for Passepartout. [#40](https://github.com/passepartoutvpn/passepartout-ios/pull/40)
 - TunnelBear provider. [#35](https://github.com/passepartoutvpn/passepartout-ios/pull/35)
