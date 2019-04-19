@@ -221,6 +221,7 @@
 "vpn.errors.encryption" = "Crittografia fallita";
 "vpn.errors.compression" = "Compressione non supportata";
 "vpn.errors.network" = "Rete cambiata";
+"vpn.errors.routing" = "Routing mancante";
 
 "issue_reporter.title" = "Segnala problema";
 "issue_reporter.message" = "Il debug log delle tue ultime connessioni è cruciale per risolvere i tuoi problemi di connettività ed è completamente anonimo.\n\nIl file di configurazione .ovpn, se presente, è allegato privato di ogni dato sensibile.\n\nPer favore controlla gli allegati dell'e-mail se non sei sicuro/a.";

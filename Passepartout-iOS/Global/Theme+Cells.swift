@@ -117,6 +117,9 @@ extension SettingTableViewCell {
                 case .networkChanged:
                     disconnectionReason = L10n.Vpn.Errors.network
                     
+                case .routing:
+                    disconnectionReason = L10n.Vpn.Errors.routing
+                    
                 default:
                     break
                 }

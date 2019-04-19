@@ -950,6 +950,8 @@ public enum L10n {
       public static let encryption = L10n.tr("Localizable", "vpn.errors.encryption")
       /// Network changed
       public static let network = L10n.tr("Localizable", "vpn.errors.network")
+      /// Missing routing
+      public static let routing = L10n.tr("Localizable", "vpn.errors.routing")
       /// Timeout
       public static let timeout = L10n.tr("Localizable", "vpn.errors.timeout")
       /// TLS failed
