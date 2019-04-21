@@ -89,7 +89,7 @@
 "service.sections.trusted.header" = "Trusted networks";
 "service.sections.trusted.footer" = "When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.";
 "service.sections.diagnostics.header" = "Diagnostics";
-"service.sections.diagnostics.footer" = "Masking status will be effective after reconnecting. Network data is hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.";
+"service.sections.diagnostics.footer" = "Masking status will be effective after reconnecting. Network data are hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.";
 //"service.sections.destruction.footer" = "Delete configuration from device settings.";
 
 "service.cells.use_profile.caption" = "Use this profile";
