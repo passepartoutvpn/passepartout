@@ -74,7 +74,7 @@
 "parsed_file.alerts.parsing.message" = "Não foi possível processar as configurações do arquivo (%@).";
 "parsed_file.alerts.buttons.report" = "Reportar problema";
 
-"imported_hosts.title" = "hosts importados";
+"imported_hosts.title" = "Hosts importados";
 
 "service.welcome.message" = "Bem-vindo ao Passepartout!\n\nUse o organizador para adicionar um novo perfil.";
 "service.sections.general.header" = "Geral";
