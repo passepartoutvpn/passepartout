@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Portuguese translations (Helder Santana). [#70](https://github.com/passepartoutvpn/passepartout-ios/pull/70)
+- German translations (Christian Lederer).
+- Russian translations (Alexander Korobynikov).
+
 ### Fixed
 
 - SoftEther connects without VPN icon. [#69](https://github.com/passepartoutvpn/passepartout-ios/issues/69)

@@ -134,6 +134,13 @@ This product includes software developed by the OpenSSL Project for use in the O
 
 © 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
 
+## Translations
+
+- Italian: Davide De Rosa (author) - [@keeshux](https://github.com/keeshux)
+- Portuguese: Helder Santana - [@heldr](https://github.com/heldr)
+- German: Christian Lederer
+- Russian: Alexander Korobynikov
+
 ## Usage
 
 You are strongly encouraged to read carefully both the [disclaimer][web-disclaimer] and [privacy policy][web-privacy] before using this software.
