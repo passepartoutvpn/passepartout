@@ -1,14 +1,10 @@
 ### Added
 
-- NordVPN provider.
-- Support for `dhcp-option PROXY_HTTP[S]`.
+- Portuguese translations (Helder Santana).
+- German translations (Christian Lederer).
+- Russian translations (Alexander Korobynikov).
 
 ### Fixed
 
-- Regression in DNS configuration.
-- SoftEther timing out.
-- VPN status cell doesn't always enter active profile.
-- Masking preference not retained.
-- Issues with very long PUSH_REPLY.
-- Missing app icon in Credits.
+- SoftEther connects without VPN icon.
 
