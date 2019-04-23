@@ -678,10 +678,6 @@ public enum L10n {
         public static let caption = L10n.tr("Localizable", "service.cells.data_count.caption")
         /// Unavailable
         public static let `none` = L10n.tr("Localizable", "service.cells.data_count.none")
-        /// ↓%@ / ↑%@
-        public static func value(_ p1: String, _ p2: String) -> String {
-          return L10n.tr("Localizable", "service.cells.data_count.value", p1, p2)
-        }
       }
       public enum DebugLog {
         /// Debug log
@@ -701,16 +697,6 @@ public enum L10n {
         public enum Parameters {
           /// Parameters
           public static let caption = L10n.tr("Localizable", "service.cells.host.parameters.caption")
-          public enum Value {
-            /// %@
-            public static func cipher(_ p1: String) -> String {
-              return L10n.tr("Localizable", "service.cells.host.parameters.value.cipher", p1)
-            }
-            /// %@ / %@
-            public static func cipherDigest(_ p1: String, _ p2: String) -> String {
-              return L10n.tr("Localizable", "service.cells.host.parameters.value.cipher_digest", p1, p2)
-            }
-          }
         }
       }
       public enum MasksPrivateData {
@@ -755,12 +741,6 @@ public enum L10n {
         /// Trust disables VPN
         public static let caption = L10n.tr("Localizable", "service.cells.trusted_policy.caption")
       }
-      public enum TrustedWifi {
-        /// %@
-        public static func caption(_ p1: String) -> String {
-          return L10n.tr("Localizable", "service.cells.trusted_wifi.caption", p1)
-        }
-      }
       public enum UseProfile {
         /// Use this profile
         public static let caption = L10n.tr("Localizable", "service.cells.use_profile.caption")
@@ -784,7 +764,7 @@ public enum L10n {
         public static let header = L10n.tr("Localizable", "service.sections.configuration.header")
       }
       public enum Diagnostics {
-        /// Masking status will be effective after reconnecting. Network data is hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.
+        /// Masking status will be effective after reconnecting. Network data are hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.
         public static let footer = L10n.tr("Localizable", "service.sections.diagnostics.footer")
         /// Diagnostics
         public static let header = L10n.tr("Localizable", "service.sections.diagnostics.header")

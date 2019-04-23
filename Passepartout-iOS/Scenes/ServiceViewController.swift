@@ -749,11 +749,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             let parameters = uncheckedHostProfile.parameters
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.Host.Parameters.caption
-            let V = L10n.Service.Cells.Host.Parameters.Value.self
             if !parameters.sessionConfiguration.fallbackCipher.embedsDigest {
-                cell.rightText = V.cipherDigest(parameters.sessionConfiguration.fallbackCipher.genericName, parameters.sessionConfiguration.fallbackDigest.genericName)
+                cell.rightText = "\(parameters.sessionConfiguration.fallbackCipher.genericName) / \(parameters.sessionConfiguration.fallbackDigest.genericName)"
             } else {
-                cell.rightText = V.cipher(parameters.sessionConfiguration.fallbackCipher.genericName)
+                cell.rightText = parameters.sessionConfiguration.fallbackCipher.genericName
             }
             return cell
 
@@ -780,7 +779,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedWiFi:
             let wifi = trustedNetworks.wifi(at: indexPath.row)
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
-            cell.caption = L10n.Service.Cells.TrustedWifi.caption(wifi.0)
+            cell.caption = wifi.0
             cell.isOn = wifi.1
             return cell
             
@@ -807,7 +806,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.DataCount.caption
             if let count = currentDataCount, vpn.status == .connected {
-                cell.rightText = L10n.Service.Cells.DataCount.value(count.0.dataUnitDescription, count.1.dataUnitDescription)
+                let down = count.0.dataUnitDescription
+                let up = count.1.dataUnitDescription
+                cell.rightText = "↓\(down) / ↑\(up)"
             } else {
                 cell.rightText = L10n.Service.Cells.DataCount.none
             }
