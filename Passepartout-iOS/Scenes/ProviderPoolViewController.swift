@@ -42,7 +42,7 @@ class ProviderPoolViewController: UIViewController {
     weak var delegate: ProviderPoolViewControllerDelegate?
 
     func setInfrastructure(_ infrastructure: Infrastructure, currentPoolId: String?) {
-        categories = infrastructure.categories.sorted { $0.name < $1.name }
+        categories = infrastructure.categories.sorted { $0.name.lowercased() < $1.name.lowercased() }
         
         for c in categories {
             sortedGroupsByCategory[c.name] = c.groups.values.sorted()
