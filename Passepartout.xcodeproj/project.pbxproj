@@ -202,6 +202,8 @@
 		0E39BCEF214B9EF10035E9DE /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		0E39BCF2214DA9310035E9DE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
+		0E411BA32272183700E0852C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Intents.strings"; sourceTree = "<group>"; };
+		0E411BA42272184A00E0852C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworks.swift; sourceTree = "<group>"; };
 		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
 		0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardVPNProvider.swift; sourceTree = "<group>"; };
@@ -801,6 +803,7 @@
 				it,
 				de,
 				ru,
+				"pt-BR",
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
 			productRefGroup = 0E57F63920C83FC5008323CF /* Products */;
@@ -1152,6 +1155,7 @@
 				0E533B142257C1DC00EF94FC /* it */,
 				0E0B6CE3226F3CDF00C1B244 /* de */,
 				0E0B6CE5226F45B100C1B244 /* ru */,
+				0E411BA42272184A00E0852C /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1196,6 +1200,7 @@
 				0E242735225944060064A1A3 /* en */,
 				0E108485226F3CC100BA41E9 /* de */,
 				0E0B6CE4226F45B000C1B244 /* ru */,
+				0E411BA32272183700E0852C /* pt-BR */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
