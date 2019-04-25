@@ -113,6 +113,11 @@ extension Pool {
         if let num = num {
             comps.append("#\(num)")
         }
-        return comps.joined(separator: " ")
+        var str = comps.joined(separator: " ")
+        if let tags = tags {
+            let suffix = tags.map { $0.uppercased() }.joined(separator: ",")
+            str = "\(str) (\(suffix))"
+        }
+        return str
     }
 }
