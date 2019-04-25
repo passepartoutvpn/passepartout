@@ -87,6 +87,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         } else {
             networkRows = []
         }
+        networkRows.insert(.defaultGateway, at: 0)
         networkRows.append(.dnsDomain)
         networkRows.append(.httpProxy)
         networkRows.append(.httpsProxy)
@@ -197,6 +198,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case compressionAlgorithm
         
+        case defaultGateway
+        
         case dnsServer
         
         case dnsDomain
@@ -304,12 +307,22 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.accessoryType = .none
             cell.isTappable = false
             
+        case .defaultGateway:
+            cell.leftText = L10n.Configuration.Cells.DefaultGateway.caption
+            if let policies = configuration.routingPolicies {
+                cell.rightText = policies.map { $0.rawValue }.joined(separator: " / ")
+            } else {
+                cell.rightText = V.All.Value.none
+            }
+            cell.accessoryType = .none
+            cell.isTappable = false
+
         case .dnsServer:
             guard let dnsServers = configuration.dnsServers else {
                 fatalError("Showing DNS section without any custom server")
             }
             cell.leftText = L10n.Configuration.Cells.DnsServer.caption
-            cell.rightText = dnsServers[indexPath.row]
+            cell.rightText = dnsServers[indexPath.row - 1]
             cell.accessoryType = .none
             cell.isTappable = false
             

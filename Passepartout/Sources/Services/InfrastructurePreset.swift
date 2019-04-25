@@ -162,6 +162,9 @@ public struct InfrastructurePreset: Codable {
         sessionBuilder.randomizeEndpoint = try cfgContainer.decodeIfPresent(Bool.self, forKey: .randomizeEndpoint) ?? false
         sessionBuilder.usesPIAPatches = try cfgContainer.decodeIfPresent(Bool.self, forKey: .usesPIAPatches) ?? false
 
+        // XXX: redirect everything through the VPN for providers
+        sessionBuilder.routingPolicies = [.IPv4, .IPv6]
+        
         let builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         configuration = builder.build()
     }

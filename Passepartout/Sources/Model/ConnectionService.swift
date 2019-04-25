@@ -265,22 +265,22 @@ public class ConnectionService: Codable {
                 case .provider:
                     let providerProfile = try decoder.decode(ProviderConnectionProfile.self, from: data)
                     
-                    // fix renamed presets, fall back to default
+                    // XXX: fix renamed presets, fall back to default
                     if providerProfile.preset == nil {
                         providerProfile.presetId = providerProfile.infrastructure.defaults.preset
                     }
                     
-                    // fix renamed pool, fall back to default
+                    // XXX: fix renamed pool, fall back to default
                     if providerProfile.pool == nil, let fallbackPool = providerProfile.infrastructure.defaultPool() {
                         providerProfile.poolId = fallbackPool.id
                     }
-
+                    
                     profile = providerProfile
                     
                 case .host:
                     let hostProfile = try decoder.decode(HostConnectionProfile.self, from: data)
 
-                    // migrate old endpointProtocols
+                    // XXX: migrate old endpointProtocols
                     if hostProfile.parameters.sessionConfiguration.endpointProtocols == nil {
                         var sessionBuilder = hostProfile.parameters.sessionConfiguration.builder()
                         sessionBuilder.endpointProtocols = hostProfile.parameters.endpointProtocols
@@ -288,6 +288,8 @@ public class ConnectionService: Codable {
                         parametersBuilder.sessionConfiguration = sessionBuilder.build()
                         hostProfile.parameters = parametersBuilder.build()
                     }
+                    
+                    // XXX: re-read routing policies for 
 
                     profile = hostProfile
                 }
@@ -327,6 +329,37 @@ public class ConnectionService: Codable {
             return nil
         }
         return url.deletingPathExtension().lastPathComponent
+    }
+    
+    func reloadHostProfilesFromConfigurationFiles() -> Bool {
+        var anyReloaded = false
+        for entry in cache {
+            guard entry.value.context == .host else {
+                continue
+            }
+            guard let host = profile(withKey: entry.key) as? HostConnectionProfile else {
+                log.warning("Host context but not a HostConnectionProfile?")
+                continue
+            }
+            guard let url = configurationURL(for: entry.key) else {
+                continue
+            }
+
+            // can fail due to passphrase (migration is non-interactive)
+            if let result = try? ConfigurationParser.parsed(fromURL: url) {
+                host.parameters = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: result.configuration).build()
+            } else {
+
+                // fall back to the safer option
+                var builder = host.parameters.builder()
+                builder.sessionConfiguration.routingPolicies = [.IPv4, .IPv6]
+                host.parameters = builder.build()
+            }
+            cache[entry.key] = host
+
+            anyReloaded = true
+        }
+        return anyReloaded
     }
     
     // MARK: Profiles

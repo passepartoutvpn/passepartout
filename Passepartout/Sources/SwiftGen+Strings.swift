@@ -168,6 +168,10 @@ public enum L10n {
           public static let lzo = L10n.tr("Localizable", "configuration.cells.compression_framing.value.lzo")
         }
       }
+      public enum DefaultGateway {
+        /// Default gateway
+        public static let caption = L10n.tr("Localizable", "configuration.cells.default_gateway.caption")
+      }
       public enum Digest {
         /// Authentication
         public static let caption = L10n.tr("Localizable", "configuration.cells.digest.caption")
