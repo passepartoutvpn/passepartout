@@ -31,6 +31,8 @@ public struct Pool: Codable, Hashable {
         case id
 
         case country
+        
+        case extraCountries = "extra_countries"
 
         case area
 
@@ -48,6 +50,8 @@ public struct Pool: Codable, Hashable {
     public let id: String
     
     public let country: String
+    
+    public let extraCountries: [String]?
 
     public let area: String?
 
@@ -95,31 +99,20 @@ extension Pool {
     }
 
     public var localizedId: String {
-        let countryString = localizedCountry
-        let zone: String
-        if let area = area, let num = num {
-            zone = "\(area) #\(num)"
-        } else if let area = area {
-            zone = area
-        } else if let num = num {
-            zone = "#\(num)"
-        } else {
-            return countryString
-        }
-        return String.init(format: Pool.localizedFormat, countryString, zone.uppercased())
+        return String.init(format: Pool.localizedFormat, localizedCountry, secondaryId)
     }
 
-    public var areaId: String? {
-        let id: String
-        if let area = area, let num = num {
-            id = "\(area) #\(num)"
-        } else if let area = area {
-            id = area
-        } else if let num = num {
-            id = "#\(num)"
-        } else {
-            return nil
+    public var secondaryId: String {
+        var comps: [String] = []
+        if let extraCountries = extraCountries {
+            comps.append(contentsOf: extraCountries.map { Utils.localizedCountry($0) })
         }
-        return id.uppercased()
+        if let area = area {
+            comps.append(area.uppercased())
+        }
+        if let num = num {
+            comps.append("#\(num)")
+        }
+        return comps.joined(separator: " ")
     }
 }
