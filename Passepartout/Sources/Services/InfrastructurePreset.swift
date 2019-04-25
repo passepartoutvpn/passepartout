@@ -38,6 +38,8 @@ public struct InfrastructurePreset: Codable {
         case key
         
         case wrapKeyData = "wrap.key.data"
+        
+        case hostname
     }
     
     public enum PresetKeys: String, CodingKey {
@@ -118,6 +120,9 @@ public struct InfrastructurePreset: Codable {
                     sessionBuilder.tlsWrap = SessionProxy.TLSWrap(strategy: dummyWrap.strategy, key: staticKey)
                 }
             }
+        }
+        if let pattern = external[.hostname] {
+            sessionBuilder.hostname = pattern.replacingOccurrences(of: "${id}", with: pool.id)
         }
         configuration.sessionConfiguration = sessionBuilder.build()
     }
