@@ -38,6 +38,8 @@ public struct InfrastructurePreset: Codable {
         case key
         
         case wrapKeyData = "wrap.key.data"
+        
+        case hostname
     }
     
     public enum PresetKeys: String, CodingKey {
@@ -95,29 +97,51 @@ public struct InfrastructurePreset: Codable {
     public func hasProtocol(_ proto: EndpointProtocol) -> Bool {
         return configuration.sessionConfiguration.endpointProtocols?.firstIndex(of: proto) != nil
     }
+    
+    public func externalConfiguration(forKey key: ExternalKey, infrastructureName: Infrastructure.Name, pool: Pool) throws -> Any? {
+        guard let pattern = external?[key] else {
+            return nil
+        }
+        let baseURL = infrastructureName.externalURL
+        switch key {
+        case .ca:
+            let filename = pattern.replacingOccurrences(of: "${id}", with: pool.id)
+            let caURL = baseURL.appendingPathComponent(filename)
+            return CryptoContainer(pem: try String(contentsOf: caURL))
 
-    public func injectExternalConfiguration(_ configuration: inout TunnelKitProvider.ConfigurationBuilder, with name: Infrastructure.Name, pool: Pool) throws {
+        case .wrapKeyData:
+            let filename = pattern.replacingOccurrences(of: "${id}", with: pool.id)
+            let tlsKeyURL = baseURL.appendingPathComponent(filename)
+            let file = try String(contentsOf: tlsKeyURL)
+            return StaticKey(file: file, direction: .client)
+
+        case .hostname:
+            return pattern.replacingOccurrences(of: "${id}", with: pool.id)
+            
+        default:
+            break
+        }
+        return nil
+    }
+
+    public func injectExternalConfiguration(_ configuration: inout TunnelKitProvider.ConfigurationBuilder, with infrastructureName: Infrastructure.Name, pool: Pool) throws {
         guard let external = external, !external.isEmpty else {
             return
         }
         
-        let baseURL = name.externalURL
-
         var sessionBuilder = configuration.sessionConfiguration.builder()
-        if let pattern = external[.ca] {
-            let filename = pattern.replacingOccurrences(of: "${id}", with: pool.id)
-            let caURL = baseURL.appendingPathComponent(filename)
-            sessionBuilder.ca = CryptoContainer(pem: try String(contentsOf: caURL))
+        if let _ = external[.ca] {
+            sessionBuilder.ca = try externalConfiguration(forKey: .ca, infrastructureName: infrastructureName, pool: pool) as? CryptoContainer
         }
-        if let pattern = external[.wrapKeyData] {
-            let filename = pattern.replacingOccurrences(of: "${id}", with: pool.id)
-            let tlsKeyURL = baseURL.appendingPathComponent(filename)
+        if let _ = external[.wrapKeyData] {
             if let dummyWrap = sessionBuilder.tlsWrap {
-                let file = try String(contentsOf: tlsKeyURL)
-                if let staticKey = StaticKey(file: file, direction: .client) {
+                if let staticKey = try externalConfiguration(forKey: .wrapKeyData, infrastructureName: infrastructureName, pool: pool) as? StaticKey {
                     sessionBuilder.tlsWrap = SessionProxy.TLSWrap(strategy: dummyWrap.strategy, key: staticKey)
                 }
             }
+        }
+        if let _ = external[.hostname] {
+            sessionBuilder.hostname = try externalConfiguration(forKey: .hostname, infrastructureName: infrastructureName, pool: pool) as? String
         }
         configuration.sessionConfiguration = sessionBuilder.build()
     }

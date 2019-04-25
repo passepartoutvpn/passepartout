@@ -25,31 +25,27 @@
 
 import Foundation
 
-public struct PoolGroup: Hashable, Comparable, CustomStringConvertible {
+public struct PoolGroup: Codable, Hashable, Comparable, CustomStringConvertible {
     public let country: String
     
     public let area: String?
     
-    private let id: String
+    public let pools: [Pool]
     
-    private let localizedId: String
-
-    public init(country: String, area: String?) {
-        self.country = country
-        self.area = area
-        
+    private var id: String {
         var id = country
-        var localizedId = Utils.localizedCountry(country)
         if let area = area {
             id += area
-            localizedId += area
         }
-        self.id = id
-        self.localizedId = localizedId
+        return id
     }
     
-    public func contains(_ pool: Pool) -> Bool {
-        return (pool.country == country) && (pool.area == area)
+    private var localizedId: String {
+        var localizedId = Utils.localizedCountry(country)
+        if let area = area {
+            localizedId += area
+        }
+        return localizedId
     }
     
     // MARK: Hashable
@@ -68,5 +64,11 @@ public struct PoolGroup: Hashable, Comparable, CustomStringConvertible {
     
     public var description: String {
         return "{\(country), \(area ?? "--")}"
+    }
+}
+
+extension PoolGroup {
+    public var localizedCountry: String {
+        return Utils.localizedCountry(country)
     }
 }

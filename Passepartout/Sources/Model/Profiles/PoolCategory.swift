@@ -1,5 +1,5 @@
 //
-//  PoolModel.swift
+//  PoolCategory.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/11/19.
@@ -25,34 +25,8 @@
 
 import Foundation
 
-public class PoolModel {
-    public let isFree: Bool
+public struct PoolCategory: Codable {
+    public let name: String
     
-    public var poolsByGroup: [PoolGroup: [Pool]]
-    
-    public private(set) var sortedGroups: [PoolGroup]
-    
-    public init(isFree: Bool) {
-        self.isFree = isFree
-        poolsByGroup = [:]
-        sortedGroups = []
-    }
-    
-    public var isEmpty: Bool {
-        return sortedGroups.isEmpty
-    }
-    
-    public func addPool(_ p: Pool) {
-        let group = p.group()
-        if var existingPools = poolsByGroup[group] {
-            existingPools.append(p)
-            poolsByGroup[group] = existingPools
-        } else {
-            poolsByGroup[group] = [p]
-        }
-    }
-    
-    public func sort() {
-        sortedGroups = poolsByGroup.keys.sorted()
-    }
+    public let groups: [String: PoolGroup]
 }

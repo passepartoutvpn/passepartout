@@ -53,7 +53,7 @@ public struct Infrastructure: Codable {
     
     public let name: Name
     
-    public let pools: [Pool]
+    public let categories: [PoolCategory]
 
     public let presets: [InfrastructurePreset]
 
@@ -69,11 +69,27 @@ public struct Infrastructure: Codable {
     }
     
     public func pool(for identifier: String) -> Pool? {
-        return pools.first { $0.id == identifier }
+        for cat in categories {
+            for group in cat.groups.values {
+                guard let found = group.pools.first(where: { $0.id == identifier }) else {
+                    continue
+                }
+                return found
+            }
+        }
+        return nil
     }
 
     public func pool(withPrefix prefix: String) -> Pool? {
-        return pools.first { $0.id.hasPrefix(prefix) }
+        for cat in categories {
+            for group in cat.groups.values {
+                guard let found = group.pools.first(where: { $0.id.hasPrefix(prefix) }) else {
+                    continue
+                }
+                return found
+            }
+        }
+        return nil
     }
     
     public func preset(for identifier: String) -> InfrastructurePreset? {

@@ -169,7 +169,7 @@ extension Infrastructure.Name {
     }
 }
 
-extension Pool {
+extension PoolGroup {
     var logo: UIImage? {
         return ImageAsset(name: country.lowercased()).image
     }

@@ -26,19 +26,19 @@
 import Foundation
 import TunnelKit
 
-public struct Pool: Codable, Hashable, CustomStringConvertible {
+public struct Pool: Codable, Hashable {
     public enum CodingKeys: String, CodingKey {
         case id
 
-        case name
-
         case country
         
+        case extraCountries = "extra_countries"
+
         case area
-        
+
         case num
         
-        case isFree = "free"
+        case tags
         
 //        case location
         
@@ -49,29 +49,15 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
     
     public let id: String
     
-    private let name: String
-
     public let country: String
     
+    public let extraCountries: [String]?
+
     public let area: String?
+
+    public let num: Int?
     
-    public let num: String?
-    
-    public var areaId: String? {
-        let id: String
-        if let area = area, let num = num {
-            id = "\(area) #\(num)"
-        } else if let area = area {
-            id = area
-        } else if let num = num {
-            id = "#\(num)"
-        } else {
-            return nil
-        }
-        return id.uppercased()
-    }
-    
-    public let isFree: Bool?
+    public let tags: [String]?
     
 //    public let location: (Double, Double)
     
@@ -98,42 +84,49 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
         return addrs
     }
     
-    public func group() -> PoolGroup {
-        return PoolGroup(country: country, area: area)
-    }
-    
     // MARK: Hashable
     
     public func hash(into hasher: inout Hasher) {
         id.hash(into: &hasher)
     }
-
-    // MARK: CustomStringConvertible
-    
-    public var description: String {
-        return "{[\(id)] \"\(name)\"}"
-    }
 }
 
 extension Pool {
-    private static let localizedFormat = "%@ - %@"
-
     public var localizedCountry: String {
         return Utils.localizedCountry(country)
     }
 
     public var localizedId: String {
-        let countryString = localizedCountry
-        let zone: String
-        if let area = area, let num = num {
-            zone = "\(area) #\(num)"
-        } else if let area = area {
-            zone = area
-        } else if let num = num {
-            zone = "#\(num)"
-        } else {
-            return countryString
+        var comps: [String] = [localizedCountry]
+        if let secondaryId = optionalSecondaryId {
+            comps.append(secondaryId)
         }
-        return String.init(format: Pool.localizedFormat, countryString, zone.uppercased())
+        return comps.joined(separator: " - ")
+    }
+
+    public var secondaryId: String {
+        return optionalSecondaryId ?? ""
+    }
+
+    private var optionalSecondaryId: String? {
+        var comps: [String] = []
+        if let extraCountries = extraCountries {
+            comps.append(contentsOf: extraCountries.map { Utils.localizedCountry($0) })
+        }
+        if let area = area {
+            comps.append(area.uppercased())
+        }
+        if let num = num {
+            comps.append("#\(num)")
+        }
+        guard !comps.isEmpty else {
+            return nil
+        }
+        var str = comps.joined(separator: " ")
+        if let tags = tags {
+            let suffix = tags.map { $0.uppercased() }.joined(separator: ",")
+            str = "\(str) (\(suffix))"
+        }
+        return str
     }
 }
