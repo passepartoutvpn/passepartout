@@ -47,7 +47,7 @@ public class AppConstants {
     }
     
     public class Web {
-        private static let version = "v1"
+        private static let version = "v2"
         
         private static let baseURL = Repos.api.appendingPathComponent(version)
         
