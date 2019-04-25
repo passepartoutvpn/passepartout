@@ -78,8 +78,7 @@
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
 		0E58BD9322404EF1006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; };
 		0E58BF65224152F9006FB157 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E58BD9122404EF1006FB157 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
-		0E66A270225FE25800F9C779 /* PoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A26F225FE25800F9C779 /* PoolModel.swift */; };
-		0E66A272225FE5FB00F9C779 /* InfrastructureCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A271225FE5FB00F9C779 /* InfrastructureCache.swift */; };
+		0E66A270225FE25800F9C779 /* PoolCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A26F225FE25800F9C779 /* PoolCategory.swift */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
@@ -223,8 +222,7 @@
 		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
 		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
 		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
-		0E66A26F225FE25800F9C779 /* PoolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolModel.swift; sourceTree = "<group>"; };
-		0E66A271225FE5FB00F9C779 /* InfrastructureCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureCache.swift; sourceTree = "<group>"; };
+		0E66A26F225FE25800F9C779 /* PoolCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PoolCategory.swift; path = ../Model/Profiles/PoolCategory.swift; sourceTree = "<group>"; };
 		0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
 		0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
 		0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsViewController.swift; sourceTree = "<group>"; };
@@ -484,9 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */,
-				0E66A271225FE5FB00F9C779 /* InfrastructureCache.swift */,
 				0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */,
-				0E66A26F225FE25800F9C779 /* PoolModel.swift */,
 				0E79D14021919F5600BB5FB2 /* ProfileKey.swift */,
 				0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */,
 			);
@@ -529,6 +525,7 @@
 				0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */,
 				0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */,
 				0ED31C0F20CF09A30027975F /* Pool.swift */,
+				0E66A26F225FE25800F9C779 /* PoolCategory.swift */,
 				0E533B152258E03B00EF94FC /* PoolGroup.swift */,
 				0E39BCEF214B9EF10035E9DE /* WebServices.swift */,
 			);
@@ -1016,7 +1013,7 @@
 			files = (
 				0E3152BD223FA03D00F61841 /* GroupConstants.swift in Sources */,
 				0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */,
-				0E66A270225FE25800F9C779 /* PoolModel.swift in Sources */,
+				0E66A270225FE25800F9C779 /* PoolCategory.swift in Sources */,
 				0E3152C2223FA04800F61841 /* MockVPNProvider.swift in Sources */,
 				0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */,
 				0E3152D2223FA05400F61841 /* DebugLog.swift in Sources */,
@@ -1047,7 +1044,6 @@
 				0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */,
 				0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */,
 				0E3152C9223FA04D00F61841 /* InfrastructureFactory.swift in Sources */,
-				0E66A272225FE5FB00F9C779 /* InfrastructureCache.swift in Sources */,
 				0E58BD9322404EF1006FB157 /* Intents.intentdefinition in Sources */,
 				0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */,
 				0E3152D4223FA05400F61841 /* Preferences.swift in Sources */,

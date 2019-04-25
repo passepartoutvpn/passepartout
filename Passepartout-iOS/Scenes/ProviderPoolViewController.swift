@@ -33,19 +33,25 @@ protocol ProviderPoolViewControllerDelegate: class {
 class ProviderPoolViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
 
-    private var models: [PoolModel] = []
+    private var categories: [PoolCategory] = []
+
+    private var sortedGroupsByCategory: [String: [PoolGroup]] = [:]
 
     private var currentPool: Pool?
     
     weak var delegate: ProviderPoolViewControllerDelegate?
 
-    func setModels(_ models: [PoolModel], currentPoolId: String?) {
-        self.models = models
+    func setInfrastructure(_ infrastructure: Infrastructure, currentPoolId: String?) {
+        categories = infrastructure.categories.sorted { $0.name < $1.name }
         
+        for c in categories {
+            sortedGroupsByCategory[c.name] = c.groups.values.sorted()
+        }
+
         // XXX: uglyyy
-        for m in models {
-            for pools in m.poolsByGroup.values {
-                for p in pools {
+        for cat in categories {
+            for group in cat.groups.values {
+                for p in group.pools {
                     if p.id == currentPoolId {
                         currentPool = p
                         return
@@ -78,12 +84,16 @@ class ProviderPoolViewController: UIViewController {
 
 extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate {
     private var selectedIndexPath: IndexPath? {
-        for (i, model) in models.enumerated() {
-            for entries in model.poolsByGroup.enumerated() {
-                guard let _ = entries.element.value.firstIndex(where: { $0.id == currentPool?.id }) else {
+        for (i, cat) in categories.enumerated() {
+            guard let sortedGroups = sortedGroupsByCategory[cat.name] else {
+                continue
+            }
+            for entries in cat.groups.enumerated() {
+                let group = entries.element.value
+                guard let _ = group.pools.firstIndex(where: { $0.id == currentPool?.id }) else {
                     continue
                 }
-                guard let row = model.sortedGroups.firstIndex(of: entries.element.key) else {
+                guard let row = sortedGroups.firstIndex(where: { $0.country == group.country && $0.area == group.area }) else {
                     continue
                 }
                 return IndexPath(row: row, section: i)
@@ -93,34 +103,32 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return models.count
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard models.count > 1 else {
+        guard categories.count > 1 else {
             return nil
         }
-        let model = models[section]
-        return model.isFree ? L10n.Provider.Pool.Sections.Free.header : L10n.Provider.Pool.Sections.Paid.header
+        let model = categories[section]
+        return model.name
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let model = models[section]
-        return model.sortedGroups.count
+        let model = categories[section]
+        return model.groups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = models[indexPath.section]
-        let group = model.sortedGroups[indexPath.row]
-        let groupPools = model.poolsByGroup[group]!
-        guard let pool = groupPools.first else {
+        let group = poolGroup(at: indexPath)
+        guard let pool = group.pools.first else {
             fatalError("Empty pools in group \(group)")
         }
 
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        cell.imageView?.image = pool.logo
+        cell.imageView?.image = group.logo
         cell.leftText = pool.localizedCountry
-        if groupPools.count > 1 {
+        if group.pools.count > 1 {
             cell.rightText = pool.area?.uppercased()
             cell.accessoryType = .detailDisclosureButton // no checkmark!
         } else {
@@ -131,10 +139,8 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = models[indexPath.section]
-        let group = model.sortedGroups[indexPath.row]
-        let groupPools = model.poolsByGroup[group]!
-        guard let pool = groupPools.randomElement() else {
+        let group = poolGroup(at: indexPath)
+        guard let pool = group.pools.randomElement() else {
             fatalError("Empty pools in group \(group)")
         }
         currentPool = pool
@@ -142,25 +148,20 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let model = models[indexPath.section]
-        let group = model.sortedGroups[indexPath.row]
-        let groupPools = model.poolsByGroup[group]!
-        guard let pool = groupPools.first else {
-            fatalError("Empty pools in group \(group)")
-        }
-        guard groupPools.count > 1 else {
+        let group = poolGroup(at: indexPath)
+        guard group.pools.count > 1 else {
             return
         }
         let vc = OptionViewController<Pool>()
-        vc.title = pool.localizedCountry
-        vc.options = groupPools.sorted {
-            guard let lnum = $0.num, let ln = Int(lnum) else {
+        vc.title = group.localizedCountry
+        vc.options = group.pools.sorted {
+            guard let lnum = $0.num else {
                 return true
             }
-            guard let rnum = $1.num, let rn = Int(rnum) else {
+            guard let rnum = $1.num else {
                 return false
             }
-            return ln < rn
+            return lnum < rnum
         }
         vc.selectedOption = currentPool
         vc.descriptionBlock = { $0.areaId ?? "" } // XXX: fail gracefully
@@ -169,5 +170,13 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
             self.delegate?.providerPoolController(self, didSelectPool: $0)
         }
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func poolGroup(at indexPath: IndexPath) -> PoolGroup {
+        let model = categories[indexPath.section]
+        guard let sortedGroups = sortedGroupsByCategory[model.name] else {
+            fatalError("Missing sorted groups for category '\(model.name)'")
+        }
+        return sortedGroups[indexPath.row]
     }
 }

@@ -26,17 +26,17 @@
 import Foundation
 import TunnelKit
 
-public struct Pool: Codable, Hashable, CustomStringConvertible {
+public struct Pool: Codable, Hashable {
     public enum CodingKeys: String, CodingKey {
         case id
 
         case country
-        
+
         case area
-        
+
         case num
         
-        case isFree = "free"
+        case tags
         
 //        case location
         
@@ -48,26 +48,12 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
     public let id: String
     
     public let country: String
-    
+
     public let area: String?
+
+    public let num: Int?
     
-    public let num: String?
-    
-    public var areaId: String? {
-        let id: String
-        if let area = area, let num = num {
-            id = "\(area) #\(num)"
-        } else if let area = area {
-            id = area
-        } else if let num = num {
-            id = "#\(num)"
-        } else {
-            return nil
-        }
-        return id.uppercased()
-    }
-    
-    public let isFree: Bool?
+    public let tags: [String]?
     
 //    public let location: (Double, Double)
     
@@ -94,20 +80,10 @@ public struct Pool: Codable, Hashable, CustomStringConvertible {
         return addrs
     }
     
-    public func group() -> PoolGroup {
-        return PoolGroup(country: country, area: area)
-    }
-    
     // MARK: Hashable
     
     public func hash(into hasher: inout Hasher) {
         id.hash(into: &hasher)
-    }
-
-    // MARK: CustomStringConvertible
-    
-    public var description: String {
-        return "{[\(id)] \"\(localizedCountry)\"}"
     }
 }
 
@@ -131,5 +107,19 @@ extension Pool {
             return countryString
         }
         return String.init(format: Pool.localizedFormat, countryString, zone.uppercased())
+    }
+
+    public var areaId: String? {
+        let id: String
+        if let area = area, let num = num {
+            id = "\(area) #\(num)"
+        } else if let area = area {
+            id = area
+        } else if let num = num {
+            id = "#\(num)"
+        } else {
+            return nil
+        }
+        return id.uppercased()
     }
 }

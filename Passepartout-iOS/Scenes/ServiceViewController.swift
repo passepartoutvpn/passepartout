@@ -152,7 +152,7 @@ class ServiceViewController: UIViewController, TableModelHost {
             
         case .providerPoolSegueIdentifier:
             let vc = destination as? ProviderPoolViewController
-            vc?.setModels(InfrastructureCache.shared.poolModels(for: uncheckedProviderProfile), currentPoolId: uncheckedProviderProfile.poolId)
+            vc?.setInfrastructure(uncheckedProviderProfile.infrastructure, currentPoolId: uncheckedProviderProfile.poolId)
             vc?.delegate = self
             
         case .endpointSegueIdentifier:
@@ -299,9 +299,6 @@ class ServiceViewController: UIViewController, TableModelHost {
             }
             self.lastInfrastructureUpdate = response.1
             self.tableView.reloadData()
-            
-            // invalidate current pool cache
-            InfrastructureCache.shared.removePoolModels(for: name)
         }
         if !isUpdating {
             hud.hide()
