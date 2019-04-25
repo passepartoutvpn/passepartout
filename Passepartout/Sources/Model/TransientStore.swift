@@ -34,6 +34,10 @@ public class TransientStore {
         static let didHandleSubreddit = "DidHandleSubreddit"
         
         static let masksPrivateData = "MasksPrivateData"
+
+        // migrations
+        
+        static let didMigrateHostsRoutingPolicies = "DidMigrateHostsRoutingPolicies"
     }
     
     public static let shared = TransientStore()
@@ -62,6 +66,15 @@ public class TransientStore {
         }
     }
     
+    public static var didMigrateHostsRoutingPolicies: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.didMigrateHostsRoutingPolicies)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.didMigrateHostsRoutingPolicies)
+        }
+    }
+    
     public static var baseVPNConfiguration: TunnelKitProvider.ConfigurationBuilder {
         let sessionBuilder = SessionProxy.ConfigurationBuilder()
         var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
@@ -84,7 +97,7 @@ public class TransientStore {
 
         // this must be graceful
         ConnectionService.migrateJSON(from: TransientStore.serviceURL, to: TransientStore.serviceURL)
-
+        
         let cfg = TransientStore.baseVPNConfiguration.build()
         do {
             let data = try Data(contentsOf: TransientStore.serviceURL)
@@ -95,6 +108,14 @@ public class TransientStore {
             service = try JSONDecoder().decode(ConnectionService.self, from: data)
             service.baseConfiguration = cfg
             service.loadProfiles()
+
+            // do migrations
+            if !TransientStore.didMigrateHostsRoutingPolicies {
+                if service.reloadHostProfilesFromConfigurationFiles() {
+                    service.saveProfiles()
+                }
+                TransientStore.didMigrateHostsRoutingPolicies = true
+            }
         } catch let e {
             log.error("Could not decode service: \(e)")
             service = ConnectionService(
