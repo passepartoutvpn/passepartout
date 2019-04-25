@@ -167,12 +167,19 @@ public extension ProviderConnectionProfile {
 
 public extension ProviderConnectionProfile {
     var mainAddress: String? {
-        assert(pool != nil, "Getting provider main address but no pool set")
-        return pool?.hostname
+        guard let pool = pool else {
+            assertionFailure("Getting provider main address but no pool set")
+            return nil
+        }
+        return pool.hostname
     }
     
     var addresses: [String] {
-        return pool?.addresses() ?? []
+        var addrs = pool?.addresses() ?? []
+        if let pool = pool, let externalHostname = try? preset?.externalConfiguration(forKey: .hostname, infrastructureName: infrastructure.name, pool: pool) as? String {
+            addrs.insert(externalHostname, at: 0)
+        }
+        return addrs
     }
     
     var protocols: [EndpointProtocol] {
