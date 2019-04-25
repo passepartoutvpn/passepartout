@@ -1,10 +1,9 @@
-### Added
+### Changed
 
-- Portuguese translations (Helder Santana).
-- German translations (Christian Lederer).
-- Russian translations (Alexander Korobynikov).
+- Do not redirect all traffic to VPN unless `--redirect-gateway` specified.
 
 ### Fixed
 
-- SoftEther connects without VPN icon.
+- Fall back to CloudFlare DNS when no servers provided.
+- UDP may disconnect on high speeds.
 

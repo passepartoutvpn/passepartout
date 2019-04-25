@@ -5,11 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 1.6.0 Beta 1757 (2019-04-25)
 
 ### Changed
 
 - Do not redirect all traffic to VPN unless `--redirect-gateway` specified. [#71](https://github.com/passepartoutvpn/passepartout-ios/pull/71)
+
+### Fixed
+
+- Fall back to CloudFlare DNS when no servers provided. [tunnelkit#84](https://github.com/keeshux/tunnelkit/issues/84)
+- UDP may disconnect on high speeds. [tunnelkit#87](https://github.com/keeshux/tunnelkit/issues/87)
 
 ## 1.6.0 Beta 1750 (2019-04-23)
 
