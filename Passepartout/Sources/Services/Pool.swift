@@ -92,17 +92,23 @@ public struct Pool: Codable, Hashable {
 }
 
 extension Pool {
-    private static let localizedFormat = "%@ - %@"
-
     public var localizedCountry: String {
         return Utils.localizedCountry(country)
     }
 
     public var localizedId: String {
-        return String.init(format: Pool.localizedFormat, localizedCountry, secondaryId)
+        var comps: [String] = [localizedCountry]
+        if let secondaryId = optionalSecondaryId {
+            comps.append(secondaryId)
+        }
+        return comps.joined(separator: " - ")
     }
 
     public var secondaryId: String {
+        return optionalSecondaryId ?? ""
+    }
+
+    private var optionalSecondaryId: String? {
         var comps: [String] = []
         if let extraCountries = extraCountries {
             comps.append(contentsOf: extraCountries.map { Utils.localizedCountry($0) })
@@ -112,6 +118,9 @@ extension Pool {
         }
         if let num = num {
             comps.append("#\(num)")
+        }
+        guard !comps.isEmpty else {
+            return nil
         }
         var str = comps.joined(separator: " ")
         if let tags = tags {
