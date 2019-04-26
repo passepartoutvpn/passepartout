@@ -16,20 +16,24 @@ Today Passepartout offers presets for the following VPN providers:
 - VyprVPN
 - Windscribe
 
-FEATURES
+EASY TO USE
 
 - Incredible ease of use, with native look & feel.
 - Handle your profiles in one single place.
-- No web services, ads or any undesired bloat besides the VPN itself.
-- Full transparency on what servers you're connecting to.
-
 - Convenient presets for major VPN providers.
 - Import .ovpn configuration files.
 - Fine-tune encryption without tweaking any configuration file.
 
-- Pick pre-resolved endpoints when DNS is problematic.
+OS INTEGRATION
+
 - Trust cellular or Wi-Fi networks to fine-grain your connectivity.
 - Intuitive Siri Shortcuts.
+
+PRIVACY FRIENDLY
+
+- Full transparency on what servers you're connecting to.
+- Pick pre-resolved endpoints when DNS is problematic.
+- No web services, ads or any undesired bloat besides the VPN itself.
 
 ~
 
