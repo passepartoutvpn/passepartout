@@ -23,6 +23,7 @@ FEATURES
   - TunnelBear
   - VyprVPN
   - Windscribe
+
 - Import .ovpn configuration files.
 - Full transparency on what servers you're connecting to.
 
