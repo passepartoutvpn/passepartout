@@ -138,7 +138,7 @@ public class Utils {
     }
 
     public static func localizedLanguage(_ code: String) -> String {
-        return Locale.current.localizedString(forLanguageCode: code) ?? code
+        return Locale.current.localizedString(forLanguageCode: code)?.capitalized ?? code
     }
     
     private init() {
