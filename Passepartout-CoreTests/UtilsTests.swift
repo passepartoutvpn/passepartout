@@ -48,4 +48,22 @@ class UtilsTests: XCTestCase {
         XCTAssertEqual(1073741824.dataUnitDescription, "1.00GB")
         XCTAssertEqual(1073741825.dataUnitDescription, "1.00GB")
     }
+    
+    func testLanguageLocalization() {
+        let languages = ["en", "it", "de", "pt-BR", "ru"]
+        let english = Locale(identifier: "en")
+        let italian = Locale(identifier: "it")
+
+        let languagesEN = privateSortedLanguages(languages, with: english)
+        let languagesIT = privateSortedLanguages(languages, with: italian)
+
+        XCTAssertEqual(languagesEN, ["en", "de", "it", "pt-BR", "ru"])
+        XCTAssertEqual(languagesIT, ["en", "it", "pt-BR", "ru", "de"])
+    }
+    
+    private func privateSortedLanguages(_ languages: [String], with locale: Locale) -> [String] {
+        return languages.sorted {
+            return locale.localizedString(forLanguageCode: $0)! < locale.localizedString(forLanguageCode: $1)!
+        }
+    }
 }
