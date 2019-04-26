@@ -176,7 +176,7 @@ public extension ProviderConnectionProfile {
     
     var addresses: [String] {
         var addrs = pool?.addresses() ?? []
-        if let pool = pool, let externalHostname = try? preset?.externalConfiguration(forKey: .hostname, infrastructureName: infrastructure.name, pool: pool) as? String {
+        if addrs.isEmpty, let pool = pool, !(pool.isResolved ?? false), let externalHostname = try? preset?.externalConfiguration(forKey: .hostname, infrastructureName: infrastructure.name, pool: pool) as? String {
             addrs.insert(externalHostname, at: 0)
         }
         return addrs

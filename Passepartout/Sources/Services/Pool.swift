@@ -44,6 +44,8 @@ public struct Pool: Codable, Hashable {
         
         case hostname
         
+        case isResolved = "resolved"
+
         case numericAddresses = "addrs"
     }
     
@@ -62,6 +64,8 @@ public struct Pool: Codable, Hashable {
 //    public let location: (Double, Double)
     
     public let hostname: String?
+
+    public let isResolved: Bool?
     
     public let numericAddresses: [UInt32]?
     
