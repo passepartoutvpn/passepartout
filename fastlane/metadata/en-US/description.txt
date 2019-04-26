@@ -6,7 +6,7 @@ Passepartout is open source: https://github.com/passepartoutvpn
 
 USE WITH MULTIPLE PROVIDERS
 
-Today Passepartout offers presets for the following VPN providers:
+Passepartout offers presets for major VPN providers:
 
 - Mullvad
 - NordVPN
@@ -20,7 +20,6 @@ EASY TO USE
 
 - Incredible ease of use, with native look & feel.
 - Handle your profiles in one single place.
-- Convenient presets for major VPN providers.
 - Import .ovpn configuration files.
 - Fine-tune encryption without tweaking any configuration file.
 
