@@ -4,28 +4,32 @@ Passepartout will not engage any unrequested background activity other than the 
 
 Passepartout is open source: https://github.com/passepartoutvpn
 
+PROVIDERS
+
+Today Passepartout offers presets for the following VPN providers:
+
+- Mullvad
+- NordVPN
+- Private Internet Access
+- ProtonVPN
+- TunnelBear
+- VyprVPN
+- Windscribe
+
 FEATURES
 
 - Incredible ease of use, with native look & feel.
 - Handle your profiles in one single place.
 - No web services, ads or any undesired bloat besides the VPN itself.
+- Full transparency on what servers you're connecting to.
 
+- Convenient presets for major VPN providers.
+- Import .ovpn configuration files.
 - Fine-tune encryption without tweaking any configuration file.
+
 - Pick pre-resolved endpoints when DNS is problematic.
 - Trust cellular or Wi-Fi networks to fine-grain your connectivity.
-- Convenient Siri Shortcuts.
-
-- Convenient presets for major VPN networks:
-  - Mullvad
-  - NordVPN
-  - Private Internet Access
-  - ProtonVPN
-  - TunnelBear
-  - VyprVPN
-  - Windscribe
-
-- Import .ovpn configuration files.
-- Full transparency on what servers you're connecting to.
+- Intuitive Siri Shortcuts.
 
 ~
 
