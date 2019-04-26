@@ -70,7 +70,7 @@ public struct Infrastructure: Codable {
     
     public func pool(for identifier: String) -> Pool? {
         for cat in categories {
-            for group in cat.groups.values {
+            for group in cat.groups {
                 guard let found = group.pools.first(where: { $0.id == identifier }) else {
                     continue
                 }
@@ -82,7 +82,7 @@ public struct Infrastructure: Codable {
 
     public func pool(withPrefix prefix: String) -> Pool? {
         for cat in categories {
-            for group in cat.groups.values {
+            for group in cat.groups {
                 guard let found = group.pools.first(where: { $0.id.hasPrefix(prefix) }) else {
                     continue
                 }

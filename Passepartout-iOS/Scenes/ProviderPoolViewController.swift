@@ -45,12 +45,12 @@ class ProviderPoolViewController: UIViewController {
         categories = infrastructure.categories.sorted { $0.name.lowercased() < $1.name.lowercased() }
         
         for c in categories {
-            sortedGroupsByCategory[c.name] = c.groups.values.sorted()
+            sortedGroupsByCategory[c.name] = c.groups.sorted()
         }
 
         // XXX: uglyyy
         for cat in categories {
-            for group in cat.groups.values {
+            for group in cat.groups {
                 for p in group.pools {
                     if p.id == currentPoolId {
                         currentPool = p
@@ -88,15 +88,11 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
             guard let sortedGroups = sortedGroupsByCategory[cat.name] else {
                 continue
             }
-            for entries in cat.groups.enumerated() {
-                let group = entries.element.value
+            for (j, group) in sortedGroups.enumerated() {
                 guard let _ = group.pools.firstIndex(where: { $0.id == currentPool?.id }) else {
                     continue
                 }
-                guard let row = sortedGroups.firstIndex(where: { $0.country == group.country && $0.area == group.area }) else {
-                    continue
-                }
-                return IndexPath(row: row, section: i)
+                return IndexPath(row: j, section: i)
             }
         }
         return nil

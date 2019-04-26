@@ -28,5 +28,5 @@ import Foundation
 public struct PoolCategory: Codable {
     public let name: String
     
-    public let groups: [String: PoolGroup]
+    public let groups: [PoolGroup]
 }
