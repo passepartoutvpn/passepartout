@@ -35,10 +35,6 @@ class VersionViewController: UIViewController {
     
     @IBOutlet private weak var labelIntro: UILabel?
     
-    @IBOutlet private weak var buttonChangelog: UIButton?
-    
-    @IBOutlet private weak var buttonCredits: UIButton?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -52,18 +48,10 @@ class VersionViewController: UIViewController {
         labelTitle?.text = GroupConstants.App.name
         labelVersion?.text = Utils.versionString()
         labelIntro?.text = L10n.Version.Labels.intro
-        buttonChangelog?.setTitle(L10n.Version.Buttons.changelog, for: .normal)
-        buttonCredits?.setTitle(L10n.Version.Buttons.credits, for: .normal)
 
         scrollView?.applyPrimaryBackground(Theme.current)
         for label in [labelTitle, labelVersion, labelIntro] {
             label?.applyLight(Theme.current)
         }
-        buttonChangelog?.apply(Theme.current)
-        buttonCredits?.apply(Theme.current)
-    }
-
-    @IBAction private func visitChangelog() {
-        UIApplication.shared.open(AppConstants.URLs.changelog, options: [:], completionHandler: nil)
     }
 }

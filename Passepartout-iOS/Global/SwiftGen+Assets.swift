@@ -286,6 +286,7 @@ internal enum Asset {
     internal static let pia = ImageAsset(name: "pia")
     internal static let protonvpn = ImageAsset(name: "protonvpn")
     internal static let tunnelbear = ImageAsset(name: "tunnelbear")
+    internal static let vyprvpn = ImageAsset(name: "vyprvpn")
     internal static let windscribe = ImageAsset(name: "windscribe")
   }
 }

@@ -244,6 +244,8 @@
 "about.title" = "About";
 "about.sections.web.header" = "Web";
 "about.sections.share.header" = "Share";
+"about.cells.changelog.caption" = "Changelog";
+"about.cells.credits.caption" = "Credits";
 "about.cells.website.caption" = "Home page";
 "about.cells.faq.caption" = "FAQ";
 "about.cells.disclaimer.caption" = "Disclaimer";
@@ -264,8 +266,6 @@
 
 "version.title" = "Version";
 "version.labels.intro" = "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.";
-"version.buttons.changelog" = "CHANGELOG";
-"version.buttons.credits" = "CREDITS";
 
 "credits.title" = "Credits";
 "credits.sections.licenses.header" = "Licenses";

@@ -33,11 +33,14 @@ class AboutViewController: UITableViewController, TableModelHost {
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.info)
+        model.add(.moreInfo)
         model.add(.web)
         model.add(.share)
+        model.setHeader("", for: .info)
         model.setHeader(L10n.About.Sections.Web.header, for: .web)
         model.setHeader(L10n.About.Sections.Share.header, for: .share)
         model.set([.version], in: .info)
+        model.set([.seeChangelog, .seeCredits], in: .moreInfo)
         model.set([.website, .faq, .disclaimer, .privacyPolicy], in: .web)
         model.set([.shareTwitter, .shareGeneric], in: .share)
         return model
@@ -66,28 +69,12 @@ class AboutViewController: UITableViewController, TableModelHost {
         perform(segue: StoryboardSegue.About.versionSegueIdentifier)
     }
     
-    private func visitWebsite() {
-        UIApplication.shared.open(AppConstants.URLs.website, options: [:], completionHandler: nil)
+    private func openCredits() {
+        perform(segue: StoryboardSegue.About.creditsSegueIdentifier)
     }
     
-    private func visitFAQ() {
-        UIApplication.shared.open(AppConstants.URLs.faq, options: [:], completionHandler: nil)
-    }
-    
-    private func visitDisclaimer() {
-        UIApplication.shared.open(AppConstants.URLs.disclaimer, options: [:], completionHandler: nil)
-    }
-    
-    private func visitPrivacyPolicy() {
-        UIApplication.shared.open(AppConstants.URLs.privacyPolicy, options: [:], completionHandler: nil)
-    }
-    
-    private func visitRepository(_ url: URL) {
+    private func visit(_ url: URL) {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
-    private func tweetAboutApp() {
-        UIApplication.shared.open(AppConstants.URLs.twitterIntent, options: [:], completionHandler: nil)
     }
     
     private func inviteFriend(sender: UITableViewCell?) {
@@ -108,6 +95,8 @@ extension AboutViewController {
     enum SectionType: Int {
         case info
         
+        case moreInfo
+        
         case web
 
         case share
@@ -115,6 +104,10 @@ extension AboutViewController {
     
     enum RowType: Int {
         case version
+        
+        case seeChangelog
+        
+        case seeCredits
         
         case website
         
@@ -141,48 +134,50 @@ extension AboutViewController {
         return model.footer(for: section)
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return model.headerHeight(for: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return model.footerHeight(for: section)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.count(for: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         switch model.row(at: indexPath) {
         case .version:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Version.title
             cell.rightText = Utils.versionString()
-            return cell
             
+        case .seeChangelog:
+            cell.leftText = L10n.About.Cells.Changelog.caption
+
+        case .seeCredits:
+            cell.leftText = L10n.About.Cells.Credits.caption
+
         case .website:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.Website.caption
-            return cell
             
         case .faq:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.Faq.caption
-            return cell
 
         case .disclaimer:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.Disclaimer.caption
-            return cell
             
         case .privacyPolicy:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.PrivacyPolicy.caption
-            return cell
             
         case .shareTwitter:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.ShareTwitter.caption
-            return cell
             
         case .shareGeneric:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.About.Cells.ShareGeneric.caption
-            return cell
         }
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -190,21 +185,27 @@ extension AboutViewController {
         case .version:
             showVersion()
             
+        case .seeChangelog:
+            visit(AppConstants.URLs.changelog)
+            
+        case .seeCredits:
+            openCredits()
+
         case .website:
-            visitWebsite()
+            visit(AppConstants.URLs.website)
             
         case .faq:
-            visitFAQ()
+            visit(AppConstants.URLs.faq)
 
         case .disclaimer:
-            visitDisclaimer()
-            
+            visit(AppConstants.URLs.disclaimer)
+
         case .privacyPolicy:
-            visitPrivacyPolicy()
-            
+            visit(AppConstants.URLs.privacyPolicy)
+
         case .shareTwitter:
-            tweetAboutApp()
-            
+            visit(AppConstants.URLs.twitterIntent)
+
         case .shareGeneric:
             inviteFriend(sender: tableView.cellForRow(at: indexPath))
         }
