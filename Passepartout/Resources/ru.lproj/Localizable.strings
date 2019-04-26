@@ -142,6 +142,7 @@
 "account.sections.guidance.footer.infrastructure.pia" = "Используйте Ваши данные для входа с веб-сайта %@. Ваш логин обычно числовой с приставкой \"p\".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Найдите Ваши данные для входа %@ \"Account > OpenVPN / IKEv2 Username\" секции веб-сайта.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Используйте данные для входа на %@ веб-сайт. Ваш логин обычно Ваш e-mail.";
+"account.sections.guidance.footer.infrastructure.vyprvpn" = "Используйте данные для входа на %@ веб-сайт. Ваш логин обычно Ваш e-mail.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Найдите Ваши данные для входа %@ в OpenVPN Config Generator на веб-сайте.";
 "account.sections.registration.footer" = "Создайте аккаунт на %@ веб-сайте.";
 "account.cells.username.caption" = "Логин";

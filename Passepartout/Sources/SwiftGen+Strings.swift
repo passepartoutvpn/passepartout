@@ -106,6 +106,10 @@ public enum L10n {
             public static func tunnelbear(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.tunnelbear", p1)
             }
+            /// Use your %@ website credentials. Your username is usually your e-mail.
+            public static func vyprvpn(_ p1: String) -> String {
+              return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.vyprvpn", p1)
+            }
             /// Find your %@ credentials in the OpenVPN Config Generator on the website.
             public static func windscribe(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.windscribe", p1)
@@ -554,18 +558,6 @@ public enum L10n {
   }
 
   public enum Provider {
-    public enum Pool {
-      public enum Sections {
-        public enum Free {
-          /// Free
-          public static let header = L10n.tr("Localizable", "provider.pool.sections.free.header")
-        }
-        public enum Paid {
-          /// Paid
-          public static let header = L10n.tr("Localizable", "provider.pool.sections.paid.header")
-        }
-      }
-    }
     public enum Preset {
       public enum Cells {
         public enum TechDetails {

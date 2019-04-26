@@ -77,6 +77,9 @@ class AccountViewController: UIViewController, TableModelHost {
         case .tunnelBear:
             return V.tunnelbear(name.rawValue)
             
+        case .vyprVPN:
+            return V.vyprvpn(name.rawValue)
+            
         case .windscribe:
             return V.windscribe(name.rawValue)
         }

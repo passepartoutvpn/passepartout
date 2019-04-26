@@ -64,6 +64,7 @@ public class InfrastructureFactory {
         .pia,
         .protonVPN,
         .tunnelBear,
+        .vyprVPN,
         .windscribe
     ]
     

@@ -142,6 +142,7 @@
 "account.sections.guidance.footer.infrastructure.pia" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise numerischt mit einem \"p\" Präfix.";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Deine Zugangsdaten für %@ findest du unter \"Account > OpenVPN / IKEv2 Username\" auf der Webseite.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise deine Email.";
+"account.sections.guidance.footer.infrastructure.vyprvpn" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise deine Email.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Deine Zugangsdaten für %@ findest du im OpenVPN Config Generator auf der Webseite.";
 "account.sections.registration.footer" = "Beantrage einen Account auf der %@ Webseite.";
 "account.cells.username.caption" = "Benutzername";
