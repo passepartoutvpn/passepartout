@@ -2,4 +2,17 @@
 
 - VyprVPN provider.
 - More infrastructure metadata.
+- Portuguese translations (Helder Santana).
+- German translations (Christian Lederer).
+- Russian translations (Alexander Korobynikov).
+
+### Changed
+
+- Do not redirect all traffic to VPN unless `--redirect-gateway` specified.
+
+### Fixed
+
+- Fall back to CloudFlare DNS when no servers provided.
+- UDP may disconnect on high speeds.
+- SoftEther connects without VPN icon.
 

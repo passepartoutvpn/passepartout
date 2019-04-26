@@ -5,14 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.6.0 Beta 1779 (2019-04-26)
+## 1.6.0 Beta 1798 (2019-04-26)
 
 ### Added
 
 - VyprVPN provider. [#72](https://github.com/passepartoutvpn/passepartout-ios/pull/72)
 - More infrastructure metadata.
-
-## 1.6.0 Beta 1757 (2019-04-25)
+- Portuguese translations (Helder Santana). [#70](https://github.com/passepartoutvpn/passepartout-ios/pull/70)
+- German translations (Christian Lederer).
+- Russian translations (Alexander Korobynikov).
 
 ### Changed
 
@@ -22,17 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fall back to CloudFlare DNS when no servers provided. [tunnelkit#84](https://github.com/keeshux/tunnelkit/issues/84)
 - UDP may disconnect on high speeds. [tunnelkit#87](https://github.com/keeshux/tunnelkit/issues/87)
-
-## 1.6.0 Beta 1750 (2019-04-23)
-
-### Added
-
-- Portuguese translations (Helder Santana). [#70](https://github.com/passepartoutvpn/passepartout-ios/pull/70)
-- German translations (Christian Lederer).
-- Russian translations (Alexander Korobynikov).
-
-### Fixed
-
 - SoftEther connects without VPN icon. [#69](https://github.com/passepartoutvpn/passepartout-ios/issues/69)
 
 ## 1.5.0 (2019-04-17)
