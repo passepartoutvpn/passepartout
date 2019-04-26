@@ -1,30 +1,38 @@
-Passepartout mira alla semplicità, integrandosi in modo naturale con la piattaforma iOS. Dimentica gli aspetti complicati del mettere a punto una connessione ad un server OpenVPN. Passepartout è un client essenziale che focalizza solo su un tunnel VPN stabile, risparmiandoti i dettagli che non è necessario sapere.
+Passepartout è un client OpenVPN intelligente perfettamente integrato con la piattaforma iOS. Passepartout è l'unica app di cui hai bisogno sia per provider OpenVPN conosciuti che per i tuoi server OpenVPN personali. Con le Reti Sicure ed i comandi rapidi Siri, Passepartout è il modo migliore di usare una VPN su iOS.
 
-Passepartout non avvierà in background nessuna attività non richiesta che non sia la VPN, essendo per questo motivo anche più congeniale ai firewall.
+Passepartout non avvia in background nessuna attività non richiesta che non sia la VPN, essendo per questo motivo anche più congeniale ai firewall.
 
 Passepartout è open source: https://github.com/passepartoutvpn
 
-FEATURE
+USALO CON VARI PROVIDER
+
+Passepartout offre profili per i maggiori provider VPN:
+
+- Mullvad
+- NordVPN
+- Private Internet Access
+- ProtonVPN
+- TunnelBear
+- VyprVPN
+- Windscribe
+
+FACILE DA USARE
 
 - Incredibilmente semplice, con look nativo.
 - Gestisci i tuoi profili in una singola schermata.
-- Nessun web service, pubblicità o altra aggiunta inutile oltre la VPN.
-
-- Regola la crittografia senza toccare alcun file di configurazione.
-- Scegli indirizzi pre-risolti quando il DNS è problematico.
-- Rendi la rete mobile o Wi-Fi sicura per personalizzare la tua connettività.
-- Comandi rapidi Siri.
-
-- Configurazioni per i maggiori provider VPN:
-  - Mullvad
-  - NordVPN
-  - Private Internet Access
-  - ProtonVPN
-  - TunnelBear
-  - VyprVPN
-  - Windscribe
 - Importa file di configurazione .ovpn.
+- Regola la crittografia senza toccare alcun file di configurazione.
+
+INTEGRAZIONE CON IL SISTEMA
+
+- Rendi la rete mobile o Wi-Fi sicura per personalizzare la tua connettività.
+- Intuitivi comandi rapidi Siri.
+
+ORIENTATO ALLA PRIVACY
+
 - Completa trasparenza sui server a cui ti connetti.
+- Scegli indirizzi pre-risolti quando il DNS è problematico.
+- Nessun web service, pubblicità o altra aggiunta inutile oltre la VPN.
 
 ~
 

@@ -1,30 +1,38 @@
-Passepartout aims at ease of use, by integrating seamlessly with the iOS platform. Forget about all the tricky aspects of setting up a VPN connection to an OpenVPN server. Passepartout is a clear-cut client that fully focuses on a stable VPN tunnel, without bothering you with complexities you don't need to know about.
+Passepartout is a smart OpenVPN client perfectly integrated with the iOS platform. Passepartout is the only app you need for both well-known OpenVPN providers and your personal OpenVPN servers. With Trusted Networks and Siri Shortcuts, Passepartout unlocks the very best of using a VPN on iOS.
 
-Passepartout will not engage any unrequested background activity other than the VPN tunnel, thus being also friendlier to firewalls.
+Passepartout does not engage any unrequested background activity other than the VPN tunnel, thus being also friendlier to firewalls.
 
 Passepartout is open source: https://github.com/passepartoutvpn
 
-FEATURES
+USE WITH MULTIPLE PROVIDERS
+
+Passepartout offers presets for major VPN providers:
+
+- Mullvad
+- NordVPN
+- Private Internet Access
+- ProtonVPN
+- TunnelBear
+- VyprVPN
+- Windscribe
+
+EASY TO USE
 
 - Incredible ease of use, with native look & feel.
 - Handle your profiles in one single place.
-- No web services, ads or any undesired bloat besides the VPN itself.
-
-- Fine-tune encryption without tweaking any configuration file.
-- Pick pre-resolved endpoints when DNS is problematic.
-- Trust cellular or Wi-Fi networks to fine-grain your connectivity.
-- Convenient Siri Shortcuts.
-
-- Convenient presets for major VPN networks:
-  - Mullvad
-  - NordVPN
-  - Private Internet Access
-  - ProtonVPN
-  - TunnelBear
-  - VyprVPN
-  - Windscribe
 - Import .ovpn configuration files.
+- Fine-tune encryption without tweaking any configuration file.
+
+OS INTEGRATION
+
+- Trust cellular or Wi-Fi networks to fine-grain your connectivity.
+- Intuitive Siri Shortcuts.
+
+PRIVACY FRIENDLY
+
 - Full transparency on what servers you're connecting to.
+- Pick pre-resolved endpoints when DNS is problematic.
+- No web services, ads or any undesired bloat besides the VPN itself.
 
 ~
 
