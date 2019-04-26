@@ -136,9 +136,9 @@ This product includes software developed by the OpenSSL Project for use in the O
 
 ## Translations
 
+- German: Christian Lederer
 - Italian: Davide De Rosa (author) - [@keeshux](https://github.com/keeshux)
 - Portuguese: Helder Santana - [@heldr](https://github.com/heldr)
-- German: Christian Lederer
 - Russian: Alexander Korobynikov
 
 ## Usage
