@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kan-Ro-DbI">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="491"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="395"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RP1-au-v0h">
-                                                <rect key="frame" x="28" y="40" width="358" height="411"/>
+                                                <rect key="frame" x="28" y="40" width="358" height="315"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="eRj-AM-Edq">
                                                         <rect key="frame" x="79" y="0.0" width="200" height="200"/>
@@ -48,42 +48,20 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wV2-Nx-RuF">
-                                                        <rect key="frame" x="0.0" y="335" width="358" height="33"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                        <state key="normal" title="&lt;CL&gt;"/>
-                                                        <connections>
-                                                            <action selector="visitChangelog" destination="PMT-gj-ARE" eventType="touchUpInside" id="hSv-6o-eXI"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtK-wa-fgh">
-                                                        <rect key="frame" x="0.0" y="378" width="358" height="33"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                        <state key="normal" title="&lt;CRD&gt;"/>
-                                                        <connections>
-                                                            <segue destination="duu-Yq-oor" kind="show" id="w0a-1I-6Nc"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="wV2-Nx-RuF" secondAttribute="trailing" id="1jj-cq-2Ja"/>
                                                     <constraint firstItem="eRj-AM-Edq" firstAttribute="centerX" secondItem="RP1-au-v0h" secondAttribute="centerX" id="39V-6k-m1r"/>
                                                     <constraint firstAttribute="trailing" secondItem="F6g-5X-yGY" secondAttribute="trailing" id="4NF-Ha-rCB"/>
                                                     <constraint firstItem="Zek-qD-saW" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="4r5-es-LKj"/>
                                                     <constraint firstItem="tOJ-Gb-6TL" firstAttribute="top" secondItem="Zek-qD-saW" secondAttribute="bottom" constant="5" id="5EV-6h-af6"/>
                                                     <constraint firstItem="F6g-5X-yGY" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="Bbh-jl-eyk"/>
-                                                    <constraint firstItem="rtK-wa-fgh" firstAttribute="top" secondItem="wV2-Nx-RuF" secondAttribute="bottom" constant="10" id="ChX-qg-yan"/>
                                                     <constraint firstItem="Zek-qD-saW" firstAttribute="top" secondItem="eRj-AM-Edq" secondAttribute="bottom" constant="20" id="E5v-Gd-4FH"/>
-                                                    <constraint firstItem="wV2-Nx-RuF" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="Iop-zX-3fL"/>
                                                     <constraint firstItem="F6g-5X-yGY" firstAttribute="top" secondItem="tOJ-Gb-6TL" secondAttribute="bottom" constant="20" id="Vla-uy-lL8"/>
                                                     <constraint firstAttribute="trailing" secondItem="Zek-qD-saW" secondAttribute="trailing" id="WL1-SB-5gf"/>
-                                                    <constraint firstAttribute="bottom" secondItem="rtK-wa-fgh" secondAttribute="bottom" id="XDo-fJ-IOo"/>
                                                     <constraint firstAttribute="trailing" secondItem="tOJ-Gb-6TL" secondAttribute="trailing" id="a5o-c7-BD5"/>
-                                                    <constraint firstAttribute="trailing" secondItem="rtK-wa-fgh" secondAttribute="trailing" id="dBQ-XF-2mE"/>
                                                     <constraint firstItem="tOJ-Gb-6TL" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="grT-YM-rGi"/>
                                                     <constraint firstItem="eRj-AM-Edq" firstAttribute="top" secondItem="RP1-au-v0h" secondAttribute="top" id="q35-KT-uTl"/>
-                                                    <constraint firstItem="rtK-wa-fgh" firstAttribute="leading" secondItem="RP1-au-v0h" secondAttribute="leading" id="weH-qk-nTh"/>
-                                                    <constraint firstItem="wV2-Nx-RuF" firstAttribute="top" secondItem="F6g-5X-yGY" secondAttribute="bottom" constant="20" id="y5I-Du-MiY"/>
+                                                    <constraint firstAttribute="bottom" secondItem="F6g-5X-yGY" secondAttribute="bottom" id="tqI-4a-Mbr"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -115,8 +93,6 @@
                         <viewLayoutGuide key="safeArea" id="1um-xX-wxp"/>
                     </view>
                     <connections>
-                        <outlet property="buttonChangelog" destination="wV2-Nx-RuF" id="E0X-ek-Ii2"/>
-                        <outlet property="buttonCredits" destination="rtK-wa-fgh" id="56A-mE-YHa"/>
                         <outlet property="labelIntro" destination="F6g-5X-yGY" id="QSg-VO-Wf4"/>
                         <outlet property="labelTitle" destination="Zek-qD-saW" id="TL8-Vb-B58"/>
                         <outlet property="labelVersion" destination="tOJ-Gb-6TL" id="O7w-Ne-L0R"/>
@@ -172,7 +148,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A5e-dW-BFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1786" y="-2247"/>
+            <point key="canvasLocation" x="-2552" y="-1544"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bMd-7b-j9C">
@@ -238,6 +214,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="PMT-gj-ARE" kind="show" identifier="VersionSegueIdentifier" id="uYt-4N-PPL"/>
+                        <segue destination="duu-Yq-oor" kind="show" identifier="CreditsSegueIdentifier" id="8oK-Gy-3Vg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AnH-Vt-JJn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -316,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Urb-bq-a19" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1012" y="-2248"/>
+            <point key="canvasLocation" x="-1542" y="-1544"/>
         </scene>
     </scenes>
     <resources>
