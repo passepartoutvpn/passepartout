@@ -16,6 +16,14 @@ public enum L10n {
     /// About
     public static let title = L10n.tr("Localizable", "about.title")
     public enum Cells {
+      public enum Changelog {
+        /// Changelog
+        public static let caption = L10n.tr("Localizable", "about.cells.changelog.caption")
+      }
+      public enum Credits {
+        /// Credits
+        public static let caption = L10n.tr("Localizable", "about.cells.credits.caption")
+      }
       public enum Disclaimer {
         /// Disclaimer
         public static let caption = L10n.tr("Localizable", "about.cells.disclaimer.caption")
@@ -892,12 +900,6 @@ public enum L10n {
   public enum Version {
     /// Version
     public static let title = L10n.tr("Localizable", "version.title")
-    public enum Buttons {
-      /// CHANGELOG
-      public static let changelog = L10n.tr("Localizable", "version.buttons.changelog")
-      /// CREDITS
-      public static let credits = L10n.tr("Localizable", "version.buttons.credits")
-    }
     public enum Labels {
       /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.
       public static let intro = L10n.tr("Localizable", "version.labels.intro")

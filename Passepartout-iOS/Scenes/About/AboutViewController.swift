@@ -154,10 +154,10 @@ extension AboutViewController {
             cell.rightText = Utils.versionString()
             
         case .seeChangelog:
-            cell.leftText = L10n.Version.Buttons.changelog
+            cell.leftText = L10n.About.Cells.Changelog.caption
 
         case .seeCredits:
-            cell.leftText = L10n.Version.Buttons.credits
+            cell.leftText = L10n.About.Cells.Credits.caption
 
         case .website:
             cell.leftText = L10n.About.Cells.Website.caption
