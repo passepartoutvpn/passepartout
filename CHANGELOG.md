@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- VyprVPN provider. [#72](https://github.com/passepartoutvpn/passepartout-ios/pull/72)
 - More infrastructure metadata.
 
 ## 1.6.0 Beta 1757 (2019-04-25)

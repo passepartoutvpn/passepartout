@@ -21,8 +21,8 @@ FEATURE
   - Private Internet Access
   - ProtonVPN
   - TunnelBear
+  - VyprVPN
   - Windscribe
-  - ...altri in arrivo!
 - Importa file di configurazione .ovpn.
 - Completa trasparenza sui server a cui ti connetti.
 
