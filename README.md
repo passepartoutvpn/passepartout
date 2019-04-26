@@ -60,8 +60,8 @@ Passepartout can connect to a few well-known VPN providers with an existing acco
 - [Private Internet Access][app-net-pia]
 - [ProtonVPN][app-net-protonvpn]
 - [TunnelBear][app-net-tunnelbear]
+- [VyprVPN][app-net-vyprvpn]
 - [Windscribe][app-net-windscribe]
-- ...more soon!
 
 In preset mode, you can pick pre-resolved IPv4 endpoints when DNS is problematic.
 
@@ -159,6 +159,7 @@ Website: [passepartoutvpn.app][about-website]
 [app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
 [app-net-protonvpn]: https://protonvpn.net/?aid=keeshux
 [app-net-tunnelbear]: https://click.tunnelbear.com/SHb8
+[app-net-vyprvpn]: https://www.vyprvpn.com/
 [app-net-windscribe]: https://secure.link/kCsD0prd
 
 [dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html

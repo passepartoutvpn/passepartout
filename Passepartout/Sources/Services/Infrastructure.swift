@@ -38,6 +38,8 @@ public struct Infrastructure: Codable {
 
         case tunnelBear = "TunnelBear"
         
+        case vyprVPN = "VyprVPN"
+        
         case windscribe = "Windscribe"
     }
     

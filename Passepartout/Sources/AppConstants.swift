@@ -208,6 +208,7 @@ public class AppConstants {
             .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/",
             .protonVPN: "https://protonvpn.net/?aid=keeshux",
             .tunnelBear: "https://click.tunnelbear.com/SHb8",
+            .vyprVPN: "https://www.vyprvpn.com/",
             .windscribe: "https://secure.link/kCsD0prd"
         ]
 
