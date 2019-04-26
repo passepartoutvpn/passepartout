@@ -4,7 +4,7 @@ Passepartout will not engage any unrequested background activity other than the 
 
 Passepartout is open source: https://github.com/passepartoutvpn
 
-PROVIDERS
+USE WITH MULTIPLE PROVIDERS
 
 Today Passepartout offers presets for the following VPN providers:
 
