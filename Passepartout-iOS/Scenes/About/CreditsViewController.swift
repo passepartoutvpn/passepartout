@@ -32,7 +32,7 @@ class CreditsViewController: UITableViewController, TableModelHost {
     private let notices = AppConstants.Notice.all
 
     private let languages = AppConstants.Translations.authorByLanguage.keys.sorted {
-        return Utils.localizedCountry($0) < Utils.localizedCountry($1)
+        return Utils.localizedLanguage($0) < Utils.localizedLanguage($1)
     }
 
     // MARK: TableModelHost

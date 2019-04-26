@@ -137,8 +137,8 @@ public class Utils {
         return Locale.current.localizedString(forRegionCode: code) ?? code
     }
 
-    public static func localizedLanguage(_ code: String) -> String? {
-        return Locale.current.localizedString(forLanguageCode: code)
+    public static func localizedLanguage(_ code: String) -> String {
+        return Locale.current.localizedString(forLanguageCode: code) ?? code
     }
     
     private init() {
