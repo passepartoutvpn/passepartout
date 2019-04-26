@@ -1,9 +1,5 @@
-### Changed
+### Added
 
-- Do not redirect all traffic to VPN unless `--redirect-gateway` specified.
-
-### Fixed
-
-- Fall back to CloudFlare DNS when no servers provided.
-- UDP may disconnect on high speeds.
+- VyprVPN provider.
+- More infrastructure metadata.
 
