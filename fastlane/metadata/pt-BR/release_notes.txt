@@ -1,0 +1,18 @@
+### O que há de novo
+
+- VyprVPN é agora suportado.
+- Mais dados de configuração de infraestrutura.
+- Tradução para Português (Helder Santana).
+- Tradução para Alemão (Christian Lederer).
+- Tradução para Russo (Alexander Korobynikov).
+
+### O que mudou
+
+- Não redireciona todo o tráfego para VPN a não ser que `--redirect-gateway` seja especificado.
+
+### Corrigido
+
+- Retorna para CloudFlare DNS quando nenhum serviço está especificado.
+- UDP pode desconectar em alta velocidade.
+- SoftEther conecta sem ícone de VPN.
+

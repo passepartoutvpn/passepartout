@@ -186,6 +186,7 @@
 "configuration.cells.tls_wrapping.value.auth" = "Autenticação";
 "configuration.cells.tls_wrapping.value.crypt" = "Criptografia";
 "configuration.cells.eku.caption" = "Verificação extendida";
+"configuration.cells.default_gateway.caption" = "Gateway padrão";
 "configuration.cells.dns_server.caption" = "DNS";
 "configuration.cells.dns_domain.caption" = "Domínio";
 "configuration.cells.proxy_http.caption" = "Proxy";
