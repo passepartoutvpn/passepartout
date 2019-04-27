@@ -171,6 +171,8 @@ public class AppConstants {
 
         public static let privacyPolicy = website.appendingPathComponent("privacy")
         
+        public static let readme = Repos.ios.appendingPathComponent("blob/master/README.md")
+        
         public static let changelog = Repos.ios.appendingPathComponent("blob/master/CHANGELOG.md")
         
         public static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!

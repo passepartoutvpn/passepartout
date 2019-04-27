@@ -33,14 +33,15 @@ class AboutViewController: UITableViewController, TableModelHost {
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
         model.add(.info)
-        model.add(.moreInfo)
+        model.add(.github)
         model.add(.web)
         model.add(.share)
         model.setHeader("", for: .info)
+        model.setHeader("GitHub", for: .github)
         model.setHeader(L10n.About.Sections.Web.header, for: .web)
         model.setHeader(L10n.About.Sections.Share.header, for: .share)
-        model.set([.version], in: .info)
-        model.set([.seeChangelog, .seeCredits], in: .moreInfo)
+        model.set([.version, .credits], in: .info)
+        model.set([.readme, .changelog], in: .github)
         model.set([.website, .faq, .disclaimer, .privacyPolicy], in: .web)
         model.set([.shareTwitter, .shareGeneric], in: .share)
         return model
@@ -95,7 +96,7 @@ extension AboutViewController {
     enum SectionType: Int {
         case info
         
-        case moreInfo
+        case github
         
         case web
 
@@ -105,9 +106,11 @@ extension AboutViewController {
     enum RowType: Int {
         case version
         
-        case seeChangelog
+        case credits
         
-        case seeCredits
+        case readme
+        
+        case changelog
         
         case website
         
@@ -153,12 +156,15 @@ extension AboutViewController {
             cell.leftText = L10n.Version.title
             cell.rightText = Utils.versionString()
             
-        case .seeChangelog:
-            cell.leftText = L10n.About.Cells.Changelog.caption
-
-        case .seeCredits:
+        case .credits:
             cell.leftText = L10n.About.Cells.Credits.caption
 
+        case .readme:
+            cell.leftText = "README"
+            
+        case .changelog:
+            cell.leftText = "CHANGELOG"
+            
         case .website:
             cell.leftText = L10n.About.Cells.Website.caption
             
@@ -185,12 +191,15 @@ extension AboutViewController {
         case .version:
             showVersion()
             
-        case .seeChangelog:
+        case .credits:
+            openCredits()
+            
+        case .readme:
+            visit(AppConstants.URLs.readme)
+            
+        case .changelog:
             visit(AppConstants.URLs.changelog)
             
-        case .seeCredits:
-            openCredits()
-
         case .website:
             visit(AppConstants.URLs.website)
             

@@ -246,7 +246,6 @@
 "about.title" = "Informazioni su";
 "about.sections.web.header" = "Web";
 "about.sections.share.header" = "Condividi";
-"about.cells.changelog.caption" = "Changelog";
 "about.cells.credits.caption" = "Credits";
 "about.cells.website.caption" = "Home page";
 "about.cells.faq.caption" = "FAQ";

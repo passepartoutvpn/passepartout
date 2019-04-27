@@ -250,7 +250,6 @@
 "about.title" = "Sobre";
 "about.sections.web.header" = "Web";
 "about.sections.share.header" = "Compartilhar";
-"about.cells.changelog.caption" = "Changelog";
 "about.cells.credits.caption" = "Créditos";
 "about.cells.website.caption" = "Home page";
 "about.cells.faq.caption" = "FAQ";
