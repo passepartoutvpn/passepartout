@@ -137,7 +137,7 @@
 "service.alerts.download.hud.extracting" = "Извлечение файлов, пожалуста подождите...";
 
 "account.sections.credentials.header" = "Данные для входа";
-"account.sections.guidance.footer.infrastructure.mullvad" = "Используйте Ваш логин и пароль с веб-сайта %@\"m\".";
+"account.sections.guidance.footer.infrastructure.mullvad" = "Используйте Ваши данные для входа с веб-сайта %@. Ваш логин обычно числовой с.";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Используйте данные для входа на %@ веб-сайт. Ваш логин обычно Ваш e-mail.";
 "account.sections.guidance.footer.infrastructure.pia" = "Используйте Ваши данные для входа с веб-сайта %@. Ваш логин обычно числовой с приставкой \"p\".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Найдите Ваши данные для входа %@ \"Account > OpenVPN / IKEv2 Username\" секции веб-сайта.";

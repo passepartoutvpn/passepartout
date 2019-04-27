@@ -137,7 +137,7 @@
 "service.alerts.download.hud.extracting" = "Estraendo i file, un attimo di pazienza...";
 
 "account.sections.credentials.header" = "Credenziali";
-"account.sections.guidance.footer.infrastructure.mullvad" = "Usa il tuo account number del sito di %@ e la password \"m\".";
+"account.sections.guidance.footer.infrastructure.mullvad" = "Usa le credenziali del sito di %@. Il tuo username è generalmente numerico.";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Usa le credenziali del sito di %@. Il tuo username è generalmente la tua e-mail.";
 "account.sections.guidance.footer.infrastructure.pia" = "Usa le credenziali del sito di %@. Il tuo username è generalmente numerico con un prefisso \"p\".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Trova le tue credenziali nella sezione \"Account > OpenVPN / IKEv2 Username\" del sito di %@.";

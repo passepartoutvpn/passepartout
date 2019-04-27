@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fall back to CloudFlare DNS when no servers provided. [tunnelkit#84](https://github.com/keeshux/tunnelkit/issues/84)
 - UDP may disconnect on high speeds. [tunnelkit#87](https://github.com/keeshux/tunnelkit/issues/87)
 - SoftEther connects without VPN icon. [#69](https://github.com/passepartoutvpn/passepartout-ios/issues/69)
+- Misleading Mullvad password suggestion. [#75](https://github.com/passepartoutvpn/passepartout-ios/issues/75)
 
 ## 1.5.0 (2019-04-17)
 

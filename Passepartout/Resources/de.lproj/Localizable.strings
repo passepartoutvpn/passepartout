@@ -137,7 +137,7 @@
 "service.alerts.download.hud.extracting" = "Extrahiere Dateien, bitte warten...";
 
 "account.sections.credentials.header" = "Zugangsdaten";
-"account.sections.guidance.footer.infrastructure.mullvad" = "Benutze deinen %@ Account-Nummer und -passwort \"m\".";
+"account.sections.guidance.footer.infrastructure.mullvad" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise numerischt.";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise deine Email.";
 "account.sections.guidance.footer.infrastructure.pia" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise numerischt mit einem \"p\" Präfix.";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Deine Zugangsdaten für %@ findest du unter \"Account > OpenVPN / IKEv2 Username\" auf der Webseite.";
