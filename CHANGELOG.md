@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.6.0 Beta 1798 (2019-04-26)
+## 1.6.0 Beta 1803 (2019-04-27)
 
 ### Added
 
@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SoftEther connects without VPN icon. [#69](https://github.com/passepartoutvpn/passepartout-ios/issues/69)
 - Misleading Mullvad password suggestion. [#75](https://github.com/passepartoutvpn/passepartout-ios/issues/75)
 - Leave digest editable despite cipher. [#74](https://github.com/passepartoutvpn/passepartout-ios/issues/74)
+- TLS errors with passphrase-protected .ovpn profiles. [tunnelkit#91](https://github.com/keeshux/tunnelkit/issues/91)
 
 ## 1.5.0 (2019-04-17)
 
