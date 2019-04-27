@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.6.0 Beta 1803 (2019-04-27)
+## Unreleased
 
 ### Added
 
@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Misleading Mullvad password suggestion. [#75](https://github.com/passepartoutvpn/passepartout-ios/issues/75)
 - Leave digest editable despite cipher. [#74](https://github.com/passepartoutvpn/passepartout-ios/issues/74)
 - TLS errors with passphrase-protected .ovpn profiles. [tunnelkit#91](https://github.com/keeshux/tunnelkit/issues/91)
+- Issue with DNS-only VPN profiles. [#73](https://github.com/passepartoutvpn/passepartout-ios/issues/73)
 
 ## 1.5.0 (2019-04-17)
 
