@@ -251,13 +251,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             
         case .digest:
             cell.leftText = L10n.Configuration.Cells.Digest.caption
-            if !configuration.fallbackCipher.embedsDigest {
-                cell.rightText = configuration.fallbackDigest.description
-            } else {
-                cell.rightText = L10n.Configuration.Cells.Digest.Value.embedded
-                cell.accessoryType = .none
-                cell.isTappable = false
-            }
+            cell.rightText = configuration.fallbackDigest.description
 
         case .resetOriginal:
             cell.leftText = L10n.Configuration.Cells.ResetOriginal.caption
@@ -394,10 +388,6 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             navigationController?.pushViewController(vc, animated: true)
             
         case .digest:
-            guard !configuration.fallbackCipher.embedsDigest else {
-                return
-            }
-            
             let vc = OptionViewController<SessionProxy.Digest>()
             vc.title = settingCell?.leftText
             vc.options = [.sha1, .sha224, .sha256, .sha384, .sha512]
