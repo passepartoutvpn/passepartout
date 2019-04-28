@@ -15,4 +15,8 @@
 - Fall back to CloudFlare DNS when no servers provided.
 - UDP may disconnect on high speeds.
 - SoftEther connects without VPN icon.
+- Misleading Mullvad password suggestion.
+- Leave digest editable despite cipher.
+- TLS errors with passphrase-protected .ovpn profiles.
+- Issue with DNS-only VPN profiles.
 
