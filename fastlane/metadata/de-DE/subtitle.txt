@@ -1,1 +1,1 @@
-Connect .ovpn & VPN providers
+Verbinde .ovpn & VPN Anbieter
