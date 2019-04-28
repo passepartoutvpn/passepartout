@@ -111,7 +111,9 @@ public class InfrastructureFactory {
                 infra = try decoder.decode(Infrastructure.self, from: data)
             } catch let e {
                 log.warning("Unable to load infrastructure \(entry.lastPathComponent): \(e)")
-                log.warning("\(String(data: data, encoding: .utf8)!)")
+                if let json = String(data: data, encoding: .utf8) {
+                    log.warning(json)
+                }
                 continue
             }
 

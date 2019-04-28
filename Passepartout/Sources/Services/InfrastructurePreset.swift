@@ -210,7 +210,7 @@ public struct InfrastructurePreset: Codable {
             for entry in external {
                 rawExternal[entry.key.rawValue] = entry.value
             }
-            try container.encodeIfPresent(rawExternal, forKey: .external)
+            try container.encode(rawExternal, forKey: .external)
         }
 
         var cfgContainer = container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
