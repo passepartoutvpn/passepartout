@@ -1,14 +1,22 @@
 ### Aggiunti
 
-- Provider NordVPN.
-- Supporto per `dhcp-option PROXY_HTTP[S]`.
+- Provider VyprVPN.
+- Più metadati nelle infrastrutture.
+- Traduzione al Portoghese (Helder Santana).
+- Traduzione al Tedesco (Christian Lederer).
+- Traduzione al Russo (Alexander Korobynikov).
+
+### Cambiati
+
+- Non redirigere tutto il traffico verso la VPN a meno che `--redirect-gateway` non sia specificato.
 
 ### Risolti
 
-- Regressione nella configurazione DNS.
-- Timeout con SoftEther.
-- La cella dello stato VPN non sempre entra nel profilo attivo.
-- Preferenza di mascheramento non salvata.
-- Problemi con PUSH_REPLY molto lunght.
-- Icona mancante nella schermata Credits.
+- Ricorri al DNS di CloudFlare quando nessun server specificato.
+- UDP può disconnettersi ad alte velocità.
+- SoftEther si connette senza icona VPN.
+- Suggerimento password fuorviante con Mullvad.
+- Lascia l'autenticazione editabile nonostante la cifratura.
+- Errori TLS con profili .ovpn protetti da password.
+- Problema con profili VPN solo per DNS.
 

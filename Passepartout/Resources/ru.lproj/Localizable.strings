@@ -182,6 +182,7 @@
 "configuration.cells.tls_wrapping.value.auth" = "Аутентификация";
 "configuration.cells.tls_wrapping.value.crypt" = "Шифрование";
 "configuration.cells.eku.caption" = "Расширенная проверка";
+"configuration.cells.default_gateway.caption" = "Шлюз по умолчанию";
 "configuration.cells.dns_server.caption" = "DNS";
 "configuration.cells.dns_domain.caption" = "Домен";
 "configuration.cells.proxy_http.caption" = "Прокси";
