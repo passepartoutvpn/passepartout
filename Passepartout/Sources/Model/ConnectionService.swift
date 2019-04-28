@@ -352,7 +352,9 @@ public class ConnectionService: Codable {
 
                 // fall back to the safer option
                 var builder = host.parameters.builder()
-                builder.sessionConfiguration.routingPolicies = [.IPv4, .IPv6]
+                var sessionBuilder = builder.sessionConfiguration.builder()
+                sessionBuilder.routingPolicies = [.IPv4, .IPv6]
+                builder.sessionConfiguration = sessionBuilder.build()
                 host.parameters = builder.build()
             }
             cache[entry.key] = host

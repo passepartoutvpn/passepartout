@@ -67,7 +67,9 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.masksPrivateData = configuration.masksPrivateData
 
         // forcibly override hostname with profile hostname (never nil)
-        builder.sessionConfiguration.hostname = hostname
+        var sessionBuilder = builder.sessionConfiguration.builder()
+        sessionBuilder.hostname = hostname
+        builder.sessionConfiguration = sessionBuilder.build()
 
         return builder.build()
     }
