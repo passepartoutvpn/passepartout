@@ -16,10 +16,6 @@ public enum L10n {
     /// About
     public static let title = L10n.tr("Localizable", "about.title")
     public enum Cells {
-      public enum Changelog {
-        /// Changelog
-        public static let caption = L10n.tr("Localizable", "about.cells.changelog.caption")
-      }
       public enum Credits {
         /// Credits
         public static let caption = L10n.tr("Localizable", "about.cells.credits.caption")
@@ -94,7 +90,7 @@ public enum L10n {
       public enum Guidance {
         public enum Footer {
           public enum Infrastructure {
-            /// Use your %@ website account number and password "m".
+            /// Use your %@ website credentials. Your username is usually numeric.
             public static func mullvad(_ p1: String) -> String {
               return L10n.tr("Localizable", "account.sections.guidance.footer.infrastructure.mullvad", p1)
             }
