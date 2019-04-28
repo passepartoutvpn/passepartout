@@ -106,7 +106,12 @@ public class InfrastructureFactory {
             guard let data = try? Data(contentsOf: entry) else {
                 continue
             }
-            guard let infra = try? decoder.decode(Infrastructure.self, from: data) else {
+            let infra: Infrastructure
+            do {
+                infra = try decoder.decode(Infrastructure.self, from: data)
+            } catch let e {
+                log.warning("Unable to load infrastructure \(entry.lastPathComponent): \(e)")
+                log.warning("\(String(data: data, encoding: .utf8)!)")
                 continue
             }
 
