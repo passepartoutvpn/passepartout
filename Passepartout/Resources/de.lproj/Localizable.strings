@@ -256,7 +256,7 @@
 
 "donation.title" = "Spenden";
 "donation.sections.one_time.header" = "Einmalig";
-"donation.sections.one_time.footer" = "If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
+"donation.sections.one_time.footer" = "Wenn du dich erkenntlich zeigen möchtest für meine Arbeit, gibt es hier ein paar Beträge die du direkt spenden kannst.\n\nDu bezahlst pro Spende nur einmal und kannst mehrmals spenden wenn du möchtest.";
 "donation.cells.loading.caption" = "Lade Spenden";
 "donation.cells.purchasing.caption" = "Führe Spende durch";
 "donation.alerts.purchase.success.title" = "Danke";
