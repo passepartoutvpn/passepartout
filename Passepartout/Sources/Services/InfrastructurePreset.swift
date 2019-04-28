@@ -205,7 +205,13 @@ public struct InfrastructurePreset: Codable {
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
         try container.encode(comment, forKey: .comment)
-        try container.encodeIfPresent(external, forKey: .external)
+        if let external = external {
+            var rawExternal: [String: String] = [:]
+            for entry in external {
+                rawExternal[entry.key.rawValue] = entry.value
+            }
+            try container.encodeIfPresent(rawExternal, forKey: .external)
+        }
 
         var cfgContainer = container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
         try cfgContainer.encode(configuration.sessionConfiguration.cipher, forKey: .cipher)
