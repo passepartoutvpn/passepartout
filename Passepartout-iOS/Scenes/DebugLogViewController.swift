@@ -30,8 +30,8 @@ import Passepartout_Core
 private let log = SwiftyBeaver.self
 
 class DebugLogViewController: UIViewController {
-    @IBOutlet private weak var textLog: UITextView!
-    
+    @IBOutlet private weak var textLog: UITextView?
+
     private let vpn = VPN.shared
     
     deinit {
@@ -44,11 +44,13 @@ class DebugLogViewController: UIViewController {
         applyDetailTitle(Theme.current)
     }
     
+    // MARK: UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = L10n.Service.Cells.DebugLog.caption
-        textLog.contentInsetAdjustmentBehavior = .never
+        textLog?.contentInsetAdjustmentBehavior = .never
 
         NotificationCenter.default.addObserver(self, selector: #selector(vpnDidPrepare), name: .VPNDidPrepare, object: nil)
         if vpn.isPrepared {
@@ -56,8 +58,10 @@ class DebugLogViewController: UIViewController {
         }
     }
     
+    // MARK: Actions
+    
     @IBAction private func share(_ sender: Any?) {
-        guard let raw = textLog.text, !raw.isEmpty else {
+        guard let raw = textLog?.text, !raw.isEmpty else {
             let alert = Macros.alert(title, L10n.DebugLog.Alerts.EmptyLog.message)
             alert.addCancelAction(L10n.Global.ok)
             present(alert, animated: true, completion: nil)
@@ -82,19 +86,19 @@ class DebugLogViewController: UIViewController {
     }
     
     @IBAction private func previousSession() {
-        textLog.findPrevious(string: GroupConstants.VPN.sessionMarker)
+        textLog?.findPrevious(string: GroupConstants.VPN.sessionMarker)
     }
     
     @IBAction private func nextSession() {
-        textLog.findNext(string: GroupConstants.VPN.sessionMarker)
+        textLog?.findNext(string: GroupConstants.VPN.sessionMarker)
     }
-    
+        
     private func startRefreshingLog() {
         vpn.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
-            self.textLog.text = $0
+            self.textLog?.text = $0
             
             DispatchQueue.main.async {
-                self.textLog.scrollToEnd()
+                self.textLog?.scrollToEnd()
                 self.refreshLogInBackground()
             }
         }
@@ -114,7 +118,7 @@ class DebugLogViewController: UIViewController {
         }
 
         vpn.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
-            self.textLog.text = $0
+            self.textLog?.text = $0
             updateBlock()
         }
     }
