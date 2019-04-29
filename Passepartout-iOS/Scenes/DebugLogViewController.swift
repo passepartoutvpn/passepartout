@@ -52,6 +52,9 @@ class DebugLogViewController: UIViewController {
         title = L10n.Service.Cells.DebugLog.caption
         textLog?.contentInsetAdjustmentBehavior = .never
 
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleBars))
+        textLog?.addGestureRecognizer(tapGestureRecognizer)
+
         NotificationCenter.default.addObserver(self, selector: #selector(vpnDidPrepare), name: .VPNDidPrepare, object: nil)
         if vpn.isPrepared {
             startRefreshingLog()
@@ -62,17 +65,21 @@ class DebugLogViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.isToolbarHidden = false
-        navigationController?.hidesBarsOnTap = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         navigationController?.isToolbarHidden = true
-        navigationController?.hidesBarsOnTap = false
     }
 
     // MARK: Actions
+    
+    @objc private func toggleBars() {
+        let isHidden = navigationController?.isToolbarHidden ?? true
+        navigationController?.setNavigationBarHidden(!isHidden, animated: true)
+        navigationController?.setToolbarHidden(!isHidden, animated: true)
+    }
     
     @IBAction private func share(_ sender: Any?) {
         guard let raw = textLog?.text, !raw.isEmpty else {
