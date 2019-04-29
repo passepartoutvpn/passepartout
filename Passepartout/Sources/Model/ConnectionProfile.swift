@@ -42,6 +42,10 @@ public protocol ConnectionProfile: class, EndpointDataSource, CustomStringConver
     
     var requiresCredentials: Bool { get }
     
+    var networkChoices: ProfileNetworkChoices? { get set }
+    
+    var manualNetworkSettings: ProfileNetworkSettings? { get set }
+    
     func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration
 
     func with(newId: String) -> ConnectionProfile

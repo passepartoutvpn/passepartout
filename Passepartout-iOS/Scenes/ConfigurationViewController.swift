@@ -59,7 +59,7 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         }
         model.add(.tls)
         model.add(.compression)
-        model.add(.network)
+//        model.add(.network)
         model.add(.other)
 
         // headers

@@ -174,6 +174,11 @@ class ServiceViewController: UIViewController, TableModelHost {
             vc?.originalConfigurationURL = service.configurationURL(for: uncheckedHostProfile)
             vc?.delegate = self
             
+        case .networkSettingsSegueIdentifier:
+            let vc = destination as? NetworkSettingsViewController
+            vc?.title = L10n.Service.Cells.NetworkSettings.caption
+            vc?.profile = profile
+            
         case .debugLogSegueIdentifier:
             break
         }
@@ -580,6 +585,8 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         
         case hostParameters
         
+        case networkSettings
+        
         case vpnResolvesHostname
         
         case vpnSurvivesSleep
@@ -718,6 +725,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             } else {
                 cell.rightText = profile?.mainAddress
             }
+            return cell
+            
+        case .networkSettings:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Service.Cells.NetworkSettings.caption
             return cell
             
         // provider cells
@@ -908,6 +920,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             perform(segue: StoryboardSegue.Main.hostParametersSegueIdentifier, sender: cell)
             return true
             
+        case .networkSettings:
+            perform(segue: StoryboardSegue.Main.networkSettingsSegueIdentifier, sender: cell)
+            return true
+            
         case .trustedAddCurrentWiFi:
             if #available(iOS 12, *) {
                 IntentDispatcher.donateTrustCurrentNetwork()
@@ -1059,10 +1075,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         }
         if isProvider {
             model.set([.account], in: .authentication)
-            model.set([.providerPool, .endpoint, .providerPreset], in: .configuration)
+            model.set([.providerPool, .endpoint, .providerPreset, .networkSettings], in: .configuration)
             model.set([.providerRefresh], in: .providerInfrastructure)
         } else {
-            model.set([.account, .endpoint, .hostParameters], in: .configuration)
+            model.set([.account, .endpoint, .hostParameters, .networkSettings], in: .configuration)
         }
         if isActiveProfile {
             if isProvider {

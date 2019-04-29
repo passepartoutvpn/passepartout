@@ -54,6 +54,10 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         return false
     }
     
+    public var networkChoices: ProfileNetworkChoices?
+    
+    public var manualNetworkSettings: ProfileNetworkSettings?
+    
     public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
         guard let endpointProtocols = parameters.sessionConfiguration.endpointProtocols, !endpointProtocols.isEmpty else {
             preconditionFailure("No endpointProtocols")

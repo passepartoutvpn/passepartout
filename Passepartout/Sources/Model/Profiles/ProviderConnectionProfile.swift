@@ -57,6 +57,10 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
 
     public var manualProtocol: EndpointProtocol?
     
+    public var networkChoices: ProfileNetworkChoices?
+    
+    public var manualNetworkSettings: ProfileNetworkSettings?
+    
     public var usesProviderEndpoint: Bool {
         return (manualAddress != nil) || (manualProtocol != nil)
     }

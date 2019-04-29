@@ -299,6 +299,7 @@ public class ConnectionService: Codable {
                 return nil
             }
         }
+        
         return profile
     }
     
@@ -531,7 +532,19 @@ public class ConnectionService: Codable {
             }
         }
         
-        let cfg = try profile.generate(from: baseConfiguration, preferences: preferences)
+        var cfg = try profile.generate(from: baseConfiguration, preferences: preferences)
+
+        // override network settings
+        if let choices = profile.networkChoices, let settings = profile.manualNetworkSettings {
+            var builder = cfg.builder()
+            var sessionBuilder = builder.sessionConfiguration.builder()
+            sessionBuilder.applyGateway(from: choices, settings: settings)
+            sessionBuilder.applyDNS(from: choices, settings: settings)
+            sessionBuilder.applyProxy(from: choices, settings: settings)
+            builder.sessionConfiguration = sessionBuilder.build()
+            cfg = builder.build()
+        }
+
         let protocolConfiguration = try cfg.generatedTunnelProtocol(
             withBundleIdentifier: GroupConstants.App.tunnelIdentifier,
             appGroup: appGroup,
