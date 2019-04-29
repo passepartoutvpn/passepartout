@@ -712,7 +712,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.Endpoint.caption
 
-            let V = L10n.Service.Cells.Endpoint.Value.self
+            let V = L10n.Global.Cells.self
             if let provider = profile as? ProviderConnectionProfile {
                 cell.rightText = provider.usesProviderEndpoint ? V.manual : V.automatic
             } else {

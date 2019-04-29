@@ -274,14 +274,14 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
                     cell.rightText = V.TlsWrapping.Value.crypt
                 }
             } else {
-                cell.rightText = V.All.Value.disabled
+                cell.rightText = L10n.Global.Cells.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .eku:
             cell.leftText = V.Eku.caption
-            cell.rightText = (configuration.checksEKU ?? false) ? V.All.Value.enabled : V.All.Value.disabled
+            cell.rightText = (configuration.checksEKU ?? false) ? L10n.Global.Cells.enabled : L10n.Global.Cells.disabled
             cell.accessoryType = .none
             cell.isTappable = false
 
@@ -296,7 +296,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             if let compressionAlgorithm = configuration.compressionAlgorithm {
                 cell.rightText = compressionAlgorithm.cellDescription
             } else {
-                cell.rightText = V.All.Value.disabled
+                cell.rightText = L10n.Global.Cells.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
@@ -306,7 +306,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             if let policies = configuration.routingPolicies {
                 cell.rightText = policies.map { $0.rawValue }.joined(separator: " / ")
             } else {
-                cell.rightText = V.All.Value.none
+                cell.rightText = L10n.Global.Cells.none
             }
             cell.accessoryType = .none
             cell.isTappable = false
@@ -322,19 +322,19 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             
         case .dnsDomain:
             cell.leftText = L10n.Configuration.Cells.DnsDomain.caption
-            cell.rightText = configuration.searchDomain ?? L10n.Configuration.Cells.All.Value.none
+            cell.rightText = configuration.searchDomain ?? L10n.Global.Cells.none
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .httpProxy:
             cell.leftText = L10n.Configuration.Cells.ProxyHttp.caption
-            cell.rightText = configuration.httpProxy?.description ?? L10n.Configuration.Cells.All.Value.none
+            cell.rightText = configuration.httpProxy?.description ?? L10n.Global.Cells.none
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .httpsProxy:
             cell.leftText = L10n.Configuration.Cells.ProxyHttps.caption
-            cell.rightText = configuration.httpsProxy?.description ?? L10n.Configuration.Cells.All.Value.none
+            cell.rightText = configuration.httpsProxy?.description ?? L10n.Global.Cells.none
             cell.accessoryType = .none
             cell.isTappable = false
             
@@ -343,7 +343,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             if let keepAlive = configuration.keepAliveInterval, keepAlive > 0 {
                 cell.rightText = V.KeepAlive.Value.seconds(Int(keepAlive))
             } else {
-                cell.rightText = V.All.Value.disabled
+                cell.rightText = L10n.Global.Cells.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
@@ -353,14 +353,14 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             if let reneg = configuration.renegotiatesAfter, reneg > 0 {
                 cell.rightText = V.RenegotiationSeconds.Value.after(TimeInterval(reneg).localized)
             } else {
-                cell.rightText = V.All.Value.disabled
+                cell.rightText = L10n.Global.Cells.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .randomEndpoint:
             cell.leftText = V.RandomEndpoint.caption
-            cell.rightText = (configuration.randomizeEndpoint ?? false) ? V.All.Value.enabled : V.All.Value.disabled
+            cell.rightText = (configuration.randomizeEndpoint ?? false) ? L10n.Global.Cells.enabled : L10n.Global.Cells.disabled
             cell.accessoryType = .none
             cell.isTappable = false
         }
@@ -438,7 +438,7 @@ private extension SessionProxy.CompressionFraming {
         let V = L10n.Configuration.Cells.self
         switch self {
         case .disabled:
-            return V.All.Value.disabled
+            return L10n.Global.Cells.disabled
             
         case .compLZO:
             return V.CompressionFraming.Value.lzo
@@ -454,7 +454,7 @@ private extension SessionProxy.CompressionAlgorithm {
         let V = L10n.Configuration.Cells.self
         switch self {
         case .disabled:
-            return V.All.Value.disabled
+            return L10n.Global.Cells.disabled
             
         case .LZO:
             return V.CompressionAlgorithm.Value.lzo

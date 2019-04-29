@@ -31,6 +31,12 @@
 "global.host.title_input.placeholder" = "Мой профиль";
 "global.email_not_configured" = "E-mail аккаунт не создан.";
 
+"global.cells.enabled" = "Включен";
+"global.cells.disabled" = "Выключен";
+"global.cells.none" = "Нет";
+"global.cells.automatic" = "Автоматически";
+"global.cells.manual" = "Вручную";
+
 "reddit.title" = "Reddit";
 "reddit.message" = "А Вы знали, что Passepartout имеет свой сабреддит? Подписывайтесь для получения обновлений, обсуждения проблем, функций, новых платформ или чего угодно.\n\nЭто также отличный способ показать поддержку проекта.";
 "reddit.buttons.subscribe" = "Подписаться сейчас!";
@@ -99,8 +105,6 @@
 "service.cells.account.caption" = "Аккаунт";
 "service.cells.account.none" = "Ничего не создано";
 "service.cells.endpoint.caption" = "Конечная точка";
-"service.cells.endpoint.value.automatic" = "Автоматически";
-"service.cells.endpoint.value.manual" = "Вручную";
 "service.cells.provider.pool.caption" = "Местоположение";
 "service.cells.provider.preset.caption" = "Пресет";
 "service.cells.provider.refresh.caption" = "Обновить инфраструктуру";
@@ -198,9 +202,6 @@
 "configuration.cells.renegotiation_seconds.caption" = "Перезаключение";
 "configuration.cells.renegotiation_seconds.value.after" = "после %@";
 "configuration.cells.random_endpoint.caption" = "Рандомная конечная точка";
-"configuration.cells.all.value.enabled" = "Включен";
-"configuration.cells.all.value.disabled" = "Выключен";
-"configuration.cells.all.value.none" = "Нет";
 
 "debug_log.buttons.previous" = "Предыдущий";
 "debug_log.buttons.next" = "Следующий";

@@ -31,6 +31,12 @@
 "global.host.title_input.placeholder" = "Meu perfil";
 "global.email_not_configured" = "Nenhuma conta de email configurada.";
 
+"global.cells.enabled" = "Ativado";
+"global.cells.disabled" = "Desativado";
+"global.cells.none" = "Nenhum";
+"global.cells.automatic" = "Automático";
+"global.cells.manual" = "Manual";
+
 "reddit.title" = "Reddit";
 "reddit.message" = "Você sabia que Passepartout tem um subreddit? Siga-nos para atualizações ou para discutir problemas, novas funcionalidades, ou qualquer outro tópico.\n\nÉ uma boa maneira de mostrar seu interesse pelo projeto.";
 "reddit.buttons.subscribe" = "Seguir!";
@@ -99,8 +105,6 @@
 "service.cells.account.caption" = "Conta";
 "service.cells.account.none" = "Nenhum configurado";
 "service.cells.endpoint.caption" = "Endereço";
-"service.cells.endpoint.value.automatic" = "Automático";
-"service.cells.endpoint.value.manual" = "Manual";
 "service.cells.provider.pool.caption" = "Localização";
 "service.cells.provider.preset.caption" = "Pré-definição";
 "service.cells.provider.refresh.caption" = "Atualizar infraestrutura";
@@ -202,9 +206,6 @@
 "configuration.cells.renegotiation_seconds.caption" = "Renegociando";
 "configuration.cells.renegotiation_seconds.value.after" = "depois de %@";
 "configuration.cells.random_endpoint.caption" = "Destino randômico";
-"configuration.cells.all.value.enabled" = "Ativado";
-"configuration.cells.all.value.disabled" = "Desativado";
-"configuration.cells.all.value.none" = "Nenhum";
 
 "debug_log.buttons.previous" = "Anterior";
 "debug_log.buttons.next" = "Próximo";

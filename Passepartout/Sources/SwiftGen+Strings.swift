@@ -132,16 +132,6 @@ public enum L10n {
 
   public enum Configuration {
     public enum Cells {
-      public enum All {
-        public enum Value {
-          /// Disabled
-          public static let disabled = L10n.tr("Localizable", "configuration.cells.all.value.disabled")
-          /// Enabled
-          public static let enabled = L10n.tr("Localizable", "configuration.cells.all.value.enabled")
-          /// None
-          public static let `none` = L10n.tr("Localizable", "configuration.cells.all.value.none")
-        }
-      }
       public enum Cipher {
         /// Cipher
         public static let caption = L10n.tr("Localizable", "configuration.cells.cipher.caption")
@@ -382,6 +372,18 @@ public enum L10n {
     public static let next = L10n.tr("Localizable", "global.next")
     /// OK
     public static let ok = L10n.tr("Localizable", "global.ok")
+    public enum Cells {
+      /// Automatic
+      public static let automatic = L10n.tr("Localizable", "global.cells.automatic")
+      /// Disabled
+      public static let disabled = L10n.tr("Localizable", "global.cells.disabled")
+      /// Enabled
+      public static let enabled = L10n.tr("Localizable", "global.cells.enabled")
+      /// Manual
+      public static let manual = L10n.tr("Localizable", "global.cells.manual")
+      /// None
+      public static let `none` = L10n.tr("Localizable", "global.cells.none")
+    }
     public enum Host {
       public enum TitleInput {
         /// Acceptable characters are alphanumerics plus dash "-", underscore "_" and dot ".".
@@ -686,12 +688,6 @@ public enum L10n {
       public enum Endpoint {
         /// Endpoint
         public static let caption = L10n.tr("Localizable", "service.cells.endpoint.caption")
-        public enum Value {
-          /// Automatic
-          public static let automatic = L10n.tr("Localizable", "service.cells.endpoint.value.automatic")
-          /// Manual
-          public static let manual = L10n.tr("Localizable", "service.cells.endpoint.value.manual")
-        }
       }
       public enum Host {
         public enum Parameters {
