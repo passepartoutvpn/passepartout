@@ -58,6 +58,20 @@ class DebugLogViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isToolbarHidden = false
+        navigationController?.hidesBarsOnTap = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        navigationController?.isToolbarHidden = true
+        navigationController?.hidesBarsOnTap = false
+    }
+
     // MARK: Actions
     
     @IBAction private func share(_ sender: Any?) {
