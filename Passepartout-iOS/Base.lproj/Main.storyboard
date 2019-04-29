@@ -398,43 +398,37 @@
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L2r-Gc-jgW">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="rewind" id="dzc-CH-vwc">
-                                        <connections>
-                                            <action selector="previousSession" destination="KmS-dJ-DVx" id="mbh-60-0C4"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="S80-Iu-dbj"/>
-                                    <barButtonItem systemItem="fastForward" id="XdD-tV-5tf">
-                                        <connections>
-                                            <action selector="nextSession" destination="KmS-dJ-DVx" id="IMg-vd-A8K"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="flexibleSpace" id="5Nm-qF-X75"/>
-                                    <barButtonItem systemItem="action" id="dDq-i9-dB0">
-                                        <connections>
-                                            <action selector="share:" destination="KmS-dJ-DVx" id="32r-VS-qvc"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="EID-0c-3tN" firstAttribute="trailing" secondItem="Aex-ay-Bvb" secondAttribute="trailing" id="MxQ-FS-qWF"/>
+                            <constraint firstItem="EID-0c-3tN" firstAttribute="bottom" secondItem="Aex-ay-Bvb" secondAttribute="bottom" id="Uwp-4b-lh8"/>
                             <constraint firstItem="Aex-ay-Bvb" firstAttribute="top" secondItem="EID-0c-3tN" secondAttribute="top" id="dQv-Al-Hx5"/>
-                            <constraint firstItem="L2r-Gc-jgW" firstAttribute="top" secondItem="Aex-ay-Bvb" secondAttribute="bottom" id="e6U-Xm-pES"/>
-                            <constraint firstItem="L2r-Gc-jgW" firstAttribute="leading" secondItem="DQA-dJ-PeF" secondAttribute="leading" id="iuO-hK-K2Z"/>
-                            <constraint firstItem="L2r-Gc-jgW" firstAttribute="bottom" secondItem="EID-0c-3tN" secondAttribute="bottom" id="lG5-6f-HvB"/>
-                            <constraint firstAttribute="trailing" secondItem="L2r-Gc-jgW" secondAttribute="trailing" id="paj-ca-wpL"/>
                             <constraint firstItem="Aex-ay-Bvb" firstAttribute="leading" secondItem="EID-0c-3tN" secondAttribute="leading" id="uaR-uG-IC6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EID-0c-3tN"/>
                     </view>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="rewind" id="dzc-CH-vwc">
+                            <connections>
+                                <action selector="previousSession" destination="KmS-dJ-DVx" id="mbh-60-0C4"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="S80-Iu-dbj"/>
+                        <barButtonItem systemItem="fastForward" id="XdD-tV-5tf">
+                            <connections>
+                                <action selector="nextSession" destination="KmS-dJ-DVx" id="IMg-vd-A8K"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="5Nm-qF-X75"/>
+                        <barButtonItem systemItem="action" id="dDq-i9-dB0">
+                            <connections>
+                                <action selector="share:" destination="KmS-dJ-DVx" id="32r-VS-qvc"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="Wbs-3b-OSm"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="textLog" destination="Aex-ay-Bvb" id="9l9-Nk-Dz3"/>
                     </connections>
