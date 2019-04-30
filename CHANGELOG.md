@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Override network settings. [#77](https://github.com/passepartoutvpn/passepartout-ios/pull/77)
 
+### Changed
+
+- Host compression framing and algorithm are now editable.
+
 ## 1.6.0 (2019-05-01)
 
 ### Added

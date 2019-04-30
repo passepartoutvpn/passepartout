@@ -54,11 +54,11 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         
         // sections
         model.add(.communication)
+        model.add(.compression)
         if isEditable {
             model.add(.reset)
         }
         model.add(.tls)
-        model.add(.compression)
 //        model.add(.network)
         model.add(.other)
 
@@ -253,6 +253,24 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.leftText = L10n.Configuration.Cells.Digest.caption
             cell.rightText = configuration.fallbackDigest.description
 
+        case .compressionFraming:
+            cell.leftText = L10n.Configuration.Cells.CompressionFraming.caption
+            cell.rightText = configuration.fallbackCompressionFraming.cellDescription
+            
+        case .compressionAlgorithm:
+            cell.leftText = L10n.Configuration.Cells.CompressionAlgorithm.caption
+            if let compressionAlgorithm = configuration.compressionAlgorithm {
+                cell.rightText = compressionAlgorithm.cellDescription
+            } else {
+                cell.rightText = L10n.Global.Cells.disabled
+            }
+            if configuration.compressionFraming != .disabled {
+                cell.isTappable = true
+            } else {
+                cell.accessoryType = .none
+                cell.isTappable = false
+            }
+
         case .resetOriginal:
             cell.leftText = L10n.Configuration.Cells.ResetOriginal.caption
             cell.applyAction(Theme.current)
@@ -285,22 +303,6 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.accessoryType = .none
             cell.isTappable = false
 
-        case .compressionFraming:
-            cell.leftText = L10n.Configuration.Cells.CompressionFraming.caption
-            cell.rightText = configuration.fallbackCompressionFraming.cellDescription
-            cell.accessoryType = .none
-            cell.isTappable = false
-
-        case .compressionAlgorithm:
-            cell.leftText = L10n.Configuration.Cells.CompressionAlgorithm.caption
-            if let compressionAlgorithm = configuration.compressionAlgorithm {
-                cell.rightText = compressionAlgorithm.cellDescription
-            } else {
-                cell.rightText = L10n.Global.Cells.disabled
-            }
-            cell.accessoryType = .none
-            cell.isTappable = false
-            
         case .defaultGateway:
             cell.leftText = L10n.Configuration.Cells.DefaultGateway.caption
             if let policies = configuration.routingPolicies {
@@ -399,18 +401,37 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             }
             navigationController?.pushViewController(vc, animated: true)
 
-//        case .compressionFraming:
-//            let vc = OptionViewController<SessionProxy.CompressionFraming>()
-//            vc.title = settingCell?.leftText
-//            vc.options = [.disabled, .compLZO, .compress]
-//            vc.selectedOption = configuration.compressionFraming
-//            vc.descriptionBlock = { $0.cellDescription }
-//            vc.selectionBlock = { [weak self] in
-//                self?.configuration.compressionFraming = $0
-//                self?.popAndCheckRefresh()
-//            }
-//            navigationController?.pushViewController(vc, animated: true)
+        case .compressionFraming:
+            let vc = OptionViewController<SessionProxy.CompressionFraming>()
+            vc.title = settingCell?.leftText
+            vc.options = [.disabled, .compLZO, .compress]
+            vc.selectedOption = configuration.compressionFraming
+            vc.descriptionBlock = { $0.cellDescription }
+            vc.selectionBlock = { [weak self] in
+                self?.configuration.compressionFraming = $0
+                if $0 == .disabled {
+                    self?.configuration.compressionAlgorithm = .disabled
+                }
+                self?.popAndCheckRefresh()
+            }
+            navigationController?.pushViewController(vc, animated: true)
 
+        case .compressionAlgorithm:
+            guard configuration.compressionFraming != .disabled else {
+                return
+            }
+            
+            let vc = OptionViewController<SessionProxy.CompressionAlgorithm>()
+            vc.title = settingCell?.leftText
+            vc.options = [.disabled, .LZO]
+            vc.selectedOption = configuration.compressionAlgorithm
+            vc.descriptionBlock = { $0.cellDescription }
+            vc.selectionBlock = { [weak self] in
+                self?.configuration.compressionAlgorithm = $0
+                self?.popAndCheckRefresh()
+            }
+            navigationController?.pushViewController(vc, animated: true)
+            
         case .resetOriginal:
             tableView.deselectRow(at: indexPath, animated: true)
             resetOriginalConfiguration()
