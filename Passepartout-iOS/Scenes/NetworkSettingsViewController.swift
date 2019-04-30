@@ -110,7 +110,7 @@ class NetworkSettingsViewController: UITableViewController {
         
         // rows
         model.set([.gateway, .dns, .proxy], in: .choices)
-        model.set([.gatewayAll, .gatewayIPv4, .gatewayIPv6, .gatewayNone], in: .manualGateway)
+        model.set([.gatewayIPv4, .gatewayIPv6], in: .manualGateway)
 
         var dnsRows: [RowType] = Array(repeating: .dnsAddress, count: networkSettings.dnsServers?.count ?? 0)
         dnsRows.insert(.dnsDomain, at: 0)
@@ -265,13 +265,9 @@ extension NetworkSettingsViewController {
         
         case proxy
         
-        case gatewayAll
-        
         case gatewayIPv4
 
         case gatewayIPv6
-
-        case gatewayNone
         
         case dnsDomain
         
@@ -330,33 +326,20 @@ extension NetworkSettingsViewController {
             cell.rightText = networkChoices.proxy.description
             return cell
 
-        case .gatewayAll, .gatewayIPv4, .gatewayIPv6, .gatewayNone:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            var policies: [SessionProxy.RoutingPolicy]?
-            
-            switch row {
-            case .gatewayAll:
-                cell.leftText = L10n.Global.Cells.enabled
-                policies = [.IPv4, .IPv6]
-
-            case .gatewayIPv4:
-                cell.leftText = "IPv4"
-                policies = [.IPv4]
-
-            case .gatewayIPv6:
-                cell.leftText = "IPv6"
-                policies = [.IPv6]
-
-            case .gatewayNone:
-                cell.leftText = L10n.Global.Cells.disabled
-
-            default:
-                break
-            }
-            cell.applyChecked(networkSettings.gatewayPolicies == policies, Theme.current)
-            cell.isTappable = (networkChoices.gateway == .manual)
+        case .gatewayIPv4:
+            let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
+            cell.caption = "IPv4"
+            cell.toggle.isEnabled = (networkChoices.gateway == .manual)
+            cell.isOn = networkSettings.gatewayPolicies?.contains(.IPv4) ?? false
             return cell
 
+        case .gatewayIPv6:
+            let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
+            cell.caption = "IPv6"
+            cell.toggle.isEnabled = (networkChoices.gateway == .manual)
+            cell.isOn = networkSettings.gatewayPolicies?.contains(.IPv6) ?? false
+            return cell
+            
         case .dnsDomain:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.Configuration.Cells.DnsDomain.caption
@@ -508,34 +491,6 @@ extension NetworkSettingsViewController {
             }
             navigationController?.pushViewController(vc, animated: true)
 
-        case .gatewayAll:
-            guard networkChoices.gateway == .manual else {
-                return
-            }
-            networkSettings.gatewayPolicies = [.IPv4, .IPv6]
-            tableView.reloadData()
-
-        case .gatewayIPv4:
-            guard networkChoices.gateway == .manual else {
-                return
-            }
-            networkSettings.gatewayPolicies = [.IPv4]
-            tableView.reloadData()
-
-        case .gatewayIPv6:
-            guard networkChoices.gateway == .manual else {
-                return
-            }
-            networkSettings.gatewayPolicies = [.IPv6]
-            tableView.reloadData()
-
-        case .gatewayNone:
-            guard networkChoices.gateway == .manual else {
-                return
-            }
-            networkSettings.gatewayPolicies = nil
-            tableView.reloadData()
-            
         case .dnsAddAddress:
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -554,6 +509,39 @@ extension NetworkSettingsViewController {
             reloadModel()
             tableView.insertRows(at: [indexPath], with: .automatic)
             
+        default:
+            break
+        }
+    }
+    
+    private func handle(row: RowType, cell: ToggleTableViewCell) {
+        switch row {
+        case .gatewayIPv4:
+            guard networkChoices.gateway == .manual else {
+                return
+            }
+            var policies = networkSettings.gatewayPolicies ?? []
+            if cell.toggle.isOn {
+                policies.append(.IPv4)
+            } else {
+                policies.removeAll { $0 == .IPv4 }
+            }
+            policies.sort { $0.rawValue < $1.rawValue }
+            networkSettings.gatewayPolicies = policies
+
+        case .gatewayIPv6:
+            guard networkChoices.gateway == .manual else {
+                return
+            }
+            var policies = networkSettings.gatewayPolicies ?? []
+            if cell.toggle.isOn {
+                policies.append(.IPv6)
+            } else {
+                policies.removeAll { $0 == .IPv6 }
+            }
+            policies.sort { $0.rawValue < $1.rawValue }
+            networkSettings.gatewayPolicies = policies
+
         default:
             break
         }
@@ -585,6 +573,15 @@ extension NetworkSettingsViewController {
 
         reloadModel()
         tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+}
+
+extension NetworkSettingsViewController: ToggleTableViewCellDelegate {
+    func toggleCell(_ cell: ToggleTableViewCell, didToggleToValue value: Bool) {
+        guard let item = RowType(rawValue: cell.tag) else {
+            return
+        }
+        handle(row: item, cell: cell)
     }
 }
 
