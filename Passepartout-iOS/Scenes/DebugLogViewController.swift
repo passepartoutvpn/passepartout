@@ -76,9 +76,10 @@ class DebugLogViewController: UIViewController {
     // MARK: Actions
     
     @objc private func toggleBars() {
-        let isHidden = navigationController?.isToolbarHidden ?? true
-        navigationController?.setNavigationBarHidden(!isHidden, animated: true)
-        navigationController?.setToolbarHidden(!isHidden, animated: true)
+        let nav = navigationController
+        let isHidden = nav?.isToolbarHidden ?? true
+//        nav?.setNavigationBarHidden(!isHidden, animated: true)
+        nav?.setToolbarHidden(!isHidden, animated: true)
     }
     
     @IBAction private func share(_ sender: Any?) {
