@@ -344,18 +344,13 @@ extension NetworkSettingsViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.Configuration.Cells.DnsDomain.caption
             cell.field.tag = FieldTag.dnsDomain.rawValue
+            cell.field.placeholder = L10n.Global.Cells.none
             cell.field.text = networkSettings.dnsDomainName
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .asciiCapable
             cell.captionWidth = 160.0
             cell.delegate = self
-            if networkChoices.dns == .manual {
-                cell.field.isEnabled = true
-                cell.field.placeholder = L10n.Global.Cells.none
-            } else {
-                cell.field.isEnabled = false
-                cell.field.placeholder = nil
-            }
+            cell.field.isEnabled = (networkChoices.dns == .manual)
             return cell
             
         case .dnsAddress:
@@ -364,18 +359,13 @@ extension NetworkSettingsViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.NetworkSettings.Cells.Address.caption
             cell.field.tag = FieldTag.dnsAddress.rawValue + i
+            cell.field.placeholder = L10n.Global.Cells.none
             cell.field.text = networkSettings.dnsServers?[i]
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .decimalPad
             cell.captionWidth = 160.0
             cell.delegate = self
-            if networkChoices.dns == .manual {
-                cell.field.isEnabled = true
-                cell.field.placeholder = L10n.Global.Cells.none
-            } else {
-                cell.field.isEnabled = false
-                cell.field.placeholder = nil
-            }
+            cell.field.isEnabled = (networkChoices.dns == .manual)
             return cell
 
         case .dnsAddAddress:
@@ -388,36 +378,26 @@ extension NetworkSettingsViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.NetworkSettings.Cells.Address.caption
             cell.field.tag = FieldTag.proxyAddress.rawValue
+            cell.field.placeholder = L10n.Global.Cells.none
             cell.field.text = networkSettings.proxyAddress
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .decimalPad
             cell.captionWidth = 160.0
             cell.delegate = self
-            if networkChoices.proxy == .manual {
-                cell.field.isEnabled = true
-                cell.field.placeholder = L10n.Global.Cells.none
-            } else {
-                cell.field.isEnabled = false
-                cell.field.placeholder = nil
-            }
+            cell.field.isEnabled = (networkChoices.proxy == .manual)
             return cell
 
         case .proxyPort:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.NetworkSettings.Cells.Port.caption
             cell.field.tag = FieldTag.proxyPort.rawValue
+            cell.field.placeholder = L10n.Global.Cells.none
             cell.field.text = networkSettings.proxyPort?.description
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .numberPad
             cell.captionWidth = 160.0
             cell.delegate = self
-            if networkChoices.proxy == .manual {
-                cell.field.isEnabled = true
-                cell.field.placeholder = L10n.Global.Cells.none
-            } else {
-                cell.field.isEnabled = false
-                cell.field.placeholder = nil
-            }
+            cell.field.isEnabled = (networkChoices.proxy == .manual)
             return cell
 
         case .proxyBypass:
@@ -426,18 +406,13 @@ extension NetworkSettingsViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.NetworkSettings.Cells.ProxyBypass.caption
             cell.field.tag = FieldTag.proxyBypass.rawValue + i
+            cell.field.placeholder = L10n.Global.Cells.none
             cell.field.text = networkSettings.proxyBypassDomains?[i]
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .asciiCapable
             cell.captionWidth = 160.0
             cell.delegate = self
-            if networkChoices.proxy == .manual {
-                cell.field.isEnabled = true
-                cell.field.placeholder = L10n.Global.Cells.none
-            } else {
-                cell.field.isEnabled = false
-                cell.field.placeholder = nil
-            }
+            cell.field.isEnabled = (networkChoices.proxy == .manual)
             return cell
 
         case .proxyAddBypass:
