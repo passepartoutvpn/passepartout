@@ -54,6 +54,10 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         return false
     }
     
+    public var networkChoices: ProfileNetworkChoices?
+    
+    public var manualNetworkSettings: ProfileNetworkSettings?
+    
     public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
         guard let endpointProtocols = parameters.sessionConfiguration.endpointProtocols, !endpointProtocols.isEmpty else {
             preconditionFailure("No endpointProtocols")
@@ -67,7 +71,9 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         builder.masksPrivateData = configuration.masksPrivateData
 
         // forcibly override hostname with profile hostname (never nil)
-        builder.sessionConfiguration.hostname = hostname
+        var sessionBuilder = builder.sessionConfiguration.builder()
+        sessionBuilder.hostname = hostname
+        builder.sessionConfiguration = sessionBuilder.build()
 
         return builder.build()
     }

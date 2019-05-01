@@ -35,6 +35,10 @@ public class PlaceholderConnectionProfile: ConnectionProfile {
     
     public var requiresCredentials: Bool = false
     
+    public var networkChoices: ProfileNetworkChoices?
+    
+    public var manualNetworkSettings: ProfileNetworkSettings?
+    
     public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
         fatalError("Generating configuration from a PlaceholderConnectionProfile")
     }

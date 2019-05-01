@@ -109,6 +109,7 @@
 "service.cells.provider.preset.caption" = "Preset";
 "service.cells.provider.refresh.caption" = "Refresh infrastructure";
 "service.cells.host.parameters.caption" = "Parameters";
+"service.cells.network_settings.caption" = "Network settings";
 "service.cells.vpn_survives_sleep.caption" = "Keep alive on sleep";
 "service.cells.vpn_resolves_hostname.caption" = "Resolve server hostname";
 //"service.cells.vpn_prefers_udp.caption" = "Prefer UDP socket";
@@ -199,6 +200,14 @@
 "configuration.cells.renegotiation_seconds.caption" = "Renegotiation";
 "configuration.cells.renegotiation_seconds.value.after" = "after %@";
 "configuration.cells.random_endpoint.caption" = "Randomize endpoint";
+
+"network_settings.cells.choice.client" = "Read .ovpn";
+"network_settings.cells.choice.server" = "Pull from server";
+"network_settings.cells.address.caption" = "Address";
+"network_settings.cells.port.caption" = "Port";
+"network_settings.cells.add_dns_server.caption" = "Add address";
+"network_settings.cells.proxy_bypass.caption" = "Bypass domain";
+"network_settings.cells.add_proxy_bypass.caption" = "Add bypass domain";
 
 "debug_log.buttons.previous" = "Previous";
 "debug_log.buttons.next" = "Next";

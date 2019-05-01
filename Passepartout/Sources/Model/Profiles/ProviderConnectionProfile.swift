@@ -57,6 +57,10 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
 
     public var manualProtocol: EndpointProtocol?
     
+    public var networkChoices: ProfileNetworkChoices?
+    
+    public var manualNetworkSettings: ProfileNetworkSettings?
+    
     public var usesProviderEndpoint: Bool {
         return (manualAddress != nil) || (manualProtocol != nil)
     }
@@ -134,8 +138,9 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
             builder.resolvedAddresses = pool.addresses()
         }
         
+        var sessionBuilder = builder.sessionConfiguration.builder()
         if let proto = manualProtocol {
-            builder.sessionConfiguration.endpointProtocols = [proto]
+            sessionBuilder.endpointProtocols = [proto]
         } else {
             
             // restrict "Any" protocol to UDP, unless there are no UDP endpoints
@@ -145,12 +150,14 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
                 endpoints = allEndpoints
             }
             
-            builder.sessionConfiguration.endpointProtocols = endpoints
-//            builder.sessionConfiguration.endpointProtocols = [
+            sessionBuilder.endpointProtocols = endpoints
+//            sessionBuilder.endpointProtocols = [
 //                EndpointProtocol(.udp, 8080),
 //                EndpointProtocol(.tcp, 443)
 //            ]
         }
+        builder.sessionConfiguration = sessionBuilder.build()
+        
         return builder.build()
     }
 

@@ -22,6 +22,7 @@ EASY TO USE
 - Handle your profiles in one single place.
 - Import .ovpn configuration files.
 - Fine-tune encryption without tweaking any configuration file.
+- Override network settings in a snap (default gateway, DNS, proxy).
 
 OS INTEGRATION
 

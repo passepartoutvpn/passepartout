@@ -21,6 +21,7 @@ internal enum StoryboardSegue {
     case debugLogSegueIdentifier = "DebugLogSegueIdentifier"
     case endpointSegueIdentifier = "EndpointSegueIdentifier"
     case hostParametersSegueIdentifier = "HostParametersSegueIdentifier"
+    case networkSettingsSegueIdentifier = "NetworkSettingsSegueIdentifier"
     case providerPoolSegueIdentifier = "ProviderPoolSegueIdentifier"
     case providerPresetSegueIdentifier = "ProviderPresetSegueIdentifier"
   }

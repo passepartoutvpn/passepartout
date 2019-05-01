@@ -417,6 +417,37 @@ public enum L10n {
     }
   }
 
+  public enum NetworkSettings {
+    public enum Cells {
+      public enum AddDnsServer {
+        /// Add address
+        public static let caption = L10n.tr("Localizable", "network_settings.cells.add_dns_server.caption")
+      }
+      public enum AddProxyBypass {
+        /// Add bypass domain
+        public static let caption = L10n.tr("Localizable", "network_settings.cells.add_proxy_bypass.caption")
+      }
+      public enum Address {
+        /// Address
+        public static let caption = L10n.tr("Localizable", "network_settings.cells.address.caption")
+      }
+      public enum Choice {
+        /// Read .ovpn
+        public static let client = L10n.tr("Localizable", "network_settings.cells.choice.client")
+        /// Pull from server
+        public static let server = L10n.tr("Localizable", "network_settings.cells.choice.server")
+      }
+      public enum Port {
+        /// Port
+        public static let caption = L10n.tr("Localizable", "network_settings.cells.port.caption")
+      }
+      public enum ProxyBypass {
+        /// Bypass domain
+        public static let caption = L10n.tr("Localizable", "network_settings.cells.proxy_bypass.caption")
+      }
+    }
+  }
+
   public enum Organizer {
     public enum Alerts {
       public enum AddHost {
@@ -698,6 +729,10 @@ public enum L10n {
       public enum MasksPrivateData {
         /// Mask network data
         public static let caption = L10n.tr("Localizable", "service.cells.masks_private_data.caption")
+      }
+      public enum NetworkSettings {
+        /// Network settings
+        public static let caption = L10n.tr("Localizable", "service.cells.network_settings.caption")
       }
       public enum Provider {
         public enum Pool {

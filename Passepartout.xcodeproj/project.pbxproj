@@ -110,6 +110,8 @@
 		0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */; };
 		0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5CF242141CE58004FF1BD /* HUD.swift */; };
 		0EF5CF292141F31F004FF1BD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
+		0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */; };
+		0EFB901A2276D7F1006405E4 /* NetworkSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */; };
 		0EFBFAC121AC464800887A8C /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFBFAC021AC464800887A8C /* CreditsViewController.swift */; };
 		0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943D215BE10800529B64 /* IssueReporter.swift */; };
 		0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943F215BED8E00529B64 /* LabelViewController.swift */; };
@@ -286,6 +288,8 @@
 		0EEB53B1225D525B00746300 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
 		0EF5CF242141CE58004FF1BD /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNetworkSettings.swift; sourceTree = "<group>"; };
+		0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsViewController.swift; sourceTree = "<group>"; };
 		0EFBFAC021AC464800887A8C /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
 		0EFD943F215BED8E00529B64 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
@@ -510,6 +514,7 @@
 				0EC7F20420E24308004EA58E /* DebugLog.swift */,
 				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
 				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
+				0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */,
 				0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */,
 				0E2B494120FD16540094784C /* TransientStore.swift */,
 				0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */,
@@ -610,6 +615,7 @@
 				0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */,
 				0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */,
 				0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */,
+				0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */,
 				0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */,
 				0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */,
 				0E57F63D20C83FC5008323CF /* ServiceViewController.swift */,
@@ -1047,6 +1053,7 @@
 				0E58BD9322404EF1006FB157 /* Intents.intentdefinition in Sources */,
 				0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */,
 				0E3152D4223FA05400F61841 /* Preferences.swift in Sources */,
+				0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */,
 				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
 				0E3152CB223FA04D00F61841 /* Pool.swift in Sources */,
 				0E3152C7223FA04800F61841 /* VPNStatus.swift in Sources */,
@@ -1075,6 +1082,7 @@
 				0E4FD7F120D58618002221FF /* Macros.swift in Sources */,
 				0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */,
 				0E05C5D720D1645F006EE732 /* ToggleTableViewCell.swift in Sources */,
+				0EFB901A2276D7F1006405E4 /* NetworkSettingsViewController.swift in Sources */,
 				0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */,
 				0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */,
 				0E05C61D20D27C82006EE732 /* Theme.swift in Sources */,
