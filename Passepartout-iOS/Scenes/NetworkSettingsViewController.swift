@@ -351,7 +351,7 @@ extension NetworkSettingsViewController {
             cell.delegate = self
             if networkChoices.dns == .manual {
                 cell.field.isEnabled = true
-                cell.field.placeholder = "example.com"
+                cell.field.placeholder = L10n.Global.Cells.none
             } else {
                 cell.field.isEnabled = false
                 cell.field.placeholder = nil
@@ -371,7 +371,7 @@ extension NetworkSettingsViewController {
             cell.delegate = self
             if networkChoices.dns == .manual {
                 cell.field.isEnabled = true
-                cell.field.placeholder = "8.8.8.8"
+                cell.field.placeholder = L10n.Global.Cells.none
             } else {
                 cell.field.isEnabled = false
                 cell.field.placeholder = nil
@@ -395,7 +395,7 @@ extension NetworkSettingsViewController {
             cell.delegate = self
             if networkChoices.proxy == .manual {
                 cell.field.isEnabled = true
-                cell.field.placeholder = "192.168.1.1"
+                cell.field.placeholder = L10n.Global.Cells.none
             } else {
                 cell.field.isEnabled = false
                 cell.field.placeholder = nil
@@ -413,7 +413,7 @@ extension NetworkSettingsViewController {
             cell.delegate = self
             if networkChoices.proxy == .manual {
                 cell.field.isEnabled = true
-                cell.field.placeholder = "8080"
+                cell.field.placeholder = L10n.Global.Cells.none
             } else {
                 cell.field.isEnabled = false
                 cell.field.placeholder = nil
@@ -433,7 +433,7 @@ extension NetworkSettingsViewController {
             cell.delegate = self
             if networkChoices.proxy == .manual {
                 cell.field.isEnabled = true
-                cell.field.placeholder = "excluded.com"
+                cell.field.placeholder = L10n.Global.Cells.none
             } else {
                 cell.field.isEnabled = false
                 cell.field.placeholder = nil
