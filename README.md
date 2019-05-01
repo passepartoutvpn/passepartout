@@ -43,6 +43,10 @@ Passepartout strives for transparency, by showing a fairly detailed yet understa
 
 [<img src="res/snap-parameters.png" width="300">](res/snap-parameters.png)
 
+### Override network settings
+
+Override default gateway, DNS and proxy settings right from the app. Don't bother editing the .ovpn file or your pushed server settings. This is especially useful if you want to override your provider settings, e.g. to integrate your own DNS-based ad blocking.
+
 ### Disconnect on sleep
 
 Keeping the VPN active in the background provides smoother operation, but may be tough for the battery. You might want to use this feature if you're concerned about battery life. When the device goes to sleep, the VPN will disconnect to then reconnect on device wake-up.
