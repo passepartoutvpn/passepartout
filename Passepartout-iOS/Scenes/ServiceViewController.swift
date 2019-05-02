@@ -162,8 +162,13 @@ class ServiceViewController: UIViewController, TableModelHost {
             vc?.modificationDelegate = self
             
         case .providerPresetSegueIdentifier:
+            let infra = uncheckedProviderProfile.infrastructure
+            let presets: [InfrastructurePreset] = uncheckedProviderProfile.pool?.supportedPresetIds(in: uncheckedProviderProfile.infrastructure).map {
+                return infra.preset(for: $0)!
+            } ?? []
+
             let vc = destination as? ProviderPresetViewController
-            vc?.presets = uncheckedProviderProfile.infrastructure.presets
+            vc?.presets = presets
             vc?.currentPresetId = uncheckedProviderProfile.presetId
             vc?.delegate = self
             
@@ -627,6 +632,13 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     private var endpointIndexPath: IndexPath {
         guard let ip = model.indexPath(row: .endpoint, section: .configuration) else {
             fatalError("Could not locate endpointIndexPath")
+        }
+        return ip
+    }
+    
+    private var providerPresetIndexPath: IndexPath {
+        guard let ip = model.indexPath(row: .providerPreset, section: .configuration) else {
+            fatalError("Could not locate presetIndexPath")
         }
         return ip
     }
@@ -1122,13 +1134,13 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         tableView.reloadRows(at: [dataCountIndexPath], with: .none)
     }
     
-    func reloadSelectedRow(andRowAt indexPath: IndexPath? = nil) {
+    func reloadSelectedRow(andRowsAt indexPaths: [IndexPath]? = nil) {
         guard let selectedIP = tableView.indexPathForSelectedRow else {
             return
         }
         var outdatedIPs = [selectedIP]
-        if let otherIP = indexPath {
-            outdatedIPs.append(otherIP)
+        if let otherIPs = indexPaths {
+            outdatedIPs.append(contentsOf: otherIPs)
         }
         tableView.reloadRows(at: outdatedIPs, with: .none)
         tableView.selectRow(at: selectedIP, animated: false, scrollPosition: .none)
@@ -1254,7 +1266,21 @@ extension ServiceViewController: ProviderPoolViewControllerDelegate {
             return
         }
         uncheckedProviderProfile.poolId = pool.id
-        reloadSelectedRow(andRowAt: endpointIndexPath)
+        
+        var extraReloadedRows = [endpointIndexPath]
+
+        // fall back to a supported preset and reload preset row too
+        let supportedPresets = pool.supportedPresetIds(in: uncheckedProviderProfile.infrastructure)
+        if let presetId = uncheckedProviderProfile.preset?.id, !supportedPresets.contains(presetId),
+            let fallback = supportedPresets.first {
+
+            if fallback != uncheckedProviderProfile.presetId {
+                extraReloadedRows.append(providerPresetIndexPath)
+            }
+            uncheckedProviderProfile.presetId = fallback
+        }
+
+        reloadSelectedRow(andRowsAt: extraReloadedRows)
         vpn.reinstallIfEnabled()
 
         if #available(iOS 12, *) {
@@ -1271,7 +1297,7 @@ extension ServiceViewController: ProviderPresetViewControllerDelegate {
             return
         }
         uncheckedProviderProfile.presetId = preset.id
-        reloadSelectedRow(andRowAt: endpointIndexPath)
+        reloadSelectedRow(andRowsAt: [endpointIndexPath])
         vpn.reinstallIfEnabled()
     }
 }
