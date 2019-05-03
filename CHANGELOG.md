@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Override network settings. [#77](https://github.com/passepartoutvpn/passepartout-ios/pull/77)
+- Support for `--redirect-gateway block-local` (partial). [tunnelkit#81](https://github.com/keeshux/tunnelkit/issues/81)
 
 ### Changed
 
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - NordVPN double servers not connecting out of the box. [#78](https://github.com/passepartoutvpn/passepartout-ios/issues/78)
+- Authentication with OpenVPN AS. [tunnelkit#95](https://github.com/keeshux/tunnelkit/issues/95)
 
 ## 1.6.0 (2019-05-01)
 
