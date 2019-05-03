@@ -1,22 +1,14 @@
 ### Added
 
-- VyprVPN provider.
-- More infrastructure metadata.
-- Portuguese translations (Helder Santana).
-- German translations (Christian Lederer).
-- Russian translations (Alexander Korobynikov).
+- Override network settings.
+- Support for `--redirect-gateway block-local` (partial).
 
 ### Changed
 
-- Do not redirect all traffic to VPN unless `--redirect-gateway` specified.
+- Host compression framing and algorithm are now editable.
 
 ### Fixed
 
-- Fall back to CloudFlare DNS when no servers provided.
-- UDP may disconnect on high speeds.
-- SoftEther connects without VPN icon.
-- Misleading Mullvad password suggestion.
-- Leave digest editable despite cipher.
-- TLS errors with passphrase-protected .ovpn profiles.
-- Issue with DNS-only VPN profiles.
+- NordVPN double servers not connecting out of the box.
+- Authentication with OpenVPN AS.
 
