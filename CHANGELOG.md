@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Host compression framing and algorithm are now editable.
 
+### Fixed
+
+- NordVPN double servers not connecting out of the box. [#78](https://github.com/passepartoutvpn/passepartout-ios/issues/78)
+
 ## 1.6.0 (2019-05-01)
 
 ### Added

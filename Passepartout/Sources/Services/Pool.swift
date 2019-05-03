@@ -69,6 +69,25 @@ public struct Pool: Codable, Hashable {
     
     public let numericAddresses: [UInt32]?
     
+    // XXX: inefficient but convenient field (not serialized)
+    public func category(in infrastructure: Infrastructure) -> PoolCategory? {
+        for category in infrastructure.categories {
+            for group in category.groups {
+                for pool in group.pools {
+                    if pool.id == id {
+                        return category
+                    }
+                }
+            }
+        }
+        return nil
+    }
+
+    public func supportedPresetIds(in infrastructure: Infrastructure) -> [String] {
+        let poolCategory = category(in: infrastructure)
+        return poolCategory?.presets ?? infrastructure.presets.map { $0.id }
+    }
+    
     public func hasAddress(_ address: String) -> Bool {
         guard let numericAddresses = numericAddresses else {
             return false
@@ -86,6 +105,12 @@ public struct Pool: Codable, Hashable {
             addrs.insert(hostname, at: 0)
         }
         return addrs
+    }
+    
+    // MARK: Equatable
+
+    public static func == (lhs: Pool, rhs: Pool) -> Bool {
+        return lhs.id == rhs.id
     }
     
     // MARK: Hashable
