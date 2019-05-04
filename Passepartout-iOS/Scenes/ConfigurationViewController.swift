@@ -264,12 +264,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             } else {
                 cell.rightText = L10n.Global.Cells.disabled
             }
-            if configuration.compressionFraming != .disabled {
-                cell.isTappable = true
-            } else {
-                cell.accessoryType = .none
-                cell.isTappable = false
-            }
+            cell.isTappable = (configuration.compressionFraming != .disabled)
 
         case .resetOriginal:
             cell.leftText = L10n.Configuration.Cells.ResetOriginal.caption
@@ -405,7 +400,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             let vc = OptionViewController<SessionProxy.CompressionFraming>()
             vc.title = settingCell?.leftText
             vc.options = [.disabled, .compLZO, .compress]
-            vc.selectedOption = configuration.compressionFraming
+            vc.selectedOption = configuration.compressionFraming ?? .disabled
             vc.descriptionBlock = { $0.cellDescription }
             vc.selectionBlock = { [weak self] in
                 self?.configuration.compressionFraming = $0
@@ -424,7 +419,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             let vc = OptionViewController<SessionProxy.CompressionAlgorithm>()
             vc.title = settingCell?.leftText
             vc.options = [.disabled, .LZO]
-            vc.selectedOption = configuration.compressionAlgorithm
+            vc.selectedOption = configuration.compressionAlgorithm ?? .disabled
             vc.descriptionBlock = { $0.cellDescription }
             vc.selectionBlock = { [weak self] in
                 self?.configuration.compressionAlgorithm = $0
