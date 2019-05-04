@@ -275,6 +275,9 @@ public class ConnectionService: Codable {
                         providerProfile.poolId = fallbackPool.id
                     }
                     
+                    // XXX: fix unsupported preset
+                    providerProfile.setSupportedPreset()
+                    
                     profile = providerProfile
                     
                 case .host:

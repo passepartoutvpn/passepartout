@@ -76,6 +76,16 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         presetId = infrastructure.defaults.preset
     }
     
+    public func setSupportedPreset() {
+        guard let pool = pool else {
+            return
+        }
+        let supported = pool.supportedPresetIds(in: infrastructure)
+        if let current = preset?.id, !supported.contains(current), let fallback = supported.first {
+            presetId = fallback
+        }
+    }
+    
     private func validateEndpoint() {
         guard let pool = pool, let preset = preset else {
             manualAddress = nil
