@@ -73,6 +73,7 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         // forcibly override hostname with profile hostname (never nil)
         var sessionBuilder = builder.sessionConfiguration.builder()
         sessionBuilder.hostname = hostname
+        sessionBuilder.tlsSecurityLevel = 0 // lowest, tolerate widest range of certificates
         builder.sessionConfiguration = sessionBuilder.build()
 
         return builder.build()
