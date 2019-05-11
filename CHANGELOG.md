@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - TLS failed with some servers. [tunnelkit#97](https://github.com/keeshux/tunnelkit/issues/97)
+- Default gateway not overridden when both IPv4/6 disabled.
 
 ## 1.6.1 Beta 1845 (2019-05-03)
 
