@@ -1,14 +1,5 @@
-### Added
-
-- Override network settings.
-- Support for `--redirect-gateway block-local` (partial).
-
-### Changed
-
-- Host compression framing and algorithm are now editable.
-
 ### Fixed
 
-- NordVPN double servers not connecting out of the box.
-- Authentication with OpenVPN AS.
+- TLS failed with some servers.
+- Default gateway not overridden when both IPv4/6 disabled.
 
