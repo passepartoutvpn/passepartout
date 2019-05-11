@@ -953,6 +953,8 @@ public enum L10n {
       public static let dns = L10n.tr("Localizable", "vpn.errors.dns")
       /// Encryption failed
       public static let encryption = L10n.tr("Localizable", "vpn.errors.encryption")
+      /// No gateway
+      public static let gateway = L10n.tr("Localizable", "vpn.errors.gateway")
       /// Network changed
       public static let network = L10n.tr("Localizable", "vpn.errors.network")
       /// Missing routing

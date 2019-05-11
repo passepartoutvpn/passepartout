@@ -227,6 +227,7 @@
 "vpn.errors.compression" = "Compression unsupported";
 "vpn.errors.network" = "Network changed";
 "vpn.errors.routing" = "Missing routing";
+"vpn.errors.gateway" = "No gateway";
 
 "issue_reporter.title" = "Report issue";
 "issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the e-mail attachments if unsure.";

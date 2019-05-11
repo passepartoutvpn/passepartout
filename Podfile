@@ -5,8 +5,8 @@ use_frameworks!
 def shared_pods
     #pod 'TunnelKit', '~> 1.7.0'
     #pod 'TunnelKit/LZO', '~> 1.7.0'
-    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => 'ff0dfc4'
-    pod 'TunnelKit/LZO', :git => 'https://github.com/keeshux/tunnelkit', :commit => 'ff0dfc4'
+    pod 'TunnelKit', :git => 'https://github.com/keeshux/tunnelkit', :commit => 'd06b2e1'
+    pod 'TunnelKit/LZO', :git => 'https://github.com/keeshux/tunnelkit', :commit => 'd06b2e1'
     #pod 'TunnelKit', :path => '../../personal/tunnelkit'
     #pod 'TunnelKit/LZO', :path => '../../personal/tunnelkit'
     pod 'SSZipArchive'
