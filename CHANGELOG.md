@@ -21,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - NordVPN double servers not connecting out of the box. [#78](https://github.com/passepartoutvpn/passepartout-ios/issues/78)
 - Authentication with OpenVPN AS. [tunnelkit#95](https://github.com/passepartoutvpn/tunnelkit/issues/95)
 - TLS failed with some servers. [tunnelkit#97](https://github.com/passepartoutvpn/tunnelkit/issues/97)
-- Default gateway not overridden when both IPv4/6 disabled.
 
 ## 1.6.0 (2019-05-01)
 
