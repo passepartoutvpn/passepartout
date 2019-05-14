@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- TLS failed with some servers. [tunnelkit#97](https://github.com/keeshux/tunnelkit/issues/97)
+- TLS failed with some servers. [tunnelkit#97](https://github.com/passepartoutvpn/tunnelkit/issues/97)
 - Default gateway not overridden when both IPv4/6 disabled.
 
 ## 1.6.1 Beta 1845 (2019-05-03)
@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Override network settings. [#77](https://github.com/passepartoutvpn/passepartout-ios/pull/77)
-- Support for `--redirect-gateway block-local` (partial). [tunnelkit#81](https://github.com/keeshux/tunnelkit/issues/81)
+- Support for `--redirect-gateway block-local` (partial). [tunnelkit#81](https://github.com/passepartoutvpn/tunnelkit/issues/81)
 
 ### Changed
 
@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - NordVPN double servers not connecting out of the box. [#78](https://github.com/passepartoutvpn/passepartout-ios/issues/78)
-- Authentication with OpenVPN AS. [tunnelkit#95](https://github.com/keeshux/tunnelkit/issues/95)
+- Authentication with OpenVPN AS. [tunnelkit#95](https://github.com/passepartoutvpn/tunnelkit/issues/95)
 
 ## 1.6.0 (2019-05-01)
 
@@ -44,12 +44,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fall back to CloudFlare DNS when no servers provided. [tunnelkit#84](https://github.com/keeshux/tunnelkit/issues/84)
-- UDP may disconnect on high speeds. [tunnelkit#87](https://github.com/keeshux/tunnelkit/issues/87)
+- Fall back to CloudFlare DNS when no servers provided. [tunnelkit#84](https://github.com/passepartoutvpn/tunnelkit/issues/84)
+- UDP may disconnect on high speeds. [tunnelkit#87](https://github.com/passepartoutvpn/tunnelkit/issues/87)
 - SoftEther connects without VPN icon. [#69](https://github.com/passepartoutvpn/passepartout-ios/issues/69)
 - Misleading Mullvad password suggestion. [#75](https://github.com/passepartoutvpn/passepartout-ios/issues/75)
 - Leave digest editable despite cipher. [#74](https://github.com/passepartoutvpn/passepartout-ios/issues/74)
-- TLS errors with passphrase-protected .ovpn profiles. [tunnelkit#91](https://github.com/keeshux/tunnelkit/issues/91)
+- TLS errors with passphrase-protected .ovpn profiles. [tunnelkit#91](https://github.com/passepartoutvpn/tunnelkit/issues/91)
 - Issue with DNS-only VPN profiles. [#73](https://github.com/passepartoutvpn/passepartout-ios/issues/73)
 
 ## 1.5.0 (2019-04-17)
@@ -57,15 +57,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - NordVPN provider. [#65](https://github.com/passepartoutvpn/passepartout-ios/pull/65)
-- Support for `dhcp-option PROXY_HTTP[S]`. [tunnelkit#74](https://github.com/keeshux/tunnelkit/issues/74)
+- Support for `dhcp-option PROXY_HTTP[S]`. [tunnelkit#74](https://github.com/passepartoutvpn/tunnelkit/issues/74)
 
 ### Fixed
 
 - Regression in DNS configuration. [#68](https://github.com/passepartoutvpn/passepartout-ios/issues/68)
-- SoftEther timing out. [tunnelkit#67](https://github.com/keeshux/tunnelkit/issues/67)
+- SoftEther timing out. [tunnelkit#67](https://github.com/passepartoutvpn/tunnelkit/issues/67)
 - VPN status cell doesn't always enter active profile. [#63](https://github.com/passepartoutvpn/passepartout-ios/issues/63)
 - Masking preference not retained. [#64](https://github.com/passepartoutvpn/passepartout-ios/issues/64)
-- Issues with very long PUSH_REPLY. [tunnelkit#71](https://github.com/keeshux/tunnelkit/issues/71)
+- Issues with very long PUSH_REPLY. [tunnelkit#71](https://github.com/passepartoutvpn/tunnelkit/issues/71)
 - Missing app icon in Credits.
 
 ## 1.4.0 (2019-04-11)
@@ -99,7 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Support PKCS#8 encrypted cert keys. [#43](https://github.com/passepartoutvpn/passepartout-ios/issues/43)
-- Handle PEM with preamble. [tunnelkit#78](https://github.com/keeshux/tunnelkit/issues/78)
+- Handle PEM with preamble. [tunnelkit#78](https://github.com/passepartoutvpn/tunnelkit/issues/78)
 - Infrastructures not retained after refresh. [#54](https://github.com/passepartoutvpn/passepartout-ios/issues/54)
 
 ## 1.2.0 (2019-04-01)
@@ -162,16 +162,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Override DNS servers via `dhcp-option DNS`. [tunnelkit#56](https://github.com/keeshux/tunnelkit/pull/56)
+- Override DNS servers via `dhcp-option DNS`. [tunnelkit#56](https://github.com/passepartoutvpn/tunnelkit/pull/56)
 - About link to FAQ.
 
 ### Changed
 
-- Only enable EKU verification if `remote-cert-tls server`. [tunnelkit#64](https://github.com/keeshux/tunnelkit/pull/64)
+- Only enable EKU verification if `remote-cert-tls server`. [tunnelkit#64](https://github.com/passepartoutvpn/tunnelkit/pull/64)
 
 ### Fixed
 
-- Shut down if server pushes a compression directive. [tunnelkit#65](https://github.com/keeshux/tunnelkit/pull/65)
+- Shut down if server pushes a compression directive. [tunnelkit#65](https://github.com/passepartoutvpn/tunnelkit/pull/65)
 - Retain DNS reply order in resolved endpoint addresses. [#31](https://github.com/passepartoutvpn/passepartout-ios/pull/31)
 
 ## 1.0 (2019-01-16)
@@ -188,7 +188,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Explicit "Reconnect" button. [#9](https://github.com/passepartoutvpn/passepartout-ios/pull/9)
 - Option to revert host parameters to original configuration (Nicholas Caito). [#10](https://github.com/passepartoutvpn/passepartout-ios/pull/10)
 - Support for TLS wrapping (tls-auth and tls-crypt). [#5](https://github.com/passepartoutvpn/passepartout-ios/pull/5)
-- AES-GCM and new endpoints to PIA network preset. [tunnelkit#32](https://github.com/keeshux/tunnelkit/pull/32)
+- AES-GCM and new endpoints to PIA network preset. [tunnelkit#32](https://github.com/passepartoutvpn/tunnelkit/pull/32)
 - Disclosure indicators in profile organizer (Samuel Michaels).
 - Disclaimer for app usage.
 
@@ -221,7 +221,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Connection occasionally turning inactive after a while.
 - Improved performance and privacy of debug log.
 - .ovpn files could not be imported without OpenVPN Connect installed. [#6](https://github.com/passepartoutvpn/passepartout-ios/issues/6)
-- Fixed Mullvad abrupt disconnection. [tunnelkit#30](https://github.com/keeshux/tunnelkit/issues/30)
+- Fixed Mullvad abrupt disconnection. [tunnelkit#30](https://github.com/passepartoutvpn/tunnelkit/issues/30)
 - Credentials are now optional for host profiles. [#4](https://github.com/passepartoutvpn/passepartout-ios/pull/4)
 - Can now import .ovpn files from Apple Files app. [#1](https://github.com/passepartoutvpn/passepartout-ios/pull/1)
 - Reject unrecognized values for `cipher`, `auth` and `proto`. [#1](https://github.com/passepartoutvpn/passepartout-ios/pull/1)

@@ -169,8 +169,8 @@ Website: [passepartoutvpn.app][about-website]
 [dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html
 [dep-jazzy]: https://github.com/realm/jazzy
 [dep-brew]: https://brew.sh/
-[dep-tunnelkit]: https://github.com/keeshux/tunnelkit
-[dep-tunnelkit-ovpn]: https://github.com/keeshux/tunnelkit#support-for-ovpn-configuration
+[dep-tunnelkit]: https://github.com/passepartoutvpn/tunnelkit
+[dep-tunnelkit-ovpn]: https://github.com/passepartoutvpn/tunnelkit#support-for-ovpn-configuration
 [dep-openssl]: https://www.openssl.org/
 
 [license-content]: LICENSE
