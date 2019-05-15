@@ -2,6 +2,7 @@
 
 - Sovrascrivi impostazioni di rete.
 - Supporto per `--redirect-gateway block-local` (parziale).
+- Traduzione al Russo (Alexander Korobynikov).
 
 ### Cambiati
 

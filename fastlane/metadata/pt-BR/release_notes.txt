@@ -2,6 +2,7 @@
 
 - Substituir configurações de rede.
 - Suporte para `--redirect-gateway block-local` (parcial).
+- Tradução para Russo (Alexander Korobynikov).
 
 ### O que mudou
 

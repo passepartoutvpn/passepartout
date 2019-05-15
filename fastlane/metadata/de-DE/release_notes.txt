@@ -2,6 +2,7 @@
 
 - Netzwerkeinstellungen übersteuern.
 - Unterstützung für `--redirect-gateway block-local` (teilweise).
+- Russische Übersetzung (Alexander Korobynikov).
 
 ### Geändert
 
