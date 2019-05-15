@@ -109,6 +109,7 @@
 "service.cells.provider.preset.caption" = "Voreinstellung";
 "service.cells.provider.refresh.caption" = "Infrastruktur neu laden";
 "service.cells.host.parameters.caption" = "Parameter";
+"service.cells.network_settings.caption" = "Netzwerk-Einstellungen";
 "service.cells.vpn_survives_sleep.caption" = "Verbindung aktiv halten trotz Schlafmodus";
 "service.cells.vpn_resolves_hostname.caption" = "Server Hostname auflösen";
 //"service.cells.vpn_prefers_udp.caption" = "Prefer UDP socket";
@@ -203,6 +204,14 @@
 "configuration.cells.renegotiation_seconds.value.after" = "nach %@";
 "configuration.cells.random_endpoint.caption" = "Endpunkt zufällig wählen";
 
+"network_settings.cells.choice.client" = ".ovpn-Datei einlesen";
+"network_settings.cells.choice.server" = "Vom Server holen";
+"network_settings.cells.address.caption" = "Adresse";
+"network_settings.cells.port.caption" = "Port";
+"network_settings.cells.add_dns_server.caption" = "Adresse hinzufügen";
+"network_settings.cells.proxy_bypass.caption" = "Domäne umgehen";
+"network_settings.cells.add_proxy_bypass.caption" = "Zu umgehende Domäne hinzufügen";
+
 "debug_log.buttons.previous" = "Zurück";
 "debug_log.buttons.next" = "Weiter";
 "debug_log.alerts.empty_log.message" = "Das Debug-Log ist leer.";
@@ -221,6 +230,7 @@
 "vpn.errors.compression" = "Komprimierung nicht unterstützt";
 "vpn.errors.network" = "Netzwerk geändert";
 "vpn.errors.routing" = "Kein Routing";
+"vpn.errors.gateway" = "Kein Gateway";
 
 "issue_reporter.title" = "Problem melden";
 "issue_reporter.message" = "Das Debug-Log deiner letzten Verbindung ist notwendig um dein Verbindungs-Problem zu untersuchen und ist vollständig anonymisiert.\n\nDie .ovpn-Konfigurations-Datei, sofern vorhanden, wird anonymisiert von jeglichen sensiblen Daten, angehangen.\n\nBitte prüfe im Zweifelsfall die Email-Anhänge.";
