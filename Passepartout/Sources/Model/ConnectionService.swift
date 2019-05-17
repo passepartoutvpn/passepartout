@@ -573,7 +573,9 @@ public class ConnectionService: Codable {
             rule.ssidMatch = reallyTrustedWifis
             rules.append(rule)
         }
-        rules.append(NEOnDemandRuleConnect())
+        let connection = NEOnDemandRuleConnect()
+        connection.interfaceTypeMatch = .any
+        rules.append(connection)
         
         return NetworkExtensionVPNConfiguration(protocolConfiguration: protocolConfiguration, onDemandRules: rules)
     }
