@@ -155,9 +155,9 @@ public class AppConstants {
         }
 
         public static let authorByLanguage: [String: String] = [
+            "de": "Christian Lederer",
             "it": "Davide De Rosa",
             "pt-BR": "Helder Santana",
-            "de": "Christian Lederer",
             "ru": "Alexander Korobynikov"
         ]
     }
@@ -252,6 +252,11 @@ public class AppConstants {
 
         public static let all: [License] = [
             License(
+                "lzo",
+                "GPLv2",
+                "https://www.gnu.org/licenses/gpl-2.0.txt"
+            ),
+            License(
                 "MBProgressHUD",
                 "MIT",
                 "https://raw.githubusercontent.com/jdg/MBProgressHUD/master/LICENSE"
@@ -280,11 +285,6 @@ public class AppConstants {
                 "SwiftyBeaver",
                 "MIT",
                 "https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE"
-            ),
-            License(
-                "lzo",
-                "GPLv2",
-                "https://www.gnu.org/licenses/gpl-2.0.txt"
             )
         ]
 
