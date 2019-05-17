@@ -560,13 +560,13 @@
 		0EDE8DEC20C93E3B004C739C /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				0EA068F3218475F800C320AD /* ConfigurationParserResult+Alerts.swift */,
 				0EEB53B1225D525B00746300 /* Downloader.swift */,
 				0EF5CF242141CE58004FF1BD /* HUD.swift */,
 				0E24273F225951B00064A1A3 /* InApp.swift */,
 				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
 				0E4FD7F020D58618002221FF /* Macros.swift */,
 				0ED38AE9214054A50004D387 /* OptionViewController.swift */,
-				0EA068F3218475F800C320AD /* ConfigurationParserResult+Alerts.swift */,
 				0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */,
 				0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */,
 				0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */,
