@@ -22,6 +22,7 @@ EINFACH ZU BENUTZEN
 - Verwalte alle Profile an einem Platz.
 - Importiere .ovpn Konfigurationsdateien.
 - Feintune die Verschlüsselung ohne Änderungen an der Konfigurationsdatei.
+- Netzwerkeinstellungen schnell übersteuern (Standart-Gateway, DNS, Proxy).
 
 BETRIEBSSYSTEM-INTEGRATION
 

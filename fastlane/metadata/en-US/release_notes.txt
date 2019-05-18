@@ -2,6 +2,7 @@
 
 - Override network settings.
 - Support for `--redirect-gateway block-local` (partial).
+- Russian translations (Alexander Korobynikov).
 
 ### Changed
 

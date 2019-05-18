@@ -109,6 +109,7 @@
 "service.cells.provider.preset.caption" = "Preset";
 "service.cells.provider.refresh.caption" = "Aggiorna infrastruttura";
 "service.cells.host.parameters.caption" = "Parametri";
+"service.cells.network_settings.caption" = "Impostazioni di rete";
 "service.cells.vpn_survives_sleep.caption" = "Mantieni attivo in sleep";
 "service.cells.vpn_resolves_hostname.caption" = "Risolvi hostname del server";
 //"service.cells.vpn_prefers_udp.caption" = "Prefer UDP socket";
@@ -203,6 +204,14 @@
 "configuration.cells.renegotiation_seconds.value.after" = "dopo %@";
 "configuration.cells.random_endpoint.caption" = "Endpoint casuale";
 
+"network_settings.cells.choice.client" = "Leggi .ovpn";
+"network_settings.cells.choice.server" = "Ottieni dal server";
+"network_settings.cells.address.caption" = "Indirizzo";
+"network_settings.cells.port.caption" = "Porta";
+"network_settings.cells.add_dns_server.caption" = "Aggiungi indirizzo";
+"network_settings.cells.proxy_bypass.caption" = "Dominio ignorato";
+"network_settings.cells.add_proxy_bypass.caption" = "Aggiungi dominio ignorato";
+
 "debug_log.buttons.previous" = "Precedente";
 "debug_log.buttons.next" = "Successivo";
 "debug_log.alerts.empty_log.message" = "Il debug log è vuoto.";
@@ -221,6 +230,7 @@
 "vpn.errors.compression" = "Compressione non supportata";
 "vpn.errors.network" = "Rete cambiata";
 "vpn.errors.routing" = "Routing mancante";
+"vpn.errors.gateway" = "Nessun gateway";
 
 "issue_reporter.title" = "Segnala problema";
 "issue_reporter.message" = "Il debug log delle tue ultime connessioni è cruciale per risolvere i tuoi problemi di connettività ed è completamente anonimo.\n\nIl file di configurazione .ovpn, se presente, è allegato privato di ogni dato sensibile.\n\nPer favore controlla gli allegati dell'e-mail se non sei sicuro/a.";

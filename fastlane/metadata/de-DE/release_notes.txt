@@ -1,18 +1,16 @@
 ### Hinzugefügt
 
-- VyprVPN Anbieter.
-- Mehr Infrastruktur-Metadaten.
-- Portugiesische Übersetzung (Helder Santana).
-- Deutsche Übersetzung (Christian Lederer).
+- Netzwerkeinstellungen übersteuern.
+- Unterstützung für `--redirect-gateway block-local` (teilweise).
 - Russische Übersetzung (Alexander Korobynikov).
 
 ### Geändert
 
-- Leite nicht allen Netzwerkverkehr über das VPN, es sei denn `--redirect-gateway` ist angegeben.
+- Komprimierungs-Framing und -algorithmus sind jetzt bearbeitbar.
 
 ### Fehlerbehebungen
 
-- Rückfallebene zu CloudFlare DNS falls keine Server angegeben.
-- UDP-Verbindung kann Abbrechen bei hohen Geschwindigkeiten.
-- SoftEther verbindet sich ohne VPN Icon.
-
+- NordVPN Doppel-Server wurden standardmäßig nicht verbunden.
+- Authentifizierung mit OpenVPN AS.
+- TLS schlug fehl mit manchen Servern.
+- Standart-Gateway nicht übersteuert wenn sowohl IPv4 als auch v6 deaktiviert waren.

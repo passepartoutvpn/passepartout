@@ -109,6 +109,7 @@
 "service.cells.provider.preset.caption" = "Пресет";
 "service.cells.provider.refresh.caption" = "Обновить инфраструктуру";
 "service.cells.host.parameters.caption" = "Параметры";
+"service.cells.network_settings.caption" = "Сетевые настройки";
 "service.cells.vpn_survives_sleep.caption" = "Оставлять включенным во время сна";
 "service.cells.vpn_resolves_hostname.caption" = "Разрешить имя хоста сервера";
 //"service.cells.vpn_prefers_udp.caption" = "Предпочитать UDP подключение";
@@ -203,6 +204,14 @@
 "configuration.cells.renegotiation_seconds.value.after" = "после %@";
 "configuration.cells.random_endpoint.caption" = "Рандомная конечная точка";
 
+"network_settings.cells.choice.client" = "Читать .ovpn";
+"network_settings.cells.choice.server" = "Вытащить с сервера";
+"network_settings.cells.address.caption" = "Адрес";
+"network_settings.cells.port.caption" = "порт";
+"network_settings.cells.add_dns_server.caption" = "Добавить адрес";
+"network_settings.cells.proxy_bypass.caption" = "Обход домена";
+"network_settings.cells.add_proxy_bypass.caption" = "Добавить обходной домен";
+
 "debug_log.buttons.previous" = "Предыдущий";
 "debug_log.buttons.next" = "Следующий";
 "debug_log.alerts.empty_log.message" = "Журнал отладки пуст.";
@@ -221,6 +230,7 @@
 "vpn.errors.compression" = "Сжатие не поддерживается";
 "vpn.errors.network" = "Изменение сети";
 "vpn.errors.routing" = "Отсутствует маршрутизация";
+"vpn.errors.gateway" = "Нет шлюза";
 
 "issue_reporter.title" = "Сообщить о проблеме";
 "issue_reporter.message" = "Журнал отладки Вашего последнего соединения необходим для разрешения проблем подключения, и является полностью анонимным.\n\n .ovpn файл, если есть, прикреплён без каких-либо конфиденциальных данных .\n\nПожалуйста, перепроверьте прикреплённые файлы, если не уверены.";

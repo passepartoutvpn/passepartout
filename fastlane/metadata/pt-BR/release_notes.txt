@@ -1,18 +1,15 @@
 ### O que há de novo
 
-- VyprVPN é agora suportado.
-- Mais dados de configuração de infraestrutura.
-- Tradução para Português (Helder Santana).
-- Tradução para Alemão (Christian Lederer).
+- Substituir configurações de rede.
+- Suporte para `--redirect-gateway block-local` (parcial).
 - Tradução para Russo (Alexander Korobynikov).
 
 ### O que mudou
 
-- Não redireciona todo o tráfego para VPN a não ser que `--redirect-gateway` seja especificado.
+- O enquadramento e o algoritmo de compactação do host agora são editáveis.
 
 ### Corrigido
 
-- Retorna para CloudFlare DNS quando nenhum serviço está especificado.
-- UDP pode desconectar em alta velocidade.
-- SoftEther conecta sem ícone de VPN.
-
+- Servidores duplos NordVPN não conectam fora da caixa.
+- Autenticação com o OpenVPN AS.
+- TLS falhou com alguns servidores.

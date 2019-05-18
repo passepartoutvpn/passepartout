@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Override network settings. [#77](https://github.com/passepartoutvpn/passepartout-ios/pull/77)
 - Support for `--redirect-gateway block-local` (partial). [tunnelkit#81](https://github.com/passepartoutvpn/tunnelkit/issues/81)
+- Russian translations (Alexander Korobynikov).
 
 ### Changed
 

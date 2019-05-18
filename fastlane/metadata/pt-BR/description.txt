@@ -22,6 +22,7 @@ FÁCIL DE USAR
 - Controle seus perfis em um único lugar.
 - Importe arquivos de configuração .ovpn.
 - Habilite criptografia sem melhorar nenhum arquivo de configuração.
+- Substitua configurações de rede em um piscar de olhos (gateway padrão, DNS, proxy).
 
 INTEGRAÇÃO COM O SISTEMA
 
