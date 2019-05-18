@@ -109,18 +109,15 @@
 "service.cells.provider.preset.caption" = "Pré-definição";
 "service.cells.provider.refresh.caption" = "Atualizar infraestrutura";
 "service.cells.host.parameters.caption" = "Parâmetros";
-"service.cells.host.parameters.value.cipher" = "%@";
-"service.cells.host.parameters.value.cipher_digest" = "%@ / %@";
+"service.cells.network_settings.caption" = "Configurações de rede";
 "service.cells.vpn_survives_sleep.caption" = "Manter ativo em modo descanço";
 "service.cells.vpn_resolves_hostname.caption" = "Resolver hostname do servidor";
 //"service.cells.vpn_prefers_udp.caption" = "Preferir socket UDP";
 "service.cells.trusted_mobile.caption" = "Rede celular";
-"service.cells.trusted_wifi.caption" = "%@";
 "service.cells.trusted_add_wifi.caption" = "Adicionar Wi-Fi atual";
 "service.cells.trusted_policy.caption" = "Trust disables VPN";
 "service.cells.test_connectivity.caption" = "Testar conexão";
 "service.cells.data_count.caption" = "Dados transferidos";
-"service.cells.data_count.value" = "↓%@ / ↑%@";
 "service.cells.data_count.none" = "Indisponível";
 "service.cells.debug_log.caption" = "Log de Debug";
 "service.cells.masks_private_data.caption" = "Esconder dados da rede";
@@ -207,6 +204,14 @@
 "configuration.cells.renegotiation_seconds.value.after" = "depois de %@";
 "configuration.cells.random_endpoint.caption" = "Destino randômico";
 
+"network_settings.cells.choice.client" = "Ler .ovpn";
+"network_settings.cells.choice.server" = "Puxar do servidor";
+"network_settings.cells.address.caption" = "Endereço";
+"network_settings.cells.port.caption" = "Porta";
+"network_settings.cells.add_dns_server.caption" = "Adicionar endereço";
+"network_settings.cells.proxy_bypass.caption" = "Domínio ignorado";
+"network_settings.cells.add_proxy_bypass.caption" = "Adicionar domínio ignorado";
+
 "debug_log.buttons.previous" = "Anterior";
 "debug_log.buttons.next" = "Próximo";
 "debug_log.alerts.empty_log.message" = "O log está vazio.";
@@ -225,6 +230,7 @@
 "vpn.errors.compression" = "Compressão não suportada";
 "vpn.errors.network" = "Rede alterada";
 "vpn.errors.routing" = "Rota necessária";
+"vpn.errors.gateway" = "Sem gateway";
 
 "issue_reporter.title" = "Reportar problema";
 "issue_reporter.message" = "O log de suas últimas conexões é crucial para resolver problemas de conectividade e é completamemnte anônimo.\n\nO arquivo de conexão .ovpn, se existente, é anexado sem nenhum dado sensitivo.\n\nPor favor, verique o anexos de email se necessário.";
