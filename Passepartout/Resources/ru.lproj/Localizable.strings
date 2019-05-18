@@ -132,8 +132,6 @@
 "service.alerts.test_connectivity.title" = "Связь";
 "service.alerts.test_connectivity.messages.success" = "Ваше устройство подключено к интернету!";
 "service.alerts.test_connectivity.messages.failure" = "Ваше устройство не подключено к интернету, пожалйста проверьте установки Вашего профиля.";
-"service.alerts.data_count.messages.current" = "Получено: %llu\nОтправлено: %llu";
-"service.alerts.data_count.messages.not_available" = "Информация не доступна, Вы подключены?";
 "service.alerts.masks_private_data.messages.must_reconnect" = "Для безопасного сброса журнала отладки и изменения маскировки информации сети Вы должны заново подключиться к VPN.";
 "service.alerts.buttons.reconnect" = "Переподключить";
 "service.alerts.download.title" = "Необходимо скачивание";

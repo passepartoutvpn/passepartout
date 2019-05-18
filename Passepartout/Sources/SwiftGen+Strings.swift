@@ -630,16 +630,6 @@ public enum L10n {
         /// You need to enter account credentials first.
         public static let message = L10n.tr("Localizable", "service.alerts.credentials_needed.message")
       }
-      public enum DataCount {
-        public enum Messages {
-          /// Received: %llu\nSent: %llu
-          public static func current(_ p1: Int, _ p2: Int) -> String {
-            return L10n.tr("Localizable", "service.alerts.data_count.messages.current", p1, p2)
-          }
-          /// Information not available, are you connected?
-          public static let notAvailable = L10n.tr("Localizable", "service.alerts.data_count.messages.not_available")
-        }
-      }
       public enum Download {
         /// Failed to download configuration files. %@
         public static func failed(_ p1: String) -> String {

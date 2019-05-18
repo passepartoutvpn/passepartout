@@ -132,8 +132,6 @@
 "service.alerts.test_connectivity.title" = "Connettività";
 "service.alerts.test_connectivity.messages.success" = "Il tuo dispositivo è connesso a Internet!";
 "service.alerts.test_connectivity.messages.failure" = "Il tuo dispositivo non è connesso a Internet, per favore controlla i parametri del tuo profilo.";
-"service.alerts.data_count.messages.current" = "Ricevuti: %llu\nInviati: %llu";
-"service.alerts.data_count.messages.not_available" = "Informazione non disponibile, sei connesso/a?";
 "service.alerts.masks_private_data.messages.must_reconnect" = "Per azzerare il debug log ed applicare la nuova preferenza di mascheramento, devi riconnetterti alla VPN.";
 "service.alerts.buttons.reconnect" = "Riconnetti";
 "service.alerts.download.title" = "Download necessario";

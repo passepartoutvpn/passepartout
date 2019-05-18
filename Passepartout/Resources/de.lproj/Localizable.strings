@@ -132,8 +132,6 @@
 "service.alerts.test_connectivity.title" = "Konnektivität";
 "service.alerts.test_connectivity.messages.success" = "Dein Gerät ist mit dem Internet verbunden!";
 "service.alerts.test_connectivity.messages.failure" = "Dein Gerät hat keine Verbindung mit dem Internet, bitte prüfe deine Profil-Parameter.";
-"service.alerts.data_count.messages.current" = "Empfangen: %llu\nGesendet: %llu";
-"service.alerts.data_count.messages.not_available" = "Information nicht verfügbar, bist du verbunden?";
 "service.alerts.masks_private_data.messages.must_reconnect" = "Um das aktuelle Debug-Log sicher zurückzusetzen und die neuen Zensier-Paramenter anzuwenden, musst du das VPN jetzt erneut verbinden.";
 "service.alerts.buttons.reconnect" = "Erneut verbinden";
 "service.alerts.download.title" = "Download benötigt";

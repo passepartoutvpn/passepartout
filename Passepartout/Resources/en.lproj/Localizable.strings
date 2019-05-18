@@ -132,8 +132,6 @@
 "service.alerts.test_connectivity.title" = "Connectivity";
 "service.alerts.test_connectivity.messages.success" = "Your device is connected to the Internet!";
 "service.alerts.test_connectivity.messages.failure" = "Your device has no Internet connectivity, please review your profile parameters.";
-"service.alerts.data_count.messages.current" = "Received: %llu\nSent: %llu";
-"service.alerts.data_count.messages.not_available" = "Information not available, are you connected?";
 "service.alerts.masks_private_data.messages.must_reconnect" = "In order to safely reset the current debug log and apply the new masking preference, you must reconnect to the VPN now.";
 "service.alerts.buttons.reconnect" = "Reconnect";
 "service.alerts.download.title" = "Download required";

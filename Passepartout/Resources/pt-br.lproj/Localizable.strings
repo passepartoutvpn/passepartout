@@ -132,8 +132,6 @@
 "service.alerts.test_connectivity.title" = "Conectividade";
 "service.alerts.test_connectivity.messages.success" = "Seu dispositivo está conectado à Internet!";
 "service.alerts.test_connectivity.messages.failure" = "Seu dispositivo não está conectado à Internet, por favor, verifique sua configurações.";
-"service.alerts.data_count.messages.current" = "Recebido: %llu\nSent: %llu";
-"service.alerts.data_count.messages.not_available" = "Informação não disponível, você está conectado?";
 "service.alerts.masks_private_data.messages.must_reconnect" = "Para garantir uma restauração segura do seu log de debug, você precisa reconectar à VPN.";
 "service.alerts.buttons.reconnect" = "Reconectar";
 "service.alerts.download.title" = "Download requirido";
