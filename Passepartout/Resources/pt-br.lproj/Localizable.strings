@@ -159,9 +159,6 @@
 "account.cells.open_guide.caption" = "Ver sua credenciais";
 "account.cells.signup.caption" = "Registrar com %@";
 
-"provider.pool.sections.free.header" = "Grátis";
-"provider.pool.sections.paid.header" = "Pago";
-
 "endpoint.sections.location_addresses.header" = "Endereços";
 "endpoint.sections.location_protocols.header" = "Protocolos";
 "endpoint.cells.any_address.caption" = "Automático";

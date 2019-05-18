@@ -159,9 +159,6 @@
 "account.cells.open_guide.caption" = "Проверьте Ваши данные";
 "account.cells.signup.caption" = "Зарегистрируйтесь с %@";
 
-"provider.pool.sections.free.header" = "Бесплатный";
-"provider.pool.sections.paid.header" = "Платный";
-
 "endpoint.sections.location_addresses.header" = "Адреса";
 "endpoint.sections.location_protocols.header" = "Протоколы";
 "endpoint.cells.any_address.caption" = "Автоматически";
@@ -258,7 +255,6 @@
 "about.title" = "О нас";
 "about.sections.web.header" = "Веб";
 "about.sections.share.header" = "Поделиться";
-"about.cells.changelog.caption" = "Журнал изменений";
 "about.cells.credits.caption" = "Благодарности";
 "about.cells.website.caption" = "Домашняя страница";
 "about.cells.faq.caption" = "FAQ";
