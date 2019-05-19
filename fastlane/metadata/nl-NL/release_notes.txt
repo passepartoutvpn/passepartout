@@ -1,0 +1,18 @@
+### Toegevoegd
+
+- Netwerkinstellingen overschrijven.
+- Gedeeltelijke ondersteuning voor `--redirect-gateway block-local`.
+- Russische vertaling (Alexander Korobynikov).
+- Griekse vertaling (Konstantinos Koukoulakis).
+- Franse vertaling (Julien Laniel).
+- Nederlands vertaling (Norbert de Vreede).
+
+### Aangepast
+
+- Host compressie framing en algoritme kunnen nu worden bewerkt.
+
+### Opgelost
+
+- NordVPN dubbele server configuratie kon niet verbinden met default settings.
+- Authenticatie met OpenVPN AS.
+- TLS mislukte bij sommige servers.
