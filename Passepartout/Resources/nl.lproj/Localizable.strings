@@ -225,7 +225,7 @@
 "vpn.errors.compression" = "Compressie wordt niet ondersteund";
 "vpn.errors.network" = "Netwerk veranderd";
 "vpn.errors.routing" = "Ontbrekende routering";
-"vpn.errors.gateway" = "Geen gateway”;
+"vpn.errors.gateway" = "Geen gateway";
 
 "issue_reporter.title" = "Meld een probleem";
 "issue_reporter.message" = "Het foutopsporingslogboek van uw laatste verbindingen is cruciaal om uw verbindingsproblemen op te lossen en is volledig geanonimiseerd.\n\nHet .ovpn configuratiebestand, indien aanwezig, is ontdaan van alle gevoelige gegevens.\n\nControleer de e-mailbijlagen als je niet zeker bent dat alles verwijderd is.";
