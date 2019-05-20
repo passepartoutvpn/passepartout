@@ -31,6 +31,12 @@
 "global.host.title_input.placeholder" = "Mijn Profiel";
 "global.email_not_configured" = "Er is geen email adres geconfigureerd.";
 
+"global.cells.enabled" = "Ingeschakeld";
+"global.cells.disabled" = "Uitgeschakeld";
+"global.cells.none" = "Geen";
+"global.cells.automatic" = "Automatisch";
+"global.cells.manual" = "Handmatig";
+
 "reddit.title" = "Reddit";
 "reddit.message" = "Wist je dat Passepartout een eigen subreddit heeft? Schrijf je in voor updates, of discussiëren over problemen, (nieuwe) mogelijkheden, nieuwe platformen of wat je maar wil.\n\nHet is ook een goede manier om te laten zien dat je om dit project geeft.";
 "reddit.buttons.subscribe" = "Schfijf je nu in!";
@@ -99,12 +105,11 @@
 "service.cells.account.caption" = "Account";
 "service.cells.account.none" = "Niets geconfigureerd";
 "service.cells.endpoint.caption" = "Endpoint";
-"service.cells.endpoint.value.automatic" = "Automatisch";
-"service.cells.endpoint.value.manual" = "Handmatig";
 "service.cells.provider.pool.caption" = "Locatie";
 "service.cells.provider.preset.caption" = "Voorkeur";
 "service.cells.provider.refresh.caption" = "Vernieuw de infrastructuur";
 "service.cells.host.parameters.caption" = "Parameters";
+"service.cells.network_settings.caption" = "Netwerk instellingen";
 "service.cells.vpn_survives_sleep.caption" = "Actief tijdens slaapstand";
 "service.cells.vpn_resolves_hostname.caption" = "Haal de naam van de host op";
 //"service.cells.vpn_prefers_udp.caption" = "Voorkeur voor UDP socket";
@@ -127,8 +132,6 @@
 "service.alerts.test_connectivity.title" = "Connectiviteit";
 "service.alerts.test_connectivity.messages.success" = "Apparaat is verbonden met internet!";
 "service.alerts.test_connectivity.messages.failure" = "Uw apparaat heeft geen internetverbinding. Controleer uw profielparameters.";
-"service.alerts.data_count.messages.current" = "Ontvangen: %llu\nVerzonden: %llu";
-"service.alerts.data_count.messages.not_available" = "Informatie niet beschikbaar, bent u verbonden?";
 "service.alerts.masks_private_data.messages.must_reconnect" = "Om het huidige foutopsporingslogboek veilig opnieuw in te stellen en de nieuwe maskeervoorkeur toe te passen, moet u nu opnieuw verbinding maken met VPN.";
 "service.alerts.buttons.reconnect" = "Opnieuw verbinden";
 "service.alerts.download.title" = "Download vereist";
@@ -195,9 +198,14 @@
 "configuration.cells.renegotiation_seconds.caption" = "Renegotiation";
 "configuration.cells.renegotiation_seconds.value.after" = "na %@";
 "configuration.cells.random_endpoint.caption" = "Willekeurig eindpunt";
-"configuration.cells.all.value.enabled" = "Ingeschakeld";
-"configuration.cells.all.value.disabled" = "Uitgeschakeld";
-"configuration.cells.all.value.none" = "Geen";
+
+"network_settings.cells.choice.client" = "Gebruik .ovpn";
+"network_settings.cells.choice.server" = "Haal op van server";
+"network_settings.cells.address.caption" = "Adress";
+"network_settings.cells.port.caption" = "Port";
+"network_settings.cells.add_dns_server.caption" = "Voeg adress toe";
+"network_settings.cells.proxy_bypass.caption" = "Omzeil domein";
+"network_settings.cells.add_proxy_bypass.caption" = "Voeg omzeil optie voor domein toe";
 
 "debug_log.buttons.previous" = "Vorige";
 "debug_log.buttons.next" = "Volgende";
@@ -216,7 +224,8 @@
 "vpn.errors.encryption" = "Versleuteling mislukt";
 "vpn.errors.compression" = "Compressie wordt niet ondersteund";
 "vpn.errors.network" = "Netwerk veranderd";
-"vpn.errors.routing" = "Ontbrekende routing";
+"vpn.errors.routing" = "Ontbrekende routering";
+"vpn.errors.gateway" = "Geen gateway”;
 
 "issue_reporter.title" = "Meld een probleem";
 "issue_reporter.message" = "Het foutopsporingslogboek van uw laatste verbindingen is cruciaal om uw verbindingsproblemen op te lossen en is volledig geanonimiseerd.\n\nHet .ovpn configuratiebestand, indien aanwezig, is ontdaan van alle gevoelige gegevens.\n\nControleer de e-mailbijlagen als je niet zeker bent dat alles verwijderd is.";
