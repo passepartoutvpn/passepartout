@@ -288,6 +288,8 @@
 		0EE2FA672291E50300F56F49 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		0EEB53B1225D525B00746300 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		0EF4EF7F229431CB0030E6EB /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Intents.strings; sourceTree = "<group>"; };
+		0EF4EF80229431D20030E6EB /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
 		0EF5CF242141CE58004FF1BD /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNetworkSettings.swift; sourceTree = "<group>"; };
@@ -810,6 +812,7 @@
 				ru,
 				"pt-BR",
 				nl,
+				el,
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
 			productRefGroup = 0E57F63920C83FC5008323CF /* Products */;
@@ -1164,6 +1167,7 @@
 				0E0B6CE5226F45B100C1B244 /* ru */,
 				0E411BA42272184A00E0852C /* pt-BR */,
 				0EE2FA672291E50300F56F49 /* nl */,
+				0EF4EF80229431D20030E6EB /* el */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1210,6 +1214,7 @@
 				0E0B6CE4226F45B000C1B244 /* ru */,
 				0E411BA32272183700E0852C /* pt-BR */,
 				0EE2FA662291E4AA00F56F49 /* nl */,
+				0EF4EF7F229431CB0030E6EB /* el */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";

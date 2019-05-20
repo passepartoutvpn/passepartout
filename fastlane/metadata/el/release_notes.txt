@@ -1,0 +1,6 @@
+### Added
+
+- Dutch translations (Norbert de Vreede).
+- Greek translations (Konstantinos Koukoulakis).
+- French translations (Julien Laniel).
+- Spanish translations (Christian Broce).
