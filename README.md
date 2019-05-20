@@ -142,10 +142,15 @@ This product includes software developed by the OpenSSL Project for use in the O
 
 ## Translations
 
+- Dutch: Norbert de Vreede - [@paxpacis](https://github.com/paxpacis)
+- French: Julien Laniel - [@linkjul](https://github.com/linkjul)
 - German: Christian Lederer
+- Greek: Konstantinos Koukoulakis
 - Italian: Davide De Rosa (author) - [@keeshux](https://github.com/keeshux)
 - Portuguese: Helder Santana - [@heldr](https://github.com/heldr)
 - Russian: Alexander Korobynikov
+- Spanish: Davide De Rosa (author), Elena Vivó
+- Swedish: Henry Gross-Hellsen - [@cowpod](https://github.com/cowpod)
 
 ## Usage
 
