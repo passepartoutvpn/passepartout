@@ -1,16 +1,7 @@
 ### Aggiunti
 
-- Sovrascrivi impostazioni di rete.
-- Supporto per `--redirect-gateway block-local` (parziale).
-- Traduzione al Russo (Alexander Korobynikov).
-
-### Cambiati
-
-- Framing e algoritmo di compressione ora modificabili negli host.
-
-### Risolti
-
-- I server Double VPN di NordVPN non si connettono al primo tentativo.
-- Autenticazione con server OpenVPN AS.
-- TLS fallito con alcuni server.
-
+- Traduzione all'Olandese (Norbert de Vreede).
+- Traduzione al Greco (Konstantinos Koukoulakis).
+- Traduzione al Francese (Julien Laniel).
+- Traduzione allo Spagnolo (Davide De Rosa, Elena Vivó).
+- Traduzione allo Svedese (Henry Gross-Hellsen).

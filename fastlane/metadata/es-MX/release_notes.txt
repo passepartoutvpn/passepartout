@@ -1,16 +1,7 @@
-### Added
+### Añadido
 
-- Override network settings.
-- Support for `--redirect-gateway block-local` (partial).
-- Russian translations (Alexander Korobynikov).
-
-### Changed
-
-- Host compression framing and algorithm are now editable.
-
-### Fixed
-
-- NordVPN double servers not connecting out of the box.
-- Authentication with OpenVPN AS.
-- TLS failed with some servers.
-
+- Traducción al Holandés (Norbert de Vreede).
+- Traducción al Griego (Konstantinos Koukoulakis).
+- Traducción al Francés (Julien Laniel).
+- Traducción al Español (Davide De Rosa, Elena Vivó).
+- Traducción al Sueco (Henry Gross-Hellsen).

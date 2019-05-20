@@ -1,6 +1,7 @@
-### Added
+### Προστέθηκε
 
-- Dutch translations (Norbert de Vreede).
-- Greek translations (Konstantinos Koukoulakis).
-- French translations (Julien Laniel).
-- Spanish translations (Christian Broce).
+- Ολλανδικές μεταφράσεις (Norbert de Vreede).
+- Ελληνικές μεταφράσεις (Konstantinos Koukoulakis).
+- Γαλλικές μεταφράσεις (Julien Laniel).
+- Ισπανικές μεταφράσεις (Davide De Rosa, Elena Vivó).
+- Σουηδικές μεταφράσεις (Henry Gross-Hellsen).
