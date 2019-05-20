@@ -1,1 +1,1 @@
-Verbind via .ovpn bestanden & VPN providers
+Verbind .ovpn & VPN providers
