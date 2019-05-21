@@ -1,0 +1,283 @@
+//
+//  Localizable.strings
+//  Passepartout
+//
+//  Created by Davide De Rosa on 6/13/18.
+//  Copyright (c) 2019 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"global.ok" = "OK";
+"global.cancel" = "Ακύρωση";
+"global.next" = "Επόμενο";
+"global.close" = "Κλείσιμο";
+"global.host.title_input.message" = "Αποδεκτοί χαρακτήρες είναι οι αλφαριθμητικοί συν τη παύλα \"-\", κάτω παύλα \"_\" και τελεία \".\".";
+"global.host.title_input.placeholder" = "Το προφίλ μου";
+"global.email_not_configured" = "Δεν έχει ρυθμιστεί λογαριασμός ηλεκτρονικού ταχυδρομείου.";
+
+"global.cells.enabled" = "Ενεργοποιήθηκε";
+"global.cells.disabled" = "Απενεργοποιήθηκε";
+"global.cells.none" = "Κανένα";
+"global.cells.automatic" = "Αυτόματο";
+"global.cells.manual" = "Χειροκίνητο";
+
+"reddit.title" = "Reddit";
+"reddit.message" = "Γνωρίζατε ότι το Passepartout έχει subreddit? Εγγραφείτε για ενημερώσεις ή για να συζητήσετε προβλήματα της εφαρμογές, νέες δυνατότητες και άλλα.\n\nΕίναι επίσης ένας ωραίος τρόπος να δείξετε ότι ενδιαφέρεστε για τη προσπάθεια αυτή.";
+"reddit.buttons.subscribe" = "Εγγραφή τώρα!";
+"reddit.buttons.remind" = "Υπενθύμιση Αργότερα";
+"reddit.buttons.never" = "Μη με ρωτήσεις ξανά";
+
+"organizer.sections.providers.header" = "Πάροχοι";
+"organizer.sections.providers.footer" = "Εδώ θα βρείτε ορισμένους παρόχους με προκαθορισμένες ρυθμίσεις προφίλ.";
+"organizer.sections.hosts.header" = "Φιλοξενητές";
+"organizer.sections.hosts.footer" = "Εισάγετε φιλοξενητές από ένα raw .ovpn αρχείο.";
+"organizer.sections.siri.header" = "Siri";
+"organizer.sections.siri.footer" = "Get help from Siri to speed up your most common interactions with the app.";
+"organizer.sections.support.header" = "Υποστήριξη";
+"organizer.sections.feedback.header" = "Ανατροφοδότηση";
+"organizer.cells.profile.value.current" = "Σε χρήση";
+"organizer.cells.add_provider.caption" = "Προσθήκη νέου παρόχου";
+"organizer.cells.add_host.caption" = "Προσθήκη νέου διακομιστή";
+"organizer.cells.siri_shortcuts.caption" = "Διαχείριση Συντομεύσεων";
+"organizer.cells.join_community.caption" = "Συμμετοχή στην κοινότητα";
+"organizer.cells.write_review.caption" = "Γράψτε μια κριτική";
+"organizer.cells.donate.caption" = "Κάντε μια δωρεά";
+"organizer.cells.patreon.caption" = "Υποστηρίξτε με στο Patreon";
+"organizer.cells.translate.caption" = "Βοηθήστε στη μετάφραση";
+"organizer.cells.about.caption" = "Σχετικά με %@";
+"organizer.cells.uninstall.caption" = "Αφαίρεση ρύθμισης VPN";
+"organizer.alerts.exhausted_providers.message" = "Έχετε δημιουργήσει προφίλ για οποιονδήποτε διαθέσιμο πάροχο.";
+"organizer.alerts.add_host.message" = "Εισάγετε μια διεύθυνση από ένα αρχείο .ovpn στο Safari, το Mail ή άλλη εφαρμογή για να ρυθμίσετε ένα προφίλ διακομιστή.\n\nΜπορείτε επίσης να εισάγετε ένα .ovpn αρχείο από το iTunes File Sharing.";
+"organizer.alerts.cannot_donate.message" = "Δεν έχει ρυθμιστεί καμία μέθοδος πληρωμής σε αυτήν τη συσκευή.";
+"organizer.alerts.delete_vpn_profile.message" = "Θέλετε πραγματικά να διαγράψετε τη διαμόρφωση VPN από τις ρυθμίσεις της συσκευής σας; Αυτό μπορεί να διορθώσει κάποιες καταστραμμένες καταστάσεις VPN και δεν θα επηρεάσει τα προφίλ του παροχέα και του διακομιστή σας.";
+
+"wizards.host.cells.title_input.caption" = "Τίτλος";
+"wizards.host.sections.existing.header" = "Υπάρχον Προφίλ";
+"wizards.host.alerts.existing.message" = "Ένα προφίλ διακομιστή με τον ίδιο τίτλο υπάρχει ήδη. Αντικατέστησέ το;";
+
+"parsed_file.alerts.malformed.message" = "Το αρχείο ρυθμίσεων περιέχει μια ακατάλληλη επιλογή (%@).";
+"parsed_file.alerts.missing.message" = "Το αρχείο διαμόρφωσης δεν διαθέτει την απαιτούμενη επιλογή (%@).";
+"parsed_file.alerts.unsupported.message" = "Το αρχείο διαμόρφωσης περιέχει μια επιλογή που δεν υποστηρίζεται (%@).";
+"parsed_file.alerts.potentially_unsupported.message" = "Το αρχείο ρυθμίσεων είναι σωστό, αλλά περιέχει μια δυνητικά μη υποστηριζόμενη επιλογή (%@).\n\nΗ δυνατότητα σύνδεσης μπορεί να διακοπεί ανάλογα με τις ρυθμίσεις του διακομιστή.";
+"parsed_file.alerts.encryption_passphrase.message" = "Εισαγάγετε το κωδικό κρυπτογράφησης.";
+"parsed_file.alerts.decryption.message" = "Η διαμόρφωση περιέχει κρυπτογραφημένο ιδιωτικό κλειδί και δεν ήταν δυνατό να αποκρυπτογραφηθεί. Δείτε πάλι το κωδικό που καταχωρίσατε.";
+"parsed_file.alerts.parsing.message" = "Δεν είναι δυνατή η ανάλυση του παρεχόμενου αρχείου ρύθμισης παραμέτρων (%@).";
+"parsed_file.alerts.buttons.report" = "Αναφέρετε ένα πρόβλημα";
+
+"imported_hosts.title" = "Εισαγόμενοι διακομιστές";
+
+"service.welcome.message" = "Καλώς Ήλθατε στο Passepartout!\n\nΧρησιμοποιήστε τον διοργανωτή για να προσθέσετε ένα νέο προφίλ.";
+"service.sections.general.header" = "Γενικά";
+"service.sections.vpn.header" = "VPN";
+"service.sections.vpn.footer" = "Η σύνδεση θα πραγματοποιηθεί όποτε είναι απαραίτητο.";
+"service.sections.status.header" = "Σύνδεση";
+"service.sections.configuration.header" = "Ρύθμιση";
+"service.sections.provider_infrastructure.footer" = "Τελευταία ενημέρωση στις %@.";
+"service.sections.vpn_survives_sleep.footer" = "Απενεργοποιήστε για να βελτιώσετε τη χρήση της μπαταρίας, εις βάρος των περιστασιακών επιβραδύνσεων που οφείλονται σε επανασύνδεση αφύπνισης.";
+"service.sections.vpn_resolves_hostname.footer" = "Προτιμάται στα περισσότερα δίκτυα και απαιτείται σε ορισμένα δίκτυα IPv6. Απενεργοποιήστε το εκεί που μπλοκάρεται το DNS ή για να επιταχύνετε τη επικοινωνία όταν το DNS είναι αργό για να ανταποκριθεί.";
+//"service.sections.vpn_prefers_udp.footer" = "Το UDP είναι πιο γρήγορο από το TCP, αλλά ενδέχεται να μην λειτουργεί σε ορισμένα δίκτυα. Απενεργοποιήστε σε δίκτυα όπου ενδέχεται να αποκλειστεί το UDP.";
+"service.sections.trusted.header" = "Αξιόπιστα δίκτυα";
+"service.sections.trusted.footer" = "Κατά την είσοδο σε ένα αξιόπιστο δίκτυο, το VPN απενεργοποιείται κανονικά και διατηρείται αποσυνδεδεμένο. Απενεργοποιήστε αυτήν την επιλογή για να μην έχετε μια τέτοια συμπεριφορά.";
+"service.sections.diagnostics.header" = "Διαγνωστικά";
+"service.sections.diagnostics.footer" = "Η κατάσταση κάλυψης θα είναι αποτελεσματική μετά την επανασύνδεση. Τα δεδομένα δικτύου είναι του διακομιστή, διευθύνσεις IP, δρομολόγηση και SSID. Τα διαπιστευτήρια και τα ιδιωτικά κλειδιά δεν καταγράφονται ανεξάρτητα.";
+//"service.sections.destruction.footer" = "Διαγραφή ρυθμίσεων από τις ρυθμίσεις της συσκευής.";
+
+"service.cells.use_profile.caption" = "Χρησιμοποιήστε αυτό το προφίλ";
+"service.cells.vpn_service.caption" = "Ενεργοποιήθηκε";
+"service.cells.connection_status.caption" = "Κατάσταση";
+"service.cells.reconnect.caption" = "Επανασύνδεση";
+"service.cells.account.caption" = "Λογαριασμός";
+"service.cells.account.none" = "Δεν έχει διαμορφωθεί";
+"service.cells.endpoint.caption" = "Τελικό σημείο";
+"service.cells.provider.pool.caption" = "Τοποθεσία";
+"service.cells.provider.preset.caption" = "Προεπιλογή";
+"service.cells.provider.refresh.caption" = "Ανανέωση της υποδομής";
+"service.cells.host.parameters.caption" = "Παράμετροι";
+"service.cells.network_settings.caption" = "Ρυθμίσεις Δικτύου";
+"service.cells.vpn_survives_sleep.caption" = "Κρατήστε ζωντανό στον ύπνο";
+"service.cells.vpn_resolves_hostname.caption" = "Επίλυση του ονόματος σέρβερ διακομιστή";
+//"service.cells.vpn_prefers_udp.caption" = "Prefer UDP socket";
+"service.cells.trusted_mobile.caption" = "Δίκτυο Κινητής";
+"service.cells.trusted_add_wifi.caption" = "Προσθέστε το τρέχον Wi-Fi";
+"service.cells.trusted_policy.caption" = "Τα αξιόπιστα δίκτυα απενεργοποιούν το VPN";
+"service.cells.test_connectivity.caption" = "Δοκιμή συνδεσιμότητας";
+"service.cells.data_count.caption" = "Ανταλλαγή δεδομένων";
+"service.cells.data_count.none" = "Μη διαθέσιμο";
+"service.cells.debug_log.caption" = "Μητρώο εντοπισμού σφαλμάτων";
+"service.cells.masks_private_data.caption" = "Μάσκα δεδομένα δικτύου";
+"service.cells.report_issue.caption" = "Αναφορά ζητήματος συνδεσιμότητας";
+
+"service.alerts.rename.title" = "Μετονομασία προφίλ";
+"service.alerts.credentials_needed.message" = "Πρέπει πρώτα να εισαγάγετε διαπιστευτήρια λογαριασμού.";
+"service.alerts.reconnect_vpn.message" = "Θέλετε να συνδεθείτε ξανά με το VPN;";
+"service.alerts.trusted.no_network.message" = "Δεν είστε συνδεδεμένοι σε κανένα δίκτυο Wi-Fi.";
+"service.alerts.trusted.will_disconnect_trusted.message" = "Με εμπιστοσύνη σε αυτό το δίκτυο, το VPN μπορεί να αποσυνδεθεί. Να συνεχίσω;";
+"service.alerts.trusted.will_disconnect_policy.message" = "Αλλάζοντας την πολιτική εμπιστοσύνης, το VPN μπορεί να αποσυνδεθεί. Να συνεχίσω;";
+"service.alerts.test_connectivity.title" = "Συνδεσιμότητα";
+"service.alerts.test_connectivity.messages.success" = "Η συσκευή σας είναι συνδεδεμένη στο Διαδίκτυο!";
+"service.alerts.test_connectivity.messages.failure" = "Η συσκευή σας δεν διαθέτει σύνδεση στο Internet, παρακαλούμε να ελέγξετε τις παραμέτρους του προφίλ σας.";
+"service.alerts.masks_private_data.messages.must_reconnect" = "Για να επαναφέρετε με ασφάλεια την τρέχουσα καταγραφή εντοπισμού σφαλμάτων και να εφαρμόσετε τη νέα προτίμηση κάλυψης, πρέπει να συνδεθείτε ξανά με το VPN.";
+"service.alerts.buttons.reconnect" = "Επανασύνδεση";
+"service.alerts.download.title" = "Απαιτείται λήψη";
+"service.alerts.download.message" = "%@ απαιτεί τη λήψη πρόσθετων αρχείων ρυθμίσεων.\n\nΕπιβεβαιώστε για να ξεκινήσετε τη λήψη.";
+"service.alerts.download.failed" = "Αποτυχία λήψης αρχείων ρυθμίσεων. %@";
+"service.alerts.download.hud.extracting" = "Εξάγοντας τα αρχεία, παρακαλώ να είστε υπομονετικοί...";
+
+"account.sections.credentials.header" = "Διαπιστευτήρια";
+"account.sections.guidance.footer.infrastructure.mullvad" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως αριθμητικό.";
+"account.sections.guidance.footer.infrastructure.nordvpn" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως το ηλεκτρονικό σας ταχυδρομείο.";
+"account.sections.guidance.footer.infrastructure.pia" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως αριθμητικό με πρόθεμα \"p\".";
+"account.sections.guidance.footer.infrastructure.protonvpn" = "Βρείτε τα διαπιστευτήριά σας %@ στην ενότητα \"Λογαριασμός> OpenVPN / IKEv2 Username \" της ιστοσελίδας.";
+"account.sections.guidance.footer.infrastructure.tunnelbear" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως το ηλεκτρονικό σας ταχυδρομείο.";
+"account.sections.guidance.footer.infrastructure.vyprvpn" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως το ηλεκτρονικό σας ταχυδρομείο.";
+"account.sections.guidance.footer.infrastructure.windscribe" = "Βρείτε τα διαπιστευτήριά σας %@ στο OpenVPN Config Generator στον ιστότοπο.";
+"account.sections.registration.footer" = "Πηγαίνετε να αποκτήσετε λογαριασμό στον ιστότοπο %@.";
+"account.cells.username.caption" = "Όνομα χρήστη";
+"account.cells.username.placeholder" = "χρήστης";
+"account.cells.password.caption" = "Κωδικός";
+"account.cells.password.placeholder" = "κωδικός";
+//"account.cells.password_confirm.caption" = "Επιβεβαίωση";
+//"account.cells.password_confirm.mismatch" = "Οι κωδικοί πρόσβασης δεν ταιριάζουν!";
+"account.cells.open_guide.caption" = "Δείτε τα διαπιστευτήρια σας";
+"account.cells.signup.caption" = "Εγγραφείτε με %@";
+
+"endpoint.sections.location_addresses.header" = "Διεθύνσεις";
+"endpoint.sections.location_protocols.header" = "Πρωτόκολλα";
+"endpoint.cells.any_address.caption" = "Αυτόματο";
+"endpoint.cells.any_protocol.caption" = "Αυτόματο";
+
+"provider.preset.cells.tech_details.caption" = "Τεχνικές Λεπτομέρειες";
+//"provider.preset.sections.main.footer" = "Αγγίξτε το κουμπί πληροφοριών για να αποκαλύψετε τεχνικές λεπτομέρειες.";
+
+"configuration.sections.communication.header" = "Επικοινωνία";
+"configuration.sections.reset.footer" = "Αν καταλήξατε σε κατεστραμένη συνδεσιμότητα μετά την αλλαγή των παραμέτρων επικοινωνίας, πατήστε για να επανέλθετε στην αρχική διαμόρφωση.";
+"configuration.sections.tls.header" = "TLS";
+"configuration.sections.compression.header" = "Συμπίεση";
+"configuration.sections.network.header" = "Δίκτυο";
+"configuration.sections.other.header" = "Άλλο";
+"configuration.cells.cipher.caption" = "Cipher";
+"configuration.cells.digest.caption" = "Αυθεντικοποίηση";
+"configuration.cells.digest.value.embedded" = "Ενσωματωμένο";
+"configuration.cells.reset_original.caption" = "Επαναφορά ρυθμίσεων";
+"configuration.cells.client.caption" = "Πιστοποιητικό πελάτη";
+"configuration.cells.client.value.enabled" = "Επαληθεύτηκε";
+"configuration.cells.client.value.disabled" = "Δεν επαληθεύτηκε";
+"configuration.cells.tls_wrapping.caption" = "Wrapping";
+"configuration.cells.tls_wrapping.value.auth" = "Αυθεντικοποίηση";
+"configuration.cells.tls_wrapping.value.crypt" = "Κρυπτογράφηση";
+"configuration.cells.eku.caption" = "Εκτεταμένη επαλήθευση";
+"configuration.cells.default_gateway.caption" = "Προεπιλεγμένη πύλη";
+"configuration.cells.dns_server.caption" = "DNS";
+"configuration.cells.dns_domain.caption" = "Domain";
+"configuration.cells.proxy_http.caption" = "Proxy";
+"configuration.cells.proxy_https.caption" = "Proxy (HTTPS)";
+"configuration.cells.compression_framing.caption" = "Framing";
+"configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
+"configuration.cells.compression_framing.value.compress" = "--συμπίεση";
+"configuration.cells.compression_algorithm.caption" = "Αλγόρυθμος";
+"configuration.cells.compression_algorithm.value.lzo" = "LZO";
+"configuration.cells.compression_algorithm.value.other" = "Δεν υποστηρίζεται";
+"configuration.cells.keep_alive.caption" = "Διατηρήστε ζωντανή";
+"configuration.cells.keep_alive.value.seconds" = "%d δευτερόλεπτα";
+"configuration.cells.renegotiation_seconds.caption" = "Επαναδιαπραγμάτευση";
+"configuration.cells.renegotiation_seconds.value.after" = "μετά από %@";
+"configuration.cells.random_endpoint.caption" = "Τυχαίο τελικό σημείο";
+
+"network_settings.cells.choice.client" = "Ανάγνωση .ovpn";
+"network_settings.cells.choice.server" = "Λήψη από το διακομιστή";
+"network_settings.cells.address.caption" = "Διεύθυνση";
+"network_settings.cells.port.caption" = "Θύρα";
+"network_settings.cells.add_dns_server.caption" = "Προσθήκη Διεύθυνσης";
+"network_settings.cells.proxy_bypass.caption" = "Παράκαμψη Τομέα";
+"network_settings.cells.add_proxy_bypass.caption" = "Προσθήκη τομέα παράκαμψης";
+
+"debug_log.buttons.previous" = "Προηγούμενο";
+"debug_log.buttons.next" = "Επόμενο";
+"debug_log.alerts.empty_log.message" = "Το αρχείο εντοπισμού σφαλμάτων είναι κενό.";
+
+"vpn.connecting" = "Προσπάθεια Σύνδεσης";
+"vpn.active" = "Ενεργό";
+"vpn.disconnecting" = "Αποσυνδέετε";
+"vpn.inactive" = "Μη ενεργό";
+"vpn.disabled" = "Απενεργοποιημένο";
+
+"vpn.errors.timeout" = "Τέλος χρονικού Ορίου";
+"vpn.errors.dns" = "Το DNS απέτυχε";
+"vpn.errors.auth" = "Το Auth απέτυχε";
+"vpn.errors.tls" = "Το TLS απέτυχε";
+"vpn.errors.encryption" = "Η Κρυπτογράφηση απέτυχε";
+"vpn.errors.compression" = "Η συμπίεση δεν υποστηρίζεται";
+"vpn.errors.network" = "Το δίκτυο άλλαξε";
+"vpn.errors.routing" = "Λείπει η δρομολόγηση";
+"vpn.errors.gateway" = "Δεν υπάρχει πύλη";
+
+"issue_reporter.title" = "Αναφορά Προβλήματος";
+"issue_reporter.message" = "The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the e-mail attachments if unsure.";
+"issue_reporter.buttons.accept" = "Καταλαβαίνω";
+
+"translations.title" = "Μεταφράσεις";
+
+"shortcuts.add.title" = "Προσθήκη Συντόμευσης";
+"shortcuts.add.sections.vpn.header" = "VPN";
+"shortcuts.add.sections.wifi.header" = "Wi-Fi";
+"shortcuts.add.sections.cellular.header" = "Δίκτυο Κινητής";
+"shortcuts.add.cells.connect.caption" = "Σύνδεση σε";
+"shortcuts.add.cells.enable_vpn.caption" = "Ενεργοποίηση VPN";
+"shortcuts.add.cells.disable_vpn.caption" = "Απενεργοποίηση VPN";
+"shortcuts.add.cells.trust_current_wifi.caption" = "Εμπιστέψου το τρέχον Wi-Fi";
+"shortcuts.add.cells.untrust_current_wifi.caption" = "Μην εμπιστευθείτε το τρέχον Wi-Fi";
+"shortcuts.add.cells.trust_cellular.caption" = "Εμπιστοσύνη δικτύου κινητής τηλεφωνίας";
+"shortcuts.add.cells.untrust_cellular.caption" = "Μην εμπιστευθείτε το δίκτυο κινητής τηλεφωνίας";
+"shortcuts.add.alerts.no_profiles.message" = "Δεν υπάρχει προφίλ για σύνδεση.";
+
+"shortcuts.edit.title" = "Διαχείριση συντομεύσεων";
+"shortcuts.edit.sections.all.header" = "Υπάρχουσες συντομεύσεις";
+"shortcuts.edit.cells.add_shortcut.caption" = "Προσθήκη Συντόμευσης";
+
+"about.title" = "Περι";
+"about.sections.web.header" = "Web";
+"about.sections.share.header" = "Διαμοιράστε";
+"about.cells.credits.caption" = "Συντελεστές";
+"about.cells.website.caption" = "Αρχική Σελίδα";
+"about.cells.faq.caption" = "Συχνές Ερωτήσεις";
+"about.cells.disclaimer.caption" = "Άρνηση Ευθύνης";
+"about.cells.privacy_policy.caption" = "Πολιτική Απορρήτου";
+"about.cells.share_twitter.caption" = "Tweet γι 'αυτό!";
+"about.cells.share_generic.caption" = "Πρόσκληση Φίλου";
+
+"donation.title" = "Δωρεά";
+"donation.sections.one_time.header" = "Μια Φορά";
+"donation.sections.one_time.footer" = "Αν είστε χαρούμενη με τη δουλειά μου, εδώ είναι λίγα ποσά που μπορείτε να δώσετε αμέσως.\n\nΘα χρεωθείτε μόνο μία φορά και μπορείτε να δώσετε πολλές φορές.";
+"donation.cells.loading.caption" = "Φόρτωση δωρεών";
+"donation.cells.purchasing.caption" = "Εκτέλεση δωρεάς";
+"donation.alerts.purchase.success.title" = "Ευχαριστώ";
+"donation.alerts.purchase.success.message" = "Αυτό σημαίνει πολλά για μένα και πραγματικά ελπίζω να συνεχίσετε να χρησιμοποιείτε και να προωθείτε αυτήν την εφαρμογή.";
+"donation.alerts.purchase.failure.message" = "Δεν είναι δυνατή η εκτέλεση της δωρεάς. %@";
+
+"share.message" = "Το Passepartout είναι φιλικό προς το χρήστη, ανοιχτού κώδικα OpenVPN πρόγραμμα για iOS και macOS";
+
+"version.title" = "Έκδοση";
+"version.labels.intro" = "Το Passepartout και το TunnelKit γράφονται και συντηρούνται από τον Davide De Rosa (keeshux).\n\nΟ πηγαίος κώδικας για το Passepartout και το TunnelKit είναι δημόσια διαθέσιμε στο GitHub υπό το GPLv3, μπορείτε να βρείτε συνδέσμους στην αρχική σελίδα.\n\nΤο Passepartout είναι ένας μη επίσημος πελάτης και δεν είναι συνδεδεμένος με το OpenVPN Inc.";
+
+"credits.title" = "Συντελεστές";
+"credits.sections.licenses.header" = "Άδειες";
+"credits.sections.notices.header" = "Σημειώσεις";
+"credits.sections.translations.header" = "Μεταφράσεις";
+
+"label.license.error" = "Δεν είναι δυνατή η λήψη πλήρους περιεχομένου άδειας χρήσης.";
