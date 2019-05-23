@@ -39,7 +39,7 @@ public class PlaceholderConnectionProfile: ConnectionProfile {
     
     public var manualNetworkSettings: ProfileNetworkSettings?
     
-    public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
+    public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
         fatalError("Generating configuration from a PlaceholderConnectionProfile")
     }
     

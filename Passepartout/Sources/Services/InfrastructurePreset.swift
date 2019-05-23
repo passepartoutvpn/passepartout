@@ -26,7 +26,7 @@
 import Foundation
 import TunnelKit
 
-// supports a subset of TunnelKitProvider.Configuration
+// supports a subset of OpenVPNTunnelProvider.Configuration
 // ignores new JSON keys
 
 public struct InfrastructurePreset: Codable {
@@ -90,7 +90,7 @@ public struct InfrastructurePreset: Codable {
     
     public let comment: String
 
-    public let configuration: TunnelKitProvider.Configuration
+    public let configuration: OpenVPNTunnelProvider.Configuration
     
     public let external: [ExternalKey: String]?
     
@@ -107,13 +107,13 @@ public struct InfrastructurePreset: Codable {
         case .ca:
             let filename = pattern.replacingOccurrences(of: "${id}", with: pool.id)
             let caURL = baseURL.appendingPathComponent(filename)
-            return CryptoContainer(pem: try String(contentsOf: caURL))
+            return OpenVPN.CryptoContainer(pem: try String(contentsOf: caURL))
 
         case .wrapKeyData:
             let filename = pattern.replacingOccurrences(of: "${id}", with: pool.id)
             let tlsKeyURL = baseURL.appendingPathComponent(filename)
             let file = try String(contentsOf: tlsKeyURL)
-            return StaticKey(file: file, direction: .client)
+            return OpenVPN.StaticKey(file: file, direction: .client)
 
         case .hostname:
             return pattern.replacingOccurrences(of: "${id}", with: pool.id)
@@ -124,19 +124,19 @@ public struct InfrastructurePreset: Codable {
         return nil
     }
 
-    public func injectExternalConfiguration(_ configuration: inout TunnelKitProvider.ConfigurationBuilder, with infrastructureName: Infrastructure.Name, pool: Pool) throws {
+    public func injectExternalConfiguration(_ configuration: inout OpenVPNTunnelProvider.ConfigurationBuilder, with infrastructureName: Infrastructure.Name, pool: Pool) throws {
         guard let external = external, !external.isEmpty else {
             return
         }
         
         var sessionBuilder = configuration.sessionConfiguration.builder()
         if let _ = external[.ca] {
-            sessionBuilder.ca = try externalConfiguration(forKey: .ca, infrastructureName: infrastructureName, pool: pool) as? CryptoContainer
+            sessionBuilder.ca = try externalConfiguration(forKey: .ca, infrastructureName: infrastructureName, pool: pool) as? OpenVPN.CryptoContainer
         }
         if let _ = external[.wrapKeyData] {
             if let dummyWrap = sessionBuilder.tlsWrap {
-                if let staticKey = try externalConfiguration(forKey: .wrapKeyData, infrastructureName: infrastructureName, pool: pool) as? StaticKey {
-                    sessionBuilder.tlsWrap = SessionProxy.TLSWrap(strategy: dummyWrap.strategy, key: staticKey)
+                if let staticKey = try externalConfiguration(forKey: .wrapKeyData, infrastructureName: infrastructureName, pool: pool) as? OpenVPN.StaticKey {
+                    sessionBuilder.tlsWrap = OpenVPN.TLSWrap(strategy: dummyWrap.strategy, key: staticKey)
                 }
             }
         }
@@ -168,17 +168,17 @@ public struct InfrastructurePreset: Codable {
 
         let cfgContainer = try container.nestedContainer(keyedBy: ConfigurationKeys.self, forKey: .configuration)
 
-        var sessionBuilder = SessionProxy.ConfigurationBuilder()
-        sessionBuilder.cipher = try cfgContainer.decode(SessionProxy.Cipher.self, forKey: .cipher)
-        if let digest = try cfgContainer.decodeIfPresent(SessionProxy.Digest.self, forKey: .digest) {
+        var sessionBuilder = OpenVPN.ConfigurationBuilder()
+        sessionBuilder.cipher = try cfgContainer.decode(OpenVPN.Cipher.self, forKey: .cipher)
+        if let digest = try cfgContainer.decodeIfPresent(OpenVPN.Digest.self, forKey: .digest) {
             sessionBuilder.digest = digest
         }
-        sessionBuilder.compressionFraming = try cfgContainer.decode(SessionProxy.CompressionFraming.self, forKey: .compressionFraming)
-        sessionBuilder.compressionAlgorithm = try cfgContainer.decodeIfPresent(SessionProxy.CompressionAlgorithm.self, forKey: .compressionAlgorithm) ?? .disabled
-        sessionBuilder.ca = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .ca)
-        sessionBuilder.clientCertificate = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientCertificate)
-        sessionBuilder.clientKey = try cfgContainer.decodeIfPresent(CryptoContainer.self, forKey: .clientKey)
-        sessionBuilder.tlsWrap = try cfgContainer.decodeIfPresent(SessionProxy.TLSWrap.self, forKey: .tlsWrap)
+        sessionBuilder.compressionFraming = try cfgContainer.decode(OpenVPN.CompressionFraming.self, forKey: .compressionFraming)
+        sessionBuilder.compressionAlgorithm = try cfgContainer.decodeIfPresent(OpenVPN.CompressionAlgorithm.self, forKey: .compressionAlgorithm) ?? .disabled
+        sessionBuilder.ca = try cfgContainer.decodeIfPresent(OpenVPN.CryptoContainer.self, forKey: .ca)
+        sessionBuilder.clientCertificate = try cfgContainer.decodeIfPresent(OpenVPN.CryptoContainer.self, forKey: .clientCertificate)
+        sessionBuilder.clientKey = try cfgContainer.decodeIfPresent(OpenVPN.CryptoContainer.self, forKey: .clientKey)
+        sessionBuilder.tlsWrap = try cfgContainer.decodeIfPresent(OpenVPN.TLSWrap.self, forKey: .tlsWrap)
         sessionBuilder.keepAliveInterval = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .keepAliveSeconds)
         sessionBuilder.renegotiatesAfter = try cfgContainer.decodeIfPresent(TimeInterval.self, forKey: .renegotiatesAfterSeconds)
         sessionBuilder.endpointProtocols = try cfgContainer.decode([EndpointProtocol].self, forKey: .endpointProtocols)
@@ -189,7 +189,7 @@ public struct InfrastructurePreset: Codable {
         // default to server settings
         sessionBuilder.routingPolicies = nil
         
-        let builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
+        let builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         configuration = builder.build()
     }
     

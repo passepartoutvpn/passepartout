@@ -75,7 +75,7 @@ extension SettingTableViewCell {
         accessoryType = .none
     }
     
-    func applyVPN(_ theme: Theme, with vpnStatus: VPNStatus?, error: TunnelKitProvider.ProviderError?) {
+    func applyVPN(_ theme: Theme, with vpnStatus: VPNStatus?, error: OpenVPNTunnelProvider.ProviderError?) {
         leftTextColor = theme.palette.primaryText
         guard let vpnStatus = vpnStatus else {
             rightText = L10n.Vpn.disabled

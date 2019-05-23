@@ -5,13 +5,12 @@ use_frameworks!
 load 'Podfile.include'
 
 $tunnelkit_name = 'TunnelKit'
-$tunnelkit_specs = ['Core', 'AppExtension', 'LZO']
-#$tunnelkit_specs = ['OpenVPN', 'LZO']
+$tunnelkit_specs = ['Protocols/OpenVPN', 'Extra/LZO']
 
 def shared_pods
-    by_version('~> 1.7.1', $tunnelkit_name, $tunnelkit_specs)
-    #by_git('d06b2e1', $tunnelkit_name, $tunnelkit_specs)
-    #by_path('..', $tunnelkit_name, $tunnelkit_specs)
+    #pod_version $tunnelkit_name, $tunnelkit_specs, '~> 2.0.0'
+    pod_git $tunnelkit_name, $tunnelkit_specs, 'f3edd6e'
+    #pod_path $tunnelkit_name, $tunnelkit_specs, '..'
     pod 'SSZipArchive'
 end
 

@@ -26,7 +26,7 @@
 import Foundation
 import TunnelKit
 
-public typealias Credentials = SessionProxy.Credentials
+public typealias Credentials = OpenVPN.Credentials
 
 public extension Credentials {
     var isEmpty: Bool {

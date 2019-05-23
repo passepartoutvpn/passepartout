@@ -35,9 +35,9 @@ class ConfigurationViewController: UIViewController, TableModelHost {
     
     private lazy var itemRefresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
 
-    var initialConfiguration: SessionProxy.Configuration!
+    var initialConfiguration: OpenVPN.Configuration!
     
-    private lazy var configuration: SessionProxy.ConfigurationBuilder = initialConfiguration.builder()
+    private lazy var configuration: OpenVPN.ConfigurationBuilder = initialConfiguration.builder()
     
     var originalConfigurationURL: URL?
 
@@ -138,9 +138,9 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             log.warning("Resetting with no original configuration set? Bad table model?")
             return
         }
-        let parsingResult: ConfigurationParser.Result
+        let parsingResult: OpenVPN.ConfigurationParser.Result
         do {
-            parsingResult = try ConfigurationParser.parsed(fromURL: originalURL)
+            parsingResult = try OpenVPN.ConfigurationParser.parsed(fromURL: originalURL)
         } catch let e {
             log.error("Could not parse original configuration: \(e)")
             return
@@ -373,7 +373,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         switch model.row(at: indexPath) {
         case .cipher:
-            let vc = OptionViewController<SessionProxy.Cipher>()
+            let vc = OptionViewController<OpenVPN.Cipher>()
             vc.title = settingCell?.leftText
             vc.options = [.aes128cbc, .aes192cbc, .aes256cbc, .aes128gcm, .aes192gcm, .aes256gcm]
             vc.selectedOption = configuration.cipher
@@ -385,7 +385,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             navigationController?.pushViewController(vc, animated: true)
             
         case .digest:
-            let vc = OptionViewController<SessionProxy.Digest>()
+            let vc = OptionViewController<OpenVPN.Digest>()
             vc.title = settingCell?.leftText
             vc.options = [.sha1, .sha224, .sha256, .sha384, .sha512]
             vc.selectedOption = configuration.digest
@@ -397,7 +397,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             navigationController?.pushViewController(vc, animated: true)
 
         case .compressionFraming:
-            let vc = OptionViewController<SessionProxy.CompressionFraming>()
+            let vc = OptionViewController<OpenVPN.CompressionFraming>()
             vc.title = settingCell?.leftText
             vc.options = [.disabled, .compLZO, .compress]
             vc.selectedOption = configuration.compressionFraming ?? .disabled
@@ -416,7 +416,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
                 return
             }
             
-            let vc = OptionViewController<SessionProxy.CompressionAlgorithm>()
+            let vc = OptionViewController<OpenVPN.CompressionAlgorithm>()
             vc.title = settingCell?.leftText
             vc.options = [.disabled, .LZO]
             vc.selectedOption = configuration.compressionAlgorithm ?? .disabled
@@ -449,7 +449,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
 // MARK: -
 
-private extension SessionProxy.CompressionFraming {
+private extension OpenVPN.CompressionFraming {
     var cellDescription: String {
         let V = L10n.Configuration.Cells.self
         switch self {
@@ -465,7 +465,7 @@ private extension SessionProxy.CompressionFraming {
     }
 }
 
-private extension SessionProxy.CompressionAlgorithm {
+private extension OpenVPN.CompressionAlgorithm {
     var cellDescription: String {
         let V = L10n.Configuration.Cells.self
         switch self {

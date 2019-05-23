@@ -26,14 +26,14 @@
 import Foundation
 import TunnelKit
 
-public extension SessionProxy.ConfigurationBuilder {
-//    mutating func copyCommunication(from other: SessionProxy.ConfigurationBuilder) {
+public extension OpenVPN.ConfigurationBuilder {
+//    mutating func copyCommunication(from other: OpenVPN.ConfigurationBuilder) {
 //        cipher = other.cipher
 //        digest = other.digest
 //        compressionFraming = other.compressionFraming
 //    }
 
-    func canCommunicate(with other: SessionProxy.Configuration) -> Bool {
+    func canCommunicate(with other: OpenVPN.Configuration) -> Bool {
         return
             (cipher == other.cipher) &&
             ((digest == other.digest) || fallbackCipher.embedsDigest) &&

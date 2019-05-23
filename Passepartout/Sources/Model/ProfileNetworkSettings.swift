@@ -49,7 +49,7 @@ public class ProfileNetworkChoices: Codable {
 }
 
 public class ProfileNetworkSettings: Codable, CustomStringConvertible {
-    public var gatewayPolicies: [SessionProxy.RoutingPolicy]?
+    public var gatewayPolicies: [OpenVPN.RoutingPolicy]?
 
     public var dnsServers: [String]?
     
@@ -72,7 +72,7 @@ public class ProfileNetworkSettings: Codable, CustomStringConvertible {
         gatewayPolicies = [.IPv4, .IPv6]
     }
     
-    public init(from configuration: SessionProxy.Configuration) {
+    public init(from configuration: OpenVPN.Configuration) {
         gatewayPolicies = configuration.routingPolicies
         dnsDomainName = configuration.searchDomain
         dnsServers = configuration.dnsServers
@@ -114,7 +114,7 @@ public class ProfileNetworkSettings: Codable, CustomStringConvertible {
     }
 }
 
-extension SessionProxy.ConfigurationBuilder {
+extension OpenVPN.ConfigurationBuilder {
     public mutating func applyGateway(from choices: ProfileNetworkChoices, settings: ProfileNetworkSettings) {
         switch choices.gateway {
         case .client:

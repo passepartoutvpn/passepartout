@@ -114,7 +114,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
         return true
     }
     
-    public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
+    public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
         guard let pool = pool else {
             preconditionFailure("Nil pool?")
         }
