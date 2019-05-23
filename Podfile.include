@@ -1,0 +1,19 @@
+$git_root = "https://github.com/passepartoutvpn"
+
+def by_version(version, name, specs)
+    specs.each { |s|
+        pod "#{name}/#{s}", version
+    }
+end
+
+def by_git(sha, name, specs)
+    specs.each { |s|
+        pod "#{name}/#{s}", :git => "#{$git_root}/#{name.downcase}", :commit => sha
+    }
+end
+
+def by_path(root, name, specs)
+    specs.each { |s|
+        pod "#{name}/#{s}", :path => "#{root}/#{name.downcase}"
+    }
+end

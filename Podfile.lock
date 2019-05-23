@@ -3,9 +3,6 @@ PODS:
   - OpenSSL-Apple (1.1.0j.2)
   - SSZipArchive (2.1.4)
   - SwiftyBeaver (1.7.0)
-  - TunnelKit (1.7.1):
-    - TunnelKit/AppExtension (= 1.7.1)
-    - TunnelKit/Core (= 1.7.1)
   - TunnelKit/AppExtension (1.7.1):
     - SwiftyBeaver
     - TunnelKit/Core
@@ -17,7 +14,8 @@ PODS:
 DEPENDENCIES:
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit (~> 1.7.1)
+  - TunnelKit/AppExtension (~> 1.7.1)
+  - TunnelKit/Core (~> 1.7.1)
   - TunnelKit/LZO (~> 1.7.1)
 
 SPEC REPOS:
@@ -35,6 +33,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: d1e02dea5cb58ea0d4dbfcdcb387e653d148d800
 
-PODFILE CHECKSUM: 6803ec63a9b690e4594f4a3954c271c559022574
+PODFILE CHECKSUM: 813756b522b60395c23ca318fdc98351fad17f8c
 
 COCOAPODS: 1.6.1

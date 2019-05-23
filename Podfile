@@ -2,13 +2,16 @@ source 'https://github.com/cocoapods/specs.git'
 platform :ios, '11.0'
 use_frameworks!
 
+load 'Podfile.include'
+
+$tunnelkit_name = 'TunnelKit'
+$tunnelkit_specs = ['Core', 'AppExtension', 'LZO']
+#$tunnelkit_specs = ['OpenVPN', 'LZO']
+
 def shared_pods
-    pod 'TunnelKit', '~> 1.7.1'
-    pod 'TunnelKit/LZO', '~> 1.7.1'
-    #pod 'TunnelKit', :git => 'https://github.com/passepartoutvpn/tunnelkit', :commit => 'd06b2e1'
-    #pod 'TunnelKit/LZO', :git => 'https://github.com/passepartoutvpn/tunnelkit', :commit => 'd06b2e1'
-    #pod 'TunnelKit', :path => '../tunnelkit'
-    #pod 'TunnelKit/LZO', :path => '../tunnelkit'
+    by_version('~> 1.7.1', $tunnelkit_name, $tunnelkit_specs)
+    #by_git('d06b2e1', $tunnelkit_name, $tunnelkit_specs)
+    #by_path('..', $tunnelkit_name, $tunnelkit_specs)
     pod 'SSZipArchive'
 end
 
