@@ -108,12 +108,12 @@ For the VPN to work properly, the app requires:
 
 both in the main app and the tunnel extension target.
 
-Make sure to also update the following constants in `Passepartout/Sources/GroupConstants.swift` according to your developer account and your target bundle identifiers:
+Make sure to update `Passepartout-iOS/Config.xcconfig` according to your developer account and your identifiers:
 
-    public static let teamId
-    public static let appId
-    public static let appGroup
-    public static let tunnelIdentifier
+    CFG_TEAM_ID = A1B2C3D4E5
+    CFG_APP_ID = com.example.ios.MyApp
+    CFG_GROUP_ID = com.example.MyAppGroup // omit the "group." prefix
+    CFG_APPSTORE_ID = 1234567890
 
 ## License
 

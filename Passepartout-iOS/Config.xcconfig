@@ -1,8 +1,8 @@
 //
-//  VPN.swift
+//  Config.xcconfig
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/12/18.
+//  Created by Davide De Rosa on 5/24/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,12 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
 
-public class VPN {
-    #if targetEnvironment(simulator)
-    public static let shared = MockVPNProvider()
-    #else
-    public static let shared = StandardVPNProvider(bundleIdentifier: AppConstants.App.tunnelBundleId)
-    #endif
-}
+CFG_TEAM_ID = DTDYD63ZX9
+CFG_APP_ID = com.algoritmico.ios.Passepartout
+CFG_GROUP_ID = com.algoritmico.Passepartout
+CFG_APPSTORE_ID = 1433648537

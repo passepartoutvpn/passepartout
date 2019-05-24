@@ -539,7 +539,7 @@ public class ConnectionService: Codable {
         }
 
         let protocolConfiguration = try cfg.generatedTunnelProtocol(
-            withBundleIdentifier: GroupConstants.App.tunnelIdentifier,
+            withBundleIdentifier: AppConstants.App.tunnelBundleId,
             appGroup: appGroup,
             credentials: creds
         )

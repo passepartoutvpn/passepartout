@@ -28,6 +28,22 @@ import TunnelKit
 import SwiftyBeaver
 
 public class AppConstants {
+    public class App {
+        public static let appStoreId: String = {
+            guard let identifier = GroupConstants.App.config["appstore_id"] as? String else {
+                fatalError("Missing appstore_id from Info.plist config")
+            }
+            return identifier
+        }()
+
+        public static let tunnelBundleId: String = {
+            guard let identifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String else {
+                fatalError("Missing kCFBundleIdentifierKey from Info.plist")
+            }
+            return "\(identifier).Tunnel"
+        }()
+    }
+
     public class Flags {
         public static let isBeta = false
     }

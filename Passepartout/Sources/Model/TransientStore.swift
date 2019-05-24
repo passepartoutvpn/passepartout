@@ -119,7 +119,7 @@ public class TransientStore {
         } catch let e {
             log.error("Could not decode service: \(e)")
             service = ConnectionService(
-                withAppGroup: GroupConstants.App.appGroup,
+                withAppGroup: GroupConstants.App.groupId,
                 baseConfiguration: cfg
             )
 
