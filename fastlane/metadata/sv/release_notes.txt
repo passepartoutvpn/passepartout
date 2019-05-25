@@ -1,0 +1,15 @@
+### Tillagt
+
+- Åsidosätta nätverksinställningar.
+- Stöd för `-redirect-gateway block-local` (delvis).
+- Ryska översättningar (Alexander Korobynikov).
+
+### Ändrats
+
+- Komprimering av värdkomprimering och algoritm kan nu redigeras.
+
+### Fast
+
+- NordVPN-dubbelservrar förbinder inte ur lådan.
+- Autentisering med OpenVPN AS.
+- TLS misslyckades med vissa servrar.
