@@ -1,1 +1,1 @@
-../../../../metadata/en-US/keywords.txt
+../../../../metadata/sv/keywords.txt
