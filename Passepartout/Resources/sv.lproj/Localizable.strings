@@ -60,7 +60,7 @@
 "organizer.cells.donate.caption" = "Gör en donation";
 "organizer.cells.patreon.caption" = "Stötta mig på Patreon";
 "organizer.cells.translate.caption" = "Erbjuda att översätta";
-"organizer.cells.about.caption" = "Om% @";
+"organizer.cells.about.caption" = "Om %@";
 "organizer.cells.uninstall.caption" = "Ta bort VPN-konfiguration";
 "organizer.alerts.exhausted_providers.message" = "Du har skapat profiler för alla tillgängliga leverantörer.";
 "organizer.alerts.add_host.message" = "Öppna en URL till en .ovpn konfigurationsfil från Safari, Mail eller en annan app för att skapa en värdprofil. \n\nDu kan också importera en .ovpn med iTunes Fildelning." ;
@@ -71,13 +71,13 @@
 "wizards.host.sections.existing.header" = "Befintliga profiler";
 "wizards.host.alerts.existing.message" = "En värdprofil med samma namn finns redan. Byt ut det?";
 
-"parsed_file.alerts.malformed.message" = "Konfigurationsfilen innehåller ett felaktigt val (% @).";
-"parsed_file.alerts.missing.message" = "Konfigurationsfilen saknar ett obligatoriskt val (% @).";
-"parsed_file.alerts.unsupported.message" = "Konfigurationsfilen innehåller ett stöd som inte stöds (% @).";
-"parsed_file.alerts.potentially_unsupported.message" = "Konfigurationsfilen är korrekt men innehåller ett eventuellt stöd som inte stöds (% @). \n\nConnectivity kan bryta beroende på serverinställningar.";
+"parsed_file.alerts.malformed.message" = "Konfigurationsfilen innehåller ett felaktigt val (%@).";
+"parsed_file.alerts.missing.message" = "Konfigurationsfilen saknar ett obligatoriskt val (%@).";
+"parsed_file.alerts.unsupported.message" = "Konfigurationsfilen innehåller ett stöd som inte stöds (%@).";
+"parsed_file.alerts.potentially_unsupported.message" = "Konfigurationsfilen är korrekt men innehåller ett eventuellt stöd som inte stöds (%@). \n\nConnectivity kan bryta beroende på serverinställningar.";
 "parsed_file.alerts.encryption_passphrase.message" = "Var god ange krypterings lösenordsfrasen.";
 "parsed_file.alerts.decryption.message" = "Konfigurationen innehåller en krypterad privat nyckel och den kan inte dekrypteras. Dubbelkontrollera ditt inmatade lösenfras.";
-"parsed_file.alerts.parsing.message" = "Det gick inte att analysera den angivna konfigurationsfilen (% @).";
+"parsed_file.alerts.parsing.message" = "Det gick inte att analysera den angivna konfigurationsfilen (%@).";
 "parsed_file.alerts.buttons.report" = "Rapportera ett problem";
 
 "imported_hosts.title" = "Importerade värdar";
@@ -88,7 +88,7 @@
 "service.sections.vpn.footer" = "Anslutningen kommer att upprättas vid behov.";
 "service.sections.status.header" = "Koppling";
 "service.sections.configuration.header" = "Konfiguration";
-"service.sections.provider_infrastructure.footer" = "Senast uppdaterad på% @.";
+"service.sections.provider_infrastructure.footer" = "Senast uppdaterad på %@.";
 "service.sections.vpn_survives_sleep.footer" = "Inaktivera för att förbättra batterianvändningen, på bekostnad av tillfälliga avmattningar på grund av återuppkoppling.";
 "service.sections.vpn_resolves_hostname.footer" = "Föredragna i de flesta nätverk och krävs i vissa IPv6-nätverk. Inaktivera var DNS blockeras eller för att påskynda förhandlingar när DNS är långsamt att svara.";
 //"service.sections.vpn_prefers_udp.footer "=" UDP är snabbare än TCP, men fungerar kanske inte i vissa nätverk. Inaktivera i nätverk där UDP kan blockeras. ";
@@ -135,19 +135,19 @@
 "service.alerts.masks_private_data.messages.must_reconnect" = "För att säkert återställa den aktuella felsökningsloggen och tillämpa den nya maskeringspreferensen måste du återansluta till VPN nu.";
 "service.alerts.buttons.reconnect" = "Reconnect";
 "service.alerts.download.title" = "Ladda ner krävs";
-"service.alerts.download.message" = "% @ kräver nedladdning av ytterligare konfigurationsfiler. \n\nKontrollera för att starta nedladdningen.";
-"service.alerts.download.failed" = "Misslyckades med att ladda ner konfigurationsfiler.% @";
+"service.alerts.download.message" = "%@ kräver nedladdning av ytterligare konfigurationsfiler. \n\nKontrollera för att starta nedladdningen.";
+"service.alerts.download.failed" = "Misslyckades med att ladda ner konfigurationsfiler. %@";
 "service.alerts.download.hud.extracting" = "Extraherar filer, var så tålmodig ...";
 
 "account.sections.credentials.header" = "Referenser";
-"account.sections.guidance.footer.infrastructure.mullvad" = "Använd dina% @ webbplatsuppgifter. Ditt användarnamn är vanligtvis numeriskt.";
-"account.sections.guidance.footer.infrastructure.nordvpn" = "Använd dina% @ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
-"account.sections.guidance.footer.infrastructure.pia" = "Använd dina% @ webbplatsuppgifter. Ditt användarnamn är vanligtvis numeriskt med ett prefix för \" p \".";
-"account.sections.guidance.footer.infrastructure.protonvpn" = "Hitta dina% @ credentials i avsnittet \" Konto> OpenVPN / IKEv2 Användarnamn \"på webbplatsen.";
-"account.sections.guidance.footer.infrastructure.tunnelbear" = "Använd dina% @ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
-"account.sections.guidance.footer.infrastructure.vyprvpn" = "Använd dina% @ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
-"account.sections.guidance.footer.infrastructure.windscribe" = "Hitta din% @ credentials i OpenVPN Config Generator på webbplatsen.";
-"account.sections.registration.footer" = "Hämta ett konto på% @ webbplatsen.";
+"account.sections.guidance.footer.infrastructure.mullvad" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis numeriskt.";
+"account.sections.guidance.footer.infrastructure.nordvpn" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
+"account.sections.guidance.footer.infrastructure.pia" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis numeriskt med ett prefix för \" p \".";
+"account.sections.guidance.footer.infrastructure.protonvpn" = "Hitta dina %@ credentials i avsnittet \" Konto> OpenVPN / IKEv2 Användarnamn \"på webbplatsen.";
+"account.sections.guidance.footer.infrastructure.tunnelbear" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
+"account.sections.guidance.footer.infrastructure.vyprvpn" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
+"account.sections.guidance.footer.infrastructure.windscribe" = "Hitta din %@ credentials i OpenVPN Config Generator på webbplatsen.";
+"account.sections.registration.footer" = "Hämta ett konto på %@ webbplatsen.";
 "account.cells.username.caption" = "Användarnamn";
 "account.cells.username.placeholder" = "användarnamn";
 "account.cells.password.caption" = "Lösenord";
@@ -155,7 +155,7 @@
 //"account.cells.password_confirm.caption "=" Bekräfta ";
 //"account.cells.password_confirm.mismatch "=" Lösenorden matchar inte! ";
 "account.cells.open_guide.caption" = "Visa dina uppgifter";
-"account.cells.signup.caption" = "Registrera med% @";
+"account.cells.signup.caption" = "Registrera med %@";
 
 "endpoint.sections.location_addresses.header" = "Adresser";
 "endpoint.sections.location_protocols.header" = "Protokoll";
@@ -194,9 +194,9 @@
 "configuration.cells.compression_algorithm.value.lzo" = "LZO";
 "configuration.cells.compression_algorithm.value.other" = "Utan stöd";
 "configuration.cells.keep_alive.caption" = "hål-vid-liv";
-"configuration.cells.keep_alive.value.seconds" = "% d seconds";
+"configuration.cells.keep_alive.value.seconds" = "%d seconds";
 "configuration.cells.renegotiation_seconds.caption" = "Omförhandling";
-"configuration.cells.renegotiation_seconds.value.after" = "efter% @";
+"configuration.cells.renegotiation_seconds.value.after" = "efter %@";
 "configuration.cells.random_endpoint.caption" = "Omställ slutpunkt pa slumpmässigt sätt";
 
 "network_settings.cells.choice.client" = "Läs .ovpn";
@@ -268,7 +268,7 @@
 "donation.cells.purchasing.caption" = "Performing donation";
 "donation.alerts.purchase.success.title" = "Tack";
 "donation.alerts.purchase.success.message" = "Detta betyder mycket för mig och jag hoppas verkligen att du fortsätter att använda och marknadsföra denna app.";
-"donation.alerts.purchase.failure.message" = "Kan inte göra donationen.% @";
+"donation.alerts.purchase.failure.message" = "Kan inte göra donationen. %@";
 
 "share.message" = "Passepartout är en användarvänlig öppen källkod OpenVPN-klient för iOS och macOS";
 
