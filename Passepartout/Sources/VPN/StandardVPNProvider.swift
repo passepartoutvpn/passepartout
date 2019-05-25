@@ -198,7 +198,7 @@ public class StandardVPNProvider: VPNProvider {
                 return
             }
             do {
-                try session.sendProviderMessage(TunnelKitProvider.Message.dataCount.data) { (data) in
+                try session.sendProviderMessage(OpenVPNTunnelProvider.Message.dataCount.data) { (data) in
                     guard let data = data, data.count == 16 else {
                         DispatchQueue.main.async {
                             completionHandler(nil)
@@ -250,7 +250,7 @@ public class StandardVPNProvider: VPNProvider {
     
     private static func requestDebugLog(session: NETunnelProviderSession, completionHandler: @escaping (String?) -> Void) {
         do {
-            try session.sendProviderMessage(TunnelKitProvider.Message.requestLog.data) { (data) in
+            try session.sendProviderMessage(OpenVPNTunnelProvider.Message.requestLog.data) { (data) in
                 guard let data = data, !data.isEmpty else {
                     completionHandler(nil)
                     return

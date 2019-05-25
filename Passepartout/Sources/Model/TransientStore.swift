@@ -75,9 +75,9 @@ public class TransientStore {
         }
     }
     
-    public static var baseVPNConfiguration: TunnelKitProvider.ConfigurationBuilder {
-        let sessionBuilder = SessionProxy.ConfigurationBuilder()
-        var builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
+    public static var baseVPNConfiguration: OpenVPNTunnelProvider.ConfigurationBuilder {
+        let sessionBuilder = OpenVPN.ConfigurationBuilder()
+        var builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         builder.mtu = 1250
         builder.shouldDebug = true
 //        builder.debugLogFormat = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $L $N.$F:$l - $M"
@@ -119,7 +119,7 @@ public class TransientStore {
         } catch let e {
             log.error("Could not decode service: \(e)")
             service = ConnectionService(
-                withAppGroup: GroupConstants.App.appGroup,
+                withAppGroup: GroupConstants.App.groupId,
                 baseConfiguration: cfg
             )
 

@@ -39,23 +39,23 @@ public class GroupConstants {
         public static let buildNumber = Int(Bundle.main.infoDictionary![kCFBundleVersionKey as String] as! String)!
 
         public static let versionString = "\(versionNumber) (\(buildNumber))"
-        
-        public static let teamId = "DTDYD63ZX9"
 
-        public static let appId = "1433648537"
+        public static let config: [String: Any] = {
+            guard let cfg = Bundle.main.infoDictionary?["com.algoritmico.Passepartout.config"] as? [String: Any] else {
+                fatalError("Missing app config from Info.plist")
+            }
+            return cfg
+        }()
         
-        #if os(iOS)
-        public static let appGroup = "group.com.algoritmico.Passepartout"
-        
-        public static let tunnelIdentifier = "com.algoritmico.ios.Passepartout.Tunnel"
-        #else
-        public static let appGroup = "\(teamId).group.com.algoritmico.Passepartout"
-        
-        public static let tunnelIdentifier = "com.algoritmico.macos.Passepartout.Tunnel"
-        #endif
+        public static let groupId: String = {
+            guard let identifier = config["group_id"] as? String else {
+                fatalError("Missing group_id from Info.plist config")
+            }
+            return identifier
+        }()
 
         private static var containerURL: URL {
-            guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+            guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
                 print("Unable to access App Group container")
                 return FileManager.default.userURL(for: .documentDirectory, appending: nil)
             }

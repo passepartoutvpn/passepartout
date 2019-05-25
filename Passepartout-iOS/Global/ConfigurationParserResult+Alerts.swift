@@ -1,5 +1,5 @@
 //
-//  ConfigurationParserResult+Alerts.swift
+//  OpenVPN.ConfigurationParserResult+Alerts.swift
 //  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 10/27/18.
@@ -31,16 +31,16 @@ import Passepartout_Core
 
 private let log = SwiftyBeaver.self
 
-extension ConfigurationParser.Result {
+extension OpenVPN.ConfigurationParser.Result {
     static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphrase: String?,
-                     passphraseBlock: @escaping (String) -> Void, passphraseCancelBlock: (() -> Void)?) -> ConfigurationParser.Result? {
+                     passphraseBlock: @escaping (String) -> Void, passphraseCancelBlock: (() -> Void)?) -> OpenVPN.ConfigurationParser.Result? {
 
-        let result: ConfigurationParser.Result
+        let result: OpenVPN.ConfigurationParser.Result
         let fm = FileManager.default
 
         log.debug("Parsing configuration URL: \(url)")
         do {
-            result = try ConfigurationParser.parsed(fromURL: url, passphrase: passphrase)
+            result = try OpenVPN.ConfigurationParser.parsed(fromURL: url, passphrase: passphrase)
         } catch let e as ConfigurationError {
             switch e {
             case .encryptionPassphrase, .unableToDecrypt(_):

@@ -25,7 +25,7 @@
 
 import TunnelKit
 
-class PacketTunnelProvider: TunnelKitProvider {
+class PacketTunnelProvider: OpenVPNTunnelProvider {
     override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         appVersion = "\(GroupConstants.App.name) \(GroupConstants.App.versionString)"
         dnsTimeout = GroupConstants.VPN.dnsTimeout

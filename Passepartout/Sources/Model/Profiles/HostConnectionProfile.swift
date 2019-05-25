@@ -31,13 +31,13 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
 
     public let hostname: String
     
-    public var parameters: TunnelKitProvider.Configuration
+    public var parameters: OpenVPNTunnelProvider.Configuration
 
     public init(title: String, hostname: String) {
         self.title = title
         self.hostname = hostname
-        let sessionConfiguration = SessionProxy.ConfigurationBuilder().build()
-        parameters = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: sessionConfiguration).build()
+        let sessionConfiguration = OpenVPN.ConfigurationBuilder().build()
+        parameters = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionConfiguration).build()
     }
     
     // MARK: ConnectionProfile
@@ -58,7 +58,7 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     public var manualNetworkSettings: ProfileNetworkSettings?
     
-    public func generate(from configuration: TunnelKitProvider.Configuration, preferences: Preferences) throws -> TunnelKitProvider.Configuration {
+    public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
         guard let endpointProtocols = parameters.sessionConfiguration.endpointProtocols, !endpointProtocols.isEmpty else {
             preconditionFailure("No endpointProtocols")
         }

@@ -37,7 +37,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
         return TransientStore.shared.service.ids(forContext: .host).sortedCaseInsensitive()
     }()
     
-    var parsingResult: ConfigurationParser.Result? {
+    var parsingResult: OpenVPN.ConfigurationParser.Result? {
         didSet {
             useSuggestedTitle()
         }
@@ -104,7 +104,7 @@ class WizardHostViewController: UITableViewController, TableModelHost {
         }
 
         let profile = HostConnectionProfile(title: enteredTitle, hostname: hostname)
-        let builder = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
+        let builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
         profile.parameters = builder.build()
 
         let service = TransientStore.shared.service

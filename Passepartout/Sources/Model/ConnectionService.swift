@@ -89,7 +89,7 @@ public class ConnectionService: Codable {
 
     private let keychain: Keychain
     
-    public var baseConfiguration: TunnelKitProvider.Configuration
+    public var baseConfiguration: OpenVPNTunnelProvider.Configuration
     
     private var cache: [ProfileKey: ConnectionProfile]
     
@@ -124,7 +124,7 @@ public class ConnectionService: Codable {
     
     public weak var delegate: ConnectionServiceDelegate?
     
-    public init(withAppGroup appGroup: String, baseConfiguration: TunnelKitProvider.Configuration) {
+    public init(withAppGroup appGroup: String, baseConfiguration: OpenVPNTunnelProvider.Configuration) {
         guard let defaults = UserDefaults(suiteName: appGroup) else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
@@ -157,7 +157,7 @@ public class ConnectionService: Codable {
         self.defaults = defaults
         keychain = Keychain(group: appGroup)
 
-        baseConfiguration = try container.decode(TunnelKitProvider.Configuration.self, forKey: .baseConfiguration)
+        baseConfiguration = try container.decode(OpenVPNTunnelProvider.Configuration.self, forKey: .baseConfiguration)
         activeProfileKey = try container.decodeIfPresent(ProfileKey.self, forKey: .activeProfileKey)
         preferences = try container.decode(EditablePreferences.self, forKey: .preferences)
 
@@ -281,20 +281,10 @@ public class ConnectionService: Codable {
                     profile = providerProfile
                     
                 case .host:
-                    let hostProfile = try decoder.decode(HostConnectionProfile.self, from: data)
-
-                    // XXX: migrate old endpointProtocols
-                    if hostProfile.parameters.sessionConfiguration.endpointProtocols == nil {
-                        var sessionBuilder = hostProfile.parameters.sessionConfiguration.builder()
-                        sessionBuilder.endpointProtocols = hostProfile.parameters.endpointProtocols
-                        var parametersBuilder = hostProfile.parameters.builder()
-                        parametersBuilder.sessionConfiguration = sessionBuilder.build()
-                        hostProfile.parameters = parametersBuilder.build()
-                    }
-                    
-                    // XXX: re-read routing policies for 
-
-                    profile = hostProfile
+//                    let hostProfile = try decoder.decode(HostConnectionProfile.self, from: data)
+//
+//                    profile = hostProfile
+                    break
                 }
                 cache[key] = profile
             } catch let e {
@@ -350,8 +340,8 @@ public class ConnectionService: Codable {
             }
 
             // can fail due to passphrase (migration is non-interactive)
-            if let result = try? ConfigurationParser.parsed(fromURL: url) {
-                host.parameters = TunnelKitProvider.ConfigurationBuilder(sessionConfiguration: result.configuration).build()
+            if let result = try? OpenVPN.ConfigurationParser.parsed(fromURL: url) {
+                host.parameters = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: result.configuration).build()
             } else {
 
                 // fall back to the safer option
@@ -549,7 +539,7 @@ public class ConnectionService: Codable {
         }
 
         let protocolConfiguration = try cfg.generatedTunnelProtocol(
-            withBundleIdentifier: GroupConstants.App.tunnelIdentifier,
+            withBundleIdentifier: AppConstants.App.tunnelBundleId,
             appGroup: appGroup,
             credentials: creds
         )
@@ -602,7 +592,7 @@ public class ConnectionService: Codable {
         try? FileManager.default.removeItem(at: url)
     }
 
-    public var vpnLastError: TunnelKitProvider.ProviderError? {
+    public var vpnLastError: OpenVPNTunnelProvider.ProviderError? {
         return baseConfiguration.lastError(in: appGroup)
     }
     

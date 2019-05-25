@@ -1217,7 +1217,7 @@ extension ServiceViewController: TrustedNetworksModelDelegate {
 // MARK: -
 
 extension ServiceViewController: ConfigurationModificationDelegate {
-    func configuration(didUpdate newConfiguration: SessionProxy.Configuration) {
+    func configuration(didUpdate newConfiguration: OpenVPN.Configuration) {
         if let hostProfile = profile as? HostConnectionProfile {
             var builder = hostProfile.parameters.builder()
             builder.sessionConfiguration = newConfiguration

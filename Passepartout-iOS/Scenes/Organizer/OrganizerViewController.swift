@@ -319,7 +319,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
     
     private func writeReview() {
-        let url = AppConstants.URLs.review(withId: GroupConstants.App.appId)
+        let url = AppConstants.URLs.review(withId: AppConstants.App.appStoreId)
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     

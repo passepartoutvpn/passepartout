@@ -106,11 +106,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let passphraseCancelBlock = {
             _ = try? FileManager.default.removeItem(at: url)
         }
-        guard let parsingResult = ConfigurationParser.Result.from(url, withErrorAlertIn: target, passphrase: passphrase, passphraseBlock: passphraseBlock, passphraseCancelBlock: passphraseCancelBlock) else {
+        guard let parsingResult = OpenVPN.ConfigurationParser.Result.from(url, withErrorAlertIn: target, passphrase: passphrase, passphraseBlock: passphraseBlock, passphraseCancelBlock: passphraseCancelBlock) else {
             return true
         }
         if let warning = parsingResult.warning {
-            ConfigurationParser.Result.alertImportWarning(url: url, in: target, withWarning: warning) {
+            OpenVPN.ConfigurationParser.Result.alertImportWarning(url: url, in: target, withWarning: warning) {
                 if $0 {
                     self.handleParsingResult(parsingResult, in: target)
                 } else {
@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
     
-    private func handleParsingResult(_ parsingResult: ConfigurationParser.Result, in target: UIViewController) {
+    private func handleParsingResult(_ parsingResult: OpenVPN.ConfigurationParser.Result, in target: UIViewController) {
 
         // already presented: update parsed configuration
         if let nav = target as? UINavigationController, let wizard = nav.topViewController as? WizardHostViewController {
