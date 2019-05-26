@@ -1,0 +1,16 @@
+### Ajouté
+
+- Outrepasser les paramètres réseaux.
+- Support pour `--redirect-gateway block-local` (partiel).
+- Traduction Russe (Alexander Korobynikov).
+
+### Changé
+
+- Cadrages et algorithmes de compression de l'hôte peuvent maintenant être modifiés.
+
+### Fixé
+
+- Serveurs double NordVPN ne se connectant pas à la base.
+- Authentification avec OpenVPN AS.
+- TLS échoués avec certains servers.
+
