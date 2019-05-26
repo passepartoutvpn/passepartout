@@ -168,8 +168,8 @@ Website: [passepartoutvpn.app][about-website]
 [app-net-mullvad]: https://mullvad.net/en/account/create/
 [app-net-nordvpn]: https://go.nordvpn.net/SH21Z
 [app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
-[app-net-protonvpn]: https://protonvpn.net/?aid=keeshux
-[app-net-tunnelbear]: https://click.tunnelbear.com/SHb8
+[app-net-protonvpn]: https://proton.go2cloud.org/SHZ
+[app-net-tunnelbear]: https://www.tunnelbear.com/
 [app-net-vyprvpn]: https://www.vyprvpn.com/
 [app-net-windscribe]: https://secure.link/kCsD0prd
 

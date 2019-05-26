@@ -195,10 +195,10 @@ extension AboutViewController {
             openCredits()
             
         case .readme:
-            visit(AppConstants.URLs.readme)
+            visit(AppConstants.URLs.iOS.readme)
             
         case .changelog:
-            visit(AppConstants.URLs.changelog)
+            visit(AppConstants.URLs.iOS.changelog)
             
         case .website:
             visit(AppConstants.URLs.website)
