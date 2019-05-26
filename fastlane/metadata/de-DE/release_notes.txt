@@ -1,16 +1,7 @@
 ### Hinzugefügt
 
-- Netzwerkeinstellungen übersteuern.
-- Unterstützung für `--redirect-gateway block-local` (teilweise).
-- Russische Übersetzung (Alexander Korobynikov).
-
-### Geändert
-
-- Komprimierungs-Framing und -algorithmus sind jetzt bearbeitbar.
-
-### Fehlerbehebungen
-
-- NordVPN Doppel-Server wurden standardmäßig nicht verbunden.
-- Authentifizierung mit OpenVPN AS.
-- TLS schlug fehl mit manchen Servern.
-- Standart-Gateway nicht übersteuert wenn sowohl IPv4 als auch v6 deaktiviert waren.
+- Niederländische Übersetzung (Norbert de Vreede).
+- Griechische Übersetzung (Konstantinos Koukoulakis).
+- Französische Übersetzung (Julien Laniel).
+- Spanische Übersetzung (Davide De Rosa, Elena Vivó).
+- Schwedische Übersetzung (Henry Gross-Hellsen).

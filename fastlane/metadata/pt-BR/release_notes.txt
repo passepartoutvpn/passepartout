@@ -1,15 +1,7 @@
 ### O que há de novo
 
-- Substituir configurações de rede.
-- Suporte para `--redirect-gateway block-local` (parcial).
-- Tradução para Russo (Alexander Korobynikov).
-
-### O que mudou
-
-- O enquadramento e o algoritmo de compactação do host agora são editáveis.
-
-### Corrigido
-
-- Servidores duplos NordVPN não conectam fora da caixa.
-- Autenticação com o OpenVPN AS.
-- TLS falhou com alguns servidores.
+- Tradução para Holandês (Norbert de Vreede).
+- Tradução para Grego (Konstantinos Koukoulakis).
+- Tradução para Francês (Julien Laniel).
+- Tradução para Espanhol (Davide De Rosa, Elena Vivó).
+- Tradução para Sueco (Henry Gross-Hellsen).
