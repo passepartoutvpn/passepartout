@@ -68,7 +68,7 @@
 		0E3CAFB7229AAE770008E5C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Localizable.strings */; };
 		0E3CAFB8229AAE770008E5C8 /* Intents.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF9A229AAE760008E5C8 /* Intents.strings */; };
 		0E3CAFC0229AAE770008E5C8 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */; };
-		0E3CAFC2229AAE850008E5C8 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAFC1229AAE850008E5C8 /* Web */; };
+		0E3CAFC4229AAF8E0008E5C8 /* API in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAFC3229AAF8E0008E5C8 /* API */; };
 		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
@@ -219,7 +219,7 @@
 		0E3CAFB4229AAE760008E5C8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAFB5229AAE760008E5C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E3CAFB6229AAE760008E5C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Intents.strings; sourceTree = "<group>"; };
-		0E3CAFC1229AAE850008E5C8 /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Web; sourceTree = "<group>"; };
+		0E3CAFC3229AAF8E0008E5C8 /* API */ = {isa = PBXFileReference; lastKnownFileType = folder; path = API; sourceTree = "<group>"; };
 		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
 		0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworks.swift; sourceTree = "<group>"; };
 		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 		0ED38AF1214177920004D387 /* VPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNProvider.swift; sourceTree = "<group>"; };
 		0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntentDispatcher.swift; path = Passepartout/Sources/Intents/IntentDispatcher.swift; sourceTree = SOURCE_ROOT; };
+		0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntentDispatcher.swift; path = Submodules/Core/Passepartout/Sources/Intents/IntentDispatcher.swift; sourceTree = SOURCE_ROOT; };
 		0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Passepartout-Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		0EDE8DC520C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -424,7 +424,6 @@
 		0E3CAF97229AAE760008E5C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0E3CAFC1229AAE850008E5C8 /* Web */,
 				0E3CAF9A229AAE760008E5C8 /* Intents.strings */,
 				0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */,
 				0E3CAF98229AAE760008E5C8 /* Localizable.strings */,
@@ -457,12 +456,11 @@
 		0E57F62F20C83FC5008323CF = {
 			isa = PBXGroup;
 			children = (
-				0EDE8DEF20C93EBB004C739C /* Passepartout */,
-				0E3152A9223F9EF500F61841 /* PassepartoutTests */,
 				0E31529C223F9EF500F61841 /* PassepartoutCore-iOS */,
 				0EE4EB2B229A6FED000E4BA1 /* PassepartoutCoreTests-iOS */,
 				0E57F63A20C83FC5008323CF /* Passepartout-iOS */,
 				0EDE8DC020C86910004C739C /* Passepartout-iOS-Tunnel */,
+				0EE4EB2C229A71BB000E4BA1 /* Submodules */,
 				0E57F63920C83FC5008323CF /* Products */,
 				374B9F085E1148C37CF9117A /* Frameworks */,
 				ECB6C4CA315B2CB2AFE7ACBB /* Pods */,
@@ -652,6 +650,24 @@
 				0E3152AC223F9EF500F61841 /* Info.plist */,
 			);
 			path = "PassepartoutCoreTests-iOS";
+			sourceTree = "<group>";
+		};
+		0EE4EB2C229A71BB000E4BA1 /* Submodules */ = {
+			isa = PBXGroup;
+			children = (
+				0E3CAFC3229AAF8E0008E5C8 /* API */,
+				0EE4EB2E229A71DA000E4BA1 /* Core */,
+			);
+			path = Submodules;
+			sourceTree = "<group>";
+		};
+		0EE4EB2E229A71DA000E4BA1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0EDE8DEF20C93EBB004C739C /* Passepartout */,
+				0E3152A9223F9EF500F61841 /* PassepartoutTests */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		374B9F085E1148C37CF9117A /* Frameworks */ = {
@@ -869,7 +885,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E3CAFC2229AAE850008E5C8 /* Web in Resources */,
+				0E3CAFC4229AAF8E0008E5C8 /* API in Resources */,
 				0E3CAFB8229AAE770008E5C8 /* Intents.strings in Resources */,
 				0E3CAFB7229AAE770008E5C8 /* Localizable.strings in Resources */,
 			);

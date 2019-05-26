@@ -52,9 +52,15 @@ public class AppConstants {
         public static let name = "passepartoutvpn.app"
     }
     
+    public class API {
+        public static let version = "v2"
+    }
+    
     public class Store {
         public static let serviceFilename = "ConnectionService.json"
-        
+
+        public static let apiDirectory = "API/\(API.version)"
+
         public static let webCacheDirectory = "Web"
 
         public static let providersDirectory = "Providers"
@@ -63,9 +69,7 @@ public class AppConstants {
     }
     
     public class Web {
-        private static let version = "v2"
-        
-        private static let baseURL = Repos.api.appendingPathComponent(version)
+        private static let baseURL = Repos.api.appendingPathComponent(API.version)
         
         public static func url(path: String) -> URL {
             return baseURL.appendingPathComponent(path)

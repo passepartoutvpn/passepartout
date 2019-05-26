@@ -258,15 +258,15 @@ private extension Infrastructure.Name {
     var bundleRelativePath: String {
         let endpoint = WebServices.Endpoint.network(self)
         
-        // e.g. "Web", PIA="net/pia" -> "Web/net/pia.json"
-        return "\(AppConstants.Store.webCacheDirectory)/\(endpoint.path).json"
+        // e.g. "API/v2", PIA="net/pia" -> "API/v2/net/pia.json"
+        return "\(AppConstants.Store.apiDirectory)/\(endpoint.path).json"
     }
 
     var bundleURL: URL? {
         let bundle = Bundle(for: InfrastructureFactory.self)
         let endpoint = WebServices.Endpoint.network(self)
 
-        // e.g. "Web", PIA="net/pia" -> "[Bundle]:Web/net/pia.json"
-        return bundle.url(forResource: "\(AppConstants.Store.webCacheDirectory)/\(endpoint.path)", withExtension: "json")
+        // e.g. "API/v2", PIA="net/pia" -> "[Bundle]:API/v2/net/pia.json"
+        return bundle.url(forResource: "\(AppConstants.Store.apiDirectory)/\(endpoint.path)", withExtension: "json")
     }
 }
