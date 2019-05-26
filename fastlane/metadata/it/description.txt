@@ -39,4 +39,4 @@ ORIENTATO ALLA PRIVACY
 
 Passepartout è un client non ufficiale e non è affiliato ad OpenVPN Inc. in alcuna maniera.
 
-© 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
+© 2002-2018 OpenVPN Inc. - OpenVPN è un marchio registrato di OpenVPN Inc.
