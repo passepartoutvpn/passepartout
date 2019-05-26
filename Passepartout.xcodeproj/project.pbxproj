@@ -203,6 +203,8 @@
 		0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutsConnectToViewController.swift; sourceTree = "<group>"; };
 		0E39BCEF214B9EF10035E9DE /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		0E39BCF2214DA9310035E9DE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		0E3CAFC5229B033E0008E5C8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E3CAFC7229B28310008E5C8 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
 		0E411BA32272183700E0852C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Intents.strings"; sourceTree = "<group>"; };
 		0E411BA42272184A00E0852C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 				el,
 				sv,
 				fr,
+				es,
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
 			productRefGroup = 0E57F63920C83FC5008323CF /* Products */;
@@ -1178,6 +1181,7 @@
 				0EF4EF80229431D20030E6EB /* el */,
 				0E9DE06C22992DE600DEC291 /* sv */,
 				0EE4EB2A229A6AF8000E4BA1 /* fr */,
+				0E3CAFC7229B28310008E5C8 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1227,6 +1231,7 @@
 				0EF4EF7F229431CB0030E6EB /* el */,
 				0E9DE06B22992DE000DEC291 /* sv */,
 				0EE4EB29229A6AF8000E4BA1 /* fr */,
+				0E3CAFC5229B033E0008E5C8 /* es */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
