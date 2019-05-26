@@ -1,6 +1,6 @@
 //
 //  ConnectionServiceTests.swift
-//  Passepartout-CoreTests
+//  PassepartoutTests
 //
 //  Created by Davide De Rosa on 10/25/18.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
@@ -25,7 +25,7 @@
 
 import XCTest
 import TunnelKit
-@testable import Passepartout_Core
+@testable import PassepartoutCore
 
 class ConnectionServiceTests: XCTestCase {
     let url = Bundle(for: ConnectionServiceTests.self).url(forResource: "ConnectionService", withExtension: "json")!

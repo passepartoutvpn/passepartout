@@ -25,7 +25,7 @@
 
 import UIKit
 import Intents
-import Passepartout_Core
+import PassepartoutCore
 
 @available(iOS 12, *)
 class ShortcutsAddViewController: UITableViewController, TableModelHost {

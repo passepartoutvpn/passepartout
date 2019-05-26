@@ -20,10 +20,10 @@
 		0E242740225951B00064A1A3 /* InApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E24273F225951B00064A1A3 /* InApp.swift */; };
 		0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E242741225956AC0064A1A3 /* DonationViewController.swift */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
-		0E3152A4223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */; };
-		0E3152AD223F9EF500F61841 /* Passepartout_Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* Passepartout_Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0E3152B0223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */; };
-		0E3152B1223F9EF500F61841 /* Passepartout_Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0E3152A4223F9EF500F61841 /* PassepartoutCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; };
+		0E3152AD223F9EF500F61841 /* PassepartoutCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* PassepartoutCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0E3152B0223F9EF500F61841 /* PassepartoutCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; };
+		0E3152B1223F9EF500F61841 /* PassepartoutCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0E3152B9223F9F3B00F61841 /* ConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */; };
 		0E3152BA223F9F3D00F61841 /* InfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2620CF257C0027975F /* InfrastructureTests.swift */; };
 		0E3152BB223FA03D00F61841 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCF2214DA9310035E9DE /* AppConstants.swift */; };
@@ -118,7 +118,9 @@
 		2774FA39ED110D958C822250 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A4ADF4EAADB11C595D7937 /* Pods_Passepartout_iOS_Tunnel.framework */; };
 		64BC3972D5FD0698BA15D741 /* Pods_Passepartout_CoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330CE87BE42AD629984E05C3 /* Pods_Passepartout_CoreTests.framework */; };
 		65923F9A7B1F49732A1B386B /* Pods_Passepartout_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EAE1FBCD7178916560C394 /* Pods_Passepartout_iOS.framework */; };
+		6715B60144CD8B8ACEC6559F /* Pods_PassepartoutCore_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530930FCE0F9D65D4246FDE5 /* Pods_PassepartoutCore_iOS.framework */; };
 		974F713030E083F69F5E1049 /* Pods_Passepartout_Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC62156F813CA8AE19A046B /* Pods_Passepartout_Core.framework */; };
+		FA448D16DE2B6D80BC288007 /* Pods_PassepartoutCoreTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7999ECF2EC57D65C8696543 /* Pods_PassepartoutCoreTests_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,7 +154,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0E3152B1223F9EF500F61841 /* Passepartout_Core.framework in Embed Frameworks */,
+				0E3152B1223F9EF500F61841 /* PassepartoutCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,10 +195,10 @@
 		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
 		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
 		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
-		0E31529B223F9EF400F61841 /* Passepartout_Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Passepartout_Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E31529D223F9EF500F61841 /* Passepartout_Core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Passepartout_Core.h; sourceTree = "<group>"; };
+		0E31529B223F9EF400F61841 /* PassepartoutCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PassepartoutCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E31529D223F9EF500F61841 /* PassepartoutCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassepartoutCore.h; sourceTree = "<group>"; };
 		0E31529E223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E3152A3223F9EF500F61841 /* Passepartout-CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Passepartout-CoreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E3152A3223F9EF500F61841 /* PassepartoutCoreTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PassepartoutCoreTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E3152AC223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsAddViewController.swift; sourceTree = "<group>"; };
@@ -304,9 +306,13 @@
 		0EFBFAC021AC464800887A8C /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
 		0EFD943F215BED8E00529B64 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		1220F3BC3149D131D03597F8 /* Pods-PassepartoutCoreTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCoreTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PassepartoutCoreTests-iOS/Pods-PassepartoutCoreTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		1AA0A7801E34D3A4286280AB /* Pods-Passepartout-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		306E9009D8A771C5756ACC83 /* Pods-Passepartout-CoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-CoreTests.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests.release.xcconfig"; sourceTree = "<group>"; };
 		330CE87BE42AD629984E05C3 /* Pods_Passepartout_CoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_CoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50406FC5DC2BC7B353DE5FED /* Pods-PassepartoutCore-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCore-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PassepartoutCore-iOS/Pods-PassepartoutCore-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		530930FCE0F9D65D4246FDE5 /* Pods_PassepartoutCore_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PassepartoutCore_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		691419FE71C4305580FF9749 /* Pods-PassepartoutCore-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCore-iOS.release.xcconfig"; path = "Target Support Files/Pods-PassepartoutCore-iOS/Pods-PassepartoutCore-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		84E4F391724F65947460C4C6 /* Pods-Passepartout-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A1EAE1FBCD7178916560C394 /* Pods_Passepartout_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A4ADF4EAADB11C595D7937 /* Pods_Passepartout_iOS_Tunnel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_iOS_Tunnel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,6 +321,8 @@
 		CA8AA77D192D2ABAABC8A4DA /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
 		D35137256E20958EA0A025A0 /* Pods-Passepartout-CoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-CoreTests.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7CC6F055B1ECE468E956C00 /* Pods-Passepartout-Core.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-Core.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-Core/Pods-Passepartout-Core.debug.xcconfig"; sourceTree = "<group>"; };
+		E7999ECF2EC57D65C8696543 /* Pods_PassepartoutCoreTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PassepartoutCoreTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7EC93ADD382D056F2361BDE /* Pods-PassepartoutCoreTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCoreTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PassepartoutCoreTests-iOS/Pods-PassepartoutCoreTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				974F713030E083F69F5E1049 /* Pods_Passepartout_Core.framework in Frameworks */,
+				6715B60144CD8B8ACEC6559F /* Pods_PassepartoutCore_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,8 +339,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E3152A4223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */,
+				0E3152A4223F9EF500F61841 /* PassepartoutCore.framework in Frameworks */,
 				64BC3972D5FD0698BA15D741 /* Pods_Passepartout_CoreTests.framework in Frameworks */,
+				FA448D16DE2B6D80BC288007 /* Pods_PassepartoutCoreTests_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +349,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E3152B0223F9EF500F61841 /* Passepartout_Core.framework in Frameworks */,
+				0E3152B0223F9EF500F61841 /* PassepartoutCore.framework in Frameworks */,
 				0ED31C3D20CF396E0027975F /* NetworkExtension.framework in Frameworks */,
 				65923F9A7B1F49732A1B386B /* Pods_Passepartout_iOS.framework in Frameworks */,
 			);
@@ -391,25 +401,24 @@
 			path = Shortcuts;
 			sourceTree = "<group>";
 		};
-		0E31529C223F9EF500F61841 /* Passepartout-Core */ = {
+		0E31529C223F9EF500F61841 /* PassepartoutCore-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0E31529D223F9EF500F61841 /* Passepartout_Core.h */,
+				0E31529D223F9EF500F61841 /* PassepartoutCore.h */,
 				0E31529E223F9EF500F61841 /* Info.plist */,
 			);
-			path = "Passepartout-Core";
+			path = "PassepartoutCore-iOS";
 			sourceTree = "<group>";
 		};
-		0E3152A9223F9EF500F61841 /* Passepartout-CoreTests */ = {
+		0E3152A9223F9EF500F61841 /* PassepartoutTests */ = {
 			isa = PBXGroup;
 			children = (
 				0EBBE8F121822B4D00106008 /* ConnectionService.json */,
 				0EBBE8F021822B4D00106008 /* ConnectionServiceTests.swift */,
 				0ED31C2620CF257C0027975F /* InfrastructureTests.swift */,
 				0ECEB10B224FEF9B00E9E551 /* UtilsTests.swift */,
-				0E3152AC223F9EF500F61841 /* Info.plist */,
 			);
-			path = "Passepartout-CoreTests";
+			path = PassepartoutTests;
 			sourceTree = "<group>";
 		};
 		0E4FD7D920D3E43F002221FF /* VPN */ = {
@@ -438,8 +447,9 @@
 			isa = PBXGroup;
 			children = (
 				0EDE8DEF20C93EBB004C739C /* Passepartout */,
-				0E31529C223F9EF500F61841 /* Passepartout-Core */,
-				0E3152A9223F9EF500F61841 /* Passepartout-CoreTests */,
+				0E3152A9223F9EF500F61841 /* PassepartoutTests */,
+				0E31529C223F9EF500F61841 /* PassepartoutCore-iOS */,
+				0EE4EB2B229A6FED000E4BA1 /* PassepartoutCoreTests-iOS */,
 				0E57F63A20C83FC5008323CF /* Passepartout-iOS */,
 				0EDE8DC020C86910004C739C /* Passepartout-iOS-Tunnel */,
 				0E57F63920C83FC5008323CF /* Products */,
@@ -453,8 +463,8 @@
 			children = (
 				0E57F63820C83FC5008323CF /* Passepartout.app */,
 				0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */,
-				0E31529B223F9EF400F61841 /* Passepartout_Core.framework */,
-				0E3152A3223F9EF500F61841 /* Passepartout-CoreTests.xctest */,
+				0E31529B223F9EF400F61841 /* PassepartoutCore.framework */,
+				0E3152A3223F9EF500F61841 /* PassepartoutCoreTests-iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -635,6 +645,14 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		0EE4EB2B229A6FED000E4BA1 /* PassepartoutCoreTests-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				0E3152AC223F9EF500F61841 /* Info.plist */,
+			);
+			path = "PassepartoutCoreTests-iOS";
+			sourceTree = "<group>";
+		};
 		374B9F085E1148C37CF9117A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,6 +663,8 @@
 				330CE87BE42AD629984E05C3 /* Pods_Passepartout_CoreTests.framework */,
 				A1EAE1FBCD7178916560C394 /* Pods_Passepartout_iOS.framework */,
 				A3A4ADF4EAADB11C595D7937 /* Pods_Passepartout_iOS_Tunnel.framework */,
+				530930FCE0F9D65D4246FDE5 /* Pods_PassepartoutCore_iOS.framework */,
+				E7999ECF2EC57D65C8696543 /* Pods_PassepartoutCoreTests_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -660,6 +680,10 @@
 				1AA0A7801E34D3A4286280AB /* Pods-Passepartout-iOS.release.xcconfig */,
 				CA8AA77D192D2ABAABC8A4DA /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */,
 				C8A8897C87D8BCB817593651 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */,
+				50406FC5DC2BC7B353DE5FED /* Pods-PassepartoutCore-iOS.debug.xcconfig */,
+				691419FE71C4305580FF9749 /* Pods-PassepartoutCore-iOS.release.xcconfig */,
+				E7EC93ADD382D056F2361BDE /* Pods-PassepartoutCoreTests-iOS.debug.xcconfig */,
+				1220F3BC3149D131D03597F8 /* Pods-PassepartoutCoreTests-iOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -671,16 +695,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E3152AD223F9EF500F61841 /* Passepartout_Core.h in Headers */,
+				0E3152AD223F9EF500F61841 /* PassepartoutCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0E31529A223F9EF400F61841 /* Passepartout-Core */ = {
+		0E31529A223F9EF400F61841 /* PassepartoutCore-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E3152B6223F9EF500F61841 /* Build configuration list for PBXNativeTarget "Passepartout-Core" */;
+			buildConfigurationList = 0E3152B6223F9EF500F61841 /* Build configuration list for PBXNativeTarget "PassepartoutCore-iOS" */;
 			buildPhases = (
 				62FB13BEA00ABC00B4A29BCD /* [CP] Check Pods Manifest.lock */,
 				0E315296223F9EF400F61841 /* Headers */,
@@ -692,14 +716,14 @@
 			);
 			dependencies = (
 			);
-			name = "Passepartout-Core";
+			name = "PassepartoutCore-iOS";
 			productName = "Passepartout-Core";
-			productReference = 0E31529B223F9EF400F61841 /* Passepartout_Core.framework */;
+			productReference = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		0E3152A2223F9EF500F61841 /* Passepartout-CoreTests */ = {
+		0E3152A2223F9EF500F61841 /* PassepartoutCoreTests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E3152B8223F9EF500F61841 /* Build configuration list for PBXNativeTarget "Passepartout-CoreTests" */;
+			buildConfigurationList = 0E3152B8223F9EF500F61841 /* Build configuration list for PBXNativeTarget "PassepartoutCoreTests-iOS" */;
 			buildPhases = (
 				659C2986645B0E1133FB185B /* [CP] Check Pods Manifest.lock */,
 				0E31529F223F9EF500F61841 /* Sources */,
@@ -712,9 +736,9 @@
 			dependencies = (
 				0E3152A6223F9EF500F61841 /* PBXTargetDependency */,
 			);
-			name = "Passepartout-CoreTests";
+			name = "PassepartoutCoreTests-iOS";
 			productName = "Passepartout-CoreTests";
-			productReference = 0E3152A3223F9EF500F61841 /* Passepartout-CoreTests.xctest */;
+			productReference = 0E3152A3223F9EF500F61841 /* PassepartoutCoreTests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0E57F63720C83FC5008323CF /* Passepartout-iOS */ = {
@@ -830,8 +854,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0E31529A223F9EF400F61841 /* Passepartout-Core */,
-				0E3152A2223F9EF500F61841 /* Passepartout-CoreTests */,
+				0E31529A223F9EF400F61841 /* PassepartoutCore-iOS */,
+				0E3152A2223F9EF500F61841 /* PassepartoutCoreTests-iOS */,
 				0E57F63720C83FC5008323CF /* Passepartout-iOS */,
 				0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */,
 			);
@@ -926,7 +950,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Passepartout-Core-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-PassepartoutCore-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -948,7 +972,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Passepartout-CoreTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-PassepartoutCoreTests-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -985,7 +1009,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PassepartoutCoreTests-iOS/Pods-PassepartoutCoreTests-iOS-frameworks.sh",
 				"${PODS_ROOT}/OpenSSL-Apple/frameworks/iPhone/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
@@ -1002,7 +1026,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Passepartout-CoreTests/Pods-Passepartout-CoreTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PassepartoutCoreTests-iOS/Pods-PassepartoutCoreTests-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D6AF52B99BBE4A3C74D968EC /* [CP] Check Pods Manifest.lock */ = {
@@ -1153,12 +1177,12 @@
 /* Begin PBXTargetDependency section */
 		0E3152A6223F9EF500F61841 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0E31529A223F9EF400F61841 /* Passepartout-Core */;
+			target = 0E31529A223F9EF400F61841 /* PassepartoutCore-iOS */;
 			targetProxy = 0E3152A5223F9EF500F61841 /* PBXContainerItemProxy */;
 		};
 		0E3152AF223F9EF500F61841 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0E31529A223F9EF400F61841 /* Passepartout-Core */;
+			target = 0E31529A223F9EF400F61841 /* PassepartoutCore-iOS */;
 			targetProxy = 0E3152AE223F9EF500F61841 /* PBXContainerItemProxy */;
 		};
 		0EDE8DC720C86910004C739C /* PBXTargetDependency */ = {
@@ -1249,7 +1273,7 @@
 /* Begin XCBuildConfiguration section */
 		0E3152B2223F9EF500F61841 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7CC6F055B1ECE468E956C00 /* Pods-Passepartout-Core.debug.xcconfig */;
+			baseConfigurationReference = 50406FC5DC2BC7B353DE5FED /* Pods-PassepartoutCore-iOS.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1260,7 +1284,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Passepartout-Core/Info.plist";
+				INFOPLIST_FILE = "PassepartoutCore-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1269,8 +1293,8 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.algoritmico.ios.Passepartout-Core";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutCore;
+				PRODUCT_NAME = PassepartoutCore;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1281,7 +1305,7 @@
 		};
 		0E3152B3223F9EF500F61841 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0006BCD0B73ABD3B2B701604 /* Pods-Passepartout-Core.release.xcconfig */;
+			baseConfigurationReference = 691419FE71C4305580FF9749 /* Pods-PassepartoutCore-iOS.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1292,7 +1316,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Passepartout-Core/Info.plist";
+				INFOPLIST_FILE = "PassepartoutCore-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1300,8 +1324,8 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.algoritmico.ios.Passepartout-Core";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutCore;
+				PRODUCT_NAME = PassepartoutCore;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1312,10 +1336,10 @@
 		};
 		0E3152B4223F9EF500F61841 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D35137256E20958EA0A025A0 /* Pods-Passepartout-CoreTests.debug.xcconfig */;
+			baseConfigurationReference = E7EC93ADD382D056F2361BDE /* Pods-PassepartoutCoreTests-iOS.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Passepartout-CoreTests/Info.plist";
+				INFOPLIST_FILE = "PassepartoutCoreTests-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1324,7 +1348,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.algoritmico.ios.Passepartout-CoreTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1333,10 +1357,10 @@
 		};
 		0E3152B5223F9EF500F61841 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 306E9009D8A771C5756ACC83 /* Pods-Passepartout-CoreTests.release.xcconfig */;
+			baseConfigurationReference = 1220F3BC3149D131D03597F8 /* Pods-PassepartoutCoreTests-iOS.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Passepartout-CoreTests/Info.plist";
+				INFOPLIST_FILE = "PassepartoutCoreTests-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1344,7 +1368,7 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.algoritmico.ios.Passepartout-CoreTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1576,7 +1600,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0E3152B6223F9EF500F61841 /* Build configuration list for PBXNativeTarget "Passepartout-Core" */ = {
+		0E3152B6223F9EF500F61841 /* Build configuration list for PBXNativeTarget "PassepartoutCore-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0E3152B2223F9EF500F61841 /* Debug */,
@@ -1585,7 +1609,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0E3152B8223F9EF500F61841 /* Build configuration list for PBXNativeTarget "Passepartout-CoreTests" */ = {
+		0E3152B8223F9EF500F61841 /* Build configuration list for PBXNativeTarget "PassepartoutCoreTests-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0E3152B4223F9EF500F61841 /* Debug */,

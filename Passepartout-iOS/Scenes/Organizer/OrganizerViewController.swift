@@ -26,7 +26,7 @@
 import UIKit
 import StoreKit
 import MessageUI
-import Passepartout_Core
+import PassepartoutCore
 
 // XXX: convoluted due to the separation of provider/host profiles
 

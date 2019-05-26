@@ -25,7 +25,7 @@
 
 import UIKit
 import StoreKit
-import Passepartout_Core
+import PassepartoutCore
 
 class DonationViewController: UITableViewController, TableModelHost {
     private var donationList: [InApp.Donation] = []

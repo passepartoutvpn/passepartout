@@ -24,7 +24,7 @@
 //
 
 import UIKit
-import Passepartout_Core
+import PassepartoutCore
 
 class AboutViewController: UITableViewController, TableModelHost {
 

@@ -28,7 +28,7 @@ import NetworkExtension
 import CoreTelephony
 import MBProgressHUD
 import TunnelKit
-import Passepartout_Core
+import PassepartoutCore
 
 class ServiceViewController: UIViewController, TableModelHost {
     @IBOutlet private weak var tableView: UITableView!

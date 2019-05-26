@@ -57,8 +57,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0E3152A2223F9EF500F61841"
-               BuildableName = "Passepartout-CoreTests.xctest"
-               BlueprintName = "Passepartout-CoreTests"
+               BuildableName = "PassepartoutCoreTests-iOS.xctest"
+               BlueprintName = "PassepartoutCoreTests-iOS"
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
          </TestableReference>

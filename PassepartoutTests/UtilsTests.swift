@@ -1,6 +1,6 @@
 //
 //  UtilsTests.swift
-//  Passepartout-CoreTests
+//  PassepartoutTests
 //
 //  Created by Davide De Rosa on 3/30/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
@@ -24,7 +24,7 @@
 //
 
 import XCTest
-@testable import Passepartout_Core
+@testable import PassepartoutCore
 
 class UtilsTests: XCTestCase {
     override func setUp() {

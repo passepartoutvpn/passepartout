@@ -25,7 +25,7 @@
 
 import UIKit
 import TunnelKit
-import Passepartout_Core
+import PassepartoutCore
 
 extension UITableViewCell {
     func applyChecked(_ checked: Bool, _ theme: Theme) {

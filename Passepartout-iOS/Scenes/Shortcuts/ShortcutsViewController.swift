@@ -26,7 +26,7 @@
 import UIKit
 import Intents
 import IntentsUI
-import Passepartout_Core
+import PassepartoutCore
 
 @available(iOS 12, *)
 protocol ShortcutsIntentDelegate: class {

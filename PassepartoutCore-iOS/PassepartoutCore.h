@@ -1,10 +1,10 @@
 //
-//  Passepartout_Core.h
-//  Passepartout-Core
+//  PassepartoutCore.h
+//  PassepartoutCore
 //
 //  Created by Davide De Rosa on 3/18/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
-//
+
 //  https://github.com/passepartoutvpn
 //
 //  This file is part of Passepartout.
@@ -23,14 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-//! Project version number for Passepartout_Core.
-FOUNDATION_EXPORT double Passepartout_CoreVersionNumber;
+//! Project version number for PassepartoutCore.
+FOUNDATION_EXPORT double PassepartoutCoreVersionNumber;
 
-//! Project version string for Passepartout_Core.
-FOUNDATION_EXPORT const unsigned char Passepartout_CoreVersionString[];
+//! Project version string for PassepartoutCore.
+FOUNDATION_EXPORT const unsigned char PassepartoutCoreVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <Passepartout_Core/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <PassepartoutCore/PublicHeader.h>
 
 
