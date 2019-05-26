@@ -1,1 +1,1 @@
-Connecter fournisseurs .ovpn & VPN
+Connecter .ovpn & fournisseurs
