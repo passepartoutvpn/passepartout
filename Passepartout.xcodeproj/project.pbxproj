@@ -460,7 +460,7 @@
 				0EE4EB2B229A6FED000E4BA1 /* PassepartoutCoreTests-iOS */,
 				0E57F63A20C83FC5008323CF /* Passepartout-iOS */,
 				0EDE8DC020C86910004C739C /* Passepartout-iOS-Tunnel */,
-				0EE4EB2C229A71BB000E4BA1 /* Submodules */,
+				0EE4EB2C229A71BB000E4BA1 /* Libraries */,
 				0E57F63920C83FC5008323CF /* Products */,
 				374B9F085E1148C37CF9117A /* Frameworks */,
 				ECB6C4CA315B2CB2AFE7ACBB /* Pods */,
@@ -652,13 +652,13 @@
 			path = "PassepartoutCoreTests-iOS";
 			sourceTree = "<group>";
 		};
-		0EE4EB2C229A71BB000E4BA1 /* Submodules */ = {
+		0EE4EB2C229A71BB000E4BA1 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				0E3CAFC3229AAF8E0008E5C8 /* API */,
 				0EE4EB2E229A71DA000E4BA1 /* Core */,
 			);
-			path = Submodules;
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 		0EE4EB2E229A71DA000E4BA1 /* Core */ = {
