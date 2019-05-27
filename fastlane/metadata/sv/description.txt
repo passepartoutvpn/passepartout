@@ -1,4 +1,6 @@
-Passepartout är en smart OpenVPN-klient som är helt integrerad med iOS-plattformen. Passepartout är den enda app du behöver för både kända OpenVPN-leverantörer och dina personliga OpenVPN-servrar. Med Betrodda Nätverk och Siri Shortcuts låser Passepartout det bästa av att använda en VPN på iOS.
+Passepartout är en smart OpenVPN-klient som är helt integrerad med iOS-plattformen. Passepartout är den enda app du behöver för både kända OpenVPN-leverantörer och dina personliga OpenVPN-servrar.
+
+Med Betrodda Nätverk och Siri Shortcuts låser Passepartout det bästa av att använda en VPN på iOS.
 
 Passepartout engagerar inte någon oönskad bakgrundsaktivitet utom VPN-tunneln, vilket är också vänligare för andra brandväggar eller VPN-klienter.
 
