@@ -25,7 +25,7 @@
 
 import UIKit
 import TunnelKit
-import Passepartout_Core
+import PassepartoutCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {

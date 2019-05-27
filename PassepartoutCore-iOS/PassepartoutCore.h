@@ -1,10 +1,10 @@
 //
-//  Preferences.swift
-//  Passepartout
+//  PassepartoutCore.h
+//  PassepartoutCore
 //
-//  Created by Davide De Rosa on 9/4/18.
+//  Created by Davide De Rosa on 3/18/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
-//
+
 //  https://github.com/passepartoutvpn
 //
 //  This file is part of Passepartout.
@@ -23,32 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#import <Foundation/Foundation.h>
 
-public protocol Preferences {
-    var resolvesHostname: Bool { get }
-    
-    var disconnectsOnSleep: Bool { get }
-    
-    #if os(iOS)
-    var trustsMobileNetwork: Bool { get }
-    #endif
-    
-    var trustedWifis: [String: Bool] { get }
-    
-    var trustPolicy: TrustPolicy { get }
-}
+//! Project version number for PassepartoutCore.
+FOUNDATION_EXPORT double PassepartoutCoreVersionNumber;
 
-public class EditablePreferences: Preferences, Codable {
-    public var resolvesHostname: Bool = true
-    
-    public var disconnectsOnSleep: Bool = false
-    
-    #if os(iOS)
-    public var trustsMobileNetwork: Bool = false
-    #endif
-    
-    public var trustedWifis: [String: Bool] = [:]
-    
-    public var trustPolicy: TrustPolicy = .disconnect
-}
+//! Project version string for PassepartoutCore.
+FOUNDATION_EXPORT const unsigned char PassepartoutCoreVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <PassepartoutCore/PublicHeader.h>
+
+

@@ -1,0 +1,6 @@
+[submodule "Submodules/API"]
+	path = Submodules/API
+	url = https://github.com/passepartoutvpn/api
+[submodule "Submodules/Core"]
+	path = Submodules/Core
+	url = https://github.com/passepartoutvpn/passepartout-core-apple

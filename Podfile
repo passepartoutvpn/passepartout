@@ -14,10 +14,10 @@ def shared_pods
     pod 'SSZipArchive'
 end
 
-target 'Passepartout-Core' do
+target 'PassepartoutCore-iOS' do
     shared_pods
 end
-target 'Passepartout-CoreTests' do
+target 'PassepartoutCoreTests-iOS' do
     shared_pods
 end
 

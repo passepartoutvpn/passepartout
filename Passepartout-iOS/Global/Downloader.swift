@@ -26,7 +26,7 @@
 import Foundation
 import MBProgressHUD
 import SwiftyBeaver
-import Passepartout_Core
+import PassepartoutCore
 
 private let log = SwiftyBeaver.self
 

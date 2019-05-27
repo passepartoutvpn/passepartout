@@ -24,7 +24,7 @@
 //
 
 import UIKit
-import Passepartout_Core
+import PassepartoutCore
 
 protocol ProviderPoolViewControllerDelegate: class {
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool)

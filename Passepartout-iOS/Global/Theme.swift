@@ -26,7 +26,7 @@
 import UIKit
 import MessageUI
 import StoreKit
-import Passepartout_Core
+import PassepartoutCore
 
 extension UIColor {
     convenience init(rgb: UInt32, alpha: CGFloat) {
