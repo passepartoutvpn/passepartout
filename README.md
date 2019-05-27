@@ -3,7 +3,7 @@
 # [Passepartout][about-website]
 
 ![iOS 11+](https://img.shields.io/badge/ios-11+-green.svg)
-[![TunnelKit 1.7.x](https://img.shields.io/badge/tunnelkit-1.7-d69c68.svg)][dep-tunnelkit]
+[![TunnelKit 2.0.x](https://img.shields.io/badge/tunnelkit-2.0-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
 [![Join Telegram](https://img.shields.io/badge/chat-Telegram-blue.svg)][about-telegram]
@@ -95,11 +95,14 @@ Download the app codebase locally:
 
     $ git clone https://github.com/passepartoutvpn/passepartout-ios.git
 
+Enter the directory and clone the submodules:
+
+    $ git submodule init
+    $ git submodule update
+
 Assuming you have a [working CocoaPods environment][dep-cocoapods], setting up the app workspace only requires installing the pod dependencies:
 
     $ pod install
-
-After that, open `Passepartout.xcworkspace` in Xcode and run the `Passepartout-iOS` target.
 
 For the VPN to work properly, the app requires:
 
@@ -113,7 +116,9 @@ Make sure to update `Passepartout-iOS/Config.xcconfig` according to your develop
     CFG_TEAM_ID = A1B2C3D4E5
     CFG_APP_ID = com.example.ios.MyApp
     CFG_GROUP_ID = com.example.MyAppGroup // omit the "group." prefix
-    CFG_APPSTORE_ID = 1234567890
+    CFG_APPSTORE_ID = 1234567890 // optional for development, can be bogus
+
+After that, open `Passepartout.xcworkspace` in Xcode and run the `Passepartout-iOS` target.
 
 ## License
 
