@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "fastlane"
-gem "cocoapods", "~> 1.6"
+gem "cocoapods", "~> 1.6.0"
 gem "dotenv"
 
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
