@@ -17,8 +17,8 @@ PODS:
 DEPENDENCIES:
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `a861c69`)
-  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `a861c69`)
+  - TunnelKit/Extra/LZO (~> 2.0.1)
+  - TunnelKit/Protocols/OpenVPN (~> 2.0.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -26,16 +26,7 @@ SPEC REPOS:
     - OpenSSL-Apple
     - SSZipArchive
     - SwiftyBeaver
-
-EXTERNAL SOURCES:
-  TunnelKit:
-    :commit: a861c69
-    :git: https://github.com/passepartoutvpn/tunnelkit
-
-CHECKOUT OPTIONS:
-  TunnelKit:
-    :commit: a861c69
-    :git: https://github.com/passepartoutvpn/tunnelkit
+    - TunnelKit
 
 SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
@@ -44,6 +35,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
   TunnelKit: a1477f296a481c2ccefe9e6788aea090a1fb6f18
 
-PODFILE CHECKSUM: 16e93cfb144d613f0ba7af1adc65fc0330004c84
+PODFILE CHECKSUM: f7dc7ec149d7920efd701d7178738f6ddf533a3d
 
 COCOAPODS: 1.6.2
