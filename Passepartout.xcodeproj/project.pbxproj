@@ -62,7 +62,6 @@
 		0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36D25A22403469006AF062 /* Shortcuts.storyboard */; };
 		0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */; };
 		0E3CAFB7229AAE770008E5C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Localizable.strings */; };
-		0E3CAFB8229AAE770008E5C8 /* Intents.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF9A229AAE760008E5C8 /* Intents.strings */; };
 		0E3CAFC0229AAE770008E5C8 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */; };
 		0E3CAFC4229AAF8E0008E5C8 /* API in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAFC3229AAF8E0008E5C8 /* API */; };
 		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
@@ -77,6 +76,7 @@
 		0E66A270225FE25800F9C779 /* PoolCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A26F225FE25800F9C779 /* PoolCategory.swift */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */; };
+		0E776642229D0DAE0023FA76 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD7862257462800D033B4 /* Providers.xcassets */; };
 		0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD788225746B300D033B4 /* Flags.xcassets */; };
@@ -182,24 +182,15 @@
 		0E39BCEF214B9EF10035E9DE /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		0E39BCF2214DA9310035E9DE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		0E3CAF99229AAE760008E5C8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E3CAF9B229AAE760008E5C8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAF9C229AAE760008E5C8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E3CAF9D229AAE760008E5C8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAF9E229AAE760008E5C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E3CAF9F229AAE760008E5C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAFA0229AAE760008E5C8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E3CAFA1229AAE760008E5C8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAFAB229AAE760008E5C8 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E3CAFAC229AAE760008E5C8 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAFAE229AAE760008E5C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		0E3CAFAF229AAE760008E5C8 /* pt-br */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-br"; path = "pt-br.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		0E3CAFB0229AAE760008E5C8 /* pt-br */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-br"; path = "pt-br.lproj/Intents.strings"; sourceTree = "<group>"; };
 		0E3CAFB1229AAE760008E5C8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E3CAFB2229AAE760008E5C8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAFB3229AAE760008E5C8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E3CAFB4229AAE760008E5C8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAFB5229AAE760008E5C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0E3CAFB6229AAE760008E5C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E3CAFC3229AAF8E0008E5C8 /* API */ = {isa = PBXFileReference; lastKnownFileType = folder; path = API; sourceTree = "<group>"; };
 		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
 		0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworks.swift; sourceTree = "<group>"; };
@@ -221,8 +212,17 @@
 		0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
 		0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
 		0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsViewController.swift; sourceTree = "<group>"; };
-		0E776574229CF6580023FA76 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E776575229CF65D0023FA76 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E776637229D0D9E0023FA76 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E776638229D0D9F0023FA76 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E776639229D0DA00023FA76 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E77663A229D0DA10023FA76 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E77663B229D0DA20023FA76 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Intents.strings"; sourceTree = "<group>"; };
+		0E77663C229D0DA40023FA76 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E77663D229D0DA50023FA76 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E77663E229D0DA60023FA76 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E77663F229D0DA70023FA76 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E776640229D0DA80023FA76 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E78179E21BE852200950C58 /* Reviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviewer.swift; sourceTree = "<group>"; };
 		0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderConnectionProfile.swift; sourceTree = "<group>"; };
 		0E79D14021919F5600BB5FB2 /* ProfileKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileKey.swift; sourceTree = "<group>"; };
@@ -374,7 +374,6 @@
 		0E3CAF97229AAE760008E5C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0E3CAF9A229AAE760008E5C8 /* Intents.strings */,
 				0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */,
 				0E3CAF98229AAE760008E5C8 /* Localizable.strings */,
 			);
@@ -793,7 +792,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E3CAFC4229AAF8E0008E5C8 /* API in Resources */,
-				0E3CAFB8229AAE770008E5C8 /* Intents.strings in Resources */,
 				0E3CAFB7229AAE770008E5C8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -987,6 +985,7 @@
 				0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */,
 				0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */,
 				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
+				0E776642229D0DAE0023FA76 /* Intents.intentdefinition in Sources */,
 				0EEB53B2225D525B00746300 /* Downloader.swift in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
 				0E242740225951B00064A1A3 /* InApp.swift in Sources */,
@@ -1078,27 +1077,20 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		0E3CAF9A229AAE760008E5C8 /* Intents.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E3CAF9B229AAE760008E5C8 /* de */,
-				0E3CAF9D229AAE760008E5C8 /* el */,
-				0E3CAF9F229AAE760008E5C8 /* en */,
-				0E3CAFA1229AAE760008E5C8 /* it */,
-				0E3CAFAC229AAE760008E5C8 /* sv */,
-				0E3CAFB0229AAE760008E5C8 /* pt-br */,
-				0E3CAFB2229AAE760008E5C8 /* ru */,
-				0E3CAFB4229AAE760008E5C8 /* fr */,
-				0E3CAFB6229AAE760008E5C8 /* nl */,
-				0E776574229CF6580023FA76 /* es */,
-			);
-			name = Intents.strings;
-			sourceTree = "<group>";
-		};
 		0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0E3CAFAE229AAE760008E5C8 /* Base */,
+				0E776637229D0D9E0023FA76 /* en */,
+				0E776638229D0D9F0023FA76 /* it */,
+				0E776639229D0DA00023FA76 /* de */,
+				0E77663A229D0DA10023FA76 /* ru */,
+				0E77663B229D0DA20023FA76 /* pt-BR */,
+				0E77663C229D0DA40023FA76 /* nl */,
+				0E77663D229D0DA50023FA76 /* el */,
+				0E77663E229D0DA60023FA76 /* sv */,
+				0E77663F229D0DA70023FA76 /* fr */,
+				0E776640229D0DA80023FA76 /* es */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
