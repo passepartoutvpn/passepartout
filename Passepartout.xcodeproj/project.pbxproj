@@ -223,7 +223,6 @@
 		0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVPNProvider.swift; sourceTree = "<group>"; };
 		0E4FD7ED20D539A0002221FF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0E4FD7F020D58618002221FF /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
-		0E4FD80420D683A2002221FF /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
 		0E533B152258E03B00EF94FC /* PoolGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolGroup.swift; sourceTree = "<group>"; };
 		0E57F63820C83FC5008323CF /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E57F63B20C83FC5008323CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -663,7 +662,6 @@
 		374B9F085E1148C37CF9117A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0E4FD80420D683A2002221FF /* NetworkExtension.framework */,
 				0ED31C3920CF39510027975F /* NetworkExtension.framework */,
 				0EDE8DD220C86978004C739C /* NotificationCenter.framework */,
 				6D32B24AA7767AB2E7FB6E0F /* Pods_Passepartout_iOS.framework */,
