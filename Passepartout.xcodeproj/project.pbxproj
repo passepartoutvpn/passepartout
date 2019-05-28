@@ -237,6 +237,8 @@
 		0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
 		0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
 		0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsViewController.swift; sourceTree = "<group>"; };
+		0E776574229CF6580023FA76 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E776575229CF65D0023FA76 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E78179E21BE852200950C58 /* Reviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviewer.swift; sourceTree = "<group>"; };
 		0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderConnectionProfile.swift; sourceTree = "<group>"; };
 		0E79D14021919F5600BB5FB2 /* ProfileKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileKey.swift; sourceTree = "<group>"; };
@@ -1221,6 +1223,7 @@
 				0E3CAFB1229AAE760008E5C8 /* ru */,
 				0E3CAFB3229AAE760008E5C8 /* fr */,
 				0E3CAFB5229AAE760008E5C8 /* nl */,
+				0E776575229CF65D0023FA76 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1237,6 +1240,7 @@
 				0E3CAFB2229AAE760008E5C8 /* ru */,
 				0E3CAFB4229AAE760008E5C8 /* fr */,
 				0E3CAFB6229AAE760008E5C8 /* nl */,
+				0E776574229CF6580023FA76 /* es */,
 			);
 			name = Intents.strings;
 			sourceTree = "<group>";
