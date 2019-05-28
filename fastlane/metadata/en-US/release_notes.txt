@@ -5,3 +5,4 @@
 - French translations (Julien Laniel).
 - Spanish translations (Davide De Rosa, Elena Vivó).
 - Swedish translations (Henry Gross-Hellsen).
+
