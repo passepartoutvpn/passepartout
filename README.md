@@ -196,6 +196,5 @@ Website: [passepartoutvpn.app][about-website]
 [about-twitter]: https://twitter.com/keeshux
 [about-website]: https://passepartoutvpn.app
 [about-patreon]: https://www.patreon.com/keeshux
-[about-testflight]: https://testflight.apple.com/join/XHzgXj6m
 [about-reddit]: https://www.reddit.com/r/passepartout
 [about-telegram]: https://t.me/passepartoutvpn
