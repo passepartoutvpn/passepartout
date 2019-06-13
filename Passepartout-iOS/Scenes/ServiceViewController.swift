@@ -450,10 +450,6 @@ class ServiceViewController: UIViewController, TableModelHost {
         shouldDeleteLogOnDisconnection = false
     }
 
-    private func postSupportRequest() {
-        UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
-    }
-
     private func reportConnectivityIssue() {
         let attach = IssueReporter.Attachments(debugLog: true, profile: uncheckedProfile)
         IssueReporter.shared.present(in: self, withAttachments: attach)
@@ -611,8 +607,6 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case debugLog
         
         case masksPrivateData
-        
-        case joinCommunity
         
         case reportIssue
     }
@@ -850,11 +844,6 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         // feedback
 
-        case .joinCommunity:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Organizer.Cells.JoinCommunity.caption
-            return cell
-            
         case .reportIssue:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Service.Cells.ReportIssue.caption
@@ -961,9 +950,6 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .debugLog:
             perform(segue: StoryboardSegue.Main.debugLogSegueIdentifier, sender: cell)
             return true
-            
-        case .joinCommunity:
-            postSupportRequest()
             
         case .reportIssue:
             reportConnectivityIssue()
@@ -1099,7 +1085,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.set([.vpnSurvivesSleep], in: .vpnSurvivesSleep)
             model.set([.trustedPolicy], in: .trustedPolicy)
             model.set([.dataCount, .debugLog, .masksPrivateData], in: .diagnostics)
-            model.set([.joinCommunity, .reportIssue], in: .feedback)
+            model.set([.reportIssue], in: .feedback)
         }
 
         trustedNetworks.delegate = self
