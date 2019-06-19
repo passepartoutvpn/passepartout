@@ -771,7 +771,6 @@
 				sv,
 				fr,
 				es,
-				"pt-br",
 				pt,
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
