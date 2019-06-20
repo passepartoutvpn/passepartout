@@ -246,19 +246,19 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         cell.isTappable = isEditable
         switch row {
         case .cipher:
-            cell.leftText = L10n.Configuration.Cells.Cipher.caption
+            cell.leftText = V.Cipher.caption
             cell.rightText = configuration.fallbackCipher.description
             
         case .digest:
-            cell.leftText = L10n.Configuration.Cells.Digest.caption
+            cell.leftText = V.Digest.caption
             cell.rightText = configuration.fallbackDigest.description
 
         case .compressionFraming:
-            cell.leftText = L10n.Configuration.Cells.CompressionFraming.caption
+            cell.leftText = V.CompressionFraming.caption
             cell.rightText = configuration.fallbackCompressionFraming.cellDescription
             
         case .compressionAlgorithm:
-            cell.leftText = L10n.Configuration.Cells.CompressionAlgorithm.caption
+            cell.leftText = V.CompressionAlgorithm.caption
             if let compressionAlgorithm = configuration.compressionAlgorithm {
                 cell.rightText = compressionAlgorithm.cellDescription
             } else {
@@ -267,17 +267,17 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.isTappable = (configuration.compressionFraming != .disabled)
 
         case .resetOriginal:
-            cell.leftText = L10n.Configuration.Cells.ResetOriginal.caption
+            cell.leftText = V.ResetOriginal.caption
             cell.applyAction(Theme.current)
             
         case .client:
-            cell.leftText = L10n.Configuration.Cells.Client.caption
-            cell.rightText = (configuration.clientCertificate != nil) ? L10n.Configuration.Cells.Client.Value.enabled : L10n.Configuration.Cells.Client.Value.disabled
+            cell.leftText = V.Client.caption
+            cell.rightText = (configuration.clientCertificate != nil) ? V.Client.Value.enabled : V.Client.Value.disabled
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .tlsWrapping:
-            cell.leftText = L10n.Configuration.Cells.TlsWrapping.caption
+            cell.leftText = V.TlsWrapping.caption
             if let strategy = configuration.tlsWrap?.strategy {
                 switch strategy {
                 case .auth:
@@ -299,7 +299,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.isTappable = false
 
         case .defaultGateway:
-            cell.leftText = L10n.Configuration.Cells.DefaultGateway.caption
+            cell.leftText = V.DefaultGateway.caption
             if let policies = configuration.routingPolicies {
                 cell.rightText = policies.map { $0.rawValue }.joined(separator: " / ")
             } else {
@@ -312,31 +312,31 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             guard let dnsServers = configuration.dnsServers else {
                 fatalError("Showing DNS section without any custom server")
             }
-            cell.leftText = L10n.Configuration.Cells.DnsServer.caption
+            cell.leftText = V.DnsServer.caption
             cell.rightText = dnsServers[indexPath.row - 1]
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .dnsDomain:
-            cell.leftText = L10n.Configuration.Cells.DnsDomain.caption
+            cell.leftText = V.DnsDomain.caption
             cell.rightText = configuration.searchDomain ?? L10n.Global.Cells.none
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .httpProxy:
-            cell.leftText = L10n.Configuration.Cells.ProxyHttp.caption
+            cell.leftText = V.ProxyHttp.caption
             cell.rightText = configuration.httpProxy?.description ?? L10n.Global.Cells.none
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .httpsProxy:
-            cell.leftText = L10n.Configuration.Cells.ProxyHttps.caption
+            cell.leftText = V.ProxyHttps.caption
             cell.rightText = configuration.httpsProxy?.description ?? L10n.Global.Cells.none
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .keepAlive:
-            cell.leftText = L10n.Configuration.Cells.KeepAlive.caption
+            cell.leftText = V.KeepAlive.caption
             if let keepAlive = configuration.keepAliveInterval, keepAlive > 0 {
                 cell.rightText = V.KeepAlive.Value.seconds(Int(keepAlive))
             } else {
@@ -346,7 +346,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.isTappable = false
 
         case .renegSeconds:
-            cell.leftText = L10n.Configuration.Cells.RenegotiationSeconds.caption
+            cell.leftText = V.RenegotiationSeconds.caption
             if let reneg = configuration.renegotiatesAfter, reneg > 0 {
                 cell.rightText = V.RenegotiationSeconds.Value.after(TimeInterval(reneg).localized)
             } else {
