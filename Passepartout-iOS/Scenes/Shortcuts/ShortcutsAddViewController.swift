@@ -41,9 +41,9 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
         model.set([.connect, .enableVPN, .disableVPN], in: .vpn)
         model.set([.trustCurrentWiFi, .untrustCurrentWiFi], in: .wifi)
         model.set([.trustCellular, .untrustCellular], in: .cellular)
-        model.setHeader(L10n.Shortcuts.Add.Sections.Vpn.header, for: .vpn)
-        model.setHeader(L10n.Shortcuts.Add.Sections.Wifi.header, for: .wifi)
-        model.setHeader(L10n.Shortcuts.Add.Sections.Cellular.header, for: .cellular)
+        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Vpn.header, for: .vpn)
+        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Wifi.header, for: .wifi)
+        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Cellular.header, for: .cellular)
         return model
     }()
     
@@ -55,7 +55,7 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Shortcuts.Add.title
+        title = L10n.App.Shortcuts.Add.title
     }
 
     // MARK: UITableViewController
@@ -100,25 +100,25 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         switch model.row(at: indexPath) {
         case .connect:
-            cell.leftText = L10n.Shortcuts.Add.Cells.Connect.caption
+            cell.leftText = L10n.Core.Shortcuts.Add.Cells.Connect.caption
             
         case .enableVPN:
-            cell.leftText = L10n.Shortcuts.Add.Cells.EnableVpn.caption
+            cell.leftText = L10n.Core.Shortcuts.Add.Cells.EnableVpn.caption
             
         case .disableVPN:
-            cell.leftText = L10n.Shortcuts.Add.Cells.DisableVpn.caption
+            cell.leftText = L10n.Core.Shortcuts.Add.Cells.DisableVpn.caption
             
         case .trustCurrentWiFi:
-            cell.leftText = L10n.Shortcuts.Add.Cells.TrustCurrentWifi.caption
+            cell.leftText = L10n.Core.Shortcuts.Add.Cells.TrustCurrentWifi.caption
             
         case .untrustCurrentWiFi:
-            cell.leftText = L10n.Shortcuts.Add.Cells.UntrustCurrentWifi.caption
+            cell.leftText = L10n.Core.Shortcuts.Add.Cells.UntrustCurrentWifi.caption
             
         case .trustCellular:
-            cell.leftText = L10n.Shortcuts.Add.Cells.TrustCellular.caption
+            cell.leftText = L10n.Core.Shortcuts.Add.Cells.TrustCellular.caption
             
         case .untrustCellular:
-            cell.leftText = L10n.Shortcuts.Add.Cells.UntrustCellular.caption
+            cell.leftText = L10n.Core.Shortcuts.Add.Cells.UntrustCellular.caption
         }
         return cell
     }
@@ -159,10 +159,10 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
     private func addConnect() {
         guard TransientStore.shared.service.hasProfiles() else {
             let alert = Macros.alert(
-                L10n.Shortcuts.Add.Cells.Connect.caption,
-                L10n.Shortcuts.Add.Alerts.NoProfiles.message
+                L10n.Core.Shortcuts.Add.Cells.Connect.caption,
+                L10n.Core.Shortcuts.Add.Alerts.NoProfiles.message
             )
-            alert.addAction(L10n.Global.ok) {
+            alert.addAction(L10n.Core.Global.ok) {
                 if let ip = self.tableView.indexPathForSelectedRow {
                     self.tableView.deselectRow(at: ip, animated: true)
                 }

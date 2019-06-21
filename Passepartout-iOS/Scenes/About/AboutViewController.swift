@@ -38,8 +38,8 @@ class AboutViewController: UITableViewController, TableModelHost {
         model.add(.share)
         model.setHeader("", for: .info)
         model.setHeader("GitHub", for: .github)
-        model.setHeader(L10n.About.Sections.Web.header, for: .web)
-        model.setHeader(L10n.About.Sections.Share.header, for: .share)
+        model.setHeader(L10n.Core.About.Sections.Web.header, for: .web)
+        model.setHeader(L10n.Core.About.Sections.Share.header, for: .share)
         model.set([.version, .credits], in: .info)
         model.set([.readme, .changelog], in: .github)
         model.set([.website, .faq, .disclaimer, .privacyPolicy], in: .web)
@@ -61,7 +61,7 @@ class AboutViewController: UITableViewController, TableModelHost {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.About.title
+        title = L10n.Core.About.title
     }
     
     // MARK: Actions
@@ -79,7 +79,7 @@ class AboutViewController: UITableViewController, TableModelHost {
     }
     
     private func inviteFriend(sender: UITableViewCell?) {
-        let message = "\(L10n.Share.message) \(AppConstants.URLs.website)"
+        let message = "\(L10n.Core.Share.message) \(AppConstants.URLs.website)"
         let vc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
         vc.popoverPresentationController?.sourceView = sender
         present(vc, animated: true, completion: nil)
@@ -153,11 +153,11 @@ extension AboutViewController {
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         switch model.row(at: indexPath) {
         case .version:
-            cell.leftText = L10n.Version.title
+            cell.leftText = L10n.Core.Version.title
             cell.rightText = Utils.versionString()
             
         case .credits:
-            cell.leftText = L10n.About.Cells.Credits.caption
+            cell.leftText = L10n.Core.About.Cells.Credits.caption
 
         case .readme:
             cell.leftText = "README"
@@ -166,22 +166,22 @@ extension AboutViewController {
             cell.leftText = "CHANGELOG"
             
         case .website:
-            cell.leftText = L10n.About.Cells.Website.caption
+            cell.leftText = L10n.Core.About.Cells.Website.caption
             
         case .faq:
-            cell.leftText = L10n.About.Cells.Faq.caption
+            cell.leftText = L10n.Core.About.Cells.Faq.caption
 
         case .disclaimer:
-            cell.leftText = L10n.About.Cells.Disclaimer.caption
+            cell.leftText = L10n.Core.About.Cells.Disclaimer.caption
             
         case .privacyPolicy:
-            cell.leftText = L10n.About.Cells.PrivacyPolicy.caption
+            cell.leftText = L10n.Core.About.Cells.PrivacyPolicy.caption
             
         case .shareTwitter:
-            cell.leftText = L10n.About.Cells.ShareTwitter.caption
+            cell.leftText = L10n.Core.About.Cells.ShareTwitter.caption
             
         case .shareGeneric:
-            cell.leftText = L10n.About.Cells.ShareGeneric.caption
+            cell.leftText = L10n.Core.About.Cells.ShareGeneric.caption
         }
         return cell
     }
@@ -213,7 +213,7 @@ extension AboutViewController {
             visit(AppConstants.URLs.privacyPolicy)
 
         case .shareTwitter:
-            visit(AppConstants.URLs.twitterIntent)
+            visit(AppConstants.URLs.twitterIntent(withMessage: L10n.Core.Share.message))
 
         case .shareGeneric:
             inviteFriend(sender: tableView.cellForRow(at: indexPath))

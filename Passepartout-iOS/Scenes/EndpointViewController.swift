@@ -66,8 +66,8 @@ class EndpointViewController: UIViewController, TableModelHost {
         model.add(.locationAddresses)
         model.add(.locationProtocols)
         
-        model.setHeader(L10n.Endpoint.Sections.LocationAddresses.header, for: .locationAddresses)
-        model.setHeader(L10n.Endpoint.Sections.LocationProtocols.header, for: .locationProtocols)
+        model.setHeader(L10n.App.Endpoint.Sections.LocationAddresses.header, for: .locationAddresses)
+        model.setHeader(L10n.App.Endpoint.Sections.LocationProtocols.header, for: .locationProtocols)
         
         if dataSource.canCustomizeEndpoint {
             var addressRows: [RowType] = Array(repeating: .availableAddress, count: dataSource.addresses.count)
@@ -99,7 +99,7 @@ class EndpointViewController: UIViewController, TableModelHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Service.Cells.Endpoint.caption
+        title = L10n.Core.Endpoint.title
         guard let _ = dataSource else {
             fatalError("Data source not set")
         }
@@ -208,7 +208,7 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
         switch row {
         case .anyAddress:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Endpoint.Cells.AnyAddress.caption
+            cell.leftText = L10n.Core.Endpoint.Cells.AnyAddress.caption
             cell.accessoryType = .none
             cell.isTappable = true
             if let _ = currentAddress {
@@ -235,7 +235,7 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .anyProtocol:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Endpoint.Cells.AnyProtocol.caption
+            cell.leftText = L10n.Core.Endpoint.Cells.AnyProtocol.caption
             cell.accessoryType = .none
             cell.isTappable = true
             if let _ = currentProtocol {

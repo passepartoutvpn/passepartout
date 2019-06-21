@@ -1,3 +1,11 @@
+strings:
+    inputs:
+        - Submodules/Core/Passepartout/Resources/en.lproj/Core.strings
+        - Passepartout-iOS/Global/en.lproj/App.strings
+    outputs:
+        - templateName: structured-swift4
+          output: Passepartout-iOS/Global/SwiftGen+Strings.swift
+
 ib:
     inputs:
         - Passepartout-iOS/Base.lproj/About.storyboard

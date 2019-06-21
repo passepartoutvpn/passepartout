@@ -53,8 +53,8 @@ class DonationViewController: UITableViewController, TableModelHost {
         model.clear()
         
         model.add(.oneTime)
-        model.setHeader(L10n.Donation.Sections.OneTime.header, for: .oneTime)
-        model.setFooter(L10n.Donation.Sections.OneTime.footer, for: .oneTime)
+        model.setHeader(L10n.Core.Donation.Sections.OneTime.header, for: .oneTime)
+        model.setFooter(L10n.Core.Donation.Sections.OneTime.footer, for: .oneTime)
 
         guard !isLoading else {
             model.set([.loading], in: .oneTime)
@@ -81,7 +81,7 @@ class DonationViewController: UITableViewController, TableModelHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Donation.title
+        title = L10n.Core.Donation.title
         reloadModel()
 
         let inApp = InAppHelper.shared
@@ -122,12 +122,12 @@ class DonationViewController: UITableViewController, TableModelHost {
         switch model.row(at: indexPath) {
         case .loading:
             let cell = Cells.activity.dequeue(from: tableView, for: indexPath)
-            cell.textLabel?.text = L10n.Donation.Cells.Loading.caption
+            cell.textLabel?.text = L10n.Core.Donation.Cells.Loading.caption
             return cell
 
         case .purchasing:
             let cell = Cells.activity.dequeue(from: tableView, for: indexPath)
-            cell.textLabel?.text = L10n.Donation.Cells.Purchasing.caption
+            cell.textLabel?.text = L10n.Core.Donation.Cells.Purchasing.caption
             return cell
 
         case .donation:
@@ -178,12 +178,12 @@ class DonationViewController: UITableViewController, TableModelHost {
             return
 
         case .success:
-            alert = Macros.alert(L10n.Donation.Alerts.Purchase.Success.title, L10n.Donation.Alerts.Purchase.Success.message)
+            alert = Macros.alert(L10n.Core.Donation.Alerts.Purchase.Success.title, L10n.Core.Donation.Alerts.Purchase.Success.message)
 
         case .failure:
-            alert = Macros.alert(title, L10n.Donation.Alerts.Purchase.Failure.message(error?.localizedDescription ?? ""))
+            alert = Macros.alert(title, L10n.Core.Donation.Alerts.Purchase.Failure.message(error?.localizedDescription ?? ""))
         }
-        alert.addCancelAction(L10n.Global.ok) {
+        alert.addCancelAction(L10n.Core.Global.ok) {
             self.isPurchasing = false
             self.reloadModel()
             self.tableView.reloadData()

@@ -55,18 +55,18 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         model.add(.feedback)
         model.add(.about)
         model.add(.destruction)
-        model.setHeader(L10n.Service.Sections.Vpn.header, for: .vpn)
-        model.setHeader(L10n.Organizer.Sections.Providers.header, for: .providers)
-        model.setHeader(L10n.Organizer.Sections.Hosts.header, for: .hosts)
-        model.setFooter(L10n.Organizer.Sections.Providers.footer, for: .providers)
-        model.setFooter(L10n.Organizer.Sections.Hosts.footer, for: .hosts)
+        model.setHeader(L10n.App.Service.Sections.Vpn.header, for: .vpn)
+        model.setHeader(L10n.Core.Organizer.Sections.Providers.header, for: .providers)
+        model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, for: .hosts)
+        model.setFooter(L10n.Core.Organizer.Sections.Providers.footer, for: .providers)
+        model.setFooter(L10n.Core.Organizer.Sections.Hosts.footer, for: .hosts)
         if #available(iOS 12, *) {
-            model.setHeader(L10n.Organizer.Sections.Siri.header, for: .siri)
-            model.setFooter(L10n.Organizer.Sections.Siri.footer, for: .siri)
+            model.setHeader(L10n.Core.Organizer.Sections.Siri.header, for: .siri)
+            model.setFooter(L10n.Core.Organizer.Sections.Siri.footer, for: .siri)
             model.set([.siriShortcuts], in: .siri)
         }
-        model.setHeader(L10n.Organizer.Sections.Support.header, for: .support)
-        model.setHeader(L10n.Organizer.Sections.Feedback.header, for: .feedback)
+        model.setHeader(L10n.Core.Organizer.Sections.Support.header, for: .support)
+        model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, for: .feedback)
         model.set([.connectionStatus], in: .vpn)
         model.set([.donate, .patreon, .translate], in: .support)
         model.set([.joinCommunity, .writeReview], in: .feedback)
@@ -125,15 +125,15 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         if !didShowSubreddit && !TransientStore.didHandleSubreddit {
             didShowSubreddit = true
             
-            let alert = Macros.alert(L10n.Reddit.title, L10n.Reddit.message)
-            alert.addDefaultAction(L10n.Reddit.Buttons.subscribe) {
+            let alert = Macros.alert(L10n.Core.Reddit.title, L10n.Core.Reddit.message)
+            alert.addDefaultAction(L10n.Core.Reddit.Buttons.subscribe) {
                 TransientStore.didHandleSubreddit = true
                 self.subscribeSubreddit()
             }
-            alert.addAction(L10n.Reddit.Buttons.never) {
+            alert.addAction(L10n.Core.Reddit.Buttons.never) {
                 TransientStore.didHandleSubreddit = true
             }
-            alert.addCancelAction(L10n.Reddit.Buttons.remind)
+            alert.addCancelAction(L10n.Core.Reddit.Buttons.remind)
             present(alert, animated: true, completion: nil)
         }
     }
@@ -195,10 +195,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 
         guard !names.isEmpty else {
             let alert = Macros.alert(
-                L10n.Organizer.Sections.Providers.header,
-                L10n.Organizer.Alerts.ExhaustedProviders.message
+                L10n.Core.Organizer.Sections.Providers.header,
+                L10n.Core.Organizer.Alerts.ExhaustedProviders.message
             )
-            alert.addCancelAction(L10n.Global.ok)
+            alert.addCancelAction(L10n.Core.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -218,10 +218,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     private func donateToDeveloper() {
         guard SKPaymentQueue.canMakePayments() else {
             let alert = Macros.alert(
-                L10n.Organizer.Cells.Donate.caption,
-                L10n.Organizer.Alerts.CannotDonate.message
+                L10n.Core.Organizer.Cells.Donate.caption,
+                L10n.Core.Organizer.Alerts.CannotDonate.message
             )
-            alert.addCancelAction(L10n.Global.ok)
+            alert.addCancelAction(L10n.Core.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -234,8 +234,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     
     private func offerTranslation() {
         guard MFMailComposeViewController.canSendMail() else {
-            let alert = Macros.alert(L10n.IssueReporter.title, L10n.Global.emailNotConfigured)
-            alert.addCancelAction(L10n.Global.ok)
+            let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.Global.emailNotConfigured)
+            alert.addCancelAction(L10n.Core.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -304,13 +304,13 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 
     private func confirmVpnProfileDeletion() {
         let alert = Macros.alert(
-            L10n.Organizer.Cells.Uninstall.caption,
-            L10n.Organizer.Alerts.DeleteVpnProfile.message
+            L10n.Core.Organizer.Cells.Uninstall.caption,
+            L10n.Core.Organizer.Alerts.DeleteVpnProfile.message
         )
-        alert.addDefaultAction(L10n.Global.ok) {
+        alert.addDefaultAction(L10n.Core.Global.ok) {
             VPN.shared.uninstall(completionHandler: nil)
         }
-        alert.addCancelAction(L10n.Global.cancel)
+        alert.addCancelAction(L10n.Core.Global.cancel)
         present(alert, animated: true, completion: nil)
     }
     
@@ -330,7 +330,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             return
         }
         let alert = Macros.alert("Debug log", log)
-        alert.addCancelAction(L10n.Global.ok)
+        alert.addCancelAction(L10n.Core.Global.ok)
         present(alert, animated: true, completion: nil)
     }
     
@@ -419,7 +419,7 @@ extension OrganizerViewController {
         case .connectionStatus:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyVPN(Theme.current, with: VPN.shared.isEnabled ? VPN.shared.status : nil, error: nil)
-            cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
+            cell.leftText = L10n.Core.Service.Cells.ConnectionStatus.caption
             return cell
 
         case .profile:
@@ -431,61 +431,61 @@ extension OrganizerViewController {
                 cell.imageView?.image = nil
             }
             cell.leftText = rowProfile.id
-            cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Organizer.Cells.Profile.Value.current : nil
+            cell.rightText = service.isActiveProfile(rowProfile) ? L10n.App.Organizer.Cells.Profile.Value.current : nil
             return cell
 
         case .addProvider:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.Organizer.Cells.AddProvider.caption
+            cell.leftText = L10n.App.Organizer.Cells.AddProvider.caption
             return cell
 
         case .addHost:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.Organizer.Cells.AddHost.caption
+            cell.leftText = L10n.App.Organizer.Cells.AddHost.caption
             return cell
             
         case .siriShortcuts:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.Organizer.Cells.SiriShortcuts.caption
+            cell.leftText = L10n.Core.Organizer.Cells.SiriShortcuts.caption
             return cell
             
         case .donate:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Organizer.Cells.Donate.caption
+            cell.leftText = L10n.Core.Organizer.Cells.Donate.caption
             return cell
 
         case .patreon:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Organizer.Cells.Patreon.caption
+            cell.leftText = L10n.Core.Organizer.Cells.Patreon.caption
             return cell
             
         case .translate:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Organizer.Cells.Translate.caption
+            cell.leftText = L10n.Core.Organizer.Cells.Translate.caption
             return cell
             
         case .joinCommunity:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Organizer.Cells.JoinCommunity.caption
+            cell.leftText = L10n.Core.Organizer.Cells.JoinCommunity.caption
             return cell
             
         case .writeReview:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Organizer.Cells.WriteReview.caption
+            cell.leftText = L10n.Core.Organizer.Cells.WriteReview.caption
             return cell
 
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Organizer.Cells.About.caption(GroupConstants.App.name)
+            cell.leftText = L10n.Core.Organizer.Cells.About.caption(GroupConstants.App.name)
             cell.rightText = Utils.versionString()
             return cell
             
         case .uninstall:
             let cell = Cells.destructive.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.Organizer.Cells.Uninstall.caption
+            cell.caption = L10n.Core.Organizer.Cells.Uninstall.caption
             return cell
             
         case .testDisplayLog:

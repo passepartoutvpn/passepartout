@@ -57,8 +57,8 @@ class IssueReporter: NSObject {
 
     func present(in viewController: UIViewController, withAttachments attachments: Attachments) {
         guard MFMailComposeViewController.canSendMail() else {
-            let alert = Macros.alert(L10n.IssueReporter.title, L10n.Global.emailNotConfigured)
-            alert.addCancelAction(L10n.Global.ok)
+            let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.Global.emailNotConfigured)
+            alert.addCancelAction(L10n.Core.Global.ok)
             viewController.present(alert, animated: true, completion: nil)
             return
         }
@@ -66,13 +66,13 @@ class IssueReporter: NSObject {
         self.viewController = viewController
         
         if attachments.debugLog {
-            let alert = Macros.alert(L10n.IssueReporter.title, L10n.IssueReporter.message)
-            alert.addDefaultAction(L10n.IssueReporter.Buttons.accept) {
+            let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.IssueReporter.message)
+            alert.addDefaultAction(L10n.Core.IssueReporter.Buttons.accept) {
                 VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
                     self.composeEmail(withDebugLog: $0, configurationURL: attachments.configurationURL, description: attachments.description)
                 }
             }
-            alert.addCancelAction(L10n.Global.cancel)
+            alert.addCancelAction(L10n.Core.Global.cancel)
             viewController.present(alert, animated: true, completion: nil)
         } else {
             composeEmail(withDebugLog: nil, configurationURL: attachments.configurationURL, description: attachments.description)
