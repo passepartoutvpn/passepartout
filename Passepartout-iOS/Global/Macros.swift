@@ -73,3 +73,40 @@ extension UIAlertController {
         return action
     }
 }
+
+extension UIView {
+    static func get<T: UIView>() -> T {
+        let name = String(describing: T.self)
+        let nib = UINib(nibName: name, bundle: nil)
+        let objects = nib.instantiate(withOwner: nil)
+        for o in objects {
+            if let view = o as? T {
+                return view
+            }
+        }
+        fatalError()
+    }
+}
+
+extension UITableView {
+    func scrollToRowAsync(at indexPath: IndexPath) {
+        DispatchQueue.main.async { [weak self] in
+            self?.scrollToRow(at: indexPath, at: .middle, animated: false)
+        }
+    }
+    
+    func selectRowAsync(at indexPath: IndexPath) {
+        DispatchQueue.main.async { [weak self] in
+            self?.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
+        }
+    }
+}
+
+extension UIColor {
+    convenience init(rgb: UInt32, alpha: CGFloat) {
+        let r = CGFloat((rgb & 0xff0000) >> 16) / 255.0
+        let g = CGFloat((rgb & 0xff00) >> 8) / 255.0
+        let b = CGFloat(rgb & 0xff) / 255.0
+        self.init(red: r, green: g, blue: b, alpha: alpha)
+    }
+}
