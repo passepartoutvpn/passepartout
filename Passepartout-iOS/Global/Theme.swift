@@ -135,7 +135,7 @@ extension UIButton {
 
 extension UITextField {
     func applyProfileId(_ theme: Theme) {
-        placeholder = L10n.Global.Host.TitleInput.placeholder
+        placeholder = L10n.Core.Global.Host.TitleInput.placeholder
         clearButtonMode = .always
         keyboardType = .asciiCapable
         returnKeyType = .done

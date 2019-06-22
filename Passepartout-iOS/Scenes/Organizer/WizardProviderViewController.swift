@@ -34,7 +34,7 @@ class WizardProviderViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Organizer.Sections.Providers.header
+        title = L10n.Core.Organizer.Sections.Providers.header
     }
     
     private func next(withName name: Infrastructure.Name) {

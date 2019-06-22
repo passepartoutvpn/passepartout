@@ -1,6 +1,6 @@
 #!/bin/sh
-DIR="Passepartout/Resources"
-FILENAME="Localizable.strings"
+DIR="Passepartout-iOS/Global"
+FILENAME="App.strings"
 LANG_BASE="en"
 LANG_TARGET="$1"
 STRINGS_BASE="$DIR/$LANG_BASE.lproj/$FILENAME"

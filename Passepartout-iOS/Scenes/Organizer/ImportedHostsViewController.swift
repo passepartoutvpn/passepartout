@@ -38,7 +38,7 @@ class ImportedHostsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.ImportedHosts.title
+        title = L10n.App.ImportedHosts.title
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,9 +53,9 @@ class ImportedHostsViewController: UITableViewController {
         guard !pendingConfigurationURLs.isEmpty else {
             let alert = Macros.alert(
                 title,
-                L10n.Organizer.Alerts.AddHost.message
+                L10n.Core.Organizer.Alerts.AddHost.message
             )
-            alert.addCancelAction(L10n.Global.ok) {
+            alert.addCancelAction(L10n.Core.Global.ok) {
                 self.close()
             }
             present(alert, animated: true, completion: nil)

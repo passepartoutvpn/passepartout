@@ -44,17 +44,17 @@ extension OpenVPN.ConfigurationParser.Result {
         } catch let e as ConfigurationError {
             switch e {
             case .encryptionPassphrase, .unableToDecrypt(_):
-                let alert = Macros.alert(url.normalizedFilename, L10n.ParsedFile.Alerts.EncryptionPassphrase.message)
+                let alert = Macros.alert(url.normalizedFilename, L10n.Core.ParsedFile.Alerts.EncryptionPassphrase.message)
                 alert.addTextField { (field) in
                     field.isSecureTextEntry = true
                 }
-                alert.addDefaultAction(L10n.Global.ok) {
+                alert.addDefaultAction(L10n.Core.Global.ok) {
                     guard let passphrase = alert.textFields?.first?.text else {
                         return
                     }
                     passphraseBlock(passphrase)
                 }
-                alert.addCancelAction(L10n.Global.cancel) {
+                alert.addCancelAction(L10n.Core.Global.cancel) {
                     passphraseCancelBlock?()
                 }
                 viewController.present(alert, animated: true, completion: nil)
@@ -76,22 +76,22 @@ extension OpenVPN.ConfigurationParser.Result {
     
     private static func alertImportError(url: URL, in vc: UIViewController, withMessage message: String) {
         let alert = Macros.alert(url.normalizedFilename, message)
-//        alert.addDefaultAction(L10n.ParsedFile.Alerts.Buttons.report) {
+//        alert.addDefaultAction(L10n.Core.ParsedFile.Alerts.Buttons.report) {
 //            var attach = IssueReporter.Attachments(debugLog: false, configurationURL: url)
 //            attach.description = message
 //            IssueReporter.shared.present(in: vc, withAttachments: attach)
 //        }
-        alert.addCancelAction(L10n.Global.ok)
+        alert.addCancelAction(L10n.Core.Global.ok)
         vc.present(alert, animated: true, completion: nil)
     }
 
     static func alertImportWarning(url: URL, in vc: UIViewController, withWarning warning: ConfigurationError, completionHandler: @escaping (Bool) -> Void) {
         let message = details(forWarning: warning)
-        let alert = Macros.alert(url.normalizedFilename, L10n.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
-        alert.addDefaultAction(L10n.Global.ok) {
+        let alert = Macros.alert(url.normalizedFilename, L10n.Core.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
+        alert.addDefaultAction(L10n.Core.Global.ok) {
             completionHandler(true)
         }
-        alert.addCancelAction(L10n.Global.cancel) {
+        alert.addCancelAction(L10n.Core.Global.cancel) {
             completionHandler(false)
         }
         vc.present(alert, animated: true, completion: nil)
@@ -102,22 +102,22 @@ extension OpenVPN.ConfigurationParser.Result {
             switch appError {
             case .malformed(let option):
                 log.error("Could not parse configuration URL: malformed option, \(option)")
-                return L10n.ParsedFile.Alerts.Malformed.message(option)
+                return L10n.Core.ParsedFile.Alerts.Malformed.message(option)
 
             case .missingConfiguration(let option):
                 log.error("Could not parse configuration URL: missing configuration, \(option)")
-                return L10n.ParsedFile.Alerts.Missing.message(option)
+                return L10n.Core.ParsedFile.Alerts.Missing.message(option)
                 
             case .unsupportedConfiguration(let option):
                 log.error("Could not parse configuration URL: unsupported configuration, \(option)")
-                return L10n.ParsedFile.Alerts.Unsupported.message(option)
+                return L10n.Core.ParsedFile.Alerts.Unsupported.message(option)
                 
             default:
                 break
             }
         }
         log.error("Could not parse configuration URL: \(error)")
-        return L10n.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
+        return L10n.Core.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
     }
     
     private static func details(forWarning warning: ConfigurationError) -> String {

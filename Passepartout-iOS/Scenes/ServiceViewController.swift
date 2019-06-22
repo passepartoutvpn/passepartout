@@ -25,7 +25,6 @@
 
 import UIKit
 import NetworkExtension
-import CoreTelephony
 import MBProgressHUD
 import TunnelKit
 import PassepartoutCore
@@ -98,7 +97,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         navigationItem.leftItemsSupplementBackButton = true
 
-        labelWelcome.text = L10n.Service.Welcome.message
+        labelWelcome.text = L10n.App.Service.Welcome.message
         labelWelcome.apply(Theme.current)
 
         let nc = NotificationCenter.default
@@ -174,14 +173,14 @@ class ServiceViewController: UIViewController, TableModelHost {
             
         case .hostParametersSegueIdentifier:
             let vc = destination as? ConfigurationViewController
-            vc?.title = L10n.Service.Cells.Host.Parameters.caption
+            vc?.title = L10n.App.Service.Cells.Host.Parameters.caption
             vc?.initialConfiguration = uncheckedHostProfile.parameters.sessionConfiguration
             vc?.originalConfigurationURL = service.configurationURL(for: uncheckedHostProfile)
             vc?.delegate = self
             
         case .networkSettingsSegueIdentifier:
             let vc = destination as? NetworkSettingsViewController
-            vc?.title = L10n.Service.Cells.NetworkSettings.caption
+            vc?.title = L10n.Core.NetworkSettings.title
             vc?.profile = profile
             
         case .debugLogSegueIdentifier:
@@ -218,19 +217,19 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
 
     @IBAction private func renameProfile() {
-        let alert = Macros.alert(L10n.Service.Alerts.Rename.title, L10n.Global.Host.TitleInput.message)
+        let alert = Macros.alert(L10n.Core.Service.Alerts.Rename.title, L10n.Core.Global.Host.TitleInput.message)
         alert.addTextField { (field) in
             field.text = self.profile?.id
             field.applyProfileId(Theme.current)
             field.delegate = self
         }
-        pendingRenameAction = alert.addDefaultAction(L10n.Global.ok) {
+        pendingRenameAction = alert.addDefaultAction(L10n.Core.Global.ok) {
             guard let newId = alert.textFields?.first?.text else {
                 return
             }
             self.doRenameCurrentProfile(to: newId)
         }
-        alert.addCancelAction(L10n.Global.cancel)
+        alert.addCancelAction(L10n.Core.Global.cancel)
         pendingRenameAction?.isEnabled = false
         present(alert, animated: true, completion: nil)
     }
@@ -247,10 +246,10 @@ class ServiceViewController: UIViewController, TableModelHost {
             }
             guard !service.needsCredentials(for: uncheckedProfile) else {
                 let alert = Macros.alert(
-                    L10n.Service.Sections.Vpn.header,
-                    L10n.Service.Alerts.CredentialsNeeded.message
+                    L10n.App.Service.Sections.Vpn.header,
+                    L10n.Core.Service.Alerts.CredentialsNeeded.message
                 )
-                alert.addCancelAction(L10n.Global.ok) {
+                alert.addCancelAction(L10n.Core.Global.ok) {
                     cell.setOn(false, animated: true)
                 }
                 present(alert, animated: true, completion: nil)
@@ -285,13 +284,13 @@ class ServiceViewController: UIViewController, TableModelHost {
     private func confirmVpnReconnection() {
         guard vpn.status == .disconnected else {
             let alert = Macros.alert(
-                L10n.Service.Cells.ConnectionStatus.caption,
-                L10n.Service.Alerts.ReconnectVpn.message
+                L10n.Core.Service.Cells.ConnectionStatus.caption,
+                L10n.Core.Service.Alerts.ReconnectVpn.message
             )
-            alert.addDefaultAction(L10n.Global.ok) {
+            alert.addDefaultAction(L10n.Core.Global.ok) {
                 self.vpn.reconnect(completionHandler: nil)
             }
-            alert.addCancelAction(L10n.Global.cancel)
+            alert.addCancelAction(L10n.Core.Global.cancel)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -349,13 +348,13 @@ class ServiceViewController: UIViewController, TableModelHost {
             return
         }
         let alert = Macros.alert(
-            L10n.Service.Sections.Trusted.header,
-            L10n.Service.Alerts.Trusted.WillDisconnectPolicy.message
+            L10n.Core.Service.Sections.Trusted.header,
+            L10n.Core.Service.Alerts.Trusted.WillDisconnectPolicy.message
         )
-        alert.addDefaultAction(L10n.Global.ok) {
+        alert.addDefaultAction(L10n.Core.Global.ok) {
             completionHandler()
         }
-        alert.addCancelAction(L10n.Global.cancel) {
+        alert.addCancelAction(L10n.Core.Global.cancel) {
             sender.setOn(false, animated: true)
         }
         present(alert, animated: true, completion: nil)
@@ -363,13 +362,13 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private func confirmPotentialTrustedDisconnection(at rowIndex: Int?, completionHandler: @escaping () -> Void) {
         let alert = Macros.alert(
-            L10n.Service.Sections.Trusted.header,
-            L10n.Service.Alerts.Trusted.WillDisconnectTrusted.message
+            L10n.Core.Service.Sections.Trusted.header,
+            L10n.Core.Service.Alerts.Trusted.WillDisconnectTrusted.message
         )
-        alert.addDefaultAction(L10n.Global.ok) {
+        alert.addDefaultAction(L10n.Core.Global.ok) {
             completionHandler()
         }
-        alert.addCancelAction(L10n.Global.cancel) {
+        alert.addCancelAction(L10n.Core.Global.cancel) {
             guard let rowIndex = rowIndex else {
                 return
             }
@@ -385,12 +384,12 @@ class ServiceViewController: UIViewController, TableModelHost {
         Utils.checkConnectivityURL(AppConstants.Web.connectivityURL, timeout: AppConstants.Web.connectivityTimeout) {
             hud.hide()
 
-            let V = L10n.Service.Alerts.TestConnectivity.Messages.self
+            let V = L10n.Core.Service.Alerts.TestConnectivity.Messages.self
             let alert = Macros.alert(
-                L10n.Service.Alerts.TestConnectivity.title,
+                L10n.Core.Service.Alerts.TestConnectivity.title,
                 $0 ? V.success : V.failure
             )
-            alert.addCancelAction(L10n.Global.ok)
+            alert.addCancelAction(L10n.Core.Global.ok)
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -398,10 +397,10 @@ class ServiceViewController: UIViewController, TableModelHost {
 //    private func displayDataCount() {
 //        guard vpn.isEnabled else {
 //            let alert = Macros.alert(
-//                L10n.Service.Cells.DataCount.caption,
-//                L10n.Service.Alerts.DataCount.Messages.notAvailable
+//                L10n.Core.Service.Cells.DataCount.caption,
+//                L10n.Core.Service.Alerts.DataCount.Messages.notAvailable
 //            )
-//            alert.addCancelAction(L10n.Global.ok)
+//            alert.addCancelAction(L10n.Core.Global.ok)
 //            present(alert, animated: true, completion: nil)
 //            return
 //        }
@@ -409,15 +408,15 @@ class ServiceViewController: UIViewController, TableModelHost {
 //        vpn.requestBytesCount {
 //            let message: String
 //            if let count = $0 {
-//                message = L10n.Service.Alerts.DataCount.Messages.current(Int(count.0), Int(count.1))
+//                message = L10n.Core.Service.Alerts.DataCount.Messages.current(Int(count.0), Int(count.1))
 //            } else {
-//                message = L10n.Service.Alerts.DataCount.Messages.notAvailable
+//                message = L10n.Core.Service.Alerts.DataCount.Messages.notAvailable
 //            }
 //            let alert = Macros.alert(
-//                L10n.Service.Cells.DataCount.caption,
+//                L10n.Core.Service.Cells.DataCount.caption,
 //                message
 //            )
-//            alert.addCancelAction(L10n.Global.ok)
+//            alert.addCancelAction(L10n.Core.Global.ok)
 //            self.present(alert, animated: true, completion: nil)
 //        }
 //    }
@@ -430,15 +429,15 @@ class ServiceViewController: UIViewController, TableModelHost {
         
         guard vpn.status == .disconnected else {
             let alert = Macros.alert(
-                L10n.Service.Cells.MasksPrivateData.caption,
-                L10n.Service.Alerts.MasksPrivateData.Messages.mustReconnect
+                L10n.Core.Service.Cells.MasksPrivateData.caption,
+                L10n.Core.Service.Alerts.MasksPrivateData.Messages.mustReconnect
             )
-            alert.addDestructiveAction(L10n.Service.Alerts.Buttons.reconnect) {
+            alert.addDestructiveAction(L10n.Core.Service.Alerts.Buttons.reconnect) {
                 handler()
                 self.shouldDeleteLogOnDisconnection = true
                 self.vpn.reconnect(completionHandler: nil)
             }
-            alert.addCancelAction(L10n.Global.cancel) {
+            alert.addCancelAction(L10n.Core.Global.cancel) {
                 cell.setOn(!cell.isOn, animated: true)
             }
             present(alert, animated: true, completion: nil)
@@ -464,11 +463,11 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
         
         let alert = Macros.alert(
-            L10n.Service.Alerts.Download.title,
-            L10n.Service.Alerts.Download.message(providerProfile.name.rawValue)
+            L10n.Core.Service.Alerts.Download.title,
+            L10n.Core.Service.Alerts.Download.message(providerProfile.name.rawValue)
         )
-        alert.addCancelAction(L10n.Global.cancel)
-        alert.addDefaultAction(L10n.Global.ok) {
+        alert.addCancelAction(L10n.Core.Global.cancel)
+        alert.addDefaultAction(L10n.Core.Global.ok) {
             self.confirmDownload(URL(string: downloadURL)!)
         }
         present(alert, animated: true, completion: nil)
@@ -483,15 +482,15 @@ class ServiceViewController: UIViewController, TableModelHost {
     private func handleDownloadedProviderResources(url: URL?, error: Error?) {
         guard let url = url else {
             let alert = Macros.alert(
-                L10n.Service.Alerts.Download.title,
-                L10n.Service.Alerts.Download.failed(error?.localizedDescription ?? "")
+                L10n.Core.Service.Alerts.Download.title,
+                L10n.Core.Service.Alerts.Download.failed(error?.localizedDescription ?? "")
             )
-            alert.addCancelAction(L10n.Global.ok)
+            alert.addCancelAction(L10n.Core.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }
 
-        let hud = HUD(label: L10n.Service.Alerts.Download.Hud.extracting)
+        let hud = HUD(label: L10n.Core.Service.Alerts.Download.Hud.extracting)
         hud.show()
         uncheckedProviderProfile.name.importExternalResources(from: url) {
             hud.hide()
@@ -661,7 +660,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         let rows = model.rows(for: section)
         if rows.contains(.providerRefresh), let date = lastInfrastructureUpdate {
-            return L10n.Service.Sections.ProviderInfrastructure.footer(date.timestamp)
+            return L10n.Core.Service.Sections.ProviderInfrastructure.footer(date.timestamp)
         }
         return model.footer(for: section)
     }
@@ -680,7 +679,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .useProfile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.Service.Cells.UseProfile.caption
+            cell.leftText = L10n.App.Service.Cells.UseProfile.caption
             return cell
             
         case .vpnService:
@@ -689,7 +688,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
 
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
-            cell.caption = L10n.Service.Cells.VpnService.caption
+            cell.caption = L10n.App.Service.Cells.VpnService.caption
             cell.isOn = vpn.isEnabled
             return cell
             
@@ -700,7 +699,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil, error: service.vpnLastError)
-            cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
+            cell.leftText = L10n.Core.Service.Cells.ConnectionStatus.caption
             cell.accessoryType = .none
             cell.isTappable = false
             return cell
@@ -708,7 +707,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .reconnect:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.Service.Cells.Reconnect.caption
+            cell.leftText = L10n.App.Service.Cells.Reconnect.caption
             cell.accessoryType = .none
             cell.isTappable = !service.needsCredentials(for: uncheckedProfile) && vpn.isEnabled
             return cell
@@ -717,15 +716,15 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .account:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.Account.caption
+            cell.leftText = L10n.Core.Account.title
             cell.rightText = profile?.username
             return cell
 
         case .endpoint:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.Endpoint.caption
+            cell.leftText = L10n.Core.Endpoint.title
 
-            let V = L10n.Global.Cells.self
+            let V = L10n.Core.Global.Values.self
             if let provider = profile as? ProviderConnectionProfile {
                 cell.rightText = provider.usesProviderEndpoint ? V.manual : V.automatic
             } else {
@@ -735,27 +734,27 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .networkSettings:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.NetworkSettings.caption
+            cell.leftText = L10n.Core.NetworkSettings.title
             return cell
             
         // provider cells
             
         case .providerPool:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.Provider.Pool.caption
+            cell.leftText = L10n.Core.Service.Cells.Provider.Pool.caption
             cell.rightText = uncheckedProviderProfile.pool?.localizedId
             return cell
             
         case .providerPreset:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.Provider.Preset.caption
+            cell.leftText = L10n.Core.Service.Cells.Provider.Preset.caption
             cell.rightText = uncheckedProviderProfile.preset?.name // XXX: localize?
             return cell
             
         case .providerRefresh:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.Service.Cells.Provider.Refresh.caption
+            cell.leftText = L10n.App.Service.Cells.Provider.Refresh.caption
             return cell
             
         // host cells
@@ -763,7 +762,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .hostParameters:
             let parameters = uncheckedHostProfile.parameters
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.Host.Parameters.caption
+            cell.leftText = L10n.App.Service.Cells.Host.Parameters.caption
             if !parameters.sessionConfiguration.fallbackCipher.embedsDigest {
                 cell.rightText = "\(parameters.sessionConfiguration.fallbackCipher.genericName) / \(parameters.sessionConfiguration.fallbackDigest.genericName)"
             } else {
@@ -775,19 +774,19 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .vpnResolvesHostname:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
-            cell.caption = L10n.Service.Cells.VpnResolvesHostname.caption
+            cell.caption = L10n.Core.Service.Cells.VpnResolvesHostname.caption
             cell.isOn = service.preferences.resolvesHostname
             return cell
             
         case .vpnSurvivesSleep:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
-            cell.caption = L10n.Service.Cells.VpnSurvivesSleep.caption
+            cell.caption = L10n.Core.Service.Cells.VpnSurvivesSleep.caption
             cell.isOn = !service.preferences.disconnectsOnSleep
             return cell
             
         case .trustedMobile:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
-            cell.caption = L10n.Service.Cells.TrustedMobile.caption
+            cell.caption = L10n.Core.Service.Cells.TrustedMobile.caption
             cell.isOn = service.preferences.trustsMobileNetwork
             return cell
             
@@ -801,12 +800,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedAddCurrentWiFi:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.Service.Cells.TrustedAddWifi.caption
+            cell.leftText = L10n.App.Service.Cells.TrustedAddWifi.caption
             return cell
 
         case .trustedPolicy:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
-            cell.caption = L10n.Service.Cells.TrustedPolicy.caption
+            cell.caption = L10n.Core.Service.Cells.TrustedPolicy.caption
             cell.isOn = (service.preferences.trustPolicy == .disconnect)
             return cell
             
@@ -814,18 +813,18 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .testConnectivity:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.TestConnectivity.caption
+            cell.leftText = L10n.Core.Service.Cells.TestConnectivity.caption
             return cell
 
         case .dataCount:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.DataCount.caption
+            cell.leftText = L10n.Core.Service.Cells.DataCount.caption
             if let count = currentDataCount, vpn.status == .connected {
                 let down = count.0.dataUnitDescription
                 let up = count.1.dataUnitDescription
                 cell.rightText = "↓\(down) / ↑\(up)"
             } else {
-                cell.rightText = L10n.Service.Cells.DataCount.none
+                cell.rightText = L10n.Core.Service.Cells.DataCount.none
             }
             cell.accessoryType = .none
             cell.isTappable = false
@@ -833,12 +832,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
 
         case .debugLog:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.DebugLog.caption
+            cell.leftText = L10n.Core.Service.Cells.DebugLog.caption
             return cell
             
         case .masksPrivateData:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
-            cell.caption = L10n.Service.Cells.MasksPrivateData.caption
+            cell.caption = L10n.Core.Service.Cells.MasksPrivateData.caption
             cell.isOn = TransientStore.masksPrivateData
             return cell
             
@@ -846,7 +845,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
 
         case .reportIssue:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Service.Cells.ReportIssue.caption
+            cell.leftText = L10n.Core.Service.Cells.ReportIssue.caption
             return cell
         }
     }
@@ -933,10 +932,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
 
             guard trustedNetworks.addCurrentWifi() else {
                 let alert = Macros.alert(
-                    L10n.Service.Sections.Trusted.header,
-                    L10n.Service.Alerts.Trusted.NoNetwork.message
+                    L10n.Core.Service.Sections.Trusted.header,
+                    L10n.Core.Service.Alerts.Trusted.NoNetwork.message
                 )
-                alert.addCancelAction(L10n.Global.ok)
+                alert.addCancelAction(L10n.Core.Global.ok)
                 present(alert, animated: true, completion: nil)
                 return false
             }
@@ -1034,31 +1033,31 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         }
 
         // headers
-        model.setHeader(L10n.Service.Sections.Vpn.header, for: .vpn)
+        model.setHeader(L10n.App.Service.Sections.Vpn.header, for: .vpn)
         if isProvider {
-            model.setHeader(L10n.Service.Sections.Configuration.header, for: .authentication)
+            model.setHeader(L10n.App.Service.Sections.Configuration.header, for: .authentication)
         } else {
-            model.setHeader(L10n.Service.Sections.Configuration.header, for: .configuration)
+            model.setHeader(L10n.App.Service.Sections.Configuration.header, for: .configuration)
         }
         if isActiveProfile {
             if isProvider {
                 model.setHeader("", for: .vpnResolvesHostname)
                 model.setHeader("", for: .vpnSurvivesSleep)
             }
-            model.setHeader(L10n.Service.Sections.Trusted.header, for: .trusted)
-            model.setHeader(L10n.Service.Sections.Diagnostics.header, for: .diagnostics)
-            model.setHeader(L10n.Organizer.Sections.Feedback.header, for: .feedback)
+            model.setHeader(L10n.Core.Service.Sections.Trusted.header, for: .trusted)
+            model.setHeader(L10n.Core.Service.Sections.Diagnostics.header, for: .diagnostics)
+            model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, for: .feedback)
         }
         
         // footers
         if isActiveProfile {
-            model.setFooter(L10n.Service.Sections.Vpn.footer, for: .vpn)
+            model.setFooter(L10n.Core.Service.Sections.Vpn.footer, for: .vpn)
             if isProvider {
-                model.setFooter(L10n.Service.Sections.VpnResolvesHostname.footer, for: .vpnResolvesHostname)
+                model.setFooter(L10n.Core.Service.Sections.VpnResolvesHostname.footer, for: .vpnResolvesHostname)
             }
-            model.setFooter(L10n.Service.Sections.VpnSurvivesSleep.footer, for: .vpnSurvivesSleep)
-            model.setFooter(L10n.Service.Sections.Trusted.footer, for: .trustedPolicy)
-            model.setFooter(L10n.Service.Sections.Diagnostics.footer, for: .diagnostics)
+            model.setFooter(L10n.Core.Service.Sections.VpnSurvivesSleep.footer, for: .vpnSurvivesSleep)
+            model.setFooter(L10n.Core.Service.Sections.Trusted.footer, for: .trustedPolicy)
+            model.setFooter(L10n.Core.Service.Sections.Diagnostics.footer, for: .diagnostics)
         }
         
         // rows

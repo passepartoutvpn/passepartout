@@ -1,0 +1,61 @@
+//
+//  App.strings
+//  Passepartout-iOS
+//
+//  Created by Davide De Rosa on 4/23/19.
+//  Copyright (c) 2019 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"organizer.cells.profile.value.current" = "Используется";
+"organizer.cells.add_provider.caption" = "Добавить нового провайдера";
+"organizer.cells.add_host.caption" = "Добавить новый хост";
+
+"wizards.host.cells.title_input.caption" = "Название";
+"wizards.host.sections.existing.header" = "Существующие профили";
+
+"imported_hosts.title" = "Импортированные хост профили";
+
+"service.welcome.message" = "Добро пожаловать в Passepartout!\n\nИспользуйте организатор для добавления нового профиля.";
+"service.sections.vpn.header" = "VPN";
+"service.sections.status.header" = "Соединение";
+"service.sections.configuration.header" = "Конфигурация";
+
+"service.cells.use_profile.caption" = "Использовать это профиль.";
+"service.cells.vpn_service.caption" = "Включен";
+"service.cells.reconnect.caption" = "Переподключиться";
+"service.cells.provider.refresh.caption" = "Обновить инфраструктуру";
+"service.cells.host.parameters.caption" = "Параметры";
+"service.cells.trusted_add_wifi.caption" = "Добавить текущий Wi-Fi";
+
+"account.sections.credentials.header" = "Данные для входа";
+
+"endpoint.sections.location_addresses.header" = "Адреса";
+"endpoint.sections.location_protocols.header" = "Протоколы";
+
+"provider.preset.cells.tech_details.caption" = "Техническая информация";
+
+"network_settings.cells.add_dns_server.caption" = "Добавить адрес";
+"network_settings.cells.proxy_bypass.caption" = "Обход домена";
+"network_settings.cells.add_proxy_bypass.caption" = "Добавить обходной домен";
+
+"shortcuts.add.title" = "Создать команду";
+
+"shortcuts.edit.title" = "Управлять командами";
+"shortcuts.edit.cells.add_shortcut.caption" = "Создать команду";

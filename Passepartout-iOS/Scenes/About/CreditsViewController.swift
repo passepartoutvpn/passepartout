@@ -44,9 +44,9 @@ class CreditsViewController: UITableViewController, TableModelHost {
         model.add(.notices)
         model.add(.translations)
         
-        model.setHeader(L10n.Credits.Sections.Licenses.header, for: .licenses)
-        model.setHeader(L10n.Credits.Sections.Notices.header, for: .notices)
-        model.setHeader(L10n.Credits.Sections.Translations.header, for: .translations)
+        model.setHeader(L10n.Core.Credits.Sections.Licenses.header, for: .licenses)
+        model.setHeader(L10n.Core.Credits.Sections.Notices.header, for: .notices)
+        model.setHeader(L10n.Core.Credits.Sections.Translations.header, for: .translations)
 
         model.set(.license, count: licenses.count, in: .licenses)
         model.set(.notice, count: notices.count, in: .notices)
@@ -58,7 +58,7 @@ class CreditsViewController: UITableViewController, TableModelHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Credits.title
+        title = L10n.Core.Credits.title
         reloadModel()
     }
     

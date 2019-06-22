@@ -1,0 +1,61 @@
+//
+//  App.strings
+//  Passepartout-iOS
+//
+//  Created by Davide De Rosa on 6/13/18.
+//  Copyright (c) 2019 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"organizer.cells.profile.value.current" = "En utilisation";
+"organizer.cells.add_provider.caption" = "Ajouter un nouveau fournisseur";
+"organizer.cells.add_host.caption" = "Ajouter un nouvel hôte";
+
+"wizards.host.cells.title_input.caption" = "Titre";
+"wizards.host.sections.existing.header" = "Profiles existants";
+
+"imported_hosts.title" = "Hôtes importés";
+
+"service.welcome.message" = "Bienvenue à Passepartout!\n\nUtilisez l'organiseur pour ajouter un nouveau profile.";
+"service.sections.vpn.header" = "VPN";
+"service.sections.status.header" = "Connection";
+"service.sections.configuration.header" = "Configuration";
+
+"service.cells.use_profile.caption" = "Utiliser ce profile";
+"service.cells.vpn_service.caption" = "Activer";
+"service.cells.reconnect.caption" = "Reconnecter";
+"service.cells.provider.refresh.caption" = "Rafraîchir l'infrastructure";
+"service.cells.host.parameters.caption" = "Paramètres";
+"service.cells.trusted_add_wifi.caption" = "Ajouter le présent Wi-Fi";
+
+"account.sections.credentials.header" = "Indetifiants";
+
+"endpoint.sections.location_addresses.header" = "Adresses";
+"endpoint.sections.location_protocols.header" = "Protocols";
+
+"provider.preset.cells.tech_details.caption" = "Détails techniques";
+
+"network_settings.cells.add_dns_server.caption" = "Ajouter une adresse";
+"network_settings.cells.proxy_bypass.caption" = "Outrepasser le domaine";
+"network_settings.cells.add_proxy_bypass.caption" = "Ajouter outrepasser le domaine";
+
+"shortcuts.add.title" = "Ajouter un raccourcis";
+
+"shortcuts.edit.title" = "Gérer les raccourcis";
+"shortcuts.edit.cells.add_shortcut.caption" = "Ajouter un raccourcis";

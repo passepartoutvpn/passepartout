@@ -72,7 +72,7 @@ class ProviderPoolViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Service.Cells.Provider.Pool.caption
+        title = L10n.Core.Service.Cells.Provider.Pool.caption
         tableView.reloadData()
         if let ip = selectedIndexPath {
             tableView.selectRowAsync(at: ip)

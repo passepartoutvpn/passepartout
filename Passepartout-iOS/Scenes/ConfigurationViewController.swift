@@ -59,19 +59,17 @@ class ConfigurationViewController: UIViewController, TableModelHost {
             model.add(.reset)
         }
         model.add(.tls)
-//        model.add(.network)
         model.add(.other)
 
         // headers
-        model.setHeader(L10n.Configuration.Sections.Communication.header, for: .communication)
-        model.setHeader(L10n.Configuration.Sections.Tls.header, for: .tls)
-        model.setHeader(L10n.Configuration.Sections.Compression.header, for: .compression)
-        model.setHeader(L10n.Configuration.Sections.Network.header, for: .network)
-        model.setHeader(L10n.Configuration.Sections.Other.header, for: .other)
+        model.setHeader(L10n.Core.Configuration.Sections.Communication.header, for: .communication)
+        model.setHeader(L10n.Core.Configuration.Sections.Tls.header, for: .tls)
+        model.setHeader(L10n.Core.Configuration.Sections.Compression.header, for: .compression)
+        model.setHeader(L10n.Core.Configuration.Sections.Other.header, for: .other)
 
         // footers
         if isEditable {
-            model.setFooter(L10n.Configuration.Sections.Reset.footer, for: .reset)
+            model.setFooter(L10n.Core.Configuration.Sections.Reset.footer, for: .reset)
         }
         
         // rows
@@ -81,17 +79,6 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         }
         model.set([.client, .tlsWrapping, .eku], in: .tls)
         model.set([.compressionFraming, .compressionAlgorithm], in: .compression)
-        var networkRows: [RowType]
-        if let dnsServers = configuration.dnsServers {
-            networkRows = [RowType](repeating: .dnsServer, count: dnsServers.count)
-        } else {
-            networkRows = []
-        }
-        networkRows.insert(.defaultGateway, at: 0)
-        networkRows.append(.dnsDomain)
-        networkRows.append(.httpProxy)
-        networkRows.append(.httpsProxy)
-        model.set(networkRows, in: .network)
         model.set([.keepAlive, .renegSeconds, .randomEndpoint], in: .other)
 
         return model
@@ -198,16 +185,6 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case compressionAlgorithm
         
-        case defaultGateway
-        
-        case dnsServer
-        
-        case dnsDomain
-        
-        case httpProxy
-        
-        case httpsProxy
-        
         case keepAlive
         
         case renegSeconds
@@ -237,7 +214,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = model.row(at: indexPath)
-        let V = L10n.Configuration.Cells.self
+        let V = L10n.Core.Configuration.Cells.self
 
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         if !isEditable {
@@ -246,38 +223,38 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         cell.isTappable = isEditable
         switch row {
         case .cipher:
-            cell.leftText = L10n.Configuration.Cells.Cipher.caption
+            cell.leftText = V.Cipher.caption
             cell.rightText = configuration.fallbackCipher.description
             
         case .digest:
-            cell.leftText = L10n.Configuration.Cells.Digest.caption
+            cell.leftText = V.Digest.caption
             cell.rightText = configuration.fallbackDigest.description
 
         case .compressionFraming:
-            cell.leftText = L10n.Configuration.Cells.CompressionFraming.caption
+            cell.leftText = V.CompressionFraming.caption
             cell.rightText = configuration.fallbackCompressionFraming.cellDescription
             
         case .compressionAlgorithm:
-            cell.leftText = L10n.Configuration.Cells.CompressionAlgorithm.caption
+            cell.leftText = V.CompressionAlgorithm.caption
             if let compressionAlgorithm = configuration.compressionAlgorithm {
                 cell.rightText = compressionAlgorithm.cellDescription
             } else {
-                cell.rightText = L10n.Global.Cells.disabled
+                cell.rightText = L10n.Core.Global.Values.disabled
             }
             cell.isTappable = (configuration.compressionFraming != .disabled)
 
         case .resetOriginal:
-            cell.leftText = L10n.Configuration.Cells.ResetOriginal.caption
+            cell.leftText = V.ResetOriginal.caption
             cell.applyAction(Theme.current)
             
         case .client:
-            cell.leftText = L10n.Configuration.Cells.Client.caption
-            cell.rightText = (configuration.clientCertificate != nil) ? L10n.Configuration.Cells.Client.Value.enabled : L10n.Configuration.Cells.Client.Value.disabled
+            cell.leftText = V.Client.caption
+            cell.rightText = (configuration.clientCertificate != nil) ? V.Client.Value.enabled : V.Client.Value.disabled
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .tlsWrapping:
-            cell.leftText = L10n.Configuration.Cells.TlsWrapping.caption
+            cell.leftText = V.TlsWrapping.caption
             if let strategy = configuration.tlsWrap?.strategy {
                 switch strategy {
                 case .auth:
@@ -287,77 +264,40 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
                     cell.rightText = V.TlsWrapping.Value.crypt
                 }
             } else {
-                cell.rightText = L10n.Global.Cells.disabled
+                cell.rightText = L10n.Core.Global.Values.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .eku:
             cell.leftText = V.Eku.caption
-            cell.rightText = (configuration.checksEKU ?? false) ? L10n.Global.Cells.enabled : L10n.Global.Cells.disabled
+            cell.rightText = (configuration.checksEKU ?? false) ? L10n.Core.Global.Values.enabled : L10n.Core.Global.Values.disabled
             cell.accessoryType = .none
             cell.isTappable = false
 
-        case .defaultGateway:
-            cell.leftText = L10n.Configuration.Cells.DefaultGateway.caption
-            if let policies = configuration.routingPolicies {
-                cell.rightText = policies.map { $0.rawValue }.joined(separator: " / ")
-            } else {
-                cell.rightText = L10n.Global.Cells.none
-            }
-            cell.accessoryType = .none
-            cell.isTappable = false
-
-        case .dnsServer:
-            guard let dnsServers = configuration.dnsServers else {
-                fatalError("Showing DNS section without any custom server")
-            }
-            cell.leftText = L10n.Configuration.Cells.DnsServer.caption
-            cell.rightText = dnsServers[indexPath.row - 1]
-            cell.accessoryType = .none
-            cell.isTappable = false
-            
-        case .dnsDomain:
-            cell.leftText = L10n.Configuration.Cells.DnsDomain.caption
-            cell.rightText = configuration.searchDomain ?? L10n.Global.Cells.none
-            cell.accessoryType = .none
-            cell.isTappable = false
-
-        case .httpProxy:
-            cell.leftText = L10n.Configuration.Cells.ProxyHttp.caption
-            cell.rightText = configuration.httpProxy?.description ?? L10n.Global.Cells.none
-            cell.accessoryType = .none
-            cell.isTappable = false
-            
-        case .httpsProxy:
-            cell.leftText = L10n.Configuration.Cells.ProxyHttps.caption
-            cell.rightText = configuration.httpsProxy?.description ?? L10n.Global.Cells.none
-            cell.accessoryType = .none
-            cell.isTappable = false
-            
         case .keepAlive:
-            cell.leftText = L10n.Configuration.Cells.KeepAlive.caption
+            cell.leftText = V.KeepAlive.caption
             if let keepAlive = configuration.keepAliveInterval, keepAlive > 0 {
                 cell.rightText = V.KeepAlive.Value.seconds(Int(keepAlive))
             } else {
-                cell.rightText = L10n.Global.Cells.disabled
+                cell.rightText = L10n.Core.Global.Values.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .renegSeconds:
-            cell.leftText = L10n.Configuration.Cells.RenegotiationSeconds.caption
+            cell.leftText = V.RenegotiationSeconds.caption
             if let reneg = configuration.renegotiatesAfter, reneg > 0 {
                 cell.rightText = V.RenegotiationSeconds.Value.after(TimeInterval(reneg).localized)
             } else {
-                cell.rightText = L10n.Global.Cells.disabled
+                cell.rightText = L10n.Core.Global.Values.disabled
             }
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .randomEndpoint:
             cell.leftText = V.RandomEndpoint.caption
-            cell.rightText = (configuration.randomizeEndpoint ?? false) ? L10n.Global.Cells.enabled : L10n.Global.Cells.disabled
+            cell.rightText = (configuration.randomizeEndpoint ?? false) ? L10n.Core.Global.Values.enabled : L10n.Core.Global.Values.disabled
             cell.accessoryType = .none
             cell.isTappable = false
         }
@@ -451,10 +391,10 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
 private extension OpenVPN.CompressionFraming {
     var cellDescription: String {
-        let V = L10n.Configuration.Cells.self
+        let V = L10n.Core.Configuration.Cells.self
         switch self {
         case .disabled:
-            return L10n.Global.Cells.disabled
+            return L10n.Core.Global.Values.disabled
             
         case .compLZO:
             return V.CompressionFraming.Value.lzo
@@ -467,10 +407,10 @@ private extension OpenVPN.CompressionFraming {
 
 private extension OpenVPN.CompressionAlgorithm {
     var cellDescription: String {
-        let V = L10n.Configuration.Cells.self
+        let V = L10n.Core.Configuration.Cells.self
         switch self {
         case .disabled:
-            return L10n.Global.Cells.disabled
+            return L10n.Core.Global.Values.disabled
             
         case .LZO:
             return V.CompressionAlgorithm.Value.lzo

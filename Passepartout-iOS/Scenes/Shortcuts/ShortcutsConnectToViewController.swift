@@ -44,8 +44,8 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     
     let model: TableModel<SectionType, RowType> = {
         let model: TableModel<SectionType, RowType> = TableModel()
-        model.setHeader(L10n.Organizer.Sections.Providers.header, for: .providers)
-        model.setHeader(L10n.Organizer.Sections.Hosts.header, for: .hosts)
+        model.setHeader(L10n.Core.Organizer.Sections.Providers.header, for: .providers)
+        model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, for: .hosts)
         return model
     }()
     
@@ -68,7 +68,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Shortcuts.Add.Cells.Connect.caption
+        title = L10n.Core.Shortcuts.Add.Cells.Connect.caption
         reloadModel()
     }
     

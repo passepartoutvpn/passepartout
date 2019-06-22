@@ -69,7 +69,7 @@ class LabelViewController: UIViewController {
                     content = try String(contentsOf: license.url)
                     couldFetch = true
                 } catch {
-                    content = L10n.Label.License.error
+                    content = L10n.Core.Label.License.error
                     couldFetch = false
                 }
                 DispatchQueue.main.async {
