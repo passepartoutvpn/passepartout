@@ -315,7 +315,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case .cipher:
             let vc = OptionViewController<OpenVPN.Cipher>()
             vc.title = settingCell?.leftText
-            vc.options = [.aes128cbc, .aes192cbc, .aes256cbc, .aes128gcm, .aes192gcm, .aes256gcm]
+            vc.options = OpenVPN.Cipher.available
             vc.selectedOption = configuration.cipher
             vc.descriptionBlock = { $0.description }
             vc.selectionBlock = { [weak self] in
@@ -327,7 +327,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case .digest:
             let vc = OptionViewController<OpenVPN.Digest>()
             vc.title = settingCell?.leftText
-            vc.options = [.sha1, .sha224, .sha256, .sha384, .sha512]
+            vc.options = OpenVPN.Digest.available
             vc.selectedOption = configuration.digest
             vc.descriptionBlock = { $0.description }
             vc.selectionBlock = { [weak self] in
@@ -339,7 +339,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case .compressionFraming:
             let vc = OptionViewController<OpenVPN.CompressionFraming>()
             vc.title = settingCell?.leftText
-            vc.options = [.disabled, .compLZO, .compress]
+            vc.options = OpenVPN.CompressionFraming.available
             vc.selectedOption = configuration.compressionFraming ?? .disabled
             vc.descriptionBlock = { $0.cellDescription }
             vc.selectionBlock = { [weak self] in
@@ -358,7 +358,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             
             let vc = OptionViewController<OpenVPN.CompressionAlgorithm>()
             vc.title = settingCell?.leftText
-            vc.options = [.disabled, .LZO]
+            vc.options = OpenVPN.CompressionAlgorithm.available
             vc.selectedOption = configuration.compressionAlgorithm ?? .disabled
             vc.descriptionBlock = { $0.cellDescription }
             vc.selectionBlock = { [weak self] in

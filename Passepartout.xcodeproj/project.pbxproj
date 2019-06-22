@@ -66,6 +66,7 @@
 		0E45E6E022BD793800F19312 /* App.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E45E6E222BD793800F19312 /* App.strings */; };
 		0E45E6E422BD799700F19312 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E6E322BD799700F19312 /* SwiftGen+Strings.swift */; };
 		0E45E6FA22BD8FC500F19312 /* Core.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Core.strings */; };
+		0E45E71022BE108100F19312 /* OpenVPNOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
 		0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E533B152258E03B00EF94FC /* PoolGroup.swift */; };
@@ -203,6 +204,7 @@
 		0E45E6F722BD898800F19312 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/App.strings; sourceTree = "<group>"; };
 		0E45E6F822BD898A00F19312 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/App.strings; sourceTree = "<group>"; };
 		0E45E6F922BD898B00F19312 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/App.strings; sourceTree = "<group>"; };
+		0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenVPNOptions.swift; sourceTree = "<group>"; };
 		0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworks.swift; sourceTree = "<group>"; };
 		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
 		0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardVPNProvider.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				0ECEB109224FECEA00E9E551 /* DataUnit.swift */,
 				0EC7F20420E24308004EA58E /* DebugLog.swift */,
 				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
+				0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */,
 				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
 				0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */,
 				0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */,
@@ -942,6 +945,7 @@
 				0E3152C2223FA04800F61841 /* MockVPNProvider.swift in Sources */,
 				0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */,
 				0E3152D2223FA05400F61841 /* DebugLog.swift in Sources */,
+				0E45E71022BE108100F19312 /* OpenVPNOptions.swift in Sources */,
 				0E3152C4223FA04800F61841 /* VPN.swift in Sources */,
 				0E3152C6223FA04800F61841 /* VPNProvider.swift in Sources */,
 				0E3152DA223FA05800F61841 /* PlaceholderConnectionProfile.swift in Sources */,

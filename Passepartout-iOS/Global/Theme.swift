@@ -28,15 +28,6 @@ import MessageUI
 import StoreKit
 import PassepartoutCore
 
-extension UIColor {
-    convenience init(rgb: UInt32, alpha: CGFloat) {
-        let r = CGFloat((rgb & 0xff0000) >> 16) / 255.0
-        let g = CGFloat((rgb & 0xff00) >> 8) / 255.0
-        let b = CGFloat(rgb & 0xff) / 255.0
-        self.init(red: r, green: g, blue: b, alpha: alpha)
-    }
-}
-
 struct Theme {
     struct Palette {
         var primaryBackground = UIColor(rgb: 0x515d71, alpha: 1.0)
@@ -172,14 +163,5 @@ extension Infrastructure.Name {
 extension PoolGroup {
     var logo: UIImage? {
         return ImageAsset(name: country.lowercased()).image
-    }
-}
-
-extension SKProduct {
-    var localizedPrice: String? {
-        let fmt = NumberFormatter()
-        fmt.numberStyle = .currency
-        fmt.locale = priceLocale
-        return fmt.string(from: price)
     }
 }
