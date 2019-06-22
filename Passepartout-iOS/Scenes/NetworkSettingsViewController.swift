@@ -66,19 +66,7 @@ class NetworkSettingsViewController: UITableViewController {
     
     private let networkSettings = ProfileNetworkSettings()
 
-    private lazy var clientNetworkSettings: ProfileNetworkSettings? = {
-        guard let hostProfile = profile as? HostConnectionProfile else {
-            return nil
-        }
-        return ProfileNetworkSettings(from: hostProfile.parameters.sessionConfiguration)
-    }()
-    
-    private var choices: [NetworkChoice] {
-        guard let _ = clientNetworkSettings else {
-            return [.server, .manual]
-        }
-        return [.client, .server, .manual]
-    }
+    private lazy var clientNetworkSettings = profile?.clientNetworkSettings
     
     // MARK: TableModelHost
     
@@ -430,7 +418,7 @@ extension NetworkSettingsViewController {
         case .gateway:
             let vc = OptionViewController<NetworkChoice>()
             vc.title = (cell as? SettingTableViewCell)?.leftText
-            vc.options = choices
+            vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
 
             vc.selectedOption = networkChoices.gateway
@@ -443,7 +431,7 @@ extension NetworkSettingsViewController {
         case .dns:
             let vc = OptionViewController<NetworkChoice>()
             vc.title = (cell as? SettingTableViewCell)?.leftText
-            vc.options = choices
+            vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
             
             vc.selectedOption = networkChoices.dns
@@ -456,7 +444,7 @@ extension NetworkSettingsViewController {
         case .proxy:
             let vc = OptionViewController<NetworkChoice>()
             vc.title = (cell as? SettingTableViewCell)?.leftText
-            vc.options = choices
+            vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
             
             vc.selectedOption = networkChoices.proxy
