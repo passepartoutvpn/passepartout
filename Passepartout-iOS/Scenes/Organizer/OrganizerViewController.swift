@@ -431,7 +431,7 @@ extension OrganizerViewController {
                 cell.imageView?.image = nil
             }
             cell.leftText = rowProfile.id
-            cell.rightText = service.isActiveProfile(rowProfile) ? L10n.App.Organizer.Cells.Profile.Value.current : nil
+            cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Core.Organizer.Cells.Profile.Value.current : nil
             return cell
 
         case .addProvider:

@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"organizer.cells.profile.value.current" = "Σε χρήση";
 "organizer.cells.add_provider.caption" = "Προσθήκη νέου παρόχου";
 "organizer.cells.add_host.caption" = "Προσθήκη νέου διακομιστή";
 
@@ -32,7 +31,6 @@
 
 "imported_hosts.title" = "Εισαγόμενοι διακομιστές";
 
-"service.welcome.message" = "Καλώς Ήλθατε στο Passepartout!\n\nΧρησιμοποιήστε τον διοργανωτή για να προσθέσετε ένα νέο προφίλ.";
 "service.sections.vpn.header" = "VPN";
 "service.sections.status.header" = "Σύνδεση";
 "service.sections.configuration.header" = "Ρύθμιση";

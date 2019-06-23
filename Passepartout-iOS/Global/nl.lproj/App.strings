@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"organizer.cells.profile.value.current" = "In gebruik";
 "organizer.cells.add_provider.caption" = "Voeg nieuwe aanbieder toe";
 "organizer.cells.add_host.caption" = "Voeg nieuwe host toe";
 
@@ -32,7 +31,6 @@
 
 "imported_hosts.title" = "Geïmporteerde hosts";
 
-"service.welcome.message" = "Welkom bij Passepartout!\n\nGebruik de organizer om een ​​nieuw profiel toe te voegen.";
 "service.sections.vpn.header" = "VPN";
 "service.sections.status.header" = "Verbinding";
 "service.sections.configuration.header" = "Configuratie";

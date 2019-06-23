@@ -97,7 +97,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         navigationItem.leftItemsSupplementBackButton = true
 
-        labelWelcome.text = L10n.App.Service.Welcome.message
+        labelWelcome.text = L10n.Core.Service.Welcome.message
         labelWelcome.apply(Theme.current)
 
         let nc = NotificationCenter.default

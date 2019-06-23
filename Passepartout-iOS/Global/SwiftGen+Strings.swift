@@ -62,12 +62,6 @@ internal enum L10n {
           /// Add new provider
           internal static let caption = L10n.tr("App", "organizer.cells.add_provider.caption")
         }
-        internal enum Profile {
-          internal enum Value {
-            /// In use
-            internal static let current = L10n.tr("App", "organizer.cells.profile.value.current")
-          }
-        }
       }
     }
     internal enum Provider {
@@ -124,10 +118,6 @@ internal enum L10n {
           /// VPN
           internal static let header = L10n.tr("App", "service.sections.vpn.header")
         }
-      }
-      internal enum Welcome {
-        /// Welcome to Passepartout!\n\nUse the organizer to add a new profile.
-        internal static let message = L10n.tr("App", "service.welcome.message")
       }
     }
     internal enum Shortcuts {
@@ -596,6 +586,12 @@ internal enum L10n {
           /// Support me on Patreon
           internal static let caption = L10n.tr("Core", "organizer.cells.patreon.caption")
         }
+        internal enum Profile {
+          internal enum Value {
+            /// In use
+            internal static let current = L10n.tr("Core", "organizer.cells.profile.value.current")
+          }
+        }
         internal enum SiriShortcuts {
           /// Manage shortcuts
           internal static let caption = L10n.tr("Core", "organizer.cells.siri_shortcuts.caption")
@@ -852,6 +848,10 @@ internal enum L10n {
           /// Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.
           internal static let footer = L10n.tr("Core", "service.sections.vpn_survives_sleep.footer")
         }
+      }
+      internal enum Welcome {
+        /// Welcome to Passepartout!\n\nUse the organizer to add a new profile.
+        internal static let message = L10n.tr("Core", "service.welcome.message")
       }
     }
     internal enum Share {
