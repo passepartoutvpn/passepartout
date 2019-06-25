@@ -11,11 +11,7 @@
  
 Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS.
 
-## Beta
-
-Passepartout betas are available for patrons on TestFlight.
-
-<a href="https://www.patreon.com/keeshux"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"></a>
+<a href="https://www.patreon.com/join/keeshux/checkout?rid=3009474"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"></a>
 
 ## Overview
 
