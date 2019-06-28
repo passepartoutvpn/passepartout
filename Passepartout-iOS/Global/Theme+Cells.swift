@@ -111,7 +111,7 @@ extension SettingTableViewCell {
                 case .encryptionInitialization, .encryptionData:
                     disconnectionReason = L10n.Core.Vpn.Errors.encryption
 
-                case .serverCompression:
+                case .serverCompression, .lzo:
                     disconnectionReason = L10n.Core.Vpn.Errors.compression
                     
                 case .networkChanged:
