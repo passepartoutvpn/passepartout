@@ -53,9 +53,9 @@ class NetworkSettingsViewController: UITableViewController {
     
     private lazy var networkChoices = ProfileNetworkChoices.with(profile: profile)
     
-    private let networkSettings = ProfileNetworkSettings()
-
     private lazy var clientNetworkSettings = profile?.clientNetworkSettings
+    
+    private let networkSettings = ProfileNetworkSettings()
     
     // MARK: TableModelHost
     
@@ -124,23 +124,8 @@ class NetworkSettingsViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        profile?.networkChoices = networkChoices
-        if networkChoices.gateway == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
-            settings.copyGateway(from: networkSettings)
-            profile?.manualNetworkSettings = settings
-        }
-        if networkChoices.dns == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
-            settings.copyDNS(from: networkSettings)
-            profile?.manualNetworkSettings = settings
-        }
-        if networkChoices.proxy == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
-            settings.copyProxy(from: networkSettings)
-            profile?.manualNetworkSettings = settings
-        }
+
+        commitChanges()
     }
     
     // MARK: Actions
@@ -219,6 +204,25 @@ class NetworkSettingsViewController: UITableViewController {
         }
         
         log.debug("Network settings: \(networkSettings)")
+    }
+    
+    private func commitChanges() {
+        profile?.networkChoices = networkChoices
+        if networkChoices.gateway == .manual {
+            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
+            settings.copyGateway(from: networkSettings)
+            profile?.manualNetworkSettings = settings
+        }
+        if networkChoices.dns == .manual {
+            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
+            settings.copyDNS(from: networkSettings)
+            profile?.manualNetworkSettings = settings
+        }
+        if networkChoices.proxy == .manual {
+            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
+            settings.copyProxy(from: networkSettings)
+            profile?.manualNetworkSettings = settings
+        }
     }
 }
 
