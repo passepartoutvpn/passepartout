@@ -48,21 +48,10 @@ private struct Offsets {
     static let proxyBypass = 2
 }
 
-// FIXME: init networkSettings with HOST profile.sessionConfiguration
-// FIXME: omit "Client" for PROVIDER
-
 class NetworkSettingsViewController: UITableViewController {
     var profile: ConnectionProfile?
     
-    private lazy var networkChoices: ProfileNetworkChoices = {
-        if let choices = profile?.networkChoices {
-            return choices
-        }
-        if let _ = profile as? ProviderConnectionProfile {
-            return ProfileNetworkChoices(choice: .server)
-        }
-        return ProfileNetworkChoices(choice: .client)
-    }()
+    private lazy var networkChoices = ProfileNetworkChoices.with(profile: profile)
     
     private let networkSettings = ProfileNetworkSettings()
 
