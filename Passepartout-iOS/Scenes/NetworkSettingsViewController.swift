@@ -207,22 +207,18 @@ class NetworkSettingsViewController: UITableViewController {
     }
     
     private func commitChanges() {
+        let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
         profile?.networkChoices = networkChoices
         if networkChoices.gateway == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
             settings.copyGateway(from: networkSettings)
-            profile?.manualNetworkSettings = settings
         }
         if networkChoices.dns == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
             settings.copyDNS(from: networkSettings)
-            profile?.manualNetworkSettings = settings
         }
         if networkChoices.proxy == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
             settings.copyProxy(from: networkSettings)
-            profile?.manualNetworkSettings = settings
         }
+        profile?.manualNetworkSettings = settings
     }
 }
 
