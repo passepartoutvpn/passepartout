@@ -37,7 +37,6 @@
 
 "service.cells.use_profile.caption" = "Использовать это профиль.";
 "service.cells.vpn_service.caption" = "Включен";
-"service.cells.reconnect.caption" = "Переподключиться";
 "service.cells.provider.refresh.caption" = "Обновить инфраструктуру";
 "service.cells.host.parameters.caption" = "Параметры";
 "service.cells.trusted_add_wifi.caption" = "Добавить текущий Wi-Fi";

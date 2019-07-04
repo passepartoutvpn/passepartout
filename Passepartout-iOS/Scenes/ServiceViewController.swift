@@ -707,7 +707,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .reconnect:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
-            cell.leftText = L10n.App.Service.Cells.Reconnect.caption
+            cell.leftText = L10n.Core.Service.Cells.Reconnect.caption
             cell.accessoryType = .none
             cell.isTappable = !service.needsCredentials(for: uncheckedProfile) && vpn.isEnabled
             return cell

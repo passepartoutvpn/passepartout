@@ -37,7 +37,6 @@
 
 "service.cells.use_profile.caption" = "Usar esse perfil";
 "service.cells.vpn_service.caption" = "Ativado";
-"service.cells.reconnect.caption" = "Reconectar";
 "service.cells.provider.refresh.caption" = "Atualizar infraestrutura";
 "service.cells.host.parameters.caption" = "Parâmetros";
 "service.cells.trusted_add_wifi.caption" = "Adicionar Wi-Fi atual";

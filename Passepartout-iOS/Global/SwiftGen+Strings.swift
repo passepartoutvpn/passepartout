@@ -88,10 +88,6 @@ internal enum L10n {
             internal static let caption = L10n.tr("App", "service.cells.provider.refresh.caption")
           }
         }
-        internal enum Reconnect {
-          /// Reconnect
-          internal static let caption = L10n.tr("App", "service.cells.reconnect.caption")
-        }
         internal enum TrustedAddWifi {
           /// Add current Wi-Fi
           internal static let caption = L10n.tr("App", "service.cells.trusted_add_wifi.caption")
@@ -791,6 +787,10 @@ internal enum L10n {
             /// Preset
             internal static let caption = L10n.tr("Core", "service.cells.provider.preset.caption")
           }
+        }
+        internal enum Reconnect {
+          /// Reconnect
+          internal static let caption = L10n.tr("Core", "service.cells.reconnect.caption")
         }
         internal enum ReportIssue {
           /// Report connectivity issue

@@ -37,7 +37,6 @@
 
 "service.cells.use_profile.caption" = "Använd den här profilen";
 "service.cells.vpn_service.caption" = "Aktiverad";
-"service.cells.reconnect.caption" = "Återanslut";
 "service.cells.provider.refresh.caption" = "Uppdatera infrastruktur";
 "service.cells.host.parameters.caption" = "Parametrar";
 "service.cells.trusted_add_wifi.caption" = "Lägg till nuvarande Wi-Fi";
