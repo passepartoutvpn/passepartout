@@ -183,16 +183,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
     
     private func addNewProvider() {
-        var names = Set(InfrastructureFactory.shared.allNames)
-        var createdNames: [Infrastructure.Name] = []
-        providers.forEach {
-            guard let name = Infrastructure.Name(rawValue: $0) else {
-                return
-            }
-            createdNames.append(name)
-        }
-        names.formSymmetricDifference(createdNames)
-
+        let names = service.availableProviderNames()
         guard !names.isEmpty else {
             let alert = Macros.alert(
                 L10n.Core.Organizer.Sections.Providers.header,
@@ -202,8 +193,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
             present(alert, animated: true, completion: nil)
             return
         }
-
-        availableProviderNames = names.sorted()
+        availableProviderNames = names
         perform(segue: StoryboardSegue.Organizer.addProviderSegueIdentifier)
     }
 

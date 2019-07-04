@@ -48,25 +48,14 @@ private struct Offsets {
     static let proxyBypass = 2
 }
 
-// FIXME: init networkSettings with HOST profile.sessionConfiguration
-// FIXME: omit "Client" for PROVIDER
-
 class NetworkSettingsViewController: UITableViewController {
     var profile: ConnectionProfile?
     
-    private lazy var networkChoices: ProfileNetworkChoices = {
-        if let choices = profile?.networkChoices {
-            return choices
-        }
-        if let _ = profile as? ProviderConnectionProfile {
-            return ProfileNetworkChoices(choice: .server)
-        }
-        return ProfileNetworkChoices(choice: .client)
-    }()
+    private lazy var networkChoices = ProfileNetworkChoices.with(profile: profile)
+    
+    private lazy var clientNetworkSettings = profile?.clientNetworkSettings
     
     private let networkSettings = ProfileNetworkSettings()
-
-    private lazy var clientNetworkSettings = profile?.clientNetworkSettings
     
     // MARK: TableModelHost
     
@@ -135,23 +124,8 @@ class NetworkSettingsViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        profile?.networkChoices = networkChoices
-        if networkChoices.gateway == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
-            settings.copyGateway(from: networkSettings)
-            profile?.manualNetworkSettings = settings
-        }
-        if networkChoices.dns == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
-            settings.copyDNS(from: networkSettings)
-            profile?.manualNetworkSettings = settings
-        }
-        if networkChoices.proxy == .manual {
-            let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
-            settings.copyProxy(from: networkSettings)
-            profile?.manualNetworkSettings = settings
-        }
+
+        commitChanges()
     }
     
     // MARK: Actions
@@ -230,6 +204,21 @@ class NetworkSettingsViewController: UITableViewController {
         }
         
         log.debug("Network settings: \(networkSettings)")
+    }
+    
+    private func commitChanges() {
+        let settings = profile?.manualNetworkSettings ?? ProfileNetworkSettings()
+        profile?.networkChoices = networkChoices
+        if networkChoices.gateway == .manual {
+            settings.copyGateway(from: networkSettings)
+        }
+        if networkChoices.dns == .manual {
+            settings.copyDNS(from: networkSettings)
+        }
+        if networkChoices.proxy == .manual {
+            settings.copyProxy(from: networkSettings)
+        }
+        profile?.manualNetworkSettings = settings
     }
 }
 
