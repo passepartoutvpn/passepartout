@@ -223,17 +223,27 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
     
     private func offerTranslation() {
+        let V = AppConstants.Translations.Email.self
+        let recipient = V.recipient
+        let subject = V.subject
+        let body = V.body(V.template)
+        
         guard MFMailComposeViewController.canSendMail() else {
-            let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.Global.emailNotConfigured)
-            alert.addCancelAction(L10n.Core.Global.ok)
-            present(alert, animated: true, completion: nil)
+            let app = UIApplication.shared
+            guard let url = Utils.mailto(to: recipient, subject: subject, body: body), app.canOpenURL(url) else {
+                let alert = Macros.alert(L10n.Core.Translations.title, L10n.Core.Global.emailNotConfigured)
+                alert.addCancelAction(L10n.Core.Global.ok)
+                present(alert, animated: true, completion: nil)
+                return
+            }
+            app.open(url, options: [:], completionHandler: nil)
             return
         }
 
         let vc = MFMailComposeViewController()
-        vc.setToRecipients([AppConstants.Translations.Email.recipient])
-        vc.setSubject(AppConstants.Translations.Email.subject)
-        vc.setMessageBody(AppConstants.Translations.Email.body(AppConstants.Translations.Email.template), isHTML: false)
+        vc.setToRecipients([recipient])
+        vc.setSubject(subject)
+        vc.setMessageBody(body, isHTML: false)
         vc.mailComposeDelegate = self
         vc.apply(Theme.current)
         present(vc, animated: true, completion: nil)

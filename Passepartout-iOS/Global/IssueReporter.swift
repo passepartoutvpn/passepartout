@@ -57,9 +57,16 @@ class IssueReporter: NSObject {
 
     func present(in viewController: UIViewController, withAttachments attachments: Attachments) {
         guard MFMailComposeViewController.canSendMail() else {
-            let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.Global.emailNotConfigured)
-            alert.addCancelAction(L10n.Core.Global.ok)
-            viewController.present(alert, animated: true, completion: nil)
+            let app = UIApplication.shared
+            let V = AppConstants.IssueReporter.Email.self
+            let body = V.body(V.template, DebugLog(raw: "--").decoratedString())
+            guard let url = Utils.mailto(to: V.recipient, subject: V.subject, body: body), app.canOpenURL(url) else {
+                let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.Global.emailNotConfigured)
+                alert.addCancelAction(L10n.Core.Global.ok)
+                viewController.present(alert, animated: true, completion: nil)
+                return
+            }
+            app.open(url, options: [:], completionHandler: nil)
             return
         }
         
