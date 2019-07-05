@@ -1,8 +1,10 @@
 ### Added
 
-- Dutch translations (Norbert de Vreede).
-- Greek translations (Konstantinos Koukoulakis).
-- French translations (Julien Laniel).
-- Spanish translations (Davide De Rosa, Elena Vivó).
-- Swedish translations (Henry Gross-Hellsen).
+- "Custom DNS" preset for Mullvad.
+
+### Fixed
+
+- Refreshed infrastructures are not retained.
+- Portuguese bound to Brazil region.
+- German spelling of "Default gateway".
 
