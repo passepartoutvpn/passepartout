@@ -88,7 +88,7 @@ class ImportedHostsViewController: UITableViewController {
             }
             self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier, sender: cell)
         }
-        guard let parsingResult = OpenVPN.ConfigurationParser.Result.from(url, withErrorAlertIn: self, passphrase: passphrase, passphraseBlock: passphraseBlock, passphraseCancelBlock: nil) else {
+        guard let parsingResult = OpenVPN.ConfigurationParser.Result.from(url, withErrorAlertIn: self, passphrase: passphrase, removeOnError: false, passphraseBlock: passphraseBlock, passphraseCancelBlock: nil) else {
             deselectSelectedRow()
             return false
         }

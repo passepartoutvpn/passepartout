@@ -106,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let passphraseCancelBlock = {
             _ = try? FileManager.default.removeItem(at: url)
         }
-        guard let parsingResult = OpenVPN.ConfigurationParser.Result.from(url, withErrorAlertIn: target, passphrase: passphrase, passphraseBlock: passphraseBlock, passphraseCancelBlock: passphraseCancelBlock) else {
+        guard let parsingResult = OpenVPN.ConfigurationParser.Result.from(url, withErrorAlertIn: target, passphrase: passphrase, removeOnError: true, passphraseBlock: passphraseBlock, passphraseCancelBlock: passphraseCancelBlock) else {
             return true
         }
         if let warning = parsingResult.warning {

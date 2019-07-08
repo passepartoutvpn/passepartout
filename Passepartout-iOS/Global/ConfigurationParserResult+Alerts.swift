@@ -32,7 +32,7 @@ import PassepartoutCore
 private let log = SwiftyBeaver.self
 
 extension OpenVPN.ConfigurationParser.Result {
-    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphrase: String?,
+    static func from(_ url: URL, withErrorAlertIn viewController: UIViewController, passphrase: String?, removeOnError: Bool,
                      passphraseBlock: @escaping (String) -> Void, passphraseCancelBlock: (() -> Void)?) -> OpenVPN.ConfigurationParser.Result? {
 
         let result: OpenVPN.ConfigurationParser.Result
@@ -62,13 +62,17 @@ extension OpenVPN.ConfigurationParser.Result {
             default:
                 let message = localizedMessage(forError: e)
                 alertImportError(url: url, in: viewController, withMessage: message)
-                try? fm.removeItem(at: url)
+                if removeOnError {
+                    try? fm.removeItem(at: url)
+                }
             }
             return nil
         } catch let e {
             let message = localizedMessage(forError: e)
             alertImportError(url: url, in: viewController, withMessage: message)
-            try? fm.removeItem(at: url)
+            if removeOnError {
+                try? fm.removeItem(at: url)
+            }
             return nil
         }
         return result
