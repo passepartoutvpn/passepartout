@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- "Custom DNS" preset for Mullvad. [mullvad#1](https://github.com/passepartoutvpn/api-source-mullvad/issues/1)
+- "Custom DNS" preset for Mullvad. [api-source-mullvad#1](https://github.com/passepartoutvpn/api-source-mullvad/issues/1)
 
 ### Fixed
 
+- VPN staying active while it's not. [tunnelkit#106](https://github.com/passepartoutvpn/tunnelkit/issues/106)
+- Disconnection on renegotiation. [tunnelkit#105](https://github.com/passepartoutvpn/tunnelkit/issues/105)
 - Support third party apps when sending e-mails.
-- Refreshed infrastructures are not retained. [core#1](https://github.com/passepartoutvpn/passepartout-core-apple/issues/1)
+- Refreshed infrastructures are not retained. [passepartout-core-apple#1](https://github.com/passepartoutvpn/passepartout-core-apple/issues/1)
 - Portuguese bound to Brazil region.
 - German spelling of "Default gateway".
 
