@@ -4,6 +4,9 @@
 
 ### Fixed
 
+- VPN staying active while it's not.
+- Disconnection on renegotiation.
+- Support third party apps when sending e-mails.
 - Refreshed infrastructures are not retained.
 - Portuguese bound to Brazil region.
 - German spelling of "Default gateway".
