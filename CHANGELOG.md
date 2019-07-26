@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.8.0 Beta 1968 (2019-07-11)
+## Unreleased
 
 ### Added
 
@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refreshed infrastructures are not retained. [passepartout-core-apple#1](https://github.com/passepartoutvpn/passepartout-core-apple/issues/1)
 - Portuguese bound to Brazil region.
 - German spelling of "Default gateway".
+- Some French wording (Joel Gallant).
+- Erroneous placeholders in Network Settings (Joel Gallant).
 
 ## 1.7.0 (2019-06-02)
 
