@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - "Custom DNS" preset for Mullvad. [api-source-mullvad#1](https://github.com/passepartoutvpn/api-source-mullvad/issues/1)
 
+### Changed
+
+- Disconnect on "No buffer space available" rather than leaving a stale connection (improve later). [tunnelkit#104](https://github.com/passepartoutvpn/tunnelkit/issues/104)
+
 ### Fixed
 
 - VPN staying active while it's not. [tunnelkit#106](https://github.com/passepartoutvpn/tunnelkit/issues/106)
