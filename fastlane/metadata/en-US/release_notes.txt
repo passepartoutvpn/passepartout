@@ -1,6 +1,7 @@
 ### Added
 
 - "Custom DNS" preset for Mullvad.
+- Change app language from Settings in iOS 13.
 
 ### Changed
 
