@@ -19,6 +19,7 @@
 		0E24273A225950450064A1A3 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E24273C225950450064A1A3 /* About.storyboard */; };
 		0E242740225951B00064A1A3 /* InApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E24273F225951B00064A1A3 /* InApp.swift */; };
 		0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E242741225956AC0064A1A3 /* DonationViewController.swift */; };
+		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
 		0E3152AD223F9EF500F61841 /* PassepartoutCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* PassepartoutCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E3152B0223F9EF500F61841 /* PassepartoutCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; };
@@ -171,6 +172,7 @@
 		0E24273B225950450064A1A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		0E24273F225951B00064A1A3 /* InApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InApp.swift; sourceTree = "<group>"; };
 		0E242741225956AC0064A1A3 /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
+		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
 		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
 		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				0E9CD788225746B300D033B4 /* Flags.xcassets */,
 				0E9CD7862257462800D033B4 /* Providers.xcassets */,
 				0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */,
+				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
 				0E57F64720C83FC7008323CF /* Info.plist */,
 			);
 			path = "Passepartout-iOS";
@@ -822,6 +825,7 @@
 				0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */,
 				0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */,
 				0E57F64120C83FC5008323CF /* Main.storyboard in Resources */,
+				0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */,
 				0E45E6E022BD793800F19312 /* App.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

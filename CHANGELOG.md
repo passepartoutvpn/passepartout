@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - "Custom DNS" preset for Mullvad. [api-source-mullvad#1](https://github.com/passepartoutvpn/api-source-mullvad/issues/1)
+- Change app language from Settings in iOS 13. [#90](https://github.com/passepartoutvpn/passepartout-ios/issues/90)
 
 ### Changed
 
