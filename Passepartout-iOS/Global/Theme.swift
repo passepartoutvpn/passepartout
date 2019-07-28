@@ -34,11 +34,21 @@ struct Theme {
         
         var accent1 = UIColor(rgb: 0xd69c68, alpha: 1.0)
 
-        var primaryText: UIColor = .darkText
+        var primaryText: UIColor = {
+            guard #available(iOS 13, *) else {
+                return .darkText
+            }
+            return .label
+        }()
         
         var primaryLightText: UIColor = .white
         
-        var secondaryText: UIColor = .gray
+        var secondaryText: UIColor = {
+            guard #available(iOS 13, *) else {
+                return .gray
+            }
+            return .secondaryLabel
+        }()
 
         var on: UIColor {
             return accent1
