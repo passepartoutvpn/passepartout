@@ -143,6 +143,7 @@ This product includes software developed by the OpenSSL Project for use in the O
 
 ## Translations
 
+- Chinese (Simplified): OnlyThen - [@OnlyThen](https://github.com/OnlyThen)
 - Dutch: Norbert de Vreede - [@paxpacis](https://github.com/paxpacis)
 - English: Davide De Rosa (author)
 - French: Julien Laniel - [@linkjul](https://github.com/linkjul)
