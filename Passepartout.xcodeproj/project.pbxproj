@@ -175,6 +175,9 @@
 		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
 		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
+		0E2C54C3230056C800F59453 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Intents.strings"; sourceTree = "<group>"; };
+		0E2C54C4230056EF00F59453 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Core.strings"; sourceTree = "<group>"; };
+		0E2C54C52300570200F59453 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/App.strings"; sourceTree = "<group>"; };
 		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
 		0E31529B223F9EF400F61841 /* PassepartoutCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PassepartoutCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E31529D223F9EF500F61841 /* PassepartoutCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassepartoutCore.h; sourceTree = "<group>"; };
@@ -790,6 +793,7 @@
 				fr,
 				es,
 				pt,
+				"zh-Hans",
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
 			productRefGroup = 0E57F63920C83FC5008323CF /* Products */;
@@ -1093,6 +1097,7 @@
 				0E3CAFB5229AAE760008E5C8 /* nl */,
 				0E776575229CF65D0023FA76 /* es */,
 				0E6ACB7822B1A5BB001B3C99 /* pt */,
+				0E2C54C4230056EF00F59453 /* zh-Hans */,
 			);
 			name = Core.strings;
 			sourceTree = "<group>";
@@ -1111,6 +1116,7 @@
 				0E77663F229D0DA70023FA76 /* fr */,
 				0E776640229D0DA80023FA76 /* es */,
 				0E6ACB7722B1A57C001B3C99 /* pt */,
+				0E2C54C3230056C800F59453 /* zh-Hans */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
@@ -1128,6 +1134,7 @@
 				0E45E6F722BD898800F19312 /* fr */,
 				0E45E6F822BD898A00F19312 /* es */,
 				0E45E6F922BD898B00F19312 /* pt */,
+				0E2C54C52300570200F59453 /* zh-Hans */,
 			);
 			name = App.strings;
 			sourceTree = "<group>";
