@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //            splitViewController.preferredDisplayMode = .primaryOverlay
         }
         
-        InAppHelper.shared.requestProducts(completionHandler: nil)
+        InAppHelper.shared.requestProducts(withIdentifiers: InApp.allIdentifiers(), completionHandler: nil)
 
         return true
     }

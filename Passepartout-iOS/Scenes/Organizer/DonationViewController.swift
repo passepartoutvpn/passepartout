@@ -86,7 +86,7 @@ class DonationViewController: UITableViewController, TableModelHost {
 
         let inApp = InAppHelper.shared
         if inApp.products.isEmpty {
-            inApp.requestProducts {
+            inApp.requestProducts(withIdentifiers: InApp.allIdentifiers()) {
                 self.isLoading = false
                 self.setProducts($0)
             }

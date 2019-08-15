@@ -92,6 +92,7 @@
 		0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB109224FECEA00E9E551 /* DataUnit.swift */; };
 		0ECEE44E20E1122200A6BB43 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44D20E1122200A6BB43 /* TableModel.swift */; };
 		0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */; };
+		0ECF12D7230612F5008E4924 /* InAppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF12D6230612F5008E4924 /* InAppHelper.swift */; };
 		0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2820CF2A340027975F /* AccountViewController.swift */; };
 		0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */; };
 		0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
@@ -270,6 +271,7 @@
 		0ECEB109224FECEA00E9E551 /* DataUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUnit.swift; sourceTree = "<group>"; };
 		0ECEE44D20E1122200A6BB43 /* TableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
 		0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Cells.swift"; sourceTree = "<group>"; };
+		0ECF12D6230612F5008E4924 /* InAppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InAppHelper.swift; path = Submodules/Core/Passepartout/Sources/InAppHelper.swift; sourceTree = SOURCE_ROOT; };
 		0ED31C0F20CF09A30027975F /* Pool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pool.swift; sourceTree = "<group>"; };
 		0ED31C1120CF0ABA0027975F /* Infrastructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Infrastructure.swift; sourceTree = "<group>"; };
 		0ED31C2820CF2A340027975F /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 				0E39BCF2214DA9310035E9DE /* AppConstants.swift */,
 				0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */,
 				0EDE8DED20C93E4C004C739C /* GroupConstants.swift */,
+				0ECF12D6230612F5008E4924 /* InAppHelper.swift */,
 				0E78179E21BE852200950C58 /* Reviewer.swift */,
 				0E4FD7ED20D539A0002221FF /* Utils.swift */,
 			);
@@ -972,6 +975,7 @@
 				0E3152CC223FA04D00F61841 /* WebServices.swift in Sources */,
 				0E3152BB223FA03D00F61841 /* AppConstants.swift in Sources */,
 				0E3152CA223FA04D00F61841 /* InfrastructurePreset.swift in Sources */,
+				0ECF12D7230612F5008E4924 /* InAppHelper.swift in Sources */,
 				0E3152CE223FA05400F61841 /* ConnectionService.swift in Sources */,
 				0ED993B1223FF8C700B0F9C9 /* IntentDispatcher.swift in Sources */,
 				0E3152BE223FA03D00F61841 /* Reviewer.swift in Sources */,
