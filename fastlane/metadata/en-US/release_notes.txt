@@ -1,20 +1,4 @@
 ### Added
 
-- "Custom DNS" preset for Mullvad.
-- Change app language from Settings in iOS 13.
-
-### Changed
-
-- Disconnect on "No buffer space available" rather than leaving a stale connection (improve later).
-
-### Fixed
-
-- VPN staying active while it's not.
-- Disconnection on renegotiation.
-- Support third party apps when sending e-mails.
-- Refreshed infrastructures are not retained.
-- Portuguese bound to Brazil region.
-- German spelling of "Default gateway".
-- Some French wording (Joel Gallant).
-- Erroneous placeholders in Network Settings (Joel Gallant).
+- Chinese (Simplified) translations (OnlyThen).
 
