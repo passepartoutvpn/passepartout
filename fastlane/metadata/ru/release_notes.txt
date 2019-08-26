@@ -1,0 +1,4 @@
+### Added
+
+- Chinese (Simplified) translations (OnlyThen).
+
