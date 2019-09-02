@@ -16,6 +16,10 @@
 				<string>public.content</string>
 				<string>public.data</string>
 			</array>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
