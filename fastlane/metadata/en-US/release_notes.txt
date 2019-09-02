@@ -1,4 +1,6 @@
-### Added
+### Fixed
 
-- Chinese (Simplified) translations (OnlyThen).
+- Transparent navigation bar in iPadOS 13.
+- Unable to open .ovpn files in iOS 13.
+- Premature disconnection due to .staleSession error.
 
