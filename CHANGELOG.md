@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Chinese (Simplified) translations (OnlyThen). [#95](https://github.com/passepartoutvpn/passepartout-ios/pull/95)
+- Support for iOS 13 Dark Mode. [#93](https://github.com/passepartoutvpn/passepartout-ios/issues/93)
 
 ### Fixed
 
