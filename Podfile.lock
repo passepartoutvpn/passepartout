@@ -1,8 +1,8 @@
 PODS:
   - MBProgressHUD (1.1.0)
   - OpenSSL-Apple (1.1.0j.2)
-  - SSZipArchive (2.2.1)
-  - SwiftyBeaver (1.7.0)
+  - SSZipArchive (2.2.2)
+  - SwiftyBeaver (1.7.1)
   - TunnelKit/AppExtension (2.0.3):
     - SwiftyBeaver
     - TunnelKit/Core
@@ -40,8 +40,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   OpenSSL-Apple: e88e1eb314acb4a05e2348069790c4aa49f6d319
-  SSZipArchive: 8e859da2520142e09166bc9161967db296e9d02f
-  SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
+  SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
+  SwiftyBeaver: da5e573ad583586c18236324c36900990afe1733
   TunnelKit: c5068cf6c4296e96df3d359b88528810ed0824cb
 
 PODFILE CHECKSUM: ad025dbdd790911a4051d98c9aef8c96fae01091
