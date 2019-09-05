@@ -29,24 +29,6 @@ import MessageUI
 import PassepartoutCore
 
 class IssueReporter: NSObject {
-    struct Attachments {
-        let debugLog: Bool
-        
-        let configurationURL: URL?
-        
-        var description: String?
-        
-        init(debugLog: Bool, configurationURL: URL?) {
-            self.debugLog = debugLog
-            self.configurationURL = configurationURL
-        }
-
-        init(debugLog: Bool, profile: ConnectionProfile) {
-            let url = TransientStore.shared.service.configurationURL(for: profile)
-            self.init(debugLog: debugLog, configurationURL: url)
-        }
-    }
-    
     static let shared = IssueReporter()
     
     private weak var viewController: UIViewController?
@@ -55,7 +37,7 @@ class IssueReporter: NSObject {
         super.init()
     }
 
-    func present(in viewController: UIViewController, withAttachments attachments: Attachments) {
+    func present(in viewController: UIViewController, withIssue issue: Issue) {
         guard MFMailComposeViewController.canSendMail() else {
             let app = UIApplication.shared
             let V = AppConstants.IssueReporter.Email.self
@@ -72,17 +54,17 @@ class IssueReporter: NSObject {
         
         self.viewController = viewController
         
-        if attachments.debugLog {
+        if issue.debugLog {
             let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.IssueReporter.message)
             alert.addDefaultAction(L10n.Core.IssueReporter.Buttons.accept) {
                 VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
-                    self.composeEmail(withDebugLog: $0, configurationURL: attachments.configurationURL, description: attachments.description)
+                    self.composeEmail(withDebugLog: $0, configurationURL: issue.configurationURL, description: issue.description)
                 }
             }
             alert.addCancelAction(L10n.Core.Global.cancel)
             viewController.present(alert, animated: true, completion: nil)
         } else {
-            composeEmail(withDebugLog: nil, configurationURL: attachments.configurationURL, description: attachments.description)
+            composeEmail(withDebugLog: nil, configurationURL: issue.configurationURL, description: issue.description)
         }
     }
     

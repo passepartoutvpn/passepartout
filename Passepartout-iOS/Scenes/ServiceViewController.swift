@@ -450,8 +450,8 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
 
     private func reportConnectivityIssue() {
-        let attach = IssueReporter.Attachments(debugLog: true, profile: uncheckedProfile)
-        IssueReporter.shared.present(in: self, withAttachments: attach)
+        let issue = Issue(debugLog: true, profile: uncheckedProfile)
+        IssueReporter.shared.present(in: self, withIssue: issue)
     }
     
     private func requireDownload() {

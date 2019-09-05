@@ -106,6 +106,7 @@
 		0EDE8DC820C86910004C739C /* Passepartout-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */; };
 		0EEB53B2225D525B00746300 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEB53B1225D525B00746300 /* Downloader.swift */; };
+		0EEF23412321AC55000AEBE3 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF23402321AC55000AEBE3 /* Issue.swift */; };
 		0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */; };
 		0EF5CF252141CE58004FF1BD /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF5CF242141CE58004FF1BD /* HUD.swift */; };
 		0EF5CF292141F31F004FF1BD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
@@ -297,6 +298,7 @@
 		0EDE8DED20C93E4C004C739C /* GroupConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupConstants.swift; sourceTree = "<group>"; };
 		0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		0EEB53B1225D525B00746300 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		0EEF23402321AC55000AEBE3 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Issue.swift; path = Submodules/Core/Passepartout/Sources/Issue.swift; sourceTree = SOURCE_ROOT; };
 		0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
 		0EF5CF242141CE58004FF1BD /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNetworkSettings.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */,
 				0EDE8DED20C93E4C004C739C /* GroupConstants.swift */,
 				0ECF12D6230612F5008E4924 /* InAppHelper.swift */,
+				0EEF23402321AC55000AEBE3 /* Issue.swift */,
 				0E78179E21BE852200950C58 /* Reviewer.swift */,
 				0E4FD7ED20D539A0002221FF /* Utils.swift */,
 			);
@@ -979,6 +982,7 @@
 				0E3152CE223FA05400F61841 /* ConnectionService.swift in Sources */,
 				0ED993B1223FF8C700B0F9C9 /* IntentDispatcher.swift in Sources */,
 				0E3152BE223FA03D00F61841 /* Reviewer.swift in Sources */,
+				0EEF23412321AC55000AEBE3 /* Issue.swift in Sources */,
 				0E3152C3223FA04800F61841 /* StandardVPNProvider.swift in Sources */,
 				0E3152D1223FA05400F61841 /* Credentials.swift in Sources */,
 				0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */,
