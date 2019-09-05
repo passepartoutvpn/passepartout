@@ -809,7 +809,7 @@ internal enum L10n {
           internal static let caption = L10n.tr("Core", "service.cells.trusted_policy.caption")
         }
         internal enum VpnResolvesHostname {
-          /// Resolve server hostname
+          /// Resolve provider hostname
           internal static let caption = L10n.tr("Core", "service.cells.vpn_resolves_hostname.caption")
         }
         internal enum VpnSurvivesSleep {
