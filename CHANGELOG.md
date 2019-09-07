@@ -5,19 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.8.1 Beta 2002 (2019-09-03)
+## Unreleased
+
+### Added
+
+- Chinese (Simplified) translations (OnlyThen). [#95](https://github.com/passepartoutvpn/passepartout-ios/pull/95)
 
 ### Fixed
 
 - Transparent navigation bar in iPadOS 13.
 - Unable to open .ovpn files in iOS 13.
 - Premature disconnection due to .staleSession error. [tunnelkit#120](https://github.com/passepartoutvpn/tunnelkit/issues/120)
-
-## 1.8.1 Beta 1993 (2019-08-18)
-
-### Added
-
-- Chinese (Simplified) translations (OnlyThen). [#95](https://github.com/passepartoutvpn/passepartout-ios/pull/95)
 
 ## 1.8.0 (2019-08-01)
 

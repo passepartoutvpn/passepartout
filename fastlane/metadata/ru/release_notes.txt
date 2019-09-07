@@ -2,3 +2,7 @@
 
 - Chinese (Simplified) translations (OnlyThen).
 
+### Fixed
+
+- Premature disconnection due to .staleSession error.
+
