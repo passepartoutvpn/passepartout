@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Transparent navigation bar in iPadOS 13.
-- Unable to open .ovpn files in iOS 13.
+- Unable to open .ovpn files in iOS 13. [#99](https://github.com/passepartoutvpn/passepartout-ios/issues/99)
 - Premature disconnection due to .staleSession error. [tunnelkit#120](https://github.com/passepartoutvpn/tunnelkit/issues/120)
 
 ## 1.8.0 (2019-08-01)
