@@ -68,7 +68,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         model.setHeader(L10n.Core.Organizer.Sections.Support.header, for: .support)
         model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, for: .feedback)
         model.set([.connectionStatus], in: .vpn)
-        model.set([.donate, .patreon, .translate], in: .support)
+        model.set([.donate, .translate], in: .support)
         model.set([.joinCommunity, .writeReview], in: .feedback)
         model.set([.openAbout], in: .about)
         model.set([.uninstall], in: .destruction)
@@ -381,7 +381,7 @@ extension OrganizerViewController {
         
         case donate
         
-        case patreon
+//        case patreon
         
         case translate
         
@@ -457,10 +457,10 @@ extension OrganizerViewController {
             cell.leftText = L10n.Core.Organizer.Cells.Donate.caption
             return cell
 
-        case .patreon:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Organizer.Cells.Patreon.caption
-            return cell
+//        case .patreon:
+//            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+//            cell.leftText = L10n.Core.Organizer.Cells.Patreon.caption
+//            return cell
             
         case .translate:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
@@ -520,8 +520,8 @@ extension OrganizerViewController {
         case .donate:
             donateToDeveloper()
 
-        case .patreon:
-            visitPatreon()
+//        case .patreon:
+//            visitPatreon()
             
         case .translate:
             offerTranslation()
