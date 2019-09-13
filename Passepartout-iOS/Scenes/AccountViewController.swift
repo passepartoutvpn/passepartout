@@ -123,11 +123,11 @@ class AccountViewController: UIViewController, TableModelHost {
                 }
                 model.setHeader("", for: .registration)
             }
-            if let _ = referralURL {
-                model.add(.registration)
-                model.setFooter(L10n.Core.Account.Sections.Registration.footer(name.rawValue), for: .registration)
-                model.set([.signUp], in: .registration)
-            }
+//            if let _ = referralURL {
+//                model.add(.registration)
+//                model.setFooter(L10n.Core.Account.Sections.Registration.footer(name.rawValue), for: .registration)
+//                model.set([.signUp], in: .registration)
+//            }
         }
     }
     
