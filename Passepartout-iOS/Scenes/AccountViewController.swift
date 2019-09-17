@@ -112,7 +112,7 @@ class AccountViewController: UIViewController, TableModelHost {
         model.setHeader(L10n.App.Account.Sections.Credentials.header, for: .credentials)
         model.set([.username, .password], in: .credentials)
 
-        if let name = infrastructureName {
+        if let _ = infrastructureName {
             if let guidanceString = guidanceString {
                 if let _ = guidanceURL {
                     model.add(.guidance)
