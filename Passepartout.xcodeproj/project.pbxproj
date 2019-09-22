@@ -1357,8 +1357,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS/Passepartout.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				INFOPLIST_FILE = "Passepartout-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1367,7 +1367,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1380,8 +1380,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS/Passepartout.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				INFOPLIST_FILE = "Passepartout-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1390,7 +1390,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1400,8 +1400,8 @@
 			baseConfigurationReference = 09CB728874F1553EF27BAAB9 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS-Tunnel/Tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				INFOPLIST_FILE = "Passepartout-iOS-Tunnel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1412,7 +1412,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
 				PRODUCT_NAME = "Passepartout-Tunnel";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1423,8 +1423,8 @@
 			baseConfigurationReference = 4BD12523ABCBF7ED941FC270 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS-Tunnel/Tunnel.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				INFOPLIST_FILE = "Passepartout-iOS-Tunnel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1434,7 +1434,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
 				PRODUCT_NAME = "Passepartout-Tunnel";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
