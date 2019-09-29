@@ -17,4 +17,3 @@ ci/CHANGELOG.md
 ci/DESCRIPTION.md
 .env.secret*
 Preview.html
-Gemfile.lock
