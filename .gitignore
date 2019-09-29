@@ -15,5 +15,6 @@ build/
 dist/
 ci/CHANGELOG.md
 ci/DESCRIPTION.md
+ci/beta-feedback.txt
 .env.secret*
 Preview.html
