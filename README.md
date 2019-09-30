@@ -78,10 +78,10 @@ You can find details on what may or may not work in the related section of the [
 ### Requirements
 
 - iOS 11.0+
-- Xcode 10+ (Swift 5)
+- Xcode 11+ (Swift 5)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
-- [CocoaPods 1.6.0][dep-cocoapods]
+- [CocoaPods 1.8.0][dep-cocoapods]
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
