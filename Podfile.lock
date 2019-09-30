@@ -1,24 +1,24 @@
 PODS:
   - MBProgressHUD (1.1.0)
-  - OpenSSL-Apple (1.1.0j.2)
+  - OpenSSL-Apple (1.1.0l.4)
   - SSZipArchive (2.2.2)
-  - SwiftyBeaver (1.7.1)
-  - TunnelKit/AppExtension (2.0.3):
+  - SwiftyBeaver (1.8.0)
+  - TunnelKit/AppExtension (2.0.5):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (2.0.3):
+  - TunnelKit/Core (2.0.5):
     - SwiftyBeaver
-  - TunnelKit/Extra/LZO (2.0.3)
-  - TunnelKit/Protocols/OpenVPN (2.0.3):
-    - OpenSSL-Apple (~> 1.1.0j.2)
+  - TunnelKit/Extra/LZO (2.0.5)
+  - TunnelKit/Protocols/OpenVPN (2.0.5):
+    - OpenSSL-Apple (~> 1.1.0j.4)
     - TunnelKit/AppExtension
     - TunnelKit/Core
 
 DEPENDENCIES:
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (~> 2.0.3)
-  - TunnelKit/Protocols/OpenVPN (~> 2.0.3)
+  - TunnelKit/Extra/LZO (~> 2.0.5)
+  - TunnelKit/Protocols/OpenVPN (~> 2.0.5)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -30,11 +30,11 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  OpenSSL-Apple: e88e1eb314acb4a05e2348069790c4aa49f6d319
+  OpenSSL-Apple: f3d1668588ea8f06b076dcfa6177cd90452e3800
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
-  SwiftyBeaver: da5e573ad583586c18236324c36900990afe1733
-  TunnelKit: ce2ede930fd464042b4d4efba14ff1fb580d7519
+  SwiftyBeaver: f5c4c5f3e01b8fcb7dfcf13d23644eb886bf415d
+  TunnelKit: f33216415cd9d5e37b6acf02edb0c79350598b36
 
-PODFILE CHECKSUM: 4af9b46c049c79e708cd982531a5c6cd0b8d3a25
+PODFILE CHECKSUM: 2b800cbfc6e938892ac1e11ad27f4e3473593162
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.1
