@@ -1,11 +1,4 @@
-### Added
+### Changed
 
-- Chinese (Simplified) translations (OnlyThen).
-- Support for iOS 13 Dark Mode.
-
-### Fixed
-
-- Transparent navigation bar in iPadOS 13.
-- Unable to open .ovpn files in iOS 13.
-- Premature disconnection due to .staleSession error.
+- Upgrade project to Xcode 11.
 
