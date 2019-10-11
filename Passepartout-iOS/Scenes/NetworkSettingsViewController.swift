@@ -340,7 +340,7 @@ extension NetworkSettingsViewController {
             cell.field.placeholder = L10n.Core.Global.Values.none
             cell.field.text = networkSettings.dnsServers?[i]
             cell.field.clearButtonMode = .always
-            cell.field.keyboardType = .decimalPad
+            cell.field.keyboardType = .numbersAndPunctuation
             cell.captionWidth = 160.0
             cell.delegate = self
             cell.field.isEnabled = (networkChoices.dns == .manual)
@@ -359,7 +359,7 @@ extension NetworkSettingsViewController {
             cell.field.placeholder = L10n.Core.Global.Values.none
             cell.field.text = networkSettings.proxyAddress
             cell.field.clearButtonMode = .always
-            cell.field.keyboardType = .decimalPad
+            cell.field.keyboardType = .numbersAndPunctuation
             cell.captionWidth = 160.0
             cell.delegate = self
             cell.field.isEnabled = (networkChoices.proxy == .manual)

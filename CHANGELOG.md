@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Upgrade project to Xcode 11.
 
+### Fixed
+
+- Cannot enter IP addresses in some localizations. [#103](https://github.com/passepartoutvpn/passepartout-ios/issues/103)
+
 ## 1.8.1 (2019-09-15)
 
 ### Added
