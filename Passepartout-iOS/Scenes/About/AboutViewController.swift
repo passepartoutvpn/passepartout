@@ -25,25 +25,26 @@
 
 import UIKit
 import PassepartoutCore
+import Convenience
 
-class AboutViewController: UITableViewController, TableModelHost {
+class AboutViewController: UITableViewController, StrongTableHost {
 
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
     
-    let model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
+    let model: StrongTableModel<SectionType, RowType> = {
+        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         model.add(.info)
         model.add(.github)
         model.add(.web)
         model.add(.share)
-        model.setHeader("", for: .info)
-        model.setHeader("GitHub", for: .github)
-        model.setHeader(L10n.Core.About.Sections.Web.header, for: .web)
-        model.setHeader(L10n.Core.About.Sections.Share.header, for: .share)
-        model.set([.version, .credits], in: .info)
-        model.set([.readme, .changelog], in: .github)
-        model.set([.website, .faq, .disclaimer, .privacyPolicy], in: .web)
-        model.set([.shareTwitter, .shareGeneric], in: .share)
+        model.setHeader("", forSection: .info)
+        model.setHeader("GitHub", forSection: .github)
+        model.setHeader(L10n.Core.About.Sections.Web.header, forSection: .web)
+        model.setHeader(L10n.Core.About.Sections.Share.header, forSection: .share)
+        model.set([.version, .credits], forSection: .info)
+        model.set([.readme, .changelog], forSection: .github)
+        model.set([.website, .faq, .disclaimer, .privacyPolicy], forSection: .web)
+        model.set([.shareTwitter, .shareGeneric], forSection: .share)
         return model
     }()
     
@@ -126,15 +127,15 @@ extension AboutViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -146,7 +147,7 @@ extension AboutViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,7 +155,7 @@ extension AboutViewController {
         switch model.row(at: indexPath) {
         case .version:
             cell.leftText = L10n.Core.Version.title
-            cell.rightText = Utils.versionString()
+            cell.rightText = ApplicationInfo.appVersion
             
         case .credits:
             cell.leftText = L10n.Core.About.Cells.Credits.caption

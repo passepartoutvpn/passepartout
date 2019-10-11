@@ -25,6 +25,7 @@
 
 import UIKit
 import PassepartoutCore
+import Convenience
 
 protocol AccountViewControllerDelegate: class {
     func accountController(_: AccountViewController, didEnterCredentials credentials: Credentials)
@@ -32,7 +33,7 @@ protocol AccountViewControllerDelegate: class {
     func accountControllerDidComplete(_: AccountViewController)
 }
 
-class AccountViewController: UIViewController, TableModelHost {
+class AccountViewController: UIViewController, StrongTableHost {
     @IBOutlet private weak var tableView: UITableView?
     
     private weak var cellUsername: FieldTableViewCell?
@@ -101,32 +102,32 @@ class AccountViewController: UIViewController, TableModelHost {
 
     weak var delegate: AccountViewControllerDelegate?
 
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
     
-    var model: TableModel<SectionType, RowType> = TableModel()
+    var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
     
     func reloadModel() {
         model.clear()
         
         model.add(.credentials)
-        model.setHeader(L10n.App.Account.Sections.Credentials.header, for: .credentials)
-        model.set([.username, .password], in: .credentials)
+        model.setHeader(L10n.App.Account.Sections.Credentials.header, forSection: .credentials)
+        model.set([.username, .password], forSection: .credentials)
 
         if let _ = infrastructureName {
             if let guidanceString = guidanceString {
                 if let _ = guidanceURL {
                     model.add(.guidance)
-                    model.setFooter(guidanceString, for: .guidance)
-                    model.set([.openGuide], in: .guidance)
+                    model.setFooter(guidanceString, forSection: .guidance)
+                    model.set([.openGuide], forSection: .guidance)
                 } else {
-                    model.setFooter(guidanceString, for: .credentials)
+                    model.setFooter(guidanceString, forSection: .credentials)
                 }
-                model.setHeader("", for: .registration)
+                model.setHeader("", forSection: .registration)
             }
 //            if let _ = referralURL {
 //                model.add(.registration)
-//                model.setFooter(L10n.Core.Account.Sections.Registration.footer(name.rawValue), for: .registration)
-//                model.set([.signUp], in: .registration)
+//                model.setFooter(L10n.Core.Account.Sections.Registration.footer(name.rawValue), forSection: .registration)
+//                model.set([.signUp], forSection: .registration)
 //            }
         }
     }
@@ -210,15 +211,15 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
     private static let footerButtonTag = 1000
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -226,7 +227,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -84,7 +84,7 @@ class DebugLogViewController: UIViewController {
     
     @IBAction private func share(_ sender: Any?) {
         guard let raw = textLog?.text, !raw.isEmpty else {
-            let alert = Macros.alert(title, L10n.Core.DebugLog.Alerts.EmptyLog.message)
+            let alert = UIAlertController.asAlert(title, L10n.Core.DebugLog.Alerts.EmptyLog.message)
             alert.addCancelAction(L10n.Core.Global.ok)
             present(alert, animated: true, completion: nil)
             return

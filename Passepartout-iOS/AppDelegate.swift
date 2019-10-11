@@ -26,6 +26,7 @@
 import UIKit
 import TunnelKit
 import PassepartoutCore
+import Convenience
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -54,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //            splitViewController.preferredDisplayMode = .primaryOverlay
         }
         
-        InAppHelper.shared.requestProducts(withIdentifiers: InApp.allIdentifiers(), completionHandler: nil)
+        ProductManager.shared.listProducts(completionHandler: nil)
 
         return true
     }

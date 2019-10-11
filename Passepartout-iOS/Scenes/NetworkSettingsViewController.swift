@@ -27,6 +27,7 @@ import UIKit
 import PassepartoutCore
 import TunnelKit
 import SwiftyBeaver
+import Convenience
 
 private let log = SwiftyBeaver.self
 
@@ -57,9 +58,9 @@ class NetworkSettingsViewController: UITableViewController {
     
     private let networkSettings = ProfileNetworkSettings()
     
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
     
-    let model: TableModel<SectionType, RowType> = TableModel()
+    let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
     
     func reloadModel() {
         model.clear()
@@ -77,24 +78,24 @@ class NetworkSettingsViewController: UITableViewController {
         }
         
         // headers
-        model.setHeader("", for: .choices)
-        model.setHeader(L10n.Core.NetworkSettings.Gateway.title, for: .manualGateway)
-        model.setHeader(L10n.Core.NetworkSettings.Dns.title, for: .manualDNS)
-        model.setHeader(L10n.Core.NetworkSettings.Proxy.title, for: .manualProxy)
+        model.setHeader("", forSection: .choices)
+        model.setHeader(L10n.Core.NetworkSettings.Gateway.title, forSection: .manualGateway)
+        model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .manualDNS)
+        model.setHeader(L10n.Core.NetworkSettings.Proxy.title, forSection: .manualProxy)
         
         // footers
 //        model.setFooter(L10n.Core.Configuration.Sections.Reset.footer, for: .reset)
         
         // rows
-        model.set([.gateway, .dns, .proxy], in: .choices)
-        model.set([.gatewayIPv4, .gatewayIPv6], in: .manualGateway)
+        model.set([.gateway, .dns, .proxy], forSection: .choices)
+        model.set([.gatewayIPv4, .gatewayIPv6], forSection: .manualGateway)
 
         var dnsRows: [RowType] = Array(repeating: .dnsAddress, count: networkSettings.dnsServers?.count ?? 0)
         dnsRows.insert(.dnsDomain, at: 0)
         if networkChoices.dns == .manual {
             dnsRows.append(.dnsAddAddress)
         }
-        model.set(dnsRows, in: .manualDNS)
+        model.set(dnsRows, forSection: .manualDNS)
 
         var proxyRows: [RowType] = Array(repeating: .proxyBypass, count: networkSettings.proxyBypassDomains?.count ?? 0)
         proxyRows.insert(.proxyAddress, at: 0)
@@ -102,7 +103,7 @@ class NetworkSettingsViewController: UITableViewController {
         if networkChoices.proxy == .manual {
             proxyRows.append(.proxyAddBypass)
         }
-        model.set(proxyRows, in: .manualProxy)
+        model.set(proxyRows, forSection: .manualProxy)
     }
     
     // MARK: UIViewController
@@ -262,15 +263,15 @@ extension NetworkSettingsViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -278,7 +279,7 @@ extension NetworkSettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -287,19 +288,19 @@ extension NetworkSettingsViewController {
         switch row {
         case .gateway:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = model.header(for: .manualGateway)
+            cell.leftText = model.header(forSection: .manualGateway)
             cell.rightText = networkChoices.gateway.description
             return cell
 
         case .dns:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = model.header(for: .manualDNS)
+            cell.leftText = model.header(forSection: .manualDNS)
             cell.rightText = networkChoices.dns.description
             return cell
 
         case .proxy:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = model.header(for: .manualProxy)
+            cell.leftText = model.header(forSection: .manualProxy)
             cell.rightText = networkChoices.proxy.description
             return cell
 
@@ -405,7 +406,7 @@ extension NetworkSettingsViewController {
 
         switch model.row(at: indexPath) {
         case .gateway:
-            let vc = OptionViewController<NetworkChoice>()
+            let vc = SingleOptionViewController<NetworkChoice>()
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
@@ -418,7 +419,7 @@ extension NetworkSettingsViewController {
             navigationController?.pushViewController(vc, animated: true)
 
         case .dns:
-            let vc = OptionViewController<NetworkChoice>()
+            let vc = SingleOptionViewController<NetworkChoice>()
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
@@ -431,7 +432,7 @@ extension NetworkSettingsViewController {
             navigationController?.pushViewController(vc, animated: true)
 
         case .proxy:
-            let vc = OptionViewController<NetworkChoice>()
+            let vc = SingleOptionViewController<NetworkChoice>()
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }

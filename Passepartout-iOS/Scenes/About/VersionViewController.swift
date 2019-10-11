@@ -25,6 +25,7 @@
 
 import UIKit
 import PassepartoutCore
+import Convenience
 
 class VersionViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView?
@@ -46,7 +47,7 @@ class VersionViewController: UIViewController {
         
         title = L10n.Core.Version.title
         labelTitle?.text = GroupConstants.App.name
-        labelVersion?.text = Utils.versionString()
+        labelVersion?.text = ApplicationInfo.appVersion
         labelIntro?.text = L10n.Core.Version.Labels.intro
 
         scrollView?.applyPrimaryBackground(Theme.current)

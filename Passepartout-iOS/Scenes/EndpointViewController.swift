@@ -26,12 +26,13 @@
 import UIKit
 import TunnelKit
 import PassepartoutCore
+import Convenience
 
 protocol EndpointViewControllerDelegate: class {
     func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: EndpointProtocol?)
 }
 
-class EndpointViewController: UIViewController, TableModelHost {
+class EndpointViewController: UIViewController, StrongTableHost {
     @IBOutlet private weak var tableView: UITableView!
     
     private lazy var itemRefresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
@@ -58,28 +59,28 @@ class EndpointViewController: UIViewController, TableModelHost {
 
     weak var modificationDelegate: ConfigurationModificationDelegate?
 
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
     
-    lazy var model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
+    lazy var model: StrongTableModel<SectionType, RowType> = {
+        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         
         model.add(.locationAddresses)
         model.add(.locationProtocols)
         
-        model.setHeader(L10n.App.Endpoint.Sections.LocationAddresses.header, for: .locationAddresses)
-        model.setHeader(L10n.App.Endpoint.Sections.LocationProtocols.header, for: .locationProtocols)
+        model.setHeader(L10n.App.Endpoint.Sections.LocationAddresses.header, forSection: .locationAddresses)
+        model.setHeader(L10n.App.Endpoint.Sections.LocationProtocols.header, forSection: .locationProtocols)
         
         if dataSource.canCustomizeEndpoint {
             var addressRows: [RowType] = Array(repeating: .availableAddress, count: dataSource.addresses.count)
             addressRows.insert(.anyAddress, at: 0)
-            model.set(addressRows, in: .locationAddresses)
+            model.set(addressRows, forSection: .locationAddresses)
             
             var protocolRows: [RowType] = Array(repeating: .availableProtocol, count: dataSource.protocols.count)
             protocolRows.insert(.anyProtocol, at: 0)
-            model.set(protocolRows, in: .locationProtocols)
+            model.set(protocolRows, forSection: .locationProtocols)
         } else {
-            model.set(.availableAddress, count: dataSource.addresses.count, in: .locationAddresses)
-            model.set(.availableProtocol, count: dataSource.protocols.count, in: .locationProtocols)
+            model.set(.availableAddress, count: dataSource.addresses.count, forSection: .locationAddresses)
+            model.set(.availableProtocol, count: dataSource.protocols.count, forSection: .locationProtocols)
         }
 
         return model
@@ -188,19 +189,19 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

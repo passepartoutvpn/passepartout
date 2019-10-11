@@ -25,6 +25,7 @@
 
 import UIKit
 import PassepartoutCore
+import Convenience
 
 protocol ProviderPoolViewControllerDelegate: class {
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool)
@@ -148,7 +149,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         guard group.pools.count > 1 else {
             return
         }
-        let vc = OptionViewController<Pool>()
+        let vc = SingleOptionViewController<Pool>()
         vc.title = group.localizedCountry
         vc.options = group.pools.sorted {
             guard let lnum = $0.num else {

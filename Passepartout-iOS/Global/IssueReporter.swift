@@ -42,8 +42,8 @@ class IssueReporter: NSObject {
             let app = UIApplication.shared
             let V = AppConstants.IssueReporter.Email.self
             let body = V.body(V.template, DebugLog(raw: "--").decoratedString())
-            guard let url = Utils.mailto(to: V.recipient, subject: V.subject, body: body), app.canOpenURL(url) else {
-                let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.Global.emailNotConfigured)
+            guard let url = URL.mailto(to: V.recipient, subject: V.subject, body: body), app.canOpenURL(url) else {
+                let alert = UIAlertController.asAlert(L10n.Core.IssueReporter.title, L10n.Core.Global.emailNotConfigured)
                 alert.addCancelAction(L10n.Core.Global.ok)
                 viewController.present(alert, animated: true, completion: nil)
                 return
@@ -55,8 +55,8 @@ class IssueReporter: NSObject {
         self.viewController = viewController
         
         if issue.debugLog {
-            let alert = Macros.alert(L10n.Core.IssueReporter.title, L10n.Core.IssueReporter.message)
-            alert.addDefaultAction(L10n.Core.IssueReporter.Buttons.accept) {
+            let alert = UIAlertController.asAlert(L10n.Core.IssueReporter.title, L10n.Core.IssueReporter.message)
+            alert.addPreferredAction(L10n.Core.IssueReporter.Buttons.accept) {
                 VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
                     self.composeEmail(withDebugLog: $0, configurationURL: issue.configurationURL, description: issue.description)
                 }

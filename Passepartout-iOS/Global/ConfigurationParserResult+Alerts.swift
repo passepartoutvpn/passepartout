@@ -44,11 +44,11 @@ extension OpenVPN.ConfigurationParser.Result {
         } catch let e as ConfigurationError {
             switch e {
             case .encryptionPassphrase, .unableToDecrypt(_):
-                let alert = Macros.alert(url.normalizedFilename, L10n.Core.ParsedFile.Alerts.EncryptionPassphrase.message)
+                let alert = UIAlertController.asAlert(url.normalizedFilename, L10n.Core.ParsedFile.Alerts.EncryptionPassphrase.message)
                 alert.addTextField { (field) in
                     field.isSecureTextEntry = true
                 }
-                alert.addDefaultAction(L10n.Core.Global.ok) {
+                alert.addPreferredAction(L10n.Core.Global.ok) {
                     guard let passphrase = alert.textFields?.first?.text else {
                         return
                     }
@@ -79,8 +79,8 @@ extension OpenVPN.ConfigurationParser.Result {
     }
     
     private static func alertImportError(url: URL, in vc: UIViewController, withMessage message: String) {
-        let alert = Macros.alert(url.normalizedFilename, message)
-//        alert.addDefaultAction(L10n.Core.ParsedFile.Alerts.Buttons.report) {
+        let alert = UIAlertController.asAlert(url.normalizedFilename, message)
+//        alert.addPreferredAction(L10n.Core.ParsedFile.Alerts.Buttons.report) {
 //            var attach = IssueReporter.Attachments(debugLog: false, configurationURL: url)
 //            attach.description = message
 //            IssueReporter.shared.present(in: vc, withAttachments: attach)
@@ -91,8 +91,8 @@ extension OpenVPN.ConfigurationParser.Result {
 
     static func alertImportWarning(url: URL, in vc: UIViewController, withWarning warning: ConfigurationError, completionHandler: @escaping (Bool) -> Void) {
         let message = details(forWarning: warning)
-        let alert = Macros.alert(url.normalizedFilename, L10n.Core.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
-        alert.addDefaultAction(L10n.Core.Global.ok) {
+        let alert = UIAlertController.asAlert(url.normalizedFilename, L10n.Core.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
+        alert.addPreferredAction(L10n.Core.Global.ok) {
             completionHandler(true)
         }
         alert.addCancelAction(L10n.Core.Global.cancel) {

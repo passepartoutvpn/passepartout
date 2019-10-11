@@ -1,8 +1,8 @@
 //
-//  InApp.swift
+//  Donation.swift
 //  Passepartout-iOS
 //
-//  Created by Davide De Rosa on 4/6/19.
+//  Created by Davide De Rosa on 10/11/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,33 +24,26 @@
 //
 
 import Foundation
-import StoreKit
 
-struct InApp {
-    enum Donation: String {
-        static let all: [Donation] = [
-            .tiny,
-            .small,
-            .medium,
-            .big,
-            .huge,
-            .maxi
-        ]
+enum Donation: String {
+    case tiny = "com.algoritmico.ios.Passepartout.donations.Tiny"
 
-        case tiny = "com.algoritmico.ios.Passepartout.donations.Tiny"
+    case small = "com.algoritmico.ios.Passepartout.donations.Small"
 
-        case small = "com.algoritmico.ios.Passepartout.donations.Small"
+    case medium = "com.algoritmico.ios.Passepartout.donations.Medium"
 
-        case medium = "com.algoritmico.ios.Passepartout.donations.Medium"
+    case big = "com.algoritmico.ios.Passepartout.donations.Big"
 
-        case big = "com.algoritmico.ios.Passepartout.donations.Big"
+    case huge = "com.algoritmico.ios.Passepartout.donations.Huge"
 
-        case huge = "com.algoritmico.ios.Passepartout.donations.Huge"
+    case maxi = "com.algoritmico.ios.Passepartout.donations.Maxi"
 
-        case maxi = "com.algoritmico.ios.Passepartout.donations.Maxi"
-    }
-
-    static func allIdentifiers() -> Set<String> {
-        return Set<String>(Donation.all.map { $0.rawValue })
-    }
+    static let all: [Donation] = [
+        .tiny,
+        .small,
+        .medium,
+        .big,
+        .huge,
+        .maxi
+    ]
 }

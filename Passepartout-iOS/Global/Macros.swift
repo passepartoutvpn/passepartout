@@ -25,55 +25,6 @@
 
 import UIKit
 
-class Macros {
-    static func alert(_ title: String?, _ message: String?) -> UIAlertController {
-        return UIAlertController(title: title, message: message, preferredStyle: .alert)
-    }
-    
-    static func actionSheet(_ title: String?, _ message: String?) -> UIAlertController {
-        return UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-    }
-}
-
-extension UIAlertController {
-    @discardableResult func addDefaultAction(_ title: String, handler: @escaping () -> Void) -> UIAlertAction {
-        let action = UIAlertAction(title: title, style: .default) { (action) in
-            handler()
-        }
-        addAction(action)
-        preferredAction = action
-        return action
-    }
-    
-    @discardableResult func addCancelAction(_ title: String, handler: (() -> Void)? = nil) -> UIAlertAction {
-        let action = UIAlertAction(title: title, style: .cancel) { (action) in
-            handler?()
-        }
-        addAction(action)
-        if actions.count == 1 {
-            preferredAction = action
-        }
-        return action
-    }
-    
-    @discardableResult func addAction(_ title: String, handler: @escaping () -> Void) -> UIAlertAction {
-        let action = UIAlertAction(title: title, style: .default) { (action) in
-            handler()
-        }
-        addAction(action)
-        return action
-    }
-    
-    @discardableResult func addDestructiveAction(_ title: String, handler: @escaping () -> Void) -> UIAlertAction {
-        let action = UIAlertAction(title: title, style: .destructive) { (action) in
-            handler()
-        }
-        addAction(action)
-        preferredAction = action
-        return action
-    }
-}
-
 extension UIView {
     static func get<T: UIView>() -> T {
         let name = String(describing: T.self)

@@ -51,7 +51,7 @@ class ImportedHostsViewController: UITableViewController {
         super.viewDidAppear(animated)
 
         guard !pendingConfigurationURLs.isEmpty else {
-            let alert = Macros.alert(
+            let alert = UIAlertController.asAlert(
                 title,
                 L10n.Core.Organizer.Alerts.AddHost.message
             )
