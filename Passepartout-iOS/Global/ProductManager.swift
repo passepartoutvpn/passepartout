@@ -1,8 +1,8 @@
 //
-//  Theme+Titles.swift
+//  ProductManager.swift
 //  Passepartout-iOS
 //
-//  Created by Davide De Rosa on 7/16/18.
+//  Created by Davide De Rosa on 4/6/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,37 +23,30 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
+import Foundation
+import StoreKit
 import Convenience
 
-extension UIViewController {
-    func applyMasterTitle(_ theme: Theme) {
-        navigationItem.largeTitleDisplayMode = theme.masterTitleDisplayMode
+struct ProductManager {
+    static let shared = ProductManager()
+    
+    private let inApp: InApp<Donation>
+    
+    private init() {
+        inApp = InApp()
     }
     
-    func applyDetailTitle(_ theme: Theme) {
-        navigationItem.largeTitleDisplayMode = theme.detailTitleDisplayMode
-    }
-}
-
-extension StrongTableModel {
-    func headerHeight(for section: Int) -> CGFloat {
-        guard let title = header(forSection: section) else {
-            return 1.0
+    func listProducts(completionHandler: (([SKProduct]) -> Void)?) {
+        guard inApp.products.isEmpty else {
+            completionHandler?(inApp.products)
+            return
         }
-        guard !title.isEmpty else {
-            return 0.0
+        inApp.requestProducts(withIdentifiers: Donation.all) { _ in
+            completionHandler?(self.inApp.products)
         }
-        return UITableView.automaticDimension
     }
 
-    func footerHeight(for section: Int) -> CGFloat {
-        guard let title = footer(forSection: section) else {
-            return 1.0
-        }
-        guard !title.isEmpty else {
-            return 0.0
-        }
-        return UITableView.automaticDimension
+    func purchase(_ product: SKProduct, completionHandler: @escaping (InAppPurchaseResult, Error?) -> Void) {
+        inApp.purchase(product: product, completionHandler: completionHandler)
     }
 }

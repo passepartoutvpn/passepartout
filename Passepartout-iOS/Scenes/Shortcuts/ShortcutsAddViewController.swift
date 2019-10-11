@@ -26,24 +26,25 @@
 import UIKit
 import Intents
 import PassepartoutCore
+import Convenience
 
 @available(iOS 12, *)
-class ShortcutsAddViewController: UITableViewController, TableModelHost {
+class ShortcutsAddViewController: UITableViewController, StrongTableHost {
     weak var delegate: ShortcutsIntentDelegate?
 
-    // MARK: TableModel
+    // MARK: StrongTableModel
     
-    let model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
+    let model: StrongTableModel<SectionType, RowType> = {
+        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         model.add(.vpn)
         model.add(.wifi)
         model.add(.cellular)
-        model.set([.connect, .enableVPN, .disableVPN], in: .vpn)
-        model.set([.trustCurrentWiFi, .untrustCurrentWiFi], in: .wifi)
-        model.set([.trustCellular, .untrustCellular], in: .cellular)
-        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Vpn.header, for: .vpn)
-        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Wifi.header, for: .wifi)
-        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Cellular.header, for: .cellular)
+        model.set([.connect, .enableVPN, .disableVPN], forSection: .vpn)
+        model.set([.trustCurrentWiFi, .untrustCurrentWiFi], forSection: .wifi)
+        model.set([.trustCellular, .untrustCellular], forSection: .cellular)
+        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Vpn.header, forSection: .vpn)
+        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Wifi.header, forSection: .wifi)
+        model.setHeader(L10n.Core.Shortcuts.Add.Sections.Cellular.header, forSection: .cellular)
         return model
     }()
     
@@ -85,15 +86,15 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -158,7 +159,7 @@ class ShortcutsAddViewController: UITableViewController, TableModelHost {
 
     private func addConnect() {
         guard TransientStore.shared.service.hasProfiles() else {
-            let alert = Macros.alert(
+            let alert = UIAlertController.asAlert(
                 L10n.Core.Shortcuts.Add.Cells.Connect.caption,
                 L10n.Core.Shortcuts.Add.Alerts.NoProfiles.message
             )

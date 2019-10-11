@@ -27,10 +27,11 @@ import UIKit
 import TunnelKit
 import SwiftyBeaver
 import PassepartoutCore
+import Convenience
 
 private let log = SwiftyBeaver.self
 
-class ConfigurationViewController: UIViewController, TableModelHost {
+class ConfigurationViewController: UIViewController, StrongTableHost {
     @IBOutlet private weak var tableView: UITableView!
     
     private lazy var itemRefresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
@@ -47,10 +48,10 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         
     weak var delegate: ConfigurationModificationDelegate?
     
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
 
-    lazy var model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
+    lazy var model: StrongTableModel<SectionType, RowType> = {
+        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         
         // sections
         model.add(.communication)
@@ -62,24 +63,24 @@ class ConfigurationViewController: UIViewController, TableModelHost {
         model.add(.other)
 
         // headers
-        model.setHeader(L10n.Core.Configuration.Sections.Communication.header, for: .communication)
-        model.setHeader(L10n.Core.Configuration.Sections.Tls.header, for: .tls)
-        model.setHeader(L10n.Core.Configuration.Sections.Compression.header, for: .compression)
-        model.setHeader(L10n.Core.Configuration.Sections.Other.header, for: .other)
+        model.setHeader(L10n.Core.Configuration.Sections.Communication.header, forSection: .communication)
+        model.setHeader(L10n.Core.Configuration.Sections.Tls.header, forSection: .tls)
+        model.setHeader(L10n.Core.Configuration.Sections.Compression.header, forSection: .compression)
+        model.setHeader(L10n.Core.Configuration.Sections.Other.header, forSection: .other)
 
         // footers
         if isEditable {
-            model.setFooter(L10n.Core.Configuration.Sections.Reset.footer, for: .reset)
+            model.setFooter(L10n.Core.Configuration.Sections.Reset.footer, forSection: .reset)
         }
         
         // rows
-        model.set([.cipher, .digest], in: .communication)
+        model.set([.cipher, .digest], forSection: .communication)
         if isEditable {
-            model.set([.resetOriginal], in: .reset)
+            model.set([.resetOriginal], forSection: .reset)
         }
-        model.set([.client, .tlsWrapping, .eku], in: .tls)
-        model.set([.compressionFraming, .compressionAlgorithm], in: .compression)
-        model.set([.keepAlive, .renegSeconds, .randomEndpoint], in: .other)
+        model.set([.client, .tlsWrapping, .eku], forSection: .tls)
+        model.set([.compressionFraming, .compressionAlgorithm], forSection: .compression)
+        model.set([.keepAlive, .renegSeconds, .randomEndpoint], forSection: .other)
 
         return model
     }()
@@ -193,15 +194,15 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
 
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -209,7 +210,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -313,7 +314,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         switch model.row(at: indexPath) {
         case .cipher:
-            let vc = OptionViewController<OpenVPN.Cipher>()
+            let vc = SingleOptionViewController<OpenVPN.Cipher>()
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.Cipher.available
             vc.selectedOption = configuration.cipher
@@ -325,7 +326,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             navigationController?.pushViewController(vc, animated: true)
             
         case .digest:
-            let vc = OptionViewController<OpenVPN.Digest>()
+            let vc = SingleOptionViewController<OpenVPN.Digest>()
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.Digest.available
             vc.selectedOption = configuration.digest
@@ -337,7 +338,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             navigationController?.pushViewController(vc, animated: true)
 
         case .compressionFraming:
-            let vc = OptionViewController<OpenVPN.CompressionFraming>()
+            let vc = SingleOptionViewController<OpenVPN.CompressionFraming>()
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.CompressionFraming.available
             vc.selectedOption = configuration.compressionFraming ?? .disabled
@@ -356,7 +357,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
                 return
             }
             
-            let vc = OptionViewController<OpenVPN.CompressionAlgorithm>()
+            let vc = SingleOptionViewController<OpenVPN.CompressionAlgorithm>()
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.CompressionAlgorithm.available
             vc.selectedOption = configuration.compressionAlgorithm ?? .disabled

@@ -27,10 +27,11 @@ import UIKit
 import TunnelKit
 import SwiftyBeaver
 import PassepartoutCore
+import Convenience
 
 private let log = SwiftyBeaver.self
 
-class WizardHostViewController: UITableViewController, TableModelHost {
+class WizardHostViewController: UITableViewController, StrongTableHost {
     @IBOutlet private weak var itemNext: UIBarButtonItem!
     
     private let existingHosts: [String] = {
@@ -47,18 +48,18 @@ class WizardHostViewController: UITableViewController, TableModelHost {
 
     private var createdProfile: HostConnectionProfile?
 
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
 
-    lazy var model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
+    lazy var model: StrongTableModel<SectionType, RowType> = {
+        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         model.add(.meta)
-        model.setFooter(L10n.Core.Global.Host.TitleInput.message, for: .meta)
+        model.setFooter(L10n.Core.Global.Host.TitleInput.message, forSection: .meta)
         if !existingHosts.isEmpty {
             model.add(.existing)
-            model.setHeader(L10n.App.Wizards.Host.Sections.Existing.header, for: .existing)
+            model.setHeader(L10n.App.Wizards.Host.Sections.Existing.header, forSection: .existing)
         }
-        model.set([.titleInput], in: .meta)
-        model.set(.existingHost, count: existingHosts.count, in: .existing)
+        model.set([.titleInput], forSection: .meta)
+        model.set(.existingHost, count: existingHosts.count, forSection: .existing)
         return model
     }()
     
@@ -110,8 +111,8 @@ class WizardHostViewController: UITableViewController, TableModelHost {
         let service = TransientStore.shared.service
         guard !service.containsProfile(profile) else {
             let replacedProfile = service.profile(withContext: profile.context, id: profile.id)
-            let alert = Macros.alert(title, L10n.Core.Wizards.Host.Alerts.Existing.message)
-            alert.addDefaultAction(L10n.Core.Global.ok) {
+            let alert = UIAlertController.asAlert(title, L10n.Core.Wizards.Host.Alerts.Existing.message)
+            alert.addPreferredAction(L10n.Core.Global.ok) {
                 self.next(withProfile: profile, replacedProfile: replacedProfile)
             }
             alert.addCancelAction(L10n.Core.Global.cancel)
@@ -177,26 +178,26 @@ extension WizardHostViewController {
     }
     
     private var cellTitle: FieldTableViewCell? {
-        guard let ip = model.indexPath(row: .titleInput, section: .meta) else {
+        guard let ip = model.indexPath(forRow: .titleInput, ofSection: .meta) else {
             return nil
         }
         return tableView.cellForRow(at: ip) as? FieldTableViewCell
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,7 +224,7 @@ extension WizardHostViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
         case .existingHost:
-            guard let titleIndexPath = model.indexPath(row: .titleInput, section: .meta) else {
+            guard let titleIndexPath = model.indexPath(forRow: .titleInput, ofSection: .meta) else {
                 fatalError("Could not found title cell?")
             }
             let hostTitle = existingHosts[indexPath.row]

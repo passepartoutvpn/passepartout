@@ -25,8 +25,9 @@
 
 import UIKit
 import PassepartoutCore
+import Convenience
 
-class CreditsViewController: UITableViewController, TableModelHost {
+class CreditsViewController: UITableViewController, StrongTableHost {
     private let licenses = AppConstants.License.all
     
     private let notices = AppConstants.Notice.all
@@ -35,22 +36,22 @@ class CreditsViewController: UITableViewController, TableModelHost {
         return Utils.localizedLanguage($0) < Utils.localizedLanguage($1)
     }
 
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
     
-    var model: TableModel<SectionType, RowType> = TableModel()
+    var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
     
     func reloadModel() {
         model.add(.licenses)
         model.add(.notices)
         model.add(.translations)
         
-        model.setHeader(L10n.Core.Credits.Sections.Licenses.header, for: .licenses)
-        model.setHeader(L10n.Core.Credits.Sections.Notices.header, for: .notices)
-        model.setHeader(L10n.Core.Credits.Sections.Translations.header, for: .translations)
+        model.setHeader(L10n.Core.Credits.Sections.Licenses.header, forSection: .licenses)
+        model.setHeader(L10n.Core.Credits.Sections.Notices.header, forSection: .notices)
+        model.setHeader(L10n.Core.Credits.Sections.Translations.header, forSection: .translations)
 
-        model.set(.license, count: licenses.count, in: .licenses)
-        model.set(.notice, count: notices.count, in: .notices)
-        model.set(.translation, count: languages.count, in: .translations)
+        model.set(.license, count: licenses.count, forSection: .licenses)
+        model.set(.notice, count: notices.count, forSection: .notices)
+        model.set(.translation, count: languages.count, forSection: .translations)
     }
     
     // MARK: UIViewController
@@ -108,15 +109,15 @@ extension CreditsViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

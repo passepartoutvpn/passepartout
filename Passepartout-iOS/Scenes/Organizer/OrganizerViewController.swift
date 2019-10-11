@@ -27,10 +27,11 @@ import UIKit
 import StoreKit
 import MessageUI
 import PassepartoutCore
+import Convenience
 
 // XXX: convoluted due to the separation of provider/host profiles
 
-class OrganizerViewController: UITableViewController, TableModelHost {
+class OrganizerViewController: UITableViewController, StrongTableHost {
     private let service = TransientStore.shared.service
     
     private var providers: [String] = []
@@ -41,10 +42,10 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 
     private var didShowSubreddit = false
 
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
 
-    let model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
+    let model: StrongTableModel<SectionType, RowType> = {
+        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         model.add(.vpn)
         model.add(.providers)
         model.add(.hosts)
@@ -55,27 +56,27 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         model.add(.feedback)
         model.add(.about)
         model.add(.destruction)
-        model.setHeader(L10n.App.Service.Sections.Vpn.header, for: .vpn)
-        model.setHeader(L10n.Core.Organizer.Sections.Providers.header, for: .providers)
-        model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, for: .hosts)
-        model.setFooter(L10n.Core.Organizer.Sections.Providers.footer, for: .providers)
-        model.setFooter(L10n.Core.Organizer.Sections.Hosts.footer, for: .hosts)
+        model.setHeader(L10n.App.Service.Sections.Vpn.header, forSection: .vpn)
+        model.setHeader(L10n.Core.Organizer.Sections.Providers.header, forSection: .providers)
+        model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, forSection: .hosts)
+        model.setFooter(L10n.Core.Organizer.Sections.Providers.footer, forSection: .providers)
+        model.setFooter(L10n.Core.Organizer.Sections.Hosts.footer, forSection: .hosts)
         if #available(iOS 12, *) {
-            model.setHeader(L10n.Core.Organizer.Sections.Siri.header, for: .siri)
-            model.setFooter(L10n.Core.Organizer.Sections.Siri.footer, for: .siri)
-            model.set([.siriShortcuts], in: .siri)
+            model.setHeader(L10n.Core.Organizer.Sections.Siri.header, forSection: .siri)
+            model.setFooter(L10n.Core.Organizer.Sections.Siri.footer, forSection: .siri)
+            model.set([.siriShortcuts], forSection: .siri)
         }
-        model.setHeader(L10n.Core.Organizer.Sections.Support.header, for: .support)
-        model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, for: .feedback)
-        model.set([.connectionStatus], in: .vpn)
-        model.set([.donate, .translate], in: .support)
-        model.set([.joinCommunity, .writeReview], in: .feedback)
-        model.set([.openAbout], in: .about)
-        model.set([.uninstall], in: .destruction)
+        model.setHeader(L10n.Core.Organizer.Sections.Support.header, forSection: .support)
+        model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, forSection: .feedback)
+        model.set([.connectionStatus], forSection: .vpn)
+        model.set([.donate, .translate], forSection: .support)
+        model.set([.joinCommunity, .writeReview], forSection: .feedback)
+        model.set([.openAbout], forSection: .about)
+        model.set([.uninstall], forSection: .destruction)
         if AppConstants.Flags.isBeta {
             model.add(.test)
-            model.setHeader("Beta", for: .test)
-            model.set([.testDisplayLog, .testTermination], in: .test)
+            model.setHeader("Beta", forSection: .test)
+            model.set([.testDisplayLog, .testTermination], forSection: .test)
         }
         return model
     }()
@@ -89,8 +90,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         providerRows.append(.addProvider)
         hostRows.append(.addHost)
         
-        model.set(providerRows, in: .providers)
-        model.set(hostRows, in: .hosts)
+        model.set(providerRows, forSection: .providers)
+        model.set(hostRows, forSection: .hosts)
     }
     
     // MARK: UIViewController
@@ -125,8 +126,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         if !didShowSubreddit && !TransientStore.didHandleSubreddit {
             didShowSubreddit = true
             
-            let alert = Macros.alert(L10n.Core.Reddit.title, L10n.Core.Reddit.message)
-            alert.addDefaultAction(L10n.Core.Reddit.Buttons.subscribe) {
+            let alert = UIAlertController.asAlert(L10n.Core.Reddit.title, L10n.Core.Reddit.message)
+            alert.addPreferredAction(L10n.Core.Reddit.Buttons.subscribe) {
                 TransientStore.didHandleSubreddit = true
                 self.subscribeSubreddit()
             }
@@ -185,7 +186,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     private func addNewProvider() {
         let names = service.availableProviderNames()
         guard !names.isEmpty else {
-            let alert = Macros.alert(
+            let alert = UIAlertController.asAlert(
                 L10n.Core.Organizer.Sections.Providers.header,
                 L10n.Core.Organizer.Alerts.ExhaustedProviders.message
             )
@@ -207,7 +208,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
 
     private func donateToDeveloper() {
         guard SKPaymentQueue.canMakePayments() else {
-            let alert = Macros.alert(
+            let alert = UIAlertController.asAlert(
                 L10n.Core.Organizer.Cells.Donate.caption,
                 L10n.Core.Organizer.Alerts.CannotDonate.message
             )
@@ -230,8 +231,8 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         
         guard MFMailComposeViewController.canSendMail() else {
             let app = UIApplication.shared
-            guard let url = Utils.mailto(to: recipient, subject: subject, body: body), app.canOpenURL(url) else {
-                let alert = Macros.alert(L10n.Core.Translations.title, L10n.Core.Global.emailNotConfigured)
+            guard let url = URL.mailto(to: recipient, subject: subject, body: body), app.canOpenURL(url) else {
+                let alert = UIAlertController.asAlert(L10n.Core.Translations.title, L10n.Core.Global.emailNotConfigured)
                 alert.addCancelAction(L10n.Core.Global.ok)
                 present(alert, animated: true, completion: nil)
                 return
@@ -254,7 +255,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
     
     private func removeProfile(at indexPath: IndexPath) {
-        let sectionObject = model.section(for: indexPath.section)
+        let sectionObject = model.section(forIndex: indexPath.section)
         let rowProfile = profileKey(at: indexPath)
         switch sectionObject {
         case .providers:
@@ -288,7 +289,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         }
         
         tableView.beginUpdates()
-        model.deleteRow(in: sectionObject, at: indexPath.row)
+        model.deleteRow(at: indexPath.row, ofSection: sectionObject)
         tableView.deleteRows(at: [indexPath], with: .automatic)
 //        if let fallbackSection = fallbackSection {
 //            let section = model.index(ofSection: fallbackSection)
@@ -303,11 +304,11 @@ class OrganizerViewController: UITableViewController, TableModelHost {
     }
 
     private func confirmVpnProfileDeletion() {
-        let alert = Macros.alert(
+        let alert = UIAlertController.asAlert(
             L10n.Core.Organizer.Cells.Uninstall.caption,
             L10n.Core.Organizer.Alerts.DeleteVpnProfile.message
         )
-        alert.addDefaultAction(L10n.Core.Global.ok) {
+        alert.addPreferredAction(L10n.Core.Global.ok) {
             VPN.shared.uninstall(completionHandler: nil)
         }
         alert.addCancelAction(L10n.Core.Global.cancel)
@@ -329,7 +330,7 @@ class OrganizerViewController: UITableViewController, TableModelHost {
         guard let log = try? String(contentsOf: AppConstants.Log.fileURL) else {
             return
         }
-        let alert = Macros.alert("Debug log", log)
+        let alert = UIAlertController.asAlert("Debug log", log)
         alert.addCancelAction(L10n.Core.Global.ok)
         present(alert, animated: true, completion: nil)
     }
@@ -399,19 +400,19 @@ extension OrganizerViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -480,7 +481,7 @@ extension OrganizerViewController {
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Organizer.Cells.About.caption(GroupConstants.App.name)
-            cell.rightText = Utils.versionString()
+            cell.rightText = ApplicationInfo.appVersion
             return cell
             
         case .uninstall:
@@ -562,7 +563,7 @@ extension OrganizerViewController {
     
     private func sectionProfiles(at indexPath: IndexPath) -> [String] {
         let ids: [String]
-        let sectionObject = model.section(for: indexPath.section)
+        let sectionObject = model.section(forIndex: indexPath.section)
         switch sectionObject {
         case .providers:
             ids = providers
@@ -580,7 +581,7 @@ extension OrganizerViewController {
     }
     
     private func profileKey(at indexPath: IndexPath) -> ProfileKey {
-        let section = model.section(for: indexPath.section)
+        let section = model.section(forIndex: indexPath.section)
         switch section {
         case .providers:
             return ProfileKey(.provider, providers[indexPath.row])
@@ -595,7 +596,7 @@ extension OrganizerViewController {
 
     private func profile(at indexPath: IndexPath) -> ConnectionProfile {
         let id = sectionProfiles(at: indexPath)[indexPath.row]
-        let section = model.section(for: indexPath.section)
+        let section = model.section(forIndex: indexPath.section)
         let context: Context
         switch section {
         case .providers:

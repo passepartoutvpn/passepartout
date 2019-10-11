@@ -12,6 +12,10 @@ def shared_pods
     #pod_git $tunnelkit_name, $tunnelkit_specs, '1830695'
     #pod_path $tunnelkit_name, $tunnelkit_specs, '..'
     pod 'SSZipArchive'
+
+    for spec in ['About', 'Alerts', 'Dialogs', 'InApp', 'Misc', 'Options', 'Persistence', 'Reviewer', 'Tables'] do
+        pod "Convenience/#{spec}", :git => 'https://github.com/keeshux/convenience', :commit => '9689317'
+    end
 end
 
 target 'PassepartoutCore-iOS' do

@@ -27,9 +27,10 @@ import UIKit
 import Intents
 import IntentsUI
 import PassepartoutCore
+import Convenience
 
 @available(iOS 12, *)
-class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewControllerDelegate, TableModelHost {
+class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewControllerDelegate, StrongTableHost {
     private let service = TransientStore.shared.service
 
     private var providers: [String] = []
@@ -40,12 +41,12 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     
     weak var delegate: ShortcutsIntentDelegate?
     
-    // MARK: TableModelHost
+    // MARK: StrongTableHost
     
-    let model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
-        model.setHeader(L10n.Core.Organizer.Sections.Providers.header, for: .providers)
-        model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, for: .hosts)
+    let model: StrongTableModel<SectionType, RowType> = {
+        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
+        model.setHeader(L10n.Core.Organizer.Sections.Providers.header, forSection: .providers)
+        model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, forSection: .hosts)
         return model
     }()
     
@@ -55,11 +56,11 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
 
         if !providers.isEmpty {
             model.add(.providers)
-            model.set(.providerShortcut, count: providers.count, in: .providers)
+            model.set(.providerShortcut, count: providers.count, forSection: .providers)
         }
         if !hosts.isEmpty {
             model.add(.hosts)
-            model.set(.hostShortcut, count: hosts.count, in: .hosts)
+            model.set(.hostShortcut, count: hosts.count, forSection: .hosts)
         }
     }
     
@@ -108,15 +109,15 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -26,9 +26,10 @@
 import UIKit
 import StoreKit
 import PassepartoutCore
+import Convenience
 
-class DonationViewController: UITableViewController, TableModelHost {
-    private var donationList: [InApp.Donation] = []
+class DonationViewController: UITableViewController, StrongTableHost {
+    private var donationList: [Donation] = []
 
     private var productsByIdentifier: [String: SKProduct] = [:]
     
@@ -44,35 +45,34 @@ class DonationViewController: UITableViewController, TableModelHost {
         tableView.reloadData()
     }
     
-    // MARK: TableModel
+    // MARK: StrongTableModel
     
-    var model: TableModel<SectionType, RowType> = TableModel()
+    var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
 
     func reloadModel() {
         donationList = []
         model.clear()
         
         model.add(.oneTime)
-        model.setHeader(L10n.Core.Donation.Sections.OneTime.header, for: .oneTime)
-        model.setFooter(L10n.Core.Donation.Sections.OneTime.footer, for: .oneTime)
+        model.setHeader(L10n.Core.Donation.Sections.OneTime.header, forSection: .oneTime)
+        model.setFooter(L10n.Core.Donation.Sections.OneTime.footer, forSection: .oneTime)
 
         guard !isLoading else {
-            model.set([.loading], in: .oneTime)
+            model.set([.loading], forSection: .oneTime)
             return
         }
         
-        let completeList: [InApp.Donation] = [.tiny, .small, .medium, .big, .huge, .maxi]
-        for row in completeList {
+        for row in Donation.all {
             guard let _ = productsByIdentifier[row.rawValue] else {
                 continue
             }
             donationList.append(row)
         }
-        model.set(.donation, count: donationList.count, in: .oneTime)
+        model.set(.donation, count: donationList.count, forSection: .oneTime)
 
         if isPurchasing {
             model.add(.activity)
-            model.set([.purchasing], in: .activity)
+            model.set([.purchasing], forSection: .activity)
         }
     }
     
@@ -84,15 +84,9 @@ class DonationViewController: UITableViewController, TableModelHost {
         title = L10n.Core.Donation.title
         reloadModel()
 
-        let inApp = InAppHelper.shared
-        if inApp.products.isEmpty {
-            inApp.requestProducts(withIdentifiers: InApp.allIdentifiers()) {
-                self.isLoading = false
-                self.setProducts($0)
-            }
-        } else {
-            isLoading = false
-            setProducts(inApp.products)
+        ProductManager.shared.listProducts {
+            self.isLoading = false
+            self.setProducts($0)
         }
     }
     
@@ -103,19 +97,19 @@ class DonationViewController: UITableViewController, TableModelHost {
     // MARK: UITableViewController
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -159,7 +153,7 @@ class DonationViewController: UITableViewController, TableModelHost {
             reloadModel()
             tableView.reloadData()
             
-            InAppHelper.shared.purchase(product: product) {
+            ProductManager.shared.purchase(product) {
                 self.handlePurchase(result: $0, error: $1)
             }
             
@@ -168,7 +162,7 @@ class DonationViewController: UITableViewController, TableModelHost {
         }
     }
 
-    private func handlePurchase(result: InAppHelper.PurchaseResult, error: Error?) {
+    private func handlePurchase(result: InAppPurchaseResult, error: Error?) {
         let alert: UIAlertController
         switch result {
         case .cancelled:
@@ -178,10 +172,10 @@ class DonationViewController: UITableViewController, TableModelHost {
             return
 
         case .success:
-            alert = Macros.alert(L10n.Core.Donation.Alerts.Purchase.Success.title, L10n.Core.Donation.Alerts.Purchase.Success.message)
+            alert = UIAlertController.asAlert(L10n.Core.Donation.Alerts.Purchase.Success.title, L10n.Core.Donation.Alerts.Purchase.Success.message)
 
         case .failure:
-            alert = Macros.alert(title, L10n.Core.Donation.Alerts.Purchase.Failure.message(error?.localizedDescription ?? ""))
+            alert = UIAlertController.asAlert(title, L10n.Core.Donation.Alerts.Purchase.Failure.message(error?.localizedDescription ?? ""))
         }
         alert.addCancelAction(L10n.Core.Global.ok) {
             self.isPurchasing = false

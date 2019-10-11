@@ -27,6 +27,7 @@ import UIKit
 import Intents
 import IntentsUI
 import PassepartoutCore
+import Convenience
 
 @available(iOS 12, *)
 protocol ShortcutsIntentDelegate: class {
@@ -63,27 +64,27 @@ private struct ShortcutWrapper: Comparable {
 }
 
 @available(iOS 12, *)
-class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewControllerDelegate, INUIEditVoiceShortcutViewControllerDelegate, ShortcutsIntentDelegate, TableModelHost {
+class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewControllerDelegate, INUIEditVoiceShortcutViewControllerDelegate, ShortcutsIntentDelegate, StrongTableHost {
     private var wrappers: [ShortcutWrapper]?
     
     private var pendingShortcut: INShortcut?
     
     private var editedIndexPath: IndexPath?
     
-    // MARK: TableModel
+    // MARK: StrongTableModel
     
-    let model: TableModel<SectionType, RowType> = {
-        let model: TableModel<SectionType, RowType> = TableModel()
+    let model: StrongTableModel<SectionType, RowType> = {
+        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         model.add(.all)
-        model.setHeader(L10n.Core.Shortcuts.Edit.Sections.All.header, for: .all)
-        model.set([], in: .all)
+        model.setHeader(L10n.Core.Shortcuts.Edit.Sections.All.header, forSection: .all)
+        model.set([], forSection: .all)
         return model
     }()
     
     func reloadModel() {
         var rows = [RowType](repeating: .shortcut, count: wrappers?.count ?? 0)
         rows.append(.addShortcut)
-        model.set(rows, in: .all)
+        model.set(rows, forSection: .all)
     }
     
     // MARK: UIViewController
@@ -119,7 +120,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     private func handleShortcutsFetchError(_ error: Error?) {
         
         // TODO: really show it?
-//        let alert = Macros.alert(
+//        let alert = UIAlertController.asAlert(
 //            title,
 //            L10n.Core.Shortcuts.Edit.message(error?.localizedDescription ?? "")
 //        )
@@ -167,15 +168,15 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -28,8 +28,9 @@ import NetworkExtension
 import MBProgressHUD
 import TunnelKit
 import PassepartoutCore
+import Convenience
 
-class ServiceViewController: UIViewController, TableModelHost {
+class ServiceViewController: UIViewController, StrongTableHost {
     @IBOutlet private weak var tableView: UITableView!
 
     @IBOutlet private weak var viewWelcome: UIView!
@@ -38,6 +39,11 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     @IBOutlet private weak var itemEdit: UIBarButtonItem!
     
+    private let downloader = FileDownloader(
+        temporaryURL: GroupConstants.App.cachesURL.appendingPathComponent("downloaded.tmp"),
+        timeout: AppConstants.Web.timeout
+    )
+
     private var profile: ConnectionProfile?
 
     private let service = TransientStore.shared.service
@@ -54,7 +60,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     // MARK: Table
     
-    var model: TableModel<SectionType, RowType> = TableModel()
+    var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
     
     private let trustedNetworks = TrustedNetworksModel()
     
@@ -217,13 +223,13 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
 
     @IBAction private func renameProfile() {
-        let alert = Macros.alert(L10n.Core.Service.Alerts.Rename.title, L10n.Core.Global.Host.TitleInput.message)
+        let alert = UIAlertController.asAlert(L10n.Core.Service.Alerts.Rename.title, L10n.Core.Global.Host.TitleInput.message)
         alert.addTextField { (field) in
             field.text = self.profile?.id
             field.applyProfileId(Theme.current)
             field.delegate = self
         }
-        pendingRenameAction = alert.addDefaultAction(L10n.Core.Global.ok) {
+        pendingRenameAction = alert.addPreferredAction(L10n.Core.Global.ok) {
             guard let newId = alert.textFields?.first?.text else {
                 return
             }
@@ -245,7 +251,7 @@ class ServiceViewController: UIViewController, TableModelHost {
                 IntentDispatcher.donateConnection(with: uncheckedProfile)
             }
             guard !service.needsCredentials(for: uncheckedProfile) else {
-                let alert = Macros.alert(
+                let alert = UIAlertController.asAlert(
                     L10n.App.Service.Sections.Vpn.header,
                     L10n.Core.Service.Alerts.CredentialsNeeded.message
                 )
@@ -283,11 +289,11 @@ class ServiceViewController: UIViewController, TableModelHost {
     
     private func confirmVpnReconnection() {
         guard vpn.status == .disconnected else {
-            let alert = Macros.alert(
+            let alert = UIAlertController.asAlert(
                 L10n.Core.Service.Cells.ConnectionStatus.caption,
                 L10n.Core.Service.Alerts.ReconnectVpn.message
             )
-            alert.addDefaultAction(L10n.Core.Global.ok) {
+            alert.addPreferredAction(L10n.Core.Global.ok) {
                 self.vpn.reconnect(completionHandler: nil)
             }
             alert.addCancelAction(L10n.Core.Global.cancel)
@@ -300,7 +306,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     private func refreshProviderInfrastructure() {
         let name = uncheckedProviderProfile.name
         
-        let hud = HUD()
+        let hud = HUD(view: view.window!)
         let isUpdating = InfrastructureFactory.shared.update(name, notBeforeInterval: AppConstants.Web.minimumUpdateInterval) { (response, error) in
             hud.hide()
             guard let response = response else {
@@ -347,11 +353,11 @@ class ServiceViewController: UIViewController, TableModelHost {
             completionHandler()
             return
         }
-        let alert = Macros.alert(
+        let alert = UIAlertController.asAlert(
             L10n.Core.Service.Sections.Trusted.header,
             L10n.Core.Service.Alerts.Trusted.WillDisconnectPolicy.message
         )
-        alert.addDefaultAction(L10n.Core.Global.ok) {
+        alert.addPreferredAction(L10n.Core.Global.ok) {
             completionHandler()
         }
         alert.addCancelAction(L10n.Core.Global.cancel) {
@@ -361,11 +367,11 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     private func confirmPotentialTrustedDisconnection(at rowIndex: Int?, completionHandler: @escaping () -> Void) {
-        let alert = Macros.alert(
+        let alert = UIAlertController.asAlert(
             L10n.Core.Service.Sections.Trusted.header,
             L10n.Core.Service.Alerts.Trusted.WillDisconnectTrusted.message
         )
-        alert.addDefaultAction(L10n.Core.Global.ok) {
+        alert.addPreferredAction(L10n.Core.Global.ok) {
             completionHandler()
         }
         alert.addCancelAction(L10n.Core.Global.cancel) {
@@ -380,12 +386,12 @@ class ServiceViewController: UIViewController, TableModelHost {
     }
     
     private func testInternetConnectivity() {
-        let hud = HUD()
+        let hud = HUD(view: view.window!)
         Utils.checkConnectivityURL(AppConstants.Web.connectivityURL, timeout: AppConstants.Web.connectivityTimeout) {
             hud.hide()
 
             let V = L10n.Core.Service.Alerts.TestConnectivity.Messages.self
-            let alert = Macros.alert(
+            let alert = UIAlertController.asAlert(
                 L10n.Core.Service.Alerts.TestConnectivity.title,
                 $0 ? V.success : V.failure
             )
@@ -396,7 +402,7 @@ class ServiceViewController: UIViewController, TableModelHost {
     
 //    private func displayDataCount() {
 //        guard vpn.isEnabled else {
-//            let alert = Macros.alert(
+//            let alert = UIAlertController.asAlert(
 //                L10n.Core.Service.Cells.DataCount.caption,
 //                L10n.Core.Service.Alerts.DataCount.Messages.notAvailable
 //            )
@@ -412,7 +418,7 @@ class ServiceViewController: UIViewController, TableModelHost {
 //            } else {
 //                message = L10n.Core.Service.Alerts.DataCount.Messages.notAvailable
 //            }
-//            let alert = Macros.alert(
+//            let alert = UIAlertController.asAlert(
 //                L10n.Core.Service.Cells.DataCount.caption,
 //                message
 //            )
@@ -428,7 +434,7 @@ class ServiceViewController: UIViewController, TableModelHost {
         }
         
         guard vpn.status == .disconnected else {
-            let alert = Macros.alert(
+            let alert = UIAlertController.asAlert(
                 L10n.Core.Service.Cells.MasksPrivateData.caption,
                 L10n.Core.Service.Alerts.MasksPrivateData.Messages.mustReconnect
             )
@@ -462,26 +468,26 @@ class ServiceViewController: UIViewController, TableModelHost {
             return
         }
         
-        let alert = Macros.alert(
+        let alert = UIAlertController.asAlert(
             L10n.Core.Service.Alerts.Download.title,
             L10n.Core.Service.Alerts.Download.message(providerProfile.name.rawValue)
         )
         alert.addCancelAction(L10n.Core.Global.cancel)
-        alert.addDefaultAction(L10n.Core.Global.ok) {
+        alert.addPreferredAction(L10n.Core.Global.ok) {
             self.confirmDownload(URL(string: downloadURL)!)
         }
         present(alert, animated: true, completion: nil)
     }
     
     private func confirmDownload(_ url: URL) {
-        _ = Downloader.shared.download(url: url, in: view) { (url, error) in
+        _ = downloader.download(url: url, in: view) { (url, error) in
             self.handleDownloadedProviderResources(url: url, error: error)
         }
     }
     
     private func handleDownloadedProviderResources(url: URL?, error: Error?) {
         guard let url = url else {
-            let alert = Macros.alert(
+            let alert = UIAlertController.asAlert(
                 L10n.Core.Service.Alerts.Download.title,
                 L10n.Core.Service.Alerts.Download.failed(error?.localizedDescription ?? "")
             )
@@ -490,7 +496,7 @@ class ServiceViewController: UIViewController, TableModelHost {
             return
         }
 
-        let hud = HUD(label: L10n.Core.Service.Alerts.Download.Hud.extracting)
+        let hud = HUD(view: view.window!, label: L10n.Core.Service.Alerts.Download.Hud.extracting)
         hud.show()
         uncheckedProviderProfile.name.importExternalResources(from: url) {
             hud.hide()
@@ -615,22 +621,22 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     }
     
     private var statusIndexPath: IndexPath? {
-        return model.indexPath(row: .connectionStatus, section: .vpn)
+        return model.indexPath(forRow: .connectionStatus, ofSection: .vpn)
     }
     
     private var dataCountIndexPath: IndexPath? {
-        return model.indexPath(row: .dataCount, section: .diagnostics)
+        return model.indexPath(forRow: .dataCount, ofSection: .diagnostics)
     }
     
     private var endpointIndexPath: IndexPath {
-        guard let ip = model.indexPath(row: .endpoint, section: .configuration) else {
+        guard let ip = model.indexPath(forRow: .endpoint, ofSection: .configuration) else {
             fatalError("Could not locate endpointIndexPath")
         }
         return ip
     }
     
     private var providerPresetIndexPath: IndexPath {
-        guard let ip = model.indexPath(row: .providerPreset, section: .configuration) else {
+        guard let ip = model.indexPath(forRow: .providerPreset, ofSection: .configuration) else {
             fatalError("Could not locate presetIndexPath")
         }
         return ip
@@ -650,19 +656,19 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return model.count
+        return model.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(for: section)
+        return model.header(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        let rows = model.rows(for: section)
+        let rows = model.rows(forSection: section)
         if rows.contains(.providerRefresh), let date = lastInfrastructureUpdate {
             return L10n.Core.Service.Sections.ProviderInfrastructure.footer(date.timestamp)
         }
-        return model.footer(for: section)
+        return model.footer(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -670,7 +676,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count(for: section)
+        return model.numberOfRows(forSection: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -931,7 +937,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
 
             guard trustedNetworks.addCurrentWifi() else {
-                let alert = Macros.alert(
+                let alert = UIAlertController.asAlert(
                     L10n.Core.Service.Sections.Trusted.header,
                     L10n.Core.Service.Alerts.Trusted.NoNetwork.message
                 )
@@ -1033,31 +1039,31 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         }
 
         // headers
-        model.setHeader(L10n.App.Service.Sections.Vpn.header, for: .vpn)
+        model.setHeader(L10n.App.Service.Sections.Vpn.header, forSection: .vpn)
         if isProvider {
-            model.setHeader(L10n.App.Service.Sections.Configuration.header, for: .authentication)
+            model.setHeader(L10n.App.Service.Sections.Configuration.header, forSection: .authentication)
         } else {
-            model.setHeader(L10n.App.Service.Sections.Configuration.header, for: .configuration)
+            model.setHeader(L10n.App.Service.Sections.Configuration.header, forSection: .configuration)
         }
         if isActiveProfile {
             if isProvider {
-                model.setHeader("", for: .vpnResolvesHostname)
-                model.setHeader("", for: .vpnSurvivesSleep)
+                model.setHeader("", forSection: .vpnResolvesHostname)
+                model.setHeader("", forSection: .vpnSurvivesSleep)
             }
-            model.setHeader(L10n.Core.Service.Sections.Trusted.header, for: .trusted)
-            model.setHeader(L10n.Core.Service.Sections.Diagnostics.header, for: .diagnostics)
-            model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, for: .feedback)
+            model.setHeader(L10n.Core.Service.Sections.Trusted.header, forSection: .trusted)
+            model.setHeader(L10n.Core.Service.Sections.Diagnostics.header, forSection: .diagnostics)
+            model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, forSection: .feedback)
         }
         
         // footers
         if isActiveProfile {
-            model.setFooter(L10n.Core.Service.Sections.Vpn.footer, for: .vpn)
+            model.setFooter(L10n.Core.Service.Sections.Vpn.footer, forSection: .vpn)
             if isProvider {
-                model.setFooter(L10n.Core.Service.Sections.VpnResolvesHostname.footer, for: .vpnResolvesHostname)
+                model.setFooter(L10n.Core.Service.Sections.VpnResolvesHostname.footer, forSection: .vpnResolvesHostname)
             }
-            model.setFooter(L10n.Core.Service.Sections.VpnSurvivesSleep.footer, for: .vpnSurvivesSleep)
-            model.setFooter(L10n.Core.Service.Sections.Trusted.footer, for: .trustedPolicy)
-            model.setFooter(L10n.Core.Service.Sections.Diagnostics.footer, for: .diagnostics)
+            model.setFooter(L10n.Core.Service.Sections.VpnSurvivesSleep.footer, forSection: .vpnSurvivesSleep)
+            model.setFooter(L10n.Core.Service.Sections.Trusted.footer, forSection: .trustedPolicy)
+            model.setFooter(L10n.Core.Service.Sections.Diagnostics.footer, forSection: .diagnostics)
         }
         
         // rows
@@ -1066,30 +1072,30 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             if vpn.isEnabled {
                 rows.append(.reconnect)
             }
-            model.set(rows, in: .vpn)
+            model.set(rows, forSection: .vpn)
         } else {
-            model.set([.useProfile], in: .vpn)
+            model.set([.useProfile], forSection: .vpn)
         }
         if isProvider {
-            model.set([.account], in: .authentication)
-            model.set([.providerPool, .endpoint, .providerPreset, .networkSettings], in: .configuration)
-            model.set([.providerRefresh], in: .providerInfrastructure)
+            model.set([.account], forSection: .authentication)
+            model.set([.providerPool, .endpoint, .providerPreset, .networkSettings], forSection: .configuration)
+            model.set([.providerRefresh], forSection: .providerInfrastructure)
         } else {
-            model.set([.account, .endpoint, .hostParameters, .networkSettings], in: .configuration)
+            model.set([.account, .endpoint, .hostParameters, .networkSettings], forSection: .configuration)
         }
         if isActiveProfile {
             if isProvider {
-                model.set([.vpnResolvesHostname], in: .vpnResolvesHostname)
+                model.set([.vpnResolvesHostname], forSection: .vpnResolvesHostname)
             }
-            model.set([.vpnSurvivesSleep], in: .vpnSurvivesSleep)
-            model.set([.trustedPolicy], in: .trustedPolicy)
-            model.set([.dataCount, .debugLog, .masksPrivateData], in: .diagnostics)
-            model.set([.reportIssue], in: .feedback)
+            model.set([.vpnSurvivesSleep], forSection: .vpnSurvivesSleep)
+            model.set([.trustedPolicy], forSection: .trustedPolicy)
+            model.set([.dataCount, .debugLog, .masksPrivateData], forSection: .diagnostics)
+            model.set([.reportIssue], forSection: .feedback)
         }
 
         trustedNetworks.delegate = self
         trustedNetworks.load(from: service.preferences)
-        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, in: .trusted)
+        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, forSection: .trusted)
     }
 
     private func reloadVpnStatus() {
@@ -1170,7 +1176,7 @@ extension ServiceViewController: TrustedNetworksModelDelegate {
     }
     
     func trustedNetworks(_: TrustedNetworksModel, shouldInsertWifiAt rowIndex: Int) {
-        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, in: .trusted)
+        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, forSection: .trusted)
         tableView.insertRows(at: [IndexPath(row: rowIndex, section: trustedSectionIndex)], with: .bottom)
     }
     
@@ -1186,7 +1192,7 @@ extension ServiceViewController: TrustedNetworksModelDelegate {
     }
     
     func trustedNetworks(_: TrustedNetworksModel, shouldDeleteWifiAt rowIndex: Int) {
-        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, in: .trusted)
+        model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, forSection: .trusted)
         tableView.deleteRows(at: [IndexPath(row: rowIndex, section: trustedSectionIndex)], with: .top)
     }
     
