@@ -2,3 +2,7 @@
 
 - Upgrade project to Xcode 11.
 
+### Fixed
+
+- Cannot enter IP addresses in some localizations.
+
