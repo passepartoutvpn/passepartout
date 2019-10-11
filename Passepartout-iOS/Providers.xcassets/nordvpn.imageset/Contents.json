@@ -34,6 +34,17 @@
       "idiom" : "universal",
       "filename" : "nordvpn@3x.png",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "nordvpn-dark@3x.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "scale" : "3x"
     }
   ],
   "info" : {
