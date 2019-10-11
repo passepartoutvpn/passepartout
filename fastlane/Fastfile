@@ -13,63 +13,6 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-build_description_path = "../ci/DESCRIPTION.md" # "../#{ENV["BUILD_DESCRIPTION_PATH"]}"
-build_changelog_path = "../ci/CHANGELOG.md" # "../#{ENV["BUILD_CHANGELOG_PATH"]}"
-beta_feedback_path = "../ci/beta-feedback.txt"
+default_platform(:ios)
 
-desc "Prepare a new build"
-lane :prepare_archive do
-    ensure_git_status_clean
-    cocoapods
-    get_build_number
-    base_build_number = lane_context[SharedValues::BUILD_NUMBER].to_i
-    increment_build_number(
-        build_number: base_build_number + number_of_commits
-    )
-end
-
-desc "Archive a new build"
-lane :create_archive do
-    prepare_archive
-    match
-    gym
-end
-
-desc "Set build changelog"
-lane :set_build_changelog do
-    lane_context[SharedValues::FL_CHANGELOG] = File.read(build_changelog_path)
-end
-
-desc "Submit a build to App Center"
-lane :dev_deploy do
-    set_build_changelog
-    appcenter_upload
-end
-
-desc "Submit a build to TestFlight"
-lane :beta_deploy do
-    set_build_changelog
-    pilot(
-        beta_app_description: File.read(build_description_path),
-        beta_app_feedback_email: File.read(beta_feedback_path)
-    )
-end
-
-desc "Update App Store metadata"
-lane :update_metadata do
-    deliver(
-        skip_screenshots: true
-    )
-end
-
-desc "Update App Store screenshots"
-lane :update_screenshots do
-    deliver(
-        skip_metadata: true
-    )
-end
-
-desc "Update provisioning profiles"
-lane :update_provisioning do |options|
-    match(options)
-end
+import("../Submodules/fastlane-ci-templates/include/Fastfile.include")

@@ -13,8 +13,6 @@ fastlane/metadata/review_information
 fastlane/metadata/trade_representative_contact_information
 build/
 dist/
-ci/CHANGELOG.md
-ci/DESCRIPTION.md
-ci/beta-feedback.txt
+templates/
 .env.secret*
 Preview.html
