@@ -14,7 +14,8 @@ def shared_pods
     pod 'SSZipArchive'
 
     for spec in ['About', 'Alerts', 'Dialogs', 'InApp', 'Misc', 'Options', 'Persistence', 'Reviewer', 'Tables'] do
-        pod "Convenience/#{spec}", :git => 'https://github.com/keeshux/convenience', :commit => '9689317'
+        pod "Convenience/#{spec}", :git => 'https://github.com/keeshux/convenience', :commit => 'b990a8c'
+        #pod "Convenience/#{spec}", :path => '../../personal/convenience'
     end
 end
 

@@ -320,7 +320,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     }
     
     private func writeReview() {
-        let url = AppConstants.URLs.review(withId: AppConstants.App.appStoreId)
+        let url = Reviewer.urlForReview(withAppId: AppConstants.App.appStoreId)
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
