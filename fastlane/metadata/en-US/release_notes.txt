@@ -5,4 +5,5 @@
 ### Fixed
 
 - Cannot enter IP addresses in some localizations.
+- Cannot easily trust Wi-Fi networks in iOS 13.
 
