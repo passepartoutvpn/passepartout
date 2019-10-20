@@ -351,10 +351,10 @@ class ServiceViewController: UIViewController, StrongTableHost {
             case .denied:
                 let alert = UIAlertController.asAlert(
                     L10n.App.Service.Cells.TrustedAddWifi.caption,
-                    "You must allow location access to trust this Wi-Fi network. Go to iOS settings and review your location permissions for Passepartout."
+                    L10n.App.Service.Alerts.Location.Message.denied
                 )
                 alert.addCancelAction(L10n.Core.Global.ok)
-                alert.addPreferredAction("Settings") {
+                alert.addPreferredAction(L10n.App.Service.Alerts.Location.Button.settings) {
                     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
                 }
                 present(alert, animated: true, completion: nil)
