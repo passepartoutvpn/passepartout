@@ -341,7 +341,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         }
     }
     
-    private func trustCurrentWiFi() -> Bool {
+    private func trustCurrentWiFi() {
         if #available(iOS 13, *) {
             let auth = CLLocationManager.authorizationStatus()
             switch auth {
@@ -358,12 +358,12 @@ class ServiceViewController: UIViewController, StrongTableHost {
                     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
                 }
                 present(alert, animated: true, completion: nil)
-                return false
+                return
                 
             default:
                 locationManager.delegate = self
                 locationManager.requestWhenInUseAuthorization()
-                return false
+                return
             }
         }
 
@@ -379,9 +379,8 @@ class ServiceViewController: UIViewController, StrongTableHost {
             )
             alert.addCancelAction(L10n.Core.Global.ok)
             present(alert, animated: true, completion: nil)
-            return false
+            return
         }
-        return true
     }
     
     private func toggleTrustedConnectionPolicy(_ isOn: Bool, sender: ToggleTableViewCell) {
@@ -977,7 +976,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             return true
             
         case .trustedAddCurrentWiFi:
-            return trustCurrentWiFi()
+            trustCurrentWiFi()
             
         case .testConnectivity:
             testInternetConnectivity()
@@ -1330,7 +1329,7 @@ extension ServiceViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 
         // can only change when calling this method, re-invoke
-        _ = trustCurrentWiFi()
+        trustCurrentWiFi()
     }
 }
 
