@@ -349,12 +349,20 @@ class ServiceViewController: UIViewController, StrongTableHost {
                 break
                 
             case .denied:
-                // TODO: alert when location denied
+                let alert = UIAlertController.asAlert(
+                    L10n.App.Service.Cells.TrustedAddWifi.caption,
+                    "You must allow location access to trust this Wi-Fi network. Go to iOS settings and review your location permissions for Passepartout."
+                )
+                alert.addCancelAction(L10n.Core.Global.ok)
+                alert.addPreferredAction("Settings") {
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                }
+                present(alert, animated: true, completion: nil)
                 return false
                 
             default:
+                locationManager.delegate = self
                 locationManager.requestWhenInUseAuthorization()
-                // TODO: auto-invoke trustCurrentWiFi() again when location granted
                 return false
             }
         }
@@ -1315,6 +1323,14 @@ extension ServiceViewController: ProviderPresetViewControllerDelegate {
         uncheckedProviderProfile.presetId = preset.id
         reloadSelectedRow(andRowsAt: [endpointIndexPath])
         vpn.reinstallIfEnabled()
+    }
+}
+
+extension ServiceViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
+        // can only change when calling this method, re-invoke
+        _ = trustCurrentWiFi()
     }
 }
 
