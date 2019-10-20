@@ -42,6 +42,8 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private let locationManager = CLLocationManager()
     
+    private var isPendingTrustedWiFi = false
+    
     private let downloader = FileDownloader(
         temporaryURL: GroupConstants.App.cachesURL.appendingPathComponent("downloaded.tmp"),
         timeout: AppConstants.Web.timeout
@@ -349,6 +351,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
                 break
                 
             case .denied:
+                isPendingTrustedWiFi = false
                 let alert = UIAlertController.asAlert(
                     L10n.App.Service.Cells.TrustedAddWifi.caption,
                     L10n.App.Service.Alerts.Location.Message.denied
@@ -361,6 +364,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
                 return
                 
             default:
+                isPendingTrustedWiFi = true
                 locationManager.delegate = self
                 locationManager.requestWhenInUseAuthorization()
                 return
@@ -1327,8 +1331,10 @@ extension ServiceViewController: ProviderPresetViewControllerDelegate {
 
 extension ServiceViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-
-        // can only change when calling this method, re-invoke
+        guard isPendingTrustedWiFi else {
+            return
+        }
+        isPendingTrustedWiFi = false
         trustCurrentWiFi()
     }
 }
