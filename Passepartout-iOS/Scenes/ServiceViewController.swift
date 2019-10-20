@@ -338,6 +338,24 @@ class ServiceViewController: UIViewController, StrongTableHost {
         }
     }
     
+    private func trustCurrentWiFi() -> Bool {
+        if #available(iOS 12, *) {
+            IntentDispatcher.donateTrustCurrentNetwork()
+            IntentDispatcher.donateUntrustCurrentNetwork()
+        }
+
+        guard trustedNetworks.addCurrentWifi() else {
+            let alert = UIAlertController.asAlert(
+                L10n.Core.Service.Sections.Trusted.header,
+                L10n.Core.Service.Alerts.Trusted.NoNetwork.message
+            )
+            alert.addCancelAction(L10n.Core.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
     private func toggleTrustedConnectionPolicy(_ isOn: Bool, sender: ToggleTableViewCell) {
         let completionHandler: () -> Void = {
             self.service.preferences.trustPolicy = isOn ? .disconnect : .ignore
@@ -931,20 +949,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             return true
             
         case .trustedAddCurrentWiFi:
-            if #available(iOS 12, *) {
-                IntentDispatcher.donateTrustCurrentNetwork()
-                IntentDispatcher.donateUntrustCurrentNetwork()
-            }
-
-            guard trustedNetworks.addCurrentWifi() else {
-                let alert = UIAlertController.asAlert(
-                    L10n.Core.Service.Sections.Trusted.header,
-                    L10n.Core.Service.Alerts.Trusted.NoNetwork.message
-                )
-                alert.addCancelAction(L10n.Core.Global.ok)
-                present(alert, animated: true, completion: nil)
-                return false
-            }
+            return trustCurrentWiFi()
             
         case .testConnectivity:
             testInternetConnectivity()
