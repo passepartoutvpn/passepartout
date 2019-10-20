@@ -26,6 +26,7 @@
 import UIKit
 import NetworkExtension
 import MBProgressHUD
+import CoreLocation
 import TunnelKit
 import PassepartoutCore
 import Convenience
@@ -38,6 +39,10 @@ class ServiceViewController: UIViewController, StrongTableHost {
     @IBOutlet private weak var labelWelcome: UILabel!
     
     @IBOutlet private weak var itemEdit: UIBarButtonItem!
+    
+    private let locationManager = CLLocationManager()
+    
+    private var isPendingTrustedWiFi = false
     
     private let downloader = FileDownloader(
         temporaryURL: GroupConstants.App.cachesURL.appendingPathComponent("downloaded.tmp"),
@@ -335,6 +340,50 @@ class ServiceViewController: UIViewController, StrongTableHost {
                 return
             }
             vpn.reinstall(completionHandler: nil)
+        }
+    }
+    
+    private func trustCurrentWiFi() {
+        if #available(iOS 13, *) {
+            let auth = CLLocationManager.authorizationStatus()
+            switch auth {
+            case .authorizedAlways, .authorizedWhenInUse:
+                break
+                
+            case .denied:
+                isPendingTrustedWiFi = false
+                let alert = UIAlertController.asAlert(
+                    L10n.App.Service.Cells.TrustedAddWifi.caption,
+                    L10n.App.Service.Alerts.Location.Message.denied
+                )
+                alert.addCancelAction(L10n.Core.Global.ok)
+                alert.addPreferredAction(L10n.App.Service.Alerts.Location.Button.settings) {
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                }
+                present(alert, animated: true, completion: nil)
+                return
+                
+            default:
+                isPendingTrustedWiFi = true
+                locationManager.delegate = self
+                locationManager.requestWhenInUseAuthorization()
+                return
+            }
+        }
+
+        if #available(iOS 12, *) {
+            IntentDispatcher.donateTrustCurrentNetwork()
+            IntentDispatcher.donateUntrustCurrentNetwork()
+        }
+
+        guard trustedNetworks.addCurrentWifi() else {
+            let alert = UIAlertController.asAlert(
+                L10n.Core.Service.Sections.Trusted.header,
+                L10n.Core.Service.Alerts.Trusted.NoNetwork.message
+            )
+            alert.addCancelAction(L10n.Core.Global.ok)
+            present(alert, animated: true, completion: nil)
+            return
         }
     }
     
@@ -931,20 +980,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             return true
             
         case .trustedAddCurrentWiFi:
-            if #available(iOS 12, *) {
-                IntentDispatcher.donateTrustCurrentNetwork()
-                IntentDispatcher.donateUntrustCurrentNetwork()
-            }
-
-            guard trustedNetworks.addCurrentWifi() else {
-                let alert = UIAlertController.asAlert(
-                    L10n.Core.Service.Sections.Trusted.header,
-                    L10n.Core.Service.Alerts.Trusted.NoNetwork.message
-                )
-                alert.addCancelAction(L10n.Core.Global.ok)
-                present(alert, animated: true, completion: nil)
-                return false
-            }
+            trustCurrentWiFi()
             
         case .testConnectivity:
             testInternetConnectivity()
@@ -1290,6 +1326,16 @@ extension ServiceViewController: ProviderPresetViewControllerDelegate {
         uncheckedProviderProfile.presetId = preset.id
         reloadSelectedRow(andRowsAt: [endpointIndexPath])
         vpn.reinstallIfEnabled()
+    }
+}
+
+extension ServiceViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard isPendingTrustedWiFi else {
+            return
+        }
+        isPendingTrustedWiFi = false
+        trustCurrentWiFi()
     }
 }
 

@@ -75,6 +75,18 @@ internal enum L10n {
       }
     }
     internal enum Service {
+      internal enum Alerts {
+        internal enum Location {
+          internal enum Button {
+            /// Settings
+            internal static let settings = L10n.tr("App", "service.alerts.location.button.settings")
+          }
+          internal enum Message {
+            /// You must allow location access to trust this Wi-Fi network. Go to iOS settings and review your location permissions for Passepartout.
+            internal static let denied = L10n.tr("App", "service.alerts.location.message.denied")
+          }
+        }
+      }
       internal enum Cells {
         internal enum Host {
           internal enum Parameters {

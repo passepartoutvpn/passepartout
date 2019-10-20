@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Refresh infrastructure";
 "service.cells.host.parameters.caption" = "Parameters";
 "service.cells.trusted_add_wifi.caption" = "Add current Wi-Fi";
+"service.alerts.location.message.denied" = "You must allow location access to trust this Wi-Fi network. Go to iOS settings and review your location permissions for Passepartout.";
+"service.alerts.location.button.settings" = "Settings";
 
 "account.sections.credentials.header" = "Credentials";
 
