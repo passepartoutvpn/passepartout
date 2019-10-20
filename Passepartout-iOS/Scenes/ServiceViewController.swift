@@ -26,6 +26,7 @@
 import UIKit
 import NetworkExtension
 import MBProgressHUD
+import CoreLocation
 import TunnelKit
 import PassepartoutCore
 import Convenience
@@ -38,6 +39,8 @@ class ServiceViewController: UIViewController, StrongTableHost {
     @IBOutlet private weak var labelWelcome: UILabel!
     
     @IBOutlet private weak var itemEdit: UIBarButtonItem!
+    
+    private let locationManager = CLLocationManager()
     
     private let downloader = FileDownloader(
         temporaryURL: GroupConstants.App.cachesURL.appendingPathComponent("downloaded.tmp"),
@@ -339,6 +342,23 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
     
     private func trustCurrentWiFi() -> Bool {
+        if #available(iOS 13, *) {
+            let auth = CLLocationManager.authorizationStatus()
+            switch auth {
+            case .authorizedAlways, .authorizedWhenInUse:
+                break
+                
+            case .denied:
+                // TODO: alert when location denied
+                return false
+                
+            default:
+                locationManager.requestWhenInUseAuthorization()
+                // TODO: auto-invoke trustCurrentWiFi() again when location granted
+                return false
+            }
+        }
+
         if #available(iOS 12, *) {
             IntentDispatcher.donateTrustCurrentNetwork()
             IntentDispatcher.donateUntrustCurrentNetwork()
