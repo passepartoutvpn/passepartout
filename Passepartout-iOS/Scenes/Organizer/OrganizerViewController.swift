@@ -69,7 +69,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         model.setHeader(L10n.Core.Organizer.Sections.Support.header, forSection: .support)
         model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, forSection: .feedback)
         model.set([.connectionStatus], forSection: .vpn)
-        model.set([.donate, .translate], forSection: .support)
+        model.set([.donate, .translate, .faq], forSection: .support)
         model.set([.joinCommunity, .writeReview], forSection: .feedback)
         model.set([.openAbout], forSection: .about)
         model.set([.uninstall], forSection: .destruction)
@@ -219,10 +219,10 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         perform(segue: StoryboardSegue.Organizer.donateSegueIdentifier, sender: nil)
     }
 
-    private func visitPatreon() {
-        UIApplication.shared.open(AppConstants.URLs.patreon, options: [:], completionHandler: nil)
+    private func visit(_ url: URL) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    
+
     private func offerTranslation() {
         let V = AppConstants.Translations.Email.self
         let recipient = V.recipient
@@ -386,6 +386,8 @@ extension OrganizerViewController {
         
         case translate
         
+        case faq
+        
         case joinCommunity
         
         case writeReview
@@ -468,6 +470,11 @@ extension OrganizerViewController {
             cell.leftText = L10n.Core.Organizer.Cells.Translate.caption
             return cell
             
+        case .faq:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Core.About.Cells.Faq.caption
+            return cell
+            
         case .joinCommunity:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Organizer.Cells.JoinCommunity.caption
@@ -522,10 +529,13 @@ extension OrganizerViewController {
             donateToDeveloper()
 
 //        case .patreon:
-//            visitPatreon()
+//            visit(AppConstants.URLs.patreon)
             
         case .translate:
             offerTranslation()
+            
+        case .faq:
+            visit(AppConstants.URLs.faq)
             
         case .joinCommunity:
             subscribeSubreddit()
