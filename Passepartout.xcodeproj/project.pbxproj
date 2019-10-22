@@ -56,6 +56,7 @@
 		0E3152DA223FA05800F61841 /* PlaceholderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */; };
 		0E3152DB223FA05800F61841 /* ProfileKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D14021919F5600BB5FB2 /* ProfileKey.swift */; };
 		0E3152DC223FA05800F61841 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
+		0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3262D8235EE8DA00B5E470 /* HostImporter.swift */; };
 		0E3419AD2350815E00419E18 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3419AC2350815E00419E18 /* Donation.swift */; };
 		0E3586FE225BD34800509A4D /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */; };
 		0E36D24D2240234B006AF062 /* ShortcutsAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */; };
@@ -83,7 +84,6 @@
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD7862257462800D033B4 /* Providers.xcassets */; };
 		0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD788225746B300D033B4 /* Flags.xcassets */; };
-		0EA068F4218475F800C320AD /* ConfigurationParserResult+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA068F3218475F800C320AD /* ConfigurationParserResult+Alerts.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
@@ -179,6 +179,7 @@
 		0E31529B223F9EF400F61841 /* PassepartoutCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PassepartoutCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E31529D223F9EF500F61841 /* PassepartoutCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassepartoutCore.h; sourceTree = "<group>"; };
 		0E31529E223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E3262D8235EE8DA00B5E470 /* HostImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostImporter.swift; sourceTree = "<group>"; };
 		0E3419AC2350815E00419E18 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsAddViewController.swift; sourceTree = "<group>"; };
@@ -247,7 +248,6 @@
 		0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructurePreset.swift; sourceTree = "<group>"; };
 		0E9CD7862257462800D033B4 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
 		0E9CD788225746B300D033B4 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
-		0EA068F3218475F800C320AD /* ConfigurationParserResult+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConfigurationParserResult+Alerts.swift"; sourceTree = "<group>"; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
 		0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Migration.swift"; sourceTree = "<group>"; };
@@ -534,8 +534,8 @@
 			isa = PBXGroup;
 			children = (
 				0E45E6E222BD793800F19312 /* App.strings */,
-				0EA068F3218475F800C320AD /* ConfigurationParserResult+Alerts.swift */,
 				0E3419AC2350815E00419E18 /* Donation.swift */,
+				0E3262D8235EE8DA00B5E470 /* HostImporter.swift */,
 				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
 				0E4FD7F020D58618002221FF /* Macros.swift */,
 				0E24273F225951B00064A1A3 /* ProductManager.swift */,
@@ -986,6 +986,7 @@
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
 				0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */,
 				0E3419AD2350815E00419E18 /* Donation.swift in Sources */,
+				0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */,
 				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,
 				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
 				0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */,
@@ -1000,7 +1001,6 @@
 				0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */,
 				0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */,
 				0E36D24D2240234B006AF062 /* ShortcutsAddViewController.swift in Sources */,
-				0EA068F4218475F800C320AD /* ConfigurationParserResult+Alerts.swift in Sources */,
 				0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */,
 				0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */,
 				0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */,
