@@ -1,6 +1,13 @@
+### Added
+
+- Import host via document picker.
+- Support for `--ping-restart` (Robert Patchett).
+- Support for proxy auto-configuration URL (ThinkChaos).
+
 ### Changed
 
 - Upgrade project to Xcode 11.
+- Show Organizer on launch rather than profile in use.
 
 ### Fixed
 
