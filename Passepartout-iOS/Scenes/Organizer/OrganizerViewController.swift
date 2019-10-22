@@ -115,6 +115,11 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         reloadModel()
         tableView.reloadData()
 
+        // XXX: if split vc is collapsed when a profile is in use, this vc
+        // is not loaded on app launch. consequentially, service.delegate remains
+        // nil until the Organizer is entered
+        //
+        // see UISplitViewControllerDelegate in AppDelegate (collapse is now commented out)
         service.delegate = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)

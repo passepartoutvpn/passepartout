@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     // MARK: UISplitViewControllerDelegate
     
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-        return !TransientStore.shared.service.hasActiveProfile()
+        return true//!TransientStore.shared.service.hasActiveProfile()
     }
 
     // MARK: URLs
