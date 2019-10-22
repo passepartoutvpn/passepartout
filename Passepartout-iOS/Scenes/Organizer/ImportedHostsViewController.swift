@@ -52,17 +52,17 @@ class ImportedHostsViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        guard !pendingConfigurationURLs.isEmpty else {
-            let alert = UIAlertController.asAlert(
-                title,
-                L10n.Core.Organizer.Alerts.AddHost.message
-            )
-            alert.addCancelAction(L10n.Core.Global.ok) {
-                self.close()
-            }
-            present(alert, animated: true, completion: nil)
-            return
-        }
+//        guard !pendingConfigurationURLs.isEmpty else {
+//            let alert = UIAlertController.asAlert(
+//                title,
+//                L10n.Core.Organizer.Alerts.AddHost.message
+//            )
+//            alert.addCancelAction(L10n.Core.Global.ok) {
+//                self.close()
+//            }
+//            present(alert, animated: true, completion: nil)
+//            return
+//        }
         if let selectedIP = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIP, animated: true)
         }
@@ -71,7 +71,8 @@ class ImportedHostsViewController: UITableViewController {
     // MARK: Actions
     
     @IBAction private func openConfigurationFile() {
-        // TODO: open document picker
+        let picker = UIDocumentPickerViewController(documentTypes: ["public.content", "public.data"], in: .import)
+        present(picker, animated: true, completion: nil)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
