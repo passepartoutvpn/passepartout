@@ -32,6 +32,8 @@ private let log = SwiftyBeaver.self
 
 class ImportedHostsViewController: UITableViewController {
     private lazy var pendingConfigurationURLs = TransientStore.shared.service.pendingConfigurationURLs().sortedCaseInsensitive()
+    
+    private var importer: HostImporter?
 
     private var parsingResult: OpenVPN.ConfigurationParser.Result?
     
@@ -76,35 +78,20 @@ class ImportedHostsViewController: UITableViewController {
                 return false
             }
             let url = pendingConfigurationURLs[indexPath.row]
-            return tryParseURL(url, passphrase: nil, cell: cell)
+            return tryParseURL(url, cell: cell)
         }
         return true
     }
     
-    private func tryParseURL(_ url: URL, passphrase: String?, cell: UITableViewCell) -> Bool {
-        let passphraseBlock: (String) -> Void = { (passphrase) in
-            guard self.tryParseURL(url, passphrase: passphrase, cell: cell) else {
-                return
-            }
-            self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier, sender: cell)
-        }
-        guard let parsingResult = OpenVPN.ConfigurationParser.Result.from(url, withErrorAlertIn: self, passphrase: passphrase, removeOnError: false, passphraseBlock: passphraseBlock, passphraseCancelBlock: nil) else {
-            deselectSelectedRow()
-            return false
-        }
-        self.parsingResult = parsingResult
-        
-        // postpone segue until alert dismissal
-        if let warning = parsingResult.warning {
-            OpenVPN.ConfigurationParser.Result.alertImportWarning(url: url, in: self, withWarning: warning) {
-                self.deselectSelectedRow()
-                if $0 {
-                    self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
-                } else {
-                    self.parsingResult = nil
-                }
-            }
-            return false
+    private func tryParseURL(_ url: URL, cell: UITableViewCell) -> Bool {
+        importer = HostImporter(withConfigurationURL: url, parentViewController: self)
+        importer?.importHost(withPassphrase: nil, removeOnError: false, removeOnCancel: false) {
+
+            // FIXME: HostImporter, also deselect on error/cancel, or just deselect immediately
+            self.deselectSelectedRow()
+
+            self.parsingResult = $0
+            self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
         }
         return true
     }

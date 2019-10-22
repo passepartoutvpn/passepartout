@@ -32,6 +32,8 @@ import Convenience
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
+    
+    private var importer: HostImporter?
 
     override init() {
         AppConstants.Log.configure()
@@ -101,26 +103,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
     
     private func tryParseURL(_ url: URL, passphrase: String?, target: UIViewController) -> Bool {
-        let passphraseBlock = { (passphrase) in
-            _ = self.tryParseURL(url, passphrase: passphrase, target: target)
+        guard let rootViewController = window?.rootViewController else {
+            return false
         }
-        let passphraseCancelBlock = {
-            _ = try? FileManager.default.removeItem(at: url)
+        importer = HostImporter(withConfigurationURL: url, parentViewController: rootViewController)
+        importer?.importHost(withPassphrase: passphrase, removeOnError: true, removeOnCancel: true) {
+            self.handleParsingResult($0, in: rootViewController)
         }
-        guard let parsingResult = OpenVPN.ConfigurationParser.Result.from(url, withErrorAlertIn: target, passphrase: passphrase, removeOnError: true, passphraseBlock: passphraseBlock, passphraseCancelBlock: passphraseCancelBlock) else {
-            return true
-        }
-        if let warning = parsingResult.warning {
-            OpenVPN.ConfigurationParser.Result.alertImportWarning(url: url, in: target, withWarning: warning) {
-                if $0 {
-                    self.handleParsingResult(parsingResult, in: target)
-                } else {
-                    try? FileManager.default.removeItem(at: url)
-                }
-            }
-            return true
-        }
-        handleParsingResult(parsingResult, in: target)
         return true
     }
     
