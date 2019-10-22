@@ -70,6 +70,10 @@ class ImportedHostsViewController: UITableViewController {
     
     // MARK: Actions
     
+    @IBAction private func openConfigurationFile() {
+        // TODO: open document picker
+    }
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 
         // segue parses configuration file if not yet
