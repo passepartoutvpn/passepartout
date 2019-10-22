@@ -84,12 +84,10 @@ class ImportedHostsViewController: UITableViewController {
     }
     
     private func tryParseURL(_ url: URL, cell: UITableViewCell) -> Bool {
+        deselectSelectedRow()
+
         importer = HostImporter(withConfigurationURL: url, parentViewController: self)
         importer?.importHost(withPassphrase: nil, removeOnError: false, removeOnCancel: false) {
-
-            // FIXME: HostImporter, also deselect on error/cancel, or just deselect immediately
-            self.deselectSelectedRow()
-
             self.parsingResult = $0
             self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
         }
