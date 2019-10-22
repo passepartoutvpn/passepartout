@@ -52,23 +52,30 @@ class ImportedHostsViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        guard !pendingConfigurationURLs.isEmpty else {
-            let alert = UIAlertController.asAlert(
-                title,
-                L10n.Core.Organizer.Alerts.AddHost.message
-            )
-            alert.addCancelAction(L10n.Core.Global.ok) {
-                self.close()
-            }
-            present(alert, animated: true, completion: nil)
-            return
-        }
+//        guard !pendingConfigurationURLs.isEmpty else {
+//            let alert = UIAlertController.asAlert(
+//                title,
+//                L10n.Core.Organizer.Alerts.AddHost.message
+//            )
+//            alert.addCancelAction(L10n.Core.Global.ok) {
+//                self.close()
+//            }
+//            present(alert, animated: true, completion: nil)
+//            return
+//        }
         if let selectedIP = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedIP, animated: true)
         }
     }
     
     // MARK: Actions
+    
+    @IBAction private func openConfigurationFile() {
+        let picker = UIDocumentPickerViewController(documentTypes: ["public.content", "public.data"], in: .import)
+        picker.allowsMultipleSelection = false
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 
@@ -83,7 +90,7 @@ class ImportedHostsViewController: UITableViewController {
         return true
     }
     
-    private func tryParseURL(_ url: URL, cell: UITableViewCell) -> Bool {
+    private func tryParseURL(_ url: URL, cell: UITableViewCell?) -> Bool {
         deselectSelectedRow()
 
         importer = HostImporter(withConfigurationURL: url, parentViewController: self)
@@ -136,5 +143,17 @@ extension ImportedHostsViewController {
         try? FileManager.default.removeItem(at: url)
         pendingConfigurationURLs.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .top)
+    }
+}
+
+extension ImportedHostsViewController: UIDocumentPickerDelegate {
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let url = urls.first else {
+            return
+        }
+        _ = tryParseURL(url, cell: nil)
     }
 }

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Import host via document picker.
+
 ### Changed
 
 - Upgrade project to Xcode 11.
