@@ -112,7 +112,10 @@ extension OpenVPN.ConfigurationParser.Result {
                 log.error("Could not parse configuration URL: missing configuration, \(option)")
                 return L10n.Core.ParsedFile.Alerts.Missing.message(option)
                 
-            case .unsupportedConfiguration(let option):
+            case .unsupportedConfiguration(var option):
+                if option.contains("external") {
+                    option.append(" - see FAQ")
+                }
                 log.error("Could not parse configuration URL: unsupported configuration, \(option)")
                 return L10n.Core.ParsedFile.Alerts.Unsupported.message(option)
                 
@@ -132,7 +135,10 @@ extension OpenVPN.ConfigurationParser.Result {
         case .missingConfiguration(let option):
             return option
             
-        case .unsupportedConfiguration(let option):
+        case .unsupportedConfiguration(var option):
+            if option.contains("external") {
+                option.append(" - see FAQ")
+            }
             return option
             
         default:
