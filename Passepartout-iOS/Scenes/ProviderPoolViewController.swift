@@ -126,11 +126,12 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         cell.imageView?.image = group.logo
         cell.leftText = pool.localizedCountry
         if group.pools.count > 1 {
-            cell.rightText = pool.area?.uppercased()
+            cell.rightText = pool.area
             cell.accessoryType = .detailDisclosureButton // no checkmark!
         } else {
             cell.rightText = pool.secondaryId
         }
+        cell.rightText = cell.rightText?.uppercased()
         cell.isTappable = true
         return cell
     }
