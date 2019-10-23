@@ -40,6 +40,8 @@ private enum FieldTag: Int {
 
     case proxyPort = 302
     
+    case proxyAutoConfigurationURL = 303
+    
     case proxyBypass = 400
 }
 
@@ -100,6 +102,7 @@ class NetworkSettingsViewController: UITableViewController {
         var proxyRows: [RowType] = Array(repeating: .proxyBypass, count: networkSettings.proxyBypassDomains?.count ?? 0)
         proxyRows.insert(.proxyAddress, at: 0)
         proxyRows.insert(.proxyPort, at: 1)
+        proxyRows.insert(.proxyAutoConfigurationURL, at: 2)
         if networkChoices.proxy == .manual {
             proxyRows.append(.proxyAddBypass)
         }
@@ -188,7 +191,7 @@ class NetworkSettingsViewController: UITableViewController {
     private func commitTextField(_ field: UITextField) {
 
         // DNS: domain, servers
-        // Proxy: address, port, bypass domains
+        // Proxy: address, port, PAC, bypass domains
         
         if field.tag == FieldTag.dnsDomain.rawValue {
             networkSettings.dnsDomainName = field.text
@@ -196,6 +199,12 @@ class NetworkSettingsViewController: UITableViewController {
             networkSettings.proxyAddress = field.text
         } else if field.tag == FieldTag.proxyPort.rawValue {
             networkSettings.proxyPort = UInt16(field.text ?? "0")
+        } else if field.tag == FieldTag.proxyAutoConfigurationURL.rawValue {
+            if let string = field.text {
+                networkSettings.proxyAutoConfigurationURL = URL(string: string)
+            } else {
+                networkSettings.proxyAutoConfigurationURL = nil
+            }
         } else if field.tag >= FieldTag.dnsAddress.rawValue && field.tag < FieldTag.proxyAddress.rawValue {
             let i = field.tag - FieldTag.dnsAddress.rawValue
             networkSettings.dnsServers?[i] = field.text ?? ""
@@ -256,6 +265,8 @@ extension NetworkSettingsViewController {
         case proxyAddress
         
         case proxyPort
+        
+        case proxyAutoConfigurationURL
         
         case proxyBypass
 
@@ -373,6 +384,19 @@ extension NetworkSettingsViewController {
             cell.field.text = networkSettings.proxyPort?.description
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .numberPad
+            cell.captionWidth = 160.0
+            cell.delegate = self
+            cell.field.isEnabled = (networkChoices.proxy == .manual)
+            return cell
+            
+        case .proxyAutoConfigurationURL:
+            let cell = Cells.field.dequeue(from: tableView, for: indexPath)
+            cell.caption = "PAC"
+            cell.field.tag = FieldTag.proxyAutoConfigurationURL.rawValue
+            cell.field.placeholder = L10n.Core.Global.Values.none
+            cell.field.text = networkSettings.proxyAutoConfigurationURL?.absoluteString
+            cell.field.clearButtonMode = .always
+            cell.field.keyboardType = .asciiCapable
             cell.captionWidth = 160.0
             cell.delegate = self
             cell.field.isEnabled = (networkChoices.proxy == .manual)
