@@ -28,6 +28,8 @@ internal enum StoryboardScene {
 
     internal static let providerPoolViewController = SceneType<ProviderPoolViewController>(storyboard: Main.self, identifier: "ProviderPoolViewController")
 
+    internal static let serverNetworkViewController = SceneType<ServerNetworkViewController>(storyboard: Main.self, identifier: "ServerNetworkViewController")
+
     internal static let serviceIdentifier = SceneType<UIKit.UINavigationController>(storyboard: Main.self, identifier: "ServiceIdentifier")
   }
   internal enum Organizer: StoryboardType {

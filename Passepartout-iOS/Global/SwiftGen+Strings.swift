@@ -706,6 +706,14 @@ internal enum L10n {
         internal static let subscribe = L10n.tr("Core", "reddit.buttons.subscribe")
       }
     }
+    internal enum ServerNetwork {
+      internal enum Cells {
+        internal enum Route {
+          /// Route
+          internal static let caption = L10n.tr("Core", "server_network.cells.route.caption")
+        }
+      }
+    }
     internal enum Service {
       internal enum Alerts {
         internal enum Buttons {

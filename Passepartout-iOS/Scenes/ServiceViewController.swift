@@ -194,6 +194,9 @@ class ServiceViewController: UIViewController, StrongTableHost {
             vc?.title = L10n.Core.NetworkSettings.title
             vc?.profile = profile
             
+        case .serverNetworkSegueIdentifier:
+            break
+            
         case .debugLogSegueIdentifier:
             break
         }
@@ -489,9 +492,9 @@ class ServiceViewController: UIViewController, StrongTableHost {
     private func discloseServerNetwork() {
         let caption = L10n.Core.Service.Cells.ServerNetwork.caption
         tryRequestServerConfiguration(withCaption: caption) { [weak self] in
-            let vc = StoryboardScene.Main.configurationIdentifier.instantiate()
+            let vc = StoryboardScene.Main.serverNetworkViewController.instantiate()
             vc.title = caption
-            vc.initialConfiguration = $0
+            vc.configuration = $0
             self?.navigationController?.pushViewController(vc, animated: true)
         }
     }

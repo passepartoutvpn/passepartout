@@ -24,6 +24,7 @@ internal enum StoryboardSegue {
     case networkSettingsSegueIdentifier = "NetworkSettingsSegueIdentifier"
     case providerPoolSegueIdentifier = "ProviderPoolSegueIdentifier"
     case providerPresetSegueIdentifier = "ProviderPresetSegueIdentifier"
+    case serverNetworkSegueIdentifier = "ServerNetworkSegueIdentifier"
   }
   internal enum Organizer: String, SegueType {
     case aboutSegueIdentifier = "AboutSegueIdentifier"
