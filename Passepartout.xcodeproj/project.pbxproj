@@ -84,6 +84,7 @@
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD7862257462800D033B4 /* Providers.xcassets */; };
 		0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD788225746B300D033B4 /* Flags.xcassets */; };
+		0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
@@ -248,6 +249,7 @@
 		0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructurePreset.swift; sourceTree = "<group>"; };
 		0E9CD7862257462800D033B4 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
 		0E9CD788225746B300D033B4 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
+		0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetworkViewController.swift; sourceTree = "<group>"; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
 		0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Migration.swift"; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */,
 				0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */,
 				0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */,
+				0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */,
 				0E57F63D20C83FC5008323CF /* ServiceViewController.swift */,
 			);
 			path = Scenes;
@@ -986,6 +989,7 @@
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
 				0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */,
 				0E3419AD2350815E00419E18 /* Donation.swift in Sources */,
+				0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */,
 				0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */,
 				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,
 				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
