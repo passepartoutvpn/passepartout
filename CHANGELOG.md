@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Cannot enter IP addresses in some localizations. [#103](https://github.com/passepartoutvpn/passepartout-ios/issues/103)
 - Cannot easily trust Wi-Fi networks in iOS 13. [#100](https://github.com/passepartoutvpn/passepartout-ios/issues/100)
+- Infrastructures not updated in non-English locales.
 
 ## 1.8.1 (2019-09-15)
 
