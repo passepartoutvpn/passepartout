@@ -17,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Upgrade project to Xcode 11.
-- Show Organizer on launch rather than profile in use.
 
 ### Fixed
 
