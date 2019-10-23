@@ -712,6 +712,10 @@ internal enum L10n {
           /// Reconnect
           internal static let reconnect = L10n.tr("Core", "service.alerts.buttons.reconnect")
         }
+        internal enum Configuration {
+          /// Configuration unavailable, make sure you are connected to the VPN.
+          internal static let disconnected = L10n.tr("Core", "service.alerts.configuration.disconnected")
+        }
         internal enum CredentialsNeeded {
           /// You need to enter account credentials first.
           internal static let message = L10n.tr("Core", "service.alerts.credentials_needed.message")
@@ -807,6 +811,14 @@ internal enum L10n {
         internal enum ReportIssue {
           /// Report connectivity issue
           internal static let caption = L10n.tr("Core", "service.cells.report_issue.caption")
+        }
+        internal enum ServerConfiguration {
+          /// Server configuration
+          internal static let caption = L10n.tr("Core", "service.cells.server_configuration.caption")
+        }
+        internal enum ServerNetwork {
+          /// Server network
+          internal static let caption = L10n.tr("Core", "service.cells.server_network.caption")
         }
         internal enum TestConnectivity {
           /// Test connectivity

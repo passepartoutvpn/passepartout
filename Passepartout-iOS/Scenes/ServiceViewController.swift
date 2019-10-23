@@ -476,6 +476,41 @@ class ServiceViewController: UIViewController, StrongTableHost {
 //        }
 //    }
     
+    private func discloseServerConfiguration() {
+        let caption = L10n.Core.Service.Cells.ServerConfiguration.caption
+        tryRequestServerConfiguration(withCaption: caption) { [weak self] in
+            let vc = StoryboardScene.Main.configurationIdentifier.instantiate()
+            vc.title = caption
+            vc.initialConfiguration = $0
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
+    private func discloseServerNetwork() {
+        let caption = L10n.Core.Service.Cells.ServerNetwork.caption
+        tryRequestServerConfiguration(withCaption: caption) { [weak self] in
+            let vc = StoryboardScene.Main.configurationIdentifier.instantiate()
+            vc.title = caption
+            vc.initialConfiguration = $0
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
+    private func tryRequestServerConfiguration(withCaption caption: String, completionHandler: @escaping (OpenVPN.Configuration) -> Void) {
+        vpn.requestServerConfiguration { [weak self] in
+            guard let cfg = $0 as? OpenVPN.Configuration else {
+                let alert = UIAlertController.asAlert(
+                    caption,
+                    L10n.Core.Service.Alerts.Configuration.disconnected
+                )
+                alert.addCancelAction(L10n.Core.Global.ok)
+                self?.present(alert, animated: true, completion: nil)
+                return
+            }
+            completionHandler(cfg)
+        }
+    }
+
     private func togglePrivateDataMasking(cell: ToggleTableViewCell) {
         let handler = {
             TransientStore.masksPrivateData = cell.isOn
@@ -657,6 +692,10 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case testConnectivity
         
         case dataCount
+        
+        case serverConfiguration
+        
+        case serverNetwork
         
         case debugLog
         
@@ -884,6 +923,16 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             cell.accessoryType = .none
             cell.isTappable = false
             return cell
+            
+        case .serverConfiguration:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText =  L10n.Core.Service.Cells.ServerConfiguration.caption
+            return cell
+
+        case .serverNetwork:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText =  L10n.Core.Service.Cells.ServerNetwork.caption
+            return cell
 
         case .debugLog:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
@@ -987,6 +1036,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
 //        case .dataCount:
 //            displayDataCount()
+            
+        case .serverConfiguration:
+            discloseServerConfiguration()
+            
+        case .serverNetwork:
+            discloseServerNetwork()
 
         case .debugLog:
             perform(segue: StoryboardSegue.Main.debugLogSegueIdentifier, sender: cell)
@@ -1125,7 +1180,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             model.set([.vpnSurvivesSleep], forSection: .vpnSurvivesSleep)
             model.set([.trustedPolicy], forSection: .trustedPolicy)
-            model.set([.dataCount, .debugLog, .masksPrivateData], forSection: .diagnostics)
+            model.set([.dataCount, .serverConfiguration, .serverNetwork, .debugLog, .masksPrivateData], forSection: .diagnostics)
             model.set([.reportIssue], forSection: .feedback)
         }
 
