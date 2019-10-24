@@ -23,4 +23,5 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"NSLocationWhenInUseUsageDescription" = "Access name of current Wi-Fi";
+"NSLocationWhenInUseUsageDescription" = "Accedi al nome della rete Wi-Fi corrente";
+ 

@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Atualizar infraestrutura";
 "service.cells.host.parameters.caption" = "Parâmetros";
 "service.cells.trusted_add_wifi.caption" = "Adicionar Wi-Fi atual";
+"service.alerts.location.message.denied" = "Você precisa autorizar o compartilhamento de localização. Acesse ajustes do iOS e verifique permissões de localização do Passepartout.";
+"service.alerts.location.button.settings" = "Ajustes";
 
 "account.sections.credentials.header" = "Credenciais";
 

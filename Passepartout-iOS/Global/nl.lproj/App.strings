@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Vernieuw de infrastructuur";
 "service.cells.host.parameters.caption" = "Parameters";
 "service.cells.trusted_add_wifi.caption" = "Voeg huidige WiFi toe";
+"service.alerts.location.message.denied" = "Om dit Wi-Fi netwerk te vertrouwen is toestemming tot locatie gegevens nodig. Ga naar Instellingen -> Privacy -> Locatievoorzieningen en check de locatie bevoegdheden voor Passepartout.";
+"service.alerts.location.button.settings" = "Instellingen";
 
 "account.sections.credentials.header" = "Inloggegevens";
 

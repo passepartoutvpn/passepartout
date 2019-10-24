@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "刷新基础设置";
 "service.cells.host.parameters.caption" = "参数";
 "service.cells.trusted_add_wifi.caption" = "添加当前的Wi-Fi";
+"service.alerts.location.message.denied" = "您必须允许位置访问权限才能信任此Wi-Fi网络。请转到iOS设置并查看您对Passepartout的位置权限。";
+"service.alerts.location.button.settings" = "设置";
 
 "account.sections.credentials.header" = "认证方式";
 

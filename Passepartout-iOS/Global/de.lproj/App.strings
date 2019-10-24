@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Infrastruktur neu laden";
 "service.cells.host.parameters.caption" = "Parameter";
 "service.cells.trusted_add_wifi.caption" = "Aktuelles WLAN hinzufügen";
+"service.alerts.location.message.denied" = "Sie müssen den Standortzugriff zulassen, um diesem Wi-Fi-Netzwerk zu vertrauen. Gehen Sie zu den iOS-Einstellungen und überprüfen Sie Ihre Standortberechtigungen für Passepartout.";
+"service.alerts.location.button.settings" = "Einstellungen";
 
 "account.sections.credentials.header" = "Zugangsdaten";
 

@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Обновить инфраструктуру";
 "service.cells.host.parameters.caption" = "Параметры";
 "service.cells.trusted_add_wifi.caption" = "Добавить текущий Wi-Fi";
+"service.alerts.location.message.denied" = "Вы должны разрешить доступ к расположению, чтобы доверять этой сети Wi-Fi. Перейдите в настройки iOS и просмотрите разрешения для определения местоположения для Passepartout.";
+"service.alerts.location.button.settings" = "Настройки";
 
 "account.sections.credentials.header" = "Данные для входа";
 
