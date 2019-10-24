@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.9.0 Beta 2083 (2019-10-23)
+## Unreleased
 
 ### Added
 
@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cannot enter IP addresses in some localizations. [#103](https://github.com/passepartoutvpn/passepartout-ios/issues/103)
 - Cannot easily trust Wi-Fi networks in iOS 13. [#100](https://github.com/passepartoutvpn/passepartout-ios/issues/100)
 - Infrastructures not updated in non-English locales.
+- Default gateway not enforced for providers (e.g. TunnelBear).
 
 ## 1.8.1 (2019-09-15)
 
