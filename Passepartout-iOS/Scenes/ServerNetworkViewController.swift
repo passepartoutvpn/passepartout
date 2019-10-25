@@ -67,7 +67,7 @@ class ServerNetworkViewController: UITableViewController, StrongTableHost {
         }
 
         rows = []
-        if let dnsDomain = configuration.searchDomain, !dnsDomain.isEmpty {
+        if let dnsDomain = configuration.searchDomains?.first, !dnsDomain.isEmpty {
             indexOfFirstDNSAddress = 1
             rows.append(.dnsDomain)
         }
@@ -240,7 +240,7 @@ extension ServerNetworkViewController {
         // shared rows
         switch row {
         case .dnsDomain:
-            guard let domain = configuration.searchDomain, !domain.isEmpty else {
+            guard let domain = configuration.searchDomains?.first, !domain.isEmpty else {
                 fatalError("Got DNS domain without a domain")
             }
             cell.leftText = L10n.Core.NetworkSettings.Dns.Cells.Domain.caption
