@@ -89,7 +89,7 @@ class IssueReporter: NSObject {
             }
         }
         vc.mailComposeDelegate = self
-        vc.apply(Theme.current)
+        vc.apply(.current)
         viewController?.present(vc, animated: true, completion: nil)
     }
 }

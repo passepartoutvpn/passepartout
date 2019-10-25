@@ -26,11 +26,20 @@
 import UIKit
 import TunnelKit
 import PassepartoutCore
+import Convenience
 
 extension UITableViewCell {
     func applyChecked(_ checked: Bool, _ theme: Theme) {
         accessoryType = checked ? .checkmark : .none
-        tintColor = Theme.current.palette.accessory
+        tintColor = theme.palette.accessory
+    }
+}
+
+extension SingleOptionViewController {
+    func applyTint(_ theme: Theme) {
+        configurationBlock = { (cell, _) in
+            cell.tintColor = theme.palette.accessory
+        }
     }
 }
 

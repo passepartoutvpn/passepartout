@@ -151,6 +151,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
             return
         }
         let vc = SingleOptionViewController<Pool>()
+        vc.applyTint(Theme.current)
         vc.title = group.localizedCountry
         vc.options = group.pools.sorted {
             guard let lnum = $0.num else {

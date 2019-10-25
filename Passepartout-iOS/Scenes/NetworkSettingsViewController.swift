@@ -480,10 +480,11 @@ extension NetworkSettingsViewController {
         switch model.row(at: indexPath) {
         case .gateway:
             let vc = SingleOptionViewController<NetworkChoice>()
+            vc.applyTint(Theme.current)
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
-
+            
             vc.selectedOption = networkChoices.gateway
             vc.selectionBlock = { [weak self] in
                 self?.updateGateway($0)
@@ -493,10 +494,11 @@ extension NetworkSettingsViewController {
 
         case .dns:
             let vc = SingleOptionViewController<NetworkChoice>()
+            vc.applyTint(Theme.current)
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
-            
+
             vc.selectedOption = networkChoices.dns
             vc.selectionBlock = { [weak self] in
                 self?.updateDNS($0)
@@ -506,10 +508,11 @@ extension NetworkSettingsViewController {
 
         case .proxy:
             let vc = SingleOptionViewController<NetworkChoice>()
+            vc.applyTint(Theme.current)
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
-            
+
             vc.selectedOption = networkChoices.proxy
             vc.selectionBlock = { [weak self] in
                 self?.updateProxy($0)
