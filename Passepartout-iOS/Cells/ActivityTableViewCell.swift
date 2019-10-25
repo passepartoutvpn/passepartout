@@ -39,7 +39,7 @@ extension ActivityTableViewCell {
         
         func dequeue(from tableView: UITableView, for indexPath: IndexPath) -> ActivityTableViewCell {
             let cell = tableView.dequeue(T.self, identifier: Provider.identifier, for: indexPath)
-            cell.apply(Theme.current)
+            cell.apply(.current)
             cell.activityIndicator.startAnimating()
             cell.accessoryView = cell.activityIndicator
             cell.selectionStyle = .none

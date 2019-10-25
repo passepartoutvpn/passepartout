@@ -40,16 +40,16 @@ class LabelViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         activity?.hidesWhenStopped = true
-        activity?.applyAccent(Theme.current)
-        scrollView?.applyPrimaryBackground(Theme.current)
-        label?.applyLight(Theme.current)
+        activity?.applyAccent(.current)
+        scrollView?.applyPrimaryBackground(.current)
+        label?.applyLight(.current)
 
         if let license = license {
             

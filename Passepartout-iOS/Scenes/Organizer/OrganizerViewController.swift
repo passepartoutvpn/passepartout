@@ -103,7 +103,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        applyMasterTitle(Theme.current)
+        applyMasterTitle(.current)
     }
 
     override func viewDidLoad() {
@@ -251,7 +251,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         vc.setSubject(subject)
         vc.setMessageBody(body, isHTML: false)
         vc.mailComposeDelegate = self
-        vc.apply(Theme.current)
+        vc.apply(.current)
         present(vc, animated: true, completion: nil)
     }
     
@@ -426,7 +426,7 @@ extension OrganizerViewController {
         switch model.row(at: indexPath) {
         case .connectionStatus:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyVPN(Theme.current, with: VPN.shared.isEnabled ? VPN.shared.status : nil, error: nil)
+            cell.applyVPN(.current, with: VPN.shared.isEnabled ? VPN.shared.status : nil, error: nil)
             cell.leftText = L10n.Core.Service.Cells.ConnectionStatus.caption
             return cell
 
@@ -444,19 +444,19 @@ extension OrganizerViewController {
 
         case .addProvider:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.Organizer.Cells.AddProvider.caption
             return cell
 
         case .addHost:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.Organizer.Cells.AddHost.caption
             return cell
             
         case .siriShortcuts:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.Core.Organizer.Cells.SiriShortcuts.caption
             return cell
             

@@ -39,7 +39,7 @@ class VersionViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
     
     override func viewDidLoad() {
@@ -50,9 +50,9 @@ class VersionViewController: UIViewController {
         labelVersion?.text = ApplicationInfo.appVersion
         labelIntro?.text = L10n.Core.Version.Labels.intro
 
-        scrollView?.applyPrimaryBackground(Theme.current)
+        scrollView?.applyPrimaryBackground(.current)
         for label in [labelTitle, labelVersion, labelIntro] {
-            label?.applyLight(Theme.current)
+            label?.applyLight(.current)
         }
     }
 }

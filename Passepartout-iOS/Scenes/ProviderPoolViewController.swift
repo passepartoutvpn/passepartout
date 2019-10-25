@@ -67,7 +67,7 @@ class ProviderPoolViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
 
     override func viewDidLoad() {
@@ -151,7 +151,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
             return
         }
         let vc = SingleOptionViewController<Pool>()
-        vc.applyTint(Theme.current)
+        vc.applyTint(.current)
         vc.title = group.localizedCountry
         vc.options = group.pools.sorted {
             guard let lnum = $0.num else {

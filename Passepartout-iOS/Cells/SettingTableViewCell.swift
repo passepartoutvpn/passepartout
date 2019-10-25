@@ -79,7 +79,7 @@ extension SettingTableViewCell {
         
         func dequeue(from tableView: UITableView, for indexPath: IndexPath) -> SettingTableViewCell {
             let cell = tableView.dequeue(T.self, identifier: Provider.identifier, for: indexPath)
-            cell.apply(Theme.current)
+            cell.apply(.current)
             cell.imageView?.image = nil
             cell.rightText = nil
             cell.isTappable = true

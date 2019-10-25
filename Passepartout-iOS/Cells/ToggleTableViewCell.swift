@@ -97,13 +97,13 @@ extension ToggleTableViewCell {
         
         func dequeue(from tableView: UITableView, for indexPath: IndexPath) -> ToggleTableViewCell {
             let cell = tableView.dequeue(T.self, identifier: Provider.identifier, for: indexPath)
-            cell.apply(Theme.current)
+            cell.apply(.current)
             return cell
         }
 
         func dequeue(from tableView: UITableView, for indexPath: IndexPath, tag: Int, delegate: ToggleTableViewCellDelegate) -> ToggleTableViewCell {
             let cell = tableView.dequeue(T.self, identifier: Provider.identifier, for: indexPath)
-            cell.apply(Theme.current)
+            cell.apply(.current)
             cell.tag = tag
             cell.delegate = delegate
             return cell

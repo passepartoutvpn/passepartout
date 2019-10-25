@@ -41,7 +41,7 @@ class DebugLogViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
     
     // MARK: UIViewController

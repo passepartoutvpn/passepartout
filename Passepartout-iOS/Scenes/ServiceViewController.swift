@@ -90,7 +90,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
     
     override func viewDidLoad() {
@@ -109,7 +109,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         navigationItem.leftItemsSupplementBackButton = true
 
         labelWelcome.text = L10n.Core.Service.Welcome.message
-        labelWelcome.apply(Theme.current)
+        labelWelcome.apply(.current)
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -234,7 +234,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         let alert = UIAlertController.asAlert(L10n.Core.Service.Alerts.Rename.title, L10n.Core.Global.Host.TitleInput.message)
         alert.addTextField { (field) in
             field.text = self.profile?.id
-            field.applyProfileId(Theme.current)
+            field.applyProfileId(.current)
             field.delegate = self
         }
         pendingRenameAction = alert.addPreferredAction(L10n.Core.Global.ok) {
@@ -775,7 +775,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         switch row {
         case .useProfile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.Service.Cells.UseProfile.caption
             return cell
             
@@ -795,7 +795,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
             
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyVPN(Theme.current, with: vpn.isEnabled ? vpn.status : nil, error: service.vpnLastError)
+            cell.applyVPN(.current, with: vpn.isEnabled ? vpn.status : nil, error: service.vpnLastError)
             cell.leftText = L10n.Core.Service.Cells.ConnectionStatus.caption
             cell.accessoryType = .none
             cell.isTappable = false
@@ -803,7 +803,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .reconnect:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.Core.Service.Cells.Reconnect.caption
             cell.accessoryType = .none
             cell.isTappable = !service.needsCredentials(for: uncheckedProfile) && vpn.isEnabled
@@ -850,7 +850,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .providerRefresh:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.Service.Cells.Provider.Refresh.caption
             return cell
             
@@ -896,7 +896,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         case .trustedAddCurrentWiFi:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.Service.Cells.TrustedAddWifi.caption
             return cell
 

@@ -93,7 +93,7 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
     
     override func viewDidLoad() {
@@ -246,7 +246,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case .resetOriginal:
             cell.leftText = V.ResetOriginal.caption
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             
         case .client:
             cell.leftText = V.Client.caption
@@ -315,7 +315,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         switch model.row(at: indexPath) {
         case .cipher:
             let vc = SingleOptionViewController<OpenVPN.Cipher>()
-            vc.applyTint(Theme.current)
+            vc.applyTint(.current)
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.Cipher.available
             vc.selectedOption = configuration.cipher
@@ -328,7 +328,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             
         case .digest:
             let vc = SingleOptionViewController<OpenVPN.Digest>()
-            vc.applyTint(Theme.current)
+            vc.applyTint(.current)
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.Digest.available
             vc.selectedOption = configuration.digest
@@ -341,7 +341,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
 
         case .compressionFraming:
             let vc = SingleOptionViewController<OpenVPN.CompressionFraming>()
-            vc.applyTint(Theme.current)
+            vc.applyTint(.current)
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.CompressionFraming.available
             vc.selectedOption = configuration.compressionFraming ?? .disabled
@@ -361,7 +361,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             }
             
             let vc = SingleOptionViewController<OpenVPN.CompressionAlgorithm>()
-            vc.applyTint(Theme.current)
+            vc.applyTint(.current)
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.CompressionAlgorithm.available
             vc.selectedOption = configuration.compressionAlgorithm ?? .disabled

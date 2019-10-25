@@ -48,7 +48,7 @@ class ProviderPresetViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
     
     override func viewDidLoad() {
@@ -109,10 +109,10 @@ extension ProviderPresetViewController: UITableViewDataSource, UITableViewDelega
         switch rows[indexPath.row] {
         case .presetDescription:
             cell.leftText = preset.comment
-            cell.applyChecked(preset.id == currentPresetId, Theme.current)
+            cell.applyChecked(preset.id == currentPresetId, .current)
 
         case .techDetails:
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.Provider.Preset.Cells.TechDetails.caption
             cell.accessoryType = .none
         }

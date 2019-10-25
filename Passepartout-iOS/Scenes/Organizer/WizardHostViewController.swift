@@ -207,7 +207,7 @@ extension WizardHostViewController {
             cell.caption = L10n.App.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
             cell.allowedCharset = .filename
-            cell.field.applyProfileId(Theme.current)
+            cell.field.applyProfileId(.current)
             cell.delegate = self
             return cell
             

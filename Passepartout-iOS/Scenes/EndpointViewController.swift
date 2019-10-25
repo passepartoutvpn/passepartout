@@ -94,7 +94,7 @@ class EndpointViewController: UIViewController, StrongTableHost {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
     
     override func viewDidLoad() {
@@ -213,9 +213,9 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
             cell.isTappable = true
             if let _ = currentAddress {
-                cell.applyChecked(false, Theme.current)
+                cell.applyChecked(false, .current)
             } else {
-                cell.applyChecked(true, Theme.current)
+                cell.applyChecked(true, .current)
                 currentAddressIndexPath = indexPath
             }
             return cell
@@ -227,10 +227,10 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
             cell.isTappable = true
             if address == currentAddress {
-                cell.applyChecked(true, Theme.current)
+                cell.applyChecked(true, .current)
                 currentAddressIndexPath = indexPath
             } else {
-                cell.applyChecked(false, Theme.current)
+                cell.applyChecked(false, .current)
             }
             return cell
             
@@ -240,9 +240,9 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
             cell.isTappable = true
             if let _ = currentProtocol {
-                cell.applyChecked(false, Theme.current)
+                cell.applyChecked(false, .current)
             } else {
-                cell.applyChecked(true, Theme.current)
+                cell.applyChecked(true, .current)
                 currentProtocolIndexPath = indexPath
             }
             return cell
@@ -254,10 +254,10 @@ extension EndpointViewController: UITableViewDataSource, UITableViewDelegate {
             cell.accessoryType = .none
             cell.isTappable = true
             if proto == currentProtocol {
-                cell.applyChecked(true, Theme.current)
+                cell.applyChecked(true, .current)
                 currentProtocolIndexPath = indexPath
             } else {
-                cell.applyChecked(false, Theme.current)
+                cell.applyChecked(false, .current)
             }
             return cell
         }

@@ -116,7 +116,7 @@ class ServerNetworkViewController: UITableViewController, StrongTableHost {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
     
     override func viewDidLoad() {

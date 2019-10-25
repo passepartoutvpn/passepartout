@@ -137,7 +137,7 @@ class AccountViewController: UIViewController, StrongTableHost {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        applyDetailTitle(Theme.current)
+        applyDetailTitle(.current)
     }
     
     override func viewDidLoad() {
@@ -264,7 +264,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
         case .openGuide:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Account.Cells.OpenGuide.caption
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             return cell
 
         case .signUp:
@@ -273,7 +273,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             }
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Account.Cells.Signup.caption(name.rawValue)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             return cell
         }
     }

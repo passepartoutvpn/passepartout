@@ -186,12 +186,12 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
             guard let wrapper = wrappers?[indexPath.row] else {
                 break
             }
-            cell.apply(Theme.current)
+            cell.apply(.current)
             cell.leftText = wrapper.phrase
             cell.rightText = wrapper.intentDescription
 
         case .addShortcut:
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.Shortcuts.Edit.Cells.AddShortcut.caption
             cell.accessoryType = .none
             cell.isTappable = true

@@ -387,7 +387,7 @@ extension NetworkSettingsViewController {
 
         case .dnsAddAddress:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.NetworkSettings.Cells.AddDnsServer.caption
             return cell
             
@@ -408,7 +408,7 @@ extension NetworkSettingsViewController {
             
         case .dnsAddDomain:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.NetworkSettings.Cells.AddDnsDomain.caption
             return cell
             
@@ -468,7 +468,7 @@ extension NetworkSettingsViewController {
 
         case .proxyAddBypass:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(Theme.current)
+            cell.applyAction(.current)
             cell.leftText = L10n.App.NetworkSettings.Cells.AddProxyBypass.caption
             return cell
         }
@@ -480,7 +480,7 @@ extension NetworkSettingsViewController {
         switch model.row(at: indexPath) {
         case .gateway:
             let vc = SingleOptionViewController<NetworkChoice>()
-            vc.applyTint(Theme.current)
+            vc.applyTint(.current)
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
@@ -494,7 +494,7 @@ extension NetworkSettingsViewController {
 
         case .dns:
             let vc = SingleOptionViewController<NetworkChoice>()
-            vc.applyTint(Theme.current)
+            vc.applyTint(.current)
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }
@@ -508,7 +508,7 @@ extension NetworkSettingsViewController {
 
         case .proxy:
             let vc = SingleOptionViewController<NetworkChoice>()
-            vc.applyTint(Theme.current)
+            vc.applyTint(.current)
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = NetworkChoice.choices(for: profile)
             vc.descriptionBlock = { $0.description }

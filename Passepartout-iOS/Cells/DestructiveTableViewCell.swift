@@ -68,7 +68,7 @@ extension DestructiveTableViewCell {
         
         func dequeue(from tableView: UITableView, for indexPath: IndexPath) -> DestructiveTableViewCell {
             let cell = tableView.dequeue(T.self, identifier: Provider.identifier, for: indexPath)
-            cell.apply(Theme.current)
+            cell.apply(.current)
             return cell
         }
     }
