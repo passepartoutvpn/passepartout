@@ -38,6 +38,10 @@ internal enum L10n {
     }
     internal enum NetworkSettings {
       internal enum Cells {
+        internal enum AddDnsDomain {
+          /// Add search domain
+          internal static let caption = L10n.tr("App", "network_settings.cells.add_dns_domain.caption")
+        }
         internal enum AddDnsServer {
           /// Add address
           internal static let caption = L10n.tr("App", "network_settings.cells.add_dns_server.caption")

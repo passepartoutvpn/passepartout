@@ -51,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Technical details";
 
 "network_settings.cells.add_dns_server.caption" = "Add address";
+"network_settings.cells.add_dns_domain.caption" = "Add search domain";
 "network_settings.cells.proxy_bypass.caption" = "Bypass domain";
 "network_settings.cells.add_proxy_bypass.caption" = "Add bypass domain";
 

@@ -32,9 +32,9 @@ import Convenience
 private let log = SwiftyBeaver.self
 
 private enum FieldTag: Int {
-    case dnsDomain = 101
+    case dnsAddress = 100
     
-    case dnsAddress = 200
+    case dnsDomain = 200
     
     case proxyAddress = 301
 
@@ -46,7 +46,9 @@ private enum FieldTag: Int {
 }
 
 private struct Offsets {
-    static let dnsAddress = 1
+    static let dnsAddress = 0
+    
+    static let dnsDomain = 0
     
     static let proxyBypass = 2
 }
@@ -67,22 +69,23 @@ class NetworkSettingsViewController: UITableViewController {
     func reloadModel() {
         model.clear()
         
-        // sections
-        model.add(.choices)
+        // sections (candidate)
+        var sections: [SectionType] = []
+        sections.append(.choices)
         if networkChoices.gateway != .server {
-            model.add(.manualGateway)
+            sections.append(.manualGateway)
         }
         if networkChoices.dns != .server {
-            model.add(.manualDNS)
+            sections.append(.manualDNSServers)
+            sections.append(.manualDNSDomains)
         }
         if networkChoices.proxy != .server {
-            model.add(.manualProxy)
+            sections.append(.manualProxy)
         }
         
         // headers
         model.setHeader("", forSection: .choices)
         model.setHeader(L10n.Core.NetworkSettings.Gateway.title, forSection: .manualGateway)
-        model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .manualDNS)
         model.setHeader(L10n.Core.NetworkSettings.Proxy.title, forSection: .manualProxy)
         
         // footers
@@ -92,13 +95,18 @@ class NetworkSettingsViewController: UITableViewController {
         model.set([.gateway, .dns, .proxy], forSection: .choices)
         model.set([.gatewayIPv4, .gatewayIPv6], forSection: .manualGateway)
 
-        var dnsRows: [RowType] = Array(repeating: .dnsAddress, count: networkSettings.dnsServers?.count ?? 0)
-        dnsRows.insert(.dnsDomain, at: 0)
+        var dnsServers: [RowType] = Array(repeating: .dnsAddress, count: networkSettings.dnsServers?.count ?? 0)
         if networkChoices.dns == .manual {
-            dnsRows.append(.dnsAddAddress)
+            dnsServers.append(.dnsAddAddress)
         }
-        model.set(dnsRows, forSection: .manualDNS)
+        model.set(dnsServers, forSection: .manualDNSServers)
 
+        var dnsDomains: [RowType] = Array(repeating: .dnsDomain, count: networkSettings.dnsSearchDomains?.count ?? 0)
+        if networkChoices.dns == .manual {
+            dnsDomains.append(.dnsAddDomain)
+        }
+        model.set(dnsDomains, forSection: .manualDNSDomains)
+        
         var proxyRows: [RowType] = Array(repeating: .proxyBypass, count: networkSettings.proxyBypassDomains?.count ?? 0)
         proxyRows.insert(.proxyAddress, at: 0)
         proxyRows.insert(.proxyPort, at: 1)
@@ -107,6 +115,20 @@ class NetworkSettingsViewController: UITableViewController {
             proxyRows.append(.proxyAddBypass)
         }
         model.set(proxyRows, forSection: .manualProxy)
+
+        // refine sections before add (DNS is tricky)
+        if !dnsServers.isEmpty {
+            model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .manualDNSServers)
+        } else if !dnsDomains.isEmpty {
+            sections.removeAll { $0 == .manualDNSServers }
+            model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .manualDNSDomains)
+        } else {
+            sections.removeAll { $0 == .manualDNSServers }
+            sections.removeAll { $0 == .manualDNSDomains }
+        }
+        for s in sections {
+            model.add(s)
+        }
     }
     
     // MARK: UIViewController
@@ -190,11 +212,25 @@ class NetworkSettingsViewController: UITableViewController {
     
     private func commitTextField(_ field: UITextField) {
 
-        // DNS: domain, servers
+        // DNS: servers, domains
         // Proxy: address, port, PAC, bypass domains
-        
-        if field.tag == FieldTag.dnsDomain.rawValue {
-            networkSettings.dnsDomainName = field.text
+
+        let text = field.text ?? ""
+
+        if field.tag >= FieldTag.dnsAddress.rawValue && field.tag < FieldTag.dnsDomain.rawValue {
+            let i = field.tag - FieldTag.dnsAddress.rawValue
+            if let _ = networkSettings.dnsServers {
+                networkSettings.dnsServers?[i] = text
+            } else {
+                networkSettings.dnsServers = [text]
+            }
+        } else if field.tag >= FieldTag.dnsDomain.rawValue && field.tag < FieldTag.proxyAddress.rawValue {
+            let i = field.tag - FieldTag.dnsDomain.rawValue
+            if let _ = networkSettings.dnsSearchDomains {
+                networkSettings.dnsSearchDomains?[i] = text
+            } else {
+                networkSettings.dnsSearchDomains = [text]
+            }
         } else if field.tag == FieldTag.proxyAddress.rawValue {
             networkSettings.proxyAddress = field.text
         } else if field.tag == FieldTag.proxyPort.rawValue {
@@ -205,12 +241,13 @@ class NetworkSettingsViewController: UITableViewController {
             } else {
                 networkSettings.proxyAutoConfigurationURL = nil
             }
-        } else if field.tag >= FieldTag.dnsAddress.rawValue && field.tag < FieldTag.proxyAddress.rawValue {
-            let i = field.tag - FieldTag.dnsAddress.rawValue
-            networkSettings.dnsServers?[i] = field.text ?? ""
         } else if field.tag >= FieldTag.proxyBypass.rawValue {
             let i = field.tag - FieldTag.proxyBypass.rawValue
-            networkSettings.proxyBypassDomains?[i] = field.text ?? ""
+            if let _ = networkSettings.proxyBypassDomains {
+                networkSettings.proxyBypassDomains?[i] = text
+            } else {
+                networkSettings.proxyBypassDomains = [text]
+            }
         }
         
         log.debug("Network settings: \(networkSettings)")
@@ -240,7 +277,9 @@ extension NetworkSettingsViewController {
         
         case manualGateway
         
-        case manualDNS
+        case manualDNSServers
+        
+        case manualDNSDomains
         
         case manualProxy
     }
@@ -256,11 +295,13 @@ extension NetworkSettingsViewController {
 
         case gatewayIPv6
         
-        case dnsDomain
-        
         case dnsAddress
         
         case dnsAddAddress
+        
+        case dnsDomain
+        
+        case dnsAddDomain
         
         case proxyAddress
         
@@ -299,19 +340,19 @@ extension NetworkSettingsViewController {
         switch row {
         case .gateway:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = model.header(forSection: .manualGateway)
+            cell.leftText = L10n.Core.NetworkSettings.Gateway.title
             cell.rightText = networkChoices.gateway.description
             return cell
 
         case .dns:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = model.header(forSection: .manualDNS)
+            cell.leftText = L10n.Core.NetworkSettings.Dns.title
             cell.rightText = networkChoices.dns.description
             return cell
 
         case .proxy:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = model.header(forSection: .manualProxy)
+            cell.leftText = L10n.Core.NetworkSettings.Proxy.title
             cell.rightText = networkChoices.proxy.description
             return cell
 
@@ -327,19 +368,6 @@ extension NetworkSettingsViewController {
             cell.caption = "IPv6"
             cell.toggle.isEnabled = (networkChoices.gateway == .manual)
             cell.isOn = networkSettings.gatewayPolicies?.contains(.IPv6) ?? false
-            return cell
-            
-        case .dnsDomain:
-            let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.Core.NetworkSettings.Dns.Cells.Domain.caption
-            cell.field.tag = FieldTag.dnsDomain.rawValue
-            cell.field.placeholder = L10n.Core.Global.Values.none
-            cell.field.text = networkSettings.dnsDomainName
-            cell.field.clearButtonMode = .always
-            cell.field.keyboardType = .asciiCapable
-            cell.captionWidth = 160.0
-            cell.delegate = self
-            cell.field.isEnabled = (networkChoices.dns == .manual)
             return cell
             
         case .dnsAddress:
@@ -361,6 +389,27 @@ extension NetworkSettingsViewController {
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(Theme.current)
             cell.leftText = L10n.App.NetworkSettings.Cells.AddDnsServer.caption
+            return cell
+            
+        case .dnsDomain:
+            let i = indexPath.row - Offsets.dnsDomain
+
+            let cell = Cells.field.dequeue(from: tableView, for: indexPath)
+            cell.caption = L10n.Core.NetworkSettings.Dns.Cells.Domain.caption
+            cell.field.tag = FieldTag.dnsDomain.rawValue + i
+            cell.field.placeholder = L10n.Core.Global.Values.none
+            cell.field.text = networkSettings.dnsSearchDomains?[i]
+            cell.field.clearButtonMode = .always
+            cell.field.keyboardType = .asciiCapable
+            cell.captionWidth = 160.0
+            cell.delegate = self
+            cell.field.isEnabled = (networkChoices.dns == .manual)
+            return cell
+            
+        case .dnsAddDomain:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.applyAction(Theme.current)
+            cell.leftText = L10n.App.NetworkSettings.Cells.AddDnsDomain.caption
             return cell
             
         case .proxyAddress:
@@ -477,6 +526,15 @@ extension NetworkSettingsViewController {
             reloadModel()
             tableView.insertRows(at: [indexPath], with: .automatic)
 
+        case .dnsAddDomain:
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            var dnsSearchDomains = networkSettings.dnsSearchDomains ?? []
+            dnsSearchDomains.append("")
+            networkSettings.dnsSearchDomains = dnsSearchDomains
+            reloadModel()
+            tableView.insertRows(at: [indexPath], with: .automatic)
+
         case .proxyAddBypass:
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -526,7 +584,7 @@ extension NetworkSettingsViewController {
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         switch model.row(at: indexPath) {
-        case .dnsAddress, .proxyBypass:
+        case .dnsAddress, .dnsDomain, .proxyBypass:
             return true
 
         default:
@@ -537,11 +595,12 @@ extension NetworkSettingsViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
         case .dnsAddress:
-            // start at row 1
             networkSettings.dnsServers?.remove(at: indexPath.row - Offsets.dnsAddress)
 
+        case .dnsDomain:
+            networkSettings.dnsSearchDomains?.remove(at: indexPath.row - Offsets.dnsDomain)
+
         case .proxyBypass:
-            // start at row 2
             networkSettings.proxyBypassDomains?.remove(at: indexPath.row - Offsets.proxyBypass)
             
         default:
