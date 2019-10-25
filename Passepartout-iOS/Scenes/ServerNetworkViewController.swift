@@ -67,11 +67,13 @@ class ServerNetworkViewController: UITableViewController, StrongTableHost {
         }
 
         rows = []
-        if let dnsDomain = configuration.searchDomains?.first, !dnsDomain.isEmpty {
-            indexOfFirstDNSAddress = 1
-            rows.append(.dnsDomain)
+        if let dnsDomains = configuration.searchDomains, !dnsDomains.isEmpty {
+            for i in 0..<dnsDomains.count {
+                rows.append(.dnsDomain)
+            }
         }
         if let dnsServers = configuration.dnsServers, !dnsServers.isEmpty {
+            indexOfFirstDNSAddress = rows.count
             for i in 0..<dnsServers.count {
                 rows.append(.dnsAddress)
             }
@@ -240,8 +242,8 @@ extension ServerNetworkViewController {
         // shared rows
         switch row {
         case .dnsDomain:
-            guard let domain = configuration.searchDomains?.first, !domain.isEmpty else {
-                fatalError("Got DNS domain without a domain")
+            guard let domain = configuration.searchDomains?[indexPath.row] else {
+                fatalError("Got DNS search domain with empty search domains")
             }
             cell.leftText = L10n.Core.NetworkSettings.Dns.Cells.Domain.caption
             cell.rightText = domain
