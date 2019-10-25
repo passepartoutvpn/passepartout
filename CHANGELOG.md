@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for `--ping-restart` (Robert Patchett). [tunnelkit#122](https://github.com/passepartoutvpn/tunnelkit/pull/122)
 - Support for proxy auto-configuration URL (ThinkChaos). [tunnelkit#125](https://github.com/passepartoutvpn/tunnelkit/pull/125)
 - Disclose server configuration and network settings in Diagnostics. [#101](https://github.com/passepartoutvpn/passepartout-ios/issues/101)
+- Support multiple DNS search domains. [tunnelkit#127](https://github.com/passepartoutvpn/tunnelkit/issues/127)
 
 ### Changed
 
