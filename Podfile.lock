@@ -10,6 +10,14 @@ PODS:
   - Convenience/Persistence (0.0.1)
   - Convenience/Reviewer (0.0.1)
   - Convenience/Tables (0.0.1)
+  - DTFoundation/Core (1.7.14)
+  - DTFoundation/DTASN1 (1.7.14):
+    - DTFoundation/Core
+  - Kvitto (1.0.3):
+    - DTFoundation/DTASN1 (~> 1.7.13)
+    - Kvitto/Core (= 1.0.3)
+  - Kvitto/Core (1.0.3):
+    - DTFoundation/DTASN1 (~> 1.7.13)
   - MBProgressHUD (1.1.0)
   - OpenSSL-Apple (1.1.0l.4)
   - SSZipArchive (2.2.2)
@@ -35,6 +43,7 @@ DEPENDENCIES:
   - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `b990a8c`)
   - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `b990a8c`)
   - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `b990a8c`)
+  - Kvitto
   - MBProgressHUD
   - SSZipArchive
   - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `4d930d3`)
@@ -42,6 +51,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DTFoundation
+    - Kvitto
     - MBProgressHUD
     - OpenSSL-Apple
     - SSZipArchive
@@ -64,13 +75,15 @@ CHECKOUT OPTIONS:
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
-  Convenience: c2bc96be4ca77c7018f85b2c63b95c2a44c05c5a
+  Convenience: c4240c936b2119752ffa0841d40a4bc6a0ba8a5d
+  DTFoundation: 25aa19bb7c6e225b1dfae195604fb8cf1da0ab4c
+  Kvitto: d451f893f84ad669850b7cb7d3f8781363e14232
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   OpenSSL-Apple: f3d1668588ea8f06b076dcfa6177cd90452e3800
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   SwiftyBeaver: aaf2ebd7dac2e952991f46a82ed24ad642867ae2
   TunnelKit: 0743f0306be0869d51118ac33e274e7507a93537
 
-PODFILE CHECKSUM: f45a3fd3744e646a5513e3e25d447d1550c9fefa
+PODFILE CHECKSUM: d1e12ff38bc1839dddbbbcaa5e436ea0fad60f70
 
 COCOAPODS: 1.8.4

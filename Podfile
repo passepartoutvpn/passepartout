@@ -21,6 +21,7 @@ end
 
 target 'PassepartoutCore-iOS' do
     shared_pods
+    pod 'Kvitto'
 end
 
 target 'Passepartout-iOS' do
