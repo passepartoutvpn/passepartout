@@ -57,7 +57,7 @@
 		0E3152DB223FA05800F61841 /* ProfileKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D14021919F5600BB5FB2 /* ProfileKey.swift */; };
 		0E3152DC223FA05800F61841 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
 		0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3262D8235EE8DA00B5E470 /* HostImporter.swift */; };
-		0E3419AD2350815E00419E18 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3419AC2350815E00419E18 /* Donation.swift */; };
+		0E3419AD2350815E00419E18 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3419AC2350815E00419E18 /* Product.swift */; };
 		0E3586FE225BD34800509A4D /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */; };
 		0E36D24D2240234B006AF062 /* ShortcutsAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */; };
 		0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36D25A22403469006AF062 /* Shortcuts.storyboard */; };
@@ -180,7 +180,7 @@
 		0E31529D223F9EF500F61841 /* PassepartoutCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassepartoutCore.h; sourceTree = "<group>"; };
 		0E31529E223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E3262D8235EE8DA00B5E470 /* HostImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostImporter.swift; sourceTree = "<group>"; };
-		0E3419AC2350815E00419E18 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
+		0E3419AC2350815E00419E18 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsAddViewController.swift; sourceTree = "<group>"; };
 		0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutsConnectToViewController.swift; sourceTree = "<group>"; };
@@ -533,10 +533,10 @@
 			isa = PBXGroup;
 			children = (
 				0E45E6E222BD793800F19312 /* App.strings */,
-				0E3419AC2350815E00419E18 /* Donation.swift */,
 				0E3262D8235EE8DA00B5E470 /* HostImporter.swift */,
 				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
 				0E4FD7F020D58618002221FF /* Macros.swift */,
+				0E3419AC2350815E00419E18 /* Product.swift */,
 				0E24273F225951B00064A1A3 /* ProductManager.swift */,
 				0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */,
 				0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */,
@@ -984,7 +984,7 @@
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
 				0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */,
-				0E3419AD2350815E00419E18 /* Donation.swift in Sources */,
+				0E3419AD2350815E00419E18 /* Product.swift in Sources */,
 				0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */,
 				0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */,
 				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,

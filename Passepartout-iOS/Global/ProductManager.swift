@@ -30,7 +30,7 @@ import Convenience
 struct ProductManager {
     static let shared = ProductManager()
     
-    private let inApp: InApp<Donation>
+    private let inApp: InApp<Product>
     
     private init() {
         inApp = InApp()
@@ -41,7 +41,7 @@ struct ProductManager {
             completionHandler?(inApp.products)
             return
         }
-        inApp.requestProducts(withIdentifiers: Donation.all) { _ in
+        inApp.requestProducts(withIdentifiers: Product.all) { _ in
             completionHandler?(self.inApp.products)
         }
     }

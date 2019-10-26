@@ -29,7 +29,7 @@ import PassepartoutCore
 import Convenience
 
 class DonationViewController: UITableViewController, StrongTableHost {
-    private var donationList: [Donation] = []
+    private var donationList: [Product] = []
 
     private var productsByIdentifier: [String: SKProduct] = [:]
     
@@ -62,12 +62,7 @@ class DonationViewController: UITableViewController, StrongTableHost {
             return
         }
         
-        for row in Donation.all {
-            guard let _ = productsByIdentifier[row.rawValue] else {
-                continue
-            }
-            donationList.append(row)
-        }
+        donationList.append(contentsOf: Product.allDonations.filter { productsByIdentifier[$0.rawValue] != nil })
         model.set(.donation, count: donationList.count, forSection: .oneTime)
 
         if isPurchasing {
