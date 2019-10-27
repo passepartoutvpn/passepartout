@@ -61,3 +61,9 @@ extension UIColor {
         self.init(red: r, green: g, blue: b, alpha: alpha)
     }
 }
+
+func delay(_ block: @escaping () -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+        block()
+    }
+}

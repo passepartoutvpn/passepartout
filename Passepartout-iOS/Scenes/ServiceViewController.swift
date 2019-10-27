@@ -273,7 +273,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
                 guard error == nil else {
 
                     // XXX: delay to avoid weird toggle state
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                    delay {
                         cell.setOn(false, animated: true)
                         if error as? ApplicationError == .externalResources {
                             self.requireDownload()
