@@ -204,10 +204,20 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     }
 
     private func addNewHost() {
+        if TransientStore.shared.service.hasReachedMaximumNumberOfHosts {
+            guard ProductManager.shared.isEligible(forFeature: .unlimitedHosts) else {
+                presentPurchaseScreen(forProduct: .unlimitedHosts)
+                return
+            }
+        }
         perform(segue: StoryboardSegue.Organizer.showImportedHostsSegueIdentifier)
     }
     
     private func addShortcuts() {
+        guard ProductManager.shared.isEligible(forFeature: .siriShortcuts) else {
+            presentPurchaseScreen(forProduct: .siriShortcuts)
+            return
+        }
         perform(segue: StoryboardSegue.Organizer.siriShortcutsSegueIdentifier)
     }
 

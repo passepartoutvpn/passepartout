@@ -159,6 +159,13 @@ class ProductManager: NSObject {
     }
 }
 
+extension ConnectionService {
+    var hasReachedMaximumNumberOfHosts: Bool {
+        let numberOfHosts = ids(forContext: .host).count
+        return numberOfHosts >= AppConstants.InApp.limitedNumberOfHosts
+    }
+}
+
 extension ProductManager: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         reloadReceipt()

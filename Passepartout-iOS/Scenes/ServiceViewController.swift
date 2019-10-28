@@ -347,6 +347,14 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
     
     private func trustMobileNetwork(cell: ToggleTableViewCell) {
+        guard ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
+            delay {
+                cell.setOn(false, animated: true)
+            }
+            presentPurchaseScreen(forProduct: .trustedNetworks)
+            return
+        }
+
         if #available(iOS 12, *) {
             IntentDispatcher.donateTrustCellularNetwork()
             IntentDispatcher.donateUntrustCellularNetwork()
@@ -356,6 +364,11 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
     
     private func trustCurrentWiFi() {
+        guard ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
+            presentPurchaseScreen(forProduct: .trustedNetworks)
+            return
+        }
+
         if #available(iOS 13, *) {
             let auth = CLLocationManager.authorizationStatus()
             switch auth {
@@ -400,6 +413,14 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
     
     private func toggleTrustWiFi(cell: ToggleTableViewCell, at row: Int) {
+        guard ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
+            delay {
+                cell.setOn(false, animated: true)
+            }
+            presentPurchaseScreen(forProduct: .trustedNetworks)
+            return
+        }
+
         if cell.isOn {
             trustedNetworks.enableWifi(at: row)
         } else {
