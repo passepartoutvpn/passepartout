@@ -91,7 +91,7 @@ class AboutViewController: UITableViewController, StrongTableHost {
         present(vc, animated: true, completion: nil)
     }
     
-    @IBAction private func dismiss() {
+    @IBAction private func close() {
         dismiss(animated: true, completion: nil)
     }
 }

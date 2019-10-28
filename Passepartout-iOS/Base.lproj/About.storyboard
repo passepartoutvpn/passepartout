@@ -113,7 +113,7 @@
                     <navigationItem key="navigationItem" id="SOR-2l-C78">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="SJM-bE-0QY">
                             <connections>
-                                <action selector="dismiss" destination="SuC-Dh-OPk" id="F1n-Mk-Njo"/>
+                                <action selector="close" destination="SuC-Dh-OPk" id="5dH-2U-9tb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
