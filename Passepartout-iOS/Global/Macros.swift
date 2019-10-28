@@ -62,6 +62,12 @@ extension UIColor {
     }
 }
 
+extension UIViewController {
+    func presentPurchaseScreen(forProduct product: Product) {
+        present(StoryboardScene.Purchase.initialScene.instantiate(), animated: true, completion: nil)
+    }
+}
+
 func delay(_ block: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
         block()

@@ -68,6 +68,8 @@
 		0E45E6E422BD799700F19312 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E6E322BD799700F19312 /* SwiftGen+Strings.swift */; };
 		0E45E6FA22BD8FC500F19312 /* Core.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Core.strings */; };
 		0E45E71022BE108100F19312 /* OpenVPNOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */; };
+		0E4B0D6B2366E3C100C890B4 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */; };
+		0E4B0D742366E6C800C890B4 /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E4B0D762366E6C800C890B4 /* Purchase.storyboard */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
 		0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E533B152258E03B00EF94FC /* PoolGroup.swift */; };
@@ -208,6 +210,8 @@
 		0E45E6F822BD898A00F19312 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/App.strings; sourceTree = "<group>"; };
 		0E45E6F922BD898B00F19312 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/App.strings; sourceTree = "<group>"; };
 		0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenVPNOptions.swift; sourceTree = "<group>"; };
+		0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
+		0E4B0D752366E6C800C890B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Purchase.storyboard; sourceTree = "<group>"; };
 		0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworks.swift; sourceTree = "<group>"; };
 		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
 		0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardVPNProvider.swift; sourceTree = "<group>"; };
@@ -391,6 +395,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0E4B0D6C2366E53C00C890B4 /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */,
+			);
+			path = Purchase;
+			sourceTree = "<group>";
+		};
 		0E4FD7D920D3E43F002221FF /* VPN */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +460,7 @@
 				0E24273C225950450064A1A3 /* About.storyboard */,
 				0E57F63F20C83FC5008323CF /* Main.storyboard */,
 				0ED38ADC213F44D00004D387 /* Organizer.storyboard */,
+				0E4B0D762366E6C800C890B4 /* Purchase.storyboard */,
 				0E36D25A22403469006AF062 /* Shortcuts.storyboard */,
 				0E57F64220C83FC7008323CF /* Assets.xcassets */,
 				0E9CD788225746B300D033B4 /* Flags.xcassets */,
@@ -580,6 +593,7 @@
 			children = (
 				0E24273D225950CC0064A1A3 /* About */,
 				0E89DFCC213EEDE700741BA1 /* Organizer */,
+				0E4B0D6C2366E53C00C890B4 /* Purchase */,
 				0E24273E225950ED0064A1A3 /* Shortcuts */,
 				0ED31C2820CF2A340027975F /* AccountViewController.swift */,
 				0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */,
@@ -812,6 +826,7 @@
 				0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */,
 				0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */,
 				0E57F64120C83FC5008323CF /* Main.storyboard in Resources */,
+				0E4B0D742366E6C800C890B4 /* Purchase.storyboard in Resources */,
 				0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */,
 				0E45E6E022BD793800F19312 /* App.strings in Resources */,
 			);
@@ -981,6 +996,7 @@
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
 				0E242740225951B00064A1A3 /* ProductManager.swift in Sources */,
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
+				0E4B0D6B2366E3C100C890B4 /* PurchaseViewController.swift in Sources */,
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
 				0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */,
@@ -1104,6 +1120,14 @@
 				0E2C54C52300570200F59453 /* zh-Hans */,
 			);
 			name = App.strings;
+			sourceTree = "<group>";
+		};
+		0E4B0D762366E6C800C890B4 /* Purchase.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E4B0D752366E6C800C890B4 /* Base */,
+			);
+			name = Purchase.storyboard;
 			sourceTree = "<group>";
 		};
 		0E57F63F20C83FC5008323CF /* Main.storyboard */ = {

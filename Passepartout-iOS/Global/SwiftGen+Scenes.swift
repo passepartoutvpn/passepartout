@@ -41,6 +41,11 @@ internal enum StoryboardScene {
 
     internal static let wizardHostIdentifier = SceneType<UIKit.UINavigationController>(storyboard: Organizer.self, identifier: "WizardHostIdentifier")
   }
+  internal enum Purchase: StoryboardType {
+    internal static let storyboardName = "Purchase"
+
+    internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Purchase.self)
+  }
   internal enum Shortcuts: StoryboardType {
     internal static let storyboardName = "Shortcuts"
 
