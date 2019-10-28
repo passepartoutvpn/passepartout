@@ -68,7 +68,12 @@ class AboutViewController: UITableViewController, StrongTableHost {
     // MARK: Actions
 
     private func showVersion() {
-        perform(segue: StoryboardSegue.About.versionSegueIdentifier)
+        let vc = VersionViewController()
+        vc.appIcon = Asset.Assets.logo.image
+        vc.extraText = L10n.Core.Version.Labels.intro
+        vc.backgroundColor = Theme.current.palette.primaryBackground
+        vc.textColor = Theme.current.palette.primaryLightText
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func openCredits() {

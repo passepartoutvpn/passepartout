@@ -64,7 +64,6 @@
 		0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */; };
 		0E3CAFC0229AAE770008E5C8 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */; };
 		0E3CAFC4229AAF8E0008E5C8 /* API in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAFC3229AAF8E0008E5C8 /* API */; };
-		0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */; };
 		0E45E6E022BD793800F19312 /* App.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E45E6E222BD793800F19312 /* App.strings */; };
 		0E45E6E422BD799700F19312 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E6E322BD799700F19312 /* SwiftGen+Strings.swift */; };
 		0E45E6FA22BD8FC500F19312 /* Core.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Core.strings */; };
@@ -197,7 +196,6 @@
 		0E3CAFB3229AAE760008E5C8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Core.strings; sourceTree = "<group>"; };
 		0E3CAFB5229AAE760008E5C8 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Core.strings; sourceTree = "<group>"; };
 		0E3CAFC3229AAF8E0008E5C8 /* API */ = {isa = PBXFileReference; lastKnownFileType = folder; path = API; sourceTree = "<group>"; };
-		0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
 		0E45E6E122BD793800F19312 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/App.strings; sourceTree = "<group>"; };
 		0E45E6E322BD799700F19312 /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
 		0E45E6F122BD897E00F19312 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/App.strings; sourceTree = "<group>"; };
@@ -361,7 +359,6 @@
 				0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */,
 				0EFBFAC021AC464800887A8C /* CreditsViewController.swift */,
 				0EFD943F215BED8E00529B64 /* LabelViewController.swift */,
-				0E3DA370215CB5BF00B40FC9 /* VersionViewController.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -985,7 +982,6 @@
 				0E242740225951B00064A1A3 /* ProductManager.swift in Sources */,
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
-				0E3DA371215CB5BF00B40FC9 /* VersionViewController.swift in Sources */,
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
 				0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */,
 				0E3419AD2350815E00419E18 /* Donation.swift in Sources */,
