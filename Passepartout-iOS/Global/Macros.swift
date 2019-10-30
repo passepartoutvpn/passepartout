@@ -67,6 +67,10 @@ extension UIViewController {
         let nav = StoryboardScene.Purchase.initialScene.instantiate()
         let vc = nav.topViewController as? PurchaseViewController
         vc?.feature = product
+
+        // enforce pre iOS 13 behavior
+        nav.modalPresentationStyle = .fullScreen
+
         present(nav, animated: true, completion: nil)
     }
 }

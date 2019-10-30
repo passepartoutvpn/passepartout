@@ -71,11 +71,6 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         }
 
         title = L10n.App.Purchase.title
-
-        // enforce pre iOS 13 behavior
-        if #available(iOS 13, *) {
-            isModalInPresentation = true
-        }
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
 
         isLoading = true
