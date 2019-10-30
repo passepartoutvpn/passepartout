@@ -130,12 +130,13 @@ The logo is taken from the awesome Circle Icons set by Nick Roach.
 
 The country flags are taken from: <https://github.com/lipis/flag-icon-css/>
 
+- Kvitto - © 2015 Oliver Drobnik
+- lzo - © 1996-2017 Markus F.X.J. Oberhumer
 - MBProgressHUD - © 2009-2016 Matej Bukovinski
 - PIATunnel - © 2018-Present Private Internet Access
 - SSZipArchive - © 2010-2012 Sam Soffes
 - SwiftGen - © 2018 SwiftGen
 - SwiftyBeaver - © 2015 Sebastian Kreutzberger
-- lzo - © 1996-2017 Markus F.X.J. Oberhumer
 
 This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. ([https://www.openssl.org/][dep-openssl])
 
