@@ -43,7 +43,11 @@ class ProductManager: NSObject {
     
     private var purchasedAppVersion: String?
     
-    private var purchasedFeatures: Set<Product>
+    private(set) var purchasedFeatures: Set<Product>
+    
+    private var refreshRequest: SKReceiptRefreshRequest?
+    
+    private var restoreCompletionHandler: ((Error?) -> Void)?
     
     private override init() {
         inApp = InApp()
@@ -53,6 +57,11 @@ class ProductManager: NSObject {
         super.init()
 
         reloadReceipt()
+        SKPaymentQueue.default().add(self)
+    }
+    
+    deinit {
+        SKPaymentQueue.default().remove(self)
     }
     
     func listProducts(completionHandler: (([SKProduct]) -> Void)?) {
@@ -65,6 +74,10 @@ class ProductManager: NSObject {
         }
     }
 
+    func product(withIdentifier identifier: Product) -> SKProduct? {
+        return inApp.product(withIdentifier: identifier)
+    }
+    
     func purchase(_ product: SKProduct, completionHandler: @escaping (InAppPurchaseResult, Error?) -> Void) {
         inApp.purchase(product: product) {
             if $0 == .success {
@@ -72,6 +85,13 @@ class ProductManager: NSObject {
             }
             completionHandler($0, $1)
         }
+    }
+    
+    func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
+        restoreCompletionHandler = completionHandler
+        refreshRequest = SKReceiptRefreshRequest()
+        refreshRequest?.delegate = self
+        refreshRequest?.start()
     }
 
     // MARK: In-app eligibility
@@ -136,5 +156,29 @@ class ProductManager: NSObject {
         return purchasedFeatures.contains {
             return $0.rawValue.hasSuffix("providers.\(name.rawValue)")
         }
+    }
+}
+
+extension ProductManager: SKPaymentTransactionObserver {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        reloadReceipt()
+    }
+}
+
+extension ProductManager: SKRequestDelegate {
+    func requestDidFinish(_ request: SKRequest) {
+        reloadReceipt()
+        inApp.restorePurchases { [weak self] (finished, _, error) in
+            guard finished else {
+                return
+            }
+            self?.restoreCompletionHandler?(error)
+            self?.restoreCompletionHandler = nil
+        }
+    }
+    
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        restoreCompletionHandler?(error)
+        restoreCompletionHandler = nil
     }
 }
