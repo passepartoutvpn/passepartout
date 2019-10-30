@@ -78,6 +78,7 @@
 		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
 		0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64220C83FC7008323CF /* Assets.xcassets */; };
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
+		0E6268942369AD0600355F75 /* PurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */; };
 		0E66A270225FE25800F9C779 /* PoolCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A26F225FE25800F9C779 /* PoolCategory.swift */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */; };
@@ -227,6 +228,7 @@
 		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
 		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
 		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
+		0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCell.swift; sourceTree = "<group>"; };
 		0E66A26F225FE25800F9C779 /* PoolCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PoolCategory.swift; path = ../Model/Profiles/PoolCategory.swift; sourceTree = "<group>"; };
 		0E6ACB7722B1A57C001B3C99 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E6ACB7822B1A5BB001B3C99 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Core.strings; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 		0E4B0D6C2366E53C00C890B4 /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
+				0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */,
 				0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */,
 			);
 			path = Purchase;
@@ -995,6 +998,7 @@
 				0E776642229D0DAE0023FA76 /* Intents.intentdefinition in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
 				0E242740225951B00064A1A3 /* ProductManager.swift in Sources */,
+				0E6268942369AD0600355F75 /* PurchaseTableViewCell.swift in Sources */,
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
 				0E4B0D6B2366E3C100C890B4 /* PurchaseViewController.swift in Sources */,
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,

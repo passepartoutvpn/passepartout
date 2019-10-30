@@ -78,6 +78,18 @@ internal enum L10n {
         }
       }
     }
+    internal enum Purchase {
+      /// Purchase
+      internal static let title = L10n.tr("App", "purchase.title")
+      internal enum Cells {
+        internal enum Restore {
+          /// If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.
+          internal static let description = L10n.tr("App", "purchase.cells.restore.description")
+          /// Restore purchases
+          internal static let title = L10n.tr("App", "purchase.cells.restore.title")
+        }
+      }
+    }
     internal enum Service {
       internal enum Alerts {
         internal enum Location {

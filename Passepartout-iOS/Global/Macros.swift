@@ -64,7 +64,10 @@ extension UIColor {
 
 extension UIViewController {
     func presentPurchaseScreen(forProduct product: Product) {
-        present(StoryboardScene.Purchase.initialScene.instantiate(), animated: true, completion: nil)
+        let nav = StoryboardScene.Purchase.initialScene.instantiate()
+        let vc = nav.topViewController as? PurchaseViewController
+        vc?.feature = product
+        present(nav, animated: true, completion: nil)
     }
 }
 
