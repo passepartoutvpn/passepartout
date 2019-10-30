@@ -273,7 +273,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
                 guard error == nil else {
 
                     // XXX: delay to avoid weird toggle state
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                    delay {
                         cell.setOn(false, animated: true)
                         if error as? ApplicationError == .externalResources {
                             self.requireDownload()
@@ -346,6 +346,15 @@ class ServiceViewController: UIViewController, StrongTableHost {
         }
     }
     
+    private func trustMobileNetwork(cell: ToggleTableViewCell) {
+        if #available(iOS 12, *) {
+            IntentDispatcher.donateTrustCellularNetwork()
+            IntentDispatcher.donateUntrustCellularNetwork()
+        }
+
+        trustedNetworks.setMobile(cell.isOn)
+    }
+    
     private func trustCurrentWiFi() {
         if #available(iOS 13, *) {
             let auth = CLLocationManager.authorizationStatus()
@@ -387,6 +396,14 @@ class ServiceViewController: UIViewController, StrongTableHost {
             alert.addCancelAction(L10n.Core.Global.ok)
             present(alert, animated: true, completion: nil)
             return
+        }
+    }
+    
+    private func toggleTrustWiFi(cell: ToggleTableViewCell, at row: Int) {
+        if cell.isOn {
+            trustedNetworks.enableWifi(at: row)
+        } else {
+            trustedNetworks.disableWifi(at: row)
         }
     }
     
@@ -1071,22 +1088,13 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             toggleDisconnectsOnSleep(cell.isOn)
             
         case .trustedMobile:
-            if #available(iOS 12, *) {
-                IntentDispatcher.donateTrustCellularNetwork()
-                IntentDispatcher.donateUntrustCellularNetwork()
-            }
-
-            trustedNetworks.setMobile(cell.isOn)
+            trustMobileNetwork(cell: cell)
             
         case .trustedWiFi:
             guard let indexPath = tableView.indexPath(for: cell) else {
                 return
             }
-            if cell.isOn {
-                trustedNetworks.enableWifi(at: indexPath.row)
-            } else {
-                trustedNetworks.disableWifi(at: indexPath.row)
-            }
+            toggleTrustWiFi(cell: cell, at: indexPath.row)
             
         case .trustedPolicy:
             toggleTrustedConnectionPolicy(cell.isOn, sender: cell)
