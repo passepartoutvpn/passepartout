@@ -33,15 +33,13 @@ import PassepartoutCore
 private let log = SwiftyBeaver.self
 
 class ProductManager: NSObject {
-    private static let lastFullVersionNumber = "1.8.1"
-
-    private static let lastFullVersionBuild = "2016"
+    private static let lastFullVersionBuild = 2016 // 1.8.1
 
     static let shared = ProductManager()
     
     private let inApp: InApp<Product>
     
-    private var purchasedAppVersion: String?
+    private var purchasedAppBuild: Int?
     
     private(set) var purchasedFeatures: Set<Product>
     
@@ -51,7 +49,7 @@ class ProductManager: NSObject {
     
     private override init() {
         inApp = InApp()
-        purchasedAppVersion = nil
+        purchasedAppBuild = nil
         purchasedFeatures = []
         
         super.init()
@@ -106,14 +104,16 @@ class ProductManager: NSObject {
             return
         }
 
-        purchasedAppVersion = receipt.originalAppVersion
+        if let originalAppVersion = receipt.originalAppVersion, let buildNumber = Int(originalAppVersion) {
+            purchasedAppBuild = buildNumber
+        }
         purchasedFeatures.removeAll()
 
-        if let version = purchasedAppVersion {
-            log.debug("Original purchased version: \(version)")
+        if let buildNumber = purchasedAppBuild {
+            log.debug("Original purchased build: \(buildNumber)")
 
             // treat former purchases as full versions
-            if version <= ProductManager.lastFullVersionNumber {
+            if buildNumber <= ProductManager.lastFullVersionBuild {
                 purchasedFeatures.insert(.fullVersion)
             }
         }
