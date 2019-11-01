@@ -26,14 +26,40 @@
 import Foundation
 import StoreKit
 import Convenience
+import SwiftyBeaver
+import Kvitto
+import PassepartoutCore
 
-struct ProductManager {
+private let log = SwiftyBeaver.self
+
+class ProductManager: NSObject {
+    private static let lastFullVersionBuild = 2016 // 1.8.1
+
     static let shared = ProductManager()
     
-    private let inApp: InApp<Donation>
+    private let inApp: InApp<Product>
     
-    private init() {
+    private var purchasedAppBuild: Int?
+    
+    private(set) var purchasedFeatures: Set<Product>
+    
+    private var refreshRequest: SKReceiptRefreshRequest?
+    
+    private var restoreCompletionHandler: ((Error?) -> Void)?
+    
+    private override init() {
         inApp = InApp()
+        purchasedAppBuild = nil
+        purchasedFeatures = []
+        
+        super.init()
+
+        reloadReceipt()
+        SKPaymentQueue.default().add(self)
+    }
+    
+    deinit {
+        SKPaymentQueue.default().remove(self)
     }
     
     func listProducts(completionHandler: (([SKProduct]) -> Void)?) {
@@ -41,12 +67,125 @@ struct ProductManager {
             completionHandler?(inApp.products)
             return
         }
-        inApp.requestProducts(withIdentifiers: Donation.all) { _ in
+        inApp.requestProducts(withIdentifiers: Product.all) { _ in
             completionHandler?(self.inApp.products)
         }
     }
 
+    func product(withIdentifier identifier: Product) -> SKProduct? {
+        return inApp.product(withIdentifier: identifier)
+    }
+    
     func purchase(_ product: SKProduct, completionHandler: @escaping (InAppPurchaseResult, Error?) -> Void) {
-        inApp.purchase(product: product, completionHandler: completionHandler)
+        inApp.purchase(product: product) {
+            if $0 == .success {
+                self.reloadReceipt()
+            }
+            completionHandler($0, $1)
+        }
+    }
+    
+    func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
+        restoreCompletionHandler = completionHandler
+        refreshRequest = SKReceiptRefreshRequest()
+        refreshRequest?.delegate = self
+        refreshRequest?.start()
+    }
+
+    // MARK: In-app eligibility
+    
+    private func reloadReceipt() {
+        guard let url = Bundle.main.appStoreReceiptURL else {
+            log.warning("No App Store receipt found!")
+            return
+        }
+        guard let receipt = Receipt(contentsOfURL: url) else {
+            log.error("Could not parse App Store receipt!")
+            return
+        }
+
+        if let originalAppVersion = receipt.originalAppVersion, let buildNumber = Int(originalAppVersion) {
+            purchasedAppBuild = buildNumber
+        }
+        purchasedFeatures.removeAll()
+
+        if let buildNumber = purchasedAppBuild {
+            log.debug("Original purchased build: \(buildNumber)")
+
+            // treat former purchases as full versions
+            if buildNumber <= ProductManager.lastFullVersionBuild {
+                purchasedFeatures.insert(.fullVersion)
+            }
+        }
+        if let iapReceipts = receipt.inAppPurchaseReceipts {
+            log.debug("In-app receipts:")
+            iapReceipts.forEach {
+                guard let pid = $0.productIdentifier, let date = $0.originalPurchaseDate else {
+                    return
+                }
+                log.debug("\t\(pid) [\(date)]")
+            }
+            for r in iapReceipts {
+                guard let pid = r.productIdentifier, let product = Product(rawValue: pid) else {
+                    continue
+                }
+                purchasedFeatures.insert(product)
+            }
+        }
+        log.info("Purchased features: \(purchasedFeatures)")
+    }
+
+    func isFullVersion() -> Bool {
+        guard !AppConstants.Flags.isBeta else {
+            return true
+        }
+        return purchasedFeatures.contains(.fullVersion)
+    }
+    
+    func isEligible(forFeature feature: Product) -> Bool {
+        guard !isFullVersion() else {
+            return true
+        }
+        return purchasedFeatures.contains(feature)
+    }
+
+    func isEligible(forProvider name: Infrastructure.Name) -> Bool {
+        guard !isFullVersion() else {
+            return true
+        }
+        return purchasedFeatures.contains {
+            return $0.rawValue.hasSuffix("providers.\(name.rawValue)")
+        }
+    }
+}
+
+extension ConnectionService {
+    var hasReachedMaximumNumberOfHosts: Bool {
+        let numberOfHosts = ids(forContext: .host).count
+        return numberOfHosts >= AppConstants.InApp.limitedNumberOfHosts
+    }
+}
+
+extension ProductManager: SKPaymentTransactionObserver {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        reloadReceipt()
+    }
+}
+
+extension ProductManager: SKRequestDelegate {
+    func requestDidFinish(_ request: SKRequest) {
+        reloadReceipt()
+        inApp.restorePurchases { [weak self] (finished, _, error) in
+            guard finished else {
+                return
+            }
+            self?.restoreCompletionHandler?(error)
+            self?.restoreCompletionHandler = nil
+        }
+    }
+    
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        restoreCompletionHandler?(error)
+        restoreCompletionHandler = nil
     }
 }

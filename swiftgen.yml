@@ -11,6 +11,7 @@ ib:
         - Passepartout-iOS/Base.lproj/About.storyboard
         - Passepartout-iOS/Base.lproj/Main.storyboard
         - Passepartout-iOS/Base.lproj/Organizer.storyboard
+        - Passepartout-iOS/Base.lproj/Purchase.storyboard
         - Passepartout-iOS/Base.lproj/Shortcuts.storyboard
     outputs:
         - templateName: scenes-swift4

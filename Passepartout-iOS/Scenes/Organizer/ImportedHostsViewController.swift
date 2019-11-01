@@ -71,7 +71,7 @@ class ImportedHostsViewController: UITableViewController {
     // MARK: Actions
     
     @IBAction private func openConfigurationFile() {
-        let picker = UIDocumentPickerViewController(documentTypes: ["public.content", "public.data"], in: .import)
+        let picker = UIDocumentPickerViewController(documentTypes: AppConstants.URLs.filetypes, in: .import)
         picker.allowsMultipleSelection = false
         picker.delegate = self
         present(picker, animated: true, completion: nil)

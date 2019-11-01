@@ -62,6 +62,19 @@ extension UIColor {
     }
 }
 
+extension UIViewController {
+    func presentPurchaseScreen(forProduct product: Product) {
+        let nav = StoryboardScene.Purchase.initialScene.instantiate()
+        let vc = nav.topViewController as? PurchaseViewController
+        vc?.feature = product
+
+        // enforce pre iOS 13 behavior
+        nav.modalPresentationStyle = .fullScreen
+
+        present(nav, animated: true, completion: nil)
+    }
+}
+
 func delay(_ block: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
         block()

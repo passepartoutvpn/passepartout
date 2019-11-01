@@ -38,6 +38,11 @@ class WizardProviderViewController: UITableViewController {
     }
     
     private func next(withName name: Infrastructure.Name) {
+        guard ProductManager.shared.isEligible(forProvider: name) else {
+            presentPurchaseScreen(forProduct: name.product)
+            return
+        }
+
         let profile = ProviderConnectionProfile(name: name)
         createdProfile = profile
         

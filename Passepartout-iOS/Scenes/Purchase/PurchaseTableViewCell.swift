@@ -1,8 +1,8 @@
 //
-//  Donation.swift
+//  PurchaseTableViewCell.swift
 //  Passepartout-iOS
 //
-//  Created by Davide De Rosa on 10/11/19.
+//  Created by Davide De Rosa on 10/30/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,27 +23,33 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
+import StoreKit
 
-enum Donation: String {
-    case tiny = "com.algoritmico.ios.Passepartout.donations.Tiny"
+class PurchaseTableViewCell: UITableViewCell {
+    @IBOutlet private weak var labelTitle: UILabel?
 
-    case small = "com.algoritmico.ios.Passepartout.donations.Small"
+    @IBOutlet private weak var labelDescription: UILabel?
 
-    case medium = "com.algoritmico.ios.Passepartout.donations.Medium"
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        labelTitle?.applyAccent(.current)
+    }
+    
+    func fill(product: SKProduct) {
+        var title = product.localizedTitle
+        if let price = product.localizedPrice {
+            title += " @ \(price)"
+        }
+        fill(
+            title: title,
+            description: "\(product.localizedDescription)."
+        )
+    }
 
-    case big = "com.algoritmico.ios.Passepartout.donations.Big"
-
-    case huge = "com.algoritmico.ios.Passepartout.donations.Huge"
-
-    case maxi = "com.algoritmico.ios.Passepartout.donations.Maxi"
-
-    static let all: [Donation] = [
-        .tiny,
-        .small,
-        .medium,
-        .big,
-        .huge,
-        .maxi
-    ]
+    func fill(title: String, description: String) {
+        labelTitle?.text = title
+        labelDescription?.text = description
+    }
 }

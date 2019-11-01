@@ -130,6 +130,10 @@ extension UILabel {
     func applyLight(_ theme: Theme) {
         textColor = theme.palette.primaryLightText
     }
+
+    func applyAccent(_ theme: Theme) {
+        textColor = theme.palette.accent1
+    }
 }
 
 extension UIButton {

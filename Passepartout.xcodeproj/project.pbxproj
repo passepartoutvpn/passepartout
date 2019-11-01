@@ -57,7 +57,7 @@
 		0E3152DB223FA05800F61841 /* ProfileKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D14021919F5600BB5FB2 /* ProfileKey.swift */; };
 		0E3152DC223FA05800F61841 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
 		0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3262D8235EE8DA00B5E470 /* HostImporter.swift */; };
-		0E3419AD2350815E00419E18 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3419AC2350815E00419E18 /* Donation.swift */; };
+		0E3419AD2350815E00419E18 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3419AC2350815E00419E18 /* Product.swift */; };
 		0E3586FE225BD34800509A4D /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */; };
 		0E36D24D2240234B006AF062 /* ShortcutsAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */; };
 		0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36D25A22403469006AF062 /* Shortcuts.storyboard */; };
@@ -68,6 +68,8 @@
 		0E45E6E422BD799700F19312 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E6E322BD799700F19312 /* SwiftGen+Strings.swift */; };
 		0E45E6FA22BD8FC500F19312 /* Core.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Core.strings */; };
 		0E45E71022BE108100F19312 /* OpenVPNOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */; };
+		0E4B0D6B2366E3C100C890B4 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */; };
+		0E4B0D742366E6C800C890B4 /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E4B0D762366E6C800C890B4 /* Purchase.storyboard */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
 		0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E533B152258E03B00EF94FC /* PoolGroup.swift */; };
@@ -76,6 +78,7 @@
 		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
 		0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64220C83FC7008323CF /* Assets.xcassets */; };
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
+		0E6268942369AD0600355F75 /* PurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */; };
 		0E66A270225FE25800F9C779 /* PoolCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A26F225FE25800F9C779 /* PoolCategory.swift */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */; };
@@ -180,7 +183,7 @@
 		0E31529D223F9EF500F61841 /* PassepartoutCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassepartoutCore.h; sourceTree = "<group>"; };
 		0E31529E223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E3262D8235EE8DA00B5E470 /* HostImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostImporter.swift; sourceTree = "<group>"; };
-		0E3419AC2350815E00419E18 /* Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
+		0E3419AC2350815E00419E18 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsAddViewController.swift; sourceTree = "<group>"; };
 		0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutsConnectToViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 		0E45E6F822BD898A00F19312 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/App.strings; sourceTree = "<group>"; };
 		0E45E6F922BD898B00F19312 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/App.strings; sourceTree = "<group>"; };
 		0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenVPNOptions.swift; sourceTree = "<group>"; };
+		0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
+		0E4B0D752366E6C800C890B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Purchase.storyboard; sourceTree = "<group>"; };
 		0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworks.swift; sourceTree = "<group>"; };
 		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
 		0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardVPNProvider.swift; sourceTree = "<group>"; };
@@ -223,6 +228,7 @@
 		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
 		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
 		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
+		0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCell.swift; sourceTree = "<group>"; };
 		0E66A26F225FE25800F9C779 /* PoolCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PoolCategory.swift; path = ../Model/Profiles/PoolCategory.swift; sourceTree = "<group>"; };
 		0E6ACB7722B1A57C001B3C99 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E6ACB7822B1A5BB001B3C99 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Core.strings; sourceTree = "<group>"; };
@@ -391,6 +397,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0E4B0D6C2366E53C00C890B4 /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */,
+				0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */,
+			);
+			path = Purchase;
+			sourceTree = "<group>";
+		};
 		0E4FD7D920D3E43F002221FF /* VPN */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +463,7 @@
 				0E24273C225950450064A1A3 /* About.storyboard */,
 				0E57F63F20C83FC5008323CF /* Main.storyboard */,
 				0ED38ADC213F44D00004D387 /* Organizer.storyboard */,
+				0E4B0D762366E6C800C890B4 /* Purchase.storyboard */,
 				0E36D25A22403469006AF062 /* Shortcuts.storyboard */,
 				0E57F64220C83FC7008323CF /* Assets.xcassets */,
 				0E9CD788225746B300D033B4 /* Flags.xcassets */,
@@ -533,10 +549,10 @@
 			isa = PBXGroup;
 			children = (
 				0E45E6E222BD793800F19312 /* App.strings */,
-				0E3419AC2350815E00419E18 /* Donation.swift */,
 				0E3262D8235EE8DA00B5E470 /* HostImporter.swift */,
 				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
 				0E4FD7F020D58618002221FF /* Macros.swift */,
+				0E3419AC2350815E00419E18 /* Product.swift */,
 				0E24273F225951B00064A1A3 /* ProductManager.swift */,
 				0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */,
 				0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */,
@@ -580,6 +596,7 @@
 			children = (
 				0E24273D225950CC0064A1A3 /* About */,
 				0E89DFCC213EEDE700741BA1 /* Organizer */,
+				0E4B0D6C2366E53C00C890B4 /* Purchase */,
 				0E24273E225950ED0064A1A3 /* Shortcuts */,
 				0ED31C2820CF2A340027975F /* AccountViewController.swift */,
 				0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */,
@@ -812,6 +829,7 @@
 				0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */,
 				0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */,
 				0E57F64120C83FC5008323CF /* Main.storyboard in Resources */,
+				0E4B0D742366E6C800C890B4 /* Purchase.storyboard in Resources */,
 				0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */,
 				0E45E6E022BD793800F19312 /* App.strings in Resources */,
 			);
@@ -980,11 +998,13 @@
 				0E776642229D0DAE0023FA76 /* Intents.intentdefinition in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
 				0E242740225951B00064A1A3 /* ProductManager.swift in Sources */,
+				0E6268942369AD0600355F75 /* PurchaseTableViewCell.swift in Sources */,
 				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
+				0E4B0D6B2366E3C100C890B4 /* PurchaseViewController.swift in Sources */,
 				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
 				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
 				0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */,
-				0E3419AD2350815E00419E18 /* Donation.swift in Sources */,
+				0E3419AD2350815E00419E18 /* Product.swift in Sources */,
 				0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */,
 				0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */,
 				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,
@@ -1104,6 +1124,14 @@
 				0E2C54C52300570200F59453 /* zh-Hans */,
 			);
 			name = App.strings;
+			sourceTree = "<group>";
+		};
+		0E4B0D762366E6C800C890B4 /* Purchase.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E4B0D752366E6C800C890B4 /* Base */,
+			);
+			name = Purchase.storyboard;
 			sourceTree = "<group>";
 		};
 		0E57F63F20C83FC5008323CF /* Main.storyboard */ = {
