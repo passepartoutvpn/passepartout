@@ -41,7 +41,7 @@ class ProductManager: NSObject {
     
     private var purchasedAppBuild: Int?
     
-    private(set) var purchasedFeatures: Set<Product>
+    private var purchasedFeatures: Set<Product>
     
     private var refreshRequest: SKReceiptRefreshRequest?
     
@@ -156,6 +156,10 @@ class ProductManager: NSObject {
         return purchasedFeatures.contains {
             return $0.rawValue.hasSuffix("providers.\(name.rawValue)")
         }
+    }
+
+    func isEligibleForFeedback() -> Bool {
+        return AppConstants.Flags.isBeta || !purchasedFeatures.isEmpty
     }
 }
 

@@ -1158,7 +1158,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.add(.trusted)
             model.add(.trustedPolicy)
             model.add(.diagnostics)
-            model.add(.feedback)
+            if ProductManager.shared.isEligibleForFeedback() {
+                model.add(.feedback)
+            }
         }
 
         // headers
