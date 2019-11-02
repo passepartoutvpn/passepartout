@@ -21,6 +21,7 @@
 		0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E242741225956AC0064A1A3 /* DonationViewController.swift */; };
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
+		0E2EB063236D8E1E0079DB53 /* AppConstants+Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2EB062236D8E1E0079DB53 /* AppConstants+Flags.swift */; };
 		0E3152AD223F9EF500F61841 /* PassepartoutCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* PassepartoutCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E3152B0223F9EF500F61841 /* PassepartoutCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; };
 		0E3152B1223F9EF500F61841 /* PassepartoutCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -179,6 +180,7 @@
 		0E2C54C4230056EF00F59453 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Core.strings"; sourceTree = "<group>"; };
 		0E2C54C52300570200F59453 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/App.strings"; sourceTree = "<group>"; };
 		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
+		0E2EB062236D8E1E0079DB53 /* AppConstants+Flags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConstants+Flags.swift"; sourceTree = "<group>"; };
 		0E31529B223F9EF400F61841 /* PassepartoutCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PassepartoutCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E31529D223F9EF500F61841 /* PassepartoutCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassepartoutCore.h; sourceTree = "<group>"; };
 		0E31529E223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				0E45E6E222BD793800F19312 /* App.strings */,
+				0E2EB062236D8E1E0079DB53 /* AppConstants+Flags.swift */,
 				0E3262D8235EE8DA00B5E470 /* HostImporter.swift */,
 				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
 				0E4FD7F020D58618002221FF /* Macros.swift */,
@@ -1011,6 +1014,7 @@
 				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
 				0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */,
 				0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */,
+				0E2EB063236D8E1E0079DB53 /* AppConstants+Flags.swift in Sources */,
 				0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */,
 				0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */,
 				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
