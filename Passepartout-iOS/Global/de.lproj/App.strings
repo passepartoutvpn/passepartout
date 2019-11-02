@@ -51,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Technische Details";
 
 "network_settings.cells.add_dns_server.caption" = "Adresse hinzufügen";
+"network_settings.cells.add_dns_domain.caption" = "Domäne hinzufügen";
 "network_settings.cells.proxy_bypass.caption" = "Domäne umgehen";
 "network_settings.cells.add_proxy_bypass.caption" = "Zu umgehende Domäne hinzufügen";
 

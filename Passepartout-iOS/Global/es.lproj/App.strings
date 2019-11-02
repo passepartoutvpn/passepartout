@@ -51,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Detalles técnicos";
 
 "network_settings.cells.add_dns_server.caption" = "Añadir dirección";
+"network_settings.cells.add_dns_domain.caption" = "Añadir dominio";
 "network_settings.cells.proxy_bypass.caption" = "Dominio ignorado";
 "network_settings.cells.add_proxy_bypass.caption" = "Añadir dominio ignorado";
 

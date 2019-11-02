@@ -51,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Τεχνικές Λεπτομέρειες";
 
 "network_settings.cells.add_dns_server.caption" = "Προσθήκη Διεύθυνσης";
+"network_settings.cells.add_dns_domain.caption" = "Προσθήκη τομέα";
 "network_settings.cells.proxy_bypass.caption" = "Παράκαμψη Τομέα";
 "network_settings.cells.add_proxy_bypass.caption" = "Προσθήκη τομέα παράκαμψης";
 

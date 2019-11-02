@@ -51,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Tekniska detaljer";
 
 "network_settings.cells.add_dns_server.caption" = "Lägg till adress";
+"network_settings.cells.add_dns_domain.caption" = "Lägg till domän";
 "network_settings.cells.proxy_bypass.caption" = "Bypass-domän";
 "network_settings.cells.add_proxy_bypass.caption" = "Add bypass domain";
 

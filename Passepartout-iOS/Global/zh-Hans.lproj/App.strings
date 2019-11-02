@@ -51,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "技术细节";
 
 "network_settings.cells.add_dns_server.caption" = "添加地址";
+"network_settings.cells.add_dns_domain.caption" = "添加域";
 "network_settings.cells.proxy_bypass.caption" = "旁路域名";
 "network_settings.cells.add_proxy_bypass.caption" = "添加旁路域名";
 
