@@ -125,7 +125,9 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         // see UISplitViewControllerDelegate in AppDelegate (collapse is now commented out)
         service.delegate = self
 
-        NotificationCenter.default.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
+        nc.addObserver(self, selector: #selector(productManagerDidReloadReceipt), name: ProductManager.didReloadReceipt, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -360,6 +362,11 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     // MARK: Notifications
 
     @objc private func vpnDidUpdate() {
+        tableView.reloadData()
+    }
+    
+    @objc private func productManagerDidReloadReceipt() {
+        reloadModel()
         tableView.reloadData()
     }
 }
