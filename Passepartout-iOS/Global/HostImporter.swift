@@ -1,6 +1,6 @@
 //
 //  HostImporter.swift
-//  Passepartout-macOS
+//  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 10/22/19.
 //  Copyright (c) 2019 Davide De Rosa. All rights reserved.
