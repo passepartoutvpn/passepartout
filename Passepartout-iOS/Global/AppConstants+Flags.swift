@@ -28,7 +28,13 @@ import PassepartoutCore
 
 extension AppConstants {
     class Flags {
-        static var isBeta = false
+        static var isBeta: Bool {
+            #if targetEnvironment(simulator)
+            return true
+            #else
+            return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+            #endif
+        }
 
         static var isMockVPN = false {
             didSet {
