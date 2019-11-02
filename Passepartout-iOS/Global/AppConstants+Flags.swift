@@ -36,6 +36,8 @@ extension AppConstants {
             #endif
         }
 
+        static var isBetaFullVersion = false
+
         static var isMockVPN = false {
             didSet {
                 VPN.isMockVPN = isMockVPN
