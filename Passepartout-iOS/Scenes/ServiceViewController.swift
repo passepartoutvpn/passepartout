@@ -115,8 +115,10 @@ class ServiceViewController: UIViewController, StrongTableHost {
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidReinstall, object: nil)
-        nc.addObserver(self, selector: #selector(intentDidUpdateService), name: .IntentDidUpdateService, object: nil)
-        nc.addObserver(self, selector: #selector(serviceDidUpdateDataCount(_:)), name: .ConnectionServiceDidUpdateDataCount, object: nil)
+        if #available(iOS 13, *) {
+            nc.addObserver(self, selector: #selector(intentDidUpdateService), name: IntentDispatcher.didUpdateService, object: nil)
+        }
+        nc.addObserver(self, selector: #selector(serviceDidUpdateDataCount(_:)), name: ConnectionService.didUpdateDataCount, object: nil)
         nc.addObserver(self, selector: #selector(productManagerDidReloadReceipt), name: ProductManager.didReloadReceipt, object: nil)
 
         // run this no matter what
