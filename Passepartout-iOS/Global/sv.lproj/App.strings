@@ -58,3 +58,7 @@
 
 "shortcuts.edit.title" = "Hantera genvägar";
 "shortcuts.edit.cells.add_shortcut.caption" = "Lägg till genväg";
+
+"purchase.title" = "Köp";
+"purchase.cells.restore.title" = "Återställ köp";
+"purchase.cells.restore.description" = "Om du köpte den här appen eller funktionen tidigare kan du återställa dina inköp och den här skärmen visas inte igen.";

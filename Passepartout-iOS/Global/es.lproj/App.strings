@@ -58,3 +58,7 @@
 
 "shortcuts.edit.title" = "Gestionar atajos";
 "shortcuts.edit.cells.add_shortcut.caption" = "Añadir atajo";
+
+"purchase.title" = "Compra";
+"purchase.cells.restore.title" = "Restaurar compras";
+"purchase.cells.restore.description" = "Si compraste esta aplicación o funcionalidad anteriormente, puedes restaurar tus compras y esta pantalla no volverá a aparecer.";

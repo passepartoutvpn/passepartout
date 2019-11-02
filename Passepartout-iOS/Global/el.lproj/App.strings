@@ -58,3 +58,7 @@
 
 "shortcuts.edit.title" = "Διαχείριση συντομεύσεων";
 "shortcuts.edit.cells.add_shortcut.caption" = "Προσθήκη Συντόμευσης";
+
+"purchase.title" = "Αγορά";
+"purchase.cells.restore.title" = "Επαναφορά αγορών";
+"purchase.cells.restore.description" = "Αν έχετε αγοράσει αυτή την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας και αυτή η οθόνη δεν θα εμφανιστεί ξανά.";

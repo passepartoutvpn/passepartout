@@ -58,3 +58,7 @@
 
 "shortcuts.edit.title" = "Gestisci comandi rapidi";
 "shortcuts.edit.cells.add_shortcut.caption" = "Aggiungi comando rapido";
+
+"purchase.title" = "Acquista";
+"purchase.cells.restore.title" = "Ripristina acquisti";
+"purchase.cells.restore.description" = "Se hai comprato quest'applicazione o funzionalità in precedenza, puoi ripristinare i tuoi acquisti in modo che questa schermata non compaia più.";

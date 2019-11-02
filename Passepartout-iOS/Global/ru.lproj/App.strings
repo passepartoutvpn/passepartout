@@ -58,3 +58,7 @@
 
 "shortcuts.edit.title" = "Управлять командами";
 "shortcuts.edit.cells.add_shortcut.caption" = "Создать команду";
+
+"purchase.title" = "Покупка";
+"purchase.cells.restore.title" = "Восстановить покупки";
+"purchase.cells.restore.description" = "Если вы купили это приложение или функцию в прошлом, вы можете восстановить свои покупки, и этот экран больше не будет отображаться.";

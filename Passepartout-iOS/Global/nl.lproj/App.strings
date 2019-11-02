@@ -58,3 +58,7 @@
 
 "shortcuts.edit.title" = "Beheer snelkoppelingen";
 "shortcuts.edit.cells.add_shortcut.caption" = "Voeg snelkoppeling toe";
+
+"purchase.title" = "Aankoop";
+"purchase.cells.restore.title" = "Aankopen herstellen";
+"purchase.cells.restore.description" = "Als u deze app of functie in het verleden hebt gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer weergegeven.";

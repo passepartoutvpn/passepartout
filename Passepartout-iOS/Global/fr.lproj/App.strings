@@ -58,3 +58,7 @@
 
 "shortcuts.edit.title" = "Gérer les raccourcis";
 "shortcuts.edit.cells.add_shortcut.caption" = "Ajouter un raccourcis";
+
+"purchase.title" = "Acheter";
+"purchase.cells.restore.title" = "Restaurer les achats";
+"purchase.cells.restore.description" = "Si vous avez acheté cette application ou cette fonctionnalité auparavant, vous pouvez restaurer vos achats et cet écran ne s'affichera plus.";

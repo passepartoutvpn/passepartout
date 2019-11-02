@@ -58,3 +58,7 @@
 
 "shortcuts.edit.title" = "管理捷径";
 "shortcuts.edit.cells.add_shortcut.caption" = "添加捷径";
+
+"purchase.title" = "购买";
+"purchase.cells.restore.title" = "还原购买的物品";
+"purchase.cells.restore.description" = "如果您以前购买过此应用程序或功能，则可以恢复您的购买，并且此屏幕不会再显示。";
