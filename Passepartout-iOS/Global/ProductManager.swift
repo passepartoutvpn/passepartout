@@ -140,7 +140,7 @@ class ProductManager: NSObject {
     }
 
     func isFullVersion() -> Bool {
-        guard !AppConstants.Flags.isBeta else {
+        if AppConstants.Flags.isBeta && AppConstants.Flags.isBetaFullVersion {
             return true
         }
         return purchasedFeatures.contains(.fullVersion)
