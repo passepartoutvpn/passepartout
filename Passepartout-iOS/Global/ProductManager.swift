@@ -33,6 +33,8 @@ import PassepartoutCore
 private let log = SwiftyBeaver.self
 
 class ProductManager: NSObject {
+    static let didReloadReceipt = Notification.Name("ProductManagerDidReloadReceipt")
+
     private static let lastFullVersionBuild = 2016 // 1.8.1
 
     static let shared = ProductManager()
@@ -41,7 +43,7 @@ class ProductManager: NSObject {
     
     private var purchasedAppBuild: Int?
     
-    private(set) var purchasedFeatures: Set<Product>
+    private var purchasedFeatures: Set<Product>
     
     private var refreshRequest: SKReceiptRefreshRequest?
     
@@ -133,6 +135,8 @@ class ProductManager: NSObject {
             }
         }
         log.info("Purchased features: \(purchasedFeatures)")
+        
+        NotificationCenter.default.post(name: ProductManager.didReloadReceipt, object: nil)
     }
 
     func isFullVersion() -> Bool {
@@ -156,6 +160,10 @@ class ProductManager: NSObject {
         return purchasedFeatures.contains {
             return $0.rawValue.hasSuffix("providers.\(name.rawValue)")
         }
+    }
+
+    func isEligibleForFeedback() -> Bool {
+        return AppConstants.Flags.isBeta || !purchasedFeatures.isEmpty
     }
 }
 

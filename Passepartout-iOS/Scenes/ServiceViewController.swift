@@ -117,6 +117,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidReinstall, object: nil)
         nc.addObserver(self, selector: #selector(intentDidUpdateService), name: .IntentDidUpdateService, object: nil)
         nc.addObserver(self, selector: #selector(serviceDidUpdateDataCount(_:)), name: .ConnectionServiceDidUpdateDataCount, object: nil)
+        nc.addObserver(self, selector: #selector(productManagerDidReloadReceipt), name: ProductManager.didReloadReceipt, object: nil)
 
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
@@ -666,6 +667,11 @@ class ServiceViewController: UIViewController, StrongTableHost {
         }
         refreshDataCount(dataCount)
     }
+    
+    @objc private func productManagerDidReloadReceipt() {
+        reloadModel()
+        tableView.reloadData()
+    }
 }
 
 // MARK: -
@@ -1158,7 +1164,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.add(.trusted)
             model.add(.trustedPolicy)
             model.add(.diagnostics)
-            model.add(.feedback)
+            if ProductManager.shared.isEligibleForFeedback() {
+                model.add(.feedback)
+            }
         }
 
         // headers

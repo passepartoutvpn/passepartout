@@ -44,8 +44,10 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
     // MARK: StrongTableHost
 
-    let model: StrongTableModel<SectionType, RowType> = {
-        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
+    let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
+    
+    func reloadModel() {
+        model.clear()
         model.add(.vpn)
         model.add(.providers)
         model.add(.hosts)
@@ -53,7 +55,9 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             model.add(.siri)
         }
         model.add(.support)
-        model.add(.feedback)
+        if ProductManager.shared.isEligibleForFeedback() {
+            model.add(.feedback)
+        }
         model.add(.about)
         model.add(.destruction)
         model.setHeader(L10n.App.Service.Sections.Vpn.header, forSection: .vpn)
@@ -78,10 +82,9 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             model.setHeader("Beta", forSection: .test)
             model.set([.testDisplayLog, .testTermination], forSection: .test)
         }
-        return model
-    }()
-    
-    func reloadModel() {
+        
+        //
+
         providers = service.ids(forContext: .provider).sorted()
         hosts = service.ids(forContext: .host).sortedCaseInsensitive()
         
@@ -122,7 +125,9 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         // see UISplitViewControllerDelegate in AppDelegate (collapse is now commented out)
         service.delegate = self
 
-        NotificationCenter.default.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
+        nc.addObserver(self, selector: #selector(productManagerDidReloadReceipt), name: ProductManager.didReloadReceipt, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -357,6 +362,11 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     // MARK: Notifications
 
     @objc private func vpnDidUpdate() {
+        tableView.reloadData()
+    }
+    
+    @objc private func productManagerDidReloadReceipt() {
+        reloadModel()
         tableView.reloadData()
     }
 }
