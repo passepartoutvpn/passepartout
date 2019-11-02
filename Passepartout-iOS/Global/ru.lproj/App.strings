@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Обновить инфраструктуру";
 "service.cells.host.parameters.caption" = "Параметры";
 "service.cells.trusted_add_wifi.caption" = "Добавить текущий Wi-Fi";
+"service.alerts.location.message.denied" = "Вы должны разрешить доступ к расположению, чтобы доверять этой сети Wi-Fi. Перейдите в настройки iOS и просмотрите разрешения для определения местоположения для Passepartout.";
+"service.alerts.location.button.settings" = "Настройки";
 
 "account.sections.credentials.header" = "Данные для входа";
 
@@ -49,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Техническая информация";
 
 "network_settings.cells.add_dns_server.caption" = "Добавить адрес";
+"network_settings.cells.add_dns_domain.caption" = "Добавить домен";
 "network_settings.cells.proxy_bypass.caption" = "Обход домена";
 "network_settings.cells.add_proxy_bypass.caption" = "Добавить обходной домен";
 
@@ -56,3 +59,7 @@
 
 "shortcuts.edit.title" = "Управлять командами";
 "shortcuts.edit.cells.add_shortcut.caption" = "Создать команду";
+
+"purchase.title" = "Покупка";
+"purchase.cells.restore.title" = "Восстановить покупки";
+"purchase.cells.restore.description" = "Если вы купили это приложение или функцию в прошлом, вы можете восстановить свои покупки, и этот экран больше не будет отображаться.";

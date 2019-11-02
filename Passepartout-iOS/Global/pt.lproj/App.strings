@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Atualizar infraestrutura";
 "service.cells.host.parameters.caption" = "Parâmetros";
 "service.cells.trusted_add_wifi.caption" = "Adicionar Wi-Fi atual";
+"service.alerts.location.message.denied" = "Você precisa autorizar o compartilhamento de localização. Acesse ajustes do iOS e verifique permissões de localização do Passepartout.";
+"service.alerts.location.button.settings" = "Ajustes";
 
 "account.sections.credentials.header" = "Credenciais";
 
@@ -49,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Detalhes técnicos";
 
 "network_settings.cells.add_dns_server.caption" = "Adicionar endereço";
+"network_settings.cells.add_dns_domain.caption" = "Adicionar domínio";
 "network_settings.cells.proxy_bypass.caption" = "Domínio ignorado";
 "network_settings.cells.add_proxy_bypass.caption" = "Adicionar domínio ignorado";
 
@@ -56,3 +59,7 @@
 
 "shortcuts.edit.title" = "Configuração de atalhos";
 "shortcuts.edit.cells.add_shortcut.caption" = "Adicionar atalho";
+
+"purchase.title" = "Comprar";
+"purchase.cells.restore.title" = "Restaurar compras";
+"purchase.cells.restore.description" = "Se você comprou este aplicativo ou recurso no passado, pode restaurar suas compras e essa tela não será exibida novamente.";

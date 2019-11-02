@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Ανανέωση της υποδομής";
 "service.cells.host.parameters.caption" = "Παράμετροι";
 "service.cells.trusted_add_wifi.caption" = "Προσθέστε το τρέχον Wi-Fi";
+"service.alerts.location.message.denied" = "Πρέπει να επιτρέψετε τη πρόσβαση τοποθεσίας για να εμπιστευτείτε το Wi-Fi δίκτυο. Μεταβείτε στις ρυθμίσεις του iOS και επιθεωρείστε τις ρυθμίσεις για το Passepartout.";
+"service.alerts.location.button.settings" = "Ρυθμίσεις";
 
 "account.sections.credentials.header" = "Διαπιστευτήρια";
 
@@ -49,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Τεχνικές Λεπτομέρειες";
 
 "network_settings.cells.add_dns_server.caption" = "Προσθήκη Διεύθυνσης";
+"network_settings.cells.add_dns_domain.caption" = "Προσθήκη τομέα";
 "network_settings.cells.proxy_bypass.caption" = "Παράκαμψη Τομέα";
 "network_settings.cells.add_proxy_bypass.caption" = "Προσθήκη τομέα παράκαμψης";
 
@@ -56,3 +59,7 @@
 
 "shortcuts.edit.title" = "Διαχείριση συντομεύσεων";
 "shortcuts.edit.cells.add_shortcut.caption" = "Προσθήκη Συντόμευσης";
+
+"purchase.title" = "Αγορά";
+"purchase.cells.restore.title" = "Επαναφορά αγορών";
+"purchase.cells.restore.description" = "Αν έχετε αγοράσει αυτή την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας και αυτή η οθόνη δεν θα εμφανιστεί ξανά.";

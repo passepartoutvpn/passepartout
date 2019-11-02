@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Uppdatera infrastruktur";
 "service.cells.host.parameters.caption" = "Parametrar";
 "service.cells.trusted_add_wifi.caption" = "Lägg till nuvarande Wi-Fi";
+"service.alerts.location.message.denied" = "Du måste tillåta lägetillgång för att förlita detta nätverk. Öppna iOS inställningar och se över tillstånd för Passepartout.";
+"service.alerts.location.button.settings" = "Inställningar";
 
 "account.sections.credentials.header" = "Referenser";
 
@@ -49,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Tekniska detaljer";
 
 "network_settings.cells.add_dns_server.caption" = "Lägg till adress";
+"network_settings.cells.add_dns_domain.caption" = "Lägg till domän";
 "network_settings.cells.proxy_bypass.caption" = "Bypass-domän";
 "network_settings.cells.add_proxy_bypass.caption" = "Add bypass domain";
 
@@ -56,3 +59,7 @@
 
 "shortcuts.edit.title" = "Hantera genvägar";
 "shortcuts.edit.cells.add_shortcut.caption" = "Lägg till genväg";
+
+"purchase.title" = "Köp";
+"purchase.cells.restore.title" = "Återställ köp";
+"purchase.cells.restore.description" = "Om du köpte den här appen eller funktionen tidigare kan du återställa dina inköp och den här skärmen visas inte igen.";

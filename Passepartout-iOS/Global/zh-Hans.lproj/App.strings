@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "刷新基础设置";
 "service.cells.host.parameters.caption" = "参数";
 "service.cells.trusted_add_wifi.caption" = "添加当前的Wi-Fi";
+"service.alerts.location.message.denied" = "您必须允许位置访问权限才能信任此Wi-Fi网络。请转到iOS设置并查看您对Passepartout的位置权限。";
+"service.alerts.location.button.settings" = "设置";
 
 "account.sections.credentials.header" = "认证方式";
 
@@ -49,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "技术细节";
 
 "network_settings.cells.add_dns_server.caption" = "添加地址";
+"network_settings.cells.add_dns_domain.caption" = "添加域";
 "network_settings.cells.proxy_bypass.caption" = "旁路域名";
 "network_settings.cells.add_proxy_bypass.caption" = "添加旁路域名";
 
@@ -56,3 +59,7 @@
 
 "shortcuts.edit.title" = "管理捷径";
 "shortcuts.edit.cells.add_shortcut.caption" = "添加捷径";
+
+"purchase.title" = "购买";
+"purchase.cells.restore.title" = "还原购买的物品";
+"purchase.cells.restore.description" = "如果您以前购买过此应用程序或功能，则可以恢复您的购买，并且此屏幕不会再显示。";

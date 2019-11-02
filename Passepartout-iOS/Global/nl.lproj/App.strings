@@ -40,6 +40,8 @@
 "service.cells.provider.refresh.caption" = "Vernieuw de infrastructuur";
 "service.cells.host.parameters.caption" = "Parameters";
 "service.cells.trusted_add_wifi.caption" = "Voeg huidige WiFi toe";
+"service.alerts.location.message.denied" = "Om dit Wi-Fi netwerk te vertrouwen is toestemming tot locatie gegevens nodig. Ga naar Instellingen -> Privacy -> Locatievoorzieningen en check de locatie bevoegdheden voor Passepartout.";
+"service.alerts.location.button.settings" = "Instellingen";
 
 "account.sections.credentials.header" = "Inloggegevens";
 
@@ -49,6 +51,7 @@
 "provider.preset.cells.tech_details.caption" = "Technische details";
 
 "network_settings.cells.add_dns_server.caption" = "Voeg adress toe";
+"network_settings.cells.add_dns_domain.caption" = "Domein toevoegen";
 "network_settings.cells.proxy_bypass.caption" = "Omzeil domein";
 "network_settings.cells.add_proxy_bypass.caption" = "Voeg omzeil optie voor domein toe";
 
@@ -56,3 +59,7 @@
 
 "shortcuts.edit.title" = "Beheer snelkoppelingen";
 "shortcuts.edit.cells.add_shortcut.caption" = "Voeg snelkoppeling toe";
+
+"purchase.title" = "Aankoop";
+"purchase.cells.restore.title" = "Aankopen herstellen";
+"purchase.cells.restore.description" = "Als u deze app of functie in het verleden hebt gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer weergegeven.";

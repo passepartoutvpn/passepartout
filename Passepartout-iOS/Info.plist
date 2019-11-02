@@ -43,7 +43,7 @@
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Access name of connected Wi-Fi</string>
+	<string>dummy</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ConnectVPNIntent</string>
