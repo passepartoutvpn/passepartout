@@ -1,11 +1,19 @@
 ### Added
 
-- Chinese (Simplified) translations (OnlyThen).
-- Support for iOS 13 Dark Mode.
+- Import host via document picker.
+- Support for `--ping-restart` (Robert Patchett).
+- Support for proxy auto-configuration URL (ThinkChaos).
+- Disclose server configuration and network settings in Diagnostics.
+- Support multiple DNS search domains.
+
+### Changed
+
+- Upgrade project to Xcode 11.
 
 ### Fixed
 
-- Transparent navigation bar in iPadOS 13.
-- Unable to open .ovpn files in iOS 13.
-- Premature disconnection due to .staleSession error.
+- Cannot enter IP addresses in some localizations.
+- Cannot easily trust Wi-Fi networks in iOS 13.
+- Infrastructures not updated in non-English locales.
+- Default gateway not enforced for providers (e.g. TunnelBear).
 
