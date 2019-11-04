@@ -27,7 +27,11 @@ import Foundation
 import PassepartoutCore
 
 extension AppConstants {
-    class Flags {
+    struct Rating {
+        static let eventCount = 3
+    }
+
+    struct Flags {
         static var isBeta: Bool {
             #if targetEnvironment(simulator)
             return true
@@ -43,5 +47,9 @@ extension AppConstants {
                 VPN.isMockVPN = isMockVPN
             }
         }
+    }
+
+    struct InApp {
+        public static let limitedNumberOfHosts = 2
     }
 }

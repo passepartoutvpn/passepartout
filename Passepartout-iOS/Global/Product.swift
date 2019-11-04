@@ -107,9 +107,3 @@ extension Infrastructure.Name {
         return product
     }
 }
-
-extension AppConstants {
-    struct InApp {
-        public static let limitedNumberOfHosts = 2
-    }
-}
