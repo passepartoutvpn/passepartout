@@ -50,7 +50,7 @@ private struct Offsets {
     
     static let dnsDomain = 0
     
-    static let proxyBypass = 2
+    static let proxyBypass = 3
 }
 
 class NetworkSettingsViewController: UITableViewController {
