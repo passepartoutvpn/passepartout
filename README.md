@@ -33,17 +33,23 @@ Trust cellular or Wi-Fi networks to fine-grain your connectivity. You can then c
 
 [<img src="res/snap-trusted.png" width="300">](res/snap-trusted.png)
 
-### See your connection parameters
+### Siri shortcuts
 
-Passepartout strives for transparency, by showing a fairly detailed yet understandable resume of your connection parameters.
+Enjoy the convenience of Siri shortcuts to automate frequent VPN actions.
 
-[<img src="res/snap-parameters.png" width="300">](res/snap-parameters.png)
+[<img src="res/snap-shortcuts.png" width="300">](res/snap-shortcuts.png)
 
 ### Override network settings
 
 Override default gateway, DNS and proxy settings right from the app. Don't bother editing the .ovpn file or your pushed server settings. This is especially useful if you want to override your provider settings, e.g. to integrate your own DNS-based ad blocking.
 
 [<img src="res/snap-network.png" width="300">](res/snap-network.png)
+
+### See your connection parameters
+
+Passepartout strives for transparency, by showing a fairly detailed yet understandable resume of your connection parameters.
+
+[<img src="res/snap-parameters.png" width="300">](res/snap-parameters.png)
 
 ### Disconnect on sleep
 
