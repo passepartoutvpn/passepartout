@@ -28,6 +28,7 @@ import StoreKit
 import MessageUI
 import PassepartoutCore
 import Convenience
+import SystemConfiguration.CaptiveNetwork
 
 // XXX: convoluted due to the separation of provider/host profiles
 
@@ -80,7 +81,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         if AppConstants.Flags.isBeta {
             model.add(.test)
             model.setHeader("Beta", forSection: .test)
-            model.set([.testDisplayLog, .testTermination], forSection: .test)
+            model.set([.testInterfaces, .testDisplayLog, .testTermination], forSection: .test)
         }
         
         //
@@ -346,6 +347,31 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     
     //
     
+    private func testInterfaces() {
+        let alert = UIAlertController.asAlert("Test interfaces", nil)
+        alert.addCancelAction(L10n.Core.Global.ok)
+        defer {
+            present(alert, animated: true, completion: nil)
+        }
+        guard let interfaceNames = CNCopySupportedInterfaces() as? [CFString] else {
+            alert.message = "Nil result from CNCopySupportedInterfaces()"
+            return
+        }
+
+        var message = interfaceNames.description
+        message += "\n\n"
+        for name in interfaceNames {
+            message += name as String
+            message += "\n"
+            guard let iface = CNCopyCurrentNetworkInfo(name) else {
+                continue
+            }
+            message += (iface as NSDictionary).description
+            message += "\n"
+        }
+        alert.message = message
+    }
+    
     private func testDisplayLog() {
         guard let log = try? String(contentsOf: AppConstants.Log.fileURL) else {
             return
@@ -420,6 +446,8 @@ extension OrganizerViewController {
         case openAbout
         
         case uninstall
+        
+        case testInterfaces
         
         case testDisplayLog
 
@@ -521,6 +549,11 @@ extension OrganizerViewController {
             cell.caption = L10n.Core.Organizer.Cells.Uninstall.caption
             return cell
             
+        case .testInterfaces:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = "Show interfaces"
+            return cell
+
         case .testDisplayLog:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = "Display current log"
@@ -573,6 +606,9 @@ extension OrganizerViewController {
             
         case .uninstall:
             confirmVpnProfileDeletion()
+            
+        case .testInterfaces:
+            testInterfaces()
             
         case .testDisplayLog:
             testDisplayLog()
