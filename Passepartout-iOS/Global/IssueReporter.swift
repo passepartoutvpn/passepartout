@@ -58,28 +58,39 @@ class IssueReporter: NSObject {
             let alert = UIAlertController.asAlert(L10n.Core.IssueReporter.title, L10n.Core.IssueReporter.message)
             alert.addPreferredAction(L10n.Core.IssueReporter.Buttons.accept) {
                 VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
-                    self.composeEmail(withDebugLog: $0, configurationURL: issue.configurationURL, description: issue.description)
+                    self.composeEmail(withDebugLog: $0, issue: issue)
                 }
             }
             alert.addCancelAction(L10n.Core.Global.cancel)
             viewController.present(alert, animated: true, completion: nil)
         } else {
-            composeEmail(withDebugLog: nil, configurationURL: issue.configurationURL, description: issue.description)
+            composeEmail(withDebugLog: nil, issue: issue)
         }
     }
     
-    private func composeEmail(withDebugLog debugLog: String?, configurationURL: URL?, description: String?) {
-        let metadata = DebugLog(raw: "--").decoratedString()
-        
+    private func composeEmail(withDebugLog debugLog: String?, issue: Issue) {
         let vc = MFMailComposeViewController()
         vc.setToRecipients([AppConstants.IssueReporter.Email.recipient])
         vc.setSubject(AppConstants.IssueReporter.Email.subject)
-        vc.setMessageBody(AppConstants.IssueReporter.Email.body(description ?? AppConstants.IssueReporter.Email.template, metadata), isHTML: false)
+
+        let bodyContent = AppConstants.IssueReporter.Email.template
+        var bodyMetadata = "--\n\n"
+        bodyMetadata += DebugLog(raw: "").decoratedString()
+        if let infrastructure = issue.infrastructure {
+            bodyMetadata += "Provider: \(infrastructure.name.rawValue)\n"
+            if let lastUpdated = InfrastructureFactory.shared.modificationDate(for: infrastructure.name) {
+                bodyMetadata += "Last updated: \(lastUpdated)\n"
+            }
+            bodyMetadata += "\n"
+        }
+        bodyMetadata += "--"
+        vc.setMessageBody(AppConstants.IssueReporter.Email.body(bodyContent, bodyMetadata), isHTML: false)
+
         if let raw = debugLog {
             let attachment = DebugLog(raw: raw).decoratedData()
             vc.addAttachmentData(attachment, mimeType: AppConstants.IssueReporter.MIME.debugLog, fileName: AppConstants.IssueReporter.Filenames.debugLog)
         }
-        if let url = configurationURL {
+        if let url = issue.configurationURL {
             do {
                 let parsedFile = try OpenVPN.ConfigurationParser.parsed(fromURL: url, returnsStripped: true)
                 if let attachment = parsedFile.strippedLines?.joined(separator: "\n").data(using: .utf8) {
