@@ -44,6 +44,8 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
     
     func reloadModel() {
+        let fullVersionString: String
+
         model.clear()
         model.add(.products)
         
@@ -56,9 +58,19 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
+            
+            fullVersionString = skFullVersion.localizedTitle
+        } else {
+            fullVersionString = "Full version" // XXX
         }
         rows.append(.restore)
         model.set(rows, forSection: .products)
+
+        let featureBulletsList: [String] = ProductManager.shared.featureProducts(includingFullVersion: false).map {
+            return "- \($0.localizedTitle)"
+        }.sortedCaseInsensitive()
+        let featureBullets = featureBulletsList.joined(separator: "\n")
+        model.setFooter(L10n.App.Purchase.Sections.Products.footer(fullVersionString, featureBullets), forSection: .products)
     }
     
     // MARK: UIViewController
@@ -154,6 +166,14 @@ extension PurchaseViewController {
         case fullVersion
         
         case restore
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return model.numberOfSections
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return model.footer(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

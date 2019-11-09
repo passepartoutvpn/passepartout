@@ -89,6 +89,14 @@ internal enum L10n {
           internal static let title = L10n.tr("App", "purchase.cells.restore.title")
         }
       }
+      internal enum Sections {
+        internal enum Products {
+          /// Every product is a one-time purchase.\n\n%@ entails:\n\n- All providers (including those being added in the future)\n%@
+          internal static func footer(_ p1: String, _ p2: String) -> String {
+            return L10n.tr("App", "purchase.sections.products.footer", p1, p2)
+          }
+        }
+      }
     }
     internal enum Service {
       internal enum Alerts {
