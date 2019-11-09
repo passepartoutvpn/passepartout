@@ -97,6 +97,18 @@ enum Product: String {
     // MARK: All
 
     static let all: [Product] = allDonations + allFeatures + allProviders
+    
+    var isDonation: Bool {
+        return Product.allDonations.contains(self)
+    }
+
+    var isFeature: Bool {
+        return Product.allFeatures.contains(self)
+    }
+
+    var isProvider: Bool {
+        return Product.allProviders.contains(self)
+    }
 }
 
 extension Infrastructure.Name {

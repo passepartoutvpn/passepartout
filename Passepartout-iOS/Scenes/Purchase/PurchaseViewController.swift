@@ -38,6 +38,8 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     private var skFeature: SKProduct?
 
     private var skFullVersion: SKProduct?
+    
+    private var fullVersionExtra: String?
 
     // MARK: StrongTableHost
     
@@ -46,19 +48,26 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     func reloadModel() {
         model.clear()
         model.add(.products)
-        
+        model.setFooter(L10n.App.Purchase.Sections.Products.footer, forSection: .products)
+
         var rows: [RowType] = []
         let pm = ProductManager.shared
-        if let skFeature = pm.product(withIdentifier: feature) {
-            self.skFeature = skFeature
-            rows.append(.feature)
-        }
         if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
         }
+        if let skFeature = pm.product(withIdentifier: feature) {
+            self.skFeature = skFeature
+            rows.append(.feature)
+        }
         rows.append(.restore)
         model.set(rows, forSection: .products)
+
+        let featureBulletsList: [String] = ProductManager.shared.featureProducts(includingFullVersion: false).map {
+            return "- \($0.localizedTitle)"
+        }.sortedCaseInsensitive()
+        let featureBullets = featureBulletsList.joined(separator: "\n")
+        fullVersionExtra = L10n.App.Purchase.Cells.FullVersion.extraDescription(featureBullets)
     }
     
     // MARK: UIViewController
@@ -156,6 +165,14 @@ extension PurchaseViewController {
         case restore
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return model.numberOfSections
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return model.footer(forSection: section)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard !isLoading else {
             return 0
@@ -176,7 +193,7 @@ extension PurchaseViewController {
             guard let product = skFullVersion else {
                 fatalError("Loaded full version cell, yet no corresponding product?")
             }
-            cell.fill(product: product)
+            cell.fill(product: product, customDescription: fullVersionExtra)
             
         case .restore:
             cell.fill(

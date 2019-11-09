@@ -29,27 +29,28 @@ import StoreKit
 class PurchaseTableViewCell: UITableViewCell {
     @IBOutlet private weak var labelTitle: UILabel?
 
+    @IBOutlet private weak var labelPrice: UILabel?
+
     @IBOutlet private weak var labelDescription: UILabel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         labelTitle?.applyAccent(.current)
+        labelPrice?.applyAccent(.current)
     }
     
-    func fill(product: SKProduct) {
-        var title = product.localizedTitle
-        if let price = product.localizedPrice {
-            title += " @ \(price)"
-        }
+    func fill(product: SKProduct, customDescription: String? = nil) {
         fill(
-            title: title,
-            description: "\(product.localizedDescription)."
+            title: product.localizedTitle,
+            description: customDescription ?? "\(product.localizedDescription)."
         )
+        labelPrice?.text = product.localizedPrice
     }
 
     func fill(title: String, description: String) {
         labelTitle?.text = title
         labelDescription?.text = description
+        labelPrice?.text = nil
     }
 }

@@ -80,6 +80,21 @@ class ProductManager: NSObject {
         return inApp.product(withIdentifier: identifier)
     }
     
+    func featureProducts(includingFullVersion: Bool) -> [SKProduct] {
+        return inApp.products.filter {
+            guard let p = Product(rawValue: $0.productIdentifier) else {
+                return false
+            }
+            guard includingFullVersion || p != .fullVersion else {
+                return false
+            }
+            guard p.isFeature else {
+                return false
+            }
+            return true
+        }
+    }
+    
     func purchase(_ product: SKProduct, completionHandler: @escaping (InAppPurchaseResult, Error?) -> Void) {
         inApp.purchase(product: product) {
             if $0 == .success {
