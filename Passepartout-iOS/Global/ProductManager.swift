@@ -34,6 +34,8 @@ private let log = SwiftyBeaver.self
 
 class ProductManager: NSObject {
     static let didReloadReceipt = Notification.Name("ProductManagerDidReloadReceipt")
+    
+    static let didReviewPurchases = Notification.Name("ProductManagerDidReviewPurchases")
 
     private static let lastFullVersionBuild = 2016 // 1.8.1
 
@@ -223,7 +225,7 @@ class ProductManager: NSObject {
         TransientStore.shared.serialize(withProfiles: true)
         VPN.shared.uninstall(completionHandler: nil)
 
-        NotificationCenter.default.post(name: ProductManager.didReloadReceipt, object: nil)
+        NotificationCenter.default.post(name: ProductManager.didReviewPurchases, object: nil)
     }
 }
 

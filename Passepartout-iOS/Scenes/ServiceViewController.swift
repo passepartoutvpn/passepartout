@@ -120,6 +120,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         }
         nc.addObserver(self, selector: #selector(serviceDidUpdateDataCount(_:)), name: ConnectionService.didUpdateDataCount, object: nil)
         nc.addObserver(self, selector: #selector(productManagerDidReloadReceipt), name: ProductManager.didReloadReceipt, object: nil)
+        nc.addObserver(self, selector: #selector(productManagerDidReviewPurchases), name: ProductManager.didReviewPurchases, object: nil)
 
         // run this no matter what
         // XXX: convenient here vs AppDelegate for updating table
@@ -141,6 +142,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         super.viewDidAppear(animated)
 
         clearSelection()
+        hideProfileIfDeleted()
     }
     
     override func didReceiveMemoryWarning() {
@@ -673,6 +675,10 @@ class ServiceViewController: UIViewController, StrongTableHost {
     @objc private func productManagerDidReloadReceipt() {
         reloadModel()
         tableView.reloadData()
+    }
+    
+    @objc private func productManagerDidReviewPurchases() {
+        hideProfileIfDeleted()
     }
 }
 
