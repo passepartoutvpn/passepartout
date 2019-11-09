@@ -139,18 +139,15 @@ class ProductManager: NSObject {
         if let iapReceipts = receipt.inAppPurchaseReceipts {
             log.debug("In-app receipts:")
             iapReceipts.forEach {
-                guard let pid = $0.productIdentifier, let purchaseDate = $0.originalPurchaseDate else {
+                guard let pid = $0.productIdentifier, let product = Product(rawValue: pid) else {
                     return
                 }
-                log.debug("\t\(pid) [purchased on: \(purchaseDate)]")
-            }
-            for r in iapReceipts {
-                guard let pid = r.productIdentifier, let product = Product(rawValue: pid) else {
-                    continue
-                }
-                if let cancellationDate = r.cancellationDate {
+                if let cancellationDate = $0.cancellationDate {
                     log.debug("\t\(pid) [cancelled on: \(cancellationDate)]")
-                    continue
+                    return
+                }
+                if let purchaseDate = $0.originalPurchaseDate {
+                    log.debug("\t\(pid) [purchased on: \(purchaseDate)]")
                 }
                 purchasedFeatures.insert(product)
             }
