@@ -52,13 +52,13 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
 
         var rows: [RowType] = []
         let pm = ProductManager.shared
-        if let skFeature = pm.product(withIdentifier: feature) {
-            self.skFeature = skFeature
-            rows.append(.feature)
-        }
         if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
+        }
+        if let skFeature = pm.product(withIdentifier: feature) {
+            self.skFeature = skFeature
+            rows.append(.feature)
         }
         rows.append(.restore)
         model.set(rows, forSection: .products)
