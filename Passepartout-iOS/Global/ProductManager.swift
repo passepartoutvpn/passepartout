@@ -34,6 +34,8 @@ private let log = SwiftyBeaver.self
 
 class ProductManager: NSObject {
     static let didReloadReceipt = Notification.Name("ProductManagerDidReloadReceipt")
+    
+    static let didReviewPurchases = Notification.Name("ProductManagerDidReviewPurchases")
 
     private static let lastFullVersionBuild = 2016 // 1.8.1
 
@@ -96,7 +98,7 @@ class ProductManager: NSObject {
 
     // MARK: In-app eligibility
     
-    private func reloadReceipt() {
+    private func reloadReceipt(andNotify: Bool = true) {
         guard let url = Bundle.main.appStoreReceiptURL else {
             log.warning("No App Store receipt found!")
             return
@@ -122,13 +124,17 @@ class ProductManager: NSObject {
         if let iapReceipts = receipt.inAppPurchaseReceipts {
             log.debug("In-app receipts:")
             iapReceipts.forEach {
-                guard let pid = $0.productIdentifier, let date = $0.originalPurchaseDate else {
+                guard let pid = $0.productIdentifier, let purchaseDate = $0.originalPurchaseDate else {
                     return
                 }
-                log.debug("\t\(pid) [\(date)]")
+                log.debug("\t\(pid) [purchased on: \(purchaseDate)]")
             }
             for r in iapReceipts {
                 guard let pid = r.productIdentifier, let product = Product(rawValue: pid) else {
+                    continue
+                }
+                if let cancellationDate = r.cancellationDate {
+                    log.debug("\t\(pid) [cancelled on: \(cancellationDate)]")
                     continue
                 }
                 purchasedFeatures.insert(product)
@@ -136,7 +142,9 @@ class ProductManager: NSObject {
         }
         log.info("Purchased features: \(purchasedFeatures)")
         
-        NotificationCenter.default.post(name: ProductManager.didReloadReceipt, object: nil)
+        if andNotify {
+            NotificationCenter.default.post(name: ProductManager.didReloadReceipt, object: nil)
+        }
     }
 
     func isFullVersion() -> Bool {
@@ -164,6 +172,60 @@ class ProductManager: NSObject {
 
     func isEligibleForFeedback() -> Bool {
         return AppConstants.Flags.isBeta || !purchasedFeatures.isEmpty
+    }
+    
+    // MARK: Review
+    
+    func reviewPurchases() {
+        let service = TransientStore.shared.service
+        reloadReceipt(andNotify: false)
+        var shouldReinstall = false
+
+        // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
+
+        log.debug("Checking 'Trusted networks'")
+        if !isEligible(forFeature: .trustedNetworks) {
+            if service.preferences.trustsMobileNetwork || !service.preferences.trustedWifis.isEmpty {
+                service.preferences.trustsMobileNetwork = false
+                service.preferences.trustedWifis.removeAll()
+                log.debug("\tRefunded")
+                shouldReinstall = true
+            }
+        }
+
+        log.debug("Checking 'Unlimited hosts'")
+        if !isEligible(forFeature: .unlimitedHosts) {
+            let ids = service.ids(forContext: .host)
+            if ids.count > AppConstants.InApp.limitedNumberOfHosts {
+                for id in ids {
+                    service.removeProfile(ProfileKey(.host, id))
+                }
+                log.debug("\tRefunded")
+                shouldReinstall = true
+            }
+        }
+
+        log.debug("Checking providers")
+        for name in service.currentProviderNames() {
+            if !isEligible(forProvider: name) {
+                service.removeProfile(ProfileKey(name))
+                log.debug("\tRefunded provider: \(name)")
+                shouldReinstall = true
+            }
+        }
+        
+        // no refunds
+        guard shouldReinstall else {
+            return
+        }
+
+        //
+
+        // save reverts and remove fraud VPN profile
+        TransientStore.shared.serialize(withProfiles: true)
+        VPN.shared.uninstall(completionHandler: nil)
+
+        NotificationCenter.default.post(name: ProductManager.didReviewPurchases, object: nil)
     }
 }
 
