@@ -43,7 +43,13 @@
                                             <rect key="frame" x="20" y="20" width="374" height="59"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hf0-aN-JRs">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="21"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="34.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="892-go-vOV">
+                                                    <rect key="frame" x="334" y="0.0" width="40" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -59,10 +65,12 @@
                                                 <constraint firstAttribute="trailing" secondItem="gB1-nL-LEc" secondAttribute="trailing" id="062-HW-sKW"/>
                                                 <constraint firstItem="gB1-nL-LEc" firstAttribute="leading" secondItem="Dit-R5-2h7" secondAttribute="leading" id="3je-C8-e0v"/>
                                                 <constraint firstItem="Hf0-aN-JRs" firstAttribute="leading" secondItem="Dit-R5-2h7" secondAttribute="leading" id="7cX-Z8-Z9p"/>
+                                                <constraint firstAttribute="trailing" secondItem="892-go-vOV" secondAttribute="trailing" id="Dt7-md-WxN"/>
                                                 <constraint firstItem="Hf0-aN-JRs" firstAttribute="top" secondItem="Dit-R5-2h7" secondAttribute="top" id="FOS-1V-gEv"/>
-                                                <constraint firstAttribute="trailing" secondItem="Hf0-aN-JRs" secondAttribute="trailing" id="MQl-hH-lvW"/>
+                                                <constraint firstItem="892-go-vOV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hf0-aN-JRs" secondAttribute="trailing" constant="20" id="P3K-6q-k6r"/>
                                                 <constraint firstItem="gB1-nL-LEc" firstAttribute="top" secondItem="Hf0-aN-JRs" secondAttribute="bottom" constant="20" id="dKT-d6-56g"/>
                                                 <constraint firstAttribute="bottom" secondItem="gB1-nL-LEc" secondAttribute="bottom" id="h1s-nk-2kw"/>
+                                                <constraint firstItem="892-go-vOV" firstAttribute="top" secondItem="Dit-R5-2h7" secondAttribute="top" id="tzq-5O-Ntg"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -75,6 +83,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="labelDescription" destination="gB1-nL-LEc" id="zIn-g5-Rl0"/>
+                                    <outlet property="labelPrice" destination="892-go-vOV" id="9Kf-XF-zUy"/>
                                     <outlet property="labelTitle" destination="Hf0-aN-JRs" id="E65-5C-zZR"/>
                                 </connections>
                             </tableViewCell>
