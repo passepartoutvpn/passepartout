@@ -61,5 +61,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "Создать команду";
 
 "purchase.title" = "Покупка";
+"purchase.sections.products.footer" = "Каждый товар является одноразовой покупкой.";
+"purchase.cells.full_version.extra_description" = "- Все провайдеры (включая будущих)\n%@";
 "purchase.cells.restore.title" = "Восстановить покупки";
 "purchase.cells.restore.description" = "Если вы купили это приложение или функцию в прошлом, вы можете восстановить свои покупки, и этот экран больше не будет отображаться.";

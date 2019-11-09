@@ -61,5 +61,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "Adicionar atalho";
 
 "purchase.title" = "Comprar";
+"purchase.sections.products.footer" = "Todo produto é uma compra única.";
+"purchase.cells.full_version.extra_description" = "- Todos os provedores (incluindo os futuros)\n%@";
 "purchase.cells.restore.title" = "Restaurar compras";
 "purchase.cells.restore.description" = "Se você comprou este aplicativo ou recurso no passado, pode restaurar suas compras e essa tela não será exibida novamente.";

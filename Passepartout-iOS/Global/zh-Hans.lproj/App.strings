@@ -61,5 +61,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "添加捷径";
 
 "purchase.title" = "购买";
+"purchase.sections.products.footer" = "每个产品都是一次性购买。";
+"purchase.cells.full_version.extra_description" = "-所有提供程序（包括将来的提供程序\n％@";
 "purchase.cells.restore.title" = "还原购买的物品";
 "purchase.cells.restore.description" = "如果您以前购买过此应用程序或功能，则可以恢复您的购买，并且此屏幕不会再显示。";

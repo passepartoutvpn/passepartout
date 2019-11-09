@@ -83,7 +83,7 @@ internal enum L10n {
       internal static let title = L10n.tr("App", "purchase.title")
       internal enum Cells {
         internal enum FullVersion {
-          /// \n- All providers (including those being added in the future)\n%@
+          /// - All providers (including the future ones)\n%@
           internal static func extraDescription(_ p1: String) -> String {
             return L10n.tr("App", "purchase.cells.full_version.extra_description", p1)
           }

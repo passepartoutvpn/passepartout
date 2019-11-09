@@ -61,5 +61,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "Voeg snelkoppeling toe";
 
 "purchase.title" = "Aankoop";
+"purchase.sections.products.footer" = "Elk product is een eenmalige aankoop.";
+"purchase.cells.full_version.extra_description" = "- Alle providers (inclusief de toekomstige)\n%@";
 "purchase.cells.restore.title" = "Aankopen herstellen";
 "purchase.cells.restore.description" = "Als u deze app of functie in het verleden hebt gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer weergegeven.";

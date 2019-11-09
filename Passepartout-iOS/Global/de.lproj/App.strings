@@ -61,5 +61,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "Kurzbefehl hinzufügen";
 
 "purchase.title" = "Kauf";
+"purchase.sections.products.footer" = "Jedes Produkt ist ein einmaliger Kauf.";
+"purchase.cells.full_version.extra_description" = "- Alle Anbieter (einschließlich der zukünftigen)\n%@";
 "purchase.cells.restore.title" = "Einkäufe wiederherstellen";
 "purchase.cells.restore.description" = "Wenn Sie diese App oder Funktion in der Vergangenheit gekauft haben, können Sie Ihre Einkäufe wiederherstellen. Dieser Bildschirm wird nicht mehr angezeigt.";
