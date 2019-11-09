@@ -82,6 +82,12 @@ internal enum L10n {
       /// Purchase
       internal static let title = L10n.tr("App", "purchase.title")
       internal enum Cells {
+        internal enum FullVersion {
+          /// \n- All providers (including those being added in the future)\n%@
+          internal static func extraDescription(_ p1: String) -> String {
+            return L10n.tr("App", "purchase.cells.full_version.extra_description", p1)
+          }
+        }
         internal enum Restore {
           /// If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.
           internal static let description = L10n.tr("App", "purchase.cells.restore.description")
@@ -91,10 +97,8 @@ internal enum L10n {
       }
       internal enum Sections {
         internal enum Products {
-          /// Every product is a one-time purchase.\n\n%@ entails:\n\n- All providers (including those being added in the future)\n%@
-          internal static func footer(_ p1: String, _ p2: String) -> String {
-            return L10n.tr("App", "purchase.sections.products.footer", p1, p2)
-          }
+          /// Every product is a one-time purchase.
+          internal static let footer = L10n.tr("App", "purchase.sections.products.footer")
         }
       }
     }

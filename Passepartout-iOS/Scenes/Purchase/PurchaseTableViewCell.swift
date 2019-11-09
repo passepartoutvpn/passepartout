@@ -40,10 +40,10 @@ class PurchaseTableViewCell: UITableViewCell {
         labelPrice?.applyAccent(.current)
     }
     
-    func fill(product: SKProduct) {
+    func fill(product: SKProduct, customDescription: String? = nil) {
         fill(
             title: product.localizedTitle,
-            description: "\(product.localizedDescription)."
+            description: customDescription ?? "\(product.localizedDescription)."
         )
         labelPrice?.text = product.localizedPrice
     }

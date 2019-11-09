@@ -61,6 +61,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "Add shortcut";
 
 "purchase.title" = "Purchase";
-"purchase.sections.products.footer" = "Every product is a one-time purchase.\n\n%@ entails:\n\n- All providers (including those being added in the future)\n%@";
+"purchase.sections.products.footer" = "Every product is a one-time purchase.";
+"purchase.cells.full_version.extra_description" = "- All providers (including those being added in the future)\n%@";
 "purchase.cells.restore.title" = "Restore purchases";
 "purchase.cells.restore.description" = "If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.";

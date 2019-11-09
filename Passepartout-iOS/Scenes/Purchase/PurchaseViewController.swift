@@ -38,17 +38,18 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     private var skFeature: SKProduct?
 
     private var skFullVersion: SKProduct?
+    
+    private var fullVersionExtra: String?
 
     // MARK: StrongTableHost
     
     var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
     
     func reloadModel() {
-        let fullVersionString: String
-
         model.clear()
         model.add(.products)
-        
+        model.setFooter(L10n.App.Purchase.Sections.Products.footer, forSection: .products)
+
         var rows: [RowType] = []
         let pm = ProductManager.shared
         if let skFeature = pm.product(withIdentifier: feature) {
@@ -58,10 +59,6 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
-            
-            fullVersionString = skFullVersion.localizedTitle
-        } else {
-            fullVersionString = "Full version" // XXX
         }
         rows.append(.restore)
         model.set(rows, forSection: .products)
@@ -70,7 +67,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
             return "- \($0.localizedTitle)"
         }.sortedCaseInsensitive()
         let featureBullets = featureBulletsList.joined(separator: "\n")
-        model.setFooter(L10n.App.Purchase.Sections.Products.footer(fullVersionString, featureBullets), forSection: .products)
+        fullVersionExtra = L10n.App.Purchase.Cells.FullVersion.extraDescription(featureBullets)
     }
     
     // MARK: UIViewController
@@ -196,7 +193,7 @@ extension PurchaseViewController {
             guard let product = skFullVersion else {
                 fatalError("Loaded full version cell, yet no corresponding product?")
             }
-            cell.fill(product: product)
+            cell.fill(product: product, customDescription: fullVersionExtra)
             
         case .restore:
             cell.fill(
