@@ -83,7 +83,7 @@ internal enum L10n {
       internal static let title = L10n.tr("App", "purchase.title")
       internal enum Cells {
         internal enum FullVersion {
-          /// - All providers (including the future ones)\n%@
+          /// - All providers (including future ones)\n%@
           internal static func extraDescription(_ p1: String) -> String {
             return L10n.tr("App", "purchase.cells.full_version.extra_description", p1)
           }
@@ -97,7 +97,7 @@ internal enum L10n {
       }
       internal enum Sections {
         internal enum Products {
-          /// Every product is a one-time purchase.
+          /// Every product is a one-time purchase. Provider purchases do not include a VPN subscription.
           internal static let footer = L10n.tr("App", "purchase.sections.products.footer")
         }
       }

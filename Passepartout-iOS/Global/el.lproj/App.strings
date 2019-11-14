@@ -61,7 +61,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "Προσθήκη Συντόμευσης";
 
 "purchase.title" = "Αγορά";
-"purchase.sections.products.footer" = "Κάθε προϊόν είναι μια εφάπαξ αγορά.";
+"purchase.sections.products.footer" = "Κάθε προϊόν είναι μια αγορά μία φορά. Οι αγορές παροχέα δεν περιλαμβάνουν συνδρομή VPN.";
 "purchase.cells.full_version.extra_description" = "- Όλοι οι πάροχοι (συμπεριλαμβανομένων εκείνων που προστίθενται στο μέλλον)\n%@";
 "purchase.cells.restore.title" = "Επαναφορά αγορών";
 "purchase.cells.restore.description" = "Αν έχετε αγοράσει αυτή την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας και αυτή η οθόνη δεν θα εμφανιστεί ξανά.";

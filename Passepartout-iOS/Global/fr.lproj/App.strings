@@ -61,7 +61,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "Ajouter un raccourcis";
 
 "purchase.title" = "Acheter";
-"purchase.sections.products.footer" = "Chaque produit est un achat ponctuel.";
+"purchase.sections.products.footer" = "Chaque produit est un achat unique. Les achats des fournisseurs n'incluent pas d'abonnement à un réseau privé virtuel.";
 "purchase.cells.full_version.extra_description" = "- Tous les fournisseurs (y compris les futurs)\n%@";
 "purchase.cells.restore.title" = "Restaurer les achats";
 "purchase.cells.restore.description" = "Si vous avez acheté cette application ou cette fonctionnalité auparavant, vous pouvez restaurer vos achats et cet écran ne s'affichera plus.";
