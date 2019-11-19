@@ -75,6 +75,10 @@ extension UIViewController {
     }
 }
 
+func visitURL(_ url: URL) {
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+}
+
 func delay(_ block: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
         block()
