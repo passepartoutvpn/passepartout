@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         wizard.parsingResult = parsingResult
         wizard.removesConfigurationOnCancel = true
 
-        wizardNav.modalPresentationStyle = .formSheet
+        wizardNav.applyModalPresentation(.current)
         target.present(wizardNav, animated: true, completion: nil)
     }
 }

@@ -110,6 +110,12 @@ extension Theme {
     }
 }
 
+extension UIViewController {
+    func applyModalPresentation(_ theme: Theme) {
+        modalPresentationStyle = theme.modalPresentationStyle
+    }
+}
+
 extension UIView {
     func applyPrimaryBackground(_ theme: Theme) {
         backgroundColor = theme.palette.primaryBackground

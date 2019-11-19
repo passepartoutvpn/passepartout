@@ -146,7 +146,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
         }
         pendingShortcut = nil
         let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
-        vc.modalPresentationStyle = Theme.current.modalPresentationStyle
+        vc.applyModalPresentation(.current)
         vc.delegate = self
         present(vc, animated: true, completion: nil)
     }
@@ -206,7 +206,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
                 break
             }
             let vc = INUIEditVoiceShortcutViewController(voiceShortcut: wrapper.original)
-            vc.modalPresentationStyle = Theme.current.modalPresentationStyle
+            vc.applyModalPresentation(.current)
             vc.delegate = self
             editedIndexPath = indexPath
             present(vc, animated: true, completion: nil)
