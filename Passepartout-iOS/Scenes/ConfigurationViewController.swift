@@ -46,12 +46,16 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         return originalConfigurationURL != nil
     }
         
+    var isServerPushed = false
+
     weak var delegate: ConfigurationModificationDelegate?
     
     // MARK: StrongTableHost
 
-    lazy var model: StrongTableModel<SectionType, RowType> = {
-        let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
+    let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
+
+    func reloadModel() {
+        model.clear()
         
         // sections
         model.add(.communication)
@@ -59,7 +63,9 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         if isEditable {
             model.add(.reset)
         }
-        model.add(.tls)
+        if !isServerPushed {
+            model.add(.tls)
+        }
         model.add(.other)
 
         // headers
@@ -74,18 +80,47 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         }
         
         // rows
-        model.set([.cipher, .digest], forSection: .communication)
+        if isServerPushed {
+            var rows: [RowType]
+
+            rows = []
+            if let _ = configuration.cipher {
+                rows.append(.cipher)
+            }
+            if let _ = configuration.digest {
+                rows.append(.digest)
+            }
+            model.set(rows, forSection: .communication)
+
+            rows = []
+            if let _ = configuration.compressionFraming {
+                rows.append(.compressionFraming)
+            }
+            if let _ = configuration.compressionAlgorithm {
+                rows.append(.compressionAlgorithm)
+            }
+            model.set(rows, forSection: .compression)
+
+            rows = []
+            if let _ = configuration.keepAliveInterval {
+                rows.append(.keepAlive)
+            }
+            if let _ = configuration.renegotiatesAfter {
+                rows.append(.renegSeconds)
+            }
+            if let _ = configuration.randomizeEndpoint {
+                rows.append(.randomEndpoint)
+            }
+            model.set(rows, forSection: .other)
+        } else {
+            model.set([.cipher, .digest], forSection: .communication)
+            model.set([.compressionFraming, .compressionAlgorithm], forSection: .compression)
+            model.set([.keepAlive, .renegSeconds, .randomEndpoint], forSection: .other)
+        }
         if isEditable {
             model.set([.resetOriginal], forSection: .reset)
         }
         model.set([.client, .tlsWrapping, .eku], forSection: .tls)
-        model.set([.compressionFraming, .compressionAlgorithm], forSection: .compression)
-        model.set([.keepAlive, .renegSeconds, .randomEndpoint], forSection: .other)
-
-        return model
-    }()
-    
-    func reloadModel() {
     }
     
     // MARK: UIViewController
@@ -96,7 +131,8 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         guard let _ = initialConfiguration else {
             fatalError("Initial configuration not set")
         }
-        
+        reloadModel()
+
         guard isEditable else {
             tableView.allowsSelection = false
             return

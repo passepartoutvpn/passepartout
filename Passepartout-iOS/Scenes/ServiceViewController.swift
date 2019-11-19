@@ -522,6 +522,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
             let vc = StoryboardScene.Main.configurationIdentifier.instantiate()
             vc.title = caption
             vc.initialConfiguration = $0
+            vc.isServerPushed = true
             self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
