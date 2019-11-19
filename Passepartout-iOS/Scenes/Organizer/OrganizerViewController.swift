@@ -56,9 +56,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             model.add(.siri)
         }
         model.add(.support)
-        if ProductManager.shared.isEligibleForFeedback() {
-            model.add(.feedback)
-        }
+        model.add(.feedback)
         model.add(.about)
         model.add(.destruction)
         model.setHeader(L10n.App.Service.Sections.Vpn.header, forSection: .vpn)
@@ -75,7 +73,13 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, forSection: .feedback)
         model.set([.connectionStatus], forSection: .vpn)
         model.set([.donate, .translate], forSection: .support)
-        model.set([.joinCommunity, .writeReview], forSection: .feedback)
+
+        var feedbackRows: [RowType] = [.joinCommunity]
+        if ProductManager.shared.isEligibleForFeedback() {
+            feedbackRows.append(.writeReview)
+        }
+        model.set(feedbackRows, forSection: .feedback)
+
         model.set([.openAbout], forSection: .about)
         model.set([.uninstall], forSection: .destruction)
         if AppConstants.Flags.isBeta {

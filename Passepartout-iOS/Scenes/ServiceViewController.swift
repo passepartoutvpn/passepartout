@@ -1176,9 +1176,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.add(.trusted)
             model.add(.trustedPolicy)
             model.add(.diagnostics)
-            if ProductManager.shared.isEligibleForFeedback() {
-                model.add(.feedback)
-            }
+            model.add(.feedback)
         }
 
         // headers
@@ -1233,7 +1231,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.set([.vpnSurvivesSleep], forSection: .vpnSurvivesSleep)
             model.set([.trustedPolicy], forSection: .trustedPolicy)
             model.set([.dataCount, .serverConfiguration, .serverNetwork, .debugLog, .masksPrivateData], forSection: .diagnostics)
-            model.set([.faq, .reportIssue], forSection: .feedback)
+
+            var feedbackRows: [RowType] = [.faq]
+            if ProductManager.shared.isEligibleForFeedback() {
+                feedbackRows.append(.reportIssue)
+            }
+            model.set(feedbackRows, forSection: .feedback)
         }
 
         trustedNetworks.delegate = self
