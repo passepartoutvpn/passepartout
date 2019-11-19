@@ -40,7 +40,12 @@ extension AppConstants {
             #endif
         }
 
-        static var isBetaFullVersion = false
+        static var isBetaFullVersion: Bool {
+            guard !ProcessInfo.processInfo.arguments.contains("FULL_VERSION") else {
+                return true
+            }
+            return false
+        }
 
         static var isMockVPN = false {
             didSet {
