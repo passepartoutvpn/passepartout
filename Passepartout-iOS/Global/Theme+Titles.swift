@@ -26,16 +26,6 @@
 import UIKit
 import Convenience
 
-extension UIViewController {
-    func applyMasterTitle(_ theme: Theme) {
-        navigationItem.largeTitleDisplayMode = theme.masterTitleDisplayMode
-    }
-    
-    func applyDetailTitle(_ theme: Theme) {
-        navigationItem.largeTitleDisplayMode = theme.detailTitleDisplayMode
-    }
-}
-
 extension StrongTableModel {
     func headerHeight(for section: Int) -> CGFloat {
         guard let title = header(forSection: section) else {

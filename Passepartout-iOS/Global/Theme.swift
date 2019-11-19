@@ -82,16 +82,10 @@ struct Theme {
     
     var palette: Palette
 
-    var masterTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode
-
-    var detailTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode
-    
     var modalPresentationStyle: UIModalPresentationStyle
     
     private init() {
         palette = Palette()
-        masterTitleDisplayMode = .never
-        detailTitleDisplayMode = .never
         modalPresentationStyle = .formSheet
     }
 }
@@ -113,6 +107,12 @@ extension Theme {
         
         let activity = UIActivityIndicatorView.appearance()
         activity.color = palette.accessory
+    }
+}
+
+extension UIViewController {
+    func applyModalPresentation(_ theme: Theme) {
+        modalPresentationStyle = theme.modalPresentationStyle
     }
 }
 

@@ -38,12 +38,6 @@ class DebugLogViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        applyDetailTitle(.current)
-    }
-    
     // MARK: UIViewController
     
     override func viewDidLoad() {
