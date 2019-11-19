@@ -104,12 +104,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        applyMasterTitle(.current)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
