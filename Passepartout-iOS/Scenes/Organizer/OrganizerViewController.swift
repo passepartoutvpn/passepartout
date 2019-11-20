@@ -56,9 +56,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             model.add(.siri)
         }
         model.add(.support)
-        if ProductManager.shared.isEligibleForFeedback() {
-            model.add(.feedback)
-        }
+        model.add(.feedback)
         model.add(.about)
         model.add(.destruction)
         model.setHeader(L10n.App.Service.Sections.Vpn.header, forSection: .vpn)
@@ -74,8 +72,16 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         model.setHeader(L10n.Core.Organizer.Sections.Support.header, forSection: .support)
         model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, forSection: .feedback)
         model.set([.connectionStatus], forSection: .vpn)
-        model.set([.donate, .translate, .faq], forSection: .support)
-        model.set([.joinCommunity, .writeReview], forSection: .feedback)
+        model.set([.donate, .translate], forSection: .support)
+
+        var feedbackRows: [RowType] = [.joinCommunity]
+        if ProductManager.shared.isEligibleForFeedback() {
+            feedbackRows.append(.writeReview)
+        }
+        feedbackRows.append(.visitAlternativeTo)
+        feedbackRows.append(.visitProductHunt)
+        model.set(feedbackRows, forSection: .feedback)
+
         model.set([.openAbout], forSection: .about)
         model.set([.uninstall], forSection: .destruction)
         if AppConstants.Flags.isBeta {
@@ -232,10 +238,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             return
         }
         perform(segue: StoryboardSegue.Organizer.donateSegueIdentifier, sender: nil)
-    }
-
-    private func visit(_ url: URL) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
     private func offerTranslation() {
@@ -431,11 +433,13 @@ extension OrganizerViewController {
         
         case translate
         
-        case faq
-        
         case joinCommunity
         
         case writeReview
+        
+        case visitAlternativeTo
+
+        case visitProductHunt
 
         case openAbout
         
@@ -517,11 +521,6 @@ extension OrganizerViewController {
             cell.leftText = L10n.Core.Organizer.Cells.Translate.caption
             return cell
             
-        case .faq:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.About.Cells.Faq.caption
-            return cell
-            
         case .joinCommunity:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Organizer.Cells.JoinCommunity.caption
@@ -530,6 +529,16 @@ extension OrganizerViewController {
         case .writeReview:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Organizer.Cells.WriteReview.caption
+            return cell
+            
+        case .visitAlternativeTo:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = "AlternativeTo"
+            return cell
+
+        case .visitProductHunt:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = "ProductHunt"
             return cell
 
         case .openAbout:
@@ -586,14 +595,17 @@ extension OrganizerViewController {
         case .translate:
             offerTranslation()
             
-        case .faq:
-            visit(AppConstants.URLs.faq)
-            
         case .joinCommunity:
             subscribeSubreddit()
             
         case .writeReview:
             writeReview()
+            
+        case .visitAlternativeTo:
+            visitURL(AppConstants.URLs.alternativeTo)
+            
+        case .visitProductHunt:
+            visitURL(AppConstants.URLs.productHunt)
 
         case .openAbout:
             about()

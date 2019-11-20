@@ -74,10 +74,6 @@ class AboutViewController: UITableViewController, StrongTableHost {
         perform(segue: StoryboardSegue.About.creditsSegueIdentifier)
     }
     
-    private func visit(_ url: URL) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
     private func inviteFriend(sender: UITableViewCell?) {
         let message = "\(L10n.Core.Share.message) \(AppConstants.URLs.website)"
         let vc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
@@ -195,25 +191,25 @@ extension AboutViewController {
             openCredits()
             
         case .readme:
-            visit(AppConstants.URLs.iOS.readme)
+            visitURL(AppConstants.URLs.iOS.readme)
             
         case .changelog:
-            visit(AppConstants.URLs.iOS.changelog)
+            visitURL(AppConstants.URLs.iOS.changelog)
             
         case .website:
-            visit(AppConstants.URLs.website)
+            visitURL(AppConstants.URLs.website)
             
         case .faq:
-            visit(AppConstants.URLs.faq)
+            visitURL(AppConstants.URLs.faq)
 
         case .disclaimer:
-            visit(AppConstants.URLs.disclaimer)
+            visitURL(AppConstants.URLs.disclaimer)
 
         case .privacyPolicy:
-            visit(AppConstants.URLs.privacyPolicy)
+            visitURL(AppConstants.URLs.privacyPolicy)
 
         case .shareTwitter:
-            visit(AppConstants.URLs.twitterIntent(withMessage: L10n.Core.Share.message))
+            visitURL(AppConstants.URLs.twitterIntent(withMessage: L10n.Core.Share.message))
 
         case .shareGeneric:
             inviteFriend(sender: tableView.cellForRow(at: indexPath))

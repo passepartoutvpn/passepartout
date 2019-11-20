@@ -750,6 +750,8 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         
         case masksPrivateData
         
+        case faq
+        
         case reportIssue
     }
 
@@ -996,6 +998,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             
         // feedback
 
+        case .faq:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Core.About.Cells.Faq.caption
+            return cell
+            
         case .reportIssue:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Service.Cells.ReportIssue.caption
@@ -1096,6 +1103,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             perform(segue: StoryboardSegue.Main.debugLogSegueIdentifier, sender: cell)
             return true
             
+        case .faq:
+            visitURL(AppConstants.URLs.faq)
+            
         case .reportIssue:
             reportConnectivityIssue()
             
@@ -1166,9 +1176,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.add(.trusted)
             model.add(.trustedPolicy)
             model.add(.diagnostics)
-            if ProductManager.shared.isEligibleForFeedback() {
-                model.add(.feedback)
-            }
+            model.add(.feedback)
         }
 
         // headers
@@ -1223,7 +1231,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             model.set([.vpnSurvivesSleep], forSection: .vpnSurvivesSleep)
             model.set([.trustedPolicy], forSection: .trustedPolicy)
             model.set([.dataCount, .serverConfiguration, .serverNetwork, .debugLog, .masksPrivateData], forSection: .diagnostics)
-            model.set([.reportIssue], forSection: .feedback)
+
+            var feedbackRows: [RowType] = [.faq]
+            if ProductManager.shared.isEligibleForFeedback() {
+                feedbackRows.append(.reportIssue)
+            }
+            model.set(feedbackRows, forSection: .feedback)
         }
 
         trustedNetworks.delegate = self
