@@ -34,15 +34,15 @@ PODS:
     - TunnelKit/Core
 
 DEPENDENCIES:
-  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `22778d5`)
-  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `22778d5`)
-  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `22778d5`)
-  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `22778d5`)
-  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `22778d5`)
-  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `22778d5`)
-  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `22778d5`)
-  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `22778d5`)
-  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `22778d5`)
+  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
@@ -61,12 +61,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Convenience:
-    :commit: 22778d5
+    :commit: 1cc2fea
     :git: https://github.com/keeshux/convenience
 
 CHECKOUT OPTIONS:
   Convenience:
-    :commit: 22778d5
+    :commit: 1cc2fea
     :git: https://github.com/keeshux/convenience
 
 SPEC CHECKSUMS:
@@ -79,6 +79,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
   TunnelKit: ddcccbf8c984e2760a42899e311e7991f21e42cc
 
-PODFILE CHECKSUM: 61194d5518f6f8b0de957eceea2a2eecd300b323
+PODFILE CHECKSUM: 5c114e6c899f8f327f4693d099b445d8f97a9b09
 
 COCOAPODS: 1.8.4

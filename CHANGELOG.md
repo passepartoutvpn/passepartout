@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Only show pushed server configuration.
+- Adjust UI to device text size. [#117](https://github.com/passepartoutvpn/passepartout-ios/pull/117)
 
 ## 1.9.1 (2019-11-10)
 

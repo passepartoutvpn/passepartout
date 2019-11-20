@@ -30,7 +30,7 @@ extension Cells {
 }
 
 class DestructiveTableViewCell: UITableViewCell {
-    @IBOutlet private lazy var labelCaption: UILabel? = {
+    @IBOutlet private(set) lazy var labelCaption: UILabel? = {
         let label = UILabel()
         label.textAlignment = .center
         contentView.addSubview(label)

@@ -38,6 +38,8 @@ class PurchaseTableViewCell: UITableViewCell {
         
         labelTitle?.applyAccent(.current)
         labelPrice?.applyAccent(.current)
+        labelDescription?.apply(.current)
+        labelDescription?.applySecondarySize(.current)
     }
     
     func fill(product: SKProduct, customDescription: String? = nil) {
