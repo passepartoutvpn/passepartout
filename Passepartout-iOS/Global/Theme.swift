@@ -124,21 +124,18 @@ extension UIView {
 
 extension UILabel {
     func apply(_ theme: Theme) {
+        font = .preferredFont(forTextStyle: .body)
         textColor = theme.palette.primaryText
     }
 
     func applyLight(_ theme: Theme) {
+        font = .preferredFont(forTextStyle: .body)
         textColor = theme.palette.primaryLightText
     }
 
     func applyAccent(_ theme: Theme) {
+        font = .preferredFont(forTextStyle: .body)
         textColor = theme.palette.accent1
-    }
-}
-
-extension UIButton {
-    func apply(_ theme: Theme) {
-        tintColor = theme.palette.action
     }
 }
 
