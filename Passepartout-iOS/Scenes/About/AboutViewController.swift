@@ -70,8 +70,16 @@ class AboutViewController: UITableViewController, StrongTableHost {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func openCredits() {
-        perform(segue: StoryboardSegue.About.creditsSegueIdentifier)
+    private func showCredits() {
+        let vc = CreditsViewController()
+        vc.title = L10n.Core.Credits.title
+        vc.licensesHeader = L10n.Core.Credits.Sections.Licenses.header
+        vc.noticesHeader = L10n.Core.Credits.Sections.Notices.header
+        vc.translationsHeader = L10n.Core.Credits.Sections.Translations.header
+        vc.software = AppConstants.Credits.software
+        vc.translators = AppConstants.Translations.translators
+        vc.accentColor = Theme.current.palette.accent1
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func inviteFriend(sender: UITableViewCell?) {
@@ -188,7 +196,7 @@ extension AboutViewController {
             showVersion()
             
         case .credits:
-            openCredits()
+            showCredits()
             
         case .readme:
             visitURL(AppConstants.URLs.iOS.readme)

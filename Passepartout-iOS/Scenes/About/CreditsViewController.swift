@@ -27,122 +27,84 @@ import UIKit
 import PassepartoutCore
 import Convenience
 
-class CreditsViewController: UITableViewController, StrongTableHost {
-    private let licenses = AppConstants.License.all
-    
-    private let notices = AppConstants.Notice.all
+//class CreditsViewController: Convenience.CreditsViewController {
+//    override func viewDidLoad() {
+//        title = L10n.Core.Credits.title
+//        licensesHeader = L10n.Core.Credits.Sections.Licenses.header
+//        noticesHeader = L10n.Core.Credits.Sections.Notices.header
+//        translationsHeader = L10n.Core.Credits.Sections.Translations.header
+//        software = AppConstants.Credits.software
+//        translators = AppConstants.Translations.translators
+//        accentColor = Theme.current.palette.accent1
+//
+//        super.viewDidLoad()
+//    }
+//}
 
-    private let languages = AppConstants.Translations.authorByLanguage.keys.sorted {
-        return Utils.localizedLanguage($0) < Utils.localizedLanguage($1)
-    }
-
-    // MARK: StrongTableHost
-    
-    var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
-    
-    func reloadModel() {
-        model.add(.licenses)
-        model.add(.notices)
-        model.add(.translations)
-        
-        model.setHeader(L10n.Core.Credits.Sections.Licenses.header, forSection: .licenses)
-        model.setHeader(L10n.Core.Credits.Sections.Notices.header, forSection: .notices)
-        model.setHeader(L10n.Core.Credits.Sections.Translations.header, forSection: .translations)
-
-        model.set(.license, count: licenses.count, forSection: .licenses)
-        model.set(.notice, count: notices.count, forSection: .notices)
-        model.set(.translation, count: languages.count, forSection: .translations)
-    }
-    
-    // MARK: UIViewController
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        title = L10n.Core.Credits.title
-        reloadModel()
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        guard let cell = sender as? SettingTableViewCell, let indexPath = tableView.indexPath(for: cell) else {
-            return false
-        }
-        return model.row(at: indexPath) != .translation
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let vc = segue.destination as? LabelViewController else {
-            return
-        }
-        guard let cell = sender as? SettingTableViewCell, let indexPath = tableView.indexPath(for: cell) else {
-            return
-        }
-        vc.title = cell.leftText
-        switch model.row(at: indexPath) {
-        case .license:
-            vc.license = licenses[indexPath.row]
-
-        case .notice:
-            vc.text = notices[indexPath.row].statement
-            
-        default:
-            break
-        }
-    }
-}
-
-extension CreditsViewController {
-    enum SectionType: Int {
-        case licenses
-        
-        case notices
-
-        case translations
-    }
-
-    enum RowType: Int {
-        case license
-        
-        case notice
-
-        case translation
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.numberOfSections
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.header(forSection: section)
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.numberOfRows(forSection: section)
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        switch model.row(at: indexPath) {
-        case .license:
-            let obj = licenses[indexPath.row]
-            cell.leftText = obj.name
-            cell.rightText = obj.type
-
-        case .notice:
-            let obj = notices[indexPath.row]
-            cell.leftText = obj.name
-            cell.rightText = nil
-            
-        case .translation:
-            let lang = languages[indexPath.row]
-            guard let author = AppConstants.Translations.authorByLanguage[lang] else {
-                fatalError("Author not found for language \(lang)")
-            }
-            cell.leftText = Utils.localizedLanguage(lang)
-            cell.rightText = author
-            cell.accessoryType = .none
-            cell.isTappable = false
-        }
-        return cell
-    }
-}
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard let vc = segue.destination as? LabelViewController else {
+//            return
+//        }
+//        guard let cell = sender as? SettingTableViewCell, let indexPath = tableView.indexPath(for: cell) else {
+//            return
+//        }
+//        vc.title = cell.leftText
+//        switch model.row(at: indexPath) {
+//        case .license:
+//            vc.license = licenses[indexPath.row]
+//
+//        case .notice:
+//            vc.text = notices[indexPath.row].statement
+//
+//        default:
+//            break
+//        }
+//    }
+//}
+//
+//extension CreditsViewController {
+//    enum SectionType: Int {
+//        case licenses
+//
+//        case notices
+//
+//        case translations
+//    }
+//
+//    enum RowType: Int {
+//        case license
+//
+//        case notice
+//
+//        case translation
+//    }
+//
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return model.numberOfSections
+//    }
+//
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return model.header(forSection: section)
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return model.numberOfRows(forSection: section)
+//    }
+//
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+//        switch model.row(at: indexPath) {
+//        case .license:
+//            let obj = licenses[indexPath.row]
+//            cell.leftText = obj.name
+//            cell.rightText = obj.type
+//
+//        case .notice:
+//            let obj = notices[indexPath.row]
+//            cell.leftText = obj.name
+//            cell.rightText = nil
+//
+//        }
+//        return cell
+//    }
+//}

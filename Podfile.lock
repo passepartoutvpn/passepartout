@@ -34,15 +34,15 @@ PODS:
     - TunnelKit/Core
 
 DEPENDENCIES:
-  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
-  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
-  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
-  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
-  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
-  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
-  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
-  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
-  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `1cc2fea`)
+  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `732ee78`)
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
@@ -60,7 +60,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Convenience:
-    :commit: 1cc2fea
+    :commit: 732ee78
     :git: https://github.com/keeshux/convenience
   TunnelKit:
     :commit: 8b17a13
@@ -68,7 +68,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Convenience:
-    :commit: 1cc2fea
+    :commit: 732ee78
     :git: https://github.com/keeshux/convenience
   TunnelKit:
     :commit: 8b17a13
@@ -84,6 +84,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
   TunnelKit: 4b70c0d8b6727b407248b4271b7613225f63204b
 
-PODFILE CHECKSUM: ccf21a2182dc05b22494a2d00f31ec4123ddd658
+PODFILE CHECKSUM: 981400b93aecbb27e102c23158bec54a9637bf99
 
 COCOAPODS: 1.8.4

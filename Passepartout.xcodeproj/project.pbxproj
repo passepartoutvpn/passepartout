@@ -112,9 +112,7 @@
 		0EF5CF292141F31F004FF1BD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
 		0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */; };
 		0EFB901A2276D7F1006405E4 /* NetworkSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */; };
-		0EFBFAC121AC464800887A8C /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFBFAC021AC464800887A8C /* CreditsViewController.swift */; };
 		0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943D215BE10800529B64 /* IssueReporter.swift */; };
-		0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943F215BED8E00529B64 /* LabelViewController.swift */; };
 		577B90392A4798F63461B0B5 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4CE55A94366C45DDB1E624 /* Pods_Passepartout_iOS_Tunnel.framework */; };
 		87121F7216E808EE79925040 /* Pods_Passepartout_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D32B24AA7767AB2E7FB6E0F /* Pods_Passepartout_iOS.framework */; };
 		91AF81613E19B47C06EBD447 /* Pods_PassepartoutCore_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276375A4CF0313B033CD8B5A /* Pods_PassepartoutCore_iOS.framework */; };
@@ -313,9 +311,7 @@
 		0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
 		0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNetworkSettings.swift; sourceTree = "<group>"; };
 		0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsViewController.swift; sourceTree = "<group>"; };
-		0EFBFAC021AC464800887A8C /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
 		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
-		0EFD943F215BED8E00529B64 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
 		0FD7B360EE444EF1CDBFDF1C /* Pods-PassepartoutCoreTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCoreTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PassepartoutCoreTests-iOS/Pods-PassepartoutCoreTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		234D3C887F46AD64480495BB /* Pods-PassepartoutCoreTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCoreTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PassepartoutCoreTests-iOS/Pods-PassepartoutCoreTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		276375A4CF0313B033CD8B5A /* Pods_PassepartoutCore_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PassepartoutCore_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -377,8 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */,
-				0EFBFAC021AC464800887A8C /* CreditsViewController.swift */,
-				0EFD943F215BED8E00529B64 /* LabelViewController.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -1024,7 +1018,6 @@
 				0E3419AD2350815E00419E18 /* Product.swift in Sources */,
 				0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */,
 				0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */,
-				0EFD9440215BED8E00529B64 /* LabelViewController.swift in Sources */,
 				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
 				0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */,
 				0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */,
@@ -1032,7 +1025,6 @@
 				0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */,
 				0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */,
 				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
-				0EFBFAC121AC464800887A8C /* CreditsViewController.swift in Sources */,
 				0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */,
 				0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */,
 				0E3586FE225BD34800509A4D /* ActivityTableViewCell.swift in Sources */,
