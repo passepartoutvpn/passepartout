@@ -10,6 +10,8 @@ PODS:
   - Convenience/Persistence (0.0.1)
   - Convenience/Reviewer (0.0.1)
   - Convenience/Tables (0.0.1)
+  - Convenience/WebServices (0.0.1):
+    - SwiftyBeaver
   - DTFoundation/Core (1.7.14)
   - DTFoundation/DTASN1 (1.7.14):
     - DTFoundation/Core
@@ -34,15 +36,16 @@ PODS:
     - TunnelKit/Core
 
 DEPENDENCIES:
-  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `732ee78`)
-  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `732ee78`)
-  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `732ee78`)
-  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `732ee78`)
-  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `732ee78`)
-  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `732ee78`)
-  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `732ee78`)
-  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `732ee78`)
-  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `732ee78`)
+  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
+  - Convenience/WebServices (from `https://github.com/keeshux/convenience`, commit `cfd2e57`)
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
@@ -60,7 +63,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Convenience:
-    :commit: 732ee78
+    :commit: cfd2e57
     :git: https://github.com/keeshux/convenience
   TunnelKit:
     :commit: 8b17a13
@@ -68,14 +71,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Convenience:
-    :commit: 732ee78
+    :commit: cfd2e57
     :git: https://github.com/keeshux/convenience
   TunnelKit:
     :commit: 8b17a13
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
-  Convenience: c4240c936b2119752ffa0841d40a4bc6a0ba8a5d
+  Convenience: 230739dd640bb826b640765d93715744721726be
   DTFoundation: 25aa19bb7c6e225b1dfae195604fb8cf1da0ab4c
   Kvitto: d451f893f84ad669850b7cb7d3f8781363e14232
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
@@ -84,6 +87,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
   TunnelKit: 4b70c0d8b6727b407248b4271b7613225f63204b
 
-PODFILE CHECKSUM: 981400b93aecbb27e102c23158bec54a9637bf99
+PODFILE CHECKSUM: 51463b0e66ae367dd35c273e67cfc84659a41432
 
 COCOAPODS: 1.8.4
