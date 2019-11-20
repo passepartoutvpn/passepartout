@@ -137,6 +137,10 @@ extension UILabel {
         font = .preferredFont(forTextStyle: .body)
         textColor = theme.palette.accent1
     }
+
+    func applySecondarySize(_ theme: Theme) {
+        font = .preferredFont(forTextStyle: .callout)
+    }
 }
 
 extension UITextField {
