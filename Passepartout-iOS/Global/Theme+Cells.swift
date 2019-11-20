@@ -30,6 +30,7 @@ import Convenience
 
 extension UITableViewCell {
     func applyChecked(_ checked: Bool, _ theme: Theme) {
+        textLabel?.font = .preferredFont(forTextStyle: .body)
         accessoryType = checked ? .checkmark : .none
         tintColor = theme.palette.accessory
     }
@@ -45,20 +46,25 @@ extension SingleOptionViewController {
 
 extension DestructiveTableViewCell {
     func apply(_ theme: Theme) {
+        labelCaption?.font = .preferredFont(forTextStyle: .body)
+        captionColor = theme.palette.destructive
         accessoryType = .none
         selectionStyle = .default
-        captionColor = theme.palette.destructive
     }
 }
 
 extension FieldTableViewCell {
     func apply(_ theme: Theme) {
+        textLabel?.font = .preferredFont(forTextStyle: .body)
+        field.font = .preferredFont(forTextStyle: .body)
         captionColor = theme.palette.primaryText
     }
 }
 
 extension SettingTableViewCell {
     func apply(_ theme: Theme) {
+        textLabel?.font = .preferredFont(forTextStyle: .body)
+        detailTextLabel?.font = .preferredFont(forTextStyle: .body)
         leftTextColor = theme.palette.primaryText
         rightTextColor = theme.palette.secondaryText
     }
@@ -66,12 +72,14 @@ extension SettingTableViewCell {
 
 extension ToggleTableViewCell {
     func apply(_ theme: Theme) {
+        textLabel?.font = .preferredFont(forTextStyle: .body)
         captionColor = theme.palette.primaryText
     }
 }
 
 extension ActivityTableViewCell {
     func apply(_ theme: Theme) {
+        textLabel?.font = .preferredFont(forTextStyle: .body)
         textLabel?.text = nil
         detailTextLabel?.text = nil
     }
@@ -79,12 +87,17 @@ extension ActivityTableViewCell {
 
 extension SettingTableViewCell {
     func applyAction(_ theme: Theme) {
+        textLabel?.font = .preferredFont(forTextStyle: .body)
+        detailTextLabel?.font = .preferredFont(forTextStyle: .body)
         leftTextColor = theme.palette.action
         rightTextColor = nil
         accessoryType = .none
     }
     
     func applyVPN(_ theme: Theme, with vpnStatus: VPNStatus?, error: OpenVPNTunnelProvider.ProviderError?) {
+        textLabel?.font = .preferredFont(forTextStyle: .body)
+        detailTextLabel?.font = .preferredFont(forTextStyle: .body)
+
         leftTextColor = theme.palette.primaryText
         guard let vpnStatus = vpnStatus else {
             rightText = L10n.Core.Vpn.disabled
