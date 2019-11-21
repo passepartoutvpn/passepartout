@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- "Trusted networks" settings are now saved per profile. [#114](https://github.com/passepartoutvpn/passepartout-ios/issues/114)
 - Require explicit `--ca` and `--cipher` in .ovpn configuration file.
 
 ### Fixed
