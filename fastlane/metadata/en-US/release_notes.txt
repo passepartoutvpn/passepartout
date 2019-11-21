@@ -1,5 +1,10 @@
+### Added
+
+- Favorite provider locations.
+
 ### Changed
 
+- "Trusted networks" settings are now saved per profile.
 - Require explicit `--ca` and `--cipher` in .ovpn configuration file.
 
 ### Fixed
