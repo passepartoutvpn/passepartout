@@ -157,7 +157,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard categories.count > 1 else {
+        if categories.count == 1 && categories.first?.name == "" {
             return nil
         }
         let model = categories[section]
