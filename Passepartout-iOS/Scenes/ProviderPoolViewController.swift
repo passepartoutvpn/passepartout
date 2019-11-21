@@ -247,12 +247,13 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
                 self.favoriteGroup(withId: groupId)
                 $2(true)
             }
+            action.applyNormal(.current)
         } else {
             return nil
         }
 
         let cfg = UISwipeActionsConfiguration(actions: [action])
-        cfg.performsFirstActionWithFullSwipe = true
+        cfg.performsFirstActionWithFullSwipe = false
         return cfg
     }
     

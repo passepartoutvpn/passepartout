@@ -170,6 +170,12 @@ extension UIBarButtonItem {
     }
 }
 
+extension UIContextualAction {
+    func applyNormal(_ theme: Theme) {
+        backgroundColor = theme.palette.primaryBackground
+    }
+}
+
 // XXX: status bar is broken
 extension MFMailComposeViewController {
     func apply(_ theme: Theme) {
