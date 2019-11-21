@@ -94,6 +94,9 @@ class ProviderPoolViewController: UIViewController {
         isShowingFavorites = !isShowingFavorites
         if isShowingFavorites {
             reloadFavorites()
+            navigationItem.rightBarButtonItem?.applyAccent(.current)
+        } else {
+            navigationItem.rightBarButtonItem?.apply(.current)
         }
         tableView.reloadData()
     }
