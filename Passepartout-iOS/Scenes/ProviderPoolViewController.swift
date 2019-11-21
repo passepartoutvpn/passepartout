@@ -29,28 +29,40 @@ import Convenience
 
 protocol ProviderPoolViewControllerDelegate: class {
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool)
+    
+    func providerPoolController(_: ProviderPoolViewController, didUpdateFavoriteGroups favoriteGroupIds: [String])
 }
 
 class ProviderPoolViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
 
-    private var categories: [PoolCategory] = []
+    private var allCategories: [PoolCategory] = []
 
-    private var sortedGroupsByCategory: [String: [PoolGroup]] = [:]
+    private var favoriteCategories: [PoolCategory] = []
 
     private var currentPool: Pool?
+    
+    private var isShowingFavorites = false
+
+    var favoriteGroupIds: [String] = []
+    
+    var isReadonly = false
     
     weak var delegate: ProviderPoolViewControllerDelegate?
 
     func setInfrastructure(_ infrastructure: Infrastructure, currentPoolId: String?) {
-        categories = infrastructure.categories.sorted { $0.name.lowercased() < $1.name.lowercased() }
-        
-        for c in categories {
-            sortedGroupsByCategory[c.name] = c.groups.sorted()
+        let sortedCategories = infrastructure.categories.sorted { $0.name.lowercased() < $1.name.lowercased() }
+        allCategories = []
+        for c in sortedCategories {
+            allCategories.append(PoolCategory(
+                name: c.name,
+                groups: c.groups.sorted(),
+                presets: c.presets
+            ))
         }
 
         // XXX: uglyyy
-        for cat in categories {
+        for cat in allCategories {
             for group in cat.groups {
                 for p in group.pools {
                     if p.id == currentPoolId {
@@ -72,6 +84,53 @@ class ProviderPoolViewController: UIViewController {
         if let ip = selectedIndexPath {
             tableView.selectRowAsync(at: ip)
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(toggleFavorites))
+    }
+    
+    // MARK: Actions
+    
+    @objc private func toggleFavorites() {
+        isShowingFavorites = !isShowingFavorites
+        if isShowingFavorites {
+            reloadFavorites()
+        }
+        tableView.reloadData()
+    }
+
+    private func favoriteGroup(withId groupId: String) {
+        favoriteGroupIds.append(groupId)
+        delegate?.providerPoolController(self, didUpdateFavoriteGroups: favoriteGroupIds)
+    }
+    
+    private func unfavoriteGroup(in category: PoolCategory, withId groupId: String, deletingRowAt indexPath: IndexPath?) {
+        favoriteGroupIds.removeAll(where: { $0 == groupId })
+        if let indexPath = indexPath {
+            reloadFavorites()
+            if category.groups.count == 1 {
+                tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+            } else {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+        delegate?.providerPoolController(self, didUpdateFavoriteGroups: favoriteGroupIds)
+    }
+
+    private func reloadFavorites() {
+        favoriteCategories = []
+        for c in allCategories {
+            let favoriteGroups = c.groups.filter {
+                return favoriteGroupIds.contains($0.uniqueId(in: c))
+            }
+            guard !favoriteGroups.isEmpty else {
+                continue
+            }
+            favoriteCategories.append(PoolCategory(
+                name: c.name,
+                groups: favoriteGroups,
+                presets: c.presets
+            ))
+        }
     }
 }
 
@@ -80,10 +139,7 @@ class ProviderPoolViewController: UIViewController {
 extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate {
     private var selectedIndexPath: IndexPath? {
         for (i, cat) in categories.enumerated() {
-            guard let sortedGroups = sortedGroupsByCategory[cat.name] else {
-                continue
-            }
-            for (j, group) in sortedGroups.enumerated() {
+            for (j, group) in cat.groups.enumerated() {
                 guard let _ = group.pools.firstIndex(where: { $0.id == currentPool?.id }) else {
                     continue
                 }
@@ -168,11 +224,43 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return !isReadonly
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let category = categories[indexPath.section]
+        let group = poolGroup(at: indexPath)
+        let groupId = group.uniqueId(in: category)
+
+        let action: UIContextualAction
+        if favoriteGroupIds.contains(groupId) {
+            action = UIContextualAction(style: .destructive, title: L10n.App.Provider.Pool.Actions.unfavorite) {
+                self.unfavoriteGroup(in: category, withId: groupId, deletingRowAt: self.isShowingFavorites ? indexPath : nil)
+                $2(true)
+            }
+        } else if !isShowingFavorites {
+            action = UIContextualAction(style: .normal, title: L10n.App.Provider.Pool.Actions.favorite) {
+                self.favoriteGroup(withId: groupId)
+                $2(true)
+            }
+        } else {
+            return nil
+        }
+
+        let cfg = UISwipeActionsConfiguration(actions: [action])
+        cfg.performsFirstActionWithFullSwipe = true
+        return cfg
+    }
+    
+    // MARK: Helpers
+    
     private func poolGroup(at indexPath: IndexPath) -> PoolGroup {
         let model = categories[indexPath.section]
-        guard let sortedGroups = sortedGroupsByCategory[model.name] else {
-            fatalError("Missing sorted groups for category '\(model.name)'")
-        }
-        return sortedGroups[indexPath.row]
+        return model.groups[indexPath.row]
+    }
+    
+    private var categories: [PoolCategory] {
+        return isShowingFavorites ? favoriteCategories : allCategories
     }
 }

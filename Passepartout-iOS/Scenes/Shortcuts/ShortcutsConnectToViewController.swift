@@ -173,4 +173,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool) {
         addMoveToLocation(pool: pool)
     }
+
+    func providerPoolController(_: ProviderPoolViewController, didUpdateFavoriteGroups favoriteGroupIds: [String]) {
+    }
 }
