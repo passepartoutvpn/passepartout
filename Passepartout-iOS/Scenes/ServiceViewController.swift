@@ -1241,7 +1241,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         }
 
         trustedNetworks.delegate = self
-        trustedNetworks.load(from: uncheckedProfile)
+        trustedNetworks.load(from: uncheckedProfile.trustedNetworks)
         model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, forSection: .trusted)
     }
 
