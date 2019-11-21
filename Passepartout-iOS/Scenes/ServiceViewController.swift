@@ -429,7 +429,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private func toggleTrustedConnectionPolicy(_ isOn: Bool, sender: ToggleTableViewCell) {
         let completionHandler: () -> Void = {
-            self.service.preferences.trustedNetworks.policy = isOn ? .disconnect : .ignore
+            self.uncheckedProfile.trustedNetworks.policy = isOn ? .disconnect : .ignore
             if self.vpn.isEnabled {
                 self.vpn.reinstall(completionHandler: nil)
             }
@@ -933,7 +933,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedMobile:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
             cell.caption = L10n.Core.Service.Cells.TrustedMobile.caption
-            cell.isOn = service.preferences.trustedNetworks.includesMobile
+            cell.isOn = uncheckedProfile.trustedNetworks.includesMobile
             return cell
             
         case .trustedWiFi:
@@ -952,7 +952,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedPolicy:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
             cell.caption = L10n.Core.Service.Cells.TrustedPolicy.caption
-            cell.isOn = (service.preferences.trustedNetworks.policy == .disconnect)
+            cell.isOn = (uncheckedProfile.trustedNetworks.policy == .disconnect)
             return cell
             
         // diagnostics
@@ -1241,7 +1241,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         }
 
         trustedNetworks.delegate = self
-        trustedNetworks.load(from: service.preferences)
+        trustedNetworks.load(from: uncheckedProfile)
         model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, forSection: .trusted)
     }
 
@@ -1315,7 +1315,7 @@ extension ServiceViewController: UITextFieldDelegate {
 
 extension ServiceViewController: TrustedNetworksUIDelegate {
     func trustedNetworksCouldDisconnect(_: TrustedNetworksUI) -> Bool {
-        return (service.preferences.trustedNetworks.policy == .disconnect) && (vpn.status != .disconnected)
+        return (uncheckedProfile.trustedNetworks.policy == .disconnect) && (vpn.status != .disconnected)
     }
     
     func trustedNetworksShouldConfirmDisconnection(_: TrustedNetworksUI, triggeredAt rowIndex: Int, completionHandler: @escaping () -> Void) {
@@ -1344,8 +1344,8 @@ extension ServiceViewController: TrustedNetworksUIDelegate {
     }
     
     func trustedNetworksShouldReinstall(_: TrustedNetworksUI) {
-        service.preferences.trustedNetworks.includesMobile = trustedNetworks.trustsMobileNetwork
-        service.preferences.trustedNetworks.includedWiFis = trustedNetworks.trustedWifis
+        uncheckedProfile.trustedNetworks.includesMobile = trustedNetworks.trustsMobileNetwork
+        uncheckedProfile.trustedNetworks.includedWiFis = trustedNetworks.trustedWifis
         if vpn.isEnabled {
             vpn.reinstall(completionHandler: nil)
         }

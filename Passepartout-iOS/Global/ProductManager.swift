@@ -191,17 +191,26 @@ class ProductManager: NSObject {
     func reviewPurchases() {
         let service = TransientStore.shared.service
         reloadReceipt(andNotify: false)
-        var shouldReinstall = false
+        var anyRefund = false
 
         // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
 
         log.debug("Checking 'Trusted networks'")
         if !isEligible(forFeature: .trustedNetworks) {
-            if service.preferences.trustedNetworks.includesMobile || !service.preferences.trustedNetworks.includedWiFis.isEmpty {
-                service.preferences.trustedNetworks.includesMobile = false
-                service.preferences.trustedNetworks.includedWiFis.removeAll()
+            
+            // reset trusted networks for ALL profiles (must load first)
+            for key in service.allProfileKeys() {
+                guard let profile = service.profile(withKey: key) else {
+                    continue
+                }
+                if profile.trustedNetworks.includesMobile || !profile.trustedNetworks.includedWiFis.isEmpty {
+                    profile.trustedNetworks.includesMobile = false
+                    profile.trustedNetworks.includedWiFis.removeAll()
+                    anyRefund = true
+                }
+            }
+            if anyRefund {
                 log.debug("\tRefunded")
-                shouldReinstall = true
             }
         }
 
@@ -213,7 +222,7 @@ class ProductManager: NSObject {
                     service.removeProfile(ProfileKey(.host, id))
                 }
                 log.debug("\tRefunded")
-                shouldReinstall = true
+                anyRefund = true
             }
         }
 
@@ -222,12 +231,11 @@ class ProductManager: NSObject {
             if !isEligible(forProvider: name) {
                 service.removeProfile(ProfileKey(name))
                 log.debug("\tRefunded provider: \(name)")
-                shouldReinstall = true
+                anyRefund = true
             }
         }
         
-        // no refunds
-        guard shouldReinstall else {
+        guard anyRefund else {
             return
         }
 
