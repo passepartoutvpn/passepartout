@@ -153,10 +153,16 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if isShowingEmptyFavorites {
+            return 1
+        }
         return categories.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if isShowingEmptyFavorites {
+            return nil
+        }
         if categories.count == 1 && categories.first?.name == "" {
             return nil
         }
@@ -164,7 +170,17 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         return model.name
     }
     
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if isShowingEmptyFavorites {
+            return L10n.App.Provider.Pool.Sections.EmptyFavorites.footer
+        }
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isShowingEmptyFavorites {
+            return 0
+        }
         let model = categories[section]
         return model.groups.count
     }
@@ -266,5 +282,9 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     
     private var categories: [PoolCategory] {
         return isShowingFavorites ? favoriteCategories : allCategories
+    }
+    
+    private var isShowingEmptyFavorites: Bool {
+        return isShowingFavorites && favoriteGroupIds.isEmpty
     }
 }
