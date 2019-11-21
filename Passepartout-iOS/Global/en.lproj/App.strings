@@ -48,6 +48,10 @@
 "endpoint.sections.location_addresses.header" = "Addresses";
 "endpoint.sections.location_protocols.header" = "Protocols";
 
+"provider.pool.actions.favorite" = "Favorite";
+"provider.pool.actions.unfavorite" = "Unfavorite";
+"provider.pool.sections.empty_favorites.footer" = "Swipe left on a location to add or remove it from Favorites.";
+
 "provider.preset.cells.tech_details.caption" = "Technical details";
 
 "network_settings.cells.add_dns_server.caption" = "Add address";

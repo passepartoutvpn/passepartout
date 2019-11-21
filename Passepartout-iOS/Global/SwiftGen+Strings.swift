@@ -69,6 +69,20 @@ internal enum L10n {
       }
     }
     internal enum Provider {
+      internal enum Pool {
+        internal enum Actions {
+          /// Favorite
+          internal static let favorite = L10n.tr("App", "provider.pool.actions.favorite")
+          /// Unfavorite
+          internal static let unfavorite = L10n.tr("App", "provider.pool.actions.unfavorite")
+        }
+        internal enum Sections {
+          internal enum EmptyFavorites {
+            /// Swipe left on a location to add or remove it from Favorites.
+            internal static let footer = L10n.tr("App", "provider.pool.sections.empty_favorites.footer")
+          }
+        }
+      }
       internal enum Preset {
         internal enum Cells {
           internal enum TechDetails {

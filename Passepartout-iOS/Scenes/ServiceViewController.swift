@@ -162,6 +162,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         case .providerPoolSegueIdentifier:
             let vc = destination as? ProviderPoolViewController
             vc?.setInfrastructure(uncheckedProviderProfile.infrastructure, currentPoolId: uncheckedProviderProfile.poolId)
+            vc?.favoriteGroupIds = uncheckedProviderProfile.favoriteGroupIds ?? []
             vc?.delegate = self
             
         case .endpointSegueIdentifier:
@@ -1424,6 +1425,10 @@ extension ServiceViewController: ProviderPoolViewControllerDelegate {
         if #available(iOS 12, *) {
             IntentDispatcher.donateConnection(with: uncheckedProviderProfile)
         }
+    }
+    
+    func providerPoolController(_: ProviderPoolViewController, didUpdateFavoriteGroups favoriteGroupIds: [String]) {
+        uncheckedProviderProfile.favoriteGroupIds = favoriteGroupIds
     }
 }
 

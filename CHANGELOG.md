@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.10.0 Beta 2181 (2019-11-21)
 
+### Added
+
+- Favorite provider locations. [#118](https://github.com/passepartoutvpn/passepartout-ios/issues/118)
+
 ### Changed
 
 - "Trusted networks" settings are now saved per profile. [#114](https://github.com/passepartoutvpn/passepartout-ios/issues/114)

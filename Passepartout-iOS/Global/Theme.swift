@@ -160,6 +160,22 @@ extension UIActivityIndicatorView {
     }
 }
 
+extension UIBarButtonItem {
+    func apply(_ theme: Theme) {
+        tintColor = nil
+    }
+
+    func applyAccent(_ theme: Theme) {
+        tintColor = theme.palette.accent1
+    }
+}
+
+extension UIContextualAction {
+    func applyNormal(_ theme: Theme) {
+        backgroundColor = theme.palette.primaryBackground
+    }
+}
+
 // XXX: status bar is broken
 extension MFMailComposeViewController {
     func apply(_ theme: Theme) {
