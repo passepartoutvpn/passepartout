@@ -67,7 +67,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
     
-    private let trustedNetworks = TrustedNetworksModel()
+    private let trustedNetworks = TrustedNetworksUI()
     
     // MARK: UIViewController
 
@@ -429,7 +429,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private func toggleTrustedConnectionPolicy(_ isOn: Bool, sender: ToggleTableViewCell) {
         let completionHandler: () -> Void = {
-            self.service.preferences.trustPolicy = isOn ? .disconnect : .ignore
+            self.service.preferences.trustedNetworks.policy = isOn ? .disconnect : .ignore
             if self.vpn.isEnabled {
                 self.vpn.reinstall(completionHandler: nil)
             }
@@ -782,7 +782,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         return ip
     }
     
-    private func mappedTrustedNetworksRow(_ from: TrustedNetworksModel.RowType) -> RowType {
+    private func mappedTrustedNetworksRow(_ from: TrustedNetworksUI.RowType) -> RowType {
         switch from {
         case .trustsMobile:
             return .trustedMobile
@@ -933,7 +933,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedMobile:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
             cell.caption = L10n.Core.Service.Cells.TrustedMobile.caption
-            cell.isOn = service.preferences.trustsMobileNetwork
+            cell.isOn = service.preferences.trustedNetworks.includesMobile
             return cell
             
         case .trustedWiFi:
@@ -952,7 +952,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedPolicy:
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
             cell.caption = L10n.Core.Service.Cells.TrustedPolicy.caption
-            cell.isOn = (service.preferences.trustPolicy == .disconnect)
+            cell.isOn = (service.preferences.trustedNetworks.policy == .disconnect)
             return cell
             
         // diagnostics
@@ -1313,21 +1313,21 @@ extension ServiceViewController: UITextFieldDelegate {
 
 // MARK: -
 
-extension ServiceViewController: TrustedNetworksModelDelegate {
-    func trustedNetworksCouldDisconnect(_: TrustedNetworksModel) -> Bool {
-        return (service.preferences.trustPolicy == .disconnect) && (vpn.status != .disconnected)
+extension ServiceViewController: TrustedNetworksUIDelegate {
+    func trustedNetworksCouldDisconnect(_: TrustedNetworksUI) -> Bool {
+        return (service.preferences.trustedNetworks.policy == .disconnect) && (vpn.status != .disconnected)
     }
     
-    func trustedNetworksShouldConfirmDisconnection(_: TrustedNetworksModel, triggeredAt rowIndex: Int, completionHandler: @escaping () -> Void) {
+    func trustedNetworksShouldConfirmDisconnection(_: TrustedNetworksUI, triggeredAt rowIndex: Int, completionHandler: @escaping () -> Void) {
         confirmPotentialTrustedDisconnection(at: rowIndex, completionHandler: completionHandler)
     }
     
-    func trustedNetworks(_: TrustedNetworksModel, shouldInsertWifiAt rowIndex: Int) {
+    func trustedNetworks(_: TrustedNetworksUI, shouldInsertWifiAt rowIndex: Int) {
         model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, forSection: .trusted)
         tableView.insertRows(at: [IndexPath(row: rowIndex, section: trustedSectionIndex)], with: .bottom)
     }
     
-    func trustedNetworks(_: TrustedNetworksModel, shouldReloadWifiAt rowIndex: Int, isTrusted: Bool) {
+    func trustedNetworks(_: TrustedNetworksUI, shouldReloadWifiAt rowIndex: Int, isTrusted: Bool) {
         let genericCell = tableView.cellForRow(at: IndexPath(row: rowIndex, section: trustedSectionIndex))
         guard let cell = genericCell as? ToggleTableViewCell else {
             fatalError("Not a trusted Wi-Fi cell (\(type(of: genericCell)) != ToggleTableViewCell)")
@@ -1338,14 +1338,14 @@ extension ServiceViewController: TrustedNetworksModelDelegate {
         cell.setOn(isTrusted, animated: true)
     }
     
-    func trustedNetworks(_: TrustedNetworksModel, shouldDeleteWifiAt rowIndex: Int) {
+    func trustedNetworks(_: TrustedNetworksUI, shouldDeleteWifiAt rowIndex: Int) {
         model.set(trustedNetworks.rows.map { mappedTrustedNetworksRow($0) }, forSection: .trusted)
         tableView.deleteRows(at: [IndexPath(row: rowIndex, section: trustedSectionIndex)], with: .top)
     }
     
-    func trustedNetworksShouldReinstall(_: TrustedNetworksModel) {
-        service.preferences.trustsMobileNetwork = trustedNetworks.trustsMobileNetwork
-        service.preferences.trustedWifis = trustedNetworks.trustedWifis
+    func trustedNetworksShouldReinstall(_: TrustedNetworksUI) {
+        service.preferences.trustedNetworks.includesMobile = trustedNetworks.trustsMobileNetwork
+        service.preferences.trustedNetworks.includedWiFis = trustedNetworks.trustedWifis
         if vpn.isEnabled {
             vpn.reinstall(completionHandler: nil)
         }

@@ -197,9 +197,9 @@ class ProductManager: NSObject {
 
         log.debug("Checking 'Trusted networks'")
         if !isEligible(forFeature: .trustedNetworks) {
-            if service.preferences.trustsMobileNetwork || !service.preferences.trustedWifis.isEmpty {
-                service.preferences.trustsMobileNetwork = false
-                service.preferences.trustedWifis.removeAll()
+            if service.preferences.trustedNetworks.includesMobile || !service.preferences.trustedNetworks.includedWiFis.isEmpty {
+                service.preferences.trustedNetworks.includesMobile = false
+                service.preferences.trustedNetworks.includedWiFis.removeAll()
                 log.debug("\tRefunded")
                 shouldReinstall = true
             }

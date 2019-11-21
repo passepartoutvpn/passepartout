@@ -92,6 +92,7 @@
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
+		0EB9EB7323867E7F009C0A1C /* TrustedNetworksUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */; };
 		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
 		0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */; };
 		0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB109224FECEA00E9E551 /* DataUnit.swift */; };
@@ -259,6 +260,7 @@
 		0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetworkViewController.swift; sourceTree = "<group>"; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
+		0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksUI.swift; sourceTree = "<group>"; };
 		0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Migration.swift"; sourceTree = "<group>"; };
 		0EBE2FD02360F88C00F0D5AB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0EBE2FD12360F88E00F0D5AB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -496,6 +498,15 @@
 			path = Organizer;
 			sourceTree = "<group>";
 		};
+		0EB9EB7123867E7F009C0A1C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */,
+			);
+			name = UI;
+			path = Submodules/Core/Passepartout/Sources/UI;
+			sourceTree = SOURCE_ROOT;
+		};
 		0EBE3AA2213DC1B000BFA2F5 /* Profiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,10 +599,11 @@
 		0EDE8DF020C93EBB004C739C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0E50E7C422330E5100D5F76C /* Intents */,
 				0ED31C0E20CF09890027975F /* Model */,
 				0ED31C1B20CF0ACE0027975F /* Services */,
+				0EB9EB7123867E7F009C0A1C /* UI */,
 				0E4FD7D920D3E43F002221FF /* VPN */,
-				0E50E7C422330E5100D5F76C /* Intents */,
 				0E39BCF2214DA9310035E9DE /* AppConstants.swift */,
 				0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */,
 				0EDE8DED20C93E4C004C739C /* GroupConstants.swift */,
@@ -984,6 +996,7 @@
 				0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */,
 				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
 				0E3152CB223FA04D00F61841 /* Pool.swift in Sources */,
+				0EB9EB7323867E7F009C0A1C /* TrustedNetworksUI.swift in Sources */,
 				0E3CAFC0229AAE770008E5C8 /* Intents.intentdefinition in Sources */,
 				0E3152C7223FA04800F61841 /* VPNStatus.swift in Sources */,
 			);
