@@ -178,7 +178,7 @@ class ProductManager: NSObject {
             return true
         }
         return purchasedFeatures.contains {
-            return $0.rawValue.hasSuffix("providers.\(name.rawValue)")
+            return $0.rawValue.hasSuffix("providers.\(name)")
         }
     }
 

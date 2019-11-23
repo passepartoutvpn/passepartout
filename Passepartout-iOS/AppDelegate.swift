@@ -40,11 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     override init() {
         AppConstants.Log.configure()
+        InfrastructureFactory.shared.preload()
         super.init()
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        InfrastructureFactory.shared.loadCache()
         Theme.current.applyAppearance()
         Reviewer.shared.eventCountBeforeRating = AppConstants.Rating.eventCount
 

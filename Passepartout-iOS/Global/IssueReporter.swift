@@ -77,8 +77,8 @@ class IssueReporter: NSObject {
         var bodyMetadata = "--\n\n"
         bodyMetadata += DebugLog(raw: "").decoratedString()
         if let infrastructure = issue.infrastructure {
-            bodyMetadata += "Provider: \(infrastructure.name.rawValue)\n"
-            if let lastUpdated = InfrastructureFactory.shared.modificationDate(for: infrastructure.name) {
+            bodyMetadata += "Provider: \(infrastructure.name)\n"
+            if let lastUpdated = InfrastructureFactory.shared.modificationDate(forName: infrastructure.name) {
                 bodyMetadata += "Last updated: \(lastUpdated)\n"
             }
             bodyMetadata += "\n"

@@ -61,28 +61,32 @@ class AccountViewController: UIViewController, StrongTableHost {
         guard let name = infrastructureName else {
             return nil
         }
+        // FIXME: make this dynamic?
         let V = L10n.Core.Account.Sections.Guidance.Footer.Infrastructure.self
         switch name {
         case .mullvad:
-            return V.mullvad(name.rawValue)
+            return V.mullvad(name)
             
-        case .nordVPN:
-            return V.nordvpn(name.rawValue)
+        case .nordvpn:
+            return V.nordvpn(name)
             
         case .pia:
-            return V.pia(name.rawValue)
+            return V.pia(name)
             
-        case .protonVPN:
-            return V.protonvpn(name.rawValue)
+        case .protonvpn:
+            return V.protonvpn(name)
 
-        case .tunnelBear:
-            return V.tunnelbear(name.rawValue)
+        case .tunnelbear:
+            return V.tunnelbear(name)
             
-        case .vyprVPN:
-            return V.vyprvpn(name.rawValue)
+        case .vyprvpn:
+            return V.vyprvpn(name)
             
         case .windscribe:
-            return V.windscribe(name.rawValue)
+            return V.windscribe(name)
+            
+        default:
+            return nil
         }
     }
     
@@ -266,7 +270,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
                 fatalError("Sign-up shown when not a provider profile")
             }
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Account.Cells.Signup.caption(name.rawValue)
+            cell.leftText = L10n.Core.Account.Cells.Signup.caption(name)
             cell.applyAction(.current)
             return cell
         }

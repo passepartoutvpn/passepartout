@@ -39,7 +39,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
     private var hosts: [String] = []
     
-    private var availableProviderNames: [Infrastructure.Name]?
+    private var availableProviders: [Infrastructure.Metadata]?
 
     private var didShowSubreddit = false
 
@@ -177,7 +177,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
             vc.setProfile(selectedProfile)
         } else if let providerVC = destination as? WizardProviderViewController {
-            providerVC.availableNames = availableProviderNames ?? []
+            providerVC.available = availableProviders ?? []
         }
     }
 
@@ -195,8 +195,8 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     }
     
     private func addNewProvider() {
-        let names = service.availableProviderNames()
-        guard !names.isEmpty else {
+        let providers = service.availableProviders()
+        guard !providers.isEmpty else {
             let alert = UIAlertController.asAlert(
                 L10n.Core.Organizer.Sections.Providers.header,
                 L10n.Core.Organizer.Alerts.ExhaustedProviders.message
@@ -205,7 +205,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             present(alert, animated: true, completion: nil)
             return
         }
-        availableProviderNames = names
+        availableProviders = providers
         perform(segue: StoryboardSegue.Organizer.addProviderSegueIdentifier)
     }
 
@@ -479,12 +479,13 @@ extension OrganizerViewController {
         case .profile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             let rowProfile = profileKey(at: indexPath)
-            if rowProfile.context == .provider, let providerName = Infrastructure.Name(rawValue: rowProfile.id) {
-                cell.imageView?.image = providerName.logo
+            if rowProfile.context == .provider, let metadata = InfrastructureFactory.shared.metadata(forName: rowProfile.id) {
+                cell.imageView?.image = metadata.logo
+                cell.leftText = metadata.description
             } else {
                 cell.imageView?.image = nil
+                cell.leftText = rowProfile.id
             }
-            cell.leftText = rowProfile.id
             cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Core.Organizer.Cells.Profile.Value.current : nil
             return cell
 

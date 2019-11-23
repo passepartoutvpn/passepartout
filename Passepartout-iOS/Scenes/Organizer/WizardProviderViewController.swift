@@ -27,7 +27,7 @@ import UIKit
 import PassepartoutCore
 
 class WizardProviderViewController: UITableViewController {
-    var availableNames: [Infrastructure.Name] = []
+    var available: [Infrastructure.Metadata] = []
     
     private var createdProfile: ProviderConnectionProfile?
 
@@ -37,17 +37,17 @@ class WizardProviderViewController: UITableViewController {
         title = L10n.Core.Organizer.Sections.Providers.header
     }
     
-    private func next(withName name: Infrastructure.Name) {
-        guard ProductManager.shared.isEligible(forProvider: name) else {
-            presentPurchaseScreen(forProduct: name.product)
+    private func next(withMetadata metadata: Infrastructure.Metadata) {
+        guard ProductManager.shared.isEligible(forProvider: metadata.name) else {
+            presentPurchaseScreen(forProduct: metadata.product)
             return
         }
 
-        let profile = ProviderConnectionProfile(name: name)
+        let profile = ProviderConnectionProfile(name: metadata.name)
         createdProfile = profile
         
         let accountVC = StoryboardScene.Main.accountIdentifier.instantiate()
-        let infrastructure = InfrastructureFactory.shared.get(name)
+        let infrastructure = InfrastructureFactory.shared.infrastructure(forName: metadata.name)
         accountVC.usernamePlaceholder = infrastructure.defaults.username
         accountVC.infrastructureName = infrastructure.name
         accountVC.delegate = self
@@ -73,20 +73,20 @@ class WizardProviderViewController: UITableViewController {
 
 extension WizardProviderViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableNames.count
+        return available.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let name = availableNames[indexPath.row]
+        let metadata = available[indexPath.row]
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        cell.imageView?.image = name.logo
-        cell.leftText = name.rawValue
+        cell.imageView?.image = metadata.logo
+        cell.leftText = metadata.description
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let name = availableNames[indexPath.row]
-        next(withName: name)
+        let metadata = available[indexPath.row]
+        next(withMetadata: metadata)
     }
 }
 

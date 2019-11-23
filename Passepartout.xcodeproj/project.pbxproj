@@ -89,6 +89,8 @@
 		0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD7862257462800D033B4 /* Providers.xcassets */; };
 		0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD788225746B300D033B4 /* Flags.xcassets */; };
 		0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */; };
+		0EA84515238A9B5200EFC500 /* Infrastructure+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */; };
+		0EA8451A238C2AB500EFC500 /* Infrastructure+Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
@@ -258,6 +260,8 @@
 		0E9CD7862257462800D033B4 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
 		0E9CD788225746B300D033B4 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
 		0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetworkViewController.swift; sourceTree = "<group>"; };
+		0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Infrastructure+Name.swift"; path = "Submodules/Core/Passepartout/Sources/Services/Infrastructure+Name.swift"; sourceTree = SOURCE_ROOT; };
+		0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Infrastructure+Metadata.swift"; path = "Submodules/Core/Passepartout/Sources/Services/Infrastructure+Metadata.swift"; sourceTree = SOURCE_ROOT; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
 		0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksUI.swift; sourceTree = "<group>"; };
@@ -545,6 +549,8 @@
 			isa = PBXGroup;
 			children = (
 				0ED31C1120CF0ABA0027975F /* Infrastructure.swift */,
+				0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */,
+				0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */,
 				0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */,
 				0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */,
 				0ED31C0F20CF09A30027975F /* Pool.swift */,
@@ -985,6 +991,7 @@
 				0E3152CA223FA04D00F61841 /* InfrastructurePreset.swift in Sources */,
 				0E3152CE223FA05400F61841 /* ConnectionService.swift in Sources */,
 				0ED993B1223FF8C700B0F9C9 /* IntentDispatcher.swift in Sources */,
+				0EA84515238A9B5200EFC500 /* Infrastructure+Name.swift in Sources */,
 				0EEF23412321AC55000AEBE3 /* Issue.swift in Sources */,
 				0E3152C3223FA04800F61841 /* StandardVPNProvider.swift in Sources */,
 				0E3152D1223FA05400F61841 /* Credentials.swift in Sources */,
@@ -996,6 +1003,7 @@
 				0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */,
 				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
 				0E3152CB223FA04D00F61841 /* Pool.swift in Sources */,
+				0EA8451A238C2AB500EFC500 /* Infrastructure+Metadata.swift in Sources */,
 				0EB9EB7323867E7F009C0A1C /* TrustedNetworksUI.swift in Sources */,
 				0E3CAFC0229AAE770008E5C8 /* Intents.intentdefinition in Sources */,
 				0E3152C7223FA04800F61841 /* VPNStatus.swift in Sources */,

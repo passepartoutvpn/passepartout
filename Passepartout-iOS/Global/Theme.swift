@@ -189,9 +189,10 @@ extension MFMailComposeViewController {
     }
 }
 
-extension Infrastructure.Name {
+// FIXME: load from index JSON
+extension Infrastructure.Metadata {
     var logo: UIImage? {
-        return ImageAsset(name: rawValue.lowercased()).image
+        return ImageAsset(name: name.lowercased()).image
     }
 }
 

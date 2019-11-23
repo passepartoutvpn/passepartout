@@ -111,10 +111,10 @@ enum Product: String {
     }
 }
 
-extension Infrastructure.Name {
+extension Infrastructure.Metadata {
     var product: Product {
-        guard let product = Product(rawValue: "com.algoritmico.ios.Passepartout.providers.\(rawValue)") else {
-            fatalError("Product not found for provider \(rawValue)")
+        guard let product = Product(rawValue: "com.algoritmico.ios.Passepartout.providers.\(self)") else {
+            fatalError("Product not found for provider \(self)")
         }
         return product
     }
