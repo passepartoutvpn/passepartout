@@ -1047,6 +1047,14 @@ internal enum L10n {
           }
         }
       }
+      internal enum Provider {
+        internal enum Cells {
+          internal enum UpdateList {
+            /// Update list
+            internal static let caption = L10n.tr("Core", "wizards.provider.cells.update_list.caption")
+          }
+        }
+      }
     }
   }
 }

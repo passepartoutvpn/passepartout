@@ -25,29 +25,50 @@
 
 import UIKit
 import PassepartoutCore
+import Convenience
+import SwiftyBeaver
 
-class WizardProviderViewController: UITableViewController {
-    var availableNames: [Infrastructure.Name] = []
+private let log = SwiftyBeaver.self
+
+class WizardProviderViewController: UITableViewController, StrongTableHost {
+    private var available: [Infrastructure.Metadata] = []
     
     private var createdProfile: ProviderConnectionProfile?
+    
+    // MARK: StrongTableHost
+    
+    let model = StrongTableModel<SectionType, RowType>()
+    
+    func reloadModel() {
+        available = TransientStore.shared.service.availableProviders()
+
+        model.clear()
+        model.add(.availableProviders)
+        model.add(.listActions)
+        model.set(.provider, count: available.count, forSection: .availableProviders)
+        model.set([.updateList], forSection: .listActions)
+    }
+    
+    // MARK: UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = L10n.Core.Organizer.Sections.Providers.header
+        reloadModel()
     }
     
-    private func next(withName name: Infrastructure.Name) {
-        guard ProductManager.shared.isEligible(forProvider: name) else {
-            presentPurchaseScreen(forProduct: name.product)
+    private func next(withMetadata metadata: Infrastructure.Metadata) {
+        guard ProductManager.shared.isEligible(forProvider: metadata.name) else {
+            presentPurchaseScreen(forProduct: metadata.product)
             return
         }
 
-        let profile = ProviderConnectionProfile(name: name)
+        let profile = ProviderConnectionProfile(name: metadata.name)
         createdProfile = profile
         
         let accountVC = StoryboardScene.Main.accountIdentifier.instantiate()
-        let infrastructure = InfrastructureFactory.shared.get(name)
+        let infrastructure = InfrastructureFactory.shared.infrastructure(forName: metadata.name)
         accountVC.usernamePlaceholder = infrastructure.defaults.username
         accountVC.infrastructureName = infrastructure.name
         accountVC.delegate = self
@@ -63,6 +84,23 @@ class WizardProviderViewController: UITableViewController {
             service.addOrReplaceProfile(profile, credentials: credentials)
         }
     }
+    
+    private func updateProvidersList() {
+        let hud = HUD(view: view)
+        InfrastructureFactory.shared.updateIndex { [weak self] in
+            if let error = $0 {
+                hud.hide()
+                log.error("Unable to update providers list: \(error)")
+                return
+            }
+
+            ProductManager.shared.listProducts { _ in
+                self?.reloadModel()
+                self?.tableView.reloadData()
+                hud.hide()
+            }
+        }
+    }
 
     @IBAction private func close() {
         dismiss(animated: true, completion: nil)
@@ -72,21 +110,55 @@ class WizardProviderViewController: UITableViewController {
 // MARK: -
 
 extension WizardProviderViewController {
+    enum SectionType {
+        case availableProviders
+        
+        case listActions
+    }
+    
+    enum RowType {
+        case provider
+        
+        case updateList
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return model.numberOfSections
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return availableNames.count
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let name = availableNames[indexPath.row]
+        let row = model.row(at: indexPath)
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        cell.imageView?.image = name.logo
-        cell.leftText = name.rawValue
+        switch row {
+        case .provider:
+            let metadata = available[indexPath.row]
+            cell.apply(.current)
+            cell.imageView?.image = metadata.logo
+            cell.leftText = metadata.description
+            
+        case .updateList:
+            cell.applyAction(.current)
+            cell.imageView?.image = nil
+            cell.leftText = L10n.Core.Wizards.Provider.Cells.UpdateList.caption
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let name = availableNames[indexPath.row]
-        next(withName: name)
+        let row = model.row(at: indexPath)
+        switch row {
+        case .provider:
+            let metadata = available[indexPath.row]
+            next(withMetadata: metadata)
+        
+        case .updateList:
+            tableView.deselectRow(at: indexPath, animated: true)
+            updateProvidersList()
+        }
     }
 }
 

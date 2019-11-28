@@ -58,31 +58,35 @@ class AccountViewController: UIViewController, StrongTableHost {
     }
     
     private var guidanceString: String? {
-        guard let name = infrastructureName else {
+        guard let name = infrastructureName, let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
             return nil
         }
+        // XXX: should make this dynamic
         let V = L10n.Core.Account.Sections.Guidance.Footer.Infrastructure.self
-        switch name {
+        switch metadata.name {
         case .mullvad:
-            return V.mullvad(name.rawValue)
+            return V.mullvad(metadata.description)
             
-        case .nordVPN:
-            return V.nordvpn(name.rawValue)
+        case .nordvpn:
+            return V.nordvpn(metadata.description)
             
         case .pia:
-            return V.pia(name.rawValue)
+            return V.pia(metadata.description)
             
-        case .protonVPN:
-            return V.protonvpn(name.rawValue)
+        case .protonvpn:
+            return V.protonvpn(metadata.description)
 
-        case .tunnelBear:
-            return V.tunnelbear(name.rawValue)
+        case .tunnelbear:
+            return V.tunnelbear(metadata.description)
             
-        case .vyprVPN:
-            return V.vyprvpn(name.rawValue)
+        case .vyprvpn:
+            return V.vyprvpn(metadata.description)
             
         case .windscribe:
-            return V.windscribe(name.rawValue)
+            return V.windscribe(metadata.description)
+            
+        default:
+            return nil
         }
     }
     
@@ -266,7 +270,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
                 fatalError("Sign-up shown when not a provider profile")
             }
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Account.Cells.Signup.caption(name.rawValue)
+            cell.leftText = L10n.Core.Account.Cells.Signup.caption(name)
             cell.applyAction(.current)
             return cell
         }

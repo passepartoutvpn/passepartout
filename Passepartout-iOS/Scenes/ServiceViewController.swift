@@ -79,7 +79,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         self.profile = profile
         vpn.profile = profile
         
-        title = profile?.id
+        title = profile?.screenTitle
         navigationItem.rightBarButtonItem = (profile?.context == .host) ? itemEdit : nil
         if reloadingViews {
             reloadModel()
@@ -95,10 +95,9 @@ class ServiceViewController: UIViewController, StrongTableHost {
             setProfile(service.activeProfile)
         }
         if let providerProfile = profile as? ProviderConnectionProfile {
-            lastInfrastructureUpdate = InfrastructureFactory.shared.modificationDate(for: providerProfile.name)
+            lastInfrastructureUpdate = InfrastructureFactory.shared.modificationDate(forName: providerProfile.name)
         }
 
-        title = profile?.id
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         navigationItem.leftItemsSupplementBackButton = true
 
@@ -596,7 +595,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         
         let alert = UIAlertController.asAlert(
             L10n.Core.Service.Alerts.Download.title,
-            L10n.Core.Service.Alerts.Download.message(providerProfile.name.rawValue)
+            L10n.Core.Service.Alerts.Download.message(providerProfile.name)
         )
         alert.addCancelAction(L10n.Core.Global.cancel)
         alert.addPreferredAction(L10n.Core.Global.ok) {
