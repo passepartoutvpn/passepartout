@@ -58,32 +58,32 @@ class AccountViewController: UIViewController, StrongTableHost {
     }
     
     private var guidanceString: String? {
-        guard let name = infrastructureName else {
+        guard let name = infrastructureName, let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
             return nil
         }
-        // FIXME: make this dynamic?
+        // XXX: should make this dynamic
         let V = L10n.Core.Account.Sections.Guidance.Footer.Infrastructure.self
-        switch name {
+        switch metadata.name {
         case .mullvad:
-            return V.mullvad(name)
+            return V.mullvad(metadata.description)
             
         case .nordvpn:
-            return V.nordvpn(name)
+            return V.nordvpn(metadata.description)
             
         case .pia:
-            return V.pia(name)
+            return V.pia(metadata.description)
             
         case .protonvpn:
-            return V.protonvpn(name)
+            return V.protonvpn(metadata.description)
 
         case .tunnelbear:
-            return V.tunnelbear(name)
+            return V.tunnelbear(metadata.description)
             
         case .vyprvpn:
-            return V.vyprvpn(name)
+            return V.vyprvpn(metadata.description)
             
         case .windscribe:
-            return V.windscribe(name)
+            return V.windscribe(metadata.description)
             
         default:
             return nil
