@@ -25,16 +25,32 @@
 
 import UIKit
 import PassepartoutCore
+import Convenience
 
-class WizardProviderViewController: UITableViewController {
+class WizardProviderViewController: UITableViewController, StrongTableHost {
     var available: [Infrastructure.Metadata] = []
     
     private var createdProfile: ProviderConnectionProfile?
+    
+    // MARK: StrongTableHost
+    
+    let model = StrongTableModel<SectionType, RowType>()
+    
+    func reloadModel() {
+        model.clear()
+        model.add(.availableProviders)
+        model.add(.listActions)
+        model.set(.provider, count: available.count, forSection: .availableProviders)
+        model.set([.updateList], forSection: .listActions)
+    }
+    
+    // MARK: UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = L10n.Core.Organizer.Sections.Providers.header
+        reloadModel()
     }
     
     private func next(withMetadata metadata: Infrastructure.Metadata) {
@@ -63,6 +79,10 @@ class WizardProviderViewController: UITableViewController {
             service.addOrReplaceProfile(profile, credentials: credentials)
         }
     }
+    
+    private func updateProvidersList() {
+        // FIXME: update providers
+    }
 
     @IBAction private func close() {
         dismiss(animated: true, completion: nil)
@@ -72,21 +92,55 @@ class WizardProviderViewController: UITableViewController {
 // MARK: -
 
 extension WizardProviderViewController {
+    enum SectionType {
+        case availableProviders
+        
+        case listActions
+    }
+    
+    enum RowType {
+        case provider
+        
+        case updateList
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return model.numberOfSections
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return available.count
+        return model.numberOfRows(forSection: section)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let metadata = available[indexPath.row]
+        let row = model.row(at: indexPath)
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-        cell.imageView?.image = metadata.logo
-        cell.leftText = metadata.description
+        switch row {
+        case .provider:
+            let metadata = available[indexPath.row]
+            cell.apply(.current)
+            cell.imageView?.image = metadata.logo
+            cell.leftText = metadata.description
+            
+        case .updateList:
+            cell.applyAction(.current)
+            cell.imageView?.image = nil
+            cell.leftText = L10n.Core.Wizards.Provider.Cells.UpdateList.caption
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let metadata = available[indexPath.row]
-        next(withMetadata: metadata)
+        let row = model.row(at: indexPath)
+        switch row {
+        case .provider:
+            let metadata = available[indexPath.row]
+            next(withMetadata: metadata)
+        
+        case .updateList:
+            tableView.deselectRow(at: indexPath, animated: true)
+            updateProvidersList()
+        }
     }
 }
 
