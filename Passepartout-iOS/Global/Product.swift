@@ -26,21 +26,28 @@
 import Foundation
 import PassepartoutCore
 
-enum Product: String {
+struct Product: RawRepresentable, Equatable, Hashable {
+    private static let bundle = "com.algoritmico.ios.Passepartout"
+    
+    private static let donationsBundle = "\(bundle).donations"
+    
+    private static let featuresBundle = "\(bundle).features"
+    
+    private static let providersBundle = "\(bundle).providers"
     
     // MARK: Donations
     
-    case tinyDonation = "com.algoritmico.ios.Passepartout.donations.Tiny"
+    static let tinyDonation = Product(donationDescription: "Tiny")
 
-    case smallDonation = "com.algoritmico.ios.Passepartout.donations.Small"
+    static let smallDonation = Product(donationDescription: "Small")
 
-    case mediumDonation = "com.algoritmico.ios.Passepartout.donations.Medium"
+    static let mediumDonation = Product(donationDescription: "Medium")
 
-    case bigDonation = "com.algoritmico.ios.Passepartout.donations.Big"
+    static let bigDonation = Product(donationDescription: "Big")
 
-    case hugeDonation = "com.algoritmico.ios.Passepartout.donations.Huge"
+    static let hugeDonation = Product(donationDescription: "Huge")
 
-    case maxiDonation = "com.algoritmico.ios.Passepartout.donations.Maxi"
+    static let maxiDonation = Product(donationDescription: "Maxi")
     
     static let allDonations: [Product] = [
         .tinyDonation,
@@ -51,15 +58,19 @@ enum Product: String {
         .maxiDonation
     ]
 
+    private init(donationDescription: String) {
+        self.init(rawValue: "\(Product.donationsBundle).\(donationDescription)")!
+    }
+
     // MARK: Features
 
-    case unlimitedHosts = "com.algoritmico.ios.Passepartout.features.unlimited_hosts"
+    static let unlimitedHosts = Product(featureId: "unlimited_hosts")
 
-    case trustedNetworks = "com.algoritmico.ios.Passepartout.features.trusted_networks"
+    static let trustedNetworks = Product(featureId: "trusted_networks")
 
-    case siriShortcuts = "com.algoritmico.ios.Passepartout.features.siri"
+    static let siriShortcuts = Product(featureId: "features.siri")
 
-    case fullVersion = "com.algoritmico.ios.Passepartout.features.full_version"
+    static let fullVersion = Product(featureId: "full_version")
     
     static let allFeatures: [Product] = [
         .unlimitedHosts,
@@ -67,55 +78,64 @@ enum Product: String {
         .siriShortcuts,
         .fullVersion
     ]
+    
+    private init(featureId: String) {
+        self.init(rawValue: "\(Product.featuresBundle).\(featureId)")!
+    }
 
     // MARK: Providers
 
-    case mullvad = "com.algoritmico.ios.Passepartout.providers.Mullvad"
-
-    case nordVPN = "com.algoritmico.ios.Passepartout.providers.NordVPN"
-
-    case pia = "com.algoritmico.ios.Passepartout.providers.PIA"
-
-    case protonVPN = "com.algoritmico.ios.Passepartout.providers.ProtonVPN"
-
-    case tunnelBear = "com.algoritmico.ios.Passepartout.providers.TunnelBear"
-
-    case vyprVPN = "com.algoritmico.ios.Passepartout.providers.VyprVPN"
-
-    case windscribe = "com.algoritmico.ios.Passepartout.providers.Windscribe"
-
-    static let allProviders: [Product] = [
-        .mullvad,
-        .nordVPN,
-        .pia,
-        .protonVPN,
-        .tunnelBear,
-        .vyprVPN,
-        .windscribe
-    ]
+    static var allProviders: [Product] {
+        return InfrastructureFactory.shared.allMetadata.map {
+            return Product(providerId: $0.description)
+        }
+    }
     
+    fileprivate init(providerId: String) {
+        self.init(rawValue: "\(Product.providersBundle).\(providerId)")!
+    }
+
     // MARK: All
 
-    static let all: [Product] = allDonations + allFeatures + allProviders
+    static var all: [Product] {
+        return allDonations + allFeatures + allProviders
+    }
     
     var isDonation: Bool {
-        return Product.allDonations.contains(self)
+        return rawValue.hasPrefix(Product.donationsBundle)
     }
 
     var isFeature: Bool {
-        return Product.allFeatures.contains(self)
+        return rawValue.hasPrefix(Product.featuresBundle)
     }
 
     var isProvider: Bool {
-        return Product.allProviders.contains(self)
+        return rawValue.hasPrefix(Product.providersBundle)
+    }
+    
+    // MARK: RawRepresentable
+    
+    let rawValue: String
+    
+    init?(rawValue: String) {
+        self.rawValue = rawValue
+    }
+
+    // MARK: Equatable
+    
+    static func ==(lhs: Product, rhs: Product) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+    
+    // MARK: Hashable
+    
+    func hash(into hasher: inout Hasher) {
+        rawValue.hash(into: &hasher)
     }
 }
 
 extension Infrastructure.Metadata {
     var product: Product {
-        guard let product = Product(rawValue: "com.algoritmico.ios.Passepartout.providers.\(self)") else {
-            fatalError("Product not found for provider \(self)")
-        }
-        return product
+        return Product(providerId: description)
     }
 }

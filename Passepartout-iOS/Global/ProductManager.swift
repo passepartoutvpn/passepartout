@@ -72,6 +72,8 @@ class ProductManager: NSObject {
             return
         }
         inApp.requestProducts(withIdentifiers: Product.all) { _ in
+            log.debug("In-app products: \(self.inApp.products.map { $0.productIdentifier })")
+            
             completionHandler?(self.inApp.products)
         }
     }
