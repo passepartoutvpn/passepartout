@@ -15,6 +15,7 @@
 		0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E0C072B236087A100155AAC /* InfoPlist.strings */; };
 		0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1066C820E0F84A004F98B7 /* Cells.swift */; };
 		0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */; };
+		0E1C0A4F238FC7A5009FC087 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C0A4E238FC7A5009FC087 /* InfrastructureFactory.swift */; };
 		0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */; };
 		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
 		0E24273A225950450064A1A3 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E24273C225950450064A1A3 /* About.storyboard */; };
@@ -38,7 +39,6 @@
 		0E3152C6223FA04800F61841 /* VPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AF1214177920004D387 /* VPNProvider.swift */; };
 		0E3152C7223FA04800F61841 /* VPNStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */; };
 		0E3152C8223FA04D00F61841 /* Infrastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C1120CF0ABA0027975F /* Infrastructure.swift */; };
-		0E3152C9223FA04D00F61841 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */; };
 		0E3152CA223FA04D00F61841 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
 		0E3152CB223FA04D00F61841 /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C0F20CF09A30027975F /* Pool.swift */; };
 		0E3152CC223FA04D00F61841 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCEF214B9EF10035E9DE /* WebServices.swift */; };
@@ -171,6 +171,7 @@
 		0E0C072C236087C800155AAC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E1066C820E0F84A004F98B7 /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointViewController.swift; sourceTree = "<group>"; };
+		0E1C0A4E238FC7A5009FC087 /* InfrastructureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfrastructureFactory.swift; path = Submodules/Core/Passepartout/Sources/Services/InfrastructureFactory.swift; sourceTree = SOURCE_ROOT; };
 		0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderPresetViewController.swift; sourceTree = "<group>"; };
 		0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		0E23B4A12298559800304C30 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -276,7 +277,6 @@
 		0EBE2FD72360F89600F0D5AB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD82360F89600F0D5AB /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerViewController.swift; sourceTree = "<group>"; };
-		0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureFactory.swift; sourceTree = "<group>"; };
 		0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustPolicy.swift; sourceTree = "<group>"; };
 		0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionProfile.swift; sourceTree = "<group>"; };
 		0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionService.swift; sourceTree = "<group>"; };
@@ -551,7 +551,7 @@
 				0ED31C1120CF0ABA0027975F /* Infrastructure.swift */,
 				0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */,
 				0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */,
-				0EBE3A83213C6ADE00BFA2F5 /* InfrastructureFactory.swift */,
+				0E1C0A4E238FC7A5009FC087 /* InfrastructureFactory.swift */,
 				0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */,
 				0ED31C0F20CF09A30027975F /* Pool.swift */,
 				0E66A26F225FE25800F9C779 /* PoolCategory.swift */,
@@ -975,6 +975,7 @@
 				0E3152C6223FA04800F61841 /* VPNProvider.swift in Sources */,
 				0E3152DA223FA05800F61841 /* PlaceholderConnectionProfile.swift in Sources */,
 				0E3152D0223FA05400F61841 /* ConnectionService+Migration.swift in Sources */,
+				0E1C0A4F238FC7A5009FC087 /* InfrastructureFactory.swift in Sources */,
 				0E3152D5223FA05400F61841 /* SessionProxy+Communication.swift in Sources */,
 				0E3152D7223FA05400F61841 /* TrustedNetworks.swift in Sources */,
 				0E3152DB223FA05800F61841 /* ProfileKey.swift in Sources */,
@@ -997,7 +998,6 @@
 				0E3152D1223FA05400F61841 /* Credentials.swift in Sources */,
 				0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */,
 				0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */,
-				0E3152C9223FA04D00F61841 /* InfrastructureFactory.swift in Sources */,
 				0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */,
 				0E3152D4223FA05400F61841 /* Preferences.swift in Sources */,
 				0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */,

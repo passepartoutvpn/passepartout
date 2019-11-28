@@ -39,8 +39,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
     private var hosts: [String] = []
     
-    private var availableProviders: [Infrastructure.Metadata]?
-
     private var didShowSubreddit = false
 
     // MARK: StrongTableHost
@@ -176,8 +174,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             }
 
             vc.setProfile(selectedProfile)
-        } else if let providerVC = destination as? WizardProviderViewController {
-            providerVC.available = availableProviders ?? []
         }
     }
 
@@ -195,8 +191,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     }
     
     private func addNewProvider() {
-        let providers = service.availableProviders()
-        guard !providers.isEmpty else {
+        guard service.hasAvailableProviders() else {
             let alert = UIAlertController.asAlert(
                 L10n.Core.Organizer.Sections.Providers.header,
                 L10n.Core.Organizer.Alerts.ExhaustedProviders.message
@@ -205,7 +200,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             present(alert, animated: true, completion: nil)
             return
         }
-        availableProviders = providers
         perform(segue: StoryboardSegue.Organizer.addProviderSegueIdentifier)
     }
 

@@ -67,10 +67,6 @@ class ProductManager: NSObject {
     }
     
     func listProducts(completionHandler: (([SKProduct]) -> Void)?) {
-        guard inApp.products.isEmpty else {
-            completionHandler?(inApp.products)
-            return
-        }
         inApp.requestProducts(withIdentifiers: Product.all) { _ in
             log.debug("In-app products: \(self.inApp.products.map { $0.productIdentifier })")
             

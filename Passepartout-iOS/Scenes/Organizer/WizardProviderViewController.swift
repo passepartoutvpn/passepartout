@@ -26,9 +26,12 @@
 import UIKit
 import PassepartoutCore
 import Convenience
+import SwiftyBeaver
+
+private let log = SwiftyBeaver.self
 
 class WizardProviderViewController: UITableViewController, StrongTableHost {
-    var available: [Infrastructure.Metadata] = []
+    private var available: [Infrastructure.Metadata] = []
     
     private var createdProfile: ProviderConnectionProfile?
     
@@ -37,6 +40,8 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     let model = StrongTableModel<SectionType, RowType>()
     
     func reloadModel() {
+        available = TransientStore.shared.service.availableProviders()
+
         model.clear()
         model.add(.availableProviders)
         model.add(.listActions)
@@ -81,7 +86,20 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     }
     
     private func updateProvidersList() {
-        // FIXME: update providers
+        let hud = HUD(view: view)
+        InfrastructureFactory.shared.updateIndex { [weak self] in
+            if let error = $0 {
+                hud.hide()
+                log.error("Unable to update providers list: \(error)")
+                return
+            }
+
+            ProductManager.shared.listProducts { _ in
+                self?.reloadModel()
+                self?.tableView.reloadData()
+                hud.hide()
+            }
+        }
     }
 
     @IBAction private func close() {
