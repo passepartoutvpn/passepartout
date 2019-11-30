@@ -94,10 +94,14 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
                 return
             }
 
-            ProductManager.shared.listProducts { _ in
+            ProductManager.shared.listProducts { (products, error) in
+                hud.hide()
+                if let error = error {
+                    log.error("Unable to list products: \(error)")
+                    return
+                }
                 self?.reloadModel()
                 self?.tableView.reloadData()
-                hud.hide()
             }
         }
     }
