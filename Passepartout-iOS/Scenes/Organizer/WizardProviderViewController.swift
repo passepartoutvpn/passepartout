@@ -96,11 +96,21 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     }
     
     private func alertMissingInfrastructure(forName name: Infrastructure.Name, error: Error?) {
-        log.error("Unable to download missing \(name) infrastructure: \(error?.localizedDescription ?? "")")
-
-        let alert = UIAlertController.asAlert(title, "..........")
+        var message = L10n.Core.Wizards.Provider.Alerts.Unavailable.message
+        if let error = error {
+            log.error("Unable to download missing \(name) infrastructure (network error): \(error.localizedDescription)")
+            message.append(" \(error.localizedDescription)")
+        } else {
+            log.error("Unable to download missing \(name) infrastructure (API error)")
+        }
+        
+        let alert = UIAlertController.asAlert(name, message)
         alert.addCancelAction(L10n.Core.Global.ok)
         present(alert, animated: true, completion: nil)
+        
+        if let ip = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: ip, animated: true)
+        }
     }
 
     private func finish(withCredentials credentials: Credentials) {

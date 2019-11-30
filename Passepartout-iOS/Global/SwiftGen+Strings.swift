@@ -1048,6 +1048,12 @@ internal enum L10n {
         }
       }
       internal enum Provider {
+        internal enum Alerts {
+          internal enum Unavailable {
+            /// Could not download provider infrastructure, please retry later.
+            internal static let message = L10n.tr("Core", "wizards.provider.alerts.unavailable.message")
+          }
+        }
         internal enum Cells {
           internal enum UpdateList {
             /// Update list
