@@ -34,8 +34,6 @@ struct Theme {
         
         var accent1 = UIColor(rgb: 0xd69c68, alpha: 1.0)
 
-//        var primaryText: UIColor = .darkText
-        // TODO: uncomment for iOS 13 Dark Mode
         var primaryText: UIColor = {
             guard #available(iOS 13, *) else {
                 return .darkText
@@ -45,8 +43,6 @@ struct Theme {
         
         var primaryLightText: UIColor = .white
         
-//        var secondaryText: UIColor = .gray
-        // TODO: uncomment for iOS 13 Dark Mode
         var secondaryText: UIColor = {
             guard #available(iOS 13, *) else {
                 return .gray
