@@ -27,6 +27,9 @@ import UIKit
 import StoreKit
 import PassepartoutCore
 import Convenience
+import SwiftyBeaver
+
+private let log = SwiftyBeaver.self
 
 class DonationViewController: UITableViewController, StrongTableHost {
     private var donationList: [Product] = []
@@ -81,7 +84,11 @@ class DonationViewController: UITableViewController, StrongTableHost {
 
         ProductManager.shared.listProducts {
             self.isLoading = false
-            self.setProducts($0)
+            guard let products = $0 else {
+                log.error("Unable to list products: \($1?.localizedDescription ?? "")")
+                return
+            }
+            self.setProducts(products)
         }
     }
     

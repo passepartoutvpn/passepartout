@@ -58,21 +58,59 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
         reloadModel()
     }
     
-    private func next(withMetadata metadata: Infrastructure.Metadata) {
+    private func tryNext(withMetadata metadata: Infrastructure.Metadata) {
         guard ProductManager.shared.isEligible(forProvider: metadata.name) else {
             presentPurchaseScreen(forProduct: metadata.product)
             return
         }
 
+        // make sure that infrastructure exists locally
+        guard let _ = InfrastructureFactory.shared.infrastructure(forName: metadata.name) else {
+            let hud = HUD(view: view)
+            _ = InfrastructureFactory.shared.update(metadata.name, notBeforeInterval: nil) { [weak self] in
+                hud.hide()
+                guard let _ = $0 else {
+                    self?.alertMissingInfrastructure(forName: metadata.name, error: $1)
+                    return
+                }
+                self?.next(withMetadata: metadata)
+            }
+            return
+        }
+
+        next(withMetadata: metadata)
+    }
+
+    private func next(withMetadata metadata: Infrastructure.Metadata) {
         let profile = ProviderConnectionProfile(name: metadata.name)
         createdProfile = profile
         
         let accountVC = StoryboardScene.Main.accountIdentifier.instantiate()
-        let infrastructure = InfrastructureFactory.shared.infrastructure(forName: metadata.name)
+        guard let infrastructure = InfrastructureFactory.shared.infrastructure(forName: metadata.name) else {
+            fatalError("Moving to credentials with nil infrastructure, not downloaded properly?")
+        }
         accountVC.usernamePlaceholder = infrastructure.defaults.username
         accountVC.infrastructureName = infrastructure.name
         accountVC.delegate = self
         navigationController?.pushViewController(accountVC, animated: true)
+    }
+    
+    private func alertMissingInfrastructure(forName name: Infrastructure.Name, error: Error?) {
+        var message = L10n.Core.Wizards.Provider.Alerts.Unavailable.message
+        if let error = error {
+            log.error("Unable to download missing \(name) infrastructure (network error): \(error.localizedDescription)")
+            message.append(" \(error.localizedDescription)")
+        } else {
+            log.error("Unable to download missing \(name) infrastructure (API error)")
+        }
+        
+        let alert = UIAlertController.asAlert(name, message)
+        alert.addCancelAction(L10n.Core.Global.ok)
+        present(alert, animated: true, completion: nil)
+        
+        if let ip = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: ip, animated: true)
+        }
     }
 
     private func finish(withCredentials credentials: Credentials) {
@@ -94,10 +132,14 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
                 return
             }
 
-            ProductManager.shared.listProducts { _ in
+            ProductManager.shared.listProducts { (products, error) in
+                hud.hide()
+                if let error = error {
+                    log.error("Unable to list products: \(error)")
+                    return
+                }
                 self?.reloadModel()
                 self?.tableView.reloadData()
-                hud.hide()
             }
         }
     }
@@ -153,7 +195,7 @@ extension WizardProviderViewController {
         switch row {
         case .provider:
             let metadata = available[indexPath.row]
-            next(withMetadata: metadata)
+            tryNext(withMetadata: metadata)
         
         case .updateList:
             tableView.deselectRow(at: indexPath, animated: true)

@@ -474,13 +474,9 @@ extension OrganizerViewController {
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             let rowProfile = profileKey(at: indexPath)
             if rowProfile.context == .provider {
-                if let metadata = InfrastructureFactory.shared.metadata(forName: rowProfile.id) {
-                    cell.imageView?.image = metadata.logo
-                    cell.leftText = metadata.description
-                } else {
-                    cell.imageView?.image = Asset.Providers.placeholder.image
-                    cell.leftText = rowProfile.id
-                }
+                let metadata = InfrastructureFactory.shared.metadata(forName: rowProfile.id)
+                cell.imageView?.image = metadata?.logo
+                cell.leftText = metadata?.description ?? rowProfile.id
             } else {
                 cell.imageView?.image = nil
                 cell.leftText = rowProfile.id

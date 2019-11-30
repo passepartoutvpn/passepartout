@@ -90,7 +90,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         super.viewDidAppear(animated)
 
         let hud = HUD(view: view)
-        ProductManager.shared.listProducts { [weak self] _ in
+        ProductManager.shared.listProducts { [weak self] (_, _) in
             self?.reloadModel()
             self?.isLoading = false
             self?.tableView.reloadData()

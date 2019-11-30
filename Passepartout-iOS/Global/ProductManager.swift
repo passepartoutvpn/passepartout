@@ -66,12 +66,14 @@ class ProductManager: NSObject {
         SKPaymentQueue.default().remove(self)
     }
     
-    func listProducts(completionHandler: (([SKProduct]) -> Void)?) {
-        inApp.requestProducts(withIdentifiers: Product.all) { _ in
+    func listProducts(completionHandler: (([SKProduct]?, Error?) -> Void)?) {
+        inApp.requestProducts(withIdentifiers: Product.all, completionHandler: { _ in
             log.debug("In-app products: \(self.inApp.products.map { $0.productIdentifier })")
             
-            completionHandler?(self.inApp.products)
-        }
+            completionHandler?(self.inApp.products, nil)
+        }, failureHandler: {
+            completionHandler?(nil, $0)
+        })
     }
 
     func product(withIdentifier identifier: Product) -> SKProduct? {
