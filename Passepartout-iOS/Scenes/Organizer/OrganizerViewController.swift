@@ -76,8 +76,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         if ProductManager.shared.isEligibleForFeedback() {
             feedbackRows.append(.writeReview)
         }
-        feedbackRows.append(.visitAlternativeTo)
-        feedbackRows.append(.visitProductHunt)
         model.set(feedbackRows, forSection: .feedback)
 
         model.set([.openAbout], forSection: .about)
@@ -431,10 +429,6 @@ extension OrganizerViewController {
         
         case writeReview
         
-        case visitAlternativeTo
-
-        case visitProductHunt
-
         case openAbout
         
         case uninstall
@@ -527,16 +521,6 @@ extension OrganizerViewController {
             cell.leftText = L10n.Core.Organizer.Cells.WriteReview.caption
             return cell
             
-        case .visitAlternativeTo:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = "AlternativeTo"
-            return cell
-
-        case .visitProductHunt:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = "ProductHunt"
-            return cell
-
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Organizer.Cells.About.caption(GroupConstants.App.name)
@@ -597,12 +581,6 @@ extension OrganizerViewController {
         case .writeReview:
             writeReview()
             
-        case .visitAlternativeTo:
-            visitURL(AppConstants.URLs.alternativeTo)
-            
-        case .visitProductHunt:
-            visitURL(AppConstants.URLs.productHunt)
-
         case .openAbout:
             about()
             
