@@ -46,7 +46,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private let downloader = FileDownloader(
         temporaryURL: GroupConstants.App.cachesURL.appendingPathComponent("downloaded.tmp"),
-        timeout: AppConstants.Web.timeout
+        timeout: AppConstants.Services.timeout
     )
 
     private var profile: ConnectionProfile?
@@ -314,7 +314,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         let name = uncheckedProviderProfile.name
         
         let hud = HUD(view: view.window!)
-        let isUpdating = InfrastructureFactory.shared.update(name, notBeforeInterval: AppConstants.Web.minimumUpdateInterval) { (response, error) in
+        let isUpdating = InfrastructureFactory.shared.update(name, notBeforeInterval: AppConstants.Services.minimumUpdateInterval) { (response, error) in
             hud.hide()
             guard let response = response else {
                 return
@@ -476,7 +476,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private func testInternetConnectivity() {
         let hud = HUD(view: view.window!)
-        Utils.checkConnectivityURL(AppConstants.Web.connectivityURL, timeout: AppConstants.Web.connectivityTimeout) {
+        Utils.checkConnectivityURL(AppConstants.Services.connectivityURL, timeout: AppConstants.Services.connectivityTimeout) {
             hud.hide()
 
             let V = L10n.Core.Service.Alerts.TestConnectivity.Messages.self
