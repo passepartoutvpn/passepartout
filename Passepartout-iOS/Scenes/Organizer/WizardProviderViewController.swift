@@ -60,7 +60,7 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     
     private func tryNext(withMetadata metadata: Infrastructure.Metadata) {
         guard ProductManager.shared.isEligible(forProvider: metadata.name) else {
-            presentPurchaseScreen(forProduct: metadata.product)
+            presentPurchaseScreen(forProduct: metadata.product, delegate: self)
             return
         }
 
@@ -70,7 +70,7 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
             _ = InfrastructureFactory.shared.update(metadata.name, notBeforeInterval: nil) { [weak self] in
                 hud.hide()
                 guard let _ = $0 else {
-                    self?.alertMissingInfrastructure(forName: metadata.name, error: $1)
+                    self?.alertMissingInfrastructure(forMetadata: metadata, error: $1)
                     return
                 }
                 self?.next(withMetadata: metadata)
@@ -95,16 +95,16 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
         navigationController?.pushViewController(accountVC, animated: true)
     }
     
-    private func alertMissingInfrastructure(forName name: Infrastructure.Name, error: Error?) {
+    private func alertMissingInfrastructure(forMetadata metadata: Infrastructure.Metadata, error: Error?) {
         var message = L10n.Core.Wizards.Provider.Alerts.Unavailable.message
         if let error = error {
-            log.error("Unable to download missing \(name) infrastructure (network error): \(error.localizedDescription)")
+            log.error("Unable to download missing \(metadata.description) infrastructure (network error): \(error.localizedDescription)")
             message.append(" \(error.localizedDescription)")
         } else {
-            log.error("Unable to download missing \(name) infrastructure (API error)")
+            log.error("Unable to download missing \(metadata.description) infrastructure (API error)")
         }
         
-        let alert = UIAlertController.asAlert(name, message)
+        let alert = UIAlertController.asAlert(metadata.description, message)
         alert.addCancelAction(L10n.Core.Global.ok)
         present(alert, animated: true, completion: nil)
         
