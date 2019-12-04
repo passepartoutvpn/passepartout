@@ -63,10 +63,11 @@ extension UIColor {
 }
 
 extension UIViewController {
-    func presentPurchaseScreen(forProduct product: Product) {
+    func presentPurchaseScreen(forProduct product: Product, delegate: PurchaseViewControllerDelegate? = nil) {
         let nav = StoryboardScene.Purchase.initialScene.instantiate()
         let vc = nav.topViewController as? PurchaseViewController
         vc?.feature = product
+        vc?.delegate = delegate
 
         // enforce pre iOS 13 behavior
         nav.modalPresentationStyle = .fullScreen

@@ -35,6 +35,8 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     
     private var createdProfile: ProviderConnectionProfile?
     
+    private var selectedMetadata: Infrastructure.Metadata?
+    
     // MARK: StrongTableHost
     
     let model = StrongTableModel<SectionType, RowType>()
@@ -59,6 +61,8 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     }
     
     private func tryNext(withMetadata metadata: Infrastructure.Metadata) {
+        selectedMetadata = metadata
+
         guard ProductManager.shared.isEligible(forProvider: metadata.name) else {
             presentPurchaseScreen(forProduct: metadata.product, delegate: self)
             return
@@ -212,5 +216,16 @@ extension WizardProviderViewController: AccountViewControllerDelegate {
     
     func accountControllerDidComplete(_ vc: AccountViewController) {
         finish(withCredentials: vc.credentials)
+    }
+}
+
+// MARK: -
+
+extension WizardProviderViewController: PurchaseViewControllerDelegate {
+    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product) {
+        guard let metadata = selectedMetadata else {
+            return
+        }
+        tryNext(withMetadata: metadata)
     }
 }

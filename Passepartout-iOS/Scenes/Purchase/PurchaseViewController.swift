@@ -30,10 +30,16 @@ import Convenience
 
 private let log = SwiftyBeaver.self
 
+protocol PurchaseViewControllerDelegate: class {
+    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product)
+}
+
 class PurchaseViewController: UITableViewController, StrongTableHost {
     private var isLoading = true
 
     var feature: Product!
+    
+    weak var delegate: PurchaseViewControllerDelegate?
 
     private var skFeature: SKProduct?
 
@@ -135,7 +141,14 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
                 }
                 return
             }
-            self?.dismiss(animated: true, completion: nil)
+
+            self?.dismiss(animated: true) {
+                guard let weakSelf = self else {
+                    return
+                }
+                let product = weakSelf.feature.matchesStoreKitProduct(skProduct) ? weakSelf.feature! : .fullVersion
+                weakSelf.delegate?.purchaseController(weakSelf, didPurchase: product)
+            }
         }
     }
     
