@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import StoreKit
 import PassepartoutCore
 
 struct Product: RawRepresentable, Equatable, Hashable {
@@ -136,6 +137,12 @@ struct Product: RawRepresentable, Equatable, Hashable {
 
 extension Infrastructure.Metadata {
     var product: Product {
-        return Product(providerId: description)
+        return Product(providerId: inApp ?? description)
+    }
+}
+
+extension Product {
+    func matchesStoreKitProduct(_ skProduct: SKProduct) -> Bool {
+        return skProduct.productIdentifier == rawValue
     }
 }
