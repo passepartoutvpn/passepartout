@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.10.0 Beta 2194 (2019-11-21)
+## Unreleased
 
 ### Added
 
@@ -15,12 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - "Trusted networks" settings are now saved per profile. [#114](https://github.com/passepartoutvpn/passepartout-ios/issues/114)
 - Require explicit `--ca` and `--cipher` in .ovpn configuration file.
-- Restore provider flow after purchase.
 
 ### Fixed
 
 - Only show pushed server configuration.
 - Adjust UI to device text size. [#117](https://github.com/passepartoutvpn/passepartout-ios/pull/117)
+- Restore provider flow after purchase.
 
 ## 1.9.1 (2019-11-10)
 
