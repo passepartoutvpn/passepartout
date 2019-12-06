@@ -16,3 +16,4 @@ dist/
 templates/
 .env.secret*
 Preview.html
+l10n
