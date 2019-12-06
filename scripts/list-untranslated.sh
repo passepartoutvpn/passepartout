@@ -4,8 +4,14 @@ FILENAME_APP="App.strings"
 DIR_CORE="Submodules/Core/Passepartout/Resources"
 FILENAME_CORE="Core.strings"
 
-DIR=$DIR_APP
-FILENAME=$FILENAME_APP
+if [[ $2 = "core" ]]; then
+    DIR=$DIR_CORE
+    FILENAME=$FILENAME_CORE
+else
+    DIR=$DIR_APP
+    FILENAME=$FILENAME_APP
+fi
+
 LANG_BASE="en"
 LANG_TARGET="$1"
 STRINGS_BASE="$DIR/$LANG_BASE.lproj/$FILENAME"
