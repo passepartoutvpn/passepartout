@@ -24,13 +24,13 @@ PODS:
   - OpenSSL-Apple (1.1.1d.5a)
   - SSZipArchive (2.2.2)
   - SwiftyBeaver (1.8.3)
-  - TunnelKit/AppExtension (2.1.1):
+  - TunnelKit/AppExtension (2.2.0):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (2.1.1):
+  - TunnelKit/Core (2.2.0):
     - SwiftyBeaver
-  - TunnelKit/Extra/LZO (2.1.1)
-  - TunnelKit/Protocols/OpenVPN (2.1.1):
+  - TunnelKit/Extra/LZO (2.2.0)
+  - TunnelKit/Protocols/OpenVPN (2.2.0):
     - OpenSSL-Apple (~> 1.1.1d.5a)
     - TunnelKit/AppExtension
     - TunnelKit/Core
@@ -49,8 +49,8 @@ DEPENDENCIES:
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `8b17a13`)
-  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `8b17a13`)
+  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `aabdf83`)
+  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `aabdf83`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -66,7 +66,7 @@ EXTERNAL SOURCES:
     :commit: 3a191e8
     :git: https://github.com/keeshux/convenience
   TunnelKit:
-    :commit: 8b17a13
+    :commit: aabdf83
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
@@ -74,7 +74,7 @@ CHECKOUT OPTIONS:
     :commit: 3a191e8
     :git: https://github.com/keeshux/convenience
   TunnelKit:
-    :commit: 8b17a13
+    :commit: aabdf83
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
@@ -85,8 +85,8 @@ SPEC CHECKSUMS:
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
-  TunnelKit: 4b70c0d8b6727b407248b4271b7613225f63204b
+  TunnelKit: 67d819c4a545d3f95a81bfb6627834d786a5b4d5
 
-PODFILE CHECKSUM: 5b0c1f2c23e4a3ffa33152e231291a97351d7165
+PODFILE CHECKSUM: d74de0bd78856bde29729b65799a511847d95347
 
 COCOAPODS: 1.8.4
