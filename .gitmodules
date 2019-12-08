@@ -6,4 +6,4 @@
 	url = https://github.com/passepartoutvpn/passepartout-core-apple
 [submodule "Submodules/fastlane-ci-templates"]
 	path = Submodules/fastlane-ci-templates
-	url = git@github.com:keeshux/fastlane-ci-templates
+	url = https://github.com/keeshux/fastlane-ci-templates
