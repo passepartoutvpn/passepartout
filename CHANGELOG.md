@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - "Trusted networks" settings are now saved per profile. [#114](https://github.com/passepartoutvpn/passepartout-ios/issues/114)
 - Require explicit `--ca` and `--cipher` in .ovpn configuration file.
+- Revert fallback to CloudFlare DNS when no servers provided. [#116](https://github.com/passepartoutvpn/passepartout-ios/issues/116)
 
 ### Fixed
 

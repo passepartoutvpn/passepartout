@@ -31,6 +31,7 @@ class PacketTunnelProvider: OpenVPNTunnelProvider {
         dnsTimeout = GroupConstants.VPN.dnsTimeout
         logSeparator = GroupConstants.VPN.sessionMarker
         dataCountInterval = GroupConstants.VPN.dataCountInterval
+        fallbackDNSServers = []
         super.startTunnel(options: options, completionHandler: completionHandler)
     }
 }
