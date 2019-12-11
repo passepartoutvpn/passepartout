@@ -48,6 +48,10 @@
 "endpoint.sections.location_addresses.header" = "Adressen";
 "endpoint.sections.location_protocols.header" = "Protocollen";
 
+"provider.pool.actions.favorite" = "Favoriet";
+"provider.pool.actions.unfavorite" = "Unfavorite";
+"provider.pool.sections.empty_favorites.footer" = "Veeg naar links op een locatie om deze toe te voegen of te verwijderen uit Favorieten.";
+
 "provider.preset.cells.tech_details.caption" = "Technische details";
 
 "network_settings.cells.add_dns_server.caption" = "Voeg adress toe";

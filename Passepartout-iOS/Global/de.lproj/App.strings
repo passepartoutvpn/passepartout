@@ -48,6 +48,10 @@
 "endpoint.sections.location_addresses.header" = "Adressen";
 "endpoint.sections.location_protocols.header" = "Protokolle";
 
+"provider.pool.actions.favorite" = "Favorit";
+"provider.pool.actions.unfavorite" = "Nicht Favorit";
+"provider.pool.sections.empty_favorites.footer" = "Streichen Sie an einem Ort nach links, um ihn Ihren Favoriten hinzuzufügen oder daraus zu entfernen.";
+
 "provider.preset.cells.tech_details.caption" = "Technische Details";
 
 "network_settings.cells.add_dns_server.caption" = "Adresse hinzufügen";

@@ -48,6 +48,10 @@
 "endpoint.sections.location_addresses.header" = "Adresser";
 "endpoint.sections.location_protocols.header" = "Protokoll";
 
+"provider.pool.actions.favorite" = "Favorit";
+"provider.pool.actions.unfavorite" = "Inte favorit";
+"provider.pool.sections.empty_favorites.footer" = "Dra åt vänster på en plats för att lägga till eller ta bort den från favoriter.";
+
 "provider.preset.cells.tech_details.caption" = "Tekniska detaljer";
 
 "network_settings.cells.add_dns_server.caption" = "Lägg till adress";
