@@ -1,14 +1,20 @@
 ### Added
 
+- Dynamic providers, refresh supported list in real time.
 - Favorite provider locations.
+- Polish translations (Piotr Książek).
 
 ### Changed
 
 - "Trusted networks" settings are now saved per profile.
 - Require explicit `--ca` and `--cipher` in .ovpn configuration file.
+- Revert fallback to CloudFlare DNS when no servers provided.
+- German translations (Theodor Tietze).
 
 ### Fixed
 
 - Only show pushed server configuration.
 - Adjust UI to device text size.
+- Restore provider flow after purchase.
+- Improved some translations.
 
