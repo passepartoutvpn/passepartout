@@ -50,12 +50,12 @@
 
 "provider.pool.actions.favorite" = "Αγαπημένο";
 "provider.pool.actions.unfavorite" = "Δεν προτιμάται";
-"provider.pool.sections.empty_favorites.footer" = "Σύρετε αριστερά σε μια θέση για να την προσθέσετε ή να την καταργήσετε από τα Αγαπημένα.";
+"provider.pool.sections.empty_favorites.footer" = "Σείρετε αριστερά για να προσθέσετε ή να αφαιρέσεται από τα αγαπημένα.";
 
 "provider.preset.cells.tech_details.caption" = "Τεχνικές Λεπτομέρειες";
 
 "network_settings.cells.add_dns_server.caption" = "Προσθήκη Διεύθυνσης";
-"network_settings.cells.add_dns_domain.caption" = "Προσθήκη τομέα";
+"network_settings.cells.add_dns_domain.caption" = "Προσθήκη τομέα αναζήτησης";
 "network_settings.cells.proxy_bypass.caption" = "Παράκαμψη Τομέα";
 "network_settings.cells.add_proxy_bypass.caption" = "Προσθήκη τομέα παράκαμψης";
 
@@ -65,7 +65,7 @@
 "shortcuts.edit.cells.add_shortcut.caption" = "Προσθήκη Συντόμευσης";
 
 "purchase.title" = "Αγορά";
-"purchase.sections.products.footer" = "Κάθε προϊόν είναι μια αγορά μία φορά. Οι αγορές παροχέα δεν περιλαμβάνουν συνδρομή VPN.";
-"purchase.cells.full_version.extra_description" = "- Όλοι οι πάροχοι (συμπεριλαμβανομένων εκείνων που προστίθενται στο μέλλον)\n%@";
-"purchase.cells.restore.title" = "Επαναφορά αγορών";
-"purchase.cells.restore.description" = "Αν έχετε αγοράσει αυτή την εφαρμογή ή λειτουργία στο παρελθόν, μπορείτε να επαναφέρετε τις αγορές σας και αυτή η οθόνη δεν θα εμφανιστεί ξανά.";
+"purchase.sections.products.footer" = "Κάθε προϊόν είναι μια αγορά. Οι αγορές παρόχων δεν περιλαμβάνουν τη συνδρομή VPN.";
+"purchase.cells.full_version.extra_description" = "- Όλοι οι πάροχοι (περιλαμβάνονται και οι μελλοντικοί)\n%@";
+"purchase.cells.restore.title" = "Επαναφορά Αγορών";
+"purchase.cells.restore.description" = "Εαν αγοράσατε την εφαρμογή στο παρελθόν, μπορείτε να κάνετε επαναφορά αγορών και αυτή η οθόνη δε θα εμφανιστεί ξανά.";
