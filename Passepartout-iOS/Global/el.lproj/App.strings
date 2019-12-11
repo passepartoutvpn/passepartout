@@ -48,6 +48,10 @@
 "endpoint.sections.location_addresses.header" = "Διεθύνσεις";
 "endpoint.sections.location_protocols.header" = "Πρωτόκολλα";
 
+"provider.pool.actions.favorite" = "Αγαπημένο";
+"provider.pool.actions.unfavorite" = "Δεν προτιμάται";
+"provider.pool.sections.empty_favorites.footer" = "Σύρετε αριστερά σε μια θέση για να την προσθέσετε ή να την καταργήσετε από τα Αγαπημένα.";
+
 "provider.preset.cells.tech_details.caption" = "Τεχνικές Λεπτομέρειες";
 
 "network_settings.cells.add_dns_server.caption" = "Προσθήκη Διεύθυνσης";
