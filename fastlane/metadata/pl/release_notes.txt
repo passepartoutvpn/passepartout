@@ -1,11 +1,20 @@
 ### Added
 
-- Chinese (Simplified) translations (OnlyThen).
-- Support for iOS 13 Dark Mode.
+- Dynamic providers, refresh supported list in real time.
+- Favorite provider locations.
+- Polish translations (Piotr Książek).
+
+### Changed
+
+- "Trusted networks" settings are now saved per profile.
+- Require explicit `--ca` and `--cipher` in .ovpn configuration file.
+- Revert fallback to CloudFlare DNS when no servers provided.
+- German translations (Theodor Tietze).
 
 ### Fixed
 
-- Transparent navigation bar in iPadOS 13.
-- Unable to open .ovpn files in iOS 13.
-- Premature disconnection due to .staleSession error.
+- Only show pushed server configuration.
+- Adjust UI to device text size.
+- Restore provider flow after purchase.
+- Improved some translations.
 
