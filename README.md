@@ -3,7 +3,7 @@
 # [Passepartout][about-website]
 
 ![iOS 11+](https://img.shields.io/badge/ios-11+-green.svg)
-[![TunnelKit 2.1](https://img.shields.io/badge/tunnelkit-2.1-d69c68.svg)][dep-tunnelkit]
+[![TunnelKit 2.2](https://img.shields.io/badge/tunnelkit-2.2-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
 [![Join Telegram](https://img.shields.io/badge/chat-Telegram-blue.svg)][about-telegram]
