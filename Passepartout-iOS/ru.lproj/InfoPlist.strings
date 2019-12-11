@@ -23,4 +23,4 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"NSLocationWhenInUseUsageDescription" = "Считать имя текущего Wi-Fi";
+"NSLocationWhenInUseUsageDescription" = "Имя доступа подключённой Wi-Fi сети";

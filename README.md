@@ -154,9 +154,10 @@ This product includes software developed by the OpenSSL Project for use in the O
 - Dutch: Norbert de Vreede - [@paxpacis](https://github.com/paxpacis)
 - English: Davide De Rosa (author)
 - French: Julien Laniel - [@linkjul](https://github.com/linkjul)
-- German: Christian Lederer
+- German: Christian Lederer, Theodor Tietze
 - Greek: Konstantinos Koukoulakis
 - Italian: Davide De Rosa (author)
+- Polish: Piotr Książek
 - Portuguese: Helder Santana - [@heldr](https://github.com/heldr)
 - Russian: Alexander Korobynikov
 - Spanish: Davide De Rosa (author), Elena Vivó

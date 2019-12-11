@@ -172,6 +172,10 @@
 		0E1066C820E0F84A004F98B7 /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointViewController.swift; sourceTree = "<group>"; };
 		0E1C0A4E238FC7A5009FC087 /* InfrastructureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfrastructureFactory.swift; path = Submodules/Core/Passepartout/Sources/Services/InfrastructureFactory.swift; sourceTree = SOURCE_ROOT; };
+		0E1C0A50238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Intents.strings; sourceTree = "<group>"; };
+		0E1C0A51238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/App.strings; sourceTree = "<group>"; };
+		0E1C0A52238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0E1C0A53238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Core.strings; sourceTree = "<group>"; };
 		0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderPresetViewController.swift; sourceTree = "<group>"; };
 		0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		0E23B4A12298559800304C30 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -822,6 +826,7 @@
 				es,
 				pt,
 				"zh-Hans",
+				pl,
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
 			productRefGroup = 0E57F63920C83FC5008323CF /* Products */;
@@ -1100,6 +1105,7 @@
 				0EBE2FD62360F89500F0D5AB /* ru */,
 				0EBE2FD72360F89600F0D5AB /* es */,
 				0EBE2FD82360F89600F0D5AB /* sv */,
+				0E1C0A52238FFF97009FC087 /* pl */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1134,6 +1140,7 @@
 				0E776575229CF65D0023FA76 /* es */,
 				0E6ACB7822B1A5BB001B3C99 /* pt */,
 				0E2C54C4230056EF00F59453 /* zh-Hans */,
+				0E1C0A53238FFF97009FC087 /* pl */,
 			);
 			name = Core.strings;
 			sourceTree = "<group>";
@@ -1153,6 +1160,7 @@
 				0E776640229D0DA80023FA76 /* es */,
 				0E6ACB7722B1A57C001B3C99 /* pt */,
 				0E2C54C3230056C800F59453 /* zh-Hans */,
+				0E1C0A50238FFF97009FC087 /* pl */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
@@ -1171,6 +1179,7 @@
 				0E45E6F822BD898A00F19312 /* es */,
 				0E45E6F922BD898B00F19312 /* pt */,
 				0E2C54C52300570200F59453 /* zh-Hans */,
+				0E1C0A51238FFF97009FC087 /* pl */,
 			);
 			name = App.strings;
 			sourceTree = "<group>";
