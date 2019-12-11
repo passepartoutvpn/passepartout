@@ -76,9 +76,9 @@ class IssueReporter: NSObject {
         let bodyContent = AppConstants.IssueReporter.Email.template
         var bodyMetadata = "--\n\n"
         bodyMetadata += DebugLog(raw: "").decoratedString()
-        if let infrastructure = issue.infrastructure {
-            bodyMetadata += "Provider: \(infrastructure.name)\n"
-            if let lastUpdated = InfrastructureFactory.shared.modificationDate(forName: infrastructure.name) {
+        if let metadata = issue.infrastructure.metadata {
+            bodyMetadata += "Provider: \(metadata.description)\n"
+            if let lastUpdated = InfrastructureFactory.shared.modificationDate(forName: metadata.name) {
                 bodyMetadata += "Last updated: \(lastUpdated)\n"
             }
             bodyMetadata += "\n"
