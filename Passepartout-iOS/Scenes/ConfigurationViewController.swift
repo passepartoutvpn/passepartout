@@ -58,15 +58,12 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         model.clear()
         
         // sections
-        model.add(.communication)
-        model.add(.compression)
         if isEditable {
             model.add(.reset)
         }
         if !isServerPushed {
             model.add(.tls)
         }
-        model.add(.other)
 
         // headers
         model.setHeader(L10n.Core.Configuration.Sections.Communication.header, forSection: .communication)
@@ -90,7 +87,10 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
             if let _ = configuration.digest {
                 rows.append(.digest)
             }
-            model.set(rows, forSection: .communication)
+            if !rows.isEmpty {
+                model.add(.communication)
+                model.set(rows, forSection: .communication)
+            }
 
             rows = []
             if let _ = configuration.compressionFraming {
@@ -99,7 +99,10 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
             if let _ = configuration.compressionAlgorithm {
                 rows.append(.compressionAlgorithm)
             }
-            model.set(rows, forSection: .compression)
+            if !rows.isEmpty {
+                model.add(.compression)
+                model.set(rows, forSection: .compression)
+            }
 
             rows = []
             if let _ = configuration.keepAliveInterval {
@@ -111,8 +114,14 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
             if let _ = configuration.randomizeEndpoint {
                 rows.append(.randomEndpoint)
             }
-            model.set(rows, forSection: .other)
+            if !rows.isEmpty {
+                model.add(.other)
+                model.set(rows, forSection: .other)
+            }
         } else {
+            model.add(.communication)
+            model.add(.compression)
+            model.add(.other)
             model.set([.cipher, .digest], forSection: .communication)
             model.set([.compressionFraming, .compressionAlgorithm], forSection: .compression)
             model.set([.keepAlive, .renegSeconds, .randomEndpoint], forSection: .other)
