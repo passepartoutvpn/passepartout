@@ -1,3 +1,1 @@
-#!/bin/sh
-git checkout Passepartout*/Info.plist
-git checkout Passepartout*.pbxproj
+../Submodules/Core/scripts/reset-archive.sh
