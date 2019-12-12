@@ -112,11 +112,11 @@ extension UIViewController {
     }
 }
 
-extension UIView {
-    func applyPrimaryBackground(_ theme: Theme) {
-        backgroundColor = theme.palette.primaryBackground
-    }
-}
+//extension UIView {
+//    func applyPrimaryBackground(_ theme: Theme) {
+//        backgroundColor = theme.palette.primaryBackground
+//    }
+//}
 
 extension UILabel {
     func apply(_ theme: Theme) {
