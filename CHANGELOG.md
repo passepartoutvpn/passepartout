@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.10.0 Beta 2238 (2019-12-11)
+## Unreleased
 
 ### Added
 
@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Tunnel dying on idle or device locked. [#106](https://github.com/passepartoutvpn/passepartout-ios/issues/106), [tunnelkit#138](https://github.com/passepartoutvpn/tunnelkit/issues/138)
 - Only show pushed server configuration.
 - Adjust UI to device text size. [#117](https://github.com/passepartoutvpn/passepartout-ios/pull/117)
 - Restore provider flow after purchase.
