@@ -69,7 +69,7 @@ struct Product: RawRepresentable, Equatable, Hashable {
 
     static let trustedNetworks = Product(featureId: "trusted_networks")
 
-    static let siriShortcuts = Product(featureId: "features.siri")
+    static let siriShortcuts = Product(featureId: "siri")
 
     static let fullVersion = Product(featureId: "full_version")
     
