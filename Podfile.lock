@@ -23,14 +23,14 @@ PODS:
   - MBProgressHUD (1.1.0)
   - OpenSSL-Apple (1.1.1d.5a)
   - SSZipArchive (2.2.2)
-  - SwiftyBeaver (1.8.3)
-  - TunnelKit/AppExtension (2.2.0):
+  - SwiftyBeaver (1.8.4)
+  - TunnelKit/AppExtension (2.2.1):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (2.2.0):
+  - TunnelKit/Core (2.2.1):
     - SwiftyBeaver
-  - TunnelKit/Extra/LZO (2.2.0)
-  - TunnelKit/Protocols/OpenVPN (2.2.0):
+  - TunnelKit/Extra/LZO (2.2.1)
+  - TunnelKit/Protocols/OpenVPN (2.2.1):
     - OpenSSL-Apple (~> 1.1.1d.5a)
     - TunnelKit/AppExtension
     - TunnelKit/Core
@@ -49,8 +49,8 @@ DEPENDENCIES:
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `db78726`)
-  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `db78726`)
+  - TunnelKit/Extra/LZO (~> 2.2.1)
+  - TunnelKit/Protocols/OpenVPN (~> 2.2.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -60,22 +60,17 @@ SPEC REPOS:
     - OpenSSL-Apple
     - SSZipArchive
     - SwiftyBeaver
+    - TunnelKit
 
 EXTERNAL SOURCES:
   Convenience:
     :commit: 3a191e8
     :git: https://github.com/keeshux/convenience
-  TunnelKit:
-    :commit: db78726
-    :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
   Convenience:
     :commit: 3a191e8
     :git: https://github.com/keeshux/convenience
-  TunnelKit:
-    :commit: db78726
-    :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
   Convenience: 230739dd640bb826b640765d93715744721726be
@@ -84,9 +79,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
-  SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
-  TunnelKit: 67d819c4a545d3f95a81bfb6627834d786a5b4d5
+  SwiftyBeaver: f9a9aba96a6a6166e21682377804d728b0d20b95
+  TunnelKit: 554b30f3a37387169d00be45d120fa8df6c8068e
 
-PODFILE CHECKSUM: 8e261bf661da4ab8f57702f8d0292eb6c9c4edb8
+PODFILE CHECKSUM: 81a7b7e0f8d59b362c04b24ee9bebd428b540a51
 
 COCOAPODS: 1.8.4
