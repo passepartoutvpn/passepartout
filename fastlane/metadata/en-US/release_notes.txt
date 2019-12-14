@@ -13,7 +13,6 @@
 
 ### Fixed
 
-- Tunnel dying on idle or device locked.
 - Only show pushed server configuration.
 - Adjust UI to device text size.
 - Restore provider flow after purchase.
