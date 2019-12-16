@@ -40,7 +40,7 @@
 "service.cells.provider.refresh.caption" = "Infrastruktur neu laden";
 "service.cells.host.parameters.caption" = "Parameter";
 "service.cells.trusted_add_wifi.caption" = "Aktuelles WLAN hinzufügen";
-"service.alerts.location.message.denied" = "Sie müssen den Standortzugriff zulassen, um diesem Wi-Fi-Netzwerk zu vertrauen. Gehen Sie zu den iOS-Einstellungen und überprüfen Sie Ihre Standortberechtigungen für Passepartout.";
+"service.alerts.location.message.denied" = "Sie müssen den Standortzugriff zulassen, um diesem Wi-Fi-Netzwerk vertrauen zu können. Gehen Sie zu den iOS-Einstellungen und überprüfen Sie Ihre Standortberechtigungen für Passepartout.";
 "service.alerts.location.button.settings" = "Einstellungen";
 
 "account.sections.credentials.header" = "Zugangsdaten";
@@ -48,9 +48,9 @@
 "endpoint.sections.location_addresses.header" = "Adressen";
 "endpoint.sections.location_protocols.header" = "Protokolle";
 
-"provider.pool.actions.favorite" = "Favorit";
-"provider.pool.actions.unfavorite" = "Nicht Favorit";
-"provider.pool.sections.empty_favorites.footer" = "Streichen Sie an einem Ort nach links, um ihn Ihren Favoriten hinzuzufügen oder daraus zu entfernen.";
+"provider.pool.actions.favorite" = "Favorit hinzuzufügen";
+"provider.pool.actions.unfavorite" = "Favorit entfernen";
+"provider.pool.sections.empty_favorites.footer" = "Wische nach Links um einen Standort zu den Favoriten hinzuzufügen oder zu entfernen.";
 
 "provider.preset.cells.tech_details.caption" = "Technische Details";
 
@@ -64,8 +64,8 @@
 "shortcuts.edit.title" = "Kurzbefehle bearbeiten";
 "shortcuts.edit.cells.add_shortcut.caption" = "Kurzbefehl hinzufügen";
 
-"purchase.title" = "Kauf";
-"purchase.sections.products.footer" = "Jedes Produkt ist ein einmaliger Kauf. Beim Kauf eines Anbieters ist kein VPN-Abonnement enthalten.";
-"purchase.cells.full_version.extra_description" = "- Alle Anbieter (einschließlich der zukünftigen)\n%@";
+"purchase.title" = "Kaufen";
+"purchase.sections.products.footer" = "Jedes Produkt ist ein einmaliger Kauf. Der Kauf eines Providers beinhaltet kein VPN-Abonnement.";
+"purchase.cells.full_version.extra_description" = "- Alle Anbieter (inklusive Zukünftige)\n%@";
 "purchase.cells.restore.title" = "Einkäufe wiederherstellen";
-"purchase.cells.restore.description" = "Wenn Sie diese App oder Funktion in der Vergangenheit gekauft haben, können Sie Ihre Einkäufe wiederherstellen. Dieser Bildschirm wird nicht mehr angezeigt.";
+"purchase.cells.restore.description" = "Wenn Sie diese App oder Funktion in der Vergangenheit gekauft haben, können Sie Ihre Einkäufe wiederherstellen und dieser Bildschirm wird nicht mehr angezeigt.";
