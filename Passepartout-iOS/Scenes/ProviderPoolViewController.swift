@@ -111,7 +111,12 @@ class ProviderPoolViewController: UIViewController {
         if let indexPath = indexPath {
             reloadFavorites()
             if category.groups.count == 1 {
-                tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+                let indexSet = IndexSet(integer: indexPath.section)
+                if isShowingEmptyFavorites {
+                    tableView.reloadSections(indexSet, with: .automatic)
+                } else {
+                    tableView.deleteSections(indexSet, with: .automatic)
+                }
             } else {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
