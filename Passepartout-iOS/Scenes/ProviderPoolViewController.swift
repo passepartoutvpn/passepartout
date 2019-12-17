@@ -99,6 +99,10 @@ class ProviderPoolViewController: UIViewController {
             navigationItem.rightBarButtonItem?.apply(.current)
         }
         tableView.reloadData()
+
+        if let ip = selectedIndexPath {
+            tableView.selectRowAsync(at: ip)
+        }
     }
 
     private func favoriteGroup(withId groupId: String) {
