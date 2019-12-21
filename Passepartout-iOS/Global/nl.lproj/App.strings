@@ -49,13 +49,13 @@
 "endpoint.sections.location_protocols.header" = "Protocollen";
 
 "provider.pool.actions.favorite" = "Favoriet";
-"provider.pool.actions.unfavorite" = "Unfavorite";
-"provider.pool.sections.empty_favorites.footer" = "Veeg naar links op een locatie om deze toe te voegen of te verwijderen uit Favorieten.";
+"provider.pool.actions.unfavorite" = "Geen favoriet";
+"provider.pool.sections.empty_favorites.footer" = "Veeg naar links op een locatie om deze toe te voegen of te verwijderen aan Favorieten.";
 
 "provider.preset.cells.tech_details.caption" = "Technische details";
 
 "network_settings.cells.add_dns_server.caption" = "Voeg adress toe";
-"network_settings.cells.add_dns_domain.caption" = "Domein toevoegen";
+"network_settings.cells.add_dns_domain.caption" = "Zoekdomein toevoegen";
 "network_settings.cells.proxy_bypass.caption" = "Omzeil domein";
 "network_settings.cells.add_proxy_bypass.caption" = "Voeg omzeil optie voor domein toe";
 
@@ -64,8 +64,8 @@
 "shortcuts.edit.title" = "Beheer snelkoppelingen";
 "shortcuts.edit.cells.add_shortcut.caption" = "Voeg snelkoppeling toe";
 
-"purchase.title" = "Aankoop";
-"purchase.sections.products.footer" = "Elk product is een eenmalige aankoop. Provider-aankopen bevatten geen VPN-abonnement.";
-"purchase.cells.full_version.extra_description" = "- Alle providers (inclusief de toekomstige)\n%@";
-"purchase.cells.restore.title" = "Aankopen herstellen";
-"purchase.cells.restore.description" = "Als u deze app of functie in het verleden hebt gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer weergegeven.";
+"purchase.title" = "Aanschaffen";
+"purchase.sections.products.footer" = "Elk product is een eenmalige aankoop. Aankopen van providers bevatten geen VPN-abonnement.";
+"purchase.cells.full_version.extra_description" = "- Alle providers (inclusief toekomstige)\n%@";
+"purchase.cells.restore.title" = "Herstel Aankopen";
+"purchase.cells.restore.description" = "Als u deze app of functie in het verleden heeft gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer getoond.";
