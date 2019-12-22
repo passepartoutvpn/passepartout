@@ -173,13 +173,11 @@ class ProductManager: NSObject {
         return purchasedFeatures.contains(feature)
     }
 
-    func isEligible(forProvider name: Infrastructure.Name) -> Bool {
+    func isEligible(forProvider metadata: Infrastructure.Metadata) -> Bool {
         guard !isFullVersion() else {
             return true
         }
-        return purchasedFeatures.contains {
-            return $0.rawValue.hasSuffix("providers.\(name)")
-        }
+        return purchasedFeatures.contains(metadata.product)
     }
 
     func isEligibleForFeedback() -> Bool {
@@ -228,7 +226,10 @@ class ProductManager: NSObject {
 
         log.debug("Checking providers")
         for name in service.currentProviderNames() {
-            if !isEligible(forProvider: name) {
+            guard let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
+                continue
+            }
+            if !isEligible(forProvider: metadata) {
                 service.removeProfile(ProfileKey(name))
                 log.debug("\tRefunded provider: \(name)")
                 anyRefund = true
