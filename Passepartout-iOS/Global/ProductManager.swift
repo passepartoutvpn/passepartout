@@ -167,17 +167,11 @@ class ProductManager: NSObject {
     }
     
     func isEligible(forFeature feature: Product) -> Bool {
-        guard !isFullVersion() else {
-            return true
-        }
-        return purchasedFeatures.contains(feature)
+        return isFullVersion() || purchasedFeatures.contains(feature)
     }
 
     func isEligible(forProvider metadata: Infrastructure.Metadata) -> Bool {
-        guard !isFullVersion() else {
-            return true
-        }
-        return purchasedFeatures.contains(metadata.product)
+        return isFullVersion() || purchasedFeatures.contains(metadata.product)
     }
 
     func isEligibleForFeedback() -> Bool {
