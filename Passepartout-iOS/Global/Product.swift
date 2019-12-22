@@ -137,7 +137,7 @@ struct Product: RawRepresentable, Equatable, Hashable {
 
 extension Infrastructure.Metadata {
     var product: Product {
-        return Product(providerId: inApp ?? description)
+        return Product(providerId: inApp ?? name)
     }
 }
 
