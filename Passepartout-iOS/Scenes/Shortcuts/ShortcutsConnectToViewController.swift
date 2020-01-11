@@ -3,7 +3,7 @@
 //  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 3/18/19.
-//  Copyright (c) 2019 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2020 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
