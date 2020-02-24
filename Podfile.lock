@@ -20,7 +20,7 @@ PODS:
     - Kvitto/Core (= 1.0.3)
   - Kvitto/Core (1.0.3):
     - DTFoundation/DTASN1 (~> 1.7.13)
-  - MBProgressHUD (1.1.0)
+  - MBProgressHUD (1.2.0)
   - OpenSSL-Apple (1.1.1d.5a)
   - SSZipArchive (2.2.2)
   - SwiftyBeaver (1.8.4)
@@ -81,7 +81,7 @@ SPEC CHECKSUMS:
   Convenience: 230739dd640bb826b640765d93715744721726be
   DTFoundation: 25aa19bb7c6e225b1dfae195604fb8cf1da0ab4c
   Kvitto: d451f893f84ad669850b7cb7d3f8781363e14232
-  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   SwiftyBeaver: f9a9aba96a6a6166e21682377804d728b0d20b95
