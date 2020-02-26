@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Programming error in some SoftEther negotiation (Grivus). [tunnelkit#143](https://github.com/passepartoutvpn/tunnelkit/pull/143)
+- Default gateway not yet enforced for providers (e.g. TunnelBear). [passepartout-core-apple#4](https://github.com/passepartoutvpn/passepartout-core-apple/pull/4)
 
 ## 1.10.1 (2019-12-24)
 
