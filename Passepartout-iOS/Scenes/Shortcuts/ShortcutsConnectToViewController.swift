@@ -33,7 +33,7 @@ import Convenience
 class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewControllerDelegate, StrongTableHost {
     private let service = TransientStore.shared.service
 
-    private var providers: [String] = []
+    private var providers: [Infrastructure.Metadata] = []
     
     private var hosts: [String] = []
 
@@ -51,8 +51,8 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     }()
     
     func reloadModel() {
-        providers = service.ids(forContext: .provider).sorted()
-        hosts = service.ids(forContext: .host).sortedCaseInsensitive()
+        providers = service.currentProviderMetadata().sorted()
+        hosts = service.currentHostNames().sortedCaseInsensitive()
 
         if !providers.isEmpty {
             model.add(.providers)
@@ -124,7 +124,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         switch model.row(at: indexPath) {
         case .providerShortcut:
-            cell.leftText = providers[indexPath.row]
+            cell.leftText = providers[indexPath.row].description
             
         case .hostShortcut:
             cell.leftText = hosts[indexPath.row]
@@ -135,7 +135,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
         case .providerShortcut:
-            selectedProfile = service.profile(withContext: .provider, id: providers[indexPath.row])
+            selectedProfile = service.profile(withContext: .provider, id: providers[indexPath.row].name)
             pickProviderLocation()
 
         case .hostShortcut:

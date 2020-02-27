@@ -208,7 +208,7 @@ class ProductManager: NSObject {
 
         log.debug("Checking 'Unlimited hosts'")
         if !isEligible(forFeature: .unlimitedHosts) {
-            let ids = service.ids(forContext: .host)
+            let ids = service.currentHostNames()
             if ids.count > AppConstants.InApp.limitedNumberOfHosts {
                 for id in ids {
                     service.removeProfile(ProfileKey(.host, id))
@@ -246,7 +246,7 @@ class ProductManager: NSObject {
 
 extension ConnectionService {
     var hasReachedMaximumNumberOfHosts: Bool {
-        let numberOfHosts = ids(forContext: .host).count
+        let numberOfHosts = currentHostNames().count
         return numberOfHosts >= AppConstants.InApp.limitedNumberOfHosts
     }
 }

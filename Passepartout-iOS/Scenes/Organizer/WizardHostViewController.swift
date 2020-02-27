@@ -35,7 +35,7 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
     @IBOutlet private weak var itemNext: UIBarButtonItem!
     
     private let existingHosts: [String] = {
-        return TransientStore.shared.service.ids(forContext: .host).sortedCaseInsensitive()
+        return TransientStore.shared.service.currentHostNames().sortedCaseInsensitive()
     }()
     
     var parsingResult: OpenVPN.ConfigurationParser.Result? {

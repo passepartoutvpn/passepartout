@@ -85,8 +85,8 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         
         //
 
-        providers = service.ids(forContext: .provider).sorted()
-        hosts = service.ids(forContext: .host).sortedCaseInsensitive()
+        providers = service.currentProviderNames().sorted()
+        hosts = service.currentHostNames().sortedCaseInsensitive()
         
         var providerRows = [RowType](repeating: .profile, count: providers.count)
         var hostRows = [RowType](repeating: .profile, count: hosts.count)
