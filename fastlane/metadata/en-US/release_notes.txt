@@ -1,4 +1,6 @@
 ### Fixed
 
-- Provider purchases were not properly recognized/restored.
+- Programming error in some SoftEther negotiation (Grivus).
+- Default gateway not yet enforced for providers (e.g. TunnelBear).
+- Active profile lost after renaming.
 
