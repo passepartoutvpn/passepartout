@@ -248,7 +248,9 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
     
     private func doRenameCurrentProfile(to newId: String) {
-        let renamedProfile = service.renameProfile(uncheckedHostProfile, to: newId)
+        guard let renamedProfile = service.renameProfile(uncheckedHostProfile, to: newId) else {
+            return
+        }
         setProfile(renamedProfile, reloadingViews: false)
     }
     
