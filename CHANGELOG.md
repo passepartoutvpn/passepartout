@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.11.0 Beta 2276 (2020-02-27)
 
+### Changed
+
+- Allow any character in host profile name. [#26](https://github.com/passepartoutvpn/passepartout-ios/issues/26)
+
 ### Fixed
 
 - Programming error in some SoftEther negotiation (Grivus). [tunnelkit#143](https://github.com/passepartoutvpn/tunnelkit/pull/143)
