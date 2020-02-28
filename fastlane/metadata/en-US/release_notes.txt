@@ -1,3 +1,7 @@
+### Changed
+
+- Allow any character in host profile name.
+
 ### Fixed
 
 - Programming error in some SoftEther negotiation (Grivus).
