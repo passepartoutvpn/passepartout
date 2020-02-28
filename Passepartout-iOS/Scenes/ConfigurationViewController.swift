@@ -60,6 +60,7 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         // sections
         if isEditable {
             model.add(.reset)
+            model.setHeader("", forSection: .reset)
         }
         if !isServerPushed {
             model.add(.tls)

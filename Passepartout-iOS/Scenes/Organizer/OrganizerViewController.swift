@@ -85,8 +85,8 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         
         //
 
-        providers = service.currentProviderNames().sorted()
-        hosts = service.currentHostNames().sortedCaseInsensitive()
+        providers = service.sortedProviderNames()
+        hosts = service.sortedHostIds()
         
         var providerRows = [RowType](repeating: .profile, count: providers.count)
         var hostRows = [RowType](repeating: .profile, count: hosts.count)
@@ -467,11 +467,10 @@ extension OrganizerViewController {
             if rowProfile.context == .provider {
                 let metadata = InfrastructureFactory.shared.metadata(forName: rowProfile.id)
                 cell.imageView?.image = metadata?.logo
-                cell.leftText = metadata?.description ?? rowProfile.id
             } else {
                 cell.imageView?.image = nil
-                cell.leftText = rowProfile.id
             }
+            cell.leftText = service.screenTitle(rowProfile)
             cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Core.Organizer.Cells.Profile.Value.current : nil
             return cell
 
@@ -693,7 +692,7 @@ extension OrganizerViewController: ConnectionServiceDelegate {
         perform(segue: StoryboardSegue.Organizer.selectProfileSegueIdentifier, sender: profile)
     }
     
-    func connectionService(didRename oldProfile: ConnectionProfile, to newProfile: ConnectionProfile) {
+    func connectionService(didRename profile: ConnectionProfile, to newTitle: String) {
         TransientStore.shared.serialize(withProfiles: false) // rename
 
         reloadModel()

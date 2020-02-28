@@ -79,7 +79,11 @@ class ServiceViewController: UIViewController, StrongTableHost {
         self.profile = profile
         vpn.profile = profile
         
-        title = profile?.screenTitle
+        if let profile = profile {
+            title = service.screenTitle(ProfileKey(profile))
+        } else {
+            title = nil
+        }
         navigationItem.rightBarButtonItem = (profile?.context == .host) ? itemEdit : nil
         if reloadingViews {
             reloadModel()
@@ -230,34 +234,36 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
 
     @IBAction private func renameProfile() {
-        let alert = UIAlertController.asAlert(L10n.Core.Service.Alerts.Rename.title, L10n.Core.Global.Host.TitleInput.message)
+        let alert = UIAlertController.asAlert(L10n.Core.Service.Alerts.Rename.title, nil)
         alert.addTextField { (field) in
-            field.text = self.profile?.id
+            field.text = self.service.screenTitle(ProfileKey(self.uncheckedProfile))
             field.applyProfileId(.current)
             field.delegate = self
         }
         pendingRenameAction = alert.addPreferredAction(L10n.Core.Global.ok) {
-            guard let newId = alert.textFields?.first?.text else {
+            guard let newTitle = alert.textFields?.first?.text else {
                 return
             }
-            self.doRenameCurrentProfile(to: newId)
+            self.doRenameCurrentProfile(to: newTitle)
         }
         alert.addCancelAction(L10n.Core.Global.cancel)
         pendingRenameAction?.isEnabled = false
         present(alert, animated: true, completion: nil)
     }
     
-    private func doRenameCurrentProfile(to newId: String) {
-        guard let renamedProfile = service.renameProfile(uncheckedHostProfile, to: newId) else {
+    private func doRenameCurrentProfile(to newTitle: String) {
+        guard let profile = profile else {
             return
         }
-        setProfile(renamedProfile, reloadingViews: false)
+        service.renameProfile(profile, to: newTitle)
+        setProfile(profile, reloadingViews: false)
     }
     
     private func toggleVpnService(cell: ToggleTableViewCell) {
         if cell.isOn {
             if #available(iOS 12, *) {
-                IntentDispatcher.donateConnection(with: uncheckedProfile)
+                let title = service.screenTitle(ProfileKey(uncheckedProfile))
+                IntentDispatcher.donateConnection(with: uncheckedProfile, title: title)
             }
             guard !service.needsCredentials(for: uncheckedProfile) else {
                 let alert = UIAlertController.asAlert(
@@ -1424,7 +1430,8 @@ extension ServiceViewController: ProviderPoolViewControllerDelegate {
         vpn.reinstallIfEnabled()
 
         if #available(iOS 12, *) {
-            IntentDispatcher.donateConnection(with: uncheckedProviderProfile)
+            let title = service.screenTitle(forProviderName: uncheckedProviderProfile.name)
+            IntentDispatcher.donateConnection(with: uncheckedProviderProfile, title: title)
         }
     }
     

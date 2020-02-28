@@ -33,7 +33,7 @@ import Convenience
 class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewControllerDelegate, StrongTableHost {
     private let service = TransientStore.shared.service
 
-    private var providers: [Infrastructure.Metadata] = []
+    private var providers: [Infrastructure.Name] = []
     
     private var hosts: [String] = []
 
@@ -51,8 +51,8 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     }()
     
     func reloadModel() {
-        providers = service.currentProviderMetadata().sorted()
-        hosts = service.currentHostNames().sortedCaseInsensitive()
+        providers = service.sortedProviderNames()
+        hosts = service.sortedHostIds()
 
         if !providers.isEmpty {
             model.add(.providers)
@@ -124,10 +124,16 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         switch model.row(at: indexPath) {
         case .providerShortcut:
-            cell.leftText = providers[indexPath.row].description
+            let name = providers[indexPath.row]
+            if let metadata = InfrastructureFactory.shared.metadata(forName: name) {
+                cell.leftText = metadata.description
+            } else {
+                cell.leftText = name
+            }
             
         case .hostShortcut:
-            cell.leftText = hosts[indexPath.row]
+            let id = hosts[indexPath.row]
+            cell.leftText = service.screenTitle(forHostId: id)
         }
         return cell
     }
@@ -135,7 +141,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
         case .providerShortcut:
-            selectedProfile = service.profile(withContext: .provider, id: providers[indexPath.row].name)
+            selectedProfile = service.profile(withContext: .provider, id: providers[indexPath.row])
             pickProviderLocation()
 
         case .hostShortcut:
@@ -150,7 +156,8 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
         guard let host = selectedProfile as? HostConnectionProfile else {
             fatalError("Not a HostConnectionProfile")
         }
-        addShortcut(with: IntentDispatcher.intentConnect(profile: host))
+        let title = service.screenTitle(forHostId: host.id)
+        addShortcut(with: IntentDispatcher.intentConnect(profile: host, title: title))
     }
     
     private func addMoveToLocation(pool: Pool) {

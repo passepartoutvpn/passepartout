@@ -34,9 +34,7 @@ private let log = SwiftyBeaver.self
 class WizardHostViewController: UITableViewController, StrongTableHost {
     @IBOutlet private weak var itemNext: UIBarButtonItem!
     
-    private let existingHosts: [String] = {
-        return TransientStore.shared.service.currentHostNames().sortedCaseInsensitive()
-    }()
+    private let existingHostIds = TransientStore.shared.service.sortedHostIds()
     
     var parsingResult: OpenVPN.ConfigurationParser.Result? {
         didSet {
@@ -47,19 +45,23 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
     var removesConfigurationOnCancel = false
 
     private var createdProfile: HostConnectionProfile?
+    
+    private var createdTitle: String?
+    
+    private var replacedProfile: ConnectionProfile?
 
     // MARK: StrongTableHost
 
     lazy var model: StrongTableModel<SectionType, RowType> = {
         let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         model.add(.meta)
-        model.setFooter(L10n.Core.Global.Host.TitleInput.message, forSection: .meta)
-        if !existingHosts.isEmpty {
+//        model.setFooter(L10n.Core.Global.Host.TitleInput.message, forSection: .meta)
+        if !existingHostIds.isEmpty {
             model.add(.existing)
             model.setHeader(L10n.App.Wizards.Host.Sections.Existing.header, forSection: .existing)
         }
         model.set([.titleInput], forSection: .meta)
-        model.set(.existingHost, count: existingHosts.count, forSection: .existing)
+        model.set(.existingHost, count: existingHostIds.count, forSection: .existing)
         return model
     }()
     
@@ -104,26 +106,28 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
             return
         }
 
-        let profile = HostConnectionProfile(title: enteredTitle, hostname: hostname)
+        let profile = HostConnectionProfile(hostname: hostname)
         let builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
         profile.parameters = builder.build()
 
         let service = TransientStore.shared.service
-        guard !service.containsProfile(profile) else {
-            let replacedProfile = service.profile(withContext: profile.context, id: profile.id)
+        replacedProfile = nil
+        if let existingHostId = service.existingHostId(withTitle: enteredTitle) {
+            replacedProfile = service.profile(withContext: profile.context, id: existingHostId)
             let alert = UIAlertController.asAlert(title, L10n.Core.Wizards.Host.Alerts.Existing.message)
             alert.addPreferredAction(L10n.Core.Global.ok) {
-                self.next(withProfile: profile, replacedProfile: replacedProfile)
+                self.next(withProfile: profile, title: enteredTitle)
             }
             alert.addCancelAction(L10n.Core.Global.cancel)
             present(alert, animated: true, completion: nil)
             return
         }
-        next(withProfile: profile, replacedProfile: nil)
+        next(withProfile: profile, title: enteredTitle)
     }
     
-    private func next(withProfile profile: HostConnectionProfile, replacedProfile: ConnectionProfile?) {
+    private func next(withProfile profile: HostConnectionProfile, title: String) {
         createdProfile = profile
+        createdTitle = title
 
         let accountVC = StoryboardScene.Main.accountIdentifier.instantiate()
         if let replacedProfile = replacedProfile {
@@ -134,7 +138,7 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
     }
     
     private func finish(withCredentials credentials: Credentials) {
-        guard let profile = createdProfile else {
+        guard let profile = createdProfile, let title = createdTitle else {
             fatalError("No profile created?")
         }
         let service = TransientStore.shared.service
@@ -150,7 +154,10 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
             }
         }
         dismiss(animated: true) {
-            service.addOrReplaceProfile(profile, credentials: credentials)
+            if let replacedProfile = self.replacedProfile {
+                service.removeProfile(ProfileKey(replacedProfile))
+            }
+            service.addOrReplaceProfile(profile, credentials: credentials, title: title)
         }
     }
 
@@ -206,15 +213,15 @@ extension WizardHostViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = L10n.App.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
-            cell.allowedCharset = .filename
+//            cell.allowedCharset = .filename
             cell.field.applyProfileId(.current)
             cell.delegate = self
             return cell
             
         case .existingHost:
-            let hostTitle = existingHosts[indexPath.row]
+            let existingTitle = hostTitle(at: indexPath.row)
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = hostTitle
+            cell.leftText = existingTitle
             cell.accessoryType = .none
             cell.isTappable = true
             return cell
@@ -227,14 +234,18 @@ extension WizardHostViewController {
             guard let titleIndexPath = model.indexPath(forRow: .titleInput, ofSection: .meta) else {
                 fatalError("Could not found title cell?")
             }
-            let hostTitle = existingHosts[indexPath.row]
+            let existingTitle = hostTitle(at: indexPath.row)
             let cellTitle = tableView.cellForRow(at: titleIndexPath) as? FieldTableViewCell
-            cellTitle?.field.text = hostTitle
+            cellTitle?.field.text = existingTitle
             tableView.deselectRow(at: indexPath, animated: true)
             
         default:
             break
         }
+    }
+    
+    private func hostTitle(at row: Int) -> String {
+        return TransientStore.shared.service.screenTitle(forHostId: existingHostIds[row])
     }
 }
 
