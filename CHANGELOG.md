@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.11.0 Beta 2279 (2020-02-28)
+## Unreleased
 
 ### Changed
 
@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Programming error in some SoftEther negotiation (Grivus). [tunnelkit#143](https://github.com/passepartoutvpn/tunnelkit/pull/143)
 - Default gateway not yet enforced for providers (e.g. TunnelBear). [passepartout-core-apple#4](https://github.com/passepartoutvpn/passepartout-core-apple/pull/4)
 - Active profile lost after renaming. [#128](https://github.com/passepartoutvpn/passepartout-ios/issues/128)
+- Handle server shutdown/restart (remote `--explicit-exit-notify`). [tunnelkit#131](https://github.com/passepartoutvpn/tunnelkit/issues/131)
 
 ## 1.10.1 (2019-12-24)
 

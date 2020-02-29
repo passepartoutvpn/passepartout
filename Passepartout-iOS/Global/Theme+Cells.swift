@@ -145,6 +145,9 @@ extension SettingTableViewCell {
                 case .gatewayUnattainable:
                     disconnectionReason = L10n.Core.Vpn.Errors.gateway
                     
+                case .serverShutdown:
+                    disconnectionReason = L10n.Core.Vpn.Errors.shutdown
+                    
                 default:
                     break
                 }

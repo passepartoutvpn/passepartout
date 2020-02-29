@@ -1032,6 +1032,8 @@ internal enum L10n {
         internal static let network = L10n.tr("Core", "vpn.errors.network")
         /// Missing routing
         internal static let routing = L10n.tr("Core", "vpn.errors.routing")
+        /// Server shutdown
+        internal static let shutdown = L10n.tr("Core", "vpn.errors.shutdown")
         /// Timeout
         internal static let timeout = L10n.tr("Core", "vpn.errors.timeout")
         /// TLS failed
