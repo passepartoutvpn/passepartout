@@ -185,14 +185,24 @@ extension MFMailComposeViewController {
     }
 }
 
-// FIXME: load from index JSON
 extension Infrastructure.Metadata {
+
+    // FIXME: load from index JSON
     var logo: UIImage? {
         let bundle = Bundle(for: AppDelegate.self)
         guard let image = AssetImageTypeAlias(named: name, in: bundle, compatibleWith: nil) else {
             return Asset.Providers.placeholder.image
         }
         return image
+    }
+    
+    var guidanceString: String? {
+        let key = "account.sections.guidance.footer.infrastructure.\(name)"
+        let format = NSLocalizedString(key, tableName: "Core", bundle: Bundle(for: AppDelegate.self), comment: "")
+        guard !format.isEmpty else {
+            return nil
+        }
+        return String(format: format, locale: .current, description)
     }
 }
 
