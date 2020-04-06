@@ -7,4 +7,6 @@
 - Programming error in some SoftEther negotiation (Grivus).
 - Default gateway not yet enforced for providers (e.g. TunnelBear).
 - Active profile lost after renaming.
+- Handle server shutdown/restart (remote `--explicit-exit-notify`).
+- Handle explicit IPv4/IPv6 protocols (`4` or `6` suffix in `--proto`).
 
