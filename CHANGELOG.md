@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default gateway not yet enforced for providers (e.g. TunnelBear). [passepartout-core-apple#4](https://github.com/passepartoutvpn/passepartout-core-apple/pull/4)
 - Active profile lost after renaming. [#128](https://github.com/passepartoutvpn/passepartout-ios/issues/128)
 - Handle server shutdown/restart (remote `--explicit-exit-notify`). [tunnelkit#131](https://github.com/passepartoutvpn/tunnelkit/issues/131)
+- Handle explicit IPv4/IPv6 protocols (`4` or `6` suffix in `--proto`). [tunnelkit#153](https://github.com/passepartoutvpn/tunnelkit/issues/153)
 
 ## 1.10.1 (2019-12-24)
 
