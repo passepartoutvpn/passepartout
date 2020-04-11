@@ -52,18 +52,28 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     }
     
     // MARK: UIViewController
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(didReloadReceipt), name: ProductManager.didReloadReceipt, object: nil)
 
         title = L10n.Core.Organizer.Sections.Providers.header
         reloadModel()
     }
     
-    private func tryNext(withMetadata metadata: Infrastructure.Metadata) {
+    private func tryNext(withMetadata metadata: Infrastructure.Metadata, purchaseIfNecessary: Bool) {
         selectedMetadata = metadata
 
         guard ProductManager.shared.isEligible(forProvider: metadata) else {
+            guard purchaseIfNecessary else {
+                return
+            }
             presentPurchaseScreen(forProduct: metadata.product, delegate: self)
             return
         }
@@ -199,7 +209,7 @@ extension WizardProviderViewController {
         switch row {
         case .provider:
             let metadata = available[indexPath.row]
-            tryNext(withMetadata: metadata)
+            tryNext(withMetadata: metadata, purchaseIfNecessary: true)
         
         case .updateList:
             tableView.deselectRow(at: indexPath, animated: true)
@@ -226,6 +236,13 @@ extension WizardProviderViewController: PurchaseViewControllerDelegate {
         guard let metadata = selectedMetadata else {
             return
         }
-        tryNext(withMetadata: metadata)
+        tryNext(withMetadata: metadata, purchaseIfNecessary: false)
+    }
+    
+    @objc private func didReloadReceipt() {
+        guard let metadata = selectedMetadata else {
+            return
+        }
+        tryNext(withMetadata: metadata, purchaseIfNecessary: false)
     }
 }
