@@ -21,9 +21,9 @@ PODS:
   - Kvitto/Core (1.0.3):
     - DTFoundation/DTASN1 (~> 1.7.13)
   - MBProgressHUD (1.2.0)
-  - OpenSSL-Apple (1.1.1d.5a)
+  - OpenSSL-Apple (1.1.1f.6)
   - SSZipArchive (2.2.2)
-  - SwiftyBeaver (1.9.0)
+  - SwiftyBeaver (1.9.1)
   - TunnelKit/AppExtension (2.2.2):
     - SwiftyBeaver
     - TunnelKit/Core
@@ -49,8 +49,8 @@ DEPENDENCIES:
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `d24fe30`)
-  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `d24fe30`)
+  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `735c1fd`)
+  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `735c1fd`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -66,7 +66,7 @@ EXTERNAL SOURCES:
     :commit: 3a191e8
     :git: https://github.com/keeshux/convenience
   TunnelKit:
-    :commit: d24fe30
+    :commit: 735c1fd
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
@@ -74,7 +74,7 @@ CHECKOUT OPTIONS:
     :commit: 3a191e8
     :git: https://github.com/keeshux/convenience
   TunnelKit:
-    :commit: d24fe30
+    :commit: 735c1fd
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
@@ -82,11 +82,11 @@ SPEC CHECKSUMS:
   DTFoundation: 25aa19bb7c6e225b1dfae195604fb8cf1da0ab4c
   Kvitto: d451f893f84ad669850b7cb7d3f8781363e14232
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OpenSSL-Apple: 2c9efbc94e0a1ada434cc197b02bd70052a82281
+  OpenSSL-Apple: 07d3f68add280b474278320232fb89625dd29fe9
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
-  SwiftyBeaver: d39e7c376bf15e9fffca8263b8fd1f42ea56aa2d
+  SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
   TunnelKit: 1733ed87934deb57edc7aa5f4b25185bf302a7d4
 
-PODFILE CHECKSUM: fe42186fe1c854bdca7d7f0a3a6241f219653044
+PODFILE CHECKSUM: 9e07692ed4dae230687dba3ac8b85dc74c3a0d6b
 
 COCOAPODS: 1.9.1
