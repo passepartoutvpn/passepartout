@@ -11,8 +11,6 @@
  
 Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS.
 
-<a href="https://www.patreon.com/join/keeshux/checkout?rid=3009474"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160"></a>
-
 ## Overview
 
 ### All profiles in one place
@@ -199,6 +197,5 @@ Website: [passepartoutvpn.app][about-website]
 
 [about-twitter]: https://twitter.com/keeshux
 [about-website]: https://passepartoutvpn.app
-[about-patreon]: https://www.patreon.com/keeshux
 [about-reddit]: https://www.reddit.com/r/passepartout
 [about-telegram]: https://t.me/passepartoutvpn
