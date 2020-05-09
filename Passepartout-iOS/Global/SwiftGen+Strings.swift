@@ -279,6 +279,10 @@ internal enum L10n {
         internal enum Guidance {
           internal enum Footer {
             internal enum Infrastructure {
+              /// Use your %@ website credentials.
+              internal static func hideme(_ p1: String) -> String {
+                return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.hideme", p1)
+              }
               /// Use your %@ website credentials. Your username is usually numeric (without spaces).
               internal static func mullvad(_ p1: String) -> String {
                 return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.mullvad", p1)
