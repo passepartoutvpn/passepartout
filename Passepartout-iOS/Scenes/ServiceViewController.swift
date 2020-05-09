@@ -31,6 +31,10 @@ import TunnelKit
 import PassepartoutCore
 import Convenience
 
+import SwiftyBeaver
+
+private let log = SwiftyBeaver.self
+
 class ServiceViewController: UIViewController, StrongTableHost {
     @IBOutlet private weak var tableView: UITableView!
 
@@ -644,6 +648,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         guard let status = vpn.status else {
             return
         }
+        log.debug("VPN.status: \(status)")
         switch status {
         case .connected:
             Reviewer.shared.reportEvent()
