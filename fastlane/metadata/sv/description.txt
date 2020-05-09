@@ -10,6 +10,7 @@ ANVÄNDNING MED FLERA PROVIDERS
 
 Passepartout erbjuder förinställningar för större VPN-leverantörer:
 
+- Hide.me
 - Mullvad
 - NordVPN
 - Private Internet Access

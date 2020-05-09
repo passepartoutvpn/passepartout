@@ -10,6 +10,7 @@ Passepartout имеет открытый исходный код: https://github
 
 Passepartout предлагает предустановленные настройки для основных VPN провайдеров:
 
+- Hide.me
 - Mullvad
 - NordVPN
 - Private Internet Access

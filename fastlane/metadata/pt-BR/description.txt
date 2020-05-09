@@ -10,6 +10,7 @@ UTILIZE DIVERSOS SERVIÇOS DE VPN
 
 Passepartout oferece configurações para os seguintes provedores de VPN:
 
+- Hide.me
 - Mullvad
 - NordVPN
 - Private Internet Access
