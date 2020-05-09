@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Active profile lost after renaming. [#128](https://github.com/passepartoutvpn/passepartout-ios/issues/128)
 - Handle server shutdown/restart (remote `--explicit-exit-notify`). [tunnelkit#131](https://github.com/passepartoutvpn/tunnelkit/issues/131)
 - Handle explicit IPv4/IPv6 protocols (`4` or `6` suffix in `--proto`). [tunnelkit#153](https://github.com/passepartoutvpn/tunnelkit/issues/153)
+- IPv6 traffic broken on Mojave. [tunnelkit#146](https://github.com/passepartoutvpn/tunnelkit/issues/146), [#169](https://github.com/passepartoutvpn/tunnelkit/pull/169)
+- Transient connected state upon connection failure (rob-patchett). [tunnelkit#128](https://github.com/passepartoutvpn/tunnelkit/pull/128)
 
 ## 1.10.1 (2019-12-24)
 
