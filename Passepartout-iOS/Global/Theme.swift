@@ -197,7 +197,7 @@ extension Infrastructure.Metadata {
     var guidanceString: String? {
         let key = "account.sections.guidance.footer.infrastructure.\(name)"
         let format = NSLocalizedString(key, tableName: "Core", bundle: Bundle(for: AppDelegate.self), comment: "")
-        guard !format.isEmpty else {
+        guard format != key else {
             return nil
         }
         return String(format: format, locale: .current, description)
