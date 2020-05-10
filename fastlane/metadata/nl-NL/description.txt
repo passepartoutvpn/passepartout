@@ -10,6 +10,7 @@ GEBRUIK MET MEERDERE PROVIDERS
 
 Passepartout biedt presets voor grote VPN-providers:
 
+- Hide.me
 - Mullvad
 - NordVPN
 - Private Internet Access

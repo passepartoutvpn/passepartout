@@ -10,6 +10,7 @@ UŻYWAJ Z WIELOMA USŁUGODAWCAMI
 
 Passepartout oferuje gotowe konfiguracje dla poniższych usługodawców:
 
+- Hide.me
 - Mullvad
 - NordVPN
 - Private Internet Access
