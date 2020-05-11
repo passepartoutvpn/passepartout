@@ -112,8 +112,8 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
 
         let service = TransientStore.shared.service
         replacedProfile = nil
-        if let existingHostId = service.existingHostId(withTitle: enteredTitle) {
-            replacedProfile = service.profile(withContext: profile.context, id: existingHostId)
+        if let existingProfile = service.hostProfile(withTitle: enteredTitle) {
+            replacedProfile = existingProfile
             let alert = UIAlertController.asAlert(title, L10n.Core.Wizards.Host.Alerts.Existing.message)
             alert.addPreferredAction(L10n.Core.Global.ok) {
                 self.next(withProfile: profile, title: enteredTitle)
