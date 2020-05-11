@@ -88,12 +88,12 @@ struct Product: RawRepresentable, Equatable, Hashable {
 
     static var allProviders: [Product] {
         return InfrastructureFactory.shared.allMetadata.map {
-            return Product(providerId: $0.description)
+            return Product(providerMetadata: $0)
         }
     }
     
-    fileprivate init(providerId: String) {
-        self.init(rawValue: "\(Product.providersBundle).\(providerId)")!
+    fileprivate init(providerMetadata: Infrastructure.Metadata) {
+        self.init(rawValue: "\(Product.providersBundle).\(providerMetadata.inApp ?? providerMetadata.name)")!
     }
 
     // MARK: All
@@ -137,7 +137,7 @@ struct Product: RawRepresentable, Equatable, Hashable {
 
 extension Infrastructure.Metadata {
     var product: Product {
-        return Product(providerId: inApp ?? name)
+        return Product(providerMetadata: self)
     }
 }
 
