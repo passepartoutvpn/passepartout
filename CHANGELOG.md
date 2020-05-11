@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Relax keyboard for host titles.
+
 ### Fixed
 
 - In-app purchase unavailable for new providers. [#141](https://github.com/passepartoutvpn/passepartout-ios/issues/141)
-- Hosts may be renamed to same name. [#140](https://github.com/passepartoutvpn/passepartout-ios/issues/140)
+- Hosts may be renamed to same title. [#140](https://github.com/passepartoutvpn/passepartout-ios/issues/140)
 
 ## 1.11.1 (2020-05-11)
 

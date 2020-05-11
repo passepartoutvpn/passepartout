@@ -140,10 +140,10 @@ extension UILabel {
 }
 
 extension UITextField {
-    func applyProfileId(_ theme: Theme) {
+    func applyHostTitle(_ theme: Theme) {
         placeholder = L10n.Core.Global.Host.TitleInput.placeholder
         clearButtonMode = .always
-        keyboardType = .asciiCapable
+        keyboardType = .default
         returnKeyType = .done
         autocapitalizationType = .none
         autocorrectionType = .no

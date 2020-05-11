@@ -241,7 +241,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         let alert = UIAlertController.asAlert(L10n.Core.Service.Alerts.Rename.title, nil)
         alert.addTextField { (field) in
             field.text = self.service.screenTitle(ProfileKey(self.uncheckedProfile))
-            field.applyProfileId(.current)
+            field.applyHostTitle(.current)
             field.delegate = self
         }
         pendingRenameAction = alert.addPreferredAction(L10n.Core.Global.ok) {
@@ -1332,9 +1332,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
 
 extension ServiceViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard string.rangeOfCharacter(from: CharacterSet.filename.inverted) == nil else {
-            return false
-        }
+//        guard string.rangeOfCharacter(from: CharacterSet.filename.inverted) == nil else {
+//            return false
+//        }
         if let text = textField.text {
             let replacement = (text as NSString).replacingCharacters(in: range, with: string)
             pendingRenameAction?.isEnabled = (replacement != uncheckedProfile.id)
