@@ -248,17 +248,40 @@ class ServiceViewController: UIViewController, StrongTableHost {
             guard let newTitle = alert.textFields?.first?.text else {
                 return
             }
-            self.doRenameCurrentProfile(to: newTitle)
+            self.confirmRenameCurrentProfile(to: newTitle)
         }
         alert.addCancelAction(L10n.Core.Global.cancel)
         pendingRenameAction?.isEnabled = false
         present(alert, animated: true, completion: nil)
     }
     
-    private func doRenameCurrentProfile(to newTitle: String) {
+    private func confirmRenameCurrentProfile(to newTitle: String) {
         guard let profile = profile else {
             return
         }
+        if let existingProfile = service.hostProfile(withTitle: newTitle) {
+            let alert = UIAlertController.asAlert(L10n.Core.Service.Alerts.Rename.title, L10n.Core.Wizards.Host.Alerts.Existing.message)
+            alert.addPreferredAction(L10n.Core.Global.ok) {
+                self.doReplaceProfile(profile, to: newTitle, existingProfile: existingProfile)
+            }
+            alert.addCancelAction(L10n.Core.Global.cancel)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        doRenameProfile(profile, to: newTitle)
+    }
+    
+    private func doReplaceProfile(_ profile: ConnectionProfile, to newTitle: String, existingProfile: ConnectionProfile) {
+        let wasActive = service.isActiveProfile(existingProfile)
+        service.removeProfile(ProfileKey(existingProfile))
+        service.renameProfile(profile, to: newTitle)
+        if wasActive {
+            service.activateProfile(profile)
+        }
+        setProfile(profile, reloadingViews: true)
+    }
+    
+    private func doRenameProfile(_ profile: ConnectionProfile, to newTitle: String) {
         service.renameProfile(profile, to: newTitle)
         setProfile(profile, reloadingViews: false)
     }
