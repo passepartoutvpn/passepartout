@@ -1,4 +1,9 @@
-### Added
+### Changed
 
-- Hide.me provider.
+- Relax keyboard for host titles.
+
+### Fixed
+
+- In-app purchase unavailable for new providers.
+- Hosts may be renamed to same title.
 
