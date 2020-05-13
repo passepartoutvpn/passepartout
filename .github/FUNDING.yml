@@ -1,1 +1,5 @@
-custom: ["https://paypal.me/passepartoutvpn", "passepartoutvpn.app"]
+github: passepartoutvpn
+custom: [
+    "https://paypal.me/passepartoutvpn",
+    "passepartoutvpn.app"
+]
