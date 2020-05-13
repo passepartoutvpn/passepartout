@@ -1,16 +1,16 @@
 PODS:
-  - Convenience/About (0.0.1):
+  - Convenience/About (0.0.2):
     - Convenience/Tables
-  - Convenience/Alerts (0.0.1)
-  - Convenience/Dialogs (0.0.1):
+  - Convenience/Alerts (0.0.2)
+  - Convenience/Dialogs (0.0.2):
     - MBProgressHUD
-  - Convenience/InApp (0.0.1)
-  - Convenience/Misc (0.0.1)
-  - Convenience/Options (0.0.1)
-  - Convenience/Persistence (0.0.1)
-  - Convenience/Reviewer (0.0.1)
-  - Convenience/Tables (0.0.1)
-  - Convenience/WebServices (0.0.1):
+  - Convenience/InApp (0.0.2)
+  - Convenience/Misc (0.0.2)
+  - Convenience/Options (0.0.2)
+  - Convenience/Persistence (0.0.2)
+  - Convenience/Reviewer (0.0.2)
+  - Convenience/Tables (0.0.2)
+  - Convenience/WebServices (0.0.2):
     - SwiftyBeaver
   - DTFoundation/Core (1.7.14)
   - DTFoundation/DTASN1 (1.7.14):
@@ -36,16 +36,16 @@ PODS:
     - TunnelKit/Core
 
 DEPENDENCIES:
-  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
-  - Convenience/WebServices (from `https://github.com/keeshux/convenience`, commit `3a191e8`)
+  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/WebServices (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
@@ -64,16 +64,16 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Convenience:
-    :commit: 3a191e8
+    :commit: 0b09b1e
     :git: https://github.com/keeshux/convenience
 
 CHECKOUT OPTIONS:
   Convenience:
-    :commit: 3a191e8
+    :commit: 0b09b1e
     :git: https://github.com/keeshux/convenience
 
 SPEC CHECKSUMS:
-  Convenience: 230739dd640bb826b640765d93715744721726be
+  Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
   DTFoundation: 25aa19bb7c6e225b1dfae195604fb8cf1da0ab4c
   Kvitto: d451f893f84ad669850b7cb7d3f8781363e14232
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
@@ -82,6 +82,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
   TunnelKit: 17c6af76028b29cc6ddc936160986a4d12e09266
 
-PODFILE CHECKSUM: 04c9b5c05b2e958dc32a014a84ee014b31d36241
+PODFILE CHECKSUM: eb40a1c527745c9544d756a7fdcca1bb66a6bf79
 
 COCOAPODS: 1.9.1
