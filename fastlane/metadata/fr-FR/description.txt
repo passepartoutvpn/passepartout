@@ -15,6 +15,7 @@ Passepartout offre des réglages pré-conçu avec des fournisseurs VPN majeurs :
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- TorGuard
 - TunnelBear
 - VyprVPN
 - Windscribe

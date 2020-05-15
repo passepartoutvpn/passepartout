@@ -15,6 +15,7 @@ Passepartout bietet Voreinstellungen für alle gängigen VPN-Anbieter:
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- TorGuard
 - TunnelBear
 - VyprVPN
 - Windscribe

@@ -15,6 +15,7 @@ To Passepartout βασίζετε σε ανοιχτό κώδικα: https://githu
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- TorGuard
 - TunnelBear
 - VyprVPN
 - Windscribe

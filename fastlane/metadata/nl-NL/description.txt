@@ -15,6 +15,7 @@ Passepartout biedt presets voor grote VPN-providers:
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- TorGuard
 - TunnelBear
 - VyprVPN
 - Windscribe

@@ -15,6 +15,7 @@ Passepartout erbjuder förinställningar för större VPN-leverantörer:
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- TorGuard
 - TunnelBear
 - VyprVPN
 - Windscribe

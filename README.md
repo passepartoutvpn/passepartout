@@ -66,6 +66,7 @@ Passepartout can connect to a few well-known VPN providers with an existing acco
 - [NordVPN][app-net-nordvpn]
 - [Private Internet Access][app-net-pia]
 - [ProtonVPN][app-net-protonvpn]
+- [TorGuard][app-net-torguard]
 - [TunnelBear][app-net-tunnelbear]
 - [VyprVPN][app-net-vyprvpn]
 - [Windscribe][app-net-windscribe]
@@ -182,6 +183,7 @@ Website: [passepartoutvpn.app][about-website]
 [app-net-nordvpn]: https://go.nordvpn.net/SH21Z
 [app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
 [app-net-protonvpn]: https://proton.go2cloud.org/SHZ
+[app-net-torguard]: https://torguard.net/
 [app-net-tunnelbear]: https://www.tunnelbear.com/
 [app-net-vyprvpn]: https://www.vyprvpn.com/
 [app-net-windscribe]: https://secure.link/kCsD0prd

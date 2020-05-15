@@ -15,6 +15,7 @@ Passepartout oferece configurações para os seguintes provedores de VPN:
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- TorGuard
 - TunnelBear
 - VyprVPN
 - Windscribe

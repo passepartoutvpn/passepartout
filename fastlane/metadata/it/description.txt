@@ -15,6 +15,7 @@ Passepartout offre profili per i maggiori provider VPN:
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- TorGuard
 - TunnelBear
 - VyprVPN
 - Windscribe
