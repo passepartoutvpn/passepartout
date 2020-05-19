@@ -1,9 +1,8 @@
-### Changed
+### Added
 
-- Relax keyboard for host titles.
+- TorGuard provider (Jorrit Visser).
 
 ### Fixed
 
-- In-app purchase unavailable for new providers.
-- Hosts may be renamed to same title.
+- Persistent crash on launch after "Add new provider > Update list".
 
