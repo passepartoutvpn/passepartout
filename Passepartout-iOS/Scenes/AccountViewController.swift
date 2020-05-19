@@ -100,7 +100,11 @@ class AccountViewController: UIViewController, StrongTableHost {
                 } else {
                     model.setFooter(guidanceString, forSection: .credentials)
                 }
-                model.setHeader("", forSection: .registration)
+//                model.setHeader("", forSection: .registration)
+            } else if let _ = guidanceURL {
+                model.add(.guidance)
+                model.set([.openGuide], forSection: .guidance)
+//                model.setHeader("", forSection: .registration)
             }
 //            if let _ = referralURL {
 //                model.add(.registration)
