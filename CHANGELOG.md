@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - TorGuard provider (Jorrit Visser). [api-source#5](https://github.com/passepartoutvpn/api-source/issues/5)
 
+### Fixed
+
+- Persistent crash on launch after "Add new provider > Update list".
+
 ## 1.11.2 (2020-05-12)
 
 ### Changed
