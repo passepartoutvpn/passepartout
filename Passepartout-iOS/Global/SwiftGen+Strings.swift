@@ -299,10 +299,6 @@ internal enum L10n {
               internal static func protonvpn(_ p1: String) -> String {
                 return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.protonvpn", p1)
               }
-              /// Use your %@ service credentials, which may differ from website credentials.
-              internal static func torguard(_ p1: String) -> String {
-                return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.torguard", p1)
-              }
               /// Use your %@ website credentials. Your username is usually your e-mail.
               internal static func tunnelbear(_ p1: String) -> String {
                 return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.tunnelbear", p1)
