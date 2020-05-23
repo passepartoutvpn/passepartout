@@ -1,8 +1,4 @@
 ### Added
 
-- TorGuard provider (Jorrit Visser).
-
-### Fixed
-
-- Persistent crash on launch after "Add new provider > Update list".
+- Customize host endpoint.
 
