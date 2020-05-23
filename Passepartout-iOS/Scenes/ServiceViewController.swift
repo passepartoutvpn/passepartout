@@ -908,7 +908,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
 
             let V = L10n.Core.Global.Values.self
             if let provider = profile as? ProviderConnectionProfile {
-                cell.rightText = provider.usesProviderEndpoint ? V.manual : V.automatic
+                cell.rightText = provider.usesCustomEndpoint ? V.manual : V.automatic
             } else {
                 cell.rightText = profile?.mainAddress
             }
@@ -1424,10 +1424,9 @@ extension ServiceViewController: AccountViewControllerDelegate {
 
 extension ServiceViewController: EndpointViewControllerDelegate {
     func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: EndpointProtocol?) {
-        if let providerProfile = profile as? ProviderConnectionProfile {
-            providerProfile.manualAddress = newAddress
-            providerProfile.manualProtocol = newProtocol
-        }
+        profile?.customAddress = newAddress
+        profile?.customProtocol = newProtocol
+
         reloadSelectedRow()
     }
 }
