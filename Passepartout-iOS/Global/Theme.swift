@@ -93,6 +93,9 @@ extension Theme {
         bar.tintColor = palette.primaryLightText
         bar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: palette.primaryLightText]
         bar.largeTitleTextAttributes = bar.titleTextAttributes
+        
+        let pickerBar = UINavigationBar.appearance(whenContainedInInstancesOf: [UIDocumentBrowserViewController.self])
+        pickerBar.tintColor = nil
 
         let toolbar = UIToolbar.appearance()
         toolbar.barTintColor = palette.primaryBackground
