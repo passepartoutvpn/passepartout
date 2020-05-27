@@ -95,7 +95,10 @@ extension Theme {
         bar.largeTitleTextAttributes = bar.titleTextAttributes
         
         let pickerBar = UINavigationBar.appearance(whenContainedInInstancesOf: [UIDocumentBrowserViewController.self])
+        pickerBar.barTintColor = nil
         pickerBar.tintColor = nil
+        pickerBar.titleTextAttributes = nil
+        pickerBar.largeTitleTextAttributes = nil
 
         let toolbar = UIToolbar.appearance()
         toolbar.barTintColor = palette.primaryBackground
