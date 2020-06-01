@@ -81,7 +81,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         }
         model.setHeader(L10n.Core.Organizer.Sections.Support.header, forSection: .support)
         model.set([.connectionStatus], forSection: .vpn)
-        model.set([.donate, .joinCommunity], forSection: .support)
+        model.set([.donate, .githubSponsors, .joinCommunity], forSection: .support)
 
         model.set([.openAbout], forSection: .about)
         model.set([.uninstall], forSection: .destruction)
@@ -441,7 +441,7 @@ extension OrganizerViewController {
         
         case donate
         
-//        case githubSponsors
+        case githubSponsors
         
         case translate
         
@@ -534,10 +534,10 @@ extension OrganizerViewController {
             cell.leftText = L10n.Core.Organizer.Cells.Donate.caption
             return cell
 
-//        case .githubSponsors:
-//            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-//            cell.leftText = L10n.Core.Organizer.Cells.GithubSponsors.caption
-//            return cell
+        case .githubSponsors:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Core.Organizer.Cells.GithubSponsors.caption
+            return cell
             
         case .translate:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
@@ -605,8 +605,8 @@ extension OrganizerViewController {
         case .donate:
             donateToDeveloper()
 
-//        case .githubSponsors:
-//            becomeSponsor()
+        case .githubSponsors:
+            becomeSponsor()
             
         case .translate:
             offerTranslation()
