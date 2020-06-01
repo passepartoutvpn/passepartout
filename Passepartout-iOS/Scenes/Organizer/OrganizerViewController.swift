@@ -449,6 +449,14 @@ extension OrganizerViewController {
         return model.footer(forSection: section)
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return model.headerHeight(for: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return model.footerHeight(for: section)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.numberOfRows(forSection: section)
     }
