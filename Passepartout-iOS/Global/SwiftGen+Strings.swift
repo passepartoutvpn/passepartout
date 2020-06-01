@@ -66,6 +66,16 @@ internal enum L10n {
           /// Add new provider
           internal static let caption = L10n.tr("App", "organizer.cells.add_provider.caption")
         }
+        internal enum SupportKickstarter {
+          /// What's coming next?
+          internal static let caption = L10n.tr("App", "organizer.cells.support_kickstarter.caption")
+        }
+      }
+      internal enum Sections {
+        internal enum Kickstarter {
+          /// More on further development of Passepartout.
+          internal static let footer = L10n.tr("App", "organizer.sections.kickstarter.footer")
+        }
       }
     }
     internal enum Provider {
