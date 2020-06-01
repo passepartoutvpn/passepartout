@@ -2,3 +2,7 @@
 
 - Customize host endpoint.
 
+### Fixed
+
+- Invisible buttons in document browser.
+
