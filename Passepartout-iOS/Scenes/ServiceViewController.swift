@@ -663,6 +663,10 @@ class ServiceViewController: UIViewController, StrongTableHost {
         }
     }
     
+    private func openKickstarterCampaign() {
+        UIApplication.shared.open(AppConstants.Flags.kickstarterURL, options: [:], completionHandler: nil)
+    }
+
     // MARK: Notifications
     
     @objc private func vpnDidUpdate() {
@@ -717,6 +721,8 @@ class ServiceViewController: UIViewController, StrongTableHost {
 
 extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, ToggleTableViewCellDelegate {
     enum SectionType {
+        case kickstarter
+        
         case vpn
         
         case authentication
@@ -741,6 +747,8 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     }
     
     enum RowType: Int {
+        case supportKickstarter
+
         case useProfile
         
         case vpnService
@@ -858,6 +866,12 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = model.row(at: indexPath)
         switch row {
+        case .supportKickstarter:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.applyAction(.current)
+            cell.leftText = L10n.App.Organizer.Cells.SupportKickstarter.caption
+            return cell
+
         case .useProfile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
@@ -1087,6 +1101,9 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
     // true if enters subscreen
     private func handle(row: RowType, cell: UITableViewCell) -> Bool {
         switch row {
+        case .supportKickstarter:
+            openKickstarterCampaign()
+
         case .useProfile:
             activateProfile()
             
@@ -1196,6 +1213,13 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         let isActiveProfile = service.isActiveProfile(profile)
         let isProvider = (profile as? ProviderConnectionProfile) != nil
         
+        if AppConstants.Flags.isShowingKickstarter {
+            model.add(.kickstarter)
+            model.setHeader("Kickstarter", forSection: .kickstarter)
+            model.setFooter(L10n.App.Organizer.Sections.Kickstarter.footer, forSection: .kickstarter)
+            model.set([.supportKickstarter], forSection: .kickstarter)
+        }
+
         // sections
         model.add(.vpn)
         if isProvider {
