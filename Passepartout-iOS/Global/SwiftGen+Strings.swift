@@ -646,13 +646,13 @@ internal enum L10n {
           /// Make a donation
           internal static let caption = L10n.tr("Core", "organizer.cells.donate.caption")
         }
+        internal enum GithubSponsors {
+          /// Support me on GitHub
+          internal static let caption = L10n.tr("Core", "organizer.cells.github_sponsors.caption")
+        }
         internal enum JoinCommunity {
           /// Join community
           internal static let caption = L10n.tr("Core", "organizer.cells.join_community.caption")
-        }
-        internal enum Patreon {
-          /// Support me on Patreon
-          internal static let caption = L10n.tr("Core", "organizer.cells.patreon.caption")
         }
         internal enum Profile {
           internal enum Value {

@@ -332,6 +332,10 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         present(alert, animated: true, completion: nil)
     }
     
+    private func becomeSponsor() {
+        UIApplication.shared.open(AppConstants.URLs.githubSponsors, options: [:], completionHandler: nil)
+    }
+    
     private func subscribeSubreddit() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
@@ -437,7 +441,7 @@ extension OrganizerViewController {
         
         case donate
         
-//        case patreon
+//        case githubSponsors
         
         case translate
         
@@ -530,9 +534,9 @@ extension OrganizerViewController {
             cell.leftText = L10n.Core.Organizer.Cells.Donate.caption
             return cell
 
-//        case .patreon:
+//        case .githubSponsors:
 //            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-//            cell.leftText = L10n.Core.Organizer.Cells.Patreon.caption
+//            cell.leftText = L10n.Core.Organizer.Cells.GithubSponsors.caption
 //            return cell
             
         case .translate:
@@ -601,8 +605,8 @@ extension OrganizerViewController {
         case .donate:
             donateToDeveloper()
 
-//        case .patreon:
-//            visit(AppConstants.URLs.patreon)
+//        case .githubSponsors:
+//            becomeSponsor()
             
         case .translate:
             offerTranslation()
