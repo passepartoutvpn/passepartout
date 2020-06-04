@@ -81,7 +81,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         }
         model.setHeader(L10n.Core.Organizer.Sections.Support.header, forSection: .support)
         model.set([.connectionStatus], forSection: .vpn)
-        model.set([.donate, .joinCommunity], forSection: .support)
+        model.set([.donate, .githubSponsors, .joinCommunity], forSection: .support)
 
         model.set([.openAbout], forSection: .about)
         model.set([.uninstall], forSection: .destruction)
@@ -332,6 +332,10 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         present(alert, animated: true, completion: nil)
     }
     
+    private func becomeSponsor() {
+        UIApplication.shared.open(AppConstants.URLs.githubSponsors, options: [:], completionHandler: nil)
+    }
+    
     private func subscribeSubreddit() {
         UIApplication.shared.open(AppConstants.URLs.subreddit, options: [:], completionHandler: nil)
     }
@@ -437,7 +441,7 @@ extension OrganizerViewController {
         
         case donate
         
-//        case patreon
+        case githubSponsors
         
         case translate
         
@@ -530,10 +534,10 @@ extension OrganizerViewController {
             cell.leftText = L10n.Core.Organizer.Cells.Donate.caption
             return cell
 
-//        case .patreon:
-//            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-//            cell.leftText = L10n.Core.Organizer.Cells.Patreon.caption
-//            return cell
+        case .githubSponsors:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Core.Organizer.Cells.GithubSponsors.caption
+            return cell
             
         case .translate:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
@@ -601,8 +605,8 @@ extension OrganizerViewController {
         case .donate:
             donateToDeveloper()
 
-//        case .patreon:
-//            visit(AppConstants.URLs.patreon)
+        case .githubSponsors:
+            becomeSponsor()
             
         case .translate:
             offerTranslation()
