@@ -6,7 +6,6 @@
 [![TunnelKit 2.2](https://img.shields.io/badge/tunnelkit-2.2-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
-[![Join Telegram](https://img.shields.io/badge/chat-Telegram-blue.svg)][about-telegram]
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20an%20user-friendly%2C%20open%20source%20%23OpenVPN%20client%20for%20%23iOS%20and%20%23macOS)
  
 Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS.
@@ -204,4 +203,3 @@ Website: [passepartoutvpn.app][about-website]
 [about-twitter]: https://twitter.com/keeshux
 [about-website]: https://passepartoutvpn.app
 [about-reddit]: https://www.reddit.com/r/passepartout
-[about-telegram]: https://t.me/passepartoutvpn
