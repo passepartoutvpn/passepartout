@@ -1,8 +1,4 @@
-### Added
-
-- Customize host endpoint.
-
 ### Fixed
 
-- Invisible buttons in document browser.
+- Skip DNS resolution of provider servers without a hostname (e.g. ProtonVPN "Secure Core").
 
