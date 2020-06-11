@@ -47,14 +47,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     
     func reloadModel() {
         model.clear()
-
-        if AppConstants.Flags.isShowingKickstarter {
-            model.add(.kickstarter)
-            model.setHeader("Kickstarter", forSection: .kickstarter)
-            model.setFooter(L10n.App.Organizer.Sections.Kickstarter.footer, forSection: .kickstarter)
-            model.set([.supportKickstarter], forSection: .kickstarter)
-        }
-
         model.add(.vpn)
         model.add(.providers)
         model.add(.hosts)
@@ -115,9 +107,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         super.viewDidLoad()
 
         title = GroupConstants.App.title
-        if AppConstants.Flags.isShowingKickstarter {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.Assets.kickstarter.image, style: .plain, target: self, action: #selector(openKickstarterCampaign))
-        }
         navigationItem.rightBarButtonItem = editButtonItem
         Cells.destructive.register(with: tableView)
         reloadModel()
@@ -345,10 +334,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    @objc private func openKickstarterCampaign() {
-        UIApplication.shared.open(AppConstants.Flags.kickstarterURL, options: [:], completionHandler: nil)
-    }
-    
     //
     
     private func testInterfaces() {
@@ -405,8 +390,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
 extension OrganizerViewController {
     enum SectionType: Int {
-        case kickstarter
-
         case vpn
         
         case providers
@@ -427,8 +410,6 @@ extension OrganizerViewController {
     }
     
     enum RowType: Int {
-        case supportKickstarter
-        
         case connectionStatus
         
         case profile
@@ -486,12 +467,6 @@ extension OrganizerViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch model.row(at: indexPath) {
-        case .supportKickstarter:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(.current)
-            cell.leftText = L10n.App.Organizer.Cells.SupportKickstarter.caption
-            return cell
-
         case .connectionStatus:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyVPN(.current, with: VPN.shared.isEnabled ? VPN.shared.status : nil, error: nil)
@@ -584,9 +559,6 @@ extension OrganizerViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
-        case .supportKickstarter:
-            openKickstarterCampaign()
-            
         case .connectionStatus:
             enterActiveProfile()
             

@@ -52,10 +52,6 @@ extension AppConstants {
                 VPN.isMockVPN = isMockVPN
             }
         }
-
-        static let isShowingKickstarter = true
-
-        static let kickstarterURL = URL(string: "https://www.kickstarter.com/projects/keeshux/passepartout-your-only-multi-provider-vpn-client/")!
     }
 
     struct InApp {
