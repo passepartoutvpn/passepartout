@@ -29,6 +29,7 @@ import Convenience
 import SwiftyBeaver
 import Kvitto
 import PassepartoutCore
+import TunnelKit
 
 private let log = SwiftyBeaver.self
 

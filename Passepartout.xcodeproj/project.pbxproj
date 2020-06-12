@@ -31,13 +31,6 @@
 		0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */; };
 		0E3152BD223FA03D00F61841 /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0E3152C0223FA03D00F61841 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
-		0E3152C1223FA04800F61841 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */; };
-		0E3152C2223FA04800F61841 /* MockVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */; };
-		0E3152C3223FA04800F61841 /* StandardVPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */; };
-		0E3152C4223FA04800F61841 /* VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C3620CF38D10027975F /* VPN.swift */; };
-		0E3152C5223FA04800F61841 /* VPNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */; };
-		0E3152C6223FA04800F61841 /* VPNProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AF1214177920004D387 /* VPNProvider.swift */; };
-		0E3152C7223FA04800F61841 /* VPNStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */; };
 		0E3152C8223FA04D00F61841 /* Infrastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C1120CF0ABA0027975F /* Infrastructure.swift */; };
 		0E3152CA223FA04D00F61841 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
 		0E3152CB223FA04D00F61841 /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C0F20CF09A30027975F /* Pool.swift */; };
@@ -92,6 +85,7 @@
 		0EA84515238A9B5200EFC500 /* Infrastructure+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */; };
 		0EA8451A238C2AB500EFC500 /* Infrastructure+Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
+		0EAC572F249426E200D0FCE0 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC572E249426E200D0FCE0 /* GracefulVPN.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
 		0EB9EB7323867E7F009C0A1C /* TrustedNetworksUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */; };
@@ -226,8 +220,6 @@
 		0E4B0D752366E6C800C890B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Purchase.storyboard; sourceTree = "<group>"; };
 		0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedNetworks.swift; sourceTree = "<group>"; };
 		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
-		0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardVPNProvider.swift; sourceTree = "<group>"; };
-		0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVPNProvider.swift; sourceTree = "<group>"; };
 		0E4FD7ED20D539A0002221FF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0E4FD7F020D58618002221FF /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 		0E533B152258E03B00EF94FC /* PoolGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolGroup.swift; sourceTree = "<group>"; };
@@ -236,9 +228,6 @@
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatus.swift; sourceTree = "<group>"; };
-		0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNConfiguration.swift; sourceTree = "<group>"; };
-		0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
 		0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCell.swift; sourceTree = "<group>"; };
 		0E66A26F225FE25800F9C779 /* PoolCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PoolCategory.swift; path = ../Model/Profiles/PoolCategory.swift; sourceTree = "<group>"; };
 		0E6ACB7722B1A57C001B3C99 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Intents.strings; sourceTree = "<group>"; };
@@ -267,6 +256,7 @@
 		0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetworkViewController.swift; sourceTree = "<group>"; };
 		0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Infrastructure+Name.swift"; path = "Submodules/Core/Passepartout/Sources/Services/Infrastructure+Name.swift"; sourceTree = SOURCE_ROOT; };
 		0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Infrastructure+Metadata.swift"; path = "Submodules/Core/Passepartout/Sources/Services/Infrastructure+Metadata.swift"; sourceTree = SOURCE_ROOT; };
+		0EAC572E249426E200D0FCE0 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GracefulVPN.swift; path = Submodules/Core/Passepartout/Sources/Model/GracefulVPN.swift; sourceTree = SOURCE_ROOT; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
 		0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksUI.swift; sourceTree = "<group>"; };
@@ -298,13 +288,11 @@
 		0ED31C1120CF0ABA0027975F /* Infrastructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Infrastructure.swift; sourceTree = "<group>"; };
 		0ED31C2820CF2A340027975F /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderPoolViewController.swift; sourceTree = "<group>"; };
-		0ED31C3620CF38D10027975F /* VPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPN.swift; sourceTree = "<group>"; };
 		0ED31C3920CF39510027975F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		0ED31C3B20CF39510027975F /* Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
 		0ED38AD8213F33150004D387 /* WizardHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardHostViewController.swift; sourceTree = "<group>"; };
 		0ED38AE621404F100004D387 /* EndpointDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointDataSource.swift; sourceTree = "<group>"; };
 		0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModificationDelegate.swift; sourceTree = "<group>"; };
-		0ED38AF1214177920004D387 /* VPNProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNProvider.swift; sourceTree = "<group>"; };
 		0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntentDispatcher.swift; path = Submodules/Core/Passepartout/Sources/Intents/IntentDispatcher.swift; sourceTree = SOURCE_ROOT; };
@@ -424,20 +412,6 @@
 			path = Purchase;
 			sourceTree = "<group>";
 		};
-		0E4FD7D920D3E43F002221FF /* VPN */ = {
-			isa = PBXGroup;
-			children = (
-				0E5E5DE421511C5F00E318A3 /* GracefulVPN.swift */,
-				0E4FD7E020D3E4C5002221FF /* MockVPNProvider.swift */,
-				0E4FD7DD20D3E49A002221FF /* StandardVPNProvider.swift */,
-				0ED31C3620CF38D10027975F /* VPN.swift */,
-				0E5E5DE1215119DD00E318A3 /* VPNConfiguration.swift */,
-				0ED38AF1214177920004D387 /* VPNProvider.swift */,
-				0E5E5DDE215119AF00E318A3 /* VPNStatus.swift */,
-			);
-			path = VPN;
-			sourceTree = "<group>";
-		};
 		0E50E7C422330E5100D5F76C /* Intents */ = {
 			isa = PBXGroup;
 			children = (
@@ -538,6 +512,7 @@
 				0ECEB109224FECEA00E9E551 /* DataUnit.swift */,
 				0EC7F20420E24308004EA58E /* DebugLog.swift */,
 				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
+				0EAC572E249426E200D0FCE0 /* GracefulVPN.swift */,
 				0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */,
 				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
 				0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */,
@@ -613,7 +588,6 @@
 				0ED31C0E20CF09890027975F /* Model */,
 				0ED31C1B20CF0ACE0027975F /* Services */,
 				0EB9EB7123867E7F009C0A1C /* UI */,
-				0E4FD7D920D3E43F002221FF /* VPN */,
 				0E39BCF2214DA9310035E9DE /* AppConstants.swift */,
 				0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */,
 				0EDE8DED20C93E4C004C739C /* GroupConstants.swift */,
@@ -972,21 +946,16 @@
 				0E3152BD223FA03D00F61841 /* GroupConstants.swift in Sources */,
 				0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */,
 				0E66A270225FE25800F9C779 /* PoolCategory.swift in Sources */,
-				0E3152C2223FA04800F61841 /* MockVPNProvider.swift in Sources */,
 				0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */,
 				0E3152D2223FA05400F61841 /* DebugLog.swift in Sources */,
 				0E45E71022BE108100F19312 /* OpenVPNOptions.swift in Sources */,
-				0E3152C4223FA04800F61841 /* VPN.swift in Sources */,
-				0E3152C6223FA04800F61841 /* VPNProvider.swift in Sources */,
 				0E3152DA223FA05800F61841 /* PlaceholderConnectionProfile.swift in Sources */,
 				0E3152D0223FA05400F61841 /* ConnectionService+Migration.swift in Sources */,
 				0E1C0A4F238FC7A5009FC087 /* InfrastructureFactory.swift in Sources */,
 				0E3152D5223FA05400F61841 /* SessionProxy+Communication.swift in Sources */,
 				0E3152D7223FA05400F61841 /* TrustedNetworks.swift in Sources */,
 				0E3152DB223FA05800F61841 /* ProfileKey.swift in Sources */,
-				0E3152C1223FA04800F61841 /* GracefulVPN.swift in Sources */,
 				0E3152CF223FA05400F61841 /* ConnectionService+Configurations.swift in Sources */,
-				0E3152C5223FA04800F61841 /* VPNConfiguration.swift in Sources */,
 				0E3152C8223FA04D00F61841 /* Infrastructure.swift in Sources */,
 				0E3152D8223FA05400F61841 /* TrustPolicy.swift in Sources */,
 				0E3152DC223FA05800F61841 /* ProviderConnectionProfile.swift in Sources */,
@@ -998,8 +967,8 @@
 				0E3152CE223FA05400F61841 /* ConnectionService.swift in Sources */,
 				0ED993B1223FF8C700B0F9C9 /* IntentDispatcher.swift in Sources */,
 				0EA84515238A9B5200EFC500 /* Infrastructure+Name.swift in Sources */,
+				0EAC572F249426E200D0FCE0 /* GracefulVPN.swift in Sources */,
 				0EEF23412321AC55000AEBE3 /* Issue.swift in Sources */,
-				0E3152C3223FA04800F61841 /* StandardVPNProvider.swift in Sources */,
 				0E3152D1223FA05400F61841 /* Credentials.swift in Sources */,
 				0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */,
 				0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */,
@@ -1011,7 +980,6 @@
 				0EA8451A238C2AB500EFC500 /* Infrastructure+Metadata.swift in Sources */,
 				0EB9EB7323867E7F009C0A1C /* TrustedNetworksUI.swift in Sources */,
 				0E3CAFC0229AAE770008E5C8 /* Intents.intentdefinition in Sources */,
-				0E3152C7223FA04800F61841 /* VPNStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

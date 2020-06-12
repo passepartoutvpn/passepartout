@@ -27,6 +27,7 @@ import UIKit
 import StoreKit
 import MessageUI
 import PassepartoutCore
+import TunnelKit
 import Convenience
 import SystemConfiguration.CaptiveNetwork
 
@@ -120,7 +121,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         service.delegate = self
 
         let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
+        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: VPN.didChangeStatus, object: nil)
         nc.addObserver(self, selector: #selector(productManagerDidReloadReceipt), name: ProductManager.didReloadReceipt, object: nil)
     }
     

@@ -46,12 +46,6 @@ extension AppConstants {
             }
             return false
         }
-
-        static var isMockVPN = false {
-            didSet {
-                VPN.isMockVPN = isMockVPN
-            }
-        }
     }
 
     struct InApp {

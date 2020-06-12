@@ -114,8 +114,8 @@ class ServiceViewController: UIViewController, StrongTableHost {
 
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidChangeStatus, object: nil)
-        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: .VPNDidReinstall, object: nil)
+        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: VPN.didChangeStatus, object: nil)
+        nc.addObserver(self, selector: #selector(vpnDidUpdate), name: VPN.didReinstall, object: nil)
         if #available(iOS 13, *) {
             nc.addObserver(self, selector: #selector(intentDidUpdateService), name: IntentDispatcher.didUpdateService, object: nil)
         }

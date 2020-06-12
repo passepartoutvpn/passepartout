@@ -26,6 +26,7 @@
 import UIKit
 import SwiftyBeaver
 import PassepartoutCore
+import TunnelKit
 
 private let log = SwiftyBeaver.self
 
@@ -49,7 +50,7 @@ class DebugLogViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleBars))
         textLog?.addGestureRecognizer(tapGestureRecognizer)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(vpnDidPrepare), name: .VPNDidPrepare, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(vpnDidPrepare), name: VPN.didPrepare, object: nil)
         if vpn.isPrepared {
             startRefreshingLog()
         }

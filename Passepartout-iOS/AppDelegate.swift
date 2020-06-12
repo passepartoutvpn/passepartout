@@ -41,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     override init() {
         AppConstants.Log.configure()
         InfrastructureFactory.shared.preload()
+        #if !targetEnvironment(simulator)
+        VPN.shared = StandardVPNProvider(bundleIdentifier: AppConstants.App.tunnelBundleId)
+        #endif
         super.init()
     }
     
