@@ -194,7 +194,7 @@ extension MFMailComposeViewController {
 extension Infrastructure.Metadata {
     var logo: UIImage? {
         let bundle = Bundle(for: AppDelegate.self)
-        guard let image = AssetImageTypeAlias(named: name, in: bundle, compatibleWith: nil) else {
+        guard let image = ImageAsset.Image(named: name, in: bundle, compatibleWith: nil) else {
             return Asset.Providers.placeholder.image
         }
         return image

@@ -60,6 +60,7 @@ Passepartout is a VPN client and does absolutely nothing else without your conse
 
 Passepartout can connect to a few well-known VPN providers with an existing account:
 
+- [Child Safe VPN][app-net-csv]
 - [Hide.me][app-net-hideme]
 - [Mullvad][app-net-mullvad]
 - [NordVPN][app-net-nordvpn]
@@ -177,6 +178,7 @@ Website: [passepartoutvpn.app][about-website]
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 
 [app-api]: https://github.com/passepartoutvpn/passepartout-api
+[app-net-csv]: https://childsafevpn.com
 [app-net-hideme]: https://member.hide.me/en/checkout?plan=new_default_prices&coupon=6CB-BDB-802&duration=24
 [app-net-mullvad]: https://mullvad.net/en/account/create/
 [app-net-nordvpn]: https://go.nordvpn.net/SH21Z
