@@ -175,6 +175,8 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             }
 
             vc.setProfile(selectedProfile)
+        } else if let vc = destination as? ImportedHostsViewController {
+            vc.delegate = self
         } else if let vc = destination as? WizardHostViewController {
             vc.parsingResult = hostParsingResult
         }
@@ -785,6 +787,14 @@ extension OrganizerViewController: UIDocumentPickerDelegate {
             return
         }
         tryParseHostURL(url)
+    }
+}
+
+extension OrganizerViewController: ImportedHostsViewControllerDelegate {
+    func importedHostsController(_: ImportedHostsViewController, didImport url: URL) {
+        dismiss(animated: true) {
+            self.tryParseHostURL(url)
+        }
     }
 }
 
