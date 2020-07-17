@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sge-vR-hZB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sge-vR-hZB">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -206,11 +206,6 @@
                                 <action selector="close" destination="c0p-pg-Arz" id="yVS-jW-gwZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="Lcp-oT-AOy">
-                            <connections>
-                                <action selector="openConfigurationFile" destination="c0p-pg-Arz" id="E7s-pJ-8y6"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c40-c8-YA4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -238,7 +233,7 @@
             <objects>
                 <navigationController storyboardIdentifier="WizardHostIdentifier" id="xKb-d1-xzB" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7oY-rT-q4A">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -247,7 +242,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BvG-Pe-O1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1727" y="-357"/>
+            <point key="canvasLocation" x="-1700" y="-357"/>
         </scene>
         <!--Donation View Controller-->
         <scene sceneID="NrW-UF-gN3">
@@ -388,6 +383,7 @@
                         <segue destination="POR-9u-PsE" kind="presentation" identifier="AboutSegueIdentifier" modalPresentationStyle="formSheet" id="78g-ra-Yhp"/>
                         <segue destination="5ku-HX-5yk" kind="presentation" identifier="DonateSegueIdentifier" modalPresentationStyle="formSheet" id="H4q-BS-PmK"/>
                         <segue destination="pel-Q7-aOe" kind="showDetail" identifier="SelectProfileSegueIdentifier" id="bkI-h9-mGF"/>
+                        <segue destination="xKb-d1-xzB" kind="presentation" identifier="ImportHostSegueIdentifier" id="lvz-gb-YiL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGp-H5-24W" userLabel="First Responder" sceneMemberID="firstResponder"/>

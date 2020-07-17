@@ -70,13 +70,6 @@ class ImportedHostsViewController: UITableViewController {
     
     // MARK: Actions
     
-    @IBAction private func openConfigurationFile() {
-        let picker = UIDocumentPickerViewController(documentTypes: AppConstants.URLs.filetypes, in: .import)
-        picker.allowsMultipleSelection = false
-        picker.delegate = self
-        present(picker, animated: true, completion: nil)
-    }
-    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 
         // segue parses configuration file if not yet
@@ -143,17 +136,5 @@ extension ImportedHostsViewController {
         try? FileManager.default.removeItem(at: url)
         pendingConfigurationURLs.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .top)
-    }
-}
-
-extension ImportedHostsViewController: UIDocumentPickerDelegate {
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-    }
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let url = urls.first else {
-            return
-        }
-        _ = tryParseURL(url, cell: nil)
     }
 }
