@@ -24,7 +24,8 @@
 //
 
 "organizer.cells.add_provider.caption" = "Voeg nieuwe aanbieder toe";
-"organizer.cells.add_host.caption" = "Voeg nieuwe host toe";
+"organizer.cells.add_host.caption" = "Toevoegen vanuit Bestanden";
+"organizer.cells.import_host.caption" = "Toevoegen vanuit geïmporteerd";
 
 "wizards.host.cells.title_input.caption" = "Titel";
 "wizards.host.sections.existing.header" = "Bestaande profielen";

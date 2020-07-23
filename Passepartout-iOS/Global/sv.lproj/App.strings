@@ -24,7 +24,8 @@
 //
 
 "organizer.cells.add_provider.caption" = "Lägg till ny leverantör";
-"organizer.cells.add_host.caption" = "Lägg till ny värd";
+"organizer.cells.add_host.caption" = "Lägg till från Filer";
+"organizer.cells.import_host.caption" = "Lägg till från importerad";
 
 "wizards.host.cells.title_input.caption" = "Namn";
 "wizards.host.sections.existing.header" = "Befintliga profiler";

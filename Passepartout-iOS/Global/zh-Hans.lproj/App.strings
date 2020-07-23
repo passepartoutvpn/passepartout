@@ -24,7 +24,8 @@
 //
 
 "organizer.cells.add_provider.caption" = "添加新的提供商配置";
-"organizer.cells.add_host.caption" = "添加新的主机配置";
+"organizer.cells.add_host.caption" = "从文件添加";
+"organizer.cells.import_host.caption" = "从导入中添加";
 
 "wizards.host.cells.title_input.caption" = "名称";
 "wizards.host.sections.existing.header" = "已存在的配置";

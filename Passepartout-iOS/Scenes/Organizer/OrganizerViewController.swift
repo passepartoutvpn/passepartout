@@ -41,6 +41,10 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     private var hosts: [String] = []
     
     private var didShowSubreddit = false
+    
+    private var importer: HostImporter?
+    
+    private var hostParsingResult: OpenVPN.ConfigurationParser.Result?
 
     // MARK: StrongTableHost
 
@@ -93,6 +97,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         var hostRows = [RowType](repeating: .profile, count: hosts.count)
         providerRows.append(.addProvider)
         hostRows.append(.addHost)
+        hostRows.append(.importHost)
         
         model.set(providerRows, forSection: .providers)
         model.set(hostRows, forSection: .hosts)
@@ -170,6 +175,10 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             }
 
             vc.setProfile(selectedProfile)
+        } else if let vc = destination as? ImportedHostsViewController {
+            vc.delegate = self
+        } else if let vc = destination as? WizardHostViewController {
+            vc.parsingResult = hostParsingResult
         }
     }
 
@@ -200,6 +209,27 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     }
 
     private func addNewHost() {
+        if TransientStore.shared.service.hasReachedMaximumNumberOfHosts {
+            guard ProductManager.shared.isEligible(forFeature: .unlimitedHosts) else {
+                presentPurchaseScreen(forProduct: .unlimitedHosts)
+                return
+            }
+        }
+        let picker = UIDocumentPickerViewController(documentTypes: AppConstants.URLs.filetypes, in: .import)
+        picker.allowsMultipleSelection = false
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
+    
+    private func tryParseHostURL(_ url: URL) {
+        importer = HostImporter(withConfigurationURL: url, parentViewController: self)
+        importer?.importHost(withPassphrase: nil, removeOnError: false, removeOnCancel: false) {
+            self.hostParsingResult = $0
+            self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
+        }
+    }
+
+    private func importNewHost() {
         if TransientStore.shared.service.hasReachedMaximumNumberOfHosts {
             guard ProductManager.shared.isEligible(forFeature: .unlimitedHosts) else {
                 presentPurchaseScreen(forProduct: .unlimitedHosts)
@@ -419,6 +449,8 @@ extension OrganizerViewController {
         
         case addHost
         
+        case importHost
+        
         case siriShortcuts
         
         case donate
@@ -499,6 +531,12 @@ extension OrganizerViewController {
             cell.leftText = L10n.App.Organizer.Cells.AddHost.caption
             return cell
             
+        case .importHost:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.applyAction(.current)
+            cell.leftText = L10n.App.Organizer.Cells.ImportHost.caption
+            return cell
+
         case .siriShortcuts:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
@@ -571,6 +609,9 @@ extension OrganizerViewController {
 
         case .addHost:
             addNewHost()
+            
+        case .importHost:
+            importNewHost()
             
         case .siriShortcuts:
             addShortcuts()
@@ -733,6 +774,26 @@ extension OrganizerViewController: ConnectionServiceDelegate {
 
         if #available(iOS 12, *) {
             IntentDispatcher.donateEnableVPN()
+        }
+    }
+}
+
+extension OrganizerViewController: UIDocumentPickerDelegate {
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let url = urls.first else {
+            return
+        }
+        tryParseHostURL(url)
+    }
+}
+
+extension OrganizerViewController: ImportedHostsViewControllerDelegate {
+    func importedHostsController(_: ImportedHostsViewController, didImport url: URL) {
+        dismiss(animated: true) {
+            self.tryParseHostURL(url)
         }
     }
 }

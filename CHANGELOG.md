@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Changed
 
+- Improved host import flow.
 - Use active profile name in iOS settings.
 
 ## 1.11.5 (2020-06-23)

@@ -30,12 +30,14 @@ import PassepartoutCore
 
 private let log = SwiftyBeaver.self
 
+protocol ImportedHostsViewControllerDelegate: class {
+    func importedHostsController(_: ImportedHostsViewController, didImport url: URL)
+}
+
 class ImportedHostsViewController: UITableViewController {
     private lazy var pendingConfigurationURLs = TransientStore.shared.service.pendingConfigurationURLs().sortedCaseInsensitive()
     
-    private var importer: HostImporter?
-
-    private var parsingResult: OpenVPN.ConfigurationParser.Result?
+    weak var delegate: ImportedHostsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,72 +45,8 @@ class ImportedHostsViewController: UITableViewController {
         title = L10n.App.ImportedHosts.title
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        parsingResult = nil
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-//        guard !pendingConfigurationURLs.isEmpty else {
-//            let alert = UIAlertController.asAlert(
-//                title,
-//                L10n.Core.Organizer.Alerts.AddHost.message
-//            )
-//            alert.addCancelAction(L10n.Core.Global.ok) {
-//                self.close()
-//            }
-//            present(alert, animated: true, completion: nil)
-//            return
-//        }
-        if let selectedIP = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selectedIP, animated: true)
-        }
-    }
-    
-    // MARK: Actions
-    
-    @IBAction private func openConfigurationFile() {
-        let picker = UIDocumentPickerViewController(documentTypes: AppConstants.URLs.filetypes, in: .import)
-        picker.allowsMultipleSelection = false
-        picker.delegate = self
-        present(picker, animated: true, completion: nil)
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-
-        // segue parses configuration file if not yet
-        if parsingResult == nil {
-            guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
-                return false
-            }
-            let url = pendingConfigurationURLs[indexPath.row]
-            return tryParseURL(url, cell: cell)
-        }
-        return true
-    }
-    
-    private func tryParseURL(_ url: URL, cell: UITableViewCell?) -> Bool {
-        deselectSelectedRow()
-
-        importer = HostImporter(withConfigurationURL: url, parentViewController: self)
-        importer?.importHost(withPassphrase: nil, removeOnError: false, removeOnCancel: false) {
-            self.parsingResult = $0
-            self.perform(segue: StoryboardSegue.Organizer.importHostSegueIdentifier)
-        }
-        return true
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let wizard = segue.destination as? WizardHostViewController else {
-            return
-        }
-        wizard.parsingResult = parsingResult
-
-        // retain back button
-        wizard.navigationItem.leftBarButtonItem = nil
+    private func selectHost(withUrl url: URL) {
+        delegate?.importedHostsController(self, didImport: url)
     }
     
     @IBAction private func close() {
@@ -133,6 +71,11 @@ extension ImportedHostsViewController {
         cell.leftText = url.normalizedFilename
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let url = pendingConfigurationURLs[indexPath.row]
+        selectHost(withUrl: url)
+    }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -143,17 +86,5 @@ extension ImportedHostsViewController {
         try? FileManager.default.removeItem(at: url)
         pendingConfigurationURLs.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .top)
-    }
-}
-
-extension ImportedHostsViewController: UIDocumentPickerDelegate {
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-    }
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let url = urls.first else {
-            return
-        }
-        _ = tryParseURL(url, cell: nil)
     }
 }

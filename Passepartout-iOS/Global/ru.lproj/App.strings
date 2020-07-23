@@ -24,7 +24,8 @@
 //
 
 "organizer.cells.add_provider.caption" = "Добавить нового провайдера";
-"organizer.cells.add_host.caption" = "Добавить новый хост";
+"organizer.cells.add_host.caption" = "Добавить из файлов";
+"organizer.cells.import_host.caption" = "Добавить из импортированных";
 
 "wizards.host.cells.title_input.caption" = "Название";
 "wizards.host.sections.existing.header" = "Существующие профили";
