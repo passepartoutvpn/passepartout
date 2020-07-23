@@ -24,7 +24,8 @@
 //
 
 "organizer.cells.add_provider.caption" = "Añadir proveedor";
-"organizer.cells.add_host.caption" = "Añadir host";
+"organizer.cells.add_host.caption" = "Añadir desde Ficheros";
+"organizer.cells.import_host.caption" = "Añadir desde importados";
 
 "wizards.host.cells.title_input.caption" = "Título";
 "wizards.host.sections.existing.header" = "Perfiles existentes";

@@ -58,7 +58,7 @@ internal enum L10n {
     internal enum Organizer {
       internal enum Cells {
         internal enum AddHost {
-          /// Browse configurations
+          /// Add from Files
           internal static let caption = L10n.tr("App", "organizer.cells.add_host.caption")
         }
         internal enum AddProvider {
@@ -66,7 +66,7 @@ internal enum L10n {
           internal static let caption = L10n.tr("App", "organizer.cells.add_provider.caption")
         }
         internal enum ImportHost {
-          /// Imported configurations
+          /// Add from imported
           internal static let caption = L10n.tr("App", "organizer.cells.import_host.caption")
         }
       }

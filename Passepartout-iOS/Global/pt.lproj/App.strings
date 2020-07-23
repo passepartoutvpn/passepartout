@@ -24,7 +24,8 @@
 //
 
 "organizer.cells.add_provider.caption" = "Adicionar novo perfil";
-"organizer.cells.add_host.caption" = "Adicionar novo host";
+"organizer.cells.add_host.caption" = "Adicionar dos Arquivos";
+"organizer.cells.import_host.caption" = "Adicionar dos importados";
 
 "wizards.host.cells.title_input.caption" = "Título";
 "wizards.host.sections.existing.header" = "Perfis existentes";

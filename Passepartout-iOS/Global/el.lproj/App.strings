@@ -24,7 +24,8 @@
 //
 
 "organizer.cells.add_provider.caption" = "Προσθήκη νέου παρόχου";
-"organizer.cells.add_host.caption" = "Προσθήκη νέου διακομιστή";
+"organizer.cells.add_host.caption" = "Προσθήκη από αρχεία";
+"organizer.cells.import_host.caption" = "Προσθήκη από εισαγωγή";
 
 "wizards.host.cells.title_input.caption" = "Τίτλος";
 "wizards.host.sections.existing.header" = "Υπάρχον Προφίλ";
