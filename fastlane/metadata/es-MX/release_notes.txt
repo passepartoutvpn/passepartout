@@ -1,4 +1,0 @@
-### Fixed
-
-- Skip DNS resolution of provider servers without a hostname (e.g. ProtonVPN "Secure Core").
-
