@@ -12,18 +12,18 @@ PODS:
   - Convenience/Tables (0.0.2)
   - Convenience/WebServices (0.0.2):
     - SwiftyBeaver
-  - DTFoundation/Core (1.7.14)
-  - DTFoundation/DTASN1 (1.7.14):
+  - DTFoundation/Core (1.7.15)
+  - DTFoundation/DTASN1 (1.7.15):
     - DTFoundation/Core
-  - Kvitto (1.0.3):
+  - Kvitto (1.0.4):
     - DTFoundation/DTASN1 (~> 1.7.13)
-    - Kvitto/Core (= 1.0.3)
-  - Kvitto/Core (1.0.3):
+    - Kvitto/Core (= 1.0.4)
+  - Kvitto/Core (1.0.4):
     - DTFoundation/DTASN1 (~> 1.7.13)
   - MBProgressHUD (1.2.0)
   - OpenSSL-Apple (1.1.1g.6)
   - SSZipArchive (2.2.3)
-  - SwiftyBeaver (1.9.1)
+  - SwiftyBeaver (1.9.2)
   - TunnelKit/AppExtension (2.3.0):
     - SwiftyBeaver
     - TunnelKit/Core
@@ -82,12 +82,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
-  DTFoundation: 25aa19bb7c6e225b1dfae195604fb8cf1da0ab4c
-  Kvitto: d451f893f84ad669850b7cb7d3f8781363e14232
+  DTFoundation: 767ca882209ef4d5132ec7e702526d5ed5bb71a2
+  Kvitto: 2b8a572b0f38890d63227a5062775c8209f8e143
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   OpenSSL-Apple: c9c1b9c5b2b1fc4e1758fc5f0836b58ae7fd8183
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
-  SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
+  SwiftyBeaver: b8239f6bfe9e1ea3303e6139abc8c24228081d84
   TunnelKit: a4fa4ecc6fc2b9fa74c38609c0e8fc4441d9672e
 
 PODFILE CHECKSUM: 318a10ca02bd2f890a96f90de37f4f04ac9f80f4
