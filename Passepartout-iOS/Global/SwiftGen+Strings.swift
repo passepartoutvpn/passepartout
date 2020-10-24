@@ -639,6 +639,10 @@ internal enum L10n {
           /// Make a donation
           internal static let caption = L10n.tr("Core", "organizer.cells.donate.caption")
         }
+        internal enum FollowTwitch {
+          /// Watch Passepartout on Twitch
+          internal static let caption = L10n.tr("Core", "organizer.cells.follow_twitch.caption")
+        }
         internal enum GithubSponsors {
           /// Support me on GitHub
           internal static let caption = L10n.tr("Core", "organizer.cells.github_sponsors.caption")
@@ -696,6 +700,12 @@ internal enum L10n {
         internal enum Support {
           /// Support
           internal static let header = L10n.tr("Core", "organizer.sections.support.header")
+        }
+        internal enum Twitch {
+          /// Come watch me make Passepartout live on Twitch, join the chat to interact and contribute!
+          internal static let footer = L10n.tr("Core", "organizer.sections.twitch.footer")
+          /// Twitch
+          internal static let header = L10n.tr("Core", "organizer.sections.twitch.header")
         }
       }
     }
