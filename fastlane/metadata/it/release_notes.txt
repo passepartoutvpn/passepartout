@@ -1,13 +1,4 @@
 ### Added
 
-- Child Safe VPN provider.
-
-### Changed
-
-- Improved host import flow.
-- Use active profile name in iOS settings.
-
-### Fixed
-
-- In-app purchases may not be credited/restored (Radu Ursache).
+- Watch me make Passepartout live on Twitch.
 
