@@ -189,7 +189,12 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     // MARK: Actions
     
     private func followOnTwitch() {
-        UIApplication.shared.open(AppConstants.URLs.twitch, options: [:], completionHandler: nil)
+        let app = UIApplication.shared
+        if app.canOpenURL(AppConstants.URLs.twitch) {
+            app.open(AppConstants.URLs.twitch, options: [:], completionHandler: nil)
+        } else {
+            app.open(AppConstants.URLs.twitchFallback, options: [:], completionHandler: nil)
+        }
     }
 
     private func enterProfile(_ profile: ConnectionProfile) {
