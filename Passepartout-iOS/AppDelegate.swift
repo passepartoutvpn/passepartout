@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         AppConstants.Log.configure()
         InfrastructureFactory.shared.preload()
         #if !targetEnvironment(simulator)
-        VPN.shared = StandardVPNProvider(bundleIdentifier: AppConstants.App.tunnelBundleId)
+        VPN.shared = OpenVPNProvider(bundleIdentifier: AppConstants.App.tunnelBundleId)
         #endif
         super.init()
     }

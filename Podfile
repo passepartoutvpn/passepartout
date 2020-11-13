@@ -1,15 +1,15 @@
 source 'https://github.com/cocoapods/specs.git'
-platform :ios, '11.0'
+platform :ios, '12.0'
 use_frameworks!
 
 load 'Podfile.include'
 
 $tunnelkit_name = 'TunnelKit'
-$tunnelkit_specs = ['Protocols/OpenVPN', 'Manager', 'Extra/LZO']
+$tunnelkit_specs = ['Protocols/OpenVPN', 'Extra/LZO']
 
 def shared_pods
     #pod_version $tunnelkit_name, $tunnelkit_specs, '~> 2.2.7'
-    pod_git $tunnelkit_name, $tunnelkit_specs, '683617d'
+    pod_git $tunnelkit_name, $tunnelkit_specs, '7433f9d469bd06735d85439693ca284430fb56e4'
     #pod_path $tunnelkit_name, $tunnelkit_specs, '..'
     pod 'SSZipArchive'
 
