@@ -57,8 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 //        splitViewController.minimumPrimaryColumnWidth = 360.0
         splitViewController.maximumPrimaryColumnWidth = .infinity
         splitViewController.delegate = self
-        if UI_USER_INTERFACE_IDIOM() == .pad {
-            splitViewController.preferredDisplayMode = .allVisible
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            splitViewController.preferredDisplayMode = .oneBesideSecondary
 //        } else {
 //            splitViewController.preferredDisplayMode = .primaryOverlay
         }

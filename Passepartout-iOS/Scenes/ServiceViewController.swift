@@ -404,8 +404,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
         }
 
         if #available(iOS 13, *) {
-            let auth = CLLocationManager.authorizationStatus()
-            switch auth {
+            switch locationManager.authorizationStatus {
             case .authorizedAlways, .authorizedWhenInUse:
                 break
                 
