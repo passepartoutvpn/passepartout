@@ -204,8 +204,6 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case compression
         
-        case network
-        
         case other
     }
     
