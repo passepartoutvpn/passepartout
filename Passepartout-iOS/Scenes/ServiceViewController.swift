@@ -860,7 +860,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .useProfile:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Service.Cells.UseProfile.caption
+            cell.leftText = L10n.Core.Service.Cells.UseProfile.caption
             return cell
             
         case .vpnService:

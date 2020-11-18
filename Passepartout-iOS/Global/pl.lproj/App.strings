@@ -36,7 +36,6 @@
 "service.sections.status.header" = "Połączenie";
 "service.sections.configuration.header" = "Konfiguracja";
 
-"service.cells.use_profile.caption" = "Używaj tego profilu";
 "service.cells.vpn_service.caption" = "Włączone";
 "service.cells.provider.refresh.caption" = "Odśwież infrastrukturę";
 "service.cells.host.parameters.caption" = "Parametry";

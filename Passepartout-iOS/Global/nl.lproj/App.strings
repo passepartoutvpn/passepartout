@@ -36,7 +36,6 @@
 "service.sections.status.header" = "Verbinding";
 "service.sections.configuration.header" = "Configuratie";
 
-"service.cells.use_profile.caption" = "Gebruik dit profiel";
 "service.cells.vpn_service.caption" = "Ingeschakeld";
 "service.cells.provider.refresh.caption" = "Vernieuw de infrastructuur";
 "service.cells.host.parameters.caption" = "Parameters";

@@ -36,7 +36,6 @@
 "service.sections.status.header" = "连接";
 "service.sections.configuration.header" = "配置";
 
-"service.cells.use_profile.caption" = "使用此配置";
 "service.cells.vpn_service.caption" = "已启用";
 "service.cells.provider.refresh.caption" = "刷新基础设置";
 "service.cells.host.parameters.caption" = "参数";

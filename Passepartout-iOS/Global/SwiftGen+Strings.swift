@@ -149,10 +149,6 @@ internal enum L10n {
           /// Add current Wi-Fi
           internal static let caption = L10n.tr("App", "service.cells.trusted_add_wifi.caption")
         }
-        internal enum UseProfile {
-          /// Use this profile
-          internal static let caption = L10n.tr("App", "service.cells.use_profile.caption")
-        }
         internal enum VpnService {
           /// Enabled
           internal static let caption = L10n.tr("App", "service.cells.vpn_service.caption")
@@ -902,6 +898,10 @@ internal enum L10n {
         internal enum TrustedPolicy {
           /// Trust disables VPN
           internal static let caption = L10n.tr("Core", "service.cells.trusted_policy.caption")
+        }
+        internal enum UseProfile {
+          /// Use this profile
+          internal static let caption = L10n.tr("Core", "service.cells.use_profile.caption")
         }
         internal enum VpnResolvesHostname {
           /// Resolve provider hostname

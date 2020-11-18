@@ -36,7 +36,6 @@
 "service.sections.status.header" = "Koppling";
 "service.sections.configuration.header" = "Konfiguration";
 
-"service.cells.use_profile.caption" = "Använd den här profilen";
 "service.cells.vpn_service.caption" = "Aktiverad";
 "service.cells.provider.refresh.caption" = "Uppdatera infrastruktur";
 "service.cells.host.parameters.caption" = "Parametrar";

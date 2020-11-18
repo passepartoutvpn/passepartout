@@ -36,7 +36,6 @@
 "service.sections.status.header" = "Σύνδεση";
 "service.sections.configuration.header" = "Ρύθμιση";
 
-"service.cells.use_profile.caption" = "Χρησιμοποιήστε αυτό το προφίλ";
 "service.cells.vpn_service.caption" = "Ενεργοποιήθηκε";
 "service.cells.provider.refresh.caption" = "Ανανέωση της υποδομής";
 "service.cells.host.parameters.caption" = "Παράμετροι";
