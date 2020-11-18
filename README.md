@@ -173,7 +173,7 @@ You are strongly encouraged to read carefully both the [disclaimer][web-disclaim
 
 Twitter: [@keeshux][about-twitter]
 
-Website: [passepartoutvpn.app][about-website]
+Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
 
@@ -204,4 +204,5 @@ Website: [passepartoutvpn.app][about-website]
 
 [about-twitter]: https://twitter.com/keeshux
 [about-website]: https://passepartoutvpn.app
+[about-faq]: https://passepartoutvpn.app/faq/
 [about-reddit]: https://www.reddit.com/r/passepartout
