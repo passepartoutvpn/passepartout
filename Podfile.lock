@@ -21,18 +21,18 @@ PODS:
   - Kvitto/Core (1.0.5):
     - DTFoundation/DTASN1 (~> 1.7.13)
   - MBProgressHUD (1.2.0)
-  - OpenSSL-Apple (1.1.1h.8)
+  - OpenSSL-Apple (1.1.1h.9)
   - SSZipArchive (2.2.3)
   - SwiftyBeaver (1.9.3)
-  - TunnelKit/AppExtension (3.0.1):
+  - TunnelKit/AppExtension (3.1.0):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (3.0.1):
+  - TunnelKit/Core (3.1.0):
     - SwiftyBeaver
-  - TunnelKit/Extra/LZO (3.0.1)
-  - TunnelKit/Manager (3.0.1):
+  - TunnelKit/Extra/LZO (3.1.0)
+  - TunnelKit/Manager (3.1.0):
     - SwiftyBeaver
-  - TunnelKit/Protocols/OpenVPN (3.0.1):
+  - TunnelKit/Protocols/OpenVPN (3.1.0):
     - OpenSSL-Apple (~> 1.1.1h.8)
     - TunnelKit/AppExtension
     - TunnelKit/Core
@@ -52,8 +52,8 @@ DEPENDENCIES:
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (~> 3.0.1)
-  - TunnelKit/Protocols/OpenVPN (~> 3.0.1)
+  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `4e2dca9`)
+  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `4e2dca9`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -63,28 +63,33 @@ SPEC REPOS:
     - OpenSSL-Apple
     - SSZipArchive
     - SwiftyBeaver
-    - TunnelKit
 
 EXTERNAL SOURCES:
   Convenience:
     :commit: 0b09b1e
     :git: https://github.com/keeshux/convenience
+  TunnelKit:
+    :commit: 4e2dca9
+    :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
   Convenience:
     :commit: 0b09b1e
     :git: https://github.com/keeshux/convenience
+  TunnelKit:
+    :commit: 4e2dca9
+    :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
   DTFoundation: e7781d9fd2f202bfd451fbbf8cab71ce83b46498
   Kvitto: e5c903c656cce6bfebbf337d992184cf03cb4853
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OpenSSL-Apple: 70990157548ecf94885310231aff52db698e1077
+  OpenSSL-Apple: cf679d18ec7d719c6a7d38c9a2977a21c2369d38
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
-  TunnelKit: 0eeab02d3367ae6c3333162963242bf021558fef
+  TunnelKit: 4db9180956f8aaf4ab152fd0d38c6c9c63a46cf8
 
-PODFILE CHECKSUM: e7d1179acdfeaac329f88cc1a8840a8de5109b4e
+PODFILE CHECKSUM: 1fd20c6db48881199527c72f0e28c9a6c3cb85dc
 
 COCOAPODS: 1.10.0
