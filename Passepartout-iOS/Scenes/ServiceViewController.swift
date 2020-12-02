@@ -81,7 +81,6 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     func setProfile(_ profile: ConnectionProfile?, reloadingViews: Bool = true) {
         self.profile = profile
-        vpn.profile = profile
         
         if let profile = profile {
             title = service.screenTitle(ProfileKey(profile))
@@ -228,9 +227,6 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private func activateProfile() {
         service.activateProfile(uncheckedProfile)
-
-        // for vpn methods to work, must update .profile to currently active profile
-        vpn.profile = uncheckedProfile
         vpn.disconnect { (error) in
             self.reloadModel()
             self.updateViewsIfNeeded()

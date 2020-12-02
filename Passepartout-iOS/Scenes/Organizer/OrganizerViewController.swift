@@ -802,6 +802,9 @@ extension OrganizerViewController: ConnectionServiceDelegate {
             IntentDispatcher.donateEnableVPN()
         }
     }
+    
+    func connectionService(didUpdate profile: ConnectionProfile) {
+    }
 }
 
 extension OrganizerViewController: UIDocumentPickerDelegate {
