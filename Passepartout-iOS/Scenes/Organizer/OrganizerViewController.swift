@@ -86,7 +86,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
         model.set([.openAbout], forSection: .about)
         model.set([.uninstall], forSection: .destruction)
-        if AppConstants.Flags.isBeta {
+        if ProductManager.shared.isBeta {
             model.add(.test)
             model.setHeader("Beta", forSection: .test)
             model.set([.testInterfaces, .testDisplayLog, .testTermination], forSection: .test)

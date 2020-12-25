@@ -1,5 +1,5 @@
 //
-//  AppConstants+Flags.swift
+//  AppConstants+App.swift
 //  Passepartout-iOS
 //
 //  Created by Davide De Rosa on 11/2/19.
@@ -31,24 +31,16 @@ extension AppConstants {
         static let eventCount = 3
     }
 
-    struct Flags {
-        static var isBeta: Bool {
-            #if targetEnvironment(simulator)
-            return true
-            #else
-            return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-            #endif
-        }
-
+    struct InApp {
         static var isBetaFullVersion: Bool {
             guard !ProcessInfo.processInfo.arguments.contains("FULL_VERSION") else {
                 return true
             }
             return false
         }
-    }
 
-    struct InApp {
-        public static let limitedNumberOfHosts = 2
+        static let lastFullVersionBuild = 2016
+
+        static let limitedNumberOfHosts = 2
     }
 }

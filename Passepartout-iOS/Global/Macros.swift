@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import PassepartoutCore
 
 extension UIView {
     static func get<T: UIView>() -> T {
