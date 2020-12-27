@@ -430,15 +430,20 @@ class ServiceViewController: UIViewController, StrongTableHost {
             IntentDispatcher.donateUntrustCurrentNetwork()
         }
 
-        guard trustedNetworks.addCurrentWifi() else {
-            let alert = UIAlertController.asAlert(
-                L10n.Core.Service.Sections.Trusted.header,
-                L10n.Core.Service.Alerts.Trusted.NoNetwork.message
-            )
-            alert.addCancelAction(L10n.Core.Global.ok)
-            present(alert, animated: true, completion: nil)
-            return
+        let alert = UIAlertController.asAlert(L10n.Core.Service.Sections.Trusted.header, nil)
+        alert.addTextField { (field) in
+            field.text = Utils.currentWifiNetworkName() ?? ""
+            field.applyHostTitle(.current)
+            field.delegate = self
         }
+        alert.addCancelAction(L10n.Core.Global.cancel)
+        alert.addPreferredAction(L10n.Core.Global.ok) {
+            guard let wifi = alert.textFields?.first?.text else {
+                return
+            }
+            self.trustedNetworks.addWifi(wifi)
+        }
+        present(alert, animated: true, completion: nil)
     }
     
     private func toggleTrustWiFi(cell: ToggleTableViewCell, at row: Int) {
