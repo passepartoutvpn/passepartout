@@ -10,6 +10,7 @@ USE WITH MULTIPLE PROVIDERS
 
 Passepartout offers presets for major VPN providers:
 
+- Child Safe VPN
 - Hide.me
 - Mullvad
 - NordVPN
