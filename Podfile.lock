@@ -39,21 +39,21 @@ PODS:
     - TunnelKit/Manager
 
 DEPENDENCIES:
-  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
-  - Convenience/WebServices (from `https://github.com/keeshux/convenience`, commit `0b09b1e`)
+  - Convenience/About (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/Alerts (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/Dialogs (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/InApp (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/Misc (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/Options (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/Persistence (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `b30816a`)
+  - Convenience/WebServices (from `https://github.com/keeshux/convenience`, commit `b30816a`)
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `304d021`)
-  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `304d021`)
+  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `ba3ead1`)
+  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `ba3ead1`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -66,18 +66,18 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Convenience:
-    :commit: 0b09b1e
+    :commit: b30816a
     :git: https://github.com/keeshux/convenience
   TunnelKit:
-    :commit: 304d021
+    :commit: ba3ead1
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
   Convenience:
-    :commit: 0b09b1e
+    :commit: b30816a
     :git: https://github.com/keeshux/convenience
   TunnelKit:
-    :commit: 304d021
+    :commit: ba3ead1
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
@@ -90,6 +90,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
   TunnelKit: 4db9180956f8aaf4ab152fd0d38c6c9c63a46cf8
 
-PODFILE CHECKSUM: c61d36f819940bcbb0684b98ec889e9bb5df918e
+PODFILE CHECKSUM: 96b84a3adcf28988f3e33ddb5110dc243dd7fefe
 
 COCOAPODS: 1.10.0
