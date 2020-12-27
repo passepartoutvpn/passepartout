@@ -73,12 +73,13 @@
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "FULL_VERSION"
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "FULL_VERSION"
+            value = ""
             isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
