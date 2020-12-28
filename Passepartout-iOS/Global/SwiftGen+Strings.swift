@@ -146,7 +146,7 @@ internal enum L10n {
           }
         }
         internal enum TrustedAddWifi {
-          /// Add current Wi-Fi
+          /// Add Wi-Fi
           internal static let caption = L10n.tr("App", "service.cells.trusted_add_wifi.caption")
         }
         internal enum VpnService {

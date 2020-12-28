@@ -39,7 +39,7 @@
 "service.cells.vpn_service.caption" = "Włączone";
 "service.cells.provider.refresh.caption" = "Odśwież infrastrukturę";
 "service.cells.host.parameters.caption" = "Parametry";
-"service.cells.trusted_add_wifi.caption" = "Dodaj obecnie połączoną sieć Wi-Fi";
+"service.cells.trusted_add_wifi.caption" = "Dodaj Wi-Fi";
 "service.alerts.location.message.denied" = "Musisz pozwolić na dostęp do lokalizacji żeby zaufać tej sieci Wi-Fi. Przejdź do ustawień prywatności i pozwól Passepartout na wykorzystywanie usług lokalizacji.";
 "service.alerts.location.button.settings" = "Ustawienia";
 

@@ -39,7 +39,7 @@
 "service.cells.vpn_service.caption" = "Activer";
 "service.cells.provider.refresh.caption" = "Rafraîchir l'infrastructure";
 "service.cells.host.parameters.caption" = "Paramètres";
-"service.cells.trusted_add_wifi.caption" = "Ajouter le présent Wi-Fi";
+"service.cells.trusted_add_wifi.caption" = "Ajouter Wi-Fi";
 "service.alerts.location.message.denied" = "Vous devez autoriser la localisation pour faire confiance à ce réseau WiFi. Acceptez les permissions de localisation pour Passepartout dans les réglages.";
 "service.alerts.location.button.settings" = "Réglages";
 

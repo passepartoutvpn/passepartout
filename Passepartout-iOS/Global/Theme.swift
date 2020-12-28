@@ -146,13 +146,22 @@ extension UILabel {
 }
 
 extension UITextField {
-    func applyHostTitle(_ theme: Theme) {
-        placeholder = L10n.Core.Global.Host.TitleInput.placeholder
+    func applyAlert(_ theme: Theme) {
         clearButtonMode = .always
         keyboardType = .default
         returnKeyType = .done
         autocapitalizationType = .none
         autocorrectionType = .no
+    }
+
+    func applyHostTitle(_ theme: Theme) {
+        applyAlert(theme)
+        placeholder = L10n.Core.Global.Host.TitleInput.placeholder
+    }
+
+    func applyWiFiTitle(_ theme: Theme) {
+        applyAlert(theme)
+        placeholder = nil
     }
 }
 

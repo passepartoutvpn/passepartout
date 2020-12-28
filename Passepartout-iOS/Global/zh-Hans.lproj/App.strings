@@ -39,7 +39,7 @@
 "service.cells.vpn_service.caption" = "已启用";
 "service.cells.provider.refresh.caption" = "刷新基础设置";
 "service.cells.host.parameters.caption" = "参数";
-"service.cells.trusted_add_wifi.caption" = "添加当前的Wi-Fi";
+"service.cells.trusted_add_wifi.caption" = "新增Wi-Fi";
 "service.alerts.location.message.denied" = "你必须允许位置访问以信任此Wi-Fi。请至iOS设置对Passepartout的位置权限。";
 "service.alerts.location.button.settings" = "设置";
 

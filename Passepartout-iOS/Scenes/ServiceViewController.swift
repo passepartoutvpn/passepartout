@@ -433,11 +433,11 @@ class ServiceViewController: UIViewController, StrongTableHost {
         let alert = UIAlertController.asAlert(L10n.Core.Service.Sections.Trusted.header, nil)
         alert.addTextField { (field) in
             field.text = Utils.currentWifiNetworkName() ?? ""
-            field.applyHostTitle(.current)
+            field.applyWiFiTitle(.current)
             field.delegate = self
         }
         alert.addCancelAction(L10n.Core.Global.cancel)
-        alert.addPreferredAction(L10n.Core.Global.ok) {
+        alert.addPreferredAction(L10n.App.Service.Cells.TrustedAddWifi.caption) {
             guard let wifi = alert.textFields?.first?.text else {
                 return
             }

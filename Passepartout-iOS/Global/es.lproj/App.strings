@@ -39,7 +39,7 @@
 "service.cells.vpn_service.caption" = "Habilitado";
 "service.cells.provider.refresh.caption" = "Refrescar infraestructura";
 "service.cells.host.parameters.caption" = "Parámetros";
-"service.cells.trusted_add_wifi.caption" = "Añadir Wi-Fi en uso";
+"service.cells.trusted_add_wifi.caption" = "Añadir Wi-Fi";
 "service.alerts.location.message.denied" = "Debes dar acceso a tu posición para añadir esta red Wi-Fi a las redes de confianza. Mira los ajustes iOS y revisa los permisos de posición para Passepartout.";
 "service.alerts.location.button.settings" = "Ajustes";
 

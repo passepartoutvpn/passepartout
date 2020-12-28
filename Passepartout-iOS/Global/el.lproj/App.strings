@@ -39,7 +39,7 @@
 "service.cells.vpn_service.caption" = "Ενεργοποιήθηκε";
 "service.cells.provider.refresh.caption" = "Ανανέωση της υποδομής";
 "service.cells.host.parameters.caption" = "Παράμετροι";
-"service.cells.trusted_add_wifi.caption" = "Προσθέστε το τρέχον Wi-Fi";
+"service.cells.trusted_add_wifi.caption" = "Προσθέστε Wi-Fi";
 "service.alerts.location.message.denied" = "Πρέπει να επιτρέψετε τη πρόσβαση τοποθεσίας για να εμπιστευτείτε το Wi-Fi δίκτυο. Μεταβείτε στις ρυθμίσεις του iOS και επιθεωρείστε τις ρυθμίσεις για το Passepartout.";
 "service.alerts.location.button.settings" = "Ρυθμίσεις";
 

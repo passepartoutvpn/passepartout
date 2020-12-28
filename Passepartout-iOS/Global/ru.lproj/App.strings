@@ -39,7 +39,7 @@
 "service.cells.vpn_service.caption" = "Включен";
 "service.cells.provider.refresh.caption" = "Обновить инфраструктуру";
 "service.cells.host.parameters.caption" = "Параметры";
-"service.cells.trusted_add_wifi.caption" = "Добавить текущий Wi-Fi";
+"service.cells.trusted_add_wifi.caption" = "Добавить Wi-Fi";
 "service.alerts.location.message.denied" = "Вам нужно разрешить использование геопозиции для добавления этой Wi-Fi сети в доверенные. Перейдите в настройки iOS, и измените разрешения геолокации для Passepartout.";
 "service.alerts.location.button.settings" = "Настройки";
 
