@@ -82,7 +82,7 @@ class NetworkSettingsViewController: UITableViewController {
         if networkChoices.proxy != .server {
             sections.append(.manualProxy)
         }
-        if networkChoices.mtu != .server {
+        if networkChoices.mtu == .manual {
             sections.append(.manualMTU)
         }
         
