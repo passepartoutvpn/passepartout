@@ -82,18 +82,23 @@ class NetworkSettingsViewController: UITableViewController {
         if networkChoices.proxy != .server {
             sections.append(.manualProxy)
         }
+        if networkChoices.mtu != .server {
+            sections.append(.manualMTU)
+        }
         
         // headers
         model.setHeader("", forSection: .choices)
         model.setHeader(L10n.Core.NetworkSettings.Gateway.title, forSection: .manualGateway)
         model.setHeader(L10n.Core.NetworkSettings.Proxy.title, forSection: .manualProxy)
+        model.setHeader(L10n.Core.NetworkSettings.Mtu.title, forSection: .manualMTU)
         
         // footers
 //        model.setFooter(L10n.Core.Configuration.Sections.Reset.footer, for: .reset)
         
         // rows
-        model.set([.gateway, .dns, .proxy], forSection: .choices)
+        model.set([.gateway, .dns, .proxy, .mtu], forSection: .choices)
         model.set([.gatewayIPv4, .gatewayIPv6], forSection: .manualGateway)
+        model.set([.mtuBytes], forSection: .manualMTU)
 
         var dnsServers: [RowType] = Array(repeating: .dnsAddress, count: networkSettings.dnsServers?.count ?? 0)
         if networkChoices.dns == .manual {
@@ -139,6 +144,7 @@ class NetworkSettingsViewController: UITableViewController {
         updateGateway(networkChoices.gateway)
         updateDNS(networkChoices.dns)
         updateProxy(networkChoices.proxy)
+        updateMTU(networkChoices.mtu)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,6 +216,24 @@ class NetworkSettingsViewController: UITableViewController {
         }
     }
     
+    private func updateMTU(_ choice: NetworkChoice) {
+        networkChoices.mtu = choice
+        switch networkChoices.mtu {
+        case .client:
+            if let settings = clientNetworkSettings {
+                networkSettings.copyMTU(from: settings)
+            }
+            
+        case .server:
+            break
+            
+        case .manual:
+            if let settings = profile?.manualNetworkSettings {
+                networkSettings.copyMTU(from: settings)
+            }
+        }
+    }
+    
     private func commitTextField(_ field: UITextField) {
 
         // DNS: servers, domains
@@ -265,6 +289,9 @@ class NetworkSettingsViewController: UITableViewController {
         if networkChoices.proxy == .manual {
             settings.copyProxy(from: networkSettings)
         }
+        if networkChoices.mtu == .manual {
+            settings.copyMTU(from: networkSettings)
+        }
         profile?.manualNetworkSettings = settings
     }
 }
@@ -282,6 +309,8 @@ extension NetworkSettingsViewController {
         case manualDNSDomains
         
         case manualProxy
+
+        case manualMTU
     }
     
     enum RowType: Int {
@@ -290,6 +319,8 @@ extension NetworkSettingsViewController {
         case dns
         
         case proxy
+        
+        case mtu
         
         case gatewayIPv4
 
@@ -312,6 +343,8 @@ extension NetworkSettingsViewController {
         case proxyBypass
 
         case proxyAddBypass
+
+        case mtuBytes
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -354,6 +387,12 @@ extension NetworkSettingsViewController {
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.NetworkSettings.Proxy.title
             cell.rightText = networkChoices.proxy.description
+            return cell
+            
+        case .mtu:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Core.NetworkSettings.Mtu.title
+            cell.rightText = networkChoices.mtu.description
             return cell
 
         case .gatewayIPv4:
@@ -471,6 +510,12 @@ extension NetworkSettingsViewController {
             cell.applyAction(.current)
             cell.leftText = L10n.App.NetworkSettings.Cells.AddProxyBypass.caption
             return cell
+
+        case .mtuBytes:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Core.NetworkSettings.Mtu.Cells.Bytes.caption
+            cell.rightText = networkSettings.mtuBytes?.description ?? "Default"
+            return cell
         }
     }
     
@@ -520,6 +565,20 @@ extension NetworkSettingsViewController {
             }
             navigationController?.pushViewController(vc, animated: true)
 
+        case .mtu:
+            let vc = SingleOptionViewController<NetworkChoice>()
+            vc.applyTint(.current)
+            vc.title = (cell as? SettingTableViewCell)?.leftText
+            vc.options = NetworkChoice.choices(for: profile)
+            vc.descriptionBlock = { $0.description }
+
+            vc.selectedOption = networkChoices.mtu
+            vc.selectionBlock = { [weak self] in
+                self?.updateMTU($0)
+                self?.navigationController?.popViewController(animated: true)
+            }
+            navigationController?.pushViewController(vc, animated: true)
+
         case .dnsAddAddress:
             tableView.deselectRow(at: indexPath, animated: true)
             
@@ -547,6 +606,23 @@ extension NetworkSettingsViewController {
             reloadModel()
             tableView.insertRows(at: [indexPath], with: .automatic)
             
+        case .mtuBytes:
+            guard networkChoices.mtu == .manual else {
+                break
+            }
+            let vc = SingleOptionViewController<Int>()
+            vc.applyTint(.current)
+            vc.title = (cell as? SettingTableViewCell)?.leftText
+            vc.options = ProfileNetworkSettings.mtuOptions
+            vc.descriptionBlock = { $0.description }
+            
+            vc.selectedOption = networkSettings.mtuBytes
+            vc.selectionBlock = { [weak self] in
+                self?.networkSettings.mtuBytes = $0
+                self?.navigationController?.popViewController(animated: true)
+            }
+            navigationController?.pushViewController(vc, animated: true)
+
         default:
             break
         }

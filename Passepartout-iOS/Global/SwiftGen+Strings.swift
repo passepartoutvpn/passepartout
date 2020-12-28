@@ -600,6 +600,16 @@ internal enum L10n {
         /// Default gateway
         internal static let title = L10n.tr("Core", "network_settings.gateway.title")
       }
+      internal enum Mtu {
+        /// MTU
+        internal static let title = L10n.tr("Core", "network_settings.mtu.title")
+        internal enum Cells {
+          internal enum Bytes {
+            /// Bytes
+            internal static let caption = L10n.tr("Core", "network_settings.mtu.cells.bytes.caption")
+          }
+        }
+      }
       internal enum Proxy {
         /// Proxy
         internal static let title = L10n.tr("Core", "network_settings.proxy.title")
