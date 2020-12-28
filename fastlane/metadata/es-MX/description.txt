@@ -26,7 +26,7 @@ FÁCIL DE USAR
 - Gestiona tus perfiles en una sola pantalla.
 - Importa ficheros de configuración .ovpn.
 - Configura el cifrado sin retocar ningún fichero de configuración.
-- Sobrescribe los ajustes de red en un chasquido (puerta de enlace, DNS, proxy).
+- Sobrescribe los ajustes de red en un chasquido (puerta de enlace, DNS, proxy, MTU).
 
 INTEGRACIÓN CON EL SISTEMA OPERATIVO
 

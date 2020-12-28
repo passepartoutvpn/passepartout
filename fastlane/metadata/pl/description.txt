@@ -26,7 +26,7 @@ Passepartout oferuje gotowe konfiguracje dla poniższych usługodawców:
 - Przechowuj swoje profile w jednym miejscu
 - Importuj pliki konfiguracyjne .openvpn
 - Optymalne szyfrowanie bez konieczności dodatkowej konfiguracji
-- Napisz ustawienia sieciowe z łatwością (brama domyślna, DNS, Proxy)
+- Napisz ustawienia sieciowe z łatwością (brama domyślna, DNS, Proxy, MTU)
 
 INTEGRACJA Z SYSTEMEM
 

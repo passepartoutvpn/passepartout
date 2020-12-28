@@ -26,7 +26,7 @@ FACILE D'UTILISATION
 - S'occupe de vos profiles en un Seul endroit.
 - Importer les fichiers de configuration .ovpn.
 - Affiner l'encryption sans modifier les fichiers de configuration.
-- Outrepasse les paramètres réseaux en un clin d'oeil (passerelle par défaut, DNS, proxy).
+- Outrepasse les paramètres réseaux en un clin d'oeil (passerelle par défaut, DNS, proxy, MTU).
 
 INTÉGRATION OS
 

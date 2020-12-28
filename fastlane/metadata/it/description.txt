@@ -26,7 +26,7 @@ FACILE DA USARE
 - Gestisci i tuoi profili in una singola schermata.
 - Importa file di configurazione .ovpn.
 - Regola la crittografia senza toccare alcun file di configurazione.
-- Sovrascrivi le impostazioni di rete in un attimo (gateway predefinito, DNS, proxy).
+- Sovrascrivi le impostazioni di rete in un attimo (gateway predefinito, DNS, proxy, MTU).
 
 INTEGRAZIONE CON IL SISTEMA
 
