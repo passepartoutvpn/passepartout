@@ -1,0 +1,9 @@
+### Added
+
+- Customize MTU in network settings.
+
+### Changed
+
+- Enter explicit Wi-Fi SSID to trust.
+- Use default tunnel MTU rather than 1250.
+
