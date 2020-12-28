@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Customize MTU in network settings.
+
 ### Changed
 
 - Enter explicit Wi-Fi SSID to trust.
+- Default MTU to 1500.
 
 ## 1.12.1 (2020-11-15)
 
