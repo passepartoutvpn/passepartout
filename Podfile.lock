@@ -21,7 +21,7 @@ PODS:
   - Kvitto/Core (1.0.5):
     - DTFoundation/DTASN1 (~> 1.7.13)
   - MBProgressHUD (1.2.0)
-  - OpenSSL-Apple (1.1.1h.9)
+  - OpenSSL-Apple (1.1.1h.10)
   - SSZipArchive (2.2.3)
   - SwiftyBeaver (1.9.3)
   - TunnelKit/AppExtension (3.1.0):
@@ -33,7 +33,7 @@ PODS:
   - TunnelKit/Manager (3.1.0):
     - SwiftyBeaver
   - TunnelKit/Protocols/OpenVPN (3.1.0):
-    - OpenSSL-Apple (~> 1.1.1h.8)
+    - OpenSSL-Apple (~> 1.1.1h.10)
     - TunnelKit/AppExtension
     - TunnelKit/Core
     - TunnelKit/Manager
@@ -52,8 +52,8 @@ DEPENDENCIES:
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `e923382`)
-  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `e923382`)
+  - TunnelKit/Extra/LZO (~> 3.1.0)
+  - TunnelKit/Protocols/OpenVPN (~> 3.1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -63,33 +63,28 @@ SPEC REPOS:
     - OpenSSL-Apple
     - SSZipArchive
     - SwiftyBeaver
+    - TunnelKit
 
 EXTERNAL SOURCES:
   Convenience:
     :commit: b30816a
     :git: https://github.com/keeshux/convenience
-  TunnelKit:
-    :commit: e923382
-    :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
   Convenience:
     :commit: b30816a
     :git: https://github.com/keeshux/convenience
-  TunnelKit:
-    :commit: e923382
-    :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
   DTFoundation: e7781d9fd2f202bfd451fbbf8cab71ce83b46498
   Kvitto: e5c903c656cce6bfebbf337d992184cf03cb4853
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OpenSSL-Apple: cf679d18ec7d719c6a7d38c9a2977a21c2369d38
+  OpenSSL-Apple: 8a8fcb06fb66f9c2f7aed45ce363668493b8e5f6
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
-  TunnelKit: 4db9180956f8aaf4ab152fd0d38c6c9c63a46cf8
+  TunnelKit: 1d9494670d643fd447aa3fa208dae1a4dcab2b2e
 
-PODFILE CHECKSUM: 18150cf5ff4c6f87ae8ecd29ddbea7d64d6741bd
+PODFILE CHECKSUM: c7333249e02a01ebc26be633bfc8c95fc5d82229
 
 COCOAPODS: 1.10.0
