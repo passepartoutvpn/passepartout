@@ -614,11 +614,16 @@ extension NetworkSettingsViewController {
             vc.applyTint(.current)
             vc.title = (cell as? SettingTableViewCell)?.leftText
             vc.options = ProfileNetworkSettings.mtuOptions
-            vc.descriptionBlock = { $0.description }
+            vc.descriptionBlock = {
+                guard $0 != 0 else {
+                    return "Default"
+                }
+                return $0.description
+            }
             
-            vc.selectedOption = networkSettings.mtuBytes
+            vc.selectedOption = networkSettings.mtuBytes ?? 0
             vc.selectionBlock = { [weak self] in
-                self?.networkSettings.mtuBytes = $0
+                self?.networkSettings.mtuBytes = ($0 != 0) ? $0 : nil
                 self?.navigationController?.popViewController(animated: true)
             }
             navigationController?.pushViewController(vc, animated: true)
