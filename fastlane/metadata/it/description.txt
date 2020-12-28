@@ -10,6 +10,7 @@ USALO CON VARI PROVIDER
 
 Passepartout offre profili per i maggiori provider VPN:
 
+- Child Safe VPN 
 - Hide.me
 - Mullvad
 - NordVPN

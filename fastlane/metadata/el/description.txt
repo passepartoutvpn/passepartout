@@ -10,6 +10,7 @@ To Passepartout βασίζετε σε ανοιχτό κώδικα: https://githu
 
 Το Passepartout προσφέρει προκαθορισμένες ρυθμίσεις για βασικούς VPN παρόχους:
 
+- Child Safe VPN
 - Hide.me
 - Mullvad
 - NordVPN

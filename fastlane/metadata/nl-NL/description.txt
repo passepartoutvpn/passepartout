@@ -10,6 +10,7 @@ GEBRUIK MET MEERDERE PROVIDERS
 
 Passepartout biedt presets voor grote VPN-providers:
 
+- Child Safe VPN 
 - Hide.me
 - Mullvad
 - NordVPN
