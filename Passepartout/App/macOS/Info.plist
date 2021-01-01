@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>ovpn</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>OpenVPN Configuration</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(CFG_APP_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>$(CFG_COPYRIGHT)</string>
+	<key>NSMainStoryboardFile</key>
+	<string>Main</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>ConnectVPNIntent</string>
+		<string>DisableVPNIntent</string>
+		<string>EnableVPNIntent</string>
+		<string>MoveToLocationIntent</string>
+		<string>TrustCellularNetworkIntent</string>
+		<string>TrustCurrentNetworkIntent</string>
+		<string>UntrustCellularNetworkIntent</string>
+		<string>UntrustCurrentNetworkIntent</string>
+	</array>
+	<key>com.algoritmico.Passepartout.config</key>
+	<dict>
+		<key>app_launcher_id</key>
+		<string>$(CFG_APP_LAUNCHER_ID)</string>
+		<key>appcenter_secret</key>
+		<string>$(CFG_APPCENTER_SECRET)</string>
+		<key>appstore_id</key>
+		<string>$(CFG_APPSTORE_MACOS_ID)</string>
+		<key>group_id</key>
+		<string>$(CFG_TEAM_ID).group.$(CFG_GROUP_ID)</string>
+	</dict>
+</dict>
+</plist>

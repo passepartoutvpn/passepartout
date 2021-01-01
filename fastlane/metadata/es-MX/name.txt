@@ -1,1 +1,0 @@
-Passepartout - Cliente OpenVPN

@@ -1,0 +1,240 @@
+//
+//  Core.strings
+//  Passepartout
+//
+//  Created by Davide De Rosa on 6/13/18.
+//  Copyright (c) 2021 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"global.ok" = "OK";
+"global.cancel" = "Avbryt";
+"global.next" = "Nästa";
+"global.close" = "Stäng";
+"global.host.title_input.message" = "Godtagbara tecken är alfanumeriska plus bindestreck \" - \", understrykning \" _ \"och punkt \". \".";
+"global.host.title_input.placeholder" = "Min profil";
+"global.email_not_configured" = "Inget e-postkonto är konfigurerat.";
+"global.values.enabled" = "Aktiverad";
+"global.values.disabled" = "Inaktiverad";
+"global.values.none" = "Ingen";
+"global.values.automatic" = "Automatiskt";
+"global.values.manual" = "Manuellt";
+"reddit.title" = "Reddit";
+"reddit.message" = "Visste du att Passepartout har en subreddit? Prenumerera på uppdateringar eller diskutera problem, funktioner, nya plattformar eller vad du vill. \n\nDet är också ett bra sätt att visa dig bryr dig om detta projekt.";
+"reddit.buttons.subscribe" = "Prenumerera nu!";
+"reddit.buttons.remind" = "Påminn mig senare";
+"reddit.buttons.never" = "Fråga inte igen";
+"organizer.sections.providers.header" = "Leverantörer";
+"organizer.sections.providers.footer" = "Här hittar du några leverantörer med förinställda konfigurationsprofiler.";
+"organizer.sections.hosts.header" = "Värdar";
+"organizer.sections.hosts.footer" = "Importera värdar från .ovpn konfigurationsfiler.";
+"organizer.sections.siri.header" = "Siri";
+"organizer.sections.siri.footer" = "Få hjälp från Siri för att påskynda dina vanligaste interaktioner med appen.";
+"organizer.sections.support.header" = "Support";
+"organizer.sections.feedback.header" = "Feedback";
+"organizer.cells.siri_shortcuts.caption" = "Hantera genvägar";
+"organizer.cells.join_community.caption" = "Gå med i communityn";
+"organizer.cells.write_review.caption" = "Skriv en recension";
+"organizer.cells.donate.caption" = "Gör en donation";
+"organizer.cells.github_sponsors.caption" = "Stötta mig på GitHub";
+"organizer.cells.translate.caption" = "Erbjuda att översätta";
+"organizer.cells.about.caption" = "Om %@";
+"organizer.cells.uninstall.caption" = "Ta bort VPN-konfiguration";
+"organizer.alerts.exhausted_providers.message" = "Du har skapat profiler för alla tillgängliga leverantörer.";
+"organizer.alerts.add_host.message" = "Öppna en URL till en .ovpn konfigurationsfil från Safari, Mail eller en annan app för att skapa en värdprofil. \n\nDu kan också importera en .ovpn med iTunes Fildelning." ;
+"organizer.alerts.cannot_donate.message" = "Det finns ingen betalningsmetod konfigurerad på den här enheten.";
+"organizer.alerts.delete_vpn_profile.message" = "Vill du verkligen radera VPN-konfigurationen från enhetens inställningar? Detta kan fixa några trasiga VPN tillstånd och påverkar inte dina leverantörs- och värdprofiler.";
+"wizards.host.alerts.existing.message" = "En värdprofil med samma namn finns redan. Byt ut det?";
+"parsed_file.alerts.malformed.message" = "Konfigurationsfilen innehåller ett felaktigt val (%@).";
+"parsed_file.alerts.missing.message" = "Konfigurationsfilen saknar ett obligatoriskt val (%@).";
+"parsed_file.alerts.unsupported.message" = "Konfigurationsfilen innehåller ett stöd som inte stöds (%@).";
+"parsed_file.alerts.potentially_unsupported.message" = "Konfigurationsfilen är korrekt men innehåller ett eventuellt stöd som inte stöds (%@). \n\nConnectivity kan bryta beroende på serverinställningar.";
+"parsed_file.alerts.encryption_passphrase.message" = "Var god ange krypteringslösenfrasen.";
+"parsed_file.alerts.decryption.message" = "Konfigurationen innehåller en krypterad privat nyckel och den kan inte dekrypteras. Kontrollera din inmatade lösenfras.";
+"parsed_file.alerts.parsing.message" = "Det gick inte att analysera den angivna konfigurationsfilen (%@).";
+"parsed_file.alerts.buttons.report" = "Rapportera ett problem";
+"service.sections.vpn.footer" = "Anslutningen kommer att upprättas vid behov.";
+"service.sections.provider_infrastructure.footer" = "Senast uppdaterad på %@.";
+"service.sections.vpn_survives_sleep.footer" = "Inaktivera för att förbättra batterianvändningen, på bekostnad av tillfälliga avmattningar på grund av återuppkoppling.";
+"service.sections.vpn_resolves_hostname.footer" = "Föredragna i de flesta nätverk och krävs i vissa IPv6-nätverk. Inaktivera var DNS blockeras eller för att påskynda förhandlingar när DNS är långsamt att svara.";
+"service.sections.trusted.header" = "Tillförlitliga nätverk";
+"service.sections.trusted.footer" = "När du advänder ett betrott nätverk, VPN:et stängs normalt och hålls bortkopplat. Avaktivera detta alternativet för att inte genomdriva sådant beteende.";
+"service.sections.diagnostics.header" = "Diagnostics";
+"service.sections.diagnostics.footer" = "Masking status kommer att fungera efter återanslutning. Nätverksdata är värdnamn, IP-adresser, routing, SSID. Referenser och privata nycklar loggas inte oavsett.";
+"service.cells.connection_status.caption" = "Status";
+"account.title" = "Konto";
+"endpoint.title" = "Slutpunkt";
+"service.cells.provider.pool.caption" = "Plats";
+"service.cells.provider.preset.caption" = "Förinställt";
+"network_settings.title" = "Nätverksinställningar";
+"service.cells.vpn_survives_sleep.caption" = "Håll dig levande i sömnen";
+"service.cells.vpn_resolves_hostname.caption" = "Lösa server värdnamn";
+"service.cells.trusted_mobile.caption" = "Mobilt nätverk";
+"service.cells.trusted_policy.caption" = "Förtroende inaktiverar VPN";
+"service.cells.test_connectivity.caption" = "Testanslutning";
+"service.cells.data_count.caption" = "Utbyttad data";
+"service.cells.data_count.none" = "Otillgänglig";
+"service.cells.debug_log.caption" = "Debug log";
+"service.cells.masks_private_data.caption" = "Mask nätverksdata";
+"service.cells.reconnect.caption" = "Återanslut";
+"service.cells.report_issue.caption" = "Rapportera anslutningsproblem";
+"service.alerts.rename.title" = "Byt namn på profil";
+"service.alerts.credentials_needed.message" = "Du måste ange kontouppgifterna först.";
+"service.alerts.reconnect_vpn.message" = "Vill du återansluta till VPN?";
+"service.alerts.trusted.no_network.message" = "Du är inte ansluten till något Wi-Fi-nätverk.";
+"service.alerts.trusted.will_disconnect_trusted.message" = "Genom att lita på detta nätverk kan VPN kopplas bort. Fortsätt?";
+"service.alerts.trusted.will_disconnect_policy.message" = "Genom att byta tillitspolicy kan VPN kopplas bort. Fortsätt?";
+"service.alerts.test_connectivity.title" = "Anslutningar";
+"service.alerts.test_connectivity.messages.success" = "Din enhet är ansluten till Internet!";
+"service.alerts.test_connectivity.messages.failure" = "Din enhet har ingen Internetanslutning, var god granska dina profilparametrar.";
+"service.alerts.masks_private_data.messages.must_reconnect" = "För att säkert återställa den aktuella felsökningsloggen och tillämpa den nya maskeringspreferensen måste du återansluta till VPN nu.";
+"service.alerts.buttons.reconnect" = "Reconnect";
+"service.alerts.download.title" = "Ladda ner krävs";
+"service.alerts.download.message" = "%@ kräver nedladdning av ytterligare konfigurationsfiler. \n\nKontrollera för att starta nedladdningen.";
+"service.alerts.download.failed" = "Misslyckades med att ladda ner konfigurationsfiler. %@";
+"service.alerts.download.hud.extracting" = "Extraherar filer, var så tålmodig ...";
+"account.sections.guidance.footer.infrastructure.hideme" = "Använd dina %@ webbplatsuppgifter.";
+"account.sections.guidance.footer.infrastructure.mullvad" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis numeriskt (utan utrymmen).";
+"account.sections.guidance.footer.infrastructure.nordvpn" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
+"account.sections.guidance.footer.infrastructure.pia" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis numeriskt med ett prefix för \" p \".";
+"account.sections.guidance.footer.infrastructure.protonvpn" = "Hitta dina %@ credentials i avsnittet \" Konto> OpenVPN / IKEv2 Användarnamn \"på webbplatsen.";
+"account.sections.guidance.footer.infrastructure.torguard" = "Använd dina %@ service-referenser, som kan skilja sig från webbplatsens referenser.";
+"account.sections.guidance.footer.infrastructure.tunnelbear" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
+"account.sections.guidance.footer.infrastructure.vyprvpn" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
+"account.sections.guidance.footer.infrastructure.windscribe" = "Hitta din %@ credentials i OpenVPN Config Generator på webbplatsen.";
+"account.sections.registration.footer" = "Hämta ett konto på %@ webbplatsen.";
+"account.cells.username.caption" = "Användarnamn";
+"account.cells.username.placeholder" = "användarnamn";
+"account.cells.password.caption" = "Lösenord";
+"account.cells.password.placeholder" = "hemlighet";
+"account.cells.open_guide.caption" = "Visa dina uppgifter";
+"account.cells.signup.caption" = "Registrera med %@";
+"endpoint.cells.any_address.caption" = "Automatiskt";
+"endpoint.cells.any_protocol.caption" = "Automatiskt";
+"configuration.sections.communication.header" = "Communication";
+"configuration.sections.reset.footer" = "Om du slutade med bruten anslutning efter att ha ändrat kommunikationsparametrarna trycker du på för att återgå till den ursprungliga konfigurationen.";
+"configuration.sections.tls.header" = "TLS";
+"configuration.sections.compression.header" = "Kompression";
+"configuration.sections.network.header" = "Nätverk";
+"configuration.sections.other.header" = "Other";
+"configuration.cells.cipher.caption" = "Cipher";
+"configuration.cells.digest.caption" = "Autentisering";
+"configuration.cells.digest.value.embedded" = "Inbäddad";
+"configuration.cells.reset_original.caption" = "Återställ konfiguration";
+"configuration.cells.client.caption" = "Klientcertifikat";
+"configuration.cells.client.value.enabled" = "Verified";
+"configuration.cells.client.value.disabled" = "Ej verifierad";
+"configuration.cells.tls_wrapping.caption" = "Omslagning";
+"configuration.cells.tls_wrapping.value.auth" = "Autentisering";
+"configuration.cells.tls_wrapping.value.crypt" = "Kryptering";
+"configuration.cells.eku.caption" = "Förlängd verifering";
+"network_settings.gateway.title" = "Normal gateway";
+"network_settings.dns.title" = "DNS";
+"network_settings.dns.cells.domain.caption" = "Domain";
+"network_settings.proxy.title" = "Proxy";
+"configuration.cells.proxy_https.caption" = "Proxy (HTTPS)";
+"configuration.cells.compression_framing.caption" = "Inramning";
+"configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
+"configuration.cells.compression_framing.value.compress" = "--compress";
+"configuration.cells.compression_algorithm.caption" = "Algoritm";
+"configuration.cells.compression_algorithm.value.lzo" = "LZO";
+"configuration.cells.compression_algorithm.value.other" = "Utan stöd";
+"configuration.cells.keep_alive.caption" = "hål-vid-liv";
+"configuration.cells.keep_alive.value.seconds" = "%d seconds";
+"configuration.cells.renegotiation_seconds.caption" = "Omförhandling";
+"configuration.cells.renegotiation_seconds.value.after" = "efter %@";
+"configuration.cells.random_endpoint.caption" = "Omställ slutpunkt på slumpmässigt sätt";
+"network_choice.client" = "Läs .ovpn";
+"network_choice.server" = "Dra från server";
+"global.captions.address" = "Adress";
+"global.captions.port" = "Port";
+"debug_log.buttons.previous" = "Previous";
+"debug_log.buttons.next" = "Next";
+"debug_log.alerts.empty_log.message" = "Felsökningsloggen är tom.";
+"vpn.connecting" = "Anslutning";
+"vpn.active" = "Aktiv";
+"vpn.disconnecting" = "Koppla från";
+"vpn.inactive" = "Inaktiv";
+"vpn.disabled" = "Inaktiverad";
+"vpn.errors.timeout" = "Timeout";
+"vpn.errors.dns" = "DNS misslyckades";
+"vpn.errors.auth" = "Auth failed";
+"vpn.errors.tls" = "TLS misslyckades";
+"vpn.errors.encryption" = "Kryptering misslyckades";
+"vpn.errors.compression" = "Komprimering utan stöd";
+"vpn.errors.network" = "Nätverk ändrat";
+"vpn.errors.routing" = "Saknad routing";
+"vpn.errors.gateway" = "Ingen gateway";
+"vpn.errors.shutdown" = "Servern stängs av";
+"issue_reporter.title" = "Rapportera problem";
+"issue_reporter.message" = "Felsökningsloggen för dina senaste anslutningar är avgörande för att lösa dina anslutningsproblem och är helt anonym. \n\nHanteringsfilen .ovpn är eventuellt bifogad av någon känslig data. \n\nPresentera dubbelkolla e-postbilagorna om du är osäker. ";
+"issue_reporter.buttons.accept" = "Jag förstår";
+"translations.title" = "Översättningar";
+"shortcuts.add.sections.vpn.header" = "VPN";
+"shortcuts.add.sections.wifi.header" = "Wi-Fi";
+"shortcuts.add.sections.cellular.header" = "Cellular";
+"shortcuts.add.cells.connect.caption" = "Anslut till";
+"shortcuts.add.cells.enable_vpn.caption" = "Aktivera VPN";
+"shortcuts.add.cells.disable_vpn.caption" = "Inaktivera VPN";
+"shortcuts.add.cells.trust_current_wifi.caption" = "Lita på nuvarande Wi-Fi";
+"shortcuts.add.cells.untrust_current_wifi.caption" = "Avaktivera nuvarande Wi-Fi";
+"shortcuts.add.cells.trust_cellular.caption" = "Lita på mobilnätverk";
+"shortcuts.add.cells.untrust_cellular.caption" = "Untrust cellular network";
+"shortcuts.add.alerts.no_profiles.message" = "Det finns ingen profil att ansluta till.";
+"shortcuts.edit.sections.all.header" = "Befintliga genvägar";
+"about.title" = "About";
+"about.sections.web.header" = "Web";
+"about.sections.share.header" = "Dela";
+"about.cells.credits.caption" = "Credits";
+"about.cells.website.caption" = "Hemsida";
+"about.cells.faq.caption" = "FAQ";
+"about.cells.disclaimer.caption" = "Disclaimer";
+"about.cells.privacy_policy.caption" = "Sekretesspolicy";
+"about.cells.share_twitter.caption" = "Tweet om det!";
+"about.cells.share_generic.caption" = "Bjud in en vän";
+"donation.title" = "Donera";
+"donation.sections.one_time.header" = "En gång";
+"donation.sections.one_time.footer" = "Om du vill visa tacksamhet för mitt fria arbete, här är några belopp du kan donera direkt. \n\nDu betalas endast en gång per donation, och du kan donera flera gånger. ";
+"donation.cells.loading.caption" = "Laddar donationer";
+"donation.cells.purchasing.caption" = "Performing donation";
+"donation.alerts.purchase.success.title" = "Tack";
+"donation.alerts.purchase.success.message" = "Detta betyder mycket för mig och jag hoppas verkligen att du fortsätter att använda och marknadsföra denna app.";
+"donation.alerts.purchase.failure.message" = "Kan inte göra donationen. %@";
+"share.message" = "Passepartout är en användarvänlig öppen källkod OpenVPN-klient för iOS och macOS";
+"version.title" = "Version";
+"version.labels.intro" = "Passepartout och TunnelKit skrivs och underhålls av Davide De Rosa (keeshux). \n\nKällkod för Passepartout och TunnelKit är offentligt tillgänglig på GitHub under GPLv3, du kan hitta länkar på hemsidan. \n\nPassepartout är en icke-officiell klient och är inte på något sätt ansluten till OpenVPN Inc. ";
+"credits.title" = "Credits";
+"credits.sections.licenses.header" = "Licenses";
+"credits.sections.notices.header" = "Meddelanden";
+"credits.sections.translations.header" = "Translations";
+"label.license.error" = "Kan inte ladda ner fullständigt licensinnehåll.";
+"organizer.cells.profile.value.current" = "Under användning";
+"service.welcome.message" = "Välkommen till Passepartout! \n\nAnvänd arrangören för att lägga till en ny profil.";
+"service.cells.server_configuration.caption" = "Server konfiguration";
+"service.cells.server_network.caption" = "Server nätverk";
+"service.alerts.configuration.disconnected" = "Konfiguration otillgänglig. Se till att du är kopplad till VPN:et.";
+"server_network.cells.route.caption" = "Rutt";
+"wizards.provider.cells.update_list.caption" = "Uppdatera listan";
+"wizards.provider.alerts.unavailable.message" = "Det gick inte att ladda ner leverantörens infrastruktur, försök igen senare.";
+"organizer.sections.twitch.header" = "Twitch";
+"organizer.sections.twitch.footer" = "Kom och se mig göra Passepartout live på Twitch, gå med i chatten för att interagera och bidra!";
+"organizer.cells.follow_twitch.caption" = "Se Passepartout on Twitch";
+"service.cells.use_profile.caption" = "Använd den här profilen";
+"network_settings.mtu.title" = "MTU";
+"network_settings.mtu.cells.bytes.caption" = "Bytes";

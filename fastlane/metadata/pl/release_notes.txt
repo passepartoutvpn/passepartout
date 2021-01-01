@@ -1,5 +1,0 @@
-### Fixed
-
-- Losing profiles on upgrade.
-- Twitch link does not work when Twitch app not installed.
-
