@@ -209,7 +209,7 @@ extension AboutViewController {
             showCredits()
             
         case .readme:
-            visitURL(AppConstants.URLs.iOS.readme)
+            visitURL(AppConstants.URLs.readme)
             
         case .changelog:
             visitURL(AppConstants.URLs.iOS.changelog)

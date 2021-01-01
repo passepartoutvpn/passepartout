@@ -177,16 +177,14 @@ public class AppConstants {
     }
 
     public class URLs {
+        public static let readme = Repos.apple.appendingPathComponent("blob/master/README.md")
+        
         public class iOS {
-            public static let readme = Repos.ios.appendingPathComponent("blob/master/README.md")
-            
-            public static let changelog = Repos.ios.appendingPathComponent("blob/master/CHANGELOG.md")
+            public static let changelog = Repos.apple.appendingPathComponent("blob/master/Passepartout/App/iOS/CHANGELOG.md")
         }
 
         public class macOS {
-            public static let readme = Repos.macos.appendingPathComponent("blob/master/README.md")
-            
-            public static let changelog = Repos.macos.appendingPathComponent("blob/master/CHANGELOG.md")
+            public static let changelog = Repos.apple.appendingPathComponent("blob/master/Passepartout/App/macOS/CHANGELOG.md")
         }
         
         public static let filetypes = ["public.content", "public.data"]
@@ -265,9 +263,7 @@ public class AppConstants {
             return githubRawRoot.appendingPathComponent(repo)
         }
         
-        public static let ios = github(repo: "passepartout-ios")
-
-        public static let macos = github(repo: "passepartout-macos")
+        public static let apple = github(repo: "passepartout-apple")
         
         public static let api = githubRaw(repo: "api")
     }
