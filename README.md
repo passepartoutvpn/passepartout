@@ -3,12 +3,13 @@
 # [Passepartout][about-website]
 
 ![iOS 12+](https://img.shields.io/badge/ios-12+-green.svg)
+![macOS 10.15+](https://img.shields.io/badge/macos-10.15+-green.svg)
 [![TunnelKit 3.1](https://img.shields.io/badge/tunnelkit-3.1-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20an%20user-friendly%2C%20open%20source%20%23OpenVPN%20client%20for%20%23iOS%20and%20%23macOS)
  
-Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS.
+Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS and macOS.
 
 ## Overview
 
@@ -16,37 +17,43 @@ Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iO
 
 Passepartout lets you handle multiple profiles in one single place and quickly switch between them.
 
-[<img src="res/snap-home.png" width="300">](res/snap-home.png)
+[<img src="res/ios/snap-home.png" width="300">](res/ios/snap-home.png)
+
+[<img src="res/macos/snap-home.png" width="300">](res/macos/snap-home.png)
 
 ### Ease of use
 
 With its native look & feel, Passepartout focuses on ease of use. It does so by stripping the .ovpn flags that are today obsolete or rarely used. With good approximation, it mimics the most relevant features you will find in OpenVPN 2.4.x.
 
-[<img src="res/snap-profile.png" width="300">](res/snap-profile.png)
+[<img src="res/ios/snap-profile.png" width="300">](res/ios/snap-profile.png)
 
 ### Trusted networks
 
-Trust cellular or Wi-Fi networks to fine-grain your connectivity. You can then choose to retain a VPN connection when entering a trusted network, or prevent it completely.
+Trust Wi-Fi, cellular (iOS) or wired (macOS) networks to fine-grain your connectivity. You can then choose to retain a VPN connection when entering a trusted network, or prevent it completely.
 
-[<img src="res/snap-trusted.png" width="300">](res/snap-trusted.png)
+[<img src="res/ios/snap-trusted.png" width="300">](res/ios/snap-trusted.png)
 
-### Siri shortcuts
+[<img src="res/macos/snap-trusted.png" width="300">](res/macos/snap-trusted.png)
+
+### Siri shortcuts (iOS)
 
 Enjoy the convenience of Siri shortcuts to automate frequent VPN actions.
 
-[<img src="res/snap-shortcuts.png" width="300">](res/snap-shortcuts.png)
+[<img src="res/ios/snap-shortcuts.png" width="300">](res/ios/snap-shortcuts.png)
 
 ### Override network settings
 
-Override default gateway, DNS and proxy settings right from the app. Don't bother editing the .ovpn file or your pushed server settings. This is especially useful if you want to override your provider settings, e.g. to integrate your own DNS-based ad blocking.
+Override default gateway, DNS, proxy and MTU settings right from the app. Don't bother editing the .ovpn file or your pushed server settings. This is especially useful if you want to override your provider settings, e.g. to integrate your own DNS-based ad blocking.
 
-[<img src="res/snap-network.png" width="300">](res/snap-network.png)
+[<img src="res/ios/snap-network.png" width="300">](res/ios/snap-network.png)
+
+[<img src="res/macos/snap-network.png" width="300">](res/macos/snap-network.png)
 
 ### See your connection parameters
 
 Passepartout strives for transparency, by showing a fairly detailed yet understandable resume of your connection parameters.
 
-[<img src="res/snap-parameters.png" width="300">](res/snap-parameters.png)
+[<img src="res/ios/snap-parameters.png" width="300">](res/ios/snap-parameters.png)
 
 ### Disconnect on sleep
 
@@ -83,7 +90,7 @@ You can find details on what may or may not work in the related section of the [
 
 ### Requirements
 
-- iOS 12.0+
+- iOS 12.0+ / macOS 10.15+
 - Xcode 11+ (Swift 5)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
@@ -95,7 +102,7 @@ It's highly recommended to use the Git and Ruby packages provided by [Homebrew][
 
 Download the app codebase locally:
 
-    $ git clone https://github.com/passepartoutvpn/passepartout-ios.git
+    $ git clone https://github.com/passepartoutvpn/passepartout-apple.git
 
 Enter the directory and clone the submodules:
 
@@ -113,18 +120,20 @@ For the VPN to work properly, the app requires:
 
 both in the main app and the tunnel extension target.
 
-Make sure to update `Passepartout-iOS/Config.xcconfig` according to your developer account and your identifiers:
+Make sure to update `Config.xcconfig` according to your developer account and your identifiers:
 
     CFG_TEAM_ID = A1B2C3D4E5
-    CFG_APP_ID = com.example.ios.MyApp
+    CFG_APP_IOS_ID = com.example.ios.MyApp
+    CFG_APP_MACOS_ID = com.example.macos.MyApp
     CFG_GROUP_ID = com.example.MyAppGroup // omit the "group." prefix
-    CFG_APPSTORE_ID = 1234567890 // optional for development, can be bogus
+    CFG_APPSTORE_IOS_ID = 1234567890 // optional for development, can be bogus
+    CFG_APPSTORE_MACOS_ID = 1234567890 // optional for development, can be bogus
 
-After that, open `Passepartout.xcworkspace` in Xcode and run the `Passepartout-iOS` target.
+After that, open `Passepartout.xcworkspace` in Xcode and run the `Passepartout-iOS` or `Passepartout-macOS` target.
 
 ## License
 
-Copyright (c) 2020 Davide De Rosa. All rights reserved.
+Copyright (c) 2021 Davide De Rosa. All rights reserved.
 
 This project is licensed under the [GPLv3][license-content].
 
