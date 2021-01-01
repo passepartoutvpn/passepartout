@@ -1,6 +1,6 @@
 //
 //  EndpointViewController.swift
-//  Passepartout-macOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 6/19/19.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

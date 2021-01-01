@@ -1,6 +1,6 @@
 //
 //  ConnectionServiceTests.swift
-//  PassepartoutTests
+//  Passepartout
 //
 //  Created by Davide De Rosa on 10/25/18.
 //  Copyright (c) 2020 Davide De Rosa. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  PacketTunnelProvider.swift
-//  Passepartout-macOS-Tunnel
+//  Passepartout
 //
 //  Created by Davide De Rosa on 6/17/18.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

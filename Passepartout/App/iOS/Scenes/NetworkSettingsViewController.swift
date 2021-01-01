@@ -1,6 +1,6 @@
 //
 //  NetworkSettingsViewController.swift
-//  Passepartout-iOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 4/29/19.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

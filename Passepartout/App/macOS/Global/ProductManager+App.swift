@@ -1,6 +1,6 @@
 //
 //  ProductManager+App.swift
-//  Passepartout-macOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 12/25/20.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

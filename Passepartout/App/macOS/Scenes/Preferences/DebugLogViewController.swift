@@ -1,6 +1,6 @@
 //
 //  DebugLogViewController.swift
-//  Passepartout-macOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 7/31/18.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

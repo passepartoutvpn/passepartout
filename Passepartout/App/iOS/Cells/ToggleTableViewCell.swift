@@ -1,6 +1,6 @@
 //
 //  ToggleTableViewCell.swift
-//  Passepartout-iOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  Theme+Views.swift
-//  Passepartout-macOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 7/29/18.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  IssueReporter.swift
-//  Passepartout-iOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 9/26/18.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

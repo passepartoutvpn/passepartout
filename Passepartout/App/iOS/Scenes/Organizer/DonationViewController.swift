@@ -1,6 +1,6 @@
 //
 //  DonationViewController.swift
-//  Passepartout-iOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 4/6/19.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  InfrastructureTests.swift
-//  PassepartoutTests
+//  Passepartout
 //
 //  Created by Davide De Rosa on 6/11/18.
 //  Copyright (c) 2020 Davide De Rosa. All rights reserved.

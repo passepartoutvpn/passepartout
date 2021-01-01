@@ -1,6 +1,6 @@
 //
 //  WindowManager.swift
-//  Passepartout-macOS
+//  Passepartout
 //
 //  Created by Davide De Rosa on 8/12/19.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.

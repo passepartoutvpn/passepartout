@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  PassepartoutLauncher
+//  Passepartout
 //
 //  Created by Davide De Rosa on 12/16/20.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.
