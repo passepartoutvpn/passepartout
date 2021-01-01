@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Watch me make Passepartout live on Twitch.
 
-## 1.12.0 Beta 2394 (2020-10-06)
+## 1.12.0 (2020-10-06)
 
 ### Added
 
