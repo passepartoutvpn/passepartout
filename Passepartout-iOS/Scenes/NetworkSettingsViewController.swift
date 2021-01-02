@@ -144,7 +144,7 @@ class NetworkSettingsViewController: UITableViewController {
         updateGateway(networkChoices.gateway)
         updateDNS(networkChoices.dns)
         updateProxy(networkChoices.proxy)
-        updateMTU(networkChoices.mtu)
+        updateMTU(networkChoices.mtu ?? ProfileNetworkChoices.defaultChoice)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,7 +218,7 @@ class NetworkSettingsViewController: UITableViewController {
     
     private func updateMTU(_ choice: NetworkChoice) {
         networkChoices.mtu = choice
-        switch networkChoices.mtu {
+        switch networkChoices.mtu ?? ProfileNetworkChoices.defaultChoice {
         case .client:
             if let settings = clientNetworkSettings {
                 networkSettings.copyMTU(from: settings)
@@ -392,7 +392,7 @@ extension NetworkSettingsViewController {
         case .mtu:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.NetworkSettings.Mtu.title
-            cell.rightText = networkChoices.mtu.description
+            cell.rightText = (networkChoices.mtu ?? ProfileNetworkChoices.defaultChoice).description
             return cell
 
         case .gatewayIPv4:

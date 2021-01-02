@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Fixed
+
+- Losing profiles on upgrade. [#163](https://github.com/passepartoutvpn/passepartout-ios/issues/163)
+- Twitch link does not work when Twitch app not installed. [#162](https://github.com/passepartoutvpn/passepartout-ios/issues/162)
+
 ## 1.13.0 (2021-01-01)
 
 ### Added
