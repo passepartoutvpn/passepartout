@@ -31,7 +31,6 @@ CFG_APP_IOS_ID = com.algoritmico.ios.Passepartout
 CFG_APP_MACOS_ID = com.algoritmico.macos.Passepartout
 CFG_APP_LAUNCHER_ID = com.algoritmico.macos.Passepartout.Launcher
 CFG_GROUP_ID = com.algoritmico.Passepartout
-CFG_APP_VERSION = 1.14.0
 CFG_APPSTORE_IOS_ID = 1433648537
 CFG_APPSTORE_MACOS_ID = 1433645014
 CFG_COPYRIGHT = Copyright © 2021 Davide De Rosa. All rights reserved.
