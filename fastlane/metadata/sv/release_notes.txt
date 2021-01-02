@@ -1,9 +1,5 @@
-### Added
+### Fixed
 
-- Customize MTU in network settings.
-
-### Changed
-
-- Enter explicit Wi-Fi SSID to trust.
-- Use default tunnel MTU rather than 1250.
+- Losing profiles on upgrade.
+- Twitch link does not work when Twitch app not installed.
 
