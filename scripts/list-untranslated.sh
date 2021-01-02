@@ -1,12 +1,12 @@
 #!/bin/sh
-. .env
+. .env.$1
 
-DIR_APP="$PROJECT/Global"
+DIR_APP="$APP_ROOT"
 FILENAME_APP="App.strings"
-DIR_CORE="Submodules/Core/Passepartout/Resources"
+DIR_CORE="Passepartout/Core/Resources"
 FILENAME_CORE="Core.strings"
 
-if [[ $2 = "core" ]]; then
+if [[ $3 = "core" ]]; then
     DIR=$DIR_CORE
     FILENAME=$FILENAME_CORE
 else
@@ -15,7 +15,7 @@ else
 fi
 
 LANG_BASE="en"
-LANG_TARGET="$1"
+LANG_TARGET="$2"
 STRINGS_BASE="$DIR/$LANG_BASE.lproj/$FILENAME"
 STRINGS_TARGET="$DIR/$LANG_TARGET.lproj/$FILENAME"
 IDS="string-ids.tmp"

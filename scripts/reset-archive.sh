@@ -1,3 +1,2 @@
 #!/bin/sh
-git checkout Passepartout*/Info.plist
-git checkout Passepartout*.pbxproj
+git checkout *Info.plist Passepartout.xcodeproj
