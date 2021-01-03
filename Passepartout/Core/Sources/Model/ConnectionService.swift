@@ -356,39 +356,6 @@ public class ConnectionService: Codable {
         return url.deletingPathExtension().lastPathComponent
     }
     
-    func reloadHostProfilesFromConfigurationFiles() -> Bool {
-        var anyReloaded = false
-        for entry in cache {
-            guard entry.value.context == .host else {
-                continue
-            }
-            guard let host = profile(withKey: entry.key) as? HostConnectionProfile else {
-                log.warning("Host context but not a HostConnectionProfile?")
-                continue
-            }
-            guard let url = configurationURL(for: entry.key) else {
-                continue
-            }
-
-            // can fail due to passphrase (migration is non-interactive)
-            if let result = try? OpenVPN.ConfigurationParser.parsed(fromURL: url) {
-                host.parameters = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: result.configuration).build()
-            } else {
-
-                // fall back to the safer option
-                var builder = host.parameters.builder()
-                var sessionBuilder = builder.sessionConfiguration.builder()
-                sessionBuilder.routingPolicies = [.IPv4]
-                builder.sessionConfiguration = sessionBuilder.build()
-                host.parameters = builder.build()
-            }
-            cache[entry.key] = host
-
-            anyReloaded = true
-        }
-        return anyReloaded
-    }
-    
     // MARK: Profiles
 
     public func hasProfiles() -> Bool {

@@ -72,33 +72,6 @@ public class TransientStore {
         }
     }
     
-    public static var didMigrateHostsRoutingPolicies: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: Keys.didMigrateHostsRoutingPolicies)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Keys.didMigrateHostsRoutingPolicies)
-        }
-    }
-    
-    public static var didMigrateDynamicProviders: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: Keys.didMigrateDynamicProviders)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Keys.didMigrateDynamicProviders)
-        }
-    }
-
-    public static var didMigrateHostsToUUID: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: Keys.didMigrateHostsToUUID)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Keys.didMigrateHostsToUUID)
-        }
-    }
-    
     public static var didMigrateKeychainContext: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Keys.didMigrateKeychainContext)
@@ -125,8 +98,6 @@ public class TransientStore {
             Keys.masksPrivateData: true
         ])
         
-        TransientStore.migrateDocumentsToAppGroup()
-
         // this must be graceful
         ConnectionService.migrateJSON(from: TransientStore.serviceURL, to: TransientStore.serviceURL)
         
@@ -147,29 +118,16 @@ public class TransientStore {
             service.baseConfiguration = cfg
 
             // pre-load migrations
-            if !TransientStore.didMigrateDynamicProviders {
-                service.migrateProvidersToLowercase()
-                TransientStore.didMigrateDynamicProviders = true
-            }
-            if !TransientStore.didMigrateHostsToUUID {
-                service.migrateHostsToUUID()
-                TransientStore.didMigrateHostsToUUID = true
-            }
 
             service.loadProfiles()
 
+            // post-load migrations
+            #if os(iOS)
             if !TransientStore.didMigrateKeychainContext {
                 service.migrateKeychainContext()
                 TransientStore.didMigrateKeychainContext = true
             }
-
-            // post-load migrations
-            if !TransientStore.didMigrateHostsRoutingPolicies {
-                if service.reloadHostProfilesFromConfigurationFiles() {
-                    service.saveProfiles()
-                }
-                TransientStore.didMigrateHostsRoutingPolicies = true
-            }
+            #endif
         } catch let e {
             log.error("Could not decode service: \(e)")
             service = ConnectionService(
@@ -178,15 +136,7 @@ public class TransientStore {
             )
             
             // fresh install, skip all migrations
-            TransientStore.didMigrateHostsRoutingPolicies = true
-            TransientStore.didMigrateDynamicProviders = true
-            TransientStore.didMigrateHostsToUUID = true
             TransientStore.didMigrateKeychainContext = true
-
-//            // hardcoded loading
-//            _ = service.addProfile(ProviderConnectionProfile(name: .pia), credentials: nil)
-//            _ = service.addProfile(HostConnectionProfile(title: "vps"), credentials: Credentials(username: "foo", password: "bar"))
-//            service.activateProfile(service.profiles.first!)
         }
         service.observeVPNDataCount(milliseconds: GroupConstants.VPN.dataCountInterval)
     }
@@ -230,10 +180,6 @@ public class TransientStore {
     }
 
     private static func migratedDataIfNecessary(fromData data: Data) -> Data? {
-        guard !TransientStore.didMigrateHostsToUUID else {
-            return data
-        }
-
         guard var json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
             return nil
         }
