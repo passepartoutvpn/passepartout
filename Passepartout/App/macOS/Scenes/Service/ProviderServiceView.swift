@@ -160,22 +160,28 @@ class ProviderServiceView: NSView {
             popupCategory.addItem(withTitle: categoryTitle)
         }
 
-        if let (a, b, c) = selectPopupsFromCurrentProfile() {
+        let (a, b, c) = selectPopupsFromCurrentProfile()
+        if popupCategory.numberOfItems > 0 {
             popupCategory.selectItem(at: a)
             loadLocations(withCategory: a)
-            popupLocation.selectItem(at: b)
-            loadAreas(withLocation: b)
-            popupArea.selectItem(at: c)
-
-            currentCategoryIndex = a
-            currentLocationIndex = b
+            if popupLocation.numberOfItems > 0 {
+                popupLocation.selectItem(at: b)
+                loadAreas(withLocation: b)
+                if popupArea.numberOfItems > 0 {
+                    popupArea.selectItem(at: c)
+                }
+            }
         }
+
+        currentCategoryIndex = a
+        currentLocationIndex = b
+
         if let lastInfrastructureUpdate = InfrastructureFactory.shared.modificationDate(forName: profile.name) {
             labelLastInfrastructureUpdate.stringValue = L10n.Core.Service.Sections.ProviderInfrastructure.footer(lastInfrastructureUpdate.timestamp)
         }
     }
     
-    private func selectPopupsFromCurrentProfile() -> (Int, Int, Int)? {
+    private func selectPopupsFromCurrentProfile() -> (Int, Int, Int) {
         for (a, category) in categories.enumerated() {
             guard let groups = sortedGroupsByCategory[category.name] else {
                 continue
@@ -190,7 +196,7 @@ class ProviderServiceView: NSView {
                 }
             }
         }
-        return nil
+        return (0, 0, 0)
     }
     
     private func loadLocations(withCategory index: Int) {
