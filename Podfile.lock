@@ -49,7 +49,7 @@ DEPENDENCIES:
   - Convenience/Reviewer (from `https://github.com/keeshux/convenience`, commit `b30816a`)
   - Convenience/Tables (from `https://github.com/keeshux/convenience`, commit `b30816a`)
   - Convenience/WebServices (from `https://github.com/keeshux/convenience`, commit `b30816a`)
-  - Kvitto
+  - Kvitto (from `https://github.com/keeshux/Kvitto`, branch `enable-macos-spec`)
   - MBProgressHUD
   - SSZipArchive
   - TunnelKit/Extra/LZO (~> 3.1.0)
@@ -58,7 +58,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - DTFoundation
-    - Kvitto
     - MBProgressHUD
     - OpenSSL-Apple
     - SSZipArchive
@@ -69,22 +68,28 @@ EXTERNAL SOURCES:
   Convenience:
     :commit: b30816a
     :git: https://github.com/keeshux/convenience
+  Kvitto:
+    :branch: enable-macos-spec
+    :git: https://github.com/keeshux/Kvitto
 
 CHECKOUT OPTIONS:
   Convenience:
     :commit: b30816a
     :git: https://github.com/keeshux/convenience
+  Kvitto:
+    :commit: e263fcd1f40a6a482a0f1e424ba98009c4ad2b96
+    :git: https://github.com/keeshux/Kvitto
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
   DTFoundation: e7781d9fd2f202bfd451fbbf8cab71ce83b46498
-  Kvitto: e5c903c656cce6bfebbf337d992184cf03cb4853
+  Kvitto: 5511954b22d6c710e1a04dcbdee44ae7b3d1caeb
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   OpenSSL-Apple: 8a8fcb06fb66f9c2f7aed45ce363668493b8e5f6
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
   TunnelKit: 1d9494670d643fd447aa3fa208dae1a4dcab2b2e
 
-PODFILE CHECKSUM: c7333249e02a01ebc26be633bfc8c95fc5d82229
+PODFILE CHECKSUM: 49cadeae6b11c6b4bb4ea7d10e7d70519211c659
 
 COCOAPODS: 1.10.0

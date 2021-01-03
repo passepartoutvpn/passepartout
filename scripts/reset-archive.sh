@@ -1,1 +1,2 @@
-../Submodules/Core/scripts/reset-archive.sh
+#!/bin/sh
+git checkout *Info.plist Passepartout.xcodeproj

@@ -2,6 +2,9 @@
 # For more information, check out the docs
 # https://docs.fastlane.tools/actions/deliver/
 
+screenshots_path "#{ENV['APP_ROOT']}/fastlane/screenshots"
+metadata_path "#{ENV['APP_ROOT']}/fastlane/metadata"
+
 skip_binary_upload true
 skip_metadata false
 skip_screenshots false

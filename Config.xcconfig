@@ -1,0 +1,38 @@
+//
+//  Config.xcconfig
+//  Passepartout
+//
+//  Created by Davide De Rosa on 5/24/19.
+//  Copyright (c) 2021 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+CFG_TEAM_ID = DTDYD63ZX9
+CFG_APP_IOS_ID = com.algoritmico.ios.Passepartout
+CFG_APP_MACOS_ID = com.algoritmico.macos.Passepartout
+CFG_APP_LAUNCHER_ID = com.algoritmico.macos.Passepartout.Launcher
+CFG_GROUP_ID = com.algoritmico.Passepartout
+CFG_APPSTORE_IOS_ID = 1433648537
+CFG_APPSTORE_MACOS_ID = 1433645014
+CFG_COPYRIGHT = Copyright © 2021 Davide De Rosa. All rights reserved.
+
+#include? "Secret.xcconfig"

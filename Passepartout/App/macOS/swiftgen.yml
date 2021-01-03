@@ -1,0 +1,29 @@
+strings:
+    inputs:
+        - ../../Core/Resources/en.lproj/Core.strings
+        - en.lproj/App.strings
+    outputs:
+        - templateName: structured-swift4
+          output: Global/SwiftGen+Strings.swift
+
+ib:
+    inputs:
+        #- Base.lproj/About.storyboard
+        - Base.lproj/Main.storyboard
+        - Base.lproj/Preferences.storyboard
+        - Base.lproj/Service.storyboard
+        #- Base.lproj/Shortcuts.storyboard
+    outputs:
+        - templateName: scenes-swift4
+          output: Global/SwiftGen+Scenes.swift
+        - templateName: segues-swift4
+          output: Global/SwiftGen+Segues.swift
+
+xcassets:
+    inputs:
+        - Assets.xcassets
+        - Flags.xcassets
+        - Providers.xcassets
+    outputs:
+        - templateName: swift4
+          output: Global/SwiftGen+Assets.swift

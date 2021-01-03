@@ -1,0 +1,71 @@
+//
+//  App.strings
+//  Passepartout
+//
+//  Created by Davide De Rosa on 6/21/19.
+//  Copyright (c) 2021 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"organizer.cells.add_provider.caption" = "Add new provider";
+"organizer.cells.add_host.caption" = "Add from Files";
+"organizer.cells.import_host.caption" = "Add from imported";
+
+"wizards.host.cells.title_input.caption" = "Title";
+"wizards.host.sections.existing.header" = "Existing profiles";
+
+"imported_hosts.title" = "Imported hosts";
+
+"service.sections.vpn.header" = "VPN";
+"service.sections.status.header" = "Connection";
+"service.sections.configuration.header" = "Configuration";
+
+"service.cells.vpn_service.caption" = "Enabled";
+"service.cells.provider.refresh.caption" = "Refresh infrastructure";
+"service.cells.host.parameters.caption" = "Parameters";
+"service.cells.trusted_add_wifi.caption" = "Add Wi-Fi";
+"service.alerts.location.message.denied" = "You must allow location access to trust this Wi-Fi network. Go to iOS settings and review your location permissions for Passepartout.";
+"service.alerts.location.button.settings" = "Settings";
+
+"account.sections.credentials.header" = "Credentials";
+
+"endpoint.sections.location_addresses.header" = "Addresses";
+"endpoint.sections.location_protocols.header" = "Protocols";
+
+"provider.pool.actions.favorite" = "Favorite";
+"provider.pool.actions.unfavorite" = "Unfavorite";
+"provider.pool.sections.empty_favorites.footer" = "Swipe left on a location to add or remove it from Favorites.";
+
+"provider.preset.cells.tech_details.caption" = "Technical details";
+
+"network_settings.cells.add_dns_server.caption" = "Add address";
+"network_settings.cells.add_dns_domain.caption" = "Add search domain";
+"network_settings.cells.proxy_bypass.caption" = "Bypass domain";
+"network_settings.cells.add_proxy_bypass.caption" = "Add bypass domain";
+
+"shortcuts.add.title" = "Add shortcut";
+
+"shortcuts.edit.title" = "Manage shortcuts";
+"shortcuts.edit.cells.add_shortcut.caption" = "Add shortcut";
+
+"purchase.title" = "Purchase";
+"purchase.sections.products.footer" = "Every product is a one-time purchase. Provider purchases do not include a VPN subscription.";
+"purchase.cells.full_version.extra_description" = "- All providers (including future ones)\n%@";
+"purchase.cells.restore.title" = "Restore purchases";
+"purchase.cells.restore.description" = "If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.";

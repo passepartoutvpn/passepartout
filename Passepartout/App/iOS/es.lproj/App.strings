@@ -1,0 +1,71 @@
+//
+//  App.strings
+//  Passepartout
+//
+//  Created by Davide De Rosa on 6/13/18.
+//  Copyright (c) 2021 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"organizer.cells.add_provider.caption" = "Añadir proveedor";
+"organizer.cells.add_host.caption" = "Añadir desde Ficheros";
+"organizer.cells.import_host.caption" = "Añadir desde importados";
+
+"wizards.host.cells.title_input.caption" = "Título";
+"wizards.host.sections.existing.header" = "Perfiles existentes";
+
+"imported_hosts.title" = "Hosts importados";
+
+"service.sections.vpn.header" = "VPN";
+"service.sections.status.header" = "Conexión";
+"service.sections.configuration.header" = "Configuración";
+
+"service.cells.vpn_service.caption" = "Habilitado";
+"service.cells.provider.refresh.caption" = "Refrescar infraestructura";
+"service.cells.host.parameters.caption" = "Parámetros";
+"service.cells.trusted_add_wifi.caption" = "Añadir Wi-Fi";
+"service.alerts.location.message.denied" = "Debes dar acceso a tu posición para añadir esta red Wi-Fi a las redes de confianza. Mira los ajustes iOS y revisa los permisos de posición para Passepartout.";
+"service.alerts.location.button.settings" = "Ajustes";
+
+"account.sections.credentials.header" = "Credenciales";
+
+"endpoint.sections.location_addresses.header" = "Direcciones";
+"endpoint.sections.location_protocols.header" = "Protocolos";
+
+"provider.pool.actions.favorite" = "Favorita";
+"provider.pool.actions.unfavorite" = "No favorita";
+"provider.pool.sections.empty_favorites.footer" = "Desliza a la izquierda de una ubicación para agregarla o quitarla de los Favoritos.";
+
+"provider.preset.cells.tech_details.caption" = "Detalles técnicos";
+
+"network_settings.cells.add_dns_server.caption" = "Añadir dirección";
+"network_settings.cells.add_dns_domain.caption" = "Añadir dominio";
+"network_settings.cells.proxy_bypass.caption" = "Dominio ignorado";
+"network_settings.cells.add_proxy_bypass.caption" = "Añadir dominio ignorado";
+
+"shortcuts.add.title" = "Añadir atajo";
+
+"shortcuts.edit.title" = "Gestionar atajos";
+"shortcuts.edit.cells.add_shortcut.caption" = "Añadir atajo";
+
+"purchase.title" = "Compra";
+"purchase.sections.products.footer" = "Cada producto es una compra única y no recurrente. La compra de un proveedor no incluye una suscripción al servicio.";
+"purchase.cells.full_version.extra_description" = "- Todos los proveedores (incluye los futuros)\n%@";
+"purchase.cells.restore.title" = "Restaurar compras";
+"purchase.cells.restore.description" = "Si compraste esta aplicación o funcionalidad anteriormente, puedes restaurar tus compras y esta pantalla no volverá a aparecer.";

@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051985241A3ABE44EB09DFF5 /* Pods_ios_PassepartoutTunnel_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF7D2E624A2979425A6F7B7A /* Pods_ios_PassepartoutTunnel_iOS.framework */; };
+		0774835EE25EEA07495A98AA /* Pods_macos_PassepartoutTunnel_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35380A14E9FF6F0250C171CD /* Pods_macos_PassepartoutTunnel_macOS.framework */; };
 		0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */; };
 		0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */; };
 		0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */; };
@@ -15,7 +17,6 @@
 		0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E0C072B236087A100155AAC /* InfoPlist.strings */; };
 		0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1066C820E0F84A004F98B7 /* Cells.swift */; };
 		0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */; };
-		0E1C0A4F238FC7A5009FC087 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C0A4E238FC7A5009FC087 /* InfrastructureFactory.swift */; };
 		0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */; };
 		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
 		0E24273A225950450064A1A3 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E24273C225950450064A1A3 /* About.storyboard */; };
@@ -59,13 +60,116 @@
 		0E3CAFC4229AAF8E0008E5C8 /* API in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAFC3229AAF8E0008E5C8 /* API */; };
 		0E45E6E022BD793800F19312 /* App.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E45E6E222BD793800F19312 /* App.strings */; };
 		0E45E6E422BD799700F19312 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E6E322BD799700F19312 /* SwiftGen+Strings.swift */; };
-		0E45E6FA22BD8FC500F19312 /* Core.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Core.strings */; };
 		0E45E71022BE108100F19312 /* OpenVPNOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */; };
 		0E4B0D6B2366E3C100C890B4 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */; };
 		0E4B0D742366E6C800C890B4 /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E4B0D762366E6C800C890B4 /* Purchase.storyboard */; };
 		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
 		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
+		0E52031D259F58BF00CBAB56 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F7D259F41690022DFB8 /* Providers.xcassets */; };
+		0E52031E259F58BF00CBAB56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F7F259F41690022DFB8 /* Assets.xcassets */; };
+		0E52031F259F58BF00CBAB56 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E569FA7259F41690022DFB8 /* Flags.xcassets */; };
+		0E520320259F58BF00CBAB56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F8B259F41690022DFB8 /* AppDelegate.swift */; };
+		0E52032B259F58DD00CBAB56 /* TextTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F5A259F41690022DFB8 /* TextTableView.xib */; };
+		0E52032C259F58DD00CBAB56 /* TextTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F5B259F41690022DFB8 /* TextTableView.swift */; };
+		0E520333259F58F500CBAB56 /* OrganizerProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F69259F41690022DFB8 /* OrganizerProfileTableView.swift */; };
+		0E520334259F58F500CBAB56 /* OrganizerProfileTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F6B259F41690022DFB8 /* OrganizerProfileTableView.xib */; };
+		0E520335259F58F500CBAB56 /* HostServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F7A259F41690022DFB8 /* HostServiceView.swift */; };
+		0E520336259F58F500CBAB56 /* HostServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F7B259F41690022DFB8 /* HostServiceView.xib */; };
+		0E520337259F58F500CBAB56 /* ProviderServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F79259F41690022DFB8 /* ProviderServiceView.xib */; };
+		0E520338259F58F500CBAB56 /* ProviderServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F6E259F41690022DFB8 /* ProviderServiceView.swift */; };
+		0E520339259F58F500CBAB56 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F6D259F41690022DFB8 /* ServiceViewController.swift */; };
+		0E52033A259F58F500CBAB56 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F7C259F41690022DFB8 /* AccountViewController.swift */; };
+		0E52033B259F58F500CBAB56 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F6A259F41690022DFB8 /* OrganizerViewController.swift */; };
+		0E520342259F58FE00CBAB56 /* EndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F71259F41690022DFB8 /* EndpointViewController.swift */; };
+		0E520343259F58FE00CBAB56 /* ProfileCustomizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F73259F41690022DFB8 /* ProfileCustomizationViewController.swift */; };
+		0E520344259F58FE00CBAB56 /* TrustedNetworksAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F75259F41690022DFB8 /* TrustedNetworksAddViewController.swift */; };
+		0E520345259F58FE00CBAB56 /* DNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F76259F41690022DFB8 /* DNSViewController.swift */; };
+		0E520346259F58FE00CBAB56 /* TrustedNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F78259F41690022DFB8 /* TrustedNetworksViewController.swift */; };
+		0E520347259F58FE00CBAB56 /* ProxyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F74259F41690022DFB8 /* ProxyViewController.swift */; };
+		0E520348259F58FE00CBAB56 /* MTUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F70259F41690022DFB8 /* MTUViewController.swift */; };
+		0E520349259F58FE00CBAB56 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F72259F41690022DFB8 /* ConfigurationViewController.swift */; };
+		0E52034A259F58FE00CBAB56 /* DefaultGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F77259F41690022DFB8 /* DefaultGatewayViewController.swift */; };
+		0E520354259F590600CBAB56 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F67259F41690022DFB8 /* PreferencesViewController.swift */; };
+		0E520355259F590600CBAB56 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F66259F41690022DFB8 /* DebugLogViewController.swift */; };
+		0E520356259F590600CBAB56 /* PreferencesGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F68259F41690022DFB8 /* PreferencesGeneralViewController.swift */; };
+		0E52035D259F591300CBAB56 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F8A259F41690022DFB8 /* MainMenu.xib */; };
+		0E52035E259F591300CBAB56 /* StatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F89259F41690022DFB8 /* StatusMenu.swift */; };
+		0E52035F259F591300CBAB56 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F88259F41690022DFB8 /* MainMenu.swift */; };
+		0E520379259F593B00CBAB56 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA6259F41690022DFB8 /* Macros.swift */; };
+		0E52037A259F593B00CBAB56 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F92259F41690022DFB8 /* WindowManager.swift */; };
+		0E52037B259F593B00CBAB56 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F8F259F41690022DFB8 /* IssueReporter.swift */; };
+		0E52037C259F593B00CBAB56 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA1259F41690022DFB8 /* Theme.swift */; };
+		0E52037D259F593B00CBAB56 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9C259F41690022DFB8 /* SwiftGen+Strings.swift */; };
+		0E52037E259F593B00CBAB56 /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */; };
+		0E52037F259F593B00CBAB56 /* Theme+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9A259F41690022DFB8 /* Theme+Views.swift */; };
+		0E520380259F593B00CBAB56 /* AppConstants+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA3259F41690022DFB8 /* AppConstants+App.swift */; };
+		0E520381259F593B00CBAB56 /* NSTextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F94259F41690022DFB8 /* NSTextView+Search.swift */; };
+		0E520382259F593B00CBAB56 /* SwiftGen+Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */; };
+		0E520383259F593B00CBAB56 /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */; };
+		0E520384259F593B00CBAB56 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F99259F41690022DFB8 /* Donation.swift */; };
+		0E520385259F593B00CBAB56 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E569FA4259F41690022DFB8 /* Credits.html */; };
+		0E520386259F593B00CBAB56 /* ProductManager+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9E259F41690022DFB8 /* ProductManager+App.swift */; };
+		0E520387259F593B00CBAB56 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F97259F41690022DFB8 /* TextInputViewController.swift */; };
+		0E520388259F593B00CBAB56 /* HostImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F93259F41690022DFB8 /* HostImporter.swift */; };
+		0E52038F259F593F00CBAB56 /* App.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F8D259F41690022DFB8 /* App.strings */; };
+		0E5203B6259F5F3F00CBAB56 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
+		0E5203BE259F5F3F00CBAB56 /* PassepartoutTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E5203B5259F5F3F00CBAB56 /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0E5203F1259F60D600CBAB56 /* PassepartoutCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E5203EA259F60D600CBAB56 /* PassepartoutCore.framework */; };
+		0E5203F2259F60D600CBAB56 /* PassepartoutCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0E5203EA259F60D600CBAB56 /* PassepartoutCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0E52041F259F62B200CBAB56 /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
+		0E52047B259F642600CBAB56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F85259F41690022DFB8 /* Main.storyboard */; };
+		0E52047C259F642600CBAB56 /* Service.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F83259F41690022DFB8 /* Service.storyboard */; };
+		0E52047D259F642600CBAB56 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F81259F41690022DFB8 /* Preferences.storyboard */; };
+		0E5204A7259F66F700CBAB56 /* PassepartoutCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* PassepartoutCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0E5204A9259F673000CBAB56 /* Core.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Core.strings */; };
+		0E5204AA259F673100CBAB56 /* Core.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAF98229AAE760008E5C8 /* Core.strings */; };
+		0E5204AF259F673D00CBAB56 /* ApplicationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */; };
+		0E5204B0259F673D00CBAB56 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F14259F2D3E0022DFB8 /* Issue.swift */; };
+		0E5204B1259F673D00CBAB56 /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
+		0E5204B2259F673D00CBAB56 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
+		0E5204B7259F674000CBAB56 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCF2214DA9310035E9DE /* AppConstants.swift */; };
+		0E5204BC259F674400CBAB56 /* TrustedNetworksUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F30259F2DC10022DFB8 /* TrustedNetworksUI.swift */; };
+		0E5204C1259F675400CBAB56 /* Infrastructure+Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F29259F2DB10022DFB8 /* Infrastructure+Metadata.swift */; };
+		0E5204C2259F675400CBAB56 /* PoolCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A26F225FE25800F9C779 /* PoolCategory.swift */; };
+		0E5204C3259F675400CBAB56 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F2A259F2DB10022DFB8 /* InfrastructureFactory.swift */; };
+		0E5204C4259F675400CBAB56 /* TrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */; };
+		0E5204C5259F675400CBAB56 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
+		0E5204C6259F675400CBAB56 /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C0F20CF09A30027975F /* Pool.swift */; };
+		0E5204C7259F675400CBAB56 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1B259F2D8F0022DFB8 /* Product.swift */; };
+		0E5204C8259F675400CBAB56 /* PoolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E533B152258E03B00EF94FC /* PoolGroup.swift */; };
+		0E5204C9259F675400CBAB56 /* ConnectionService+Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */; };
+		0E5204CA259F675400CBAB56 /* ProfileNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */; };
+		0E5204CB259F675400CBAB56 /* EndpointDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AE621404F100004D387 /* EndpointDataSource.swift */; };
+		0E5204CC259F675400CBAB56 /* HostConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA3213DC1B000BFA2F5 /* HostConnectionProfile.swift */; };
+		0E5204CD259F675400CBAB56 /* Infrastructure+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F28259F2DB10022DFB8 /* Infrastructure+Name.swift */; };
+		0E5204CE259F675400CBAB56 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE620C93945004C739C /* Credentials.swift */; };
+		0E5204CF259F675400CBAB56 /* TrustedNetworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CB820DB9BC600A0C59C /* TrustedNetworks.swift */; };
+		0E5204D0259F675400CBAB56 /* Infrastructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C1120CF0ABA0027975F /* Infrastructure.swift */; };
+		0E5204D1259F675400CBAB56 /* PlaceholderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */; };
+		0E5204D2259F675400CBAB56 /* ConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9E213DC1A100BFA2F5 /* ConnectionProfile.swift */; };
+		0E5204D3259F675400CBAB56 /* ConnectionService+Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */; };
+		0E5204D4259F675400CBAB56 /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A9F213DC1A100BFA2F5 /* ConnectionService.swift */; };
+		0E5204D5259F675400CBAB56 /* ProfileKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D14021919F5600BB5FB2 /* ProfileKey.swift */; };
+		0E5204D6259F675400CBAB56 /* DataUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB109224FECEA00E9E551 /* DataUnit.swift */; };
+		0E5204D7259F675400CBAB56 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7F20420E24308004EA58E /* DebugLog.swift */; };
+		0E5204D9259F675400CBAB56 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC4213DF7AE00741BA1 /* Preferences.swift */; };
+		0E5204DA259F675400CBAB56 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1A259F2D8F0022DFB8 /* ProductManager.swift */; };
+		0E5204DB259F675400CBAB56 /* TransientStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B494120FD16540094784C /* TransientStore.swift */; };
+		0E5204DC259F675400CBAB56 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F19259F2D8F0022DFB8 /* GracefulVPN.swift */; };
+		0E5204DD259F675400CBAB56 /* InfrastructurePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */; };
+		0E5204DE259F675400CBAB56 /* OpenVPNOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */; };
+		0E5204DF259F675400CBAB56 /* SessionProxy+Communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */; };
+		0E5204E0259F675400CBAB56 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E39BCEF214B9EF10035E9DE /* WebServices.swift */; };
+		0E5204E5259F67A000CBAB56 /* API in Resources */ = {isa = PBXBuildFile; fileRef = 0E3CAFC3229AAF8E0008E5C8 /* API */; };
 		0E533B162258E03B00EF94FC /* PoolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E533B152258E03B00EF94FC /* PoolGroup.swift */; };
+		0E569F15259F2D3E0022DFB8 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F14259F2D3E0022DFB8 /* Issue.swift */; };
+		0E569F1C259F2D8F0022DFB8 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F19259F2D8F0022DFB8 /* GracefulVPN.swift */; };
+		0E569F1E259F2D8F0022DFB8 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1A259F2D8F0022DFB8 /* ProductManager.swift */; };
+		0E569F20259F2D8F0022DFB8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1B259F2D8F0022DFB8 /* Product.swift */; };
+		0E569F2B259F2DB10022DFB8 /* Infrastructure+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F28259F2DB10022DFB8 /* Infrastructure+Name.swift */; };
+		0E569F2C259F2DB10022DFB8 /* Infrastructure+Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F29259F2DB10022DFB8 /* Infrastructure+Metadata.swift */; };
+		0E569F2D259F2DB10022DFB8 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F2A259F2DB10022DFB8 /* InfrastructureFactory.swift */; };
+		0E569F31259F2DC10022DFB8 /* TrustedNetworksUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F30259F2DC10022DFB8 /* TrustedNetworksUI.swift */; };
 		0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63B20C83FC5008323CF /* AppDelegate.swift */; };
 		0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63D20C83FC5008323CF /* ServiceViewController.swift */; };
 		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
@@ -77,20 +181,32 @@
 		0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */; };
 		0E776642229D0DAE0023FA76 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
+		0E9AA978259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */; };
+		0E9AA979259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */; };
+		0E9AA992259F779F003FAFF1 /* PassepartoutCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; platformFilter = ios; };
+		0E9AA9BF259F7821003FAFF1 /* PassepartoutCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E5203EA259F60D600CBAB56 /* PassepartoutCore.framework */; };
+		0E9AA9EF259F799B003FAFF1 /* ConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA987259F777B003FAFF1 /* ConnectionServiceTests.swift */; };
+		0E9AA9F0259F799B003FAFF1 /* ConnectionService.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E9AA988259F777B003FAFF1 /* ConnectionService.json */; };
+		0E9AA9F1259F799B003FAFF1 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA986259F777B003FAFF1 /* UtilsTests.swift */; };
+		0E9AA9F2259F799B003FAFF1 /* InfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA985259F777B003FAFF1 /* InfrastructureTests.swift */; };
+		0E9AA9F9259F799C003FAFF1 /* ConnectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA987259F777B003FAFF1 /* ConnectionServiceTests.swift */; };
+		0E9AA9FA259F799C003FAFF1 /* ConnectionService.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E9AA988259F777B003FAFF1 /* ConnectionService.json */; };
+		0E9AA9FB259F799C003FAFF1 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA986259F777B003FAFF1 /* UtilsTests.swift */; };
+		0E9AA9FC259F799C003FAFF1 /* InfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA985259F777B003FAFF1 /* InfrastructureTests.swift */; };
+		0E9AAA7F259F7DB7003FAFF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F5E259F41690022DFB8 /* Assets.xcassets */; };
+		0E9AAA80259F7DB7003FAFF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F62259F41690022DFB8 /* AppDelegate.swift */; };
+		0E9AAA89259F7DCA003FAFF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F5F259F41690022DFB8 /* Main.storyboard */; };
+		0E9AAABE259F7FFF003FAFF1 /* PassepartoutLauncher.app in Resources */ = {isa = PBXBuildFile; fileRef = 0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */; };
+		0E9AAACB259F808B003FAFF1 /* PassepartoutLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0E9AAAD4259F809F003FAFF1 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9AAAD3259F809F003FAFF1 /* ServiceManagement.framework */; };
 		0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD7862257462800D033B4 /* Providers.xcassets */; };
 		0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD788225746B300D033B4 /* Flags.xcassets */; };
 		0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */; };
-		0EA84515238A9B5200EFC500 /* Infrastructure+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */; };
-		0EA8451A238C2AB500EFC500 /* Infrastructure+Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
-		0EAC572F249426E200D0FCE0 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC572E249426E200D0FCE0 /* GracefulVPN.swift */; };
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
-		0EB9EB7323867E7F009C0A1C /* TrustedNetworksUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */; };
 		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
 		0ECA7E2225967BB90095F369 /* ProductManager+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA7E2125967BB90095F369 /* ProductManager+App.swift */; };
-		0ECA7E2D25967BF40095F369 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA7E2525967BDB0095F369 /* Product.swift */; };
-		0ECA7E3025967BFB0095F369 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA7E2625967BDB0095F369 /* ProductManager.swift */; };
 		0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */; };
 		0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB109224FECEA00E9E551 /* DataUnit.swift */; };
 		0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */; };
@@ -102,18 +218,18 @@
 		0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED38ADC213F44D00004D387 /* Organizer.storyboard */; };
 		0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */; };
 		0ED993B1223FF8C700B0F9C9 /* IntentDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */; };
-		0EDE8DC420C86910004C739C /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */; };
-		0EDE8DC820C86910004C739C /* Passepartout-Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0EDE8DC820C86910004C739C /* PassepartoutTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */; };
-		0EEF23412321AC55000AEBE3 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF23402321AC55000AEBE3 /* Issue.swift */; };
+		0EEDC551C74496360E09994F /* Pods_ios_Passepartout_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E070D15674A07F40A22BFA7E /* Pods_ios_Passepartout_iOS.framework */; };
 		0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */; };
-		0EF5CF292141F31F004FF1BD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7ED20D539A0002221FF /* Utils.swift */; };
 		0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */; };
 		0EFB901A2276D7F1006405E4 /* NetworkSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */; };
 		0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943D215BE10800529B64 /* IssueReporter.swift */; };
-		577B90392A4798F63461B0B5 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4CE55A94366C45DDB1E624 /* Pods_Passepartout_iOS_Tunnel.framework */; };
-		87121F7216E808EE79925040 /* Pods_Passepartout_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D32B24AA7767AB2E7FB6E0F /* Pods_Passepartout_iOS.framework */; };
-		91AF81613E19B47C06EBD447 /* Pods_PassepartoutCore_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276375A4CF0313B033CD8B5A /* Pods_PassepartoutCore_iOS.framework */; };
+		23B30D087357F9AC3130E01F /* Pods_macos_Passepartout_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D4C05138CFBC311ED76548 /* Pods_macos_Passepartout_macOS.framework */; };
+		254BDBF29F7A1FC54C52B302 /* Pods_ios_PassepartoutCore_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93E25644660446940471003 /* Pods_ios_PassepartoutCore_iOS.framework */; };
+		339DAF589F7BEBC11A09F350 /* Pods_ios_PassepartoutCoreTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F661C42E70315D0788B19EDC /* Pods_ios_PassepartoutCoreTests_iOS.framework */; };
+		52F5904C9D386AFF8437468F /* Pods_macos_PassepartoutCoreTests_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BA8850A89C4680A6A23A65 /* Pods_macos_PassepartoutCoreTests_macOS.framework */; };
+		B78AF882395541F93658B1AC /* Pods_macos_PassepartoutCore_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555477CACFC266802E4C2FF2 /* Pods_macos_PassepartoutCore_macOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +239,48 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0E31529A223F9EF400F61841;
 			remoteInfo = "Passepartout-Core";
+		};
+		0E5203BC259F5F3F00CBAB56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E5203B4259F5F3F00CBAB56;
+			remoteInfo = "Passepartout-macOS-Tunnel";
+		};
+		0E5203EF259F60D600CBAB56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E5203E9259F60D600CBAB56;
+			remoteInfo = "PassepartoutCore-macOS";
+		};
+		0E9AA993259F779F003FAFF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E31529A223F9EF400F61841;
+			remoteInfo = "PassepartoutCore-iOS";
+		};
+		0E9AA9C0259F7821003FAFF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E5203E9259F60D600CBAB56;
+			remoteInfo = "PassepartoutCore-macOS";
+		};
+		0E9AAABF259F7FFF003FAFF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E9AAA60259F7D7E003FAFF1;
+			remoteInfo = "PassepartoutLauncher-macOS";
+		};
+		0E9AAAC1259F800B003FAFF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E9AAA60259F7D7E003FAFF1;
+			remoteInfo = "PassepartoutLauncher-macOS";
 		};
 		0EDE8DC620C86910004C739C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -145,13 +303,45 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0E5203C2259F5F3F00CBAB56 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0E5203BE259F5F3F00CBAB56 /* PassepartoutTunnel.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5203F6259F60D600CBAB56 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0E5203F2259F60D600CBAB56 /* PassepartoutCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AAACA259F806B003FAFF1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				0E9AAACB259F808B003FAFF1 /* PassepartoutLauncher.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EDE8DCC20C86910004C739C /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0EDE8DC820C86910004C739C /* Passepartout-Tunnel.appex in Embed App Extensions */,
+				0EDE8DC820C86910004C739C /* PassepartoutTunnel.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +349,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0376B8FDB39F81CA072C3F37 /* Pods-ios-PassepartoutCore-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-PassepartoutCore-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ios-PassepartoutCore-iOS/Pods-ios-PassepartoutCore-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		055AC72673D0F12546CAEEA6 /* Pods-macos-Passepartout-macOS-Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-Passepartout-macOS-Tunnel.release.xcconfig"; path = "Target Support Files/Pods-macos-Passepartout-macOS-Tunnel/Pods-macos-Passepartout-macOS-Tunnel.release.xcconfig"; sourceTree = "<group>"; };
 		09CB728874F1553EF27BAAB9 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
 		0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTableViewCell.swift; sourceTree = "<group>"; };
 		0E05C61C20D27C82006EE732 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -166,7 +358,6 @@
 		0E0C072C236087C800155AAC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E1066C820E0F84A004F98B7 /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointViewController.swift; sourceTree = "<group>"; };
-		0E1C0A4E238FC7A5009FC087 /* InfrastructureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfrastructureFactory.swift; path = Submodules/Core/Passepartout/Sources/Services/InfrastructureFactory.swift; sourceTree = SOURCE_ROOT; };
 		0E1C0A50238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E1C0A51238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/App.strings; sourceTree = "<group>"; };
 		0E1C0A52238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -221,7 +412,76 @@
 		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
 		0E4FD7ED20D539A0002221FF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0E4FD7F020D58618002221FF /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		0E5202F7259F573500CBAB56 /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E5203B5259F5F3F00CBAB56 /* PassepartoutTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E5203EA259F60D600CBAB56 /* PassepartoutCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PassepartoutCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E533B152258E03B00EF94FC /* PoolGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoolGroup.swift; sourceTree = "<group>"; };
+		0E569F14259F2D3E0022DFB8 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		0E569F19259F2D8F0022DFB8 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
+		0E569F1A259F2D8F0022DFB8 /* ProductManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
+		0E569F1B259F2D8F0022DFB8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		0E569F28259F2DB10022DFB8 /* Infrastructure+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Infrastructure+Name.swift"; sourceTree = "<group>"; };
+		0E569F29259F2DB10022DFB8 /* Infrastructure+Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Infrastructure+Metadata.swift"; sourceTree = "<group>"; };
+		0E569F2A259F2DB10022DFB8 /* InfrastructureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfrastructureFactory.swift; sourceTree = "<group>"; };
+		0E569F30259F2DC10022DFB8 /* TrustedNetworksUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksUI.swift; sourceTree = "<group>"; };
+		0E569F5A259F41690022DFB8 /* TextTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextTableView.xib; sourceTree = "<group>"; };
+		0E569F5B259F41690022DFB8 /* TextTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableView.swift; sourceTree = "<group>"; };
+		0E569F5E259F41690022DFB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E569F60259F41690022DFB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0E569F61259F41690022DFB8 /* Launcher.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Launcher.entitlements; sourceTree = "<group>"; };
+		0E569F62259F41690022DFB8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E569F63259F41690022DFB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E569F66259F41690022DFB8 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
+		0E569F67259F41690022DFB8 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		0E569F68259F41690022DFB8 /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
+		0E569F69259F41690022DFB8 /* OrganizerProfileTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizerProfileTableView.swift; sourceTree = "<group>"; };
+		0E569F6A259F41690022DFB8 /* OrganizerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizerViewController.swift; sourceTree = "<group>"; };
+		0E569F6B259F41690022DFB8 /* OrganizerProfileTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrganizerProfileTableView.xib; sourceTree = "<group>"; };
+		0E569F6D259F41690022DFB8 /* ServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		0E569F6E259F41690022DFB8 /* ProviderServiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderServiceView.swift; sourceTree = "<group>"; };
+		0E569F70259F41690022DFB8 /* MTUViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTUViewController.swift; sourceTree = "<group>"; };
+		0E569F71259F41690022DFB8 /* EndpointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointViewController.swift; sourceTree = "<group>"; };
+		0E569F72259F41690022DFB8 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
+		0E569F73259F41690022DFB8 /* ProfileCustomizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCustomizationViewController.swift; sourceTree = "<group>"; };
+		0E569F74259F41690022DFB8 /* ProxyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyViewController.swift; sourceTree = "<group>"; };
+		0E569F75259F41690022DFB8 /* TrustedNetworksAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksAddViewController.swift; sourceTree = "<group>"; };
+		0E569F76259F41690022DFB8 /* DNSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSViewController.swift; sourceTree = "<group>"; };
+		0E569F77259F41690022DFB8 /* DefaultGatewayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultGatewayViewController.swift; sourceTree = "<group>"; };
+		0E569F78259F41690022DFB8 /* TrustedNetworksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksViewController.swift; sourceTree = "<group>"; };
+		0E569F79259F41690022DFB8 /* ProviderServiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProviderServiceView.xib; sourceTree = "<group>"; };
+		0E569F7A259F41690022DFB8 /* HostServiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostServiceView.swift; sourceTree = "<group>"; };
+		0E569F7B259F41690022DFB8 /* HostServiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostServiceView.xib; sourceTree = "<group>"; };
+		0E569F7C259F41690022DFB8 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		0E569F7D259F41690022DFB8 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
+		0E569F7E259F41690022DFB8 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+		0E569F7F259F41690022DFB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E569F82259F41690022DFB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
+		0E569F84259F41690022DFB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Service.storyboard; sourceTree = "<group>"; };
+		0E569F86259F41690022DFB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0E569F88259F41690022DFB8 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		0E569F89259F41690022DFB8 /* StatusMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenu.swift; sourceTree = "<group>"; };
+		0E569F8A259F41690022DFB8 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		0E569F8B259F41690022DFB8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E569F8F259F41690022DFB8 /* IssueReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
+		0E569F91259F41690022DFB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/App.strings; sourceTree = "<group>"; };
+		0E569F92259F41690022DFB8 /* WindowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
+		0E569F93259F41690022DFB8 /* HostImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostImporter.swift; sourceTree = "<group>"; };
+		0E569F94259F41690022DFB8 /* NSTextView+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Search.swift"; sourceTree = "<group>"; };
+		0E569F97259F41690022DFB8 /* TextInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
+		0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
+		0E569F99259F41690022DFB8 /* Donation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
+		0E569F9A259F41690022DFB8 /* Theme+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+Views.swift"; sourceTree = "<group>"; };
+		0E569F9C259F41690022DFB8 /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
+		0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Scenes.swift"; sourceTree = "<group>"; };
+		0E569F9E259F41690022DFB8 /* ProductManager+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProductManager+App.swift"; sourceTree = "<group>"; };
+		0E569FA1259F41690022DFB8 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0E569FA3259F41690022DFB8 /* AppConstants+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppConstants+App.swift"; sourceTree = "<group>"; };
+		0E569FA4259F41690022DFB8 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
+		0E569FA6259F41690022DFB8 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
+		0E569FA7259F41690022DFB8 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
+		0E569FA8259F41690022DFB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E569FAA259F41690022DFB8 /* Tunnel-macOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Tunnel-macOS.entitlements"; sourceTree = "<group>"; };
 		0E57F63820C83FC5008323CF /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E57F63B20C83FC5008323CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
@@ -250,15 +510,21 @@
 		0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionProxy+Communication.swift"; sourceTree = "<group>"; };
 		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
 		0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructurePreset.swift; sourceTree = "<group>"; };
+		0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		0E9AA985259F777B003FAFF1 /* InfrastructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureTests.swift; sourceTree = "<group>"; };
+		0E9AA986259F777B003FAFF1 /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
+		0E9AA987259F777B003FAFF1 /* ConnectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionServiceTests.swift; sourceTree = "<group>"; };
+		0E9AA988259F777B003FAFF1 /* ConnectionService.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ConnectionService.json; sourceTree = "<group>"; };
+		0E9AA98D259F779F003FAFF1 /* PassepartoutCoreTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PassepartoutCoreTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E9AA991259F779F003FAFF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E9AA9BA259F7821003FAFF1 /* PassepartoutCoreTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PassepartoutCoreTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E9AAAD3259F809F003FAFF1 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
 		0E9CD7862257462800D033B4 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
 		0E9CD788225746B300D033B4 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
 		0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetworkViewController.swift; sourceTree = "<group>"; };
-		0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Infrastructure+Name.swift"; path = "Submodules/Core/Passepartout/Sources/Services/Infrastructure+Name.swift"; sourceTree = SOURCE_ROOT; };
-		0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Infrastructure+Metadata.swift"; path = "Submodules/Core/Passepartout/Sources/Services/Infrastructure+Metadata.swift"; sourceTree = SOURCE_ROOT; };
-		0EAC572E249426E200D0FCE0 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GracefulVPN.swift; path = Submodules/Core/Passepartout/Sources/Model/GracefulVPN.swift; sourceTree = SOURCE_ROOT; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
-		0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksUI.swift; sourceTree = "<group>"; };
 		0EBBE8F42182361700106008 /* ConnectionService+Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Migration.swift"; sourceTree = "<group>"; };
 		0EBE2FD02360F88C00F0D5AB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0EBE2FD12360F88E00F0D5AB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -277,8 +543,6 @@
 		0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderConnectionProfile.swift; sourceTree = "<group>"; };
 		0EC7F20420E24308004EA58E /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
 		0ECA7E2125967BB90095F369 /* ProductManager+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProductManager+App.swift"; sourceTree = "<group>"; };
-		0ECA7E2525967BDB0095F369 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = Submodules/Core/Passepartout/Sources/Model/Product.swift; sourceTree = SOURCE_ROOT; };
-		0ECA7E2625967BDB0095F369 /* ProductManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductManager.swift; path = Submodules/Core/Passepartout/Sources/Model/ProductManager.swift; sourceTree = SOURCE_ROOT; };
 		0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
 		0ECEB105224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0ECEB106224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Organizer.storyboard; sourceTree = "<group>"; };
@@ -291,38 +555,58 @@
 		0ED31C2820CF2A340027975F /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderPoolViewController.swift; sourceTree = "<group>"; };
 		0ED31C3920CF39510027975F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		0ED31C3B20CF39510027975F /* Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
+		0ED31C3B20CF39510027975F /* Tunnel-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tunnel-iOS.entitlements"; sourceTree = "<group>"; };
 		0ED38AD8213F33150004D387 /* WizardHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardHostViewController.swift; sourceTree = "<group>"; };
 		0ED38AE621404F100004D387 /* EndpointDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointDataSource.swift; sourceTree = "<group>"; };
 		0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModificationDelegate.swift; sourceTree = "<group>"; };
 		0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntentDispatcher.swift; path = Submodules/Core/Passepartout/Sources/Intents/IntentDispatcher.swift; sourceTree = SOURCE_ROOT; };
-		0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Passepartout-Tunnel.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
-		0EDE8DC520C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ED993B0223FF8C700B0F9C9 /* IntentDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentDispatcher.swift; sourceTree = "<group>"; };
+		0EDE8DBF20C86910004C739C /* PassepartoutTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EDE8DC320C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0EDE8DD220C86978004C739C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		0EDE8DE220C86A13004C739C /* Passepartout.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Passepartout.entitlements; sourceTree = "<group>"; };
+		0EDE8DE220C86A13004C739C /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Scenes.swift"; sourceTree = "<group>"; };
 		0EDE8DE620C93945004C739C /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		0EDE8DED20C93E4C004C739C /* GroupConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupConstants.swift; sourceTree = "<group>"; };
 		0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		0EEF23402321AC55000AEBE3 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Issue.swift; path = Submodules/Core/Passepartout/Sources/Issue.swift; sourceTree = SOURCE_ROOT; };
 		0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
 		0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNetworkSettings.swift; sourceTree = "<group>"; };
 		0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsViewController.swift; sourceTree = "<group>"; };
 		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
 		0FD7B360EE444EF1CDBFDF1C /* Pods-PassepartoutCoreTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCoreTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PassepartoutCoreTests-iOS/Pods-PassepartoutCoreTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		0FDF9B1E8EC63CCF4A2C9694 /* Pods-ios-Passepartout-iOS-Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-Passepartout-iOS-Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-ios-Passepartout-iOS-Tunnel/Pods-ios-Passepartout-iOS-Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
+		155FC78114E324E01093F98C /* Pods-ios-Passepartout-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-Passepartout-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ios-Passepartout-iOS/Pods-ios-Passepartout-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		234D3C887F46AD64480495BB /* Pods-PassepartoutCoreTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCoreTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-PassepartoutCoreTests-iOS/Pods-PassepartoutCoreTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		276375A4CF0313B033CD8B5A /* Pods_PassepartoutCore_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PassepartoutCore_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23D4C05138CFBC311ED76548 /* Pods_macos_Passepartout_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macos_Passepartout_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		329F34FAC963CE4BEA3013D6 /* Pods-macos-PassepartoutCore-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-PassepartoutCore-macOS.debug.xcconfig"; path = "Target Support Files/Pods-macos-PassepartoutCore-macOS/Pods-macos-PassepartoutCore-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		35380A14E9FF6F0250C171CD /* Pods_macos_PassepartoutTunnel_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macos_PassepartoutTunnel_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD12523ABCBF7ED941FC270 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS-Tunnel.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS-Tunnel/Pods-Passepartout-iOS-Tunnel.release.xcconfig"; sourceTree = "<group>"; };
+		50DD79FBBBBF400F3BFE8912 /* Pods-macos-PassepartoutTunnel-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-PassepartoutTunnel-macOS.debug.xcconfig"; path = "Target Support Files/Pods-macos-PassepartoutTunnel-macOS/Pods-macos-PassepartoutTunnel-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		53B773C4BAE7EDB38C7AFCD1 /* Pods-Passepartout-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.release.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		6D32B24AA7767AB2E7FB6E0F /* Pods_Passepartout_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		992C366F272FAA643335F68C /* Pods_PassepartoutCoreTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PassepartoutCoreTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		555477CACFC266802E4C2FF2 /* Pods_macos_PassepartoutCore_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macos_PassepartoutCore_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C7F674900185F5DD24DA481 /* Pods-macos-Passepartout-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-Passepartout-macOS.release.xcconfig"; path = "Target Support Files/Pods-macos-Passepartout-macOS/Pods-macos-Passepartout-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		5CC1FDDBA184F8548D814E9D /* Pods-ios-PassepartoutCore-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-PassepartoutCore-iOS.release.xcconfig"; path = "Target Support Files/Pods-ios-PassepartoutCore-iOS/Pods-ios-PassepartoutCore-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		7E007C60601AFBB8A2C34DC4 /* Pods-ios-PassepartoutTunnel-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-PassepartoutTunnel-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ios-PassepartoutTunnel-iOS/Pods-ios-PassepartoutTunnel-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		80A0C78A127E8CE9CB8E658D /* Pods-macos-PassepartoutCoreTests-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-PassepartoutCoreTests-macOS.release.xcconfig"; path = "Target Support Files/Pods-macos-PassepartoutCoreTests-macOS/Pods-macos-PassepartoutCoreTests-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		9FB2CA39113427B15C824FE0 /* Pods-ios-PassepartoutTunnel-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-PassepartoutTunnel-iOS.release.xcconfig"; path = "Target Support Files/Pods-ios-PassepartoutTunnel-iOS/Pods-ios-PassepartoutTunnel-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A1C4E67627603307808F2FFC /* Pods-PassepartoutCore-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCore-iOS.debug.xcconfig"; path = "Target Support Files/Pods-PassepartoutCore-iOS/Pods-PassepartoutCore-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		A8E3B69460648EA46C1BF850 /* Pods-ios-PassepartoutCoreTests-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-PassepartoutCoreTests-iOS.debug.xcconfig"; path = "Target Support Files/Pods-ios-PassepartoutCoreTests-iOS/Pods-ios-PassepartoutCoreTests-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B7018254471DA72DF7939A01 /* Pods-macos-Passepartout-macOS-Tunnel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-Passepartout-macOS-Tunnel.debug.xcconfig"; path = "Target Support Files/Pods-macos-Passepartout-macOS-Tunnel/Pods-macos-Passepartout-macOS-Tunnel.debug.xcconfig"; sourceTree = "<group>"; };
+		B93E25644660446940471003 /* Pods_ios_PassepartoutCore_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_PassepartoutCore_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3D09D9270939FC37BE7101E /* Pods-macos-PassepartoutCore-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-PassepartoutCore-macOS.release.xcconfig"; path = "Target Support Files/Pods-macos-PassepartoutCore-macOS/Pods-macos-PassepartoutCore-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		C9BA8850A89C4680A6A23A65 /* Pods_macos_PassepartoutCoreTests_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_macos_PassepartoutCoreTests_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFF79E4C42220C649C2259D2 /* Pods-ios-Passepartout-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-Passepartout-iOS.release.xcconfig"; path = "Target Support Files/Pods-ios-Passepartout-iOS/Pods-ios-Passepartout-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		D2AF3AFC3418E6800D8A70E8 /* Pods-macos-PassepartoutTunnel-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-PassepartoutTunnel-macOS.release.xcconfig"; path = "Target Support Files/Pods-macos-PassepartoutTunnel-macOS/Pods-macos-PassepartoutTunnel-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		D5D3FFA0392EA5F818646CD9 /* Pods-ios-PassepartoutCoreTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-PassepartoutCoreTests-iOS.release.xcconfig"; path = "Target Support Files/Pods-ios-PassepartoutCoreTests-iOS/Pods-ios-PassepartoutCoreTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		E070D15674A07F40A22BFA7E /* Pods_ios_Passepartout_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_Passepartout_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E08D99B2FCC4478BB24A57B0 /* Pods-macos-Passepartout-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-Passepartout-macOS.debug.xcconfig"; path = "Target Support Files/Pods-macos-Passepartout-macOS/Pods-macos-Passepartout-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E69B5CF79639B3D24F2AFFC9 /* Pods-macos-PassepartoutCoreTests-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-macos-PassepartoutCoreTests-macOS.debug.xcconfig"; path = "Target Support Files/Pods-macos-PassepartoutCoreTests-macOS/Pods-macos-PassepartoutCoreTests-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E9433B826E8B47C325FD6B8F /* Pods-ios-Passepartout-iOS-Tunnel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-Passepartout-iOS-Tunnel.release.xcconfig"; path = "Target Support Files/Pods-ios-Passepartout-iOS-Tunnel/Pods-ios-Passepartout-iOS-Tunnel.release.xcconfig"; sourceTree = "<group>"; };
 		F1BECEC1D93FEBDB17B714D8 /* Pods-PassepartoutCore-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PassepartoutCore-iOS.release.xcconfig"; path = "Target Support Files/Pods-PassepartoutCore-iOS/Pods-PassepartoutCore-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		F4959B5F3CB1BBC2C46EA639 /* Pods-Passepartout-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Passepartout-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		FA4CE55A94366C45DDB1E624 /* Pods_Passepartout_iOS_Tunnel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Passepartout_iOS_Tunnel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F661C42E70315D0788B19EDC /* Pods_ios_PassepartoutCoreTests_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_PassepartoutCoreTests_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF7D2E624A2979425A6F7B7A /* Pods_ios_PassepartoutTunnel_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_PassepartoutTunnel_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,7 +614,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91AF81613E19B47C06EBD447 /* Pods_PassepartoutCore_iOS.framework in Frameworks */,
+				254BDBF29F7A1FC54C52B302 /* Pods_ios_PassepartoutCore_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5202F4259F573500CBAB56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AAAD4259F809F003FAFF1 /* ServiceManagement.framework in Frameworks */,
+				0E5203F1259F60D600CBAB56 /* PassepartoutCore.framework in Frameworks */,
+				23B30D087357F9AC3130E01F /* Pods_macos_Passepartout_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5203B2259F5F3F00CBAB56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E5203B6259F5F3F00CBAB56 /* NetworkExtension.framework in Frameworks */,
+				0774835EE25EEA07495A98AA /* Pods_macos_PassepartoutTunnel_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5203E7259F60D600CBAB56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B78AF882395541F93658B1AC /* Pods_macos_PassepartoutCore_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +651,32 @@
 			files = (
 				0E3152B0223F9EF500F61841 /* PassepartoutCore.framework in Frameworks */,
 				0ED31C3D20CF396E0027975F /* NetworkExtension.framework in Frameworks */,
-				87121F7216E808EE79925040 /* Pods_Passepartout_iOS.framework in Frameworks */,
+				0EEDC551C74496360E09994F /* Pods_ios_Passepartout_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AA98A259F779F003FAFF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AA992259F779F003FAFF1 /* PassepartoutCore.framework in Frameworks */,
+				339DAF589F7BEBC11A09F350 /* Pods_ios_PassepartoutCoreTests_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AA9B7259F7821003FAFF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AA9BF259F7821003FAFF1 /* PassepartoutCore.framework in Frameworks */,
+				52F5904C9D386AFF8437468F /* Pods_macos_PassepartoutCoreTests_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AAA5E259F7D7E003FAFF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +685,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */,
-				577B90392A4798F63461B0B5 /* Pods_Passepartout_iOS_Tunnel.framework in Frameworks */,
+				051985241A3ABE44EB09DFF5 /* Pods_ios_PassepartoutTunnel_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,13 +723,15 @@
 			path = Shortcuts;
 			sourceTree = "<group>";
 		};
-		0E31529C223F9EF500F61841 /* PassepartoutCore-iOS */ = {
+		0E31529C223F9EF500F61841 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0E3CAF97229AAE760008E5C8 /* Resources */,
+				0EDE8DF020C93EBB004C739C /* Sources */,
 				0E31529D223F9EF500F61841 /* PassepartoutCore.h */,
 				0E31529E223F9EF500F61841 /* Info.plist */,
 			);
-			path = "PassepartoutCore-iOS";
+			path = Core;
 			sourceTree = "<group>";
 		};
 		0E3CAF97229AAE760008E5C8 /* Resources */ = {
@@ -422,13 +760,140 @@
 			path = Intents;
 			sourceTree = "<group>";
 		};
+		0E569F58259F41690022DFB8 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				0E569F8C259F41690022DFB8 /* Global */,
+				0E569F5C259F41690022DFB8 /* Launcher */,
+				0E569F87259F41690022DFB8 /* Menu */,
+				0E569F64259F41690022DFB8 /* Scenes */,
+				0E569F59259F41690022DFB8 /* Tables */,
+				0E569F7E259F41690022DFB8 /* App.entitlements */,
+				0E569FA8259F41690022DFB8 /* Info.plist */,
+				0E569F8D259F41690022DFB8 /* App.strings */,
+				0E569F8B259F41690022DFB8 /* AppDelegate.swift */,
+				0E569F7F259F41690022DFB8 /* Assets.xcassets */,
+				0E569FA7259F41690022DFB8 /* Flags.xcassets */,
+				0E569F7D259F41690022DFB8 /* Providers.xcassets */,
+				0E569F85259F41690022DFB8 /* Main.storyboard */,
+				0E569F81259F41690022DFB8 /* Preferences.storyboard */,
+				0E569F83259F41690022DFB8 /* Service.storyboard */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		0E569F59259F41690022DFB8 /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				0E569F5B259F41690022DFB8 /* TextTableView.swift */,
+				0E569F5A259F41690022DFB8 /* TextTableView.xib */,
+			);
+			path = Tables;
+			sourceTree = "<group>";
+		};
+		0E569F5C259F41690022DFB8 /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				0E569F61259F41690022DFB8 /* Launcher.entitlements */,
+				0E569F63259F41690022DFB8 /* Info.plist */,
+				0E569F62259F41690022DFB8 /* AppDelegate.swift */,
+				0E569F5E259F41690022DFB8 /* Assets.xcassets */,
+				0E569F5F259F41690022DFB8 /* Main.storyboard */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
+		0E569F64259F41690022DFB8 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0E569F65259F41690022DFB8 /* Preferences */,
+				0E569F6C259F41690022DFB8 /* Service */,
+				0E569F69259F41690022DFB8 /* OrganizerProfileTableView.swift */,
+				0E569F6A259F41690022DFB8 /* OrganizerViewController.swift */,
+				0E569F6B259F41690022DFB8 /* OrganizerProfileTableView.xib */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		0E569F65259F41690022DFB8 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				0E569F66259F41690022DFB8 /* DebugLogViewController.swift */,
+				0E569F68259F41690022DFB8 /* PreferencesGeneralViewController.swift */,
+				0E569F67259F41690022DFB8 /* PreferencesViewController.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		0E569F6C259F41690022DFB8 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0E569F6F259F41690022DFB8 /* Customization */,
+				0E569F7C259F41690022DFB8 /* AccountViewController.swift */,
+				0E569F7A259F41690022DFB8 /* HostServiceView.swift */,
+				0E569F6E259F41690022DFB8 /* ProviderServiceView.swift */,
+				0E569F6D259F41690022DFB8 /* ServiceViewController.swift */,
+				0E569F7B259F41690022DFB8 /* HostServiceView.xib */,
+				0E569F79259F41690022DFB8 /* ProviderServiceView.xib */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		0E569F6F259F41690022DFB8 /* Customization */ = {
+			isa = PBXGroup;
+			children = (
+				0E569F72259F41690022DFB8 /* ConfigurationViewController.swift */,
+				0E569F77259F41690022DFB8 /* DefaultGatewayViewController.swift */,
+				0E569F76259F41690022DFB8 /* DNSViewController.swift */,
+				0E569F71259F41690022DFB8 /* EndpointViewController.swift */,
+				0E569F70259F41690022DFB8 /* MTUViewController.swift */,
+				0E569F73259F41690022DFB8 /* ProfileCustomizationViewController.swift */,
+				0E569F74259F41690022DFB8 /* ProxyViewController.swift */,
+				0E569F75259F41690022DFB8 /* TrustedNetworksAddViewController.swift */,
+				0E569F78259F41690022DFB8 /* TrustedNetworksViewController.swift */,
+			);
+			path = Customization;
+			sourceTree = "<group>";
+		};
+		0E569F87259F41690022DFB8 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				0E569F88259F41690022DFB8 /* MainMenu.swift */,
+				0E569F8A259F41690022DFB8 /* MainMenu.xib */,
+				0E569F89259F41690022DFB8 /* StatusMenu.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		0E569F8C259F41690022DFB8 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				0E569FA4259F41690022DFB8 /* Credits.html */,
+				0E569FA3259F41690022DFB8 /* AppConstants+App.swift */,
+				0E569F99259F41690022DFB8 /* Donation.swift */,
+				0E569F93259F41690022DFB8 /* HostImporter.swift */,
+				0E569F8F259F41690022DFB8 /* IssueReporter.swift */,
+				0E569FA6259F41690022DFB8 /* Macros.swift */,
+				0E569F94259F41690022DFB8 /* NSTextView+Search.swift */,
+				0E569F9E259F41690022DFB8 /* ProductManager+App.swift */,
+				0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */,
+				0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */,
+				0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */,
+				0E569F9C259F41690022DFB8 /* SwiftGen+Strings.swift */,
+				0E569F97259F41690022DFB8 /* TextInputViewController.swift */,
+				0E569FA1259F41690022DFB8 /* Theme.swift */,
+				0E569F9A259F41690022DFB8 /* Theme+Views.swift */,
+				0E569F92259F41690022DFB8 /* WindowManager.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		0E57F62F20C83FC5008323CF = {
 			isa = PBXGroup;
 			children = (
-				0E31529C223F9EF500F61841 /* PassepartoutCore-iOS */,
-				0E57F63A20C83FC5008323CF /* Passepartout-iOS */,
-				0EDE8DC020C86910004C739C /* Passepartout-iOS-Tunnel */,
-				0EE4EB2C229A71BB000E4BA1 /* Libraries */,
+				0E23B4A12298559800304C30 /* Config.xcconfig */,
+				0E9AA982259F7674003FAFF1 /* Passepartout */,
+				0EE4EB2C229A71BB000E4BA1 /* Submodules */,
 				0E57F63920C83FC5008323CF /* Products */,
 				374B9F085E1148C37CF9117A /* Frameworks */,
 				ECB6C4CA315B2CB2AFE7ACBB /* Pods */,
@@ -439,35 +904,41 @@
 			isa = PBXGroup;
 			children = (
 				0E57F63820C83FC5008323CF /* Passepartout.app */,
-				0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */,
+				0EDE8DBF20C86910004C739C /* PassepartoutTunnel.appex */,
 				0E31529B223F9EF400F61841 /* PassepartoutCore.framework */,
+				0E5202F7259F573500CBAB56 /* Passepartout.app */,
+				0E5203B5259F5F3F00CBAB56 /* PassepartoutTunnel.appex */,
+				0E5203EA259F60D600CBAB56 /* PassepartoutCore.framework */,
+				0E9AA98D259F779F003FAFF1 /* PassepartoutCoreTests-iOS.xctest */,
+				0E9AA9BA259F7821003FAFF1 /* PassepartoutCoreTests-macOS.xctest */,
+				0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0E57F63A20C83FC5008323CF /* Passepartout-iOS */ = {
+		0E57F63A20C83FC5008323CF /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0EDE8DEC20C93E3B004C739C /* Global */,
 				0E1066CA20E0F85C004F98B7 /* Cells */,
+				0EDE8DEC20C93E3B004C739C /* Global */,
 				0EDE8DF120C93ED8004C739C /* Scenes */,
-				0E23B4A12298559800304C30 /* Config.xcconfig */,
-				0EDE8DE220C86A13004C739C /* Passepartout.entitlements */,
+				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
+				0EDE8DE220C86A13004C739C /* App.entitlements */,
+				0E57F64720C83FC7008323CF /* Info.plist */,
+				0E45E6E222BD793800F19312 /* App.strings */,
+				0E0C072B236087A100155AAC /* InfoPlist.strings */,
 				0E57F63B20C83FC5008323CF /* AppDelegate.swift */,
+				0E57F64220C83FC7008323CF /* Assets.xcassets */,
+				0E9CD788225746B300D033B4 /* Flags.xcassets */,
+				0E9CD7862257462800D033B4 /* Providers.xcassets */,
 				0E24273C225950450064A1A3 /* About.storyboard */,
+				0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */,
 				0E57F63F20C83FC5008323CF /* Main.storyboard */,
 				0ED38ADC213F44D00004D387 /* Organizer.storyboard */,
 				0E4B0D762366E6C800C890B4 /* Purchase.storyboard */,
 				0E36D25A22403469006AF062 /* Shortcuts.storyboard */,
-				0E57F64220C83FC7008323CF /* Assets.xcassets */,
-				0E9CD788225746B300D033B4 /* Flags.xcassets */,
-				0E9CD7862257462800D033B4 /* Providers.xcassets */,
-				0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */,
-				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
-				0E57F64720C83FC7008323CF /* Info.plist */,
-				0E0C072B236087A100155AAC /* InfoPlist.strings */,
 			);
-			path = "Passepartout-iOS";
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		0E89DFCC213EEDE700741BA1 /* Organizer */ = {
@@ -482,14 +953,45 @@
 			path = Organizer;
 			sourceTree = "<group>";
 		};
+		0E9AA982259F7674003FAFF1 /* Passepartout */ = {
+			isa = PBXGroup;
+			children = (
+				0E9AA983259F76C5003FAFF1 /* App */,
+				0E31529C223F9EF500F61841 /* Core */,
+				0E9AA984259F777B003FAFF1 /* Tests */,
+				0EDE8DC020C86910004C739C /* Tunnel */,
+			);
+			path = Passepartout;
+			sourceTree = "<group>";
+		};
+		0E9AA983259F76C5003FAFF1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0E57F63A20C83FC5008323CF /* iOS */,
+				0E569F58259F41690022DFB8 /* macOS */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		0E9AA984259F777B003FAFF1 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0E9AA991259F779F003FAFF1 /* Info.plist */,
+				0E9AA988259F777B003FAFF1 /* ConnectionService.json */,
+				0E9AA987259F777B003FAFF1 /* ConnectionServiceTests.swift */,
+				0E9AA985259F777B003FAFF1 /* InfrastructureTests.swift */,
+				0E9AA986259F777B003FAFF1 /* UtilsTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		0EB9EB7123867E7F009C0A1C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0EB9EB7223867E7F009C0A1C /* TrustedNetworksUI.swift */,
+				0E569F30259F2DC10022DFB8 /* TrustedNetworksUI.swift */,
 			);
-			name = UI;
-			path = Submodules/Core/Passepartout/Sources/UI;
-			sourceTree = SOURCE_ROOT;
+			path = UI;
+			sourceTree = "<group>";
 		};
 		0EBE3AA2213DC1B000BFA2F5 /* Profiles */ = {
 			isa = PBXGroup;
@@ -514,11 +1016,11 @@
 				0ECEB109224FECEA00E9E551 /* DataUnit.swift */,
 				0EC7F20420E24308004EA58E /* DebugLog.swift */,
 				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
-				0EAC572E249426E200D0FCE0 /* GracefulVPN.swift */,
+				0E569F19259F2D8F0022DFB8 /* GracefulVPN.swift */,
 				0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */,
 				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
-				0ECA7E2525967BDB0095F369 /* Product.swift */,
-				0ECA7E2625967BDB0095F369 /* ProductManager.swift */,
+				0E569F1B259F2D8F0022DFB8 /* Product.swift */,
+				0E569F1A259F2D8F0022DFB8 /* ProductManager.swift */,
 				0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */,
 				0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */,
 				0E2B494120FD16540094784C /* TransientStore.swift */,
@@ -532,9 +1034,9 @@
 			isa = PBXGroup;
 			children = (
 				0ED31C1120CF0ABA0027975F /* Infrastructure.swift */,
-				0EA84519238C2AB500EFC500 /* Infrastructure+Metadata.swift */,
-				0EA84514238A9B5100EFC500 /* Infrastructure+Name.swift */,
-				0E1C0A4E238FC7A5009FC087 /* InfrastructureFactory.swift */,
+				0E569F29259F2DB10022DFB8 /* Infrastructure+Metadata.swift */,
+				0E569F28259F2DB10022DFB8 /* Infrastructure+Name.swift */,
+				0E569F2A259F2DB10022DFB8 /* InfrastructureFactory.swift */,
 				0E8D97E121388B52006FB4A0 /* InfrastructurePreset.swift */,
 				0ED31C0F20CF09A30027975F /* Pool.swift */,
 				0E66A26F225FE25800F9C779 /* PoolCategory.swift */,
@@ -544,20 +1046,20 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		0EDE8DC020C86910004C739C /* Passepartout-iOS-Tunnel */ = {
+		0EDE8DC020C86910004C739C /* Tunnel */ = {
 			isa = PBXGroup;
 			children = (
-				0ED31C3B20CF39510027975F /* Tunnel.entitlements */,
-				0EDE8DC320C86910004C739C /* PacketTunnelProvider.swift */,
-				0EDE8DC520C86910004C739C /* Info.plist */,
+				0ED31C3B20CF39510027975F /* Tunnel-iOS.entitlements */,
+				0E569FAA259F41690022DFB8 /* Tunnel-macOS.entitlements */,
+				0EDE8DC320C86910004C739C /* Info.plist */,
+				0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */,
 			);
-			path = "Passepartout-iOS-Tunnel";
+			path = Tunnel;
 			sourceTree = "<group>";
 		};
 		0EDE8DEC20C93E3B004C739C /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				0E45E6E222BD793800F19312 /* App.strings */,
 				0E2EB062236D8E1E0079DB53 /* AppConstants+App.swift */,
 				0E3262D8235EE8DA00B5E470 /* HostImporter.swift */,
 				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
@@ -575,15 +1077,6 @@
 			path = Global;
 			sourceTree = "<group>";
 		};
-		0EDE8DEF20C93EBB004C739C /* Passepartout */ = {
-			isa = PBXGroup;
-			children = (
-				0E3CAF97229AAE760008E5C8 /* Resources */,
-				0EDE8DF020C93EBB004C739C /* Sources */,
-			);
-			path = Passepartout;
-			sourceTree = "<group>";
-		};
 		0EDE8DF020C93EBB004C739C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,7 +1087,7 @@
 				0E39BCF2214DA9310035E9DE /* AppConstants.swift */,
 				0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */,
 				0EDE8DED20C93E4C004C739C /* GroupConstants.swift */,
-				0EEF23402321AC55000AEBE3 /* Issue.swift */,
+				0E569F14259F2D3E0022DFB8 /* Issue.swift */,
 				0E4FD7ED20D539A0002221FF /* Utils.swift */,
 			);
 			path = Sources;
@@ -621,32 +1114,28 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		0EE4EB2C229A71BB000E4BA1 /* Libraries */ = {
+		0EE4EB2C229A71BB000E4BA1 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
 				0E3CAFC3229AAF8E0008E5C8 /* API */,
-				0EE4EB2E229A71DA000E4BA1 /* Core */,
 			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		0EE4EB2E229A71DA000E4BA1 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				0EDE8DEF20C93EBB004C739C /* Passepartout */,
-			);
-			path = Core;
+			path = Submodules;
 			sourceTree = "<group>";
 		};
 		374B9F085E1148C37CF9117A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E9AAAD3259F809F003FAFF1 /* ServiceManagement.framework */,
 				0ED31C3920CF39510027975F /* NetworkExtension.framework */,
 				0EDE8DD220C86978004C739C /* NotificationCenter.framework */,
-				6D32B24AA7767AB2E7FB6E0F /* Pods_Passepartout_iOS.framework */,
-				FA4CE55A94366C45DDB1E624 /* Pods_Passepartout_iOS_Tunnel.framework */,
-				276375A4CF0313B033CD8B5A /* Pods_PassepartoutCore_iOS.framework */,
-				992C366F272FAA643335F68C /* Pods_PassepartoutCoreTests_iOS.framework */,
+				E070D15674A07F40A22BFA7E /* Pods_ios_Passepartout_iOS.framework */,
+				B93E25644660446940471003 /* Pods_ios_PassepartoutCore_iOS.framework */,
+				F661C42E70315D0788B19EDC /* Pods_ios_PassepartoutCoreTests_iOS.framework */,
+				FF7D2E624A2979425A6F7B7A /* Pods_ios_PassepartoutTunnel_iOS.framework */,
+				23D4C05138CFBC311ED76548 /* Pods_macos_Passepartout_macOS.framework */,
+				555477CACFC266802E4C2FF2 /* Pods_macos_PassepartoutCore_macOS.framework */,
+				C9BA8850A89C4680A6A23A65 /* Pods_macos_PassepartoutCoreTests_macOS.framework */,
+				35380A14E9FF6F0250C171CD /* Pods_macos_PassepartoutTunnel_macOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -662,6 +1151,26 @@
 				F1BECEC1D93FEBDB17B714D8 /* Pods-PassepartoutCore-iOS.release.xcconfig */,
 				0FD7B360EE444EF1CDBFDF1C /* Pods-PassepartoutCoreTests-iOS.debug.xcconfig */,
 				234D3C887F46AD64480495BB /* Pods-PassepartoutCoreTests-iOS.release.xcconfig */,
+				155FC78114E324E01093F98C /* Pods-ios-Passepartout-iOS.debug.xcconfig */,
+				CFF79E4C42220C649C2259D2 /* Pods-ios-Passepartout-iOS.release.xcconfig */,
+				0FDF9B1E8EC63CCF4A2C9694 /* Pods-ios-Passepartout-iOS-Tunnel.debug.xcconfig */,
+				E9433B826E8B47C325FD6B8F /* Pods-ios-Passepartout-iOS-Tunnel.release.xcconfig */,
+				0376B8FDB39F81CA072C3F37 /* Pods-ios-PassepartoutCore-iOS.debug.xcconfig */,
+				5CC1FDDBA184F8548D814E9D /* Pods-ios-PassepartoutCore-iOS.release.xcconfig */,
+				E08D99B2FCC4478BB24A57B0 /* Pods-macos-Passepartout-macOS.debug.xcconfig */,
+				5C7F674900185F5DD24DA481 /* Pods-macos-Passepartout-macOS.release.xcconfig */,
+				B7018254471DA72DF7939A01 /* Pods-macos-Passepartout-macOS-Tunnel.debug.xcconfig */,
+				055AC72673D0F12546CAEEA6 /* Pods-macos-Passepartout-macOS-Tunnel.release.xcconfig */,
+				329F34FAC963CE4BEA3013D6 /* Pods-macos-PassepartoutCore-macOS.debug.xcconfig */,
+				C3D09D9270939FC37BE7101E /* Pods-macos-PassepartoutCore-macOS.release.xcconfig */,
+				A8E3B69460648EA46C1BF850 /* Pods-ios-PassepartoutCoreTests-iOS.debug.xcconfig */,
+				D5D3FFA0392EA5F818646CD9 /* Pods-ios-PassepartoutCoreTests-iOS.release.xcconfig */,
+				7E007C60601AFBB8A2C34DC4 /* Pods-ios-PassepartoutTunnel-iOS.debug.xcconfig */,
+				9FB2CA39113427B15C824FE0 /* Pods-ios-PassepartoutTunnel-iOS.release.xcconfig */,
+				E69B5CF79639B3D24F2AFFC9 /* Pods-macos-PassepartoutCoreTests-macOS.debug.xcconfig */,
+				80A0C78A127E8CE9CB8E658D /* Pods-macos-PassepartoutCoreTests-macOS.release.xcconfig */,
+				50DD79FBBBBF400F3BFE8912 /* Pods-macos-PassepartoutTunnel-macOS.debug.xcconfig */,
+				D2AF3AFC3418E6800D8A70E8 /* Pods-macos-PassepartoutTunnel-macOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -674,6 +1183,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E3152AD223F9EF500F61841 /* PassepartoutCore.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5203E5259F60D600CBAB56 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E5204A7259F66F700CBAB56 /* PassepartoutCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +1216,69 @@
 			productReference = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		0E5202F6259F573500CBAB56 /* Passepartout-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E520304259F573800CBAB56 /* Build configuration list for PBXNativeTarget "Passepartout-macOS" */;
+			buildPhases = (
+				6D65C9B23CEAFE3755C8BC2B /* [CP] Check Pods Manifest.lock */,
+				0E5202F3259F573500CBAB56 /* Sources */,
+				0E5202F4259F573500CBAB56 /* Frameworks */,
+				0E5202F5259F573500CBAB56 /* Resources */,
+				0E9AAACA259F806B003FAFF1 /* CopyFiles */,
+				0E5203C2259F5F3F00CBAB56 /* Embed App Extensions */,
+				0E5203F6259F60D600CBAB56 /* Embed Frameworks */,
+				5F0C817F8E72ADCEDA44DBC5 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E5203BD259F5F3F00CBAB56 /* PBXTargetDependency */,
+				0E5203F0259F60D600CBAB56 /* PBXTargetDependency */,
+				0E9AAAC0259F7FFF003FAFF1 /* PBXTargetDependency */,
+				0E9AAAC2259F800B003FAFF1 /* PBXTargetDependency */,
+			);
+			name = "Passepartout-macOS";
+			productName = "Passepartout-macOS";
+			productReference = 0E5202F7259F573500CBAB56 /* Passepartout.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0E5203B4259F5F3F00CBAB56 /* PassepartoutTunnel-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E5203BF259F5F3F00CBAB56 /* Build configuration list for PBXNativeTarget "PassepartoutTunnel-macOS" */;
+			buildPhases = (
+				A6026405EC7F053B50C8BFF4 /* [CP] Check Pods Manifest.lock */,
+				0E5203B1259F5F3F00CBAB56 /* Sources */,
+				0E5203B2259F5F3F00CBAB56 /* Frameworks */,
+				0E5203B3259F5F3F00CBAB56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PassepartoutTunnel-macOS";
+			productName = "Passepartout-macOS-Tunnel";
+			productReference = 0E5203B5259F5F3F00CBAB56 /* PassepartoutTunnel.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		0E5203E9259F60D600CBAB56 /* PassepartoutCore-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E5203F3259F60D600CBAB56 /* Build configuration list for PBXNativeTarget "PassepartoutCore-macOS" */;
+			buildPhases = (
+				6D3E350F59230E4C94ED9FDA /* [CP] Check Pods Manifest.lock */,
+				0E5203E5259F60D600CBAB56 /* Headers */,
+				0E5203E6259F60D600CBAB56 /* Sources */,
+				0E5203E7259F60D600CBAB56 /* Frameworks */,
+				0E5203E8259F60D600CBAB56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PassepartoutCore-macOS";
+			productName = "PassepartoutCore-macOS";
+			productReference = 0E5203EA259F60D600CBAB56 /* PassepartoutCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		0E57F63720C83FC5008323CF /* Passepartout-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout-iOS" */;
@@ -722,9 +1302,66 @@
 			productReference = 0E57F63820C83FC5008323CF /* Passepartout.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */ = {
+		0E9AA98C259F779F003FAFF1 /* PassepartoutCoreTests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "Passepartout-iOS-Tunnel" */;
+			buildConfigurationList = 0E9AA995259F779F003FAFF1 /* Build configuration list for PBXNativeTarget "PassepartoutCoreTests-iOS" */;
+			buildPhases = (
+				5CCA3608E9249955B3DEA5BF /* [CP] Check Pods Manifest.lock */,
+				0E9AA989259F779F003FAFF1 /* Sources */,
+				0E9AA98A259F779F003FAFF1 /* Frameworks */,
+				0E9AA98B259F779F003FAFF1 /* Resources */,
+				F4BF37883BF513DD4EF79789 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E9AA994259F779F003FAFF1 /* PBXTargetDependency */,
+			);
+			name = "PassepartoutCoreTests-iOS";
+			productName = "PassepartoutCoreTests-iOS";
+			productReference = 0E9AA98D259F779F003FAFF1 /* PassepartoutCoreTests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0E9AA9B9259F7821003FAFF1 /* PassepartoutCoreTests-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E9AA9C2259F7821003FAFF1 /* Build configuration list for PBXNativeTarget "PassepartoutCoreTests-macOS" */;
+			buildPhases = (
+				1BFBF587EFF0D8EFB44539C5 /* [CP] Check Pods Manifest.lock */,
+				0E9AA9B6259F7821003FAFF1 /* Sources */,
+				0E9AA9B7259F7821003FAFF1 /* Frameworks */,
+				0E9AA9B8259F7821003FAFF1 /* Resources */,
+				07E82DB4E76B85853FE611FC /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E9AA9C1259F7821003FAFF1 /* PBXTargetDependency */,
+			);
+			name = "PassepartoutCoreTests-macOS";
+			productName = "PassepartoutCoreTests-macOS";
+			productReference = 0E9AA9BA259F7821003FAFF1 /* PassepartoutCoreTests-macOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0E9AAA60259F7D7E003FAFF1 /* PassepartoutLauncher-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E9AAA70259F7D81003FAFF1 /* Build configuration list for PBXNativeTarget "PassepartoutLauncher-macOS" */;
+			buildPhases = (
+				0E9AAA5D259F7D7E003FAFF1 /* Sources */,
+				0E9AAA5E259F7D7E003FAFF1 /* Frameworks */,
+				0E9AAA5F259F7D7E003FAFF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PassepartoutLauncher-macOS";
+			productName = "PassepartoutLauncher-macOS";
+			productReference = 0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0EDE8DBE20C86910004C739C /* PassepartoutTunnel-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "PassepartoutTunnel-iOS" */;
 			buildPhases = (
 				4316D2F30EA7143E6BB85EDE /* [CP] Check Pods Manifest.lock */,
 				0EDE8DBB20C86910004C739C /* Sources */,
@@ -735,9 +1372,9 @@
 			);
 			dependencies = (
 			);
-			name = "Passepartout-iOS-Tunnel";
+			name = "PassepartoutTunnel-iOS";
 			productName = "Passepartout-iOS-Tunnel";
-			productReference = 0EDE8DBF20C86910004C739C /* Passepartout-Tunnel.appex */;
+			productReference = 0EDE8DBF20C86910004C739C /* PassepartoutTunnel.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -746,13 +1383,22 @@
 		0E57F63020C83FC5008323CF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1220;
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
 					0E31529A223F9EF400F61841 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
+					};
+					0E5202F6259F573500CBAB56 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					0E5203B4259F5F3F00CBAB56 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					0E5203E9259F60D600CBAB56 = {
+						CreatedOnToolsVersion = 12.3;
 					};
 					0E57F63720C83FC5008323CF = {
 						CreatedOnToolsVersion = 9.4;
@@ -771,6 +1417,15 @@
 								enabled = 1;
 							};
 						};
+					};
+					0E9AA98C259F779F003FAFF1 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					0E9AA9B9259F7821003FAFF1 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					0E9AAA60259F7D7E003FAFF1 = {
+						CreatedOnToolsVersion = 12.3;
 					};
 					0EDE8DBE20C86910004C739C = {
 						CreatedOnToolsVersion = 10.0;
@@ -811,8 +1466,14 @@
 			projectRoot = "";
 			targets = (
 				0E31529A223F9EF400F61841 /* PassepartoutCore-iOS */,
+				0E9AA98C259F779F003FAFF1 /* PassepartoutCoreTests-iOS */,
+				0EDE8DBE20C86910004C739C /* PassepartoutTunnel-iOS */,
 				0E57F63720C83FC5008323CF /* Passepartout-iOS */,
-				0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */,
+				0E5203E9259F60D600CBAB56 /* PassepartoutCore-macOS */,
+				0E9AA9B9259F7821003FAFF1 /* PassepartoutCoreTests-macOS */,
+				0E9AAA60259F7D7E003FAFF1 /* PassepartoutLauncher-macOS */,
+				0E5203B4259F5F3F00CBAB56 /* PassepartoutTunnel-macOS */,
+				0E5202F6259F573500CBAB56 /* Passepartout-macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -826,23 +1487,85 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0E5202F5259F573500CBAB56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E520337259F58F500CBAB56 /* ProviderServiceView.xib in Resources */,
+				0E520336259F58F500CBAB56 /* HostServiceView.xib in Resources */,
+				0E52031D259F58BF00CBAB56 /* Providers.xcassets in Resources */,
+				0E52047D259F642600CBAB56 /* Preferences.storyboard in Resources */,
+				0E52038F259F593F00CBAB56 /* App.strings in Resources */,
+				0E520385259F593B00CBAB56 /* Credits.html in Resources */,
+				0E52047C259F642600CBAB56 /* Service.storyboard in Resources */,
+				0E52032B259F58DD00CBAB56 /* TextTableView.xib in Resources */,
+				0E52047B259F642600CBAB56 /* Main.storyboard in Resources */,
+				0E5204AA259F673100CBAB56 /* Core.strings in Resources */,
+				0E520334259F58F500CBAB56 /* OrganizerProfileTableView.xib in Resources */,
+				0E9AAABE259F7FFF003FAFF1 /* PassepartoutLauncher.app in Resources */,
+				0E52031E259F58BF00CBAB56 /* Assets.xcassets in Resources */,
+				0E52031F259F58BF00CBAB56 /* Flags.xcassets in Resources */,
+				0E52035D259F591300CBAB56 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5203B3259F5F3F00CBAB56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5203E8259F60D600CBAB56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E5204E5259F67A000CBAB56 /* API in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E57F63620C83FC5008323CF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E5204A9259F673000CBAB56 /* Core.strings in Resources */,
 				0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */,
 				0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */,
 				0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */,
 				0E24273A225950450064A1A3 /* About.storyboard in Resources */,
 				0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */,
 				0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */,
-				0E45E6FA22BD8FC500F19312 /* Core.strings in Resources */,
 				0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */,
 				0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */,
 				0E57F64120C83FC5008323CF /* Main.storyboard in Resources */,
 				0E4B0D742366E6C800C890B4 /* Purchase.storyboard in Resources */,
 				0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */,
 				0E45E6E022BD793800F19312 /* App.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AA98B259F779F003FAFF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AA9FA259F799C003FAFF1 /* ConnectionService.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AA9B8259F7821003FAFF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AA9F0259F799B003FAFF1 /* ConnectionService.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AAA5F259F7D7E003FAFF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AAA7F259F7DB7003FAFF1 /* Assets.xcassets in Resources */,
+				0E9AAA89259F7DCA003FAFF1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,6 +1579,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		07E82DB4E76B85853FE611FC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macos-PassepartoutCoreTests-macOS/Pods-macos-PassepartoutCoreTests-macOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macos-PassepartoutCoreTests-macOS/Pods-macos-PassepartoutCoreTests-macOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-macos-PassepartoutCoreTests-macOS/Pods-macos-PassepartoutCoreTests-macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		0A0A35FE311454E07CF67743 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -871,7 +1611,29 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PassepartoutCore-iOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ios-PassepartoutCore-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1BFBF587EFF0D8EFB44539C5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-macos-PassepartoutCoreTests-macOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -893,7 +1655,90 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Passepartout-iOS-Tunnel-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ios-PassepartoutTunnel-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CCA3608E9249955B3DEA5BF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ios-PassepartoutCoreTests-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F0C817F8E72ADCEDA44DBC5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macos-Passepartout-macOS/Pods-macos-Passepartout-macOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-macos-Passepartout-macOS/Pods-macos-Passepartout-macOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-macos-Passepartout-macOS/Pods-macos-Passepartout-macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D3E350F59230E4C94ED9FDA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-macos-PassepartoutCore-macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D65C9B23CEAFE3755C8BC2B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-macos-Passepartout-macOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -906,15 +1751,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ios-Passepartout-iOS/Pods-ios-Passepartout-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ios-Passepartout-iOS/Pods-ios-Passepartout-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Passepartout-iOS/Pods-Passepartout-iOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-Passepartout-iOS/Pods-ios-Passepartout-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8598326924C7B7B17B82A427 /* [CP] Check Pods Manifest.lock */ = {
@@ -932,11 +1777,50 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Passepartout-iOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ios-Passepartout-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6026405EC7F053B50C8BFF4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-macos-PassepartoutTunnel-macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4BF37883BF513DD4EF79789 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-PassepartoutCoreTests-iOS/Pods-ios-PassepartoutCoreTests-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-PassepartoutCoreTests-iOS/Pods-ios-PassepartoutCoreTests-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-PassepartoutCoreTests-iOS/Pods-ios-PassepartoutCoreTests-iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -953,8 +1837,8 @@
 				0E3152D2223FA05400F61841 /* DebugLog.swift in Sources */,
 				0E45E71022BE108100F19312 /* OpenVPNOptions.swift in Sources */,
 				0E3152DA223FA05800F61841 /* PlaceholderConnectionProfile.swift in Sources */,
+				0E569F1E259F2D8F0022DFB8 /* ProductManager.swift in Sources */,
 				0E3152D0223FA05400F61841 /* ConnectionService+Migration.swift in Sources */,
-				0E1C0A4F238FC7A5009FC087 /* InfrastructureFactory.swift in Sources */,
 				0E3152D5223FA05400F61841 /* SessionProxy+Communication.swift in Sources */,
 				0E3152D7223FA05400F61841 /* TrustedNetworks.swift in Sources */,
 				0E3152DB223FA05800F61841 /* ProfileKey.swift in Sources */,
@@ -962,29 +1846,126 @@
 				0E3152C8223FA04D00F61841 /* Infrastructure.swift in Sources */,
 				0E3152D8223FA05400F61841 /* TrustPolicy.swift in Sources */,
 				0E3152DC223FA05800F61841 /* ProviderConnectionProfile.swift in Sources */,
+				0E569F2B259F2DB10022DFB8 /* Infrastructure+Name.swift in Sources */,
 				0E3152D9223FA05800F61841 /* HostConnectionProfile.swift in Sources */,
 				0E3152D6223FA05400F61841 /* TransientStore.swift in Sources */,
 				0E3152CC223FA04D00F61841 /* WebServices.swift in Sources */,
-				0ECA7E2D25967BF40095F369 /* Product.swift in Sources */,
 				0E3152BB223FA03D00F61841 /* AppConstants.swift in Sources */,
 				0E3152CA223FA04D00F61841 /* InfrastructurePreset.swift in Sources */,
 				0E3152CE223FA05400F61841 /* ConnectionService.swift in Sources */,
 				0ED993B1223FF8C700B0F9C9 /* IntentDispatcher.swift in Sources */,
-				0EA84515238A9B5200EFC500 /* Infrastructure+Name.swift in Sources */,
-				0EAC572F249426E200D0FCE0 /* GracefulVPN.swift in Sources */,
-				0EEF23412321AC55000AEBE3 /* Issue.swift in Sources */,
+				0E569F31259F2DC10022DFB8 /* TrustedNetworksUI.swift in Sources */,
+				0E569F1C259F2D8F0022DFB8 /* GracefulVPN.swift in Sources */,
+				0E569F2C259F2DB10022DFB8 /* Infrastructure+Metadata.swift in Sources */,
 				0E3152D1223FA05400F61841 /* Credentials.swift in Sources */,
 				0E3152CD223FA05400F61841 /* ConnectionProfile.swift in Sources */,
 				0E3152BC223FA03D00F61841 /* ApplicationError.swift in Sources */,
+				0E569F15259F2D3E0022DFB8 /* Issue.swift in Sources */,
 				0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */,
+				0E569F2D259F2DB10022DFB8 /* InfrastructureFactory.swift in Sources */,
 				0E3152D4223FA05400F61841 /* Preferences.swift in Sources */,
 				0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */,
 				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
 				0E3152CB223FA04D00F61841 /* Pool.swift in Sources */,
-				0EA8451A238C2AB500EFC500 /* Infrastructure+Metadata.swift in Sources */,
-				0EB9EB7323867E7F009C0A1C /* TrustedNetworksUI.swift in Sources */,
-				0ECA7E3025967BFB0095F369 /* ProductManager.swift in Sources */,
 				0E3CAFC0229AAE770008E5C8 /* Intents.intentdefinition in Sources */,
+				0E569F20259F2D8F0022DFB8 /* Product.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5202F3259F573500CBAB56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E520388259F593B00CBAB56 /* HostImporter.swift in Sources */,
+				0E520379259F593B00CBAB56 /* Macros.swift in Sources */,
+				0E520387259F593B00CBAB56 /* TextInputViewController.swift in Sources */,
+				0E52033B259F58F500CBAB56 /* OrganizerViewController.swift in Sources */,
+				0E520382259F593B00CBAB56 /* SwiftGen+Scenes.swift in Sources */,
+				0E52032C259F58DD00CBAB56 /* TextTableView.swift in Sources */,
+				0E520355259F590600CBAB56 /* DebugLogViewController.swift in Sources */,
+				0E52034A259F58FE00CBAB56 /* DefaultGatewayViewController.swift in Sources */,
+				0E520345259F58FE00CBAB56 /* DNSViewController.swift in Sources */,
+				0E52037D259F593B00CBAB56 /* SwiftGen+Strings.swift in Sources */,
+				0E520320259F58BF00CBAB56 /* AppDelegate.swift in Sources */,
+				0E520344259F58FE00CBAB56 /* TrustedNetworksAddViewController.swift in Sources */,
+				0E52033A259F58F500CBAB56 /* AccountViewController.swift in Sources */,
+				0E520356259F590600CBAB56 /* PreferencesGeneralViewController.swift in Sources */,
+				0E520348259F58FE00CBAB56 /* MTUViewController.swift in Sources */,
+				0E52037E259F593B00CBAB56 /* SwiftGen+Segues.swift in Sources */,
+				0E52037C259F593B00CBAB56 /* Theme.swift in Sources */,
+				0E52035E259F591300CBAB56 /* StatusMenu.swift in Sources */,
+				0E52035F259F591300CBAB56 /* MainMenu.swift in Sources */,
+				0E520342259F58FE00CBAB56 /* EndpointViewController.swift in Sources */,
+				0E520339259F58F500CBAB56 /* ServiceViewController.swift in Sources */,
+				0E520383259F593B00CBAB56 /* SwiftGen+Assets.swift in Sources */,
+				0E52037A259F593B00CBAB56 /* WindowManager.swift in Sources */,
+				0E520381259F593B00CBAB56 /* NSTextView+Search.swift in Sources */,
+				0E520349259F58FE00CBAB56 /* ConfigurationViewController.swift in Sources */,
+				0E520354259F590600CBAB56 /* PreferencesViewController.swift in Sources */,
+				0E520343259F58FE00CBAB56 /* ProfileCustomizationViewController.swift in Sources */,
+				0E520346259F58FE00CBAB56 /* TrustedNetworksViewController.swift in Sources */,
+				0E520338259F58F500CBAB56 /* ProviderServiceView.swift in Sources */,
+				0E520347259F58FE00CBAB56 /* ProxyViewController.swift in Sources */,
+				0E520380259F593B00CBAB56 /* AppConstants+App.swift in Sources */,
+				0E52037B259F593B00CBAB56 /* IssueReporter.swift in Sources */,
+				0E520335259F58F500CBAB56 /* HostServiceView.swift in Sources */,
+				0E520384259F593B00CBAB56 /* Donation.swift in Sources */,
+				0E520333259F58F500CBAB56 /* OrganizerProfileTableView.swift in Sources */,
+				0E52037F259F593B00CBAB56 /* Theme+Views.swift in Sources */,
+				0E520386259F593B00CBAB56 /* ProductManager+App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5203B1259F5F3F00CBAB56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AA979259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */,
+				0E52041F259F62B200CBAB56 /* GroupConstants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E5203E6259F60D600CBAB56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E5204D3259F675400CBAB56 /* ConnectionService+Migration.swift in Sources */,
+				0E5204C1259F675400CBAB56 /* Infrastructure+Metadata.swift in Sources */,
+				0E5204BC259F674400CBAB56 /* TrustedNetworksUI.swift in Sources */,
+				0E5204D9259F675400CBAB56 /* Preferences.swift in Sources */,
+				0E5204DD259F675400CBAB56 /* InfrastructurePreset.swift in Sources */,
+				0E5204CE259F675400CBAB56 /* Credentials.swift in Sources */,
+				0E5204E0259F675400CBAB56 /* WebServices.swift in Sources */,
+				0E5204DF259F675400CBAB56 /* SessionProxy+Communication.swift in Sources */,
+				0E5204D7259F675400CBAB56 /* DebugLog.swift in Sources */,
+				0E5204C4259F675400CBAB56 /* TrustPolicy.swift in Sources */,
+				0E5204CA259F675400CBAB56 /* ProfileNetworkSettings.swift in Sources */,
+				0E5204C8259F675400CBAB56 /* PoolGroup.swift in Sources */,
+				0E5204DB259F675400CBAB56 /* TransientStore.swift in Sources */,
+				0E5204D6259F675400CBAB56 /* DataUnit.swift in Sources */,
+				0E5204DA259F675400CBAB56 /* ProductManager.swift in Sources */,
+				0E5204C6259F675400CBAB56 /* Pool.swift in Sources */,
+				0E5204B1259F673D00CBAB56 /* GroupConstants.swift in Sources */,
+				0E5204D5259F675400CBAB56 /* ProfileKey.swift in Sources */,
+				0E5204D1259F675400CBAB56 /* PlaceholderConnectionProfile.swift in Sources */,
+				0E5204AF259F673D00CBAB56 /* ApplicationError.swift in Sources */,
+				0E5204B0259F673D00CBAB56 /* Issue.swift in Sources */,
+				0E5204CB259F675400CBAB56 /* EndpointDataSource.swift in Sources */,
+				0E5204DE259F675400CBAB56 /* OpenVPNOptions.swift in Sources */,
+				0E5204C5259F675400CBAB56 /* ProviderConnectionProfile.swift in Sources */,
+				0E5204D0259F675400CBAB56 /* Infrastructure.swift in Sources */,
+				0E5204D4259F675400CBAB56 /* ConnectionService.swift in Sources */,
+				0E5204DC259F675400CBAB56 /* GracefulVPN.swift in Sources */,
+				0E5204C2259F675400CBAB56 /* PoolCategory.swift in Sources */,
+				0E5204C3259F675400CBAB56 /* InfrastructureFactory.swift in Sources */,
+				0E5204C9259F675400CBAB56 /* ConnectionService+Configurations.swift in Sources */,
+				0E5204B2259F673D00CBAB56 /* Utils.swift in Sources */,
+				0E5204CF259F675400CBAB56 /* TrustedNetworks.swift in Sources */,
+				0E5204D2259F675400CBAB56 /* ConnectionProfile.swift in Sources */,
+				0E5204CD259F675400CBAB56 /* Infrastructure+Name.swift in Sources */,
+				0E5204CC259F675400CBAB56 /* HostConnectionProfile.swift in Sources */,
+				0E5204B7259F674000CBAB56 /* AppConstants.swift in Sources */,
+				0E5204C7259F675400CBAB56 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1037,13 +2018,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0E9AA989259F779F003FAFF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AA9FC259F799C003FAFF1 /* InfrastructureTests.swift in Sources */,
+				0E9AA9F9259F799C003FAFF1 /* ConnectionServiceTests.swift in Sources */,
+				0E9AA9FB259F799C003FAFF1 /* UtilsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AA9B6259F7821003FAFF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AA9F2259F799B003FAFF1 /* InfrastructureTests.swift in Sources */,
+				0E9AA9EF259F799B003FAFF1 /* ConnectionServiceTests.swift in Sources */,
+				0E9AA9F1259F799B003FAFF1 /* UtilsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E9AAA5D259F7D7E003FAFF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E9AAA80259F7DB7003FAFF1 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EDE8DBB20C86910004C739C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EDE8DC420C86910004C739C /* PacketTunnelProvider.swift in Sources */,
 				0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */,
-				0EF5CF292141F31F004FF1BD /* Utils.swift in Sources */,
+				0E9AA978259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1055,9 +2063,40 @@
 			target = 0E31529A223F9EF400F61841 /* PassepartoutCore-iOS */;
 			targetProxy = 0E3152AE223F9EF500F61841 /* PBXContainerItemProxy */;
 		};
+		0E5203BD259F5F3F00CBAB56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E5203B4259F5F3F00CBAB56 /* PassepartoutTunnel-macOS */;
+			targetProxy = 0E5203BC259F5F3F00CBAB56 /* PBXContainerItemProxy */;
+		};
+		0E5203F0259F60D600CBAB56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E5203E9259F60D600CBAB56 /* PassepartoutCore-macOS */;
+			targetProxy = 0E5203EF259F60D600CBAB56 /* PBXContainerItemProxy */;
+		};
+		0E9AA994259F779F003FAFF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 0E31529A223F9EF400F61841 /* PassepartoutCore-iOS */;
+			targetProxy = 0E9AA993259F779F003FAFF1 /* PBXContainerItemProxy */;
+		};
+		0E9AA9C1259F7821003FAFF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E5203E9259F60D600CBAB56 /* PassepartoutCore-macOS */;
+			targetProxy = 0E9AA9C0259F7821003FAFF1 /* PBXContainerItemProxy */;
+		};
+		0E9AAAC0259F7FFF003FAFF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E9AAA60259F7D7E003FAFF1 /* PassepartoutLauncher-macOS */;
+			targetProxy = 0E9AAABF259F7FFF003FAFF1 /* PBXContainerItemProxy */;
+		};
+		0E9AAAC2259F800B003FAFF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E9AAA60259F7D7E003FAFF1 /* PassepartoutLauncher-macOS */;
+			targetProxy = 0E9AAAC1259F800B003FAFF1 /* PBXContainerItemProxy */;
+		};
 		0EDE8DC720C86910004C739C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0EDE8DBE20C86910004C739C /* Passepartout-iOS-Tunnel */;
+			target = 0EDE8DBE20C86910004C739C /* PassepartoutTunnel-iOS */;
 			targetProxy = 0EDE8DC620C86910004C739C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1164,6 +2203,46 @@
 			name = Purchase.storyboard;
 			sourceTree = "<group>";
 		};
+		0E569F5F259F41690022DFB8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E569F60259F41690022DFB8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0E569F81259F41690022DFB8 /* Preferences.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E569F82259F41690022DFB8 /* Base */,
+			);
+			name = Preferences.storyboard;
+			sourceTree = "<group>";
+		};
+		0E569F83259F41690022DFB8 /* Service.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E569F84259F41690022DFB8 /* Base */,
+			);
+			name = Service.storyboard;
+			sourceTree = "<group>";
+		};
+		0E569F85259F41690022DFB8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E569F86259F41690022DFB8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0E569F8D259F41690022DFB8 /* App.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E569F91259F41690022DFB8 /* en */,
+			);
+			name = App.strings;
+			sourceTree = "<group>";
+		};
 		0E57F63F20C83FC5008323CF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1193,7 +2272,7 @@
 /* Begin XCBuildConfiguration section */
 		0E3152B2223F9EF500F61841 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1C4E67627603307808F2FFC /* Pods-PassepartoutCore-iOS.debug.xcconfig */;
+			baseConfigurationReference = 0376B8FDB39F81CA072C3F37 /* Pods-ios-PassepartoutCore-iOS.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1204,7 +2283,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "PassepartoutCore-iOS/Info.plist";
+				INFOPLIST_FILE = Passepartout/Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1217,6 +2296,7 @@
 				PRODUCT_NAME = PassepartoutCore;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1225,7 +2305,7 @@
 		};
 		0E3152B3223F9EF500F61841 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1BECEC1D93FEBDB17B714D8 /* Pods-PassepartoutCore-iOS.release.xcconfig */;
+			baseConfigurationReference = 5CC1FDDBA184F8548D814E9D /* Pods-ios-PassepartoutCore-iOS.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1236,7 +2316,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "PassepartoutCore-iOS/Info.plist";
+				INFOPLIST_FILE = Passepartout/Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1248,7 +2328,181 @@
 				PRODUCT_NAME = PassepartoutCore;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0E520305259F573800CBAB56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E08D99B2FCC4478BB24A57B0 /* Pods-macos-Passepartout-macOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/macOS/App.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Passepartout/App/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID)";
+				PRODUCT_NAME = Passepartout;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout macos";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0E520306259F573800CBAB56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C7F674900185F5DD24DA481 /* Pods-macos-Passepartout-macOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/macOS/App.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Passepartout/App/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID)";
+				PRODUCT_NAME = Passepartout;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout macos";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		0E5203C0259F5F3F00CBAB56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50DD79FBBBBF400F3BFE8912 /* Pods-macos-PassepartoutTunnel-macOS.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Passepartout/Tunnel/Tunnel-macOS.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID).Tunnel";
+				PRODUCT_NAME = PassepartoutTunnel;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout.Tunnel macos";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0E5203C1259F5F3F00CBAB56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2AF3AFC3418E6800D8A70E8 /* Pods-macos-PassepartoutTunnel-macOS.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Passepartout/Tunnel/Tunnel-macOS.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID).Tunnel";
+				PRODUCT_NAME = PassepartoutTunnel;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout.Tunnel macos";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		0E5203F4259F60D600CBAB56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 329F34FAC963CE4BEA3013D6 /* Pods-macos-PassepartoutCore-macOS.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 974;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Passepartout/Core/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.PassepartoutCore;
+				PRODUCT_NAME = PassepartoutCore;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0E5203F5259F60D600CBAB56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3D09D9270939FC37BE7101E /* Pods-macos-PassepartoutCore-macOS.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 974;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Passepartout/Core/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.PassepartoutCore;
+				PRODUCT_NAME = PassepartoutCore;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1310,12 +2564,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -1369,31 +2625,33 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		0E57F65620C83FC7008323CF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4959B5F3CB1BBC2C46EA639 /* Pods-Passepartout-iOS.debug.xcconfig */;
+			baseConfigurationReference = 155FC78114E324E01093F98C /* Pods-ios-Passepartout-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS/Passepartout.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/iOS/App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				INFOPLIST_FILE = "Passepartout-iOS/Info.plist";
+				INFOPLIST_FILE = Passepartout/App/iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_IOS_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1403,43 +2661,182 @@
 		};
 		0E57F65720C83FC7008323CF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53B773C4BAE7EDB38C7AFCD1 /* Pods-Passepartout-iOS.release.xcconfig */;
+			baseConfigurationReference = CFF79E4C42220C649C2259D2 /* Pods-ios-Passepartout-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS/Passepartout.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/iOS/App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				INFOPLIST_FILE = "Passepartout-iOS/Info.plist";
+				INFOPLIST_FILE = Passepartout/App/iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_IOS_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
+		0E9AA996259F779F003FAFF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8E3B69460648EA46C1BF850 /* Pods-ios-PassepartoutCoreTests-iOS.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = Passepartout/Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0E9AA997259F779F003FAFF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5D3FFA0392EA5F818646CD9 /* Pods-ios-PassepartoutCoreTests-iOS.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = Passepartout/Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0E9AA9C3259F7821003FAFF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E69B5CF79639B3D24F2AFFC9 /* Pods-macos-PassepartoutCoreTests-macOS.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = Passepartout/Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0E9AA9C4259F7821003FAFF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80A0C78A127E8CE9CB8E658D /* Pods-macos-PassepartoutCoreTests-macOS.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = Passepartout/Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		0E9AAA6E259F7D81003FAFF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/macOS/Launcher/Launcher.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Passepartout/App/macOS/Launcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Launcher;
+				PRODUCT_NAME = PassepartoutLauncher;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0E9AAA6F259F7D81003FAFF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/macOS/Launcher/Launcher.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Passepartout/App/macOS/Launcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Launcher;
+				PRODUCT_NAME = PassepartoutLauncher;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		0EDE8DCA20C86910004C739C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09CB728874F1553EF27BAAB9 /* Pods-Passepartout-iOS-Tunnel.debug.xcconfig */;
+			baseConfigurationReference = 7E007C60601AFBB8A2C34DC4 /* Pods-ios-PassepartoutTunnel-iOS.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS-Tunnel/Tunnel.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Passepartout/Tunnel/Tunnel-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				INFOPLIST_FILE = "Passepartout-iOS-Tunnel/Info.plist";
+				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
-				PRODUCT_NAME = "Passepartout-Tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_IOS_ID).Tunnel";
+				PRODUCT_NAME = PassepartoutTunnel;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1448,20 +2845,20 @@
 		};
 		0EDE8DCB20C86910004C739C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4BD12523ABCBF7ED941FC270 /* Pods-Passepartout-iOS-Tunnel.release.xcconfig */;
+			baseConfigurationReference = 9FB2CA39113427B15C824FE0 /* Pods-ios-PassepartoutTunnel-iOS.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Passepartout-iOS-Tunnel/Tunnel.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Passepartout/Tunnel/Tunnel-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				INFOPLIST_FILE = "Passepartout-iOS-Tunnel/Info.plist";
+				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
-				PRODUCT_NAME = "Passepartout-Tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_IOS_ID).Tunnel";
+				PRODUCT_NAME = PassepartoutTunnel;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1476,6 +2873,33 @@
 			buildConfigurations = (
 				0E3152B2223F9EF500F61841 /* Debug */,
 				0E3152B3223F9EF500F61841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E520304259F573800CBAB56 /* Build configuration list for PBXNativeTarget "Passepartout-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E520305259F573800CBAB56 /* Debug */,
+				0E520306259F573800CBAB56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E5203BF259F5F3F00CBAB56 /* Build configuration list for PBXNativeTarget "PassepartoutTunnel-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E5203C0259F5F3F00CBAB56 /* Debug */,
+				0E5203C1259F5F3F00CBAB56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E5203F3259F60D600CBAB56 /* Build configuration list for PBXNativeTarget "PassepartoutCore-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E5203F4259F60D600CBAB56 /* Debug */,
+				0E5203F5259F60D600CBAB56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1498,7 +2922,34 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "Passepartout-iOS-Tunnel" */ = {
+		0E9AA995259F779F003FAFF1 /* Build configuration list for PBXNativeTarget "PassepartoutCoreTests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E9AA996259F779F003FAFF1 /* Debug */,
+				0E9AA997259F779F003FAFF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E9AA9C2259F7821003FAFF1 /* Build configuration list for PBXNativeTarget "PassepartoutCoreTests-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E9AA9C3259F7821003FAFF1 /* Debug */,
+				0E9AA9C4259F7821003FAFF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E9AAA70259F7D81003FAFF1 /* Build configuration list for PBXNativeTarget "PassepartoutLauncher-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E9AAA6E259F7D81003FAFF1 /* Debug */,
+				0E9AAA6F259F7D81003FAFF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "PassepartoutTunnel-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0EDE8DCA20C86910004C739C /* Debug */,

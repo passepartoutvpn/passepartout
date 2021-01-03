@@ -1,0 +1,72 @@
+//
+//  App.strings
+//  Passepartout
+//
+//  Created by Davide De Rosa on 6/21/19.
+//  Copyright (c) 2021 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"global.values.default" = "Default";
+
+"vpn.unused" = "Off";
+
+"organizer.title" = "%@";
+"organizer.menus.provider" = "Provider";
+"organizer.menus.provider.unavailable" = "No providers left";
+"organizer.menus.host" = "Host";
+"organizer.alerts.remove_profile.title" = "Remove profile";
+"organizer.alerts.remove_profile.message" = "Are you sure you want to delete profile %@?";
+"organizer.alerts.open_host_file.title" = "Select an .ovpn file";
+
+"service.cells.vpn.turn_on.caption" = "Enable VPN";
+"service.cells.vpn.turn_off.caption" = "Disable VPN";
+"service.cells.category.caption" = "Category";
+"service.cells.addresses.caption" = "Addresses";
+
+"endpoint.cells.address" = "Address";
+"endpoint.cells.protocol" = "Protocol";
+
+"configuration.title" = "Configuration";
+"configuration.alerts.commit.message" = "New parameters will not be effective until you reconnect manually. Changes in trusted networks will apply immediately.";
+"configuration.alerts.commit.buttons.reconnect" = "Reconnect now";
+"configuration.alerts.commit.buttons.skip" = "Skip";
+
+"network_settings.dns.cells.domains.title" = "Domains";
+"network_settings.dns.cells.addresses.title" = "Servers";
+"network_settings.proxy.cells.bypass_domains.title" = "Bypass domains";
+
+"preferences.title" = "%@ Preferences";
+"preferences.sections.general.header" = "General";
+"preferences.cells.launches_on_login.caption" = "Launch on login";
+"preferences.cells.launches_on_login.footer" = "Check to automatically launch the app on boot or login.";
+
+"trusted.columns.trust.title" = "Trust";
+"trusted.ethernet.title" = "Trust wired connections";
+"trusted.ethernet.description" = "Check to trust any wired cable connection.";
+
+"menu.switch_profile.title" = "Active profile";
+"menu.active_profile.title.none" = "No active profile";
+"menu.active_profile.items.customize.title" = "Customize...";
+"menu.active_profile.messages.missing_credentials" = "No account configured";
+"menu.organizer.title" = "Organizer";
+"menu.preferences.title" = "Preferences";
+"menu.support.title" = "Support";
+"menu.quit.title" = "Quit %@";
+"menu.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
