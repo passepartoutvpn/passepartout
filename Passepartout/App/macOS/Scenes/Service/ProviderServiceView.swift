@@ -153,7 +153,7 @@ class ProviderServiceView: NSView {
         categories.forEach {
             let categoryTitle: String
             if $0.name.isEmpty {
-                categoryTitle = L10n.App.Global.Values.default
+                categoryTitle = L10n.Core.Global.Values.default
             } else {
                 categoryTitle = $0.name.capitalized
             }
@@ -228,7 +228,7 @@ class ProviderServiceView: NSView {
             guard !$0.secondaryId.isEmpty || currentSortedPools.count > 1 else {
                 return
             }
-            let title = !$0.secondaryId.isEmpty ? $0.secondaryId : "Default"
+            let title = !$0.secondaryId.isEmpty ? $0.secondaryId : L10n.Core.Global.Values.default
             let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
             if let extraCountry = $0.extraCountries?.first {
                 item.image = extraCountry.image

@@ -131,7 +131,7 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
             popupCompressionFraming.isEnabled = false
             popupCompressionAlgorithm.isEnabled = false
         } else {
-            popupPreset.addItem(withTitle: L10n.App.Global.Values.default)
+            popupPreset.addItem(withTitle: L10n.Core.Global.Values.default)
             popupPreset.isEnabled = false
         }
         

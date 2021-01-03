@@ -306,7 +306,7 @@ class StatusMenu: NSObject {
             
             let infrastructure = providerProfile.infrastructure
             for category in infrastructure.categories {
-                let title = category.name.isEmpty ? L10n.App.Global.Values.default : category.name.capitalized
+                let title = category.name.isEmpty ? L10n.Core.Global.Values.default : category.name.capitalized
                 let submenu = NSMenu()
                 let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
                 item.indentationLevel = 1
@@ -325,7 +325,7 @@ class StatusMenu: NSObject {
                             itemGroup.state = .on
                         }
                         
-                        let title = !pool.secondaryId.isEmpty ? pool.secondaryId : "Default"
+                        let title = !pool.secondaryId.isEmpty ? pool.secondaryId : L10n.Core.Global.Values.default
                         let item = NSMenuItem(title: title, action: #selector(connectToPool(_:)), keyEquivalent: "")
                         if let extraCountry = pool.extraCountries?.first {
                             item.image = extraCountry.image

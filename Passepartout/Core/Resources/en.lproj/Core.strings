@@ -30,6 +30,7 @@
 "global.host.title_input.message" = "Acceptable characters are alphanumerics plus dash \"-\", underscore \"_\" and dot \".\".";
 "global.host.title_input.placeholder" = "My profile";
 "global.email_not_configured" = "No e-mail account is configured.";
+"global.values.default" = "Default";
 
 "global.captions.address" = "Address";
 "global.captions.port" = "Port";

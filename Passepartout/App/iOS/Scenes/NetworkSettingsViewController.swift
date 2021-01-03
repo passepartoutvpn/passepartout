@@ -514,7 +514,7 @@ extension NetworkSettingsViewController {
         case .mtuBytes:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.NetworkSettings.Mtu.Cells.Bytes.caption
-            cell.rightText = networkSettings.mtuBytes?.description ?? "Default"
+            cell.rightText = networkSettings.mtuBytes?.description ?? L10n.Core.Global.Values.default
             return cell
         }
     }
@@ -616,7 +616,7 @@ extension NetworkSettingsViewController {
             vc.options = ProfileNetworkSettings.mtuOptions
             vc.descriptionBlock = {
                 guard $0 != 0 else {
-                    return "Default"
+                    return L10n.Core.Global.Values.default
                 }
                 return $0.description
             }

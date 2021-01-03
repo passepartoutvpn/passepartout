@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"global.values.default" = "Default";
-
 "vpn.unused" = "Off";
 
 "organizer.title" = "%@";

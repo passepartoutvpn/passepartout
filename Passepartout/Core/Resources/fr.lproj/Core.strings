@@ -238,3 +238,4 @@
 "service.cells.use_profile.caption" = "Utiliser ce profile";
 "network_settings.mtu.title" = "MTU";
 "network_settings.mtu.cells.bytes.caption" = "Bytes";
+"global.values.default" = "Default";

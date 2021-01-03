@@ -232,7 +232,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         vc.title = group.localizedCountry
         vc.options = group.pools.sortedPools()
         vc.selectedOption = currentPool
-        vc.descriptionBlock = { !$0.secondaryId.isEmpty ? $0.secondaryId : "Default" }
+        vc.descriptionBlock = { !$0.secondaryId.isEmpty ? $0.secondaryId : L10n.Core.Global.Values.default }
         vc.selectionBlock = {
             self.currentPool = $0
             self.delegate?.providerPoolController(self, didSelectPool: $0)

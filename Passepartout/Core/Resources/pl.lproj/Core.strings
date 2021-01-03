@@ -39,6 +39,7 @@
 "global.values.none" = "Brak";
 "global.values.automatic" = "Automatycznie";
 "global.values.manual" = "Ręcznie";
+"global.values.default" = "Default";
 
 "reddit.title" = "Reddit";
 "reddit.message" = "Wiedziałeś/łaś, że Passepartout ma swój subreddit? Subskrybuj dla aktualizacji, dyskusji o funkcjonalności, nowych platformach lub o czymkolwiek zechcesz.\n\nTo również świetny sposób na okazanie zainteresowania projektem.";

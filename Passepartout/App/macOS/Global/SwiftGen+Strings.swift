@@ -35,12 +35,6 @@ internal enum L10n {
         internal static let `protocol` = L10n.tr("App", "endpoint.cells.protocol")
       }
     }
-    internal enum Global {
-      internal enum Values {
-        /// Default
-        internal static let `default` = L10n.tr("App", "global.values.default")
-      }
-    }
     internal enum Menu {
       internal enum ActiveProfile {
         internal enum Items {
@@ -547,6 +541,8 @@ internal enum L10n {
       internal enum Values {
         /// Automatic
         internal static let automatic = L10n.tr("Core", "global.values.automatic")
+        /// Default
+        internal static let `default` = L10n.tr("Core", "global.values.default")
         /// Disabled
         internal static let disabled = L10n.tr("Core", "global.values.disabled")
         /// Enabled

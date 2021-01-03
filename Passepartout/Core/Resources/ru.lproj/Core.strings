@@ -238,3 +238,4 @@
 "service.cells.use_profile.caption" = "Использовать это профиль.";
 "network_settings.mtu.title" = "MTU";
 "network_settings.mtu.cells.bytes.caption" = "байты";
+"global.values.default" = "По умолчанию";
