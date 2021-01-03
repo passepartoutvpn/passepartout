@@ -314,17 +314,31 @@ class StatusMenu: NSObject {
                 for group in category.groups.sorted() {
                     let title = group.localizedCountry
 
-                    let itemGroup = NSMenuItem(title: title, action: #selector(connectToPool(_:)), keyEquivalent: "")
+                    let itemGroup = NSMenuItem(title: title, action: #selector(connectToGroup(_:)), keyEquivalent: "")
                     itemGroup.image = group.logo
                     itemGroup.target = self
                     itemGroup.representedObject = group
                     
+                    let submenuGroup = NSMenu()
                     for pool in group.pools {
                         if pool.id == providerProfile.poolId {
                             itemGroup.state = .on
-                            break
                         }
+                        
+                        let title = !pool.secondaryId.isEmpty ? pool.secondaryId : "Default"
+                        let item = NSMenuItem(title: title, action: #selector(connectToPool(_:)), keyEquivalent: "")
+                        if let extraCountry = pool.extraCountries?.first {
+                            item.image = extraCountry.image
+                        }
+                        item.target = self
+                        item.representedObject = pool
+                        submenuGroup.addItem(item)
                     }
+                    if submenuGroup.numberOfItems > 1 {
+                        itemGroup.action = nil
+                        itemGroup.submenu = submenuGroup
+                    }
+
                     submenu.addItem(itemGroup)
                 }
                 menu.setSubmenu(submenu, for: item)
@@ -405,7 +419,7 @@ class StatusMenu: NSObject {
         vpn.reconnect(completionHandler: nil)
     }
     
-    @objc private func connectToPool(_ sender: Any?) {
+    @objc private func connectToGroup(_ sender: Any?) {
         guard let item = sender as? NSMenuItem else {
             return
         }
@@ -423,6 +437,23 @@ class StatusMenu: NSObject {
         setActiveProfile(profile)
     }
     
+    @objc private func connectToPool(_ sender: Any?) {
+        guard let item = sender as? NSMenuItem else {
+            return
+        }
+        guard let pool = item.representedObject as? Pool else {
+            return
+        }
+        guard let profile = service.activeProfile as? ProviderConnectionProfile else {
+            return
+        }
+        service.setPoolId(pool.id, forProviderProfile: profile)
+        vpn.reconnect(completionHandler: nil)
+        
+        // update menu
+        setActiveProfile(profile)
+    }
+
     @objc private func connectToEndpoint(_ sender: Any?) {
         guard let item = sender as? NSMenuItem else {
             return
