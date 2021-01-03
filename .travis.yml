@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode12
 xcode_workspace: Passepartout.xcworkspace
 xcode_scheme: PassepartoutCore-iOS
-xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xʀ
+xcode_destination: platform=iOS Simulator,OS=12.4,name=iPhone Xs Max
 cache:
     - bundler
     - cocoapods
