@@ -1384,7 +1384,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
 					0E31529A223F9EF400F61841 = {
@@ -2447,7 +2447,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 329F34FAC963CE4BEA3013D6 /* Pods-macos-PassepartoutCore-macOS.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -2480,7 +2480,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C3D09D9270939FC37BE7101E /* Pods-macos-PassepartoutCore-macOS.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
