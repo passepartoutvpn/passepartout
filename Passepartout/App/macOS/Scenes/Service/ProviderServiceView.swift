@@ -205,22 +205,7 @@ class ProviderServiceView: NSView {
         
         popupLocation.removeAllItems()
         sortedGroupsByCategory[category.name]?.forEach {
-            guard let pool = $0.pools.first else {
-                return
-            }
-            
-            var title = $0.localizedCountry
-            let subtitle: String?
-            if $0.pools.count > 1 {
-                subtitle = pool.area?.uppercased()
-            } else {
-                subtitle = pool.secondaryId
-            }
-            if !(subtitle?.isEmpty ?? true) {
-                title.append(" - \(subtitle!)")
-            }
-            
-            let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: $0.localizedCountry, action: nil, keyEquivalent: "")
             item.image = $0.logo
             menu.addItem(item)
         }
@@ -240,10 +225,11 @@ class ProviderServiceView: NSView {
         // FIXME: inefficient, cache sorted pools
         currentSortedPools = group.pools.sortedPools()
         currentSortedPools.forEach {
-            guard !$0.secondaryId.isEmpty else {
+            guard !$0.secondaryId.isEmpty || currentSortedPools.count > 1 else {
                 return
             }
-            let item = NSMenuItem(title: $0.secondaryId, action: nil, keyEquivalent: "")
+            let title = !$0.secondaryId.isEmpty ? $0.secondaryId : "Default"
+            let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
             if let extraCountry = $0.extraCountries?.first {
                 item.image = extraCountry.image
             }

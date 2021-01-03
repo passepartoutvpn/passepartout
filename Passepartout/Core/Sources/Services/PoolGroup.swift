@@ -28,24 +28,14 @@ import Foundation
 public class PoolGroup: Codable, Hashable, Comparable, CustomStringConvertible {
     public let country: String
     
-    public let area: String?
-    
     public let pools: [Pool]
     
     private var id: String {
-        var id = country
-        if let area = area {
-            id += area
-        }
-        return id
+        return country
     }
     
     private var localizedId: String {
-        var localizedId = Utils.localizedCountry(country)
-        if let area = area {
-            localizedId += area
-        }
-        return localizedId
+        return Utils.localizedCountry(country)
     }
     
     // MARK: Equatable
@@ -69,7 +59,7 @@ public class PoolGroup: Codable, Hashable, Comparable, CustomStringConvertible {
     // MARK: CustomStringConvertible
     
     public var description: String {
-        return "{\(country), \(area ?? "--")}"
+        return country
     }
 }
 
@@ -84,9 +74,6 @@ extension PoolGroup {
         var components: [String] = []
         components.append(category.name)
         components.append(country)
-        if let area = area {
-            components.append(area)
-        }
         return components.joined(separator: "/")
     }
 }

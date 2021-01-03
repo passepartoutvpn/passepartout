@@ -204,7 +204,6 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         cell.imageView?.image = group.logo
         cell.leftText = pool.localizedCountry
         if group.pools.count > 1 {
-            cell.rightText = pool.area
             cell.accessoryType = .detailDisclosureButton // no checkmark!
         } else {
             cell.rightText = pool.secondaryId
@@ -231,20 +230,9 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         let vc = SingleOptionViewController<Pool>()
         vc.applyTint(.current)
         vc.title = group.localizedCountry
-        vc.options = group.pools.sorted {
-            guard let lnum = $0.num else {
-                return true
-            }
-            guard let rnum = $1.num else {
-                return false
-            }
-            guard lnum != rnum else {
-                return $0.secondaryId < $1.secondaryId
-            }
-            return lnum < rnum
-        }
+        vc.options = group.pools.sortedPools()
         vc.selectedOption = currentPool
-        vc.descriptionBlock = { $0.secondaryId }
+        vc.descriptionBlock = { !$0.secondaryId.isEmpty ? $0.secondaryId : "Default" }
         vc.selectionBlock = {
             self.currentPool = $0
             self.delegate?.providerPoolController(self, didSelectPool: $0)
