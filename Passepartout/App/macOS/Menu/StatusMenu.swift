@@ -318,6 +318,7 @@ class StatusMenu: NSObject {
                     }
 
                     let itemGroup = NSMenuItem(title: title, action: #selector(connectToPool(_:)), keyEquivalent: "")
+                    itemGroup.image = group.logo
                     itemGroup.target = self
                     itemGroup.representedObject = group
                     
