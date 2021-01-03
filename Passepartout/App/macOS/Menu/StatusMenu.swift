@@ -312,10 +312,7 @@ class StatusMenu: NSObject {
                 item.indentationLevel = 1
                 
                 for group in category.groups.sorted() {
-                    var title = group.localizedCountry
-                    if let area = group.area?.uppercased() {
-                        title = "\(title) - \(area)"
-                    }
+                    let title = group.localizedCountry
 
                     let itemGroup = NSMenuItem(title: title, action: #selector(connectToPool(_:)), keyEquivalent: "")
                     itemGroup.image = group.logo
