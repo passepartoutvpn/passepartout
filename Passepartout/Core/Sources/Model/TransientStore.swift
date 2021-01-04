@@ -44,6 +44,8 @@ public class TransientStore {
         static let didMigrateHostsToUUID = "DidMigrateHostsToUUID"
         
         static let didMigrateKeychainContext = "didMigrateKeychainContext"
+        
+        static let didMigrateRetainLowMTU = "didMigrateRetainLowMTU"
     }
     
     public static let shared = TransientStore()
@@ -78,6 +80,15 @@ public class TransientStore {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.didMigrateKeychainContext)
+        }
+    }
+    
+    public static var didMigrateRetainLowMTU: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: Keys.didMigrateRetainLowMTU)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.didMigrateRetainLowMTU)
         }
     }
     
@@ -126,6 +137,26 @@ public class TransientStore {
             if !TransientStore.didMigrateKeychainContext {
                 service.migrateKeychainContext()
                 TransientStore.didMigrateKeychainContext = true
+            }
+            if !TransientStore.didMigrateRetainLowMTU {
+                for key in service.allProfileKeys() {
+                    guard let profile = service.profile(withKey: key) else {
+                        continue
+                    }
+                    if profile.networkChoices == nil {
+                        profile.networkChoices = ProfileNetworkChoices(
+                            choice: (key.context == .provider) ? .server : .client
+                        )
+                    }
+                    if profile.manualNetworkSettings == nil {
+                        profile.manualNetworkSettings = ProfileNetworkSettings()
+                    }
+                    if profile.manualNetworkSettings?.mtuBytes == nil {
+                        profile.networkChoices?.mtu = .manual
+                        profile.manualNetworkSettings?.mtuBytes = 1200
+                    }
+                }
+                TransientStore.didMigrateRetainLowMTU = true
             }
             #endif
         } catch let e {
