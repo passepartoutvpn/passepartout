@@ -1,5 +1,9 @@
-### Fixed
+### Added
 
-- Losing profiles on upgrade.
-- Twitch link does not work when Twitch app not installed.
+- Can now copy entries in "Server network".
+
+### Changed
+
+- Rendering of provider infrastructures.
+- Default to low MTU (1200) when unspecified.
 
