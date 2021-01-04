@@ -307,9 +307,9 @@ public class ConnectionService: Codable {
             } catch let e {
                 log.error("Could not decode profile JSON: \(e)")
                 
-                // drop corrupt cache entry
-                cache.removeValue(forKey: key)
-                try? FileManager.default.removeItem(at: profileURL(key))
+//                // drop corrupt cache entry
+//                cache.removeValue(forKey: key)
+//                try? FileManager.default.removeItem(at: profileURL(key))
                 
                 return nil
             }
