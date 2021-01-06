@@ -24,4 +24,3 @@ clean true
 silent false
 include_bitcode false
 skip_profile_detection true
-skip_package_pkg true
