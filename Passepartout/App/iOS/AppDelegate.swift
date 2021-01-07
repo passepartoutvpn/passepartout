@@ -105,12 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             fatalError("No window.rootViewController?")
         }
         let topmost = root.presentedViewController ?? root
-        if TransientStore.shared.service.hasReachedMaximumNumberOfHosts {
-            guard ProductManager.shared.isEligible(forFeature: .unlimitedHosts) else {
-                topmost.presentPurchaseScreen(forProduct: .unlimitedHosts)
-                return false
-            }
-        }
         return tryParseURL(url, passphrase: nil, target: topmost)
     }
     

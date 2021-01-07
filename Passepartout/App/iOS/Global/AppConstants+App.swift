@@ -38,7 +38,5 @@ extension AppConstants {
         static let isBetaFullVersion = true
 
         static let lastFullVersionBuild = 2016
-
-        static let limitedNumberOfHosts = 2
     }
 }

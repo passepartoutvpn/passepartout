@@ -71,18 +71,6 @@ extension ProductManager {
             }
         }
 
-        log.debug("Checking 'Unlimited hosts'")
-        if !isEligible(forFeature: .unlimitedHosts) {
-            let ids = service.hostIds()
-            if ids.count > AppConstants.InApp.limitedNumberOfHosts {
-                for id in ids {
-                    service.removeProfile(ProfileKey(.host, id))
-                }
-                log.debug("\tRefunded")
-                anyRefund = true
-            }
-        }
-
         log.debug("Checking providers")
         for name in service.providerNames() {
             guard let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
@@ -106,12 +94,5 @@ extension ProductManager {
         VPN.shared.uninstall(completionHandler: nil)
 
         NotificationCenter.default.post(name: ProductManager.didReviewPurchases, object: nil)
-    }
-}
-
-extension ConnectionService {
-    var hasReachedMaximumNumberOfHosts: Bool {
-        let numberOfHosts = hostIds().count
-        return numberOfHosts >= AppConstants.InApp.limitedNumberOfHosts
     }
 }
