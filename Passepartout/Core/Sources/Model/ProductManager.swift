@@ -156,10 +156,16 @@ public class ProductManager: NSObject {
     }
     
     public func isEligible(forFeature feature: Product) -> Bool {
+        guard !isBeta else {
+            return false
+        }
         return isFullVersion() || purchasedFeatures.contains(feature)
     }
 
     public func isEligible(forProvider metadata: Infrastructure.Metadata) -> Bool {
+        guard !isBeta else {
+            return false
+        }
         return isFullVersion() || purchasedFeatures.contains(metadata.product)
     }
 
