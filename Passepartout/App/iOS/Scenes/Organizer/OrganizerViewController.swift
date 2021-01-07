@@ -241,8 +241,13 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     }
     
     private func addShortcuts() {
-        guard ProductManager.shared.isEligible(forFeature: .siriShortcuts) else {
-            presentPurchaseScreen(forProduct: .siriShortcuts)
+        do {
+            guard try ProductManager.shared.isEligible(forFeature: .siriShortcuts) else {
+                presentPurchaseScreen(forProduct: .siriShortcuts)
+                return
+            }
+        } catch {
+            presentBetaFeatureUnavailable("Siri")
             return
         }
         perform(segue: StoryboardSegue.Organizer.siriShortcutsSegueIdentifier)

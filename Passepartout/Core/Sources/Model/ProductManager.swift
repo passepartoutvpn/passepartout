@@ -32,6 +32,10 @@ import TunnelKit
 
 private let log = SwiftyBeaver.self
 
+public enum ProductError: Error {
+    case beta
+}
+
 public class ProductManager: NSObject {
     public struct Configuration {
         public let isBetaFullVersion: Bool
@@ -155,16 +159,16 @@ public class ProductManager: NSObject {
         return purchasedFeatures.contains(.fullVersion)
     }
     
-    public func isEligible(forFeature feature: Product) -> Bool {
+    public func isEligible(forFeature feature: Product) throws -> Bool {
         guard !isBeta else {
-            return false
+            throw ProductError.beta
         }
         return isFullVersion() || purchasedFeatures.contains(feature)
     }
 
-    public func isEligible(forProvider metadata: Infrastructure.Metadata) -> Bool {
+    public func isEligible(forProvider metadata: Infrastructure.Metadata) throws -> Bool {
         guard !isBeta else {
-            return false
+            throw ProductError.beta
         }
         return isFullVersion() || purchasedFeatures.contains(metadata.product)
     }

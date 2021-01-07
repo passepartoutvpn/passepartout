@@ -46,7 +46,7 @@ extension ProductManager {
         // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
 
         log.debug("Checking 'Trusted networks'")
-        if !isEligible(forFeature: .trustedNetworks) {
+        if !((try? isEligible(forFeature: .trustedNetworks)) ?? false) {
             
             // reset trusted networks for ALL profiles (must load first)
             for key in service.allProfileKeys() {
@@ -76,7 +76,7 @@ extension ProductManager {
             guard let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
                 continue
             }
-            if !isEligible(forProvider: metadata) {
+            if !((try? isEligible(forProvider: metadata)) ?? false) {
                 service.removeProfile(ProfileKey(name))
                 log.debug("\tRefunded provider: \(name)")
                 anyRefund = true

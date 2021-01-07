@@ -75,6 +75,12 @@ extension UIViewController {
 
         present(nav, animated: true, completion: nil)
     }
+    
+    func presentBetaFeatureUnavailable(_ title: String) {
+        let alert = UIAlertController.asAlert(title, "The requested feature is unavailable in beta.")
+        alert.addCancelAction("OK")
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 func visitURL(_ url: URL) {
