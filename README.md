@@ -4,7 +4,7 @@
 
 ![iOS 12+](https://img.shields.io/badge/ios-12+-green.svg)
 ![macOS 10.15+](https://img.shields.io/badge/macos-10.15+-green.svg)
-[![TunnelKit 3.1](https://img.shields.io/badge/tunnelkit-3.1-d69c68.svg)][dep-tunnelkit]
+[![TunnelKit 3.2](https://img.shields.io/badge/tunnelkit-3.2-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20an%20user-friendly%2C%20open%20source%20%23OpenVPN%20client%20for%20%23iOS%20and%20%23macOS)
