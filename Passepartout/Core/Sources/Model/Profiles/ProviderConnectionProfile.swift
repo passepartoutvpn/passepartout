@@ -27,6 +27,30 @@ import Foundation
 import TunnelKit
 
 public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
+
+    // XXX: drop after @transient serviceDelegate
+    public enum CodingKeys: CodingKey {
+        case name
+        
+        case poolId
+        
+        case presetId
+        
+        case customAddress
+        
+        case customProtocol
+
+        case favoriteGroupIds
+
+        case username
+        
+        case trustedNetworks
+
+        case networkChoices
+        
+        case manualNetworkSettings
+    }
+    
     public let name: Infrastructure.Name
 
     public var infrastructure: Infrastructure {
@@ -122,6 +146,8 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     public var manualNetworkSettings: ProfileNetworkSettings?
     
+    public weak var serviceDelegate: ConnectionServiceDelegate?
+
     public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
         guard let pool = pool else {
             preconditionFailure("Nil pool?")
