@@ -46,7 +46,7 @@ extension ProductManager {
         // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
 
         log.debug("Checking 'Trusted networks'")
-        if !isEligible(forFeature: .trustedNetworks) {
+        if !((try? isEligible(forFeature: .trustedNetworks)) ?? false) {
             
             // reset trusted networks for ALL profiles (must load first)
             for key in service.allProfileKeys() {
@@ -71,24 +71,12 @@ extension ProductManager {
             }
         }
 
-        log.debug("Checking 'Unlimited hosts'")
-        if !isEligible(forFeature: .unlimitedHosts) {
-            let ids = service.hostIds()
-            if ids.count > AppConstants.InApp.limitedNumberOfHosts {
-                for id in ids {
-                    service.removeProfile(ProfileKey(.host, id))
-                }
-                log.debug("\tRefunded")
-                anyRefund = true
-            }
-        }
-
         log.debug("Checking providers")
         for name in service.providerNames() {
             guard let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
                 continue
             }
-            if !isEligible(forProvider: metadata) {
+            if !((try? isEligible(forProvider: metadata)) ?? false) {
                 service.removeProfile(ProfileKey(name))
                 log.debug("\tRefunded provider: \(name)")
                 anyRefund = true
@@ -106,12 +94,5 @@ extension ProductManager {
         VPN.shared.uninstall(completionHandler: nil)
 
         NotificationCenter.default.post(name: ProductManager.didReviewPurchases, object: nil)
-    }
-}
-
-extension ConnectionService {
-    var hasReachedMaximumNumberOfHosts: Bool {
-        let numberOfHosts = hostIds().count
-        return numberOfHosts >= AppConstants.InApp.limitedNumberOfHosts
     }
 }

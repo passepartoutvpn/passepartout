@@ -32,13 +32,10 @@ extension AppConstants {
     }
 
     struct InApp {
-//        static var isBetaFullVersion: Bool {
-//            return ProcessInfo.processInfo.environment["FULL_VERSION"] != nil
-//        }
-        static let isBetaFullVersion = true
+        static var isBetaFullVersion: Bool {
+            return ProcessInfo.processInfo.environment["FULL_VERSION"] != nil
+        }
 
         static let lastFullVersionBuild = 2016
-
-        static let limitedNumberOfHosts = 2
     }
 }

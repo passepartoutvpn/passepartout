@@ -222,12 +222,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     }
 
     private func addNewHost() {
-        if TransientStore.shared.service.hasReachedMaximumNumberOfHosts {
-            guard ProductManager.shared.isEligible(forFeature: .unlimitedHosts) else {
-                presentPurchaseScreen(forProduct: .unlimitedHosts)
-                return
-            }
-        }
         let picker = UIDocumentPickerViewController(documentTypes: AppConstants.URLs.filetypes, in: .import)
         picker.allowsMultipleSelection = false
         picker.delegate = self
@@ -243,18 +237,17 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     }
 
     private func importNewHost() {
-        if TransientStore.shared.service.hasReachedMaximumNumberOfHosts {
-            guard ProductManager.shared.isEligible(forFeature: .unlimitedHosts) else {
-                presentPurchaseScreen(forProduct: .unlimitedHosts)
-                return
-            }
-        }
         perform(segue: StoryboardSegue.Organizer.showImportedHostsSegueIdentifier)
     }
     
     private func addShortcuts() {
-        guard ProductManager.shared.isEligible(forFeature: .siriShortcuts) else {
-            presentPurchaseScreen(forProduct: .siriShortcuts)
+        do {
+            guard try ProductManager.shared.isEligible(forFeature: .siriShortcuts) else {
+                presentPurchaseScreen(forProduct: .siriShortcuts)
+                return
+            }
+        } catch {
+            presentBetaFeatureUnavailable("Siri")
             return
         }
         perform(segue: StoryboardSegue.Organizer.siriShortcutsSegueIdentifier)

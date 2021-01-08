@@ -70,11 +70,16 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     private func tryNext(withMetadata metadata: Infrastructure.Metadata, purchaseIfNecessary: Bool) {
         selectedMetadata = metadata
 
-        guard ProductManager.shared.isEligible(forProvider: metadata) else {
-            guard purchaseIfNecessary else {
+        do {
+            guard try ProductManager.shared.isEligible(forProvider: metadata) else {
+                guard purchaseIfNecessary else {
+                    return
+                }
+                presentPurchaseScreen(forProduct: metadata.product, delegate: self)
                 return
             }
-            presentPurchaseScreen(forProduct: metadata.product, delegate: self)
+        } catch {
+            presentBetaFeatureUnavailable("Providers")
             return
         }
 

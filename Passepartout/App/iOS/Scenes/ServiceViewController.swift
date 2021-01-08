@@ -377,11 +377,19 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
     
     private func trustMobileNetwork(cell: ToggleTableViewCell) {
-        guard ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
+        do {
+            guard try ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
+                delay {
+                    cell.setOn(false, animated: true)
+                }
+                presentPurchaseScreen(forProduct: .trustedNetworks)
+                return
+            }
+        } catch {
             delay {
                 cell.setOn(false, animated: true)
             }
-            presentPurchaseScreen(forProduct: .trustedNetworks)
+            presentBetaFeatureUnavailable("Trusted networks")
             return
         }
 
@@ -394,8 +402,13 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
     
     private func trustCurrentWiFi() {
-        guard ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
-            presentPurchaseScreen(forProduct: .trustedNetworks)
+        do {
+            guard try ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
+                presentPurchaseScreen(forProduct: .trustedNetworks)
+                return
+            }
+        } catch {
+            presentBetaFeatureUnavailable("Trusted networks")
             return
         }
 
@@ -447,14 +460,22 @@ class ServiceViewController: UIViewController, StrongTableHost {
     }
     
     private func toggleTrustWiFi(cell: ToggleTableViewCell, at row: Int) {
-        guard ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
+        do {
+            guard try ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
+                delay {
+                    cell.setOn(false, animated: true)
+                }
+                presentPurchaseScreen(forProduct: .trustedNetworks)
+                return
+            }
+        } catch {
             delay {
                 cell.setOn(false, animated: true)
             }
-            presentPurchaseScreen(forProduct: .trustedNetworks)
+            presentBetaFeatureUnavailable("Trusted networks")
             return
         }
-
+        
         if cell.isOn {
             trustedNetworks.enableWifi(at: row)
         } else {

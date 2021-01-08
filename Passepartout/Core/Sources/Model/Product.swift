@@ -71,8 +71,6 @@ public struct Product: RawRepresentable, Equatable, Hashable {
     // MARK: Features
 
     #if os(iOS)
-    public static let unlimitedHosts = Product(featureId: "unlimited_hosts")
-
     public static let trustedNetworks = Product(featureId: "trusted_networks")
 
     public static let siriShortcuts = Product(featureId: "siri")
@@ -82,7 +80,6 @@ public struct Product: RawRepresentable, Equatable, Hashable {
     
     #if os(iOS)
     public static let allFeatures: [Product] = [
-        .unlimitedHosts,
         .trustedNetworks,
         .siriShortcuts,
         .fullVersion
