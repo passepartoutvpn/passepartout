@@ -27,6 +27,28 @@ import Foundation
 import TunnelKit
 
 public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
+
+    // XXX: drop after @transient serviceDelegate
+    public enum CodingKeys: CodingKey {
+        case hostname
+        
+        case parameters
+        
+        case customAddress
+        
+        case customProtocol
+
+        case id
+        
+        case username
+
+        case trustedNetworks
+
+        case networkChoices
+        
+        case manualNetworkSettings
+    }
+    
     public let hostname: String
     
     public var parameters: OpenVPNTunnelProvider.Configuration
@@ -64,6 +86,8 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     public var manualNetworkSettings: ProfileNetworkSettings?
     
+    public weak var serviceDelegate: ConnectionServiceDelegate?
+
     public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
         guard let endpointProtocols = parameters.sessionConfiguration.endpointProtocols, !endpointProtocols.isEmpty else {
             preconditionFailure("No endpointProtocols")

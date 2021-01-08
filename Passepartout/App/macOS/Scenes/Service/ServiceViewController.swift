@@ -338,7 +338,7 @@ extension ServiceViewController: ProviderServiceViewDelegate {
             uncheckedProviderProfile.presetId = fallback
         }
 
-        service.setPoolId(pool.id, forProviderProfile: uncheckedProviderProfile)
+        uncheckedProviderProfile.poolId = pool.id
 //        vpn.reinstallIfEnabled()
     }
     

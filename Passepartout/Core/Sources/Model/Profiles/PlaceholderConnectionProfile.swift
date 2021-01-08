@@ -48,6 +48,8 @@ public class PlaceholderConnectionProfile: ConnectionProfile {
     
     public var manualNetworkSettings: ProfileNetworkSettings?
     
+    public weak var serviceDelegate: ConnectionServiceDelegate?
+
     public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
         fatalError("Generating configuration from a PlaceholderConnectionProfile")
     }

@@ -27,6 +27,30 @@ import Foundation
 import TunnelKit
 
 public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
+
+    // XXX: drop after @transient serviceDelegate
+    public enum CodingKeys: CodingKey {
+        case name
+        
+        case poolId
+        
+        case presetId
+        
+        case customAddress
+        
+        case customProtocol
+
+        case favoriteGroupIds
+
+        case username
+        
+        case trustedNetworks
+
+        case networkChoices
+        
+        case manualNetworkSettings
+    }
+    
     public let name: Infrastructure.Name
 
     public var infrastructure: Infrastructure {
@@ -39,6 +63,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     public var poolId: String {
         didSet {
             validateEndpoint()
+            serviceDelegate?.connectionService(didUpdate: self)
         }
     }
 
@@ -49,6 +74,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     public var presetId: String {
         didSet {
             validateEndpoint()
+            serviceDelegate?.connectionService(didUpdate: self)
         }
     }
     
@@ -122,6 +148,8 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     public var manualNetworkSettings: ProfileNetworkSettings?
     
+    public weak var serviceDelegate: ConnectionServiceDelegate?
+
     public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
         guard let pool = pool else {
             preconditionFailure("Nil pool?")
@@ -212,12 +240,5 @@ public extension ProviderConnectionProfile {
     
     var canCustomizeEndpoint: Bool {
         return true
-    }
-}
-
-public extension ConnectionService {
-    func setPoolId(_ poolId: String, forProviderProfile profile: ProviderConnectionProfile) {
-        profile.poolId = poolId
-        delegate?.connectionService(didUpdate: profile)
     }
 }

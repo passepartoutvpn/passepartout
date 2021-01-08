@@ -430,7 +430,7 @@ class StatusMenu: NSObject {
             return
         }
         assert(!group.pools.isEmpty)
-        service.setPoolId(group.pools.randomElement()!.id, forProviderProfile: profile)
+        profile.poolId = group.pools.randomElement()!.id
         vpn.reconnect(completionHandler: nil)
         
         // update menu
@@ -447,7 +447,7 @@ class StatusMenu: NSObject {
         guard let profile = service.activeProfile as? ProviderConnectionProfile else {
             return
         }
-        service.setPoolId(pool.id, forProviderProfile: profile)
+        profile.poolId = pool.id
         vpn.reconnect(completionHandler: nil)
         
         // update menu
