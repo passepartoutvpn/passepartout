@@ -63,6 +63,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     public var poolId: String {
         didSet {
             validateEndpoint()
+            serviceDelegate?.connectionService(didUpdate: self)
         }
     }
 
@@ -73,6 +74,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     public var presetId: String {
         didSet {
             validateEndpoint()
+            serviceDelegate?.connectionService(didUpdate: self)
         }
     }
     
@@ -238,12 +240,5 @@ public extension ProviderConnectionProfile {
     
     var canCustomizeEndpoint: Bool {
         return true
-    }
-}
-
-public extension ConnectionService {
-    func setPoolId(_ poolId: String, forProviderProfile profile: ProviderConnectionProfile) {
-        profile.poolId = poolId
-        delegate?.connectionService(didUpdate: profile)
     }
 }
