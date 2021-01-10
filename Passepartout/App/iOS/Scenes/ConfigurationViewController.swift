@@ -352,10 +352,19 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         switch model.row(at: indexPath) {
         case .cipher:
+            var options: [OpenVPN.Cipher] = configuration.dataCiphers ?? []
+            if !options.isEmpty {
+                if let cipher = configuration.cipher, !options.contains(cipher) {
+                    options.append(cipher)
+                }
+            } else {
+                options.append(contentsOf: OpenVPN.Cipher.available)
+            }
+            
             let vc = SingleOptionViewController<OpenVPN.Cipher>()
             vc.applyTint(.current)
             vc.title = settingCell?.leftText
-            vc.options = OpenVPN.Cipher.available
+            vc.options = options
             vc.selectedOption = configuration.cipher
             vc.descriptionBlock = { $0.description }
             vc.selectionBlock = { [weak self] in

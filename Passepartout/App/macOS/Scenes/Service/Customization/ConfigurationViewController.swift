@@ -155,9 +155,19 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
         popupDigest.removeAllItems()
         popupCompressionFraming.removeAllItems()
         popupCompressionAlgorithm.removeAllItems()
-        for cipher in OpenVPN.Cipher.available {
+
+        var cipherOptions: [OpenVPN.Cipher] = configuration.dataCiphers ?? []
+        if !cipherOptions.isEmpty {
+            if let cipher = configuration.cipher, !cipherOptions.contains(cipher) {
+                cipherOptions.append(cipher)
+            }
+        } else {
+            cipherOptions.append(contentsOf: OpenVPN.Cipher.available)
+        }
+        for cipher in cipherOptions {
             popupCipher.addItem(withTitle: cipher.rawValue)
         }
+
         for digest in OpenVPN.Digest.available {
             popupDigest.addItem(withTitle: digest.rawValue)
         }

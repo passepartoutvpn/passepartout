@@ -28,12 +28,12 @@ import TunnelKit
 
 extension OpenVPN.Cipher {
     public static let available: [OpenVPN.Cipher] = [
-        .aes128cbc,
-        .aes192cbc,
-        .aes256cbc,
-        .aes128gcm,
+        .aes256gcm,
         .aes192gcm,
-        .aes256gcm
+        .aes128gcm,
+        .aes256cbc,
+        .aes192cbc,
+        .aes128cbc
     ]
 }
 

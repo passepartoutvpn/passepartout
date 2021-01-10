@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Support `--data-ciphers` from OpenVPN 2.5 [tunnelkit#193](https://github.com/passepartoutvpn/tunnelkit/issues/193)
+
 ### Changed
 
 - Drop hosts restriction in free version ("Unlimited hosts").
