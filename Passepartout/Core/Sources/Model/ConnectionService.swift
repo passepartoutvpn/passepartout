@@ -319,7 +319,9 @@ public class ConnectionService: Codable {
         if profile?.trustedNetworks == nil {
             profile?.trustedNetworks = TrustedNetworks()
         }
-        
+
+        // propagate delegate
+        profile?.serviceDelegate = delegate
         return profile
     }
     
