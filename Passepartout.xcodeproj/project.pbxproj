@@ -21,6 +21,8 @@
 		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
 		0E24273A225950450064A1A3 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E24273C225950450064A1A3 /* About.storyboard */; };
 		0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E242741225956AC0064A1A3 /* DonationViewController.swift */; };
+		0E294AA125AE2B0A00CB4908 /* Descriptible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294A8225AE29D100CB4908 /* Descriptible.swift */; };
+		0E294AA225AE2B0B00CB4908 /* Descriptible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294A8225AE29D100CB4908 /* Descriptible.swift */; };
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
 		0E2EB063236D8E1E0079DB53 /* AppConstants+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2EB062236D8E1E0079DB53 /* AppConstants+App.swift */; };
@@ -367,6 +369,7 @@
 		0E23B4A12298559800304C30 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0E24273B225950450064A1A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
 		0E242741225956AC0064A1A3 /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
+		0E294A8225AE29D100CB4908 /* Descriptible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Descriptible.swift; sourceTree = "<group>"; };
 		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
 		0E2B494120FD16540094784C /* TransientStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientStore.swift; sourceTree = "<group>"; };
@@ -969,6 +972,7 @@
 			children = (
 				0E57F63A20C83FC5008323CF /* iOS */,
 				0E569F58259F41690022DFB8 /* macOS */,
+				0E294A8225AE29D100CB4908 /* Descriptible.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1889,6 +1893,7 @@
 				0E520320259F58BF00CBAB56 /* AppDelegate.swift in Sources */,
 				0E520344259F58FE00CBAB56 /* TrustedNetworksAddViewController.swift in Sources */,
 				0E52033A259F58F500CBAB56 /* AccountViewController.swift in Sources */,
+				0E294AA225AE2B0B00CB4908 /* Descriptible.swift in Sources */,
 				0E520356259F590600CBAB56 /* PreferencesGeneralViewController.swift in Sources */,
 				0E520348259F58FE00CBAB56 /* MTUViewController.swift in Sources */,
 				0E52037E259F593B00CBAB56 /* SwiftGen+Segues.swift in Sources */,
@@ -1986,6 +1991,7 @@
 				0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */,
 				0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */,
 				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
+				0E294AA125AE2B0A00CB4908 /* Descriptible.swift in Sources */,
 				0E776642229D0DAE0023FA76 /* Intents.intentdefinition in Sources */,
 				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
 				0E6268942369AD0600355F75 /* PurchaseTableViewCell.swift in Sources */,
