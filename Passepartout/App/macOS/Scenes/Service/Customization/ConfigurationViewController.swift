@@ -28,57 +28,17 @@ import PassepartoutCore
 import TunnelKit
 
 class ConfigurationViewController: NSViewController, ProfileCustomization {
+    private struct Columns {
+        static let name = NSUserInterfaceItemIdentifier("Name")
+
+        static let value = NSUserInterfaceItemIdentifier("Value")
+    }
+
     @IBOutlet private weak var labelPresetCaption: NSTextField!
 
     @IBOutlet private weak var popupPreset: NSPopUpButton!
     
-    @IBOutlet private weak var boxCommunication: NSBox!
-
-    @IBOutlet private weak var labelCipherCaption: NSTextField!
-    
-    @IBOutlet private weak var popupCipher: NSPopUpButton!
-    
-    @IBOutlet private weak var labelDigestCaption: NSTextField!
-    
-    @IBOutlet private weak var popupDigest: NSPopUpButton!
-    
-    @IBOutlet private weak var boxCompression: NSBox!
-    
-    @IBOutlet private weak var labelCompressionFramingCaption: NSTextField!
-    
-    @IBOutlet private weak var popupCompressionFraming: NSPopUpButton!
-    
-    @IBOutlet private weak var labelCompressionAlgorithmCaption: NSTextField!
-    
-    @IBOutlet private weak var popupCompressionAlgorithm: NSPopUpButton!
-
-    @IBOutlet private weak var boxTLS: NSBox!
-    
-    @IBOutlet private weak var labelClientCertificateCaption: NSTextField!
-    
-    @IBOutlet private weak var labelClientCertificate: NSTextField!
-    
-    @IBOutlet private weak var labelWrappingCaption: NSTextField!
-    
-    @IBOutlet private weak var labelWrapping: NSTextField!
-
-    @IBOutlet private weak var labelExtendedVerificationCaption: NSTextField!
-    
-    @IBOutlet private weak var labelExtendedVerification: NSTextField!
-    
-    @IBOutlet private weak var boxOther: NSBox!
-    
-    @IBOutlet private weak var labelKeepAliveCaption: NSTextField!
-    
-    @IBOutlet private weak var labelKeepAlive: NSTextField!
-    
-    @IBOutlet private weak var labelRenegotiationCaption: NSTextField!
-    
-    @IBOutlet private weak var labelRenegotiation: NSTextField!
-    
-    @IBOutlet private weak var labelRandomizeEndpointCaption: NSTextField!
-    
-    @IBOutlet private weak var labelRandomizeEndpoint: NSTextField!
+    @IBOutlet private weak var tableConfiguration: NSTableView!
     
     private lazy var allPresets: [InfrastructurePreset] = {
         guard let providerProfile = profile as? ProviderConnectionProfile else {
@@ -100,6 +60,21 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
     }
     
     private var configuration = OpenVPN.ConfigurationBuilder()
+    
+    private let rows: [RowType] = [
+        .cipher,
+        .digest,
+        .compressionFraming,
+        .compressionAlgorithm,
+        .client,
+        .tlsWrapping,
+        .eku,
+        .keepAlive,
+        .renegSeconds,
+        .randomEndpoint
+    ]
+    
+    private var rowMenus: [RowType: NSMenu] = [:]
 
     // MARK: ProfileCustomization
     
@@ -118,119 +93,62 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let V = L10n.Core.Configuration.Cells.self
-        
         labelPresetCaption.stringValue = L10n.Core.Service.Cells.Provider.Preset.caption.asCaption
         popupPreset.removeAllItems()
         if !allPresets.isEmpty {
             for preset in allPresets {
                 popupPreset.addItem(withTitle: preset.name)
             }
-            popupCipher.isEnabled = false
-            popupDigest.isEnabled = false
-            popupCompressionFraming.isEnabled = false
-            popupCompressionAlgorithm.isEnabled = false
         } else {
             popupPreset.addItem(withTitle: L10n.Core.Global.Values.default)
             popupPreset.isEnabled = false
-        }
-        
-        boxCommunication.title = L10n.Core.Configuration.Sections.Communication.header
-        boxCompression.title = L10n.Core.Configuration.Sections.Compression.header
-        boxTLS.title = L10n.Core.Configuration.Sections.Tls.header
-        boxOther.title = L10n.Core.Configuration.Sections.Other.header
-
-        labelCipherCaption.stringValue = V.Cipher.caption.asCaption
-        labelDigestCaption.stringValue = V.Digest.caption.asCaption
-        labelCompressionFramingCaption.stringValue = V.CompressionFraming.caption.asCaption
-        labelCompressionAlgorithmCaption.stringValue = V.CompressionAlgorithm.caption.asCaption
-        labelClientCertificateCaption.stringValue = V.Client.caption.asCaption
-        labelWrappingCaption.stringValue = V.TlsWrapping.caption.asCaption
-        labelExtendedVerificationCaption.stringValue = V.Eku.caption.asCaption
-        labelKeepAliveCaption.stringValue = V.KeepAlive.caption.asCaption
-        labelRenegotiationCaption.stringValue = V.RenegotiationSeconds.caption.asCaption
-        labelRandomizeEndpointCaption.stringValue = V.RandomEndpoint.caption.asCaption
-
-        popupCipher.removeAllItems()
-        popupDigest.removeAllItems()
-        popupCompressionFraming.removeAllItems()
-        popupCompressionAlgorithm.removeAllItems()
-
-        var cipherOptions: [OpenVPN.Cipher] = configuration.dataCiphers ?? []
-        if !cipherOptions.isEmpty {
-            if let cipher = configuration.cipher, !cipherOptions.contains(cipher) {
-                cipherOptions.append(cipher)
-            }
-        } else {
-            cipherOptions.append(contentsOf: OpenVPN.Cipher.available)
-        }
-        for cipher in cipherOptions {
-            popupCipher.addItem(withTitle: cipher.rawValue)
-        }
-
-        for digest in OpenVPN.Digest.available {
-            popupDigest.addItem(withTitle: digest.rawValue)
-        }
-        for framing in OpenVPN.CompressionFraming.available {
-            popupCompressionFraming.addItem(withTitle: framing.itemDescription)
-        }
-        for algorithm in OpenVPN.CompressionAlgorithm.available {
-            popupCompressionAlgorithm.addItem(withTitle: algorithm.itemDescription)
         }
         
         reloadModel()
     }
     
     private func reloadModel() {
-        let V = L10n.Core.Configuration.Cells.self
-
         if let index = allPresets.firstIndex(where: { $0.id == preset?.id }) {
             popupPreset.selectItem(at: index)
         }
-        if let index = OpenVPN.Cipher.available.firstIndex(of: configuration.fallbackCipher) {
-            popupCipher.selectItem(at: index)
-        }
-        if let index = OpenVPN.Digest.available.firstIndex(of: configuration.fallbackDigest) {
-            popupDigest.selectItem(at: index)
-        }
-        if let index = OpenVPN.CompressionFraming.available.firstIndex(of: configuration.compressionFraming ?? .disabled) {
-            popupCompressionFraming.selectItem(at: index)
-        }
-        if let index = OpenVPN.CompressionAlgorithm.available.firstIndex(of: configuration.compressionAlgorithm ?? .disabled) {
-            popupCompressionAlgorithm.selectItem(at: index)
+        var availableCiphers: [OpenVPN.Cipher]
+        let availableDigests: [OpenVPN.Digest]
+        let availableCF: [OpenVPN.CompressionFraming]
+        let availableCA: [OpenVPN.CompressionAlgorithm]
+        if let _ = profile as? HostConnectionProfile {
+            availableCiphers = configuration.dataCiphers ?? []
+            if !availableCiphers.isEmpty {
+                if let cipher = configuration.cipher, !availableCiphers.contains(cipher) {
+                    availableCiphers.append(cipher)
+                }
+            } else {
+                availableCiphers.append(contentsOf: OpenVPN.Cipher.available)
+            }
+            availableDigests = OpenVPN.Digest.available
+            availableCF = OpenVPN.CompressionFraming.available
+            availableCA = OpenVPN.CompressionAlgorithm.available
+        } else {
+            availableCiphers = [configuration.fallbackCipher]
+            availableDigests = [configuration.fallbackDigest]
+            availableCF = [configuration.fallbackCompressionFraming]
+            availableCA = [configuration.fallbackCompressionAlgorithm]
         }
 
-        // enforce item constraints
-        selectCompressionFraming(nil)
-        selectCompressionAlgorithm(nil)
-        
-        labelClientCertificate.stringValue = (configuration.clientCertificate != nil) ? V.Client.Value.enabled : V.Client.Value.disabled
-        if let strategy = configuration.tlsWrap?.strategy {
-            switch strategy {
-            case .auth:
-                labelWrapping.stringValue = V.TlsWrapping.Value.auth
-                
-            case .crypt:
-                labelWrapping.stringValue = V.TlsWrapping.Value.crypt
-            }
-        } else {
-            labelWrapping.stringValue = L10n.Core.Global.Values.disabled
-        }
-        labelExtendedVerification.stringValue = (configuration.checksEKU ?? false) ? L10n.Core.Global.Values.enabled : L10n.Core.Global.Values.disabled
-        
-        if let keepAlive = configuration.keepAliveInterval, keepAlive > 0 {
-            labelKeepAlive.stringValue = V.KeepAlive.Value.seconds(Int(keepAlive))
-        } else {
-            labelKeepAlive.stringValue = L10n.Core.Global.Values.disabled
-        }
-        if let reneg = configuration.renegotiatesAfter, reneg > 0 {
-            labelRenegotiation.stringValue = V.RenegotiationSeconds.Value.after(TimeInterval(reneg).localized)
-        } else {
-            labelRenegotiation.stringValue = L10n.Core.Global.Values.disabled
-        }
-        labelRandomizeEndpoint.stringValue = (configuration.randomizeEndpoint ?? false) ? L10n.Core.Global.Values.enabled : L10n.Core.Global.Values.disabled
+        // editable
+        rowMenus[.cipher] = NSMenu.withDescriptibles(availableCiphers)
+        rowMenus[.digest] = NSMenu.withDescriptibles(availableDigests)
+        rowMenus[.compressionFraming] = NSMenu.withDescriptibles(availableCF)
+        rowMenus[.compressionAlgorithm] = NSMenu.withDescriptibles(availableCA)
+
+        // single-option menus (unselectable)
+        rowMenus[.client] = NSMenu.withDescriptibles([configuration.uiDescriptionForClientCertificate])
+        rowMenus[.tlsWrapping] = NSMenu.withDescriptibles([configuration.uiDescriptionForTLSWrap])
+        rowMenus[.eku] = NSMenu.withDescriptibles([configuration.uiDescriptionForEKU])
+        rowMenus[.keepAlive] = NSMenu.withDescriptibles([configuration.uiDescriptionForKeepAlive])
+        rowMenus[.renegSeconds] = NSMenu.withDescriptibles([configuration.uiDescriptionForRenegotiatesAfter])
+        rowMenus[.randomEndpoint] = NSMenu.withDescriptibles([configuration.uiDescriptionForRandomizeEndpoint])
     }
-    
+
     // MARK: Actions
 
     @IBAction private func selectPreset(_ sender: Any?) {
@@ -238,73 +156,153 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
         self.preset = preset
         reloadModel()
         delegate?.profileCustomization(self, didUpdatePreset: preset)
+        tableConfiguration.reloadData()
     }
+}
 
-    @IBAction private func selectCipher(_ sender: Any?) {
-        configuration.cipher = OpenVPN.Cipher.available[popupCipher.indexOfSelectedItem]
-        delegate?.profileCustomization(self, didUpdateConfiguration: configuration)
-    }
+extension ConfigurationViewController: NSTableViewDataSource, NSTableViewDelegate {
+    enum RowType: Int {
+//        case resetOriginal
 
-    @IBAction private func selectDigest(_ sender: Any?) {
-        configuration.digest = OpenVPN.Digest.available[popupDigest.indexOfSelectedItem]
-        delegate?.profileCustomization(self, didUpdateConfiguration: configuration)
+        case cipher
+        
+        case digest
+        
+        case compressionFraming
+        
+        case compressionAlgorithm
+        
+        case client
+        
+        case tlsWrapping
+        
+        case eku
+
+        case keepAlive
+        
+        case renegSeconds
+
+        case randomEndpoint
     }
     
-    @IBAction private func selectCompressionFraming(_ sender: Any?) {
-
-        // if framing is disabled, disable algorithm
-        if popupCompressionFraming.indexOfSelectedItem == 0 {
-            popupCompressionAlgorithm.selectItem(at: 0)
-        }
-
-        configuration.compressionFraming = OpenVPN.CompressionFraming.available[popupCompressionFraming.indexOfSelectedItem]
-        configuration.compressionAlgorithm = OpenVPN.CompressionAlgorithm.available[popupCompressionAlgorithm.indexOfSelectedItem]
-        delegate?.profileCustomization(self, didUpdateConfiguration: configuration)
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return rows.count
     }
-
-    @IBAction private func selectCompressionAlgorithm(_ sender: Any?) {
-
-        // if framing is disabled and algorithm is not disabled, enable --comp-lzo framing
-        if popupCompressionFraming.indexOfSelectedItem == 0 && popupCompressionAlgorithm.indexOfSelectedItem != 0 {
-            popupCompressionFraming.selectItem(at: 1)
-        }
-
-        configuration.compressionFraming = OpenVPN.CompressionFraming.available[popupCompressionFraming.indexOfSelectedItem]
-        configuration.compressionAlgorithm = OpenVPN.CompressionAlgorithm.available[popupCompressionAlgorithm.indexOfSelectedItem]
-        delegate?.profileCustomization(self, didUpdateConfiguration: configuration)
-    }
-}
-
-// MARK: -
-
-private extension OpenVPN.CompressionFraming {
-    var itemDescription: String {
+    
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         let V = L10n.Core.Configuration.Cells.self
-        switch self {
-        case .disabled:
-            return L10n.Core.Global.Values.disabled
-            
-        case .compLZO:
-            return V.CompressionFraming.Value.lzo
-            
-        case .compress:
-            return V.CompressionFraming.Value.compress
-        }
-    }
-}
+        let rowObject = rows[row]
 
-private extension OpenVPN.CompressionAlgorithm {
-    var itemDescription: String {
-        let V = L10n.Core.Configuration.Cells.self
-        switch self {
-        case .disabled:
-            return L10n.Core.Global.Values.disabled
+        switch tableColumn?.identifier {
+        case Columns.name:
+            switch rowObject {
+            case .cipher:
+                return V.Cipher.caption
+                
+            case .digest:
+                return V.Digest.caption
+                
+            case .compressionFraming:
+                return V.CompressionFraming.caption
+                
+            case .compressionAlgorithm:
+                return V.CompressionAlgorithm.caption
+                
+            case .client:
+                return V.Client.caption
+                
+            case .tlsWrapping:
+                return V.TlsWrapping.caption
+                
+            case .eku:
+                return V.Eku.caption
+                
+            case .keepAlive:
+                return V.KeepAlive.caption
+                
+            case .renegSeconds:
+                return V.RenegotiationSeconds.caption
             
-        case .LZO:
-            return V.CompressionAlgorithm.Value.lzo
+            case .randomEndpoint:
+                return V.RandomEndpoint.caption
+            }
             
-        case .other:
-            return V.CompressionAlgorithm.Value.other
+        case Columns.value:
+            guard let menu = rowMenus[rowObject], let cell = tableColumn?.dataCell(forRow: row) as? NSPopUpButtonCell else {
+                return nil
+            }
+            cell.menu = menu
+            cell.imageDimsWhenDisabled = false
+            if menu.numberOfItems > 1 {
+                cell.arrowPosition = .arrowAtBottom
+                cell.isEnabled = true
+            } else {
+                cell.arrowPosition = .noArrow
+                cell.isEnabled = false
+            }
+            switch rowObject {
+            case .cipher:
+                return menu.indexOfItem(withRepresentedObject: configuration.fallbackCipher)
+
+            case .digest:
+                return menu.indexOfItem(withRepresentedObject: configuration.fallbackDigest)
+
+            case .compressionFraming:
+                return menu.indexOfItem(withRepresentedObject: configuration.fallbackCompressionFraming)
+
+            case .compressionAlgorithm:
+                return menu.indexOfItem(withRepresentedObject: configuration.fallbackCompressionAlgorithm)
+
+            default:
+                return 0
+            }
+            
+        default:
+            break
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+        switch tableColumn?.identifier {
+        case Columns.value:
+            let rowObject = rows[row]
+            guard let menu = rowMenus[rowObject], let optionIndex = object as? Int else {
+                return
+            }
+            let optionObject = menu.item(at: optionIndex)?.representedObject
+            switch rowObject {
+            case .cipher:
+                configuration.cipher = optionObject as? OpenVPN.Cipher
+
+            case .digest:
+                configuration.digest = optionObject as? OpenVPN.Digest
+
+            case .compressionFraming:
+                guard let option = optionObject as? OpenVPN.CompressionFraming else {
+                    return
+                }
+                configuration.compressionFraming = option
+                if option == .disabled {
+                    configuration.compressionAlgorithm = .disabled
+                }
+
+            case .compressionAlgorithm:
+                guard let option = optionObject as? OpenVPN.CompressionAlgorithm else {
+                    return
+                }
+                if configuration.compressionFraming == .disabled && option != .disabled {
+                    configuration.compressionFraming = .compLZO
+                }
+                configuration.compressionAlgorithm = option
+
+            default:
+                break
+            }
+            delegate?.profileCustomization(self, didUpdateConfiguration: configuration)
+
+        default:
+            break
         }
     }
 }

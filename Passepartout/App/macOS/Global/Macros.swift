@@ -128,6 +128,18 @@ extension NSImage {
     }
 }
 
+extension NSMenu {
+    static func withDescriptibles(_ list: [UIDescriptible]) -> NSMenu {
+        let menu = NSMenu()
+        for o in list {
+            let item = NSMenuItem(title: o.uiDescription, action: nil, keyEquivalent: "")
+            item.representedObject = o
+            menu.addItem(item)
+        }
+        return menu
+    }
+}
+
 extension String {
     var asCaption: String {
         return "\(self):"
