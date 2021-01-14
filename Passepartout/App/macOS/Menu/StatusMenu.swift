@@ -321,10 +321,6 @@ class StatusMenu: NSObject {
                     
                     let submenuGroup = NSMenu()
                     for pool in group.pools {
-                        if pool.id == providerProfile.poolId {
-                            itemGroup.state = .on
-                        }
-                        
                         let title = !pool.secondaryId.isEmpty ? pool.secondaryId : L10n.Core.Global.Values.default
                         let item = NSMenuItem(title: title, action: #selector(connectToPool(_:)), keyEquivalent: "")
                         if let extraCountry = pool.extraCountries?.first {
@@ -333,6 +329,11 @@ class StatusMenu: NSObject {
                         item.target = self
                         item.representedObject = pool
                         submenuGroup.addItem(item)
+
+                        if pool.id == providerProfile.poolId {
+                            itemGroup.state = .on
+                            item.state = .on
+                        }
                     }
                     if submenuGroup.numberOfItems > 1 {
                         itemGroup.action = nil
