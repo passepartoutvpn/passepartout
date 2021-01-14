@@ -55,28 +55,15 @@ class ProviderServiceView: NSView {
         }
     }
 
-    private var categories: [PoolCategory] = []
-    
-    private var sortedGroupsByCategory: [String: [PoolGroup]] = [:]
-    
-    private var currentCategoryIndex = -1
-    
-    private var currentLocationIndex = -1
-    
-    private var currentSortedPools: [Pool] = []
-
     var profile: ProviderConnectionProfile? {
         didSet {
             guard let profile = profile else {
-                categories = []
-                sortedGroupsByCategory = [:]
-                currentSortedPools = []
                 popupCategory.removeAllItems()
                 popupLocation.removeAllItems()
                 popupArea.removeAllItems()
                 return
             }
-            reloadData(withProfile: profile)
+            reloadHierarchy(withProfile: profile)
         }
     }
 
@@ -85,6 +72,8 @@ class ProviderServiceView: NSView {
             buttonRefreshInfrastructure.isEnabled = !isRefreshingInfrastructure
         }
     }
+    
+    private var categories: [PoolCategory] = []
 
     weak var delegate: ProviderServiceViewDelegate?
     
@@ -99,34 +88,24 @@ class ProviderServiceView: NSView {
     // MARK: Actions
 
     @IBAction private func selectCategory(_ sender: Any?) {
-        let index = popupCategory.indexOfSelectedItem
-        guard index != currentCategoryIndex else {
-            return
-        }
-        currentCategoryIndex = index
-        
-        loadLocations(withCategory: index)
-        loadAreas(withLocation: 0)
-        if let pool = currentSortedPools.first {
+        loadLocations()
+        loadAreas()
+        if let pool = selectedPool() {
             delegate?.providerView(self, didSelectPool: pool)
         }
     }
 
     @IBAction private func selectLocation(_ sender: Any?) {
-        let index = popupLocation.indexOfSelectedItem
-        guard index != currentLocationIndex else {
-            return
-        }
-        currentLocationIndex = index
-
-        loadAreas(withLocation: index)
-        if let pool = currentSortedPools.first {
+        loadAreas()
+        if let pool = selectedPool() {
             delegate?.providerView(self, didSelectPool: pool)
         }
     }
     
     @IBAction private func selectArea(_ sender: Any?) {
-        let pool = currentSortedPools[popupArea.indexOfSelectedItem]
+        guard let pool = popupArea.selectedItem?.representedObject as? Pool else {
+            return
+        }
         delegate?.providerView(self, didSelectPool: pool)
     }
     
@@ -137,95 +116,86 @@ class ProviderServiceView: NSView {
     // MARK: Helpers
 
     func reloadData() {
-        guard let profile = profile else {
-            return
-        }
-        reloadData(withProfile: profile)
     }
     
-    private func reloadData(withProfile profile: ProviderConnectionProfile) {
+    private func reloadHierarchy(withProfile profile: ProviderConnectionProfile) {
         categories = profile.infrastructure.categories.sorted { $0.name.lowercased() < $1.name.lowercased() }
-        for c in categories {
-            sortedGroupsByCategory[c.name] = c.groups.sorted()
-        }
-        
         popupCategory.removeAllItems()
+
+        let menu = NSMenu()
         categories.forEach {
-            let categoryTitle: String
-            if $0.name.isEmpty {
-                categoryTitle = L10n.Core.Global.Values.default
-            } else {
-                categoryTitle = $0.name.capitalized
-            }
-            popupCategory.addItem(withTitle: categoryTitle)
+            let item = NSMenuItem()
+            item.title = !$0.name.isEmpty ? $0.name.capitalized : L10n.Core.Global.Values.default
+            item.representedObject = $0 // category
+            menu.addItem(item)
         }
+        popupCategory.menu = menu
 
         let (a, b, c) = selectPopupsFromCurrentProfile()
         if popupCategory.numberOfItems > 0 {
             popupCategory.selectItem(at: a)
-            loadLocations(withCategory: a)
+            loadLocations()
             if popupLocation.numberOfItems > 0 {
                 popupLocation.selectItem(at: b)
-                loadAreas(withLocation: b)
+                loadAreas()
                 if popupArea.numberOfItems > 0 {
                     popupArea.selectItem(at: c)
                 }
             }
         }
 
-        currentCategoryIndex = a
-        currentLocationIndex = b
-
         if let lastInfrastructureUpdate = InfrastructureFactory.shared.modificationDate(forName: profile.name) {
             labelLastInfrastructureUpdate.stringValue = L10n.Core.Service.Sections.ProviderInfrastructure.footer(lastInfrastructureUpdate.timestamp)
         }
     }
-    
-    private func selectPopupsFromCurrentProfile() -> (Int, Int, Int) {
-        for (a, category) in categories.enumerated() {
-            guard let groups = sortedGroupsByCategory[category.name] else {
-                continue
-            }
-            for (b, group) in groups.enumerated() {
 
-                // FIXME: inefficient, cache sorted pools
-                for (c, pool) in group.pools.sortedPools().enumerated() {
+    // FIXME: inefficient, cache sorted pools
+    private func selectPopupsFromCurrentProfile() -> (Int, Int, Int) {
+        var a = 0, b = 0, c = 0
+        for category in categories {
+            b = 0
+            for group in category.groups {
+                c = 0
+                for pool in group.pools.sortedPools() {
                     if pool.id == profile?.poolId {
                         return (a, b, c)
                     }
+                    c += 1
                 }
+                b += 1
             }
+            a += 1
         }
         return (0, 0, 0)
     }
     
-    private func loadLocations(withCategory index: Int) {
-        let category = categories[index]
-        let menu = NSMenu()
-        
+    private func loadLocations() {
+        guard let category = popupCategory.selectedItem?.representedObject as? PoolCategory else {
+            return
+        }
         popupLocation.removeAllItems()
-        sortedGroupsByCategory[category.name]?.forEach {
+
+        let menu = NSMenu()
+        category.groups.sorted().forEach {
             let item = NSMenuItem(title: $0.localizedCountry, action: nil, keyEquivalent: "")
             item.image = $0.logo
+            item.representedObject = $0 // group
             menu.addItem(item)
         }
         popupLocation.menu = menu
     }
     
-    private func loadAreas(withLocation index: Int) {
-        let categoryIndex = popupCategory.indexOfSelectedItem
-        let category = categories[categoryIndex]
-        guard let sortedGroups = sortedGroupsByCategory[category.name] else {
-            fatalError("No groups in category \(category.name)")
+    private func loadAreas() {
+        guard let group = popupLocation.selectedItem?.representedObject as? PoolGroup else {
+            return
         }
-        let group = sortedGroups[index]
-        let menu = NSMenu()
-        
         popupArea.removeAllItems()
+
         // FIXME: inefficient, cache sorted pools
-        currentSortedPools = group.pools.sortedPools()
-        currentSortedPools.forEach {
-            guard !$0.secondaryId.isEmpty || currentSortedPools.count > 1 else {
+        let menu = NSMenu()
+        let pools = group.pools.sortedPools()
+        pools.forEach {
+            guard !$0.secondaryId.isEmpty || pools.count > 1 else {
                 return
             }
             let title = !$0.secondaryId.isEmpty ? $0.secondaryId : L10n.Core.Global.Values.default
@@ -233,9 +203,20 @@ class ProviderServiceView: NSView {
             if let extraCountry = $0.extraCountries?.first {
                 item.image = extraCountry.image
             }
+            item.representedObject = $0 // pool
             menu.addItem(item)
         }
         popupArea.menu = menu
         popupArea.isHidden = menu.items.isEmpty
+    }
+    
+    private func selectedPool() -> Pool? {
+        guard popupArea.numberOfItems > 0 else {
+            guard let group = popupLocation.selectedItem?.representedObject as? PoolGroup else {
+                return nil
+            }
+            return group.pools.first
+        }
+        return popupArea.itemArray.first?.representedObject as? Pool
     }
 }
