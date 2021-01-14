@@ -62,9 +62,6 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
             model.add(.reset)
             model.setHeader("", forSection: .reset)
         }
-        if !isServerPushed {
-            model.add(.tls)
-        }
 
         // headers
         model.setHeader(L10n.Core.Configuration.Sections.Communication.header, forSection: .communication)
@@ -105,6 +102,10 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
                 model.set(rows, forSection: .compression)
             }
 
+            if !isServerPushed {
+                model.add(.tls)
+            }
+
             rows = []
             if let _ = configuration.keepAliveInterval {
                 rows.append(.keepAlive)
@@ -122,6 +123,9 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         } else {
             model.add(.communication)
             model.add(.compression)
+            if !isServerPushed {
+                model.add(.tls)
+            }
             model.add(.other)
             model.set([.cipher, .digest], forSection: .communication)
             model.set([.compressionFraming, .compressionAlgorithm], forSection: .compression)
@@ -261,82 +265,60 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         }
         cell.isTappable = isEditable
         switch row {
-        case .cipher:
-            cell.leftText = V.Cipher.caption
-            cell.rightText = configuration.fallbackCipher.description
-            
-        case .digest:
-            cell.leftText = V.Digest.caption
-            cell.rightText = configuration.fallbackDigest.description
-
-        case .compressionFraming:
-            cell.leftText = V.CompressionFraming.caption
-            cell.rightText = configuration.fallbackCompressionFraming.cellDescription
-            
-        case .compressionAlgorithm:
-            cell.leftText = V.CompressionAlgorithm.caption
-            if let compressionAlgorithm = configuration.compressionAlgorithm {
-                cell.rightText = compressionAlgorithm.cellDescription
-            } else {
-                cell.rightText = L10n.Core.Global.Values.disabled
-            }
-            cell.isTappable = (configuration.compressionFraming != .disabled)
-
         case .resetOriginal:
             cell.leftText = V.ResetOriginal.caption
             cell.applyAction(.current)
             
+        case .cipher:
+            cell.leftText = V.Cipher.caption
+            cell.rightText = configuration.fallbackCipher.uiDescription
+            
+        case .digest:
+            cell.leftText = V.Digest.caption
+            cell.rightText = configuration.fallbackDigest.uiDescription
+
+        case .compressionFraming:
+            cell.leftText = V.CompressionFraming.caption
+            cell.rightText = configuration.fallbackCompressionFraming.uiDescription
+            
+        case .compressionAlgorithm:
+            cell.leftText = V.CompressionAlgorithm.caption
+            cell.rightText = configuration.fallbackCompressionAlgorithm.uiDescription
+            cell.isTappable = (configuration.compressionFraming != .disabled)
+
         case .client:
             cell.leftText = V.Client.caption
-            cell.rightText = (configuration.clientCertificate != nil) ? V.Client.Value.enabled : V.Client.Value.disabled
+            cell.rightText = configuration.uiDescriptionForClientCertificate
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .tlsWrapping:
             cell.leftText = V.TlsWrapping.caption
-            if let strategy = configuration.tlsWrap?.strategy {
-                switch strategy {
-                case .auth:
-                    cell.rightText = V.TlsWrapping.Value.auth
-
-                case .crypt:
-                    cell.rightText = V.TlsWrapping.Value.crypt
-                }
-            } else {
-                cell.rightText = L10n.Core.Global.Values.disabled
-            }
+            cell.rightText = configuration.uiDescriptionForTLSWrap
             cell.accessoryType = .none
             cell.isTappable = false
             
         case .eku:
             cell.leftText = V.Eku.caption
-            cell.rightText = (configuration.checksEKU ?? false) ? L10n.Core.Global.Values.enabled : L10n.Core.Global.Values.disabled
+            cell.rightText = configuration.uiDescriptionForEKU
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .keepAlive:
             cell.leftText = V.KeepAlive.caption
-            if let keepAlive = configuration.keepAliveInterval, keepAlive > 0 {
-                cell.rightText = V.KeepAlive.Value.seconds(Int(keepAlive))
-            } else {
-                cell.rightText = L10n.Core.Global.Values.disabled
-            }
+            cell.rightText = configuration.uiDescriptionForKeepAlive
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .renegSeconds:
             cell.leftText = V.RenegotiationSeconds.caption
-            if let reneg = configuration.renegotiatesAfter, reneg > 0 {
-                cell.rightText = V.RenegotiationSeconds.Value.after(TimeInterval(reneg).localized)
-            } else {
-                cell.rightText = L10n.Core.Global.Values.disabled
-            }
+            cell.rightText = configuration.uiDescriptionForRenegotiatesAfter
             cell.accessoryType = .none
             cell.isTappable = false
 
         case .randomEndpoint:
             cell.leftText = V.RandomEndpoint.caption
-            cell.rightText = (configuration.randomizeEndpoint ?? false) ? L10n.Core.Global.Values.enabled : L10n.Core.Global.Values.disabled
+            cell.rightText = configuration.uiDescriptionForRandomizeEndpoint
             cell.accessoryType = .none
             cell.isTappable = false
         }
@@ -366,7 +348,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             vc.title = settingCell?.leftText
             vc.options = options
             vc.selectedOption = configuration.cipher
-            vc.descriptionBlock = { $0.description }
+            vc.descriptionBlock = { $0.uiDescription }
             vc.selectionBlock = { [weak self] in
                 self?.configuration.cipher = $0
                 self?.popAndCheckRefresh()
@@ -379,7 +361,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.Digest.available
             vc.selectedOption = configuration.digest
-            vc.descriptionBlock = { $0.description }
+            vc.descriptionBlock = { $0.uiDescription }
             vc.selectionBlock = { [weak self] in
                 self?.configuration.digest = $0
                 self?.popAndCheckRefresh()
@@ -392,7 +374,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.CompressionFraming.available
             vc.selectedOption = configuration.compressionFraming ?? .disabled
-            vc.descriptionBlock = { $0.cellDescription }
+            vc.descriptionBlock = { $0.uiDescription }
             vc.selectionBlock = { [weak self] in
                 self?.configuration.compressionFraming = $0
                 if $0 == .disabled {
@@ -412,7 +394,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             vc.title = settingCell?.leftText
             vc.options = OpenVPN.CompressionAlgorithm.available
             vc.selectedOption = configuration.compressionAlgorithm ?? .disabled
-            vc.descriptionBlock = { $0.cellDescription }
+            vc.descriptionBlock = { $0.uiDescription }
             vc.selectionBlock = { [weak self] in
                 self?.configuration.compressionAlgorithm = $0
                 self?.popAndCheckRefresh()
@@ -436,39 +418,5 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         navigationController?.popViewController(animated: true)
 
         delegate?.configuration(didUpdate: configuration.build())
-    }
-}
-
-// MARK: -
-
-private extension OpenVPN.CompressionFraming {
-    var cellDescription: String {
-        let V = L10n.Core.Configuration.Cells.self
-        switch self {
-        case .disabled:
-            return L10n.Core.Global.Values.disabled
-            
-        case .compLZO:
-            return V.CompressionFraming.Value.lzo
-            
-        case .compress:
-            return V.CompressionFraming.Value.compress
-        }
-    }
-}
-
-private extension OpenVPN.CompressionAlgorithm {
-    var cellDescription: String {
-        let V = L10n.Core.Configuration.Cells.self
-        switch self {
-        case .disabled:
-            return L10n.Core.Global.Values.disabled
-            
-        case .LZO:
-            return V.CompressionAlgorithm.Value.lzo
-            
-        case .other:
-            return V.CompressionAlgorithm.Value.other
-        }
     }
 }
