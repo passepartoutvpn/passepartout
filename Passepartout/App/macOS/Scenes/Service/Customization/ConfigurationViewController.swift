@@ -141,12 +141,12 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
         rowMenus[.compressionAlgorithm] = NSMenu.withDescriptibles(availableCA)
 
         // single-option menus (unselectable)
-        rowMenus[.client] = NSMenu.withDescriptibles([configuration.uiDescriptionForClientCertificate])
-        rowMenus[.tlsWrapping] = NSMenu.withDescriptibles([configuration.uiDescriptionForTLSWrap])
-        rowMenus[.eku] = NSMenu.withDescriptibles([configuration.uiDescriptionForEKU])
-        rowMenus[.keepAlive] = NSMenu.withDescriptibles([configuration.uiDescriptionForKeepAlive])
-        rowMenus[.renegSeconds] = NSMenu.withDescriptibles([configuration.uiDescriptionForRenegotiatesAfter])
-        rowMenus[.randomEndpoint] = NSMenu.withDescriptibles([configuration.uiDescriptionForRandomizeEndpoint])
+        rowMenus[.client] = NSMenu.withString(configuration.uiDescriptionForClientCertificate)
+        rowMenus[.tlsWrapping] = NSMenu.withString(configuration.uiDescriptionForTLSWrap)
+        rowMenus[.eku] = NSMenu.withString(configuration.uiDescriptionForEKU)
+        rowMenus[.keepAlive] = NSMenu.withString(configuration.uiDescriptionForKeepAlive)
+        rowMenus[.renegSeconds] = NSMenu.withString(configuration.uiDescriptionForRenegotiatesAfter)
+        rowMenus[.randomEndpoint] = NSMenu.withString(configuration.uiDescriptionForRandomizeEndpoint)
     }
 
     // MARK: Actions
@@ -229,7 +229,7 @@ extension ConfigurationViewController: NSTableViewDataSource, NSTableViewDelegat
             
         case Columns.value:
             guard let menu = rowMenus[rowObject], let cell = tableColumn?.dataCell(forRow: row) as? NSPopUpButtonCell else {
-                return nil
+                break
             }
             cell.menu = menu
             cell.imageDimsWhenDisabled = false

@@ -30,12 +30,6 @@ public protocol UIDescriptible {
     var uiDescription: String { get }
 }
 
-extension String: UIDescriptible {
-    public var uiDescription: String {
-        return description
-    }
-}
-
 extension OpenVPN.Cipher: UIDescriptible {
     public var uiDescription: String {
         return description

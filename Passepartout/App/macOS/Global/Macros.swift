@@ -138,6 +138,14 @@ extension NSMenu {
         }
         return menu
     }
+
+    static func withString(_ string: String) -> NSMenu {
+        let menu = NSMenu()
+        let item = NSMenuItem(title: string, action: nil, keyEquivalent: "")
+        item.representedObject = string
+        menu.addItem(item)
+        return menu
+    }
 }
 
 extension String {
