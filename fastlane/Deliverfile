@@ -2,8 +2,17 @@
 # For more information, check out the docs
 # https://docs.fastlane.tools/actions/deliver/
 
-screenshots_path "#{ENV['APP_ROOT']}/fastlane/screenshots"
-metadata_path "#{ENV['APP_ROOT']}/fastlane/metadata"
+screenshots_path "#{ENV["APP_ROOT"]}/fastlane/screenshots"
+metadata_path "#{ENV["APP_ROOT"]}/fastlane/metadata"
+
+if not ENV["TARGET"].nil?
+    binary_path = "#{ENV["DIST_PATH"]}/#{ENV["PLATFORM"]}/#{ENV["TARGET"]}"
+    if ENV["PLATFORM"] == "ios"
+        ipa "#{binary_path}/#{ENV["APP_NAME"]}.ipa"
+    else
+        pkg "#{binary_path}/#{ENV["APP_NAME"]}.pkg"
+    end
+end
 
 skip_binary_upload true
 skip_metadata false
