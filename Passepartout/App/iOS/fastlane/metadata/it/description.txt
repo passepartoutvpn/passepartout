@@ -33,7 +33,6 @@ INTEGRAZIONE CON IL SISTEMA
 
 - Rendi la rete mobile o Wi-Fi sicura per personalizzare la tua connettività.
 - La modalità on-demand agisce come kill switch abilitando la VPN non appena venga rilevata attività di rete.
-- Intuitivi comandi rapidi Siri (iOS).
 
 ORIENTATO ALLA PRIVACY
 

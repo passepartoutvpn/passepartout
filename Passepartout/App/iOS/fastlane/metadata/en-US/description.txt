@@ -33,7 +33,6 @@ OS INTEGRATION
 
 - Trust wired or Wi-Fi networks to fine-grain your connectivity.
 - On-demand acts as kill switch by enabling the VPN whenever there is network activity.
-- Intuitive Siri Shortcuts (iOS).
 
 PRIVACY FRIENDLY
 
