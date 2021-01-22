@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Support `--data-ciphers` from OpenVPN 2.5 [tunnelkit#193](https://github.com/passepartoutvpn/tunnelkit/issues/193)
+- Support DNS over HTTPS/TLS in "Network settings". [#91](https://github.com/passepartoutvpn/passepartout-apple/issues/91)
 
 ### Changed
 

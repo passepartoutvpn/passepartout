@@ -136,14 +136,14 @@
             <objects>
                 <viewController title="DNS" id="mbI-Io-BZh" userLabel="DNS" customClass="DNSViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="We2-9p-1Vt">
-                        <rect key="frame" x="0.0" y="0.0" width="520" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="514" height="440"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zao-dc-fzq">
-                                <rect key="frame" x="0.0" y="20" width="500" height="360"/>
+                                <rect key="frame" x="0.0" y="20" width="494" height="400"/>
                                 <subviews>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bFA-yD-Roy">
-                                        <rect key="frame" x="147" y="336" width="247" height="25"/>
+                                        <rect key="frame" x="147" y="376" width="247" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="euy-38-pqL"/>
                                         </constraints>
@@ -163,28 +163,74 @@
                                         </connections>
                                     </popUpButton>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zfd-mA-qV9">
-                                        <rect key="frame" x="0.0" y="0.0" width="500" height="330"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="494" height="370"/>
                                         <subviews>
+                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CSz-iK-Imy">
+                                                <rect key="frame" x="147" y="346" width="247" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="2y9-wd-q0g"/>
+                                                </constraints>
+                                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="210-ZR-L2J" id="KD6-ly-ONG">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="Kvm-gz-uaS">
+                                                        <items>
+                                                            <menuItem title="Item 1" state="on" id="210-ZR-L2J"/>
+                                                            <menuItem title="Item 2" id="sVf-le-KwE"/>
+                                                            <menuItem title="Item 3" id="VbS-Rk-gsh"/>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="pickProtocol:" target="mbI-Io-BZh" id="ik0-nd-ODu"/>
+                                                </connections>
+                                            </popUpButton>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oRM-XY-fH6">
+                                                <rect key="frame" x="150" y="309" width="344" height="21"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="pa5-Wv-hRq">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="L6f-kb-mEG">
-                                                <rect key="frame" x="150" y="170" width="350" height="160"/>
+                                                <rect key="frame" x="150" y="170" width="344" height="160"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="160" id="zCq-d8-x9i"/>
                                                 </constraints>
                                             </customView>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Baa-Z1-JJJ">
-                                                <rect key="frame" x="150" y="0.0" width="350" height="160"/>
+                                                <rect key="frame" x="150" y="0.0" width="344" height="160"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="160" id="BTk-TZ-Dat"/>
                                                 </constraints>
                                             </customView>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ef3-Zx-nCS">
+                                                <rect key="frame" x="-2" y="352" width="144" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="PROTO" id="lpP-C3-tYW">
+                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Baa-Z1-JJJ" secondAttribute="bottom" id="DZf-vr-lkr"/>
+                                            <constraint firstItem="CSz-iK-Imy" firstAttribute="top" secondItem="Zfd-mA-qV9" secondAttribute="top" id="0rT-Xa-fsr"/>
+                                            <constraint firstItem="CSz-iK-Imy" firstAttribute="leading" secondItem="Baa-Z1-JJJ" secondAttribute="leading" id="4NK-b5-pOE"/>
+                                            <constraint firstItem="ef3-Zx-nCS" firstAttribute="leading" secondItem="Zfd-mA-qV9" secondAttribute="leading" id="9hc-Mm-7v7"/>
                                             <constraint firstAttribute="trailing" secondItem="Baa-Z1-JJJ" secondAttribute="trailing" id="Kc3-oq-1nC"/>
                                             <constraint firstItem="Baa-Z1-JJJ" firstAttribute="leading" secondItem="L6f-kb-mEG" secondAttribute="leading" id="OAq-vY-0dj"/>
+                                            <constraint firstItem="ef3-Zx-nCS" firstAttribute="centerY" secondItem="CSz-iK-Imy" secondAttribute="centerY" id="PLm-Ng-tlW"/>
+                                            <constraint firstItem="oRM-XY-fH6" firstAttribute="trailing" secondItem="L6f-kb-mEG" secondAttribute="trailing" id="U5i-6g-z66"/>
                                             <constraint firstAttribute="trailing" secondItem="L6f-kb-mEG" secondAttribute="trailing" id="Ufy-l9-JnV"/>
-                                            <constraint firstItem="L6f-kb-mEG" firstAttribute="top" secondItem="Zfd-mA-qV9" secondAttribute="top" id="ht1-Z0-GZL"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CSz-iK-Imy" secondAttribute="trailing" id="Z6g-uk-L7s"/>
+                                            <constraint firstItem="L6f-kb-mEG" firstAttribute="top" secondItem="CSz-iK-Imy" secondAttribute="bottom" constant="20" id="Z8n-Jh-qIx"/>
+                                            <constraint firstAttribute="bottom" secondItem="Baa-Z1-JJJ" secondAttribute="bottom" id="ciR-fE-0Bj"/>
+                                            <constraint firstItem="Baa-Z1-JJJ" firstAttribute="top" secondItem="oRM-XY-fH6" secondAttribute="bottom" priority="250" constant="10" id="ljr-hl-Iip"/>
+                                            <constraint firstItem="CSz-iK-Imy" firstAttribute="leading" secondItem="ef3-Zx-nCS" secondAttribute="trailing" constant="10" id="nOE-xl-CUa"/>
                                             <constraint firstItem="Baa-Z1-JJJ" firstAttribute="top" secondItem="L6f-kb-mEG" secondAttribute="bottom" constant="10" id="qwn-Pc-7xS"/>
+                                            <constraint firstItem="oRM-XY-fH6" firstAttribute="leading" secondItem="L6f-kb-mEG" secondAttribute="leading" id="wE8-Cr-8A8"/>
+                                            <constraint firstItem="oRM-XY-fH6" firstAttribute="top" secondItem="L6f-kb-mEG" secondAttribute="top" id="xUI-3F-09L"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
@@ -209,9 +255,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constraintAddressesBottom" destination="qwn-Pc-7xS" id="f8K-7g-9N2"/>
                         <outlet property="constraintChoiceBottom" destination="0mN-72-zeu" id="Lf7-4v-Gae"/>
+                        <outlet property="constraintCustomBottom" destination="ljr-hl-Iip" id="JQK-dK-cqy"/>
                         <outlet property="constraintSettingsTop" destination="ymz-zd-mjc" id="sN1-KM-hgC"/>
+                        <outlet property="labelDNSProtocol" destination="ef3-Zx-nCS" id="nec-BT-J2J"/>
                         <outlet property="popupChoice" destination="bFA-yD-Roy" id="lYe-Ho-P0K"/>
+                        <outlet property="popupDNSProtocol" destination="CSz-iK-Imy" id="gIh-zq-W3E"/>
+                        <outlet property="textDNSCustom" destination="oRM-XY-fH6" id="rmb-Ue-MZR"/>
                         <outlet property="viewDNSAddresses" destination="L6f-kb-mEG" id="cbb-T7-MeD"/>
                         <outlet property="viewDNSDomains" destination="Baa-Z1-JJJ" id="msU-UP-bJZ"/>
                         <outlet property="viewSettings" destination="Zfd-mA-qV9" id="831-9h-AXu"/>
@@ -219,7 +270,7 @@
                 </viewController>
                 <customObject id="Gxf-Bl-2bj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="579" y="2339"/>
+            <point key="canvasLocation" x="631" y="2362"/>
         </scene>
         <!--Service View Controller-->
         <scene sceneID="5Tf-QF-BT2">

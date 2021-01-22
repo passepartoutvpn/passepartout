@@ -201,8 +201,11 @@ extension ProfileCustomizationContainerViewController: ProfileCustomizationDeleg
     
     func profileCustomization(_ profileCustomization: ProfileCustomization, didUpdateDNS choice: NetworkChoice, withManualSettings newSettings: ProfileNetworkSettings) {
         pendingChoices?.dns = choice
-        pendingManualNetworkSettings.dnsSearchDomains = newSettings.dnsSearchDomains
+        pendingManualNetworkSettings.dnsProtocol = newSettings.dnsProtocol
+        pendingManualNetworkSettings.dnsHTTPSURL = newSettings.dnsHTTPSURL
+        pendingManualNetworkSettings.dnsTLSServerName = newSettings.dnsTLSServerName
         pendingManualNetworkSettings.dnsServers = newSettings.dnsServers
+        pendingManualNetworkSettings.dnsSearchDomains = newSettings.dnsSearchDomains
     }
     
     func profileCustomization(_ profileCustomization: ProfileCustomization, didUpdateProxy choice: NetworkChoice, withManualSettings newSettings: ProfileNetworkSettings) {

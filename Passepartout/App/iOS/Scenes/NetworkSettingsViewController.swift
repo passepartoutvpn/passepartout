@@ -32,6 +32,8 @@ import Convenience
 private let log = SwiftyBeaver.self
 
 private enum FieldTag: Int {
+    case dnsCustom = 50
+    
     case dnsAddress = 100
     
     case dnsDomain = 200
@@ -76,7 +78,14 @@ class NetworkSettingsViewController: UITableViewController {
             sections.append(.manualGateway)
         }
         if networkChoices.dns != .server {
-            sections.append(.manualDNSServers)
+            sections.append(.manualDNSProtocol)
+            switch networkSettings.dnsProtocol {
+            case .https, .tls:
+                break
+                
+            default:
+                sections.append(.manualDNSServers)
+            }
             sections.append(.manualDNSDomains)
         }
         if networkChoices.proxy != .server {
@@ -100,6 +109,16 @@ class NetworkSettingsViewController: UITableViewController {
         model.set([.gatewayIPv4, .gatewayIPv6], forSection: .manualGateway)
         model.set([.mtuBytes], forSection: .manualMTU)
 
+        var dnsProtocolRows: [RowType] = [.dnsProtocol]
+        switch networkSettings.dnsProtocol {
+        case .https, .tls:
+            dnsProtocolRows.append(.dnsCustom)
+
+        default:
+            break
+        }
+        model.set(dnsProtocolRows, forSection: .manualDNSProtocol)
+        
         var dnsServers: [RowType] = Array(repeating: .dnsAddress, count: networkSettings.dnsServers?.count ?? 0)
         if networkChoices.dns == .manual {
             dnsServers.append(.dnsAddAddress)
@@ -111,7 +130,7 @@ class NetworkSettingsViewController: UITableViewController {
             dnsDomains.append(.dnsAddDomain)
         }
         model.set(dnsDomains, forSection: .manualDNSDomains)
-        
+
         var proxyRows: [RowType] = Array(repeating: .proxyBypass, count: networkSettings.proxyBypassDomains?.count ?? 0)
         proxyRows.insert(.proxyAddress, at: 0)
         proxyRows.insert(.proxyPort, at: 1)
@@ -122,11 +141,10 @@ class NetworkSettingsViewController: UITableViewController {
         model.set(proxyRows, forSection: .manualProxy)
 
         // refine sections before add (DNS is tricky)
+        model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .manualDNSProtocol)
         if !dnsServers.isEmpty {
-            model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .manualDNSServers)
         } else if !dnsDomains.isEmpty {
             sections.removeAll { $0 == .manualDNSServers }
-            model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .manualDNSDomains)
         } else {
             sections.removeAll { $0 == .manualDNSServers }
             sections.removeAll { $0 == .manualDNSDomains }
@@ -241,7 +259,21 @@ class NetworkSettingsViewController: UITableViewController {
 
         let text = field.text ?? ""
 
-        if field.tag >= FieldTag.dnsAddress.rawValue && field.tag < FieldTag.dnsDomain.rawValue {
+        if field.tag == FieldTag.dnsCustom.rawValue {
+            switch networkSettings.dnsProtocol {
+            case .https:
+                guard let string = field.text, let url = URL(string: string) else {
+                    break
+                }
+                networkSettings.dnsHTTPSURL = url
+
+            case .tls:
+                networkSettings.dnsTLSServerName = field.text
+
+            default:
+                break
+            }
+        } else if field.tag >= FieldTag.dnsAddress.rawValue && field.tag < FieldTag.dnsDomain.rawValue {
             let i = field.tag - FieldTag.dnsAddress.rawValue
             if let _ = networkSettings.dnsServers {
                 networkSettings.dnsServers?[i] = text
@@ -304,6 +336,8 @@ extension NetworkSettingsViewController {
         
         case manualGateway
         
+        case manualDNSProtocol
+        
         case manualDNSServers
         
         case manualDNSDomains
@@ -325,6 +359,10 @@ extension NetworkSettingsViewController {
         case gatewayIPv4
 
         case gatewayIPv6
+        
+        case dnsProtocol
+        
+        case dnsCustom
         
         case dnsAddress
         
@@ -409,6 +447,34 @@ extension NetworkSettingsViewController {
             cell.isOn = networkSettings.gatewayPolicies?.contains(.IPv6) ?? false
             return cell
             
+        case .dnsProtocol:
+            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
+            cell.leftText = L10n.Core.Global.Captions.protocol
+            cell.rightText = (networkSettings.dnsProtocol ?? .fallback)?.description
+            return cell
+            
+        case .dnsCustom:
+            let cell = Cells.field.dequeue(from: tableView, for: indexPath)
+            cell.caption = nil
+            cell.field.tag = FieldTag.dnsCustom.rawValue
+            switch networkSettings.dnsProtocol {
+            case .https:
+                cell.field.placeholder = AppConstants.Placeholders.dohURL
+                cell.field.text = networkSettings.dnsHTTPSURL?.absoluteString
+
+            case .tls:
+                cell.field.placeholder = AppConstants.Placeholders.dotServerName
+                cell.field.text = networkSettings.dnsTLSServerName
+
+            default:
+                break
+            }
+            cell.field.clearButtonMode = .always
+            cell.field.keyboardType = .asciiCapable
+            cell.captionWidth = 0.0
+            cell.delegate = self
+            return cell
+
         case .dnsAddress:
             let i = indexPath.row - Offsets.dnsAddress
             
@@ -575,6 +641,24 @@ extension NetworkSettingsViewController {
             vc.selectedOption = networkChoices.mtu
             vc.selectionBlock = { [weak self] in
                 self?.updateMTU($0)
+                self?.navigationController?.popViewController(animated: true)
+            }
+            navigationController?.pushViewController(vc, animated: true)
+
+        case .dnsProtocol:
+            let vc = SingleOptionViewController<DNSProtocol>()
+            vc.applyTint(.current)
+            vc.title = (cell as? SettingTableViewCell)?.leftText
+            if #available(iOS 14, macOS 11, *) {
+                vc.options = [.plain, .https, .tls]
+            } else {
+                vc.options = [.plain]
+            }
+            vc.descriptionBlock = { $0.description }
+
+            vc.selectedOption = networkSettings.dnsProtocol ?? .fallback
+            vc.selectionBlock = { [weak self] in
+                self?.networkSettings.dnsProtocol = $0
                 self?.navigationController?.popViewController(animated: true)
             }
             navigationController?.pushViewController(vc, animated: true)

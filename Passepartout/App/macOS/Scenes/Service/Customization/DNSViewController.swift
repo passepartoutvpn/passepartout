@@ -25,31 +25,34 @@
 
 import Cocoa
 import PassepartoutCore
+import TunnelKit
 
 class DNSViewController: NSViewController, ProfileCustomization {
-    private struct Templates {
-        static let server = "0.0.0.0"
-
-        static let domain = ""
-    }
-
     @IBOutlet private weak var popupChoice: NSPopUpButton!
     
     @IBOutlet private weak var viewSettings: NSView!
+
+    @IBOutlet private weak var textDNSCustom: NSTextField!
 
     @IBOutlet private weak var viewDNSAddresses: NSView!
     
     @IBOutlet private weak var viewDNSDomains: NSView!
     
+    @IBOutlet private weak var labelDNSProtocol: NSTextField!
+    
+    @IBOutlet private weak var popupDNSProtocol: NSPopUpButton!
+    
     @IBOutlet private var constraintChoiceBottom: NSLayoutConstraint!
     
     @IBOutlet private var constraintSettingsTop: NSLayoutConstraint!
     
+    @IBOutlet private var constraintCustomBottom: NSLayoutConstraint!
+    
+    @IBOutlet private var constraintAddressesBottom: NSLayoutConstraint!
+    
     private lazy var tableDNSDomains: TextTableView = .get()
     
     private lazy var tableDNSAddresses: TextTableView = .get()
-    
-    private lazy var choices = NetworkChoice.choices(for: profile)
     
     private lazy var currentChoice = profile?.networkChoices?.dns ?? ProfileNetworkChoices.with(profile: profile).dns
 
@@ -66,6 +69,8 @@ class DNSViewController: NSViewController, ProfileCustomization {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        labelDNSProtocol.stringValue = L10n.Core.Global.Captions.protocol.asCaption
+
         tableDNSAddresses.title = L10n.App.NetworkSettings.Dns.Cells.Addresses.title.asCaption
         viewDNSAddresses.addSubview(tableDNSAddresses)
         tableDNSAddresses.translatesAutoresizingMaskIntoConstraints = false
@@ -89,21 +94,61 @@ class DNSViewController: NSViewController, ProfileCustomization {
         loadSettings(from: currentChoice)
 
         popupChoice.removeAllItems()
-        for choice in choices {
-            popupChoice.addItem(withTitle: choice.description)
+        popupDNSProtocol.removeAllItems()
+        let menuChoice = NSMenu()
+        var indexOfChoice = 0
+        for (i, choice) in NetworkChoice.choices(for: profile).enumerated() {
+            let item = NSMenuItem(title: choice.description, action: nil, keyEquivalent: "")
+            item.representedObject = choice
+            menuChoice.addItem(item)
             if choice == currentChoice {
-                popupChoice.selectItem(at: popupChoice.numberOfItems - 1)
+                indexOfChoice = i
             }
         }
-        tableDNSAddresses.rowTemplate = Templates.server
-        tableDNSDomains.rowTemplate = Templates.domain
+        popupChoice.menu = menuChoice
+        tableDNSAddresses.rowTemplate = AppConstants.Placeholders.dnsAddress
+        tableDNSDomains.rowTemplate = AppConstants.Placeholders.dnsDomain
+        let menuProtocol = NSMenu()
+        var availableProtocols: [DNSProtocol] = [.plain]
+        if #available(iOS 14, macOS 11, *) {
+            availableProtocols.append(.https)
+            availableProtocols.append(.tls)
+        }
+        var indexOfDNSProtocol = 0
+        for (i, proto) in availableProtocols.enumerated() {
+            let item = NSMenuItem(title: proto.description, action: nil, keyEquivalent: "")
+            item.representedObject = proto
+            menuProtocol.addItem(item)
+            if proto == networkSettings.dnsProtocol {
+                indexOfDNSProtocol = i
+            }
+        }
+        popupChoice.menu = menuChoice
+        popupChoice.selectItem(at: indexOfChoice)
+        popupDNSProtocol.menu = menuProtocol
+        popupDNSProtocol.selectItem(at: indexOfDNSProtocol)
     }
     
     // MARK: Actions
     
     @IBAction private func pickChoice(_ sender: Any?) {
-        let choice = choices[popupChoice.indexOfSelectedItem]
+        guard let choice = popupChoice.selectedItem?.representedObject as? NetworkChoice else {
+            return
+        }
         loadSettings(from: choice)
+
+        delegate?.profileCustomization(self, didUpdateDNS: choice, withManualSettings: networkSettings)
+    }
+
+    @IBAction private func pickProtocol(_ sender: Any?) {
+        guard let choice = popupChoice.selectedItem?.representedObject as? NetworkChoice else {
+            return
+        }
+        guard let proto = popupDNSProtocol.selectedItem?.representedObject as? DNSProtocol else {
+            return
+        }
+        networkSettings.dnsProtocol = proto
+        updateProtocolVisibility()
 
         delegate?.profileCustomization(self, didUpdateDNS: choice, withManualSettings: networkSettings)
     }
@@ -113,7 +158,16 @@ class DNSViewController: NSViewController, ProfileCustomization {
             return
         }
         view.endEditing()
-        networkSettings.dnsServers = tableDNSAddresses.rows
+        switch networkSettings.dnsProtocol {
+        case .https:
+            networkSettings.dnsHTTPSURL = URL(string: textDNSCustom.stringValue)
+
+        case .tls:
+            networkSettings.dnsTLSServerName = textDNSCustom.stringValue
+
+        default:
+            networkSettings.dnsServers = tableDNSAddresses.rows
+        }
         networkSettings.dnsSearchDomains = tableDNSDomains.rows
 
         delegate?.profileCustomization(self, didUpdateDNS: .manual, withManualSettings: networkSettings)
@@ -145,5 +199,30 @@ class DNSViewController: NSViewController, ProfileCustomization {
         constraintChoiceBottom.priority = isServer ? .defaultHigh : .defaultLow
         constraintSettingsTop.priority = isServer ? .defaultLow : .defaultHigh
         viewSettings.isHidden = isServer
+        
+        updateProtocolVisibility()
+    }
+    
+    private func updateProtocolVisibility() {
+        let isCustom: Bool
+        switch networkSettings.dnsProtocol {
+        case .https:
+            isCustom = true
+            textDNSCustom.placeholderString = AppConstants.Placeholders.dohURL
+            textDNSCustom.stringValue = networkSettings.dnsHTTPSURL?.absoluteString ?? ""
+            
+        case .tls:
+            isCustom = true
+            textDNSCustom.placeholderString = AppConstants.Placeholders.dotServerName
+            textDNSCustom.stringValue = networkSettings.dnsTLSServerName ?? ""
+
+        default:
+            isCustom = false
+        }
+
+        constraintCustomBottom.priority = isCustom ? .defaultHigh : .defaultLow
+        constraintAddressesBottom.priority = isCustom ? .defaultLow : .defaultHigh
+        textDNSCustom.isHidden = !isCustom
+        viewDNSAddresses.isHidden = isCustom
     }
 }
