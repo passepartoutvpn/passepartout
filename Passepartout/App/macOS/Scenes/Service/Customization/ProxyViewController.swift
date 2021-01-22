@@ -135,11 +135,7 @@ class ProxyViewController: NSViewController, ProfileCustomization {
         textProxyAddress.stringValue = networkSettings.proxyAddress ?? ""
         textProxyPort.isEnabled = (currentChoice == .manual)
         textProxyPort.stringValue = networkSettings.proxyPort?.description ?? ""
-        tableProxyBypass.rows = networkSettings.proxyBypassDomains ?? []
-        tableProxyBypass.isAddEnabled = (currentChoice == .manual)
-        tableProxyBypass.isRemoveEnabled = false
-        tableProxyBypass.selectedRow = nil
-        tableProxyBypass.reloadData()
+        tableProxyBypass.reset(withRows: networkSettings.proxyBypassDomains ?? [], isAddEnabled: currentChoice == .manual)
 
         let isServer = (currentChoice == .server)
         constraintChoiceBottom.priority = isServer ? .defaultHigh : .defaultLow

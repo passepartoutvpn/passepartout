@@ -36,7 +36,7 @@ class TextTableView: NSView {
     
     var title = ""
 
-    var rows: [String] = []
+    private(set) var rows: [String] = []
 
     var selectedRow: Int? {
         didSet {
@@ -94,6 +94,15 @@ class TextTableView: NSView {
     }
     
     // MARK: Actions
+    
+    func reset(withRows rows: [String], isAddEnabled: Bool) {
+        endEditing()
+        self.rows = rows
+        self.isAddEnabled = isAddEnabled
+        isRemoveEnabled = false
+        selectedRow = nil
+        reloadData()
+    }
     
     func reloadData() {
         tableView.reloadData()

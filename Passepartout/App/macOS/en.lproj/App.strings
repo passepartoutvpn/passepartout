@@ -46,8 +46,8 @@
 "configuration.alerts.commit.buttons.reconnect" = "Reconnect now";
 "configuration.alerts.commit.buttons.skip" = "Skip";
 
-"network_settings.dns.cells.domains.title" = "Domains";
 "network_settings.dns.cells.addresses.title" = "Servers";
+"network_settings.dns.cells.domains.title" = "Domains";
 "network_settings.proxy.cells.bypass_domains.title" = "Bypass domains";
 
 "preferences.title" = "%@ Preferences";

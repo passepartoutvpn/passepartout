@@ -28,18 +28,18 @@ import PassepartoutCore
 
 class DNSViewController: NSViewController, ProfileCustomization {
     private struct Templates {
-        static let domain = ""
-
         static let server = "0.0.0.0"
+
+        static let domain = ""
     }
 
     @IBOutlet private weak var popupChoice: NSPopUpButton!
     
     @IBOutlet private weak var viewSettings: NSView!
 
-    @IBOutlet private weak var viewDNSDomains: NSView!
-    
     @IBOutlet private weak var viewDNSAddresses: NSView!
+    
+    @IBOutlet private weak var viewDNSDomains: NSView!
     
     @IBOutlet private var constraintChoiceBottom: NSLayoutConstraint!
     
@@ -66,16 +66,6 @@ class DNSViewController: NSViewController, ProfileCustomization {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableDNSDomains.title = L10n.App.NetworkSettings.Dns.Cells.Domains.title.asCaption
-        viewDNSDomains.addSubview(tableDNSDomains)
-        tableDNSDomains.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableDNSDomains.topAnchor.constraint(equalTo: viewDNSDomains.topAnchor),
-            tableDNSDomains.bottomAnchor.constraint(equalTo: viewDNSDomains.bottomAnchor),
-            tableDNSDomains.leftAnchor.constraint(equalTo: viewDNSDomains.leftAnchor),
-            tableDNSDomains.rightAnchor.constraint(equalTo: viewDNSDomains.rightAnchor),
-        ])
-        
         tableDNSAddresses.title = L10n.App.NetworkSettings.Dns.Cells.Addresses.title.asCaption
         viewDNSAddresses.addSubview(tableDNSAddresses)
         tableDNSAddresses.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +76,16 @@ class DNSViewController: NSViewController, ProfileCustomization {
             tableDNSAddresses.rightAnchor.constraint(equalTo: viewDNSAddresses.rightAnchor),
         ])
         
+        tableDNSDomains.title = L10n.App.NetworkSettings.Dns.Cells.Domains.title.asCaption
+        viewDNSDomains.addSubview(tableDNSDomains)
+        tableDNSDomains.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableDNSDomains.topAnchor.constraint(equalTo: viewDNSDomains.topAnchor),
+            tableDNSDomains.bottomAnchor.constraint(equalTo: viewDNSDomains.bottomAnchor),
+            tableDNSDomains.leftAnchor.constraint(equalTo: viewDNSDomains.leftAnchor),
+            tableDNSDomains.rightAnchor.constraint(equalTo: viewDNSDomains.rightAnchor),
+        ])
+        
         popupChoice.removeAllItems()
         for choice in choices {
             popupChoice.addItem(withTitle: choice.description)
@@ -93,8 +93,8 @@ class DNSViewController: NSViewController, ProfileCustomization {
                 popupChoice.selectItem(at: popupChoice.numberOfItems - 1)
             }
         }
-        tableDNSDomains.rowTemplate = Templates.domain
         tableDNSAddresses.rowTemplate = Templates.server
+        tableDNSDomains.rowTemplate = Templates.domain
         loadSettings(from: currentChoice)
     }
     
@@ -112,8 +112,8 @@ class DNSViewController: NSViewController, ProfileCustomization {
             return
         }
         view.endEditing()
-        networkSettings.dnsSearchDomains = tableDNSDomains.rows
         networkSettings.dnsServers = tableDNSAddresses.rows
+        networkSettings.dnsSearchDomains = tableDNSDomains.rows
 
         delegate?.profileCustomization(self, didUpdateDNS: .manual, withManualSettings: networkSettings)
     }
@@ -137,17 +137,8 @@ class DNSViewController: NSViewController, ProfileCustomization {
             }
         }
         
-        tableDNSDomains.isEnabled = (currentChoice == .manual)
-        tableDNSDomains.rows = networkSettings.dnsSearchDomains ?? []
-        tableDNSDomains.isRemoveEnabled = false
-        tableDNSDomains.selectedRow = nil
-        tableDNSDomains.reloadData()
-
-        tableDNSAddresses.isAddEnabled = (currentChoice == .manual)
-        tableDNSAddresses.rows = networkSettings.dnsServers ?? []
-        tableDNSAddresses.isRemoveEnabled = false
-        tableDNSAddresses.selectedRow = nil
-        tableDNSAddresses.reloadData()
+        tableDNSAddresses.reset(withRows: networkSettings.dnsServers ?? [], isAddEnabled: currentChoice == .manual)
+        tableDNSDomains.reset(withRows: networkSettings.dnsSearchDomains ?? [], isAddEnabled: currentChoice == .manual)
 
         let isServer = (currentChoice == .server)
         constraintChoiceBottom.priority = isServer ? .defaultHigh : .defaultLow

@@ -165,16 +165,16 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zfd-mA-qV9">
                                         <rect key="frame" x="0.0" y="0.0" width="500" height="330"/>
                                         <subviews>
-                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Baa-Z1-JJJ">
-                                                <rect key="frame" x="150" y="0.0" width="350" height="160"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="160" id="BTk-TZ-Dat"/>
-                                                </constraints>
-                                            </customView>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="L6f-kb-mEG">
                                                 <rect key="frame" x="150" y="170" width="350" height="160"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="160" id="zCq-d8-x9i"/>
+                                                </constraints>
+                                            </customView>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Baa-Z1-JJJ">
+                                                <rect key="frame" x="150" y="0.0" width="350" height="160"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="160" id="BTk-TZ-Dat"/>
                                                 </constraints>
                                             </customView>
                                         </subviews>
@@ -212,8 +212,8 @@
                         <outlet property="constraintChoiceBottom" destination="0mN-72-zeu" id="Lf7-4v-Gae"/>
                         <outlet property="constraintSettingsTop" destination="ymz-zd-mjc" id="sN1-KM-hgC"/>
                         <outlet property="popupChoice" destination="bFA-yD-Roy" id="lYe-Ho-P0K"/>
-                        <outlet property="viewDNSAddresses" destination="Baa-Z1-JJJ" id="Vg5-Ut-Fo8"/>
-                        <outlet property="viewDNSDomains" destination="L6f-kb-mEG" id="kp4-Xa-UhO"/>
+                        <outlet property="viewDNSAddresses" destination="L6f-kb-mEG" id="cbb-T7-MeD"/>
+                        <outlet property="viewDNSDomains" destination="Baa-Z1-JJJ" id="msU-UP-bJZ"/>
                         <outlet property="viewSettings" destination="Zfd-mA-qV9" id="831-9h-AXu"/>
                     </connections>
                 </viewController>
