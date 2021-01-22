@@ -451,12 +451,20 @@ extension NetworkSettingsViewController {
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.leftText = L10n.Core.Global.Captions.protocol
             cell.rightText = (networkSettings.dnsProtocol ?? .fallback)?.description
+            if networkChoices.dns == .manual {
+                cell.accessoryType = .disclosureIndicator
+                cell.isTappable = true
+            } else {
+                cell.accessoryType = .none
+                cell.isTappable = false
+            }
             return cell
             
         case .dnsCustom:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = nil
             cell.field.tag = FieldTag.dnsCustom.rawValue
+            cell.field.isEnabled = (networkChoices.dns == .manual)
             switch networkSettings.dnsProtocol {
             case .https:
                 cell.field.placeholder = AppConstants.Placeholders.dohURL
@@ -646,6 +654,10 @@ extension NetworkSettingsViewController {
             navigationController?.pushViewController(vc, animated: true)
 
         case .dnsProtocol:
+            guard networkChoices.dns == .manual else {
+                break
+            }
+
             let vc = SingleOptionViewController<DNSProtocol>()
             vc.applyTint(.current)
             vc.title = (cell as? SettingTableViewCell)?.leftText

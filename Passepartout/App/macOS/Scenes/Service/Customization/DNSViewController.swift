@@ -192,8 +192,11 @@ class DNSViewController: NSViewController, ProfileCustomization {
             }
         }
         
-        tableDNSAddresses.reset(withRows: networkSettings.dnsServers ?? [], isAddEnabled: currentChoice == .manual)
-        tableDNSDomains.reset(withRows: networkSettings.dnsSearchDomains ?? [], isAddEnabled: currentChoice == .manual)
+        let isManual = (currentChoice == .manual)
+        popupDNSProtocol.isEnabled = isManual
+        textDNSCustom.isEnabled = isManual
+        tableDNSAddresses.reset(withRows: networkSettings.dnsServers ?? [], isAddEnabled: isManual)
+        tableDNSDomains.reset(withRows: networkSettings.dnsSearchDomains ?? [], isAddEnabled: isManual)
 
         let isServer = (currentChoice == .server)
         constraintChoiceBottom.priority = isServer ? .defaultHigh : .defaultLow
@@ -204,16 +207,17 @@ class DNSViewController: NSViewController, ProfileCustomization {
     }
     
     private func updateProtocolVisibility() {
+        let isManual = (currentChoice == .manual)
         let isCustom: Bool
         switch networkSettings.dnsProtocol {
         case .https:
             isCustom = true
-            textDNSCustom.placeholderString = AppConstants.Placeholders.dohURL
+            textDNSCustom.placeholderString = isManual ? AppConstants.Placeholders.dohURL : ""
             textDNSCustom.stringValue = networkSettings.dnsHTTPSURL?.absoluteString ?? ""
             
         case .tls:
             isCustom = true
-            textDNSCustom.placeholderString = AppConstants.Placeholders.dotServerName
+            textDNSCustom.placeholderString = isManual ? AppConstants.Placeholders.dotServerName : ""
             textDNSCustom.stringValue = networkSettings.dnsTLSServerName ?? ""
 
         default:
