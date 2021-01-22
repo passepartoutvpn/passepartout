@@ -53,7 +53,7 @@ class EndpointViewController: NSViewController, ProfileCustomization {
         super.viewDidLoad()
 
         labelAddressCaption.stringValue = L10n.App.Endpoint.Cells.address.asCaption
-        labelProtocolCaption.stringValue = L10n.App.Endpoint.Cells.protocol.asCaption
+        labelProtocolCaption.stringValue = L10n.Core.Global.Captions.protocol.asCaption
 
         popupAddress.removeAllItems()
         for address in dataSource.addresses {

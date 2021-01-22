@@ -31,8 +31,6 @@ internal enum L10n {
       internal enum Cells {
         /// Address
         internal static let address = L10n.tr("App", "endpoint.cells.address")
-        /// Protocol
-        internal static let `protocol` = L10n.tr("App", "endpoint.cells.protocol")
       }
     }
     internal enum Menu {
@@ -529,6 +527,8 @@ internal enum L10n {
         internal static let address = L10n.tr("Core", "global.captions.address")
         /// Port
         internal static let port = L10n.tr("Core", "global.captions.port")
+        /// Protocol
+        internal static let `protocol` = L10n.tr("Core", "global.captions.protocol")
       }
       internal enum Host {
         internal enum TitleInput {

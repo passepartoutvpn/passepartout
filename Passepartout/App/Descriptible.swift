@@ -25,6 +25,7 @@
 
 import Foundation
 import TunnelKit
+import PassepartoutCore
 
 public protocol UIDescriptible {
     var uiDescription: String { get }
@@ -121,5 +122,35 @@ extension OpenVPN.ConfigurationBuilder {
     public var uiDescriptionForRandomizeEndpoint: String {
         let V = L10n.Core.Global.Values.self
         return (randomizeEndpoint ?? false) ? V.enabled : V.disabled
+    }
+}
+
+extension NetworkChoice: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .client:
+            return L10n.Core.NetworkChoice.client
+            
+        case .server:
+            return L10n.Core.NetworkChoice.server
+            
+        case .manual:
+            return L10n.Core.Global.Values.manual
+        }
+    }
+}
+
+extension DNSProtocol: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .plain:
+            return "Cleartext"
+            
+        case .https:
+            return "HTTPS"
+            
+        case .tls:
+            return "TLS"
+        }
     }
 }

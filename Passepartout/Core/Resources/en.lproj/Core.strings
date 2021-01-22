@@ -34,6 +34,7 @@
 
 "global.captions.address" = "Address";
 "global.captions.port" = "Port";
+"global.captions.protocol" = "Protocol";
 
 "global.values.enabled" = "Enabled";
 "global.values.disabled" = "Disabled";

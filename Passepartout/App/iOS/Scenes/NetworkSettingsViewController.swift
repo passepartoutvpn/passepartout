@@ -713,18 +713,3 @@ extension NetworkSettingsViewController: FieldTableViewCellDelegate {
     func fieldCellDidEnter(_: FieldTableViewCell) {
     }
 }
-
-extension NetworkChoice: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case .client:
-            return L10n.Core.NetworkChoice.client
-            
-        case .server:
-            return L10n.Core.NetworkChoice.server
-            
-        case .manual:
-            return L10n.Core.Global.Values.manual
-        }
-    }
-}

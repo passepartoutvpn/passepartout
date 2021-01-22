@@ -39,7 +39,6 @@
 "service.cells.addresses.caption" = "Addresses";
 
 "endpoint.cells.address" = "Address";
-"endpoint.cells.protocol" = "Protocol";
 
 "configuration.title" = "Configuration";
 "configuration.alerts.commit.message" = "New parameters will not be effective until you reconnect manually. Changes in trusted networks will apply immediately.";
