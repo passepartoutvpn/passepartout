@@ -86,6 +86,8 @@ class DNSViewController: NSViewController, ProfileCustomization {
             tableDNSDomains.rightAnchor.constraint(equalTo: viewDNSDomains.rightAnchor),
         ])
         
+        loadSettings(from: currentChoice)
+
         popupChoice.removeAllItems()
         for choice in choices {
             popupChoice.addItem(withTitle: choice.description)
@@ -95,7 +97,6 @@ class DNSViewController: NSViewController, ProfileCustomization {
         }
         tableDNSAddresses.rowTemplate = Templates.server
         tableDNSDomains.rowTemplate = Templates.domain
-        loadSettings(from: currentChoice)
     }
     
     // MARK: Actions

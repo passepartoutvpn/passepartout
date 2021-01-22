@@ -80,6 +80,8 @@ class ProxyViewController: NSViewController, ProfileCustomization {
             tableProxyBypass.rightAnchor.constraint(equalTo: viewProxyBypass.rightAnchor),
         ])
         
+        loadSettings(from: currentChoice)
+
         popupChoice.removeAllItems()
         for choice in choices {
             popupChoice.addItem(withTitle: choice.description)
@@ -88,7 +90,6 @@ class ProxyViewController: NSViewController, ProfileCustomization {
             }
         }
         tableProxyBypass.rowTemplate = Templates.bypass
-        loadSettings(from: currentChoice)
     }
     
     // MARK: Actions
