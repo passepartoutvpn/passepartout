@@ -215,10 +215,11 @@ class StatusMenu: NSObject {
             itemToggleVPN = nil
             itemReconnectVPN = nil
             statusItem.button?.image = imageStatusInactive
+            statusItem.button?.toolTip = nil
             return
         }
-        
-        itemProfileName?.title = service.screenTitle(ProfileKey(profile))
+        let profileTitle = service.screenTitle(ProfileKey(profile))
+        itemProfileName?.title = profileTitle
 //        itemProfileName?.image = profile.image
         
         let needsCredentials = service.needsCredentials(for: profile)
@@ -547,6 +548,12 @@ class StatusMenu: NSObject {
         } else {
             itemToggleVPN?.title = L10n.App.Service.Cells.Vpn.TurnOn.caption
             itemToggleVPN?.action = #selector(enableVPN)
+        }
+        if let profile = service.activeProfile {
+            let profileTitle = service.screenTitle(ProfileKey(profile))
+            statusItem.button?.toolTip = "\(GroupConstants.App.name)\n\(profileTitle)\n\((vpn.status ?? .disconnected).uiDescription)"
+        } else {
+            statusItem.button?.toolTip = nil
         }
 
         switch vpn.status ?? .disconnected {
