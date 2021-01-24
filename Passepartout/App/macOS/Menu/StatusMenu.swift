@@ -555,6 +555,7 @@ class StatusMenu: NSObject {
         } else {
             statusItem.button?.toolTip = nil
         }
+        statusItem.button?.alphaValue = 1.0
 
         switch vpn.status ?? .disconnected {
         case .connected:
@@ -567,6 +568,7 @@ class StatusMenu: NSObject {
 
         case .disconnected:
             statusItem.button?.image = imageStatusInactive
+            statusItem.button?.alphaValue = 0.5
 
         case .disconnecting:
             statusItem.button?.image = imageStatusInProgress
