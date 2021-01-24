@@ -11,11 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Country flags in provider infrastructure menu.
 - Support DNS over HTTPS/TLS in "Network settings". [#91](https://github.com/passepartoutvpn/passepartout-apple/issues/91)
+- Menu tooltip describing active profile and status.
 
 ### Changed
 
 - Rendering of provider infrastructures.
 - Rendering of profile configuration.
+- Color-blind friendly menu icon.
 
 ### Fixed
 
