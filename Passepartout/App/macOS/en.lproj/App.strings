@@ -59,6 +59,7 @@
 "trusted.ethernet.title" = "Trust wired connections";
 "trusted.ethernet.description" = "Check to trust any wired cable connection.";
 
+"menu.show.title" = "Show";
 "menu.switch_profile.title" = "Active profile";
 "menu.active_profile.title.none" = "No active profile";
 "menu.active_profile.items.customize.title" = "Customize...";

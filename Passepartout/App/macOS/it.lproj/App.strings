@@ -59,6 +59,7 @@
 "trusted.ethernet.title" = "Connessioni cablate sicure";
 "trusted.ethernet.description" = "Seleziona per considerare sicura qualsiasi rete cablata.";
 
+"menu.show.title" = "Mostra";
 "menu.switch_profile.title" = "Profilo attivo";
 "menu.active_profile.title.none" = "Nessun profilo attivo";
 "menu.active_profile.items.customize.title" = "Personalizza...";
