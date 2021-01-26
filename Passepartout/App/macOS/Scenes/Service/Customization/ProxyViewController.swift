@@ -33,7 +33,7 @@ class ProxyViewController: NSViewController, ProfileCustomization {
     
     @IBOutlet private weak var popupChoice: NSPopUpButton!
     
-    @IBOutlet private weak var viewSettings: NSView!
+    @IBOutlet private weak var viewSettings: NSStackView!
     
     @IBOutlet private weak var labelProxyCaption: NSTextField!
     
