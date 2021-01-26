@@ -268,6 +268,22 @@ public class AppConstants {
         public static let api = githubRaw(repo: "api")
     }
 
+    public struct Placeholders {
+        public static let empty = ""
+
+        public static let address = "0.0.0.0"
+
+        public static let hostname = "example.com"
+
+        public static let dohURL = "https://example.com/dns-query"
+        
+        public static let dotServerName = hostname
+
+        public static let dnsAddress = address
+
+        public static let dnsDomain = empty
+    }
+
     public struct Credits {
         public static let author = "Davide De Rosa"
 

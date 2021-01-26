@@ -136,14 +136,14 @@
             <objects>
                 <viewController title="DNS" id="mbI-Io-BZh" userLabel="DNS" customClass="DNSViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="We2-9p-1Vt">
-                        <rect key="frame" x="0.0" y="0.0" width="520" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="610" height="467"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zao-dc-fzq">
-                                <rect key="frame" x="0.0" y="20" width="500" height="360"/>
+                                <rect key="frame" x="0.0" y="20" width="590" height="427"/>
                                 <subviews>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bFA-yD-Roy">
-                                        <rect key="frame" x="147" y="336" width="247" height="25"/>
+                                        <rect key="frame" x="147" y="403" width="247" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="euy-38-pqL"/>
                                         </constraints>
@@ -163,28 +163,88 @@
                                         </connections>
                                     </popUpButton>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zfd-mA-qV9">
-                                        <rect key="frame" x="0.0" y="0.0" width="500" height="330"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="590" height="397"/>
                                         <subviews>
-                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="L6f-kb-mEG">
-                                                <rect key="frame" x="150" y="170" width="350" height="160"/>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ef3-Zx-nCS">
+                                                <rect key="frame" x="-2" y="379" width="144" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="PROTO" id="lpP-C3-tYW">
+                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CSz-iK-Imy">
+                                                <rect key="frame" x="147" y="373" width="247" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="160" id="zCq-d8-x9i"/>
+                                                    <constraint firstAttribute="width" constant="240" id="2y9-wd-q0g"/>
                                                 </constraints>
-                                            </customView>
-                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Baa-Z1-JJJ">
-                                                <rect key="frame" x="150" y="0.0" width="350" height="160"/>
+                                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="210-ZR-L2J" id="KD6-ly-ONG">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="Kvm-gz-uaS">
+                                                        <items>
+                                                            <menuItem title="Item 1" state="on" id="210-ZR-L2J"/>
+                                                            <menuItem title="Item 2" id="sVf-le-KwE"/>
+                                                            <menuItem title="Item 3" id="VbS-Rk-gsh"/>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="pickProtocol:" target="mbI-Io-BZh" id="ik0-nd-ODu"/>
+                                                </connections>
+                                            </popUpButton>
+                                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VB1-6I-men">
+                                                <rect key="frame" x="150" y="0.0" width="440" height="357"/>
+                                                <subviews>
+                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oRM-XY-fH6">
+                                                        <rect key="frame" x="0.0" y="336" width="344" height="21"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="pa5-Wv-hRq">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="L6f-kb-mEG">
+                                                        <rect key="frame" x="0.0" y="168" width="440" height="160"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="160" id="zCq-d8-x9i"/>
+                                                        </constraints>
+                                                    </customView>
+                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Baa-Z1-JJJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="440" height="160"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="160" id="BTk-TZ-Dat"/>
+                                                        </constraints>
+                                                    </customView>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="160" id="BTk-TZ-Dat"/>
+                                                    <constraint firstItem="Baa-Z1-JJJ" firstAttribute="leading" secondItem="VB1-6I-men" secondAttribute="leading" id="E4U-iU-57G"/>
+                                                    <constraint firstItem="L6f-kb-mEG" firstAttribute="leading" secondItem="VB1-6I-men" secondAttribute="leading" id="U89-Q1-C6d"/>
+                                                    <constraint firstAttribute="trailing" secondItem="L6f-kb-mEG" secondAttribute="trailing" id="UN9-uj-ZRd"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Baa-Z1-JJJ" secondAttribute="trailing" id="g14-fv-nkI"/>
                                                 </constraints>
-                                            </customView>
+                                                <visibilityPriorities>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                </visibilityPriorities>
+                                                <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                </customSpacing>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Baa-Z1-JJJ" secondAttribute="bottom" id="DZf-vr-lkr"/>
-                                            <constraint firstAttribute="trailing" secondItem="Baa-Z1-JJJ" secondAttribute="trailing" id="Kc3-oq-1nC"/>
-                                            <constraint firstItem="Baa-Z1-JJJ" firstAttribute="leading" secondItem="L6f-kb-mEG" secondAttribute="leading" id="OAq-vY-0dj"/>
-                                            <constraint firstAttribute="trailing" secondItem="L6f-kb-mEG" secondAttribute="trailing" id="Ufy-l9-JnV"/>
-                                            <constraint firstItem="L6f-kb-mEG" firstAttribute="top" secondItem="Zfd-mA-qV9" secondAttribute="top" id="ht1-Z0-GZL"/>
-                                            <constraint firstItem="Baa-Z1-JJJ" firstAttribute="top" secondItem="L6f-kb-mEG" secondAttribute="bottom" constant="10" id="qwn-Pc-7xS"/>
+                                            <constraint firstItem="CSz-iK-Imy" firstAttribute="top" secondItem="Zfd-mA-qV9" secondAttribute="top" id="0rT-Xa-fsr"/>
+                                            <constraint firstItem="ef3-Zx-nCS" firstAttribute="leading" secondItem="Zfd-mA-qV9" secondAttribute="leading" id="9hc-Mm-7v7"/>
+                                            <constraint firstAttribute="trailing" secondItem="VB1-6I-men" secondAttribute="trailing" id="P3L-ud-eD0"/>
+                                            <constraint firstItem="ef3-Zx-nCS" firstAttribute="centerY" secondItem="CSz-iK-Imy" secondAttribute="centerY" id="PLm-Ng-tlW"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CSz-iK-Imy" secondAttribute="trailing" id="Z6g-uk-L7s"/>
+                                            <constraint firstAttribute="bottom" secondItem="VB1-6I-men" secondAttribute="bottom" id="hFM-7e-UdP"/>
+                                            <constraint firstItem="VB1-6I-men" firstAttribute="leading" secondItem="CSz-iK-Imy" secondAttribute="leading" id="lUN-SE-VwO"/>
+                                            <constraint firstItem="CSz-iK-Imy" firstAttribute="leading" secondItem="ef3-Zx-nCS" secondAttribute="trailing" constant="10" id="nOE-xl-CUa"/>
+                                            <constraint firstItem="VB1-6I-men" firstAttribute="top" secondItem="CSz-iK-Imy" secondAttribute="bottom" constant="20" id="zYP-pf-qiS"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
@@ -194,7 +254,7 @@
                                     <constraint firstItem="Zfd-mA-qV9" firstAttribute="leading" secondItem="Zao-dc-fzq" secondAttribute="leading" id="C1K-EU-y2R"/>
                                     <constraint firstItem="bFA-yD-Roy" firstAttribute="leading" secondItem="Zao-dc-fzq" secondAttribute="leading" constant="150" id="DSy-uq-QJd"/>
                                     <constraint firstAttribute="bottom" secondItem="Zfd-mA-qV9" secondAttribute="bottom" id="IoU-2m-d07"/>
-                                    <constraint firstItem="L6f-kb-mEG" firstAttribute="leading" secondItem="bFA-yD-Roy" secondAttribute="leading" id="hqH-9b-APZ"/>
+                                    <constraint firstItem="CSz-iK-Imy" firstAttribute="leading" secondItem="bFA-yD-Roy" secondAttribute="leading" id="lTF-D2-GBG"/>
                                     <constraint firstAttribute="trailing" secondItem="Zfd-mA-qV9" secondAttribute="trailing" id="mkp-8f-ZKo"/>
                                     <constraint firstItem="bFA-yD-Roy" firstAttribute="top" secondItem="Zao-dc-fzq" secondAttribute="top" id="suK-gn-ven"/>
                                     <constraint firstItem="Zfd-mA-qV9" firstAttribute="top" secondItem="bFA-yD-Roy" secondAttribute="bottom" constant="10" id="ymz-zd-mjc"/>
@@ -211,7 +271,10 @@
                     <connections>
                         <outlet property="constraintChoiceBottom" destination="0mN-72-zeu" id="Lf7-4v-Gae"/>
                         <outlet property="constraintSettingsTop" destination="ymz-zd-mjc" id="sN1-KM-hgC"/>
+                        <outlet property="labelDNSProtocol" destination="ef3-Zx-nCS" id="nec-BT-J2J"/>
                         <outlet property="popupChoice" destination="bFA-yD-Roy" id="lYe-Ho-P0K"/>
+                        <outlet property="popupDNSProtocol" destination="CSz-iK-Imy" id="gIh-zq-W3E"/>
+                        <outlet property="textDNSCustom" destination="oRM-XY-fH6" id="rmb-Ue-MZR"/>
                         <outlet property="viewDNSAddresses" destination="L6f-kb-mEG" id="cbb-T7-MeD"/>
                         <outlet property="viewDNSDomains" destination="Baa-Z1-JJJ" id="msU-UP-bJZ"/>
                         <outlet property="viewSettings" destination="Zfd-mA-qV9" id="831-9h-AXu"/>
@@ -219,7 +282,7 @@
                 </viewController>
                 <customObject id="Gxf-Bl-2bj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="579" y="2339"/>
+            <point key="canvasLocation" x="631" y="2362"/>
         </scene>
         <!--Service View Controller-->
         <scene sceneID="5Tf-QF-BT2">

@@ -75,7 +75,13 @@ public class ProfileNetworkSettings: Codable, CustomStringConvertible {
 
     public var gatewayPolicies: [OpenVPN.RoutingPolicy]?
 
+    public var dnsProtocol: DNSProtocol?
+    
     public var dnsServers: [String]?
+    
+    public var dnsHTTPSURL: URL?
+    
+    public var dnsTLSServerName: String?
     
     public var dnsSearchDomains: [String]?
     
@@ -102,8 +108,11 @@ public class ProfileNetworkSettings: Codable, CustomStringConvertible {
     
     public init(from configuration: OpenVPN.Configuration) {
         gatewayPolicies = configuration.routingPolicies
-        dnsSearchDomains = configuration.searchDomains
+        dnsProtocol = configuration.dnsProtocol
         dnsServers = configuration.dnsServers
+        dnsHTTPSURL = configuration.dnsHTTPSURL
+        dnsTLSServerName = configuration.dnsTLSServerName
+        dnsSearchDomains = configuration.searchDomains
         proxyAddress = configuration.httpProxy?.address
         proxyPort = configuration.httpProxy?.port
         proxyAutoConfigurationURL = configuration.proxyAutoConfigurationURL
@@ -123,8 +132,11 @@ public class ProfileNetworkSettings: Codable, CustomStringConvertible {
     }
     
     public func copyDNS(from settings: ProfileNetworkSettings) {
-        dnsSearchDomains = settings.dnsSearchDomains
+        dnsProtocol = settings.dnsProtocol
         dnsServers = settings.dnsServers?.filter { !$0.isEmpty }
+        dnsHTTPSURL = settings.dnsHTTPSURL
+        dnsTLSServerName = settings.dnsTLSServerName
+        dnsSearchDomains = settings.dnsSearchDomains
     }
     
     public func copyProxy(from settings: ProfileNetworkSettings) {
@@ -143,7 +155,7 @@ public class ProfileNetworkSettings: Codable, CustomStringConvertible {
     public var description: String {
         let comps: [String] = [
             "gw: \(gatewayPolicies?.description ?? "")",
-            "dns: {domains: \(dnsSearchDomains?.description ?? "[]"), servers: \(dnsServers?.description ?? "[]")}",
+            "dns: {protocol: \(dnsProtocol ?? .fallback), https: \(dnsHTTPSURL?.absoluteString ?? ""), tls: \(dnsTLSServerName?.description ?? ""), servers: \(dnsServers?.description ?? "[]"), domains: \(dnsSearchDomains?.description ?? "[]")}",
             "proxy: {address: \(proxyAddress ?? ""), port: \(proxyPort?.description ?? ""), PAC: \(proxyAutoConfigurationURL?.absoluteString ?? ""), bypass: \(proxyBypassDomains?.description ?? "[]")}",
             "mtu: {bytes: \(mtuBytes?.description ?? "default")}"
         ]
@@ -171,11 +183,17 @@ extension OpenVPN.ConfigurationBuilder {
             break
             
         case .server:
+            dnsProtocol = nil
             dnsServers = nil
+            dnsHTTPSURL = nil
+            dnsTLSServerName = nil
             searchDomains = nil
 
         case .manual:
+            dnsProtocol = settings.dnsProtocol
             dnsServers = settings.dnsServers?.filter { !$0.isEmpty }
+            dnsHTTPSURL = settings.dnsHTTPSURL
+            dnsTLSServerName = settings.dnsTLSServerName
             searchDomains = settings.dnsSearchDomains
         }
     }
