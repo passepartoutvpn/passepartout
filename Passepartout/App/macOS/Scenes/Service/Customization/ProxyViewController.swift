@@ -41,6 +41,10 @@ class ProxyViewController: NSViewController, ProfileCustomization {
     
     @IBOutlet private weak var textProxyPort: NSTextField!
     
+    @IBOutlet private weak var labelPACCaption: NSTextField!
+    
+    @IBOutlet private weak var textPAC: NSTextField!
+    
     @IBOutlet private weak var viewProxyBypass: NSView!
     
     @IBOutlet private var constraintChoiceBottom: NSLayoutConstraint!
@@ -69,6 +73,8 @@ class ProxyViewController: NSViewController, ProfileCustomization {
         labelProxyCaption.stringValue = L10n.Core.Global.Captions.address.asCaption
         textProxyAddress.placeholderString = L10n.Core.Global.Values.none
         textProxyPort.placeholderString = L10n.Core.Global.Values.none
+        labelPACCaption.stringValue = "PAC".asCaption
+        textPAC.placeholderString = L10n.Core.Global.Values.none
 
         tableProxyBypass.title = L10n.App.NetworkSettings.Proxy.Cells.BypassDomains.title.asCaption
         viewProxyBypass.addSubview(tableProxyBypass)
@@ -108,6 +114,7 @@ class ProxyViewController: NSViewController, ProfileCustomization {
         view.endEditing()
         networkSettings.proxyAddress = textProxyAddress.stringValue
         networkSettings.proxyPort = UInt16(textProxyPort.stringValue)
+        networkSettings.proxyAutoConfigurationURL = URL(string: textPAC.stringValue)
         networkSettings.proxyBypassDomains = tableProxyBypass.rows
 
         delegate?.profileCustomization(self, didUpdateProxy: .manual, withManualSettings: networkSettings)
@@ -136,6 +143,7 @@ class ProxyViewController: NSViewController, ProfileCustomization {
         textProxyAddress.stringValue = networkSettings.proxyAddress ?? ""
         textProxyPort.isEnabled = (currentChoice == .manual)
         textProxyPort.stringValue = networkSettings.proxyPort?.description ?? ""
+        textPAC.stringValue = networkSettings.proxyAutoConfigurationURL?.absoluteString ?? ""
         tableProxyBypass.reset(withRows: networkSettings.proxyBypassDomains ?? [], isAddEnabled: currentChoice == .manual)
 
         let isServer = (currentChoice == .server)

@@ -846,10 +846,10 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="qqg-dj-Man">
-                                <rect key="frame" x="0.0" y="20" width="500" height="221"/>
+                                <rect key="frame" x="0.0" y="20" width="500" height="248"/>
                                 <subviews>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vnw-dm-nrd">
-                                        <rect key="frame" x="147" y="197" width="247" height="25"/>
+                                        <rect key="frame" x="147" y="224" width="247" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="FDY-1Y-fD8"/>
                                         </constraints>
@@ -869,13 +869,13 @@ DQ
                                         </connections>
                                     </popUpButton>
                                     <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3mV-87-Odw">
-                                        <rect key="frame" x="0.0" y="0.0" width="500" height="191"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="500" height="218"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="tWj-MW-BEZ">
-                                                <rect key="frame" x="0.0" y="168" width="500" height="23"/>
+                                                <rect key="frame" x="0.0" y="197" width="500" height="21"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1lz-QY-I4a">
-                                                        <rect key="frame" x="-2" y="4" width="144" height="16"/>
+                                                        <rect key="frame" x="-2" y="3" width="144" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="ADDR" id="YDY-1u-h1f">
                                                             <font key="font" usesAppearanceFont="YES"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -883,7 +883,7 @@ DQ
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="agk-kA-yKN">
-                                                        <rect key="frame" x="150" y="0.0" width="130" height="23"/>
+                                                        <rect key="frame" x="150" y="0.0" width="130" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="130" id="7Ec-rg-RBm"/>
                                                         </constraints>
@@ -897,7 +897,7 @@ DQ
                                                         </connections>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aOI-Xp-liP">
-                                                        <rect key="frame" x="280" y="1" width="60" height="21"/>
+                                                        <rect key="frame" x="280" y="0.0" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="cCA-F4-gRF"/>
                                                         </constraints>
@@ -920,6 +920,38 @@ DQ
                                                     <constraint firstItem="1lz-QY-I4a" firstAttribute="centerY" secondItem="agk-kA-yKN" secondAttribute="centerY" id="k54-yc-nlu"/>
                                                     <constraint firstAttribute="bottom" secondItem="agk-kA-yKN" secondAttribute="bottom" id="snC-1Z-lN8"/>
                                                     <constraint firstItem="agk-kA-yKN" firstAttribute="leading" secondItem="1lz-QY-I4a" secondAttribute="trailing" constant="10" id="wtb-VQ-9g1"/>
+                                                </constraints>
+                                            </customView>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="05W-SY-nBT">
+                                                <rect key="frame" x="0.0" y="168" width="500" height="21"/>
+                                                <subviews>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rfk-wd-ga6">
+                                                        <rect key="frame" x="-2" y="3" width="144" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="PAC" id="qRf-g6-q2o">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nI3-NZ-lhx">
+                                                        <rect key="frame" x="150" y="0.0" width="350" height="21"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="http://" drawsBackground="YES" id="ACk-Rx-UfP">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="GKB-5a-YDj" id="xWZ-Zl-mke"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="nI3-NZ-lhx" firstAttribute="leading" secondItem="rfk-wd-ga6" secondAttribute="trailing" constant="10" id="F3J-CD-5P0"/>
+                                                    <constraint firstItem="nI3-NZ-lhx" firstAttribute="top" secondItem="05W-SY-nBT" secondAttribute="top" id="MZB-Ad-wlv"/>
+                                                    <constraint firstItem="rfk-wd-ga6" firstAttribute="centerY" secondItem="nI3-NZ-lhx" secondAttribute="centerY" id="Nse-If-ETf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="nI3-NZ-lhx" secondAttribute="trailing" id="iro-wk-mXF"/>
+                                                    <constraint firstItem="rfk-wd-ga6" firstAttribute="leading" secondItem="05W-SY-nBT" secondAttribute="leading" id="mtB-EX-7Qn"/>
+                                                    <constraint firstAttribute="bottom" secondItem="nI3-NZ-lhx" secondAttribute="bottom" id="os3-8Y-l1x"/>
                                                 </constraints>
                                             </customView>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="lIW-gM-F4p">
@@ -946,12 +978,16 @@ DQ
                                             <constraint firstItem="tWj-MW-BEZ" firstAttribute="top" secondItem="3mV-87-Odw" secondAttribute="top" id="MsT-lY-mAK"/>
                                             <constraint firstAttribute="bottom" secondItem="lIW-gM-F4p" secondAttribute="bottom" id="OxC-ah-XcI"/>
                                             <constraint firstAttribute="trailing" secondItem="lIW-gM-F4p" secondAttribute="trailing" id="d9m-id-d4S"/>
+                                            <constraint firstAttribute="trailing" secondItem="05W-SY-nBT" secondAttribute="trailing" id="pOz-xh-2P0"/>
+                                            <constraint firstItem="nI3-NZ-lhx" firstAttribute="leading" secondItem="agk-kA-yKN" secondAttribute="leading" id="xwK-NG-dQq"/>
                                         </constraints>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
@@ -980,8 +1016,10 @@ DQ
                     <connections>
                         <outlet property="constraintChoiceBottom" destination="ZkX-Fo-kl8" id="KC2-KB-4oq"/>
                         <outlet property="constraintSettingsTop" destination="poK-LR-Sgw" id="CUq-FG-BkY"/>
+                        <outlet property="labelPACCaption" destination="rfk-wd-ga6" id="qhK-yK-7G9"/>
                         <outlet property="labelProxyCaption" destination="1lz-QY-I4a" id="oO6-ZW-JNA"/>
                         <outlet property="popupChoice" destination="Vnw-dm-nrd" id="JGo-RJ-2Ai"/>
+                        <outlet property="textPAC" destination="nI3-NZ-lhx" id="Rsv-bV-Aiz"/>
                         <outlet property="textProxyAddress" destination="agk-kA-yKN" id="2WJ-8v-kCy"/>
                         <outlet property="textProxyPort" destination="aOI-Xp-liP" id="5Wx-Ux-Fk2"/>
                         <outlet property="viewProxyBypass" destination="OXH-cq-bhS" id="m81-Wt-AtR"/>
@@ -1358,7 +1396,7 @@ DQ
         <scene sceneID="rnS-Xr-j1E">
             <objects>
                 <viewController title="MTU" id="0rP-u0-K0y" customClass="MTUViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="fcz-Gl-uf2">
+                    <view key="view" id="fcz-Gl-uf2">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="90"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
