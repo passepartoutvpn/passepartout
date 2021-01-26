@@ -84,12 +84,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+//        TransientStore.shared.service.preferences.confirmsQuit = true
+        guard TransientStore.shared.service.preferences.confirmsQuit ?? true else {
+            return .terminateNow
+        }
         let alert = Macros.warning(
             L10n.App.Menu.Quit.title(GroupConstants.App.name),
             L10n.App.Menu.Quit.Messages.confirm
         )
-        guard alert.presentModally(withOK: L10n.Core.Global.ok, cancel: L10n.Core.Global.cancel) else {
+        switch alert.presentModallyEx(withOK: L10n.Core.Global.ok, other1: L10n.Core.Global.cancel, other2: L10n.Core.Reddit.Buttons.never) {
+        case .alertSecondButtonReturn:
             return .terminateCancel
+
+        case .alertThirdButtonReturn:
+            TransientStore.shared.service.preferences.confirmsQuit = false
+            break
+
+        default:
+            break
         }
         return .terminateNow
     }
