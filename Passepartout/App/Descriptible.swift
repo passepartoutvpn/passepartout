@@ -154,3 +154,21 @@ extension DNSProtocol: CustomStringConvertible {
         }
     }
 }
+
+extension VPNStatus: UIDescriptible {
+    public var uiDescription: String {
+        switch self {
+        case .connecting:
+            return L10n.Core.Vpn.connecting
+            
+        case .connected:
+            return L10n.Core.Vpn.active
+            
+        case .disconnecting:
+            return L10n.Core.Vpn.disconnecting
+            
+        case .disconnected:
+            return L10n.Core.Vpn.inactive
+        }
+    }
+}
