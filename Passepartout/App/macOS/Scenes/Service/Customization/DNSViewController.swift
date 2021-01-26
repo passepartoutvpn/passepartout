@@ -46,10 +46,6 @@ class DNSViewController: NSViewController, ProfileCustomization {
     
     @IBOutlet private var constraintSettingsTop: NSLayoutConstraint!
     
-    @IBOutlet private var constraintCustomBottom: NSLayoutConstraint!
-    
-    @IBOutlet private var constraintAddressesBottom: NSLayoutConstraint!
-    
     private lazy var tableDNSDomains: TextTableView = .get()
     
     private lazy var tableDNSAddresses: TextTableView = .get()
@@ -208,25 +204,22 @@ class DNSViewController: NSViewController, ProfileCustomization {
     
     private func updateProtocolVisibility() {
         let isManual = (currentChoice == .manual)
-        let isCustom: Bool
         switch networkSettings.dnsProtocol {
         case .https:
-            isCustom = true
             textDNSCustom.placeholderString = isManual ? AppConstants.Placeholders.dohURL : ""
             textDNSCustom.stringValue = networkSettings.dnsHTTPSURL?.absoluteString ?? ""
-            
+            textDNSCustom.isHidden = false
+            viewDNSAddresses.isHidden = true
+
         case .tls:
-            isCustom = true
             textDNSCustom.placeholderString = isManual ? AppConstants.Placeholders.dotServerName : ""
             textDNSCustom.stringValue = networkSettings.dnsTLSServerName ?? ""
+            textDNSCustom.isHidden = false
+            viewDNSAddresses.isHidden = false
 
         default:
-            isCustom = false
+            textDNSCustom.isHidden = true
+            viewDNSAddresses.isHidden = false
         }
-
-        constraintCustomBottom.priority = isCustom ? .defaultHigh : .defaultLow
-        constraintAddressesBottom.priority = isCustom ? .defaultLow : .defaultHigh
-        textDNSCustom.isHidden = !isCustom
-        viewDNSAddresses.isHidden = isCustom
     }
 }
