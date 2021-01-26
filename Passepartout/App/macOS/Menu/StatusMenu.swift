@@ -109,22 +109,15 @@ class StatusMenu: NSObject {
     private func rebuild() {
         menu.removeAllItems()
 
-        // main windows
-        
-        let itemAbout = NSMenuItem(title: L10n.Core.Organizer.Cells.About.caption(GroupConstants.App.name), action: #selector(showAbout), keyEquivalent: "")
-        let itemOrganizer = NSMenuItem(title: L10n.App.Menu.Organizer.title.asContinuation, action: #selector(showOrganizer), keyEquivalent: "o")
+        // main actions
+
+        let itemShow = NSMenuItem(title: L10n.App.Menu.Show.title, action: #selector(showOrganizer), keyEquivalent: "")
         let itemPreferences = NSMenuItem(title: L10n.App.Menu.Preferences.title.asContinuation, action: #selector(showPreferences), keyEquivalent: ",")
-        itemAbout.target = self
-        itemOrganizer.target = self
-        itemPreferences.target = self
-        menu.addItem(itemAbout)
-        menu.addItem(itemOrganizer)
-        menu.addItem(itemPreferences)
-        menu.addItem(.separator())
-        
-        // profiles
-        
         itemSwitchProfile = NSMenuItem(title: L10n.App.Menu.SwitchProfile.title, action: nil, keyEquivalent: "")
+        itemShow.target = self
+        itemPreferences.target = self
+        menu.addItem(itemShow)
+        menu.addItem(itemPreferences)
         menu.addItem(itemSwitchProfile!)
         reloadProfiles()
         menu.addItem(.separator())
@@ -135,7 +128,7 @@ class StatusMenu: NSObject {
         menu.addItem(itemProfileName!)
         setActiveProfile(service.activeProfile)
         menu.addItem(.separator())
-        
+
         // support
         
         let menuSupport = NSMenu()
@@ -167,10 +160,13 @@ class StatusMenu: NSObject {
         menu.addItem(itemSupport)
         menu.addItem(.separator())
 
-        // quit
+        // secondary
         
+        let itemAbout = NSMenuItem(title: L10n.Core.Organizer.Cells.About.caption(GroupConstants.App.name), action: #selector(showAbout), keyEquivalent: "")
         let itemQuit = NSMenuItem(title: L10n.App.Menu.Quit.title(GroupConstants.App.name), action: #selector(quit), keyEquivalent: "q")
+        itemAbout.target = self
         itemQuit.target = self
+        menu.addItem(itemAbout)
         menu.addItem(itemQuit)
     }
     
@@ -309,8 +305,8 @@ class StatusMenu: NSObject {
             for category in infrastructure.categories {
                 let title = category.name.isEmpty ? L10n.Core.Global.Values.default : category.name.capitalized
                 let submenu = NSMenu()
-                let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-                item.indentationLevel = 1
+                let itemCategory = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+                itemCategory.indentationLevel = 1
                 
                 for group in category.groups.sorted() {
                     let title = group.localizedCountry
@@ -332,6 +328,7 @@ class StatusMenu: NSObject {
                         submenuGroup.addItem(item)
 
                         if pool.id == providerProfile.poolId {
+                            itemCategory.state = .on
                             itemGroup.state = .on
                             item.state = .on
                         }
@@ -343,10 +340,10 @@ class StatusMenu: NSObject {
 
                     submenu.addItem(itemGroup)
                 }
-                menu.setSubmenu(submenu, for: item)
-                menu.insertItem(item, at: i)
+                menu.setSubmenu(submenu, for: itemCategory)
+                menu.insertItem(itemCategory, at: i)
                 i += 1
-                itemsProfile.append(item)
+                itemsProfile.append(itemCategory)
             }
         } else {
 
@@ -388,7 +385,7 @@ class StatusMenu: NSObject {
         let preferences = StoryboardScene.Preferences.initialScene.instantiate()
         organizer?.contentViewController?.presentAsModalWindow(preferences)
     }
-    
+
     @objc private func switchActiveProfile(_ sender: Any?) {
         guard let item = sender as? NSMenuItem else {
             return

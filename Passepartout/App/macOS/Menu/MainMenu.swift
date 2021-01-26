@@ -27,9 +27,8 @@ import Cocoa
 
 class MainMenu: NSObject {
     @IBAction private func showPreferences(_ sender: Any?) {
-        guard let vc = NSApp.mainWindow?.contentViewController else {
-            return
-        }
-        vc.presentAsModalWindow(StoryboardScene.Preferences.initialScene.instantiate())
+        let organizer = WindowManager.shared.showOrganizer()
+        let preferences = StoryboardScene.Preferences.initialScene.instantiate()
+        organizer?.contentViewController?.presentAsModalWindow(preferences)
     }
 }

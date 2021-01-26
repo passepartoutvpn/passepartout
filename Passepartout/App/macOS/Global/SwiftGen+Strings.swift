@@ -70,6 +70,10 @@ internal enum L10n {
           internal static let confirm = L10n.tr("App", "menu.quit.messages.confirm")
         }
       }
+      internal enum Show {
+        /// Show
+        internal static let title = L10n.tr("App", "menu.show.title")
+      }
       internal enum Support {
         /// Support
         internal static let title = L10n.tr("App", "menu.support.title")
