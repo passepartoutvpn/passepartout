@@ -841,8 +841,8 @@ DQ
         <scene sceneID="lCI-lq-aRn">
             <objects>
                 <viewController title="PROXY" id="GKB-5a-YDj" userLabel="PROXY" customClass="ProxyViewController" customModule="Passepartout" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="0vU-UL-a3L">
-                        <rect key="frame" x="0.0" y="0.0" width="520" height="261"/>
+                    <view key="view" id="0vU-UL-a3L">
+                        <rect key="frame" x="0.0" y="0.0" width="520" height="288"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="qqg-dj-Man">
