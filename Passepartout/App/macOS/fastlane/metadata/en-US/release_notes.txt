@@ -1,1 +1,16 @@
+### Added
+
+- Country flags in provider infrastructure menu.
+- Support DNS over HTTPS/TLS in "Network settings".
+- Menu tooltip describing active profile and status.
+
+### Changed
+
+- Rendering of provider infrastructures.
+- Rendering of profile configuration.
+- Color-blind friendly menu icon.
+
+### Fixed
+
+- Provider infrastructure selectors not reloaded on profile change.
 
