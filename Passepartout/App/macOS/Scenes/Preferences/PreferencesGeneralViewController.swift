@@ -32,6 +32,10 @@ class PreferencesGeneralViewController: NSViewController {
 
     @IBOutlet private weak var labelLaunchOnLogin: NSTextField!
 
+    @IBOutlet private weak var checkConfirmQuit: NSButton!
+
+    @IBOutlet private weak var labelConfirmQuit: NSTextField!
+
     @IBOutlet private weak var checkResolveHostname: NSButton!
 
     @IBOutlet private weak var labelResolveHostname: NSTextField!
@@ -43,10 +47,13 @@ class PreferencesGeneralViewController: NSViewController {
         
         checkLaunchOnLogin.title = L10n.App.Preferences.Cells.LaunchesOnLogin.caption
         labelLaunchOnLogin.stringValue = L10n.App.Preferences.Cells.LaunchesOnLogin.footer
+        checkConfirmQuit.title = L10n.App.Preferences.Cells.ConfirmQuit.caption
+        labelConfirmQuit.stringValue = L10n.App.Preferences.Cells.ConfirmQuit.footer
         checkResolveHostname.title = L10n.Core.Service.Cells.VpnResolvesHostname.caption
         labelResolveHostname.stringValue = L10n.Core.Service.Sections.VpnResolvesHostname.footer
         
         checkLaunchOnLogin.state = (service.preferences.launchesOnLogin ?? true) ? .on : .off
+        checkConfirmQuit.state = (service.preferences.confirmsQuit ?? true) ? .on : .off
         checkResolveHostname.state = service.preferences.resolvesHostname ? .on : .off
     }
     
@@ -59,6 +66,10 @@ class PreferencesGeneralViewController: NSViewController {
     @IBAction private func toggleLaunchesOnLogin(_ sender: Any?) {
         service.preferences.launchesOnLogin = (checkLaunchOnLogin.state == .on)
         SMLoginItemSetEnabled(AppConstants.App.appLauncherId as CFString, service.preferences.launchesOnLogin ?? true)
+    }
+
+    @IBAction private func toggleConfirmQuit(_ sender: Any?) {
+        service.preferences.confirmsQuit = (checkConfirmQuit.state == .on)
     }
 
     @IBAction private func toggleResolvesHostname(_ sender: Any?) {

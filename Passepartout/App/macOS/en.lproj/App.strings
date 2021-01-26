@@ -54,6 +54,8 @@
 "preferences.sections.general.header" = "General";
 "preferences.cells.launches_on_login.caption" = "Launch on login";
 "preferences.cells.launches_on_login.footer" = "Check to automatically launch the app on boot or login.";
+"preferences.cells.confirm_quit.caption" = "Confirm quit";
+"preferences.cells.confirm_quit.footer" = "Check to present a quit confirmation alert.";
 
 "trusted.columns.trust.title" = "Trust";
 "trusted.ethernet.title" = "Trust wired connections";

@@ -141,6 +141,12 @@ internal enum L10n {
         return L10n.tr("App", "preferences.title", String(describing: p1))
       }
       internal enum Cells {
+        internal enum ConfirmQuit {
+          /// Confirm quit
+          internal static let caption = L10n.tr("App", "preferences.cells.confirm_quit.caption")
+          /// Check to skip quit confirmation alert.
+          internal static let footer = L10n.tr("App", "preferences.cells.confirm_quit.footer")
+        }
         internal enum LaunchesOnLogin {
           /// Launch on login
           internal static let caption = L10n.tr("App", "preferences.cells.launches_on_login.caption")
