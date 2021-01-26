@@ -305,8 +305,8 @@ class StatusMenu: NSObject {
             for category in infrastructure.categories {
                 let title = category.name.isEmpty ? L10n.Core.Global.Values.default : category.name.capitalized
                 let submenu = NSMenu()
-                let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-                item.indentationLevel = 1
+                let itemCategory = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+                itemCategory.indentationLevel = 1
                 
                 for group in category.groups.sorted() {
                     let title = group.localizedCountry
@@ -328,6 +328,7 @@ class StatusMenu: NSObject {
                         submenuGroup.addItem(item)
 
                         if pool.id == providerProfile.poolId {
+                            itemCategory.state = .on
                             itemGroup.state = .on
                             item.state = .on
                         }
@@ -339,10 +340,10 @@ class StatusMenu: NSObject {
 
                     submenu.addItem(itemGroup)
                 }
-                menu.setSubmenu(submenu, for: item)
-                menu.insertItem(item, at: i)
+                menu.setSubmenu(submenu, for: itemCategory)
+                menu.insertItem(itemCategory, at: i)
                 i += 1
-                itemsProfile.append(item)
+                itemsProfile.append(itemCategory)
             }
         } else {
 
