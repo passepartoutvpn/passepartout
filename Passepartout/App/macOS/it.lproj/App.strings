@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/21/19.
-//  Copyright (c) 2019 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2021 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -25,6 +25,7 @@
 
 "vpn.unused" = "Spento";
 
+"organizer.title" = "%@";
 "organizer.menus.provider" = "Provider";
 "organizer.menus.provider.unavailable" = "Nessun altro provider disponibile";
 "organizer.menus.host" = "Host";
@@ -41,11 +42,29 @@
 "endpoint.cells.protocol" = "Protocollo";
 
 "configuration.title" = "Configurazione";
+"configuration.alerts.commit.message" = "I nuovi parametri non saranno effettivi finché non ti riconnetti manualmente. I cambi nelle reti sicure saranno applicati immediatamente.";
+"configuration.alerts.commit.buttons.reconnect" = "Riconnetti adesso";
+"configuration.alerts.commit.buttons.skip" = "Ignora";
 
+"network_settings.dns.cells.domains.title" = "Dominii";
 "network_settings.dns.cells.addresses.title" = "Server";
 "network_settings.proxy.cells.bypass_domains.title" = "Dominii ignorati";
 
-"preferences.title" = "Preferenze";
+"preferences.title" = "Preferenze %@";
 "preferences.sections.general.header" = "Generale";
+"preferences.cells.launches_on_login.caption" = "Apri al login";
+"preferences.cells.launches_on_login.footer" = "Seleziona per aprire automaticamente l'app all'avvio o al login.";
 
 "trusted.columns.trust.title" = "Sicura";
+"trusted.ethernet.title" = "Connessioni cablate sicure";
+"trusted.ethernet.description" = "Seleziona per considerare sicura qualsiasi rete cablata.";
+
+"menu.switch_profile.title" = "Profilo attivo";
+"menu.active_profile.title.none" = "Nessun profilo attivo";
+"menu.active_profile.items.customize.title" = "Personalizza...";
+"menu.active_profile.messages.missing_credentials" = "Nessun account configurato";
+"menu.organizer.title" = "Organizer";
+"menu.preferences.title" = "Preferenze";
+"menu.support.title" = "Supporto";
+"menu.quit.title" = "Esci da %@";
+"menu.quit.messages.confirm" = "La VPN, se abilitata, continuerà ad essere attiva in background. Vuoi comunque uscire?";

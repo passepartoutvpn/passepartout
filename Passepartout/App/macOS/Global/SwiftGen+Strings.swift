@@ -31,6 +31,8 @@ internal enum L10n {
       internal enum Cells {
         /// Address
         internal static let address = L10n.tr("App", "endpoint.cells.address")
+        /// Protocol
+        internal static let `protocol` = L10n.tr("App", "endpoint.cells.protocol")
       }
     }
     internal enum Menu {
