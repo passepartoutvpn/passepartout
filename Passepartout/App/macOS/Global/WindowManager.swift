@@ -37,11 +37,7 @@ class WindowManager: NSObject {
     }
     
     @discardableResult func showOrganizer() -> NSWindowController? {
-        organizer = presentWindowController(
-            StoryboardScene.Main.organizerWindowController,
-            existing: organizer,
-            title: L10n.App.Organizer.title(GroupConstants.App.name)
-        )
+        organizer = presentWindowController(StoryboardScene.Main.organizerWindowController, existing: organizer)
         return organizer
     }
     
@@ -61,11 +57,10 @@ class WindowManager: NSObject {
 
     // MARK: Helpers
 
-    private func presentWindowController(_ wcScene: SceneType<NSWindowController>, existing: NSWindowController?, title: String) -> NSWindowController? {
+    private func presentWindowController(_ wcScene: SceneType<NSWindowController>, existing: NSWindowController?) -> NSWindowController? {
         var wc: NSWindowController?
         if existing == nil {
             wc = wcScene.instantiate()
-            wc?.window?.title = title
             wc?.window?.delegate = self
             wc?.window?.center()
             wc?.showWindow(nil)
