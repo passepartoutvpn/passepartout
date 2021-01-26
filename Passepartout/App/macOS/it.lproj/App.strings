@@ -50,10 +50,12 @@
 "network_settings.dns.cells.addresses.title" = "Server";
 "network_settings.proxy.cells.bypass_domains.title" = "Dominii ignorati";
 
-"preferences.title" = "Preferenze %@";
+"preferences.title" = "Preferenze";
 "preferences.sections.general.header" = "Generale";
 "preferences.cells.launches_on_login.caption" = "Apri al login";
 "preferences.cells.launches_on_login.footer" = "Seleziona per aprire automaticamente l'app all'avvio o al login.";
+"preferences.cells.confirm_quit.caption" = "Conferma uscita";
+"preferences.cells.confirm_quit.footer" = "Seleziona per confermare l'uscita dall'applicazione.";
 
 "trusted.columns.trust.title" = "Sicura";
 "trusted.ethernet.title" = "Connessioni cablate sicure";

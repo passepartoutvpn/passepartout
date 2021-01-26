@@ -45,7 +45,7 @@ class WindowManager: NSObject {
 //        preferences = presentWindowController(
 //            StoryboardScene.Preferences.initialScene.instantiate(),
 //            existing: preferences,
-//            title: L10n.App.Preferences.title(GroupConstants.App.name)
+//            title: L10n.App.Preferences.title
 //        )
 //        return preferences
 //    }

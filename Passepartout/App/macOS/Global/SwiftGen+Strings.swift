@@ -136,11 +136,15 @@ internal enum L10n {
       }
     }
     internal enum Preferences {
-      /// %@ Preferences
-      internal static func title(_ p1: Any) -> String {
-        return L10n.tr("App", "preferences.title", String(describing: p1))
-      }
+      /// Preferences
+      internal static let title = L10n.tr("App", "preferences.title")
       internal enum Cells {
+        internal enum ConfirmQuit {
+          /// Confirm quit
+          internal static let caption = L10n.tr("App", "preferences.cells.confirm_quit.caption")
+          /// Check to present a quit confirmation alert.
+          internal static let footer = L10n.tr("App", "preferences.cells.confirm_quit.footer")
+        }
         internal enum LaunchesOnLogin {
           /// Launch on login
           internal static let caption = L10n.tr("App", "preferences.cells.launches_on_login.caption")

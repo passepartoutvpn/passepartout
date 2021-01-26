@@ -28,6 +28,8 @@ import Foundation
 public protocol Preferences {
     var launchesOnLogin: Bool? { get }
     
+    var confirmsQuit: Bool? { get }
+    
     var resolvesHostname: Bool { get }
     
     var disconnectsOnSleep: Bool { get }
@@ -35,6 +37,8 @@ public protocol Preferences {
 
 public class EditablePreferences: Preferences, Codable {
     public var launchesOnLogin: Bool? = false
+    
+    public var confirmsQuit: Bool? = true
 
     public var resolvesHostname: Bool = true
     

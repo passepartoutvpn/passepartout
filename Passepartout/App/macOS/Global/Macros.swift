@@ -74,14 +74,18 @@ extension NSAlert {
     }
 
     func presentModally(withOK okTitle: String, cancel cancelTitle: String?, dummy dummyTitle: String? = nil) -> Bool {
+        return presentModallyEx(withOK: okTitle, other1: cancelTitle, other2: dummyTitle) == .alertFirstButtonReturn
+    }
+
+    func presentModallyEx(withOK okTitle: String, other1 other1Title: String?, other2 other2Title: String? = nil) -> NSApplication.ModalResponse {
         addButton(withTitle: okTitle)
-        if let cancelTitle = cancelTitle {
-            addButton(withTitle: cancelTitle)
+        if let other1Title = other1Title {
+            addButton(withTitle: other1Title)
         }
-        if let dummyTitle = dummyTitle {
-            addButton(withTitle: dummyTitle)
+        if let other2Title = other2Title {
+            addButton(withTitle: other2Title)
         }
-        return runModal() == .alertFirstButtonReturn
+        return runModal()
     }
 }
 
