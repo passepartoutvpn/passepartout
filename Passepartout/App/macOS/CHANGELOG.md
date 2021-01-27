@@ -9,8 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Country flags in provider infrastructure menu.
+- Support `--data-ciphers` from OpenVPN 2.5 [tunnelkit#193](https://github.com/passepartoutvpn/tunnelkit/issues/193)
 - Support DNS over HTTPS/TLS in "Network settings". [#91](https://github.com/passepartoutvpn/passepartout-apple/issues/91)
+- Country flags in provider infrastructure menu.
 - Menu tooltip describing active profile and status.
 - Make "Confirm quit" a preference.
 
@@ -23,7 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Provider infrastructure selectors not reloaded on profile change.
-- Missing PAC URL in proxy settings on macOS.
+- Missing PAC URL in proxy settings.
+- Redundant keychain items.
 
 ## 1.0.0 (2021-01-01)
 
