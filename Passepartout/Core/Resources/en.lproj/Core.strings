@@ -85,7 +85,7 @@
 
 "share.message" = "Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS";
 
-//////////////////////
+// ////////////////////
 
 "organizer.sections.twitch.header" = "Twitch";
 "organizer.sections.twitch.footer" = "Come watch me make Passepartout live on Twitch, join the chat to interact and contribute!";

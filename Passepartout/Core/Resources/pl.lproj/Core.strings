@@ -30,16 +30,17 @@
 "global.host.title_input.message" = "Akceptowane są znaki alfanumeryczne i pauza \"-\", podkreślenie \"_\" oraz kropka \".\".";
 "global.host.title_input.placeholder" = "Mój profil";
 "global.email_not_configured" = "Adres e-mail nie jest skonfigurowany.";
+"global.values.default" = "Default";
 
 "global.captions.address" = "Adres";
 "global.captions.port" = "Port";
+"global.captions.protocol" = "Protokół";
 
 "global.values.enabled" = "Włączony";
 "global.values.disabled" = "Wyłączony";
 "global.values.none" = "Brak";
 "global.values.automatic" = "Automatycznie";
 "global.values.manual" = "Ręcznie";
-"global.values.default" = "Default";
 
 "reddit.title" = "Reddit";
 "reddit.message" = "Wiedziałeś/łaś, że Passepartout ma swój subreddit? Subskrybuj dla aktualizacji, dyskusji o funkcjonalności, nowych platformach lub o czymkolwiek zechcesz.\n\nTo również świetny sposób na okazanie zainteresowania projektem.";
@@ -84,7 +85,7 @@
 
 "share.message" = "Passepartout to klient OpenVPN, przyjazny użytkownikowi, open-source, stworzony dla iOS i macOS";
 
-//////////////////////
+// ////////////////////
 
 "organizer.sections.twitch.header" = "Twitch";
 "organizer.sections.twitch.footer" = "Przyjdź i zobacz, jak tworzę Passepartout na żywo na Twitchu, dołącz do czatu, aby współdziałać i udzielać się!";
@@ -124,6 +125,7 @@
 "service.sections.trusted.footer" = "Kiedy urządzenie łączy się z zaufaną siecią, VPN jest wyłączane. Wyłącz tę opcję żeby nie wymuszać takiego zachowania.";
 "service.sections.diagnostics.header" = "Diagnostyka";
 "service.sections.diagnostics.footer" = "Status maskowania będzie widoczny po ponownym połączeniu. Dane połączenia to nazwy hostów, adresy IP, routing, SSID. Loginy i klucze prywatne nie są zapisywane.";
+"service.cells.use_profile.caption" = "Używaj tego profilu";
 "service.cells.connection_status.caption" = "Status";
 "service.cells.provider.pool.caption" = "Lokalizacja";
 "service.cells.provider.preset.caption" = "Preset";
@@ -267,4 +269,3 @@
 "credits.sections.translations.header" = "Tłumaczenia";
 
 "label.license.error" = "Nie udało się pobrać danych licencyjnych.";
-"service.cells.use_profile.caption" = "Używaj tego profilu";

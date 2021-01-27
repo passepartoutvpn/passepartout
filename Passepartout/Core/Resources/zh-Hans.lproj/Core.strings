@@ -30,23 +30,30 @@
 "global.host.title_input.message" = "可输入的字符为字母、数字以及破折号\"-\"，下划线\"_\"和点\".\"。";
 "global.host.title_input.placeholder" = "我的配置";
 "global.email_not_configured" = "未配置e-mail账户。";
+"global.values.default" = "默认";
+
 "global.captions.address" = "地址";
 "global.captions.port" = "端口";
+"global.captions.protocol" = "协议";
+
 "global.values.enabled" = "已启用";
 "global.values.disabled" = "未启用";
 "global.values.none" = "无";
 "global.values.automatic" = "自动设置";
 "global.values.manual" = "手动设置";
+
 "reddit.title" = "Reddit";
 "reddit.message" = "你知道Passepartout有一个subreddit吗？可以在上面讨论更新、问题、功能、新的平台等n任何你想要的。\n\n这同样是表达你对此项目关注的地方。";
 "reddit.buttons.subscribe" = "立即订阅!";
 "reddit.buttons.remind" = "稍后提醒我";
 "reddit.buttons.never" = "不要再问";
+
 "vpn.connecting" = "连接中";
 "vpn.active" = "活动的";
 "vpn.disconnecting" = "断开中";
 "vpn.inactive" = "不活动";
 "vpn.disabled" = "未启用";
+
 "vpn.errors.timeout" = "超时";
 "vpn.errors.dns" = "DNS解析失败";
 "vpn.errors.auth" = "身份验证失败";
@@ -57,6 +64,7 @@
 "vpn.errors.routing" = "缺少路由";
 "vpn.errors.gateway" = "无网关";
 "vpn.errors.shutdown" = "服务器关闭";
+
 "parsed_file.alerts.malformed.message" = "此配置文件包含格式错误的选项(%@)。";
 "parsed_file.alerts.missing.message" = "此配置文件缺少必须的选项(%@)。";
 "parsed_file.alerts.unsupported.message" = "此配置文件包含不支持的选项(%@)。";
@@ -65,13 +73,22 @@
 "parsed_file.alerts.decryption.message" = "该配置包含加密私钥且不能被解密。请再次检查输入的密钥。";
 "parsed_file.alerts.parsing.message" = "无法解析提供的配置文件(%@)。";
 "parsed_file.alerts.buttons.report" = "报告问题";
+
 "network_choice.client" = "读取.ovpn文件";
 "network_choice.server" = "从服务端拉取";
+
 "issue_reporter.title" = "提交问题";
 "issue_reporter.message" = "最后一次连接的debug日志对于解决连接问题是很重要的，并且它是匿名的。\n\n如果有.ovpn文件，那么已经去除了敏感信息后才会y添加。\n\n如果不确定的话，请检查e-mail附件。";
 "issue_reporter.buttons.accept" = "我已知悉";
+
 "translations.title" = "翻译";
+
 "share.message" = "Passepartout是iOS和macOS平台下的用户友的、开源的OpenVPN客户端";
+
+// ////////////////////
+
+"organizer.sections.twitch.header" = "Twitch";
+"organizer.sections.twitch.footer" = "快来看我让Passepartout在Twitch上直播，加入聊天互动并做出贡献！";
 "organizer.sections.providers.header" = "提供商";
 "organizer.sections.providers.footer" = "在这里你可以找到预设的新的提供商配置。";
 "organizer.sections.hosts.header" = "主机";
@@ -80,6 +97,7 @@
 "organizer.sections.siri.footer" = "通过Siri来帮助你加快常用的操作。";
 "organizer.sections.support.header" = "支持";
 "organizer.sections.feedback.header" = "反馈";
+"organizer.cells.follow_twitch.caption" = "在Twitch上观看路路通";
 "organizer.cells.profile.value.current" = "使用中";
 "organizer.cells.siri_shortcuts.caption" = "管理捷径";
 "organizer.cells.join_community.caption" = "加入社区";
@@ -93,7 +111,11 @@
 "organizer.alerts.add_host.message" = "从Safari、邮件或其他App中打开.ovpn文件的URL来设置主机配置。\n\n你同样可以通过iTunes文件分享来导入.ovpnf文件。";
 "organizer.alerts.cannot_donate.message" = "此设备未设置付款方式。";
 "organizer.alerts.delete_vpn_profile.message" = "你确定要从此设备移除VPN配置吗？这可能会固定一些断开的VPN状态，不会影响已经存在的配置。";
+
+"wizards.provider.cells.update_list.caption" = "更新列表";
+"wizards.provider.alerts.unavailable.message" = "无法下载提供商基础架构，请稍后重试。";
 "wizards.host.alerts.existing.message" = "已经存在同名的配置。要替换它吗？";
+
 "service.welcome.message" = "欢迎使用Passepartout!\n\n使用分类页面来添加一个新的配置。";
 "service.sections.vpn.footer" = "必要时连接将会建立。";
 "service.sections.provider_infrastructure.footer" = "最后在%@时更新";
@@ -103,6 +125,7 @@
 "service.sections.trusted.footer" = "当进入可信网络后，VPN将会断开并保持断开状态。禁用此选项可关闭此功能。";
 "service.sections.diagnostics.header" = "分析数据";
 "service.sections.diagnostics.footer" = "在重连后状态隐藏才有效。网络数据包括主机名、IP地址、路由、SSID、认证方式，但私钥不会出现在日志中。";
+"service.cells.use_profile.caption" = "使用此配置";
 "service.cells.connection_status.caption" = "状态";
 "service.cells.provider.pool.caption" = "位置";
 "service.cells.provider.preset.caption" = "预设";
@@ -113,10 +136,13 @@
 "service.cells.test_connectivity.caption" = "测试连接性";
 "service.cells.data_count.caption" = "已交换数据量";
 "service.cells.data_count.none" = "不可用";
+"service.cells.server_configuration.caption" = "服务端配置";
+"service.cells.server_network.caption" = "服务端网络";
 "service.cells.debug_log.caption" = "调试日志";
 "service.cells.masks_private_data.caption" = "隐藏网络数据";
 "service.cells.reconnect.caption" = "重连";
 "service.cells.report_issue.caption" = "报告连接问题";
+
 "service.alerts.rename.title" = "重命名配置";
 "service.alerts.credentials_needed.message" = "你需要先输入账户的认证信息。";
 "service.alerts.reconnect_vpn.message" = "要重连VPN吗？";
@@ -126,12 +152,14 @@
 "service.alerts.test_connectivity.title" = "连接性";
 "service.alerts.test_connectivity.messages.success" = "你的设备连接到了网络！";
 "service.alerts.test_connectivity.messages.failure" = "你的设备没有连接到网络，请检查你的配置参数。";
+"service.alerts.configuration.disconnected" = "配置不可用，请确认你已连接到VPN。";
 "service.alerts.masks_private_data.messages.must_reconnect" = "为了安全地重置当前调试日志并应用新的掩码设置，你现在必须重连VPN。";
 "service.alerts.buttons.reconnect" = "重连";
 "service.alerts.download.title" = "下载必须的内容";
 "service.alerts.download.message" = "%@要求下载额外的配置文件。\n\n确认以开始下载。";
 "service.alerts.download.failed" = "下载配置文件失败。 %@";
 "service.alerts.download.hud.extracting" = "提取文件中，请等待...";
+
 "account.title" = "账户";
 "account.sections.guidance.footer.infrastructure.hideme" = "使用你的%@网站认证信息。";
 "account.sections.guidance.footer.infrastructure.mullvad" = "使用你的%@网站认证信息。你的用户名一般是数字 (没有空格)。";
@@ -149,10 +177,13 @@
 "account.cells.password.placeholder" = "secret";
 "account.cells.open_guide.caption" = "查看你的认证信息";
 "account.cells.signup.caption" = "以%@注册";
+
 "endpoint.title" = "服务端";
 "endpoint.cells.any_address.caption" = "自动";
 "endpoint.cells.any_protocol.caption" = "自动";
+
 "network_settings.title" = "网络设置";
+
 "configuration.sections.communication.header" = "通信";
 "configuration.sections.reset.footer" = "如果你在更改连接参数后变成断开状态，点按已恢复到原始的配置。";
 "configuration.sections.tls.header" = "TLS";
@@ -162,7 +193,6 @@
 "configuration.cells.cipher.caption" = "加密";
 "configuration.cells.digest.caption" = "身份验证";
 "configuration.cells.digest.value.embedded" = "已包含";
-"configuration.cells.proxy_https.caption" = "代理（HTTPS）";
 "configuration.cells.compression_framing.caption" = "分帧";
 "configuration.cells.compression_framing.value.lzo" = "--comp-lzo";
 "configuration.cells.compression_framing.value.compress" = "--compress";
@@ -182,13 +212,20 @@
 "configuration.cells.renegotiation_seconds.caption" = "重协商";
 "configuration.cells.renegotiation_seconds.value.after" = "在%@之后";
 "configuration.cells.random_endpoint.caption" = "随机的服务端";
+
 "network_settings.gateway.title" = "默认网关";
 "network_settings.dns.title" = "DNS";
 "network_settings.dns.cells.domain.caption" = "域名";
 "network_settings.proxy.title" = "代理";
+"network_settings.mtu.title" = "MTU";
+"network_settings.mtu.cells.bytes.caption" = "Bytes";
+
+"server_network.cells.route.caption" = "路由";
+
 "debug_log.buttons.previous" = "上一步";
 "debug_log.buttons.next" = "下一步";
 "debug_log.alerts.empty_log.message" = "日志为空";
+
 "shortcuts.add.sections.vpn.header" = "VPN";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
 "shortcuts.add.sections.cellular.header" = "蜂窝网络";
@@ -200,7 +237,9 @@
 "shortcuts.add.cells.trust_cellular.caption" = "信任蜂窝网络";
 "shortcuts.add.cells.untrust_cellular.caption" = "不信任蜂窝网络";
 "shortcuts.add.alerts.no_profiles.message" = "没有可以连接的配置。";
+
 "shortcuts.edit.sections.all.header" = "已经存在的捷径";
+
 "donation.title" = "捐助";
 "donation.sections.one_time.header" = "一次性";
 "donation.sections.one_time.footer" = "如果你想对我免费的工作表示感谢，这里是一些你可以捐助的数额。\n\n每次捐助只需要付款一次，你可以捐助多次。";
@@ -209,6 +248,7 @@
 "donation.alerts.purchase.success.title" = "感谢";
 "donation.alerts.purchase.success.message" = "这对于我意味着很多，希望你保持使用并使它更好。";
 "donation.alerts.purchase.failure.message" = "无法展现捐助内容。%@";
+
 "about.title" = "关于";
 "about.sections.web.header" = "网络";
 "about.sections.share.header" = "分享";
@@ -219,23 +259,13 @@
 "about.cells.privacy_policy.caption" = "隐私政策";
 "about.cells.share_twitter.caption" = "发送关于它的推特!";
 "about.cells.share_generic.caption" = "邀请朋友";
+
 "version.title" = "版本";
 "version.labels.intro" = "Passepartout和TunnelKit由Davide De Rosa (keeshux)编写并维护。\n\nPassepartout和TunnelKit的源代码在GitHub上以GPLv3许可证面向大众开放，你可以在主页上找到链接。\n\nPassepartout不是官方的客户端，同OpenVPN Inc也没有关系。";
+
 "credits.title" = "评分";
 "credits.sections.licenses.header" = "许可证";
 "credits.sections.notices.header" = "注意";
 "credits.sections.translations.header" = "翻译";
+
 "label.license.error" = "不能下载到完整的许可证内容。";
-"service.cells.server_configuration.caption" = "服务端配置";
-"service.cells.server_network.caption" = "服务端网络";
-"service.alerts.configuration.disconnected" = "配置不可用，请确认你已连接到VPN。";
-"server_network.cells.route.caption" = "路由";
-"wizards.provider.cells.update_list.caption" = "更新列表";
-"wizards.provider.alerts.unavailable.message" = "无法下载提供商基础架构，请稍后重试。";
-"organizer.sections.twitch.header" = "Twitch";
-"organizer.sections.twitch.footer" = "快来看我让Passepartout在Twitch上直播，加入聊天互动并做出贡献！";
-"organizer.cells.follow_twitch.caption" = "在Twitch上观看路路通";
-"service.cells.use_profile.caption" = "使用此配置";
-"network_settings.mtu.title" = "MTU";
-"network_settings.mtu.cells.bytes.caption" = "Bytes";
-"global.values.default" = "默认";
