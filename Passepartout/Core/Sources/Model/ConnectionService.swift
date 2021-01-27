@@ -544,7 +544,8 @@ public class ConnectionService: Codable {
         let protocolConfiguration = try cfg.generatedTunnelProtocol(
             withBundleIdentifier: AppConstants.App.tunnelBundleId,
             appGroup: appGroup,
-            credentials: creds
+            context: profile.passwordContext,
+            username: creds?.username
         )
         protocolConfiguration.disconnectOnSleep = preferences.disconnectsOnSleep
 
