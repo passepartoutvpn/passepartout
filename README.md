@@ -19,8 +19,6 @@ Passepartout lets you handle multiple profiles in one single place and quickly s
 
 [<img src="res/ios/snap-home.png" width="300">](res/ios/snap-home.png)
 
-[<img src="res/macos/snap-home.png" width="300">](res/macos/snap-home.png)
-
 ### Ease of use
 
 With its native look & feel, Passepartout focuses on ease of use. It does so by stripping the .ovpn flags that are today obsolete or rarely used. With good approximation, it mimics the most relevant features you will find in OpenVPN 2.4.x.
@@ -33,8 +31,6 @@ Trust Wi-Fi, cellular (iOS) or wired (macOS) networks to fine-grain your connect
 
 [<img src="res/ios/snap-trusted.png" width="300">](res/ios/snap-trusted.png)
 
-[<img src="res/macos/snap-trusted.png" width="300">](res/macos/snap-trusted.png)
-
 ### Siri shortcuts (iOS)
 
 Enjoy the convenience of Siri shortcuts to automate frequent VPN actions.
@@ -46,8 +42,6 @@ Enjoy the convenience of Siri shortcuts to automate frequent VPN actions.
 Override default gateway, DNS, proxy and MTU settings right from the app. Don't bother editing the .ovpn file or your pushed server settings. This is especially useful if you want to override your provider settings, e.g. to integrate your own DNS-based ad blocking.
 
 [<img src="res/ios/snap-network.png" width="300">](res/ios/snap-network.png)
-
-[<img src="res/macos/snap-network.png" width="300">](res/macos/snap-network.png)
 
 ### See your connection parameters
 
