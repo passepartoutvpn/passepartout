@@ -7,3 +7,7 @@
 
 - Drop hosts restriction in free version ("Unlimited hosts").
 
+### Fixed
+
+- Redundant keychain items.
+
