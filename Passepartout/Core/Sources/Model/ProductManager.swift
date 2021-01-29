@@ -65,6 +65,8 @@ public class ProductManager: NSObject {
     
     private var purchaseDates: [Product: Date]
     
+    private var cancelledPurchases: Set<Product>
+    
     private var refreshRequest: SKReceiptRefreshRequest?
     
     private var restoreCompletionHandler: ((Error?) -> Void)?
@@ -75,6 +77,7 @@ public class ProductManager: NSObject {
         purchasedAppBuild = nil
         purchasedFeatures = []
         purchaseDates = [:]
+        cancelledPurchases = []
         
         super.init()
 
@@ -185,6 +188,10 @@ public class ProductManager: NSObject {
         #endif
     }
     
+    public func isCancelledPurchase(_ product: Product) -> Bool {
+        return cancelledPurchases.contains(product)
+    }
+    
     public func purchaseDate(forProduct product: Product) -> Date? {
         return purchaseDates[product]
     }
@@ -203,6 +210,7 @@ public class ProductManager: NSObject {
             purchasedAppBuild = buildNumber
         }
         purchasedFeatures.removeAll()
+        cancelledPurchases.removeAll()
 
         if let buildNumber = purchasedAppBuild {
             log.debug("Original purchased build: \(buildNumber)")
@@ -222,6 +230,7 @@ public class ProductManager: NSObject {
                 }
                 if let cancellationDate = $0.cancellationDate {
                     log.debug("\t\(pid) [cancelled on: \(cancellationDate)]")
+                    cancelledPurchases.insert(product)
                     return
                 }
                 if let purchaseDate = $0.originalPurchaseDate {

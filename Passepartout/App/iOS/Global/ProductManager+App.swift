@@ -41,12 +41,13 @@ extension ProductManager {
     public func reviewPurchases() {
         let service = TransientStore.shared.service
         reloadReceipt(andNotify: false)
+        let isFullVersion = (try? isEligible(forFeature: .fullVersion)) ?? false
         var anyRefund = false
 
         // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
 
         log.debug("Checking 'Trusted networks'")
-        if !((try? isEligible(forFeature: .trustedNetworks)) ?? false) {
+        if isCancelledPurchase(.fullVersion) || (!isFullVersion && isCancelledPurchase(.trustedNetworks)) {
             
             // reset trusted networks for ALL profiles (must load first)
             for key in service.allProfileKeys() {
@@ -76,7 +77,7 @@ extension ProductManager {
             guard let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
                 continue
             }
-            if !((try? isEligible(forProvider: metadata)) ?? false) {
+            if isCancelledPurchase(.fullVersion) || (!isFullVersion && isCancelledPurchase(metadata.product)) {
                 service.removeProfile(ProfileKey(name))
                 log.debug("\tRefunded provider: \(name)")
                 anyRefund = true
