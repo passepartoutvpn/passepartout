@@ -1,16 +1,17 @@
-Passepartout to inteligentny klient OpenVPN, perfekcyjnie zintegrowany z platformą iOS. Passepartout to jedyna aplikacja dla znanych usługodawców OpenVPN i Twoich prywatnych serwerów OpenVPN.
+Passepartout jest inteligentnym klientem OpenVPN, perfekcyjnie zintegrowanym z platformami systemu iOS. Passepartout to jedyna aplikacja, jakiej potrzebujesz do łączenia przez renomowanych dostawców OpenVPN i swoje prywatne serwery OpenVPN.
 
-Passepartout, z obsługą skrótów Siri oraz konfiguracją sieci zaufanych, pozwala na najłatwiejsze użytkowanie VPN na iOS.
+Dzięki funkcji Zaufanych Sieci Passepartout zapewnia wszystko, co najlepsze w korzystaniu z VPN w systemie iOS.
 
-Passepartout nie inicjuje połączeń innych niż tunel VPN, dlatego jest aplikacją przyjazną dla zapór sieciowych.
+Passepartout nie wykonuje żadnych niepożądanych działań w tle poza łączeniem z tunelem VPN, dzięki czemu jest również bardziej przyjazna dla firewalli.
 
-Passepartout jest open source: https://github.com/passepartoutvpn
+Passepartout jest aplikacją typu open source:  https://github.com/passepartoutvpn
 
-UŻYWAJ Z WIELOMA USŁUGODAWCAMI
+MOŻESZ W NIEJ KORZYSTAĆ Z USŁUG  WIELU DOSTAWCÓW
 
-Passepartout oferuje gotowe konfiguracje dla poniższych usługodawców:
 
-- Child Safe VPN 
+Passepartout oferuje gotowe konfiguracje najważniejszych dostawców VPN:
+
+- Child Safe VPN
 - Hide.me
 - Mullvad
 - NordVPN
@@ -21,27 +22,25 @@ Passepartout oferuje gotowe konfiguracje dla poniższych usługodawców:
 - VyprVPN
 - Windscribe
 
-ŁATWY W UŻYCIU
 
-- Niesamowita łatwość w użytkowaniu z przejrzystym wyglądem
-- Przechowuj swoje profile w jednym miejscu
-- Importuj pliki konfiguracyjne .openvpn
-- Optymalne szyfrowanie bez konieczności dodatkowej konfiguracji
-- Napisz ustawienia sieciowe z łatwością (brama domyślna, DNS, Proxy, MTU)
 
-INTEGRACJA Z SYSTEMEM
+ŁATWOŚĆ OBSŁUGI
 
-- Zaufaj wybranym połączeniom WiFi lub sieci komórkowej żeby kontrolować swoje połączenie
-- Intuicyjne skróty Siri
+- Niesamowita łatwość użytkowania dzięki natywnej szacie graficznej  i funkcjonalnościom.
+- Obsługa wszystkich profili w jednym miejscu
+- Import plików konfiguracyjnych .openvpn
+- Optymalne szyfrowanie bez konieczności modyfikowania pliku konfiguracyjnego
+- - Błyskawiczne zastępowanie ustawień sieciowych (domyślna bramka), DNS, proxy, MTU.
 
 PRZYJAZNA PRYWATNOŚCI
 
-- Transparentność serwerów do których jesteś połączony/a
-- Wybierz zdefiniowane węzły końcowe, gdy DNS jest problematyczne
-- Żadnych reklam, śmieci, ani serwisów sieciowych - tylko protokół VPN
+- Pełna transparentność informacji o serwerach, z którymi się łączysz.
+- Wybór wstępnie zdefiniowanych punktów końcowych, gdy DNS sprawia problemy.
+- Brak usług internetowych, reklam i innych niepożądanych elementów poza samą siecią VPN.
 
 ~
 
-Passepartout to nieoficjalny klient i nie jest powiązany z OpenVPN Inc.
+Passepartout jest nieoficjalnym klient i nie jest powiązany z OpenVPN Inc.
 
-© 2002-2018 OpenVPN Inc. - OpenVPN to zarejestrowany znak towarowy OpenVPN Inc.
+© 2002-2018 OpenVPN Inc. - OpenVPN zarejestrowanym znakiem towarowym firmy  OpenVPN Inc.
+
