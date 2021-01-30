@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Redundant keychain items.
+- Keyboard not dismissed in "Network settings".
 
 ## 1.14.0 (2021-01-07)
 

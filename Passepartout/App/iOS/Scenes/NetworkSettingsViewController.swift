@@ -806,6 +806,7 @@ extension NetworkSettingsViewController: FieldTableViewCellDelegate {
         commitTextField(cell.field)
     }
     
-    func fieldCellDidEnter(_: FieldTableViewCell) {
+    func fieldCellDidEnter(_ cell: FieldTableViewCell) {
+        cell.field.resignFirstResponder()
     }
 }
