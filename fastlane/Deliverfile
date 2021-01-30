@@ -17,4 +17,4 @@ end
 skip_binary_upload true
 skip_metadata false
 skip_screenshots false
-overwrite_screenshots true
+#overwrite_screenshots true
