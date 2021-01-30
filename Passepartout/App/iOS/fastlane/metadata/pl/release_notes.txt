@@ -10,4 +10,5 @@
 ### Fixed
 
 - Redundant keychain items.
+- Keyboard not dismissed in "Network settings".
 
