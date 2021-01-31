@@ -1,1 +1,1 @@
-Passepartout, OpenVPN for Mac
+Passepartout - OpenVPN Client

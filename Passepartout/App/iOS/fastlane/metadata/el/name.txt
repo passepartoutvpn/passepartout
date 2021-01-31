@@ -1,1 +1,1 @@
-Passepartout, OpenVPN για iOS
+Passepartout - OpenVPN Client

@@ -1,1 +1,1 @@
-Passepartout, OpenVPN για Mac
+Passepartout - OpenVPN Client

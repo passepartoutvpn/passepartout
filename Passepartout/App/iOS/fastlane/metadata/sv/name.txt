@@ -1,1 +1,1 @@
-Passepartout, OpenVPN för iOS
+Passepartout - OpenVPN Klient
