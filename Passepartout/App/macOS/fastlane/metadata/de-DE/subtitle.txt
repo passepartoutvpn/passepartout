@@ -1,1 +1,1 @@
-Verbinde .ovpn & VPN Anbieter
+../../../../iOS/fastlane/metadata/de-DE/subtitle.txt

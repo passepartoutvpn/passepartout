@@ -1,1 +1,1 @@
-Connecter .ovpn & services VPN
+../../../../iOS/fastlane/metadata/fr-FR/subtitle.txt

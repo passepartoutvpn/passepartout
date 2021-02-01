@@ -1,1 +1,1 @@
-https://www.reddit.com/r/passepartout
+../../../../iOS/fastlane/metadata/ru/support_url.txt

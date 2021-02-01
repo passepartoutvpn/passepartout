@@ -1,1 +1,1 @@
-Passepartout - OpenVPN клиент
+../../../../iOS/fastlane/metadata/ru/name.txt

@@ -1,1 +1,1 @@
-mullvad,protonvpn,nordvpn,pia,windscribe,expressvpn,tunnelbear,vyprvpn,netflix,bezpłatny,anonimowy
+../../../../iOS/fastlane/metadata/pl/keywords.txt
