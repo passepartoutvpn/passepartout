@@ -131,28 +131,32 @@ class StatusMenu: NSObject {
         
         let menuSupport = NSMenu()
         let itemCommunity = NSMenuItem(title: L10n.Core.Organizer.Cells.JoinCommunity.caption.asContinuation, action: #selector(joinCommunity), keyEquivalent: "")
-        let itemReview = NSMenuItem(title: L10n.Core.Organizer.Cells.WriteReview.caption.asContinuation, action: #selector(writeReview), keyEquivalent: "")
 //        let itemDonate = NSMenuItem(title: L10n.Core.Organizer.Cells.Donate.caption.asContinuation, action: #selector(showDonations), keyEquivalent: "")
 //        let itemGitHubSponsors = NSMenuItem(title: L10n.Core.Organizer.Cells.GithubSponsors.caption.asContinuation, action: #selector(seeGitHubSponsors), keyEquivalent: "")
 //        let itemTranslate = NSMenuItem(title: L10n.Core.Organizer.Cells.Translate.caption.asContinuation, action: #selector(offerToTranslate), keyEquivalent: "")
         let itemFAQ = NSMenuItem(title: L10n.Core.About.Cells.Faq.caption.asContinuation, action: #selector(visitFAQ), keyEquivalent: "")
-        let itemReport = NSMenuItem(title: L10n.Core.Service.Cells.ReportIssue.caption.asContinuation, action: #selector(reportConnectivityIssue), keyEquivalent: "")
         itemCommunity.target = self
-        itemReview.target = self
 //        itemDonate.target = self
 //        itemGitHubSponsors.target = self
 //        itemTranslate.target = self
         itemFAQ.target = self
-        itemReport.target = self
 //        menuSupport.addItem(itemDonate)
         menuSupport.addItem(itemCommunity)
 //        menuSupport.addItem(.separator())
 //        menuSupport.addItem(itemGitHubSponsors)
 //        menuSupport.addItem(itemTranslate)
-        menuSupport.addItem(itemReview)
+        if ProductManager.shared.isEligibleForFeedback() {
+            let itemReview = NSMenuItem(title: L10n.Core.Organizer.Cells.WriteReview.caption.asContinuation, action: #selector(writeReview), keyEquivalent: "")
+            itemReview.target = self
+            menuSupport.addItem(itemReview)
+        }
         menuSupport.addItem(.separator())
         menuSupport.addItem(itemFAQ)
-        menuSupport.addItem(itemReport)
+        if ProductManager.shared.isEligibleForFeedback() {
+            let itemReport = NSMenuItem(title: L10n.Core.Service.Cells.ReportIssue.caption.asContinuation, action: #selector(reportConnectivityIssue), keyEquivalent: "")
+            itemReport.target = self
+            menuSupport.addItem(itemReport)
+        }
         let itemSupport = NSMenuItem(title: L10n.App.Menu.Support.title, action: nil, keyEquivalent: "")
         menu.setSubmenu(menuSupport, for: itemSupport)
         menu.addItem(itemSupport)
