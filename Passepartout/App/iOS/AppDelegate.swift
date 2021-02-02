@@ -162,7 +162,9 @@ extension UISplitViewController {
 
 extension AppDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        guard (try? ProductManager.shared.isEligible(forFeature: .siriShortcuts)) ?? false else {
+        do {
+            try ProductManager.shared.verifyEligible(forFeature: .siriShortcuts)
+        } catch {
             return false
         }
         guard let interaction = userActivity.interaction else {

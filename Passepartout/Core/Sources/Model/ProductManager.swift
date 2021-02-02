@@ -33,6 +33,8 @@ import TunnelKit
 private let log = SwiftyBeaver.self
 
 public enum ProductError: Error {
+    case uneligible
+    
     case beta
 }
 
@@ -161,23 +163,21 @@ public class ProductManager: NSObject {
         #endif
         return purchasedFeatures.contains(.fullVersion)
     }
-    
-    public func isEligible(forFeature feature: Product) throws -> Bool {
-        if isBeta {
-            guard cfg.isBetaFullVersion else {
-                throw ProductError.beta
-            }
-        }
+
+    private func isEligible(forFeature feature: Product) -> Bool {
         return isFullVersion() || purchasedFeatures.contains(feature)
     }
 
-    public func isEligible(forProvider metadata: Infrastructure.Metadata) throws -> Bool {
-        if isBeta {
-            guard cfg.isBetaFullVersion else {
-                throw ProductError.beta
-            }
-        }
+    private func isEligible(forProvider metadata: Infrastructure.Metadata) -> Bool {
         return isFullVersion() || purchasedFeatures.contains(metadata.product)
+    }
+
+    private func isEligibleForTrustedNetworks() -> Bool {
+        #if os(iOS)
+        return isFullVersion() || purchasedFeatures.contains(.trustedNetworks)
+        #else
+        return isFullVersion()
+        #endif
     }
 
     public func isEligibleForFeedback() -> Bool {
@@ -188,6 +188,39 @@ public class ProductManager: NSObject {
         #endif
     }
     
+    public func verifyEligible(forFeature feature: Product) throws {
+        if isBeta {
+            guard cfg.isBetaFullVersion else {
+                throw ProductError.beta
+            }
+        }
+        guard isEligible(forFeature: feature) else {
+            throw ProductError.uneligible
+        }
+    }
+
+    public func verifyEligible(forProvider metadata: Infrastructure.Metadata) throws {
+        if isBeta {
+            guard cfg.isBetaFullVersion else {
+                throw ProductError.beta
+            }
+        }
+        guard isFullVersion() || purchasedFeatures.contains(metadata.product) else {
+            throw ProductError.uneligible
+        }
+    }
+
+    public func verifyEligibleForTrustedNetworks() throws {
+        if isBeta {
+            guard cfg.isBetaFullVersion else {
+                throw ProductError.beta
+            }
+        }
+        guard isEligibleForTrustedNetworks() else {
+            throw ProductError.uneligible
+        }
+    }
+
     public func isCancelledPurchase(_ product: Product) -> Bool {
         return cancelledPurchases.contains(product)
     }
@@ -269,5 +302,83 @@ extension ProductManager: SKRequestDelegate {
     public func request(_ request: SKRequest, didFailWithError error: Error) {
         restoreCompletionHandler?(error)
         restoreCompletionHandler = nil
+    }
+}
+
+extension ProductManager {
+    public static let shared = ProductManager(
+        Configuration(
+            isBetaFullVersion: AppConstants.InApp.isBetaFullVersion,
+            lastFullVersionBuild: AppConstants.InApp.lastFullVersionBuild
+        )
+    )
+
+    public func reviewPurchases() {
+        let service = TransientStore.shared.service
+        reloadReceipt(andNotify: false)
+        let isEligibleForFullVersion = isFullVersion()
+        let hasCancelledFullVersion: Bool
+        let hasCancelledTrustedNetworks: Bool
+        var anyRefund = false
+        
+        #if os(iOS)
+        hasCancelledFullVersion = !isEligibleForFullVersion && (isCancelledPurchase(.fullVersion) || isCancelledPurchase(.fullVersion_iOS))
+        hasCancelledTrustedNetworks = !isEligibleForFullVersion && isCancelledPurchase(.trustedNetworks)
+        #else
+        hasCancelledFullVersion = !isEligibleForFullVersion && (isCancelledPurchase(.fullVersion) || isCancelledPurchase(.fullVersion_macOS))
+        hasCancelledTrustedNetworks = false
+        #endif
+        
+        // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
+
+        log.debug("Checking 'Trusted networks'")
+        if hasCancelledFullVersion || hasCancelledTrustedNetworks {
+            
+            // reset trusted networks for ALL profiles (must load first)
+            for key in service.allProfileKeys() {
+                guard let profile = service.profile(withKey: key) else {
+                    continue
+                }
+                #if os(iOS)
+                if profile.trustedNetworks.includesMobile || !profile.trustedNetworks.includedWiFis.isEmpty {
+                    profile.trustedNetworks.includesMobile = false
+                    profile.trustedNetworks.includedWiFis.removeAll()
+                    anyRefund = true
+                }
+                #else
+                if !profile.trustedNetworks.includedWiFis.isEmpty {
+                    profile.trustedNetworks.includedWiFis.removeAll()
+                    anyRefund = true
+                }
+                #endif
+            }
+            if anyRefund {
+                log.debug("\tRefunded")
+            }
+        }
+
+        log.debug("Checking providers")
+        for name in service.providerNames() {
+            guard let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
+                continue
+            }
+            if hasCancelledFullVersion || (!isEligibleForFullVersion && isCancelledPurchase(metadata.product)) {
+                service.removeProfile(ProfileKey(name))
+                log.debug("\tRefunded provider: \(name)")
+                anyRefund = true
+            }
+        }
+        
+        guard anyRefund else {
+            return
+        }
+
+        //
+
+        // save reverts and remove fraud VPN profile
+        TransientStore.shared.serialize(withProfiles: true)
+        VPN.shared.uninstall(completionHandler: nil)
+
+        NotificationCenter.default.post(name: ProductManager.didReviewPurchases, object: nil)
     }
 }
