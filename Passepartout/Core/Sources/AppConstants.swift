@@ -359,12 +359,7 @@ public class AppConstants {
 
         static let lastFullVersionBuild = 2016
         #else
-        static var isBetaFullVersion: Bool {
-            guard !ProcessInfo.processInfo.arguments.contains("FULL_VERSION") else {
-                return true
-            }
-            return false
-        }
+        static let isBetaFullVersion = false
 
         static let lastFullVersionBuild = 0
         #endif
