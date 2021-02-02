@@ -67,25 +67,23 @@ class StatusMenu: NSObject {
     
     private let menuAllProfiles = NSMenu()
 
-    private var itemSwitchProfile: NSMenuItem?
+    private lazy var itemSwitchProfile = NSMenuItem(title: L10n.App.Menu.SwitchProfile.title, action: nil, keyEquivalent: "")
     
     private var itemsAllProfiles: [NSMenuItem] = []
 
-    private var itemProfileName: NSMenuItem?
+    private lazy var itemProfileName = NSMenuItem(title: "", action: nil, keyEquivalent: "")
 
     private var itemsProfile: [NSMenuItem] = []
     
-    private var itemPool: NSMenuItem?
+    private lazy var itemPool = NSMenuItem(title: "", action: nil, keyEquivalent: "")
 
-    private var itemToggleVPN: NSMenuItem?
+    private lazy var itemToggleVPN = NSMenuItem(title: L10n.App.Service.Cells.Vpn.TurnOn.caption, action: nil, keyEquivalent: "")
 
-    private var itemReconnectVPN: NSMenuItem?
+    private lazy var itemReconnectVPN = NSMenuItem(title: L10n.Core.Service.Cells.Reconnect.caption, action: #selector(reconnectVPN), keyEquivalent: "")
     
     private override init() {
         super.init()
         
-        service.delegate = self
-
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(vpnDidUpdate), name: VPN.didChangeStatus, object: nil)
     }
@@ -103,6 +101,7 @@ class StatusMenu: NSObject {
         VPN.shared.prepare {
             self.rebuild()
             self.statusItem.menu = self.menu
+            self.service.delegate = self
         }
     }
     
@@ -113,19 +112,17 @@ class StatusMenu: NSObject {
 
         let itemShow = NSMenuItem(title: L10n.App.Menu.Show.title, action: #selector(showOrganizer), keyEquivalent: "")
         let itemPreferences = NSMenuItem(title: L10n.App.Menu.Preferences.title.asContinuation, action: #selector(showPreferences), keyEquivalent: ",")
-        itemSwitchProfile = NSMenuItem(title: L10n.App.Menu.SwitchProfile.title, action: nil, keyEquivalent: "")
         itemShow.target = self
         itemPreferences.target = self
         menu.addItem(itemShow)
         menu.addItem(itemPreferences)
-        menu.addItem(itemSwitchProfile!)
+        menu.addItem(itemSwitchProfile)
         reloadProfiles()
         menu.addItem(.separator())
 
         // active profile
         
-        itemProfileName = NSMenuItem(title: "", action: nil, keyEquivalent: "")
-        menu.addItem(itemProfileName!)
+        menu.addItem(itemProfileName)
         setActiveProfile(service.activeProfile)
         menu.addItem(.separator())
 
@@ -189,7 +186,7 @@ class StatusMenu: NSObject {
             menuAllProfiles.addItem(item)
             itemsAllProfiles.append(item)
         }
-        menu.setSubmenu(menuAllProfiles, for: itemSwitchProfile!)
+        menu.setSubmenu(menuAllProfiles, for: itemSwitchProfile)
     }
     
     func refreshWithCurrentProfile() {
@@ -197,7 +194,7 @@ class StatusMenu: NSObject {
     }
 
     func setActiveProfile(_ profile: ConnectionProfile?) {
-        let startIndex = menu.index(of: itemProfileName!)
+        let startIndex = menu.index(of: itemProfileName)
         var i = startIndex + 1
         
         for item in itemsProfile {
@@ -206,33 +203,29 @@ class StatusMenu: NSObject {
         itemsProfile.removeAll()
 
         guard let profile = profile else {
-            itemProfileName?.title = L10n.App.Menu.ActiveProfile.Title.none
-//            itemProfileName?.image = nil
-            itemToggleVPN = nil
-            itemReconnectVPN = nil
+            itemProfileName.title = L10n.App.Menu.ActiveProfile.Title.none
+//            itemProfileName.image = nil
             statusItem.button?.image = imageStatusInactive
             statusItem.button?.toolTip = nil
             return
         }
         let profileTitle = service.screenTitle(ProfileKey(profile))
-        itemProfileName?.title = profileTitle
-//        itemProfileName?.image = profile.image
+        itemProfileName.title = profileTitle
+//        itemProfileName.image = profile.image
         
         let needsCredentials = service.needsCredentials(for: profile)
         if !needsCredentials {
-            itemToggleVPN = NSMenuItem(title: L10n.App.Service.Cells.Vpn.TurnOn.caption, action: nil, keyEquivalent: "")
-            itemReconnectVPN = NSMenuItem(title: L10n.Core.Service.Cells.Reconnect.caption, action: #selector(reconnectVPN), keyEquivalent: "")
-            itemToggleVPN?.indentationLevel = 1
-            itemReconnectVPN?.indentationLevel = 1
-            itemToggleVPN?.target = self
-            itemReconnectVPN?.target = self
-            menu.insertItem(itemToggleVPN!, at: i)
+            itemToggleVPN.indentationLevel = 1
+            itemReconnectVPN.indentationLevel = 1
+            itemToggleVPN.target = self
+            itemReconnectVPN.target = self
+            menu.insertItem(itemToggleVPN, at: i)
             i += 1
-            menu.insertItem(itemReconnectVPN!, at: i)
+            menu.insertItem(itemReconnectVPN, at: i)
             i += 1
 
-            itemsProfile.append(itemToggleVPN!)
-            itemsProfile.append(itemReconnectVPN!)
+            itemsProfile.append(itemToggleVPN)
+            itemsProfile.append(itemReconnectVPN)
         } else {
             let itemMissingCredentials = NSMenuItem(title: L10n.App.Menu.ActiveProfile.Messages.missingCredentials, action: nil, keyEquivalent: "")
             itemMissingCredentials.indentationLevel = 1
@@ -296,10 +289,10 @@ class StatusMenu: NSObject {
 //            guard poolDescription = providerProfile.pool?.localizedId else {
 //                fatalError("No pool selected?")
 //            }
-            itemPool = NSMenuItem(title: providerProfile.pool?.localizedId ?? "", action: nil, keyEquivalent: "")
-            menu.insertItem(itemPool!, at: i)
+            itemPool.title = providerProfile.pool?.localizedId ?? ""
+            menu.insertItem(itemPool, at: i)
             i += 1
-            itemsProfile.append(itemPool!)
+            itemsProfile.append(itemPool)
             
             let infrastructure = providerProfile.infrastructure
             for category in infrastructure.categories {
@@ -540,11 +533,11 @@ class StatusMenu: NSObject {
     
     private func updateUIWithVPNStatus() {
         if vpn.isEnabled {
-            itemToggleVPN?.title = L10n.App.Service.Cells.Vpn.TurnOff.caption
-            itemToggleVPN?.action = #selector(disableVPN)
+            itemToggleVPN.title = L10n.App.Service.Cells.Vpn.TurnOff.caption
+            itemToggleVPN.action = #selector(disableVPN)
         } else {
-            itemToggleVPN?.title = L10n.App.Service.Cells.Vpn.TurnOn.caption
-            itemToggleVPN?.action = #selector(enableVPN)
+            itemToggleVPN.title = L10n.App.Service.Cells.Vpn.TurnOn.caption
+            itemToggleVPN.action = #selector(enableVPN)
         }
         if let profile = service.activeProfile {
             let profileTitle = service.screenTitle(ProfileKey(profile))
@@ -615,7 +608,7 @@ extension StatusMenu: ConnectionServiceDelegate {
         guard let providerProfile = profile as? ProviderConnectionProfile else {
             return
         }
-        itemPool?.title = providerProfile.pool?.localizedId ?? ""
+        itemPool.title = providerProfile.pool?.localizedId ?? ""
         
         NotificationCenter.default.post(name: StatusMenu.didUpdateProfile, object: profile)
     }
