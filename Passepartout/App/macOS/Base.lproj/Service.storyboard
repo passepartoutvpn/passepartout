@@ -1220,7 +1220,7 @@ DQ
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <segue destination="KOf-Ss-PtI" kind="sheet" id="131-KX-EPr"/>
+                                                    <segue destination="KOf-Ss-PtI" kind="sheet" identifier="TrustedNetworkAddSegueIdentifier" id="131-KX-EPr"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C9Y-vu-Z9f">

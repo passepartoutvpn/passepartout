@@ -88,6 +88,12 @@ class OrganizerViewController: NSViewController {
         guard let item = sender as? NSMenuItem, let metadata = item.representedObject as? Infrastructure.Metadata else {
             return
         }
+        do {
+            try ProductManager.shared.verifyEligible(forProvider: metadata)
+        } catch {
+            presentPurchaseScreen(forProduct: metadata.product)
+            return
+        }
         perform(segue: StoryboardSegue.Main.enterAccountSegueIdentifier, sender: metadata.name)
     }
     

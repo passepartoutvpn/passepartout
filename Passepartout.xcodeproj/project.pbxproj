@@ -175,9 +175,12 @@
 		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
 		0E6268942369AD0600355F75 /* PurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */; };
 		0E66A270225FE25800F9C779 /* PoolCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66A26F225FE25800F9C779 /* PoolCategory.swift */; };
+		0E6BA54B25C9EE3A000CDFAC /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6BA54D25C9EE3A000CDFAC /* Purchase.storyboard */; };
 		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
 		0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */; };
 		0E776642229D0DAE0023FA76 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CAFAD229AAE760008E5C8 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
+		0E79D2C825C9F1B300D12964 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D2C725C9F1B300D12964 /* PurchaseViewController.swift */; };
+		0E79D31E25CC0CF600D12964 /* PurchaseProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D31D25CC0CF600D12964 /* PurchaseProductView.swift */; };
 		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
 		0E9AA978259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */; };
 		0E9AA979259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */; };
@@ -485,6 +488,7 @@
 		0E66A26F225FE25800F9C779 /* PoolCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PoolCategory.swift; path = ../Model/Profiles/PoolCategory.swift; sourceTree = "<group>"; };
 		0E6ACB7722B1A57C001B3C99 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E6ACB7822B1A5BB001B3C99 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Core.strings; sourceTree = "<group>"; };
+		0E6BA54C25C9EE3A000CDFAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Purchase.storyboard; sourceTree = "<group>"; };
 		0E6BE13920CFB76800A6DD36 /* ApplicationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationError.swift; sourceTree = "<group>"; };
 		0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
 		0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsViewController.swift; sourceTree = "<group>"; };
@@ -500,6 +504,8 @@
 		0E776640229D0DA80023FA76 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Intents.strings; sourceTree = "<group>"; };
 		0E79D13E21919EC900BB5FB2 /* PlaceholderConnectionProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderConnectionProfile.swift; sourceTree = "<group>"; };
 		0E79D14021919F5600BB5FB2 /* ProfileKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileKey.swift; sourceTree = "<group>"; };
+		0E79D2C725C9F1B300D12964 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
+		0E79D31D25CC0CF600D12964 /* PurchaseProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProductView.swift; sourceTree = "<group>"; };
 		0E89DFC4213DF7AE00741BA1 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SessionProxy+Communication.swift"; sourceTree = "<group>"; };
 		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
@@ -771,6 +777,7 @@
 				0E569F7D259F41690022DFB8 /* Providers.xcassets */,
 				0E569F85259F41690022DFB8 /* Main.storyboard */,
 				0E569F81259F41690022DFB8 /* Preferences.storyboard */,
+				0E6BA54D25C9EE3A000CDFAC /* Purchase.storyboard */,
 				0E569F83259F41690022DFB8 /* Service.storyboard */,
 			);
 			path = macOS;
@@ -801,6 +808,7 @@
 			isa = PBXGroup;
 			children = (
 				0E569F65259F41690022DFB8 /* Preferences */,
+				0E6BA54125C9ED91000CDFAC /* Purchase */,
 				0E569F6C259F41690022DFB8 /* Service */,
 				0E569F69259F41690022DFB8 /* OrganizerProfileTableView.swift */,
 				0E569F6A259F41690022DFB8 /* OrganizerViewController.swift */,
@@ -930,6 +938,15 @@
 				0E36D25A22403469006AF062 /* Shortcuts.storyboard */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		0E6BA54125C9ED91000CDFAC /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				0E79D31D25CC0CF600D12964 /* PurchaseProductView.swift */,
+				0E79D2C725C9F1B300D12964 /* PurchaseViewController.swift */,
+			);
+			path = Purchase;
 			sourceTree = "<group>";
 		};
 		0E89DFCC213EEDE700741BA1 /* Organizer */ = {
@@ -1486,6 +1503,7 @@
 				0E52031D259F58BF00CBAB56 /* Providers.xcassets in Resources */,
 				0E52047D259F642600CBAB56 /* Preferences.storyboard in Resources */,
 				0E52038F259F593F00CBAB56 /* App.strings in Resources */,
+				0E6BA54B25C9EE3A000CDFAC /* Purchase.storyboard in Resources */,
 				0E520385259F593B00CBAB56 /* Credits.html in Resources */,
 				0E52047C259F642600CBAB56 /* Service.storyboard in Resources */,
 				0E52032B259F58DD00CBAB56 /* TextTableView.xib in Resources */,
@@ -1882,6 +1900,7 @@
 				0E294AA225AE2B0B00CB4908 /* Descriptible.swift in Sources */,
 				0E520356259F590600CBAB56 /* PreferencesGeneralViewController.swift in Sources */,
 				0E520348259F58FE00CBAB56 /* MTUViewController.swift in Sources */,
+				0E79D31E25CC0CF600D12964 /* PurchaseProductView.swift in Sources */,
 				0E52037E259F593B00CBAB56 /* SwiftGen+Segues.swift in Sources */,
 				0E52037C259F593B00CBAB56 /* Theme.swift in Sources */,
 				0E52035E259F591300CBAB56 /* StatusMenu.swift in Sources */,
@@ -1895,6 +1914,7 @@
 				0E520354259F590600CBAB56 /* PreferencesViewController.swift in Sources */,
 				0E520343259F58FE00CBAB56 /* ProfileCustomizationViewController.swift in Sources */,
 				0E520346259F58FE00CBAB56 /* TrustedNetworksViewController.swift in Sources */,
+				0E79D2C825C9F1B300D12964 /* PurchaseViewController.swift in Sources */,
 				0E520338259F58F500CBAB56 /* ProviderServiceView.swift in Sources */,
 				0E520347259F58FE00CBAB56 /* ProxyViewController.swift in Sources */,
 				0E52037B259F593B00CBAB56 /* IssueReporter.swift in Sources */,
@@ -2245,6 +2265,14 @@
 				0ECEB108224FE51400E9E551 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		0E6BA54D25C9EE3A000CDFAC /* Purchase.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E6BA54C25C9EE3A000CDFAC /* Base */,
+			);
+			name = Purchase.storyboard;
 			sourceTree = "<group>";
 		};
 		0ED38ADC213F44D00004D387 /* Organizer.storyboard */ = {
