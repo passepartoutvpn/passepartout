@@ -108,7 +108,6 @@
 		0E520381259F593B00CBAB56 /* NSTextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F94259F41690022DFB8 /* NSTextView+Search.swift */; };
 		0E520382259F593B00CBAB56 /* SwiftGen+Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */; };
 		0E520383259F593B00CBAB56 /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */; };
-		0E520384259F593B00CBAB56 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F99259F41690022DFB8 /* Donation.swift */; };
 		0E520385259F593B00CBAB56 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E569FA4259F41690022DFB8 /* Credits.html */; };
 		0E520386259F593B00CBAB56 /* ProductManager+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9E259F41690022DFB8 /* ProductManager+App.swift */; };
 		0E520387259F593B00CBAB56 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F97259F41690022DFB8 /* TextInputViewController.swift */; };
@@ -472,7 +471,6 @@
 		0E569F94259F41690022DFB8 /* NSTextView+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Search.swift"; sourceTree = "<group>"; };
 		0E569F97259F41690022DFB8 /* TextInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
 		0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
-		0E569F99259F41690022DFB8 /* Donation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		0E569F9A259F41690022DFB8 /* Theme+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+Views.swift"; sourceTree = "<group>"; };
 		0E569F9C259F41690022DFB8 /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
 		0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Scenes.swift"; sourceTree = "<group>"; };
@@ -874,7 +872,6 @@
 			children = (
 				0E569FA4259F41690022DFB8 /* Credits.html */,
 				0E569FA3259F41690022DFB8 /* AppConstants+App.swift */,
-				0E569F99259F41690022DFB8 /* Donation.swift */,
 				0E569F93259F41690022DFB8 /* HostImporter.swift */,
 				0E569F8F259F41690022DFB8 /* IssueReporter.swift */,
 				0E569FA6259F41690022DFB8 /* Macros.swift */,
@@ -1915,7 +1912,6 @@
 				0E520380259F593B00CBAB56 /* AppConstants+App.swift in Sources */,
 				0E52037B259F593B00CBAB56 /* IssueReporter.swift in Sources */,
 				0E520335259F58F500CBAB56 /* HostServiceView.swift in Sources */,
-				0E520384259F593B00CBAB56 /* Donation.swift in Sources */,
 				0E520333259F58F500CBAB56 /* OrganizerProfileTableView.swift in Sources */,
 				0E52037F259F593B00CBAB56 /* Theme+Views.swift in Sources */,
 				0E520386259F593B00CBAB56 /* ProductManager+App.swift in Sources */,

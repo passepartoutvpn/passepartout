@@ -151,11 +151,11 @@ public class ProductManager: NSObject {
     
     public func isFullVersion() -> Bool {
         #if os(iOS)
-        if isBeta && cfg.isBetaFullVersion {
+        if (isBeta && cfg.isBetaFullVersion) || purchasedFeatures.contains(.fullVersion_iOS) {
             return true
         }
         #else
-        if cfg.isBetaFullVersion {
+        if cfg.isBetaFullVersion || purchasedFeatures.contains(.fullVersion_macOS) {
             return true
         }
         #endif
