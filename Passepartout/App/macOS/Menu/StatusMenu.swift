@@ -102,6 +102,7 @@ class StatusMenu: NSObject {
             self.rebuild()
             self.statusItem.menu = self.menu
             self.service.delegate = self
+            self.reloadVpnStatus()
         }
     }
     
@@ -234,7 +235,7 @@ class StatusMenu: NSObject {
             itemsProfile.append(itemMissingCredentials)
         }
 
-        updateUIWithVPNStatus()
+        reloadVpnStatus()
 
         if !needsCredentials, let providerProfile = profile as? ProviderConnectionProfile {
 
@@ -525,13 +526,6 @@ class StatusMenu: NSObject {
     // MARK: Helpers
     
     private func reloadVpnStatus() {
-        guard service.hasActiveProfile() else {
-            return
-        }
-        updateUIWithVPNStatus()
-    }
-    
-    private func updateUIWithVPNStatus() {
         if vpn.isEnabled {
             itemToggleVPN.title = L10n.App.Service.Cells.Vpn.TurnOff.caption
             itemToggleVPN.action = #selector(disableVPN)
