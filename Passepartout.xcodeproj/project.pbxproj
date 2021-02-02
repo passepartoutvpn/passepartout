@@ -2363,7 +2363,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID)";
 				PRODUCT_NAME = Passepartout;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout macos";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout macos";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -2390,7 +2390,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID)";
 				PRODUCT_NAME = Passepartout;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout macos";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout macos";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -2416,7 +2416,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID).Tunnel";
 				PRODUCT_NAME = PassepartoutTunnel;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout.Tunnel macos";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2442,7 +2442,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID).Tunnel";
 				PRODUCT_NAME = PassepartoutTunnel;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout.Tunnel macos";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2471,7 +2471,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.PassepartoutCore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutCore;
 				PRODUCT_NAME = PassepartoutCore;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -2502,7 +2502,7 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.PassepartoutCore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutCore;
 				PRODUCT_NAME = PassepartoutCore;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -2699,7 +2699,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2719,7 +2718,6 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2741,7 +2739,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -2762,7 +2759,6 @@
 					"@loader_path/../Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -2788,7 +2784,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Launcher;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_LAUNCHER_ID)";
 				PRODUCT_NAME = PassepartoutLauncher;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -2815,7 +2811,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Launcher;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_LAUNCHER_ID)";
 				PRODUCT_NAME = PassepartoutLauncher;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
