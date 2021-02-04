@@ -57,6 +57,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         NSApp.mainMenu = loadMainMenu()
         StatusMenu.shared.install()
+        ProductManager.shared.reviewPurchases()
         
 //        if let appCenterSecret = appCenterSecret, !appCenterSecret.isEmpty {
 //            AppCenter.start(withAppSecret: appCenterSecret, services: [Analytics.self, Crashes.self])

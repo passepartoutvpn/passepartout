@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "Hantera genvägar";
 "shortcuts.edit.cells.add_shortcut.caption" = "Lägg till genväg";
-
-"purchase.title" = "Köp";
-"purchase.sections.products.footer" = "Varje produkt är ett engångsköp. Leverantörsköp inkluderar inte ett VPN-abonnemang.";
-"purchase.cells.full_version.extra_description" = "- Alla leverantörer (inklusive framtida)\n%@";
-"purchase.cells.restore.title" = "Återställ köp";
-"purchase.cells.restore.description" = "Om du köpte den här appen eller funktionen tidigare kan du återställa dina inköp och den här skärmen visas inte igen.";

@@ -95,30 +95,6 @@ internal enum L10n {
         }
       }
     }
-    internal enum Purchase {
-      /// Purchase
-      internal static let title = L10n.tr("App", "purchase.title")
-      internal enum Cells {
-        internal enum FullVersion {
-          /// - All providers (including future ones)\n%@
-          internal static func extraDescription(_ p1: Any) -> String {
-            return L10n.tr("App", "purchase.cells.full_version.extra_description", String(describing: p1))
-          }
-        }
-        internal enum Restore {
-          /// If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.
-          internal static let description = L10n.tr("App", "purchase.cells.restore.description")
-          /// Restore purchases
-          internal static let title = L10n.tr("App", "purchase.cells.restore.title")
-        }
-      }
-      internal enum Sections {
-        internal enum Products {
-          /// Every product is a one-time purchase. Provider purchases do not include a VPN subscription.
-          internal static let footer = L10n.tr("App", "purchase.sections.products.footer")
-        }
-      }
-    }
     internal enum Service {
       internal enum Alerts {
         internal enum Location {
@@ -762,6 +738,30 @@ internal enum L10n {
           internal static func message(_ p1: Any) -> String {
             return L10n.tr("Core", "parsed_file.alerts.unsupported.message", String(describing: p1))
           }
+        }
+      }
+    }
+    internal enum Purchase {
+      /// Purchase
+      internal static let title = L10n.tr("Core", "purchase.title")
+      internal enum Cells {
+        internal enum FullVersion {
+          /// - All providers (including future ones)\n%@
+          internal static func extraDescription(_ p1: Any) -> String {
+            return L10n.tr("Core", "purchase.cells.full_version.extra_description", String(describing: p1))
+          }
+        }
+        internal enum Restore {
+          /// If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.
+          internal static let description = L10n.tr("Core", "purchase.cells.restore.description")
+          /// Restore purchases
+          internal static let title = L10n.tr("Core", "purchase.cells.restore.title")
+        }
+      }
+      internal enum Sections {
+        internal enum Products {
+          /// Every product is a one-time purchase. Provider purchases do not include a VPN subscription.
+          internal static let footer = L10n.tr("Core", "purchase.sections.products.footer")
         }
       }
     }

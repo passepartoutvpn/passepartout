@@ -24,6 +24,11 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<PreferencesViewController>(storyboard: Preferences.self)
   }
+  internal enum Purchase: StoryboardType {
+    internal static let storyboardName = "Purchase"
+
+    internal static let initialScene = InitialSceneType<PurchaseViewController>(storyboard: Purchase.self)
+  }
   internal enum Service: StoryboardType {
     internal static let storyboardName = "Service"
 

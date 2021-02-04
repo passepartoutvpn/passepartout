@@ -553,25 +553,29 @@ public class ConnectionService: Codable {
         log.verbose(protocolConfiguration)
         
         var rules: [NEOnDemandRule] = []
-        #if os(iOS)
-        if profile.trustedNetworks.includesMobile {
-            let rule = policyRule(for: profile)
-            rule.interfaceTypeMatch = .cellular
-            rules.append(rule)
-        }
-        #else
-        if profile.trustedNetworks.includesEthernet {
-            let rule = policyRule(for: profile)
-            rule.interfaceTypeMatch = .ethernet
-            rules.append(rule)
-        }
-        #endif
-        let reallyTrustedWifis = Array(profile.trustedNetworks.includedWiFis.filter { $1 }.keys)
-        if !reallyTrustedWifis.isEmpty {
-            let rule = policyRule(for: profile)
-            rule.interfaceTypeMatch = .wiFi
-            rule.ssidMatch = reallyTrustedWifis
-            rules.append(rule)
+        do {
+            try ProductManager.shared.verifyEligibleForTrustedNetworks()
+            #if os(iOS)
+            if profile.trustedNetworks.includesMobile {
+                let rule = policyRule(for: profile)
+                rule.interfaceTypeMatch = .cellular
+                rules.append(rule)
+            }
+            #else
+            if profile.trustedNetworks.includesEthernet {
+                let rule = policyRule(for: profile)
+                rule.interfaceTypeMatch = .ethernet
+                rules.append(rule)
+            }
+            #endif
+            let reallyTrustedWifis = Array(profile.trustedNetworks.includedWiFis.filter { $1 }.keys)
+            if !reallyTrustedWifis.isEmpty {
+                let rule = policyRule(for: profile)
+                rule.interfaceTypeMatch = .wiFi
+                rule.ssidMatch = reallyTrustedWifis
+                rules.append(rule)
+            }
+        } catch {
         }
         let connection = NEOnDemandRuleConnect()
         connection.interfaceTypeMatch = .any

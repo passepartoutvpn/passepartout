@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "Kurzbefehle bearbeiten";
 "shortcuts.edit.cells.add_shortcut.caption" = "Kurzbefehl hinzufügen";
-
-"purchase.title" = "Kaufen";
-"purchase.sections.products.footer" = "Jedes Produkt ist ein einmaliger Kauf. Der Kauf eines Providers beinhaltet kein VPN-Abonnement.";
-"purchase.cells.full_version.extra_description" = "- Alle Anbieter (inklusive Zukünftige)\n%@";
-"purchase.cells.restore.title" = "Einkäufe wiederherstellen";
-"purchase.cells.restore.description" = "Wenn Sie diese App oder Funktion in der Vergangenheit gekauft haben, können Sie Ihre Einkäufe wiederherstellen und dieser Bildschirm wird nicht mehr angezeigt.";

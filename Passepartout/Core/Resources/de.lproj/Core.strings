@@ -240,6 +240,12 @@
 
 "shortcuts.edit.sections.all.header" = "Existierende Kurzbefehle";
 
+"purchase.title" = "Kaufen";
+"purchase.sections.products.footer" = "Jedes Produkt ist ein einmaliger Kauf. Der Kauf eines Providers beinhaltet kein VPN-Abonnement.";
+"purchase.cells.full_version.extra_description" = "Alle Anbieter (inklusive Zukünftige)\n%@";
+"purchase.cells.restore.title" = "Einkäufe wiederherstellen";
+"purchase.cells.restore.description" = "Wenn Sie diese App oder Funktion in der Vergangenheit gekauft haben, können Sie Ihre Einkäufe wiederherstellen und dieser Bildschirm wird nicht mehr angezeigt.";
+
 "donation.title" = "Spenden";
 "donation.sections.one_time.header" = "Einmalig";
 "donation.sections.one_time.footer" = "Wenn du dich erkenntlich zeigen möchtest für meine Arbeit, gibt es hier ein paar Beträge die du direkt spenden kannst.\n\nDu bezahlst pro Spende nur einmal und kannst mehrmals spenden wenn du möchtest.";

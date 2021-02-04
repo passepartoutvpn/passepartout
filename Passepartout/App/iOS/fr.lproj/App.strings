@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "Gérer les raccourcis";
 "shortcuts.edit.cells.add_shortcut.caption" = "Ajouter un raccourcis";
-
-"purchase.title" = "Acheter";
-"purchase.sections.products.footer" = "Chaque produit est un achat unique. Les achats n'incluent pas une souscription à un service de VPN.";
-"purchase.cells.full_version.extra_description" = "- Tous les fournisseurs (incluant les prochains)\n%@";
-"purchase.cells.restore.title" = "Restaurer les achats";
-"purchase.cells.restore.description" = "Si vous avez acheté l'application ou une fonctionnalité dans le passé, vous pouvez restaurer les achats et ce message ne s'affichera plus.";

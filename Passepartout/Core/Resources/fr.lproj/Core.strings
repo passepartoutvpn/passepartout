@@ -240,6 +240,12 @@
 
 "shortcuts.edit.sections.all.header" = "Raccourcis existants";
 
+"purchase.title" = "Acheter";
+"purchase.sections.products.footer" = "Chaque produit est un achat unique. Les achats n'incluent pas une souscription à un service de VPN.";
+"purchase.cells.full_version.extra_description" = "Tous les fournisseurs (incluant les prochains)\n%@";
+"purchase.cells.restore.title" = "Restaurer les achats";
+"purchase.cells.restore.description" = "Si vous avez acheté l'application ou une fonctionnalité dans le passé, vous pouvez restaurer les achats et ce message ne s'affichera plus.";
+
 "donation.title" = "Faire un don";
 "donation.sections.one_time.header" = "Une seule fois";
 "donation.sections.one_time.footer" = "Si vous voulez manifester votre gratitude envers mon travail bénévole, voici certains montants pour faire un don instantanément.\n\n Vous n'allez être chargé qu'une seule fois par don et vous pouvez faire un don plus d'une fois.";

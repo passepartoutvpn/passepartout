@@ -2,7 +2,7 @@
 //  PurchaseViewController.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/27/19.
+//  Created by Davide De Rosa on 2/2/21.
 //  Copyright (c) 2021 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
+import Cocoa
 import StoreKit
 import PassepartoutCore
 import SwiftyBeaver
@@ -35,8 +35,22 @@ protocol PurchaseViewControllerDelegate: class {
     func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product)
 }
 
-class PurchaseViewController: UITableViewController, StrongTableHost {
-    private var isLoading = true
+class PurchaseViewController: NSViewController {
+    private struct Columns {
+        static let product = NSUserInterfaceItemIdentifier("ProductCellIdentifier")
+    }
+
+    @IBOutlet private weak var tableView: NSTableView!
+    
+    @IBOutlet private weak var labelFooter: NSTextField!
+
+    @IBOutlet private weak var labelRestore: NSTextField!
+
+    @IBOutlet private weak var activityPurchase: NSProgressIndicator!
+
+    @IBOutlet private weak var buttonPurchase: NSButton!
+
+    @IBOutlet private weak var buttonRestore: NSButton!
 
     var feature: Product!
     
@@ -52,18 +66,12 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
 
     private var fullVersionExtra: String?
 
-    // MARK: StrongTableHost
-    
-    var model: StrongTableModel<SectionType, RowType> = StrongTableModel()
+    var rows: [RowType] = []
     
     func reloadModel() {
-        model.clear()
-        model.add(.products)
-        model.setFooter(L10n.Core.Purchase.Sections.Products.footer, forSection: .products)
-
-        var rows: [RowType] = []
+        rows = []
         let pm = ProductManager.shared
-        if let skPlatformVersion = pm.product(withIdentifier: .fullVersion_iOS) {
+        if let skPlatformVersion = pm.product(withIdentifier: .fullVersion_macOS) {
             self.skPlatformVersion = skPlatformVersion
             rows.append(.platformVersion)
         }
@@ -75,52 +83,85 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
             self.skFeature = skFeature
             rows.append(.feature)
         }
-        rows.append(.restore)
-        model.set(rows, forSection: .products)
 
         let platformBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
-            return "- \($0.localizedTitle)"
+            return $0.localizedTitle
         }.sortedCaseInsensitive()
         let platformBullets = platformBulletsList.joined(separator: "\n")
-        platformVersionExtra = "- \(L10n.Core.Purchase.Cells.FullVersion.extraDescription(platformBullets))"
+        platformVersionExtra = L10n.Core.Purchase.Cells.FullVersion.extraDescription(platformBullets)
 
-        let fullBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS]).map {
-            return "- \($0.localizedTitle)"
+        let fullBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_macOS]).map {
+            return $0.localizedTitle
         }.sortedCaseInsensitive()
         let fullBullets = fullBulletsList.joined(separator: "\n")
-        fullVersionExtra = "- \(L10n.Core.Purchase.Cells.FullVersion.extraDescription(fullBullets))"
+        fullVersionExtra = L10n.Core.Purchase.Cells.FullVersion.extraDescription(fullBullets)
     }
     
-    // MARK: UIViewController
+    // MARK: NSViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = L10n.Core.Purchase.title
+        labelFooter.stringValue = L10n.Core.Purchase.Sections.Products.footer
+        labelRestore.stringValue = L10n.Core.Purchase.Cells.Restore.description
+        buttonPurchase.title = L10n.Core.Purchase.title
+        buttonRestore.title = L10n.Core.Purchase.Cells.Restore.title
 
         guard let _ = feature else {
             fatalError("No feature set for purchase")
         }
 
-        title = L10n.Core.Purchase.title
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
-
-        isLoading = true
+        tableView.usesAutomaticRowHeights = true
         tableView.reloadData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear() {
+        super.viewWillAppear()
 
-        let hud = HUD(view: view)
+        view.window?.styleMask = [.closable, .titled]
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+
+        startWaiting()
         ProductManager.shared.listProducts { [weak self] (_, _) in
             self?.reloadModel()
-            self?.isLoading = false
             self?.tableView.reloadData()
-            hud.hide()
+            self?.stopWaiting()
         }
     }
     
     // MARK: Actions
     
+    @IBAction private func doPurchase(_ sender: Any) {
+        guard tableView.selectedRow != -1 else {
+            return
+        }
+        switch rows[tableView.selectedRow] {
+        case .feature:
+            purchaseFeature()
+
+        case .platformVersion:
+            purchasePlatformVersion()
+
+        case .fullVersion:
+            purchaseFullVersion()
+        }
+    }
+
+    @IBAction private func doRestorePurchases(_ sender: Any) {
+        startWaiting()
+        ProductManager.shared.restorePurchases { [weak self] in
+            self?.stopWaiting()
+            guard $0 == nil else {
+                return
+            }
+            self?.dismiss(nil)
+        }
+    }
+
     private func purchaseFeature() {
         guard let sk = skFeature else {
             return
@@ -142,21 +183,10 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         purchase(sk)
     }
 
-    private func restorePurchases() {
-        let hud = HUD(view: view)
-        ProductManager.shared.restorePurchases { [weak self] in
-            hud.hide()
-            guard $0 == nil else {
-                return
-            }
-            self?.dismiss(animated: true, completion: nil)
-        }
-    }
-
     private func purchase(_ skProduct: SKProduct) {
-        let hud = HUD(view: view)
+        startWaiting()
         ProductManager.shared.purchase(skProduct) { [weak self] in
-            hud.hide()
+            self?.stopWaiting()
             guard $0 == .success else {
                 if let error = $1 {
                     self?.reportPurchaseError(withProduct: skProduct, error: error)
@@ -164,104 +194,81 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
                 return
             }
 
-            self?.dismiss(animated: true) {
-                guard let weakSelf = self else {
-                    return
-                }
-                let product = weakSelf.feature.matchesStoreKitProduct(skProduct) ? weakSelf.feature! : .fullVersion
-                weakSelf.delegate?.purchaseController(weakSelf, didPurchase: product)
+            guard let weakSelf = self else {
+                return
             }
+            let product = weakSelf.feature.matchesStoreKitProduct(skProduct) ? weakSelf.feature! : .fullVersion
+            weakSelf.delegate?.purchaseController(weakSelf, didPurchase: product)
+
+            self?.dismiss(nil)
         }
     }
     
     private func reportPurchaseError(withProduct product: SKProduct, error: Error) {
         log.error("Unable to purchase \(product): \(error)")
         
-        let alert = UIAlertController.asAlert(product.localizedTitle, error.localizedDescription)
-        alert.addCancelAction(L10n.Core.Global.ok)
-        present(alert, animated: true, completion: nil)
+        let alert = Macros.warning(product.localizedTitle, error.localizedDescription)
+        _ = alert.presentModally(withOK: L10n.Core.Global.ok, cancel: nil)
     }
 
     @objc private func close() {
-        dismiss(animated: true, completion: nil)
+        dismiss(nil)
+    }
+
+    // MARK: Helpers
+    
+    private func startWaiting() {
+        tableView.isEnabled = false
+        buttonPurchase.isEnabled = false
+        buttonRestore.isEnabled = false
+        activityPurchase.isHidden = false
+        activityPurchase.startAnimation(nil)
+    }
+    
+    private func stopWaiting() {
+        activityPurchase.stopAnimation(nil)
+        tableView.isEnabled = true
+        buttonPurchase.isEnabled = true
+        buttonRestore.isEnabled = true
     }
 }
 
-extension PurchaseViewController {
-    enum SectionType {
-        case products
-    }
-    
+extension PurchaseViewController: NSTableViewDataSource, NSTableViewDelegate {
     enum RowType {
         case feature
         
         case platformVersion
         
         case fullVersion
-
-        case restore
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.numberOfSections
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return rows.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.footer(forSection: section)
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard !isLoading else {
-            return 0
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let view = tableView.makeView(withIdentifier: Columns.product, owner: nil) as? PurchaseProductView else {
+            return nil
         }
-        return model.numberOfRows(forSection: section)
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseTableViewCell", for: indexPath) as! PurchaseTableViewCell
-        switch model.row(at: indexPath) {
+        switch rows[row] {
         case .feature:
             guard let product = skFeature else {
                 fatalError("Loaded feature cell, yet no corresponding product?")
             }
-            cell.fill(product: product)
-            
+            view.fill(product: product)
+
         case .platformVersion:
             guard let product = skPlatformVersion else {
                 fatalError("Loaded platform version cell, yet no corresponding product?")
             }
-            cell.fill(product: product, customDescription: platformVersionExtra)
+            view.fill(product: product, customDescription: platformVersionExtra)
 
         case .fullVersion:
             guard let product = skFullVersion else {
                 fatalError("Loaded full version cell, yet no corresponding product?")
             }
-            cell.fill(product: product, customDescription: fullVersionExtra)
-            
-        case .restore:
-            cell.fill(
-                title: L10n.Core.Purchase.Cells.Restore.title,
-                description: L10n.Core.Purchase.Cells.Restore.description
-            )
+            view.fill(product: product, customDescription: fullVersionExtra)
         }
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        switch model.row(at: indexPath) {
-        case .feature:
-            purchaseFeature()
-            
-        case .platformVersion:
-            purchasePlatformVersion()
-            
-        case .fullVersion:
-            purchaseFullVersion()
-            
-        case .restore:
-            restorePurchases()
-        }
+        return view
     }
 }

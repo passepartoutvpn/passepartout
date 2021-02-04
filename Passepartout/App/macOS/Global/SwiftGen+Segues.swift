@@ -19,6 +19,7 @@ internal enum StoryboardSegue {
   internal enum Service: String, SegueType {
     case accountSegueIdentifier = "AccountSegueIdentifier"
     case customizeSegueIdentifier = "CustomizeSegueIdentifier"
+    case trustedNetworkAddSegueIdentifier = "TrustedNetworkAddSegueIdentifier"
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

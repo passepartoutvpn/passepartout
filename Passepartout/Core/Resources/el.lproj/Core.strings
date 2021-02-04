@@ -240,6 +240,12 @@
 
 "shortcuts.edit.sections.all.header" = "Υπάρχουσες συντομεύσεις";
 
+"purchase.title" = "Αγορά";
+"purchase.sections.products.footer" = "Κάθε προϊόν είναι μια αγορά. Οι αγορές παρόχων δεν περιλαμβάνουν τη συνδρομή VPN.";
+"purchase.cells.full_version.extra_description" = "Όλοι οι πάροχοι (περιλαμβάνονται και οι μελλοντικοί)\n%@";
+"purchase.cells.restore.title" = "Επαναφορά Αγορών";
+"purchase.cells.restore.description" = "Εαν αγοράσατε την εφαρμογή στο παρελθόν, μπορείτε να κάνετε επαναφορά αγορών και αυτή η οθόνη δε θα εμφανιστεί ξανά.";
+
 "donation.title" = "Δωρεά";
 "donation.sections.one_time.header" = "Μια Φορά";
 "donation.sections.one_time.footer" = "Αν είστε χαρούμενη με τη δουλειά μου, εδώ είναι λίγα ποσά που μπορείτε να δώσετε αμέσως.\n\nΘα χρεωθείτε μόνο μία φορά και μπορείτε να δώσετε πολλές φορές.";

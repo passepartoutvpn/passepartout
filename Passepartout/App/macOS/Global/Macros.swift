@@ -24,6 +24,7 @@
 //
 
 import Cocoa
+import PassepartoutCore
 
 class Macros {
     static func warning(_ title: String, _ message: String) -> NSAlert {
@@ -86,6 +87,15 @@ extension NSAlert {
             addButton(withTitle: other2Title)
         }
         return runModal()
+    }
+}
+
+extension NSViewController {
+    func presentPurchaseScreen(forProduct product: Product, delegate: PurchaseViewControllerDelegate? = nil) {
+        let vc = StoryboardScene.Purchase.initialScene.instantiate()
+        vc.feature = product
+        vc.delegate = delegate
+        presentAsModalWindow(vc)
     }
 }
 

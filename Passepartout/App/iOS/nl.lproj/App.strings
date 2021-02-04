@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "Beheer snelkoppelingen";
 "shortcuts.edit.cells.add_shortcut.caption" = "Voeg snelkoppeling toe";
-
-"purchase.title" = "Aanschaffen";
-"purchase.sections.products.footer" = "Elk product is een eenmalige aankoop. Aankopen van providers bevatten geen VPN-abonnement.";
-"purchase.cells.full_version.extra_description" = "- Alle providers (inclusief toekomstige)\n%@";
-"purchase.cells.restore.title" = "Herstel Aankopen";
-"purchase.cells.restore.description" = "Als u deze app of functie in het verleden heeft gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer getoond.";

@@ -8,9 +8,9 @@ strings:
 
 ib:
     inputs:
-        #- Base.lproj/About.storyboard
         - Base.lproj/Main.storyboard
         - Base.lproj/Preferences.storyboard
+        - Base.lproj/Purchase.storyboard
         - Base.lproj/Service.storyboard
         #- Base.lproj/Shortcuts.storyboard
     outputs:

@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "Manage shortcuts";
 "shortcuts.edit.cells.add_shortcut.caption" = "Add shortcut";
-
-"purchase.title" = "Purchase";
-"purchase.sections.products.footer" = "Every product is a one-time purchase. Provider purchases do not include a VPN subscription.";
-"purchase.cells.full_version.extra_description" = "- All providers (including future ones)\n%@";
-"purchase.cells.restore.title" = "Restore purchases";
-"purchase.cells.restore.description" = "If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.";

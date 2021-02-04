@@ -240,6 +240,12 @@
 
 "shortcuts.edit.sections.all.header" = "Istniejące skróty";
 
+"purchase.title" = "Kup";
+"purchase.sections.products.footer" = "Każdy produkt to zakup jednorazowy. Kuipno usługodawcy nie zawiera subskrypcji VPN.";
+"purchase.cells.full_version.extra_description" = "Wszyscy usługodawcy (włączając przyszłych)\n%@";
+"purchase.cells.restore.title" = "Przywróć zakup";
+"purchase.cells.restore.description" = "Jeśli kupiłeś tą aplikację lub funkcję wcześniej, możesz przywrócić swoje zakupy i ten ekran nie będzie wyświetlony ponownie.";
+
 "donation.title" = "Dotacja";
 "donation.sections.one_time.header" = "Jeden raz";
 "donation.sections.one_time.footer" = "Jeśli chcesz docenić moją pracę, poniżej znajdziesz kilka kwot do wyboru dotacji.\n\nTwoje konto zostanie obciążone tylko raz na jedną dotację, możesz wysłać dotację kilka razy.";

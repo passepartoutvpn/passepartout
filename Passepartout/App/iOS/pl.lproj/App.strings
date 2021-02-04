@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "Zarządzaj skrótami";
 "shortcuts.edit.cells.add_shortcut.caption" = "Dodaj skrót";
-
-"purchase.title" = "Kup";
-"purchase.sections.products.footer" = "Każdy produkt to zakup jednorazowy. Kuipno usługodawcy nie zawiera subskrypcji VPN.";
-"purchase.cells.full_version.extra_description" = "- Wszyscy usługodawcy (włączając przyszłych)\n%@";
-"purchase.cells.restore.title" = "Przywróć zakup";
-"purchase.cells.restore.description" = "Jeśli kupiłeś tą aplikację lub funkcję wcześniej, możesz przywrócić swoje zakupy i ten ekran nie będzie wyświetlony ponownie.";

@@ -240,6 +240,12 @@
 
 "shortcuts.edit.sections.all.header" = "Bestaande snelkoppelingen";
 
+"purchase.title" = "Aanschaffen";
+"purchase.sections.products.footer" = "Elk product is een eenmalige aankoop. Aankopen van providers bevatten geen VPN-abonnement.";
+"purchase.cells.full_version.extra_description" = "Alle providers (inclusief toekomstige)\n%@";
+"purchase.cells.restore.title" = "Herstel Aankopen";
+"purchase.cells.restore.description" = "Als u deze app of functie in het verleden heeft gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer getoond.";
+
 "donation.title" = "Donatie";
 "donation.sections.one_time.header" = "Eenmalig";
 "donation.sections.one_time.footer" = "Als je dankbaarheid wilt tonen voor mijn gratis werk, zijn hier een paar bedragen die je direct kunt doneren.\n\nHet bedrag wordt slechts één keer per donatie in rekening gebracht en u kunt meerdere keren doneren.";

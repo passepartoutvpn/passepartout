@@ -240,6 +240,12 @@
 
 "shortcuts.edit.sections.all.header" = "Befintliga genvägar";
 
+"purchase.title" = "Köp";
+"purchase.sections.products.footer" = "Varje produkt är ett engångsköp. Leverantörsköp inkluderar inte ett VPN-abonnemang.";
+"purchase.cells.full_version.extra_description" = "Alla leverantörer (inklusive framtida)\n%@";
+"purchase.cells.restore.title" = "Återställ köp";
+"purchase.cells.restore.description" = "Om du köpte den här appen eller funktionen tidigare kan du återställa dina inköp och den här skärmen visas inte igen.";
+
 "donation.title" = "Donera";
 "donation.sections.one_time.header" = "En gång";
 "donation.sections.one_time.footer" = "Om du vill visa tacksamhet för mitt fria arbete, här är några belopp du kan donera direkt. \n\nDu betalas endast en gång per donation, och du kan donera flera gånger. ";

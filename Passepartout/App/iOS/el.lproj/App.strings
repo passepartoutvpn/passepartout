@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "Διαχείριση συντομεύσεων";
 "shortcuts.edit.cells.add_shortcut.caption" = "Προσθήκη Συντόμευσης";
-
-"purchase.title" = "Αγορά";
-"purchase.sections.products.footer" = "Κάθε προϊόν είναι μια αγορά. Οι αγορές παρόχων δεν περιλαμβάνουν τη συνδρομή VPN.";
-"purchase.cells.full_version.extra_description" = "- Όλοι οι πάροχοι (περιλαμβάνονται και οι μελλοντικοί)\n%@";
-"purchase.cells.restore.title" = "Επαναφορά Αγορών";
-"purchase.cells.restore.description" = "Εαν αγοράσατε την εφαρμογή στο παρελθόν, μπορείτε να κάνετε επαναφορά αγορών και αυτή η οθόνη δε θα εμφανιστεί ξανά.";
