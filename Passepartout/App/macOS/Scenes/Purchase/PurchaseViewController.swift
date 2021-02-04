@@ -58,8 +58,12 @@ class PurchaseViewController: NSViewController {
 
     private var skFeature: SKProduct?
     
+    private var skPlatformVersion: SKProduct?
+
     private var skFullVersion: SKProduct?
     
+    private var platformVersionExtra: String?
+
     private var fullVersionExtra: String?
 
     var rows: [RowType] = []
@@ -67,6 +71,10 @@ class PurchaseViewController: NSViewController {
     func reloadModel() {
         rows = []
         let pm = ProductManager.shared
+        if let skPlatformVersion = pm.product(withIdentifier: .fullVersion_macOS) {
+            self.skPlatformVersion = skPlatformVersion
+            rows.append(.platformVersion)
+        }
         if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
@@ -75,6 +83,12 @@ class PurchaseViewController: NSViewController {
             self.skFeature = skFeature
             rows.append(.feature)
         }
+
+        let platformBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
+            return $0.localizedTitle
+        }.sortedCaseInsensitive()
+        let platformBullets = platformBulletsList.joined(separator: "\n")
+        platformVersionExtra = L10n.Core.Purchase.Cells.FullVersion.extraDescription(platformBullets)
 
         let fullBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_macOS]).map {
             return $0.localizedTitle
@@ -129,6 +143,9 @@ class PurchaseViewController: NSViewController {
         case .feature:
             purchaseFeature()
 
+        case .platformVersion:
+            purchasePlatformVersion()
+
         case .fullVersion:
             purchaseFullVersion()
         }
@@ -152,6 +169,13 @@ class PurchaseViewController: NSViewController {
         purchase(sk)
     }
     
+    private func purchasePlatformVersion() {
+        guard let sk = skPlatformVersion else {
+            return
+        }
+        purchase(sk)
+    }
+
     private func purchaseFullVersion() {
         guard let sk = skFullVersion else {
             return
@@ -213,6 +237,8 @@ extension PurchaseViewController: NSTableViewDataSource, NSTableViewDelegate {
     enum RowType {
         case feature
         
+        case platformVersion
+        
         case fullVersion
     }
     
@@ -230,6 +256,12 @@ extension PurchaseViewController: NSTableViewDataSource, NSTableViewDelegate {
                 fatalError("Loaded feature cell, yet no corresponding product?")
             }
             view.fill(product: product)
+
+        case .platformVersion:
+            guard let product = skPlatformVersion else {
+                fatalError("Loaded platform version cell, yet no corresponding product?")
+            }
+            view.fill(product: product, customDescription: platformVersionExtra)
 
         case .fullVersion:
             guard let product = skFullVersion else {

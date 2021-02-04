@@ -43,9 +43,13 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     weak var delegate: PurchaseViewControllerDelegate?
 
     private var skFeature: SKProduct?
+    
+    private var skPlatformVersion: SKProduct?
 
     private var skFullVersion: SKProduct?
     
+    private var platformVersionExtra: String?
+
     private var fullVersionExtra: String?
 
     // MARK: StrongTableHost
@@ -59,6 +63,10 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
 
         var rows: [RowType] = []
         let pm = ProductManager.shared
+        if let skPlatformVersion = pm.product(withIdentifier: .fullVersion_iOS) {
+            self.skPlatformVersion = skPlatformVersion
+            rows.append(.platformVersion)
+        }
         if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
@@ -70,11 +78,17 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         rows.append(.restore)
         model.set(rows, forSection: .products)
 
-        let featureBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS]).map {
+        let platformBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
             return "- \($0.localizedTitle)"
         }.sortedCaseInsensitive()
-        let featureBullets = featureBulletsList.joined(separator: "\n")
-        fullVersionExtra = L10n.App.Purchase.Cells.FullVersion.extraDescription(featureBullets)
+        let platformBullets = platformBulletsList.joined(separator: "\n")
+        platformVersionExtra = "- \(L10n.Core.Purchase.Cells.FullVersion.extraDescription(platformBullets))"
+
+        let fullBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS]).map {
+            return "- \($0.localizedTitle)"
+        }.sortedCaseInsensitive()
+        let fullBullets = fullBulletsList.joined(separator: "\n")
+        fullVersionExtra = "- \(L10n.Core.Purchase.Cells.FullVersion.extraDescription(fullBullets))"
     }
     
     // MARK: UIViewController
@@ -109,6 +123,13 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     
     private func purchaseFeature() {
         guard let sk = skFeature else {
+            return
+        }
+        purchase(sk)
+    }
+    
+    private func purchasePlatformVersion() {
+        guard let sk = skPlatformVersion else {
             return
         }
         purchase(sk)
@@ -174,8 +195,10 @@ extension PurchaseViewController {
     enum RowType {
         case feature
         
-        case fullVersion
+        case platformVersion
         
+        case fullVersion
+
         case restore
     }
     
@@ -203,6 +226,12 @@ extension PurchaseViewController {
             }
             cell.fill(product: product)
             
+        case .platformVersion:
+            guard let product = skPlatformVersion else {
+                fatalError("Loaded platform version cell, yet no corresponding product?")
+            }
+            cell.fill(product: product, customDescription: platformVersionExtra)
+
         case .fullVersion:
             guard let product = skFullVersion else {
                 fatalError("Loaded full version cell, yet no corresponding product?")
@@ -224,6 +253,9 @@ extension PurchaseViewController {
         switch model.row(at: indexPath) {
         case .feature:
             purchaseFeature()
+            
+        case .platformVersion:
+            purchasePlatformVersion()
             
         case .fullVersion:
             purchaseFullVersion()
