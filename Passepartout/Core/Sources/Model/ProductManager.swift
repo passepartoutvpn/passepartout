@@ -294,14 +294,18 @@ extension ProductManager: SKRequestDelegate {
             guard finished else {
                 return
             }
-            self?.restoreCompletionHandler?(error)
-            self?.restoreCompletionHandler = nil
+            DispatchQueue.main.async {
+                self?.restoreCompletionHandler?(error)
+                self?.restoreCompletionHandler = nil
+            }
         }
     }
     
     public func request(_ request: SKRequest, didFailWithError error: Error) {
-        restoreCompletionHandler?(error)
-        restoreCompletionHandler = nil
+        DispatchQueue.main.async { [weak self] in
+            self?.restoreCompletionHandler?(error)
+            self?.restoreCompletionHandler = nil
+        }
     }
 }
 
