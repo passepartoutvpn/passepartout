@@ -160,6 +160,22 @@ class StatusMenu: NSObject {
         let itemSupport = NSMenuItem(title: L10n.App.Menu.Support.title, action: nil, keyEquivalent: "")
         menu.setSubmenu(menuSupport, for: itemSupport)
         menu.addItem(itemSupport)
+        
+        // share
+
+        let menuShare = NSMenu()
+        let itemTweet = NSMenuItem(title: L10n.Core.About.Cells.ShareTwitter.caption, action: #selector(shareTwitter), keyEquivalent: "")
+        let itemInvite = NSMenuItem(title: L10n.Core.About.Cells.ShareGeneric.caption.asContinuation, action: #selector(shareGeneric), keyEquivalent: "")
+        let itemAlternativeTo = NSMenuItem(title: "AlternativeTo".asContinuation, action: #selector(visitAlternativeTo), keyEquivalent: "")
+        itemTweet.target = self
+        itemInvite.target = self
+        itemAlternativeTo.target = self
+        menuShare.addItem(itemTweet)
+        menuShare.addItem(itemInvite)
+        menuShare.addItem(itemAlternativeTo)
+        let itemShare = NSMenuItem(title: L10n.Core.About.Sections.Share.header, action: nil, keyEquivalent: "")
+        menu.setSubmenu(menuShare, for: itemShare)
+        menu.addItem(itemShare)
         menu.addItem(.separator())
 
         // secondary
@@ -515,6 +531,23 @@ class StatusMenu: NSObject {
     @objc private func reportConnectivityIssue() {
         let issue = Issue(debugLog: true, profile: TransientStore.shared.service.activeProfile)
         IssueReporter.shared.present(withIssue: issue)
+    }
+    
+    @objc private func shareTwitter() {
+        NSWorkspace.shared.open(AppConstants.URLs.twitterIntent(withMessage: L10n.Core.Share.message))
+    }
+    
+    @objc private func shareGeneric() {
+        guard let source = statusItem.button else {
+            return
+        }
+        let message = "\(L10n.Core.Share.message) \(AppConstants.URLs.website)"
+        let picker = NSSharingServicePicker(items: [message])
+        picker.show(relativeTo: source.bounds, of: source, preferredEdge: .minY)
+    }
+    
+    @objc private func visitAlternativeTo() {
+        NSWorkspace.shared.open(AppConstants.URLs.alternativeTo)
     }
     
     @objc private func quit() {
