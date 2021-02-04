@@ -1,6 +1,6 @@
 ### Added
 
-- Support `--data-ciphers` from OpenVPN 2.5 [tunnelkit#193](https://github.com/passepartoutvpn/tunnelkit/issues/193)
+- Support `--data-ciphers` from OpenVPN 2.5.
 - Support DNS over HTTPS/TLS in "Network settings".
 
 ### Changed

@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 1.15.0 Beta 2597 (2021-02-04)
 
 ### Added
 
-- Support `--data-ciphers` from OpenVPN 2.5 [tunnelkit#193](https://github.com/passepartoutvpn/tunnelkit/issues/193)
+- Support `--data-ciphers` from OpenVPN 2.5. [tunnelkit#193](https://github.com/passepartoutvpn/tunnelkit/issues/193)
 - Support DNS over HTTPS/TLS in "Network settings". [#91](https://github.com/passepartoutvpn/passepartout-apple/issues/91)
 - Menu tooltip describing active profile and status.
 - Make "Confirm quit" a preference.
