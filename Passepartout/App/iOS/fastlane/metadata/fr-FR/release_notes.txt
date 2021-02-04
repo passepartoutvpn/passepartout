@@ -11,4 +11,5 @@
 
 - Redundant keychain items.
 - Keyboard not dismissed in "Network settings".
+- "Reset configuration" not working with encrypted configuration files.
 
