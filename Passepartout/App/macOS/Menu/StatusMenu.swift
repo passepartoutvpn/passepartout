@@ -543,16 +543,17 @@ class StatusMenu: NSObject {
         } else {
             statusItem.button?.toolTip = nil
         }
-        statusItem.button?.alphaValue = 1.0
 
         switch vpn.status ?? .disconnected {
         case .connected:
             statusItem.button?.image = imageStatusActive
+            statusItem.button?.alphaValue = 1.0
             
             Reviewer.shared.reportEvent()
 
         case .connecting:
             statusItem.button?.image = imageStatusInProgress
+            statusItem.button?.alphaValue = 1.0
 
         case .disconnected:
             statusItem.button?.image = imageStatusInactive
@@ -560,6 +561,7 @@ class StatusMenu: NSObject {
 
         case .disconnecting:
             statusItem.button?.image = imageStatusInProgress
+            statusItem.button?.alphaValue = 1.0
         }
     }
 }
