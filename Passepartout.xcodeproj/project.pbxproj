@@ -1374,7 +1374,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
 					0E31529A223F9EF400F61841 = {
@@ -2263,7 +2263,7 @@
 			baseConfigurationReference = 0376B8FDB39F81CA072C3F37 /* Pods-ios-PassepartoutCore-iOS.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -2295,7 +2295,7 @@
 			baseConfigurationReference = 5CC1FDDBA184F8548D814E9D /* Pods-ios-PassepartoutCore-iOS.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
