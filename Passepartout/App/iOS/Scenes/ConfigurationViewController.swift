@@ -165,14 +165,24 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
     
     // MARK: Actions
 
-    private func resetOriginalConfiguration() {
+    private func resetOriginalConfiguration(passphrase: String? = nil) {
         guard let originalURL = originalConfigurationURL else {
             log.warning("Resetting with no original configuration set? Bad table model?")
             return
         }
         let parsingResult: OpenVPN.ConfigurationParser.Result
         do {
-            parsingResult = try OpenVPN.ConfigurationParser.parsed(fromURL: originalURL)
+            parsingResult = try OpenVPN.ConfigurationParser.parsed(fromURL: originalURL, passphrase: passphrase)
+        } catch let e as ConfigurationError {
+            switch e {
+            case .encryptionPassphrase:
+                log.warning("Configuration is encrypted, ask for passphrase")
+                askForResetConfigurationWithPassphrase(originalURL)
+
+            default:
+                log.error("Could not parse original configuration: \(e)")
+            }
+            return
         } catch let e {
             log.error("Could not parse original configuration: \(e)")
             return
@@ -183,6 +193,22 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         tableView.reloadData()
 
         delegate?.configuration(didUpdate: initialConfiguration)
+    }
+    
+    private func askForResetConfigurationWithPassphrase(_ originalURL: URL) {
+        let alert = UIAlertController.asAlert(nil, L10n.Core.ParsedFile.Alerts.EncryptionPassphrase.message)
+        alert.addTextField { (field) in
+            field.isSecureTextEntry = true
+        }
+        alert.addPreferredAction(L10n.Core.Global.ok) {
+            guard let passphrase = alert.textFields?.first?.text else {
+                return
+            }
+            self.resetOriginalConfiguration(passphrase: passphrase)
+        }
+        alert.addCancelAction(L10n.Core.Global.cancel) {
+        }
+        present(alert, animated: true, completion: nil)
     }
 
     @IBAction private func refresh() {

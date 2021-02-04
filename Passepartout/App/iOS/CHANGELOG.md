@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.15.0 Beta 2564 (2021-01-30)
+## Unreleased
 
 ### Added
 
@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Redundant keychain items.
 - Keyboard not dismissed in "Network settings".
+- "Reset configuration" not working with encrypted configuration files.
 
 ## 1.14.0 (2021-01-07)
 
