@@ -44,7 +44,7 @@ class AboutViewController: UITableViewController, StrongTableHost {
         model.set([.version, .credits], forSection: .info)
         model.set([.readme, .changelog], forSection: .github)
         model.set([.website, .faq, .disclaimer, .privacyPolicy], forSection: .web)
-        model.set([.shareTwitter, .shareGeneric, .visitAlternativeTo, .visitProductHunt], forSection: .share)
+        model.set([.shareTwitter, .shareGeneric, .visitAlternativeTo], forSection: .share)
         return model
     }()
     
@@ -129,8 +129,6 @@ extension AboutViewController {
         case shareGeneric
 
         case visitAlternativeTo
-
-        case visitProductHunt
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -193,9 +191,6 @@ extension AboutViewController {
 
         case .visitAlternativeTo:
             cell.leftText = "AlternativeTo"
-
-        case .visitProductHunt:
-            cell.leftText = "ProductHunt"
         }
         return cell
     }
@@ -234,9 +229,6 @@ extension AboutViewController {
 
         case .visitAlternativeTo:
             visitURL(AppConstants.URLs.alternativeTo)
-
-        case .visitProductHunt:
-            visitURL(AppConstants.URLs.productHunt)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

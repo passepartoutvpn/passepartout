@@ -207,9 +207,7 @@ public class AppConstants {
         
         public static let githubSponsors = URL(string: "https://www.github.com/sponsors/passepartoutvpn")!
         
-        public static let alternativeTo = URL(string: "https://alternativeto.net/software/passepartout-vpn/")!
-        
-        public static let productHunt = URL(string: "https://www.producthunt.com/posts/passepartout-vpn/")!
+        public static let alternativeTo = URL(string: "https://alternativeto.net/software/passepartout-vpn/about/")!
         
         private static let twitterHashtags = ["OpenVPN", "iOS", "macOS"]
         
