@@ -70,7 +70,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         rows.append(.restore)
         model.set(rows, forSection: .products)
 
-        let featureBulletsList: [String] = ProductManager.shared.featureProducts(includingFullVersion: false).map {
+        let featureBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS]).map {
             return "- \($0.localizedTitle)"
         }.sortedCaseInsensitive()
         let featureBullets = featureBulletsList.joined(separator: "\n")

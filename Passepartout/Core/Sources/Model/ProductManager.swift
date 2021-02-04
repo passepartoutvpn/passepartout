@@ -118,12 +118,12 @@ public class ProductManager: NSObject {
         return inApp.product(withIdentifier: identifier)
     }
     
-    public func featureProducts(includingFullVersion: Bool) -> [SKProduct] {
+    public func featureProducts(excluding: [Product]) -> [SKProduct] {
         return inApp.products.filter {
             guard let p = Product(rawValue: $0.productIdentifier) else {
                 return false
             }
-            guard includingFullVersion || p != .fullVersion else {
+            guard !excluding.contains(p) else {
                 return false
             }
             guard p.isFeature else {
