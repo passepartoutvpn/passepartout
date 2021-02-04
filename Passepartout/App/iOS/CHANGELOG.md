@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Redundant keychain items.
 - Keyboard not dismissed in "Network settings".
 - "Reset configuration" not working with encrypted configuration files.
+- "Update list" locks up in providers.
 
 ## 1.14.0 (2021-01-07)
 

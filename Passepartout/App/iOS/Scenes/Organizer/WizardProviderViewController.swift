@@ -145,21 +145,14 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     private func updateProvidersList() {
         let hud = HUD(view: view)
         InfrastructureFactory.shared.updateIndex { [weak self] in
+            hud.hide()
             if let error = $0 {
-                hud.hide()
                 log.error("Unable to update providers list: \(error)")
                 return
             }
 
-//            ProductManager.shared.listProducts { (products, error) in
-//                hud.hide()
-//                if let error = error {
-//                    log.error("Unable to list products: \(error)")
-//                    return
-//                }
-                self?.reloadModel()
-                self?.tableView.reloadData()
-//            }
+            self?.reloadModel()
+            self?.tableView.reloadData()
         }
     }
 
