@@ -1,1 +1,1 @@
-https://passepartoutvpn.app
+../../../../iOS/fastlane/metadata/pl/marketing_url.txt

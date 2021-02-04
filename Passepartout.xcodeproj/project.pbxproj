@@ -25,7 +25,6 @@
 		0E294AA225AE2B0B00CB4908 /* Descriptible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294A8225AE29D100CB4908 /* Descriptible.swift */; };
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
 		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
-		0E2EB063236D8E1E0079DB53 /* AppConstants+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2EB062236D8E1E0079DB53 /* AppConstants+App.swift */; };
 		0E3152AD223F9EF500F61841 /* PassepartoutCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E31529D223F9EF500F61841 /* PassepartoutCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E3152B0223F9EF500F61841 /* PassepartoutCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; };
 		0E3152B1223F9EF500F61841 /* PassepartoutCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31529B223F9EF400F61841 /* PassepartoutCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -104,13 +103,10 @@
 		0E52037D259F593B00CBAB56 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9C259F41690022DFB8 /* SwiftGen+Strings.swift */; };
 		0E52037E259F593B00CBAB56 /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */; };
 		0E52037F259F593B00CBAB56 /* Theme+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9A259F41690022DFB8 /* Theme+Views.swift */; };
-		0E520380259F593B00CBAB56 /* AppConstants+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA3259F41690022DFB8 /* AppConstants+App.swift */; };
 		0E520381259F593B00CBAB56 /* NSTextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F94259F41690022DFB8 /* NSTextView+Search.swift */; };
 		0E520382259F593B00CBAB56 /* SwiftGen+Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */; };
 		0E520383259F593B00CBAB56 /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */; };
-		0E520384259F593B00CBAB56 /* Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F99259F41690022DFB8 /* Donation.swift */; };
 		0E520385259F593B00CBAB56 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E569FA4259F41690022DFB8 /* Credits.html */; };
-		0E520386259F593B00CBAB56 /* ProductManager+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9E259F41690022DFB8 /* ProductManager+App.swift */; };
 		0E520387259F593B00CBAB56 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F97259F41690022DFB8 /* TextInputViewController.swift */; };
 		0E520388259F593B00CBAB56 /* HostImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F93259F41690022DFB8 /* HostImporter.swift */; };
 		0E52038F259F593F00CBAB56 /* App.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F8D259F41690022DFB8 /* App.strings */; };
@@ -208,7 +204,6 @@
 		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
 		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
 		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
-		0ECA7E2225967BB90095F369 /* ProductManager+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA7E2125967BB90095F369 /* ProductManager+App.swift */; };
 		0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */; };
 		0ECEB10A224FECEA00E9E551 /* DataUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEB109224FECEA00E9E551 /* DataUnit.swift */; };
 		0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */; };
@@ -377,7 +372,6 @@
 		0E2C54C4230056EF00F59453 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Core.strings"; sourceTree = "<group>"; };
 		0E2C54C52300570200F59453 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/App.strings"; sourceTree = "<group>"; };
 		0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionService+Configurations.swift"; sourceTree = "<group>"; };
-		0E2EB062236D8E1E0079DB53 /* AppConstants+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConstants+App.swift"; sourceTree = "<group>"; };
 		0E31529B223F9EF400F61841 /* PassepartoutCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PassepartoutCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E31529D223F9EF500F61841 /* PassepartoutCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassepartoutCore.h; sourceTree = "<group>"; };
 		0E31529E223F9EF500F61841 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -472,13 +466,10 @@
 		0E569F94259F41690022DFB8 /* NSTextView+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Search.swift"; sourceTree = "<group>"; };
 		0E569F97259F41690022DFB8 /* TextInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
 		0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
-		0E569F99259F41690022DFB8 /* Donation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Donation.swift; sourceTree = "<group>"; };
 		0E569F9A259F41690022DFB8 /* Theme+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+Views.swift"; sourceTree = "<group>"; };
 		0E569F9C259F41690022DFB8 /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
 		0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Scenes.swift"; sourceTree = "<group>"; };
-		0E569F9E259F41690022DFB8 /* ProductManager+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProductManager+App.swift"; sourceTree = "<group>"; };
 		0E569FA1259F41690022DFB8 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		0E569FA3259F41690022DFB8 /* AppConstants+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppConstants+App.swift"; sourceTree = "<group>"; };
 		0E569FA4259F41690022DFB8 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
 		0E569FA6259F41690022DFB8 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
@@ -546,7 +537,6 @@
 		0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderConnectionProfile.swift; sourceTree = "<group>"; };
 		0EBE8D2E25C076F900798607 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/App.strings; sourceTree = "<group>"; };
 		0EC7F20420E24308004EA58E /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
-		0ECA7E2125967BB90095F369 /* ProductManager+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProductManager+App.swift"; sourceTree = "<group>"; };
 		0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
 		0ECEB105224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0ECEB106224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Organizer.storyboard; sourceTree = "<group>"; };
@@ -873,13 +863,10 @@
 			isa = PBXGroup;
 			children = (
 				0E569FA4259F41690022DFB8 /* Credits.html */,
-				0E569FA3259F41690022DFB8 /* AppConstants+App.swift */,
-				0E569F99259F41690022DFB8 /* Donation.swift */,
 				0E569F93259F41690022DFB8 /* HostImporter.swift */,
 				0E569F8F259F41690022DFB8 /* IssueReporter.swift */,
 				0E569FA6259F41690022DFB8 /* Macros.swift */,
 				0E569F94259F41690022DFB8 /* NSTextView+Search.swift */,
-				0E569F9E259F41690022DFB8 /* ProductManager+App.swift */,
 				0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */,
 				0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */,
 				0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */,
@@ -1065,11 +1052,9 @@
 		0EDE8DEC20C93E3B004C739C /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				0E2EB062236D8E1E0079DB53 /* AppConstants+App.swift */,
 				0E3262D8235EE8DA00B5E470 /* HostImporter.swift */,
 				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
 				0E4FD7F020D58618002221FF /* Macros.swift */,
-				0ECA7E2125967BB90095F369 /* ProductManager+App.swift */,
 				0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */,
 				0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */,
 				0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */,
@@ -1912,13 +1897,10 @@
 				0E520346259F58FE00CBAB56 /* TrustedNetworksViewController.swift in Sources */,
 				0E520338259F58F500CBAB56 /* ProviderServiceView.swift in Sources */,
 				0E520347259F58FE00CBAB56 /* ProxyViewController.swift in Sources */,
-				0E520380259F593B00CBAB56 /* AppConstants+App.swift in Sources */,
 				0E52037B259F593B00CBAB56 /* IssueReporter.swift in Sources */,
 				0E520335259F58F500CBAB56 /* HostServiceView.swift in Sources */,
-				0E520384259F593B00CBAB56 /* Donation.swift in Sources */,
 				0E520333259F58F500CBAB56 /* OrganizerProfileTableView.swift in Sources */,
 				0E52037F259F593B00CBAB56 /* Theme+Views.swift in Sources */,
-				0E520386259F593B00CBAB56 /* ProductManager+App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2006,7 +1988,6 @@
 				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
 				0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */,
 				0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */,
-				0E2EB063236D8E1E0079DB53 /* AppConstants+App.swift in Sources */,
 				0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */,
 				0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */,
 				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
@@ -2017,7 +1998,6 @@
 				0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */,
 				0E36D24D2240234B006AF062 /* ShortcutsAddViewController.swift in Sources */,
 				0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */,
-				0ECA7E2225967BB90095F369 /* ProductManager+App.swift in Sources */,
 				0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */,
 				0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */,
 				0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */,
@@ -2363,7 +2343,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID)";
 				PRODUCT_NAME = Passepartout;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout macos";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout macos";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -2390,7 +2370,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID)";
 				PRODUCT_NAME = Passepartout;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout macos";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout macos";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -2416,7 +2396,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID).Tunnel";
 				PRODUCT_NAME = PassepartoutTunnel;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout.Tunnel macos";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2442,7 +2422,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID).Tunnel";
 				PRODUCT_NAME = PassepartoutTunnel;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.macos.Passepartout.Tunnel macos";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -2471,7 +2451,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.PassepartoutCore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutCore;
 				PRODUCT_NAME = PassepartoutCore;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -2502,7 +2482,7 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.PassepartoutCore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutCore;
 				PRODUCT_NAME = PassepartoutCore;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -2699,7 +2679,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2719,7 +2698,6 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.Passepartout.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2741,7 +2719,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -2762,7 +2739,6 @@
 					"@loader_path/../Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -2788,7 +2764,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Launcher;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_LAUNCHER_ID)";
 				PRODUCT_NAME = PassepartoutLauncher;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -2815,7 +2791,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.macos.Passepartout.Launcher;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_LAUNCHER_ID)";
 				PRODUCT_NAME = PassepartoutLauncher;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;

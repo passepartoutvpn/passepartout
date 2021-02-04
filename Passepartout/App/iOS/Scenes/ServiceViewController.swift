@@ -378,18 +378,18 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private func trustMobileNetwork(cell: ToggleTableViewCell) {
         do {
-            guard try ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
-                delay {
-                    cell.setOn(false, animated: true)
-                }
-                presentPurchaseScreen(forProduct: .trustedNetworks)
-                return
-            }
-        } catch {
+            try ProductManager.shared.verifyEligible(forFeature: .trustedNetworks)
+        } catch ProductError.beta {
             delay {
                 cell.setOn(false, animated: true)
             }
             presentBetaFeatureUnavailable("Trusted networks")
+            return
+        } catch {
+            delay {
+                cell.setOn(false, animated: true)
+            }
+            presentPurchaseScreen(forProduct: .trustedNetworks)
             return
         }
 
@@ -403,12 +403,12 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private func trustCurrentWiFi() {
         do {
-            guard try ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
-                presentPurchaseScreen(forProduct: .trustedNetworks)
-                return
-            }
-        } catch {
+            try ProductManager.shared.verifyEligible(forFeature: .trustedNetworks)
+        } catch ProductError.beta {
             presentBetaFeatureUnavailable("Trusted networks")
+            return
+        } catch {
+            presentPurchaseScreen(forProduct: .trustedNetworks)
             return
         }
 
@@ -461,18 +461,18 @@ class ServiceViewController: UIViewController, StrongTableHost {
     
     private func toggleTrustWiFi(cell: ToggleTableViewCell, at row: Int) {
         do {
-            guard try ProductManager.shared.isEligible(forFeature: .trustedNetworks) else {
-                delay {
-                    cell.setOn(false, animated: true)
-                }
-                presentPurchaseScreen(forProduct: .trustedNetworks)
-                return
-            }
-        } catch {
+            try ProductManager.shared.verifyEligible(forFeature: .trustedNetworks)
+        } catch ProductError.beta {
             delay {
                 cell.setOn(false, animated: true)
             }
             presentBetaFeatureUnavailable("Trusted networks")
+            return
+        } catch {
+            delay {
+                cell.setOn(false, animated: true)
+            }
+            presentPurchaseScreen(forProduct: .trustedNetworks)
             return
         }
         

@@ -1,1 +1,1 @@
-Passepartout, OpenVPN für Mac
+../../../../iOS/fastlane/metadata/de-DE/name.txt

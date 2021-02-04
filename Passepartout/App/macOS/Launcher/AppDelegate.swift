@@ -38,7 +38,7 @@ class AppDelegate: NSObject {
 
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let mainAppIdentifier = "com.algoritmico.macos.Passepartout" // XXX: hardcoded
+        let mainAppIdentifier = "com.algoritmico.ios.Passepartout" // XXX: hardcoded
         let runningApps = NSWorkspace.shared.runningApplications
         let isRunning = !runningApps.filter { $0.bundleIdentifier == mainAppIdentifier }.isEmpty
 

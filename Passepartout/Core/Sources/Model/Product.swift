@@ -27,11 +27,7 @@ import Foundation
 import StoreKit
 
 public struct Product: RawRepresentable, Equatable, Hashable {
-    #if os(iOS)
     private static let bundleSubdomain = "ios"
-    #else
-    private static let bundleSubdomain = "macos"
-    #endif
 
     private static let bundle = "com.algoritmico.\(bundleSubdomain).Passepartout"
 
@@ -70,25 +66,23 @@ public struct Product: RawRepresentable, Equatable, Hashable {
 
     // MARK: Features
 
-    #if os(iOS)
     public static let trustedNetworks = Product(featureId: "trusted_networks")
 
     public static let siriShortcuts = Product(featureId: "siri")
-    #endif
 
-    public static let fullVersion = Product(featureId: "full_version")
+    public static let fullVersion_iOS = Product(featureId: "full_version")
     
-    #if os(iOS)
+    public static let fullVersion_macOS = Product(featureId: "full_mac_version")
+
+    public static let fullVersion = Product(featureId: "full_multi_version")
+
     public static let allFeatures: [Product] = [
         .trustedNetworks,
         .siriShortcuts,
+        .fullVersion_iOS,
+        .fullVersion_macOS,
         .fullVersion
     ]
-    #else
-    public static let allFeatures: [Product] = [
-        .fullVersion
-    ]
-    #endif
 
     private init(featureId: String) {
         self.init(rawValue: "\(Product.featuresBundle).\(featureId)")!
@@ -96,11 +90,11 @@ public struct Product: RawRepresentable, Equatable, Hashable {
 
     // MARK: Providers
 
-    public static var allProviders: [Product] {
-        return InfrastructureFactory.shared.allMetadata.map {
-            return Product(providerMetadata: $0)
-        }
-    }
+//    public static var allProviders: [Product] {
+//        return InfrastructureFactory.shared.allMetadata.map {
+//            return Product(providerMetadata: $0)
+//        }
+//    }
     
     fileprivate init(providerMetadata: Infrastructure.Metadata) {
         self.init(rawValue: "\(Product.providersBundle).\(providerMetadata.inApp ?? providerMetadata.name)")!
@@ -109,7 +103,7 @@ public struct Product: RawRepresentable, Equatable, Hashable {
     // MARK: All
 
     public static var all: [Product] {
-        return allDonations + allFeatures + allProviders
+        return allDonations + allFeatures// + allProviders
     }
     
     public var isDonation: Bool {

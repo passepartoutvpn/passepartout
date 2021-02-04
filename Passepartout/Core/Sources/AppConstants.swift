@@ -342,4 +342,31 @@ public class AppConstants {
             )
         ]
     }
+
+    public struct Rating {
+        #if os(iOS)
+        public static let eventCount = 3
+        #else
+        public static let eventCount = 10
+        #endif
+    }
+
+    struct InApp {
+        #if os(iOS)
+        static var isBetaFullVersion: Bool {
+            return ProcessInfo.processInfo.environment["FULL_VERSION"] != nil
+        }
+
+        static let lastFullVersionBuild = 2016
+        #else
+        static var isBetaFullVersion: Bool {
+            guard !ProcessInfo.processInfo.arguments.contains("FULL_VERSION") else {
+                return true
+            }
+            return false
+        }
+
+        static let lastFullVersionBuild = 0
+        #endif
+    }
 }
