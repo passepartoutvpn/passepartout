@@ -240,6 +240,12 @@
 
 "shortcuts.edit.sections.all.header" = "Atajos existentes";
 
+"purchase.title" = "Compra";
+"purchase.sections.products.footer" = "Cada producto es una compra única y no recurrente. La compra de un proveedor no incluye una suscripción al servicio.";
+"purchase.cells.full_version.extra_description" = "Todos los proveedores (incluye los futuros)\n%@";
+"purchase.cells.restore.title" = "Restaurar compras";
+"purchase.cells.restore.description" = "Si compraste esta aplicación o funcionalidad anteriormente, puedes restaurar tus compras y esta pantalla no volverá a aparecer.";
+
 "donation.title" = "Donar";
 "donation.sections.one_time.header" = "Única";
 "donation.sections.one_time.footer" = "Si te gusta mi trabajo, aquí puedes colaborar con una donación.\n\nSólo se te cobrará una vez por donación, y puedes donar las veces que quieras.";

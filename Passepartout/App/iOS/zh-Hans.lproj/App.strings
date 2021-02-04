@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "管理捷径";
 "shortcuts.edit.cells.add_shortcut.caption" = "添加捷径";
-
-"purchase.title" = "购买";
-"purchase.sections.products.footer" = "每件产品都是一次性的购买。 购买的提供商并不包含VPN订阅。";
-"purchase.cells.full_version.extra_description" = "- 所有的提供商（包括未来添加的）\n%@";
-"purchase.cells.restore.title" = "恢复购买";
-"purchase.cells.restore.description" = "如果你购买过此应用或其特征， 你可以恢复购买，此页面将不在显示。";

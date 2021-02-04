@@ -240,6 +240,12 @@
 
 "shortcuts.edit.sections.all.header" = "已经存在的捷径";
 
+"purchase.title" = "购买";
+"purchase.sections.products.footer" = "每件产品都是一次性的购买。 购买的提供商并不包含VPN订阅。";
+"purchase.cells.full_version.extra_description" = "所有的提供商（包括未来添加的）\n%@";
+"purchase.cells.restore.title" = "恢复购买";
+"purchase.cells.restore.description" = "如果你购买过此应用或其特征， 你可以恢复购买，此页面将不在显示。";
+
 "donation.title" = "捐助";
 "donation.sections.one_time.header" = "一次性";
 "donation.sections.one_time.footer" = "如果你想对我免费的工作表示感谢，这里是一些你可以捐助的数额。\n\n每次捐助只需要付款一次，你可以捐助多次。";

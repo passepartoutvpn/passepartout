@@ -63,9 +63,3 @@
 
 "shortcuts.edit.title" = "Gestionar atajos";
 "shortcuts.edit.cells.add_shortcut.caption" = "Añadir atajo";
-
-"purchase.title" = "Compra";
-"purchase.sections.products.footer" = "Cada producto es una compra única y no recurrente. La compra de un proveedor no incluye una suscripción al servicio.";
-"purchase.cells.full_version.extra_description" = "- Todos los proveedores (incluye los futuros)\n%@";
-"purchase.cells.restore.title" = "Restaurar compras";
-"purchase.cells.restore.description" = "Si compraste esta aplicación o funcionalidad anteriormente, puedes restaurar tus compras y esta pantalla no volverá a aparecer.";

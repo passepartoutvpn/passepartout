@@ -55,7 +55,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     func reloadModel() {
         model.clear()
         model.add(.products)
-        model.setFooter(L10n.App.Purchase.Sections.Products.footer, forSection: .products)
+        model.setFooter(L10n.Core.Purchase.Sections.Products.footer, forSection: .products)
 
         var rows: [RowType] = []
         let pm = ProductManager.shared
@@ -86,7 +86,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
             fatalError("No feature set for purchase")
         }
 
-        title = L10n.App.Purchase.title
+        title = L10n.Core.Purchase.title
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
 
         isLoading = true
@@ -211,8 +211,8 @@ extension PurchaseViewController {
             
         case .restore:
             cell.fill(
-                title: L10n.App.Purchase.Cells.Restore.title,
-                description: L10n.App.Purchase.Cells.Restore.description
+                title: L10n.Core.Purchase.Cells.Restore.title,
+                description: L10n.Core.Purchase.Cells.Restore.description
             )
         }
         return cell
