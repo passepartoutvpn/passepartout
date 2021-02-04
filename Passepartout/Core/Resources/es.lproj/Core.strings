@@ -240,7 +240,7 @@
 
 "shortcuts.edit.sections.all.header" = "Atajos existentes";
 
-"purchase.title" = "Compra";
+"purchase.title" = "Comprar";
 "purchase.sections.products.footer" = "Cada producto es una compra única y no recurrente. La compra de un proveedor no incluye una suscripción al servicio.";
 "purchase.cells.full_version.extra_description" = "Todos los proveedores (incluye los futuros)\n%@";
 "purchase.cells.restore.title" = "Restaurar compras";
