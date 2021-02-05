@@ -44,12 +44,12 @@ public class ProductManager: NSObject {
         
         public let isBetaFullVersion: Bool
 
-        public let lastFullVersionBuild: Int
+        public let lastFullVersionBuild: (Int, Product)
         
         public init(
             locksBetaFeatures: Bool,
             isBetaFullVersion: Bool,
-            lastFullVersionBuild: Int
+            lastFullVersionBuild: (Int, Product)
         ) {
             self.locksBetaFeatures = locksBetaFeatures
             self.isBetaFullVersion = isBetaFullVersion
@@ -258,8 +258,8 @@ public class ProductManager: NSObject {
             log.debug("Original purchased build: \(buildNumber)")
 
             // treat former purchases as full versions
-            if buildNumber <= cfg.lastFullVersionBuild {
-                purchasedFeatures.insert(.fullVersion_iOS)
+            if buildNumber <= cfg.lastFullVersionBuild.0 {
+                purchasedFeatures.insert(cfg.lastFullVersionBuild.1)
             }
         }
         if let iapReceipts = receipt.inAppPurchaseReceipts {
