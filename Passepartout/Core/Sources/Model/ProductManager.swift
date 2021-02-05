@@ -40,14 +40,18 @@ public enum ProductError: Error {
 
 public class ProductManager: NSObject {
     public struct Configuration {
+        public let locksBetaFeatures: Bool
+        
         public let isBetaFullVersion: Bool
 
         public let lastFullVersionBuild: Int
         
         public init(
+            locksBetaFeatures: Bool,
             isBetaFullVersion: Bool,
             lastFullVersionBuild: Int
         ) {
+            self.locksBetaFeatures = locksBetaFeatures
             self.isBetaFullVersion = isBetaFullVersion
             self.lastFullVersionBuild = lastFullVersionBuild
         }
@@ -92,10 +96,14 @@ public class ProductManager: NSObject {
     }
     
     public var isBeta: Bool {
+        #if os(iOS)
         #if targetEnvironment(simulator)
         return true
         #else
         return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+        #endif
+        #else
+        return false
         #endif
     }
 
@@ -157,7 +165,7 @@ public class ProductManager: NSObject {
             return true
         }
         #else
-        if cfg.isBetaFullVersion || purchasedFeatures.contains(.fullVersion_macOS) {
+        if (isBeta && cfg.isBetaFullVersion) || purchasedFeatures.contains(.fullVersion_macOS) {
             return true
         }
         #endif
@@ -182,7 +190,10 @@ public class ProductManager: NSObject {
     
     public func verifyEligible(forFeature feature: Product) throws {
         if isBeta {
-            guard cfg.isBetaFullVersion else {
+            if cfg.isBetaFullVersion {
+                return
+            }
+            guard !cfg.locksBetaFeatures else {
                 throw ProductError.beta
             }
         }
@@ -193,7 +204,10 @@ public class ProductManager: NSObject {
 
     public func verifyEligible(forProvider metadata: Infrastructure.Metadata) throws {
         if isBeta {
-            guard cfg.isBetaFullVersion else {
+            if cfg.isBetaFullVersion {
+                return
+            }
+            guard !cfg.locksBetaFeatures else {
                 throw ProductError.beta
             }
         }
@@ -204,7 +218,10 @@ public class ProductManager: NSObject {
 
     public func verifyEligibleForTrustedNetworks() throws {
         if isBeta {
-            guard cfg.isBetaFullVersion else {
+            if cfg.isBetaFullVersion {
+                return
+            }
+            guard !cfg.locksBetaFeatures else {
                 throw ProductError.beta
             }
         }
@@ -304,6 +321,7 @@ extension ProductManager: SKRequestDelegate {
 extension ProductManager {
     public static let shared = ProductManager(
         Configuration(
+            locksBetaFeatures: AppConstants.InApp.locksBetaFeatures,
             isBetaFullVersion: AppConstants.InApp.isBetaFullVersion,
             lastFullVersionBuild: AppConstants.InApp.lastFullVersionBuild
         )
