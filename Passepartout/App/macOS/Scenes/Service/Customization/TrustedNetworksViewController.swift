@@ -111,7 +111,7 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
             try ProductManager.shared.verifyEligibleForTrustedNetworks()
         } catch {
             checkTrustEthernet.state = .off
-            presentPurchaseScreen(forProduct: .fullVersion_macOS)
+            presentPurchaseScreen(forProduct: .trustedNetworks)
             return
         }
         trustedNetworks.includesEthernet = (checkTrustEthernet.state == .on)
@@ -134,7 +134,7 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
             do {
                 try ProductManager.shared.verifyEligibleForTrustedNetworks()
             } catch {
-                presentPurchaseScreen(forProduct: .fullVersion_macOS)
+                presentPurchaseScreen(forProduct: .trustedNetworks)
                 return false
             }
         }
