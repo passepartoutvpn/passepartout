@@ -173,19 +173,11 @@ public class ProductManager: NSObject {
     }
 
     private func isEligibleForTrustedNetworks() -> Bool {
-        #if os(iOS)
         return isFullVersion() || purchasedFeatures.contains(.trustedNetworks)
-        #else
-        return isFullVersion()
-        #endif
     }
 
     public func isEligibleForFeedback() -> Bool {
-        #if os(iOS)
         return isBeta || !purchasedFeatures.isEmpty
-        #else
-        return isFullVersion()
-        #endif
     }
     
     public func verifyEligible(forFeature feature: Product) throws {
