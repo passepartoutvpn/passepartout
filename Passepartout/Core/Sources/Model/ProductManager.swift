@@ -250,7 +250,7 @@ public class ProductManager: NSObject {
 
             // treat former purchases as full versions
             if buildNumber <= cfg.lastFullVersionBuild {
-                purchasedFeatures.insert(.fullVersion)
+                purchasedFeatures.insert(.fullVersion_iOS)
             }
         }
         if let iapReceipts = receipt.inAppPurchaseReceipts {
