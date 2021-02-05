@@ -84,7 +84,7 @@ class PurchaseViewController: NSViewController {
             rows.append(.feature)
         }
 
-        let platformBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
+        let platformBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.siriShortcuts, .fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
             return $0.localizedTitle
         }.sortedCaseInsensitive()
         let platformBullets = platformBulletsList.joined(separator: "\n")
