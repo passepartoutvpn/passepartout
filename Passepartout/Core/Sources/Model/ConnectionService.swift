@@ -554,7 +554,7 @@ public class ConnectionService: Codable {
         
         var rules: [NEOnDemandRule] = []
         do {
-            try ProductManager.shared.verifyEligibleForTrustedNetworks()
+            try ProductManager.shared.verifyEligible(forFeature: .trustedNetworks)
             #if os(iOS)
             if profile.trustedNetworks.includesMobile {
                 let rule = policyRule(for: profile)

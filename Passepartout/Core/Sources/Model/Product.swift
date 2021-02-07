@@ -65,6 +65,8 @@ public struct Product: RawRepresentable, Equatable, Hashable {
     }
 
     // MARK: Features
+    
+    public static let allProviders = Product(featureId: "all_providers")
 
     public static let trustedNetworks = Product(featureId: "trusted_networks")
 
@@ -77,6 +79,7 @@ public struct Product: RawRepresentable, Equatable, Hashable {
     public static let fullVersion = Product(featureId: "full_multi_version")
 
     public static let allFeatures: [Product] = [
+        .allProviders,
         .trustedNetworks,
         .siriShortcuts,
         .fullVersion_iOS,

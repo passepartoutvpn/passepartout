@@ -108,7 +108,7 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
 
     @IBAction private func toggleTrustEthernet(_ sender: Any?) {
         do {
-            try ProductManager.shared.verifyEligibleForTrustedNetworks()
+            try ProductManager.shared.verifyEligible(forFeature: .trustedNetworks)
         } catch {
             checkTrustEthernet.state = .off
             presentPurchaseScreen(forProduct: .trustedNetworks)
@@ -132,7 +132,7 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
     override func shouldPerformSegue(withIdentifier identifier: NSStoryboardSegue.Identifier, sender: Any?) -> Bool {
         if identifier == StoryboardSegue.Service.trustedNetworkAddSegueIdentifier.rawValue {
             do {
-                try ProductManager.shared.verifyEligibleForTrustedNetworks()
+                try ProductManager.shared.verifyEligible(forFeature: .trustedNetworks)
             } catch {
                 presentPurchaseScreen(forProduct: .trustedNetworks)
                 return false

@@ -32,13 +32,13 @@ import Convenience
 private let log = SwiftyBeaver.self
 
 protocol PurchaseViewControllerDelegate: class {
-    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product)
+    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product?)
 }
 
 class PurchaseViewController: UITableViewController, StrongTableHost {
     private var isLoading = true
 
-    var feature: Product!
+    var feature: Product?
     
     weak var delegate: PurchaseViewControllerDelegate?
 
@@ -66,39 +66,33 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         if let skPlatformVersion = pm.product(withIdentifier: .fullVersion_iOS) {
             self.skPlatformVersion = skPlatformVersion
             rows.append(.platformVersion)
+
+            let bullets: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
+                return $0.localizedTitle
+            }.sortedCaseInsensitive()
+            platformVersionExtra = bullets.joined(separator: "\n")
         }
-        if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
+        if !pm.hasPurchased(.fullVersion_macOS), let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
+
+            let bullets: [String] = ProductManager.shared.featureProducts(including: [.fullVersion_iOS, .fullVersion_macOS]).map {
+                return $0.localizedTitle
+            }.sortedCaseInsensitive()
+            fullVersionExtra = bullets.joined(separator: "\n")
         }
-        if let skFeature = pm.product(withIdentifier: feature) {
+        if let feature = feature, let skFeature = pm.product(withIdentifier: feature) {
             self.skFeature = skFeature
             rows.append(.feature)
         }
         rows.append(.restore)
         model.set(rows, forSection: .products)
-
-        let platformBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
-            return "- \($0.localizedTitle)"
-        }.sortedCaseInsensitive()
-        let platformBullets = platformBulletsList.joined(separator: "\n")
-        platformVersionExtra = "- \(L10n.Core.Purchase.Cells.FullVersion.extraDescription(platformBullets))"
-
-        let fullBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS]).map {
-            return "- \($0.localizedTitle)"
-        }.sortedCaseInsensitive()
-        let fullBullets = fullBulletsList.joined(separator: "\n")
-        fullVersionExtra = "- \(L10n.Core.Purchase.Cells.FullVersion.extraDescription(fullBullets))"
     }
     
     // MARK: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard let _ = feature else {
-            fatalError("No feature set for purchase")
-        }
 
         title = L10n.Core.Purchase.title
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
@@ -168,7 +162,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
                 guard let weakSelf = self else {
                     return
                 }
-                let product = weakSelf.feature.matchesStoreKitProduct(skProduct) ? weakSelf.feature! : .fullVersion
+                let product = Product(rawValue: skProduct.productIdentifier)
                 weakSelf.delegate?.purchaseController(weakSelf, didPurchase: product)
             }
         }

@@ -126,6 +126,21 @@ public class ProductManager: NSObject {
         return inApp.product(withIdentifier: identifier)
     }
     
+    public func featureProducts(including: [Product]) -> [SKProduct] {
+        return inApp.products.filter {
+            guard let p = Product(rawValue: $0.productIdentifier) else {
+                return false
+            }
+            guard including.contains(p) else {
+                return false
+            }
+            guard p.isFeature else {
+                return false
+            }
+            return true
+        }
+    }
+    
     public func featureProducts(excluding: [Product]) -> [SKProduct] {
         return inApp.products.filter {
             guard let p = Product(rawValue: $0.productIdentifier) else {
@@ -159,29 +174,30 @@ public class ProductManager: NSObject {
 
     // MARK: In-app eligibility
     
-    public func isFullVersion() -> Bool {
+    private func isCurrentPlatformVersion() -> Bool {
         #if os(iOS)
-        if (isBeta && cfg.isBetaFullVersion) || purchasedFeatures.contains(.fullVersion_iOS) {
-            return true
-        }
+        return purchasedFeatures.contains(.fullVersion_iOS)
         #else
-        if (isBeta && cfg.isBetaFullVersion) || purchasedFeatures.contains(.fullVersion_macOS) {
+        return purchasedFeatures.contains(.fullVersion_macOS)
+        #endif
+    }
+
+    private func isFullVersion() -> Bool {
+        if isBeta && cfg.isBetaFullVersion {
             return true
         }
-        #endif
+        if isCurrentPlatformVersion() {
+            return true
+        }
         return purchasedFeatures.contains(.fullVersion)
     }
 
     private func isEligible(forFeature feature: Product) -> Bool {
+        #if os(iOS)
         return isFullVersion() || purchasedFeatures.contains(feature)
-    }
-
-    private func isEligible(forProvider metadata: Infrastructure.Metadata) -> Bool {
-        return isFullVersion() || purchasedFeatures.contains(metadata.product)
-    }
-
-    private func isEligibleForTrustedNetworks() -> Bool {
-        return isFullVersion() || purchasedFeatures.contains(.trustedNetworks)
+        #else
+        return isFullVersion()
+        #endif
     }
 
     public func isEligibleForFeedback() -> Bool {
@@ -211,23 +227,13 @@ public class ProductManager: NSObject {
                 throw ProductError.beta
             }
         }
-        guard isFullVersion() || purchasedFeatures.contains(metadata.product) else {
+        guard isEligible(forFeature: metadata.product) else {
             throw ProductError.uneligible
         }
     }
 
-    public func verifyEligibleForTrustedNetworks() throws {
-        if isBeta {
-            if cfg.isBetaFullVersion {
-                return
-            }
-            guard !cfg.locksBetaFeatures else {
-                throw ProductError.beta
-            }
-        }
-        guard isEligibleForTrustedNetworks() else {
-            throw ProductError.uneligible
-        }
+    public func hasPurchased(_ product: Product) -> Bool {
+        return purchasedFeatures.contains(product)
     }
 
     public func isCancelledPurchase(_ product: Product) -> Bool {
