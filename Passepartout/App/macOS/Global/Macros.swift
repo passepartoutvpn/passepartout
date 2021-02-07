@@ -93,7 +93,7 @@ extension NSAlert {
 extension NSViewController {
     func presentPurchaseScreen(forProduct product: Product, delegate: PurchaseViewControllerDelegate? = nil) {
         let vc = StoryboardScene.Purchase.initialScene.instantiate()
-        vc.feature = product
+//        vc.feature = product
         vc.delegate = delegate
         presentAsModalWindow(vc)
     }
