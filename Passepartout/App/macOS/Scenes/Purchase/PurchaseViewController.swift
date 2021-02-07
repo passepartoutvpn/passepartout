@@ -32,7 +32,7 @@ import Convenience
 private let log = SwiftyBeaver.self
 
 protocol PurchaseViewControllerDelegate: class {
-    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product)
+    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product?)
 }
 
 class PurchaseViewController: NSViewController {
@@ -52,7 +52,7 @@ class PurchaseViewController: NSViewController {
 
     @IBOutlet private weak var buttonRestore: NSButton!
 
-    var feature: Product!
+    var feature: Product?
     
     weak var delegate: PurchaseViewControllerDelegate?
 
@@ -79,7 +79,7 @@ class PurchaseViewController: NSViewController {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
         }
-        if let skFeature = pm.product(withIdentifier: feature) {
+        if let feature = feature, let skFeature = pm.product(withIdentifier: feature) {
             self.skFeature = skFeature
             rows.append(.feature)
         }
@@ -107,10 +107,6 @@ class PurchaseViewController: NSViewController {
         labelRestore.stringValue = L10n.Core.Purchase.Cells.Restore.description
         buttonPurchase.title = L10n.Core.Purchase.title
         buttonRestore.title = L10n.Core.Purchase.Cells.Restore.title
-
-        guard let _ = feature else {
-            fatalError("No feature set for purchase")
-        }
 
         tableView.usesAutomaticRowHeights = true
         tableView.reloadData()
@@ -197,7 +193,7 @@ class PurchaseViewController: NSViewController {
             guard let weakSelf = self else {
                 return
             }
-            let product = weakSelf.feature.matchesStoreKitProduct(skProduct) ? weakSelf.feature! : .fullVersion
+            let product = Product(rawValue: skProduct.productIdentifier)
             weakSelf.delegate?.purchaseController(weakSelf, didPurchase: product)
 
             self?.dismiss(nil)

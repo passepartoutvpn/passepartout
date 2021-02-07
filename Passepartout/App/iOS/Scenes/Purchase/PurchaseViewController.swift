@@ -32,13 +32,13 @@ import Convenience
 private let log = SwiftyBeaver.self
 
 protocol PurchaseViewControllerDelegate: class {
-    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product)
+    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product?)
 }
 
 class PurchaseViewController: UITableViewController, StrongTableHost {
     private var isLoading = true
 
-    var feature: Product!
+    var feature: Product?
     
     weak var delegate: PurchaseViewControllerDelegate?
 
@@ -71,7 +71,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
         }
-        if let skFeature = pm.product(withIdentifier: feature) {
+        if let feature = feature, let skFeature = pm.product(withIdentifier: feature) {
             self.skFeature = skFeature
             rows.append(.feature)
         }
@@ -95,10 +95,6 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard let _ = feature else {
-            fatalError("No feature set for purchase")
-        }
 
         title = L10n.Core.Purchase.title
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
@@ -168,7 +164,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
                 guard let weakSelf = self else {
                     return
                 }
-                let product = weakSelf.feature.matchesStoreKitProduct(skProduct) ? weakSelf.feature! : .fullVersion
+                let product = Product(rawValue: skProduct.productIdentifier)
                 weakSelf.delegate?.purchaseController(weakSelf, didPurchase: product)
             }
         }
