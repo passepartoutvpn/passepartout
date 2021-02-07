@@ -178,7 +178,11 @@ public class ProductManager: NSObject {
     }
 
     private func isEligible(forFeature feature: Product) -> Bool {
+        #if os(iOS)
         return isFullVersion() || purchasedFeatures.contains(feature)
+        #else
+        return isFullVersion()
+        #endif
     }
 
     public func isEligibleForFeedback() -> Bool {
