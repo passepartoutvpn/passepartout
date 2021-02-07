@@ -66,10 +66,20 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         if let skPlatformVersion = pm.product(withIdentifier: .fullVersion_iOS) {
             self.skPlatformVersion = skPlatformVersion
             rows.append(.platformVersion)
+
+            let bullets: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
+                return $0.localizedTitle
+            }.sortedCaseInsensitive()
+            platformVersionExtra = bullets.joined(separator: "\n")
         }
         if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
+
+            let bullets: [String] = ProductManager.shared.featureProducts(including: [.fullVersion_iOS, .fullVersion_macOS]).map {
+                return $0.localizedTitle
+            }.sortedCaseInsensitive()
+            fullVersionExtra = bullets.joined(separator: "\n")
         }
         if let feature = feature, let skFeature = pm.product(withIdentifier: feature) {
             self.skFeature = skFeature
@@ -77,18 +87,6 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         }
         rows.append(.restore)
         model.set(rows, forSection: .products)
-
-        let platformBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS, .fullVersion_macOS]).map {
-            return "- \($0.localizedTitle)"
-        }.sortedCaseInsensitive()
-        let platformBullets = platformBulletsList.joined(separator: "\n")
-        platformVersionExtra = "- \(L10n.Core.Purchase.Cells.FullVersion.extraDescription(platformBullets))"
-
-        let fullBulletsList: [String] = ProductManager.shared.featureProducts(excluding: [.fullVersion, .fullVersion_iOS]).map {
-            return "- \($0.localizedTitle)"
-        }.sortedCaseInsensitive()
-        let fullBullets = fullBulletsList.joined(separator: "\n")
-        fullVersionExtra = "- \(L10n.Core.Purchase.Cells.FullVersion.extraDescription(fullBullets))"
     }
     
     // MARK: UIViewController

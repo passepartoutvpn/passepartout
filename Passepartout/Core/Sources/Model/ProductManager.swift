@@ -126,6 +126,21 @@ public class ProductManager: NSObject {
         return inApp.product(withIdentifier: identifier)
     }
     
+    public func featureProducts(including: [Product]) -> [SKProduct] {
+        return inApp.products.filter {
+            guard let p = Product(rawValue: $0.productIdentifier) else {
+                return false
+            }
+            guard including.contains(p) else {
+                return false
+            }
+            guard p.isFeature else {
+                return false
+            }
+            return true
+        }
+    }
+    
     public func featureProducts(excluding: [Product]) -> [SKProduct] {
         return inApp.products.filter {
             guard let p = Product(rawValue: $0.productIdentifier) else {
