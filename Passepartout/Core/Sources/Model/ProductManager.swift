@@ -232,6 +232,10 @@ public class ProductManager: NSObject {
         }
     }
 
+    public func hasPurchased(_ product: Product) -> Bool {
+        return purchasedFeatures.contains(product)
+    }
+
     public func isCancelledPurchase(_ product: Product) -> Bool {
         return cancelledPurchases.contains(product)
     }

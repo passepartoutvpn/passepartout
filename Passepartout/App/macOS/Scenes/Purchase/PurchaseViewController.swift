@@ -80,7 +80,7 @@ class PurchaseViewController: NSViewController {
             }.sortedCaseInsensitive()
             platformVersionExtra = bullets.joined(separator: "\n")
         }
-        if let skFullVersion = pm.product(withIdentifier: .fullVersion) {
+        if !pm.hasPurchased(.fullVersion_iOS), let skFullVersion = pm.product(withIdentifier: .fullVersion) {
             self.skFullVersion = skFullVersion
             rows.append(.fullVersion)
 
