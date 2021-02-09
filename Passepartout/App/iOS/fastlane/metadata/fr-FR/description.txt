@@ -38,6 +38,6 @@ VIE PRIVÉE
 
 ~
 
-Passepartout best un client non-officiel et n'est aucunement affilié à OpenVPN inc.
+Passepartout est un client non-officiel et n'est aucunement affilié à OpenVPN inc.
 
 © 2002-2018 OpenVPN Inc. - OpenVPN est une marque enregistrée de OpenVPN Inc.
