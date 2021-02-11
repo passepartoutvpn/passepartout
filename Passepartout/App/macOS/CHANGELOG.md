@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Skip keychain password prompt. [tunnelkit#200](https://github.com/passepartoutvpn/tunnelkit/issues/200)
+
 ### Fixed
 
 - No way to set DNS servers when using DNS over HTTPS. [#171](https://github.com/passepartoutvpn/passepartout-apple/issues/171)
