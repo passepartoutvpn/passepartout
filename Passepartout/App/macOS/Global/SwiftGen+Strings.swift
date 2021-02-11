@@ -159,6 +159,16 @@ internal enum L10n {
         }
       }
     }
+    internal enum Purchase {
+      internal enum Sections {
+        internal enum Products {
+          internal enum Footer {
+            /// If you bought the old macOS app (1.14.0), skip this step. Instead, send your Apple invoice to this address to restore full version: 
+            internal static let macLegacy = L10n.tr("App", "purchase.sections.products.footer.mac_legacy")
+          }
+        }
+      }
+    }
     internal enum Service {
       internal enum Cells {
         internal enum Addresses {
@@ -768,7 +778,7 @@ internal enum L10n {
       internal static let title = L10n.tr("Core", "purchase.title")
       internal enum Cells {
         internal enum FullVersion {
-          /// - All providers (including future ones)\n%@
+          /// All providers (including future ones)\n%@
           internal static func extraDescription(_ p1: Any) -> String {
             return L10n.tr("Core", "purchase.cells.full_version.extra_description", String(describing: p1))
           }

@@ -71,3 +71,5 @@
 "menu.support.title" = "Support";
 "menu.quit.title" = "Quit %@";
 "menu.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
+
+"purchase.sections.products.footer.mac_legacy" = "If you bought the old macOS app (1.14.0), skip this step. Instead, send your Apple invoice to this address to restore full version: ";

@@ -746,7 +746,7 @@ internal enum L10n {
       internal static let title = L10n.tr("Core", "purchase.title")
       internal enum Cells {
         internal enum FullVersion {
-          /// - All providers (including future ones)\n%@
+          /// All providers (including future ones)\n%@
           internal static func extraDescription(_ p1: Any) -> String {
             return L10n.tr("Core", "purchase.cells.full_version.extra_description", String(describing: p1))
           }
