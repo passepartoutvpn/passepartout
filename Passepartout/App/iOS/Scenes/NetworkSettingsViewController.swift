@@ -79,13 +79,7 @@ class NetworkSettingsViewController: UITableViewController {
         }
         if networkChoices.dns != .server {
             sections.append(.manualDNSProtocol)
-            switch networkSettings.dnsProtocol {
-            case .https:
-                break
-                
-            default:
-                sections.append(.manualDNSServers)
-            }
+            sections.append(.manualDNSServers)
             sections.append(.manualDNSDomains)
         }
         if networkChoices.proxy != .server {

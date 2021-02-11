@@ -162,8 +162,9 @@ class DNSViewController: NSViewController, ProfileCustomization {
             networkSettings.dnsTLSServerName = textDNSCustom.stringValue
 
         default:
-            networkSettings.dnsServers = tableDNSAddresses.rows
+            break
         }
+        networkSettings.dnsServers = tableDNSAddresses.rows
         networkSettings.dnsSearchDomains = tableDNSDomains.rows
 
         delegate?.profileCustomization(self, didUpdateDNS: .manual, withManualSettings: networkSettings)
@@ -209,17 +210,14 @@ class DNSViewController: NSViewController, ProfileCustomization {
             textDNSCustom.placeholderString = isManual ? AppConstants.Placeholders.dohURL : ""
             textDNSCustom.stringValue = networkSettings.dnsHTTPSURL?.absoluteString ?? ""
             textDNSCustom.isHidden = false
-            viewDNSAddresses.isHidden = true
 
         case .tls:
             textDNSCustom.placeholderString = isManual ? AppConstants.Placeholders.dotServerName : ""
             textDNSCustom.stringValue = networkSettings.dnsTLSServerName ?? ""
             textDNSCustom.isHidden = false
-            viewDNSAddresses.isHidden = false
 
         default:
             textDNSCustom.isHidden = true
-            viewDNSAddresses.isHidden = false
         }
     }
 }
