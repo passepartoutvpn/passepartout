@@ -14,5 +14,9 @@
 	<array>
 		<string>group.$(CFG_GROUP_ID)</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)group.com.algoritmico.Passepartout</string>
+	</array>
 </dict>
 </plist>
