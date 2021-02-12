@@ -1,15 +1,17 @@
 <p style="text-align: center; padding: 0em 1em"><img src="res/logo.svg" width="300" height="300" /></p>
 
-# [Passepartout][about-website]
-
 ![iOS 12+](https://img.shields.io/badge/ios-12+-green.svg)
 ![macOS 10.15+](https://img.shields.io/badge/macos-10.15+-green.svg)
 [![TunnelKit 3.3](https://img.shields.io/badge/tunnelkit-3.3-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
+[![Travis-CI](https://api.travis-ci.org/passepartoutvpn/passepartout-apple.svg?branch=master)](https://travis-ci.org/passepartoutvpn/passepartout-apple)
+
+# [Passepartout][about-website]
+
+Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS and macOS.
+ 
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20an%20user-friendly%2C%20open%20source%20%23OpenVPN%20client%20for%20%23iOS%20and%20%23macOS)
- 
-Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS and macOS.
 
 ## Overview
 
