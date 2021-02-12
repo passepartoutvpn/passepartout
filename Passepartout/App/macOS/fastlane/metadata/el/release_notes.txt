@@ -1,17 +1,8 @@
-### Added
-
-- Support `--data-ciphers` from OpenVPN 2.5.
-- Support DNS over HTTPS/TLS in "Network settings".
-- Menu tooltip describing active profile and status.
-- Make "Confirm quit" a preference.
-
 ### Changed
 
-- Rendering of profile configuration.
-- Color-blind friendly menu icon.
+- Skip keychain password prompt.
 
 ### Fixed
 
-- Missing PAC URL in proxy settings.
-- Redundant keychain items.
+- No way to set DNS servers when using DNS over HTTPS.
 

@@ -1,16 +1,4 @@
-### Added
-
-- Support `--data-ciphers` from OpenVPN 2.5.
-- Support DNS over HTTPS/TLS in "Network settings".
-
-### Changed
-
-- Drop hosts restriction in free version ("Unlimited hosts").
-
 ### Fixed
 
-- Redundant keychain items.
-- Keyboard not dismissed in "Network settings".
-- "Reset configuration" not working with encrypted configuration files.
-- "Update list" locks up in providers.
+- No way to set DNS servers when using DNS over HTTPS.
 
