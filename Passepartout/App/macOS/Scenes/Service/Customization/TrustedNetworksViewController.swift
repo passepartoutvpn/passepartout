@@ -83,6 +83,7 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
             switch column.identifier {
             case Columns.ssid:
                 column.title = "SSID"
+                column.isEditable = false
 
             case Columns.trust:
                 column.title = L10n.App.Trusted.Columns.Trust.title
@@ -181,8 +182,13 @@ extension TrustedNetworksViewController: NSTableViewDataSource, NSTableViewDeleg
         guard row < model.sortedWifis.count else { // XXX
             return
         }
-        
         switch tableColumn?.identifier {
+//        case Columns.ssid:
+//            guard let ssidName = object as? String else {
+//                fatalError("Expected a String for trust SSID")
+//            }
+//            model.renameWifi(at: row, to: ssidName)
+            
         case Columns.trust:
             guard let checkTrust = object as? Bool else {
                 fatalError("Expected a Bool for trust checkbox state")
