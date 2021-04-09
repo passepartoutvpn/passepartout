@@ -189,19 +189,20 @@ class ServiceViewController: NSViewController {
             status = .disconnected
         }
         service.activateProfile(profile)
-        reloadVpnStatus()
 
-        switch status {
-        case .disconnected:
+        if !vpn.isEnabled {
             guard !service.needsCredentials(for: uncheckedProfile) else {
                 isPendingConnection = true
                 perform(segue: StoryboardSegue.Service.accountSegueIdentifier)
                 return
             }
-            vpn.reconnect(completionHandler: nil)
-            
-        default:
-            vpn.disconnect(completionHandler: nil)
+            vpn.reconnect { _ in
+                self.reloadVpnStatus()
+            }
+        } else {
+            vpn.disconnect { _ in
+                self.reloadVpnStatus()
+            }
         }
     }
 

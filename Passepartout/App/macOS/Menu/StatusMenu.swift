@@ -421,11 +421,15 @@ class StatusMenu: NSObject {
     }
 
     @objc private func enableVPN() {
-        vpn.reconnect(completionHandler: nil)
+        vpn.reconnect { _ in
+            self.reloadVpnStatus()
+        }
     }
 
     @objc private func disableVPN() {
-        vpn.disconnect(completionHandler: nil)
+        vpn.disconnect { _ in
+            self.reloadVpnStatus()
+        }
     }
     
     @objc private func reconnectVPN() {
