@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Improved debug log appearance.
+
 ### Fixed
 
 - Prevent ineffective editing of trusted network SSID.
