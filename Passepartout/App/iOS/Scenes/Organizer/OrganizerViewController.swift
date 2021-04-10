@@ -52,7 +52,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     
     func reloadModel() {
         model.clear()
-        model.add(.twitch)
         model.add(.vpn)
         model.add(.providers)
         model.add(.hosts)
@@ -67,11 +66,9 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         }
         model.add(.about)
         model.add(.destruction)
-        model.setHeader(L10n.Core.Organizer.Sections.Twitch.header, forSection: .twitch)
         model.setHeader(L10n.App.Service.Sections.Vpn.header, forSection: .vpn)
         model.setHeader(L10n.Core.Organizer.Sections.Providers.header, forSection: .providers)
         model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, forSection: .hosts)
-        model.setFooter(L10n.Core.Organizer.Sections.Twitch.footer, forSection: .twitch)
         model.setFooter(L10n.Core.Organizer.Sections.Providers.footer, forSection: .providers)
         model.setFooter(L10n.Core.Organizer.Sections.Hosts.footer, forSection: .hosts)
         if #available(iOS 12, *) {
@@ -80,7 +77,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             model.set([.siriShortcuts], forSection: .siri)
         }
         model.setHeader(L10n.Core.Organizer.Sections.Support.header, forSection: .support)
-        model.set([.followTwitch], forSection: .twitch)
         model.set([.connectionStatus], forSection: .vpn)
         model.set([.donate, .githubSponsors, .joinCommunity], forSection: .support)
 
@@ -188,15 +184,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
     // MARK: Actions
     
-    private func followOnTwitch() {
-        let app = UIApplication.shared
-        if app.canOpenURL(AppConstants.URLs.twitch) {
-            app.open(AppConstants.URLs.twitch, options: [:], completionHandler: nil)
-        } else {
-            app.open(AppConstants.URLs.twitchFallback, options: [:], completionHandler: nil)
-        }
-    }
-
     private func enterProfile(_ profile: ConnectionProfile) {
         perform(segue: StoryboardSegue.Organizer.selectProfileSegueIdentifier, sender: profile)
     }
@@ -427,8 +414,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
 extension OrganizerViewController {
     enum SectionType: Int {
-        case twitch
-        
         case vpn
         
         case providers
@@ -449,8 +434,6 @@ extension OrganizerViewController {
     }
     
     enum RowType: Int {
-        case followTwitch
-        
         case connectionStatus
         
         case profile
@@ -510,12 +493,6 @@ extension OrganizerViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch model.row(at: indexPath) {
-        case .followTwitch:
-            let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.applyAction(.current)
-            cell.leftText = L10n.Core.Organizer.Cells.FollowTwitch.caption
-            return cell
-
         case .connectionStatus:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyVPN(.current, with: VPN.shared.isEnabled ? VPN.shared.status : nil, error: nil)
@@ -614,9 +591,6 @@ extension OrganizerViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch model.row(at: indexPath) {
-        case .followTwitch:
-            followOnTwitch()
-
         case .connectionStatus:
             enterActiveProfile()
             

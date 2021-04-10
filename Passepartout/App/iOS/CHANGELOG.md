@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Drop Twitch link.
+
 ## 1.15.1 (2021-02-14)
 
 ### Fixed
