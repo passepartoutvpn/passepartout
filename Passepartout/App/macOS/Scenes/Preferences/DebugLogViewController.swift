@@ -66,15 +66,8 @@ class DebugLogViewController: NSViewController {
 
         labelExchangedCaption.stringValue = L10n.Core.Service.Cells.DataCount.caption.asCaption
         labelLog.stringValue = L10n.Core.Service.Cells.DebugLog.caption.asCaption
-//        scrollTextLog.scrollerStyle = .overlay
-//        scrollTextLog.autohidesScrollers = false
-        if #available(macOS 10.12.2, *) {
-            buttonPrevious.image = NSImage(named: NSImage.touchBarRewindTemplateName)
-            buttonNext.image = NSImage(named: NSImage.touchBarFastForwardTemplateName)
-        } else {
-            buttonPrevious.title = L10n.Core.DebugLog.Buttons.previous
-            buttonNext.title = L10n.Core.DebugLog.Buttons.next
-        }
+        buttonPrevious.image = NSImage(named: NSImage.touchBarRewindTemplateName)
+        buttonNext.image = NSImage(named: NSImage.touchBarFastForwardTemplateName)
         buttonShare.image = NSImage(named: NSImage.shareTemplateName)
         
         let nc = NotificationCenter.default
@@ -136,15 +129,30 @@ class DebugLogViewController: NSViewController {
     }
     
     @IBAction private func previousSession(_ sender: Any?) {
-        // FIXME
-//        textFinderLog.performAction(.previousMatch)
-//        textLog.findPrevious(string: GroupConstants.Log.sessionMarker)
+        let visibleRow = firstVisibleRow()
+        let viewport = logLines[0..<visibleRow]
+        let row = viewport.lastIndex(of: Substring(GroupConstants.VPN.sessionMarker)) ?? 0
+        tableTextLog.scrollRowToVisible(row)
     }
 
     @IBAction private func nextSession(_ sender: Any?) {
-        // FIXME
-//        textFinderLog.performAction(.previousMatch)
-//        textLog.findNext(string: GroupConstants.Log.sessionMarker)
+        let visibleRow = lastVisibleRow()
+        guard visibleRow < logLines.count else {
+            return
+        }
+        let viewport = logLines[(visibleRow + 1)..<logLines.count]
+        let row = viewport.firstIndex(of: Substring(GroupConstants.VPN.sessionMarker)) ?? (logLines.count - 1)
+        tableTextLog.scrollRowToVisible(row)
+    }
+    
+    private func firstVisibleRow() -> Int {
+        let range = tableTextLog.rows(in: tableTextLog.visibleRect)
+        return range.location
+    }
+    
+    private func lastVisibleRow() -> Int {
+        let range = tableTextLog.rows(in: tableTextLog.visibleRect)
+        return range.location + range.length
     }
     
     private func startRefreshingLog() {
