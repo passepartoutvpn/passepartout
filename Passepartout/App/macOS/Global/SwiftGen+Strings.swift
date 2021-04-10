@@ -27,6 +27,12 @@ internal enum L10n {
         }
       }
     }
+    internal enum DebugLog {
+      internal enum Buttons {
+        /// Copy
+        internal static let copy = L10n.tr("App", "debug_log.buttons.copy")
+      }
+    }
     internal enum Endpoint {
       internal enum Cells {
         /// Address

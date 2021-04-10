@@ -42,6 +42,8 @@ class DebugLogViewController: NSViewController {
 
     @IBOutlet private weak var buttonNext: NSButton!
     
+    @IBOutlet private weak var buttonCopy: NSButton!
+
     @IBOutlet private weak var buttonShare: NSButton!
 
     private let service = TransientStore.shared.service
@@ -66,6 +68,7 @@ class DebugLogViewController: NSViewController {
 
         labelExchangedCaption.stringValue = L10n.Core.Service.Cells.DataCount.caption.asCaption
         labelLog.stringValue = L10n.Core.Service.Cells.DebugLog.caption.asCaption
+        buttonCopy.title = L10n.App.DebugLog.Buttons.copy
         buttonPrevious.image = NSImage(named: NSImage.touchBarRewindTemplateName)
         buttonNext.image = NSImage(named: NSImage.touchBarFastForwardTemplateName)
         buttonShare.image = NSImage(named: NSImage.shareTemplateName)
@@ -110,6 +113,19 @@ class DebugLogViewController: NSViewController {
         handler()
         service.eraseVpnLog()
         shouldDeleteLogOnDisconnection = false
+    }
+
+    @IBAction private func copySelection(_ sender: Any?) {
+        let rows = tableTextLog.selectedRowIndexes
+        let content = logLines.enumerated().filter {
+            rows.contains($0.offset)
+        }.map {
+            $0.element
+        }.joined(separator: "\n")
+
+        let pb = NSPasteboard.general
+        pb.clearContents()
+        pb.setString(content, forType: .string)
     }
 
     @IBAction private func share(_ sender: Any?) {

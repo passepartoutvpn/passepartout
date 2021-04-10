@@ -129,23 +129,33 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m2Y-4s-bVk">
-                                                <rect key="frame" x="277" y="-7" width="102" height="32"/>
-                                                <buttonCell key="cell" type="push" title="&lt;previous&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="R4S-an-c68">
+                                                <rect key="frame" x="204" y="-7" width="102" height="32"/>
+                                                <buttonCell key="cell" type="push" title="&lt;copy&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="R4S-an-c68">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="previousSession:" target="ATy-TE-Vs0" id="m7K-Cl-xrh"/>
+                                                    <action selector="copySelection:" target="ATy-TE-Vs0" id="udJ-ph-ssv"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rDF-K8-yFT">
-                                                <rect key="frame" x="375" y="-7" width="102" height="32"/>
-                                                <buttonCell key="cell" type="push" title="&lt;next&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8jk-bu-DVf">
+                                                <rect key="frame" x="302" y="-7" width="102" height="32"/>
+                                                <buttonCell key="cell" type="push" title="&lt;previous&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8jk-bu-DVf">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="nextSession:" target="ATy-TE-Vs0" id="fz2-xr-Hd3"/>
+                                                    <action selector="previousSession:" target="ATy-TE-Vs0" id="sRd-dW-eWY"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ef1-P2-klj">
+                                                <rect key="frame" x="400" y="-7" width="77" height="32"/>
+                                                <buttonCell key="cell" type="push" title="&lt;next&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UGO-Jx-wJl">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="nextSession:" target="ATy-TE-Vs0" id="TrH-qw-I4t"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b8r-ZS-86k">
@@ -162,12 +172,15 @@
                                         <constraints>
                                             <constraint firstItem="b8r-ZS-86k" firstAttribute="top" secondItem="Ftb-C7-gDH" secondAttribute="top" id="9Nt-ab-quI"/>
                                             <constraint firstAttribute="trailing" secondItem="b8r-ZS-86k" secondAttribute="trailing" id="FSb-cu-30n"/>
-                                            <constraint firstItem="b8r-ZS-86k" firstAttribute="leading" secondItem="rDF-K8-yFT" secondAttribute="trailing" constant="10" id="VzN-CR-tTV"/>
+                                            <constraint firstAttribute="bottom" secondItem="ef1-P2-klj" secondAttribute="bottom" id="J2x-2o-qrK"/>
+                                            <constraint firstItem="ef1-P2-klj" firstAttribute="top" secondItem="Ftb-C7-gDH" secondAttribute="top" id="K1S-eO-q4t"/>
                                             <constraint firstItem="rDF-K8-yFT" firstAttribute="leading" secondItem="m2Y-4s-bVk" secondAttribute="trailing" constant="10" id="bZt-Ge-Quw"/>
                                             <constraint firstItem="UTb-MT-GBZ" firstAttribute="centerY" secondItem="b8r-ZS-86k" secondAttribute="centerY" id="d10-KF-xsL"/>
                                             <constraint firstItem="rDF-K8-yFT" firstAttribute="centerY" secondItem="m2Y-4s-bVk" secondAttribute="centerY" id="d7N-tX-8q2"/>
                                             <constraint firstItem="m2Y-4s-bVk" firstAttribute="width" secondItem="rDF-K8-yFT" secondAttribute="width" id="e9W-zM-AiX"/>
+                                            <constraint firstItem="ef1-P2-klj" firstAttribute="leading" secondItem="rDF-K8-yFT" secondAttribute="trailing" constant="10" id="fUp-Wa-bXT"/>
                                             <constraint firstItem="m2Y-4s-bVk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UTb-MT-GBZ" secondAttribute="trailing" constant="10" id="iqR-lF-x76"/>
+                                            <constraint firstItem="b8r-ZS-86k" firstAttribute="leading" secondItem="ef1-P2-klj" secondAttribute="trailing" constant="10" id="m6o-Kb-tjv"/>
                                             <constraint firstItem="UTb-MT-GBZ" firstAttribute="leading" secondItem="Ftb-C7-gDH" secondAttribute="leading" id="ruL-eN-A7E"/>
                                             <constraint firstAttribute="bottom" secondItem="b8r-ZS-86k" secondAttribute="bottom" id="svr-ck-SJm"/>
                                             <constraint firstItem="m2Y-4s-bVk" firstAttribute="centerY" secondItem="b8r-ZS-86k" secondAttribute="centerY" id="ycP-XO-sOy"/>
@@ -196,8 +209,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buttonNext" destination="rDF-K8-yFT" id="3Mh-go-meN"/>
-                        <outlet property="buttonPrevious" destination="m2Y-4s-bVk" id="2FQ-8G-1yH"/>
+                        <outlet property="buttonCopy" destination="m2Y-4s-bVk" id="pfU-KS-9qr"/>
+                        <outlet property="buttonNext" destination="ef1-P2-klj" id="DnZ-4m-h0g"/>
+                        <outlet property="buttonPrevious" destination="rDF-K8-yFT" id="puI-xW-bnF"/>
                         <outlet property="buttonShare" destination="b8r-ZS-86k" id="OU6-UQ-3As"/>
                         <outlet property="checkMasking" destination="UTb-MT-GBZ" id="8rf-Oa-eGc"/>
                         <outlet property="labelExchanged" destination="T1N-Aq-a2C" id="lqw-oi-lLK"/>
