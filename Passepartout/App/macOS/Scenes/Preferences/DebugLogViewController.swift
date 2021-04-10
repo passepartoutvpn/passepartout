@@ -179,6 +179,7 @@ class DebugLogViewController: NSViewController {
             
             DispatchQueue.main.async {
                 self.tableTextLog.reloadData()
+                self.tableTextLog.sizeToFit()
                 self.refreshLogInBackground()
             }
         }
@@ -204,6 +205,7 @@ class DebugLogViewController: NSViewController {
             updateBlock()
             if wasEmpty {
                 self.tableTextLog.reloadData()
+                self.tableTextLog.sizeToFit()
             }
         }
     }
