@@ -44,6 +44,10 @@ class AccountViewController: NSViewController {
 
     @IBOutlet private weak var textPassword: NSSecureTextField!
 
+    @IBOutlet private weak var labelGuidance: NSTextField!
+    
+    @IBOutlet private weak var buttonGuidance: NSButton!
+
     @IBOutlet private weak var buttonOK: NSButton!
 
     @IBOutlet private weak var buttonCancel: NSButton!
@@ -67,14 +71,30 @@ class AccountViewController: NSViewController {
         }
         labelPasswordCaption.stringValue = L10n.Core.Account.Cells.Password.caption.asCaption
         textPassword.placeholderString = L10n.Core.Account.Cells.Password.placeholder
+        buttonGuidance.title = L10n.Core.Account.Cells.OpenGuide.caption
         buttonOK.title = L10n.Core.Global.ok
         buttonCancel.title = L10n.Core.Global.cancel
         
         let credentials = service.credentials(for: profile)
         textUsername.stringValue = credentials?.username ?? ""
         textPassword.stringValue = credentials?.password ?? ""
+
+        if let guidanceString = guidanceString, !guidanceString.isEmpty {
+            labelGuidance.stringValue = guidanceString
+            buttonGuidance.isHidden = (guidanceURL == nil)
+        } else {
+            labelGuidance.isHidden = true
+            buttonGuidance.isHidden = true
+        }
     }
-    
+
+    @IBAction private func openGuidance(_ sender: Any?) {
+        guard let url = guidanceURL else {
+            return
+        }
+        NSWorkspace.shared.open(url)
+    }
+
     @IBAction private func confirm(_ sender: Any?) {
         let username = textUsername.stringValue
         let password = textPassword.stringValue
@@ -102,5 +122,31 @@ class AccountViewController: NSViewController {
     
     override func cancelOperation(_ sender: Any?) {
         delegateAndDismiss(sender)
+    }
+}
+
+extension AccountViewController {
+    private var infrastructureName: Infrastructure.Name? {
+        guard let providerProfile = profile as? ProviderConnectionProfile else {
+            return nil
+        }
+        return providerProfile.name
+    }
+    
+    private var guidanceString: String? {
+        guard let name = infrastructureName, let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
+            return nil
+        }
+        return metadata.guidanceString
+    }
+    
+    private var guidanceURL: URL? {
+        guard let name = infrastructureName else {
+            return nil
+        }
+        guard let string = AppConstants.URLs.guidances[name] else {
+            return nil
+        }
+        return URL(string: string)
     }
 }
