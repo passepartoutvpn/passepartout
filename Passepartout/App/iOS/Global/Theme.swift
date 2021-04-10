@@ -208,15 +208,6 @@ extension Infrastructure.Metadata {
         }
         return image
     }
-    
-    var guidanceString: String? {
-        let key = "account.sections.guidance.footer.infrastructure.\(name)"
-        let format = NSLocalizedString(key, tableName: "Core", bundle: Bundle(for: AppDelegate.self), comment: "")
-        guard format != key else {
-            return nil
-        }
-        return String(format: format, locale: .current, description)
-    }
 }
 
 extension PoolGroup {

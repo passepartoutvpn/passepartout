@@ -805,7 +805,7 @@ DQ
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="openGuidance:" target="9cc-44-7Ec" id="YJy-EF-tl2"/>
+                                            <action selector="openGuidanceURL:" target="9cc-44-7Ec" id="tsU-Ot-gPe"/>
                                         </connections>
                                     </button>
                                 </subviews>

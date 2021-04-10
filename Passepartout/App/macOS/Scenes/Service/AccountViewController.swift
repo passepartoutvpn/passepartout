@@ -88,7 +88,9 @@ class AccountViewController: NSViewController {
         }
     }
 
-    @IBAction private func openGuidance(_ sender: Any?) {
+    // MARK: Actions
+    
+    @IBAction private func openGuidanceURL(_ sender: Any?) {
         guard let url = guidanceURL else {
             return
         }
@@ -126,27 +128,22 @@ class AccountViewController: NSViewController {
 }
 
 extension AccountViewController {
-    private var infrastructureName: Infrastructure.Name? {
-        guard let providerProfile = profile as? ProviderConnectionProfile else {
-            return nil
-        }
-        return providerProfile.name
-    }
-    
     private var guidanceString: String? {
-        guard let name = infrastructureName, let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
-            return nil
-        }
-        return metadata.guidanceString
+        return metadata?.guidanceString
     }
     
     private var guidanceURL: URL? {
-        guard let name = infrastructureName else {
+        return metadata?.guidanceURL
+    }
+
+    private var referralURL: URL? {
+        return metadata?.referralURL
+    }
+
+    private var metadata: Infrastructure.Metadata? {
+        guard let providerProfile = profile as? ProviderConnectionProfile else {
             return nil
         }
-        guard let string = AppConstants.URLs.guidances[name] else {
-            return nil
-        }
-        return URL(string: string)
+        return InfrastructureFactory.shared.metadata(forName: providerProfile.name)
     }
 }

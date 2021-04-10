@@ -198,3 +198,28 @@ public extension Array where Element: CustomStringConvertible {
         return sorted { $0.description.lowercased() < $1.description.lowercased() }
     }
 }
+
+public extension Infrastructure.Metadata {
+    var guidanceString: String? {
+        let key = "account.sections.guidance.footer.infrastructure.\(name)"
+        let format = NSLocalizedString(key, tableName: "Core", bundle: .main, comment: "")
+        guard format != key else {
+            return nil
+        }
+        return String(format: format, locale: .current, description)
+    }
+    
+    var guidanceURL: URL? {
+        guard let string = AppConstants.URLs.guidances[name] else {
+            return nil
+        }
+        return URL(string: string)
+    }
+    
+    var referralURL: URL? {
+        guard let string = AppConstants.URLs.referrals[name] else {
+            return nil
+        }
+        return URL(string: string)
+    }
+}

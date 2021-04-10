@@ -57,27 +57,6 @@ class AccountViewController: UIViewController, StrongTableHost {
         return Credentials(username, password).trimmed()
     }
     
-    private var guidanceString: String? {
-        guard let name = infrastructureName, let metadata = InfrastructureFactory.shared.metadata(forName: name) else {
-            return nil
-        }
-        return metadata.guidanceString
-    }
-    
-    private var guidanceURL: String? {
-        guard let name = infrastructureName else {
-            return nil
-        }
-        return AppConstants.URLs.guidances[name]
-    }
-
-    private var referralURL: String? {
-        guard let name = infrastructureName else {
-            return nil
-        }
-        return AppConstants.URLs.referrals[name]
-    }
-
     weak var delegate: AccountViewControllerDelegate?
 
     // MARK: StrongTableHost
@@ -144,17 +123,17 @@ class AccountViewController: UIViewController, StrongTableHost {
     }
     
     private func openGuidanceURL() {
-        guard let urlString = guidanceURL else {
+        guard let url = guidanceURL else {
             return
         }
-        UIApplication.shared.open(URL(string: urlString)!, options: [:], completionHandler: nil)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     private func openReferralURL() {
-        guard let urlString = referralURL else {
+        guard let url = referralURL else {
             return
         }
-        UIApplication.shared.open(URL(string: urlString)!, options: [:], completionHandler: nil)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction private func done() {
@@ -284,5 +263,26 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
         default:
             break
         }
+    }
+}
+
+extension AccountViewController {
+    private var guidanceString: String? {
+        return metadata?.guidanceString
+    }
+    
+    private var guidanceURL: URL? {
+        return metadata?.guidanceURL
+    }
+
+    private var referralURL: URL? {
+        return metadata?.referralURL
+    }
+
+    private var metadata: Infrastructure.Metadata? {
+        guard let name = infrastructureName else {
+            return nil
+        }
+        return InfrastructureFactory.shared.metadata(forName: name)
     }
 }
