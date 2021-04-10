@@ -57,6 +57,8 @@
 "preferences.cells.confirm_quit.caption" = "Confirm quit";
 "preferences.cells.confirm_quit.footer" = "Check to present a quit confirmation alert.";
 
+"debug_log.buttons.copy" = "Copy";
+
 "trusted.columns.trust.title" = "Trust";
 "trusted.ethernet.title" = "Trust wired connections";
 "trusted.ethernet.description" = "Check to trust any wired cable connection.";

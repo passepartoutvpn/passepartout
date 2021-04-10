@@ -57,6 +57,8 @@
 "preferences.cells.confirm_quit.caption" = "Conferma uscita";
 "preferences.cells.confirm_quit.footer" = "Seleziona per confermare l'uscita dall'applicazione.";
 
+"debug_log.buttons.copy" = "Copia";
+
 "trusted.columns.trust.title" = "Sicura";
 "trusted.ethernet.title" = "Connessioni cablate sicure";
 "trusted.ethernet.description" = "Seleziona per considerare sicura qualsiasi rete cablata.";

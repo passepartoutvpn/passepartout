@@ -32,7 +32,6 @@ class PreferencesViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.App.Preferences.title
         let labels = [
             L10n.App.Preferences.Sections.General.header,
             L10n.Core.Service.Sections.Diagnostics.header

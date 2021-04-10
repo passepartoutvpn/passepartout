@@ -395,9 +395,7 @@ class StatusMenu: NSObject {
     }
     
     @objc private func showPreferences() {
-        let organizer = WindowManager.shared.showOrganizer()
-        let preferences = StoryboardScene.Preferences.initialScene.instantiate()
-        organizer?.contentViewController?.presentAsModalWindow(preferences)
+        WindowManager.shared.showPreferences()
     }
 
     @objc private func switchActiveProfile(_ sender: Any?) {

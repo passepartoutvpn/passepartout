@@ -36,25 +36,23 @@ class DebugLogViewController: NSViewController {
 
     @IBOutlet private weak var labelLog: NSTextField!
 
-    @IBOutlet private weak var scrollTextLog: NSScrollView!
+    @IBOutlet private weak var tableTextLog: NSTableView!
     
-    @IBOutlet private var textLog: NSTextView!
-
-    @IBOutlet private weak var textFinderLog: NSTextFinder!
-
     @IBOutlet private weak var buttonPrevious: NSButton!
 
     @IBOutlet private weak var buttonNext: NSButton!
     
+    @IBOutlet private weak var buttonCopy: NSButton!
+
     @IBOutlet private weak var buttonShare: NSButton!
 
     private let service = TransientStore.shared.service
     
     private let vpn = VPN.shared
     
-    private var tmpDebugURL: URL?
-    
     private var shouldDeleteLogOnDisconnection = false
+    
+    private var logLines: [Substring] = []
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -70,16 +68,9 @@ class DebugLogViewController: NSViewController {
 
         labelExchangedCaption.stringValue = L10n.Core.Service.Cells.DataCount.caption.asCaption
         labelLog.stringValue = L10n.Core.Service.Cells.DebugLog.caption.asCaption
-//        scrollTextLog.scrollerStyle = .overlay
-//        scrollTextLog.autohidesScrollers = false
-        textLog.font = NSFont(name: "Courier New", size: NSFont.systemFontSize(for: .regular))
-        if #available(macOS 10.12.2, *) {
-            buttonPrevious.image = NSImage(named: NSImage.touchBarRewindTemplateName)
-            buttonNext.image = NSImage(named: NSImage.touchBarFastForwardTemplateName)
-        } else {
-            buttonPrevious.title = L10n.Core.DebugLog.Buttons.previous
-            buttonNext.title = L10n.Core.DebugLog.Buttons.next
-        }
+        buttonCopy.title = L10n.App.DebugLog.Buttons.copy
+        buttonPrevious.image = NSImage(named: NSImage.touchBarRewindTemplateName)
+        buttonNext.image = NSImage(named: NSImage.touchBarFastForwardTemplateName)
         buttonShare.image = NSImage(named: NSImage.shareTemplateName)
         
         let nc = NotificationCenter.default
@@ -124,8 +115,21 @@ class DebugLogViewController: NSViewController {
         shouldDeleteLogOnDisconnection = false
     }
 
+    @IBAction private func copySelection(_ sender: Any?) {
+        let rows = tableTextLog.selectedRowIndexes
+        let content = logLines.enumerated().filter {
+            rows.contains($0.offset)
+        }.map {
+            $0.element
+        }.joined(separator: "\n")
+
+        let pb = NSPasteboard.general
+        pb.clearContents()
+        pb.setString(content, forType: .string)
+    }
+
     @IBAction private func share(_ sender: Any?) {
-        let text = textLog.string
+        let text = logLines.joined(separator: "\n")
         guard !text.isEmpty else {
             let alert = Macros.warning(
                 L10n.Core.Service.Cells.DebugLog.caption,
@@ -141,23 +145,41 @@ class DebugLogViewController: NSViewController {
     }
     
     @IBAction private func previousSession(_ sender: Any?) {
-        textFinderLog.performAction(.previousMatch)
-//        textLog.findPrevious(string: GroupConstants.Log.sessionMarker)
+        let visibleRow = firstVisibleRow()
+        let viewport = logLines[0..<visibleRow]
+        let row = viewport.lastIndex(of: Substring(GroupConstants.VPN.sessionMarker)) ?? 0
+        tableTextLog.scrollRowToVisible(row)
     }
 
     @IBAction private func nextSession(_ sender: Any?) {
-        textFinderLog.performAction(.previousMatch)
-//        textLog.findNext(string: GroupConstants.Log.sessionMarker)
+        let visibleRow = lastVisibleRow()
+        guard visibleRow < logLines.count else {
+            return
+        }
+        let viewport = logLines[(visibleRow + 1)..<logLines.count]
+        let row = viewport.firstIndex(of: Substring(GroupConstants.VPN.sessionMarker)) ?? (logLines.count - 1)
+        tableTextLog.scrollRowToVisible(row)
+    }
+    
+    private func firstVisibleRow() -> Int {
+        let range = tableTextLog.rows(in: tableTextLog.visibleRect)
+        return range.location
+    }
+    
+    private func lastVisibleRow() -> Int {
+        let range = tableTextLog.rows(in: tableTextLog.visibleRect)
+        return range.location + range.length
     }
     
     private func startRefreshingLog() {
         let fallback: () -> String = { self.service.vpnLog }
         
         vpn.requestDebugLog(fallback: fallback) {
-            self.textLog.string = $0
+            self.logLines = $0.split(separator: "\n")
             
             DispatchQueue.main.async {
-                self.textLog.scrollToEnd()
+                self.tableTextLog.reloadData()
+                self.tableTextLog.sizeToFit()
                 self.refreshLogInBackground()
             }
         }
@@ -178,11 +200,12 @@ class DebugLogViewController: NSViewController {
         }
         
         vpn.requestDebugLog(fallback: fallback) {
-            let wasEmpty = self.textLog.string.isEmpty
-            self.textLog.string = $0
+            let wasEmpty = self.logLines.isEmpty
+            self.logLines = $0.split(separator: "\n")
             updateBlock()
             if wasEmpty {
-                self.textLog.scrollToEnd()
+                self.tableTextLog.reloadData()
+                self.tableTextLog.sizeToFit()
             }
         }
     }
@@ -222,5 +245,22 @@ class DebugLogViewController: NSViewController {
         } else {
             labelExchanged.stringValue = L10n.Core.Service.Cells.DataCount.none
         }
+    }
+}
+
+extension DebugLogViewController: NSTableViewDataSource, NSTableViewDelegate {
+    func tableView(_ tableView: NSTableView, willDisplayCell cell: Any, for tableColumn: NSTableColumn?, row: Int) {
+        guard let cell = cell as? NSTextFieldCell else {
+            return
+        }
+        cell.font = NSFont(name: "Courier New", size: NSFont.systemFontSize(for: .regular))
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return logLines.count
+    }
+    
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        return logLines[row]
     }
 }

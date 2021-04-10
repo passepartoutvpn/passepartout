@@ -31,24 +31,22 @@ class WindowManager: NSObject {
     
     private var organizer: NSWindowController?
     
-//    private var preferences: NSWindowController?
+    private var preferences: NSWindowController?
     
     private override init() {
     }
     
     @discardableResult func showOrganizer() -> NSWindowController? {
         organizer = presentWindowController(StoryboardScene.Main.organizerWindowController, existing: organizer)
+        organizer?.window?.title = "Passepartout"
         return organizer
     }
     
-//    @discardableResult func showPreferences() -> NSWindowController? {
-//        preferences = presentWindowController(
-//            StoryboardScene.Preferences.initialScene.instantiate(),
-//            existing: preferences,
-//            title: L10n.App.Preferences.title
-//        )
-//        return preferences
-//    }
+    @discardableResult func showPreferences() -> NSWindowController? {
+        preferences = presentWindowController(StoryboardScene.Preferences.preferencesWindowController, existing: preferences)
+        preferences?.window?.title = L10n.App.Preferences.title
+        return preferences
+    }
     
     func showAbout() {
         NSApp.orderFrontStandardAboutPanel(nil)
