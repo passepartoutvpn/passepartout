@@ -487,6 +487,9 @@ class StatusMenu: NSObject {
     
     @objc private func editAccountCredentials(_ sender: Any?) {
         let organizer = WindowManager.shared.showOrganizer()
+        guard organizer?.contentViewController?.presentedViewControllers?.isEmpty ?? true else {
+            return
+        }
         let accountController = StoryboardScene.Service.accountViewController.instantiate()
         accountController.profile = service.activeProfile
         organizer?.contentViewController?.presentAsSheet(accountController)
@@ -494,6 +497,9 @@ class StatusMenu: NSObject {
 
     @objc private func customizeProfile(_ sender: Any?) {
         let organizer = WindowManager.shared.showOrganizer()
+        guard organizer?.contentViewController?.presentedViewControllers?.isEmpty ?? true else {
+            return
+        }
         let profileCustomization = StoryboardScene.Service.profileCustomizationContainerViewController.instantiate()
         profileCustomization.profile = service.activeProfile
         organizer?.contentViewController?.presentAsSheet(profileCustomization)

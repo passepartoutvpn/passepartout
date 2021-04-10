@@ -54,6 +54,6 @@ class TrustedNetworksAddViewController: NSViewController {
             return
         }
         delegate?.trustedController(self, didEnterSSID: ssid)
-        dismiss(self)
+        presentingViewController?.dismiss(self)
     }
 }

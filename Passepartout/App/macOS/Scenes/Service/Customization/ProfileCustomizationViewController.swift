@@ -169,7 +169,7 @@ class ProfileCustomizationContainerViewController: NSViewController {
             }
         }
         
-        dismiss(self)
+        presentingViewController?.dismiss(self)
     }
 }
 

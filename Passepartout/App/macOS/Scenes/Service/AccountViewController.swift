@@ -92,12 +92,12 @@ class AccountViewController: NSViewController {
         }
         
         delegate?.accountController(self, didUpdateCredentials: credentials, forProfile: profile)
-        dismiss(self)
+        presentingViewController?.dismiss(self)
     }
     
     @IBAction private func delegateAndDismiss(_ sender: Any?) {
         delegate?.accountControllerDidCancel(self)
-        dismiss(self)
+        presentingViewController?.dismiss(self)
     }
     
     override func cancelOperation(_ sender: Any?) {
