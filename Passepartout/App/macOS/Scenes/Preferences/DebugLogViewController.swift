@@ -148,6 +148,9 @@ class DebugLogViewController: NSViewController {
         let visibleRow = firstVisibleRow()
         let viewport = logLines[0..<visibleRow]
         let row = viewport.lastIndex(of: Substring(GroupConstants.VPN.sessionMarker)) ?? 0
+        guard row < visibleRow else {
+            return
+        }
         tableTextLog.scrollRowToVisible(row)
     }
 
@@ -158,6 +161,9 @@ class DebugLogViewController: NSViewController {
         }
         let viewport = logLines[(visibleRow + 1)..<logLines.count]
         let row = viewport.firstIndex(of: Substring(GroupConstants.VPN.sessionMarker)) ?? (logLines.count - 1)
+        guard row > visibleRow else {
+            return
+        }
         tableTextLog.scrollRowToVisible(row)
     }
     
