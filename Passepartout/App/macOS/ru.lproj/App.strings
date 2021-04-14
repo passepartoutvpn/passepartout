@@ -1,0 +1,76 @@
+//
+//  App.strings
+//  Passepartout
+//
+//  Created by Davide De Rosa on 6/21/19.
+//  Copyright (c) 2021 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+"vpn.unused" = "Выкл";
+
+"organizer.title" = "%@";
+"organizer.menus.provider" = "Провайдер";
+"organizer.menus.provider.unavailable" = "Не осталось провайдеров";
+"organizer.menus.host" = "Хост";
+"organizer.alerts.remove_profile.title" = "Удалить профиль";
+"organizer.alerts.remove_profile.message" = "Вы точно хотите удалить профиль %@?";
+"organizer.alerts.open_host_file.title" = "Выберите файл .ovpn";
+
+"service.cells.vpn.turn_on.caption" = "Включить VPN";
+"service.cells.vpn.turn_off.caption" = "Отключить VPN";
+"service.cells.category.caption" = "Категория";
+"service.cells.addresses.caption" = "Адреса";
+
+"endpoint.cells.address" = "Адрес";
+"endpoint.cells.protocol" = "Протокол";
+
+"configuration.title" = "Конфигурация";
+"configuration.alerts.commit.message" = "Новые параметры не вступят в силу до ручного переподключения. Изменения в доверенных сетях вступят в силу сразу.";
+"configuration.alerts.commit.buttons.reconnect" = "Переподключиться";
+"configuration.alerts.commit.buttons.skip" = "Пропустить";
+
+"network_settings.dns.cells.addresses.title" = "Серверы";
+"network_settings.dns.cells.domains.title" = "Домены";
+"network_settings.proxy.cells.bypass_domains.title" = "Обходные домены";
+
+"preferences.title" = "Настройки";
+"preferences.sections.general.header" = "Общие";
+"preferences.cells.launches_on_login.caption" = "Запускать при входе";
+"preferences.cells.launches_on_login.footer" = "Включите, чтобы приложение автоматически запускалось при загрузке или входе.";
+"preferences.cells.confirm_quit.caption" = "Подтверждать выход";
+"preferences.cells.confirm_quit.footer" = "Включите, чтобы выход надо было подтверждать.";
+
+"debug_log.buttons.copy" = "Копировать";
+
+"trusted.columns.trust.title" = "Доверенные";
+"trusted.ethernet.title" = "Доверенные проводные подключения";
+"trusted.ethernet.description" = "Включите, чтобы добавить в доверенные проводное подключение.";
+
+"menu.show.title" = "Показать";
+"menu.switch_profile.title" = "Активный профиль";
+"menu.active_profile.title.none" = "Нет активных профилей";
+"menu.active_profile.items.customize.title" = "Настроить...";
+"menu.active_profile.messages.missing_credentials" = "Нет настроенных аккаунтов";
+"menu.organizer.title" = "Организатор";
+"menu.preferences.title" = "Настройки";
+"menu.support.title" = "Поддержка";
+"menu.quit.title" = "Выйти из %@";
+"menu.quit.messages.confirm" = "Если включить VPN, он всё равно будет работать в фоновом режиме. Вы точно хотите выйти?";
+

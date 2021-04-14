@@ -10,11 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Website guidance in provider account screen.
+- Missing translations (German, Greek, Spanish, French, Dutch, Polish, Portuguese, Russian, Swedish, Chinese Simplified).
 
 ### Changed
 
-- Improved debug log appearance.
-- Show information from provider metadata in account.
+- Improve debug log appearance.
 
 ### Fixed
 

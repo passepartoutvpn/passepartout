@@ -46,8 +46,8 @@
 "configuration.alerts.commit.buttons.reconnect" = "Riconnetti adesso";
 "configuration.alerts.commit.buttons.skip" = "Ignora";
 
-"network_settings.dns.cells.domains.title" = "Dominii";
 "network_settings.dns.cells.addresses.title" = "Server";
+"network_settings.dns.cells.domains.title" = "Dominii";
 "network_settings.proxy.cells.bypass_domains.title" = "Dominii ignorati";
 
 "preferences.title" = "Preferenze";
