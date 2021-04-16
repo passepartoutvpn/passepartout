@@ -1,4 +1,4 @@
-### Fixed
+### Changed
 
-- No way to set DNS servers when using DNS over HTTPS.
+- Drop Twitch link.
 

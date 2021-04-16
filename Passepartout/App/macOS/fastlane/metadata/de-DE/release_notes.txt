@@ -1,8 +1,14 @@
+### Added
+
+- Website guidance in provider account screen.
+- Missing translations (German, Greek, Spanish, French, Dutch, Polish, Portuguese, Russian, Swedish, Chinese Simplified).
+
 ### Changed
 
-- Skip keychain password prompt.
+- Improve debug log appearance.
 
 ### Fixed
 
-- No way to set DNS servers when using DNS over HTTPS.
+- Prevent ineffective editing of trusted network SSID.
+- VPN not being disabled when "Inactive" due to trusted network.
 
