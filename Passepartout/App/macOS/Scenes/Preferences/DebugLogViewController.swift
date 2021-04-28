@@ -267,6 +267,9 @@ extension DebugLogViewController: NSTableViewDataSource, NSTableViewDelegate {
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        guard row < logLines.count else {
+            return nil
+        }
         return logLines[row]
     }
 }
