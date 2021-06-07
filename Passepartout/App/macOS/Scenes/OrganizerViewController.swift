@@ -94,9 +94,37 @@ class OrganizerViewController: NSViewController {
             presentPurchaseScreen(forProduct: metadata.product)
             return
         }
-        perform(segue: StoryboardSegue.Main.enterAccountSegueIdentifier, sender: metadata.name)
+        // make sure that infrastructure exists locally
+        guard let _ = InfrastructureFactory.shared.infrastructure(forName: metadata.name) else {
+            _ = InfrastructureFactory.shared.update(metadata.name, notBeforeInterval: nil) { [weak self] in
+                guard let _ = $0 else {
+                    self?.alertMissingInfrastructure(forMetadata: metadata, error: $1)
+                    return
+                }
+                self?.confirmAddProvider(withMetadata: metadata)
+            }
+            return
+        }
+        confirmAddProvider(withMetadata: metadata)
     }
     
+    private func alertMissingInfrastructure(forMetadata metadata: Infrastructure.Metadata, error: Error?) {
+        var message = L10n.Core.Wizards.Provider.Alerts.Unavailable.message
+        if let error = error {
+            log.error("Unable to download missing \(metadata.description) infrastructure (network error): \(error.localizedDescription)")
+            message.append(" \(error.localizedDescription)")
+        } else {
+            log.error("Unable to download missing \(metadata.description) infrastructure (API error)")
+        }
+        
+        let alert = Macros.warning(metadata.description, message)
+        _ = alert.presentModally(withOK: L10n.Core.Global.ok, cancel: nil)
+    }
+
+    private func confirmAddProvider(withMetadata metadata: Infrastructure.Metadata) {
+        perform(segue: StoryboardSegue.Main.enterAccountSegueIdentifier, sender: metadata.name)
+    }
+
     @objc private func addHost() {
         let panel = NSOpenPanel()
         

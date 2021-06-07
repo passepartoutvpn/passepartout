@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Prevent ineffective editing of trusted network SSID.
 - VPN not being disabled when "Inactive" due to trusted network.
+- Crash when adding dynamically updated provider.
 
 ## 1.15.1 (2021-02-14)
 
