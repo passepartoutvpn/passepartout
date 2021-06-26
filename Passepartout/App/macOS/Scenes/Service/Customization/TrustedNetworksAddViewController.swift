@@ -26,7 +26,7 @@
 import Cocoa
 import PassepartoutCore
 
-protocol TrustedNetworksAddViewControllerDelegate: class {
+protocol TrustedNetworksAddViewControllerDelegate: AnyObject {
     func trustedController(_ trustedController: TrustedNetworksAddViewController, didEnterSSID ssid: String)
 }
 

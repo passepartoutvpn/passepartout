@@ -26,7 +26,7 @@
 import Cocoa
 import PassepartoutCore
 
-protocol TextInputViewControllerDelegate: class {
+protocol TextInputViewControllerDelegate: AnyObject {
     func textInputController(_ textInputController: TextInputViewController, shouldEnterText text: String) -> Bool
     
     func textInputController(_ textInputController: TextInputViewController, didEnterText text: String)

@@ -27,13 +27,13 @@ import Cocoa
 import PassepartoutCore
 import TunnelKit
 
-protocol ProfileCustomization: class {
+protocol ProfileCustomization: AnyObject {
     var profile: ConnectionProfile? { get set }
     
     var delegate: ProfileCustomizationDelegate? { get set }
 }
 
-protocol ProfileCustomizationDelegate: class {
+protocol ProfileCustomizationDelegate: AnyObject {
     func profileCustomization(_ profileCustomization: ProfileCustomization, didUpdateEndpointWithAddress newAddress: String?)
 
     func profileCustomization(_ profileCustomization: ProfileCustomization, didUpdateEndpointWithProtocol newEndpointProtocol: EndpointProtocol?)

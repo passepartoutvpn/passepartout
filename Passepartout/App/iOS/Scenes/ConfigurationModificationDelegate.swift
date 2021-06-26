@@ -26,7 +26,7 @@
 import Foundation
 import TunnelKit
 
-protocol ConfigurationModificationDelegate: class {
+protocol ConfigurationModificationDelegate: AnyObject {
     func configuration(didUpdate newConfiguration: OpenVPN.Configuration)
     
     func configurationShouldReinstall()

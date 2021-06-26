@@ -26,7 +26,7 @@
 import Cocoa
 import PassepartoutCore
 
-protocol ProviderServiceViewDelegate: class {
+protocol ProviderServiceViewDelegate: AnyObject {
     func providerView(_ providerView: ProviderServiceView, didSelectPool pool: Pool)
 
     func providerViewDidRequestInfrastructureRefresh(_ providerView: ProviderServiceView)

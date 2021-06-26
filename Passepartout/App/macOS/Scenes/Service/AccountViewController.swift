@@ -27,7 +27,7 @@ import Cocoa
 import TunnelKit
 import PassepartoutCore
 
-protocol AccountViewControllerDelegate: class {
+protocol AccountViewControllerDelegate: AnyObject {
     func accountController(_ accountController: AccountViewController, shouldUpdateCredentials credentials: Credentials, forProfile profile: ConnectionProfile) -> Bool
     
     func accountController(_ accountController: AccountViewController, didUpdateCredentials credentials: Credentials, forProfile profile: ConnectionProfile)

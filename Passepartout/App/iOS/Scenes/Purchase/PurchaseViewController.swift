@@ -31,7 +31,7 @@ import Convenience
 
 private let log = SwiftyBeaver.self
 
-protocol PurchaseViewControllerDelegate: class {
+protocol PurchaseViewControllerDelegate: AnyObject {
     func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product?)
 }
 

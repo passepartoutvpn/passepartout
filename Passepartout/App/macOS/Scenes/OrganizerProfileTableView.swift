@@ -26,7 +26,7 @@
 import Cocoa
 import PassepartoutCore
 
-protocol OrganizerProfileTableViewDelegate: class {
+protocol OrganizerProfileTableViewDelegate: AnyObject {
     func profileTableViewDidRequestAdd(_ profileTableView: OrganizerProfileTableView, sender: NSView)
 
     func profileTableView(_ profileTableView: OrganizerProfileTableView, didRequestRemove profile: ConnectionProfile)

@@ -27,7 +27,7 @@ import UIKit
 import PassepartoutCore
 import Convenience
 
-protocol AccountViewControllerDelegate: class {
+protocol AccountViewControllerDelegate: AnyObject {
     func accountController(_: AccountViewController, didEnterCredentials credentials: Credentials)
     
     func accountControllerDidComplete(_: AccountViewController)

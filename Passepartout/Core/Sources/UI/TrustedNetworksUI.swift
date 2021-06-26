@@ -25,7 +25,7 @@
 
 import Foundation
 
-public protocol TrustedNetworksUIDelegate: class {
+public protocol TrustedNetworksUIDelegate: AnyObject {
     func trustedNetworksCouldDisconnect(_: TrustedNetworksUI) -> Bool
 
     func trustedNetworksShouldConfirmDisconnection(_: TrustedNetworksUI, triggeredAt rowIndex: Int, completionHandler: @escaping () -> Void)

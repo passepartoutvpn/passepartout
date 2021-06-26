@@ -30,7 +30,7 @@ import PassepartoutCore
 import Convenience
 
 @available(iOS 12, *)
-protocol ShortcutsIntentDelegate: class {
+protocol ShortcutsIntentDelegate: AnyObject {
     func shortcutsDidSelectIntent(intent: INIntent)
 }
 

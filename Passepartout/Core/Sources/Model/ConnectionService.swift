@@ -30,7 +30,7 @@ import SwiftyBeaver
 
 private let log = SwiftyBeaver.self
 
-public protocol ConnectionServiceDelegate: class {
+public protocol ConnectionServiceDelegate: AnyObject {
     func connectionService(didAdd profile: ConnectionProfile)
 
     func connectionService(didRename profile: ConnectionProfile, to newTitle: String)

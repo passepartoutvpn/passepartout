@@ -21,18 +21,18 @@ PODS:
   - Kvitto/Core (1.0.5):
     - DTFoundation/DTASN1 (~> 1.7.13)
   - MBProgressHUD (1.2.0)
-  - OpenSSL-Apple (1.1.1h.10)
+  - OpenSSL-Apple (1.1.1k.11)
   - SSZipArchive (2.2.3)
   - SwiftyBeaver (1.9.3)
-  - TunnelKit/AppExtension (3.3.1):
+  - TunnelKit/AppExtension (3.4.0):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (3.3.1):
+  - TunnelKit/Core (3.4.0):
     - SwiftyBeaver
-  - TunnelKit/Extra/LZO (3.3.1)
-  - TunnelKit/Manager (3.3.1):
+  - TunnelKit/Extra/LZO (3.4.0)
+  - TunnelKit/Manager (3.4.0):
     - SwiftyBeaver
-  - TunnelKit/Protocols/OpenVPN (3.3.1):
+  - TunnelKit/Protocols/OpenVPN (3.4.0):
     - OpenSSL-Apple (~> 1.1.1h.10)
     - TunnelKit/AppExtension
     - TunnelKit/Core
@@ -52,8 +52,8 @@ DEPENDENCIES:
   - Kvitto (from `https://github.com/keeshux/Kvitto`, branch `enable-macos-spec`)
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (~> 3.3.1)
-  - TunnelKit/Protocols/OpenVPN (~> 3.3.1)
+  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `a658410`)
+  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `a658410`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -62,7 +62,6 @@ SPEC REPOS:
     - OpenSSL-Apple
     - SSZipArchive
     - SwiftyBeaver
-    - TunnelKit
 
 EXTERNAL SOURCES:
   Convenience:
@@ -71,6 +70,9 @@ EXTERNAL SOURCES:
   Kvitto:
     :branch: enable-macos-spec
     :git: https://github.com/keeshux/Kvitto
+  TunnelKit:
+    :commit: a658410
+    :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
   Convenience:
@@ -79,17 +81,20 @@ CHECKOUT OPTIONS:
   Kvitto:
     :commit: e263fcd1f40a6a482a0f1e424ba98009c4ad2b96
     :git: https://github.com/keeshux/Kvitto
+  TunnelKit:
+    :commit: a658410
+    :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
   DTFoundation: e7781d9fd2f202bfd451fbbf8cab71ce83b46498
   Kvitto: 5511954b22d6c710e1a04dcbdee44ae7b3d1caeb
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OpenSSL-Apple: 8a8fcb06fb66f9c2f7aed45ce363668493b8e5f6
+  OpenSSL-Apple: 3104e6d32de21815b68aeba31edaa6a78d90e7e0
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
-  TunnelKit: abc76b7580ac190c4e932d8e67b9ece11fba45a4
+  TunnelKit: 9733bb3d8b911b8dfa3cb1363bc82bb3f4204038
 
-PODFILE CHECKSUM: 02f587a7e0b92f055453fe6df12d236f8368ade5
+PODFILE CHECKSUM: 240f988c205fbbd465571409d4d6ea67de3b7bb6
 
 COCOAPODS: 1.10.1

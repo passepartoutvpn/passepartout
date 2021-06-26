@@ -29,7 +29,7 @@ extension Cells {
     static let field = FieldTableViewCell.Provider()
 }
 
-protocol FieldTableViewCellDelegate: class {
+protocol FieldTableViewCellDelegate: AnyObject {
     func fieldCellDidEdit(_: FieldTableViewCell)
 
     func fieldCellDidEnter(_: FieldTableViewCell)

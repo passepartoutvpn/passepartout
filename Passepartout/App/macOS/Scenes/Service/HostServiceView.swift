@@ -26,7 +26,7 @@
 import Cocoa
 import PassepartoutCore
 
-protocol HostServiceViewDelegate: class {
+protocol HostServiceViewDelegate: AnyObject {
 }
 
 class HostServiceView: NSView {

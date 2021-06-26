@@ -28,7 +28,7 @@ import TunnelKit
 import PassepartoutCore
 import Convenience
 
-protocol EndpointViewControllerDelegate: class {
+protocol EndpointViewControllerDelegate: AnyObject {
     func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: EndpointProtocol?)
 }
 

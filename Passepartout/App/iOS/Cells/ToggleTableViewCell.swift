@@ -29,7 +29,7 @@ extension Cells {
     static let toggle = ToggleTableViewCell.Provider()
 }
 
-protocol ToggleTableViewCellDelegate: class {
+protocol ToggleTableViewCellDelegate: AnyObject {
     func toggleCell(_: ToggleTableViewCell, didToggleToValue value: Bool)
 }
 

@@ -30,7 +30,7 @@ import PassepartoutCore
 
 private let log = SwiftyBeaver.self
 
-protocol ImportedHostsViewControllerDelegate: class {
+protocol ImportedHostsViewControllerDelegate: AnyObject {
     func importedHostsController(_: ImportedHostsViewController, didImport url: URL)
 }
 

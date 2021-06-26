@@ -33,7 +33,7 @@ public enum Context: String, Codable {
     case host
 }
 
-public protocol ConnectionProfile: class, EndpointDataSource, CustomStringConvertible {
+public protocol ConnectionProfile: AnyObject, EndpointDataSource, CustomStringConvertible {
     var context: Context { get }
     
     var id: String { get }

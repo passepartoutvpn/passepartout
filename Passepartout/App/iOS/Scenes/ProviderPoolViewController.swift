@@ -27,7 +27,7 @@ import UIKit
 import PassepartoutCore
 import Convenience
 
-protocol ProviderPoolViewControllerDelegate: class {
+protocol ProviderPoolViewControllerDelegate: AnyObject {
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool)
     
     func providerPoolController(_: ProviderPoolViewController, didUpdateFavoriteGroups favoriteGroupIds: [String])
