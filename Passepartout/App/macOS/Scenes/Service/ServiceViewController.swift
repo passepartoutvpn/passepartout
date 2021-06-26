@@ -180,14 +180,14 @@ class ServiceViewController: NSViewController {
             return
         }
 
-        let status: VPNStatus
-        if service.isActiveProfile(profile) {
-            status = vpn.status ?? .disconnected
-        } else {
-
-            // force reconnection when activating a different profile
-            status = .disconnected
-        }
+//        let status: VPNStatus
+//        if service.isActiveProfile(profile) {
+//            status = vpn.status ?? .disconnected
+//        } else {
+//
+//            // force reconnection when activating a different profile
+//            status = .disconnected
+//        }
         service.activateProfile(profile)
 
         if !vpn.isEnabled {
