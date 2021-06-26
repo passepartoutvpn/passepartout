@@ -1,14 +1,8 @@
 ### Added
 
-- Website guidance in provider account screen.
-- Missing translations (German, Greek, Spanish, French, Dutch, Polish, Portuguese, Russian, Swedish, Chinese Simplified).
-
-### Changed
-
-- Improve debug log appearance.
+- SurfShark provider.
 
 ### Fixed
 
-- Prevent ineffective editing of trusted network SSID.
-- VPN not being disabled when "Inactive" due to trusted network.
+- Crash when adding dynamically updated provider.
 

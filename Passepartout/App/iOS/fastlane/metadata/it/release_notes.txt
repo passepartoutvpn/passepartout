@@ -1,4 +1,4 @@
-### Changed
+### Added
 
-- Drop Twitch link.
+- SurfShark provider.
 
