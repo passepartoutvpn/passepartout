@@ -16,6 +16,7 @@ Passepartout предлагает предустановленные настр�
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- SurfShark
 - TorGuard
 - TunnelBear
 - VyprVPN

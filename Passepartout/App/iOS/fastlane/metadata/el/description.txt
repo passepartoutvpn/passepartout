@@ -16,6 +16,7 @@ To Passepartout βασίζεται σε ανοιχτό κώδικα: https://git
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- SurfShark
 - TorGuard
 - TunnelBear
 - VyprVPN

@@ -16,6 +16,7 @@ Passepartout offers presets for major VPN providers:
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- SurfShark
 - TorGuard
 - TunnelBear
 - VyprVPN

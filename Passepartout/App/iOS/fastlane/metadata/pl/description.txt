@@ -17,6 +17,7 @@ Passepartout oferuje gotowe konfiguracje najważniejszych dostawców VPN:
 - NordVPN
 - Private Internet Access
 - ProtonVPN
+- SurfShark
 - TorGuard
 - TunnelBear
 - VyprVPN
