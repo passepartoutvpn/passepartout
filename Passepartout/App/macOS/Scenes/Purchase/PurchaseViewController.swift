@@ -40,10 +40,6 @@ class PurchaseViewController: NSViewController {
         static let product = NSUserInterfaceItemIdentifier("ProductCellIdentifier")
     }
 
-    private let legacyEmail = "issues+maclegacy@passepartoutvpn.app"
-    
-    private lazy var legacyEmailURL = URL(string: "mailto:\(legacyEmail)")!
-
     @IBOutlet private weak var tableView: NSTableView!
     
     @IBOutlet private weak var labelFooter: NSTextField!
@@ -55,8 +51,6 @@ class PurchaseViewController: NSViewController {
     @IBOutlet private weak var buttonPurchase: NSButton!
 
     @IBOutlet private weak var buttonRestore: NSButton!
-
-    @IBOutlet private weak var labelLegacy: NSTextField!
 
     var feature: Product?
     
@@ -111,16 +105,6 @@ class PurchaseViewController: NSViewController {
         labelRestore.stringValue = L10n.Core.Purchase.Cells.Restore.description
         buttonPurchase.title = L10n.Core.Purchase.title
         buttonRestore.title = L10n.Core.Purchase.Cells.Restore.title
-        
-        let legacyEmailLink = NSAttributedString(
-            string: legacyEmail,
-            attributes: [.link: legacyEmailURL]
-        )
-        let legacyText = NSMutableAttributedString()
-        legacyText.append(NSAttributedString(string: L10n.App.Purchase.Sections.Products.Footer.macLegacy))
-        legacyText.append(legacyEmailLink)
-        labelLegacy.attributedStringValue = legacyText
-        labelLegacy.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(sendLegacyEmail)))
 
         tableView.usesAutomaticRowHeights = true
         tableView.reloadData()
@@ -170,10 +154,6 @@ class PurchaseViewController: NSViewController {
             }
             self?.dismiss(nil)
         }
-    }
-    
-    @objc private func sendLegacyEmail() {
-        NSWorkspace.shared.open(legacyEmailURL)
     }
     
     private func purchaseFeature() {
