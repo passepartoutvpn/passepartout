@@ -12,8 +12,8 @@ PODS:
   - Convenience/Tables (0.0.2)
   - Convenience/WebServices (0.0.2):
     - SwiftyBeaver
-  - DTFoundation/Core (1.7.17)
-  - DTFoundation/DTASN1 (1.7.17):
+  - DTFoundation/Core (1.7.18)
+  - DTFoundation/DTASN1 (1.7.18):
     - DTFoundation/Core
   - Kvitto (1.0.5):
     - DTFoundation/DTASN1 (~> 1.7.13)
@@ -82,7 +82,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
-  DTFoundation: 989698be00d3f19438c38a49a8ebb3f6919dcac5
+  DTFoundation: a53f8cda2489208cbc71c648be177f902ee17536
   Kvitto: 5511954b22d6c710e1a04dcbdee44ae7b3d1caeb
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   OpenSSL-Apple: 3104e6d32de21815b68aeba31edaa6a78d90e7e0
