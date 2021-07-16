@@ -1,6 +1,7 @@
 ### Added
 
 - SurfShark provider.
+- Support for `--compress stub-v2`.
 
 ### Fixed
 
