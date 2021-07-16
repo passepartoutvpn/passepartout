@@ -53,7 +53,7 @@ extension OpenVPN.CompressionFraming: UIDescriptible {
         case .compLZO:
             return V.CompressionFraming.Value.lzo
             
-        case .compress:
+        case .compress, .compressV2:
             return V.CompressionFraming.Value.compress
         }
     }

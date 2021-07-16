@@ -24,15 +24,15 @@ PODS:
   - OpenSSL-Apple (1.1.1k.11)
   - SSZipArchive (2.4.2)
   - SwiftyBeaver (1.9.5)
-  - TunnelKit/AppExtension (3.3.2):
+  - TunnelKit/AppExtension (3.3.3):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (3.3.2):
+  - TunnelKit/Core (3.3.3):
     - SwiftyBeaver
-  - TunnelKit/Extra/LZO (3.3.2)
-  - TunnelKit/Manager (3.3.2):
+  - TunnelKit/Extra/LZO (3.3.3)
+  - TunnelKit/Manager (3.3.3):
     - SwiftyBeaver
-  - TunnelKit/Protocols/OpenVPN (3.3.2):
+  - TunnelKit/Protocols/OpenVPN (3.3.3):
     - OpenSSL-Apple (~> 1.1.1h.10)
     - TunnelKit/AppExtension
     - TunnelKit/Core
@@ -52,8 +52,8 @@ DEPENDENCIES:
   - Kvitto (from `https://github.com/keeshux/Kvitto`, branch `enable-macos-spec`)
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (~> 3.3.2)
-  - TunnelKit/Protocols/OpenVPN (~> 3.3.2)
+  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `f5fdc0c`)
+  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `f5fdc0c`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -62,7 +62,6 @@ SPEC REPOS:
     - OpenSSL-Apple
     - SSZipArchive
     - SwiftyBeaver
-    - TunnelKit
 
 EXTERNAL SOURCES:
   Convenience:
@@ -71,6 +70,9 @@ EXTERNAL SOURCES:
   Kvitto:
     :branch: enable-macos-spec
     :git: https://github.com/keeshux/Kvitto
+  TunnelKit:
+    :commit: f5fdc0c
+    :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
   Convenience:
@@ -79,6 +81,9 @@ CHECKOUT OPTIONS:
   Kvitto:
     :commit: e263fcd1f40a6a482a0f1e424ba98009c4ad2b96
     :git: https://github.com/keeshux/Kvitto
+  TunnelKit:
+    :commit: f5fdc0c
+    :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
@@ -88,8 +93,8 @@ SPEC CHECKSUMS:
   OpenSSL-Apple: 3104e6d32de21815b68aeba31edaa6a78d90e7e0
   SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
-  TunnelKit: efebe7db85bdb4ea89fb3af569d4bb7321e7b65d
+  TunnelKit: 068ff24480fa0f10e2209f3e9a75cfed9b4d78ec
 
-PODFILE CHECKSUM: 419def201d8bed7d3cb5854165369a1eb039ddac
+PODFILE CHECKSUM: 65053fc8867b4ec1b933215ab49e6e2788caa969
 
 COCOAPODS: 1.10.1
