@@ -298,13 +298,17 @@ public class ProductManager: NSObject {
 
 extension ProductManager: SKPaymentTransactionObserver {
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        reloadReceipt()
+        DispatchQueue.main.async { [weak self] in
+            self?.reloadReceipt()
+        }
     }
 }
 
 extension ProductManager: SKRequestDelegate {
     public func requestDidFinish(_ request: SKRequest) {
-        reloadReceipt()
+        DispatchQueue.main.async { [weak self] in
+            self?.reloadReceipt()
+        }
         inApp.restorePurchases { [weak self] (finished, _, error) in
             guard finished else {
                 return

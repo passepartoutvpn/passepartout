@@ -16,13 +16,13 @@ end
 def shared_pods_ios
     shared_pods
     for spec in ['About', 'Alerts', 'Dialogs', 'InApp', 'Misc', 'Options', 'Persistence', 'Reviewer', 'Tables', 'WebServices'] do
-        pod "Convenience/#{spec}", :git => 'https://github.com/keeshux/convenience', :commit => 'b30816a'
+        pod "Convenience/#{spec}", :git => 'https://github.com/keeshux/convenience', :commit => '5ed1fe0'
     end
 end
 def shared_pods_macos
     shared_pods
     for spec in ['InApp', 'Misc', 'Persistence', 'Reviewer', 'WebServices'] do
-        pod "Convenience/#{spec}", :git => 'https://github.com/keeshux/convenience', :commit => 'b30816a'
+        pod "Convenience/#{spec}", :git => 'https://github.com/keeshux/convenience', :commit => '5ed1fe0'
     end
 end
 

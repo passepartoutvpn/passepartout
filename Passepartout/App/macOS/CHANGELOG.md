@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.15.3 Beta 2669 (2021-07-16)
+## Unreleased
 
 ### Added
 
@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Crash when adding dynamically updated provider.
+- In-app purchases might crash the app and not be credited until relaunch.
 
 ## 1.15.2 (2021-04-17)
 
