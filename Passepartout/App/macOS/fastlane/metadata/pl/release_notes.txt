@@ -6,4 +6,5 @@
 ### Fixed
 
 - Crash when adding dynamically updated provider.
+- In-app purchases might crash the app and not be credited until relaunch.
 
