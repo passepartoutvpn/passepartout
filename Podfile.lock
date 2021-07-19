@@ -52,8 +52,8 @@ DEPENDENCIES:
   - Kvitto (from `https://github.com/keeshux/Kvitto`, branch `enable-macos-spec`)
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `4dc3eee`)
-  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `4dc3eee`)
+  - TunnelKit/Extra/LZO (~> 3.3.3)
+  - TunnelKit/Protocols/OpenVPN (~> 3.3.3)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -62,6 +62,7 @@ SPEC REPOS:
     - OpenSSL-Apple
     - SSZipArchive
     - SwiftyBeaver
+    - TunnelKit
 
 EXTERNAL SOURCES:
   Convenience:
@@ -70,9 +71,6 @@ EXTERNAL SOURCES:
   Kvitto:
     :branch: enable-macos-spec
     :git: https://github.com/keeshux/Kvitto
-  TunnelKit:
-    :commit: 4dc3eee
-    :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
   Convenience:
@@ -81,9 +79,6 @@ CHECKOUT OPTIONS:
   Kvitto:
     :commit: e263fcd1f40a6a482a0f1e424ba98009c4ad2b96
     :git: https://github.com/keeshux/Kvitto
-  TunnelKit:
-    :commit: 4dc3eee
-    :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
@@ -95,6 +90,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
   TunnelKit: 068ff24480fa0f10e2209f3e9a75cfed9b4d78ec
 
-PODFILE CHECKSUM: 11d1cc1129dae6ca6be92d1792cead39a7258721
+PODFILE CHECKSUM: 81ea192c9d192b6658515eea4248efe9c0065df1
 
 COCOAPODS: 1.10.1
