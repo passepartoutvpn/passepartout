@@ -11,7 +11,7 @@ def shared_pods
     #pod_git $tunnelkit_name, $tunnelkit_specs, '4dc3eee'
     #pod_path $tunnelkit_name, $tunnelkit_specs, '..'
     pod 'SSZipArchive'
-    pod 'Kvitto', :git => 'https://github.com/keeshux/Kvitto', :branch => 'enable-macos-spec'
+    pod 'Kvitto'
 end
 def shared_pods_ios
     shared_pods
