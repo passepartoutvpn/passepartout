@@ -267,7 +267,7 @@
 "about.cells.share_generic.caption" = "Freund einladen";
 
 "version.title" = "Version";
-"version.labels.intro" = "Passepartout und TunnelKit sind geschrieben und gewartet von by Davide De Rosa (keeshux).\n\nQuellcode für Passepartout und TunnelKit ist öffentlich auf GitHub unter GPLv3 verfügbar, du findest die Links auf der Homepage.\n\nPassepartout ist ein inoffizieller client und auf keine Art und Weise mit OpenVPN Inc. verbunden.";
+"version.labels.intro" = "Passepartout und TunnelKit sind geschrieben und gewartet von Davide De Rosa (keeshux).\n\nQuellcode für Passepartout und TunnelKit ist öffentlich auf GitHub unter GPLv3 verfügbar, du findest die Links auf der Homepage.\n\nPassepartout ist ein inoffizieller client und auf keine Art und Weise mit OpenVPN Inc. verbunden.";
 
 "credits.title" = "Credits";
 "credits.sections.licenses.header" = "Lizenzen";
