@@ -43,6 +43,8 @@ extension Infrastructure.Name {
 
     public static let protonvpn = "protonvpn"
     
+    public static let surfshark = "surfshark"
+    
     public static let torguard = "torguard"
 
     public static let tunnelbear = "tunnelbear"

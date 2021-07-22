@@ -227,6 +227,7 @@ public class AppConstants {
         
         public static let guidances: [Infrastructure.Name: String] = [
             .protonvpn: "https://account.protonvpn.com/settings",
+            .surfshark: "https://my.surfshark.com/vpn/manual-setup/main",
             .torguard: "https://torguard.net/clientarea.php?action=changepw",
             .windscribe: "https://windscribe.com/getconfig/openvpn"
         ]
