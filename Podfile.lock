@@ -24,15 +24,15 @@ PODS:
   - OpenSSL-Apple (1.1.1k.11)
   - SSZipArchive (2.4.2)
   - SwiftyBeaver (1.9.5)
-  - TunnelKit/AppExtension (3.3.3):
+  - TunnelKit/AppExtension (3.4.0):
     - SwiftyBeaver
     - TunnelKit/Core
-  - TunnelKit/Core (3.3.3):
+  - TunnelKit/Core (3.4.0):
     - SwiftyBeaver
-  - TunnelKit/Extra/LZO (3.3.3)
-  - TunnelKit/Manager (3.3.3):
+  - TunnelKit/Extra/LZO (3.4.0)
+  - TunnelKit/Manager (3.4.0):
     - SwiftyBeaver
-  - TunnelKit/Protocols/OpenVPN (3.3.3):
+  - TunnelKit/Protocols/OpenVPN (3.4.0):
     - OpenSSL-Apple (~> 1.1.1h.10)
     - TunnelKit/AppExtension
     - TunnelKit/Core
@@ -52,8 +52,8 @@ DEPENDENCIES:
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (~> 3.3.3)
-  - TunnelKit/Protocols/OpenVPN (~> 3.3.3)
+  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `65774c9`)
+  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `65774c9`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -63,17 +63,22 @@ SPEC REPOS:
     - OpenSSL-Apple
     - SSZipArchive
     - SwiftyBeaver
-    - TunnelKit
 
 EXTERNAL SOURCES:
   Convenience:
     :commit: 5ed1fe0
     :git: https://github.com/keeshux/convenience
+  TunnelKit:
+    :commit: 65774c9
+    :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
   Convenience:
     :commit: 5ed1fe0
     :git: https://github.com/keeshux/convenience
+  TunnelKit:
+    :commit: 65774c9
+    :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
   Convenience: c805c2aff569ff735c5d69c2c2b7a9bd110fa507
@@ -83,8 +88,8 @@ SPEC CHECKSUMS:
   OpenSSL-Apple: 3104e6d32de21815b68aeba31edaa6a78d90e7e0
   SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
-  TunnelKit: 068ff24480fa0f10e2209f3e9a75cfed9b4d78ec
+  TunnelKit: 9733bb3d8b911b8dfa3cb1363bc82bb3f4204038
 
-PODFILE CHECKSUM: f88917df911decd28e1ada0b866f3370fb4ae70e
+PODFILE CHECKSUM: 1a4dbd105e1c36d0e60bd7a66dddcf6bb766cda3
 
 COCOAPODS: 1.10.1
