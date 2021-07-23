@@ -123,6 +123,15 @@ extension OpenVPN.ConfigurationBuilder {
         let V = L10n.Core.Global.Values.self
         return (randomizeEndpoint ?? false) ? V.enabled : V.disabled
     }
+
+    public var uiDescriptionForXOR: String {
+        let V = L10n.Core.Global.Values.self
+        guard let mask = xorMask, mask != 0 else {
+            return V.disabled
+        }
+
+        return String(format: "0x%02x", UInt8(mask))
+    }
 }
 
 extension NetworkChoice: CustomStringConvertible {

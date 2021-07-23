@@ -102,10 +102,6 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
                 model.set(rows, forSection: .compression)
             }
 
-            if !isServerPushed {
-                model.add(.tls)
-            }
-
             rows = []
             if let _ = configuration.keepAliveInterval {
                 rows.append(.keepAlive)
@@ -123,13 +119,11 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         } else {
             model.add(.communication)
             model.add(.compression)
-            if !isServerPushed {
-                model.add(.tls)
-            }
+            model.add(.tls)
             model.add(.other)
             model.set([.cipher, .digest], forSection: .communication)
             model.set([.compressionFraming, .compressionAlgorithm], forSection: .compression)
-            model.set([.keepAlive, .renegSeconds, .randomEndpoint], forSection: .other)
+            model.set([.keepAlive, .renegSeconds, .randomEndpoint, .xorMask], forSection: .other)
         }
         if isEditable {
             model.set([.resetOriginal], forSection: .reset)
@@ -254,6 +248,8 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         
         case compressionAlgorithm
         
+        case xorMask
+        
         case keepAlive
         
         case renegSeconds
@@ -311,7 +307,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
             cell.leftText = V.CompressionAlgorithm.caption
             cell.rightText = configuration.fallbackCompressionAlgorithm.uiDescription
             cell.isTappable = (configuration.compressionFraming != .disabled)
-
+            
         case .client:
             cell.leftText = V.Client.caption
             cell.rightText = configuration.uiDescriptionForClientCertificate
@@ -345,6 +341,12 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
         case .randomEndpoint:
             cell.leftText = V.RandomEndpoint.caption
             cell.rightText = configuration.uiDescriptionForRandomizeEndpoint
+            cell.accessoryType = .none
+            cell.isTappable = false
+
+        case .xorMask:
+            cell.leftText = "XOR"
+            cell.rightText = configuration.uiDescriptionForXOR
             cell.accessoryType = .none
             cell.isTappable = false
         }

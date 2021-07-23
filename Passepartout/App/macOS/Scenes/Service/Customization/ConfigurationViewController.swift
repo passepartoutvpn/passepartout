@@ -71,7 +71,8 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
         .eku,
         .keepAlive,
         .renegSeconds,
-        .randomEndpoint
+        .randomEndpoint,
+        .xorMask
     ]
     
     private var rowMenus: [RowType: NSMenu] = [:]
@@ -147,6 +148,7 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
         rowMenus[.keepAlive] = NSMenu.withString(configuration.uiDescriptionForKeepAlive)
         rowMenus[.renegSeconds] = NSMenu.withString(configuration.uiDescriptionForRenegotiatesAfter)
         rowMenus[.randomEndpoint] = NSMenu.withString(configuration.uiDescriptionForRandomizeEndpoint)
+        rowMenus[.xorMask] = NSMenu.withString(configuration.uiDescriptionForXOR)
     }
 
     // MARK: Actions
@@ -183,6 +185,8 @@ extension ConfigurationViewController: NSTableViewDataSource, NSTableViewDelegat
         case renegSeconds
 
         case randomEndpoint
+        
+        case xorMask
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -225,6 +229,9 @@ extension ConfigurationViewController: NSTableViewDataSource, NSTableViewDelegat
             
             case .randomEndpoint:
                 return V.RandomEndpoint.caption
+                
+            case .xorMask:
+                return "XOR"
             }
             
         case Columns.value:
