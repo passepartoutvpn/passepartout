@@ -64,6 +64,7 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
     private let rows: [RowType] = [
         .cipher,
         .digest,
+        .xorMask,
         .compressionFraming,
         .compressionAlgorithm,
         .client,
@@ -71,8 +72,7 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
         .eku,
         .keepAlive,
         .renegSeconds,
-        .randomEndpoint,
-        .xorMask
+        .randomEndpoint
     ]
     
     private var rowMenus: [RowType: NSMenu] = [:]

@@ -121,9 +121,9 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
             model.add(.compression)
             model.add(.tls)
             model.add(.other)
-            model.set([.cipher, .digest], forSection: .communication)
+            model.set([.cipher, .digest, .xorMask], forSection: .communication)
             model.set([.compressionFraming, .compressionAlgorithm], forSection: .compression)
-            model.set([.keepAlive, .renegSeconds, .randomEndpoint, .xorMask], forSection: .other)
+            model.set([.keepAlive, .renegSeconds, .randomEndpoint], forSection: .other)
         }
         if isEditable {
             model.set([.resetOriginal], forSection: .reset)
