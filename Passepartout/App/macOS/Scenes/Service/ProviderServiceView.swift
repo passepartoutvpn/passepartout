@@ -47,6 +47,8 @@ class ProviderServiceView: NSView {
     
     @IBOutlet private weak var buttonRefreshInfrastructure: NSButton!
     
+    @IBOutlet private weak var buttonFavorite: NSButton!
+    
     var isEnabled: Bool = true {
         didSet {
             popupCategory.isEnabled = isEnabled
@@ -83,6 +85,9 @@ class ProviderServiceView: NSView {
         labelCategoryCaption.stringValue = L10n.App.Service.Cells.Category.caption.asCaption
         labelLocationCaption.stringValue = L10n.Core.Service.Cells.Provider.Pool.caption.asCaption
         buttonRefreshInfrastructure.image = NSImage(named: NSImage.refreshTemplateName)
+        buttonFavorite.image = NSImage(named: NSImage.bookmarksTemplateName)
+
+        updateFavoriteState()
     }
     
     // MARK: Actions
@@ -98,6 +103,7 @@ class ProviderServiceView: NSView {
     @IBAction private func selectLocation(_ sender: Any?) {
         loadAreas()
         if let pool = selectedPool() {
+            updateFavoriteState()
             delegate?.providerView(self, didSelectPool: pool)
         }
     }
@@ -113,6 +119,20 @@ class ProviderServiceView: NSView {
         delegate?.providerViewDidRequestInfrastructureRefresh(self)
     }
     
+    @IBAction private func toggleFavorite(_ sender: Any?) {
+        guard let category = selectedCategory(), let group = selectedGroup() else {
+            return
+        }
+        let groupId = group.uniqueId(in: category)
+        let isFavorite = buttonFavorite.state == .on
+        if isFavorite {
+            profile?.favoriteGroupIds = profile?.favoriteGroupIds ?? []
+            profile?.favoriteGroupIds?.append(groupId)
+        } else {
+            profile?.favoriteGroupIds?.removeAll { $0 == groupId }
+        }
+    }
+
     // MARK: Helpers
 
     func reloadData() {
@@ -210,6 +230,14 @@ class ProviderServiceView: NSView {
         popupArea.isHidden = menu.items.isEmpty
     }
     
+    private func selectedCategory() -> PoolCategory? {
+        return popupCategory.selectedItem?.representedObject as? PoolCategory
+    }
+
+    private func selectedGroup() -> PoolGroup? {
+        return popupLocation.selectedItem?.representedObject as? PoolGroup
+    }
+
     private func selectedPool() -> Pool? {
         guard popupArea.numberOfItems > 0 else {
             guard let group = popupLocation.selectedItem?.representedObject as? PoolGroup else {
@@ -218,5 +246,14 @@ class ProviderServiceView: NSView {
             return group.pools.first
         }
         return popupArea.itemArray.first?.representedObject as? Pool
+    }
+    
+    private func updateFavoriteState() {
+        guard let category = selectedCategory(), let group = selectedGroup() else {
+            return
+        }
+        let groupId = group.uniqueId(in: category)
+        let isFavorite = profile?.favoriteGroupIds?.contains(groupId) ?? false
+        buttonFavorite.state = isFavorite ? .on : .off
     }
 }
