@@ -67,6 +67,7 @@ Passepartout can connect to a few well-known VPN providers with an existing acco
 - [Hide.me][app-net-hideme]
 - [Mullvad][app-net-mullvad]
 - [NordVPN][app-net-nordvpn]
+- [Oeck][app-net-oeck]
 - [Private Internet Access][app-net-pia]
 - [ProtonVPN][app-net-protonvpn]
 - [TorGuard][app-net-torguard]
@@ -187,6 +188,7 @@ Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 [app-net-hideme]: https://member.hide.me/en/checkout?plan=new_default_prices&coupon=6CB-BDB-802&duration=24
 [app-net-mullvad]: https://mullvad.net/en/account/create/
 [app-net-nordvpn]: https://go.nordvpn.net/SH21Z
+[app-net-oeck]: https://www.oeck.com
 [app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
 [app-net-protonvpn]: https://proton.go2cloud.org/SHZ
 [app-net-torguard]: https://torguard.net/

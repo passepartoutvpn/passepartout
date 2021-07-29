@@ -15,6 +15,7 @@ Passepartout oferuje gotowe konfiguracje najważniejszych dostawców VPN:
 - Hide.me
 - Mullvad
 - NordVPN
+- Oeck
 - Private Internet Access
 - ProtonVPN
 - SurfShark

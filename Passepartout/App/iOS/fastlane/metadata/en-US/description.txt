@@ -14,6 +14,7 @@ Passepartout offers presets for major VPN providers:
 - Hide.me
 - Mullvad
 - NordVPN
+- Oeck
 - Private Internet Access
 - ProtonVPN
 - SurfShark

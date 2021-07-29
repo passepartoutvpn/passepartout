@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support for `--scramble xormask`. [#38](https://github.com/passepartoutvpn/passepartout-apple/issues/38)
 - Favorite provider locations.
+- Oeck provider.
 
 ## 1.15.3 (2021-07-20)
 
