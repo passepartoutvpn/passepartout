@@ -185,6 +185,10 @@ internal enum L10n {
           /// Category
           internal static let caption = L10n.tr("App", "service.cells.category.caption")
         }
+        internal enum OnlyShowsFavorites {
+          /// Only show favorite locations
+          internal static let caption = L10n.tr("App", "service.cells.only_shows_favorites.caption")
+        }
         internal enum Vpn {
           internal enum TurnOff {
             /// Disable VPN
