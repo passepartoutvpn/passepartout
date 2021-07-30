@@ -161,12 +161,12 @@
 "service.alerts.download.hud.extracting" = "Bestanden uitpakken, even geduld...";
 
 "account.title" = "Account";
-"account.sections.guidance.footer.infrastructure.hideme" = "Gebruik de inloggegevens van %@.";
+"account.sections.guidance.footer.infrastructure.default.web" = "Gebruik de inloggegevens van %@.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Gebruik uw %@ service-gegevens, die kunnen verschillen van de gegevens van de website.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Gebruik de inloggegevens van %@. Uw gebruikersnaam is meestal numeriek (zonder ruimte).";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Gebruik de inloggegevens van %@. Uw gebruikersnaam is meestal uw e-mailadres.";
 "account.sections.guidance.footer.infrastructure.pia" = "Gebruik de inloggegevens van %@. Uw gebruikersnaam is meestal numeriek met \"p\" als voorvoegsel.";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Vind de inloggegevens van %@ in \"Account > OpenVPN / IKEv2 Username\" onderdeel van de website.";
-"account.sections.guidance.footer.infrastructure.torguard" = "Gebruik uw %@ service-gegevens, die kunnen verschillen van de gegevens van de website.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Gebruik de inloggegevens van %@. Uw gebruikersnaam is meestal uw e-mailadres.";
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Gebruik de inloggegevens van %@ Uw gebruikersnaam is meestal uw e-mailadres.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Vind de inloggegevens van %@ in de OpenVPN Config Generator op de website.";

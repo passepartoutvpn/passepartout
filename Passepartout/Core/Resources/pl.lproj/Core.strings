@@ -161,12 +161,12 @@
 "service.alerts.download.hud.extracting" = "Wypakowywanie plików, proszę czekać ...";
 
 "account.title" = "Konto";
-"account.sections.guidance.footer.infrastructure.hideme" = "Użyj loginu do %@.";
+"account.sections.guidance.footer.infrastructure.default.web" = "Użyj loginu do %@.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Użyj poświadczeń usługi %@, które mogą różnić się od poświadczeń witryny.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Użyj loginu do %@. Twoja nazwa użytkownika jest najczęściej ciągiem liczb (bez przestrzeni).";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Użyj loginu do %@. Twoja nazwa użytkownika to najczęściej e-mail.";
 "account.sections.guidance.footer.infrastructure.pia" = "Użyj loginu do %@. Twoja nazwa użytkownika jesy najczęściej ciągiem liczb poprzedonym prefiksem \"p\".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Użyj loginu do %@. Zajdziesz go w sekcji \"Account > OpenVPN / IKEv2 Username\".";
-"account.sections.guidance.footer.infrastructure.torguard" = "Użyj poświadczeń usługi %@, które mogą różnić się od poświadczeń witryny.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Użyj loginu do %@. Twoja nazwa użytkownika to najczęściej e-mail.";
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Użyj loginu do %@. Twoja nazwa użytkownika to najczęściej e-mail.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Użyj loginu do %@ z generatora konfiguracji OpenVPN dostępnego na stronie.";

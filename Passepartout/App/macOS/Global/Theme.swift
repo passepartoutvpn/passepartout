@@ -60,11 +60,17 @@ extension Infrastructure.Metadata {
     }
 
     var guidanceString: String? {
-        let key = "account.sections.guidance.footer.infrastructure.\(name)"
-        let format = NSLocalizedString(key, tableName: "Core", bundle: Bundle(for: AppDelegate.self), comment: "")
-        guard format != key else {
-            return nil
+        let prefix = "account.sections.guidance.footer.infrastructure"
+        let key = "\(prefix).\(name)"
+        var format = NSLocalizedString(key, tableName: "Core", bundle: Bundle(for: AppDelegate.self), comment: "")
+
+        // i.e. key not found
+        if format == key {
+            let purpose = name.credentialsPurpose
+            let defaultKey = "\(prefix).default.\(purpose)"
+            format = NSLocalizedString(defaultKey, tableName: "Core", bundle: Bundle(for: AppDelegate.self), comment: "")
         }
+
         return String(format: format, locale: .current, description)
     }
 }

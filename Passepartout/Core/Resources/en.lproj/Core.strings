@@ -161,12 +161,12 @@
 "service.alerts.download.hud.extracting" = "Extracting files, please be patient...";
 
 "account.title" = "Account";
-"account.sections.guidance.footer.infrastructure.hideme" = "Use your %@ website credentials.";
+"account.sections.guidance.footer.infrastructure.default.web" = "Use your %@ website credentials.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Use your %@ service credentials, which may differ from website credentials.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Use your %@ website credentials. Your username is usually numeric (without spaces).";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Use your %@ website credentials. Your username is usually your e-mail.";
 "account.sections.guidance.footer.infrastructure.pia" = "Use your %@ website credentials. Your username is usually numeric with a \"p\" prefix.";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Find your %@ credentials in the \"Account > OpenVPN / IKEv2 Username\" section of the website.";
-"account.sections.guidance.footer.infrastructure.torguard" = "Use your %@ service credentials, which may differ from website credentials.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Use your %@ website credentials. Your username is usually your e-mail.";
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Use your %@ website credentials. Your username is usually your e-mail.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Find your %@ credentials in the OpenVPN Config Generator on the website.";

@@ -161,12 +161,12 @@
 "service.alerts.download.hud.extracting" = "Извлечение файлов, пожалуста подождите...";
 
 "account.title" = "Аккаунт";
-"account.sections.guidance.footer.infrastructure.hideme" = "Используйте Ваши данные для входа с веб-сайта %@.";
+"account.sections.guidance.footer.infrastructure.default.web" = "Используйте Ваши данные для входа с веб-сайта %@.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Используйте свои учетные данные %@ service, которые могут отличаться от учетных данных веб-сайта.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Используйте Ваши данные для входа с веб-сайта %@. Ваш логин обычно числовой с (без пробелов).";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Используйте данные для входа на %@ веб-сайт. Ваш логин обычно Ваш e-mail.";
 "account.sections.guidance.footer.infrastructure.pia" = "Используйте Ваши данные для входа с веб-сайта %@. Ваш логин обычно числовой с приставкой \"p\".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Найдите Ваши данные для входа %@ \"Account > OpenVPN / IKEv2 Username\" секции веб-сайта.";
-"account.sections.guidance.footer.infrastructure.torguard" = "Используйте свои учетные данные %@ service, которые могут отличаться от учетных данных веб-сайта.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Используйте данные для входа на %@ веб-сайт. Ваш логин обычно Ваш e-mail.";
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Используйте данные для входа на %@ веб-сайт. Ваш логин обычно Ваш e-mail.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Найдите Ваши данные для входа %@ в OpenVPN Config Generator на веб-сайте.";

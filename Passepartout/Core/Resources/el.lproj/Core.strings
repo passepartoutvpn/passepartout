@@ -161,12 +161,12 @@
 "service.alerts.download.hud.extracting" = "Εξάγοντας τα αρχεία, παρακαλώ να είστε υπομονετικοί...";
 
 "account.title" = "Λογαριασμός";
-"account.sections.guidance.footer.infrastructure.hideme" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@.";
+"account.sections.guidance.footer.infrastructure.default.web" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Χρησιμοποιήστε τα διαπιστευτήρια της υπηρεσίας %@, τα οποία ενδέχεται να διαφέρουν από τα διαπιστευτήρια του ιστότοπου.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως αριθμητικό (χωρίς διαστήματα).";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως το ηλεκτρονικό σας ταχυδρομείο.";
 "account.sections.guidance.footer.infrastructure.pia" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως αριθμητικό με πρόθεμα \"p\".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Βρείτε τα διαπιστευτήριά σας %@ στην ενότητα \"Λογαριασμός> OpenVPN / IKEv2 Username \" της ιστοσελίδας.";
-"account.sections.guidance.footer.infrastructure.torguard" = "Χρησιμοποιήστε τα διαπιστευτήρια της υπηρεσίας %@, τα οποία ενδέχεται να διαφέρουν από τα διαπιστευτήρια του ιστότοπου.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως το ηλεκτρονικό σας ταχυδρομείο.";
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως το ηλεκτρονικό σας ταχυδρομείο.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Βρείτε τα διαπιστευτήριά σας %@ στο OpenVPN Config Generator στον ιστότοπο.";

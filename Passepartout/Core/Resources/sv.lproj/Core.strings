@@ -161,12 +161,12 @@
 "service.alerts.download.hud.extracting" = "Extraherar filer, var så tålmodig ...";
 
 "account.title" = "Konto";
-"account.sections.guidance.footer.infrastructure.hideme" = "Använd dina %@ webbplatsuppgifter.";
+"account.sections.guidance.footer.infrastructure.default.web" = "Använd dina %@ webbplatsuppgifter.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Använd dina %@ service-referenser, som kan skilja sig från webbplatsens referenser.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis numeriskt (utan utrymmen).";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
 "account.sections.guidance.footer.infrastructure.pia" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis numeriskt med ett prefix för \" p \".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Hitta dina %@ credentials i avsnittet \" Konto> OpenVPN / IKEv2 Användarnamn \"på webbplatsen.";
-"account.sections.guidance.footer.infrastructure.torguard" = "Använd dina %@ service-referenser, som kan skilja sig från webbplatsens referenser.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Hitta din %@ credentials i OpenVPN Config Generator på webbplatsen.";

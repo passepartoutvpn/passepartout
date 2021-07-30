@@ -161,12 +161,12 @@
 "service.alerts.download.hud.extracting" = "Extraindo arquivos, seja paciente...";
 
 "account.title" = "Conta";
-"account.sections.guidance.footer.infrastructure.hideme" = "Utilize %@ credenciais do site.";
+"account.sections.guidance.footer.infrastructure.default.web" = "Utilize %@ credenciais do site.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Utilize suas credenciais de serviço %@, que podem diferir das credenciais do site.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Utilize %@ credenciais do site. Seu usuário é normalmente numérico (sem espaços).";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Utilize %@ credenciais do site. Seu usuário é normalmente o seu email.";
 "account.sections.guidance.footer.infrastructure.pia" = "Utilize %@ credenciais do site. Seu usuário é normalmente numérico com prefixo \"p\".";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Encontre %@ credenciais na sessão \"Account > OpenVPN / IKEv2 Username\" do site.";
-"account.sections.guidance.footer.infrastructure.torguard" = "Utilize suas credenciais de serviço %@, que podem diferir das credenciais do site.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Utilize %@ credenciais do site. Seu usuário é normalmente o seu email.";
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Utilize %@ credenciais do site. Seu usuário é normalmente o seu email.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Encontre %@ credenciais no gerador de configuração OpenVPN do site.";

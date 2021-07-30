@@ -296,10 +296,6 @@ internal enum L10n {
         internal enum Guidance {
           internal enum Footer {
             internal enum Infrastructure {
-              /// Use your %@ website credentials.
-              internal static func hideme(_ p1: Any) -> String {
-                return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.hideme", String(describing: p1))
-              }
               /// Use your %@ website credentials. Your username is usually numeric (without spaces).
               internal static func mullvad(_ p1: Any) -> String {
                 return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.mullvad", String(describing: p1))
@@ -316,10 +312,6 @@ internal enum L10n {
               internal static func protonvpn(_ p1: Any) -> String {
                 return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.protonvpn", String(describing: p1))
               }
-              /// Use your %@ service credentials, which may differ from website credentials.
-              internal static func torguard(_ p1: Any) -> String {
-                return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.torguard", String(describing: p1))
-              }
               /// Use your %@ website credentials. Your username is usually your e-mail.
               internal static func tunnelbear(_ p1: Any) -> String {
                 return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.tunnelbear", String(describing: p1))
@@ -331,6 +323,16 @@ internal enum L10n {
               /// Find your %@ credentials in the OpenVPN Config Generator on the website.
               internal static func windscribe(_ p1: Any) -> String {
                 return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.windscribe", String(describing: p1))
+              }
+              internal enum Default {
+                /// Use your %@ service credentials, which may differ from website credentials.
+                internal static func specific(_ p1: Any) -> String {
+                  return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.default.specific", String(describing: p1))
+                }
+                /// Use your %@ website credentials.
+                internal static func web(_ p1: Any) -> String {
+                  return L10n.tr("Core", "account.sections.guidance.footer.infrastructure.default.web", String(describing: p1))
+                }
               }
             }
           }

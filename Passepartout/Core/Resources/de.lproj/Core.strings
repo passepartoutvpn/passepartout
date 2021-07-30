@@ -161,12 +161,12 @@
 "service.alerts.download.hud.extracting" = "Extrahiere Dateien, bitte warten...";
 
 "account.title" = "Account";
-"account.sections.guidance.footer.infrastructure.hideme" = "Benutze deine %@ Web-Zugangsdaten.";
+"account.sections.guidance.footer.infrastructure.default.web" = "Benutze deine %@ Web-Zugangsdaten.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Verwenden Sie Ihre %@ service-Anmeldeinformationen, die von den Website-Anmeldeinformationen abweichen können.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise numerischt (ohne Zwischenraum).";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise deine Email.";
 "account.sections.guidance.footer.infrastructure.pia" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise numerischt mit einem \"p\" Präfix.";
 "account.sections.guidance.footer.infrastructure.protonvpn" = "Deine Zugangsdaten für %@ findest du unter \"Account > OpenVPN / IKEv2 Username\" auf der Webseite.";
-"account.sections.guidance.footer.infrastructure.torguard" = "Verwenden Sie Ihre %@ service-Anmeldeinformationen, die von den Website-Anmeldeinformationen abweichen können.";
 "account.sections.guidance.footer.infrastructure.tunnelbear" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise deine Email.";
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise deine Email.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Deine Zugangsdaten für %@ findest du im OpenVPN Config Generator auf der Webseite.";
