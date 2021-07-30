@@ -55,6 +55,10 @@ class EndpointViewController: NSViewController, ProfileCustomization {
         labelAddressCaption.stringValue = L10n.App.Endpoint.Cells.address.asCaption
         labelProtocolCaption.stringValue = L10n.Core.Global.Captions.protocol.asCaption
 
+        reloadEndpoints()
+    }
+    
+    func reloadEndpoints() {
         popupAddress.removeAllItems()
         for address in dataSource.addresses {
             popupAddress.addItem(withTitle: address)

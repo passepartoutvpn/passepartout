@@ -58,6 +58,8 @@ class ProfileCustomizationContainerViewController: NSViewController {
     
     @IBOutlet private weak var buttonCancel: NSButton!
     
+    fileprivate weak var endpointController: EndpointViewController?
+
     fileprivate weak var dnsController: DNSViewController?
     
     fileprivate weak var proxyController: ProxyViewController?
@@ -184,6 +186,10 @@ extension ProfileCustomizationContainerViewController: ProfileCustomizationDeleg
     
     func profileCustomization(_ profileCustomization: ProfileCustomization, didUpdatePreset newPreset: InfrastructurePreset) {
         pendingPreset = newPreset
+
+        // XXX: commit immediately to update endpoints
+        (profile as? ProviderConnectionProfile)?.presetId = newPreset.id
+        endpointController?.reloadEndpoints()
     }
     
     func profileCustomization(_ profileCustomization: ProfileCustomization, didUpdateConfiguration newConfiguration: OpenVPN.ConfigurationBuilder) {
@@ -235,7 +241,9 @@ class ProfileCustomizationViewController: NSTabViewController {
                 custom.profile = profile
                 custom.delegate = containerController
 
-                if let vc = custom as? DNSViewController {
+                if let vc = custom as? EndpointViewController {
+                    containerController?.endpointController = vc
+                } else if let vc = custom as? DNSViewController {
                     containerController?.dnsController = vc
                 } else if let vc = custom as? ProxyViewController {
                     containerController?.proxyController = vc
