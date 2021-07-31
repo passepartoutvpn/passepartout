@@ -1,4 +1,5 @@
 ### Added
 
 - Support for `--scramble xormask`.
+- Oeck provider.
 
