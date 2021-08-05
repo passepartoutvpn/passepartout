@@ -37,6 +37,7 @@
 "service.cells.vpn.turn_off.caption" = "Inaktivera VPN";
 "service.cells.category.caption" = "Kategori";
 "service.cells.addresses.caption" = "Adresser";
+"service.cells.only_shows_favorites.caption" = "Visa endast favoritplatser";
 
 "endpoint.cells.address" = "Adress";
 "endpoint.cells.protocol" = "Protokoll";

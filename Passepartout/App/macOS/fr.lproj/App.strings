@@ -37,6 +37,7 @@
 "service.cells.vpn.turn_off.caption" = "Désactiver VPN";
 "service.cells.category.caption" = "Catégorie";
 "service.cells.addresses.caption" = "Adresses";
+"service.cells.only_shows_favorites.caption" = "Afficher uniquement les emplacements favoris";
 
 "endpoint.cells.address" = "Adresse";
 "endpoint.cells.protocol" = "Protocole";

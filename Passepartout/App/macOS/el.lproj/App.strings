@@ -37,6 +37,7 @@
 "service.cells.vpn.turn_off.caption" = "Απενεργοποίηση VPN";
 "service.cells.category.caption" = "Κατηγορία";
 "service.cells.addresses.caption" = "Διευθύνσεις";
+"service.cells.only_shows_favorites.caption" = "Προβολή αγαπημένων τοποθεσιών μόνο";
 
 "endpoint.cells.address" = "Διεύθυνση";
 "endpoint.cells.protocol" = "Πρωτόκολλο";

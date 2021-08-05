@@ -37,6 +37,7 @@
 "service.cells.vpn.turn_off.caption" = "Disabilita VPN";
 "service.cells.category.caption" = "Categoria";
 "service.cells.addresses.caption" = "Indirizzi";
+"service.cells.only_shows_favorites.caption" = "Mostra solo le posizioni preferite";
 
 "endpoint.cells.address" = "Indirizzo";
 "endpoint.cells.protocol" = "Protocollo";
@@ -74,4 +75,3 @@
 "menu.quit.title" = "Esci da %@";
 "menu.quit.messages.confirm" = "La VPN, se abilitata, continuerà ad essere attiva in background. Vuoi comunque uscire?";
 
-"purchase.sections.products.footer.mac_legacy" = "Se hai acquistato la vecchia app macOS (1.14.0), ignora questo passaggio. Piuttosto, inoltra la tua ricevuta Apple a questo indirizzo per ripristinare la versione completa: ";

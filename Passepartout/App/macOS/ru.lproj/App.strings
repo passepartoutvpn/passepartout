@@ -37,6 +37,7 @@
 "service.cells.vpn.turn_off.caption" = "Отключить VPN";
 "service.cells.category.caption" = "Категория";
 "service.cells.addresses.caption" = "Адреса";
+"service.cells.only_shows_favorites.caption" = "Показывать только места из избранного";
 
 "endpoint.cells.address" = "Адрес";
 "endpoint.cells.protocol" = "Протокол";

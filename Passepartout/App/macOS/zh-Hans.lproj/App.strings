@@ -37,6 +37,7 @@
 "service.cells.vpn.turn_off.caption" = "禁用VPN";
 "service.cells.category.caption" = "类别";
 "service.cells.addresses.caption" = "地址";
+"service.cells.only_shows_favorites.caption" = "仅显示收藏的地点";
 
 "endpoint.cells.address" = "地址";
 "endpoint.cells.protocol" = "协议";

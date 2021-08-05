@@ -37,6 +37,7 @@
 "service.cells.vpn.turn_off.caption" = "VPN deactiveren";
 "service.cells.category.caption" = "Categorie";
 "service.cells.addresses.caption" = "Adressen";
+"service.cells.only_shows_favorites.caption" = "Alleen favoriete locaties weergeven";
 
 "endpoint.cells.address" = "Adres";
 "endpoint.cells.protocol" = "Protocol";
