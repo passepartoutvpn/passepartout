@@ -100,6 +100,7 @@ class ProviderServiceView: NSView {
         checkOnlyShowsFavorites.title = L10n.Service.Cells.OnlyShowsFavorites.caption
         checkOnlyShowsFavorites.state = .off
         buttonRefreshInfrastructure.image = NSImage(named: NSImage.refreshTemplateName)
+        buttonRefreshInfrastructure.toolTip = L10n.Service.Cells.Provider.Refresh.caption
         buttonFavorite.image = NSImage(named: NSImage.bookmarksTemplateName)
 
         updateFavoriteState()
@@ -138,8 +139,10 @@ class ProviderServiceView: NSView {
         if isFavorite {
             profile?.favoriteGroupIds = profile?.favoriteGroupIds ?? []
             profile?.favoriteGroupIds?.append(groupId)
+            buttonFavorite.toolTip = L10n.Provider.Pool.Actions.unfavorite
         } else {
             profile?.favoriteGroupIds?.removeAll { $0 == groupId }
+            buttonFavorite.toolTip = L10n.Provider.Pool.Actions.favorite
         }
 
         // disable favorite while filtering favorites
@@ -294,6 +297,7 @@ class ProviderServiceView: NSView {
         let groupId = group.uniqueId(in: category)
         let isFavorite = profile?.favoriteGroupIds?.contains(groupId) ?? false
         buttonFavorite.state = isFavorite ? .on : .off
+        buttonFavorite.toolTip = (isFavorite ? L10n.Provider.Pool.Actions.unfavorite : L10n.Provider.Pool.Actions.favorite)
     }
 
     private func delegateSelectedPool() {
