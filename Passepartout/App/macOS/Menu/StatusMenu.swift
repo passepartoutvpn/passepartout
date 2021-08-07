@@ -24,6 +24,7 @@
 //
 
 import Cocoa
+import StoreKit
 import PassepartoutCore
 import TunnelKit
 import Convenience
@@ -131,16 +132,23 @@ class StatusMenu: NSObject {
         
         let menuSupport = NSMenu()
         let itemCommunity = NSMenuItem(title: L10n.Organizer.Cells.JoinCommunity.caption.asContinuation, action: #selector(joinCommunity), keyEquivalent: "")
-//        let itemDonate = NSMenuItem(title: L10n.Organizer.Cells.Donate.caption.asContinuation, action: #selector(showDonations), keyEquivalent: "")
+        let itemDonate = NSMenuItem(title: L10n.Organizer.Cells.Donate.caption, action: nil, keyEquivalent: "")
 //        let itemGitHubSponsors = NSMenuItem(title: L10n.Organizer.Cells.GithubSponsors.caption.asContinuation, action: #selector(seeGitHubSponsors), keyEquivalent: "")
 //        let itemTranslate = NSMenuItem(title: L10n.Organizer.Cells.Translate.caption.asContinuation, action: #selector(offerToTranslate), keyEquivalent: "")
+
+        let menuDonate = NSMenu()
+        ProductManager.shared.listProducts { [weak self] products, error in
+            self?.addDonations(fromProducts: products ?? [], to: menuDonate)
+        }
+
+        menuSupport.setSubmenu(menuDonate, for: itemDonate)
         let itemFAQ = NSMenuItem(title: L10n.About.Cells.Faq.caption.asContinuation, action: #selector(visitFAQ), keyEquivalent: "")
         itemCommunity.target = self
 //        itemDonate.target = self
 //        itemGitHubSponsors.target = self
 //        itemTranslate.target = self
         itemFAQ.target = self
-//        menuSupport.addItem(itemDonate)
+        menuSupport.addItem(itemDonate)
         menuSupport.addItem(itemCommunity)
 //        menuSupport.addItem(.separator())
 //        menuSupport.addItem(itemGitHubSponsors)
@@ -569,6 +577,27 @@ class StatusMenu: NSObject {
     }
     
     // MARK: Helpers
+    
+    private func addDonations(fromProducts products: [SKProduct], to menu: NSMenu) {
+        products.sorted { $0.price.decimalValue < $1.price.decimalValue }.forEach {
+            guard let p = Product(rawValue: $0.productIdentifier), p.isDonation, let price = $0.localizedPrice else {
+                return
+            }
+            let title = "\($0.localizedTitle) (\(price))"
+            let item = NSMenuItem(title: title, action: #selector(performDonation(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = $0
+            menu.addItem(item)
+        }
+    }
+    
+    @objc private func performDonation(_ item: NSMenuItem) {
+        guard let product = item.representedObject as? SKProduct else {
+            return
+        }
+        ProductManager.shared.purchase(product) { _, _ in
+        }
+    }
     
     private func reloadVpnStatus() {
         if vpn.isEnabled {
