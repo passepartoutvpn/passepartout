@@ -59,7 +59,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     func reloadModel() {
         model.clear()
         model.add(.products)
-        model.setFooter(L10n.Core.Purchase.Sections.Products.footer, forSection: .products)
+        model.setFooter(L10n.Purchase.Sections.Products.footer, forSection: .products)
 
         var rows: [RowType] = []
         let pm = ProductManager.shared
@@ -94,7 +94,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Core.Purchase.title
+        title = L10n.Purchase.title
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
 
         isLoading = true
@@ -172,7 +172,7 @@ class PurchaseViewController: UITableViewController, StrongTableHost {
         log.error("Unable to purchase \(product): \(error)")
         
         let alert = UIAlertController.asAlert(product.localizedTitle, error.localizedDescription)
-        alert.addCancelAction(L10n.Core.Global.ok)
+        alert.addCancelAction(L10n.Global.ok)
         present(alert, animated: true, completion: nil)
     }
 
@@ -234,8 +234,8 @@ extension PurchaseViewController {
             
         case .restore:
             cell.fill(
-                title: L10n.Core.Purchase.Cells.Restore.title,
-                description: L10n.Core.Purchase.Cells.Restore.description
+                title: L10n.Purchase.Cells.Restore.title,
+                description: L10n.Purchase.Cells.Restore.description
             )
         }
         return cell

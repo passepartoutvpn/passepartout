@@ -44,7 +44,7 @@ class WindowManager: NSObject {
     
     @discardableResult func showPreferences() -> NSWindowController? {
         preferences = presentWindowController(StoryboardScene.Preferences.preferencesWindowController, existing: preferences)
-        preferences?.window?.title = L10n.Core.Preferences.title
+        preferences?.window?.title = L10n.Preferences.title
         return preferences
     }
     

@@ -64,13 +64,13 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelTitle.stringValue = L10n.Core.Service.Sections.Trusted.header.asCaption
+        labelTitle.stringValue = L10n.Service.Sections.Trusted.header.asCaption
         buttonAdd.image = NSImage(named: NSImage.addTemplateName)
         buttonRemove.image = NSImage(named: NSImage.removeTemplateName)
-        checkTrustEthernet.title = L10n.Core.Trusted.Ethernet.title
-        labelTrustEthernetDescription.stringValue = L10n.Core.Trusted.Ethernet.description
-        checkDisableConnection.title = L10n.Core.Service.Cells.TrustedPolicy.caption
-        labelDisableConnectionDescription.stringValue = L10n.Core.Service.Sections.Trusted.footer
+        checkTrustEthernet.title = L10n.Trusted.Ethernet.title
+        labelTrustEthernetDescription.stringValue = L10n.Trusted.Ethernet.description
+        checkDisableConnection.title = L10n.Service.Cells.TrustedPolicy.caption
+        labelDisableConnectionDescription.stringValue = L10n.Service.Sections.Trusted.footer
 
         checkTrustEthernet.state = trustedNetworks.includesEthernet ? .on : .off
         checkDisableConnection.state = (trustedNetworks.policy == .disconnect) ? .on : .off
@@ -86,7 +86,7 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
                 column.isEditable = false
 
             case Columns.trust:
-                column.title = L10n.Core.Trusted.Columns.Trust.title
+                column.title = L10n.Trusted.Columns.Trust.title
                 
             default:
                 break
@@ -218,10 +218,10 @@ extension TrustedNetworksViewController: TrustedNetworksUIDelegate {
 
     func trustedNetworksShouldConfirmDisconnection(_: TrustedNetworksUI, triggeredAt rowIndex: Int, completionHandler: @escaping () -> Void) {
         let alert = Macros.warning(
-            L10n.Core.Service.Sections.Trusted.header,
-            L10n.Core.Service.Alerts.Trusted.WillDisconnectTrusted.message
+            L10n.Service.Sections.Trusted.header,
+            L10n.Service.Alerts.Trusted.WillDisconnectTrusted.message
         )
-        alert.present(in: view.window, withOK: L10n.Core.Global.ok, cancel: L10n.Core.Global.cancel, handler: completionHandler, cancelHandler: nil)
+        alert.present(in: view.window, withOK: L10n.Global.ok, cancel: L10n.Global.cancel, handler: completionHandler, cancelHandler: nil)
     }
     
     func trustedNetworks(_: TrustedNetworksUI, shouldInsertWifiAt rowIndex: Int) {

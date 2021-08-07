@@ -100,18 +100,18 @@ extension SettingTableViewCell {
 
         leftTextColor = theme.palette.primaryText
         guard let vpnStatus = vpnStatus else {
-            rightText = L10n.Core.Vpn.disabled
+            rightText = L10n.Vpn.disabled
             rightTextColor = theme.palette.secondaryText
             return
         }
         
         switch vpnStatus {
         case .connecting:
-            rightText = L10n.Core.Vpn.connecting
+            rightText = L10n.Vpn.connecting
             rightTextColor = theme.palette.indeterminate
             
         case .connected:
-            rightText = L10n.Core.Vpn.active
+            rightText = L10n.Vpn.active
             rightTextColor = theme.palette.on
             
         case .disconnecting, .disconnected:
@@ -119,34 +119,34 @@ extension SettingTableViewCell {
             if let error = error {
                 switch error {
                 case .socketActivity, .timeout:
-                    disconnectionReason = L10n.Core.Vpn.Errors.timeout
+                    disconnectionReason = L10n.Vpn.Errors.timeout
                     
                 case .dnsFailure:
-                    disconnectionReason = L10n.Core.Vpn.Errors.dns
+                    disconnectionReason = L10n.Vpn.Errors.dns
                     
                 case .tlsInitialization, .tlsServerVerification, .tlsHandshake:
-                    disconnectionReason = L10n.Core.Vpn.Errors.tls
+                    disconnectionReason = L10n.Vpn.Errors.tls
                     
                 case .authentication:
-                    disconnectionReason = L10n.Core.Vpn.Errors.auth
+                    disconnectionReason = L10n.Vpn.Errors.auth
                     
                 case .encryptionInitialization, .encryptionData:
-                    disconnectionReason = L10n.Core.Vpn.Errors.encryption
+                    disconnectionReason = L10n.Vpn.Errors.encryption
 
                 case .serverCompression, .lzo:
-                    disconnectionReason = L10n.Core.Vpn.Errors.compression
+                    disconnectionReason = L10n.Vpn.Errors.compression
                     
                 case .networkChanged:
-                    disconnectionReason = L10n.Core.Vpn.Errors.network
+                    disconnectionReason = L10n.Vpn.Errors.network
                     
                 case .routing:
-                    disconnectionReason = L10n.Core.Vpn.Errors.routing
+                    disconnectionReason = L10n.Vpn.Errors.routing
                     
                 case .gatewayUnattainable:
-                    disconnectionReason = L10n.Core.Vpn.Errors.gateway
+                    disconnectionReason = L10n.Vpn.Errors.gateway
                     
                 case .serverShutdown:
-                    disconnectionReason = L10n.Core.Vpn.Errors.shutdown
+                    disconnectionReason = L10n.Vpn.Errors.shutdown
                     
                 default:
                     break
@@ -154,11 +154,11 @@ extension SettingTableViewCell {
             }
             switch vpnStatus {
             case .disconnecting:
-                rightText = disconnectionReason ?? L10n.Core.Vpn.disconnecting
+                rightText = disconnectionReason ?? L10n.Vpn.disconnecting
                 rightTextColor = theme.palette.indeterminate
                 
             case .disconnected:
-                rightText = disconnectionReason ?? L10n.Core.Vpn.inactive
+                rightText = disconnectionReason ?? L10n.Vpn.inactive
                 rightTextColor = theme.palette.off
                 
             default:

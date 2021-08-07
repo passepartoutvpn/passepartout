@@ -70,13 +70,13 @@ class ProxyViewController: NSViewController, ProfileCustomization {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelProxyCaption.stringValue = L10n.Core.Global.Captions.address.asCaption
-        textProxyAddress.placeholderString = L10n.Core.Global.Values.none
-        textProxyPort.placeholderString = L10n.Core.Global.Values.none
+        labelProxyCaption.stringValue = L10n.Global.Captions.address.asCaption
+        textProxyAddress.placeholderString = L10n.Global.Values.none
+        textProxyPort.placeholderString = L10n.Global.Values.none
         labelPACCaption.stringValue = "PAC".asCaption
-        textPAC.placeholderString = L10n.Core.Global.Values.none
+        textPAC.placeholderString = L10n.Global.Values.none
 
-        tableProxyBypass.title = L10n.Core.NetworkSettings.Proxy.Cells.BypassDomains.title.asCaption
+        tableProxyBypass.title = L10n.NetworkSettings.Proxy.Cells.BypassDomains.title.asCaption
         viewProxyBypass.addSubview(tableProxyBypass)
         tableProxyBypass.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

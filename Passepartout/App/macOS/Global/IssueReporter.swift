@@ -36,8 +36,8 @@ class IssueReporter: NSObject {
 
     func present(withIssue issue: Issue) {
         if issue.debugLog {
-            let alert = Macros.warning(L10n.Core.IssueReporter.title, L10n.Core.IssueReporter.message)
-            alert.present(in: nil, withOK: L10n.Core.IssueReporter.Buttons.accept, cancel: L10n.Core.Global.cancel, handler: {
+            let alert = Macros.warning(L10n.IssueReporter.title, L10n.IssueReporter.message)
+            alert.present(in: nil, withOK: L10n.IssueReporter.Buttons.accept, cancel: L10n.Global.cancel, handler: {
                 VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
                     self.composeEmail(withDebugLog: $0, issue: issue)
                 }

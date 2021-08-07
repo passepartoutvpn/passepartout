@@ -39,8 +39,8 @@ class AboutViewController: UITableViewController, StrongTableHost {
         model.add(.share)
         model.setHeader("", forSection: .info)
         model.setHeader("GitHub", forSection: .github)
-        model.setHeader(L10n.Core.About.Sections.Web.header, forSection: .web)
-        model.setHeader(L10n.Core.About.Sections.Share.header, forSection: .share)
+        model.setHeader(L10n.About.Sections.Web.header, forSection: .web)
+        model.setHeader(L10n.About.Sections.Share.header, forSection: .share)
         model.set([.version, .credits], forSection: .info)
         model.set([.readme, .changelog], forSection: .github)
         model.set([.website, .faq, .disclaimer, .privacyPolicy], forSection: .web)
@@ -56,7 +56,7 @@ class AboutViewController: UITableViewController, StrongTableHost {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Core.About.title
+        title = L10n.About.title
     }
     
     // MARK: Actions
@@ -64,7 +64,7 @@ class AboutViewController: UITableViewController, StrongTableHost {
     private func showVersion() {
         let vc = VersionViewController()
         vc.appIcon = Asset.Assets.logo.image
-        vc.extraText = L10n.Core.Version.Labels.intro
+        vc.extraText = L10n.Version.Labels.intro
         vc.backgroundColor = Theme.current.palette.primaryBackground
         vc.textColor = Theme.current.palette.primaryLightText
         navigationController?.pushViewController(vc, animated: true)
@@ -72,10 +72,10 @@ class AboutViewController: UITableViewController, StrongTableHost {
     
     private func showCredits() {
         let vc = CreditsViewController()
-        vc.title = L10n.Core.Credits.title
-        vc.licensesHeader = L10n.Core.Credits.Sections.Licenses.header
-        vc.noticesHeader = L10n.Core.Credits.Sections.Notices.header
-        vc.translationsHeader = L10n.Core.Credits.Sections.Translations.header
+        vc.title = L10n.Credits.title
+        vc.licensesHeader = L10n.Credits.Sections.Licenses.header
+        vc.noticesHeader = L10n.Credits.Sections.Notices.header
+        vc.translationsHeader = L10n.Credits.Sections.Translations.header
         vc.software = AppConstants.Credits.software
         vc.translators = AppConstants.Translations.translators
         vc.accentColor = Theme.current.palette.accent1
@@ -83,7 +83,7 @@ class AboutViewController: UITableViewController, StrongTableHost {
     }
     
     private func inviteFriend(sender: UITableViewCell?) {
-        let message = "\(L10n.Core.Share.message) \(AppConstants.URLs.website)"
+        let message = "\(L10n.Share.message) \(AppConstants.URLs.website)"
         let vc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
         vc.popoverPresentationController?.sourceView = sender
         present(vc, animated: true, completion: nil)
@@ -159,11 +159,11 @@ extension AboutViewController {
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         switch model.row(at: indexPath) {
         case .version:
-            cell.leftText = L10n.Core.Version.title
+            cell.leftText = L10n.Version.title
             cell.rightText = ApplicationInfo.appVersion
             
         case .credits:
-            cell.leftText = L10n.Core.About.Cells.Credits.caption
+            cell.leftText = L10n.About.Cells.Credits.caption
 
         case .readme:
             cell.leftText = "README"
@@ -172,22 +172,22 @@ extension AboutViewController {
             cell.leftText = "CHANGELOG"
             
         case .website:
-            cell.leftText = L10n.Core.About.Cells.Website.caption
+            cell.leftText = L10n.About.Cells.Website.caption
             
         case .faq:
-            cell.leftText = L10n.Core.About.Cells.Faq.caption
+            cell.leftText = L10n.About.Cells.Faq.caption
 
         case .disclaimer:
-            cell.leftText = L10n.Core.About.Cells.Disclaimer.caption
+            cell.leftText = L10n.About.Cells.Disclaimer.caption
             
         case .privacyPolicy:
-            cell.leftText = L10n.Core.About.Cells.PrivacyPolicy.caption
+            cell.leftText = L10n.About.Cells.PrivacyPolicy.caption
             
         case .shareTwitter:
-            cell.leftText = L10n.Core.About.Cells.ShareTwitter.caption
+            cell.leftText = L10n.About.Cells.ShareTwitter.caption
             
         case .shareGeneric:
-            cell.leftText = L10n.Core.About.Cells.ShareGeneric.caption
+            cell.leftText = L10n.About.Cells.ShareGeneric.caption
 
         case .visitAlternativeTo:
             cell.leftText = "AlternativeTo"
@@ -222,7 +222,7 @@ extension AboutViewController {
             visitURL(AppConstants.URLs.privacyPolicy)
 
         case .shareTwitter:
-            visitURL(AppConstants.URLs.twitterIntent(withMessage: L10n.Core.Share.message))
+            visitURL(AppConstants.URLs.twitterIntent(withMessage: L10n.Share.message))
 
         case .shareGeneric:
             inviteFriend(sender: tableView.cellForRow(at: indexPath))

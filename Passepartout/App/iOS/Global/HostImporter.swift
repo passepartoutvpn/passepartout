@@ -75,7 +75,7 @@ class HostImporter {
     private func alertImportError(_ error: Error, removeOnError: Bool) {
         let message = HostImporter.localizedMessage(forError: error)
         let alert = UIAlertController.asAlert(configurationURL.normalizedFilename, message)
-        alert.addCancelAction(L10n.Core.Global.ok)
+        alert.addCancelAction(L10n.Global.ok)
         viewController?.present(alert, animated: true, completion: nil)
 
         if removeOnError {
@@ -85,11 +85,11 @@ class HostImporter {
 
     private func alertImportWarning(_ warning: ConfigurationError, removeOnCancel: Bool, completionHandler: @escaping () -> Void) {
         let message = HostImporter.localizedDetailsMessage(forWarning: warning)
-        let alert = UIAlertController.asAlert(configurationURL.normalizedFilename, L10n.Core.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
-        alert.addPreferredAction(L10n.Core.Global.ok) {
+        let alert = UIAlertController.asAlert(configurationURL.normalizedFilename, L10n.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
+        alert.addPreferredAction(L10n.Global.ok) {
             completionHandler()
         }
-        alert.addCancelAction(L10n.Core.Global.cancel) {
+        alert.addCancelAction(L10n.Global.cancel) {
             if removeOnCancel {
                 try? FileManager.default.removeItem(at: self.configurationURL)
             }
@@ -98,11 +98,11 @@ class HostImporter {
     }
 
     private func enterPassphraseForHost(at url: URL, removeOnError: Bool, removeOnCancel: Bool, completionHandler: @escaping (OpenVPN.ConfigurationParser.Result) -> Void) {
-        let alert = UIAlertController.asAlert(configurationURL.normalizedFilename, L10n.Core.ParsedFile.Alerts.EncryptionPassphrase.message)
+        let alert = UIAlertController.asAlert(configurationURL.normalizedFilename, L10n.ParsedFile.Alerts.EncryptionPassphrase.message)
         alert.addTextField { (field) in
             field.isSecureTextEntry = true
         }
-        alert.addPreferredAction(L10n.Core.Global.ok) {
+        alert.addPreferredAction(L10n.Global.ok) {
             guard let passphrase = alert.textFields?.first?.text else {
                 return
             }
@@ -113,7 +113,7 @@ class HostImporter {
                 completionHandler: completionHandler
             )
         }
-        alert.addCancelAction(L10n.Core.Global.cancel) {
+        alert.addCancelAction(L10n.Global.cancel) {
             if removeOnCancel {
                 try? FileManager.default.removeItem(at: url)
             }
@@ -128,25 +128,25 @@ class HostImporter {
             switch appError {
             case .malformed(let option):
                 log.error("Could not parse configuration URL: malformed option, \(option)")
-                return L10n.Core.ParsedFile.Alerts.Malformed.message(option)
+                return L10n.ParsedFile.Alerts.Malformed.message(option)
 
             case .missingConfiguration(let option):
                 log.error("Could not parse configuration URL: missing configuration, \(option)")
-                return L10n.Core.ParsedFile.Alerts.Missing.message(option)
+                return L10n.ParsedFile.Alerts.Missing.message(option)
                 
             case .unsupportedConfiguration(var option):
                 if option.contains("external") {
                     option.append(" (see FAQ)")
                 }
                 log.error("Could not parse configuration URL: unsupported configuration, \(option)")
-                return L10n.Core.ParsedFile.Alerts.Unsupported.message(option)
+                return L10n.ParsedFile.Alerts.Unsupported.message(option)
                 
             default:
                 break
             }
         }
         log.error("Could not parse configuration URL: \(error)")
-        return L10n.Core.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
+        return L10n.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
     }
     
     private static func localizedDetailsMessage(forWarning warning: ConfigurationError) -> String {

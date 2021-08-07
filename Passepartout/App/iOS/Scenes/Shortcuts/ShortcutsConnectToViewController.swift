@@ -45,8 +45,8 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     
     let model: StrongTableModel<SectionType, RowType> = {
         let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
-        model.setHeader(L10n.Core.Organizer.Sections.Providers.header, forSection: .providers)
-        model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, forSection: .hosts)
+        model.setHeader(L10n.Organizer.Sections.Providers.header, forSection: .providers)
+        model.setHeader(L10n.Organizer.Sections.Hosts.header, forSection: .hosts)
         return model
     }()
     
@@ -69,7 +69,7 @@ class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Core.Shortcuts.Add.Cells.Connect.caption
+        title = L10n.Shortcuts.Add.Cells.Connect.caption
         reloadModel()
     }
     

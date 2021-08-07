@@ -44,7 +44,7 @@ class DebugLogViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Core.Service.Cells.DebugLog.caption
+        title = L10n.Service.Cells.DebugLog.caption
         textLog?.contentInsetAdjustmentBehavior = .never
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleBars))
@@ -79,8 +79,8 @@ class DebugLogViewController: UIViewController {
     
     @IBAction private func share(_ sender: Any?) {
         guard let raw = textLog?.text, !raw.isEmpty else {
-            let alert = UIAlertController.asAlert(title, L10n.Core.DebugLog.Alerts.EmptyLog.message)
-            alert.addCancelAction(L10n.Core.Global.ok)
+            let alert = UIAlertController.asAlert(title, L10n.DebugLog.Alerts.EmptyLog.message)
+            alert.addCancelAction(L10n.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }

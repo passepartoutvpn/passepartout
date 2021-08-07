@@ -50,7 +50,7 @@ class HostServiceView: NSView {
     override func viewWillMove(toSuperview newSuperview: NSView?) {
         super.viewWillMove(toSuperview: newSuperview)
         
-        labelAddressesCaption.stringValue = L10n.Core.Service.Cells.Addresses.caption.asCaption
+        labelAddressesCaption.stringValue = L10n.Service.Cells.Addresses.caption.asCaption
     }
     
     func reloadData() {

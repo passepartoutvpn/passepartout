@@ -42,8 +42,8 @@ class TrustedNetworksAddViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttonOK.title = L10n.Core.Global.ok
-        buttonCancel.title = L10n.Core.Global.cancel
+        buttonOK.title = L10n.Global.ok
+        buttonCancel.title = L10n.Global.cancel
 
         textSSID.stringValue = Utils.currentWifiNetworkName() ?? ""
     }

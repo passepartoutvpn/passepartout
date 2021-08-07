@@ -64,14 +64,14 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
         }
 
         // headers
-        model.setHeader(L10n.Core.Configuration.Sections.Communication.header, forSection: .communication)
-        model.setHeader(L10n.Core.Configuration.Sections.Tls.header, forSection: .tls)
-        model.setHeader(L10n.Core.Configuration.Sections.Compression.header, forSection: .compression)
-        model.setHeader(L10n.Core.Configuration.Sections.Other.header, forSection: .other)
+        model.setHeader(L10n.Configuration.Sections.Communication.header, forSection: .communication)
+        model.setHeader(L10n.Configuration.Sections.Tls.header, forSection: .tls)
+        model.setHeader(L10n.Configuration.Sections.Compression.header, forSection: .compression)
+        model.setHeader(L10n.Configuration.Sections.Other.header, forSection: .other)
 
         // footers
         if isEditable {
-            model.setFooter(L10n.Core.Configuration.Sections.Reset.footer, forSection: .reset)
+            model.setFooter(L10n.Configuration.Sections.Reset.footer, forSection: .reset)
         }
         
         // rows
@@ -190,17 +190,17 @@ class ConfigurationViewController: UIViewController, StrongTableHost {
     }
     
     private func askForResetConfigurationWithPassphrase(_ originalURL: URL) {
-        let alert = UIAlertController.asAlert(nil, L10n.Core.ParsedFile.Alerts.EncryptionPassphrase.message)
+        let alert = UIAlertController.asAlert(nil, L10n.ParsedFile.Alerts.EncryptionPassphrase.message)
         alert.addTextField { (field) in
             field.isSecureTextEntry = true
         }
-        alert.addPreferredAction(L10n.Core.Global.ok) {
+        alert.addPreferredAction(L10n.Global.ok) {
             guard let passphrase = alert.textFields?.first?.text else {
                 return
             }
             self.resetOriginalConfiguration(passphrase: passphrase)
         }
-        alert.addCancelAction(L10n.Core.Global.cancel) {
+        alert.addCancelAction(L10n.Global.cancel) {
         }
         present(alert, animated: true, completion: nil)
     }
@@ -279,7 +279,7 @@ extension ConfigurationViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = model.row(at: indexPath)
-        let V = L10n.Core.Configuration.Cells.self
+        let V = L10n.Configuration.Cells.self
 
         let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
         if !isEditable {

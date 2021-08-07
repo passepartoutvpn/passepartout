@@ -55,10 +55,10 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
     lazy var model: StrongTableModel<SectionType, RowType> = {
         let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         model.add(.meta)
-//        model.setFooter(L10n.Core.Global.Host.TitleInput.message, forSection: .meta)
+//        model.setFooter(L10n.Global.Host.TitleInput.message, forSection: .meta)
         if !existingHostIds.isEmpty {
             model.add(.existing)
-            model.setHeader(L10n.Core.Wizards.Host.Sections.Existing.header, forSection: .existing)
+            model.setHeader(L10n.Wizards.Host.Sections.Existing.header, forSection: .existing)
         }
         model.set([.titleInput], forSection: .meta)
         model.set(.existingHost, count: existingHostIds.count, forSection: .existing)
@@ -73,8 +73,8 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Core.Organizer.Sections.Hosts.header
-        itemNext.title = L10n.Core.Global.next
+        title = L10n.Organizer.Sections.Hosts.header
+        itemNext.title = L10n.Global.next
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,11 +114,11 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
         replacedProfile = nil
         if let existingProfile = service.hostProfile(withTitle: enteredTitle) {
             replacedProfile = existingProfile
-            let alert = UIAlertController.asAlert(title, L10n.Core.Wizards.Host.Alerts.Existing.message)
-            alert.addPreferredAction(L10n.Core.Global.ok) {
+            let alert = UIAlertController.asAlert(title, L10n.Wizards.Host.Alerts.Existing.message)
+            alert.addPreferredAction(L10n.Global.ok) {
                 self.next(withProfile: profile, title: enteredTitle)
             }
-            alert.addCancelAction(L10n.Core.Global.cancel)
+            alert.addCancelAction(L10n.Global.cancel)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -211,7 +211,7 @@ extension WizardHostViewController {
         switch model.row(at: indexPath) {
         case .titleInput:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.Core.Wizards.Host.Cells.TitleInput.caption
+            cell.caption = L10n.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
 //            cell.allowedCharset = .filename
             cell.field.applyHostTitle(.current)

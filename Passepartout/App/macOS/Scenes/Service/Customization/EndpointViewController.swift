@@ -52,8 +52,8 @@ class EndpointViewController: NSViewController, ProfileCustomization {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        labelAddressCaption.stringValue = L10n.Core.Endpoint.Cells.address.asCaption
-        labelProtocolCaption.stringValue = L10n.Core.Global.Captions.protocol.asCaption
+        labelAddressCaption.stringValue = L10n.Endpoint.Cells.address.asCaption
+        labelProtocolCaption.stringValue = L10n.Global.Captions.protocol.asCaption
 
         reloadEndpoints()
     }
@@ -75,8 +75,8 @@ class EndpointViewController: NSViewController, ProfileCustomization {
         }
         
         if dataSource.canCustomizeEndpoint {
-            popupAddress.insertItem(withTitle: L10n.Core.Endpoint.Cells.AnyAddress.caption, at: 0)
-            popupProtocol.insertItem(withTitle: L10n.Core.Endpoint.Cells.AnyProtocol.caption, at: 0)
+            popupAddress.insertItem(withTitle: L10n.Endpoint.Cells.AnyAddress.caption, at: 0)
+            popupProtocol.insertItem(withTitle: L10n.Endpoint.Cells.AnyProtocol.caption, at: 0)
 
             if dataSource.customAddress == nil {
                 popupAddress.selectItem(at: 0)

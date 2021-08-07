@@ -68,8 +68,8 @@ class TextInputViewController: NSViewController {
         labelTextCaption.stringValue = caption
         textField.stringValue = text
         textField.placeholderString = placeholder
-        buttonOK.title = L10n.Core.Global.ok
-        buttonCancel.title = L10n.Core.Global.cancel
+        buttonOK.title = L10n.Global.ok
+        buttonCancel.title = L10n.Global.cancel
 
         textPlain.isHidden = isSecure
         textSecure.isHidden = !isSecure

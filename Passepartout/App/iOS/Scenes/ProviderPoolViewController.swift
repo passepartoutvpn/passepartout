@@ -79,7 +79,7 @@ class ProviderPoolViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Core.Service.Cells.Provider.Pool.caption
+        title = L10n.Service.Cells.Provider.Pool.caption
         tableView.reloadData()
         if let ip = selectedIndexPath {
             tableView.selectRowAsync(at: ip)
@@ -181,7 +181,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if isShowingEmptyFavorites {
-            return L10n.Core.Provider.Pool.Sections.EmptyFavorites.footer
+            return L10n.Provider.Pool.Sections.EmptyFavorites.footer
         }
         return nil
     }
@@ -232,7 +232,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
         vc.title = group.localizedCountry
         vc.options = group.pools.sortedPools()
         vc.selectedOption = currentPool
-        vc.descriptionBlock = { !$0.secondaryId.isEmpty ? $0.secondaryId : L10n.Core.Global.Values.default }
+        vc.descriptionBlock = { !$0.secondaryId.isEmpty ? $0.secondaryId : L10n.Global.Values.default }
         vc.selectionBlock = {
             self.currentPool = $0
             self.delegate?.providerPoolController(self, didSelectPool: $0)
@@ -251,12 +251,12 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
 
         let action: UIContextualAction
         if favoriteGroupIds.contains(groupId) {
-            action = UIContextualAction(style: .destructive, title: L10n.Core.Provider.Pool.Actions.unfavorite) {
+            action = UIContextualAction(style: .destructive, title: L10n.Provider.Pool.Actions.unfavorite) {
                 self.unfavoriteGroup(in: category, withId: groupId, deletingRowAt: self.isShowingFavorites ? indexPath : nil)
                 $2(true)
             }
         } else if !isShowingFavorites {
-            action = UIContextualAction(style: .normal, title: L10n.Core.Provider.Pool.Actions.favorite) {
+            action = UIContextualAction(style: .normal, title: L10n.Provider.Pool.Actions.favorite) {
                 self.favoriteGroup(withId: groupId)
                 $2(true)
             }

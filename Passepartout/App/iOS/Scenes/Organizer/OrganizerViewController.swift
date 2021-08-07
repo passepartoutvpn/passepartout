@@ -61,22 +61,22 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         model.add(.support)
         if ProductManager.shared.isEligibleForFeedback() {
             model.add(.feedback)
-            model.setHeader(L10n.Core.Organizer.Sections.Feedback.header, forSection: .feedback)
+            model.setHeader(L10n.Organizer.Sections.Feedback.header, forSection: .feedback)
             model.set([.writeReview], forSection: .feedback)
         }
         model.add(.about)
         model.add(.destruction)
-        model.setHeader(L10n.Core.Service.Sections.Vpn.header, forSection: .vpn)
-        model.setHeader(L10n.Core.Organizer.Sections.Providers.header, forSection: .providers)
-        model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, forSection: .hosts)
-        model.setFooter(L10n.Core.Organizer.Sections.Providers.footer, forSection: .providers)
-        model.setFooter(L10n.Core.Organizer.Sections.Hosts.footer, forSection: .hosts)
+        model.setHeader(L10n.Service.Sections.Vpn.header, forSection: .vpn)
+        model.setHeader(L10n.Organizer.Sections.Providers.header, forSection: .providers)
+        model.setHeader(L10n.Organizer.Sections.Hosts.header, forSection: .hosts)
+        model.setFooter(L10n.Organizer.Sections.Providers.footer, forSection: .providers)
+        model.setFooter(L10n.Organizer.Sections.Hosts.footer, forSection: .hosts)
         if #available(iOS 12, *) {
-            model.setHeader(L10n.Core.Organizer.Sections.Siri.header, forSection: .siri)
-            model.setFooter(L10n.Core.Organizer.Sections.Siri.footer, forSection: .siri)
+            model.setHeader(L10n.Organizer.Sections.Siri.header, forSection: .siri)
+            model.setFooter(L10n.Organizer.Sections.Siri.footer, forSection: .siri)
             model.set([.siriShortcuts], forSection: .siri)
         }
-        model.setHeader(L10n.Core.Organizer.Sections.Support.header, forSection: .support)
+        model.setHeader(L10n.Organizer.Sections.Support.header, forSection: .support)
         model.set([.connectionStatus], forSection: .vpn)
         model.set([.donate, .githubSponsors, .joinCommunity], forSection: .support)
 
@@ -136,15 +136,15 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         if !didShowSubreddit && !TransientStore.didHandleSubreddit {
             didShowSubreddit = true
 
-            let alert = UIAlertController.asAlert(L10n.Core.Reddit.title, L10n.Core.Reddit.message)
-            alert.addPreferredAction(L10n.Core.Reddit.Buttons.subscribe) {
+            let alert = UIAlertController.asAlert(L10n.Reddit.title, L10n.Reddit.message)
+            alert.addPreferredAction(L10n.Reddit.Buttons.subscribe) {
                 TransientStore.didHandleSubreddit = true
                 self.subscribeSubreddit()
             }
-            alert.addAction(L10n.Core.Reddit.Buttons.never) {
+            alert.addAction(L10n.Reddit.Buttons.never) {
                 TransientStore.didHandleSubreddit = true
             }
-            alert.addCancelAction(L10n.Core.Reddit.Buttons.remind)
+            alert.addCancelAction(L10n.Reddit.Buttons.remind)
             present(alert, animated: true, completion: nil)
         }
     }
@@ -198,10 +198,10 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     private func addNewProvider() {
         guard service.hasAvailableProviders() else {
             let alert = UIAlertController.asAlert(
-                L10n.Core.Organizer.Sections.Providers.header,
-                L10n.Core.Organizer.Alerts.ExhaustedProviders.message
+                L10n.Organizer.Sections.Providers.header,
+                L10n.Organizer.Alerts.ExhaustedProviders.message
             )
-            alert.addCancelAction(L10n.Core.Global.ok)
+            alert.addCancelAction(L10n.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -243,10 +243,10 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     private func donateToDeveloper() {
         guard SKPaymentQueue.canMakePayments() else {
             let alert = UIAlertController.asAlert(
-                L10n.Core.Organizer.Cells.Donate.caption,
-                L10n.Core.Organizer.Alerts.CannotDonate.message
+                L10n.Organizer.Cells.Donate.caption,
+                L10n.Organizer.Alerts.CannotDonate.message
             )
-            alert.addCancelAction(L10n.Core.Global.ok)
+            alert.addCancelAction(L10n.Global.ok)
             present(alert, animated: true, completion: nil)
             return
         }
@@ -262,8 +262,8 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         guard MFMailComposeViewController.canSendMail() else {
             let app = UIApplication.shared
             guard let url = URL.mailto(to: recipient, subject: subject, body: body), app.canOpenURL(url) else {
-                let alert = UIAlertController.asAlert(L10n.Core.Translations.title, L10n.Core.Global.emailNotConfigured)
-                alert.addCancelAction(L10n.Core.Global.ok)
+                let alert = UIAlertController.asAlert(L10n.Translations.title, L10n.Global.emailNotConfigured)
+                alert.addCancelAction(L10n.Global.ok)
                 present(alert, animated: true, completion: nil)
                 return
             }
@@ -335,13 +335,13 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
 
     private func confirmVpnProfileDeletion() {
         let alert = UIAlertController.asAlert(
-            L10n.Core.Organizer.Cells.Uninstall.caption,
-            L10n.Core.Organizer.Alerts.DeleteVpnProfile.message
+            L10n.Organizer.Cells.Uninstall.caption,
+            L10n.Organizer.Alerts.DeleteVpnProfile.message
         )
-        alert.addPreferredAction(L10n.Core.Global.ok) {
+        alert.addPreferredAction(L10n.Global.ok) {
             VPN.shared.uninstall(completionHandler: nil)
         }
-        alert.addCancelAction(L10n.Core.Global.cancel)
+        alert.addCancelAction(L10n.Global.cancel)
         present(alert, animated: true, completion: nil)
     }
     
@@ -362,7 +362,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
     
     private func testInterfaces() {
         let alert = UIAlertController.asAlert("Test interfaces", nil)
-        alert.addCancelAction(L10n.Core.Global.ok)
+        alert.addCancelAction(L10n.Global.ok)
         defer {
             present(alert, animated: true, completion: nil)
         }
@@ -390,7 +390,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             return
         }
         let alert = UIAlertController.asAlert("Debug log", log)
-        alert.addCancelAction(L10n.Core.Global.ok)
+        alert.addCancelAction(L10n.Global.ok)
         present(alert, animated: true, completion: nil)
     }
     
@@ -496,7 +496,7 @@ extension OrganizerViewController {
         case .connectionStatus:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyVPN(.current, with: VPN.shared.isEnabled ? VPN.shared.status : nil, error: nil)
-            cell.leftText = L10n.Core.Service.Cells.ConnectionStatus.caption
+            cell.leftText = L10n.Service.Cells.ConnectionStatus.caption
             return cell
 
         case .profile:
@@ -509,67 +509,67 @@ extension OrganizerViewController {
                 cell.imageView?.image = nil
             }
             cell.leftText = service.screenTitle(rowProfile)
-            cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Core.Organizer.Cells.Profile.Value.current : nil
+            cell.rightText = service.isActiveProfile(rowProfile) ? L10n.Organizer.Cells.Profile.Value.current : nil
             return cell
 
         case .addProvider:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.Core.Organizer.Cells.AddProvider.caption
+            cell.leftText = L10n.Organizer.Cells.AddProvider.caption
             return cell
 
         case .addHost:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.Core.Organizer.Cells.AddHost.caption
+            cell.leftText = L10n.Organizer.Cells.AddHost.caption
             return cell
             
         case .importHost:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.Core.Organizer.Cells.ImportHost.caption
+            cell.leftText = L10n.Organizer.Cells.ImportHost.caption
             return cell
 
         case .siriShortcuts:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.Core.Organizer.Cells.SiriShortcuts.caption
+            cell.leftText = L10n.Organizer.Cells.SiriShortcuts.caption
             return cell
             
         case .donate:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Organizer.Cells.Donate.caption
+            cell.leftText = L10n.Organizer.Cells.Donate.caption
             return cell
 
         case .githubSponsors:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Organizer.Cells.GithubSponsors.caption
+            cell.leftText = L10n.Organizer.Cells.GithubSponsors.caption
             return cell
             
         case .translate:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Organizer.Cells.Translate.caption
+            cell.leftText = L10n.Organizer.Cells.Translate.caption
             return cell
             
         case .joinCommunity:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Organizer.Cells.JoinCommunity.caption
+            cell.leftText = L10n.Organizer.Cells.JoinCommunity.caption
             return cell
             
         case .writeReview:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Organizer.Cells.WriteReview.caption
+            cell.leftText = L10n.Organizer.Cells.WriteReview.caption
             return cell
             
         case .openAbout:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Organizer.Cells.About.caption(GroupConstants.App.name)
+            cell.leftText = L10n.Organizer.Cells.About.caption(GroupConstants.App.name)
             cell.rightText = ApplicationInfo.appVersion
             return cell
             
         case .uninstall:
             let cell = Cells.destructive.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.Core.Organizer.Cells.Uninstall.caption
+            cell.caption = L10n.Organizer.Cells.Uninstall.caption
             return cell
             
         case .testInterfaces:

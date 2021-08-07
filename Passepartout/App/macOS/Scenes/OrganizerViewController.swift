@@ -63,7 +63,7 @@ class OrganizerViewController: NSViewController {
             tableProfiles.rightAnchor.constraint(equalTo: viewProfiles.rightAnchor),
         ])
 
-        buttonRemoveConfiguration.title = L10n.Core.Organizer.Cells.Uninstall.caption
+        buttonRemoveConfiguration.title = L10n.Organizer.Cells.Uninstall.caption
 
         tableProfiles.selectionBlock = { [weak self] in
             self?.serviceController?.setProfile($0)
@@ -109,7 +109,7 @@ class OrganizerViewController: NSViewController {
     }
     
     private func alertMissingInfrastructure(forMetadata metadata: Infrastructure.Metadata, error: Error?) {
-        var message = L10n.Core.Wizards.Provider.Alerts.Unavailable.message
+        var message = L10n.Wizards.Provider.Alerts.Unavailable.message
         if let error = error {
             log.error("Unable to download missing \(metadata.description) infrastructure (network error): \(error.localizedDescription)")
             message.append(" \(error.localizedDescription)")
@@ -118,7 +118,7 @@ class OrganizerViewController: NSViewController {
         }
         
         let alert = Macros.warning(metadata.description, message)
-        _ = alert.presentModally(withOK: L10n.Core.Global.ok, cancel: nil)
+        _ = alert.presentModally(withOK: L10n.Global.ok, cancel: nil)
     }
 
     private func confirmAddProvider(withMetadata metadata: Infrastructure.Metadata) {
@@ -128,7 +128,7 @@ class OrganizerViewController: NSViewController {
     @objc private func addHost() {
         let panel = NSOpenPanel()
         
-        panel.title = L10n.Core.Organizer.Alerts.OpenHostFile.title
+        panel.title = L10n.Organizer.Alerts.OpenHostFile.title
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
         panel.canChooseFiles = true
@@ -164,10 +164,10 @@ class OrganizerViewController: NSViewController {
         // rename to existing title -> confirm overwrite existing
         if let existingProfile = service.hostProfile(withTitle: newTitle) {
             let alert = Macros.warning(
-                L10n.Core.Service.Alerts.Rename.title,
-                L10n.Core.Wizards.Host.Alerts.Existing.message
+                L10n.Service.Alerts.Rename.title,
+                L10n.Wizards.Host.Alerts.Existing.message
             )
-            alert.present(in: view.window, withOK: L10n.Core.Global.ok, cancel: L10n.Core.Global.cancel, handler: {
+            alert.present(in: view.window, withOK: L10n.Global.ok, cancel: L10n.Global.cancel, handler: {
                 self.doReplaceProfile(profile, to: newTitle, existingProfile: existingProfile)
             }, cancelHandler: nil)
             return
@@ -191,10 +191,10 @@ class OrganizerViewController: NSViewController {
 
     @IBAction private func confirmVpnProfileDeletion(_ sender: Any?) {
         let alert = Macros.warning(
-            L10n.Core.Organizer.Cells.Uninstall.caption,
-            L10n.Core.Organizer.Alerts.DeleteVpnProfile.message
+            L10n.Organizer.Cells.Uninstall.caption,
+            L10n.Organizer.Alerts.DeleteVpnProfile.message
         )
-        alert.present(in: view.window, withOK: L10n.Core.Global.ok, cancel: L10n.Core.Global.cancel, handler: {
+        alert.present(in: view.window, withOK: L10n.Global.ok, cancel: L10n.Global.cancel, handler: {
             VPN.shared.uninstall(completionHandler: nil)
         }, cancelHandler: nil)
     }
@@ -219,9 +219,9 @@ class OrganizerViewController: NSViewController {
             }
             
             // rename host
-            vc.caption = L10n.Core.Service.Alerts.Rename.title.asCaption
+            vc.caption = L10n.Service.Alerts.Rename.title.asCaption
             vc.text = service.screenTitle(forHostId: profile.id)
-            vc.placeholder = L10n.Core.Global.Host.TitleInput.placeholder
+            vc.placeholder = L10n.Global.Host.TitleInput.placeholder
             vc.object = profile
             vc.delegate = self
         }
@@ -312,7 +312,7 @@ extension OrganizerViewController: OrganizerProfileTableViewDelegate {
 
         let menu = NSMenu()
 
-        let itemProvider = NSMenuItem(title: L10n.Core.Organizer.Menus.provider, action: nil, keyEquivalent: "")
+        let itemProvider = NSMenuItem(title: L10n.Organizer.Menus.provider, action: nil, keyEquivalent: "")
         let menuProvider = NSMenu()
         let availableMetadata = service.availableProviders()
         if !availableMetadata.isEmpty {
@@ -323,17 +323,17 @@ extension OrganizerViewController: OrganizerProfileTableViewDelegate {
                 menuProvider.addItem(item)
             }
         } else {
-            let item = NSMenuItem(title: L10n.Core.Organizer.Menus.Provider.unavailable, action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: L10n.Organizer.Menus.Provider.unavailable, action: nil, keyEquivalent: "")
             item.isEnabled = false
             menuProvider.addItem(item)
         }
         menuProvider.addItem(.separator())
-        let itemProviderUpdateList = NSMenuItem(title: L10n.Core.Wizards.Provider.Cells.UpdateList.caption, action: #selector(updateProvidersList), keyEquivalent: "")
+        let itemProviderUpdateList = NSMenuItem(title: L10n.Wizards.Provider.Cells.UpdateList.caption, action: #selector(updateProvidersList), keyEquivalent: "")
         menuProvider.addItem(itemProviderUpdateList)
         menu.setSubmenu(menuProvider, for: itemProvider)
         menu.addItem(itemProvider)
 
-        let menuHost = NSMenuItem(title: L10n.Core.Organizer.Menus.host.asContinuation, action: #selector(addHost), keyEquivalent: "")
+        let menuHost = NSMenuItem(title: L10n.Organizer.Menus.host.asContinuation, action: #selector(addHost), keyEquivalent: "")
         menu.addItem(menuHost)
 
         NSMenu.popUpContextMenu(menu, with: event, for: sender)
@@ -343,10 +343,10 @@ extension OrganizerViewController: OrganizerProfileTableViewDelegate {
         profilePendingRemoval = profile
 
         let alert = Macros.warning(
-            L10n.Core.Organizer.Alerts.RemoveProfile.title,
-            L10n.Core.Organizer.Alerts.RemoveProfile.message(service.screenTitle(ProfileKey(profile)))
+            L10n.Organizer.Alerts.RemoveProfile.title,
+            L10n.Organizer.Alerts.RemoveProfile.message(service.screenTitle(ProfileKey(profile)))
         )
-        alert.present(in: view.window, withOK: L10n.Core.Global.ok, cancel: L10n.Core.Global.cancel, handler: {
+        alert.present(in: view.window, withOK: L10n.Global.ok, cancel: L10n.Global.cancel, handler: {
             self.removePendingProfile()
         }, cancelHandler: nil)
     }
