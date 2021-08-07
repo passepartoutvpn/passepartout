@@ -53,6 +53,7 @@
 "vpn.disconnecting" = "Trenne";
 "vpn.inactive" = "Inaktiv";
 "vpn.disabled" = "Deaktiviert";
+"vpn.unused" = "Aus";
 
 "vpn.errors.timeout" = "Timeout";
 "vpn.errors.dns" = "DNS fehlgeschlagen";
@@ -87,6 +88,11 @@
 
 // ////////////////////
 
+"organizer.title" = "%@";
+"organizer.menus.provider" = "Anbieter";
+"organizer.menus.provider.unavailable" = "Keine Anbieter übrig";
+"organizer.menus.host" = "Host";
+/* //////////////////// */
 "organizer.sections.twitch.header" = "Twitch";
 "organizer.sections.twitch.footer" = "Come watch me make Passepartout live on Twitch, join the chat to interact and contribute!";
 "organizer.sections.providers.header" = "Anbieter";
@@ -107,17 +113,28 @@
 "organizer.cells.translate.caption" = "Übersetzung anbieten";
 "organizer.cells.about.caption" = "Über %@";
 "organizer.cells.uninstall.caption" = "VPN-Konfiguration entfernen";
+"organizer.cells.add_provider.caption" = "Neuen Anbieter hinzufügen";
+"organizer.cells.add_host.caption" = "Aus Dateien hinzufügen";
+"organizer.cells.import_host.caption" = "Vom Import hinzufügen";
 "organizer.alerts.exhausted_providers.message" = "Du hast Profile für alle verfügbaren Anbieter erstellt.";
 "organizer.alerts.add_host.message" = "Öffne eine URL zu einer .ovpn-Konfigurationsdatei aus Safari, Mail oder anderen App um ein Host-Profil einzurichten.\n\nDu kannst auch eine .ovpn-Datei mit iTunes Dateifreigabe importieren.";
 "organizer.alerts.cannot_donate.message" = "Auf diesem Gerät ist keine Bezahlmethode konfiguriert.";
 "organizer.alerts.delete_vpn_profile.message" = "Möchtest du wirklich die VPN-Konfiguration aus deinen Geräte-Einstellungen löschen? Dies behebt möglicherweise manche kaputten VPN-Zustände und beeinflusst nicht deine Anbieter und Hosts-Profile.";
+"organizer.alerts.remove_profile.title" = "Profil entfernen";
+"organizer.alerts.remove_profile.message" = "Bist du sicher, dass du das Profil %@ löschen möchtest?";
+"organizer.alerts.open_host_file.title" = "Wähle eine .ovpn-Datei.";
 
 "wizards.provider.cells.update_list.caption" = "Aktualisiere Liste";
 "wizards.provider.alerts.unavailable.message" = "Die Provider-Infrastruktur konnte nicht heruntergeladen werden. Bitte versuchen Sie es später erneut.";
+"wizards.host.sections.existing.header" = "Bestehende Profile";
+"wizards.host.cells.title_input.caption" = "Titel";
 "wizards.host.alerts.existing.message" = "Ein Host-Profil mit identischem Titel existiert bereits. Ersetzen?";
 
 "service.welcome.message" = "Willkommen bei Passepartout!\n\nBenutze den Organizer um ein neues Profil hinzuzufügen.";
+"service.sections.vpn.header" = "VPN";
 "service.sections.vpn.footer" = "Die Verbindung wird immer aufgebaut wenn notwendig.";
+"service.sections.status.header" = "Verbindung";
+"service.sections.configuration.header" = "Konfiguration";
 "service.sections.provider_infrastructure.footer" = "Zuletzt aktualisiert am %@.";
 "service.sections.vpn_survives_sleep.footer" = "Deaktivieren um die Batterielaufzeit zu verbessern, allerdings verzögert sich der Verbindungsaufbau beim Aufwachen.";
 "service.sections.vpn_resolves_hostname.footer" = "Bevorzugt in den meisten Netzwerken und benötigt in manchen IPv6 Netzwerken. Deaktivieren wo DNS geblockt ist oder um die Aushandlung zu beschleunigen bei langsam antwortenden DNS.";
@@ -126,11 +143,20 @@
 "service.sections.diagnostics.header" = "Diagnose";
 "service.sections.diagnostics.footer" = "Zensier-Status wird aktiv nach erneutem Verbinden. Netzwerk-Daten sind Hostnamen, IP-Adressen, Routingtabellen, SSID. Zugangsdaten und Private Keys werden nie gelogged.";
 "service.cells.use_profile.caption" = "Dieses Profil verwenden";
+"service.cells.vpn_service.caption" = "Aktiviert";
+"service.cells.vpn.turn_on.caption" = "Aktiviere VPN";
+"service.cells.vpn.turn_off.caption" = "Deaktiviere VPN";
 "service.cells.connection_status.caption" = "Status";
+"service.cells.host.parameters.caption" = "Parameter";
 "service.cells.provider.pool.caption" = "Ort";
 "service.cells.provider.preset.caption" = "Voreinstellung";
+"service.cells.provider.refresh.caption" = "Infrastruktur neu laden";
+"service.cells.category.caption" = "Kategorie";
+"service.cells.addresses.caption" = "Adressen";
+"service.cells.only_shows_favorites.caption" = "Nur favorisierte Standorte anzeigen";
 "service.cells.vpn_survives_sleep.caption" = "Verbindung aktiv halten trotz Schlafmodus";
 "service.cells.vpn_resolves_hostname.caption" = "Server Hostname auflösen";
+"service.cells.trusted_add_wifi.caption" = "WLAN hinzufügen";
 "service.cells.trusted_mobile.caption" = "Mobilfunknetz";
 "service.cells.trusted_policy.caption" = "Vertrauen deaktiviert VPN";
 "service.cells.test_connectivity.caption" = "Verbindung testen";
@@ -159,8 +185,17 @@
 "service.alerts.download.message" = "%@ benötigt den Download von zusätzlichen Konfigurationsdateien.\n\nBestätige um mit dem Download zu beginnen.";
 "service.alerts.download.failed" = "Herunterladen der Konfigurationsdateien fehlgeschlagen. %@";
 "service.alerts.download.hud.extracting" = "Extrahiere Dateien, bitte warten...";
+"service.alerts.location.message.denied" = "Sie müssen den Standortzugriff zulassen, um diesem Wi-Fi-Netzwerk vertrauen zu können. Gehen Sie zu den iOS-Einstellungen und überprüfen Sie Ihre Standortberechtigungen für Passepartout.";
+"service.alerts.location.button.settings" = "Einstellungen";
+
+"provider.pool.sections.empty_favorites.footer" = "Wische nach Links um einen Standort zu den Favoriten hinzuzufügen oder zu entfernen.";
+"provider.pool.actions.favorite" = "Favorit hinzuzufügen";
+"provider.pool.actions.unfavorite" = "Favorit entfernen";
+
+"provider.preset.cells.tech_details.caption" = "Technische Details";
 
 "account.title" = "Account";
+"account.sections.credentials.header" = "Zugangsdaten";
 "account.sections.guidance.footer.infrastructure.default.web" = "Benutze deine %@ Web-Zugangsdaten.";
 "account.sections.guidance.footer.infrastructure.default.specific" = "Verwenden Sie Ihre %@ service-Anmeldeinformationen, die von den Website-Anmeldeinformationen abweichen können.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Benutze deine %@ Web-Zugangsdaten. Dein Benutzername ist üblicherweise numerischt (ohne Zwischenraum).";
@@ -179,11 +214,20 @@
 "account.cells.signup.caption" = "Registrieren bei %@";
 
 "endpoint.title" = "Endpoint";
+"endpoint.sections.location_addresses.header" = "Adressen";
+"endpoint.sections.location_protocols.header" = "Protokolle";
+"endpoint.cells.address" = "Adresse";
+"endpoint.cells.protocol" = "Protokoll";
 "endpoint.cells.any_address.caption" = "Automatisch";
 "endpoint.cells.any_protocol.caption" = "Automatisch";
 
 "network_settings.title" = "Netzwerk-Einstellungen";
+"network_settings.cells.add_dns_server.caption" = "Adresse hinzufügen";
+"network_settings.cells.add_dns_domain.caption" = "Domäne hinzufügen";
+"network_settings.cells.proxy_bypass.caption" = "Domäne umgehen";
+"network_settings.cells.add_proxy_bypass.caption" = "Zu umgehende Domäne hinzufügen";
 
+"configuration.title" = "Konfiguration";
 "configuration.sections.communication.header" = "Kommunikation";
 "configuration.sections.reset.footer" = "Wenn du nach einer Änderung der Kommunikations-Parameter dich nicht mehr verbinden kannst, hier tippen um zur originalen Konfiguration zurückzukehren.";
 "configuration.sections.tls.header" = "TLS";
@@ -212,11 +256,28 @@
 "configuration.cells.renegotiation_seconds.caption" = "erneute Aushandlung";
 "configuration.cells.renegotiation_seconds.value.after" = "nach %@";
 "configuration.cells.random_endpoint.caption" = "Endpunkt zufällig wählen";
+"configuration.alerts.commit.message" = "Neue Parameter werden erst nach einer manuellen Wiederherstellung der Verbindung wirksam. Änderungen in vertrauenswürdigen Netzwerken werden sofort wirksam.";
+"configuration.alerts.commit.buttons.reconnect" = "Jetzt erneut verbinden";
+"configuration.alerts.commit.buttons.skip" = "Überspringen";
+
+"trusted.columns.trust.title" = "Vertrauen";
+"trusted.ethernet.title" = "Kabelverbindungen vertrauen";
+"trusted.ethernet.description" = "Hier ein Häkchen setzen, um jeder Kabelverbindung zu vertrauen.";
+
+"preferences.title" = "Einstellungen";
+"preferences.sections.general.header" = "Allgemein";
+"preferences.cells.launches_on_login.caption" = "Bei Anmeldung starten";
+"preferences.cells.launches_on_login.footer" = "Hier ein Häkchen setzen, um die App beim Systemstart oder der Anmeldung automatisch zu starten.";
+"preferences.cells.confirm_quit.caption" = "Beenden bestätigen";
+"preferences.cells.confirm_quit.footer" = "Hier ein Häkchen setzen, um einen Hinweis zur Bestätigung des Beendens anzuzeigen.";
 
 "network_settings.gateway.title" = "Standard-Gateway";
 "network_settings.dns.title" = "DNS";
+"network_settings.dns.cells.addresses.title" = "Server";
 "network_settings.dns.cells.domain.caption" = "Domäne";
+"network_settings.dns.cells.domains.title" = "Domänen";
 "network_settings.proxy.title" = "Proxy";
+"network_settings.proxy.cells.bypass_domains.title" = "Domänen umgehen";
 "network_settings.mtu.title" = "MTU";
 "network_settings.mtu.cells.bytes.caption" = "Bytes";
 
@@ -224,8 +285,10 @@
 
 "debug_log.buttons.previous" = "Zurück";
 "debug_log.buttons.next" = "Weiter";
+"debug_log.buttons.copy" = "Kopieren";
 "debug_log.alerts.empty_log.message" = "Das Debug-Log ist leer.";
 
+"shortcuts.add.title" = "Füge Kurzbefehl hinzu";
 "shortcuts.add.sections.vpn.header" = "VPN";
 "shortcuts.add.sections.wifi.header" = "WLAN";
 "shortcuts.add.sections.cellular.header" = "Mobilfunknetz";
@@ -238,7 +301,9 @@
 "shortcuts.add.cells.untrust_cellular.caption" = "Misstraue Mobilfunknetz";
 "shortcuts.add.alerts.no_profiles.message" = "Es gibt kein Profil mit dem eine Verbindung hergestellt werden kann.";
 
+"shortcuts.edit.title" = "Kurzbefehle bearbeiten";
 "shortcuts.edit.sections.all.header" = "Existierende Kurzbefehle";
+"shortcuts.edit.cells.add_shortcut.caption" = "Kurzbefehl hinzufügen";
 
 "purchase.title" = "Kaufen";
 "purchase.sections.products.footer" = "Jedes Produkt ist ein einmaliger Kauf. Der Kauf eines Providers beinhaltet kein VPN-Abonnement.";
@@ -275,3 +340,20 @@
 "credits.sections.translations.header" = "Übersetzungen";
 
 "label.license.error" = "Konnte vollständigen Lizenz-Inhalt nicht herunterladen.";
+
+// iOS only
+
+"imported_hosts.title" = "Importierte Hosts";
+
+// macOS only
+
+"menu.show.title" = "Anzeigen";
+"menu.switch_profile.title" = "Aktives Profil";
+"menu.active_profile.title.none" = "Keine aktiven Profile";
+"menu.active_profile.items.customize.title" = "Anpassen...";
+"menu.active_profile.messages.missing_credentials" = "Es wurde keine Konto konfiguriert";
+"menu.organizer.title" = "Organizer";
+"menu.preferences.title" = "Einstellungen";
+"menu.support.title" = "Support";
+"menu.quit.title" = "%@ beenden";
+"menu.quit.messages.confirm" = "Wenn das VPN aktiviert wurde, läuft es weiter im Hintergrund. Möchtest du beenden?";

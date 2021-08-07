@@ -53,6 +53,7 @@
 "vpn.disconnecting" = "Отключается";
 "vpn.inactive" = "Не активен";
 "vpn.disabled" = "Отключен";
+"vpn.unused" = "Выкл";
 
 "vpn.errors.timeout" = "Тайм-аут";
 "vpn.errors.dns" = "Ошибка DNS";
@@ -87,6 +88,11 @@
 
 // ////////////////////
 
+"organizer.title" = "%@";
+"organizer.menus.provider" = "Провайдер";
+"organizer.menus.provider.unavailable" = "Не осталось провайдеров";
+"organizer.menus.host" = "Хост";
+/* //////////////////// */
 "organizer.sections.twitch.header" = "Twitch";
 "organizer.sections.twitch.footer" = "Приходите посмотреть, как я делаю Passepartout в прямом эфире на Twitch, присоединяйтесь к чату, чтобы общаться и вносить свой вклад!";
 "organizer.sections.providers.header" = "Провайдеры";
@@ -107,17 +113,28 @@
 "organizer.cells.translate.caption" = "Помощь с переводом";
 "organizer.cells.about.caption" = "Об %@";
 "organizer.cells.uninstall.caption" = "Удалить VPN конфигурацию";
+"organizer.cells.add_provider.caption" = "Добавить нового провайдера";
+"organizer.cells.add_host.caption" = "Добавить из файлов";
+"organizer.cells.import_host.caption" = "Добавить из импортированных";
 "organizer.alerts.exhausted_providers.message" = "Вы создали профили для всех доступных провайдеров.";
 "organizer.alerts.add_host.message" = "Откройте ссылку на .ovpn файл конфигурации через Safari, Почту или другое приложение для добавление хост профиля.\n\nВы также можете импортировать .ovpn файл через общие файлы iTunes.";
 "organizer.alerts.cannot_donate.message" = "На этом усторйстве не выбран способ платежа.";
 "organizer.alerts.delete_vpn_profile.message" = "Вы действительно хотите убрать VPN конфигурацию из настроек устройства? Это может исправить несколько VPN ошибок, но не изменит установки приложения.";
+"organizer.alerts.remove_profile.title" = "Удалить профиль";
+"organizer.alerts.remove_profile.message" = "Вы точно хотите удалить профиль %@?";
+"organizer.alerts.open_host_file.title" = "Выберите файл .ovpn";
 
 "wizards.provider.cells.update_list.caption" = "Обновить список";
 "wizards.provider.alerts.unavailable.message" = "Не удалось загрузить инфраструктуру провайдера, повторите попытку позже.";
+"wizards.host.sections.existing.header" = "Существующие профили";
+"wizards.host.cells.title_input.caption" = "Название";
 "wizards.host.alerts.existing.message" = "Хост профиль с этим названием уже существует. Заменить?";
 
 "service.welcome.message" = "Добро пожаловать в Passepartout!\n\nИспользуйте организатор для добавления нового профиля.";
+"service.sections.vpn.header" = "VPN";
 "service.sections.vpn.footer" = "Соединение будет установлено при необходимости.";
+"service.sections.status.header" = "Соединение";
+"service.sections.configuration.header" = "Конфигурация";
 "service.sections.provider_infrastructure.footer" = "Последнее обновление %@.";
 "service.sections.vpn_survives_sleep.footer" = "Отключите для уменьшения расхода заряда аккумулятора, может привести к временным замедлениям в связи с повторным подключением после \"пробуждения\".";
 "service.sections.vpn_resolves_hostname.footer" = "Предпочтительно в большинстве сетей и необходимо в некоторых IPv6 сетях. Отключите если  DNS заблокирован, или для увеличения скорости в случае медленных ответов DNS.";
@@ -126,11 +143,20 @@
 "service.sections.diagnostics.header" = "Диагностика";
 "service.sections.diagnostics.footer" = "Маскировка включится после повторного подключения. Информация о сети - это названия хост профилей, IP адрес, маршрутизация и SSID. Данные для входа и приватные ключи не собираются.";
 "service.cells.use_profile.caption" = "Использовать это профиль.";
+"service.cells.vpn_service.caption" = "Включен";
+"service.cells.vpn.turn_on.caption" = "Включить VPN";
+"service.cells.vpn.turn_off.caption" = "Отключить VPN";
 "service.cells.connection_status.caption" = "Статус";
+"service.cells.host.parameters.caption" = "Параметры";
 "service.cells.provider.pool.caption" = "Местоположение";
 "service.cells.provider.preset.caption" = "Пресет";
+"service.cells.provider.refresh.caption" = "Обновить инфраструктуру";
+"service.cells.category.caption" = "Категория";
+"service.cells.addresses.caption" = "Адреса";
+"service.cells.only_shows_favorites.caption" = "Показывать только места из избранного";
 "service.cells.vpn_survives_sleep.caption" = "Оставлять включенным во время сна";
 "service.cells.vpn_resolves_hostname.caption" = "Разрешить имя хоста сервера";
+"service.cells.trusted_add_wifi.caption" = "Добавить Wi-Fi";
 "service.cells.trusted_mobile.caption" = "Мобильная сеть";
 "service.cells.trusted_policy.caption" = "Дов. сеть отключает VPN";
 "service.cells.test_connectivity.caption" = "Проверить подключение";
@@ -159,8 +185,17 @@
 "service.alerts.download.message" = "%@ необходимы дополнительные файлы конфигурации.\n\nПодтвердите для скачивания.";
 "service.alerts.download.failed" = "Не удалось скачать файлы конфигурации.%@";
 "service.alerts.download.hud.extracting" = "Извлечение файлов, пожалуста подождите...";
+"service.alerts.location.message.denied" = "Вам нужно разрешить использование геопозиции для добавления этой Wi-Fi сети в доверенные. Перейдите в настройки iOS, и измените разрешения геолокации для Passepartout.";
+"service.alerts.location.button.settings" = "Настройки";
+
+"provider.pool.sections.empty_favorites.footer" = "Свайп в лево на локации, чтобы добавить или убрать из избранного.";
+"provider.pool.actions.favorite" = "Добавить в избранное";
+"provider.pool.actions.unfavorite" = "Убрать из избранного";
+
+"provider.preset.cells.tech_details.caption" = "Техническая информация";
 
 "account.title" = "Аккаунт";
+"account.sections.credentials.header" = "Данные для входа";
 "account.sections.guidance.footer.infrastructure.default.web" = "Используйте Ваши данные для входа с веб-сайта %@.";
 "account.sections.guidance.footer.infrastructure.default.specific" = "Используйте свои учетные данные %@ service, которые могут отличаться от учетных данных веб-сайта.";
 "account.sections.guidance.footer.infrastructure.mullvad" = "Используйте Ваши данные для входа с веб-сайта %@. Ваш логин обычно числовой с (без пробелов).";
@@ -179,11 +214,20 @@
 "account.cells.signup.caption" = "Зарегистрируйтесь с %@";
 
 "endpoint.title" = "Конечная точка";
+"endpoint.sections.location_addresses.header" = "Адреса";
+"endpoint.sections.location_protocols.header" = "Протоколы";
+"endpoint.cells.address" = "Адрес";
+"endpoint.cells.protocol" = "Протокол";
 "endpoint.cells.any_address.caption" = "Автоматически";
 "endpoint.cells.any_protocol.caption" = "Автоматически";
 
 "network_settings.title" = "Сетевые настройки";
+"network_settings.cells.add_dns_server.caption" = "Добавить адрес";
+"network_settings.cells.add_dns_domain.caption" = "Добавить домен поиска";
+"network_settings.cells.proxy_bypass.caption" = "Обход домена";
+"network_settings.cells.add_proxy_bypass.caption" = "Добавить обходной домен";
 
+"configuration.title" = "Конфигурация";
 "configuration.sections.communication.header" = "Связь";
 "configuration.sections.reset.footer" = "Если после изменения параметров связи у Вас разорвалось соединение, нажмите, чтобы вернуться к исходной конфигурации.";
 "configuration.sections.tls.header" = "TLS";
@@ -212,11 +256,28 @@
 "configuration.cells.renegotiation_seconds.caption" = "Перезаключение";
 "configuration.cells.renegotiation_seconds.value.after" = "после %@";
 "configuration.cells.random_endpoint.caption" = "Рандомная конечная точка";
+"configuration.alerts.commit.message" = "Новые параметры не вступят в силу до ручного переподключения. Изменения в доверенных сетях вступят в силу сразу.";
+"configuration.alerts.commit.buttons.reconnect" = "Переподключиться";
+"configuration.alerts.commit.buttons.skip" = "Пропустить";
+
+"trusted.columns.trust.title" = "Доверенные";
+"trusted.ethernet.title" = "Доверенные проводные подключения";
+"trusted.ethernet.description" = "Включите, чтобы добавить в доверенные проводное подключение.";
+
+"preferences.title" = "Настройки";
+"preferences.sections.general.header" = "Общие";
+"preferences.cells.launches_on_login.caption" = "Запускать при входе";
+"preferences.cells.launches_on_login.footer" = "Включите, чтобы приложение автоматически запускалось при загрузке или входе.";
+"preferences.cells.confirm_quit.caption" = "Подтверждать выход";
+"preferences.cells.confirm_quit.footer" = "Включите, чтобы выход надо было подтверждать.";
 
 "network_settings.gateway.title" = "Шлюз по умолчанию";
 "network_settings.dns.title" = "DNS";
+"network_settings.dns.cells.addresses.title" = "Серверы";
 "network_settings.dns.cells.domain.caption" = "Домен";
+"network_settings.dns.cells.domains.title" = "Домены";
 "network_settings.proxy.title" = "Прокси";
+"network_settings.proxy.cells.bypass_domains.title" = "Обходные домены";
 "network_settings.mtu.title" = "MTU";
 "network_settings.mtu.cells.bytes.caption" = "байты";
 
@@ -224,8 +285,10 @@
 
 "debug_log.buttons.previous" = "Предыдущий";
 "debug_log.buttons.next" = "Следующий";
+"debug_log.buttons.copy" = "Копировать";
 "debug_log.alerts.empty_log.message" = "Журнал отладки пуст.";
 
+"shortcuts.add.title" = "Создать команду";
 "shortcuts.add.sections.vpn.header" = "VPN";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
 "shortcuts.add.sections.cellular.header" = "Мобильная сеть";
@@ -238,7 +301,9 @@
 "shortcuts.add.cells.untrust_cellular.caption" = "Не доверять мобильной сети";
 "shortcuts.add.alerts.no_profiles.message" = "Нет профиля для подключения.";
 
+"shortcuts.edit.title" = "Управлять командами";
 "shortcuts.edit.sections.all.header" = "Существующие команды";
+"shortcuts.edit.cells.add_shortcut.caption" = "Создать команду";
 
 "purchase.title" = "Покупка";
 "purchase.sections.products.footer" = "Каждый продукт является разовой покупкой. Покупка провайдера не включает подписку на VPN.";
@@ -275,3 +340,20 @@
 "credits.sections.translations.header" = "Переводы";
 
 "label.license.error" = "Не получается загрузить полную лицензию.";
+
+// iOS only
+
+"imported_hosts.title" = "Импортированные хост профили";
+
+// macOS only
+
+"menu.show.title" = "Показать";
+"menu.switch_profile.title" = "Активный профиль";
+"menu.active_profile.title.none" = "Нет активных профилей";
+"menu.active_profile.items.customize.title" = "Настроить...";
+"menu.active_profile.messages.missing_credentials" = "Нет настроенных аккаунтов";
+"menu.organizer.title" = "Организатор";
+"menu.preferences.title" = "Настройки";
+"menu.support.title" = "Поддержка";
+"menu.quit.title" = "Выйти из %@";
+"menu.quit.messages.confirm" = "Если включить VPN, он всё равно будет работать в фоновом режиме. Вы точно хотите выйти?";

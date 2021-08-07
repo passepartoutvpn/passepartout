@@ -92,6 +92,7 @@
 "organizer.menus.provider" = "Provider";
 "organizer.menus.provider.unavailable" = "No providers left";
 "organizer.menus.host" = "Host";
+/* //////////////////// */
 "organizer.sections.twitch.header" = "Twitch";
 "organizer.sections.twitch.footer" = "Come watch me make Passepartout live on Twitch, join the chat to interact and contribute!";
 "organizer.sections.providers.header" = "Providers";

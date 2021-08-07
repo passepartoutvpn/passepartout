@@ -53,6 +53,7 @@
 "vpn.disconnecting" = "断开中";
 "vpn.inactive" = "不活动";
 "vpn.disabled" = "未启用";
+"vpn.unused" = "关";
 
 "vpn.errors.timeout" = "超时";
 "vpn.errors.dns" = "DNS解析失败";
@@ -87,6 +88,11 @@
 
 // ////////////////////
 
+"organizer.title" = "%@";
+"organizer.menus.provider" = "提供商";
+"organizer.menus.provider.unavailable" = "没有提供商了";
+"organizer.menus.host" = "主机";
+/* //////////////////// */
 "organizer.sections.twitch.header" = "Twitch";
 "organizer.sections.twitch.footer" = "快来看我让Passepartout在Twitch上直播，加入聊天互动并做出贡献！";
 "organizer.sections.providers.header" = "提供商";
@@ -107,17 +113,28 @@
 "organizer.cells.translate.caption" = "提供翻译";
 "organizer.cells.about.caption" = "关于 %@";
 "organizer.cells.uninstall.caption" = "移除VPN配置";
+"organizer.cells.add_provider.caption" = "添加新的提供商配置";
+"organizer.cells.add_host.caption" = "从文件添加";
+"organizer.cells.import_host.caption" = "从导入中添加";
 "organizer.alerts.exhausted_providers.message" = "你已针对每个可用的提供商创建了配置。";
 "organizer.alerts.add_host.message" = "从Safari、邮件或其他App中打开.ovpn文件的URL来设置主机配置。\n\n你同样可以通过iTunes文件分享来导入.ovpnf文件。";
 "organizer.alerts.cannot_donate.message" = "此设备未设置付款方式。";
 "organizer.alerts.delete_vpn_profile.message" = "你确定要从此设备移除VPN配置吗？这可能会固定一些断开的VPN状态，不会影响已经存在的配置。";
+"organizer.alerts.remove_profile.title" = "删除配置";
+"organizer.alerts.remove_profile.message" = "确定要删除配置%@吗？";
+"organizer.alerts.open_host_file.title" = "选择.ovpn文件";
 
 "wizards.provider.cells.update_list.caption" = "更新列表";
 "wizards.provider.alerts.unavailable.message" = "无法下载提供商基础架构，请稍后重试。";
+"wizards.host.sections.existing.header" = "已存在的配置";
+"wizards.host.cells.title_input.caption" = "名称";
 "wizards.host.alerts.existing.message" = "已经存在同名的配置。要替换它吗？";
 
 "service.welcome.message" = "欢迎使用Passepartout!\n\n使用分类页面来添加一个新的配置。";
+"service.sections.vpn.header" = "VPN";
 "service.sections.vpn.footer" = "必要时连接将会建立。";
+"service.sections.status.header" = "连接";
+"service.sections.configuration.header" = "配置";
 "service.sections.provider_infrastructure.footer" = "最后在%@时更新";
 "service.sections.vpn_survives_sleep.footer" = "禁用以减少电池消耗，由于存在可能的唤醒时重连消耗。";
 "service.sections.vpn_resolves_hostname.footer" = "推荐在大部分的网络中打开，并要求在IPv6环境下。当DNS被阻断或相应缓慢时禁用。";
@@ -126,11 +143,20 @@
 "service.sections.diagnostics.header" = "分析数据";
 "service.sections.diagnostics.footer" = "在重连后状态隐藏才有效。网络数据包括主机名、IP地址、路由、SSID、认证方式，但私钥不会出现在日志中。";
 "service.cells.use_profile.caption" = "使用此配置";
+"service.cells.vpn_service.caption" = "已启用";
+"service.cells.vpn.turn_on.caption" = "启用VPN";
+"service.cells.vpn.turn_off.caption" = "禁用VPN";
 "service.cells.connection_status.caption" = "状态";
+"service.cells.host.parameters.caption" = "参数";
 "service.cells.provider.pool.caption" = "位置";
 "service.cells.provider.preset.caption" = "预设";
+"service.cells.provider.refresh.caption" = "刷新基础设置";
+"service.cells.category.caption" = "类别";
+"service.cells.addresses.caption" = "地址";
+"service.cells.only_shows_favorites.caption" = "仅显示收藏的地点";
 "service.cells.vpn_survives_sleep.caption" = "休眠时保持连接";
 "service.cells.vpn_resolves_hostname.caption" = "解析服务器主机名";
+"service.cells.trusted_add_wifi.caption" = "新增Wi-Fi";
 "service.cells.trusted_mobile.caption" = "蜂窝网络";
 "service.cells.trusted_policy.caption" = "信任网络中禁用VPN";
 "service.cells.test_connectivity.caption" = "测试连接性";
@@ -159,10 +185,19 @@
 "service.alerts.download.message" = "%@要求下载额外的配置文件。\n\n确认以开始下载。";
 "service.alerts.download.failed" = "下载配置文件失败。 %@";
 "service.alerts.download.hud.extracting" = "提取文件中，请等待...";
+"service.alerts.location.message.denied" = "你必须允许位置访问以信任此Wi-Fi。请至iOS设置对Passepartout的位置权限。";
+"service.alerts.location.button.settings" = "设置";
+
+"provider.pool.sections.empty_favorites.footer" = "向左轻扫以将其从最喜爱列表中移除或添加。";
+"provider.pool.actions.favorite" = "最喜爱";
+"provider.pool.actions.unfavorite" = "不喜爱";
+
+"provider.preset.cells.tech_details.caption" = "技术细节";
 
 "account.title" = "账户";
+"account.sections.credentials.header" = "认证方式";
 "account.sections.guidance.footer.infrastructure.default.web" = "使用你的%@网站认证信息。";
-"account.sections.guidance.footer.infrastructure.default.specific" = "使用您的％@服务凭据，该凭据可能与网站凭据不同。";
+"account.sections.guidance.footer.infrastructure.default.specific" = "使用您的%@服务凭据，该凭据可能与网站凭据不同。";
 "account.sections.guidance.footer.infrastructure.mullvad" = "使用你的%@网站认证信息。你的用户名一般是数字 (没有空格)。";
 "account.sections.guidance.footer.infrastructure.nordvpn" = "使用你的%@网站认证信息。你的用户名一般是你的e-mail。";
 "account.sections.guidance.footer.infrastructure.pia" = "使用你的%@网站认证信息。你的用户名一般是数字且带有前缀\"p\"。";
@@ -179,11 +214,20 @@
 "account.cells.signup.caption" = "以%@注册";
 
 "endpoint.title" = "服务端";
+"endpoint.sections.location_addresses.header" = "地址";
+"endpoint.sections.location_protocols.header" = "协议";
+"endpoint.cells.address" = "地址";
+"endpoint.cells.protocol" = "协议";
 "endpoint.cells.any_address.caption" = "自动";
 "endpoint.cells.any_protocol.caption" = "自动";
 
 "network_settings.title" = "网络设置";
+"network_settings.cells.add_dns_server.caption" = "添加地址";
+"network_settings.cells.add_dns_domain.caption" = "添加搜索域名";
+"network_settings.cells.proxy_bypass.caption" = "旁路域名";
+"network_settings.cells.add_proxy_bypass.caption" = "添加旁路域名";
 
+"configuration.title" = "配置";
 "configuration.sections.communication.header" = "通信";
 "configuration.sections.reset.footer" = "如果你在更改连接参数后变成断开状态，点按已恢复到原始的配置。";
 "configuration.sections.tls.header" = "TLS";
@@ -212,11 +256,28 @@
 "configuration.cells.renegotiation_seconds.caption" = "重协商";
 "configuration.cells.renegotiation_seconds.value.after" = "在%@之后";
 "configuration.cells.random_endpoint.caption" = "随机的服务端";
+"configuration.alerts.commit.message" = "除非手动重新连接，否则新参数将无效。受信任的网络中的更改将立即生效。";
+"configuration.alerts.commit.buttons.reconnect" = "立即重新连接";
+"configuration.alerts.commit.buttons.skip" = "跳过";
+
+"trusted.columns.trust.title" = "信任";
+"trusted.ethernet.title" = "信任有线连接";
+"trusted.ethernet.description" = "选中以信任所有有线连接。";
+
+"preferences.title" = "偏好设置";
+"preferences.sections.general.header" = "一般";
+"preferences.cells.launches_on_login.caption" = "登录时启动";
+"preferences.cells.launches_on_login.footer" = "选中以在启动或登录时自动启动应用。";
+"preferences.cells.confirm_quit.caption" = "确认退出";
+"preferences.cells.confirm_quit.footer" = "选中以显示退出确认提醒。";
 
 "network_settings.gateway.title" = "默认网关";
 "network_settings.dns.title" = "DNS";
+"network_settings.dns.cells.addresses.title" = "服务器";
 "network_settings.dns.cells.domain.caption" = "域名";
+"network_settings.dns.cells.domains.title" = "域";
 "network_settings.proxy.title" = "代理";
+"network_settings.proxy.cells.bypass_domains.title" = "旁路域";
 "network_settings.mtu.title" = "MTU";
 "network_settings.mtu.cells.bytes.caption" = "Bytes";
 
@@ -224,8 +285,10 @@
 
 "debug_log.buttons.previous" = "上一步";
 "debug_log.buttons.next" = "下一步";
+"debug_log.buttons.copy" = "复制";
 "debug_log.alerts.empty_log.message" = "日志为空";
 
+"shortcuts.add.title" = "添加捷径";
 "shortcuts.add.sections.vpn.header" = "VPN";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
 "shortcuts.add.sections.cellular.header" = "蜂窝网络";
@@ -238,7 +301,9 @@
 "shortcuts.add.cells.untrust_cellular.caption" = "不信任蜂窝网络";
 "shortcuts.add.alerts.no_profiles.message" = "没有可以连接的配置。";
 
+"shortcuts.edit.title" = "管理捷径";
 "shortcuts.edit.sections.all.header" = "已经存在的捷径";
+"shortcuts.edit.cells.add_shortcut.caption" = "添加捷径";
 
 "purchase.title" = "购买";
 "purchase.sections.products.footer" = "每件产品都是一次性的购买。 购买的提供商并不包含VPN订阅。";
@@ -275,3 +340,20 @@
 "credits.sections.translations.header" = "翻译";
 
 "label.license.error" = "不能下载到完整的许可证内容。";
+
+// iOS only
+
+"imported_hosts.title" = "导入主机配置";
+
+// macOS only
+
+"menu.show.title" = "显示";
+"menu.switch_profile.title" = "有效配置";
+"menu.active_profile.title.none" = "无有效配置";
+"menu.active_profile.items.customize.title" = "自定义......";
+"menu.active_profile.messages.missing_credentials" = "未配置账户";
+"menu.organizer.title" = "分类页面";
+"menu.preferences.title" = "偏好设置";
+"menu.support.title" = "支持";
+"menu.quit.title" = "退出%@";
+"menu.quit.messages.confirm" = "VPN（如果启用）仍将在后台运行。您要退出吗？";
