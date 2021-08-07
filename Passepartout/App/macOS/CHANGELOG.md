@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Support for `--scramble xormask`. [#38](https://github.com/passepartoutvpn/passepartout-apple/issues/38)
+- Support for `--scramble xormask`. [tunnelkit#38](https://github.com/passepartoutvpn/tunnelkit/issues/38)
 - Favorite provider locations.
 - Oeck provider.
 - In-app donations.
