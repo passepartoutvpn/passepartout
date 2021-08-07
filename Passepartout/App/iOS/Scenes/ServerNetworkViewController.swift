@@ -267,7 +267,7 @@ extension ServerNetworkViewController {
             guard let domain = configuration.proxyBypassDomains?[indexPath.row - indexOfFirstProxyBypassDomain] else {
                 fatalError("Got proxy bypass domain with empty domains")
             }
-            cell.leftText = L10n.App.NetworkSettings.Cells.ProxyBypass.caption
+            cell.leftText = L10n.Core.NetworkSettings.Cells.ProxyBypass.caption
             cell.rightText = domain
             
         default:

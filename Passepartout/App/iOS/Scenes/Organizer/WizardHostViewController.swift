@@ -58,7 +58,7 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
 //        model.setFooter(L10n.Core.Global.Host.TitleInput.message, forSection: .meta)
         if !existingHostIds.isEmpty {
             model.add(.existing)
-            model.setHeader(L10n.App.Wizards.Host.Sections.Existing.header, forSection: .existing)
+            model.setHeader(L10n.Core.Wizards.Host.Sections.Existing.header, forSection: .existing)
         }
         model.set([.titleInput], forSection: .meta)
         model.set(.existingHost, count: existingHostIds.count, forSection: .existing)
@@ -211,7 +211,7 @@ extension WizardHostViewController {
         switch model.row(at: indexPath) {
         case .titleInput:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.App.Wizards.Host.Cells.TitleInput.caption
+            cell.caption = L10n.Core.Wizards.Host.Cells.TitleInput.caption
             cell.captionWidth = 100.0
 //            cell.allowedCharset = .filename
             cell.field.applyHostTitle(.current)

@@ -107,7 +107,7 @@ extension ProviderPresetViewController: UITableViewDataSource, UITableViewDelega
 
         case .techDetails:
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Provider.Preset.Cells.TechDetails.caption
+            cell.leftText = L10n.Core.Provider.Preset.Cells.TechDetails.caption
             cell.accessoryType = .none
         }
         return cell

@@ -67,7 +67,7 @@ class AccountViewController: UIViewController, StrongTableHost {
         model.clear()
         
         model.add(.credentials)
-        model.setHeader(L10n.App.Account.Sections.Credentials.header, forSection: .credentials)
+        model.setHeader(L10n.Core.Account.Sections.Credentials.header, forSection: .credentials)
         model.set([.username, .password], forSection: .credentials)
 
         if let _ = infrastructureName {

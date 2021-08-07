@@ -181,7 +181,7 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if isShowingEmptyFavorites {
-            return L10n.App.Provider.Pool.Sections.EmptyFavorites.footer
+            return L10n.Core.Provider.Pool.Sections.EmptyFavorites.footer
         }
         return nil
     }
@@ -251,12 +251,12 @@ extension ProviderPoolViewController: UITableViewDataSource, UITableViewDelegate
 
         let action: UIContextualAction
         if favoriteGroupIds.contains(groupId) {
-            action = UIContextualAction(style: .destructive, title: L10n.App.Provider.Pool.Actions.unfavorite) {
+            action = UIContextualAction(style: .destructive, title: L10n.Core.Provider.Pool.Actions.unfavorite) {
                 self.unfavoriteGroup(in: category, withId: groupId, deletingRowAt: self.isShowingFavorites ? indexPath : nil)
                 $2(true)
             }
         } else if !isShowingFavorites {
-            action = UIContextualAction(style: .normal, title: L10n.App.Provider.Pool.Actions.favorite) {
+            action = UIContextualAction(style: .normal, title: L10n.Core.Provider.Pool.Actions.favorite) {
                 self.favoriteGroup(withId: groupId)
                 $2(true)
             }

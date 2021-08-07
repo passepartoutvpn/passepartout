@@ -190,7 +190,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
             
         case .hostParametersSegueIdentifier:
             let vc = destination as? ConfigurationViewController
-            vc?.title = L10n.App.Service.Cells.Host.Parameters.caption
+            vc?.title = L10n.Core.Service.Cells.Host.Parameters.caption
             vc?.initialConfiguration = uncheckedHostProfile.parameters.sessionConfiguration
             vc?.originalConfigurationURL = service.configurationURL(for: uncheckedHostProfile)
             vc?.delegate = self
@@ -290,7 +290,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
             }
             guard !service.needsCredentials(for: uncheckedProfile) else {
                 let alert = UIAlertController.asAlert(
-                    L10n.App.Service.Sections.Vpn.header,
+                    L10n.Core.Service.Sections.Vpn.header,
                     L10n.Core.Service.Alerts.CredentialsNeeded.message
                 )
                 alert.addCancelAction(L10n.Core.Global.ok) {
@@ -420,11 +420,11 @@ class ServiceViewController: UIViewController, StrongTableHost {
             case .denied:
                 isPendingTrustedWiFi = false
                 let alert = UIAlertController.asAlert(
-                    L10n.App.Service.Cells.TrustedAddWifi.caption,
-                    L10n.App.Service.Alerts.Location.Message.denied
+                    L10n.Core.Service.Cells.TrustedAddWifi.caption,
+                    L10n.Core.Service.Alerts.Location.Message.denied
                 )
                 alert.addCancelAction(L10n.Core.Global.ok)
-                alert.addPreferredAction(L10n.App.Service.Alerts.Location.Button.settings) {
+                alert.addPreferredAction(L10n.Core.Service.Alerts.Location.Button.settings) {
                     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
                 }
                 present(alert, animated: true, completion: nil)
@@ -450,7 +450,7 @@ class ServiceViewController: UIViewController, StrongTableHost {
             field.delegate = self
         }
         alert.addCancelAction(L10n.Core.Global.cancel)
-        alert.addPreferredAction(L10n.App.Service.Cells.TrustedAddWifi.caption) {
+        alert.addPreferredAction(L10n.Core.Service.Cells.TrustedAddWifi.caption) {
             guard let wifi = alert.textFields?.first?.text else {
                 return
             }
@@ -891,7 +891,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
             }
 
             let cell = Cells.toggle.dequeue(from: tableView, for: indexPath, tag: row.rawValue, delegate: self)
-            cell.caption = L10n.App.Service.Cells.VpnService.caption
+            cell.caption = L10n.Core.Service.Cells.VpnService.caption
             cell.isOn = vpn.isEnabled
             return cell
             
@@ -957,7 +957,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .providerRefresh:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Service.Cells.Provider.Refresh.caption
+            cell.leftText = L10n.Core.Service.Cells.Provider.Refresh.caption
             return cell
             
         // host cells
@@ -965,7 +965,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .hostParameters:
             let parameters = uncheckedHostProfile.parameters
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.App.Service.Cells.Host.Parameters.caption
+            cell.leftText = L10n.Core.Service.Cells.Host.Parameters.caption
             if !parameters.sessionConfiguration.fallbackCipher.embedsDigest {
                 cell.rightText = "\(parameters.sessionConfiguration.fallbackCipher.genericName) / \(parameters.sessionConfiguration.fallbackDigest.genericName)"
             } else {
@@ -1003,7 +1003,7 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         case .trustedAddCurrentWiFi:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Service.Cells.TrustedAddWifi.caption
+            cell.leftText = L10n.Core.Service.Cells.TrustedAddWifi.caption
             return cell
 
         case .trustedPolicy:
@@ -1238,11 +1238,11 @@ extension ServiceViewController: UITableViewDataSource, UITableViewDelegate, Tog
         }
 
         // headers
-        model.setHeader(L10n.App.Service.Sections.Vpn.header, forSection: .vpn)
+        model.setHeader(L10n.Core.Service.Sections.Vpn.header, forSection: .vpn)
         if isProvider {
-            model.setHeader(L10n.App.Service.Sections.Configuration.header, forSection: .authentication)
+            model.setHeader(L10n.Core.Service.Sections.Configuration.header, forSection: .authentication)
         } else {
-            model.setHeader(L10n.App.Service.Sections.Configuration.header, forSection: .configuration)
+            model.setHeader(L10n.Core.Service.Sections.Configuration.header, forSection: .configuration)
         }
         if isActiveProfile {
             if isProvider {

@@ -67,8 +67,8 @@ class EndpointViewController: UIViewController, StrongTableHost {
         model.add(.locationAddresses)
         model.add(.locationProtocols)
         
-        model.setHeader(L10n.App.Endpoint.Sections.LocationAddresses.header, forSection: .locationAddresses)
-        model.setHeader(L10n.App.Endpoint.Sections.LocationProtocols.header, forSection: .locationProtocols)
+        model.setHeader(L10n.Core.Endpoint.Sections.LocationAddresses.header, forSection: .locationAddresses)
+        model.setHeader(L10n.Core.Endpoint.Sections.LocationProtocols.header, forSection: .locationProtocols)
         
         if dataSource.canCustomizeEndpoint {
             var addressRows: [RowType] = Array(repeating: .availableAddress, count: dataSource.addresses.count)

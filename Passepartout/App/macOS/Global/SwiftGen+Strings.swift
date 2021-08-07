@@ -775,6 +775,16 @@ internal enum L10n {
         }
       }
     }
+    internal enum Provider {
+      internal enum Pool {
+        internal enum Actions {
+          /// Favorite
+          internal static let favorite = L10n.tr("Core", "provider.pool.actions.favorite")
+          /// Unfavorite
+          internal static let unfavorite = L10n.tr("Core", "provider.pool.actions.unfavorite")
+        }
+      }
+    }
     internal enum Purchase {
       /// Purchase
       internal static let title = L10n.tr("Core", "purchase.title")
@@ -917,6 +927,10 @@ internal enum L10n {
           internal enum Preset {
             /// Preset
             internal static let caption = L10n.tr("Core", "service.cells.provider.preset.caption")
+          }
+          internal enum Refresh {
+            /// Refresh infrastructure
+            internal static let caption = L10n.tr("Core", "service.cells.provider.refresh.caption")
           }
         }
         internal enum Reconnect {

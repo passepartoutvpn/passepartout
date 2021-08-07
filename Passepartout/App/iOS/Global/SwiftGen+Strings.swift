@@ -11,172 +11,6 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   internal enum App {
-    internal enum Account {
-      internal enum Sections {
-        internal enum Credentials {
-          /// Credentials
-          internal static let header = L10n.tr("App", "account.sections.credentials.header")
-        }
-      }
-    }
-    internal enum Endpoint {
-      internal enum Sections {
-        internal enum LocationAddresses {
-          /// Addresses
-          internal static let header = L10n.tr("App", "endpoint.sections.location_addresses.header")
-        }
-        internal enum LocationProtocols {
-          /// Protocols
-          internal static let header = L10n.tr("App", "endpoint.sections.location_protocols.header")
-        }
-      }
-    }
-    internal enum ImportedHosts {
-      /// Imported hosts
-      internal static let title = L10n.tr("App", "imported_hosts.title")
-    }
-    internal enum NetworkSettings {
-      internal enum Cells {
-        internal enum AddDnsDomain {
-          /// Add search domain
-          internal static let caption = L10n.tr("App", "network_settings.cells.add_dns_domain.caption")
-        }
-        internal enum AddDnsServer {
-          /// Add address
-          internal static let caption = L10n.tr("App", "network_settings.cells.add_dns_server.caption")
-        }
-        internal enum AddProxyBypass {
-          /// Add bypass domain
-          internal static let caption = L10n.tr("App", "network_settings.cells.add_proxy_bypass.caption")
-        }
-        internal enum ProxyBypass {
-          /// Bypass domain
-          internal static let caption = L10n.tr("App", "network_settings.cells.proxy_bypass.caption")
-        }
-      }
-    }
-    internal enum Organizer {
-      internal enum Cells {
-        internal enum AddHost {
-          /// Add from Files
-          internal static let caption = L10n.tr("App", "organizer.cells.add_host.caption")
-        }
-        internal enum AddProvider {
-          /// Add new provider
-          internal static let caption = L10n.tr("App", "organizer.cells.add_provider.caption")
-        }
-        internal enum ImportHost {
-          /// Add from imported
-          internal static let caption = L10n.tr("App", "organizer.cells.import_host.caption")
-        }
-      }
-    }
-    internal enum Provider {
-      internal enum Pool {
-        internal enum Actions {
-          /// Favorite
-          internal static let favorite = L10n.tr("App", "provider.pool.actions.favorite")
-          /// Unfavorite
-          internal static let unfavorite = L10n.tr("App", "provider.pool.actions.unfavorite")
-        }
-        internal enum Sections {
-          internal enum EmptyFavorites {
-            /// Swipe left on a location to add or remove it from Favorites.
-            internal static let footer = L10n.tr("App", "provider.pool.sections.empty_favorites.footer")
-          }
-        }
-      }
-      internal enum Preset {
-        internal enum Cells {
-          internal enum TechDetails {
-            /// Technical details
-            internal static let caption = L10n.tr("App", "provider.preset.cells.tech_details.caption")
-          }
-        }
-      }
-    }
-    internal enum Service {
-      internal enum Alerts {
-        internal enum Location {
-          internal enum Button {
-            /// Settings
-            internal static let settings = L10n.tr("App", "service.alerts.location.button.settings")
-          }
-          internal enum Message {
-            /// You must allow location access to trust this Wi-Fi network. Go to iOS settings and review your location permissions for Passepartout.
-            internal static let denied = L10n.tr("App", "service.alerts.location.message.denied")
-          }
-        }
-      }
-      internal enum Cells {
-        internal enum Host {
-          internal enum Parameters {
-            /// Parameters
-            internal static let caption = L10n.tr("App", "service.cells.host.parameters.caption")
-          }
-        }
-        internal enum Provider {
-          internal enum Refresh {
-            /// Refresh infrastructure
-            internal static let caption = L10n.tr("App", "service.cells.provider.refresh.caption")
-          }
-        }
-        internal enum TrustedAddWifi {
-          /// Add Wi-Fi
-          internal static let caption = L10n.tr("App", "service.cells.trusted_add_wifi.caption")
-        }
-        internal enum VpnService {
-          /// Enabled
-          internal static let caption = L10n.tr("App", "service.cells.vpn_service.caption")
-        }
-      }
-      internal enum Sections {
-        internal enum Configuration {
-          /// Configuration
-          internal static let header = L10n.tr("App", "service.sections.configuration.header")
-        }
-        internal enum Status {
-          /// Connection
-          internal static let header = L10n.tr("App", "service.sections.status.header")
-        }
-        internal enum Vpn {
-          /// VPN
-          internal static let header = L10n.tr("App", "service.sections.vpn.header")
-        }
-      }
-    }
-    internal enum Shortcuts {
-      internal enum Add {
-        /// Add shortcut
-        internal static let title = L10n.tr("App", "shortcuts.add.title")
-      }
-      internal enum Edit {
-        /// Manage shortcuts
-        internal static let title = L10n.tr("App", "shortcuts.edit.title")
-        internal enum Cells {
-          internal enum AddShortcut {
-            /// Add shortcut
-            internal static let caption = L10n.tr("App", "shortcuts.edit.cells.add_shortcut.caption")
-          }
-        }
-      }
-    }
-    internal enum Wizards {
-      internal enum Host {
-        internal enum Cells {
-          internal enum TitleInput {
-            /// Title
-            internal static let caption = L10n.tr("App", "wizards.host.cells.title_input.caption")
-          }
-        }
-        internal enum Sections {
-          internal enum Existing {
-            /// Existing profiles
-            internal static let header = L10n.tr("App", "wizards.host.sections.existing.header")
-          }
-        }
-      }
-    }
   }
   internal enum Core {
     internal enum About {
@@ -251,6 +85,10 @@ internal enum L10n {
         }
       }
       internal enum Sections {
+        internal enum Credentials {
+          /// Credentials
+          internal static let header = L10n.tr("Core", "account.sections.credentials.header")
+        }
         internal enum Guidance {
           internal enum Footer {
             internal enum Infrastructure {
@@ -500,6 +338,16 @@ internal enum L10n {
           internal static let caption = L10n.tr("Core", "endpoint.cells.any_protocol.caption")
         }
       }
+      internal enum Sections {
+        internal enum LocationAddresses {
+          /// Addresses
+          internal static let header = L10n.tr("Core", "endpoint.sections.location_addresses.header")
+        }
+        internal enum LocationProtocols {
+          /// Protocols
+          internal static let header = L10n.tr("Core", "endpoint.sections.location_protocols.header")
+        }
+      }
     }
     internal enum Global {
       /// Cancel
@@ -543,6 +391,10 @@ internal enum L10n {
         internal static let `none` = L10n.tr("Core", "global.values.none")
       }
     }
+    internal enum ImportedHosts {
+      /// Imported hosts
+      internal static let title = L10n.tr("Core", "imported_hosts.title")
+    }
     internal enum IssueReporter {
       /// The debug log of your latest connections is crucial to resolve your connectivity issues and is completely anonymous.\n\nThe .ovpn configuration file, if any, is attached stripped of any sensitive data.\n\nPlease double check the e-mail attachments if unsure.
       internal static let message = L10n.tr("Core", "issue_reporter.message")
@@ -568,6 +420,24 @@ internal enum L10n {
     internal enum NetworkSettings {
       /// Network settings
       internal static let title = L10n.tr("Core", "network_settings.title")
+      internal enum Cells {
+        internal enum AddDnsDomain {
+          /// Add search domain
+          internal static let caption = L10n.tr("Core", "network_settings.cells.add_dns_domain.caption")
+        }
+        internal enum AddDnsServer {
+          /// Add address
+          internal static let caption = L10n.tr("Core", "network_settings.cells.add_dns_server.caption")
+        }
+        internal enum AddProxyBypass {
+          /// Add bypass domain
+          internal static let caption = L10n.tr("Core", "network_settings.cells.add_proxy_bypass.caption")
+        }
+        internal enum ProxyBypass {
+          /// Bypass domain
+          internal static let caption = L10n.tr("Core", "network_settings.cells.proxy_bypass.caption")
+        }
+      }
       internal enum Dns {
         /// DNS
         internal static let title = L10n.tr("Core", "network_settings.dns.title")
@@ -623,6 +493,14 @@ internal enum L10n {
             return L10n.tr("Core", "organizer.cells.about.caption", String(describing: p1))
           }
         }
+        internal enum AddHost {
+          /// Add from Files
+          internal static let caption = L10n.tr("Core", "organizer.cells.add_host.caption")
+        }
+        internal enum AddProvider {
+          /// Add new provider
+          internal static let caption = L10n.tr("Core", "organizer.cells.add_provider.caption")
+        }
         internal enum Donate {
           /// Make a donation
           internal static let caption = L10n.tr("Core", "organizer.cells.donate.caption")
@@ -634,6 +512,10 @@ internal enum L10n {
         internal enum GithubSponsors {
           /// Support me on GitHub
           internal static let caption = L10n.tr("Core", "organizer.cells.github_sponsors.caption")
+        }
+        internal enum ImportHost {
+          /// Add from imported
+          internal static let caption = L10n.tr("Core", "organizer.cells.import_host.caption")
         }
         internal enum JoinCommunity {
           /// Join community
@@ -743,6 +625,30 @@ internal enum L10n {
         }
       }
     }
+    internal enum Provider {
+      internal enum Pool {
+        internal enum Actions {
+          /// Favorite
+          internal static let favorite = L10n.tr("Core", "provider.pool.actions.favorite")
+          /// Unfavorite
+          internal static let unfavorite = L10n.tr("Core", "provider.pool.actions.unfavorite")
+        }
+        internal enum Sections {
+          internal enum EmptyFavorites {
+            /// Swipe left on a location to add or remove it from Favorites.
+            internal static let footer = L10n.tr("Core", "provider.pool.sections.empty_favorites.footer")
+          }
+        }
+      }
+      internal enum Preset {
+        internal enum Cells {
+          internal enum TechDetails {
+            /// Technical details
+            internal static let caption = L10n.tr("Core", "provider.preset.cells.tech_details.caption")
+          }
+        }
+      }
+    }
     internal enum Purchase {
       /// Purchase
       internal static let title = L10n.tr("Core", "purchase.title")
@@ -819,6 +725,16 @@ internal enum L10n {
             internal static let extracting = L10n.tr("Core", "service.alerts.download.hud.extracting")
           }
         }
+        internal enum Location {
+          internal enum Button {
+            /// Settings
+            internal static let settings = L10n.tr("Core", "service.alerts.location.button.settings")
+          }
+          internal enum Message {
+            /// You must allow location access to trust this Wi-Fi network. Go to iOS settings and review your location permissions for Passepartout.
+            internal static let denied = L10n.tr("Core", "service.alerts.location.message.denied")
+          }
+        }
         internal enum MasksPrivateData {
           internal enum Messages {
             /// In order to safely reset the current debug log and apply the new masking preference, you must reconnect to the VPN now.
@@ -873,6 +789,12 @@ internal enum L10n {
           /// Debug log
           internal static let caption = L10n.tr("Core", "service.cells.debug_log.caption")
         }
+        internal enum Host {
+          internal enum Parameters {
+            /// Parameters
+            internal static let caption = L10n.tr("Core", "service.cells.host.parameters.caption")
+          }
+        }
         internal enum MasksPrivateData {
           /// Mask network data
           internal static let caption = L10n.tr("Core", "service.cells.masks_private_data.caption")
@@ -885,6 +807,10 @@ internal enum L10n {
           internal enum Preset {
             /// Preset
             internal static let caption = L10n.tr("Core", "service.cells.provider.preset.caption")
+          }
+          internal enum Refresh {
+            /// Refresh infrastructure
+            internal static let caption = L10n.tr("Core", "service.cells.provider.refresh.caption")
           }
         }
         internal enum Reconnect {
@@ -907,6 +833,10 @@ internal enum L10n {
           /// Test connectivity
           internal static let caption = L10n.tr("Core", "service.cells.test_connectivity.caption")
         }
+        internal enum TrustedAddWifi {
+          /// Add Wi-Fi
+          internal static let caption = L10n.tr("Core", "service.cells.trusted_add_wifi.caption")
+        }
         internal enum TrustedMobile {
           /// Cellular network
           internal static let caption = L10n.tr("Core", "service.cells.trusted_mobile.caption")
@@ -923,12 +853,20 @@ internal enum L10n {
           /// Resolve provider hostname
           internal static let caption = L10n.tr("Core", "service.cells.vpn_resolves_hostname.caption")
         }
+        internal enum VpnService {
+          /// Enabled
+          internal static let caption = L10n.tr("Core", "service.cells.vpn_service.caption")
+        }
         internal enum VpnSurvivesSleep {
           /// Keep alive on sleep
           internal static let caption = L10n.tr("Core", "service.cells.vpn_survives_sleep.caption")
         }
       }
       internal enum Sections {
+        internal enum Configuration {
+          /// Configuration
+          internal static let header = L10n.tr("Core", "service.sections.configuration.header")
+        }
         internal enum Diagnostics {
           /// Masking status will be effective after reconnecting. Network data are hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.
           internal static let footer = L10n.tr("Core", "service.sections.diagnostics.footer")
@@ -941,6 +879,10 @@ internal enum L10n {
             return L10n.tr("Core", "service.sections.provider_infrastructure.footer", String(describing: p1))
           }
         }
+        internal enum Status {
+          /// Connection
+          internal static let header = L10n.tr("Core", "service.sections.status.header")
+        }
         internal enum Trusted {
           /// When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.
           internal static let footer = L10n.tr("Core", "service.sections.trusted.footer")
@@ -950,6 +892,8 @@ internal enum L10n {
         internal enum Vpn {
           /// The connection will be established whenever necessary.
           internal static let footer = L10n.tr("Core", "service.sections.vpn.footer")
+          /// VPN
+          internal static let header = L10n.tr("Core", "service.sections.vpn.header")
         }
         internal enum VpnResolvesHostname {
           /// Preferred in most networks and required in some IPv6 networks. Disable where DNS is blocked, or to speed up negotiation when DNS is slow to respond.
@@ -971,6 +915,8 @@ internal enum L10n {
     }
     internal enum Shortcuts {
       internal enum Add {
+        /// Add shortcut
+        internal static let title = L10n.tr("Core", "shortcuts.add.title")
         internal enum Alerts {
           internal enum NoProfiles {
             /// There is no profile to connect to.
@@ -1023,6 +969,14 @@ internal enum L10n {
         }
       }
       internal enum Edit {
+        /// Manage shortcuts
+        internal static let title = L10n.tr("Core", "shortcuts.edit.title")
+        internal enum Cells {
+          internal enum AddShortcut {
+            /// Add shortcut
+            internal static let caption = L10n.tr("Core", "shortcuts.edit.cells.add_shortcut.caption")
+          }
+        }
         internal enum Sections {
           internal enum All {
             /// Existing shortcuts
@@ -1083,6 +1037,18 @@ internal enum L10n {
           internal enum Existing {
             /// A host profile with the same title already exists. Replace it?
             internal static let message = L10n.tr("Core", "wizards.host.alerts.existing.message")
+          }
+        }
+        internal enum Cells {
+          internal enum TitleInput {
+            /// Title
+            internal static let caption = L10n.tr("Core", "wizards.host.cells.title_input.caption")
+          }
+        }
+        internal enum Sections {
+          internal enum Existing {
+            /// Existing profiles
+            internal static let header = L10n.tr("Core", "wizards.host.sections.existing.header")
           }
         }
       }

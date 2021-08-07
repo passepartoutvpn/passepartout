@@ -66,7 +66,7 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         }
         model.add(.about)
         model.add(.destruction)
-        model.setHeader(L10n.App.Service.Sections.Vpn.header, forSection: .vpn)
+        model.setHeader(L10n.Core.Service.Sections.Vpn.header, forSection: .vpn)
         model.setHeader(L10n.Core.Organizer.Sections.Providers.header, forSection: .providers)
         model.setHeader(L10n.Core.Organizer.Sections.Hosts.header, forSection: .hosts)
         model.setFooter(L10n.Core.Organizer.Sections.Providers.footer, forSection: .providers)
@@ -515,19 +515,19 @@ extension OrganizerViewController {
         case .addProvider:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Organizer.Cells.AddProvider.caption
+            cell.leftText = L10n.Core.Organizer.Cells.AddProvider.caption
             return cell
 
         case .addHost:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Organizer.Cells.AddHost.caption
+            cell.leftText = L10n.Core.Organizer.Cells.AddHost.caption
             return cell
             
         case .importHost:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Organizer.Cells.ImportHost.caption
+            cell.leftText = L10n.Core.Organizer.Cells.ImportHost.caption
             return cell
 
         case .siriShortcuts:

@@ -56,7 +56,7 @@ class ShortcutsAddViewController: UITableViewController, StrongTableHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.App.Shortcuts.Add.title
+        title = L10n.Core.Shortcuts.Add.title
     }
 
     // MARK: UITableViewController

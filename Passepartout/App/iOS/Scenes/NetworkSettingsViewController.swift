@@ -495,7 +495,7 @@ extension NetworkSettingsViewController {
         case .dnsAddAddress:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.NetworkSettings.Cells.AddDnsServer.caption
+            cell.leftText = L10n.Core.NetworkSettings.Cells.AddDnsServer.caption
             return cell
             
         case .dnsDomain:
@@ -516,7 +516,7 @@ extension NetworkSettingsViewController {
         case .dnsAddDomain:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.NetworkSettings.Cells.AddDnsDomain.caption
+            cell.leftText = L10n.Core.NetworkSettings.Cells.AddDnsDomain.caption
             return cell
             
         case .proxyAddress:
@@ -562,7 +562,7 @@ extension NetworkSettingsViewController {
             let i = indexPath.row - Offsets.proxyBypass
             
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.App.NetworkSettings.Cells.ProxyBypass.caption
+            cell.caption = L10n.Core.NetworkSettings.Cells.ProxyBypass.caption
             cell.field.tag = FieldTag.proxyBypass.rawValue + i
             cell.field.placeholder = L10n.Core.Global.Values.none
             cell.field.text = networkSettings.proxyBypassDomains?[i]
@@ -576,7 +576,7 @@ extension NetworkSettingsViewController {
         case .proxyAddBypass:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.NetworkSettings.Cells.AddProxyBypass.caption
+            cell.leftText = L10n.Core.NetworkSettings.Cells.AddProxyBypass.caption
             return cell
 
         case .mtuBytes:

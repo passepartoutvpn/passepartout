@@ -42,7 +42,7 @@ class ImportedHostsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.App.ImportedHosts.title
+        title = L10n.Core.ImportedHosts.title
     }
 
     private func selectHost(withUrl url: URL) {

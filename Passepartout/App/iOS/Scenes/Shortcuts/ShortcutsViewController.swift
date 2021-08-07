@@ -192,7 +192,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
 
         case .addShortcut:
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Shortcuts.Edit.Cells.AddShortcut.caption
+            cell.leftText = L10n.Core.Shortcuts.Edit.Cells.AddShortcut.caption
             cell.accessoryType = .none
             cell.isTappable = true
         }
