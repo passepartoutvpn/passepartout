@@ -153,12 +153,12 @@ class ProfileCustomizationContainerViewController: NSViewController {
                 switch vpn.status {
                 case .connected, .connecting:
                     let alert = Macros.warning(
-                        L10n.App.Configuration.title,
-                        L10n.App.Configuration.Alerts.Commit.message
+                        L10n.Core.Configuration.title,
+                        L10n.Core.Configuration.Alerts.Commit.message
                     )
                     if alert.presentModally(
-                        withOK: L10n.App.Configuration.Alerts.Commit.Buttons.reconnect,
-                        cancel: L10n.App.Configuration.Alerts.Commit.Buttons.skip) {
+                        withOK: L10n.Core.Configuration.Alerts.Commit.Buttons.reconnect,
+                        cancel: L10n.Core.Configuration.Alerts.Commit.Buttons.skip) {
 
                         vpn.reconnect(completionHandler: nil)
                     } else {
@@ -259,7 +259,7 @@ class ProfileCustomizationViewController: NSTabViewController {
         assert(tabViewItems.count == expectedTabs, "Customization tabs misconfigured (expected \(expectedTabs))")
 
         tabViewItems[0].label = L10n.Core.Endpoint.title
-        tabViewItems[1].label = L10n.App.Configuration.title
+        tabViewItems[1].label = L10n.Core.Configuration.title
         tabViewItems[2].label = L10n.Core.Service.Sections.Trusted.header
         tabViewItems[3].label = L10n.Core.NetworkSettings.Gateway.title
         tabViewItems[4].label = L10n.Core.NetworkSettings.Dns.title

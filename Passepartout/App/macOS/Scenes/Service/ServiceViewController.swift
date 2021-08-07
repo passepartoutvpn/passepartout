@@ -154,7 +154,7 @@ class ServiceViewController: NSViewController {
         labelStatusCaption.stringValue = L10n.Core.Service.Cells.ConnectionStatus.caption.asCaption
         labelServiceDescription.stringValue = L10n.Core.Service.Sections.Vpn.footer
         buttonUse.title = L10n.Core.Service.Cells.UseProfile.caption
-        buttonToggle.title = L10n.App.Service.Cells.Vpn.TurnOn.caption
+        buttonToggle.title = L10n.Core.Service.Cells.Vpn.TurnOn.caption
         buttonReconnect.title = L10n.Core.Service.Cells.Reconnect.caption
         buttonCustomize.image = NSImage(named: NSImage.actionTemplateName)
         buttonAccount.title = L10n.Core.Account.title.asContinuation
@@ -276,14 +276,14 @@ class ServiceViewController: NSViewController {
         guard isActive && vpn.isEnabled else {
             labelStatus.applyVPN(Theme.current, isActive: isActive, with: nil, error: nil)
             activityVPN.stopAnimation(nil)
-            buttonToggle.title = L10n.App.Service.Cells.Vpn.TurnOn.caption
+            buttonToggle.title = L10n.Core.Service.Cells.Vpn.TurnOn.caption
             buttonToggle.isEnabled = true
             buttonReconnect.isEnabled = false
             return
         }
 
         labelStatus.applyVPN(Theme.current, isActive: isActive, with: vpn.status, error: service.vpnLastError)
-        buttonToggle.title = vpn.isEnabled ? L10n.App.Service.Cells.Vpn.TurnOff.caption : L10n.App.Service.Cells.Vpn.TurnOn.caption
+        buttonToggle.title = vpn.isEnabled ? L10n.Core.Service.Cells.Vpn.TurnOff.caption : L10n.Core.Service.Cells.Vpn.TurnOn.caption
         buttonReconnect.isEnabled = true
 
         // append connected location for providers

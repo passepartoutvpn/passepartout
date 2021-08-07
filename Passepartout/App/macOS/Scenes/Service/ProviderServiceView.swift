@@ -95,9 +95,9 @@ class ProviderServiceView: NSView {
     override func viewWillMove(toSuperview newSuperview: NSView?) {
         super.viewWillMove(toSuperview: newSuperview)
         
-        labelCategoryCaption.stringValue = L10n.App.Service.Cells.Category.caption.asCaption
+        labelCategoryCaption.stringValue = L10n.Core.Service.Cells.Category.caption.asCaption
         labelLocationCaption.stringValue = L10n.Core.Service.Cells.Provider.Pool.caption.asCaption
-        checkOnlyShowsFavorites.title = L10n.App.Service.Cells.OnlyShowsFavorites.caption
+        checkOnlyShowsFavorites.title = L10n.Core.Service.Cells.OnlyShowsFavorites.caption
         checkOnlyShowsFavorites.state = .off
         buttonRefreshInfrastructure.image = NSImage(named: NSImage.refreshTemplateName)
         buttonFavorite.image = NSImage(named: NSImage.bookmarksTemplateName)

@@ -128,7 +128,7 @@ class OrganizerViewController: NSViewController {
     @objc private func addHost() {
         let panel = NSOpenPanel()
         
-        panel.title = L10n.App.Organizer.Alerts.OpenHostFile.title
+        panel.title = L10n.Core.Organizer.Alerts.OpenHostFile.title
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
         panel.canChooseFiles = true
@@ -312,7 +312,7 @@ extension OrganizerViewController: OrganizerProfileTableViewDelegate {
 
         let menu = NSMenu()
 
-        let itemProvider = NSMenuItem(title: L10n.App.Organizer.Menus.provider, action: nil, keyEquivalent: "")
+        let itemProvider = NSMenuItem(title: L10n.Core.Organizer.Menus.provider, action: nil, keyEquivalent: "")
         let menuProvider = NSMenu()
         let availableMetadata = service.availableProviders()
         if !availableMetadata.isEmpty {
@@ -323,7 +323,7 @@ extension OrganizerViewController: OrganizerProfileTableViewDelegate {
                 menuProvider.addItem(item)
             }
         } else {
-            let item = NSMenuItem(title: L10n.App.Organizer.Menus.Provider.unavailable, action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: L10n.Core.Organizer.Menus.Provider.unavailable, action: nil, keyEquivalent: "")
             item.isEnabled = false
             menuProvider.addItem(item)
         }
@@ -333,7 +333,7 @@ extension OrganizerViewController: OrganizerProfileTableViewDelegate {
         menu.setSubmenu(menuProvider, for: itemProvider)
         menu.addItem(itemProvider)
 
-        let menuHost = NSMenuItem(title: L10n.App.Organizer.Menus.host.asContinuation, action: #selector(addHost), keyEquivalent: "")
+        let menuHost = NSMenuItem(title: L10n.Core.Organizer.Menus.host.asContinuation, action: #selector(addHost), keyEquivalent: "")
         menu.addItem(menuHost)
 
         NSMenu.popUpContextMenu(menu, with: event, for: sender)
@@ -343,8 +343,8 @@ extension OrganizerViewController: OrganizerProfileTableViewDelegate {
         profilePendingRemoval = profile
 
         let alert = Macros.warning(
-            L10n.App.Organizer.Alerts.RemoveProfile.title,
-            L10n.App.Organizer.Alerts.RemoveProfile.message(service.screenTitle(ProfileKey(profile)))
+            L10n.Core.Organizer.Alerts.RemoveProfile.title,
+            L10n.Core.Organizer.Alerts.RemoveProfile.message(service.screenTitle(ProfileKey(profile)))
         )
         alert.present(in: view.window, withOK: L10n.Core.Global.ok, cancel: L10n.Core.Global.cancel, handler: {
             self.removePendingProfile()

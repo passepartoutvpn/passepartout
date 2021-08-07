@@ -68,7 +68,7 @@ class DebugLogViewController: NSViewController {
 
         labelExchangedCaption.stringValue = L10n.Core.Service.Cells.DataCount.caption.asCaption
         labelLog.stringValue = L10n.Core.Service.Cells.DebugLog.caption.asCaption
-        buttonCopy.title = L10n.App.DebugLog.Buttons.copy
+        buttonCopy.title = L10n.Core.DebugLog.Buttons.copy
         buttonPrevious.image = NSImage(named: NSImage.touchBarRewindTemplateName)
         buttonNext.image = NSImage(named: NSImage.touchBarFastForwardTemplateName)
         buttonShare.image = NSImage(named: NSImage.shareTemplateName)

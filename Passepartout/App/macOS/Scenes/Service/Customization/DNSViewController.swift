@@ -67,7 +67,7 @@ class DNSViewController: NSViewController, ProfileCustomization {
         
         labelDNSProtocol.stringValue = L10n.Core.Global.Captions.protocol.asCaption
 
-        tableDNSAddresses.title = L10n.App.NetworkSettings.Dns.Cells.Addresses.title.asCaption
+        tableDNSAddresses.title = L10n.Core.NetworkSettings.Dns.Cells.Addresses.title.asCaption
         viewDNSAddresses.addSubview(tableDNSAddresses)
         tableDNSAddresses.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -77,7 +77,7 @@ class DNSViewController: NSViewController, ProfileCustomization {
             tableDNSAddresses.rightAnchor.constraint(equalTo: viewDNSAddresses.rightAnchor),
         ])
         
-        tableDNSDomains.title = L10n.App.NetworkSettings.Dns.Cells.Domains.title.asCaption
+        tableDNSDomains.title = L10n.Core.NetworkSettings.Dns.Cells.Domains.title.asCaption
         viewDNSDomains.addSubview(tableDNSDomains)
         tableDNSDomains.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

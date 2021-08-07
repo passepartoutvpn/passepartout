@@ -52,7 +52,7 @@ class EndpointViewController: NSViewController, ProfileCustomization {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        labelAddressCaption.stringValue = L10n.App.Endpoint.Cells.address.asCaption
+        labelAddressCaption.stringValue = L10n.Core.Endpoint.Cells.address.asCaption
         labelProtocolCaption.stringValue = L10n.Core.Global.Captions.protocol.asCaption
 
         reloadEndpoints()

@@ -90,8 +90,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return .terminateNow
         }
         let alert = Macros.warning(
-            L10n.App.Menu.Quit.title(GroupConstants.App.name),
-            L10n.App.Menu.Quit.Messages.confirm
+            L10n.Core.Menu.Quit.title(GroupConstants.App.name),
+            L10n.Core.Menu.Quit.Messages.confirm
         )
         switch alert.presentModallyEx(withOK: L10n.Core.Global.ok, other1: L10n.Core.Global.cancel, other2: L10n.Core.Reddit.Buttons.never) {
         case .alertSecondButtonReturn:

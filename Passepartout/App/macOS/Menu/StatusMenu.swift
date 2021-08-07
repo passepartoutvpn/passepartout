@@ -67,7 +67,7 @@ class StatusMenu: NSObject {
     
     private let menuAllProfiles = NSMenu()
 
-    private lazy var itemSwitchProfile = NSMenuItem(title: L10n.App.Menu.SwitchProfile.title, action: nil, keyEquivalent: "")
+    private lazy var itemSwitchProfile = NSMenuItem(title: L10n.Core.Menu.SwitchProfile.title, action: nil, keyEquivalent: "")
     
     private var itemsAllProfiles: [NSMenuItem] = []
 
@@ -77,7 +77,7 @@ class StatusMenu: NSObject {
     
     private lazy var itemPool = NSMenuItem(title: "", action: nil, keyEquivalent: "")
 
-    private lazy var itemToggleVPN = NSMenuItem(title: L10n.App.Service.Cells.Vpn.TurnOn.caption, action: nil, keyEquivalent: "")
+    private lazy var itemToggleVPN = NSMenuItem(title: L10n.Core.Service.Cells.Vpn.TurnOn.caption, action: nil, keyEquivalent: "")
 
     private lazy var itemReconnectVPN = NSMenuItem(title: L10n.Core.Service.Cells.Reconnect.caption, action: #selector(reconnectVPN), keyEquivalent: "")
     
@@ -111,8 +111,8 @@ class StatusMenu: NSObject {
 
         // main actions
 
-        let itemShow = NSMenuItem(title: L10n.App.Menu.Show.title, action: #selector(showOrganizer), keyEquivalent: "")
-        let itemPreferences = NSMenuItem(title: L10n.App.Menu.Preferences.title.asContinuation, action: #selector(showPreferences), keyEquivalent: ",")
+        let itemShow = NSMenuItem(title: L10n.Core.Menu.Show.title, action: #selector(showOrganizer), keyEquivalent: "")
+        let itemPreferences = NSMenuItem(title: L10n.Core.Menu.Preferences.title.asContinuation, action: #selector(showPreferences), keyEquivalent: ",")
         itemShow.target = self
         itemPreferences.target = self
         menu.addItem(itemShow)
@@ -157,7 +157,7 @@ class StatusMenu: NSObject {
             itemReport.target = self
             menuSupport.addItem(itemReport)
         }
-        let itemSupport = NSMenuItem(title: L10n.App.Menu.Support.title, action: nil, keyEquivalent: "")
+        let itemSupport = NSMenuItem(title: L10n.Core.Menu.Support.title, action: nil, keyEquivalent: "")
         menu.setSubmenu(menuSupport, for: itemSupport)
         menu.addItem(itemSupport)
         
@@ -181,7 +181,7 @@ class StatusMenu: NSObject {
         // secondary
         
         let itemAbout = NSMenuItem(title: L10n.Core.Organizer.Cells.About.caption(GroupConstants.App.name), action: #selector(showAbout), keyEquivalent: "")
-        let itemQuit = NSMenuItem(title: L10n.App.Menu.Quit.title(GroupConstants.App.name), action: #selector(quit), keyEquivalent: "q")
+        let itemQuit = NSMenuItem(title: L10n.Core.Menu.Quit.title(GroupConstants.App.name), action: #selector(quit), keyEquivalent: "q")
         itemAbout.target = self
         itemQuit.target = self
         menu.addItem(itemAbout)
@@ -224,7 +224,7 @@ class StatusMenu: NSObject {
         itemsProfile.removeAll()
 
         guard let profile = profile else {
-            itemProfileName.title = L10n.App.Menu.ActiveProfile.Title.none
+            itemProfileName.title = L10n.Core.Menu.ActiveProfile.Title.none
 //            itemProfileName.image = nil
             statusItem.button?.image = imageStatusInactive
             statusItem.button?.toolTip = nil
@@ -248,7 +248,7 @@ class StatusMenu: NSObject {
             itemsProfile.append(itemToggleVPN)
             itemsProfile.append(itemReconnectVPN)
         } else {
-            let itemMissingCredentials = NSMenuItem(title: L10n.App.Menu.ActiveProfile.Messages.missingCredentials, action: nil, keyEquivalent: "")
+            let itemMissingCredentials = NSMenuItem(title: L10n.Core.Menu.ActiveProfile.Messages.missingCredentials, action: nil, keyEquivalent: "")
             itemMissingCredentials.indentationLevel = 1
             menu.insertItem(itemMissingCredentials, at: i)
             i += 1
@@ -295,7 +295,7 @@ class StatusMenu: NSObject {
             itemsProfile.append(itemAccount)
 
             // customize
-            let itemCustomize = NSMenuItem(title: L10n.App.Menu.ActiveProfile.Items.Customize.title, action: #selector(customizeProfile(_:)), keyEquivalent: "")
+            let itemCustomize = NSMenuItem(title: L10n.Core.Menu.ActiveProfile.Items.Customize.title, action: #selector(customizeProfile(_:)), keyEquivalent: "")
             menu.insertItem(itemCustomize, at: i)
             i += 1
             itemCustomize.target = self
@@ -370,7 +370,7 @@ class StatusMenu: NSObject {
             itemsProfile.append(itemAccount)
 
             // customize
-            let itemCustomize = NSMenuItem(title: L10n.App.Menu.ActiveProfile.Items.Customize.title, action: #selector(customizeProfile(_:)), keyEquivalent: "")
+            let itemCustomize = NSMenuItem(title: L10n.Core.Menu.ActiveProfile.Items.Customize.title, action: #selector(customizeProfile(_:)), keyEquivalent: "")
             menu.insertItem(itemCustomize, at: i)
             i += 1
             itemCustomize.target = self
@@ -572,10 +572,10 @@ class StatusMenu: NSObject {
     
     private func reloadVpnStatus() {
         if vpn.isEnabled {
-            itemToggleVPN.title = L10n.App.Service.Cells.Vpn.TurnOff.caption
+            itemToggleVPN.title = L10n.Core.Service.Cells.Vpn.TurnOff.caption
             itemToggleVPN.action = #selector(disableVPN)
         } else {
-            itemToggleVPN.title = L10n.App.Service.Cells.Vpn.TurnOn.caption
+            itemToggleVPN.title = L10n.Core.Service.Cells.Vpn.TurnOn.caption
             itemToggleVPN.action = #selector(enableVPN)
         }
         if let profile = service.activeProfile {

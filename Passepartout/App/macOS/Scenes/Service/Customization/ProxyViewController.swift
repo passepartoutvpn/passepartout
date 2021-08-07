@@ -76,7 +76,7 @@ class ProxyViewController: NSViewController, ProfileCustomization {
         labelPACCaption.stringValue = "PAC".asCaption
         textPAC.placeholderString = L10n.Core.Global.Values.none
 
-        tableProxyBypass.title = L10n.App.NetworkSettings.Proxy.Cells.BypassDomains.title.asCaption
+        tableProxyBypass.title = L10n.Core.NetworkSettings.Proxy.Cells.BypassDomains.title.asCaption
         viewProxyBypass.addSubview(tableProxyBypass)
         tableProxyBypass.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

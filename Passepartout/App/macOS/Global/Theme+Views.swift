@@ -30,7 +30,7 @@ import TunnelKit
 extension NSTextField {
     func applyVPN(_ theme: Theme, isActive: Bool, with vpnStatus: VPNStatus?, error: OpenVPNTunnelProvider.ProviderError?) {
         guard isActive else {
-            stringValue = L10n.App.Vpn.unused
+            stringValue = L10n.Core.Vpn.unused
             textColor = theme.palette.colorSecondaryText
             return
         }

@@ -45,10 +45,10 @@ class PreferencesGeneralViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkLaunchOnLogin.title = L10n.App.Preferences.Cells.LaunchesOnLogin.caption
-        labelLaunchOnLogin.stringValue = L10n.App.Preferences.Cells.LaunchesOnLogin.footer
-        checkConfirmQuit.title = L10n.App.Preferences.Cells.ConfirmQuit.caption
-        labelConfirmQuit.stringValue = L10n.App.Preferences.Cells.ConfirmQuit.footer
+        checkLaunchOnLogin.title = L10n.Core.Preferences.Cells.LaunchesOnLogin.caption
+        labelLaunchOnLogin.stringValue = L10n.Core.Preferences.Cells.LaunchesOnLogin.footer
+        checkConfirmQuit.title = L10n.Core.Preferences.Cells.ConfirmQuit.caption
+        labelConfirmQuit.stringValue = L10n.Core.Preferences.Cells.ConfirmQuit.footer
         checkResolveHostname.title = L10n.Core.Service.Cells.VpnResolvesHostname.caption
         labelResolveHostname.stringValue = L10n.Core.Service.Sections.VpnResolvesHostname.footer
         

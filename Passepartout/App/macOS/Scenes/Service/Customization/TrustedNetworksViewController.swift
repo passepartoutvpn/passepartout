@@ -67,8 +67,8 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
         labelTitle.stringValue = L10n.Core.Service.Sections.Trusted.header.asCaption
         buttonAdd.image = NSImage(named: NSImage.addTemplateName)
         buttonRemove.image = NSImage(named: NSImage.removeTemplateName)
-        checkTrustEthernet.title = L10n.App.Trusted.Ethernet.title
-        labelTrustEthernetDescription.stringValue = L10n.App.Trusted.Ethernet.description
+        checkTrustEthernet.title = L10n.Core.Trusted.Ethernet.title
+        labelTrustEthernetDescription.stringValue = L10n.Core.Trusted.Ethernet.description
         checkDisableConnection.title = L10n.Core.Service.Cells.TrustedPolicy.caption
         labelDisableConnectionDescription.stringValue = L10n.Core.Service.Sections.Trusted.footer
 
@@ -86,7 +86,7 @@ class TrustedNetworksViewController: NSViewController, ProfileCustomization {
                 column.isEditable = false
 
             case Columns.trust:
-                column.title = L10n.App.Trusted.Columns.Trust.title
+                column.title = L10n.Core.Trusted.Columns.Trust.title
                 
             default:
                 break
