@@ -286,6 +286,7 @@ internal enum Asset {
     internal static let hideme = ImageAsset(name: "hideme")
     internal static let mullvad = ImageAsset(name: "mullvad")
     internal static let nordvpn = ImageAsset(name: "nordvpn")
+    internal static let oeck = ImageAsset(name: "oeck")
     internal static let pia = ImageAsset(name: "pia")
     internal static let placeholder = ImageAsset(name: "placeholder")
     internal static let protonvpn = ImageAsset(name: "protonvpn")

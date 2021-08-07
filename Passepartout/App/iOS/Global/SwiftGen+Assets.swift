@@ -286,9 +286,11 @@ internal enum Asset {
     internal static let hideme = ImageAsset(name: "hideme")
     internal static let mullvad = ImageAsset(name: "mullvad")
     internal static let nordvpn = ImageAsset(name: "nordvpn")
+    internal static let oeck = ImageAsset(name: "oeck")
     internal static let pia = ImageAsset(name: "pia")
     internal static let placeholder = ImageAsset(name: "placeholder")
     internal static let protonvpn = ImageAsset(name: "protonvpn")
+    internal static let surfshark = ImageAsset(name: "surfshark")
     internal static let torguard = ImageAsset(name: "torguard")
     internal static let tunnelbear = ImageAsset(name: "tunnelbear")
     internal static let vyprvpn = ImageAsset(name: "vyprvpn")
@@ -313,7 +315,8 @@ internal struct ImageAsset {
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
     #elseif os(macOS)
-    let image = bundle.image(forResource: NSImage.Name(name))
+    let name = NSImage.Name(self.name)
+    let image = (bundle == .main) ? NSImage(named: name) : bundle.image(forResource: name)
     #elseif os(watchOS)
     let image = Image(named: name)
     #endif
@@ -342,7 +345,11 @@ internal extension ImageAsset.Image {
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
-    Bundle(for: BundleToken.self)
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
   }()
 }
 // swiftlint:enable convenience_type
