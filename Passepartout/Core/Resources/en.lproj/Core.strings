@@ -129,8 +129,6 @@
 "wizards.host.cells.title_input.caption" = "Title";
 "wizards.host.alerts.existing.message" = "A host profile with the same title already exists. Replace it?";
 
-"imported_hosts.title" = "Imported hosts";
-
 "service.welcome.message" = "Welcome to Passepartout!\n\nUse the organizer to add a new profile.";
 "service.sections.vpn.header" = "VPN";
 "service.sections.vpn.footer" = "The connection will be established whenever necessary.";
@@ -289,17 +287,6 @@
 "debug_log.buttons.copy" = "Copy";
 "debug_log.alerts.empty_log.message" = "The debug log is empty.";
 
-"menu.show.title" = "Show";
-"menu.switch_profile.title" = "Active profile";
-"menu.active_profile.title.none" = "No active profile";
-"menu.active_profile.items.customize.title" = "Customize...";
-"menu.active_profile.messages.missing_credentials" = "No account configured";
-"menu.organizer.title" = "Organizer";
-"menu.preferences.title" = "Preferences";
-"menu.support.title" = "Support";
-"menu.quit.title" = "Quit %@";
-"menu.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
-
 "shortcuts.add.title" = "Add shortcut";
 "shortcuts.add.sections.vpn.header" = "VPN";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
@@ -352,3 +339,20 @@
 "credits.sections.translations.header" = "Translations";
 
 "label.license.error" = "Unable to download full license content.";
+
+// iOS only
+
+"imported_hosts.title" = "Imported hosts";
+
+// macOS only
+
+"menu.show.title" = "Show";
+"menu.switch_profile.title" = "Active profile";
+"menu.active_profile.title.none" = "No active profile";
+"menu.active_profile.items.customize.title" = "Customize...";
+"menu.active_profile.messages.missing_credentials" = "No account configured";
+"menu.organizer.title" = "Organizer";
+"menu.preferences.title" = "Preferences";
+"menu.support.title" = "Support";
+"menu.quit.title" = "Quit %@";
+"menu.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
