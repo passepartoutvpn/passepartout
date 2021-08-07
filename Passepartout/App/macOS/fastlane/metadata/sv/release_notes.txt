@@ -3,4 +3,5 @@
 - Support for `--scramble xormask`.
 - Favorite provider locations.
 - Oeck provider.
+- In-app donations.
 
