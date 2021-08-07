@@ -48,7 +48,7 @@ class ProviderPresetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Core.Service.Cells.Provider.Preset.caption
+        title = L10n.Service.Cells.Provider.Preset.caption
         tableView.reloadData()
         if let ip = selectedIndexPath {
             tableView.scrollToRowAsync(at: ip)
@@ -88,7 +88,7 @@ extension ProviderPresetViewController: UITableViewDataSource, UITableViewDelega
     }
     
 //    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-//        return L10n.Core.Provider.Preset.Sections.Main.footer
+//        return L10n.Provider.Preset.Sections.Main.footer
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,7 +107,7 @@ extension ProviderPresetViewController: UITableViewDataSource, UITableViewDelega
 
         case .techDetails:
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Provider.Preset.Cells.TechDetails.caption
+            cell.leftText = L10n.Provider.Preset.Cells.TechDetails.caption
             cell.accessoryType = .none
         }
         return cell

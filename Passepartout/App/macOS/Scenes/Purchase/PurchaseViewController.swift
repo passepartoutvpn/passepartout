@@ -100,11 +100,11 @@ class PurchaseViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Core.Purchase.title
-        labelFooter.stringValue = L10n.Core.Purchase.Sections.Products.footer
-        labelRestore.stringValue = L10n.Core.Purchase.Cells.Restore.description
-        buttonPurchase.title = L10n.Core.Purchase.title
-        buttonRestore.title = L10n.Core.Purchase.Cells.Restore.title
+        title = L10n.Purchase.title
+        labelFooter.stringValue = L10n.Purchase.Sections.Products.footer
+        labelRestore.stringValue = L10n.Purchase.Cells.Restore.description
+        buttonPurchase.title = L10n.Purchase.title
+        buttonRestore.title = L10n.Purchase.Cells.Restore.title
 
         tableView.usesAutomaticRowHeights = true
         tableView.reloadData()
@@ -202,7 +202,7 @@ class PurchaseViewController: NSViewController {
         log.error("Unable to purchase \(product): \(error)")
         
         let alert = Macros.warning(product.localizedTitle, error.localizedDescription)
-        _ = alert.presentModally(withOK: L10n.Core.Global.ok, cancel: nil)
+        _ = alert.presentModally(withOK: L10n.Global.ok, cancel: nil)
     }
 
     @objc private func close() {

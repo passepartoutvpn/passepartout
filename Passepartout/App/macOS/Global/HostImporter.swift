@@ -66,21 +66,21 @@ class HostImporter {
             default:
                 let message = HostImporter.localizedMessage(forError: e)
                 let alert = Macros.warning(configurationURL.normalizedFilename, message)
-                _ = alert.presentModally(withOK: L10n.Core.Global.ok, cancel: nil)
+                _ = alert.presentModally(withOK: L10n.Global.ok, cancel: nil)
             }
             return
         } catch let e {
             let message = HostImporter.localizedMessage(forError: e)
             let alert = Macros.warning(configurationURL.normalizedFilename, message)
-            _ = alert.presentModally(withOK: L10n.Core.Global.ok, cancel: nil)
+            _ = alert.presentModally(withOK: L10n.Global.ok, cancel: nil)
             return
         }
         
         if let warning = result.warning {
             let message = HostImporter.localizedDetailsMessage(forWarning: warning)
-            let alert = Macros.warning(configurationURL.normalizedFilename, L10n.Core.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
+            let alert = Macros.warning(configurationURL.normalizedFilename, L10n.ParsedFile.Alerts.PotentiallyUnsupported.message(message))
             
-            if alert.presentModally(withOK: L10n.Core.Global.ok, cancel: L10n.Core.Global.cancel) {
+            if alert.presentModally(withOK: L10n.Global.ok, cancel: L10n.Global.cancel) {
                 enterProfileName(forHostWithResult: result)
             }
             
@@ -92,7 +92,7 @@ class HostImporter {
 
     private func enterPassphraseForHost(at url: URL) {
         let vc = StoryboardScene.Main.textInputViewController.instantiate()
-        vc.caption = L10n.Core.ParsedFile.Alerts.EncryptionPassphrase.message
+        vc.caption = L10n.ParsedFile.Alerts.EncryptionPassphrase.message
         vc.isSecure = true
         vc.object = url
         vc.delegate = self
@@ -105,12 +105,12 @@ class HostImporter {
         }
 
         let vc = StoryboardScene.Main.textInputViewController.instantiate()
-        vc.caption = L10n.Core.Service.Alerts.Rename.title.asCaption
+        vc.caption = L10n.Service.Alerts.Rename.title.asCaption
         let profile = HostConnectionProfile(hostname: hostname)
         let builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
         profile.parameters = builder.build()
         vc.text = title
-        vc.placeholder = L10n.Core.Global.Host.TitleInput.placeholder
+        vc.placeholder = L10n.Global.Host.TitleInput.placeholder
         vc.object = profile
         vc.delegate = self
         present(vc)
@@ -139,22 +139,22 @@ class HostImporter {
             switch appError {
             case .malformed(let option):
                 log.error("Could not parse configuration URL: malformed option, \(option)")
-                return L10n.Core.ParsedFile.Alerts.Malformed.message(option)
+                return L10n.ParsedFile.Alerts.Malformed.message(option)
                 
             case .missingConfiguration(let option):
                 log.error("Could not parse configuration URL: missing configuration, \(option)")
-                return L10n.Core.ParsedFile.Alerts.Missing.message(option)
+                return L10n.ParsedFile.Alerts.Missing.message(option)
                 
             case .unsupportedConfiguration(let option):
                 log.error("Could not parse configuration URL: unsupported configuration, \(option)")
-                return L10n.Core.ParsedFile.Alerts.Unsupported.message(option)
+                return L10n.ParsedFile.Alerts.Unsupported.message(option)
                 
             default:
                 break
             }
         }
         log.error("Could not parse configuration URL: \(error)")
-        return L10n.Core.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
+        return L10n.ParsedFile.Alerts.Parsing.message(error.localizedDescription)
     }
     
     // XXX: copy/paste from iOS
@@ -196,8 +196,8 @@ extension HostImporter: TextInputViewControllerDelegate {
             if let existingHostId = service.existingHostId(withTitle: text) {
                 dismiss(textInputController)
 
-                let alert = Macros.warning(text, L10n.Core.Wizards.Host.Alerts.Existing.message)
-                if alert.presentModally(withOK: L10n.Core.Global.ok, cancel: L10n.Core.Global.cancel) {
+                let alert = Macros.warning(text, L10n.Wizards.Host.Alerts.Existing.message)
+                if alert.presentModally(withOK: L10n.Global.ok, cancel: L10n.Global.cancel) {
                     guard let existingProfile = service.profile(withContext: profile.context, id: existingHostId) else {
                         fatalError("ConnectionService.existingHostId() returned a non-existing host profile?")
                     }

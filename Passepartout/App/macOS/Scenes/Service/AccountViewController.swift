@@ -63,17 +63,17 @@ class AccountViewController: NSViewController {
         
         assert(profile != nil, "Profile not set")
         
-        labelUsernameCaption.stringValue = L10n.Core.Account.Cells.Username.caption.asCaption
+        labelUsernameCaption.stringValue = L10n.Account.Cells.Username.caption.asCaption
         if let providerProfile = profile as? ProviderConnectionProfile {
             textUsername.placeholderString = providerProfile.infrastructure.defaults.username
         } else {
-            textUsername.placeholderString = L10n.Core.Account.Cells.Username.placeholder
+            textUsername.placeholderString = L10n.Account.Cells.Username.placeholder
         }
-        labelPasswordCaption.stringValue = L10n.Core.Account.Cells.Password.caption.asCaption
-        textPassword.placeholderString = L10n.Core.Account.Cells.Password.placeholder
-        buttonGuidance.title = L10n.Core.Account.Cells.OpenGuide.caption
-        buttonOK.title = L10n.Core.Global.ok
-        buttonCancel.title = L10n.Core.Global.cancel
+        labelPasswordCaption.stringValue = L10n.Account.Cells.Password.caption.asCaption
+        textPassword.placeholderString = L10n.Account.Cells.Password.placeholder
+        buttonGuidance.title = L10n.Account.Cells.OpenGuide.caption
+        buttonOK.title = L10n.Global.ok
+        buttonCancel.title = L10n.Global.cancel
         
         let credentials = service.credentials(for: profile)
         textUsername.stringValue = credentials?.username ?? ""

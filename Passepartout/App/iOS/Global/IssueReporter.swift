@@ -43,8 +43,8 @@ class IssueReporter: NSObject {
             let V = AppConstants.IssueReporter.Email.self
             let body = V.body(V.template, DebugLog(raw: "--").decoratedString())
             guard let url = URL.mailto(to: V.recipient, subject: V.subject, body: body), app.canOpenURL(url) else {
-                let alert = UIAlertController.asAlert(L10n.Core.IssueReporter.title, L10n.Core.Global.emailNotConfigured)
-                alert.addCancelAction(L10n.Core.Global.ok)
+                let alert = UIAlertController.asAlert(L10n.IssueReporter.title, L10n.Global.emailNotConfigured)
+                alert.addCancelAction(L10n.Global.ok)
                 viewController.present(alert, animated: true, completion: nil)
                 return
             }
@@ -55,13 +55,13 @@ class IssueReporter: NSObject {
         self.viewController = viewController
         
         if issue.debugLog {
-            let alert = UIAlertController.asAlert(L10n.Core.IssueReporter.title, L10n.Core.IssueReporter.message)
-            alert.addPreferredAction(L10n.Core.IssueReporter.Buttons.accept) {
+            let alert = UIAlertController.asAlert(L10n.IssueReporter.title, L10n.IssueReporter.message)
+            alert.addPreferredAction(L10n.IssueReporter.Buttons.accept) {
                 VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
                     self.composeEmail(withDebugLog: $0, issue: issue)
                 }
             }
-            alert.addCancelAction(L10n.Core.Global.cancel)
+            alert.addCancelAction(L10n.Global.cancel)
             viewController.present(alert, animated: true, completion: nil)
         } else {
             composeEmail(withDebugLog: nil, issue: issue)

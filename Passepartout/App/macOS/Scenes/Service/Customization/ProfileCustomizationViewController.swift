@@ -89,8 +89,8 @@ class ProfileCustomizationContainerViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttonOK.title = L10n.Core.Global.ok
-        buttonCancel.title = L10n.Core.Global.cancel
+        buttonOK.title = L10n.Global.ok
+        buttonCancel.title = L10n.Global.cancel
         
         pendingAddress = (profile as? ProviderConnectionProfile)?.customAddress
         pendingProtocol = (profile as? ProviderConnectionProfile)?.customProtocol
@@ -153,12 +153,12 @@ class ProfileCustomizationContainerViewController: NSViewController {
                 switch vpn.status {
                 case .connected, .connecting:
                     let alert = Macros.warning(
-                        L10n.App.Configuration.title,
-                        L10n.App.Configuration.Alerts.Commit.message
+                        L10n.Configuration.title,
+                        L10n.Configuration.Alerts.Commit.message
                     )
                     if alert.presentModally(
-                        withOK: L10n.App.Configuration.Alerts.Commit.Buttons.reconnect,
-                        cancel: L10n.App.Configuration.Alerts.Commit.Buttons.skip) {
+                        withOK: L10n.Configuration.Alerts.Commit.Buttons.reconnect,
+                        cancel: L10n.Configuration.Alerts.Commit.Buttons.skip) {
 
                         vpn.reconnect(completionHandler: nil)
                     } else {
@@ -258,12 +258,12 @@ class ProfileCustomizationViewController: NSTabViewController {
         let expectedTabs = 7
         assert(tabViewItems.count == expectedTabs, "Customization tabs misconfigured (expected \(expectedTabs))")
 
-        tabViewItems[0].label = L10n.Core.Endpoint.title
-        tabViewItems[1].label = L10n.App.Configuration.title
-        tabViewItems[2].label = L10n.Core.Service.Sections.Trusted.header
-        tabViewItems[3].label = L10n.Core.NetworkSettings.Gateway.title
-        tabViewItems[4].label = L10n.Core.NetworkSettings.Dns.title
-        tabViewItems[5].label = L10n.Core.NetworkSettings.Proxy.title
-        tabViewItems[6].label = L10n.Core.NetworkSettings.Mtu.title
+        tabViewItems[0].label = L10n.Endpoint.title
+        tabViewItems[1].label = L10n.Configuration.title
+        tabViewItems[2].label = L10n.Service.Sections.Trusted.header
+        tabViewItems[3].label = L10n.NetworkSettings.Gateway.title
+        tabViewItems[4].label = L10n.NetworkSettings.Dns.title
+        tabViewItems[5].label = L10n.NetworkSettings.Proxy.title
+        tabViewItems[6].label = L10n.NetworkSettings.Mtu.title
     }
 }

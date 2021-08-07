@@ -156,7 +156,7 @@ extension UITextField {
 
     func applyHostTitle(_ theme: Theme) {
         applyAlert(theme)
-        placeholder = L10n.Core.Global.Host.TitleInput.placeholder
+        placeholder = L10n.Global.Host.TitleInput.placeholder
     }
 
     func applyWiFiTitle(_ theme: Theme) {

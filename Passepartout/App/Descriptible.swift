@@ -45,10 +45,10 @@ extension OpenVPN.Digest: UIDescriptible {
 
 extension OpenVPN.CompressionFraming: UIDescriptible {
     public var uiDescription: String {
-        let V = L10n.Core.Configuration.Cells.self
+        let V = L10n.Configuration.Cells.self
         switch self {
         case .disabled:
-            return L10n.Core.Global.Values.disabled
+            return L10n.Global.Values.disabled
             
         case .compLZO:
             return V.CompressionFraming.Value.lzo
@@ -61,10 +61,10 @@ extension OpenVPN.CompressionFraming: UIDescriptible {
 
 extension OpenVPN.CompressionAlgorithm: UIDescriptible {
     public var uiDescription: String {
-        let V = L10n.Core.Configuration.Cells.self
+        let V = L10n.Configuration.Cells.self
         switch self {
         case .disabled:
-            return L10n.Core.Global.Values.disabled
+            return L10n.Global.Values.disabled
             
         case .LZO:
             return V.CompressionAlgorithm.Value.lzo
@@ -77,7 +77,7 @@ extension OpenVPN.CompressionAlgorithm: UIDescriptible {
 
 extension OpenVPN.ConfigurationBuilder {
     public var uiDescriptionForTLSWrap: String {
-        let V = L10n.Core.Configuration.Cells.self
+        let V = L10n.Configuration.Cells.self
         if let strategy = tlsWrap?.strategy {
             switch strategy {
             case .auth:
@@ -87,45 +87,45 @@ extension OpenVPN.ConfigurationBuilder {
                 return V.TlsWrapping.Value.crypt
             }
         } else {
-            return L10n.Core.Global.Values.disabled
+            return L10n.Global.Values.disabled
         }
     }
 
     public var uiDescriptionForKeepAlive: String {
-        let V = L10n.Core.Configuration.Cells.self
+        let V = L10n.Configuration.Cells.self
         if let keepAlive = keepAliveInterval, keepAlive > 0 {
             return V.KeepAlive.Value.seconds(Int(keepAlive))
         } else {
-            return L10n.Core.Global.Values.disabled
+            return L10n.Global.Values.disabled
         }
     }
 
     public var uiDescriptionForClientCertificate: String {
-        let V = L10n.Core.Configuration.Cells.Client.Value.self
+        let V = L10n.Configuration.Cells.Client.Value.self
         return (clientCertificate != nil) ? V.enabled : V.disabled
     }
 
     public var uiDescriptionForEKU: String {
-        let V = L10n.Core.Global.Values.self
+        let V = L10n.Global.Values.self
         return (checksEKU ?? false) ? V.enabled : V.disabled
     }
 
     public var uiDescriptionForRenegotiatesAfter: String {
-        let V = L10n.Core.Configuration.Cells.self
+        let V = L10n.Configuration.Cells.self
         if let reneg = renegotiatesAfter, reneg > 0 {
             return V.RenegotiationSeconds.Value.after(TimeInterval(reneg).localized)
         } else {
-            return L10n.Core.Global.Values.disabled
+            return L10n.Global.Values.disabled
         }
     }
 
     public var uiDescriptionForRandomizeEndpoint: String {
-        let V = L10n.Core.Global.Values.self
+        let V = L10n.Global.Values.self
         return (randomizeEndpoint ?? false) ? V.enabled : V.disabled
     }
 
     public var uiDescriptionForXOR: String {
-        let V = L10n.Core.Global.Values.self
+        let V = L10n.Global.Values.self
         guard let mask = xorMask, mask != 0 else {
             return V.disabled
         }
@@ -138,13 +138,13 @@ extension NetworkChoice: CustomStringConvertible {
     public var description: String {
         switch self {
         case .client:
-            return L10n.Core.NetworkChoice.client
+            return L10n.NetworkChoice.client
             
         case .server:
-            return L10n.Core.NetworkChoice.server
+            return L10n.NetworkChoice.server
             
         case .manual:
-            return L10n.Core.Global.Values.manual
+            return L10n.Global.Values.manual
         }
     }
 }
@@ -168,16 +168,16 @@ extension VPNStatus: UIDescriptible {
     public var uiDescription: String {
         switch self {
         case .connecting:
-            return L10n.Core.Vpn.connecting
+            return L10n.Vpn.connecting
             
         case .connected:
-            return L10n.Core.Vpn.active
+            return L10n.Vpn.active
             
         case .disconnecting:
-            return L10n.Core.Vpn.disconnecting
+            return L10n.Vpn.disconnecting
             
         case .disconnected:
-            return L10n.Core.Vpn.inactive
+            return L10n.Vpn.inactive
         }
     }
 }

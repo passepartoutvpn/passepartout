@@ -76,7 +76,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     let model: StrongTableModel<SectionType, RowType> = {
         let model: StrongTableModel<SectionType, RowType> = StrongTableModel()
         model.add(.all)
-        model.setHeader(L10n.Core.Shortcuts.Edit.Sections.All.header, forSection: .all)
+        model.setHeader(L10n.Shortcuts.Edit.Sections.All.header, forSection: .all)
         model.set([], forSection: .all)
         return model
     }()
@@ -92,7 +92,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Core.Organizer.Cells.SiriShortcuts.caption
+        title = L10n.Organizer.Cells.SiriShortcuts.caption
 
         INVoiceShortcutCenter.shared.getAllVoiceShortcuts { [weak self] (shortcuts, error) in
             DispatchQueue.main.async {
@@ -122,9 +122,9 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
         // TODO: really show it?
 //        let alert = UIAlertController.asAlert(
 //            title,
-//            L10n.Core.Shortcuts.Edit.message(error?.localizedDescription ?? "")
+//            L10n.Shortcuts.Edit.message(error?.localizedDescription ?? "")
 //        )
-//        alert.addCancelAction(L10n.Core.Global.ok) {
+//        alert.addCancelAction(L10n.Global.ok) {
 //            self.close()
 //        }
 //        present(alert, animated: true, completion: nil)
@@ -192,7 +192,7 @@ class ShortcutsViewController: UITableViewController, INUIAddVoiceShortcutViewCo
 
         case .addShortcut:
             cell.applyAction(.current)
-            cell.leftText = L10n.App.Shortcuts.Edit.Cells.AddShortcut.caption
+            cell.leftText = L10n.Shortcuts.Edit.Cells.AddShortcut.caption
             cell.accessoryType = .none
             cell.isTappable = true
         }

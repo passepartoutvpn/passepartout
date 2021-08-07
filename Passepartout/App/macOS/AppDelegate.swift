@@ -74,8 +74,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         if !TransientStore.didHandleSubreddit {
-            let alert = Macros.warning(L10n.Core.Reddit.title, L10n.Core.Reddit.message)
-            alert.present(in: nil, withOK: L10n.Core.Reddit.Buttons.subscribe, cancel: L10n.Core.Reddit.Buttons.never, dummy: L10n.Core.Reddit.Buttons.remind, handler: {
+            let alert = Macros.warning(L10n.Reddit.title, L10n.Reddit.message)
+            alert.present(in: nil, withOK: L10n.Reddit.Buttons.subscribe, cancel: L10n.Reddit.Buttons.never, dummy: L10n.Reddit.Buttons.remind, handler: {
                 TransientStore.didHandleSubreddit = true
                 self.subscribeSubreddit()
             }, cancelHandler: {
@@ -90,10 +90,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return .terminateNow
         }
         let alert = Macros.warning(
-            L10n.App.Menu.Quit.title(GroupConstants.App.name),
-            L10n.App.Menu.Quit.Messages.confirm
+            L10n.Menu.Quit.title(GroupConstants.App.name),
+            L10n.Menu.Quit.Messages.confirm
         )
-        switch alert.presentModallyEx(withOK: L10n.Core.Global.ok, other1: L10n.Core.Global.cancel, other2: L10n.Core.Reddit.Buttons.never) {
+        switch alert.presentModallyEx(withOK: L10n.Global.ok, other1: L10n.Global.cancel, other2: L10n.Reddit.Buttons.never) {
         case .alertSecondButtonReturn:
             return .terminateCancel
 

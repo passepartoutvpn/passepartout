@@ -33,8 +33,8 @@ class PreferencesViewController: NSViewController {
         super.viewDidLoad()
         
         let labels = [
-            L10n.App.Preferences.Sections.General.header,
-            L10n.Core.Service.Sections.Diagnostics.header
+            L10n.Preferences.Sections.General.header,
+            L10n.Service.Sections.Diagnostics.header
         ]
         tabView.tabViewItems.enumerated().forEach {
             $1.label = labels[$0]

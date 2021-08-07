@@ -102,8 +102,8 @@ class ServerNetworkViewController: UITableViewController, StrongTableHost {
         // headers
         model.setHeader("IPv4", forSection: .ipv4)
         model.setHeader("IPv6", forSection: .ipv6)
-        model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .dns)
-        model.setHeader(L10n.Core.NetworkSettings.Proxy.title, forSection: .proxy)
+        model.setHeader(L10n.NetworkSettings.Dns.title, forSection: .dns)
+        model.setHeader(L10n.NetworkSettings.Proxy.title, forSection: .proxy)
 
         return model
     }()
@@ -182,22 +182,22 @@ extension ServerNetworkViewController {
         case .ipv4:
             switch row {
             case .address:
-                cell.leftText = L10n.Core.Global.Captions.address
+                cell.leftText = L10n.Global.Captions.address
                 if let ipv4 = configuration.ipv4 {
                     cell.rightText = "\(ipv4.address)/\(ipv4.addressMask)"
                 } else {
-                    cell.rightText = L10n.Core.Global.Values.none
+                    cell.rightText = L10n.Global.Values.none
                 }
 
             case .defaultGateway:
-                cell.leftText = L10n.Core.NetworkSettings.Gateway.title
-                cell.rightText = configuration.ipv4?.defaultGateway ?? L10n.Core.Global.Values.none
+                cell.leftText = L10n.NetworkSettings.Gateway.title
+                cell.rightText = configuration.ipv4?.defaultGateway ?? L10n.Global.Values.none
 
             case .route:
                 guard let route = configuration.ipv4?.routes[indexPath.row - indexOfFirstRoute4] else {
                     fatalError("Got an IPv4 route cell with empty routes")
                 }
-                cell.leftText = L10n.Core.ServerNetwork.Cells.Route.caption
+                cell.leftText = L10n.ServerNetwork.Cells.Route.caption
                 cell.rightText = "\(route.destination)/\(route.mask) -> \(route.gateway)"
 
             default:
@@ -207,22 +207,22 @@ extension ServerNetworkViewController {
         case .ipv6:
             switch row {
             case .address:
-                cell.leftText = L10n.Core.Global.Captions.address
+                cell.leftText = L10n.Global.Captions.address
                 if let ipv6 = configuration.ipv6 {
                     cell.rightText = "\(ipv6.address)/\(ipv6.addressPrefixLength)"
                 } else {
-                    cell.rightText = L10n.Core.Global.Values.none
+                    cell.rightText = L10n.Global.Values.none
                 }
 
             case .defaultGateway:
-                cell.leftText = L10n.Core.NetworkSettings.Gateway.title
-                cell.rightText = configuration.ipv6?.defaultGateway ?? L10n.Core.Global.Values.none
+                cell.leftText = L10n.NetworkSettings.Gateway.title
+                cell.rightText = configuration.ipv6?.defaultGateway ?? L10n.Global.Values.none
 
             case .route:
                 guard let route = configuration.ipv6?.routes[indexPath.row - indexOfFirstRoute6] else {
                     fatalError("Got an IPv6 route cell with empty routes")
                 }
-                cell.leftText = L10n.Core.ServerNetwork.Cells.Route.caption
+                cell.leftText = L10n.ServerNetwork.Cells.Route.caption
                 cell.rightText = "\(route.destination)/\(route.prefixLength) -> \(route.gateway)"
 
             default:
@@ -239,21 +239,21 @@ extension ServerNetworkViewController {
             guard let domain = configuration.searchDomains?[indexPath.row] else {
                 fatalError("Got DNS search domain with empty search domains")
             }
-            cell.leftText = L10n.Core.NetworkSettings.Dns.Cells.Domain.caption
+            cell.leftText = L10n.NetworkSettings.Dns.Cells.Domain.caption
             cell.rightText = domain
             
         case .dnsAddress:
             guard let server = configuration.dnsServers?[indexPath.row - indexOfFirstDNSAddress] else {
                 fatalError("Got DNS server with empty servers")
             }
-            cell.leftText = L10n.Core.Global.Captions.address
+            cell.leftText = L10n.Global.Captions.address
             cell.rightText = server
 
         case .proxyAddress:
             guard let proxy = configuration.httpsProxy ?? configuration.httpProxy else {
                 fatalError("Got proxy section without a proxy")
             }
-            cell.leftText = L10n.Core.Global.Captions.address
+            cell.leftText = L10n.Global.Captions.address
             cell.rightText = "\(proxy.address):\(proxy.port)"
 
         case .proxyAutoConfigurationURL:
@@ -267,7 +267,7 @@ extension ServerNetworkViewController {
             guard let domain = configuration.proxyBypassDomains?[indexPath.row - indexOfFirstProxyBypassDomain] else {
                 fatalError("Got proxy bypass domain with empty domains")
             }
-            cell.leftText = L10n.App.NetworkSettings.Cells.ProxyBypass.caption
+            cell.leftText = L10n.NetworkSettings.Cells.ProxyBypass.caption
             cell.rightText = domain
             
         default:

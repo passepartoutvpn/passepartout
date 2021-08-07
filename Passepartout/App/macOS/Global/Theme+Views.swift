@@ -30,31 +30,31 @@ import TunnelKit
 extension NSTextField {
     func applyVPN(_ theme: Theme, isActive: Bool, with vpnStatus: VPNStatus?, error: OpenVPNTunnelProvider.ProviderError?) {
         guard isActive else {
-            stringValue = L10n.App.Vpn.unused
+            stringValue = L10n.Vpn.unused
             textColor = theme.palette.colorSecondaryText
             return
         }
         guard let vpnStatus = vpnStatus else {
-            stringValue = L10n.Core.Vpn.disabled
+            stringValue = L10n.Vpn.disabled
             textColor = theme.palette.colorSecondaryText
             return
         }
         
         switch vpnStatus {
         case .connecting:
-            stringValue = L10n.Core.Vpn.connecting
+            stringValue = L10n.Vpn.connecting
             textColor = theme.palette.colorIndeterminate
             
         case .connected:
-            stringValue = L10n.Core.Vpn.active
+            stringValue = L10n.Vpn.active
             textColor = theme.palette.colorOn
             
         case .disconnecting:
-            stringValue = disconnectionReason(for: error) ?? L10n.Core.Vpn.disconnecting
+            stringValue = disconnectionReason(for: error) ?? L10n.Vpn.disconnecting
             textColor = theme.palette.colorIndeterminate
             
         case .disconnected:
-            stringValue = disconnectionReason(for: error) ?? L10n.Core.Vpn.inactive
+            stringValue = disconnectionReason(for: error) ?? L10n.Vpn.inactive
             textColor = theme.palette.colorOff
         }
     }
@@ -63,7 +63,7 @@ extension NSTextField {
         guard let error = error else {
             return nil
         }
-        let V = L10n.Core.Vpn.Errors.self
+        let V = L10n.Vpn.Errors.self
         switch error {
         case .socketActivity, .timeout:
             return V.timeout

@@ -91,12 +91,12 @@ class NetworkSettingsViewController: UITableViewController {
         
         // headers
         model.setHeader("", forSection: .choices)
-        model.setHeader(L10n.Core.NetworkSettings.Gateway.title, forSection: .manualGateway)
-        model.setHeader(L10n.Core.NetworkSettings.Proxy.title, forSection: .manualProxy)
-        model.setHeader(L10n.Core.NetworkSettings.Mtu.title, forSection: .manualMTU)
+        model.setHeader(L10n.NetworkSettings.Gateway.title, forSection: .manualGateway)
+        model.setHeader(L10n.NetworkSettings.Proxy.title, forSection: .manualProxy)
+        model.setHeader(L10n.NetworkSettings.Mtu.title, forSection: .manualMTU)
         
         // footers
-//        model.setFooter(L10n.Core.Configuration.Sections.Reset.footer, for: .reset)
+//        model.setFooter(L10n.Configuration.Sections.Reset.footer, for: .reset)
         
         // rows
         model.set([.gateway, .dns, .proxy, .mtu], forSection: .choices)
@@ -135,7 +135,7 @@ class NetworkSettingsViewController: UITableViewController {
         model.set(proxyRows, forSection: .manualProxy)
 
         // refine sections before add (DNS is tricky)
-        model.setHeader(L10n.Core.NetworkSettings.Dns.title, forSection: .manualDNSProtocol)
+        model.setHeader(L10n.NetworkSettings.Dns.title, forSection: .manualDNSProtocol)
         if !dnsServers.isEmpty {
         } else if !dnsDomains.isEmpty {
             sections.removeAll { $0 == .manualDNSServers }
@@ -405,25 +405,25 @@ extension NetworkSettingsViewController {
         switch row {
         case .gateway:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.NetworkSettings.Gateway.title
+            cell.leftText = L10n.NetworkSettings.Gateway.title
             cell.rightText = networkChoices.gateway.description
             return cell
 
         case .dns:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.NetworkSettings.Dns.title
+            cell.leftText = L10n.NetworkSettings.Dns.title
             cell.rightText = networkChoices.dns.description
             return cell
 
         case .proxy:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.NetworkSettings.Proxy.title
+            cell.leftText = L10n.NetworkSettings.Proxy.title
             cell.rightText = networkChoices.proxy.description
             return cell
             
         case .mtu:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.NetworkSettings.Mtu.title
+            cell.leftText = L10n.NetworkSettings.Mtu.title
             cell.rightText = (networkChoices.mtu ?? ProfileNetworkChoices.defaultChoice).description
             return cell
 
@@ -443,7 +443,7 @@ extension NetworkSettingsViewController {
             
         case .dnsProtocol:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Global.Captions.protocol
+            cell.leftText = L10n.Global.Captions.protocol
             cell.rightText = (networkSettings.dnsProtocol ?? .fallback)?.description
             if networkChoices.dns == .manual {
                 cell.accessoryType = .disclosureIndicator
@@ -481,9 +481,9 @@ extension NetworkSettingsViewController {
             let i = indexPath.row - Offsets.dnsAddress
             
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.Core.Global.Captions.address
+            cell.caption = L10n.Global.Captions.address
             cell.field.tag = FieldTag.dnsAddress.rawValue + i
-            cell.field.placeholder = L10n.Core.Global.Values.none
+            cell.field.placeholder = L10n.Global.Values.none
             cell.field.text = networkSettings.dnsServers?[i]
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .numbersAndPunctuation
@@ -495,16 +495,16 @@ extension NetworkSettingsViewController {
         case .dnsAddAddress:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.NetworkSettings.Cells.AddDnsServer.caption
+            cell.leftText = L10n.NetworkSettings.Cells.AddDnsServer.caption
             return cell
             
         case .dnsDomain:
             let i = indexPath.row - Offsets.dnsDomain
 
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.Core.NetworkSettings.Dns.Cells.Domain.caption
+            cell.caption = L10n.NetworkSettings.Dns.Cells.Domain.caption
             cell.field.tag = FieldTag.dnsDomain.rawValue + i
-            cell.field.placeholder = L10n.Core.Global.Values.none
+            cell.field.placeholder = L10n.Global.Values.none
             cell.field.text = networkSettings.dnsSearchDomains?[i]
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .asciiCapable
@@ -516,14 +516,14 @@ extension NetworkSettingsViewController {
         case .dnsAddDomain:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.NetworkSettings.Cells.AddDnsDomain.caption
+            cell.leftText = L10n.NetworkSettings.Cells.AddDnsDomain.caption
             return cell
             
         case .proxyAddress:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.Core.Global.Captions.address
+            cell.caption = L10n.Global.Captions.address
             cell.field.tag = FieldTag.proxyAddress.rawValue
-            cell.field.placeholder = L10n.Core.Global.Values.none
+            cell.field.placeholder = L10n.Global.Values.none
             cell.field.text = networkSettings.proxyAddress
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .numbersAndPunctuation
@@ -534,9 +534,9 @@ extension NetworkSettingsViewController {
 
         case .proxyPort:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.Core.Global.Captions.port
+            cell.caption = L10n.Global.Captions.port
             cell.field.tag = FieldTag.proxyPort.rawValue
-            cell.field.placeholder = L10n.Core.Global.Values.none
+            cell.field.placeholder = L10n.Global.Values.none
             cell.field.text = networkSettings.proxyPort?.description
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .numberPad
@@ -549,7 +549,7 @@ extension NetworkSettingsViewController {
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cell.caption = "PAC"
             cell.field.tag = FieldTag.proxyAutoConfigurationURL.rawValue
-            cell.field.placeholder = L10n.Core.Global.Values.none
+            cell.field.placeholder = L10n.Global.Values.none
             cell.field.text = networkSettings.proxyAutoConfigurationURL?.absoluteString
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .asciiCapable
@@ -562,9 +562,9 @@ extension NetworkSettingsViewController {
             let i = indexPath.row - Offsets.proxyBypass
             
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
-            cell.caption = L10n.App.NetworkSettings.Cells.ProxyBypass.caption
+            cell.caption = L10n.NetworkSettings.Cells.ProxyBypass.caption
             cell.field.tag = FieldTag.proxyBypass.rawValue + i
-            cell.field.placeholder = L10n.Core.Global.Values.none
+            cell.field.placeholder = L10n.Global.Values.none
             cell.field.text = networkSettings.proxyBypassDomains?[i]
             cell.field.clearButtonMode = .always
             cell.field.keyboardType = .asciiCapable
@@ -576,13 +576,13 @@ extension NetworkSettingsViewController {
         case .proxyAddBypass:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
             cell.applyAction(.current)
-            cell.leftText = L10n.App.NetworkSettings.Cells.AddProxyBypass.caption
+            cell.leftText = L10n.NetworkSettings.Cells.AddProxyBypass.caption
             return cell
 
         case .mtuBytes:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.NetworkSettings.Mtu.Cells.Bytes.caption
-            cell.rightText = networkSettings.mtuBytes?.description ?? L10n.Core.Global.Values.default
+            cell.leftText = L10n.NetworkSettings.Mtu.Cells.Bytes.caption
+            cell.rightText = networkSettings.mtuBytes?.description ?? L10n.Global.Values.default
             return cell
         }
     }
@@ -706,7 +706,7 @@ extension NetworkSettingsViewController {
             vc.options = ProfileNetworkSettings.mtuOptions
             vc.descriptionBlock = {
                 guard $0 != 0 else {
-                    return L10n.Core.Global.Values.default
+                    return L10n.Global.Values.default
                 }
                 return $0.description
             }

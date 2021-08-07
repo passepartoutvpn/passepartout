@@ -95,9 +95,9 @@ class ProviderServiceView: NSView {
     override func viewWillMove(toSuperview newSuperview: NSView?) {
         super.viewWillMove(toSuperview: newSuperview)
         
-        labelCategoryCaption.stringValue = L10n.App.Service.Cells.Category.caption.asCaption
-        labelLocationCaption.stringValue = L10n.Core.Service.Cells.Provider.Pool.caption.asCaption
-        checkOnlyShowsFavorites.title = L10n.App.Service.Cells.OnlyShowsFavorites.caption
+        labelCategoryCaption.stringValue = L10n.Service.Cells.Category.caption.asCaption
+        labelLocationCaption.stringValue = L10n.Service.Cells.Provider.Pool.caption.asCaption
+        checkOnlyShowsFavorites.title = L10n.Service.Cells.OnlyShowsFavorites.caption
         checkOnlyShowsFavorites.state = .off
         buttonRefreshInfrastructure.image = NSImage(named: NSImage.refreshTemplateName)
         buttonFavorite.image = NSImage(named: NSImage.bookmarksTemplateName)
@@ -180,7 +180,7 @@ class ProviderServiceView: NSView {
         let menu = NSMenu()
         categories.forEach { category in
             let item = NSMenuItem()
-            item.title = !category.name.isEmpty ? category.name.capitalized : L10n.Core.Global.Values.default
+            item.title = !category.name.isEmpty ? category.name.capitalized : L10n.Global.Values.default
             item.representedObject = category
             menu.addItem(item)
 
@@ -202,7 +202,7 @@ class ProviderServiceView: NSView {
         }
 
         if let lastInfrastructureUpdate = InfrastructureFactory.shared.modificationDate(forName: profile.name) {
-            labelLastInfrastructureUpdate.stringValue = L10n.Core.Service.Sections.ProviderInfrastructure.footer(lastInfrastructureUpdate.timestamp)
+            labelLastInfrastructureUpdate.stringValue = L10n.Service.Sections.ProviderInfrastructure.footer(lastInfrastructureUpdate.timestamp)
         }
         
         checkOnlyShowsFavorites.isEnabled = !(profile.favoriteGroupIds?.isEmpty ?? true)
@@ -257,7 +257,7 @@ class ProviderServiceView: NSView {
             guard !$0.secondaryId.isEmpty || pools.count > 1 else {
                 return
             }
-            let title = !$0.secondaryId.isEmpty ? $0.secondaryId : L10n.Core.Global.Values.default
+            let title = !$0.secondaryId.isEmpty ? $0.secondaryId : L10n.Global.Values.default
             let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
             if let extraCountry = $0.extraCountries?.first {
                 item.image = extraCountry.image

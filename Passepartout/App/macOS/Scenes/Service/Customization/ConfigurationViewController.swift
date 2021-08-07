@@ -94,14 +94,14 @@ class ConfigurationViewController: NSViewController, ProfileCustomization {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelPresetCaption.stringValue = L10n.Core.Service.Cells.Provider.Preset.caption.asCaption
+        labelPresetCaption.stringValue = L10n.Service.Cells.Provider.Preset.caption.asCaption
         popupPreset.removeAllItems()
         if !allPresets.isEmpty {
             for preset in allPresets {
                 popupPreset.addItem(withTitle: preset.name)
             }
         } else {
-            popupPreset.addItem(withTitle: L10n.Core.Global.Values.default)
+            popupPreset.addItem(withTitle: L10n.Global.Values.default)
             popupPreset.isEnabled = false
         }
         
@@ -194,7 +194,7 @@ extension ConfigurationViewController: NSTableViewDataSource, NSTableViewDelegat
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        let V = L10n.Core.Configuration.Cells.self
+        let V = L10n.Configuration.Cells.self
         let rowObject = rows[row]
 
         switch tableColumn?.identifier {

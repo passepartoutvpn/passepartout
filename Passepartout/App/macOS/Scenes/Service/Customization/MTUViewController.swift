@@ -64,10 +64,10 @@ class MTUViewController: NSViewController, ProfileCustomization {
                 popupChoice.selectItem(at: popupChoice.numberOfItems - 1)
             }
         }
-        labelMTUCaption.stringValue = L10n.Core.NetworkSettings.Mtu.Cells.Bytes.caption.asCaption
+        labelMTUCaption.stringValue = L10n.NetworkSettings.Mtu.Cells.Bytes.caption.asCaption
         popupMTU.removeAllItems()
         for opt in ProfileNetworkSettings.mtuOptions {
-            popupMTU.addItem(withTitle: (opt != 0) ? opt.description : L10n.Core.Global.Values.default)
+            popupMTU.addItem(withTitle: (opt != 0) ? opt.description : L10n.Global.Values.default)
         }
         loadSettings(from: currentChoice ?? ProfileNetworkChoices.defaultChoice)
     }
@@ -115,7 +115,7 @@ class MTUViewController: NSViewController, ProfileCustomization {
 
         popupMTU.isEnabled = (currentChoice == .manual)
         for (i, opt) in popupMTU.itemTitles.enumerated() {
-            if opt == L10n.Core.Global.Values.default {
+            if opt == L10n.Global.Values.default {
                 if bytes == nil {
                     popupMTU.selectItem(at: i)
                     break

@@ -67,7 +67,7 @@ class AccountViewController: UIViewController, StrongTableHost {
         model.clear()
         
         model.add(.credentials)
-        model.setHeader(L10n.App.Account.Sections.Credentials.header, forSection: .credentials)
+        model.setHeader(L10n.Account.Sections.Credentials.header, forSection: .credentials)
         model.set([.username, .password], forSection: .credentials)
 
         if let _ = infrastructureName {
@@ -87,7 +87,7 @@ class AccountViewController: UIViewController, StrongTableHost {
             }
 //            if let _ = referralURL {
 //                model.add(.registration)
-//                model.setFooter(L10n.Core.Account.Sections.Registration.footer(name.rawValue), forSection: .registration)
+//                model.setFooter(L10n.Account.Sections.Registration.footer(name.rawValue), forSection: .registration)
 //                model.set([.signUp], forSection: .registration)
 //            }
         }
@@ -98,7 +98,7 @@ class AccountViewController: UIViewController, StrongTableHost {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = L10n.Core.Account.title
+        title = L10n.Account.title
         cellUsername?.field.text = currentCredentials?.username
         cellPassword?.field.text = currentCredentials?.password
         
@@ -190,8 +190,8 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
         case .username:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cellUsername = cell
-            cell.caption = L10n.Core.Account.Cells.Username.caption
-            cell.field.placeholder = usernamePlaceholder ?? L10n.Core.Account.Cells.Username.placeholder
+            cell.caption = L10n.Account.Cells.Username.caption
+            cell.field.placeholder = usernamePlaceholder ?? L10n.Account.Cells.Username.placeholder
             cell.field.clearButtonMode = .always
             cell.field.isSecureTextEntry = false
             cell.field.text = currentCredentials?.username
@@ -205,8 +205,8 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
         case .password:
             let cell = Cells.field.dequeue(from: tableView, for: indexPath)
             cellPassword = cell
-            cell.caption = L10n.Core.Account.Cells.Password.caption
-            cell.field.placeholder = L10n.Core.Account.Cells.Password.placeholder
+            cell.caption = L10n.Account.Cells.Password.caption
+            cell.field.placeholder = L10n.Account.Cells.Password.placeholder
             cell.field.clearButtonMode = .always
             cell.field.isSecureTextEntry = true
             cell.field.text = currentCredentials?.password
@@ -218,7 +218,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
             
         case .openGuide:
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Account.Cells.OpenGuide.caption
+            cell.leftText = L10n.Account.Cells.OpenGuide.caption
             cell.applyAction(.current)
             return cell
 
@@ -227,7 +227,7 @@ extension AccountViewController: UITableViewDataSource, UITableViewDelegate, Fie
                 fatalError("Sign-up shown when not a provider profile")
             }
             let cell = Cells.setting.dequeue(from: tableView, for: indexPath)
-            cell.leftText = L10n.Core.Account.Cells.Signup.caption(name)
+            cell.leftText = L10n.Account.Cells.Signup.caption(name)
             cell.applyAction(.current)
             return cell
         }

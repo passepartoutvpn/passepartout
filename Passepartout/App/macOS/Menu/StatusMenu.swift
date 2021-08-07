@@ -67,7 +67,7 @@ class StatusMenu: NSObject {
     
     private let menuAllProfiles = NSMenu()
 
-    private lazy var itemSwitchProfile = NSMenuItem(title: L10n.App.Menu.SwitchProfile.title, action: nil, keyEquivalent: "")
+    private lazy var itemSwitchProfile = NSMenuItem(title: L10n.Menu.SwitchProfile.title, action: nil, keyEquivalent: "")
     
     private var itemsAllProfiles: [NSMenuItem] = []
 
@@ -77,9 +77,9 @@ class StatusMenu: NSObject {
     
     private lazy var itemPool = NSMenuItem(title: "", action: nil, keyEquivalent: "")
 
-    private lazy var itemToggleVPN = NSMenuItem(title: L10n.App.Service.Cells.Vpn.TurnOn.caption, action: nil, keyEquivalent: "")
+    private lazy var itemToggleVPN = NSMenuItem(title: L10n.Service.Cells.Vpn.TurnOn.caption, action: nil, keyEquivalent: "")
 
-    private lazy var itemReconnectVPN = NSMenuItem(title: L10n.Core.Service.Cells.Reconnect.caption, action: #selector(reconnectVPN), keyEquivalent: "")
+    private lazy var itemReconnectVPN = NSMenuItem(title: L10n.Service.Cells.Reconnect.caption, action: #selector(reconnectVPN), keyEquivalent: "")
     
     private override init() {
         super.init()
@@ -111,8 +111,8 @@ class StatusMenu: NSObject {
 
         // main actions
 
-        let itemShow = NSMenuItem(title: L10n.App.Menu.Show.title, action: #selector(showOrganizer), keyEquivalent: "")
-        let itemPreferences = NSMenuItem(title: L10n.App.Menu.Preferences.title.asContinuation, action: #selector(showPreferences), keyEquivalent: ",")
+        let itemShow = NSMenuItem(title: L10n.Menu.Show.title, action: #selector(showOrganizer), keyEquivalent: "")
+        let itemPreferences = NSMenuItem(title: L10n.Menu.Preferences.title.asContinuation, action: #selector(showPreferences), keyEquivalent: ",")
         itemShow.target = self
         itemPreferences.target = self
         menu.addItem(itemShow)
@@ -130,11 +130,11 @@ class StatusMenu: NSObject {
         // support
         
         let menuSupport = NSMenu()
-        let itemCommunity = NSMenuItem(title: L10n.Core.Organizer.Cells.JoinCommunity.caption.asContinuation, action: #selector(joinCommunity), keyEquivalent: "")
-//        let itemDonate = NSMenuItem(title: L10n.Core.Organizer.Cells.Donate.caption.asContinuation, action: #selector(showDonations), keyEquivalent: "")
-//        let itemGitHubSponsors = NSMenuItem(title: L10n.Core.Organizer.Cells.GithubSponsors.caption.asContinuation, action: #selector(seeGitHubSponsors), keyEquivalent: "")
-//        let itemTranslate = NSMenuItem(title: L10n.Core.Organizer.Cells.Translate.caption.asContinuation, action: #selector(offerToTranslate), keyEquivalent: "")
-        let itemFAQ = NSMenuItem(title: L10n.Core.About.Cells.Faq.caption.asContinuation, action: #selector(visitFAQ), keyEquivalent: "")
+        let itemCommunity = NSMenuItem(title: L10n.Organizer.Cells.JoinCommunity.caption.asContinuation, action: #selector(joinCommunity), keyEquivalent: "")
+//        let itemDonate = NSMenuItem(title: L10n.Organizer.Cells.Donate.caption.asContinuation, action: #selector(showDonations), keyEquivalent: "")
+//        let itemGitHubSponsors = NSMenuItem(title: L10n.Organizer.Cells.GithubSponsors.caption.asContinuation, action: #selector(seeGitHubSponsors), keyEquivalent: "")
+//        let itemTranslate = NSMenuItem(title: L10n.Organizer.Cells.Translate.caption.asContinuation, action: #selector(offerToTranslate), keyEquivalent: "")
+        let itemFAQ = NSMenuItem(title: L10n.About.Cells.Faq.caption.asContinuation, action: #selector(visitFAQ), keyEquivalent: "")
         itemCommunity.target = self
 //        itemDonate.target = self
 //        itemGitHubSponsors.target = self
@@ -146,26 +146,26 @@ class StatusMenu: NSObject {
 //        menuSupport.addItem(itemGitHubSponsors)
 //        menuSupport.addItem(itemTranslate)
         if ProductManager.shared.isEligibleForFeedback() {
-            let itemReview = NSMenuItem(title: L10n.Core.Organizer.Cells.WriteReview.caption.asContinuation, action: #selector(writeReview), keyEquivalent: "")
+            let itemReview = NSMenuItem(title: L10n.Organizer.Cells.WriteReview.caption.asContinuation, action: #selector(writeReview), keyEquivalent: "")
             itemReview.target = self
             menuSupport.addItem(itemReview)
         }
         menuSupport.addItem(.separator())
         menuSupport.addItem(itemFAQ)
         if ProductManager.shared.isEligibleForFeedback() {
-            let itemReport = NSMenuItem(title: L10n.Core.Service.Cells.ReportIssue.caption.asContinuation, action: #selector(reportConnectivityIssue), keyEquivalent: "")
+            let itemReport = NSMenuItem(title: L10n.Service.Cells.ReportIssue.caption.asContinuation, action: #selector(reportConnectivityIssue), keyEquivalent: "")
             itemReport.target = self
             menuSupport.addItem(itemReport)
         }
-        let itemSupport = NSMenuItem(title: L10n.App.Menu.Support.title, action: nil, keyEquivalent: "")
+        let itemSupport = NSMenuItem(title: L10n.Menu.Support.title, action: nil, keyEquivalent: "")
         menu.setSubmenu(menuSupport, for: itemSupport)
         menu.addItem(itemSupport)
         
         // share
 
         let menuShare = NSMenu()
-        let itemTweet = NSMenuItem(title: L10n.Core.About.Cells.ShareTwitter.caption, action: #selector(shareTwitter), keyEquivalent: "")
-        let itemInvite = NSMenuItem(title: L10n.Core.About.Cells.ShareGeneric.caption.asContinuation, action: #selector(shareGeneric), keyEquivalent: "")
+        let itemTweet = NSMenuItem(title: L10n.About.Cells.ShareTwitter.caption, action: #selector(shareTwitter), keyEquivalent: "")
+        let itemInvite = NSMenuItem(title: L10n.About.Cells.ShareGeneric.caption.asContinuation, action: #selector(shareGeneric), keyEquivalent: "")
         let itemAlternativeTo = NSMenuItem(title: "AlternativeTo".asContinuation, action: #selector(visitAlternativeTo), keyEquivalent: "")
         itemTweet.target = self
         itemInvite.target = self
@@ -173,15 +173,15 @@ class StatusMenu: NSObject {
         menuShare.addItem(itemTweet)
         menuShare.addItem(itemInvite)
         menuShare.addItem(itemAlternativeTo)
-        let itemShare = NSMenuItem(title: L10n.Core.About.Sections.Share.header, action: nil, keyEquivalent: "")
+        let itemShare = NSMenuItem(title: L10n.About.Sections.Share.header, action: nil, keyEquivalent: "")
         menu.setSubmenu(menuShare, for: itemShare)
         menu.addItem(itemShare)
         menu.addItem(.separator())
 
         // secondary
         
-        let itemAbout = NSMenuItem(title: L10n.Core.Organizer.Cells.About.caption(GroupConstants.App.name), action: #selector(showAbout), keyEquivalent: "")
-        let itemQuit = NSMenuItem(title: L10n.App.Menu.Quit.title(GroupConstants.App.name), action: #selector(quit), keyEquivalent: "q")
+        let itemAbout = NSMenuItem(title: L10n.Organizer.Cells.About.caption(GroupConstants.App.name), action: #selector(showAbout), keyEquivalent: "")
+        let itemQuit = NSMenuItem(title: L10n.Menu.Quit.title(GroupConstants.App.name), action: #selector(quit), keyEquivalent: "q")
         itemAbout.target = self
         itemQuit.target = self
         menu.addItem(itemAbout)
@@ -224,7 +224,7 @@ class StatusMenu: NSObject {
         itemsProfile.removeAll()
 
         guard let profile = profile else {
-            itemProfileName.title = L10n.App.Menu.ActiveProfile.Title.none
+            itemProfileName.title = L10n.Menu.ActiveProfile.Title.none
 //            itemProfileName.image = nil
             statusItem.button?.image = imageStatusInactive
             statusItem.button?.toolTip = nil
@@ -248,7 +248,7 @@ class StatusMenu: NSObject {
             itemsProfile.append(itemToggleVPN)
             itemsProfile.append(itemReconnectVPN)
         } else {
-            let itemMissingCredentials = NSMenuItem(title: L10n.App.Menu.ActiveProfile.Messages.missingCredentials, action: nil, keyEquivalent: "")
+            let itemMissingCredentials = NSMenuItem(title: L10n.Menu.ActiveProfile.Messages.missingCredentials, action: nil, keyEquivalent: "")
             itemMissingCredentials.indentationLevel = 1
             menu.insertItem(itemMissingCredentials, at: i)
             i += 1
@@ -260,12 +260,12 @@ class StatusMenu: NSObject {
         if !needsCredentials, let providerProfile = profile as? ProviderConnectionProfile {
 
             // endpoint (port only)
-            let itemEndpoint = NSMenuItem(title: L10n.Core.Endpoint.title, action: nil, keyEquivalent: "")
+            let itemEndpoint = NSMenuItem(title: L10n.Endpoint.title, action: nil, keyEquivalent: "")
             itemEndpoint.indentationLevel = 1
             let menuEndpoint = NSMenu()
             
             // automatic
-            let itemEndpointAutomatic = NSMenuItem(title: L10n.Core.Endpoint.Cells.AnyProtocol.caption, action: #selector(connectToEndpoint(_:)), keyEquivalent: "")
+            let itemEndpointAutomatic = NSMenuItem(title: L10n.Endpoint.Cells.AnyProtocol.caption, action: #selector(connectToEndpoint(_:)), keyEquivalent: "")
             itemEndpointAutomatic.target = self
             if providerProfile.customProtocol == nil {
                 itemEndpointAutomatic.state = .on
@@ -287,7 +287,7 @@ class StatusMenu: NSObject {
             itemsProfile.append(itemEndpoint)
 
             // account
-            let itemAccount = NSMenuItem(title: L10n.Core.Account.title.asContinuation, action: #selector(editAccountCredentials(_:)), keyEquivalent: "")
+            let itemAccount = NSMenuItem(title: L10n.Account.title.asContinuation, action: #selector(editAccountCredentials(_:)), keyEquivalent: "")
             menu.insertItem(itemAccount, at: i)
             i += 1
             itemAccount.target = self
@@ -295,7 +295,7 @@ class StatusMenu: NSObject {
             itemsProfile.append(itemAccount)
 
             // customize
-            let itemCustomize = NSMenuItem(title: L10n.App.Menu.ActiveProfile.Items.Customize.title, action: #selector(customizeProfile(_:)), keyEquivalent: "")
+            let itemCustomize = NSMenuItem(title: L10n.Menu.ActiveProfile.Items.Customize.title, action: #selector(customizeProfile(_:)), keyEquivalent: "")
             menu.insertItem(itemCustomize, at: i)
             i += 1
             itemCustomize.target = self
@@ -317,7 +317,7 @@ class StatusMenu: NSObject {
             
             let infrastructure = providerProfile.infrastructure
             for category in infrastructure.categories {
-                let title = category.name.isEmpty ? L10n.Core.Global.Values.default : category.name.capitalized
+                let title = category.name.isEmpty ? L10n.Global.Values.default : category.name.capitalized
                 let submenu = NSMenu()
                 let itemCategory = NSMenuItem(title: title, action: nil, keyEquivalent: "")
                 itemCategory.indentationLevel = 1
@@ -332,7 +332,7 @@ class StatusMenu: NSObject {
                     
                     let submenuGroup = NSMenu()
                     for pool in group.pools {
-                        let title = !pool.secondaryId.isEmpty ? pool.secondaryId : L10n.Core.Global.Values.default
+                        let title = !pool.secondaryId.isEmpty ? pool.secondaryId : L10n.Global.Values.default
                         let item = NSMenuItem(title: title, action: #selector(connectToPool(_:)), keyEquivalent: "")
                         if let extraCountry = pool.extraCountries?.first {
                             item.image = extraCountry.image
@@ -362,7 +362,7 @@ class StatusMenu: NSObject {
         } else {
 
             // account
-            let itemAccount = NSMenuItem(title: L10n.Core.Account.title.asContinuation, action: #selector(editAccountCredentials(_:)), keyEquivalent: "")
+            let itemAccount = NSMenuItem(title: L10n.Account.title.asContinuation, action: #selector(editAccountCredentials(_:)), keyEquivalent: "")
             menu.insertItem(itemAccount, at: i)
             i += 1
             itemAccount.target = self
@@ -370,7 +370,7 @@ class StatusMenu: NSObject {
             itemsProfile.append(itemAccount)
 
             // customize
-            let itemCustomize = NSMenuItem(title: L10n.App.Menu.ActiveProfile.Items.Customize.title, action: #selector(customizeProfile(_:)), keyEquivalent: "")
+            let itemCustomize = NSMenuItem(title: L10n.Menu.ActiveProfile.Items.Customize.title, action: #selector(customizeProfile(_:)), keyEquivalent: "")
             menu.insertItem(itemCustomize, at: i)
             i += 1
             itemCustomize.target = self
@@ -542,14 +542,14 @@ class StatusMenu: NSObject {
     }
     
     @objc private func shareTwitter() {
-        NSWorkspace.shared.open(AppConstants.URLs.twitterIntent(withMessage: L10n.Core.Share.message))
+        NSWorkspace.shared.open(AppConstants.URLs.twitterIntent(withMessage: L10n.Share.message))
     }
     
     @objc private func shareGeneric() {
         guard let source = statusItem.button else {
             return
         }
-        let message = "\(L10n.Core.Share.message) \(AppConstants.URLs.website)"
+        let message = "\(L10n.Share.message) \(AppConstants.URLs.website)"
         let picker = NSSharingServicePicker(items: [message])
         picker.show(relativeTo: source.bounds, of: source, preferredEdge: .minY)
     }
@@ -572,10 +572,10 @@ class StatusMenu: NSObject {
     
     private func reloadVpnStatus() {
         if vpn.isEnabled {
-            itemToggleVPN.title = L10n.App.Service.Cells.Vpn.TurnOff.caption
+            itemToggleVPN.title = L10n.Service.Cells.Vpn.TurnOff.caption
             itemToggleVPN.action = #selector(disableVPN)
         } else {
-            itemToggleVPN.title = L10n.App.Service.Cells.Vpn.TurnOn.caption
+            itemToggleVPN.title = L10n.Service.Cells.Vpn.TurnOn.caption
             itemToggleVPN.action = #selector(enableVPN)
         }
         if let profile = service.activeProfile {

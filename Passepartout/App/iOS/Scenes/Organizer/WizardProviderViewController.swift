@@ -63,7 +63,7 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(didReloadReceipt), name: ProductManager.didReloadReceipt, object: nil)
 
-        title = L10n.Core.Organizer.Sections.Providers.header
+        title = L10n.Organizer.Sections.Providers.header
         reloadModel()
     }
     
@@ -115,7 +115,7 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
     }
     
     private func alertMissingInfrastructure(forMetadata metadata: Infrastructure.Metadata, error: Error?) {
-        var message = L10n.Core.Wizards.Provider.Alerts.Unavailable.message
+        var message = L10n.Wizards.Provider.Alerts.Unavailable.message
         if let error = error {
             log.error("Unable to download missing \(metadata.description) infrastructure (network error): \(error.localizedDescription)")
             message.append(" \(error.localizedDescription)")
@@ -124,7 +124,7 @@ class WizardProviderViewController: UITableViewController, StrongTableHost {
         }
         
         let alert = UIAlertController.asAlert(metadata.description, message)
-        alert.addCancelAction(L10n.Core.Global.ok)
+        alert.addCancelAction(L10n.Global.ok)
         present(alert, animated: true, completion: nil)
         
         if let ip = tableView.indexPathForSelectedRow {
@@ -197,7 +197,7 @@ extension WizardProviderViewController {
         case .updateList:
             cell.applyAction(.current)
             cell.imageView?.image = nil
-            cell.leftText = L10n.Core.Wizards.Provider.Cells.UpdateList.caption
+            cell.leftText = L10n.Wizards.Provider.Cells.UpdateList.caption
         }
         return cell
     }

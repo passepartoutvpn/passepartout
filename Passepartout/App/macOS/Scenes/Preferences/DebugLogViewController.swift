@@ -61,14 +61,14 @@ class DebugLogViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = L10n.Core.Service.Cells.DebugLog.caption
+        title = L10n.Service.Cells.DebugLog.caption
 
-        checkMasking.title = L10n.Core.Service.Cells.MasksPrivateData.caption
+        checkMasking.title = L10n.Service.Cells.MasksPrivateData.caption
         checkMasking.state = (TransientStore.masksPrivateData ? .on : .off)
 
-        labelExchangedCaption.stringValue = L10n.Core.Service.Cells.DataCount.caption.asCaption
-        labelLog.stringValue = L10n.Core.Service.Cells.DebugLog.caption.asCaption
-        buttonCopy.title = L10n.App.DebugLog.Buttons.copy
+        labelExchangedCaption.stringValue = L10n.Service.Cells.DataCount.caption.asCaption
+        labelLog.stringValue = L10n.Service.Cells.DebugLog.caption.asCaption
+        buttonCopy.title = L10n.DebugLog.Buttons.copy
         buttonPrevious.image = NSImage(named: NSImage.touchBarRewindTemplateName)
         buttonNext.image = NSImage(named: NSImage.touchBarFastForwardTemplateName)
         buttonShare.image = NSImage(named: NSImage.shareTemplateName)
@@ -93,10 +93,10 @@ class DebugLogViewController: NSViewController {
         
         guard vpn.status == .disconnected else {
             let alert = Macros.warning(
-                L10n.Core.Service.Cells.MasksPrivateData.caption,
-                L10n.Core.Service.Alerts.MasksPrivateData.Messages.mustReconnect
+                L10n.Service.Cells.MasksPrivateData.caption,
+                L10n.Service.Alerts.MasksPrivateData.Messages.mustReconnect
             )
-            alert.present(in: view.window, withOK: L10n.Core.Service.Alerts.Buttons.reconnect, cancel: L10n.Core.Global.cancel, handler: {
+            alert.present(in: view.window, withOK: L10n.Service.Alerts.Buttons.reconnect, cancel: L10n.Global.cancel, handler: {
                 handler()
                 self.shouldDeleteLogOnDisconnection = true
                 
@@ -132,10 +132,10 @@ class DebugLogViewController: NSViewController {
         let text = logLines.joined(separator: "\n")
         guard !text.isEmpty else {
             let alert = Macros.warning(
-                L10n.Core.Service.Cells.DebugLog.caption,
-                L10n.Core.DebugLog.Alerts.EmptyLog.message
+                L10n.Service.Cells.DebugLog.caption,
+                L10n.DebugLog.Alerts.EmptyLog.message
             )
-            alert.present(in: view.window, withOK: L10n.Core.Global.ok, handler: nil)
+            alert.present(in: view.window, withOK: L10n.Global.ok, handler: nil)
             return
         }
         let log = DebugLog(raw: text)
@@ -249,7 +249,7 @@ class DebugLogViewController: NSViewController {
             let up = count.1.dataUnitDescription
             labelExchanged.stringValue = "↓\(down) / ↑\(up)"
         } else {
-            labelExchanged.stringValue = L10n.Core.Service.Cells.DataCount.none
+            labelExchanged.stringValue = L10n.Service.Cells.DataCount.none
         }
     }
 }

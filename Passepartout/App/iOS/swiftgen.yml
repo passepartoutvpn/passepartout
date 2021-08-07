@@ -1,7 +1,6 @@
 strings:
     inputs:
         - ../../Core/Resources/en.lproj/Core.strings
-        - en.lproj/App.strings
     outputs:
         - templateName: structured-swift4
           output: Global/SwiftGen+Strings.swift
