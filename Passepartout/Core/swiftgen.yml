@@ -1,0 +1,8 @@
+strings:
+    inputs:
+        - Resources/en.lproj/Core.strings
+    outputs:
+        - templateName: structured-swift4
+          output: Sources/SwiftGen+Strings.swift
+          params:
+            publicAccess: true

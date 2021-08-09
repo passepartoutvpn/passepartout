@@ -58,21 +58,6 @@ extension Infrastructure.Metadata {
         }
         return image
     }
-
-    var guidanceString: String? {
-        let prefix = "account.sections.guidance.footer.infrastructure"
-        let key = "\(prefix).\(name)"
-        var format = NSLocalizedString(key, tableName: "Core", bundle: Bundle(for: AppDelegate.self), comment: "")
-
-        // i.e. key not found
-        if format == key {
-            let purpose = name.credentialsPurpose
-            let defaultKey = "\(prefix).default.\(purpose)"
-            format = NSLocalizedString(defaultKey, tableName: "Core", bundle: Bundle(for: AppDelegate.self), comment: "")
-        }
-
-        return String(format: format, locale: .current, description)
-    }
 }
 
 extension ConnectionProfile {
