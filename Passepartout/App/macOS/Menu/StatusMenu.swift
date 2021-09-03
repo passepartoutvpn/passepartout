@@ -339,7 +339,7 @@ class StatusMenu: NSObject {
                     itemGroup.representedObject = group
                     
                     let submenuGroup = NSMenu()
-                    for pool in group.pools {
+                    for pool in group.pools.sortedPools() {
                         let title = !pool.secondaryId.isEmpty ? pool.secondaryId : L10n.Global.Values.default
                         let item = NSMenuItem(title: title, action: #selector(connectToPool(_:)), keyEquivalent: "")
                         if let extraCountry = pool.extraCountries?.first {
