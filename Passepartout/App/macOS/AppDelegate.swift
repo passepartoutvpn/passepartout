@@ -47,7 +47,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     override init() {
         AppConstants.Log.configure()
         InfrastructureFactory.shared.preload()
-        VPN.shared = OpenVPNProvider(bundleIdentifier: AppConstants.App.tunnelBundleId)
         super.init()
     }
 

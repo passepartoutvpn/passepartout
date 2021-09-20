@@ -123,18 +123,18 @@ public class GracefulVPN {
     }
     
     public func requestBytesCount(completionHandler: @escaping ((UInt, UInt)?) -> Void) {
-        guard let vpn = vpn else {
+        guard let ipc = vpn as? VPNProviderIPC else {
             completionHandler(nil)
             return
         }
-        vpn.requestBytesCount(completionHandler: completionHandler)
+        ipc.requestBytesCount(completionHandler: completionHandler)
     }
 
     public func requestServerConfiguration(completionHandler: @escaping (Any?) -> Void) {
-        guard let vpn = vpn, vpn.status == .connected else {
+        guard let ipc = vpn as? VPNProviderIPC, vpn?.status == .connected else {
             completionHandler(nil)
             return
         }
-        vpn.requestServerConfiguration(completionHandler: completionHandler)
+        ipc.requestServerConfiguration(completionHandler: completionHandler)
     }
 }

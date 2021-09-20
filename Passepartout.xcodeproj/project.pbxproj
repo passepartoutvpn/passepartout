@@ -197,6 +197,8 @@
 		0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD7862257462800D033B4 /* Providers.xcassets */; };
 		0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD788225746B300D033B4 /* Flags.xcassets */; };
 		0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */; };
+		0EA9F29C26F9027700E806E1 /* VPN+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9F29B26F9027700E806E1 /* VPN+Shared.swift */; };
+		0EA9F29D26F9027800E806E1 /* VPN+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9F29B26F9027700E806E1 /* VPN+Shared.swift */; };
 		0EAAD71920E6669A0088754A /* GroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DED20C93E4C004C739C /* GroupConstants.swift */; };
 		0EB1F41C26B456C7003916BF /* Infrastructure+CredentialsPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1F41B26B456C7003916BF /* Infrastructure+CredentialsPurpose.swift */; };
 		0EB1F41D26B456C7003916BF /* Infrastructure+CredentialsPurpose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB1F41B26B456C7003916BF /* Infrastructure+CredentialsPurpose.swift */; };
@@ -508,6 +510,7 @@
 		0E9CD7862257462800D033B4 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
 		0E9CD788225746B300D033B4 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
 		0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetworkViewController.swift; sourceTree = "<group>"; };
+		0EA9F29B26F9027700E806E1 /* VPN+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VPN+Shared.swift"; sourceTree = "<group>"; };
 		0EB1F41B26B456C7003916BF /* Infrastructure+CredentialsPurpose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Infrastructure+CredentialsPurpose.swift"; sourceTree = "<group>"; };
 		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
 		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
@@ -1080,6 +1083,7 @@
 				0E569F14259F2D3E0022DFB8 /* Issue.swift */,
 				0EE247F526C115890080A4CE /* SwiftGen+Strings.swift */,
 				0E4FD7ED20D539A0002221FF /* Utils.swift */,
+				0EA9F29B26F9027700E806E1 /* VPN+Shared.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -1855,6 +1859,7 @@
 				0E569F15259F2D3E0022DFB8 /* Issue.swift in Sources */,
 				0E3152D3223FA05400F61841 /* EndpointDataSource.swift in Sources */,
 				0E569F2D259F2DB10022DFB8 /* InfrastructureFactory.swift in Sources */,
+				0EA9F29C26F9027700E806E1 /* VPN+Shared.swift in Sources */,
 				0E3152D4223FA05400F61841 /* Preferences.swift in Sources */,
 				0EFB901822764689006405E4 /* ProfileNetworkSettings.swift in Sources */,
 				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
@@ -1921,6 +1926,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E5204D3259F675400CBAB56 /* ConnectionService+Migration.swift in Sources */,
+				0EA9F29D26F9027800E806E1 /* VPN+Shared.swift in Sources */,
 				0E5204C1259F675400CBAB56 /* Infrastructure+Metadata.swift in Sources */,
 				0E5204BC259F674400CBAB56 /* TrustedNetworksUI.swift in Sources */,
 				0E5204D9259F675400CBAB56 /* Preferences.swift in Sources */,
