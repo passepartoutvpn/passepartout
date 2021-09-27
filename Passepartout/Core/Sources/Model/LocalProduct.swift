@@ -1,5 +1,5 @@
 //
-//  Product.swift
+//  LocalProduct.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/11/19.
@@ -26,7 +26,7 @@
 import Foundation
 import StoreKit
 
-public struct Product: RawRepresentable, Equatable, Hashable {
+public struct LocalProduct: RawRepresentable, Equatable, Hashable {
     private static let bundleSubdomain = "ios"
 
     private static let bundle = "com.algoritmico.\(bundleSubdomain).Passepartout"
@@ -39,19 +39,19 @@ public struct Product: RawRepresentable, Equatable, Hashable {
     
     // MARK: Donations
     
-    public static let tinyDonation = Product(donationDescription: "Tiny")
+    public static let tinyDonation = LocalProduct(donationDescription: "Tiny")
 
-    public static let smallDonation = Product(donationDescription: "Small")
+    public static let smallDonation = LocalProduct(donationDescription: "Small")
 
-    public static let mediumDonation = Product(donationDescription: "Medium")
+    public static let mediumDonation = LocalProduct(donationDescription: "Medium")
 
-    public static let bigDonation = Product(donationDescription: "Big")
+    public static let bigDonation = LocalProduct(donationDescription: "Big")
 
-    public static let hugeDonation = Product(donationDescription: "Huge")
+    public static let hugeDonation = LocalProduct(donationDescription: "Huge")
 
-    public static let maxiDonation = Product(donationDescription: "Maxi")
+    public static let maxiDonation = LocalProduct(donationDescription: "Maxi")
     
-    public static let allDonations: [Product] = [
+    public static let allDonations: [LocalProduct] = [
         .tinyDonation,
         .smallDonation,
         .mediumDonation,
@@ -61,24 +61,24 @@ public struct Product: RawRepresentable, Equatable, Hashable {
     ]
 
     private init(donationDescription: String) {
-        self.init(rawValue: "\(Product.donationsBundle).\(donationDescription)")!
+        self.init(rawValue: "\(LocalProduct.donationsBundle).\(donationDescription)")!
     }
 
     // MARK: Features
     
-    public static let allProviders = Product(featureId: "all_providers")
+    public static let allProviders = LocalProduct(featureId: "all_providers")
 
-    public static let trustedNetworks = Product(featureId: "trusted_networks")
+    public static let trustedNetworks = LocalProduct(featureId: "trusted_networks")
 
-    public static let siriShortcuts = Product(featureId: "siri")
+    public static let siriShortcuts = LocalProduct(featureId: "siri")
 
-    public static let fullVersion_iOS = Product(featureId: "full_version")
+    public static let fullVersion_iOS = LocalProduct(featureId: "full_version")
     
-    public static let fullVersion_macOS = Product(featureId: "full_mac_version")
+    public static let fullVersion_macOS = LocalProduct(featureId: "full_mac_version")
 
-    public static let fullVersion = Product(featureId: "full_multi_version")
+    public static let fullVersion = LocalProduct(featureId: "full_multi_version")
 
-    public static let allFeatures: [Product] = [
+    public static let allFeatures: [LocalProduct] = [
         .allProviders,
         .trustedNetworks,
         .siriShortcuts,
@@ -88,37 +88,37 @@ public struct Product: RawRepresentable, Equatable, Hashable {
     ]
 
     private init(featureId: String) {
-        self.init(rawValue: "\(Product.featuresBundle).\(featureId)")!
+        self.init(rawValue: "\(LocalProduct.featuresBundle).\(featureId)")!
     }
 
     // MARK: Providers
 
-//    public static var allProviders: [Product] {
+//    public static var allProviders: [LocalProduct] {
 //        return InfrastructureFactory.shared.allMetadata.map {
-//            return Product(providerMetadata: $0)
+//            return LocalProduct(providerMetadata: $0)
 //        }
 //    }
     
     fileprivate init(providerMetadata: Infrastructure.Metadata) {
-        self.init(rawValue: "\(Product.providersBundle).\(providerMetadata.inApp ?? providerMetadata.name)")!
+        self.init(rawValue: "\(LocalProduct.providersBundle).\(providerMetadata.inApp ?? providerMetadata.name)")!
     }
 
     // MARK: All
 
-    public static var all: [Product] {
+    public static var all: [LocalProduct] {
         return allDonations + allFeatures// + allProviders
     }
     
     public var isDonation: Bool {
-        return rawValue.hasPrefix(Product.donationsBundle)
+        return rawValue.hasPrefix(LocalProduct.donationsBundle)
     }
 
     public var isFeature: Bool {
-        return rawValue.hasPrefix(Product.featuresBundle)
+        return rawValue.hasPrefix(LocalProduct.featuresBundle)
     }
 
     public var isProvider: Bool {
-        return rawValue.hasPrefix(Product.providersBundle)
+        return rawValue.hasPrefix(LocalProduct.providersBundle)
     }
     
     // MARK: RawRepresentable
@@ -131,7 +131,7 @@ public struct Product: RawRepresentable, Equatable, Hashable {
 
     // MARK: Equatable
     
-    public static func ==(lhs: Product, rhs: Product) -> Bool {
+    public static func ==(lhs: LocalProduct, rhs: LocalProduct) -> Bool {
         return lhs.rawValue == rhs.rawValue
     }
     
@@ -143,12 +143,12 @@ public struct Product: RawRepresentable, Equatable, Hashable {
 }
 
 public extension Infrastructure.Metadata {
-    var product: Product {
-        return Product(providerMetadata: self)
+    var product: LocalProduct {
+        return LocalProduct(providerMetadata: self)
     }
 }
 
-public extension Product {
+public extension LocalProduct {
     func matchesStoreKitProduct(_ skProduct: SKProduct) -> Bool {
         return skProduct.productIdentifier == rawValue
     }

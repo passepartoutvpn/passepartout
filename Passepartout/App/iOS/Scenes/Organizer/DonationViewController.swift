@@ -32,7 +32,7 @@ import SwiftyBeaver
 private let log = SwiftyBeaver.self
 
 class DonationViewController: UITableViewController, StrongTableHost {
-    private var donationList: [Product] = []
+    private var donationList: [LocalProduct] = []
 
     private var productsByIdentifier: [String: SKProduct] = [:]
     
@@ -65,7 +65,7 @@ class DonationViewController: UITableViewController, StrongTableHost {
             return
         }
         
-        donationList.append(contentsOf: Product.allDonations.filter { productsByIdentifier[$0.rawValue] != nil })
+        donationList.append(contentsOf: LocalProduct.allDonations.filter { productsByIdentifier[$0.rawValue] != nil })
         model.set(.donation, count: donationList.count, forSection: .oneTime)
 
         if isPurchasing {

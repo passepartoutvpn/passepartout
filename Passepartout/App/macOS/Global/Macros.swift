@@ -91,7 +91,7 @@ extension NSAlert {
 }
 
 extension NSViewController {
-    func presentPurchaseScreen(forProduct product: Product, delegate: PurchaseViewControllerDelegate? = nil) {
+    func presentPurchaseScreen(forProduct product: LocalProduct, delegate: PurchaseViewControllerDelegate? = nil) {
         let vc = StoryboardScene.Purchase.initialScene.instantiate()
 //        vc.feature = product
         vc.delegate = delegate

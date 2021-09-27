@@ -580,7 +580,7 @@ class StatusMenu: NSObject {
     
     private func addDonations(fromProducts products: [SKProduct], to menu: NSMenu) {
         products.sorted { $0.price.decimalValue < $1.price.decimalValue }.forEach {
-            guard let p = Product(rawValue: $0.productIdentifier), p.isDonation, let price = $0.localizedPrice else {
+            guard let p = LocalProduct(rawValue: $0.productIdentifier), p.isDonation, let price = $0.localizedPrice else {
                 return
             }
             let title = "\($0.localizedTitle) (\(price))"

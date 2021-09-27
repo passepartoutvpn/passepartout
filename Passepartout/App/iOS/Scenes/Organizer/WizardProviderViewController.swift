@@ -230,7 +230,7 @@ extension WizardProviderViewController: AccountViewControllerDelegate {
 // MARK: -
 
 extension WizardProviderViewController: PurchaseViewControllerDelegate {
-    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product?) {
+    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: LocalProduct?) {
         guard let metadata = selectedMetadata else {
             return
         }

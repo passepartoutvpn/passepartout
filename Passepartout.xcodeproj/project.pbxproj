@@ -127,7 +127,7 @@
 		0E5204C4259F675400CBAB56 /* TrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A8F213C6F4000BFA2F5 /* TrustPolicy.swift */; };
 		0E5204C5259F675400CBAB56 /* ProviderConnectionProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3AA4213DC1B000BFA2F5 /* ProviderConnectionProfile.swift */; };
 		0E5204C6259F675400CBAB56 /* Pool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C0F20CF09A30027975F /* Pool.swift */; };
-		0E5204C7259F675400CBAB56 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1B259F2D8F0022DFB8 /* Product.swift */; };
+		0E5204C7259F675400CBAB56 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1B259F2D8F0022DFB8 /* Feature.swift */; };
 		0E5204C8259F675400CBAB56 /* PoolGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E533B152258E03B00EF94FC /* PoolGroup.swift */; };
 		0E5204C9259F675400CBAB56 /* ConnectionService+Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D11B9217DBEDE0096822C /* ConnectionService+Configurations.swift */; };
 		0E5204CA259F675400CBAB56 /* ProfileNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */; };
@@ -157,7 +157,7 @@
 		0E569F15259F2D3E0022DFB8 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F14259F2D3E0022DFB8 /* Issue.swift */; };
 		0E569F1C259F2D8F0022DFB8 /* GracefulVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F19259F2D8F0022DFB8 /* GracefulVPN.swift */; };
 		0E569F1E259F2D8F0022DFB8 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1A259F2D8F0022DFB8 /* ProductManager.swift */; };
-		0E569F20259F2D8F0022DFB8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1B259F2D8F0022DFB8 /* Product.swift */; };
+		0E569F20259F2D8F0022DFB8 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F1B259F2D8F0022DFB8 /* Feature.swift */; };
 		0E569F2B259F2DB10022DFB8 /* Infrastructure+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F28259F2DB10022DFB8 /* Infrastructure+Name.swift */; };
 		0E569F2C259F2DB10022DFB8 /* Infrastructure+Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F29259F2DB10022DFB8 /* Infrastructure+Metadata.swift */; };
 		0E569F2D259F2DB10022DFB8 /* InfrastructureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F2A259F2DB10022DFB8 /* InfrastructureFactory.swift */; };
@@ -408,7 +408,7 @@
 		0E569F14259F2D3E0022DFB8 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		0E569F19259F2D8F0022DFB8 /* GracefulVPN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GracefulVPN.swift; sourceTree = "<group>"; };
 		0E569F1A259F2D8F0022DFB8 /* ProductManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
-		0E569F1B259F2D8F0022DFB8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		0E569F1B259F2D8F0022DFB8 /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		0E569F28259F2DB10022DFB8 /* Infrastructure+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Infrastructure+Name.swift"; sourceTree = "<group>"; };
 		0E569F29259F2DB10022DFB8 /* Infrastructure+Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Infrastructure+Metadata.swift"; sourceTree = "<group>"; };
 		0E569F2A259F2DB10022DFB8 /* InfrastructureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfrastructureFactory.swift; sourceTree = "<group>"; };
@@ -1011,10 +1011,10 @@
 				0ECEB109224FECEA00E9E551 /* DataUnit.swift */,
 				0EC7F20420E24308004EA58E /* DebugLog.swift */,
 				0ED38AE621404F100004D387 /* EndpointDataSource.swift */,
+				0E569F1B259F2D8F0022DFB8 /* Feature.swift */,
 				0E569F19259F2D8F0022DFB8 /* GracefulVPN.swift */,
 				0E45E70F22BE108100F19312 /* OpenVPNOptions.swift */,
 				0E89DFC4213DF7AE00741BA1 /* Preferences.swift */,
-				0E569F1B259F2D8F0022DFB8 /* Product.swift */,
 				0E569F1A259F2D8F0022DFB8 /* ProductManager.swift */,
 				0EFB901722764689006405E4 /* ProfileNetworkSettings.swift */,
 				0E89DFC7213E8FC500741BA1 /* SessionProxy+Communication.swift */,
@@ -1865,7 +1865,7 @@
 				0E3152C0223FA03D00F61841 /* Utils.swift in Sources */,
 				0E3152CB223FA04D00F61841 /* Pool.swift in Sources */,
 				0E3CAFC0229AAE770008E5C8 /* Intents.intentdefinition in Sources */,
-				0E569F20259F2D8F0022DFB8 /* Product.swift in Sources */,
+				0E569F20259F2D8F0022DFB8 /* Feature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1964,7 +1964,7 @@
 				0E5204CD259F675400CBAB56 /* Infrastructure+Name.swift in Sources */,
 				0E5204CC259F675400CBAB56 /* HostConnectionProfile.swift in Sources */,
 				0E5204B7259F674000CBAB56 /* AppConstants.swift in Sources */,
-				0E5204C7259F675400CBAB56 /* Product.swift in Sources */,
+				0E5204C7259F675400CBAB56 /* Feature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

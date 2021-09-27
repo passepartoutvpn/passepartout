@@ -32,7 +32,7 @@ import Convenience
 private let log = SwiftyBeaver.self
 
 protocol PurchaseViewControllerDelegate: AnyObject {
-    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: Product?)
+    func purchaseController(_ purchaseController: PurchaseViewController, didPurchase product: LocalProduct?)
 }
 
 class PurchaseViewController: NSViewController {
@@ -52,7 +52,7 @@ class PurchaseViewController: NSViewController {
 
     @IBOutlet private weak var buttonRestore: NSButton!
 
-    var feature: Product?
+    var feature: LocalProduct?
     
     weak var delegate: PurchaseViewControllerDelegate?
 
@@ -191,7 +191,7 @@ class PurchaseViewController: NSViewController {
             guard let weakSelf = self else {
                 return
             }
-            let product = Product(rawValue: skProduct.productIdentifier)
+            let product = LocalProduct(rawValue: skProduct.productIdentifier)
             weakSelf.delegate?.purchaseController(weakSelf, didPurchase: product)
 
             self?.dismiss(nil)

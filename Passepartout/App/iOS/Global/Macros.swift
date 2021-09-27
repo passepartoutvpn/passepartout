@@ -64,7 +64,7 @@ extension UIColor {
 }
 
 extension UIViewController {
-    func presentPurchaseScreen(forProduct product: Product, delegate: PurchaseViewControllerDelegate? = nil) {
+    func presentPurchaseScreen(forProduct product: LocalProduct, delegate: PurchaseViewControllerDelegate? = nil) {
         let nav = StoryboardScene.Purchase.initialScene.instantiate()
         let vc = nav.topViewController as? PurchaseViewController
 //        vc?.feature = product

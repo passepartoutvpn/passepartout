@@ -358,11 +358,11 @@ public class AppConstants {
             return ProcessInfo.processInfo.environment["FULL_VERSION"] != nil
         }
 
-        static let lastFullVersionBuild: (Int, Product) = (2016, .fullVersion_iOS)
+        static let lastFullVersionBuild: (Int, LocalProduct) = (2016, .fullVersion_iOS)
         #else
         static let isBetaFullVersion = false
 
-        static let lastFullVersionBuild: (Int, Product) = (0, .fullVersion_macOS)
+        static let lastFullVersionBuild: (Int, LocalProduct) = (0, .fullVersion_macOS)
         #endif
     }
 }

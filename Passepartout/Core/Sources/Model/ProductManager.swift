@@ -44,12 +44,12 @@ public class ProductManager: NSObject {
         
         public let isBetaFullVersion: Bool
 
-        public let lastFullVersionBuild: (Int, Product)
+        public let lastFullVersionBuild: (Int, LocalProduct)
         
         public init(
             locksBetaFeatures: Bool,
             isBetaFullVersion: Bool,
-            lastFullVersionBuild: (Int, Product)
+            lastFullVersionBuild: (Int, LocalProduct)
         ) {
             self.locksBetaFeatures = locksBetaFeatures
             self.isBetaFullVersion = isBetaFullVersion
@@ -63,15 +63,15 @@ public class ProductManager: NSObject {
     
     public let cfg: Configuration
 
-    private let inApp: InApp<Product>
+    private let inApp: InApp<LocalProduct>
     
     private var purchasedAppBuild: Int?
     
-    private var purchasedFeatures: Set<Product>
+    private var purchasedFeatures: Set<LocalProduct>
     
-    private var purchaseDates: [Product: Date]
+    private var purchaseDates: [LocalProduct: Date]
     
-    private var cancelledPurchases: Set<Product>
+    private var cancelledPurchases: Set<LocalProduct>
     
     private var refreshRequest: SKReceiptRefreshRequest?
     
@@ -108,7 +108,7 @@ public class ProductManager: NSObject {
     }
 
     public func listProducts(completionHandler: (([SKProduct]?, Error?) -> Void)?) {
-        let products = Product.all
+        let products = LocalProduct.all
         guard !products.isEmpty else {
             completionHandler?(nil, nil)
             return
@@ -122,13 +122,13 @@ public class ProductManager: NSObject {
         })
     }
 
-    public func product(withIdentifier identifier: Product) -> SKProduct? {
+    public func product(withIdentifier identifier: LocalProduct) -> SKProduct? {
         return inApp.product(withIdentifier: identifier)
     }
     
-    public func featureProducts(including: [Product]) -> [SKProduct] {
+    public func featureProducts(including: [LocalProduct]) -> [SKProduct] {
         return inApp.products.filter {
-            guard let p = Product(rawValue: $0.productIdentifier) else {
+            guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
             guard including.contains(p) else {
@@ -141,9 +141,9 @@ public class ProductManager: NSObject {
         }
     }
     
-    public func featureProducts(excluding: [Product]) -> [SKProduct] {
+    public func featureProducts(excluding: [LocalProduct]) -> [SKProduct] {
         return inApp.products.filter {
-            guard let p = Product(rawValue: $0.productIdentifier) else {
+            guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
             guard !excluding.contains(p) else {
@@ -192,7 +192,7 @@ public class ProductManager: NSObject {
         return purchasedFeatures.contains(.fullVersion)
     }
 
-    private func isEligible(forFeature feature: Product) -> Bool {
+    private func isEligible(forFeature feature: LocalProduct) -> Bool {
         #if os(iOS)
         return isFullVersion() || purchasedFeatures.contains(feature)
         #else
@@ -204,7 +204,7 @@ public class ProductManager: NSObject {
         return isBeta || !purchasedFeatures.isEmpty
     }
     
-    public func verifyEligible(forFeature feature: Product) throws {
+    public func verifyEligible(forFeature feature: LocalProduct) throws {
         if isBeta {
             if cfg.isBetaFullVersion {
                 return
@@ -232,15 +232,15 @@ public class ProductManager: NSObject {
         }
     }
 
-    public func hasPurchased(_ product: Product) -> Bool {
+    public func hasPurchased(_ product: LocalProduct) -> Bool {
         return purchasedFeatures.contains(product)
     }
 
-    public func isCancelledPurchase(_ product: Product) -> Bool {
+    public func isCancelledPurchase(_ product: LocalProduct) -> Bool {
         return cancelledPurchases.contains(product)
     }
     
-    public func purchaseDate(forProduct product: Product) -> Date? {
+    public func purchaseDate(forProduct product: LocalProduct) -> Date? {
         return purchaseDates[product]
     }
 
@@ -273,7 +273,7 @@ public class ProductManager: NSObject {
             
             log.debug("In-app receipts:")
             iapReceipts.forEach {
-                guard let pid = $0.productIdentifier, let product = Product(rawValue: pid) else {
+                guard let pid = $0.productIdentifier, let product = LocalProduct(rawValue: pid) else {
                     return
                 }
                 if let cancellationDate = $0.cancellationDate {
