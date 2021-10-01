@@ -61,12 +61,19 @@ jobs:
           ci/update-certs.sh mac development
           ci/update-certs.sh ios development
       - name: Build (macOS)
-        run: ci/beta-archive.sh mac
+        run: |
+          ci/beta-archive.sh mac
       - name: Clean up
-        run: scripts/reset-archive.sh
+        run: |
+          scripts/reset-archive.sh
       - name: Build (iOS)
-        run: ci/beta-archive.sh ios
+        run: |
+          ci/beta-archive.sh ios
       - name: Send to App Store (macOS)
-        run: ci/store-deploy.sh mac
+        run: |
+          ci/set-build-changelog.sh mac
+          ci/store-deploy.sh mac
       - name: Submit to TestFlight (iOS)
-        run: ci/beta-deploy.sh ios
+        run: |
+          ci/set-build-changelog.sh ios
+          ci/beta-deploy.sh ios
