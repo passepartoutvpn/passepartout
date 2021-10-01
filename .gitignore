@@ -20,3 +20,5 @@ l10n
 passepartout-translations.zip
 default.profraw
 asc-key.json
+.bundle
+vendor/
