@@ -63,12 +63,11 @@ jobs:
       - name: Build (macOS)
         run: |
           ci/beta-archive.sh mac
-      - name: Clean up
-        run: |
           scripts/reset-archive.sh
       - name: Build (iOS)
         run: |
           ci/beta-archive.sh ios
+          scripts/reset-archive.sh
       - name: Send to App Store (macOS)
         run: |
           ci/set-build-changelog.sh mac
