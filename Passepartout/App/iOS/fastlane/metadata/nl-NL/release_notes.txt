@@ -1,5 +1,4 @@
-### Added
+### Fixed
 
-- Support for `--scramble xormask`.
-- Oeck provider.
+- Missing account guidance footer in some providers.
 
