@@ -13,8 +13,6 @@ Pods
 **/fastlane/metadata/trade_representative_contact_information
 build/
 dist/
-templates/CHANGELOG.ios.md
-templates/CHANGELOG.mac.md
 templates/new-strings.txt
 iap/
 .env.secret*

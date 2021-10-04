@@ -25,6 +25,7 @@ env:
   PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
   PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
   PILOT_BETA_APP_FEEDBACK: ${{ secrets.PILOT_BETA_APP_FEEDBACK }}
+  PILOT_BETA_APP_REVIEW_INFO: ${{ secrets.PILOT_BETA_APP_REVIEW_INFO }}
   APPCENTER_OWNER_NAME: ${{ secrets.APPCENTER_OWNER_NAME }}
   APPCENTER_API_TOKEN: ${{ secrets.APPCENTER_API_TOKEN }}
 
@@ -57,22 +58,18 @@ jobs:
       - name: Prepare for fastlane match
         run: |
           scripts/recognize-match-hostname.sh
-          bundle exec fastlane run create_keychain name:"$MATCH_KEYCHAIN_NAME" password:"$MATCH_KEYCHAIN_PASSWORD"
-          ci/update-certs.sh mac development
-          ci/update-certs.sh ios development
+          bundle exec fastlane preinstall_development_certs
       - name: Build (macOS)
         run: |
-          ci/beta-archive.sh mac
+          bundle exec fastlane --env mac,beta create_archive
           scripts/reset-archive.sh
       - name: Build (iOS)
         run: |
-          ci/beta-archive.sh ios
+          bundle exec fastlane --env ios,beta create_archive
           scripts/reset-archive.sh
-      - name: Send to App Store (macOS)
+      - name: Submit to TestFlight (macOS)
         run: |
-          ci/set-build-changelog.sh mac
-          ci/store-deploy.sh mac
+          PILOT_CHANGELOG=`ci/build-changelog.sh mac` bundle exec fastlane --env mac,beta beta_deploy
       - name: Submit to TestFlight (iOS)
         run: |
-          ci/set-build-changelog.sh ios
-          ci/beta-deploy.sh ios
+          PILOT_CHANGELOG=`ci/build-changelog.sh ios` bundle exec fastlane --env ios,beta beta_deploy

@@ -1,8 +1,8 @@
 type "development" # The default type, can be: appstore, adhoc, enterprise or development
 
 app_identifier [
-    "com.algoritmico.#{ENV['BUNDLE_CONTEXT']}.Passepartout",
-    "com.algoritmico.#{ENV['BUNDLE_CONTEXT']}.Passepartout.Tunnel"
+    "com.algoritmico.ios.Passepartout",
+    "com.algoritmico.ios.Passepartout.Tunnel"
 ]
 
 # For all available options run `fastlane match --help`

@@ -10,9 +10,8 @@
 
 # sdk "iphoneos9.0"
 
-build_target = ENV["TARGET"]
-stage_build_path = "#{ENV["BUILD_PATH"]}/#{ENV["PLATFORM"]}/#{build_target}"
-stage_artifacts_path = "#{ENV["DIST_PATH"]}/#{ENV["PLATFORM"]}/#{build_target}"
+stage_build_path = "#{ENV["BUILD_PATH"]}/#{ENV["PLATFORM"]}/#{ENV["TARGET"]}"
+stage_artifacts_path = "#{ENV["DIST_PATH"]}/#{ENV["PLATFORM"]}/#{ENV["TARGET"]}"
 
 derived_data_path stage_build_path
 buildlog_path stage_build_path
