@@ -1,1 +1,1 @@
-DeskApps.Utilities
+UTILITIES
