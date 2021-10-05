@@ -5,10 +5,10 @@ if [[ $CURRENT_BRANCH != "master" ]]; then
     exit
 fi
 
-ci/update-changelog.sh ios
-ci/update-changelog.sh mac
-ci/copy-release-notes.sh ios
-ci/copy-release-notes.sh mac
+ci/update-changelog.sh ios &&
+    ci/update-changelog.sh mac &&
+    ci/copy-release-notes.sh ios &&
+    ci/copy-release-notes.sh mac
 
 git add Passepartout/App/*/CHANGELOG.md
 git add Passepartout/App/*/fastlane/metadata/*/release_notes.txt
