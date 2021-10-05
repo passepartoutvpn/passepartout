@@ -35,7 +35,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.17.0</string>
 	<key>CFBundleVersion</key>
-	<string>1010</string>
+	<string>1020</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
