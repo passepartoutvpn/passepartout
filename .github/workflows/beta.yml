@@ -30,7 +30,7 @@ env:
   APPCENTER_API_TOKEN: ${{ secrets.APPCENTER_API_TOKEN }}
 
 jobs:
-  submit_appstore:
+  upload_to_testflight:
     runs-on: macos-10.15
     timeout-minutes: 60
     steps:
@@ -57,16 +57,16 @@ jobs:
             ${{ runner.os }}-pods-
       - name: Prepare for fastlane match
         run: |
-          scripts/recognize-match-hostname.sh
+          scripts/ci/recognize-match-hostname.sh
           bundle exec fastlane preinstall_development_certs
       - name: Build (macOS)
         run: |
           bundle exec fastlane --env mac,beta create_archive
-          scripts/reset-archive.sh
+          scripts/ci/reset-archive.sh
       - name: Build (iOS)
         run: |
           bundle exec fastlane --env ios,beta create_archive
-          scripts/reset-archive.sh
+          scripts/ci/reset-archive.sh
       - name: Submit to TestFlight (macOS)
         run: |
           PILOT_CHANGELOG=`ci/build-changelog.sh mac` bundle exec fastlane --env mac,beta beta_deploy
