@@ -99,3 +99,32 @@ jobs:
           export PILOT_CHANGELOG=`ci/build-changelog.sh ios`
           export PILOT_BUILD_NUMBER=`ci/build-number.sh`
           bundle exec fastlane --env ios,beta beta_deploy
+  submit_for_app_review:
+    runs-on: macos-10.15
+    needs: submit_to_testflight
+    environment:
+      name: app_review
+    env:
+      DELIVER_USERNAME: ${{ secrets.DELIVER_USERNAME }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Prepare Ruby bundle
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Update App Store Connect metadata (macOS)
+        run: |
+          ci/update-asc-metadata.sh mac
+      - name: Update App Store Connect metadata (iOS)
+        run: |
+          ci/update-asc-metadata.sh ios
+      - name: Submit for App Review (macOS)
+        run: |
+          bundle exec fastlane --env mac store_review
+      - name: Submit for App Review (iOS)
+        run: |
+          bundle exec fastlane --env ios store_review
