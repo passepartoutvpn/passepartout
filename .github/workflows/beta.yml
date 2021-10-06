@@ -58,17 +58,15 @@ jobs:
       - name: Build (macOS)
         run: |
           bundle exec fastlane --env mac,beta create_archive
-          scripts/ci/reset-archive.sh
       - name: Build (iOS)
         run: |
           bundle exec fastlane --env ios,beta create_archive
-          scripts/ci/reset-archive.sh
       - name: Upload to App Store (macOS)
         run: |
-          bundle exec fastlane --env mac,beta store_deploy
+          bundle exec fastlane --env mac,beta store_upload
       - name: Upload to App Store (iOS)
         run: |
-          bundle exec fastlane --env ios,beta store_deploy
+          bundle exec fastlane --env ios,beta store_upload
   submit_to_testflight:
     runs-on: macos-10.15
     needs: upload_to_app_store
@@ -92,13 +90,11 @@ jobs:
       - name: Submit to TestFlight (macOS)
         run: |
           export PILOT_CHANGELOG=`ci/build-changelog.sh mac`
-          export PILOT_BUILD_NUMBER=`ci/build-number.sh`
-          bundle exec fastlane --env mac,beta beta_deploy
+          bundle exec fastlane --env mac,beta store_beta
       - name: Submit to TestFlight (iOS)
         run: |
           export PILOT_CHANGELOG=`ci/build-changelog.sh ios`
-          export PILOT_BUILD_NUMBER=`ci/build-number.sh`
-          bundle exec fastlane --env ios,beta beta_deploy
+          bundle exec fastlane --env ios,beta store_beta
   submit_for_app_review:
     runs-on: macos-10.15
     needs: submit_to_testflight
@@ -118,10 +114,10 @@ jobs:
           bundler-cache: true
       - name: Update App Store Connect metadata (macOS)
         run: |
-          ci/update-asc-metadata.sh mac
+          bundle exec fastlane --env mac update_metadata
       - name: Update App Store Connect metadata (iOS)
         run: |
-          ci/update-asc-metadata.sh ios
+          bundle exec fastlane --env ios update_metadata
       - name: Submit for App Review (macOS)
         run: |
           bundle exec fastlane --env mac store_review
