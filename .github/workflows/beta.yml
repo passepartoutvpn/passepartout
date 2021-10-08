@@ -2,11 +2,10 @@ name: beta
 
 on:
   push:
-    #branches:
-    #  - master
-    #  - stable
-    tags:
-      - 'v*-b*'
+    branches:
+      - stable
+    #tags:
+    #  - 'v*-b*'
     #tags-ignore:
     #  - 'v*-*'
 
