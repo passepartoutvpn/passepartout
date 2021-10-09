@@ -122,8 +122,8 @@ jobs:
       - name: Submit for App Review (macOS)
         run: |
           export DELIVER_BUILD_NUMBER=`ci/build-number.sh mac`
-          bundle exec fastlane --env mac store_review
+          bundle exec fastlane --env mac store_review add_id_info_uses_idfa:false
       - name: Submit for App Review (iOS)
         run: |
           export DELIVER_BUILD_NUMBER=`ci/build-number.sh ios`
-          bundle exec fastlane --env ios store_review
+          bundle exec fastlane --env ios store_review add_id_info_uses_idfa:false
