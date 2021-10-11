@@ -10,7 +10,7 @@
 
 # sdk "iphoneos9.0"
 
-output_directory ENV["DIST_PATH"]
+output_directory "dist/#{ENV["PLATFORM"]}"
 
 clean true
 silent false
