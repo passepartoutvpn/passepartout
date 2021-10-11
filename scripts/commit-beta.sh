@@ -14,6 +14,6 @@ git add Passepartout/App/*/CHANGELOG.md
 git add Passepartout/App/*/fastlane/metadata/*/release_notes.txt
 git commit -m "Set beta release"
 
-VERSION=`ci/version-number.sh`
-BUILD=`ci/build-number.sh`
+VERSION=`ci/version-number.sh ios`
+BUILD=`ci/build-number.sh ios`
 git tag "v$VERSION-b$BUILD"

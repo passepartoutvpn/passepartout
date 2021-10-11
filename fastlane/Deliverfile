@@ -5,13 +5,10 @@
 screenshots_path "#{ENV["APP_ROOT"]}/fastlane/screenshots"
 metadata_path "#{ENV["APP_ROOT"]}/fastlane/metadata"
 
-if not ENV["TARGET"].nil?
-    binary_path = "#{ENV["DIST_PATH"]}/#{ENV["PLATFORM"]}/#{ENV["TARGET"]}"
-    if ENV["PLATFORM"] == "ios"
-        ipa "#{binary_path}/#{ENV["APP_NAME"]}.ipa"
-    else
-        pkg "#{binary_path}/#{ENV["APP_NAME"]}.pkg"
-    end
+if ENV["PLATFORM"] == "ios"
+    ipa "dist/ios/Passepartout.ipa"
+else
+    pkg "dist/mac/Passepartout.pkg"
 end
 
 skip_binary_upload true
