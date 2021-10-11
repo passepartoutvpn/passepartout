@@ -21,7 +21,7 @@ PODS:
   - Kvitto/Core (1.0.6):
     - DTFoundation/DTASN1 (~> 1.7.17)
   - MBProgressHUD (1.2.0)
-  - OpenSSL-Apple (1.1.1k.11)
+  - OpenSSL-Apple (1.1.1l.11)
   - SSZipArchive (2.4.2)
   - SwiftyBeaver (1.9.5)
   - TunnelKit/AppExtension (3.5.0):
@@ -33,7 +33,7 @@ PODS:
   - TunnelKit/Manager (3.5.0):
     - SwiftyBeaver
   - TunnelKit/Protocols/OpenVPN (3.5.0):
-    - OpenSSL-Apple (~> 1.1.1k.11)
+    - OpenSSL-Apple (~> 1.1.1l.11)
     - TunnelKit/AppExtension
     - TunnelKit/Core
     - TunnelKit/Manager
@@ -52,8 +52,8 @@ DEPENDENCIES:
   - Kvitto
   - MBProgressHUD
   - SSZipArchive
-  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `27ca294`)
-  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `27ca294`)
+  - TunnelKit/Extra/LZO (from `https://github.com/passepartoutvpn/tunnelkit`, commit `16c0041`)
+  - TunnelKit/Protocols/OpenVPN (from `https://github.com/passepartoutvpn/tunnelkit`, commit `16c0041`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -69,7 +69,7 @@ EXTERNAL SOURCES:
     :commit: 5ed1fe0
     :git: https://github.com/keeshux/convenience
   TunnelKit:
-    :commit: 27ca294
+    :commit: 16c0041
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 CHECKOUT OPTIONS:
@@ -77,7 +77,7 @@ CHECKOUT OPTIONS:
     :commit: 5ed1fe0
     :git: https://github.com/keeshux/convenience
   TunnelKit:
-    :commit: 27ca294
+    :commit: 16c0041
     :git: https://github.com/passepartoutvpn/tunnelkit
 
 SPEC CHECKSUMS:
@@ -85,11 +85,11 @@ SPEC CHECKSUMS:
   DTFoundation: a53f8cda2489208cbc71c648be177f902ee17536
   Kvitto: f02b3f84d84a383504fc57cfe824934c7ed782c0
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OpenSSL-Apple: 3104e6d32de21815b68aeba31edaa6a78d90e7e0
+  OpenSSL-Apple: fb93d9a7ce4529054764ce19bb80947a38aee09b
   SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
-  TunnelKit: 3eee96d9243628c0714d6fa80b5f17eae54dc6de
+  TunnelKit: be4aff5e8f9c0d274e9e7462cf9bfdfa947440b2
 
-PODFILE CHECKSUM: 20aa3334c0c0e60055b7f72067f4e248eca84e88
+PODFILE CHECKSUM: 53169a5219e2a8900c62883e07b0fd96685bd8f0
 
 COCOAPODS: 1.11.2
