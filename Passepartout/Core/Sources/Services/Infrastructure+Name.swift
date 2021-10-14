@@ -39,6 +39,8 @@ extension Infrastructure.Name {
 
     public static let nordvpn = "nordvpn"
 
+    public static let oeck = "oeck"
+
     public static let pia = "pia"
 
     public static let protonvpn = "protonvpn"

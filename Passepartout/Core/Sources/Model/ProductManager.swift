@@ -227,6 +227,9 @@ public class ProductManager: NSObject {
                 throw ProductError.beta
             }
         }
+        guard metadata.name != .oeck else {
+            return
+        }
         guard isEligible(forFeature: metadata.product) else {
             throw ProductError.uneligible
         }
