@@ -5,12 +5,6 @@
 screenshots_path "#{ENV["APP_ROOT"]}/fastlane/screenshots"
 metadata_path "#{ENV["APP_ROOT"]}/fastlane/metadata"
 
-if ENV["PLATFORM"] == "ios"
-    ipa "dist/ios/Passepartout.ipa"
-else
-    pkg "dist/mac/Passepartout.pkg"
-end
-
 skip_binary_upload true
 skip_metadata false
 skip_screenshots false
