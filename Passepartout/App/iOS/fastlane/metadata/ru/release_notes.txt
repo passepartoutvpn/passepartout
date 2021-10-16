@@ -1,3 +1,7 @@
+### Changed
+
+- Allow Oeck provider without any purchase.
+
 ### Fixed
 
 - Missing account guidance footer in some providers.

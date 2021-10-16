@@ -1,3 +1,7 @@
+### Changed
+
+- Allow Oeck provider without any purchase.
+
 ### Fixed
 
 - Location areas were not sorted in menu.
