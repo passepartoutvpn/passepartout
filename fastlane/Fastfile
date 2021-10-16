@@ -21,7 +21,6 @@ lane :preinstall_development_certs do
         name: ENV["MATCH_KEYCHAIN_NAME"],
         password: ENV["MATCH_KEYCHAIN_PASSWORD"]
     )
-    app_store_connect_api_key
     match(
         platform: "macos",
         type: "development"
