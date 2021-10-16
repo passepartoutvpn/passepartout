@@ -119,6 +119,7 @@ jobs:
       name: app_review
     env:
       DELIVER_USERNAME: ${{ secrets.DELIVER_USERNAME }}
+      DELIVER_FORCE: true
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
