@@ -88,10 +88,22 @@ struct Theme {
 
 extension Theme {
     func applyAppearance() {
+        if #available(iOS 15, *) {
+            let navBar = UINavigationBarAppearance()
+            navBar.configureWithOpaqueBackground()
+            navBar.backgroundColor = palette.primaryBackground
+            navBar.titleTextAttributes = [.foregroundColor: palette.primaryLightText]
+            navBar.buttonAppearance.normal.titleTextAttributes = navBar.titleTextAttributes
+            navBar.doneButtonAppearance.normal.titleTextAttributes = navBar.titleTextAttributes
+            let appearance = UINavigationBar.appearance()
+            appearance.standardAppearance = navBar
+            appearance.scrollEdgeAppearance = appearance.standardAppearance
+        }
+        
         let bar = UINavigationBar.appearance()
         bar.barTintColor = palette.primaryBackground
         bar.tintColor = palette.primaryLightText
-        bar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: palette.primaryLightText]
+        bar.titleTextAttributes = [.foregroundColor: palette.primaryLightText]
         bar.largeTitleTextAttributes = bar.titleTextAttributes
         
         let pickerBar = UINavigationBar.appearance(whenContainedInInstancesOf: [UIDocumentBrowserViewController.self])

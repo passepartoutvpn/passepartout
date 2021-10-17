@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- iOS 15: Navigation bar has broken appearance.
 - Missing account guidance footer in some providers.
 - Files imported via Music (iTunes) File Sharing did not show up.
 
