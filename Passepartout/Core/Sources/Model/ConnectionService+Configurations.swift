@@ -59,7 +59,8 @@ public extension ConnectionService {
     
     func pendingConfigurationURLs() -> [URL] {
         do {
-            let list = try FileManager.default.contentsOfDirectory(at: rootURL, includingPropertiesForKeys: nil, options: [])
+            let url = FileManager.default.userURL(for: .documentDirectory, appending: nil)
+            let list = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [])
             return list.filter { $0.pathExtension == "ovpn" }
         } catch let e {
             log.error("Could not list imported configurations: \(e)")
