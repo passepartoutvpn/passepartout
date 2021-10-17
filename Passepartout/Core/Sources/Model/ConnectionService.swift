@@ -65,14 +65,8 @@ public class ConnectionService: Codable {
 
     public static let didUpdateDataCount = Notification.Name("ConnectionServiceDidUpdateDataCount")
 
-    public var directory: String? = nil
-    
     public var rootURL: URL {
-        var url = GroupConstants.App.documentsURL
-        if let directory = directory {
-            url.appendPathComponent(directory)
-        }
-        return url
+        return GroupConstants.App.documentsURL
     }
     
     var providersURL: URL {
