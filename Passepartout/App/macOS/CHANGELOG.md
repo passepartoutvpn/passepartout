@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Allow Oeck provider without any purchase.
+- Status bar icon color had to be dropped in order to automatically adjust to desktop background color.
 
 ### Fixed
 
