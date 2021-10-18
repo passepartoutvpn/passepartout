@@ -130,12 +130,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Update App Store Connect metadata (macOS)
-        run: |
-          bundle exec fastlane --env mac update_metadata
-      - name: Update App Store Connect metadata (iOS)
-        run: |
-          bundle exec fastlane --env ios update_metadata
       - name: Submit for App Review (macOS)
         run: |
           export DELIVER_BUILD_NUMBER=`ci/build-number.sh mac`
