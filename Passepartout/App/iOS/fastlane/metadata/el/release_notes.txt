@@ -4,5 +4,7 @@
 
 ### Fixed
 
+- iOS 15: Navigation bar has broken appearance.
 - Missing account guidance footer in some providers.
+- Files imported via Music (iTunes) File Sharing did not show up.
 
