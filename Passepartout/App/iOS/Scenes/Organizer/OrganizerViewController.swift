@@ -59,11 +59,6 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
             model.add(.siri)
         }
         model.add(.support)
-        if ProductManager.shared.isEligibleForFeedback() {
-            model.add(.feedback)
-            model.setHeader(L10n.Organizer.Sections.Feedback.header, forSection: .feedback)
-            model.set([.writeReview], forSection: .feedback)
-        }
         model.add(.about)
         model.add(.destruction)
         model.setHeader(L10n.Service.Sections.Vpn.header, forSection: .vpn)
@@ -78,7 +73,11 @@ class OrganizerViewController: UITableViewController, StrongTableHost {
         }
         model.setHeader(L10n.Organizer.Sections.Support.header, forSection: .support)
         model.set([.connectionStatus], forSection: .vpn)
-        model.set([.donate, .githubSponsors, .joinCommunity], forSection: .support)
+        if ProductManager.shared.isEligibleForFeedback() {
+            model.set([.donate, .joinCommunity, .writeReview], forSection: .support)
+        } else {
+            model.set([.donate, .joinCommunity], forSection: .support)
+        }
 
         model.set([.openAbout], forSection: .about)
         model.set([.uninstall], forSection: .destruction)
@@ -424,8 +423,6 @@ extension OrganizerViewController {
         
         case support
         
-        case feedback
-
         case about
         
         case destruction
