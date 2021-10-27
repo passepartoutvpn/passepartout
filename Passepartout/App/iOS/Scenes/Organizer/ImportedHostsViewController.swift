@@ -24,8 +24,9 @@
 //
 
 import UIKit
-import TunnelKit
+import TunnelKitCore
 import SwiftyBeaver
+import PassepartoutConstants
 import PassepartoutCore
 
 private let log = SwiftyBeaver.self

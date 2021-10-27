@@ -22,3 +22,5 @@ default.profraw
 asc-key.json
 .bundle
 vendor/
+.build
+.swiftpm

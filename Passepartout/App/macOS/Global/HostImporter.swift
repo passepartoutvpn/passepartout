@@ -23,10 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import Cocoa
+import PassepartoutConstants
 import PassepartoutCore
-import TunnelKit
 import SwiftyBeaver
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 private let log = SwiftyBeaver.self
 

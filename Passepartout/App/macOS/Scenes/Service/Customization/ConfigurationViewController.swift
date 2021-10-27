@@ -24,8 +24,9 @@
 //
 
 import Cocoa
+import PassepartoutConstants
 import PassepartoutCore
-import TunnelKit
+import TunnelKitOpenVPN
 
 class ConfigurationViewController: NSViewController, ProfileCustomization {
     private struct Columns {

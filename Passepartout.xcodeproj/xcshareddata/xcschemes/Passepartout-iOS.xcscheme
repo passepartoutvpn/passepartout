@@ -51,16 +51,6 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E9AA98C259F779F003FAFF1"
-               BuildableName = "PassepartoutCoreTests-iOS.xctest"
-               BlueprintName = "PassepartoutCoreTests-iOS"
-               ReferencedContainer = "container:Passepartout.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

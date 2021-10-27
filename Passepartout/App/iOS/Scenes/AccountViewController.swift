@@ -24,8 +24,9 @@
 //
 
 import UIKit
+import PassepartoutConstants
 import PassepartoutCore
-import Convenience
+import ConvenienceUI
 
 protocol AccountViewControllerDelegate: AnyObject {
     func accountController(_: AccountViewController, didEnterCredentials credentials: Credentials)
@@ -44,7 +45,7 @@ class AccountViewController: UIViewController, StrongTableHost {
     
     var usernamePlaceholder: String?
     
-    var infrastructureName: Infrastructure.Name? {
+    var infrastructureName: InfrastructureName? {
         didSet {
             reloadModel()
             tableView?.reloadData()

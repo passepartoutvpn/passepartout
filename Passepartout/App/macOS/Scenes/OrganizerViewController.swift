@@ -24,9 +24,10 @@
 //
 
 import Cocoa
-import PassepartoutCore
-import TunnelKit
 import SwiftyBeaver
+import PassepartoutConstants
+import PassepartoutCore
+import TunnelKitManager
 
 private let log = SwiftyBeaver.self
 
@@ -205,7 +206,7 @@ class OrganizerViewController: NSViewController {
         } else if let vc = segue.destinationController as? AccountViewController {
 
             // add provider -> account
-            if let name = sender as? Infrastructure.Name {
+            if let name = sender as? InfrastructureName {
                 vc.profile = ProviderConnectionProfile(name: name)
             }
             // add host -> rename -> account

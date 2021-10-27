@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0E5203B4259F5F3F00CBAB56"
+               BuildableName = "PassepartoutTunnel.appex"
+               BlueprintName = "PassepartoutTunnel-macOS"
+               ReferencedContainer = "container:Passepartout.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,16 +42,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E9AA9B9259F7821003FAFF1"
-               BuildableName = "PassepartoutCoreTests-macOS.xctest"
-               BlueprintName = "PassepartoutCoreTests-macOS"
-               ReferencedContainer = "container:Passepartout.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

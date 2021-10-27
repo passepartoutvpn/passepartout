@@ -25,8 +25,9 @@
 
 import UIKit
 import SwiftyBeaver
+import PassepartoutConstants
 import PassepartoutCore
-import TunnelKit
+import TunnelKitManager
 
 private let log = SwiftyBeaver.self
 
@@ -111,7 +112,7 @@ class DebugLogViewController: UIViewController {
     }
         
     private func startRefreshingLog() {
-        vpn.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
+        vpn.requestDebugLog(fallback: TransientStore.shared.debugSnapshot) {
             self.textLog?.text = $0
             
             DispatchQueue.main.async {
@@ -134,7 +135,7 @@ class DebugLogViewController: UIViewController {
             return
         }
 
-        vpn.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
+        vpn.requestDebugLog(fallback: TransientStore.shared.debugSnapshot) {
             self.textLog?.text = $0
             updateBlock()
         }

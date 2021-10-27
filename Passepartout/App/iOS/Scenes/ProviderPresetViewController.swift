@@ -24,6 +24,7 @@
 //
 
 import UIKit
+import PassepartoutConstants
 import PassepartoutCore
 
 protocol ProviderPresetViewControllerDelegate: AnyObject {

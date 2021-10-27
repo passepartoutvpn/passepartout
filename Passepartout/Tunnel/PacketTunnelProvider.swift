@@ -23,7 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import TunnelKit
+import Foundation
+import TunnelKitOpenVPN
+import PassepartoutConstants
 
 class PacketTunnelProvider: OpenVPNTunnelProvider {
     override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {

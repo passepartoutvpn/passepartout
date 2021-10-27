@@ -45,14 +45,6 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
-      - name: Cache CocoaPods
-        uses: actions/cache@v2
-        with:
-          path: |
-            Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
       - name: Prepare for fastlane match
         run: |
           scripts/ci/recognize-match-hostname.sh
@@ -101,12 +93,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Submit to TestFlight (macOS)
+      - name: Publish on TestFlight (macOS)
         run: |
           export PILOT_APP_VERSION=`ci/version-number.sh mac`
           export PILOT_BUILD_NUMBER=`ci/build-number.sh mac`
           bundle exec fastlane --env mac,beta store_beta
-      - name: Submit to TestFlight (iOS)
+      - name: Publish on TestFlight (iOS)
         run: |
           export PILOT_APP_VERSION=`ci/version-number.sh ios`
           export PILOT_BUILD_NUMBER=`ci/build-number.sh ios`

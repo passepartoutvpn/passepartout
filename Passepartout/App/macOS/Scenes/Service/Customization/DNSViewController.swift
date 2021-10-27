@@ -24,8 +24,9 @@
 //
 
 import Cocoa
+import PassepartoutConstants
 import PassepartoutCore
-import TunnelKit
+import TunnelKitCore
 
 class DNSViewController: NSViewController, ProfileCustomization {
     @IBOutlet private weak var popupChoice: NSPopUpButton!

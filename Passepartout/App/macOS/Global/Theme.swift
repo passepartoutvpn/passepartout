@@ -24,6 +24,7 @@
 //
 
 import Cocoa
+import PassepartoutConstants
 import PassepartoutCore
 
 struct Theme {

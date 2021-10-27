@@ -24,8 +24,10 @@
 //
 
 import UIKit
+import PassepartoutConstants
 import PassepartoutCore
 import Convenience
+import ConvenienceUI
 
 class AboutViewController: UITableViewController, StrongTableHost {
 

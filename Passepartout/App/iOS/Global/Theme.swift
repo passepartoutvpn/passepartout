@@ -26,6 +26,7 @@
 import UIKit
 import MessageUI
 import StoreKit
+import PassepartoutConstants
 import PassepartoutCore
 
 struct Theme {

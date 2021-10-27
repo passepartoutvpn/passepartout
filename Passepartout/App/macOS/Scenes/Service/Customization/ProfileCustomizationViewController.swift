@@ -24,8 +24,10 @@
 //
 
 import Cocoa
+import PassepartoutConstants
 import PassepartoutCore
-import TunnelKit
+import TunnelKitCore
+import TunnelKitOpenVPN
 
 protocol ProfileCustomization: AnyObject {
     var profile: ConnectionProfile? { get set }

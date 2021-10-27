@@ -24,9 +24,11 @@
 //
 
 import UIKit
-import TunnelKit
+import PassepartoutConstants
 import PassepartoutCore
-import Convenience
+import TunnelKitManager
+import TunnelKitOpenVPN
+import ConvenienceUI
 
 extension UITableViewCell {
     func applyChecked(_ checked: Bool, _ theme: Theme) {

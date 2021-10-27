@@ -24,8 +24,10 @@
 //
 
 import Cocoa
+import PassepartoutConstants
 import PassepartoutCore
-import TunnelKit
+import TunnelKitManager
+import TunnelKitOpenVPN
 
 extension NSTextField {
     func applyVPN(_ theme: Theme, isActive: Bool, with vpnStatus: VPNStatus?, error: OpenVPNTunnelProvider.ProviderError?) {

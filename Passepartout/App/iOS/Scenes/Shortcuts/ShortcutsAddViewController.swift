@@ -25,8 +25,9 @@
 
 import UIKit
 import Intents
+import PassepartoutConstants
 import PassepartoutCore
-import Convenience
+import ConvenienceUI
 
 @available(iOS 12, *)
 class ShortcutsAddViewController: UITableViewController, StrongTableHost {

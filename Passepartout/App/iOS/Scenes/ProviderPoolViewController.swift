@@ -24,8 +24,9 @@
 //
 
 import UIKit
+import PassepartoutConstants
 import PassepartoutCore
-import Convenience
+import ConvenienceUI
 
 protocol ProviderPoolViewControllerDelegate: AnyObject {
     func providerPoolController(_: ProviderPoolViewController, didSelectPool pool: Pool)

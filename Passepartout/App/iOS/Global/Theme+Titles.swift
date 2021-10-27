@@ -24,7 +24,7 @@
 //
 
 import UIKit
-import Convenience
+import ConvenienceUI
 
 extension StrongTableModel {
     func headerHeight(for section: Int) -> CGFloat {

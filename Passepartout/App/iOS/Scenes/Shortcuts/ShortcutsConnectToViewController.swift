@@ -26,14 +26,15 @@
 import UIKit
 import Intents
 import IntentsUI
+import PassepartoutConstants
 import PassepartoutCore
-import Convenience
+import ConvenienceUI
 
 @available(iOS 12, *)
 class ShortcutsConnectToViewController: UITableViewController, ProviderPoolViewControllerDelegate, StrongTableHost {
     private let service = TransientStore.shared.service
 
-    private var providers: [Infrastructure.Name] = []
+    private var providers: [InfrastructureName] = []
     
     private var hosts: [String] = []
 

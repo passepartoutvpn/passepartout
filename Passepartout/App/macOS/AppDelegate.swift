@@ -24,9 +24,10 @@
 //
 
 import Cocoa
+import PassepartoutConstants
 import PassepartoutCore
 import Convenience
-import TunnelKit
+import TunnelKitCore
 import ServiceManagement
 
 // comment on release

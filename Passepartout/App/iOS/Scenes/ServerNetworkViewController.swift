@@ -24,10 +24,12 @@
 //
 
 import UIKit
-import TunnelKit
 import SwiftyBeaver
+import PassepartoutConstants
 import PassepartoutCore
-import Convenience
+import TunnelKitCore
+import TunnelKitOpenVPN
+import ConvenienceUI
 
 private let log = SwiftyBeaver.self
 

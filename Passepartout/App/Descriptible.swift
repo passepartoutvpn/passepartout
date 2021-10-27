@@ -24,8 +24,11 @@
 //
 
 import Foundation
-import TunnelKit
+import PassepartoutConstants
 import PassepartoutCore
+import TunnelKitCore
+import TunnelKitManager
+import TunnelKitOpenVPN
 
 public protocol UIDescriptible {
     var uiDescription: String { get }

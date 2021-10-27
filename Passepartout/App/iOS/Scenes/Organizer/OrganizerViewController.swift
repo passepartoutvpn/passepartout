@@ -26,10 +26,14 @@
 import UIKit
 import StoreKit
 import MessageUI
-import PassepartoutCore
-import TunnelKit
-import Convenience
 import SystemConfiguration.CaptiveNetwork
+import PassepartoutConstants
+import PassepartoutCore
+import TunnelKitCore
+import TunnelKitManager
+import TunnelKitOpenVPN
+import Convenience
+import ConvenienceUI
 
 // XXX: convoluted due to the separation of provider/host profiles
 

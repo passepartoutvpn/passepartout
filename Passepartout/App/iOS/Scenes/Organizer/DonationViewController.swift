@@ -25,9 +25,11 @@
 
 import UIKit
 import StoreKit
+import SwiftyBeaver
+import PassepartoutConstants
 import PassepartoutCore
 import Convenience
-import SwiftyBeaver
+import ConvenienceUI
 
 private let log = SwiftyBeaver.self
 

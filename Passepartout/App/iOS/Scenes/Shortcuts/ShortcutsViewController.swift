@@ -26,8 +26,9 @@
 import UIKit
 import Intents
 import IntentsUI
+import PassepartoutConstants
 import PassepartoutCore
-import Convenience
+import ConvenienceUI
 
 @available(iOS 12, *)
 protocol ShortcutsIntentDelegate: AnyObject {

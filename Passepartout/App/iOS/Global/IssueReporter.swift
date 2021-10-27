@@ -24,9 +24,11 @@
 //
 
 import Foundation
-import TunnelKit
 import MessageUI
+import PassepartoutConstants
 import PassepartoutCore
+import TunnelKitManager
+import TunnelKitOpenVPN
 
 class IssueReporter: NSObject {
     static let shared = IssueReporter()
@@ -57,7 +59,7 @@ class IssueReporter: NSObject {
         if issue.debugLog {
             let alert = UIAlertController.asAlert(L10n.IssueReporter.title, L10n.IssueReporter.message)
             alert.addPreferredAction(L10n.IssueReporter.Buttons.accept) {
-                VPN.shared.requestDebugLog(fallback: AppConstants.Log.debugSnapshot) {
+                VPN.shared.requestDebugLog(fallback: TransientStore.shared.debugSnapshot) {
                     self.composeEmail(withDebugLog: $0, issue: issue)
                 }
             }

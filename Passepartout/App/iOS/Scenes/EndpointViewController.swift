@@ -24,9 +24,10 @@
 //
 
 import UIKit
-import TunnelKit
+import PassepartoutConstants
 import PassepartoutCore
-import Convenience
+import TunnelKitCore
+import ConvenienceUI
 
 protocol EndpointViewControllerDelegate: AnyObject {
     func endpointController(_: EndpointViewController, didUpdateWithNewAddress newAddress: String?, newProtocol: EndpointProtocol?)

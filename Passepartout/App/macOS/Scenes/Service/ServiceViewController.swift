@@ -24,8 +24,10 @@
 //
 
 import Cocoa
+import PassepartoutConstants
 import PassepartoutCore
-import TunnelKit
+import TunnelKitCore
+import TunnelKitManager
 import SwiftyBeaver
 import Convenience
 
