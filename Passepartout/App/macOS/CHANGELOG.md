@@ -5,12 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.17.0 Beta 2831 (2021-10-18)
+## Unreleased
 
 ### Changed
 
 - Allow Oeck provider without any purchase.
-- Status bar icon color had to be dropped in order to automatically adjust to desktop background color.
+- Drop status bar icon color to automatically adjust to desktop background color. [#199](https://github.com/passepartoutvpn/passepartout-apple/issues/199)
 - Migrate to SwiftPM.
 
 ### Fixed
