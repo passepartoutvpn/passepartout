@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -21,8 +21,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", revision: "3a546ebfbb4cde41496cc719781dbf11477ae161"),
-        .package(name: "Convenience", url: "https://github.com/keeshux/convenience", revision: "c7399a59539308db5a05b6b83fb10e23fcc81426"),
+        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("d1f70171cb09c1e71e0f3cc23fccb7bb7a9a9d42")),
+        .package(name: "Convenience", url: "https://github.com/keeshux/convenience", .revision("5cee4740a365bde746f6bc7e0033cf57a71c2d99")),
         .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0")
     ],
     targets: [

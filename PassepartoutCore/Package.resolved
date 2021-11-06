@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/keeshux/convenience",
         "state": {
           "branch": null,
-          "revision": "c7399a59539308db5a05b6b83fb10e23fcc81426",
+          "revision": "5cee4740a365bde746f6bc7e0033cf57a71c2d99",
           "version": null
         }
       },
@@ -69,7 +69,7 @@
         "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
         "state": {
           "branch": null,
-          "revision": "3a546ebfbb4cde41496cc719781dbf11477ae161",
+          "revision": "d1f70171cb09c1e71e0f3cc23fccb7bb7a9a9d42",
           "version": null
         }
       }
