@@ -52,7 +52,7 @@ jobs:
       - name: Run tests (macOS)
         if: github.ref == 'refs/heads/master'
         run: |
-          bundle exec fastlane --env mac test_target
+          bundle exec fastlane --env mac,beta test_target
       - name: Build (macOS)
         if: github.ref == 'refs/heads/stable'
         run: |
