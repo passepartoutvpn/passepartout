@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitCore
+import TunnelKit
 
 public protocol EndpointDataSource {
     var mainAddress: String? { get }

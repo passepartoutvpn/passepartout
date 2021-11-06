@@ -25,9 +25,8 @@
 
 import Foundation
 import NetworkExtension
-import TunnelKitCore
+import TunnelKit
 import TunnelKitOpenVPN
-import TunnelKitAppExtension
 
 public enum Context: String, Codable {
     case provider
@@ -52,7 +51,7 @@ public protocol ConnectionProfile: AnyObject, EndpointDataSource, CustomStringCo
     
     var serviceDelegate: ConnectionServiceDelegate? { get set }
 
-    func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration
+    func generate(from configuration: OpenVPNProvider.Configuration, preferences: Preferences) throws -> OpenVPNProvider.Configuration
 }
 
 public extension ConnectionProfile {

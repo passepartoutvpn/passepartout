@@ -25,7 +25,6 @@
 
 import UIKit
 import Intents
-import PassepartoutConstants
 import PassepartoutCore
 import ConvenienceUI
 

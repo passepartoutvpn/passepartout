@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitManager
+import TunnelKit
 import TunnelKitOpenVPN
 import PassepartoutConstants
 

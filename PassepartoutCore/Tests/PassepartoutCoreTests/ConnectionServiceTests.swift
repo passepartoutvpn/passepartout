@@ -24,7 +24,7 @@
 //
 
 import XCTest
-import TunnelKitCore
+import TunnelKit
 @testable import PassepartoutCore
 
 class ConnectionServiceTests: XCTestCase {

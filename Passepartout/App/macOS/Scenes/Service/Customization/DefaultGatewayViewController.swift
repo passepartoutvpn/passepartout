@@ -24,9 +24,7 @@
 //
 
 import Cocoa
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitOpenVPN
 
 class DefaultGatewayViewController: NSViewController, ProfileCustomization {
     @IBOutlet private weak var popupChoice: NSPopUpButton!

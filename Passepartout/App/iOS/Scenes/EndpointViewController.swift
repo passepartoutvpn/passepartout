@@ -24,9 +24,7 @@
 //
 
 import UIKit
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitCore
 import ConvenienceUI
 
 protocol EndpointViewControllerDelegate: AnyObject {

@@ -30,7 +30,7 @@ extension Cells {
 }
 
 class ActivityTableViewCell: UITableViewCell {
-    private lazy var activityIndicator = UIActivityIndicatorView(style: .gray)
+    private lazy var activityIndicator = UIActivityIndicatorView(style: .medium)
 }
 
 extension ActivityTableViewCell {

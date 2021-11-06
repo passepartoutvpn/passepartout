@@ -24,11 +24,8 @@
 //
 
 import Cocoa
-import PassepartoutConstants
 import PassepartoutCore
 import SwiftyBeaver
-import TunnelKitCore
-import TunnelKitOpenVPN
 
 private let log = SwiftyBeaver.self
 
@@ -109,7 +106,7 @@ class HostImporter {
         let vc = StoryboardScene.Main.textInputViewController.instantiate()
         vc.caption = L10n.Service.Alerts.Rename.title.asCaption
         let profile = HostConnectionProfile(hostname: hostname)
-        let builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
+        let builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
         profile.parameters = builder.build()
         vc.text = title
         vc.placeholder = L10n.Global.Host.TitleInput.placeholder

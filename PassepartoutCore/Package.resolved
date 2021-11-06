@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/keeshux/openssl-apple",
         "state": {
           "branch": null,
-          "revision": "1889136399ba40e4fc358cfe7fafef7170aac3f7",
+          "revision": "37043e7c92c9fb348d1d668b0402148c9fa9873c",
           "version": "1.1.112"
         }
       },
@@ -69,7 +69,7 @@
         "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
         "state": {
           "branch": null,
-          "revision": "d1f70171cb09c1e71e0f3cc23fccb7bb7a9a9d42",
+          "revision": "25b79508f0901d024cc31e073e55a33bd6e5fae2",
           "version": null
         }
       }

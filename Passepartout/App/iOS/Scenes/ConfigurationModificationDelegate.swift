@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitOpenVPN
+import PassepartoutCore
 
 protocol ConfigurationModificationDelegate: AnyObject {
     func configuration(didUpdate newConfiguration: OpenVPN.Configuration)

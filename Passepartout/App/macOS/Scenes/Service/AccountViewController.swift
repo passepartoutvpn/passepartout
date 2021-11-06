@@ -24,8 +24,6 @@
 //
 
 import Cocoa
-import TunnelKitCore
-import PassepartoutConstants
 import PassepartoutCore
 
 protocol AccountViewControllerDelegate: AnyObject {

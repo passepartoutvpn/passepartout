@@ -24,10 +24,7 @@
 //
 
 import UIKit
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitManager
-import TunnelKitOpenVPN
 import ConvenienceUI
 
 extension UITableViewCell {
@@ -96,7 +93,7 @@ extension SettingTableViewCell {
         accessoryType = .none
     }
     
-    func applyVPN(_ theme: Theme, with vpnStatus: VPNStatus?, error: OpenVPNTunnelProvider.ProviderError?) {
+    func applyVPN(_ theme: Theme, with vpnStatus: VPNStatus?, error: OpenVPNProviderError?) {
         textLabel?.font = .preferredFont(forTextStyle: .body)
         detailTextLabel?.font = .preferredFont(forTextStyle: .body)
 

@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitCore
+import TunnelKit
 import TunnelKitOpenVPN
 
 public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
@@ -52,7 +52,7 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     public let hostname: String
     
-    public var parameters: OpenVPNTunnelProvider.Configuration
+    public var parameters: OpenVPNProvider.Configuration
 
     public var customAddress: String?
 
@@ -62,7 +62,7 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         id = UUID().uuidString
         self.hostname = hostname
         let sessionConfiguration = OpenVPN.ConfigurationBuilder().build()
-        parameters = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionConfiguration).build()
+        parameters = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: sessionConfiguration).build()
 
         trustedNetworks = TrustedNetworks()
     }
@@ -89,7 +89,7 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     public weak var serviceDelegate: ConnectionServiceDelegate?
 
-    public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
+    public func generate(from configuration: OpenVPNProvider.Configuration, preferences: Preferences) throws -> OpenVPNProvider.Configuration {
         guard let endpointProtocols = parameters.sessionConfiguration.endpointProtocols, !endpointProtocols.isEmpty else {
             preconditionFailure("No endpointProtocols")
         }
@@ -108,7 +108,6 @@ public class HostConnectionProfile: ConnectionProfile, Codable, Equatable {
         // forcibly override hostname with profile hostname (never nil)
         var sessionBuilder = builder.sessionConfiguration.builder()
         sessionBuilder.hostname = hostname
-        sessionBuilder.tlsSecurityLevel = 0 // lowest, tolerate widest range of certificates
         if sessionBuilder.mtu == nil {
             sessionBuilder.mtu = configuration.sessionConfiguration.mtu
         }

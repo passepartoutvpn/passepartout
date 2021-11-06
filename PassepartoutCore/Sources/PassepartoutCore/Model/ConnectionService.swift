@@ -26,9 +26,7 @@
 import Foundation
 import NetworkExtension
 import SwiftyBeaver
-import TunnelKitCore
-import TunnelKitAppExtension
-import TunnelKitManager
+import TunnelKit
 import TunnelKitOpenVPN
 import PassepartoutConstants
 
@@ -89,7 +87,7 @@ public class ConnectionService: Codable {
 
     private let keychain: Keychain
     
-    public var baseConfiguration: OpenVPNTunnelProvider.Configuration
+    public var baseConfiguration: OpenVPNProvider.Configuration
     
     private var cache: [ProfileKey: ConnectionProfile]
     
@@ -125,7 +123,7 @@ public class ConnectionService: Codable {
     
     public weak var delegate: ConnectionServiceDelegate?
     
-    public init(withAppGroup appGroup: String, baseConfiguration: OpenVPNTunnelProvider.Configuration) {
+    public init(withAppGroup appGroup: String, baseConfiguration: OpenVPNProvider.Configuration) {
         guard let defaults = UserDefaults(suiteName: appGroup) else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
@@ -157,7 +155,7 @@ public class ConnectionService: Codable {
         self.defaults = defaults
         keychain = Keychain(group: appGroup)
 
-        baseConfiguration = try container.decode(OpenVPNTunnelProvider.Configuration.self, forKey: .baseConfiguration)
+        baseConfiguration = try container.decode(OpenVPNProvider.Configuration.self, forKey: .baseConfiguration)
         activeProfileKey = try container.decodeIfPresent(ProfileKey.self, forKey: .activeProfileKey)
         preferences = try container.decode(EditablePreferences.self, forKey: .preferences)
 
@@ -608,7 +606,7 @@ public class ConnectionService: Codable {
         try? FileManager.default.removeItem(at: url)
     }
 
-    public var vpnLastError: OpenVPNTunnelProvider.ProviderError? {
+    public var vpnLastError: OpenVPNProviderError? {
         return baseConfiguration.lastError(in: appGroup)
     }
     

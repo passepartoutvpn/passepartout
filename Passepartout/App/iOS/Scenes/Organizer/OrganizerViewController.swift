@@ -27,11 +27,7 @@ import UIKit
 import StoreKit
 import MessageUI
 import SystemConfiguration.CaptiveNetwork
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitCore
-import TunnelKitManager
-import TunnelKitOpenVPN
 import Convenience
 import ConvenienceUI
 

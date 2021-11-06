@@ -25,7 +25,6 @@
 
 import UIKit
 import StoreKit
-import PassepartoutConstants
 import PassepartoutCore
 import SwiftyBeaver
 import ConvenienceUI

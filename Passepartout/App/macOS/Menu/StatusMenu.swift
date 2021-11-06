@@ -25,11 +25,7 @@
 
 import Cocoa
 import StoreKit
-import PassepartoutConstants
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitCore
-import TunnelKitManager
 import Convenience
 
 class StatusMenu: NSObject {

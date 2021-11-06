@@ -24,9 +24,7 @@
 //
 
 import Cocoa
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitCore
 
 class EndpointViewController: NSViewController, ProfileCustomization {
     @IBOutlet private weak var labelAddressCaption: NSTextField!

@@ -25,9 +25,7 @@
 
 import UIKit
 import SwiftyBeaver
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitOpenVPN
 import ConvenienceUI
 
 private let log = SwiftyBeaver.self
@@ -108,7 +106,7 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
         }
 
         let profile = HostConnectionProfile(hostname: hostname)
-        let builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
+        let builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: result.configuration)
         profile.parameters = builder.build()
 
         let service = TransientStore.shared.service

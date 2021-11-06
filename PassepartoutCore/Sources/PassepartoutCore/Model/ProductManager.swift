@@ -28,8 +28,7 @@ import StoreKit
 import Convenience
 import SwiftyBeaver
 import Kvitto
-import TunnelKitCore
-import TunnelKitManager
+import TunnelKit
 import PassepartoutConstants
 
 private let log = SwiftyBeaver.self

@@ -24,8 +24,8 @@
 //
 
 import Foundation
-import TunnelKitOpenVPN
 import PassepartoutConstants
+import PassepartoutOpenVPNTunnel
 
 class PacketTunnelProvider: OpenVPNTunnelProvider {
     override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {

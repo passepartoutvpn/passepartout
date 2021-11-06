@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitCore
+import TunnelKit
 
 public class Pool: Codable, Hashable {
     public enum CodingKeys: String, CodingKey {

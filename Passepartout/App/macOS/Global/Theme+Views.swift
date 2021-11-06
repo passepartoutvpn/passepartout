@@ -24,13 +24,10 @@
 //
 
 import Cocoa
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitManager
-import TunnelKitOpenVPN
 
 extension NSTextField {
-    func applyVPN(_ theme: Theme, isActive: Bool, with vpnStatus: VPNStatus?, error: OpenVPNTunnelProvider.ProviderError?) {
+    func applyVPN(_ theme: Theme, isActive: Bool, with vpnStatus: VPNStatus?, error: OpenVPNProviderError?) {
         guard isActive else {
             stringValue = L10n.Vpn.unused
             textColor = theme.palette.colorSecondaryText
@@ -61,7 +58,7 @@ extension NSTextField {
         }
     }
     
-    private func disconnectionReason(for error: OpenVPNTunnelProvider.ProviderError?) -> String? {
+    private func disconnectionReason(for error: OpenVPNProviderError?) -> String? {
         guard let error = error else {
             return nil
         }

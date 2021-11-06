@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitCore
+import TunnelKit
 import TunnelKitOpenVPN
 import PassepartoutConstants
 
@@ -94,7 +94,7 @@ public class InfrastructurePreset: Codable {
     
     public let comment: String
 
-    public let configuration: OpenVPNTunnelProvider.Configuration
+    public let configuration: OpenVPNProvider.Configuration
     
     public let external: [ExternalKey: String]?
     
@@ -128,7 +128,7 @@ public class InfrastructurePreset: Codable {
         return nil
     }
 
-    public func injectExternalConfiguration(_ configuration: inout OpenVPNTunnelProvider.ConfigurationBuilder, with infrastructureName: InfrastructureName, pool: Pool) throws {
+    public func injectExternalConfiguration(_ configuration: inout OpenVPNProvider.ConfigurationBuilder, with infrastructureName: InfrastructureName, pool: Pool) throws {
         guard let external = external, !external.isEmpty else {
             return
         }
@@ -194,7 +194,7 @@ public class InfrastructurePreset: Codable {
         // default to server settings
         sessionBuilder.routingPolicies = nil
         
-        let builder = OpenVPNTunnelProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
+        let builder = OpenVPNProvider.ConfigurationBuilder(sessionConfiguration: sessionBuilder.build())
         configuration = builder.build()
     }
     

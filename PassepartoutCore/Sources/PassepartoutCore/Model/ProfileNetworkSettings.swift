@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitCore
+import TunnelKit
 import TunnelKitOpenVPN
 
 public enum NetworkChoice: String, Codable {

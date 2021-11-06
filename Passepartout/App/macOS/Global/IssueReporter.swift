@@ -25,11 +25,7 @@
 
 import Foundation
 import AppKit
-import PassepartoutConstants
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitManager
-import TunnelKitOpenVPN
 
 class IssueReporter: NSObject {
     static let shared = IssueReporter()

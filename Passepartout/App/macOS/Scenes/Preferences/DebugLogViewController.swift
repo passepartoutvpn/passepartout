@@ -24,9 +24,7 @@
 //
 
 import Cocoa
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitManager
 
 class DebugLogViewController: NSViewController {
     @IBOutlet private weak var labelExchangedCaption: NSTextField!

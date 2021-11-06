@@ -27,11 +27,7 @@ import UIKit
 import NetworkExtension
 import CoreLocation
 import SwiftyBeaver
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitCore
-import TunnelKitManager
-import TunnelKitOpenVPN
 import Convenience
 import ConvenienceUI
 

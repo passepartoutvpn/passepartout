@@ -24,7 +24,6 @@
 //
 
 import Cocoa
-import PassepartoutConstants
 import PassepartoutCore
 
 class TrustedNetworksViewController: NSViewController, ProfileCustomization {

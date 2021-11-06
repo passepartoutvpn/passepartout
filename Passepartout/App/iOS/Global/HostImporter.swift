@@ -25,10 +25,7 @@
 
 import UIKit
 import SwiftyBeaver
-import PassepartoutConstants
 import PassepartoutCore
-import TunnelKitCore
-import TunnelKitOpenVPN
 
 private let log = SwiftyBeaver.self
 

@@ -24,7 +24,6 @@
 //
 
 import UIKit
-import PassepartoutConstants
 import PassepartoutCore
 import Convenience
 import ConvenienceUI

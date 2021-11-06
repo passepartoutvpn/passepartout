@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import TunnelKitCore
 #if os(iOS)
 import MessageUI
 #endif

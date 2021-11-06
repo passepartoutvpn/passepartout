@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitCore
+import TunnelKit
 import TunnelKitOpenVPN
 import PassepartoutConstants
 
@@ -152,7 +152,7 @@ public class ProviderConnectionProfile: ConnectionProfile, Codable, Equatable {
     
     public weak var serviceDelegate: ConnectionServiceDelegate?
 
-    public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
+    public func generate(from configuration: OpenVPNProvider.Configuration, preferences: Preferences) throws -> OpenVPNProvider.Configuration {
         guard let pool = pool else {
             preconditionFailure("Nil pool?")
         }

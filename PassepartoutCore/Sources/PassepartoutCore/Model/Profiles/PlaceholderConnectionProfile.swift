@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import TunnelKitCore
+import TunnelKit
 import TunnelKitOpenVPN
 
 public class PlaceholderConnectionProfile: ConnectionProfile {
@@ -51,7 +51,7 @@ public class PlaceholderConnectionProfile: ConnectionProfile {
     
     public weak var serviceDelegate: ConnectionServiceDelegate?
 
-    public func generate(from configuration: OpenVPNTunnelProvider.Configuration, preferences: Preferences) throws -> OpenVPNTunnelProvider.Configuration {
+    public func generate(from configuration: OpenVPNProvider.Configuration, preferences: Preferences) throws -> OpenVPNProvider.Configuration {
         fatalError("Generating configuration from a PlaceholderConnectionProfile")
     }
     

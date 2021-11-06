@@ -24,7 +24,6 @@
 //
 
 import Cocoa
-import PassepartoutConstants
 import PassepartoutCore
 
 protocol TrustedNetworksAddViewControllerDelegate: AnyObject {
