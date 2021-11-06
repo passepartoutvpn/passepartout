@@ -92,7 +92,7 @@
 	<key>com.algoritmico.Passepartout.config</key>
 	<dict>
 		<key>appstore_id</key>
-		<string>$(CFG_APPSTORE_IOS_ID)</string>
+		<string>$(CFG_APPSTORE_ID)</string>
 		<key>group_id</key>
 		<string>group.$(CFG_GROUP_ID)</string>
 	</dict>

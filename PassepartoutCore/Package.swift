@@ -22,7 +22,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("d1f70171cb09c1e71e0f3cc23fccb7bb7a9a9d42")),
-        .package(name: "Convenience", url: "https://github.com/keeshux/convenience", .revision("5cee4740a365bde746f6bc7e0033cf57a71c2d99")),
+        .package(name: "Convenience", url: "https://github.com/keeshux/convenience", .revision("347105ec0ce27cd4255acf9875fd60ad1f213801")),
         .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0")
     ],
     targets: [

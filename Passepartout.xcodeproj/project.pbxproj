@@ -1268,9 +1268,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout macos";
 				SDKROOT = macosx;
@@ -1295,8 +1293,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout macos";
 				SDKROOT = macosx;
@@ -1319,9 +1316,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID).Tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
 				PRODUCT_NAME = PassepartoutTunnel;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
 				SDKROOT = macosx;
@@ -1345,8 +1340,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_MACOS_ID).Tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
 				PRODUCT_NAME = PassepartoutTunnel;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
 				SDKROOT = macosx;
@@ -1411,7 +1405,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1471,7 +1464,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1495,7 +1487,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_IOS_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1517,7 +1509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_IOS_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1541,8 +1533,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_LAUNCHER_ID)";
 				PRODUCT_NAME = PassepartoutLauncher;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1569,7 +1559,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_LAUNCHER_ID)";
 				PRODUCT_NAME = PassepartoutLauncher;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1592,8 +1581,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_IOS_ID).Tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
 				PRODUCT_NAME = PassepartoutTunnel;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
 				SKIP_INSTALL = YES;
@@ -1614,7 +1602,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_IOS_ID).Tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
 				PRODUCT_NAME = PassepartoutTunnel;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
 				SKIP_INSTALL = YES;

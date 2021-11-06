@@ -67,7 +67,7 @@
 		<key>appcenter_secret</key>
 		<string>$(CFG_APPCENTER_SECRET)</string>
 		<key>appstore_id</key>
-		<string>$(CFG_APPSTORE_MACOS_ID)</string>
+		<string>$(CFG_APPSTORE_ID)</string>
 		<key>group_id</key>
 		<string>$(CFG_TEAM_ID).group.$(CFG_GROUP_ID)</string>
 	</dict>
