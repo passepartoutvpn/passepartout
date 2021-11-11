@@ -9,8 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Replace OpenSSL with BoringSSL.
+- Restrict support to secure TLS algorithms (security level).
 - Allow Oeck provider without any purchase.
-- Migrate to SwiftPM.
 
 ### Fixed
 

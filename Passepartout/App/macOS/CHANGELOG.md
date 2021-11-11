@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Allow Oeck provider without any purchase.
+- Replace OpenSSL with BoringSSL.
+- Restrict support to secure TLS algorithms (security level).
 - Drop status bar icon color to automatically adjust to desktop background color. [#199](https://github.com/passepartoutvpn/passepartout-apple/issues/199)
-- Migrate to SwiftPM.
+- Allow Oeck provider without any purchase.
 
 ### Fixed
 
