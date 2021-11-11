@@ -47,12 +47,21 @@
         }
       },
       {
-        "package": "openssl-apple",
-        "repositoryURL": "https://github.com/keeshux/openssl-apple",
+        "package": "swift-nio",
+        "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "37043e7c92c9fb348d1d668b0402148c9fa9873c",
-          "version": "1.1.112"
+          "revision": "addf69cfe60376c325397c8926589415576b1dd1",
+          "version": "2.34.0"
+        }
+      },
+      {
+        "package": "swift-nio-ssl",
+        "repositoryURL": "https://github.com/apple/swift-nio-ssl",
+        "state": {
+          "branch": null,
+          "revision": "08e701df9a3b9108c56f1aef5d9ef9a78fda2846",
+          "version": "2.16.2"
         }
       },
       {
@@ -69,7 +78,7 @@
         "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
         "state": {
           "branch": null,
-          "revision": "25b79508f0901d024cc31e073e55a33bd6e5fae2",
+          "revision": "4a47eec041338da8d64ddd5d4d017d2d193017a3",
           "version": null
         }
       }
