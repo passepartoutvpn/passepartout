@@ -89,6 +89,9 @@ class OrganizerViewController: NSViewController {
         }
         do {
             try ProductManager.shared.verifyEligible(forProvider: metadata)
+        } catch ProductError.beta {
+            presentBetaFeatureUnavailable("Providers")
+            return
         } catch {
             presentPurchaseScreen(forProduct: metadata.product)
             return

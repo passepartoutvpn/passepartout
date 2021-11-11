@@ -97,6 +97,11 @@ extension NSViewController {
         vc.delegate = delegate
         presentAsModalWindow(vc)
     }
+
+    func presentBetaFeatureUnavailable(_ title: String) {
+        let alert = Macros.warning(title, "The requested feature is unavailable in beta.")
+        alert.present(in: view.window, withOK: "OK", handler: nil)
+    }
 }
 
 extension NSView {

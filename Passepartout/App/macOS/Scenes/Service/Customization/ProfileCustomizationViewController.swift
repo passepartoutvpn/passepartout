@@ -264,5 +264,12 @@ class ProfileCustomizationViewController: NSTabViewController {
         tabViewItems[4].label = L10n.NetworkSettings.Dns.title
         tabViewItems[5].label = L10n.NetworkSettings.Proxy.title
         tabViewItems[6].label = L10n.NetworkSettings.Mtu.title
+
+        do {
+            try ProductManager.shared.verifyEligible(forFeature: .trustedNetworks)
+        } catch ProductError.beta {
+            tabViewItems.remove(at: 2)
+        } catch {
+        }
     }
 }

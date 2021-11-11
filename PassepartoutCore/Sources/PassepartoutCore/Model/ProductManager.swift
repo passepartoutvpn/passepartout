@@ -104,6 +104,7 @@ public class ProductManager: NSObject {
         return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
         #endif
         #else
+        // FIXME: skip TestFlight on macOS until beta condition is clearly determined
         return false
         #endif
     }

@@ -102,11 +102,11 @@ jobs:
           export PILOT_APP_VERSION=`ci/version-number.sh ios`
           export PILOT_BUILD_NUMBER=`ci/build-number.sh ios`
           bundle exec fastlane --env ios,beta store_beta
-      - name: Publish on TestFlight (macOS)
-        run: |
-          export PILOT_APP_VERSION=`ci/version-number.sh mac`
-          export PILOT_BUILD_NUMBER=`ci/build-number.sh mac`
-          bundle exec fastlane --env mac,beta store_beta
+#      - name: Publish on TestFlight (macOS)
+#        run: |
+#          export PILOT_APP_VERSION=`ci/version-number.sh mac`
+#          export PILOT_BUILD_NUMBER=`ci/build-number.sh mac`
+#          bundle exec fastlane --env mac,beta store_beta
   submit_for_app_review:
     if: github.ref == 'refs/heads/stable'
     runs-on: ubuntu-latest
