@@ -14,67 +14,73 @@ env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
   FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+  MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
+  MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+  MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
+  MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
+  MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+  PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
+  PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
+  PILOT_BETA_APP_FEEDBACK: ${{ secrets.PILOT_BETA_APP_FEEDBACK }}
+  PILOT_BETA_APP_REVIEW_INFO: ${{ secrets.PILOT_BETA_APP_REVIEW_INFO }}
+  CHANGELOG_PREFACE: ${{ secrets.CHANGELOG_PREFACE }}
 
 jobs:
-  test_or_upload_to_app_store:
+  run_tests:
+    if: github.ref != 'refs/heads/stable'
     runs-on: macos-10.15
-    timeout-minutes: 60
-    env:
-      MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
-      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-      MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
-      MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
-      MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
-      MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
-      PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
-      PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
-      PILOT_BETA_APP_FEEDBACK: ${{ secrets.PILOT_BETA_APP_FEEDBACK }}
-      PILOT_BETA_APP_REVIEW_INFO: ${{ secrets.PILOT_BETA_APP_REVIEW_INFO }}
-      CHANGELOG_PREFACE: ${{ secrets.CHANGELOG_PREFACE }}
+    timeout-minutes: 20
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # for proper build number
+          fetch-depth: 0
           submodules: true
-      - name: Prepare Ruby bundle
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Select Xcode version
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: latest-stable
-      - name: Prepare for fastlane match
-        run: |
-          scripts/ci/recognize-match-hostname.sh
-          bundle exec fastlane preinstall_development_certs
-      - name: Run tests (macOS)
-        if: github.ref == 'refs/heads/master'
+      - name: Prepare build
+        uses: ./.github/actions/prepare-build-app
+      - name: Run tests
         run: |
           bundle exec fastlane --env mac,beta test_target
-      - name: Build (macOS)
-        if: github.ref == 'refs/heads/stable'
-        run: |
-          bundle exec fastlane --env mac,beta create_archive
-      - name: Build (iOS)
-        if: github.ref == 'refs/heads/stable'
+  build_upload_ios:
+    if: github.ref == 'refs/heads/stable'
+    runs-on: macos-10.15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Prepare build
+        uses: ./.github/actions/prepare-build-app
+      - name: Build iOS (.ipa)
         run: |
           bundle exec fastlane --env ios,beta create_archive
-      - name: Submit to TestFlight (macOS)
-        if: github.ref == 'refs/heads/stable'
-        run: |
-          export PILOT_CHANGELOG=`ci/build-changelog.sh mac`
-          bundle exec fastlane --env mac,beta store_beta
-      - name: Submit to TestFlight (iOS)
-        if: github.ref == 'refs/heads/stable'
+      - name: Submit to TestFlight
         run: |
           export PILOT_CHANGELOG=`ci/build-changelog.sh ios`
           bundle exec fastlane --env ios,beta store_beta
+  build_upload_mac:
+    if: github.ref == 'refs/heads/stable'
+    runs-on: macos-10.15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Prepare build
+        uses: ./.github/actions/prepare-build-app
+      - name: Build macOS (.pkg)
+        run: |
+          bundle exec fastlane --env mac,beta create_archive
+      - name: Submit to TestFlight
+        run: |
+          export PILOT_CHANGELOG=`ci/build-changelog.sh mac`
+          bundle exec fastlane --env mac,beta store_beta
   release_public_beta:
     if: github.ref == 'refs/heads/stable'
     runs-on: ubuntu-latest
-    needs: test_or_upload_to_app_store
+    needs: [build_upload_ios, build_upload_mac]
     environment:
       name: public_beta
     env:
@@ -91,20 +97,20 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Publish on TestFlight (macOS)
-        run: |
-          export PILOT_APP_VERSION=`ci/version-number.sh mac`
-          export PILOT_BUILD_NUMBER=`ci/build-number.sh mac`
-          bundle exec fastlane --env mac,beta store_beta
       - name: Publish on TestFlight (iOS)
         run: |
           export PILOT_APP_VERSION=`ci/version-number.sh ios`
           export PILOT_BUILD_NUMBER=`ci/build-number.sh ios`
           bundle exec fastlane --env ios,beta store_beta
+      - name: Publish on TestFlight (macOS)
+        run: |
+          export PILOT_APP_VERSION=`ci/version-number.sh mac`
+          export PILOT_BUILD_NUMBER=`ci/build-number.sh mac`
+          bundle exec fastlane --env mac,beta store_beta
   submit_for_app_review:
     if: github.ref == 'refs/heads/stable'
     runs-on: ubuntu-latest
-    needs: test_or_upload_to_app_store
+    needs: release_public_beta
     environment:
       name: app_review
     env:
@@ -120,13 +126,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Submit for App Review (macOS)
-        run: |
-          export DELIVER_APP_VERSION=`ci/version-number.sh mac`
-          export DELIVER_BUILD_NUMBER=`ci/build-number.sh mac`
-          bundle exec fastlane --env mac store_review add_id_info_uses_idfa:false
       - name: Submit for App Review (iOS)
         run: |
           export DELIVER_APP_VERSION=`ci/version-number.sh ios`
           export DELIVER_BUILD_NUMBER=`ci/build-number.sh ios`
           bundle exec fastlane --env ios store_review add_id_info_uses_idfa:false
+      - name: Submit for App Review (macOS)
+        run: |
+          export DELIVER_APP_VERSION=`ci/version-number.sh mac`
+          export DELIVER_BUILD_NUMBER=`ci/build-number.sh mac`
+          bundle exec fastlane --env mac store_review add_id_info_uses_idfa:false
