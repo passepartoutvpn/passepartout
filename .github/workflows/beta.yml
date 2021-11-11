@@ -65,13 +65,11 @@ jobs:
         if: github.ref == 'refs/heads/stable'
         run: |
           export PILOT_CHANGELOG=`ci/build-changelog.sh mac`
-          export PILOT_PKG="dist/mac/Passepartout.pkg"
           bundle exec fastlane --env mac,beta store_beta
       - name: Submit to TestFlight (iOS)
         if: github.ref == 'refs/heads/stable'
         run: |
           export PILOT_CHANGELOG=`ci/build-changelog.sh ios`
-          export PILOT_IPA="dist/ios/Passepartout.ipa"
           bundle exec fastlane --env ios,beta store_beta
   release_public_beta:
     if: github.ref == 'refs/heads/stable'
