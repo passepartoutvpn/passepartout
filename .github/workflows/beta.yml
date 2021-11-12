@@ -29,7 +29,7 @@ env:
 jobs:
   run_tests:
     if: github.ref != 'refs/heads/stable'
-    runs-on: macos-10.15
+    runs-on: macos-11
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v2
@@ -43,7 +43,7 @@ jobs:
           bundle exec fastlane --env mac,beta test_target
   build_upload_ios:
     if: github.ref == 'refs/heads/stable'
-    runs-on: macos-10.15
+    runs-on: macos-11
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v2
@@ -61,7 +61,7 @@ jobs:
           bundle exec fastlane --env ios,beta store_beta
   build_upload_mac:
     if: github.ref == 'refs/heads/stable'
-    runs-on: macos-10.15
+    runs-on: macos-11
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v2
