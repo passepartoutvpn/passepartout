@@ -1,7 +1,9 @@
 ### Changed
 
+- Replace OpenSSL with BoringSSL.
+- Restrict support to secure TLS algorithms (security level).
+- Drop status bar icon color to automatically adjust to desktop background color.
 - Allow Oeck provider without any purchase.
-- Status bar icon color had to be dropped in order to automatically adjust to desktop background color.
 
 ### Fixed
 

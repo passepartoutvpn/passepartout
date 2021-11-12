@@ -1,5 +1,7 @@
 ### Changed
 
+- Replace OpenSSL with BoringSSL.
+- Restrict support to secure TLS algorithms (security level).
 - Allow Oeck provider without any purchase.
 
 ### Fixed
