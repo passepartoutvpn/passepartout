@@ -10,7 +10,6 @@ ANVÄNDNING MED FLERA LEVERANTÖRER
 
 Passepartout erbjuder förinställningar för större VPN-leverantörer:
 
-- Child Safe VPN 
 - Hide.me
 - Mullvad
 - NordVPN

@@ -10,7 +10,6 @@ UTILIZE DIVERSOS SERVIÇOS DE VPN
 
 Passepartout oferece configurações para os seguintes provedores de VPN:
 
-- Child Safe VPN 
 - Hide.me
 - Mullvad
 - NordVPN

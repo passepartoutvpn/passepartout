@@ -10,7 +10,6 @@ Passepartout tiene código abierto: https://github.com/passepartoutvpn
 
 Passepartout ofrece ajustes para estos proveedores VPN:
 
-- Child Safe VPN
 - Hide.me
 - Mullvad
 - NordVPN

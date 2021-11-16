@@ -10,7 +10,6 @@ BENUTZBAR MIT VIELEN ANBIETERN
 
 Passepartout bietet Voreinstellungen für alle gängigen VPN-Anbieter:
 
-- Child Safe VPN
 - Hide.me
 - Mullvad
 - NordVPN
