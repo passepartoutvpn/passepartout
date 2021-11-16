@@ -1,8 +1,8 @@
 <p style="text-align: center; padding: 0em 1em"><img src="res/logo.svg" width="300" height="300" /></p>
 
-![iOS 12+](https://img.shields.io/badge/ios-12+-green.svg)
+![iOS 13+](https://img.shields.io/badge/ios-13+-green.svg)
 ![macOS 10.15+](https://img.shields.io/badge/macos-10.15+-green.svg)
-[![TunnelKit 3.5](https://img.shields.io/badge/tunnelkit-3.5-d69c68.svg)][dep-tunnelkit]
+[![TunnelKit 4.0](https://img.shields.io/badge/tunnelkit-4.0-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
 [![GitHub Actions](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml)
 
@@ -63,7 +63,6 @@ Passepartout is a VPN client and does absolutely nothing else without your conse
 
 Passepartout can connect to a few well-known VPN providers with an existing account:
 
-- [Child Safe VPN][app-net-csv]
 - [Hide.me][app-net-hideme]
 - [Mullvad][app-net-mullvad]
 - [NordVPN][app-net-nordvpn]
@@ -87,11 +86,10 @@ You can find details on what may or may not work in the related section of the [
 
 ### Requirements
 
-- iOS 12.0+ / macOS 10.15+
-- Xcode 11+ (Swift 5)
+- iOS 13.0+ / macOS 10.15+
+- Xcode 12+ (SwiftPM 5.3)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
-- [CocoaPods 1.8.0][dep-cocoapods]
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
@@ -106,10 +104,6 @@ Enter the directory and clone the submodules:
     $ git submodule init
     $ git submodule update
 
-Assuming you have a [working CocoaPods environment][dep-cocoapods], setting up the app workspace only requires installing the pod dependencies:
-
-    $ pod install
-
 For the VPN to work properly, the app requires:
 
 - _App Groups_ and _Keychain Sharing_ capabilities
@@ -120,13 +114,12 @@ both in the main app and the tunnel extension target.
 Make sure to update `Config.xcconfig` according to your developer account and your identifiers:
 
     CFG_TEAM_ID = A1B2C3D4E5
-    CFG_APP_IOS_ID = com.example.ios.MyApp
-    CFG_APP_MACOS_ID = com.example.macos.MyApp
+    CFG_APP_ID = com.example.MyApp
+    CFG_APP_LAUNCHER_ID = com.example.MyApp.Launcher // macOS only
     CFG_GROUP_ID = com.example.MyAppGroup // omit the "group." prefix
-    CFG_APPSTORE_IOS_ID = 1234567890 // optional for development, can be bogus
-    CFG_APPSTORE_MACOS_ID = 1234567890 // optional for development, can be bogus
+    CFG_APPSTORE_ID = 1234567890 // optional for development, can be bogus
 
-After that, open `Passepartout.xcworkspace` in Xcode and run the `Passepartout-iOS` or `Passepartout-macOS` target.
+After that, open `Passepartout.xcodeproj` in Xcode and run the `Passepartout-iOS` or `Passepartout-macOS` target.
 
 ## License
 
@@ -196,7 +189,6 @@ Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 [app-net-vyprvpn]: https://www.vyprvpn.com/
 [app-net-windscribe]: https://secure.link/kCsD0prd
 
-[dep-cocoapods]: https://guides.cocoapods.org/using/getting-started.html
 [dep-brew]: https://brew.sh/
 [dep-tunnelkit]: https://github.com/passepartoutvpn/tunnelkit
 [dep-tunnelkit-ovpn]: https://github.com/passepartoutvpn/tunnelkit#support-for-ovpn-configuration
