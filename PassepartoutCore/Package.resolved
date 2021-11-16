@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
         "state": {
           "branch": null,
-          "revision": "4a47eec041338da8d64ddd5d4d017d2d193017a3",
-          "version": null
+          "revision": "29ff5a3772e42d3a367653d32882e218fed0c733",
+          "version": "4.0.0"
         }
       }
     ]
