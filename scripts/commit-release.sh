@@ -1,23 +1,24 @@
 #!/bin/sh
 CURRENT_BRANCH=`git branch --show-current`
-if [[ $CURRENT_BRANCH != "stable" ]]; then
-    echo "Not on stable branch"
+if [[ $CURRENT_BRANCH != "master" ]]; then
+    echo "Not on master branch"
     exit
 fi
 
-VERSION=`ci/version-number.sh`
+VERSION=`ci/version-number.sh ios`
 DATE=`date "+%Y-%m-%d"`
 CHANGELOG_GLOB="Passepartout/App/*/CHANGELOG.md"
-MESSAGE="Release"
+COMMIT_MESSAGE="Set release date"
+TAG_MESSAGE="Release"
 sed -i '' -E "s/^.*Beta.*$/## $VERSION ($DATE)/" $CHANGELOG_GLOB
 
-if ! git commit -am $MESSAGE; then
+if ! git commit -am "$COMMIT_MESSAGE"; then
     echo "Failed to commit release"
     git reset --hard
     exit
 fi
 
-if ! git tag -as "v$VERSION" -m $MESSAGE; then
+if ! git tag -as "v$VERSION" -m "$TAG_MESSAGE"; then
     echo "Failed to tag release"
     git reset --hard HEAD^
     exit
