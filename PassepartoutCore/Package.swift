@@ -7,7 +7,7 @@ let package = Package(
     name: "PassepartoutCore",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v13), .macOS(.v10_15)
+        .iOS(.v12), .macOS(.v10_15)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
