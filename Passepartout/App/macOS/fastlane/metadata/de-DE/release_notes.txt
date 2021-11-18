@@ -1,11 +1,4 @@
-### Changed
-
-- Replace OpenSSL with BoringSSL.
-- Restrict support to secure TLS algorithms (security level).
-- Drop status bar icon color to automatically adjust to desktop background color.
-- Allow Oeck provider without any purchase.
-
 ### Fixed
 
-- Location areas were not sorted in menu.
+- Regression in TLS handshake on certain devices.
 
