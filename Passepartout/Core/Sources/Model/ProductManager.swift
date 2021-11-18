@@ -100,7 +100,7 @@ public class ProductManager: NSObject {
         #if targetEnvironment(simulator)
         return true
         #else
-        return false//Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+        return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
         #endif
         #else
         return false
