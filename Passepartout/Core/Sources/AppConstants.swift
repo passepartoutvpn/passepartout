@@ -354,9 +354,9 @@ public class AppConstants {
         static let locksBetaFeatures = true
 
         #if os(iOS)
-        static var isBetaFullVersion = true//: Bool {
-//            return ProcessInfo.processInfo.environment["FULL_VERSION"] != nil
-//        }
+        static var isBetaFullVersion: Bool {
+            return ProcessInfo.processInfo.environment["FULL_VERSION"] != nil
+        }
 
         static let lastFullVersionBuild: (Int, LocalProduct) = (2016, .fullVersion_iOS)
         #else
