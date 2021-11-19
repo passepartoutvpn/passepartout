@@ -54,13 +54,9 @@ class StatusMenu: NSObject {
 
     // MARK: Button images
 
-    private let imageStatus = Asset.Assets.statusBarButtonImage.image
+    private let imageStatusActive = Asset.Assets.statusActive.image
 
-    private lazy var imageStatusActive: NSImage = imageStatus.tinted(withColor: Theme.current.palette.colorOn)
-
-    private lazy var imageStatusInactive: NSImage = imageStatus.tinted(withColor: Theme.current.palette.colorPrimaryText)
-
-    private lazy var imageStatusInProgress: NSImage = imageStatus.tinted(withColor: Theme.current.palette.colorIndeterminate)
+    private let imageStatusPending = Asset.Assets.statusPending.image
 
     // MARK: Menu references
     
@@ -94,10 +90,10 @@ class StatusMenu: NSObject {
     }
     
     func install() {
-        guard let button = statusItem.button else {
+        guard let _ = statusItem.button else {
             return
         }
-        button.image = imageStatus
+        setStatusImage(for: .inactive)
         
         VPN.shared.prepare {
             self.rebuild()
@@ -234,7 +230,7 @@ class StatusMenu: NSObject {
         guard let profile = profile else {
             itemProfileName.title = L10n.Menu.ActiveProfile.Title.none
 //            itemProfileName.image = nil
-            statusItem.button?.image = imageStatusInactive
+            setStatusImage(for: .inactive)
             statusItem.button?.toolTip = nil
             return
         }
@@ -616,22 +612,18 @@ class StatusMenu: NSObject {
 
         switch vpn.status ?? .disconnected {
         case .connected:
-            statusItem.button?.image = imageStatusActive
-            statusItem.button?.alphaValue = 1.0
+            setStatusImage(for: .active)
             
             Reviewer.shared.reportEvent()
 
         case .connecting:
-            statusItem.button?.image = imageStatusInProgress
-            statusItem.button?.alphaValue = 1.0
+            setStatusImage(for: .pending)
 
         case .disconnected:
-            statusItem.button?.image = imageStatusInactive
-            statusItem.button?.alphaValue = 0.5
+            setStatusImage(for: .inactive)
 
         case .disconnecting:
-            statusItem.button?.image = imageStatusInProgress
-            statusItem.button?.alphaValue = 1.0
+            setStatusImage(for: .pending)
         }
     }
 }
@@ -681,5 +673,31 @@ extension StatusMenu: ConnectionServiceDelegate {
         itemPool.title = providerProfile.pool?.localizedId ?? ""
         
         NotificationCenter.default.post(name: StatusMenu.didUpdateProfile, object: profile)
+    }
+}
+
+extension StatusMenu {
+    fileprivate enum ImageStatus {
+        case active
+        
+        case pending
+        
+        case inactive
+    }
+
+    fileprivate func setStatusImage(for imageStatus: ImageStatus) {
+        switch imageStatus {
+        case .active:
+            statusItem.button?.image = imageStatusActive
+            statusItem.button?.alphaValue = 1.0
+
+        case .pending:
+            statusItem.button?.image = imageStatusPending
+            statusItem.button?.alphaValue = 1.0
+
+        case .inactive:
+            statusItem.button?.image = imageStatusActive
+            statusItem.button?.alphaValue = 0.5
+        }
     }
 }
