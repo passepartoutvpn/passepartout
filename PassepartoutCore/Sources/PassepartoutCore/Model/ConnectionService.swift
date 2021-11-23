@@ -541,7 +541,7 @@ public class ConnectionService: Codable {
             withBundleIdentifier: AppConstants.App.tunnelBundleId,
             appGroup: appGroup,
             context: profile.passwordContext,
-            username: creds?.username
+            credentials: creds
         )
         protocolConfiguration.disconnectOnSleep = preferences.disconnectsOnSleep
 

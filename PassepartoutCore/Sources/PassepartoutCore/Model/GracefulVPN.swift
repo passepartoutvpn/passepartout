@@ -66,7 +66,7 @@ public class GracefulVPN {
         }
         do {
             log.info("Reconnecting...")
-            try vpn.reconnect(configuration: service.vpnConfiguration(), completionHandler: completionHandler)
+            try vpn.reconnect(configuration: service.vpnConfiguration(), delay: nil, completionHandler: completionHandler)
         } catch let e {
             guard e as? ApplicationError != .externalResources else {
                 completionHandler?(e)
