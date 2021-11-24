@@ -738,6 +738,7 @@
 				0E9AAACA259F806B003FAFF1 /* CopyFiles */,
 				0E5203C2259F5F3F00CBAB56 /* Embed App Extensions */,
 				0E5203F6259F60D600CBAB56 /* Embed Frameworks */,
+				0EBEF139274E4DAE00EAC689 /* Drop Extra Frameworks In Extensions */,
 			);
 			buildRules = (
 			);
@@ -782,6 +783,7 @@
 				0E57F63620C83FC5008323CF /* Resources */,
 				0E3152B7223F9EF500F61841 /* Embed Frameworks */,
 				0EB2B14B2733FB6F007705AB /* Embed App Extensions */,
+				0EBEF138274E4C7F00EAC689 /* Drop Extra Frameworks In Extensions */,
 			);
 			buildRules = (
 			);
@@ -983,6 +985,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0EBEF138274E4C7F00EAC689 /* Drop Extra Frameworks In Extensions */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Drop Extra Frameworks In Extensions";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/PassepartoutTunnel.appex/Frameworks\"\n";
+		};
+		0EBEF139274E4DAE00EAC689 /* Drop Extra Frameworks In Extensions */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Drop Extra Frameworks In Extensions";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/PassepartoutTunnel.appex/Contents/Frameworks\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0E5202F3259F573500CBAB56 /* Sources */ = {
@@ -1385,8 +1426,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1058;
+				CURRENT_PROJECT_VERSION = 1065;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1450,8 +1492,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1058;
+				CURRENT_PROJECT_VERSION = 1065;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
