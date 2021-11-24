@@ -1,3 +1,7 @@
+### Changed
+
+- Revert to OpenSSL.
+
 ### Fixed
 
 - Regression in TLS handshake on certain devices.
