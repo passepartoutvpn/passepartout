@@ -4,5 +4,5 @@
 
 ### Fixed
 
-- Regression in TLS handshake on certain devices.
+- "TLS failed" with some certificates (e.g. Let's Encrypt).
 
