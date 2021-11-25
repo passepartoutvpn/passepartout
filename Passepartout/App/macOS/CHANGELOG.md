@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.17.2 Beta 2912 (2021-11-24)
+## Unreleased
 
 ### Changed
 
@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Regression in TLS handshake on certain devices.
+- "TLS failed" with some certificates (e.g. Let's Encrypt).
 
 ## 1.17.0 (2021-11-16)
 
