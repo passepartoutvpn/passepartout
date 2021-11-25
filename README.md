@@ -1,6 +1,6 @@
 <p style="text-align: center; padding: 0em 1em"><img src="res/logo.svg" width="300" height="300" /></p>
 
-![iOS 13+](https://img.shields.io/badge/ios-13+-green.svg)
+![iOS 12+](https://img.shields.io/badge/ios-12+-green.svg)
 ![macOS 10.15+](https://img.shields.io/badge/macos-10.15+-green.svg)
 [![TunnelKit 4.0](https://img.shields.io/badge/tunnelkit-4.0-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
@@ -86,7 +86,7 @@ You can find details on what may or may not work in the related section of the [
 
 ### Requirements
 
-- iOS 13.0+ / macOS 10.15+
+- iOS 12.0+ / macOS 10.15+
 - Xcode 12+ (SwiftPM 5.3)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
