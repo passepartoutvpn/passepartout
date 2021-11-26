@@ -1,9 +1,7 @@
 .DS_Store
 *.swp
 *.pbxuser
-**/*.xcworkspace/xcuserdata
-**/*.xcodeproj/project.xcworkspace
-**/*.xcodeproj/xcuserdata
+**/xcuserdata
 Pods
 **/fastlane/**/*.html
 **/fastlane/README.md
