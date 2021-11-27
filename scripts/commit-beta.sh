@@ -10,6 +10,8 @@ ci/update-changelog.sh ios &&
     ci/copy-release-notes.sh ios &&
     ci/copy-release-notes.sh mac
 
+git -C PassepartoutCore/Sources/PassepartoutCore/API pull origin master
+git add */PassepartoutCore/API
 git add Passepartout/App/*/CHANGELOG.md
 git add Passepartout/App/*/fastlane/metadata/*/release_notes.txt
 git commit -m "Set beta release"
