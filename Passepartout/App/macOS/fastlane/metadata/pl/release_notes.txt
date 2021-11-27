@@ -5,4 +5,5 @@
 ### Fixed
 
 - "TLS failed" with some certificates (e.g. Let's Encrypt).
+- Newer infrastructure discarded over bundle.
 
