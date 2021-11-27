@@ -118,7 +118,7 @@ public class InfrastructureFactory {
             }
 
             // pick cache if newer
-            if Utils.isFile(at: entry, newerThanFileAt: name.bundleURL) {
+            if Utils.isFile(at: cacheURL(forName: name), newerThanFileAt: name.bundleURL) {
                 let infraPath = WebServices.Endpoint.providerNetwork(name).apiURL(relativeTo: cachePath)
                 do {
                     let infraData = try Data(contentsOf: infraPath)
