@@ -276,7 +276,7 @@ public class IntentDispatcher {
         let vpn = VPN.shared
         if doReconnect {
             log.info("Reconnecting VPN: \(configuration)")
-            vpn.reconnect(configuration: configuration) { (error) in
+            vpn.reconnect(configuration: configuration, delay: nil) { (error) in
                 notifyServiceUpdate()
                 completionHandler?(error)
             }
