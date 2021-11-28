@@ -1,9 +1,9 @@
 <p style="text-align: center; padding: 0em 1em"><img src="res/logo.svg" width="300" height="300" /></p>
 
-![iOS 12+](https://img.shields.io/badge/ios-12+-green.svg)
-![macOS 10.15+](https://img.shields.io/badge/macos-10.15+-green.svg)
-[![TunnelKit 4.0](https://img.shields.io/badge/tunnelkit-4.0-d69c68.svg)][dep-tunnelkit]
-[![License GPLv3](https://img.shields.io/badge/license-GPLv3-lightgray.svg)](LICENSE)
+![iOS 12+](https://img.shields.io/badge/iOS-12+-green.svg)
+![macOS 10.15+](https://img.shields.io/badge/macOS-10.15+-green.svg)
+[![TunnelKit 4.0](https://img.shields.io/badge/TunnelKit-4.0-d69c68.svg)][dep-tunnelkit]
+[![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
 [![GitHub Actions](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml)
 
 # [Passepartout][about-website]
