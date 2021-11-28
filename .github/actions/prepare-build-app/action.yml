@@ -8,12 +8,6 @@ runs:
     - uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
-    - uses: actions/cache@v2
-      with:
-        path: .build
-        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
-        restore-keys: |
-          ${{ runner.os }}-spm-
     - shell: bash
       run: |
         scripts/ci/recognize-match-hostname.sh
