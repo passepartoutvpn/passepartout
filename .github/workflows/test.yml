@@ -1,0 +1,31 @@
+name: Unit Tests
+
+on:
+  push:
+    branches-ignore:
+      - 'stable'
+
+env:
+  APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
+  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+  MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
+  MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+  MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
+  MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
+  MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+
+jobs:
+  run_tests:
+    runs-on: macos-11
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Prepare build
+        uses: ./.github/actions/prepare-build-app
+      - name: Run tests
+        run: |
+          bundle exec fastlane --env mac,beta test_target
