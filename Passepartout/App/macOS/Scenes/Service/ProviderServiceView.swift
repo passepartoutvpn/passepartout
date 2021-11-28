@@ -173,6 +173,10 @@ class ProviderServiceView: NSView {
     // MARK: Helpers
 
     func reloadData() {
+        guard let profile = profile else {
+            return
+        }
+        reloadHierarchy(withProfile: profile)
     }
     
     private func reloadHierarchy(withProfile profile: ProviderConnectionProfile) {

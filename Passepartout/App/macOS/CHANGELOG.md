@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- Last update was not refreshed on "Refresh infrastructure".
+
 ## 1.17.2 (2021-11-30)
 
 ### Changed
