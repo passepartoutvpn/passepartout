@@ -34,7 +34,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           submodules: true
       - name: Prepare build
         uses: ./.github/actions/prepare-build-app
@@ -48,7 +47,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           submodules: true
       - name: Prepare build
         uses: ./.github/actions/prepare-build-app
@@ -67,7 +65,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           submodules: true
       - name: Prepare build
         uses: ./.github/actions/prepare-build-app
@@ -93,7 +90,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           submodules: true
       - name: Prepare Ruby bundle
         uses: ruby/setup-ruby@v1
@@ -122,7 +118,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           submodules: true
       - name: Prepare Ruby bundle
         uses: ruby/setup-ruby@v1
