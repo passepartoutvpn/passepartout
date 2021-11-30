@@ -10,8 +10,6 @@
 
 # sdk "iphoneos9.0"
 
-output_directory "dist/#{ENV["PLATFORM"]}"
-
 clean true
 silent false
 skip_profile_detection true

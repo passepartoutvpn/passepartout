@@ -4,4 +4,5 @@ if [[ -z $PLATFORM ]]; then
     echo "Platform required"
     exit
 fi
-bundle exec fastlane --env $PLATFORM,beta,secret create_archive
+export GYM_OUTPUT_DIRECTORY="dist/$PLATFORM"
+bundle exec fastlane --env $PLATFORM,beta,secret test_and_build_app test:false

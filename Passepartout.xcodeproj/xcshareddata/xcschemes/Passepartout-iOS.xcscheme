@@ -51,6 +51,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PassepartoutCoreTests"
+               BuildableName = "PassepartoutCoreTests"
+               BlueprintName = "PassepartoutCoreTests"
+               ReferencedContainer = "container:PassepartoutCore">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

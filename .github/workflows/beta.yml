@@ -26,44 +26,58 @@ env:
 jobs:
   build_upload_ios:
     runs-on: macos-11
-    timeout-minutes: 60
+    env:
+      GYM_OUTPUT_DIRECTORY: "dist/ios"
+      PILOT_IPA: "dist/ios/Passepartout.ipa"
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
       - name: Prepare build
         uses: ./.github/actions/prepare-build-app
-      - name: Build iOS (.ipa)
+      - name: Run tests
         run: |
-          bundle exec fastlane --env ios,beta create_archive
+          cd PassepartoutCore
+          swift test
+      - name: Build iOS (.ipa)
+        timeout-minutes: 15
+        run: |
+          bundle exec fastlane --env ios,beta test_and_build_app test:false
       - name: Submit to TestFlight
         run: |
           export PILOT_CHANGELOG=`ci/build-changelog.sh ios`
-          export PILOT_IPA="dist/ios/Passepartout.ipa"
-          bundle exec fastlane --env ios,beta store_beta
+          bundle exec fastlane --env ios,beta run pilot
   build_upload_mac:
     runs-on: macos-11
-    timeout-minutes: 60
+    env:
+      GYM_OUTPUT_DIRECTORY: "dist/mac"
+      PILOT_PKG: "dist/mac/Passepartout.pkg"
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
       - name: Prepare build
         uses: ./.github/actions/prepare-build-app
-      - name: Build macOS (.pkg)
+        with:
+          platform: "macos"
+      - name: Run tests
         run: |
-          bundle exec fastlane --env mac,beta create_archive
+          cd PassepartoutCore
+          swift test
+      - name: Build macOS (.pkg)
+        timeout-minutes: 15
+        run: |
+          bundle exec fastlane --env mac,beta test_and_build_app test:false
       - name: Submit to TestFlight
         run: |
           export PILOT_CHANGELOG=`ci/build-changelog.sh mac`
-          export PILOT_PKG="dist/mac/Passepartout.pkg"
-          bundle exec fastlane --env mac,beta store_beta
+          bundle exec fastlane --env mac,beta run pilot
   release_public_beta:
     runs-on: ubuntu-latest
     needs: [build_upload_ios, build_upload_mac]
     environment:
       name: public_beta
-      url: https://testflight.apple.com/join/K71mtLjZ
+      url: "https://testflight.apple.com/join/K71mtLjZ"
     env:
       PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
       PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
@@ -81,16 +95,16 @@ jobs:
         run: |
           export PILOT_APP_VERSION=`ci/version-number.sh ios`
           export PILOT_BUILD_NUMBER=`ci/build-number.sh ios`
-          bundle exec fastlane --env ios,beta store_beta
+          bundle exec fastlane --env ios,beta run pilot
 #      - name: Publish on TestFlight (macOS)
 #        run: |
 #          export PILOT_APP_VERSION=`ci/version-number.sh mac`
 #          export PILOT_BUILD_NUMBER=`ci/build-number.sh mac`
-#          bundle exec fastlane --env mac,beta store_beta
+#          bundle exec fastlane --env mac,beta run pilot
       - name: Tag beta
         run: |
-          export VERSION=`ci/version-number.sh ios`
-          export BUILD=`ci/version-number.sh ios`
+          VERSION=`ci/version-number.sh ios`
+          BUILD=`ci/build-number.sh ios`
           git tag "v$VERSION-b$BUILD" && git push --tags
   submit_for_app_review:
     runs-on: ubuntu-latest
@@ -113,12 +127,12 @@ jobs:
         run: |
           export DELIVER_APP_VERSION=`ci/version-number.sh ios`
           export DELIVER_BUILD_NUMBER=`ci/build-number.sh ios`
-          bundle exec fastlane --env ios store_review add_id_info_uses_idfa:false
+          bundle exec fastlane --env ios deliver_review add_id_info_uses_idfa:false
       - name: Submit for App Review (macOS)
         run: |
           export DELIVER_APP_VERSION=`ci/version-number.sh mac`
           export DELIVER_BUILD_NUMBER=`ci/build-number.sh mac`
-          bundle exec fastlane --env mac store_review add_id_info_uses_idfa:false
+          bundle exec fastlane --env mac deliver_review add_id_info_uses_idfa:false
   release_to_app_store:
     runs-on: ubuntu-latest
     needs: submit_for_app_review
@@ -139,14 +153,13 @@ jobs:
           git_tag_gpgsign: true
           git_push_gpgsign: false
       - name: Tag release
-        id: tag_release
         run: |
           scripts/ci/commit-release.sh
           git pull && git push && git push --tags
           echo "::set-output name=tag_name::`git describe`"
       - name: Assemble notes
         run: |
-          export RELEASE_NOTES="release-notes.txt"
+          RELEASE_NOTES="release-notes.txt"
           echo "# App Store" >$RELEASE_NOTES
           echo >>$RELEASE_NOTES
           echo "## iOS" >>$RELEASE_NOTES
