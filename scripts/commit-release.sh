@@ -8,7 +8,7 @@ fi
 VERSION=`ci/version-number.sh ios`
 DATE=`date "+%Y-%m-%d"`
 CHANGELOG_GLOB="Passepartout/App/*/CHANGELOG.md"
-COMMIT_MESSAGE="Set release date"
+COMMIT_MESSAGE="[ci skip] Set release date"
 TAG_MESSAGE="Release"
 TAG_SIGN="--sign"
 if [[ $1 == "no-sign" ]]; then
