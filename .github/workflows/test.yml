@@ -3,7 +3,7 @@ name: Unit Tests
 on:
   push:
     branches-ignore:
-      - 'stable'
+      - 'test/*'
 
 env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}

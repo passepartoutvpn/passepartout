@@ -4,7 +4,9 @@
 ![macOS 10.15+](https://img.shields.io/badge/macOS-10.15+-green.svg)
 [![TunnelKit 4.0](https://img.shields.io/badge/TunnelKit-4.0-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
-[![GitHub Actions](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml)
+
+[![Unit Tests](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml)
+[![Public Beta](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml)
 
 # [Passepartout][about-website]
 
