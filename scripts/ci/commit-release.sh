@@ -4,8 +4,12 @@ if [[ $CURRENT_BRANCH != "master" ]]; then
     echo "Not on master branch"
     exit 1
 fi
+VERSION=$1
+if [[ -z $VERSION ]]; then
+    echo "Must provide version"
+    exit 1
+fi
 
-VERSION=`ci/version-number.sh ios`
 DATE=`date "+%Y-%m-%d"`
 CHANGELOG_GLOB="Passepartout/App/*/CHANGELOG.md"
 COMMIT_MESSAGE="[ci skip] Set release date"

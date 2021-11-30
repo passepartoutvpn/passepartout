@@ -24,36 +24,22 @@ env:
   CHANGELOG_PREFACE: ${{ secrets.CHANGELOG_PREFACE }}
 
 jobs:
-  build_upload_ios:
-    name: Upload iOS app
+  build_upload:
+    name: Upload to ASC
     runs-on: macos-11
+    strategy:
+      fail-fast: true
+      matrix:
+        name: ["iOS", "macOS"]
+        include:
+          - name: "iOS"
+            platform: "ios"
+            use_version: true
+          - name: "macOS"
+            platform: "mac"
     env:
-      GYM_OUTPUT_DIRECTORY: "dist/ios"
-      PILOT_IPA: "dist/ios/Passepartout.ipa"
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-      - name: Prepare build
-        uses: ./.github/actions/prepare-build-app
-      - name: Run tests
-        run: |
-          cd PassepartoutCore
-          swift test
-      - name: Build iOS (.ipa)
-        timeout-minutes: 15
-        run: |
-          bundle exec fastlane --env ios,beta test_and_build_app test:false
-      - name: Submit to TestFlight
-        run: |
-          export PILOT_CHANGELOG=`ci/build-changelog.sh ios`
-          bundle exec fastlane --env ios,beta run pilot
-  build_upload_mac:
-    name: Upload macOS app
-    runs-on: macos-11
-    env:
-      GYM_OUTPUT_DIRECTORY: "dist/mac"
-      PILOT_PKG: "dist/mac/Passepartout.pkg"
+      PLATFORM: ${{ matrix.platform }}
+      GYM_OUTPUT_DIRECTORY: "dist/${{ matrix.platform }}"
     steps:
       - uses: actions/checkout@v2
         with:
@@ -61,29 +47,47 @@ jobs:
       - name: Prepare build
         uses: ./.github/actions/prepare-build-app
         with:
-          platform: "macos"
+          platform: ${{ matrix.platform }}
+      - name: Store app version
+        id: app_version
+        if: ${{ matrix.use_version }}
+        run: |
+          VERSION=`ci/version-number.sh $PLATFORM`
+          BUILD=`ci/build-number.sh $PLATFORM`
+          echo "::set-output name=version::$VERSION"
+          echo "::set-output name=build::$BUILD"
       - name: Run tests
         run: |
           cd PassepartoutCore
           swift test
-      - name: Build macOS (.pkg)
+      - name: Build ${{ matrix.name }} app
         timeout-minutes: 15
         run: |
-          bundle exec fastlane --env mac,beta test_and_build_app test:false
+          bundle exec fastlane --env $PLATFORM,beta test_and_build_app test:false
       - name: Submit to TestFlight
         run: |
-          export PILOT_CHANGELOG=`ci/build-changelog.sh mac`
-          bundle exec fastlane --env mac,beta run pilot
+          if [ $PLATFORM == "ios" ]; then
+            export PILOT_IPA="$GYM_OUTPUT_DIRECTORY/Passepartout.ipa"
+          else
+            export PILOT_PKG="$GYM_OUTPUT_DIRECTORY/Passepartout.pkg"
+          fi
+          export PILOT_CHANGELOG=`ci/build-changelog.sh $PLATFORM`
+          bundle exec fastlane --env $PLATFORM,beta run pilot
+    outputs:
+      version: ${{ steps.app_version.outputs.version }}
+      build: ${{ steps.app_version.outputs.build }}
   distribute_public_beta:
     name: Distribute Public Beta
     runs-on: ubuntu-latest
-    needs: [build_upload_ios, build_upload_mac]
+    needs: build_upload
     environment:
       name: public_beta
       url: "https://testflight.apple.com/join/K71mtLjZ"
     env:
       PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
       PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
+      PILOT_APP_VERSION: ${{ needs.build_upload.outputs.version }}
+      PILOT_BUILD_NUMBER: ${{ needs.build_upload.outputs.build }}
       PILOT_DISTRIBUTE_ONLY: true
     steps:
       - name: Check out repository
@@ -96,27 +100,23 @@ jobs:
           bundler-cache: true
       - name: Publish on TestFlight (iOS)
         run: |
-          export PILOT_APP_VERSION=`ci/version-number.sh ios`
-          export PILOT_BUILD_NUMBER=`ci/build-number.sh ios`
           bundle exec fastlane --env ios,beta run pilot
 #      - name: Publish on TestFlight (macOS)
 #        run: |
-#          export PILOT_APP_VERSION=`ci/version-number.sh mac`
-#          export PILOT_BUILD_NUMBER=`ci/build-number.sh mac`
 #          bundle exec fastlane --env mac,beta run pilot
       - name: Tag beta
         run: |
-          VERSION=`ci/version-number.sh ios`
-          BUILD=`ci/build-number.sh ios`
-          git tag "v$VERSION-b$BUILD" && git push --tags
+          git tag "v$PILOT_APP_VERSION-b$PILOT_BUILD_NUMBER" && git push --tags
   submit_for_app_review:
     name: Submit to App Review
     runs-on: ubuntu-latest
-    needs: release_public_beta
+    needs: build_upload
     environment:
       name: app_review
     env:
       DELIVER_USERNAME: ${{ secrets.DELIVER_USERNAME }}
+      DELIVER_APP_VERSION: ${{ needs.build_upload.outputs.version }}
+      DELIVER_BUILD_NUMBER: ${{ needs.build_upload.outputs.build }}
       DELIVER_FORCE: true
     steps:
       - name: Check out repository
@@ -129,13 +129,9 @@ jobs:
           bundler-cache: true
       - name: Submit for App Review (iOS)
         run: |
-          export DELIVER_APP_VERSION=`ci/version-number.sh ios`
-          export DELIVER_BUILD_NUMBER=`ci/build-number.sh ios`
           bundle exec fastlane --env ios deliver_review add_id_info_uses_idfa:false
       - name: Submit for App Review (macOS)
         run: |
-          export DELIVER_APP_VERSION=`ci/version-number.sh mac`
-          export DELIVER_BUILD_NUMBER=`ci/build-number.sh mac`
           bundle exec fastlane --env mac deliver_review add_id_info_uses_idfa:false
   publish_to_app_store:
     name: Publish to App Store
@@ -143,6 +139,8 @@ jobs:
     needs: submit_for_app_review
     environment:
       name: app_store
+    env:
+      TAG_NAME: ${{ needs.build_upload.outputs.version }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -159,9 +157,10 @@ jobs:
           git_push_gpgsign: false
       - name: Tag release
         run: |
-          scripts/ci/commit-release.sh
-          git pull && git push && git push --tags
-          echo "::set-output name=tag_name::`git describe`"
+          git pull --no-tags origin $GITHUB_REF_NAME
+          git submodule update --recursive
+          scripts/ci/commit-release.sh $TAG_NAME
+          git push && git push --tags
       - name: Assemble notes
         run: |
           RELEASE_NOTES="release-notes.txt"
@@ -176,7 +175,7 @@ jobs:
       - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.tag_release.outputs.tag_name }}
+          tag_name: "v${{ needs.build_upload.outputs.version }}"
           body_path: release-notes.txt
           files: |
             release-notes.txt
