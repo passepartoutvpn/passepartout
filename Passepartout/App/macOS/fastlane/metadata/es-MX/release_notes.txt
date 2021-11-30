@@ -1,9 +1,4 @@
-### Changed
-
-- Revert to OpenSSL.
-
 ### Fixed
 
-- "TLS failed" with some certificates (e.g. Let's Encrypt).
-- Newer infrastructure discarded over bundle.
+- Last update was not refreshed on "Refresh infrastructure".
 
