@@ -7,8 +7,10 @@ fi
 
 # set build number
 . .env
+MARKER_FILE=".beta-build"
 BUILD=$((BASE_BUILD_NUMBER + `git rev-list HEAD --count` + 1))
 ci/set-build.sh $BUILD
+echo $BUILD >$MARKER_FILE
 
 # set release notes
 ci/update-release-notes.sh ios &&
@@ -21,6 +23,7 @@ git -C PassepartoutCore/Sources/PassepartoutCore/API pull origin master
 git add */PassepartoutCore/API
 
 # add build number
+git add $MARKER_FILE
 git add Passepartout.xcodeproj
 git add *.plist
 

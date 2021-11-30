@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - 'master'
+    paths:
+      - '.beta-build'
 
 env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
@@ -22,16 +24,8 @@ env:
   CHANGELOG_PREFACE: ${{ secrets.CHANGELOG_PREFACE }}
 
 jobs:
-  check_beta:
-    if: contains(github.event.head_commit.message, 'Attempt beta release')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check beta commit
-        run: |
-          echo
   build_upload_ios:
     runs-on: macos-11
-    needs: check_beta
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v2
@@ -49,7 +43,6 @@ jobs:
           bundle exec fastlane --env ios,beta store_beta
   build_upload_mac:
     runs-on: macos-11
-    needs: check_beta
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v2
