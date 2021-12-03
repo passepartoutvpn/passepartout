@@ -1,4 +1,8 @@
 name: 'Prepare build environment'
+inputs:
+  platform:
+    description: 'Platform for match'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -11,4 +15,4 @@ runs:
     - shell: bash
       run: |
         scripts/ci/recognize-match-hostname.sh
-        bundle exec fastlane preinstall_development_certs
+        bundle exec fastlane --env ${{ inputs.platform }} preinstall_development_certs

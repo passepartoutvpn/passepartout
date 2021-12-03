@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Release app in the open via [GitHub Actions](https://github.com/passepartoutvpn/passepartout-apple/actions).
+
 ## 1.17.2 (2021-11-30)
 
 ### Changed

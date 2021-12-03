@@ -22,11 +22,6 @@ lane :preinstall_development_certs do
         password: ENV["MATCH_KEYCHAIN_PASSWORD"]
     )
     match(
-        platform: "macos",
-        type: "development"
-    )
-    match(
-        platform: "ios",
         type: "development"
     )
 end

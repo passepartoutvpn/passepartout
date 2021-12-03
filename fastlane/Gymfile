@@ -10,8 +10,11 @@
 
 # sdk "iphoneos9.0"
 
-output_directory "dist/#{ENV["PLATFORM"]}"
-
 clean true
 silent false
 skip_profile_detection true
+disable_xcpretty true
+
+build_path "build"
+derived_data_path "build/derived_data"
+#cloned_source_packages_path "build/sources"
