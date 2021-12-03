@@ -6,7 +6,7 @@
 [![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
 
 [![Unit Tests](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml)
-[![Public Beta](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/beta.yml)
+[![Release](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/release.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/release.yml)
 
 # [Passepartout][about-website]
 
