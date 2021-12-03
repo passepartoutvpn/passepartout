@@ -10,5 +10,6 @@ if [[ $PLATFORM == "ios" ]]; then
 else
     export PILOT_PKG="$OUTPUT_DIRECTORY/Passepartout.pkg"
 fi
+export CHANGELOG_PREFACE=`cat templates/CHANGELOG.preface.md`
 export PILOT_CHANGELOG=`ci/build-changelog.sh $PLATFORM`
 bundle exec fastlane --env $PLATFORM,beta,secret run pilot
