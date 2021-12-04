@@ -1,0 +1,23 @@
+name: "Create custom keychain"
+inputs:
+  name:
+    description: "Keychain name"
+    required: true
+  password:
+    description: "Keychain password"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      env:
+        KEYCHAIN_NAME: ${{ inputs.name }}
+        KEYCHAIN_PASSWORD: ${{ inputs.password }}
+      run: |
+        bundle exec fastlane run create_keychain unlock:true lock_after_timeout:false
+    - uses: webiny/action-post-run@2.0.1
+      env:
+        KEYCHAIN_NAME: ${{ inputs.name }}
+      with:
+        run: |
+          bundle exec fastlane run delete_keychain
