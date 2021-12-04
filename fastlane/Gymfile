@@ -17,3 +17,5 @@ skip_profile_detection true
 build_path "build"
 derived_data_path "build/derived_data"
 #cloned_source_packages_path "build/sources"
+
+disable_xcpretty true

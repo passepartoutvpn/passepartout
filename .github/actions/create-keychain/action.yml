@@ -14,7 +14,7 @@ runs:
         KEYCHAIN_NAME: ${{ inputs.name }}
         KEYCHAIN_PASSWORD: ${{ inputs.password }}
       run: |
-        bundle exec fastlane run create_keychain unlock:true lock_after_timeout:false
+        bundle exec fastlane run create_keychain unlock:true lock_after_timeout:false timeout:6000
     - uses: webiny/action-post-run@2.0.1
       env:
         KEYCHAIN_NAME: ${{ inputs.name }}

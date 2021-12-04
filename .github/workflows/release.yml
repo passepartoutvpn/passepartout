@@ -11,18 +11,6 @@ env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
   FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-  MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
-  MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-  MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
-  MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
-  MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
-  MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
-  PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
-  PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
-  PILOT_BETA_APP_FEEDBACK: ${{ secrets.PILOT_BETA_APP_FEEDBACK }}
-  PILOT_BETA_APP_REVIEW_INFO: ${{ secrets.PILOT_BETA_APP_REVIEW_INFO }}
-  PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ secrets.PILOT_NOTIFY_EXTERNAL_TESTERS }}
-  CHANGELOG_PREFACE: ${{ secrets.CHANGELOG_PREFACE }}
 
 jobs:
   build_upload:
@@ -40,6 +28,12 @@ jobs:
             platform: "mac"
     env:
       PLATFORM: ${{ matrix.platform }}
+      MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+      MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
+      MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
+      MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
       GYM_OUTPUT_DIRECTORY: "dist/${{ matrix.platform }}"
     steps:
       - uses: actions/checkout@v2
@@ -51,6 +45,14 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
+      - name: Store app version
+        id: app_version
+        if: ${{ matrix.use_version }}
+        run: |
+          VERSION=`ci/version-number.sh $PLATFORM`
+          BUILD=`ci/build-number.sh $PLATFORM`
+          echo "::set-output name=version::$VERSION"
+          echo "::set-output name=build::$BUILD"
       - name: Create keychain
         uses: ./.github/actions/create-keychain
         with:
@@ -60,23 +62,22 @@ jobs:
         run: |
           scripts/ci/recognize-match-hostname.sh
           bundle exec fastlane --env ${{ matrix.platform }} match development
-      - name: Store app version
-        id: app_version
-        if: ${{ matrix.use_version }}
-        run: |
-          VERSION=`ci/version-number.sh $PLATFORM`
-          BUILD=`ci/build-number.sh $PLATFORM`
-          echo "::set-output name=version::$VERSION"
-          echo "::set-output name=build::$BUILD"
       - name: Run tests
         run: |
           cd PassepartoutCore
           swift test
       - name: Build ${{ matrix.name }} app
-        timeout-minutes: 15
+        timeout-minutes: 10
         run: |
           bundle exec fastlane --env $PLATFORM,beta test_and_build_app test:false
       - name: Submit to TestFlight
+        env:
+          PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
+          PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
+          PILOT_BETA_APP_FEEDBACK: ${{ secrets.PILOT_BETA_APP_FEEDBACK }}
+          PILOT_BETA_APP_REVIEW_INFO: ${{ secrets.PILOT_BETA_APP_REVIEW_INFO }}
+          PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ secrets.PILOT_NOTIFY_EXTERNAL_TESTERS }}
+          CHANGELOG_PREFACE: ${{ secrets.CHANGELOG_PREFACE }}
         run: |
           if [ $PLATFORM == "ios" ]; then
             export PILOT_IPA="$GYM_OUTPUT_DIRECTORY/Passepartout.ipa"
@@ -96,18 +97,17 @@ jobs:
       name: public_beta
       url: "https://testflight.apple.com/join/K71mtLjZ"
     env:
-      PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
-      PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
       PILOT_APP_VERSION: ${{ needs.build_upload.outputs.version }}
       PILOT_BUILD_NUMBER: ${{ needs.build_upload.outputs.build }}
+      PILOT_USERNAME: ${{ secrets.PILOT_USERNAME }}
+      PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
+      PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ secrets.PILOT_NOTIFY_EXTERNAL_TESTERS }}
       PILOT_DISTRIBUTE_ONLY: true
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Prepare Ruby bundle
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
       - name: Publish on TestFlight (iOS)
@@ -131,12 +131,10 @@ jobs:
       DELIVER_BUILD_NUMBER: ${{ needs.build_upload.outputs.build }}
       DELIVER_FORCE: true
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Prepare Ruby bundle
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
       - name: Submit for App Review (iOS)
@@ -153,9 +151,9 @@ jobs:
       name: app_store
     env:
       TAG_NAME: ${{ needs.build_upload.outputs.version }}
+      RELEASE_NOTES: release-notes.txt
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           submodules: true
       - name: Import GPG key
@@ -167,27 +165,21 @@ jobs:
           git_commit_gpgsign: true
           git_tag_gpgsign: true
           git_push_gpgsign: false
-      - name: Tag release
+      - name: Pull metadata updates
         run: |
           git pull --no-tags origin $GITHUB_REF_NAME
           git submodule update --recursive
+      - name: Tag release
+        run: |
           scripts/ci/commit-release.sh $TAG_NAME
           git push && git push --tags
       - name: Assemble notes
         run: |
-          RELEASE_NOTES="release-notes.txt"
-          echo "# App Store" >$RELEASE_NOTES
-          echo >>$RELEASE_NOTES
-          echo "## iOS" >>$RELEASE_NOTES
-          echo >>$RELEASE_NOTES
-          cat Passepartout/App/iOS/fastlane/metadata/en-US/release_notes.txt >>$RELEASE_NOTES
-          echo "## macOS" >>$RELEASE_NOTES
-          echo >>$RELEASE_NOTES
-          cat Passepartout/App/macOS/fastlane/metadata/en-US/release_notes.txt >>$RELEASE_NOTES
+          scripts/ci/release-notes.sh $TAG_NAME >$RELEASE_NOTES
       - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "v${{ needs.build_upload.outputs.version }}"
-          body_path: release-notes.txt
+          tag_name: "v${{ env.TAG_NAME }}"
+          body_path: ${{ env.RELEASE_NOTES }}
           files: |
-            release-notes.txt
+            ${{ env.RELEASE_NOTES }}
