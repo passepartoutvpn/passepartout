@@ -69,8 +69,17 @@
         "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
         "state": {
           "branch": null,
-          "revision": "b88f490b82d7b11310d0f36dc41c5478f753966c",
-          "version": "4.0.3"
+          "revision": "430e0e6afb6f528b4fdf4210d47017c938a4b115",
+          "version": null
+        }
+      },
+      {
+        "package": "WireGuardKit",
+        "repositoryURL": "https://git.zx2c4.com/wireguard-apple",
+        "state": {
+          "branch": null,
+          "revision": "10da5cfdef362889b438cfbeff867a74e6d717fd",
+          "version": "1.0.15-26"
         }
       }
     ]

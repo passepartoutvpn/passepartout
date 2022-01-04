@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Handle `--keepalive` option.
+
 ### Changed
 
 - Release app in the open via GitHub Actions.
