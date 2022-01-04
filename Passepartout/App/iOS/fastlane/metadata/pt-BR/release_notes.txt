@@ -1,4 +1,8 @@
+### Added
+
+- Handle `--keepalive` option.
+
 ### Changed
 
-- Release app in the open via [GitHub Actions](https://github.com/passepartoutvpn/passepartout-apple/actions).
+- Release app in the open via GitHub Actions.
 
