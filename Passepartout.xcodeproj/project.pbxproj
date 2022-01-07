@@ -1003,7 +1003,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Frameworks\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf ${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Frameworks\n";
 		};
 		0EBEF139274E4DAE00EAC689 /* Drop Extra Frameworks In Extensions */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1021,7 +1021,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf \"${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Contents/Frameworks\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf ${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Contents/Frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1426,7 +1426,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2973;
+				CURRENT_PROJECT_VERSION = 2975;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1492,7 +1492,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2973;
+				CURRENT_PROJECT_VERSION = 2975;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
