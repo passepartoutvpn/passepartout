@@ -110,6 +110,7 @@ For the VPN to work properly, the app requires:
 
 - _App Groups_ and _Keychain Sharing_ capabilities
 - App IDs with _Packet Tunnel_ entitlements
+- Enabling "App Sandbox > Outgoing Connections (Client)" (macOS only)
 
 both in the main app and the tunnel extension target.
 
