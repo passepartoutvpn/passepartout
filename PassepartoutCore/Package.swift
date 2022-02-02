@@ -7,7 +7,7 @@ let package = Package(
     name: "PassepartoutCore",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v12), .macOS(.v10_15)
+        .iOS(.v12), .macOS(.v10_14)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -22,7 +22,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
 //        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", from: "4.0.0"),
-        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("430e0e6afb6f528b4fdf4210d47017c938a4b115")),
+        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("3fbd5a514054bd136455c03004423e069d1d67ef")),
 //        .package(name: "TunnelKit", path: "../../tunnelkit"),
         .package(name: "Convenience", url: "https://github.com/keeshux/convenience", .revision("347105ec0ce27cd4255acf9875fd60ad1f213801")),
         .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0")
