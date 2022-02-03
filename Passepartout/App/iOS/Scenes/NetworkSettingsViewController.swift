@@ -250,18 +250,15 @@ class NetworkSettingsViewController: UITableViewController {
         // DNS: servers, domains
         // Proxy: address, port, PAC, bypass domains
 
-        let text = field.text ?? ""
+        let text = field.text?.stripped ?? ""
 
         if field.tag == FieldTag.dnsCustom.rawValue {
             switch networkSettings.dnsProtocol {
             case .https:
-                guard let string = field.text, let url = URL(string: string) else {
-                    break
-                }
-                networkSettings.dnsHTTPSURL = url
+                networkSettings.dnsHTTPSURL = URL(string: text)
 
             case .tls:
-                networkSettings.dnsTLSServerName = field.text
+                networkSettings.dnsTLSServerName = text
 
             default:
                 break
@@ -281,11 +278,11 @@ class NetworkSettingsViewController: UITableViewController {
                 networkSettings.dnsSearchDomains = [text]
             }
         } else if field.tag == FieldTag.proxyAddress.rawValue {
-            networkSettings.proxyAddress = field.text
+            networkSettings.proxyAddress = text
         } else if field.tag == FieldTag.proxyPort.rawValue {
-            networkSettings.proxyPort = UInt16(field.text ?? "0")
+            networkSettings.proxyPort = UInt16(text) ?? 0
         } else if field.tag == FieldTag.proxyAutoConfigurationURL.rawValue {
-            if let string = field.text {
+            if let string = text {
                 networkSettings.proxyAutoConfigurationURL = URL(string: string)
             } else {
                 networkSettings.proxyAutoConfigurationURL = nil

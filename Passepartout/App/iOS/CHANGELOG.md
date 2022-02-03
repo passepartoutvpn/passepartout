@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release app in the open via GitHub Actions.
 
+### Fixed
+
+- Trim whitespaces in text fields.
+
 ## 1.17.2 (2021-11-30)
 
 ### Changed

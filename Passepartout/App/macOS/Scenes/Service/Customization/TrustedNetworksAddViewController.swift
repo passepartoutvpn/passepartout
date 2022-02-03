@@ -49,7 +49,7 @@ class TrustedNetworksAddViewController: NSViewController {
     }
 
     @IBAction private func confirm(_ sender: Any?) {
-        let ssid = textSSID.stringValue.trimmingCharacters(in: .whitespaces)
+        let ssid = textSSID.stringValue.stripped
         guard !ssid.isEmpty else {
             return
         }

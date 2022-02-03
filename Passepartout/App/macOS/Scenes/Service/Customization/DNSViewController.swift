@@ -158,7 +158,7 @@ class DNSViewController: NSViewController, ProfileCustomization {
             networkSettings.dnsHTTPSURL = URL(string: textDNSCustom.stringValue)
 
         case .tls:
-            networkSettings.dnsTLSServerName = textDNSCustom.stringValue
+            networkSettings.dnsTLSServerName = textDNSCustom.stringValue.stripped
 
         default:
             break

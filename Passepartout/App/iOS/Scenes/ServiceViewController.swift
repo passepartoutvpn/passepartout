@@ -449,10 +449,11 @@ class ServiceViewController: UIViewController, StrongTableHost {
         }
         alert.addCancelAction(L10n.Global.cancel)
         alert.addPreferredAction(L10n.Service.Cells.TrustedAddWifi.caption) {
-            guard let wifi = alert.textFields?.first?.text else {
+            let ssid = alert.textFields?.first?.text?.stripped
+            guard let ssid = ssid, !ssid.isEmpty else {
                 return
             }
-            self.trustedNetworks.addWifi(wifi)
+            self.trustedNetworks.addWifi(ssid)
         }
         present(alert, animated: true, completion: nil)
     }

@@ -38,8 +38,8 @@ public extension Credentials {
     }
     
     func trimmed() -> Credentials {
-        let trimmedUsername = username.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedUsername = username.stripped
+        let trimmedPassword = password.stripped
         return Credentials(trimmedUsername, trimmedPassword)
     }
 }

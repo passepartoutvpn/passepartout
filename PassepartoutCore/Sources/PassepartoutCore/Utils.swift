@@ -230,3 +230,9 @@ public extension Infrastructure.Metadata {
         return URL(string: string)
     }
 }
+
+public extension String {
+    var stripped: String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}

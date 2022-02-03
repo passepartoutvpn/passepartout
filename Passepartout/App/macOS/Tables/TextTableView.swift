@@ -143,7 +143,7 @@ extension TextTableView: NSTableViewDataSource, NSTableViewDelegate {
             rows.remove(at: row)
             return
         }
-        rows[row] = string
+        rows[row] = string.stripped
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {

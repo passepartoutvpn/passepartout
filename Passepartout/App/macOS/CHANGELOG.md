@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Last update was not refreshed on "Refresh infrastructure".
+- Trim whitespaces in text fields.
 
 ## 1.17.2 (2021-11-30)
 

@@ -112,7 +112,7 @@ class ProxyViewController: NSViewController, ProfileCustomization {
             return
         }
         view.endEditing()
-        networkSettings.proxyAddress = textProxyAddress.stringValue
+        networkSettings.proxyAddress = textProxyAddress.stringValue.stripped
         networkSettings.proxyPort = UInt16(textProxyPort.stringValue)
         networkSettings.proxyAutoConfigurationURL = URL(string: textPAC.stringValue)
         networkSettings.proxyBypassDomains = tableProxyBypass.rows

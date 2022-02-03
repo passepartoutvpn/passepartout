@@ -95,7 +95,7 @@ class WizardHostViewController: UITableViewController, StrongTableHost {
     }
     
     @IBAction private func next() {
-        guard let enteredTitle = cellTitle?.field.text?.trimmingCharacters(in: .whitespaces), !enteredTitle.isEmpty else {
+        guard let enteredTitle = cellTitle?.field.text?.stripped, !enteredTitle.isEmpty else {
             return
         }
         guard let result = parsingResult else {
