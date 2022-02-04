@@ -282,11 +282,7 @@ class NetworkSettingsViewController: UITableViewController {
         } else if field.tag == FieldTag.proxyPort.rawValue {
             networkSettings.proxyPort = UInt16(text) ?? 0
         } else if field.tag == FieldTag.proxyAutoConfigurationURL.rawValue {
-            if let string = text {
-                networkSettings.proxyAutoConfigurationURL = URL(string: string)
-            } else {
-                networkSettings.proxyAutoConfigurationURL = nil
-            }
+            networkSettings.proxyAutoConfigurationURL = URL(string: text)
         } else if field.tag >= FieldTag.proxyBypass.rawValue {
             let i = field.tag - FieldTag.proxyBypass.rawValue
             if let _ = networkSettings.proxyBypassDomains {
