@@ -9,4 +9,5 @@
 ### Fixed
 
 - Last update was not refreshed on "Refresh infrastructure".
+- Trim whitespaces in text fields.
 

@@ -6,3 +6,7 @@
 
 - Release app in the open via GitHub Actions.
 
+### Fixed
+
+- Trim whitespaces in text fields.
+
