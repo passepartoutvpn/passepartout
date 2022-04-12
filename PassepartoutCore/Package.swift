@@ -76,9 +76,9 @@ let package = Package(
 //        .testTarget(
 //            name: "PassepartoutCoreTests",
 //            dependencies: ["PassepartoutCore"]),
-        .testTarget(
-            name: "PassepartoutProfilesTests",
-            dependencies: ["PassepartoutProfiles"]),
+//        .testTarget(
+//            name: "PassepartoutProfilesTests",
+//            dependencies: ["PassepartoutProfiles"]),
         .testTarget(
             name: "PassepartoutProvidersTests",
             dependencies: ["PassepartoutProviders"]),
