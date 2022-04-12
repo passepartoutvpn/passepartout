@@ -206,7 +206,8 @@ struct ProfileView: View {
         profileManager.removeProfiles(withIds: [header.id])
 
         // XXX: iOS 14, NavigationLink removal via header removal in OrganizerView+Profiles doesn't pop
-        if #unavailable(iOS 15) {
+        if #available(iOS 15, *) {
+        } else {
             presentationMode.wrappedValue.dismiss()
         }
     }

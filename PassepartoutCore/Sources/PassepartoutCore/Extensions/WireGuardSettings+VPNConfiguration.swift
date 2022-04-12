@@ -27,6 +27,8 @@ import Foundation
 import TunnelKitWireGuard
 
 extension Profile.WireGuardSettings: VPNConfigurationProviding {
+
+    @MainActor
     func vpnConfiguration(_ parameters: VPNConfigurationParameters) throws -> VPNConfiguration {
         var customBuilder = configuration.builder()
 

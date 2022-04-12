@@ -25,6 +25,7 @@
 
 import Foundation
 
+@MainActor
 public protocol AppPreferences {
     var activeProfileId: UUID? { get }
     

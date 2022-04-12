@@ -42,6 +42,9 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "^1.17"
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
@@ -62,12 +65,12 @@ jobs:
         run: |
           scripts/ci/recognize-match-hostname.sh
           bundle exec fastlane --env ${{ matrix.platform }} match development
-      - name: Run tests
-        run: |
-          cd PassepartoutCore
-          swift test
+#      - name: Run tests
+#        run: |
+#          cd PassepartoutCore
+#          swift test
       - name: Build ${{ matrix.name }} app
-        timeout-minutes: 10
+        timeout-minutes: 15
         run: |
           bundle exec fastlane --env $PLATFORM,beta test_and_build_app test:false
       - name: Submit to TestFlight

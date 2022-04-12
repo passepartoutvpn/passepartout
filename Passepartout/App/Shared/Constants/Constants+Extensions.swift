@@ -44,13 +44,12 @@ extension Constants {
             guard let identifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String else {
                 fatalError("Missing kCFBundleIdentifierKey from Info.plist")
             }
-            let prefix = "\(identifier).Tunnel"
             switch vpnProtocol {
             case .openVPN:
-                return "\(prefix).OpenVPN"
+                return "\(identifier).OpenVPNTunnel"
 
             case .wireGuard:
-                return "\(prefix).WireGuard"
+                return "\(identifier).WireGuardTunnel"
             }
         }
     }

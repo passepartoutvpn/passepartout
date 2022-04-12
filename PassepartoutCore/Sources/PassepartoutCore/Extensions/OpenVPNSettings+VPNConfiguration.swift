@@ -27,6 +27,8 @@ import Foundation
 import TunnelKitOpenVPN
 
 extension Profile.OpenVPNSettings: VPNConfigurationProviding {
+
+    @MainActor
     func vpnConfiguration(_ parameters: VPNConfigurationParameters) throws -> VPNConfiguration {
         var customBuilder = configuration.builder()
 

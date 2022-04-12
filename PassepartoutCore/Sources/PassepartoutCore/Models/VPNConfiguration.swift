@@ -29,6 +29,7 @@ import NetworkExtension
 
 public typealias VPNConfiguration = (neConfiguration: NetworkExtensionConfiguration, neExtra: NetworkExtensionExtra?)
 
+@MainActor
 protocol VPNConfigurationProviding {
     func vpnConfiguration(_ parameters: VPNConfigurationParameters) throws -> VPNConfiguration
 }

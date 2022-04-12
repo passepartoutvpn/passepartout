@@ -3,6 +3,7 @@ name: Unit Tests
 on:
   push:
     branches-ignore:
+      - 'master' # temporary
       - 'test/*'
     paths-ignore:
       - '.beta-*'
