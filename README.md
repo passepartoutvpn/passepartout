@@ -1,8 +1,8 @@
 <p style="text-align: center; padding: 0em 1em"><img src="res/logo.svg" width="300" height="300" /></p>
 
-![iOS 12+](https://img.shields.io/badge/iOS-12+-green.svg)
-![macOS 10.14+](https://img.shields.io/badge/macOS-10.14+-green.svg)
-[![TunnelKit 4.0](https://img.shields.io/badge/TunnelKit-4.0-d69c68.svg)][dep-tunnelkit]
+![iOS 14+](https://img.shields.io/badge/iOS-14+-green.svg)
+![macOS 11+](https://img.shields.io/badge/macOS-11+-green.svg)
+[![TunnelKit 5.0](https://img.shields.io/badge/TunnelKit-5.0-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
 
 [![Unit Tests](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml)
@@ -10,7 +10,7 @@
 
 # [Passepartout][about-website]
 
-Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] client for iOS and macOS.
+Passepartout is a non-official, user-friendly [OpenVPN®][openvpn] and [WireGuard][wireguard] client for iOS and macOS.
  
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20an%20user-friendly%2C%20open%20source%20%23OpenVPN%20client%20for%20%23iOS%20and%20%23macOS)
@@ -25,7 +25,9 @@ Passepartout lets you handle multiple profiles in one single place and quickly s
 
 ### Ease of use
 
-With its native look & feel, Passepartout focuses on ease of use. It does so by stripping the .ovpn flags that are today obsolete or rarely used. With good approximation, it mimics the most relevant features you will find in OpenVPN 2.4.x.
+With its native look & feel, Passepartout focuses on ease of use. It does so by stripping the flags that are today obsolete or rarely used. With good approximation, it mimics the most relevant features you will find in the official OpenVPN and WireGuard clients.
+
+Not to mention iCloud support, which makes your VPN profiles available on all your devices without any additional effort!
 
 [<img src="res/ios/snap-profile.png" width="300">](res/ios/snap-profile.png)
 
@@ -35,7 +37,7 @@ Trust Wi-Fi, cellular (iOS) or wired (macOS) networks to fine-grain your connect
 
 [<img src="res/ios/snap-trusted.png" width="300">](res/ios/snap-trusted.png)
 
-### Siri shortcuts (iOS)
+### Siri shortcuts
 
 Enjoy the convenience of Siri shortcuts to automate frequent VPN actions.
 
@@ -43,7 +45,7 @@ Enjoy the convenience of Siri shortcuts to automate frequent VPN actions.
 
 ### Override network settings
 
-Override default gateway, DNS, proxy and MTU settings right from the app. Don't bother editing the .ovpn file or your pushed server settings. This is especially useful if you want to override your provider settings, e.g. to integrate your own DNS-based ad blocking.
+Override default gateway, DNS (plus DoH/DoT), proxy and MTU settings right from the app. Don't bother editing the configuration file or your server settings. This is especially useful if you want to override your provider settings, e.g. to integrate your own DNS-based ad blocking.
 
 [<img src="res/ios/snap-network.png" width="300">](res/ios/snap-network.png)
 
@@ -78,20 +80,19 @@ Passepartout can connect to a few well-known VPN providers with an existing acco
 
 In preset mode, you can pick pre-resolved IPv4 endpoints when DNS is problematic.
 
-### Import .ovpn profiles
+### Import configuration files
 
-Passepartout can import .ovpn configuration files. This way you can fine-tune encryption without tweaking and reimporting a new configuration. 
-
-You can find details on what may or may not work in the related section of the [TunnelKit README][dep-tunnelkit-ovpn].
+Passepartout can import .ovpn (OpenVPN) and .wg (WireGuard) configuration files as is. You can find details on what may or may not work in the related section of the [TunnelKit README][dep-tunnelkit-ovpn].
 
 ## Installation
 
 ### Requirements
 
-- iOS 12.0+ / macOS 10.15+
-- Xcode 12+ (SwiftPM 5.3)
+- iOS 14+ / macOS 11+
+- Xcode 13+ (SwiftPM 5.3)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
+- golang
 
 It's highly recommended to use the Git and Ruby packages provided by [Homebrew][dep-brew].
 
@@ -106,13 +107,7 @@ Enter the directory and clone the submodules:
     $ git submodule init
     $ git submodule update
 
-For the VPN to work properly, the app requires:
-
-- _App Groups_ and _Keychain Sharing_ capabilities
-- App IDs with _Packet Tunnel_ entitlements
-- Enabling "App Sandbox > Outgoing Connections (Client)" (macOS only)
-
-both in the main app and the tunnel extension target.
+For everything to work properly, make sure to comply with all the capabilities/entitlements, both in the main app and the tunnel extension target.
 
 Make sure to update `Config.xcconfig` according to your developer account and your identifiers:
 
@@ -122,7 +117,11 @@ Make sure to update `Config.xcconfig` according to your developer account and yo
     CFG_GROUP_ID = com.example.MyAppGroup // omit the "group." prefix
     CFG_APPSTORE_ID = 1234567890 // optional for development, can be bogus
 
-After that, open `Passepartout.xcodeproj` in Xcode and run the `Passepartout-iOS` or `Passepartout-macOS` target.
+Also, `PATH` must include your golang installation in order to compile WireGuardKit:
+    
+    PATH = $(PATH):/path/to/golang
+
+To eventually test the app, open `Passepartout.xcodeproj` in Xcode and run the `Passepartout` target.
 
 ## License
 
@@ -148,9 +147,17 @@ The country flags are taken from: <https://github.com/lipis/flag-icon-css/>
 - SwiftGen - Copyright (c) 2018 SwiftGen
 - SwiftyBeaver - Copyright (c) 2015 Sebastian Kreutzberger
 
-This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. ([https://www.openssl.org/][dep-openssl])
+### OpenVPN
 
-Copyright (c) 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc.
+© Copyright 2022 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc.
+
+### WireGuard
+
+© Copyright 2015-2022 Jason A. Donenfeld. All Rights Reserved. "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
+
+### OpenSSL
+
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. ([https://www.openssl.org/][dep-openssl])
 
 ## Translations
 
@@ -178,9 +185,9 @@ Twitter: [@keeshux][about-twitter]
 Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
+[wireguard]: https://www.wireguard.com/
 
 [app-api]: https://github.com/passepartoutvpn/passepartout-api
-[app-net-csv]: https://childsafevpn.com
 [app-net-hideme]: https://member.hide.me/en/checkout?plan=new_default_prices&coupon=6CB-BDB-802&duration=24
 [app-net-mullvad]: https://mullvad.net/en/account/create/
 [app-net-nordvpn]: https://go.nordvpn.net/SH21Z
