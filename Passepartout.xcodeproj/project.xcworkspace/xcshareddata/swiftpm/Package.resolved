@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "TunnelKit",
+        "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
+        "state": {
+          "branch": null,
+          "revision": "f33a8549431a6710ab8814bda8dd94e7bcf13f09",
+          "version": null
+        }
+      },
+      {
         "package": "WireGuardKit",
         "repositoryURL": "https://github.com/passepartoutvpn/wireguard-apple",
         "state": {
