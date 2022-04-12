@@ -296,7 +296,7 @@ extension ProfileManager {
         }
         
         // IMPORTANT: invalidate current profile if deleted
-        if !currentProfile.value.isPlaceholder && newHeaders.keys.contains(currentProfile.value.id) {
+        if !currentProfile.value.isPlaceholder && !newHeaders.keys.contains(currentProfile.value.id) {
             pp_log.info("\tCurrent profile deleted, invalidating...")
             if isCurrentProfileActive() {
                 pp_log.info("\tCurrent profile was also active, deactivating...")
