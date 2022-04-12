@@ -393,7 +393,6 @@
 		0E34A2B827CAA8EA00C73B67 /* L10n */ = {
 			isa = PBXGroup;
 			children = (
-				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
 				0E34A2B527CAA8CC00C73B67 /* Core+L10n.swift */,
 				0E34A2AF27CAA84500C73B67 /* OpenVPN+L10n.swift */,
 				0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */,
@@ -544,6 +543,7 @@
 				0EDE8DE220C86A13004C739C /* App.entitlements */,
 				0E57F64720C83FC7008323CF /* Info.plist */,
 				0E0C072B236087A100155AAC /* InfoPlist.strings */,
+				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
 				0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */,
 			);
 			path = App;

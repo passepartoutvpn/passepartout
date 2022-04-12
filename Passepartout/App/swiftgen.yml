@@ -1,6 +1,6 @@
 strings:
     inputs:
-        - L10n/en.lproj/Localizable.strings
+        - en.lproj/Localizable.strings
     outputs:
         - templateName: structured-swift4
           output: Constants/SwiftGen+Strings.swift

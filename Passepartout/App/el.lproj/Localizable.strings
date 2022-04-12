@@ -4,7 +4,7 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
-//
+/* MARK: Global */
 
 "global.strings.cancel" = "Ακύρωση";
 "global.strings.next" = "Επόμενο";
@@ -15,6 +15,9 @@
 "global.strings.add" = "Προσθήκη";
 "global.strings.default" = "Default";
 "global.strings.name" = "Όνομα";
+"global.strings.provider" = "Πάροχος";
+"global.strings.providers" = "Πάροχοι";
+"global.strings.configuration" = "Ρύθμιση";
 "global.strings.address" = "Διεύθυνση";
 "global.strings.addresses" = "Διεθύνσεις";
 "global.strings.port" = "Θύρα";
@@ -41,7 +44,7 @@
 "global.strings.translations" = "Μεταφράσεις";
 
 "global.messages.email_not_configured" = "Δεν έχει ρυθμιστεί λογαριασμός ηλεκτρονικού ταχυδρομείου.";
-"global.messages.share" = "Το Passepartout είναι φιλικό προς το χρήστη, ανοιχτού κώδικα OpenVPN πρόγραμμα για iOS και macOS";
+"global.messages.share" = "Το Passepartout είναι φιλικό προς το χρήστη, ανοιχτού κώδικα OpenVPN / WireGuard πρόγραμμα για iOS και macOS";
 
 "global.placeholders.profile_name" = "Το προφίλ μου";
 
@@ -50,7 +53,30 @@
 "global.errors.missing_provider_server" = "Λείπει διακομιστής";
 "global.errors.missing_provider_preset" = "Λείπει προεπιλογή";
 
-// MARK: TunnelKit
+/* MARK: Menus */
+
+"menu.all.support.title" = "Υποστήριξη";
+"menu.all.share.title" = "Διαμοιράστε";
+"menu.all.about.title" = "Σχετικά με %@";
+
+"menu.contextual.add_profile.imported" = "Προσθήκη %@";
+"menu.system.show.title" = "Προβολή";
+"menu.system.switch_profile.title" = "Ενεργό προφίλ";
+"menu.system.active_profile.title.none" = "Δεν υπάρχει ενεργό προφίλ";
+"menu.system.active_profile.items.customize.title" = "Προσαρμογή...";
+"menu.system.active_profile.messages.missing_credentials" = "Δεν έχει διαμορφωθεί λογαριασμός";
+"menu.system.organizer.title" = "Διοργανωτής";
+"menu.system.preferences.title" = "Προτιμήσεις";
+"menu.system.support.donate" = "Κάντε μια δωρεά";
+"menu.system.support.join_community" = "Συμμετοχή στην κοινότητα";
+"menu.system.support.write_review" = "Γράψτε μια κριτική";
+// "menu.system.support.translate" = "Offer to translate";
+"menu.system.share_twitter.caption" = "Tweet γι 'αυτό!";
+"menu.system.share_generic.caption" = "Πρόσκληση Φίλου";
+"menu.system.quit.title" = "Διακοπή %@";
+"menu.system.quit.messages.confirm" = "Το VPN, αν είναι ενεργοποιημένο, θα εξακολουθεί να εκτελείται στο παρασκήνιο. Θέλετε να το διακόψετε;";
+
+/* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Προσπάθεια Σύνδεσης";
 "tunnelkit.vpn.active" = "Ενεργό";
@@ -78,61 +104,36 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Εισαγάγετε το κωδικό κρυπτογράφησης.";
 "tunnelkit.errors.openvpn.decryption" = "Η διαμόρφωση περιέχει κρυπτογραφημένο ιδιωτικό κλειδί και δεν ήταν δυνατό να αποκρυπτογραφηθεί. Δείτε πάλι το κωδικό που καταχωρίσατε.";
 
-// MARK: OrganizerView
-
-"organizer.sections.twitch.footer" = "Ελάτε να με παρακολουθήσετε ζωντανά το Passepartout στο Twitch, εγγραφείτε στη συνομιλία για να αλληλεπιδράσετε και να συνεισφέρετε!";
-"organizer.sections.siri.footer" = "Get help from Siri to speed up your most common interactions with the app.";
-"organizer.sections.support.header" = "Υποστήριξη";
-"organizer.items.follow_twitch.caption" = "Παρακολουθήστε το Passepartout στο Twitch";
-"organizer.items.profile.value.current" = "Σε χρήση";
-"organizer.items.siri_shortcuts.caption" = "Διαχείριση Συντομεύσεων";
-"organizer.items.join_community.caption" = "Συμμετοχή στην κοινότητα";
-"organizer.items.write_review.caption" = "Γράψτε μια κριτική";
-"organizer.items.donate.caption" = "Κάντε μια δωρεά";
-"organizer.items.github_sponsors.caption" = "Υποστηρίξτε με στο GitHub";
-"organizer.items.translate.caption" = "Βοηθήστε στη μετάφραση";
-"organizer.items.about.caption" = "Σχετικά με %@";
-"organizer.items.uninstall.caption" = "Αφαίρεση ρύθμισης VPN";
-"organizer.items.add_provider.caption" = "Προσθήκη νέου παρόχου";
-"organizer.items.add_host.caption" = "Προσθήκη από αρχεία";
-
 "organizer.alerts.reddit.message" = "Γνωρίζατε ότι το Passepartout έχει subreddit? Εγγραφείτε για ενημερώσεις ή για να συζητήσετε προβλήματα της εφαρμογές, νέες δυνατότητες και άλλα.\n\nΕίναι επίσης ένας ωραίος τρόπος να δείξετε ότι ενδιαφέρεστε για τη προσπάθεια αυτή.";
 "organizer.alerts.reddit.buttons.subscribe" = "Εγγραφή τώρα!";
 "organizer.alerts.reddit.buttons.remind" = "Υπενθύμιση Αργότερα";
 "organizer.alerts.reddit.buttons.never" = "Μη με ρωτήσεις ξανά";
 
-"organizer.alerts.uninstall_vpn.message" = "Θέλετε πραγματικά να διαγράψετε τη διαμόρφωση VPN από τις ρυθμίσεις της συσκευής σας; Αυτό μπορεί να διορθώσει κάποιες καταστραμμένες καταστάσεις VPN και δεν θα επηρεάσει τα προφίλ του παροχέα και του διακομιστή σας.";
 "organizer.alerts.remove_profile.title" = "Κατάργηση προφίλ";
 "organizer.alerts.remove_profile.message" = "Είστε βέβαιοι ότι θέλετε να διαγράψετε το προφίλ %@;";
 
-"organizer.menus.add_profile.imported" = "Προσθήκη %@";
-
-// MARK: AddProfileView
+/* MARK: AddProfileView */
 
 "add_profile.shared.title" = "Νέο προφίλ";
 "add_profile.shared.views.existing.header" = "Υπάρχον Προφίλ";
 "add_profile.shared.alerts.overwrite.message" = "Ένα προφίλ με το  ίδιο όνομα υπάρχει ήδη. Αντικατάσταση;";
 
-// MARK: AddHostView
+/* MARK: AddHostView */
 
 "add_profile.host.sections.encryption.footer" = "Εισαγωγή φράσης εισόδου";
 
-// MARK: AddProviderView
+/* MARK: AddProviderView */
 
-"add_profile.provider.sections.providers.header" = "Πάροχοι";
 "add_profile.provider.sections.vpn.footer" = "Εδώ θα βρείτε ορισμένους παρόχους με προκαθορισμένες ρυθμίσεις προφίλ.";
 "add_profile.provider.items.update_list" = "Αναβάθμιση Λίστας";
 "add_profile.provider.errors.no_default_server" = "Δεν βρέθηκε διακομιστής";
 
-// MARK: ProfileView
-
-"profile.sections.provider.header" = "Πάροχος";
+/* MARK: ProfileView */
 
 "profile.welcome.message" = "Καλώς Ήλθατε στο Passepartout!\n\nΧρησιμοποιήστε τον διοργανωτή για να προσθέσετε ένα νέο προφίλ.";
 
 "profile.sections.vpn.footer" = "Η σύνδεση θα πραγματοποιηθεί όποτε είναι απαραίτητο.";
 "profile.sections.status.header" = "Σύνδεση";
-"profile.sections.configuration.header" = "Ρύθμιση";
 "profile.sections.provider_infrastructure.footer" = "Τελευταία ενημέρωση στις %@.";
 "profile.sections.vpn_survives_sleep.footer" = "Απενεργοποιήστε για να βελτιώσετε τη χρήση της μπαταρίας, εις βάρος των περιστασιακών επιβραδύνσεων που οφείλονται σε επανασύνδεση αφύπνισης.";
 "profile.sections.vpn_resolves_hostname.footer" = "Προτιμάται στα περισσότερα δίκτυα και απαιτείται σε ορισμένα δίκτυα IPv6. Απενεργοποιήστε το εκεί που μπλοκάρεται το DNS ή για να επιταχύνετε τη επικοινωνία όταν το DNS είναι αργό για να ανταποκριθεί.";
@@ -149,14 +150,16 @@
 "profile.items.vpn_survives_sleep.caption" = "Κρατήστε ζωντανό στον ύπνο";
 "profile.items.vpn_resolves_hostname.caption" = "Επίλυση του ονόματος σέρβερ διακομιστή";
 "profile.items.reconnect.caption" = "Επανασύνδεση";
+"profile.items.uninstall.caption" = "Αφαίρεση ρύθμισης VPN";
 
 "profile.alerts.rename.title" = "Μετονομασία προφίλ";
 "profile.alerts.reconnect_vpn.message" = "Θέλετε να συνδεθείτε ξανά με το VPN;";
+"profile.alerts.uninstall_vpn.message" = "Θέλετε πραγματικά να διαγράψετε τη διαμόρφωση VPN από τις ρυθμίσεις της συσκευής σας; Αυτό μπορεί να διορθώσει κάποιες καταστραμμένες καταστάσεις VPN και δεν θα επηρεάσει τα προφίλ του παροχέα και του διακομιστή σας.";
 "profile.alerts.test_connectivity.title" = "Συνδεσιμότητα";
 "profile.alerts.test_connectivity.messages.success" = "Η συσκευή σας είναι συνδεδεμένη στο Διαδίκτυο!";
 "profile.alerts.test_connectivity.messages.failure" = "Η συσκευή σας δεν διαθέτει σύνδεση στο Internet, παρακαλούμε να ελέγξετε τις παραμέτρους του προφίλ σας.";
 
-// MARK: ProfileView -> Provider*View
+/* MARK: ProfileView -> Provider*View */
 
 "provider.location.title" = "Τοποθεσία";
 "provider.location.sections.empty_favorites.footer" = "Σείρετε αριστερά για να προσθέσετε ή να αφαιρέσεται από τα αγαπημένα.";
@@ -165,7 +168,7 @@
 
 "provider.preset.title" = "Προεπιλογή";
 
-// MARK: ProfileView -> AccountView
+/* MARK: ProfileView -> AccountView */
 
 "account.title" = "Λογαριασμός";
 "account.sections.credentials.header" = "Διαπιστευτήρια";
@@ -187,7 +190,7 @@
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Χρησιμοποιήστε τα διαπιστευτήρια ιστοτόπου %@. Το όνομα χρήστη είναι συνήθως το ηλεκτρονικό σας ταχυδρομείο.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Βρείτε τα διαπιστευτήριά σας %@ στο OpenVPN Config Generator στον ιστότοπο.";
 
-// MARK: ProfileView -> EndpointView
+/* MARK: ProfileView -> EndpointView */
 
 "endpoint.wireguard.items.peer.caption" = "Ομότιμο";
 "endpoint.wireguard.items.preshared_key.caption" = "Κλειδί προδιαμοιρασμού";
@@ -220,7 +223,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "μετά από %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Τυχαίο τελικό σημείο";
 
-// MARK: ProfileView -> NetworkSettingsView
+/* MARK: ProfileView -> NetworkSettingsView */
 
 "network_settings.title" = "Ρυθμίσεις Δικτύου";
 "network_settings.sections.choices.header" = "Παράκαμψη";
@@ -231,7 +234,7 @@
 "network_settings.items.proxy_bypass.caption" = "Παράκαμψη Τομέα";
 "network_settings.items.add_proxy_bypass.caption" = "Προσθήκη τομέα παράκαμψης";
 
-// MARK: ProfileView -> OnDemandView
+/* MARK: ProfileView -> OnDemandView */
 
 "on_demand.title" = "Αξιόπιστα δίκτυα";
 "on_demand.sections.policy.footer" = "Κατά την είσοδο σε ένα αξιόπιστο δίκτυο, το VPN απενεργοποιείται κανονικά και διατηρείται αποσυνδεδεμένο. Απενεργοποιήστε αυτήν την επιλογή για να μην έχετε μια τέτοια συμπεριφορά.";
@@ -242,7 +245,7 @@
 "on_demand.items.ethernet.description" = "Επιλέξτε για να εμπιστευθείτε οποιαδήποτε ενσύρματη σύνδεση καλωδίου.";
 "on_demand.items.policy.caption" = "Τα αξιόπιστα δίκτυα απενεργοποιούν το VPN";
 
-// MARK: ProfileView -> DiagnosticsView
+/* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Διαγνωστικά";
 "diagnostics.sections.debug_log.footer" = "Η κατάσταση κάλυψης θα είναι αποτελεσματική μετά την επανασύνδεση. Τα δεδομένα δικτύου είναι του διακομιστή, διευθύνσεις IP, δρομολόγηση και SSID. Τα διαπιστευτήρια και τα ιδιωτικά κλειδιά δεν καταγράφονται ανεξάρτητα.";
@@ -252,15 +255,16 @@
 
 "diagnostics.alerts.masks_private_data.messages.must_reconnect" = "Για να επαναφέρετε με ασφάλεια την τρέχουσα καταγραφή εντοπισμού σφαλμάτων και να εφαρμόσετε τη νέα προτίμηση κάλυψης, πρέπει να συνδεθείτε ξανά με το VPN.";
 
-// MARK: DiagnosticsView -> DebugLogView
+/* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Μητρώο εντοπισμού σφαλμάτων";
 "debug_log.buttons.copy" = "Αντιγραφή";
 
-// MARK: DiagnosticsView -> ReportIssueView
+/* MARK: DiagnosticsView -> ReportIssueView */
 
 "report_issue.alert.title" = "Αναφορά Προβλήματος";
-// MARK: ShortcutsView
+
+/* MARK: ShortcutsView */
 
 "shortcuts.add.title" = "Προσθήκη Συντόμευσης";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
@@ -276,9 +280,10 @@
 
 "shortcuts.edit.title" = "Διαχείριση συντομεύσεων";
 "shortcuts.edit.sections.all.header" = "Υπάρχουσες συντομεύσεις";
+"shortcuts.edit.sections.add.footer" = "Get help from Siri to speed up your most common interactions with the app.";
 "shortcuts.edit.items.add_shortcut.caption" = "Προσθήκη Συντόμευσης";
 
-// MARK: PaywallView
+/* MARK: PaywallView */
 
 "paywall.title" = "Αγορά";
 "paywall.sections.products.footer" = "Κάθε προϊόν είναι μια αγορά. Οι αγορές παρόχων δεν περιλαμβάνουν τη συνδρομή VPN.";
@@ -287,7 +292,7 @@
 "paywall.items.restore.title" = "Επαναφορά Αγορών";
 "paywall.items.restore.description" = "Εαν αγοράσατε την εφαρμογή στο παρελθόν, μπορείτε να κάνετε επαναφορά αγορών και αυτή η οθόνη δε θα εμφανιστεί ξανά.";
 
-// MARK: DonateView
+/* MARK: DonateView */
 
 "donate.title" = "Δωρεά";
 "donate.sections.one_time.header" = "Μια Φορά";
@@ -298,30 +303,27 @@
 "donate.alerts.purchase.success.message" = "Αυτό σημαίνει πολλά για μένα και πραγματικά ελπίζω να συνεχίσετε να χρησιμοποιείτε και να προωθείτε αυτήν την εφαρμογή.";
 "donate.alerts.purchase.failure.message" = "Δεν είναι δυνατή η εκτέλεση της δωρεάς. %@";
 
-// MARK: AboutView
+/* MARK: AboutView */
 
 "about.title" = "Περι";
 "about.sections.web.header" = "Web";
-"about.sections.share.header" = "Διαμοιράστε";
 "about.items.credits.caption" = "Συντελεστές";
 "about.items.website.caption" = "Αρχική Σελίδα";
 "about.items.disclaimer.caption" = "Άρνηση Ευθύνης";
 "about.items.privacy_policy.caption" = "Πολιτική Απορρήτου";
-"about.items.share_twitter.caption" = "Tweet γι 'αυτό!";
-"about.items.share_generic.caption" = "Πρόσκληση Φίλου";
 
-// MARK: AboutView -> VersionView
+/* MARK: AboutView -> VersionView */
 
 "version.title" = "Έκδοση";
 "version.labels.intro" = "Το Passepartout και το TunnelKit γράφονται και συντηρούνται από τον Davide De Rosa (keeshux).\n\nΟ πηγαίος κώδικας για το Passepartout και το TunnelKit είναι δημόσια διαθέσιμε στο GitHub υπό το GPLv3, μπορείτε να βρείτε συνδέσμους στην αρχική σελίδα.\n\nΤο Passepartout είναι ένας μη επίσημος πελάτης και δεν είναι συνδεδεμένος με το OpenVPN Inc.";
 
-// MARK: AboutView -> CreditsView
+/* MARK: AboutView -> CreditsView */
 
 "credits.title" = "Συντελεστές";
 "credits.sections.licenses.header" = "Άδειες";
 "credits.sections.notices.header" = "Σημειώσεις";
 
-// MARK: PreferencesView (macOS)
+/* MARK: PreferencesView (macOS) */
 
 "preferences.title" = "Προτιμήσεις";
 "preferences.sections.general.header" = "Γενικός";
@@ -329,16 +331,3 @@
 "preferences.items.launches_on_login.footer" = "Επιλέξτε για αυτόματη εκκίνηση της εφαρμογής κατά την εκκίνηση ή τη σύνδεση.";
 "preferences.items.confirm_quit.caption" = "Επιβεβαίωση διακοπής";
 "preferences.items.confirm_quit.footer" = "Επιλέξτε για παρουσίαση ειδοποίησης ότι επιβεβαιώνεται η διακοπή.";
-
-// MARK: Menu (macOS)
-
-"menu.show.title" = "Προβολή";
-"menu.switch_profile.title" = "Ενεργό προφίλ";
-"menu.active_profile.title.none" = "Δεν υπάρχει ενεργό προφίλ";
-"menu.active_profile.items.customize.title" = "Προσαρμογή...";
-"menu.active_profile.messages.missing_credentials" = "Δεν έχει διαμορφωθεί λογαριασμός";
-"menu.organizer.title" = "Διοργανωτής";
-"menu.preferences.title" = "Προτιμήσεις";
-"menu.support.title" = "Υποστήριξη";
-"menu.quit.title" = "Διακοπή %@";
-"menu.quit.messages.confirm" = "Το VPN, αν είναι ενεργοποιημένο, θα εξακολουθεί να εκτελείται στο παρασκήνιο. Θέλετε να το διακόψετε;";

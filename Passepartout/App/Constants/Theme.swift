@@ -147,12 +147,16 @@ extension View {
         "flags/\(countryCode.lowercased())"
     }
 
-    var themeHostImage: String {
+    var themeProviderImage: String {
+        "externaldrive.connected.to.line.below.fill"
+    }
+    
+    var themeHostFilesImage: String {
         "folder.fill"
     }
     
-    var themeProviderImage: String {
-        "externaldrive.connected.to.line.below.fill"
+    var themeHostTextImage: String {
+        "text.justify"
     }
     
     var themeSettingsMenuImage: String {

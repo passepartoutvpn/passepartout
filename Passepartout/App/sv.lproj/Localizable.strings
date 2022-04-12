@@ -4,7 +4,7 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
-//
+/* MARK: Global */
 
 "global.strings.cancel" = "Avbryt";
 "global.strings.next" = "Nästa";
@@ -15,6 +15,9 @@
 "global.strings.add" = "Lägg till";
 "global.strings.default" = "Default";
 "global.strings.name" = "Namn";
+"global.strings.provider" = "Leverantör";
+"global.strings.providers" = "Leverantörer";
+"global.strings.configuration" = "Konfiguration";
 "global.strings.address" = "Adress";
 "global.strings.addresses" = "Adresser";
 "global.strings.port" = "Port";
@@ -41,7 +44,7 @@
 "global.strings.translations" = "Translations";
 
 "global.messages.email_not_configured" = "Inget e-postkonto är konfigurerat.";
-"global.messages.share" = "Passepartout är en användarvänlig öppen källkod OpenVPN-klient för iOS och macOS";
+"global.messages.share" = "Passepartout är en användarvänlig öppen källkod OpenVPN / WireGuard klient för iOS och macOS";
 
 "global.placeholders.profile_name" = "Min profil";
 
@@ -50,7 +53,30 @@
 "global.errors.missing_provider_server" = "Server saknas";
 "global.errors.missing_provider_preset" = "Förinställning saknas";
 
-// MARK: TunnelKit
+/* MARK: Menus */
+
+"menu.all.support.title" = "Support";
+"menu.all.share.title" = "Dela";
+"menu.all.about.title" = "Om %@";
+
+"menu.contextual.add_profile.imported" = "Lägg till %@";
+"menu.system.show.title" = "Visa";
+"menu.system.switch_profile.title" = "Aktiv profil";
+"menu.system.active_profile.title.none" = "Ingen aktiv profil";
+"menu.system.active_profile.items.customize.title" = "Anpassa";
+"menu.system.active_profile.messages.missing_credentials" = "Inget konto har konfigurerats";
+"menu.system.organizer.title" = "Organisatör";
+"menu.system.preferences.title" = "Inställningar";
+"menu.system.support.donate" = "Gör en donation";
+"menu.system.support.join_community" = "Gå med i communityn";
+"menu.system.support.write_review" = "Skriv en recension";
+// "menu.system.support.translate" = "Offer to translate";
+"menu.system.share_twitter.caption" = "Tweet om det!";
+"menu.system.share_generic.caption" = "Bjud in en vän";
+"menu.system.quit.title" = "Lämna %@";
+"menu.system.quit.messages.confirm" = "Om ett VPN är aktiverat kommer detta fortfarande att köra i bakgrunden. Vill du lämna?";
+
+/* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Anslutning";
 "tunnelkit.vpn.active" = "Aktiv";
@@ -78,61 +104,36 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Var god ange krypteringslösenfrasen.";
 "tunnelkit.errors.openvpn.decryption" = "Konfigurationen innehåller en krypterad privat nyckel och den kan inte dekrypteras. Kontrollera din inmatade lösenfras.";
 
-// MARK: OrganizerView
-
-"organizer.sections.twitch.footer" = "Kom och se mig göra Passepartout live på Twitch, gå med i chatten för att interagera och bidra!";
-"organizer.sections.siri.footer" = "Få hjälp från Siri för att påskynda dina vanligaste interaktioner med appen.";
-"organizer.sections.support.header" = "Support";
-"organizer.items.follow_twitch.caption" = "Se Passepartout on Twitch";
-"organizer.items.profile.value.current" = "Under användning";
-"organizer.items.siri_shortcuts.caption" = "Hantera genvägar";
-"organizer.items.join_community.caption" = "Gå med i communityn";
-"organizer.items.write_review.caption" = "Skriv en recension";
-"organizer.items.donate.caption" = "Gör en donation";
-"organizer.items.github_sponsors.caption" = "Stötta mig på GitHub";
-"organizer.items.translate.caption" = "Erbjuda att översätta";
-"organizer.items.about.caption" = "Om %@";
-"organizer.items.uninstall.caption" = "Ta bort VPN-konfiguration";
-"organizer.items.add_provider.caption" = "Lägg till ny leverantör";
-"organizer.items.add_host.caption" = "Lägg till från Filer";
-
 "organizer.alerts.reddit.message" = "Visste du att Passepartout har en subreddit? Prenumerera på uppdateringar eller diskutera problem, funktioner, nya plattformar eller vad du vill. \n\nDet är också ett bra sätt att visa dig bryr dig om detta projekt.";
 "organizer.alerts.reddit.buttons.subscribe" = "Prenumerera nu!";
 "organizer.alerts.reddit.buttons.remind" = "Påminn mig senare";
 "organizer.alerts.reddit.buttons.never" = "Fråga inte igen";
 
-"organizer.alerts.uninstall_vpn.message" = "Vill du verkligen radera VPN-konfigurationen från enhetens inställningar? Detta kan fixa några trasiga VPN tillstånd och påverkar inte dina leverantörs- och värdprofiler.";
 "organizer.alerts.remove_profile.title" = "Ta bort profil";
 "organizer.alerts.remove_profile.message" = "Är det säkert att du vill ta bort profilen %@?";
 
-"organizer.menus.add_profile.imported" = "Lägg till %@";
-
-// MARK: AddProfileView
+/* MARK: AddProfileView */
 
 "add_profile.shared.title" = "Ny profil";
 "add_profile.shared.views.existing.header" = "Befintliga profiler";
 "add_profile.shared.alerts.overwrite.message" = "En profil med samma namn finns redan. Vill du ersätta den?";
 
-// MARK: AddHostView
+/* MARK: AddHostView */
 
 "add_profile.host.sections.encryption.footer" = "Ange lösenfras";
 
-// MARK: AddProviderView
+/* MARK: AddProviderView */
 
-"add_profile.provider.sections.providers.header" = "Leverantörer";
 "add_profile.provider.sections.vpn.footer" = "Här hittar du några leverantörer med förinställda konfigurationsprofiler.";
 "add_profile.provider.items.update_list" = "Uppdatera listan";
 "add_profile.provider.errors.no_default_server" = "Ingen server hittades.";
 
-// MARK: ProfileView
-
-"profile.sections.provider.header" = "Leverantör";
+/* MARK: ProfileView */
 
 "profile.welcome.message" = "Välkommen till Passepartout! \n\nAnvänd arrangören för att lägga till en ny profil.";
 
 "profile.sections.vpn.footer" = "Anslutningen kommer att upprättas vid behov.";
 "profile.sections.status.header" = "Koppling";
-"profile.sections.configuration.header" = "Konfiguration";
 "profile.sections.provider_infrastructure.footer" = "Senast uppdaterad på %@.";
 "profile.sections.vpn_survives_sleep.footer" = "Inaktivera för att förbättra batterianvändningen, på bekostnad av tillfälliga avmattningar på grund av återuppkoppling.";
 "profile.sections.vpn_resolves_hostname.footer" = "Föredragna i de flesta nätverk och krävs i vissa IPv6-nätverk. Inaktivera var DNS blockeras eller för att påskynda förhandlingar när DNS är långsamt att svara.";
@@ -149,14 +150,16 @@
 "profile.items.vpn_survives_sleep.caption" = "Håll dig levande i sömnen";
 "profile.items.vpn_resolves_hostname.caption" = "Lösa server värdnamn";
 "profile.items.reconnect.caption" = "Återanslut";
+"profile.items.uninstall.caption" = "Ta bort VPN-konfiguration";
 
 "profile.alerts.rename.title" = "Byt namn på profil";
 "profile.alerts.reconnect_vpn.message" = "Vill du återansluta till VPN?";
+"profile.alerts.uninstall_vpn.message" = "Vill du verkligen radera VPN-konfigurationen från enhetens inställningar? Detta kan fixa några trasiga VPN tillstånd och påverkar inte dina leverantörs- och värdprofiler.";
 "profile.alerts.test_connectivity.title" = "Anslutningar";
 "profile.alerts.test_connectivity.messages.success" = "Din enhet är ansluten till Internet!";
 "profile.alerts.test_connectivity.messages.failure" = "Din enhet har ingen Internetanslutning, var god granska dina profilparametrar.";
 
-// MARK: ProfileView -> Provider*View
+/* MARK: ProfileView -> Provider*View */
 
 "provider.location.title" = "Plats";
 "provider.location.sections.empty_favorites.footer" = "Dra åt vänster på en plats för att lägga till eller ta bort den från favoriter.";
@@ -165,7 +168,7 @@
 
 "provider.preset.title" = "Förinställt";
 
-// MARK: ProfileView -> AccountView
+/* MARK: ProfileView -> AccountView */
 
 "account.title" = "Konto";
 "account.sections.credentials.header" = "Referenser";
@@ -187,7 +190,7 @@
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Använd dina %@ webbplatsuppgifter. Ditt användarnamn är vanligtvis ditt e-postmeddelande.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Hitta din %@ credentials i OpenVPN Config Generator på webbplatsen.";
 
-// MARK: ProfileView -> EndpointView
+/* MARK: ProfileView -> EndpointView */
 
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Tidigare delad nyckel";
@@ -220,7 +223,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "efter %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Omställ slutpunkt på slumpmässigt sätt";
 
-// MARK: ProfileView -> NetworkSettingsView
+/* MARK: ProfileView -> NetworkSettingsView */
 
 "network_settings.title" = "Nätverksinställningar";
 "network_settings.sections.choices.header" = "Åsidosätt";
@@ -231,7 +234,7 @@
 "network_settings.items.proxy_bypass.caption" = "Bypass-domän";
 "network_settings.items.add_proxy_bypass.caption" = "Add bypass domain";
 
-// MARK: ProfileView -> OnDemandView
+/* MARK: ProfileView -> OnDemandView */
 
 "on_demand.title" = "Tillförlitliga nätverk";
 "on_demand.sections.policy.footer" = "När du advänder ett betrott nätverk, VPN:et stängs normalt och hålls bortkopplat. Avaktivera detta alternativet för att inte genomdriva sådant beteende.";
@@ -242,7 +245,7 @@
 "on_demand.items.ethernet.description" = "Markera för att lita på alla kabelanslutna uppkopplingar.";
 "on_demand.items.policy.caption" = "Förtroende inaktiverar VPN";
 
-// MARK: ProfileView -> DiagnosticsView
+/* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnostics";
 "diagnostics.sections.debug_log.footer" = "Masking status kommer att fungera efter återanslutning. Nätverksdata är värdnamn, IP-adresser, routing, SSID. Referenser och privata nycklar loggas inte oavsett.";
@@ -252,15 +255,16 @@
 
 "diagnostics.alerts.masks_private_data.messages.must_reconnect" = "För att säkert återställa den aktuella felsökningsloggen och tillämpa den nya maskeringspreferensen måste du återansluta till VPN nu.";
 
-// MARK: DiagnosticsView -> DebugLogView
+/* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Debug log";
 "debug_log.buttons.copy" = "Kopiera";
 
-// MARK: DiagnosticsView -> ReportIssueView
+/* MARK: DiagnosticsView -> ReportIssueView */
 
 "report_issue.alert.title" = "Rapportera problem";
-// MARK: ShortcutsView
+
+/* MARK: ShortcutsView */
 
 "shortcuts.add.title" = "Lägg till genväg";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
@@ -276,9 +280,10 @@
 
 "shortcuts.edit.title" = "Hantera genvägar";
 "shortcuts.edit.sections.all.header" = "Befintliga genvägar";
+"shortcuts.edit.sections.add.footer" = "Få hjälp från Siri för att påskynda dina vanligaste interaktioner med appen.";
 "shortcuts.edit.items.add_shortcut.caption" = "Lägg till genväg";
 
-// MARK: PaywallView
+/* MARK: PaywallView */
 
 "paywall.title" = "Köp";
 "paywall.sections.products.footer" = "Varje produkt är ett engångsköp. Leverantörsköp inkluderar inte ett VPN-abonnemang.";
@@ -287,7 +292,7 @@
 "paywall.items.restore.title" = "Återställ köp";
 "paywall.items.restore.description" = "Om du köpte den här appen eller funktionen tidigare kan du återställa dina inköp och den här skärmen visas inte igen.";
 
-// MARK: DonateView
+/* MARK: DonateView */
 
 "donate.title" = "Donera";
 "donate.sections.one_time.header" = "En gång";
@@ -298,30 +303,27 @@
 "donate.alerts.purchase.success.message" = "Detta betyder mycket för mig och jag hoppas verkligen att du fortsätter att använda och marknadsföra denna app.";
 "donate.alerts.purchase.failure.message" = "Kan inte göra donationen. %@";
 
-// MARK: AboutView
+/* MARK: AboutView */
 
 "about.title" = "About";
 "about.sections.web.header" = "Web";
-"about.sections.share.header" = "Dela";
 "about.items.credits.caption" = "Credits";
 "about.items.website.caption" = "Hemsida";
 "about.items.disclaimer.caption" = "Disclaimer";
 "about.items.privacy_policy.caption" = "Sekretesspolicy";
-"about.items.share_twitter.caption" = "Tweet om det!";
-"about.items.share_generic.caption" = "Bjud in en vän";
 
-// MARK: AboutView -> VersionView
+/* MARK: AboutView -> VersionView */
 
 "version.title" = "Version";
 "version.labels.intro" = "Passepartout och TunnelKit skrivs och underhålls av Davide De Rosa (keeshux). \n\nKällkod för Passepartout och TunnelKit är offentligt tillgänglig på GitHub under GPLv3, du kan hitta länkar på hemsidan. \n\nPassepartout är en icke-officiell klient och är inte på något sätt ansluten till OpenVPN Inc. ";
 
-// MARK: AboutView -> CreditsView
+/* MARK: AboutView -> CreditsView */
 
 "credits.title" = "Credits";
 "credits.sections.licenses.header" = "Licenses";
 "credits.sections.notices.header" = "Meddelanden";
 
-// MARK: PreferencesView (macOS)
+/* MARK: PreferencesView (macOS) */
 
 "preferences.title" = "Inställningar";
 "preferences.sections.general.header" = "Allmänt";
@@ -329,16 +331,3 @@
 "preferences.items.launches_on_login.footer" = "Markera för att starta appen automatiskt efter omstart eller vid inloggning.";
 "preferences.items.confirm_quit.caption" = "Bekräfta lämna";
 "preferences.items.confirm_quit.footer" = "Markera för att visa en uppmaning att bekräfta att man vill lämna appen.";
-
-// MARK: Menu (macOS)
-
-"menu.show.title" = "Visa";
-"menu.switch_profile.title" = "Aktiv profil";
-"menu.active_profile.title.none" = "Ingen aktiv profil";
-"menu.active_profile.items.customize.title" = "Anpassa";
-"menu.active_profile.messages.missing_credentials" = "Inget konto har konfigurerats";
-"menu.organizer.title" = "Organisatör";
-"menu.preferences.title" = "Inställningar";
-"menu.support.title" = "Support";
-"menu.quit.title" = "Lämna %@";
-"menu.quit.messages.confirm" = "Om ett VPN är aktiverat kommer detta fortfarande att köra i bakgrunden. Vill du lämna?";

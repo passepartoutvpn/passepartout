@@ -4,7 +4,7 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
-//
+/* MARK: Global */
 
 "global.strings.cancel" = "Afbreken";
 "global.strings.next" = "Volgende";
@@ -15,6 +15,9 @@
 "global.strings.add" = "Toevoegen";
 "global.strings.default" = "Default";
 "global.strings.name" = "Naam";
+"global.strings.provider" = "Aanbieder";
+"global.strings.providers" = "Aanbieders";
+"global.strings.configuration" = "Configuratie";
 "global.strings.address" = "Adress";
 "global.strings.addresses" = "Adressen";
 "global.strings.port" = "Port";
@@ -41,7 +44,7 @@
 "global.strings.translations" = "Vertalingen";
 
 "global.messages.email_not_configured" = "Er is geen email adres geconfigureerd.";
-"global.messages.share" = "Passepartout is een gebruiksvriendelijke open source OpenVPN-client voor iOS en macOS";
+"global.messages.share" = "Passepartout is een gebruiksvriendelijke open source OpenVPN / WireGuard client voor iOS en macOS";
 
 "global.placeholders.profile_name" = "Mijn Profiel";
 
@@ -50,7 +53,30 @@
 "global.errors.missing_provider_server" = "Ontbrekende server";
 "global.errors.missing_provider_preset" = "Ontbrekende voorkeur";
 
-// MARK: TunnelKit
+/* MARK: Menus */
+
+"menu.all.support.title" = "Ondersteuning";
+"menu.all.share.title" = "Delen";
+"menu.all.about.title" = "Over %@";
+
+"menu.contextual.add_profile.imported" = "%@ toevoegen";
+"menu.system.show.title" = "Weergeven";
+"menu.system.switch_profile.title" = "Actief profiel";
+"menu.system.active_profile.title.none" = "Geen actief profiel";
+"menu.system.active_profile.items.customize.title" = "Aanpassen...";
+"menu.system.active_profile.messages.missing_credentials" = "Geen account geconfigureerd";
+"menu.system.organizer.title" = "Organisator";
+"menu.system.preferences.title" = "Voorkeuren";
+"menu.system.support.donate" = "Doneer een gift";
+"menu.system.support.join_community" = "Word lid van de gemeenschap";
+"menu.system.support.write_review" = "Schrijf een beoordeling";
+// "menu.system.support.translate" = "Offer to translate";
+"menu.system.share_twitter.caption" = "Tweet about it!";
+"menu.system.share_generic.caption" = "Nodig een vriend uit";
+"menu.system.quit.title" = "%@ afsluiten";
+"menu.system.quit.messages.confirm" = "De VPN zal, indien geactiveerd, op de achtergrond blijven draaien. Wilt u sluiten?";
+
+/* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Verbinden";
 "tunnelkit.vpn.active" = "Actief";
@@ -78,61 +104,36 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Voer een coderingswachtwoord in";
 "tunnelkit.errors.openvpn.decryption" = "De configuratie bevat een gecodeerde privésleutel en deze kan niet worden gedecodeerd. Controleer de ingevoerde wachtwoordzin nogmaals.";
 
-// MARK: OrganizerView
-
-"organizer.sections.twitch.footer" = "Kom kijken hoe ik Passepartout live maak op Twitch, doe mee aan de chat om te communiceren en bij te dragen!";
-"organizer.sections.siri.footer" = "Krijg hulp van Siri en versnel de meest gebruikte interacties binnen de app.";
-"organizer.sections.support.header" = "Ondersteuning";
-"organizer.items.follow_twitch.caption" = "Bekijk Passepartout op Twitch";
-"organizer.items.profile.value.current" = "In gebruik";
-"organizer.items.siri_shortcuts.caption" = "Beheer snelkoppelingen";
-"organizer.items.join_community.caption" = "Word lid van de gemeenschap";
-"organizer.items.write_review.caption" = "Schrijf een beoordeling";
-"organizer.items.donate.caption" = "Doneer een gift";
-"organizer.items.github_sponsors.caption" = "Steun me op GitHub";
-"organizer.items.translate.caption" = "Help met vertalen";
-"organizer.items.about.caption" = "Over %@";
-"organizer.items.uninstall.caption" = "Verwijder VPN configuratie";
-"organizer.items.add_provider.caption" = "Voeg nieuwe aanbieder toe";
-"organizer.items.add_host.caption" = "Toevoegen vanuit Bestanden";
-
 "organizer.alerts.reddit.message" = "Wist je dat Passepartout een eigen subreddit heeft? Schrijf je in voor updates, of discussiëren over problemen, (nieuwe) mogelijkheden, nieuwe platformen of wat je maar wil.\n\nHet is ook een goede manier om te laten zien dat je om dit project geeft.";
 "organizer.alerts.reddit.buttons.subscribe" = "Schfijf je nu in!";
 "organizer.alerts.reddit.buttons.remind" = "Herinner me later";
 "organizer.alerts.reddit.buttons.never" = "Vraag dit niet meer";
 
-"organizer.alerts.uninstall_vpn.message" = "Wilt u de VPN-configuratie van uw apparaatinstellingen verwijderen? Dit kan enkele problemen met VPN oplossen en heeft geen invloed op uw provider- en hostprofielen.";
 "organizer.alerts.remove_profile.title" = "Profiel verwijderen";
 "organizer.alerts.remove_profile.message" = "Weet u zeker dat u profiel %@ wilt verwijderen?";
 
-"organizer.menus.add_profile.imported" = "%@ toevoegen";
-
-// MARK: AddProfileView
+/* MARK: AddProfileView */
 
 "add_profile.shared.title" = "Nieuw profiel";
 "add_profile.shared.views.existing.header" = "Bestaande profielen";
 "add_profile.shared.alerts.overwrite.message" = "Er bestaat al een profiel met deze naam, wil je hem vervangen?";
 
-// MARK: AddHostView
+/* MARK: AddHostView */
 
 "add_profile.host.sections.encryption.footer" = "Voer wachtwoordzin in";
 
-// MARK: AddProviderView
+/* MARK: AddProviderView */
 
-"add_profile.provider.sections.providers.header" = "Aanbieders";
 "add_profile.provider.sections.vpn.footer" = "Hier vind je aan aantal aanbieders met configuratie profielen.";
 "add_profile.provider.items.update_list" = "Lijst bijwerken";
 "add_profile.provider.errors.no_default_server" = "Geen server gevonden.";
 
-// MARK: ProfileView
-
-"profile.sections.provider.header" = "Aanbieder";
+/* MARK: ProfileView */
 
 "profile.welcome.message" = "Welkom bij Passepartout!\n\nGebruik de organizer om een nieuw profiel toe te voegen.";
 
 "profile.sections.vpn.footer" = "De verbinding zal worden gestart wanneer nodig.";
 "profile.sections.status.header" = "Verbinding";
-"profile.sections.configuration.header" = "Configuratie";
 "profile.sections.provider_infrastructure.footer" = "Laatste update was op %@.";
 "profile.sections.vpn_survives_sleep.footer" = "Uitschakelen om het batterijverbruik te verbeteren, ten koste van incidentele vertragingen als gevolg van het opnieuw opstarten na wake-up.";
 "profile.sections.vpn_resolves_hostname.footer" = "Voorkeur om dit aan te zetten voor de meeste netwerken en vereist in sommige IPv6-netwerken. Uitschakelen waar DNS wordt geblokkeerd, of om de onderhandelingen te versnellen wanneer DNS traag reageert.";
@@ -149,14 +150,16 @@
 "profile.items.vpn_survives_sleep.caption" = "Actief tijdens slaapstand";
 "profile.items.vpn_resolves_hostname.caption" = "Haal de naam van de host op";
 "profile.items.reconnect.caption" = "Opnieuw verbinden";
+"profile.items.uninstall.caption" = "Verwijder VPN configuratie";
 
 "profile.alerts.rename.title" = "Profiel hernoemen";
 "profile.alerts.reconnect_vpn.message" = "Opnieuw verbinding maken met de VPN?";
+"profile.alerts.uninstall_vpn.message" = "Wilt u de VPN-configuratie van uw apparaatinstellingen verwijderen? Dit kan enkele problemen met VPN oplossen en heeft geen invloed op uw provider- en hostprofielen.";
 "profile.alerts.test_connectivity.title" = "Connectiviteit";
 "profile.alerts.test_connectivity.messages.success" = "Apparaat is verbonden met internet!";
 "profile.alerts.test_connectivity.messages.failure" = "Uw apparaat heeft geen internetverbinding. Controleer uw profielparameters.";
 
-// MARK: ProfileView -> Provider*View
+/* MARK: ProfileView -> Provider*View */
 
 "provider.location.title" = "Locatie";
 "provider.location.sections.empty_favorites.footer" = "Veeg naar links op een locatie om deze toe te voegen of te verwijderen aan Favorieten.";
@@ -165,7 +168,7 @@
 
 "provider.preset.title" = "Voorkeur";
 
-// MARK: ProfileView -> AccountView
+/* MARK: ProfileView -> AccountView */
 
 "account.title" = "Account";
 "account.sections.credentials.header" = "Inloggegevens";
@@ -187,7 +190,7 @@
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Gebruik de inloggegevens van %@ Uw gebruikersnaam is meestal uw e-mailadres.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Vind de inloggegevens van %@ in de OpenVPN Config Generator op de website.";
 
-// MARK: ProfileView -> EndpointView
+/* MARK: ProfileView -> EndpointView */
 
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Vooraf gedeelde sleutel";
@@ -220,7 +223,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "na %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Willekeurig eindpunt";
 
-// MARK: ProfileView -> NetworkSettingsView
+/* MARK: ProfileView -> NetworkSettingsView */
 
 "network_settings.title" = "Netwerk instellingen";
 "network_settings.sections.choices.header" = "Overschrijven";
@@ -231,7 +234,7 @@
 "network_settings.items.proxy_bypass.caption" = "Omzeil domein";
 "network_settings.items.add_proxy_bypass.caption" = "Voeg omzeil optie voor domein toe";
 
-// MARK: ProfileView -> OnDemandView
+/* MARK: ProfileView -> OnDemandView */
 
 "on_demand.title" = "Vertrouwde netwerken";
 "on_demand.sections.policy.footer" = "Bij het invoeren van een vertrouwd netwerk wordt de VPN uitgeschakeld en niet verbonden gehouden. Schakel deze optie uit om dergelijk gedrag niet af te dwingen.";
@@ -242,7 +245,7 @@
 "on_demand.items.ethernet.description" = "Vink aan om alle bekabelde verbindingen te vertrouwen.";
 "on_demand.items.policy.caption" = "Trust disables VPN";
 
-// MARK: ProfileView -> DiagnosticsView
+/* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnose";
 "diagnostics.sections.debug_log.footer" = "De maskeerstatus is effectief na opnieuw verbinden. Netwerkgegevens zijn hostnamen, IP-adressen, routing, SSID's. Inloggegevens en privésleutels worden niet geregistreerd.";
@@ -252,15 +255,16 @@
 
 "diagnostics.alerts.masks_private_data.messages.must_reconnect" = "Om het huidige foutopsporingslogboek veilig opnieuw in te stellen en de nieuwe maskeervoorkeur toe te passen, moet u nu opnieuw verbinding maken met VPN.";
 
-// MARK: DiagnosticsView -> DebugLogView
+/* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Foutopsporingslogboek";
 "debug_log.buttons.copy" = "Kopiëren";
 
-// MARK: DiagnosticsView -> ReportIssueView
+/* MARK: DiagnosticsView -> ReportIssueView */
 
 "report_issue.alert.title" = "Meld een probleem";
-// MARK: ShortcutsView
+
+/* MARK: ShortcutsView */
 
 "shortcuts.add.title" = "Voeg snelkoppeling toe";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
@@ -276,9 +280,10 @@
 
 "shortcuts.edit.title" = "Beheer snelkoppelingen";
 "shortcuts.edit.sections.all.header" = "Bestaande snelkoppelingen";
+"shortcuts.edit.sections.add.footer" = "Krijg hulp van Siri en versnel de meest gebruikte interacties binnen de app.";
 "shortcuts.edit.items.add_shortcut.caption" = "Voeg snelkoppeling toe";
 
-// MARK: PaywallView
+/* MARK: PaywallView */
 
 "paywall.title" = "Aanschaffen";
 "paywall.sections.products.footer" = "Elk product is een eenmalige aankoop. Aankopen van providers bevatten geen VPN-abonnement.";
@@ -287,7 +292,7 @@
 "paywall.items.restore.title" = "Herstel Aankopen";
 "paywall.items.restore.description" = "Als u deze app of functie in het verleden heeft gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer getoond.";
 
-// MARK: DonateView
+/* MARK: DonateView */
 
 "donate.title" = "Donatie";
 "donate.sections.one_time.header" = "Eenmalig";
@@ -298,30 +303,27 @@
 "donate.alerts.purchase.success.message" = "Dit betekent veel voor mij en ik hoop echt dat je deze app blijft gebruiken en promoten.";
 "donate.alerts.purchase.failure.message" = "Donatie mislukt. %@";
 
-// MARK: AboutView
+/* MARK: AboutView */
 
 "about.title" = "Over";
 "about.sections.web.header" = "Web";
-"about.sections.share.header" = "Delen";
 "about.items.credits.caption" = "Credits";
 "about.items.website.caption" = "Home page";
 "about.items.disclaimer.caption" = "Vrijwaring";
 "about.items.privacy_policy.caption" = "Privacybeleid";
-"about.items.share_twitter.caption" = "Tweet about it!";
-"about.items.share_generic.caption" = "Nodig een vriend uit";
 
-// MARK: AboutView -> VersionView
+/* MARK: AboutView -> VersionView */
 
 "version.title" = "Versie";
 "version.labels.intro" = "Passepartout en TunnelKit zijn geschreven en worden onderhouden door Davide De Rosa (keeshux).\n\nDe broncode voor Passepartout en TunnelKit is openbaar beschikbaar op GitHub onder de GPLv3, je kunt links op de startpagina vinden.\n\nPassepartout is een niet-officiële client en is op geen enkele manier verbonden aan OpenVPN Inc.";
 
-// MARK: AboutView -> CreditsView
+/* MARK: AboutView -> CreditsView */
 
 "credits.title" = "Credits";
 "credits.sections.licenses.header" = "Licenties";
 "credits.sections.notices.header" = "Mededelingen";
 
-// MARK: PreferencesView (macOS)
+/* MARK: PreferencesView (macOS) */
 
 "preferences.title" = "Voorkeuren";
 "preferences.sections.general.header" = "Algemeen";
@@ -329,16 +331,3 @@
 "preferences.items.launches_on_login.footer" = "Vink aan als u wilt dat de app automatisch wordt gelanceerd bij opstarten of aanmelden.";
 "preferences.items.confirm_quit.caption" = "Sluiten bevestigen";
 "preferences.items.confirm_quit.footer" = "Vink aan om een bevestigingsmelding te sluiten.";
-
-// MARK: Menu (macOS)
-
-"menu.show.title" = "Weergeven";
-"menu.switch_profile.title" = "Actief profiel";
-"menu.active_profile.title.none" = "Geen actief profiel";
-"menu.active_profile.items.customize.title" = "Aanpassen...";
-"menu.active_profile.messages.missing_credentials" = "Geen account geconfigureerd";
-"menu.organizer.title" = "Organisator";
-"menu.preferences.title" = "Voorkeuren";
-"menu.support.title" = "Ondersteuning";
-"menu.quit.title" = "%@ afsluiten";
-"menu.quit.messages.confirm" = "De VPN zal, indien geactiveerd, op de achtergrond blijven draaien. Wilt u sluiten?";

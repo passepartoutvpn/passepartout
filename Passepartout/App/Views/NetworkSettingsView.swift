@@ -123,8 +123,7 @@ extension NetworkSettingsView {
 
             if !settings.isAutomaticDNS {
                 themeTextPicker(
-                    // FIXME: l10n, refactor string id to "global.strings.configuration"
-                    L10n.Profile.Sections.Configuration.header,
+                    L10n.Global.Strings.configuration,
                     selection: $settings.dns.configurationType,
                     values: Network.DNSSettings.availableConfigurationTypes(forVPNProtocol: vpnProtocol),
                     description: \.localizedDescription
@@ -217,8 +216,7 @@ extension NetworkSettingsView {
 
             if !settings.isAutomaticProxy {
                 themeTextPicker(
-                    // FIXME: l10n, refactor string id to "global.strings.configuration"
-                    L10n.Profile.Sections.Configuration.header,
+                    L10n.Global.Strings.configuration,
                     selection: $settings.proxy.configurationType,
                     values: Network.ProxySettings.availableConfigurationTypes,
                     description: \.localizedDescription

@@ -190,8 +190,6 @@ extension Constants {
         
         static let githubSponsors = URL(string: "https://www.github.com/sponsors/passepartoutvpn")!
         
-        static let alternativeTo = URL(string: "https://alternativeto.net/software/passepartout-vpn/about/")!
-        
         static let openVPNGuidances: [ProviderName: String] = [
             .protonvpn: "https://account.protonvpn.com/settings",
             .surfshark: "https://my.surfshark.com/vpn/manual-setup/main",

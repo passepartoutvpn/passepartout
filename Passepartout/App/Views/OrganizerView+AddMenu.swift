@@ -37,19 +37,23 @@ extension OrganizerView {
             _isHostFileImporterPresented = isHostFileImporterPresented
         }
         
-        // FIXME: l10n, shorten menu captions
         var body: some View {
             Menu {
                 Button {
                     modalType = .addProvider
                 } label: {
-                    Label(L10n.Organizer.Items.AddProvider.caption, systemImage: themeProviderImage)
+                    Label(L10n.Global.Strings.provider, systemImage: themeProviderImage)
                 }
                 Button {
                     presentHostFileImporter()
                 } label: {
-                    Label(L10n.Organizer.Items.AddHost.caption, systemImage: themeHostImage)
+                    Label(L10n.Menu.Contextual.AddProfile.fromFiles, systemImage: themeHostFilesImage)
                 }
+//                Button {
+//                    // TODO: add profile from text
+//                } label: {
+//                    Label(L10n.Organizer.Menus.AddProfile.fromText, systemImage: themeHostTextImage)
+//                }
                 if let urls = importedURLs, !urls.isEmpty {
                     Divider()
                     ForEach(urls, id: \.absoluteString, content: importedURLRow)
@@ -60,7 +64,7 @@ extension OrganizerView {
         }
 
         private func importedURLRow(_ url: URL) -> some View {
-            Button(L10n.Organizer.Menus.AddProfile.imported(url.lastPathComponent)) {
+            Button(L10n.Menu.Contextual.AddProfile.imported(url.lastPathComponent)) {
                 presentAddHost(withURL: url, deletingURLOnSuccess: true)
             }
         }

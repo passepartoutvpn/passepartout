@@ -36,8 +36,6 @@ extension OrganizerView {
         
         private let redditURL = Constants.URLs.subreddit
         
-        private let alternativeToURL = Constants.URLs.alternativeTo
-
         private let shareMessage = L10n.Global.Messages.share
 
         private let appName = Unlocalized.appName
@@ -50,11 +48,10 @@ extension OrganizerView {
         
         var body: some View {
             Menu {
-                Menu(L10n.Menu.Support.title) {
+                Menu(L10n.Menu.All.Support.title) {
                     supportMenu
                 }
-                // FIXME: l10n, refactor string id to "menu.share.title"
-                Menu(L10n.About.Sections.Share.header) {
+                Menu(L10n.Menu.All.Share.title) {
                     shareMenu
                 }
                 Divider()
@@ -71,30 +68,29 @@ extension OrganizerView {
                 Button {
                     modalType = .donate
                 } label: {
-                    Label(L10n.Organizer.Items.Donate.caption, systemImage: themeDonateImage)
+                    Label(L10n.Donate.title, systemImage: themeDonateImage)
                 }.disabled(!productManager.canMakePayments())
 
                 Button {
                     URL.openURL(redditURL)
                 } label: {
-                    Label(L10n.Organizer.Items.JoinCommunity.caption, systemImage: themeRedditImage)
+                    Label(L10n.Menu.Contextual.Support.joinCommunity, systemImage: themeRedditImage)
                 }
                 Button(action: submitReview) {
-                    Label(L10n.Organizer.Items.WriteReview.caption, systemImage: themeWriteReviewImage)
+                    Label(L10n.Menu.Contextual.Support.writeReview, systemImage: themeWriteReviewImage)
                 }
             }
         }
 
         private var shareMenu: some View {
             Group {
-                Button(L10n.About.Items.ShareTwitter.caption, action: shareOnTwitter)
-                Button(L10n.About.Items.ShareGeneric.caption, action: shareWithFriend)
-                Button(Unlocalized.About.alternativeTo, action: shareAlternativeTo)
+                Button(L10n.Menu.Contextual.shareTwitter, action: shareOnTwitter)
+                Button(L10n.Menu.Contextual.shareGeneric, action: shareWithFriend)
             }
         }
         
         private var aboutButton: some View {
-            Button(L10n.Organizer.Items.About.caption(appName)) {
+            Button(L10n.Menu.All.About.title("")) {
                 presentAbout()
             }
         }
@@ -107,10 +103,6 @@ extension OrganizerView {
         private func shareWithFriend() {
             let shareMessage = "\(shareMessage) \(Constants.URLs.website)"
             modalType = .share([shareMessage])
-        }
-
-        private func shareAlternativeTo() {
-            URL.openURL(alternativeToURL)
         }
 
         private func submitReview() {

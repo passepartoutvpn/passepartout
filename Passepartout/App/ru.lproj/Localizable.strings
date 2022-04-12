@@ -4,7 +4,7 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
-//
+/* MARK: Global */
 
 "global.strings.cancel" = "Отменить";
 "global.strings.next" = "Далее";
@@ -15,6 +15,9 @@
 "global.strings.add" = "Добавить";
 "global.strings.default" = "По умолчанию";
 "global.strings.name" = "Имя";
+"global.strings.provider" = "Провайдер";
+"global.strings.providers" = "Провайдеры";
+"global.strings.configuration" = "Конфигурация";
 "global.strings.address" = "Адрес";
 "global.strings.addresses" = "Адреса";
 "global.strings.port" = "порт";
@@ -50,7 +53,30 @@
 "global.errors.missing_provider_server" = "Отсутствует сервер";
 "global.errors.missing_provider_preset" = "Отсутствует пресет";
 
-// MARK: TunnelKit
+/* MARK: Menus */
+
+"menu.all.support.title" = "Поддержка";
+"menu.all.share.title" = "Поделиться";
+"menu.all.about.title" = "Об %@";
+
+"menu.contextual.add_profile.imported" = "Добавить %@";
+"menu.system.show.title" = "Показать";
+"menu.system.switch_profile.title" = "Активный профиль";
+"menu.system.active_profile.title.none" = "Нет активных профилей";
+"menu.system.active_profile.items.customize.title" = "Настроить...";
+"menu.system.active_profile.messages.missing_credentials" = "Нет настроенных аккаунтов";
+"menu.system.organizer.title" = "Организатор";
+"menu.system.preferences.title" = "Настройки";
+"menu.system.support.donate" = "Сделать пожертвование";
+"menu.system.support.join_community" = "Вступить в сообщество";
+"menu.system.support.write_review" = "Написать отзыв";
+// "menu.system.support.translate" = "Offer to translate";
+"menu.system.share_twitter.caption" = "Твитнуть о нас!";
+"menu.system.share_generic.caption" = "Пригласить друга";
+"menu.system.quit.title" = "Выйти из %@";
+"menu.system.quit.messages.confirm" = "Если включить VPN, он всё равно будет работать в фоновом режиме. Вы точно хотите выйти?";
+
+/* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Подключается";
 "tunnelkit.vpn.active" = "Активен";
@@ -78,61 +104,36 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Пожалуйста, введите кодовую фразу шифрования";
 "tunnelkit.errors.openvpn.decryption" = "Конфигурация содержит зашифрованный приватный ключ, он не может быть расшифрован. Перепроверьте кодовую фразу.";
 
-// MARK: OrganizerView
-
-"organizer.sections.twitch.footer" = "Приходите посмотреть, как я делаю Passepartout в прямом эфире на Twitch, присоединяйтесь к чату, чтобы общаться и вносить свой вклад!";
-"organizer.sections.siri.footer" = "Получить помощь Сири, чтобы ускорить частые действия с приложением.";
-"organizer.sections.support.header" = "Поддержка";
-"organizer.items.follow_twitch.caption" = "Смотрите Паспарту на Twitch";
-"organizer.items.profile.value.current" = "Используется";
-"organizer.items.siri_shortcuts.caption" = "Управлять коммандами";
-"organizer.items.join_community.caption" = "Вступить в сообщество";
-"organizer.items.write_review.caption" = "Написать отзыв";
-"organizer.items.donate.caption" = "Сделать пожертвование";
-"organizer.items.github_sponsors.caption" = "Поддержите меня на GitHub";
-"organizer.items.translate.caption" = "Помощь с переводом";
-"organizer.items.about.caption" = "Об %@";
-"organizer.items.uninstall.caption" = "Удалить VPN конфигурацию";
-"organizer.items.add_provider.caption" = "Добавить нового провайдера";
-"organizer.items.add_host.caption" = "Добавить из файлов";
-
 "organizer.alerts.reddit.message" = "А Вы знали, что Passepartout имеет свой сабреддит? Подписывайтесь для получения обновлений, обсуждения проблем, функций, новых платформ или чего угодно.\n\nЭто также отличный способ показать поддержку проекта.";
 "organizer.alerts.reddit.buttons.subscribe" = "Подписаться сейчас!";
 "organizer.alerts.reddit.buttons.remind" = "Напомнить позже";
 "organizer.alerts.reddit.buttons.never" = "Больше не спрашивать";
 
-"organizer.alerts.uninstall_vpn.message" = "Вы действительно хотите убрать VPN конфигурацию из настроек устройства? Это может исправить несколько VPN ошибок, но не изменит установки приложения.";
 "organizer.alerts.remove_profile.title" = "Удалить профиль";
 "organizer.alerts.remove_profile.message" = "Вы точно хотите удалить профиль %@?";
 
-"organizer.menus.add_profile.imported" = "Добавить %@";
-
-// MARK: AddProfileView
+/* MARK: AddProfileView */
 
 "add_profile.shared.title" = "Новый профиль";
 "add_profile.shared.views.existing.header" = "Существующие профили";
 "add_profile.shared.alerts.overwrite.message" = "Профиль с этим именем уже существует. Заменить?";
 
-// MARK: AddHostView
+/* MARK: AddHostView */
 
 "add_profile.host.sections.encryption.footer" = "Введите кодовую фразу";
 
-// MARK: AddProviderView
+/* MARK: AddProviderView */
 
-"add_profile.provider.sections.providers.header" = "Провайдеры";
 "add_profile.provider.sections.vpn.footer" = "Здесь Вы найдёте несколько провайдеров с уже созданными профилями.";
 "add_profile.provider.items.update_list" = "Обновить список";
 "add_profile.provider.errors.no_default_server" = "Не удалось найти сервер.";
 
-// MARK: ProfileView
-
-"profile.sections.provider.header" = "Провайдер";
+/* MARK: ProfileView */
 
 "profile.welcome.message" = "Добро пожаловать в Passepartout!\n\nИспользуйте организатор для добавления нового профиля.";
 
 "profile.sections.vpn.footer" = "Соединение будет установлено при необходимости.";
 "profile.sections.status.header" = "Соединение";
-"profile.sections.configuration.header" = "Конфигурация";
 "profile.sections.provider_infrastructure.footer" = "Последнее обновление %@.";
 "profile.sections.vpn_survives_sleep.footer" = "Отключите для уменьшения расхода заряда аккумулятора, может привести к временным замедлениям в связи с повторным подключением после \"пробуждения\".";
 "profile.sections.vpn_resolves_hostname.footer" = "Предпочтительно в большинстве сетей и необходимо в некоторых IPv6 сетях. Отключите если  DNS заблокирован, или для увеличения скорости в случае медленных ответов DNS.";
@@ -149,14 +150,16 @@
 "profile.items.vpn_survives_sleep.caption" = "Оставлять включенным во время сна";
 "profile.items.vpn_resolves_hostname.caption" = "Разрешить имя хоста сервера";
 "profile.items.reconnect.caption" = "Переподключиться";
+"profile.items.uninstall.caption" = "Удалить VPN конфигурацию";
 
 "profile.alerts.rename.title" = "Переименовать профиль";
 "profile.alerts.reconnect_vpn.message" = "Хотите заново подключиться к VPN?";
+"profile.alerts.uninstall_vpn.message" = "Вы действительно хотите убрать VPN конфигурацию из настроек устройства? Это может исправить несколько VPN ошибок, но не изменит установки приложения.";
 "profile.alerts.test_connectivity.title" = "Связь";
 "profile.alerts.test_connectivity.messages.success" = "Ваше устройство подключено к интернету!";
 "profile.alerts.test_connectivity.messages.failure" = "Ваше устройство не подключено к интернету, пожалйста проверьте установки Вашего профиля.";
 
-// MARK: ProfileView -> Provider*View
+/* MARK: ProfileView -> Provider*View */
 
 "provider.location.title" = "Местоположение";
 "provider.location.sections.empty_favorites.footer" = "Свайп в лево на локации, чтобы добавить или убрать из избранного.";
@@ -165,7 +168,7 @@
 
 "provider.preset.title" = "Пресет";
 
-// MARK: ProfileView -> AccountView
+/* MARK: ProfileView -> AccountView */
 
 "account.title" = "Аккаунт";
 "account.sections.credentials.header" = "Данные для входа";
@@ -187,7 +190,7 @@
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Используйте данные для входа на %@ веб-сайт. Ваш логин обычно Ваш e-mail.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Найдите Ваши данные для входа %@ в OpenVPN Config Generator на веб-сайте.";
 
-// MARK: ProfileView -> EndpointView
+/* MARK: ProfileView -> EndpointView */
 
 "endpoint.wireguard.items.peer.caption" = "Узел";
 "endpoint.wireguard.items.preshared_key.caption" = "Общий ключ";
@@ -220,7 +223,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "после %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Рандомная конечная точка";
 
-// MARK: ProfileView -> NetworkSettingsView
+/* MARK: ProfileView -> NetworkSettingsView */
 
 "network_settings.title" = "Сетевые настройки";
 "network_settings.sections.choices.header" = "Игнорировать";
@@ -231,7 +234,7 @@
 "network_settings.items.proxy_bypass.caption" = "Обход домена";
 "network_settings.items.add_proxy_bypass.caption" = "Добавить обходной домен";
 
-// MARK: ProfileView -> OnDemandView
+/* MARK: ProfileView -> OnDemandView */
 
 "on_demand.title" = "Доверенные сети";
 "on_demand.sections.policy.footer" = "При подключении к доверенным сетям VPN обычно выключается, и остаётся отключенным. Отключите эту опцию чтобы оставлять VPN подключенным.";
@@ -242,7 +245,7 @@
 "on_demand.items.ethernet.description" = "Включите, чтобы добавить в доверенные проводное подключение.";
 "on_demand.items.policy.caption" = "Дов. сеть отключает VPN";
 
-// MARK: ProfileView -> DiagnosticsView
+/* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Диагностика";
 "diagnostics.sections.debug_log.footer" = "Маскировка включится после повторного подключения. Информация о сети - это названия хост профилей, IP адрес, маршрутизация и SSID. Данные для входа и приватные ключи не собираются.";
@@ -252,15 +255,16 @@
 
 "diagnostics.alerts.masks_private_data.messages.must_reconnect" = "Для безопасного сброса журнала отладки и изменения маскировки информации сети Вы должны заново подключиться к VPN.";
 
-// MARK: DiagnosticsView -> DebugLogView
+/* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Журнал отладки";
 "debug_log.buttons.copy" = "Копировать";
 
-// MARK: DiagnosticsView -> ReportIssueView
+/* MARK: DiagnosticsView -> ReportIssueView */
 
 "report_issue.alert.title" = "Сообщить о проблеме";
-// MARK: ShortcutsView
+
+/* MARK: ShortcutsView */
 
 "shortcuts.add.title" = "Создать команду";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
@@ -276,9 +280,10 @@
 
 "shortcuts.edit.title" = "Управлять командами";
 "shortcuts.edit.sections.all.header" = "Существующие команды";
+"shortcuts.edit.sections.add.footer" = "Получить помощь Сири, чтобы ускорить частые действия с приложением.";
 "shortcuts.edit.items.add_shortcut.caption" = "Создать команду";
 
-// MARK: PaywallView
+/* MARK: PaywallView */
 
 "paywall.title" = "Покупка";
 "paywall.sections.products.footer" = "Каждый продукт является разовой покупкой. Покупка провайдера не включает подписку на VPN.";
@@ -287,7 +292,7 @@
 "paywall.items.restore.title" = "Восстановить покупки";
 "paywall.items.restore.description" = "Если Вы купили это приложение или совершили встроенные покупки в прошлом, вы можете восстановить ваши покупки, и этот баннер больше не появится.";
 
-// MARK: DonateView
+/* MARK: DonateView */
 
 "donate.title" = "Пожертвовать";
 "donate.sections.one_time.header" = "Один раз";
@@ -298,30 +303,27 @@
 "donate.alerts.purchase.success.message" = "Это значит многое для меня, и, я надеюсь, Вы продолжить использовать и рассказывать об этом приложении.";
 "donate.alerts.purchase.failure.message" = "Не получается совершить пожертвование. %@";
 
-// MARK: AboutView
+/* MARK: AboutView */
 
 "about.title" = "О нас";
 "about.sections.web.header" = "Веб";
-"about.sections.share.header" = "Поделиться";
 "about.items.credits.caption" = "Благодарности";
 "about.items.website.caption" = "Домашняя страница";
 "about.items.disclaimer.caption" = "Предупреждение";
 "about.items.privacy_policy.caption" = "Политика конфиденциальности";
-"about.items.share_twitter.caption" = "Твитнуть о нас!";
-"about.items.share_generic.caption" = "Пригласить друга";
 
-// MARK: AboutView -> VersionView
+/* MARK: AboutView -> VersionView */
 
 "version.title" = "Версия";
 "version.labels.intro" = "Passepartout и TunnelKit написаны и установлены Davide De Rosa (keeshux).\n\nИсходные коды для Passepartout и TunnelKit публично доступны на GitHub под GPLv3, вы можете найти ссылки на домашней странице.\n\nPassepartout является неофициальным клиентом, и никаким образом не связан с OpenVPN Inc.";
 
-// MARK: AboutView -> CreditsView
+/* MARK: AboutView -> CreditsView */
 
 "credits.title" = "Благодарность";
 "credits.sections.licenses.header" = "Лицензии";
 "credits.sections.notices.header" = "Упоминания";
 
-// MARK: PreferencesView (macOS)
+/* MARK: PreferencesView (macOS) */
 
 "preferences.title" = "Настройки";
 "preferences.sections.general.header" = "Общие";
@@ -329,16 +331,3 @@
 "preferences.items.launches_on_login.footer" = "Включите, чтобы приложение автоматически запускалось при загрузке или входе.";
 "preferences.items.confirm_quit.caption" = "Подтверждать выход";
 "preferences.items.confirm_quit.footer" = "Включите, чтобы выход надо было подтверждать.";
-
-// MARK: Menu (macOS)
-
-"menu.show.title" = "Показать";
-"menu.switch_profile.title" = "Активный профиль";
-"menu.active_profile.title.none" = "Нет активных профилей";
-"menu.active_profile.items.customize.title" = "Настроить...";
-"menu.active_profile.messages.missing_credentials" = "Нет настроенных аккаунтов";
-"menu.organizer.title" = "Организатор";
-"menu.preferences.title" = "Настройки";
-"menu.support.title" = "Поддержка";
-"menu.quit.title" = "Выйти из %@";
-"menu.quit.messages.confirm" = "Если включить VPN, он всё равно будет работать в фоновом режиме. Вы точно хотите выйти?";

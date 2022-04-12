@@ -80,7 +80,7 @@ struct ShortcutsView: View {
             modalType = nil
         }
         
-        .navigationTitle(L10n.Organizer.Items.SiriShortcuts.caption)
+        .navigationTitle(Unlocalized.Other.siri)
         .themeSecondaryView()
     }
     
@@ -100,8 +100,7 @@ struct ShortcutsView: View {
     
     private var addSection: some View {
         Section(
-            // FIXME: l10n, string id
-            footer: Text(L10n.Organizer.Sections.Siri.footer)
+            footer: Text(L10n.Shortcuts.Edit.Sections.Add.footer)
         ) {
             NavigationLink(isActive: $isNavigationPresented) {
                 AddView(

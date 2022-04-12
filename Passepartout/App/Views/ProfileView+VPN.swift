@@ -164,14 +164,14 @@ extension ProfileView {
                 Button {
                     isAskingUninstallVPN = true
                 } label: {
-                    Label(L10n.Organizer.Items.Uninstall.caption, systemImage: themeDeleteImage)
+                    Label(L10n.Profile.Items.Uninstall.caption, systemImage: themeDeleteImage)
                 }.foregroundColor(themeErrorColor)
                 .actionSheet(isPresented: $isAskingUninstallVPN) {
                     ActionSheet(
-                        title: Text(L10n.Organizer.Alerts.UninstallVpn.message),
+                        title: Text(L10n.Profile.Alerts.UninstallVpn.message),
                         message: nil,
                         buttons: [
-                            .destructive(Text(L10n.Organizer.Items.Uninstall.caption), action: {
+                            .destructive(Text(L10n.Profile.Items.Uninstall.caption), action: {
                                 Task {
                                     await vpnManager.uninstall()
                                 }

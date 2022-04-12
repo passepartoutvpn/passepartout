@@ -79,10 +79,9 @@ extension OrganizerView {
             }.animation(.default, value: profileManager.headers)
         }
 
-        // FIXME: l10n
         private var emptyView: some View {
             VStack {
-                Text("No profiles")
+                Text(L10n.Organizer.Empty.noProfiles)
                     .themeInformativeText()
             }
         }

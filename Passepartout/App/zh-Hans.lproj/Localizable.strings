@@ -4,7 +4,7 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
-//
+/* MARK: Global */
 
 "global.strings.cancel" = "取消";
 "global.strings.next" = "下一步";
@@ -15,6 +15,9 @@
 "global.strings.add" = "添加";
 "global.strings.default" = "默认";
 "global.strings.name" = "名称";
+"global.strings.provider" = "提供商";
+"global.strings.providers" = "提供商";
+"global.strings.configuration" = "配置";
 "global.strings.address" = "地址";
 "global.strings.addresses" = "地址";
 "global.strings.port" = "端口";
@@ -50,7 +53,30 @@
 "global.errors.missing_provider_server" = "缺少服务器";
 "global.errors.missing_provider_preset" = "缺少预设";
 
-// MARK: TunnelKit
+/* MARK: Menus */
+
+"menu.all.support.title" = "支持";
+"menu.all.share.title" = "分享";
+"menu.all.about.title" = "关于 %@";
+
+"menu.contextual.add_profile.imported" = "添加%@";
+"menu.system.show.title" = "显示";
+"menu.system.switch_profile.title" = "有效配置";
+"menu.system.active_profile.title.none" = "无有效配置";
+"menu.system.active_profile.items.customize.title" = "自定义......";
+"menu.system.active_profile.messages.missing_credentials" = "未配置账户";
+"menu.system.organizer.title" = "分类页面";
+"menu.system.preferences.title" = "偏好设置";
+"menu.system.support.donate" = "提供捐助";
+"menu.system.support.join_community" = "加入社区";
+"menu.system.support.write_review" = "写下想法";
+// "menu.system.support.translate" = "Offer to translate";
+"menu.system.share_twitter.caption" = "发送关于它的推特!";
+"menu.system.share_generic.caption" = "邀请朋友";
+"menu.system.quit.title" = "退出%@";
+"menu.system.quit.messages.confirm" = "VPN（如果启用）仍将在后台运行。您要退出吗？";
+
+/* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "连接中";
 "tunnelkit.vpn.active" = "活动的";
@@ -78,61 +104,36 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "请输入加密密码";
 "tunnelkit.errors.openvpn.decryption" = "该配置包含加密私钥且不能被解密。请再次检查输入的密钥。";
 
-// MARK: OrganizerView
-
-"organizer.sections.twitch.footer" = "快来看我让Passepartout在Twitch上直播，加入聊天互动并做出贡献！";
-"organizer.sections.siri.footer" = "通过Siri来帮助你加快常用的操作。";
-"organizer.sections.support.header" = "支持";
-"organizer.items.follow_twitch.caption" = "在Twitch上观看路路通";
-"organizer.items.profile.value.current" = "使用中";
-"organizer.items.siri_shortcuts.caption" = "管理捷径";
-"organizer.items.join_community.caption" = "加入社区";
-"organizer.items.write_review.caption" = "写下想法";
-"organizer.items.donate.caption" = "提供捐助";
-"organizer.items.github_sponsors.caption" = "在GitHub上支持我";
-"organizer.items.translate.caption" = "提供翻译";
-"organizer.items.about.caption" = "关于 %@";
-"organizer.items.uninstall.caption" = "移除VPN配置";
-"organizer.items.add_provider.caption" = "添加新的提供商配置";
-"organizer.items.add_host.caption" = "从文件添加";
-
 "organizer.alerts.reddit.message" = "你知道Passepartout有一个subreddit吗？可以在上面讨论更新、问题、功能、新的平台等n任何你想要的。\n\n这同样是表达你对此项目关注的地方。";
 "organizer.alerts.reddit.buttons.subscribe" = "立即订阅!";
 "organizer.alerts.reddit.buttons.remind" = "稍后提醒我";
 "organizer.alerts.reddit.buttons.never" = "不要再问";
 
-"organizer.alerts.uninstall_vpn.message" = "你确定要从此设备移除VPN配置吗？这可能会固定一些断开的VPN状态，不会影响已经存在的配置。";
 "organizer.alerts.remove_profile.title" = "删除配置";
 "organizer.alerts.remove_profile.message" = "确定要删除配置%@吗？";
 
-"organizer.menus.add_profile.imported" = "添加%@";
-
-// MARK: AddProfileView
+/* MARK: AddProfileView */
 
 "add_profile.shared.title" = "新的配置";
 "add_profile.shared.views.existing.header" = "已存在的配置";
 "add_profile.shared.alerts.overwrite.message" = "已经存在同名的配置。要替换吗？";
 
-// MARK: AddHostView
+/* MARK: AddHostView */
 
 "add_profile.host.sections.encryption.footer" = "输入密码";
 
-// MARK: AddProviderView
+/* MARK: AddProviderView */
 
-"add_profile.provider.sections.providers.header" = "提供商";
 "add_profile.provider.sections.vpn.footer" = "在这里你可以找到预设的新的提供商配置。";
 "add_profile.provider.items.update_list" = "更新列表";
 "add_profile.provider.errors.no_default_server" = "未找到任何服务器";
 
-// MARK: ProfileView
-
-"profile.sections.provider.header" = "提供商";
+/* MARK: ProfileView */
 
 "profile.welcome.message" = "欢迎使用Passepartout!\n\n使用分类页面来添加一个新的配置。";
 
 "profile.sections.vpn.footer" = "必要时连接将会建立。";
 "profile.sections.status.header" = "连接";
-"profile.sections.configuration.header" = "配置";
 "profile.sections.provider_infrastructure.footer" = "最后在%@时更新";
 "profile.sections.vpn_survives_sleep.footer" = "禁用以减少电池消耗，由于存在可能的唤醒时重连消耗。";
 "profile.sections.vpn_resolves_hostname.footer" = "推荐在大部分的网络中打开，并要求在IPv6环境下。当DNS被阻断或相应缓慢时禁用。";
@@ -149,14 +150,16 @@
 "profile.items.vpn_survives_sleep.caption" = "休眠时保持连接";
 "profile.items.vpn_resolves_hostname.caption" = "解析服务器主机名";
 "profile.items.reconnect.caption" = "重连";
+"profile.items.uninstall.caption" = "移除VPN配置";
 
 "profile.alerts.rename.title" = "重命名配置";
 "profile.alerts.reconnect_vpn.message" = "要重连VPN吗？";
+"profile.alerts.uninstall_vpn.message" = "你确定要从此设备移除VPN配置吗？这可能会固定一些断开的VPN状态，不会影响已经存在的配置。";
 "profile.alerts.test_connectivity.title" = "连接性";
 "profile.alerts.test_connectivity.messages.success" = "你的设备连接到了网络！";
 "profile.alerts.test_connectivity.messages.failure" = "你的设备没有连接到网络，请检查你的配置参数。";
 
-// MARK: ProfileView -> Provider*View
+/* MARK: ProfileView -> Provider*View */
 
 "provider.location.title" = "位置";
 "provider.location.sections.empty_favorites.footer" = "向左轻扫以将其从最喜爱列表中移除或添加。";
@@ -165,7 +168,7 @@
 
 "provider.preset.title" = "预设";
 
-// MARK: ProfileView -> AccountView
+/* MARK: ProfileView -> AccountView */
 
 "account.title" = "账户";
 "account.sections.credentials.header" = "认证方式";
@@ -187,7 +190,7 @@
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "使用你的%@网站认证信息。你的用户名一般是你的e-mail。";
 "account.sections.guidance.footer.infrastructure.windscribe" = "在网站上的OpenVPN配置生成器中找到你的%@认证信息。 ";
 
-// MARK: ProfileView -> EndpointView
+/* MARK: ProfileView -> EndpointView */
 
 "endpoint.wireguard.items.peer.caption" = "同级";
 "endpoint.wireguard.items.preshared_key.caption" = "预共用密码";
@@ -220,7 +223,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "在%@之后";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "随机的服务端";
 
-// MARK: ProfileView -> NetworkSettingsView
+/* MARK: ProfileView -> NetworkSettingsView */
 
 "network_settings.title" = "网络设置";
 "network_settings.sections.choices.header" = "覆盖";
@@ -231,7 +234,7 @@
 "network_settings.items.proxy_bypass.caption" = "旁路域名";
 "network_settings.items.add_proxy_bypass.caption" = "添加旁路域名";
 
-// MARK: ProfileView -> OnDemandView
+/* MARK: ProfileView -> OnDemandView */
 
 "on_demand.title" = "可信网络";
 "on_demand.sections.policy.footer" = "当进入可信网络后，VPN将会断开并保持断开状态。禁用此选项可关闭此功能。";
@@ -242,7 +245,7 @@
 "on_demand.items.ethernet.description" = "选中以信任所有有线连接。";
 "on_demand.items.policy.caption" = "信任网络中禁用VPN";
 
-// MARK: ProfileView -> DiagnosticsView
+/* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "分析数据";
 "diagnostics.sections.debug_log.footer" = "在重连后状态隐藏才有效。网络数据包括主机名、IP地址、路由、SSID、认证方式，但私钥不会出现在日志中。";
@@ -252,15 +255,16 @@
 
 "diagnostics.alerts.masks_private_data.messages.must_reconnect" = "为了安全地重置当前调试日志并应用新的掩码设置，你现在必须重连VPN。";
 
-// MARK: DiagnosticsView -> DebugLogView
+/* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "调试日志";
 "debug_log.buttons.copy" = "复制";
 
-// MARK: DiagnosticsView -> ReportIssueView
+/* MARK: DiagnosticsView -> ReportIssueView */
 
 "report_issue.alert.title" = "提交问题";
-// MARK: ShortcutsView
+
+/* MARK: ShortcutsView */
 
 "shortcuts.add.title" = "添加捷径";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
@@ -276,9 +280,10 @@
 
 "shortcuts.edit.title" = "管理捷径";
 "shortcuts.edit.sections.all.header" = "已经存在的捷径";
+"shortcuts.edit.sections.add.footer" = "通过Siri来帮助你加快常用的操作。";
 "shortcuts.edit.items.add_shortcut.caption" = "添加捷径";
 
-// MARK: PaywallView
+/* MARK: PaywallView */
 
 "paywall.title" = "购买";
 "paywall.sections.products.footer" = "每件产品都是一次性的购买。 购买的提供商并不包含VPN订阅。";
@@ -287,7 +292,7 @@
 "paywall.items.restore.title" = "恢复购买";
 "paywall.items.restore.description" = "如果你购买过此应用或其特征， 你可以恢复购买，此页面将不在显示。";
 
-// MARK: DonateView
+/* MARK: DonateView */
 
 "donate.title" = "捐助";
 "donate.sections.one_time.header" = "一次性";
@@ -298,30 +303,27 @@
 "donate.alerts.purchase.success.message" = "这对于我意味着很多，希望你保持使用并使它更好。";
 "donate.alerts.purchase.failure.message" = "无法展现捐助内容。%@";
 
-// MARK: AboutView
+/* MARK: AboutView */
 
 "about.title" = "关于";
 "about.sections.web.header" = "网络";
-"about.sections.share.header" = "分享";
 "about.items.credits.caption" = "评分";
 "about.items.website.caption" = "主页";
 "about.items.disclaimer.caption" = "免责声明";
 "about.items.privacy_policy.caption" = "隐私政策";
-"about.items.share_twitter.caption" = "发送关于它的推特!";
-"about.items.share_generic.caption" = "邀请朋友";
 
-// MARK: AboutView -> VersionView
+/* MARK: AboutView -> VersionView */
 
 "version.title" = "版本";
 "version.labels.intro" = "Passepartout和TunnelKit由Davide De Rosa (keeshux)编写并维护。\n\nPassepartout和TunnelKit的源代码在GitHub上以GPLv3许可证面向大众开放，你可以在主页上找到链接。\n\nPassepartout不是官方的客户端，同OpenVPN Inc也没有关系。";
 
-// MARK: AboutView -> CreditsView
+/* MARK: AboutView -> CreditsView */
 
 "credits.title" = "评分";
 "credits.sections.licenses.header" = "许可证";
 "credits.sections.notices.header" = "注意";
 
-// MARK: PreferencesView (macOS)
+/* MARK: PreferencesView (macOS) */
 
 "preferences.title" = "偏好设置";
 "preferences.sections.general.header" = "一般";
@@ -329,16 +331,3 @@
 "preferences.items.launches_on_login.footer" = "选中以在启动或登录时自动启动应用。";
 "preferences.items.confirm_quit.caption" = "确认退出";
 "preferences.items.confirm_quit.footer" = "选中以显示退出确认提醒。";
-
-// MARK: Menu (macOS)
-
-"menu.show.title" = "显示";
-"menu.switch_profile.title" = "有效配置";
-"menu.active_profile.title.none" = "无有效配置";
-"menu.active_profile.items.customize.title" = "自定义......";
-"menu.active_profile.messages.missing_credentials" = "未配置账户";
-"menu.organizer.title" = "分类页面";
-"menu.preferences.title" = "偏好设置";
-"menu.support.title" = "支持";
-"menu.quit.title" = "退出%@";
-"menu.quit.messages.confirm" = "VPN（如果启用）仍将在后台运行。您要退出吗？";

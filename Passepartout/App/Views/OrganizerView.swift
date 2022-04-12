@@ -206,7 +206,7 @@ extension OrganizerView {
 
         case .failure(let error):
             alertType = .error(
-                L10n.Organizer.Items.AddHost.caption,
+                L10n.Menu.Contextual.AddProfile.fromFiles,
                 error
             )
         }

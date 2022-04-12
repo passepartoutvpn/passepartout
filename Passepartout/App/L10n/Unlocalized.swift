@@ -99,7 +99,7 @@ enum Unlocalized {
     enum Social {
         static let reddit = "Reddit"
         
-        private static let twitterHashtags = ["OpenVPN", "iOS", "macOS"]
+        private static let twitterHashtags = ["OpenVPN", "WireGuard", "iOS", "macOS"]
         
         static func twitterIntent(withMessage message: String) -> URL {
             var text = message
@@ -206,8 +206,6 @@ enum Unlocalized {
         static let changelog = "CHANGELOG"
         
         static let faq = "FAQ"
-        
-        static let alternativeTo = "AlternativeTo"
     }
     
     enum VPN {

@@ -27,24 +27,12 @@ internal enum L10n {
         /// Privacy policy
         internal static let caption = L10n.tr("Localizable", "about.items.privacy_policy.caption")
       }
-      internal enum ShareGeneric {
-        /// Invite a friend
-        internal static let caption = L10n.tr("Localizable", "about.items.share_generic.caption")
-      }
-      internal enum ShareTwitter {
-        /// Tweet about it!
-        internal static let caption = L10n.tr("Localizable", "about.items.share_twitter.caption")
-      }
       internal enum Website {
         /// Home page
         internal static let caption = L10n.tr("Localizable", "about.items.website.caption")
       }
     }
     internal enum Sections {
-      internal enum Share {
-        /// Share
-        internal static let header = L10n.tr("Localizable", "about.sections.share.header")
-      }
       internal enum Web {
         /// Web
         internal static let header = L10n.tr("Localizable", "about.sections.web.header")
@@ -156,10 +144,6 @@ internal enum L10n {
         internal static let updateList = L10n.tr("Localizable", "add_profile.provider.items.update_list")
       }
       internal enum Sections {
-        internal enum Providers {
-          /// Providers
-          internal static let header = L10n.tr("Localizable", "add_profile.provider.sections.providers.header")
-        }
         internal enum Vpn {
           /// Here you find a few providers with preset configuration profiles.
           internal static let footer = L10n.tr("Localizable", "add_profile.provider.sections.vpn.footer")
@@ -421,13 +405,13 @@ internal enum L10n {
       internal static let missingProfile = L10n.tr("Localizable", "global.errors.missing_profile")
       /// Missing preset
       internal static let missingProviderPreset = L10n.tr("Localizable", "global.errors.missing_provider_preset")
-      /// Missing server
+      /// Missing location
       internal static let missingProviderServer = L10n.tr("Localizable", "global.errors.missing_provider_server")
     }
     internal enum Messages {
       /// No e-mail account is configured.
       internal static let emailNotConfigured = L10n.tr("Localizable", "global.messages.email_not_configured")
-      /// Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS
+      /// Passepartout is an user-friendly, open source OpenVPN / WireGuard client for iOS and macOS
       internal static let share = L10n.tr("Localizable", "global.messages.share")
     }
     internal enum Placeholders {
@@ -449,6 +433,8 @@ internal enum L10n {
       internal static let bytes = L10n.tr("Localizable", "global.strings.bytes")
       /// Cancel
       internal static let cancel = L10n.tr("Localizable", "global.strings.cancel")
+      /// Configuration
+      internal static let configuration = L10n.tr("Localizable", "global.strings.configuration")
       /// Default
       internal static let `default` = L10n.tr("Localizable", "global.strings.default")
       /// Disabled
@@ -485,6 +471,10 @@ internal enum L10n {
       internal static let `protocol` = L10n.tr("Localizable", "global.strings.protocol")
       /// Protocols
       internal static let protocols = L10n.tr("Localizable", "global.strings.protocols")
+      /// Provider
+      internal static let provider = L10n.tr("Localizable", "global.strings.provider")
+      /// Providers
+      internal static let providers = L10n.tr("Localizable", "global.strings.providers")
       /// Proxy
       internal static let proxy = L10n.tr("Localizable", "global.strings.proxy")
       /// Public key
@@ -503,51 +493,103 @@ internal enum L10n {
   }
 
   internal enum Menu {
-    internal enum ActiveProfile {
-      internal enum Items {
-        internal enum Customize {
-          /// Customize...
-          internal static let title = L10n.tr("Localizable", "menu.active_profile.items.customize.title")
+    internal enum All {
+      internal enum About {
+        /// About %@
+        internal static func title(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "menu.all.about.title", String(describing: p1))
         }
       }
-      internal enum Messages {
-        /// No account configured
-        internal static let missingCredentials = L10n.tr("Localizable", "menu.active_profile.messages.missing_credentials")
+      internal enum Share {
+        /// Share
+        internal static let title = L10n.tr("Localizable", "menu.all.share.title")
       }
-      internal enum Title {
-        /// No active profile
-        internal static let `none` = L10n.tr("Localizable", "menu.active_profile.title.none")
-      }
-    }
-    internal enum Organizer {
-      /// Organizer
-      internal static let title = L10n.tr("Localizable", "menu.organizer.title")
-    }
-    internal enum Preferences {
-      /// Preferences
-      internal static let title = L10n.tr("Localizable", "menu.preferences.title")
-    }
-    internal enum Quit {
-      /// Quit %@
-      internal static func title(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "menu.quit.title", String(describing: p1))
-      }
-      internal enum Messages {
-        /// The VPN, if enabled, will still run in the background. Do you want to quit?
-        internal static let confirm = L10n.tr("Localizable", "menu.quit.messages.confirm")
+      internal enum Support {
+        /// Support
+        internal static let title = L10n.tr("Localizable", "menu.all.support.title")
       }
     }
-    internal enum Show {
-      /// Show
-      internal static let title = L10n.tr("Localizable", "menu.show.title")
+    internal enum Contextual {
+      /// Invite
+      internal static let shareGeneric = L10n.tr("Localizable", "menu.contextual.share_generic")
+      /// Tweet
+      internal static let shareTwitter = L10n.tr("Localizable", "menu.contextual.share_twitter")
+      internal enum AddProfile {
+        /// From Files
+        internal static let fromFiles = L10n.tr("Localizable", "menu.contextual.add_profile.from_files")
+        /// From text
+        internal static let fromText = L10n.tr("Localizable", "menu.contextual.add_profile.from_text")
+        /// Add %@
+        internal static func imported(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "menu.contextual.add_profile.imported", String(describing: p1))
+        }
+      }
+      internal enum Support {
+        /// Community
+        internal static let joinCommunity = L10n.tr("Localizable", "menu.contextual.support.join_community")
+        /// Review
+        internal static let writeReview = L10n.tr("Localizable", "menu.contextual.support.write_review")
+      }
     }
-    internal enum Support {
-      /// Support
-      internal static let title = L10n.tr("Localizable", "menu.support.title")
-    }
-    internal enum SwitchProfile {
-      /// Active profile
-      internal static let title = L10n.tr("Localizable", "menu.switch_profile.title")
+    internal enum System {
+      internal enum ActiveProfile {
+        internal enum Items {
+          internal enum Customize {
+            /// Customize...
+            internal static let title = L10n.tr("Localizable", "menu.system.active_profile.items.customize.title")
+          }
+        }
+        internal enum Messages {
+          /// No account configured
+          internal static let missingCredentials = L10n.tr("Localizable", "menu.system.active_profile.messages.missing_credentials")
+        }
+        internal enum Title {
+          /// No active profile
+          internal static let `none` = L10n.tr("Localizable", "menu.system.active_profile.title.none")
+        }
+      }
+      internal enum Organizer {
+        /// Organizer
+        internal static let title = L10n.tr("Localizable", "menu.system.organizer.title")
+      }
+      internal enum Preferences {
+        /// Preferences
+        internal static let title = L10n.tr("Localizable", "menu.system.preferences.title")
+      }
+      internal enum Quit {
+        /// Quit %@
+        internal static func title(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "menu.system.quit.title", String(describing: p1))
+        }
+        internal enum Messages {
+          /// The VPN, if enabled, will still run in the background. Do you want to quit?
+          internal static let confirm = L10n.tr("Localizable", "menu.system.quit.messages.confirm")
+        }
+      }
+      internal enum ShareGeneric {
+        /// Invite a friend
+        internal static let caption = L10n.tr("Localizable", "menu.system.share_generic.caption")
+      }
+      internal enum ShareTwitter {
+        /// Tweet about it!
+        internal static let caption = L10n.tr("Localizable", "menu.system.share_twitter.caption")
+      }
+      internal enum Show {
+        /// Show
+        internal static let title = L10n.tr("Localizable", "menu.system.show.title")
+      }
+      internal enum Support {
+        /// Make a donation
+        internal static let donate = L10n.tr("Localizable", "menu.system.support.donate")
+        /// Join community
+        internal static let joinCommunity = L10n.tr("Localizable", "menu.system.support.join_community")
+        /// Write a review
+        internal static let writeReview = L10n.tr("Localizable", "menu.system.support.write_review")
+      }
+      internal enum SwitchProfile {
+        /// Active profile
+        internal static let title = L10n.tr("Localizable", "menu.system.switch_profile.title")
+      }
     }
   }
 
@@ -651,86 +693,10 @@ internal enum L10n {
         /// Remove profile
         internal static let title = L10n.tr("Localizable", "organizer.alerts.remove_profile.title")
       }
-      internal enum UninstallVpn {
-        /// Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your provider and host profiles.
-        internal static let message = L10n.tr("Localizable", "organizer.alerts.uninstall_vpn.message")
-      }
     }
-    internal enum Items {
-      internal enum About {
-        /// About %@
-        internal static func caption(_ p1: Any) -> String {
-          return L10n.tr("Localizable", "organizer.items.about.caption", String(describing: p1))
-        }
-      }
-      internal enum AddHost {
-        /// Add from Files
-        internal static let caption = L10n.tr("Localizable", "organizer.items.add_host.caption")
-      }
-      internal enum AddProvider {
-        /// Add new provider
-        internal static let caption = L10n.tr("Localizable", "organizer.items.add_provider.caption")
-      }
-      internal enum Donate {
-        /// Make a donation
-        internal static let caption = L10n.tr("Localizable", "organizer.items.donate.caption")
-      }
-      internal enum FollowTwitch {
-        /// Watch Passepartout on Twitch
-        internal static let caption = L10n.tr("Localizable", "organizer.items.follow_twitch.caption")
-      }
-      internal enum GithubSponsors {
-        /// Support me on GitHub
-        internal static let caption = L10n.tr("Localizable", "organizer.items.github_sponsors.caption")
-      }
-      internal enum JoinCommunity {
-        /// Join community
-        internal static let caption = L10n.tr("Localizable", "organizer.items.join_community.caption")
-      }
-      internal enum Profile {
-        internal enum Value {
-          /// In use
-          internal static let current = L10n.tr("Localizable", "organizer.items.profile.value.current")
-        }
-      }
-      internal enum SiriShortcuts {
-        /// Manage shortcuts
-        internal static let caption = L10n.tr("Localizable", "organizer.items.siri_shortcuts.caption")
-      }
-      internal enum Translate {
-        /// Offer to translate
-        internal static let caption = L10n.tr("Localizable", "organizer.items.translate.caption")
-      }
-      internal enum Uninstall {
-        /// Remove VPN configuration
-        internal static let caption = L10n.tr("Localizable", "organizer.items.uninstall.caption")
-      }
-      internal enum WriteReview {
-        /// Write a review
-        internal static let caption = L10n.tr("Localizable", "organizer.items.write_review.caption")
-      }
-    }
-    internal enum Menus {
-      internal enum AddProfile {
-        /// Add %@
-        internal static func imported(_ p1: Any) -> String {
-          return L10n.tr("Localizable", "organizer.menus.add_profile.imported", String(describing: p1))
-        }
-      }
-    }
-    internal enum Sections {
-      internal enum Siri {
-        /// Get help from Siri to speed up your most common interactions with the app.
-        internal static let footer = L10n.tr("Localizable", "organizer.sections.siri.footer")
-      }
-      internal enum Support {
-        /// Support
-        internal static let header = L10n.tr("Localizable", "organizer.sections.support.header")
-      }
-      internal enum Twitch {
-        /// Come watch me make Passepartout live on Twitch, join the chat to interact and contribute!
-        internal static let footer = L10n.tr("Localizable", "organizer.sections.twitch.footer")
-      }
+    internal enum Empty {
+      /// No profiles
+      internal static let noProfiles = L10n.tr("Localizable", "organizer.empty.no_profiles")
     }
   }
 
@@ -809,6 +775,10 @@ internal enum L10n {
           internal static let success = L10n.tr("Localizable", "profile.alerts.test_connectivity.messages.success")
         }
       }
+      internal enum UninstallVpn {
+        /// Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your provider and host profiles.
+        internal static let message = L10n.tr("Localizable", "profile.alerts.uninstall_vpn.message")
+      }
     }
     internal enum Items {
       internal enum Category {
@@ -836,6 +806,10 @@ internal enum L10n {
       internal enum Reconnect {
         /// Reconnect
         internal static let caption = L10n.tr("Localizable", "profile.items.reconnect.caption")
+      }
+      internal enum Uninstall {
+        /// Remove VPN configuration
+        internal static let caption = L10n.tr("Localizable", "profile.items.uninstall.caption")
       }
       internal enum UseProfile {
         /// Use this profile
@@ -865,17 +839,9 @@ internal enum L10n {
       }
     }
     internal enum Sections {
-      internal enum Configuration {
-        /// Configuration
-        internal static let header = L10n.tr("Localizable", "profile.sections.configuration.header")
-      }
       internal enum Feedback {
         /// Feedback
         internal static let header = L10n.tr("Localizable", "profile.sections.feedback.header")
-      }
-      internal enum Provider {
-        /// Provider
-        internal static let header = L10n.tr("Localizable", "profile.sections.provider.header")
       }
       internal enum ProviderInfrastructure {
         /// Last updated on %@.
@@ -999,6 +965,10 @@ internal enum L10n {
         }
       }
       internal enum Sections {
+        internal enum Add {
+          /// Get help from Siri to speed up your most common interactions with the app.
+          internal static let footer = L10n.tr("Localizable", "shortcuts.edit.sections.add.footer")
+        }
         internal enum All {
           /// Existing shortcuts
           internal static let header = L10n.tr("Localizable", "shortcuts.edit.sections.all.header")

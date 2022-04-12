@@ -4,7 +4,7 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
-//
+/* MARK: Global */
 
 "global.strings.cancel" = "Cancel";
 "global.strings.next" = "Next";
@@ -15,6 +15,9 @@
 "global.strings.add" = "Add";
 "global.strings.default" = "Default";
 "global.strings.name" = "Name";
+"global.strings.provider" = "Provider";
+"global.strings.providers" = "Providers";
+"global.strings.configuration" = "Configuration";
 "global.strings.address" = "Address";
 "global.strings.addresses" = "Addresses";
 "global.strings.port" = "Port";
@@ -41,16 +44,46 @@
 "global.strings.translations" = "Translations";
 
 "global.messages.email_not_configured" = "No e-mail account is configured.";
-"global.messages.share" = "Passepartout is an user-friendly, open source OpenVPN client for iOS and macOS";
+"global.messages.share" = "Passepartout is an user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";
 
 "global.placeholders.profile_name" = "My profile";
 
 "global.errors.missing_profile" = "Missing profile";
 "global.errors.missing_account" = "Missing account";
-"global.errors.missing_provider_server" = "Missing server";
+"global.errors.missing_provider_server" = "Missing location";
 "global.errors.missing_provider_preset" = "Missing preset";
 
-// MARK: TunnelKit
+/* MARK: Menus */
+
+"menu.all.support.title" = "Support";
+"menu.all.share.title" = "Share";
+"menu.all.about.title" = "About %@";
+
+"menu.contextual.add_profile.from_files" = "From Files";
+"menu.contextual.add_profile.from_text" = "From text";
+"menu.contextual.add_profile.imported" = "Add %@";
+"menu.contextual.support.write_review" = "Review";
+"menu.contextual.support.join_community" = "Community";
+"menu.contextual.share_twitter" = "Tweet";
+"menu.contextual.share_generic" = "Invite";
+
+"menu.system.show.title" = "Show";
+"menu.system.switch_profile.title" = "Active profile";
+"menu.system.active_profile.title.none" = "No active profile";
+"menu.system.active_profile.items.customize.title" = "Customize...";
+"menu.system.active_profile.messages.missing_credentials" = "No account configured";
+"menu.system.organizer.title" = "Organizer";
+"menu.system.preferences.title" = "Preferences";
+"menu.system.support.donate" = "Make a donation";
+"menu.system.support.join_community" = "Join community";
+"menu.system.support.write_review" = "Write a review";
+// "menu.system.support.translate" = "Offer to translate";
+"menu.system.share_twitter.caption" = "Tweet about it!";
+"menu.system.share_generic.caption" = "Invite a friend";
+"menu.system.quit.title" = "Quit %@";
+"menu.system.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
+
+/* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Connecting";
 "tunnelkit.vpn.active" = "Active";
@@ -78,61 +111,40 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Please enter the encryption passphrase.";
 "tunnelkit.errors.openvpn.decryption" = "Unable to decrypt private key.";
 
-// MARK: OrganizerView
+/* MARK: OrganizerView */
 
-"organizer.sections.twitch.footer" = "Come watch me make Passepartout live on Twitch, join the chat to interact and contribute!";
-"organizer.sections.siri.footer" = "Get help from Siri to speed up your most common interactions with the app.";
-"organizer.sections.support.header" = "Support";
-"organizer.items.follow_twitch.caption" = "Watch Passepartout on Twitch";
-"organizer.items.profile.value.current" = "In use";
-"organizer.items.siri_shortcuts.caption" = "Manage shortcuts";
-"organizer.items.join_community.caption" = "Join community";
-"organizer.items.write_review.caption" = "Write a review";
-"organizer.items.donate.caption" = "Make a donation";
-"organizer.items.github_sponsors.caption" = "Support me on GitHub";
-"organizer.items.translate.caption" = "Offer to translate";
-"organizer.items.about.caption" = "About %@";
-"organizer.items.uninstall.caption" = "Remove VPN configuration";
-"organizer.items.add_provider.caption" = "Add new provider";
-"organizer.items.add_host.caption" = "Add from Files";
+"organizer.empty.no_profiles" = "No profiles";
 
 "organizer.alerts.reddit.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";
 "organizer.alerts.reddit.buttons.subscribe" = "Subscribe now!";
 "organizer.alerts.reddit.buttons.remind" = "Remind me later";
 "organizer.alerts.reddit.buttons.never" = "Don't ask again";
 
-"organizer.alerts.uninstall_vpn.message" = "Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your provider and host profiles.";
 "organizer.alerts.remove_profile.title" = "Remove profile";
 "organizer.alerts.remove_profile.message" = "Are you sure you want to delete profile %@?";
 
-"organizer.menus.add_profile.imported" = "Add %@";
-
-// MARK: AddProfileView
+/* MARK: AddProfileView */
 
 "add_profile.shared.title" = "New profile";
 "add_profile.shared.views.existing.header" = "Existing profiles";
 "add_profile.shared.alerts.overwrite.message" = "A profile with the same name already exists. Replace it?";
 
-// MARK: AddHostView
+/* MARK: AddHostView */
 
 "add_profile.host.sections.encryption.footer" = "Enter passphrase";
 
-// MARK: AddProviderView
+/* MARK: AddProviderView */
 
-"add_profile.provider.sections.providers.header" = "Providers";
 "add_profile.provider.sections.vpn.footer" = "Here you find a few providers with preset configuration profiles.";
 "add_profile.provider.items.update_list" = "Update list";
 "add_profile.provider.errors.no_default_server" = "Could not find any server.";
 
-// MARK: ProfileView
-
-"profile.sections.provider.header" = "Provider";
+/* MARK: ProfileView */
 
 "profile.welcome.message" = "Welcome to Passepartout!\n\nUse the organizer to add a new profile.";
 
 "profile.sections.vpn.footer" = "The connection will be established whenever necessary.";
 "profile.sections.status.header" = "Connection";
-"profile.sections.configuration.header" = "Configuration";
 "profile.sections.provider_infrastructure.footer" = "Last updated on %@.";
 "profile.sections.vpn_survives_sleep.footer" = "Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.";
 "profile.sections.vpn_resolves_hostname.footer" = "Preferred in most networks and required in some IPv6 networks. Disable where DNS is blocked, or to speed up negotiation when DNS is slow to respond.";
@@ -149,14 +161,16 @@
 "profile.items.vpn_survives_sleep.caption" = "Keep alive on sleep";
 "profile.items.vpn_resolves_hostname.caption" = "Resolve provider hostname";
 "profile.items.reconnect.caption" = "Reconnect";
+"profile.items.uninstall.caption" = "Remove VPN configuration";
 
 "profile.alerts.rename.title" = "Rename profile";
 "profile.alerts.reconnect_vpn.message" = "Do you want to reconnect to the VPN?";
+"profile.alerts.uninstall_vpn.message" = "Do you really want to erase the VPN configuration from your device settings? This may fix some broken VPN states and will not affect your provider and host profiles.";
 "profile.alerts.test_connectivity.title" = "Connectivity";
 "profile.alerts.test_connectivity.messages.success" = "Your device is connected to the Internet!";
 "profile.alerts.test_connectivity.messages.failure" = "Your device has no Internet connectivity, please review your profile parameters.";
 
-// MARK: ProfileView -> Provider*View
+/* MARK: ProfileView -> Provider*View */
 
 "provider.location.title" = "Location";
 "provider.location.sections.empty_favorites.footer" = "Swipe left on a location to add or remove it from Favorites.";
@@ -165,7 +179,7 @@
 
 "provider.preset.title" = "Preset";
 
-// MARK: ProfileView -> AccountView
+/* MARK: ProfileView -> AccountView */
 
 "account.title" = "Account";
 "account.sections.credentials.header" = "Credentials";
@@ -187,7 +201,7 @@
 "account.sections.guidance.footer.infrastructure.vyprvpn" = "Use your %@ website credentials. Your username is usually your e-mail.";
 "account.sections.guidance.footer.infrastructure.windscribe" = "Find your %@ credentials in the OpenVPN Config Generator on the website.";
 
-// MARK: ProfileView -> EndpointView
+/* MARK: ProfileView -> EndpointView */
 
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Preshared key";
@@ -220,7 +234,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "after %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Randomize endpoint";
 
-// MARK: ProfileView -> NetworkSettingsView
+/* MARK: ProfileView -> NetworkSettingsView */
 
 "network_settings.title" = "Network settings";
 "network_settings.sections.choices.header" = "Override";
@@ -231,7 +245,7 @@
 "network_settings.items.proxy_bypass.caption" = "Bypass domain";
 "network_settings.items.add_proxy_bypass.caption" = "Add bypass domain";
 
-// MARK: ProfileView -> OnDemandView
+/* MARK: ProfileView -> OnDemandView */
 
 "on_demand.title" = "Trusted networks";
 "on_demand.sections.policy.footer" = "When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.";
@@ -242,7 +256,7 @@
 "on_demand.items.ethernet.description" = "Check to trust any wired cable connection.";
 "on_demand.items.policy.caption" = "Trust disables VPN";
 
-// MARK: ProfileView -> DiagnosticsView
+/* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnostics";
 "diagnostics.sections.debug_log.footer" = "Masking status will be effective after reconnecting. Network data are hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.";
@@ -252,15 +266,16 @@
 
 "diagnostics.alerts.masks_private_data.messages.must_reconnect" = "In order to safely reset the current debug log and apply the new masking preference, you must reconnect to the VPN now.";
 
-// MARK: DiagnosticsView -> DebugLogView
+/* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Debug log";
 "debug_log.buttons.copy" = "Copy";
 
-// MARK: DiagnosticsView -> ReportIssueView
+/* MARK: DiagnosticsView -> ReportIssueView */
 
 "report_issue.alert.title" = "Report issue";
-// MARK: ShortcutsView
+
+/* MARK: ShortcutsView */
 
 "shortcuts.add.title" = "Add shortcut";
 "shortcuts.add.sections.wifi.header" = "Wi-Fi";
@@ -276,9 +291,10 @@
 
 "shortcuts.edit.title" = "Manage shortcuts";
 "shortcuts.edit.sections.all.header" = "Existing shortcuts";
+"shortcuts.edit.sections.add.footer" = "Get help from Siri to speed up your most common interactions with the app.";
 "shortcuts.edit.items.add_shortcut.caption" = "Add shortcut";
 
-// MARK: PaywallView
+/* MARK: PaywallView */
 
 "paywall.title" = "Purchase";
 "paywall.sections.products.footer" = "Every product is a one-time purchase. Provider purchases do not include a VPN subscription.";
@@ -287,7 +303,7 @@
 "paywall.items.restore.title" = "Restore purchases";
 "paywall.items.restore.description" = "If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.";
 
-// MARK: DonateView
+/* MARK: DonateView */
 
 "donate.title" = "Donate";
 "donate.sections.one_time.header" = "One time";
@@ -298,30 +314,27 @@
 "donate.alerts.purchase.success.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
 "donate.alerts.purchase.failure.message" = "Unable to perform the donation. %@";
 
-// MARK: AboutView
+/* MARK: AboutView */
 
 "about.title" = "About";
 "about.sections.web.header" = "Web";
-"about.sections.share.header" = "Share";
 "about.items.credits.caption" = "Credits";
 "about.items.website.caption" = "Home page";
 "about.items.disclaimer.caption" = "Disclaimer";
 "about.items.privacy_policy.caption" = "Privacy policy";
-"about.items.share_twitter.caption" = "Tweet about it!";
-"about.items.share_generic.caption" = "Invite a friend";
 
-// MARK: AboutView -> VersionView
+/* MARK: AboutView -> VersionView */
 
 "version.title" = "Version";
 "version.labels.intro" = "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.";
 
-// MARK: AboutView -> CreditsView
+/* MARK: AboutView -> CreditsView */
 
 "credits.title" = "Credits";
 "credits.sections.licenses.header" = "Licenses";
 "credits.sections.notices.header" = "Notices";
 
-// MARK: PreferencesView (macOS)
+/* MARK: PreferencesView (macOS) */
 
 "preferences.title" = "Preferences";
 "preferences.sections.general.header" = "General";
@@ -329,16 +342,3 @@
 "preferences.items.launches_on_login.footer" = "Check to automatically launch the app on boot or login.";
 "preferences.items.confirm_quit.caption" = "Confirm quit";
 "preferences.items.confirm_quit.footer" = "Check to present a quit confirmation alert.";
-
-// MARK: Menu (macOS)
-
-"menu.show.title" = "Show";
-"menu.switch_profile.title" = "Active profile";
-"menu.active_profile.title.none" = "No active profile";
-"menu.active_profile.items.customize.title" = "Customize...";
-"menu.active_profile.messages.missing_credentials" = "No account configured";
-"menu.organizer.title" = "Organizer";
-"menu.preferences.title" = "Preferences";
-"menu.support.title" = "Support";
-"menu.quit.title" = "Quit %@";
-"menu.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
