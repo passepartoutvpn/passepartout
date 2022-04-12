@@ -146,7 +146,7 @@ jobs:
   publish_to_app_store:
     name: Publish to App Store
     runs-on: ubuntu-latest
-    needs: [build_upload, submit_for_app_review]
+    needs: submit_for_app_review
     environment:
       name: app_store
     env:

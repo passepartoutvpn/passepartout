@@ -1,0 +1,15 @@
+strings:
+    inputs:
+        - L10n/en.lproj/Localizable.strings
+    outputs:
+        - templateName: structured-swift4
+          output: Constants/SwiftGen+Strings.swift
+
+xcassets:
+    inputs:
+        - Assets.xcassets
+        - Flags.xcassets
+        - Providers.xcassets
+    outputs:
+        - templateName: swift4
+          output: Constants/SwiftGen+Assets.swift

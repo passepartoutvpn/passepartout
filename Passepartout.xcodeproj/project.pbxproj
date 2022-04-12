@@ -7,133 +7,122 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */; };
-		0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */; };
-		0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */; };
-		0E05C5D720D1645F006EE732 /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */; };
-		0E05C61D20D27C82006EE732 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E05C61C20D27C82006EE732 /* Theme.swift */; };
+		0E0AD49027BD53CB00FBB520 /* ProfileView+Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0AD48F27BD53CB00FBB520 /* ProfileView+Welcome.swift */; };
+		0E0BD27327B2EA2C00583AC5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27227B2EA2C00583AC5 /* MainView.swift */; };
+		0E0BD27627B2EB2200583AC5 /* DonateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27527B2EB2200583AC5 /* DonateView.swift */; };
+		0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */; };
 		0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E0C072B236087A100155AAC /* InfoPlist.strings */; };
-		0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1066C820E0F84A004F98B7 /* Cells.swift */; };
-		0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */; };
-		0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */; };
-		0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */; };
-		0E24273A225950450064A1A3 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E24273C225950450064A1A3 /* About.storyboard */; };
-		0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E242741225956AC0064A1A3 /* DonationViewController.swift */; };
-		0E294AA125AE2B0A00CB4908 /* Descriptible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294A8225AE29D100CB4908 /* Descriptible.swift */; };
-		0E294AA225AE2B0B00CB4908 /* Descriptible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E294A8225AE29D100CB4908 /* Descriptible.swift */; };
+		0E12BC8F27F62C8600B2F912 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12BC8E27F62C8500B2F912 /* Validators.swift */; };
+		0E2A8D4927ADF87F00207D04 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */; };
+		0E2A8D4F27B04BBA00207D04 /* OrganizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */; };
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
-		0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B493F20FCFF990094784C /* Theme+Titles.swift */; };
-		0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3262D8235EE8DA00B5E470 /* HostImporter.swift */; };
-		0E3586FE225BD34800509A4D /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */; };
-		0E36D24D2240234B006AF062 /* ShortcutsAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */; };
-		0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E36D25A22403469006AF062 /* Shortcuts.storyboard */; };
-		0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */; };
-		0E4B0D6B2366E3C100C890B4 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */; };
-		0E4B0D742366E6C800C890B4 /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E4B0D762366E6C800C890B4 /* Purchase.storyboard */; };
-		0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */; };
-		0E4FD7F120D58618002221FF /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4FD7F020D58618002221FF /* Macros.swift */; };
-		0E52031D259F58BF00CBAB56 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F7D259F41690022DFB8 /* Providers.xcassets */; };
-		0E52031E259F58BF00CBAB56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F7F259F41690022DFB8 /* Assets.xcassets */; };
-		0E52031F259F58BF00CBAB56 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E569FA7259F41690022DFB8 /* Flags.xcassets */; };
-		0E520320259F58BF00CBAB56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F8B259F41690022DFB8 /* AppDelegate.swift */; };
-		0E52032B259F58DD00CBAB56 /* TextTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F5A259F41690022DFB8 /* TextTableView.xib */; };
-		0E52032C259F58DD00CBAB56 /* TextTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F5B259F41690022DFB8 /* TextTableView.swift */; };
-		0E520333259F58F500CBAB56 /* OrganizerProfileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F69259F41690022DFB8 /* OrganizerProfileTableView.swift */; };
-		0E520334259F58F500CBAB56 /* OrganizerProfileTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F6B259F41690022DFB8 /* OrganizerProfileTableView.xib */; };
-		0E520335259F58F500CBAB56 /* HostServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F7A259F41690022DFB8 /* HostServiceView.swift */; };
-		0E520336259F58F500CBAB56 /* HostServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F7B259F41690022DFB8 /* HostServiceView.xib */; };
-		0E520337259F58F500CBAB56 /* ProviderServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F79259F41690022DFB8 /* ProviderServiceView.xib */; };
-		0E520338259F58F500CBAB56 /* ProviderServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F6E259F41690022DFB8 /* ProviderServiceView.swift */; };
-		0E520339259F58F500CBAB56 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F6D259F41690022DFB8 /* ServiceViewController.swift */; };
-		0E52033A259F58F500CBAB56 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F7C259F41690022DFB8 /* AccountViewController.swift */; };
-		0E52033B259F58F500CBAB56 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F6A259F41690022DFB8 /* OrganizerViewController.swift */; };
-		0E520342259F58FE00CBAB56 /* EndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F71259F41690022DFB8 /* EndpointViewController.swift */; };
-		0E520343259F58FE00CBAB56 /* ProfileCustomizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F73259F41690022DFB8 /* ProfileCustomizationViewController.swift */; };
-		0E520344259F58FE00CBAB56 /* TrustedNetworksAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F75259F41690022DFB8 /* TrustedNetworksAddViewController.swift */; };
-		0E520345259F58FE00CBAB56 /* DNSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F76259F41690022DFB8 /* DNSViewController.swift */; };
-		0E520346259F58FE00CBAB56 /* TrustedNetworksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F78259F41690022DFB8 /* TrustedNetworksViewController.swift */; };
-		0E520347259F58FE00CBAB56 /* ProxyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F74259F41690022DFB8 /* ProxyViewController.swift */; };
-		0E520348259F58FE00CBAB56 /* MTUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F70259F41690022DFB8 /* MTUViewController.swift */; };
-		0E520349259F58FE00CBAB56 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F72259F41690022DFB8 /* ConfigurationViewController.swift */; };
-		0E52034A259F58FE00CBAB56 /* DefaultGatewayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F77259F41690022DFB8 /* DefaultGatewayViewController.swift */; };
-		0E520354259F590600CBAB56 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F67259F41690022DFB8 /* PreferencesViewController.swift */; };
-		0E520355259F590600CBAB56 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F66259F41690022DFB8 /* DebugLogViewController.swift */; };
-		0E520356259F590600CBAB56 /* PreferencesGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F68259F41690022DFB8 /* PreferencesGeneralViewController.swift */; };
-		0E52035D259F591300CBAB56 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F8A259F41690022DFB8 /* MainMenu.xib */; };
-		0E52035E259F591300CBAB56 /* StatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F89259F41690022DFB8 /* StatusMenu.swift */; };
-		0E52035F259F591300CBAB56 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F88259F41690022DFB8 /* MainMenu.swift */; };
-		0E520379259F593B00CBAB56 /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA6259F41690022DFB8 /* Macros.swift */; };
-		0E52037A259F593B00CBAB56 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F92259F41690022DFB8 /* WindowManager.swift */; };
-		0E52037B259F593B00CBAB56 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F8F259F41690022DFB8 /* IssueReporter.swift */; };
-		0E52037C259F593B00CBAB56 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA1259F41690022DFB8 /* Theme.swift */; };
-		0E52037E259F593B00CBAB56 /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */; };
-		0E52037F259F593B00CBAB56 /* Theme+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9A259F41690022DFB8 /* Theme+Views.swift */; };
-		0E520381259F593B00CBAB56 /* NSTextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F94259F41690022DFB8 /* NSTextView+Search.swift */; };
-		0E520382259F593B00CBAB56 /* SwiftGen+Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */; };
-		0E520383259F593B00CBAB56 /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */; };
-		0E520385259F593B00CBAB56 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E569FA4259F41690022DFB8 /* Credits.html */; };
-		0E520387259F593B00CBAB56 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F97259F41690022DFB8 /* TextInputViewController.swift */; };
-		0E520388259F593B00CBAB56 /* HostImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F93259F41690022DFB8 /* HostImporter.swift */; };
-		0E5203B6259F5F3F00CBAB56 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
-		0E5203BE259F5F3F00CBAB56 /* PassepartoutTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0E5203B5259F5F3F00CBAB56 /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0E52047B259F642600CBAB56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F85259F41690022DFB8 /* Main.storyboard */; };
-		0E52047C259F642600CBAB56 /* Service.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F83259F41690022DFB8 /* Service.storyboard */; };
-		0E52047D259F642600CBAB56 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F81259F41690022DFB8 /* Preferences.storyboard */; };
-		0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63B20C83FC5008323CF /* AppDelegate.swift */; };
-		0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E57F63D20C83FC5008323CF /* ServiceViewController.swift */; };
-		0E57F64120C83FC5008323CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F63F20C83FC5008323CF /* Main.storyboard */; };
-		0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64220C83FC7008323CF /* Assets.xcassets */; };
-		0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */; };
-		0E6268942369AD0600355F75 /* PurchaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */; };
-		0E6BA54B25C9EE3A000CDFAC /* Purchase.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E6BA54D25C9EE3A000CDFAC /* Purchase.storyboard */; };
-		0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */; };
-		0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */; };
-		0E79D2C825C9F1B300D12964 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D2C725C9F1B300D12964 /* PurchaseViewController.swift */; };
-		0E79D31E25CC0CF600D12964 /* PurchaseProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E79D31D25CC0CF600D12964 /* PurchaseProductView.swift */; };
-		0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */; };
+		0E2C171B27CB5A3B007E8488 /* GenericCreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */; };
+		0E2C172B27CB63F9007E8488 /* Reviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C172A27CB63F9007E8488 /* Reviewer.swift */; };
+		0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift */; };
+		0E2DE71F27DCD0290067B9E1 /* TunnelKit+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DE71E27DCD0290067B9E1 /* TunnelKit+L10n.swift */; };
+		0E2DE72527DCDF550067B9E1 /* WireGuard+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DE72427DCDF550067B9E1 /* WireGuard+L10n.swift */; };
+		0E34A2B627CAA8CC00C73B67 /* Core+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34A2B527CAA8CC00C73B67 /* Core+L10n.swift */; };
+		0E34A2B927CAA96A00C73B67 /* OpenVPN+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34A2AF27CAA84500C73B67 /* OpenVPN+L10n.swift */; };
+		0E34A2CF27CADA6300C73B67 /* GenericVersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34A2CE27CADA6300C73B67 /* GenericVersionView.swift */; };
+		0E34AC7627F83FE20042F2AB /* OrganizerView+VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC7527F83FE20042F2AB /* OrganizerView+VPN.swift */; };
+		0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */; };
+		0E34AC7A27F8431D0042F2AB /* OrganizerView+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC7927F8431D0042F2AB /* OrganizerView+Shortcuts.swift */; };
+		0E34AC7C27F845510042F2AB /* OrganizerView+Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC7B27F845510042F2AB /* OrganizerView+Profiles.swift */; };
+		0E34AC7E27F849050042F2AB /* OrganizerView+AddProfileMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC7D27F849050042F2AB /* OrganizerView+AddProfileMenu.swift */; };
+		0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */; };
+		0E3B7FCD27E47B3700C66F13 /* AddHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FCC27E47B3700C66F13 /* AddHostView.swift */; };
+		0E3B7FD627E5173A00C66F13 /* ProfileView+VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */; };
+		0E3B7FDA27E51A0200C66F13 /* ProfileView+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */; };
+		0E44689627B051C300A14CE4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44689527B051C300A14CE4 /* ProfileView.swift */; };
+		0E44689C27B11B5300A14CE4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44689B27B11B5300A14CE4 /* AboutView.swift */; };
+		0E49F6BB27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49F6BA27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift */; };
+		0E49F6BD27D7639000385834 /* EndpointAdvancedView+WireGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49F6BC27D7639000385834 /* EndpointAdvancedView+WireGuard.swift */; };
+		0E49F6BF27D764AF00385834 /* EndpointAdvancedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49F6BE27D764AF00385834 /* EndpointAdvancedView.swift */; };
+		0E53249927D26B51002565C3 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E53249627D26B51002565C3 /* ProductManager.swift */; };
+		0E53249D27D28FC7002565C3 /* Kvitto in Frameworks */ = {isa = PBXBuildFile; productRef = 0E53249C27D28FC7002565C3 /* Kvitto */; };
+		0E5324A627D297BB002565C3 /* InApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5324A527D297BB002565C3 /* InApp.swift */; };
+		0E5324A927D2AC55002565C3 /* LongContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5324A827D2AC55002565C3 /* LongContentView.swift */; };
+		0E5349BE27C16A4500C71BB3 /* StyledPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5349BD27C16A4500C71BB3 /* StyledPicker.swift */; };
+		0E5349C627C176C200C71BB3 /* EndpointView+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5349C527C176C200C71BB3 /* EndpointView+OpenVPN.swift */; };
+		0E5349C827C176D100C71BB3 /* EndpointView+WireGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5349C727C176D100C71BB3 /* EndpointView+WireGuard.swift */; };
+		0E53E63727E34FE2001D4902 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E53E63627E34FE2001D4902 /* AppContext.swift */; };
+		0E5683B927C2825D00EAF1CD /* DiagnosticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5683B827C2825D00EAF1CD /* DiagnosticsView.swift */; };
+		0E6059CB27FCC5DE003F4063 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059C827FCC5DD003F4063 /* Flags.xcassets */; };
+		0E6059CC27FCC5DE003F4063 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059C927FCC5DE003F4063 /* Providers.xcassets */; };
+		0E6059CD27FCC5DE003F4063 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059CA27FCC5DE003F4063 /* Assets.xcassets */; };
+		0E6059CF27FCC618003F4063 /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */; };
+		0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */; };
+		0E71ACE327C0F2E400F85C4B /* Providers+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */; };
+		0E71ACE927C1055300F85C4B /* NetworkSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACE827C1055200F85C4B /* NetworkSettingsView.swift */; };
+		0E71ACEB27C1060D00F85C4B /* EndpointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACEA27C1060D00F85C4B /* EndpointView.swift */; };
+		0E71ACEF27C106B500F85C4B /* ProviderPresetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACEE27C106B400F85C4B /* ProviderPresetView.swift */; };
+		0E71ACF127C1073800F85C4B /* ProviderLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACF027C1073800F85C4B /* ProviderLocationView.swift */; };
+		0E71ACF727C107CA00F85C4B /* DebugLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACF627C107C900F85C4B /* DebugLogView.swift */; };
+		0E71ACF927C12E4800F85C4B /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACF827C12E4800F85C4B /* CreditsView.swift */; };
+		0E71ACFB27C12E5300F85C4B /* VersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACFA27C12E5300F85C4B /* VersionView.swift */; };
+		0E71ACFD27C1321A00F85C4B /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACFC27C1321A00F85C4B /* ActivityView.swift */; };
+		0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */; };
+		0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */; };
+		0E92D7C927F1042A0033CB7B /* ProfileView+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */; };
+		0E92D7F427F104B80033CB7B /* ProfileView+Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7F327F104B80033CB7B /* ProfileView+Diagnostics.swift */; };
 		0E9AA978259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */; };
-		0E9AA979259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */; };
-		0E9AAA7F259F7DB7003FAFF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F5E259F41690022DFB8 /* Assets.xcassets */; };
-		0E9AAA80259F7DB7003FAFF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E569F62259F41690022DFB8 /* AppDelegate.swift */; };
-		0E9AAA89259F7DCA003FAFF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E569F5F259F41690022DFB8 /* Main.storyboard */; };
-		0E9AAABE259F7FFF003FAFF1 /* PassepartoutLauncher.app in Resources */ = {isa = PBXBuildFile; fileRef = 0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */; };
-		0E9AAACB259F808B003FAFF1 /* PassepartoutLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD7862257462800D033B4 /* Providers.xcassets */; };
-		0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E9CD788225746B300D033B4 /* Flags.xcassets */; };
-		0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */; };
-		0EA591132733DD4F0096F796 /* IntentDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA591122733DD4E0096F796 /* IntentDispatcher.swift */; };
+		0E9C233027F47032007D5FC7 /* IntentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C232F27F47032007D5FC7 /* IntentsManager.swift */; };
+		0E9C233327F47E95007D5FC7 /* IntentDispatcher+Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C233227F47E95007D5FC7 /* IntentDispatcher+Activities.swift */; };
+		0E9C3B6C27FB3A9C00D0F02E /* ReloadingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C3B6B27FB3A9C00D0F02E /* ReloadingSection.swift */; };
+		0E9C3B6F27FC573E00D0F02E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9C3B6E27FC573E00D0F02E /* CloudKit.framework */; };
+		0E9E5AEF27B44CF1008C95DA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E9E5AE227B44CF1008C95DA /* Localizable.strings */; };
+		0E9ED48127FD9BAE003B2316 /* CopySavingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */; };
 		0EA591162733DDDA0096F796 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0EA591142733DDDA0096F796 /* Intents.intentdefinition */; };
-		0EA591302733E1420096F796 /* PassepartoutOpenVPNTunnel in Frameworks */ = {isa = PBXBuildFile; productRef = 0EA5912F2733E1420096F796 /* PassepartoutOpenVPNTunnel */; };
-		0EA591322733E1490096F796 /* PassepartoutOpenVPNTunnel in Frameworks */ = {isa = PBXBuildFile; productRef = 0EA591312733E1490096F796 /* PassepartoutOpenVPNTunnel */; };
-		0EB2B1482733FB6F007705AB /* PassepartoutTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */; };
-		0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */; };
-		0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */; };
-		0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */; };
-		0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */; };
-		0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2820CF2A340027975F /* AccountViewController.swift */; };
-		0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */; };
+		0EB17EA727D226B400D473B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
+		0EB17EA927D226C900D473B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
+		0EB17EAA27D226C900D473B5 /* Constants+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */; };
+		0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA327D2263700D473B5 /* LocalProduct.swift */; };
+		0EB17EBA27D2560300D473B5 /* PassepartoutProviders+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */; };
+		0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0EB3413027C7761A00483410 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB3412F27C7761A00483410 /* Binding+Extensions.swift */; };
+		0EB34BCA27C6A70200B126DA /* OnDemandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB34BC927C6A70200B126DA /* OnDemandView.swift */; };
+		0EB34BCC27C6F41D00B126DA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB34BCB27C6F41D00B126DA /* Theme.swift */; };
+		0EB4042C27CA0E8C00378B1A /* Unlocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4042B27CA0E8B00378B1A /* Unlocalized.swift */; };
+		0EB4042E27CA136300378B1A /* AddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4042D27CA136200378B1A /* AddingTextField.swift */; };
+		0EBC074C27EB673C00208AD9 /* ProfileView+Rename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC074B27EB673C00208AD9 /* ProfileView+Rename.swift */; };
+		0EBC075527EBC83800208AD9 /* MailComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075427EBC83800208AD9 /* MailComposerView.swift */; };
+		0EBC075B27EC4FFF00208AD9 /* ReportIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075A27EC4FFF00208AD9 /* ReportIssueView.swift */; };
+		0EBC075D27EC529000208AD9 /* DebugLog+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075C27EC529000208AD9 /* DebugLog+Constants.swift */; };
+		0EBC076027EC587900208AD9 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */; };
+		0ECF71EE27B6A99300CDB528 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF71ED27B6A99300CDB528 /* AccountView.swift */; };
+		0ED1D6DC27DBA41700983466 /* DiagnosticsView+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */; };
+		0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */; };
+		0ED2B33927D3C49800FD8EA9 /* OpenVPNAppExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED2B33827D3C49800FD8EA9 /* OpenVPNAppExtension */; };
+		0ED2B34527D3C77800FD8EA9 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
+		0ED2B35B27D3C94F00FD8EA9 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B35A27D3C94F00FD8EA9 /* PacketTunnelProvider.swift */; };
+		0ED2B36027D3C99100FD8EA9 /* PassepartoutWireGuardTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0ED2B36727D3C9A300FD8EA9 /* WireGuardAppExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED2B36627D3C9A300FD8EA9 /* WireGuardAppExtension */; };
+		0ED30DCC27EA197D0057D8A3 /* RevealingSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DCB27EA197C0057D8A3 /* RevealingSecureField.swift */; };
+		0ED30DCF27EA1EF80057D8A3 /* PaywallView+Beta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */; };
+		0ED30DD227EA1F650057D8A3 /* PaywallView+Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */; };
+		0ED30DDB27EA351C0057D8A3 /* Constants+Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DDA27EA351C0057D8A3 /* Constants+Tunnel.swift */; };
+		0ED30DDD27EA35230057D8A3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
-		0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AD8213F33150004D387 /* WizardHostViewController.swift */; };
-		0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED38ADC213F44D00004D387 /* Organizer.storyboard */; };
-		0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */; };
-		0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */; };
+		0ED89C1527DE0A0C008B36D6 /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */; };
+		0ED89C1727DE0E05008B36D6 /* IntentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */; };
+		0ED89C1C27DE3ABC008B36D6 /* ShortcutsView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */; };
+		0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */; };
+		0ED89C2027DE423B008B36D6 /* ShortcutsView+ConnectTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1F27DE423B008B36D6 /* ShortcutsView+ConnectTo.swift */; };
+		0ED89C2527DE45A3008B36D6 /* ProfileHeaderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C2427DE45A3008B36D6 /* ProfileHeaderRow.swift */; };
+		0EDE02C227F61C79000FBE3C /* EditableTextList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE02C127F61C79000FBE3C /* EditableTextList.swift */; };
+		0EE8B7E327FF340F00B68621 /* VPNProtocolType+FileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8B7E227FF340F00B68621 /* VPNProtocolType+FileExtensions.swift */; };
 		0EED0BB92733CEDA00C9FC68 /* PassepartoutCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0EED0BB82733CEDA00C9FC68 /* PassepartoutCore */; };
-		0EED0BBB2733CEE000C9FC68 /* PassepartoutCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0EED0BBA2733CEE000C9FC68 /* PassepartoutCore */; };
-		0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */; };
-		0EFB901A2276D7F1006405E4 /* NetworkSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */; };
-		0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFD943D215BE10800529B64 /* IssueReporter.swift */; };
+		0EF0FAF627DD0211007EB181 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0FAF527DD0211007EB181 /* PaywallView.swift */; };
+		0EF0FAF727DD159C007EB181 /* IntentDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA591122733DD4E0096F796 /* IntentDispatcher.swift */; };
+		0EF0FAF927DD212C007EB181 /* IntentActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0FAF827DD212C007EB181 /* IntentActivity.swift */; };
+		0EF2212B27E667EA001D0BD7 /* AddProviderView+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212A27E667EA001D0BD7 /* AddProviderView+Name.swift */; };
+		0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */; };
+		0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */; };
+		0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0E5203BC259F5F3F00CBAB56 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0E5203B4259F5F3F00CBAB56;
-			remoteInfo = "Passepartout-macOS-Tunnel";
-		};
-		0E9AAABF259F7FFF003FAFF1 /* PBXContainerItemProxy */ = {
+		0E6059C627FCC33D003F4063 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
 			proxyType = 1;
@@ -146,6 +135,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0EDE8DBE20C86910004C739C;
 			remoteInfo = "PassepartoutTunnel-iOS";
+		};
+		0ECF71FB27B6DA6700CDB528 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0ECF71F327B6D9CD00CDB528;
+			remoteInfo = "PassepartoutWireGuard-iOS";
+		};
+		0ED2B36127D3C99100FD8EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0ED2B33E27D3C77800FD8EA9;
+			remoteInfo = "WireGuardTunnel-iOS";
+		};
+		0ED2B36A27D3CAB100FD8EA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0ECF71F327B6D9CD00CDB528;
+			remoteInfo = "WireGuardGo-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -160,44 +170,14 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0E5203C2259F5F3F00CBAB56 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				0E5203BE259F5F3F00CBAB56 /* PassepartoutTunnel.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0E5203F6259F60D600CBAB56 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0E9AAACA259F806B003FAFF1 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Contents/Library/LoginItems;
-			dstSubfolderSpec = 1;
-			files = (
-				0E9AAACB259F808B003FAFF1 /* PassepartoutLauncher.app in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0EB2B14B2733FB6F007705AB /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0EB2B1482733FB6F007705AB /* PassepartoutTunnel.appex in Embed App Extensions */,
+				0ED2B36027D3C99100FD8EA9 /* PassepartoutWireGuardTunnel.appex in Embed App Extensions */,
+				0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,101 +185,86 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTableViewCell.swift; sourceTree = "<group>"; };
-		0E05C61C20D27C82006EE732 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0E0AD48F27BD53CB00FBB520 /* ProfileView+Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileView+Welcome.swift"; sourceTree = "<group>"; };
+		0E0BD27227B2EA2C00583AC5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		0E0BD27527B2EB2200583AC5 /* DonateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateView.swift; sourceTree = "<group>"; };
+		0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsView.swift; sourceTree = "<group>"; };
 		0E0C072A236087A100155AAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E0C072C236087C800155AAC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0E1066C820E0F84A004F98B7 /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
-		0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointViewController.swift; sourceTree = "<group>"; };
+		0E12BC8E27F62C8500B2F912 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		0E1C0A52238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderPresetViewController.swift; sourceTree = "<group>"; };
-		0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		0E23B4A12298559800304C30 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		0E24273B225950450064A1A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/About.storyboard; sourceTree = "<group>"; };
-		0E242741225956AC0064A1A3 /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
-		0E294A8225AE29D100CB4908 /* Descriptible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Descriptible.swift; sourceTree = "<group>"; };
+		0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassepartoutApp.swift; sourceTree = "<group>"; };
+		0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerView.swift; sourceTree = "<group>"; };
 		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		0E2B493F20FCFF990094784C /* Theme+Titles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Titles.swift"; sourceTree = "<group>"; };
-		0E3262D8235EE8DA00B5E470 /* HostImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostImporter.swift; sourceTree = "<group>"; };
-		0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
-		0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsAddViewController.swift; sourceTree = "<group>"; };
-		0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutsConnectToViewController.swift; sourceTree = "<group>"; };
-		0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
-		0E4B0D752366E6C800C890B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Purchase.storyboard; sourceTree = "<group>"; };
-		0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveTableViewCell.swift; sourceTree = "<group>"; };
-		0E4FD7F020D58618002221FF /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
-		0E5202F7259F573500CBAB56 /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E5203B5259F5F3F00CBAB56 /* PassepartoutTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E569F5A259F41690022DFB8 /* TextTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextTableView.xib; sourceTree = "<group>"; };
-		0E569F5B259F41690022DFB8 /* TextTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableView.swift; sourceTree = "<group>"; };
-		0E569F5E259F41690022DFB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0E569F60259F41690022DFB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0E569F61259F41690022DFB8 /* Launcher.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Launcher.entitlements; sourceTree = "<group>"; };
-		0E569F62259F41690022DFB8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0E569F63259F41690022DFB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E569F66259F41690022DFB8 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
-		0E569F67259F41690022DFB8 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		0E569F68259F41690022DFB8 /* PreferencesGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesGeneralViewController.swift; sourceTree = "<group>"; };
-		0E569F69259F41690022DFB8 /* OrganizerProfileTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizerProfileTableView.swift; sourceTree = "<group>"; };
-		0E569F6A259F41690022DFB8 /* OrganizerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizerViewController.swift; sourceTree = "<group>"; };
-		0E569F6B259F41690022DFB8 /* OrganizerProfileTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrganizerProfileTableView.xib; sourceTree = "<group>"; };
-		0E569F6D259F41690022DFB8 /* ServiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
-		0E569F6E259F41690022DFB8 /* ProviderServiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProviderServiceView.swift; sourceTree = "<group>"; };
-		0E569F70259F41690022DFB8 /* MTUViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTUViewController.swift; sourceTree = "<group>"; };
-		0E569F71259F41690022DFB8 /* EndpointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointViewController.swift; sourceTree = "<group>"; };
-		0E569F72259F41690022DFB8 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
-		0E569F73259F41690022DFB8 /* ProfileCustomizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCustomizationViewController.swift; sourceTree = "<group>"; };
-		0E569F74259F41690022DFB8 /* ProxyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyViewController.swift; sourceTree = "<group>"; };
-		0E569F75259F41690022DFB8 /* TrustedNetworksAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksAddViewController.swift; sourceTree = "<group>"; };
-		0E569F76259F41690022DFB8 /* DNSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSViewController.swift; sourceTree = "<group>"; };
-		0E569F77259F41690022DFB8 /* DefaultGatewayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultGatewayViewController.swift; sourceTree = "<group>"; };
-		0E569F78259F41690022DFB8 /* TrustedNetworksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrustedNetworksViewController.swift; sourceTree = "<group>"; };
-		0E569F79259F41690022DFB8 /* ProviderServiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProviderServiceView.xib; sourceTree = "<group>"; };
-		0E569F7A259F41690022DFB8 /* HostServiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostServiceView.swift; sourceTree = "<group>"; };
-		0E569F7B259F41690022DFB8 /* HostServiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostServiceView.xib; sourceTree = "<group>"; };
-		0E569F7C259F41690022DFB8 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		0E569F7D259F41690022DFB8 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
-		0E569F7E259F41690022DFB8 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
-		0E569F7F259F41690022DFB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0E569F82259F41690022DFB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
-		0E569F84259F41690022DFB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Service.storyboard; sourceTree = "<group>"; };
-		0E569F86259F41690022DFB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0E569F88259F41690022DFB8 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
-		0E569F89259F41690022DFB8 /* StatusMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenu.swift; sourceTree = "<group>"; };
-		0E569F8A259F41690022DFB8 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		0E569F8B259F41690022DFB8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0E569F8F259F41690022DFB8 /* IssueReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
-		0E569F92259F41690022DFB8 /* WindowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
-		0E569F93259F41690022DFB8 /* HostImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostImporter.swift; sourceTree = "<group>"; };
-		0E569F94259F41690022DFB8 /* NSTextView+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Search.swift"; sourceTree = "<group>"; };
-		0E569F97259F41690022DFB8 /* TextInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
-		0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
-		0E569F9A259F41690022DFB8 /* Theme+Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+Views.swift"; sourceTree = "<group>"; };
-		0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Scenes.swift"; sourceTree = "<group>"; };
-		0E569FA1259F41690022DFB8 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		0E569FA4259F41690022DFB8 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
-		0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
-		0E569FA6259F41690022DFB8 /* Macros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
-		0E569FA7259F41690022DFB8 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
-		0E569FA8259F41690022DFB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E569FAA259F41690022DFB8 /* Tunnel-macOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Tunnel-macOS.entitlements"; sourceTree = "<group>"; };
+		0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCreditsView.swift; sourceTree = "<group>"; };
+		0E2C172A27CB63F9007E8488 /* Reviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reviewer.swift; sourceTree = "<group>"; };
+		0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKit+Identifiable.swift"; sourceTree = "<group>"; };
+		0E2DE71E27DCD0290067B9E1 /* TunnelKit+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKit+L10n.swift"; sourceTree = "<group>"; };
+		0E2DE72427DCDF550067B9E1 /* WireGuard+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WireGuard+L10n.swift"; sourceTree = "<group>"; };
+		0E34A2AF27CAA84500C73B67 /* OpenVPN+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenVPN+L10n.swift"; sourceTree = "<group>"; };
+		0E34A2B527CAA8CC00C73B67 /* Core+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core+L10n.swift"; sourceTree = "<group>"; };
+		0E34A2CE27CADA6300C73B67 /* GenericVersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericVersionView.swift; sourceTree = "<group>"; };
+		0E34AC7527F83FE20042F2AB /* OrganizerView+VPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+VPN.swift"; sourceTree = "<group>"; };
+		0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Scene.swift"; sourceTree = "<group>"; };
+		0E34AC7927F8431D0042F2AB /* OrganizerView+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Shortcuts.swift"; sourceTree = "<group>"; };
+		0E34AC7B27F845510042F2AB /* OrganizerView+Profiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Profiles.swift"; sourceTree = "<group>"; };
+		0E34AC7D27F849050042F2AB /* OrganizerView+AddProfileMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+AddProfileMenu.swift"; sourceTree = "<group>"; };
+		0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnDemandView+SSID.swift"; sourceTree = "<group>"; };
+		0E3B7FCC27E47B3700C66F13 /* AddHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHostView.swift; sourceTree = "<group>"; };
+		0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+VPN.swift"; sourceTree = "<group>"; };
+		0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Provider.swift"; sourceTree = "<group>"; };
+		0E44689527B051C300A14CE4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		0E44689B27B11B5300A14CE4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		0E49F6BA27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndpointAdvancedView+OpenVPN.swift"; sourceTree = "<group>"; };
+		0E49F6BC27D7639000385834 /* EndpointAdvancedView+WireGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndpointAdvancedView+WireGuard.swift"; sourceTree = "<group>"; };
+		0E49F6BE27D764AF00385834 /* EndpointAdvancedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointAdvancedView.swift; sourceTree = "<group>"; };
+		0E53249627D26B51002565C3 /* ProductManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
+		0E5324A527D297BB002565C3 /* InApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InApp.swift; sourceTree = "<group>"; };
+		0E5324A827D2AC55002565C3 /* LongContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongContentView.swift; sourceTree = "<group>"; };
+		0E5349BD27C16A4500C71BB3 /* StyledPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledPicker.swift; sourceTree = "<group>"; };
+		0E5349C527C176C200C71BB3 /* EndpointView+OpenVPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndpointView+OpenVPN.swift"; sourceTree = "<group>"; };
+		0E5349C727C176D100C71BB3 /* EndpointView+WireGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndpointView+WireGuard.swift"; sourceTree = "<group>"; };
+		0E53E63627E34FE2001D4902 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
+		0E5683B827C2825D00EAF1CD /* DiagnosticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticsView.swift; sourceTree = "<group>"; };
 		0E57F63820C83FC5008323CF /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E57F63B20C83FC5008323CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0E57F63D20C83FC5008323CF /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
-		0E57F64220C83FC7008323CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseTableViewCell.swift; sourceTree = "<group>"; };
-		0E6BA54C25C9EE3A000CDFAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Purchase.storyboard; sourceTree = "<group>"; };
-		0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
-		0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsViewController.swift; sourceTree = "<group>"; };
-		0E79D2C725C9F1B300D12964 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
-		0E79D31D25CC0CF600D12964 /* PurchaseProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProductView.swift; sourceTree = "<group>"; };
-		0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardProviderViewController.swift; sourceTree = "<group>"; };
+		0E6059C827FCC5DD003F4063 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
+		0E6059C927FCC5DE003F4063 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
+		0E6059CA27FCC5DE003F4063 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
+		0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Providers+L10n.swift"; sourceTree = "<group>"; };
+		0E71ACE827C1055200F85C4B /* NetworkSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsView.swift; sourceTree = "<group>"; };
+		0E71ACEA27C1060D00F85C4B /* EndpointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointView.swift; sourceTree = "<group>"; };
+		0E71ACEE27C106B400F85C4B /* ProviderPresetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderPresetView.swift; sourceTree = "<group>"; };
+		0E71ACF027C1073800F85C4B /* ProviderLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderLocationView.swift; sourceTree = "<group>"; };
+		0E71ACF627C107C900F85C4B /* DebugLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogView.swift; sourceTree = "<group>"; };
+		0E71ACF827C12E4800F85C4B /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		0E71ACFA27C12E5300F85C4B /* VersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionView.swift; sourceTree = "<group>"; };
+		0E71ACFC27C1321A00F85C4B /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHostViewModel.swift; sourceTree = "<group>"; };
+		0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Configuration.swift"; sourceTree = "<group>"; };
+		0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Extra.swift"; sourceTree = "<group>"; };
+		0E92D7F327F104B80033CB7B /* ProfileView+Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Diagnostics.swift"; sourceTree = "<group>"; };
 		0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
-		0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E9CD7862257462800D033B4 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
-		0E9CD788225746B300D033B4 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
-		0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerNetworkViewController.swift; sourceTree = "<group>"; };
+		0E9C232F27F47032007D5FC7 /* IntentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsManager.swift; sourceTree = "<group>"; };
+		0E9C233227F47E95007D5FC7 /* IntentDispatcher+Activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentDispatcher+Activities.swift"; sourceTree = "<group>"; };
+		0E9C3B6B27FB3A9C00D0F02E /* ReloadingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadingSection.swift; sourceTree = "<group>"; };
+		0E9C3B6E27FC573E00D0F02E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		0E9E5AE327B44CF1008C95DA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AE427B44CF1008C95DA /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AE527B44CF1008C95DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0E9E5AE627B44CF1008C95DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AE727B44CF1008C95DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AE827B44CF1008C95DA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AE927B44CF1008C95DA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AEA27B44CF1008C95DA /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AEB27B44CF1008C95DA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AEC27B44CF1008C95DA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AED27B44CF1008C95DA /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9E5AEE27B44CF1008C95DA /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopySavingButton.swift; sourceTree = "<group>"; };
 		0EA26DC827353020000F251A /* PassepartoutCore */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PassepartoutCore; sourceTree = "<group>"; };
 		0EA591122733DD4E0096F796 /* IntentDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentDispatcher.swift; sourceTree = "<group>"; };
 		0EA591152733DDDA0096F796 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
@@ -315,8 +280,20 @@
 		0EA5912A2733DDFC0096F796 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Intents.strings; sourceTree = "<group>"; };
 		0EA5912C2733DDFC0096F796 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Intents.strings; sourceTree = "<group>"; };
 		0EA5912E2733DDFD0096F796 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Intents.strings; sourceTree = "<group>"; };
-		0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Search.swift"; sourceTree = "<group>"; };
-		0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedHostsViewController.swift; sourceTree = "<group>"; };
+		0EB17EA127D2263700D473B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0EB17EA327D2263700D473B5 /* LocalProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalProduct.swift; sourceTree = "<group>"; };
+		0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Extensions.swift"; sourceTree = "<group>"; };
+		0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PassepartoutProviders+Extensions.swift"; sourceTree = "<group>"; };
+		0EB3412F27C7761A00483410 /* Binding+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
+		0EB34BC927C6A70200B126DA /* OnDemandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDemandView.swift; sourceTree = "<group>"; };
+		0EB34BCB27C6F41D00B126DA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0EB4042B27CA0E8B00378B1A /* Unlocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unlocalized.swift; sourceTree = "<group>"; };
+		0EB4042D27CA136200378B1A /* AddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingTextField.swift; sourceTree = "<group>"; };
+		0EBC074B27EB673C00208AD9 /* ProfileView+Rename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Rename.swift"; sourceTree = "<group>"; };
+		0EBC075427EBC83800208AD9 /* MailComposerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposerView.swift; sourceTree = "<group>"; };
+		0EBC075A27EC4FFF00208AD9 /* ReportIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportIssueView.swift; sourceTree = "<group>"; };
+		0EBC075C27EC529000208AD9 /* DebugLog+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DebugLog+Constants.swift"; sourceTree = "<group>"; };
+		0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Strings.swift"; sourceTree = "<group>"; };
 		0EBE2FD02360F88C00F0D5AB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0EBE2FD12360F88E00F0D5AB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD22360F88F00F0D5AB /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -326,62 +303,54 @@
 		0EBE2FD62360F89500F0D5AB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD72360F89600F0D5AB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD82360F89600F0D5AB /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerViewController.swift; sourceTree = "<group>"; };
-		0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
-		0ECEB105224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0ECEB106224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Organizer.storyboard; sourceTree = "<group>"; };
-		0ECEB107224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Shortcuts.storyboard; sourceTree = "<group>"; };
-		0ECEB108224FE51400E9E551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Cells.swift"; sourceTree = "<group>"; };
-		0ED31C2820CF2A340027975F /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderPoolViewController.swift; sourceTree = "<group>"; };
+		0ECF71ED27B6A99300CDB528 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiagnosticsView+OpenVPN.swift"; sourceTree = "<group>"; };
+		0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiagnosticsView+WireGuard.swift"; sourceTree = "<group>"; };
+		0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutWireGuardTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ED2B35A27D3C94F00FD8EA9 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		0ED30DCB27EA197C0057D8A3 /* RevealingSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealingSecureField.swift; sourceTree = "<group>"; };
+		0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaywallView+Beta.swift"; sourceTree = "<group>"; };
+		0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaywallView+Purchase.swift"; sourceTree = "<group>"; };
+		0ED30DDA27EA351C0057D8A3 /* Constants+Tunnel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Tunnel.swift"; sourceTree = "<group>"; };
 		0ED31C3920CF39510027975F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		0ED31C3B20CF39510027975F /* Tunnel-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tunnel-iOS.entitlements"; sourceTree = "<group>"; };
-		0ED38AD8213F33150004D387 /* WizardHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardHostViewController.swift; sourceTree = "<group>"; };
-		0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModificationDelegate.swift; sourceTree = "<group>"; };
-		0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
-		0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		0EDE8DBF20C86910004C739C /* PassepartoutTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ED31C3B20CF39510027975F /* Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
+		0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
+		0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentEditView.swift; sourceTree = "<group>"; };
+		0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortcutsView+Add.swift"; sourceTree = "<group>"; };
+		0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentAddView.swift; sourceTree = "<group>"; };
+		0ED89C1F27DE423B008B36D6 /* ShortcutsView+ConnectTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortcutsView+ConnectTo.swift"; sourceTree = "<group>"; };
+		0ED89C2427DE45A3008B36D6 /* ProfileHeaderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderRow.swift; sourceTree = "<group>"; };
+		0EDE02C127F61C79000FBE3C /* EditableTextList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextList.swift; sourceTree = "<group>"; };
+		0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutOpenVPNTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDE8DC320C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0EDE8DD220C86978004C739C /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		0EDE8DE220C86A13004C739C /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
-		0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Scenes.swift"; sourceTree = "<group>"; };
-		0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Segues.swift"; sourceTree = "<group>"; };
-		0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsViewController.swift; sourceTree = "<group>"; };
-		0EFD943D215BE10800529B64 /* IssueReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueReporter.swift; sourceTree = "<group>"; };
+		0EE8B7E227FF340F00B68621 /* VPNProtocolType+FileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VPNProtocolType+FileExtensions.swift"; sourceTree = "<group>"; };
+		0EF0FAF527DD0211007EB181 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		0EF0FAF827DD212C007EB181 /* IntentActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentActivity.swift; sourceTree = "<group>"; };
+		0EF2212A27E667EA001D0BD7 /* AddProviderView+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddProviderView+Name.swift"; sourceTree = "<group>"; };
+		0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderView.swift; sourceTree = "<group>"; };
+		0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
+		0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0E5202F4259F573500CBAB56 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0EED0BBB2733CEE000C9FC68 /* PassepartoutCore in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0E5203B2259F5F3F00CBAB56 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0EA591302733E1420096F796 /* PassepartoutOpenVPNTunnel in Frameworks */,
-				0E5203B6259F5F3F00CBAB56 /* NetworkExtension.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0E57F63520C83FC5008323CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E9C3B6F27FC573E00D0F02E /* CloudKit.framework in Frameworks */,
 				0EED0BB92733CEDA00C9FC68 /* PassepartoutCore in Frameworks */,
+				0E53249D27D28FC7002565C3 /* Kvitto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0E9AAA5E259F7D7E003FAFF1 /* Frameworks */ = {
+		0ED2B34327D3C77800FD8EA9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ED2B34527D3C77800FD8EA9 /* NetworkExtension.framework in Frameworks */,
+				0ED2B36727D3C9A300FD8EA9 /* WireGuardAppExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +358,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EA591322733E1490096F796 /* PassepartoutOpenVPNTunnel in Frameworks */,
+				0ED2B33927D3C49800FD8EA9 /* OpenVPNAppExtension in Frameworks */,
 				0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,169 +366,122 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E1066CA20E0F85C004F98B7 /* Cells */ = {
+		0E0BD25527B130AD00583AC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0E3586FD225BD34800509A4D /* ActivityTableViewCell.swift */,
-				0E1066C820E0F84A004F98B7 /* Cells.swift */,
-				0E4C9CBA20DCF0D600A0C59C /* DestructiveTableViewCell.swift */,
-				0E05C5CE20D139AF006EE732 /* FieldTableViewCell.swift */,
-				0ED824CD20D12DBE00F2FE9E /* SettingTableViewCell.swift */,
-				0ED824C920D12B8700F2FE9E /* ToggleTableViewCell.swift */,
+				0EC54E1927F214C9002522D0 /* AddProfile */,
+				0EC54E1A27F214E7002522D0 /* Paywall */,
+				0EC54E1B27F214F1002522D0 /* Profile */,
+				0E44689B27B11B5300A14CE4 /* AboutView.swift */,
+				0ECF71ED27B6A99300CDB528 /* AccountView.swift */,
+				0E71ACF827C12E4800F85C4B /* CreditsView.swift */,
+				0E71ACF627C107C900F85C4B /* DebugLogView.swift */,
+				0E5683B827C2825D00EAF1CD /* DiagnosticsView.swift */,
+				0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */,
+				0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */,
+				0E0BD27527B2EB2200583AC5 /* DonateView.swift */,
+				0E71ACEA27C1060D00F85C4B /* EndpointView.swift */,
+				0E49F6BE27D764AF00385834 /* EndpointAdvancedView.swift */,
+				0E49F6BA27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift */,
+				0E49F6BC27D7639000385834 /* EndpointAdvancedView+WireGuard.swift */,
+				0E5349C527C176C200C71BB3 /* EndpointView+OpenVPN.swift */,
+				0E5349C727C176D100C71BB3 /* EndpointView+WireGuard.swift */,
+				0E0BD27227B2EA2C00583AC5 /* MainView.swift */,
+				0E71ACE827C1055200F85C4B /* NetworkSettingsView.swift */,
+				0EB34BC927C6A70200B126DA /* OnDemandView.swift */,
+				0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */,
+				0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */,
+				0E34AC7D27F849050042F2AB /* OrganizerView+AddProfileMenu.swift */,
+				0E34AC7B27F845510042F2AB /* OrganizerView+Profiles.swift */,
+				0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */,
+				0E34AC7927F8431D0042F2AB /* OrganizerView+Shortcuts.swift */,
+				0E34AC7527F83FE20042F2AB /* OrganizerView+VPN.swift */,
+				0ED89C2427DE45A3008B36D6 /* ProfileHeaderRow.swift */,
+				0E44689527B051C300A14CE4 /* ProfileView.swift */,
+				0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */,
+				0E92D7F327F104B80033CB7B /* ProfileView+Diagnostics.swift */,
+				0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */,
+				0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */,
+				0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */,
+				0E0AD48F27BD53CB00FBB520 /* ProfileView+Welcome.swift */,
+				0E71ACF027C1073800F85C4B /* ProviderLocationView.swift */,
+				0E71ACEE27C106B400F85C4B /* ProviderPresetView.swift */,
+				0EBC075A27EC4FFF00208AD9 /* ReportIssueView.swift */,
+				0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */,
+				0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */,
+				0ED89C1F27DE423B008B36D6 /* ShortcutsView+ConnectTo.swift */,
+				0E71ACFA27C12E5300F85C4B /* VersionView.swift */,
 			);
-			path = Cells;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		0E24273D225950CC0064A1A3 /* About */ = {
+		0E0BD26427B25EC800583AC5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				0EE3BBB1215ED3A900F30952 /* AboutViewController.swift */,
+				0EB17EA027D2263700D473B5 /* Constants */,
+				0E49F6C927DB398100385834 /* Extensions */,
+				0E92781227E7CD530057BB81 /* InApp */,
+				0EA591112733DD4E0096F796 /* Intents */,
+				0E34A2B827CAA8EA00C73B67 /* L10n */,
+				0E2C171C27CB6307007E8488 /* Reusable */,
+				0E6059CA27FCC5DE003F4063 /* Assets.xcassets */,
+				0E6059C827FCC5DD003F4063 /* Flags.xcassets */,
+				0E6059C927FCC5DE003F4063 /* Providers.xcassets */,
+				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
+				0EDE8DE220C86A13004C739C /* App.entitlements */,
+				0E57F64720C83FC7008323CF /* Info.plist */,
+				0E0C072B236087A100155AAC /* InfoPlist.strings */,
+				0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */,
 			);
-			path = About;
+			path = Shared;
 			sourceTree = "<group>";
 		};
-		0E24273E225950ED0064A1A3 /* Shortcuts */ = {
+		0E2C171C27CB6307007E8488 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				0E36D24C2240234B006AF062 /* ShortcutsAddViewController.swift */,
-				0E36D25B224034AD006AF062 /* ShortcutsConnectToViewController.swift */,
-				0E773BF7224BF37600CDDC8E /* ShortcutsViewController.swift */,
+				0EB4042D27CA136200378B1A /* AddingTextField.swift */,
+				0EB3412F27C7761A00483410 /* Binding+Extensions.swift */,
+				0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */,
+				0EDE02C127F61C79000FBE3C /* EditableTextList.swift */,
+				0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */,
+				0E34A2CE27CADA6300C73B67 /* GenericVersionView.swift */,
+				0E5324A527D297BB002565C3 /* InApp.swift */,
+				0EF0FAF827DD212C007EB181 /* IntentActivity.swift */,
+				0E5324A827D2AC55002565C3 /* LongContentView.swift */,
+				0E9C3B6B27FB3A9C00D0F02E /* ReloadingSection.swift */,
+				0ED30DCB27EA197C0057D8A3 /* RevealingSecureField.swift */,
+				0E2C172A27CB63F9007E8488 /* Reviewer.swift */,
+				0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */,
+				0E5349BD27C16A4500C71BB3 /* StyledPicker.swift */,
+				0E12BC8E27F62C8500B2F912 /* Validators.swift */,
+				0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */,
 			);
-			path = Shortcuts;
+			path = Reusable;
 			sourceTree = "<group>";
 		};
-		0E4B0D6C2366E53C00C890B4 /* Purchase */ = {
+		0E34A2B827CAA8EA00C73B67 /* L10n */ = {
 			isa = PBXGroup;
 			children = (
-				0E6268932369AD0600355F75 /* PurchaseTableViewCell.swift */,
-				0E4B0D6A2366E3C000C890B4 /* PurchaseViewController.swift */,
+				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
+				0E34A2B527CAA8CC00C73B67 /* Core+L10n.swift */,
+				0E34A2AF27CAA84500C73B67 /* OpenVPN+L10n.swift */,
+				0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */,
+				0E2DE71E27DCD0290067B9E1 /* TunnelKit+L10n.swift */,
+				0EB4042B27CA0E8B00378B1A /* Unlocalized.swift */,
+				0E2DE72427DCDF550067B9E1 /* WireGuard+L10n.swift */,
 			);
-			path = Purchase;
+			path = L10n;
 			sourceTree = "<group>";
 		};
-		0E569F58259F41690022DFB8 /* macOS */ = {
+		0E49F6C927DB398100385834 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0E569F8C259F41690022DFB8 /* Global */,
-				0E569F5C259F41690022DFB8 /* Launcher */,
-				0E569F87259F41690022DFB8 /* Menu */,
-				0E569F64259F41690022DFB8 /* Scenes */,
-				0E569F59259F41690022DFB8 /* Tables */,
-				0E569F7E259F41690022DFB8 /* App.entitlements */,
-				0E569FA8259F41690022DFB8 /* Info.plist */,
-				0E569F8B259F41690022DFB8 /* AppDelegate.swift */,
-				0E569F7F259F41690022DFB8 /* Assets.xcassets */,
-				0E569FA7259F41690022DFB8 /* Flags.xcassets */,
-				0E569F7D259F41690022DFB8 /* Providers.xcassets */,
-				0E569F85259F41690022DFB8 /* Main.storyboard */,
-				0E569F81259F41690022DFB8 /* Preferences.storyboard */,
-				0E6BA54D25C9EE3A000CDFAC /* Purchase.storyboard */,
-				0E569F83259F41690022DFB8 /* Service.storyboard */,
+				0EBC075C27EC529000208AD9 /* DebugLog+Constants.swift */,
+				0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */,
+				0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift */,
+				0EE8B7E227FF340F00B68621 /* VPNProtocolType+FileExtensions.swift */,
 			);
-			path = macOS;
-			sourceTree = "<group>";
-		};
-		0E569F59259F41690022DFB8 /* Tables */ = {
-			isa = PBXGroup;
-			children = (
-				0E569F5B259F41690022DFB8 /* TextTableView.swift */,
-				0E569F5A259F41690022DFB8 /* TextTableView.xib */,
-			);
-			path = Tables;
-			sourceTree = "<group>";
-		};
-		0E569F5C259F41690022DFB8 /* Launcher */ = {
-			isa = PBXGroup;
-			children = (
-				0E569F61259F41690022DFB8 /* Launcher.entitlements */,
-				0E569F63259F41690022DFB8 /* Info.plist */,
-				0E569F62259F41690022DFB8 /* AppDelegate.swift */,
-				0E569F5E259F41690022DFB8 /* Assets.xcassets */,
-				0E569F5F259F41690022DFB8 /* Main.storyboard */,
-			);
-			path = Launcher;
-			sourceTree = "<group>";
-		};
-		0E569F64259F41690022DFB8 /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				0E569F65259F41690022DFB8 /* Preferences */,
-				0E6BA54125C9ED91000CDFAC /* Purchase */,
-				0E569F6C259F41690022DFB8 /* Service */,
-				0E569F69259F41690022DFB8 /* OrganizerProfileTableView.swift */,
-				0E569F6A259F41690022DFB8 /* OrganizerViewController.swift */,
-				0E569F6B259F41690022DFB8 /* OrganizerProfileTableView.xib */,
-			);
-			path = Scenes;
-			sourceTree = "<group>";
-		};
-		0E569F65259F41690022DFB8 /* Preferences */ = {
-			isa = PBXGroup;
-			children = (
-				0E569F66259F41690022DFB8 /* DebugLogViewController.swift */,
-				0E569F68259F41690022DFB8 /* PreferencesGeneralViewController.swift */,
-				0E569F67259F41690022DFB8 /* PreferencesViewController.swift */,
-			);
-			path = Preferences;
-			sourceTree = "<group>";
-		};
-		0E569F6C259F41690022DFB8 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				0E569F6F259F41690022DFB8 /* Customization */,
-				0E569F7C259F41690022DFB8 /* AccountViewController.swift */,
-				0E569F7A259F41690022DFB8 /* HostServiceView.swift */,
-				0E569F6E259F41690022DFB8 /* ProviderServiceView.swift */,
-				0E569F6D259F41690022DFB8 /* ServiceViewController.swift */,
-				0E569F7B259F41690022DFB8 /* HostServiceView.xib */,
-				0E569F79259F41690022DFB8 /* ProviderServiceView.xib */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		0E569F6F259F41690022DFB8 /* Customization */ = {
-			isa = PBXGroup;
-			children = (
-				0E569F72259F41690022DFB8 /* ConfigurationViewController.swift */,
-				0E569F77259F41690022DFB8 /* DefaultGatewayViewController.swift */,
-				0E569F76259F41690022DFB8 /* DNSViewController.swift */,
-				0E569F71259F41690022DFB8 /* EndpointViewController.swift */,
-				0E569F70259F41690022DFB8 /* MTUViewController.swift */,
-				0E569F73259F41690022DFB8 /* ProfileCustomizationViewController.swift */,
-				0E569F74259F41690022DFB8 /* ProxyViewController.swift */,
-				0E569F75259F41690022DFB8 /* TrustedNetworksAddViewController.swift */,
-				0E569F78259F41690022DFB8 /* TrustedNetworksViewController.swift */,
-			);
-			path = Customization;
-			sourceTree = "<group>";
-		};
-		0E569F87259F41690022DFB8 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				0E569F88259F41690022DFB8 /* MainMenu.swift */,
-				0E569F8A259F41690022DFB8 /* MainMenu.xib */,
-				0E569F89259F41690022DFB8 /* StatusMenu.swift */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
-		0E569F8C259F41690022DFB8 /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				0E569FA4259F41690022DFB8 /* Credits.html */,
-				0E569F93259F41690022DFB8 /* HostImporter.swift */,
-				0E569F8F259F41690022DFB8 /* IssueReporter.swift */,
-				0E569FA6259F41690022DFB8 /* Macros.swift */,
-				0E569F94259F41690022DFB8 /* NSTextView+Search.swift */,
-				0E569F98259F41690022DFB8 /* SwiftGen+Assets.swift */,
-				0E569F9D259F41690022DFB8 /* SwiftGen+Scenes.swift */,
-				0E569FA5259F41690022DFB8 /* SwiftGen+Segues.swift */,
-				0E569F97259F41690022DFB8 /* TextInputViewController.swift */,
-				0E569FA1259F41690022DFB8 /* Theme.swift */,
-				0E569F9A259F41690022DFB8 /* Theme+Views.swift */,
-				0E569F92259F41690022DFB8 /* WindowManager.swift */,
-			);
-			path = Global;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0E57F62F20C83FC5008323CF = {
@@ -577,10 +499,8 @@
 			isa = PBXGroup;
 			children = (
 				0E57F63820C83FC5008323CF /* Passepartout.app */,
-				0EDE8DBF20C86910004C739C /* PassepartoutTunnel.appex */,
-				0E5202F7259F573500CBAB56 /* Passepartout.app */,
-				0E5203B5259F5F3F00CBAB56 /* PassepartoutTunnel.appex */,
-				0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */,
+				0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */,
+				0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -588,54 +508,27 @@
 		0E57F63A20C83FC5008323CF /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0E1066CA20E0F85C004F98B7 /* Cells */,
-				0EDE8DEC20C93E3B004C739C /* Global */,
-				0EA591112733DD4E0096F796 /* Intents */,
-				0EDE8DF120C93ED8004C739C /* Scenes */,
-				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
-				0EDE8DE220C86A13004C739C /* App.entitlements */,
-				0E57F64720C83FC7008323CF /* Info.plist */,
-				0E0C072B236087A100155AAC /* InfoPlist.strings */,
-				0E57F63B20C83FC5008323CF /* AppDelegate.swift */,
-				0E57F64220C83FC7008323CF /* Assets.xcassets */,
-				0E9CD788225746B300D033B4 /* Flags.xcassets */,
-				0E9CD7862257462800D033B4 /* Providers.xcassets */,
-				0E24273C225950450064A1A3 /* About.storyboard */,
-				0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */,
-				0E57F63F20C83FC5008323CF /* Main.storyboard */,
-				0ED38ADC213F44D00004D387 /* Organizer.storyboard */,
-				0E4B0D762366E6C800C890B4 /* Purchase.storyboard */,
-				0E36D25A22403469006AF062 /* Shortcuts.storyboard */,
-				0EA591142733DDDA0096F796 /* Intents.intentdefinition */,
+				0EBC075327EBC7FC00208AD9 /* Reusable */,
+				0ECF71E227B64FFC00CDB528 /* ViewModels */,
+				0E0BD25527B130AD00583AC5 /* Views */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
 		};
-		0E6BA54125C9ED91000CDFAC /* Purchase */ = {
+		0E92781227E7CD530057BB81 /* InApp */ = {
 			isa = PBXGroup;
 			children = (
-				0E79D31D25CC0CF600D12964 /* PurchaseProductView.swift */,
-				0E79D2C725C9F1B300D12964 /* PurchaseViewController.swift */,
+				0EB17EA327D2263700D473B5 /* LocalProduct.swift */,
+				0E53249627D26B51002565C3 /* ProductManager.swift */,
 			);
-			path = Purchase;
-			sourceTree = "<group>";
-		};
-		0E89DFCC213EEDE700741BA1 /* Organizer */ = {
-			isa = PBXGroup;
-			children = (
-				0E242741225956AC0064A1A3 /* DonationViewController.swift */,
-				0EB67D6A2184581E00BA6200 /* ImportedHostsViewController.swift */,
-				0EBE3A78213C4E5400BFA2F5 /* OrganizerViewController.swift */,
-				0ED38AD8213F33150004D387 /* WizardHostViewController.swift */,
-				0E89DFCD213EEDFA00741BA1 /* WizardProviderViewController.swift */,
-			);
-			path = Organizer;
+			path = InApp;
 			sourceTree = "<group>";
 		};
 		0E9AA982259F7674003FAFF1 /* Passepartout */ = {
 			isa = PBXGroup;
 			children = (
 				0E9AA983259F76C5003FAFF1 /* App */,
+				0ED30DD627EA33220057D8A3 /* Shared */,
 				0EDE8DC020C86910004C739C /* Tunnel */,
 			);
 			path = Passepartout;
@@ -644,9 +537,8 @@
 		0E9AA983259F76C5003FAFF1 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0E0BD26427B25EC800583AC5 /* Shared */,
 				0E57F63A20C83FC5008323CF /* iOS */,
-				0E569F58259F41690022DFB8 /* macOS */,
-				0E294A8225AE29D100CB4908 /* Descriptible.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -654,58 +546,109 @@
 		0EA591112733DD4E0096F796 /* Intents */ = {
 			isa = PBXGroup;
 			children = (
+				0EA591142733DDDA0096F796 /* Intents.intentdefinition */,
 				0EA591122733DD4E0096F796 /* IntentDispatcher.swift */,
+				0E9C233227F47E95007D5FC7 /* IntentDispatcher+Activities.swift */,
+				0E9C232F27F47032007D5FC7 /* IntentsManager.swift */,
 			);
 			path = Intents;
+			sourceTree = "<group>";
+		};
+		0EB17EA027D2263700D473B5 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0E53E63627E34FE2001D4902 /* AppContext.swift */,
+				0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */,
+				0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */,
+				0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */,
+				0EB34BCB27C6F41D00B126DA /* Theme.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		0EBC075327EBC7FC00208AD9 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				0E71ACFC27C1321A00F85C4B /* ActivityView.swift */,
+				0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */,
+				0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */,
+				0EBC075427EBC83800208AD9 /* MailComposerView.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		0EC54E1927F214C9002522D0 /* AddProfile */ = {
+			isa = PBXGroup;
+			children = (
+				0E3B7FCC27E47B3700C66F13 /* AddHostView.swift */,
+				0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */,
+				0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */,
+				0EF2212A27E667EA001D0BD7 /* AddProviderView+Name.swift */,
+			);
+			path = AddProfile;
+			sourceTree = "<group>";
+		};
+		0EC54E1A27F214E7002522D0 /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				0EF0FAF527DD0211007EB181 /* PaywallView.swift */,
+				0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */,
+				0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
+		0EC54E1B27F214F1002522D0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0EBC074B27EB673C00208AD9 /* ProfileView+Rename.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		0ECF71E227B64FFC00CDB528 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */,
+				0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0ED2B33C27D3C52900FD8EA9 /* OpenVPN */ = {
+			isa = PBXGroup;
+			children = (
+				0ED30DDA27EA351C0057D8A3 /* Constants+Tunnel.swift */,
+				0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */,
+			);
+			path = OpenVPN;
+			sourceTree = "<group>";
+		};
+		0ED2B33D27D3C53400FD8EA9 /* WireGuard */ = {
+			isa = PBXGroup;
+			children = (
+				0ED2B35A27D3C94F00FD8EA9 /* PacketTunnelProvider.swift */,
+			);
+			path = WireGuard;
+			sourceTree = "<group>";
+		};
+		0ED30DD627EA33220057D8A3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				0EB17EA127D2263700D473B5 /* Constants.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		0EDE8DC020C86910004C739C /* Tunnel */ = {
 			isa = PBXGroup;
 			children = (
-				0ED31C3B20CF39510027975F /* Tunnel-iOS.entitlements */,
-				0E569FAA259F41690022DFB8 /* Tunnel-macOS.entitlements */,
+				0ED2B33C27D3C52900FD8EA9 /* OpenVPN */,
+				0ED2B33D27D3C53400FD8EA9 /* WireGuard */,
+				0ED31C3B20CF39510027975F /* Tunnel.entitlements */,
 				0EDE8DC320C86910004C739C /* Info.plist */,
-				0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */,
 			);
 			path = Tunnel;
-			sourceTree = "<group>";
-		};
-		0EDE8DEC20C93E3B004C739C /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				0E3262D8235EE8DA00B5E470 /* HostImporter.swift */,
-				0EFD943D215BE10800529B64 /* IssueReporter.swift */,
-				0E4FD7F020D58618002221FF /* Macros.swift */,
-				0ECC60DD2256B6890020BEAC /* SwiftGen+Assets.swift */,
-				0EDE8DE320C89028004C739C /* SwiftGen+Scenes.swift */,
-				0EF56BBA2185AC8500B0C8AB /* SwiftGen+Segues.swift */,
-				0E05C61C20D27C82006EE732 /* Theme.swift */,
-				0ECEE44F20E1182E00A6BB43 /* Theme+Cells.swift */,
-				0E2B493F20FCFF990094784C /* Theme+Titles.swift */,
-				0EB60FD92111136E00AD27F3 /* UITextView+Search.swift */,
-			);
-			path = Global;
-			sourceTree = "<group>";
-		};
-		0EDE8DF120C93ED8004C739C /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				0E24273D225950CC0064A1A3 /* About */,
-				0E89DFCC213EEDE700741BA1 /* Organizer */,
-				0E4B0D6C2366E53C00C890B4 /* Purchase */,
-				0E24273E225950ED0064A1A3 /* Shortcuts */,
-				0ED31C2820CF2A340027975F /* AccountViewController.swift */,
-				0ED38AEB2141260D0004D387 /* ConfigurationModificationDelegate.swift */,
-				0E1D72B3213C118500BA1586 /* ConfigurationViewController.swift */,
-				0E6BE13E20CFBAB300A6DD36 /* DebugLogViewController.swift */,
-				0E158AD920E11B0B00C85A82 /* EndpointViewController.swift */,
-				0EFB90192276D7F1006405E4 /* NetworkSettingsViewController.swift */,
-				0ED31C2B20CF2D6F0027975F /* ProviderPoolViewController.swift */,
-				0E1D72B1213BFFCF00BA1586 /* ProviderPresetViewController.swift */,
-				0E9CDB6623604AD5006733B4 /* ServerNetworkViewController.swift */,
-				0E57F63D20C83FC5008323CF /* ServiceViewController.swift */,
-			);
-			path = Scenes;
 			sourceTree = "<group>";
 		};
 		0EE315DB2733104700F5D461 /* Packages */ = {
@@ -719,6 +662,7 @@
 		374B9F085E1148C37CF9117A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E9C3B6E27FC573E00D0F02E /* CloudKit.framework */,
 				0ED31C3920CF39510027975F /* NetworkExtension.framework */,
 				0EDE8DD220C86978004C739C /* NotificationCenter.framework */,
 			);
@@ -727,57 +671,30 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXLegacyTarget section */
+		0ECF71F327B6D9CD00CDB528 /* WireGuardGo */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 0ECF71F427B6D9CD00CDB528 /* Build configuration list for PBXLegacyTarget "WireGuardGo" */;
+			buildPhases = (
+			);
+			buildToolPath = "$(PROJECT_DIR)/Passepartout/App/Scripts/build_wireguard_go_bridge.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = WireGuardGo;
+			passBuildSettingsInEnvironment = 1;
+			productName = "PassepartoutWireGuard-iOS";
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
-		0E5202F6259F573500CBAB56 /* Passepartout-macOS */ = {
+		0E57F63720C83FC5008323CF /* Passepartout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E520304259F573800CBAB56 /* Build configuration list for PBXNativeTarget "Passepartout-macOS" */;
+			buildConfigurationList = 0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout" */;
 			buildPhases = (
-				0E5202F3259F573500CBAB56 /* Sources */,
-				0E5202F4259F573500CBAB56 /* Frameworks */,
-				0E5202F5259F573500CBAB56 /* Resources */,
-				0E9AAACA259F806B003FAFF1 /* CopyFiles */,
-				0E5203C2259F5F3F00CBAB56 /* Embed App Extensions */,
-				0E5203F6259F60D600CBAB56 /* Embed Frameworks */,
-				0EBEF139274E4DAE00EAC689 /* Drop Extra Frameworks In Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0E5203BD259F5F3F00CBAB56 /* PBXTargetDependency */,
-				0E9AAAC0259F7FFF003FAFF1 /* PBXTargetDependency */,
-			);
-			name = "Passepartout-macOS";
-			packageProductDependencies = (
-				0EED0BBA2733CEE000C9FC68 /* PassepartoutCore */,
-			);
-			productName = "Passepartout-macOS";
-			productReference = 0E5202F7259F573500CBAB56 /* Passepartout.app */;
-			productType = "com.apple.product-type.application";
-		};
-		0E5203B4259F5F3F00CBAB56 /* PassepartoutTunnel-macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0E5203BF259F5F3F00CBAB56 /* Build configuration list for PBXNativeTarget "PassepartoutTunnel-macOS" */;
-			buildPhases = (
-				0E5203B1259F5F3F00CBAB56 /* Sources */,
-				0E5203B2259F5F3F00CBAB56 /* Frameworks */,
-				0E5203B3259F5F3F00CBAB56 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "PassepartoutTunnel-macOS";
-			packageProductDependencies = (
-				0EA5912F2733E1420096F796 /* PassepartoutOpenVPNTunnel */,
-			);
-			productName = "Passepartout-macOS-Tunnel";
-			productReference = 0E5203B5259F5F3F00CBAB56 /* PassepartoutTunnel.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		0E57F63720C83FC5008323CF /* Passepartout-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout-iOS" */;
-			buildPhases = (
+				0EADDC7227F0677F0093E303 /* Copy Core Data codegen */,
+				0E9E5AF427B44E59008C95DA /* Refresh Localizations */,
 				0E57F63420C83FC5008323CF /* Sources */,
 				0E57F63520C83FC5008323CF /* Frameworks */,
 				0E57F63620C83FC5008323CF /* Resources */,
@@ -788,36 +705,44 @@
 			buildRules = (
 			);
 			dependencies = (
+				0ECF71FC27B6DA6700CDB528 /* PBXTargetDependency */,
 				0EB2B14A2733FB6F007705AB /* PBXTargetDependency */,
+				0ED2B36227D3C99100FD8EA9 /* PBXTargetDependency */,
+				0E6059C727FCC33D003F4063 /* PBXTargetDependency */,
 			);
-			name = "Passepartout-iOS";
+			name = Passepartout;
 			packageProductDependencies = (
 				0EED0BB82733CEDA00C9FC68 /* PassepartoutCore */,
+				0E53249C27D28FC7002565C3 /* Kvitto */,
 			);
 			productName = Passepartout;
 			productReference = 0E57F63820C83FC5008323CF /* Passepartout.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0E9AAA60259F7D7E003FAFF1 /* PassepartoutLauncher-macOS */ = {
+		0ED2B33E27D3C77800FD8EA9 /* WireGuardTunnel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E9AAA70259F7D81003FAFF1 /* Build configuration list for PBXNativeTarget "PassepartoutLauncher-macOS" */;
+			buildConfigurationList = 0ED2B34727D3C77800FD8EA9 /* Build configuration list for PBXNativeTarget "WireGuardTunnel" */;
 			buildPhases = (
-				0E9AAA5D259F7D7E003FAFF1 /* Sources */,
-				0E9AAA5E259F7D7E003FAFF1 /* Frameworks */,
-				0E9AAA5F259F7D7E003FAFF1 /* Resources */,
+				0ED2B34027D3C77800FD8EA9 /* Sources */,
+				0ED2B34327D3C77800FD8EA9 /* Frameworks */,
+				0ED2B34627D3C77800FD8EA9 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0ED2B36B27D3CAB100FD8EA9 /* PBXTargetDependency */,
 			);
-			name = "PassepartoutLauncher-macOS";
-			productName = "PassepartoutLauncher-macOS";
-			productReference = 0E9AAA61259F7D7E003FAFF1 /* PassepartoutLauncher.app */;
-			productType = "com.apple.product-type.application";
+			name = WireGuardTunnel;
+			packageProductDependencies = (
+				0ED2B36627D3C9A300FD8EA9 /* WireGuardAppExtension */,
+			);
+			productName = "Passepartout-iOS-Tunnel";
+			productReference = 0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
-		0EDE8DBE20C86910004C739C /* PassepartoutTunnel-iOS */ = {
+		0EDE8DBE20C86910004C739C /* OpenVPNTunnel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "PassepartoutTunnel-iOS" */;
+			buildConfigurationList = 0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "OpenVPNTunnel" */;
 			buildPhases = (
 				0EDE8DBB20C86910004C739C /* Sources */,
 				0EDE8DBC20C86910004C739C /* Frameworks */,
@@ -827,12 +752,12 @@
 			);
 			dependencies = (
 			);
-			name = "PassepartoutTunnel-iOS";
+			name = OpenVPNTunnel;
 			packageProductDependencies = (
-				0EA591312733E1490096F796 /* PassepartoutOpenVPNTunnel */,
+				0ED2B33827D3C49800FD8EA9 /* OpenVPNAppExtension */,
 			);
 			productName = "Passepartout-iOS-Tunnel";
-			productReference = 0EDE8DBF20C86910004C739C /* PassepartoutTunnel.appex */;
+			productReference = 0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -845,12 +770,6 @@
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
-					0E5202F6259F573500CBAB56 = {
-						CreatedOnToolsVersion = 12.3;
-					};
-					0E5203B4259F5F3F00CBAB56 = {
-						CreatedOnToolsVersion = 12.3;
-					};
 					0E57F63720C83FC5008323CF = {
 						CreatedOnToolsVersion = 9.4;
 						LastSwiftMigration = 1020;
@@ -869,8 +788,8 @@
 							};
 						};
 					};
-					0E9AAA60259F7D7E003FAFF1 = {
-						CreatedOnToolsVersion = 12.3;
+					0ECF71F327B6D9CD00CDB528 = {
+						CreatedOnToolsVersion = 13.2;
 					};
 					0EDE8DBE20C86910004C739C = {
 						CreatedOnToolsVersion = 10.0;
@@ -907,73 +826,38 @@
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
 			packageReferences = (
+				0E53249B27D28FC7002565C3 /* XCRemoteSwiftPackageReference "Kvitto" */,
 			);
 			productRefGroup = 0E57F63920C83FC5008323CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0EDE8DBE20C86910004C739C /* PassepartoutTunnel-iOS */,
-				0E57F63720C83FC5008323CF /* Passepartout-iOS */,
-				0E9AAA60259F7D7E003FAFF1 /* PassepartoutLauncher-macOS */,
-				0E5203B4259F5F3F00CBAB56 /* PassepartoutTunnel-macOS */,
-				0E5202F6259F573500CBAB56 /* Passepartout-macOS */,
+				0E57F63720C83FC5008323CF /* Passepartout */,
+				0EDE8DBE20C86910004C739C /* OpenVPNTunnel */,
+				0ECF71F327B6D9CD00CDB528 /* WireGuardGo */,
+				0ED2B33E27D3C77800FD8EA9 /* WireGuardTunnel */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0E5202F5259F573500CBAB56 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0E520337259F58F500CBAB56 /* ProviderServiceView.xib in Resources */,
-				0E520336259F58F500CBAB56 /* HostServiceView.xib in Resources */,
-				0E52031D259F58BF00CBAB56 /* Providers.xcassets in Resources */,
-				0E52047D259F642600CBAB56 /* Preferences.storyboard in Resources */,
-				0E6BA54B25C9EE3A000CDFAC /* Purchase.storyboard in Resources */,
-				0E520385259F593B00CBAB56 /* Credits.html in Resources */,
-				0E52047C259F642600CBAB56 /* Service.storyboard in Resources */,
-				0E52032B259F58DD00CBAB56 /* TextTableView.xib in Resources */,
-				0E52047B259F642600CBAB56 /* Main.storyboard in Resources */,
-				0E520334259F58F500CBAB56 /* OrganizerProfileTableView.xib in Resources */,
-				0E9AAABE259F7FFF003FAFF1 /* PassepartoutLauncher.app in Resources */,
-				0E52031E259F58BF00CBAB56 /* Assets.xcassets in Resources */,
-				0E52031F259F58BF00CBAB56 /* Flags.xcassets in Resources */,
-				0E52035D259F591300CBAB56 /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0E5203B3259F5F3F00CBAB56 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0E57F63620C83FC5008323CF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E36D25822403469006AF062 /* Shortcuts.storyboard in Resources */,
+				0E6059CB27FCC5DE003F4063 /* Flags.xcassets in Resources */,
 				0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */,
-				0ED38ADA213F44D00004D387 /* Organizer.storyboard in Resources */,
-				0E24273A225950450064A1A3 /* About.storyboard in Resources */,
-				0E57F64620C83FC7008323CF /* LaunchScreen.storyboard in Resources */,
-				0E57F64320C83FC7008323CF /* Assets.xcassets in Resources */,
-				0E9CD7872257462800D033B4 /* Providers.xcassets in Resources */,
-				0E9CD789225746B300D033B4 /* Flags.xcassets in Resources */,
-				0E57F64120C83FC5008323CF /* Main.storyboard in Resources */,
-				0E4B0D742366E6C800C890B4 /* Purchase.storyboard in Resources */,
+				0E6059CC27FCC5DE003F4063 /* Providers.xcassets in Resources */,
+				0E6059CD27FCC5DE003F4063 /* Assets.xcassets in Resources */,
+				0E9E5AEF27B44CF1008C95DA /* Localizable.strings in Resources */,
 				0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0E9AAA5F259F7D7E003FAFF1 /* Resources */ = {
+		0ED2B34627D3C77800FD8EA9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E9AAA7F259F7DB7003FAFF1 /* Assets.xcassets in Resources */,
-				0E9AAA89259F7DCA003FAFF1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,6 +871,43 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0E9E5AF427B44E59008C95DA /* Refresh Localizations */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Refresh Localizations";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=${PATH}:/opt/homebrew/bin\ncd \"${PROJECT_DIR}/Passepartout/App/Shared\"\nswiftgen\n";
+		};
+		0EADDC7227F0677F0093E303 /* Copy Core Data codegen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Core Data codegen";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "Passepartout/App/Scripts/copy_coredata_codegen.sh\n";
+			showEnvVarsInLog = 0;
+		};
 		0EBEF138274E4C7F00EAC689 /* Drop Extra Frameworks In Extensions */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1005,131 +926,114 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf ${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Frameworks\n";
 		};
-		0EBEF139274E4DAE00EAC689 /* Drop Extra Frameworks In Extensions */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Drop Extra Frameworks In Extensions";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf ${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Contents/Frameworks\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0E5202F3259F573500CBAB56 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0E520388259F593B00CBAB56 /* HostImporter.swift in Sources */,
-				0E520379259F593B00CBAB56 /* Macros.swift in Sources */,
-				0E520387259F593B00CBAB56 /* TextInputViewController.swift in Sources */,
-				0E52033B259F58F500CBAB56 /* OrganizerViewController.swift in Sources */,
-				0E520382259F593B00CBAB56 /* SwiftGen+Scenes.swift in Sources */,
-				0E52032C259F58DD00CBAB56 /* TextTableView.swift in Sources */,
-				0E520355259F590600CBAB56 /* DebugLogViewController.swift in Sources */,
-				0E52034A259F58FE00CBAB56 /* DefaultGatewayViewController.swift in Sources */,
-				0E520345259F58FE00CBAB56 /* DNSViewController.swift in Sources */,
-				0E520320259F58BF00CBAB56 /* AppDelegate.swift in Sources */,
-				0E520344259F58FE00CBAB56 /* TrustedNetworksAddViewController.swift in Sources */,
-				0E52033A259F58F500CBAB56 /* AccountViewController.swift in Sources */,
-				0E294AA225AE2B0B00CB4908 /* Descriptible.swift in Sources */,
-				0E520356259F590600CBAB56 /* PreferencesGeneralViewController.swift in Sources */,
-				0E520348259F58FE00CBAB56 /* MTUViewController.swift in Sources */,
-				0E79D31E25CC0CF600D12964 /* PurchaseProductView.swift in Sources */,
-				0E52037E259F593B00CBAB56 /* SwiftGen+Segues.swift in Sources */,
-				0E52037C259F593B00CBAB56 /* Theme.swift in Sources */,
-				0E52035E259F591300CBAB56 /* StatusMenu.swift in Sources */,
-				0E52035F259F591300CBAB56 /* MainMenu.swift in Sources */,
-				0E520342259F58FE00CBAB56 /* EndpointViewController.swift in Sources */,
-				0E520339259F58F500CBAB56 /* ServiceViewController.swift in Sources */,
-				0E520383259F593B00CBAB56 /* SwiftGen+Assets.swift in Sources */,
-				0E52037A259F593B00CBAB56 /* WindowManager.swift in Sources */,
-				0E520381259F593B00CBAB56 /* NSTextView+Search.swift in Sources */,
-				0E520349259F58FE00CBAB56 /* ConfigurationViewController.swift in Sources */,
-				0E520354259F590600CBAB56 /* PreferencesViewController.swift in Sources */,
-				0E520343259F58FE00CBAB56 /* ProfileCustomizationViewController.swift in Sources */,
-				0E520346259F58FE00CBAB56 /* TrustedNetworksViewController.swift in Sources */,
-				0E79D2C825C9F1B300D12964 /* PurchaseViewController.swift in Sources */,
-				0E520338259F58F500CBAB56 /* ProviderServiceView.swift in Sources */,
-				0E520347259F58FE00CBAB56 /* ProxyViewController.swift in Sources */,
-				0E52037B259F593B00CBAB56 /* IssueReporter.swift in Sources */,
-				0E520335259F58F500CBAB56 /* HostServiceView.swift in Sources */,
-				0E520333259F58F500CBAB56 /* OrganizerProfileTableView.swift in Sources */,
-				0E52037F259F593B00CBAB56 /* Theme+Views.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0E5203B1259F5F3F00CBAB56 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0E9AA979259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0E57F63420C83FC5008323CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ED38AD9213F33150004D387 /* WizardHostViewController.swift in Sources */,
-				0EE3BBB2215ED3A900F30952 /* AboutViewController.swift in Sources */,
 				0EA591162733DDDA0096F796 /* Intents.intentdefinition in Sources */,
-				0EBE3A79213C4E5500BFA2F5 /* OrganizerViewController.swift in Sources */,
-				0E4FD7F120D58618002221FF /* Macros.swift in Sources */,
-				0E05C5D720D1645F006EE732 /* ToggleTableViewCell.swift in Sources */,
-				0EFB901A2276D7F1006405E4 /* NetworkSettingsViewController.swift in Sources */,
-				0E05C5D420D1645F006EE732 /* FieldTableViewCell.swift in Sources */,
-				0E36D25C224034AD006AF062 /* ShortcutsConnectToViewController.swift in Sources */,
-				0E05C61D20D27C82006EE732 /* Theme.swift in Sources */,
-				0ECC60DE2256B68A0020BEAC /* SwiftGen+Assets.swift in Sources */,
-				0E242742225956AC0064A1A3 /* DonationViewController.swift in Sources */,
-				0ED38AEC2141260D0004D387 /* ConfigurationModificationDelegate.swift in Sources */,
-				0E294AA125AE2B0A00CB4908 /* Descriptible.swift in Sources */,
-				0ECEE45020E1182E00A6BB43 /* Theme+Cells.swift in Sources */,
-				0E6268942369AD0600355F75 /* PurchaseTableViewCell.swift in Sources */,
-				0E1066C920E0F84A004F98B7 /* Cells.swift in Sources */,
-				0E4B0D6B2366E3C100C890B4 /* PurchaseViewController.swift in Sources */,
-				0EF56BBB2185AC8500B0C8AB /* SwiftGen+Segues.swift in Sources */,
-				0EA591132733DD4F0096F796 /* IntentDispatcher.swift in Sources */,
-				0E05C5D620D1645F006EE732 /* SwiftGen+Scenes.swift in Sources */,
-				0E773BF8224BF37600CDDC8E /* ShortcutsViewController.swift in Sources */,
-				0E9CDB6723604AD5006733B4 /* ServerNetworkViewController.swift in Sources */,
-				0E3262D9235EE8DA00B5E470 /* HostImporter.swift in Sources */,
-				0ED31C2C20CF2D6F0027975F /* ProviderPoolViewController.swift in Sources */,
-				0E2B494020FCFF990094784C /* Theme+Titles.swift in Sources */,
-				0E05C5D520D1645F006EE732 /* SettingTableViewCell.swift in Sources */,
-				0E89DFCE213EEDFA00741BA1 /* WizardProviderViewController.swift in Sources */,
-				0E1D72B2213BFFCF00BA1586 /* ProviderPresetViewController.swift in Sources */,
-				0E6BE13F20CFBAB300A6DD36 /* DebugLogViewController.swift in Sources */,
-				0EFD943E215BE10800529B64 /* IssueReporter.swift in Sources */,
-				0EB60FDA2111136E00AD27F3 /* UITextView+Search.swift in Sources */,
-				0E3586FE225BD34800509A4D /* ActivityTableViewCell.swift in Sources */,
-				0EB67D6B2184581E00BA6200 /* ImportedHostsViewController.swift in Sources */,
-				0E57F63E20C83FC5008323CF /* ServiceViewController.swift in Sources */,
-				0E36D24D2240234B006AF062 /* ShortcutsAddViewController.swift in Sources */,
-				0E57F63C20C83FC5008323CF /* AppDelegate.swift in Sources */,
-				0ED31C2920CF2A340027975F /* AccountViewController.swift in Sources */,
-				0E158ADA20E11B0B00C85A82 /* EndpointViewController.swift in Sources */,
-				0E1D72B4213C118500BA1586 /* ConfigurationViewController.swift in Sources */,
-				0E4C9CBB20DCF0D600A0C59C /* DestructiveTableViewCell.swift in Sources */,
+				0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */,
+				0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */,
+				0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */,
+				0E34AC7A27F8431D0042F2AB /* OrganizerView+Shortcuts.swift in Sources */,
+				0E34AC7E27F849050042F2AB /* OrganizerView+AddProfileMenu.swift in Sources */,
+				0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift in Sources */,
+				0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */,
+				0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */,
+				0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */,
+				0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */,
+				0E9C3B6C27FB3A9C00D0F02E /* ReloadingSection.swift in Sources */,
+				0E5324A627D297BB002565C3 /* InApp.swift in Sources */,
+				0E3B7FCD27E47B3700C66F13 /* AddHostView.swift in Sources */,
+				0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */,
+				0E5349C827C176D100C71BB3 /* EndpointView+WireGuard.swift in Sources */,
+				0EBC076027EC587900208AD9 /* SwiftGen+Strings.swift in Sources */,
+				0E5683B927C2825D00EAF1CD /* DiagnosticsView.swift in Sources */,
+				0E71ACFD27C1321A00F85C4B /* ActivityView.swift in Sources */,
+				0E44689627B051C300A14CE4 /* ProfileView.swift in Sources */,
+				0EDE02C227F61C79000FBE3C /* EditableTextList.swift in Sources */,
+				0E92D7C927F1042A0033CB7B /* ProfileView+Extra.swift in Sources */,
+				0EBC074C27EB673C00208AD9 /* ProfileView+Rename.swift in Sources */,
+				0E49F6BD27D7639000385834 /* EndpointAdvancedView+WireGuard.swift in Sources */,
+				0EB34BCC27C6F41D00B126DA /* Theme.swift in Sources */,
+				0EB17EA927D226C900D473B5 /* Constants.swift in Sources */,
+				0E5324A927D2AC55002565C3 /* LongContentView.swift in Sources */,
+				0ED89C1C27DE3ABC008B36D6 /* ShortcutsView+Add.swift in Sources */,
+				0E34A2CF27CADA6300C73B67 /* GenericVersionView.swift in Sources */,
+				0E9C233327F47E95007D5FC7 /* IntentDispatcher+Activities.swift in Sources */,
+				0EBC075D27EC529000208AD9 /* DebugLog+Constants.swift in Sources */,
+				0EB17EAA27D226C900D473B5 /* Constants+Extensions.swift in Sources */,
+				0E53E63727E34FE2001D4902 /* AppContext.swift in Sources */,
+				0E3B7FD627E5173A00C66F13 /* ProfileView+VPN.swift in Sources */,
+				0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */,
+				0ED30DCF27EA1EF80057D8A3 /* PaywallView+Beta.swift in Sources */,
+				0ECF71EE27B6A99300CDB528 /* AccountView.swift in Sources */,
+				0E71ACF727C107CA00F85C4B /* DebugLogView.swift in Sources */,
+				0EF0FAF927DD212C007EB181 /* IntentActivity.swift in Sources */,
+				0EBC075B27EC4FFF00208AD9 /* ReportIssueView.swift in Sources */,
+				0ED89C1727DE0E05008B36D6 /* IntentEditView.swift in Sources */,
+				0E71ACE927C1055300F85C4B /* NetworkSettingsView.swift in Sources */,
+				0EB34BCA27C6A70200B126DA /* OnDemandView.swift in Sources */,
+				0E0BD27327B2EA2C00583AC5 /* MainView.swift in Sources */,
+				0E34AC7C27F845510042F2AB /* OrganizerView+Profiles.swift in Sources */,
+				0EB17EBA27D2560300D473B5 /* PassepartoutProviders+Extensions.swift in Sources */,
+				0E3B7FDA27E51A0200C66F13 /* ProfileView+Provider.swift in Sources */,
+				0E71ACE327C0F2E400F85C4B /* Providers+L10n.swift in Sources */,
+				0E71ACF127C1073800F85C4B /* ProviderLocationView.swift in Sources */,
+				0E2A8D4F27B04BBA00207D04 /* OrganizerView.swift in Sources */,
+				0E49F6BB27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift in Sources */,
+				0E71ACEF27C106B500F85C4B /* ProviderPresetView.swift in Sources */,
+				0E0AD49027BD53CB00FBB520 /* ProfileView+Welcome.swift in Sources */,
+				0E34AC7627F83FE20042F2AB /* OrganizerView+VPN.swift in Sources */,
+				0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */,
+				0EF0FAF627DD0211007EB181 /* PaywallView.swift in Sources */,
+				0E5349BE27C16A4500C71BB3 /* StyledPicker.swift in Sources */,
+				0ED89C2527DE45A3008B36D6 /* ProfileHeaderRow.swift in Sources */,
+				0E2C172B27CB63F9007E8488 /* Reviewer.swift in Sources */,
+				0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */,
+				0ED89C2027DE423B008B36D6 /* ShortcutsView+ConnectTo.swift in Sources */,
+				0E34A2B627CAA8CC00C73B67 /* Core+L10n.swift in Sources */,
+				0E6059CF27FCC618003F4063 /* SwiftGen+Assets.swift in Sources */,
+				0E2A8D4927ADF87F00207D04 /* PassepartoutApp.swift in Sources */,
+				0EBC075527EBC83800208AD9 /* MailComposerView.swift in Sources */,
+				0EF0FAF727DD159C007EB181 /* IntentDispatcher.swift in Sources */,
+				0E12BC8F27F62C8600B2F912 /* Validators.swift in Sources */,
+				0E9ED48127FD9BAE003B2316 /* CopySavingButton.swift in Sources */,
+				0E44689C27B11B5300A14CE4 /* AboutView.swift in Sources */,
+				0E71ACF927C12E4800F85C4B /* CreditsView.swift in Sources */,
+				0ED89C1527DE0A0C008B36D6 /* Shortcut.swift in Sources */,
+				0E34A2B927CAA96A00C73B67 /* OpenVPN+L10n.swift in Sources */,
+				0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */,
+				0E71ACEB27C1060D00F85C4B /* EndpointView.swift in Sources */,
+				0E53249927D26B51002565C3 /* ProductManager.swift in Sources */,
+				0E9C233027F47032007D5FC7 /* IntentsManager.swift in Sources */,
+				0EB4042C27CA0E8C00378B1A /* Unlocalized.swift in Sources */,
+				0EB4042E27CA136300378B1A /* AddingTextField.swift in Sources */,
+				0EE8B7E327FF340F00B68621 /* VPNProtocolType+FileExtensions.swift in Sources */,
+				0EF2212B27E667EA001D0BD7 /* AddProviderView+Name.swift in Sources */,
+				0E2DE71F27DCD0290067B9E1 /* TunnelKit+L10n.swift in Sources */,
+				0E49F6BF27D764AF00385834 /* EndpointAdvancedView.swift in Sources */,
+				0E0BD27627B2EB2200583AC5 /* DonateView.swift in Sources */,
+				0E2C171B27CB5A3B007E8488 /* GenericCreditsView.swift in Sources */,
+				0ED30DD227EA1F650057D8A3 /* PaywallView+Purchase.swift in Sources */,
+				0EB3413027C7761A00483410 /* Binding+Extensions.swift in Sources */,
+				0E2DE72527DCDF550067B9E1 /* WireGuard+L10n.swift in Sources */,
+				0E71ACFB27C12E5300F85C4B /* VersionView.swift in Sources */,
+				0ED1D6DC27DBA41700983466 /* DiagnosticsView+OpenVPN.swift in Sources */,
+				0ED30DCC27EA197D0057D8A3 /* RevealingSecureField.swift in Sources */,
+				0E92D7F427F104B80033CB7B /* ProfileView+Diagnostics.swift in Sources */,
+				0E5349C627C176C200C71BB3 /* EndpointView+OpenVPN.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0E9AAA5D259F7D7E003FAFF1 /* Sources */ = {
+		0ED2B34027D3C77800FD8EA9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E9AAA80259F7DB7003FAFF1 /* AppDelegate.swift in Sources */,
+				0ED2B35B27D3C94F00FD8EA9 /* PacketTunnelProvider.swift in Sources */,
+				0ED30DDD27EA35230057D8A3 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1138,26 +1042,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E9AA978259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */,
+				0EB17EA727D226B400D473B5 /* Constants.swift in Sources */,
+				0ED30DDB27EA351C0057D8A3 /* Constants+Tunnel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0E5203BD259F5F3F00CBAB56 /* PBXTargetDependency */ = {
+		0E6059C727FCC33D003F4063 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0E5203B4259F5F3F00CBAB56 /* PassepartoutTunnel-macOS */;
-			targetProxy = 0E5203BC259F5F3F00CBAB56 /* PBXContainerItemProxy */;
-		};
-		0E9AAAC0259F7FFF003FAFF1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0E9AAA60259F7D7E003FAFF1 /* PassepartoutLauncher-macOS */;
-			targetProxy = 0E9AAABF259F7FFF003FAFF1 /* PBXContainerItemProxy */;
+			platformFilter = ios;
+			targetProxy = 0E6059C627FCC33D003F4063 /* PBXContainerItemProxy */;
 		};
 		0EB2B14A2733FB6F007705AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0EDE8DBE20C86910004C739C /* PassepartoutTunnel-iOS */;
+			platformFilter = ios;
+			target = 0EDE8DBE20C86910004C739C /* OpenVPNTunnel */;
 			targetProxy = 0EB2B1492733FB6F007705AB /* PBXContainerItemProxy */;
+		};
+		0ECF71FC27B6DA6700CDB528 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0ECF71F327B6D9CD00CDB528 /* WireGuardGo */;
+			targetProxy = 0ECF71FB27B6DA6700CDB528 /* PBXContainerItemProxy */;
+		};
+		0ED2B36227D3C99100FD8EA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 0ED2B33E27D3C77800FD8EA9 /* WireGuardTunnel */;
+			targetProxy = 0ED2B36127D3C99100FD8EA9 /* PBXContainerItemProxy */;
+		};
+		0ED2B36B27D3CAB100FD8EA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0ECF71F327B6D9CD00CDB528 /* WireGuardGo */;
+			targetProxy = 0ED2B36A27D3CAB100FD8EA9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1181,84 +1099,23 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		0E24273C225950450064A1A3 /* About.storyboard */ = {
+		0E9E5AE227B44CF1008C95DA /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0E24273B225950450064A1A3 /* Base */,
+				0E9E5AE327B44CF1008C95DA /* de */,
+				0E9E5AE427B44CF1008C95DA /* el */,
+				0E9E5AE527B44CF1008C95DA /* zh-Hans */,
+				0E9E5AE627B44CF1008C95DA /* en */,
+				0E9E5AE727B44CF1008C95DA /* es */,
+				0E9E5AE827B44CF1008C95DA /* it */,
+				0E9E5AE927B44CF1008C95DA /* sv */,
+				0E9E5AEA27B44CF1008C95DA /* pl */,
+				0E9E5AEB27B44CF1008C95DA /* ru */,
+				0E9E5AEC27B44CF1008C95DA /* fr */,
+				0E9E5AED27B44CF1008C95DA /* nl */,
+				0E9E5AEE27B44CF1008C95DA /* pt */,
 			);
-			name = About.storyboard;
-			sourceTree = "<group>";
-		};
-		0E36D25A22403469006AF062 /* Shortcuts.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0ECEB107224FE51400E9E551 /* Base */,
-			);
-			name = Shortcuts.storyboard;
-			sourceTree = "<group>";
-		};
-		0E4B0D762366E6C800C890B4 /* Purchase.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E4B0D752366E6C800C890B4 /* Base */,
-			);
-			name = Purchase.storyboard;
-			sourceTree = "<group>";
-		};
-		0E569F5F259F41690022DFB8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E569F60259F41690022DFB8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0E569F81259F41690022DFB8 /* Preferences.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E569F82259F41690022DFB8 /* Base */,
-			);
-			name = Preferences.storyboard;
-			sourceTree = "<group>";
-		};
-		0E569F83259F41690022DFB8 /* Service.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E569F84259F41690022DFB8 /* Base */,
-			);
-			name = Service.storyboard;
-			sourceTree = "<group>";
-		};
-		0E569F85259F41690022DFB8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E569F86259F41690022DFB8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0E57F63F20C83FC5008323CF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0ECEB105224FE51400E9E551 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0E57F64420C83FC7008323CF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0ECEB108224FE51400E9E551 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		0E6BA54D25C9EE3A000CDFAC /* Purchase.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E6BA54C25C9EE3A000CDFAC /* Base */,
-			);
-			name = Purchase.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		0EA591142733DDDA0096F796 /* Intents.intentdefinition */ = {
@@ -1281,115 +1138,9 @@
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
-		0ED38ADC213F44D00004D387 /* Organizer.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0ECEB106224FE51400E9E551 /* Base */,
-			);
-			name = Organizer.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0E520305259F573800CBAB56 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/macOS/App.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Manual;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = Passepartout/App/macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
-				PRODUCT_NAME = Passepartout;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout macos";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		0E520306259F573800CBAB56 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/macOS/App.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Manual;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = Passepartout/App/macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
-				PRODUCT_NAME = Passepartout;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout macos";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		0E5203C0259F5F3F00CBAB56 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Passepartout/Tunnel/Tunnel-macOS.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
-				PRODUCT_NAME = PassepartoutTunnel;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		0E5203C1259F5F3F00CBAB56 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Passepartout/Tunnel/Tunnel-macOS.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
-				PRODUCT_NAME = PassepartoutTunnel;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel macos";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		0E57F65320C83FC7008323CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E23B4A12298559800304C30 /* Config.xcconfig */;
@@ -1426,7 +1177,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2984;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1445,8 +1196,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1492,7 +1243,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2984;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1505,8 +1256,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1521,18 +1272,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/iOS/App.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/Shared/App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				INFOPLIST_FILE = Passepartout/App/iOS/Info.plist;
+				INFOPLIST_FILE = Passepartout/App/Shared/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout catalyst";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1543,79 +1300,69 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/iOS/App.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/Shared/App.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				INFOPLIST_FILE = Passepartout/App/iOS/Info.plist;
+				INFOPLIST_FILE = Passepartout/App/Shared/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout catalyst";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		0E9AAA6E259F7D81003FAFF1 /* Debug */ = {
+		0ECF71F527B6D9CD00CDB528 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/macOS/Launcher/Launcher.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				COMBINE_HIDPI_IMAGES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = Passepartout/App/macOS/Launcher/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_LAUNCHER_ID)";
-				PRODUCT_NAME = PassepartoutLauncher;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		0E9AAA6F259F7D81003FAFF1 /* Release */ = {
+		0ECF71F627B6D9CD00CDB528 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/macOS/Launcher/Launcher.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				COMBINE_HIDPI_IMAGES = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = Passepartout/App/macOS/Launcher/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_LAUNCHER_ID)";
-				PRODUCT_NAME = PassepartoutLauncher;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
-		0EDE8DCA20C86910004C739C /* Debug */ = {
+		0ED2B34827D3C77800FD8EA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Passepartout/Tunnel/Tunnel-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
@@ -1624,10 +1371,60 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
-				PRODUCT_NAME = PassepartoutTunnel;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel.WireGuard";
+				PRODUCT_NAME = PassepartoutWireGuardTunnel;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel.WireGuard";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.Tunnel.WireGuard catalyst";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0ED2B34927D3C77800FD8EA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel.WireGuard";
+				PRODUCT_NAME = PassepartoutWireGuardTunnel;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel.WireGuard";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.Tunnel.WireGuard catalyst";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0EDE8DCA20C86910004C739C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel.OpenVPN";
+				PRODUCT_NAME = PassepartoutOpenVPNTunnel;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel.OpenVPN";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.Tunnel.OpenVPN catalyst";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1635,8 +1432,9 @@
 		0EDE8DCB20C86910004C739C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Passepartout/Tunnel/Tunnel-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				INFOPLIST_FILE = Passepartout/Tunnel/Info.plist;
@@ -1645,10 +1443,12 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel";
-				PRODUCT_NAME = PassepartoutTunnel;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID).Tunnel.OpenVPN";
+				PRODUCT_NAME = PassepartoutOpenVPNTunnel;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.Tunnel.OpenVPN";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.Tunnel.OpenVPN catalyst";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1656,24 +1456,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0E520304259F573800CBAB56 /* Build configuration list for PBXNativeTarget "Passepartout-macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0E520305259F573800CBAB56 /* Debug */,
-				0E520306259F573800CBAB56 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0E5203BF259F5F3F00CBAB56 /* Build configuration list for PBXNativeTarget "PassepartoutTunnel-macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0E5203C0259F5F3F00CBAB56 /* Debug */,
-				0E5203C1259F5F3F00CBAB56 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		0E57F63320C83FC5008323CF /* Build configuration list for PBXProject "Passepartout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1683,7 +1465,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout-iOS" */ = {
+		0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0E57F65620C83FC7008323CF /* Debug */,
@@ -1692,16 +1474,25 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0E9AAA70259F7D81003FAFF1 /* Build configuration list for PBXNativeTarget "PassepartoutLauncher-macOS" */ = {
+		0ECF71F427B6D9CD00CDB528 /* Build configuration list for PBXLegacyTarget "WireGuardGo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0E9AAA6E259F7D81003FAFF1 /* Debug */,
-				0E9AAA6F259F7D81003FAFF1 /* Release */,
+				0ECF71F527B6D9CD00CDB528 /* Debug */,
+				0ECF71F627B6D9CD00CDB528 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "PassepartoutTunnel-iOS" */ = {
+		0ED2B34727D3C77800FD8EA9 /* Build configuration list for PBXNativeTarget "WireGuardTunnel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ED2B34827D3C77800FD8EA9 /* Debug */,
+				0ED2B34927D3C77800FD8EA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0EDE8DC920C86910004C739C /* Build configuration list for PBXNativeTarget "OpenVPNTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0EDE8DCA20C86910004C739C /* Debug */,
@@ -1712,20 +1503,32 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCSwiftPackageProductDependency section */
-		0EA5912F2733E1420096F796 /* PassepartoutOpenVPNTunnel */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PassepartoutOpenVPNTunnel;
+/* Begin XCRemoteSwiftPackageReference section */
+		0E53249B27D28FC7002565C3 /* XCRemoteSwiftPackageReference "Kvitto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Cocoanetics/Kvitto";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
 		};
-		0EA591312733E1490096F796 /* PassepartoutOpenVPNTunnel */ = {
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0E53249C27D28FC7002565C3 /* Kvitto */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = PassepartoutOpenVPNTunnel;
+			package = 0E53249B27D28FC7002565C3 /* XCRemoteSwiftPackageReference "Kvitto" */;
+			productName = Kvitto;
+		};
+		0ED2B33827D3C49800FD8EA9 /* OpenVPNAppExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OpenVPNAppExtension;
+		};
+		0ED2B36627D3C9A300FD8EA9 /* WireGuardAppExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WireGuardAppExtension;
 		};
 		0EED0BB82733CEDA00C9FC68 /* PassepartoutCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PassepartoutCore;
-		};
-		0EED0BBA2733CEE000C9FC68 /* PassepartoutCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PassepartoutCore;
 		};

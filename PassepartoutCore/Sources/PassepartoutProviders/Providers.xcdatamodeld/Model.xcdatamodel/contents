@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E230" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="1.0">
+    <entity name="CDInfrastructure" representedClassName="CDInfrastructure" syncable="YES">
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="vpnProtocol" optional="YES" attributeType="String"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDInfrastructureCategory" inverseName="infrastructure" inverseEntity="CDInfrastructureCategory"/>
+        <relationship name="defaults" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDInfrastructureDefaultSettings" inverseName="infrastructure" inverseEntity="CDInfrastructureDefaultSettings"/>
+        <relationship name="provider" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDProvider" inverseName="infrastructures" inverseEntity="CDProvider"/>
+    </entity>
+    <entity name="CDInfrastructureCategory" representedClassName="CDInfrastructureCategory" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="infrastructure" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDInfrastructure" inverseName="categories" inverseEntity="CDInfrastructure"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDInfrastructureLocation" inverseName="category" inverseEntity="CDInfrastructureLocation"/>
+        <relationship name="presets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDInfrastructurePreset" inverseName="category" inverseEntity="CDInfrastructurePreset"/>
+        <relationship name="servers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDInfrastructureServer" inverseName="category" inverseEntity="CDInfrastructureServer"/>
+    </entity>
+    <entity name="CDInfrastructureDefaultSettings" representedClassName="CDInfrastructureDefaultSettings" syncable="YES">
+        <attribute name="countryCode" optional="YES" attributeType="String"/>
+        <attribute name="usernamePlaceholder" optional="YES" attributeType="String"/>
+        <relationship name="infrastructure" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDInfrastructure" inverseName="defaults" inverseEntity="CDInfrastructure"/>
+    </entity>
+    <entity name="CDInfrastructureLocation" representedClassName="CDInfrastructureLocation" syncable="YES">
+        <attribute name="countryCode" optional="YES" attributeType="String"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDInfrastructureCategory" inverseName="locations" inverseEntity="CDInfrastructureCategory"/>
+        <relationship name="servers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDInfrastructureServer" inverseName="location" inverseEntity="CDInfrastructureServer"/>
+    </entity>
+    <entity name="CDInfrastructurePreset" representedClassName="CDInfrastructurePreset" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="vpnConfiguration" optional="YES" attributeType="Binary"/>
+        <attribute name="vpnProtocol" optional="YES" attributeType="String"/>
+        <relationship name="category" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDInfrastructureCategory" inverseName="presets" inverseEntity="CDInfrastructureCategory"/>
+    </entity>
+    <entity name="CDInfrastructureServer" representedClassName="CDInfrastructureServer" syncable="YES">
+        <attribute name="apiId" optional="YES" attributeType="String"/>
+        <attribute name="area" optional="YES" attributeType="String"/>
+        <attribute name="countryCode" optional="YES" attributeType="String"/>
+        <attribute name="extraCountryCodes" optional="YES" attributeType="String"/>
+        <attribute name="hostname" optional="YES" attributeType="String"/>
+        <attribute name="ipAddresses" optional="YES" attributeType="String"/>
+        <attribute name="serverIndex" optional="YES" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDInfrastructureCategory" inverseName="servers" inverseEntity="CDInfrastructureCategory"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDInfrastructureLocation" inverseName="servers" inverseEntity="CDInfrastructureLocation"/>
+    </entity>
+    <entity name="CDProvider" representedClassName="CDProvider" syncable="YES">
+        <attribute name="fullName" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="infrastructures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDInfrastructure" inverseName="provider" inverseEntity="CDInfrastructure"/>
+    </entity>
+    <elements>
+        <element name="CDInfrastructure" positionX="-240.8046875" positionY="-241.30078125" width="128" height="104"/>
+        <element name="CDInfrastructureCategory" positionX="-14.94921875" positionY="-486.0078125" width="128" height="104"/>
+        <element name="CDInfrastructureDefaultSettings" positionX="-216" positionY="-306" width="128" height="74"/>
+        <element name="CDInfrastructureLocation" positionX="-13.98828125" positionY="-278.7734375" width="128" height="74"/>
+        <element name="CDInfrastructurePreset" positionX="257.9921875" positionY="-460.0859375" width="128" height="119"/>
+        <element name="CDInfrastructureServer" positionX="-7.15234375" positionY="-87.2109375" width="128" height="194"/>
+        <element name="CDProvider" positionX="-437.7734375" positionY="-218.8984375" width="128" height="89"/>
+    </elements>
+</model>

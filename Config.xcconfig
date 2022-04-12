@@ -33,4 +33,6 @@ CFG_GROUP_ID = com.algoritmico.Passepartout
 CFG_APPSTORE_ID = 1433648537
 CFG_COPYRIGHT = Copyright © 2022 Davide De Rosa. All rights reserved.
 
+PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin:/usr/local/go/bin
+
 #include? "Secret.xcconfig"

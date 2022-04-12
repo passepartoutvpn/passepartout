@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Convenience",
-        "repositoryURL": "https://github.com/keeshux/convenience",
-        "state": {
-          "branch": null,
-          "revision": "347105ec0ce27cd4255acf9875fd60ad1f213801",
-          "version": null
-        }
-      },
-      {
         "package": "DTFoundation",
         "repositoryURL": "https://github.com/Cocoanetics/DTFoundation.git",
         "state": {
@@ -20,12 +11,12 @@
         }
       },
       {
-        "package": "FontAwesome",
-        "repositoryURL": "https://github.com/thii/FontAwesome.swift",
+        "package": "GenericJSON",
+        "repositoryURL": "https://github.com/zoul/generic-json-swift",
         "state": {
           "branch": null,
-          "revision": "07883a32d49dfc7bdedbeea115067b53dfbeeb43",
-          "version": "1.9.1"
+          "revision": "a137894b2a217abe489cdf1ea287e6f7819b1051",
+          "version": "2.0.1"
         }
       },
       {
@@ -35,15 +26,6 @@
           "branch": null,
           "revision": "88888674d772ddcf19671159ed0022cb0bc37be2",
           "version": "1.0.6"
-        }
-      },
-      {
-        "package": "MBProgressHUD",
-        "repositoryURL": "https://github.com/jdg/MBProgressHUD",
-        "state": {
-          "branch": null,
-          "revision": "bca42b801100b2b3a4eda0ba8dd33d858c780b0d",
-          "version": "1.2.0"
         }
       },
       {
@@ -65,21 +47,12 @@
         }
       },
       {
-        "package": "TunnelKit",
-        "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
-        "state": {
-          "branch": null,
-          "revision": "88544e4877f00990ef699873f3505fff606ab64b",
-          "version": "4.1.0"
-        }
-      },
-      {
         "package": "WireGuardKit",
-        "repositoryURL": "https://git.zx2c4.com/wireguard-apple",
+        "repositoryURL": "https://github.com/passepartoutvpn/wireguard-apple",
         "state": {
           "branch": null,
-          "revision": "10da5cfdef362889b438cfbeff867a74e6d717fd",
-          "version": "1.0.15-26"
+          "revision": "d3b8f1ac6f3361d69bd3daf8aee3c43012c6ec0b",
+          "version": "1.0.16"
         }
       }
     ]

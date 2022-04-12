@@ -1,0 +1,15 @@
+17:52:58.836 DEBUG PassepartoutApp.initializeManagers():85 - Logging to: Optional(file:///Users/keeshux/Library/Developer/CoreSimulator/Devices/E70FACB1-8B61-4EF1-A728-3CA7832FE6A6/data/Containers/Shared/AppGroup/A6A53064-6DA4-4FB3-BCA6-0E4F06080EDB/Library/Caches/Debug.log)
+17:52:59.095 DEBUG ProductManager.listProducts():124 - In-app products: ["com.algoritmico.ios.Passepartout.features.trusted_networks", "com.algoritmico.ios.Passepartout.features.full_mac_version", "com.algoritmico.ios.Passepartout.features.full_multi_version", "com.algoritmico.ios.Passepartout.donations.Big", "com.algoritmico.ios.Passepartout.donations.Tiny", "com.algoritmico.ios.Passepartout.features.full_version", "com.algoritmico.ios.Passepartout.donations.Medium", "com.algoritmico.ios.Passepartout.features.all_providers", "com.algoritmico.ios.Passepartout.donations.Small", "com.algoritmico.ios.Passepartout.donations.Huge", "com.algoritmico.ios.Passepartout.features.siri", "com.algoritmico.ios.Passepartout.donations.Maxi"]
+17:52:59.123 ERROR ProductManager.reloadReceipt():255 - Could not parse App Store receipt!
+17:53:23.048 DEBUG ProfileManager.profile():155 - Loading profile and account with id CBE39E2C-0EB3-47C6-9709-83A68A620ED2...
+17:53:23.074 DEBUG ProfileManager.password():230 - Unable to load password from keychain: notFound
+17:53:23.230 DEBUG KeyedCache.put():61 - Cache MISS [servers]
+17:53:23.234 DEBUG KeyedCache.put():61 - Cache MISS [lastUpdate]
+17:53:25.055 DEBUG ProfileManager.persistProfile():263 - Writing profile CBE39E2C-0EB3-47C6-9709-83A68A620ED2 to persistent store...
+17:53:25.061 DEBUG ProfileManager.persistProfile():265 - 	Saving associated password to keychain
+17:53:25.889 DEBUG ProfileManager.profile():155 - Loading profile and account with id BF151D7D-4CD3-4403-8E4D-245CB9EF3CED...
+17:53:25.893 DEBUG ProfileManager.password():230 - Unable to load password from keychain: notFound
+17:53:25.923 DEBUG KeyedCache.put():61 - Cache MISS [servers]
+17:53:25.926 DEBUG KeyedCache.put():61 - Cache MISS [lastUpdate]
+17:53:27.144 DEBUG ProfileManager.persistProfile():263 - Writing profile BF151D7D-4CD3-4403-8E4D-245CB9EF3CED to persistent store...
+17:53:27.150 DEBUG ProfileManager.persistProfile():265 - 	Saving associated password to keychain

@@ -1,8 +1,0 @@
-strings:
-    inputs:
-        - Sources/PassepartoutCore/Resources/en.lproj/Core.strings
-    outputs:
-        - templateName: structured-swift4
-          output: Sources/PassepartoutCore/SwiftGen+Strings.swift
-          params:
-            publicAccess: true

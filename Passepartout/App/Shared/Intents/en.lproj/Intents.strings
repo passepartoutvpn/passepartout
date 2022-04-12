@@ -1,0 +1,45 @@
+"0jRWn5" = "Removes cellular from trusted networks";
+
+"IeGsEq" = "Disable VPN";
+"1ZRTCZ" = "Disable VPN";
+
+"66bZBE" = "With ${providerFullName} provider￼";
+
+"7eoAss" = "Removes current Wi-Fi from trusted networks";
+
+"9GpJt5" = "Adds cellular to trusted networks";
+
+"BKxs8X" = "Adds current Wi-Fi to trusted networks";
+
+"NWWgCl" = "Trust cellular network";
+"H4taev" = "Trust cellular network";
+
+"KjkCfU" = "Connects to a specific location of a provider profile";
+
+"LA99yM" = "Connect to VPN";
+
+"U6o81V" = "Connect to ${profileName}";
+
+"WnTPFg" = "Connect to ${serverName}";
+
+"eQ1yzr" = "Disables the VPN service";
+
+"eXXb2z" = "Connects to a host profile";
+
+"yesvFP" = "Enable VPN";
+"lQ6ziK" = "Enable VPN";
+
+"POyDPM" = "Trust current Wi-Fi";
+"m2E7SI" = "Trust current Wi-Fi";
+
+"qo3Szz" = "Connect to provider location";
+
+"0Wu9nb" = "Untrust current Wi-Fi";
+"rd1T8p" = "Untrust current Wi-Fi";
+
+"ggzKA2" = "Untrust cellular network";
+"wB1iYX" = "Untrust cellular network";
+
+"xY97Vu" = "Enables the VPN service with the profile currently in use";
+
+"NCoK9B" = "With profile in use";
