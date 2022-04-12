@@ -7,13 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- WireGuard support. [#201](https://github.com/passepartoutvpn/passepartout-apple/issues/201)
+- iCloud support. [#137](https://github.com/passepartoutvpn/passepartout-apple/issues/137)
+
 ### Changed
 
 - App completely rewritten in SwiftUI.
 
 ### Fixed
 
-- Files occasionally not selectable in browser.
+- Files occasionally not selectable in browser. [#215](https://github.com/passepartoutvpn/passepartout-apple/issues/215)
 
 ## 1.18.0 (2022-02-15)
 
