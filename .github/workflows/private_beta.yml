@@ -22,7 +22,7 @@ jobs:
       fail-fast: true
       matrix:
 #       name: ["iOS", "macOS"]
-       name: ["iOS"]
+        name: ["iOS"]
         include:
           - name: "iOS"
             platform: "ios"
