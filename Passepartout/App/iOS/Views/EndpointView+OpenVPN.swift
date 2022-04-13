@@ -141,7 +141,7 @@ extension EndpointView.OpenVPNView {
             themeTextPicker(
                 L10n.Global.Strings.protocol,
                 selection: $selectedSocketType,
-                values: allSocketTypes,
+                values: availableSocketTypes,
                 description: \.rawValue
             )
             themeTextPicker(
@@ -213,7 +213,7 @@ extension EndpointView.OpenVPNView {
             selectedPort = customEndpoint.proto.port
         } else {
             isAutomatic = true
-            guard let socketType = allSocketTypes.first else {
+            guard let socketType = availableSocketTypes.first else {
                 assertionFailure("No socket types, empty remotes?")
                 return
             }
@@ -234,20 +234,26 @@ extension EndpointView.OpenVPNView {
         selectedPort = port
     }
 
-    private var allSocketTypes: [SocketType] {
+    private var availableSocketTypes: [SocketType] {
         guard let remotes = builder.remotes else {
             return []
         }
-        var allTypes: [SocketType] = []
-        [SocketType.udp, SocketType.tcp].forEach { socketType in
+        let allTypes: [SocketType] = [
+            SocketType.udp,
+            SocketType.tcp,
+            SocketType.udp4,
+            SocketType.tcp4
+        ]
+        var availableTypes: [SocketType] = []
+        allTypes.forEach { socketType in
             guard remotes.contains(where: {
                 $0.proto.socketType == socketType
             }) else {
                 return
             }
-            allTypes.append(socketType)
+            availableTypes.append(socketType)
         }
-        return allTypes
+        return availableTypes
     }
 
     private func allPorts(forSocketType socketType: SocketType) -> [UInt16] {
