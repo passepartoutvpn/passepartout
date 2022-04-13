@@ -1,13 +1,9 @@
 ### Added
 
-- Handle `--keepalive` option.
+- WireGuard support.
+- iCloud support.
 
 ### Changed
 
-- Release app in the open via GitHub Actions.
-
-### Fixed
-
-- Last update was not refreshed on "Refresh infrastructure".
-- Trim whitespaces in text fields.
+- App completely rewritten in SwiftUI.
 

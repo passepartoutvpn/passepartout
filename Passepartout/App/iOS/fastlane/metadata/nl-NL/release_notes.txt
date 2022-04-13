@@ -1,12 +1,13 @@
 ### Added
 
-- Handle `--keepalive` option.
+- WireGuard support.
+- iCloud support.
 
 ### Changed
 
-- Release app in the open via GitHub Actions.
+- App completely rewritten in SwiftUI.
 
 ### Fixed
 
-- Trim whitespaces in text fields.
+- Files occasionally not selectable in browser.
 
