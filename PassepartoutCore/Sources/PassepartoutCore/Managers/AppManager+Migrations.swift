@@ -186,7 +186,7 @@ extension AppManager {
             remotes.append("\(hostname):\($0)")
         }
         ovpn["remotes"] = remotes
-        ovpn["authUserPass"] = authUserPass.contains(header.id.uuidString)
+        ovpn["authUserPass"] = authUserPass.contains(oldUUIDString)
         let cfg = try JSON(ovpn).decode(OpenVPN.Configuration.self)
         
         // keychain
