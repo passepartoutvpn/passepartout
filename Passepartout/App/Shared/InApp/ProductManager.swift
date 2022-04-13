@@ -58,8 +58,6 @@ class ProductManager: NSObject, ObservableObject {
         }
     }
     
-    static let didReloadReceipt = Notification.Name("ProductManagerDidReloadReceipt")
-    
     let cfg: Configuration
     
     @Published private(set) var isRefreshingProducts = false
@@ -79,8 +77,6 @@ class ProductManager: NSObject, ObservableObject {
     private var cancelledPurchases: Set<LocalProduct>
     
     private var refreshRequest: SKReceiptRefreshRequest?
-    
-    private var restoreCompletionHandler: ((Error?) -> Void)?
     
     init(_ cfg: Configuration) {
         self.cfg = cfg
@@ -155,19 +151,25 @@ class ProductManager: NSObject, ObservableObject {
     }
     
     func purchase(_ product: SKProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
-        inApp.purchase(product: product) {
-            if case .success = $0 {
+        inApp.purchase(product: product) { result in
+            if case .success = result {
                 self.reloadReceipt()
             }
-            completionHandler($0)
+            DispatchQueue.main.async {
+                completionHandler(result)
+            }
         }
     }
     
     func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
-        restoreCompletionHandler = completionHandler
-        refreshRequest = SKReceiptRefreshRequest()
-        refreshRequest?.delegate = self
-        refreshRequest?.start()
+        inApp.restorePurchases { (finished, _, error) in
+            guard finished else {
+                return
+            }
+            DispatchQueue.main.async {
+                completionHandler(error)
+            }
+        }
     }
 
     // MARK: In-app eligibility
@@ -263,10 +265,8 @@ class ProductManager: NSObject, ObservableObject {
             }
         }
         pp_log.info("Purchased features: \(purchasedFeatures)")
-        objectWillChange.send()
-        
         if andNotify {
-            NotificationCenter.default.post(name: ProductManager.didReloadReceipt, object: nil)
+            objectWillChange.send()
         }
     }
 }
@@ -275,30 +275,6 @@ extension ProductManager: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         DispatchQueue.main.async { [weak self] in
             self?.reloadReceipt()
-        }
-    }
-}
-
-extension ProductManager: SKRequestDelegate {
-    func requestDidFinish(_ request: SKRequest) {
-        DispatchQueue.main.async { [weak self] in
-            self?.reloadReceipt()
-        }
-        inApp.restorePurchases { [weak self] (finished, _, error) in
-            guard finished else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.restoreCompletionHandler?(error)
-                self?.restoreCompletionHandler = nil
-            }
-        }
-    }
-    
-    func request(_ request: SKRequest, didFailWithError error: Error) {
-        DispatchQueue.main.async { [weak self] in
-            self?.restoreCompletionHandler?(error)
-            self?.restoreCompletionHandler = nil
         }
     }
 }
