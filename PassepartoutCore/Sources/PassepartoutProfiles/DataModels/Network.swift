@@ -106,9 +106,17 @@ extension Network {
 
 extension Network {
     public struct ProxySettings: Codable, Equatable, NetworkChoiceRepresentable, ProxySettingsProviding {
+        public enum ConfigurationType: String, Codable {
+            case manual
+            
+            case pac
+            
+            case disabled
+        }
+        
         public var choice: Network.Choice
         
-        public var isProxyEnabled = true
+        public var configurationType: ConfigurationType = .manual
 
         public var proxyAddress: String?
         

@@ -113,17 +113,27 @@ extension OpenVPN.ConfigurationBuilder {
             break
 
         case .manual:
-            isProxyEnabled = settings.isProxyEnabled
+            isProxyEnabled = settings.configurationType != .disabled
 
-            if settings.isProxyEnabled {
+            switch settings.configurationType {
+            case .manual:
                 if let proxyServer = settings.proxyServer {
                     httpProxy = proxyServer
                     httpsProxy = proxyServer
-                } else if let pac = settings.proxyAutoConfigurationURL {
+                    proxyAutoConfigurationURL = nil
+                }
+                
+            case .pac:
+                if let pac = settings.proxyAutoConfigurationURL {
+                    httpProxy = nil
+                    httpsProxy = nil
                     proxyAutoConfigurationURL = pac
                 }
-                proxyBypassDomains = settings.proxyBypassDomains.filter { !$0.isEmpty }
+                
+            case .disabled:
+                break
             }
+            proxyBypassDomains = settings.proxyBypassDomains.filter { !$0.isEmpty }
         }
     }
     

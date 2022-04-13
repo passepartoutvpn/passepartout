@@ -39,6 +39,14 @@ extension Network.DNSSettings {
     }
 }
 
+extension Network.ProxySettings {
+    public static let availableConfigurationTypes: [ConfigurationType] = [
+        .manual,
+        .pac,
+        .disabled
+    ]
+}
+
 extension Network.MTUSettings {
     public static let availableBytes: [Int] = [0, 1500, 1400, 1300, 1200]
 }

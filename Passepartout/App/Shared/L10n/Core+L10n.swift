@@ -104,3 +104,18 @@ extension Network.Choice {
         }
     }
 }
+
+extension Network.ProxySettings.ConfigurationType {
+    var localizedDescription: String {
+        switch self {
+        case .manual:
+            return L10n.Global.Strings.manual
+            
+        case .pac:
+            return Unlocalized.Network.proxyAutoConfiguration
+            
+        case .disabled:
+            return L10n.Global.Strings.disabled
+        }
+    }
+}

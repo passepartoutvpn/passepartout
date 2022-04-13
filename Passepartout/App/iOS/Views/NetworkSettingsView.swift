@@ -215,9 +215,16 @@ extension NetworkSettingsView {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticProxy.animation())
 
             if !settings.isAutomaticProxy {
-                Toggle(L10n.Global.Strings.enabled, isOn: $settings.proxy.isProxyEnabled.animation())
-                
-                if settings.proxy.isProxyEnabled {
+                themeTextPicker(
+                    // FIXME: l10n, refactor string id to "global.strings.configuration"
+                    L10n.Profile.Sections.Configuration.header,
+                    selection: $settings.proxy.configurationType,
+                    values: Network.ProxySettings.availableConfigurationTypes,
+                    description: \.localizedDescription
+                )
+
+                switch settings.proxy.configurationType {
+                case .manual:
                     TextField(Unlocalized.Placeholders.address, text: $settings.proxy.proxyAddress ?? "")
                         .themeIPAddress(settings.proxy.proxyAddress)
                         .withLeadingText(L10n.Global.Strings.address)
@@ -226,13 +233,16 @@ extension NetworkSettingsView {
                         .themeSocketPort()
                         .withLeadingText(L10n.Global.Strings.port)
 
+                case .pac:
                     TextField(Unlocalized.Placeholders.pacURL, text: $settings.proxy.proxyAutoConfigurationURL.toString())
                         .themeURL(settings.proxy.proxyAutoConfigurationURL?.absoluteString)
-                        .withLeadingText(Unlocalized.Network.proxyAutoConfiguration)
+
+                case .disabled:
+                    EmptyView()
                 }
             }
         }
-        if !settings.isAutomaticProxy && settings.proxy.isProxyEnabled {
+        if !settings.isAutomaticProxy && settings.proxy.configurationType != .disabled {
             proxyManualBypassDomains
         }
     }
