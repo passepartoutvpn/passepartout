@@ -65,9 +65,9 @@ public protocol DNSSettingsProviding {
 public protocol ProxySettingsProviding {
     var proxyServer: Proxy? { get }
     
-    var proxyAutoConfigurationURL: URL? { get }
-    
     var proxyBypassDomains: [String] { get }
+
+    var proxyAutoConfigurationURL: URL? { get }
 }
 
 public protocol MTUSettingsProviding {
