@@ -360,8 +360,10 @@ extension ProfileManager {
                 renamedProfiles.append(uniqueProfile)
             }
         }
-        strategy.saveProfiles(renamedProfiles)
-        pp_log.debug("Duplicates successfully renamed!")
+        if !renamedProfiles.isEmpty {
+            strategy.saveProfiles(renamedProfiles)
+            pp_log.debug("Duplicates successfully renamed!")
+        }
     }
 }
 
