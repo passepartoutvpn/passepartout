@@ -122,10 +122,10 @@ extension Network {
         
         public var proxyPort: UInt16?
         
-        public var proxyAutoConfigurationURL: URL?
-        
         public var proxyBypassDomains: [String] = []
 
+        public var proxyAutoConfigurationURL: URL?
+        
         public var proxyServer: Proxy? {
             guard let address = proxyAddress, let port = proxyPort, !address.isEmpty, port > 0 else {
                 return nil

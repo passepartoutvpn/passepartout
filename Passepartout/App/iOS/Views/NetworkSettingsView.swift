@@ -242,7 +242,7 @@ extension NetworkSettingsView {
                 }
             }
         }
-        if !settings.isAutomaticProxy && settings.proxy.configurationType != .disabled {
+        if !settings.isAutomaticProxy && settings.proxy.configurationType == .manual {
             proxyManualBypassDomains
         }
     }
