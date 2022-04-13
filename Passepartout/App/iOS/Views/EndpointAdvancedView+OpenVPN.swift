@@ -66,14 +66,20 @@ extension EndpointAdvancedView.OpenVPNView {
             Section(
                 header: Text(Unlocalized.Network.ipv4)
             ) {
-                Text(L10n.Global.Strings.address)
-                    .withTrailingText(builder.ipv4.localizedAddress, copyOnTap: true)
-                Text(L10n.NetworkSettings.Gateway.title)
-                    .withTrailingText(builder.ipv4.localizedDefaultGateway, copyOnTap: true)
+                themeLongContentLinkDefault(
+                    L10n.Global.Strings.address,
+                    content: .constant(builder.ipv4.localizedAddress)
+                )
+                themeLongContentLinkDefault(
+                    L10n.NetworkSettings.Gateway.title,
+                    content: .constant(builder.ipv4.localizedDefaultGateway)
+                )
             
                 ForEach(cfg.routes, id: \.self) { route in
-                    Text(L10n.Endpoint.Advanced.Openvpn.Items.Route.caption)
-                        .withTrailingText(route.localizedDescription, copyOnTap: true)
+                    themeLongContentLinkDefault(
+                        L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
+                        content: .constant(route.localizedDescription)
+                    )
                 }
             }
         }
@@ -84,15 +90,20 @@ extension EndpointAdvancedView.OpenVPNView {
             Section(
                 header: Text(Unlocalized.Network.ipv6)
             ) {
-                Text(L10n.Global.Strings.address)
-                    .withTrailingText(builder.ipv6.localizedAddress, copyOnTap: true)
-
-                Text(L10n.NetworkSettings.Gateway.title)
-                    .withTrailingText(builder.ipv6.localizedDefaultGateway, copyOnTap: true)
+                themeLongContentLinkDefault(
+                    L10n.Global.Strings.address,
+                    content: .constant(builder.ipv6.localizedAddress)
+                )
+                themeLongContentLinkDefault(
+                    L10n.NetworkSettings.Gateway.title,
+                    content: .constant(builder.ipv6.localizedDefaultGateway)
+                )
 
                 ForEach(cfg.routes, id: \.self) { route in
-                    Text(L10n.Endpoint.Advanced.Openvpn.Items.Route.caption)
-                        .withTrailingText(route.localizedDescription, copyOnTap: true)
+                    themeLongContentLinkDefault(
+                        L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
+                        content: .constant(route.localizedDescription)
+                    )
                 }
             }
         }
@@ -185,11 +196,11 @@ extension EndpointAdvancedView.OpenVPNView {
             ) {
                 ForEach(settings.servers, id: \.self) {
                     Text(L10n.Global.Strings.address)
-                        .withTrailingText($0)
+                        .withTrailingText($0, copyOnTap: true)
                 }
                 ForEach(settings.domains, id: \.self) {
                     Text(L10n.Global.Strings.domain)
-                        .withTrailingText($0)
+                        .withTrailingText($0, copyOnTap: true)
                 }
             }
         }
@@ -202,15 +213,15 @@ extension EndpointAdvancedView.OpenVPNView {
             ) {
                 settings.proxy.map {
                     Text(L10n.Global.Strings.address)
-                        .withTrailingText($0.rawValue)
+                        .withTrailingText($0.rawValue, copyOnTap: true)
                 }
                 settings.pac.map {
                     Text(Unlocalized.Network.proxyAutoConfiguration)
-                        .withTrailingText($0.absoluteString)
+                        .withTrailingText($0.absoluteString, copyOnTap: true)
                 }
                 ForEach(settings.bypass, id: \.self) {
                     Text(L10n.NetworkSettings.Items.ProxyBypass.caption)
-                        .withTrailingText($0)
+                        .withTrailingText($0, copyOnTap: true)
                 }
             }
         }

@@ -320,7 +320,14 @@ extension View {
             .insetGrouped
         }
     }
-    
+
+    func themeLongContentLinkDefault(_ title: String, content: Binding<String>) -> some View {
+        LongContentLink(title, content: content) {
+            Text($0)
+                .foregroundColor(themeSecondaryColor)
+        }
+    }
+
     func themeLongContentLink(_ title: String, content: Binding<String>, withPreview preview: String? = nil) -> some View {
         LongContentLink(title, content: content, preview: preview) {
             Text(preview != nil ? $0 : "")
