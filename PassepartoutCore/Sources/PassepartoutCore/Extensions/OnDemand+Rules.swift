@@ -27,31 +27,33 @@ import Foundation
 import NetworkExtension
 
 extension Profile.OnDemand {
-    var rules: [NEOnDemandRule] {
+    func rules(withCustomRules: Bool) -> [NEOnDemandRule] {
 
         // TODO: on-demand, drop when "trusted networks" -> "on-demand"
         assert(policy == .excluding)
         
         var rules: [NEOnDemandRule] = []
-        #if os(iOS)
-        if withMobileNetwork {
-            let rule = policyRule
-            rule.interfaceTypeMatch = .cellular
-            rules.append(rule)
-        }
-        #else
-        if withEthernetNetwork {
-            let rule = policyRule
-            rule.interfaceTypeMatch = .ethernet
-            rules.append(rule)
-        }
-        #endif
-        let SSIDs = Array(withSSIDs.filter { $1 }.keys)
-        if !SSIDs.isEmpty {
-            let rule = policyRule
-            rule.interfaceTypeMatch = .wiFi
-            rule.ssidMatch = SSIDs
-            rules.append(rule)
+        if withCustomRules {
+            #if os(iOS)
+            if withMobileNetwork {
+                let rule = policyRule
+                rule.interfaceTypeMatch = .cellular
+                rules.append(rule)
+            }
+            #else
+            if withEthernetNetwork {
+                let rule = policyRule
+                rule.interfaceTypeMatch = .ethernet
+                rules.append(rule)
+            }
+            #endif
+            let SSIDs = Array(withSSIDs.filter { $1 }.keys)
+            if !SSIDs.isEmpty {
+                let rule = policyRule
+                rule.interfaceTypeMatch = .wiFi
+                rule.ssidMatch = SSIDs
+                rules.append(rule)
+            }
         }
         let connection = NEOnDemandRuleConnect()
         connection.interfaceTypeMatch = .any

@@ -134,8 +134,8 @@ class AppContext {
         profileManager.activeProfileId = appManager.activeProfileId
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.rateLimitMilliseconds = Constants.RateLimit.vpnManager
-        vpnManager.isOnDemandSupported = {
-            self.isEligibleForOnDemand()
+        vpnManager.isOnDemandRulesSupported = {
+            self.isEligibleForOnDemandRules()
         }
 
         // app
@@ -164,7 +164,7 @@ class AppContext {
     }
     
     // eligibility: reset on-demand rules if no trusted networks
-    private func isEligibleForOnDemand() -> Bool {
+    private func isEligibleForOnDemandRules() -> Bool {
         guard productManager.isEligible(forFeature: .trustedNetworks) else {
             pp_log.warning("Ignore on-demand rules, not eligible for trusted networks")
             return false

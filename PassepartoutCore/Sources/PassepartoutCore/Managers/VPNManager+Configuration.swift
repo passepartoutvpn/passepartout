@@ -53,7 +53,8 @@ extension VPNManager {
                 profile,
                 appGroup: profileManager.appGroup,
                 preferences: appManager.preferences,
-                passwordReference: profileManager.passwordReference(forProfile: profile)
+                passwordReference: profileManager.passwordReference(forProfile: profile),
+                withCustomRules: isOnDemandRulesSupported()
             )
 
             var cfg: VPNConfiguration
@@ -84,11 +85,6 @@ extension VPNManager {
                 cfg = try settings.vpnConfiguration(parameters)
             }
             
-            // suppress rules if not supported
-            if !isOnDemandSupported() {
-                cfg.neExtra?.onDemandRules = []
-            }
-
             return cfg
         } catch {
             pp_log.error("Unable to build VPNConfiguration: \(error)")
