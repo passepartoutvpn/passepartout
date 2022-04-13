@@ -164,7 +164,10 @@ extension OrganizerView {
 
         case .presentPaywallShortcuts:
             NavigationView {
-                PaywallView(feature: .siriShortcuts)
+                PaywallView(
+                    modalType: $modalType,
+                    feature: .siriShortcuts
+                )
             }.themeGlobal()
         }
     }

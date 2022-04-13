@@ -53,9 +53,9 @@ extension PaywallView {
         
         @Environment(\.scenePhase) private var scenePhase
 
-        @Environment(\.presentationMode) private var presentationMode
-        
         @ObservedObject private var productManager: ProductManager
+
+        @Binding private var isPresented: Bool
         
         private let feature: LocalProduct?
         
@@ -63,8 +63,9 @@ extension PaywallView {
         
         @State private var purchaseState: PurchaseState?
 
-        init(feature: LocalProduct? = nil) {
+        init(isPresented: Binding<Bool>, feature: LocalProduct? = nil) {
             productManager = .shared
+            _isPresented = isPresented
             self.feature = feature
         }
         
@@ -149,7 +150,7 @@ extension PaywallView.PurchaseView {
             case .success(let result):
                 switch result {
                 case .done:
-                    presentationMode.wrappedValue.dismiss()
+                    isPresented = false
                     
                 case .cancelled:
                     break
@@ -172,7 +173,7 @@ extension PaywallView.PurchaseView {
                 alertType = .restoreFailed(error)
                 return
             }
-            presentationMode.wrappedValue.dismiss()
+            isPresented = false
             purchaseState = nil
         }
     }

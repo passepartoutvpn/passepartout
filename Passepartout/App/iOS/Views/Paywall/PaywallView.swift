@@ -28,10 +28,24 @@ import SwiftUI
 struct PaywallView: View {
     @ObservedObject private var productManager: ProductManager
     
-    private let feature: LocalProduct?
+    @Binding private var isPresented: Bool
     
-    init(feature: LocalProduct? = nil) {
+    private let feature: LocalProduct?
+
+    init<MT>(modalType: Binding<MT?>, feature: LocalProduct? = nil) {
+        let isPresented = Binding<Bool> {
+            modalType.wrappedValue != nil
+        } set: {
+            if !$0 {
+                modalType.wrappedValue = nil
+            }
+        }
+        self.init(isPresented: isPresented, feature: feature)
+    }
+
+    init(isPresented: Binding<Bool>, feature: LocalProduct? = nil) {
         productManager = .shared
+        _isPresented = isPresented
         self.feature = feature
     }
 
@@ -40,7 +54,10 @@ struct PaywallView: View {
             if productManager.cfg.appType == .beta {
                 BetaView()
             } else {
-                PurchaseView(feature: feature)
+                PurchaseView(
+                    isPresented: $isPresented,
+                    feature: feature
+                )
             }
         }.themeSecondaryView()
     }

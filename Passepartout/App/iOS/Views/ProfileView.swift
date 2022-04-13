@@ -126,6 +126,7 @@ struct ProfileView: View {
         case .paywallTrustedNetworks:
             NavigationView {
                 PaywallView(
+                    modalType: $modalType,
                     feature: .trustedNetworks
                 )
             }.themeGlobal()

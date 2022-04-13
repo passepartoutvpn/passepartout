@@ -84,7 +84,7 @@ struct AddProviderView: View {
         .navigationTitle(L10n.AddProfile.Shared.title)
         .sheet(isPresented: $viewModel.isPaywallPresented) {
             NavigationView {
-                PaywallView()
+                PaywallView(isPresented: $viewModel.isPaywallPresented)
             }.themeGlobal()
         }.onAppear {
             refreshProviders()
