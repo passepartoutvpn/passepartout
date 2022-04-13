@@ -33,9 +33,11 @@ extension Profile.WireGuardSettings: VPNConfigurationProviding {
         var customBuilder = configuration.builder()
 
         // network settings
-        customBuilder.applyGateway(from: parameters.networkSettings.gateway)
-        customBuilder.applyDNS(from: parameters.networkSettings.dns)
-        customBuilder.applyMTU(from: parameters.networkSettings.mtu)
+        if parameters.withNetworkSettings {
+            customBuilder.applyGateway(from: parameters.networkSettings.gateway)
+            customBuilder.applyDNS(from: parameters.networkSettings.dns)
+            customBuilder.applyMTU(from: parameters.networkSettings.mtu)
+        }
 
         let customConfiguration = customBuilder.build()
 

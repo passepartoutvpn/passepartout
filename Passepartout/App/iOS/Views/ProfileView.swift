@@ -31,6 +31,8 @@ struct ProfileView: View {
     enum ModalType: Int, Identifiable {
         case rename
         
+        case paywallNetworkSettings
+        
         case paywallTrustedNetworks
 
         var id: Int {
@@ -123,6 +125,14 @@ struct ProfileView: View {
                 RenameView(currentProfile: profileManager.currentProfile)
             }.themeGlobal()
             
+        case .paywallNetworkSettings:
+            NavigationView {
+                PaywallView(
+                    modalType: $modalType,
+                    feature: .networkSettings
+                )
+            }.themeGlobal()
+
         case .paywallTrustedNetworks:
             NavigationView {
                 PaywallView(

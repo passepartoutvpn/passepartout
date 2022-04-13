@@ -49,12 +49,16 @@ class ProductManager: NSObject, ObservableObject {
         
         let lastFullVersionBuild: (Int, LocalProduct)
         
+        let lastNetworkSettingsBuild: Int
+        
         init(
             appType: AppType,
-            lastFullVersionBuild: (Int, LocalProduct)
+            lastFullVersionBuild: (Int, LocalProduct),
+            lastNetworkSettingsBuild: Int
         ) {
             self.appType = appType
             self.lastFullVersionBuild = lastFullVersionBuild
+            self.lastNetworkSettingsBuild = lastNetworkSettingsBuild
         }
     }
     
@@ -193,6 +197,11 @@ class ProductManager: NSObject, ObservableObject {
     }
 
     func isEligible(forFeature feature: LocalProduct) -> Bool {
+        if let purchasedAppBuild = purchasedAppBuild {
+            if feature == .networkSettings && purchasedAppBuild <= cfg.lastNetworkSettingsBuild {
+                return true
+            }
+        }
         #if os(iOS)
         return isFullVersion() || purchasedFeatures.contains(feature)
         #else

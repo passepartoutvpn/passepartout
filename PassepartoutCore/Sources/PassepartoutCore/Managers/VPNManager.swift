@@ -41,6 +41,8 @@ public class VPNManager: ObservableObject, RateLimited {
 
     private let strategy: VPNManagerStrategy
     
+    public var isNetworkSettingsSupported: () -> Bool
+    
     public var isOnDemandRulesSupported: () -> Bool
 
     // MARK: State
@@ -72,6 +74,7 @@ public class VPNManager: ObservableObject, RateLimited {
         self.profileManager = profileManager
         self.providerManager = providerManager
         self.strategy = strategy
+        isNetworkSettingsSupported = { true }
         isOnDemandRulesSupported = { true }
 
         currentState = ObservableState()

@@ -54,6 +54,7 @@ extension VPNManager {
                 appGroup: profileManager.appGroup,
                 preferences: appManager.preferences,
                 passwordReference: profileManager.passwordReference(forProfile: profile),
+                withNetworkSettings: isNetworkSettingsSupported(),
                 withCustomRules: isOnDemandRulesSupported()
             )
 

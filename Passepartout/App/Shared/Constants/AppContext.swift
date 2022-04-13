@@ -114,7 +114,8 @@ class AppContext {
 
         productManager = ProductManager(.init(
             appType: Constants.InApp.appType,
-            lastFullVersionBuild: Constants.InApp.lastFullVersionBuild
+            lastFullVersionBuild: Constants.InApp.lastFullVersionBuild,
+            lastNetworkSettingsBuild: Constants.InApp.lastNetworkSettingsBuild
         ))
         intentsManager = IntentsManager()
         reviewer = Reviewer()
@@ -158,6 +159,15 @@ class AppContext {
         }
         guard productManager.isEligible(forProvider: providerName) else {
 //            pp_log.debug("Not eligible for provider \(metadata.name)")
+            return false
+        }
+        return true
+    }
+    
+    // eligibility: ignore network settings if ineligible
+    private func isEligibleForNetworkSettings() -> Bool {
+        guard productManager.isEligible(forFeature: .networkSettings) else {
+            pp_log.warning("Ignore network settings, not eligible")
             return false
         }
         return true

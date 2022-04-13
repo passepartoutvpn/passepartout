@@ -47,6 +47,8 @@ struct VPNConfigurationParameters {
 
     let passwordReference: Data?
     
+    let withNetworkSettings: Bool
+    
     let onDemandRules: [NEOnDemandRule]
 
     init(
@@ -54,6 +56,7 @@ struct VPNConfigurationParameters {
         appGroup: String,
         preferences: AppPreferences,
         passwordReference: Data?,
+        withNetworkSettings: Bool,
         withCustomRules: Bool
     ) {
         title = profile.header.name
@@ -62,6 +65,7 @@ struct VPNConfigurationParameters {
         networkSettings = profile.networkSettings
         username = !profile.account.username.isEmpty ? profile.account.username : nil
         self.passwordReference = passwordReference
+        self.withNetworkSettings = withNetworkSettings
         onDemandRules = profile.onDemand.rules(withCustomRules: withCustomRules)
     }
 }

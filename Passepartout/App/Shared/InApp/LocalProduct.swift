@@ -68,6 +68,8 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
     // MARK: Features
     
     static let allProviders = LocalProduct(featureId: "all_providers")
+    
+    static let networkSettings = LocalProduct(featureId: "network_settings")
 
     static let trustedNetworks = LocalProduct(featureId: "trusted_networks")
 
@@ -81,6 +83,7 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
 
     static let allFeatures: [LocalProduct] = [
         .allProviders,
+        .networkSettings,
         .trustedNetworks,
         .siriShortcuts,
         .fullVersion_iOS,

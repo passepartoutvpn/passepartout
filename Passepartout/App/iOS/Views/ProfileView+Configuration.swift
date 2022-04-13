@@ -34,6 +34,10 @@ extension ProfileView {
 
         @Binding private var modalType: ModalType?
         
+        private var isEligibleForNetworkSettings: Bool {
+            productManager.isEligible(forFeature: .networkSettings)
+        }
+        
         private var isEligibleForTrustedNetworks: Bool {
             productManager.isEligible(forFeature: .trustedNetworks)
         }
@@ -75,10 +79,20 @@ extension ProfileView {
                         Label(L10n.Account.title, systemImage: themeAccountImage)
                     }
                 }
-                NavigationLink {
-                    NetworkSettingsView(currentProfile: currentProfile)
-                } label: {
-                    Label(L10n.NetworkSettings.title, systemImage: themeNetworkSettingsImage)
+
+                // eligibility: enter network settings or present paywall
+                if isEligibleForNetworkSettings {
+                    NavigationLink {
+                        NetworkSettingsView(currentProfile: currentProfile)
+                    } label: {
+                        networkSettingsRow
+                    }
+                } else {
+                    Button {
+                        modalType = .paywallNetworkSettings
+                    } label: {
+                        networkSettingsRow
+                    }
                 }
 
                 // eligibility: enter trusted networks or present paywall
@@ -96,6 +110,10 @@ extension ProfileView {
                     }
                 }
             }
+        }
+        
+        private var networkSettingsRow: some View {
+            Label(L10n.NetworkSettings.title, systemImage: themeNetworkSettingsImage)
         }
 
         private var onDemandRow: some View {

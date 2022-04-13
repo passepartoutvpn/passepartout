@@ -75,6 +75,8 @@ extension Constants {
         #else
         static let lastFullVersionBuild: (Int, LocalProduct) = (0, .fullVersion_macOS)
         #endif
+        
+        static let lastNetworkSettingsBuild = 2999
 
         private static var isBeta: Bool {
             #if os(iOS)
