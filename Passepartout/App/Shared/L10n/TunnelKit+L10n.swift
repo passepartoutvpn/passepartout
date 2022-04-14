@@ -48,21 +48,6 @@ extension VPNStatus {
     }
 }
 
-extension DNSProtocol {
-    var localizedDescription: String {
-        switch self {
-        case .plain:
-            return Unlocalized.DNS.plain
-            
-        case .https:
-            return Unlocalized.Network.https
-            
-        case .tls:
-            return Unlocalized.Network.tls
-        }
-    }
-}
-
 extension DataCount {
     var localizedDescription: String {
         let down = received.descriptionAsDataUnit

@@ -58,8 +58,6 @@ extension VPNManager {
                 withCustomRules: isOnDemandRulesSupported()
             )
 
-            var cfg: VPNConfiguration
-            
             switch profile.currentVPNProtocol {
             case .openVPN:
                 let settings: Profile.OpenVPNSettings
@@ -71,7 +69,7 @@ extension VPNManager {
                     }
                     settings = hostSettings
                 }
-                cfg = try settings.vpnConfiguration(parameters)
+                return try settings.vpnConfiguration(parameters)
 
             case .wireGuard:
                 let settings: Profile.WireGuardSettings
@@ -83,10 +81,8 @@ extension VPNManager {
                     }
                     settings = hostSettings
                 }
-                cfg = try settings.vpnConfiguration(parameters)
+                return try settings.vpnConfiguration(parameters)
             }
-            
-            return cfg
         } catch {
             pp_log.error("Unable to build VPNConfiguration: \(error)")
 

@@ -43,18 +43,18 @@ extension Profile.OpenVPNSettings: GatewaySettingsProviding {
 extension Profile.OpenVPNSettings: DNSSettingsProviding {
 
     // not a dhcp-option
-    public var dnsProtocol: DNSProtocol {
-        return .plain
+    public var dnsProtocol: DNSProtocol? {
+        return (configuration.isDNSEnabled ?? true) ? .plain : nil
     }
     
     // dhcp-option DNS
-    public var dnsServers: [String] {
-        return configuration.dnsServers ?? []
+    public var dnsServers: [String]? {
+        return configuration.dnsServers
     }
     
     // dhcp-option DOMAIN/DOMAIN-SEARCH
-    public var dnsSearchDomains: [String] {
-        return configuration.searchDomains ?? []
+    public var dnsSearchDomains: [String]? {
+        return configuration.searchDomains
     }
     
     // not a dhcp-option
@@ -75,14 +75,14 @@ extension Profile.OpenVPNSettings: ProxySettingsProviding {
         return configuration.httpsProxy ?? configuration.httpProxy
     }
     
+    // dhcp-option PROXY_BYPASS
+    public var proxyBypassDomains: [String]? {
+        return configuration.proxyBypassDomains
+    }
+
     // dhcp-option PROXY_AUTO_CONFIG_URL
     public var proxyAutoConfigurationURL: URL? {
         return configuration.proxyAutoConfigurationURL
-    }
-    
-    // dhcp-option PROXY_BYPASS
-    public var proxyBypassDomains: [String] {
-        return configuration.proxyBypassDomains ?? []
     }
 }
 

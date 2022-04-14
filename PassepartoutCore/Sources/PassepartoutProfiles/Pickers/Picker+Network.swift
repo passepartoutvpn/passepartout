@@ -28,13 +28,13 @@ import TunnelKitCore
 import PassepartoutProviders
 
 extension Network.DNSSettings {
-    public static func availableProtocols(forVPNProtocol vpnProtocol: VPNProtocolType) -> [DNSProtocol] {
+    public static func availableConfigurationTypes(forVPNProtocol vpnProtocol: VPNProtocolType) -> [ConfigurationType] {
         switch vpnProtocol {
         case .openVPN:
-            return [.plain, .https, .tls]
+            return [.plain, .https, .tls, .disabled]
 
         case .wireGuard:
-            return [.plain]
+            return [.plain, .disabled]
         }
     }
 }

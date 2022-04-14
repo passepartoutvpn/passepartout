@@ -51,11 +51,11 @@ extension Profile.OnDemand: StrippableContent {
 extension Profile.NetworkSettings: StrippableContent {
     public var stripped: Self {
         var copy = self
-        copy.dns.dnsServers = copy.dns.dnsServers.compactMap(\.strippedNotEmpty)
-        copy.dns.dnsSearchDomains = copy.dns.dnsSearchDomains.compactMap(\.strippedNotEmpty)
+        copy.dns.dnsServers = copy.dns.dnsServers?.compactMap(\.strippedNotEmpty)
+        copy.dns.dnsSearchDomains = copy.dns.dnsSearchDomains?.compactMap(\.strippedNotEmpty)
         copy.dns.dnsTLSServerName = copy.dns.dnsTLSServerName?.strippedNotEmpty
         copy.proxy.proxyAddress = copy.proxy.proxyAddress?.strippedNotEmpty
-        copy.proxy.proxyBypassDomains = copy.proxy.proxyBypassDomains.compactMap(\.strippedNotEmpty)
+        copy.proxy.proxyBypassDomains = copy.proxy.proxyBypassDomains?.compactMap(\.strippedNotEmpty)
         return copy
     }
 }

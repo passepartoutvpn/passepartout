@@ -29,9 +29,11 @@ import NetworkExtension
 extension Profile.OnDemand {
     func rules(withCustomRules: Bool) -> [NEOnDemandRule] {
 
-        // TODO: on-demand, drop when "trusted networks" -> "on-demand"
+        // TODO: on-demand, drop hardcoding when "trusted networks" -> "on-demand"
+//        isEnabled = true
+//        policy = .excluding
         assert(policy == .excluding)
-        
+
         var rules: [NEOnDemandRule] = []
         if withCustomRules {
             #if os(iOS)

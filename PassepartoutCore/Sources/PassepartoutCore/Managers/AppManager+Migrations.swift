@@ -288,7 +288,7 @@ extension AppManager {
 
             // dns
             (manual["dnsProtocol"] as? String).map {
-                settings.dns.dnsProtocol = DNSProtocol(rawValue: $0) ?? .plain
+                settings.dns.configurationType = .init(rawValue: $0) ?? .plain
             }
             settings.dns.dnsServers = manual["dnsServers"] as? [String] ?? []
             settings.dns.dnsSearchDomains = manual["dnsSearchDomains"] as? [String] ?? []

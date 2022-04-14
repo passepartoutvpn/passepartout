@@ -97,13 +97,27 @@ extension OpenVPN.ConfigurationBuilder {
             break
 
         case .manual:
-            isDNSEnabled = settings.isDNSEnabled
+            let isDNSEnabled = settings.configurationType != .disabled
+            self.isDNSEnabled = isDNSEnabled
 
-            if settings.isDNSEnabled {
-                dnsProtocol = settings.dnsProtocol
-                dnsServers = settings.dnsServers.filter { !$0.isEmpty }
+            switch settings.configurationType {
+            case .plain:
+                dnsProtocol = .plain
+
+            case .https:
+                dnsProtocol = .https
                 dnsHTTPSURL = settings.dnsHTTPSURL
+
+            case .tls:
+                dnsProtocol = .tls
                 dnsTLSServerName = settings.dnsTLSServerName
+
+            case .disabled:
+                break
+            }
+            
+            if isDNSEnabled {
+                dnsServers = settings.dnsServers?.filter { !$0.isEmpty }
                 searchDomains = settings.dnsSearchDomains
             }
         }
@@ -121,7 +135,7 @@ extension OpenVPN.ConfigurationBuilder {
             case .manual:
                 httpProxy = settings.proxyServer
                 httpsProxy = settings.proxyServer
-                proxyBypassDomains = settings.proxyBypassDomains.filter { !$0.isEmpty }
+                proxyBypassDomains = settings.proxyBypassDomains?.filter { !$0.isEmpty }
                 proxyAutoConfigurationURL = nil
                 
             case .pac:

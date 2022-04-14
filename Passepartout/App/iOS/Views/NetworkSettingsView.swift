@@ -122,29 +122,30 @@ extension NetworkSettingsView {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticDNS.animation())
 
             if !settings.isAutomaticDNS {
-                Toggle(L10n.Global.Strings.enabled, isOn: $settings.dns.isDNSEnabled.animation())
+                themeTextPicker(
+                    // FIXME: l10n, refactor string id to "global.strings.configuration"
+                    L10n.Profile.Sections.Configuration.header,
+                    selection: $settings.dns.configurationType,
+                    values: Network.DNSSettings.availableConfigurationTypes(forVPNProtocol: vpnProtocol),
+                    description: \.localizedDescription
+                )
 
-                if settings.dns.isDNSEnabled {
-                    themeTextPicker(
-                        L10n.Global.Strings.protocol,
-                        selection: $settings.dns.dnsProtocol,
-                        values: Network.DNSSettings.availableProtocols(forVPNProtocol: vpnProtocol),
-                        description: \.localizedDescription
-                    )
-                    switch settings.dns.dnsProtocol {
-                    case .plain:
-                        EmptyView()
+                switch settings.dns.configurationType {
+                case .plain:
+                    EmptyView()
 
-                    case .https:
-                        dnsManualHTTPSRow
+                case .https:
+                    dnsManualHTTPSRow
 
-                    case .tls:
-                        dnsManualTLSRow
-                    }
+                case .tls:
+                    dnsManualTLSRow
+
+                case .disabled:
+                    EmptyView()
                 }
             }
         }
-        if !settings.isAutomaticDNS && settings.dns.isDNSEnabled {
+        if !settings.isAutomaticDNS && settings.dns.configurationType != .disabled {
             dnsManualServers
             dnsManualDomains
         }
@@ -163,7 +164,7 @@ extension NetworkSettingsView {
     private var dnsManualServers: some View {
         Section {
             EditableTextList(
-                elements: $settings.dns.dnsServers,
+                elements: $settings.dns.dnsServers ?? [],
                 allowsDuplicates: false,
                 mapping: mapNotEmpty
             ) {
@@ -184,7 +185,7 @@ extension NetworkSettingsView {
     private var dnsManualDomains: some View {
         Section {
             EditableTextList(
-                elements: $settings.dns.dnsSearchDomains,
+                elements: $settings.dns.dnsSearchDomains ?? [],
                 allowsDuplicates: false,
                 mapping: mapNotEmpty
             ) {
@@ -250,7 +251,7 @@ extension NetworkSettingsView {
     private var proxyManualBypassDomains: some View {
         Section {
             EditableTextList(
-                elements: $settings.proxy.proxyBypassDomains,
+                elements: $settings.proxy.proxyBypassDomains ?? [],
                 allowsDuplicates: false,
                 mapping: mapNotEmpty
             ) {

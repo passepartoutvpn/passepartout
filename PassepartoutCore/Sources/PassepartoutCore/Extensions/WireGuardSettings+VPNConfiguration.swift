@@ -89,12 +89,17 @@ extension WireGuard.ConfigurationBuilder {
             break
 
         case .manual:
-            if settings.isDNSEnabled {
-                dnsServers = settings.dnsServers
-                dnsSearchDomains = settings.dnsSearchDomains.filter { !$0.isEmpty }
-            } else {
+            switch settings.configurationType {
+            case .plain:
+                dnsServers = settings.dnsServers ?? []
+                dnsSearchDomains = settings.dnsSearchDomains?.filter { !$0.isEmpty } ?? []
+
+            case .disabled:
                 dnsServers = []
                 dnsSearchDomains = []
+
+            default:
+                fatalError("Invalid DNS configuration for WireGuard: \(settings.configurationType)")
             }
         }
     }

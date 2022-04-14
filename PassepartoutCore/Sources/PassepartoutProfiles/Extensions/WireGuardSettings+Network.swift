@@ -28,15 +28,15 @@ import TunnelKitCore
 import TunnelKitWireGuard
 
 extension Profile.WireGuardSettings: DNSSettingsProviding {
-    public var dnsProtocol: DNSProtocol {
+    public var dnsProtocol: DNSProtocol? {
         return .plain
     }
     
-    public var dnsServers: [String] {
+    public var dnsServers: [String]? {
         return configuration.dnsServers
     }
     
-    public var dnsSearchDomains: [String] {
+    public var dnsSearchDomains: [String]? {
         return configuration.dnsSearchDomains
     }
     

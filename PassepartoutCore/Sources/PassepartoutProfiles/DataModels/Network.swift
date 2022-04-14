@@ -51,21 +51,21 @@ public protocol GatewaySettingsProviding {
 }
 
 public protocol DNSSettingsProviding {
-    var dnsProtocol: DNSProtocol { get }
+    var dnsProtocol: DNSProtocol? { get }
     
-    var dnsServers: [String] { get }
+    var dnsServers: [String]? { get }
     
+    var dnsSearchDomains: [String]? { get }
+
     var dnsHTTPSURL: URL? { get }
     
     var dnsTLSServerName: String? { get }
-    
-    var dnsSearchDomains: [String] { get }
 }
 
 public protocol ProxySettingsProviding {
     var proxyServer: Proxy? { get }
     
-    var proxyBypassDomains: [String] { get }
+    var proxyBypassDomains: [String]? { get }
 
     var proxyAutoConfigurationURL: URL? { get }
 }
@@ -88,15 +88,27 @@ extension Network {
 
 extension Network {
     public struct DNSSettings: Codable, Equatable, NetworkChoiceRepresentable, DNSSettingsProviding {
+        public enum ConfigurationType: String, Codable {
+            case plain
+            
+            case https
+            
+            case tls
+            
+            case disabled
+        }
+
         public var choice: Network.Choice
         
-        public var isDNSEnabled = true
-
-        public var dnsProtocol: DNSProtocol = .plain
+        public var configurationType: ConfigurationType = .plain
         
-        public var dnsServers: [String] = []
+        public var dnsProtocol: DNSProtocol? {
+            DNSProtocol(rawValue: configurationType.rawValue)
+        }
         
-        public var dnsSearchDomains: [String] = []
+        public var dnsServers: [String]?
+        
+        public var dnsSearchDomains: [String]?
 
         public var dnsHTTPSURL: URL?
         
@@ -122,7 +134,7 @@ extension Network {
         
         public var proxyPort: UInt16?
         
-        public var proxyBypassDomains: [String] = []
+        public var proxyBypassDomains: [String]?
 
         public var proxyAutoConfigurationURL: URL?
         

@@ -105,6 +105,24 @@ extension Network.Choice {
     }
 }
 
+extension Network.DNSSettings.ConfigurationType {
+    var localizedDescription: String {
+        switch self {
+        case .plain:
+            return Unlocalized.DNS.plain
+            
+        case .https:
+            return Unlocalized.Network.https
+
+        case .tls:
+            return Unlocalized.Network.tls
+
+        case .disabled:
+            return L10n.Global.Strings.disabled
+        }
+    }
+}
+
 extension Network.ProxySettings.ConfigurationType {
     var localizedDescription: String {
         switch self {
