@@ -335,8 +335,11 @@ extension ProfileManager {
             allNames.remove(at: i)
         }
         let duplicates = Set(allNames)
-
-        pp_log.debug("Duplicate profile names: \(duplicates)")
+        guard !duplicates.isEmpty else {
+            pp_log.debug("No duplicated profiles")
+            return
+        }
+        pp_log.debug("Duplicated profile names: \(duplicates)")
 
         var renamedProfiles: [Profile] = []
         duplicates.forEach { name in

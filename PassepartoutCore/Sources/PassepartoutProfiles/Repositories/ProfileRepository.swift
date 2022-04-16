@@ -34,7 +34,7 @@ class ProfileRepository: Repository {
         self.context = context
     }
     
-    func headers() -> FetchedValueHolder<[UUID: Profile.Header]> {
+    func fetchedHeaders() -> FetchedValueHolder<[UUID: Profile.Header]> {
         let request: NSFetchRequest<NSFetchRequestResult> = CDProfile.fetchRequest()
         request.sortDescriptors = [
             .init(keyPath: \CDProfile.uuid, ascending: true),
@@ -62,9 +62,9 @@ class ProfileRepository: Repository {
             initial: [:]
         )
     }
-    
-    func profile(withId id: UUID) -> FetchedValueHolder<Profile?> {
-        let request: NSFetchRequest<NSFetchRequestResult> = CDProfile.fetchRequest()
+
+    func profile(withId id: UUID) -> Profile? {
+        let request = CDProfile.fetchRequest()
         request.sortDescriptors = [
             .init(keyPath: \CDProfile.lastUpdate, ascending: false)
         ]
@@ -72,22 +72,16 @@ class ProfileRepository: Repository {
             format: "uuid == %@",
             id.uuidString
         )
-        return .init(
-            context: context,
-            request: request,
-            mapping: {
-                guard let dto = $0.first as? CDProfile else {
-                    return nil
-                }
-                do {
-                    return try ProfileMapper.toModel(dto)
-                } catch {
-                    pp_log.error("Unable to map CDProfile: \(error)")
-                    return nil
-                }
-            },
-            initial: nil
-        )
+        do {
+            let results = try context.fetch(request)
+            guard let recent = results.first else {
+                return nil
+            }
+            return try ProfileMapper.toModel(recent)
+        } catch {
+            pp_log.error("Unable to fetch profile: \(error)")
+            return nil
+        }
     }
 
     func saveProfiles(_ profiles: [Profile]) throws {

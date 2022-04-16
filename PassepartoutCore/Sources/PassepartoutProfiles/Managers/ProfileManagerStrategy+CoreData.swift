@@ -35,7 +35,7 @@ extension ProfileManager {
 
         public init(persistence: Persistence) {
             profileRepository = ProfileRepository(persistence.context)
-            fetchedHeaders = profileRepository.headers()
+            fetchedHeaders = profileRepository.fetchedHeaders()
         }
         
         public var allHeaders: [UUID: Profile.Header] {
@@ -43,7 +43,7 @@ extension ProfileManager {
         }
         
         public func profile(withId id: UUID) -> Profile? {
-            profileRepository.profile(withId: id).value
+            profileRepository.profile(withId: id)
         }
 
         public func saveProfiles(_ profiles: [Profile]) {
