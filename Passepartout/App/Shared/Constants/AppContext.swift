@@ -139,6 +139,9 @@ class AppContext {
             self.isEligibleForOnDemandRules()
         }
 
+        profileManager.observeUpdates()
+        vpnManager.observeUpdates()
+
         // app
 
         reviewer.eventCountBeforeRating = Constants.Rating.eventCount

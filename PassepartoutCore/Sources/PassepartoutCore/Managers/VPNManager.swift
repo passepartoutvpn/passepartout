@@ -78,8 +78,6 @@ public class VPNManager: ObservableObject, RateLimited {
         isOnDemandRulesSupported = { true }
 
         currentState = ObservableState()
-        observeStrategy()
-        observeProfileManager()
     }
 
     public func toggle() -> Bool {
@@ -156,6 +154,11 @@ public class VPNManager: ObservableObject, RateLimited {
 // MARK: Observation
 
 extension VPNManager {
+    public func observeUpdates() {
+        observeStrategy()
+        observeProfileManager()
+    }
+    
     private func observeStrategy() {
         strategy.observe(into: currentState)
     }

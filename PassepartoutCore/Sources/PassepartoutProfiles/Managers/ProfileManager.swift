@@ -85,7 +85,6 @@ public class ProfileManager: ObservableObject {
         self.strategy = strategy
 
         currentProfile = ObservableProfile()
-        observeUpdates()
     }
 }
 
@@ -275,7 +274,7 @@ extension ProfileManager {
 }
 
 extension ProfileManager {
-    private func observeUpdates() {
+    public func observeUpdates() {
         strategy.willUpdateProfiles()
             .dropFirst()
             .sink {
