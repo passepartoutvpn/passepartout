@@ -79,7 +79,6 @@ extension OrganizerView {
                 Section {
                     ForEach(headers.sorted(), content: navigationLink(forHeader:))
                         .onDelete(perform: removeProfiles)
-                        .onAppear(perform: selectActiveProfile)
                 }
             }
         }
@@ -101,6 +100,8 @@ extension OrganizerView {
                 } else {
                     ProfileHeaderRow(header: header)
                 }
+            }.onAppear {
+                preselectActiveProfile(header.id)
             }
         }
     }
@@ -133,7 +134,7 @@ extension OrganizerView.ProfilesList {
 }
 
 extension OrganizerView.ProfilesList {
-    private func selectActiveProfile() {
+    private func preselectActiveProfile(_ id: UUID) {
         guard isFirstLaunch else {
             return
         }
@@ -146,9 +147,9 @@ extension OrganizerView.ProfilesList {
         //
         if alertType == nil,
            themeIdiom != .pad,
-           let activeProfileId = profileManager.activeHeader?.id {
+           id == profileManager.activeHeader?.id {
 
-            selectedProfileId = activeProfileId
+            selectedProfileId = id
         }
     }
 
