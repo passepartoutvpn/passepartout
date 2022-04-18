@@ -53,22 +53,22 @@ extension OrganizerView {
 
         var body: some View {
             debugChanges()
-            return ReloadingSection(
-                header: Text(Unlocalized.VPN.vpn),
-                footer: EmptyView(),
-                elements: profileManager.headers,
-                equality: {
-                    Set($0) == Set($1)
-                }
-            ) {
-                if !$0.isEmpty {
-                    ForEach($0.sorted(), content: navigationLink(forHeader:))
-                        .onAppear(perform: selectActiveProfile)
-                } else {
-                    AddProfileMenu(
-                        withImportedURLs: false,
-                        bindings: addProfileMenuBindings
-                    )
+            return Section {
+                ReloadingContent(
+                    observing: profileManager.headers,
+                    equality: {
+                        Set($0) == Set($1)
+                    }
+                ) {
+                    if !$0.isEmpty {
+                        ForEach($0.sorted(), content: navigationLink(forHeader:))
+                            .onAppear(perform: selectActiveProfile)
+                    } else {
+                        AddProfileMenu(
+                            withImportedURLs: false,
+                            bindings: addProfileMenuBindings
+                        )
+                    }
                 }
             }.onAppear(perform: performMigrationsIfNeeded)
 

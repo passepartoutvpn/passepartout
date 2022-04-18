@@ -82,20 +82,22 @@ struct DonateView: View {
     }
     
     private var productsSection: some View {
-        ReloadingSection(
+        Section(
             header: Text(L10n.Donate.Sections.OneTime.header),
             footer: Text(L10n.Donate.Sections.OneTime.footer)
-                .xxxThemeTruncation(),
-            elements: productManager.donations,
-            equality: {
-                Set($0.map(\.productIdentifier)) == Set($1.map(\.productIdentifier))
-            },
-            isReloading: productManager.isRefreshingProducts,
-            reload: {
-                productManager.refreshProducts()
-            }
+                .xxxThemeTruncation()
         ) {
-            ForEach($0, id: \.productIdentifier, content: productRow)
+            ReloadingContent(
+                observing: productManager.donations,
+                equality: {
+                    Set($0.map(\.productIdentifier)) == Set($1.map(\.productIdentifier))
+                },
+                reload: {
+                    productManager.refreshProducts()
+                }
+            ) {
+                ForEach($0, id: \.productIdentifier, content: productRow)
+            }
         }
     }
     

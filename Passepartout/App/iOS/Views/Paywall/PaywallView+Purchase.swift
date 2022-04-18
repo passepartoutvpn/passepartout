@@ -100,22 +100,23 @@ extension PaywallView {
         }
         
         private var productsSection: some View {
-            ReloadingSection(
+            Section(
                 header: Text(L10n.Paywall.title),
-                footer: Text(L10n.Paywall.Sections.Products.footer),
-                elements: productManager.products,
-                equality: {
-                    Set($0.map(\.productIdentifier)) == Set($1.map(\.productIdentifier))
-                },
-                isReloading: productManager.isRefreshingProducts,
-                reload: {
-                    productManager.refreshProducts()
-                },
-                content: { _ in
+                footer: Text(L10n.Paywall.Sections.Products.footer)
+            ) {
+                ReloadingContent(
+                    observing: productManager.products,
+                    equality: {
+                        Set($0.map(\.productIdentifier)) == Set($1.map(\.productIdentifier))
+                    },
+                    reload: {
+                        productManager.refreshProducts()
+                    }
+                ) { _ in
                     ForEach(productRowModels, id: \.product.productIdentifier, content: productRow)
                     restoreRow
                 }
-            )
+            }
         }
 
         private func productRow(_ model: RowModel) -> some View {

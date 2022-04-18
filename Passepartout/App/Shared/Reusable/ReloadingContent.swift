@@ -1,5 +1,5 @@
 //
-//  ReloadingSection.swift
+//  ReloadingContent.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/4/22.
@@ -25,36 +25,49 @@
 
 import SwiftUI
 
-struct ReloadingSection<Header: View, Footer: View, T: Equatable, Content: View>: View {
+struct ReloadingContent<T: Equatable, Content: View>: View {
     @Environment(\.scenePhase) private var scenePhase
     
-    let header: Header
+    private let elements: [T]
     
-    let footer: Footer
+    private let equality: ([T], [T]) -> Bool
     
-    let elements: [T]
+    private let reload: (() -> Void)?
     
-    var equality: ([T], [T]) -> Bool = { $0 == $1 }
-    
-    var isReloading = false
-
-    var reload: (() -> Void)?
-    
-    @ViewBuilder let content: ([T]) -> Content
+    @ViewBuilder private let content: ([T]) -> Content
     
     @State private var localElements: [T] = []
     
+    init(
+        observing elements: [T],
+        equality: @escaping ([T], [T]) -> Bool = { $0 == $1 },
+        reload: (() -> Void)? = nil,
+        @ViewBuilder content: @escaping ([T]) -> Content
+    ) {
+        self.elements = elements
+        self.equality = equality
+        self.reload = reload
+        self.content = content
+
+        // XXX: not sure about this, but if content() is empty .onAppear() will
+        // never trigger, thus never setting initial elements
+        //
+        // BEWARE: localElements will not be automatically bound to changes
+        // in elements (use a Binding for that), but this is actually intended
+        _localElements = State(initialValue: elements)
+        if elements.isEmpty {
+            reload?()
+        }
+    }
+    
     var body: some View {
-        Section(
-            header: header,//progressHeader,
-            footer: footer
-        ) {
+        Group {
             content(localElements)
-        }.onAppear {
-            localElements = elements
-            if localElements.isEmpty {
-                reload?()
-            }
+//        }.onAppear {
+//            localElements = elements
+//            if localElements.isEmpty {
+//                reload?()
+//            }
         }.onChange(of: elements) { newElements in
             guard !equality(localElements, newElements) else {
                 return
@@ -68,14 +81,4 @@ struct ReloadingSection<Header: View, Footer: View, T: Equatable, Content: View>
             }
         }
     }
-    
-//    private var progressHeader: some View {
-//        HStack {
-//            header
-//            if isReloading {
-//                ProgressView()
-//                    .padding(.leading, 5)
-//            }
-//        }
-//    }
 }
