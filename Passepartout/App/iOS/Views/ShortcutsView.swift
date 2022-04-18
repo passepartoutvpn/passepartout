@@ -44,6 +44,8 @@ struct ShortcutsView: View {
     }
 
     @ObservedObject private var intentsManager: IntentsManager
+    
+    private let target: Profile
 
     @State private var modalType: ModalType?
     
@@ -51,8 +53,9 @@ struct ShortcutsView: View {
     
     @State private var pendingShortcut: INShortcut?
     
-    init() {
+    init(target: Profile) {
         intentsManager = .shared
+        self.target = target
     }
     
     var body: some View {
@@ -75,8 +78,14 @@ struct ShortcutsView: View {
         Section(
             header: Text(L10n.Shortcuts.Edit.Sections.All.header)
         ) {
-            ForEach(intentsManager.shortcuts.values.sorted(), content: rowView)
+            ForEach(relevantShortcuts, content: rowView)
         }
+    }
+    
+    private var relevantShortcuts: [Shortcut] {
+        intentsManager.shortcuts.values.filter {
+            $0.isRelevant(to: target)
+        }.sorted()
     }
     
     private var addSection: some View {
@@ -86,6 +95,7 @@ struct ShortcutsView: View {
         ) {
             NavigationLink(isActive: $isNavigationPresented) {
                 AddView(
+                    target: target,
                     pendingShortcut: delegatingPendingShortcut
                 )
             } label: {
@@ -139,5 +149,20 @@ struct ShortcutsView: View {
     private func presentAddShortcut(_ shortcut: INShortcut) {
         isNavigationPresented = false
         modalType = .add(shortcut: shortcut)
+    }
+}
+
+private extension Shortcut {
+    func isRelevant(to profile: Profile) -> Bool {
+        guard let intent = native.shortcut.intent else {
+            return true
+        }
+        if let connectIntent = intent as? ConnectVPNIntent {
+            return connectIntent.profileId == profile.id.uuidString
+        }
+        if let moveToIntent = intent as? MoveToLocationIntent {
+            return moveToIntent.profileId == profile.id.uuidString
+        }
+        return true
     }
 }

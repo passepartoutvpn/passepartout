@@ -29,76 +29,131 @@ import PassepartoutCore
 
 extension ShortcutsView {
     struct AddView: View {
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var providerManager: ProviderManager
         
         @StateObject private var pendingProfile = ObservableProfile()
+
+        private let target: Profile
         
         @Binding private var pendingShortcut: INShortcut?
-        
-        init(pendingShortcut: Binding<INShortcut?>) {
-            profileManager = .shared
+
+        @State private var isPresentingProviderLocation = false
+
+        init(target: Profile, pendingShortcut: Binding<INShortcut?>) {
+            providerManager = .shared
+            self.target = target
             _pendingShortcut = pendingShortcut
         }
         
         var body: some View {
-            List {
-                Section(
-                    header: Text(Unlocalized.VPN.vpn)
-                ) {
-                    NavigationLink(L10n.Shortcuts.Add.Items.Connect.caption) {
-                        ConnectToView(
-                            pendingProfile: pendingProfile,
-                            pendingShortcut: $pendingShortcut
-                        )
-                    }.disabled(profileManager.headers.isEmpty)
+            ZStack {
+                List {
+                    Section(
+                        header: Text(Unlocalized.VPN.vpn)
+                    ) {
+                        addConnectView
+                        Button(L10n.Shortcuts.Add.Items.EnableVpn.caption, action: addEnableVPN)
+                        Button(L10n.Shortcuts.Add.Items.DisableVpn.caption, action: addDisableVPN)
+                    }
+                    Section(
+                        header: Text(L10n.Shortcuts.Add.Sections.Wifi.header)
+                    ) {
+                        Button(L10n.Shortcuts.Add.Items.TrustCurrentWifi.caption, action: addTrustWiFi)
+                        Button(L10n.Shortcuts.Add.Items.UntrustCurrentWifi.caption, action: addUntrustWiFi)
+                    }
+                    Section(
+                        header: Text(L10n.Shortcuts.Add.Sections.Cellular.header)
+                    ) {
+                        Button(L10n.Shortcuts.Add.Items.TrustCellular.caption, action: addTrustCellular)
+                        Button(L10n.Shortcuts.Add.Items.UntrustCellular.caption, action: addUntrustCellular)
+                    }
+                }
 
-                    Button(L10n.Shortcuts.Add.Items.EnableVpn.caption, action: addEnableVPN)
-                    Button(L10n.Shortcuts.Add.Items.DisableVpn.caption, action: addDisableVPN)
-                }
-                Section(
-                    header: Text(L10n.Shortcuts.Add.Sections.Wifi.header)
-                ) {
-                    Button(L10n.Shortcuts.Add.Items.TrustCurrentWifi.caption, action: addTrustWiFi)
-                    Button(L10n.Shortcuts.Add.Items.UntrustCurrentWifi.caption, action: addUntrustWiFi)
-                }
-                Section(
-                    header: Text(L10n.Shortcuts.Add.Sections.Cellular.header)
-                ) {
-                    Button(L10n.Shortcuts.Add.Items.TrustCellular.caption, action: addTrustCellular)
-                    Button(L10n.Shortcuts.Add.Items.UntrustCellular.caption, action: addUntrustCellular)
-                }
+                providerLocationLink
             }.navigationTitle(L10n.Shortcuts.Add.title)
         }
-            
-        private func addEnableVPN() {
-            addShortcut(with: IntentDispatcher.intentEnable())
-        }
 
-        private func addDisableVPN() {
-            addShortcut(with: IntentDispatcher.intentDisable())
-        }
-
-        private func addTrustWiFi() {
-            addShortcut(with: IntentDispatcher.intentTrustWiFi())
-        }
-
-        private func addUntrustWiFi() {
-            addShortcut(with: IntentDispatcher.intentUntrustWiFi())
-        }
-
-        private func addTrustCellular() {
-            addShortcut(with: IntentDispatcher.intentTrustCellular())
-        }
-
-        private func addUntrustCellular() {
-            addShortcut(with: IntentDispatcher.intentUntrustCellular())
-        }
-
-        private func addShortcut(with intent: INIntent) {
-            guard let shortcut = INShortcut(intent: intent) else {
-                fatalError("Unable to create INShortcut, intent '\(intent.description)' not exposed by app?")
+        private var addConnectView: some View {
+            Button(L10n.Shortcuts.Add.Items.Connect.caption) {
+                if target.isProvider {
+                    pendingProfile.value = target
+                    isPresentingProviderLocation = true
+                } else {
+                    addConnect(target.header)
+                }
             }
-            pendingShortcut = shortcut
         }
+        
+        private var providerLocationLink: some View {
+            NavigationLink("", isActive: $isPresentingProviderLocation) {
+                ProviderLocationView(
+                    currentProfile: pendingProfile,
+                    isEditable: false,
+                    isPresented: isProviderLocationPresented
+                )
+            }
+        }
+    }
+}
+
+extension ShortcutsView.AddView {
+    private var isProviderLocationPresented: Binding<Bool> {
+        .init {
+            isPresentingProviderLocation
+        } set: {
+            if !$0 {
+                isPresentingProviderLocation = false
+                addMoveToPendingProfile()
+            }
+        }
+    }
+    
+    private func addConnect(_ header: Profile.Header) {
+        pendingShortcut = INShortcut(intent: IntentDispatcher.intentConnect(
+            header: header
+        ))
+    }
+
+    private func addMoveToPendingProfile() {
+        let header = pendingProfile.value.header
+        guard let server = pendingProfile.value.providerServer(providerManager) else {
+            return
+        }
+        pendingShortcut = INShortcut(intent: IntentDispatcher.intentMoveTo(
+            header: header,
+            providerFullName: server.providerMetadata.fullName,
+            server: server
+        ))
+    }
+
+    private func addEnableVPN() {
+        addShortcut(with: IntentDispatcher.intentEnable())
+    }
+
+    private func addDisableVPN() {
+        addShortcut(with: IntentDispatcher.intentDisable())
+    }
+
+    private func addTrustWiFi() {
+        addShortcut(with: IntentDispatcher.intentTrustWiFi())
+    }
+
+    private func addUntrustWiFi() {
+        addShortcut(with: IntentDispatcher.intentUntrustWiFi())
+    }
+
+    private func addTrustCellular() {
+        addShortcut(with: IntentDispatcher.intentTrustCellular())
+    }
+
+    private func addUntrustCellular() {
+        addShortcut(with: IntentDispatcher.intentUntrustCellular())
+    }
+
+    private func addShortcut(with intent: INIntent) {
+        guard let shortcut = INShortcut(intent: intent) else {
+            fatalError("Unable to create INShortcut, intent '\(intent.description)' not exposed by app?")
+        }
+        pendingShortcut = shortcut
     }
 }

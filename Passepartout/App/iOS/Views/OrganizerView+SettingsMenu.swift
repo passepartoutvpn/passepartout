@@ -34,10 +34,6 @@ extension OrganizerView {
 
         @Binding var alertType: AlertType?
         
-        private var isEligibleForSiri: Bool {
-            productManager.isEligible(forFeature: .siriShortcuts)
-        }
-        
         private let redditURL = Constants.URLs.subreddit
         
         private let alternativeToURL = Constants.URLs.alternativeTo
@@ -62,7 +58,6 @@ extension OrganizerView {
                     shareMenu
                 }
                 Divider()
-                shortcutsButton
                 aboutButton
 //                RemoveVPNSection()
 //                betaSection
@@ -71,14 +66,6 @@ extension OrganizerView {
             }
         }
 
-        private var shortcutsButton: some View {
-            Button {
-                presentShortcutsOrPaywall()
-            } label: {
-                Label(L10n.Organizer.Items.SiriShortcuts.caption, systemImage: themeShortcutsImage)
-            }
-        }
-        
         private var supportMenu: some View {
             Group {
                 Button {
@@ -109,16 +96,6 @@ extension OrganizerView {
         private var aboutButton: some View {
             Button(L10n.Organizer.Items.About.caption(appName)) {
                 presentAbout()
-            }
-        }
-
-        private func presentShortcutsOrPaywall() {
-
-            // eligibility: enter Siri shortcuts or present paywall
-            if isEligibleForSiri {
-                modalType = .shortcuts
-            } else {
-                modalType = .presentPaywallShortcuts
             }
         }
 

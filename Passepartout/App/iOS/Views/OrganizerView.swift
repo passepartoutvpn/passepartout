@@ -32,15 +32,11 @@ struct OrganizerView: View {
 
         case addHost(URL, Bool)
         
-        case shortcuts
-        
         case donate
         
         case share([Any])
 
         case about
-        
-        case presentPaywallShortcuts
         
         // XXX: alert ids
         var id: Int {
@@ -49,15 +45,11 @@ struct OrganizerView: View {
 
             case .addHost: return 2
                 
-            case .shortcuts: return 3
-                
             case .donate: return 4
                 
             case .share: return 5
                 
             case .about: return 6
-                
-            case .presentPaywallShortcuts: return 7
             }
         }
     }
@@ -160,11 +152,6 @@ extension OrganizerView {
                 )
             }.themeGlobal()
             
-        case .shortcuts:
-            NavigationView {
-                ShortcutsView()
-            }.themeGlobal()
-            
         case .donate:
             NavigationView {
                 DonateView()
@@ -176,14 +163,6 @@ extension OrganizerView {
         case .about:
             NavigationView {
                 AboutView()
-            }.themeGlobal()
-
-        case .presentPaywallShortcuts:
-            NavigationView {
-                PaywallView(
-                    modalType: $modalType,
-                    feature: .siriShortcuts
-                )
             }.themeGlobal()
         }
     }

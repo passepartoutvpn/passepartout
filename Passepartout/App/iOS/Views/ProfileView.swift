@@ -24,13 +24,16 @@
 //
 
 import SwiftUI
-import Combine
 import PassepartoutCore
 
 struct ProfileView: View {
     enum ModalType: Int, Identifiable {
+        case shortcuts
+        
         case rename
         
+        case paywallShortcuts
+
         case paywallNetworkSettings
         
         case paywallTrustedNetworks
@@ -106,11 +109,10 @@ struct ProfileView: View {
     private func toolbar() -> some ToolbarContent {
         ToolbarItemGroup(placement: .navigationBarTrailing) {
             if !isDeleted {
-                Button {
-                    modalType = .rename
-                } label: {
-                    Image(systemName: themeRenameProfileImage)
-                }
+                MenuBar(
+                    currentProfile: profileManager.currentProfile,
+                    modalType: $modalType
+                )
             }
         }
     }
@@ -118,11 +120,24 @@ struct ProfileView: View {
     @ViewBuilder
     private func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
+        case .shortcuts:
+            NavigationView {
+                ShortcutsView(target: profileManager.currentProfile.value)
+            }.themeGlobal()
+            
         case .rename:
             NavigationView {
                 RenameView(currentProfile: profileManager.currentProfile)
             }.themeGlobal()
             
+        case .paywallShortcuts:
+            NavigationView {
+                PaywallView(
+                    modalType: $modalType,
+                    feature: .siriShortcuts
+                )
+            }.themeGlobal()
+
         case .paywallNetworkSettings:
             NavigationView {
                 PaywallView(
