@@ -28,7 +28,7 @@ import TunnelKitManager
 import TunnelKitOpenVPN
 import TunnelKitWireGuard
 import NetworkExtension
-import PassepartoutUtils
+import PassepartoutCore
 
 extension VPNStatus {
     var localizedDescription: String {

@@ -80,7 +80,10 @@ struct ShortcutsView: View {
     }
     
     private var addSection: some View {
-        Section {
+        Section(
+            // FIXME: l10n, string id
+            footer: Text(L10n.Organizer.Sections.Siri.footer)
+        ) {
             NavigationLink(isActive: $isNavigationPresented) {
                 AddView(
                     pendingShortcut: delegatingPendingShortcut

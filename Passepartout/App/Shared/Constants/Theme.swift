@@ -37,28 +37,6 @@ extension Color {
 }
 
 extension View {
-    
-    @available(iOS 14, *)
-    func themeConfigureNavigationBarAppearance() {
-        let navBackgroundColor = Asset.Assets.primaryColor.color
-        let titleAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: Asset.Assets.lightTextColor.color
-        ]
-
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.backgroundColor = navBackgroundColor
-        navBarAppearance.titleTextAttributes = titleAttributes
-        navBarAppearance.largeTitleTextAttributes = titleAttributes
-
-        let navBar = UINavigationBar.appearance()
-        navBar.standardAppearance = navBarAppearance
-        navBar.compactAppearance = navBarAppearance
-        navBar.scrollEdgeAppearance = navBarAppearance
-        
-//        UITableView.appearance().backgroundColor = .clear
-    }
-
     @available(iOS 14, *)
     var themeIdiom: UIUserInterfaceIdiom {
         UIDevice.current.userInterfaceIdiom
@@ -78,7 +56,7 @@ extension View {
     
     @ViewBuilder
     private func themeNavigationViewStyle() -> some View {
-        switch UIDevice.current.userInterfaceIdiom {
+        switch themeIdiom {
         case .phone:
             navigationViewStyle(.stack)
 
@@ -87,15 +65,8 @@ extension View {
         }
     }
     
-    @ViewBuilder
     func themePrimaryView() -> some View {
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            navigationBarTitleDisplayMode(.large)
-
-        default:
-            themeSecondaryView()
-        }
+        navigationBarTitleDisplayMode(.large)
     }
 
     func themeSecondaryView() -> some View {
@@ -105,6 +76,11 @@ extension View {
     func themeLongText() -> some View {
         lineLimit(1)
             .truncationMode(.middle)
+    }
+    
+    func themeInformativeText() -> some View {
+        font(.title)
+            .foregroundColor(themeSecondaryColor)
     }
 }
 
@@ -180,10 +156,14 @@ extension View {
         "externaldrive.connected.to.line.below.fill"
     }
     
-    var themeAddProfileImage: String {
+    var themeSettingsMenuImage: String {
+        "ellipsis.circle"
+    }
+
+    var themeAddMenuImage: String {
         "plus"
     }
-    
+
     var themeCheckmarkImage: String {
         "checkmark"
     }

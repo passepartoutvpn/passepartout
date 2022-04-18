@@ -26,17 +26,6 @@
 import SwiftUI
 
 struct AboutView: View {
-    enum ModalType: Identifiable {
-        case share([Any])
-        
-        // XXX: alert ids
-        var id: Int {
-            return 1
-        }
-    }
-
-    @State private var modalType: ModalType?
-    
     private let versionString = Constants.Global.appVersionString
     
     private let readmeURL = Constants.URLs.readme
@@ -51,24 +40,13 @@ struct AboutView: View {
 
     private let privacyURL = Constants.URLs.privacyPolicy
 
-    private let alternativeToURL = Constants.URLs.alternativeTo
-
-    private let shareMessage = L10n.Global.Messages.share
-
     var body: some View {
         List {
             infoSubview
             githubSubview
             webSubview
-            shareSubview
         }.themeSecondaryView()
         .navigationTitle(L10n.About.title)
-        .sheet(item: $modalType) {
-            switch $0 {
-            case .share(let items):
-                ActivityView(activityItems: items)
-            }
-        }
     }
     
     private var infoSubview: some View {
@@ -115,29 +93,5 @@ struct AboutView: View {
                 URL.openURL(privacyURL)
             }
         }
-    }
-
-    private var shareSubview: some View {
-        Section(
-            header: Text(L10n.About.Sections.Share.header)
-        ) {
-            Button(L10n.About.Items.ShareTwitter.caption, action: shareOnTwitter)
-            Button(L10n.About.Items.ShareGeneric.caption, action: shareWithFriend)
-            Button(Unlocalized.About.alternativeTo, action: shareAlternativeTo)
-        }
-    }
-    
-    private func shareOnTwitter() {
-        let url = Unlocalized.Social.twitterIntent(withMessage: shareMessage)
-        URL.openURL(url)
-    }
-
-    private func shareWithFriend() {
-        let shareMessage = "\(shareMessage) \(Constants.URLs.website)"
-        modalType = .share([shareMessage])
-    }
-
-    private func shareAlternativeTo() {
-        URL.openURL(alternativeToURL)
     }
 }

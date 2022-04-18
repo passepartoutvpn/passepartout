@@ -103,6 +103,10 @@ class ProductManager: NSObject, ObservableObject {
         SKPaymentQueue.default().remove(self)
     }
     
+    func canMakePayments() -> Bool {
+        SKPaymentQueue.canMakePayments()
+    }
+    
     func refreshProducts() {
         let ids = LocalProduct.all
         guard !ids.isEmpty else {

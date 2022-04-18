@@ -1,8 +1,8 @@
 //
-//  OrganizerView+AddProfileMenu.swift
+//  OrganizerView+AddMenu.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/2/22.
+//  Created by Davide De Rosa on 4/18/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -27,31 +27,21 @@ import SwiftUI
 import PassepartoutCore
 
 extension OrganizerView {
-    struct AddProfileMenu: View {
-        struct Bindings {
-            @Binding var modalType: ModalType?
-
-            @Binding var alertType: AlertType?
-
-            @Binding var isHostFileImporterPresented: Bool
+    struct AddMenu: View {
+        @Binding private var modalType: ModalType?
+        
+        @Binding private var isHostFileImporterPresented: Bool
+        
+        init(modalType: Binding<ModalType?>, isHostFileImporterPresented: Binding<Bool>) {
+            _modalType = modalType
+            _isHostFileImporterPresented = isHostFileImporterPresented
         }
         
-        private let withImportedURLs: Bool
-        
-        private let bindings: Bindings
-
-        init(
-            withImportedURLs: Bool,
-            bindings: Bindings
-        ) {
-            self.withImportedURLs = withImportedURLs
-            self.bindings = bindings
-        }
-        
+        // FIXME: l10n, shorten menu captions
         var body: some View {
-            Group {
+            Menu {
                 Button {
-                    bindings.modalType = .addProvider
+                    modalType = .addProvider
                 } label: {
                     Label(L10n.Organizer.Items.AddProvider.caption, systemImage: themeProviderImage)
                 }
@@ -60,12 +50,12 @@ extension OrganizerView {
                 } label: {
                     Label(L10n.Organizer.Items.AddHost.caption, systemImage: themeHostImage)
                 }
-                if withImportedURLs {
+                if let urls = importedURLs, !urls.isEmpty {
                     Divider()
-                    importedURLs.map { urls in
-                        ForEach(urls, id: \.absoluteString, content: importedURLRow)
-                    }
+                    ForEach(urls, id: \.absoluteString, content: importedURLRow)
                 }
+            } label: {
+                themeAddMenuImage.asSystemImage
             }
         }
 
@@ -86,33 +76,31 @@ extension OrganizerView {
                 return nil
             }
         }
-    }
-}
 
-extension OrganizerView.AddProfileMenu {
-    private func presentAddProvider() {
-        bindings.modalType = .addProvider
-    }
-
-    private func presentAddHost(withURL url: URL, deletingURLOnSuccess: Bool) {
-        bindings.modalType = .addHost(url, deletingURLOnSuccess)
-    }
-
-    private func presentHostFileImporter() {
-
-        // XXX: iOS bug, hack around crappy bug when dismissing by swiping down
-        //
-        // https://stackoverflow.com/questions/66965471/swiftui-fileimporter-modifier-not-updating-binding-when-dismissed-by-tapping
-        bindings.isHostFileImporterPresented = false
-        Task {
-            await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
-            bindings.isHostFileImporterPresented = true
+        private func presentAddProvider() {
+            modalType = .addProvider
         }
-//        isHostFileImporterPresented = true
 
-//        // use this to test hardcoded bundle file
-//        let url = Bundle.main.url(forResource: "pia", withExtension: "ovpn")!
-//        importedProfileName = "pia.ovpn"
-//        modalType = .addHost(url, false)
+        private func presentAddHost(withURL url: URL, deletingURLOnSuccess: Bool) {
+            modalType = .addHost(url, deletingURLOnSuccess)
+        }
+
+        private func presentHostFileImporter() {
+
+            // XXX: iOS bug, hack around crappy bug when dismissing by swiping down
+            //
+            // https://stackoverflow.com/questions/66965471/swiftui-fileimporter-modifier-not-updating-binding-when-dismissed-by-tapping
+            isHostFileImporterPresented = false
+            Task {
+                await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
+                isHostFileImporterPresented = true
+            }
+//            isHostFileImporterPresented = true
+
+//            // use this to test hardcoded bundle file
+//            let url = Bundle.main.url(forResource: "pia", withExtension: "ovpn")!
+//            importedProfileName = "pia.ovpn"
+//            modalType = .addHost(url, false)
+        }
     }
 }

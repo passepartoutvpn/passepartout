@@ -26,10 +26,6 @@
 import SwiftUI
 
 struct MainView: View {
-    init() {
-        themeConfigureNavigationBarAppearance()
-    }
-
     var body: some View {
         NavigationView {
             OrganizerView()

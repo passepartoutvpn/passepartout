@@ -99,6 +99,7 @@ struct ProfileView: View {
         ExtraSection(currentProfile: profileManager.currentProfile)
         DiagnosticsSection(currentProfile: profileManager.currentProfile)
         removeProfileSection
+        UninstallVPNSection()
     }
     
     private var welcomeView: some View {
@@ -171,6 +172,27 @@ struct ProfileView: View {
         }
     }
 
+    private func confirmRemoveProfile() {
+        withAnimation {
+            removeProfile()
+        }
+    }
+
+    private func removeProfile() {
+        guard profileManager.isExistingProfile(withId: header.id) else {
+            assertionFailure("Deleting non-existent profile \(header.name)")
+            return
+        }
+        IntentDispatcher.forgetProfile(withHeader: header)
+        profileManager.removeProfiles(withIds: [header.id])
+
+        // XXX: iOS 14, NavigationLink removal via header removal in OrganizerView+Profiles doesn't pop
+        if #available(iOS 15, *) {
+        } else {
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+
     private func loadProfileIfNeeded() {
         guard !isLoaded else {
             return
@@ -198,27 +220,6 @@ struct ProfileView: View {
             }
         } catch {
             pp_log.error("Profile \(header.id) could not be loaded: \(error)")
-            presentationMode.wrappedValue.dismiss()
-        }
-    }
-    
-    private func confirmRemoveProfile() {
-        withAnimation {
-            removeProfile()
-        }
-    }
-
-    private func removeProfile() {
-        guard profileManager.isExistingProfile(withId: header.id) else {
-            assertionFailure("Deleting non-existent profile \(header.name)")
-            return
-        }
-        IntentDispatcher.forgetProfile(withHeader: header)
-        profileManager.removeProfiles(withIds: [header.id])
-
-        // XXX: iOS 14, NavigationLink removal via header removal in OrganizerView+Profiles doesn't pop
-        if #available(iOS 15, *) {
-        } else {
             presentationMode.wrappedValue.dismiss()
         }
     }

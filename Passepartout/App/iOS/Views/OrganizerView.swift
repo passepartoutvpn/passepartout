@@ -24,7 +24,6 @@
 //
 
 import SwiftUI
-import StoreKit
 import PassepartoutCore
 
 struct OrganizerView: View {
@@ -32,6 +31,14 @@ struct OrganizerView: View {
         case addProvider
 
         case addHost(URL, Bool)
+        
+        case shortcuts
+        
+        case donate
+        
+        case share([Any])
+
+        case about
         
         case presentPaywallShortcuts
         
@@ -42,7 +49,15 @@ struct OrganizerView: View {
 
             case .addHost: return 2
                 
-            case .presentPaywallShortcuts: return 3
+            case .shortcuts: return 3
+                
+            case .donate: return 4
+                
+            case .share: return 5
+                
+            case .about: return 6
+                
+            case .presentPaywallShortcuts: return 7
             }
         }
     }
@@ -72,18 +87,14 @@ struct OrganizerView: View {
 
     @AppStorage(AppManager.DefaultKey.didHandleSubreddit.rawValue) var didHandleSubreddit = false
     
-    init() {
-        appManager = .shared
-    }
-    
     private let hostFileTypes = Constants.URLs.filetypes
     
     private let redditURL = Constants.URLs.subreddit
     
-    private let appName = Unlocalized.appName
-
-    private let versionString = Constants.Global.appVersionString
-
+    init() {
+        appManager = .shared
+    }
+    
     var body: some View {
         debugChanges()
         return ZStack {
@@ -91,22 +102,7 @@ struct OrganizerView: View {
                 alertType: $alertType,
                 didHandleSubreddit: $didHandleSubreddit
             )
-            List {
-                ProfilesSection(
-                    addProfileMenuBindings: .init(
-                        modalType: $modalType,
-                        alertType: $alertType,
-                        isHostFileImporterPresented: $isHostFileImporterPresented
-                    )
-                )
-                ShortcutsSection(
-                    modalType: $modalType
-                )
-                supportSection
-                aboutSection
-                RemoveVPNSection()
-//                betaSection
-            }
+            ProfilesList(alertType: $alertType)
         }.navigationTitle(Unlocalized.appName)
         .toolbar(content: toolbar)
         .sheet(item: $modalType, content: presentedModal)
@@ -119,18 +115,20 @@ struct OrganizerView: View {
         ).onOpenURL(perform: onOpenURL)
     }
 
-    private func toolbar() -> some View {
-        Menu {
-            AddProfileMenu(
-                withImportedURLs: true,
-                bindings: .init(
-                    modalType: $modalType,
-                    alertType: $alertType,
-                    isHostFileImporterPresented: $isHostFileImporterPresented
-                )
+    @ToolbarContentBuilder
+    private func toolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .primaryAction) {
+            AddMenu(
+                modalType: $modalType,
+                isHostFileImporterPresented: $isHostFileImporterPresented
             )
-        } label: {
-            themeAddProfileImage.asSystemImage
+        }
+        ToolbarItemGroup(placement: .automatic) {
+            SettingsMenu(
+                modalType: $modalType,
+                alertType: $alertType
+            )
+            EditButton() // FIXME: toolbars, this is not shown
         }
     }
 }
@@ -160,6 +158,24 @@ extension OrganizerView {
                         isPresented: isModalPresented
                     )
                 )
+            }.themeGlobal()
+            
+        case .shortcuts:
+            NavigationView {
+                ShortcutsView()
+            }.themeGlobal()
+            
+        case .donate:
+            NavigationView {
+                DonateView()
+            }.themeGlobal()
+
+        case .share(let items):
+            ActivityView(activityItems: items)
+
+        case .about:
+            NavigationView {
+                AboutView()
             }.themeGlobal()
 
         case .presentPaywallShortcuts:
@@ -228,51 +244,10 @@ extension OrganizerView {
     }
 }
 
-// MARK: Minor sections
-
-extension OrganizerView {
-    private var supportSection: some View {
-        Section(
-            header: Text(L10n.Organizer.Sections.Support.header)
-        ) {
-            NavigationLink {
-                DonateView()
-            } label: {
-                Label(L10n.Organizer.Items.Donate.caption, systemImage: themeDonateImage)
-            }.disabled(!SKPaymentQueue.canMakePayments())
-
-            Button {
-                URL.openURL(redditURL)
-            } label: {
-                Label(L10n.Organizer.Items.JoinCommunity.caption, systemImage: themeRedditImage)
-            }
-            Button(action: submitReview) {
-                Label(L10n.Organizer.Items.WriteReview.caption, systemImage: themeWriteReviewImage)
-            }
-        }
-    }
-    
-    private var aboutSection: some View {
-        Section {
-            NavigationLink {
-                AboutView()
-            } label: {
-                Text(L10n.Organizer.Items.About.caption(appName))
-//                    .withTrailingText(versionString)
-            }
-        }
-    }
-}
-
 // MARK: Actions
 
 extension OrganizerView {
     private func presentSubscribeReddit() {
         alertType = .subscribeReddit
-    }
-
-    private func submitReview() {
-        let reviewURL = Reviewer.urlForReview(withAppId: Constants.App.appStoreId)
-        URL.openURL(reviewURL)
     }
 }

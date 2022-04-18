@@ -27,7 +27,7 @@ import SwiftUI
 import PassepartoutCore
 
 extension OrganizerView {
-    struct ProfilesSection: View {
+    struct ProfilesList: View {
         @ObservedObject private var appManager: AppManager
 
         @ObservedObject private var profileManager: ProfileManager
@@ -36,39 +36,32 @@ extension OrganizerView {
 
         // just to observe changes in profiles eligibility
         @ObservedObject private var productManager: ProductManager
-
-        private let addProfileMenuBindings: AddProfileMenu.Bindings
+        
+        @Binding private var alertType: AlertType?
 
         @State private var isFirstLaunch = true
         
         @State private var selectedProfileId: UUID?
         
-        init(addProfileMenuBindings: AddProfileMenu.Bindings) {
+        init(alertType: Binding<AlertType?>) {
             appManager = .shared
             profileManager = .shared
             providerManager = .shared
             productManager = .shared
-            self.addProfileMenuBindings = addProfileMenuBindings
+            _alertType = alertType
         }
 
         var body: some View {
             debugChanges()
-            return Section {
-                ReloadingContent(
-                    observing: profileManager.headers,
-                    equality: {
-                        Set($0) == Set($1)
-                    }
-                ) {
-                    if !$0.isEmpty {
-                        ForEach($0.sorted(), content: navigationLink(forHeader:))
-                            .onAppear(perform: selectActiveProfile)
-                    } else {
-                        AddProfileMenu(
-                            withImportedURLs: false,
-                            bindings: addProfileMenuBindings
-                        )
-                    }
+            return ReloadingContent(
+                observing: profileManager.headers,
+                equality: {
+                    Set($0) == Set($1)
+                }
+            ) { headers in
+                mainView(headers)
+                if headers.isEmpty {
+                    emptyView
                 }
             }.onAppear(perform: performMigrationsIfNeeded)
 
@@ -78,6 +71,23 @@ extension OrganizerView {
             // from AddProfileView
             .onReceive(profileManager.didCreateProfile) {
                 selectedProfileId = $0.id
+            }
+        }
+        
+        private func mainView(_ headers: [Profile.Header]) -> some View {
+            List {
+                Section {
+                    ForEach(headers.sorted(), content: navigationLink(forHeader:))
+                        .onAppear(perform: selectActiveProfile)
+                }
+            }
+        }
+
+        // FIXME: l10n
+        private var emptyView: some View {
+            VStack {
+                Text("No profiles")
+                    .themeInformativeText()
             }
         }
 
@@ -95,7 +105,7 @@ extension OrganizerView {
     }
 }
 
-extension OrganizerView.ProfilesSection {
+extension OrganizerView.ProfilesList {
     struct ActiveProfileHeaderRow: View {
         @ObservedObject private var currentVPNState: VPNManager.ObservableState
 
@@ -121,7 +131,7 @@ extension OrganizerView.ProfilesSection {
     }
 }
 
-extension OrganizerView.ProfilesSection {
+extension OrganizerView.ProfilesList {
     private func selectActiveProfile() {
         guard isFirstLaunch else {
             return
@@ -133,7 +143,7 @@ extension OrganizerView.ProfilesSection {
         // - an alert is active, as it would break navigation
         // - on iPad, as it's already shown
         //
-        if addProfileMenuBindings.alertType == nil,
+        if alertType == nil,
            themeIdiom != .pad,
            let activeProfileId = profileManager.activeHeader?.id {
 
@@ -146,7 +156,7 @@ extension OrganizerView.ProfilesSection {
             await appManager.doMigrations(profileManager)
         }
     }
-
+    
     private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
         if let selectedProfileId = selectedProfileId,
            !profileManager.isExistingProfile(withId: selectedProfileId) {

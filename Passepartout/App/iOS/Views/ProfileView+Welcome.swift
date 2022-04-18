@@ -30,6 +30,7 @@ extension ProfileView {
         var body: some View {
             Text(L10n.Profile.Welcome.message)
                 .multilineTextAlignment(.center)
+                .themeInformativeText()
         }
     }
 }
