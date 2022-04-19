@@ -171,9 +171,9 @@ public class ProviderManager: ObservableObject, RateLimited {
                         .eraseToAnyPublisher()
                 }
                 
-                guard self.appBuild >= infrastructure.buildNumber else {
-                    pp_log.error("Infrastructure requires app build >= \(infrastructure.buildNumber) (app is \(self.appBuild))")
-                    return Fail(error: ProviderManagerError.outdatedBuild(self.appBuild, infrastructure.buildNumber))
+                guard self.appBuild >= infrastructure.build else {
+                    pp_log.error("Infrastructure requires app build >= \(infrastructure.build) (app is \(self.appBuild))")
+                    return Fail(error: ProviderManagerError.outdatedBuild(self.appBuild, infrastructure.build))
                         .eraseToAnyPublisher()
                 }
 

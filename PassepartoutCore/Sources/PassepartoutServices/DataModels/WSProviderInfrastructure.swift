@@ -38,17 +38,7 @@ public struct WSProviderInfrastructure: Codable {
         public let countryCode: String
     }
     
-    public let build: [String: Int]
-    
-    public var buildNumber: Int {
-        var num: Int?
-        #if os(iOS)
-        num = build["ios"]
-        #else
-        num = build["macos"]
-        #endif
-        return num ?? 0
-    }
+    public let build: Int
     
     public let name: WSProviderName
     
