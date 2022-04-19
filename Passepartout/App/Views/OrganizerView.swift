@@ -115,12 +115,12 @@ struct OrganizerView: View {
                 isHostFileImporterPresented: $isHostFileImporterPresented
             )
         }
-        ToolbarItemGroup(placement: .navigation) {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
             SettingsMenu(
                 modalType: $modalType,
                 alertType: $alertType
             )
-            EditButton() // FIXME: toolbars, this is not shown
+//            EditButton()
         }
     }
 }
