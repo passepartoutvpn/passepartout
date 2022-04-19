@@ -34,8 +34,7 @@ struct VersionView: View {
             appName: Unlocalized.appName,
             versionString: versionString,
             extraString: L10n.Version.Labels.intro
-        ).navigationTitle(L10n.Version.title)
-        .background(themePrimaryBackground)
+        ).background(themePrimaryBackground)
         .foregroundColor(themeLightTextColor)
     }
 }
