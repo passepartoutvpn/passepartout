@@ -369,21 +369,22 @@
 		0E0BD25527B130AD00583AC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0EC54E1927F214C9002522D0 /* AddProfile */,
-				0EC54E1A27F214E7002522D0 /* Paywall */,
-				0EC54E1B27F214F1002522D0 /* Profile */,
 				0E44689B27B11B5300A14CE4 /* AboutView.swift */,
 				0ECF71ED27B6A99300CDB528 /* AccountView.swift */,
+				0E3B7FCC27E47B3700C66F13 /* AddHostView.swift */,
+				0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */,
+				0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */,
+				0EF2212A27E667EA001D0BD7 /* AddProviderView+Name.swift */,
 				0E71ACF827C12E4800F85C4B /* CreditsView.swift */,
 				0E71ACF627C107C900F85C4B /* DebugLogView.swift */,
 				0E5683B827C2825D00EAF1CD /* DiagnosticsView.swift */,
 				0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */,
 				0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */,
 				0E0BD27527B2EB2200583AC5 /* DonateView.swift */,
-				0E71ACEA27C1060D00F85C4B /* EndpointView.swift */,
 				0E49F6BE27D764AF00385834 /* EndpointAdvancedView.swift */,
 				0E49F6BA27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift */,
 				0E49F6BC27D7639000385834 /* EndpointAdvancedView+WireGuard.swift */,
+				0E71ACEA27C1060D00F85C4B /* EndpointView.swift */,
 				0E5349C527C176C200C71BB3 /* EndpointView+OpenVPN.swift */,
 				0E5349C727C176D100C71BB3 /* EndpointView+WireGuard.swift */,
 				0E0BD27227B2EA2C00583AC5 /* MainView.swift */,
@@ -395,6 +396,9 @@
 				0E34AC7B27F845510042F2AB /* OrganizerView+Profiles.swift */,
 				0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */,
 				0EE11CD1280D8317003BE431 /* OrganizerView+SettingsMenu.swift */,
+				0EF0FAF527DD0211007EB181 /* PaywallView.swift */,
+				0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */,
+				0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */,
 				0ED89C2427DE45A3008B36D6 /* ProfileHeaderRow.swift */,
 				0E44689527B051C300A14CE4 /* ProfileView.swift */,
 				0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */,
@@ -402,6 +406,7 @@
 				0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */,
 				0E3CD482280DAE92007075C0 /* ProfileView+MenuBar.swift */,
 				0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */,
+				0EBC074B27EB673C00208AD9 /* ProfileView+Rename.swift */,
 				0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */,
 				0E0AD48F27BD53CB00FBB520 /* ProfileView+Welcome.swift */,
 				0E71ACF027C1073800F85C4B /* ProviderLocationView.swift */,
@@ -575,35 +580,6 @@
 				0EBC075427EBC83800208AD9 /* MailComposerView.swift */,
 			);
 			path = Reusable;
-			sourceTree = "<group>";
-		};
-		0EC54E1927F214C9002522D0 /* AddProfile */ = {
-			isa = PBXGroup;
-			children = (
-				0E3B7FCC27E47B3700C66F13 /* AddHostView.swift */,
-				0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */,
-				0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */,
-				0EF2212A27E667EA001D0BD7 /* AddProviderView+Name.swift */,
-			);
-			path = AddProfile;
-			sourceTree = "<group>";
-		};
-		0EC54E1A27F214E7002522D0 /* Paywall */ = {
-			isa = PBXGroup;
-			children = (
-				0EF0FAF527DD0211007EB181 /* PaywallView.swift */,
-				0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */,
-				0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */,
-			);
-			path = Paywall;
-			sourceTree = "<group>";
-		};
-		0EC54E1B27F214F1002522D0 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				0EBC074B27EB673C00208AD9 /* ProfileView+Rename.swift */,
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		0ECF71E227B64FFC00CDB528 /* ViewModels */ = {
