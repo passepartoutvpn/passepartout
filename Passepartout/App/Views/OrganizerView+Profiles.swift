@@ -61,14 +61,14 @@ extension OrganizerView {
                     emptyView
                 }
             }.onAppear {
-                localHeaders = profileManager.headers.sorted()
+                reloadHeaders(profileManager.headers)
                 performMigrationsIfNeeded()
             }.onChange(of: profileManager.headers) { newHeaders in
                 withAnimation {
                     guard Set(newHeaders) != Set(localHeaders) else {
                         return
                     }
-                    localHeaders = newHeaders.sorted()
+                    reloadHeaders(newHeaders)
                     dismissSelectionIfDeleted(headers: newHeaders)
                 }
             }
@@ -139,6 +139,10 @@ extension OrganizerView.ProfilesList {
 }
 
 extension OrganizerView.ProfilesList {
+    private func reloadHeaders(_ newHeaders: [Profile.Header]) {
+        localHeaders = newHeaders.sorted()
+    }
+    
     private func preselectIfActiveProfile(_ id: UUID) {
 
         // do not push profile if:
@@ -181,7 +185,9 @@ extension OrganizerView.ProfilesList {
         }
 
         profileManager.removeProfiles(withIds: toDelete)
-        localHeaders = profileManager.headers.sorted()
+
+        // IMPORTANT: synchronize headers here to prevent .onChange() from animating a second time
+        localHeaders.remove(atOffsets: indexSet)
     }
 
     private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
