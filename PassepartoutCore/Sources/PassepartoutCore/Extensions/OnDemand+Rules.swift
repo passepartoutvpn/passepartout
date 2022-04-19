@@ -50,11 +50,13 @@ extension Profile.OnDemand {
 
         var rules: [NEOnDemandRule] = []
         if withCustomRules {
+            #if os(iOS)
             if withMobileNetwork {
                 let rule = policyRule
                 rule.interfaceTypeMatch = .cellular
                 rules.append(rule)
             }
+            #endif
             if withEthernetNetwork {
                 if let compatibleEthernet = NEOnDemandRuleInterfaceType.compatibleEthernet {
                     let rule = policyRule

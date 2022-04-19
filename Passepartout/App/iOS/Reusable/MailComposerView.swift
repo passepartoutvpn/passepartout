@@ -23,9 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if canImport(MessageUI)
 import SwiftUI
-import Combine
 import MessageUI
 
 struct MailComposerView: UIViewControllerRepresentable {
@@ -76,4 +74,3 @@ struct MailComposerView: UIViewControllerRepresentable {
         Coordinator(self)
     }
 }
-#endif

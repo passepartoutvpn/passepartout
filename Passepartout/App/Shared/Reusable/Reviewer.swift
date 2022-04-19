@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS) && canImport(StoreKit)
 import UIKit
 import StoreKit
 
@@ -93,4 +92,3 @@ public class Reviewer: ObservableObject {
         return URL(string: "https://apps.apple.com/app/id\(appId)?action=write-review")!
     }
 }
-#endif

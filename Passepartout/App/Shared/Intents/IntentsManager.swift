@@ -25,9 +25,7 @@
 
 import Foundation
 import Intents
-#if canImport(IntentsUI)
 import IntentsUI
-#endif
 import Combine
 
 @MainActor
@@ -65,7 +63,6 @@ class IntentsManager: NSObject, ObservableObject {
     }
 }
 
-@available(iOS 12, macOS 12, *)
 extension IntentsManager: INUIAddVoiceShortcutViewControllerDelegate {
     func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
         guard let vs = voiceShortcut else {
@@ -81,7 +78,6 @@ extension IntentsManager: INUIAddVoiceShortcutViewControllerDelegate {
    }
 }
 
-@available(iOS 12, macOS 12, *)
 extension IntentsManager: INUIEditVoiceShortcutViewControllerDelegate {
     func editVoiceShortcutViewController(_ controller: INUIEditVoiceShortcutViewController, didUpdate voiceShortcut: INVoiceShortcut?, error: Error?) {
         guard let vs = voiceShortcut else {

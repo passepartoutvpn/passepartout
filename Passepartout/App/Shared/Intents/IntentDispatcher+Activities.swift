@@ -132,7 +132,6 @@ extension IntentDispatcher {
     }
     
     private static func handleCellularNetwork(_ trust: Bool, _ vpnManager: VPNManager) {
-        #if os(iOS)
         Task {
             do {
                 try await vpnManager.modifyActiveProfile {
@@ -142,7 +141,6 @@ extension IntentDispatcher {
                 pp_log.error("Unable to modify cellular trust: \(error)")
             }
         }
-        #endif
     }
 
     private static func handleCurrentNetwork(_ trust: Bool, _ vpnManager: VPNManager) {

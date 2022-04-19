@@ -144,12 +144,10 @@ struct ShortcutsView: View {
         }
     }
     
-    @available(iOS 12, macOS 12, *)
     private func presentEditShortcut(_ shortcut: Shortcut) {
         modalType = .edit(shortcut: shortcut)
     }
 
-    @available(iOS 12, macOS 12, *)
     private func presentAddShortcut(_ shortcut: INShortcut) {
         isNavigationPresented = false
         modalType = .add(shortcut: shortcut)

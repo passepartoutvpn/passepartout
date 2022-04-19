@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if canImport(StoreKit)
 import Foundation
 import StoreKit
 
@@ -222,4 +221,3 @@ extension SKProduct {
         return localizedCurrencyFormatter.string(from: price)
     }
 }
-#endif

@@ -37,7 +37,6 @@ extension Color {
 }
 
 extension View {
-    @available(iOS 14, *)
     var themeIdiom: UIUserInterfaceIdiom {
         UIDevice.current.userInterfaceIdiom
     }

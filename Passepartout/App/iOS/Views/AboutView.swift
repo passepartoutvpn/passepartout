@@ -32,7 +32,7 @@ struct AboutView: View {
     
     private let readmeURL = Constants.URLs.readme
 
-    private let changelogURL = Constants.URLs.iOS.changelog
+    private let changelogURL = Constants.URLs.changelog
 
     private let homeURL = Constants.URLs.website
 

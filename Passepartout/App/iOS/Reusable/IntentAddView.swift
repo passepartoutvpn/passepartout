@@ -25,11 +25,8 @@
 
 import SwiftUI
 import Intents
-#if canImport(IntentsUI)
 import IntentsUI
-#endif
 
-@available(iOS 12, macOS 12, *)
 struct IntentAddView: UIViewControllerRepresentable {
     let shortcut: INShortcut
     

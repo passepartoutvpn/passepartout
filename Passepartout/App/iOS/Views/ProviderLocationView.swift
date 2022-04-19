@@ -122,7 +122,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
 
     @ViewBuilder
     private func toolbar() -> some View {
-        if #available(iOS 15, macOS 12, *) {
+        if #available(iOS 15, *) {
             Button {
                 withAnimation {
                     isShowingFavorites.toggle()
@@ -144,7 +144,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             header: !category.name.isEmpty ? Text(category.name) : nil
         ) {
             ForEach(filteredLocations(for: category)) { location in
-                if isEditable, #available(iOS 15, macOS 12, *) {
+                if isEditable, #available(iOS 15, *) {
                     locationRow(location)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             favoriteActions(location)
@@ -197,7 +197,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         }
     }
 
-    @available(iOS 15, macOS 12, *)
+    @available(iOS 15, *)
     private func favoriteActions(_ location: ProviderLocation) -> some View {
         Button {
             withAnimation {
