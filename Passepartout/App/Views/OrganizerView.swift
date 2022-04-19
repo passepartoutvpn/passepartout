@@ -115,7 +115,7 @@ struct OrganizerView: View {
                 isHostFileImporterPresented: $isHostFileImporterPresented
             )
         }
-        ToolbarItemGroup(placement: .automatic) {
+        ToolbarItemGroup(placement: .navigation) {
             SettingsMenu(
                 modalType: $modalType,
                 alertType: $alertType
