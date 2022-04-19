@@ -26,6 +26,20 @@
 import Foundation
 import NetworkExtension
 
+extension NEOnDemandRuleInterfaceType {
+    static var compatibleEthernet: NEOnDemandRuleInterfaceType? {
+        #if targetEnvironment(macCatalyst)
+        // FIXME: Catalyst, missing enum case, try hardcoding
+        // https://developer.apple.com/documentation/networkextension/neondemandruleinterfacetype/ethernet
+        NEOnDemandRuleInterfaceType(rawValue: 1)
+        #elseif os(macOS)
+        .ethernet
+        #else
+        nil
+        #endif
+    }
+}
+
 extension Profile.OnDemand {
     func rules(withCustomRules: Bool) -> [NEOnDemandRule] {
 
@@ -36,19 +50,20 @@ extension Profile.OnDemand {
 
         var rules: [NEOnDemandRule] = []
         if withCustomRules {
-            #if os(iOS)
             if withMobileNetwork {
                 let rule = policyRule
                 rule.interfaceTypeMatch = .cellular
                 rules.append(rule)
             }
-            #else
             if withEthernetNetwork {
-                let rule = policyRule
-                rule.interfaceTypeMatch = .ethernet
-                rules.append(rule)
+                if let compatibleEthernet = NEOnDemandRuleInterfaceType.compatibleEthernet {
+                    let rule = policyRule
+                    rule.interfaceTypeMatch = compatibleEthernet
+                    rules.append(rule)
+                } else {
+                    pp_log.warning("Unable to add rule for NEOnDemandRuleInterfaceType.ethernet (not compatible)")
+                }
             }
-            #endif
             let SSIDs = Array(withSSIDs.filter { $1 }.keys)
             if !SSIDs.isEmpty {
                 let rule = policyRule

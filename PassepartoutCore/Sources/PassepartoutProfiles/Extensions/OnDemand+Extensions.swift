@@ -24,12 +24,9 @@
 //
 
 import Foundation
-import NetworkExtension
 import PassepartoutUtils
 
 extension Profile.OnDemand {
-
-    @available(iOS 14, *)
     public var withMobileNetwork: Bool {
         get {
             withOtherNetworks.contains(.mobile)
@@ -43,7 +40,6 @@ extension Profile.OnDemand {
         }
     }
 
-    @available(macOS 11, *)
     public var withEthernetNetwork: Bool {
         get {
             withOtherNetworks.contains(.ethernet)

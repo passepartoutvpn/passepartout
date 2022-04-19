@@ -36,11 +36,8 @@ extension Profile {
         }
         
         public enum OtherNetwork: String, Codable {
-
-            @available(iOS 14, *)
             case mobile
 
-            @available(macOS 11, *)
             case ethernet
         }
         
