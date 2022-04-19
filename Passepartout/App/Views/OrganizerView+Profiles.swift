@@ -101,7 +101,7 @@ extension OrganizerView {
                     ProfileHeaderRow(header: header)
                 }
             }.onAppear {
-                preselectActiveProfile(header.id)
+                preselectIfActiveProfile(header.id)
             }
         }
     }
@@ -134,23 +134,22 @@ extension OrganizerView.ProfilesList {
 }
 
 extension OrganizerView.ProfilesList {
-    private func preselectActiveProfile(_ id: UUID) {
-        guard isFirstLaunch else {
-            return
-        }
-        isFirstLaunch = false
+    private func preselectIfActiveProfile(_ id: UUID) {
 
         // do not push profile if:
         //
         // - an alert is active, as it would break navigation
         // - on iPad, as it's already shown
         //
-        if alertType == nil,
-           themeIdiom != .pad,
-           id == profileManager.activeHeader?.id {
-
-            selectedProfileId = id
+        guard alertType == nil, themeIdiom != .pad, id == profileManager.activeHeader?.id else {
+            return
         }
+        guard isFirstLaunch else {
+            return
+        }
+        isFirstLaunch = false
+
+        selectedProfileId = id
     }
 
     private func performMigrationsIfNeeded() {
