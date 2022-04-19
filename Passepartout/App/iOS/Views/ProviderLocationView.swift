@@ -106,17 +106,18 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     }
     
     private var mainView: some View {
-        ScrollViewReader { scrollProxy in
+        // FIXME: layout, content inside ScrollViewReader is not re-rendered on isShowingFavorites
+//        ScrollViewReader { scrollProxy in
             List {
                 if !isShowingEmptyFavorites {
                     categoriesView
                 } else {
                     emptyFavoritesSection
                 }
-            }.onAppear {
-                scrollToSelectedLocation(scrollProxy)
+//            }.onAppear {
+//                scrollToSelectedLocation(scrollProxy)
             }
-        }
+//        }
     }
 
     @ViewBuilder
@@ -310,14 +311,14 @@ extension ProviderLocationView {
 
 // FIXME: layout, pre-scrolling produces plenty of artifacts
 
-extension ProviderLocationView {
-    private func scrollToSelectedLocation(_ proxy: ScrollViewProxy) {
+//extension ProviderLocationView {
+//    private func scrollToSelectedLocation(_ proxy: ScrollViewProxy) {
 //        proxy.maybeScrollTo(selectedServer?.locationId)
-    }
-}
+//    }
+//}
 
 extension ProviderLocationView.ServerListView {
     private func scrollToSelectedServer(_ proxy: ScrollViewProxy) {
-//        proxy.maybeScrollTo(selectedServer?.id)
+        proxy.maybeScrollTo(selectedServer?.id)
     }
 }
