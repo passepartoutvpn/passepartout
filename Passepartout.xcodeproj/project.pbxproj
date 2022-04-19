@@ -366,15 +366,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E0BD25527B130AD00583AC5 /* Views */ = {
+		0E2C171C27CB6307007E8488 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				0E71ACFC27C1321A00F85C4B /* ActivityView.swift */,
+				0EB4042D27CA136200378B1A /* AddingTextField.swift */,
+				0EB3412F27C7761A00483410 /* Binding+Extensions.swift */,
+				0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */,
+				0EDE02C127F61C79000FBE3C /* EditableTextList.swift */,
+				0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */,
+				0E34A2CE27CADA6300C73B67 /* GenericVersionView.swift */,
+				0E5324A527D297BB002565C3 /* InApp.swift */,
+				0EF0FAF827DD212C007EB181 /* IntentActivity.swift */,
+				0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */,
+				0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */,
+				0E5324A827D2AC55002565C3 /* LongContentView.swift */,
+				0EBC075427EBC83800208AD9 /* MailComposerView.swift */,
+				0E9C3B6B27FB3A9C00D0F02E /* ReloadingContent.swift */,
+				0ED30DCB27EA197C0057D8A3 /* RevealingSecureField.swift */,
+				0E2C172A27CB63F9007E8488 /* Reviewer.swift */,
+				0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */,
+				0E5349BD27C16A4500C71BB3 /* StyledPicker.swift */,
+				0E12BC8E27F62C8500B2F912 /* Validators.swift */,
+				0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		0E34A2B827CAA8EA00C73B67 /* L10n */ = {
+			isa = PBXGroup;
+			children = (
+				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
+				0E34A2B527CAA8CC00C73B67 /* Core+L10n.swift */,
+				0E34A2AF27CAA84500C73B67 /* OpenVPN+L10n.swift */,
+				0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */,
+				0E2DE71E27DCD0290067B9E1 /* TunnelKit+L10n.swift */,
+				0EB4042B27CA0E8B00378B1A /* Unlocalized.swift */,
+				0E2DE72427DCDF550067B9E1 /* WireGuard+L10n.swift */,
+			);
+			path = L10n;
+			sourceTree = "<group>";
+		};
+		0E35C0AE280EF8A80071FA35 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0E35C0B2280EFA6A0071FA35 /* iOS */,
+				0E35C0B3280EFA6E0071FA35 /* macOS */,
 				0E44689B27B11B5300A14CE4 /* AboutView.swift */,
 				0ECF71ED27B6A99300CDB528 /* AccountView.swift */,
 				0E3B7FCC27E47B3700C66F13 /* AddHostView.swift */,
+				0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */,
 				0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */,
 				0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */,
 				0EF2212A27E667EA001D0BD7 /* AddProviderView+Name.swift */,
+				0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */,
 				0E71ACF827C12E4800F85C4B /* CreditsView.swift */,
 				0E71ACF627C107C900F85C4B /* DebugLogView.swift */,
 				0E5683B827C2825D00EAF1CD /* DiagnosticsView.swift */,
@@ -419,62 +464,18 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0E0BD26427B25EC800583AC5 /* Shared */ = {
+		0E35C0B2280EFA6A0071FA35 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0EB17EA027D2263700D473B5 /* Constants */,
-				0E49F6C927DB398100385834 /* Extensions */,
-				0E92781227E7CD530057BB81 /* InApp */,
-				0EA591112733DD4E0096F796 /* Intents */,
-				0E34A2B827CAA8EA00C73B67 /* L10n */,
-				0E2C171C27CB6307007E8488 /* Reusable */,
-				0E6059CA27FCC5DE003F4063 /* Assets.xcassets */,
-				0E6059C827FCC5DD003F4063 /* Flags.xcassets */,
-				0E6059C927FCC5DE003F4063 /* Providers.xcassets */,
-				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
-				0EDE8DE220C86A13004C739C /* App.entitlements */,
-				0E57F64720C83FC7008323CF /* Info.plist */,
-				0E0C072B236087A100155AAC /* InfoPlist.strings */,
-				0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */,
 			);
-			path = Shared;
+			path = iOS;
 			sourceTree = "<group>";
 		};
-		0E2C171C27CB6307007E8488 /* Reusable */ = {
+		0E35C0B3280EFA6E0071FA35 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				0EB4042D27CA136200378B1A /* AddingTextField.swift */,
-				0EB3412F27C7761A00483410 /* Binding+Extensions.swift */,
-				0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */,
-				0EDE02C127F61C79000FBE3C /* EditableTextList.swift */,
-				0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */,
-				0E34A2CE27CADA6300C73B67 /* GenericVersionView.swift */,
-				0E5324A527D297BB002565C3 /* InApp.swift */,
-				0EF0FAF827DD212C007EB181 /* IntentActivity.swift */,
-				0E5324A827D2AC55002565C3 /* LongContentView.swift */,
-				0E9C3B6B27FB3A9C00D0F02E /* ReloadingContent.swift */,
-				0ED30DCB27EA197C0057D8A3 /* RevealingSecureField.swift */,
-				0E2C172A27CB63F9007E8488 /* Reviewer.swift */,
-				0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */,
-				0E5349BD27C16A4500C71BB3 /* StyledPicker.swift */,
-				0E12BC8E27F62C8500B2F912 /* Validators.swift */,
-				0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */,
 			);
-			path = Reusable;
-			sourceTree = "<group>";
-		};
-		0E34A2B827CAA8EA00C73B67 /* L10n */ = {
-			isa = PBXGroup;
-			children = (
-				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
-				0E34A2B527CAA8CC00C73B67 /* Core+L10n.swift */,
-				0E34A2AF27CAA84500C73B67 /* OpenVPN+L10n.swift */,
-				0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */,
-				0E2DE71E27DCD0290067B9E1 /* TunnelKit+L10n.swift */,
-				0EB4042B27CA0E8B00378B1A /* Unlocalized.swift */,
-				0E2DE72427DCDF550067B9E1 /* WireGuard+L10n.swift */,
-			);
-			path = L10n;
+			path = macOS;
 			sourceTree = "<group>";
 		};
 		0E49F6C927DB398100385834 /* Extensions */ = {
@@ -510,16 +511,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0E57F63A20C83FC5008323CF /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				0EBC075327EBC7FC00208AD9 /* Reusable */,
-				0ECF71E227B64FFC00CDB528 /* ViewModels */,
-				0E0BD25527B130AD00583AC5 /* Views */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
 		0E92781227E7CD530057BB81 /* InApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,8 +533,21 @@
 		0E9AA983259F76C5003FAFF1 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				0E0BD26427B25EC800583AC5 /* Shared */,
-				0E57F63A20C83FC5008323CF /* iOS */,
+				0EB17EA027D2263700D473B5 /* Constants */,
+				0E49F6C927DB398100385834 /* Extensions */,
+				0E92781227E7CD530057BB81 /* InApp */,
+				0EA591112733DD4E0096F796 /* Intents */,
+				0E34A2B827CAA8EA00C73B67 /* L10n */,
+				0E2C171C27CB6307007E8488 /* Reusable */,
+				0E35C0AE280EF8A80071FA35 /* Views */,
+				0E6059CA27FCC5DE003F4063 /* Assets.xcassets */,
+				0E6059C827FCC5DD003F4063 /* Flags.xcassets */,
+				0E6059C927FCC5DE003F4063 /* Providers.xcassets */,
+				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
+				0EDE8DE220C86A13004C739C /* App.entitlements */,
+				0E57F64720C83FC7008323CF /* Info.plist */,
+				0E0C072B236087A100155AAC /* InfoPlist.strings */,
+				0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -569,26 +573,6 @@
 				0EB34BCB27C6F41D00B126DA /* Theme.swift */,
 			);
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		0EBC075327EBC7FC00208AD9 /* Reusable */ = {
-			isa = PBXGroup;
-			children = (
-				0E71ACFC27C1321A00F85C4B /* ActivityView.swift */,
-				0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */,
-				0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */,
-				0EBC075427EBC83800208AD9 /* MailComposerView.swift */,
-			);
-			path = Reusable;
-			sourceTree = "<group>";
-		};
-		0ECF71E227B64FFC00CDB528 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */,
-				0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		0ED2B33C27D3C52900FD8EA9 /* OpenVPN */ = {
@@ -1248,11 +1232,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/Shared/App.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/App.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3021;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				INFOPLIST_FILE = Passepartout/App/Shared/Info.plist;
+				INFOPLIST_FILE = Passepartout/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1274,11 +1258,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Passepartout/App/Shared/App.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Passepartout/App/App.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3021;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
-				INFOPLIST_FILE = Passepartout/App/Shared/Info.plist;
+				INFOPLIST_FILE = Passepartout/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
