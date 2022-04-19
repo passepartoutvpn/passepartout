@@ -168,13 +168,7 @@ extension Constants {
     enum URLs {
         static let readme = Repos.apple.appendingPathComponent("blob/master/README.md")
         
-        enum iOS {
-            static let changelog = Repos.apple.appendingPathComponent("blob/master/Passepartout/App/iOS/CHANGELOG.md")
-        }
-
-        enum macOS {
-            static let changelog = Repos.apple.appendingPathComponent("blob/master/Passepartout/App/macOS/CHANGELOG.md")
-        }
+        static let changelog = Repos.apple.appendingPathComponent("blob/master/CHANGELOG.md")
         
         static let filetypes: [UTType] = [.item]
 

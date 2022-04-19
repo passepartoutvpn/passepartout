@@ -29,7 +29,7 @@ git add Passepartout.xcodeproj
 git add *.plist
 
 # add release notes
-git add Passepartout/App/*/CHANGELOG.md
+git add CHANGELOG.md
 git add Passepartout/App/*/fastlane/metadata/*/release_notes.txt
 
 git commit -m "Attempt beta release"

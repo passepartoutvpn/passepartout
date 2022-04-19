@@ -6,7 +6,7 @@ if [[ -z $VERSION ]]; then
     exit 1
 fi
 
-CHANGELOG_GLOB="Passepartout/App/*/CHANGELOG.md"
+CHANGELOG_GLOB="CHANGELOG.md"
 
 ci/set-version.sh $VERSION
 sed -i '' -E "s/(^and this project adheres.*$)/\1\n\n## Unreleased/" $CHANGELOG_GLOB
