@@ -53,8 +53,6 @@ struct ProfileView: View {
     @State private var modalType: ModalType?
     
     @State private var isLoaded = false
-
-    @State private var isAskingRemoveProfile = false
     
     init(header: Profile.Header?) {
         let profileManager: ProfileManager = .shared
@@ -98,7 +96,6 @@ struct ProfileView: View {
         )
         ExtraSection(currentProfile: profileManager.currentProfile)
         DiagnosticsSection(currentProfile: profileManager.currentProfile)
-        removeProfileSection
         UninstallVPNSection()
     }
     
@@ -149,47 +146,6 @@ struct ProfileView: View {
             header: Text(Unlocalized.VPN.vpn)
         ) {
             ProgressView()
-        }
-    }
-
-    private var removeProfileSection: some View {
-        Section {
-            Button {
-                isAskingRemoveProfile = true
-            } label: {
-                Label(L10n.Organizer.Alerts.RemoveProfile.title, systemImage: themeDeleteImage)
-            }.foregroundColor(themeErrorColor)
-            .actionSheet(isPresented: $isAskingRemoveProfile) {
-                ActionSheet(
-                    title: Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name)),
-                    message: nil,
-                    buttons: [
-                        .destructive(Text(L10n.Organizer.Alerts.RemoveProfile.title), action: confirmRemoveProfile),
-                        .cancel(Text(L10n.Global.Strings.cancel))
-                    ]
-                )
-            }
-        }
-    }
-
-    private func confirmRemoveProfile() {
-        withAnimation {
-            removeProfile()
-        }
-    }
-
-    private func removeProfile() {
-        guard profileManager.isExistingProfile(withId: header.id) else {
-            assertionFailure("Deleting non-existent profile \(header.name)")
-            return
-        }
-        IntentDispatcher.forgetProfile(withHeader: header)
-        profileManager.removeProfiles(withIds: [header.id])
-
-        // XXX: iOS 14, NavigationLink removal via header removal in OrganizerView+Profiles doesn't pop
-        if #available(iOS 15, *) {
-        } else {
-            presentationMode.wrappedValue.dismiss()
         }
     }
 

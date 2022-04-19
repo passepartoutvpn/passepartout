@@ -78,6 +78,7 @@ extension OrganizerView {
             List {
                 Section {
                     ForEach(headers.sorted(), content: navigationLink(forHeader:))
+                        .onDelete(perform: removeProfiles)
                         .onAppear(perform: selectActiveProfile)
                 }
             }
@@ -157,6 +158,15 @@ extension OrganizerView.ProfilesList {
         }
     }
     
+    private func removeProfiles(_ indexSet: IndexSet) {
+        let headers = profileManager.headers.sorted()
+        var toDelete: [UUID] = []
+        indexSet.forEach {
+            toDelete.append(headers[$0].id)
+        }
+        profileManager.removeProfiles(withIds: toDelete)
+    }
+
     private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
         if let selectedProfileId = selectedProfileId,
            !profileManager.isExistingProfile(withId: selectedProfileId) {

@@ -162,7 +162,7 @@ extension ProfileManager {
         }
 
         guard let profile = strategy.profile(withId: id) else {
-            assertionFailure("Profile in headers yet not found in persistent store")
+//            assertionFailure("Profile in headers yet not found in persistent store")
             return nil
         }
         guard availabilityFilter?(profile.header) ?? true else {

@@ -44,7 +44,7 @@ extension ProfileView {
         var body: some View {
             debugChanges()
             return Group {
-                if !isEmpty {
+                if canDisplay {
                     mainView
                 } else {
                     EmptyView()
@@ -52,8 +52,14 @@ extension ProfileView {
             }
         }
         
-        private var isEmpty: Bool {
-            currentProfile.value.isPlaceholder || !currentProfile.value.isProvider
+        private var canDisplay: Bool {
+            guard !currentProfile.value.isPlaceholder else {
+                return false
+            }
+            guard let providerName = currentProfile.value.header.providerName else {
+                return false
+            }
+            return providerManager.isAvailable(providerName, vpnProtocol: currentProfile.value.currentVPNProtocol)
         }
         
         private var mainView: some View {
