@@ -183,10 +183,10 @@ class ProductManager: NSObject, ObservableObject {
     // MARK: In-app eligibility
     
     private func isCurrentPlatformVersion() -> Bool {
-        #if os(iOS)
-        return purchasedFeatures.contains(.fullVersion_iOS)
-        #else
+        #if targetEnvironment(macCatalyst)
         return purchasedFeatures.contains(.fullVersion_macOS)
+        #else
+        return purchasedFeatures.contains(.fullVersion_iOS)
         #endif
     }
 
@@ -206,10 +206,10 @@ class ProductManager: NSObject, ObservableObject {
                 return true
             }
         }
-        #if os(iOS)
-        return isFullVersion() || purchasedFeatures.contains(feature)
-        #else
+        #if targetEnvironment(macCatalyst)
         return isFullVersion()
+        #else
+        return isFullVersion() || purchasedFeatures.contains(feature)
         #endif
     }
 
@@ -299,12 +299,12 @@ extension ProductManager {
         let hasCancelledFullVersion: Bool
         let hasCancelledTrustedNetworks: Bool
         
-        #if os(iOS)
-        hasCancelledFullVersion = !isEligibleForFullVersion && (isCancelledPurchase(.fullVersion) || isCancelledPurchase(.fullVersion_iOS))
-        hasCancelledTrustedNetworks = !isEligibleForFullVersion && isCancelledPurchase(.trustedNetworks)
-        #else
+        #if targetEnvironment(macCatalyst)
         hasCancelledFullVersion = !isEligibleForFullVersion && (isCancelledPurchase(.fullVersion) || isCancelledPurchase(.fullVersion_macOS))
         hasCancelledTrustedNetworks = false
+        #else
+        hasCancelledFullVersion = !isEligibleForFullVersion && (isCancelledPurchase(.fullVersion) || isCancelledPurchase(.fullVersion_iOS))
+        hasCancelledTrustedNetworks = !isEligibleForFullVersion && isCancelledPurchase(.trustedNetworks)
         #endif
         
         // review features and potentially revert them if they were used (Siri is handled in AppDelegate)

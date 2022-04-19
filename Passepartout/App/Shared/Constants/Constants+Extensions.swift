@@ -70,24 +70,19 @@ extension Constants {
             return isBeta ? .beta : .freemium
         }
 
-        #if os(iOS)
-        static let lastFullVersionBuild: (Int, LocalProduct) = (2016, .fullVersion_iOS)
-        #else
+        #if targetEnvironment(macCatalyst)
         static let lastFullVersionBuild: (Int, LocalProduct) = (0, .fullVersion_macOS)
+        #else
+        static let lastFullVersionBuild: (Int, LocalProduct) = (2016, .fullVersion_iOS)
         #endif
         
         static let lastNetworkSettingsBuild = 2999
 
         private static var isBeta: Bool {
-            #if os(iOS)
             #if targetEnvironment(simulator)
             return true
             #else
             return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-            #endif
-            #else
-            // TODO: production, skip TestFlight on macOS until beta condition is clearly determined
-            return false
             #endif
         }
     }
@@ -256,10 +251,10 @@ extension Constants {
     }
     
     enum Rating {
-        #if os(iOS)
-        static let eventCount = 3
-        #else
+        #if targetEnvironment(macCatalyst)
         static let eventCount = 10
+        #else
+        static let eventCount = 3
         #endif
     }
 }

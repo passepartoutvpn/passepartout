@@ -189,21 +189,21 @@ extension PaywallView.PurchaseView {
     }
     
     private var skPlatformVersion: SKProduct? {
-        #if os(iOS)
-        return productManager.product(withIdentifier: .fullVersion_iOS)
-        #else
+        #if targetEnvironment(macCatalyst)
         return productManager.product(withIdentifier: .fullVersion_macOS)
+        #else
+        return productManager.product(withIdentifier: .fullVersion_iOS)
         #endif
     }
 
     // hide full version if already bought the other platform version
     private var skFullVersion: SKProduct? {
-        #if os(iOS)
-        guard !productManager.hasPurchased(.fullVersion_macOS) else {
+        #if targetEnvironment(macCatalyst)
+        guard !productManager.hasPurchased(.fullVersion_iOS) else {
             return nil
         }
         #else
-        guard !productManager.hasPurchased(.fullVersion_iOS) else {
+        guard !productManager.hasPurchased(.fullVersion_macOS) else {
             return nil
         }
         #endif
