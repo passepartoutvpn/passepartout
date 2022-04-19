@@ -38,7 +38,7 @@ extension VPNProtocolType {
             return "ovpn"
             
         case .wireGuard:
-            return "wg"
+            return "conf"
         }
     }
 }
