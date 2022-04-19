@@ -160,11 +160,23 @@ extension OrganizerView.ProfilesList {
     }
     
     private func removeProfiles(_ indexSet: IndexSet) {
+        withAnimation {
+            doRemoveProfiles(indexSet)
+        }
+    }
+
+    private func doRemoveProfiles(_ indexSet: IndexSet) {
         let headers = profileManager.headers.sorted()
         var toDelete: [UUID] = []
         indexSet.forEach {
             toDelete.append(headers[$0].id)
         }
+
+        // clear selection before removal to avoid triggering a bogus navigation push
+        if let selectedProfileId = selectedProfileId, toDelete.contains(selectedProfileId) {
+            self.selectedProfileId = nil
+        }
+
         profileManager.removeProfiles(withIds: toDelete)
     }
 
