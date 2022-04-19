@@ -27,10 +27,14 @@ import SwiftUI
 import PassepartoutCore
 
 extension ProfileView {
-    struct ProviderSection: View {
-        @ObservedObject private var providerManager: ProviderManager
+    struct ProviderSection: View, ProviderProfileAvailability {
+        @ObservedObject var providerManager: ProviderManager
         
         @ObservedObject private var currentProfile: ObservableProfile
+        
+        var profile: Profile {
+            currentProfile.value
+        }
         
         @State private var isProviderLocationPresented = false
 
@@ -44,22 +48,12 @@ extension ProfileView {
         var body: some View {
             debugChanges()
             return Group {
-                if canDisplay {
+                if isProviderProfileAvailable {
                     mainView
                 } else {
                     EmptyView()
                 }
             }
-        }
-        
-        private var canDisplay: Bool {
-            guard !currentProfile.value.isPlaceholder else {
-                return false
-            }
-            guard let providerName = currentProfile.value.header.providerName else {
-                return false
-            }
-            return providerManager.isAvailable(providerName, vpnProtocol: currentProfile.value.currentVPNProtocol)
         }
         
         private var mainView: some View {

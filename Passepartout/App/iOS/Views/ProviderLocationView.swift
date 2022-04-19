@@ -26,15 +26,19 @@
 import SwiftUI
 import PassepartoutCore
 
-struct ProviderLocationView: View {
+struct ProviderLocationView: View, ProviderProfileAvailability {
+    @ObservedObject var providerManager: ProviderManager
+
     @ObservedObject private var appManager: AppManager
     
-    @ObservedObject private var providerManager: ProviderManager
-
     @ObservedObject private var currentProfile: ObservableProfile
     
-    private let isEditable: Bool
+    var profile: Profile {
+        currentProfile.value
+    }
 
+    private let isEditable: Bool
+    
     private var providerName: ProviderName {
         guard let name = currentProfile.value.header.providerName else {
             assertionFailure("Not a provider")
@@ -92,17 +96,13 @@ struct ProviderLocationView: View {
     var body: some View {
         debugChanges()
         return Group {
-            if !isEmpty {
+            if isProviderProfileAvailable {
                 mainView
             } else {
                 EmptyView()
             }
         }.navigationTitle(L10n.Provider.Location.title)
         .toolbar(content: toolbar)
-    }
-    
-    private var isEmpty: Bool {
-        currentProfile.value.isPlaceholder || !currentProfile.value.isProvider
     }
     
     private var mainView: some View {
