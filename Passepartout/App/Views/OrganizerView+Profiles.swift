@@ -41,6 +41,8 @@ extension OrganizerView {
 
         @State private var isFirstLaunch = true
         
+        @State private var localHeaders: [Profile.Header] = []
+
         @State private var selectedProfileId: UUID?
         
         init(alertType: Binding<AlertType?>) {
@@ -53,21 +55,23 @@ extension OrganizerView {
 
         var body: some View {
             debugChanges()
-            return ReloadingContent(
-                observing: profileManager,
-                on: \.headers,
-                equality: {
-                    Set($0) == Set($1)
-                }
-            ) { headers in
-                mainView(headers)
-                if headers.isEmpty {
+            return Group {
+                mainView
+                if localHeaders.isEmpty {
                     emptyView
                 }
-            }.onAppear(perform: performMigrationsIfNeeded)
-
-            // detect deletion
-            .onChange(of: profileManager.headers, perform: dismissSelectionIfDeleted)
+            }.onAppear {
+                localHeaders = profileManager.headers.sorted()
+                performMigrationsIfNeeded()
+            }.onChange(of: profileManager.headers) { newHeaders in
+                withAnimation {
+                    guard Set(newHeaders) != Set(localHeaders) else {
+                        return
+                    }
+                    localHeaders = newHeaders.sorted()
+                    dismissSelectionIfDeleted(headers: newHeaders)
+                }
+            }
 
             // from AddProfileView
             .onReceive(profileManager.didCreateProfile) {
@@ -75,10 +79,10 @@ extension OrganizerView {
             }
         }
         
-        private func mainView(_ headers: [Profile.Header]) -> some View {
+        private var mainView: some View {
             List {
                 Section {
-                    ForEach(headers.sorted(), content: navigationLink(forHeader:))
+                    ForEach(localHeaders, content: navigationLink(forHeader:))
                         .onDelete(perform: removeProfiles)
                 }
             }
@@ -166,10 +170,9 @@ extension OrganizerView.ProfilesList {
     }
 
     private func doRemoveProfiles(_ indexSet: IndexSet) {
-        let headers = profileManager.headers.sorted()
         var toDelete: [UUID] = []
         indexSet.forEach {
-            toDelete.append(headers[$0].id)
+            toDelete.append(localHeaders[$0].id)
         }
 
         // clear selection before removal to avoid triggering a bogus navigation push
@@ -178,6 +181,7 @@ extension OrganizerView.ProfilesList {
         }
 
         profileManager.removeProfiles(withIds: toDelete)
+        localHeaders = profileManager.headers.sorted()
     }
 
     private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
