@@ -280,7 +280,7 @@ extension String {
 
 extension View {
     func themeCloseItem(presentationMode: Binding<PresentationMode>) -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .cancellationAction) {
             Button {
                 presentationMode.wrappedValue.dismiss()
             } label: {
@@ -290,7 +290,7 @@ extension View {
     }
 
     func themeCloseItem(isPresented: Binding<Bool>) -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .cancellationAction) {
             Button {
                 isPresented.wrappedValue = false
             } label: {
