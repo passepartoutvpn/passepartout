@@ -90,7 +90,8 @@ struct DonateView: View {
                 .xxxThemeTruncation()
         ) {
             ReloadingContent(
-                observing: productManager.donations,
+                observing: productManager,
+                on: \.donations,
                 equality: {
                     Set($0.map(\.productIdentifier)) == Set($1.map(\.productIdentifier))
                 },

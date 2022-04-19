@@ -25,10 +25,16 @@
 
 import SwiftUI
 
-struct ReloadingContent<T: Equatable, Content: View>: View {
+struct ReloadingContent<O: ObservableObject, T: Equatable, Content: View>: View {
     @Environment(\.scenePhase) private var scenePhase
     
-    private let elements: [T]
+    @ObservedObject private var object: O
+    
+    private let keyPath: KeyPath<O, [T]>
+    
+    private var elements: [T] {
+        object[keyPath: keyPath]
+    }
     
     private let equality: ([T], [T]) -> Bool
     
@@ -39,12 +45,14 @@ struct ReloadingContent<T: Equatable, Content: View>: View {
     @State private var localElements: [T] = []
     
     init(
-        observing elements: [T],
+        observing object: O,
+        on keyPath: KeyPath<O, [T]>,
         equality: @escaping ([T], [T]) -> Bool = { $0 == $1 },
         reload: (() -> Void)? = nil,
         @ViewBuilder content: @escaping ([T]) -> Content
     ) {
-        self.elements = elements
+        self.object = object
+        self.keyPath = keyPath
         self.equality = equality
         self.reload = reload
         self.content = content
@@ -61,7 +69,8 @@ struct ReloadingContent<T: Equatable, Content: View>: View {
     }
     
     var body: some View {
-        Group {
+        debugChanges()
+        return Group {
             content(localElements)
 //        }.onAppear {
 //            localElements = elements

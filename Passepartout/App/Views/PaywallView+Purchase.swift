@@ -105,7 +105,8 @@ extension PaywallView {
                 footer: Text(L10n.Paywall.Sections.Products.footer)
             ) {
                 ReloadingContent(
-                    observing: productManager.products,
+                    observing: productManager,
+                    on: \.products,
                     equality: {
                         Set($0.map(\.productIdentifier)) == Set($1.map(\.productIdentifier))
                     },

@@ -54,7 +54,8 @@ extension OrganizerView {
         var body: some View {
             debugChanges()
             return ReloadingContent(
-                observing: profileManager.headers,
+                observing: profileManager,
+                on: \.headers,
                 equality: {
                     Set($0) == Set($1)
                 }
