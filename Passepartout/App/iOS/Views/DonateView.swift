@@ -42,7 +42,7 @@ struct DonateView: View {
         }
     }
     
-    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.presentationMode) private var presentationMode
 
     @ObservedObject private var productManager: ProductManager
     
@@ -60,7 +60,9 @@ struct DonateView: View {
                 .disabled(pendingDonationIdentifier != nil)
         }.themeSecondaryView()
         .navigationTitle(L10n.Donate.title)
-        .alert(item: $alertType, content: presentedAlert)
+        .toolbar {
+            themeCloseItem(presentationMode: presentationMode)
+        }.alert(item: $alertType, content: presentedAlert)
     }
 
     private func presentedAlert(_ alertType: AlertType) -> Alert {

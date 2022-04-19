@@ -60,5 +60,8 @@ struct PaywallView: View {
                 )
             }
         }.themeSecondaryView()
+        .toolbar {
+            themeCloseItem(isPresented: $isPresented)
+        }
     }
 }

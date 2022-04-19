@@ -188,8 +188,8 @@ extension View {
         "heart.fill"
     }
     
-    var themeAboutImage: String {
-        "info.circle"
+    var themeCloseImage: String {
+        "xmark"
     }
     
     var themeDeleteImage: String {
@@ -280,6 +280,26 @@ extension String {
 // MARK: Shortcuts
 
 extension View {
+    func themeCloseItem(presentationMode: Binding<PresentationMode>) -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+                presentationMode.wrappedValue.dismiss()
+            } label: {
+                themeCloseImage.asSystemImage
+            }
+        }
+    }
+
+    func themeCloseItem(isPresented: Binding<Bool>) -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+                isPresented.wrappedValue = false
+            } label: {
+                themeCloseImage.asSystemImage
+            }
+        }
+    }
+    
     func themeSaveButtonLabel() -> some View {
 //        themeCheckmarkImage.asSystemImage
         Text(L10n.Global.Strings.save)

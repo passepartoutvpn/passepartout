@@ -82,6 +82,7 @@ struct AddProviderView: View {
             ForEach(viewModel.providers, id: \.navigationId, content: providerNavigationLink)
         }.themeSecondaryView()
         .navigationTitle(L10n.AddProfile.Shared.title)
+        .toolbar(content: toolbar)
         .sheet(isPresented: $viewModel.isPaywallPresented) {
             NavigationView {
                 PaywallView(isPresented: $viewModel.isPaywallPresented)
@@ -93,6 +94,11 @@ struct AddProviderView: View {
                 refreshProviders(newValue)
             }
         }
+    }
+    
+    @ToolbarContentBuilder
+    private func toolbar() -> some ToolbarContent {
+        themeCloseItem(isPresented: bindings.$isPresented)
     }
     
     private var mainSection: some View {

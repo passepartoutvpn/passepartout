@@ -45,6 +45,8 @@ struct ShortcutsView: View {
 
     @ObservedObject private var intentsManager: IntentsManager
     
+    @Environment(\.presentationMode) private var presentationMode
+    
     private let target: Profile
 
     @State private var modalType: ModalType?
@@ -66,7 +68,9 @@ struct ShortcutsView: View {
             addSection
         }.themeSecondaryView()
         .navigationTitle(L10n.Organizer.Items.SiriShortcuts.caption)
-        .sheet(item: $modalType, content: presentedModal)
+        .toolbar {
+            themeCloseItem(presentationMode: presentationMode)
+        }.sheet(item: $modalType, content: presentedModal)
         .onAppear {
             intentsManager.reloadShortcuts()
         }.onReceive(intentsManager.shouldDismissIntentView) { _ in

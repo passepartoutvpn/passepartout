@@ -77,12 +77,16 @@ struct AddHostView: View {
         .onDisappear(perform: dropResourcePermissions)
     }
 
-    private func toolbar() -> some View {
-        Button(nextString) {
-            if !viewModel.processedProfile.isPlaceholder {
-                saveProfile()
-            } else {
-                processProfile(replacingExisting: false)
+    @ToolbarContentBuilder
+    private func toolbar() -> some ToolbarContent {
+        themeCloseItem(isPresented: bindings.$isPresented)
+        ToolbarItem(placement: .primaryAction) {
+            Button(nextString) {
+                if !viewModel.processedProfile.isPlaceholder {
+                    saveProfile()
+                } else {
+                    processProfile(replacingExisting: false)
+                }
             }
         }
     }

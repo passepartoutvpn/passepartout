@@ -55,8 +55,11 @@ extension ProfileView {
             }.themeSecondaryView()
             .navigationTitle(currentProfile.value.header.name)
             .toolbar {
-                Button(action: commitRenaming) {
-                    themeDoneButtonLabel()
+                themeCloseItem(presentationMode: presentationMode)
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: commitRenaming) {
+                        themeDoneButtonLabel()
+                    }
                 }
             }.alert(isPresented: $isOverwritingExistingProfile, content: alertOverwriteExistingProfile)
         }

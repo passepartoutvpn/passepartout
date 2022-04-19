@@ -26,6 +26,8 @@
 import SwiftUI
 
 struct AboutView: View {
+    @Environment(\.presentationMode) private var presentationMode
+
     private let versionString = Constants.Global.appVersionString
     
     private let readmeURL = Constants.URLs.readme
@@ -47,6 +49,9 @@ struct AboutView: View {
             webSubview
         }.themeSecondaryView()
         .navigationTitle(L10n.About.title)
+        .toolbar {
+            themeCloseItem(presentationMode: presentationMode)
+        }
     }
     
     private var infoSubview: some View {
