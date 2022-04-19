@@ -78,7 +78,7 @@
 		0EB17EAA27D226C900D473B5 /* Constants+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */; };
 		0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA327D2263700D473B5 /* LocalProduct.swift */; };
 		0EB17EBA27D2560300D473B5 /* PassepartoutProviders+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */; };
-		0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EB3413027C7761A00483410 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB3412F27C7761A00483410 /* Binding+Extensions.swift */; };
 		0EB34BCA27C6A70200B126DA /* OnDemandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB34BC927C6A70200B126DA /* OnDemandView.swift */; };
 		0EB34BCC27C6F41D00B126DA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB34BCB27C6F41D00B126DA /* Theme.swift */; };
@@ -95,7 +95,7 @@
 		0ED2B33927D3C49800FD8EA9 /* OpenVPNAppExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED2B33827D3C49800FD8EA9 /* OpenVPNAppExtension */; };
 		0ED2B34527D3C77800FD8EA9 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
 		0ED2B35B27D3C94F00FD8EA9 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B35A27D3C94F00FD8EA9 /* PacketTunnelProvider.swift */; };
-		0ED2B36027D3C99100FD8EA9 /* PassepartoutWireGuardTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0ED2B36027D3C99100FD8EA9 /* PassepartoutWireGuardTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0ED2B36727D3C9A300FD8EA9 /* WireGuardAppExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED2B36627D3C9A300FD8EA9 /* WireGuardAppExtension */; };
 		0ED30DCC27EA197D0057D8A3 /* RevealingSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DCB27EA197C0057D8A3 /* RevealingSecureField.swift */; };
 		0ED30DCF27EA1EF80057D8A3 /* PaywallView+Beta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */; };
@@ -1017,7 +1017,6 @@
 		};
 		0EB2B14A2733FB6F007705AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 0EDE8DBE20C86910004C739C /* OpenVPNTunnel */;
 			targetProxy = 0EB2B1492733FB6F007705AB /* PBXContainerItemProxy */;
 		};
@@ -1028,7 +1027,6 @@
 		};
 		0ED2B36227D3C99100FD8EA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 0ED2B33E27D3C77800FD8EA9 /* WireGuardTunnel */;
 			targetProxy = 0ED2B36127D3C99100FD8EA9 /* PBXContainerItemProxy */;
 		};
@@ -1160,6 +1158,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1219,6 +1219,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -1246,10 +1248,7 @@
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout catalyst";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1272,9 +1271,6 @@
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout catalyst";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1330,8 +1326,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.WireGuardTunnel";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.WireGuardTunnel catalyst";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1352,8 +1346,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.WireGuardTunnel";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.WireGuardTunnel catalyst";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1374,8 +1366,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.OpenVPNTunnel";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.OpenVPNTunnel catalyst";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1396,8 +1386,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout.OpenVPNTunnel";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.OpenVPNTunnel catalyst";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
