@@ -57,9 +57,7 @@ extension ProfileView {
             .toolbar {
                 themeCloseItem(presentationMode: presentationMode)
                 ToolbarItem(placement: .primaryAction) {
-                    Button(action: commitRenaming) {
-                        themeDoneButtonLabel()
-                    }
+                    Button(action: commitRenaming, label: themeSaveButtonLabel)
                 }
             }.alert(isPresented: $isOverwritingExistingProfile, content: alertOverwriteExistingProfile)
         }
