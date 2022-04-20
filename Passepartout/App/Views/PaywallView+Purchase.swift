@@ -75,6 +75,15 @@ extension PaywallView {
                     .disabled(purchaseState != nil)
             }.navigationTitle(Unlocalized.appName)
             .alert(item: $alertType, content: presentedAlert)
+
+            // reloading
+            .onAppear {
+                productManager.refreshProducts()
+            }.onChange(of: scenePhase) { newValue in
+                if newValue == .active {
+                    productManager.refreshProducts()
+                }
+            }.animation(.default, value: productManager.isRefreshingProducts)
         }
         
         private func presentedAlert(_ alertType: AlertType) -> Alert {
@@ -104,19 +113,12 @@ extension PaywallView {
                 header: Text(L10n.Paywall.title),
                 footer: Text(L10n.Paywall.Sections.Products.footer)
             ) {
-                ReloadingContent(
-                    observing: productManager,
-                    on: \.products,
-                    equality: {
-                        Set($0.map(\.productIdentifier)) == Set($1.map(\.productIdentifier))
-                    },
-                    reload: {
-                        productManager.refreshProducts()
-                    }
-                ) { _ in
+                if !productManager.isRefreshingProducts {
                     ForEach(productRowModels, id: \.product.productIdentifier, content: productRow)
-                    restoreRow
+                } else {
+                    ProgressView()
                 }
+                restoreRow
             }
         }
 

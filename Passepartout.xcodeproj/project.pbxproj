@@ -68,7 +68,6 @@
 		0E9AA978259F756A003FAFF1 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */; };
 		0E9C233027F47032007D5FC7 /* IntentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C232F27F47032007D5FC7 /* IntentsManager.swift */; };
 		0E9C233327F47E95007D5FC7 /* IntentDispatcher+Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C233227F47E95007D5FC7 /* IntentDispatcher+Activities.swift */; };
-		0E9C3B6C27FB3A9C00D0F02E /* ReloadingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9C3B6B27FB3A9C00D0F02E /* ReloadingContent.swift */; };
 		0E9C3B6F27FC573E00D0F02E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9C3B6E27FC573E00D0F02E /* CloudKit.framework */; };
 		0E9E5AEF27B44CF1008C95DA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E9E5AE227B44CF1008C95DA /* Localizable.strings */; };
 		0E9ED48127FD9BAE003B2316 /* CopySavingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */; };
@@ -250,7 +249,6 @@
 		0E9AA977259F756A003FAFF1 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		0E9C232F27F47032007D5FC7 /* IntentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsManager.swift; sourceTree = "<group>"; };
 		0E9C233227F47E95007D5FC7 /* IntentDispatcher+Activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentDispatcher+Activities.swift"; sourceTree = "<group>"; };
-		0E9C3B6B27FB3A9C00D0F02E /* ReloadingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadingContent.swift; sourceTree = "<group>"; };
 		0E9C3B6E27FC573E00D0F02E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		0E9E5AE327B44CF1008C95DA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0E9E5AE427B44CF1008C95DA /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -382,7 +380,6 @@
 				0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */,
 				0E5324A827D2AC55002565C3 /* LongContentView.swift */,
 				0EBC075427EBC83800208AD9 /* MailComposerView.swift */,
-				0E9C3B6B27FB3A9C00D0F02E /* ReloadingContent.swift */,
 				0ED30DCB27EA197C0057D8A3 /* RevealingSecureField.swift */,
 				0E2C172A27CB63F9007E8488 /* Reviewer.swift */,
 				0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */,
@@ -902,7 +899,6 @@
 				0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */,
 				0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */,
 				0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */,
-				0E9C3B6C27FB3A9C00D0F02E /* ReloadingContent.swift in Sources */,
 				0E5324A627D297BB002565C3 /* InApp.swift in Sources */,
 				0E3B7FCD27E47B3700C66F13 /* AddHostView.swift in Sources */,
 				0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */,

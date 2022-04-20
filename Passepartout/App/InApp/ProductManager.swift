@@ -112,6 +112,10 @@ class ProductManager: NSObject, ObservableObject {
         guard !ids.isEmpty else {
             return
         }
+        guard products.isEmpty else {
+            pp_log.debug("In-app products already available, not refreshing")
+            return
+        }
         isRefreshingProducts = true
         inApp.requestProducts(withIdentifiers: ids, completionHandler: { _ in
             pp_log.debug("In-app products: \(self.inApp.products.map { $0.productIdentifier })")

@@ -44,6 +44,8 @@ struct DonateView: View {
     
     @Environment(\.presentationMode) private var presentationMode
 
+    @Environment(\.scenePhase) private var scenePhase
+
     @ObservedObject private var productManager: ProductManager
     
     @State private var alertType: AlertType?
@@ -63,6 +65,15 @@ struct DonateView: View {
         .toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.alert(item: $alertType, content: presentedAlert)
+
+        // reloading
+        .onAppear {
+            productManager.refreshProducts()
+        }.onChange(of: scenePhase) { newValue in
+            if newValue == .active {
+                productManager.refreshProducts()
+            }
+        }.animation(.default, value: productManager.isRefreshingProducts)
     }
 
     private func presentedAlert(_ alertType: AlertType) -> Alert {
@@ -89,17 +100,10 @@ struct DonateView: View {
             footer: Text(L10n.Donate.Sections.OneTime.footer)
                 .xxxThemeTruncation()
         ) {
-            ReloadingContent(
-                observing: productManager,
-                on: \.donations,
-                equality: {
-                    Set($0.map(\.productIdentifier)) == Set($1.map(\.productIdentifier))
-                },
-                reload: {
-                    productManager.refreshProducts()
-                }
-            ) {
-                ForEach($0, id: \.productIdentifier, content: productRow)
+            if !productManager.isRefreshingProducts {
+                ForEach(productManager.donations, id: \.productIdentifier, content: productRow)
+            } else {
+                ProgressView()
             }
         }
     }
