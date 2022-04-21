@@ -78,11 +78,20 @@ struct ProfileView: View {
             } else {
                 welcomeView
             }
-        }.themeSecondaryView()
-        .navigationTitle(title)
-        .toolbar(content: toolbar)
-        .sheet(item: $modalType, content: presentedModal)
+        }.toolbar {
+            // FIXME: toolbars, unroll single items
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                if !isDeleted {
+                    MenuBar(
+                        currentProfile: profileManager.currentProfile,
+                        modalType: $modalType
+                    )
+                }
+            }
+        }.sheet(item: $modalType, content: presentedModal)
         .onAppear(perform: loadProfileIfNeeded)
+        .navigationTitle(title)
+        .themeSecondaryView()
     }
     
     private var title: String {
@@ -104,17 +113,6 @@ struct ProfileView: View {
     
     private var welcomeView: some View {
         WelcomeView()
-    }
-    
-    private func toolbar() -> some ToolbarContent {
-        ToolbarItemGroup(placement: .navigationBarTrailing) {
-            if !isDeleted {
-                MenuBar(
-                    currentProfile: profileManager.currentProfile,
-                    modalType: $modalType
-                )
-            }
-        }
     }
     
     @ViewBuilder

@@ -69,28 +69,24 @@ struct AddHostView: View {
                     bindings: bindings
                 )
             }
-        }.themeSecondaryView()
-        .navigationTitle(L10n.AddProfile.Shared.title)
-        .toolbar(content: toolbar)
-        .alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
-        .onAppear(perform: requestResourcePermissions)
-        .onDisappear(perform: dropResourcePermissions)
-    }
-
-    @ToolbarContentBuilder
-    private func toolbar() -> some ToolbarContent {
-        themeCloseItem(isPresented: bindings.$isPresented)
-        ToolbarItem(placement: .primaryAction) {
-            Button(nextString) {
-                if !viewModel.processedProfile.isPlaceholder {
-                    saveProfile()
-                } else {
-                    processProfile(replacingExisting: false)
+        }.toolbar {
+            themeCloseItem(isPresented: bindings.$isPresented)
+            ToolbarItem(placement: .primaryAction) {
+                Button(nextString) {
+                    if !viewModel.processedProfile.isPlaceholder {
+                        saveProfile()
+                    } else {
+                        processProfile(replacingExisting: false)
+                    }
                 }
             }
-        }
+        }.alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
+        .onAppear(perform: requestResourcePermissions)
+        .onDisappear(perform: dropResourcePermissions)
+        .navigationTitle(L10n.AddProfile.Shared.title)
+        .themeSecondaryView()
     }
-    
+
     @ViewBuilder
     private var processingView: some View {
         AddProfileView.ProfileNameSection(

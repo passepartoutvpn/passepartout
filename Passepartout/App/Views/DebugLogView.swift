@@ -55,27 +55,24 @@ struct DebugLogView: View {
         ScrollViewReader { scrollProxy in
             ScrollView(showsIndicators: true) {
                 contentView
-            }.toolbar(content: toolbar)
-            .onAppear {
+            }.onAppear {
                 refreshLog(scrollingToLatestWith: scrollProxy)
-            }.onReceive(timer, perform: refreshLog)
+            }
+        }.toolbar {
+            if !isSharing {
+                Button(action: shareDebugLog) {
+                    themeShareImage.asSystemImage
+                }.disabled(logLines.isEmpty)
+            } else {
+                ProgressView()
+            }
         }.sheet(isPresented: $isSharing, content: sharingActivityView)
+        .edgesIgnoringSafeArea([.leading, .trailing])
+        .onReceive(timer, perform: refreshLog)
         .navigationTitle(L10n.DebugLog.title)
         .themeDebugLogFont()
-        .edgesIgnoringSafeArea([.leading, .trailing])
     }
 
-    @ViewBuilder
-    private func toolbar() -> some View {
-        if !isSharing {
-            Button(action: shareDebugLog) {
-                themeShareImage.asSystemImage
-            }.disabled(logLines.isEmpty)
-        } else {
-            ProgressView()
-        }
-    }
-    
     private var contentView: some View {
         LazyVStack {
             ForEach(logLines.indices, id: \.self) {

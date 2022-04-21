@@ -66,9 +66,7 @@ struct ShortcutsView: View {
                 shortcutsSection
             }
             addSection
-        }.themeSecondaryView()
-        .navigationTitle(L10n.Organizer.Items.SiriShortcuts.caption)
-        .toolbar {
+        }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.sheet(item: $modalType, content: presentedModal)
 
@@ -81,6 +79,9 @@ struct ShortcutsView: View {
         .onReceive(intentsManager.shouldDismissIntentView) { _ in
             modalType = nil
         }
+        
+        .navigationTitle(L10n.Organizer.Items.SiriShortcuts.caption)
+        .themeSecondaryView()
     }
     
     private var shortcutsSection: some View {

@@ -78,19 +78,16 @@ extension AddProviderView {
                         bindings: bindings
                     )
                 }
-            }.navigationTitle(providerMetadata.fullName)
-            .toolbar(content: toolbar)
-            .alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
+            }.toolbar {
+                Button {
+                    saveProfile(replacingExisting: false)
+                } label: {
+                    themeSaveButtonLabel()
+                }
+            }.alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
+            .navigationTitle(providerMetadata.fullName)
         }
 
-        private func toolbar() -> some View {
-            Button {
-                saveProfile(replacingExisting: false)
-            } label: {
-                themeSaveButtonLabel()
-            }
-        }
-        
         private func alertOverwriteExistingProfile() -> Alert {
             return Alert(
                 title: Text(L10n.AddProfile.Shared.title),

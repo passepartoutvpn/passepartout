@@ -101,8 +101,17 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             } else {
                 EmptyView()
             }
+        }.toolbar {
+            if #available(iOS 15, *) {
+                Button {
+                    withAnimation {
+                        isShowingFavorites.toggle()
+                    }
+                } label: {
+                    themeFavoritesImage(isShowingFavorites).asSystemImage
+                }
+            }
         }.navigationTitle(L10n.Provider.Location.title)
-        .toolbar(content: toolbar)
     }
     
     private var mainView: some View {
@@ -118,21 +127,6 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
 //                scrollToSelectedLocation(scrollProxy)
             }
 //        }
-    }
-
-    @ViewBuilder
-    private func toolbar() -> some View {
-        if #available(iOS 15, *) {
-            Button {
-                withAnimation {
-                    isShowingFavorites.toggle()
-                }
-            } label: {
-                themeFavoritesImage(isShowingFavorites).asSystemImage
-            }
-        } else {
-            self
-        }
     }
 
     private var categoriesView: some View {

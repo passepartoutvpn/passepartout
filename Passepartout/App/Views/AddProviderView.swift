@@ -88,19 +88,14 @@ struct AddProviderView: View {
 
             // hidden
             ForEach(providers, id: \.navigationId, content: providerNavigationLink)
-        }.themeSecondaryView()
-        .navigationTitle(L10n.AddProfile.Shared.title)
-        .toolbar(content: toolbar)
-        .sheet(isPresented: $viewModel.isPaywallPresented) {
+        }.toolbar {
+            themeCloseItem(isPresented: bindings.$isPresented)
+        }.sheet(isPresented: $viewModel.isPaywallPresented) {
             NavigationView {
                 PaywallView(isPresented: $viewModel.isPaywallPresented)
             }.themeGlobal()
-        }
-    }
-    
-    @ToolbarContentBuilder
-    private func toolbar() -> some ToolbarContent {
-        themeCloseItem(isPresented: bindings.$isPresented)
+        }.navigationTitle(L10n.AddProfile.Shared.title)
+        .themeSecondaryView()
     }
     
     private var mainSection: some View {

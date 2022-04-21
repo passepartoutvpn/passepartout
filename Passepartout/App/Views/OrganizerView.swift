@@ -95,9 +95,21 @@ struct OrganizerView: View {
                 didHandleSubreddit: $didHandleSubreddit
             )
             ProfilesList(alertType: $alertType)
-        }.navigationTitle(Unlocalized.appName)
-        .toolbar(content: toolbar)
-        .sheet(item: $modalType, content: presentedModal)
+        }.toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                AddMenu(
+                    modalType: $modalType,
+                    isHostFileImporterPresented: $isHostFileImporterPresented
+                )
+            }
+            ToolbarItem(placement: .navigation) {
+                SettingsMenu(
+                    modalType: $modalType,
+                    alertType: $alertType
+                )
+    //            EditButton()
+            }
+        }.sheet(item: $modalType, content: presentedModal)
         .alert(item: $alertType, content: presentedAlert)
         .fileImporter(
             isPresented: $isHostFileImporterPresented,
@@ -105,27 +117,9 @@ struct OrganizerView: View {
             allowsMultipleSelection: false,
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
-    }
-
-    @ToolbarContentBuilder
-    private func toolbar() -> some ToolbarContent {
-        ToolbarItem(placement: .primaryAction) {
-            AddMenu(
-                modalType: $modalType,
-                isHostFileImporterPresented: $isHostFileImporterPresented
-            )
-        }
-        ToolbarItem(placement: .navigation) {
-            SettingsMenu(
-                modalType: $modalType,
-                alertType: $alertType
-            )
-//            EditButton()
-        }
+        .navigationTitle(Unlocalized.appName)
     }
 }
-
-// MARK: Global handlers
 
 extension OrganizerView {
     
@@ -222,8 +216,6 @@ extension OrganizerView {
         modalType = .addHost(url, false)
     }
 }
-
-// MARK: Actions
 
 extension OrganizerView {
     private func presentSubscribeReddit() {
