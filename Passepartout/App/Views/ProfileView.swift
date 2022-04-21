@@ -77,7 +77,6 @@ struct ProfileView: View {
                 }
             } else {
                 welcomeView
-                    .navigationBarHidden(true)
             }
         }.themeSecondaryView()
         .navigationTitle(title)
