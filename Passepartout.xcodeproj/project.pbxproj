@@ -117,6 +117,7 @@
 		0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */; };
 		0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */; };
 		0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */; };
+		0EF708322811CC8400A3A308 /* VPNStatusText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF708312811CC8400A3A308 /* VPNStatusText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -328,6 +329,7 @@
 		0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderView.swift; sourceTree = "<group>"; };
 		0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 		0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderViewModel.swift; sourceTree = "<group>"; };
+		0EF708312811CC8400A3A308 /* VPNStatusText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -454,6 +456,7 @@
 				0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */,
 				0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */,
 				0E71ACFA27C12E5300F85C4B /* VersionView.swift */,
+				0EF708312811CC8400A3A308 /* VPNStatusText.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 				0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */,
 				0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */,
 				0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */,
+				0EF708322811CC8400A3A308 /* VPNStatusText.swift in Sources */,
 				0E5324A627D297BB002565C3 /* InApp.swift in Sources */,
 				0E3B7FCD27E47B3700C66F13 /* AddHostView.swift in Sources */,
 				0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */,

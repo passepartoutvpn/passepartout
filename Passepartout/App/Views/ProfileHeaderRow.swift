@@ -29,24 +29,35 @@ import PassepartoutCore
 struct ProfileHeaderRow: View {
     let header: Profile.Header
     
+    let isActive: Bool
+    
     var body: some View {
-        if let name = header.providerName {
-            providerView(name)
-        } else {
-            hostView
-        }
+        VStack(alignment: .leading, spacing: 5) {
+            Group {
+                if let name = header.providerName {
+                    providerView(name)
+                } else {
+                    hostView
+                }
+            }.themeLongText()
+            .font(.body)
+
+            if isActive {
+                VPNStatusText()
+                    .foregroundColor(themeSecondaryColor)
+                    .font(.caption)
+            }
+        }.frame(height: 60)
     }
     
     private func providerView(_ name: ProviderName) -> some View {
 //        Label(header.name, systemImage: themeProviderImage)
 //        Label(header.name, image: themeAssetsProviderImage(name))
         Text(header.name)
-            .themeLongText()
     }
     
     private var hostView: some View {
 //        Label(header.name, systemImage: themeHostImage)
         Text(header.name)
-            .themeLongText()
     }
 }

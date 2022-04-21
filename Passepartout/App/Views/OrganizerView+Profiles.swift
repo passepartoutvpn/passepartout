@@ -91,11 +91,10 @@ extension OrganizerView {
             NavigationLink(tag: header.id, selection: $selectedProfileId) {
                 ProfileView(header: header)
             } label: {
-                if profileManager.isActiveProfile(header.id) {
-                    ActiveProfileHeaderRow(header: header)
-                } else {
-                    ProfileHeaderRow(header: header)
-                }
+                ProfileHeaderRow(
+                    header: header,
+                    isActive: profileManager.isActiveProfile(header.id)
+                )
             }.onAppear {
                 preselectIfActiveProfile(header.id)
 
@@ -110,32 +109,6 @@ extension OrganizerView {
                     }
                 }
             }
-        }
-    }
-}
-
-extension OrganizerView.ProfilesList {
-    struct ActiveProfileHeaderRow: View {
-        @ObservedObject private var currentVPNState: VPNManager.ObservableState
-
-        private let header: Profile.Header
-        
-        init(header: Profile.Header) {
-            currentVPNState = .shared
-            self.header = header
-        }
-        
-        var body: some View {
-            debugChanges()
-            return ProfileHeaderRow(header: header)
-                .withTrailingText(statusDescription)
-        }
-
-        private var statusDescription: String {
-            return currentVPNState.localizedStatusDescription(
-                withErrors: false,
-                withDataCount: false
-            )
         }
     }
 }
