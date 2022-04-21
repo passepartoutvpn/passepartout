@@ -49,8 +49,8 @@ struct ProfileView: View {
     
     private let header: Profile.Header
     
-    private var isDeleted: Bool {
-        !profileManager.isExistingProfile(withId: header.id)
+    private var isExisting: Bool {
+        profileManager.isExistingProfile(withId: header.id)
     }
 
     @State private var modalType: ModalType?
@@ -67,14 +67,8 @@ struct ProfileView: View {
     var body: some View {
         debugChanges()
         return Group {
-            if !isDeleted {
-                List {
-                    if isLoaded {
-                        mainView
-                    } else {
-                        loadingSection
-                    }
-                }
+            if isExisting {
+                mainView
             } else {
                 welcomeView
             }
@@ -82,12 +76,12 @@ struct ProfileView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 ShortcutsItem(
                     modalType: $modalType
-                ).disabled(isDeleted)
+                ).disabled(!isExisting)
 
                 RenameItem(
                     currentProfile: profileManager.currentProfile,
                     modalType: $modalType
-                ).disabled(isDeleted)
+                ).disabled(!isExisting)
             }
         }.sheet(item: $modalType, content: presentedModal)
         .onAppear(perform: loadProfileIfNeeded)
@@ -96,26 +90,34 @@ struct ProfileView: View {
     }
     
     private var title: String {
-        !isDeleted ? header.name : ""
+        isExisting ? header.name : ""
     }
     
-    @ViewBuilder
     private var mainView: some View {
-        VPNSection(currentProfile: profileManager.currentProfile)
-        ProviderSection(currentProfile: profileManager.currentProfile)
-        ConfigurationSection(
-            currentProfile: profileManager.currentProfile,
-            modalType: $modalType
-        )
-        ExtraSection(currentProfile: profileManager.currentProfile)
-        DiagnosticsSection(currentProfile: profileManager.currentProfile)
-        UninstallVPNSection()
+        List {
+            VPNSection(
+                currentProfile: profileManager.currentProfile,
+                isLoaded: isLoaded
+            )
+            if isLoaded {
+                ProviderSection(currentProfile: profileManager.currentProfile)
+                ConfigurationSection(
+                    currentProfile: profileManager.currentProfile,
+                    modalType: $modalType
+                )
+                ExtraSection(currentProfile: profileManager.currentProfile)
+                DiagnosticsSection(currentProfile: profileManager.currentProfile)
+                UninstallVPNSection()
+            }
+        }
     }
     
     private var welcomeView: some View {
-        WelcomeView()
+        Text(L10n.Profile.Welcome.message)
+            .multilineTextAlignment(.center)
+            .themeInformativeText()
     }
-    
+
     @ViewBuilder
     private func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
@@ -155,14 +157,6 @@ struct ProfileView: View {
         }
     }
     
-    private var loadingSection: some View {
-        Section(
-            header: Text(Unlocalized.VPN.vpn)
-        ) {
-            ProgressView()
-        }
-    }
-
     private func loadProfileIfNeeded() {
         guard !isLoaded else {
             return

@@ -30,8 +30,6 @@ extension ProfileView {
     struct VPNSection: View {
         @ObservedObject private var profileManager: ProfileManager
 
-        @ObservedObject private var currentProfile: ObservableProfile
-
         @ObservedObject private var providerManager: ProviderManager
 
         @ObservedObject private var vpnManager: VPNManager
@@ -39,6 +37,10 @@ extension ProfileView {
         @ObservedObject private var currentVPNState: VPNManager.ObservableState
 
         @ObservedObject private var productManager: ProductManager
+        
+        @ObservedObject private var currentProfile: ObservableProfile
+
+        private let isLoaded: Bool
 
         private var isActiveProfile: Bool {
             profileManager.isCurrentProfileActive()
@@ -48,26 +50,35 @@ extension ProfileView {
             productManager.isEligible(forFeature: .siriShortcuts)
         }
         
-        init(currentProfile: ObservableProfile) {
+        init(currentProfile: ObservableProfile, isLoaded: Bool) {
             profileManager = .shared
             providerManager = .shared
             vpnManager = .shared
             currentVPNState = .shared
             productManager = .shared
             self.currentProfile = currentProfile
+            self.isLoaded = isLoaded
         }
         
         var body: some View {
-            if isActiveProfile {
-                activeView
+            if isLoaded {
+                if isActiveProfile {
+                    activeView
+                } else {
+                    inactiveSubview
+                }
             } else {
-                inactiveSubview
+                loadingView
             }
+        }
+        
+        private var headerView: some View {
+            Text(Unlocalized.VPN.vpn)
         }
         
         private var activeView: some View {
             Section(
-                header: Text(Unlocalized.VPN.vpn),
+                header: headerView,
                 footer: Text(L10n.Profile.Sections.Vpn.footer)
                     .xxxThemeTruncation()
             ) {
@@ -93,7 +104,7 @@ extension ProfileView {
 
         private var inactiveSubview: some View {
             Section(
-                header: Text(Unlocalized.VPN.vpn)
+                header: headerView
             ) {
                 Button(L10n.Profile.Items.UseProfile.caption) {
                     withAnimation {
@@ -103,6 +114,14 @@ extension ProfileView {
                         await vpnManager.disable()
                     }
                 }
+            }
+        }
+        
+        private var loadingView: some View {
+            Section(
+                header: headerView
+            ) {
+                ProgressView()
             }
         }
         

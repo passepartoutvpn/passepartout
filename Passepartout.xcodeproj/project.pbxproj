@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E0AD49027BD53CB00FBB520 /* ProfileView+Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0AD48F27BD53CB00FBB520 /* ProfileView+Welcome.swift */; };
 		0E0BD27327B2EA2C00583AC5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27227B2EA2C00583AC5 /* MainView.swift */; };
 		0E0BD27627B2EB2200583AC5 /* DonateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27527B2EB2200583AC5 /* DonateView.swift */; };
 		0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */; };
@@ -184,7 +183,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0E0AD48F27BD53CB00FBB520 /* ProfileView+Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileView+Welcome.swift"; sourceTree = "<group>"; };
 		0E0BD27227B2EA2C00583AC5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0E0BD27527B2EB2200583AC5 /* DonateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateView.swift; sourceTree = "<group>"; };
 		0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsView.swift; sourceTree = "<group>"; };
@@ -450,7 +448,6 @@
 				0EBC074B27EB673C00208AD9 /* ProfileView+Rename.swift */,
 				0E3CD482280DAE92007075C0 /* ProfileView+Toolbar.swift */,
 				0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */,
-				0E0AD48F27BD53CB00FBB520 /* ProfileView+Welcome.swift */,
 				0E71ACF027C1073800F85C4B /* ProviderLocationView.swift */,
 				0E71ACEE27C106B400F85C4B /* ProviderPresetView.swift */,
 				0EBC075A27EC4FFF00208AD9 /* ReportIssueView.swift */,
@@ -941,7 +938,6 @@
 				0E2A8D4F27B04BBA00207D04 /* OrganizerView.swift in Sources */,
 				0E49F6BB27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift in Sources */,
 				0E71ACEF27C106B500F85C4B /* ProviderPresetView.swift in Sources */,
-				0E0AD49027BD53CB00FBB520 /* ProfileView+Welcome.swift in Sources */,
 				0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */,
 				0EF0FAF627DD0211007EB181 /* PaywallView.swift in Sources */,
 				0E5349BE27C16A4500C71BB3 /* StyledPicker.swift in Sources */,
