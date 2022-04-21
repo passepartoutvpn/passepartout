@@ -71,9 +71,14 @@ struct ShortcutsView: View {
         .toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.sheet(item: $modalType, content: presentedModal)
+
+        // reloading
         .onAppear {
             intentsManager.reloadShortcuts()
-        }.onReceive(intentsManager.shouldDismissIntentView) { _ in
+        }.animation(.default, value: intentsManager.isReloadingShortcuts)
+        
+        // IntentsUI
+        .onReceive(intentsManager.shouldDismissIntentView) { _ in
             modalType = nil
         }
     }
