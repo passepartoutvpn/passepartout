@@ -98,6 +98,17 @@ extension OrganizerView {
                 }
             }.onAppear {
                 preselectIfActiveProfile(header.id)
+
+                // XXX: iOS 14 bug, if selectedProfileId is set before its NavigationLink
+                // has appeared, the NavigationLink will not auto-activate once appeared
+                // enforce activation by clearing and resetting selectedProfileId to its
+                // current value
+                withAnimation {
+                    if let tmp = selectedProfileId, tmp == header.id {
+                        selectedProfileId = nil
+                        selectedProfileId = tmp
+                    }
+                }
             }
         }
     }
