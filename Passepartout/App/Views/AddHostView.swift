@@ -60,7 +60,7 @@ struct AddHostView: View {
                 } else {
                     completeView
                 }
-            }
+            }.animation(.default, value: viewModel)
 
             // hidden
             NavigationLink("", isActive: $isEnteringCredentials) {
@@ -159,31 +159,23 @@ struct AddHostView: View {
             title: Text(L10n.AddProfile.Shared.title),
             message: Text(L10n.AddProfile.Shared.Alerts.Overwrite.message),
             primaryButton: .destructive(Text(L10n.Global.Strings.ok)) {
-                
-                // XXX: delay withAnimation() to not overlap with alert dismiss animation
-                Task {
-                    processProfile(replacingExisting: true)
-                }
+                processProfile(replacingExisting: true)
             },
             secondaryButton: .cancel(Text(L10n.Global.Strings.cancel))
         )
     }
 
     private func processProfile(replacingExisting: Bool) {
-        withAnimation {
-            viewModel.processURL(
-                url,
-                with: profileManager,
-                replacingExisting: replacingExisting,
-                deletingURLOnSuccess: deletingURLOnSuccess
-            )
-        }
+        viewModel.processURL(
+            url,
+            with: profileManager,
+            replacingExisting: replacingExisting,
+            deletingURLOnSuccess: deletingURLOnSuccess
+        )
     }
 
     private func saveProfile() {
-        let result = withAnimation {
-            viewModel.addProcessedProfile(to: profileManager)
-        }
+        let result = viewModel.addProcessedProfile(to: profileManager)
         guard result else {
             return
         }

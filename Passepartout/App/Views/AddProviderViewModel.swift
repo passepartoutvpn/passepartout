@@ -34,11 +34,6 @@ extension AddProviderView {
             case provider(ProviderName)
         }
 
-        // local copy for animations
-        @Published var providers: [ProviderMetadata] = []
-
-        @Published private(set) var newProviders: [ProviderMetadata] = []
-
         @Published var selectedVPNProtocol: VPNProtocolType = .openVPN
 
         @Published var selectedProvider: ProviderMetadata?
@@ -107,8 +102,6 @@ extension AddProviderView {
                     try await providerManager.fetchProvidersIndexPublisher(
                         priority: .remoteThenBundle
                     ).async()
-
-                    newProviders = providerManager.allProviders()
                 } catch {
                     errorMessage = error.localizedDescription
                 }
@@ -123,7 +116,7 @@ extension AddProviderView {
 }
 
 extension AddProviderView.NameView {
-    struct ViewModel {
+    struct ViewModel: Equatable {
         private var isNamePreset = false
 
         var profileName = ""

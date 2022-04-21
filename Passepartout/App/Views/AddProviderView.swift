@@ -41,9 +41,16 @@ struct AddProviderView: View {
         self.bindings = bindings
     }
     
+    private var providers: [ProviderMetadata] {
+        providerManager.allProviders()
+            .filter {
+                $0.supportedVPNProtocols.contains(viewModel.selectedVPNProtocol)
+            }.sorted()
+    }
+    
     private var availableVPNProtocols: [VPNProtocolType] {
         var protos: Set<VPNProtocolType> = []
-        viewModel.providers.forEach {
+        providers.forEach {
             $0.supportedVPNProtocols.forEach {
                 protos.insert($0)
             }
@@ -70,16 +77,17 @@ struct AddProviderView: View {
             ScrollViewReader { scrollProxy in
                 List {
                     mainSection
-                    if !viewModel.providers.isEmpty {
+                    if !providers.isEmpty {
                         providersSection
                     }
                 }.onChange(of: viewModel.errorMessage) {
                     onErrorMessage($0, scrollProxy)
                 }.disabled(viewModel.pendingOperation != nil)
+                .animation(.default, value: providers)
             }
 
             // hidden
-            ForEach(viewModel.providers, id: \.navigationId, content: providerNavigationLink)
+            ForEach(providers, id: \.navigationId, content: providerNavigationLink)
         }.themeSecondaryView()
         .navigationTitle(L10n.AddProfile.Shared.title)
         .toolbar(content: toolbar)
@@ -87,12 +95,6 @@ struct AddProviderView: View {
             NavigationView {
                 PaywallView(isPresented: $viewModel.isPaywallPresented)
             }.themeGlobal()
-        }.onAppear {
-            refreshProviders()
-        }.onChange(of: viewModel.newProviders) { newValue in
-            withAnimation {
-                refreshProviders(newValue)
-            }
         }
     }
     
@@ -122,7 +124,7 @@ struct AddProviderView: View {
         Section(
             footer: themeErrorMessage(viewModel.errorMessage)
         ) {
-            ForEach(viewModel.providers, content: providerRow)
+            ForEach(providers, content: providerRow)
         }
     }
     
@@ -150,13 +152,6 @@ struct AddProviderView: View {
         }.withTrailingProgress(when: isUpdatingIndex)
     }
     
-    private func refreshProviders(_ newProviders: [ProviderMetadata]? = nil) {
-        viewModel.providers = (newProviders ?? providerManager.allProviders())
-            .filter {
-                $0.supportedVPNProtocols.contains(viewModel.selectedVPNProtocol)
-            }.sorted()
-    }
-    
     // eligibility: select or purchase provider
     private func presentOrPurchaseProvider(_ metadata: ProviderMetadata) {
         if productManager.isEligible(forProvider: metadata.name) {
@@ -176,7 +171,7 @@ struct AddProviderView: View {
 
 extension AddProviderView {
     private func scrollToErrorMessage(_ proxy: ScrollViewProxy) {
-        proxy.maybeScrollTo(viewModel.providers.last?.id, animated: true)
+        proxy.maybeScrollTo(providers.last?.id, animated: true)
     }
 }
 

@@ -96,24 +96,18 @@ extension AddProviderView {
                 title: Text(L10n.AddProfile.Shared.title),
                 message: Text(L10n.AddProfile.Shared.Alerts.Overwrite.message),
                 primaryButton: .destructive(Text(L10n.Global.Strings.ok)) {
-
-                    // XXX: delay withAnimation() to not overlap with alert dismiss animation
-                    Task {
-                        saveProfile(replacingExisting: true)
-                    }
+                    saveProfile(replacingExisting: true)
                 },
                 secondaryButton: .cancel(Text(L10n.Global.Strings.cancel))
             )
         }
 
         private func saveProfile(replacingExisting: Bool) {
-            let addedProfile = withAnimation {
-                viewModel.addProfile(
-                    profile,
-                    to: profileManager,
-                    replacingExisting: replacingExisting
-                )
-            }
+            let addedProfile = viewModel.addProfile(
+                profile,
+                to: profileManager,
+                replacingExisting: replacingExisting
+            )
             guard let addedProfile = addedProfile else {
                 return
             }

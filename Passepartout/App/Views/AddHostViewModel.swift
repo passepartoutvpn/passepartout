@@ -29,7 +29,7 @@ import TunnelKitOpenVPN
 import TunnelKitWireGuard
 
 extension AddHostView {
-    struct ViewModel {
+    struct ViewModel: Equatable {
         private var isNamePreset = false
         
         var profileName = ""
