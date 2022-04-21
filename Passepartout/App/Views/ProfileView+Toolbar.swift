@@ -1,5 +1,5 @@
 //
-//  ProfileView+MenuBar.swift
+//  ProfileView+Toolbar.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/6/22.
@@ -27,21 +27,18 @@ import SwiftUI
 import PassepartoutCore
 
 extension ProfileView {
-    struct MenuBar: View {
+    struct ShortcutsItem: View {
         @ObservedObject private var productManager: ProductManager
-        
-        @ObservedObject private var currentProfile: ObservableProfile
         
         @Binding private var modalType: ModalType?
         
+        init(modalType: Binding<ModalType?>) {
+            productManager = .shared
+            _modalType = modalType
+        }
+
         private var isEligibleForSiri: Bool {
             productManager.isEligible(forFeature: .siriShortcuts)
-        }
-        
-        init(currentProfile: ObservableProfile, modalType: Binding<ModalType?>) {
-            productManager = .shared
-            self.currentProfile = currentProfile
-            _modalType = modalType
         }
         
         var body: some View {
@@ -49,11 +46,6 @@ extension ProfileView {
                 presentShortcutsOrPaywall()
             } label: {
                 themeShortcutsImage.asSystemImage
-            }
-            Button {
-                modalType = .rename
-            } label: {
-                themeRenameProfileImage.asSystemImage
             }
         }
 
@@ -64,6 +56,25 @@ extension ProfileView {
                 modalType = .shortcuts
             } else {
                 modalType = .paywallShortcuts
+            }
+        }
+    }
+    
+    struct RenameItem: View {
+        @ObservedObject private var currentProfile: ObservableProfile
+        
+        @Binding private var modalType: ModalType?
+        
+        init(currentProfile: ObservableProfile, modalType: Binding<ModalType?>) {
+            self.currentProfile = currentProfile
+            _modalType = modalType
+        }
+        
+        var body: some View {
+            Button {
+                modalType = .rename
+            } label: {
+                themeRenameProfileImage.asSystemImage
             }
         }
     }

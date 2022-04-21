@@ -79,14 +79,15 @@ struct ProfileView: View {
                 welcomeView
             }
         }.toolbar {
-            // FIXME: toolbars, unroll single items
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                if !isDeleted {
-                    MenuBar(
-                        currentProfile: profileManager.currentProfile,
-                        modalType: $modalType
-                    )
-                }
+                ShortcutsItem(
+                    modalType: $modalType
+                ).disabled(isDeleted)
+
+                RenameItem(
+                    currentProfile: profileManager.currentProfile,
+                    modalType: $modalType
+                ).disabled(isDeleted)
             }
         }.sheet(item: $modalType, content: presentedModal)
         .onAppear(perform: loadProfileIfNeeded)
