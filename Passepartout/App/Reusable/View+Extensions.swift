@@ -88,15 +88,6 @@ extension View {
             }
         }
     }
-
-    @ViewBuilder
-    func replacedWithProgress(when condition: Bool) -> some View {
-        if condition {
-            ProgressView()
-        } else {
-            self
-        }
-    }
 }
 
 extension View {

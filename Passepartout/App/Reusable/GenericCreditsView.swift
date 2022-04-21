@@ -141,14 +141,18 @@ extension GenericCreditsView {
         @Binding var content: String?
         
         var body: some View {
-            content.map { unwrapped in
-                ScrollView {
-                    Text(unwrapped)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        .padding()
+            ZStack {
+                content.map { unwrapped in
+                    ScrollView {
+                        Text(unwrapped)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            .padding()
+                    }
                 }
-            }.replacedWithProgress(when: content == nil)
-            .onAppear(perform: loadURL)
+                if content == nil {
+                    ProgressView()
+                }
+            }.onAppear(perform: loadURL)
         }
         
         private func loadURL() {

@@ -65,11 +65,15 @@ struct DebugLogView: View {
         .edgesIgnoringSafeArea([.leading, .trailing])
     }
 
+    @ViewBuilder
     private func toolbar() -> some View {
-        Button(action: shareDebugLog) {
-            themeShareImage.asSystemImage
-        }.replacedWithProgress(when: isSharing)
-        .disabled(logLines.isEmpty)
+        if !isSharing {
+            Button(action: shareDebugLog) {
+                themeShareImage.asSystemImage
+            }.disabled(logLines.isEmpty)
+        } else {
+            ProgressView()
+        }
     }
     
     private var contentView: some View {
