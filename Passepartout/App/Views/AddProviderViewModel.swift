@@ -124,11 +124,21 @@ extension AddProviderView {
 
 extension AddProviderView.NameView {
     struct ViewModel {
+        private var isNamePreset = false
+
         var profileName = ""
         
         var isAskingOverwrite = false
         
         private(set) var errorMessage: String?
+        
+        mutating func presetName(withMetadata metadata: ProviderMetadata) {
+            guard !isNamePreset else {
+                return
+            }
+            isNamePreset = true
+            profileName = metadata.fullName
+        }
 
         @MainActor
         mutating func addProfile(

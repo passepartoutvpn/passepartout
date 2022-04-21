@@ -95,10 +95,11 @@ struct AddHostView: View {
     private var processingView: some View {
         AddProfileView.ProfileNameSection(
             profileName: $viewModel.profileName,
-            initialName: url.normalizedFilename,
             errorMessage: viewModel.errorMessage
         ) {
             processProfile(replacingExisting: false)
+        }.onAppear {
+            viewModel.presetName(withURL: url)
         }
         if viewModel.requiresPassphrase {
             encryptionSection

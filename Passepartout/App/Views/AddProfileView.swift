@@ -34,8 +34,6 @@ enum AddProfileView {
     struct ProfileNameSection: View {
         @Binding var profileName: String
         
-        let initialName: String
-        
         let errorMessage: String?
         
         let onCommit: () -> Void
@@ -46,12 +44,6 @@ enum AddProfileView {
                 footer: themeErrorMessage(errorMessage)
             ) {
                 TextField(L10n.Global.Placeholders.profileName, text: $profileName, onCommit: onCommit)
-                    .onAppear {
-                        // XXX: this is reset on the way back, but:
-                        // host: there is no back button after processing profile
-                        // host/provider: back button is hidden after going to credentials
-                        profileName = initialName
-                    }
             }
         }
     }

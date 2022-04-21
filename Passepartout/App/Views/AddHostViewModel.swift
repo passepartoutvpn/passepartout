@@ -30,6 +30,8 @@ import TunnelKitWireGuard
 
 extension AddHostView {
     struct ViewModel {
+        private var isNamePreset = false
+        
         var profileName = ""
         
         private(set) var requiresPassphrase = false
@@ -41,6 +43,14 @@ extension AddHostView {
         private(set) var errorMessage: String?
         
         var isAskingOverwrite = false
+        
+        mutating func presetName(withURL url: URL) {
+            guard !isNamePreset else {
+                return
+            }
+            isNamePreset = true
+            profileName = url.normalizedFilename
+        }
 
         @MainActor
         mutating func processURL(

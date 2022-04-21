@@ -56,10 +56,11 @@ extension AddProviderView {
                 List {
                     AddProfileView.ProfileNameSection(
                         profileName: $viewModel.profileName,
-                        initialName: providerMetadata.fullName,
                         errorMessage: viewModel.errorMessage
                     ) {
                         saveProfile(replacingExisting: false)
+                    }.onAppear {
+                        viewModel.presetName(withMetadata: providerMetadata)
                     }
                     let headers = profileManager.headers.sorted()
                     if !headers.isEmpty {
