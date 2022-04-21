@@ -309,13 +309,11 @@ extension ProviderLocationView {
     }
 }
 
-// FIXME: layout, pre-scrolling produces plenty of artifacts
-
-//extension ProviderLocationView {
-//    private func scrollToSelectedLocation(_ proxy: ScrollViewProxy) {
-//        proxy.maybeScrollTo(selectedServer?.locationId)
-//    }
-//}
+extension ProviderLocationView {
+    private func scrollToSelectedLocation(_ proxy: ScrollViewProxy) {
+        proxy.maybeScrollTo(selectedServer?.locationId)
+    }
+}
 
 extension ProviderLocationView.ServerListView {
     private func scrollToSelectedServer(_ proxy: ScrollViewProxy) {
