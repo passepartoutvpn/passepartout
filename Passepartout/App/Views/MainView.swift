@@ -31,7 +31,7 @@ struct MainView: View {
             OrganizerView()
                 .themePrimaryView()
 
-            ProfileView(header: nil)
+            ProfileView()
         }.themeGlobal()
     }
 }

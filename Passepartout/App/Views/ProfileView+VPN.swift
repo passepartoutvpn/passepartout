@@ -42,7 +42,7 @@ extension ProfileView {
         
         @ObservedObject private var currentProfile: ObservableProfile
 
-        private let isLoaded: Bool
+        private let isLoading: Bool
 
         private var isActiveProfile: Bool {
             profileManager.isCurrentProfileActive()
@@ -52,7 +52,7 @@ extension ProfileView {
             productManager.isEligible(forFeature: .siriShortcuts)
         }
         
-        init(currentProfile: ObservableProfile, isLoaded: Bool) {
+        init(currentProfile: ObservableProfile, isLoading: Bool) {
             appManager = .shared
             profileManager = .shared
             providerManager = .shared
@@ -60,11 +60,11 @@ extension ProfileView {
             currentVPNState = .shared
             productManager = .shared
             self.currentProfile = currentProfile
-            self.isLoaded = isLoaded
+            self.isLoading = isLoading
         }
         
         var body: some View {
-            if isLoaded {
+            if !isLoading {
                 if isActiveProfile {
                     activeView
                 } else {
@@ -114,7 +114,7 @@ extension ProfileView {
                         profileManager.activateCurrentProfile()
 
                         // IMPORTANT: save immediately to keep in sync with VPN status
-                        appManager.activeProfileId = profileManager.activeProfileId
+                        appManager.activeProfileId = profileManager.activeHeader?.id
                     }
                     Task {
                         await vpnManager.disable()

@@ -41,7 +41,7 @@ extension OrganizerView {
 
         @State private var isFirstLaunch = true
         
-        @State private var selectedProfileId: UUID?
+        @State private var isPresentingProfile = false
         
         init(alertType: Binding<AlertType?>) {
             appManager = .shared
@@ -53,7 +53,11 @@ extension OrganizerView {
 
         var body: some View {
             debugChanges()
-            return Group {
+            return ZStack {
+                NavigationLink("", isActive: $isPresentingProfile) {
+                    ProfileView()
+                }.onAppear(perform: presentActiveProfile)
+
                 mainView
                 if profileManager.headers.isEmpty {
                     emptyView
@@ -66,14 +70,14 @@ extension OrganizerView {
 
             // from AddProfileView
             .onReceive(profileManager.didCreateProfile) {
-                selectedProfileId = $0.id
+                presentProfile(withId: $0.id)
             }
         }
         
         private var mainView: some View {
             List {
                 Section {
-                    ForEach(sortedHeaders, content: navigationLink(forHeader:))
+                    ForEach(sortedHeaders, content: profileButton(forHeader:))
                         .onDelete(perform: removeProfiles)
                 }
             }.animation(.default, value: profileManager.headers)
@@ -86,27 +90,14 @@ extension OrganizerView {
             }
         }
 
-        private func navigationLink(forHeader header: Profile.Header) -> some View {
-            NavigationLink(tag: header.id, selection: $selectedProfileId) {
-                ProfileView(header: header)
+        private func profileButton(forHeader header: Profile.Header) -> some View {
+            Button {
+                presentProfile(withId: header.id)
             } label: {
                 ProfileHeaderRow(
                     header: header,
                     isActive: profileManager.isActiveProfile(header.id)
                 )
-            }.onAppear {
-                preselectIfActiveProfile(header.id)
-
-                // XXX: iOS 14 bug, if selectedProfileId is set before its NavigationLink
-                // has appeared, the NavigationLink will not auto-activate once appeared
-                // enforce activation by clearing and resetting selectedProfileId to its
-                // current value
-                withAnimation {
-                    if let tmp = selectedProfileId, tmp == header.id {
-                        selectedProfileId = nil
-                        selectedProfileId = tmp
-                    }
-                }
             }
         }
     }
@@ -117,22 +108,21 @@ extension OrganizerView.ProfilesList {
         profileManager.headers.sorted()
     }
     
-    private func preselectIfActiveProfile(_ id: UUID) {
-
-        // do not push profile if:
-        //
-        // - an alert is active, as it would break navigation
-        // - on iPad, as it's already shown
-        //
-        guard alertType == nil, themeIdiom != .pad, id == profileManager.activeHeader?.id else {
-            return
-        }
-        guard isFirstLaunch else {
+    private func presentActiveProfile() {
+        guard isFirstLaunch, profileManager.hasActiveProfile else {
             return
         }
         isFirstLaunch = false
-
-        selectedProfileId = id
+        isPresentingProfile = true
+    }
+    
+    private func presentProfile(withId id: UUID) {
+        do {
+            try profileManager.loadCurrentProfile(withId: id, makeReady: true)
+            isPresentingProfile = true
+        } catch {
+            pp_log.error("Unable to load profile: \(error)")
+        }
     }
 
     private func performMigrationsIfNeeded() {
@@ -149,18 +139,16 @@ extension OrganizerView.ProfilesList {
         }
 
         // clear selection before removal to avoid triggering a bogus navigation push
-        if let selectedProfileId = selectedProfileId, toDelete.contains(selectedProfileId) {
-            self.selectedProfileId = nil
+        if toDelete.contains(profileManager.currentProfile.value.id) {
+            isPresentingProfile = false
         }
 
         profileManager.removeProfiles(withIds: toDelete)
     }
 
     private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
-        if let selectedProfileId = selectedProfileId,
-           !profileManager.isExistingProfile(withId: selectedProfileId) {
-
-            self.selectedProfileId = nil
+        if isPresentingProfile, !profileManager.isCurrentProfileExisting() {
+            isPresentingProfile = false
         }
     }
 }

@@ -47,21 +47,18 @@ struct ProfileView: View {
     
     @ObservedObject private var profileManager: ProfileManager
     
-    private let header: Profile.Header
+    private var isLoading: Bool {
+        profileManager.isLoadingCurrentProfile
+    }
     
     private var isExisting: Bool {
-        profileManager.isExistingProfile(withId: header.id)
+        profileManager.isCurrentProfileExisting()
     }
 
     @State private var modalType: ModalType?
     
-    @State private var isLoaded = false
-    
-    init(header: Profile.Header?) {
-        let profileManager: ProfileManager = .shared
-        
-        self.profileManager = profileManager
-        self.header = header ?? profileManager.activeHeader ?? Profile.placeholder.header
+    init() {
+        profileManager = .shared
     }
 
     var body: some View {
@@ -84,22 +81,21 @@ struct ProfileView: View {
                 ).disabled(!isExisting)
             }
         }.sheet(item: $modalType, content: presentedModal)
-        .onAppear(perform: loadProfileIfNeeded)
         .navigationTitle(title)
         .themeSecondaryView()
     }
     
     private var title: String {
-        isExisting ? header.name : ""
+        profileManager.currentProfile.name
     }
     
     private var mainView: some View {
         List {
             VPNSection(
                 currentProfile: profileManager.currentProfile,
-                isLoaded: isLoaded
+                isLoading: isLoading
             )
-            if isLoaded {
+            if !isLoading {
                 ProviderSection(currentProfile: profileManager.currentProfile)
                 ConfigurationSection(
                     currentProfile: profileManager.currentProfile,
@@ -154,37 +150,6 @@ struct ProfileView: View {
                     feature: .trustedNetworks
                 )
             }.themeGlobal()
-        }
-    }
-    
-    private func loadProfileIfNeeded() {
-        guard !isLoaded else {
-            return
-        }
-        guard !header.isPlaceholder else {
-            pp_log.debug("ProfileView is a placeholder for WelcomeView, no active profile")
-            return
-        }
-        do {
-            let result = try profileManager.loadCurrentProfile(withId: header.id)
-            if result.isReady {
-                isLoaded = true
-                return
-            }
-            Task {
-                do {
-                    try await profileManager.makeProfileReady(result.profile)
-                    withAnimation {
-                        isLoaded = true
-                    }
-                } catch {
-                    pp_log.error("Profile \(header.id) could not be made ready: \(error)")
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }
-        } catch {
-            pp_log.error("Profile \(header.id) could not be loaded: \(error)")
-            presentationMode.wrappedValue.dismiss()
         }
     }
 

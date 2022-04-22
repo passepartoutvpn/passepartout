@@ -47,7 +47,7 @@ public class ProfileManager: ObservableObject {
     
     public var availabilityFilter: ((Profile.Header) -> Bool)?
 
-    public var activeProfileId: UUID? {
+    private var activeProfileId: UUID? {
         willSet {
             willUpdateActiveId.send(newValue)
         }
@@ -58,6 +58,8 @@ public class ProfileManager: ObservableObject {
 
     // MARK: Observables
 
+    @Published public private(set) var isLoadingCurrentProfile = false
+    
     public let currentProfile: ObservableProfile
     
     public let willUpdateActiveId = PassthroughSubject<UUID?, Never>()
@@ -85,6 +87,15 @@ public class ProfileManager: ObservableObject {
 
         currentProfile = ObservableProfile()
     }
+    
+    public func loadActiveProfile(withId id: UUID) throws {
+        guard isExistingProfile(withId: id) else {
+            pp_log.warning("Active profile \(id) does not exist, ignoring")
+            return
+        }
+        activeProfileId = id
+        try loadCurrentProfile(withId: id, makeReady: true)
+    }
 }
 
 // MARK: Index
@@ -103,6 +114,10 @@ extension ProfileManager {
 
     public var headers: [Profile.Header] {
         availableHeaders
+    }
+    
+    public var hasActiveProfile: Bool {
+        activeHeader != nil
     }
 
     public var activeHeader: Profile.Header? {
@@ -232,7 +247,16 @@ extension ProfileManager {
 // MARK: Observation
 
 extension ProfileManager {
-    public func loadCurrentProfile(withId id: UUID) throws -> LoadResult {
+    public func loadCurrentProfile(withId id: UUID, makeReady: Bool) throws {
+        guard !isLoadingCurrentProfile else {
+            pp_log.warning("Already loading another profile")
+            return
+        }
+        guard id != currentProfile.value.id else {
+            pp_log.debug("Profile \(id) is already current profile")
+            return
+        }
+        isLoadingCurrentProfile = true
         if isExistingProfile(withId: currentProfile.value.id) {
             pp_log.info("Committing changes of former current profile \(currentProfile.value.logDescription)")
             saveCurrentProfile()
@@ -240,12 +264,26 @@ extension ProfileManager {
         do {
             let result = try loadProfile(withId: id)
             pp_log.info("Current profile: \(result.profile.logDescription)")
-            currentProfile.value = result.profile
-            return result
+
+            if !makeReady || result.isReady {
+                currentProfile.value = result.profile
+                isLoadingCurrentProfile = false
+            } else {
+                Task {
+                    try await makeProfileReady(result.profile)
+                    currentProfile.value = result.profile
+                    isLoadingCurrentProfile = false
+                }
+            }
         } catch {
             currentProfile.value = .placeholder
+            isLoadingCurrentProfile = false
             throw error
         }
+    }
+    
+    public func isCurrentProfileExisting() -> Bool {
+        isExistingProfile(withId: currentProfile.value.id)
     }
     
     public func isCurrentProfileActive() -> Bool {

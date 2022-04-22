@@ -132,7 +132,13 @@ class AppContext {
         profileManager.availabilityFilter = {
             self.isEligibleProfile(withHeader: $0)
         }
-        profileManager.activeProfileId = appManager.activeProfileId
+        if let activeProfileId = appManager.activeProfileId {
+            do {
+                try profileManager.loadActiveProfile(withId: activeProfileId)
+            } catch {
+                pp_log.warning("Unable to load active profile: \(error)")
+            }
+        }
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.rateLimitMilliseconds = Constants.RateLimit.vpnManager
         vpnManager.isOnDemandRulesSupported = {
