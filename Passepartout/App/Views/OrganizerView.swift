@@ -112,6 +112,7 @@ struct OrganizerView: View {
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
         .navigationTitle(Unlocalized.appName)
+        .themePrimaryView()
     }
 }
 

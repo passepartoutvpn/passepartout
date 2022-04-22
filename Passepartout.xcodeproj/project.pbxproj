@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E065F112813269500062CAF /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E065F102813269500062CAF /* WelcomeView.swift */; };
 		0E0BD27327B2EA2C00583AC5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27227B2EA2C00583AC5 /* MainView.swift */; };
 		0E0BD27627B2EB2200583AC5 /* DonateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27527B2EB2200583AC5 /* DonateView.swift */; };
 		0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */; };
@@ -184,6 +185,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E065F102813269500062CAF /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0E0BD27227B2EA2C00583AC5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0E0BD27527B2EB2200583AC5 /* DonateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateView.swift; sourceTree = "<group>"; };
 		0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsView.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 				0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */,
 				0E71ACFA27C12E5300F85C4B /* VersionView.swift */,
 				0EF708312811CC8400A3A308 /* VPNStatusText.swift */,
+				0E065F102813269500062CAF /* WelcomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -969,6 +972,7 @@
 				0EB4042E27CA136300378B1A /* AddingTextField.swift in Sources */,
 				0EE8B7E327FF340F00B68621 /* VPNProtocolType+FileExtensions.swift in Sources */,
 				0EF2212B27E667EA001D0BD7 /* AddProviderView+Name.swift in Sources */,
+				0E065F112813269500062CAF /* WelcomeView.swift in Sources */,
 				0E2DE71F27DCD0290067B9E1 /* TunnelKit+L10n.swift in Sources */,
 				0E49F6BF27D764AF00385834 /* EndpointAdvancedView.swift in Sources */,
 				0E0BD27627B2EB2200583AC5 /* DonateView.swift in Sources */,

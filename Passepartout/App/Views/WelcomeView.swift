@@ -1,8 +1,8 @@
 //
-//  MainView.swift
+//  WelcomeView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/8/22.
+//  Created by Davide De Rosa on 4/22/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,11 +25,10 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct WelcomeView: View {
     var body: some View {
-        NavigationView {
-            OrganizerView()
-            ProfileView()
-        }.themeGlobal()
+        Text(L10n.Profile.Welcome.message)
+            .multilineTextAlignment(.center)
+            .themeInformativeText()
     }
 }

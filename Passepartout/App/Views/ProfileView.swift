@@ -67,7 +67,7 @@ struct ProfileView: View {
             if isExisting {
                 mainView
             } else {
-                welcomeView
+                WelcomeView()
             }
         }.toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -108,12 +108,6 @@ struct ProfileView: View {
         }
     }
     
-    private var welcomeView: some View {
-        Text(L10n.Profile.Welcome.message)
-            .multilineTextAlignment(.center)
-            .themeInformativeText()
-    }
-
     @ViewBuilder
     private func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
