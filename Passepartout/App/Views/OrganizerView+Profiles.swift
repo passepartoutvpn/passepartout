@@ -73,9 +73,15 @@ extension OrganizerView {
         
         private var mainView: some View {
             List {
+                activeHeaders.map { headers in
+                    Section {
+                        ForEach(headers, content: profileButton(forHeader:))
+                            .onDelete(perform: removeActiveProfile)
+                    }
+                }
                 Section {
-                    ForEach(sortedHeaders, content: profileButton(forHeader:))
-                        .onDelete(perform: removeProfiles)
+                    ForEach(otherHeaders, content: profileButton(forHeader:))
+                        .onDelete(perform: removeOtherProfiles)
                 }
             }.animation(.default, value: profileManager.headers)
         }
@@ -107,8 +113,18 @@ extension OrganizerView {
 }
 
 extension OrganizerView.ProfilesList {
-    private var sortedHeaders: [Profile.Header] {
-        profileManager.headers.sorted()
+    private var activeHeaders: [Profile.Header]? {
+        guard let activeHeader = profileManager.activeHeader else {
+            return nil
+        }
+        return [activeHeader]
+    }
+    
+    private var otherHeaders: [Profile.Header] {
+        profileManager.headers
+            .filter {
+                !profileManager.isActiveProfile($0.id)
+            }.sorted()
     }
     
     private func presentActiveProfile() {
@@ -128,18 +144,24 @@ extension OrganizerView.ProfilesList {
         }
     }
 
-    private func performMigrationsIfNeeded() {
-        Task {
-            await appManager.doMigrations(profileManager)
+    private func removeActiveProfile(_ indexSet: IndexSet) {
+        guard let activeHeader = activeHeaders?.first else {
+            assertionFailure("Removing active profile while nil?")
+            return
         }
+        removeProfiles(withIds: [activeHeader.id])
     }
     
-    private func removeProfiles(_ indexSet: IndexSet) {
-        let currentHeaders = sortedHeaders
+    private func removeOtherProfiles(_ indexSet: IndexSet) {
+        let currentHeaders = otherHeaders
         var toDelete: [UUID] = []
         indexSet.forEach {
             toDelete.append(currentHeaders[$0].id)
         }
+        removeProfiles(withIds: toDelete)
+    }
+
+    private func removeProfiles(withIds toDelete: [UUID]) {
 
         // clear selection before removal to avoid triggering a bogus navigation push
         if toDelete.contains(profileManager.currentProfile.value.id) {
@@ -149,6 +171,12 @@ extension OrganizerView.ProfilesList {
         profileManager.removeProfiles(withIds: toDelete)
     }
 
+    private func performMigrationsIfNeeded() {
+        Task {
+            await appManager.doMigrations(profileManager)
+        }
+    }
+    
     private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
         if isPresentingProfile, !profileManager.isCurrentProfileExisting() {
             isPresentingProfile = false
