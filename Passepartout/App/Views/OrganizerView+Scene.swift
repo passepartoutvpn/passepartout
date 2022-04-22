@@ -84,7 +84,6 @@ extension OrganizerView {
         }
         
         private func persist() {
-            appManager.activeProfileId = profileManager.activeProfileId
             profileManager.persist()
         }
     }

@@ -28,6 +28,8 @@ import PassepartoutCore
 
 extension ProfileView {
     struct VPNSection: View {
+        @ObservedObject private var appManager: AppManager
+
         @ObservedObject private var profileManager: ProfileManager
 
         @ObservedObject private var providerManager: ProviderManager
@@ -51,6 +53,7 @@ extension ProfileView {
         }
         
         init(currentProfile: ObservableProfile, isLoaded: Bool) {
+            appManager = .shared
             profileManager = .shared
             providerManager = .shared
             vpnManager = .shared
@@ -109,6 +112,9 @@ extension ProfileView {
                 Button(L10n.Profile.Items.UseProfile.caption) {
                     withAnimation {
                         profileManager.activateCurrentProfile()
+
+                        // IMPORTANT: save immediately to keep in sync with VPN status
+                        appManager.activeProfileId = profileManager.activeProfileId
                     }
                     Task {
                         await vpnManager.disable()

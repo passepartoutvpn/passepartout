@@ -153,6 +153,7 @@ extension AppManager: AppPreferences {
         }
         set {
             defaults.set(newValue?.uuidString, forKey: DefaultKey.activeProfileId.rawValue)
+            defaults.synchronize()
             objectWillChange.send()
         }
     }
