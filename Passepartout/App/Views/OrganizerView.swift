@@ -69,8 +69,6 @@ struct OrganizerView: View {
         }
     }
 
-    @ObservedObject private var appManager: AppManager
-
     @State private var modalType: ModalType?
 
     @State private var alertType: AlertType?
@@ -82,10 +80,6 @@ struct OrganizerView: View {
     private let hostFileTypes = Constants.URLs.filetypes
     
     private let redditURL = Constants.URLs.subreddit
-    
-    init() {
-        appManager = .shared
-    }
     
     var body: some View {
         debugChanges()

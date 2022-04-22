@@ -50,7 +50,6 @@ public class ProfileManager: ObservableObject {
     public var activeProfileId: UUID? {
         willSet {
             willUpdateActiveId.send(newValue)
-            objectWillChange.send()
         }
         didSet {
             pp_log.debug("Active profile updated: \(activeProfileId?.uuidString ?? "nil")")
