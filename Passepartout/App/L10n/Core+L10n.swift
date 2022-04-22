@@ -49,7 +49,15 @@ extension PassepartoutError {
 }
 
 extension VPNManager.ObservableState {
-    func localizedStatusDescription(withErrors: Bool, withDataCount: Bool) -> String {
+    enum LocalizedStyle {
+        case statusOnly
+        
+        case dataCountOrStatus
+        
+        case statusAndDataCount
+    }
+    
+    func localizedStatusDescription(withErrors: Bool, style: LocalizedStyle) -> String {
         guard isEnabled else {
 
             // report application errors even if VPN is disabled
@@ -66,12 +74,25 @@ extension VPNManager.ObservableState {
                 return errorDescription
             }
         }
-        if withDataCount {
-            if vpnStatus == .connected, let dataCount = dataCount {
-                return dataCount.localizedDescription
-            }
+        let statusDescription = vpnStatus.localizedDescription
+        var dataCountDescription: String?
+        if vpnStatus == .connected, let dataCount = dataCount {
+            dataCountDescription = dataCount.localizedDescription
         }
-        return vpnStatus.localizedDescription
+        switch style {
+        case .statusOnly:
+            return statusDescription
+            
+        case .dataCountOrStatus:
+            return dataCountDescription ?? statusDescription
+            
+        case .statusAndDataCount:
+            var comps: [String] = [statusDescription]
+            if let dataCountDescription = dataCountDescription {
+                comps.append(dataCountDescription)
+            }
+            return comps.joined(separator: " ")
+        }
     }
 }
 

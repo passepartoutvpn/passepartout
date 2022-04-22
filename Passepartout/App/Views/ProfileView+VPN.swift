@@ -92,7 +92,7 @@ extension ProfileView {
                 Text(L10n.Profile.Items.ConnectionStatus.caption)
                     .withTrailingText(currentVPNState.localizedStatusDescription(
                         withErrors: true,
-                        withDataCount: true
+                        style: .dataCountOrStatus
                     ))
             }
         }
