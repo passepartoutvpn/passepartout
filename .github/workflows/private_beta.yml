@@ -62,7 +62,7 @@ jobs:
       - name: Tweak build
         run: |
           ci/set-build.sh ${{ github.event.inputs.build_number }}
-          /usr/libexec/PlistBuddy -c "Add :com.algoritmico.Passepartout.config:app_type integer 2" Passepartout/App/Shared/Info.plist
+          /usr/libexec/PlistBuddy -c "Add :com.algoritmico.Passepartout.config:app_type integer 2" Passepartout/App/Info.plist
       - name: Build ${{ matrix.name }} app
         timeout-minutes: 15
         run: |
