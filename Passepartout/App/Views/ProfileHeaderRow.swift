@@ -40,12 +40,12 @@ struct ProfileHeaderRow: View {
                     hostView
                 }
             }.themeLongText()
-            .font(.body)
+            .font(.headline)
 
             if isActive {
                 VPNStatusText()
                     .foregroundColor(themeSecondaryColor)
-                    .font(.caption)
+                    .font(.subheadline)
             }
         }.frame(height: 60)
     }
