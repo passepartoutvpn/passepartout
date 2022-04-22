@@ -54,6 +54,7 @@ struct AddHostView: View {
 
     var body: some View {
         ZStack {
+            hiddenAccountLink
             List {
                 if viewModel.processedProfile.isPlaceholder {
                     processingView
@@ -61,14 +62,6 @@ struct AddHostView: View {
                     completeView
                 }
             }.animation(.default, value: viewModel)
-
-            // hidden
-            NavigationLink("", isActive: $isEnteringCredentials) {
-                AddProfileView.AccountWrapperView(
-                    profile: $viewModel.processedProfile,
-                    bindings: bindings
-                )
-            }
         }.toolbar {
             themeCloseItem(isPresented: bindings.$isPresented)
             ToolbarItem(placement: .primaryAction) {
@@ -131,6 +124,15 @@ struct AddHostView: View {
                 Text(L10n.Global.Strings.protocol)
                     .withTrailingText($0.description)
             }
+        }
+    }
+    
+    private var hiddenAccountLink: some View {
+        NavigationLink("", isActive: $isEnteringCredentials) {
+            AddProfileView.AccountWrapperView(
+                profile: $viewModel.processedProfile,
+                bindings: bindings
+            )
         }
     }
 

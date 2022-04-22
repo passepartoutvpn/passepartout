@@ -53,6 +53,7 @@ extension AddProviderView {
 
         var body: some View {
             ZStack {
+                hiddenAccountLink
                 List {
                     AddProfileView.ProfileNameSection(
                         profileName: $viewModel.profileName,
@@ -70,14 +71,6 @@ extension AddProviderView {
                         )
                     }
                 }
-
-                // hidden
-                NavigationLink("", isActive: $isEnteringCredentials) {
-                    AddProfileView.AccountWrapperView(
-                        profile: $profile,
-                        bindings: bindings
-                    )
-                }
             }.toolbar {
                 Button {
                     saveProfile(replacingExisting: false)
@@ -86,6 +79,15 @@ extension AddProviderView {
                 }
             }.alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
             .navigationTitle(providerMetadata.fullName)
+        }
+        
+        private var hiddenAccountLink: some View {
+            NavigationLink("", isActive: $isEnteringCredentials) {
+                AddProfileView.AccountWrapperView(
+                    profile: $profile,
+                    bindings: bindings
+                )
+            }
         }
 
         private func alertOverwriteExistingProfile() -> Alert {

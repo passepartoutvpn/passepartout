@@ -54,10 +54,7 @@ extension OrganizerView {
         var body: some View {
             debugChanges()
             return ZStack {
-                NavigationLink("", isActive: $isPresentingProfile) {
-                    ProfileView()
-                }.onAppear(perform: presentActiveProfile)
-
+                hiddenProfileLink
                 mainView
                 if profileManager.headers.isEmpty {
                     emptyView
@@ -89,7 +86,7 @@ extension OrganizerView {
                     .themeInformativeText()
             }
         }
-
+        
         private func profileButton(forHeader header: Profile.Header) -> some View {
             Button {
                 presentProfile(withId: header.id)
@@ -99,6 +96,12 @@ extension OrganizerView {
                     isActive: profileManager.isActiveProfile(header.id)
                 )
             }
+        }
+        
+        private var hiddenProfileLink: some View {
+            NavigationLink("", isActive: $isPresentingProfile) {
+                ProfileView()
+            }.onAppear(perform: presentActiveProfile)
         }
     }
 }

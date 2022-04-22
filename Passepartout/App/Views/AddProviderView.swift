@@ -74,6 +74,7 @@ struct AddProviderView: View {
 
     var body: some View {
         ZStack {
+            ForEach(providers, id: \.navigationId, content: hiddenProviderLink)
             ScrollViewReader { scrollProxy in
                 List {
                     mainSection
@@ -85,9 +86,6 @@ struct AddProviderView: View {
                 }.disabled(viewModel.pendingOperation != nil)
                 .animation(.default, value: providers)
             }
-
-            // hidden
-            ForEach(providers, id: \.navigationId, content: providerNavigationLink)
         }.toolbar {
             themeCloseItem(isPresented: bindings.$isPresented)
         }.sheet(isPresented: $viewModel.isPaywallPresented) {
@@ -131,7 +129,7 @@ struct AddProviderView: View {
         }.withTrailingProgress(when: isFetchingProvider(metadata.name))
     }
     
-    private func providerNavigationLink(_ metadata: ProviderMetadata) -> some View {
+    private func hiddenProviderLink(_ metadata: ProviderMetadata) -> some View {
         NavigationLink("", tag: metadata, selection: $viewModel.selectedProvider) {
             NameView(
                 profile: $viewModel.pendingProfile,

@@ -47,6 +47,7 @@ extension ShortcutsView {
         
         var body: some View {
             ZStack {
+                hiddenProviderLocationLink
                 List {
                     Section(
                         header: Text(Unlocalized.VPN.vpn)
@@ -68,8 +69,6 @@ extension ShortcutsView {
                         Button(L10n.Shortcuts.Add.Items.UntrustCellular.caption, action: addUntrustCellular)
                     }
                 }
-
-                providerLocationLink
             }.navigationTitle(L10n.Shortcuts.Add.title)
         }
 
@@ -84,7 +83,7 @@ extension ShortcutsView {
             }
         }
         
-        private var providerLocationLink: some View {
+        private var hiddenProviderLocationLink: some View {
             NavigationLink("", isActive: $isPresentingProviderLocation) {
                 ProviderLocationView(
                     currentProfile: pendingProfile,
