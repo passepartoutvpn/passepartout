@@ -290,6 +290,10 @@ extension View {
         tint(themePrimaryBackgroundColor)
     }
 
+    func themeTextButtonStyle() -> some View {
+        accentColor(.primary)
+    }
+
     func themeLongTextStyle() -> some View {
         lineLimit(1)
             .truncationMode(.middle)

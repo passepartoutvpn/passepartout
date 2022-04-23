@@ -101,7 +101,7 @@ extension OrganizerView {
                     header: header,
                     isActive: profileManager.isActiveProfile(header.id)
                 )
-            }
+            }.themeTextButtonStyle()
         }
         
         private var hiddenProfileLink: some View {
