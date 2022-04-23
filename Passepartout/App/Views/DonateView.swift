@@ -73,7 +73,7 @@ struct DonateView: View {
             if newValue == .active {
                 productManager.refreshProducts()
             }
-        }.animation(.default, value: productManager.isRefreshingProducts)
+        }.themeAnimation(on: productManager.isRefreshingProducts)
     }
 
     private func presentedAlert(_ alertType: AlertType) -> Alert {

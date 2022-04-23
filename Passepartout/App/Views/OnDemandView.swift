@@ -72,7 +72,7 @@ struct OnDemandView: View {
 extension OnDemandView {
     private var enabledView: some View {
         Section {
-            Toggle(L10n.Global.Strings.enabled, isOn: $onDemand.isEnabled.animation())
+            Toggle(L10n.Global.Strings.enabled, isOn: $onDemand.isEnabled.themeAnimation())
         }
     }
     

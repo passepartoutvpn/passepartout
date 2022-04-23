@@ -84,7 +84,7 @@ struct AddProviderView: View {
                 }.onChange(of: viewModel.errorMessage) {
                     onErrorMessage($0, scrollProxy)
                 }.disabled(viewModel.pendingOperation != nil)
-                .animation(.default, value: providers)
+                .themeAnimation(on: providers)
             }
         }.toolbar {
             themeCloseItem(isPresented: bindings.$isPresented)

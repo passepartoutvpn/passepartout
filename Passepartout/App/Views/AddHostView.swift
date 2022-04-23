@@ -61,7 +61,7 @@ struct AddHostView: View {
                 } else {
                     completeView
                 }
-            }.animation(.default, value: viewModel)
+            }.themeAnimation(on: viewModel)
         }.toolbar {
             themeCloseItem(isPresented: bindings.$isPresented)
             ToolbarItem(placement: .primaryAction) {

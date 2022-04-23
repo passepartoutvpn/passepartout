@@ -83,7 +83,7 @@ extension OrganizerView {
                     ForEach(otherHeaders, content: profileButton(forHeader:))
                         .onDelete(perform: removeOtherProfiles)
                 }
-            }.animation(.default, value: profileManager.headers)
+            }.themeAnimation(on: profileManager.headers)
         }
 
         private var emptyView: some View {

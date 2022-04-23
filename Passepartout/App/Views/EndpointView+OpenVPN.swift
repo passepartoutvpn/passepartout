@@ -132,7 +132,7 @@ extension EndpointView {
 extension EndpointView.OpenVPNView {
     private var mainSection: some View {
         Section {
-            Toggle(L10n.Global.Strings.automatic, isOn: $isAutomatic.animation())
+            Toggle(L10n.Global.Strings.automatic, isOn: $isAutomatic.themeAnimation())
         }
     }
     

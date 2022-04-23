@@ -310,6 +310,20 @@ extension View {
     }
 }
 
+// MARK: Animations
+    
+extension View {
+    func themeAnimation<V: Equatable>(on value: V) -> some View {
+        animation(.default, value: value)
+    }
+}
+
+extension Binding {
+    func themeAnimation() -> Binding<Value> {
+        animation(.default)
+    }
+}
+
 // MARK: Shortcuts
 
 extension View {

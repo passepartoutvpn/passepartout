@@ -100,7 +100,7 @@ extension NetworkSettingsView {
         Section(
             header: Text(L10n.NetworkSettings.Gateway.title)
         ) {
-            Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticGateway.animation())
+            Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticGateway.themeAnimation())
 
             if !settings.isAutomaticGateway {
                 Toggle(Unlocalized.Network.ipv4, isOn: $settings.gateway.isDefaultIPv4)
@@ -119,7 +119,7 @@ extension NetworkSettingsView {
         Section(
             header: Text(Unlocalized.Network.dns)
         ) {
-            Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticDNS.animation())
+            Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticDNS.themeAnimation())
 
             if !settings.isAutomaticDNS {
                 themeTextPicker(
@@ -212,7 +212,7 @@ extension NetworkSettingsView {
         Section(
             header: Text(L10n.Global.Strings.proxy)
         ) {
-            Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticProxy.animation())
+            Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticProxy.themeAnimation())
 
             if !settings.isAutomaticProxy {
                 themeTextPicker(
@@ -275,7 +275,7 @@ extension NetworkSettingsView {
         Section(
             header: Text(Unlocalized.Network.mtu)
         ) {
-            Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticMTU.animation())
+            Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticMTU.themeAnimation())
             
             if !settings.isAutomaticMTU {
                 themeTextPicker(

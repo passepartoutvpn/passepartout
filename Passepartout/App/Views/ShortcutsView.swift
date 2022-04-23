@@ -73,7 +73,7 @@ struct ShortcutsView: View {
         // reloading
         .onAppear {
             intentsManager.reloadShortcuts()
-        }.animation(.default, value: intentsManager.isReloadingShortcuts)
+        }.themeAnimation(on: intentsManager.isReloadingShortcuts)
         
         // IntentsUI
         .onReceive(intentsManager.shouldDismissIntentView) { _ in
