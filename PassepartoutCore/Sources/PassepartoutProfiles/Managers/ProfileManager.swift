@@ -335,10 +335,6 @@ extension ProfileManager {
         // IMPORTANT: invalidate current profile if deleted
         if !currentProfile.value.isPlaceholder && !newHeaders.keys.contains(currentProfile.value.id) {
             pp_log.info("\tCurrent profile deleted, invalidating...")
-            if isCurrentProfileActive() {
-                pp_log.info("\tCurrent profile was also active, deactivating...")
-                activeProfileId = nil
-            }
             currentProfile.value = .placeholder
         }
 
@@ -346,6 +342,11 @@ extension ProfileManager {
         if let newProfile = newProfile, newProfile != currentProfile.value {
             pp_log.info("Current profile remotely updated")
             currentProfile.value = newProfile
+        }
+
+        if let activeProfileId = activeProfileId, !newHeaders.keys.contains(activeProfileId) {
+            pp_log.info("\tActive profile was deleted")
+            self.activeProfileId = nil
         }
 
         // IMPORTANT: defer task to avoid recursive saves
