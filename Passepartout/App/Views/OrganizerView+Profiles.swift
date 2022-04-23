@@ -128,6 +128,16 @@ extension OrganizerView.ProfilesList {
     }
     
     private func presentActiveProfile() {
+
+        // do not present profile if:
+        //
+        // - an alert is active, as it would break navigation
+        // - on iPad, as it's already shown
+        //
+        guard alertType == nil, themeIdiom != .pad else {
+            return
+        }
+
         guard isFirstLaunch, profileManager.hasActiveProfile else {
             return
         }
