@@ -77,7 +77,7 @@ jobs:
           PILOT_GROUPS: ${{ secrets.PILOT_GROUPS }}
           PILOT_BETA_APP_FEEDBACK: ${{ secrets.PILOT_BETA_APP_FEEDBACK }}
           PILOT_BETA_APP_REVIEW_INFO: ${{ secrets.PILOT_BETA_APP_REVIEW_INFO }}
-          PILOT_NOTIFY_EXTERNAL_TESTERS: false
+          PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ secrets.PILOT_NOTIFY_EXTERNAL_TESTERS }}
           CHANGELOG_PREFACE: ${{ secrets.CHANGELOG_PREFACE }}
         run: |
           if [ $PLATFORM == "ios" ]; then
