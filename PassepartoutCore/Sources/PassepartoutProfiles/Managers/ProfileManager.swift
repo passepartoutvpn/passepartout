@@ -320,6 +320,7 @@ extension ProfileManager {
 
         currentProfile.$value
             .dropFirst()
+            .removeDuplicates()
             .sink {
                 self.willUpdateCurrentProfile($0)
             }.store(in: &cancellables)
