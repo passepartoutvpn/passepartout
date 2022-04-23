@@ -89,7 +89,7 @@ extension OrganizerView {
         private var emptyView: some View {
             VStack {
                 Text(L10n.Organizer.Empty.noProfiles)
-                    .themeInformativeText()
+                    .themeInformativeTextStyle()
             }
         }
         

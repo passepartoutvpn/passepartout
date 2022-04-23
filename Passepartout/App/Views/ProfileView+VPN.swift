@@ -165,7 +165,7 @@ extension ProfileView {
                     isAskingUninstallVPN = true
                 } label: {
                     Label(L10n.Profile.Items.Uninstall.caption, systemImage: themeDeleteImage)
-                }.foregroundColor(themeErrorColor)
+                }.themeErrorTextStyle()
                 .actionSheet(isPresented: $isAskingUninstallVPN) {
                     ActionSheet(
                         title: Text(L10n.Profile.Alerts.UninstallVpn.message),

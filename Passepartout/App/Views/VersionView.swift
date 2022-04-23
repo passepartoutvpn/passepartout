@@ -35,6 +35,6 @@ struct VersionView: View {
             versionString: versionString,
             extraString: L10n.Version.Labels.intro
         ).background(themePrimaryBackground)
-        .foregroundColor(themeLightTextColor)
+        .themeLightTextStyle()
     }
 }

@@ -64,7 +64,7 @@ enum AddProfileView {
         private func existingProfileButton(_ header: Profile.Header) -> some View {
             Button(header.name) {
                 profileName = header.name
-            }.themeLongText()
+            }.themeLongTextStyle()
         }
     }
 

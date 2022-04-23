@@ -199,7 +199,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             }
         } label: {
             themeFavoriteActionImage(!isFavoriteLocation(location)).asSystemImage
-        }.tint(themePrimaryBackgroundColor)
+        }.themePrimaryTintStyle()
     }
 }
 

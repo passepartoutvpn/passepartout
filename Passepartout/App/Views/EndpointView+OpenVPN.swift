@@ -187,7 +187,7 @@ extension EndpointView.OpenVPNView {
 
     private func text(forEndpoint endpoint: Endpoint?) -> some View {
         Text(endpoint?.address ?? L10n.Global.Strings.automatic)
-            .themeLongText()
+            .themeLongTextStyle()
     }
 }
 

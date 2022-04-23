@@ -28,7 +28,6 @@ import SwiftUI
 struct WelcomeView: View {
     var body: some View {
         Text(L10n.Profile.Welcome.message)
-            .multilineTextAlignment(.center)
-            .themeInformativeText()
+            .themeInformativeTextStyle()
     }
 }

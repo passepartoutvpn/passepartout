@@ -71,43 +71,28 @@ extension View {
     func themeSecondaryView() -> some View {
         navigationBarTitleDisplayMode(.inline)
     }
-
-    func themeLongText() -> some View {
-        lineLimit(1)
-            .truncationMode(.middle)
-    }
-    
-    func themeInformativeText() -> some View {
-        font(.title)
-            .foregroundColor(themeSecondaryColor)
-    }
 }
 
 // MARK: Colors
 
 extension View {
-    var themeAccentColor: Color {
+    fileprivate var themeAccentColor: Color {
         Color(Asset.Assets.accentColor.color)
     }
     
-    var themePrimaryBackgroundColor: Color {
+    fileprivate var themePrimaryBackgroundColor: Color {
         Color(Asset.Assets.primaryColor.color)
     }
     
-    var themePrimaryBackground: some View {
-        themePrimaryBackgroundColor
-            .ignoresSafeArea()
-    }
-    
-    var themeSecondaryColor: Color {
+    fileprivate var themeSecondaryColor: Color {
         .secondary
     }
     
-    var themeLightTextColor: Color {
+    fileprivate var themeLightTextColor: Color {
         Color(Asset.Assets.lightTextColor.color)
     }
     
-    var themeErrorColor: Color {
+    fileprivate var themeErrorColor: Color {
         .red
     }
 
@@ -121,14 +106,6 @@ extension View {
         } catch {
             return themeErrorColor
         }
-    }
-}
-
-// MARK: Fonts
-
-extension View {
-    func themeDebugLogFont() -> some View {
-        font(.system(size: 13, weight: .medium, design: .monospaced))
     }
 }
 
@@ -277,6 +254,55 @@ extension String {
 
     var asSystemImage: Image {
         Image(systemName: self)
+    }
+}
+
+// MARK: Styles
+
+extension View {
+    var themePrimaryBackground: some View {
+        themePrimaryBackgroundColor
+            .ignoresSafeArea()
+    }
+
+    func themeAccentForegroundStyle() -> some View {
+        foregroundColor(themeAccentColor)
+    }
+
+    func themeSecondaryTextStyle() -> some View {
+        foregroundColor(themeSecondaryColor)
+    }
+    
+    func themeLightTextStyle() -> some View {
+        foregroundColor(themeLightTextColor)
+    }
+    
+    func themeErrorTextStyle() -> some View {
+        foregroundColor(themeErrorColor)
+    }
+
+    func themeDestructiveButtonStyle() -> some View {
+        foregroundColor(themeErrorColor)
+    }
+
+    @available(iOS 15, *)
+    func themePrimaryTintStyle() -> some View {
+        tint(themePrimaryBackgroundColor)
+    }
+
+    func themeLongTextStyle() -> some View {
+        lineLimit(1)
+            .truncationMode(.middle)
+    }
+    
+    func themeInformativeTextStyle() -> some View {
+        multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundColor(themeSecondaryColor)
+    }
+
+    func themeDebugLogStyle() -> some View {
+        font(.system(size: 13, weight: .medium, design: .monospaced))
     }
 }
 

@@ -48,12 +48,12 @@ extension View {
         }
     }
 
-    func withTrailingText(_ text: String?, color: Color? = nil, truncationMode: Text.TruncationMode = .tail, copyOnTap: Bool = false) -> some View {
+    func withTrailingText(_ text: String?, truncationMode: Text.TruncationMode = .tail, copyOnTap: Bool = false) -> some View {
         HStack {
             self
             Spacer()
             let trailing = text.map(Text.init)
-                .foregroundColor(color ?? themeSecondaryColor)
+                .themeSecondaryTextStyle()
                 .lineLimit(1)
                 .truncationMode(truncationMode)
             if copyOnTap {
@@ -73,7 +73,7 @@ extension View {
             if condition {
                 Spacer()
                 themeCheckmarkImage.asSystemImage
-                    .foregroundColor(themeAccentColor)
+                    .themeAccentForegroundStyle()
             }
         }
     }

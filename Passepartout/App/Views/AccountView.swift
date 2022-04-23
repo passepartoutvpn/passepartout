@@ -77,10 +77,10 @@ struct AccountView: View {
 
                 RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password) {
                     themeConceilImage.asSystemImage
-                        .foregroundColor(themeAccentColor)
+                        .themeAccentForegroundStyle()
                 } revealImage: {
                     themeRevealImage.asSystemImage
-                        .foregroundColor(themeAccentColor)
+                        .themeAccentForegroundStyle()
                 }.textContentType(.password)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)

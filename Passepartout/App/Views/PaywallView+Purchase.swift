@@ -298,7 +298,7 @@ private struct PurchaseRow: View {
             } else {
                 product.localizedPrice.map {
                     Text($0)
-                        .foregroundColor(themeSecondaryColor)
+                        .themeSecondaryTextStyle()
                 }
             }
         }

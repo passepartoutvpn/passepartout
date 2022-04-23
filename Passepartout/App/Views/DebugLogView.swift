@@ -70,7 +70,7 @@ struct DebugLogView: View {
         .edgesIgnoringSafeArea([.leading, .trailing])
         .onReceive(timer, perform: refreshLog)
         .navigationTitle(L10n.DebugLog.title)
-        .themeDebugLogFont()
+        .themeDebugLogStyle()
     }
 
     private var contentView: some View {
