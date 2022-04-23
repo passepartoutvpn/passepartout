@@ -175,8 +175,8 @@ extension NetworkSettingsView {
                 ).themeIPAddress($0.text.wrappedValue)
             } addLabel: {
                 Text(L10n.NetworkSettings.Items.AddDnsServer.caption)
-//            } commitLabel: {
-//                Text(L10n.Global.Strings.add)
+            } commitLabel: {
+                Text(L10n.Global.Strings.add)
             }
         }
     }
@@ -196,8 +196,8 @@ extension NetworkSettingsView {
                 ).themeDomainName($0.text.wrappedValue)
             } addLabel: {
                 Text(L10n.NetworkSettings.Items.AddDnsDomain.caption)
-//            } commitLabel: {
-//                Text(L10n.Global.Strings.add)
+            } commitLabel: {
+                Text(L10n.Global.Strings.add)
             }
         }
     }
@@ -261,8 +261,8 @@ extension NetworkSettingsView {
                 ).themeDomainName($0.text.wrappedValue)
             } addLabel: {
                 Text(L10n.NetworkSettings.Items.AddProxyBypass.caption)
-//                } commitLabel: {
-//                    Text(L10n.Global.Strings.add)
+                } commitLabel: {
+                    Text(L10n.Global.Strings.add)
             }
         }
     }
