@@ -35,13 +35,19 @@ struct VPNStatusText: View {
     
     var body: some View {
         debugChanges()
-        return Text(statusDescription)
+        return HStack {
+            Text(statusDescription)
+            Spacer()
+            currentVPNState.dataCount.map {
+                Text($0.localizedDescription)
+            }
+        }
     }
 
     private var statusDescription: String {
-        return currentVPNState.localizedStatusDescription(
+        currentVPNState.localizedStatusDescription(
             withErrors: false,
-            style: .statusAndDataCount
+            dataCountIfAvailable: false
         )
     }
 }
