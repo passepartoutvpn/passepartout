@@ -66,7 +66,7 @@ jobs:
           PLIST_PATH: "Passepartout/App/Info.plist"
         run: |
           ci/set-build.sh $BUILD_NUMBER
-          /usr/libexec/PlistBuddy -c $PLIST_COMMAND $PLIST_PATH
+          /usr/libexec/PlistBuddy -c "$PLIST_COMMAND" "$PLIST_PATH"
       - name: Build ${{ matrix.name }} app
         timeout-minutes: 15
         run: |
