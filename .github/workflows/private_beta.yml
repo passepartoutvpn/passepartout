@@ -14,7 +14,7 @@ env:
 
 jobs:
   build_upload:
-    name: Upload to ASC
+    name: Distribute Private Beta
     runs-on: macos-11
     environment:
       name: private_beta
@@ -60,9 +60,13 @@ jobs:
           scripts/ci/recognize-match-hostname.sh
           bundle exec fastlane --env ${{ matrix.platform }} match development
       - name: Tweak build
+        env:
+          BUILD_NUMBER: ${{ github.event.inputs.build_number }}
+          PLIST_COMMAND: "Add :com.algoritmico.Passepartout.config:app_type integer 2"
+          PLIST_PATH: "Passepartout/App/Info.plist"
         run: |
-          ci/set-build.sh ${{ github.event.inputs.build_number }}
-          /usr/libexec/PlistBuddy -c "Add :com.algoritmico.Passepartout.config:app_type integer 2" Passepartout/App/Info.plist
+          ci/set-build.sh $BUILD_NUMBER
+          /usr/libexec/PlistBuddy -c $PLIST_COMMAND $PLIST_PATH
       - name: Build ${{ matrix.name }} app
         timeout-minutes: 15
         run: |
