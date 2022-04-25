@@ -103,7 +103,10 @@ struct ProfileView: View {
                 )
                 ExtraSection(currentProfile: profileManager.currentProfile)
                 DiagnosticsSection(currentProfile: profileManager.currentProfile)
-                UninstallVPNSection()
+                Section {
+                    UninstallVPNButton()
+                    RemoveProfileButton(header: profileManager.currentProfile.value.header)
+                }
             }
         }
     }

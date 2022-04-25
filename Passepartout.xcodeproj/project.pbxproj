@@ -61,6 +61,8 @@
 		0E71ACF927C12E4800F85C4B /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACF827C12E4800F85C4B /* CreditsView.swift */; };
 		0E71ACFB27C12E5300F85C4B /* VersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACFA27C12E5300F85C4B /* VersionView.swift */; };
 		0E71ACFD27C1321A00F85C4B /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACFC27C1321A00F85C4B /* ActivityView.swift */; };
+		0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7577D62816A3B200081CBE /* DestructiveButton.swift */; };
+		0E7577DD2816C3AD00081CBE /* ProfileView+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7577DC2816C3AD00081CBE /* ProfileView+Buttons.swift */; };
 		0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */; };
 		0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */; };
 		0E92D7C927F1042A0033CB7B /* ProfileView+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */; };
@@ -243,6 +245,8 @@
 		0E71ACF827C12E4800F85C4B /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		0E71ACFA27C12E5300F85C4B /* VersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionView.swift; sourceTree = "<group>"; };
 		0E71ACFC27C1321A00F85C4B /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		0E7577D62816A3B200081CBE /* DestructiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButton.swift; sourceTree = "<group>"; };
+		0E7577DC2816C3AD00081CBE /* ProfileView+Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Buttons.swift"; sourceTree = "<group>"; };
 		0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHostViewModel.swift; sourceTree = "<group>"; };
 		0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Configuration.swift"; sourceTree = "<group>"; };
 		0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Extra.swift"; sourceTree = "<group>"; };
@@ -373,6 +377,7 @@
 				0EB4042D27CA136200378B1A /* AddingTextField.swift */,
 				0EB3412F27C7761A00483410 /* Binding+Extensions.swift */,
 				0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */,
+				0E7577D62816A3B200081CBE /* DestructiveButton.swift */,
 				0EDE02C127F61C79000FBE3C /* EditableTextList.swift */,
 				0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */,
 				0E34A2CE27CADA6300C73B67 /* GenericVersionView.swift */,
@@ -442,6 +447,7 @@
 				0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */,
 				0ED89C2427DE45A3008B36D6 /* ProfileHeaderRow.swift */,
 				0E44689527B051C300A14CE4 /* ProfileView.swift */,
+				0E7577DC2816C3AD00081CBE /* ProfileView+Buttons.swift */,
 				0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */,
 				0E92D7F327F104B80033CB7B /* ProfileView+Diagnostics.swift */,
 				0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */,
@@ -887,8 +893,10 @@
 				0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */,
 				0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */,
 				0EF708322811CC8400A3A308 /* VPNStatusText.swift in Sources */,
+				0E7577DD2816C3AD00081CBE /* ProfileView+Buttons.swift in Sources */,
 				0E5324A627D297BB002565C3 /* InApp.swift in Sources */,
 				0E3B7FCD27E47B3700C66F13 /* AddHostView.swift in Sources */,
+				0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */,
 				0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */,
 				0E35C09A280E95BB0071FA35 /* ProviderProfileAvailability.swift in Sources */,
 				0E5349C827C176D100C71BB3 /* EndpointView+WireGuard.swift in Sources */,

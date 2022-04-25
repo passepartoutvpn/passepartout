@@ -277,10 +277,6 @@ extension View {
         foregroundColor(themeLightTextColor)
     }
     
-    func themeErrorTextStyle() -> some View {
-        foregroundColor(themeErrorColor)
-    }
-
     func themeDestructiveButtonStyle() -> some View {
         foregroundColor(themeErrorColor)
     }

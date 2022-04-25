@@ -149,38 +149,4 @@ extension ProfileView {
             }
         }
     }
-
-    struct UninstallVPNSection: View {
-        @ObservedObject private var vpnManager: VPNManager
-        
-        @State private var isAskingUninstallVPN = false
-        
-        init() {
-            vpnManager = .shared
-        }
-        
-        var body: some View {
-            Section {
-                Button {
-                    isAskingUninstallVPN = true
-                } label: {
-                    Label(L10n.Profile.Items.Uninstall.caption, systemImage: themeDeleteImage)
-                }.themeErrorTextStyle()
-                .actionSheet(isPresented: $isAskingUninstallVPN) {
-                    ActionSheet(
-                        title: Text(L10n.Profile.Alerts.UninstallVpn.message),
-                        message: nil,
-                        buttons: [
-                            .destructive(Text(L10n.Profile.Items.Uninstall.caption), action: {
-                                Task {
-                                    await vpnManager.uninstall()
-                                }
-                            }),
-                            .cancel(Text(L10n.Global.Strings.cancel))
-                        ]
-                    )
-                }
-            }
-        }
-    }
 }
