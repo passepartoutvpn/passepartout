@@ -29,7 +29,7 @@ import TunnelKitManager
 import TunnelKitOpenVPNManager
 
 @MainActor
-public class VPNManager: ObservableObject, RateLimited {
+public class VPNManager: ObservableObject {
 
     // MARK: Initialization
     
@@ -81,20 +81,6 @@ public class VPNManager: ObservableObject, RateLimited {
     }
 
     public func toggle() -> Bool {
-        guard !isRateLimited("") else {
-            return false
-        }
-        lastActionDate[""] = Date()
-
-        // signal rate limiting flag (e.g. for UI)
-        if let rateLimitMilliseconds = rateLimitMilliseconds {
-            isRateLimiting = true
-            Task {
-                try await Task.sleep(nanoseconds: UInt64(rateLimitMilliseconds) * NSEC_PER_MSEC)
-                isRateLimiting = false
-            }
-        }
-
         guard let configuration = vpnConfigurationWithCurrentProfile() else {
             return false
         }
@@ -141,14 +127,6 @@ public class VPNManager: ObservableObject, RateLimited {
     public func debugLogURL(forProtocol vpnProtocol: VPNProtocolType) -> URL? {
         return strategy.debugLogURL(forProtocol: vpnProtocol)
     }
-
-    // MARK: RateLimited
-    
-    public var lastActionDate: [String: Date] = [:]
-
-    public var rateLimitMilliseconds: Int?
-
-    @Published public private(set) var isRateLimiting = false
 }
 
 // MARK: Observation

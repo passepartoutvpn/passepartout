@@ -139,7 +139,7 @@ extension Constants {
     enum RateLimit {
         static let providerManager = 10000
         
-        static let vpnManager = 500
+        static let vpnToggle = 500
     }
     
     enum Log {

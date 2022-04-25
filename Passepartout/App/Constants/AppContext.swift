@@ -140,7 +140,6 @@ class AppContext {
             }
         }
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
-        vpnManager.rateLimitMilliseconds = Constants.RateLimit.vpnManager
         vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
         }

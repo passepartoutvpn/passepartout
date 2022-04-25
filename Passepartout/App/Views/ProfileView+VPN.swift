@@ -44,6 +44,8 @@ extension ProfileView {
 
         @State private var isLocallyEnabled = false
 
+        @State private var canToggle = true
+
         private var isEnabled: Binding<Bool> {
             .init {
                 isLocallyEnabled
@@ -101,7 +103,7 @@ extension ProfileView {
                         isLocallyEnabled = currentVPNState.isEnabled
                     }.onChange(of: currentVPNState.isEnabled) {
                         isLocallyEnabled = $0
-                    }.disabled(vpnManager.isRateLimiting)
+                    }.disabled(!canToggle)
 
                 Text(L10n.Profile.Items.ConnectionStatus.caption)
                     .withTrailingText(currentVPNState.localizedStatusDescription(
@@ -112,8 +114,9 @@ extension ProfileView {
         }
 
         private var vpnToggleString: String {
-            let V = L10n.Profile.Items.Vpn.self
-            return currentVPNState.isEnabled ? V.TurnOff.caption : V.TurnOn.caption
+//            let V = L10n.Profile.Items.Vpn.self
+//            return currentVPNState.isEnabled ? V.TurnOff.caption : V.TurnOn.caption
+            L10n.Global.Strings.enabled
         }
 
         private var inactiveSubview: some View {
@@ -145,6 +148,12 @@ extension ProfileView {
         private func toggleVPNAndDonateIntents() {
             guard vpnManager.toggle() else {
                 return
+            }
+            
+            // rate limit toggle actions
+            canToggle = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Constants.RateLimit.vpnToggle)) {
+                canToggle = true
             }
 
             // eligibility: donate intents if eligible for Siri
