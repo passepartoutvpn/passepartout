@@ -49,7 +49,7 @@ extension ProfileView {
                     header: Text(L10n.Profile.Alerts.Rename.title)
                 ) {
                     TextField(L10n.Global.Placeholders.profileName, text: $newName, onCommit: commitRenaming)
-                        .disableAutocorrection(true)
+                        .themeProfileName()
                         .onAppear(perform: loadCurrentName)
                 }
             }.themeSecondaryView()

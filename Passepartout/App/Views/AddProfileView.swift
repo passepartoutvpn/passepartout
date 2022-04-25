@@ -44,6 +44,7 @@ enum AddProfileView {
                 footer: themeErrorMessage(errorMessage)
             ) {
                 TextField(L10n.Global.Placeholders.profileName, text: $profileName, onCommit: onCommit)
+                    .themeProfileName()
             }
         }
     }

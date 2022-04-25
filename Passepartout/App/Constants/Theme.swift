@@ -401,6 +401,11 @@ extension View {
 // MARK: Validation
 
 extension View {
+    func themeProfileName() -> some View {
+        autocapitalization(.none)
+            .disableAutocorrection(true)
+    }
+
     func themeURL(_ urlString: String?) -> some View {
         themeValidating(urlString, validator: Validators.url)
             .keyboardType(.asciiCapable)
