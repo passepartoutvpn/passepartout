@@ -42,6 +42,17 @@ extension ProfileView {
         
         @ObservedObject private var currentProfile: ObservableProfile
 
+        @State private var isLocallyEnabled = false
+
+        private var isEnabled: Binding<Bool> {
+            .init {
+                isLocallyEnabled
+            } set: {
+                isLocallyEnabled = $0
+                toggleVPNAndDonateIntents()
+            }
+        }
+
         private let isLoading: Bool
 
         private var isActiveProfile: Bool {
@@ -85,13 +96,13 @@ extension ProfileView {
                 footer: Text(L10n.Profile.Sections.Vpn.footer)
                     .xxxThemeTruncation()
             ) {
-                HStack {
-                    Button(vpnToggleString, action: toggleVPNAndDonateIntents)
-                        .disabled(vpnManager.isRateLimiting)
-                    Spacer()
-                    Toggle("", isOn: .constant(currentVPNState.isEnabled))
-                        .disabled(true)
-                }
+                Toggle(vpnToggleString, isOn: isEnabled)
+                    .onAppear {
+                        isLocallyEnabled = currentVPNState.isEnabled
+                    }.onChange(of: currentVPNState.isEnabled) {
+                        isLocallyEnabled = $0
+                    }.disabled(vpnManager.isRateLimiting)
+
                 Text(L10n.Profile.Items.ConnectionStatus.caption)
                     .withTrailingText(currentVPNState.localizedStatusDescription(
                         withErrors: true,
