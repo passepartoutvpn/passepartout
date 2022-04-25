@@ -77,4 +77,12 @@ struct Validators {
             throw ValidationError.url
         }
     }
+
+    static func dnsOverTLSServerName(_ string: String) throws {
+        do {
+            try domainName(string)
+        } catch {
+            try ipAddress(string)
+        }
+    }
 }

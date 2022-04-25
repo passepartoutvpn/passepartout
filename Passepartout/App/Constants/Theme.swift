@@ -427,6 +427,13 @@ extension View {
             .disableAutocorrection(true)
     }
 
+    func themeDNSOverTLSServerName(_ string: String?) -> some View {
+        themeValidating(string, validator: Validators.dnsOverTLSServerName)
+            .keyboardType(.asciiCapable)
+            .autocapitalization(.none)
+            .disableAutocorrection(true)
+    }
+
     func themeSSID(_ text: String?) -> some View {
         themeValidating(text, validator: Validators.notEmpty)
             .keyboardType(.asciiCapable)

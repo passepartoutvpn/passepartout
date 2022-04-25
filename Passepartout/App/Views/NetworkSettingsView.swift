@@ -157,7 +157,7 @@ extension NetworkSettingsView {
 
     private var dnsManualTLSRow: some View {
         TextField(Unlocalized.Placeholders.dotServerName, text: $settings.dns.dnsTLSServerName ?? "")
-            .themeDomainName(settings.dns.dnsTLSServerName)
+            .themeDNSOverTLSServerName(settings.dns.dnsTLSServerName)
     }
 
     private var dnsManualServers: some View {
