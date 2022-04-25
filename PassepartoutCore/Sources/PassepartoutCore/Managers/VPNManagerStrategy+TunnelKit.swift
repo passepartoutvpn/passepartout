@@ -203,6 +203,9 @@ extension VPNManager {
         private func onDataCount(_: Date) {
             switch vpnState.value.vpnStatus {
             case .connected:
+                guard let currentDataCount = currentDataCount else {
+                    return
+                }
                 currentState?.dataCount = currentDataCount
             
             default:
