@@ -1,1 +1,0 @@
-../../../../iOS/fastlane/metadata/el/privacy_url.txt

@@ -408,8 +408,6 @@
 		0E35C0AE280EF8A80071FA35 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0E35C0B2280EFA6A0071FA35 /* iOS */,
-				0E35C0B3280EFA6E0071FA35 /* macOS */,
 				0E44689B27B11B5300A14CE4 /* AboutView.swift */,
 				0ECF71ED27B6A99300CDB528 /* AccountView.swift */,
 				0E3B7FCC27E47B3700C66F13 /* AddHostView.swift */,
@@ -461,20 +459,6 @@
 				0E065F102813269500062CAF /* WelcomeView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		0E35C0B2280EFA6A0071FA35 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		0E35C0B3280EFA6E0071FA35 /* macOS */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = macOS;
 			sourceTree = "<group>";
 		};
 		0E49F6C927DB398100385834 /* Extensions */ = {

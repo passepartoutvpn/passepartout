@@ -1,1 +1,0 @@
-../../../../iOS/fastlane/metadata/ru/support_url.txt

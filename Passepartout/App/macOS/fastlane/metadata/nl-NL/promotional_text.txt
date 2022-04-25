@@ -1,1 +1,0 @@
-../../../../iOS/fastlane/metadata/nl-NL/promotional_text.txt

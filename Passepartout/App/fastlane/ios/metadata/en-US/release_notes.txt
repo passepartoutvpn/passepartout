@@ -1,0 +1,12 @@
+### Added
+
+- WireGuard support.
+- iCloud support.
+
+### Changed
+
+- App completely rewritten in SwiftUI.
+
+### Fixed
+
+- Files occasionally not selectable in browser.

@@ -1,1 +1,0 @@
-../../../../iOS/fastlane/metadata/es-MX/marketing_url.txt

@@ -1,9 +1,0 @@
-### Added
-
-- WireGuard support.
-- iCloud support.
-
-### Changed
-
-- App completely rewritten in SwiftUI.
-

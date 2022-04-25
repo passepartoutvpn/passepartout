@@ -1,1 +1,0 @@
-../../../../iOS/fastlane/metadata/sv/apple_tv_privacy_policy.txt

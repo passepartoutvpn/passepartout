@@ -7,8 +7,8 @@ Pods
 **/fastlane/README.md
 **/fastlane/report.xml
 **/fastlane/test_output
-**/fastlane/metadata/review_information
-**/fastlane/metadata/trade_representative_contact_information
+**/fastlane/*/metadata/review_information
+**/fastlane/*/metadata/trade_representative_contact_information
 dist/
 iap/
 templates/
