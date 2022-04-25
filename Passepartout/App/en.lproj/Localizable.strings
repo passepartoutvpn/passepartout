@@ -44,7 +44,7 @@
 "global.strings.translations" = "Translations";
 
 "global.messages.email_not_configured" = "No e-mail account is configured.";
-"global.messages.share" = "Passepartout is an user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";
+"global.messages.share" = "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";
 
 "global.placeholders.profile_name" = "My profile";
 

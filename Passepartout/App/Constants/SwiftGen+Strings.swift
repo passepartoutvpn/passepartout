@@ -411,7 +411,7 @@ internal enum L10n {
     internal enum Messages {
       /// No e-mail account is configured.
       internal static let emailNotConfigured = L10n.tr("Localizable", "global.messages.email_not_configured")
-      /// Passepartout is an user-friendly, open source OpenVPN / WireGuard client for iOS and macOS
+      /// Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS
       internal static let share = L10n.tr("Localizable", "global.messages.share")
     }
     internal enum Placeholders {
