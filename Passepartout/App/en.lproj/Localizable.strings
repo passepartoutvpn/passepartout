@@ -15,6 +15,7 @@
 "global.strings.add" = "Add";
 "global.strings.default" = "Default";
 "global.strings.name" = "Name";
+"global.strings.profiles" = "Profiles";
 "global.strings.provider" = "Provider";
 "global.strings.providers" = "Providers";
 "global.strings.configuration" = "Configuration";
@@ -113,6 +114,7 @@
 
 /* MARK: OrganizerView */
 
+"organizer.sections.active" = "In use";
 "organizer.empty.no_profiles" = "No profiles";
 
 "organizer.alerts.reddit.message" = "Did you know that Passepartout has a subreddit? Subscribe for updates or to discuss issues, features, new platforms or whatever you like.\n\nIt's also a great way to show you care about this project.";

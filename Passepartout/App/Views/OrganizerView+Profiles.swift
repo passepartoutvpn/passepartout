@@ -74,14 +74,21 @@ extension OrganizerView {
         private var mainView: some View {
             List {
                 activeHeaders.map { headers in
-                    Section {
+                    Section(
+                        header: Text(L10n.Organizer.Sections.active)
+                    ) {
                         ForEach(headers, content: profileButton(forHeader:))
                             .onDelete(perform: removeActiveProfile)
                     }
                 }
-                Section {
-                    ForEach(otherHeaders, content: profileButton(forHeader:))
-                        .onDelete(perform: removeOtherProfiles)
+                let headers = otherHeaders
+                if !headers.isEmpty {
+                    Section(
+                        header: Text(L10n.Global.Strings.profiles)
+                    ) {
+                        ForEach(headers, content: profileButton(forHeader:))
+                            .onDelete(perform: removeOtherProfiles)
+                    }
                 }
             }.themeAnimation(on: profileManager.headers)
         }

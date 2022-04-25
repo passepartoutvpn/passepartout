@@ -467,6 +467,8 @@ internal enum L10n {
       internal static let port = L10n.tr("Localizable", "global.strings.port")
       /// Private key
       internal static let privateKey = L10n.tr("Localizable", "global.strings.private_key")
+      /// Profiles
+      internal static let profiles = L10n.tr("Localizable", "global.strings.profiles")
       /// Protocol
       internal static let `protocol` = L10n.tr("Localizable", "global.strings.protocol")
       /// Protocols
@@ -697,6 +699,10 @@ internal enum L10n {
     internal enum Empty {
       /// No profiles
       internal static let noProfiles = L10n.tr("Localizable", "organizer.empty.no_profiles")
+    }
+    internal enum Sections {
+      /// In use
+      internal static let active = L10n.tr("Localizable", "organizer.sections.active")
     }
   }
 
