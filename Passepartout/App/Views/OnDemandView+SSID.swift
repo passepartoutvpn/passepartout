@@ -72,7 +72,7 @@ extension OnDemandView {
                 text: callback.text,
                 onEditingChanged: callback.onEditingChanged,
                 onCommit: callback.onCommit
-            ).themeSSID(callback.text.wrappedValue)
+            ).themeValidSSID(callback.text.wrappedValue)
         }
     }
 }

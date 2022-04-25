@@ -397,44 +397,44 @@ extension View {
 // MARK: Validation
 
 extension View {
-    func themeProfileName() -> some View {
+    func themeValidProfileName() -> some View {
         autocapitalization(.none)
             .disableAutocorrection(true)
     }
 
-    func themeURL(_ urlString: String?) -> some View {
+    func themeValidURL(_ urlString: String?) -> some View {
         themeValidating(urlString, validator: Validators.url)
             .keyboardType(.asciiCapable)
             .autocapitalization(.none)
             .disableAutocorrection(true)
     }
     
-    func themeIPAddress(_ ipAddress: String?) -> some View {
+    func themeValidIPAddress(_ ipAddress: String?) -> some View {
         themeValidating(ipAddress, validator: Validators.ipAddress)
             .keyboardType(.numbersAndPunctuation)
             .autocapitalization(.none)
             .disableAutocorrection(true)
     }
     
-    func themeSocketPort() -> some View {
+    func themeValidSocketPort() -> some View {
         keyboardType(.numberPad)
     }
 
-    func themeDomainName(_ domainName: String?) -> some View {
+    func themeValidDomainName(_ domainName: String?) -> some View {
         themeValidating(domainName, validator: Validators.domainName)
             .keyboardType(.asciiCapable)
             .autocapitalization(.none)
             .disableAutocorrection(true)
     }
 
-    func themeDNSOverTLSServerName(_ string: String?) -> some View {
+    func themeValidDNSOverTLSServerName(_ string: String?) -> some View {
         themeValidating(string, validator: Validators.dnsOverTLSServerName)
             .keyboardType(.asciiCapable)
             .autocapitalization(.none)
             .disableAutocorrection(true)
     }
 
-    func themeSSID(_ text: String?) -> some View {
+    func themeValidSSID(_ text: String?) -> some View {
         themeValidating(text, validator: Validators.notEmpty)
             .keyboardType(.asciiCapable)
             .autocapitalization(.none)

@@ -152,12 +152,12 @@ extension NetworkSettingsView {
     
     private var dnsManualHTTPSRow: some View {
         TextField(Unlocalized.Placeholders.dohURL, text: $settings.dns.dnsHTTPSURL.toString())
-            .themeURL(settings.dns.dnsHTTPSURL?.absoluteString)
+            .themeValidURL(settings.dns.dnsHTTPSURL?.absoluteString)
     }
 
     private var dnsManualTLSRow: some View {
         TextField(Unlocalized.Placeholders.dotServerName, text: $settings.dns.dnsTLSServerName ?? "")
-            .themeDNSOverTLSServerName(settings.dns.dnsTLSServerName)
+            .themeValidDNSOverTLSServerName(settings.dns.dnsTLSServerName)
     }
 
     private var dnsManualServers: some View {
@@ -172,7 +172,7 @@ extension NetworkSettingsView {
                     text: $0.text,
                     onEditingChanged: $0.onEditingChanged,
                     onCommit: $0.onCommit
-                ).themeIPAddress($0.text.wrappedValue)
+                ).themeValidIPAddress($0.text.wrappedValue)
             } addLabel: {
                 Text(L10n.NetworkSettings.Items.AddDnsServer.caption)
             } commitLabel: {
@@ -193,7 +193,7 @@ extension NetworkSettingsView {
                     text: $0.text,
                     onEditingChanged: $0.onEditingChanged,
                     onCommit: $0.onCommit
-                ).themeDomainName($0.text.wrappedValue)
+                ).themeValidDomainName($0.text.wrappedValue)
             } addLabel: {
                 Text(L10n.NetworkSettings.Items.AddDnsDomain.caption)
             } commitLabel: {
@@ -225,16 +225,16 @@ extension NetworkSettingsView {
                 switch settings.proxy.configurationType {
                 case .manual:
                     TextField(Unlocalized.Placeholders.address, text: $settings.proxy.proxyAddress ?? "")
-                        .themeIPAddress(settings.proxy.proxyAddress)
+                        .themeValidIPAddress(settings.proxy.proxyAddress)
                         .withLeadingText(L10n.Global.Strings.address)
 
                     TextField(Unlocalized.Placeholders.port, text: $settings.proxy.proxyPort.toString())
-                        .themeSocketPort()
+                        .themeValidSocketPort()
                         .withLeadingText(L10n.Global.Strings.port)
 
                 case .pac:
                     TextField(Unlocalized.Placeholders.pacURL, text: $settings.proxy.proxyAutoConfigurationURL.toString())
-                        .themeURL(settings.proxy.proxyAutoConfigurationURL?.absoluteString)
+                        .themeValidURL(settings.proxy.proxyAutoConfigurationURL?.absoluteString)
 
                 case .disabled:
                     EmptyView()
@@ -258,7 +258,7 @@ extension NetworkSettingsView {
                     text: $0.text,
                     onEditingChanged: $0.onEditingChanged,
                     onCommit: $0.onCommit
-                ).themeDomainName($0.text.wrappedValue)
+                ).themeValidDomainName($0.text.wrappedValue)
             } addLabel: {
                 Text(L10n.NetworkSettings.Items.AddProxyBypass.caption)
                 } commitLabel: {
