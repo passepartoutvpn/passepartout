@@ -42,19 +42,6 @@ extension ProfileView {
         
         @ObservedObject private var currentProfile: ObservableProfile
 
-        @State private var isLocallyEnabled = false
-
-        @State private var canToggle = true
-
-        private var isEnabled: Binding<Bool> {
-            .init {
-                isLocallyEnabled
-            } set: {
-                isLocallyEnabled = $0
-                toggleVPNAndDonateIntents()
-            }
-        }
-
         private let isLoading: Bool
 
         private var isActiveProfile: Bool {
@@ -98,12 +85,20 @@ extension ProfileView {
                 footer: Text(L10n.Profile.Sections.Vpn.footer)
                     .xxxThemeTruncation()
             ) {
-                Toggle(vpnToggleString, isOn: isEnabled)
-                    .onAppear {
-                        isLocallyEnabled = currentVPNState.isEnabled
-                    }.onChange(of: currentVPNState.isEnabled) {
-                        isLocallyEnabled = $0
-                    }.disabled(!canToggle)
+                VPNToggle(rateLimit: Constants.RateLimit.vpnToggle) {
+
+                    // eligibility: donate intents if eligible for Siri
+                    if isEligibleForSiri {
+                        pp_log.debug("Donating connection intents...")
+
+                        IntentDispatcher.donateEnableVPN()
+                        IntentDispatcher.donateDisableVPN()
+                        IntentDispatcher.donateConnection(
+                            with: currentProfile.value,
+                            providerManager: providerManager
+                        )
+                    }
+                }
 
                 Text(L10n.Profile.Items.ConnectionStatus.caption)
                     .withTrailingText(currentVPNState.localizedStatusDescription(
@@ -111,12 +106,6 @@ extension ProfileView {
                         dataCountIfAvailable: true
                     ))
             }
-        }
-
-        private var vpnToggleString: String {
-//            let V = L10n.Profile.Items.Vpn.self
-//            return currentVPNState.isEnabled ? V.TurnOff.caption : V.TurnOn.caption
-            L10n.Global.Strings.enabled
         }
 
         private var inactiveSubview: some View {
@@ -142,30 +131,6 @@ extension ProfileView {
                 header: headerView
             ) {
                 ProgressView()
-            }
-        }
-        
-        private func toggleVPNAndDonateIntents() {
-            guard vpnManager.toggle() else {
-                return
-            }
-            
-            // rate limit toggle actions
-            canToggle = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Constants.RateLimit.vpnToggle)) {
-                canToggle = true
-            }
-
-            // eligibility: donate intents if eligible for Siri
-            if isEligibleForSiri {
-                pp_log.debug("Donating connection intents...")
-
-                IntentDispatcher.donateEnableVPN()
-                IntentDispatcher.donateDisableVPN()
-                IntentDispatcher.donateConnection(
-                    with: currentProfile.value,
-                    providerManager: providerManager
-                )
             }
         }
     }

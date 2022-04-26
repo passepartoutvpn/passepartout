@@ -63,6 +63,7 @@
 		0E71ACFD27C1321A00F85C4B /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACFC27C1321A00F85C4B /* ActivityView.swift */; };
 		0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7577D62816A3B200081CBE /* DestructiveButton.swift */; };
 		0E7577DD2816C3AD00081CBE /* ProfileView+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7577DC2816C3AD00081CBE /* ProfileView+Buttons.swift */; };
+		0E7577DF2817E22C00081CBE /* VPNToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7577DE2817E22C00081CBE /* VPNToggle.swift */; };
 		0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */; };
 		0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */; };
 		0E92D7C927F1042A0033CB7B /* ProfileView+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */; };
@@ -247,6 +248,7 @@
 		0E71ACFC27C1321A00F85C4B /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		0E7577D62816A3B200081CBE /* DestructiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButton.swift; sourceTree = "<group>"; };
 		0E7577DC2816C3AD00081CBE /* ProfileView+Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Buttons.swift"; sourceTree = "<group>"; };
+		0E7577DE2817E22C00081CBE /* VPNToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNToggle.swift; sourceTree = "<group>"; };
 		0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHostViewModel.swift; sourceTree = "<group>"; };
 		0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Configuration.swift"; sourceTree = "<group>"; };
 		0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Extra.swift"; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */,
 				0E71ACFA27C12E5300F85C4B /* VersionView.swift */,
 				0EF708312811CC8400A3A308 /* VPNStatusText.swift */,
+				0E7577DE2817E22C00081CBE /* VPNToggle.swift */,
 				0E065F102813269500062CAF /* WelcomeView.swift */,
 			);
 			path = Views;
@@ -944,6 +947,7 @@
 				0E2C172B27CB63F9007E8488 /* Reviewer.swift in Sources */,
 				0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */,
 				0E34A2B627CAA8CC00C73B67 /* Core+L10n.swift in Sources */,
+				0E7577DF2817E22C00081CBE /* VPNToggle.swift in Sources */,
 				0E6059CF27FCC618003F4063 /* SwiftGen+Assets.swift in Sources */,
 				0E2A8D4927ADF87F00207D04 /* PassepartoutApp.swift in Sources */,
 				0EBC075527EBC83800208AD9 /* MailComposerView.swift in Sources */,
