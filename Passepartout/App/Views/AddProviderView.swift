@@ -81,6 +81,8 @@ struct AddProviderView: View {
                     if !providers.isEmpty {
                         providersSection
                     }
+                }.onAppear {
+                    viewModel.updateIndex(providerManager)
                 }.onChange(of: viewModel.errorMessage) {
                     onErrorMessage($0, scrollProxy)
                 }.disabled(viewModel.pendingOperation != nil)
