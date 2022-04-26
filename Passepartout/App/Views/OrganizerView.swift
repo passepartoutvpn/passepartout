@@ -132,7 +132,7 @@ extension OrganizerView {
 
         case .addHost(let url, let deletingURLOnSuccess):
             NavigationView {
-                AddHostView(
+                AddHostView.NameView(
                     url: url,
                     deletingURLOnSuccess: deletingURLOnSuccess,
                     bindings: .init(
