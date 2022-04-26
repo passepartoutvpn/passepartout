@@ -58,26 +58,26 @@ class ProvidersTests: XCTestCase {
     override func tearDown() {
 //        manager.reset()
     }
-    
-//    func testLoadBundledProviders() throws {
-//        let exp = expectation(description: "Load bundle")
-//
-//        manager.loadBundledProvidersPublisher(vpnProtocol: .openVPN)
-//            .sink {
-//                switch $0 {
-//                case .finished:
-//                    exp.fulfill()
-//
-//                case .failure(let error):
-//                    pp_log.error("Unable to load bundled providers: \(error)")
-//                    exp.fulfill()
-//                }
-//            } receiveValue: {
-//                pp_log.debug("Loaded \($0.count) providers")
-//            }.store(in: &cancellables)
-//
-//        waitForExpectations(timeout: 10.0, handler: nil)
-//    }
+
+    func testFetchLocalIndex() throws {
+        let exp = expectation(description: "Local index")
+
+        manager.fetchProvidersIndexPublisher(priority: .bundle)
+            .sink {
+                switch $0 {
+                case .finished:
+                    exp.fulfill()
+
+                case .failure(let error):
+                    pp_log.error("Unable to load remote provider: \(error)")
+                    exp.fulfill()
+                }
+            } receiveValue: {
+                pp_log.debug("Loaded index")
+            }.store(in: &cancellables)
+
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
 
     func testFetchRemoteIndex() throws {
         let exp = expectation(description: "Remote index")

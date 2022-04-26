@@ -106,13 +106,18 @@ class ProviderRepository: Repository {
 
             // update existing
             providers.forEach { dto in
+                guard let name = dto.name else {
+                    return
+                }
                 guard let ws = index.metadata.first(where: {
-                    $0.name == dto.name
+                    $0.name == name
                 }) else {
                     // delete if not in new index
+                    pp_log.info("Deleting provider: \(name)")
                     context.delete(dto)
                     return
                 }
+                pp_log.info("Updating provider: \(name)")
                 dto.fullName = ws.fullName
                 dto.lastUpdate = Date()
             }
