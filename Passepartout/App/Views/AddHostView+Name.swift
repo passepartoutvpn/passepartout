@@ -41,7 +41,11 @@ extension AddHostView {
         @State private var viewModel = ViewModel()
         
         @State private var isEnteringCredentials = false
-        
+
+        private var isComplete: Bool {
+            !viewModel.processedProfile.isPlaceholder
+        }
+
         init(
             url: URL,
             deletingURLOnSuccess: Bool,
@@ -57,11 +61,7 @@ extension AddHostView {
             ZStack {
                 hiddenAccountLink
                 List {
-                    if viewModel.processedProfile.isPlaceholder {
-                        processingView
-                    } else {
-                        completeView
-                    }
+                    mainView
                 }.themeAnimation(on: viewModel)
             }.toolbar {
                 themeCloseItem(isPresented: bindings.$isPresented)
@@ -82,7 +82,7 @@ extension AddHostView {
         }
 
         @ViewBuilder
-        private var processingView: some View {
+        private var mainView: some View {
             AddProfileView.ProfileNameSection(
                 profileName: $viewModel.profileName,
                 errorMessage: viewModel.errorMessage
@@ -90,16 +90,21 @@ extension AddHostView {
                 processProfile(replacingExisting: false)
             }.onAppear {
                 viewModel.presetName(withURL: url)
-            }
-            if viewModel.requiresPassphrase {
-                encryptionSection
-            }
-            let headers = profileManager.headers.sorted()
-            if !headers.isEmpty {
-                AddProfileView.ExistingProfilesSection(
-                    headers: headers,
-                    profileName: $viewModel.profileName
-                )
+            }.disabled(isComplete)
+
+            if !isComplete {
+                if viewModel.requiresPassphrase {
+                    encryptionSection
+                }
+                let headers = profileManager.headers.sorted()
+                if !headers.isEmpty {
+                    AddProfileView.ExistingProfilesSection(
+                        headers: headers,
+                        profileName: $viewModel.profileName
+                    )
+                }
+            } else {
+                completeSection
             }
         }
         
@@ -113,12 +118,11 @@ extension AddHostView {
             }
         }
 
-        private var completeView: some View {
+        private var completeSection: some View {
             Section(
+                header: Text(L10n.AddProfile.Shared.title),
                 footer: themeErrorMessage(viewModel.errorMessage)
             ) {
-                Text(L10n.Global.Strings.name)
-                    .withTrailingText(viewModel.processedProfile.header.name)
                 Text(Unlocalized.Network.url)
                     .withTrailingText(url.lastPathComponent)
                 viewModel.processedProfile.vpnProtocols.first.map {
