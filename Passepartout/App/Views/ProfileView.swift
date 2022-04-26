@@ -149,8 +149,4 @@ struct ProfileView: View {
             }.themeGlobal()
         }
     }
-
-    private func presentPaywallTrustedNetworks() {
-        modalType = .paywallTrustedNetworks
-    }
 }
