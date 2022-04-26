@@ -71,12 +71,22 @@ extension Constants {
         }
 
         #if targetEnvironment(macCatalyst)
-        static let lastFullVersionBuild: (Int, LocalProduct) = (0, .fullVersion_macOS)
+        static let buildProducts = BuildProducts {
+            if $0 <= 3000 {
+                return [.networkSettings]
+            }
+            return []
+        }
         #else
-        static let lastFullVersionBuild: (Int, LocalProduct) = (2016, .fullVersion_iOS)
+        static let buildProducts = BuildProducts {
+            if $0 <= 2016 {
+                return [.fullVersion_iOS]
+            } else if $0 <= 3000 {
+                return [.networkSettings]
+            }
+            return []
+        }
         #endif
-        
-        static let lastNetworkSettingsBuild = 2999
 
         private static var isBeta: Bool {
             #if targetEnvironment(simulator)

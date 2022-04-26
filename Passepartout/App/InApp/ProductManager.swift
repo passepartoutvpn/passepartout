@@ -43,26 +43,10 @@ class ProductManager: NSObject, ObservableObject {
         
         case fullVersion = 2
     }
-
-    struct Configuration {
-        let appType: AppType
-        
-        let lastFullVersionBuild: (Int, LocalProduct)
-        
-        let lastNetworkSettingsBuild: Int
-        
-        init(
-            appType: AppType,
-            lastFullVersionBuild: (Int, LocalProduct),
-            lastNetworkSettingsBuild: Int
-        ) {
-            self.appType = appType
-            self.lastFullVersionBuild = lastFullVersionBuild
-            self.lastNetworkSettingsBuild = lastNetworkSettingsBuild
-        }
-    }
     
-    let cfg: Configuration
+    let appType: AppType
+    
+    let buildProducts: BuildProducts
     
     @Published private(set) var isRefreshingProducts = false
 
@@ -82,8 +66,10 @@ class ProductManager: NSObject, ObservableObject {
     
     private var refreshRequest: SKReceiptRefreshRequest?
     
-    init(_ cfg: Configuration) {
-        self.cfg = cfg
+    init(appType: AppType, buildProducts: BuildProducts) {
+        self.appType = appType
+        self.buildProducts = buildProducts
+    
         products = []
         inApp = InApp()
         purchasedAppBuild = nil
@@ -195,7 +181,7 @@ class ProductManager: NSObject, ObservableObject {
     }
 
     private func isFullVersion() -> Bool {
-        if cfg.appType == .fullVersion {
+        if appType == .fullVersion {
             return true
         }
         if isCurrentPlatformVersion() {
@@ -206,7 +192,7 @@ class ProductManager: NSObject, ObservableObject {
 
     func isEligible(forFeature feature: LocalProduct) -> Bool {
         if let purchasedAppBuild = purchasedAppBuild {
-            if feature == .networkSettings && purchasedAppBuild <= cfg.lastNetworkSettingsBuild {
+            if feature == .networkSettings && buildProducts.hasProduct(.networkSettings, atBuild: purchasedAppBuild) {
                 return true
             }
         }
@@ -222,7 +208,7 @@ class ProductManager: NSObject, ObservableObject {
     }
 
     func isEligibleForFeedback() -> Bool {
-        return cfg.appType == .beta || !purchasedFeatures.isEmpty
+        return appType == .beta || !purchasedFeatures.isEmpty
     }
     
     func hasPurchased(_ product: LocalProduct) -> Bool {
@@ -256,9 +242,9 @@ class ProductManager: NSObject, ObservableObject {
         if let buildNumber = purchasedAppBuild {
             pp_log.debug("Original purchased build: \(buildNumber)")
 
-            // treat former purchases as full versions
-            if buildNumber <= cfg.lastFullVersionBuild.0 {
-                purchasedFeatures.insert(cfg.lastFullVersionBuild.1)
+            // assume some purchases by build number
+            buildProducts.products(atBuild: buildNumber).forEach {
+                purchasedFeatures.insert($0)
             }
         }
         if let iapReceipts = receipt.inAppPurchaseReceipts {

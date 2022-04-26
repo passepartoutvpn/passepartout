@@ -112,11 +112,10 @@ class AppContext {
 
         // app
 
-        productManager = ProductManager(.init(
+        productManager = ProductManager(
             appType: Constants.InApp.appType,
-            lastFullVersionBuild: Constants.InApp.lastFullVersionBuild,
-            lastNetworkSettingsBuild: Constants.InApp.lastNetworkSettingsBuild
-        ))
+            buildProducts: Constants.InApp.buildProducts
+        )
         intentsManager = IntentsManager()
         reviewer = Reviewer()
         
