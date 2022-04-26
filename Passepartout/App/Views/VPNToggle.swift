@@ -39,8 +39,10 @@ struct VPNToggle: View {
         .init {
             isLocallyEnabled
         } set: {
+            guard toggleVPN() else {
+                return
+            }
             isLocallyEnabled = $0
-            toggleVPN()
         }
     }
 
@@ -65,9 +67,9 @@ struct VPNToggle: View {
             }.disabled(!canToggle)
     }
 
-    private func toggleVPN() {
+    private func toggleVPN() -> Bool {
         guard vpnManager.toggle() else {
-            return
+            return false
         }
         
         // rate limit toggle actions
@@ -77,5 +79,6 @@ struct VPNToggle: View {
         }
         
         onToggle?()
+        return true
     }
 }
