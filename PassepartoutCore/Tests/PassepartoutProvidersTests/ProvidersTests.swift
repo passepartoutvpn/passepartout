@@ -144,7 +144,7 @@ class ProvidersTests: XCTestCase {
     
     func testServerId() async {
         await fetchProvider(.nordvpn)
-        guard let server = manager.server(.nordvpn, vpnProtocol: .openVPN, serverId: "es143") else {
+        guard let server = manager.server(.nordvpn, vpnProtocol: .openVPN, apiId: "es143") else {
             return
         }
         pp_log.debug(server)

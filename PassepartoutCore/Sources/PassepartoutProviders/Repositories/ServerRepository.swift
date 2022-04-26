@@ -84,11 +84,11 @@ class ServerRepository: Repository {
         }
     }
 
-    func server(forProviderWithName providerName: ProviderName, vpnProtocol: VPNProtocolType, serverId: String) -> ProviderServer? {
+    func server(forProviderWithName providerName: ProviderName, vpnProtocol: VPNProtocolType, apiId: String) -> ProviderServer? {
         let request = CDInfrastructureServer.fetchRequest()
         request.predicate = NSPredicate(
-            format: "serverId == %@ AND category.infrastructure.provider.name == %@ AND category.infrastructure.vpnProtocol == %@",
-            serverId,
+            format: "apiId == %@ AND category.infrastructure.provider.name == %@ AND category.infrastructure.vpnProtocol == %@",
+            apiId,
             providerName,
             vpnProtocol.rawValue
         )

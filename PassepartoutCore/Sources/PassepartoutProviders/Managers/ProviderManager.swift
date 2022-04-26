@@ -106,8 +106,8 @@ public class ProviderManager: ObservableObject, RateLimited {
     }
 
 //    @available(*, deprecated, message: "only use for migration, server is not cached")
-    public func server(_ name: ProviderName, vpnProtocol: VPNProtocolType, serverId: String) -> ProviderServer? {
-        serverRepository.server(forProviderWithName: name, vpnProtocol: vpnProtocol, serverId: serverId)
+    public func server(_ name: ProviderName, vpnProtocol: VPNProtocolType, apiId: String) -> ProviderServer? {
+        serverRepository.server(forProviderWithName: name, vpnProtocol: vpnProtocol, apiId: apiId)
     }
 
 //    public func anyServer(forProviderWithName providerName: ProviderName, vpnProtocol: VPNProtocolType, countryCode: String) -> ProviderServer? {
