@@ -87,7 +87,7 @@ extension ProviderServer {
     }
 
     var localizedDetailsWithDefault: String {
-        return details ?? L10n.Global.Strings.default
+        return details ?? "\(L10n.Global.Strings.default) [\(apiId)]"
     }
 }
 

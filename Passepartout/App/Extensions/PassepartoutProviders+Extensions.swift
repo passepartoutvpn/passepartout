@@ -75,7 +75,12 @@ extension ProviderServer: Comparable {
         if let li = lhs.serverIndex, let ri = rhs.serverIndex {
             return li < ri
         }
-        return lhs.localizedDetails < rhs.localizedDetails
+        let ld = lhs.localizedDetails
+        let rd = rhs.localizedDetails
+        if ld != rd {
+            return ld < rd
+        }
+        return lhs.apiId < rhs.apiId
     }
 }
 
