@@ -115,7 +115,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     }
     
     private var mainView: some View {
-        // FIXME: layout, content inside ScrollViewReader is not re-rendered on isShowingFavorites
+        // FIXME: layout, restore ScrollViewReader, but content inside it is not re-rendered on isShowingFavorites
 //        ScrollViewReader { scrollProxy in
             List {
                 if !isShowingEmptyFavorites {

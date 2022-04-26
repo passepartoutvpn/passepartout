@@ -80,7 +80,7 @@ struct DebugLogView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }//.padding()
-        // FIXME: layout, a slight padding would be nice, but it glitches on first touch
+        // TODO: layout, a slight padding would be nice, but it glitches on first touch
     }
     
     private func refreshLog(scrollingToLatestWith scrollProxy: ScrollViewProxy?) {

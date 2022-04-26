@@ -31,9 +31,9 @@ struct LongContentView: View {
     var body: some View {
         TextEditor(text: $content)
             .font(.system(.body, design: .monospaced))
-            .padding()
+//            .padding()
 
-        // FIXME: layout, padding should rather be an inset, and extend beyond safe areas
+        // TODO: layout, add padding an inset, let content extend beyond safe areas
     }
 }
 
