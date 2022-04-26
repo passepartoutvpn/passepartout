@@ -108,6 +108,12 @@ extension OrganizerView {
                     header: header,
                     isActive: profileManager.isActiveProfile(header.id)
                 )
+            }.contextMenu {
+                Button {
+                    duplicateProfile(withId: header.id)
+                } label: {
+                    Label(L10n.Global.Strings.duplicate, systemImage: themeDuplicateImage)
+                }
             }.themeTextButtonStyle()
         }
         
@@ -186,6 +192,10 @@ extension OrganizerView.ProfilesList {
         }
 
         profileManager.removeProfiles(withIds: toDelete)
+    }
+    
+    private func duplicateProfile(withId id: UUID) {
+        profileManager.duplicateProfile(withId: id)
     }
 
     private func performMigrationsIfNeeded() {

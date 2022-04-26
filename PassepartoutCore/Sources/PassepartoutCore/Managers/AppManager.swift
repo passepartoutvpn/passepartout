@@ -116,7 +116,7 @@ public class AppManager: ObservableObject {
                 migrated.forEach {
                     var profile = $0
                     if profileManager.isExistingProfile(withName: profile.header.name) {
-                        profile = profile.renamedUniquely()
+                        profile = profile.renamedUniquely(withLastUpdate: true)
                     }
                     profileManager.saveProfile(profile, isActive: nil)
                 }

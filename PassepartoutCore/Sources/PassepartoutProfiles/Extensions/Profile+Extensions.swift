@@ -69,15 +69,24 @@ extension Profile {
 }
 
 extension Profile.Header {
+    public func withNewId() -> Self {
+        Profile.Header(
+            uuid: .init(),
+            name: name,
+            providerName: providerName,
+            lastUpdate: lastUpdate
+        )
+    }
+    
     public func renamed(to newName: String) -> Self {
         var header = self
         header.name = newName
         return header
     }
     
-    public func renamedUniquely() -> Self {
+    public func renamedUniquely(withLastUpdate: Bool) -> Self {
         let suffix: String
-        if let lastUpdate = lastUpdate {
+        if withLastUpdate, let lastUpdate = lastUpdate {
             suffix = lastUpdate.timestamp
         } else {
             guard let leadingUUID = id.uuidString.components(separatedBy: "-").first else {
@@ -92,15 +101,21 @@ extension Profile.Header {
 }
 
 extension Profile {
+    public func withNewId() -> Self {
+        var profile = self
+        profile.header = profile.header.withNewId()
+        return profile
+    }
+
     public func renamed(to newName: String) -> Self {
         var profile = self
         profile.header = profile.header.renamed(to: newName)
         return profile
     }
     
-    public func renamedUniquely() -> Self {
+    public func renamedUniquely(withLastUpdate: Bool) -> Self {
         var profile = self
-        profile.header = profile.header.renamedUniquely()
+        profile.header = profile.header.renamedUniquely(withLastUpdate: withLastUpdate)
         return profile
     }
 }

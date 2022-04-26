@@ -237,6 +237,17 @@ extension ProfileManager {
         let ids = Array(allHeaders.keys)
         removeProfiles(withIds: ids)
     }
+    
+    public func duplicateProfile(withId id: UUID) {
+        guard let source = profile(withId: id) else {
+            return
+        }
+        let copy = source
+            .renamedUniquely(withLastUpdate: false)
+            .withNewId()
+
+        saveProfile(copy, isActive: nil)
+    }
 
     public func persist() {
         pp_log.info("Persisting profiles")
@@ -391,7 +402,7 @@ extension ProfileManager {
 
 //            headers.removeFirst()
             headers.forEach { dupHeader in
-                let uniqueHeader = dupHeader.renamedUniquely()
+                let uniqueHeader = dupHeader.renamedUniquely(withLastUpdate: true)
                 pp_log.debug("Renaming duplicate profile \(dupHeader.logDescription) to \(uniqueHeader.logDescription)")
                 guard var uniqueProfile = profile(withId: uniqueHeader.id) else {
                     pp_log.warning("Skipping profile \(dupHeader.logDescription) renaming, not found")

@@ -12,6 +12,7 @@
 "global.strings.ok" = "OK";
 "global.strings.save" = "Save";
 "global.strings.rename" = "Rename";
+"global.strings.duplicate" = "Duplicate";
 "global.strings.add" = "Add";
 "global.strings.default" = "Default";
 "global.strings.name" = "Name";

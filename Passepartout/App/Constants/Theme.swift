@@ -176,6 +176,10 @@ extension View {
         "trash.fill"
     }
     
+    var themeDuplicateImage: String {
+        "doc.on.doc.fill"
+    }
+    
     var themeRenameProfileImage: String {
         "highlighter"
 //        "character.cursor.ibeam"

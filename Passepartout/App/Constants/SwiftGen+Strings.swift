@@ -443,6 +443,8 @@ internal enum L10n {
       internal static let domain = L10n.tr("Localizable", "global.strings.domain")
       /// Domains
       internal static let domains = L10n.tr("Localizable", "global.strings.domains")
+      /// Duplicate
+      internal static let duplicate = L10n.tr("Localizable", "global.strings.duplicate")
       /// Enabled
       internal static let enabled = L10n.tr("Localizable", "global.strings.enabled")
       /// Encryption
