@@ -126,7 +126,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "APP_TYPE"
-            value = "0"
+            value = "2"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable

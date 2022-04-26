@@ -437,6 +437,8 @@ internal enum L10n {
       internal static let configuration = L10n.tr("Localizable", "global.strings.configuration")
       /// Default
       internal static let `default` = L10n.tr("Localizable", "global.strings.default")
+      /// Delete
+      internal static let delete = L10n.tr("Localizable", "global.strings.delete")
       /// Disabled
       internal static let disabled = L10n.tr("Localizable", "global.strings.disabled")
       /// Domain
@@ -493,6 +495,8 @@ internal enum L10n {
       internal static let servers = L10n.tr("Localizable", "global.strings.servers")
       /// Translations
       internal static let translations = L10n.tr("Localizable", "global.strings.translations")
+      /// Uninstall
+      internal static let uninstall = L10n.tr("Localizable", "global.strings.uninstall")
     }
   }
 
@@ -694,8 +698,6 @@ internal enum L10n {
         internal static func message(_ p1: Any) -> String {
           return L10n.tr("Localizable", "organizer.alerts.remove_profile.message", String(describing: p1))
         }
-        /// Remove profile
-        internal static let title = L10n.tr("Localizable", "organizer.alerts.remove_profile.title")
       }
     }
     internal enum Empty {
@@ -814,10 +816,6 @@ internal enum L10n {
       internal enum Reconnect {
         /// Reconnect
         internal static let caption = L10n.tr("Localizable", "profile.items.reconnect.caption")
-      }
-      internal enum Uninstall {
-        /// Remove VPN configuration
-        internal static let caption = L10n.tr("Localizable", "profile.items.uninstall.caption")
       }
       internal enum UseProfile {
         /// Use this profile

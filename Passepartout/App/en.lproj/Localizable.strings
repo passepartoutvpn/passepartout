@@ -14,6 +14,8 @@
 "global.strings.rename" = "Rename";
 "global.strings.duplicate" = "Duplicate";
 "global.strings.add" = "Add";
+"global.strings.delete" = "Delete";
+"global.strings.uninstall" = "Uninstall";
 "global.strings.default" = "Default";
 "global.strings.name" = "Name";
 "global.strings.profiles" = "Profiles";
@@ -123,7 +125,6 @@
 "organizer.alerts.reddit.buttons.remind" = "Remind me later";
 "organizer.alerts.reddit.buttons.never" = "Don't ask again";
 
-"organizer.alerts.remove_profile.title" = "Remove profile";
 "organizer.alerts.remove_profile.message" = "Are you sure you want to delete profile %@?";
 
 /* MARK: AddProfileView */
@@ -164,7 +165,6 @@
 "profile.items.vpn_survives_sleep.caption" = "Keep alive on sleep";
 "profile.items.vpn_resolves_hostname.caption" = "Resolve provider hostname";
 "profile.items.reconnect.caption" = "Reconnect";
-"profile.items.uninstall.caption" = "Remove VPN configuration";
 
 "profile.alerts.rename.title" = "Rename profile";
 "profile.alerts.reconnect_vpn.message" = "Do you want to reconnect to the VPN?";

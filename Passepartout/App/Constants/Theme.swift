@@ -172,6 +172,10 @@ extension View {
         "xmark"
     }
     
+    var themeUninstallImage: String {
+        "arrow.uturn.down"
+    }
+    
     var themeDeleteImage: String {
         "trash.fill"
     }
@@ -281,10 +285,6 @@ extension View {
         foregroundColor(themeLightTextColor)
     }
     
-    func themeDestructiveButtonStyle() -> some View {
-        foregroundColor(themeErrorColor)
-    }
-
     @available(iOS 15, *)
     func themePrimaryTintStyle() -> some View {
         tint(themePrimaryBackgroundColor)

@@ -70,16 +70,10 @@ struct ProfileView: View {
                 WelcomeView()
             }
         }.toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                ShortcutsItem(
-                    modalType: $modalType
-                ).disabled(!isExisting)
-
-                RenameItem(
-                    currentProfile: profileManager.currentProfile,
-                    modalType: $modalType
-                ).disabled(!isExisting)
-            }
+            MainMenu(
+                currentProfile: profileManager.currentProfile,
+                modalType: $modalType
+            ).disabled(!isExisting)
         }.sheet(item: $modalType, content: presentedModal)
         .navigationTitle(title)
         .themeSecondaryView()
@@ -103,10 +97,6 @@ struct ProfileView: View {
                 )
                 ExtraSection(currentProfile: profileManager.currentProfile)
                 DiagnosticsSection(currentProfile: profileManager.currentProfile)
-                Section {
-                    UninstallVPNButton()
-                    RemoveProfileButton(header: profileManager.currentProfile.value.header)
-                }
             }
         }
     }
