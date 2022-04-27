@@ -52,7 +52,7 @@ extension DataCount {
     var localizedDescription: String {
         let down = received.descriptionAsDataUnit
         let up = sent.descriptionAsDataUnit
-        return "↓\(down) / ↑\(up)"
+        return "↓\(down) ↑\(up)"
     }
 }
 

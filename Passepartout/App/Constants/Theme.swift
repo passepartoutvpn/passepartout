@@ -42,15 +42,18 @@ extension View {
     }
 }
 
-// MARK: Styles
+// MARK: Global
 
 extension View {
     func themeGlobal() -> some View {
+        #if targetEnvironment(macCatalyst)
+        self
+        #else
         let color = themeAccentColor
         return accentColor(color)
             .toggleStyle(SwitchToggleStyle(tint: color))
-            .listStyle(.insetGrouped)
             .themeNavigationViewStyle()
+        #endif
     }
     
     @ViewBuilder
@@ -65,11 +68,20 @@ extension View {
     }
     
     func themePrimaryView() -> some View {
+        #if targetEnvironment(macCatalyst)
+        navigationBarHidden(true)
+        #else
         navigationBarTitleDisplayMode(.large)
+        #endif
     }
 
     func themeSecondaryView() -> some View {
+        #if targetEnvironment(macCatalyst)
+        navigationBarHidden(true)
+        #else
         navigationBarTitleDisplayMode(.inline)
+            .listStyle(.insetGrouped)
+        #endif
     }
 }
 

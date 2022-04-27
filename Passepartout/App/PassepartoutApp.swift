@@ -31,6 +31,7 @@ struct PassepartoutApp: App {
     @SceneBuilder var body: some Scene {
         WindowGroup {
             MainView()
+                .withoutTitleBar()
                 .onIntentActivity(IntentDispatcher.connectVPN)
                 .onIntentActivity(IntentDispatcher.disableVPN)
                 .onIntentActivity(IntentDispatcher.enableVPN)

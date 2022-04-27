@@ -92,6 +92,7 @@
 		0EBC075B27EC4FFF00208AD9 /* ReportIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075A27EC4FFF00208AD9 /* ReportIssueView.swift */; };
 		0EBC075D27EC529000208AD9 /* DebugLog+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075C27EC529000208AD9 /* DebugLog+Constants.swift */; };
 		0EBC076027EC587900208AD9 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */; };
+		0EBE880F281B18DE0090D9E6 /* ProfileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE880E281B18DE0090D9E6 /* ProfileRow.swift */; };
 		0ECF71EE27B6A99300CDB528 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF71ED27B6A99300CDB528 /* AccountView.swift */; };
 		0ED1D6DC27DBA41700983466 /* DiagnosticsView+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */; };
 		0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */; };
@@ -110,7 +111,6 @@
 		0ED89C1727DE0E05008B36D6 /* IntentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */; };
 		0ED89C1C27DE3ABC008B36D6 /* ShortcutsView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */; };
 		0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */; };
-		0ED89C2527DE45A3008B36D6 /* ProfileHeaderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C2427DE45A3008B36D6 /* ProfileHeaderRow.swift */; };
 		0EDE02C227F61C79000FBE3C /* EditableTextList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE02C127F61C79000FBE3C /* EditableTextList.swift */; };
 		0EE11CD2280D8317003BE431 /* OrganizerView+SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE11CD1280D8317003BE431 /* OrganizerView+SettingsMenu.swift */; };
 		0EE8B7E327FF340F00B68621 /* VPNProtocolType+FileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8B7E227FF340F00B68621 /* VPNProtocolType+FileExtensions.swift */; };
@@ -122,7 +122,6 @@
 		0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */; };
 		0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */; };
 		0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */; };
-		0EF708322811CC8400A3A308 /* VPNStatusText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF708312811CC8400A3A308 /* VPNStatusText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,6 +309,7 @@
 		0EBE2FD62360F89500F0D5AB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD72360F89600F0D5AB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD82360F89600F0D5AB /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0EBE880E281B18DE0090D9E6 /* ProfileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRow.swift; sourceTree = "<group>"; };
 		0ECF71ED27B6A99300CDB528 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiagnosticsView+OpenVPN.swift"; sourceTree = "<group>"; };
 		0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiagnosticsView+WireGuard.swift"; sourceTree = "<group>"; };
@@ -325,7 +325,6 @@
 		0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentEditView.swift; sourceTree = "<group>"; };
 		0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortcutsView+Add.swift"; sourceTree = "<group>"; };
 		0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentAddView.swift; sourceTree = "<group>"; };
-		0ED89C2427DE45A3008B36D6 /* ProfileHeaderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderRow.swift; sourceTree = "<group>"; };
 		0EDE02C127F61C79000FBE3C /* EditableTextList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextList.swift; sourceTree = "<group>"; };
 		0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutOpenVPNTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDE8DC320C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -339,7 +338,6 @@
 		0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderView.swift; sourceTree = "<group>"; };
 		0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 		0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderViewModel.swift; sourceTree = "<group>"; };
-		0EF708312811CC8400A3A308 /* VPNStatusText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,7 +448,7 @@
 				0EF0FAF527DD0211007EB181 /* PaywallView.swift */,
 				0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */,
 				0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */,
-				0ED89C2427DE45A3008B36D6 /* ProfileHeaderRow.swift */,
+				0EBE880E281B18DE0090D9E6 /* ProfileRow.swift */,
 				0E44689527B051C300A14CE4 /* ProfileView.swift */,
 				0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */,
 				0E92D7F327F104B80033CB7B /* ProfileView+Diagnostics.swift */,
@@ -465,7 +463,6 @@
 				0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */,
 				0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */,
 				0E71ACFA27C12E5300F85C4B /* VersionView.swift */,
-				0EF708312811CC8400A3A308 /* VPNStatusText.swift */,
 				0E7577DE2817E22C00081CBE /* VPNToggle.swift */,
 				0E065F102813269500062CAF /* WelcomeView.swift */,
 			);
@@ -898,7 +895,6 @@
 				0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */,
 				0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */,
 				0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */,
-				0EF708322811CC8400A3A308 /* VPNStatusText.swift in Sources */,
 				0E5324A627D297BB002565C3 /* InApp.swift in Sources */,
 				0E3B7FCD27E47B3700C66F13 /* AddHostView+Name.swift in Sources */,
 				0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */,
@@ -926,6 +922,7 @@
 				0E53E63727E34FE2001D4902 /* AppContext.swift in Sources */,
 				0E3B7FD627E5173A00C66F13 /* ProfileView+VPN.swift in Sources */,
 				0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */,
+				0EBE880F281B18DE0090D9E6 /* ProfileRow.swift in Sources */,
 				0ED30DCF27EA1EF80057D8A3 /* PaywallView+Beta.swift in Sources */,
 				0ECF71EE27B6A99300CDB528 /* AccountView.swift in Sources */,
 				0E71ACF727C107CA00F85C4B /* DebugLogView.swift in Sources */,
@@ -946,7 +943,6 @@
 				0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */,
 				0EF0FAF627DD0211007EB181 /* PaywallView.swift in Sources */,
 				0E5349BE27C16A4500C71BB3 /* StyledPicker.swift in Sources */,
-				0ED89C2527DE45A3008B36D6 /* ProfileHeaderRow.swift in Sources */,
 				0E2C172B27CB63F9007E8488 /* Reviewer.swift in Sources */,
 				0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */,
 				0E34A2B627CAA8CC00C73B67 /* Core+L10n.swift in Sources */,

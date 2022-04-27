@@ -38,8 +38,27 @@ extension OrganizerView {
         @Binding private var alertType: AlertType?
 
         @State private var isFirstLaunch = true
+
+        @State private var presentedProfileId: UUID?
         
-        @State private var isPresentingProfile = false
+        private var presentedAndLoadedProfileId: Binding<UUID?> {
+            .init {
+                presentedProfileId
+            } set: {
+                guard let id = $0 else {
+                    presentedProfileId = nil
+                    return
+                }
+                presentedProfileId = id
+
+                // load profile contextually with navigation
+                do {
+                    try profileManager.loadCurrentProfile(withId: id)
+                } catch {
+                    pp_log.error("Unable to load profile: \(error)")
+                }
+            }
+        }
         
         init(alertType: Binding<AlertType?>) {
             profileManager = .shared
@@ -50,8 +69,7 @@ extension OrganizerView {
 
         var body: some View {
             debugChanges()
-            return ZStack {
-                hiddenProfileLink
+            return Group {
                 mainView
                 if profileManager.headers.isEmpty {
                     emptyView
@@ -64,28 +82,17 @@ extension OrganizerView {
 
             // from AddProfileView
             .onReceive(profileManager.didCreateProfile) {
-                presentProfile(withId: $0.id)
+                presentedAndLoadedProfileId.wrappedValue = $0.id
             }
         }
         
         private var mainView: some View {
             List {
-                activeHeaders.map { headers in
-                    Section(
-                        header: Text(L10n.Organizer.Sections.active)
-                    ) {
-                        ForEach(headers, content: profileButton(forHeader:))
-                            .onDelete(perform: removeActiveProfile)
-                    }
-                }
-                let headers = otherHeaders
-                if !headers.isEmpty {
-                    Section(
-                        header: Text(L10n.Global.Strings.profiles)
-                    ) {
-                        ForEach(headers, content: profileButton(forHeader:))
-                            .onDelete(perform: removeOtherProfiles)
-                    }
+                Section(
+                    header: Text(L10n.Global.Strings.profiles)
+                ) {
+                    ForEach(sortedHeaders, content: profileRow(forHeader:))
+                        .onDelete(perform: removeProfiles)
                 }
             }.themeAnimation(on: profileManager.headers)
         }
@@ -97,84 +104,84 @@ extension OrganizerView {
             }
         }
         
-        private func profileButton(forHeader header: Profile.Header) -> some View {
-            Button {
-                presentProfile(withId: header.id)
+        private func profileRow(forHeader header: Profile.Header) -> some View {
+            NavigationLink(tag: header.id, selection: presentedAndLoadedProfileId) {
+                ProfileView()
             } label: {
-                ProfileHeaderRow(
-                    header: header,
-                    isActive: profileManager.isActiveProfile(header.id)
-                )
+                profileLabel(forHeader: header)
             }.contextMenu {
-                ProfileView.DuplicateButton(
-                    header: header,
-                    switchCurrentProfile: false
-                )
-            }.themeTextButtonStyle()
+                profileMenu(forHeader: header)
+            }.onAppear {
+                presentIfActiveProfile(header.id)
+            }
         }
         
-        private var hiddenProfileLink: some View {
-            NavigationLink("", isActive: $isPresentingProfile) {
-                ProfileView()
-            }.onAppear(perform: presentActiveProfile)
+        private func profileLabel(forHeader header: Profile.Header) -> some View {
+            ProfileRow(
+                header: header,
+                isActive: profileManager.isActiveProfile(header.id)
+            )
+        }
+
+        @ViewBuilder
+        private func profileMenu(forHeader header: Profile.Header) -> some View {
+            ProfileView.DuplicateButton(
+                header: header,
+                switchCurrentProfile: false
+            )
+        }
+
+        private var sortedHeaders: [Profile.Header] {
+            profileManager.headers
+                .sorted()
+            
+            // FIXME: layout, moving active profile on top breaks row animation (content flashes on Mac)
+//                .sorted {
+//                    if profileManager.isActiveProfile($0.id) {
+//                        return true
+//                    } else if profileManager.isActiveProfile($1.id) {
+//                        return false
+//                    } else {
+//                        return $0 < $1
+//                    }
+//                }
         }
     }
 }
 
 extension OrganizerView.ProfilesList {
-    private var activeHeaders: [Profile.Header]? {
-        guard let activeHeader = profileManager.activeHeader else {
-            return nil
+    private func presentIfActiveProfile(_ id: UUID) {
+        guard id == profileManager.activeHeader?.id else {
+            return
         }
-        return [activeHeader]
-    }
-    
-    private var otherHeaders: [Profile.Header] {
-        profileManager.headers
-            .filter {
-                !profileManager.isActiveProfile($0.id)
-            }.sorted()
+        presentActiveProfile()
     }
     
     private func presentActiveProfile() {
-
-        // do not present profile if:
-        //
-        // - an alert is active, as it would break navigation
-        // - on iPad, as it's already shown
-        //
-        guard alertType == nil, themeIdiom != .pad else {
-            return
-        }
-
-        guard isFirstLaunch, profileManager.hasActiveProfile else {
+        guard isFirstLaunch else {
             return
         }
         isFirstLaunch = false
-        isPresentingProfile = true
-    }
-    
-    private func presentProfile(withId id: UUID) {
-        isPresentingProfile = true
-        do {
-            try profileManager.loadCurrentProfile(withId: id)
-        } catch {
-            pp_log.error("Unable to load profile: \(error)")
-        }
-    }
 
-    private func removeActiveProfile(_ indexSet: IndexSet) {
-        guard let activeHeader = activeHeaders?.first else {
-            assertionFailure("Removing active profile while nil?")
+        // presenting profile when an alert is active seems to break navigation
+        guard alertType == nil else {
             return
         }
-        removeProfiles(withIds: [activeHeader.id])
+        guard let activeProfileId = profileManager.activeHeader?.id else {
+            return
+        }
+
+        // FIXME: layout, preselecting profile on iPad portrait/compact adds ProfileView() twice
+        // can notice becase "Back" needs to be tapped twice to show sidebar
+        if themeIdiom != .pad {
+            presentedProfileId = activeProfileId
+        }
     }
     
-    private func removeOtherProfiles(_ indexSet: IndexSet) {
-        let currentHeaders = otherHeaders
+    private func removeProfiles(at offsets: IndexSet) {
+        let currentHeaders = sortedHeaders
         var toDelete: [UUID] = []
-        indexSet.forEach {
+        offsets.forEach {
             toDelete.append(currentHeaders[$0].id)
         }
         removeProfiles(withIds: toDelete)
@@ -184,7 +191,7 @@ extension OrganizerView.ProfilesList {
 
         // clear selection before removal to avoid triggering a bogus navigation push
         if toDelete.contains(profileManager.currentProfile.value.id) {
-            isPresentingProfile = false
+            presentedProfileId = nil
         }
 
         profileManager.removeProfiles(withIds: toDelete)
@@ -197,8 +204,8 @@ extension OrganizerView.ProfilesList {
     }
     
     private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
-        if isPresentingProfile, !profileManager.isCurrentProfileExisting() {
-            isPresentingProfile = false
+        if let _ = presentedProfileId, !profileManager.isCurrentProfileExisting() {
+            presentedProfileId = nil
         }
     }
 }

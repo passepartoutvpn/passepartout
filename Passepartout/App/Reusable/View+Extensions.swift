@@ -28,6 +28,20 @@ import PassepartoutCore
 import SwiftyBeaver
 
 extension View {
+    func withoutTitleBar() -> some View {
+        #if targetEnvironment(macCatalyst)
+        withHostingWindow { window in
+            guard let titlebar = window?.windowScene?.titlebar else {
+                return
+            }
+            titlebar.titleVisibility = .hidden
+            titlebar.toolbar = nil
+        }
+        #else
+        self
+        #endif
+    }
+
     func withLeadingText(_ text: String?, color: Color? = nil, truncationMode: Text.TruncationMode = .tail) -> some View {
         HStack {
             text.map(Text.init)
@@ -119,5 +133,28 @@ extension ScrollViewProxy {
                 scrollTo(id, anchor: anchor)
             }
         }
+    }
+}
+
+// https://stackoverflow.com/questions/65238068/hide-title-bar-in-swiftui-app-for-maccatalyst
+
+private extension View {
+    func withHostingWindow(_ callback: @escaping (UIWindow?) -> Void) -> some View {
+        background(HostingWindowFinder(callback: callback))
+    }
+}
+
+private struct HostingWindowFinder: UIViewRepresentable {
+    var callback: (UIWindow?) -> ()
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        DispatchQueue.main.async { [weak view] in
+            self.callback(view?.window)
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
     }
 }
