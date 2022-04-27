@@ -34,6 +34,27 @@ extension AddProviderView {
             case provider(ProviderName)
         }
 
+        var isUpdatingIndex: Bool {
+            if case .index = pendingOperation {
+                return true
+            }
+            return false
+        }
+
+        var isFetchingAnyProvider: Bool {
+            if case .provider = pendingOperation {
+                return true
+            }
+            return false
+        }
+
+        func isFetchingProvider(_ name: ProviderName) -> Bool {
+            if case .provider(name) = pendingOperation {
+                return true
+            }
+            return false
+        }
+        
         @Published var selectedVPNProtocol: VPNProtocolType = .openVPN
 
         @Published var selectedProvider: ProviderMetadata?

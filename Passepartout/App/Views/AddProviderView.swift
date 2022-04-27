@@ -58,20 +58,6 @@ struct AddProviderView: View {
         return protos.sorted()
     }
     
-    private func isFetchingProvider(_ name: ProviderName) -> Bool {
-        if case .provider(name) = viewModel.pendingOperation {
-            return true
-        }
-        return false
-    }
-    
-    private var isUpdatingIndex: Bool {
-        if case .index = viewModel.pendingOperation {
-            return true
-        }
-        return false
-    }
-
     var body: some View {
         ZStack {
             ForEach(providers, id: \.navigationId, content: hiddenProviderLink)
@@ -85,8 +71,7 @@ struct AddProviderView: View {
                     viewModel.updateIndex(providerManager)
                 }.onChange(of: viewModel.errorMessage) {
                     onErrorMessage($0, scrollProxy)
-                }.disabled(viewModel.pendingOperation != nil)
-                .themeAnimation(on: providers)
+                }.themeAnimation(on: providers)
             }
         }.toolbar {
             themeCloseItem(isPresented: bindings.$isPresented)
@@ -120,7 +105,7 @@ struct AddProviderView: View {
             footer: themeErrorMessage(viewModel.errorMessage)
         ) {
             ForEach(providers, content: providerRow)
-        }
+        }.disabled(viewModel.isFetchingAnyProvider)
     }
     
     private func providerRow(_ metadata: ProviderMetadata) -> some View {
@@ -128,7 +113,7 @@ struct AddProviderView: View {
             presentOrPurchaseProvider(metadata)
         } label: {
             Label(metadata.description, image: themeAssetsProviderImage(metadata.name))
-        }.withTrailingProgress(when: isFetchingProvider(metadata.name))
+        }.withTrailingProgress(when: viewModel.isFetchingProvider(metadata.name))
     }
     
     private func hiddenProviderLink(_ metadata: ProviderMetadata) -> some View {
@@ -144,7 +129,8 @@ struct AddProviderView: View {
     private var updateListButton: some View {
         Button(L10n.AddProfile.Provider.Items.updateList) {
             viewModel.updateIndex(providerManager)
-        }.withTrailingProgress(when: isUpdatingIndex)
+        }.withTrailingProgress(when: viewModel.isUpdatingIndex)
+        .disabled(viewModel.isUpdatingIndex)
     }
     
     // eligibility: select or purchase provider
