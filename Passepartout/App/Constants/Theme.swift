@@ -125,11 +125,11 @@ extension View {
     }
 
     var themeProviderImage: String {
-        "externaldrive.connected.to.line.below.fill"
+        "externaldrive.connected.to.line.below"
     }
     
     var themeHostFilesImage: String {
-        "folder.fill"
+        "folder"
     }
     
     var themeHostTextImage: String {
@@ -153,19 +153,19 @@ extension View {
     }
 
     var themeShortcutsImage: String {
-        "mic.fill"
+        "mic"
     }
 
     var themeDonateImage: String {
-        "giftcard.fill"
+        "giftcard"
     }
 
     var themeRedditImage: String {
-        "person.3.fill"
+        "person.3"
     }
 
     var themeWriteReviewImage: String {
-        "heart.fill"
+        "heart"
     }
     
     var themeCloseImage: String {
@@ -177,11 +177,11 @@ extension View {
     }
     
     var themeDeleteImage: String {
-        "trash.fill"
+        "trash"
     }
     
     var themeDuplicateImage: String {
-        "doc.on.doc.fill"
+        "doc.on.doc"
     }
     
     var themeRenameProfileImage: String {
@@ -190,7 +190,7 @@ extension View {
     }
     
     var themeVPNProtocolImage: String {
-        "bolt.fill"
+        "bolt"
 //        "waveform.path.ecg"
 //        "message.and.waveform.fill"
 //        "pc"
@@ -202,11 +202,11 @@ extension View {
     }
     
     var themeAccountImage: String {
-        "person.fill"
+        "person"
     }
     
     var themeProviderLocationImage: String {
-        "location.fill"
+        "location"
     }
     
     var themeProviderPresetImage: String {
@@ -231,15 +231,15 @@ extension View {
     }
     
     var themeFAQImage: String {
-        "questionmark.diamond.fill"
+        "questionmark.diamond"
     }
 
     var themeConceilImage: String {
-        "eye.slash.fill"
+        "eye.slash"
     }
 
     var themeRevealImage: String {
-        "eye.fill"
+        "eye"
     }
 
     var themeShareImage: String {
