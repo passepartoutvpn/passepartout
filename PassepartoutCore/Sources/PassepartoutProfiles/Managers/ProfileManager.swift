@@ -238,15 +238,16 @@ extension ProfileManager {
         removeProfiles(withIds: ids)
     }
     
-    public func duplicateProfile(withId id: UUID) {
+    public func duplicateProfile(withId id: UUID) -> Profile? {
         guard let source = profile(withId: id) else {
-            return
+            return nil
         }
         let copy = source
             .renamedUniquely(withLastUpdate: false)
             .withNewId()
 
         saveProfile(copy, isActive: nil)
+        return copy
     }
 
     public func persist() {

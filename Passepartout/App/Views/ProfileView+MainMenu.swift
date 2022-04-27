@@ -74,10 +74,10 @@ extension ProfileView {
                 RenameButton(
                     modalType: $modalType
                 )
-                // should contextually set duplicate as current profile
-//                DuplicateButton(
-//                    header: currentProfile.value.header
-//                )
+                DuplicateButton(
+                    header: currentProfile.value.header,
+                    switchCurrentProfile: true
+                )
                 uninstallVPNButton
                 Divider()
                 deleteProfileButton
@@ -187,11 +187,14 @@ extension ProfileView {
     struct DuplicateButton: View {
         @ObservedObject private var profileManager: ProfileManager
         
-        let header: Profile.Header
+        private let header: Profile.Header
         
-        init(header: Profile.Header) {
+        private let switchCurrentProfile: Bool
+        
+        init(header: Profile.Header, switchCurrentProfile: Bool) {
             profileManager = .shared
             self.header = header
+            self.switchCurrentProfile = switchCurrentProfile
         }
         
         var body: some View {
@@ -203,7 +206,16 @@ extension ProfileView {
         }
 
         private func duplicateProfile(withId id: UUID) {
-            profileManager.duplicateProfile(withId: id)
+            guard let copy = profileManager.duplicateProfile(withId: id) else {
+                return
+            }
+            if switchCurrentProfile {
+                do {
+                    try profileManager.loadCurrentProfile(withId: copy.id, makeReady: true)
+                } catch {
+                    pp_log.warning("Unable to load profile duplicate: \(error)")
+                }
+            }
         }
     }
 }

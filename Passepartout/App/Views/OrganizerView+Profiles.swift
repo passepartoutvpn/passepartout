@@ -109,7 +109,10 @@ extension OrganizerView {
                     isActive: profileManager.isActiveProfile(header.id)
                 )
             }.contextMenu {
-                ProfileView.DuplicateButton(header: header)
+                ProfileView.DuplicateButton(
+                    header: header,
+                    switchCurrentProfile: false
+                )
             }.themeTextButtonStyle()
         }
         
