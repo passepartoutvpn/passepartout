@@ -67,6 +67,10 @@ extension ProfileView {
 
         var body: some View {
             Menu {
+                ShortcutsButton(
+                    modalType: $modalType
+                )
+                Divider()
                 RenameButton(
                     modalType: $modalType
                 )
@@ -74,9 +78,6 @@ extension ProfileView {
 //                DuplicateButton(
 //                    header: currentProfile.value.header
 //                )
-                ShortcutsButton(
-                    modalType: $modalType
-                )
                 uninstallVPNButton
                 Divider()
                 deleteProfileButton
@@ -134,22 +135,6 @@ extension ProfileView {
         }
     }
     
-    struct RenameButton: View {
-        @Binding private var modalType: ModalType?
-        
-        init(modalType: Binding<ModalType?>) {
-            _modalType = modalType
-        }
-        
-        var body: some View {
-            Button {
-                modalType = .rename
-            } label: {
-                Label(L10n.Global.Strings.rename, systemImage: themeRenameProfileImage)
-            }
-        }
-    }
-
     struct ShortcutsButton: View {
         @ObservedObject private var productManager: ProductManager
         
@@ -183,6 +168,22 @@ extension ProfileView {
         }
     }
     
+    struct RenameButton: View {
+        @Binding private var modalType: ModalType?
+        
+        init(modalType: Binding<ModalType?>) {
+            _modalType = modalType
+        }
+        
+        var body: some View {
+            Button {
+                modalType = .rename
+            } label: {
+                Label(L10n.Global.Strings.rename, systemImage: themeRenameProfileImage)
+            }
+        }
+    }
+
     struct DuplicateButton: View {
         @ObservedObject private var profileManager: ProfileManager
         
