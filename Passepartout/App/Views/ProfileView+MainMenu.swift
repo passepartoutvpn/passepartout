@@ -131,7 +131,9 @@ extension ProfileView {
         }
 
         private func removeProfile() {
-            profileManager.removeProfiles(withIds: [header.id])
+            withAnimation {
+                profileManager.removeProfiles(withIds: [header.id])
+            }
         }
     }
     
