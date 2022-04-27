@@ -265,16 +265,13 @@ private struct PurchaseRow: View {
     let purchaseState: PaywallView.PurchaseView.PurchaseState?
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             actionButton
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom, 5.0)
-//                .border(.black, width: 1.0)
+                .padding(.bottom, 5)
 
             extra.map {
                 Text($0)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .multilineTextAlignment(.leading)
+                    .frame(maxHeight: .infinity)
 //                    .xxxThemeTruncation()
             }
         }.padding([.top, .bottom])
