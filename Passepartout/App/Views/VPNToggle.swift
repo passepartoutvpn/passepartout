@@ -37,17 +37,11 @@ struct VPNToggle: View {
 
     private var isEnabled: Binding<Bool> {
         .init {
-            isLocallyEnabled
-        } set: {
-            guard toggleVPN() else {
-                return
-            }
-            isLocallyEnabled = $0
+            currentVPNState.isEnabled
+        } set: { _ in
+            _ = toggleVPN()
         }
     }
-
-    // local copy grants immediate visual feedback and smooth animation
-    @State private var isLocallyEnabled = false
 
     @State private var canToggle = true
     
@@ -60,11 +54,8 @@ struct VPNToggle: View {
 
     var body: some View {
         Toggle(L10n.Global.Strings.enabled, isOn: isEnabled)
-            .onAppear {
-                isLocallyEnabled = currentVPNState.isEnabled
-            }.onChange(of: currentVPNState.isEnabled) {
-                isLocallyEnabled = $0
-            }.disabled(!canToggle)
+            .disabled(!canToggle)
+            .themeAnimation(on: currentVPNState.isEnabled)
     }
 
     private func toggleVPN() -> Bool {

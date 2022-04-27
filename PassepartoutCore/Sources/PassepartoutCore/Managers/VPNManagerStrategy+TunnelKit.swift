@@ -92,6 +92,7 @@ extension VPNManager {
 
         private func registerNotification(withName name: Notification.Name, perform: @escaping (Notification) -> Void) {
             NotificationCenter.default.publisher(for: name, object: nil)
+                .receive(on: DispatchQueue.main)
                 .sink(receiveValue: perform)
                 .store(in: &cancellables)
         }
@@ -157,6 +158,12 @@ extension VPNManager {
         
         public func removeConfigurations() async {
             await vpn.uninstall()
+
+            // XXX: force isEnabled to false as it's not properly notified by NetworkExtension
+            vpnState.send(AtomicState(
+                isEnabled: false,
+                vpnStatus: vpnState.value.vpnStatus
+            ))
         }
         
         // MARK: Notifications
@@ -197,6 +204,10 @@ extension VPNManager {
         }
         
         private func onVPNFail(_ notification: Notification) {
+            vpnState.send(AtomicState(
+                isEnabled: notification.vpnIsEnabled,
+                vpnStatus: vpnState.value.vpnStatus
+            ))
             currentState?.lastError = notification.vpnError
         }
 
