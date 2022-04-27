@@ -11,6 +11,7 @@ env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
   FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+  BUILD_NUMBER: ${{ github.event.inputs.build_number }}
 
 jobs:
   build_upload:
@@ -61,7 +62,6 @@ jobs:
           bundle exec fastlane --env ${{ matrix.platform }} match development
       - name: Tweak build
         env:
-          BUILD_NUMBER: ${{ github.event.inputs.build_number }}
           PLIST_COMMAND: "Add :com.algoritmico.Passepartout.config:app_type integer 2"
           PLIST_PATH: "Passepartout/App/Info.plist"
         run: |
@@ -90,5 +90,4 @@ jobs:
       - name: Tag beta
         run: |
           APP_VERSION=`ci/version-number.sh ios`
-          BUILD_NUMBER=`ci/build-number.sh ios`
           git tag "v$APP_VERSION-pb$BUILD_NUMBER" && git push --tags
