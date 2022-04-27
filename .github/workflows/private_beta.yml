@@ -87,3 +87,8 @@ jobs:
           fi
           export PILOT_CHANGELOG=`ci/build-changelog.sh $PLATFORM`
           bundle exec fastlane --env $PLATFORM,beta run pilot
+      - name: Tag beta
+        run: |
+          APP_VERSION=`ci/version-number.sh ios`
+          BUILD_NUMBER=`ci/build-number.sh ios`
+          git tag "v$APP_VERSION-pb$BUILD_NUMBER" && git push --tags
