@@ -210,10 +210,12 @@ extension ProfileView {
                 return
             }
             if switchCurrentProfile {
-                do {
-                    try profileManager.loadCurrentProfile(withId: copy.id, makeReady: true)
-                } catch {
-                    pp_log.warning("Unable to load profile duplicate: \(error)")
+                Task {
+                    do {
+                        try await profileManager.loadCurrentProfile(withId: copy.id)
+                    } catch {
+                        pp_log.warning("Unable to load profile duplicate: \(error)")
+                    }
                 }
             }
         }

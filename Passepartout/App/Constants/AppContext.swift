@@ -131,13 +131,6 @@ class AppContext {
         profileManager.availabilityFilter = {
             self.isEligibleProfile(withHeader: $0)
         }
-        if let activeProfileId = appManager.activeProfileId {
-            do {
-                try profileManager.loadActiveProfile(withId: activeProfileId)
-            } catch {
-                pp_log.warning("Unable to load active profile: \(error)")
-            }
-        }
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
@@ -145,6 +138,16 @@ class AppContext {
 
         profileManager.observeUpdates()
         vpnManager.observeUpdates()
+
+        if let activeProfileId = appManager.activeProfileId {
+            Task {
+                do {
+                    try await profileManager.loadActiveProfile(withId: activeProfileId)
+                } catch {
+                    pp_log.warning("Unable to load active profile: \(error)")
+                }
+            }
+        }
 
         // app
 

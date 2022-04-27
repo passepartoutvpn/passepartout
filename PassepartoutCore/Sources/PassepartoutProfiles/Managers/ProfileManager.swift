@@ -31,7 +31,7 @@ import PassepartoutUtils
 
 @MainActor
 public class ProfileManager: ObservableObject {
-    public typealias LoadResult = (isReady: Bool, profile: Profile)
+    public typealias ProfileEx = (profile: Profile, isReady: Bool)
     
     // MARK: Initialization
     
@@ -86,15 +86,6 @@ public class ProfileManager: ObservableObject {
         self.strategy = strategy
 
         currentProfile = ObservableProfile()
-    }
-    
-    public func loadActiveProfile(withId id: UUID) throws {
-        guard isExistingProfile(withId: id) else {
-            pp_log.warning("Active profile \(id) does not exist, ignoring")
-            return
-        }
-        activeProfileId = id
-        try loadCurrentProfile(withId: id, makeReady: true)
     }
 }
 
@@ -157,13 +148,13 @@ extension ProfileManager {
         saveProfile(profile, isActive: true)
     }
 
-    public func loadProfile(withId id: UUID) throws -> LoadResult {
+    public func profileEx(withId id: UUID) throws -> ProfileEx {
         guard let profile = profile(withId: id) else {
             pp_log.error("Profile not found: \(id)")
             throw PassepartoutError.missingProfile
         }
         pp_log.info("Found profile: \(profile.logDescription)")
-        return (isProfileReady(profile), profile)
+        return (profile, isProfileReady(profile))
     }
 
     private func profile(withId id: UUID) -> Profile? {
@@ -259,7 +250,16 @@ extension ProfileManager {
 // MARK: Observation
 
 extension ProfileManager {
-    public func loadCurrentProfile(withId id: UUID, makeReady: Bool) throws {
+    public func loadActiveProfile(withId id: UUID) async throws {
+        guard isExistingProfile(withId: id) else {
+            pp_log.warning("Active profile \(id) does not exist, ignoring")
+            return
+        }
+        activeProfileId = id
+        try await loadCurrentProfile(withId: id)
+    }
+
+    public func loadCurrentProfile(withId id: UUID) async throws {
         guard !isLoadingCurrentProfile else {
             pp_log.warning("Already loading another profile")
             return
@@ -274,18 +274,16 @@ extension ProfileManager {
             saveCurrentProfile()
         }
         do {
-            let result = try loadProfile(withId: id)
+            let result = try profileEx(withId: id)
             pp_log.info("Current profile: \(result.profile.logDescription)")
 
-            if !makeReady || result.isReady {
+            if result.isReady {
                 currentProfile.value = result.profile
                 isLoadingCurrentProfile = false
             } else {
-                Task {
-                    try await makeProfileReady(result.profile)
-                    currentProfile.value = result.profile
-                    isLoadingCurrentProfile = false
-                }
+                try await makeProfileReady(result.profile)
+                currentProfile.value = result.profile
+                isLoadingCurrentProfile = false
             }
         } catch {
             currentProfile.value = .placeholder

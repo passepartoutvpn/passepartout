@@ -43,7 +43,7 @@ extension VPNManager {
     }
 
     public func connect(with profileId: UUID) async throws {
-        let result = try profileManager.loadProfile(withId: profileId)
+        let result = try profileManager.profileEx(withId: profileId)
         let profile = result.profile
         guard !profileManager.isActiveProfile(profileId) ||
               currentState.vpnStatus != .connected else {
@@ -64,7 +64,7 @@ extension VPNManager {
     }
     
     public func connect(with profileId: UUID, toServer newServerId: String) async throws {
-        let result = try profileManager.loadProfile(withId: profileId)
+        let result = try profileManager.profileEx(withId: profileId)
         var profile = result.profile
         guard profile.isProvider else {
             assertionFailure("Profile \(profile.logDescription) is not a provider")
