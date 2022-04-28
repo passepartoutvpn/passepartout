@@ -169,7 +169,9 @@ extension VPNManager {
         // MARK: Notifications
 
         private func onVPNReinstall(_ notification: Notification) {
-            currentBundleIdentifier = notification.vpnBundleIdentifier
+            guard isRelevantNotification(notification) else {
+                return
+            }
 
             vpnState.send(AtomicState(
                 isEnabled: notification.vpnIsEnabled,
@@ -178,8 +180,11 @@ extension VPNManager {
         }
 
         private func onVPNStatus(_ notification: Notification) {
+            guard isRelevantNotification(notification) else {
+                return
+            }
+
             var error: Error?
-            currentBundleIdentifier = notification.vpnBundleIdentifier
 
             switch notification.vpnStatus {
             case .connected:
@@ -210,6 +215,19 @@ extension VPNManager {
             ))
             currentState?.lastError = notification.vpnError
         }
+
+        private func isRelevantNotification(_ notification: Notification) -> Bool {
+            guard let notificationTunnelIdentifier = notification.vpnBundleIdentifier else {
+                return false
+            }
+            guard notificationTunnelIdentifier == currentBundleIdentifier else {
+                pp_log.debug("Skipping not relevant notification from \(notificationTunnelIdentifier)")
+                return false
+            }
+            return true
+        }
+
+        // MARK: Data count
 
         private func onDataCount(_: Date) {
             switch vpnState.value.vpnStatus {
