@@ -15,6 +15,7 @@
 "global.strings.add" = "Добавить";
 "global.strings.default" = "По умолчанию";
 "global.strings.name" = "Имя";
+"global.strings.profiles" = "Профили";
 "global.strings.provider" = "Провайдер";
 "global.strings.providers" = "Провайдеры";
 "global.strings.configuration" = "Конфигурация";
@@ -44,13 +45,13 @@
 "global.strings.translations" = "Переводы";
 
 "global.messages.email_not_configured" = "E-mail аккаунт не создан.";
-"global.messages.share" = "Passepartout - это простой в использовании OpenVPN клиент для iOS и macOS, с открытым исходным кодом";
+"global.messages.share" = "Passepartout — это удобный в использовании клиент OpenVPN / WireGuard для iOS и macOS с открытым исходным кодом";
 
 "global.placeholders.profile_name" = "Мой профиль";
 
 "global.errors.missing_profile" = "Отсутствует профиль";
 "global.errors.missing_account" = "Отсутствует учетная запись";
-"global.errors.missing_provider_server" = "Отсутствует сервер";
+"global.errors.missing_provider_server" = "Отсутствует местоположение";
 "global.errors.missing_provider_preset" = "Отсутствует пресет";
 
 /* MARK: Menus */
@@ -59,7 +60,14 @@
 "menu.all.share.title" = "Поделиться";
 "menu.all.about.title" = "Об %@";
 
+"menu.contextual.add_profile.from_files" = "Из файлов";
+"menu.contextual.add_profile.from_text" = "Из текста";
 "menu.contextual.add_profile.imported" = "Добавить %@";
+"menu.contextual.support.write_review" = "Отзыв";
+"menu.contextual.support.join_community" = "Сообщество";
+"menu.contextual.share_twitter" = "Твит";
+"menu.contextual.share_generic" = "Пригласить";
+
 "menu.system.show.title" = "Показать";
 "menu.system.switch_profile.title" = "Активный профиль";
 "menu.system.active_profile.title.none" = "Нет активных профилей";
@@ -104,12 +112,17 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Пожалуйста, введите кодовую фразу шифрования";
 "tunnelkit.errors.openvpn.decryption" = "Конфигурация содержит зашифрованный приватный ключ, он не может быть расшифрован. Перепроверьте кодовую фразу.";
 
+/* MARK: OrganizerView */
+
+"organizer.sections.active" = "Используется";
+/* MARK: OrganizerView */
+"organizer.empty.no_profiles" = "Нет профилей";
+
 "organizer.alerts.reddit.message" = "А Вы знали, что Passepartout имеет свой сабреддит? Подписывайтесь для получения обновлений, обсуждения проблем, функций, новых платформ или чего угодно.\n\nЭто также отличный способ показать поддержку проекта.";
 "organizer.alerts.reddit.buttons.subscribe" = "Подписаться сейчас!";
 "organizer.alerts.reddit.buttons.remind" = "Напомнить позже";
 "organizer.alerts.reddit.buttons.never" = "Больше не спрашивать";
 
-"organizer.alerts.remove_profile.title" = "Удалить профиль";
 "organizer.alerts.remove_profile.message" = "Вы точно хотите удалить профиль %@?";
 
 /* MARK: AddProfileView */
@@ -150,7 +163,6 @@
 "profile.items.vpn_survives_sleep.caption" = "Оставлять включенным во время сна";
 "profile.items.vpn_resolves_hostname.caption" = "Разрешить имя хоста сервера";
 "profile.items.reconnect.caption" = "Переподключиться";
-"profile.items.uninstall.caption" = "Удалить VPN конфигурацию";
 
 "profile.alerts.rename.title" = "Переименовать профиль";
 "profile.alerts.reconnect_vpn.message" = "Хотите заново подключиться к VPN?";

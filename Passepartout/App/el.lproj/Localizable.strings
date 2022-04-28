@@ -15,6 +15,7 @@
 "global.strings.add" = "Προσθήκη";
 "global.strings.default" = "Default";
 "global.strings.name" = "Όνομα";
+"global.strings.profiles" = "Προφίλ";
 "global.strings.provider" = "Πάροχος";
 "global.strings.providers" = "Πάροχοι";
 "global.strings.configuration" = "Ρύθμιση";
@@ -50,7 +51,7 @@
 
 "global.errors.missing_profile" = "Λείπει προφίλ";
 "global.errors.missing_account" = "Λείπει λογαριασμός";
-"global.errors.missing_provider_server" = "Λείπει διακομιστής";
+"global.errors.missing_provider_server" = "Λείπει η τοποθεσία";
 "global.errors.missing_provider_preset" = "Λείπει προεπιλογή";
 
 /* MARK: Menus */
@@ -59,7 +60,14 @@
 "menu.all.share.title" = "Διαμοιράστε";
 "menu.all.about.title" = "Σχετικά με %@";
 
+"menu.contextual.add_profile.from_files" = "Από τα αρχεία";
+"menu.contextual.add_profile.from_text" = "Από το κείμενο";
 "menu.contextual.add_profile.imported" = "Προσθήκη %@";
+"menu.contextual.support.write_review" = "Κριτική";
+"menu.contextual.support.join_community" = "Κοινότητα";
+"menu.contextual.share_twitter" = "Tweet";
+"menu.contextual.share_generic" = "Πρόσκληση";
+
 "menu.system.show.title" = "Προβολή";
 "menu.system.switch_profile.title" = "Ενεργό προφίλ";
 "menu.system.active_profile.title.none" = "Δεν υπάρχει ενεργό προφίλ";
@@ -104,12 +112,17 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Εισαγάγετε το κωδικό κρυπτογράφησης.";
 "tunnelkit.errors.openvpn.decryption" = "Η διαμόρφωση περιέχει κρυπτογραφημένο ιδιωτικό κλειδί και δεν ήταν δυνατό να αποκρυπτογραφηθεί. Δείτε πάλι το κωδικό που καταχωρίσατε.";
 
+/* MARK: OrganizerView */
+
+"organizer.sections.active" = "Σε χρήση";
+/* MARK: OrganizerView */
+"organizer.empty.no_profiles" = "Δεν υπάρχουν προφίλ";
+
 "organizer.alerts.reddit.message" = "Γνωρίζατε ότι το Passepartout έχει subreddit? Εγγραφείτε για ενημερώσεις ή για να συζητήσετε προβλήματα της εφαρμογές, νέες δυνατότητες και άλλα.\n\nΕίναι επίσης ένας ωραίος τρόπος να δείξετε ότι ενδιαφέρεστε για τη προσπάθεια αυτή.";
 "organizer.alerts.reddit.buttons.subscribe" = "Εγγραφή τώρα!";
 "organizer.alerts.reddit.buttons.remind" = "Υπενθύμιση Αργότερα";
 "organizer.alerts.reddit.buttons.never" = "Μη με ρωτήσεις ξανά";
 
-"organizer.alerts.remove_profile.title" = "Κατάργηση προφίλ";
 "organizer.alerts.remove_profile.message" = "Είστε βέβαιοι ότι θέλετε να διαγράψετε το προφίλ %@;";
 
 /* MARK: AddProfileView */
@@ -150,7 +163,6 @@
 "profile.items.vpn_survives_sleep.caption" = "Κρατήστε ζωντανό στον ύπνο";
 "profile.items.vpn_resolves_hostname.caption" = "Επίλυση του ονόματος σέρβερ διακομιστή";
 "profile.items.reconnect.caption" = "Επανασύνδεση";
-"profile.items.uninstall.caption" = "Αφαίρεση ρύθμισης VPN";
 
 "profile.alerts.rename.title" = "Μετονομασία προφίλ";
 "profile.alerts.reconnect_vpn.message" = "Θέλετε να συνδεθείτε ξανά με το VPN;";

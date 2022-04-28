@@ -15,6 +15,7 @@
 "global.strings.add" = "Adicionar";
 "global.strings.default" = "Default";
 "global.strings.name" = "Nome";
+"global.strings.profiles" = "Perfis";
 "global.strings.provider" = "Provedor";
 "global.strings.providers" = "Provedores";
 "global.strings.configuration" = "Configuração";
@@ -50,7 +51,7 @@
 
 "global.errors.missing_profile" = "Perfil em falta";
 "global.errors.missing_account" = "Conta em falta";
-"global.errors.missing_provider_server" = "Servidor em falta";
+"global.errors.missing_provider_server" = "Localização em falta";
 "global.errors.missing_provider_preset" = "Pré-definição em falta";
 
 /* MARK: Menus */
@@ -59,7 +60,14 @@
 "menu.all.share.title" = "Compartilhar";
 "menu.all.about.title" = "Sobre %@";
 
+"menu.contextual.add_profile.from_files" = "De ficheiros";
+"menu.contextual.add_profile.from_text" = "De texto";
 "menu.contextual.add_profile.imported" = "Adicionar %@";
+"menu.contextual.support.write_review" = "Avaliação";
+"menu.contextual.support.join_community" = "Comunidade";
+"menu.contextual.share_twitter" = "Tweet";
+"menu.contextual.share_generic" = "Convite";
+
 "menu.system.show.title" = "Mostrar";
 "menu.system.switch_profile.title" = "Perfil ativo";
 "menu.system.active_profile.title.none" = "Sem perfil ativo";
@@ -104,12 +112,17 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Por favor, digite sua senha de criptografia.";
 "tunnelkit.errors.openvpn.decryption" = "Sua configiração possui uma chave privada criptografada que talvez não possa ser descriptografada. Verifique novamente sua senha de criptografia.";
 
+/* MARK: OrganizerView */
+
+"organizer.sections.active" = "Ativo";
+/* MARK: OrganizerView */
+"organizer.empty.no_profiles" = "Sem perfis";
+
 "organizer.alerts.reddit.message" = "Você sabia que Passepartout tem um subreddit? Siga-nos para atualizações ou para discutir problemas, novas funcionalidades, ou qualquer outro tópico.\n\nÉ uma boa maneira de mostrar seu interesse pelo projeto.";
 "organizer.alerts.reddit.buttons.subscribe" = "Seguir!";
 "organizer.alerts.reddit.buttons.remind" = "Lembrar-me depois";
 "organizer.alerts.reddit.buttons.never" = "Não perguntar novamente";
 
-"organizer.alerts.remove_profile.title" = "Remover perfil";
 "organizer.alerts.remove_profile.message" = "Tem a certeza de que pretende eliminar o perfil %@?";
 
 /* MARK: AddProfileView */
@@ -150,7 +163,6 @@
 "profile.items.vpn_survives_sleep.caption" = "Manter ativo em modo descanço";
 "profile.items.vpn_resolves_hostname.caption" = "Resolver hostname do servidor";
 "profile.items.reconnect.caption" = "Reconectar";
-"profile.items.uninstall.caption" = "Remover configuração VPN";
 
 "profile.alerts.rename.title" = "Renomear perfil";
 "profile.alerts.reconnect_vpn.message" = "Deseja reconectar à VPN?";

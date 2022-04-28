@@ -15,6 +15,7 @@
 "global.strings.add" = "Toevoegen";
 "global.strings.default" = "Default";
 "global.strings.name" = "Naam";
+"global.strings.profiles" = "Profielen";
 "global.strings.provider" = "Aanbieder";
 "global.strings.providers" = "Aanbieders";
 "global.strings.configuration" = "Configuratie";
@@ -50,7 +51,7 @@
 
 "global.errors.missing_profile" = "Ontbrekend profiel";
 "global.errors.missing_account" = "Ontbrekend account";
-"global.errors.missing_provider_server" = "Ontbrekende server";
+"global.errors.missing_provider_server" = "Ontbrekende locatie";
 "global.errors.missing_provider_preset" = "Ontbrekende voorkeur";
 
 /* MARK: Menus */
@@ -59,7 +60,14 @@
 "menu.all.share.title" = "Delen";
 "menu.all.about.title" = "Over %@";
 
+"menu.contextual.add_profile.from_files" = "Vanuit bestanden";
+"menu.contextual.add_profile.from_text" = "Vanuit tekst";
 "menu.contextual.add_profile.imported" = "%@ toevoegen";
+"menu.contextual.support.write_review" = "Beoordelen";
+"menu.contextual.support.join_community" = "Gemeenschap";
+"menu.contextual.share_twitter" = "Tweeten";
+"menu.contextual.share_generic" = "Uitnodigen";
+
 "menu.system.show.title" = "Weergeven";
 "menu.system.switch_profile.title" = "Actief profiel";
 "menu.system.active_profile.title.none" = "Geen actief profiel";
@@ -104,12 +112,17 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "Voer een coderingswachtwoord in";
 "tunnelkit.errors.openvpn.decryption" = "De configuratie bevat een gecodeerde privésleutel en deze kan niet worden gedecodeerd. Controleer de ingevoerde wachtwoordzin nogmaals.";
 
+/* MARK: OrganizerView */
+
+"organizer.sections.active" = "In gebruik";
+/* MARK: OrganizerView */
+"organizer.empty.no_profiles" = "Geen profielen";
+
 "organizer.alerts.reddit.message" = "Wist je dat Passepartout een eigen subreddit heeft? Schrijf je in voor updates, of discussiëren over problemen, (nieuwe) mogelijkheden, nieuwe platformen of wat je maar wil.\n\nHet is ook een goede manier om te laten zien dat je om dit project geeft.";
 "organizer.alerts.reddit.buttons.subscribe" = "Schfijf je nu in!";
 "organizer.alerts.reddit.buttons.remind" = "Herinner me later";
 "organizer.alerts.reddit.buttons.never" = "Vraag dit niet meer";
 
-"organizer.alerts.remove_profile.title" = "Profiel verwijderen";
 "organizer.alerts.remove_profile.message" = "Weet u zeker dat u profiel %@ wilt verwijderen?";
 
 /* MARK: AddProfileView */
@@ -150,7 +163,6 @@
 "profile.items.vpn_survives_sleep.caption" = "Actief tijdens slaapstand";
 "profile.items.vpn_resolves_hostname.caption" = "Haal de naam van de host op";
 "profile.items.reconnect.caption" = "Opnieuw verbinden";
-"profile.items.uninstall.caption" = "Verwijder VPN configuratie";
 
 "profile.alerts.rename.title" = "Profiel hernoemen";
 "profile.alerts.reconnect_vpn.message" = "Opnieuw verbinding maken met de VPN?";

@@ -15,6 +15,7 @@
 "global.strings.add" = "添加";
 "global.strings.default" = "默认";
 "global.strings.name" = "名称";
+"global.strings.profiles" = "配置";
 "global.strings.provider" = "提供商";
 "global.strings.providers" = "提供商";
 "global.strings.configuration" = "配置";
@@ -44,13 +45,13 @@
 "global.strings.translations" = "翻译";
 
 "global.messages.email_not_configured" = "未配置e-mail账户。";
-"global.messages.share" = "Passepartout是iOS和macOS平台下的用户友的、开源的OpenVPN客户端";
+"global.messages.share" = "Passepartout是适用于iOS和macOS操作系统的OpenVPN/WireGuard开源客户端，易于使用";
 
 "global.placeholders.profile_name" = "我的配置";
 
 "global.errors.missing_profile" = "缺少配置";
 "global.errors.missing_account" = "缺少帐户";
-"global.errors.missing_provider_server" = "缺少服务器";
+"global.errors.missing_provider_server" = "缺少位置";
 "global.errors.missing_provider_preset" = "缺少预设";
 
 /* MARK: Menus */
@@ -59,7 +60,14 @@
 "menu.all.share.title" = "分享";
 "menu.all.about.title" = "关于 %@";
 
+"menu.contextual.add_profile.from_files" = "从文件";
+"menu.contextual.add_profile.from_text" = "从文本";
 "menu.contextual.add_profile.imported" = "添加%@";
+"menu.contextual.support.write_review" = "评价";
+"menu.contextual.support.join_community" = "社区";
+"menu.contextual.share_twitter" = "发推文";
+"menu.contextual.share_generic" = "邀请";
+
 "menu.system.show.title" = "显示";
 "menu.system.switch_profile.title" = "有效配置";
 "menu.system.active_profile.title.none" = "无有效配置";
@@ -104,12 +112,17 @@
 "tunnelkit.errors.openvpn.passphrase_required" = "请输入加密密码";
 "tunnelkit.errors.openvpn.decryption" = "该配置包含加密私钥且不能被解密。请再次检查输入的密钥。";
 
+/* MARK: OrganizerView */
+
+"organizer.sections.active" = "使用中";
+/* MARK: OrganizerView */
+"organizer.empty.no_profiles" = "没有配置";
+
 "organizer.alerts.reddit.message" = "你知道Passepartout有一个subreddit吗？可以在上面讨论更新、问题、功能、新的平台等n任何你想要的。\n\n这同样是表达你对此项目关注的地方。";
 "organizer.alerts.reddit.buttons.subscribe" = "立即订阅!";
 "organizer.alerts.reddit.buttons.remind" = "稍后提醒我";
 "organizer.alerts.reddit.buttons.never" = "不要再问";
 
-"organizer.alerts.remove_profile.title" = "删除配置";
 "organizer.alerts.remove_profile.message" = "确定要删除配置%@吗？";
 
 /* MARK: AddProfileView */
@@ -150,7 +163,6 @@
 "profile.items.vpn_survives_sleep.caption" = "休眠时保持连接";
 "profile.items.vpn_resolves_hostname.caption" = "解析服务器主机名";
 "profile.items.reconnect.caption" = "重连";
-"profile.items.uninstall.caption" = "移除VPN配置";
 
 "profile.alerts.rename.title" = "重命名配置";
 "profile.alerts.reconnect_vpn.message" = "要重连VPN吗？";

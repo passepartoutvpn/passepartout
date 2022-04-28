@@ -15,6 +15,7 @@
 "global.strings.add" = "Añadir";
 "global.strings.default" = "Default";
 "global.strings.name" = "Nombre";
+"global.strings.profiles" = "Perfiles";
 "global.strings.provider" = "Proveedor";
 "global.strings.providers" = "Proveedores";
 "global.strings.configuration" = "Configuración";
@@ -113,6 +114,8 @@
 
 /* MARK: OrganizerView */
 
+"organizer.sections.active" = "En uso";
+/* MARK: OrganizerView */
 "organizer.empty.no_profiles" = "Ningún perfil";
 
 "organizer.alerts.reddit.message" = "Sabías que Passepartout tiene un subreddit? Suscríbete para actualizaciones o comentar problemas, funciones, nuevas plataformas o todo lo que se te ocurra.\n\nTambién es la manera ideal de mostrar interés en este proyecto.";
@@ -120,7 +123,6 @@
 "organizer.alerts.reddit.buttons.remind" = "Recordar más tarde";
 "organizer.alerts.reddit.buttons.never" = "No preguntar más";
 
-"organizer.alerts.remove_profile.title" = "Quitar perfil";
 "organizer.alerts.remove_profile.message" = "¿Seguro que deseas eliminar el perfil %@?";
 
 /* MARK: AddProfileView */
@@ -161,7 +163,6 @@
 "profile.items.vpn_survives_sleep.caption" = "Mantener en modo inactivo";
 "profile.items.vpn_resolves_hostname.caption" = "Resolver hostname del servidor";
 "profile.items.reconnect.caption" = "Reconectar";
-"profile.items.uninstall.caption" = "Borrar configuración VPN";
 
 "profile.alerts.rename.title" = "Renombrar perfil";
 "profile.alerts.reconnect_vpn.message" = "Quieres reconectarte al VPN?";
