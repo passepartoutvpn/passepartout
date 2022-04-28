@@ -185,7 +185,7 @@ extension ProfileManager {
         return profile
     }
 
-    public func saveProfile(_ profile: Profile, isActive: Bool?) {
+    public func saveProfile(_ profile: Profile, isActive: Bool?, updateIfCurrent: Bool = true) {
         guard !profile.isPlaceholder else {
             assertionFailure("Placeholder")
             return
@@ -204,8 +204,8 @@ extension ProfileManager {
             }
         }
 
-        // IMPORTANT: refresh live copy if just saved
-        if isCurrentProfile(profile.id) {
+        // IMPORTANT: refresh live copy if just saved (e.g. via intents)
+        if updateIfCurrent && isCurrentProfile(profile.id) {
             pp_log.info("Saved profile is also current profile, updating...")
             currentProfile.value = profile
         }
@@ -309,14 +309,7 @@ extension ProfileManager {
     }
     
     public func saveCurrentProfile() {
-        guard !currentProfile.value.isPlaceholder else {
-            pp_log.debug("No current profile or deleted, not persisting")
-            return
-        }
-        saveProfile(
-            currentProfile.value,
-            isActive: currentProfile.value.id == activeProfileId
-        )
+        saveProfile(currentProfile.value, isActive: nil, updateIfCurrent: false)
     }
 }
 
