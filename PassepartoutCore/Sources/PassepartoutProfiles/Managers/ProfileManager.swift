@@ -87,6 +87,10 @@ public class ProfileManager: ObservableObject {
 
         currentProfile = ObservableProfile()
     }
+    
+    public func setActiveProfileId(_ id: UUID) {
+        activeProfileId = id
+    }
 }
 
 // MARK: Index
@@ -250,15 +254,6 @@ extension ProfileManager {
 // MARK: Observation
 
 extension ProfileManager {
-    public func loadActiveProfile(withId id: UUID) async throws {
-        guard isExistingProfile(withId: id) else {
-            pp_log.warning("Active profile \(id) does not exist, ignoring")
-            return
-        }
-        activeProfileId = id
-        try await loadCurrentProfile(withId: id)
-    }
-
     public func loadCurrentProfile(withId id: UUID) async throws {
         guard !isLoadingCurrentProfile else {
             pp_log.warning("Already loading another profile")
