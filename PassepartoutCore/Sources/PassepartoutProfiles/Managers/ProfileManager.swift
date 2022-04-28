@@ -301,7 +301,7 @@ extension ProfileManager {
     }
 
     public func activateCurrentProfile() {
-        activateProfile(currentProfile.value)
+        saveProfile(currentProfile.value, isActive: true, updateIfCurrent: false)
     }
     
     public func saveCurrentProfile() {
