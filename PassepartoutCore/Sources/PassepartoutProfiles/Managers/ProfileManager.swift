@@ -238,8 +238,8 @@ extension ProfileManager {
             return nil
         }
         let copy = source
-            .renamedUniquely(withLastUpdate: false)
             .withNewId()
+            .renamedUniquely(withLastUpdate: false)
 
         saveProfile(copy, isActive: nil)
         return copy
