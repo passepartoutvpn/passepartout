@@ -141,12 +141,10 @@ class AppContext {
 
         if let activeProfileId = appManager.activeProfileId {
             profileManager.setActiveProfileId(activeProfileId)
-            Task {
-                do {
-                    try await profileManager.loadCurrentProfile(withId: activeProfileId)
-                } catch {
-                    pp_log.warning("Unable to load active profile: \(error)")
-                }
+            do {
+                try profileManager.loadCurrentProfile(withId: activeProfileId)
+            } catch {
+                pp_log.warning("Unable to load active profile: \(error)")
             }
         }
 

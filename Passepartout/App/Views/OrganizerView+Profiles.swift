@@ -158,13 +158,11 @@ extension OrganizerView.ProfilesList {
     }
     
     private func presentProfile(withId id: UUID) {
-        Task {
-            isPresentingProfile = true
-            do {
-                try await profileManager.loadCurrentProfile(withId: id)
-            } catch {
-                pp_log.error("Unable to load profile: \(error)")
-            }
+        isPresentingProfile = true
+        do {
+            try profileManager.loadCurrentProfile(withId: id)
+        } catch {
+            pp_log.error("Unable to load profile: \(error)")
         }
     }
 

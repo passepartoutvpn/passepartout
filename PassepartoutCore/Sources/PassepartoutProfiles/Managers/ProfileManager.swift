@@ -254,7 +254,7 @@ extension ProfileManager {
 // MARK: Observation
 
 extension ProfileManager {
-    public func loadCurrentProfile(withId id: UUID) async throws {
+    public func loadCurrentProfile(withId id: UUID) throws {
         guard !isLoadingCurrentProfile else {
             pp_log.warning("Already loading another profile")
             return
@@ -272,13 +272,14 @@ extension ProfileManager {
             let result = try profileEx(withId: id)
             pp_log.info("Current profile: \(result.profile.logDescription)")
 
+            currentProfile.value = result.profile
             if result.isReady {
-                currentProfile.value = result.profile
                 isLoadingCurrentProfile = false
             } else {
-                try await makeProfileReady(result.profile)
-                currentProfile.value = result.profile
-                isLoadingCurrentProfile = false
+                Task {
+                    try await makeProfileReady(result.profile)
+                    isLoadingCurrentProfile = false
+                }
             }
         } catch {
             currentProfile.value = .placeholder
