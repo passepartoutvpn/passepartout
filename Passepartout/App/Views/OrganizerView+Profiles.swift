@@ -88,12 +88,8 @@ extension OrganizerView {
         
         private var mainView: some View {
             List {
-                Section(
-                    header: Text(L10n.Global.Strings.profiles)
-                ) {
-                    ForEach(sortedHeaders, content: profileRow(forHeader:))
-                        .onDelete(perform: removeProfiles)
-                }
+                ForEach(sortedHeaders, content: profileRow(forHeader:))
+                    .onDelete(perform: removeProfiles)
             }.themeAnimation(on: profileManager.headers)
         }
 
