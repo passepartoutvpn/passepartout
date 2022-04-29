@@ -28,8 +28,6 @@ import PassepartoutCore
 
 extension OrganizerView {
     struct ProfilesList: View {
-        @ObservedObject private var appManager: AppManager
-
         @ObservedObject private var profileManager: ProfileManager
 
         @ObservedObject private var providerManager: ProviderManager
@@ -44,7 +42,6 @@ extension OrganizerView {
         @State private var isPresentingProfile = false
         
         init(alertType: Binding<AlertType?>) {
-            appManager = .shared
             profileManager = .shared
             providerManager = .shared
             productManager = .shared
@@ -195,7 +192,7 @@ extension OrganizerView.ProfilesList {
     
     private func performMigrationsIfNeeded() {
         Task {
-            await appManager.doMigrations(profileManager)
+            await AppManager.shared.doMigrations(profileManager)
         }
     }
     
