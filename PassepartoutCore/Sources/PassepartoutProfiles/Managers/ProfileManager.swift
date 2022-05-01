@@ -58,8 +58,6 @@ public class ProfileManager: ObservableObject {
 
     // MARK: Observables
 
-    @Published public private(set) var isLoadingCurrentProfile = false
-    
     public let currentProfile: ObservableProfile
     
     public let willUpdateActiveId = PassthroughSubject<UUID?, Never>()
@@ -255,7 +253,7 @@ extension ProfileManager {
 
 extension ProfileManager {
     public func loadCurrentProfile(withId id: UUID) throws {
-        guard !isLoadingCurrentProfile else {
+        guard !currentProfile.isLoading else {
             pp_log.warning("Already loading another profile")
             return
         }
@@ -263,7 +261,7 @@ extension ProfileManager {
             pp_log.debug("Profile \(id) is already current profile")
             return
         }
-        isLoadingCurrentProfile = true
+        currentProfile.isLoading = true
         if isExistingProfile(withId: currentProfile.value.id) {
             pp_log.info("Committing changes of former current profile \(currentProfile.value.logDescription)")
             saveCurrentProfile()
@@ -274,18 +272,22 @@ extension ProfileManager {
 
             currentProfile.value = result.profile
             if result.isReady {
-                isLoadingCurrentProfile = false
+                currentProfile.isLoading = false
             } else {
                 Task {
                     try await makeProfileReady(result.profile)
-                    isLoadingCurrentProfile = false
+                    currentProfile.isLoading = false
                 }
             }
         } catch {
             currentProfile.value = .placeholder
-            isLoadingCurrentProfile = false
+            currentProfile.isLoading = false
             throw error
         }
+    }
+    
+    public func isCurrentProfileLoading() -> Bool {
+        currentProfile.isLoading
     }
     
     public func isCurrentProfileExisting() -> Bool {

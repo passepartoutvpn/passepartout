@@ -43,22 +43,20 @@ struct ProfileView: View {
         }
     }
 
-    @Environment(\.presentationMode) private var presentationMode
-    
-    @ObservedObject private var profileManager: ProfileManager
+    @ObservedObject private var currentProfile: ObservableProfile
     
     private var isLoading: Bool {
-        profileManager.isLoadingCurrentProfile
+        currentProfile.isLoading
     }
     
     private var isExisting: Bool {
-        profileManager.isCurrentProfileExisting()
+        !currentProfile.value.isPlaceholder
     }
 
     @State private var modalType: ModalType?
     
     init() {
-        profileManager = .shared
+        currentProfile = ProfileManager.shared.currentProfile
     }
 
     var body: some View {
@@ -71,7 +69,7 @@ struct ProfileView: View {
             }
         }.toolbar {
             MainMenu(
-                currentProfile: profileManager.currentProfile,
+                currentProfile: currentProfile,
                 modalType: $modalType
             ).disabled(!isExisting)
         }.sheet(item: $modalType, content: presentedModal)
@@ -80,23 +78,23 @@ struct ProfileView: View {
     }
     
     private var title: String {
-        profileManager.currentProfile.name
+        currentProfile.name
     }
     
     private var mainView: some View {
         List {
             VPNSection(
-                currentProfile: profileManager.currentProfile,
+                currentProfile: currentProfile,
                 isLoading: isLoading
             )
             if !isLoading {
-                ProviderSection(currentProfile: profileManager.currentProfile)
+                ProviderSection(currentProfile: currentProfile)
                 ConfigurationSection(
-                    currentProfile: profileManager.currentProfile,
+                    currentProfile: currentProfile,
                     modalType: $modalType
                 )
-                ExtraSection(currentProfile: profileManager.currentProfile)
-                DiagnosticsSection(currentProfile: profileManager.currentProfile)
+                ExtraSection(currentProfile: currentProfile)
+                DiagnosticsSection(currentProfile: currentProfile)
             }
         }
     }
@@ -106,12 +104,12 @@ struct ProfileView: View {
         switch modalType {
         case .shortcuts:
             NavigationView {
-                ShortcutsView(target: profileManager.currentProfile.value)
+                ShortcutsView(target: currentProfile.value)
             }.themeGlobal()
             
         case .rename:
             NavigationView {
-                RenameView(currentProfile: profileManager.currentProfile)
+                RenameView(currentProfile: currentProfile)
             }.themeGlobal()
             
         case .paywallShortcuts:
