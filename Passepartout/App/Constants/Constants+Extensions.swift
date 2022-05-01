@@ -242,9 +242,6 @@ extension Constants {
     enum Delays {
         static let scrolling = 100
         
-//        @available(*, deprecated, message: "for weird animation when using withAnimation() in View.onAppear")
-        static let xxxAnimateOnAppear = 200
-        
 //        @available(*, deprecated, message: "file importer stops showing again after closing with swipe down")
         static let xxxPresentFileImporter = 200
 
