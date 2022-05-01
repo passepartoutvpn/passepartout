@@ -69,6 +69,7 @@ extension VPNManager {
                 currentState?.vpnStatus = .disconnecting
                 await Task.maybeWait(forMilliseconds: 1000)
                 currentState?.vpnStatus = .disconnected
+                currentState?.dataCount = nil
             }
         }
         

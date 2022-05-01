@@ -69,11 +69,44 @@ struct OrganizerView: View {
         }
     }
 
+    @ObservedObject private var profileManager: ProfileManager
+
+    @ObservedObject private var providerManager: ProviderManager
+
+    // just to observe changes in profiles eligibility
+    @ObservedObject private var productManager: ProductManager
+    
+    @State private var isFirstLaunch = true
+
     @State private var modalType: ModalType?
 
     @State private var alertType: AlertType?
 
     @State private var isHostFileImporterPresented = false
+
+    @State private var presentedProfileId: UUID?
+
+    private var presentedAndLoadedProfileId: Binding<UUID?> {
+        .init {
+            presentedProfileId
+        } set: {
+            guard $0 != presentedProfileId else {
+                return
+            }
+            guard let id = $0 else {
+                presentedProfileId = nil
+                return
+            }
+            presentedProfileId = id
+
+            // load profile contextually with navigation
+            do {
+                try profileManager.loadCurrentProfile(withId: id)
+            } catch {
+                pp_log.error("Unable to load profile: \(error)")
+            }
+        }
+    }
 
     @AppStorage(AppManager.DefaultKey.didHandleSubreddit.rawValue) var didHandleSubreddit = false
     
@@ -81,14 +114,20 @@ struct OrganizerView: View {
     
     private let redditURL = Constants.URLs.subreddit
     
+    init() {
+        profileManager = .shared
+        providerManager = .shared
+        productManager = .shared
+    }
+    
     var body: some View {
         debugChanges()
         return ZStack {
-            SceneView(
-                alertType: $alertType,
-                didHandleSubreddit: $didHandleSubreddit
-            )
-            ProfilesList(alertType: $alertType)
+            hiddenSceneView
+            mainView
+            if profileManager.headers.isEmpty {
+                emptyView
+            }
         }.toolbar {
             ToolbarItem(placement: .primaryAction) {
                 AddMenu(
@@ -101,18 +140,98 @@ struct OrganizerView: View {
                     modalType: $modalType,
                     alertType: $alertType
                 )
-    //            EditButton()
+//                EditButton()
             }
         }.sheet(item: $modalType, content: presentedModal)
         .alert(item: $alertType, content: presentedAlert)
-        .fileImporter(
+        .navigationTitle(Unlocalized.appName)
+        .themePrimaryView()
+
+        // events
+        .onAppear {
+            performMigrationsIfNeeded()
+        }.onChange(of: profileManager.headers) {
+            dismissSelectionIfDeleted(headers: $0)
+        }.onReceive(profileManager.didCreateProfile) {
+            presentedAndLoadedProfileId.wrappedValue = $0.id
+        }.fileImporter(
             isPresented: $isHostFileImporterPresented,
             allowedContentTypes: hostFileTypes,
             allowsMultipleSelection: false,
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
-        .navigationTitle(Unlocalized.appName)
-        .themePrimaryView()
+    }
+    
+    private var hiddenSceneView: some View {
+        SceneView(
+            alertType: $alertType,
+            didHandleSubreddit: $didHandleSubreddit
+        )
+    }
+    
+    private var mainView: some View {
+        List {
+            let headers = sortedHeaders
+            if !headers.isEmpty {
+                // FIXME: iPad multitasking, navigation binding does not clear on pop without Section
+                Section {
+                    ForEach(sortedHeaders, content: profileRow(forHeader:))
+                        .onDelete(perform: removeProfiles)
+                } header: {
+                    Text(L10n.Global.Strings.profiles)
+                }
+            }
+        }.themeAnimation(on: profileManager.headers)
+    }
+
+    private var emptyView: some View {
+        VStack {
+            Text(L10n.Organizer.Empty.noProfiles)
+                .themeInformativeTextStyle()
+        }
+    }
+
+    private func profileRow(forHeader header: Profile.Header) -> some View {
+        NavigationLink(tag: header.id, selection: presentedAndLoadedProfileId) {
+            ProfileView()
+        } label: {
+            profileLabel(forHeader: header)
+        }.contextMenu {
+            profileMenu(forHeader: header)
+        }.onAppear {
+            presentIfActiveProfile(header.id)
+        }
+    }
+    
+    private func profileLabel(forHeader header: Profile.Header) -> some View {
+        ProfileRow(
+            header: header,
+            isActive: profileManager.isActiveProfile(header.id)
+        )
+    }
+
+    @ViewBuilder
+    private func profileMenu(forHeader header: Profile.Header) -> some View {
+        ProfileView.DuplicateButton(
+            header: header,
+            switchCurrentProfile: false
+        )
+    }
+
+    private var sortedHeaders: [Profile.Header] {
+        profileManager.headers
+            .sorted()
+        
+        // FIXME: layout, moving active profile on top breaks row animation (content flashes on Mac)
+//                .sorted {
+//                    if profileManager.isActiveProfile($0.id) {
+//                        return true
+//                    } else if profileManager.isActiveProfile($1.id) {
+//                        return false
+//                    } else {
+//                        return $0 < $1
+//                    }
+//                }
     }
 }
 
@@ -213,6 +332,65 @@ extension OrganizerView {
 }
 
 extension OrganizerView {
+    private func presentIfActiveProfile(_ id: UUID) {
+        guard id == profileManager.activeHeader?.id else {
+            return
+        }
+        presentActiveProfile()
+    }
+    
+    private func presentActiveProfile() {
+        guard isFirstLaunch else {
+            return
+        }
+        isFirstLaunch = false
+
+        // presenting profile when an alert is active seems to break navigation
+        guard alertType == nil else {
+            return
+        }
+        guard let activeProfileId = profileManager.activeHeader?.id else {
+            return
+        }
+
+        // FIXME: iPad portrait/compact, preselecting profile on launch adds ProfileView() twice
+        // can notice becase "Back" needs to be tapped twice to show sidebar
+        if themeIdiom != .pad {
+            presentedProfileId = activeProfileId
+        }
+    }
+    
+    private func removeProfiles(at offsets: IndexSet) {
+        let currentHeaders = sortedHeaders
+        var toDelete: [UUID] = []
+        offsets.forEach {
+            toDelete.append(currentHeaders[$0].id)
+        }
+        removeProfiles(withIds: toDelete)
+    }
+
+    private func removeProfiles(withIds toDelete: [UUID]) {
+
+        // clear selection before removal to avoid triggering a bogus navigation push
+        if toDelete.contains(profileManager.currentProfile.value.id) {
+            presentedProfileId = nil
+        }
+
+        profileManager.removeProfiles(withIds: toDelete)
+    }
+    
+    private func performMigrationsIfNeeded() {
+        Task {
+            await AppManager.shared.doMigrations(profileManager)
+        }
+    }
+    
+    private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
+        if let _ = presentedProfileId, !profileManager.isCurrentProfileExisting() {
+            presentedProfileId = nil
+        }
+    }
+
     private func presentSubscribeReddit() {
         alertType = .subscribeReddit
     }

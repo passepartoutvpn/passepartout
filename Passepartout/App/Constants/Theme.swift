@@ -52,7 +52,6 @@ extension View {
         let color = themeAccentColor
         return accentColor(color)
             .toggleStyle(SwitchToggleStyle(tint: color))
-            .themeNavigationViewStyle()
         #endif
     }
     
@@ -66,7 +65,7 @@ extension View {
             navigationViewStyle(.automatic)
         }
     }
-    
+
     func themePrimaryView() -> some View {
         #if targetEnvironment(macCatalyst)
         navigationBarHidden(true)
