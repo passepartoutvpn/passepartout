@@ -10,4 +10,3 @@
 ### Fixed
 
 - Files occasionally not selectable in browser.
-

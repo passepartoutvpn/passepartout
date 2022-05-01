@@ -30,7 +30,7 @@ git add *.plist
 
 # add release notes
 git add CHANGELOG.md
-git add Passepartout/App/*/fastlane/metadata/*/release_notes.txt
+git add Passepartout/App/fastlane/ios/metadata/*/release_notes.txt
 
 git commit -m "Attempt beta release"
 #VERSION=`ci/version-number.sh ios`
