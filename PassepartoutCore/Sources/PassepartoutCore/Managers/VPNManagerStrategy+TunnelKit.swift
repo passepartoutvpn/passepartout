@@ -180,6 +180,12 @@ extension VPNManager {
         }
 
         private func onVPNStatus(_ notification: Notification) {
+
+            // assume first notified identifier to be the relevant one
+            // in order to restore VPN status on app launch
+            if currentBundleIdentifier == nil {
+                currentBundleIdentifier = notification.vpnBundleIdentifier
+            }
             guard isRelevantNotification(notification) else {
                 return
             }
