@@ -41,7 +41,7 @@ struct ProfileRow: View {
             VPNStateView(isActive: isActive)
                 .font(.subheadline)
                 .themeSecondaryTextStyle()
-        }.padding([.top, .bottom], 10)
+        }.padding([.top, .bottom], 5)
     }
 
     private var nameView: some View {
