@@ -125,7 +125,7 @@ struct OrganizerView: View {
         return ZStack {
             hiddenSceneView
             mainView
-            if profileManager.headers.isEmpty {
+            if !profileManager.hasProfiles {
                 emptyView
             }
         }.toolbar {
@@ -171,17 +171,26 @@ struct OrganizerView: View {
     
     private var mainView: some View {
         List {
-            let headers = sortedHeaders
-            if !headers.isEmpty {
-                // FIXME: iPad multitasking, navigation binding does not clear on pop without Section
-                Section {
-                    ForEach(sortedHeaders, content: profileRow(forHeader:))
-                        .onDelete(perform: removeProfiles)
-                } header: {
-                    Text(L10n.Global.Strings.profiles)
+            if profileManager.hasProfiles {
+                switch themeIdiom {
+                case .mac:
+                    profilesView
+
+                default:
+                    // FIXME: iPad multitasking, navigation binding does not clear on pop without Section
+                    Section {
+                        profilesView
+                    } header: {
+                        Text(L10n.Global.Strings.profiles)
+                    }
                 }
             }
         }.themeAnimation(on: profileManager.headers)
+    }
+    
+    private var profilesView: some View {
+        ForEach(sortedHeaders, content: profileRow(forHeader:))
+            .onDelete(perform: removeProfiles)
     }
 
     private var emptyView: some View {

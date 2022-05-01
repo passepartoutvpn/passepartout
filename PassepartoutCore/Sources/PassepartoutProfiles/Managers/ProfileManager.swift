@@ -109,6 +109,10 @@ extension ProfileManager {
         availableHeaders
     }
     
+    public var hasProfiles: Bool {
+        !availableHeaders.isEmpty
+    }
+    
     public var hasActiveProfile: Bool {
         activeHeader != nil
     }
