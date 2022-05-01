@@ -12,7 +12,10 @@
 "global.strings.ok" = "OK";
 "global.strings.save" = "Zapisz";
 "global.strings.rename" = "Zmień nazwę";
+"global.strings.duplicate" = "Duplikuj";
 "global.strings.add" = "Dodaj";
+"global.strings.delete" = "Usuń";
+"global.strings.uninstall" = "Odinstaluj";
 "global.strings.default" = "Default";
 "global.strings.name" = "Nazwa";
 "global.strings.profiles" = "Profile";

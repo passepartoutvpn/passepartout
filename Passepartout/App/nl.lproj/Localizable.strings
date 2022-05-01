@@ -12,7 +12,10 @@
 "global.strings.ok" = "OK";
 "global.strings.save" = "Opslaan";
 "global.strings.rename" = "Hernoemen";
+"global.strings.duplicate" = "Dupliceren";
 "global.strings.add" = "Toevoegen";
+"global.strings.delete" = "Verwijderen";
+"global.strings.uninstall" = "Installatie ongedaan maken";
 "global.strings.default" = "Default";
 "global.strings.name" = "Naam";
 "global.strings.profiles" = "Profielen";

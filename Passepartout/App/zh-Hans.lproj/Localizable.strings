@@ -12,7 +12,10 @@
 "global.strings.ok" = "好的";
 "global.strings.save" = "保存";
 "global.strings.rename" = "重命名";
+"global.strings.duplicate" = "复制";
 "global.strings.add" = "添加";
+"global.strings.delete" = "删除";
+"global.strings.uninstall" = "卸载";
 "global.strings.default" = "默认";
 "global.strings.name" = "名称";
 "global.strings.profiles" = "配置";

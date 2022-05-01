@@ -12,7 +12,10 @@
 "global.strings.ok" = "OK";
 "global.strings.save" = "Αποθήκευση";
 "global.strings.rename" = "Επανονομασία";
+"global.strings.duplicate" = "Δημιουργήστε αντίγραφο";
 "global.strings.add" = "Προσθήκη";
+"global.strings.delete" = "Διαγράψτε";
+"global.strings.uninstall" = "Καταργήστε την εγκατάσταση";
 "global.strings.default" = "Default";
 "global.strings.name" = "Όνομα";
 "global.strings.profiles" = "Προφίλ";

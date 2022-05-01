@@ -12,7 +12,10 @@
 "global.strings.ok" = "Ок";
 "global.strings.save" = "Сохранить";
 "global.strings.rename" = "Переименовать";
+"global.strings.duplicate" = "Дублировать";
 "global.strings.add" = "Добавить";
+"global.strings.delete" = "Удалить";
+"global.strings.uninstall" = "Удалить приложение";
 "global.strings.default" = "По умолчанию";
 "global.strings.name" = "Имя";
 "global.strings.profiles" = "Профили";

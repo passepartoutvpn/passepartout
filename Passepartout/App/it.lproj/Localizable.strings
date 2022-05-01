@@ -12,7 +12,10 @@
 "global.strings.ok" = "OK";
 "global.strings.save" = "Salva";
 "global.strings.rename" = "Rinomina";
+"global.strings.duplicate" = "Duplica";
 "global.strings.add" = "Aggiungi";
+"global.strings.delete" = "Cancella";
+"global.strings.uninstall" = "Disinstalla";
 "global.strings.default" = "Default";
 "global.strings.name" = "Nome";
 "global.strings.profiles" = "Profili";

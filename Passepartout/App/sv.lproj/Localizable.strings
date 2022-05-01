@@ -12,7 +12,10 @@
 "global.strings.ok" = "OK";
 "global.strings.save" = "Spara";
 "global.strings.rename" = "Byt namn";
+"global.strings.duplicate" = "Duplicera";
 "global.strings.add" = "Lägg till";
+"global.strings.delete" = "Radera";
+"global.strings.uninstall" = "Avinstallera";
 "global.strings.default" = "Default";
 "global.strings.name" = "Namn";
 "global.strings.profiles" = "Profiler";
