@@ -63,11 +63,7 @@ struct AccountView: View {
     
     var body: some View {
         List {
-            Section(
-                footer: metadata?.localizedGuidanceString.map {
-                    Text($0)
-                }
-            ) {
+            Section {
                 TextField(usernamePlaceholder ?? L10n.Account.Items.Username.placeholder, text: $liveAccount.username)
                     .textContentType(.username)
                     .disableAutocorrection(true)
@@ -85,6 +81,10 @@ struct AccountView: View {
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
                 .withLeadingText(L10n.Account.Items.Password.caption)
+            } footer: {
+                metadata?.localizedGuidanceString.map {
+                    Text($0)
+                }
             }
             if vpnProtocol == .openVPN {
                 metadata?.openVPNGuidanceURL.map { guidanceURL in

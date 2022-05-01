@@ -109,16 +109,17 @@ extension PaywallView {
         }
         
         private var productsSection: some View {
-            Section(
-                header: Text(L10n.Paywall.title),
-                footer: Text(L10n.Paywall.Sections.Products.footer)
-            ) {
+            Section {
                 if !productManager.isRefreshingProducts {
                     ForEach(productRowModels, id: \.product.productIdentifier, content: productRow)
                 } else {
                     ProgressView()
                 }
                 restoreRow
+            } header: {
+                Text(L10n.Paywall.title)
+            } footer: {
+                Text(L10n.Paywall.Sections.Products.footer)
             }
         }
 

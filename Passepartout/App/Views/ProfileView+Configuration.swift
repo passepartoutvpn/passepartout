@@ -49,9 +49,7 @@ extension ProfileView {
         }
 
         var body: some View {
-            Section(
-                header: Text(L10n.Global.Strings.configuration)
-            ) {
+            Section {
                 if currentProfile.value.vpnProtocols.count > 1 {
                     themeTextPicker(
                         L10n.Global.Strings.protocol,
@@ -109,6 +107,8 @@ extension ProfileView {
                         onDemandRow
                     }
                 }
+            } header: {
+                Text(L10n.Global.Strings.configuration)
             }
         }
         

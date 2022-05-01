@@ -45,12 +45,12 @@ extension ProfileView {
         
         var body: some View {
             List {
-                Section(
-                    header: Text(L10n.Profile.Alerts.Rename.title)
-                ) {
+                Section {
                     TextField(L10n.Global.Placeholders.profileName, text: $newName, onCommit: commitRenaming)
                         .themeValidProfileName()
                         .onAppear(perform: loadCurrentName)
+                } header: {
+                    Text(L10n.Profile.Alerts.Rename.title)
                 }
             }.themeSecondaryView()
             .navigationTitle(currentProfile.value.header.name)

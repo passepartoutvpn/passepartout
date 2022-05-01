@@ -49,24 +49,24 @@ extension ShortcutsView {
             ZStack {
                 hiddenProviderLocationLink
                 List {
-                    Section(
-                        header: Text(Unlocalized.VPN.vpn)
-                    ) {
+                    Section {
                         addConnectView
                         Button(L10n.Shortcuts.Add.Items.EnableVpn.caption, action: addEnableVPN)
                         Button(L10n.Shortcuts.Add.Items.DisableVpn.caption, action: addDisableVPN)
+                    } header: {
+                        Text(Unlocalized.VPN.vpn)
                     }
-                    Section(
-                        header: Text(L10n.Shortcuts.Add.Sections.Wifi.header)
-                    ) {
+                    Section {
                         Button(L10n.Shortcuts.Add.Items.TrustCurrentWifi.caption, action: addTrustWiFi)
                         Button(L10n.Shortcuts.Add.Items.UntrustCurrentWifi.caption, action: addUntrustWiFi)
+                    } header: {
+                        Text(L10n.Shortcuts.Add.Sections.Wifi.header)
                     }
-                    Section(
-                        header: Text(L10n.Shortcuts.Add.Sections.Cellular.header)
-                    ) {
+                    Section {
                         Button(L10n.Shortcuts.Add.Items.TrustCellular.caption, action: addTrustCellular)
                         Button(L10n.Shortcuts.Add.Items.UntrustCellular.caption, action: addUntrustCellular)
+                    } header: {
+                        Text(L10n.Shortcuts.Add.Sections.Cellular.header)
                     }
                 }
             }.navigationTitle(L10n.Shortcuts.Add.title)

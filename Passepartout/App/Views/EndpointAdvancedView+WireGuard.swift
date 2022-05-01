@@ -46,27 +46,25 @@ extension EndpointAdvancedView {
 
 extension EndpointAdvancedView.WireGuardView {
     private var keySection: some View {
-        Section(
-            header: Text(L10n.Global.Strings.interface)
-        ) {
+        Section {
             themeLongContentLink(L10n.Global.Strings.privateKey, content: .constant(builder.privateKey))
             themeLongContentLink(L10n.Global.Strings.publicKey, content: .constant(builder.publicKey))
+        } header: {
+            Text(L10n.Global.Strings.interface)
         }
     }
 
     private var addressesSection: some View {
-        Section(
-            header: Text(L10n.Global.Strings.addresses)
-        ) {
+        Section {
             ForEach(builder.addresses, id: \.self, content: Text.init)
+        } header: {
+            Text(L10n.Global.Strings.addresses)
         }
     }
 
     private func dnsSection(configuration: WireGuard.Configuration) -> some View {
         configuration.dnsSettings.map { settings in
-            Section(
-                header: Text(Unlocalized.Network.dns)
-            ) {
+            Section {
                 ForEach(settings.servers, id: \.self) {
                     Text(L10n.Global.Strings.address)
                         .withTrailingText($0)
@@ -75,6 +73,8 @@ extension EndpointAdvancedView.WireGuardView {
                     Text(L10n.Global.Strings.domain)
                         .withTrailingText($0)
                 }
+            } header: {
+                Text(Unlocalized.Network.dns)
             }
         }
     }

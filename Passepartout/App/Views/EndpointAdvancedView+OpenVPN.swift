@@ -63,9 +63,7 @@ extension EndpointAdvancedView {
 extension EndpointAdvancedView.OpenVPNView {
     private var ipv4Section: some View {
         builder.ipv4.map { cfg in
-            Section(
-                header: Text(Unlocalized.Network.ipv4)
-            ) {
+            Section {
                 themeLongContentLinkDefault(
                     L10n.Global.Strings.address,
                     content: .constant(builder.ipv4.localizedAddress)
@@ -81,15 +79,15 @@ extension EndpointAdvancedView.OpenVPNView {
                         content: .constant(route.localizedDescription)
                     )
                 }
+            } header: {
+                Text(Unlocalized.Network.ipv4)
             }
         }
     }
     
     private var ipv6Section: some View {
         builder.ipv6.map { cfg in
-            Section(
-                header: Text(Unlocalized.Network.ipv6)
-            ) {
+            Section {
                 themeLongContentLinkDefault(
                     L10n.Global.Strings.address,
                     content: .constant(builder.ipv6.localizedAddress)
@@ -105,15 +103,15 @@ extension EndpointAdvancedView.OpenVPNView {
                         content: .constant(route.localizedDescription)
                     )
                 }
+            } header: {
+                Text(Unlocalized.Network.ipv6)
             }
         }
     }
 
     private func communicationSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.communicationSettings.map { settings in
-            Section(
-                header: Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
-            ) {
+            Section {
                 settings.cipher.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.Cipher.caption)
                         .withTrailingText($0.localizedDescription)
@@ -126,14 +124,14 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(Unlocalized.VPN.xor)
                         .withTrailingText($0.localizedDescriptionAsXOR)
                 }
+            } header: {
+                Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
             }
         }
     }
     
     private var communicationEditableSection: some View {
-        Section(
-            header: Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
-        ) {
+        Section {
             themeTextPicker(
                 L10n.Endpoint.Advanced.Openvpn.Items.Cipher.caption,
                 selection: $builder.cipher ?? OpenVPN.Configuration.Fallback.cipher,
@@ -150,14 +148,14 @@ extension EndpointAdvancedView.OpenVPNView {
                 Text(Unlocalized.VPN.xor)
                     .withTrailingText($0.localizedDescriptionAsXOR)
             }
+        } header: {
+            Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
         }
     }
     
     private func compressionSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.compressionSettings.map { settings in
-            Section(
-                header: Text(L10n.Endpoint.Advanced.Openvpn.Sections.Compression.header)
-            ) {
+            Section {
                 settings.framing.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.CompressionFraming.caption)
                         .withTrailingText($0.localizedDescription)
@@ -166,14 +164,14 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.CompressionAlgorithm.caption)
                         .withTrailingText($0.localizedDescription)
                 }
+            } header: {
+                Text(L10n.Endpoint.Advanced.Openvpn.Sections.Compression.header)
             }
         }
     }
     
     private var compressionEditableSection: some View {
-        Section(
-            header: Text(L10n.Endpoint.Advanced.Openvpn.Sections.Compression.header)
-        ) {
+        Section {
             themeTextPicker(
                 L10n.Endpoint.Advanced.Openvpn.Items.CompressionFraming.caption,
                 selection: $builder.compressionFraming ?? OpenVPN.Configuration.Fallback.compressionFraming,
@@ -186,14 +184,14 @@ extension EndpointAdvancedView.OpenVPNView {
                 values: OpenVPN.CompressionAlgorithm.available,
                 description: \.localizedDescription
             ).disabled(builder.compressionFraming == .disabled)
+        } header: {
+            Text(L10n.Endpoint.Advanced.Openvpn.Sections.Compression.header)
         }
     }
 
     private func dnsSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.dnsSettings.map { settings in
-            Section(
-                header: Text(Unlocalized.Network.dns)
-            ) {
+            Section {
                 ForEach(settings.servers, id: \.self) {
                     Text(L10n.Global.Strings.address)
                         .withTrailingText($0, copyOnTap: true)
@@ -202,15 +200,15 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.Global.Strings.domain)
                         .withTrailingText($0, copyOnTap: true)
                 }
+            } header: {
+                Text(Unlocalized.Network.dns)
             }
         }
     }
 
     private func proxySection(configuration: OpenVPN.Configuration) -> some View {
         configuration.proxySettings.map { settings in
-            Section(
-                header: Text(L10n.Global.Strings.proxy)
-            ) {
+            Section {
                 settings.proxy.map {
                     Text(L10n.Global.Strings.address)
                         .withTrailingText($0.rawValue, copyOnTap: true)
@@ -223,14 +221,14 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.NetworkSettings.Items.ProxyBypass.caption)
                         .withTrailingText($0, copyOnTap: true)
                 }
+            } header: {
+                Text(L10n.Global.Strings.proxy)
             }
         }
     }
 
     private var tlsSection: some View {
-        Section(
-            header: Text(Unlocalized.Network.tls)
-        ) {
+        Section {
             builder.ca.map { ca in
                 themeLongContentLink(
                     Unlocalized.VPN.certificateAuthority,
@@ -258,14 +256,14 @@ extension EndpointAdvancedView.OpenVPNView {
             }
             Text(L10n.Endpoint.Advanced.Openvpn.Items.Eku.caption)
                 .withTrailingText(builder.checksEKU.localizedDescriptionAsEKU)
+        } header: {
+            Text(Unlocalized.Network.tls)
         }
     }
 
     private func otherSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.otherSettings.map { settings in
-            Section(
-                header: Text(L10n.Endpoint.Advanced.Openvpn.Sections.Other.header)
-            ) {
+            Section {
                 settings.keepAlive.map {
                     Text(L10n.Global.Strings.keepalive)
                         .withTrailingText($0.localizedDescriptionAsKeepAlive)
@@ -278,6 +276,8 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.RandomEndpoint.caption)
                         .withTrailingText($0.localizedDescriptionAsRandomizeEndpoint)
                 }
+            } header: {
+                Text(L10n.Endpoint.Advanced.Openvpn.Sections.Other.header)
             }
         }
     }

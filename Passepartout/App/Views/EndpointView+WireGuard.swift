@@ -104,9 +104,7 @@ extension EndpointView.WireGuardView {
     }
 
     private func section(forPeerAt peerIndex: Int) -> some View {
-        Section(
-            header: Text(L10n.Endpoint.Wireguard.Items.Peer.caption)
-        ) {
+        Section {
             themeLongContentLink(
                 L10n.Global.Strings.publicKey,
                 content: .constant(builder.publicKey(ofPeer: peerIndex))
@@ -129,6 +127,8 @@ extension EndpointView.WireGuardView {
                 Text(L10n.Global.Strings.keepalive)
                     .withTrailingText(TimeInterval($0).localizedDescriptionAsKeepAlive)
             }
+        } header: {
+            Text(L10n.Endpoint.Wireguard.Items.Peer.caption)
         }
     }
 

@@ -79,27 +79,27 @@ extension OnDemandView {
     @ViewBuilder
     private var mainView: some View {
         if Utils.hasCellularData() {
-            Section(
-            // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-//                header: Text(L10n.Profile.Sections.Trusted.header)
-            ) {
+            Section {
                 Toggle(L10n.OnDemand.Items.Mobile.caption, isOn: $onDemand.withMobileNetwork)
+            } header: {
+                // TODO: on-demand, restore when "trusted networks" -> "on-demand"
+//                Text(L10n.Profile.Sections.Trusted.header)
             }
             Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
             }
         } else {
-            Section(
-                // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-//                header: Text(L10n.Profile.Sections.Trusted.header)
-            ) {
+            Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
+            } header: {
+                // TODO: on-demand, restore when "trusted networks" -> "on-demand"
+//                Text(L10n.Profile.Sections.Trusted.header)
             }
         }
-        Section(
-            footer: Text(L10n.OnDemand.Sections.Policy.footer)
-        ) {
+        Section {
             Toggle(L10n.OnDemand.Items.Policy.caption, isOn: $onDemand.disconnectsIfNotMatching)
+        } footer: {
+            Text(L10n.OnDemand.Sections.Policy.footer)
         }
     }
 

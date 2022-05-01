@@ -110,9 +110,7 @@ extension DiagnosticsView {
         }
         
         private var debugLogSection: some View {
-            Section(
-                footer: Text(L10n.Diagnostics.Sections.DebugLog.footer)
-            ) {
+            Section {
                 let url = debugLogURL
                 NavigationLink(L10n.DebugLog.title) {
                     url.map {
@@ -123,6 +121,8 @@ extension DiagnosticsView {
                     }
                 }.disabled(url == nil)
                 Toggle(L10n.Diagnostics.Items.MasksPrivateData.caption, isOn: $appManager.masksPrivateData)
+            } footer: {
+                Text(L10n.Diagnostics.Sections.DebugLog.footer)
             }
         }
         

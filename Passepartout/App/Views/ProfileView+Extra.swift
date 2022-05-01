@@ -36,22 +36,22 @@ extension ProfileView {
         
         var body: some View {
             if currentProfile.value.isProvider {
-                Section(
-                    footer: Text(L10n.Profile.Sections.VpnResolvesHostname.footer)
-                ) {
+                Section {
                     Toggle(
                         L10n.Profile.Items.VpnResolvesHostname.caption,
                         isOn: $currentProfile.value.networkSettings.resolvesHostname
                     )
+                } footer: {
+                    Text(L10n.Profile.Sections.VpnResolvesHostname.footer)
                 }
             }
-            Section(
-                footer: Text(L10n.Profile.Sections.VpnSurvivesSleep.footer)
-            ) {
+            Section {
                 Toggle(
                     L10n.Profile.Items.VpnSurvivesSleep.caption,
                     isOn: $currentProfile.value.networkSettings.keepsAliveOnSleep
                 )
+            } footer: {
+                Text(L10n.Profile.Sections.VpnSurvivesSleep.footer)
             }
         }
     }

@@ -69,22 +69,20 @@ struct AboutView: View {
     }
 
     private var githubSubview: some View {
-        Section(
-            header: Text(Unlocalized.About.github)
-        ) {
+        Section {
             Button(Unlocalized.About.readme) {
                 URL.openURL(readmeURL)
             }
             Button(Unlocalized.About.changelog) {
                 URL.openURL(changelogURL)
             }
+        } header: {
+            Text(Unlocalized.About.github)
         }
     }
 
     private var webSubview: some View {
-        Section(
-            header: Text(L10n.About.Sections.Web.header)
-        ) {
+        Section {
             Button(L10n.About.Items.Website.caption) {
                 URL.openURL(readmeURL)
             }
@@ -97,6 +95,8 @@ struct AboutView: View {
             Button(L10n.About.Items.PrivacyPolicy.caption) {
                 URL.openURL(privacyURL)
             }
+        } header: {
+            Text(L10n.About.Sections.Web.header)
         }
     }
 }

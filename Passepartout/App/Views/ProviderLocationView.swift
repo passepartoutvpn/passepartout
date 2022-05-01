@@ -134,9 +134,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     }
     
     private func categorySection(_ category: ProviderCategory) -> some View {
-        Section(
-            header: !category.name.isEmpty ? Text(category.name) : nil
-        ) {
+        Section {
             ForEach(filteredLocations(for: category)) { location in
                 if isEditable, #available(iOS 15, *) {
                     locationRow(location)
@@ -147,6 +145,8 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
                     locationRow(location)
                 }
             }
+        } header: {
+            !category.name.isEmpty ? Text(category.name) : nil
         }
     }
     
@@ -185,9 +185,9 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     }
     
     private var emptyFavoritesSection: some View {
-        Section(
-            footer: Text(L10n.Provider.Location.Sections.EmptyFavorites.footer)
-        ) {
+        Section {
+        } footer: {
+            Text(L10n.Provider.Location.Sections.EmptyFavorites.footer)
         }
     }
 

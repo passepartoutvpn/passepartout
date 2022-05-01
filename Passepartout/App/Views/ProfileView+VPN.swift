@@ -80,11 +80,7 @@ extension ProfileView {
         }
         
         private var activeView: some View {
-            Section(
-                header: headerView,
-                footer: Text(L10n.Profile.Sections.Vpn.footer)
-                    .xxxThemeTruncation()
-            ) {
+            Section {
                 VPNToggle(rateLimit: Constants.RateLimit.vpnToggle) {
 
                     // eligibility: donate intents if eligible for Siri
@@ -105,13 +101,16 @@ extension ProfileView {
                         withErrors: true,
                         dataCountIfAvailable: true
                     ))
+            } header: {
+                headerView
+            } footer: {
+                Text(L10n.Profile.Sections.Vpn.footer)
+                    .xxxThemeTruncation()
             }
         }
 
         private var inactiveSubview: some View {
-            Section(
-                header: headerView
-            ) {
+            Section {
                 Button(L10n.Profile.Items.UseProfile.caption) {
                     Task {
 
@@ -127,14 +126,16 @@ extension ProfileView {
                         }
                     }
                 }
+            } header: {
+                headerView
             }
         }
         
         private var loadingView: some View {
-            Section(
-                header: headerView
-            ) {
+            Section {
                 ProgressView()
+            } header: {
+                headerView
             }
         }
     }

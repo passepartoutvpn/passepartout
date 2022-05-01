@@ -97,15 +97,15 @@ struct NetworkSettingsView: View {
 
 extension NetworkSettingsView {
     private var gatewayView: some View {
-        Section(
-            header: Text(L10n.NetworkSettings.Gateway.title)
-        ) {
+        Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticGateway.themeAnimation())
 
             if !settings.isAutomaticGateway {
                 Toggle(Unlocalized.Network.ipv4, isOn: $settings.gateway.isDefaultIPv4)
                 Toggle(Unlocalized.Network.ipv6, isOn: $settings.gateway.isDefaultIPv6)
             }
+        } header: {
+            Text(L10n.NetworkSettings.Gateway.title)
         }
     }
 }
@@ -116,9 +116,7 @@ extension NetworkSettingsView {
     
     @ViewBuilder
     private var dnsView: some View {
-        Section(
-            header: Text(Unlocalized.Network.dns)
-        ) {
+        Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticDNS.themeAnimation())
 
             if !settings.isAutomaticDNS {
@@ -143,6 +141,8 @@ extension NetworkSettingsView {
                     EmptyView()
                 }
             }
+        } header: {
+            Text(Unlocalized.Network.dns)
         }
         if !settings.isAutomaticDNS && settings.dns.configurationType != .disabled {
             dnsManualServers
@@ -209,9 +209,7 @@ extension NetworkSettingsView {
     
     @ViewBuilder
     private var proxyView: some View {
-        Section(
-            header: Text(L10n.Global.Strings.proxy)
-        ) {
+        Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticProxy.themeAnimation())
 
             if !settings.isAutomaticProxy {
@@ -240,6 +238,8 @@ extension NetworkSettingsView {
                     EmptyView()
                 }
             }
+        } header: {
+            Text(L10n.Global.Strings.proxy)
         }
         if !settings.isAutomaticProxy && settings.proxy.configurationType == .manual {
             proxyManualBypassDomains
@@ -272,9 +272,7 @@ extension NetworkSettingsView {
 
 extension NetworkSettingsView {
     private var mtuView: some View {
-        Section(
-            header: Text(Unlocalized.Network.mtu)
-        ) {
+        Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticMTU.themeAnimation())
             
             if !settings.isAutomaticMTU {
@@ -285,6 +283,8 @@ extension NetworkSettingsView {
                     description: \.localizedDescriptionAsMTU
                 )
             }
+        } header: {
+            Text(Unlocalized.Network.mtu)
         }
     }
 }

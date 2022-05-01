@@ -52,9 +52,7 @@ extension ProfileView {
         }
         
         var body: some View {
-            Section(
-                header: Text(L10n.Profile.Sections.Feedback.header)
-            ) {
+            Section {
                 if isActiveProfile {
                     NavigationLink {
                         DiagnosticsView(
@@ -70,6 +68,8 @@ extension ProfileView {
                 } label: {
                     Label(Unlocalized.About.faq, systemImage: themeFAQImage)
                 }
+            } header: {
+                Text(L10n.Profile.Sections.Feedback.header)
             }
         }
     }

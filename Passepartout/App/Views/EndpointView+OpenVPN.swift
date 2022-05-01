@@ -154,12 +154,12 @@ extension EndpointView.OpenVPNView {
     }
 
     private var addressesSection: some View {
-        Section(
-            header: Text(L10n.Global.Strings.addresses)
-        ) {
+        Section {
             filteredRemotes.map {
                 ForEach($0, content: button(forEndpoint:))
             }
+        } header: {
+            Text(L10n.Global.Strings.addresses)
         }
     }
     

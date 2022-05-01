@@ -69,9 +69,7 @@ struct ProviderPresetView: View {
     }
 
     private func presetSection(_ preset: ProviderServer.Preset) -> some View {
-        Section(
-            header: Text(preset.name)
-        ) {
+        Section {
             Button {
                 selectedPreset = preset
                 presentationMode.wrappedValue.dismiss()
@@ -89,6 +87,8 @@ struct ProviderPresetView: View {
                     ).navigationTitle(preset.name)
                 }
             }
+        } header: {
+            Text(preset.name)
         }
     }
     

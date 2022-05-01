@@ -95,16 +95,17 @@ struct DonateView: View {
     }
     
     private var productsSection: some View {
-        Section(
-            header: Text(L10n.Donate.Sections.OneTime.header),
-            footer: Text(L10n.Donate.Sections.OneTime.footer)
-                .xxxThemeTruncation()
-        ) {
+        Section {
             if !productManager.isRefreshingProducts {
                 ForEach(productManager.donations, id: \.productIdentifier, content: productRow)
             } else {
                 ProgressView()
             }
+        } header: {
+            Text(L10n.Donate.Sections.OneTime.header)
+        } footer: {
+            Text(L10n.Donate.Sections.OneTime.footer)
+                .xxxThemeTruncation()
         }
     }
     

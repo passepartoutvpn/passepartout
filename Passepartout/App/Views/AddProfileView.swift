@@ -39,12 +39,13 @@ enum AddProfileView {
         let onCommit: () -> Void
         
         var body: some View {
-            Section(
-                header: Text(L10n.Global.Strings.name),
-                footer: themeErrorMessage(errorMessage)
-            ) {
+            Section {
                 TextField(L10n.Global.Placeholders.profileName, text: $profileName, onCommit: onCommit)
                     .themeValidProfileName()
+            } header: {
+                Text(L10n.Global.Strings.name)
+            } footer: {
+                themeErrorMessage(errorMessage)
             }
         }
     }
@@ -55,10 +56,10 @@ enum AddProfileView {
         @Binding var profileName: String
         
         var body: some View {
-            Section(
-                header: Text(L10n.AddProfile.Shared.Views.Existing.header)
-            ) {
+            Section {
                 ForEach(headers, content: existingProfileButton)
+            } header: {
+                Text(L10n.AddProfile.Shared.Views.Existing.header)
             }
         }
         

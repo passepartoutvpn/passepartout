@@ -85,10 +85,10 @@ struct ShortcutsView: View {
     }
     
     private var shortcutsSection: some View {
-        Section(
-            header: Text(L10n.Shortcuts.Edit.Sections.All.header)
-        ) {
+        Section {
             ForEach(relevantShortcuts, content: rowView)
+        } header: {
+            Text(L10n.Shortcuts.Edit.Sections.All.header)
         }
     }
     
@@ -99,9 +99,7 @@ struct ShortcutsView: View {
     }
     
     private var addSection: some View {
-        Section(
-            footer: Text(L10n.Shortcuts.Edit.Sections.Add.footer)
-        ) {
+        Section {
             NavigationLink(isActive: $isNavigationPresented) {
                 AddView(
                     target: target,
@@ -110,6 +108,8 @@ struct ShortcutsView: View {
             } label: {
                 Text(L10n.Shortcuts.Edit.Items.AddShortcut.caption)
             }
+        } footer: {
+            Text(L10n.Shortcuts.Edit.Sections.Add.footer)
         }
     }
 

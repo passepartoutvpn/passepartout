@@ -109,26 +109,27 @@ extension AddHostView {
         }
         
         private var encryptionSection: some View {
-            Section(
-                header: Text(L10n.Global.Strings.encryption)
-            ) {
+            Section {
                 SecureField(L10n.AddProfile.Host.Sections.Encryption.footer, text: $viewModel.encryptionPassphrase) {
                     processProfile(replacingExisting: false)
                 }
+            } header: {
+                Text(L10n.Global.Strings.encryption)
             }
         }
 
         private var completeSection: some View {
-            Section(
-                header: Text(L10n.AddProfile.Shared.title),
-                footer: themeErrorMessage(viewModel.errorMessage)
-            ) {
+            Section {
                 Text(Unlocalized.Network.url)
                     .withTrailingText(url.lastPathComponent)
                 viewModel.processedProfile.vpnProtocols.first.map {
                     Text(L10n.Global.Strings.protocol)
                         .withTrailingText($0.description)
                 }
+            } header: {
+                Text(L10n.AddProfile.Shared.title)
+            } footer: {
+                themeErrorMessage(viewModel.errorMessage)
             }
         }
         

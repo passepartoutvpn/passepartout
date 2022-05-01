@@ -57,12 +57,7 @@ extension ProfileView {
         }
         
         private var mainView: some View {
-            Section(
-                header: Text(currentProvider.fullName),
-                footer: lastInfrastructureUpdate.map {
-                    Text(L10n.Profile.Sections.ProviderInfrastructure.footer($0))
-                 }
-            ) {
+            Section {
                 NavigationLink(isActive: $isProviderLocationPresented) {
                     ProviderLocationView(
                         currentProfile: currentProfile,
@@ -85,6 +80,12 @@ extension ProfileView {
                 Button(action: refreshInfrastructure) {
                     Text(L10n.Profile.Items.Provider.Refresh.caption)
                 }.withTrailingProgress(when: isRefreshingInfrastructure)
+            } header: {
+                Text(currentProvider.fullName)
+            } footer: {
+                lastInfrastructureUpdate.map {
+                    Text(L10n.Profile.Sections.ProviderInfrastructure.footer($0))
+                }
             }
         }
 

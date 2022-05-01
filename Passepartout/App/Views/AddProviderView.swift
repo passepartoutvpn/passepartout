@@ -84,9 +84,7 @@ struct AddProviderView: View {
     }
     
     private var mainSection: some View {
-        Section(
-            footer: Text(L10n.AddProfile.Provider.Sections.Vpn.footer)
-        ) {
+        Section {
             let protos = availableVPNProtocols
             if !protos.isEmpty {
                 themeTextPicker(
@@ -97,14 +95,16 @@ struct AddProviderView: View {
                 )
             }
             updateListButton
+        } footer: {
+            Text(L10n.AddProfile.Provider.Sections.Vpn.footer)
         }
     }
     
     private var providersSection: some View {
-        Section(
-            footer: themeErrorMessage(viewModel.errorMessage)
-        ) {
+        Section {
             ForEach(providers, content: providerRow)
+        } footer: {
+            themeErrorMessage(viewModel.errorMessage)
         }.disabled(viewModel.isFetchingAnyProvider)
     }
     
