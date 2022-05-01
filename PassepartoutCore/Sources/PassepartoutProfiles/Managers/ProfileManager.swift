@@ -86,8 +86,13 @@ public class ProfileManager: ObservableObject {
         currentProfile = ObservableProfile()
     }
     
-    public func setActiveProfileId(_ id: UUID) {
+    public func setActiveProfileId(_ id: UUID) -> Bool {
+        guard isExistingProfile(withId: id) else {
+            pp_log.warning("Active profile \(id) does not exist, ignoring")
+            return false
+        }
         activeProfileId = id
+        return true
     }
 }
 
