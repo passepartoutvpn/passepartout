@@ -220,18 +220,15 @@ struct OrganizerView: View {
 
     private var sortedHeaders: [Profile.Header] {
         profileManager.headers
-            .sorted()
-        
-        // FIXME: layout, moving active profile on top breaks row animation (content flashes on Mac)
-//                .sorted {
-//                    if profileManager.isActiveProfile($0.id) {
-//                        return true
-//                    } else if profileManager.isActiveProfile($1.id) {
-//                        return false
-//                    } else {
-//                        return $0 < $1
-//                    }
-//                }
+            .sorted {
+                if profileManager.isActiveProfile($0.id) {
+                    return true
+                } else if profileManager.isActiveProfile($1.id) {
+                    return false
+                } else {
+                    return $0 < $1
+                }
+            }
     }
 }
 

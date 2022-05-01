@@ -86,7 +86,7 @@ public class VPNManager: ObservableObject {
         }
         Task {
             pp_log.info("Toggling VPN (enabled: \(currentState.isEnabled) -> \(!currentState.isEnabled))")
-            currentState.lastError = nil
+            clearLastError()
             if !currentState.isEnabled {
                 await strategy.connect(configuration: configuration)
             } else {
@@ -98,25 +98,24 @@ public class VPNManager: ObservableObject {
 
     func reinstate(_ configuration: VPNConfiguration) async {
         pp_log.info("Reinstating VPN")
-        currentState.lastError = nil
+        clearLastError()
         await strategy.reinstate(configuration: configuration)
     }
     
     func reconnect(_ configuration: VPNConfiguration) async {
         pp_log.info("Reconnecting VPN")
-        currentState.lastError = nil
         await strategy.connect(configuration: configuration)
     }
     
     public func disable() async {
         pp_log.info("Disabling VPN")
-        currentState.lastError = nil
+        clearLastError()
         await strategy.disconnect()
     }
 
     public func uninstall() async {
         pp_log.info("Uninstalling VPN")
-        currentState.lastError = nil
+        clearLastError()
         await strategy.removeConfigurations()
     }
 
@@ -126,6 +125,13 @@ public class VPNManager: ObservableObject {
 
     public func debugLogURL(forProtocol vpnProtocol: VPNProtocolType) -> URL? {
         return strategy.debugLogURL(forProtocol: vpnProtocol)
+    }
+    
+    private func clearLastError() {
+        guard currentState.lastError != nil else {
+            return
+        }
+        currentState.lastError = nil
     }
 }
 

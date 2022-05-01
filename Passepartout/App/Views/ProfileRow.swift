@@ -32,7 +32,8 @@ struct ProfileRow: View {
     let isActive: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        debugChanges()
+        return VStack(alignment: .leading, spacing: 5) {
             nameView
                 .font(.headline)
                 .themeLongTextStyle()

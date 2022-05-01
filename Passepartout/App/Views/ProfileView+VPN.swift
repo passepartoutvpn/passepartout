@@ -113,14 +113,18 @@ extension ProfileView {
                 header: headerView
             ) {
                 Button(L10n.Profile.Items.UseProfile.caption) {
-                    withAnimation {
-                        profileManager.activateCurrentProfile()
-
-                        // IMPORTANT: save immediately to keep in sync with VPN status
-                        appManager.activeProfileId = profileManager.activeHeader?.id
-                    }
                     Task {
+
+                        // do this first to not override subsequent animation
+                        // active profile may flicker due to unnecessary VPN updates
                         await vpnManager.disable()
+
+                        withAnimation {
+                            profileManager.activateCurrentProfile()
+
+                            // IMPORTANT: save immediately to keep in sync with VPN status
+                            appManager.activeProfileId = profileManager.activeHeader?.id
+                        }
                     }
                 }
             }
