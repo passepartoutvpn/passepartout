@@ -125,8 +125,6 @@ struct OrganizerView: View {
         return ZStack {
             hiddenSceneView
             mainView
-                .onAppear(perform: presentActiveProfile)
-
             if !profileManager.hasProfiles {
                 emptyView
             }
@@ -209,6 +207,8 @@ struct OrganizerView: View {
             profileLabel(forHeader: header)
         }.contextMenu {
             profileMenu(forHeader: header)
+        }.onAppear {
+            presentIfActiveProfile(header.id)
         }
     }
     
@@ -338,6 +338,13 @@ extension OrganizerView {
 }
 
 extension OrganizerView {
+    private func presentIfActiveProfile(_ id: UUID) {
+        guard id == profileManager.activeHeader?.id else {
+            return
+        }
+        presentActiveProfile()
+    }
+    
     private func presentActiveProfile() {
         guard isFirstLaunch else {
             return

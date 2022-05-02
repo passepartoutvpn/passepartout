@@ -52,6 +52,7 @@ extension View {
         let color = themeAccentColor
         return accentColor(color)
             .toggleStyle(SwitchToggleStyle(tint: color))
+            .themeNavigationViewStyle()
         #endif
     }
     
