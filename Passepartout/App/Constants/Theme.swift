@@ -156,6 +156,18 @@ extension View {
         "plus"
     }
 
+    var themeProfileActiveImage: String {
+        "circle"
+    }
+
+    var themeProfileConnectedImage: String {
+        "circle.fill"
+    }
+
+    var themeProfileInactiveImage: String {
+        "circle.dotted"
+    }
+
     var themeCheckmarkImage: String {
         "checkmark"
     }

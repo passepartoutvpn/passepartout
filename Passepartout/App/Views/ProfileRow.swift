@@ -40,8 +40,8 @@ struct ProfileRow: View {
 
             VPNStateView(isActive: isActive)
                 .font(.subheadline)
-                .themeSecondaryTextStyle()
         }.padding([.top, .bottom], 5)
+        .opacity(isActive ? 1.0 : 0.5)
     }
 
     private var nameView: some View {
@@ -52,6 +52,8 @@ struct ProfileRow: View {
         @ObservedObject private var currentVPNState: VPNManager.ObservableState
         
         private let isActive: Bool
+        
+        @State private var connectedOpacity = 1.0
 
         init(isActive: Bool) {
             currentVPNState = .shared
@@ -60,15 +62,14 @@ struct ProfileRow: View {
 
         var body: some View {
             HStack {
-//                Image(systemName: isActive ? "dot.radiowaves.up.forward" : "circle")
+                profileImage
                 if isActive {
-                    Image(systemName: "circle.fill")
                     Text(statusDescription)
+                    Spacer()
                     currentVPNState.dataCount.map {
                         Text($0.localizedDescription)
                     }
                 } else {
-                    Image(systemName: "circle")
                     Text(L10n.Tunnelkit.Vpn.unused)
                 }
             }
@@ -83,6 +84,28 @@ struct ProfileRow: View {
             } else {
                 return L10n.Organizer.Sections.active
             }
+        }
+        
+        @ViewBuilder
+        private var profileImage: some View {
+            if isConnected {
+                Image(systemName: themeProfileConnectedImage)
+                    .opacity(connectedOpacity)
+                    .onAppear {
+                        connectedOpacity = 1.0
+                        withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                            connectedOpacity = 0.05
+                        }
+                    }
+            } else if isActive {
+                Image(systemName: themeProfileActiveImage)
+            } else {
+                Image(systemName: themeProfileInactiveImage)
+            }
+        }
+        
+        private var isConnected: Bool {
+            isActive && currentVPNState.vpnStatus == .connected
         }
     }
 }
