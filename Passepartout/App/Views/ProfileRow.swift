@@ -53,7 +53,7 @@ struct ProfileRow: View {
         
         private let isActive: Bool
         
-        @State private var connectedOpacity = 1.0
+//        @State private var connectedOpacity = 1.0
 
         init(isActive: Bool) {
             currentVPNState = .shared
@@ -90,13 +90,13 @@ struct ProfileRow: View {
         private var profileImage: some View {
             if isConnected {
                 Image(systemName: themeProfileConnectedImage)
-                    .opacity(connectedOpacity)
-                    .onAppear {
-                        connectedOpacity = 1.0
-                        withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
-                            connectedOpacity = 0.05
-                        }
-                    }
+//                    .opacity(connectedOpacity)
+//                    .onAppear {
+//                        connectedOpacity = 1.0
+//                        withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+//                            connectedOpacity = 0.05
+//                        }
+//                    }
             } else if isActive {
                 Image(systemName: themeProfileActiveImage)
             } else {
