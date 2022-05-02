@@ -270,33 +270,23 @@ extension ProfileManager {
             pp_log.debug("Profile \(id) is already current profile")
             return
         }
-        currentProfile.isLoading = true
         if isExistingProfile(withId: currentProfile.value.id) {
             pp_log.info("Committing changes of former current profile \(currentProfile.value.logDescription)")
             saveCurrentProfile()
         }
-        do {
-            let result = try profileEx(withId: id)
-            pp_log.info("Current profile: \(result.profile.logDescription)")
 
+        let result = try profileEx(withId: id)
+        pp_log.info("Current profile: \(result.profile.logDescription)")
+        if result.isReady {
             currentProfile.value = result.profile
-            if result.isReady {
+        } else {
+            currentProfile.isLoading = true
+            Task {
+                try await makeProfileReady(result.profile)
+                currentProfile.value = result.profile
                 currentProfile.isLoading = false
-            } else {
-                Task {
-                    try await makeProfileReady(result.profile)
-                    currentProfile.isLoading = false
-                }
             }
-        } catch {
-            currentProfile.value = .placeholder
-            currentProfile.isLoading = false
-            throw error
         }
-    }
-    
-    public func isCurrentProfileLoading() -> Bool {
-        currentProfile.isLoading
     }
     
     public func isCurrentProfileExisting() -> Bool {
