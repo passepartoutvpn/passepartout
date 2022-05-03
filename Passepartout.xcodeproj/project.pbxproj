@@ -121,6 +121,7 @@
 		0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */; };
 		0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */; };
 		0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */; };
+		0EF8C5A828213C510053CE89 /* OrganizerView+Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */; };
 		0EF98A6D281F3A9B005C0D3A /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -337,6 +338,7 @@
 		0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderView.swift; sourceTree = "<group>"; };
 		0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 		0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderViewModel.swift; sourceTree = "<group>"; };
+		0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Profiles.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,6 +444,7 @@
 				0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */,
 				0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */,
 				0E3CD47E280DA14B007075C0 /* OrganizerView+AddMenu.swift */,
+				0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */,
 				0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */,
 				0EE11CD1280D8317003BE431 /* OrganizerView+SettingsMenu.swift */,
 				0EF0FAF527DD0211007EB181 /* PaywallView.swift */,
@@ -957,6 +960,7 @@
 				0E71ACF927C12E4800F85C4B /* CreditsView.swift in Sources */,
 				0ED89C1527DE0A0C008B36D6 /* Shortcut.swift in Sources */,
 				0E34A2B927CAA96A00C73B67 /* OpenVPN+L10n.swift in Sources */,
+				0EF8C5A828213C510053CE89 /* OrganizerView+Profiles.swift in Sources */,
 				0E3CD483280DAE92007075C0 /* ProfileView+MainMenu.swift in Sources */,
 				0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */,
 				0E71ACEB27C1060D00F85C4B /* EndpointView.swift in Sources */,

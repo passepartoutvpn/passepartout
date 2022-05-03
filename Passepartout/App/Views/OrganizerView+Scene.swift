@@ -30,8 +30,6 @@ extension OrganizerView {
     struct SceneView: View {
         @Environment(\.scenePhase) private var scenePhase
 
-        @ObservedObject private var appManager: AppManager
-        
         @ObservedObject private var profileManager: ProfileManager
         
         @ObservedObject private var vpnManager: VPNManager
@@ -43,7 +41,6 @@ extension OrganizerView {
         @Binding private var didHandleSubreddit: Bool
         
         init(alertType: Binding<AlertType?>, didHandleSubreddit: Binding<Bool>) {
-            appManager = .shared
             profileManager = .shared
             vpnManager = .shared
             productManager = .shared
