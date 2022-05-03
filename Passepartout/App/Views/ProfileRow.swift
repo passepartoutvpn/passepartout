@@ -41,7 +41,6 @@ struct ProfileRow: View {
             VPNStateView(isActive: isActive)
                 .font(.subheadline)
         }.padding([.top, .bottom], 10)
-        .opacity(isActive ? 1.0 : 0.5)
     }
 
     private var nameView: some View {

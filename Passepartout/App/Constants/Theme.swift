@@ -157,7 +157,7 @@ extension View {
     }
 
     var themeProfileActiveImage: String {
-        "circle"
+        "checkmark.circle"
     }
 
     var themeProfileConnectedImage: String {
@@ -165,7 +165,7 @@ extension View {
     }
 
     var themeProfileInactiveImage: String {
-        "circle.dashed"
+        "circle"
     }
 
     var themeCheckmarkImage: String {
