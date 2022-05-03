@@ -165,7 +165,7 @@ extension View {
     }
 
     var themeProfileInactiveImage: String {
-        "circle.dotted"
+        "circle.dashed"
     }
 
     var themeCheckmarkImage: String {
