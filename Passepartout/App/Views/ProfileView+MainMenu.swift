@@ -76,7 +76,7 @@ extension ProfileView {
                 )
                 DuplicateButton(
                     header: currentProfile.value.header,
-                    switchCurrentProfile: true
+                    setAsCurrent: true
                 )
                 uninstallVPNButton
                 Divider()
@@ -191,12 +191,12 @@ extension ProfileView {
         
         private let header: Profile.Header
         
-        private let switchCurrentProfile: Bool
+        private let setAsCurrent: Bool
         
-        init(header: Profile.Header, switchCurrentProfile: Bool) {
+        init(header: Profile.Header, setAsCurrent: Bool) {
             profileManager = .shared
             self.header = header
-            self.switchCurrentProfile = switchCurrentProfile
+            self.setAsCurrent = setAsCurrent
         }
         
         var body: some View {
@@ -208,12 +208,7 @@ extension ProfileView {
         }
 
         private func duplicateProfile(withId id: UUID) {
-            guard let copy = profileManager.duplicateProfile(withId: id) else {
-                return
-            }
-            if switchCurrentProfile {
-                profileManager.currentProfileId = copy.id
-            }
+            profileManager.duplicateProfile(withId: id, setAsCurrent: setAsCurrent)
         }
     }
 }

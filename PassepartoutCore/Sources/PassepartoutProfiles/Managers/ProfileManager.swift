@@ -72,6 +72,8 @@ public class ProfileManager: ObservableObject {
     
     public let didCreateProfile = PassthroughSubject<Profile, Never>()
     
+    private var pendingProfiles: [UUID: Profile] = [:]
+    
     private var cancellables: Set<AnyCancellable> = []
 
     public init(
@@ -172,8 +174,12 @@ extension ProfileManager {
 
         // IMPORTANT: fetch live copy first (see intents)
         if isCurrentProfile(id) {
-            pp_log.debug("Profile \(currentProfile.value.logDescription) found in memory")
+            pp_log.debug("Profile \(currentProfile.value.logDescription) found in memory (current profile)")
             return currentProfile.value
+        }
+        if let pending = pendingProfiles[id] {
+            pp_log.debug("Profile \(pending.logDescription) found in memory (pending profile)")
+            return pending
         }
 
         guard let profile = strategy.profile(withId: id) else {
@@ -239,16 +245,34 @@ extension ProfileManager {
         removeProfiles(withIds: ids)
     }
     
-    public func duplicateProfile(withId id: UUID) -> Profile? {
+    public func duplicateProfile(withId id: UUID, setAsCurrent: Bool) {
         guard let source = liveProfile(withId: id) else {
-            return nil
+            return
         }
         let copy = source
             .withNewId()
             .renamedUniquely(withLastUpdate: false)
-        
-        saveProfile(copy, isActive: nil)
-        return copy
+
+        //
+        // XXX: we want to batch save the duplicate together with the former current
+        // profile, which is done in setCurrentProfile(). however, setting
+        // currentProfileId (for navigation), requires the profile ID to exist in
+        // the persistent store when looked up via liveProfile(withId:)
+        //
+        // the pendingProfiles workaround allows setting currentProfileId to a
+        // profile that has not been persisted yet
+        //
+        if setAsCurrent {
+            if #available(iOS 15, *) {
+                pendingProfiles[copy.id] = copy
+                currentProfileId = copy.id
+                pendingProfiles.removeValue(forKey: copy.id)
+            } else {
+                setCurrentProfile(copy)
+            }
+        } else {
+            strategy.saveProfile(copy)
+        }
     }
 
     public func persist() {

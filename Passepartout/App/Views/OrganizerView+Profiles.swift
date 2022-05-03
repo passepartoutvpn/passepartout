@@ -105,7 +105,7 @@ extension OrganizerView {
         private func profileMenu(forHeader header: Profile.Header) -> some View {
             ProfileView.DuplicateButton(
                 header: header,
-                switchCurrentProfile: false
+                setAsCurrent: false
             )
         }
 
