@@ -50,8 +50,21 @@ public class ProfileManager: ObservableObject {
     // MARK: Observables
 
     @Published public private(set) var activeProfileId: UUID? {
-        didSet {
-            pp_log.debug("Active profile updated: \(activeProfileId?.uuidString ?? "nil")")
+        willSet {
+            pp_log.debug("Setting active profile: \(activeProfileId?.uuidString ?? "nil")")
+        }
+    }
+
+    @Published public var currentProfileId: UUID? {
+        willSet {
+            pp_log.debug("Setting current profile: \(newValue?.uuidString ?? "nil")")
+            guard let id = newValue else {
+                return
+            }
+            guard let profile = liveProfile(withId: id) else {
+                return
+            }
+            setCurrentProfile(profile)
         }
     }
 
@@ -79,13 +92,12 @@ public class ProfileManager: ObservableObject {
         currentProfile = ObservableProfile()
     }
     
-    public func setActiveProfileId(_ id: UUID) -> Bool {
+    public func setActiveProfileId(_ id: UUID) {
         guard isExistingProfile(withId: id) else {
             pp_log.warning("Active profile \(id) does not exist, ignoring")
-            return false
+            return
         }
         activeProfileId = id
-        return true
     }
 }
 
@@ -139,15 +151,15 @@ extension ProfileManager {
         guard let id = activeProfileId else {
             return nil
         }
-        return profile(withId: id)
+        return liveProfile(withId: id)
     }
 
     public func activateProfile(_ profile: Profile) {
         saveProfile(profile, isActive: true)
     }
 
-    public func profileEx(withId id: UUID) throws -> ProfileEx {
-        guard let profile = profile(withId: id) else {
+    public func liveProfileEx(withId id: UUID) throws -> ProfileEx {
+        guard let profile = liveProfile(withId: id) else {
             pp_log.error("Profile not found: \(id)")
             throw PassepartoutError.missingProfile
         }
@@ -155,7 +167,7 @@ extension ProfileManager {
         return (profile, isProfileReady(profile))
     }
 
-    private func profile(withId id: UUID) -> Profile? {
+    private func liveProfile(withId id: UUID) -> Profile? {
         pp_log.debug("Searching profile \(id)")
 
         // IMPORTANT: fetch live copy first (see intents)
@@ -228,58 +240,75 @@ extension ProfileManager {
     }
     
     public func duplicateProfile(withId id: UUID) -> Profile? {
-        guard let source = profile(withId: id) else {
+        guard let source = liveProfile(withId: id) else {
             return nil
         }
         let copy = source
             .withNewId()
             .renamedUniquely(withLastUpdate: false)
-
+        
         saveProfile(copy, isActive: nil)
         return copy
     }
 
     public func persist() {
-        pp_log.info("Persisting profiles")
-        saveCurrentProfile()
+        pp_log.info("Persisting pending profiles")
+        if !currentProfile.value.isPlaceholder {
+            saveProfile(currentProfile.value, isActive: nil, updateIfCurrent: false)
+        }
     }
 }
 
 // MARK: Observation
 
 extension ProfileManager {
-    public func loadCurrentProfile(withId id: UUID) throws {
+    private func setCurrentProfile(_ profile: Profile) {
         guard !currentProfile.isLoading else {
             pp_log.warning("Already loading another profile")
             return
         }
-        guard id != currentProfile.value.id else {
-            pp_log.debug("Profile \(id) is already current profile")
+        guard profile.id != currentProfile.value.id else {
+            pp_log.debug("Profile \(profile.logDescription) is already current profile")
             return
         }
+
+        pp_log.info("Set current profile: \(profile.logDescription)")
+
+        //
+        // IMPORTANT: this method is called on app launch if there is an active profile, which
+        // means that carelessly calling .saveProfiles() may trigger an unnecessary
+        // willUpdateProfiles() and a potential animation in subscribers (e.g. OrganizerView)
+        //
+        // current profile, when set on launch, is never fetched from pendingProfiles, so we take
+        // care of checking that to avoid an undesired save
+        //
+        var profilesToSave: [Profile] = []
         if isExistingProfile(withId: currentProfile.value.id) {
-            pp_log.info("Committing changes of former current profile \(currentProfile.value.logDescription)")
-            saveCurrentProfile()
+            pp_log.info("Defer saving of former current profile \(currentProfile.value.logDescription)")
+            profilesToSave.append(currentProfile.value)
+        }
+        if let _ = pendingProfiles[profile.id] {
+            pp_log.info("Defer saving of transient current profile \(profile.logDescription)")
+            profilesToSave.append(profile)
+        }
+        defer {
+            if !profilesToSave.isEmpty {
+                strategy.saveProfiles(profilesToSave)
+            }
         }
 
-        let result = try profileEx(withId: id)
-        pp_log.info("Current profile: \(result.profile.logDescription)")
-        if result.isReady {
-            currentProfile.value = result.profile
+        if isProfileReady(profile) {
+            currentProfile.value = profile
         } else {
             currentProfile.isLoading = true
             Task {
-                try await makeProfileReady(result.profile)
-                currentProfile.value = result.profile
+                try await makeProfileReady(profile)
+                currentProfile.value = profile
                 currentProfile.isLoading = false
             }
         }
     }
-    
-    public func isCurrentProfileExisting() -> Bool {
-        isExistingProfile(withId: currentProfile.value.id)
-    }
-    
+
     public func isCurrentProfileActive() -> Bool {
         currentProfile.value.id == activeProfileId
     }
@@ -290,10 +319,6 @@ extension ProfileManager {
 
     public func activateCurrentProfile() {
         saveProfile(currentProfile.value, isActive: true, updateIfCurrent: false)
-    }
-    
-    public func saveCurrentProfile() {
-        saveProfile(currentProfile.value, isActive: nil, updateIfCurrent: false)
     }
 }
 
@@ -366,7 +391,7 @@ extension ProfileManager {
             headers.forEach { dupHeader in
                 let uniqueHeader = dupHeader.renamedUniquely(withLastUpdate: true)
                 pp_log.debug("Renaming duplicate profile \(dupHeader.logDescription) to \(uniqueHeader.logDescription)")
-                guard var uniqueProfile = profile(withId: uniqueHeader.id) else {
+                guard var uniqueProfile = liveProfile(withId: uniqueHeader.id) else {
                     pp_log.warning("Skipping profile \(dupHeader.logDescription) renaming, not found")
                     return
                 }

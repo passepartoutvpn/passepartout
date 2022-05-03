@@ -40,6 +40,8 @@ extension OrganizerView {
         
         @Binding private var didHandleSubreddit: Bool
         
+        @State private var isFirstLaunch = true
+
         init(alertType: Binding<AlertType?>, didHandleSubreddit: Binding<Bool>) {
             profileManager = .shared
             vpnManager = .shared
@@ -58,8 +60,26 @@ extension OrganizerView {
         }
         
         private func onAppear() {
-            if !didHandleSubreddit {
+            guard didHandleSubreddit else {
                 alertType = .subscribeReddit
+                return
+            }
+
+            //
+            // FIXME: iPad portrait/compact, loading current profile adds ProfileView() twice
+            //
+            // - from MainView
+            // - from NavigationLink destination in OrganizerView
+            //
+            // can notice becase "Back" needs to be tapped twice to show sidebar
+            // workaround: set active profile but do not load as current (prevents NavigationLink activation)
+            //
+            guard isFirstLaunch else {
+                return
+            }
+            isFirstLaunch = false
+            if !isiPadPortrait, let activeProfileId = profileManager.activeProfileId {
+                profileManager.currentProfileId = activeProfileId
             }
         }
 
@@ -82,6 +102,11 @@ extension OrganizerView {
         
         private func persist() {
             profileManager.persist()
+        }
+        
+        private var isiPadPortrait: Bool {
+            let device: UIDevice = .current
+            return device.userInterfaceIdiom == .pad && device.orientation.isPortrait
         }
     }
 }

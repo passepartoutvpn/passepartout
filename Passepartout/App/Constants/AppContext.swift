@@ -139,12 +139,8 @@ class AppContext {
         profileManager.observeUpdates()
         vpnManager.observeUpdates()
 
-        if let activeProfileId = appManager.activeProfileId, profileManager.setActiveProfileId(activeProfileId) {
-            do {
-                try profileManager.loadCurrentProfile(withId: activeProfileId)
-            } catch {
-                pp_log.warning("Unable to load active profile: \(error)")
-            }
+        if let activeProfileId = appManager.activeProfileId {
+            profileManager.setActiveProfileId(activeProfileId)
         }
 
         // app

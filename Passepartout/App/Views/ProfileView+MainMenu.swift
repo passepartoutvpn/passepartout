@@ -212,11 +212,7 @@ extension ProfileView {
                 return
             }
             if switchCurrentProfile {
-                do {
-                    try profileManager.loadCurrentProfile(withId: copy.id)
-                } catch {
-                    pp_log.warning("Unable to load profile duplicate: \(error)")
-                }
+                profileManager.currentProfileId = copy.id
             }
         }
     }

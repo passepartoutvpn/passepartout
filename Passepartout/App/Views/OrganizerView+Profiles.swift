@@ -35,32 +35,6 @@ extension OrganizerView {
         // just to observe changes in profiles eligibility
         @ObservedObject private var productManager: ProductManager
         
-        @State private var isFirstLaunch = true
-
-        @State private var presentedProfileId: UUID?
-
-        private var presentedAndLoadedProfileId: Binding<UUID?> {
-            .init {
-                presentedProfileId
-            } set: {
-                guard $0 != presentedProfileId else {
-                    return
-                }
-                guard let id = $0 else {
-                    presentedProfileId = nil
-                    return
-                }
-                presentedProfileId = id
-
-                // load profile contextually with navigation
-                do {
-                    try profileManager.loadCurrentProfile(withId: id)
-                } catch {
-                    pp_log.error("Unable to load profile: \(error)")
-                }
-            }
-        }
-
         init() {
             profileManager = .shared
             providerManager = .shared
@@ -74,15 +48,10 @@ extension OrganizerView {
                 if !profileManager.hasProfiles {
                     emptyView
                 }
-            }
-
-            // events
-            .onAppear {
+            }.onAppear {
                 performMigrationsIfNeeded()
-            }.onChange(of: profileManager.headers) {
-                dismissSelectionIfDeleted(headers: $0)
             }.onReceive(profileManager.didCreateProfile) {
-                presentedAndLoadedProfileId.wrappedValue = $0.id
+                profileManager.currentProfileId = $0.id
             }
         }
         
@@ -116,14 +85,12 @@ extension OrganizerView {
         }
 
         private func profileRow(forHeader header: Profile.Header) -> some View {
-            NavigationLink(tag: header.id, selection: presentedAndLoadedProfileId) {
+            NavigationLink(tag: header.id, selection: $profileManager.currentProfileId) {
                 ProfileView()
             } label: {
                 profileLabel(forHeader: header)
             }.contextMenu {
                 profileMenu(forHeader: header)
-            }.onAppear {
-                presentIfActiveProfile(header.id)
             }
         }
         
@@ -155,46 +122,12 @@ extension OrganizerView {
                 }
         }
 
-        private func presentIfActiveProfile(_ id: UUID) {
-            guard id == profileManager.activeProfileId else {
-                return
-            }
-            presentActiveProfile()
-        }
-        
-        private func presentActiveProfile() {
-            guard isFirstLaunch else {
-                return
-            }
-            isFirstLaunch = false
-
-            guard let activeProfileId = profileManager.activeProfileId else {
-                return
-            }
-
-            // FIXME: iPad portrait/compact, preselecting profile on launch adds ProfileView() twice
-            // can notice becase "Back" needs to be tapped twice to show sidebar
-            if themeIdiom != .pad {
-                presentedProfileId = activeProfileId
-            }
-        }
-        
         private func removeProfiles(at offsets: IndexSet) {
             let currentHeaders = sortedHeaders
             var toDelete: [UUID] = []
             offsets.forEach {
                 toDelete.append(currentHeaders[$0].id)
             }
-            removeProfiles(withIds: toDelete)
-        }
-
-        private func removeProfiles(withIds toDelete: [UUID]) {
-
-            // clear selection before removal to avoid triggering a bogus navigation push
-            if toDelete.contains(profileManager.currentProfile.value.id) {
-                presentedProfileId = nil
-            }
-
             withAnimation {
                 profileManager.removeProfiles(withIds: toDelete)
             }
@@ -203,12 +136,6 @@ extension OrganizerView {
         private func performMigrationsIfNeeded() {
             Task {
                 await AppManager.shared.doMigrations(profileManager)
-            }
-        }
-        
-        private func dismissSelectionIfDeleted(headers: [Profile.Header]) {
-            if let _ = presentedProfileId, !profileManager.isCurrentProfileExisting() {
-                presentedProfileId = nil
             }
         }
     }
