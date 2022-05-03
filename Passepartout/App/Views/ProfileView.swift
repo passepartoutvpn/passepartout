@@ -96,7 +96,7 @@ struct ProfileView: View {
                 ExtraSection(currentProfile: currentProfile)
                 DiagnosticsSection(currentProfile: currentProfile)
             }
-        }
+        }.themeAnimation(on: isLoading)
     }
     
     @ViewBuilder

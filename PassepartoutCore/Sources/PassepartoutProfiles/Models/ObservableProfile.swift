@@ -32,7 +32,10 @@ public class ObservableProfile: ValueHolder, ObservableObject {
     @Published public var value: Profile
     
     public var name: String {
-        !value.header.isPlaceholder ? value.header.name : ""
+        guard !isLoading && !value.isPlaceholder else {
+            return ""
+        }
+        return value.header.name
     }
 
     public init() {
