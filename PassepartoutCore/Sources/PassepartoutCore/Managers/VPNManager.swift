@@ -148,15 +148,16 @@ extension VPNManager {
     }
 
     private func observeProfileManager() {
-        profileManager.willUpdateActiveId
+        profileManager.$activeProfileId
             .removeDuplicates()
             .sink { newId in
                 Task {
                     await self.willUpdateActiveId(newId)
                 }
             }.store(in: &cancellables)
-        
-        profileManager.willUpdateCurrentProfile
+
+        profileManager.currentProfile.$value
+            .dropFirst()
             .removeDuplicates()
             .sink { newProfile in
                 Task {

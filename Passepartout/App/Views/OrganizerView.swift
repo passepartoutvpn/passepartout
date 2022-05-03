@@ -339,7 +339,7 @@ extension OrganizerView {
 
 extension OrganizerView {
     private func presentIfActiveProfile(_ id: UUID) {
-        guard id == profileManager.activeHeader?.id else {
+        guard id == profileManager.activeProfileId else {
             return
         }
         presentActiveProfile()
@@ -355,7 +355,7 @@ extension OrganizerView {
         guard alertType == nil else {
             return
         }
-        guard let activeProfileId = profileManager.activeHeader?.id else {
+        guard let activeProfileId = profileManager.activeProfileId else {
             return
         }
 

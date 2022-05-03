@@ -47,23 +47,16 @@ public class ProfileManager: ObservableObject {
     
     public var availabilityFilter: ((Profile.Header) -> Bool)?
 
-    private var activeProfileId: UUID? {
-        willSet {
-            willUpdateActiveId.send(newValue)
-        }
+    // MARK: Observables
+
+    @Published public private(set) var activeProfileId: UUID? {
         didSet {
             pp_log.debug("Active profile updated: \(activeProfileId?.uuidString ?? "nil")")
         }
     }
 
-    // MARK: Observables
-
     public let currentProfile: ObservableProfile
     
-    public let willUpdateActiveId = PassthroughSubject<UUID?, Never>()
-
-    public let willUpdateCurrentProfile = PassthroughSubject<Profile, Never>()
-
     public let didCreateProfile = PassthroughSubject<Profile, Never>()
     
     private var cancellables: Set<AnyCancellable> = []
@@ -119,13 +112,7 @@ extension ProfileManager {
     }
     
     public var hasActiveProfile: Bool {
-        activeHeader != nil
-    }
-
-    public var activeHeader: Profile.Header? {
-        availableHeaders.first {
-            $0.id == activeProfileId
-        }
+        activeProfileId != nil
     }
 
     public func isActiveProfile(_ id: UUID) -> Bool {
@@ -149,10 +136,10 @@ extension ProfileManager {
 
 extension ProfileManager {
     public var activeProfile: Profile? {
-        guard let activeHeader = activeHeader else {
+        guard let id = activeProfileId else {
             return nil
         }
-        return profile(withId: activeHeader.id)
+        return profile(withId: id)
     }
 
     public func activateProfile(_ profile: Profile) {
@@ -317,13 +304,6 @@ extension ProfileManager {
             .sink {
                 self.willUpdateProfiles($0)
             }.store(in: &cancellables)
-
-        currentProfile.$value
-            .dropFirst()
-            .removeDuplicates()
-            .sink {
-                self.willUpdateCurrentProfile($0)
-            }.store(in: &cancellables)
     }
     
     private func willUpdateProfiles(_ newHeaders: [UUID: Profile.Header]) {
@@ -354,13 +334,6 @@ extension ProfileManager {
         Task {
             fixDuplicateNames(in: newHeaders)
         }
-    }
-    
-    private func willUpdateCurrentProfile(_ newProfile: Profile) {
-        pp_log.debug("Current profile updated: \(newProfile.logDescription)")
-        // observe current profile explicitly (no objectWillChange)
-        
-        willUpdateCurrentProfile.send(newProfile)
     }
     
     private func fixDuplicateNames(in newHeaders: [UUID: Profile.Header]) {

@@ -122,7 +122,7 @@ extension ProfileView {
                             profileManager.activateCurrentProfile()
 
                             // IMPORTANT: save immediately to keep in sync with VPN status
-                            appManager.activeProfileId = profileManager.activeHeader?.id
+                            appManager.activeProfileId = profileManager.activeProfileId
                         }
                     }
                 }

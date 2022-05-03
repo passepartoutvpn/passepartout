@@ -35,7 +35,7 @@ extension VPNManager {
             pp_log.warning("VPN is already connected")
             return
         }
-        guard let profileId = profileManager.activeHeader?.id else {
+        guard let profileId = profileManager.activeProfileId else {
             pp_log.warning("No active profile")
             return
         }
