@@ -195,7 +195,9 @@ extension OrganizerView {
                 presentedProfileId = nil
             }
 
-            profileManager.removeProfiles(withIds: toDelete)
+            withAnimation {
+                profileManager.removeProfiles(withIds: toDelete)
+            }
         }
         
         private func performMigrationsIfNeeded() {
