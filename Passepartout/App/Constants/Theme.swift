@@ -57,16 +57,30 @@ extension View {
 
 extension View {
     func themeGlobal() -> some View {
-        #if targetEnvironment(macCatalyst)
-        self
-        #else
-        let color = themeAccentColor
-        return accentColor(color)
-            .toggleStyle(SwitchToggleStyle(tint: color))
-            .themeNavigationViewStyle()
-        #endif
+        themeNavigationViewStyle()
+            .themeTint()
+            .themeToggleStyle()
+            .menuStyle(.borderlessButton)
     }
-    
+
+    @ViewBuilder
+    private func themeTint() -> some View {
+        if #available(iOS 15, *) {
+            tint(.accentColor)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    private func themeToggleStyle() -> some View {
+        if #available(iOS 15, *) {
+            toggleStyle(.switch)
+        } else {
+            toggleStyle(SwitchToggleStyle(tint: .accentColor))
+        }
+    }
+
     @ViewBuilder
     private func themeNavigationViewStyle() -> some View {
         switch themeIdiom {
@@ -80,29 +94,22 @@ extension View {
 
     func themePrimaryView() -> some View {
         #if targetEnvironment(macCatalyst)
-        navigationBarHidden(true)
+        navigationBarTitleDisplayMode(.inline)
         #else
         navigationBarTitleDisplayMode(.large)
+            .navigationTitle(Unlocalized.appName)
         #endif
     }
 
     func themeSecondaryView() -> some View {
-        #if targetEnvironment(macCatalyst)
-        navigationBarHidden(true)
-        #else
         navigationBarTitleDisplayMode(.inline)
             .listStyle(.insetGrouped)
-        #endif
     }
 }
 
 // MARK: Colors
 
 extension View {
-    fileprivate var themeAccentColor: Color {
-        Color(Asset.Assets.accentColor.color)
-    }
-    
     fileprivate var themePrimaryBackgroundColor: Color {
         Color(Asset.Assets.primaryColor.color)
     }
@@ -307,13 +314,13 @@ extension String {
 // MARK: Styles
 
 extension View {
+    func themeAccentForegroundStyle() -> some View {
+        foregroundColor(.accentColor)
+    }
+
     var themePrimaryBackground: some View {
         themePrimaryBackgroundColor
             .ignoresSafeArea()
-    }
-
-    func themeAccentForegroundStyle() -> some View {
-        foregroundColor(themeAccentColor)
     }
 
     func themeSecondaryTextStyle() -> some View {

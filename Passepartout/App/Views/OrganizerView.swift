@@ -112,7 +112,6 @@ struct OrganizerView: View {
             allowsMultipleSelection: false,
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
-        .navigationTitle(Unlocalized.appName)
         .themePrimaryView()
     }
     

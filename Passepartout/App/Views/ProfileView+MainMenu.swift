@@ -83,26 +83,22 @@ extension ProfileView {
                 deleteProfileButton
             } label: {
                 themeSettingsMenuImage.asSystemImage
-            }.actionSheet(item: $actionSheetType) {
+            }.alert(item: $actionSheetType) {
                 switch $0 {
                 case .uninstallVPN:
-                    return ActionSheet(
-                        title: Text(L10n.Profile.Alerts.UninstallVpn.message),
-                        message: nil,
-                        buttons: [
-                            .destructive(Text(uninstallVPNTitle), action: uninstallVPN),
-                            .cancel(Text(cancelTitle))
-                        ]
+                    return Alert(
+                        title: Text(uninstallVPNTitle),
+                        message: Text(L10n.Profile.Alerts.UninstallVpn.message),
+                        primaryButton: .destructive(Text(uninstallVPNTitle), action: uninstallVPN),
+                        secondaryButton: .cancel(Text(cancelTitle))
                     )
                     
                 case .deleteProfile:
-                    return ActionSheet(
-                        title: Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name)),
-                        message: nil,
-                        buttons: [
-                            .destructive(Text(deleteProfileTitle), action: removeProfile),
-                            .cancel(Text(cancelTitle))
-                        ]
+                    return Alert(
+                        title: Text(deleteProfileTitle),
+                        message: Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name)),
+                        primaryButton: .destructive(Text(deleteProfileTitle), action: removeProfile),
+                        secondaryButton: .cancel(Text(cancelTitle))
                     )
                 }
             }
