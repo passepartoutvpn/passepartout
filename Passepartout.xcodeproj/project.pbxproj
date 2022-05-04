@@ -122,7 +122,6 @@
 		0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */; };
 		0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */; };
 		0EF8C5A828213C510053CE89 /* OrganizerView+Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */; };
-		0EF98A6D281F3A9B005C0D3A /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -347,7 +346,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E9C3B6F27FC573E00D0F02E /* CloudKit.framework in Frameworks */,
-				0EF98A6D281F3A9B005C0D3A /* NetworkExtension.framework in Frameworks */,
 				0EED0BB92733CEDA00C9FC68 /* PassepartoutCore in Frameworks */,
 				0E53249D27D28FC7002565C3 /* Kvitto in Frameworks */,
 			);
