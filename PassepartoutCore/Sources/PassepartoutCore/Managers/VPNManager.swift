@@ -149,6 +149,7 @@ extension VPNManager {
 
     private func observeProfileManager() {
         profileManager.$activeProfileId
+            .dropFirst()
             .removeDuplicates()
             .sink { newId in
                 Task {
@@ -167,11 +168,12 @@ extension VPNManager {
     }
     
     private func willUpdateActiveId(_ newId: UUID?) async {
-        guard let _ = newId else {
+        guard let newId = newId else {
             pp_log.info("No active profile, disconnecting VPN...")
             await disable()
             return
         }
+        pp_log.debug("Active profile: \(newId)")
     }
     
     private func willUpdateCurrentProfile(_ newProfile: Profile) async {

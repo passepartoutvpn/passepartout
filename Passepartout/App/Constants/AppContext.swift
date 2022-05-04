@@ -136,12 +136,12 @@ class AppContext {
             self.isEligibleForOnDemandRules()
         }
 
-        profileManager.observeUpdates()
-        vpnManager.observeUpdates()
-
         if let activeProfileId = appManager.activeProfileId {
             profileManager.setActiveProfileId(activeProfileId)
         }
+
+        profileManager.observeUpdates()
+        vpnManager.observeUpdates()
 
         // app
 
