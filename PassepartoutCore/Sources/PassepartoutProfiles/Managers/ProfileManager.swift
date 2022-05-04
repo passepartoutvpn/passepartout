@@ -51,7 +51,7 @@ public class ProfileManager: ObservableObject {
 
     @Published public private(set) var activeProfileId: UUID? {
         willSet {
-            pp_log.debug("Setting active profile: \(activeProfileId?.uuidString ?? "nil")")
+            pp_log.debug("Setting active profile: \(newValue?.uuidString ?? "nil")")
         }
     }
 
