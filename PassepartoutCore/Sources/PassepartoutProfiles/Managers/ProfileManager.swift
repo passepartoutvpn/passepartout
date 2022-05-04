@@ -132,12 +132,10 @@ extension ProfileManager {
         id == activeProfileId
     }
     
-    // existence in persistent storage
     public func isExistingProfile(withId id: UUID) -> Bool {
         allHeaders[id] != nil
     }
     
-    // existence in persistent storage
     public func isExistingProfile(withName name: String) -> Bool {
         allHeaders.contains {
             $0.value.name == name
