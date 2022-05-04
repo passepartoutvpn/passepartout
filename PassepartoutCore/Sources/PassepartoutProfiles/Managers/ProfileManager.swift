@@ -263,13 +263,13 @@ extension ProfileManager {
         // profile that has not been persisted yet
         //
         if setAsCurrent {
+            pendingProfiles[copy.id] = copy
             if #available(iOS 15, *) {
-                pendingProfiles[copy.id] = copy
                 currentProfileId = copy.id
-                pendingProfiles.removeValue(forKey: copy.id)
             } else {
                 setCurrentProfile(copy)
             }
+            pendingProfiles.removeValue(forKey: copy.id)
         } else {
             strategy.saveProfile(copy)
         }
