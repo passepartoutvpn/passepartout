@@ -55,15 +55,25 @@ public class ProfileManager: ObservableObject {
         }
     }
 
-    @Published public var currentProfileId: UUID? {
+    @Published private var internalCurrentProfileId: UUID? {
         willSet {
             pp_log.debug("Setting current profile: \(newValue?.uuidString ?? "nil")")
+        }
+    }
+
+    public var currentProfileId: UUID? {
+        get {
+            internalCurrentProfileId
+        }
+        set {
             guard let id = newValue else {
+                internalCurrentProfileId = nil
                 return
             }
             guard let profile = liveProfile(withId: id) else {
                 return
             }
+            internalCurrentProfileId = id
             setCurrentProfile(profile)
         }
     }
@@ -71,8 +81,6 @@ public class ProfileManager: ObservableObject {
     public let currentProfile: ObservableProfile
     
     public let didCreateProfile = PassthroughSubject<Profile, Never>()
-    
-    private var pendingProfiles: [UUID: Profile] = [:]
     
     private var cancellables: Set<AnyCancellable> = []
 
@@ -177,10 +185,6 @@ extension ProfileManager {
             pp_log.debug("Profile \(currentProfile.value.logDescription) found in memory (current profile)")
             return currentProfile.value
         }
-        if let pending = pendingProfiles[id] {
-            pp_log.debug("Profile \(pending.logDescription) found in memory (pending profile)")
-            return pending
-        }
 
         guard let profile = strategy.profile(withId: id) else {
             assertionFailure("Profile in headers yet not found in persistent store")
@@ -253,23 +257,15 @@ extension ProfileManager {
             .withNewId()
             .renamedUniquely(withLastUpdate: false)
 
-        //
-        // XXX: we want to batch save the duplicate together with the former current
-        // profile, which is done in setCurrentProfile(). however, setting
-        // currentProfileId (for navigation), requires the profile ID to exist in
-        // the persistent store when looked up via liveProfile(withId:)
-        //
-        // the pendingProfiles workaround allows setting currentProfileId to a
-        // profile that has not been persisted yet
-        //
         if setAsCurrent {
-            pendingProfiles[copy.id] = copy
+
+            // iOS 14 goes crazy when changing binding of a presented NavigationLink
             if #available(iOS 15, *) {
-                currentProfileId = copy.id
-            } else {
-                setCurrentProfile(copy)
+                internalCurrentProfileId = copy.id
             }
-            pendingProfiles.removeValue(forKey: copy.id)
+            
+            // autosaves copy if non-existing in persistent store
+            setCurrentProfile(copy)
         } else {
             strategy.saveProfile(copy)
         }
@@ -303,15 +299,15 @@ extension ProfileManager {
         // means that carelessly calling .saveProfiles() may trigger an unnecessary
         // willUpdateProfiles() and a potential animation in subscribers (e.g. OrganizerView)
         //
-        // current profile, when set on launch, is never fetched from pendingProfiles, so we take
-        // care of checking that to avoid an undesired save
+        // current profile, when set on launch, is always existing, so we take care
+        // checking that to avoid an undesired save
         //
         var profilesToSave: [Profile] = []
         if isExistingProfile(withId: currentProfile.value.id) {
             pp_log.info("Defer saving of former current profile \(currentProfile.value.logDescription)")
             profilesToSave.append(currentProfile.value)
         }
-        if let _ = pendingProfiles[profile.id] {
+        if !isExistingProfile(withId: profile.id) {
             pp_log.info("Defer saving of transient current profile \(profile.logDescription)")
             profilesToSave.append(profile)
         }
