@@ -45,8 +45,6 @@ public class ProfileManager: ObservableObject {
     
     private let strategy: ProfileManagerStrategy
     
-    public var availabilityFilter: ((Profile.Header) -> Bool)?
-
     // MARK: Observables
 
     @Published public private(set) var activeProfileId: UUID? {
@@ -118,19 +116,12 @@ extension ProfileManager {
         strategy.allHeaders
     }
     
-    private var availableHeaders: [Profile.Header] {
-        if let availabilityFilter = availabilityFilter {
-            return allHeaders.values.filter(availabilityFilter)
-        }
-        return Array(allHeaders.values)
-    }
-
     public var headers: [Profile.Header] {
-        availableHeaders
+        Array(allHeaders.values)
     }
     
     public var hasProfiles: Bool {
-        !availableHeaders.isEmpty
+        !allHeaders.isEmpty
     }
     
     public var hasActiveProfile: Bool {
@@ -141,12 +132,12 @@ extension ProfileManager {
         id == activeProfileId
     }
     
-    // existence in persistent storage (skips availability)
+    // existence in persistent storage
     public func isExistingProfile(withId id: UUID) -> Bool {
         allHeaders[id] != nil
     }
     
-    // existence in persistent storage (skips availability)
+    // existence in persistent storage
     public func isExistingProfile(withName name: String) -> Bool {
         allHeaders.contains {
             $0.value.name == name
@@ -188,10 +179,6 @@ extension ProfileManager {
 
         guard let profile = strategy.profile(withId: id) else {
             assertionFailure("Profile in headers yet not found in persistent store")
-            return nil
-        }
-        guard availabilityFilter?(profile.header) ?? true else {
-            pp_log.warning("Profile \(profile.logDescription) not available due to filter")
             return nil
         }
         guard !profile.vpnProtocols.isEmpty else {

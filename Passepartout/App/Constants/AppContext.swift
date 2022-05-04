@@ -128,9 +128,6 @@ class AppContext {
 
         // core
 
-        profileManager.availabilityFilter = {
-            self.isEligibleProfile(withHeader: $0)
-        }
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
@@ -154,18 +151,6 @@ class AppContext {
                     self.reviewer.reportEvent()
                 }
         }.store(in: &cancellables)
-    }
-    
-    // eligibility: hide providers not found or not purchased
-    private func isEligibleProfile(withHeader header: Profile.Header) -> Bool {
-        guard let providerName = header.providerName else {
-            return true // always eligible for non-provider profiles
-        }
-        guard productManager.isEligible(forProvider: providerName) else {
-//            pp_log.debug("Not eligible for provider \(metadata.name)")
-            return false
-        }
-        return true
     }
     
     // eligibility: ignore network settings if ineligible
