@@ -62,7 +62,7 @@ struct ProfileView: View {
     var body: some View {
         debugChanges()
         return Group {
-            if isExisting {
+            if isLoading || isExisting {
                 mainView
             } else {
                 WelcomeView()
