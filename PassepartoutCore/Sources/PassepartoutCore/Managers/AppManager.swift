@@ -106,11 +106,11 @@ public class AppManager: ObservableObject {
         CoreConfiguration.masksPrivateData = masksPrivateData
     }
     
-    public func doMigrations(_ profileManager: ProfileManager) async {
+    public func doMigrations(_ profileManager: ProfileManager) {
 //        profileManager.removeAllProfiles()
         guard didMigrateToV2 else {
             isDoingMigrations = true
-            let migrated = await doMigrateToV2()
+            let migrated = doMigrateToV2()
             if !migrated.isEmpty {
                 pp_log.info("Migrating \(migrated.count) profiles")
                 migrated.forEach {

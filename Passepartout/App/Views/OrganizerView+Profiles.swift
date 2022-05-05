@@ -135,7 +135,7 @@ extension OrganizerView {
         
         private func performMigrationsIfNeeded() {
             Task {
-                await AppManager.shared.doMigrations(profileManager)
+                AppManager.shared.doMigrations(profileManager)
             }
         }
     }

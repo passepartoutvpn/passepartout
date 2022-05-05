@@ -52,7 +52,7 @@ extension AppManager {
         return "group.com.algoritmico.Passepartout"
     }
 
-    func doMigrateToV2() async -> [Profile] {
+    func doMigrateToV2() -> [Profile] {
         var migrated: [Profile] = []
         pp_log.info("Migrating data to v2")
         
@@ -126,7 +126,7 @@ extension AppManager {
                         let json = try provider.asJSON()
 //                        pp_log.error(json)
 
-                        let result = try await migratedV1Profile(csJSON, providerMap: json)
+                        let result = try migratedV1Profile(csJSON, providerMap: json)
 //                        pp_log.info(result.profile)
 //                        print(">>> Account: \(result.profile.username) -> \(result.password)")
                         
@@ -212,7 +212,7 @@ extension AppManager {
     // presetId
     // favoriteGroupIds
     //
-    private func migratedV1Profile(_ cs: Map, providerMap: Map) async throws -> Profile {
+    private func migratedV1Profile(_ cs: Map, providerMap: Map) throws -> Profile {
         guard let name = providerMap["name"] as? String else {
             throw MigrationError.missingProviderName
         }
