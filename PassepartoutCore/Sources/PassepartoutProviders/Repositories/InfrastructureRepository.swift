@@ -49,12 +49,7 @@ class InfrastructureRepository: Repository {
                 return provider
             }()
 
-            let request = CDInfrastructure.fetchRequest()
-            request.predicate = NSPredicate(
-                format: "provider.name == %@ AND vpnProtocol == %@",
-                infrastructure.name,
-                vpnProtocol.rawValue
-            )
+            let request = fetchRequest(infrastructure.name, vpnProtocol)
             let existing = try context.fetch(request)
             existing.forEach(context.delete)
             
@@ -75,15 +70,10 @@ class InfrastructureRepository: Repository {
     }
 
     func defaultUsername(forProviderWithName name: ProviderName, vpnProtocol: VPNProtocolType) -> String? {
-        let request = CDInfrastructure.fetchRequest()
+        let request = fetchRequest(name, vpnProtocol)
         request.sortDescriptors = [
             .init(keyPath: \CDInfrastructure.lastUpdate, ascending: false)
         ]
-        request.predicate = NSPredicate(
-            format: "provider.name == %@ AND vpnProtocol == %@",
-            name,
-            vpnProtocol.rawValue
-        )
         request.relationshipKeyPathsForPrefetching = [
             "defaults"
         ]
@@ -99,19 +89,11 @@ class InfrastructureRepository: Repository {
         }
     }
 
-    func lastInfrastructureUpdate(
-        withName name: ProviderName,
-        vpnProtocol: VPNProtocolType
-    ) -> Date? {
-        let request = CDInfrastructure.fetchRequest()
+    func lastInfrastructureUpdate(withName name: ProviderName, vpnProtocol: VPNProtocolType) -> Date? {
+        let request = fetchRequest(name, vpnProtocol)
         request.sortDescriptors = [
             .init(keyPath: \CDInfrastructure.lastUpdate, ascending: false)
         ]
-        request.predicate = NSPredicate(
-            format: "provider.name == %@ AND vpnProtocol == %@",
-            name,
-            vpnProtocol.rawValue
-        )
         request.relationshipKeyPathsForPrefetching = [
             "provider",
             "provider.infrastructures"
@@ -129,6 +111,16 @@ class InfrastructureRepository: Repository {
             Utils.logFetchError(#file, #function, #line, error)
             return nil
         }
+    }
+    
+    private func fetchRequest(_ name: ProviderName, _ vpnProtocol: VPNProtocolType) -> NSFetchRequest<CDInfrastructure> {
+        let request = CDInfrastructure.fetchRequest()
+        request.predicate = NSPredicate(
+            format: "provider.name == %@ AND vpnProtocol == %@",
+            name,
+            vpnProtocol.rawValue
+        )
+        return request
     }
     
     private func providerDTO(forName name: ProviderName) throws -> CDProvider? {

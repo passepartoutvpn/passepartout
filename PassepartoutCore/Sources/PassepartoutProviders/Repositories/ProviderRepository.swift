@@ -58,10 +58,10 @@ class ProviderRepository: Repository {
 
     func provider(withName name: ProviderName) -> ProviderMetadata? {
         let request = CDProvider.fetchRequest()
+        request.predicate = NSPredicate(format: "name == %@", name)
         request.sortDescriptors = [
             .init(keyPath: \CDProvider.lastUpdate, ascending: false)
         ]
-        request.predicate = NSPredicate(format: "name == %@", name)
         request.relationshipKeyPathsForPrefetching = [
             "infrastructures"
         ]

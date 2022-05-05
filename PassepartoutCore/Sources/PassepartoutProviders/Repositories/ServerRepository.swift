@@ -139,9 +139,8 @@ class ServerRepository: Repository {
 
     func anyDefaultServer(forProviderWithName providerName: ProviderName, vpnProtocol: VPNProtocolType) -> ProviderServer? {
         let request = CDInfrastructureServer.fetchRequest()
-        let format = "countryCode == category.infrastructure.defaults.countryCode AND category.infrastructure.provider.name == %@ AND category.infrastructure.vpnProtocol == %@"
         request.predicate = NSPredicate(
-            format: format,
+            format: "countryCode == category.infrastructure.defaults.countryCode AND category.infrastructure.provider.name == %@ AND category.infrastructure.vpnProtocol == %@",
             providerName,
             vpnProtocol.rawValue
         )

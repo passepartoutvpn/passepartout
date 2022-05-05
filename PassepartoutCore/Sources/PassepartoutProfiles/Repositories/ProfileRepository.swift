@@ -65,13 +65,13 @@ class ProfileRepository: Repository {
 
     func profile(withId id: UUID) -> Profile? {
         let request = CDProfile.fetchRequest()
-        request.sortDescriptors = [
-            .init(keyPath: \CDProfile.lastUpdate, ascending: false)
-        ]
         request.predicate = NSPredicate(
             format: "uuid == %@",
             id.uuidString
         )
+        request.sortDescriptors = [
+            .init(keyPath: \CDProfile.lastUpdate, ascending: false)
+        ]
         do {
             let results = try context.fetch(request)
             guard let recent = results.first else {
