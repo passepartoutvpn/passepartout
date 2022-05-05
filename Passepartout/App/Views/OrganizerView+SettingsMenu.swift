@@ -65,7 +65,7 @@ extension OrganizerView {
                 Divider()
                 aboutButton
             } label: {
-                themeSettingsMenuImage.asSystemImage
+                themeInfoMenuImage.asSystemImage
             }
         }
 

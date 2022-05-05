@@ -170,6 +170,10 @@ extension View {
         "text.justify"
     }
     
+    var themeInfoMenuImage: String {
+        "info.circle"
+    }
+
     var themeDonateImage: String {
         "giftcard"
     }
@@ -179,7 +183,7 @@ extension View {
     }
 
     var themeWriteReviewImage: String {
-        "heart"
+        "star"
     }
     
     var themeAddMenuImage: String {
