@@ -55,6 +55,8 @@ class InfrastructureRepository: Repository {
                 infrastructure.name,
                 vpnProtocol.rawValue
             )
+            let existing = try context.fetch(request)
+            existing.forEach(context.delete)
             
             let dto = InfrastructureMapper(
                 context,
