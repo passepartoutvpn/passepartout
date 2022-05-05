@@ -128,6 +128,28 @@ extension View {
         "logo"
     }
     
+    var themeCheckmarkImage: String {
+        "checkmark"
+    }
+    
+    var themeShareImage: String {
+        "square.and.arrow.up"
+    }
+    
+    var themeCloseImage: String {
+        "xmark"
+    }
+    
+    var themeConceilImage: String {
+        "eye.slash"
+    }
+
+    var themeRevealImage: String {
+        "eye"
+    }
+
+    // MARK: Organizer
+    
     func themeAssetsProviderImage(_ providerName: ProviderName) -> String {
         "providers/\(providerName)"
     }
@@ -148,38 +170,6 @@ extension View {
         "text.justify"
     }
     
-    var themeSettingsMenuImage: String {
-        "ellipsis.circle"
-    }
-
-    var themeAddMenuImage: String {
-        "plus"
-    }
-
-    var themeProfileActiveImage: String {
-        "checkmark.circle"
-    }
-
-    var themeProfileConnectedImage: String {
-        "circle.fill"
-    }
-
-    var themeProfileInactiveImage: String {
-        "circle"
-    }
-
-    var themeCheckmarkImage: String {
-        "checkmark"
-    }
-    
-    var themeStatusImage: String {
-        "network"
-    }
-
-    var themeShortcutsImage: String {
-        "mic"
-    }
-
     var themeDonateImage: String {
         "giftcard"
     }
@@ -192,8 +182,39 @@ extension View {
         "heart"
     }
     
-    var themeCloseImage: String {
-        "xmark"
+    var themeAddMenuImage: String {
+        "plus"
+    }
+    
+    var themeProfileActiveImage: String {
+        "checkmark.circle"
+    }
+
+    var themeProfileConnectedImage: String {
+        "circle.fill"
+    }
+
+    var themeProfileInactiveImage: String {
+        "circle"
+    }
+
+    // MARK: Profile
+
+    var themeSettingsMenuImage: String {
+        "ellipsis.circle"
+    }
+
+    var themeShortcutsImage: String {
+        "mic"
+    }
+
+    var themeRenameProfileImage: String {
+        "highlighter"
+//        "character.cursor.ibeam"
+    }
+    
+    var themeDuplicateImage: String {
+        "doc.on.doc"
     }
     
     var themeUninstallImage: String {
@@ -202,15 +223,6 @@ extension View {
     
     var themeDeleteImage: String {
         "trash"
-    }
-    
-    var themeDuplicateImage: String {
-        "doc.on.doc"
-    }
-    
-    var themeRenameProfileImage: String {
-        "highlighter"
-//        "character.cursor.ibeam"
     }
     
     var themeVPNProtocolImage: String {
@@ -258,18 +270,6 @@ extension View {
         "questionmark.diamond"
     }
 
-    var themeConceilImage: String {
-        "eye.slash"
-    }
-
-    var themeRevealImage: String {
-        "eye"
-    }
-
-    var themeShareImage: String {
-        "square.and.arrow.up"
-    }
-    
     func themeFavoritesImage(_ active: Bool) -> String {
         active ? "bookmark.fill" : "bookmark"
     }
