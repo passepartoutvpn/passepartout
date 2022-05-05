@@ -34,6 +34,10 @@ extension OrganizerView {
 
         @Binding var alertType: AlertType?
         
+        private var isTestBuild: Bool {
+            Constants.App.isBeta
+        }
+        
         private let redditURL = Constants.URLs.subreddit
         
         private let shareMessage = L10n.Global.Messages.share
@@ -54,10 +58,12 @@ extension OrganizerView {
                 Menu(L10n.Menu.All.Share.title) {
                     shareMenu
                 }
+                if isTestBuild {
+                    Divider()
+                    testSection
+                }
                 Divider()
                 aboutButton
-//                RemoveVPNSection()
-//                betaSection
             } label: {
                 themeSettingsMenuImage.asSystemImage
             }
@@ -112,6 +118,17 @@ extension OrganizerView {
         
         private func presentAbout() {
             modalType = .about
+        }
+    }
+}
+
+extension OrganizerView.SettingsMenu {
+    private var testSection: some View {
+        Button("Export providers") {
+            guard let urls = AppContext.shared.urlsForProviders else {
+                return
+            }
+            modalType = .exportProviders(urls)
         }
     }
 }

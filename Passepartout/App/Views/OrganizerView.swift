@@ -38,6 +38,8 @@ struct OrganizerView: View {
 
         case about
         
+        case exportProviders([URL])
+        
         // XXX: alert ids
         var id: Int {
             switch self {
@@ -50,6 +52,8 @@ struct OrganizerView: View {
             case .share: return 5
                 
             case .about: return 6
+                
+            case .exportProviders: return 7
             }
         }
     }
@@ -157,6 +161,9 @@ extension OrganizerView {
             NavigationView {
                 AboutView()
             }.themeGlobal()
+            
+        case .exportProviders(let urls):
+            ActivityView(activityItems: urls)
         }
     }
     

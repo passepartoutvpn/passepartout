@@ -76,6 +76,17 @@ public class Persistence {
         }
     }
     
+    public var containerURLs: [URL]? {
+        guard let url = container.persistentStoreDescriptions.first?.url else {
+            return nil
+        }
+        return [
+            url,
+            url.deletingPathExtension().appendingPathExtension("sqlite-shm"),
+            url.deletingPathExtension().appendingPathExtension("sqlite-wal")
+        ]
+    }
+    
 //    public func remoteChangesPublisher() -> AnyPublisher<Void, Never> {
 //        NotificationCenter.default.publisher(
 //            for: .NSPersistentStoreRemoteChange,

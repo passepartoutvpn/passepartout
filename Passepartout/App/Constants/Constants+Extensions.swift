@@ -52,6 +52,14 @@ extension Constants {
                 return "\(identifier).WireGuardTunnel"
             }
         }
+
+        static var isBeta: Bool {
+            #if targetEnvironment(simulator)
+            return true
+            #else
+            return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+            #endif
+        }
     }
 
     enum InApp {
@@ -67,7 +75,7 @@ extension Constants {
 
                 return testAppType
             }
-            return isBeta ? .beta : .freemium
+            return App.isBeta ? .beta : .freemium
         }
 
         #if targetEnvironment(macCatalyst)
@@ -87,14 +95,6 @@ extension Constants {
             return []
         }
         #endif
-
-        private static var isBeta: Bool {
-            #if targetEnvironment(simulator)
-            return true
-            #else
-            return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-            #endif
-        }
     }
 }
 

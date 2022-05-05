@@ -33,8 +33,18 @@ import PassepartoutServices
 class AppContext {
     static let shared = AppContext()
     
-    private let persistenceManager: PersistenceManager
+    private let profilesPersistence: Persistence
     
+    private let providersPersistence: Persistence
+    
+    var urlsForProfiles: [URL]? {
+        profilesPersistence.containerURLs
+    }
+
+    var urlsForProviders: [URL]? {
+        providersPersistence.containerURLs
+    }
+
     let appManager: AppManager
     
     let providerManager: ProviderManager
@@ -63,7 +73,13 @@ class AppContext {
         appManager.configureLogging()
         pp_log.info("Logging to: \(appManager.logFile!)")
 
-        persistenceManager = PersistenceManager(author: appManager.persistenceAuthor)
+        let persistenceManager = PersistenceManager(author: appManager.persistenceAuthor)
+        profilesPersistence = persistenceManager.profilesPersistence(
+            withName: Constants.Persistence.profilesContainerName
+        )
+        providersPersistence = persistenceManager.providersPersistence(
+            withName: Constants.Persistence.providersContainerName
+        )
 
         providerManager = ProviderManager(
             appBuild: Constants.Global.appBuildNumber,
@@ -75,9 +91,7 @@ class AppContext {
                 Constants.Repos.api,
                 timeout: Constants.Services.connectivityTimeout
             ),
-            persistence: persistenceManager.providersPersistence(
-                withName: Constants.Persistence.providersContainerName
-            )
+            persistence: providersPersistence
         )
 
         profileManager = ProfileManager(
@@ -85,9 +99,7 @@ class AppContext {
             appGroup: Constants.App.appGroupId,
             keychainLabel: Unlocalized.Keychain.passwordLabel,
             strategy: ProfileManager.CoreDataStrategy(
-                persistence: persistenceManager.profilesPersistence(
-                    withName: Constants.Persistence.profilesContainerName
-                )
+                persistence: profilesPersistence
             )
         )
 
