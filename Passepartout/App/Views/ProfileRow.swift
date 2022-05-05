@@ -40,6 +40,7 @@ struct ProfileRow: View {
 
             VPNStateView(isActive: isActive)
                 .font(.subheadline)
+                .themeSecondaryTextStyle()
         }.padding([.top, .bottom], 10)
     }
 
