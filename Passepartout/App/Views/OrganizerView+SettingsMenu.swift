@@ -35,7 +35,7 @@ extension OrganizerView {
         @Binding var alertType: AlertType?
         
         private var isTestBuild: Bool {
-            Constants.App.isBeta
+            Constants.App.isBeta || Constants.InApp.appType == .beta
         }
         
         private let redditURL = Constants.URLs.subreddit
