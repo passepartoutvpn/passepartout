@@ -51,6 +51,14 @@ extension Utils {
         return isFound
     }
     #endif
+    
+    public static func hasEthernet() -> Bool {
+        #if targetEnvironment(macCatalyst) || os(macOS)
+        true
+        #else
+        false
+        #endif
+    }
 
     public static func currentWifiSSID() async -> String? {
         #if targetEnvironment(simulator)

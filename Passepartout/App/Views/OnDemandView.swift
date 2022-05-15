@@ -88,6 +88,16 @@ extension OnDemandView {
             Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
             }
+        } else if Utils.hasEthernet() {
+            Section {
+                Toggle(L10n.OnDemand.Items.Ethernet.caption, isOn: $onDemand.withEthernetNetwork)
+            } header: {
+                // TODO: on-demand, restore when "trusted networks" -> "on-demand"
+//                Text(L10n.Profile.Sections.Trusted.header)
+            }
+            Section {
+                SSIDList(withSSIDs: $onDemand.withSSIDs)
+            }
         } else {
             Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
