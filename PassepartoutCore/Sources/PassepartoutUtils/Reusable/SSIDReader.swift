@@ -51,9 +51,11 @@ public class SSIDReader: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     private func notifyCurrentSSID() {
-        let currentSSID = Utils.currentWifiNetworkName() ?? ""
-        publisher.send(currentSSID)
-        cancellables.removeAll()
+        Task {
+            let currentSSID = await Utils.currentWifiSSID() ?? ""
+            publisher.send(currentSSID)
+            cancellables.removeAll()
+        }
     }
 
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

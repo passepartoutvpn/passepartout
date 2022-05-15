@@ -24,11 +24,7 @@
 //
 
 import Foundation
-#if os(iOS)
-import SystemConfiguration.CaptiveNetwork
-#else
-import CoreWLAN
-#endif
+import NetworkExtension
 
 extension Utils {
     #if targetEnvironment(simulator)
@@ -56,32 +52,21 @@ extension Utils {
     }
     #endif
 
-    #if targetEnvironment(simulator)
-    public static func currentWifiNetworkName() -> String? {
-//        return nil
-        return ["My Home Network", "Safe Wi-Fi", "Friend's House"].randomElement()
-    }
-    #else
-    public static func currentWifiNetworkName() -> String? {
-        #if os(iOS)
-        guard let interfaceNames = CNCopySupportedInterfaces() as? [CFString] else {
-            return nil
-        }
-        for name in interfaceNames {
-            guard let iface = CNCopyCurrentNetworkInfo(name) as? [String: Any] else {
-                continue
-            }
-            guard let ssid = iface[kCNNetworkInfoKeySSID as String] as? String else {
-                continue
-            }
-            return ssid
-        }
-        return nil
+    public static func currentWifiSSID() async -> String? {
+        #if targetEnvironment(simulator)
+        ["My Home Network", "Safe Wi-Fi", "Friend's House"].randomElement()
         #else
-        return CWWiFiClient.shared().interface()?.ssid()
+        await withCheckedContinuation { continuation in
+            NEHotspotNetwork.fetchCurrent {
+                guard let network = $0 else {
+                    continuation.resume(with: .success(nil))
+                    return
+                }
+                continuation.resume(with: .success(network.ssid))
+            }
+        }
         #endif
     }
-    #endif
 }
 
 extension Utils {

@@ -144,11 +144,11 @@ extension IntentDispatcher {
     }
 
     private static func handleCurrentNetwork(_ trust: Bool, _ vpnManager: VPNManager) {
-        guard let ssid = Utils.currentWifiNetworkName() else {
-            pp_log.warning("Not connected to any Wi-Fi or no permission to read location (needs 'While Using' or 'Always')")
-            return
-        }
         Task {
+            guard let ssid = await Utils.currentWifiSSID() else {
+                pp_log.warning("Not connected to any Wi-Fi or no permission to read location (needs 'While Using' or 'Always')")
+                return
+            }
             do {
                 try await vpnManager.modifyActiveProfile {
                     pp_log.info("Wi-Fi SSID: \(ssid)")
