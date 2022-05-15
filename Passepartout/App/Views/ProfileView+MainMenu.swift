@@ -66,42 +66,59 @@ extension ProfileView {
         }
 
         var body: some View {
+            mainView
+                .alert(item: $actionSheetType) {
+                    switch $0 {
+                    case .uninstallVPN:
+                        return Alert(
+                            title: Text(uninstallVPNTitle),
+                            message: Text(L10n.Profile.Alerts.UninstallVpn.message),
+                            primaryButton: .destructive(Text(uninstallVPNTitle), action: uninstallVPN),
+                            secondaryButton: .cancel(Text(cancelTitle))
+                        )
+                        
+                    case .deleteProfile:
+                        return Alert(
+                            title: Text(deleteProfileTitle),
+                            message: Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name)),
+                            primaryButton: .destructive(Text(deleteProfileTitle), action: removeProfile),
+                            secondaryButton: .cancel(Text(cancelTitle))
+                        )
+                    }
+                }
+        }
+
+        private var mainView: some View {
             Menu {
-                ShortcutsButton(
-                    modalType: $modalType
-                )
+                shortcutsButton
                 Divider()
-                RenameButton(
-                    modalType: $modalType
-                )
-                DuplicateButton(
-                    header: currentProfile.value.header,
-                    setAsCurrent: true
-                )
+                renameButton
+                duplicateButton
                 uninstallVPNButton
                 Divider()
                 deleteProfileButton
             } label: {
                 themeSettingsMenuImage.asSystemImage
-            }.alert(item: $actionSheetType) {
-                switch $0 {
-                case .uninstallVPN:
-                    return Alert(
-                        title: Text(uninstallVPNTitle),
-                        message: Text(L10n.Profile.Alerts.UninstallVpn.message),
-                        primaryButton: .destructive(Text(uninstallVPNTitle), action: uninstallVPN),
-                        secondaryButton: .cancel(Text(cancelTitle))
-                    )
-                    
-                case .deleteProfile:
-                    return Alert(
-                        title: Text(deleteProfileTitle),
-                        message: Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name)),
-                        primaryButton: .destructive(Text(deleteProfileTitle), action: removeProfile),
-                        secondaryButton: .cancel(Text(cancelTitle))
-                    )
-                }
             }
+        }
+        
+        private var shortcutsButton: some View {
+            ShortcutsButton(
+                modalType: $modalType
+            )
+        }
+        
+        private var renameButton: some View {
+            RenameButton(
+                modalType: $modalType
+            )
+        }
+
+        private var duplicateButton: some View {
+            DuplicateButton(
+                header: currentProfile.value.header,
+                setAsCurrent: true
+            )
         }
         
         private var uninstallVPNButton: some View {
