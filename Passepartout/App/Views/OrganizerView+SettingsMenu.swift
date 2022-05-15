@@ -1,5 +1,5 @@
 //
-//  OrganizerView+SettingsMenu.swift
+//  InfoMenu.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/18/22.
@@ -26,103 +26,152 @@
 import SwiftUI
 import PassepartoutCore
 
-extension OrganizerView {
-    struct SettingsMenu: View {
-        @ObservedObject private var productManager: ProductManager
+struct InfoMenu: View {
+    enum ModalType: Identifiable {
+        case donate
         
-        @Binding var modalType: ModalType?
+        case share([Any])
 
-        @Binding var alertType: AlertType?
+        case about
         
-        private var isTestBuild: Bool {
-            Constants.App.isBeta || Constants.InApp.appType == .beta
+        case exportProviders([URL])
+        
+        // XXX: alert ids
+        var id: Int {
+            switch self {
+            case .donate: return 4
+                
+            case .share: return 5
+                
+            case .about: return 6
+                
+            case .exportProviders: return 7
+            }
         }
-        
-        private let redditURL = Constants.URLs.subreddit
-        
-        private let shareMessage = L10n.Global.Messages.share
+    }
+    
+    @ObservedObject private var productManager: ProductManager
+    
+    @State private var modalType: ModalType?
+    
+    private var isTestBuild: Bool {
+        Constants.App.isBeta || Constants.InApp.appType == .beta
+    }
+    
+    private let redditURL = Constants.URLs.subreddit
+    
+    private let shareMessage = L10n.Global.Messages.share
 
-        private let appName = Unlocalized.appName
+    private let appName = Unlocalized.appName
 
-        init(modalType: Binding<ModalType?>, alertType: Binding<AlertType?>) {
-            productManager = .shared
-            _modalType = modalType
-            _alertType = alertType
-        }
-        
-        var body: some View {
-            Menu {
-                Menu(L10n.Menu.All.Support.title) {
-                    supportMenu
-                }
-                Menu(L10n.Menu.All.Share.title) {
-                    shareMenu
-                }
-                if isTestBuild {
-                    Divider()
-                    testSection
-                }
+    init() {
+        productManager = .shared
+    }
+    
+    var body: some View {
+        Menu {
+            Menu(L10n.Menu.All.Support.title) {
+                supportMenu
+            }
+            Menu(L10n.Menu.All.Share.title) {
+                shareMenu
+            }
+            if isTestBuild {
                 Divider()
-                aboutButton
+                testSection
+            }
+            Divider()
+            aboutButton
+        } label: {
+            themeInfoMenuImage.asSystemImage
+        }.sheet(item: $modalType, content: presentedModal)
+    }
+    
+    @ViewBuilder
+    private func presentedModal(_ modalType: ModalType) -> some View {
+        switch modalType {
+        case .donate:
+            NavigationView {
+                DonateView()
+            }.themeGlobal()
+
+        case .share(let items):
+            ActivityView(activityItems: items)
+
+        case .about:
+            NavigationView {
+                AboutView()
+            }.themeGlobal()
+            
+        case .exportProviders(let urls):
+            ActivityView(activityItems: urls)
+        }
+    }
+    
+    private var isModalPresented: Binding<Bool> {
+        .init {
+            modalType != nil
+        } set: {
+            if !$0 {
+                modalType = nil
+            }
+        }
+    }
+
+
+    private var supportMenu: some View {
+        Group {
+            Button {
+                modalType = .donate
             } label: {
-                themeInfoMenuImage.asSystemImage
+                Label(L10n.Donate.title, systemImage: themeDonateImage)
+            }.disabled(!productManager.canMakePayments())
+
+            Button {
+                URL.openURL(redditURL)
+            } label: {
+                Label(L10n.Menu.Contextual.Support.joinCommunity, systemImage: themeRedditImage)
+            }
+            Button(action: submitReview) {
+                Label(L10n.Menu.Contextual.Support.writeReview, systemImage: themeWriteReviewImage)
             }
         }
+    }
 
-        private var supportMenu: some View {
-            Group {
-                Button {
-                    modalType = .donate
-                } label: {
-                    Label(L10n.Donate.title, systemImage: themeDonateImage)
-                }.disabled(!productManager.canMakePayments())
+    private var shareMenu: some View {
+        Group {
+            Button(L10n.Menu.Contextual.shareTwitter, action: shareOnTwitter)
+            Button(L10n.Menu.Contextual.shareGeneric, action: shareWithFriend)
+        }
+    }
+    
+    private var aboutButton: some View {
+        Button(L10n.Menu.All.About.title("")) {
+            presentAbout()
+        }
+    }
 
-                Button {
-                    URL.openURL(redditURL)
-                } label: {
-                    Label(L10n.Menu.Contextual.Support.joinCommunity, systemImage: themeRedditImage)
-                }
-                Button(action: submitReview) {
-                    Label(L10n.Menu.Contextual.Support.writeReview, systemImage: themeWriteReviewImage)
-                }
-            }
-        }
+    private func shareOnTwitter() {
+        let url = Unlocalized.Social.twitterIntent(withMessage: shareMessage)
+        URL.openURL(url)
+    }
 
-        private var shareMenu: some View {
-            Group {
-                Button(L10n.Menu.Contextual.shareTwitter, action: shareOnTwitter)
-                Button(L10n.Menu.Contextual.shareGeneric, action: shareWithFriend)
-            }
-        }
-        
-        private var aboutButton: some View {
-            Button(L10n.Menu.All.About.title("")) {
-                presentAbout()
-            }
-        }
+    private func shareWithFriend() {
+        let shareMessage = "\(shareMessage) \(Constants.URLs.website)"
+        modalType = .share([shareMessage])
+    }
 
-        private func shareOnTwitter() {
-            let url = Unlocalized.Social.twitterIntent(withMessage: shareMessage)
-            URL.openURL(url)
-        }
-
-        private func shareWithFriend() {
-            let shareMessage = "\(shareMessage) \(Constants.URLs.website)"
-            modalType = .share([shareMessage])
-        }
-
-        private func submitReview() {
-            let reviewURL = Reviewer.urlForReview(withAppId: Constants.App.appStoreId)
-            URL.openURL(reviewURL)
-        }
-        
-        private func presentAbout() {
-            modalType = .about
-        }
+    private func submitReview() {
+        let reviewURL = Reviewer.urlForReview(withAppId: Constants.App.appStoreId)
+        URL.openURL(reviewURL)
+    }
+    
+    private func presentAbout() {
+        modalType = .about
     }
 }
 
-extension OrganizerView.SettingsMenu {
+extension InfoMenu {
     private var testSection: some View {
         Button("Export providers") {
             guard let urls = AppContext.shared.urlsForProviders else {

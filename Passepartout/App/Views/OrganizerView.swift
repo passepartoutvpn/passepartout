@@ -27,37 +27,6 @@ import SwiftUI
 import PassepartoutCore
 
 struct OrganizerView: View {
-    enum ModalType: Identifiable {
-        case addProvider
-
-        case addHost(URL, Bool)
-        
-        case donate
-        
-        case share([Any])
-
-        case about
-        
-        case exportProviders([URL])
-        
-        // XXX: alert ids
-        var id: Int {
-            switch self {
-            case .addProvider: return 1
-
-            case .addHost: return 2
-                
-            case .donate: return 4
-                
-            case .share: return 5
-                
-            case .about: return 6
-                
-            case .exportProviders: return 7
-            }
-        }
-    }
-    
     enum AlertType: Identifiable {
         case subscribeReddit
         
@@ -73,7 +42,7 @@ struct OrganizerView: View {
         }
     }
 
-    @State private var modalType: ModalType?
+    @State private var addProfileModalType: AddProfileMenu.ModalType?
 
     @State private var alertType: AlertType?
 
@@ -92,20 +61,15 @@ struct OrganizerView: View {
             ProfilesList()
         }.toolbar {
             ToolbarItem(placement: .primaryAction) {
-                AddMenu(
-                    modalType: $modalType,
+                AddProfileMenu(
+                    modalType: $addProfileModalType,
                     isHostFileImporterPresented: $isHostFileImporterPresented
                 )
             }
-            ToolbarItem(placement: .navigationBarLeading) {
-                SettingsMenu(
-                    modalType: $modalType,
-                    alertType: $alertType
-                )
-//                EditButton()
+            ToolbarItem(placement: .navigation) {
+                InfoMenu()
             }
-        }.sheet(item: $modalType, content: presentedModal)
-        .alert(item: $alertType, content: presentedAlert)
+        }.alert(item: $alertType, content: presentedAlert)
         .fileImporter(
             isPresented: $isHostFileImporterPresented,
             allowedContentTypes: hostFileTypes,
@@ -124,56 +88,25 @@ struct OrganizerView: View {
 }
 
 extension OrganizerView {
-    
-    @ViewBuilder
-    private func presentedModal(_ modalType: ModalType) -> some View {
-        switch modalType {
-        case .addProvider:
-            NavigationView {
-                AddProviderView(
-                    bindings: .init(
-                        isPresented: isModalPresented
-                    )
-                )
-            }.themeGlobal()
+    private func onHostFileImporterResult(_ result: Result<[URL], Error>) {
+        switch result {
+        case .success(let urls):
+            guard let url = urls.first else {
+                assertionFailure("Empty URLs from file importer?")
+                return
+            }
+            addProfileModalType = .addHost(url, false)
 
-        case .addHost(let url, let deletingURLOnSuccess):
-            NavigationView {
-                AddHostView.NameView(
-                    url: url,
-                    deletingURLOnSuccess: deletingURLOnSuccess,
-                    bindings: .init(
-                        isPresented: isModalPresented
-                    )
-                )
-            }.themeGlobal()
-            
-        case .donate:
-            NavigationView {
-                DonateView()
-            }.themeGlobal()
-
-        case .share(let items):
-            ActivityView(activityItems: items)
-
-        case .about:
-            NavigationView {
-                AboutView()
-            }.themeGlobal()
-            
-        case .exportProviders(let urls):
-            ActivityView(activityItems: urls)
+        case .failure(let error):
+            alertType = .error(
+                L10n.Menu.Contextual.AddProfile.fromFiles,
+                error
+            )
         }
     }
     
-    private var isModalPresented: Binding<Bool> {
-        .init {
-            modalType != nil
-        } set: {
-            if !$0 {
-                modalType = nil
-            }
-        }
+    private func onOpenURL(_ url: URL) {
+        addProfileModalType = .addHost(url, false)
     }
 
     private func presentedAlert(_ alertType: AlertType) -> Alert {
@@ -198,27 +131,6 @@ extension OrganizerView {
                 dismissButton: .cancel(Text(L10n.Global.Strings.ok))
             )
         }
-    }
-
-    private func onHostFileImporterResult(_ result: Result<[URL], Error>) {
-        switch result {
-        case .success(let urls):
-            guard let url = urls.first else {
-                assertionFailure("Empty URLs from file importer?")
-                return
-            }
-            modalType = .addHost(url, false)
-
-        case .failure(let error):
-            alertType = .error(
-                L10n.Menu.Contextual.AddProfile.fromFiles,
-                error
-            )
-        }
-    }
-    
-    private func onOpenURL(_ url: URL) {
-        modalType = .addHost(url, false)
     }
 }
 
