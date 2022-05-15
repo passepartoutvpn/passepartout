@@ -91,7 +91,8 @@ extension OrganizerView {
             } label: {
                 profileLabel(forHeader: header)
             }.contextMenu {
-                profileMenu(forHeader: header)
+                duplicateButton(forHeader: header)
+                deleteButton(forHeader: header)
             }
         }
         
@@ -102,12 +103,21 @@ extension OrganizerView {
             )
         }
 
-        @ViewBuilder
-        private func profileMenu(forHeader header: Profile.Header) -> some View {
+        private func duplicateButton(forHeader header: Profile.Header) -> some View {
             ProfileView.DuplicateButton(
                 header: header,
                 setAsCurrent: false
             )
+        }
+
+        private func deleteButton(forHeader header: Profile.Header) -> some View {
+            DestructiveButton {
+                withAnimation {
+                    profileManager.removeProfiles(withIds: [header.id])
+                }
+            } label: {
+                Label(L10n.Global.Strings.delete, systemImage: themeDeleteImage)
+            }
         }
 
         private var sortedHeaders: [Profile.Header] {
