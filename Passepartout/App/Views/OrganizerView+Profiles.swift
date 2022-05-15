@@ -58,8 +58,9 @@ extension OrganizerView {
         private var mainView: some View {
             List {
                 if profileManager.hasProfiles {
-                    if #available(iOS 15, *), themeIdiom == .pad {
-                        // FIXME: iPad multitasking, navigation binding does not clear on pop without Section
+
+                    // FIXME: iPad multitasking, navigation binding does not clear on pop without Section
+                    if themeIsiPad && themeIsMultitasking {
                         Section {
                             profilesView
                         } header: {

@@ -26,19 +26,30 @@
 import SwiftUI
 import PassepartoutCore
 
-extension Color {
-    init(red: Double, green: Double, blue: Double, brightness: Double) {
-        self.init(
-            red: red * brightness,
-            green: green * brightness,
-            blue: blue * brightness
-        )
-    }
-}
-
 extension View {
     var themeIdiom: UIUserInterfaceIdiom {
         UIDevice.current.userInterfaceIdiom
+    }
+    
+    var themeIsiPad: Bool {
+        #if targetEnvironment(macCatalyst)
+        false
+        #else
+        UIDevice.current.userInterfaceIdiom == .pad
+        #endif
+    }
+    
+    var themeIsiPadPortrait: Bool {
+        #if targetEnvironment(macCatalyst)
+        false
+        #else
+        let device: UIDevice = .current
+        return device.userInterfaceIdiom == .pad && device.orientation.isPortrait
+        #endif
+    }
+    
+    var themeIsMultitasking: Bool {
+        UIDevice.current.isMultitaskingSupported
     }
 }
 

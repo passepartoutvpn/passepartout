@@ -78,7 +78,7 @@ extension OrganizerView {
                 return
             }
             isFirstLaunch = false
-            if !isiPadPortrait, let activeProfileId = profileManager.activeProfileId {
+            if !themeIsiPadPortrait, let activeProfileId = profileManager.activeProfileId {
                 profileManager.currentProfileId = activeProfileId
             }
         }
@@ -102,11 +102,6 @@ extension OrganizerView {
         
         private func persist() {
             profileManager.persist()
-        }
-        
-        private var isiPadPortrait: Bool {
-            let device: UIDevice = .current
-            return device.userInterfaceIdiom == .pad && device.orientation.isPortrait
         }
     }
 }
