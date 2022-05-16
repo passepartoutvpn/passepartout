@@ -67,7 +67,9 @@ struct OrganizerView: View {
                 )
             }
             ToolbarItem(placement: .navigation) {
-                InfoMenu()
+                if themeIdiom == .phone {
+                    InfoMenu()
+                }
             }
         }.alert(item: $alertType, content: presentedAlert)
         .fileImporter(

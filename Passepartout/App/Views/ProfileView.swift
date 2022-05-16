@@ -68,10 +68,15 @@ struct ProfileView: View {
                 WelcomeView()
             }
         }.toolbar {
-            MainMenu(
-                currentProfile: currentProfile,
-                modalType: $modalType
-            ).disabled(!isExisting)
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                if themeIdiom != .phone {
+                    InfoMenu()
+                }
+                MainMenu(
+                    currentProfile: currentProfile,
+                    modalType: $modalType
+                ).disabled(!isExisting)
+            }
         }.sheet(item: $modalType, content: presentedModal)
         .navigationTitle(title)
         .themeSecondaryView()
