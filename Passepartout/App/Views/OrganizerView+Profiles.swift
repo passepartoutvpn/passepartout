@@ -30,15 +30,8 @@ extension OrganizerView {
     struct ProfilesList: View {
         @ObservedObject private var profileManager: ProfileManager
 
-        @ObservedObject private var providerManager: ProviderManager
-
-        // just to observe changes in profiles eligibility
-        @ObservedObject private var productManager: ProductManager
-        
         init() {
             profileManager = .shared
-            providerManager = .shared
-            productManager = .shared
         }
         
         var body: some View {
