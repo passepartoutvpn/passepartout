@@ -8,6 +8,7 @@ on:
         required: true
 
 env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
   FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
