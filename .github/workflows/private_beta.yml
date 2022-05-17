@@ -22,13 +22,12 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-#       name: ["iOS", "macOS"]
-        name: ["iOS"]
+        name: ["iOS", "macOS"]
         include:
           - name: "iOS"
             platform: "ios"
-#         - name: "macOS"
-#           platform: "mac"
+          - name: "macOS"
+            platform: "mac"
     env:
       PLATFORM: ${{ matrix.platform }}
       MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
