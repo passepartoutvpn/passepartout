@@ -23,22 +23,35 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
 import Foundation
+#if os(iOS)
 import UIKit
+#else
+import AppKit
+#endif
 
 extension DebugLog {
     public func decoratedString(_ appName: String, _ appVersion: String) -> String {
-        let device: UIDevice = .current
-        let osVersion = "\(device.systemName) \(device.systemVersion)"
-        let deviceModel = device.model
-        let deviceIdiom = device.userInterfaceIdiom
+        let osVersion: String
+        let deviceType: String?
 
-        let metadata = [
+        #if os(iOS)
+        let device: UIDevice = .current
+        osVersion = "\(device.systemName) \(device.systemVersion)"
+        deviceType = "\(device.model) (\(device.userInterfaceIdiom))"
+        #else
+        let os = ProcessInfo().operatingSystemVersion
+        osVersion = "macOS \(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
+        deviceType = nil
+        #endif
+
+        var metadata = [
             "App: \(appName) \(appVersion)",
-            "OS: \(osVersion)",
-            "Device: \(deviceModel) (\(deviceIdiom))"
+            "OS: \(osVersion)"
         ]
+        if let deviceType = deviceType {
+            metadata.append("Device: \(deviceType)")
+        }
 
         var fullText = metadata.joined(separator: "\n")
         fullText += "\n\n"
@@ -54,4 +67,3 @@ extension DebugLog {
         return data
     }
 }
-#endif

@@ -24,7 +24,11 @@
 //
 
 import Foundation
+#if os(iOS)
 import NetworkExtension
+#else
+import CoreWLAN
+#endif
 
 extension Utils {
     #if targetEnvironment(simulator)
@@ -63,7 +67,7 @@ extension Utils {
     public static func currentWifiSSID() async -> String? {
         #if targetEnvironment(simulator)
         ["My Home Network", "Safe Wi-Fi", "Friend's House"].randomElement()
-        #else
+        #elseif os(iOS)
         await withCheckedContinuation { continuation in
             NEHotspotNetwork.fetchCurrent {
                 guard let network = $0 else {
@@ -73,6 +77,8 @@ extension Utils {
                 continuation.resume(with: .success(network.ssid))
             }
         }
+        #else
+        CWWiFiClient.shared().interface()?.ssid()
         #endif
     }
 }
