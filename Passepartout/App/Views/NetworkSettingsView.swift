@@ -26,9 +26,6 @@
 import SwiftUI
 import PassepartoutCore
 
-extension Profile.NetworkSettings: CopySavingModel {
-}
-
 struct NetworkSettingsView: View {
     @ObservedObject private var currentProfile: ObservableProfile
 

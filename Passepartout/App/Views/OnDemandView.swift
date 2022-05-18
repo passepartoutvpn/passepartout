@@ -26,9 +26,6 @@
 import SwiftUI
 import PassepartoutCore
 
-extension Profile.OnDemand: CopySavingModel {
-}
-
 struct OnDemandView: View {
     @ObservedObject private var productManager: ProductManager
 

@@ -25,11 +25,7 @@
 
 import SwiftUI
 
-protocol CopySavingModel: Equatable {
-    init()
-}
-
-struct CopySavingButton<T: CopySavingModel, Label: View>: View {
+struct CopySavingButton<T: Equatable, Label: View>: View {
     @Binding var original: T
 
     @Binding var copy: T
@@ -69,12 +65,9 @@ struct CopySavingButton<T: CopySavingModel, Label: View>: View {
     }
 
     private func saveToOriginal() {
-        defer {
-            onSave?()
+        if copy != original {
+            original = copy
         }
-        guard copy != original else {
-            return
-        }
-        original = copy
+        onSave?()
     }
 }

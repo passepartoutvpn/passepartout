@@ -26,9 +26,6 @@
 import SwiftUI
 import PassepartoutCore
 
-extension Profile.Account: CopySavingModel {
-}
-
 struct AccountView: View {
     @ObservedObject private var providerManager: ProviderManager
     
