@@ -53,13 +53,9 @@ extension Constants {
             }
         }
 
-        static var isBeta: Bool {
-            #if targetEnvironment(simulator)
-            return true
-            #else
-            return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-            #endif
-        }
+        static let isBeta: Bool = {
+            Bundle.main.isTestFlight
+        }()
     }
 
     enum InApp {
