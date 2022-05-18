@@ -396,7 +396,6 @@
 				0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */,
 				0E5349BD27C16A4500C71BB3 /* StyledPicker.swift */,
 				0E12BC8E27F62C8500B2F912 /* Validators.swift */,
-				0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -465,6 +464,7 @@
 				0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */,
 				0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */,
 				0E71ACFA27C12E5300F85C4B /* VersionView.swift */,
+				0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */,
 				0E7577DE2817E22C00081CBE /* VPNToggle.swift */,
 				0E065F102813269500062CAF /* WelcomeView.swift */,
 			);
