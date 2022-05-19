@@ -51,15 +51,14 @@ extension VPNManager {
             pp_log.warning("Profile \(profile.logDescription) is already active and connected")
             return
         }
-        
         if !result.isReady {
             try await profileManager.makeProfileReady(profile)
         }
-        
-        pp_log.info("Connecting to: \(profile.logDescription)")
-        profileManager.activateProfile(profile)
 
+        pp_log.info("Connecting to: \(profile.logDescription)")
         let cfg = try vpnConfiguration(withProfile: profile)
+
+        profileManager.activateProfile(profile)
         await reconnect(cfg)
     }
     
@@ -70,7 +69,6 @@ extension VPNManager {
             assertionFailure("Profile \(profile.logDescription) is not a provider")
             throw PassepartoutError.missingProfile
         }
-        
         if !result.isReady {
             try await profileManager.makeProfileReady(profile)
         }
@@ -80,7 +78,6 @@ extension VPNManager {
             pp_log.warning("Server \(newServerId) not found")
             throw PassepartoutError.missingProviderServer
         }
-
         guard !profileManager.isActiveProfile(profileId) ||
                 currentState.vpnStatus != .connected ||
                 oldServerId != newServer.id else {
@@ -91,14 +88,13 @@ extension VPNManager {
 
         pp_log.info("Connecting to: \(profile.logDescription) @ \(newServer.logDescription)")
         profile.setProviderServer(newServer)
-        profileManager.activateProfile(profile)
+        let cfg = try vpnConfiguration(withProfile: profile)
 
+        profileManager.activateProfile(profile)
         guard !profileManager.isCurrentProfile(profileId) else {
             pp_log.debug("Active profile is current, will reconnect via observation")
             return
         }
-
-        let cfg = try vpnConfiguration(withProfile: profile)
         await reconnect(cfg)
     }
     
@@ -110,14 +106,13 @@ extension VPNManager {
 
         pp_log.info("Modifying active profile")
         block(&profile)
-        profileManager.activateProfile(profile)
+        let cfg = try vpnConfiguration(withProfile: profile)
 
+        profileManager.activateProfile(profile)
         guard !profileManager.isCurrentProfile(profile.id) else {
             pp_log.debug("Active profile is current, will reinstate via observation")
             return
         }
-        
-        let cfg = try vpnConfiguration(withProfile: profile)
         await reinstate(cfg)
     }
 }
