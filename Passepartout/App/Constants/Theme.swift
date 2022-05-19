@@ -31,14 +31,6 @@ extension View {
         UIDevice.current.userInterfaceIdiom
     }
     
-    var themeIsiPad: Bool {
-        #if targetEnvironment(macCatalyst)
-        false
-        #else
-        UIDevice.current.userInterfaceIdiom == .pad
-        #endif
-    }
-    
     var themeIsiPadPortrait: Bool {
         #if targetEnvironment(macCatalyst)
         false
@@ -48,8 +40,15 @@ extension View {
         #endif
     }
     
-    var themeIsMultitasking: Bool {
-        UIDevice.current.isMultitaskingSupported
+    var themeIsiPadMultitasking: Bool {
+        #if targetEnvironment(macCatalyst)
+        false
+        #else
+        guard #available(iOS 15, *) else {
+            return false
+        }
+        return UIDevice.current.userInterfaceIdiom == .pad
+        #endif
     }
 }
 
