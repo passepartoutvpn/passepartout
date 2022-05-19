@@ -104,6 +104,7 @@ public class VPNManager: ObservableObject {
     
     func reconnect(_ configuration: VPNConfiguration) async {
         pp_log.info("Reconnecting VPN")
+        clearLastError()
         await strategy.connect(configuration: configuration)
     }
     
