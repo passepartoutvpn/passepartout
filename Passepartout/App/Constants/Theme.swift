@@ -142,7 +142,7 @@ extension View {
 
 extension View {
     var themeAssetsLogoImage: String {
-        "logo"
+        "Logo"
     }
     
     var themeCheckmarkImage: String {
