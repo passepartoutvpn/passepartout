@@ -97,7 +97,10 @@ extension OrganizerView {
                 assertionFailure("Empty URLs from file importer?")
                 return
             }
-            addProfileModalType = .addHost(url, false)
+            Task {
+                await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
+                addProfileModalType = .addHost(url, false)
+            }
 
         case .failure(let error):
             alertType = .error(
