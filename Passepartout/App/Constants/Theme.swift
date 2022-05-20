@@ -58,26 +58,24 @@ extension View {
     func themeGlobal() -> some View {
         themeNavigationViewStyle()
             .themeTint()
-            .themeToggleStyle()
+            .listStyle(themeListStyleValue())
+            .toggleStyle(themeToggleStyleValue())
             .menuStyle(.borderlessButton)
     }
 
-    @ViewBuilder
-    private func themeTint() -> some View {
-        if #available(iOS 15, *) {
-            tint(.accentColor)
-        } else {
-            self
-        }
+    func themePrimaryView() -> some View {
+        #if targetEnvironment(macCatalyst)
+        navigationBarTitleDisplayMode(.inline)
+            .themeSidebarListStyle()
+        #else
+        navigationBarTitleDisplayMode(.large)
+            .navigationTitle(Unlocalized.appName)
+            .themeSidebarListStyle()
+        #endif
     }
 
-    @ViewBuilder
-    private func themeToggleStyle() -> some View {
-        if #available(iOS 15, *) {
-            toggleStyle(.switch)
-        } else {
-            toggleStyle(SwitchToggleStyle(tint: .accentColor))
-        }
+    func themeSecondaryView() -> some View {
+        navigationBarTitleDisplayMode(.inline)
     }
 
     @ViewBuilder
@@ -91,18 +89,40 @@ extension View {
         }
     }
 
-    func themePrimaryView() -> some View {
+    @ViewBuilder
+    private func themeSidebarListStyle() -> some View {
         #if targetEnvironment(macCatalyst)
-        navigationBarTitleDisplayMode(.inline)
+        self
         #else
-        navigationBarTitleDisplayMode(.large)
-            .navigationTitle(Unlocalized.appName)
+        switch themeIdiom {
+        case .pad:
+            listStyle(.sidebar)
+
+        default:
+            listStyle(.insetGrouped)
+        }
         #endif
     }
 
-    func themeSecondaryView() -> some View {
-        navigationBarTitleDisplayMode(.inline)
-            .listStyle(.insetGrouped)
+    @ViewBuilder
+    private func themeTint() -> some View {
+        if #available(iOS 15, *) {
+            tint(.accentColor)
+        } else {
+            self
+        }
+    }
+
+    private func themeListStyleValue() -> some ListStyle {
+        .insetGrouped
+    }
+
+    private func themeToggleStyleValue() -> some ToggleStyle {
+        if #available(iOS 15, *) {
+            return .switch
+        } else {
+            return SwitchToggleStyle(tint: .accentColor)
+        }
     }
 }
 
@@ -409,7 +429,7 @@ extension View {
             Text(description($0))
                 .foregroundColor(themeSecondaryColor)
         } listStyle: {
-            .insetGrouped
+            themeListStyleValue()
         }
     }
 
