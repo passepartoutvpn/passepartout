@@ -42,14 +42,15 @@ extension VPNManager {
         try await connect(with: profileId)
     }
 
-    public func connect(with profileId: UUID) async throws {
+    @discardableResult
+    public func connect(with profileId: UUID) async throws -> Profile {
         let result = try profileManager.liveProfileEx(withId: profileId)
         let profile = result.profile
         guard !profileManager.isActiveProfile(profileId) ||
               currentState.vpnStatus != .connected else {
 
             pp_log.warning("Profile \(profile.logDescription) is already active and connected")
-            return
+            return profile
         }
         if !result.isReady {
             try await profileManager.makeProfileReady(profile)
@@ -60,9 +61,11 @@ extension VPNManager {
 
         profileManager.activateProfile(profile)
         await reconnect(cfg)
+        return profile
     }
     
-    public func connect(with profileId: UUID, toServer newServerId: String) async throws {
+    @discardableResult
+    public func connect(with profileId: UUID, toServer newServerId: String) async throws -> Profile {
         let result = try profileManager.liveProfileEx(withId: profileId)
         var profile = result.profile
         guard profile.isProvider else {
@@ -83,7 +86,7 @@ extension VPNManager {
                 oldServerId != newServer.id else {
             
             pp_log.info("Profile \(profile.logDescription) is already active and connected to: \(newServer.logDescription)")
-            return
+            return profile
         }
 
         pp_log.info("Connecting to: \(profile.logDescription) @ \(newServer.logDescription)")
@@ -93,9 +96,10 @@ extension VPNManager {
         profileManager.activateProfile(profile)
         guard !profileManager.isCurrentProfile(profileId) else {
             pp_log.debug("Active profile is current, will reconnect via observation")
-            return
+            return profile
         }
         await reconnect(cfg)
+        return profile
     }
     
     public func modifyActiveProfile(_ block: (inout Profile) -> Void) async throws {

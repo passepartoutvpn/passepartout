@@ -88,11 +88,8 @@ struct ProfileView: View {
     
     private var mainView: some View {
         List {
-            VPNSection(
-                currentProfile: currentProfile,
-                isLoading: isLoading
-            )
             if !isLoading {
+                VPNSection(profileId: currentProfile.value.id)
                 ProviderSection(currentProfile: currentProfile)
                 ConfigurationSection(
                     currentProfile: currentProfile,
@@ -100,6 +97,8 @@ struct ProfileView: View {
                 )
                 ExtraSection(currentProfile: currentProfile)
                 DiagnosticsSection(currentProfile: currentProfile)
+            } else {
+                ProgressView()
             }
         }.themeAnimation(on: isLoading)
     }

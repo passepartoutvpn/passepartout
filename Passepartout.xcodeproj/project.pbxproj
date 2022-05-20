@@ -53,6 +53,7 @@
 		0E6059CC27FCC5DE003F4063 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059C927FCC5DE003F4063 /* Providers.xcassets */; };
 		0E6059CD27FCC5DE003F4063 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059CA27FCC5DE003F4063 /* Assets.xcassets */; };
 		0E6059CF27FCC618003F4063 /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */; };
+		0E70589B28377DC40075D1D2 /* VPNStatusText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E70589A28377DC30075D1D2 /* VPNStatusText.swift */; };
 		0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */; };
 		0E71ACE327C0F2E400F85C4B /* Providers+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */; };
 		0E71ACE927C1055300F85C4B /* NetworkSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACE827C1055200F85C4B /* NetworkSettingsView.swift */; };
@@ -239,6 +240,7 @@
 		0E6059C927FCC5DE003F4063 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
 		0E6059CA27FCC5DE003F4063 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
+		0E70589A28377DC30075D1D2 /* VPNStatusText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusText.swift; sourceTree = "<group>"; };
 		0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Providers+L10n.swift"; sourceTree = "<group>"; };
 		0E71ACE827C1055200F85C4B /* NetworkSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsView.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */,
 				0E71ACFA27C12E5300F85C4B /* VersionView.swift */,
 				0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */,
+				0E70589A28377DC30075D1D2 /* VPNStatusText.swift */,
 				0E7577DE2817E22C00081CBE /* VPNToggle.swift */,
 				0E065F102813269500062CAF /* WelcomeView.swift */,
 			);
@@ -933,6 +936,7 @@
 				0EF0FAF927DD212C007EB181 /* IntentActivity.swift in Sources */,
 				0EBC075B27EC4FFF00208AD9 /* ReportIssueView.swift in Sources */,
 				0ED89C1727DE0E05008B36D6 /* IntentEditView.swift in Sources */,
+				0E70589B28377DC40075D1D2 /* VPNStatusText.swift in Sources */,
 				0E71ACE927C1055300F85C4B /* NetworkSettingsView.swift in Sources */,
 				0EB34BCA27C6A70200B126DA /* OnDemandView.swift in Sources */,
 				0E0BD27327B2EA2C00583AC5 /* MainView.swift in Sources */,

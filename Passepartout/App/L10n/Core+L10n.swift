@@ -58,17 +58,16 @@ extension PassepartoutError {
 }
 
 extension VPNManager.ObservableState {
-    func localizedStatusDescription(withErrors: Bool, dataCountIfAvailable: Bool) -> String {
-        guard isEnabled else {
-
-            // report application errors even if VPN is disabled
-            if withErrors {
-                if let errorDescription = (lastError as? PassepartoutError)?.localizedAppDescription, !errorDescription.isEmpty {
-                    return errorDescription
-                }
-            }
-
+    func localizedStatusDescription(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool) -> String {
+        
+        // FIXME: l10n, sure about this wording?
+        guard isActiveProfile else {
+//            return L10n.Tunnelkit.Vpn.unused
             return L10n.Tunnelkit.Vpn.disabled
+        }
+        guard isEnabled else {
+//            return L10n.Tunnelkit.Vpn.disabled
+            return L10n.Organizer.Sections.active
         }
         if withErrors {
             if let errorDescription = lastError?.localizedVPNDescription, !errorDescription.isEmpty {

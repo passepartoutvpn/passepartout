@@ -1,8 +1,8 @@
 //
-//  ProfileRow.swift
+//  VPNStatusText.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/28/22.
+//  Created by Davide De Rosa on 5/20/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,26 +26,25 @@
 import SwiftUI
 import PassepartoutCore
 
-struct ProfileRow: View {
-    let header: Profile.Header
+struct VPNStatusText: View {
+    @ObservedObject private var currentVPNState: VPNManager.ObservableState
     
     let isActiveProfile: Bool
     
+    init(isActiveProfile: Bool) {
+        currentVPNState = .shared
+        self.isActiveProfile = isActiveProfile
+    }
+    
     var body: some View {
-        debugChanges()
-        return HStack {
-            VStack(alignment: .leading, spacing: 5) {
-                Text(header.name)
-                    .font(.headline)
-                    .themeLongTextStyle()
+        Text(statusText)
+    }
 
-                VPNStatusText(isActiveProfile: isActiveProfile)
-                    .font(.subheadline)
-                    .themeSecondaryTextStyle()
-            }
-            Spacer()
-            VPNToggle(profileId: header.id, rateLimit: Constants.RateLimit.vpnToggle)
-                .labelsHidden()
-        }.padding([.top, .bottom], 10)
+    private var statusText: String {
+        return currentVPNState.localizedStatusDescription(
+            isActiveProfile: isActiveProfile,
+            withErrors: true,
+            dataCountIfAvailable: true
+        )
     }
 }

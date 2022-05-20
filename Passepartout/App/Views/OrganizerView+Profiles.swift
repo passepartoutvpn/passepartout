@@ -94,7 +94,7 @@ extension OrganizerView {
         private func profileLabel(forHeader header: Profile.Header) -> some View {
             ProfileRow(
                 header: header,
-                isActive: profileManager.isActiveProfile(header.id)
+                isActiveProfile: profileManager.isActiveProfile(header.id)
             )
         }
 
@@ -117,6 +117,7 @@ extension OrganizerView {
 
         private var sortedHeaders: [Profile.Header] {
             profileManager.headers
+//                .sorted()
                 .sorted {
                     if profileManager.isActiveProfile($0.id) {
                         return true

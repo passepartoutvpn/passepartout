@@ -27,29 +27,50 @@ import SwiftUI
 import PassepartoutCore
 
 struct VPNToggle: View {
+    @ObservedObject private var appManager: AppManager
+
+    @ObservedObject private var profileManager: ProfileManager
+
     @ObservedObject private var vpnManager: VPNManager
 
     @ObservedObject private var currentVPNState: VPNManager.ObservableState
-    
+
+    @ObservedObject private var productManager: ProductManager
+
+    private let profileId: UUID
+
     private let rateLimit: Int
     
-    private let onToggle: (() -> Void)?
-
     private var isEnabled: Binding<Bool> {
         .init {
-            currentVPNState.isEnabled
-        } set: { _ in
-            _ = toggleVPN()
+            isActiveProfile && currentVPNState.isEnabled
+        } set: { newValue in
+            guard newValue else {
+                disableVPN()
+                return
+            }
+            enableVPN()
         }
     }
+    
+    private var isActiveProfile: Bool {
+        profileManager.isActiveProfile(profileId)
+    }
 
+    private var isEligibleForSiri: Bool {
+        productManager.isEligible(forFeature: .siriShortcuts)
+    }
+    
     @State private var canToggle = true
     
-    init(rateLimit: Int, onToggle: (() -> Void)? = nil) {
+    init(profileId: UUID, rateLimit: Int) {
+        appManager = .shared
+        profileManager = .shared
         vpnManager = .shared
         currentVPNState = .shared
+        productManager = .shared
+        self.profileId = profileId
         self.rateLimit = rateLimit
-        self.onToggle = onToggle
     }
 
     var body: some View {
@@ -57,19 +78,49 @@ struct VPNToggle: View {
             .disabled(!canToggle)
             .themeAnimation(on: currentVPNState.isEnabled)
     }
+    
+    private func enableVPN() {
+        Task {
+            canToggle = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(rateLimit)) {
+                canToggle = true
+            }
+            do {
+                let profile = try await vpnManager.connect(with: profileId)
 
-    private func toggleVPN() -> Bool {
-        guard vpnManager.toggle() else {
-            return false
+                // IMPORTANT: save immediately to keep in sync with VPN status
+                appManager.activeProfileId = profileId
+
+                donateIntents(withProfile: profile)
+            } catch {
+                pp_log.warning("Unable to connect to profile \(profileId): \(error)")
+                canToggle = true
+            }
         }
-        
-        // rate limit toggle actions
-        canToggle = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(rateLimit)) {
+    }
+    
+    private func disableVPN() {
+        Task {
+            canToggle = false
+            await vpnManager.disable()
             canToggle = true
         }
-        
-        onToggle?()
-        return true
+    }
+    
+    private func donateIntents(withProfile profile: Profile) {
+
+        // eligibility: donate intents if eligible for Siri
+        guard isEligibleForSiri else {
+            return
+        }
+
+        pp_log.debug("Donating connection intents...")
+
+        IntentDispatcher.donateEnableVPN()
+        IntentDispatcher.donateDisableVPN()
+        IntentDispatcher.donateConnection(
+            with: profile,
+            providerManager: .shared
+        )
     }
 }

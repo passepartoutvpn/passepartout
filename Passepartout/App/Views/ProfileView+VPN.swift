@@ -28,114 +28,41 @@ import PassepartoutCore
 
 extension ProfileView {
     struct VPNSection: View {
-        @ObservedObject private var appManager: AppManager
-
         @ObservedObject private var profileManager: ProfileManager
 
-        @ObservedObject private var providerManager: ProviderManager
-
-        @ObservedObject private var vpnManager: VPNManager
-
-        @ObservedObject private var currentVPNState: VPNManager.ObservableState
-
-        @ObservedObject private var productManager: ProductManager
+        private let profileId: UUID
         
-        @ObservedObject private var currentProfile: ObservableProfile
-
-        private let isLoading: Bool
-
         private var isActiveProfile: Bool {
-            profileManager.isCurrentProfileActive()
+            profileManager.isActiveProfile(profileId)
         }
-        
-        private var isEligibleForSiri: Bool {
-            productManager.isEligible(forFeature: .siriShortcuts)
-        }
-        
-        init(currentProfile: ObservableProfile, isLoading: Bool) {
-            appManager = .shared
+
+        init(profileId: UUID) {
             profileManager = .shared
-            providerManager = .shared
-            vpnManager = .shared
-            currentVPNState = .shared
-            productManager = .shared
-            self.currentProfile = currentProfile
-            self.isLoading = isLoading
+            self.profileId = profileId
         }
         
         var body: some View {
-            if !isLoading {
-                if isActiveProfile {
-                    activeView
-                } else {
-                    inactiveSubview
-                }
-            } else {
-                loadingView
-            }
-        }
-        
-        private var headerView: some View {
-            Text(Unlocalized.VPN.vpn)
-        }
-        
-        private var activeView: some View {
             Section {
-                VPNToggle(rateLimit: Constants.RateLimit.vpnToggle) {
-
-                    // eligibility: donate intents if eligible for Siri
-                    if isEligibleForSiri {
-                        pp_log.debug("Donating connection intents...")
-
-                        IntentDispatcher.donateEnableVPN()
-                        IntentDispatcher.donateDisableVPN()
-                        IntentDispatcher.donateConnection(
-                            with: currentProfile.value,
-                            providerManager: providerManager
-                        )
-                    }
-                }
-
-                Text(L10n.Profile.Items.ConnectionStatus.caption)
-                    .withTrailingText(currentVPNState.localizedStatusDescription(
-                        withErrors: true,
-                        dataCountIfAvailable: true
-                    ))
+                toggleView
+                statusView
             } header: {
-                headerView
+                Text(Unlocalized.VPN.vpn)
             } footer: {
                 Text(L10n.Profile.Sections.Vpn.footer)
                     .xxxThemeTruncation()
             }
         }
-
-        private var inactiveSubview: some View {
-            Section {
-                Button(L10n.Profile.Items.UseProfile.caption) {
-                    Task {
-
-                        // do this first to not override subsequent animation
-                        // active profile may flicker due to unnecessary VPN updates
-                        await vpnManager.disable()
-
-                        withAnimation {
-                            profileManager.activateCurrentProfile()
-
-                            // IMPORTANT: save immediately to keep in sync with VPN status
-                            appManager.activeProfileId = profileManager.activeProfileId
-                        }
-                    }
-                }
-            } header: {
-                headerView
-            }
+        
+        private var toggleView: some View {
+            VPNToggle(profileId: profileId, rateLimit: Constants.RateLimit.vpnToggle)
         }
         
-        private var loadingView: some View {
-            Section {
-                ProgressView()
-            } header: {
-                headerView
+        private var statusView: some View {
+            HStack {
+                Text(L10n.Profile.Items.ConnectionStatus.caption)
+                Spacer()
+                VPNStatusText(isActiveProfile: isActiveProfile)
+                    .themeSecondaryTextStyle()
             }
         }
     }
