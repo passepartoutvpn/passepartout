@@ -26,6 +26,15 @@
 import Foundation
 import PassepartoutCore
 
+extension Error {
+    var localizedAppDescription: String {
+        if let errorDescription = (self as? PassepartoutError)?.localizedAppDescription, !errorDescription.isEmpty {
+            return "\(errorDescription)."
+        }
+        return localizedDescription
+    }
+}
+
 extension PassepartoutError {
     var localizedAppDescription: String? {
         let V = L10n.Global.Errors.self

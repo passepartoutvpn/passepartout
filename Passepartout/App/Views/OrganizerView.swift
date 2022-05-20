@@ -30,7 +30,7 @@ struct OrganizerView: View {
     enum AlertType: Identifiable {
         case subscribeReddit
         
-        case error(String, Error)
+        case error(String, String)
         
         // XXX: alert ids
         var id: Int {
@@ -79,6 +79,11 @@ struct OrganizerView: View {
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
         .themePrimaryView()
+        
+        // VPN configuration error publisher (no need to observe VPNManager)
+        .onReceive(VPNManager.shared.configurationError) {
+            alertType = .error($0.profile.header.name, $0.error.localizedAppDescription)
+        }
     }
     
     private var hiddenSceneView: some View {
@@ -105,7 +110,7 @@ extension OrganizerView {
         case .failure(let error):
             alertType = .error(
                 L10n.Menu.Contextual.AddProfile.fromFiles,
-                error
+                error.localizedDescription
             )
         }
     }
@@ -129,10 +134,10 @@ extension OrganizerView {
                 }
             )
 
-        case .error(let title, let error):
+        case .error(let title, let errorDescription):
             return Alert(
                 title: Text(title),
-                message: Text(error.localizedDescription),
+                message: Text(errorDescription),
                 dismissButton: .cancel(Text(L10n.Global.Strings.ok))
             )
         }

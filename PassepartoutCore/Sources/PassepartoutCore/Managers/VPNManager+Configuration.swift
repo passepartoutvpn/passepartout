@@ -87,7 +87,7 @@ extension VPNManager {
             pp_log.error("Unable to build VPNConfiguration: \(error)")
 
             // UI is certainly interested in configuration errors
-            lastError = error
+            configurationError.send((profile, error))
 
             throw error
         }

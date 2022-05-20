@@ -30,6 +30,7 @@ import TunnelKitOpenVPNManager
 
 @MainActor
 public class VPNManager: ObservableObject {
+    public typealias ConfigurationError = (profile: Profile, error: Error)
 
     // MARK: Initialization
     
@@ -49,7 +50,7 @@ public class VPNManager: ObservableObject {
     
     public let currentState: ObservableState
     
-    public internal(set) var lastError: Error? {
+    public private(set) var lastError: Error? {
         get {
             currentState.lastError
         }
@@ -57,6 +58,8 @@ public class VPNManager: ObservableObject {
             currentState.lastError = newValue
         }
     }
+    
+    public let configurationError = PassthroughSubject<ConfigurationError, Never>()
     
     // MARK: Internals
     
