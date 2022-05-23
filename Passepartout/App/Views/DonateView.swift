@@ -105,7 +105,6 @@ struct DonateView: View {
             Text(L10n.Donate.Sections.OneTime.header)
         } footer: {
             Text(L10n.Donate.Sections.OneTime.footer)
-                .xxxThemeTruncation()
         }
     }
     

@@ -273,7 +273,6 @@ private struct PurchaseRow: View {
             extra.map {
                 Text($0)
                     .frame(maxHeight: .infinity)
-//                    .xxxThemeTruncation()
             }
         }.padding([.top, .bottom])
     }
