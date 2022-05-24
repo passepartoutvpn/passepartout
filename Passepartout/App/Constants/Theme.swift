@@ -91,17 +91,13 @@ extension View {
 
     @ViewBuilder
     private func themeSidebarListStyle() -> some View {
-        #if targetEnvironment(macCatalyst)
-        self
-        #else
         switch themeIdiom {
-        case .pad:
-            listStyle(.sidebar)
+        case .phone:
+            listStyle(.insetGrouped)
 
         default:
-            listStyle(.insetGrouped)
+            listStyle(.sidebar)
         }
-        #endif
     }
 
     @ViewBuilder
