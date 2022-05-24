@@ -63,9 +63,8 @@ struct AccountView: View {
             Section {
                 TextField(usernamePlaceholder ?? L10n.Account.Items.Username.placeholder, text: $liveAccount.username)
                     .textContentType(.username)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
                     .keyboardType(.emailAddress)
+                    .themeRawTextStyle()
                     .withLeadingText(L10n.Account.Items.Username.caption)
 
                 RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password) {
@@ -75,8 +74,7 @@ struct AccountView: View {
                     themeRevealImage.asSystemImage
                         .themeAccentForegroundStyle()
                 }.textContentType(.password)
-                .disableAutocorrection(true)
-                .autocapitalization(.none)
+                .themeRawTextStyle()
                 .withLeadingText(L10n.Account.Items.Password.caption)
             } footer: {
                 metadata?.localizedGuidanceString.map {

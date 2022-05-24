@@ -364,6 +364,11 @@ extension View {
             .truncationMode(.middle)
     }
     
+    func themeRawTextStyle() -> some View {
+        disableAutocorrection(true)
+            .autocapitalization(.none)
+    }
+
     func themeInformativeTextStyle() -> some View {
         multilineTextAlignment(.center)
             .font(.title)
@@ -467,22 +472,19 @@ extension View {
 
 extension View {
     func themeValidProfileName() -> some View {
-        autocapitalization(.none)
-            .disableAutocorrection(true)
+        themeRawTextStyle()
     }
 
     func themeValidURL(_ urlString: String?) -> some View {
         themeValidating(urlString, validator: Validators.url)
             .keyboardType(.asciiCapable)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
+            .themeRawTextStyle()
     }
     
     func themeValidIPAddress(_ ipAddress: String?) -> some View {
         themeValidating(ipAddress, validator: Validators.ipAddress)
             .keyboardType(.numbersAndPunctuation)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
+            .themeRawTextStyle()
     }
     
     func themeValidSocketPort() -> some View {
@@ -492,22 +494,19 @@ extension View {
     func themeValidDomainName(_ domainName: String?) -> some View {
         themeValidating(domainName, validator: Validators.domainName)
             .keyboardType(.asciiCapable)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
+            .themeRawTextStyle()
     }
 
     func themeValidDNSOverTLSServerName(_ string: String?) -> some View {
         themeValidating(string, validator: Validators.dnsOverTLSServerName)
             .keyboardType(.asciiCapable)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
+            .themeRawTextStyle()
     }
 
     func themeValidSSID(_ text: String?) -> some View {
         themeValidating(text, validator: Validators.notEmpty)
             .keyboardType(.asciiCapable)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
+            .themeRawTextStyle()
     }
 
     private func themeValidating(_ string: String?, validator: (String) throws -> Void) -> some View {
