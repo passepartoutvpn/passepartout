@@ -104,23 +104,19 @@ class AppContext {
         )
 
         #if targetEnvironment(simulator)
-        vpnManager = VPNManager(
-            appManager: appManager,
-            profileManager: profileManager,
-            providerManager: providerManager,
-            strategy: VPNManager.MockStrategy()
-        )
+        let strategy = VPNManager.MockStrategy()
         #else
-        vpnManager = VPNManager(
-            appManager: appManager,
-            profileManager: profileManager,
-            providerManager: providerManager,
-            strategy: VPNManager.TunnelKitStrategy(
-                appGroup: Constants.App.appGroupId,
-                tunnelBundleIdentifier: Constants.App.tunnelBundleId
-            )
+        let strategy = VPNManager.TunnelKitStrategy(
+            appGroup: Constants.App.appGroupId,
+            tunnelBundleIdentifier: Constants.App.tunnelBundleId
         )
         #endif
+        vpnManager = VPNManager(
+            appManager: appManager,
+            profileManager: profileManager,
+            providerManager: providerManager,
+            strategy: strategy
+        )
 
         // app
 
