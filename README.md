@@ -82,7 +82,7 @@ In preset mode, you can pick pre-resolved IPv4 endpoints when DNS is problematic
 
 ### Import configuration files
 
-Passepartout can import .ovpn (OpenVPN) and .wg (WireGuard) configuration files as is. You can find details on what may or may not work in the related section of the [TunnelKit README][dep-tunnelkit-ovpn].
+Passepartout can import .ovpn (OpenVPN) and .conf/.wg (WireGuard) configuration files as is. You can find details on what may or may not work in the related section of the [TunnelKit README][dep-tunnelkit-ovpn].
 
 ## Installation
 
