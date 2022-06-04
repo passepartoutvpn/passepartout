@@ -40,7 +40,7 @@ class AppContext {
     private var cancellables: Set<AnyCancellable> = []
     
     init(coreContext: CoreContext) {
-        logManager = LogManager(logFile: Constants.Log.appFileURL)
+        logManager = LogManager(logFile: Constants.Log.appLogURL)
         logManager.logLevel = Constants.Log.logLevel
         logManager.logFormat = Constants.Log.logFormat
         logManager.configureLogging()

@@ -149,6 +149,16 @@ extension Constants {
     }
     
     enum Log {
+        private static let parentPath = "Library/Caches"
+
+        private static func containerLogURL(filename: String) -> URL {
+            Files.containerURL
+                .appendingPathComponent(parentPath)
+                .appendingPathComponent(filename)
+        }
+
+        static let appLogURL = containerLogURL(filename: "App.log")
+
         static let logLevel: SwiftyBeaver.Level = {
             guard let levelString = ProcessInfo.processInfo.environment["LOG_LEVEL"], let levelNum = Int(levelString) else {
                 return .info
@@ -158,12 +168,6 @@ extension Constants {
         
         static let logFormat = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
         
-        private static let appFileName = "Debug.log"
-        
-        static var appFileURL: URL {
-            return Files.cachesURL.appendingPathComponent(appFileName)
-        }
-
         static let tunnelLogFormat = "$DHH:mm:ss$d - $M"
         
         static let tunnelLogMaxBytes = 15000
@@ -256,18 +260,12 @@ extension Constants {
 
 extension Constants {
     enum Files {
-        private static var containerURL: URL {
+        fileprivate static var containerURL: URL {
             guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: App.appGroupId) else {
                 print("Unable to access App Group container")
                 return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             }
             return url
         }
-
-        static let cachesURL: URL = {
-            let url = containerURL.appendingPathComponent("Library/Caches", isDirectory: true)
-            try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-            return url
-        }()
     }
 }
