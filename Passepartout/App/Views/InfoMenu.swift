@@ -174,7 +174,7 @@ struct InfoMenu: View {
 extension InfoMenu {
     private var testSection: some View {
         Button("Export providers") {
-            guard let urls = AppContext.shared.urlsForProviders else {
+            guard let urls = CoreContext.shared.urlsForProviders else {
                 return
             }
             modalType = .exportProviders(urls)

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E021D9C284E68580077EF5D /* CoreContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E021D9A284E68580077EF5D /* CoreContext.swift */; };
+		0E021D9D284E68580077EF5D /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E021D9B284E68580077EF5D /* AppContext.swift */; };
 		0E0392772818732D00827C10 /* BuildProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0392762818732D00827C10 /* BuildProducts.swift */; };
 		0E039279281890B100827C10 /* AddHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E039278281890B100827C10 /* AddHostView.swift */; };
 		0E065F112813269500062CAF /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E065F102813269500062CAF /* WelcomeView.swift */; };
@@ -17,6 +19,8 @@
 		0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E0C072B236087A100155AAC /* InfoPlist.strings */; };
 		0E12BC8F27F62C8600B2F912 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12BC8E27F62C8500B2F912 /* Validators.swift */; };
 		0E293851285A70AC002A6E0E /* AppPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E293850285A70AC002A6E0E /* AppPreference.swift */; };
+		0E293857285A73BC002A6E0E /* AppContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E293856285A73BC002A6E0E /* AppContext+Shared.swift */; };
+		0E29385C285A8B30002A6E0E /* CoreContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */; };
 		0E2A8D4927ADF87F00207D04 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */; };
 		0E2A8D4F27B04BBA00207D04 /* OrganizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */; };
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
@@ -123,7 +127,6 @@
 		0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */; };
 		0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */; };
 		0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */; };
-		0EF2CC03285AFED800E501D5 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2CC02285AFED800E501D5 /* AppContext.swift */; };
 		0EF8C5A828213C510053CE89 /* OrganizerView+Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */; };
 /* End PBXBuildFile section */
 
@@ -191,6 +194,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E021D9A284E68580077EF5D /* CoreContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreContext.swift; sourceTree = "<group>"; };
+		0E021D9B284E68580077EF5D /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		0E0392762818732D00827C10 /* BuildProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildProducts.swift; sourceTree = "<group>"; };
 		0E039278281890B100827C10 /* AddHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHostView.swift; sourceTree = "<group>"; };
 		0E065F102813269500062CAF /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -204,6 +209,8 @@
 		0E1C0A52238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E23B4A12298559800304C30 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0E293850285A70AC002A6E0E /* AppPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreference.swift; sourceTree = "<group>"; };
+		0E293856285A73BC002A6E0E /* AppContext+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppContext+Shared.swift"; sourceTree = "<group>"; };
+		0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreContext+Shared.swift"; sourceTree = "<group>"; };
 		0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassepartoutApp.swift; sourceTree = "<group>"; };
 		0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerView.swift; sourceTree = "<group>"; };
 		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -342,7 +349,6 @@
 		0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderView.swift; sourceTree = "<group>"; };
 		0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 		0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderViewModel.swift; sourceTree = "<group>"; };
-		0EF2CC02285AFED800E501D5 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Profiles.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -378,6 +384,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E293858285A7484002A6E0E /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0EB17EA127D2263700D473B5 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		0E293859285A7489002A6E0E /* Contexts */ = {
+			isa = PBXGroup;
+			children = (
+				0E021D9A284E68580077EF5D /* CoreContext.swift */,
+				0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */,
+			);
+			path = Contexts;
+			sourceTree = "<group>";
+		};
+		0E29385A285A749E002A6E0E /* Contexts */ = {
+			isa = PBXGroup;
+			children = (
+				0E021D9B284E68580077EF5D /* AppContext.swift */,
+				0E293856285A73BC002A6E0E /* AppContext+Shared.swift */,
+			);
+			path = Contexts;
+			sourceTree = "<group>";
+		};
 		0E2C171C27CB6307007E8488 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				0EB17EA027D2263700D473B5 /* Constants */,
+				0E29385A285A749E002A6E0E /* Contexts */,
 				0E49F6C927DB398100385834 /* Extensions */,
 				0E92781227E7CD530057BB81 /* InApp */,
 				0EA591112733DD4E0096F796 /* Intents */,
@@ -567,7 +600,6 @@
 		0EB17EA027D2263700D473B5 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				0EF2CC02285AFED800E501D5 /* AppContext.swift */,
 				0E293850285A70AC002A6E0E /* AppPreference.swift */,
 				0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */,
 				0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */,
@@ -597,7 +629,8 @@
 		0ED30DD627EA33220057D8A3 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				0EB17EA127D2263700D473B5 /* Constants.swift */,
+				0E293858285A7484002A6E0E /* Constants */,
+				0E293859285A7489002A6E0E /* Contexts */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -880,6 +913,7 @@
 				0EA591162733DDDA0096F796 /* Intents.intentdefinition in Sources */,
 				0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */,
 				0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */,
+				0E29385C285A8B30002A6E0E /* CoreContext+Shared.swift in Sources */,
 				0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */,
 				0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift in Sources */,
 				0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */,
@@ -935,8 +969,8 @@
 				0E293851285A70AC002A6E0E /* AppPreference.swift in Sources */,
 				0E5349BE27C16A4500C71BB3 /* StyledPicker.swift in Sources */,
 				0E2C172B27CB63F9007E8488 /* Reviewer.swift in Sources */,
-				0EF2CC03285AFED800E501D5 /* AppContext.swift in Sources */,
 				0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */,
+				0E021D9C284E68580077EF5D /* CoreContext.swift in Sources */,
 				0E34A2B627CAA8CC00C73B67 /* Core+L10n.swift in Sources */,
 				0E7577DF2817E22C00081CBE /* VPNToggle.swift in Sources */,
 				0E6059CF27FCC618003F4063 /* SwiftGen+Assets.swift in Sources */,
@@ -955,6 +989,7 @@
 				0E3CD483280DAE92007075C0 /* ProfileView+MainMenu.swift in Sources */,
 				0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */,
 				0E71ACEB27C1060D00F85C4B /* EndpointView.swift in Sources */,
+				0E293857285A73BC002A6E0E /* AppContext+Shared.swift in Sources */,
 				0E53249927D26B51002565C3 /* ProductManager.swift in Sources */,
 				0E9C233027F47032007D5FC7 /* IntentsManager.swift in Sources */,
 				0EB4042C27CA0E8C00378B1A /* Unlocalized.swift in Sources */,
@@ -968,6 +1003,7 @@
 				0E2C171B27CB5A3B007E8488 /* GenericCreditsView.swift in Sources */,
 				0ED30DD227EA1F650057D8A3 /* PaywallView+Purchase.swift in Sources */,
 				0EB3413027C7761A00483410 /* Binding+Extensions.swift in Sources */,
+				0E021D9D284E68580077EF5D /* AppContext.swift in Sources */,
 				0E2DE72527DCDF550067B9E1 /* WireGuard+L10n.swift in Sources */,
 				0E71ACFB27C12E5300F85C4B /* VersionView.swift in Sources */,
 				0ED1D6DC27DBA41700983466 /* DiagnosticsView+OpenVPN.swift in Sources */,

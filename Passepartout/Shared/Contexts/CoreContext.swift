@@ -1,8 +1,8 @@
 //
-//  AppContext.swift
+//  CoreContext.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/17/22.
+//  Created by Davide De Rosa on 6/4/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,16 +24,13 @@
 //
 
 import Foundation
-import CoreData
 import Combine
 import PassepartoutCore
 import PassepartoutServices
 
 @MainActor
-class AppContext {
-    static let shared = AppContext()
-    
-    private let logManager: LogManager
+class CoreContext {
+    let store: KeyValueStore
     
     private let profilesPersistence: Persistence
     
@@ -55,22 +52,10 @@ class AppContext {
     
     let vpnManager: VPNManager
     
-    let productManager: ProductManager
-    
-    let intentsManager: IntentsManager
-
-    let reviewer: Reviewer
-    
     private var cancellables: Set<AnyCancellable> = []
     
-    private init() {
-        let store = UserDefaultsStore(defaults: .standard)
-
-        logManager = LogManager(logFile: Constants.Log.appFileURL)
-        logManager.logLevel = Constants.Log.logLevel
-        logManager.logFormat = Constants.Log.appLogFormat
-        logManager.configureLogging()
-        pp_log.info("Logging to: \(logManager.logFile!)")
+    init(store: KeyValueStore) {
+        self.store = store
         
         let persistenceManager = PersistenceManager(store: store)
         profilesPersistence = persistenceManager.profilesPersistence(
@@ -119,15 +104,6 @@ class AppContext {
             providerManager: providerManager,
             strategy: strategy
         )
-
-        // app
-
-        productManager = ProductManager(
-            appType: Constants.InApp.appType,
-            buildProducts: Constants.InApp.buildProducts
-        )
-        intentsManager = IntentsManager()
-        reviewer = Reviewer()
         
         // post
         
@@ -135,80 +111,10 @@ class AppContext {
     }
     
     private func configureObjects() {
-
-        // core
-
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.tunnelLogFormat = Constants.Log.tunnelLogFormat
-        vpnManager.isOnDemandRulesSupported = {
-            self.isEligibleForOnDemandRules()
-        }
 
         profileManager.observeUpdates()
         vpnManager.observeUpdates()
-
-        // app
-
-        reviewer.eventCountBeforeRating = Constants.Rating.eventCount
-        vpnManager.currentState.$vpnStatus
-            .removeDuplicates()
-            .sink {
-                if $0 == .connected {
-                    pp_log.info("VPN successful connection, report to Reviewer")
-                    self.reviewer.reportEvent()
-                }
-        }.store(in: &cancellables)
     }
-    
-    // eligibility: ignore network settings if ineligible
-    private func isEligibleForNetworkSettings() -> Bool {
-        guard productManager.isEligible(forFeature: .networkSettings) else {
-            pp_log.warning("Ignore network settings, not eligible")
-            return false
-        }
-        return true
-    }
-    
-    // eligibility: reset on-demand rules if no trusted networks
-    private func isEligibleForOnDemandRules() -> Bool {
-        guard productManager.isEligible(forFeature: .trustedNetworks) else {
-            pp_log.warning("Ignore on-demand rules, not eligible for trusted networks")
-            return false
-        }
-        return true
-    }
-}
-
-extension UpgradeManager {
-    static let shared = AppContext.shared.upgradeManager
-}
-
-extension ProfileManager {
-    static let shared = AppContext.shared.profileManager
-}
-
-extension ProviderManager {
-    static let shared = AppContext.shared.providerManager
-}
-
-extension VPNManager {
-    static let shared = AppContext.shared.vpnManager
-}
-
-extension ProductManager {
-    static let shared = AppContext.shared.productManager
-}
-
-extension IntentsManager {
-    static let shared = AppContext.shared.intentsManager
-}
-
-extension Reviewer {
-    static let shared = AppContext.shared.reviewer
-}
-
-extension VPNManager.ObservableState {
-
-    @MainActor
-    static let shared = AppContext.shared.vpnManager.currentState
 }

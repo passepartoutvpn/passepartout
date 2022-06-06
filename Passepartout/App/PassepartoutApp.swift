@@ -56,7 +56,7 @@ extension View {
                 return
             }
             pp_log.info("Handling activity: \(activity.name)")
-            activity.handler(userActivity, AppContext.shared.vpnManager)
+            activity.handler(userActivity, CoreContext.shared.vpnManager)
         }
     }
 }

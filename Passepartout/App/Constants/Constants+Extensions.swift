@@ -156,7 +156,7 @@ extension Constants {
             return .init(rawValue: levelNum) ?? .info
         }()
         
-        static let appLogFormat = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
+        static let logFormat = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
         
         private static let appFileName = "Debug.log"
         
