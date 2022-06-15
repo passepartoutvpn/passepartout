@@ -653,7 +653,6 @@
 			buildConfigurationList = 0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout" */;
 			buildPhases = (
 				0EADDC7227F0677F0093E303 /* Copy Core Data codegen */,
-				0E9E5AF427B44E59008C95DA /* Refresh Localizations */,
 				0E57F63420C83FC5008323CF /* Sources */,
 				0E57F63520C83FC5008323CF /* Frameworks */,
 				0E57F63620C83FC5008323CF /* Resources */,
@@ -831,24 +830,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E9E5AF427B44E59008C95DA /* Refresh Localizations */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Refresh Localizations";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#PATH=${PATH}:/opt/homebrew/bin\n#cd \"${PROJECT_DIR}/Passepartout/App/Shared\"\n#swiftgen\n";
-		};
 		0EADDC7227F0677F0093E303 /* Copy Core Data codegen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
