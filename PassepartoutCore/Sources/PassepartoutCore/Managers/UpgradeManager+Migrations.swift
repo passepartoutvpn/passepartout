@@ -1,5 +1,5 @@
 //
-//  AppManager+Migrations.swift
+//  UpgradeManager+Migrations.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/20/22.
@@ -28,12 +28,34 @@ import GenericJSON
 import TunnelKitCore
 import TunnelKitOpenVPNCore
 import TunnelKitManager
+import PassepartoutUtils
 
 private typealias Map = [String: Any]
 
+// MARK: Migrate old store
+
+extension UpgradeManager {
+    fileprivate enum LegacyStoreKey: String, KeyStoreLocation {
+        case didMigrateToV2
+        
+        var key: String {
+            rawValue
+        }
+    }
+    
+    func doMigrateStore(_ store: KeyValueStore) {
+        if !didMigrateToV2 {
+            guard let legacyDidMigrateToV2: Bool = store.value(forLocation: LegacyStoreKey.didMigrateToV2) else {
+                return
+            }
+            didMigrateToV2 = legacyDidMigrateToV2
+        }
+    }
+}
+
 // MARK: Migrate to version 2
 
-extension AppManager {
+extension UpgradeManager {
     fileprivate enum MigrationError: Error {
         case json
         
@@ -321,7 +343,7 @@ private extension URL {
     func asJSON() throws -> Map {
         let data = try Data(contentsOf: self)
         guard let json = try JSONSerialization.jsonObject(with: data) as? Map else {
-            throw AppManager.MigrationError.json
+            throw UpgradeManager.MigrationError.json
         }
         return json
     }

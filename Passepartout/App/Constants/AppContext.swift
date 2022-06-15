@@ -33,6 +33,8 @@ import PassepartoutServices
 class AppContext {
     static let shared = AppContext()
     
+    private let logManager: LogManager
+    
     private let profilesPersistence: Persistence
     
     private let providersPersistence: Persistence
@@ -45,7 +47,7 @@ class AppContext {
         providersPersistence.containerURLs
     }
 
-    let appManager: AppManager
+    let upgradeManager: UpgradeManager
     
     let providerManager: ProviderManager
     
@@ -62,24 +64,23 @@ class AppContext {
     private var cancellables: Set<AnyCancellable> = []
     
     private init() {
-        
-        // core
-        
-        appManager = AppManager()
-        appManager.logLevel = Constants.Log.logLevel
-        appManager.logFile = Constants.Log.appFileURL
-        appManager.logFormat = Constants.Log.appLogFormat
-        appManager.tunnelLogFormat = Constants.Log.tunnelLogFormat
-        appManager.configureLogging()
-        pp_log.info("Logging to: \(appManager.logFile!)")
+        let store = UserDefaultsStore(defaults: .standard)
 
-        let persistenceManager = PersistenceManager(author: appManager.persistenceAuthor)
+        logManager = LogManager(logFile: Constants.Log.appFileURL)
+        logManager.logLevel = Constants.Log.logLevel
+        logManager.logFormat = Constants.Log.appLogFormat
+        logManager.configureLogging()
+        pp_log.info("Logging to: \(logManager.logFile!)")
+        
+        let persistenceManager = PersistenceManager(store: store)
         profilesPersistence = persistenceManager.profilesPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
         providersPersistence = persistenceManager.providersPersistence(
             withName: Constants.Persistence.providersContainerName
         )
+
+        upgradeManager = UpgradeManager(store: store)
 
         providerManager = ProviderManager(
             appBuild: Constants.Global.appBuildNumber,
@@ -95,6 +96,7 @@ class AppContext {
         )
 
         profileManager = ProfileManager(
+            store: store,
             providerManager: providerManager,
             appGroup: Constants.App.appGroupId,
             keychainLabel: Unlocalized.Keychain.passwordLabel,
@@ -112,7 +114,7 @@ class AppContext {
         )
         #endif
         vpnManager = VPNManager(
-            appManager: appManager,
+            store: store,
             profileManager: profileManager,
             providerManager: providerManager,
             strategy: strategy
@@ -137,12 +139,9 @@ class AppContext {
         // core
 
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
+        vpnManager.tunnelLogFormat = Constants.Log.tunnelLogFormat
         vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
-        }
-
-        if let activeProfileId = appManager.activeProfileId {
-            profileManager.setActiveProfileId(activeProfileId)
         }
 
         profileManager.observeUpdates()
@@ -180,8 +179,8 @@ class AppContext {
     }
 }
 
-extension AppManager {
-    static let shared = AppContext.shared.appManager
+extension UpgradeManager {
+    static let shared = AppContext.shared.upgradeManager
 }
 
 extension ProfileManager {

@@ -27,8 +27,6 @@ import SwiftUI
 import PassepartoutCore
 
 struct VPNToggle: View {
-    @ObservedObject private var appManager: AppManager
-
     @ObservedObject private var profileManager: ProfileManager
 
     @ObservedObject private var vpnManager: VPNManager
@@ -64,7 +62,6 @@ struct VPNToggle: View {
     @State private var canToggle = true
     
     init(profileId: UUID, rateLimit: Int) {
-        appManager = .shared
         profileManager = .shared
         vpnManager = .shared
         currentVPNState = .shared
@@ -87,10 +84,6 @@ struct VPNToggle: View {
             }
             do {
                 let profile = try await vpnManager.connect(with: profileId)
-
-                // IMPORTANT: save immediately to keep in sync with VPN status
-                appManager.activeProfileId = profileId
-
                 donateIntents(withProfile: profile)
             } catch {
                 pp_log.warning("Unable to connect to profile \(profileId): \(error)")

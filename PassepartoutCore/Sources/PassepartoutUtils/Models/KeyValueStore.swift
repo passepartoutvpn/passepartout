@@ -1,8 +1,8 @@
 //
-//  AppPreferences.swift
+//  KeyValueStore.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/10/22.
+//  Created by Davide De Rosa on 6/15/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,23 +25,22 @@
 
 import Foundation
 
-@MainActor
-public protocol AppPreferences {
-    var activeProfileId: UUID? { get }
-    
-    var logFormat: String? { get }
-
-    var tunnelLogFormat: String? { get }
-    
-    var masksPrivateData: Bool { get }
+public protocol KeyStoreLocation: RawRepresentable where RawValue == String {
+    var key: String { get }
 }
 
-public struct DefaultAppPreferences: AppPreferences {
-    public let activeProfileId: UUID?
-    
-    public let logFormat: String?
+public protocol KeyStoreDomainLocation: KeyStoreLocation {
+    var domain: String { get }
+}
 
-    public let tunnelLogFormat: String?
+extension KeyStoreDomainLocation {
+    public var key: String {
+        "\(domain).\(rawValue)"
+    }
+}
+
+public protocol KeyValueStore {
+    func setValue<L: KeyStoreLocation, V>(_ value: V, forLocation location: L)
     
-    public let masksPrivateData: Bool
+    func value<L: KeyStoreLocation, V>(forLocation location: L) -> V?
 }

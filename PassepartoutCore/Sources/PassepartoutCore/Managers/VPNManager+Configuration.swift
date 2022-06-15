@@ -26,6 +26,13 @@
 import Foundation
 
 extension VPNManager {
+    private var vpnPreferences: VPNPreferences {
+        DefaultVPNPreferences(
+            tunnelLogFormat: tunnelLogFormat,
+            masksPrivateData: masksPrivateData
+        )
+    }
+    
     func vpnConfigurationWithCurrentProfile() -> VPNConfiguration? {
         do {
             guard profileManager.isCurrentProfileActive() else {
@@ -52,7 +59,7 @@ extension VPNManager {
             let parameters = VPNConfigurationParameters(
                 profile,
                 appGroup: profileManager.appGroup,
-                preferences: appManager.preferences,
+                preferences: vpnPreferences,
                 passwordReference: profileManager.passwordReference(forProfile: profile),
                 withNetworkSettings: isNetworkSettingsSupported(),
                 withCustomRules: isOnDemandRulesSupported()

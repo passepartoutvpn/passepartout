@@ -25,8 +25,9 @@
 
 import Foundation
 import Combine
+import TunnelKitCore
 import TunnelKitManager
-import TunnelKitOpenVPNManager
+import PassepartoutUtils
 
 @MainActor
 public class VPNManager: ObservableObject {
@@ -34,8 +35,8 @@ public class VPNManager: ObservableObject {
 
     // MARK: Initialization
     
-    let appManager: AppManager
-
+    private let store: KeyValueStore
+    
     let profileManager: ProfileManager
     
     let providerManager: ProviderManager
@@ -68,12 +69,12 @@ public class VPNManager: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     
     public init(
-        appManager: AppManager,
+        store: KeyValueStore,
         profileManager: ProfileManager,
         providerManager: ProviderManager,
         strategy: VPNManagerStrategy
     ) {
-        self.appManager = appManager
+        self.store = store
         self.profileManager = profileManager
         self.providerManager = providerManager
         self.strategy = strategy
@@ -81,6 +82,8 @@ public class VPNManager: ObservableObject {
         isOnDemandRulesSupported = { true }
 
         currentState = ObservableState()
+
+        CoreConfiguration.masksPrivateData = masksPrivateData
     }
 
     public func toggle() -> Bool {
@@ -152,7 +155,7 @@ extension VPNManager {
     }
 
     private func observeProfileManager() {
-        profileManager.$activeProfileId
+        profileManager.activeProfileIdPublisher
             .dropFirst()
             .removeDuplicates()
             .sink { newId in
@@ -249,6 +252,42 @@ extension VPNManager {
             await reconnect(cfg)
         } else {
             await reinstate(cfg)
+        }
+    }
+}
+
+// MARK: KeyValueStore
+
+extension VPNManager {
+    public var tunnelLogFormat: String? {
+        get {
+            store.value(forLocation: StoreKey.tunnelLogFormat)
+        }
+        set {
+            store.setValue(newValue, forLocation: StoreKey.tunnelLogFormat)
+        }
+    }
+    
+    public var masksPrivateData: Bool {
+        get {
+            store.value(forLocation: StoreKey.masksPrivateData) ?? true
+        }
+        set {
+            store.setValue(newValue, forLocation: StoreKey.masksPrivateData)
+
+            CoreConfiguration.masksPrivateData = masksPrivateData
+        }
+    }
+}
+
+private extension VPNManager {
+    private enum StoreKey: String, KeyStoreDomainLocation {
+        case tunnelLogFormat
+        
+        case masksPrivateData
+        
+        var domain: String {
+            "VPNManager"
         }
     }
 }

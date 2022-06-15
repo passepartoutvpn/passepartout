@@ -29,8 +29,6 @@ import PassepartoutCore
 struct ProviderLocationView: View, ProviderProfileAvailability {
     @ObservedObject var providerManager: ProviderManager
 
-    @ObservedObject private var appManager: AppManager
-    
     @ObservedObject private var currentProfile: ObservableProfile
     
     var profile: Profile {
@@ -55,7 +53,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     
     @Binding private var favoriteLocationIds: Set<String>?
     
-    @AppStorage(AppManager.DefaultKey.isShowingFavorites.rawValue) private var isShowingFavorites = false
+    @AppStorage(AppPreference.isShowingFavorites.key) private var isShowingFavorites = false
 
     private var isShowingEmptyFavorites: Bool {
         guard isShowingFavorites else {
@@ -68,7 +66,6 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     init(currentProfile: ObservableProfile, isEditable: Bool, isPresented: Binding<Bool>) {
         let providerManager: ProviderManager = .shared
 
-        appManager = .shared
         self.providerManager = providerManager
         self.currentProfile = currentProfile
         self.isEditable = isEditable

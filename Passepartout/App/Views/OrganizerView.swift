@@ -48,7 +48,7 @@ struct OrganizerView: View {
 
     @State private var isHostFileImporterPresented = false
 
-    @AppStorage(AppManager.DefaultKey.didHandleSubreddit.rawValue) var didHandleSubreddit = false
+    @AppStorage(AppPreference.didHandleSubreddit.key) private var didHandleSubreddit = false
     
     private let hostFileTypes = Constants.URLs.filetypes
     

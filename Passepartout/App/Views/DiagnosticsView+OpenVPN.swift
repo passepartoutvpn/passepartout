@@ -37,8 +37,6 @@ extension DiagnosticsView {
             }
         }
 
-        @ObservedObject private var appManager: AppManager
-
         @ObservedObject private var providerManager: ProviderManager
 
         @ObservedObject private var vpnManager: VPNManager
@@ -62,7 +60,6 @@ extension DiagnosticsView {
         private let logUpdateInterval = Constants.Log.tunnelLogRefreshInterval
         
         init(providerName: ProviderName?) {
-            appManager = .shared
             providerManager = .shared
             vpnManager = .shared
             currentVPNState = .shared
@@ -120,7 +117,7 @@ extension DiagnosticsView {
                         )
                     }
                 }.disabled(url == nil)
-                Toggle(L10n.Diagnostics.Items.MasksPrivateData.caption, isOn: $appManager.masksPrivateData)
+                Toggle(L10n.Diagnostics.Items.MasksPrivateData.caption, isOn: $vpnManager.masksPrivateData)
             } footer: {
                 Text(L10n.Diagnostics.Sections.DebugLog.footer)
             }

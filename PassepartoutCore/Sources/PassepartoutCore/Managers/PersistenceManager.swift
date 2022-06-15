@@ -25,21 +25,50 @@
 
 import Foundation
 import CoreData
+import PassepartoutUtils
 
 public class PersistenceManager {
-    private let author: String?
+    private let store: KeyValueStore
     
-    public init(author: String?) {
-        self.author = author
+    public init(store: KeyValueStore) {
+        self.store = store
+        
+        // set once
+        if persistenceAuthor == nil {
+            persistenceAuthor = UUID().uuidString
+        }
     }
 
     public func profilesPersistence(withName containerName: String) -> Persistence {
         let model = PassepartoutDataModels.profiles
-        return Persistence(withCloudKitName: containerName, model: model, author: author)
+        return Persistence(withCloudKitName: containerName, model: model, author: persistenceAuthor)
     }
     
     public func providersPersistence(withName containerName: String) -> Persistence {
         let model = PassepartoutDataModels.providers
-        return Persistence(withLocalName: containerName, model: model, author: author)
+        return Persistence(withLocalName: containerName, model: model, author: persistenceAuthor)
+    }
+}
+
+// MARK: KeyValueStore
+
+extension PersistenceManager {
+    public private(set) var persistenceAuthor: String? {
+        get {
+            store.value(forLocation: StoreKey.persistenceAuthor)
+        }
+        set {
+            store.setValue(newValue, forLocation: StoreKey.persistenceAuthor)
+        }
+    }
+}
+
+private extension PersistenceManager {
+    private enum StoreKey: String, KeyStoreDomainLocation {
+        case persistenceAuthor
+
+        var domain: String {
+            "PersistenceManager"
+        }
     }
 }

@@ -35,6 +35,8 @@ public class ProfileManager: ObservableObject {
     
     // MARK: Initialization
     
+    private let store: KeyValueStore
+    
     private let providerManager: ProviderManager
     
     public let appGroup: String
@@ -47,7 +49,7 @@ public class ProfileManager: ObservableObject {
     
     // MARK: Observables
 
-    @Published public private(set) var activeProfileId: UUID? {
+    @Published private var internalActiveProfileId: UUID? {
         willSet {
             pp_log.debug("Setting active profile: \(newValue?.uuidString ?? "nil")")
         }
@@ -57,6 +59,10 @@ public class ProfileManager: ObservableObject {
         willSet {
             pp_log.debug("Setting current profile: \(newValue?.uuidString ?? "nil")")
         }
+    }
+
+    public var activeProfileIdPublisher: Published<UUID?>.Publisher {
+        $internalActiveProfileId
     }
 
     public var currentProfileId: UUID? {
@@ -83,6 +89,7 @@ public class ProfileManager: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
 
     public init(
+        store: KeyValueStore,
         providerManager: ProviderManager,
         appGroup: String,
         keychainLabel: @escaping (String, VPNProtocolType) -> String,
@@ -91,6 +98,7 @@ public class ProfileManager: ObservableObject {
         guard let _ = UserDefaults(suiteName: appGroup) else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
+        self.store = store
         self.providerManager = providerManager
         self.appGroup = appGroup
         self.keychainLabel = keychainLabel
@@ -98,14 +106,6 @@ public class ProfileManager: ObservableObject {
         self.strategy = strategy
 
         currentProfile = ObservableProfile()
-    }
-    
-    public func setActiveProfileId(_ id: UUID) {
-        guard isExistingProfile(withId: id) else {
-            pp_log.warning("Active profile \(id) does not exist, ignoring")
-            return
-        }
-        activeProfileId = id
     }
 }
 
@@ -447,6 +447,44 @@ extension ProfileManager {
         } catch {
             pp_log.error("Unable to import missing provider: \(error)")
             throw PassepartoutError.missingProfile
+        }
+    }
+}
+
+// MARK: KeyValueStore
+
+extension ProfileManager {
+    public private(set) var activeProfileId: UUID? {
+        get {
+            guard let idString: String = store.value(forLocation: StoreKey.activeProfileId) else {
+                return nil
+            }
+            guard let id = UUID(uuidString: idString) else {
+                pp_log.warning("Active profile id is malformed, ignoring")
+                return nil
+            }
+            guard isExistingProfile(withId: id) else {
+                pp_log.warning("Active profile \(id) does not exist, ignoring")
+                return nil
+            }
+            return id
+        }
+        set {
+
+            // trigger publisher
+            internalActiveProfileId = newValue
+
+            store.setValue(newValue?.uuidString, forLocation: StoreKey.activeProfileId)
+        }
+    }
+}
+
+private extension ProfileManager {
+    private enum StoreKey: String, KeyStoreDomainLocation {
+        case activeProfileId
+        
+        var domain: String {
+            "ProfileManager"
         }
     }
 }

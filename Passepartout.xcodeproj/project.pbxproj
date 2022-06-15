@@ -16,6 +16,7 @@
 		0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */; };
 		0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E0C072B236087A100155AAC /* InfoPlist.strings */; };
 		0E12BC8F27F62C8600B2F912 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12BC8E27F62C8500B2F912 /* Validators.swift */; };
+		0E293851285A70AC002A6E0E /* AppPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E293850285A70AC002A6E0E /* AppPreference.swift */; };
 		0E2A8D4927ADF87F00207D04 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */; };
 		0E2A8D4F27B04BBA00207D04 /* OrganizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */; };
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
@@ -47,7 +48,6 @@
 		0E5349BE27C16A4500C71BB3 /* StyledPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5349BD27C16A4500C71BB3 /* StyledPicker.swift */; };
 		0E5349C627C176C200C71BB3 /* EndpointView+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5349C527C176C200C71BB3 /* EndpointView+OpenVPN.swift */; };
 		0E5349C827C176D100C71BB3 /* EndpointView+WireGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5349C727C176D100C71BB3 /* EndpointView+WireGuard.swift */; };
-		0E53E63727E34FE2001D4902 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E53E63627E34FE2001D4902 /* AppContext.swift */; };
 		0E5683B927C2825D00EAF1CD /* DiagnosticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5683B827C2825D00EAF1CD /* DiagnosticsView.swift */; };
 		0E6059CB27FCC5DE003F4063 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059C827FCC5DD003F4063 /* Flags.xcassets */; };
 		0E6059CC27FCC5DE003F4063 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059C927FCC5DE003F4063 /* Providers.xcassets */; };
@@ -123,6 +123,7 @@
 		0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */; };
 		0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */; };
 		0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */; };
+		0EF2CC03285AFED800E501D5 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF2CC02285AFED800E501D5 /* AppContext.swift */; };
 		0EF8C5A828213C510053CE89 /* OrganizerView+Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */; };
 /* End PBXBuildFile section */
 
@@ -202,6 +203,7 @@
 		0E12BC8E27F62C8500B2F912 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		0E1C0A52238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E23B4A12298559800304C30 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		0E293850285A70AC002A6E0E /* AppPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreference.swift; sourceTree = "<group>"; };
 		0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassepartoutApp.swift; sourceTree = "<group>"; };
 		0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerView.swift; sourceTree = "<group>"; };
 		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -232,7 +234,6 @@
 		0E5349BD27C16A4500C71BB3 /* StyledPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledPicker.swift; sourceTree = "<group>"; };
 		0E5349C527C176C200C71BB3 /* EndpointView+OpenVPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndpointView+OpenVPN.swift"; sourceTree = "<group>"; };
 		0E5349C727C176D100C71BB3 /* EndpointView+WireGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndpointView+WireGuard.swift"; sourceTree = "<group>"; };
-		0E53E63627E34FE2001D4902 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		0E5683B827C2825D00EAF1CD /* DiagnosticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticsView.swift; sourceTree = "<group>"; };
 		0E57F63820C83FC5008323CF /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E57F64720C83FC7008323CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -341,6 +342,7 @@
 		0EF2212C27E66EB5001D0BD7 /* AddProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderView.swift; sourceTree = "<group>"; };
 		0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 		0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderViewModel.swift; sourceTree = "<group>"; };
+		0EF2CC02285AFED800E501D5 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Profiles.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -565,7 +567,8 @@
 		0EB17EA027D2263700D473B5 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				0E53E63627E34FE2001D4902 /* AppContext.swift */,
+				0EF2CC02285AFED800E501D5 /* AppContext.swift */,
+				0E293850285A70AC002A6E0E /* AppPreference.swift */,
 				0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */,
 				0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */,
 				0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */,
@@ -907,7 +910,6 @@
 				0EBC075D27EC529000208AD9 /* DebugLog+Constants.swift in Sources */,
 				0E3CD47F280DA14B007075C0 /* AddProfileMenu.swift in Sources */,
 				0EB17EAA27D226C900D473B5 /* Constants+Extensions.swift in Sources */,
-				0E53E63727E34FE2001D4902 /* AppContext.swift in Sources */,
 				0E3B7FD627E5173A00C66F13 /* ProfileView+VPN.swift in Sources */,
 				0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */,
 				0EBE880F281B18DE0090D9E6 /* ProfileRow.swift in Sources */,
@@ -930,8 +932,10 @@
 				0E71ACEF27C106B500F85C4B /* ProviderPresetView.swift in Sources */,
 				0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */,
 				0EF0FAF627DD0211007EB181 /* PaywallView.swift in Sources */,
+				0E293851285A70AC002A6E0E /* AppPreference.swift in Sources */,
 				0E5349BE27C16A4500C71BB3 /* StyledPicker.swift in Sources */,
 				0E2C172B27CB63F9007E8488 /* Reviewer.swift in Sources */,
+				0EF2CC03285AFED800E501D5 /* AppContext.swift in Sources */,
 				0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */,
 				0E34A2B627CAA8CC00C73B67 /* Core+L10n.swift in Sources */,
 				0E7577DF2817E22C00081CBE /* VPNToggle.swift in Sources */,

@@ -39,7 +39,7 @@ struct VPNConfigurationParameters {
     
     let appGroup: String
     
-    let preferences: AppPreferences
+    let preferences: VPNPreferences
 
     let networkSettings: Profile.NetworkSettings
 
@@ -54,7 +54,7 @@ struct VPNConfigurationParameters {
     init(
         _ profile: Profile,
         appGroup: String,
-        preferences: AppPreferences,
+        preferences: VPNPreferences,
         passwordReference: Data?,
         withNetworkSettings: Bool,
         withCustomRules: Bool
