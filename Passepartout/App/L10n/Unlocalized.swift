@@ -194,7 +194,10 @@ enum Unlocalized {
             "The country flags are taken from: https://github.com/lipis/flag-icon-css/"
         ), (
             "OpenVPN",
-            "© 2002-2018 OpenVPN Inc. - OpenVPN is a registered trademark of OpenVPN Inc."
+            "© Copyright 2022 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc."
+        ), (
+            "WireGuard",
+            "© Copyright 2015-2022 Jason A. Donenfeld. All Rights Reserved. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld."
         )]
     }
 
