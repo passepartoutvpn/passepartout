@@ -157,7 +157,13 @@ extension Constants {
                 .appendingPathComponent(filename)
         }
 
+        private static func containerLogPath(filename: String) -> String {
+            "\(parentPath)/\(filename)"
+        }
+
         static let appLogURL = containerLogURL(filename: "App.log")
+
+        static let tunnelLogPath = containerLogPath(filename: "Tunnel.log")
 
         static let logLevel: SwiftyBeaver.Level = {
             guard let levelString = ProcessInfo.processInfo.environment["LOG_LEVEL"], let levelNum = Int(levelString) else {

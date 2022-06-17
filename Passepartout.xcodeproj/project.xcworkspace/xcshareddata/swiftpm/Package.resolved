@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/passepartoutvpn/openssl-apple",
         "state": {
           "branch": null,
-          "revision": "cbbff97a99384a5415bb47c072c376066b78f65f",
-          "version": "1.1.11300"
+          "revision": "1c03f4d3fc1d90a0a525af68f06eada56e5e8bb1",
+          "version": "1.1.11500"
         }
       },
       {
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
         "state": {
           "branch": null,
-          "revision": "6e0471a55b8277ff0b21e4dd3dfcfcc8da5f0355",
+          "revision": "36ed23ccc4e6083d671b6b823f50787b018f2844",
           "version": null
         }
       },

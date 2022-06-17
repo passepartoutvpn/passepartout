@@ -26,12 +26,16 @@
 import Foundation
 
 public protocol VPNPreferences {
+    var tunnelLogPath: String? { get }
+    
     var tunnelLogFormat: String? { get }
     
     var masksPrivateData: Bool { get }
 }
 
 struct DefaultVPNPreferences: VPNPreferences {
+    let tunnelLogPath: String?
+
     let tunnelLogFormat: String?
     
     let masksPrivateData: Bool

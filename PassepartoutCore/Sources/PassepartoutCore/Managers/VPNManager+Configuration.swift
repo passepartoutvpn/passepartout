@@ -28,6 +28,7 @@ import Foundation
 extension VPNManager {
     private var vpnPreferences: VPNPreferences {
         DefaultVPNPreferences(
+            tunnelLogPath: tunnelLogPath,
             tunnelLogFormat: tunnelLogFormat,
             masksPrivateData: masksPrivateData
         )

@@ -281,10 +281,10 @@ extension VPNManager {
         public func debugLogURL(forProtocol vpnProtocol: VPNProtocolType) -> URL? {
             switch vpnProtocol {
             case .openVPN:
-                return FileManager.default.openVPNURLForDebugLog(appGroup: appGroup)
+                return defaults.openVPNURLForDebugLog(appGroup: appGroup)
                 
             default:
-                return FileManager.default.wireGuardURLForDebugLog(appGroup: appGroup)
+                return defaults.wireGuardURLForDebugLog(appGroup: appGroup)
             }
         }
 

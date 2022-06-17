@@ -259,6 +259,15 @@ extension VPNManager {
 // MARK: KeyValueStore
 
 extension VPNManager {
+    public var tunnelLogPath: String? {
+        get {
+            store.value(forLocation: StoreKey.tunnelLogPath)
+        }
+        set {
+            store.setValue(newValue, forLocation: StoreKey.tunnelLogPath)
+        }
+    }
+
     public var tunnelLogFormat: String? {
         get {
             store.value(forLocation: StoreKey.tunnelLogFormat)
@@ -282,6 +291,8 @@ extension VPNManager {
 
 private extension VPNManager {
     private enum StoreKey: String, KeyStoreDomainLocation {
+        case tunnelLogPath
+        
         case tunnelLogFormat
         
         case masksPrivateData
