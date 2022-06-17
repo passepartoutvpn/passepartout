@@ -68,7 +68,7 @@ private extension PersistenceManager {
         case persistenceAuthor
 
         var domain: String {
-            "PersistenceManager"
+            "Passepartout.PersistenceManager"
         }
     }
 }

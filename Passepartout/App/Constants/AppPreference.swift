@@ -32,6 +32,6 @@ enum AppPreference: String, KeyStoreDomainLocation {
     case didHandleSubreddit
 
     var domain: String {
-        "App"
+        "Passepartout.App"
     }
 }

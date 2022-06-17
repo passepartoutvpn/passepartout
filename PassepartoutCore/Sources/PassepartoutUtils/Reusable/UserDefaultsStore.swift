@@ -1,5 +1,5 @@
 //
-//  KeyValueStore.swift
+//  UserDefaultsStore.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/15/22.
@@ -25,22 +25,22 @@
 
 import Foundation
 
-public protocol KeyStoreLocation: RawRepresentable where RawValue == String {
-    var key: String { get }
-}
-
-public protocol KeyStoreDomainLocation: KeyStoreLocation {
-    var domain: String { get }
-}
-
-extension KeyStoreDomainLocation {
-    public var key: String {
-        "\(domain).\(rawValue)"
-    }
-}
-
-public protocol KeyValueStore {
-    func setValue<L: KeyStoreLocation, V>(_ value: V, forLocation location: L)
+public struct UserDefaultsStore: KeyValueStore {
+    private let defaults: UserDefaults
     
-    func value<L: KeyStoreLocation, V>(forLocation location: L) -> V?
+    public init(defaults: UserDefaults) {
+        self.defaults = defaults
+    }
+    
+    public func setValue<L: KeyStoreLocation, V>(_ value: V, forLocation location: L) {
+        defaults.setValue(value, forKey: location.key)
+    }
+    
+    public func value<L: KeyStoreLocation, V>(forLocation location: L) -> V? {
+        defaults.value(forKey: location.key) as? V
+    }
+    
+    public func removeValue<L: KeyStoreLocation>(forLocation location: L) {
+        defaults.removeObject(forKey: location.key)
+    }
 }

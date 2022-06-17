@@ -35,8 +35,36 @@ private typealias Map = [String: Any]
 // MARK: Migrate old store
 
 extension UpgradeManager {
-    fileprivate enum LegacyStoreKey: String, KeyStoreLocation {
+    fileprivate enum LegacyStoreKey: String, KeyStoreLocation, CaseIterable {
+        case activeProfileId
+        
+        case launchesOnLogin
+        
+        case isStatusMenuEnabled
+        
+        case isShowingFavorites
+
+        case confirmsQuit
+        
+        case logFormat
+        
+        case tunnelLogFormat
+        
+        case masksPrivateData
+        
+        case didHandleSubreddit
+        
+        case persistenceAuthor
+
         case didMigrateToV2
+        
+        case other1 = "MasksPrivateData"
+        
+        case other2 = "DidHandleSubreddit"
+        
+        case other3 = "Convenience.Reviewer.LastVersion"
+        
+        case other4 = "didMigrateKeychainContext"
         
         var key: String {
             rawValue
@@ -49,6 +77,10 @@ extension UpgradeManager {
                 return
             }
             didMigrateToV2 = legacyDidMigrateToV2
+        }
+        
+        LegacyStoreKey.allCases.forEach {
+            store.removeValue(forLocation: $0)
         }
     }
 }

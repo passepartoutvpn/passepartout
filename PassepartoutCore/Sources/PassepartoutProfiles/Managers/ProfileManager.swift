@@ -484,7 +484,7 @@ private extension ProfileManager {
         case activeProfileId
         
         var domain: String {
-            "ProfileManager"
+            "Passepartout.ProfileManager"
         }
     }
 }

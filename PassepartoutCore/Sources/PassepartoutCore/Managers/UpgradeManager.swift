@@ -89,7 +89,7 @@ private extension UpgradeManager {
         case didMigrateToV2
 
         var domain: String {
-            "UpgradeManager"
+            "Passepartout.UpgradeManager"
         }
     }
 }

@@ -298,7 +298,7 @@ private extension VPNManager {
         case masksPrivateData
         
         var domain: String {
-            "VPNManager"
+            "Passepartout.VPNManager"
         }
     }
 }
