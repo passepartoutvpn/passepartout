@@ -28,7 +28,6 @@
 
 CFG_TEAM_ID = DTDYD63ZX9
 CFG_APP_ID = com.algoritmico.ios.Passepartout
-CFG_APP_LAUNCHER_ID = com.algoritmico.ios.Passepartout.Launcher
 CFG_GROUP_ID = com.algoritmico.Passepartout
 CFG_APPSTORE_ID = 1433648537
 CFG_COPYRIGHT = Copyright © 2022 Davide De Rosa. All rights reserved.

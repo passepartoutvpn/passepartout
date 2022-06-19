@@ -1,5 +1,5 @@
 //
-//  Constants+Extensions.swift
+//  Constants+App.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/15/18.
@@ -34,8 +34,6 @@ extension Constants {
 
 extension Constants {
     enum App {
-        static let appLauncherId = bundleConfig?["app_launcher_id"] as? String ?? "DUMMY_app_launcher_id"
-
         static let appStoreId = bundleConfig?["appstore_id"] as? String ?? "DUMMY_appstore_id"
 
         static let appGroupId = bundleConfig?["group_id"] as? String ?? "DUMMY_group_id"

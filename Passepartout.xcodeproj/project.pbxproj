@@ -83,7 +83,7 @@
 		0EA591162733DDDA0096F796 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0EA591142733DDDA0096F796 /* Intents.intentdefinition */; };
 		0EB17EA727D226B400D473B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0EB17EA927D226C900D473B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
-		0EB17EAA27D226C900D473B5 /* Constants+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */; };
+		0EB17EAA27D226C900D473B5 /* Constants+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA527D2263700D473B5 /* Constants+App.swift */; };
 		0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA327D2263700D473B5 /* LocalProduct.swift */; };
 		0EB17EBA27D2560300D473B5 /* PassepartoutProviders+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */; };
 		0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -299,7 +299,7 @@
 		0EA5912E2733DDFD0096F796 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Intents.strings; sourceTree = "<group>"; };
 		0EB17EA127D2263700D473B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0EB17EA327D2263700D473B5 /* LocalProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalProduct.swift; sourceTree = "<group>"; };
-		0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Extensions.swift"; sourceTree = "<group>"; };
+		0EB17EA527D2263700D473B5 /* Constants+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+App.swift"; sourceTree = "<group>"; };
 		0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PassepartoutProviders+Extensions.swift"; sourceTree = "<group>"; };
 		0EB3412F27C7761A00483410 /* Binding+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
 		0EB34BC927C6A70200B126DA /* OnDemandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDemandView.swift; sourceTree = "<group>"; };
@@ -392,22 +392,23 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		0E293859285A7489002A6E0E /* Contexts */ = {
+		0E293859285A7489002A6E0E /* Context */ = {
 			isa = PBXGroup;
 			children = (
 				0E021D9A284E68580077EF5D /* CoreContext.swift */,
 				0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */,
 			);
-			path = Contexts;
+			path = Context;
 			sourceTree = "<group>";
 		};
-		0E29385A285A749E002A6E0E /* Contexts */ = {
+		0E29385A285A749E002A6E0E /* Context */ = {
 			isa = PBXGroup;
 			children = (
+				0E293850285A70AC002A6E0E /* AppPreference.swift */,
 				0E021D9B284E68580077EF5D /* AppContext.swift */,
 				0E293856285A73BC002A6E0E /* AppContext+Shared.swift */,
 			);
-			path = Contexts;
+			path = Context;
 			sourceTree = "<group>";
 		};
 		0E2C171C27CB6307007E8488 /* Reusable */ = {
@@ -421,7 +422,6 @@
 				0EDE02C127F61C79000FBE3C /* EditableTextList.swift */,
 				0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */,
 				0E34A2CE27CADA6300C73B67 /* GenericVersionView.swift */,
-				0E5324A527D297BB002565C3 /* InApp.swift */,
 				0EF0FAF827DD212C007EB181 /* IntentActivity.swift */,
 				0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */,
 				0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */,
@@ -555,6 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				0E9AA983259F76C5003FAFF1 /* App */,
+				0ECB78D1285F4F4000B0E460 /* AppShared */,
 				0ED30DD627EA33220057D8A3 /* Shared */,
 				0EDE8DC020C86910004C739C /* Tunnel */,
 			);
@@ -564,12 +565,10 @@
 		0E9AA983259F76C5003FAFF1 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				0EB17EA027D2263700D473B5 /* Constants */,
-				0E29385A285A749E002A6E0E /* Contexts */,
+				0ECB78D4285F505D00B0E460 /* Constants */,
+				0E29385A285A749E002A6E0E /* Context */,
 				0E49F6C927DB398100385834 /* Extensions */,
-				0E92781227E7CD530057BB81 /* InApp */,
 				0EA591112733DD4E0096F796 /* Intents */,
-				0E34A2B827CAA8EA00C73B67 /* L10n */,
 				0E2C171C27CB6307007E8488 /* Reusable */,
 				0E35C0AE280EF8A80071FA35 /* Views */,
 				0E6059CA27FCC5DE003F4063 /* Assets.xcassets */,
@@ -580,7 +579,6 @@
 				0E09E35C2834172800BE1BAE /* Credits.rtf */,
 				0E57F64720C83FC7008323CF /* Info.plist */,
 				0E0C072B236087A100155AAC /* InfoPlist.strings */,
-				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
 				0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */,
 			);
 			path = App;
@@ -597,16 +595,43 @@
 			path = Intents;
 			sourceTree = "<group>";
 		};
-		0EB17EA027D2263700D473B5 /* Constants */ = {
+		0ECB78D1285F4F4000B0E460 /* AppShared */ = {
 			isa = PBXGroup;
 			children = (
-				0E293850285A70AC002A6E0E /* AppPreference.swift */,
-				0EB17EA527D2263700D473B5 /* Constants+Extensions.swift */,
-				0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */,
+				0ECB78D3285F4F9600B0E460 /* Constants */,
+				0E293859285A7489002A6E0E /* Context */,
+				0E92781227E7CD530057BB81 /* InApp */,
+				0E34A2B827CAA8EA00C73B67 /* L10n */,
+				0ECB78D5285F508B00B0E460 /* Reusable */,
+				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
+			);
+			path = AppShared;
+			sourceTree = "<group>";
+		};
+		0ECB78D3285F4F9600B0E460 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0EB17EA527D2263700D473B5 /* Constants+App.swift */,
 				0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		0ECB78D4285F505D00B0E460 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */,
 				0EB34BCB27C6F41D00B126DA /* Theme.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		0ECB78D5285F508B00B0E460 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				0E5324A527D297BB002565C3 /* InApp.swift */,
+			);
+			path = Reusable;
 			sourceTree = "<group>";
 		};
 		0ED2B33C27D3C52900FD8EA9 /* OpenVPN */ = {
@@ -630,7 +655,6 @@
 			isa = PBXGroup;
 			children = (
 				0E293858285A7484002A6E0E /* Constants */,
-				0E293859285A7489002A6E0E /* Contexts */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -943,7 +967,7 @@
 				0E9C233327F47E95007D5FC7 /* IntentDispatcher+Activities.swift in Sources */,
 				0EBC075D27EC529000208AD9 /* DebugLog+Constants.swift in Sources */,
 				0E3CD47F280DA14B007075C0 /* AddProfileMenu.swift in Sources */,
-				0EB17EAA27D226C900D473B5 /* Constants+Extensions.swift in Sources */,
+				0EB17EAA27D226C900D473B5 /* Constants+App.swift in Sources */,
 				0E3B7FD627E5173A00C66F13 /* ProfileView+VPN.swift in Sources */,
 				0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */,
 				0EBE880F281B18DE0090D9E6 /* ProfileRow.swift in Sources */,
