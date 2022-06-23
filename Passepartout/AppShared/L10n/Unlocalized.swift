@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 enum Unlocalized {
     static let appName = Constants.Global.appName

@@ -25,7 +25,7 @@
 
 import SwiftUI
 import Combine
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct DebugLogView: View {
     private let url: URL

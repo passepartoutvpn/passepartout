@@ -24,11 +24,11 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension AddProviderView {
     struct NameView: View {
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
         
         @Binding private var profile: Profile
         

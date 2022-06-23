@@ -24,17 +24,15 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 protocol ProviderProfileAvailability {
     var profile: Profile { get }
     
-    var providerManager: ProviderManager { get }
+    var providerManager: Impl.ProviderManager { get }
 }
 
 extension ProviderProfileAvailability {
-
-    @MainActor
     var isProviderProfileAvailable: Bool {
         guard !profile.isPlaceholder else {
             return false

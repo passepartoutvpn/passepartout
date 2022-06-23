@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension ProfileView {
     struct MainMenu: View {
@@ -38,9 +38,9 @@ extension ProfileView {
             }
         }
         
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
         
-        @ObservedObject private var vpnManager: VPNManager
+        @ObservedObject private var vpnManager: Impl.VPNManager
         
         @ObservedObject private var currentProfile: ObservableProfile
         
@@ -200,7 +200,7 @@ extension ProfileView {
     }
 
     struct DuplicateButton: View {
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
         
         private let header: Profile.Header
         

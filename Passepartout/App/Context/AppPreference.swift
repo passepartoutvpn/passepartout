@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutUtils
+import PassepartoutLibrary
 
 enum AppPreference: String, KeyStoreDomainLocation {
     case isShowingFavorites

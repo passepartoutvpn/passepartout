@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 enum AddProfileView {
     struct Bindings {
@@ -71,7 +71,7 @@ enum AddProfileView {
     }
 
     struct AccountWrapperView: View {
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
 
         @Binding private var profile: Profile
         

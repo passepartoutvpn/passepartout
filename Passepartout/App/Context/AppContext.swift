@@ -25,9 +25,8 @@
 
 import Foundation
 import Combine
-import PassepartoutCore
+import PassepartoutLibrary
 
-@MainActor
 class AppContext {
     private let logManager: LogManager
     

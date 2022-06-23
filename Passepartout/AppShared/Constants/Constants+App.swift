@@ -25,7 +25,7 @@
 
 import Foundation
 import UniformTypeIdentifiers
-import PassepartoutCore
+import PassepartoutLibrary
 import SwiftyBeaver
 
 extension Constants {

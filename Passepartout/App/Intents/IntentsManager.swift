@@ -28,7 +28,6 @@ import Intents
 import IntentsUI
 import Combine
 
-@MainActor
 class IntentsManager: NSObject, ObservableObject {
     @Published private(set) var isReloadingShortcuts = false
     
@@ -36,7 +35,6 @@ class IntentsManager: NSObject, ObservableObject {
     
     let shouldDismissIntentView = PassthroughSubject<Void, Never>()
     
-    @MainActor
     override init() {
         super.init()
         reloadShortcuts()

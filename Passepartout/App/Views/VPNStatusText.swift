@@ -24,10 +24,10 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct VPNStatusText: View {
-    @ObservedObject private var currentVPNState: VPNManager.ObservableState
+    @ObservedObject private var currentVPNState: ObservableVPNState
     
     let isActiveProfile: Bool
     

@@ -24,11 +24,11 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension ProfileView {
     struct VPNSection: View {
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
 
         private let profileId: UUID
         

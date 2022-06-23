@@ -25,10 +25,16 @@
 
 import Foundation
 import Combine
-import PassepartoutCore
-import PassepartoutServices
+import PassepartoutLibrary
 
-@MainActor
+enum Impl {
+    typealias ProfileManager = DefaultProfileManager
+
+    typealias ProviderManager = DefaultProviderManager
+
+    typealias VPNManager = DefaultVPNManager<DefaultProfileManager>
+}
+
 class CoreContext {
     let store: KeyValueStore
     
@@ -46,11 +52,11 @@ class CoreContext {
 
     let upgradeManager: UpgradeManager
     
-    let providerManager: ProviderManager
+    let providerManager: Impl.ProviderManager
     
-    let profileManager: ProfileManager
+    let profileManager: Impl.ProfileManager
     
-    let vpnManager: VPNManager
+    let vpnManager: Impl.VPNManager
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -67,7 +73,7 @@ class CoreContext {
 
         upgradeManager = UpgradeManager(store: store)
 
-        providerManager = ProviderManager(
+        providerManager = DefaultProviderManager(
             appBuild: Constants.Global.appBuildNumber,
             bundleServices: DefaultWebServices.bundledServices(
                 withVersion: Constants.Services.version
@@ -80,12 +86,12 @@ class CoreContext {
             persistence: providersPersistence
         )
 
-        profileManager = ProfileManager(
+        profileManager = DefaultProfileManager(
             store: store,
             providerManager: providerManager,
             appGroup: Constants.App.appGroupId,
             keychainLabel: Unlocalized.Keychain.passwordLabel,
-            strategy: ProfileManager.CoreDataStrategy(
+            strategy: CoreDataProfileManagerStrategy(
                 persistence: profilesPersistence
             )
         )
@@ -93,12 +99,13 @@ class CoreContext {
         #if targetEnvironment(simulator)
         let strategy = VPNManager.MockStrategy()
         #else
-        let strategy = VPNManager.TunnelKitStrategy(
+        let strategy = TunnelKitVPNManagerStrategy(
             appGroup: Constants.App.appGroupId,
             tunnelBundleIdentifier: Constants.App.tunnelBundleId
         )
         #endif
-        vpnManager = VPNManager(
+        vpnManager = DefaultVPNManager(
+            appGroup: Constants.App.appGroupId,
             store: store,
             profileManager: profileManager,
             providerManager: providerManager,

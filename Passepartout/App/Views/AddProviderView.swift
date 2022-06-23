@@ -24,10 +24,10 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct AddProviderView: View {
-    @ObservedObject private var providerManager: ProviderManager
+    @ObservedObject private var providerManager: Impl.ProviderManager
     
     @ObservedObject private var productManager: ProductManager
     
@@ -112,7 +112,7 @@ struct AddProviderView: View {
         Button {
             presentOrPurchaseProvider(metadata)
         } label: {
-            Label(metadata.description, image: themeAssetsProviderImage(metadata.name))
+            Label(metadata.fullName, image: themeAssetsProviderImage(metadata.name))
         }.withTrailingProgress(when: viewModel.isFetchingProvider(metadata.name))
     }
     

@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 import TunnelKitOpenVPN
 import TunnelKitWireGuard
 
@@ -52,7 +52,6 @@ extension AddHostView {
             profileName = url.normalizedFilename
         }
 
-        @MainActor
         mutating func processURL(
             _ url: URL,
             with profileManager: ProfileManager,
@@ -97,7 +96,6 @@ extension AddHostView {
             }
         }
         
-        @MainActor
         mutating func addProcessedProfile(to profileManager: ProfileManager) -> Bool {
             guard !processedProfile.isPlaceholder else {
                 assertionFailure("Saving profile without processing first?")

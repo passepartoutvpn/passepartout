@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension CoreContext {
     static let shared = CoreContext(store: UserDefaultsStore(defaults: .standard))
@@ -34,20 +34,18 @@ extension UpgradeManager {
     static let shared = CoreContext.shared.upgradeManager
 }
 
-extension ProfileManager {
+extension Impl.ProfileManager {
     static let shared = CoreContext.shared.profileManager
 }
 
-extension ProviderManager {
+extension Impl.ProviderManager {
     static let shared = CoreContext.shared.providerManager
 }
 
-extension VPNManager {
+extension Impl.VPNManager {
     static let shared = CoreContext.shared.vpnManager
 }
 
-extension VPNManager.ObservableState {
-
-    @MainActor
+extension ObservableVPNState {
     static let shared = CoreContext.shared.vpnManager.currentState
 }

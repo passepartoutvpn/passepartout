@@ -24,12 +24,12 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 import TunnelKitWireGuard
 
 extension DiagnosticsView {
     struct WireGuardView: View {
-        @ObservedObject private var vpnManager: VPNManager
+        @ObservedObject private var vpnManager: Impl.VPNManager
         
         private let providerName: ProviderName?
         

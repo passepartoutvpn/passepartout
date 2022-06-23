@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 import StoreKit
 import Kvitto
 
@@ -34,7 +34,6 @@ enum ProductError: Error {
     case beta
 }
 
-@MainActor
 class ProductManager: NSObject, ObservableObject {
     enum AppType: Int {
         case freemium = 0

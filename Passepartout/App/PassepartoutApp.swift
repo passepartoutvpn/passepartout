@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 @main
 struct PassepartoutApp: App {
@@ -45,8 +45,6 @@ struct PassepartoutApp: App {
 }
 
 extension View {
-
-    @MainActor
     fileprivate func onIntentActivity(_ activity: IntentActivity<VPNManager>) -> some View {
         onContinueUserActivity(activity.name) { userActivity in
 

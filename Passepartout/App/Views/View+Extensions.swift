@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 import SwiftyBeaver
 
 extension View {

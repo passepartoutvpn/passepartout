@@ -25,7 +25,7 @@
 
 import SwiftUI
 import StoreKit
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension PaywallView {
     struct PurchaseView: View {

@@ -24,14 +24,14 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct VPNToggle: View {
-    @ObservedObject private var profileManager: ProfileManager
+    @ObservedObject private var profileManager: Impl.ProfileManager
 
-    @ObservedObject private var vpnManager: VPNManager
+    @ObservedObject private var vpnManager: Impl.VPNManager
 
-    @ObservedObject private var currentVPNState: VPNManager.ObservableState
+    @ObservedObject private var currentVPNState: ObservableVPNState
 
     @ObservedObject private var productManager: ProductManager
 
@@ -113,7 +113,7 @@ struct VPNToggle: View {
         IntentDispatcher.donateDisableVPN()
         IntentDispatcher.donateConnection(
             with: profile,
-            providerManager: .shared
+            providerManager: Impl.ProviderManager.shared
         )
     }
 }

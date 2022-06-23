@@ -25,7 +25,7 @@
 
 import SwiftUI
 import MessageUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct ReportIssueView: View {
     @Binding private var isPresented: Bool

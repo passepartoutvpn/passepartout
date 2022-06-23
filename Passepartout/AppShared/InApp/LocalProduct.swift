@@ -25,7 +25,7 @@
 
 import Foundation
 import StoreKit
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct LocalProduct: RawRepresentable, Equatable, Hashable {
     private static let bundleSubdomain = "ios"

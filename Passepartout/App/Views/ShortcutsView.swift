@@ -25,7 +25,7 @@
 
 import SwiftUI
 import Intents
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct ShortcutsView: View {
     enum ModalType: Identifiable {

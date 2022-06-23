@@ -24,12 +24,12 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 import TunnelKitWireGuard
 
 extension EndpointView {
     struct WireGuardView: View {
-        @ObservedObject private var providerManager: ProviderManager
+        @ObservedObject private var providerManager: Impl.ProviderManager
 
         @ObservedObject private var currentProfile: ObservableProfile
 
@@ -41,7 +41,7 @@ extension EndpointView {
         
         // XXX: do not escape mutating 'self', use constant providerManager
         init(currentProfile: ObservableProfile, isReadonly: Bool) {
-            let providerManager: ProviderManager = .shared
+            let providerManager: Impl.ProviderManager = .shared
 
             self.providerManager = providerManager
             self.currentProfile = currentProfile

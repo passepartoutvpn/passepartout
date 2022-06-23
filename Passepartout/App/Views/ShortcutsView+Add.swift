@@ -25,11 +25,11 @@
 
 import SwiftUI
 import Intents
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension ShortcutsView {
     struct AddView: View {
-        @ObservedObject private var providerManager: ProviderManager
+        @ObservedObject private var providerManager: Impl.ProviderManager
         
         @StateObject private var pendingProfile = ObservableProfile()
 

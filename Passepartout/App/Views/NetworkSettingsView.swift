@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct NetworkSettingsView: View {
     @ObservedObject private var currentProfile: ObservableProfile

@@ -24,15 +24,15 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension OrganizerView {
     struct SceneView: View {
         @Environment(\.scenePhase) private var scenePhase
 
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
         
-        @ObservedObject private var vpnManager: VPNManager
+        @ObservedObject private var vpnManager: Impl.VPNManager
         
         @ObservedObject private var productManager: ProductManager
         

@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension AddProviderView {
     class ViewModel: ObservableObject {
@@ -67,7 +67,6 @@ extension AddProviderView {
         
         @Published private(set) var errorMessage: String?
         
-        @MainActor
         func selectProvider(_ metadata: ProviderMetadata, _ providerManager: ProviderManager) {
             errorMessage = nil
             guard let server = providerManager.anyDefaultServer(
@@ -82,7 +81,6 @@ extension AddProviderView {
             doSelectProvider(metadata, server)
         }
 
-        @MainActor
         private func selectProviderAfterFetchingInfrastructure(_ metadata: ProviderMetadata, _ providerManager: ProviderManager) async {
             errorMessage = nil
             pendingOperation = .provider(metadata.name)
@@ -114,7 +112,6 @@ extension AddProviderView {
             selectedProvider = metadata
         }
         
-        @MainActor
         func updateIndex(_ providerManager: ProviderManager) {
             errorMessage = nil
             pendingOperation = .index
@@ -154,7 +151,6 @@ extension AddProviderView.NameView {
             profileName = metadata.fullName
         }
 
-        @MainActor
         mutating func addProfile(
             _ profile: Profile,
             to profileManager: ProfileManager,

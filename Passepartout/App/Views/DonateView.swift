@@ -25,6 +25,7 @@
 
 import SwiftUI
 import StoreKit
+import PassepartoutLibrary
 
 struct DonateView: View {
     enum AlertType: Identifiable {

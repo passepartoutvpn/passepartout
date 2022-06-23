@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct OnDemandView: View {
     @ObservedObject private var productManager: ProductManager

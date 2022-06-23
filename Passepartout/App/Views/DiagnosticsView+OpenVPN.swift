@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 import TunnelKitOpenVPN
 
 extension DiagnosticsView {
@@ -37,11 +37,11 @@ extension DiagnosticsView {
             }
         }
 
-        @ObservedObject private var providerManager: ProviderManager
+        @ObservedObject private var providerManager: Impl.ProviderManager
 
-        @ObservedObject private var vpnManager: VPNManager
+        @ObservedObject private var vpnManager: Impl.VPNManager
         
-        @ObservedObject private var currentVPNState: VPNManager.ObservableState
+        @ObservedObject private var currentVPNState: ObservableVPNState
 
         @ObservedObject private var productManager: ProductManager
 

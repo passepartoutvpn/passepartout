@@ -24,11 +24,11 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension OrganizerView {
     struct ProfilesList: View {
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
 
         init() {
             profileManager = .shared

@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension Error {
     var localizedAppDescription: String {
@@ -57,7 +57,7 @@ extension PassepartoutError {
     }
 }
 
-extension VPNManager.ObservableState {
+extension ObservableVPNState {
     func localizedStatusDescription(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool) -> String {
         
         // FIXME: l10n, sure about this wording?

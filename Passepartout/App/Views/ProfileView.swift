@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct ProfileView: View {
     enum ModalType: Int, Identifiable {
@@ -56,7 +56,7 @@ struct ProfileView: View {
     @State private var modalType: ModalType?
     
     init() {
-        currentProfile = ProfileManager.shared.currentProfile
+        currentProfile = Impl.ProfileManager.shared.currentProfile
     }
 
     var body: some View {

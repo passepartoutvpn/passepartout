@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension VPNProtocolType {
     static let knownFileExtensions: [String] = {

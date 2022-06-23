@@ -25,7 +25,7 @@
 
 import Foundation
 import Intents
-import PassepartoutCore
+import PassepartoutLibrary
 
 class IntentDispatcher {
     private struct Groups {
@@ -78,7 +78,6 @@ class IntentDispatcher {
 
     // MARK: Donations
     
-    @MainActor
     static func donateConnection(with profile: Profile, providerManager: ProviderManager) {
         let genericIntent: INIntent
         if let providerName = profile.header.providerName {

@@ -25,7 +25,7 @@
 
 import SwiftUI
 import TunnelKitOpenVPN
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension EndpointAdvancedView {
     struct OpenVPNView: View {

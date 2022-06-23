@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct OrganizerView: View {
     enum AlertType: Identifiable {
@@ -81,7 +81,7 @@ struct OrganizerView: View {
         .themePrimaryView()
         
         // VPN configuration error publisher (no need to observe VPNManager)
-        .onReceive(VPNManager.shared.configurationError) {
+        .onReceive(Impl.VPNManager.shared.configurationError) {
             alertType = .error($0.profile.header.name, $0.error.localizedAppDescription)
         }
     }

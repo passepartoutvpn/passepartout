@@ -24,13 +24,13 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 import TunnelKitOpenVPN
 import TunnelKitWireGuard
 
 extension AddHostView {
     struct NameView: View {
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
         
         private let url: URL
         

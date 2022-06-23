@@ -24,11 +24,11 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension ProfileView {
     struct DiagnosticsSection: View {
-        @ObservedObject private var profileManager: ProfileManager
+        @ObservedObject private var profileManager: Impl.ProfileManager
 
         @ObservedObject private var currentProfile: ObservableProfile
 

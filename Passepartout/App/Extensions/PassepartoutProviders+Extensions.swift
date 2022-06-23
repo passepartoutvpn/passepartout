@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension ProviderMetadata: Identifiable, Comparable, Hashable {
     public var id: String {

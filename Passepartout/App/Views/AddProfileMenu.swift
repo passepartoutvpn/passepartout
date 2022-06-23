@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct AddProfileMenu: View {
     enum ModalType: Identifiable {

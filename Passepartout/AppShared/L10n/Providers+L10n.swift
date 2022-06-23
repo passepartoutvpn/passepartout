@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension ProviderManager {
 //    func localizedLocation(forProfile profile: Profile) -> String? {
@@ -59,7 +59,7 @@ extension ProviderMetadata {
             format = NSLocalizedString(defaultKey, bundle: .main, comment: "")
         }
 
-        return String(format: format, locale: .current, description)
+        return String(format: format, locale: .current, fullName)
     }
 }
 

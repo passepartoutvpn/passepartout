@@ -24,10 +24,10 @@
 //
 
 import SwiftUI
-import PassepartoutCore
+import PassepartoutLibrary
 
 struct AccountView: View {
-    @ObservedObject private var providerManager: ProviderManager
+    @ObservedObject private var providerManager: Impl.ProviderManager
     
     private let providerName: ProviderName?
     
