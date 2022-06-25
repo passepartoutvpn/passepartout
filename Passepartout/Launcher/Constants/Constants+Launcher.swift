@@ -32,7 +32,10 @@ extension Constants {
         private static let appPath: String = {
             let path = Bundle.main.bundlePath as NSString
             var components = path.pathComponents
+
+            // Passepartout.app/Contents/Library/LoginItems/PassepartoutLauncher.app
             components.removeLast(4)
+
             return NSString.path(withComponents: components)
         }()
 
