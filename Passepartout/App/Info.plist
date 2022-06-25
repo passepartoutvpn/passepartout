@@ -70,9 +70,9 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>primaryColor</string>
+		<string>PrimaryColor</string>
 		<key>UIImageName</key>
-		<string>logo</string>
+		<string>Logo</string>
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
