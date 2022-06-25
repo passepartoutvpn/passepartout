@@ -1,8 +1,8 @@
 //
-//  Config.xcconfig
+//  Constants+Launcher.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 5/24/19.
+//  Created by Davide De Rosa on 6/25/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,16 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
+import Foundation
 
-CFG_TEAM_ID = DTDYD63ZX9
-CFG_APP_ID = com.algoritmico.ios.Passepartout
-CFG_LAUNCHER_ID = com.algoritmico.ios.PassepartoutLauncher
-CFG_GROUP_ID = com.algoritmico.Passepartout
-CFG_APPSTORE_ID = 1433648537
-CFG_COPYRIGHT = Copyright © 2022 Davide De Rosa. All rights reserved.
+extension Constants {
+    enum Launcher {
+        static let appId = "com.algoritmico.ios.Passepartout"
 
-PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin:/usr/local/go/bin
-
-#include? "Secret.xcconfig"
+        static let appURL: URL = {
+            let url = URL(fileURLWithPath: Bundle.main.bundlePath)
+            var components = url.pathComponents
+            components.removeLast()
+            components.removeLast()
+            components.removeLast()
+            components.append("MacOS")
+            components.append(Constants.Global.appName)
+            let newPath = NSString.path(withComponents: components)
+            return URL(fileURLWithPath: newPath)
+        }()
+    }
+}

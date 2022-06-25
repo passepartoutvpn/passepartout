@@ -40,6 +40,9 @@
 		0E3B7FDA27E51A0200C66F13 /* ProfileView+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */; };
 		0E3CD47F280DA14B007075C0 /* AddProfileMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CD47E280DA14B007075C0 /* AddProfileMenu.swift */; };
 		0E3CD483280DAE92007075C0 /* ProfileView+MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CD482280DAE92007075C0 /* ProfileView+MainMenu.swift */; };
+		0E41BD9A286711C3006346B4 /* PassepartoutLauncherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E41BD99286711C3006346B4 /* PassepartoutLauncherApp.swift */; };
+		0E41BDA72867128A006346B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E41BDA62867128A006346B4 /* AppDelegate.swift */; };
+		0E41BDA928671356006346B4 /* PassepartoutLauncher.app in Embed Launcher */ = {isa = PBXBuildFile; fileRef = 0E41BD97286711C3006346B4 /* PassepartoutLauncher.app */; platformFilter = maccatalyst; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E44689627B051C300A14CE4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44689527B051C300A14CE4 /* ProfileView.swift */; };
 		0E44689C27B11B5300A14CE4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E44689B27B11B5300A14CE4 /* AboutView.swift */; };
 		0E49F6BB27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E49F6BA27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift */; };
@@ -113,6 +116,8 @@
 		0ED30DDD27EA35230057D8A3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
 		0ED7D62F2867328A009F2F8F /* Constants+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED7D62E2867328A009F2F8F /* Constants+Library.swift */; };
+		0ED7D632286733AF009F2F8F /* Constants+Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED7D631286733AF009F2F8F /* Constants+Launcher.swift */; };
+		0ED7D633286733D8009F2F8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0ED89C1527DE0A0C008B36D6 /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */; };
 		0ED89C1727DE0E05008B36D6 /* IntentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */; };
 		0ED89C1C27DE3ABC008B36D6 /* ShortcutsView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */; };
@@ -131,6 +136,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0E41BDAA286713F6006346B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E41BD96286711C3006346B4;
+			remoteInfo = PassepartoutLauncher;
+		};
 		0EB2B1492733FB6F007705AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
@@ -162,14 +174,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0E3152B7223F9EF500F61841 /* Embed Frameworks */ = {
+		0E41BDA828671339006346B4 /* Embed Launcher */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
 			files = (
+				0E41BDA928671356006346B4 /* PassepartoutLauncher.app in Embed Launcher */,
 			);
-			name = "Embed Frameworks";
+			name = "Embed Launcher";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0EB2B14B2733FB6F007705AB /* Embed App Extensions */ = {
@@ -223,6 +236,11 @@
 		0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Provider.swift"; sourceTree = "<group>"; };
 		0E3CD47E280DA14B007075C0 /* AddProfileMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileMenu.swift; sourceTree = "<group>"; };
 		0E3CD482280DAE92007075C0 /* ProfileView+MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+MainMenu.swift"; sourceTree = "<group>"; };
+		0E41BD97286711C3006346B4 /* PassepartoutLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E41BD99286711C3006346B4 /* PassepartoutLauncherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutLauncherApp.swift; sourceTree = "<group>"; };
+		0E41BDA2286711C6006346B4 /* Launcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Launcher.entitlements; sourceTree = "<group>"; };
+		0E41BDA62867128A006346B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E41BDAC286715A7006346B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E44689527B051C300A14CE4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0E44689B27B11B5300A14CE4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		0E49F6BA27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndpointAdvancedView+OpenVPN.swift"; sourceTree = "<group>"; };
@@ -325,6 +343,7 @@
 		0ED31C3920CF39510027975F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		0ED31C3B20CF39510027975F /* Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
 		0ED7D62E2867328A009F2F8F /* Constants+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Constants+Library.swift"; path = "Passepartout/App/Constants/Constants+Library.swift"; sourceTree = SOURCE_ROOT; };
+		0ED7D631286733AF009F2F8F /* Constants+Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Launcher.swift"; sourceTree = "<group>"; };
 		0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
 		0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentEditView.swift; sourceTree = "<group>"; };
 		0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortcutsView+Add.swift"; sourceTree = "<group>"; };
@@ -346,6 +365,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0E41BD94286711C3006346B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E57F63520C83FC5008323CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -493,6 +519,18 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0E41BD98286711C3006346B4 /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				0ED7D630286733A1009F2F8F /* Constants */,
+				0E41BDA2286711C6006346B4 /* Launcher.entitlements */,
+				0E41BDAC286715A7006346B4 /* Info.plist */,
+				0E41BDA62867128A006346B4 /* AppDelegate.swift */,
+				0E41BD99286711C3006346B4 /* PassepartoutLauncherApp.swift */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
 		0E49F6C927DB398100385834 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +560,7 @@
 				0E57F63820C83FC5008323CF /* Passepartout.app */,
 				0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */,
 				0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */,
+				0E41BD97286711C3006346B4 /* PassepartoutLauncher.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -637,6 +676,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		0ED7D630286733A1009F2F8F /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0ED7D631286733AF009F2F8F /* Constants+Launcher.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		0EDE8DC020C86910004C739C /* Tunnel */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,6 +733,23 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		0E41BD96286711C3006346B4 /* PassepartoutLauncher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E41BDA3286711C6006346B4 /* Build configuration list for PBXNativeTarget "PassepartoutLauncher" */;
+			buildPhases = (
+				0E41BD93286711C3006346B4 /* Sources */,
+				0E41BD94286711C3006346B4 /* Frameworks */,
+				0E41BD95286711C3006346B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PassepartoutLauncher;
+			productName = PassepartoutLauncher;
+			productReference = 0E41BD97286711C3006346B4 /* PassepartoutLauncher.app */;
+			productType = "com.apple.product-type.application";
+		};
 		0E57F63720C83FC5008323CF /* Passepartout */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E57F65520C83FC7008323CF /* Build configuration list for PBXNativeTarget "Passepartout" */;
@@ -694,13 +758,14 @@
 				0E57F63420C83FC5008323CF /* Sources */,
 				0E57F63520C83FC5008323CF /* Frameworks */,
 				0E57F63620C83FC5008323CF /* Resources */,
-				0E3152B7223F9EF500F61841 /* Embed Frameworks */,
+				0E41BDA828671339006346B4 /* Embed Launcher */,
 				0EB2B14B2733FB6F007705AB /* Embed App Extensions */,
 				0EBEF138274E4C7F00EAC689 /* Drop Extra Frameworks In Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0E41BDAB286713F6006346B4 /* PBXTargetDependency */,
 				0ECF71FC27B6DA6700CDB528 /* PBXTargetDependency */,
 				0EB2B14A2733FB6F007705AB /* PBXTargetDependency */,
 				0ED2B36227D3C99100FD8EA9 /* PBXTargetDependency */,
@@ -761,10 +826,13 @@
 		0E57F63020C83FC5008323CF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
+					0E41BD96286711C3006346B4 = {
+						CreatedOnToolsVersion = 13.4;
+					};
 					0E57F63720C83FC5008323CF = {
 						CreatedOnToolsVersion = 9.4;
 						LastSwiftMigration = 1020;
@@ -828,6 +896,7 @@
 			projectRoot = "";
 			targets = (
 				0E57F63720C83FC5008323CF /* Passepartout */,
+				0E41BD96286711C3006346B4 /* PassepartoutLauncher */,
 				0EDE8DBE20C86910004C739C /* OpenVPNTunnel */,
 				0ECF71F327B6D9CD00CDB528 /* WireGuardGo */,
 				0ED2B33E27D3C77800FD8EA9 /* WireGuardTunnel */,
@@ -836,6 +905,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0E41BD95286711C3006346B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E57F63620C83FC5008323CF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -907,6 +983,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0E41BD93286711C3006346B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ED7D632286733AF009F2F8F /* Constants+Launcher.swift in Sources */,
+				0E41BDA72867128A006346B4 /* AppDelegate.swift in Sources */,
+				0E41BD9A286711C3006346B4 /* PassepartoutLauncherApp.swift in Sources */,
+				0ED7D633286733D8009F2F8F /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E57F63420C83FC5008323CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1036,6 +1123,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0E41BDAB286713F6006346B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = maccatalyst;
+			target = 0E41BD96286711C3006346B4 /* PassepartoutLauncher */;
+			targetProxy = 0E41BDAA286713F6006346B4 /* PBXContainerItemProxy */;
+		};
 		0EB2B14A2733FB6F007705AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0EDE8DBE20C86910004C739C /* OpenVPNTunnel */;
@@ -1120,6 +1213,54 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0E41BDA4286711C6006346B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Launcher/Launcher.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Passepartout/Launcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_LAUNCHER_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0E41BDA5286711C6006346B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = Passepartout/Launcher/Launcher.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DTDYD63ZX9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Passepartout/Launcher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_LAUNCHER_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		0E57F65320C83FC7008323CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E23B4A12298559800304C30 /* Config.xcconfig */;
@@ -1421,6 +1562,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0E41BDA3286711C6006346B4 /* Build configuration list for PBXNativeTarget "PassepartoutLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E41BDA4286711C6006346B4 /* Debug */,
+				0E41BDA5286711C6006346B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0E57F63320C83FC5008323CF /* Build configuration list for PBXProject "Passepartout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
