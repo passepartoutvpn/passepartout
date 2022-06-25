@@ -25,7 +25,6 @@
 
 import Foundation
 import UniformTypeIdentifiers
-import PassepartoutLibrary
 import SwiftyBeaver
 
 extension Constants {
@@ -37,19 +36,6 @@ extension Constants {
         static let appStoreId = bundleConfig?["appstore_id"] as? String ?? "DUMMY_appstore_id"
 
         static let appGroupId = bundleConfig?["group_id"] as? String ?? "DUMMY_group_id"
-
-        static func tunnelBundleId(_ vpnProtocol: VPNProtocolType) -> String {
-            guard let identifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String else {
-                fatalError("Missing kCFBundleIdentifierKey from Info.plist")
-            }
-            switch vpnProtocol {
-            case .openVPN:
-                return "\(identifier).OpenVPNTunnel"
-
-            case .wireGuard:
-                return "\(identifier).WireGuardTunnel"
-            }
-        }
 
         static let isBeta: Bool = {
             Bundle.main.isTestFlight
@@ -203,25 +189,6 @@ extension Constants {
         static let twitchFallback = URL(string: "https://twitch.tv/keeshux")!
         
         static let githubSponsors = URL(string: "https://www.github.com/sponsors/passepartoutvpn")!
-        
-        static let openVPNGuidances: [ProviderName: String] = [
-            .protonvpn: "https://account.protonvpn.com/settings",
-            .surfshark: "https://my.surfshark.com/vpn/manual-setup/main",
-            .torguard: "https://torguard.net/clientarea.php?action=changepw",
-            .windscribe: "https://windscribe.com/getconfig/openvpn"
-        ]
-
-        static let referrals: [ProviderName: String] = [
-            .hideme: "https://member.hide.me/en/checkout?plan=new_default_prices&coupon=6CB-BDB-802&duration=24",
-            .mullvad: "https://mullvad.net/en/account/create/",
-            .nordvpn: "https://go.nordvpn.net/SH21Z",
-            .pia: "https://www.privateinternetaccess.com/pages/buy-vpn/",
-            .protonvpn: "https://proton.go2cloud.org/SHZ",
-            .torguard: "https://torguard.net/",
-            .tunnelbear: "https://www.tunnelbear.com/",
-            .vyprvpn: "https://www.vyprvpn.com/",
-            .windscribe: "https://secure.link/kCsD0prd"
-        ]
     }
 
     enum Repos {

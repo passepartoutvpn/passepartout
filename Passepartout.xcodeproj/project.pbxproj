@@ -112,6 +112,7 @@
 		0ED30DDB27EA351C0057D8A3 /* Constants+Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DDA27EA351C0057D8A3 /* Constants+Tunnel.swift */; };
 		0ED30DDD27EA35230057D8A3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0ED31C3A20CF39510027975F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
+		0ED7D62F2867328A009F2F8F /* Constants+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED7D62E2867328A009F2F8F /* Constants+Library.swift */; };
 		0ED89C1527DE0A0C008B36D6 /* Shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */; };
 		0ED89C1727DE0E05008B36D6 /* IntentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */; };
 		0ED89C1C27DE3ABC008B36D6 /* ShortcutsView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */; };
@@ -323,6 +324,7 @@
 		0ED30DDA27EA351C0057D8A3 /* Constants+Tunnel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Tunnel.swift"; sourceTree = "<group>"; };
 		0ED31C3920CF39510027975F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		0ED31C3B20CF39510027975F /* Tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
+		0ED7D62E2867328A009F2F8F /* Constants+Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Constants+Library.swift"; path = "Passepartout/App/Constants/Constants+Library.swift"; sourceTree = SOURCE_ROOT; };
 		0ED89C1427DE0A0C008B36D6 /* Shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcut.swift; sourceTree = "<group>"; };
 		0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentEditView.swift; sourceTree = "<group>"; };
 		0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortcutsView+Add.swift"; sourceTree = "<group>"; };
@@ -375,14 +377,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E293858285A7484002A6E0E /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				0EB17EA127D2263700D473B5 /* Constants.swift */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
 		0E293859285A7489002A6E0E /* Context */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,8 +541,9 @@
 			children = (
 				0E9AA983259F76C5003FAFF1 /* App */,
 				0ECB78D1285F4F4000B0E460 /* AppShared */,
-				0ED30DD627EA33220057D8A3 /* Shared */,
+				0E41BD98286711C3006346B4 /* Launcher */,
 				0EDE8DC020C86910004C739C /* Tunnel */,
+				0EB17EA127D2263700D473B5 /* Constants.swift */,
 			);
 			path = Passepartout;
 			sourceTree = "<group>";
@@ -559,6 +554,7 @@
 				0ECB78D4285F505D00B0E460 /* Constants */,
 				0E29385A285A749E002A6E0E /* Context */,
 				0E49F6C927DB398100385834 /* Extensions */,
+				0E92781227E7CD530057BB81 /* InApp */,
 				0EA591112733DD4E0096F796 /* Intents */,
 				0E2C171C27CB6307007E8488 /* Reusable */,
 				0E35C0AE280EF8A80071FA35 /* Views */,
@@ -591,7 +587,6 @@
 			children = (
 				0ECB78D3285F4F9600B0E460 /* Constants */,
 				0E293859285A7489002A6E0E /* Context */,
-				0E92781227E7CD530057BB81 /* InApp */,
 				0E34A2B827CAA8EA00C73B67 /* L10n */,
 				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
 			);
@@ -601,7 +596,6 @@
 		0ECB78D3285F4F9600B0E460 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				0EB17EA527D2263700D473B5 /* Constants+App.swift */,
 				0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */,
 			);
 			path = Constants;
@@ -610,6 +604,8 @@
 		0ECB78D4285F505D00B0E460 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				0EB17EA527D2263700D473B5 /* Constants+App.swift */,
+				0ED7D62E2867328A009F2F8F /* Constants+Library.swift */,
 				0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */,
 				0EB34BCB27C6F41D00B126DA /* Theme.swift */,
 			);
@@ -633,12 +629,12 @@
 			path = WireGuard;
 			sourceTree = "<group>";
 		};
-		0ED30DD627EA33220057D8A3 /* Shared */ = {
+		0ED7D630286733A1009F2F8F /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				0E293858285A7484002A6E0E /* Constants */,
+				0ED7D631286733AF009F2F8F /* Constants+Launcher.swift */,
 			);
-			path = Shared;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		0EDE8DC020C86910004C739C /* Tunnel */ = {
@@ -960,6 +956,7 @@
 				0E70589B28377DC40075D1D2 /* VPNStatusText.swift in Sources */,
 				0E71ACE927C1055300F85C4B /* NetworkSettingsView.swift in Sources */,
 				0EB34BCA27C6A70200B126DA /* OnDemandView.swift in Sources */,
+				0ED7D62F2867328A009F2F8F /* Constants+Library.swift in Sources */,
 				0E0BD27327B2EA2C00583AC5 /* MainView.swift in Sources */,
 				0EB17EBA27D2560300D473B5 /* PassepartoutProviders+Extensions.swift in Sources */,
 				0E3B7FDA27E51A0200C66F13 /* ProfileView+Provider.swift in Sources */,
