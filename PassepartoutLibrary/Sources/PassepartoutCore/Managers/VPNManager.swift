@@ -37,7 +37,7 @@ public protocol VPNManager {
     
     var masksPrivateData: Bool { get set }
 
-    func connectWithActiveProfile() async throws
+    func connectWithActiveProfile(toServer newServerId: String?) async throws
 
     @discardableResult
     func connect(with profileId: UUID) async throws -> Profile
@@ -46,8 +46,6 @@ public protocol VPNManager {
     func connect(with profileId: UUID, toServer newServerId: String) async throws -> Profile
     
     func modifyActiveProfile(_ block: (inout Profile) -> Void) async throws
-
-    func toggle() -> Bool
 
     func disable() async
 

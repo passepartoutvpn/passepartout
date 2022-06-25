@@ -1,0 +1,95 @@
+//
+//  ProviderProfileItem.swift
+//  Passepartout
+//
+//  Created by Davide De Rosa on 7/13/22.
+//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//
+//  https://github.com/passepartoutvpn
+//
+//  This file is part of Passepartout.
+//
+//  Passepartout is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Passepartout is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+import Foundation
+import AppKit
+
+struct ProviderProfileItem: Item {
+    private let viewModel: ViewModel
+    
+    private let vpnManager: LightVPNManager
+    
+    init(_ profile: LightProfile, providerManager: LightProviderManager, vpnManager: LightVPNManager) {
+        viewModel = ViewModel(profile, providerManager: providerManager, vpnManager: vpnManager)
+        self.vpnManager = vpnManager
+    }
+    
+    func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
+        let item = NSMenuItem(
+            title: viewModel.profile.name,
+            action: nil,
+            keyEquivalent: ""
+        )
+        item.state = viewModel.profile.isActive ? .on : .off
+        item.representedObject = viewModel
+        item.submenu = submenu()
+        return item
+    }
+    
+    private func submenu() -> NSMenu {
+        let menu = NSMenu()
+        let categories = viewModel.categories
+        if categories.isEmpty {
+            let downloadItem = TextItem(L10n.Global.Strings.download) {
+                viewModel.downloadIfNeeded()
+            }
+            menu.addItem(downloadItem.asMenuItem(withParent: menu))
+        } else if categories.count > 1 {
+            viewModel.categories.forEach {
+                menu.addItem(categoryItem(with: $0, parent: menu))
+            }
+        } else {
+            viewModel.categories.first?.locations.forEach {
+                menu.addItem(locationItem(with: $0, parent: menu))
+            }
+        }
+        return menu
+    }
+    
+    private func categoryItem(with category: LightProviderCategory, parent: NSMenu) -> NSMenuItem {
+        let title = !category.name.isEmpty ? category.name.capitalized : L10n.Global.Strings.default
+        let item = NSMenuItem(
+            title: title,
+            action: nil,
+            keyEquivalent: ""
+        )
+        item.state = viewModel.isActiveCategory(category) ? .on : .off
+        item.target = viewModel
+        item.representedObject = viewModel
+
+        let submenu = NSMenu()
+        category.locations.forEach {
+            submenu.addItem(locationItem(with: $0, parent: submenu))
+        }
+        item.submenu = submenu
+
+        return item
+    }
+    
+    private func locationItem(with location: LightProviderLocation, parent: NSMenu) -> NSMenuItem {
+        ProviderLocationItem(viewModel.profile, location, vpnManager: vpnManager)
+            .asMenuItem(withParent: parent)
+    }
+}

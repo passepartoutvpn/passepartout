@@ -43,7 +43,7 @@ extension IntentDispatcher {
 
         Task {
             do {
-                try await vpnManager.connectWithActiveProfile()
+                try await vpnManager.connectWithActiveProfile(toServer: nil)
             } catch {
                 pp_log.error("Unable to connect with active profile: \(error)")
             }

@@ -46,6 +46,11 @@
 "global.strings.keepalive" = "Keep-alive";
 "global.strings.advanced" = "Advanced";
 "global.strings.translations" = "Translations";
+"global.strings.show" = "Show";
+"global.strings.hide" = "Hide";
+"global.strings.connect" = "Connect";
+"global.strings.disconnect" = "Disconnect";
+"global.strings.download" = "Download";
 
 "global.messages.email_not_configured" = "No e-mail account is configured.";
 "global.messages.share" = "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";
@@ -71,21 +76,20 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Invite";
 
-"menu.system.show.title" = "Show";
-"menu.system.switch_profile.title" = "Active profile";
-"menu.system.active_profile.title.none" = "No active profile";
-"menu.system.active_profile.items.customize.title" = "Customize...";
-"menu.system.active_profile.messages.missing_credentials" = "No account configured";
-"menu.system.organizer.title" = "Organizer";
-"menu.system.preferences.title" = "Preferences";
-"menu.system.support.donate" = "Make a donation";
-"menu.system.support.join_community" = "Join community";
-"menu.system.support.write_review" = "Write a review";
+//"menu.system.switch_profile.title" = "Active profile";
+//"menu.system.active_profile.title.none" = "No active profile";
+//"menu.system.active_profile.items.customize.title" = "Customize...";
+//"menu.system.active_profile.messages.missing_credentials" = "No account configured";
+//"menu.system.organizer.title" = "Organizer";
+//"menu.system.preferences.title" = "Preferences";
+//"menu.system.support.donate" = "Make a donation";
+//"menu.system.support.join_community" = "Join community";
+//"menu.system.support.write_review" = "Write a review";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Tweet about it!";
-"menu.system.share_generic.caption" = "Invite a friend";
+//"menu.system.share_twitter.caption" = "Tweet about it!";
+//"menu.system.share_generic.caption" = "Invite a friend";
 "menu.system.quit.title" = "Quit %@";
-"menu.system.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
+//"menu.system.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
 
 /* MARK: TunnelKit */
 

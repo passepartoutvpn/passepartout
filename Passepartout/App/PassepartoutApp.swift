@@ -28,6 +28,10 @@ import PassepartoutLibrary
 
 @main
 struct PassepartoutApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+
+    @Environment(\.scenePhase) private var scenePhase
+    
     @SceneBuilder var body: some Scene {
         WindowGroup {
             MainView()
@@ -40,6 +44,18 @@ struct PassepartoutApp: App {
                 .onIntentActivity(IntentDispatcher.trustCurrentNetwork)
                 .onIntentActivity(IntentDispatcher.untrustCellularNetwork)
                 .onIntentActivity(IntentDispatcher.untrustCurrentNetwork)
+        }.onChange(of: scenePhase, perform: onScenePhase)
+    }
+    
+    private func onScenePhase(_ scenePhase: ScenePhase) {
+        switch scenePhase {
+        case .background:
+            #if targetEnvironment(macCatalyst)
+            MacBundle.shared.utils.sendAppToBackground()
+            #endif
+
+        default:
+            break
         }
     }
 }

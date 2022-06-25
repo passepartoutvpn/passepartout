@@ -435,16 +435,22 @@ internal enum L10n {
       internal static let cancel = L10n.tr("Localizable", "global.strings.cancel")
       /// Configuration
       internal static let configuration = L10n.tr("Localizable", "global.strings.configuration")
+      /// Connect
+      internal static let connect = L10n.tr("Localizable", "global.strings.connect")
       /// Default
       internal static let `default` = L10n.tr("Localizable", "global.strings.default")
       /// Delete
       internal static let delete = L10n.tr("Localizable", "global.strings.delete")
       /// Disabled
       internal static let disabled = L10n.tr("Localizable", "global.strings.disabled")
+      /// Disconnect
+      internal static let disconnect = L10n.tr("Localizable", "global.strings.disconnect")
       /// Domain
       internal static let domain = L10n.tr("Localizable", "global.strings.domain")
       /// Domains
       internal static let domains = L10n.tr("Localizable", "global.strings.domains")
+      /// Download
+      internal static let download = L10n.tr("Localizable", "global.strings.download")
       /// Duplicate
       internal static let duplicate = L10n.tr("Localizable", "global.strings.duplicate")
       /// Enabled
@@ -453,6 +459,8 @@ internal enum L10n {
       internal static let encryption = L10n.tr("Localizable", "global.strings.encryption")
       /// Endpoint
       internal static let endpoint = L10n.tr("Localizable", "global.strings.endpoint")
+      /// Hide
+      internal static let hide = L10n.tr("Localizable", "global.strings.hide")
       /// Interface
       internal static let interface = L10n.tr("Localizable", "global.strings.interface")
       /// Keep-alive
@@ -493,6 +501,8 @@ internal enum L10n {
       internal static let save = L10n.tr("Localizable", "global.strings.save")
       /// Servers
       internal static let servers = L10n.tr("Localizable", "global.strings.servers")
+      /// Show
+      internal static let show = L10n.tr("Localizable", "global.strings.show")
       /// Translations
       internal static let translations = L10n.tr("Localizable", "global.strings.translations")
       /// Uninstall
@@ -540,63 +550,11 @@ internal enum L10n {
       }
     }
     internal enum System {
-      internal enum ActiveProfile {
-        internal enum Items {
-          internal enum Customize {
-            /// Customize...
-            internal static let title = L10n.tr("Localizable", "menu.system.active_profile.items.customize.title")
-          }
-        }
-        internal enum Messages {
-          /// No account configured
-          internal static let missingCredentials = L10n.tr("Localizable", "menu.system.active_profile.messages.missing_credentials")
-        }
-        internal enum Title {
-          /// No active profile
-          internal static let `none` = L10n.tr("Localizable", "menu.system.active_profile.title.none")
-        }
-      }
-      internal enum Organizer {
-        /// Organizer
-        internal static let title = L10n.tr("Localizable", "menu.system.organizer.title")
-      }
-      internal enum Preferences {
-        /// Preferences
-        internal static let title = L10n.tr("Localizable", "menu.system.preferences.title")
-      }
       internal enum Quit {
         /// Quit %@
         internal static func title(_ p1: Any) -> String {
           return L10n.tr("Localizable", "menu.system.quit.title", String(describing: p1))
         }
-        internal enum Messages {
-          /// The VPN, if enabled, will still run in the background. Do you want to quit?
-          internal static let confirm = L10n.tr("Localizable", "menu.system.quit.messages.confirm")
-        }
-      }
-      internal enum ShareGeneric {
-        /// Invite a friend
-        internal static let caption = L10n.tr("Localizable", "menu.system.share_generic.caption")
-      }
-      internal enum ShareTwitter {
-        /// Tweet about it!
-        internal static let caption = L10n.tr("Localizable", "menu.system.share_twitter.caption")
-      }
-      internal enum Show {
-        /// Show
-        internal static let title = L10n.tr("Localizable", "menu.system.show.title")
-      }
-      internal enum Support {
-        /// Make a donation
-        internal static let donate = L10n.tr("Localizable", "menu.system.support.donate")
-        /// Join community
-        internal static let joinCommunity = L10n.tr("Localizable", "menu.system.support.join_community")
-        /// Write a review
-        internal static let writeReview = L10n.tr("Localizable", "menu.system.support.write_review")
-      }
-      internal enum SwitchProfile {
-        /// Active profile
-        internal static let title = L10n.tr("Localizable", "menu.system.switch_profile.title")
       }
     }
   }

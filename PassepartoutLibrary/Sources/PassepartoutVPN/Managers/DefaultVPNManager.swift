@@ -90,22 +90,6 @@ public class DefaultVPNManager<ProfileManagerType: ProfileManagerWithCurrentProf
         CoreConfiguration.masksPrivateData = masksPrivateData
     }
 
-    public func toggle() -> Bool {
-        guard let configuration = vpnConfigurationWithCurrentProfile() else {
-            return false
-        }
-        Task {
-            pp_log.info("Toggling VPN (enabled: \(currentState.isEnabled) -> \(!currentState.isEnabled))")
-            clearLastError()
-            if !currentState.isEnabled {
-                await strategy.connect(configuration: configuration)
-            } else {
-                await strategy.disconnect()
-            }
-        }
-        return true
-    }
-
     func reinstate(_ configuration: VPNConfiguration) async {
         pp_log.info("Reinstating VPN")
         clearLastError()

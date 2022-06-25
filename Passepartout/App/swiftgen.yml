@@ -1,8 +1,0 @@
-xcassets:
-    inputs:
-        - Assets.xcassets
-        - Flags.xcassets
-        - Providers.xcassets
-    outputs:
-        - templateName: swift4
-          output: Constants/SwiftGen+Assets.swift

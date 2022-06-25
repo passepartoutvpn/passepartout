@@ -34,13 +34,20 @@ public struct ProviderLocation {
     
     public let countryCode: String
     
-    public let onlyServer: ProviderServer?
+    public var onlyServer: ProviderServer? {
+        guard servers?.count == 1 else {
+            return nil
+        }
+        return servers?.first
+    }
 
-    public init(providerMetadata: ProviderMetadata, vpnProtocol: VPNProtocolType, categoryName: String, countryCode: String, onlyServer: ProviderServer?) {
+    public let servers: [ProviderServer]?
+
+    public init(providerMetadata: ProviderMetadata, vpnProtocol: VPNProtocolType, categoryName: String, countryCode: String, servers: [ProviderServer]?) {
         self.providerMetadata = providerMetadata
         self.vpnProtocol = vpnProtocol
         self.categoryName = categoryName
         self.countryCode = countryCode
-        self.onlyServer = onlyServer
+        self.servers = servers
     }
 }

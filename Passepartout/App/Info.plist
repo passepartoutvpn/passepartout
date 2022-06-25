@@ -61,6 +61,11 @@
 		<string>UntrustCellularNetworkIntent</string>
 		<string>UntrustCurrentNetworkIntent</string>
 	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<true/>
+	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

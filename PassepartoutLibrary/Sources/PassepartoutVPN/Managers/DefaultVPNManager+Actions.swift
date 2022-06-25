@@ -32,7 +32,7 @@ import PassepartoutUtils
 // ProfileManager.activateProfile()
 
 extension DefaultVPNManager {
-    public func connectWithActiveProfile() async throws {
+    public func connectWithActiveProfile(toServer newServerId: String?) async throws {
         guard currentState.vpnStatus != .connected else {
             pp_log.warning("VPN is already connected")
             return
@@ -41,7 +41,11 @@ extension DefaultVPNManager {
             pp_log.warning("No active profile")
             return
         }
-        try await connect(with: profileId)
+        if let newServerId = newServerId {
+            try await connect(with: profileId, toServer: newServerId)
+        } else {
+            try await connect(with: profileId)
+        }
     }
 
     @discardableResult
@@ -86,7 +90,7 @@ extension DefaultVPNManager {
         guard !profileManager.isActiveProfile(profileId) ||
                 currentState.vpnStatus != .connected ||
                 oldServerId != newServer.id else {
-            
+
             pp_log.info("Profile \(profile.logDescription) is already active and connected to: \(newServer.logDescription)")
             return profile
         }

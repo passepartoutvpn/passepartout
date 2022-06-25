@@ -44,6 +44,10 @@ extension Constants {
             Bundle.main.isTestFlight
         }()
     }
+    
+    enum Plugins {
+        static let macBridgeName = "PassepartoutMac.bundle"
+    }
 
     enum InApp {
         static var appType: ProductManager.AppType {

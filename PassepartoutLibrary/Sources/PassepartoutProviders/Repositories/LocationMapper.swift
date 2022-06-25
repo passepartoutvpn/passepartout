@@ -62,17 +62,22 @@ struct LocationMapper: DTOMapper, ModelMapper {
             return nil
         }
         
-        var server: ProviderServer?
-        if dto.servers?.count == 1, let serverDTO = dto.servers?.anyObject() as? CDInfrastructureServer {
-            server = ServerMapper.toModel(serverDTO)
-        }
+//        var server: ProviderServer?
+//        if dto.servers?.count == 1, let serverDTO = dto.servers?.anyObject() as? CDInfrastructureServer {
+//            server = ServerMapper.toModel(serverDTO)
+//        }
+        let servers = (dto.servers?.allObjects as? [CDInfrastructureServer])?
+            .compactMap(ServerMapper.toModel)
         
         return ProviderLocation(
             providerMetadata: providerMetadata,
             vpnProtocol: vpnProtocol,
             categoryName: categoryName,
             countryCode: countryCode,
-            onlyServer: server
+//            servers: server.map {
+//                [$0]
+//            }
+            servers: servers
         )
     }
 }
