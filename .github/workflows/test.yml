@@ -26,5 +26,5 @@ jobs:
           xcode-version: latest-stable
       - name: Run tests
         run: |
-          cd PassepartoutCore
+          cd PassepartoutLibrary
           swift test

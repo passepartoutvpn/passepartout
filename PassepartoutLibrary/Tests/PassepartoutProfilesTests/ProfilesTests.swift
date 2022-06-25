@@ -24,6 +24,7 @@
 //
 
 import XCTest
+import PassepartoutCore
 @testable import PassepartoutProfiles
 import SwiftyBeaver
 

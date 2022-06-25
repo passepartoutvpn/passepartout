@@ -26,6 +26,7 @@
 import XCTest
 import CoreData
 import Combine
+import PassepartoutCore
 @testable import PassepartoutProviders
 import PassepartoutServices
 import PassepartoutUtils
@@ -44,7 +45,7 @@ class ProvidersTests: XCTestCase {
     override func setUp() {
         pp_log.addDestination(ConsoleDestination())
 
-        manager = ProviderManager(
+        manager = DefaultProviderManager(
             appBuild: 10000,
             bundleServices: DefaultWebServices.bundledServices(withVersion: "v5"),
             webServices: DefaultWebServices("v5", URL(string: "https://passepartoutvpn.app/api/")!, timeout: nil),

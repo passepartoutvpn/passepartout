@@ -68,7 +68,7 @@ jobs:
           bundle exec fastlane --env ${{ matrix.platform }} match development
 #      - name: Run tests
 #        run: |
-#          cd PassepartoutCore
+#          cd PassepartoutLibrary
 #          swift test
       - name: Build ${{ matrix.name }} app
         timeout-minutes: 15
