@@ -29,16 +29,13 @@ extension Constants {
     enum Launcher {
         static let appId = "com.algoritmico.ios.Passepartout"
 
-        static let appURL: URL = {
-            let url = URL(fileURLWithPath: Bundle.main.bundlePath)
-            var components = url.pathComponents
-            components.removeLast()
-            components.removeLast()
-            components.removeLast()
-            components.append("MacOS")
-            components.append(Constants.Global.appName)
-            let newPath = NSString.path(withComponents: components)
-            return URL(fileURLWithPath: newPath)
+        private static let appPath: String = {
+            let path = Bundle.main.bundlePath as NSString
+            var components = path.pathComponents
+            components.removeLast(4)
+            return NSString.path(withComponents: components)
         }()
+
+        static let appURL = URL(fileURLWithPath: appPath)
     }
 }

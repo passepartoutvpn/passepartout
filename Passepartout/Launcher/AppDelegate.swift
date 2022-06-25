@@ -42,7 +42,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         }
         Task {
             do {
-                try await NSWorkspace.shared.openApplication(at: appURL, configuration: .init())
+                let cfg = NSWorkspace.OpenConfiguration()
+                cfg.hides = true
+                try await NSWorkspace.shared.openApplication(at: appURL, configuration: cfg)
             } catch {
                 NSLog("Unable to launch main app: \(error)")
             }
