@@ -33,6 +33,13 @@ extension Constants {
 
 extension Constants {
     enum App {
+        static var appId: String {
+            guard let identifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String else {
+                fatalError("Missing kCFBundleIdentifierKey from Info.plist")
+            }
+            return identifier
+        }
+
         static let appStoreId = bundleConfig?["appstore_id"] as? String ?? "DUMMY_appstore_id"
 
         static let appGroupId = bundleConfig?["group_id"] as? String ?? "DUMMY_group_id"
