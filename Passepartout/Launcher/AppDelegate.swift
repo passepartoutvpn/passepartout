@@ -37,18 +37,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         guard !isAppRunning else {
-            NSApp.terminate(nil)
+            NSApp.terminate(self)
             return
         }
-        Task {
-            do {
-                let cfg = NSWorkspace.OpenConfiguration()
-                cfg.hides = true
-                try await NSWorkspace.shared.openApplication(at: appURL, configuration: cfg)
-            } catch {
+        let cfg = NSWorkspace.OpenConfiguration()
+        cfg.hides = true
+        cfg.arguments = [Constants.Global.appArgumentBackground]
+        NSWorkspace.shared.openApplication(at: appURL, configuration: cfg) { app, error in
+            if let error = error {
                 NSLog("Unable to launch main app: \(error)")
+                return
             }
-            await NSApp.terminate(nil)
+            NSApp.terminate(self)
         }
     }
 }

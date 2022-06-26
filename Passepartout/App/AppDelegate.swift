@@ -33,6 +33,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         #if targetEnvironment(macCatalyst)
         mac.configure()
         mac.menu.install()
+        if ProcessInfo.processInfo.arguments.contains(Constants.Global.appArgumentBackground) {
+            mac.utils.sendAppToBackground()
+        }
         #endif
         return true
     }
