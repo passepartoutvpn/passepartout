@@ -20,5 +20,10 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>com.algoritmico.Passepartout.config</key>
+	<dict>
+		<key>app_id</key>
+		<string>$(CFG_APP_ID)</string>
+	</dict>
 </dict>
 </plist>

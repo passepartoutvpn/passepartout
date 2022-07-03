@@ -26,6 +26,16 @@
 import Foundation
 
 enum Constants {
+    static func bundleConfig<T>(_ key: String, in bundle: Bundle? = nil) -> T {
+        guard let config = (bundle ?? .main).infoDictionary?["com.algoritmico.Passepartout.config"] as? [String: Any] else {
+            fatalError("Unable to find config bundle")
+        }
+        guard let value = config[key] as? T else {
+            fatalError("Missing \(key) from config bundle")
+        }
+        return value
+    }
+
     enum Global {
         static let appName = "Passepartout"
 

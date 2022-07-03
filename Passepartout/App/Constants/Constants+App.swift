@@ -28,10 +28,6 @@ import UniformTypeIdentifiers
 import SwiftyBeaver
 
 extension Constants {
-    private static let bundleConfig = Bundle.main.infoDictionary?["com.algoritmico.Passepartout.config"] as? [String: Any]
-}
-
-extension Constants {
     enum App {
         static var appId: String {
             guard let identifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] as? String else {
@@ -40,9 +36,9 @@ extension Constants {
             return identifier
         }
 
-        static let appStoreId = bundleConfig?["appstore_id"] as? String ?? "DUMMY_appstore_id"
+        static let appStoreId: String = bundleConfig("appstore_id")
 
-        static let appGroupId = bundleConfig?["group_id"] as? String ?? "DUMMY_group_id"
+        static let appGroupId: String = bundleConfig("group_id")
 
         static let isBeta: Bool = {
             Bundle.main.isTestFlight
@@ -57,7 +53,7 @@ extension Constants {
 
                 return testAppType
             }
-            if let infoValue = bundleConfig?["app_type"] as? Int,
+            if let infoValue: Int = bundleConfig("app_type"),
                let testAppType = ProductManager.AppType(rawValue: infoValue) {
 
                 return testAppType

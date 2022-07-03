@@ -27,7 +27,7 @@ import Foundation
 
 extension Constants {
     enum Launcher {
-        static let appId = "com.algoritmico.ios.Passepartout"
+        static let appId: String = bundleConfig("app_id")
 
         private static let appPath: String = {
             let path = Bundle.main.bundlePath as NSString
