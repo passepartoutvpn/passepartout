@@ -59,15 +59,8 @@ extension PassepartoutError {
 
 extension ObservableVPNState {
     func localizedStatusDescription(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool) -> String {
-        
-        // FIXME: l10n, sure about this wording?
-        guard isActiveProfile else {
-//            return L10n.Tunnelkit.Vpn.unused
+        guard isActiveProfile && isEnabled else {
             return L10n.Tunnelkit.Vpn.disabled
-        }
-        guard isEnabled else {
-//            return L10n.Tunnelkit.Vpn.disabled
-            return L10n.Organizer.Sections.active
         }
         if withErrors {
             if let errorDescription = lastError?.localizedVPNDescription, !errorDescription.isEmpty {
