@@ -31,8 +31,12 @@ public struct UserDefaultsStore: KeyValueStore {
     public init(defaults: UserDefaults) {
         self.defaults = defaults
     }
-    
-    public func setValue<L: KeyStoreLocation, V>(_ value: V, forLocation location: L) {
+
+    public func setValue<L: KeyStoreLocation, V>(_ value: V?, forLocation location: L) {
+        guard let value = value else {
+            defaults.removeObject(forKey: location.key)
+            return
+        }
         defaults.setValue(value, forKey: location.key)
     }
     
