@@ -81,7 +81,7 @@ extension ProfileView {
                     Text(L10n.Profile.Items.Provider.Refresh.caption)
                 }.withTrailingProgress(when: isRefreshingInfrastructure)
             } header: {
-                Text(currentProvider.fullName)
+                currentProviderFullName.map(Text.init)
             } footer: {
                 lastInfrastructureUpdate.map {
                     Text(L10n.Profile.Sections.ProviderInfrastructure.footer($0))
@@ -89,14 +89,16 @@ extension ProfileView {
             }
         }
 
-        private var currentProvider: ProviderMetadata {
+        private var currentProviderFullName: String? {
             guard let name = currentProfile.value.header.providerName else {
-                fatalError("Provider name accessed but profile is not a provider (isPlaceholder? \(currentProfile.value.isPlaceholder))")
+                assertionFailure("Provider name accessed but profile is not a provider (isPlaceholder? \(currentProfile.value.isPlaceholder))")
+                return nil
             }
             guard let metadata = providerManager.provider(withName: name) else {
-                fatalError("Provider metadata not found")
+                assertionFailure("Provider metadata not found")
+                return nil
             }
-            return metadata
+            return metadata.name
         }
 
 //        private var currentProviderLocation: String? {

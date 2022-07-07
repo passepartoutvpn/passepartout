@@ -75,7 +75,7 @@ extension DefaultVPNManager {
                     settings = try profile.providerOpenVPNSettings(withManager: providerManager)
                 } else {
                     guard let hostSettings = profile.hostOpenVPNSettings else {
-                        fatalError("Host has no OpenVPN settings")
+                        fatalError("Profile currentVPNProtocol is OpenVPN, but host has no OpenVPN settings")
                     }
                     settings = hostSettings
                 }
@@ -87,7 +87,7 @@ extension DefaultVPNManager {
                     settings = try profile.providerWireGuardSettings(withManager: providerManager)
                 } else {
                     guard let hostSettings = profile.hostWireGuardSettings else {
-                        fatalError("Host has no WireGuard settings")
+                        fatalError("Profile currentVPNProtocol is WireGuard, but host has no WireGuard settings")
                     }
                     settings = hostSettings
                 }

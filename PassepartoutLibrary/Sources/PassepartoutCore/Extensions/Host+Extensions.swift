@@ -49,30 +49,18 @@ extension Profile {
 
     public var hostOpenVPNSettings: OpenVPNSettings? {
         get {
-            guard host != nil else {
-                fatalError("Not a host")
-            }
             return host?.ovpnSettings
         }
         set {
-            guard host != nil else {
-                fatalError("Not a host")
-            }
             host?.ovpnSettings = newValue
         }
     }
 
     public var hostWireGuardSettings: WireGuardSettings? {
         get {
-            guard host != nil else {
-                fatalError("Not a host")
-            }
             return host?.wgSettings
         }
         set {
-            guard host != nil else {
-                fatalError("Not a host")
-            }
             host?.wgSettings = newValue
         }
     }
@@ -95,7 +83,8 @@ extension Profile.Host: ProfileSubtype {
         } else if let _ = wgSettings {
             return [.wireGuard]
         } else {
-            fatalError("No VPN settings found")
+            assertionFailure("No VPN settings found")
+            return []
         }
     }
 }
