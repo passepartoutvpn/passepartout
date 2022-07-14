@@ -39,6 +39,8 @@ public protocol ProfileManager {
     
     var headers: [Profile.Header] { get }
     
+    var profiles: [Profile] { get }
+    
     func isExistingProfile(withId id: UUID) -> Bool
     
     func isExistingProfile(withName name: String) -> Bool

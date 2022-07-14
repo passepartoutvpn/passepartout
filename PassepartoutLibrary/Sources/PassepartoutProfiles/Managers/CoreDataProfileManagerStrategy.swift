@@ -42,6 +42,10 @@ public class CoreDataProfileManagerStrategy: ProfileManagerStrategy {
         fetchedHeaders.value
     }
     
+    public func profiles() -> [Profile] {
+        profileRepository.profiles()
+    }
+    
     public func profile(withId id: UUID) -> Profile? {
         profileRepository.profile(withId: id)
     }

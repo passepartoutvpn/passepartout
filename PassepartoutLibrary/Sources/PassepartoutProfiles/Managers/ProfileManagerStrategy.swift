@@ -30,6 +30,8 @@ import PassepartoutCore
 public protocol ProfileManagerStrategy {
     var allHeaders: [UUID: Profile.Header] { get }
     
+    func profiles() -> [Profile]
+    
     func profile(withId: UUID) -> Profile?
     
     func saveProfiles(_ profiles: [Profile])

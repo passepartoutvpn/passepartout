@@ -117,6 +117,10 @@ extension DefaultProfileManager {
         Array(allHeaders.values)
     }
     
+    public var profiles: [Profile] {
+        strategy.profiles()
+    }
+    
     public func isExistingProfile(withId id: UUID) -> Bool {
         allHeaders[id] != nil
     }

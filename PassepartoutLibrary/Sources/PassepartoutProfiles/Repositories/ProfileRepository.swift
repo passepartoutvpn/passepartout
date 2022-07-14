@@ -64,6 +64,21 @@ class ProfileRepository: Repository {
             initial: [:]
         )
     }
+    
+    func profiles() -> [Profile] {
+        let request = CDProfile.fetchRequest()
+        request.sortDescriptors = [
+            .init(keyPath: \CDProfile.uuid, ascending: true),
+            .init(keyPath: \CDProfile.lastUpdate, ascending: false)
+        ]
+        do {
+            let results = try context.fetch(request)
+            return try results.compactMap(ProfileMapper.toModel)
+        } catch {
+            pp_log.error("Unable to fetch profiles: \(error)")
+            return []
+        }
+    }
 
     func profile(withId id: UUID) -> Profile? {
         let request = CDProfile.fetchRequest()
