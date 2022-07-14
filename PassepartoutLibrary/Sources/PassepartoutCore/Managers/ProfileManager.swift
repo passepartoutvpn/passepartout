@@ -31,9 +31,9 @@ public protocol ProfileManager {
     
     var activeProfileId: UUID? { get }
 
-    var activeProfileIdPublisher: Published<UUID?>.Publisher { get }
-
     var currentProfileId: UUID? { get set }
+
+    var didUpdateActiveProfile: PassthroughSubject<UUID?, Never> { get }
 
     var didCreateProfile: PassthroughSubject<Profile, Never> { get }
     

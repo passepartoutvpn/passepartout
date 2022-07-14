@@ -159,7 +159,7 @@ extension DefaultVPNManager {
     }
 
     private func observeProfileManager() {
-        profileManager.activeProfileIdPublisher
+        profileManager.didUpdateActiveProfile
             .dropFirst()
             .removeDuplicates()
             .sink { newId in

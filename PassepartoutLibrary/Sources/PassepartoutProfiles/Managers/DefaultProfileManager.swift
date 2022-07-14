@@ -60,10 +60,6 @@ public class DefaultProfileManager: ProfileManagerWithCurrentProfile, Observable
         }
     }
 
-    public var activeProfileIdPublisher: Published<UUID?>.Publisher {
-        $internalActiveProfileId
-    }
-
     public var currentProfileId: UUID? {
         get {
             internalCurrentProfileId
@@ -83,6 +79,8 @@ public class DefaultProfileManager: ProfileManagerWithCurrentProfile, Observable
 
     public let currentProfile: ObservableProfile
     
+    public let didUpdateActiveProfile = PassthroughSubject<UUID?, Never>()
+
     public let didCreateProfile = PassthroughSubject<Profile, Never>()
     
     private var cancellables: Set<AnyCancellable> = []
@@ -293,6 +291,11 @@ extension DefaultProfileManager {
 
 extension DefaultProfileManager {
     public func observeUpdates() {
+        $internalActiveProfileId
+            .sink {
+                self.didUpdateActiveProfile.send($0)
+            }.store(in: &cancellables)
+
         strategy.willUpdateProfiles()
             .dropFirst()
             .sink {
