@@ -43,6 +43,7 @@ class ProfileRepository: Repository {
         ]
         request.propertiesToFetch = [
             "uuid",
+            "lastUpdate",
             "name",
             "providerName"
         ]
