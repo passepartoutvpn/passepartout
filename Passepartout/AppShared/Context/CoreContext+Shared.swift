@@ -27,6 +27,8 @@ import Foundation
 import PassepartoutLibrary
 
 extension CoreContext {
+
+    @MainActor
     static let shared = CoreContext(store: UserDefaultsStore(defaults: .standard))
 }
 

@@ -288,8 +288,10 @@ extension DefaultProfileManager {
             currentProfile.isLoading = true
             Task {
                 try await makeProfileReady(profile)
-                currentProfile.value = profile
-                currentProfile.isLoading = false
+                await MainActor.run {
+                    currentProfile.value = profile
+                    currentProfile.isLoading = false
+                }
             }
         }
     }
@@ -334,7 +336,7 @@ extension DefaultProfileManager {
         
         didUpdateProfiles.send()
 
-        // IMPORTANT: defer task to avoid recursive saves
+        // IMPORTANT: defer task to avoid recursive saves (is non-main thread an issue?)
         // FIXME: Core Data, not sure about this workaround
         Task {
             fixDuplicateNames(in: newHeaders)

@@ -53,8 +53,10 @@ public class SSIDReader: NSObject, ObservableObject, CLLocationManagerDelegate {
     private func notifyCurrentSSID() {
         Task {
             let currentSSID = await Utils.currentWifiSSID() ?? ""
-            publisher.send(currentSSID)
-            cancellables.removeAll()
+            await MainActor.run {
+                publisher.send(currentSSID)
+                cancellables.removeAll()
+            }
         }
     }
 

@@ -27,6 +27,7 @@ import Foundation
 import Intents
 import PassepartoutLibrary
 
+@MainActor
 extension IntentDispatcher {
     private enum IntentError: Error {
         case notProvider(UUID)

@@ -93,7 +93,9 @@ extension IntentsManager: INUIEditVoiceShortcutViewControllerDelegate {
         // so damn it, reload manually after a delay
         Task {
             await Task.maybeWait(forMilliseconds: Constants.Delays.xxxReloadEditedShortcut)
-            reloadShortcuts()
+            await MainActor.run {
+                reloadShortcuts()
+            }
         }
     }
 

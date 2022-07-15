@@ -45,6 +45,7 @@ public class MockVPNManagerStrategy: VPNManagerStrategy {
     public func reinstate(configuration: VPNConfiguration) {
     }
     
+    @MainActor
     public func connect(configuration: VPNConfiguration) {
         guard currentState?.vpnStatus != .connected else {
             return
@@ -58,6 +59,7 @@ public class MockVPNManagerStrategy: VPNManagerStrategy {
         }
     }
     
+    @MainActor
     public func disconnect() {
         stopCountingData()
         guard currentState?.vpnStatus != .disconnected else {
@@ -92,6 +94,7 @@ public class MockVPNManagerStrategy: VPNManagerStrategy {
         dataCountTimer = nil
     }
     
+    @MainActor
     public func removeConfigurations() {
         disconnect()
     }

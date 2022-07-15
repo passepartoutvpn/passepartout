@@ -67,7 +67,8 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
     // MARK: Protocol specific
     
     private var currentBundleIdentifier: String?
-    
+
+    @MainActor
     public init(appGroup: String, tunnelBundleIdentifier: @escaping (VPNProtocolType) -> String, dataCountInterval: TimeInterval = 3.0) {
         self.appGroup = appGroup
         self.tunnelBundleIdentifier = tunnelBundleIdentifier
@@ -107,6 +108,7 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
         // use this to drop redundant NE notifications
         vpnState
             .removeDuplicates()
+            .receive(on: DispatchQueue.main)
             .sink {
                 self.currentState?.isEnabled = $0.isEnabled
                 self.currentState?.vpnStatus = $0.vpnStatus

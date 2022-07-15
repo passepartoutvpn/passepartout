@@ -60,6 +60,7 @@ class CoreContext {
     
     private var cancellables: Set<AnyCancellable> = []
     
+    @MainActor
     init(store: KeyValueStore) {
         self.store = store
         
