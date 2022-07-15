@@ -27,6 +27,8 @@ import Foundation
 import Combine
 
 public protocol ProviderManager {
+    var didUpdateProviders: PassthroughSubject<Void, Never> { get }
+
     func allProviders() -> [ProviderMetadata]
     
     func provider(withName name: ProviderName) -> ProviderMetadata?

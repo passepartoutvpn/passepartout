@@ -32,6 +32,8 @@ public protocol ProfileManager {
     var activeProfileId: UUID? { get }
 
     var currentProfileId: UUID? { get set }
+    
+    var didUpdateProfiles: PassthroughSubject<Void, Never> { get }
 
     var didUpdateActiveProfile: PassthroughSubject<UUID?, Never> { get }
 

@@ -79,6 +79,8 @@ public class DefaultProfileManager: ProfileManagerWithCurrentProfile, Observable
 
     public let currentProfile: ObservableProfile
     
+    public let didUpdateProfiles = PassthroughSubject<Void, Never>()
+
     public let didUpdateActiveProfile = PassthroughSubject<UUID?, Never>()
 
     public let didCreateProfile = PassthroughSubject<Profile, Never>()
@@ -329,6 +331,8 @@ extension DefaultProfileManager {
             pp_log.info("\tActive profile was deleted")
             self.activeProfileId = nil
         }
+        
+        didUpdateProfiles.send()
 
         // IMPORTANT: defer task to avoid recursive saves
         // FIXME: Core Data, not sure about this workaround

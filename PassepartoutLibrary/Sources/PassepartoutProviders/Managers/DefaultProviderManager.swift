@@ -44,6 +44,8 @@ public class DefaultProviderManager: ProviderManager, ObservableObject, RateLimi
 
     private let serverRepository: ServerRepository
 
+    public let didUpdateProviders = PassthroughSubject<Void, Never>()
+
     public init(appBuild: Int, bundleServices: WebServices, webServices: WebServices, persistence: Persistence) {
         self.appBuild = appBuild
         self.bundleServices = bundleServices
@@ -118,6 +120,8 @@ public class DefaultProviderManager: ProviderManager, ObservableObject, RateLimi
             .tryMap { index in
                 self.saveLastAction(self.indexActionName)
                 try self.providerRepository.mergeIndex(index)
+
+                self.didUpdateProviders.send()
             }.eraseToAnyPublisher()
     }
     
@@ -167,6 +171,8 @@ public class DefaultProviderManager: ProviderManager, ObservableObject, RateLimi
                         vpnProtocol: vpnProtocol,
                         lastUpdate: pub.lastModified ?? Date()
                     )
+
+                    self.didUpdateProviders.send()
                 } catch {
                     pp_log.error("Unable to persist \(providerName) infrastructure (\(vpnProtocol)): \(error)")
                 }
@@ -178,6 +184,8 @@ public class DefaultProviderManager: ProviderManager, ObservableObject, RateLimi
     
     public func reset() {
         persistence.truncate()
+
+        didUpdateProviders.send()
     }
 
     // MARK: RateLimited
