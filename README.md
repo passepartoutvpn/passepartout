@@ -73,6 +73,7 @@ Passepartout can connect to a few well-known VPN providers with an existing acco
 - [Oeck][app-net-oeck]
 - [Private Internet Access][app-net-pia]
 - [ProtonVPN][app-net-protonvpn]
+- [SurfShark][app-net-surfshark]
 - [TorGuard][app-net-torguard]
 - [TunnelBear][app-net-tunnelbear]
 - [VyprVPN][app-net-vyprvpn]
@@ -194,6 +195,7 @@ Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 [app-net-oeck]: https://www.oeck.com
 [app-net-pia]: https://www.privateinternetaccess.com/pages/buy-vpn/
 [app-net-protonvpn]: https://proton.go2cloud.org/SHZ
+[app-net-surfshark]: https://surfshark.com
 [app-net-torguard]: https://torguard.net/
 [app-net-tunnelbear]: https://www.tunnelbear.com/
 [app-net-vyprvpn]: https://www.vyprvpn.com/
