@@ -11,6 +11,9 @@
 		0E021D9D284E68580077EF5D /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E021D9B284E68580077EF5D /* AppContext.swift */; };
 		0E0392772818732D00827C10 /* BuildProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0392762818732D00827C10 /* BuildProducts.swift */; };
 		0E039279281890B100827C10 /* AddHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E039278281890B100827C10 /* AddHostView.swift */; };
+		0E04F0062883462E00BFCE1C /* LightUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04F0052883462E00BFCE1C /* LightUtils.swift */; };
+		0E04F0072883462E00BFCE1C /* LightUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04F0052883462E00BFCE1C /* LightUtils.swift */; };
+		0E04F0092883466500BFCE1C /* DefaultLightUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04F0082883466500BFCE1C /* DefaultLightUtils.swift */; };
 		0E065F112813269500062CAF /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E065F102813269500062CAF /* WelcomeView.swift */; };
 		0E0838F22872C5FB00A34EC0 /* ItemGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0838F12872C5FB00A34EC0 /* ItemGroup.swift */; };
 		0E0838F82874147F00A34EC0 /* PassepartoutMenu+StatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0838F72874147F00A34EC0 /* PassepartoutMenu+StatusButton.swift */; };
@@ -277,6 +280,8 @@
 		0E021D9B284E68580077EF5D /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		0E0392762818732D00827C10 /* BuildProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildProducts.swift; sourceTree = "<group>"; };
 		0E039278281890B100827C10 /* AddHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHostView.swift; sourceTree = "<group>"; };
+		0E04F0052883462E00BFCE1C /* LightUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightUtils.swift; sourceTree = "<group>"; };
+		0E04F0082883466500BFCE1C /* DefaultLightUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLightUtils.swift; sourceTree = "<group>"; };
 		0E065F102813269500062CAF /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		0E0838F12872C5FB00A34EC0 /* ItemGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemGroup.swift; sourceTree = "<group>"; };
 		0E0838F72874147F00A34EC0 /* PassepartoutMenu+StatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PassepartoutMenu+StatusButton.swift"; sourceTree = "<group>"; };
@@ -781,6 +786,7 @@
 			children = (
 				0E96D2F82871D874005EFBCF /* LightProfileManager.swift */,
 				0E0838F92877325A00A34EC0 /* LightProviderManager.swift */,
+				0E04F0052883462E00BFCE1C /* LightUtils.swift */,
 				0E96D30128720067005EFBCF /* LightVPNManager.swift */,
 			);
 			path = Models;
@@ -791,6 +797,7 @@
 			children = (
 				0E96D2FB2871D94E005EFBCF /* DefaultLightProfileManager.swift */,
 				0E0838FC2877334300A34EC0 /* DefaultLightProviderManager.swift */,
+				0E04F0082883466500BFCE1C /* DefaultLightUtils.swift */,
 				0E96D3042872010A005EFBCF /* DefaultLightVPNManager.swift */,
 			);
 			path = Models;
@@ -1304,6 +1311,7 @@
 				0E1F562B287F0EF100F8ADD7 /* ProviderProfileItem+ViewModel.swift in Sources */,
 				0E5468072867AEC500F74D1C /* MacMenu.swift in Sources */,
 				0E96D2EC2871A0AD005EFBCF /* HostProfileItem.swift in Sources */,
+				0E04F0072883462E00BFCE1C /* LightUtils.swift in Sources */,
 				0E96D2F22871C5CA005EFBCF /* StaticSystemMenu.swift in Sources */,
 				A3A7CC58287D576400172D7D /* ProviderLocationItem+ViewModel.swift in Sources */,
 				0E5467F02867A4C300F74D1C /* PassepartoutMac.swift in Sources */,
@@ -1336,6 +1344,7 @@
 				0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */,
 				0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */,
 				0E35C09A280E95BB0071FA35 /* ProviderProfileAvailability.swift in Sources */,
+				0E04F0092883466500BFCE1C /* DefaultLightUtils.swift in Sources */,
 				0E5349C827C176D100C71BB3 /* EndpointView+WireGuard.swift in Sources */,
 				0EBC076027EC587900208AD9 /* SwiftGen+Strings.swift in Sources */,
 				0E0392772818732D00827C10 /* BuildProducts.swift in Sources */,
@@ -1403,6 +1412,7 @@
 				0E039279281890B100827C10 /* AddHostView.swift in Sources */,
 				0E5467F72867A57000F74D1C /* MacBridge.swift in Sources */,
 				0E9ED48127FD9BAE003B2316 /* CopySavingButton.swift in Sources */,
+				0E04F0062883462E00BFCE1C /* LightUtils.swift in Sources */,
 				0EE11CD2280D8317003BE431 /* InfoMenu.swift in Sources */,
 				0E44689C27B11B5300A14CE4 /* AboutView.swift in Sources */,
 				0E71ACF927C12E4800F85C4B /* CreditsView.swift in Sources */,

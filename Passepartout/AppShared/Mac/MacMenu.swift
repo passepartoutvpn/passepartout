@@ -39,4 +39,6 @@ public protocol MacMenuDelegate {
     var providerManager: LightProviderManager { get }
 
     var vpnManager: LightVPNManager { get }
+
+    var utils: LightUtils { get }
 }

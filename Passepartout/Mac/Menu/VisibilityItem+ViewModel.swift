@@ -24,15 +24,21 @@
 //
 
 import Foundation
+import AppKit
 
 extension VisibilityItem {
     class ViewModel {
-        private let transformer = ObservableProcessTransformer.shared
+        private let transformer: ObservableProcessTransformer
+        
+        private let utils: LightUtils
 
         private let titleBlock: (Bool) -> String
 
-        init(titleBlock: @escaping (Bool) -> String) {
+        init(utils: LightUtils, titleBlock: @escaping (Bool) -> String) {
             self.titleBlock = titleBlock
+
+            transformer = .shared
+            self.utils = utils
         }
 
         var title: String {
@@ -41,6 +47,9 @@ extension VisibilityItem {
         
         @objc func toggleForeground() {
             transformer.toggleForeground()
+            if transformer.isForeground {
+                utils.requestScene()
+            }
         }
         
         func subscribe(_ block: @escaping () -> Void) {

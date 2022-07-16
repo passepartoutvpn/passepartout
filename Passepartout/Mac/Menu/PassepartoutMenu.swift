@@ -57,7 +57,7 @@ class PassepartoutMenu {
         var children: [ItemGroup] = []
         
         children.append(contentsOf: [
-            VisibilityItem {
+            VisibilityItem(utils: macMenuDelegate.utils) {
                 $0 ? L10n.Global.Strings.hide : L10n.Global.Strings.show
             },
             LaunchOnLoginItem(L10n.Preferences.Items.LaunchesOnLogin.caption),

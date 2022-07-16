@@ -1,8 +1,8 @@
 //
-//  VisibilityItem.swift
+//  DefaultLightUtils.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 7/3/22.
+//  Created by Davide De Rosa on 7/16/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,27 +24,21 @@
 //
 
 import Foundation
-import AppKit
+import UIKit
 
-struct VisibilityItem: Item {
-    private let viewModel: ViewModel
-
-    init(utils: LightUtils, titleBlock: @escaping (Bool) -> String) {
-        viewModel = ViewModel(utils: utils, titleBlock: titleBlock)
-    }
+class DefaultLightUtils: LightUtils {
+    private let app: UIApplication
     
-    func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
-        let item = NSMenuItem(
-            title: viewModel.title,
-            action: #selector(viewModel.toggleForeground),
-            keyEquivalent: ""
-        )
-        item.target = viewModel
-        item.representedObject = viewModel
+    init() {
+        app = .shared
+    }
 
-        viewModel.subscribe {
-            item.title = viewModel.title
+    func requestScene() {
+        guard app.connectedScenes.isEmpty else {
+            return
         }
-        return item
+        app.requestSceneSessionActivation(nil, userActivity: nil, options: nil) { error in
+            //
+        }
     }
 }

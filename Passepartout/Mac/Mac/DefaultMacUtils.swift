@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import AppKit
 
 class DefaultMacUtils: MacUtils {
     private let transformer = ObservableProcessTransformer.shared

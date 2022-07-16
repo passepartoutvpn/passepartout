@@ -39,6 +39,10 @@ class MacBundleDelegate: MacMenuDelegate {
     var vpnManager: LightVPNManager {
         DefaultLightVPNManager()
     }
+
+    var utils: LightUtils {
+        DefaultLightUtils()
+    }
     
     init(bundle: MacBundle?) {
         self.bundle = bundle
