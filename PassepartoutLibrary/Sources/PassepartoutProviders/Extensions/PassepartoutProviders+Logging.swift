@@ -28,6 +28,6 @@ import PassepartoutCore
 
 extension ProviderServer {
     public var logDescription: String {
-        return "{'\(categoryName)', \(countryCode), '\(apiId)', \(id)}"
+        "{'\(categoryName)', \(countryCode), '\(apiId)', \(id)}"
     }
 }

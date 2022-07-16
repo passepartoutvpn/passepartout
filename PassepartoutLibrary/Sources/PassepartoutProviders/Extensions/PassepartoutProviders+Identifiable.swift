@@ -31,19 +31,19 @@ import CryptoKit
 
 extension ProviderCategory: Identifiable {
     public var id: String {
-        return "\(providerMetadata.name):\(name)"
+        "\(providerMetadata.name):\(name)"
     }
 }
 
 extension ProviderLocation: Identifiable {
     public var id: String {
-        return "\(providerMetadata.name):\(categoryName):\(countryCode)"
+        "\(providerMetadata.name):\(categoryName):\(countryCode)"
     }
 }
 
 extension ProviderServer {
     public var locationId: String {
-        return "\(providerMetadata.name):\(categoryName):\(countryCode)"
+        "\(providerMetadata.name):\(categoryName):\(countryCode)"
     }
 }
 

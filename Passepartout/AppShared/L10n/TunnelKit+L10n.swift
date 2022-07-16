@@ -86,7 +86,7 @@ extension Optional where Wrapped == IPv4Settings {
     }
 
     var localizedDefaultGateway: String {
-        return self?.defaultGateway ?? L10n.Global.Strings.none
+        self?.defaultGateway ?? L10n.Global.Strings.none
     }
 }
 
@@ -100,19 +100,19 @@ extension Optional where Wrapped == IPv6Settings {
     }
 
     var localizedDefaultGateway: String {
-        return self?.defaultGateway ?? L10n.Global.Strings.none
+        self?.defaultGateway ?? L10n.Global.Strings.none
     }
 }
 
 extension IPv4Settings.Route {
     var localizedDescription: String {
-        return "\(destination)/\(mask) -> \(gateway)"
+        "\(destination)/\(mask) -> \(gateway)"
     }
 }
 
 extension IPv6Settings.Route {
     var localizedDescription: String {
-        return "\(destination)/\(prefixLength) -> \(gateway)"
+        "\(destination)/\(prefixLength) -> \(gateway)"
     }
 }
 
@@ -180,7 +180,7 @@ extension Error {
     }
 
     private func neErrorDescription(_ error: NEVPNError) -> String? {
-        return error.localizedDescription.capitalized
+        error.localizedDescription.capitalized
     }
 }
 

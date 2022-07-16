@@ -28,7 +28,7 @@ import PassepartoutCore
 
 extension ProviderName {
     public func requiresCredentials(forProtocol vpnProtocol: VPNProtocolType) -> Bool {
-        return vpnProtocol == .openVPN
+        vpnProtocol == .openVPN
     }
 
     public var credentialsPurpose: CredentialsPurpose {

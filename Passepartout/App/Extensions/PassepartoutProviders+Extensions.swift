@@ -28,15 +28,15 @@ import PassepartoutLibrary
 
 extension ProviderMetadata: Identifiable, Comparable, Hashable {
     public var id: String {
-        return name
+        name
     }
 
     public static func ==(lhs: Self, rhs: Self) -> Bool {
-        return lhs.name == rhs.name
+        lhs.name == rhs.name
     }
 
     public static func <(lhs: Self, rhs: Self) -> Bool {
-        return lhs.fullName.lowercased() < rhs.fullName.lowercased()
+        lhs.fullName.lowercased() < rhs.fullName.lowercased()
     }
     
     public func hash(into hasher: inout Hasher) {
@@ -46,27 +46,27 @@ extension ProviderMetadata: Identifiable, Comparable, Hashable {
 
 extension ProviderCategory: Comparable {
     public static func ==(lhs: Self, rhs: Self) -> Bool {
-        return lhs.name.lowercased() == rhs.name.lowercased()
+        lhs.name.lowercased() == rhs.name.lowercased()
     }
 
     public static func <(lhs: Self, rhs: Self) -> Bool {
-        return lhs.name.lowercased() < rhs.name.lowercased()
+        lhs.name.lowercased() < rhs.name.lowercased()
     }
 }
 
 extension ProviderLocation: Comparable {
     public static func ==(lhs: Self, rhs: Self) -> Bool {
-        return lhs.countryCode == rhs.countryCode
+        lhs.countryCode == rhs.countryCode
     }
 
     public static func <(lhs: Self, rhs: Self) -> Bool {
-        return lhs.localizedCountry < rhs.localizedCountry
+        lhs.localizedCountry < rhs.localizedCountry
     }
 }
 
 extension ProviderServer: Comparable {
     public static func ==(lhs: Self, rhs: Self) -> Bool {
-        return lhs.id == rhs.id
+        lhs.id == rhs.id
     }
     
     // "Default" comes first
@@ -86,11 +86,11 @@ extension ProviderServer: Comparable {
 
 extension ProviderServer.Preset: Comparable {
     public static func ==(lhs: Self, rhs: Self) -> Bool {
-        return lhs.name == rhs.name
+        lhs.name == rhs.name
     }
 
     public static func <(lhs: Self, rhs: Self) -> Bool {
-        return lhs.name < rhs.name
+        lhs.name < rhs.name
     }
 }
 

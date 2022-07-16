@@ -28,13 +28,13 @@ import TunnelKitOpenVPN
 
 extension OpenVPN.Cipher {
     var localizedDescription: String {
-        return description
+        description
     }
 }
 
 extension OpenVPN.Digest {
     var localizedDescription: String {
-        return description
+        description
     }
 }
 

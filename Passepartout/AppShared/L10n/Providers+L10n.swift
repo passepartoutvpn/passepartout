@@ -27,10 +27,6 @@ import Foundation
 import PassepartoutLibrary
 
 extension ProviderManager {
-//    func localizedLocation(forProfile profile: Profile) -> String? {
-//        return profile.providerServer(self)?.localizedDescription
-//    }
-
     func localizedPreset(forProfile profile: Profile) -> String? {
         guard let server = profile.providerServer(self) else {
             return nil
@@ -65,13 +61,13 @@ extension ProviderMetadata {
 
 extension ProviderLocation {
     var localizedCountry: String {
-        return countryCode.localizedAsCountryCode
+        countryCode.localizedAsCountryCode
     }
 }
 
 extension ProviderServer {
     var localizedCountry: String {
-        return countryCode.localizedAsCountryCode
+        countryCode.localizedAsCountryCode
     }
 
     var localizedDescription: String {
@@ -83,16 +79,16 @@ extension ProviderServer {
     }
 
     var localizedDetails: String {
-        return details ?? ""
+        details ?? ""
     }
 
     var localizedDetailsWithDefault: String {
-        return details ?? "\(L10n.Global.Strings.default) [\(apiId)]"
+        details ?? "\(L10n.Global.Strings.default) [\(apiId)]"
     }
 }
 
 extension ProviderServer.Preset {
     var localizedDescription: String {
-        return name
+        name
     }
 }
