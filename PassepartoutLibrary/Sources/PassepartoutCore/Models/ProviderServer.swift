@@ -59,9 +59,11 @@ public struct ProviderServer: Identifiable {
     
     public let extraCountryCodes: [String]?
     
+    public let localizedName: String?
+    
     public let serverIndex: Int?
     
-    public let details: String?
+    public let tags: [String]?
     
     public let hostname: String?
     
@@ -71,15 +73,16 @@ public struct ProviderServer: Identifiable {
 
     public private(set) var presets: [Preset]?
     
-    public init(providerMetadata: ProviderMetadata, id: String, apiId: String, categoryName: String, countryCode: String, extraCountryCodes: [String]?, serverIndex: Int?, details: String?, hostname: String?, ipAddresses: [String], presetIds: [String]) {
+    public init(providerMetadata: ProviderMetadata, id: String, apiId: String, categoryName: String, countryCode: String, extraCountryCodes: [String]?, localizedName: String?, serverIndex: Int?, tags: [String]?, hostname: String?, ipAddresses: [String], presetIds: [String]) {
         self.providerMetadata = providerMetadata
         self.id = id
         self.apiId = apiId
         self.categoryName = categoryName
         self.countryCode = countryCode
         self.extraCountryCodes = extraCountryCodes
+        self.localizedName = localizedName
         self.serverIndex = serverIndex
-        self.details = details
+        self.tags = tags
         self.hostname = hostname
         self.ipAddresses = ipAddresses
         self.presetIds = presetIds

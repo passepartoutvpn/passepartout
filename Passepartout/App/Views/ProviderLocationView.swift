@@ -253,10 +253,10 @@ extension ProviderLocationView {
             HStack {
                 themeAssetsCountryImage(location.countryCode).asAssetImage
                 VStack {
-                    if let singleServer = location.onlyServer, let _ = singleServer.details {
+                    if let singleServer = location.onlyServer, let _ = singleServer.localizedShortDescription {
                         Text(location.localizedCountry)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        Text(singleServer.localizedDetails.uppercased())
+                        Text(singleServer.localizedShortDescription ?? "")
                             .frame(maxWidth: .infinity, alignment: .leading)
                     } else {
                         Text(location.localizedCountry)
@@ -284,7 +284,7 @@ extension ProviderLocationView {
             ScrollViewReader { scrollProxy in
                 List {
                     ForEach(servers) { server in
-                        Button(server.localizedDetailsWithDefault) {
+                        Button(server.localizedShortDescriptionWithDefault) {
                             selectedServer = server
                         }.withTrailingCheckmark(when: server.id == selectedServer?.id)
                     }

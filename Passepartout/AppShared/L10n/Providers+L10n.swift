@@ -70,20 +70,35 @@ extension ProviderServer {
         countryCode.localizedAsCountryCode
     }
 
-    var localizedDescription: String {
+    var localizedShortDescription: String? {
+        var comps = localizedName.map { [$0] } ?? []
+        if let serverIndex = serverIndex {
+            comps.append("#\(serverIndex)")
+        }
+        guard !comps.isEmpty else {
+            return nil
+        }
+        var str = comps.joined(separator: " ")
+        if let tags = tags {
+            let suffix = tags.map { $0.uppercased() }.joined(separator: ",")
+            str = "\(str) (\(suffix))"
+        }
+        guard !str.isEmpty else {
+            return nil
+        }
+        return str
+    }
+
+    var localizedShortDescriptionWithDefault: String {
+        localizedShortDescription ?? "\(L10n.Global.Strings.default) [\(apiId)]"
+    }
+
+    var localizedLongDescription: String {
         var comps: [String] = [localizedCountry]
-        details.map {
+        localizedShortDescription.map {
             comps.append($0)
         }
         return comps.joined(separator: " - ")
-    }
-
-    var localizedDetails: String {
-        details ?? ""
-    }
-
-    var localizedDetailsWithDefault: String {
-        details ?? "\(L10n.Global.Strings.default) [\(apiId)]"
     }
 }
 

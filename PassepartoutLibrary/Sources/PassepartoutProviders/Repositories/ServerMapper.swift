@@ -95,8 +95,9 @@ struct ServerMapper: DTOMapper, ModelMapper {
             categoryName: categoryName,
             countryCode: countryCode,
             extraCountryCodes: dto.decodedExtraCountryCodes,
+            localizedName: dto.localizedName,
             serverIndex: dto.serverIndex != 0 ? Int(dto.serverIndex) : nil,
-            details: dto.details,
+            tags: dto.decodedTags,
             hostname: dto.hostname,
             ipAddresses: dto.decodedIPAddresses,
             presetIds: supportedPresetIds
@@ -164,7 +165,7 @@ private extension CDInfrastructureServer {
 }
 
 private extension CDInfrastructureServer {
-    var details: String? {
+    var localizedName: String? {
         var comps: [String] = []
         if let extraCountryCodes = decodedExtraCountryCodes {
             comps.append(contentsOf: extraCountryCodes.map {
@@ -172,24 +173,12 @@ private extension CDInfrastructureServer {
             })
         }
         if let area = area {
-//            comps.append(area.uppercased())
             comps.append(area.capitalized)
-        }
-        if serverIndex != 0 {
-            comps.append("#\(serverIndex)")
         }
         guard !comps.isEmpty else {
             return nil
         }
-        var str = comps.joined(separator: " ")
-        if let tags = tags {
-            let suffix = tags.map { $0.uppercased() }.joined(separator: ",")
-            str = "\(str) (\(suffix))"
-        }
-        guard !str.isEmpty else {
-            return nil
-        }
-        return str
+        return comps.joined(separator: " ")
     }
 }
 

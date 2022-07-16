@@ -69,18 +69,30 @@ extension ProviderServer: Comparable {
         lhs.id == rhs.id
     }
     
-    // "Default" comes first
-    // sorts by serverIndex first, see ProtonVPN > Germany (currently "Frankfurt #203" comes before "#3")
+    // "Default" comes first (nil localizedName)
     public static func <(lhs: Self, rhs: Self) -> Bool {
-        if let li = lhs.serverIndex, let ri = rhs.serverIndex {
+        guard let ld = lhs.localizedName else {
+            return true
+        }
+        guard let rd = rhs.localizedName else {
+            return false
+        }
+        guard ld != rd else {
+            guard let li = lhs.serverIndex else {
+                return true
+            }
+            guard let ri = rhs.serverIndex else {
+                return false
+            }
+            guard li != ri else {
+                guard lhs.apiId != rhs.apiId else {
+                    return lhs.tags?.joined() ?? "" < rhs.tags?.joined() ?? ""
+                }
+                return lhs.apiId < rhs.apiId
+            }
             return li < ri
         }
-        let ld = lhs.localizedDetails
-        let rd = rhs.localizedDetails
-        if ld != rd {
-            return ld < rd
-        }
-        return lhs.apiId < rhs.apiId
+        return ld < rd
     }
 }
 

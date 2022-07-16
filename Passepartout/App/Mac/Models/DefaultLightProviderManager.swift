@@ -69,7 +69,7 @@ class DefaultLightProviderServer: LightProviderServer {
     let serverId: String
     
     init(_ server: ProviderServer) {
-        description = server.localizedDescription
+        description = server.localizedShortDescriptionWithDefault
         categoryName = server.categoryName
         locationId = server.locationId
         serverId = server.id
