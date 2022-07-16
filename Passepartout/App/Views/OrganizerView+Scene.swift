@@ -94,6 +94,9 @@ extension OrganizerView {
 
             case .background:
                 persist()
+                #if targetEnvironment(macCatalyst)
+                MacBundle.shared.utils.sendAppToBackground()
+                #endif
 
             default:
                 break
