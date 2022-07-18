@@ -63,13 +63,13 @@ extension LaunchOnLoginItem {
         }
         
         @objc func toggleLaunchesOnLogin() {
-            launchesOnLogin.toggle()
+            persistentlyLaunchesOnLogin.toggle()
         }
         
         func subscribe(_ block: @escaping (Bool) -> Void) {
             objectWillChange
                 .sink {
-                    block(self.launchesOnLogin)
+                    block(self.persistentlyLaunchesOnLogin)
                 }.store(in: &subscriptions)
         }
     }
