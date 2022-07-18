@@ -19,7 +19,7 @@ ci/update-release-notes.sh ios &&
     ci/copy-release-notes.sh mac
 
 # pull latest API
-API_PATH="PassepartoutCore/Sources/PassepartoutServices/API"
+API_PATH="PassepartoutLibrary/Sources/PassepartoutServices/API"
 git -C $API_PATH pull origin master
 git add $API_PATH
 
