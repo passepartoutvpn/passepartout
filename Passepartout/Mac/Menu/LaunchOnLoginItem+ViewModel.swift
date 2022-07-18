@@ -29,38 +29,37 @@ import ServiceManagement
 
 extension LaunchOnLoginItem {
     class ViewModel: ObservableObject {
-
-        // XXX: hardcoded from AppPreference
-        private let launchesOnLoginKey = "Passepartout.App.launchesOnLogin"
-        
         let title: String
 
-        var launchesOnLogin: Bool {
+        let utils: LightUtils
+        
+        var persistentlyLaunchesOnLogin: Bool {
             get {
-                persistentlyLaunchesOnLogin
+                launchesOnLogin
             }
             set {
                 guard SMLoginItemSetEnabled(Constants.Mac.appLauncherId as CFString, newValue) else {
                     return
                 }
-                persistentlyLaunchesOnLogin = newValue
+                launchesOnLogin = newValue
                 objectWillChange.send()
             }
         }
         
-        private var persistentlyLaunchesOnLogin: Bool {
+        private var launchesOnLogin: Bool {
             get {
-                UserDefaults.standard.bool(forKey: launchesOnLoginKey)
+                utils.launchesOnLogin
             }
             set {
-                UserDefaults.standard.set(newValue, forKey: launchesOnLoginKey)
+                utils.launchesOnLogin = newValue
             }
         }
         
         private var subscriptions: Set<AnyCancellable> = []
 
-        init(title: String) {
+        init(_ title: String, utils: LightUtils) {
             self.title = title
+            self.utils = utils
         }
         
         @objc func toggleLaunchesOnLogin() {

@@ -29,8 +29,8 @@ import AppKit
 struct LaunchOnLoginItem: Item {
     private let viewModel: ViewModel
     
-    init(_ title: String) {
-        viewModel = ViewModel(title: title)
+    init(_ title: String, utils: LightUtils) {
+        viewModel = ViewModel(title, utils: utils)
     }
 
     func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
@@ -50,6 +50,6 @@ struct LaunchOnLoginItem: Item {
     }
     
     private var state: NSControl.StateValue {
-        viewModel.launchesOnLogin ? .on : .off
+        viewModel.persistentlyLaunchesOnLogin ? .on : .off
     }
 }

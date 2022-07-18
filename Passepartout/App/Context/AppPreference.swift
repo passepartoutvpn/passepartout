@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutLibrary
 
 enum AppPreference: String, KeyStoreDomainLocation {
-    case launchesOnLogin // placeholder, hardcoded in PassepartoutMac
+    case launchesOnLogin
 
     case isShowingFavorites
 

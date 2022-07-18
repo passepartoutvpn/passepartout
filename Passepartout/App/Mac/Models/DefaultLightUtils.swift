@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 class DefaultLightUtils: LightUtils {
     private let app: UIApplication
@@ -32,6 +32,8 @@ class DefaultLightUtils: LightUtils {
     init() {
         app = .shared
     }
+    
+    @AppStorage(AppPreference.launchesOnLogin.key) var launchesOnLogin = false
 
     func requestScene() {
         guard app.connectedScenes.isEmpty else {

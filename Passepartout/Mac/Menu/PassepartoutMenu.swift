@@ -60,7 +60,10 @@ class PassepartoutMenu {
             VisibilityItem(utils: macMenuDelegate.utils) {
                 $0 ? L10n.Global.Strings.hide : L10n.Global.Strings.show
             },
-            LaunchOnLoginItem(L10n.Preferences.Items.LaunchesOnLogin.caption),
+            LaunchOnLoginItem(
+                L10n.Preferences.Items.LaunchesOnLogin.caption,
+                utils: macMenuDelegate.utils
+            ),
         ] as [ItemGroup])
 
         if profileManager.hasProfiles {
