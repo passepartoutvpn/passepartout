@@ -44,7 +44,5 @@ enum Constants {
         static let appBuildNumber = Int(Bundle.main.infoDictionary![kCFBundleVersionKey as String] as! String)!
 
         static let appVersionString = "\(appVersionNumber) (\(appBuildNumber))"
-
-        static let appArgumentBackground = "-background"
     }
 }

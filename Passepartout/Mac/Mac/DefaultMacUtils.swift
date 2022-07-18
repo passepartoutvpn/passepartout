@@ -27,20 +27,10 @@ import Foundation
 import AppKit
 
 class DefaultMacUtils: MacUtils {
+    lazy private(set) var isStartedByLauncher = NSApp.isHidden
+    
     private let transformer = ObservableProcessTransformer.shared
     
-    var isForeground: Bool {
-        transformer.isForeground
-    }
-    
-    func toggleForeground() {
-        transformer.toggleForeground()
-    }
-    
-    func bringAppToForeground() {
-        transformer.bringToForeground()
-    }
-
     func sendAppToBackground() {
         transformer.sendToBackground()
     }

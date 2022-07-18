@@ -27,12 +27,8 @@ import Foundation
 
 @objc
 public protocol MacUtils {
-    var isForeground: Bool { get }
+    var isStartedByLauncher: Bool { get }
     
-    func toggleForeground()
-
-    func bringAppToForeground()
-
     func sendAppToBackground()
 }
 

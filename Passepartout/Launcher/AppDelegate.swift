@@ -40,9 +40,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             NSApp.terminate(self)
             return
         }
+        
         let cfg = NSWorkspace.OpenConfiguration()
         cfg.hides = true
-        cfg.arguments = [Constants.Global.appArgumentBackground]
+        cfg.activates = false
+        cfg.addsToRecentItems = false
         NSWorkspace.shared.openApplication(at: appURL, configuration: cfg) { app, error in
             if let error = error {
                 NSLog("Unable to launch main app: \(error)")
