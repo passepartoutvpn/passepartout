@@ -115,7 +115,6 @@
 		0E96D2F92871D874005EFBCF /* LightProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96D2F82871D874005EFBCF /* LightProfileManager.swift */; };
 		0E96D2FC2871D94E005EFBCF /* DefaultLightProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96D2FB2871D94E005EFBCF /* DefaultLightProfileManager.swift */; };
 		0E96D2FD2871D964005EFBCF /* LightProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96D2F82871D874005EFBCF /* LightProfileManager.swift */; };
-		0E96D2FE2871F688005EFBCF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E9E5AE227B44CF1008C95DA /* Localizable.strings */; };
 		0E96D2FF2871F68B005EFBCF /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */; };
 		0E96D3002871F6C8005EFBCF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0E96D30228720067005EFBCF /* LightVPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96D30128720067005EFBCF /* LightVPNManager.swift */; };
@@ -1207,7 +1206,6 @@
 			files = (
 				0E96D30B28720ED9005EFBCF /* Assets.xcassets in Resources */,
 				0EA1D84728805EAE00F3CA48 /* Flags.xcassets in Resources */,
-				0E96D2FE2871F688005EFBCF /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
