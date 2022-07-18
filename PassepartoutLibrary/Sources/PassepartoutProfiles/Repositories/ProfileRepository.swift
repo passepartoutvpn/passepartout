@@ -39,7 +39,7 @@ class ProfileRepository: Repository {
         let request: NSFetchRequest<NSFetchRequestResult> = CDProfile.fetchRequest()
         request.sortDescriptors = [
             .init(keyPath: \CDProfile.uuid, ascending: true),
-            .init(keyPath: \CDProfile.lastUpdate, ascending: false)
+            .init(keyPath: \CDProfile.lastUpdate, ascending: true)
         ]
         request.propertiesToFetch = [
             "uuid",
@@ -69,11 +69,17 @@ class ProfileRepository: Repository {
         let request = CDProfile.fetchRequest()
         request.sortDescriptors = [
             .init(keyPath: \CDProfile.uuid, ascending: true),
-            .init(keyPath: \CDProfile.lastUpdate, ascending: false)
+            .init(keyPath: \CDProfile.lastUpdate, ascending: true)
         ]
         do {
             let results = try context.fetch(request)
-            return try results.compactMap(ProfileMapper.toModel)
+            let map = try results.reduce(into: [UUID: Profile]()) {
+                guard let profile = try ProfileMapper.toModel($1) else {
+                    return
+                }
+                $0[profile.id] = profile
+            }
+            return Array(map.values)
         } catch {
             pp_log.error("Unable to fetch profiles: \(error)")
             return []
