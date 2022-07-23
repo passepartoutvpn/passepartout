@@ -45,6 +45,8 @@ public protocol VPNManager {
     @discardableResult
     func connect(with profileId: UUID, toServer newServerId: String) async throws -> Profile
     
+    func reconnect() async
+
     func modifyActiveProfile(_ block: (inout Profile) -> Void) async throws
 
     func disable() async

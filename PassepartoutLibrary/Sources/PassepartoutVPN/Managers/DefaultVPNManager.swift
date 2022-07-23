@@ -97,9 +97,15 @@ public class DefaultVPNManager<ProfileManagerType: ProfileManagerWithCurrentProf
     }
     
     func reconnect(_ configuration: VPNConfiguration) async {
-        pp_log.info("Reconnecting VPN")
+        pp_log.info("Reconnecting VPN (with new configuration)")
         clearLastError()
         await strategy.connect(configuration: configuration)
+    }
+    
+    public func reconnect() async {
+        pp_log.info("Reconnecting VPN")
+        clearLastError()
+        await strategy.reconnect()
     }
     
     public func disable() async {

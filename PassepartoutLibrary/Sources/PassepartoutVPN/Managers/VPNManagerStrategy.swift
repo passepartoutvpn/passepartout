@@ -33,6 +33,8 @@ public protocol VPNManagerStrategy {
     func reinstate(configuration: VPNConfiguration) async
 
     func connect(configuration: VPNConfiguration) async
+    
+    func reconnect() async
 
     func disconnect() async
 

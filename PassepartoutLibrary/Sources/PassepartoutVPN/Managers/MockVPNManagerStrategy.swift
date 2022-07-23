@@ -58,6 +58,23 @@ public class MockVPNManagerStrategy: VPNManagerStrategy {
             startCountingData()
         }
     }
+
+    @MainActor
+    public func reconnect() async {
+        guard currentState?.vpnStatus == .connected else {
+            return
+        }
+        Task {
+            currentState?.vpnStatus = .disconnecting
+            await Task.maybeWait(forMilliseconds: 1000)
+            currentState?.vpnStatus = .disconnected
+            await Task.maybeWait(forMilliseconds: 1000)
+            currentState?.vpnStatus = .connecting
+            await Task.maybeWait(forMilliseconds: 1000)
+            currentState?.vpnStatus = .connected
+            currentState?.dataCount = nil
+        }
+    }
     
     @MainActor
     public func disconnect() {

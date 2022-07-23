@@ -43,6 +43,8 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
             self.vpnStatus = vpnStatus
         }
     }
+    
+    private static let reconnectionSeconds = 2
 
     private let appGroup: String
     
@@ -149,11 +151,17 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
                 bundleIdentifier,
                 configuration: configuration.neConfiguration,
                 extra: configuration.neExtra,
-                after: .seconds(2)
+                after: .seconds(Self.reconnectionSeconds)
             )
         } catch {
             pp_log.error("Unable to connect: \(error)")
         }
+    }
+    
+    public func reconnect() async {
+        try? await vpn.reconnect(
+            after: .seconds(Self.reconnectionSeconds)
+        )
     }
     
     public func disconnect() async {
