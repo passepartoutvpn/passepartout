@@ -175,18 +175,21 @@ extension DefaultProfileManager {
             assertionFailure("Placeholder")
             return
         }
-        
-        let isActive = isActive ?? allHeaders.isEmpty
 
         pp_log.info("Writing profile \(profile.logDescription) to persistent store")
         strategy.saveProfile(profile)
 
-        if isActive {
-            pp_log.info("\tActivating profile...")
+        if let isActive = isActive {
+            if isActive {
+                pp_log.info("\tActivating profile...")
+                activeProfileId = profile.id
+            } else if activeProfileId == profile.id {
+                pp_log.info("\tDeactivating profile...")
+                activeProfileId = nil
+            }
+        } else if allHeaders.isEmpty {
+            pp_log.info("\tActivating first profile...")
             activeProfileId = profile.id
-        } else if activeProfileId == profile.id {
-            pp_log.info("\tDeactivating profile...")
-            activeProfileId = nil
         }
 
         // IMPORTANT: refresh live copy if just saved (e.g. via intents)
