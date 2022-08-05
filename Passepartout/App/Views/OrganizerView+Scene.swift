@@ -78,7 +78,7 @@ extension OrganizerView {
                 return
             }
             isFirstLaunch = false
-            if !themeIsiPadPortrait, let activeProfileId = profileManager.activeProfileId {
+            if themeIdiom != .phone && !themeIsiPadPortrait, let activeProfileId = profileManager.activeProfileId {
                 profileManager.currentProfileId = activeProfileId
             }
         }
