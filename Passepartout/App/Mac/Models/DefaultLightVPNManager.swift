@@ -92,11 +92,7 @@ class DefaultLightVPNManager: LightVPNManager {
     @MainActor
     func reconnect() {
         Task {
-            if isEnabled {
-                await vpnManager.disable()
-                try? await Task.sleep(nanoseconds: 2 * NSEC_PER_SEC)
-            }
-            try? await vpnManager.connectWithActiveProfile(toServer: nil)
+            await vpnManager.reconnect()
         }
     }
 }
