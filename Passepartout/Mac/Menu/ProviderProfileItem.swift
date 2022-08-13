@@ -51,12 +51,21 @@ struct ProviderProfileItem: Item {
     private func submenu() -> NSMenu {
         let menu = NSMenu()
         let categories = viewModel.categories
-        if categories.isEmpty {
+        guard !categories.isEmpty else {
             let downloadItem = TextItem(L10n.Global.Strings.download) {
                 viewModel.downloadIfNeeded()
             }
             menu.addItem(downloadItem.asMenuItem(withParent: menu))
-        } else if categories.count > 1 {
+            return menu
+        }
+        
+        let connectItem = TextItem(L10n.Global.Strings.connect) {
+            viewModel.connectTo()
+        }
+        menu.addItem(connectItem.asMenuItem(withParent: menu))
+        menu.addItem(.separator())
+
+        if categories.count > 1 {
             viewModel.categories.forEach {
                 menu.addItem(categoryItem(with: $0, parent: menu))
             }
@@ -65,6 +74,7 @@ struct ProviderProfileItem: Item {
                 menu.addItem(locationItem(with: $0, parent: menu))
             }
         }
+
         return menu
     }
     

@@ -58,6 +58,10 @@ extension ProviderProfileItem {
             return category.name == profile.providerServer?.categoryName
         }
         
+        func connectTo() {
+            vpnManager.connect(with: profile.id)
+        }
+
         func downloadIfNeeded() {
             providerManager.downloadIfNeeded(providerName, vpnProtocol: vpnProtocol)
         }

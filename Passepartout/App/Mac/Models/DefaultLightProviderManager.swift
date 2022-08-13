@@ -96,6 +96,7 @@ class DefaultLightProviderManager: LightProviderManager {
             fatalError("Unrecognized VPN protocol: \(vpnProtocol)")
         }
         return providerManager.categories(name, vpnProtocol: vpnProtocolType)
+            .sorted()
             .map(DefaultLightProviderCategory.init)
     }
 

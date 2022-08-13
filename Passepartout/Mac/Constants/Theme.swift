@@ -26,9 +26,7 @@
 import Foundation
 import AppKit
 
-private var bundle: Bundle {
-    Bundle(for: PassepartoutMenu.StatusButton.self)
-}
+private let bundle = Constants.Mac.bundle
 
 extension LightVPNStatus {
     var localizedDescription: String {

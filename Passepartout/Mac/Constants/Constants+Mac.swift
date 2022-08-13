@@ -27,7 +27,7 @@ import Foundation
 
 extension Constants {
     enum Mac {
-        private static var bundle: Bundle {
+        static var bundle: Bundle {
             Bundle(for: PassepartoutMac.self)
         }
         
