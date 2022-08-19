@@ -46,11 +46,15 @@ public protocol LightVPNManager {
     
     func connect(with profileId: UUID, to serverId: String)
     
+    func disconnect()
+    
     func toggle()
     
     func reconnect()
     
-    var delegate: LightVPNManagerDelegate? { get set }
+    func addDelegate(_ delegate: LightVPNManagerDelegate, withIdentifier identifier: String)
+    
+    func removeDelegate(withIdentifier identifier: String)
 }
 
 @objc

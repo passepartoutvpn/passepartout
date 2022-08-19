@@ -47,7 +47,11 @@ extension VPNItemGroup {
             self.toggleTitleBlock = toggleTitleBlock
             self.reconnectTitleBlock = reconnectTitleBlock
             
-            vpnManager.delegate = self
+            vpnManager.addDelegate(self, withIdentifier: "VPNItemGroup")
+        }
+        
+        deinit {
+            vpnManager.removeDelegate(withIdentifier: "VPNItemGroup")
         }
         
         var toggleTitle: String {

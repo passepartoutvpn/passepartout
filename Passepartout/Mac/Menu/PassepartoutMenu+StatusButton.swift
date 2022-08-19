@@ -45,8 +45,12 @@ extension PassepartoutMenu {
             self.profileManager = profileManager
             self.vpnManager = vpnManager
             
-            vpnManager.delegate = self
+            vpnManager.addDelegate(self, withIdentifier: "PassepartoutMenu")
             setStatus(vpnManager.vpnStatus)
+        }
+        
+        deinit {
+            vpnManager.removeDelegate(withIdentifier: "PassepartoutMenu")
         }
         
         func install(systemMenu: SystemMenu) {

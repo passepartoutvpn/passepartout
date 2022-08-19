@@ -40,14 +40,14 @@ class DefaultLightVPNManager: LightVPNManager {
         vpnManager.currentState.vpnStatus.asLightVPNStatus
     }
     
-    weak var delegate: LightVPNManagerDelegate?
+    private var delegates: [String: LightVPNManagerDelegate] = [:]
 
     init() {
         vpnManager.currentState.$isEnabled
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink {
-                self.delegate?.didUpdateState(
+                self.didUpdateState(
                     isEnabled: $0,
                     vpnStatus: self.vpnManager.currentState.vpnStatus.asLightVPNStatus
                 )
@@ -57,7 +57,7 @@ class DefaultLightVPNManager: LightVPNManager {
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink {
-                self.delegate?.didUpdateState(
+                self.didUpdateState(
                     isEnabled: self.vpnManager.currentState.isEnabled,
                     vpnStatus: $0.asLightVPNStatus
                 )
@@ -77,6 +77,13 @@ class DefaultLightVPNManager: LightVPNManager {
             try? await vpnManager.connect(with: profileId, toServer: serverId)
         }
     }
+    
+    @MainActor
+    func disconnect() {
+        Task {
+            await vpnManager.disable()
+        }
+    }
 
     @MainActor
     func toggle() {
@@ -93,6 +100,22 @@ class DefaultLightVPNManager: LightVPNManager {
     func reconnect() {
         Task {
             await vpnManager.reconnect()
+        }
+    }
+    
+    func addDelegate(_ delegate: LightVPNManagerDelegate, withIdentifier identifier: String) {
+        delegates[identifier] = delegate
+    }
+    
+    func removeDelegate(withIdentifier identifier: String) {
+        delegates.removeValue(forKey: identifier)
+    }
+}
+
+extension DefaultLightVPNManager: LightVPNManagerDelegate {
+    func didUpdateState(isEnabled: Bool, vpnStatus: LightVPNStatus) {
+        delegates.values.forEach {
+            $0.didUpdateState(isEnabled: isEnabled, vpnStatus: vpnStatus)
         }
     }
 }

@@ -50,6 +50,8 @@ struct ProviderProfileItem: Item {
     
     private func submenu() -> NSMenu {
         let menu = NSMenu()
+        menu.autoenablesItems = false
+
         let categories = viewModel.categories
         guard !categories.isEmpty else {
             let downloadItem = TextItem(L10n.Global.Strings.download) {
@@ -59,10 +61,21 @@ struct ProviderProfileItem: Item {
             return menu
         }
         
-        let connectItem = TextItem(L10n.Global.Strings.connect) {
-            viewModel.connectTo()
+        let toggleItem = NSMenuItem()
+        toggleItem.target = viewModel
+        toggleItem.representedObject = viewModel
+
+        viewModel.subscribe {
+            if $0 == .disconnected {
+                toggleItem.title = L10n.Global.Strings.connect
+                toggleItem.action = #selector(viewModel.connectTo)
+            } else {
+                toggleItem.title = L10n.Global.Strings.disconnect
+                toggleItem.action = #selector(viewModel.disconnect)
+            }
         }
-        menu.addItem(connectItem.asMenuItem(withParent: menu))
+
+        menu.addItem(toggleItem)
         menu.addItem(.separator())
 
         if categories.count > 1 {

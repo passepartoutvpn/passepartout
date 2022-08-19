@@ -33,10 +33,18 @@ extension ProviderProfileItem {
 
         private let vpnManager: LightVPNManager
 
+        private var didUpdate: ((LightVPNStatus) -> Void)?
+
         init(_ profile: LightProfile, providerManager: LightProviderManager, vpnManager: LightVPNManager) {
             self.profile = profile
             self.providerManager = providerManager
             self.vpnManager = vpnManager
+            
+            vpnManager.addDelegate(self, withIdentifier: profile.id.uuidString)
+        }
+        
+        deinit {
+            vpnManager.removeDelegate(withIdentifier: profile.id.uuidString)
         }
 
         private var providerName: String {
@@ -55,15 +63,33 @@ extension ProviderProfileItem {
         }
         
         func isActiveCategory(_ category: LightProviderCategory) -> Bool {
-            return category.name == profile.providerServer?.categoryName
+            category.name == profile.providerServer?.categoryName
         }
         
-        func connectTo() {
+        @objc func connectTo() {
             vpnManager.connect(with: profile.id)
+        }
+        
+        @objc func disconnect() {
+            vpnManager.disconnect()
         }
 
         func downloadIfNeeded() {
             providerManager.downloadIfNeeded(providerName, vpnProtocol: vpnProtocol)
         }
+        
+        func subscribe(_ block: @escaping (LightVPNStatus) -> Void) {
+            didUpdate = block
+        }
+    }
+}
+
+extension ProviderProfileItem.ViewModel: LightVPNManagerDelegate {
+    func didUpdateState(isEnabled: Bool, vpnStatus: LightVPNStatus) {
+        guard profile.isActive else {
+            didUpdate?(.disconnected)
+            return
+        }
+        didUpdate?(vpnStatus)
     }
 }

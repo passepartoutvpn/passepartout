@@ -47,16 +47,23 @@ struct HostProfileItem: Item {
     
     private func submenu() -> NSMenu {
         let menu = NSMenu()
+        menu.autoenablesItems = false
 
-        let item = NSMenuItem(
-            title: L10n.Global.Strings.connect,
-            action: #selector(viewModel.connectTo),
-            keyEquivalent: ""
-        )
-        item.target = viewModel
-        item.representedObject = viewModel
+        let toggleItem = NSMenuItem()
+        toggleItem.target = viewModel
+        toggleItem.representedObject = viewModel
 
-        menu.addItem(item)
+        viewModel.subscribe {
+            if $0 == .disconnected {
+                toggleItem.title = L10n.Global.Strings.connect
+                toggleItem.action = #selector(viewModel.connectTo)
+            } else {
+                toggleItem.title = L10n.Global.Strings.disconnect
+                toggleItem.action = #selector(viewModel.disconnect)
+            }
+        }
+
+        menu.addItem(toggleItem)
         return menu
     }
 }
