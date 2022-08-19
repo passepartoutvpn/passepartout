@@ -56,12 +56,14 @@ public class Persistence {
         }
         pp_log.debug("Container description: \(desc)")
 
+        // set this even for local container, to avoid readonly mode in case
+        // container was formerly created with CloudKit option
+        desc.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+
         // report remote notifications (do this BEFORE loadPersistentStores)
         //
         // https://stackoverflow.com/a/69507329/784615
-//        desc.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
 //        desc.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
-
         container.loadPersistentStores {
             if let error = $1 {
                 fatalError("Could not load persistent store: \(error)")
