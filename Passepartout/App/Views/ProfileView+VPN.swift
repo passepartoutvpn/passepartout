@@ -49,6 +49,7 @@ extension ProfileView {
                 Text(Unlocalized.VPN.vpn)
             } footer: {
                 Text(L10n.Profile.Sections.Vpn.footer)
+                    .xxxThemeTruncation()
             }
         }
         
