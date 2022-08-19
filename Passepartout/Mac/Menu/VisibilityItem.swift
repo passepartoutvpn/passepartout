@@ -27,24 +27,23 @@ import Foundation
 import AppKit
 
 struct VisibilityItem: Item {
+    private let title: String
+    
     private let viewModel: ViewModel
 
-    init(utils: LightUtils, titleBlock: @escaping (Bool) -> String) {
-        viewModel = ViewModel(utils: utils, titleBlock: titleBlock)
+    init(_ title: String, utils: LightUtils) {
+        self.title = title
+        viewModel = ViewModel(utils: utils)
     }
     
     func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
         let item = NSMenuItem(
-            title: viewModel.title,
-            action: #selector(viewModel.toggleForeground),
+            title: title,
+            action: #selector(viewModel.bringToForeground),
             keyEquivalent: ""
         )
         item.target = viewModel
         item.representedObject = viewModel
-
-        viewModel.subscribe {
-            item.title = viewModel.title
-        }
         return item
     }
 }

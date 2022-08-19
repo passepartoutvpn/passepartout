@@ -32,28 +32,17 @@ extension VisibilityItem {
         
         private let utils: LightUtils
 
-        private let titleBlock: (Bool) -> String
-
-        init(utils: LightUtils, titleBlock: @escaping (Bool) -> String) {
-            self.titleBlock = titleBlock
-
+        init(utils: LightUtils) {
             transformer = .shared
             self.utils = utils
         }
 
-        var title: String {
-            titleBlock(transformer.isForeground)
-        }
-        
-        @objc func toggleForeground() {
-            transformer.toggleForeground()
+        @objc func bringToForeground() {
+            transformer.bringToForeground()
             if transformer.isForeground {
                 utils.requestScene()
+                NSApp.activate(ignoringOtherApps: true)
             }
-        }
-        
-        func subscribe(_ block: @escaping () -> Void) {
-            transformer.subscribe(block)
         }
     }
 }
