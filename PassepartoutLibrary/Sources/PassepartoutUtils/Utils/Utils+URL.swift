@@ -99,6 +99,10 @@ extension URL {
 
     public func trailingLines(bytes: UInt64) -> [String] {
         let content = trailingContent(bytes: bytes)
-        return content.components(separatedBy: "\n")
+        return content
+            .components(separatedBy: "\n")
+            .filter {
+                !$0.isEmpty
+            }
     }
 }
