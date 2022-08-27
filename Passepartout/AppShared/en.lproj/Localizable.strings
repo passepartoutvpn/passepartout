@@ -322,6 +322,10 @@
 "donate.alerts.purchase.success.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
 "donate.alerts.purchase.failure.message" = "Unable to perform the donation. %@";
 
+/* MARK: SettingsView */
+
+"settings.title" = "Settings";
+
 /* MARK: AboutView */
 
 "about.title" = "About";

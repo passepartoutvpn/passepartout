@@ -70,7 +70,7 @@ struct ProfileView: View {
         }.toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 if themeIdiom != .phone {
-                    InfoMenu()
+                    SettingsButton()
                 }
                 MainMenu(
                     currentProfile: currentProfile,

@@ -26,10 +26,14 @@
 import SwiftUI
 
 struct AboutView: View {
-    @Environment(\.presentationMode) private var presentationMode
+//    private let appName = Unlocalized.appName
 
     private let versionString = Constants.Global.appVersionString
+
+    private let redditURL = Constants.URLs.subreddit
     
+    private let shareMessage = L10n.Global.Messages.share
+
     private let readmeURL = Constants.URLs.readme
 
     private let changelogURL = Constants.URLs.changelog
@@ -44,17 +48,15 @@ struct AboutView: View {
 
     var body: some View {
         List {
-            infoSubview
-            githubSubview
-            webSubview
+            infoSection
+            supportSection
+            webSection
+            githubSection
         }.themeSecondaryView()
         .navigationTitle(L10n.About.title)
-        .toolbar {
-            themeCloseItem(presentationMode: presentationMode)
-        }
     }
     
-    private var infoSubview: some View {
+    private var infoSection: some View {
         Section {
             NavigationLink {
                 VersionView()
@@ -67,24 +69,23 @@ struct AboutView: View {
             }
         }
     }
-
-    private var githubSubview: some View {
+    
+    private var supportSection: some View {
         Section {
-            Button(Unlocalized.About.readme) {
-                URL.openURL(readmeURL)
+            Button(L10n.Menu.Contextual.Support.joinCommunity) {
+                URL.openURL(redditURL)
             }
-            Button(Unlocalized.About.changelog) {
-                URL.openURL(changelogURL)
-            }
+            Button(L10n.Menu.Contextual.shareTwitter, action: shareOnTwitter)
+            Button(L10n.Menu.Contextual.Support.writeReview, action: submitReview)
         } header: {
-            Text(Unlocalized.About.github)
+            Text(L10n.Menu.All.Support.title)
         }
     }
 
-    private var webSubview: some View {
+    private var webSection: some View {
         Section {
             Button(L10n.About.Items.Website.caption) {
-                URL.openURL(readmeURL)
+                URL.openURL(homeURL)
             }
             Button(Unlocalized.About.faq) {
                 URL.openURL(faqURL)
@@ -98,5 +99,30 @@ struct AboutView: View {
         } header: {
             Text(L10n.About.Sections.Web.header)
         }
+    }
+
+    private var githubSection: some View {
+        Section {
+            Button(Unlocalized.About.readme) {
+                URL.openURL(readmeURL)
+            }
+            Button(Unlocalized.About.changelog) {
+                URL.openURL(changelogURL)
+            }
+        } header: {
+            Text(Unlocalized.About.github)
+        }
+    }
+}
+
+extension AboutView {
+    private func shareOnTwitter() {
+        let url = Unlocalized.Social.twitterIntent(withMessage: shareMessage)
+        URL.openURL(url)
+    }
+
+    private func submitReview() {
+        let reviewURL = Reviewer.urlForReview(withAppId: Constants.App.appStoreId)
+        URL.openURL(reviewURL)
     }
 }

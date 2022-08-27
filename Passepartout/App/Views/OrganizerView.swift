@@ -68,7 +68,7 @@ struct OrganizerView: View {
             }
             ToolbarItem(placement: .navigation) {
                 if themeIdiom == .phone {
-                    InfoMenu()
+                    SettingsButton()
                 }
             }
         }.alert(item: $alertType, content: presentedAlert)

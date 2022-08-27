@@ -207,8 +207,8 @@ extension View {
         "text.justify"
     }
     
-    var themeInfoMenuImage: String {
-        "info.circle"
+    var themeSettingsImage: String {
+        "gearshape"
     }
 
     var themeDonateImage: String {
