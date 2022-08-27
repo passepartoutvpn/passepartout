@@ -58,7 +58,15 @@ struct DebugLogView: View {
             }.onAppear {
                 refreshLog(scrollingToLatestWith: scrollProxy)
             }
-        }.toolbar {
+        }
+        #if targetEnvironment(macCatalyst)
+        .toolbar {
+            Button(action: copyDebugLog) {
+                themeCopyImage.asSystemImage
+            }.disabled(logLines.isEmpty)
+        }
+        #else
+        .toolbar {
             if !isSharing {
                 Button(action: shareDebugLog) {
                     themeShareImage.asSystemImage
@@ -67,6 +75,7 @@ struct DebugLogView: View {
                 ProgressView()
             }
         }.sheet(isPresented: $isSharing, content: sharingActivityView)
+        #endif
         .edgesIgnoringSafeArea([.leading, .trailing])
         .onReceive(timer, perform: refreshLog)
         .navigationTitle(L10n.DebugLog.title)
@@ -93,7 +102,9 @@ struct DebugLogView: View {
     private func refreshLog(_: Date) {
         refreshLog(scrollingToLatestWith: nil)
     }
+}
     
+extension DebugLogView {
     private func shareDebugLog() {
         guard !logLines.isEmpty else {
             assertionFailure("Log is empty, why could it share?")
@@ -101,16 +112,15 @@ struct DebugLogView: View {
         }
         isSharing = true
     }
-}
-
-extension DebugLogView {
+    
     private func sharingActivityView() -> some View {
         ActivityView(activityItems: sharingItems)
     }
 
     private var sharingItems: [Any] {
         let raw = logLines.joined(separator: "\n")
-        let data = DebugLog(content: raw).decoratedData(appName, appVersion)
+        let data = DebugLog(content: raw)
+            .decoratedData(appName, appVersion)
 
         let path = NSTemporaryDirectory().appending(shareFilename)
         let url = URL(fileURLWithPath: path)
@@ -122,6 +132,20 @@ extension DebugLogView {
             assertionFailure("Unable to save temporary debug log file: \(error)")
             return []
         }
+    }
+}
+
+extension DebugLogView {
+    private func copyDebugLog() {
+        guard !logLines.isEmpty else {
+            assertionFailure("Log is empty, why could it copy?")
+            return
+        }
+        let raw = logLines.joined(separator: "\n")
+        let content = DebugLog(content: raw)
+            .decoratedString(appName, appVersion)
+
+        Utils.copyToPasteboard(content)
     }
 }
 

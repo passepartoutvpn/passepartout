@@ -168,6 +168,10 @@ extension View {
     var themeShareImage: String {
         "square.and.arrow.up"
     }
+
+    var themeCopyImage: String {
+        "doc.on.doc"
+    }
     
     var themeCloseImage: String {
         "xmark"
