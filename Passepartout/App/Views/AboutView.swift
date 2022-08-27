@@ -70,13 +70,14 @@ struct AboutView: View {
         }
     }
     
+    // FIXME: l10n, refactor string ids
     private var supportSection: some View {
         Section {
-            Button(L10n.Menu.Contextual.Support.joinCommunity) {
+            Button(L10n.Menu.System.Support.joinCommunity) {
                 URL.openURL(redditURL)
             }
-            Button(L10n.Menu.Contextual.shareTwitter, action: shareOnTwitter)
-            Button(L10n.Menu.Contextual.Support.writeReview, action: submitReview)
+            Button(L10n.Menu.System.ShareTwitter.caption, action: shareOnTwitter)
+            Button(L10n.Menu.System.Support.writeReview, action: submitReview)
         } header: {
             Text(L10n.Menu.All.Support.title)
         }

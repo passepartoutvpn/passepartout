@@ -62,7 +62,7 @@ struct SettingsView: View {
             NavigationLink {
                 DonateView()
             } label: {
-                Text(L10n.Donate.title)
+                Text(L10n.Menu.System.Support.donate)
             }.disabled(!productManager.canMakePayments())
         } footer: {
             HStack {

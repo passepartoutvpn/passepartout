@@ -546,6 +546,18 @@ internal enum L10n {
           return L10n.tr("Localizable", "menu.system.quit.title", String(describing: p1), fallback: "Quit %@")
         }
       }
+      internal enum ShareTwitter {
+        /// Tweet about it!
+        internal static let caption = L10n.tr("Localizable", "menu.system.share_twitter.caption", fallback: "Tweet about it!")
+      }
+      internal enum Support {
+        /// Make a donation
+        internal static let donate = L10n.tr("Localizable", "menu.system.support.donate", fallback: "Make a donation")
+        /// Join community
+        internal static let joinCommunity = L10n.tr("Localizable", "menu.system.support.join_community", fallback: "Join community")
+        /// Write a review
+        internal static let writeReview = L10n.tr("Localizable", "menu.system.support.write_review", fallback: "Write a review")
+      }
     }
   }
   internal enum NetworkSettings {

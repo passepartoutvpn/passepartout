@@ -82,11 +82,11 @@
 //"menu.system.active_profile.messages.missing_credentials" = "No account configured";
 //"menu.system.organizer.title" = "Organizer";
 //"menu.system.preferences.title" = "Preferences";
-//"menu.system.support.donate" = "Make a donation";
-//"menu.system.support.join_community" = "Join community";
-//"menu.system.support.write_review" = "Write a review";
+"menu.system.support.donate" = "Make a donation";
+"menu.system.support.join_community" = "Join community";
+"menu.system.support.write_review" = "Write a review";
 // "menu.system.support.translate" = "Offer to translate";
-//"menu.system.share_twitter.caption" = "Tweet about it!";
+"menu.system.share_twitter.caption" = "Tweet about it!";
 //"menu.system.share_generic.caption" = "Invite a friend";
 "menu.system.quit.title" = "Quit %@";
 //"menu.system.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
