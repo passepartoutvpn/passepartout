@@ -1,5 +1,5 @@
 //
-//  DefaultVPNManager+Configuration.swift
+//  VPNManager+Configuration.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/12/22.
@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutCore
 import PassepartoutUtils
 
-extension DefaultVPNManager {
+extension VPNManager {
     private var vpnPreferences: VPNPreferences {
         DefaultVPNPreferences(
             tunnelLogPath: tunnelLogPath,

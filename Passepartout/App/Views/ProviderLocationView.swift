@@ -27,7 +27,7 @@ import SwiftUI
 import PassepartoutLibrary
 
 struct ProviderLocationView: View, ProviderProfileAvailability {
-    @ObservedObject var providerManager: Impl.ProviderManager
+    @ObservedObject var providerManager: ProviderManager
 
     @ObservedObject private var currentProfile: ObservableProfile
     
@@ -64,7 +64,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     
     // XXX: do not escape mutating 'self', use constant providerManager
     init(currentProfile: ObservableProfile, isEditable: Bool, isPresented: Binding<Bool>) {
-        let providerManager: Impl.ProviderManager = .shared
+        let providerManager: ProviderManager = .shared
 
         self.providerManager = providerManager
         self.currentProfile = currentProfile
@@ -268,7 +268,7 @@ extension ProviderLocationView {
     }
 
     struct ServerListView: View {
-        @ObservedObject private var providerManager: Impl.ProviderManager
+        @ObservedObject private var providerManager: ProviderManager
         
         private let location: ProviderLocation
 

@@ -1,5 +1,5 @@
 //
-//  DefaultVPNManager.swift
+//  VPNManager.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/9/22.
@@ -29,9 +29,10 @@ import TunnelKitCore
 import TunnelKitManager
 import PassepartoutCore
 import PassepartoutProfiles
+import PassepartoutProviders
 import PassepartoutUtils
 
-public class DefaultVPNManager<ProfileManagerType: ProfileManagerWithCurrentProfile>: VPNManagerWithCurrentState, ObservableObject where ProfileManagerType.WrappedType == ObservableProfile {
+public final class VPNManager: ObservableObject {
 
     // MARK: Initialization
     
@@ -39,7 +40,7 @@ public class DefaultVPNManager<ProfileManagerType: ProfileManagerWithCurrentProf
     
     private let store: KeyValueStore
     
-    let profileManager: ProfileManagerType
+    let profileManager: ProfileManager
     
     let providerManager: ProviderManager
 
@@ -73,7 +74,7 @@ public class DefaultVPNManager<ProfileManagerType: ProfileManagerWithCurrentProf
     public init(
         appGroup: String,
         store: KeyValueStore,
-        profileManager: ProfileManagerType,
+        profileManager: ProfileManager,
         providerManager: ProviderManager,
         strategy: VPNManagerStrategy
     ) {
@@ -138,7 +139,7 @@ public class DefaultVPNManager<ProfileManagerType: ProfileManagerWithCurrentProf
 
 // MARK: Observation
 
-extension DefaultVPNManager {
+extension VPNManager {
     public func observeUpdates() {
         observeStrategy()
         observeProfileManager()
@@ -252,7 +253,7 @@ extension DefaultVPNManager {
 
 // MARK: KeyValueStore
 
-extension DefaultVPNManager {
+extension VPNManager {
     public var tunnelLogPath: String? {
         get {
             store.value(forLocation: StoreKey.tunnelLogPath)
@@ -283,7 +284,7 @@ extension DefaultVPNManager {
     }
 }
 
-private extension DefaultVPNManager {
+private extension VPNManager {
     private enum StoreKey: String, KeyStoreDomainLocation {
         case tunnelLogPath
         

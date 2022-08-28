@@ -28,7 +28,7 @@ import PassepartoutLibrary
 import Combine
 
 class DefaultLightVPNManager: LightVPNManager {
-    private let vpnManager = Impl.VPNManager.shared
+    private let vpnManager = VPNManager.shared
     
     private var subscriptions: Set<AnyCancellable> = []
     

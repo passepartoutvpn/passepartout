@@ -29,7 +29,7 @@ import TunnelKitWireGuard
 
 extension EndpointView {
     struct WireGuardView: View {
-        @ObservedObject private var providerManager: Impl.ProviderManager
+        @ObservedObject private var providerManager: ProviderManager
 
         @ObservedObject private var currentProfile: ObservableProfile
 
@@ -41,7 +41,7 @@ extension EndpointView {
         
         // XXX: do not escape mutating 'self', use constant providerManager
         init(currentProfile: ObservableProfile, isReadonly: Bool) {
-            let providerManager: Impl.ProviderManager = .shared
+            let providerManager: ProviderManager = .shared
 
             self.providerManager = providerManager
             self.currentProfile = currentProfile

@@ -29,7 +29,7 @@ import PassepartoutCore
 import PassepartoutServices
 import PassepartoutUtils
 
-public class DefaultProviderManager: ProviderManager, ObservableObject, RateLimited {
+public final class ProviderManager: ObservableObject, RateLimited {
     private let appBuild: Int
     
     private let bundleServices: WebServices

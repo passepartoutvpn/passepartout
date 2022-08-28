@@ -29,7 +29,7 @@ import PassepartoutLibrary
 struct ProviderPresetView: View {
     @Environment(\.presentationMode) private var presentationMode
 
-    @ObservedObject private var providerManager: Impl.ProviderManager
+    @ObservedObject private var providerManager: ProviderManager
 
     @ObservedObject private var currentProfile: ObservableProfile
 
@@ -39,7 +39,7 @@ struct ProviderPresetView: View {
 
     // XXX: do not escape mutating 'self', use constant providerManager
     init(currentProfile: ObservableProfile) {
-        let providerManager: Impl.ProviderManager = .shared
+        let providerManager: ProviderManager = .shared
         
         self.providerManager = providerManager
         self.currentProfile = currentProfile

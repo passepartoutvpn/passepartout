@@ -27,14 +27,6 @@ import Foundation
 import Combine
 import PassepartoutLibrary
 
-enum Impl {
-    typealias ProfileManager = DefaultProfileManager
-
-    typealias ProviderManager = DefaultProviderManager
-
-    typealias VPNManager = DefaultVPNManager<DefaultProfileManager>
-}
-
 class CoreContext {
     let store: KeyValueStore
     
@@ -52,11 +44,11 @@ class CoreContext {
 
     let upgradeManager: UpgradeManager
     
-    let providerManager: Impl.ProviderManager
+    let providerManager: ProviderManager
     
-    let profileManager: Impl.ProfileManager
+    let profileManager: ProfileManager
     
-    let vpnManager: Impl.VPNManager
+    let vpnManager: VPNManager
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -74,7 +66,7 @@ class CoreContext {
 
         upgradeManager = UpgradeManager(store: store)
 
-        providerManager = DefaultProviderManager(
+        providerManager = ProviderManager(
             appBuild: Constants.Global.appBuildNumber,
             bundleServices: DefaultWebServices.bundledServices(
                 withVersion: Constants.Services.version
@@ -87,7 +79,7 @@ class CoreContext {
             persistence: providersPersistence
         )
 
-        profileManager = DefaultProfileManager(
+        profileManager = ProfileManager(
             store: store,
             providerManager: providerManager,
             appGroup: Constants.App.appGroupId,
@@ -105,7 +97,7 @@ class CoreContext {
             tunnelBundleIdentifier: Constants.App.tunnelBundleId
         )
         #endif
-        vpnManager = DefaultVPNManager(
+        vpnManager = VPNManager(
             appGroup: Constants.App.appGroupId,
             store: store,
             profileManager: profileManager,

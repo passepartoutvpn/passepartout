@@ -26,6 +26,7 @@
 import Foundation
 import Combine
 import PassepartoutCore
+import PassepartoutProviders
 
 extension ProviderManager {
     public func fetchRemoteProviderPublisher(forProfile profile: Profile) -> AnyPublisher<Void, Error> {

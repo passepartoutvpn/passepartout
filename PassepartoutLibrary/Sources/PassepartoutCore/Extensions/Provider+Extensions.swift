@@ -45,13 +45,6 @@ extension Profile {
         provider?.name
     }
 
-    public func providerServer(_ providerManager: ProviderManager) -> ProviderServer? {
-        guard let serverId = provider?.vpnSettings[currentVPNProtocol]?.serverId else {
-            return nil
-        }
-        return providerManager.server(withId: serverId)
-    }
-
     public func providerServerId() -> String? {
         return provider?.vpnSettings[currentVPNProtocol]?.serverId
     }

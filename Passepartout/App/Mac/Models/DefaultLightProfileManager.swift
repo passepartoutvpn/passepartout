@@ -51,9 +51,9 @@ class DefaultLightProfile: LightProfile {
 }
 
 class DefaultLightProfileManager: LightProfileManager {
-    private let profileManager = Impl.ProfileManager.shared
+    private let profileManager = ProfileManager.shared
     
-    private let providerManager = Impl.ProviderManager.shared
+    private let providerManager = ProviderManager.shared
     
     private var subscriptions: Set<AnyCancellable> = []
     

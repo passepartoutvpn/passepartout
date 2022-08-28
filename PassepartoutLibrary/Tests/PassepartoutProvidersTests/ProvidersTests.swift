@@ -45,7 +45,7 @@ class ProvidersTests: XCTestCase {
     override func setUp() {
         pp_log.addDestination(ConsoleDestination())
 
-        manager = DefaultProviderManager(
+        manager = ProviderManager(
             appBuild: 10000,
             bundleServices: DefaultWebServices.bundledServices(withVersion: "v5"),
             webServices: DefaultWebServices("v5", URL(string: "https://passepartoutvpn.app/api/")!, timeout: nil),
@@ -133,7 +133,7 @@ class ProvidersTests: XCTestCase {
                 vpnProtocol: .openVPN,
                 categoryName: "",
                 countryCode: "ES",
-                onlyServer: nil
+                servers: nil
             )
 
             let servers = manager.servers(forLocation: location)

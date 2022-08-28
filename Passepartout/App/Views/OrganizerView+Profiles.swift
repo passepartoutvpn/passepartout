@@ -28,7 +28,7 @@ import PassepartoutLibrary
 
 extension OrganizerView {
     struct ProfilesList: View {
-        @ObservedObject private var profileManager: Impl.ProfileManager
+        @ObservedObject private var profileManager: ProfileManager
 
         init() {
             profileManager = .shared

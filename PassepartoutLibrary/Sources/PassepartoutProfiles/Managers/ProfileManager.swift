@@ -1,5 +1,5 @@
 //
-//  DefaultProfileManager.swift
+//  ProfileManager.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/25/22.
@@ -27,11 +27,12 @@ import Foundation
 import Combine
 import TunnelKitManager
 import PassepartoutCore
-import PassepartoutCore
 import PassepartoutUtils
+import PassepartoutProviders
 
-public class DefaultProfileManager: ProfileManagerWithCurrentProfile, ObservableObject {
-    
+public final class ProfileManager: ObservableObject {
+    public typealias ProfileEx = (profile: Profile, isReady: Bool)
+
     // MARK: Initialization
     
     private let store: KeyValueStore
@@ -46,7 +47,7 @@ public class DefaultProfileManager: ProfileManagerWithCurrentProfile, Observable
     
     private let strategy: ProfileManagerStrategy
     
-    // MARK: Observables
+    // MARK: State
 
     @Published private var internalActiveProfileId: UUID? {
         willSet {
@@ -110,7 +111,7 @@ public class DefaultProfileManager: ProfileManagerWithCurrentProfile, Observable
 
 // MARK: Index
 
-extension DefaultProfileManager {
+extension ProfileManager {
     private var allHeaders: [UUID: Profile.Header] {
         strategy.allHeaders
     }
@@ -136,7 +137,7 @@ extension DefaultProfileManager {
 
 // MARK: Profiles
 
-extension DefaultProfileManager {
+extension ProfileManager {
     public func liveProfileEx(withId id: UUID) throws -> ProfileEx {
         guard let profile = liveProfile(withId: id) else {
             pp_log.error("Profile not found: \(id)")
@@ -249,7 +250,7 @@ extension DefaultProfileManager {
 
 // MARK: Observation
 
-extension DefaultProfileManager {
+extension ProfileManager {
     private func setCurrentProfile(_ profile: Profile) {
         guard !currentProfile.isLoading else {
             pp_log.warning("Already loading another profile")
@@ -300,7 +301,7 @@ extension DefaultProfileManager {
     }
 }
 
-extension DefaultProfileManager {
+extension ProfileManager {
     public func observeUpdates() {
         $internalActiveProfileId
             .sink {
@@ -393,7 +394,7 @@ extension DefaultProfileManager {
 
 // MARK: Readiness
 
-extension DefaultProfileManager {
+extension ProfileManager {
     private func isProfileReady(_ profile: Profile) -> Bool {
         isProfileProviderAvailable(profile)
     }
@@ -433,7 +434,7 @@ extension DefaultProfileManager {
 
 // MARK: KeyValueStore
 
-extension DefaultProfileManager {
+extension ProfileManager {
     public private(set) var activeProfileId: UUID? {
         get {
             guard let idString: String = store.value(forLocation: StoreKey.activeProfileId) else {
@@ -459,7 +460,7 @@ extension DefaultProfileManager {
     }
 }
 
-private extension DefaultProfileManager {
+private extension ProfileManager {
     private enum StoreKey: String, KeyStoreDomainLocation {
         case activeProfileId
         

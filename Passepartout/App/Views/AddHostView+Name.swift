@@ -30,7 +30,7 @@ import TunnelKitWireGuard
 
 extension AddHostView {
     struct NameView: View {
-        @ObservedObject private var profileManager: Impl.ProfileManager
+        @ObservedObject private var profileManager: ProfileManager
         
         private let url: URL
         

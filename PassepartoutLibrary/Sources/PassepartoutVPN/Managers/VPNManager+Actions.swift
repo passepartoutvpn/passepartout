@@ -1,5 +1,5 @@
 //
-//  DefaultVPNManager+Actions.swift
+//  VPNManager+Actions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/30/22.
@@ -31,7 +31,7 @@ import PassepartoutUtils
 // current profile, this must be updated too. this is done in
 // ProfileManager.activateProfile()
 
-extension DefaultVPNManager {
+extension VPNManager {
     public func connectWithActiveProfile(toServer newServerId: String?) async throws {
         guard currentState.vpnStatus != .connected else {
             pp_log.warning("VPN is already connected")

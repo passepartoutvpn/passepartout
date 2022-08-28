@@ -28,7 +28,7 @@ import PassepartoutLibrary
 
 extension ProfileView {
     struct ProviderSection: View, ProviderProfileAvailability {
-        @ObservedObject var providerManager: Impl.ProviderManager
+        @ObservedObject var providerManager: ProviderManager
         
         @ObservedObject private var currentProfile: ObservableProfile
         

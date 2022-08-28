@@ -28,7 +28,7 @@ import CoreData
 import PassepartoutCore
 import PassepartoutUtils
 
-public class PersistenceManager {
+public final class PersistenceManager {
     private let store: KeyValueStore
     
     public init(store: KeyValueStore) {

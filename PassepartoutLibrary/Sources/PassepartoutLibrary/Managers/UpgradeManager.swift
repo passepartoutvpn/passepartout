@@ -29,7 +29,7 @@ import SwiftyBeaver
 import PassepartoutCore
 import PassepartoutUtils
 
-public class UpgradeManager: ObservableObject {
+public final class UpgradeManager: ObservableObject {
     
     // MARK: Initialization
     

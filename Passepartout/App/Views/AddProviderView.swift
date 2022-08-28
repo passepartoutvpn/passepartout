@@ -27,7 +27,7 @@ import SwiftUI
 import PassepartoutLibrary
 
 struct AddProviderView: View {
-    @ObservedObject private var providerManager: Impl.ProviderManager
+    @ObservedObject private var providerManager: ProviderManager
     
     @ObservedObject private var productManager: ProductManager
     

@@ -36,15 +36,15 @@ extension UpgradeManager {
     static let shared = CoreContext.shared.upgradeManager
 }
 
-extension Impl.ProfileManager {
+extension ProfileManager {
     static let shared = CoreContext.shared.profileManager
 }
 
-extension Impl.ProviderManager {
+extension ProviderManager {
     static let shared = CoreContext.shared.providerManager
 }
 
-extension Impl.VPNManager {
+extension VPNManager {
     static let shared = CoreContext.shared.vpnManager
 }
 

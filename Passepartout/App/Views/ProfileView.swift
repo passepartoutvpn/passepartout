@@ -56,7 +56,7 @@ struct ProfileView: View {
     @State private var modalType: ModalType?
     
     init() {
-        currentProfile = Impl.ProfileManager.shared.currentProfile
+        currentProfile = ProfileManager.shared.currentProfile
     }
 
     var body: some View {

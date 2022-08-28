@@ -1,8 +1,8 @@
 //
-//  VPNManagerWithCurrentState.swift
+//  ProfileManager+Processing.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/22/22.
+//  Created by Davide De Rosa on 4/7/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,6 +24,22 @@
 //
 
 import Foundation
+import TunnelKitOpenVPN
+import TunnelKitWireGuard
+import PassepartoutCore
 
-public protocol VPNManagerWithCurrentState: VPNManager, CurrentVPNStateProviding {
+extension ProfileManager {
+    public func profile(withHeader header: Profile.Header, fromContents contents: String, originalURL: URL?, passphrase: String?) throws -> Profile {
+        do {
+            let ovpn = try OpenVPN.ConfigurationParser.parsed(fromContents: contents, passphrase: passphrase, originalURL: originalURL)
+            return Profile(header, configuration: ovpn.configuration)
+        } catch let ovpnError as OpenVPN.ConfigurationError {
+            do {
+                let wg = try WireGuard.Configuration(wgQuickConfig: contents)
+                return Profile(header, configuration: wg)
+            } catch {
+                throw ovpnError
+            }
+        }
+    }
 }

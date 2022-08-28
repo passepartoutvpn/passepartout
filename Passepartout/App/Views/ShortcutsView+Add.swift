@@ -29,7 +29,7 @@ import PassepartoutLibrary
 
 extension ShortcutsView {
     struct AddView: View {
-        @ObservedObject private var providerManager: Impl.ProviderManager
+        @ObservedObject private var providerManager: ProviderManager
         
         @StateObject private var pendingProfile = ObservableProfile()
 

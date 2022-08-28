@@ -30,7 +30,7 @@ extension ProfileView {
     struct RenameView: View {
         @Environment(\.presentationMode) private var presentationMode
         
-        @ObservedObject private var profileManager: Impl.ProfileManager
+        @ObservedObject private var profileManager: ProfileManager
         
         @ObservedObject private var currentProfile: ObservableProfile
         

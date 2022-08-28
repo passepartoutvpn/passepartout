@@ -39,6 +39,13 @@ extension Profile {
 }
 
 extension Profile {
+    public func providerServer(_ providerManager: ProviderManager) -> ProviderServer? {
+        guard let serverId = providerServerId() else {
+            return nil
+        }
+        return providerManager.server(withId: serverId)
+    }
+
     public func providerOpenVPNSettings(withManager providerManager: ProviderManager) throws -> Profile.OpenVPNSettings {
         guard isProvider else {
             fatalError("Not a provider")

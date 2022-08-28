@@ -37,9 +37,9 @@ extension DiagnosticsView {
             }
         }
 
-        @ObservedObject private var providerManager: Impl.ProviderManager
+        @ObservedObject private var providerManager: ProviderManager
 
-        @ObservedObject private var vpnManager: Impl.VPNManager
+        @ObservedObject private var vpnManager: VPNManager
         
         @ObservedObject private var currentVPNState: ObservableVPNState
 

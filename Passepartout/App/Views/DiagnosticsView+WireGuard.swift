@@ -29,7 +29,7 @@ import TunnelKitWireGuard
 
 extension DiagnosticsView {
     struct WireGuardView: View {
-        @ObservedObject private var vpnManager: Impl.VPNManager
+        @ObservedObject private var vpnManager: VPNManager
         
         private let providerName: ProviderName?
         

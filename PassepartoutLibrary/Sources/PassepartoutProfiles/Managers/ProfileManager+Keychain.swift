@@ -1,5 +1,5 @@
 //
-//  DefaultProfileManager+Keychain.swift
+//  ProfileManager+Keychain.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/8/22.
@@ -28,7 +28,7 @@ import TunnelKitManager
 import PassepartoutCore
 import PassepartoutUtils
 
-extension DefaultProfileManager {
+extension ProfileManager {
     public func savePassword(forProfile profile: Profile) {
         guard !profile.isPlaceholder else {
             assertionFailure("Placeholder")

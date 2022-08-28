@@ -71,7 +71,7 @@ enum AddProfileView {
     }
 
     struct AccountWrapperView: View {
-        @ObservedObject private var profileManager: Impl.ProfileManager
+        @ObservedObject private var profileManager: ProfileManager
 
         @Binding private var profile: Profile
         

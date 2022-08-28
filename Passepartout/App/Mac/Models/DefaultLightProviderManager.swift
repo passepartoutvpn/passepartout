@@ -77,7 +77,7 @@ class DefaultLightProviderServer: LightProviderServer {
 }
 
 class DefaultLightProviderManager: LightProviderManager {
-    private let providerManager = Impl.ProviderManager.shared
+    private let providerManager = ProviderManager.shared
     
     private var subscriptions: Set<AnyCancellable> = []
     

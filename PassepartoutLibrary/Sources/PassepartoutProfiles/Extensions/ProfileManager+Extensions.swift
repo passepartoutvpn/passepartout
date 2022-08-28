@@ -60,7 +60,7 @@ extension ProfileManager {
     }
 }
 
-extension ProfileManagerWithCurrentProfile {
+extension ProfileManager {
     public func isCurrentProfileActive() -> Bool {
         currentProfile.value.id == activeProfileId
     }

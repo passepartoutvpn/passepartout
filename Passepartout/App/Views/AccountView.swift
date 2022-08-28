@@ -27,7 +27,7 @@ import SwiftUI
 import PassepartoutLibrary
 
 struct AccountView: View {
-    @ObservedObject private var providerManager: Impl.ProviderManager
+    @ObservedObject private var providerManager: ProviderManager
     
     private let providerName: ProviderName?
     

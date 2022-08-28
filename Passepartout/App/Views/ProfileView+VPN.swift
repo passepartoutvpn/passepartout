@@ -28,7 +28,7 @@ import PassepartoutLibrary
 
 extension ProfileView {
     struct VPNSection: View {
-        @ObservedObject private var profileManager: Impl.ProfileManager
+        @ObservedObject private var profileManager: ProfileManager
 
         private let profileId: UUID
         

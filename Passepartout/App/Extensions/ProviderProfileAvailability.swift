@@ -29,7 +29,7 @@ import PassepartoutLibrary
 protocol ProviderProfileAvailability {
     var profile: Profile { get }
     
-    var providerManager: Impl.ProviderManager { get }
+    var providerManager: ProviderManager { get }
 }
 
 extension ProviderProfileAvailability {
