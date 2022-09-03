@@ -49,7 +49,7 @@ struct SettingsView: View {
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.themeSecondaryView()
-        .navigationTitle(L10n.Settings.title) // FIXME: l10n
+        .navigationTitle(L10n.Settings.title)
     }
     
     private var aboutSection: some View {
@@ -62,7 +62,7 @@ struct SettingsView: View {
             NavigationLink {
                 DonateView()
             } label: {
-                Text(L10n.Menu.System.Support.donate)
+                Text(L10n.Settings.Items.Donate.caption)
             }.disabled(!productManager.canMakePayments())
         } footer: {
             HStack {

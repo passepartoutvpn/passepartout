@@ -71,18 +71,18 @@
 "menu.contextual.share_twitter" = "发推文";
 "menu.contextual.share_generic" = "邀请";
 
-"menu.system.show.title" = "显示";
+"global.strings.show" = "显示";
 "menu.system.switch_profile.title" = "有效配置";
 "menu.system.active_profile.title.none" = "无有效配置";
 "menu.system.active_profile.items.customize.title" = "自定义......";
 "menu.system.active_profile.messages.missing_credentials" = "未配置账户";
 "menu.system.organizer.title" = "分类页面";
 "menu.system.preferences.title" = "偏好设置";
-"menu.system.support.donate" = "提供捐助";
-"menu.system.support.join_community" = "加入社区";
-"menu.system.support.write_review" = "写下想法";
+"settings.items.donate.caption" = "提供捐助";
+"about.items.join_community.caption" = "加入社区";
+"about.items.write_review.caption" = "写下想法";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "发送关于它的推特!";
+"about.items.share_twitter.caption" = "发送关于它的推特!";
 "menu.system.share_generic.caption" = "邀请朋友";
 "menu.system.quit.title" = "退出%@";
 "menu.system.quit.messages.confirm" = "VPN（如果启用）仍将在后台运行。您要退出吗？";
@@ -165,7 +165,6 @@
 "profile.items.only_shows_favorites.caption" = "仅显示收藏的地点";
 "profile.items.vpn_survives_sleep.caption" = "休眠时保持连接";
 "profile.items.vpn_resolves_hostname.caption" = "解析服务器主机名";
-"profile.items.reconnect.caption" = "重连";
 
 "profile.alerts.rename.title" = "重命名配置";
 "profile.alerts.reconnect_vpn.message" = "要重连VPN吗？";

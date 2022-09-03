@@ -71,18 +71,18 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Πρόσκληση";
 
-"menu.system.show.title" = "Προβολή";
+"global.strings.show" = "Προβολή";
 "menu.system.switch_profile.title" = "Ενεργό προφίλ";
 "menu.system.active_profile.title.none" = "Δεν υπάρχει ενεργό προφίλ";
 "menu.system.active_profile.items.customize.title" = "Προσαρμογή...";
 "menu.system.active_profile.messages.missing_credentials" = "Δεν έχει διαμορφωθεί λογαριασμός";
 "menu.system.organizer.title" = "Διοργανωτής";
 "menu.system.preferences.title" = "Προτιμήσεις";
-"menu.system.support.donate" = "Κάντε μια δωρεά";
-"menu.system.support.join_community" = "Συμμετοχή στην κοινότητα";
-"menu.system.support.write_review" = "Γράψτε μια κριτική";
+"settings.items.donate.caption" = "Κάντε μια δωρεά";
+"about.items.join_community.caption" = "Συμμετοχή στην κοινότητα";
+"about.items.write_review.caption" = "Γράψτε μια κριτική";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Tweet γι 'αυτό!";
+"about.items.share_twitter.caption" = "Tweet γι 'αυτό!";
 "menu.system.share_generic.caption" = "Πρόσκληση Φίλου";
 "menu.system.quit.title" = "Διακοπή %@";
 "menu.system.quit.messages.confirm" = "Το VPN, αν είναι ενεργοποιημένο, θα εξακολουθεί να εκτελείται στο παρασκήνιο. Θέλετε να το διακόψετε;";
@@ -165,7 +165,6 @@
 "profile.items.only_shows_favorites.caption" = "Προβολή αγαπημένων τοποθεσιών μόνο";
 "profile.items.vpn_survives_sleep.caption" = "Κρατήστε ζωντανό στον ύπνο";
 "profile.items.vpn_resolves_hostname.caption" = "Επίλυση του ονόματος σέρβερ διακομιστή";
-"profile.items.reconnect.caption" = "Επανασύνδεση";
 
 "profile.alerts.rename.title" = "Μετονομασία προφίλ";
 "profile.alerts.reconnect_vpn.message" = "Θέλετε να συνδεθείτε ξανά με το VPN;";

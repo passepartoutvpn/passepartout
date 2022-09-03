@@ -71,18 +71,18 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Inviter";
 
-"menu.system.show.title" = "Afficher";
+"global.strings.show" = "Afficher";
 "menu.system.switch_profile.title" = "Profil actif";
 "menu.system.active_profile.title.none" = "Pas de profil actif";
 "menu.system.active_profile.items.customize.title" = "Personnaliser...";
 "menu.system.active_profile.messages.missing_credentials" = "Pas de compte configuré";
 "menu.system.organizer.title" = "Organisateur";
 "menu.system.preferences.title" = "Préférences";
-"menu.system.support.donate" = "Faire un don";
-"menu.system.support.join_community" = "Rejoindre la communauté";
-"menu.system.support.write_review" = "Écrire un avis";
+"settings.items.donate.caption" = "Faire un don";
+"about.items.join_community.caption" = "Rejoindre la communauté";
+"about.items.write_review.caption" = "Écrire un avis";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Tweetez!";
+"about.items.share_twitter.caption" = "Tweetez!";
 "menu.system.share_generic.caption" = "Inviter un amis";
 "menu.system.quit.title" = "Quitter %@";
 "menu.system.quit.messages.confirm" = "S'il est activé, le VPN fonctionnera en tâche de fond. Voulez-vous quitter ?";
@@ -165,7 +165,6 @@
 "profile.items.only_shows_favorites.caption" = "Afficher uniquement les emplacements favoris";
 "profile.items.vpn_survives_sleep.caption" = "Garder actif lors de la veille";
 "profile.items.vpn_resolves_hostname.caption" = "Résoudre le nom d'hôte du serveur";
-"profile.items.reconnect.caption" = "Reconnecter";
 
 "profile.alerts.rename.title" = "Renommer le profile";
 "profile.alerts.reconnect_vpn.message" = "Voulez-vous reconnecter le VPN?";

@@ -22,13 +22,25 @@ internal enum L10n {
         /// Disclaimer
         internal static let caption = L10n.tr("Localizable", "about.items.disclaimer.caption", fallback: "Disclaimer")
       }
+      internal enum JoinCommunity {
+        /// Join community
+        internal static let caption = L10n.tr("Localizable", "about.items.join_community.caption", fallback: "Join community")
+      }
       internal enum PrivacyPolicy {
         /// Privacy policy
         internal static let caption = L10n.tr("Localizable", "about.items.privacy_policy.caption", fallback: "Privacy policy")
       }
+      internal enum ShareTwitter {
+        /// Tweet about it!
+        internal static let caption = L10n.tr("Localizable", "about.items.share_twitter.caption", fallback: "Tweet about it!")
+      }
       internal enum Website {
         /// Home page
         internal static let caption = L10n.tr("Localizable", "about.items.website.caption", fallback: "Home page")
+      }
+      internal enum WriteReview {
+        /// Write a review
+        internal static let caption = L10n.tr("Localizable", "about.items.write_review.caption", fallback: "Write a review")
       }
     }
     internal enum Sections {
@@ -450,8 +462,6 @@ internal enum L10n {
       internal static let encryption = L10n.tr("Localizable", "global.strings.encryption", fallback: "Encryption")
       /// Endpoint
       internal static let endpoint = L10n.tr("Localizable", "global.strings.endpoint", fallback: "Endpoint")
-      /// Hide
-      internal static let hide = L10n.tr("Localizable", "global.strings.hide", fallback: "Hide")
       /// Interface
       internal static let interface = L10n.tr("Localizable", "global.strings.interface", fallback: "Interface")
       /// Keep-alive
@@ -545,18 +555,6 @@ internal enum L10n {
         internal static func title(_ p1: Any) -> String {
           return L10n.tr("Localizable", "menu.system.quit.title", String(describing: p1), fallback: "Quit %@")
         }
-      }
-      internal enum ShareTwitter {
-        /// Tweet about it!
-        internal static let caption = L10n.tr("Localizable", "menu.system.share_twitter.caption", fallback: "Tweet about it!")
-      }
-      internal enum Support {
-        /// Make a donation
-        internal static let donate = L10n.tr("Localizable", "menu.system.support.donate", fallback: "Make a donation")
-        /// Join community
-        internal static let joinCommunity = L10n.tr("Localizable", "menu.system.support.join_community", fallback: "Join community")
-        /// Write a review
-        internal static let writeReview = L10n.tr("Localizable", "menu.system.support.write_review", fallback: "Write a review")
       }
     }
   }
@@ -767,10 +765,6 @@ internal enum L10n {
           internal static let caption = L10n.tr("Localizable", "profile.items.provider.refresh.caption", fallback: "Refresh infrastructure")
         }
       }
-      internal enum Reconnect {
-        /// Reconnect
-        internal static let caption = L10n.tr("Localizable", "profile.items.reconnect.caption", fallback: "Reconnect")
-      }
       internal enum UseProfile {
         /// Use this profile
         internal static let caption = L10n.tr("Localizable", "profile.items.use_profile.caption", fallback: "Use this profile")
@@ -862,6 +856,12 @@ internal enum L10n {
   internal enum Settings {
     /// MARK: SettingsView
     internal static let title = L10n.tr("Localizable", "settings.title", fallback: "Settings")
+    internal enum Items {
+      internal enum Donate {
+        /// Make a donation
+        internal static let caption = L10n.tr("Localizable", "settings.items.donate.caption", fallback: "Make a donation")
+      }
+    }
   }
   internal enum Shortcuts {
     internal enum Add {

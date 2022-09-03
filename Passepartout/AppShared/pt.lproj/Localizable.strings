@@ -71,18 +71,18 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Convite";
 
-"menu.system.show.title" = "Mostrar";
+"global.strings.show" = "Mostrar";
 "menu.system.switch_profile.title" = "Perfil ativo";
 "menu.system.active_profile.title.none" = "Sem perfil ativo";
 "menu.system.active_profile.items.customize.title" = "Personalizar...";
 "menu.system.active_profile.messages.missing_credentials" = "Não há uma conta configurada";
 "menu.system.organizer.title" = "Organizador";
 "menu.system.preferences.title" = "Preferências";
-"menu.system.support.donate" = "Fazer doação";
-"menu.system.support.join_community" = "Participar da comunidade";
-"menu.system.support.write_review" = "Escrever avaliação";
+"settings.items.donate.caption" = "Fazer doação";
+"about.items.join_community.caption" = "Participar da comunidade";
+"about.items.write_review.caption" = "Escrever avaliação";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Tweet sobre isso!";
+"about.items.share_twitter.caption" = "Tweet sobre isso!";
 "menu.system.share_generic.caption" = "Convide um amigo";
 "menu.system.quit.title" = "Sair %@";
 "menu.system.quit.messages.confirm" = "A VPN, se ativa, ainda vai ser executada em segundo plano. Quer sair?";
@@ -165,7 +165,6 @@
 "profile.items.only_shows_favorites.caption" = "Mostrar apenas os locais preferidos";
 "profile.items.vpn_survives_sleep.caption" = "Manter ativo em modo descanço";
 "profile.items.vpn_resolves_hostname.caption" = "Resolver hostname do servidor";
-"profile.items.reconnect.caption" = "Reconectar";
 
 "profile.alerts.rename.title" = "Renomear perfil";
 "profile.alerts.reconnect_vpn.message" = "Deseja reconectar à VPN?";

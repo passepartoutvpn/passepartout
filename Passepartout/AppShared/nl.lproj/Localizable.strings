@@ -71,18 +71,18 @@
 "menu.contextual.share_twitter" = "Tweeten";
 "menu.contextual.share_generic" = "Uitnodigen";
 
-"menu.system.show.title" = "Weergeven";
+"global.strings.show" = "Weergeven";
 "menu.system.switch_profile.title" = "Actief profiel";
 "menu.system.active_profile.title.none" = "Geen actief profiel";
 "menu.system.active_profile.items.customize.title" = "Aanpassen...";
 "menu.system.active_profile.messages.missing_credentials" = "Geen account geconfigureerd";
 "menu.system.organizer.title" = "Organisator";
 "menu.system.preferences.title" = "Voorkeuren";
-"menu.system.support.donate" = "Doneer een gift";
-"menu.system.support.join_community" = "Word lid van de gemeenschap";
-"menu.system.support.write_review" = "Schrijf een beoordeling";
+"settings.items.donate.caption" = "Doneer een gift";
+"about.items.join_community.caption" = "Word lid van de gemeenschap";
+"about.items.write_review.caption" = "Schrijf een beoordeling";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Tweet about it!";
+"about.items.share_twitter.caption" = "Tweet about it!";
 "menu.system.share_generic.caption" = "Nodig een vriend uit";
 "menu.system.quit.title" = "%@ afsluiten";
 "menu.system.quit.messages.confirm" = "De VPN zal, indien geactiveerd, op de achtergrond blijven draaien. Wilt u sluiten?";
@@ -165,7 +165,6 @@
 "profile.items.only_shows_favorites.caption" = "Alleen favoriete locaties weergeven";
 "profile.items.vpn_survives_sleep.caption" = "Actief tijdens slaapstand";
 "profile.items.vpn_resolves_hostname.caption" = "Haal de naam van de host op";
-"profile.items.reconnect.caption" = "Opnieuw verbinden";
 
 "profile.alerts.rename.title" = "Profiel hernoemen";
 "profile.alerts.reconnect_vpn.message" = "Opnieuw verbinding maken met de VPN?";

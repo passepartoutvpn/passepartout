@@ -71,18 +71,18 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Einladen";
 
-"menu.system.show.title" = "Anzeigen";
+"global.strings.show" = "Anzeigen";
 "menu.system.switch_profile.title" = "Aktives Profil";
 "menu.system.active_profile.title.none" = "Keine aktiven Profile";
 "menu.system.active_profile.items.customize.title" = "Anpassen...";
 "menu.system.active_profile.messages.missing_credentials" = "Es wurde keine Konto konfiguriert";
 "menu.system.organizer.title" = "Organizer";
 "menu.system.preferences.title" = "Einstellungen";
-"menu.system.support.donate" = "Spenden";
-"menu.system.support.join_community" = "Community beitreten";
-"menu.system.support.write_review" = "Rezension schreiben";
+"settings.items.donate.caption" = "Spenden";
+"about.items.join_community.caption" = "Community beitreten";
+"about.items.write_review.caption" = "Rezension schreiben";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Darüber Twittern!";
+"about.items.share_twitter.caption" = "Darüber Twittern!";
 "menu.system.share_generic.caption" = "Freund einladen";
 "menu.system.quit.title" = "%@ beenden";
 "menu.system.quit.messages.confirm" = "Wenn das VPN aktiviert wurde, läuft es weiter im Hintergrund. Möchtest du beenden?";
@@ -165,7 +165,6 @@
 "profile.items.only_shows_favorites.caption" = "Nur favorisierte Standorte anzeigen";
 "profile.items.vpn_survives_sleep.caption" = "Verbindung aktiv halten trotz Schlafmodus";
 "profile.items.vpn_resolves_hostname.caption" = "Server Hostname auflösen";
-"profile.items.reconnect.caption" = "Erneut verbinden";
 
 "profile.alerts.rename.title" = "Profil umbenennen";
 "profile.alerts.reconnect_vpn.message" = "Möchtest du erneut zum VPN verbinden?";

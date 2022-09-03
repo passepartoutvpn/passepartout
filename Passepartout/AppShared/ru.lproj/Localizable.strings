@@ -71,18 +71,18 @@
 "menu.contextual.share_twitter" = "Твит";
 "menu.contextual.share_generic" = "Пригласить";
 
-"menu.system.show.title" = "Показать";
+"global.strings.show" = "Показать";
 "menu.system.switch_profile.title" = "Активный профиль";
 "menu.system.active_profile.title.none" = "Нет активных профилей";
 "menu.system.active_profile.items.customize.title" = "Настроить...";
 "menu.system.active_profile.messages.missing_credentials" = "Нет настроенных аккаунтов";
 "menu.system.organizer.title" = "Организатор";
 "menu.system.preferences.title" = "Настройки";
-"menu.system.support.donate" = "Сделать пожертвование";
-"menu.system.support.join_community" = "Вступить в сообщество";
-"menu.system.support.write_review" = "Написать отзыв";
+"settings.items.donate.caption" = "Сделать пожертвование";
+"about.items.join_community.caption" = "Вступить в сообщество";
+"about.items.write_review.caption" = "Написать отзыв";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Твитнуть о нас!";
+"about.items.share_twitter.caption" = "Твитнуть о нас!";
 "menu.system.share_generic.caption" = "Пригласить друга";
 "menu.system.quit.title" = "Выйти из %@";
 "menu.system.quit.messages.confirm" = "Если включить VPN, он всё равно будет работать в фоновом режиме. Вы точно хотите выйти?";
@@ -165,7 +165,6 @@
 "profile.items.only_shows_favorites.caption" = "Показывать только места из избранного";
 "profile.items.vpn_survives_sleep.caption" = "Оставлять включенным во время сна";
 "profile.items.vpn_resolves_hostname.caption" = "Разрешить имя хоста сервера";
-"profile.items.reconnect.caption" = "Переподключиться";
 
 "profile.alerts.rename.title" = "Переименовать профиль";
 "profile.alerts.reconnect_vpn.message" = "Хотите заново подключиться к VPN?";

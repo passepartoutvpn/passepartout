@@ -47,7 +47,6 @@
 "global.strings.advanced" = "Advanced";
 "global.strings.translations" = "Translations";
 "global.strings.show" = "Show";
-"global.strings.hide" = "Hide";
 "global.strings.connect" = "Connect";
 "global.strings.disconnect" = "Disconnect";
 "global.strings.download" = "Download";
@@ -76,20 +75,7 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Invite";
 
-//"menu.system.switch_profile.title" = "Active profile";
-//"menu.system.active_profile.title.none" = "No active profile";
-//"menu.system.active_profile.items.customize.title" = "Customize...";
-//"menu.system.active_profile.messages.missing_credentials" = "No account configured";
-//"menu.system.organizer.title" = "Organizer";
-//"menu.system.preferences.title" = "Preferences";
-"menu.system.support.donate" = "Make a donation";
-"menu.system.support.join_community" = "Join community";
-"menu.system.support.write_review" = "Write a review";
-// "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Tweet about it!";
-//"menu.system.share_generic.caption" = "Invite a friend";
 "menu.system.quit.title" = "Quit %@";
-//"menu.system.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
 
 /* MARK: TunnelKit */
 
@@ -169,7 +155,6 @@
 "profile.items.only_shows_favorites.caption" = "Only show favorite locations";
 "profile.items.vpn_survives_sleep.caption" = "Keep alive on sleep";
 "profile.items.vpn_resolves_hostname.caption" = "Resolve provider hostname";
-"profile.items.reconnect.caption" = "Reconnect";
 
 "profile.alerts.rename.title" = "Rename profile";
 "profile.alerts.reconnect_vpn.message" = "Do you want to reconnect to the VPN?";
@@ -325,12 +310,16 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Settings";
+"settings.items.donate.caption" = "Make a donation";
 
 /* MARK: AboutView */
 
 "about.title" = "About";
 "about.sections.web.header" = "Web";
 "about.items.credits.caption" = "Credits";
+"about.items.join_community.caption" = "Join community";
+"about.items.write_review.caption" = "Write a review";
+"about.items.share_twitter.caption" = "Tweet about it!";
 "about.items.website.caption" = "Home page";
 "about.items.disclaimer.caption" = "Disclaimer";
 "about.items.privacy_policy.caption" = "Privacy policy";

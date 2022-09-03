@@ -71,18 +71,18 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Bjud in";
 
-"menu.system.show.title" = "Visa";
+"global.strings.show" = "Visa";
 "menu.system.switch_profile.title" = "Aktiv profil";
 "menu.system.active_profile.title.none" = "Ingen aktiv profil";
 "menu.system.active_profile.items.customize.title" = "Anpassa";
 "menu.system.active_profile.messages.missing_credentials" = "Inget konto har konfigurerats";
 "menu.system.organizer.title" = "Organisatör";
 "menu.system.preferences.title" = "Inställningar";
-"menu.system.support.donate" = "Gör en donation";
-"menu.system.support.join_community" = "Gå med i communityn";
-"menu.system.support.write_review" = "Skriv en recension";
+"settings.items.donate.caption" = "Gör en donation";
+"about.items.join_community.caption" = "Gå med i communityn";
+"about.items.write_review.caption" = "Skriv en recension";
 // "menu.system.support.translate" = "Offer to translate";
-"menu.system.share_twitter.caption" = "Tweet om det!";
+"about.items.share_twitter.caption" = "Tweet om det!";
 "menu.system.share_generic.caption" = "Bjud in en vän";
 "menu.system.quit.title" = "Lämna %@";
 "menu.system.quit.messages.confirm" = "Om ett VPN är aktiverat kommer detta fortfarande att köra i bakgrunden. Vill du lämna?";
@@ -165,7 +165,6 @@
 "profile.items.only_shows_favorites.caption" = "Visa endast favoritplatser";
 "profile.items.vpn_survives_sleep.caption" = "Håll dig levande i sömnen";
 "profile.items.vpn_resolves_hostname.caption" = "Lösa server värdnamn";
-"profile.items.reconnect.caption" = "Återanslut";
 
 "profile.alerts.rename.title" = "Byt namn på profil";
 "profile.alerts.reconnect_vpn.message" = "Vill du återansluta till VPN?";
