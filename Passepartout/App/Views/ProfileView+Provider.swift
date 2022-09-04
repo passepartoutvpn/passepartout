@@ -98,7 +98,7 @@ extension ProfileView {
                 assertionFailure("Provider metadata not found")
                 return nil
             }
-            return metadata.name
+            return metadata.fullName
         }
 
 //        private var currentProviderLocation: String? {
