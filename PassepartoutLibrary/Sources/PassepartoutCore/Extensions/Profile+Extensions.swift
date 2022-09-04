@@ -27,7 +27,7 @@ import Foundation
 
 extension Profile {
     public var isProvider: Bool {
-        return provider != nil
+        provider != nil
     }
 
     public var vpnProtocols: [VPNProtocolType] {

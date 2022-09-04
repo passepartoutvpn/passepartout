@@ -57,7 +57,7 @@ enum Unlocalized {
     
     enum Keychain {
         static func passwordLabel(_ profileName: String, vpnProtocol: VPNProtocolType) -> String {
-            return "\(Constants.Global.appName): \(profileName) (\(vpnProtocol.description))"
+            "\(Constants.Global.appName): \(profileName) (\(vpnProtocol.description))"
         }
     }
     
@@ -67,7 +67,7 @@ enum Unlocalized {
         static let subject = "\(appName) - Report issue"
         
         static func body(_ description: String, _ metadata: String) -> String {
-            return "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards"
+            "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards"
         }
         
         static let template = "description of the issue: "
@@ -123,7 +123,7 @@ enum Unlocalized {
             static let subject = "\(appName) - Translations"
             
             static func body(_ description: String) -> String {
-                return "Hi,\n\n\(description)\n\nRegards"
+                "Hi,\n\n\(description)\n\nRegards"
             }
 
             static let template = "I offer to translate to: "

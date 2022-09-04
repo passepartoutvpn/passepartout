@@ -63,7 +63,7 @@ extension ProfileView {
         }
         
         private func alertOverwriteExistingProfile() -> Alert {
-            return Alert(
+            Alert(
                 title: Text(L10n.Profile.Alerts.Rename.title),
                 message: Text(L10n.AddProfile.Shared.Alerts.Overwrite.message),
                 primaryButton: .destructive(Text(L10n.Global.Strings.ok)) {

@@ -204,11 +204,11 @@ extension Constants {
         private static let githubRawRoot = URL(string: "https://\(Domain.name)/")!
         
         private static func github(repo: String) -> URL {
-            return githubRoot.appendingPathComponent(repo)
+            githubRoot.appendingPathComponent(repo)
         }
         
         private static func githubRaw(repo: String) -> URL {
-            return githubRawRoot.appendingPathComponent(repo)
+            githubRawRoot.appendingPathComponent(repo)
         }
         
         static let apple = github(repo: "passepartout-apple")

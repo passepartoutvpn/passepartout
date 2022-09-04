@@ -41,11 +41,7 @@ struct ProfileItemGroup: ItemGroup {
     
     func asMenuItems(withParent parent: NSMenu) -> [NSMenuItem] {
         profileManager.profiles.map {
-            if $0.isProvider {
-                return providerItem(withProfile: $0, parent: parent)
-            } else {
-                return hostItem(withProfile: $0, parent: parent)
-            }
+            $0.isProvider ? providerItem(withProfile: $0, parent: parent) : hostItem(withProfile: $0, parent: parent)
         }
     }
 

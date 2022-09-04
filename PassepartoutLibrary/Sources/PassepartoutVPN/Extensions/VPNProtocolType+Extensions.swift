@@ -30,36 +30,36 @@ import PassepartoutCore
 
 extension VPNProtocolType: Comparable {
     public static func <(lhs: Self, rhs: Self) -> Bool {
-        return lhs.description < rhs.description
+        lhs.description < rhs.description
     }
 }
 
 extension OpenVPN.ProviderConfiguration: VPNProtocolProviding {
     public var vpnProtocol: VPNProtocolType {
-        return .openVPN
+        .openVPN
     }
 }
 
 extension WireGuard.ProviderConfiguration: VPNProtocolProviding {
     public var vpnProtocol: VPNProtocolType {
-        return .wireGuard
+        .wireGuard
     }
 }
 
 extension VPNProtocolType {
     public var supportsGateway: Bool {
-        return true
+        true
     }
     
     public var supportsDNS: Bool {
-        return true
+        true
     }
 
     public var supportsProxy: Bool {
-        return self == .openVPN
+        self == .openVPN
     }
 
     public var supportsMTU: Bool {
-        return true
+        true
     }
 }

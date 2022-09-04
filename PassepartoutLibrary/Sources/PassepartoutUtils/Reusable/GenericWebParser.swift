@@ -35,11 +35,11 @@ public class GenericWebParser {
     }()
 
     public static func lastModifiedDate(string: String) -> Date? {
-        return lmFormatter.date(from: string)
+        lmFormatter.date(from: string)
     }
 
     public static func lastModifiedString(date: Date) -> String {
-        return lmFormatter.string(from: date)
+        lmFormatter.string(from: date)
     }
 
     public static func lastModifiedString(ofFileURL url: URL) -> String? {

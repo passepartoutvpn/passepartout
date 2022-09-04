@@ -43,7 +43,7 @@ public class Reviewer: ObservableObject {
 
     @discardableResult
     public func reportEvent() -> Bool {
-        return reportEvents(1)
+        reportEvents(1)
     }
 
     @discardableResult
@@ -88,6 +88,6 @@ public class Reviewer: ObservableObject {
     }
 
     public static func urlForReview(withAppId appId: String) -> URL {
-        return URL(string: "https://apps.apple.com/app/id\(appId)?action=write-review")!
+        URL(string: "https://apps.apple.com/app/id\(appId)?action=write-review")!
     }
 }

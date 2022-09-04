@@ -34,15 +34,15 @@ struct Shortcut: Identifiable, Hashable, Comparable {
     }
     
     var id: UUID {
-        return native.identifier
+        native.identifier
     }
 
     static func ==(lhs: Self, rhs: Self) -> Bool {
-        return lhs.phrase == rhs.phrase
+        lhs.phrase == rhs.phrase
     }
     
     static func <(lhs: Self, rhs: Self) -> Bool {
-        return lhs.phrase < rhs.phrase
+        lhs.phrase < rhs.phrase
     }
 
     func hash(into hasher: inout Hasher) {
@@ -50,6 +50,6 @@ struct Shortcut: Identifiable, Hashable, Comparable {
     }
 
     private var phrase: String {
-        return native.invocationPhrase.lowercased()
+        native.invocationPhrase.lowercased()
     }
 }

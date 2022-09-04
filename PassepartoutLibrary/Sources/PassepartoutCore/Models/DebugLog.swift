@@ -33,6 +33,6 @@ public struct DebugLog {
     }
 
     public var contentData: Data? {
-        return content.data(using: .utf8)
+        content.data(using: .utf8)
     }
 }

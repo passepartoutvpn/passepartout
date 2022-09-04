@@ -33,6 +33,6 @@ extension JSON {
     }
 
     public func encoded() throws -> Data {
-        return try JSONEncoder().encode(self)
+        try JSONEncoder().encode(self)
     }
 }

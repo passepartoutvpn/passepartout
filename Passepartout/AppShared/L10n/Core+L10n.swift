@@ -76,19 +76,19 @@ extension ObservableVPNState {
 
 extension Profile.Header: Comparable {
     public static func <(lhs: Self, rhs: Self) -> Bool {
-        return lhs.name.lowercased() < rhs.name.lowercased()
+        lhs.name.lowercased() < rhs.name.lowercased()
     }
 }
 
 extension Profile.OpenVPNSettings {
     var endpointDescription: String? {
-        return customEndpoint?.address ?? configuration.remotes?.first?.address
+        customEndpoint?.address ?? configuration.remotes?.first?.address
     }
 }
 
 extension Profile.WireGuardSettings {
     var endpointDescription: String? {
-        return configuration.tunnelConfiguration.peers.first?.endpoint?.stringRepresentation
+        configuration.tunnelConfiguration.peers.first?.endpoint?.stringRepresentation
     }
 }
 

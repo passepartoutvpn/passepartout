@@ -162,7 +162,7 @@ extension DiagnosticsView.OpenVPNView {
     }
     
     private var debugLogURL: URL? {
-        return vpnManager.debugLogURL(forProtocol: vpnProtocol)
+        vpnManager.debugLogURL(forProtocol: vpnProtocol)
     }
 }
 

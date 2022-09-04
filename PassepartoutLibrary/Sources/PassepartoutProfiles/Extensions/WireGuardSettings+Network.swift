@@ -30,28 +30,28 @@ import PassepartoutCore
 
 extension Profile.WireGuardSettings: DNSSettingsProviding {
     public var dnsProtocol: DNSProtocol? {
-        return .plain
+        .plain
     }
     
     public var dnsServers: [String]? {
-        return configuration.dnsServers
+        configuration.dnsServers
     }
     
     public var dnsSearchDomains: [String]? {
-        return configuration.dnsSearchDomains
+        configuration.dnsSearchDomains
     }
     
     public var dnsHTTPSURL: URL? {
-        return nil
+        nil
     }
     
     public var dnsTLSServerName: String? {
-        return nil
+        nil
     }
 }
 
 extension Profile.WireGuardSettings: MTUSettingsProviding {
     public var mtuBytes: Int {
-        return Int(configuration.mtu ?? 0)
+        Int(configuration.mtu ?? 0)
     }
 }

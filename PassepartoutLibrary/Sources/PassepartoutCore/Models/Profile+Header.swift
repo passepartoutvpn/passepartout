@@ -64,7 +64,7 @@ extension Profile {
         // MARK: Identifiable
         
         public var id: UUID {
-            return uuid
+            uuid
         }
     }
 }

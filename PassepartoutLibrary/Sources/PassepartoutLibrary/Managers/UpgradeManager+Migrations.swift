@@ -104,7 +104,7 @@ extension UpgradeManager {
     }
 
     private var appGroup: String {
-        return "group.com.algoritmico.Passepartout"
+        "group.com.algoritmico.Passepartout"
     }
 
     func doMigrateToV2() -> [Profile] {
@@ -368,7 +368,7 @@ extension UpgradeManager {
     }
     
     private func migratedV1Choice(_ map: Map, key: String) -> Network.Choice {
-        return (map[key] as? String) == "manual" ? .manual : .automatic
+        (map[key] as? String) == "manual" ? .manual : .automatic
     }
 }
 

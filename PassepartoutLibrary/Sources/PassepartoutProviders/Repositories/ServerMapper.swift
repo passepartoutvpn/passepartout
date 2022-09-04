@@ -130,11 +130,11 @@ struct ServerMapper: DTOMapper, ModelMapper {
 
 private extension WSProviderServer {
     var encodedExtraCountryCodes: String? {
-        return extraCountryCodes?.joined(separator: ",")
+        extraCountryCodes?.joined(separator: ",")
     }
     
     var encodedTags: String? {
-        return tags?.joined(separator: ",")
+        tags?.joined(separator: ",")
     }
 
     var encodedIPAddresses: String? {
@@ -149,18 +149,15 @@ private extension WSProviderServer {
 
 private extension CDInfrastructureServer {
     var decodedExtraCountryCodes: [String]? {
-        return extraCountryCodes?
-            .components(separatedBy: ",")
+        extraCountryCodes?.components(separatedBy: ",")
     }
     
     var decodedTags: [String]? {
-        return tags?
-            .components(separatedBy: ",")
+        tags?.components(separatedBy: ",")
     }
     
     var decodedIPAddresses: [String] {
-        return ipAddresses?
-            .components(separatedBy: ",") ?? []
+        ipAddresses?.components(separatedBy: ",") ?? []
     }
 }
 

@@ -53,27 +53,27 @@ class IntentDispatcher {
     }
     
     static func intentEnable() -> EnableVPNIntent {
-        return EnableVPNIntent()
+        EnableVPNIntent()
     }
     
     static func intentDisable() -> DisableVPNIntent {
-        return DisableVPNIntent()
+        DisableVPNIntent()
     }
     
     static func intentTrustWiFi() -> TrustCurrentNetworkIntent {
-        return TrustCurrentNetworkIntent()
+        TrustCurrentNetworkIntent()
     }
     
     static func intentUntrustWiFi() -> UntrustCurrentNetworkIntent {
-        return UntrustCurrentNetworkIntent()
+        UntrustCurrentNetworkIntent()
     }
     
     static func intentTrustCellular() -> TrustCellularNetworkIntent {
-        return TrustCellularNetworkIntent()
+        TrustCellularNetworkIntent()
     }
     
     static func intentUntrustCellular() -> UntrustCellularNetworkIntent {
-        return UntrustCellularNetworkIntent()
+        UntrustCellularNetworkIntent()
     }
 
     // MARK: Donations

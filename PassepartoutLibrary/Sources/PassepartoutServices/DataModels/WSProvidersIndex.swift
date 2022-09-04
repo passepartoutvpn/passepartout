@@ -50,7 +50,7 @@ public struct WSProvidersIndex: Codable {
         // MARK: CustomStringConvertible
 
         public var description: String {
-            return fullName
+            fullName
         }
     }
 

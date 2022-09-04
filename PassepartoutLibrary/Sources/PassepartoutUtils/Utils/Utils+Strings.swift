@@ -45,7 +45,7 @@ extension Utils {
 
 extension String: StrippableContent {
     public var stripped: String {
-        return trimmingCharacters(in: .whitespacesAndNewlines)
+        trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     public var strippedNotEmpty: String? {
@@ -59,13 +59,13 @@ extension String: StrippableContent {
 
 extension StringProtocol where Index == String.Index {
     public func nsRange(from range: Range<Index>) -> NSRange {
-        return NSRange(range, in: self)
+        NSRange(range, in: self)
     }
 }
 
 extension String {
     public var localizedAsCountryCode: String {
-        return Locale.current.localizedString(forRegionCode: self) ?? self
+        Locale.current.localizedString(forRegionCode: self) ?? self
     }
 }
 

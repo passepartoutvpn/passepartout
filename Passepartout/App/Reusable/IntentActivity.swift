@@ -33,7 +33,7 @@ public struct IntentActivity<UserObject> {
 
 extension View {
     public func onIntentActivity<UserObject>(_ activity: IntentActivity<UserObject>, object: UserObject) -> some View {
-        return onContinueUserActivity(activity.name) {
+        onContinueUserActivity(activity.name) {
             activity.handler($0, object)
         }
     }

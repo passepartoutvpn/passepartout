@@ -48,13 +48,13 @@ public class DefaultWebServices: WebServices {
         }
         
         private var fileType: String {
-            return "json"
+            "json"
         }
         
         // MARK: GenericWebEndpoint
 
         var path: String {
-            return "\(pathName).\(fileType)"
+            "\(pathName).\(fileType)"
         }
     }
 

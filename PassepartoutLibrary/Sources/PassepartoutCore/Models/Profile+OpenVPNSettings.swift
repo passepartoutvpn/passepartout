@@ -29,7 +29,7 @@ import TunnelKitOpenVPN
 extension Profile {
     public struct OpenVPNSettings: Codable, Equatable, VPNProtocolProviding {
         public var vpnProtocol: VPNProtocolType {
-            return .openVPN
+            .openVPN
         }
         
         public var configuration: OpenVPN.Configuration

@@ -148,7 +148,7 @@ extension DonateView {
 
 private extension ProductManager {
     var donations: [SKProduct] {
-        return products.filter { product in
+        products.filter { product in
             LocalProduct.allDonations.contains {
                 $0.matchesStoreKitProduct(product)
             }

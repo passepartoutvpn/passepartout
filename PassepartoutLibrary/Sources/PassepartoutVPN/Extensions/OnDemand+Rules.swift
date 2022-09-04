@@ -83,6 +83,6 @@ extension Profile.OnDemand {
     }
     
     private var policyRule: NEOnDemandRule {
-        return disconnectsIfNotMatching ? NEOnDemandRuleDisconnect() : NEOnDemandRuleIgnore()
+        disconnectsIfNotMatching ? NEOnDemandRuleDisconnect() : NEOnDemandRuleIgnore()
     }
 }

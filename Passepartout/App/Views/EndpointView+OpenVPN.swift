@@ -267,7 +267,7 @@ extension EndpointView.OpenVPNView {
     }
     
     private var filteredRemotes: [Endpoint]? {
-        return builder.remotes?.filter {
+        builder.remotes?.filter {
             $0.proto.socketType == selectedSocketType && $0.proto.port == selectedPort
         }
     }

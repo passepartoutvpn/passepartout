@@ -114,11 +114,11 @@ class ProductManager: NSObject, ObservableObject {
     }
 
     func product(withIdentifier identifier: LocalProduct) -> SKProduct? {
-        return inApp.product(withIdentifier: identifier)
+        inApp.product(withIdentifier: identifier)
     }
     
     func featureProducts(including: [LocalProduct]) -> [SKProduct] {
-        return inApp.products.filter {
+        inApp.products.filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
@@ -133,7 +133,7 @@ class ProductManager: NSObject, ObservableObject {
     }
     
     func featureProducts(excluding: [LocalProduct]) -> [SKProduct] {
-        return inApp.products.filter {
+        inApp.products.filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
@@ -203,19 +203,19 @@ class ProductManager: NSObject, ObservableObject {
     }
 
     func isEligibleForFeedback() -> Bool {
-        return appType == .beta || !purchasedFeatures.isEmpty
+        appType == .beta || !purchasedFeatures.isEmpty
     }
     
     func hasPurchased(_ product: LocalProduct) -> Bool {
-        return purchasedFeatures.contains(product)
+        purchasedFeatures.contains(product)
     }
 
     func isCancelledPurchase(_ product: LocalProduct) -> Bool {
-        return cancelledPurchases.contains(product)
+        cancelledPurchases.contains(product)
     }
     
     func purchaseDate(forProduct product: LocalProduct) -> Date? {
-        return purchaseDates[product]
+        purchaseDates[product]
     }
 
     func reloadReceipt(andNotify: Bool = true) {

@@ -107,7 +107,7 @@ extension ProfileView {
         }
 
         private var currentProviderServerDescription: String? {
-            return profile.providerServer(providerManager)?.localizedLongDescription
+            profile.providerServer(providerManager)?.localizedLongDescription
         }
 
         private var currentProviderCountryImage: Image? {
@@ -118,11 +118,11 @@ extension ProfileView {
         }
         
         private var currentProviderPreset: String? {
-            return providerManager.localizedPreset(forProfile: profile)
+            providerManager.localizedPreset(forProfile: profile)
         }
         
         private var lastInfrastructureUpdate: String? {
-            return providerManager.localizedInfrastructureUpdate(forProfile: profile)
+            providerManager.localizedInfrastructureUpdate(forProfile: profile)
         }
 
         private func refreshInfrastructure() {

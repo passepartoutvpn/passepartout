@@ -98,19 +98,19 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
     // MARK: All
 
     static var all: [LocalProduct] {
-        return allDonations + allFeatures// + allProviders
+        allDonations + allFeatures// + allProviders
     }
     
     var isDonation: Bool {
-        return rawValue.hasPrefix(LocalProduct.donationsBundle)
+        rawValue.hasPrefix(LocalProduct.donationsBundle)
     }
 
     var isFeature: Bool {
-        return rawValue.hasPrefix(LocalProduct.featuresBundle)
+        rawValue.hasPrefix(LocalProduct.featuresBundle)
     }
 
     var isProvider: Bool {
-        return rawValue.hasPrefix(LocalProduct.providersBundle)
+        rawValue.hasPrefix(LocalProduct.providersBundle)
     }
     
     // MARK: RawRepresentable
@@ -124,7 +124,7 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
 
 extension LocalProduct {
     func matchesStoreKitProduct(_ skProduct: SKProduct) -> Bool {
-        return skProduct.productIdentifier == rawValue
+        skProduct.productIdentifier == rawValue
     }
 }
 

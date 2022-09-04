@@ -99,6 +99,6 @@ struct ProviderPresetView: View {
 
     // some providers (e.g. NordVPN) have specific presets based on selected server
     private var availablePresets: [ProviderServer.Preset] {
-        return server?.presets?.sorted() ?? []
+        server?.presets?.sorted() ?? []
     }
 }

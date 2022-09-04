@@ -39,7 +39,7 @@ struct ProfileView: View {
         case paywallTrustedNetworks
 
         var id: Int {
-            return rawValue
+            rawValue
         }
     }
 

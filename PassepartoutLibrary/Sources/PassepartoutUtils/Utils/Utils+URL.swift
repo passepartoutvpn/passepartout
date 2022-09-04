@@ -48,7 +48,7 @@ extension URL {
         UIApplication.shared.open(url)
         return true
         #else
-        return NSWorkspace.shared.open(url)
+        NSWorkspace.shared.open(url)
         #endif
     }
 

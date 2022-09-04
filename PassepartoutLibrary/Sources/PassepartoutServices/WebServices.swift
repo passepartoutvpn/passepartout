@@ -35,7 +35,7 @@ public enum WebError: GenericWebServicesError, LocalizedError {
     case unknown
 
     public static func httpStatus(_ status: Int) -> WebError {
-        return .http(status)
+        .http(status)
     }
     
     public var errorDescription: String? {

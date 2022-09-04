@@ -51,7 +51,7 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
     private var productsMap: [PID: SKProduct]
     
     public var products: [SKProduct] {
-        return [SKProduct](productsMap.values)
+        [SKProduct](productsMap.values)
     }
     
     private var productObservers: [ProductObserver]
@@ -110,7 +110,7 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
     }
     
     public func product(withIdentifier productIdentifier: PID) -> SKProduct? {
-        return productsMap[productIdentifier]
+        productsMap[productIdentifier]
     }
 
     // MARK: SKProductsRequestDelegate
@@ -218,6 +218,6 @@ extension SKProduct {
     }
 
     public var localizedPrice: String? {
-        return localizedCurrencyFormatter.string(from: price)
+        localizedCurrencyFormatter.string(from: price)
     }
 }

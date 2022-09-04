@@ -29,7 +29,7 @@ import TunnelKitWireGuard
 extension Profile {
     public struct WireGuardSettings: Codable, Equatable, VPNProtocolProviding {
         public var vpnProtocol: VPNProtocolType {
-            return .wireGuard
+            .wireGuard
         }
         
         public var configuration: WireGuard.Configuration

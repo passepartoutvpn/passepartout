@@ -40,7 +40,7 @@ extension ProviderLocationItem {
         }
         
         var isActiveLocation: Bool {
-            return location.id == profile.providerServer?.locationId
+            location.id == profile.providerServer?.locationId
         }
         
         var isOnlyServer: Bool {

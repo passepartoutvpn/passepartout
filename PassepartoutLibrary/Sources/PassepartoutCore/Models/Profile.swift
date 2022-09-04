@@ -111,7 +111,7 @@ public struct Profile: Identifiable, Codable, Equatable {
     // MARK: Identifiable
     
     public var id: UUID {
-        return header.id
+        header.id
     }
 }
 

@@ -158,7 +158,7 @@ extension EditableTextList {
     
     private func binding(toEditedElement element: IdentifiableString) -> Binding<String> {
 //        print(">>> <-> \(element)")
-        return .init {
+        .init {
             editedTextStrings[element.id] ?? element.string
         } set: {
             editedTextStrings[element.id] = $0

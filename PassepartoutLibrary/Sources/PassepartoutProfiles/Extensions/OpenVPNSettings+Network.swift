@@ -32,12 +32,12 @@ extension Profile.OpenVPNSettings: GatewaySettingsProviding {
 
     // route-gateway
     public var isDefaultIPv4: Bool {
-        return configuration.routingPolicies?.contains(.IPv4) ?? false
+        configuration.routingPolicies?.contains(.IPv4) ?? false
     }
 
     // ifconfig-ipv6
     public var isDefaultIPv6: Bool {
-        return configuration.routingPolicies?.contains(.IPv6) ?? false
+        configuration.routingPolicies?.contains(.IPv6) ?? false
     }
 }
 
@@ -45,27 +45,27 @@ extension Profile.OpenVPNSettings: DNSSettingsProviding {
 
     // not a dhcp-option
     public var dnsProtocol: DNSProtocol? {
-        return (configuration.isDNSEnabled ?? true) ? .plain : nil
+        (configuration.isDNSEnabled ?? true) ? .plain : nil
     }
     
     // dhcp-option DNS
     public var dnsServers: [String]? {
-        return configuration.dnsServers
+        configuration.dnsServers
     }
     
     // dhcp-option DOMAIN/DOMAIN-SEARCH
     public var dnsSearchDomains: [String]? {
-        return configuration.searchDomains
+        configuration.searchDomains
     }
     
     // not a dhcp-option
     public var dnsHTTPSURL: URL? {
-        return nil
+        nil
     }
     
     // not a dhcp-option
     public var dnsTLSServerName: String? {
-        return nil
+        nil
     }
 }
 
@@ -73,17 +73,17 @@ extension Profile.OpenVPNSettings: ProxySettingsProviding {
 
     // dhcp-option PROXY_HTTP[S]
     public var proxyServer: Proxy? {
-        return configuration.httpsProxy ?? configuration.httpProxy
+        configuration.httpsProxy ?? configuration.httpProxy
     }
     
     // dhcp-option PROXY_BYPASS
     public var proxyBypassDomains: [String]? {
-        return configuration.proxyBypassDomains
+        configuration.proxyBypassDomains
     }
 
     // dhcp-option PROXY_AUTO_CONFIG_URL
     public var proxyAutoConfigurationURL: URL? {
-        return configuration.proxyAutoConfigurationURL
+        configuration.proxyAutoConfigurationURL
     }
 }
 
@@ -91,6 +91,6 @@ extension Profile.OpenVPNSettings: MTUSettingsProviding {
     public var mtuBytes: Int {
 
         // tun-mtu
-        return configuration.mtu ?? 0
+        configuration.mtu ?? 0
     }
 }

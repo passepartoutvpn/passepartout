@@ -159,7 +159,7 @@ extension AddHostView {
         }
         
         private func alertOverwriteExistingProfile() -> Alert {
-            return Alert(
+            Alert(
                 title: Text(L10n.AddProfile.Shared.title),
                 message: Text(L10n.AddProfile.Shared.Alerts.Overwrite.message),
                 primaryButton: .destructive(Text(L10n.Global.Strings.ok)) {

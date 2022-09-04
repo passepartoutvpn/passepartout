@@ -122,11 +122,11 @@ public final class VPNManager: ObservableObject {
     }
 
     public func serverConfiguration(forProtocol vpnProtocol: VPNProtocolType) -> Any? {
-        return strategy.serverConfiguration(forProtocol: vpnProtocol)
+        strategy.serverConfiguration(forProtocol: vpnProtocol)
     }
 
     public func debugLogURL(forProtocol vpnProtocol: VPNProtocolType) -> URL? {
-        return strategy.debugLogURL(forProtocol: vpnProtocol)
+        strategy.debugLogURL(forProtocol: vpnProtocol)
     }
     
     private func clearLastError() {

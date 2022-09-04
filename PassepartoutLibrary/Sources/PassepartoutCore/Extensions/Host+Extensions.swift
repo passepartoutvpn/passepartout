@@ -58,7 +58,7 @@ extension Profile {
 
     public var hostWireGuardSettings: WireGuardSettings? {
         get {
-            return host?.wgSettings
+            host?.wgSettings
         }
         set {
             host?.wgSettings = newValue

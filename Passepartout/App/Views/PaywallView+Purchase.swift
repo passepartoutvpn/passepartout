@@ -194,9 +194,9 @@ extension PaywallView.PurchaseView {
     
     private var skPlatformVersion: SKProduct? {
         #if targetEnvironment(macCatalyst)
-        return productManager.product(withIdentifier: .fullVersion_macOS)
+        productManager.product(withIdentifier: .fullVersion_macOS)
         #else
-        return productManager.product(withIdentifier: .fullVersion_iOS)
+        productManager.product(withIdentifier: .fullVersion_iOS)
         #endif
     }
 
@@ -215,7 +215,7 @@ extension PaywallView.PurchaseView {
     }
 
     private var platformVersionExtra: [String] {
-        return productManager.featureProducts(excluding: [
+        productManager.featureProducts(excluding: [
             .fullVersion,
             .fullVersion_iOS,
             .fullVersion_macOS
@@ -227,7 +227,7 @@ extension PaywallView.PurchaseView {
     }
 
     private var fullVersionExtra: [String] {
-        return productManager.featureProducts(including: [
+        productManager.featureProducts(including: [
             .fullVersion_iOS,
             .fullVersion_macOS
         ]).map {

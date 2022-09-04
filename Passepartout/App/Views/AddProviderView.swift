@@ -158,6 +158,6 @@ extension AddProviderView {
 
 private extension ProviderMetadata {
     var navigationId: String {
-        return "navigation.\(name)"
+        "navigation.\(name)"
     }
 }

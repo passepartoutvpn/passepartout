@@ -28,10 +28,10 @@ import PassepartoutLibrary
 
 extension DebugLog {
     func decoratedString() -> String {
-        return decoratedString(Constants.Global.appName, Constants.Global.appVersionString)
+        decoratedString(Constants.Global.appName, Constants.Global.appVersionString)
     }
 
     func decoratedData() -> Data {
-        return decoratedData(Constants.Global.appName, Constants.Global.appVersionString)
+        decoratedData(Constants.Global.appName, Constants.Global.appVersionString)
     }
 }

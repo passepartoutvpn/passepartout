@@ -62,8 +62,8 @@ class UtilsTests: XCTestCase {
     }
     
     private func privateSortedLanguages(_ languages: [String], with locale: Locale) -> [String] {
-        return languages.sorted {
-            return locale.localizedString(forLanguageCode: $0)! < locale.localizedString(forLanguageCode: $1)!
+        languages.sorted {
+            locale.localizedString(forLanguageCode: $0)! < locale.localizedString(forLanguageCode: $1)!
         }
     }
 }

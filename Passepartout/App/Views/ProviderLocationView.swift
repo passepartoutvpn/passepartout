@@ -225,7 +225,7 @@ extension ProviderLocationView {
     }
     
     private func isFavoriteLocation(_ location: ProviderLocation) -> Bool {
-        return favoriteLocationIds?.contains(location.id) ?? false
+        favoriteLocationIds?.contains(location.id) ?? false
     }
     
     private func toggleFavoriteLocation(_ location: ProviderLocation) {
@@ -295,7 +295,7 @@ extension ProviderLocationView {
         }
 
         private var servers: [ProviderServer] {
-            return providerManager.servers(forLocation: location).sorted()
+            providerManager.servers(forLocation: location).sorted()
         }
     }
 }

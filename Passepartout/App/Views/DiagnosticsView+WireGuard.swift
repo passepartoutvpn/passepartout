@@ -57,7 +57,7 @@ extension DiagnosticsView {
         }
 
         private var debugLogURL: URL? {
-            return vpnManager.debugLogURL(forProtocol: .wireGuard)
+            vpnManager.debugLogURL(forProtocol: .wireGuard)
         }
     }
 }

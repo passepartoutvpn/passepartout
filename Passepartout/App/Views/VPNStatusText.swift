@@ -41,7 +41,7 @@ struct VPNStatusText: View {
     }
 
     private var statusText: String {
-        return currentVPNState.localizedStatusDescription(
+        currentVPNState.localizedStatusDescription(
             isActiveProfile: isActiveProfile,
             withErrors: true,
             dataCountIfAvailable: true

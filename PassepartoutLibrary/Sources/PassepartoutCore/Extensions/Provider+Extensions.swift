@@ -46,7 +46,7 @@ extension Profile {
     }
 
     public func providerServerId() -> String? {
-        return provider?.vpnSettings[currentVPNProtocol]?.serverId
+        provider?.vpnSettings[currentVPNProtocol]?.serverId
     }
 
     public mutating func setProviderServer(_ server: ProviderServer) {
@@ -72,7 +72,7 @@ extension Profile {
     }
     
     public func providerFavoriteLocationIds() -> Set<String>? {
-        return provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds
+        provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds
     }
     
     public mutating func setProviderFavoriteLocationIds(_ ids: Set<String>?) {
@@ -80,7 +80,7 @@ extension Profile {
     }
 
     public func providerCustomEndpoint() -> Endpoint? {
-        return provider?.vpnSettings[currentVPNProtocol]?.customEndpoint
+        provider?.vpnSettings[currentVPNProtocol]?.customEndpoint
     }
 
     public mutating func setProviderCustomEndpoint(_ endpoint: Endpoint?) {
@@ -88,7 +88,7 @@ extension Profile {
     }
     
     public func providerAccount() -> Profile.Account? {
-        return provider?.vpnSettings[currentVPNProtocol]?.account
+        provider?.vpnSettings[currentVPNProtocol]?.account
     }
     
     public mutating func setProviderAccount(_ account: Profile.Account?) {

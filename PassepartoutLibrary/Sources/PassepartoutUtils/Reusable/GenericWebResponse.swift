@@ -40,6 +40,6 @@ public struct GenericWebResponse<T> {
     public let isCached: Bool
 
     public static func empty() -> GenericWebResponse {
-        return GenericWebResponse(value: nil, lastModifiedString: nil, isCached: false)
+        GenericWebResponse(value: nil, lastModifiedString: nil, isCached: false)
     }
 }

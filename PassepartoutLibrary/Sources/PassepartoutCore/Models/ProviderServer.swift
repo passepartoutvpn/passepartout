@@ -89,7 +89,7 @@ public struct ProviderServer: Identifiable {
     }
 
     public func preset(withId presetId: String) -> Preset? {
-        return presets?.first {
+        presets?.first {
             $0.id == presetId
         }
     }

@@ -117,10 +117,10 @@ public class MockVPNManagerStrategy: VPNManagerStrategy {
     }
     
     public func serverConfiguration(forProtocol vpnProtocol: VPNProtocolType) -> Any? {
-        return nil
+        nil
     }
     
     public func debugLogURL(forProtocol vpnProtocol: VPNProtocolType) -> URL? {
-        return nil
+        nil
     }
 }

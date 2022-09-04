@@ -31,11 +31,11 @@ public class KeyedCache<K: Hashable, V> {
     private var store: [K: V] = [:]
 
     public var isEmpty: Bool {
-        return store.isEmpty
+        store.isEmpty
     }
     
     public var storeValues: [V] {
-        return Array(store.values)
+        Array(store.values)
     }
     
     public init(_ query: String) {

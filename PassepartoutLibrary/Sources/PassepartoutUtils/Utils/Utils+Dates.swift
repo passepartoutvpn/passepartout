@@ -40,7 +40,7 @@ private let componentsFormatter: DateComponentsFormatter = {
 
 extension Date {
     public var timestamp: String {
-        return timestampFormatter.string(from: self)
+        timestampFormatter.string(from: self)
     }
 }
 

@@ -33,7 +33,7 @@ import CoreWLAN
 extension Utils {
     #if targetEnvironment(simulator)
     public static func hasCellularData() -> Bool {
-        return true
+        true
     }
     #else
     public static func hasCellularData() -> Bool {

@@ -28,12 +28,12 @@ import PassepartoutCore
 
 extension Profile.Header {
     public var logDescription: String {
-        return "{\(id), '\(name)'}"
+        "{\(id), '\(name)'}"
     }
 }
 
 extension Profile {
     public var logDescription: String {
-        return header.logDescription
+        header.logDescription
     }
 }

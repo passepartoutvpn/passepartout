@@ -59,19 +59,19 @@ struct GenericCreditsView: View {
     }
     
     private var sortedLicenses: [License] {
-        return licenses.sorted {
+        licenses.sorted {
             $0.0.lowercased() < $1.0.lowercased()
         }
     }
     
     private var sortedNotices: [Notice] {
-        return notices.sorted {
+        notices.sorted {
             $0.0.lowercased() < $1.0.lowercased()
         }
     }
     
     private var sortedLanguages: [String] {
-        return translations.keys.sorted {
+        translations.keys.sorted {
             $0.localizedAsCountryCode < $1.localizedAsCountryCode
         }
     }
@@ -174,6 +174,6 @@ extension GenericCreditsView {
 
 private extension String {
     var localizedAsCountryCode: String {
-        return Locale.current.localizedString(forLanguageCode: self)?.capitalized ?? self
+        Locale.current.localizedString(forLanguageCode: self)?.capitalized ?? self
     }
 }

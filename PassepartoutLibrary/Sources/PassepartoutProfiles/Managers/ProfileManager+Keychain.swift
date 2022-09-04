@@ -82,7 +82,7 @@ extension ProfileManager {
 
 private extension Profile {
     var keychainEntry: String? {
-        return "\(id.uuidString):\(currentVPNProtocol.description):\(account.username)"
+        "\(id.uuidString):\(currentVPNProtocol.description):\(account.username)"
     }
 }
 
