@@ -62,6 +62,8 @@ class DefaultLightProviderLocation: LightProviderLocation {
 class DefaultLightProviderServer: LightProviderServer {
     let description: String
     
+    let longDescription: String
+    
     let categoryName: String
     
     let locationId: String
@@ -70,6 +72,7 @@ class DefaultLightProviderServer: LightProviderServer {
     
     init(_ server: ProviderServer) {
         description = server.localizedShortDescriptionWithDefault
+        longDescription = server.localizedLongDescription
         categoryName = server.categoryName
         locationId = server.locationId
         serverId = server.id

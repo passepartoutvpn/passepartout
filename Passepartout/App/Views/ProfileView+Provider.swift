@@ -56,6 +56,7 @@ extension ProfileView {
             }
         }
         
+        @ViewBuilder
         private var mainView: some View {
             Section {
                 NavigationLink(isActive: $isProviderLocationPresented) {
@@ -71,6 +72,12 @@ extension ProfileView {
                         currentProviderCountryImage
                     }
                 }
+            } header: {
+                currentProviderFullName.map(Text.init)
+            } footer: {
+                currentProviderServerDescription.map(Text.init)
+            }
+            Section {
                 NavigationLink {
                     ProviderPresetView(currentProfile: currentProfile)
                 } label: {
@@ -80,8 +87,6 @@ extension ProfileView {
                 Button(action: refreshInfrastructure) {
                     Text(L10n.Profile.Items.Provider.Refresh.caption)
                 }.withTrailingProgress(when: isRefreshingInfrastructure)
-            } header: {
-                currentProviderFullName.map(Text.init)
             } footer: {
                 lastInfrastructureUpdate.map {
                     Text(L10n.Profile.Sections.ProviderInfrastructure.footer($0))
@@ -90,8 +95,8 @@ extension ProfileView {
         }
 
         private var currentProviderFullName: String? {
-            guard let name = currentProfile.value.header.providerName else {
-                assertionFailure("Provider name accessed but profile is not a provider (isPlaceholder? \(currentProfile.value.isPlaceholder))")
+            guard let name = profile.header.providerName else {
+                assertionFailure("Provider name accessed but profile is not a provider (isPlaceholder? \(profile.isPlaceholder))")
                 return nil
             }
             guard let metadata = providerManager.provider(withName: name) else {
@@ -101,28 +106,29 @@ extension ProfileView {
             return metadata.fullName
         }
 
-//        private var currentProviderLocation: String? {
-//            return providerManager.localizedLocation(forProfile: profile)
-//        }
+        private var currentProviderServerDescription: String? {
+            return profile.providerServer(providerManager)?.localizedLongDescription
+        }
+
         private var currentProviderCountryImage: Image? {
-            guard let code = currentProfile.value.providerServer(providerManager)?.countryCode else {
+            guard let code = profile.providerServer(providerManager)?.countryCode else {
                 return nil
             }
             return themeAssetsCountryImage(code).asAssetImage
         }
         
         private var currentProviderPreset: String? {
-            return providerManager.localizedPreset(forProfile: currentProfile.value)
+            return providerManager.localizedPreset(forProfile: profile)
         }
         
         private var lastInfrastructureUpdate: String? {
-            return providerManager.localizedInfrastructureUpdate(forProfile: currentProfile.value)
+            return providerManager.localizedInfrastructureUpdate(forProfile: profile)
         }
 
         private func refreshInfrastructure() {
             isRefreshingInfrastructure = true
             Task {
-                try await providerManager.fetchRemoteProviderPublisher(forProfile: currentProfile.value).async()
+                try await providerManager.fetchRemoteProviderPublisher(forProfile: profile).async()
                 isRefreshingInfrastructure = false
             }
         }

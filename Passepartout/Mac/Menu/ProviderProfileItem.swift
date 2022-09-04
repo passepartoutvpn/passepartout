@@ -78,13 +78,24 @@ struct ProviderProfileItem: Item {
         menu.addItem(toggleItem)
         menu.addItem(.separator())
 
+        if let currentServerDescription = viewModel.profile.providerServer?.longDescription {
+            let currentItem = NSMenuItem()
+            currentItem.title = currentServerDescription
+            currentItem.isEnabled = false
+            menu.addItem(currentItem)
+        }
+
         if categories.count > 1 {
             viewModel.categories.forEach {
-                menu.addItem(categoryItem(with: $0, parent: menu))
+                let item = categoryItem(with: $0, parent: menu)
+                item.indentationLevel = 1
+                menu.addItem(item)
             }
         } else {
             viewModel.categories.first?.locations.forEach {
-                menu.addItem(locationItem(with: $0, parent: menu))
+                let item = locationItem(with: $0, parent: menu)
+                item.indentationLevel = 1
+                menu.addItem(item)
             }
         }
 

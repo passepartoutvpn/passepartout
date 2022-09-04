@@ -47,6 +47,8 @@ public protocol LightProviderLocation {
 public protocol LightProviderServer {
     var description: String { get }
     
+    var longDescription: String { get }
+    
     var categoryName: String { get }
 
     var locationId: String { get }

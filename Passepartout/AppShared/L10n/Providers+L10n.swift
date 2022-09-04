@@ -98,7 +98,7 @@ extension ProviderServer {
         localizedShortDescription.map {
             comps.append($0)
         }
-        return comps.joined(separator: " - ")
+        return comps.joined(separator: ", ")
     }
 }
 
