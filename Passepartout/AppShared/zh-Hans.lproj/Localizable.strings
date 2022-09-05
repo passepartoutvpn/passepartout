@@ -46,6 +46,10 @@
 "global.strings.keepalive" = "保持活跃状态";
 "global.strings.advanced" = "高级";
 "global.strings.translations" = "翻译";
+"global.strings.show" = "显示";
+"global.strings.connect" = "连接";
+"global.strings.disconnect" = "断开连接";
+"global.strings.download" = "下载";
 
 "global.messages.email_not_configured" = "未配置e-mail账户。";
 "global.messages.share" = "Passepartout是适用于iOS和macOS操作系统的OpenVPN/WireGuard开源客户端，易于使用";
@@ -71,21 +75,7 @@
 "menu.contextual.share_twitter" = "发推文";
 "menu.contextual.share_generic" = "邀请";
 
-"global.strings.show" = "显示";
-"menu.system.switch_profile.title" = "有效配置";
-"menu.system.active_profile.title.none" = "无有效配置";
-"menu.system.active_profile.items.customize.title" = "自定义......";
-"menu.system.active_profile.messages.missing_credentials" = "未配置账户";
-"menu.system.organizer.title" = "分类页面";
-"menu.system.preferences.title" = "偏好设置";
-"settings.items.donate.caption" = "提供捐助";
-"about.items.join_community.caption" = "加入社区";
-"about.items.write_review.caption" = "写下想法";
-// "menu.system.support.translate" = "Offer to translate";
-"about.items.share_twitter.caption" = "发送关于它的推特!";
-"menu.system.share_generic.caption" = "邀请朋友";
 "menu.system.quit.title" = "退出%@";
-"menu.system.quit.messages.confirm" = "VPN（如果启用）仍将在后台运行。您要退出吗？";
 
 /* MARK: TunnelKit */
 
@@ -317,11 +307,19 @@
 "donate.alerts.purchase.success.message" = "这对于我意味着很多，希望你保持使用并使它更好。";
 "donate.alerts.purchase.failure.message" = "无法展现捐助内容。%@";
 
+/* MARK: SettingsView */
+
+"settings.title" = "设置";
+"settings.items.donate.caption" = "提供捐助";
+
 /* MARK: AboutView */
 
 "about.title" = "关于";
 "about.sections.web.header" = "网络";
 "about.items.credits.caption" = "评分";
+"about.items.join_community.caption" = "加入社区";
+"about.items.write_review.caption" = "写下想法";
+"about.items.share_twitter.caption" = "发送关于它的推特!";
 "about.items.website.caption" = "主页";
 "about.items.disclaimer.caption" = "免责声明";
 "about.items.privacy_policy.caption" = "隐私政策";

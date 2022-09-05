@@ -46,6 +46,10 @@
 "global.strings.keepalive" = "Keep-alive";
 "global.strings.advanced" = "Geavanceerd";
 "global.strings.translations" = "Vertalingen";
+"global.strings.show" = "Weergeven";
+"global.strings.connect" = "Verbinding maken";
+"global.strings.disconnect" = "Verbinding verbreken";
+"global.strings.download" = "Downloaden";
 
 "global.messages.email_not_configured" = "Er is geen email adres geconfigureerd.";
 "global.messages.share" = "Passepartout is een gebruiksvriendelijke open source OpenVPN / WireGuard client voor iOS en macOS";
@@ -71,21 +75,7 @@
 "menu.contextual.share_twitter" = "Tweeten";
 "menu.contextual.share_generic" = "Uitnodigen";
 
-"global.strings.show" = "Weergeven";
-"menu.system.switch_profile.title" = "Actief profiel";
-"menu.system.active_profile.title.none" = "Geen actief profiel";
-"menu.system.active_profile.items.customize.title" = "Aanpassen...";
-"menu.system.active_profile.messages.missing_credentials" = "Geen account geconfigureerd";
-"menu.system.organizer.title" = "Organisator";
-"menu.system.preferences.title" = "Voorkeuren";
-"settings.items.donate.caption" = "Doneer een gift";
-"about.items.join_community.caption" = "Word lid van de gemeenschap";
-"about.items.write_review.caption" = "Schrijf een beoordeling";
-// "menu.system.support.translate" = "Offer to translate";
-"about.items.share_twitter.caption" = "Tweet about it!";
-"menu.system.share_generic.caption" = "Nodig een vriend uit";
 "menu.system.quit.title" = "%@ afsluiten";
-"menu.system.quit.messages.confirm" = "De VPN zal, indien geactiveerd, op de achtergrond blijven draaien. Wilt u sluiten?";
 
 /* MARK: TunnelKit */
 
@@ -317,11 +307,19 @@
 "donate.alerts.purchase.success.message" = "Dit betekent veel voor mij en ik hoop echt dat je deze app blijft gebruiken en promoten.";
 "donate.alerts.purchase.failure.message" = "Donatie mislukt. %@";
 
+/* MARK: SettingsView */
+
+"settings.title" = "Instellingen";
+"settings.items.donate.caption" = "Doneer een gift";
+
 /* MARK: AboutView */
 
 "about.title" = "Over";
 "about.sections.web.header" = "Web";
 "about.items.credits.caption" = "Credits";
+"about.items.join_community.caption" = "Word lid van de gemeenschap";
+"about.items.write_review.caption" = "Schrijf een beoordeling";
+"about.items.share_twitter.caption" = "Tweet erover!";
 "about.items.website.caption" = "Home page";
 "about.items.disclaimer.caption" = "Vrijwaring";
 "about.items.privacy_policy.caption" = "Privacybeleid";

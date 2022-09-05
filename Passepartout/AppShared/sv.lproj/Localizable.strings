@@ -46,6 +46,10 @@
 "global.strings.keepalive" = "hål-vid-liv";
 "global.strings.advanced" = "Avancerat";
 "global.strings.translations" = "Translations";
+"global.strings.show" = "Visa";
+"global.strings.connect" = "Anslut";
+"global.strings.disconnect" = "Koppla från";
+"global.strings.download" = "Ladda ner";
 
 "global.messages.email_not_configured" = "Inget e-postkonto är konfigurerat.";
 "global.messages.share" = "Passepartout är en användarvänlig öppen källkod OpenVPN / WireGuard klient för iOS och macOS";
@@ -71,21 +75,7 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Bjud in";
 
-"global.strings.show" = "Visa";
-"menu.system.switch_profile.title" = "Aktiv profil";
-"menu.system.active_profile.title.none" = "Ingen aktiv profil";
-"menu.system.active_profile.items.customize.title" = "Anpassa";
-"menu.system.active_profile.messages.missing_credentials" = "Inget konto har konfigurerats";
-"menu.system.organizer.title" = "Organisatör";
-"menu.system.preferences.title" = "Inställningar";
-"settings.items.donate.caption" = "Gör en donation";
-"about.items.join_community.caption" = "Gå med i communityn";
-"about.items.write_review.caption" = "Skriv en recension";
-// "menu.system.support.translate" = "Offer to translate";
-"about.items.share_twitter.caption" = "Tweet om det!";
-"menu.system.share_generic.caption" = "Bjud in en vän";
 "menu.system.quit.title" = "Lämna %@";
-"menu.system.quit.messages.confirm" = "Om ett VPN är aktiverat kommer detta fortfarande att köra i bakgrunden. Vill du lämna?";
 
 /* MARK: TunnelKit */
 
@@ -317,11 +307,19 @@
 "donate.alerts.purchase.success.message" = "Detta betyder mycket för mig och jag hoppas verkligen att du fortsätter att använda och marknadsföra denna app.";
 "donate.alerts.purchase.failure.message" = "Kan inte göra donationen. %@";
 
+/* MARK: SettingsView */
+
+"settings.title" = "Inställningar";
+"settings.items.donate.caption" = "Gör en donation";
+
 /* MARK: AboutView */
 
 "about.title" = "About";
 "about.sections.web.header" = "Web";
 "about.items.credits.caption" = "Credits";
+"about.items.join_community.caption" = "Gå med i communityn";
+"about.items.write_review.caption" = "Skriv en recension";
+"about.items.share_twitter.caption" = "Tweet om det!";
 "about.items.website.caption" = "Hemsida";
 "about.items.disclaimer.caption" = "Disclaimer";
 "about.items.privacy_policy.caption" = "Sekretesspolicy";

@@ -46,6 +46,10 @@
 "global.strings.keepalive" = "Keep-alive";
 "global.strings.advanced" = "Erweitert";
 "global.strings.translations" = "Übersetzungen";
+"global.strings.show" = "Anzeigen";
+"global.strings.connect" = "Verbinden";
+"global.strings.disconnect" = "Trennen";
+"global.strings.download" = "Herunterladen";
 
 "global.messages.email_not_configured" = "Es wurde kein Email-Account konfiguriert.";
 "global.messages.share" = "Passepartout ist ein Benutzerfreundlicher, Open Source OpenVPN / WireGuard client für iOS und macOS";
@@ -71,21 +75,7 @@
 "menu.contextual.share_twitter" = "Tweet";
 "menu.contextual.share_generic" = "Einladen";
 
-"global.strings.show" = "Anzeigen";
-"menu.system.switch_profile.title" = "Aktives Profil";
-"menu.system.active_profile.title.none" = "Keine aktiven Profile";
-"menu.system.active_profile.items.customize.title" = "Anpassen...";
-"menu.system.active_profile.messages.missing_credentials" = "Es wurde keine Konto konfiguriert";
-"menu.system.organizer.title" = "Organizer";
-"menu.system.preferences.title" = "Einstellungen";
-"settings.items.donate.caption" = "Spenden";
-"about.items.join_community.caption" = "Community beitreten";
-"about.items.write_review.caption" = "Rezension schreiben";
-// "menu.system.support.translate" = "Offer to translate";
-"about.items.share_twitter.caption" = "Darüber Twittern!";
-"menu.system.share_generic.caption" = "Freund einladen";
 "menu.system.quit.title" = "%@ beenden";
-"menu.system.quit.messages.confirm" = "Wenn das VPN aktiviert wurde, läuft es weiter im Hintergrund. Möchtest du beenden?";
 
 /* MARK: TunnelKit */
 
@@ -317,11 +307,19 @@
 "donate.alerts.purchase.success.message" = "Das bedeutet mir viel und ich hoffe wirklich dass du die App weiterhin benutzt und unterstützt.";
 "donate.alerts.purchase.failure.message" = "Konnte Spende nicht durchführen. %@";
 
+/* MARK: SettingsView */
+
+"settings.title" = "Einstellungen";
+"settings.items.donate.caption" = "Spenden";
+
 /* MARK: AboutView */
 
 "about.title" = "Über";
 "about.sections.web.header" = "Web";
 "about.items.credits.caption" = "Credits";
+"about.items.join_community.caption" = "Community beitreten";
+"about.items.write_review.caption" = "Rezension schreiben";
+"about.items.share_twitter.caption" = "Darüber Twittern!";
 "about.items.website.caption" = "Homepage";
 "about.items.disclaimer.caption" = "Haftungsausschluss";
 "about.items.privacy_policy.caption" = "Datenschutzrichtlinie";

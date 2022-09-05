@@ -46,6 +46,10 @@
 "global.strings.keepalive" = "Поддерживаем";
 "global.strings.advanced" = "Расширенные";
 "global.strings.translations" = "Переводы";
+"global.strings.show" = "Показать";
+"global.strings.connect" = "Подключиться";
+"global.strings.disconnect" = "Отключиться";
+"global.strings.download" = "Загрузить";
 
 "global.messages.email_not_configured" = "E-mail аккаунт не создан.";
 "global.messages.share" = "Passepartout — это удобный в использовании клиент OpenVPN / WireGuard для iOS и macOS с открытым исходным кодом";
@@ -71,21 +75,7 @@
 "menu.contextual.share_twitter" = "Твит";
 "menu.contextual.share_generic" = "Пригласить";
 
-"global.strings.show" = "Показать";
-"menu.system.switch_profile.title" = "Активный профиль";
-"menu.system.active_profile.title.none" = "Нет активных профилей";
-"menu.system.active_profile.items.customize.title" = "Настроить...";
-"menu.system.active_profile.messages.missing_credentials" = "Нет настроенных аккаунтов";
-"menu.system.organizer.title" = "Организатор";
-"menu.system.preferences.title" = "Настройки";
-"settings.items.donate.caption" = "Сделать пожертвование";
-"about.items.join_community.caption" = "Вступить в сообщество";
-"about.items.write_review.caption" = "Написать отзыв";
-// "menu.system.support.translate" = "Offer to translate";
-"about.items.share_twitter.caption" = "Твитнуть о нас!";
-"menu.system.share_generic.caption" = "Пригласить друга";
 "menu.system.quit.title" = "Выйти из %@";
-"menu.system.quit.messages.confirm" = "Если включить VPN, он всё равно будет работать в фоновом режиме. Вы точно хотите выйти?";
 
 /* MARK: TunnelKit */
 
@@ -317,11 +307,19 @@
 "donate.alerts.purchase.success.message" = "Это значит многое для меня, и, я надеюсь, Вы продолжить использовать и рассказывать об этом приложении.";
 "donate.alerts.purchase.failure.message" = "Не получается совершить пожертвование. %@";
 
+/* MARK: SettingsView */
+
+"settings.title" = "Настройки";
+"settings.items.donate.caption" = "Сделать пожертвование";
+
 /* MARK: AboutView */
 
 "about.title" = "О нас";
 "about.sections.web.header" = "Веб";
 "about.items.credits.caption" = "Благодарности";
+"about.items.join_community.caption" = "Вступить в сообщество";
+"about.items.write_review.caption" = "Написать отзыв";
+"about.items.share_twitter.caption" = "Твитнуть о нас!";
 "about.items.website.caption" = "Домашняя страница";
 "about.items.disclaimer.caption" = "Предупреждение";
 "about.items.privacy_policy.caption" = "Политика конфиденциальности";
