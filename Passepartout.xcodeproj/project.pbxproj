@@ -173,6 +173,7 @@
 		0ED89C1727DE0E05008B36D6 /* IntentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */; };
 		0ED89C1C27DE3ABC008B36D6 /* ShortcutsView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */; };
 		0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */; };
+		0EDDEC7D28D0DC140017802E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EDDEC7C28D0DC130017802E /* Launch Screen.storyboard */; };
 		0EDE02C227F61C79000FBE3C /* EditableTextList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE02C127F61C79000FBE3C /* EditableTextList.swift */; };
 		0EE11CD2280D8317003BE431 /* SettingsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE11CD1280D8317003BE431 /* SettingsButton.swift */; };
 		0EE8B7E327FF340F00B68621 /* VPNProtocolType+FileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8B7E227FF340F00B68621 /* VPNProtocolType+FileExtensions.swift */; };
@@ -468,6 +469,7 @@
 		0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentEditView.swift; sourceTree = "<group>"; };
 		0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortcutsView+Add.swift"; sourceTree = "<group>"; };
 		0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentAddView.swift; sourceTree = "<group>"; };
+		0EDDEC7C28D0DC130017802E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0EDE02C127F61C79000FBE3C /* EditableTextList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextList.swift; sourceTree = "<group>"; };
 		0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutOpenVPNTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDE8DC320C86910004C739C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -840,6 +842,7 @@
 				0E6059C927FCC5DE003F4063 /* Providers.xcassets */,
 				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
 				0EDE8DE220C86A13004C739C /* App.entitlements */,
+				0EDDEC7C28D0DC130017802E /* Launch Screen.storyboard */,
 				0E09E35C2834172800BE1BAE /* Credits.rtf */,
 				0E57F64720C83FC7008323CF /* Info.plist */,
 				0E0C072B236087A100155AAC /* InfoPlist.strings */,
@@ -1192,6 +1195,7 @@
 			files = (
 				0E6059CB27FCC5DE003F4063 /* Flags.xcassets in Resources */,
 				0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */,
+				0EDDEC7D28D0DC140017802E /* Launch Screen.storyboard in Resources */,
 				0E6059CC27FCC5DE003F4063 /* Providers.xcassets in Resources */,
 				0E6059CD27FCC5DE003F4063 /* Assets.xcassets in Resources */,
 				0E9E5AEF27B44CF1008C95DA /* Localizable.strings in Resources */,

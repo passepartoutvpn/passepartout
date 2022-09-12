@@ -1,1 +1,1 @@
-Connetti .ovpn & provider VPN
+Per WireGuard ed OpenVPN

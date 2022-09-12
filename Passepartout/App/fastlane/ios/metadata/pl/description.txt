@@ -1,4 +1,4 @@
-Passepartout jest inteligentnym klientem OpenVPN, perfekcyjnie zintegrowanym z platformami systemu iOS. Passepartout to jedyna aplikacja, jakiej potrzebujesz do łączenia przez renomowanych dostawców OpenVPN i swoje prywatne serwery OpenVPN.
+Passepartout jest inteligentnym klientem VPN, perfekcyjnie zintegrowanym z platformami systemu iOS. Passepartout to jedyna aplikacja, jakiej potrzebujesz do łączenia przez renomowanych dostawców VPN i swoje prywatne serwery VPN.
 
 Dzięki funkcji Zaufanych Sieci Passepartout zapewnia wszystko, co najlepsze w korzystaniu z VPN w systemie iOS.
 
@@ -8,14 +8,12 @@ Passepartout jest aplikacją typu open source:  https://github.com/passepartoutv
 
 MOŻESZ W NIEJ KORZYSTAĆ Z USŁUG  WIELU DOSTAWCÓW
 
-
 Passepartout oferuje gotowe konfiguracje najważniejszych dostawców VPN:
 
 - Hide.me
 - Mullvad
 - NordVPN
 - Oeck
-- Private Internet Access
 - ProtonVPN
 - SurfShark
 - TorGuard
@@ -23,25 +21,16 @@ Passepartout oferuje gotowe konfiguracje najważniejszych dostawców VPN:
 - VyprVPN
 - Windscribe
 
-
-
 ŁATWOŚĆ OBSŁUGI
 
 - Niesamowita łatwość użytkowania dzięki natywnej szacie graficznej  i funkcjonalnościom.
 - Obsługa wszystkich profili w jednym miejscu
-- Import plików konfiguracyjnych .openvpn
+- Import plików konfiguracyjnych .ovpn / .conf
 - Optymalne szyfrowanie bez konieczności modyfikowania pliku konfiguracyjnego
-- - Błyskawiczne zastępowanie ustawień sieciowych (domyślna bramka), DNS, proxy, MTU.
+- Błyskawiczne zastępowanie ustawień sieciowych (domyślna bramka), DNS, proxy, MTU.
 
 PRZYJAZNA PRYWATNOŚCI
 
 - Pełna transparentność informacji o serwerach, z którymi się łączysz.
 - Wybór wstępnie zdefiniowanych punktów końcowych, gdy DNS sprawia problemy.
 - Brak usług internetowych, reklam i innych niepożądanych elementów poza samą siecią VPN.
-
-~
-
-Passepartout jest nieoficjalnym klient i nie jest powiązany z OpenVPN Inc.
-
-© 2002-2018 OpenVPN Inc. - OpenVPN zarejestrowanym znakiem towarowym firmy  OpenVPN Inc.
-

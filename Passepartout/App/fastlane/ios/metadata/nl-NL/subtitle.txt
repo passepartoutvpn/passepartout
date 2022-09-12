@@ -1,1 +1,1 @@
-Verbind .ovpn & VPN providers
+Voor WireGuard en OpenVPN

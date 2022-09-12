@@ -1,1 +1,1 @@
-Σύνδεση .ovpn & VPN παρόχους
+Για WireGuard και OpenVPN

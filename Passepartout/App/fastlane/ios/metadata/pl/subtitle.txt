@@ -1,1 +1,1 @@
-Połącz z .ovpn i serwisami VPN
+Do WireGuard oraz OpenVPN

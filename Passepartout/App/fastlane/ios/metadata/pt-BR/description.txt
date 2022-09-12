@@ -1,4 +1,4 @@
-Passepartout é um cliente inteligente de OpenVPN perfeitamente integrado com Apple. Passepartout é o único aplicativo que possibilita serviços populares de OpenVPN ou de sua própria escolha.
+Passepartout é um cliente inteligente de VPN perfeitamente integrado com Apple. Passepartout é o único aplicativo que possibilita serviços populares de VPN ou de sua própria escolha.
 
 Com "Redes confiáveis", Passepartout possibilita uma melhor experiência VPN.
 
@@ -14,7 +14,6 @@ Passepartout oferece configurações para os seguintes provedores de VPN:
 - Mullvad
 - NordVPN
 - Oeck
-- Private Internet Access
 - ProtonVPN
 - SurfShark
 - TorGuard
@@ -26,7 +25,7 @@ FÁCIL DE USAR
 
 - Fácil de usar com seu visual e experiência nativa.
 - Controle seus perfis em um único lugar.
-- Importe arquivos de configuração .ovpn.
+- Importe arquivos de configuração .ovpn / .conf.
 - Use as "Redes confiáveis" para melhor configurar sua conectividade.
 - Habilite criptografia sem melhorar nenhum arquivo de configuração.
 - Substitua configurações de rede em um piscar de olhos (gateway padrão, DNS, proxy, MTU).
@@ -36,9 +35,3 @@ FOCO EM PRIVACIDADE
 - Absoluta transparência em quais servidores você se conecta.
 - Escolha destinos pré-resolvidos quando DNS está problemático.
 - Sem cadastro, propagandas ou qualquer funcionalidade indesejada que não seja VPN por si só.
-
-~
-
-Passepartout não é um cliente oficial e não possui nenhuma afiliação com OpenVPN Inc.
-
-© 2002-2018 OpenVPN Inc. - OpenVPN é um marca registrada de OpenVPN Inc.
