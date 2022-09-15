@@ -71,13 +71,7 @@ extension ProviderServer: Comparable {
     
     // "Default" comes first (nil localizedName)
     public static func <(lhs: Self, rhs: Self) -> Bool {
-        guard let ld = lhs.localizedName else {
-            return true
-        }
-        guard let rd = rhs.localizedName else {
-            return false
-        }
-        guard ld != rd else {
+        guard lhs.localizedName != rhs.localizedName else {
             guard let li = lhs.serverIndex else {
                 return true
             }
@@ -91,6 +85,12 @@ extension ProviderServer: Comparable {
                 return lhs.apiId < rhs.apiId
             }
             return li < ri
+        }
+        guard let ld = lhs.localizedName else {
+            return true
+        }
+        guard let rd = rhs.localizedName else {
+            return false
         }
         return ld < rd
     }
