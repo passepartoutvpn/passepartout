@@ -167,7 +167,7 @@ extension Constants {
         
         static let tunnelLogFormat = "$DHH:mm:ss$d - $M"
         
-        static let tunnelLogMaxBytes = 15000
+        static let tunnelLogMaxBytes = 100000
         
         static let tunnelLogRefreshInterval: TimeInterval = 5.0
     }
