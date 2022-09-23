@@ -7,7 +7,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>3330</string>
+	<string>3332</string>
 	<key>NSPrincipalClass</key>
 	<string>$(PRODUCT_MODULE_NAME).PassepartoutMac</string>
 	<key>com.algoritmico.Passepartout.config</key>
