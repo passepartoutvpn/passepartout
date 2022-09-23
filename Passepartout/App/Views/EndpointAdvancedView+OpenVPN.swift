@@ -35,6 +35,8 @@ extension EndpointAdvancedView {
         
         let isServerPushed: Bool
         
+        private let fallbackConfiguration = OpenVPN.ConfigurationBuilder(withFallbacks: true).build()
+        
         var body: some View {
             List {
                 let cfg = builder.build()
@@ -134,13 +136,13 @@ extension EndpointAdvancedView.OpenVPNView {
         Section {
             themeTextPicker(
                 L10n.Endpoint.Advanced.Openvpn.Items.Cipher.caption,
-                selection: $builder.cipher ?? OpenVPN.Configuration.Fallback.cipher,
+                selection: $builder.cipher ?? fallbackCipher,
                 values: OpenVPN.Cipher.available,
                 description: \.localizedDescription
             )
             themeTextPicker(
                 L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption,
-                selection: $builder.digest ?? OpenVPN.Configuration.Fallback.digest,
+                selection: $builder.digest ?? fallbackDigest,
                 values: OpenVPN.Digest.available,
                 description: \.localizedDescription
             )
@@ -174,13 +176,13 @@ extension EndpointAdvancedView.OpenVPNView {
         Section {
             themeTextPicker(
                 L10n.Endpoint.Advanced.Openvpn.Items.CompressionFraming.caption,
-                selection: $builder.compressionFraming ?? OpenVPN.Configuration.Fallback.compressionFraming,
+                selection: $builder.compressionFraming ?? fallbackCompressionFraming,
                 values: OpenVPN.CompressionFraming.available,
                 description: \.localizedDescription
             )
             themeTextPicker(
                 L10n.Endpoint.Advanced.Openvpn.Items.CompressionAlgorithm.caption,
-                selection: $builder.compressionAlgorithm ?? OpenVPN.Configuration.Fallback.compressionAlgorithm,
+                selection: $builder.compressionAlgorithm ?? fallbackCompressionAlgorithm,
                 values: OpenVPN.CompressionAlgorithm.available,
                 description: \.localizedDescription
             ).disabled(builder.compressionFraming == .disabled)
@@ -317,5 +319,23 @@ extension OpenVPN.Configuration {
             return nil
         }
         return (keepAliveInterval, renegotiatesAfter, randomizeEndpoint)
+    }
+}
+
+private extension EndpointAdvancedView.OpenVPNView {
+    var fallbackCipher: OpenVPN.Cipher {
+        fallbackConfiguration.cipher!
+    }
+    
+    var fallbackDigest: OpenVPN.Digest {
+        fallbackConfiguration.digest!
+    }
+    
+    var fallbackCompressionFraming: OpenVPN.CompressionFraming {
+        fallbackConfiguration.compressionFraming!
+    }
+    
+    var fallbackCompressionAlgorithm: OpenVPN.CompressionAlgorithm {
+        fallbackConfiguration.compressionAlgorithm!
     }
 }
