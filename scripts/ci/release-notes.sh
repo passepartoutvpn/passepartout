@@ -8,11 +8,12 @@ fi
 APP_ROOT="Passepartout/App"
 echo "# App Store"
 echo
-grep $VERSION $APP_ROOT/iOS/CHANGELOG.md | cut -f 2- -d " "
+grep $VERSION CHANGELOG.md | cut -f 2- -d " "
 echo
 echo "## iOS"
 echo
-cat $APP_ROOT/iOS/fastlane/metadata/en-US/release_notes.txt
+cat $APP_ROOT/fastlane/ios/metadata/en-US/release_notes.txt
+echo
 echo "## macOS"
 echo
-cat $APP_ROOT/macOS/fastlane/metadata/en-US/release_notes.txt
+cat $APP_ROOT/fastlane/mac/metadata/en-US/release_notes.txt

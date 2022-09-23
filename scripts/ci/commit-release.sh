@@ -11,7 +11,7 @@ if [[ -z $VERSION ]]; then
 fi
 
 DATE=`date "+%Y-%m-%d"`
-CHANGELOG_GLOB="Passepartout/App/*/CHANGELOG.md"
+CHANGELOG_GLOB="CHANGELOG.md"
 COMMIT_MESSAGE="[ci skip] Set release date"
 TAG_MESSAGE="Release"
 sed -i'' -E "s/^.*Unreleased.*$/## $VERSION ($DATE)/" $CHANGELOG_GLOB
