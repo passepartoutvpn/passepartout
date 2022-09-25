@@ -54,6 +54,9 @@
 "global.messages.email_not_configured" = "Adres e-mail nie jest skonfigurowany.";
 "global.messages.share" = "Passepartout to klient OpenVPN / WireGuard, przyjazny użytkownikowi, open-source, stworzony dla iOS i macOS";
 
+"global.alerts.buttons.remind" = "Przypomnij mi później";
+"global.alerts.buttons.never" = "Nie przypominaj";
+
 "global.placeholders.profile_name" = "Mój profil";
 
 "global.errors.missing_profile" = "Brakujący profil";
@@ -113,8 +116,6 @@
 
 "organizer.alerts.reddit.message" = "Wiedziałeś/łaś, że Passepartout ma swój subreddit? Subskrybuj dla aktualizacji, dyskusji o funkcjonalności, nowych platformach lub o czymkolwiek zechcesz.\n\nTo również świetny sposób na okazanie zainteresowania projektem.";
 "organizer.alerts.reddit.buttons.subscribe" = "Subskrybuj!";
-"organizer.alerts.reddit.buttons.remind" = "Przypomnij mi później";
-"organizer.alerts.reddit.buttons.never" = "Nie przypominaj";
 
 "organizer.alerts.remove_profile.message" = "Na pewno chcesz usunąć profil %@?";
 

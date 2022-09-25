@@ -54,6 +54,9 @@
 "global.messages.email_not_configured" = "Inget e-postkonto är konfigurerat.";
 "global.messages.share" = "Passepartout är en användarvänlig öppen källkod OpenVPN / WireGuard klient för iOS och macOS";
 
+"global.alerts.buttons.remind" = "Påminn mig senare";
+"global.alerts.buttons.never" = "Fråga inte igen";
+
 "global.placeholders.profile_name" = "Min profil";
 
 "global.errors.missing_profile" = "Profil saknas";
@@ -113,8 +116,6 @@
 
 "organizer.alerts.reddit.message" = "Visste du att Passepartout har en subreddit? Prenumerera på uppdateringar eller diskutera problem, funktioner, nya plattformar eller vad du vill. \n\nDet är också ett bra sätt att visa dig bryr dig om detta projekt.";
 "organizer.alerts.reddit.buttons.subscribe" = "Prenumerera nu!";
-"organizer.alerts.reddit.buttons.remind" = "Påminn mig senare";
-"organizer.alerts.reddit.buttons.never" = "Fråga inte igen";
 
 "organizer.alerts.remove_profile.message" = "Är det säkert att du vill ta bort profilen %@?";
 

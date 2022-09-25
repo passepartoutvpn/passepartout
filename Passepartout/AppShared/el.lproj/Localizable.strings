@@ -54,6 +54,9 @@
 "global.messages.email_not_configured" = "Δεν έχει ρυθμιστεί λογαριασμός ηλεκτρονικού ταχυδρομείου.";
 "global.messages.share" = "Το Passepartout είναι φιλικό προς το χρήστη, ανοιχτού κώδικα OpenVPN / WireGuard πρόγραμμα για iOS και macOS";
 
+"global.alerts.buttons.remind" = "Υπενθύμιση Αργότερα";
+"global.alerts.buttons.never" = "Μη με ρωτήσεις ξανά";
+
 "global.placeholders.profile_name" = "Το προφίλ μου";
 
 "global.errors.missing_profile" = "Λείπει προφίλ";
@@ -113,8 +116,6 @@
 
 "organizer.alerts.reddit.message" = "Γνωρίζατε ότι το Passepartout έχει subreddit? Εγγραφείτε για ενημερώσεις ή για να συζητήσετε προβλήματα της εφαρμογές, νέες δυνατότητες και άλλα.\n\nΕίναι επίσης ένας ωραίος τρόπος να δείξετε ότι ενδιαφέρεστε για τη προσπάθεια αυτή.";
 "organizer.alerts.reddit.buttons.subscribe" = "Εγγραφή τώρα!";
-"organizer.alerts.reddit.buttons.remind" = "Υπενθύμιση Αργότερα";
-"organizer.alerts.reddit.buttons.never" = "Μη με ρωτήσεις ξανά";
 
 "organizer.alerts.remove_profile.message" = "Είστε βέβαιοι ότι θέλετε να διαγράψετε το προφίλ %@;";
 

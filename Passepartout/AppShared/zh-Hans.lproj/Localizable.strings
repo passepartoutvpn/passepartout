@@ -54,6 +54,9 @@
 "global.messages.email_not_configured" = "未配置e-mail账户。";
 "global.messages.share" = "Passepartout是适用于iOS和macOS操作系统的OpenVPN/WireGuard开源客户端，易于使用";
 
+"global.alerts.buttons.remind" = "稍后提醒我";
+"global.alerts.buttons.never" = "不要再问";
+
 "global.placeholders.profile_name" = "我的配置";
 
 "global.errors.missing_profile" = "缺少配置";
@@ -113,8 +116,6 @@
 
 "organizer.alerts.reddit.message" = "你知道Passepartout有一个subreddit吗？可以在上面讨论更新、问题、功能、新的平台等n任何你想要的。\n\n这同样是表达你对此项目关注的地方。";
 "organizer.alerts.reddit.buttons.subscribe" = "立即订阅!";
-"organizer.alerts.reddit.buttons.remind" = "稍后提醒我";
-"organizer.alerts.reddit.buttons.never" = "不要再问";
 
 "organizer.alerts.remove_profile.message" = "确定要删除配置%@吗？";
 

@@ -129,7 +129,7 @@ extension OrganizerView {
                     didHandleSubreddit = true
                     URL.openURL(redditURL)
                 },
-                secondaryButton: .cancel(Text(L10n.Organizer.Alerts.Reddit.Buttons.never)) {
+                secondaryButton: .cancel(Text(L10n.Global.Alerts.Buttons.never)) {
                     didHandleSubreddit = true
                 }
             )
