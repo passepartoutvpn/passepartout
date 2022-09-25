@@ -1,5 +1,5 @@
 #!/bin/sh
-PATTERN="Passepartout/App/iOS/fastlane/metadata/*/description.txt"
+PATTERN="Passepartout/App/fastlane/ios/metadata/*/description.txt"
 AFTER=$1
 NAME=$2
 DELIMITER="†"
