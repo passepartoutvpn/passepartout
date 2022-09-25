@@ -5,10 +5,18 @@ if [[ $CURRENT_BRANCH != "master" ]]; then
     exit 1
 fi
 
+# pull latest API
+API_PATH="PassepartoutLibrary/Sources/PassepartoutServices/API"
+if ! git -C $API_PATH pull origin master; then
+    echo "Could not pull API"
+    exit 1
+fi
+git add $API_PATH
+
 # set build number
-BASE_BUILD_NUMBER=`cat .beta-base`
+BASE_BUILD_FILE=".beta-base"
 BUILD_FILE=".beta-build"
-BUILD=$((BASE_BUILD_NUMBER + `git rev-list HEAD --count` + 1))
+BUILD=$((`cat $BASE_BUILD_FILE` + `git rev-list HEAD --count` + 1))
 ci/set-build.sh $BUILD
 echo $BUILD >$BUILD_FILE
 
@@ -18,13 +26,8 @@ ci/update-release-notes.sh ios &&
     ci/copy-release-notes.sh ios &&
     ci/copy-release-notes.sh mac
 
-# pull latest API
-API_PATH="PassepartoutLibrary/Sources/PassepartoutServices/API"
-git -C $API_PATH pull origin master
-git add $API_PATH
-
 # add build number
-git add $BUILD_FILE
+git add $BASE_BUILD_FILE $BUILD_FILE
 git add Passepartout.xcodeproj
 git add *.plist
 
