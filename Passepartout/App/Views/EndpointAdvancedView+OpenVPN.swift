@@ -43,6 +43,8 @@ extension EndpointAdvancedView {
                 if isServerPushed {
                     ipv4Section
                     ipv6Section
+                } else {
+                    pullSection(configuration: cfg)
                 }
                 dnsSection(configuration: cfg)
                 proxySection(configuration: cfg)
@@ -107,6 +109,18 @@ extension EndpointAdvancedView.OpenVPNView {
                 }
             } header: {
                 Text(Unlocalized.Network.ipv6)
+            }
+        }
+    }
+
+    private func pullSection(configuration: OpenVPN.Configuration) -> some View {
+        configuration.pullMask.map { mask in
+            Section {
+                ForEach(mask, id: \.self) {
+                    Text($0.localizedDescription)
+                }
+            } header: {
+                Text(L10n.Global.Strings.pull)
             }
         }
     }

@@ -82,6 +82,7 @@ extension OpenVPN.ConfigurationBuilder {
             break
         
         case .manual:
+            appendNoPullMask(.routes)
             var policies: [OpenVPN.RoutingPolicy] = []
             if settings.isDefaultIPv4 {
                 policies.append(.IPv4)
@@ -99,6 +100,7 @@ extension OpenVPN.ConfigurationBuilder {
             break
 
         case .manual:
+            appendNoPullMask(.dns)
             let isDNSEnabled = settings.configurationType != .disabled
             self.isDNSEnabled = isDNSEnabled
 
@@ -131,6 +133,7 @@ extension OpenVPN.ConfigurationBuilder {
             break
 
         case .manual:
+            appendNoPullMask(.proxy)
             isProxyEnabled = settings.configurationType != .disabled
 
             switch settings.configurationType {
@@ -160,5 +163,12 @@ extension OpenVPN.ConfigurationBuilder {
         case .manual:
             mtu = settings.mtuBytes
         }
+    }
+    
+    private mutating func appendNoPullMask(_ mask: OpenVPN.PullMask) {
+        if noPullMask == nil {
+            noPullMask = []
+        }
+        noPullMask?.append(mask)
     }
 }
