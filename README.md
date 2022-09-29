@@ -29,8 +29,6 @@ With its native look & feel, Passepartout focuses on ease of use. It does so by 
 
 Not to mention iCloud support, which makes your VPN profiles available on all your devices without any additional effort!
 
-[<img src="res/ios/snap-profile.png" width="300">](res/ios/snap-profile.png)
-
 ### Trusted networks
 
 Trust Wi-Fi, cellular (iOS) or wired (macOS) networks to fine-grain your connectivity. You can then choose to retain a VPN connection when entering a trusted network, or prevent it completely.
