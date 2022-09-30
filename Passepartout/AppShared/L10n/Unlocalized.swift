@@ -161,10 +161,6 @@ enum Unlocalized {
             "GPLv2",
             URL(string: "https://www.gnu.org/licenses/gpl-2.0.txt")!
         ), (
-            "MBProgressHUD",
-            "MIT",
-            URL(string: "https://raw.githubusercontent.com/jdg/MBProgressHUD/master/LICENSE")!
-        ), (
             "OpenSSL",
             "OpenSSL",
             URL(string: "https://raw.githubusercontent.com/openssl/openssl/master/LICENSE.txt")!
@@ -172,10 +168,6 @@ enum Unlocalized {
             "PIATunnel",
             "MIT",
             URL(string: "https://raw.githubusercontent.com/pia-foss/tunnel-apple/master/LICENSE")!
-        ), (
-            "SSZipArchive",
-            "MIT",
-            URL(string: "https://raw.githubusercontent.com/samsoffes/ssziparchive/master/LICENSE")!
         ), (
             "SwiftGen",
             "MIT",

@@ -140,9 +140,7 @@ The country flags are taken from: <https://github.com/lipis/flag-icon-css/>
 
 - Kvitto - Copyright (c) 2015 Oliver Drobnik
 - lzo - Copyright (c) 1996-2017 Markus F.X.J. Oberhumer
-- MBProgressHUD - Copyright (c) 2009-2016 Matej Bukovinski
 - PIATunnel - Copyright (c) 2018-Present Private Internet Access
-- SSZipArchive - Copyright (c) 2010-2012 Sam Soffes
 - SwiftGen - Copyright (c) 2018 SwiftGen
 - SwiftyBeaver - Copyright (c) 2015 Sebastian Kreutzberger
 
