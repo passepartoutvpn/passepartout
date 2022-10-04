@@ -38,7 +38,7 @@ extension DebugLog {
         #if os(iOS)
         let device: UIDevice = .current
         osVersion = "\(device.systemName) \(device.systemVersion)"
-        deviceType = "\(device.model) (\(device.userInterfaceIdiom))"
+        deviceType = "\(device.model) (\(device.userInterfaceIdiom.debugDescription))"
         #else
         let os = ProcessInfo().operatingSystemVersion
         osVersion = "macOS \(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
@@ -65,5 +65,23 @@ extension DebugLog {
             return Data()
         }
         return data
+    }
+}
+
+private extension UIUserInterfaceIdiom {
+    var debugDescription: String {
+        switch self {
+        case .phone:
+            return "Phone"
+            
+        case .pad:
+            return "Pad"
+            
+        case .mac:
+            return "Mac"
+            
+        default:
+            return "Other"
+        }
     }
 }
