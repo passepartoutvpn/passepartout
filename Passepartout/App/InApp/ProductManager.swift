@@ -199,7 +199,10 @@ class ProductManager: NSObject, ObservableObject {
     }
 
     func isEligible(forProvider providerName: ProviderName) -> Bool {
-        isEligible(forFeature: providerName.product)
+        guard providerName != .oeck else {
+            return true
+        }
+        return isEligible(forFeature: providerName.product)
     }
 
     func isEligibleForFeedback() -> Bool {

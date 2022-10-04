@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Retain whitespaces in imported file names.
 
+### Fixed
+
+- Oeck provider is available again to free users.
+
 ## 2.0.0 (2022-10-02)
 
 ### Added
