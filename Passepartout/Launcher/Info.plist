@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.0</string>
+	<string>2.0.1</string>
 	<key>CFBundleVersion</key>
-	<string>3340</string>
+	<string>3351</string>
 	<key>LSBackgroundOnly</key>
 	<true/>
 	<key>CFBundleIdentifier</key>

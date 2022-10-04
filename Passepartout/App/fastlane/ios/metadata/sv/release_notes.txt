@@ -1,12 +1,8 @@
-### Added
-
-- WireGuard support.
-- iCloud support.
-
 ### Changed
 
-- App completely rewritten in SwiftUI.
+- Retain whitespaces in imported file names.
 
 ### Fixed
 
-- Files occasionally not selectable in browser.
+- Oeck provider is available again to free users.
+
