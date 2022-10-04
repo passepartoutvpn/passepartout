@@ -1,6 +1,3 @@
-[submodule "Submodules/fastlane-ci-templates"]
-	path = Submodules/fastlane-ci-templates
-	url = https://github.com/keeshux/fastlane-ci-templates
 [submodule "PassepartoutLibrary/Sources/PassepartoutServices/API"]
 	path = PassepartoutLibrary/Sources/PassepartoutServices/API
 	url = https://github.com/passepartoutvpn/api

@@ -13,4 +13,4 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-import("../Submodules/fastlane-ci-templates/fastlane/Fastfile.include")
+import("Fastfile.include")

@@ -1,0 +1,111 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+## Project metadata
+
+desc "Get build number (*nix)"
+lane :get_build_number_unix do
+    num = get_info_plist_value(
+        path: "#{ENV["INFO_PLIST_ROOT"]}/Info.plist",
+        key: "CFBundleVersion"
+    ).to_i
+    UI.message("Build: #{num}")
+    num
+end
+
+desc "Get version number (*nix)"
+lane :get_version_number_unix do
+    num = get_info_plist_value(
+        path: "#{ENV["INFO_PLIST_ROOT"]}/Info.plist",
+        key: "CFBundleShortVersionString"
+    )
+    UI.message("Version: #{num}")
+    num
+end
+
+desc "Get commit-based build number"
+lane :get_commits_build_number do
+    #num = get_build_number + number_of_commits
+    num = get_info_plist_value(
+        path: "#{ENV["INFO_PLIST_ROOT"]}/Info.plist",
+        key: "CFBundleVersion"
+    ).to_i
+    num += number_of_commits
+    UI.message("Build: #{num}")
+    num
+end
+
+## Packaging
+
+desc "Test and build an app"
+lane :test_and_build_app do |options|
+    if options.fetch(:ensure_clean, true)
+        ensure_git_status_clean
+    end
+    if options[:cocoapods]
+        cocoapods
+    end
+    match
+    if options.fetch(:test, true)
+        scan
+    end
+    if options.fetch(:build, true)
+        gym
+    end
+    if options.fetch(:ensure_clean, true)
+        reset_git_repo(
+            skip_clean: true
+        )
+    end
+end
+
+## Distribution
+
+desc "Upload a build to the App Store"
+lane :deliver_upload do
+    deliver(
+        skip_binary_upload: false,
+        skip_metadata: true,
+        skip_screenshots: true
+    )
+end
+
+desc "Submit a build to App Review"
+lane :deliver_review do |options|
+    deliver(
+        submit_for_review: true,
+        submission_information: options,
+        automatic_release: false,
+        skip_binary_upload: true,
+        skip_metadata: false,
+        skip_screenshots: true
+    )
+end
+
+desc "Update App Store metadata"
+lane :deliver_metadata do
+    deliver(
+        skip_metadata: false,
+        skip_screenshots: true
+    )
+end
+
+desc "Update App Store screenshots"
+lane :deliver_screenshots do
+    deliver(
+        skip_metadata: true,
+        skip_screenshots: false
+    )
+end
