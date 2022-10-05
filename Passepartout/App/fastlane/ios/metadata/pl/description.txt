@@ -14,6 +14,7 @@ Passepartout oferuje gotowe konfiguracje najważniejszych dostawców VPN:
 - Mullvad
 - NordVPN
 - Oeck
+- PIA
 - ProtonVPN
 - SurfShark
 - TorGuard

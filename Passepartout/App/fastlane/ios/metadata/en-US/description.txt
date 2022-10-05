@@ -14,6 +14,7 @@ Passepartout offers presets for major VPN providers:
 - Mullvad
 - NordVPN
 - Oeck
+- PIA
 - ProtonVPN
 - SurfShark
 - TorGuard

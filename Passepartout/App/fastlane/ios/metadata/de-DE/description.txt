@@ -14,6 +14,7 @@ Passepartout bietet Voreinstellungen für alle gängigen VPN-Anbieter:
 - Mullvad
 - NordVPN
 - Oeck
+- PIA
 - ProtonVPN
 - SurfShark
 - TorGuard

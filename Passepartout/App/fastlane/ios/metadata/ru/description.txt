@@ -14,6 +14,7 @@ Passepartout предлагает предустановленные настр�
 - Mullvad
 - NordVPN
 - Oeck
+- PIA
 - ProtonVPN
 - SurfShark
 - TorGuard
