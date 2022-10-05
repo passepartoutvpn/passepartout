@@ -1,9 +1,0 @@
-.DS_Store
-*.swp
-*.o
-*.pbxuser
-*.xcworkspace/xcuserdata
-*.xcodeproj/project.xcworkspace
-*.xcodeproj/xcuserdata
-Pods
-.env.secret*
