@@ -1012,7 +1012,6 @@
 				0E41BDA828671339006346B4 /* Embed Launcher */,
 				0E3152B7223F9EF500F61841 /* Embed Plugins */,
 				0EB2B14B2733FB6F007705AB /* Embed App Extensions */,
-				0EBEF138274E4C7F00EAC689 /* Drop Extra Frameworks In Extensions */,
 			);
 			buildRules = (
 			);
@@ -1248,24 +1247,6 @@
 			shellPath = /bin/sh;
 			shellScript = "Passepartout/App/Scripts/copy_coredata_codegen.sh\n";
 			showEnvVarsInLog = 0;
-		};
-		0EBEF138274E4C7F00EAC689 /* Drop Extra Frameworks In Extensions */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Drop Extra Frameworks In Extensions";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm -rf ${BUILT_PRODUCTS_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
