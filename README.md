@@ -156,6 +156,16 @@ The country flags are taken from: <https://github.com/lipis/flag-icon-css/>
 
 This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. ([https://www.openssl.org/][dep-openssl])
 
+### Community
+
+A _huge_ credit goes to:
+
+- My tiny group of 3 private beta testers
+- The 3600+ public testers using the beta on a daily basis
+- The continued support and feedback from the [Passepartout community on Reddit][about-reddit]
+- The overall patience of users affected by my bugs that actively collaborate in resolving them
+- All those who contributed to the amazingly high rating on the App Store
+
 ## Translations
 
 - Chinese (Simplified): OnlyThen - [@OnlyThen](https://github.com/OnlyThen)
