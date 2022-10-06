@@ -10,10 +10,4 @@ echo "# App Store"
 echo
 grep $VERSION CHANGELOG.md | cut -f 2- -d " "
 echo
-echo "## iOS"
-echo
 cat $APP_ROOT/fastlane/ios/metadata/en-US/release_notes.txt
-echo
-echo "## macOS"
-echo
-cat $APP_ROOT/fastlane/mac/metadata/en-US/release_notes.txt
