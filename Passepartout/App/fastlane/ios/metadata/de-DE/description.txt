@@ -11,6 +11,7 @@ BENUTZBAR MIT VIELEN ANBIETERN
 Passepartout bietet Voreinstellungen für alle gängigen VPN-Anbieter:
 
 - Hide.me
+- IVPN
 - Mullvad
 - NordVPN
 - Oeck

@@ -11,6 +11,7 @@ ANVÄNDNING MED FLERA LEVERANTÖRER
 Passepartout erbjuder förinställningar för större VPN-leverantörer:
 
 - Hide.me
+- IVPN
 - Mullvad
 - NordVPN
 - Oeck

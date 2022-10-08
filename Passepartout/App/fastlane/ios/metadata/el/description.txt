@@ -11,6 +11,7 @@ To Passepartout βασίζεται σε ανοιχτό κώδικα: https://git
 Το Passepartout προσφέρει προκαθορισμένες ρυθμίσεις για βασικούς VPN παρόχους:
 
 - Hide.me
+- IVPN
 - Mullvad
 - NordVPN
 - Oeck

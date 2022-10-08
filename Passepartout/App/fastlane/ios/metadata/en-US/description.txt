@@ -11,6 +11,7 @@ USE WITH MULTIPLE PROVIDERS
 Passepartout offers presets for major VPN providers:
 
 - Hide.me
+- IVPN
 - Mullvad
 - NordVPN
 - Oeck

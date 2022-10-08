@@ -11,6 +11,7 @@ MOŻESZ W NIEJ KORZYSTAĆ Z USŁUG  WIELU DOSTAWCÓW
 Passepartout oferuje gotowe konfiguracje najważniejszych dostawców VPN:
 
 - Hide.me
+- IVPN
 - Mullvad
 - NordVPN
 - Oeck

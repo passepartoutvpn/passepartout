@@ -11,6 +11,7 @@ USALO CON VARI PROVIDER
 Passepartout offre profili per i maggiori provider VPN:
 
 - Hide.me
+- IVPN
 - Mullvad
 - NordVPN
 - Oeck

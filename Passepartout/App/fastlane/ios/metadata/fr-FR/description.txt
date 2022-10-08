@@ -11,6 +11,7 @@ UTILISEZ AVEC PLUSIEURS FOURNISSEURS
 Passepartout offre des réglages pré-conçu avec des fournisseurs VPN majeurs :
 
 - Hide.me
+- IVPN
 - Mullvad
 - NordVPN
 - Oeck
