@@ -138,7 +138,7 @@ extension ProfileView {
         }
 
         private func uninstallVPN() {
-            Task {
+            Task { @MainActor in
                 await vpnManager.uninstall()
             }
         }

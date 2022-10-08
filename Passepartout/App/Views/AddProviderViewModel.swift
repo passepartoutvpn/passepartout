@@ -27,8 +27,6 @@ import Foundation
 import PassepartoutLibrary
 
 extension AddProviderView {
-
-    @MainActor
     class ViewModel: ObservableObject {
         enum PendingOperation {
             case index
@@ -75,18 +73,16 @@ extension AddProviderView {
                 metadata.name,
                 vpnProtocol: selectedVPNProtocol
             ) else {
-                Task {
-                    await selectProviderAfterFetchingInfrastructure(metadata, providerManager)
-                }
+                selectProviderAfterFetchingInfrastructure(metadata, providerManager)
                 return
             }
             doSelectProvider(metadata, server)
         }
 
-        private func selectProviderAfterFetchingInfrastructure(_ metadata: ProviderMetadata, _ providerManager: ProviderManager) async {
+        private func selectProviderAfterFetchingInfrastructure(_ metadata: ProviderMetadata, _ providerManager: ProviderManager) {
             errorMessage = nil
             pendingOperation = .provider(metadata.name)
-            Task {
+            Task { @MainActor in
                 do {
                     try await providerManager.fetchProviderPublisher(
                         withName: metadata.name,
@@ -117,7 +113,7 @@ extension AddProviderView {
         func updateIndex(_ providerManager: ProviderManager) {
             errorMessage = nil
             pendingOperation = .index
-            Task {
+            Task { @MainActor in
                 do {
                     try await providerManager.fetchProvidersIndexPublisher(
                         priority: .remoteThenBundle

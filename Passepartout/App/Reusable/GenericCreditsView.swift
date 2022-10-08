@@ -159,7 +159,7 @@ extension GenericCreditsView {
             guard content == nil else {
                 return
             }
-            Task {
+            Task { @MainActor in
                 withAnimation {
                     do {
                         content = try String(contentsOf: url)

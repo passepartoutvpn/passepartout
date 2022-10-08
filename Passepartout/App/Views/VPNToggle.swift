@@ -77,11 +77,10 @@ struct VPNToggle: View {
     }
     
     private func enableVPN() {
-        Task {
+        Task { @MainActor in
             canToggle = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(rateLimit)) {
-                canToggle = true
-            }
+            await Task.maybeWait(forMilliseconds: rateLimit)
+            canToggle = true
             do {
                 let profile = try await vpnManager.connect(with: profileId)
                 donateIntents(withProfile: profile)
@@ -93,7 +92,7 @@ struct VPNToggle: View {
     }
     
     private func disableVPN() {
-        Task {
+        Task { @MainActor in
             canToggle = false
             await vpnManager.disable()
             canToggle = true

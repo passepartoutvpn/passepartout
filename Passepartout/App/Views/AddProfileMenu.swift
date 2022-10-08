@@ -58,9 +58,7 @@ struct AddProfileMenu: View {
             } label: {
                 Label(L10n.Global.Strings.provider, systemImage: themeProviderImage)
             }
-            Button {
-                presentHostFileImporter()
-            } label: {
+            Button(action: presentHostFileImporter) {
                 Label(L10n.Menu.Contextual.AddProfile.fromFiles, systemImage: themeHostFilesImage)
             }
 //                Button {
@@ -146,7 +144,7 @@ extension AddProfileMenu {
         //
         // https://stackoverflow.com/questions/66965471/swiftui-fileimporter-modifier-not-updating-binding-when-dismissed-by-tapping
         isHostFileImporterPresented = false
-        Task {
+        Task { @MainActor in
             await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
             isHostFileImporterPresented = true
         }

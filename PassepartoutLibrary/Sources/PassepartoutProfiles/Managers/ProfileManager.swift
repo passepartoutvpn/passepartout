@@ -292,10 +292,8 @@ extension ProfileManager {
             currentProfile.isLoading = true
             Task {
                 try await makeProfileReady(profile)
-                await MainActor.run {
-                    currentProfile.value = profile
-                    currentProfile.isLoading = false
-                }
+                currentProfile.value = profile
+                currentProfile.isLoading = false
             }
         }
     }
