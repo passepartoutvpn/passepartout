@@ -68,6 +68,7 @@ extension DebugLog {
     }
 }
 
+#if canImport(UIKit)
 private extension UIUserInterfaceIdiom {
     var debugDescription: String {
         switch self {
@@ -85,3 +86,4 @@ private extension UIUserInterfaceIdiom {
         }
     }
 }
+#endif
