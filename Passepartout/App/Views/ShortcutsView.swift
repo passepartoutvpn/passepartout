@@ -43,7 +43,7 @@ struct ShortcutsView: View {
         }
     }
 
-    @ObservedObject private var intentsManager: IntentsManager
+    @StateObject private var intentsManager = IntentsManager()
     
     @Environment(\.presentationMode) private var presentationMode
     
@@ -56,7 +56,6 @@ struct ShortcutsView: View {
     @State private var pendingShortcut: INShortcut?
     
     init(target: Profile) {
-        intentsManager = .shared
         self.target = target
     }
     
@@ -69,11 +68,7 @@ struct ShortcutsView: View {
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.sheet(item: $modalType, content: presentedModal)
-
-        // reloading
-        .onAppear {
-            intentsManager.reloadShortcuts()
-        }.themeAnimation(on: intentsManager.isReloadingShortcuts)
+        .themeAnimation(on: intentsManager.isReloadingShortcuts)
         
         // IntentsUI
         .onReceive(intentsManager.shouldDismissIntentView) { _ in

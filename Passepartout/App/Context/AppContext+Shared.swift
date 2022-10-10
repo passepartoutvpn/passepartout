@@ -32,11 +32,3 @@ extension AppContext {
 extension ProductManager {
     static let shared = AppContext.shared.productManager
 }
-
-extension IntentsManager {
-    static let shared = AppContext.shared.intentsManager
-}
-
-extension Reviewer {
-    static let shared = AppContext.shared.reviewer
-}

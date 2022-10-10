@@ -34,9 +34,10 @@ extension OnDemandView {
         
         var body: some View {
             EditableTextList(elements: allSSIDs, allowsDuplicates: false, mapping: mapElements) { text in
-                reader.requestCurrentSSID {
-                    if !withSSIDs.keys.contains($0) {
-                        text.wrappedValue = $0
+                Task {
+                    let ssid = try await reader.requestCurrentSSID()
+                    if !withSSIDs.keys.contains(ssid) {
+                        text.wrappedValue = ssid
                     }
                 }
             } textField: {

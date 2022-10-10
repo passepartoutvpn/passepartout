@@ -30,11 +30,9 @@ import PassepartoutLibrary
 class AppContext {
     private let logManager: LogManager
     
-    let productManager: ProductManager
+    private let reviewer: Reviewer
     
-    let intentsManager: IntentsManager
-
-    let reviewer: Reviewer
+    let productManager: ProductManager
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -45,32 +43,33 @@ class AppContext {
         logManager.configureLogging()
         pp_log.info("Logging to: \(logManager.logFile!)")
         
+        reviewer = Reviewer()
+        reviewer.eventCountBeforeRating = Constants.Rating.eventCount
+        
         productManager = ProductManager(
             appType: Constants.InApp.appType,
             buildProducts: Constants.InApp.buildProducts
         )
-        intentsManager = IntentsManager()
-        reviewer = Reviewer()
-        reviewer.eventCountBeforeRating = Constants.Rating.eventCount
-        
+
         // post
         
         configureObjects(coreContext: coreContext)
     }
     
     private func configureObjects(coreContext: CoreContext) {
+        coreContext.vpnManager.isOnDemandRulesSupported = {
+            self.isEligibleForOnDemandRules()
+        }
+
         coreContext.vpnManager.currentState.$vpnStatus
             .removeDuplicates()
+            .receive(on: DispatchQueue.main)
             .sink {
                 if $0 == .connected {
                     pp_log.info("VPN successful connection, report to Reviewer")
                     self.reviewer.reportEvent()
                 }
         }.store(in: &cancellables)
-
-        coreContext.vpnManager.isOnDemandRulesSupported = {
-            self.isEligibleForOnDemandRules()
-        }
     }
     
     // eligibility: ignore network settings if ineligible
