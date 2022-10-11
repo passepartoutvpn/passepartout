@@ -32,7 +32,7 @@ import TunnelKitOpenVPNCore
 import PassepartoutCore
 import PassepartoutUtils
 
-public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
+public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where VPNType.Configuration == NetworkExtensionConfiguration, VPNType.Extra == NetworkExtensionExtra {
     private struct AtomicState: Equatable {
         let isEnabled: Bool
         
@@ -44,7 +44,7 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
         }
     }
     
-    private static let reconnectionSeconds = 2
+    private let reconnectionSeconds = 2
 
     private let appGroup: String
     
@@ -52,7 +52,7 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
     
     private let defaults: UserDefaults
 
-    private let vpn: NetworkExtensionVPN
+    private let vpn: VPNType
     
     private let dataCountInterval: TimeInterval
     
@@ -71,14 +71,19 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
     private var currentBundleIdentifier: String?
 
     @MainActor
-    public init(appGroup: String, tunnelBundleIdentifier: @escaping (VPNProtocolType) -> String, dataCountInterval: TimeInterval = 3.0) {
+    public init(
+        appGroup: String,
+        tunnelBundleIdentifier: @escaping (VPNProtocolType) -> String,
+        vpn: VPNType,
+        dataCountInterval: TimeInterval = 3.0
+    ) {
         self.appGroup = appGroup
         self.tunnelBundleIdentifier = tunnelBundleIdentifier
         guard let defaults = UserDefaults(suiteName: appGroup) else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
         self.defaults = defaults
-        vpn = NetworkExtensionVPN()
+        self.vpn = vpn
         self.dataCountInterval = dataCountInterval
 
         registerNotification(withName: VPNNotification.didReinstall) {
@@ -151,7 +156,7 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
                 bundleIdentifier,
                 configuration: configuration.neConfiguration,
                 extra: configuration.neExtra,
-                after: .seconds(Self.reconnectionSeconds)
+                after: .seconds(reconnectionSeconds)
             )
         } catch {
             pp_log.error("Unable to connect: \(error)")
@@ -160,7 +165,7 @@ public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
     
     public func reconnect() async {
         try? await vpn.reconnect(
-            after: .seconds(Self.reconnectionSeconds)
+            after: .seconds(reconnectionSeconds)
         )
     }
     

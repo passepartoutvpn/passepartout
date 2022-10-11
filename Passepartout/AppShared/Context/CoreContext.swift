@@ -90,13 +90,15 @@ class CoreContext {
         )
 
         #if targetEnvironment(simulator)
-        let strategy = MockVPNManagerStrategy()
+        let vpn = MockVPN()
         #else
+        let vpn = NetworkExtensionVPN()
+        #endif
         let strategy = TunnelKitVPNManagerStrategy(
             appGroup: Constants.App.appGroupId,
-            tunnelBundleIdentifier: Constants.App.tunnelBundleId
+            tunnelBundleIdentifier: Constants.App.tunnelBundleId,
+            vpn: vpn
         )
-        #endif
         vpnManager = VPNManager(
             appGroup: Constants.App.appGroupId,
             store: store,
