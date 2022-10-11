@@ -38,7 +38,6 @@ class ProfileRepository: Repository {
     func fetchedHeaders() -> FetchedValueHolder<[UUID: Profile.Header]> {
         let request: NSFetchRequest<NSFetchRequestResult> = CDProfile.fetchRequest()
         request.sortDescriptors = [
-            .init(keyPath: \CDProfile.uuid, ascending: true),
             .init(keyPath: \CDProfile.lastUpdate, ascending: true)
         ]
         request.propertiesToFetch = [
@@ -68,7 +67,6 @@ class ProfileRepository: Repository {
     func profiles() -> [Profile] {
         let request = CDProfile.fetchRequest()
         request.sortDescriptors = [
-            .init(keyPath: \CDProfile.uuid, ascending: true),
             .init(keyPath: \CDProfile.lastUpdate, ascending: true)
         ]
         do {
