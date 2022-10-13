@@ -32,6 +32,7 @@ import PassepartoutProfiles
 import PassepartoutProviders
 import PassepartoutUtils
 
+@MainActor
 public final class VPNManager: ObservableObject {
 
     // MARK: Initialization

@@ -47,5 +47,7 @@ extension VPNManager {
 }
 
 extension ObservableVPNState {
+
+    @MainActor
     static let shared = CoreContext.shared.vpnManager.currentState
 }

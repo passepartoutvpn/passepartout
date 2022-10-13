@@ -30,6 +30,7 @@ import PassepartoutCore
 import PassepartoutUtils
 import PassepartoutProviders
 
+@MainActor
 public final class ProfileManager: ObservableObject {
     public typealias ProfileEx = (profile: Profile, isReady: Bool)
 

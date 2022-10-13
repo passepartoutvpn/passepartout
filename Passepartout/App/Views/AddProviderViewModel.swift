@@ -149,6 +149,7 @@ extension AddProviderView.NameView {
             profileName = metadata.fullName
         }
 
+        @MainActor
         mutating func addProfile(
             _ profile: Profile,
             to profileManager: ProfileManager,
