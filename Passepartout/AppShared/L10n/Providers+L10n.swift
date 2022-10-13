@@ -98,7 +98,11 @@ extension ProviderServer {
         localizedShortDescription.map {
             comps.append($0)
         }
-        return comps.joined(separator: ", ")
+        let desc = comps.joined(separator: ", ")
+        guard !categoryName.isEmpty else {
+            return desc
+        }
+        return "\(categoryName.uppercased()): \(desc)"
     }
 }
 
