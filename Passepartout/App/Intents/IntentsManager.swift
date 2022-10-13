@@ -27,6 +27,7 @@ import Foundation
 import Intents
 import IntentsUI
 import Combine
+import PassepartoutLibrary
 
 @MainActor
 class IntentsManager: NSObject, ObservableObject {
@@ -54,7 +55,7 @@ class IntentsManager: NSObject, ObservableObject {
             }
             isReloadingShortcuts = false
         } catch {
-            assertionFailure("Unable to fetch existing shortcuts: \(error)")
+            pp_log.error("Unable to fetch existing shortcuts: \(error)")
             isReloadingShortcuts = false
         }
     }

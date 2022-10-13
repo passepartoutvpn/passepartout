@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 extension Constants.App {
     static func tunnelBundleId(_ vpnProtocol: VPNProtocolType) -> String {
