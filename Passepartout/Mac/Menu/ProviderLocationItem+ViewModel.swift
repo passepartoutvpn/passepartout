@@ -26,6 +26,8 @@
 import Foundation
 
 extension ProviderLocationItem {
+
+    @MainActor
     class ViewModel {
         private let profile: LightProfile
 
@@ -47,7 +49,6 @@ extension ProviderLocationItem {
             location.servers.count == 1
         }
         
-        @MainActor
         @objc func connectTo() {
             guard isOnlyServer else {
                 fatalError("Connecting to a location with multiple servers?")
