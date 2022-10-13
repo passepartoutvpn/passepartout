@@ -47,6 +47,7 @@ extension ProviderLocationItem {
             location.servers.count == 1
         }
         
+        @MainActor
         @objc func connectTo() {
             guard isOnlyServer else {
                 fatalError("Connecting to a location with multiple servers?")

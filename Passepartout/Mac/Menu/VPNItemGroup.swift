@@ -26,6 +26,7 @@
 import Foundation
 import AppKit
 
+@MainActor
 struct VPNItemGroup: ItemGroup {
     private let viewModel: ViewModel
     

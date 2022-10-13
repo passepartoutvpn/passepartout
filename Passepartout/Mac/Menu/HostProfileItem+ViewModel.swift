@@ -26,6 +26,8 @@
 import Foundation
 
 extension HostProfileItem {
+
+    @MainActor
     class ViewModel {
         let profile: LightProfile
 
@@ -41,7 +43,9 @@ extension HostProfileItem {
         }
         
         deinit {
-            vpnManager.removeDelegate(withIdentifier: profile.id.uuidString)
+            Task { @MainActor in
+                vpnManager.removeDelegate(withIdentifier: profile.id.uuidString)
+            }
         }
         
         @objc func connectTo() {

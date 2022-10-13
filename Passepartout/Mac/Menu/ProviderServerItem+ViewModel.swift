@@ -43,6 +43,7 @@ extension ProviderServerItem {
             server.serverId == profile.providerServer?.serverId
         }
         
+        @MainActor
         @objc func connectTo() {
             vpnManager.connect(with: profile.id, to: server.serverId)
         }

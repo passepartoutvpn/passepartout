@@ -46,6 +46,7 @@ extension LightProfile {
     }
 }
 
+@MainActor
 @objc
 public protocol LightProfileManager {
     var hasProfiles: Bool { get }

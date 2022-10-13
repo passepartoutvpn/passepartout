@@ -26,6 +26,7 @@
 import Foundation
 import AppKit
 
+@MainActor
 class PassepartoutMenu {
     private let macMenuDelegate: MacMenuDelegate
     

@@ -36,6 +36,7 @@ public enum LightVPNStatus: Int {
     case disconnected
 }
 
+@MainActor
 @objc
 public protocol LightVPNManager {
     var isEnabled: Bool { get }

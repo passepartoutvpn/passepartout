@@ -26,6 +26,7 @@
 import Foundation
 import AppKit
 
+@MainActor
 protocol SystemMenu {
     var asMenu: NSMenu { get }
 }

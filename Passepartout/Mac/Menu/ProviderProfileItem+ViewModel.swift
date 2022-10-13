@@ -26,6 +26,8 @@
 import Foundation
 
 extension ProviderProfileItem {
+
+    @MainActor
     class ViewModel {
         let profile: LightProfile
         
@@ -44,7 +46,9 @@ extension ProviderProfileItem {
         }
         
         deinit {
-            vpnManager.removeDelegate(withIdentifier: profile.id.uuidString)
+            Task { @MainActor in
+                vpnManager.removeDelegate(withIdentifier: profile.id.uuidString)
+            }
         }
 
         private var providerName: String {

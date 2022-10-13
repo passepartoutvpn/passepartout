@@ -32,5 +32,6 @@ class PassepartoutMac: NSObject, MacBridge {
     
     let utils: MacUtils = DefaultMacUtils()
     
+    @MainActor
     let menu: MacMenu = DefaultMacMenu()
 }

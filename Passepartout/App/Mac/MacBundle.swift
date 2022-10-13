@@ -32,6 +32,7 @@ class MacBundle {
     
     private lazy var bridgeDelegate = MacBundleDelegate(bundle: self)
     
+    @MainActor
     func configure() {
         guard let bundleURL = Bundle.main.builtInPlugInsURL?.appendingPathComponent(Constants.Plugins.macBridgeName) else {
             fatalError("Unable to find Mac bundle in plugins")

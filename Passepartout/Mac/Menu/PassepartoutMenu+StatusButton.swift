@@ -27,6 +27,8 @@ import Foundation
 import AppKit
 
 extension PassepartoutMenu {
+
+    @MainActor
     class StatusButton {
         private lazy var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
@@ -50,7 +52,9 @@ extension PassepartoutMenu {
         }
         
         deinit {
-            vpnManager.removeDelegate(withIdentifier: "PassepartoutMenu")
+            Task { @MainActor in
+                vpnManager.removeDelegate(withIdentifier: "PassepartoutMenu")
+            }
         }
         
         func install(systemMenu: SystemMenu) {
