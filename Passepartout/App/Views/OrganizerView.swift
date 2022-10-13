@@ -102,7 +102,7 @@ extension OrganizerView {
                 assertionFailure("Empty URLs from file importer?")
                 return
             }
-            Task {
+            Task { @MainActor in
                 await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
                 addProfileModalType = .addHost(url, false)
             }

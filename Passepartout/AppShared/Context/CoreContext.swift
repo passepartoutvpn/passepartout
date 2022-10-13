@@ -27,6 +27,7 @@ import Foundation
 import Combine
 import PassepartoutLibrary
 
+@MainActor
 class CoreContext {
     let store: KeyValueStore
     
@@ -52,7 +53,6 @@ class CoreContext {
     
     private var cancellables: Set<AnyCancellable> = []
     
-    @MainActor
     init(store: KeyValueStore) {
         self.store = store
         

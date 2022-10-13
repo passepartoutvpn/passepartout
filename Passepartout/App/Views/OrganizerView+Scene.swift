@@ -87,7 +87,7 @@ extension OrganizerView {
             switch phase {
             case .active:
                 if productManager.hasRefunded() {
-                    Task {
+                    Task { @MainActor in
                         await vpnManager.uninstall()
                     }
                 }

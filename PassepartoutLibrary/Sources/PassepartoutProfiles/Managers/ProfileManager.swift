@@ -30,6 +30,7 @@ import PassepartoutCore
 import PassepartoutUtils
 import PassepartoutProviders
 
+@MainActor
 public final class ProfileManager: ObservableObject {
     public typealias ProfileEx = (profile: Profile, isReady: Bool)
 
@@ -292,10 +293,8 @@ extension ProfileManager {
             currentProfile.isLoading = true
             Task {
                 try await makeProfileReady(profile)
-                await MainActor.run {
-                    currentProfile.value = profile
-                    currentProfile.isLoading = false
-                }
+                currentProfile.value = profile
+                currentProfile.isLoading = false
             }
         }
     }

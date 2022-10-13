@@ -25,48 +25,50 @@
 
 import Foundation
 import CoreLocation
-import Combine
 
-public class SSIDReader: NSObject, ObservableObject, CLLocationManagerDelegate {
+@MainActor
+public class SSIDReader: NSObject, ObservableObject {
     private let manager = CLLocationManager()
-
-    private let publisher = PassthroughSubject<String, Never>()
     
-    private var cancellables: Set<AnyCancellable> = []
-
-    public func requestCurrentSSID(onSSID: @escaping (String) -> Void) {
-        publisher
-            .sink(receiveValue: onSSID)
-            .store(in: &cancellables)
-        
+    private var continuation: CheckedContinuation<String, Error>?
+    
+    private func currentSSID() async -> String {
+        await Utils.currentWifiSSID() ?? ""
+    }
+    
+    public func requestCurrentSSID() async throws -> String {
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse, .denied:
-            notifyCurrentSSID()
-            return
-
+            return await currentSSID()
+            
         default:
-            manager.delegate = self
-            manager.requestWhenInUseAuthorization()
-        }
-    }
-
-    private func notifyCurrentSSID() {
-        Task {
-            let currentSSID = await Utils.currentWifiSSID() ?? ""
-            await MainActor.run {
-                publisher.send(currentSSID)
-                cancellables.removeAll()
+            return try await withCheckedThrowingContinuation { continuation in
+                self.continuation = continuation
+                
+                manager.delegate = self
+                manager.requestWhenInUseAuthorization()
             }
         }
     }
+}
 
+extension SSIDReader: CLLocationManagerDelegate {
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways, .denied:
-            notifyCurrentSSID()
+            Task {
+                continuation?.resume(returning: await currentSSID())
+                continuation = nil
+            }
 
         default:
-            cancellables.removeAll()
+            continuation?.resume(with: .success(""))
+            continuation = nil
         }
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        continuation?.resume(throwing: error)
+        continuation = nil
     }
 }

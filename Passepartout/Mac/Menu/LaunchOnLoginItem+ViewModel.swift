@@ -28,6 +28,8 @@ import Combine
 import ServiceManagement
 
 extension LaunchOnLoginItem {
+
+    @MainActor
     class ViewModel: ObservableObject {
         let title: String
 

@@ -41,9 +41,8 @@ extension OrganizerView {
                 if !profileManager.hasProfiles {
                     emptyView
                 }
-            }.onAppear {
-                performMigrationsIfNeeded()
-            }.onReceive(profileManager.didCreateProfile) {
+            }.onAppear(perform: performMigrationsIfNeeded)
+            .onReceive(profileManager.didCreateProfile) {
                 profileManager.currentProfileId = $0.id
             }
         }
@@ -141,7 +140,7 @@ extension OrganizerView {
         }
         
         private func performMigrationsIfNeeded() {
-            Task {
+            Task { @MainActor in
                 UpgradeManager.shared.doMigrations(profileManager)
             }
         }

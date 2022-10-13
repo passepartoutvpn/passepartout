@@ -28,6 +28,7 @@ import Intents
 import IntentsUI
 import Combine
 
+@MainActor
 class IntentsManager: NSObject, ObservableObject {
     @Published private(set) var isReloadingShortcuts = false
     
@@ -35,28 +36,26 @@ class IntentsManager: NSObject, ObservableObject {
     
     let shouldDismissIntentView = PassthroughSubject<Void, Never>()
     
+    private var continuation: CheckedContinuation<[INVoiceShortcut], Never>?
+    
     override init() {
         super.init()
-        reloadShortcuts()
+        Task {
+            await reloadShortcuts()
+        }
     }
     
-    func reloadShortcuts() {
+    func reloadShortcuts() async {
         isReloadingShortcuts = true
-        INVoiceShortcutCenter.shared.getAllVoiceShortcuts { vs, error in
-            if let error = error {
-                assertionFailure("Unable to fetch existing shortcuts: \(error)")
-                DispatchQueue.main.async {
-                    self.isReloadingShortcuts = false
-                }
-                return
-            }
-            let shortcuts = (vs ?? []).reduce(into: [UUID: Shortcut]()) {
+        do {
+            let vs = try await INVoiceShortcutCenter.shared.allVoiceShortcuts()
+            shortcuts = vs.reduce(into: [UUID: Shortcut]()) {
                 $0[$1.identifier] = Shortcut($1)
             }
-            DispatchQueue.main.async {
-                self.shortcuts = shortcuts
-                self.isReloadingShortcuts = false
-            }
+            isReloadingShortcuts = false
+        } catch {
+            assertionFailure("Unable to fetch existing shortcuts: \(error)")
+            isReloadingShortcuts = false
         }
     }
 }
@@ -93,9 +92,7 @@ extension IntentsManager: INUIEditVoiceShortcutViewControllerDelegate {
         // so damn it, reload manually after a delay
         Task {
             await Task.maybeWait(forMilliseconds: Constants.Delays.xxxReloadEditedShortcut)
-            await MainActor.run {
-                reloadShortcuts()
-            }
+            await reloadShortcuts()
         }
     }
 

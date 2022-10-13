@@ -26,6 +26,7 @@
 import Foundation
 import AppKit
 
+@MainActor
 protocol ItemGroup {
     func asMenuItems(withParent parent: NSMenu) -> [NSMenuItem]
 }

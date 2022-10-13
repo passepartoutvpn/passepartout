@@ -26,6 +26,8 @@
 import Foundation
 
 extension ProviderLocationItem {
+
+    @MainActor
     class ViewModel {
         private let profile: LightProfile
 

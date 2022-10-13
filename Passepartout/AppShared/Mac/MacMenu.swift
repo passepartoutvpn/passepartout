@@ -25,6 +25,7 @@
 
 import Foundation
 
+@MainActor
 @objc
 public protocol MacMenu {
     var delegate: MacMenuDelegate? { get set }

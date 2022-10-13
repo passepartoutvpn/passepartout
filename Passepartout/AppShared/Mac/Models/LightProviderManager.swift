@@ -56,6 +56,7 @@ public protocol LightProviderServer {
     var serverId: String { get }
 }
 
+@MainActor
 @objc
 public protocol LightProviderManager {
     var delegate: LightProviderManagerDelegate? { get set }

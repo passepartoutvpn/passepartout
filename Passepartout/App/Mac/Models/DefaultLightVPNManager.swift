@@ -64,28 +64,24 @@ class DefaultLightVPNManager: LightVPNManager {
             }.store(in: &subscriptions)
     }
     
-    @MainActor
     func connect(with profileId: UUID) {
         Task {
             try? await vpnManager.connect(with: profileId)
         }
     }
 
-    @MainActor
     func connect(with profileId: UUID, to serverId: String) {
         Task {
             try? await vpnManager.connect(with: profileId, toServer: serverId)
         }
     }
     
-    @MainActor
     func disconnect() {
         Task {
             await vpnManager.disable()
         }
     }
 
-    @MainActor
     func toggle() {
         Task {
             if !isEnabled {
@@ -96,7 +92,6 @@ class DefaultLightVPNManager: LightVPNManager {
         }
     }
 
-    @MainActor
     func reconnect() {
         Task {
             await vpnManager.reconnect()

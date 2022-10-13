@@ -70,7 +70,6 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
     
     private var currentBundleIdentifier: String?
 
-    @MainActor
     public init(
         appGroup: String,
         tunnelBundleIdentifier: @escaping (VPNProtocolType) -> String,

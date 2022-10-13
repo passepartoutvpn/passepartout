@@ -34,11 +34,7 @@ extension OnDemandView {
         
         var body: some View {
             EditableTextList(elements: allSSIDs, allowsDuplicates: false, mapping: mapElements) { text in
-                reader.requestCurrentSSID {
-                    if !withSSIDs.keys.contains($0) {
-                        text.wrappedValue = $0
-                    }
-                }
+                requestSSID(text)
             } textField: {
                 ssidRow(callback: $0)
             } addLabel: {
@@ -73,6 +69,15 @@ extension OnDemandView {
                 onEditingChanged: callback.onEditingChanged,
                 onCommit: callback.onCommit
             ).themeValidSSID(callback.text.wrappedValue)
+        }
+
+        private func requestSSID(_ text: Binding<String>) {
+            Task { @MainActor in
+                let ssid = try await reader.requestCurrentSSID()
+                if !withSSIDs.keys.contains(ssid) {
+                    text.wrappedValue = ssid
+                }
+            }
         }
     }
 }

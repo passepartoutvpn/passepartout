@@ -103,7 +103,6 @@ class DefaultLightProviderManager: LightProviderManager {
             .map(DefaultLightProviderCategory.init)
     }
 
-    @MainActor
     func downloadIfNeeded(_ name: String, vpnProtocol: String) {
         guard let vpnProtocolType = VPNProtocolType(rawValue: vpnProtocol) else {
             fatalError("Unrecognized VPN protocol: \(vpnProtocol)")

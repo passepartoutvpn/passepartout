@@ -27,6 +27,8 @@ import Foundation
 import Combine
 
 extension VPNItemGroup {
+
+    @MainActor
     class ViewModel {
         private let vpnManager: LightVPNManager
 
@@ -51,7 +53,9 @@ extension VPNItemGroup {
         }
         
         deinit {
-            vpnManager.removeDelegate(withIdentifier: "VPNItemGroup")
+            Task { @MainActor in
+                vpnManager.removeDelegate(withIdentifier: "VPNItemGroup")
+            }
         }
         
         var toggleTitle: String {

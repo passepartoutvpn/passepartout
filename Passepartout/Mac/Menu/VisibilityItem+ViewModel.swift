@@ -27,6 +27,8 @@ import Foundation
 import AppKit
 
 extension VisibilityItem {
+
+    @MainActor
     class ViewModel {
         private let transformer: ObservableProcessTransformer
         
