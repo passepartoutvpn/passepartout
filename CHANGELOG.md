@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Oeck provider is available again to free users.
-- Randomic crashes on profile updates.
+- Randomic crashes on profile updates. [#229](https://github.com/passepartoutvpn/passepartout-apple/pull/229)
 
 ## 2.0.0 (2022-10-02)
 
