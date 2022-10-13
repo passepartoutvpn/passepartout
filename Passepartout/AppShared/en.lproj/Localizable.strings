@@ -50,6 +50,7 @@
 "global.strings.connect" = "Connect";
 "global.strings.disconnect" = "Disconnect";
 "global.strings.download" = "Download";
+"global.strings.pull" = "Pull";
 
 "global.messages.email_not_configured" = "No e-mail account is configured.";
 "global.messages.share" = "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";

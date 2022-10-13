@@ -120,3 +120,18 @@ extension Bool {
         return self ? V.enabled : V.disabled
     }
 }
+
+extension OpenVPN.PullMask {
+    var localizedDescription: String {
+        switch self {
+        case .routes:
+            return L10n.Endpoint.Advanced.Openvpn.Items.Route.caption
+            
+        case .dns:
+            return Unlocalized.Network.dns
+            
+        case .proxy:
+            return L10n.Global.Strings.proxy
+        }
+    }
+}

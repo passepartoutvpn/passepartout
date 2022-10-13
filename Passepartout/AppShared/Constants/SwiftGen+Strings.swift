@@ -502,6 +502,8 @@ internal enum L10n {
       internal static let proxy = L10n.tr("Localizable", "global.strings.proxy", fallback: "Proxy")
       /// Public key
       internal static let publicKey = L10n.tr("Localizable", "global.strings.public_key", fallback: "Public key")
+      /// Pull
+      internal static let pull = L10n.tr("Localizable", "global.strings.pull", fallback: "Pull")
       /// Reconnect
       internal static let reconnect = L10n.tr("Localizable", "global.strings.reconnect", fallback: "Reconnect")
       /// Rename
