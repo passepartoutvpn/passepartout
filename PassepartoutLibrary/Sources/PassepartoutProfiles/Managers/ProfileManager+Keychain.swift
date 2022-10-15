@@ -29,7 +29,7 @@ import PassepartoutCore
 import PassepartoutUtils
 
 extension ProfileManager {
-    public func savePassword(forProfile profile: Profile) {
+    public func savePassword(forProfile profile: Profile, newPassword: String? = nil) {
         guard !profile.isPlaceholder else {
             assertionFailure("Placeholder")
             return
@@ -37,7 +37,7 @@ extension ProfileManager {
         guard let keychainEntry = profile.keychainEntry else {
             return
         }
-        let password = profile.account.password
+        let password = newPassword ?? profile.account.password
         guard !password.isEmpty else {
             keychain.removePassword(
                 for: keychainEntry,
