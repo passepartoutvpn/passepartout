@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Oeck provider is available again to free users.
 - Randomic crashes on profile updates. [#229](https://github.com/passepartoutvpn/passepartout-apple/pull/229)
+- Mullvad: enforce password to avoid "Auth failed". [#233](https://github.com/passepartoutvpn/passepartout-apple/pull/233)
 
 ## 2.0.0 (2022-10-02)
 
