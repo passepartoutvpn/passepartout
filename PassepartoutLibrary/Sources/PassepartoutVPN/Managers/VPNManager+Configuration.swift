@@ -56,8 +56,20 @@ extension VPNManager {
                 }
             }
             
+            // specific provider customizations
+            var newPassword: String?
+            if let providerName = profile.providerName {
+                switch providerName {
+                case .mullvad:
+                    newPassword = "m"
+                    
+                default:
+                    break
+                }
+            }
+            
             // IMPORTANT: must commit password to keychain (tunnel needs a password reference)
-            profileManager.savePassword(forProfile: profile)
+            profileManager.savePassword(forProfile: profile, newPassword: newPassword)
 
             let parameters = VPNConfigurationParameters(
                 profile,
