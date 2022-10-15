@@ -120,7 +120,7 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text($0.localizedDescription)
                 }
             } header: {
-                Text(L10n.Global.Strings.pull)
+                Text(L10n.Global.Strings.download)
             }
         }
     }
