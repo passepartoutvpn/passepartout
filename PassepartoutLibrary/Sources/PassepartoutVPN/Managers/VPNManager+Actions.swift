@@ -42,9 +42,9 @@ extension VPNManager {
             return
         }
         if let newServerId = newServerId {
-            try await connect(with: profileId, toServer: newServerId)
+            _ = try await connect(with: profileId, toServer: newServerId)
         } else {
-            try await connect(with: profileId)
+            _ = try await connect(with: profileId)
         }
     }
 

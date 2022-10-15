@@ -75,7 +75,7 @@ extension IntentDispatcher {
         }
         Task {
             do {
-                try await vpnManager.connect(with: profileId)
+                _ = try await vpnManager.connect(with: profileId)
             } catch {
                 pp_log.error("Unable to connect with profile \(profileId): \(error)")
             }
@@ -104,7 +104,7 @@ extension IntentDispatcher {
         }
         Task {
             do {
-                try await vpnManager.connect(with: profileId, toServer: newServerId)
+                _ = try await vpnManager.connect(with: profileId, toServer: newServerId)
             } catch {
                 pp_log.error("Unable to connect with profile \(profileId): \(error)")
             }
