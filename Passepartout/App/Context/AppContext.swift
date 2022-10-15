@@ -38,9 +38,9 @@ class AppContext {
     private var cancellables: Set<AnyCancellable> = []
     
     init(coreContext: CoreContext) {
-        logManager = LogManager(logFile: Constants.Log.appLogURL)
-        logManager.logLevel = Constants.Log.logLevel
-        logManager.logFormat = Constants.Log.logFormat
+        logManager = LogManager(logFile: Constants.Log.App.url)
+        logManager.logLevel = Constants.Log.level
+        logManager.logFormat = Constants.Log.App.format
         logManager.configureLogging()
         pp_log.info("Logging to: \(logManager.logFile!)")
         

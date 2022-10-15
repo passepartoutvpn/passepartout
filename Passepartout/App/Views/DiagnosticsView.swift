@@ -54,7 +54,7 @@ extension DiagnosticsView {
         
         let tunnelLogURL: URL?
         
-        private let logUpdateInterval = Constants.Log.tunnelLogRefreshInterval
+        private let refreshInterval = Constants.Log.refreshInterval
 
         var body: some View {
             appLink
@@ -65,7 +65,7 @@ extension DiagnosticsView {
             navigationLink(
                 withTitle: L10n.Diagnostics.Items.AppLog.title,
                 url: appLogURL,
-                updateInterval: logUpdateInterval
+                refreshInterval: refreshInterval
             )
         }
         
@@ -73,17 +73,17 @@ extension DiagnosticsView {
             navigationLink(
                 withTitle: L10n.Diagnostics.Items.TunnelLog.title,
                 url: tunnelLogURL,
-                updateInterval: logUpdateInterval
+                refreshInterval: refreshInterval
             )
         }
 
-        private func navigationLink(withTitle title: String, url: URL?, updateInterval: Double) -> some View {
+        private func navigationLink(withTitle title: String, url: URL?, refreshInterval: TimeInterval) -> some View {
             NavigationLink(title) {
                 url.map {
                     DebugLogView(
                         title: title,
                         url: $0,
-                        updateInterval: updateInterval
+                        refreshInterval: refreshInterval
                     )
                 }
             }.disabled(url == nil)

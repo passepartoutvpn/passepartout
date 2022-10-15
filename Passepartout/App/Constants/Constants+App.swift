@@ -140,36 +140,40 @@ extension Constants {
     }
     
     enum Log {
+        enum App {
+            static let url = containerURL(filename: "App.log")
+
+            static let format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
+        }
+        
+        enum Tunnel {
+            static let path = containerPath(filename: "Tunnel.log")
+
+            static let format = "$DHH:mm:ss$d - $M"
+        }
+        
         private static let parentPath = "Library/Caches"
 
-        private static func containerLogURL(filename: String) -> URL {
-            Files.containerURL
-                .appendingPathComponent(parentPath)
-                .appendingPathComponent(filename)
-        }
-
-        private static func containerLogPath(filename: String) -> String {
-            "\(parentPath)/\(filename)"
-        }
-
-        static let appLogURL = containerLogURL(filename: "App.log")
-
-        static let tunnelLogPath = containerLogPath(filename: "Tunnel.log")
-
-        static let logLevel: SwiftyBeaver.Level = {
+        static let level: SwiftyBeaver.Level = {
             guard let levelString = ProcessInfo.processInfo.environment["LOG_LEVEL"], let levelNum = Int(levelString) else {
                 return .info
             }
             return .init(rawValue: levelNum) ?? .info
         }()
         
-        static let logFormat = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
+        static let maxBytes = 100000
         
-        static let tunnelLogFormat = "$DHH:mm:ss$d - $M"
-        
-        static let tunnelLogMaxBytes = 100000
-        
-        static let tunnelLogRefreshInterval: TimeInterval = 5.0
+        static let refreshInterval: TimeInterval = 5.0
+
+        private static func containerURL(filename: String) -> URL {
+            Files.containerURL
+                .appendingPathComponent(parentPath)
+                .appendingPathComponent(filename)
+        }
+
+        private static func containerPath(filename: String) -> String {
+            "\(parentPath)/\(filename)"
+        }
     }
     
     enum URLs {

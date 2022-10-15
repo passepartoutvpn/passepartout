@@ -114,8 +114,8 @@ class CoreContext {
     
     private func configureObjects() {
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
-        vpnManager.tunnelLogPath = Constants.Log.tunnelLogPath
-        vpnManager.tunnelLogFormat = Constants.Log.tunnelLogFormat
+        vpnManager.tunnelLogPath = Constants.Log.Tunnel.path
+        vpnManager.tunnelLogFormat = Constants.Log.Tunnel.format
 
         profileManager.observeUpdates()
         vpnManager.observeUpdates()

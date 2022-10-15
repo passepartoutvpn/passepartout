@@ -38,7 +38,7 @@ struct DebugLogView: View {
     
     @State private var isSharing = false
     
-    private let maxBytes = UInt64(Constants.Log.tunnelLogMaxBytes)
+    private let maxBytes = UInt64(Constants.Log.maxBytes)
 
     private let appName = Constants.Global.appName
 
@@ -46,10 +46,10 @@ struct DebugLogView: View {
     
     private let shareFilename = Unlocalized.Issues.Filenames.debugLog
     
-    init(title: String, url: URL, updateInterval: TimeInterval) {
+    init(title: String, url: URL, refreshInterval: TimeInterval) {
         self.title = title
         self.url = url
-        timer = Timer.TimerPublisher(interval: updateInterval, runLoop: .main, mode: .common)
+        timer = Timer.TimerPublisher(interval: refreshInterval, runLoop: .main, mode: .common)
             .autoconnect()
             .eraseToAnyPublisher()
     }
