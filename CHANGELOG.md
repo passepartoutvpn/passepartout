@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - IVPN provider.
 - OpenVPN: Support for `--route-nopull`. [#230](https://github.com/passepartoutvpn/passepartout-apple/pull/230)
+- App log in Diagnostics screen. [#234](https://github.com/passepartoutvpn/passepartout-apple/pull/234)
 
 ### Changed
 
