@@ -29,11 +29,11 @@ import PassepartoutLibrary
 
 @MainActor
 class AppContext {
-    private let logManager: LogManager
-    
-    private let reviewer: Reviewer
+    let logManager: LogManager
     
     let productManager: ProductManager
+    
+    private let reviewer: Reviewer
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -44,14 +44,14 @@ class AppContext {
         logManager.configureLogging()
         pp_log.info("Logging to: \(logManager.logFile!)")
         
-        reviewer = Reviewer()
-        reviewer.eventCountBeforeRating = Constants.Rating.eventCount
-        
         productManager = ProductManager(
             appType: Constants.InApp.appType,
             buildProducts: Constants.InApp.buildProducts
         )
 
+        reviewer = Reviewer()
+        reviewer.eventCountBeforeRating = Constants.Rating.eventCount
+        
         // post
         
         configureObjects(coreContext: coreContext)

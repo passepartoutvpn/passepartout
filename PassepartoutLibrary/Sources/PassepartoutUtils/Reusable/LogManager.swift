@@ -26,6 +26,7 @@
 import Foundation
 import SwiftyBeaver
 
+@MainActor
 public class LogManager {
     public let logFile: URL?
     
