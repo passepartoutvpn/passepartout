@@ -28,6 +28,8 @@ import Combine
 import PassepartoutLibrary
 
 struct DebugLogView: View {
+    private let title: String
+    
     private let url: URL
     
     private let timer: AnyPublisher<Date, Never>
@@ -44,7 +46,8 @@ struct DebugLogView: View {
     
     private let shareFilename = Unlocalized.Issues.Filenames.debugLog
     
-    init(url: URL, updateInterval: TimeInterval) {
+    init(title: String, url: URL, updateInterval: TimeInterval) {
+        self.title = title
         self.url = url
         timer = Timer.TimerPublisher(interval: updateInterval, runLoop: .main, mode: .common)
             .autoconnect()
@@ -78,7 +81,7 @@ struct DebugLogView: View {
         #endif
         .edgesIgnoringSafeArea([.leading, .trailing])
         .onReceive(timer, perform: refreshLog)
-        .navigationTitle(L10n.DebugLog.title)
+        .navigationTitle(title)
         .themeDebugLogStyle()
     }
 
