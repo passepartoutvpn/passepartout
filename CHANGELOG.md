@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - OpenVPN: Support for `--remote-random-hostname`. [tunnelkit#286](https://github.com/passepartoutvpn/tunnelkit/pull/286)
 
+### Fixed
+
+- Restore "Reconnect" action in profiles. [#232](https://github.com/passepartoutvpn/passepartout-apple/pull/232)
+
 ## 2.0.1 (2022-10-17)
 
 ### Added
