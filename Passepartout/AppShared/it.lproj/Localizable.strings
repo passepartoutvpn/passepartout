@@ -255,6 +255,7 @@
 "diagnostics.title" = "Diagnostica";
 "diagnostics.sections.debug_log.footer" = "Il mascheramento sarà effettivo dopo una riconnessione. I dati di rete sono hostname, indirizzi IP, routing, SSID. Credenziali e chiavi private non sono registrati in ogni caso.";
 "diagnostics.items.server_configuration.caption" = "Configurazione del server";
+"diagnostics.items.app_log.title" = "App";
 "diagnostics.items.masks_private_data.caption" = "Maschera dati rete";
 "diagnostics.items.report_issue.caption" = "Segnala problema connettività";
 

@@ -255,6 +255,7 @@
 "diagnostics.title" = "分析数据";
 "diagnostics.sections.debug_log.footer" = "在重连后状态隐藏才有效。网络数据包括主机名、IP地址、路由、SSID、认证方式，但私钥不会出现在日志中。";
 "diagnostics.items.server_configuration.caption" = "服务端配置";
+"diagnostics.items.app_log.title" = "应用程序";
 "diagnostics.items.masks_private_data.caption" = "隐藏网络数据";
 "diagnostics.items.report_issue.caption" = "报告连接问题";
 

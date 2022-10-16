@@ -255,6 +255,7 @@
 "diagnostics.title" = "Diagnose";
 "diagnostics.sections.debug_log.footer" = "De maskeerstatus is effectief na opnieuw verbinden. Netwerkgegevens zijn hostnamen, IP-adressen, routing, SSID's. Inloggegevens en privésleutels worden niet geregistreerd.";
 "diagnostics.items.server_configuration.caption" = "Server configuratie";
+"diagnostics.items.app_log.title" = "App";
 "diagnostics.items.masks_private_data.caption" = "Netwerkgegevens maskeren";
 "diagnostics.items.report_issue.caption" = "Probleem met connectiviteit melden";
 

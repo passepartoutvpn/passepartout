@@ -255,6 +255,7 @@
 "diagnostics.title" = "Diagnostyka";
 "diagnostics.sections.debug_log.footer" = "Status maskowania będzie widoczny po ponownym połączeniu. Dane połączenia to nazwy hostów, adresy IP, routing, SSID. Loginy i klucze prywatne nie są zapisywane.";
 "diagnostics.items.server_configuration.caption" = "Konfiguracja serwera";
+"diagnostics.items.app_log.title" = "Aplikacja";
 "diagnostics.items.masks_private_data.caption" = "Maskuj dane sieci";
 "diagnostics.items.report_issue.caption" = "Zgłoś problemy z połączeniem";
 

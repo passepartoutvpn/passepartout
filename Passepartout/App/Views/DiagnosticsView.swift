@@ -47,3 +47,46 @@ struct DiagnosticsView: View {
         }.navigationTitle(L10n.Diagnostics.title)
     }
 }
+
+extension DiagnosticsView {
+    struct DebugLogSection: View {
+        let appLogURL: URL?
+        
+        let tunnelLogURL: URL?
+        
+        private let refreshInterval = Constants.Log.refreshInterval
+
+        var body: some View {
+            appLink
+            tunnelLink
+        }
+
+        private var appLink: some View {
+            navigationLink(
+                withTitle: L10n.Diagnostics.Items.AppLog.title,
+                url: appLogURL,
+                refreshInterval: nil
+            )
+        }
+        
+        private var tunnelLink: some View {
+            navigationLink(
+                withTitle: Unlocalized.VPN.vpn,
+                url: tunnelLogURL,
+                refreshInterval: refreshInterval
+            )
+        }
+
+        private func navigationLink(withTitle title: String, url: URL?, refreshInterval: TimeInterval?) -> some View {
+            NavigationLink(title) {
+                url.map {
+                    DebugLogView(
+                        title: title,
+                        url: $0,
+                        refreshInterval: refreshInterval
+                    )
+                }
+            }.disabled(url == nil)
+        }
+    }
+}

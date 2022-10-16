@@ -255,6 +255,7 @@
 "diagnostics.title" = "Diagnósticos";
 "diagnostics.sections.debug_log.footer" = "El estado de ocultación será efectivo tras reconectar. Los datos de red son hostnames, direcciones IP, routing, SSID. Las credenciales y las claves privadas no son registrados a pesar.";
 "diagnostics.items.server_configuration.caption" = "Configuración del servidor";
+"diagnostics.items.app_log.title" = "App";
 "diagnostics.items.masks_private_data.caption" = "Ocultar datos de red";
 "diagnostics.items.report_issue.caption" = "Reportar problema de conectividad";
 

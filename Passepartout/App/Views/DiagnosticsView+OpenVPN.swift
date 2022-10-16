@@ -57,8 +57,6 @@ extension DiagnosticsView {
         
         private let vpnProtocol: VPNProtocolType = .openVPN
         
-        private let logUpdateInterval = Constants.Log.tunnelLogRefreshInterval
-        
         init(providerName: ProviderName?) {
             providerManager = .shared
             vpnManager = .shared
@@ -108,16 +106,10 @@ extension DiagnosticsView {
         
         private var debugLogSection: some View {
             Section {
-                let url = debugLogURL
-                NavigationLink(L10n.DebugLog.title) {
-                    url.map {
-                        DebugLogView(
-                            url: $0,
-                            updateInterval: logUpdateInterval
-                        )
-                    }
-                }.disabled(url == nil)
+                DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
                 Toggle(L10n.Diagnostics.Items.MasksPrivateData.caption, isOn: $vpnManager.masksPrivateData)
+            } header: {
+                Text(L10n.DebugLog.title)
             } footer: {
                 Text(L10n.Diagnostics.Sections.DebugLog.footer)
             }
@@ -160,8 +152,12 @@ extension DiagnosticsView.OpenVPNView {
         // "withFallbacks: false" for view to hide nil options
         return cfg.builder(withFallbacks: false)
     }
-    
-    private var debugLogURL: URL? {
+
+    private var appLogURL: URL? {
+        LogManager.shared.logFile
+    }
+
+    private var tunnelLogURL: URL? {
         vpnManager.debugLogURL(forProtocol: vpnProtocol)
     }
 }

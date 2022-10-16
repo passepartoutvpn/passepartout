@@ -210,6 +210,10 @@ internal enum L10n {
       }
     }
     internal enum Items {
+      internal enum AppLog {
+        /// App
+        internal static let title = L10n.tr("Localizable", "diagnostics.items.app_log.title", fallback: "App")
+      }
       internal enum MasksPrivateData {
         /// Mask network data
         internal static let caption = L10n.tr("Localizable", "diagnostics.items.masks_private_data.caption", fallback: "Mask network data")

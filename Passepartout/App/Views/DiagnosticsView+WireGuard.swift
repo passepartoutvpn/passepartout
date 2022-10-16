@@ -33,8 +33,6 @@ extension DiagnosticsView {
         
         private let providerName: ProviderName?
         
-        private let logUpdateInterval = Constants.Log.tunnelLogRefreshInterval
-
         init(providerName: ProviderName?) {
             vpnManager = .shared
             self.providerName = providerName
@@ -43,21 +41,21 @@ extension DiagnosticsView {
         var body: some View {
             List {
                 Section {
-                    let url = debugLogURL
-                    NavigationLink(L10n.DebugLog.title) {
-                        url.map {
-                            DebugLogView(
-                                url: $0,
-                                updateInterval: logUpdateInterval
-                            )
-                        }
-                    }.disabled(url == nil)
+                    DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
+                } header: {
+                    Text(L10n.DebugLog.title)
                 }
             }
         }
+    }
+}
 
-        private var debugLogURL: URL? {
-            vpnManager.debugLogURL(forProtocol: .wireGuard)
-        }
+extension DiagnosticsView.WireGuardView {
+    private var appLogURL: URL? {
+        LogManager.shared.logFile
+    }
+
+    private var tunnelLogURL: URL? {
+        vpnManager.debugLogURL(forProtocol: .wireGuard)
     }
 }
