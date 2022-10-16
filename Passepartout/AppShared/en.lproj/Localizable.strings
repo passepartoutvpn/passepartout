@@ -256,7 +256,6 @@
 "diagnostics.sections.debug_log.footer" = "Masking status will be effective after reconnecting. Network data are hostnames, IP addresses, routing, SSID. Credentials and private keys are not logged regardless.";
 "diagnostics.items.server_configuration.caption" = "Server configuration";
 "diagnostics.items.app_log.title" = "App";
-"diagnostics.items.tunnel_log.title" = "Tunnel";
 "diagnostics.items.masks_private_data.caption" = "Mask network data";
 "diagnostics.items.report_issue.caption" = "Report connectivity issue";
 

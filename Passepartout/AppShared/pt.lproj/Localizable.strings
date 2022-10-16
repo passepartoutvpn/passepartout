@@ -255,6 +255,7 @@
 "diagnostics.title" = "Diagnóstico";
 "diagnostics.sections.debug_log.footer" = "O status será escondido após reconectado. Os dados da rede são hostnames, endereços de IP, rotas, SSID. Credenciais e chaves privadas não será logadas em nenhum dos casos.";
 "diagnostics.items.server_configuration.caption" = "Configuração do servidor";
+"diagnostics.items.app_log.title" = "Aplicativo";
 "diagnostics.items.masks_private_data.caption" = "Esconder dados da rede";
 "diagnostics.items.report_issue.caption" = "Reportar problemas de conexão";
 

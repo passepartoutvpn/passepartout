@@ -226,10 +226,6 @@ internal enum L10n {
         /// Server configuration
         internal static let caption = L10n.tr("Localizable", "diagnostics.items.server_configuration.caption", fallback: "Server configuration")
       }
-      internal enum TunnelLog {
-        /// Tunnel
-        internal static let title = L10n.tr("Localizable", "diagnostics.items.tunnel_log.title", fallback: "Tunnel")
-      }
     }
     internal enum Sections {
       internal enum DebugLog {

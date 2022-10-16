@@ -255,6 +255,7 @@
 "diagnostics.title" = "Diagnostiques";
 "diagnostics.sections.debug_log.footer" = "Camouflage du status sera effectif après la reconnection. Les données réseaux sont les noms d'hôtes, adresses IP, routage, SSID. Les identifiants et clés privés ne sont pas enregistrés.";
 "diagnostics.items.server_configuration.caption" = "Configuration serveur";
+"diagnostics.items.app_log.title" = "Application";
 "diagnostics.items.masks_private_data.caption" = "Masquer les données de réseau";
 "diagnostics.items.report_issue.caption" = "Rapporter un problème de connection";
 

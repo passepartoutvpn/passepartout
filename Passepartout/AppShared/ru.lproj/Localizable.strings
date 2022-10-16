@@ -255,6 +255,7 @@
 "diagnostics.title" = "Диагностика";
 "diagnostics.sections.debug_log.footer" = "Маскировка включится после повторного подключения. Информация о сети - это названия хост профилей, IP адрес, маршрутизация и SSID. Данные для входа и приватные ключи не собираются.";
 "diagnostics.items.server_configuration.caption" = "Конфигурация сервера";
+"diagnostics.items.app_log.title" = "Приложение";
 "diagnostics.items.masks_private_data.caption" = "Маскировать информацию сети";
 "diagnostics.items.report_issue.caption" = "Сообщить о проблеме подкл.";
 

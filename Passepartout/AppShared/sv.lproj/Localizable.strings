@@ -255,6 +255,7 @@
 "diagnostics.title" = "Diagnostics";
 "diagnostics.sections.debug_log.footer" = "Masking status kommer att fungera efter återanslutning. Nätverksdata är värdnamn, IP-adresser, routing, SSID. Referenser och privata nycklar loggas inte oavsett.";
 "diagnostics.items.server_configuration.caption" = "Server konfiguration";
+"diagnostics.items.app_log.title" = "App";
 "diagnostics.items.masks_private_data.caption" = "Mask nätverksdata";
 "diagnostics.items.report_issue.caption" = "Rapportera anslutningsproblem";
 

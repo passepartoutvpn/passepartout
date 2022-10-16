@@ -255,6 +255,7 @@
 "diagnostics.title" = "Διαγνωστικά";
 "diagnostics.sections.debug_log.footer" = "Η κατάσταση κάλυψης θα είναι αποτελεσματική μετά την επανασύνδεση. Τα δεδομένα δικτύου είναι του διακομιστή, διευθύνσεις IP, δρομολόγηση και SSID. Τα διαπιστευτήρια και τα ιδιωτικά κλειδιά δεν καταγράφονται ανεξάρτητα.";
 "diagnostics.items.server_configuration.caption" = "Ρυθμίσεις Διακομιστή";
+"diagnostics.items.app_log.title" = "Εφαρμογή";
 "diagnostics.items.masks_private_data.caption" = "Μάσκα δεδομένα δικτύου";
 "diagnostics.items.report_issue.caption" = "Αναφορά ζητήματος συνδεσιμότητας";
 

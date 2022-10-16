@@ -255,6 +255,7 @@
 "diagnostics.title" = "Diagnose";
 "diagnostics.sections.debug_log.footer" = "Zensier-Status wird aktiv nach erneutem Verbinden. Netzwerk-Daten sind Hostnamen, IP-Adressen, Routingtabellen, SSID. Zugangsdaten und Private Keys werden nie gelogged.";
 "diagnostics.items.server_configuration.caption" = "Serverkonfiguration";
+"diagnostics.items.app_log.title" = "App";
 "diagnostics.items.masks_private_data.caption" = "Netzwerkdaten zensieren";
 "diagnostics.items.report_issue.caption" = "Verbindungsproblem melden";
 

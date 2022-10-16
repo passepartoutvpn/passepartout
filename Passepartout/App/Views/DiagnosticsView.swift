@@ -71,7 +71,7 @@ extension DiagnosticsView {
         
         private var tunnelLink: some View {
             navigationLink(
-                withTitle: L10n.Diagnostics.Items.TunnelLog.title,
+                withTitle: Unlocalized.VPN.vpn,
                 url: tunnelLogURL,
                 refreshInterval: refreshInterval
             )
