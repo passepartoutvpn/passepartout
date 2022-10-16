@@ -334,6 +334,10 @@ internal enum L10n {
             /// Randomize endpoint
             internal static let caption = L10n.tr("Localizable", "endpoint.advanced.openvpn.items.random_endpoint.caption", fallback: "Randomize endpoint")
           }
+          internal enum RandomHostname {
+            /// Randomize hostnames
+            internal static let caption = L10n.tr("Localizable", "endpoint.advanced.openvpn.items.random_hostname.caption", fallback: "Randomize hostnames")
+          }
           internal enum RenegotiationSeconds {
             /// Renegotiation
             internal static let caption = L10n.tr("Localizable", "endpoint.advanced.openvpn.items.renegotiation_seconds.caption", fallback: "Renegotiation")

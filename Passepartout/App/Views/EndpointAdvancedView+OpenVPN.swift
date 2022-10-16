@@ -288,9 +288,13 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.RenegotiationSeconds.caption)
                         .withTrailingText($0.localizedDescriptionAsRenegotiatesAfter)
                 }
-                settings.randomize.map {
+                settings.randomizeEndpoint.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.RandomEndpoint.caption)
                         .withTrailingText($0.localizedDescriptionAsRandomizeEndpoint)
+                }
+                settings.randomizeHostnames.map {
+                    Text(L10n.Endpoint.Advanced.Openvpn.Items.RandomHostname.caption)
+                        .withTrailingText($0.localizedDescriptionAsRandomizeHostnames)
                 }
             } header: {
                 Text(L10n.Endpoint.Advanced.Openvpn.Sections.Other.header)
@@ -328,11 +332,11 @@ extension OpenVPN.Configuration {
         return (httpsProxy ?? httpProxy, proxyAutoConfigurationURL, proxyBypassDomains ?? [])
     }
     
-    var otherSettings: (keepAlive: TimeInterval?, reneg: TimeInterval?, randomize: Bool?)? {
-        guard keepAliveInterval != nil || renegotiatesAfter != nil || randomizeEndpoint != nil else {
+    var otherSettings: (keepAlive: TimeInterval?, reneg: TimeInterval?, randomizeEndpoint: Bool?, randomizeHostnames: Bool?)? {
+        guard keepAliveInterval != nil || renegotiatesAfter != nil || randomizeEndpoint != nil || randomizeHostnames != nil else {
             return nil
         }
-        return (keepAliveInterval, renegotiatesAfter, randomizeEndpoint)
+        return (keepAliveInterval, renegotiatesAfter, randomizeEndpoint, randomizeHostnames)
     }
 }
 

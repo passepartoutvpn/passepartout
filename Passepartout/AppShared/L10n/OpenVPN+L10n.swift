@@ -119,6 +119,11 @@ extension Bool {
         let V = L10n.Global.Strings.self
         return self ? V.enabled : V.disabled
     }
+    
+    var localizedDescriptionAsRandomizeHostnames: String {
+        let V = L10n.Global.Strings.self
+        return self ? V.enabled : V.disabled
+    }
 }
 
 extension OpenVPN.PullMask {

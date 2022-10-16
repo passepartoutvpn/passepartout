@@ -227,6 +227,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Renegotiation";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "after %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Randomize endpoint";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Randomize hostnames";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
