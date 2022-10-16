@@ -108,6 +108,8 @@ extension DiagnosticsView {
             Section {
                 DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
                 Toggle(L10n.Diagnostics.Items.MasksPrivateData.caption, isOn: $vpnManager.masksPrivateData)
+            } header: {
+                Text(L10n.DebugLog.title)
             } footer: {
                 Text(L10n.Diagnostics.Sections.DebugLog.footer)
             }

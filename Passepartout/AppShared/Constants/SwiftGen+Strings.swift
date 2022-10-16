@@ -191,8 +191,10 @@ internal enum L10n {
     }
   }
   internal enum DebugLog {
+    /// MARK: DiagnosticsView -> DebugLogView
+    internal static let title = L10n.tr("Localizable", "debug_log.title", fallback: "Debug log")
     internal enum Buttons {
-      /// MARK: DiagnosticsView -> DebugLogView
+      /// Copy
       internal static let copy = L10n.tr("Localizable", "debug_log.buttons.copy", fallback: "Copy")
     }
   }
@@ -209,8 +211,8 @@ internal enum L10n {
     }
     internal enum Items {
       internal enum AppLog {
-        /// App log
-        internal static let title = L10n.tr("Localizable", "diagnostics.items.app_log.title", fallback: "App log")
+        /// App
+        internal static let title = L10n.tr("Localizable", "diagnostics.items.app_log.title", fallback: "App")
       }
       internal enum MasksPrivateData {
         /// Mask network data
@@ -225,8 +227,8 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "diagnostics.items.server_configuration.caption", fallback: "Server configuration")
       }
       internal enum TunnelLog {
-        /// Tunnel log
-        internal static let title = L10n.tr("Localizable", "diagnostics.items.tunnel_log.title", fallback: "Tunnel log")
+        /// Tunnel
+        internal static let title = L10n.tr("Localizable", "diagnostics.items.tunnel_log.title", fallback: "Tunnel")
       }
     }
     internal enum Sections {

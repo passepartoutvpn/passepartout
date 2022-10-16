@@ -42,6 +42,8 @@ extension DiagnosticsView {
             List {
                 Section {
                     DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
+                } header: {
+                    Text(L10n.DebugLog.title)
                 }
             }
         }
