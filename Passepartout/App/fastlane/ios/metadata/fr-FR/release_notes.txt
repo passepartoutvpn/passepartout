@@ -1,3 +1,9 @@
+### Added
+
+- IVPN provider.
+- OpenVPN: Support for `--route-nopull`.
+- App log in Diagnostics screen.
+
 ### Changed
 
 - Retain whitespaces in imported file names.
@@ -5,4 +11,6 @@
 ### Fixed
 
 - Oeck provider is available again to free users.
+- Randomic crashes on profile updates.
+- Mullvad: enforce password to avoid "Auth failed".
 
