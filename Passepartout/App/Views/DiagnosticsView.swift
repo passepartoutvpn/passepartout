@@ -65,7 +65,7 @@ extension DiagnosticsView {
             navigationLink(
                 withTitle: L10n.Diagnostics.Items.AppLog.title,
                 url: appLogURL,
-                refreshInterval: refreshInterval
+                refreshInterval: nil
             )
         }
         
@@ -77,7 +77,7 @@ extension DiagnosticsView {
             )
         }
 
-        private func navigationLink(withTitle title: String, url: URL?, refreshInterval: TimeInterval) -> some View {
+        private func navigationLink(withTitle title: String, url: URL?, refreshInterval: TimeInterval?) -> some View {
             NavigationLink(title) {
                 url.map {
                     DebugLogView(

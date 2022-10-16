@@ -46,12 +46,17 @@ struct DebugLogView: View {
     
     private let shareFilename = Unlocalized.Issues.Filenames.debugLog
     
-    init(title: String, url: URL, refreshInterval: TimeInterval) {
+    init(title: String, url: URL, refreshInterval: TimeInterval?) {
         self.title = title
         self.url = url
-        timer = Timer.TimerPublisher(interval: refreshInterval, runLoop: .main, mode: .common)
-            .autoconnect()
-            .eraseToAnyPublisher()
+        if let refreshInterval = refreshInterval {
+            timer = Timer.TimerPublisher(interval: refreshInterval, runLoop: .main, mode: .common)
+                .autoconnect()
+                .eraseToAnyPublisher()
+        } else {
+            timer = Empty(outputType: Date.self, failureType: Never.self)
+                .eraseToAnyPublisher()
+        }
     }
     
     var body: some View {
