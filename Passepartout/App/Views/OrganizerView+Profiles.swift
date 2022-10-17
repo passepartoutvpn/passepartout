@@ -144,7 +144,7 @@ extension OrganizerView {
         }
         
         var body: some View {
-            if isActiveProfileNotDisconnected {
+            if #available(iOS 16, *), isActiveProfileNotDisconnected {
                 reconnectButton
             }
             duplicateButton
