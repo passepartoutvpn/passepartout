@@ -329,7 +329,7 @@
 /* MARK: AboutView -> VersionView */
 
 "version.title" = "Version";
-"version.labels.intro" = "Passepartout und TunnelKit sind geschrieben und gewartet von Davide De Rosa (keeshux).\n\nQuellcode für Passepartout und TunnelKit ist öffentlich auf GitHub unter GPLv3 verfügbar, du findest die Links auf der Homepage.\n\nPassepartout ist ein inoffizieller client und auf keine Art und Weise mit OpenVPN Inc. verbunden.";
+"version.labels.intro" = "Passepartout und TunnelKit sind geschrieben und gewartet von Davide De Rosa (keeshux).\n\nQuellcode für Passepartout und TunnelKit ist öffentlich auf GitHub unter GPLv3 verfügbar, du findest die Links auf der Homepage.";
 
 /* MARK: AboutView -> CreditsView */
 

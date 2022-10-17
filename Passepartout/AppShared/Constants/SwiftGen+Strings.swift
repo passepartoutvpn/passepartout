@@ -1022,9 +1022,7 @@ internal enum L10n {
       /// Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).
       /// 
       /// Source code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.
-      /// 
-      /// Passepartout is a non-official client and is in no way affiliated with OpenVPN Inc.
-      internal static let intro = L10n.tr("Localizable", "version.labels.intro", fallback: "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.\n\nPassepartout is a non-official client and is in no way affiliated with OpenVPN Inc.")
+      internal static let intro = L10n.tr("Localizable", "version.labels.intro", fallback: "Passepartout and TunnelKit are written and maintained by Davide De Rosa (keeshux).\n\nSource code for Passepartout and TunnelKit is publicly available on GitHub under the GPLv3, you can find links in the home page.")
     }
   }
 }

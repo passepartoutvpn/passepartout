@@ -329,7 +329,7 @@
 /* MARK: AboutView -> VersionView */
 
 "version.title" = "版本";
-"version.labels.intro" = "Passepartout和TunnelKit由Davide De Rosa (keeshux)编写并维护。\n\nPassepartout和TunnelKit的源代码在GitHub上以GPLv3许可证面向大众开放，你可以在主页上找到链接。\n\nPassepartout不是官方的客户端，同OpenVPN Inc也没有关系。";
+"version.labels.intro" = "Passepartout和TunnelKit由Davide De Rosa (keeshux)编写并维护。\n\nPassepartout和TunnelKit的源代码在GitHub上以GPLv3许可证面向大众开放，你可以在主页上找到链接。";
 
 /* MARK: AboutView -> CreditsView */
 
