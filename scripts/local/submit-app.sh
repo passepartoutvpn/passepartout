@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 PLATFORM=$1
 if [[ -z $PLATFORM ]]; then
     echo "Platform required"

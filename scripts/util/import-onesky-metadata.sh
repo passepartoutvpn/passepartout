@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 FILE="$1"
 SRC="$2/$FILE"
 DST="$3"

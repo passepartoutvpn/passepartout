@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 PATTERN="Passepartout/App/fastlane/ios/metadata/*/description.txt"
 AFTER=$1
 NAME=$2

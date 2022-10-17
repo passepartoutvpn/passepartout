@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 APP_ROOT="Passepartout/App"
 APP_SHARED_ROOT="Passepartout/AppShared"
 

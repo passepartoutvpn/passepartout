@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 DIR="Passepartout/AppShared"
 FILENAME="Localizable.strings"
 

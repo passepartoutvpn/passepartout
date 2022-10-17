@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 SIZES="120 152 167 180 76"
 
 cd Passepartout/App/Assets.xcassets/AppIcon.appiconset

@@ -55,8 +55,8 @@ jobs:
         run: |
           VERSION=`ci/version-number.sh $PLATFORM`
           BUILD=`ci/build-number.sh $PLATFORM`
-          echo "::set-output name=version::$VERSION"
-          echo "::set-output name=build::$BUILD"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "build=$BUILD" >> $GITHUB_OUTPUT
       - name: Create keychain
         uses: ./.github/actions/create-keychain
         with:

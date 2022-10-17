@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 CURRENT_BRANCH=`git branch --show-current`
 if [[ $CURRENT_BRANCH != "master" ]]; then
     echo "Not on master branch"
