@@ -85,8 +85,7 @@ extension OrganizerView {
             } label: {
                 profileLabel(forHeader: header)
             }.contextMenu {
-                duplicateButton(forHeader: header)
-                deleteButton(forHeader: header)
+                ProfileContextMenu(header: header)
             }
         }
         
@@ -95,23 +94,6 @@ extension OrganizerView {
                 header: header,
                 isActiveProfile: profileManager.isActiveProfile(header.id)
             )
-        }
-
-        private func duplicateButton(forHeader header: Profile.Header) -> some View {
-            ProfileView.DuplicateButton(
-                header: header,
-                setAsCurrent: false
-            )
-        }
-
-        private func deleteButton(forHeader header: Profile.Header) -> some View {
-            DestructiveButton {
-                withAnimation {
-                    profileManager.removeProfiles(withIds: [header.id])
-                }
-            } label: {
-                Label(L10n.Global.Strings.delete, systemImage: themeDeleteImage)
-            }
         }
 
         private var sortedHeaders: [Profile.Header] {
@@ -142,6 +124,55 @@ extension OrganizerView {
         private func performMigrationsIfNeeded() {
             Task { @MainActor in
                 UpgradeManager.shared.doMigrations(profileManager)
+            }
+        }
+    }
+}
+
+extension OrganizerView {
+    struct ProfileContextMenu: View {
+        @ObservedObject private var profileManager: ProfileManager
+
+        @ObservedObject private var currentVPNState: ObservableVPNState
+
+        let header: Profile.Header
+        
+        init(header: Profile.Header) {
+            profileManager = .shared
+            currentVPNState = .shared
+            self.header = header
+        }
+        
+        var body: some View {
+            if #available(iOS 16, *), isActiveProfileNotDisconnected {
+                reconnectButton
+            }
+            duplicateButton
+            deleteButton
+        }
+        
+        private var isActiveProfileNotDisconnected: Bool {
+            profileManager.isActiveProfile(header.id) && currentVPNState.vpnStatus != .disconnected
+        }
+        
+        private var reconnectButton: some View {
+            ProfileView.ReconnectButton()
+        }
+
+        private var duplicateButton: some View {
+            ProfileView.DuplicateButton(
+                header: header,
+                setAsCurrent: false
+            )
+        }
+
+        private var deleteButton: some View {
+            DestructiveButton {
+                withAnimation {
+                    profileManager.removeProfiles(withIds: [header.id])
+                }
+            } label: {
+                Label(L10n.Global.Strings.delete, systemImage: themeDeleteImage)
             }
         }
     }

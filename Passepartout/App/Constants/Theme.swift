@@ -245,6 +245,10 @@ extension View {
         "ellipsis.circle"
     }
 
+    var themeReconnectImage: String {
+        "arrow.clockwise"
+    }
+
     var themeShortcutsImage: String {
         "mic"
     }
@@ -288,10 +292,6 @@ extension View {
     
     var themeProviderPresetImage: String {
         "slider.horizontal.3"
-    }
-    
-    var themeProviderRefreshImage: String {
-        "arrow.clockwise"
     }
     
     var themeNetworkSettingsImage: String {

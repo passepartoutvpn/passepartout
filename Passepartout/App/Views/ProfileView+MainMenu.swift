@@ -42,6 +42,8 @@ extension ProfileView {
         
         @ObservedObject private var vpnManager: VPNManager
         
+        @ObservedObject private var currentVPNState: ObservableVPNState
+        
         @ObservedObject private var currentProfile: ObservableProfile
         
         private var header: Profile.Header {
@@ -61,6 +63,7 @@ extension ProfileView {
         init(currentProfile: ObservableProfile, modalType: Binding<ModalType?>) {
             profileManager = .shared
             vpnManager = .shared
+            currentVPNState = .shared
             self.currentProfile = currentProfile
             _modalType = modalType
         }
@@ -90,10 +93,20 @@ extension ProfileView {
 
         private var mainView: some View {
             Menu {
-                shortcutsButton
+                if isActiveProfileNotDisconnected {
+                    ReconnectButton()
+                }
+                ShortcutsButton(
+                    modalType: $modalType
+                )
                 Divider()
-                renameButton
-                duplicateButton
+                RenameButton(
+                    modalType: $modalType
+                )
+                DuplicateButton(
+                    header: header,
+                    setAsCurrent: true
+                )
                 uninstallVPNButton
                 Divider()
                 deleteProfileButton
@@ -102,25 +115,10 @@ extension ProfileView {
             }
         }
         
-        private var shortcutsButton: some View {
-            ShortcutsButton(
-                modalType: $modalType
-            )
-        }
-        
-        private var renameButton: some View {
-            RenameButton(
-                modalType: $modalType
-            )
+        private var isActiveProfileNotDisconnected: Bool {
+            profileManager.isActiveProfile(header.id) && currentVPNState.vpnStatus != .disconnected
         }
 
-        private var duplicateButton: some View {
-            DuplicateButton(
-                header: currentProfile.value.header,
-                setAsCurrent: true
-            )
-        }
-        
         private var uninstallVPNButton: some View {
             Button {
                 actionSheetType = .uninstallVPN
@@ -146,6 +144,26 @@ extension ProfileView {
         private func removeProfile() {
             withAnimation {
                 profileManager.removeProfiles(withIds: [header.id])
+            }
+        }
+    }
+}
+
+extension ProfileView {
+    struct ReconnectButton: View {
+        @ObservedObject private var vpnManager: VPNManager
+        
+        init() {
+            vpnManager = .shared
+        }
+        
+        var body: some View {
+            Button {
+                Task { @MainActor in
+                    await vpnManager.reconnect()
+                }
+            } label: {
+                Label(L10n.Global.Strings.reconnect, systemImage: themeReconnectImage)
             }
         }
     }
