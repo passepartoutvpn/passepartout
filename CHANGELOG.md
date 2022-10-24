@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- OpenVPN: Tunnel dying prematurely. [tunnelkit#289](https://github.com/passepartoutvpn/tunnelkit/issues/289), [#237](https://github.com/passepartoutvpn/passepartout-apple/issues/237)
+- OpenVPN: Local network settings being ignored. [tunnelkit#290](https://github.com/passepartoutvpn/tunnelkit/issues/290)
 - Restore "Reconnect" action in profiles. [#232](https://github.com/passepartoutvpn/passepartout-apple/pull/232)
 
 ## 2.0.1 (2022-10-17)
