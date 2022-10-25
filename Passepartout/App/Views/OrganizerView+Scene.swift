@@ -85,8 +85,11 @@ extension OrganizerView {
 
         private func onScenePhase(_ phase: ScenePhase) {
             switch phase {
+            case .inactive:
+                productManager.snapshotRefunds()
+
             case .active:
-                if productManager.hasRefunded() {
+                if productManager.hasNewRefunds() {
                     Task { @MainActor in
                         await vpnManager.uninstall()
                     }

@@ -63,6 +63,8 @@ class ProductManager: NSObject, ObservableObject {
     
     private var cancelledPurchases: Set<LocalProduct>
     
+    private var cancelledPurchasesSnapshot: Set<LocalProduct>
+    
     private var refreshRequest: SKReceiptRefreshRequest?
     
     init(appType: AppType, buildProducts: BuildProducts) {
@@ -75,6 +77,7 @@ class ProductManager: NSObject, ObservableObject {
         purchasedFeatures = []
         purchaseDates = [:]
         cancelledPurchases = []
+        cancelledPurchasesSnapshot = []
         
         super.init()
 
@@ -281,8 +284,17 @@ extension ProductManager: SKPaymentTransactionObserver {
 }
 
 extension ProductManager {
-    func hasRefunded() -> Bool {
+    func snapshotRefunds() {
+        cancelledPurchasesSnapshot = cancelledPurchases
+    }
+    
+    func hasNewRefunds() -> Bool {
         reloadReceipt(andNotify: false)
+        guard cancelledPurchases != cancelledPurchasesSnapshot else {
+            pp_log.debug("No purchase was refunded")
+            return false
+        }
+        
         let isEligibleForFullVersion = isFullVersion()
         let hasCancelledFullVersion: Bool
         let hasCancelledTrustedNetworks: Bool
