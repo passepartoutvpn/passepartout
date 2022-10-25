@@ -1,16 +1,10 @@
 ### Added
 
-- IVPN provider.
-- OpenVPN: Support for `--route-nopull`.
-- App log in Diagnostics screen.
-
-### Changed
-
-- Retain whitespaces in imported file names.
+- OpenVPN: Support for `--remote-random-hostname`.
 
 ### Fixed
 
-- Oeck provider is available again to free users.
-- Randomic crashes on profile updates.
-- Mullvad: enforce password to avoid "Auth failed".
+- OpenVPN: Tunnel dying prematurely.
+- OpenVPN: Local network settings being ignored.
+- Restore "Reconnect" action in profiles.
 
