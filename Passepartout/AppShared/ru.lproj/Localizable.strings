@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "Выйти из %@";
 
+"menu.system.quit.messages.confirm" = "Если включить VPN, он всё равно будет работать в фоновом режиме. Вы точно хотите выйти?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Подключается";
@@ -227,6 +228,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Перезаключение";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "после %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Рандомная конечная точка";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Выбирать имена хостов случайным образом";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
@@ -264,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Журнал отладки";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "Копировать";
 
 /* MARK: DiagnosticsView -> ReportIssueView */

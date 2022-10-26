@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "%@ afsluiten";
 
+"menu.system.quit.messages.confirm" = "De VPN zal, indien geactiveerd, op de achtergrond blijven draaien. Wilt u sluiten?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Verbinden";
@@ -227,6 +228,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Renegotiation";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "na %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Willekeurig eindpunt";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Hostnamen randomiseren";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
@@ -264,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Foutopsporingslogboek";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "Kopiëren";
 
 /* MARK: DiagnosticsView -> ReportIssueView */

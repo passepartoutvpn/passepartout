@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "%@ beenden";
 
+"menu.system.quit.messages.confirm" = "Wenn das VPN aktiviert wurde, läuft es weiter im Hintergrund. Möchtest du beenden?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Verbinde";
@@ -227,6 +228,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "erneute Aushandlung";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "nach %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Endpunkt zufällig wählen";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Hostnamen zufällig wählen";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
@@ -264,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Debug log";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "Kopieren";
 
 /* MARK: DiagnosticsView -> ReportIssueView */

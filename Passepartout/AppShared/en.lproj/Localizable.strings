@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "Quit %@";
 
+"menu.system.quit.messages.confirm" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Connecting";
@@ -265,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Debug log";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "Copy";
 
 /* MARK: DiagnosticsView -> ReportIssueView */

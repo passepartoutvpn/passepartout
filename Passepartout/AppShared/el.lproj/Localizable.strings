@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "Διακοπή %@";
 
+"menu.system.quit.messages.confirm" = "Το VPN, αν είναι ενεργοποιημένο, θα εξακολουθεί να εκτελείται στο παρασκήνιο. Θέλετε να το διακόψετε?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Προσπάθεια Σύνδεσης";
@@ -227,6 +228,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Επαναδιαπραγμάτευση";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "μετά από %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Τυχαίο τελικό σημείο";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Τυχαιοποίηση ονομάτων κεντρικών υπολογιστών";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
@@ -264,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Μητρώο εντοπισμού σφαλμάτων";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "Αντιγραφή";
 
 /* MARK: DiagnosticsView -> ReportIssueView */

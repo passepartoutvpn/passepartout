@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "退出%@";
 
+"menu.system.quit.messages.confirm" = "VPN（如果启用）仍将在后台运行。您要退出吗？";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "连接中";
@@ -227,6 +228,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "重协商";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "在%@之后";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "随机的服务端";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "随机主机名";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
@@ -264,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "调试日志";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "复制";
 
 /* MARK: DiagnosticsView -> ReportIssueView */

@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "Sair %@";
 
+"menu.system.quit.messages.confirm" = "A VPN, se ativa, ainda vai ser executada em segundo plano. Quer sair?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Conectando";
@@ -227,6 +228,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Renegociando";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "depois de %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Destino randômico";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Nomes de anfitrião aleatórios";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
@@ -264,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Log de Debug";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "Copiar";
 
 /* MARK: DiagnosticsView -> ReportIssueView */

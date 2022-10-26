@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "Quitter %@";
 
+"menu.system.quit.messages.confirm" = "S'il est activé, le VPN fonctionnera en tâche de fond. Voulez-vous quitter ?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Connection...";
@@ -227,6 +228,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Renégociation";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "aprè %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Extrémité aléatoire";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Rendre aléatoire les noms d'hôtes";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
@@ -264,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Journal de débogage";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "Copier";
 
 /* MARK: DiagnosticsView -> ReportIssueView */

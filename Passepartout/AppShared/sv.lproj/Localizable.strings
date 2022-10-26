@@ -80,6 +80,7 @@
 
 "menu.system.quit.title" = "Lämna %@";
 
+"menu.system.quit.messages.confirm" = "Om ett VPN är aktiverat kommer detta fortfarande att köra i bakgrunden. Vill du lämna?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Anslutning";
@@ -227,6 +228,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Omförhandling";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "efter %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Omställ slutpunkt på slumpmässigt sätt";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Välj värdnamn slumpmässigt";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
@@ -264,6 +266,7 @@
 /* MARK: DiagnosticsView -> DebugLogView */
 
 "debug_log.title" = "Debug log";
+/* MARK: DiagnosticsView -> DebugLogView */
 "debug_log.buttons.copy" = "Kopiera";
 
 /* MARK: DiagnosticsView -> ReportIssueView */
