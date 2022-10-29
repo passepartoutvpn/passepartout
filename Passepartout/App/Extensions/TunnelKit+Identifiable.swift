@@ -34,12 +34,12 @@ extension Endpoint: Identifiable {
 
 extension IPv4Settings.Route: Identifiable {
     public var id: String {
-        "\(destination):\(mask):\(gateway)"
+        "\(destination):\(mask):\(gateway ?? "*")"
     }
 }
 
 extension IPv6Settings.Route: Identifiable {
     public var id: String {
-        "\(destination):\(prefixLength):\(gateway)"
+        "\(destination):\(prefixLength):\(gateway ?? "*")"
     }
 }

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - OpenVPN: Tunnel dying prematurely. [tunnelkit#289](https://github.com/passepartoutvpn/tunnelkit/issues/289), [#237](https://github.com/passepartoutvpn/passepartout-apple/issues/237)
 - OpenVPN: Local network settings being ignored. [tunnelkit#290](https://github.com/passepartoutvpn/tunnelkit/issues/290)
+- OpenVPN: Routes from configuration file are ignored. [tunnelkit#278](https://github.com/passepartoutvpn/tunnelkit/issues/278)
 - OpenVPN: Parse IPv6 endpoints properly. [tunnelkit#294](https://github.com/passepartoutvpn/tunnelkit/issues/294)
 - Restore "Reconnect" action in profiles. [#232](https://github.com/passepartoutvpn/passepartout-apple/pull/232)
 - Systematic uninstallation of VPN profile if any IAP was refunded. [#238](https://github.com/passepartoutvpn/passepartout-apple/issues/238)

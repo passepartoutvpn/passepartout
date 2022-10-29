@@ -40,12 +40,9 @@ extension EndpointAdvancedView {
         var body: some View {
             List {
                 let cfg = builder.build()
-                if isServerPushed {
-                    ipv4Section
-                    ipv6Section
-                } else {
-                    pullSection(configuration: cfg)
-                }
+                ipv4Section
+                ipv6Section
+                pullSection(configuration: cfg)
                 dnsSection(configuration: cfg)
                 proxySection(configuration: cfg)
                 if !isReadonly {
@@ -65,23 +62,28 @@ extension EndpointAdvancedView {
 }
 
 extension EndpointAdvancedView.OpenVPNView {
+
+    @ViewBuilder
     private var ipv4Section: some View {
-        builder.ipv4.map { cfg in
+        if builder.ipv4 != nil || builder.routes4 != nil {
             Section {
-                themeLongContentLinkDefault(
-                    L10n.Global.Strings.address,
-                    content: .constant(builder.ipv4.localizedAddress)
-                )
-                themeLongContentLinkDefault(
-                    L10n.NetworkSettings.Gateway.title,
-                    content: .constant(builder.ipv4.localizedDefaultGateway)
-                )
-            
-                ForEach(cfg.routes, id: \.self) { route in
+                if let settings = builder.ipv4 {
                     themeLongContentLinkDefault(
-                        L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
-                        content: .constant(route.localizedDescription)
+                        L10n.Global.Strings.address,
+                        content: .constant(settings.localizedAddress)
                     )
+                    themeLongContentLinkDefault(
+                        L10n.NetworkSettings.Gateway.title,
+                        content: .constant(settings.localizedDefaultGateway)
+                    )
+                }
+                builder.routes4.map { routes in
+                    ForEach(routes, id: \.self) { route in
+                        themeLongContentLinkDefault(
+                            L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
+                            content: .constant(route.localizedDescription)
+                        )
+                    }
                 }
             } header: {
                 Text(Unlocalized.Network.ipv4)
@@ -89,23 +91,27 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
     
+    @ViewBuilder
     private var ipv6Section: some View {
-        builder.ipv6.map { cfg in
+        if builder.ipv6 != nil || builder.routes6 != nil {
             Section {
-                themeLongContentLinkDefault(
-                    L10n.Global.Strings.address,
-                    content: .constant(builder.ipv6.localizedAddress)
-                )
-                themeLongContentLinkDefault(
-                    L10n.NetworkSettings.Gateway.title,
-                    content: .constant(builder.ipv6.localizedDefaultGateway)
-                )
-
-                ForEach(cfg.routes, id: \.self) { route in
+                if let settings = builder.ipv6 {
                     themeLongContentLinkDefault(
-                        L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
-                        content: .constant(route.localizedDescription)
+                        L10n.Global.Strings.address,
+                        content: .constant(settings.localizedAddress)
                     )
+                    themeLongContentLinkDefault(
+                        L10n.NetworkSettings.Gateway.title,
+                        content: .constant(settings.localizedDefaultGateway)
+                    )
+                }
+                builder.routes6.map { routes in
+                    ForEach(routes, id: \.self) { route in
+                        themeLongContentLinkDefault(
+                            L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
+                            content: .constant(route.localizedDescription)
+                        )
+                    }
                 }
             } header: {
                 Text(Unlocalized.Network.ipv6)

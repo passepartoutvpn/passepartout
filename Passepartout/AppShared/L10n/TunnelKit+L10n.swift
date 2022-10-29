@@ -76,43 +76,35 @@ extension TimeInterval {
     }
 }
 
-extension Optional where Wrapped == IPv4Settings {
+extension IPv4Settings {
     var localizedAddress: String {
-        if let ipv4 = self {
-            return "\(ipv4.address)/\(ipv4.addressMask)"
-        } else {
-            return L10n.Global.Strings.none
-        }
+        "\(address)/\(addressMask)"
     }
 
     var localizedDefaultGateway: String {
-        self?.defaultGateway ?? L10n.Global.Strings.none
+        defaultGateway
     }
 }
 
-extension Optional where Wrapped == IPv6Settings {
+extension IPv6Settings {
     var localizedAddress: String {
-        if let ipv6 = self {
-            return "\(ipv6.address)/\(ipv6.addressPrefixLength)"
-        } else {
-            return L10n.Global.Strings.none
-        }
+        "\(address)/\(addressPrefixLength)"
     }
 
     var localizedDefaultGateway: String {
-        self?.defaultGateway ?? L10n.Global.Strings.none
+        defaultGateway
     }
 }
 
 extension IPv4Settings.Route {
     var localizedDescription: String {
-        "\(destination)/\(mask) -> \(gateway)"
+        "\(destination)/\(mask) -> \(gateway ?? "*")"
     }
 }
 
 extension IPv6Settings.Route {
     var localizedDescription: String {
-        "\(destination)/\(prefixLength) -> \(gateway)"
+        "\(destination)/\(prefixLength) -> \(gateway ?? "*")"
     }
 }
 
