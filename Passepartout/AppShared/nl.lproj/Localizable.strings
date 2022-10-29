@@ -203,6 +203,7 @@
 "endpoint.wireguard.items.allowed_ip.caption" = "Toegestane IP";
 
 "endpoint.advanced.title" = "Technische details";
+"endpoint.advanced.openvpn.sections.pull.header" = "Pull van server";
 "endpoint.advanced.openvpn.sections.communication.header" = "Communicatie";
 "endpoint.advanced.openvpn.sections.reset.footer" = "Tik hier als de connectiviteit niet meer werkt na het aanpassen van instellingen, om terug te gaan naar de originele configuratie.";
 "endpoint.advanced.openvpn.sections.compression.header" = "Compressie";

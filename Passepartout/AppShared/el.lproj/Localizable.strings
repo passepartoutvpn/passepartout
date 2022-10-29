@@ -203,6 +203,7 @@
 "endpoint.wireguard.items.allowed_ip.caption" = "Επιτρεπόμενη IP";
 
 "endpoint.advanced.title" = "Τεχνικές Λεπτομέρειες";
+"endpoint.advanced.openvpn.sections.pull.header" = "Τραβήξτε από τον διακομιστή";
 "endpoint.advanced.openvpn.sections.communication.header" = "Επικοινωνία";
 "endpoint.advanced.openvpn.sections.reset.footer" = "Αν καταλήξατε σε κατεστραμένη συνδεσιμότητα μετά την αλλαγή των παραμέτρων επικοινωνίας, πατήστε για να επανέλθετε στην αρχική διαμόρφωση.";
 "endpoint.advanced.openvpn.sections.compression.header" = "Συμπίεση";

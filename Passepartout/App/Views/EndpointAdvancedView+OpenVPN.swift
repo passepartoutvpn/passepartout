@@ -40,9 +40,15 @@ extension EndpointAdvancedView {
         var body: some View {
             List {
                 let cfg = builder.build()
-                ipv4Section
-                ipv6Section
-                pullSection(configuration: cfg)
+                if !isServerPushed {
+                    pullSection(configuration: cfg)
+                }
+                if builder.ipv4 != nil || builder.routes4 != nil {
+                    ipv4Section
+                }
+                if builder.ipv6 != nil || builder.routes6 != nil {
+                    ipv6Section
+                }
                 dnsSection(configuration: cfg)
                 proxySection(configuration: cfg)
                 if !isReadonly {
@@ -62,63 +68,6 @@ extension EndpointAdvancedView {
 }
 
 extension EndpointAdvancedView.OpenVPNView {
-
-    @ViewBuilder
-    private var ipv4Section: some View {
-        if builder.ipv4 != nil || builder.routes4 != nil {
-            Section {
-                if let settings = builder.ipv4 {
-                    themeLongContentLinkDefault(
-                        L10n.Global.Strings.address,
-                        content: .constant(settings.localizedAddress)
-                    )
-                    themeLongContentLinkDefault(
-                        L10n.NetworkSettings.Gateway.title,
-                        content: .constant(settings.localizedDefaultGateway)
-                    )
-                }
-                builder.routes4.map { routes in
-                    ForEach(routes, id: \.self) { route in
-                        themeLongContentLinkDefault(
-                            L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
-                            content: .constant(route.localizedDescription)
-                        )
-                    }
-                }
-            } header: {
-                Text(Unlocalized.Network.ipv4)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private var ipv6Section: some View {
-        if builder.ipv6 != nil || builder.routes6 != nil {
-            Section {
-                if let settings = builder.ipv6 {
-                    themeLongContentLinkDefault(
-                        L10n.Global.Strings.address,
-                        content: .constant(settings.localizedAddress)
-                    )
-                    themeLongContentLinkDefault(
-                        L10n.NetworkSettings.Gateway.title,
-                        content: .constant(settings.localizedDefaultGateway)
-                    )
-                }
-                builder.routes6.map { routes in
-                    ForEach(routes, id: \.self) { route in
-                        themeLongContentLinkDefault(
-                            L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
-                            content: .constant(route.localizedDescription)
-                        )
-                    }
-                }
-            } header: {
-                Text(Unlocalized.Network.ipv6)
-            }
-        }
-    }
-
     private func pullSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.pullMask.map { mask in
             Section {
@@ -126,8 +75,58 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text($0.localizedDescription)
                 }
             } header: {
-                Text(L10n.Global.Strings.download)
+                Text(L10n.Endpoint.Advanced.Openvpn.Sections.Pull.header)
             }
+        }
+    }
+
+    private var ipv4Section: some View {
+        Section {
+            if let settings = builder.ipv4 {
+                themeLongContentLinkDefault(
+                    L10n.Global.Strings.address,
+                    content: .constant(settings.localizedAddress)
+                )
+                themeLongContentLinkDefault(
+                    L10n.NetworkSettings.Gateway.title,
+                    content: .constant(settings.localizedDefaultGateway)
+                )
+            }
+            builder.routes4.map { routes in
+                ForEach(routes, id: \.self) { route in
+                    themeLongContentLinkDefault(
+                        L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
+                        content: .constant(route.localizedDescription)
+                    )
+                }
+            }
+        } header: {
+            Text(Unlocalized.Network.ipv4)
+        }
+    }
+    
+    private var ipv6Section: some View {
+        Section {
+            if let settings = builder.ipv6 {
+                themeLongContentLinkDefault(
+                    L10n.Global.Strings.address,
+                    content: .constant(settings.localizedAddress)
+                )
+                themeLongContentLinkDefault(
+                    L10n.NetworkSettings.Gateway.title,
+                    content: .constant(settings.localizedDefaultGateway)
+                )
+            }
+            builder.routes6.map { routes in
+                ForEach(routes, id: \.self) { route in
+                    themeLongContentLinkDefault(
+                        L10n.Endpoint.Advanced.Openvpn.Items.Route.caption,
+                        content: .constant(route.localizedDescription)
+                    )
+                }
+            }
+        } header: {
+            Text(Unlocalized.Network.ipv6)
         }
     }
 

@@ -203,6 +203,7 @@
 "endpoint.wireguard.items.allowed_ip.caption" = "Zulässige IP";
 
 "endpoint.advanced.title" = "Technische Details";
+"endpoint.advanced.openvpn.sections.pull.header" = "Vom Server ziehen";
 "endpoint.advanced.openvpn.sections.communication.header" = "Kommunikation";
 "endpoint.advanced.openvpn.sections.reset.footer" = "Wenn du nach einer Änderung der Kommunikations-Parameter dich nicht mehr verbinden kannst, hier tippen um zur originalen Konfiguration zurückzukehren.";
 "endpoint.advanced.openvpn.sections.compression.header" = "Komprimierung";

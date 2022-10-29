@@ -194,7 +194,7 @@ internal enum L10n {
     /// MARK: DiagnosticsView -> DebugLogView
     internal static let title = L10n.tr("Localizable", "debug_log.title", fallback: "Debug log")
     internal enum Buttons {
-      /// Copy
+      /// MARK: DiagnosticsView -> DebugLogView
       internal static let copy = L10n.tr("Localizable", "debug_log.buttons.copy", fallback: "Copy")
     }
   }
@@ -384,6 +384,10 @@ internal enum L10n {
             /// Other
             internal static let header = L10n.tr("Localizable", "endpoint.advanced.openvpn.sections.other.header", fallback: "Other")
           }
+          internal enum Pull {
+            /// Pull from server
+            internal static let header = L10n.tr("Localizable", "endpoint.advanced.openvpn.sections.pull.header", fallback: "Pull from server")
+          }
           internal enum Reset {
             /// If you ended up with broken connectivity after changing the communication parameters, tap to revert to the original configuration.
             internal static let footer = L10n.tr("Localizable", "endpoint.advanced.openvpn.sections.reset.footer", fallback: "If you ended up with broken connectivity after changing the communication parameters, tap to revert to the original configuration.")
@@ -570,6 +574,10 @@ internal enum L10n {
         /// Quit %@
         internal static func title(_ p1: Any) -> String {
           return L10n.tr("Localizable", "menu.system.quit.title", String(describing: p1), fallback: "Quit %@")
+        }
+        internal enum Messages {
+          /// The VPN, if enabled, will still run in the background. Do you want to quit?
+          internal static let confirm = L10n.tr("Localizable", "menu.system.quit.messages.confirm", fallback: "The VPN, if enabled, will still run in the background. Do you want to quit?")
         }
       }
     }

@@ -203,6 +203,7 @@
 "endpoint.wireguard.items.allowed_ip.caption" = "Допустимый IP";
 
 "endpoint.advanced.title" = "Техническая информация";
+"endpoint.advanced.openvpn.sections.pull.header" = "Вытащить с сервера";
 "endpoint.advanced.openvpn.sections.communication.header" = "Связь";
 "endpoint.advanced.openvpn.sections.reset.footer" = "Если после изменения параметров связи у Вас разорвалось соединение, нажмите, чтобы вернуться к исходной конфигурации.";
 "endpoint.advanced.openvpn.sections.compression.header" = "Компресия";

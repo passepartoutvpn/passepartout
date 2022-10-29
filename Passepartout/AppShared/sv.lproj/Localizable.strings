@@ -203,6 +203,7 @@
 "endpoint.wireguard.items.allowed_ip.caption" = "Tillåtet IP";
 
 "endpoint.advanced.title" = "Tekniska detaljer";
+"endpoint.advanced.openvpn.sections.pull.header" = "Dra från servern";
 "endpoint.advanced.openvpn.sections.communication.header" = "Communication";
 "endpoint.advanced.openvpn.sections.reset.footer" = "Om du slutade med bruten anslutning efter att ha ändrat kommunikationsparametrarna trycker du på för att återgå till den ursprungliga konfigurationen.";
 "endpoint.advanced.openvpn.sections.compression.header" = "Kompression";

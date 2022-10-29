@@ -203,6 +203,7 @@
 "endpoint.wireguard.items.allowed_ip.caption" = "允许的IP";
 
 "endpoint.advanced.title" = "技术细节";
+"endpoint.advanced.openvpn.sections.pull.header" = "从服务器拉取";
 "endpoint.advanced.openvpn.sections.communication.header" = "通信";
 "endpoint.advanced.openvpn.sections.reset.footer" = "如果你在更改连接参数后变成断开状态，点按已恢复到原始的配置。";
 "endpoint.advanced.openvpn.sections.compression.header" = "压缩";
