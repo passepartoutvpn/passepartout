@@ -79,6 +79,76 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PassepartoutCoreTests"
+               BuildableName = "PassepartoutCoreTests"
+               BlueprintName = "PassepartoutCoreTests"
+               ReferencedContainer = "container:PassepartoutLibrary">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PassepartoutLibraryTests"
+               BuildableName = "PassepartoutLibraryTests"
+               BlueprintName = "PassepartoutLibraryTests"
+               ReferencedContainer = "container:PassepartoutLibrary">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PassepartoutProfilesTests"
+               BuildableName = "PassepartoutProfilesTests"
+               BlueprintName = "PassepartoutProfilesTests"
+               ReferencedContainer = "container:PassepartoutLibrary">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PassepartoutProvidersTests"
+               BuildableName = "PassepartoutProvidersTests"
+               BlueprintName = "PassepartoutProvidersTests"
+               ReferencedContainer = "container:PassepartoutLibrary">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PassepartoutServicesTests"
+               BuildableName = "PassepartoutServicesTests"
+               BlueprintName = "PassepartoutServicesTests"
+               ReferencedContainer = "container:PassepartoutLibrary">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PassepartoutUtilsTests"
+               BuildableName = "PassepartoutUtilsTests"
+               BlueprintName = "PassepartoutUtilsTests"
+               ReferencedContainer = "container:PassepartoutLibrary">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "PassepartoutVPNTests"
+               BuildableName = "PassepartoutVPNTests"
+               BlueprintName = "PassepartoutVPNTests"
+               ReferencedContainer = "container:PassepartoutLibrary">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

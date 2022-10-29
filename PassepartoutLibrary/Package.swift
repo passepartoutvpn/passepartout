@@ -89,15 +89,21 @@ let package = Package(
             dependencies: [
                 .product(name: "TunnelKitWireGuardAppExtension", package: "TunnelKit")
             ]),
-//        .testTarget(
-//            name: "PassepartoutLibraryTests",
-//            dependencies: ["PassepartoutLibrary"]),
-//        .testTarget(
-//            name: "PassepartoutProfilesTests",
-//            dependencies: ["PassepartoutProfiles"]),
+        .testTarget(
+            name: "PassepartoutLibraryTests",
+            dependencies: ["PassepartoutLibrary"]),
+        .testTarget(
+            name: "PassepartoutVPNTests",
+            dependencies: ["PassepartoutVPN"]),
+        .testTarget(
+            name: "PassepartoutProfilesTests",
+            dependencies: ["PassepartoutProfiles"]),
         .testTarget(
             name: "PassepartoutProvidersTests",
             dependencies: ["PassepartoutProviders"]),
+        .testTarget(
+            name: "PassepartoutCoreTests",
+            dependencies: ["PassepartoutCore"]),
         .testTarget(
             name: "PassepartoutServicesTests",
             dependencies: ["PassepartoutServices"]),

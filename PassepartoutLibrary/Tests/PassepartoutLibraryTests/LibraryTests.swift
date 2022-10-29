@@ -1,8 +1,8 @@
 //
-//  CoreTests.swift
+//  LibraryTests.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/30/19.
+//  Created by Davide De Rosa on 10/29/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,13 +24,13 @@
 //
 
 import XCTest
-@testable import PassepartoutCore
+@testable import PassepartoutLibrary
 
-class CoreTests: XCTestCase {
+class LibraryTests: XCTestCase {
     override func setUp() {
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-}
+ }
