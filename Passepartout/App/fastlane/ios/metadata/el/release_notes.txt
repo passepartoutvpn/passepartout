@@ -6,6 +6,7 @@
 
 - OpenVPN: Tunnel dying prematurely.
 - OpenVPN: Local network settings being ignored.
+- OpenVPN: Routes from configuration file are ignored.
 - OpenVPN: Parse IPv6 endpoints properly.
 - Restore "Reconnect" action in profiles.
 - Systematic uninstallation of VPN profile if any IAP was refunded.
