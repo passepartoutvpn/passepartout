@@ -1,22 +1,18 @@
 name: Unit Tests
 
 on:
-  push:
-    branches-ignore:
-      - 'master' # temporary
-      - 'test/*'
+  pull_request:
+    types: [ opened, synchronize ]
     paths-ignore:
       - '.beta-*'
-      - 'Passepartout.xcodeproj/project.pbxproj'
-      - '**/Info.plist'
-      - '**/CHANGELOG.md'
-      - '**/release_notes.txt'
+      - '**/*.md'
+      - 'Passepartout/App/fastlane/**'
 
 jobs:
   run_tests:
     name: Run tests
     runs-on: macos-12
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
         with:
@@ -26,5 +22,4 @@ jobs:
           xcode-version: latest-stable
       - name: Run tests
         run: |
-          cd PassepartoutLibrary
-          swift test
+          bundle exec fastlane --env beta,ios scan
