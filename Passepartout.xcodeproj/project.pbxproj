@@ -138,7 +138,7 @@
 		0EB17EAA27D226C900D473B5 /* Constants+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA527D2263700D473B5 /* Constants+App.swift */; };
 		0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA327D2263700D473B5 /* LocalProduct.swift */; };
 		0EB17EBA27D2560300D473B5 /* PassepartoutProviders+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */; };
-		0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EB3413027C7761A00483410 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB3412F27C7761A00483410 /* Binding+Extensions.swift */; };
 		0EB34BCA27C6A70200B126DA /* OnDemandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB34BC927C6A70200B126DA /* OnDemandView.swift */; };
 		0EB34BCC27C6F41D00B126DA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB34BCB27C6F41D00B126DA /* Theme.swift */; };
@@ -158,7 +158,7 @@
 		0ED2B33927D3C49800FD8EA9 /* OpenVPNAppExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED2B33827D3C49800FD8EA9 /* OpenVPNAppExtension */; };
 		0ED2B34527D3C77800FD8EA9 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED31C3920CF39510027975F /* NetworkExtension.framework */; };
 		0ED2B35B27D3C94F00FD8EA9 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2B35A27D3C94F00FD8EA9 /* PacketTunnelProvider.swift */; };
-		0ED2B36027D3C99100FD8EA9 /* PassepartoutWireGuardTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0ED2B36027D3C99100FD8EA9 /* PassepartoutWireGuardTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0ED2B36727D3C9A300FD8EA9 /* WireGuardAppExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED2B36627D3C9A300FD8EA9 /* WireGuardAppExtension */; };
 		0ED30DCC27EA197D0057D8A3 /* RevealingSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DCB27EA197C0057D8A3 /* RevealingSecureField.swift */; };
 		0ED30DCF27EA1EF80057D8A3 /* PaywallView+Beta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */; };
@@ -261,16 +261,16 @@
 			name = "Embed Launcher";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0EB2B14B2733FB6F007705AB /* Embed App Extensions */ = {
+		0EB2B14B2733FB6F007705AB /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0ED2B36027D3C99100FD8EA9 /* PassepartoutWireGuardTunnel.appex in Embed App Extensions */,
-				0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed App Extensions */,
+				0ED2B36027D3C99100FD8EA9 /* PassepartoutWireGuardTunnel.appex in Embed Foundation Extensions */,
+				0EB2B1482733FB6F007705AB /* PassepartoutOpenVPNTunnel.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -1011,7 +1011,7 @@
 				0E57F63620C83FC5008323CF /* Resources */,
 				0E41BDA828671339006346B4 /* Embed Launcher */,
 				0E3152B7223F9EF500F61841 /* Embed Plugins */,
-				0EB2B14B2733FB6F007705AB /* Embed App Extensions */,
+				0EB2B14B2733FB6F007705AB /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -1098,7 +1098,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
 					0E41BD96286711C3006346B4 = {
@@ -1557,6 +1557,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Passepartout/Launcher/Info.plist;
@@ -1581,6 +1582,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DTDYD63ZX9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Passepartout/Launcher/Info.plist;
@@ -1788,6 +1790,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 3395;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Passepartout/Mac/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -1821,6 +1824,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 3395;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Passepartout/Mac/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
