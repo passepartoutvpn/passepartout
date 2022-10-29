@@ -35,7 +35,7 @@ import SwiftyBeaver
 class ProvidersTests: XCTestCase {
     private static let persistence: Persistence = {
         let model = NSManagedObjectModel.mergedModel(from: [.module])!
-        return Persistence(withLocalName: "Providers", model: model, author: nil)
+        return Persistence(withLocalName: "ProvidersTests", model: model, author: nil)
     }()
 
     private var manager: ProviderManager!
