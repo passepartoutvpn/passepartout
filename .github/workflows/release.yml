@@ -169,14 +169,10 @@ jobs:
           git_commit_gpgsign: true
           git_tag_gpgsign: true
           git_push_gpgsign: false
-      - name: Pull metadata updates
-        run: |
-          git pull --no-tags origin $GITHUB_REF_NAME
-          git submodule update --recursive
       - name: Tag release
         run: |
           scripts/ci/commit-release.sh $TAG_NAME
-          git push && git push --tags
+          git push --tags
       - name: Assemble notes
         run: |
           scripts/ci/release-notes.sh $TAG_NAME >$RELEASE_NOTES

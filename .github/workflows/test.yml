@@ -6,6 +6,8 @@ on:
     paths-ignore:
       - '.beta-*'
       - '**/*.md'
+      - '**/*.sh'
+      - '**/*.yml'
       - 'Passepartout/App/fastlane/**'
 
 jobs:
