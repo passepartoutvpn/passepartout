@@ -133,11 +133,8 @@
 		0EA1D84728805EAE00F3CA48 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EA1D84628805EAE00F3CA48 /* Flags.xcassets */; };
 		0EA591162733DDDA0096F796 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0EA591142733DDDA0096F796 /* Intents.intentdefinition */; };
 		0EA9030B287045F70087BC73 /* SystemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9030A287045F70087BC73 /* SystemMenu.swift */; };
-		0EB13BAF290E825E003CB654 /* PassepartoutTestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB13BAE290E825E003CB654 /* PassepartoutTestsApp.swift */; };
-		0EB13BB1290E825E003CB654 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB13BB0290E825E003CB654 /* ContentView.swift */; };
-		0EB13BB3290E8260003CB654 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB13BB2290E8260003CB654 /* Assets.xcassets */; };
-		0EB13BB7290E8260003CB654 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB13BB6290E8260003CB654 /* Preview Assets.xcassets */; };
 		0EB13BBE290E835A003CB654 /* PassepartoutLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EB13BBD290E835A003CB654 /* PassepartoutLibrary */; };
+		0EB13BC0290E8C8D003CB654 /* PassepartoutTestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB13BBF290E8C8D003CB654 /* PassepartoutTestsApp.swift */; };
 		0EB17EA727D226B400D473B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0EB17EA927D226C900D473B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0EB17EAA27D226C900D473B5 /* Constants+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA527D2263700D473B5 /* Constants+App.swift */; };
@@ -438,11 +435,7 @@
 		0EA5912E2733DDFD0096F796 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Intents.strings; sourceTree = "<group>"; };
 		0EA9030A287045F70087BC73 /* SystemMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMenu.swift; sourceTree = "<group>"; };
 		0EB13BAC290E825E003CB654 /* PassepartoutTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EB13BAE290E825E003CB654 /* PassepartoutTestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutTestsApp.swift; sourceTree = "<group>"; };
-		0EB13BB0290E825E003CB654 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0EB13BB2290E8260003CB654 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0EB13BB4290E8260003CB654 /* PassepartoutTests.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PassepartoutTests.entitlements; sourceTree = "<group>"; };
-		0EB13BB6290E8260003CB654 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0EB13BBF290E8C8D003CB654 /* PassepartoutTestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutTestsApp.swift; sourceTree = "<group>"; };
 		0EB17EA127D2263700D473B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0EB17EA327D2263700D473B5 /* LocalProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalProduct.swift; sourceTree = "<group>"; };
 		0EB17EA527D2263700D473B5 /* Constants+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+App.swift"; sourceTree = "<group>"; };
@@ -894,21 +887,9 @@
 		0EB13BAD290E825E003CB654 /* PassepartoutTests */ = {
 			isa = PBXGroup;
 			children = (
-				0EB13BAE290E825E003CB654 /* PassepartoutTestsApp.swift */,
-				0EB13BB0290E825E003CB654 /* ContentView.swift */,
-				0EB13BB2290E8260003CB654 /* Assets.xcassets */,
-				0EB13BB4290E8260003CB654 /* PassepartoutTests.entitlements */,
-				0EB13BB5290E8260003CB654 /* Preview Content */,
+				0EB13BBF290E8C8D003CB654 /* PassepartoutTestsApp.swift */,
 			);
 			path = PassepartoutTests;
-			sourceTree = "<group>";
-		};
-		0EB13BB5290E8260003CB654 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				0EB13BB6290E8260003CB654 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		0ECB78D1285F4F4000B0E460 /* AppShared */ = {
@@ -1193,6 +1174,7 @@
 					};
 					0EB13BAB290E825E003CB654 = {
 						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1400;
 					};
 					0ECB78D9285F52F700B0E460 = {
 						CreatedOnToolsVersion = 13.4;
@@ -1280,8 +1262,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EB13BB7290E8260003CB654 /* Preview Assets.xcassets in Resources */,
-				0EB13BB3290E8260003CB654 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1517,8 +1497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EB13BB1290E825E003CB654 /* ContentView.swift in Sources */,
-				0EB13BAF290E825E003CB654 /* PassepartoutTestsApp.swift in Sources */,
+				0EB13BC0290E8C8D003CB654 /* PassepartoutTestsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1879,15 +1858,10 @@
 		0EB13BB8290E8260003CB654 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = PassepartoutTests/PassepartoutTests.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PassepartoutTests/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1899,13 +1873,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
-				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
@@ -1914,6 +1883,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1922,15 +1892,10 @@
 		0EB13BB9290E8260003CB654 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = PassepartoutTests/PassepartoutTests.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PassepartoutTests/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1942,13 +1907,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
-				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
