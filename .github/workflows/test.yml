@@ -12,7 +12,7 @@ jobs:
   run_tests:
     name: Run tests
     runs-on: macos-12
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v2
         with:
