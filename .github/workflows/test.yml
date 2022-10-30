@@ -20,6 +20,12 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "^1.17"
       - name: Run tests
         run: |
           bundle exec fastlane --env beta,ios scan
