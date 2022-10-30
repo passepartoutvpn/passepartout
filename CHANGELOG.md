@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+
+- Improve kill switch behavior. [#181](https://github.com/passepartoutvpn/passepartout-apple/issues/181)
+- Retain original filename as imported profile name. [#240](https://github.com/passepartoutvpn/passepartout-apple/pull/240)
+
+## Unreleased
+
 ### Added
 
 - OpenVPN: Support for `--remote-random-hostname`. [tunnelkit#286](https://github.com/passepartoutvpn/tunnelkit/pull/286)
