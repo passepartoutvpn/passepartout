@@ -48,7 +48,6 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: "^1.17"
-          cache: true
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
