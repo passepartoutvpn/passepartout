@@ -1,3 +1,2 @@
 scheme "PassepartoutTests"
 device "iPhone 14"
-output_style "raw"
