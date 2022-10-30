@@ -32,11 +32,8 @@ import AppKit
 #endif
 
 extension URL {
-    private static let illegalCharacterFallback = "_"
-    
-    public var normalizedFilename: String {
-        let filename = deletingPathExtension().lastPathComponent
-        return filename.components(separatedBy: CharacterSet.filename.inverted).joined(separator: URL.illegalCharacterFallback)
+    public var filename: String {
+        deletingPathExtension().lastPathComponent
     }
     
     @discardableResult

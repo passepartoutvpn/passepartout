@@ -49,7 +49,7 @@ extension AddHostView {
                 return
             }
             isNamePreset = true
-            profileName = url.normalizedFilename
+            profileName = url.filename
         }
 
         @MainActor
