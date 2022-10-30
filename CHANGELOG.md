@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OpenVPN: Parse IPv6 endpoints properly. [tunnelkit#294](https://github.com/passepartoutvpn/tunnelkit/issues/294)
 - Restore "Reconnect" action in profiles. [#232](https://github.com/passepartoutvpn/passepartout-apple/pull/232)
 - Systematic uninstallation of VPN profile if any IAP was refunded. [#238](https://github.com/passepartoutvpn/passepartout-apple/issues/238)
+- Use .includeAllNetworks for best-effort kill switch. [#181](https://github.com/passepartoutvpn/passepartout-apple/issues/181), [tunnelkit#300](https://github.com/passepartoutvpn/tunnelkit/pull/300)
 
 ## 2.0.1 (2022-10-17)
 

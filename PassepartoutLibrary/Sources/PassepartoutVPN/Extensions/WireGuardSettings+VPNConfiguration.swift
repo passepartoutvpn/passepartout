@@ -47,6 +47,7 @@ extension Profile.WireGuardSettings: VPNConfigurationProviding {
             appGroup: parameters.appGroup,
             configuration: customConfiguration
         )
+        cfg.killSwitch = true
         cfg.shouldDebug = true
         cfg.debugLogPath = parameters.preferences.tunnelLogPath
         cfg.debugLogFormat = parameters.preferences.tunnelLogFormat

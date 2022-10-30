@@ -56,11 +56,12 @@ extension Profile.OpenVPNSettings: VPNConfigurationProviding {
             appGroup: parameters.appGroup,
             configuration: customConfiguration
         )
+        cfg.username = parameters.username
+        cfg.killSwitch = true
         cfg.shouldDebug = true
         cfg.debugLogPath = parameters.preferences.tunnelLogPath
         cfg.debugLogFormat = parameters.preferences.tunnelLogFormat
         cfg.masksPrivateData = parameters.preferences.masksPrivateData
-        cfg.username = parameters.username
         
         var extra = NetworkExtensionExtra()
         extra.passwordReference = parameters.passwordReference
