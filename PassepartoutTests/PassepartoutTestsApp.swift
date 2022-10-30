@@ -1,8 +1,8 @@
 //
-//  CoreTests.swift
+//  PassepartoutTestsApp.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/30/19.
+//  Created by Davide De Rosa on 10/30/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,14 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import XCTest
-@testable import PassepartoutCore
+import SwiftUI
 
-class CoreTests: XCTestCase {
-    override func setUp() {
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+@main
+struct PassepartoutTestsApp: App {
+    var body: some Scene {
+        WindowGroup {
+            EmptyView()
+        }
     }
 }

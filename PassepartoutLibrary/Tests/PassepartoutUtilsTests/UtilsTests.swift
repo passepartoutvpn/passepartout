@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/30/19.
-//  Copyright (c) 2020 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -24,7 +24,7 @@
 //
 
 import XCTest
-import PassepartoutUtils
+@testable import PassepartoutUtils
 import SwiftyBeaver
 
 class UtilsTests: XCTestCase {
@@ -44,7 +44,10 @@ class UtilsTests: XCTestCase {
         let languagesEN = privateSortedLanguages(languages, with: english)
         let languagesIT = privateSortedLanguages(languages, with: italian)
 
+        // English, German, Italian, Portuguese, Russian
         XCTAssertEqual(languagesEN, ["en", "de", "it", "pt-BR", "ru"])
+
+        // Inglese, Italiano, Portoghese, Russo, Tedesco
         XCTAssertEqual(languagesIT, ["en", "it", "pt-BR", "ru", "de"])
     }
     

@@ -2,6 +2,7 @@
 # For more information, check out the docs
 # https://docs.fastlane.tools/actions/deliver/
 
+automatic_release false
 skip_binary_upload true
 skip_metadata false
 skip_screenshots false
