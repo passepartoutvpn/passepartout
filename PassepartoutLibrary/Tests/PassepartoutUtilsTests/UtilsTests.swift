@@ -44,7 +44,10 @@ class UtilsTests: XCTestCase {
         let languagesEN = privateSortedLanguages(languages, with: english)
         let languagesIT = privateSortedLanguages(languages, with: italian)
 
+        // English, German, Italian, Portuguese, Russian
         XCTAssertEqual(languagesEN, ["en", "de", "it", "pt-BR", "ru"])
+
+        // Inglese, Italiano, Portoghese, Russo, Tedesco
         XCTAssertEqual(languagesIT, ["en", "it", "pt-BR", "ru", "de"])
     }
     
