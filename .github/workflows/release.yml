@@ -122,7 +122,7 @@ jobs:
           bundle exec fastlane --env mac,beta run pilot
       - name: Tag beta
         run: |
-          git tag "v$PILOT_APP_VERSION-b$PILOT_BUILD_NUMBER" && git push --tags
+          git tag -a "v$PILOT_APP_VERSION-b$PILOT_BUILD_NUMBER" -m "Public Beta" && git push --tags
   submit_for_app_review:
     name: Submit to App Review
     runs-on: ubuntu-latest
