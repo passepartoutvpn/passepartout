@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve kill switch behavior. [#181](https://github.com/passepartoutvpn/passepartout-apple/issues/181)
 - Retain original filename as imported profile name. [#240](https://github.com/passepartoutvpn/passepartout-apple/pull/240)
 
-## Unreleased
+## 2.0.2 (2022-10-31)
 
 ### Added
 
