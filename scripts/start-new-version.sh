@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION_NEXT=$2
+VERSION_NEXT=$1
 if [[ -z $VERSION_NEXT ]]; then
     echo "New version number required"
     exit 1
