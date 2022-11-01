@@ -227,7 +227,7 @@
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Переукладення";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "після %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Випадкова кінцева точка";
-"endpoint.advanced.openvpn.items.random_hostname.caption" = "Randomize hostnames";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Обирати імена хостів випадковим чином";
 
 /* MARK: ProfileView -> NetworkSettingsView */
 
