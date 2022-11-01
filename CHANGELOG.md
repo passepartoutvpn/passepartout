@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Ukranian translations (Dmitry Chirkin). [#243](https://github.com/passepartoutvpn/passepartout-apple/pull/243)
+
 ### Fixed
 
 - Improve kill switch behavior. [#181](https://github.com/passepartoutvpn/passepartout-apple/issues/181)
