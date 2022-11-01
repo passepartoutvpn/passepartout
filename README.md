@@ -180,6 +180,7 @@ A _huge_ credit goes to:
 - Russian: Alexander Korobynikov
 - Spanish: Davide De Rosa (author), Elena Vivó
 - Swedish: Henry Gross-Hellsen - [@cowpod](https://github.com/cowpod)
+- Ukranian: Dmitry Chirkin - [@josser](https://github.com/josser)
 
 ## Usage
 
