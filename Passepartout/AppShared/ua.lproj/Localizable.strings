@@ -1,0 +1,348 @@
+//
+//  Localizable.strings
+//  Passepartout
+//
+//  Created by Davide De Rosa on 6/13/18.
+//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+/* MARK: Global */
+
+"global.strings.cancel" = "Скасувати";
+"global.strings.next" = "Далі";
+/* MARK: Global */
+"global.strings.ok" = "Ок";
+"global.strings.save" = "Зберегти";
+"global.strings.rename" = "Перейменувати";
+"global.strings.duplicate" = "Дублювати";
+"global.strings.add" = "Додати";
+"global.strings.delete" = "Видалити";
+"global.strings.uninstall" = "Видалити застосунок";
+"global.strings.default" = "За замовчуванням";
+"global.strings.name" = "Ім'я";
+"global.strings.profiles" = "Профілі";
+"global.strings.provider" = "Провайдер";
+"global.strings.providers" = "Провайдери";
+"global.strings.configuration" = "Конфігурація";
+"global.strings.address" = "Адреса";
+"global.strings.addresses" = "Адреси";
+"global.strings.port" = "порт";
+"global.strings.protocol" = "Протокол";
+"global.strings.protocols" = "Протоколи";
+"global.strings.enabled" = "Увімкнено";
+"global.strings.disabled" = "Вімкнено";
+"global.strings.none" = "Немає";
+"global.strings.automatic" = "Автоматично";
+"global.strings.manual" = "Вручну";
+"global.strings.encryption" = "Шифрування";
+"global.strings.reconnect" = "Перепідключити";
+"global.strings.servers" = "Сервери";
+"global.strings.domain" = "Домен";
+"global.strings.domains" = "Домени";
+"global.strings.proxy" = "Проксі";
+"global.strings.bytes" = "байти";
+"global.strings.interface" = "Інтерфейс";
+"global.strings.private_key" = "Закритий ключ";
+"global.strings.public_key" = "Відкритий ключ";
+"global.strings.endpoint" = "Кінцева точка";
+"global.strings.keepalive" = "Підтримуємо";
+"global.strings.advanced" = "Додадкові";
+"global.strings.translations" = "Переклади";
+"global.strings.show" = "Показати";
+"global.strings.connect" = "З'єднатися";
+"global.strings.disconnect" = "Від'єднатися";
+"global.strings.download" = "Завантажити";
+
+"global.messages.email_not_configured" = "Не налаштовано обліковий запис електронної пошти";
+"global.messages.share" = "Passepartout — це зручний у використанні клієнт OpenVPN / WireGuard для iOS и macOS з відкритим кодом";
+
+"global.alerts.buttons.remind" = "Нагадати пізніше";
+"global.alerts.buttons.never" = "Більше не питати";
+
+"global.placeholders.profile_name" = "Мій профіль";
+
+"global.errors.missing_profile" = "Відсутній профіль";
+"global.errors.missing_account" = "Відсутній обліковий запис";
+"global.errors.missing_provider_server" = "Відсутнє розташування";
+"global.errors.missing_provider_preset" = "Відсутній пресет";
+
+/* MARK: Menus */
+
+"menu.all.support.title" = "Підтримка";
+"menu.all.share.title" = "Поділитися";
+"menu.all.about.title" = "Про %@";
+
+"menu.contextual.add_profile.from_files" = "З файлів";
+"menu.contextual.add_profile.from_text" = "З тексту";
+"menu.contextual.add_profile.imported" = "Додати %@";
+"menu.contextual.support.write_review" = "Відгук";
+"menu.contextual.support.join_community" = "Спільнота";
+"menu.contextual.share_twitter" = "Твіт";
+"menu.contextual.share_generic" = "Запросити";
+
+"menu.system.quit.title" = "Вийти з %@";
+
+/* MARK: TunnelKit */
+
+"tunnelkit.vpn.connecting" = "Підключається";
+"tunnelkit.vpn.active" = "Активний";
+"tunnelkit.vpn.disconnecting" = "Відключається";
+"tunnelkit.vpn.inactive" = "Не активний";
+"tunnelkit.vpn.disabled" = "Вимкнений";
+"tunnelkit.vpn.unused" = "Вимк";
+
+"tunnelkit.errors.vpn.timeout" = "Тайм-аут";
+"tunnelkit.errors.vpn.dns" = "Помилка DNS";
+"tunnelkit.errors.vpn.auth" = "Помилка автентифікації";
+"tunnelkit.errors.vpn.tls" = "Помилка TSL";
+"tunnelkit.errors.vpn.encryption" = "Помилка розшифрування";
+"tunnelkit.errors.vpn.compression" = "Компресія не підтримується";
+"tunnelkit.errors.vpn.network" = "Зміна мережі";
+"tunnelkit.errors.vpn.routing" = "Відсутня маршрутизація";
+"tunnelkit.errors.vpn.gateway" = "Немає шлюзу";
+"tunnelkit.errors.vpn.shutdown" = "Сервер вимкнено";
+
+"tunnelkit.errors.parsing" = "Не вдається розібрати наданий файл конфігурації (%@).";
+"tunnelkit.errors.openvpn.malformed" = "Файл конфігурації містить некоректну опцію (%@).";
+"tunnelkit.errors.openvpn.required_option" = "У конфігураційному файлі відсутній обов’язковий параметр (%@).";
+"tunnelkit.errors.openvpn.unsupported_option" = "Конфігураційний файл містить параметр, який не підтримується (%@).";
+"tunnelkit.errors.openvpn.potentially_unsupported_option" = "Файл конфігурації вірний, але можливо містить параметр який не підтримується (%@).\n\nЗ'єднання може розірватися залежно від налаштувань сервера";
+"tunnelkit.errors.openvpn.passphrase_required" = "Будь ласка, введіть кодову фразу шифрування";
+"tunnelkit.errors.openvpn.decryption" = "Конфігурація містить зашифрований приватний ключ, він не може бути розшифрований. Перевірте кодову фразу.";
+
+/* MARK: OrganizerView */
+
+"organizer.sections.active" = "Використовується";
+/* MARK: OrganizerView */
+"organizer.empty.no_profiles" = "Немає профілів";
+
+"organizer.alerts.reddit.message" = "Чи знали ви, що Passepartout має свій сабреддит? Підписуйтесь для отримання оновлень, обговорення проблем, функцій, нових платформ або будь-чого.\n\nЦе також чудовий спосіб показати підтримку проекту.";
+"organizer.alerts.reddit.buttons.subscribe" = "Підпишіться зараз!";
+
+"organizer.alerts.remove_profile.message" = "Ви впевнені, що хочете видалити профіль %@?";
+
+/* MARK: AddProfileView */
+
+"add_profile.shared.title" = "Новий профіль";
+"add_profile.shared.views.existing.header" = "Існуючі профілі";
+"add_profile.shared.alerts.overwrite.message" = "Профіль з таким ім'ям вже існує. Замінити?";
+
+/* MARK: AddHostView */
+
+"add_profile.host.sections.encryption.footer" = "Введіть кодову фразу";
+
+/* MARK: AddProviderView */
+
+"add_profile.provider.sections.vpn.footer" = "Тут ви знайдете декілька провайдерів з вже створеними профілями";
+"add_profile.provider.items.update_list" = "Оновити список";
+"add_profile.provider.errors.no_default_server" = "Не вдалося знайти сервер";
+
+/* MARK: ProfileView */
+
+"profile.welcome.message" = "Ласкаво просимо до Passepartout!\n\nВикористовуйте органайзер, щоб додати новий профіль.";
+
+"profile.sections.vpn.footer" = "З'єднання буде встановлено за потреби";
+"profile.sections.status.header" = "З'єднання";
+"profile.sections.provider_infrastructure.footer" = "Останнє оновлення %@.";
+"profile.sections.vpn_survives_sleep.footer" = "Вимкніть, щоб покращити використання акумулятора, може привести до тимчасових затримок у зв’язку з повторним підключенням після \"пробудження\".";
+"profile.sections.vpn_resolves_hostname.footer" = "Бажано в більшості мереж і обов’язково потрібне в деяких мережах IPv6. Вимкніть там, де DNS заблоковано, або для прискорення з'єднання, коли DNS повільно відповідає";
+"profile.sections.feedback.header" = "Відгук";
+"profile.items.use_profile.caption" = "Використовувати цей профіль.";
+"profile.items.vpn_service.caption" = "Увімкнено";
+"profile.items.vpn.turn_on.caption" = "Увімкнути VPN";
+"profile.items.vpn.turn_off.caption" = "Вимкнути VPN";
+"profile.items.connection_status.caption" = "Статус";
+"profile.items.data_count.caption" = "Обмін даними";
+"profile.items.provider.refresh.caption" = "Оновити інфраструктуру";
+"profile.items.category.caption" = "Категорія";
+"profile.items.only_shows_favorites.caption" = "Показувати лише обрані місця";
+"profile.items.vpn_survives_sleep.caption" = "Залишати включеним під час сну";
+"profile.items.vpn_resolves_hostname.caption" = "Розпізнати ім’я хоста провайдера";
+
+"profile.alerts.rename.title" = "Змінити назву профілю";
+"profile.alerts.reconnect_vpn.message" = "Бажаєте заново підключитися до VPN?";
+"profile.alerts.uninstall_vpn.message" = "Ви справді хочете стерти конфігурацію VPN із налаштувань пристрою? Це може виправити деякі VPN помилки, але не змінить налаштування застосунку.";
+"profile.alerts.test_connectivity.title" = "Связь";
+"profile.alerts.test_connectivity.messages.success" = "Ваш пристрій підключено до Інтернету!";
+"profile.alerts.test_connectivity.messages.failure" = "Ваш пристрій не підключено до інтернету, будь ласка, перевірте налаштування вашого профілю.";
+
+/* MARK: ProfileView -> Provider*View */
+
+"provider.location.title" = "Розташування";
+"provider.location.sections.empty_favorites.footer" = "Свайп в ліво на локації, щоб додати або видалити його з обраних.";
+"provider.location.actions.favorite" = "Додати в обране";
+"provider.location.actions.unfavorite" = "Вилучити з обарного";
+
+"provider.preset.title" = "Пресет";
+
+/* MARK: ProfileView -> AccountView */
+
+"account.title" = "Акаунт";
+"account.sections.credentials.header" = "Дані для входу";
+"account.sections.registration.footer" = "Створіть обліковий запис на сторінці %@.";
+"account.items.username.caption" = "Логін";
+"account.items.username.placeholder" = "логін";
+"account.items.password.caption" = "Пароль";
+"account.items.password.placeholder" = "пароль";
+"account.items.open_guide.caption" = "Перевірте ваші дані";
+"account.items.signup.caption" = "Зарееструйтесь з %@";
+
+"account.sections.guidance.footer.infrastructure.default.web" = "Використовуйте свої облікові дані з веб-сайту %@.";
+"account.sections.guidance.footer.infrastructure.default.specific" = "Використовуйте свої облікові дані %@ сервісу, які можуть відрізнятися від облікових даних веб-сайту.";
+"account.sections.guidance.footer.infrastructure.mullvad" = "Використовуйте свої облікові дані з веб-сайту %@. Ваш логін зазвичай є числовим (без пробілів).";
+"account.sections.guidance.footer.infrastructure.nordvpn" = "Використовуйте дані для входу у %@ веб-сайт. Ваш логін зазвичай це ваш email.";
+"account.sections.guidance.footer.infrastructure.pia" = "Використовуйте ваші дані з веб-сайту %@. Ваш логін зазвичай числовий з префіксом \"p\".";
+"account.sections.guidance.footer.infrastructure.protonvpn" = "Знайдіть ваші дані для входу %@ \"Account > OpenVPN / IKEv2 Username\" розділу веб-сайту.";
+"account.sections.guidance.footer.infrastructure.tunnelbear" = "Використовуйте дані для входу до %@ веб-сайту. Ваш логін зазвичай це ваш email.";
+"account.sections.guidance.footer.infrastructure.vyprvpn" = "Використовуйте дані для входу до %@ веб-сайту. Ваш логін зазвичай це ваш email.";
+"account.sections.guidance.footer.infrastructure.windscribe" = "Знайдіть ваші дані для входу %@ у OpenVPN Config Generator на веб-сайті.";
+
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.wireguard.items.peer.caption" = "Вузол";
+"endpoint.wireguard.items.preshared_key.caption" = "Спільний ключ";
+"endpoint.wireguard.items.allowed_ip.caption" = "Дозволений IP";
+
+"endpoint.advanced.title" = "Технічна інформація";
+"endpoint.advanced.openvpn.sections.communication.header" = "Зв'язок";
+"endpoint.advanced.openvpn.sections.reset.footer" = "Якщо після зміни параметрів зв’язку у вас виникло порушення з’єднання, натисніть, щоб повернутися до початковоі конфігурації.";
+"endpoint.advanced.openvpn.sections.compression.header" = "Компресія";
+"endpoint.advanced.openvpn.sections.network.header" = "Мережа";
+"endpoint.advanced.openvpn.sections.other.header" = "Інше";
+"endpoint.advanced.openvpn.items.route.caption" = "Маршрут";
+"endpoint.advanced.openvpn.items.cipher.caption" = "Шифр";
+"endpoint.advanced.openvpn.items.digest.caption" = "Автентифікація";
+"endpoint.advanced.openvpn.items.digest.value.embedded" = "Вбудована";
+"endpoint.advanced.openvpn.items.compression_framing.caption" = "Фреймінг";
+"endpoint.advanced.openvpn.items.compression_algorithm.caption" = "Алгоритм";
+"endpoint.advanced.openvpn.items.compression_algorithm.value.other" = "Не підтримується";
+"endpoint.advanced.openvpn.items.reset_original.caption" = "Скинути конфігурацію";
+"endpoint.advanced.openvpn.items.client.caption" = "Сертифікат";
+"endpoint.advanced.openvpn.items.client_key.caption" = "Ключ";
+"endpoint.advanced.openvpn.items.client.value.enabled" = "Перевірено";
+"endpoint.advanced.openvpn.items.client.value.disabled" = "Не перевірено";
+"endpoint.advanced.openvpn.items.tls_wrapping.caption" = "Упаковуємо";
+"endpoint.advanced.openvpn.items.tls_wrapping.value.auth" = "Автентифікація";
+"endpoint.advanced.openvpn.items.tls_wrapping.value.crypt" = "Шифрування";
+"endpoint.advanced.openvpn.items.eku.caption" = "Розширена перевірка";
+"endpoint.advanced.openvpn.items.keep_alive.value.seconds" = "%d секунд";
+"endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Переукладення";
+"endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "після %@";
+"endpoint.advanced.openvpn.items.random_endpoint.caption" = "Випадкова кінцева точка";
+"endpoint.advanced.openvpn.items.random_hostname.caption" = "Обирати імена хостів випадковим чином";
+
+/* MARK: ProfileView -> NetworkSettingsView */
+
+"network_settings.title" = "Параметри мережі";
+"network_settings.sections.choices.header" = "Ігнорувати";
+"network_settings.gateway.title" = "Шлюз за замовчуванням";
+"network_settings.proxy.items.bypass_domains.caption" = "Обхідні домени";
+"network_settings.items.add_dns_server.caption" = "Додати адресу";
+"network_settings.items.add_dns_domain.caption" = "Додати пошуковий домен";
+"network_settings.items.proxy_bypass.caption" = "Обхід домену";
+"network_settings.items.add_proxy_bypass.caption" = "Додати обхідний домен";
+
+/* MARK: ProfileView -> OnDemandView */
+
+"on_demand.title" = "Довірені мережі";
+"on_demand.sections.policy.footer" = "При підключені до довірених мереж VPN зазвичай вимикається та залишається відключеним. Вимкніть цю опцію щоб залишити VPN увімкненим.";
+"on_demand.items.add_ssid.caption" = "Додати Wi-Fi";
+"on_demand.items.active.caption" = "Довірені";
+"on_demand.items.mobile.caption" = "Мобільна мережа";
+"on_demand.items.ethernet.caption" = "Довірені проводные подключения";
+"on_demand.items.ethernet.description" = "Увімкніть, щоб додати до довірених дротових підключень.";
+"on_demand.items.policy.caption" = "Дов. мережа вимикає VPN";
+
+/* MARK: ProfileView -> DiagnosticsView */
+
+"diagnostics.title" = "Диагностика";
+"diagnostics.sections.debug_log.footer" = "Маскування увімкнеться після повторного підключення. Інформація про мережу - це назви хост профілів, IP адреса, маршрути та SSID. Дані для входу та приватні ключі не збираються.";
+"diagnostics.items.server_configuration.caption" = "Конфігурація сервера";
+"diagnostics.items.app_log.title" = "Застосунок";
+"diagnostics.items.masks_private_data.caption" = "Маскувати інформацію про мережу";
+"diagnostics.items.report_issue.caption" = "Повідомити про проблему підкл.";
+
+"diagnostics.alerts.masks_private_data.messages.must_reconnect" = "Для безпечного скидання журналу налагодження та зміни маскування інформації мережі ви повинні знову підключитися до VPN.";
+
+/* MARK: DiagnosticsView -> DebugLogView */
+
+"debug_log.title" = "Діагностичний журнал";
+"debug_log.buttons.copy" = "Копіювати";
+
+/* MARK: DiagnosticsView -> ReportIssueView */
+
+"report_issue.alert.title" = "Повідомити про проблему";
+
+/* MARK: ShortcutsView */
+
+"shortcuts.add.title" = "Створити команду";
+"shortcuts.add.sections.wifi.header" = "Wi-Fi";
+"shortcuts.add.sections.cellular.header" = "Мобільна мережа";
+"shortcuts.add.items.connect.caption" = "Підключитися до";
+"shortcuts.add.items.enable_vpn.caption" = "Увімкнути VPN";
+"shortcuts.add.items.disable_vpn.caption" = "Вімкнути VPN";
+"shortcuts.add.items.trust_current_wifi.caption" = "Довіряти поточному Wi-Fi";
+"shortcuts.add.items.untrust_current_wifi.caption" = "Не довіряти поточному Wi-Fi";
+"shortcuts.add.items.trust_cellular.caption" = "Довіряти мобільній мережі";
+"shortcuts.add.items.untrust_cellular.caption" = "Не довіряти мобільній мережі";
+"shortcuts.add.alerts.no_profiles.message" = "Немає профіля для підключення";
+
+"shortcuts.edit.title" = "Керувати командами";
+"shortcuts.edit.sections.all.header" = "Існуючі команди";
+"shortcuts.edit.sections.add.footer" = "Отримати допомогу від Siri, щоб пришвидшити найчастіші дії з програмою.";
+"shortcuts.edit.items.add_shortcut.caption" = "Створити команду";
+
+/* MARK: PaywallView */
+
+"paywall.title" = "Придбати";
+"paywall.sections.products.footer" = "Кожен товар є одноразовою покупкою. Покупки провайдерів не включають підписку на VPN";
+"paywall.items.loading.caption" = "Завантаженя товарів";
+"paywall.items.full_version.extra_description" = "Всі провайдери (в тому числі майбутні)\n%@";
+"paywall.items.restore.title" = "Відновити покупки";
+"paywall.items.restore.description" = "Якщо ви придбали цю програму чи функцію раніше, ви можете відновити покупки, і цей екран більше не відображатиметься";
+
+/* MARK: DonateView */
+
+"donate.title" = "Зробити пожертвування";
+"donate.sections.one_time.header" = "Одноразово";
+"donate.sections.one_time.footer" = "Якщо ви бажаєте подякувати за мою безкоштовну роботу, тут є декілька сум, які ви можете пожертвувати прямо зараз.\n\nЗ вас буде стягнено плату лише один раз, але ви можете робити пожертви кілька разів.";
+"donate.items.loading.caption" = "Завантажуємо пожертвування";
+"donate.items.purchasing.caption" = "Виконується";
+"donate.alerts.purchase.success.title" = "Дякуємо";
+"donate.alerts.purchase.success.message" = "Це дуже важливо для мене, і я сподіваюся, що ви й надалі будете користуватися цією програмою та рекламувати її.";
+"donate.alerts.purchase.failure.message" = "Не вдається здійснити пожертвування. %@";
+
+/* MARK: SettingsView */
+
+"settings.title" = "Налаштування";
+"settings.items.donate.caption" = "Зробити пожертвування";
+
+/* MARK: AboutView */
+
+"about.title" = "Про нас";
+"about.sections.web.header" = "Веб";
+"about.items.credits.caption" = "Подяки";
+"about.items.join_community.caption" = "Вступити до спільноти";
+"about.items.write_review.caption" = "Залишити відгук";
+"about.items.share_twitter.caption" = "Твітніть про нас!";
+"about.items.website.caption" = "Домашня сторінка";
+"about.items.disclaimer.caption" = "Відмова від відповідальності";
+"about.items.privacy_policy.caption" = "Політика конфіденційності";
+
+/* MARK: AboutView -> VersionView */
+
+"version.title" = "Версія";
+"version.labels.intro" = "Passepartout та TunnelKit створені та підтримуются Davide De Rosa (keeshux).\n\nПочаткові коди для Passepartout и TunnelKit публічно доступні на GitHub під GPLv3, ви можете знайти посилання на домашній сторінці";
+
+/* MARK: AboutView -> CreditsView */
+
+"credits.title" = "Подяка";
+"credits.sections.licenses.header" = "Ліцензії";
+"credits.sections.notices.header" = "Примітки";
+
+/* MARK: PreferencesView (macOS) */
+
+"preferences.title" = "Налаштування";
+"preferences.sections.general.header" = "Загальні";
+"preferences.items.launches_on_login.caption" = "Запускати під час входу в систему";
+"preferences.items.launches_on_login.footer" = "Увімкніть, щоб програма автоматично запускалася під час завантаження або входу.";
+"preferences.items.confirm_quit.caption" = "Підтвердити вихід";
+"preferences.items.confirm_quit.footer" = "Увімкніть, щоб вихід треба було підтверджувати.";
