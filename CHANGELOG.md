@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Ukranian translations (Dmitry Chirkin). [#243](https://github.com/passepartoutvpn/passepartout-apple/pull/243)
+- OpenVPN: Full implementation of Tunnelblick XOR patch (tmthecoder). [#245](https://github.com/passepartoutvpn/passepartout-apple/pull/245), [tunnelkit#255][https://github.com/passepartoutvpn/tunnelkit/pull/255]
 
 ### Fixed
 

@@ -38,16 +38,6 @@ extension OpenVPN.Digest {
     }
 }
 
-extension UInt8 {
-    var localizedDescriptionAsXOR: String {
-        let V = L10n.Global.Strings.self
-        guard self != 0 else {
-            return V.disabled
-        }
-        return String(format: "0x%02x", UInt8(self))
-    }
-}
-
 extension OpenVPN.CompressionFraming {
     var localizedDescription: String {
         switch self {
@@ -81,17 +71,37 @@ extension OpenVPN.CompressionAlgorithm {
 
 extension Optional where Wrapped == OpenVPN.TLSWrap {
     var localizedDescription: String {
-        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
-        if let strategy = self?.strategy {
-            switch strategy {
-            case .auth:
-                return V.TlsWrapping.Value.auth
-
-            case .crypt:
-                return V.TlsWrapping.Value.crypt
-            }
-        } else {
+        guard let strategy = self?.strategy else {
             return L10n.Global.Strings.disabled
+        }
+        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
+        switch strategy {
+        case .auth:
+            return V.TlsWrapping.Value.auth
+
+        case .crypt:
+            return V.TlsWrapping.Value.crypt
+        }
+    }
+}
+
+extension Optional where Wrapped == OpenVPN.XORMethod {
+    var localizedDescription: String {
+        guard let self = self else {
+            return L10n.Global.Strings.disabled
+        }
+        switch self {
+        case .xormask:
+            return Unlocalized.OpenVPN.XOR.xormask.rawValue
+
+        case .xorptrpos:
+            return Unlocalized.OpenVPN.XOR.xorptrpos.rawValue
+
+        case .reverse:
+            return Unlocalized.OpenVPN.XOR.reverse.rawValue
+
+        case .obfuscate:
+            return Unlocalized.OpenVPN.XOR.obfuscate.rawValue
         }
     }
 }
