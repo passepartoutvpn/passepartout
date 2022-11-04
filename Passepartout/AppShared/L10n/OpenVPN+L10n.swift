@@ -93,15 +93,28 @@ extension Optional where Wrapped == OpenVPN.XORMethod {
         switch self {
         case .xormask:
             return Unlocalized.OpenVPN.XOR.xormask.rawValue
-
+            
         case .xorptrpos:
             return Unlocalized.OpenVPN.XOR.xorptrpos.rawValue
-
+            
         case .reverse:
             return Unlocalized.OpenVPN.XOR.reverse.rawValue
-
+            
         case .obfuscate:
             return Unlocalized.OpenVPN.XOR.obfuscate.rawValue
+        }
+    }
+    
+    var localizedLongDescription: String {
+        switch self {
+        case .xormask(let mask):
+            return "\(localizedDescription) \(mask.toHex())"
+            
+        case .obfuscate(let mask):
+            return "\(localizedDescription) \(mask.toHex())"
+            
+        default:
+            return localizedDescription
         }
     }
 }

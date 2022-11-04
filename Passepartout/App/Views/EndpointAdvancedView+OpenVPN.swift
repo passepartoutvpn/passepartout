@@ -141,8 +141,13 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption)
                         .withTrailingText($0.localizedDescription)
                 }
-                Text(Unlocalized.VPN.xor)
-                    .withTrailingText(settings.xor.localizedDescription)
+//                Text(Unlocalized.VPN.xor)
+//                    .withTrailingText(settings.xor.localizedDescription)
+                themeLongContentLink(
+                    Unlocalized.VPN.xor,
+                    content: .constant(settings.xor.localizedLongDescription),
+                    withPreview: settings.xor.localizedDescription
+                )
             } header: {
                 Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
             }
@@ -163,8 +168,13 @@ extension EndpointAdvancedView.OpenVPNView {
                 values: OpenVPN.Digest.available,
                 description: \.localizedDescription
             )
-            Text(Unlocalized.VPN.xor)
-                .withTrailingText(builder.xorMethod.localizedDescription)
+//            Text(Unlocalized.VPN.xor)
+//                .withTrailingText(builder.xorMethod.localizedDescription)
+            themeLongContentLink(
+                Unlocalized.VPN.xor,
+                content: .constant(builder.xorMethod.localizedLongDescription),
+                withPreview: builder.xorMethod.localizedDescription
+            )
         } header: {
             Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
         }
