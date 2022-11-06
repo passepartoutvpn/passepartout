@@ -218,6 +218,16 @@ enum Unlocalized {
         static let compress = "--compress"
         
         static let lzo = "LZO"
+        
+        enum XOR: String {
+            case xormask
+            
+            case xorptrpos
+            
+            case reverse
+            
+            case obfuscate
+        }
     }
     
     enum Network {

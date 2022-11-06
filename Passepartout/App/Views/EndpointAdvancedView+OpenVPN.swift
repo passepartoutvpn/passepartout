@@ -141,10 +141,13 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption)
                         .withTrailingText($0.localizedDescription)
                 }
-                settings.xor.map {
-                    Text(Unlocalized.VPN.xor)
-                        .withTrailingText($0.localizedDescriptionAsXOR)
-                }
+//                Text(Unlocalized.VPN.xor)
+//                    .withTrailingText(settings.xor.localizedDescription)
+                themeLongContentLink(
+                    Unlocalized.VPN.xor,
+                    content: .constant(settings.xor.localizedLongDescription),
+                    withPreview: settings.xor.localizedDescription
+                )
             } header: {
                 Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
             }
@@ -165,10 +168,13 @@ extension EndpointAdvancedView.OpenVPNView {
                 values: OpenVPN.Digest.available,
                 description: \.localizedDescription
             )
-            builder.xorMask.map {
-                Text(Unlocalized.VPN.xor)
-                    .withTrailingText($0.localizedDescriptionAsXOR)
-            }
+//            Text(Unlocalized.VPN.xor)
+//                .withTrailingText(builder.xorMethod.localizedDescription)
+            themeLongContentLink(
+                Unlocalized.VPN.xor,
+                content: .constant(builder.xorMethod.localizedLongDescription),
+                withPreview: builder.xorMethod.localizedDescription
+            )
         } header: {
             Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
         }
@@ -309,11 +315,11 @@ extension EndpointAdvancedView.OpenVPNView {
 }
 
 extension OpenVPN.Configuration {
-    var communicationSettings: (cipher: OpenVPN.Cipher?, digest: OpenVPN.Digest?, xor: UInt8?)? {
-        guard cipher != nil || digest != nil || xorMask != nil else {
+    var communicationSettings: (cipher: OpenVPN.Cipher?, digest: OpenVPN.Digest?, xor: OpenVPN.XORMethod?)? {
+        guard cipher != nil || digest != nil || xorMethod != nil else {
             return nil
         }
-        return (cipher, digest, xorMask)
+        return (cipher, digest, xorMethod)
     }
 
     var compressionSettings: (framing: OpenVPN.CompressionFraming?, algorithm: OpenVPN.CompressionAlgorithm?)? {
