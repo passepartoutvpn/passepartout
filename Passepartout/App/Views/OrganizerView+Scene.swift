@@ -34,8 +34,6 @@ extension OrganizerView {
         
         @ObservedObject private var vpnManager: VPNManager
         
-        @ObservedObject private var productManager: ProductManager
-        
         @Binding private var alertType: AlertType?
         
         @Binding private var didHandleSubreddit: Bool
@@ -45,7 +43,6 @@ extension OrganizerView {
         init(alertType: Binding<AlertType?>, didHandleSubreddit: Binding<Bool>) {
             profileManager = .shared
             vpnManager = .shared
-            productManager = .shared
             _alertType = alertType
             _didHandleSubreddit = didHandleSubreddit
         }
@@ -85,16 +82,6 @@ extension OrganizerView {
 
         private func onScenePhase(_ phase: ScenePhase) {
             switch phase {
-            case .inactive:
-                productManager.snapshotRefunds()
-
-            case .active:
-                if productManager.hasNewRefunds() {
-                    Task { @MainActor in
-                        await vpnManager.uninstall()
-                    }
-                }
-
             case .background:
                 persist()
                 #if targetEnvironment(macCatalyst)

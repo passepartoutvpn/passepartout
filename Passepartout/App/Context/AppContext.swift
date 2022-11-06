@@ -70,7 +70,16 @@ class AppContext {
                     pp_log.info("VPN successful connection, report to Reviewer")
                     self.reviewer.reportEvent()
                 }
-        }.store(in: &cancellables)
+            }.store(in: &cancellables)
+
+        productManager.didRefundProducts
+            .receive(on: DispatchQueue.main)
+            .sink {
+                Task {
+                    pp_log.info("Refunds detected, uninstalling VPN profile")
+                    await coreContext.vpnManager.uninstall()
+                }
+            }.store(in: &cancellables)
     }
     
     // eligibility: ignore network settings if ineligible
