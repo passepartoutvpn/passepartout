@@ -28,7 +28,7 @@ import PassepartoutCore
 import PassepartoutUtils
 
 extension VPNManager {
-    private var vpnPreferences: VPNPreferences {
+    var vpnPreferences: VPNPreferences {
         DefaultVPNPreferences(
             tunnelLogPath: tunnelLogPath,
             tunnelLogFormat: tunnelLogFormat,

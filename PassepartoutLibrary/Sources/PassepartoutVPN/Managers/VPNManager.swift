@@ -25,8 +25,6 @@
 
 import Foundation
 import Combine
-import TunnelKitCore
-import TunnelKitManager
 import PassepartoutCore
 import PassepartoutProfiles
 import PassepartoutProviders
@@ -55,6 +53,8 @@ public final class VPNManager: ObservableObject {
     
     public let currentState: ObservableVPNState
     
+    public let didUpdatePreferences = PassthroughSubject<VPNPreferences, Never>()
+
     public private(set) var lastError: Error? {
         get {
             currentState.lastError
@@ -88,8 +88,6 @@ public final class VPNManager: ObservableObject {
         isOnDemandRulesSupported = { true }
 
         currentState = ObservableVPNState()
-
-        CoreConfiguration.masksPrivateData = masksPrivateData
     }
 
     func reinstate(_ configuration: VPNConfiguration) async {
@@ -261,6 +259,7 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.tunnelLogPath)
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
 
@@ -270,6 +269,7 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.tunnelLogFormat)
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
     
@@ -279,8 +279,7 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.masksPrivateData)
-
-            CoreConfiguration.masksPrivateData = masksPrivateData
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
 }

@@ -119,5 +119,10 @@ class CoreContext {
 
         profileManager.observeUpdates()
         vpnManager.observeUpdates()
+
+        CoreConfiguration.masksPrivateData = vpnManager.masksPrivateData
+        vpnManager.didUpdatePreferences.sink {
+            CoreConfiguration.masksPrivateData = $0.masksPrivateData
+        }.store(in: &cancellables)
     }
 }
