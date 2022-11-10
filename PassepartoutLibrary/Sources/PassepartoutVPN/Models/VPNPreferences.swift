@@ -25,7 +25,7 @@
 
 import Foundation
 
-protocol VPNPreferences {
+public protocol VPNPreferences {
     var tunnelLogPath: String? { get }
     
     var tunnelLogFormat: String? { get }

@@ -53,6 +53,8 @@ public final class VPNManager: ObservableObject {
     
     public let currentState: ObservableVPNState
     
+    public let didUpdatePreferences = PassthroughSubject<VPNPreferences, Never>()
+
     public private(set) var lastError: Error? {
         get {
             currentState.lastError
@@ -257,6 +259,7 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.tunnelLogPath)
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
 
@@ -266,6 +269,7 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.tunnelLogFormat)
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
     
@@ -275,6 +279,7 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.masksPrivateData)
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
 }
