@@ -57,7 +57,6 @@ extension Profile.OpenVPNSettings: VPNConfigurationProviding {
             configuration: customConfiguration
         )
         cfg.username = parameters.username
-        cfg.killSwitch = true
         cfg.shouldDebug = true
         cfg.debugLogPath = parameters.preferences.tunnelLogPath
         cfg.debugLogFormat = parameters.preferences.tunnelLogFormat
@@ -67,6 +66,7 @@ extension Profile.OpenVPNSettings: VPNConfigurationProviding {
         extra.passwordReference = parameters.passwordReference
         extra.onDemandRules = parameters.onDemandRules
         extra.disconnectsOnSleep = !parameters.networkSettings.keepsAliveOnSleep
+        extra.killSwitch = true
 
         pp_log.verbose("Configuration:")
         pp_log.verbose(cfg)
