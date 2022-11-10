@@ -25,8 +25,6 @@
 
 import Foundation
 import Combine
-import TunnelKitCore
-import TunnelKitManager
 import PassepartoutCore
 import PassepartoutProfiles
 import PassepartoutProviders
@@ -88,8 +86,6 @@ public final class VPNManager: ObservableObject {
         isOnDemandRulesSupported = { true }
 
         currentState = ObservableVPNState()
-
-        CoreConfiguration.masksPrivateData = masksPrivateData
     }
 
     func reinstate(_ configuration: VPNConfiguration) async {
@@ -279,8 +275,6 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.masksPrivateData)
-
-            CoreConfiguration.masksPrivateData = masksPrivateData
         }
     }
 }
