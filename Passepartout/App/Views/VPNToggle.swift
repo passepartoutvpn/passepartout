@@ -43,8 +43,12 @@ struct VPNToggle: View {
     
     private var isEnabled: Binding<Bool> {
         .init {
-            isActiveProfile && currentVPNState.isEnabled
+            isActiveProfile && currentVPNState.isEnabled && !shouldPromptForAccount
         } set: { newValue in
+            guard !shouldPromptForAccount else {
+                interactiveProfile = profile
+                return
+            }
             guard newValue else {
                 disableVPN()
                 return
@@ -79,12 +83,8 @@ struct VPNToggle: View {
 
     var body: some View {
         Toggle(L10n.Global.Strings.enabled, isOn: isEnabled)
-            .disabled(!canToggle || shouldPromptForAccount)
-            .onTapGesture {
-                if shouldPromptForAccount {
-                    interactiveProfile = profile
-                }
-            }.themeAnimation(on: currentVPNState.isEnabled)
+            .disabled(!canToggle)
+            .themeAnimation(on: currentVPNState.isEnabled)
     }
     
     private func enableVPN() {
