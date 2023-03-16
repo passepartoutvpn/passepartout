@@ -27,7 +27,7 @@ import SwiftUI
 import PassepartoutLibrary
 
 struct ProfileRow: View {
-    let header: Profile.Header
+    let profile: Profile
     
     let isActiveProfile: Bool
     
@@ -35,7 +35,7 @@ struct ProfileRow: View {
         debugChanges()
         return HStack {
             VStack(alignment: .leading, spacing: 5) {
-                Text(header.name)
+                Text(profile.header.name)
                     .font(.headline)
                     .themeLongTextStyle()
 
@@ -44,7 +44,7 @@ struct ProfileRow: View {
                     .themeSecondaryTextStyle()
             }
             Spacer()
-            VPNToggle(profileId: header.id, rateLimit: Constants.RateLimit.vpnToggle)
+            VPNToggle(profileId: profile.id, rateLimit: Constants.RateLimit.vpnToggle)
                 .labelsHidden()
         }.padding([.top, .bottom], 10)
     }
