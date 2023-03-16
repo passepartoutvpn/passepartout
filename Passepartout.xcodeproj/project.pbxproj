@@ -146,6 +146,7 @@
 		0EB34BCC27C6F41D00B126DA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB34BCB27C6F41D00B126DA /* Theme.swift */; };
 		0EB4042C27CA0E8C00378B1A /* Unlocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4042B27CA0E8B00378B1A /* Unlocalized.swift */; };
 		0EB4042E27CA136300378B1A /* AddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4042D27CA136200378B1A /* AddingTextField.swift */; };
+		0EB90CC129C25BBD00E64628 /* InteractiveConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB90CC029C25BBD00E64628 /* InteractiveConnectionView.swift */; };
 		0EBC074C27EB673C00208AD9 /* ProfileView+Rename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC074B27EB673C00208AD9 /* ProfileView+Rename.swift */; };
 		0EBC075527EBC83800208AD9 /* MailComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075427EBC83800208AD9 /* MailComposerView.swift */; };
 		0EBC075B27EC4FFF00208AD9 /* ReportIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075A27EC4FFF00208AD9 /* ReportIssueView.swift */; };
@@ -445,6 +446,7 @@
 		0EB34BCB27C6F41D00B126DA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0EB4042B27CA0E8B00378B1A /* Unlocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unlocalized.swift; sourceTree = "<group>"; };
 		0EB4042D27CA136200378B1A /* AddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingTextField.swift; sourceTree = "<group>"; };
+		0EB90CC029C25BBD00E64628 /* InteractiveConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveConnectionView.swift; sourceTree = "<group>"; };
 		0EBC074B27EB673C00208AD9 /* ProfileView+Rename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Rename.swift"; sourceTree = "<group>"; };
 		0EBC075427EBC83800208AD9 /* MailComposerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposerView.swift; sourceTree = "<group>"; };
 		0EBC075A27EC4FFF00208AD9 /* ReportIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportIssueView.swift; sourceTree = "<group>"; };
@@ -639,6 +641,7 @@
 				0E71ACEA27C1060D00F85C4B /* EndpointView.swift */,
 				0E5349C527C176C200C71BB3 /* EndpointView+OpenVPN.swift */,
 				0E5349C727C176D100C71BB3 /* EndpointView+WireGuard.swift */,
+				0EB90CC029C25BBD00E64628 /* InteractiveConnectionView.swift */,
 				0E0BD27227B2EA2C00583AC5 /* MainView.swift */,
 				0E71ACE827C1055200F85C4B /* NetworkSettingsView.swift */,
 				0EB34BC927C6A70200B126DA /* OnDemandView.swift */,
@@ -1389,6 +1392,7 @@
 				0E3B7FCD27E47B3700C66F13 /* AddHostView+Name.swift in Sources */,
 				0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */,
 				0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */,
+				0EB90CC129C25BBD00E64628 /* InteractiveConnectionView.swift in Sources */,
 				0E35C09A280E95BB0071FA35 /* ProviderProfileAvailability.swift in Sources */,
 				0E04F0092883466500BFCE1C /* DefaultLightUtils.swift in Sources */,
 				0E5349C827C176D100C71BB3 /* EndpointView+WireGuard.swift in Sources */,
