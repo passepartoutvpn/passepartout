@@ -73,9 +73,8 @@ struct InteractiveConnectionView: View {
     }
 
     private func saveAccount() {
-        profileManager.savePassword(forProfile: profile, newPassword: password)
         Task {
-            try? await vpnManager.connect(with: profile.id)
+            try? await vpnManager.connect(with: profile.id, newPassword: password)
         }
         presentationMode.wrappedValue.dismiss()
     }

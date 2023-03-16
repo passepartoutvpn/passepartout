@@ -49,9 +49,9 @@ extension VPNManager {
     }
 
     @discardableResult
-    public func connect(with profileId: UUID) async throws -> Profile {
+    public func connect(with profileId: UUID, newPassword: String? = nil) async throws -> Profile {
         let result = try profileManager.liveProfileEx(withId: profileId)
-        let profile = result.profile
+        var profile = result.profile
         guard !profileManager.isActiveProfile(profileId) ||
               currentState.vpnStatus != .connected else {
 
@@ -63,6 +63,9 @@ extension VPNManager {
         }
 
         pp_log.info("Connecting to: \(profile.logDescription)")
+        if let newPassword {
+            profile.account.password = newPassword
+        }
         let cfg = try vpnConfiguration(withProfile: profile)
 
         profileManager.activateProfile(profile)
