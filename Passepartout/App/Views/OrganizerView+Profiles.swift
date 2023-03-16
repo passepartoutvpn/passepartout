@@ -68,7 +68,7 @@ extension OrganizerView {
         }
         
         private var profilesView: some View {
-            ForEach(sortedHeaders, content: profileRow(forHeader:))
+            ForEach(sortedProfiles, content: profileRow(forProfile:))
                 .onDelete(perform: removeProfiles)
         }
 
@@ -79,25 +79,25 @@ extension OrganizerView {
             }
         }
 
-        private func profileRow(forHeader header: Profile.Header) -> some View {
-            NavigationLink(tag: header.id, selection: $profileManager.currentProfileId) {
+        private func profileRow(forProfile profile: Profile) -> some View {
+            NavigationLink(tag: profile.id, selection: $profileManager.currentProfileId) {
                 ProfileView()
             } label: {
-                profileLabel(forHeader: header)
+                profileLabel(forProfile: profile)
             }.contextMenu {
-                ProfileContextMenu(header: header)
+                ProfileContextMenu(header: profile.header)
             }
         }
         
-        private func profileLabel(forHeader header: Profile.Header) -> some View {
+        private func profileLabel(forProfile profile: Profile) -> some View {
             ProfileRow(
-                header: header,
-                isActiveProfile: profileManager.isActiveProfile(header.id)
+                profile: profile,
+                isActiveProfile: profileManager.isActiveProfile(profile.id)
             )
         }
 
-        private var sortedHeaders: [Profile.Header] {
-            profileManager.headers
+        private var sortedProfiles: [Profile] {
+            profileManager.profiles
                 .sorted()
 //                .sorted {
 //                    if profileManager.isActiveProfile($0.id) {
@@ -111,7 +111,7 @@ extension OrganizerView {
         }
 
         private func removeProfiles(at offsets: IndexSet) {
-            let currentHeaders = sortedHeaders
+            let currentHeaders = sortedProfiles
             var toDelete: [UUID] = []
             offsets.forEach {
                 toDelete.append(currentHeaders[$0].id)

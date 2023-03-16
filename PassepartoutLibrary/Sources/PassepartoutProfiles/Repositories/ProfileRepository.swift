@@ -35,29 +35,26 @@ class ProfileRepository: Repository {
         self.context = context
     }
     
-    func fetchedHeaders() -> FetchedValueHolder<[UUID: Profile.Header]> {
+    func fetchedProfiles() -> FetchedValueHolder<[UUID: Profile]> {
         let request: NSFetchRequest<NSFetchRequestResult> = CDProfile.fetchRequest()
         request.sortDescriptors = [
             .init(keyPath: \CDProfile.lastUpdate, ascending: true)
         ]
         request.propertiesToFetch = [
-            "uuid",
-            "lastUpdate",
-            "name",
-            "providerName"
+            "json"
         ]
         return .init(
             context: context,
             request: request,
             mapping: {
-                $0.reduce(into: [UUID: Profile.Header]()) {
+                $0.reduce(into: [UUID: Profile]()) {
                     guard let dto = $1 as? CDProfile else {
                         return
                     }
-                    guard let header = ProfileHeaderMapper.toModel(dto) else {
+                    guard let profile = try? ProfileMapper.toModel(dto) else {
                         return
                     }
-                    $0[header.id] = header
+                    $0[profile.id] = profile
                 }
             },
             initial: [:]

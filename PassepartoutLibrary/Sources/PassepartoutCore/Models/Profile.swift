@@ -129,9 +129,3 @@ extension Profile {
         header.id == Self.placeholder.id
     }
 }
-
-extension Profile.Header {
-    public var isPlaceholder: Bool {
-        id == Profile.placeholder.id
-    }
-}
