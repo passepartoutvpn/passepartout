@@ -31,15 +31,15 @@ import PassepartoutUtils
 public class CoreDataProfileManagerStrategy: ProfileManagerStrategy {
     private let profileRepository: ProfileRepository
 
-    private let fetchedHeaders: FetchedValueHolder<[UUID: Profile.Header]>
+    private let fetchedProfiles: FetchedValueHolder<[UUID: Profile]>
 
     public init(persistence: Persistence) {
         profileRepository = ProfileRepository(persistence.context)
-        fetchedHeaders = profileRepository.fetchedHeaders()
+        fetchedProfiles = profileRepository.fetchedProfiles()
     }
     
-    public var allHeaders: [UUID: Profile.Header] {
-        fetchedHeaders.value
+    public var allProfiles: [UUID: Profile] {
+        fetchedProfiles.value
     }
     
     public func profiles() -> [Profile] {
@@ -62,8 +62,8 @@ public class CoreDataProfileManagerStrategy: ProfileManagerStrategy {
         profileRepository.removeProfiles(withIds: ids)
     }
 
-    public func willUpdateProfiles() -> AnyPublisher<[UUID : Profile.Header], Never> {
-        fetchedHeaders.$value
+    public func willUpdateProfiles() -> AnyPublisher<[UUID : Profile], Never> {
+        fetchedProfiles.$value
             .eraseToAnyPublisher()
     }
 }

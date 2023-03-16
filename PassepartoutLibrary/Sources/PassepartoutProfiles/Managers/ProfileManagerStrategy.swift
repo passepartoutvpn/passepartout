@@ -28,7 +28,7 @@ import Combine
 import PassepartoutCore
 
 public protocol ProfileManagerStrategy {
-    var allHeaders: [UUID: Profile.Header] { get }
+    var allProfiles: [UUID: Profile] { get }
     
     func profiles() -> [Profile]
     
@@ -38,7 +38,7 @@ public protocol ProfileManagerStrategy {
 
     func removeProfiles(withIds ids: [UUID])
 
-    func willUpdateProfiles() -> AnyPublisher<[UUID: Profile.Header], Never>
+    func willUpdateProfiles() -> AnyPublisher<[UUID: Profile], Never>
 }
 
 extension ProfileManagerStrategy {

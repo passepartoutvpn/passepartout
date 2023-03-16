@@ -113,25 +113,25 @@ public final class ProfileManager: ObservableObject {
 // MARK: Index
 
 extension ProfileManager {
-    private var allHeaders: [UUID: Profile.Header] {
-        strategy.allHeaders
-    }
-    
-    public var headers: [Profile.Header] {
-        Array(allHeaders.values)
+    private var allProfiles: [UUID: Profile] {
+        strategy.allProfiles
     }
     
     public var profiles: [Profile] {
         strategy.profiles()
     }
+
+    public var headers: [Profile.Header] {
+        Array(allProfiles.values.map(\.header))
+    }
     
     public func isExistingProfile(withId id: UUID) -> Bool {
-        allHeaders[id] != nil
+        allProfiles[id] != nil
     }
     
     public func isExistingProfile(withName name: String) -> Bool {
-        allHeaders.contains {
-            $0.value.name == name
+        allProfiles.contains {
+            $0.value.header.name == name
         }
     }
 }
@@ -189,7 +189,7 @@ extension ProfileManager {
                 pp_log.info("\tDeactivating profile...")
                 activeProfileId = nil
             }
-        } else if allHeaders.isEmpty {
+        } else if allProfiles.isEmpty {
             pp_log.info("\tActivating first profile...")
             activeProfileId = profile.id
         }
@@ -215,7 +215,7 @@ extension ProfileManager {
     
     @available(*, deprecated, message: "only use for testing")
     public func removeAllProfiles() {
-        let ids = Array(allHeaders.keys)
+        let ids = Array(allProfiles.keys)
         removeProfiles(withIds: ids)
     }
     
@@ -314,14 +314,14 @@ extension ProfileManager {
             }.store(in: &cancellables)
     }
     
-    private func willUpdateProfiles(_ newHeaders: [UUID: Profile.Header]) {
-        pp_log.debug("Profiles updated: \(newHeaders)")
+    private func willUpdateProfiles(_ newProfiles: [UUID: Profile]) {
+        pp_log.debug("Profiles updated: \(newProfiles.values.map(\.header))")
         defer {
             objectWillChange.send()
         }
         
         // IMPORTANT: invalidate current profile if deleted
-        if !currentProfile.value.isPlaceholder && !newHeaders.keys.contains(currentProfile.value.id) {
+        if !currentProfile.value.isPlaceholder && !newProfiles.keys.contains(currentProfile.value.id) {
             pp_log.info("\tCurrent profile deleted, invalidating...")
             currentProfile.value = .placeholder
         }
@@ -332,7 +332,7 @@ extension ProfileManager {
             currentProfile.value = newProfile
         }
 
-        if let activeProfileId = activeProfileId, !newHeaders.keys.contains(activeProfileId) {
+        if let activeProfileId = activeProfileId, !newProfiles.keys.contains(activeProfileId) {
             pp_log.info("\tActive profile was deleted")
             self.activeProfileId = nil
         }
@@ -342,12 +342,12 @@ extension ProfileManager {
         // IMPORTANT: defer task to avoid recursive saves (is non-main thread an issue?)
         // FIXME: Core Data, not sure about this workaround
         Task {
-            fixDuplicateNames(in: newHeaders)
+            fixDuplicateNames(in: newProfiles)
         }
     }
     
-    private func fixDuplicateNames(in newHeaders: [UUID: Profile.Header]) {
-        var allNames = newHeaders.values.map(\.name)
+    private func fixDuplicateNames(in newProfiles: [UUID: Profile]) {
+        var allNames = newProfiles.values.map(\.header.name)
         let distinctNames = Set(allNames)
         distinctNames.forEach {
             guard let i = allNames.firstIndex(of: $0) else {
@@ -364,9 +364,11 @@ extension ProfileManager {
 
         var renamedProfiles: [Profile] = []
         duplicates.forEach { name in
-            let headers = newHeaders.values.filter {
-                $0.name == name
-            }
+            let headers = newProfiles.values
+                .map(\.header)
+                .filter {
+                    $0.name == name
+                }
             guard headers.count > 1 else {
                 assertionFailure("Name '\(name)' marked as duplicate but headers.count not > 1")
                 return
