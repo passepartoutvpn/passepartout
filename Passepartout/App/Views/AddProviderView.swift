@@ -135,11 +135,11 @@ struct AddProviderView: View {
     
     // eligibility: select or purchase provider
     private func presentOrPurchaseProvider(_ metadata: ProviderMetadata) {
-        if productManager.isEligible(forProvider: metadata.name) {
-            viewModel.selectProvider(metadata, providerManager)
-        } else {
+        guard productManager.isEligible(forProvider: metadata.name) else {
             viewModel.presentPaywall()
+            return
         }
+        viewModel.selectProvider(metadata, providerManager)
     }
 
     private func onErrorMessage(_ message: String?, _ scrollProxy: ScrollViewProxy) {

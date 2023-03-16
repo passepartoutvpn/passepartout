@@ -32,7 +32,7 @@ import TunnelKitOpenVPNCore
 import PassepartoutCore
 import PassepartoutUtils
 
-public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where VPNType.Configuration == NetworkExtensionConfiguration, VPNType.Extra == NetworkExtensionExtra {
+public class TunnelKitVPNManagerStrategy: VPNManagerStrategy {
     private struct AtomicState: Equatable {
         let isEnabled: Bool
         
@@ -52,7 +52,7 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
     
     private let defaults: UserDefaults
 
-    private let vpn: VPNType
+    private let vpn: NetworkExtensionVPN
     
     private let dataCountInterval: TimeInterval
     
@@ -73,7 +73,7 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
     public init(
         appGroup: String,
         tunnelBundleIdentifier: @escaping (VPNProtocolType) -> String,
-        vpn: VPNType,
+        vpn: NetworkExtensionVPN,
         dataCountInterval: TimeInterval = 3.0
     ) {
         self.appGroup = appGroup
