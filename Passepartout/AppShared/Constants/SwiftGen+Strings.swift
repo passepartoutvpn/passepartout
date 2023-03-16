@@ -482,6 +482,8 @@ internal enum L10n {
       internal static let encryption = L10n.tr("Localizable", "global.strings.encryption", fallback: "Encryption")
       /// Endpoint
       internal static let endpoint = L10n.tr("Localizable", "global.strings.endpoint", fallback: "Endpoint")
+      /// Interactive
+      internal static let interactive = L10n.tr("Localizable", "global.strings.interactive", fallback: "Interactive")
       /// Interface
       internal static let interface = L10n.tr("Localizable", "global.strings.interface", fallback: "Interface")
       /// Keep-alive
@@ -520,6 +522,8 @@ internal enum L10n {
       internal static let rename = L10n.tr("Localizable", "global.strings.rename", fallback: "Rename")
       /// Save
       internal static let save = L10n.tr("Localizable", "global.strings.save", fallback: "Save")
+      /// Seed
+      internal static let seed = L10n.tr("Localizable", "global.strings.seed", fallback: "Seed")
       /// Servers
       internal static let servers = L10n.tr("Localizable", "global.strings.servers", fallback: "Servers")
       /// Show
