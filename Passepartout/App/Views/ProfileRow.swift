@@ -27,9 +27,17 @@ import SwiftUI
 import PassepartoutLibrary
 
 struct ProfileRow: View {
-    let profile: Profile
+    private let profile: Profile
     
-    let isActiveProfile: Bool
+    @Binding private var interactiveProfile: Profile?
+    
+    private let isActiveProfile: Bool
+    
+    init(profile: Profile, interactiveProfile: Binding<Profile?>, isActiveProfile: Bool) {
+        self.profile = profile
+        _interactiveProfile = interactiveProfile
+        self.isActiveProfile = isActiveProfile
+    }
     
     var body: some View {
         debugChanges()
@@ -44,8 +52,11 @@ struct ProfileRow: View {
                     .themeSecondaryTextStyle()
             }
             Spacer()
-            VPNToggle(profileId: profile.id, rateLimit: Constants.RateLimit.vpnToggle)
-                .labelsHidden()
+            VPNToggle(
+                profile: profile,
+                interactiveProfile: $interactiveProfile,
+                rateLimit: Constants.RateLimit.vpnToggle
+            ).labelsHidden()
         }.padding([.top, .bottom], 10)
     }
 }

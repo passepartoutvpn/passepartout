@@ -57,17 +57,19 @@ struct InteractiveConnectionView: View {
                     themeRevealImage.asSystemImage
                         .themeAccentForegroundStyle()
                 }.textContentType(.password)
-                    .themeRawTextStyle()
-                    .withLeadingText(L10n.Account.Items.Password.caption)
+                .themeRawTextStyle()
+                .withLeadingText(L10n.Account.Items.Password.caption)
+            } header: {
+                Text(L10n.Account.title)
             }
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: saveAccount) {
-                    themeSaveButtonLabel()
+                    Text(L10n.Global.Strings.connect)
                 }
             }
-        }
+        }.navigationTitle(profile.header.name)
     }
 
     private func saveAccount() {

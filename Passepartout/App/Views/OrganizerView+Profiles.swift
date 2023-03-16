@@ -29,6 +29,8 @@ import PassepartoutLibrary
 extension OrganizerView {
     struct ProfilesList: View {
         @ObservedObject private var profileManager: ProfileManager
+        
+        @State private var interactiveProfile: Profile?
 
         init() {
             profileManager = .shared
@@ -44,6 +46,10 @@ extension OrganizerView {
             }.onAppear(perform: performMigrationsIfNeeded)
             .onReceive(profileManager.didCreateProfile) {
                 profileManager.currentProfileId = $0.id
+            }.sheet(item: $interactiveProfile) { profile in
+                NavigationView {
+                    InteractiveConnectionView(profile: profile)
+                }.themeGlobal()
             }
         }
         
@@ -92,6 +98,7 @@ extension OrganizerView {
         private func profileLabel(forProfile profile: Profile) -> some View {
             ProfileRow(
                 profile: profile,
+                interactiveProfile: $interactiveProfile,
                 isActiveProfile: profileManager.isActiveProfile(profile.id)
             )
         }

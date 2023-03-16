@@ -30,15 +30,26 @@ extension ProfileView {
     struct VPNSection: View {
         @ObservedObject private var profileManager: ProfileManager
 
-        private let profileId: UUID
+        private let profile: Profile
+
+        @Binding private var modalType: ModalType?
+        
+        private var interactiveProfile: Binding<Profile?> {
+            .init {
+                modalType == .interactiveAccount ? profile : nil
+            } set: {
+                modalType = $0 != nil ? .interactiveAccount : nil
+            }
+        }
         
         private var isActiveProfile: Bool {
-            profileManager.isActiveProfile(profileId)
+            profileManager.isActiveProfile(profile.id)
         }
 
-        init(profileId: UUID) {
+        init(profile: Profile, modalType: Binding<ModalType?>) {
             profileManager = .shared
-            self.profileId = profileId
+            self.profile = profile
+            _modalType = modalType
         }
         
         var body: some View {
@@ -54,7 +65,11 @@ extension ProfileView {
         }
         
         private var toggleView: some View {
-            VPNToggle(profileId: profileId, rateLimit: Constants.RateLimit.vpnToggle)
+            VPNToggle(
+                profile: profile,
+                interactiveProfile: interactiveProfile,
+                rateLimit: Constants.RateLimit.vpnToggle
+            )
         }
         
         private var statusView: some View {
