@@ -27,6 +27,16 @@ import Foundation
 
 extension Profile {
     public struct Account: Codable, Equatable {
+        public enum AuthenticationMethod: String, Codable {
+            case persistent
+            
+            case interactive
+            
+            case totp
+        }
+
+        public var authenticationMethod: AuthenticationMethod?
+
         public var username: String
         
         public var password: String
