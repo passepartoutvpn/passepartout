@@ -42,8 +42,17 @@ extension NEOnDemandRuleInterfaceType {
     }
 }
 
-extension Profile.OnDemand {
-    func rules(withCustomRules: Bool) -> [NEOnDemandRule] {
+extension Profile {
+    func onDemandRules(withCustomRules: Bool) -> [NEOnDemandRule] {
+        onDemand.rules(isInteractive: account.authenticationMethod == .interactive, withCustomRules: withCustomRules)
+    }
+}
+
+private extension Profile.OnDemand {
+    func rules(isInteractive: Bool, withCustomRules: Bool) -> [NEOnDemandRule] {
+        guard isEnabled && !isInteractive else {
+            return []
+        }
 
         // TODO: on-demand, drop hardcoding when "trusted networks" -> "on-demand"
 //        isEnabled = true

@@ -60,7 +60,7 @@ struct VPNConfigurationParameters {
         username = !profile.account.username.isEmpty ? profile.account.username : nil
         self.passwordReference = passwordReference
         self.withNetworkSettings = withNetworkSettings
-        onDemandRules = profile.onDemand.rules(withCustomRules: withCustomRules)
+        onDemandRules = profile.onDemandRules(withCustomRules: withCustomRules)
     }
 }
 
