@@ -53,7 +53,12 @@ extension Profile.OpenVPNSettings: DNSSettingsProviding {
         configuration.dnsServers
     }
 
-    // dhcp-option DOMAIN/DOMAIN-SEARCH
+    // dhcp-option DOMAIN
+    public var dnsDomain: String? {
+        configuration.dnsDomain
+    }
+
+    // dhcp-option DOMAIN-SEARCH
     public var dnsSearchDomains: [String]? {
         configuration.searchDomains
     }

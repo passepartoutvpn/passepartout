@@ -37,6 +37,10 @@ extension Profile.WireGuardSettings: DNSSettingsProviding {
         configuration.dnsServers
     }
 
+    public var dnsDomain: String? {
+        nil
+    }
+
     public var dnsSearchDomains: [String]? {
         configuration.dnsSearchDomains
     }

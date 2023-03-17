@@ -54,6 +54,8 @@ public protocol DNSSettingsProviding {
 
     var dnsServers: [String]? { get }
 
+    var dnsDomain: String? { get }
+
     var dnsSearchDomains: [String]? { get }
 
     var dnsHTTPSURL: URL? { get }
@@ -106,6 +108,8 @@ extension Network {
         }
 
         public var dnsServers: [String]?
+
+        public var dnsDomain: String?
 
         public var dnsSearchDomains: [String]?
 
