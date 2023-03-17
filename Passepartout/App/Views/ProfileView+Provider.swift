@@ -107,7 +107,7 @@ extension ProfileView {
         }
 
         private var currentProviderServerDescription: String? {
-            profile.providerServer(providerManager)?.localizedLongDescription
+            profile.providerServer(providerManager)?.localizedLongDescription(withCategory: true)
         }
 
         private var currentProviderCountryImage: Image? {

@@ -72,7 +72,7 @@ class DefaultLightProviderServer: LightProviderServer {
     
     init(_ server: ProviderServer) {
         description = server.localizedShortDescriptionWithDefault
-        longDescription = server.localizedLongDescription
+        longDescription = server.localizedLongDescription(withCategory: false)
         categoryName = server.categoryName
         locationId = server.locationId
         serverId = server.id

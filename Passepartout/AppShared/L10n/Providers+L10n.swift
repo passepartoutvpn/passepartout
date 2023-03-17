@@ -93,16 +93,16 @@ extension ProviderServer {
         localizedShortDescription ?? "\(L10n.Global.Strings.default) [\(apiId)]"
     }
 
-    var localizedLongDescription: String {
+    func localizedLongDescription(withCategory: Bool) -> String {
         var comps: [String] = [localizedCountry]
         localizedShortDescription.map {
             comps.append($0)
         }
         let desc = comps.joined(separator: ", ")
-        guard !categoryName.isEmpty else {
-            return desc
+        if withCategory, !categoryName.isEmpty {
+            return "\(categoryName.uppercased()): \(desc)"
         }
-        return "\(categoryName.uppercased()): \(desc)"
+        return desc
     }
 }
 
