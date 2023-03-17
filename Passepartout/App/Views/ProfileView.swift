@@ -28,6 +28,8 @@ import PassepartoutLibrary
 
 struct ProfileView: View {
     enum ModalType: Int, Identifiable {
+        case interactiveAccount
+
         case shortcuts
         
         case rename
@@ -89,7 +91,10 @@ struct ProfileView: View {
     private var mainView: some View {
         List {
             if !isLoading {
-                VPNSection(profileId: currentProfile.value.id)
+                VPNSection(
+                    profile: currentProfile.value,
+                    modalType: $modalType
+                )
                 ProviderSection(currentProfile: currentProfile)
                 ConfigurationSection(
                     currentProfile: currentProfile,
@@ -105,6 +110,11 @@ struct ProfileView: View {
     @ViewBuilder
     private func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
+        case .interactiveAccount:
+            NavigationView {
+                InteractiveConnectionView(profile: currentProfile.value)
+            }.themeGlobal()
+            
         case .shortcuts:
             NavigationView {
                 ShortcutsView(target: currentProfile.value)

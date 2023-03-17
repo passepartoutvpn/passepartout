@@ -29,11 +29,14 @@ import PassepartoutLibrary
 extension OrganizerView {
     struct ProfilesList: View {
         @ObservedObject private var profileManager: ProfileManager
-
-        init() {
-            profileManager = .shared
-        }
         
+        @Binding private var modalType: ModalType?
+
+        init(modalType: Binding<ModalType?>) {
+            profileManager = .shared
+            _modalType = modalType
+        }
+
         var body: some View {
             debugChanges()
             return Group {
@@ -92,7 +95,8 @@ extension OrganizerView {
         private func profileLabel(forProfile profile: Profile) -> some View {
             ProfileRow(
                 profile: profile,
-                isActiveProfile: profileManager.isActiveProfile(profile.id)
+                isActiveProfile: profileManager.isActiveProfile(profile.id),
+                modalType: $modalType
             )
         }
 

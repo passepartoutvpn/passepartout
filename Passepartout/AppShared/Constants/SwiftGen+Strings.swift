@@ -54,6 +54,12 @@ internal enum L10n {
     /// MARK: ProfileView -> AccountView
     internal static let title = L10n.tr("Localizable", "account.title", fallback: "Account")
     internal enum Items {
+      internal enum AuthenticationMethod {
+        /// Interactive
+        internal static let interactive = L10n.tr("Localizable", "account.items.authentication_method.interactive", fallback: "Interactive")
+        /// Persistent
+        internal static let persistent = L10n.tr("Localizable", "account.items.authentication_method.persistent", fallback: "Persistent")
+      }
       internal enum OpenGuide {
         /// See your credentials
         internal static let caption = L10n.tr("Localizable", "account.items.open_guide.caption", fallback: "See your credentials")
@@ -63,6 +69,10 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "account.items.password.caption", fallback: "Password")
         /// secret
         internal static let placeholder = L10n.tr("Localizable", "account.items.password.placeholder", fallback: "secret")
+      }
+      internal enum Seed {
+        /// Seed
+        internal static let caption = L10n.tr("Localizable", "account.items.seed.caption", fallback: "Seed")
       }
       internal enum Signup {
         /// Register with %@

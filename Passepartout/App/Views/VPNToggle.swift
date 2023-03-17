@@ -35,14 +35,20 @@ struct VPNToggle: View {
 
     @ObservedObject private var productManager: ProductManager
 
-    private let profileId: UUID
-
+    private let profile: Profile
+    
+    @Binding private var interactiveProfile: Profile?
+    
     private let rateLimit: Int
     
     private var isEnabled: Binding<Bool> {
         .init {
-            isActiveProfile && currentVPNState.isEnabled
+            isActiveProfile && currentVPNState.isEnabled && !shouldPromptForAccount
         } set: { newValue in
+            guard !shouldPromptForAccount else {
+                interactiveProfile = profile
+                return
+            }
             guard newValue else {
                 disableVPN()
                 return
@@ -52,7 +58,11 @@ struct VPNToggle: View {
     }
     
     private var isActiveProfile: Bool {
-        profileManager.isActiveProfile(profileId)
+        profileManager.isActiveProfile(profile.id)
+    }
+    
+    private var shouldPromptForAccount: Bool {
+        profile.account.authenticationMethod == .interactive && (currentVPNState.vpnStatus == .disconnecting || currentVPNState.vpnStatus == .disconnected)
     }
 
     private var isEligibleForSiri: Bool {
@@ -61,12 +71,13 @@ struct VPNToggle: View {
     
     @State private var canToggle = true
     
-    init(profileId: UUID, rateLimit: Int) {
+    init(profile: Profile, interactiveProfile: Binding<Profile?>, rateLimit: Int) {
         profileManager = .shared
         vpnManager = .shared
         currentVPNState = .shared
         productManager = .shared
-        self.profileId = profileId
+        self.profile = profile
+        _interactiveProfile = interactiveProfile
         self.rateLimit = rateLimit
     }
 
@@ -82,10 +93,10 @@ struct VPNToggle: View {
             await Task.maybeWait(forMilliseconds: rateLimit)
             canToggle = true
             do {
-                let profile = try await vpnManager.connect(with: profileId)
+                let profile = try await vpnManager.connect(with: profile.id)
                 donateIntents(withProfile: profile)
             } catch {
-                pp_log.warning("Unable to connect to profile \(profileId): \(error)")
+                pp_log.warning("Unable to connect to profile \(profile.id): \(error)")
                 canToggle = true
             }
         }

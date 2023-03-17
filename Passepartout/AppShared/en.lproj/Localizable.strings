@@ -179,10 +179,13 @@
 "account.title" = "Account";
 "account.sections.credentials.header" = "Credentials";
 "account.sections.registration.footer" = "Go get an account on the %@ website.";
+"account.items.authentication_method.persistent" = "Persistent";
+"account.items.authentication_method.interactive" = "Interactive";
 "account.items.username.caption" = "Username";
 "account.items.username.placeholder" = "username";
 "account.items.password.caption" = "Password";
 "account.items.password.placeholder" = "secret";
+"account.items.seed.caption" = "Seed";
 "account.items.open_guide.caption" = "See your credentials";
 "account.items.signup.caption" = "Register with %@";
 

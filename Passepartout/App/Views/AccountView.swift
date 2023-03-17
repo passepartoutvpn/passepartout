@@ -41,8 +41,6 @@ struct AccountView: View {
 
     @State private var liveAccount = Profile.Account()
     
-    @State private var isPasswordRevealed = false
-    
     init(
         providerName: ProviderName?,
         vpnProtocol: VPNProtocolType,
@@ -61,21 +59,47 @@ struct AccountView: View {
     var body: some View {
         List {
             Section {
+                themeTextPicker(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
+                    .persistent,
+                    .interactive
+//                    .totp // TODO: interactive, support OTP-based authentication
+                ], description: \.localizedDescription)
+            }
+            Section {
                 TextField(usernamePlaceholder ?? L10n.Account.Items.Username.placeholder, text: $liveAccount.username)
                     .textContentType(.username)
                     .keyboardType(.emailAddress)
                     .themeRawTextStyle()
                     .withLeadingText(L10n.Account.Items.Username.caption)
 
-                RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password) {
-                    themeConceilImage.asSystemImage
-                        .themeAccentForegroundStyle()
-                } revealImage: {
-                    themeRevealImage.asSystemImage
-                        .themeAccentForegroundStyle()
-                }.textContentType(.password)
-                .themeRawTextStyle()
-                .withLeadingText(L10n.Account.Items.Password.caption)
+                switch liveAccount.authenticationMethod {
+                case nil, .persistent, .interactive:
+                    if liveAccount.authenticationMethod == .interactive {
+                        EmptyView()
+                    } else {
+                        RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password) {
+                            themeConceilImage.asSystemImage
+                                .themeAccentForegroundStyle()
+                        } revealImage: {
+                            themeRevealImage.asSystemImage
+                                .themeAccentForegroundStyle()
+                        }.textContentType(.password)
+                            .themeRawTextStyle()
+                            .withLeadingText(L10n.Account.Items.Password.caption)
+                    }
+
+                // TODO: interactive, scan QR code
+                case .totp:
+                    RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password) {
+                        themeConceilImage.asSystemImage
+                            .themeAccentForegroundStyle()
+                    } revealImage: {
+                        themeRevealImage.asSystemImage
+                            .themeAccentForegroundStyle()
+                    }.textContentType(.oneTimeCode)
+                        .themeRawTextStyle()
+                        .withLeadingText(L10n.Account.Items.Seed.caption)
+                }
             } footer: {
                 metadata?.localizedGuidanceString.map {
                     Text($0)
@@ -123,5 +147,20 @@ extension AccountView {
             return nil
         }
         return providerManager.provider(withName: name)
+    }
+}
+
+private extension Profile.Account.AuthenticationMethod {
+    var localizedDescription: String {
+        switch self {
+        case .persistent:
+            return L10n.Account.Items.AuthenticationMethod.persistent
+            
+        case .interactive:
+            return L10n.Account.Items.AuthenticationMethod.interactive
+            
+        case .totp:
+            return Unlocalized.Other.totp
+        }
     }
 }
