@@ -27,16 +27,16 @@ import Foundation
 
 public struct GenericWebResponse<T> {
     public let value: T?
-    
+
     public let lastModifiedString: String?
-    
+
     public var lastModified: Date? {
         guard let string = lastModifiedString else {
             return nil
         }
         return GenericWebParser.lastModifiedDate(string: string)
     }
-    
+
     public let isCached: Bool
 
     public static func empty() -> GenericWebResponse {

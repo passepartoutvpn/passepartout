@@ -32,11 +32,11 @@ extension EndpointAdvancedView {
         @Binding var builder: OpenVPN.ConfigurationBuilder
 
         let isReadonly: Bool
-        
+
         let isServerPushed: Bool
-        
+
         private let fallbackConfiguration = OpenVPN.ConfigurationBuilder(withFallbacks: true).build()
-        
+
         var body: some View {
             List {
                 let cfg = builder.build()
@@ -104,7 +104,7 @@ extension EndpointAdvancedView.OpenVPNView {
             Text(Unlocalized.Network.ipv4)
         }
     }
-    
+
     private var ipv6Section: some View {
         Section {
             if let settings = builder.ipv6 {
@@ -156,7 +156,7 @@ extension EndpointAdvancedView.OpenVPNView {
             }
         }
     }
-    
+
     private var communicationEditableSection: some View {
         Section {
             themeTextPicker(
@@ -185,7 +185,7 @@ extension EndpointAdvancedView.OpenVPNView {
             Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
         }
     }
-    
+
     private func compressionSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.compressionSettings.map { settings in
             Section {
@@ -202,7 +202,7 @@ extension EndpointAdvancedView.OpenVPNView {
             }
         }
     }
-    
+
     private var compressionEditableSection: some View {
         Section {
             themeTextPicker(
@@ -334,21 +334,21 @@ extension OpenVPN.Configuration {
         }
         return (compressionFraming, compressionAlgorithm)
     }
-    
+
     var dnsSettings: (servers: [String], domains: [String])? {
         guard !(dnsServers?.isEmpty ?? true) || !(searchDomains?.isEmpty ?? true) else {
             return nil
         }
         return (dnsServers ?? [], searchDomains ?? [])
     }
-    
+
     var proxySettings: (proxy: Proxy?, pac: URL?, bypass: [String])? {
         guard httpsProxy != nil || httpProxy != nil || proxyAutoConfigurationURL != nil || !(proxyBypassDomains?.isEmpty ?? true) else {
             return nil
         }
         return (httpsProxy ?? httpProxy, proxyAutoConfigurationURL, proxyBypassDomains ?? [])
     }
-    
+
     var otherSettings: (keepAlive: TimeInterval?, reneg: TimeInterval?, randomizeEndpoint: Bool?, randomizeHostnames: Bool?)? {
         guard keepAliveInterval != nil || renegotiatesAfter != nil || randomizeEndpoint != nil || randomizeHostnames != nil else {
             return nil
@@ -361,15 +361,15 @@ private extension EndpointAdvancedView.OpenVPNView {
     var fallbackCipher: OpenVPN.Cipher {
         fallbackConfiguration.cipher!
     }
-    
+
     var fallbackDigest: OpenVPN.Digest {
         fallbackConfiguration.digest!
     }
-    
+
     var fallbackCompressionFraming: OpenVPN.CompressionFraming {
         fallbackConfiguration.compressionFraming!
     }
-    
+
     var fallbackCompressionAlgorithm: OpenVPN.CompressionAlgorithm {
         fallbackConfiguration.compressionAlgorithm!
     }

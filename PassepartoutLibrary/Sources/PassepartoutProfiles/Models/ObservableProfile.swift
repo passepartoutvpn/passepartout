@@ -29,9 +29,9 @@ import PassepartoutUtils
 
 public class ObservableProfile: ValueHolder, ObservableObject {
     @Published public internal(set) var isLoading = false
-    
+
     @Published public var value: Profile
-    
+
     public init() {
         value = .placeholder
     }

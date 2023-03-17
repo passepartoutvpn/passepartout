@@ -41,7 +41,7 @@ extension KeyStoreDomainLocation {
 
 public protocol KeyValueStore {
     func setValue<L: KeyStoreLocation, V>(_ value: V?, forLocation location: L)
-    
+
     func value<L: KeyStoreLocation, V>(forLocation location: L) -> V?
 
     func removeValue<L: KeyStoreLocation>(forLocation location: L)

@@ -31,9 +31,9 @@ extension Profile {
         public var vpnProtocol: VPNProtocolType {
             .openVPN
         }
-        
+
         public var configuration: OpenVPN.Configuration
-        
+
         public var account: Profile.Account?
 
         public var customEndpoint: Endpoint?

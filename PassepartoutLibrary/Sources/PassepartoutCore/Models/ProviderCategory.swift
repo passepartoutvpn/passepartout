@@ -27,11 +27,11 @@ import Foundation
 
 public struct ProviderCategory {
     public let providerMetadata: ProviderMetadata
-    
+
     public let vpnProtocol: VPNProtocolType
-    
+
     public let name: String
-    
+
     public let locations: [ProviderLocation]
 
     public init(

@@ -29,9 +29,9 @@ import PassepartoutLibrary
 extension OnDemandView {
     struct SSIDList: View {
         @Binding var withSSIDs: [String: Bool]
-        
+
         @StateObject private var reader = SSIDReader()
-        
+
         var body: some View {
             EditableTextList(elements: allSSIDs, allowsDuplicates: false, mapping: mapElements) { text in
                 requestSSID(text)
@@ -43,13 +43,13 @@ extension OnDemandView {
                 Text(L10n.Global.Strings.add)
             }
         }
- 
+
         private func mapElements(elements: [IdentifiableString]) -> [IdentifiableString] {
             elements
                 .filter { !$0.string.isEmpty }
                 .sorted { $0.string.lowercased() < $1.string.lowercased() }
         }
-        
+
         private func ssidRow(callback: EditableTextList.FieldCallback) -> some View {
             Group {
                 if callback.isNewElement {
@@ -61,7 +61,7 @@ extension OnDemandView {
                 }
             }
         }
-        
+
         private func ssidField(callback: EditableTextList.FieldCallback) -> some View {
             TextField(
                 Unlocalized.Network.ssid,
@@ -102,7 +102,7 @@ extension OnDemandView.SSIDList {
 //            print(">>> withSSIDs (allSSIDs): \(withSSIDs)")
         }
     }
-    
+
     private var onSSIDs: Binding<Set<String>> {
         .init {
             Set(withSSIDs.filter {
@@ -128,7 +128,7 @@ extension OnDemandView.SSIDList {
 //            print(">>> withSSIDs (onSSIDs): \(withSSIDs)")
         }
     }
-    
+
     private func isSSIDOn(_ ssid: String) -> Binding<Bool> {
         .init {
             withSSIDs[ssid] ?? false

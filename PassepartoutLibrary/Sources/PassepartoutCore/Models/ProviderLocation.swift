@@ -27,13 +27,13 @@ import Foundation
 
 public struct ProviderLocation {
     public let providerMetadata: ProviderMetadata
-    
+
     public let vpnProtocol: VPNProtocolType
-    
+
     public let categoryName: String
-    
+
     public let countryCode: String
-    
+
     public var onlyServer: ProviderServer? {
         guard servers?.count == 1 else {
             return nil

@@ -29,17 +29,17 @@ struct CopySavingButton<T: Equatable, Label: View>: View {
     @Binding var original: T
 
     @Binding var copy: T
-    
+
     var mapping: (T) -> T
-    
+
     let label: () -> Label
 
     var saveAnyway = false
 
     var onSave: (() -> Void)?
-    
+
     @State private var isLoaded = false
-    
+
     var body: some View {
         Button(action: saveToOriginal, label: label)
             .disabled(!canSave)

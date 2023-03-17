@@ -25,7 +25,7 @@
 
 import SwiftUI
 
-func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
+func ??<T>(lhs: Binding<T?>, rhs: T) -> Binding<T> {
     Binding {
         lhs.wrappedValue ?? rhs
     } set: {
@@ -34,15 +34,15 @@ func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
 }
 
 extension Binding {
-    func toString() -> Binding<String> where Value == Optional<URL> {
+    func toString() -> Binding<String> where Value == URL? {
         .init {
             wrappedValue?.absoluteString ?? ""
         } set: {
             wrappedValue = URL(string: $0) ?? wrappedValue
         }
     }
-    
-    func toString<T>() -> Binding<String> where Value == Optional<T>, T: FixedWidthInteger {
+
+    func toString<T>() -> Binding<String> where Value == T?, T: FixedWidthInteger {
         .init {
             guard let v = wrappedValue else {
                 return ""

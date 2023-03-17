@@ -27,7 +27,7 @@ import SwiftUI
 
 public struct IntentActivity<UserObject> {
     public let name: String
-    
+
     public let handler: (NSUserActivity, UserObject) -> Void
 }
 

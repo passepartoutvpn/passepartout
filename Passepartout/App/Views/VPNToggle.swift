@@ -36,11 +36,11 @@ struct VPNToggle: View {
     @ObservedObject private var productManager: ProductManager
 
     private let profile: Profile
-    
+
     @Binding private var interactiveProfile: Profile?
-    
+
     private let rateLimit: Int
-    
+
     private var isEnabled: Binding<Bool> {
         .init {
             isActiveProfile && currentVPNState.isEnabled && !shouldPromptForAccount
@@ -56,11 +56,11 @@ struct VPNToggle: View {
             enableVPN()
         }
     }
-    
+
     private var isActiveProfile: Bool {
         profileManager.isActiveProfile(profile.id)
     }
-    
+
     private var shouldPromptForAccount: Bool {
         profile.account.authenticationMethod == .interactive && (currentVPNState.vpnStatus == .disconnecting || currentVPNState.vpnStatus == .disconnected)
     }
@@ -68,9 +68,9 @@ struct VPNToggle: View {
     private var isEligibleForSiri: Bool {
         productManager.isEligible(forFeature: .siriShortcuts)
     }
-    
+
     @State private var canToggle = true
-    
+
     init(profile: Profile, interactiveProfile: Binding<Profile?>, rateLimit: Int) {
         profileManager = .shared
         vpnManager = .shared
@@ -86,7 +86,7 @@ struct VPNToggle: View {
             .disabled(!canToggle)
             .themeAnimation(on: currentVPNState.isEnabled)
     }
-    
+
     private func enableVPN() {
         Task { @MainActor in
             canToggle = false
@@ -101,7 +101,7 @@ struct VPNToggle: View {
             }
         }
     }
-    
+
     private func disableVPN() {
         Task { @MainActor in
             canToggle = false
@@ -109,7 +109,7 @@ struct VPNToggle: View {
             canToggle = true
         }
     }
-    
+
     private func donateIntents(withProfile profile: Profile) {
 
         // eligibility: donate intents if eligible for Siri

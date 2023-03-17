@@ -28,13 +28,13 @@ import Foundation
 struct Validators {
     enum ValidationError: Error {
         case notSet
-        
+
         case empty
-        
+
         case ipAddress
-        
+
         case domainName
-        
+
         case url
     }
 
@@ -71,7 +71,7 @@ struct Validators {
             throw ValidationError.domainName
         }
     }
-    
+
     static func url(_ string: String) throws {
         guard let _ = URL(string: string) else {
             throw ValidationError.url

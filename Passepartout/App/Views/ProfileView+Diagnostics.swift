@@ -29,7 +29,7 @@ import PassepartoutLibrary
 extension ProfileView {
     struct DiagnosticsSection: View {
         @ObservedObject var currentProfile: ObservableProfile
-        
+
         var body: some View {
             Section {
                 NavigationLink {

@@ -30,9 +30,9 @@ import PassepartoutLibrary
 struct DonateView: View {
     enum AlertType: Identifiable {
         case thankYou
-        
+
         case purchaseFailed(Error)
-        
+
         // XXX: alert ids
         var id: Int {
             switch self {
@@ -42,19 +42,19 @@ struct DonateView: View {
             }
         }
     }
-    
+
     @Environment(\.scenePhase) private var scenePhase
 
     @ObservedObject private var productManager: ProductManager
-    
+
     @State private var alertType: AlertType?
 
     @State private var pendingDonationIdentifier: String?
-    
+
     init() {
         productManager = .shared
     }
-    
+
     var body: some View {
         List {
             productsSection
@@ -90,7 +90,7 @@ struct DonateView: View {
             )
         }
     }
-    
+
     private var productsSection: some View {
         Section {
             if !productManager.isRefreshingProducts {
@@ -104,7 +104,7 @@ struct DonateView: View {
             Text(L10n.Donate.Sections.OneTime.footer)
         }
     }
-    
+
     @ViewBuilder
     private func productRow(_ product: SKProduct) -> some View {
         HStack {
@@ -129,7 +129,7 @@ extension DonateView {
         pendingDonationIdentifier = product.productIdentifier
         productManager.purchase(product, completionHandler: handlePurchaseResult)
     }
-    
+
     private func handlePurchaseResult(_ result: Result<InAppPurchaseResult, Error>) {
         switch result {
         case .success(let value):
@@ -138,7 +138,7 @@ extension DonateView {
             } else {
                 // cancelled
             }
-            
+
         case .failure(let error):
             alertType = .purchaseFailed(error)
         }

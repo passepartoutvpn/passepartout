@@ -28,19 +28,19 @@ import PassepartoutLibrary
 
 struct AccountView: View {
     @ObservedObject private var providerManager: ProviderManager
-    
+
     private let providerName: ProviderName?
-    
+
     private let vpnProtocol: VPNProtocolType
-    
+
     @Binding private var account: Profile.Account
-    
+
     private let saveAnyway: Bool
-    
+
     private let onSave: (() -> Void)?
 
     @State private var liveAccount = Profile.Account()
-    
+
     init(
         providerName: ProviderName?,
         vpnProtocol: VPNProtocolType,
@@ -55,7 +55,7 @@ struct AccountView: View {
         self.saveAnyway = saveAnyway
         self.onSave = onSave
     }
-    
+
     var body: some View {
         List {
             Section {
@@ -126,7 +126,7 @@ struct AccountView: View {
             )
         }
     }
-    
+
     private func openGuidanceURL(_ url: URL) {
         URL.openURL(url)
     }
@@ -155,10 +155,10 @@ private extension Profile.Account.AuthenticationMethod {
         switch self {
         case .persistent:
             return L10n.Account.Items.AuthenticationMethod.persistent
-            
+
         case .interactive:
             return L10n.Account.Items.AuthenticationMethod.interactive
-            
+
         case .totp:
             return Unlocalized.Other.totp
         }

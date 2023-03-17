@@ -35,7 +35,7 @@ extension URL {
     public var filename: String {
         deletingPathExtension().lastPathComponent
     }
-    
+
     @discardableResult
     public static func openURL(_ url: URL) -> Bool {
         #if os(iOS)

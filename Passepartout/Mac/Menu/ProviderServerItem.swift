@@ -28,17 +28,17 @@ import AppKit
 
 struct ProviderServerItem: Item {
     private let profile: LightProfile
-    
+
     private let server: LightProviderServer
-    
+
     private let vpnManager: LightVPNManager
-    
+
     init(_ profile: LightProfile, _ server: LightProviderServer, vpnManager: LightVPNManager) {
         self.profile = profile
         self.server = server
         self.vpnManager = vpnManager
     }
-    
+
     func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
         let viewModel = ViewModel(profile, server, vpnManager: vpnManager)
         let item = NSMenuItem(

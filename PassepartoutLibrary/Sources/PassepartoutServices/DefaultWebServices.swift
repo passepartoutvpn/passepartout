@@ -36,7 +36,7 @@ public class DefaultWebServices: WebServices {
         case providersIndex
 
         case providerNetwork(WSProviderName, WSVPNProtocol)
-        
+
         private var pathName: String {
             switch self {
             case .providersIndex:
@@ -46,11 +46,11 @@ public class DefaultWebServices: WebServices {
                 return "\(Group.providers.rawValue)/\(providerName)/\(vpnProtocol.filename)"
             }
         }
-        
+
         private var fileType: String {
             "json"
         }
-        
+
         // MARK: GenericWebEndpoint
 
         var path: String {
@@ -59,7 +59,7 @@ public class DefaultWebServices: WebServices {
     }
 
     private let ws: GenericWebServices<WebError>
-    
+
     public init(_ version: String, _ root: URL, timeout: TimeInterval?, queue: DispatchQueue = .main) {
         ws = GenericWebServices(version, root, timeout: timeout)
     }
@@ -98,7 +98,7 @@ private extension WSVPNProtocol {
         switch self {
         case .openVPN:
             return "ovpn"
-            
+
         case .wireGuard:
             return "wg"
         }

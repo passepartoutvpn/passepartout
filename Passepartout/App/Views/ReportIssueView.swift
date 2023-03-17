@@ -29,15 +29,15 @@ import PassepartoutLibrary
 
 struct ReportIssueView: View {
     @Binding private var isPresented: Bool
-    
+
     private let toRecipients: [String]
-    
+
     private let subject: String
-    
+
     private let messageBody: String
-    
+
     private let attachments: [MailComposerView.Attachment]
-    
+
     init(
         isPresented: Binding<Bool>,
         vpnProtocol: VPNProtocolType,
@@ -46,7 +46,7 @@ struct ReportIssueView: View {
         lastUpdate: Date? = nil
     ) {
         _isPresented = isPresented
-        
+
         toRecipients = [Unlocalized.Issues.recipient]
         subject = Unlocalized.Issues.subject
 
@@ -77,7 +77,7 @@ struct ReportIssueView: View {
         }
         self.attachments = attachments
     }
-    
+
     var body: some View {
         MailComposerView(
             isPresented: $isPresented,

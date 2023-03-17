@@ -28,14 +28,14 @@ import PassepartoutLibrary
 
 struct VPNStatusText: View {
     @ObservedObject private var currentVPNState: ObservableVPNState
-    
+
     let isActiveProfile: Bool
-    
+
     init(isActiveProfile: Bool) {
         currentVPNState = .shared
         self.isActiveProfile = isActiveProfile
     }
-    
+
     var body: some View {
         Text(statusText)
     }

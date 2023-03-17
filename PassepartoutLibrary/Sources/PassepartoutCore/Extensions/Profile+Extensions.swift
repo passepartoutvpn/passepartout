@@ -37,7 +37,7 @@ extension Profile {
             return host?.vpnProtocols ?? []
         }
     }
-    
+
     public var account: Profile.Account {
         get {
             if isProvider {

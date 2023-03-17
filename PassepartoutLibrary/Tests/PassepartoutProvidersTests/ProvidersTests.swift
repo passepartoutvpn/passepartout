@@ -39,7 +39,7 @@ class ProvidersTests: XCTestCase {
     }()
 
     private var manager: ProviderManager!
-    
+
     private var cancellables: Set<AnyCancellable> = []
 
     override func setUp() {
@@ -140,7 +140,7 @@ class ProvidersTests: XCTestCase {
             pp_log.debug("\($0.fullName): Servers [\(location.countryCode)] (\(servers.count)): \(servers)")
         }
     }
-    
+
     func testServerId() async {
         await fetchProvider(.nordvpn)
         guard let server = manager.server(.nordvpn, vpnProtocol: .openVPN, apiId: "es143") else {
@@ -148,7 +148,7 @@ class ProvidersTests: XCTestCase {
         }
         pp_log.debug(server)
     }
-    
+
     func testDefaultServer() async {
         await fetchProvider(.protonvpn)
         guard let server = manager.anyDefaultServer(.protonvpn, vpnProtocol: .openVPN) else {
@@ -156,7 +156,7 @@ class ProvidersTests: XCTestCase {
         }
         pp_log.debug(server)
     }
-    
+
     func testServerUniqueId() async {
         await fetchProvider(.nordvpn)
         guard let server = manager.server(withId: "BEA03D24A5854DD17395057DEFBE7D6BEEA981227ACF8949E487443E6B5EF9C7") else {
@@ -165,7 +165,7 @@ class ProvidersTests: XCTestCase {
         pp_log.debug(server)
         XCTAssertEqual(server.apiId, "es143")
     }
-    
+
     private func fetchProvider(_ name: ProviderName) async {
         try? await manager.fetchProvidersIndexPublisher(priority: .bundle).async()
         try? await manager.fetchProviderPublisher(withName: name, vpnProtocol: .openVPN, priority: .bundle).async()

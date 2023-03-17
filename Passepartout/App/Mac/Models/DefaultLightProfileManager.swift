@@ -29,17 +29,17 @@ import Combine
 
 class DefaultLightProfile: LightProfile {
     let id: UUID
-    
+
     let name: String
-    
+
     let vpnProtocol: String
 
     let isActive: Bool
-    
+
     let providerName: String?
 
     let providerServer: LightProviderServer?
-    
+
     init(_ header: Profile.Header, vpnProtocol: String, isActive: Bool, providerServer: LightProviderServer?) {
         id = header.id
         name = header.name
@@ -52,11 +52,11 @@ class DefaultLightProfile: LightProfile {
 
 class DefaultLightProfileManager: LightProfileManager {
     private let profileManager = ProfileManager.shared
-    
+
     private let providerManager = ProviderManager.shared
-    
+
     private var subscriptions: Set<AnyCancellable> = []
-    
+
     weak var delegate: LightProfileManagerDelegate?
 
     init() {
@@ -66,7 +66,7 @@ class DefaultLightProfileManager: LightProfileManager {
                 self.delegate?.didUpdateProfiles()
             }.store(in: &subscriptions)
     }
-    
+
     var hasProfiles: Bool {
         profileManager.hasProfiles
     }

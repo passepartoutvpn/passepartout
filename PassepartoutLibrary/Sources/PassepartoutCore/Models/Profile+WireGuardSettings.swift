@@ -31,7 +31,7 @@ extension Profile {
         public var vpnProtocol: VPNProtocolType {
             .wireGuard
         }
-        
+
         public var configuration: WireGuard.Configuration
 
         public init(configuration: WireGuard.Configuration) {

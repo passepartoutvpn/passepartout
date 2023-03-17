@@ -64,7 +64,7 @@ extension ProfileManager {
     public func isCurrentProfileActive() -> Bool {
         currentProfile.value.id == activeProfileId
     }
-    
+
     public func isCurrentProfile(_ id: UUID) -> Bool {
         id == currentProfile.value.id
     }

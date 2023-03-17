@@ -30,10 +30,10 @@ import PassepartoutUtils
 
 public final class PersistenceManager {
     private let store: KeyValueStore
-    
+
     public init(store: KeyValueStore) {
         self.store = store
-        
+
         // set once
         if persistenceAuthor == nil {
             persistenceAuthor = UUID().uuidString
@@ -44,7 +44,7 @@ public final class PersistenceManager {
         let model = PassepartoutDataModels.profiles
         return Persistence(withCloudKitName: containerName, model: model, author: persistenceAuthor)
     }
-    
+
     public func providersPersistence(withName containerName: String) -> Persistence {
         let model = PassepartoutDataModels.providers
         return Persistence(withLocalName: containerName, model: model, author: persistenceAuthor)

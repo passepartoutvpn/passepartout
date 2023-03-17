@@ -35,7 +35,7 @@ extension ProviderName {
         switch self {
         case .protonvpn, .surfshark, .torguard, .windscribe:
             return .specific
-            
+
         default:
             return .web
         }

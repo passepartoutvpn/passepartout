@@ -31,22 +31,22 @@ import PassepartoutUtils
 
 @MainActor
 public final class UpgradeManager: ObservableObject {
-    
+
     // MARK: Initialization
-    
+
     private let store: KeyValueStore
-    
+
     // MARK: State
-    
+
     @Published public private(set) var isDoingMigrations = true
 
     public init(store: KeyValueStore) {
         self.store = store
     }
-    
+
     public func doMigrations(_ profileManager: ProfileManager) {
         doMigrateStore(store)
-        
+
 //        profileManager.removeAllProfiles()
         guard didMigrateToV2 else {
             isDoingMigrations = true

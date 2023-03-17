@@ -69,7 +69,7 @@ extension WireGuard.ConfigurationBuilder {
         switch settings.choice {
         case .automatic:
             break
-        
+
         case .manual:
             for i in 0..<peersCount {
                 if settings.isDefaultIPv4 {

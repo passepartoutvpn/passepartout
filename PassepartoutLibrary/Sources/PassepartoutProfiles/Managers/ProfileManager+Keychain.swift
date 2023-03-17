@@ -95,7 +95,7 @@ extension Keychain {
         switch SecItemCopyMatching(query as CFDictionary, &list) {
         case errSecSuccess:
             break
-            
+
         default:
             return
         }
@@ -105,7 +105,7 @@ extension Keychain {
         }
         pp_log.debug("Keychain items: \(list)")
     }
-    
+
     func removeAllPasswords(matching id: UUID, context: String) {
         _ = SecItemDelete(allPasswordsQuery(id, context) as CFDictionary)
     }

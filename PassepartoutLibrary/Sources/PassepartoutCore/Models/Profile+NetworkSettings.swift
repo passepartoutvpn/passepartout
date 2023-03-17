@@ -29,15 +29,15 @@ import TunnelKit
 extension Profile {
     public struct NetworkSettings: Codable, Equatable {
         public var gateway: Network.GatewaySettings
-        
+
         public var dns: Network.DNSSettings
-        
+
         public var proxy: Network.ProxySettings
-        
+
         public var mtu: Network.MTUSettings
-        
+
         public var resolvesHostname = true
-        
+
         public var keepsAliveOnSleep = true
 
         public init(choice: Network.Choice) {
@@ -46,7 +46,7 @@ extension Profile {
             proxy = Network.ProxySettings(choice: choice)
             mtu = Network.MTUSettings(choice: choice)
         }
-        
+
         public init() {
             self.init(choice: .defaultChoice)
         }

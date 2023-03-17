@@ -37,15 +37,15 @@ public class CoreDataProfileManagerStrategy: ProfileManagerStrategy {
         profileRepository = ProfileRepository(persistence.context)
         fetchedProfiles = profileRepository.fetchedProfiles()
     }
-    
+
     public var allProfiles: [UUID: Profile] {
         fetchedProfiles.value
     }
-    
+
     public func profiles() -> [Profile] {
         profileRepository.profiles()
     }
-    
+
     public func profile(withId id: UUID) -> Profile? {
         profileRepository.profile(withId: id)
     }
@@ -57,12 +57,12 @@ public class CoreDataProfileManagerStrategy: ProfileManagerStrategy {
             pp_log.error("Unable to save profile: \(error)")
         }
     }
-    
+
     public func removeProfiles(withIds ids: [UUID]) {
         profileRepository.removeProfiles(withIds: ids)
     }
 
-    public func willUpdateProfiles() -> AnyPublisher<[UUID : Profile], Never> {
+    public func willUpdateProfiles() -> AnyPublisher<[UUID: Profile], Never> {
         fetchedProfiles.$value
             .eraseToAnyPublisher()
     }

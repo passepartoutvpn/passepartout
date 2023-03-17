@@ -36,7 +36,7 @@ struct OnDemandView: View {
     }
 
     @State private var onDemand = Profile.OnDemand()
-    
+
     init(currentProfile: ObservableProfile) {
         productManager = .shared
         self.currentProfile = currentProfile
@@ -72,7 +72,7 @@ extension OnDemandView {
             Toggle(L10n.Global.Strings.enabled, isOn: $onDemand.isEnabled.themeAnimation())
         }
     }
-    
+
     @ViewBuilder
     private var mainView: some View {
         if Utils.hasCellularData() {
@@ -118,7 +118,7 @@ extension OnDemandView {
         IntentDispatcher.donateTrustCellularNetwork()
         IntentDispatcher.donateUntrustCellularNetwork()
     }
-    
+
     // eligibility: donate intents if eligible for Siri
     private func donateNetworkIntents(_: [String: Bool]) {
         guard isEligibleForSiri else {

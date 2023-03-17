@@ -29,28 +29,28 @@ import GenericJSON
 public struct WSProviderPreset: Codable {
     enum CodingKeys: String, CodingKey {
         case id
-        
+
         case name
-        
+
         case comment
 
         case external
 
         case jsonOpenVPNConfiguration = "ovpn"
-        
+
         case jsonWireGuardConfiguration = "wg"
     }
-    
+
     public let id: String
-    
+
     public let name: String
-    
+
     public let comment: String
 
     public var external: [String: String]?
-    
+
     public var jsonOpenVPNConfiguration: JSON?
-    
+
     public var jsonWireGuardConfiguration: JSON?
 
     public init(id: String, name: String, comment: String) {

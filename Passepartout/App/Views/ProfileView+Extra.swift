@@ -29,11 +29,11 @@ import PassepartoutLibrary
 extension ProfileView {
     struct ExtraSection: View {
         @ObservedObject private var currentProfile: ObservableProfile
-        
+
         init(currentProfile: ObservableProfile) {
             self.currentProfile = currentProfile
         }
-        
+
         var body: some View {
             if currentProfile.value.isProvider {
                 Section {

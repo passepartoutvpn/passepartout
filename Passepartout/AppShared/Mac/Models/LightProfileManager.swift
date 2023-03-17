@@ -28,13 +28,13 @@ import Foundation
 @objc(LightProfile)
 public protocol LightProfile {
     var id: UUID { get }
-    
+
     var name: String { get }
-    
+
     var vpnProtocol: String { get }
 
     var isActive: Bool { get }
-    
+
     var providerName: String? { get }
 
     var providerServer: LightProviderServer? { get }
@@ -50,13 +50,13 @@ extension LightProfile {
 @objc
 public protocol LightProfileManager {
     var hasProfiles: Bool { get }
-    
+
     var profiles: [LightProfile] { get }
 
     var activeProfileId: UUID? { get }
-    
+
     var activeProfileName: String? { get }
-    
+
     var delegate: LightProfileManagerDelegate? { get set }
 }
 

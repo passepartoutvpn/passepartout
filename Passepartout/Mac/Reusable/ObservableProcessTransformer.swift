@@ -30,23 +30,23 @@ class ObservableProcessTransformer: ObservableObject {
     static let shared = ObservableProcessTransformer()
 
     private let transformer = ProcessTransformer()
-    
+
     private var subscriptions: Set<AnyCancellable> = []
-    
+
     private init() {
     }
 
     var isForeground: Bool {
         transformer.isForeground
     }
-    
+
     func toggleForeground() {
         guard transformer.toggleForeground() else {
             return
         }
         objectWillChange.send()
     }
-    
+
     func bringToForeground() {
         guard transformer.bringToForeground() else {
             return

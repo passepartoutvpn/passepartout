@@ -32,20 +32,20 @@ import PassepartoutLibrary
 @MainActor
 class IntentsManager: NSObject, ObservableObject {
     @Published private(set) var isReloadingShortcuts = false
-    
+
     @Published private(set) var shortcuts: [UUID: Shortcut] = [:]
-    
+
     let shouldDismissIntentView = PassthroughSubject<Void, Never>()
-    
+
     private var continuation: CheckedContinuation<[INVoiceShortcut], Never>?
-    
+
     override init() {
         super.init()
         Task {
             await reloadShortcuts()
         }
     }
-    
+
     func reloadShortcuts() async {
         isReloadingShortcuts = true
         do {
@@ -81,10 +81,10 @@ extension IntentsManager: INUIEditVoiceShortcutViewControllerDelegate {
         guard let vs = voiceShortcut else {
             return
         }
-        
+
         shortcuts[vs.identifier] = Shortcut(vs)
         shouldDismissIntentView.send()
-        
+
         // XXX: iOS bug, vs.invocationPhrase here is still the old one before edit
         //
         // additionally, back from edit view controller does not trigger either onAppear or

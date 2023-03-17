@@ -31,13 +31,13 @@ struct ProfileView: View {
         case interactiveAccount
 
         case shortcuts
-        
+
         case rename
-        
+
         case paywallShortcuts
 
         case paywallNetworkSettings
-        
+
         case paywallTrustedNetworks
 
         var id: Int {
@@ -46,17 +46,17 @@ struct ProfileView: View {
     }
 
     @ObservedObject private var currentProfile: ObservableProfile
-    
+
     private var isLoading: Bool {
         currentProfile.isLoading
     }
-    
+
     private var isExisting: Bool {
         !currentProfile.value.isPlaceholder
     }
 
     @State private var modalType: ModalType?
-    
+
     init() {
         currentProfile = ProfileManager.shared.currentProfile
     }
@@ -83,11 +83,11 @@ struct ProfileView: View {
         .navigationTitle(title)
         .themeSecondaryView()
     }
-    
+
     private var title: String {
         currentProfile.name
     }
-    
+
     private var mainView: some View {
         List {
             if !isLoading {
@@ -107,7 +107,7 @@ struct ProfileView: View {
             }
         }.themeAnimation(on: isLoading)
     }
-    
+
     @ViewBuilder
     private func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
@@ -115,17 +115,17 @@ struct ProfileView: View {
             NavigationView {
                 InteractiveConnectionView(profile: currentProfile.value)
             }.themeGlobal()
-            
+
         case .shortcuts:
             NavigationView {
                 ShortcutsView(target: currentProfile.value)
             }.themeGlobal()
-            
+
         case .rename:
             NavigationView {
                 RenameView(currentProfile: currentProfile)
             }.themeGlobal()
-            
+
         case .paywallShortcuts:
             NavigationView {
                 PaywallView(

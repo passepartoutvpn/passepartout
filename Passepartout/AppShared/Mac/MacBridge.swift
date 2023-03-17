@@ -28,8 +28,8 @@ import Foundation
 @objc(MacBridge)
 public protocol MacBridge: NSObjectProtocol {
     init()
-    
+
     var utils: MacUtils { get }
-    
+
     var menu: MacMenu { get }
 }

@@ -28,7 +28,7 @@ import Foundation
 @objc
 public protocol MacUtils {
     var isStartedByLauncher: Bool { get }
-    
+
     func sendAppToBackground()
 }
 

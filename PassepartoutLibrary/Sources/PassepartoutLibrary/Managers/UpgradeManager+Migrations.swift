@@ -38,40 +38,40 @@ private typealias Map = [String: Any]
 extension UpgradeManager {
     fileprivate enum LegacyStoreKey: String, KeyStoreLocation, CaseIterable {
         case activeProfileId
-        
+
         case launchesOnLogin
-        
+
         case isStatusMenuEnabled
-        
+
         case isShowingFavorites
 
         case confirmsQuit
-        
+
         case logFormat
-        
+
         case tunnelLogFormat
-        
+
         case masksPrivateData
-        
+
         case didHandleSubreddit
-        
+
         case persistenceAuthor
 
         case didMigrateToV2
-        
+
         case other1 = "MasksPrivateData"
-        
+
         case other2 = "DidHandleSubreddit"
-        
+
         case other3 = "Convenience.Reviewer.LastVersion"
-        
+
         case other4 = "didMigrateKeychainContext"
-        
+
         var key: String {
             rawValue
         }
     }
-    
+
     func doMigrateStore(_ store: KeyValueStore) {
         if !didMigrateToV2 {
             guard let legacyDidMigrateToV2: Bool = store.value(forLocation: LegacyStoreKey.didMigrateToV2) else {
@@ -79,7 +79,7 @@ extension UpgradeManager {
             }
             didMigrateToV2 = legacyDidMigrateToV2
         }
-        
+
         LegacyStoreKey.allCases.forEach {
             store.removeValue(forLocation: $0)
         }
@@ -91,15 +91,15 @@ extension UpgradeManager {
 extension UpgradeManager {
     fileprivate enum MigrationError: Error {
         case json
-        
+
         case missingId
 
         case missingOpenVPNConfiguration
-        
+
         case missingHostname
-        
+
         case missingEndpointProtocols
-        
+
         case missingProviderName
     }
 
@@ -110,9 +110,9 @@ extension UpgradeManager {
     func doMigrateToV2() -> [Profile] {
         var migrated: [Profile] = []
         pp_log.info("Migrating data to v2")
-        
+
         let fm = FileManager.default
-        
+
         guard let documents = fm.containerURL(forSecurityApplicationGroupIdentifier: appGroup)?
             .appendingPathComponent("Documents") else {
 
@@ -127,7 +127,7 @@ extension UpgradeManager {
         do {
             let csJSON = try cs.asJSON()
 //            pp_log.error(csJSON)
-        
+
             do {
                 var authUserPassUUIDs: Set<String> = []
 
@@ -147,7 +147,7 @@ extension UpgradeManager {
                         pp_log.warning("Unable to read host profile .ovpn: \(host)")
                     }
                 }
-                
+
 //                print(">>> authUserPassUUIDs: \(authUserPassUUIDs)")
 
                 for host in try fm.contentsOfDirectory(at: hostsFolder, includingPropertiesForKeys: nil) {
@@ -157,11 +157,11 @@ extension UpgradeManager {
                     do {
                         let json = try host.asJSON()
 //                        pp_log.error(json)
-                    
+
                         let result = try migratedV1Profile(csJSON, hostMap: json, authUserPass: authUserPassUUIDs)
 //                        pp_log.info(result.profile)
 //                        print(">>> Account: \(result.profile.username) -> \(result.password)")
-                        
+
                         migrated.append(result)
                     } catch {
                         pp_log.warning("Unable to migrate host profile: \(host)")
@@ -184,7 +184,7 @@ extension UpgradeManager {
                         let result = try migratedV1Profile(csJSON, providerMap: json)
 //                        pp_log.info(result.profile)
 //                        print(">>> Account: \(result.profile.username) -> \(result.password)")
-                        
+
                         migrated.append(result)
                     } catch {
                         pp_log.warning("Unable to migrate provider profile: \(provider)")
@@ -243,7 +243,7 @@ extension UpgradeManager {
         ovpn["remotes"] = remotes
         ovpn["authUserPass"] = authUserPass.contains(oldUUIDString)
         let cfg = try JSON(ovpn).decode(OpenVPN.Configuration.self)
-        
+
         // keychain
         let username = hostMap["username"] as? String ?? ""
         let password = migratedV1Password(forProfileId: oldUUIDString, profileType: "host", username: username)
@@ -310,7 +310,7 @@ extension UpgradeManager {
             return ""
         }
     }
-    
+
     private func migratedV1TrustedNetworks(_ map: Map) -> Profile.OnDemand {
         var onDemand = Profile.OnDemand()
         onDemand.isEnabled = true
@@ -324,17 +324,17 @@ extension UpgradeManager {
         }
         return onDemand
     }
-    
+
     private func migratedV1NetworkSettings(_ map: Map) -> Profile.NetworkSettings {
         var settings = Profile.NetworkSettings()
-        
+
         if let choices = map["networkChoices"] as? Map {
             settings.gateway.choice = migratedV1Choice(choices, key: "gateway")
             settings.dns.choice = migratedV1Choice(choices, key: "dns")
             settings.proxy.choice = migratedV1Choice(choices, key: "proxy")
             settings.mtu.choice = migratedV1Choice(choices, key: "mtu")
         }
-        
+
         if let manual = map["manualNetworkSettings"] as? Map {
 
             // gateway
@@ -366,7 +366,7 @@ extension UpgradeManager {
 
         return settings
     }
-    
+
     private func migratedV1Choice(_ map: Map, key: String) -> Network.Choice {
         (map[key] as? String) == "manual" ? .manual : .automatic
     }

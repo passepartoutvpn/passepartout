@@ -29,27 +29,27 @@ extension Profile {
     public struct Account: Codable, Equatable {
         public enum AuthenticationMethod: String, Codable {
             case persistent
-            
+
             case interactive
-            
+
             case totp
         }
 
         public var authenticationMethod: AuthenticationMethod?
 
         public var username: String
-        
+
         public var password: String
-        
+
         public var isEmpty: Bool {
             username.isEmpty && password.isEmpty
         }
-        
+
         public init() {
             username = ""
             password = ""
         }
-        
+
         public init(_ username: String, _ password: String) {
             self.username = username
             self.password = password

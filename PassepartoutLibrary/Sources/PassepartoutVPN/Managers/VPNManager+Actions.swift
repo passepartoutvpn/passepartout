@@ -72,7 +72,7 @@ extension VPNManager {
         await reconnect(cfg)
         return profile
     }
-    
+
     @discardableResult
     public func connect(with profileId: UUID, toServer newServerId: String) async throws -> Profile {
         let result = try profileManager.liveProfileEx(withId: profileId)
@@ -110,7 +110,7 @@ extension VPNManager {
         await reconnect(cfg)
         return profile
     }
-    
+
     public func modifyActiveProfile(_ block: (inout Profile) -> Void) async throws {
         guard var profile = profileManager.activeProfile else {
             pp_log.warning("Nothing to modify, no active profile")

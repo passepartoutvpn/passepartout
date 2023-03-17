@@ -31,7 +31,7 @@ struct AddProfileMenu: View {
         case addProvider
 
         case addHost(URL, Bool)
-        
+
         // XXX: alert ids
         var id: Int {
             switch self {
@@ -41,16 +41,16 @@ struct AddProfileMenu: View {
             }
         }
     }
-    
+
     @Binding private var modalType: ModalType?
-    
+
     @Binding private var isHostFileImporterPresented: Bool
-    
+
     init(modalType: Binding<ModalType?>, isHostFileImporterPresented: Binding<Bool>) {
         _modalType = modalType
         _isHostFileImporterPresented = isHostFileImporterPresented
     }
-    
+
     var body: some View {
         Menu {
             Button {
@@ -74,7 +74,7 @@ struct AddProfileMenu: View {
             themeAddMenuImage.asSystemImage
         }.sheet(item: $modalType, content: presentedModal)
     }
-    
+
     @ViewBuilder
     private func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
@@ -99,7 +99,7 @@ struct AddProfileMenu: View {
             }.themeGlobal()
         }
     }
-    
+
     private var isModalPresented: Binding<Bool> {
         .init {
             modalType != nil

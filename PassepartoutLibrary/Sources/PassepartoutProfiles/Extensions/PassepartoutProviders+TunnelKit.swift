@@ -46,7 +46,7 @@ extension ProviderServer.Preset {
             return nil
         }
     }
-    
+
     public var openVPNEndpoints: [EndpointProtocol] {
         guard vpnProtocol == .openVPN else {
             return []
@@ -65,7 +65,7 @@ extension ProviderServer.Preset {
         }
         return endpoints
     }
-    
+
     public var wireGuardConfiguration: WireGuard.Configuration? {
         guard vpnProtocol == .wireGuard else {
             return nil

@@ -31,13 +31,13 @@ extension OrganizerView {
         @Environment(\.scenePhase) private var scenePhase
 
         @ObservedObject private var profileManager: ProfileManager
-        
+
         @ObservedObject private var vpnManager: VPNManager
-        
+
         @Binding private var alertType: AlertType?
-        
+
         @Binding private var didHandleSubreddit: Bool
-        
+
         @State private var isFirstLaunch = true
 
         init(alertType: Binding<AlertType?>, didHandleSubreddit: Binding<Bool>) {
@@ -46,7 +46,7 @@ extension OrganizerView {
             _alertType = alertType
             _didHandleSubreddit = didHandleSubreddit
         }
-        
+
         var body: some View {
 
             // dummy text, EmptyView() does not trigger on*() handlers
@@ -55,7 +55,7 @@ extension OrganizerView {
                 .onAppear(perform: onAppear)
                 .onChange(of: scenePhase, perform: onScenePhase)
         }
-        
+
         private func onAppear() {
             guard didHandleSubreddit else {
                 alertType = .subscribeReddit
@@ -92,7 +92,7 @@ extension OrganizerView {
                 break
             }
         }
-        
+
         private func persist() {
             profileManager.persist()
         }

@@ -33,15 +33,15 @@ extension ProfileView {
         @ObservedObject private var currentProfile: ObservableProfile
 
         @Binding private var modalType: ModalType?
-        
+
         private var isEligibleForNetworkSettings: Bool {
             productManager.isEligible(forFeature: .networkSettings)
         }
-        
+
         private var isEligibleForTrustedNetworks: Bool {
             productManager.isEligible(forFeature: .trustedNetworks)
         }
-        
+
         init(currentProfile: ObservableProfile, modalType: Binding<ModalType?>) {
             productManager = .shared
             self.currentProfile = currentProfile
@@ -111,7 +111,7 @@ extension ProfileView {
                 Text(L10n.Global.Strings.configuration)
             }
         }
-        
+
         private var networkSettingsRow: some View {
             Label(L10n.NetworkSettings.title, systemImage: themeNetworkSettingsImage)
         }

@@ -32,9 +32,9 @@ public enum Network {
 extension Network {
     public enum Choice: String, Codable {
         case automatic // OpenVPN pulls from server
-        
+
         case manual
-        
+
         public static let defaultChoice: Choice = .automatic
     }
 }
@@ -45,25 +45,25 @@ public protocol NetworkChoiceRepresentable {
 
 public protocol GatewaySettingsProviding {
     var isDefaultIPv4: Bool { get }
-    
+
     var isDefaultIPv6: Bool { get }
 }
 
 public protocol DNSSettingsProviding {
     var dnsProtocol: DNSProtocol? { get }
-    
+
     var dnsServers: [String]? { get }
-    
+
     var dnsSearchDomains: [String]? { get }
 
     var dnsHTTPSURL: URL? { get }
-    
+
     var dnsTLSServerName: String? { get }
 }
 
 public protocol ProxySettingsProviding {
     var proxyServer: Proxy? { get }
-    
+
     var proxyBypassDomains: [String]? { get }
 
     var proxyAutoConfigurationURL: URL? { get }
@@ -89,28 +89,28 @@ extension Network {
     public struct DNSSettings: Codable, Equatable, NetworkChoiceRepresentable, DNSSettingsProviding {
         public enum ConfigurationType: String, Codable {
             case plain
-            
+
             case https
-            
+
             case tls
-            
+
             case disabled
         }
 
         public var choice: Network.Choice
-        
+
         public var configurationType: ConfigurationType = .plain
-        
+
         public var dnsProtocol: DNSProtocol? {
             DNSProtocol(rawValue: configurationType.rawValue)
         }
-        
+
         public var dnsServers: [String]?
-        
+
         public var dnsSearchDomains: [String]?
 
         public var dnsHTTPSURL: URL?
-        
+
         public var dnsTLSServerName: String?
     }
 }
@@ -119,24 +119,24 @@ extension Network {
     public struct ProxySettings: Codable, Equatable, NetworkChoiceRepresentable, ProxySettingsProviding {
         public enum ConfigurationType: String, Codable {
             case manual
-            
+
             case pac
-            
+
             case disabled
         }
-        
+
         public var choice: Network.Choice
-        
+
         public var configurationType: ConfigurationType = .manual
 
         public var proxyAddress: String?
-        
+
         public var proxyPort: UInt16?
-        
+
         public var proxyBypassDomains: [String]?
 
         public var proxyAutoConfigurationURL: URL?
-        
+
         public var proxyServer: Proxy? {
             guard let address = proxyAddress, let port = proxyPort, !address.isEmpty, port > 0 else {
                 return nil
