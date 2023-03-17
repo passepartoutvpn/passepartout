@@ -152,7 +152,7 @@
 		0EBC075B27EC4FFF00208AD9 /* ReportIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075A27EC4FFF00208AD9 /* ReportIssueView.swift */; };
 		0EBC075D27EC529000208AD9 /* DebugLog+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075C27EC529000208AD9 /* DebugLog+Constants.swift */; };
 		0EBC076027EC587900208AD9 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */; };
-		0EBE880F281B18DE0090D9E6 /* ProfileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE880E281B18DE0090D9E6 /* ProfileRow.swift */; };
+		0EBE880F281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE880E281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift */; };
 		0ECB78E9285F5DE300B0E460 /* PassepartoutMac.bundle in Embed Plugins */ = {isa = PBXBuildFile; fileRef = 0ECB78DA285F52F700B0E460 /* PassepartoutMac.bundle */; platformFilter = maccatalyst; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0ECB78EC2863A21600B0E460 /* PassepartoutLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0ECB78EB2863A21600B0E460 /* PassepartoutLibrary */; };
 		0ECF71EE27B6A99300CDB528 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF71ED27B6A99300CDB528 /* AccountView.swift */; };
@@ -461,7 +461,7 @@
 		0EBE2FD62360F89500F0D5AB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD72360F89600F0D5AB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD82360F89600F0D5AB /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0EBE880E281B18DE0090D9E6 /* ProfileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRow.swift; sourceTree = "<group>"; };
+		0EBE880E281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+ProfileRow.swift"; sourceTree = "<group>"; };
 		0ECB78DA285F52F700B0E460 /* PassepartoutMac.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassepartoutMac.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ECB78E1285F53ED00B0E460 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0ECB78EA2861D1F300B0E460 /* PassepartoutLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PassepartoutLibrary; sourceTree = "<group>"; };
@@ -647,12 +647,12 @@
 				0EB34BC927C6A70200B126DA /* OnDemandView.swift */,
 				0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */,
 				0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */,
+				0EBE880E281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift */,
 				0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */,
 				0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */,
 				0EF0FAF527DD0211007EB181 /* PaywallView.swift */,
 				0ED30DCE27EA1EF80057D8A3 /* PaywallView+Beta.swift */,
 				0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */,
-				0EBE880E281B18DE0090D9E6 /* ProfileRow.swift */,
 				0E44689527B051C300A14CE4 /* ProfileView.swift */,
 				0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */,
 				0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */,
@@ -1419,7 +1419,7 @@
 				0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */,
 				0E5468002867AC9A00F74D1C /* MacUtils.swift in Sources */,
 				0E96D3052872010A005EFBCF /* DefaultLightVPNManager.swift in Sources */,
-				0EBE880F281B18DE0090D9E6 /* ProfileRow.swift in Sources */,
+				0EBE880F281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift in Sources */,
 				0ED30DCF27EA1EF80057D8A3 /* PaywallView+Beta.swift in Sources */,
 				0ECF71EE27B6A99300CDB528 /* AccountView.swift in Sources */,
 				0E71ACF727C107CA00F85C4B /* DebugLogView.swift in Sources */,
