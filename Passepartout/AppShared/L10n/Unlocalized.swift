@@ -28,24 +28,24 @@ import PassepartoutLibrary
 
 enum Unlocalized {
     static let appName = Constants.Global.appName
-    
+
     enum Placeholders {
         static let empty = ""
 
         static let address = "0.0.0.0"
-        
+
         static let port = "8080"
 
         static let hostname = "example.com"
 
         static let dohURL = "https://example.com/dns-query"
-        
+
         static let dotServerName = hostname
 
         static let dnsAddress = address
 
         static let dnsDomain = hostname
-        
+
         static let pacURL = "https://proxy/auto-conf"
 
         static let proxyBypassDomain = hostname
@@ -54,24 +54,24 @@ enum Unlocalized {
     enum DNS {
         static let plain = "Cleartext"
     }
-    
+
     enum Keychain {
         static func passwordLabel(_ profileName: String, vpnProtocol: VPNProtocolType) -> String {
             "\(Constants.Global.appName): \(profileName) (\(vpnProtocol.description))"
         }
     }
-    
+
     enum Issues {
         static let recipient = "issues@\(Constants.Domain.name)"
-        
+
         static let subject = "\(appName) - Report issue"
-        
+
         static func body(_ description: String, _ metadata: String) -> String {
             "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards"
         }
-        
+
         static let template = "description of the issue: "
-        
+
         static let maxLogBytes = UInt64(20000)
 
         enum Filenames {
@@ -81,13 +81,13 @@ enum Unlocalized {
                 let iso = fmt.string(from: Date())
                 return "debug-\(iso).txt"
             }
-            
+
             static let configuration = "profile.ovpn"
 //            static let configuration = "profile.ovpn.txt"
-            
+
             static let template = "description of the issue: "
         }
-        
+
         enum MIME {
             static let debugLog = "text/plain"
 
@@ -98,9 +98,9 @@ enum Unlocalized {
 
     enum Social {
         static let reddit = "Reddit"
-        
+
         private static let twitterHashtags = ["OpenVPN", "WireGuard", "iOS", "macOS"]
-        
+
         static func twitterIntent(withMessage message: String) -> URL {
             var text = message
             for ht in twitterHashtags {
@@ -121,7 +121,7 @@ enum Unlocalized {
             static let recipient = "translate@\(Constants.Domain.name)"
 
             static let subject = "\(appName) - Translations"
-            
+
             static func body(_ description: String) -> String {
                 "Hi,\n\n\(description)\n\nRegards"
             }
@@ -148,9 +148,9 @@ enum Unlocalized {
 
     enum Credits {
         typealias License = (String, String, URL)
-            
+
         typealias Notice = (String, String)
-        
+
         static let author = "Davide De Rosa"
 
         static let licenses: [License] = [(
@@ -178,7 +178,7 @@ enum Unlocalized {
             "MIT",
             URL(string: "https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE")!
         )]
-        
+
         static let notices: [Notice] = [(
             "Circle Icons",
             "The logo is taken from the awesome Circle Icons set by Nick Roach."
@@ -196,63 +196,63 @@ enum Unlocalized {
 
     enum About {
         static let github = "GitHub"
-        
+
         static let readme = "README"
-        
+
         static let changelog = "CHANGELOG"
-        
+
         static let faq = "FAQ"
     }
-    
+
     enum VPN {
         static let vpn = "VPN"
-        
+
         static let certificateAuthority = "CA"
 
         static let xor = "XOR"
     }
-    
+
     enum OpenVPN {
         static let compLZO = "--comp-lzo"
-        
+
         static let compress = "--compress"
-        
+
         static let lzo = "LZO"
-        
+
         enum XOR: String {
             case xormask
-            
+
             case xorptrpos
-            
+
             case reverse
-            
+
             case obfuscate
         }
     }
-    
+
     enum Network {
         static let dns = "DNS"
-            
+
         static let tls = "TLS"
 
         static let https = "HTTPS"
 
         static let url = "URL"
-        
+
         static let mtu = "MTU"
-        
+
         static let ipv4 = "IPv4"
 
         static let ipv6 = "IPv6"
-        
+
         static let ssid = "SSID"
-        
+
         static let proxyAutoConfiguration = "PAC"
     }
 
     enum Other {
         static let siri = "Siri"
-        
+
         static let totp = "TOTP"
     }
 }

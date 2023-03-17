@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension CDInfrastructureServer {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CDInfrastructureServer> {
@@ -31,6 +30,6 @@ extension CDInfrastructureServer {
 
 }
 
-extension CDInfrastructureServer : Identifiable {
+extension CDInfrastructureServer: Identifiable {
 
 }

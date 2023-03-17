@@ -28,18 +28,18 @@ import Foundation
 public struct WSProviderCategory: Codable {
     enum CodingKeys: String, CodingKey {
         case name
-        
+
         case locations
-        
+
         case supportedPresetIds = "presets"
     }
-    
+
     public let name: String
-    
+
     public let locations: [WSProviderLocation]
 
     public var supportedPresetIds: [String]?
-    
+
     public init(name: String, locations: [WSProviderLocation]) {
         self.name = name
         self.locations = locations

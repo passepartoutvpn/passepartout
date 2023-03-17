@@ -27,14 +27,14 @@ import Foundation
 
 class DefaultMacMenu: MacMenu {
     weak var delegate: MacMenuDelegate?
-    
+
     private lazy var menu: PassepartoutMenu = {
         guard let delegate = delegate else {
             fatalError("Must set MacMenu.delegate")
         }
         return PassepartoutMenu(macMenuDelegate: delegate)
     }()
-    
+
     func install() {
         menu.install()
     }

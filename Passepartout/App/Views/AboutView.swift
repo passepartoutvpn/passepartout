@@ -31,7 +31,7 @@ struct AboutView: View {
     private let versionString = Constants.Global.appVersionString
 
     private let redditURL = Constants.URLs.subreddit
-    
+
     private let shareMessage = L10n.Global.Messages.share
 
     private let readmeURL = Constants.URLs.readme
@@ -55,7 +55,7 @@ struct AboutView: View {
         }.themeSecondaryView()
         .navigationTitle(L10n.About.title)
     }
-    
+
     private var infoSection: some View {
         Section {
             NavigationLink {
@@ -69,7 +69,7 @@ struct AboutView: View {
             }
         }
     }
-    
+
     private var supportSection: some View {
         Section {
             Button(L10n.About.Items.JoinCommunity.caption) {

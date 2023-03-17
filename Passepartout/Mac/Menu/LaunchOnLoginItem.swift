@@ -28,7 +28,7 @@ import AppKit
 
 struct LaunchOnLoginItem: Item {
     private let viewModel: ViewModel
-    
+
     init(_ title: String, utils: LightUtils) {
         viewModel = ViewModel(title, utils: utils)
     }
@@ -48,7 +48,7 @@ struct LaunchOnLoginItem: Item {
         }
         return item
     }
-    
+
     private var state: NSControl.StateValue {
         viewModel.persistentlyLaunchesOnLogin ? .on : .off
     }

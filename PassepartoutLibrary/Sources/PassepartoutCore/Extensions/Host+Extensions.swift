@@ -31,7 +31,7 @@ extension Profile {
         switch currentVPNProtocol {
         case .openVPN:
             return host?.ovpnSettings?.account
-            
+
         case .wireGuard:
             return nil
         }
@@ -41,7 +41,7 @@ extension Profile {
         switch currentVPNProtocol {
         case .openVPN:
             host?.ovpnSettings?.account = account
-            
+
         case .wireGuard:
             break
         }

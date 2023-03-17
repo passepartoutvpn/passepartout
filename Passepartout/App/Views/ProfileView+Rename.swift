@@ -29,20 +29,20 @@ import PassepartoutLibrary
 extension ProfileView {
     struct RenameView: View {
         @Environment(\.presentationMode) private var presentationMode
-        
+
         @ObservedObject private var profileManager: ProfileManager
-        
+
         @ObservedObject private var currentProfile: ObservableProfile
-        
+
         @State private var newName = ""
-        
+
         @State private var isOverwritingExistingProfile = false
-        
+
         init(currentProfile: ObservableProfile) {
             profileManager = .shared
             self.currentProfile = currentProfile
         }
-        
+
         var body: some View {
             List {
                 Section {
@@ -61,7 +61,7 @@ extension ProfileView {
                 }
             }.alert(isPresented: $isOverwritingExistingProfile, content: alertOverwriteExistingProfile)
         }
-        
+
         private func alertOverwriteExistingProfile() -> Alert {
             Alert(
                 title: Text(L10n.Profile.Alerts.Rename.title),
@@ -72,7 +72,7 @@ extension ProfileView {
                 secondaryButton: .cancel(Text(L10n.Global.Strings.cancel))
             )
         }
-        
+
         private func loadCurrentName() {
             newName = currentProfile.value.header.name
         }

@@ -49,7 +49,7 @@ public class ObservableVPNState: ObservableObject {
             pp_log.debug("Last error: \(lastError)")
         }
     }
-    
+
     @Published public internal(set) var dataCount: DataCount? {
         didSet {
             guard let dataCount = dataCount else {

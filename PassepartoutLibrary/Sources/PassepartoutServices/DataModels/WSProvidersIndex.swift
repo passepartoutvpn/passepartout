@@ -29,18 +29,18 @@ public struct WSProvidersIndex: Codable {
     public struct Metadata: Codable, CustomStringConvertible {
         enum CodingKeys: String, CodingKey {
             case name
-            
+
             case fullName
-            
+
             case supportedVPNProtocols = "vpn"
         }
-        
+
         public let name: WSProviderName
-        
+
         public let fullName: String
-        
+
         public let supportedVPNProtocols: [WSVPNProtocol]
-        
+
         public init(name: WSProviderName, fullName: String, supportedVPNProtocols: [WSVPNProtocol]) {
             self.name = name
             self.fullName = fullName
@@ -55,7 +55,7 @@ public struct WSProvidersIndex: Codable {
     }
 
     public let metadata: [Metadata]
-    
+
     public init(metadata: [Metadata]) {
         self.metadata = metadata
     }

@@ -30,11 +30,11 @@ import PassepartoutUtils
 
 class ProfileRepository: Repository {
     private let context: NSManagedObjectContext
-    
+
     required init(_ context: NSManagedObjectContext) {
         self.context = context
     }
-    
+
     func fetchedProfiles() -> FetchedValueHolder<[UUID: Profile]> {
         let request: NSFetchRequest<NSFetchRequestResult> = CDProfile.fetchRequest()
         request.sortDescriptors = [
@@ -60,7 +60,7 @@ class ProfileRepository: Repository {
             initial: [:]
         )
     }
-    
+
     func profiles() -> [Profile] {
         let request = CDProfile.fetchRequest()
         request.sortDescriptors = [

@@ -28,23 +28,23 @@ import Combine
 
 public protocol GenericWebServicesError: Error {
     static func httpStatus(_ status: Int) -> Self
-    
+
     static var unknown: Self { get }
 }
 
 public class GenericWebServices<ErrorType: GenericWebServicesError> {
     private let version: String?
-    
+
     private let root: URL
-    
+
     private let timeout: TimeInterval?
-    
+
     public init(_ version: String?, _ root: URL, timeout: TimeInterval?) {
         self.version = version
         self.root = root
         self.timeout = timeout
     }
-    
+
     public func get(_ endpoint: GenericWebEndpoint) -> URLRequest {
         var request = URLRequest(url: url(forEndpoint: endpoint), cachePolicy: .reloadIgnoringCacheData)
         if let timeout = timeout {
@@ -52,7 +52,7 @@ public class GenericWebServices<ErrorType: GenericWebServicesError> {
         }
         return request
     }
-    
+
     public func parse<T: Decodable>(_ type: T.Type, request: URLRequest) -> AnyPublisher<GenericWebResponse<T>, Error> {
         pp_log.debug("GET \(request.url!)")
         pp_log.debug("Request headers: \(request.allHTTPHeaderFields?.description ?? "none")")
@@ -63,7 +63,7 @@ public class GenericWebServices<ErrorType: GenericWebServicesError> {
                 switch result {
                 case .failure(let error):
                     pp_log.error("Error (response): \(error.localizedDescription)")
-                    
+
                 default:
                     break
                 }

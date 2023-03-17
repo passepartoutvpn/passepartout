@@ -27,15 +27,15 @@ import SwiftUI
 
 struct RevealingSecureField<ImageContent: View>: View {
     let title: String
-    
+
     @Binding private var text: String
-    
+
     private let conceilImage: () -> ImageContent
-    
+
     private let revealImage: () -> ImageContent
-    
+
     @State private var isRevealed = false
-    
+
     init(
         _ title: String,
         text: Binding<String>,
@@ -47,7 +47,7 @@ struct RevealingSecureField<ImageContent: View>: View {
         self.conceilImage = conceilImage
         self.revealImage = revealImage
     }
-    
+
     var body: some View {
         HStack {
             if isRevealed {

@@ -28,7 +28,7 @@ import StoreKit
 
 public enum InAppPurchaseResult {
     case done
-    
+
     case cancelled
 }
 
@@ -41,27 +41,27 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
         where PID.RawValue == String {
 
     public typealias ProductObserver = ([PID: SKProduct]) -> Void
-    
+
     public typealias TransactionObserver = (Result<InAppPurchaseResult, Error>) -> Void
-    
+
     public typealias RestoreObserver = (Bool, PID?, Error?) -> Void
-    
+
     public typealias FailureObserver = (Error) -> Void
-    
+
     private var productsMap: [PID: SKProduct]
-    
+
     public var products: [SKProduct] {
         [SKProduct](productsMap.values)
     }
-    
+
     private var productObservers: [ProductObserver]
-    
+
     private var productFailureObserver: FailureObserver?
-    
+
     private var transactionObservers: [String: TransactionObserver]
-    
+
     private var restoreObservers: [RestoreObserver]
-    
+
     public override init() {
         productsMap = [:]
         productObservers = []
@@ -69,14 +69,14 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
         transactionObservers = [:]
         restoreObservers = []
         super.init()
-        
+
         SKPaymentQueue.default().add(self)
     }
-    
+
     deinit {
         SKPaymentQueue.default().remove(self)
     }
-    
+
     public func requestProducts(withIdentifiers identifiers: [PID], completionHandler: ProductObserver?, failureHandler: FailureObserver?) {
         let req = SKProductsRequest(productIdentifiers: Set(identifiers.map { $0.rawValue }))
         req.delegate = self
@@ -102,13 +102,13 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
         transactionObservers[product.productIdentifier] = completionHandler
         queue.add(payment)
     }
-    
+
     public func restorePurchases(completionHandler: @escaping RestoreObserver) {
         let queue = SKPaymentQueue.default()
         restoreObservers.append(completionHandler)
         queue.restoreCompletedTransactions()
     }
-    
+
     public func product(withIdentifier productIdentifier: PID) -> SKProduct? {
         productsMap[productIdentifier]
     }
@@ -120,7 +120,7 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
             self.receiveProducts(response.products)
         }
     }
-    
+
     public func request(_ request: SKRequest, didFailWithError error: Error) {
         if let _ = request as? SKProductsRequest {
             DispatchQueue.main.async {
@@ -131,7 +131,7 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
             self.transactionObservers.removeAll()
         }
     }
-    
+
     private func receiveProducts(_ products: [SKProduct]) {
         productsMap.removeAll()
         for p in products {
@@ -149,11 +149,11 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         DispatchQueue.main.async {
             let currentRestoreObservers = self.restoreObservers
-            
+
             for tx in transactions {
                 let productIdentifier = tx.payment.productIdentifier
                 let observer = self.transactionObservers[productIdentifier]
-                
+
                 switch tx.transactionState {
                 case .purchased:
                     queue.finishTransaction(tx)
@@ -168,7 +168,7 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
                         }
                         r(false, pid, nil)
                     }
-                    
+
                 case .failed:
                     queue.finishTransaction(tx)
                     if let skError = tx.error as? SKError, skError.code == .paymentCancelled {
@@ -182,7 +182,7 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
                             r(false, pid, tx.error)
                         }
                     }
-                    
+
                 default:
                     break
                 }
@@ -198,7 +198,7 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
             self.restoreObservers.removeAll()
         }
     }
-    
+
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         DispatchQueue.main.async {
             for r in self.restoreObservers {

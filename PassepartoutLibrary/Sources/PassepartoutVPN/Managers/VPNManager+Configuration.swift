@@ -35,7 +35,7 @@ extension VPNManager {
             masksPrivateData: masksPrivateData
         )
     }
-    
+
     func vpnConfigurationWithCurrentProfile() -> VPNConfiguration? {
         do {
             guard profileManager.isCurrentProfileActive() else {
@@ -55,19 +55,19 @@ extension VPNManager {
                     throw PassepartoutError.missingAccount
                 }
             }
-            
+
             // specific provider customizations
             var newPassword: String?
             if let providerName = profile.providerName {
                 switch providerName {
                 case .mullvad:
                     newPassword = "m"
-                    
+
                 default:
                     break
                 }
             }
-            
+
             // IMPORTANT: must commit password to keychain (tunnel needs a password reference)
             profileManager.savePassword(forProfile: profile, newPassword: newPassword)
 

@@ -31,14 +31,14 @@ import CoreData
 
 struct CategoryMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     private let vpnProtocol: VPNProtocolType
-    
+
     init(_ context: NSManagedObjectContext, _ vpnProtocol: VPNProtocolType) {
         self.context = context
         self.vpnProtocol = vpnProtocol
     }
-    
+
     func toDTO(_ ws: WSProviderCategory) -> CDInfrastructureCategory {
         let category = CDInfrastructureCategory(context: context)
         let locations = ws.locations.compactMap(LocationMapper(context).toDTO)
@@ -54,7 +54,7 @@ struct CategoryMapper: DTOMapper, ModelMapper {
 
         return category
     }
-    
+
     static func toModel(_ dto: CDInfrastructureCategory) -> ProviderCategory? {
         guard let infrastructureDTO = dto.infrastructure,
               let providerDTO = infrastructureDTO.provider,

@@ -31,7 +31,7 @@ import PassepartoutUtils
 
 struct ProviderMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
@@ -49,7 +49,7 @@ struct ProviderMapper: DTOMapper, ModelMapper {
             infra.provider = provider
             provider.addToInfrastructures(infra)
         }
-        
+
         return provider
     }
 
@@ -60,7 +60,7 @@ struct ProviderMapper: DTOMapper, ModelMapper {
             Utils.assertCoreDataDecodingFailed(#file, #function, #line)
             return nil
         }
-        
+
         var protos: [VPNProtocolType] = []
         if let infraDTOs = dto.infrastructures?.allObjects as? [CDInfrastructure] {
             protos = infraDTOs

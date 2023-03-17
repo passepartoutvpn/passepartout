@@ -38,7 +38,7 @@ extension EndpointView {
         @Binding private var builder: WireGuard.ConfigurationBuilder
 
 //        var customPeer: Binding<Endpoint?>? = nil
-        
+
         // XXX: do not escape mutating 'self', use constant providerManager
         init(currentProfile: ObservableProfile, isReadonly: Bool) {
             let providerManager: ProviderManager = .shared

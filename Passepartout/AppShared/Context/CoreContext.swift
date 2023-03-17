@@ -30,11 +30,11 @@ import PassepartoutLibrary
 @MainActor
 class CoreContext {
     let store: KeyValueStore
-    
+
     private let profilesPersistence: Persistence
-    
+
     private let providersPersistence: Persistence
-    
+
     var urlsForProfiles: [URL]? {
         profilesPersistence.containerURLs
     }
@@ -44,18 +44,18 @@ class CoreContext {
     }
 
     let upgradeManager: UpgradeManager
-    
+
     let providerManager: ProviderManager
-    
+
     let profileManager: ProfileManager
-    
+
     let vpnManager: VPNManager
-    
+
     private var cancellables: Set<AnyCancellable> = []
-    
+
     init(store: KeyValueStore) {
         self.store = store
-        
+
         let persistenceManager = PersistenceManager(store: store)
         profilesPersistence = persistenceManager.profilesPersistence(
             withName: Constants.Persistence.profilesContainerName
@@ -106,12 +106,12 @@ class CoreContext {
             providerManager: providerManager,
             strategy: strategy
         )
-        
+
         // post
-        
+
         configureObjects()
     }
-    
+
     private func configureObjects() {
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.tunnelLogPath = Constants.Log.Tunnel.path

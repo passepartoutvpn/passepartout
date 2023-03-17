@@ -33,9 +33,9 @@ struct AddingTextField<Field: View, ActionLabel: View>: View {
     let textField: (@escaping () -> Void) -> Field
 
     let addLabel: () -> ActionLabel
-    
+
     var commitLabel: (() -> ActionLabel)?
-    
+
     @State private var isAdding = false
 
     var body: some View {
@@ -51,14 +51,14 @@ struct AddingTextField<Field: View, ActionLabel: View>: View {
             }
         }
     }
-    
+
     private func doAdd() {
         withAnimation {
             onAdd?()
             isAdding = true
         }
     }
-    
+
     private func doCommit() {
         withAnimation {
             onCommit?()

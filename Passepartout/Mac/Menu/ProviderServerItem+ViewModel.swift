@@ -30,21 +30,21 @@ extension ProviderServerItem {
     @MainActor
     class ViewModel {
         private let profile: LightProfile
-        
+
         let server: LightProviderServer
-        
+
         private let vpnManager: LightVPNManager
-        
+
         init(_ profile: LightProfile, _ server: LightProviderServer, vpnManager: LightVPNManager) {
             self.profile = profile
             self.server = server
             self.vpnManager = vpnManager
         }
-        
+
         var isActiveServer: Bool {
             server.serverId == profile.providerServer?.serverId
         }
-        
+
         @objc func connectTo() {
             vpnManager.connect(with: profile.id, to: server.serverId)
         }

@@ -90,7 +90,7 @@ private extension Profile.OnDemand {
         rules.append(connection)
         return rules
     }
-    
+
     private var policyRule: NEOnDemandRule {
         disconnectsIfNotMatching ? NEOnDemandRuleDisconnect() : NEOnDemandRuleIgnore()
     }

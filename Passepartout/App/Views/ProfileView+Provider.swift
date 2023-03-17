@@ -29,17 +29,17 @@ import PassepartoutLibrary
 extension ProfileView {
     struct ProviderSection: View, ProviderProfileAvailability {
         @ObservedObject var providerManager: ProviderManager
-        
+
         @ObservedObject private var currentProfile: ObservableProfile
-        
+
         var profile: Profile {
             currentProfile.value
         }
-        
+
         @State private var isProviderLocationPresented = false
 
         @State private var isRefreshingInfrastructure = false
-        
+
         init(currentProfile: ObservableProfile) {
             providerManager = .shared
             self.currentProfile = currentProfile
@@ -55,7 +55,7 @@ extension ProfileView {
                 }
             }
         }
-        
+
         @ViewBuilder
         private var mainView: some View {
             Section {
@@ -116,11 +116,11 @@ extension ProfileView {
             }
             return themeAssetsCountryImage(code).asAssetImage
         }
-        
+
         private var currentProviderPreset: String? {
             providerManager.localizedPreset(forProfile: profile)
         }
-        
+
         private var lastInfrastructureUpdate: String? {
             providerManager.localizedInfrastructureUpdate(forProfile: profile)
         }

@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension CDProvider {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CDProvider> {
@@ -41,6 +40,6 @@ extension CDProvider {
 
 }
 
-extension CDProvider : Identifiable {
+extension CDProvider: Identifiable {
 
 }

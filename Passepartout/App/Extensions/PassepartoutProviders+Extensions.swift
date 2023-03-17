@@ -38,7 +38,7 @@ extension ProviderMetadata: Identifiable, Comparable, Hashable {
     public static func <(lhs: Self, rhs: Self) -> Bool {
         lhs.fullName.lowercased() < rhs.fullName.lowercased()
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(name)
     }
@@ -68,7 +68,7 @@ extension ProviderServer: Comparable {
     public static func ==(lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }
-    
+
     // "Default" comes first (nil localizedName)
     public static func <(lhs: Self, rhs: Self) -> Bool {
         guard lhs.localizedName != rhs.localizedName else {
@@ -113,7 +113,7 @@ extension ProviderMetadata {
         }
         return URL(string: string)
     }
-    
+
     var referralURL: URL? {
         guard let string = Constants.URLs.referrals[name] else {
             return nil

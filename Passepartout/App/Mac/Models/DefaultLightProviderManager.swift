@@ -29,9 +29,9 @@ import PassepartoutLibrary
 
 class DefaultLightProviderCategory: LightProviderCategory {
     let name: String
-    
+
     var locations: [LightProviderLocation]
-    
+
     init(_ category: ProviderCategory) {
         name = category.name
         locations = category.locations
@@ -42,13 +42,13 @@ class DefaultLightProviderCategory: LightProviderCategory {
 
 class DefaultLightProviderLocation: LightProviderLocation {
     let description: String
-    
+
     let id: String
-    
+
     let countryCode: String
-    
+
     let servers: [LightProviderServer]
-    
+
     init(_ location: ProviderLocation) {
         description = location.localizedCountry
         id = location.id
@@ -61,15 +61,15 @@ class DefaultLightProviderLocation: LightProviderLocation {
 
 class DefaultLightProviderServer: LightProviderServer {
     let description: String
-    
+
     let longDescription: String
-    
+
     let categoryName: String
-    
+
     let locationId: String
-    
+
     let serverId: String
-    
+
     init(_ server: ProviderServer) {
         description = server.localizedShortDescriptionWithDefault
         longDescription = server.localizedLongDescription(withCategory: false)
@@ -81,11 +81,11 @@ class DefaultLightProviderServer: LightProviderServer {
 
 class DefaultLightProviderManager: LightProviderManager {
     private let providerManager = ProviderManager.shared
-    
+
     private var subscriptions: Set<AnyCancellable> = []
-    
+
     weak var delegate: LightProviderManagerDelegate?
-    
+
     init() {
         providerManager.didUpdateProviders
             .receive(on: DispatchQueue.main)
@@ -93,7 +93,7 @@ class DefaultLightProviderManager: LightProviderManager {
                 self.delegate?.didUpdateProviders()
             }.store(in: &subscriptions)
     }
-    
+
     func categories(_ name: String, vpnProtocol: String) -> [LightProviderCategory] {
         guard let vpnProtocolType = VPNProtocolType(rawValue: vpnProtocol) else {
             fatalError("Unrecognized VPN protocol: \(vpnProtocol)")

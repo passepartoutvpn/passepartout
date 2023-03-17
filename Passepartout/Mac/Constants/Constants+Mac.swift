@@ -30,7 +30,7 @@ extension Constants {
         static var bundle: Bundle {
             Bundle(for: PassepartoutMac.self)
         }
-        
+
         static let appLauncherId: String = bundleConfig("launcher_id", in: bundle)
     }
 }

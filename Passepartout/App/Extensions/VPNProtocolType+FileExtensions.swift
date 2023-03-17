@@ -31,12 +31,12 @@ extension VPNProtocolType {
         let protos: [Self] = [.openVPN, .wireGuard]
         return protos.map(\.fileExtension)
     }()
-    
+
     var fileExtension: String {
         switch self {
         case .openVPN:
             return "ovpn"
-            
+
         case .wireGuard:
             return "conf"
         }

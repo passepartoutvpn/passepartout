@@ -40,9 +40,9 @@ struct OrganizerView: View {
 
     enum AlertType: Identifiable {
         case subscribeReddit
-        
+
         case error(String, String)
-        
+
         // XXX: alert ids
         var id: Int {
             switch self {
@@ -62,11 +62,11 @@ struct OrganizerView: View {
     @State private var isHostFileImporterPresented = false
 
     @AppStorage(AppPreference.didHandleSubreddit.key) private var didHandleSubreddit = false
-    
+
     private let hostFileTypes = Constants.URLs.filetypes
-    
+
     private let redditURL = Constants.URLs.subreddit
-    
+
     var body: some View {
         debugChanges()
         return ZStack {
@@ -93,13 +93,13 @@ struct OrganizerView: View {
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
         .themePrimaryView()
-        
+
         // VPN configuration error publisher (no need to observe VPNManager)
         .onReceive(VPNManager.shared.configurationError) {
             alertType = .error($0.profile.header.name, $0.error.localizedAppDescription)
         }
     }
-    
+
     private var hiddenSceneView: some View {
         SceneView(
             alertType: $alertType,
@@ -128,7 +128,7 @@ extension OrganizerView {
             )
         }
     }
-    
+
     private func onOpenURL(_ url: URL) {
         addProfileModalType = .addHost(url, false)
     }

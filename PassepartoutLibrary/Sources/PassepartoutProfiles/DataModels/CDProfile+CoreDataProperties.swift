@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension CDProfile {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CDProfile> {
@@ -25,6 +24,6 @@ extension CDProfile {
 
 }
 
-extension CDProfile : Identifiable {
+extension CDProfile: Identifiable {
 
 }

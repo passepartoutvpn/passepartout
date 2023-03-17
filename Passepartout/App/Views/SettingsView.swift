@@ -30,9 +30,9 @@ struct SettingsView: View {
     @ObservedObject private var profileManager: ProfileManager
 
     @ObservedObject private var productManager: ProductManager
-    
+
     @Environment(\.presentationMode) private var presentationMode
-    
+
 //    private var isTestBuild: Bool {
 //        Constants.App.isBeta || Constants.InApp.appType == .beta
 //    }
@@ -45,17 +45,16 @@ struct SettingsView: View {
         profileManager = .shared
         productManager = .shared
     }
-    
+
     var body: some View {
         List {
             aboutSection
-            diagnosticsSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.themeSecondaryView()
         .navigationTitle(L10n.Settings.title)
     }
-    
+
     private var aboutSection: some View {
         Section {
             NavigationLink {
@@ -73,21 +72,6 @@ struct SettingsView: View {
                 Spacer()
                 Text(versionString)
                 Spacer()
-            }
-        }
-    }
-    
-    private var diagnosticsSection: some View {
-        profileManager.activeProfile.map { profile in
-            Section {
-                NavigationLink {
-                    DiagnosticsView(
-                        vpnProtocol: profile.currentVPNProtocol,
-                        providerName: profile.header.providerName
-                    )
-                } label: {
-                    Text(L10n.Diagnostics.title)
-                }
             }
         }
     }

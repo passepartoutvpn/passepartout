@@ -36,10 +36,10 @@ extension IntentDispatcher {
 
         case activeAndConnected(UUID)
     }
-    
+
     typealias VPNIntentActivity = IntentActivity<VPNManager>
 
-    static let enableVPN = VPNIntentActivity(name: Constants.Activities.enableVPN) { activity, vpnManager in
+    static let enableVPN = VPNIntentActivity(name: Constants.Activities.enableVPN) { _, vpnManager in
         pp_log.info("Enabling VPN...")
 
         Task {
@@ -51,7 +51,7 @@ extension IntentDispatcher {
         }
     }
 
-    static let disableVPN = VPNIntentActivity(name: Constants.Activities.disableVPN) { activity, vpnManager in
+    static let disableVPN = VPNIntentActivity(name: Constants.Activities.disableVPN) { _, vpnManager in
         pp_log.info("Disabling VPN...")
 
         Task {
@@ -81,7 +81,7 @@ extension IntentDispatcher {
             }
         }
     }
-    
+
     static let moveToLocation = VPNIntentActivity(name: Constants.Activities.moveToLocation) { activity, vpnManager in
         pp_log.info("Moving to VPN location...")
 
@@ -110,27 +110,27 @@ extension IntentDispatcher {
             }
         }
     }
-    
-    static let trustCellularNetwork = VPNIntentActivity(name: Constants.Activities.trustCellularNetwork) { activity, vpnManager in
+
+    static let trustCellularNetwork = VPNIntentActivity(name: Constants.Activities.trustCellularNetwork) { _, vpnManager in
         pp_log.info("Trusting mobile network...")
         handleCellularNetwork(true, vpnManager)
     }
 
-    static let trustCurrentNetwork = VPNIntentActivity(name: Constants.Activities.trustCurrentNetwork) { activity, vpnManager in
+    static let trustCurrentNetwork = VPNIntentActivity(name: Constants.Activities.trustCurrentNetwork) { _, vpnManager in
         pp_log.info("Trusting current Wi-Fi...")
         handleCurrentNetwork(true, vpnManager)
     }
 
-    static let untrustCellularNetwork = VPNIntentActivity(name: Constants.Activities.untrustCellularNetwork) { activity, vpnManager in
+    static let untrustCellularNetwork = VPNIntentActivity(name: Constants.Activities.untrustCellularNetwork) { _, vpnManager in
         pp_log.info("Untrusting mobile network...")
         handleCellularNetwork(false, vpnManager)
     }
 
-    static let untrustCurrentNetwork = VPNIntentActivity(name: Constants.Activities.untrustCurrentNetwork) { activity, vpnManager in
+    static let untrustCurrentNetwork = VPNIntentActivity(name: Constants.Activities.untrustCurrentNetwork) { _, vpnManager in
         pp_log.info("Untrusting current Wi-Fi...")
         handleCurrentNetwork(false, vpnManager)
     }
-    
+
     private static func handleCellularNetwork(_ trust: Bool, _ vpnManager: VPNManager) {
         Task {
             do {

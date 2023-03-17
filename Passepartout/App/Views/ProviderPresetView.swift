@@ -34,13 +34,13 @@ struct ProviderPresetView: View {
     @ObservedObject private var currentProfile: ObservableProfile
 
     private var server: ProviderServer?
-    
+
     @Binding private var selectedPreset: ProviderServer.Preset?
 
     // XXX: do not escape mutating 'self', use constant providerManager
     init(currentProfile: ObservableProfile) {
         let providerManager: ProviderManager = .shared
-        
+
         self.providerManager = providerManager
         self.currentProfile = currentProfile
 
@@ -61,7 +61,7 @@ struct ProviderPresetView: View {
             currentProfile.value.setProviderPreset(preset)
         }
     }
-    
+
     var body: some View {
         List {
             ForEach(availablePresets, id: \.id, content: presetSection)
@@ -77,7 +77,7 @@ struct ProviderPresetView: View {
                 presetSelectionRow(preset)
             }
             NavigationLink(L10n.Endpoint.Advanced.title) {
-                
+
                 // TODO: WireGuard, preset assumes OpenVPN (read current protocol instead)
                 preset.openVPNConfiguration.map {
                     EndpointAdvancedView.OpenVPNView(
@@ -91,7 +91,7 @@ struct ProviderPresetView: View {
             Text(preset.name)
         }
     }
-    
+
     private func presetSelectionRow(_ preset: ProviderServer.Preset) -> some View {
         Text(preset.comment)
             .withTrailingCheckmark(when: preset.id == selectedPreset?.id)

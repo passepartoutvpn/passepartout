@@ -31,7 +31,7 @@ import Combine
 
 enum ProductError: Error {
     case uneligible
-    
+
     case beta
 }
 
@@ -40,30 +40,30 @@ class ProductManager: NSObject, ObservableObject {
         case freemium = 0
 
         case beta = 1
-        
+
         case fullVersion = 2
     }
-    
+
     let appType: AppType
-    
+
     let buildProducts: BuildProducts
-    
+
     let didRefundProducts = PassthroughSubject<Void, Never>()
-    
+
     @Published private(set) var isRefreshingProducts = false
 
     @Published private(set) var products: [SKProduct]
 
     //
-    
+
     private let inApp: InApp<LocalProduct>
-    
+
     private var purchasedAppBuild: Int?
-    
+
     private var purchasedFeatures: Set<LocalProduct>
-    
+
     private var purchaseDates: [LocalProduct: Date]
-    
+
     private var cancelledPurchases: Set<LocalProduct>? {
         willSet {
             guard cancelledPurchases != nil else {
@@ -76,20 +76,20 @@ class ProductManager: NSObject, ObservableObject {
             detectRefunds(newCancelledPurchases)
         }
     }
-    
+
     private var refreshRequest: SKReceiptRefreshRequest?
-    
+
     init(appType: AppType, buildProducts: BuildProducts) {
         self.appType = appType
         self.buildProducts = buildProducts
-    
+
         products = []
         inApp = InApp()
         purchasedAppBuild = nil
         purchasedFeatures = []
         purchaseDates = [:]
         cancelledPurchases = nil
-        
+
         super.init()
 
         reloadReceipt()
@@ -97,15 +97,15 @@ class ProductManager: NSObject, ObservableObject {
 
         refreshProducts()
     }
-    
+
     deinit {
         SKPaymentQueue.default().remove(self)
     }
-    
+
     func canMakePayments() -> Bool {
         SKPaymentQueue.canMakePayments()
     }
-    
+
     func refreshProducts() {
         let ids = LocalProduct.all
         guard !ids.isEmpty else {
@@ -130,7 +130,7 @@ class ProductManager: NSObject, ObservableObject {
     func product(withIdentifier identifier: LocalProduct) -> SKProduct? {
         inApp.product(withIdentifier: identifier)
     }
-    
+
     func featureProducts(including: [LocalProduct]) -> [SKProduct] {
         inApp.products.filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
@@ -145,7 +145,7 @@ class ProductManager: NSObject, ObservableObject {
             return true
         }
     }
-    
+
     func featureProducts(excluding: [LocalProduct]) -> [SKProduct] {
         inApp.products.filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
@@ -160,7 +160,7 @@ class ProductManager: NSObject, ObservableObject {
             return true
         }
     }
-    
+
     func purchase(_ product: SKProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
         inApp.purchase(product: product) { result in
             if case .success = result {
@@ -171,7 +171,7 @@ class ProductManager: NSObject, ObservableObject {
             }
         }
     }
-    
+
     func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
         inApp.restorePurchases { (finished, _, error) in
             guard finished else {
@@ -184,7 +184,7 @@ class ProductManager: NSObject, ObservableObject {
     }
 
     // MARK: In-app eligibility
-    
+
     private func isCurrentPlatformVersion() -> Bool {
         purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
@@ -222,7 +222,7 @@ class ProductManager: NSObject, ObservableObject {
     func isEligibleForFeedback() -> Bool {
         appType == .beta || !purchasedFeatures.isEmpty
     }
-    
+
     func hasPurchased(_ product: LocalProduct) -> Bool {
         purchasedFeatures.contains(product)
     }
@@ -257,7 +257,7 @@ class ProductManager: NSObject, ObservableObject {
         }
         if let iapReceipts = receipt.inAppPurchaseReceipts {
             purchaseDates.removeAll()
-            
+
             pp_log.debug("In-app receipts:")
             iapReceipts.forEach {
                 guard let pid = $0.productIdentifier, let product = LocalProduct(rawValue: pid) else {
@@ -296,7 +296,7 @@ extension ProductManager {
         let isEligibleForFullVersion = isFullVersion()
         let hasCancelledFullVersion: Bool
         let hasCancelledTrustedNetworks: Bool
-        
+
         if isMac {
             hasCancelledFullVersion = !isEligibleForFullVersion && (
                 refunds.contains(.fullVersion) || refunds.contains(.fullVersion_macOS)
@@ -308,7 +308,7 @@ extension ProductManager {
             )
             hasCancelledTrustedNetworks = !isEligibleForFullVersion && refunds.contains(.trustedNetworks)
         }
-        
+
         // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
         if hasCancelledFullVersion || hasCancelledTrustedNetworks {
             didRefundProducts.send()

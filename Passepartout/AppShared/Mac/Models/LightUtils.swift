@@ -28,6 +28,6 @@ import Foundation
 @objc
 public protocol LightUtils {
     var launchesOnLogin: Bool { get set }
-    
+
     func requestScene()
 }

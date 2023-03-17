@@ -31,11 +31,11 @@ import PassepartoutUtils
 
 class ProviderRepository: Repository {
     private let context: NSManagedObjectContext
-    
+
     required init(_ context: NSManagedObjectContext) {
         self.context = context
     }
-    
+
     func allProviders() -> [ProviderMetadata] {
         let request = CDProvider.fetchRequest()
         request.sortDescriptors = [
@@ -129,7 +129,7 @@ class ProviderRepository: Repository {
             throw error
         }
     }
-    
+
     private func reassignInfrastructures(from oldProvider: CDProvider, to newProvider: CDProvider) {
         oldProvider.infrastructures?.forEach {
             guard let infra = $0 as? CDInfrastructure else {

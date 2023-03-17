@@ -34,7 +34,7 @@ struct NetworkSettingsView: View {
     }
 
     @State private var settings = Profile.NetworkSettings()
-    
+
     init(currentProfile: ObservableProfile) {
         self.currentProfile = currentProfile
     }
@@ -64,7 +64,7 @@ struct NetworkSettingsView: View {
             )
         }
     }
-    
+
 //    EditButton()
 //        .disabled(!isAnythingManual)
 
@@ -83,7 +83,7 @@ struct NetworkSettingsView: View {
 //        }
         return false
     }
-    
+
     private func mapNotEmpty(elements: [IdentifiableString]) -> [IdentifiableString] {
         elements
             .filter { !$0.string.isEmpty }
@@ -110,7 +110,7 @@ extension NetworkSettingsView {
 // MARK: DNS
 
 extension NetworkSettingsView {
-    
+
     @ViewBuilder
     private var dnsView: some View {
         Section {
@@ -147,7 +147,7 @@ extension NetworkSettingsView {
             dnsManualSearchDomains
         }
     }
-    
+
     private var dnsManualHTTPSRow: some View {
         TextField(Unlocalized.Placeholders.dohURL, text: $settings.dns.dnsHTTPSURL.toString())
             .themeValidURL(settings.dns.dnsHTTPSURL?.absoluteString)
@@ -178,7 +178,7 @@ extension NetworkSettingsView {
             }
         }
     }
-    
+
     private var dnsManualDomainRow: some View {
         TextField(L10n.Global.Strings.domain, text: $settings.dns.dnsDomain ?? "")
             .themeValidDomainName(settings.dns.dnsDomain)
@@ -209,7 +209,7 @@ extension NetworkSettingsView {
 // MARK: Proxy
 
 extension NetworkSettingsView {
-    
+
     @ViewBuilder
     private var proxyView: some View {
         Section {
@@ -248,7 +248,7 @@ extension NetworkSettingsView {
             proxyManualBypassDomains
         }
     }
-    
+
     private var proxyManualBypassDomains: some View {
         Section {
             EditableTextList(
@@ -277,7 +277,7 @@ extension NetworkSettingsView {
     private var mtuView: some View {
         Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticMTU.themeAnimation())
-            
+
             if !settings.isAutomaticMTU {
                 themeTextPicker(
                     L10n.Global.Strings.bytes,

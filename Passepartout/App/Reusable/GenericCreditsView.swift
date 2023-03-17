@@ -27,23 +27,23 @@ import SwiftUI
 
 struct GenericCreditsView: View {
     typealias License = (String, String, URL)
-    
+
     typealias Notice = (String, String)
-    
+
     var licensesHeader: String? = "Licenses"
-    
+
     var noticesHeader: String? = "Notices"
-    
+
     var translationsHeader: String? = "Translations"
-    
+
     let licenses: [License]
-    
+
     let notices: [Notice]
-    
+
     let translations: [String: String]
-    
+
     @State private var contentForLicense: [String: String] = [:]
-    
+
     var body: some View {
         List {
             if !licenses.isEmpty {
@@ -57,27 +57,27 @@ struct GenericCreditsView: View {
             }
         }
     }
-    
+
     private var sortedLicenses: [License] {
         licenses.sorted {
             $0.0.lowercased() < $1.0.lowercased()
         }
     }
-    
+
     private var sortedNotices: [Notice] {
         notices.sorted {
             $0.0.lowercased() < $1.0.lowercased()
         }
     }
-    
+
     private var sortedLanguages: [String] {
         translations.keys.sorted {
             $0.localizedAsCountryCode < $1.localizedAsCountryCode
         }
     }
-    
+
     private var licensesSection: some View {
-        Section (
+        Section(
             header: licensesHeader.map(Text.init)
         ) {
             ForEach(sortedLicenses, id: \.0) { license in
@@ -98,7 +98,7 @@ struct GenericCreditsView: View {
     }
 
     private var noticesSection: some View {
-        Section (
+        Section(
             header: noticesHeader.map(Text.init)
         ) {
             ForEach(sortedNotices, id: \.0) { notice in
@@ -108,7 +108,7 @@ struct GenericCreditsView: View {
     }
 
     private var translationsSection: some View {
-        Section (
+        Section(
             header: translationsHeader.map(Text.init)
         ) {
             ForEach(sortedLanguages, id: \.self) { code in
@@ -123,7 +123,7 @@ struct GenericCreditsView: View {
             }
         }
     }
-    
+
     private func noticeView(_ content: (String, String)) -> some View {
         VStack {
             Text(content.1)
@@ -137,9 +137,9 @@ struct GenericCreditsView: View {
 extension GenericCreditsView {
     struct LicenseView: View {
         let url: URL
-        
+
         @Binding var content: String?
-        
+
         var body: some View {
             ZStack {
                 content.map { unwrapped in
@@ -154,7 +154,7 @@ extension GenericCreditsView {
                 }
             }.onAppear(perform: loadURL)
         }
-        
+
         private func loadURL() {
             guard content == nil else {
                 return

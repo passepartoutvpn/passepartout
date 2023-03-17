@@ -33,7 +33,7 @@ extension ProfileView {
         private let profile: Profile
 
         @Binding private var modalType: ModalType?
-        
+
         private var interactiveProfile: Binding<Profile?> {
             .init {
                 modalType == .interactiveAccount ? profile : nil
@@ -41,7 +41,7 @@ extension ProfileView {
                 modalType = $0 != nil ? .interactiveAccount : nil
             }
         }
-        
+
         private var isActiveProfile: Bool {
             profileManager.isActiveProfile(profile.id)
         }
@@ -51,7 +51,7 @@ extension ProfileView {
             self.profile = profile
             _modalType = modalType
         }
-        
+
         var body: some View {
             Section {
                 toggleView
@@ -63,7 +63,7 @@ extension ProfileView {
                     .xxxThemeTruncation()
             }
         }
-        
+
         private var toggleView: some View {
             VPNToggle(
                 profile: profile,
@@ -71,7 +71,7 @@ extension ProfileView {
                 rateLimit: Constants.RateLimit.vpnToggle
             )
         }
-        
+
         private var statusView: some View {
             HStack {
                 Text(L10n.Profile.Items.ConnectionStatus.caption)

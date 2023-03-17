@@ -28,11 +28,11 @@ import AppKit
 
 struct HostProfileItem: Item {
     private let viewModel: ViewModel
-    
+
     init(_ profile: LightProfile, vpnManager: LightVPNManager) {
         viewModel = ViewModel(profile, vpnManager: vpnManager)
     }
-    
+
     func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
         let item = NSMenuItem(
             title: viewModel.profile.name,
@@ -44,7 +44,7 @@ struct HostProfileItem: Item {
         item.representedObject = viewModel
         return item
     }
-    
+
     private func submenu() -> NSMenu {
         let menu = NSMenu()
         menu.autoenablesItems = false

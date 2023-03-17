@@ -28,10 +28,10 @@ import Foundation
 @objc(MenuBuilder)
 public protocol MenuBuilder: NSObjectProtocol {
     weak var delegate: MenuDelegate? { get set }
-    
+
     init()
 
     func sendAppToBackground()
-    
+
     func buildMenu()
 }

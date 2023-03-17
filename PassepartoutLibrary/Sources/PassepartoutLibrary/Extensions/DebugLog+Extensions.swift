@@ -58,7 +58,7 @@ extension DebugLog {
         fullText += content
         return fullText
     }
-    
+
     public func decoratedData(_ appName: String, _ appVersion: String) -> Data {
         guard let data = decoratedString(appName, appVersion).data(using: .utf8) else {
             assertionFailure("Could not encode log metadata to UTF8?")
@@ -74,13 +74,13 @@ private extension UIUserInterfaceIdiom {
         switch self {
         case .phone:
             return "Phone"
-            
+
         case .pad:
             return "Pad"
-            
+
         case .mac:
             return "Mac"
-            
+
         default:
             return "Other"
         }

@@ -35,7 +35,7 @@ public struct ProviderServer: Identifiable {
         public let comment: String
 
         public let vpnProtocol: VPNProtocolType
-        
+
         public let vpnConfiguration: JSON
 
         public init(id: String, name: String, comment: String, vpnProtocol: VPNProtocolType, vpnConfiguration: JSON) {
@@ -50,29 +50,29 @@ public struct ProviderServer: Identifiable {
     public let providerMetadata: ProviderMetadata
 
     public let id: String
-    
+
     public let apiId: String
-    
+
     public let categoryName: String
-    
+
     public let countryCode: String
-    
+
     public let extraCountryCodes: [String]?
-    
+
     public let localizedName: String?
-    
+
     public let serverIndex: Int?
-    
+
     public let tags: [String]?
-    
+
     public let hostname: String?
-    
+
     public let ipAddresses: [String]
 
     public let presetIds: [String]
 
     public private(set) var presets: [Preset]?
-    
+
     public init(providerMetadata: ProviderMetadata, id: String, apiId: String, categoryName: String, countryCode: String, extraCountryCodes: [String]?, localizedName: String?, serverIndex: Int?, tags: [String]?, hostname: String?, ipAddresses: [String], presetIds: [String]) {
         self.providerMetadata = providerMetadata
         self.id = id
@@ -93,7 +93,7 @@ public struct ProviderServer: Identifiable {
             $0.id == presetId
         }
     }
-    
+
     public func withPresets(_ presets: [Preset]?) -> Self {
         var copy = self
         copy.presets = presets

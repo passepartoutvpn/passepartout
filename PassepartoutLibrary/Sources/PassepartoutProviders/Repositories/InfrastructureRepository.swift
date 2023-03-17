@@ -31,11 +31,11 @@ import PassepartoutUtils
 
 class InfrastructureRepository: Repository {
     private let context: NSManagedObjectContext
-    
+
     required init(_ context: NSManagedObjectContext) {
         self.context = context
     }
-    
+
     func saveInfrastructure(
         _ infrastructure: WSProviderInfrastructure,
         vpnProtocol: VPNProtocolType,
@@ -53,7 +53,7 @@ class InfrastructureRepository: Repository {
             let request = fetchRequest(infrastructure.name, vpnProtocol)
             let existing = try context.fetch(request)
             existing.forEach(context.delete)
-            
+
             let dto = InfrastructureMapper(
                 context,
                 infrastructure.name,
@@ -113,7 +113,7 @@ class InfrastructureRepository: Repository {
             return nil
         }
     }
-    
+
     private func fetchRequest(_ name: ProviderName, _ vpnProtocol: VPNProtocolType) -> NSFetchRequest<CDInfrastructure> {
         let request = CDInfrastructure.fetchRequest()
         request.predicate = NSPredicate(
@@ -123,7 +123,7 @@ class InfrastructureRepository: Repository {
         )
         return request
     }
-    
+
     private func providerDTO(forName name: ProviderName) throws -> CDProvider? {
         let request = CDProvider.fetchRequest()
         request.sortDescriptors = [

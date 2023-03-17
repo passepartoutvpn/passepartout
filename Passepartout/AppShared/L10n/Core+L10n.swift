@@ -41,16 +41,16 @@ extension PassepartoutError {
         switch self {
         case .missingProfile:
             return V.missingProfile
-            
+
         case .missingAccount:
             return V.missingAccount
-            
+
         case .missingProviderServer:
             return V.missingProviderServer
-            
+
         case .missingProviderPreset:
             return V.missingProviderPreset
-            
+
         default:
             return nil
         }
@@ -103,7 +103,7 @@ extension Network.Choice {
         switch self {
         case .automatic:
             return L10n.Global.Strings.automatic
-            
+
         case .manual:
             return L10n.Global.Strings.manual
         }
@@ -115,7 +115,7 @@ extension Network.DNSSettings.ConfigurationType {
         switch self {
         case .plain:
             return Unlocalized.DNS.plain
-            
+
         case .https:
             return Unlocalized.Network.https
 
@@ -133,10 +133,10 @@ extension Network.ProxySettings.ConfigurationType {
         switch self {
         case .manual:
             return L10n.Global.Strings.manual
-            
+
         case .pac:
             return Unlocalized.Network.proxyAutoConfiguration
-            
+
         case .disabled:
             return L10n.Global.Strings.disabled
         }

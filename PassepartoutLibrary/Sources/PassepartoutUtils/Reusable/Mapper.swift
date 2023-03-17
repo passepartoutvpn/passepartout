@@ -29,7 +29,7 @@ public protocol DTOMapper {
     associatedtype WS
 
     associatedtype DTO
-    
+
     func toDTO(_ ws: WS) throws -> DTO
 }
 

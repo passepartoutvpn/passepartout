@@ -27,9 +27,9 @@ import SwiftUI
 
 struct PaywallView: View {
     @ObservedObject private var productManager: ProductManager
-    
+
     @Binding private var isPresented: Bool
-    
+
     private let feature: LocalProduct?
 
     init<MT>(modalType: Binding<MT?>, feature: LocalProduct? = nil) {

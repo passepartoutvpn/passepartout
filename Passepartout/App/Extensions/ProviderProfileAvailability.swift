@@ -28,7 +28,7 @@ import PassepartoutLibrary
 
 protocol ProviderProfileAvailability {
     var profile: Profile { get }
-    
+
     var providerManager: ProviderManager { get }
 }
 

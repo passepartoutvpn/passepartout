@@ -1,8 +1,8 @@
 //
-//  VPNStatusText.swift
+//  ProfileView+Diagnostics.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 5/20/22.
+//  Created by Davide De Rosa on 3/17/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,25 +26,21 @@
 import SwiftUI
 import PassepartoutLibrary
 
-struct VPNStatusText: View {
-    @ObservedObject private var currentVPNState: ObservableVPNState
+extension ProfileView {
+    struct DiagnosticsSection: View {
+        @ObservedObject var currentProfile: ObservableProfile
 
-    let isActiveProfile: Bool
-
-    init(isActiveProfile: Bool) {
-        currentVPNState = .shared
-        self.isActiveProfile = isActiveProfile
-    }
-
-    var body: some View {
-        Text(statusText)
-    }
-
-    private var statusText: String {
-        currentVPNState.localizedStatusDescription(
-            isActiveProfile: isActiveProfile,
-            withErrors: true,
-            dataCountIfAvailable: true
-        )
+        var body: some View {
+            Section {
+                NavigationLink {
+                    DiagnosticsView(
+                        vpnProtocol: currentProfile.value.currentVPNProtocol,
+                        providerName: currentProfile.value.header.providerName
+                    )
+                } label: {
+                    Text(L10n.Diagnostics.title)
+                }
+            }
+        }
     }
 }

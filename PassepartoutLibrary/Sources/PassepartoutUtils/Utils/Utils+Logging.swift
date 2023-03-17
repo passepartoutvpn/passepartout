@@ -36,7 +36,7 @@ extension Utils {
 //        assertionFailure(message ?? "Cannot decode entity required fields - \(file):\(function):\(line)")
         pp_log.warning(message ?? "Cannot decode entity required fields - \(file):\(function):\(line)")
     }
-    
+
     public static func logFetchError(_ file: String, _ function: String, _ line: Int, _ error: Error) {
         pp_log.error("Unable to fetch: \(error) - \(file):\(function):\(line)")
     }

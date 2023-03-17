@@ -31,11 +31,11 @@ import PassepartoutUtils
 
 class ServerRepository: Repository {
     private let context: NSManagedObjectContext
-    
+
     required init(_ context: NSManagedObjectContext) {
         self.context = context
     }
-    
+
     func categories(forProviderWithName name: ProviderName, vpnProtocol: VPNProtocolType) -> [ProviderCategory] {
         let request = CDInfrastructureCategory.fetchRequest()
         request.predicate = NSPredicate(

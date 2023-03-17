@@ -28,14 +28,14 @@ import AppKit
 
 struct VisibilityItem: Item {
     private let title: String
-    
+
     private let viewModel: ViewModel
 
     init(_ title: String, utils: LightUtils) {
         self.title = title
         viewModel = ViewModel(utils: utils)
     }
-    
+
     func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
         let item = NSMenuItem(
             title: title,

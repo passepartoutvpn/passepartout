@@ -32,23 +32,23 @@ extension ProviderLocationItem {
         private let profile: LightProfile
 
         let location: LightProviderLocation
-        
+
         private let vpnManager: LightVPNManager
-        
+
         init(_ profile: LightProfile, _ location: LightProviderLocation, vpnManager: LightVPNManager) {
             self.profile = profile
             self.location = location
             self.vpnManager = vpnManager
         }
-        
+
         var isActiveLocation: Bool {
             location.id == profile.providerServer?.locationId
         }
-        
+
         var isOnlyServer: Bool {
             location.servers.count == 1
         }
-        
+
         @objc func connectTo() {
             guard isOnlyServer else {
                 fatalError("Connecting to a location with multiple servers?")

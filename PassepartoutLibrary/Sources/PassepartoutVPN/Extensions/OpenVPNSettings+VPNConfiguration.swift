@@ -61,7 +61,7 @@ extension Profile.OpenVPNSettings: VPNConfigurationProviding {
         cfg.debugLogPath = parameters.preferences.tunnelLogPath
         cfg.debugLogFormat = parameters.preferences.tunnelLogFormat
         cfg.masksPrivateData = parameters.preferences.masksPrivateData
-        
+
         var extra = NetworkExtensionExtra()
         extra.passwordReference = parameters.passwordReference
         extra.onDemandRules = parameters.onDemandRules
@@ -81,7 +81,7 @@ extension OpenVPN.ConfigurationBuilder {
         switch settings.choice {
         case .automatic:
             break
-        
+
         case .manual:
             appendNoPullMask(.routes)
             var policies: [OpenVPN.RoutingPolicy] = []
@@ -120,7 +120,7 @@ extension OpenVPN.ConfigurationBuilder {
             case .disabled:
                 break
             }
-            
+
             if isDNSEnabled {
                 dnsServers = settings.dnsServers?.filter { !$0.isEmpty }
                 dnsDomain = settings.dnsDomain
@@ -144,19 +144,19 @@ extension OpenVPN.ConfigurationBuilder {
                 httpsProxy = settings.proxyServer
                 proxyBypassDomains = settings.proxyBypassDomains?.filter { !$0.isEmpty }
                 proxyAutoConfigurationURL = nil
-                
+
             case .pac:
                 httpProxy = nil
                 httpsProxy = nil
                 proxyBypassDomains = nil
                 proxyAutoConfigurationURL = settings.proxyAutoConfigurationURL
-                
+
             case .disabled:
                 break
             }
         }
     }
-    
+
     mutating func applyMTU(from settings: Network.MTUSettings) {
         switch settings.choice {
         case .automatic:
@@ -166,7 +166,7 @@ extension OpenVPN.ConfigurationBuilder {
             mtu = settings.mtuBytes
         }
     }
-    
+
     private mutating func appendNoPullMask(_ mask: OpenVPN.PullMask) {
         if noPullMask == nil {
             noPullMask = []

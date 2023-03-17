@@ -28,8 +28,8 @@ import SwiftUI
 struct CreditsView: View {
     var body: some View {
         GenericCreditsView(
-            licensesHeader: nil,//L10n.Credits.Sections.Licenses.header,
-            noticesHeader: nil,//L10n.Credits.Sections.Notices.header,
+            licensesHeader: nil,// L10n.Credits.Sections.Licenses.header,
+            noticesHeader: nil,// L10n.Credits.Sections.Notices.header,
             translationsHeader: L10n.Global.Strings.translations,
             licenses: Unlocalized.Credits.licenses,
             notices: Unlocalized.Credits.notices,

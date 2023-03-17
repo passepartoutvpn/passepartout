@@ -30,23 +30,23 @@ extension Profile {
     public struct Provider: Codable, Equatable {
         public struct Settings: Codable, Equatable {
             public var account: Profile.Account?
-            
+
             public var serverId: String?
 
             public var presetId: String?
 
             public var favoriteLocationIds: Set<String>?
-            
+
             public var customEndpoint: Endpoint?
-            
+
             public init() {
             }
         }
-        
+
         public let name: ProviderName
-        
+
         public var vpnSettings: [VPNProtocolType: Settings] = [:]
-        
+
         public init(_ name: ProviderName) {
             self.name = name
         }

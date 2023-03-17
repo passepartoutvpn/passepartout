@@ -31,15 +31,15 @@ import TunnelKitWireGuard
 extension AddHostView {
     struct NameView: View {
         @ObservedObject private var profileManager: ProfileManager
-        
+
         private let url: URL
-        
+
         private let deletingURLOnSuccess: Bool
-        
+
         private let bindings: AddProfileView.Bindings
-        
+
         @State private var viewModel = ViewModel()
-        
+
         @State private var isEnteringCredentials = false
 
         private var isComplete: Bool {
@@ -107,7 +107,7 @@ extension AddHostView {
                 completeSection
             }
         }
-        
+
         private var encryptionSection: some View {
             Section {
                 SecureField(L10n.AddProfile.Host.Sections.Encryption.footer, text: $viewModel.encryptionPassphrase) {
@@ -132,7 +132,7 @@ extension AddHostView {
                 themeErrorMessage(viewModel.errorMessage)
             }
         }
-        
+
         private var hiddenAccountLink: some View {
             NavigationLink("", isActive: $isEnteringCredentials) {
                 AddProfileView.AccountWrapperView(
@@ -153,11 +153,11 @@ extension AddHostView {
         private func requestResourcePermissions() {
             _ = url.startAccessingSecurityScopedResource()
         }
-        
+
         private func dropResourcePermissions() {
             url.stopAccessingSecurityScopedResource()
         }
-        
+
         private func alertOverwriteExistingProfile() -> Alert {
             Alert(
                 title: Text(L10n.AddProfile.Shared.title),

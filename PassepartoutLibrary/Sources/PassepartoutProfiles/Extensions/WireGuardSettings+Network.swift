@@ -32,23 +32,23 @@ extension Profile.WireGuardSettings: DNSSettingsProviding {
     public var dnsProtocol: DNSProtocol? {
         .plain
     }
-    
+
     public var dnsServers: [String]? {
         configuration.dnsServers
     }
-    
+
     public var dnsDomain: String? {
         nil
     }
-    
+
     public var dnsSearchDomains: [String]? {
         configuration.dnsSearchDomains
     }
-    
+
     public var dnsHTTPSURL: URL? {
         nil
     }
-    
+
     public var dnsTLSServerName: String? {
         nil
     }

@@ -29,23 +29,23 @@ import PassepartoutUtils
 
 public enum WebError: GenericWebServicesError, LocalizedError {
     case http(Int)
-    
+
     case emptyResponse
-    
+
     case unknown
 
     public static func httpStatus(_ status: Int) -> WebError {
         .http(status)
     }
-    
+
     public var errorDescription: String? {
         switch self {
         case .http(let status):
             return "HTTP \(status)"
-            
+
         case .emptyResponse:
             return "Empty response"
-            
+
         default:
             return nil
         }

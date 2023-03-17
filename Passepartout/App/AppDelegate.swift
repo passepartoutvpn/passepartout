@@ -28,8 +28,8 @@ import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     private let mac = MacBundle.shared
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         #if targetEnvironment(macCatalyst)
         mac.configure()
         mac.menu.install()

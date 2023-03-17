@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restore DNS "Domain" setting. [#260](https://github.com/passepartoutvpn/passepartout-apple/pull/260)
 - OpenVPN: Full implementation of Tunnelblick XOR patch (tmthecoder). [#245](https://github.com/passepartoutvpn/passepartout-apple/pull/245), [tunnelkit#255][https://github.com/passepartoutvpn/tunnelkit/pull/255]
 
+### Changed
+
+- Move Diagnostics view to Profile bottom. [#261](https://github.com/passepartoutvpn/passepartout-apple/pull/261)
+
 ### Fixed
 
 - Improve kill switch behavior. [#181](https://github.com/passepartoutvpn/passepartout-apple/issues/181)

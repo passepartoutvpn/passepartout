@@ -29,32 +29,32 @@ import MessageUI
 struct MailComposerView: UIViewControllerRepresentable {
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
         @Binding private var isPresented: Bool
-        
+
         init(_ view: MailComposerView) {
             _isPresented = view._isPresented
         }
-        
+
         public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
             isPresented = false
         }
     }
 
     typealias Attachment = (data: Data, mimeType: String, fileName: String)
-    
+
     static func canSendMail() -> Bool {
         MFMailComposeViewController.canSendMail()
     }
 
     @Binding var isPresented: Bool
-    
+
     let toRecipients: [String]
-    
+
     let subject: String
-    
+
     let messageBody: String
-    
+
     var attachments: [Attachment]?
-    
+
     func makeUIViewController(context: UIViewControllerRepresentableContext<MailComposerView>) -> MFMailComposeViewController {
         let vc = MFMailComposeViewController()
         vc.setToRecipients(toRecipients)
@@ -69,7 +69,7 @@ struct MailComposerView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: MFMailComposeViewController, context: UIViewControllerRepresentableContext<MailComposerView>) {
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }

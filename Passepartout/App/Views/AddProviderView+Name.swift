@@ -29,17 +29,17 @@ import PassepartoutLibrary
 extension AddProviderView {
     struct NameView: View {
         @ObservedObject private var profileManager: ProfileManager
-        
+
         @Binding private var profile: Profile
-        
+
         private let providerMetadata: ProviderMetadata
-        
+
         private let bindings: AddProfileView.Bindings
 
         @State private var viewModel = ViewModel()
-        
+
         @State private var isEnteringCredentials = false
-        
+
         init(
             profile: Binding<Profile>,
             providerMetadata: ProviderMetadata,
@@ -80,7 +80,7 @@ extension AddProviderView {
             }.alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
             .navigationTitle(providerMetadata.fullName)
         }
-        
+
         private var hiddenAccountLink: some View {
             NavigationLink("", isActive: $isEnteringCredentials) {
                 AddProfileView.AccountWrapperView(

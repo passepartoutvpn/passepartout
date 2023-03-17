@@ -78,7 +78,7 @@ extension EndpointAdvancedView.WireGuardView {
             }
         }
     }
-    
+
     private var mtuSection: some View {
         builder.mtu.map { mtu in
             Section {

@@ -30,7 +30,7 @@ extension ProviderProfileItem {
     @MainActor
     class ViewModel {
         let profile: LightProfile
-        
+
         private let providerManager: LightProviderManager
 
         private let vpnManager: LightVPNManager
@@ -41,10 +41,10 @@ extension ProviderProfileItem {
             self.profile = profile
             self.providerManager = providerManager
             self.vpnManager = vpnManager
-            
+
             vpnManager.addDelegate(self, withIdentifier: profile.id.uuidString)
         }
-        
+
         deinit {
             Task { @MainActor in
                 vpnManager.removeDelegate(withIdentifier: profile.id.uuidString)
@@ -65,15 +65,15 @@ extension ProviderProfileItem {
         var categories: [LightProviderCategory] {
             providerManager.categories(providerName, vpnProtocol: vpnProtocol)
         }
-        
+
         func isActiveCategory(_ category: LightProviderCategory) -> Bool {
             category.name == profile.providerServer?.categoryName
         }
-        
+
         @objc func connectTo() {
             vpnManager.connect(with: profile.id)
         }
-        
+
         @objc func disconnect() {
             vpnManager.disconnect()
         }
@@ -81,7 +81,7 @@ extension ProviderProfileItem {
         func downloadIfNeeded() {
             providerManager.downloadIfNeeded(providerName, vpnProtocol: vpnProtocol)
         }
-        
+
         func subscribe(_ block: @escaping (LightVPNStatus) -> Void) {
             didUpdate = block
         }

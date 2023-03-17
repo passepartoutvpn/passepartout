@@ -66,7 +66,7 @@ let package = Package(
         .target(
             name: "PassepartoutServices",
             dependencies: [
-                "PassepartoutUtils",
+                "PassepartoutUtils"
             ],
             resources: [
                 .copy("API")

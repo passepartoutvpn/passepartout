@@ -29,7 +29,7 @@ import PassepartoutLibrary
 extension OrganizerView {
     struct ProfilesList: View {
         @ObservedObject private var profileManager: ProfileManager
-        
+
         @Binding private var modalType: ModalType?
 
         init(modalType: Binding<ModalType?>) {
@@ -49,7 +49,7 @@ extension OrganizerView {
                 profileManager.currentProfileId = $0.id
             }
         }
-        
+
         private var mainView: some View {
             List {
                 if profileManager.hasProfiles {
@@ -69,7 +69,7 @@ extension OrganizerView {
                 }
             }.themeAnimation(on: profileManager.headers)
         }
-        
+
         private var profilesView: some View {
             ForEach(sortedProfiles, content: profileRow(forProfile:))
                 .onDelete(perform: removeProfiles)
@@ -91,7 +91,7 @@ extension OrganizerView {
                 ProfileContextMenu(header: profile.header)
             }
         }
-        
+
         private func profileLabel(forProfile profile: Profile) -> some View {
             ProfileRow(
                 profile: profile,
@@ -124,7 +124,7 @@ extension OrganizerView {
                 profileManager.removeProfiles(withIds: toDelete)
             }
         }
-        
+
         private func performMigrationsIfNeeded() {
             Task { @MainActor in
                 UpgradeManager.shared.doMigrations(profileManager)
@@ -140,13 +140,13 @@ extension OrganizerView {
         @ObservedObject private var currentVPNState: ObservableVPNState
 
         let header: Profile.Header
-        
+
         init(header: Profile.Header) {
             profileManager = .shared
             currentVPNState = .shared
             self.header = header
         }
-        
+
         var body: some View {
             if #available(iOS 16, *), isActiveProfileNotDisconnected {
                 reconnectButton
@@ -154,11 +154,11 @@ extension OrganizerView {
             duplicateButton
             deleteButton
         }
-        
+
         private var isActiveProfileNotDisconnected: Bool {
             profileManager.isActiveProfile(header.id) && currentVPNState.vpnStatus != .disconnected
         }
-        
+
         private var reconnectButton: some View {
             ProfileView.ReconnectButton()
         }

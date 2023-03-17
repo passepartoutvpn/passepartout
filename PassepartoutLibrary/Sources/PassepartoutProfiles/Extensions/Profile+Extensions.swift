@@ -36,13 +36,13 @@ extension Profile.Header {
             lastUpdate: lastUpdate
         )
     }
-    
+
     public func renamed(to newName: String) -> Self {
         var header = self
         header.name = newName
         return header
     }
-    
+
     public func renamedUniquely(withLastUpdate: Bool) -> Self {
         let suffix: String
         if withLastUpdate, let lastUpdate = lastUpdate {
@@ -71,7 +71,7 @@ extension Profile {
         profile.header = profile.header.renamed(to: newName)
         return profile
     }
-    
+
     public func renamedUniquely(withLastUpdate: Bool) -> Self {
         var profile = self
         profile.header = profile.header.renamedUniquely(withLastUpdate: withLastUpdate)

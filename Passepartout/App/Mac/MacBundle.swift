@@ -27,11 +27,11 @@ import Foundation
 
 class MacBundle {
     static let shared = MacBundle()
-    
+
     private var bridge: MacBridge!
-    
+
     private lazy var bridgeDelegate = MacBundleDelegate(bundle: self)
-    
+
     @MainActor
     func configure() {
         guard let bundleURL = Bundle.main.builtInPlugInsURL?.appendingPathComponent(Constants.Plugins.macBridgeName) else {
@@ -46,11 +46,11 @@ class MacBundle {
         bridge = bridgeClass.init()
         bridge.menu.delegate = bridgeDelegate
     }
-    
+
     var utils: MacUtils {
         bridge.utils
     }
-    
+
     var menu: MacMenu {
         bridge.menu
     }

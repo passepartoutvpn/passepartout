@@ -30,14 +30,14 @@ enum AddProfileView {
     struct Bindings {
         @Binding var isPresented: Bool
     }
-    
+
     struct ProfileNameSection: View {
         @Binding var profileName: String
-        
+
         let errorMessage: String?
-        
+
         let onCommit: () -> Void
-        
+
         var body: some View {
             Section {
                 TextField(L10n.Global.Placeholders.profileName, text: $profileName, onCommit: onCommit)
@@ -49,12 +49,12 @@ enum AddProfileView {
             }
         }
     }
-    
+
     struct ExistingProfilesSection: View {
         let headers: [Profile.Header]
-        
+
         @Binding var profileName: String
-        
+
         var body: some View {
             Section {
                 ForEach(headers, content: existingProfileButton)
@@ -62,7 +62,7 @@ enum AddProfileView {
                 Text(L10n.AddProfile.Shared.Views.Existing.header)
             }
         }
-        
+
         private func existingProfileButton(_ header: Profile.Header) -> some View {
             Button(header.name) {
                 profileName = header.name
@@ -74,11 +74,11 @@ enum AddProfileView {
         @ObservedObject private var profileManager: ProfileManager
 
         @Binding private var profile: Profile
-        
+
         private let bindings: AddProfileView.Bindings
 
         @State private var account = Profile.Account()
-        
+
         init(
             profile: Binding<Profile>,
             bindings: AddProfileView.Bindings
@@ -87,7 +87,7 @@ enum AddProfileView {
             _profile = profile
             self.bindings = bindings
         }
-        
+
         var body: some View {
             AccountView(
                 providerName: profile.header.providerName,

@@ -28,7 +28,7 @@ import AppKit
 
 class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     private let appURL = Constants.Launcher.appURL
-    
+
     private var isAppRunning: Bool {
         NSWorkspace.shared.runningApplications.contains {
             $0.bundleIdentifier == Constants.Launcher.appId
@@ -40,12 +40,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             NSApp.terminate(self)
             return
         }
-        
+
         let cfg = NSWorkspace.OpenConfiguration()
         cfg.hides = true
         cfg.activates = false
         cfg.addsToRecentItems = false
-        NSWorkspace.shared.openApplication(at: appURL, configuration: cfg) { app, error in
+        NSWorkspace.shared.openApplication(at: appURL, configuration: cfg) { _, error in
             if let error = error {
                 NSLog("Unable to launch main app: \(error)")
                 return

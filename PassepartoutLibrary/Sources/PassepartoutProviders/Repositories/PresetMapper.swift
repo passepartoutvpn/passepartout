@@ -32,7 +32,7 @@ import GenericJSON
 
 struct PresetMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
@@ -51,7 +51,7 @@ struct PresetMapper: DTOMapper, ModelMapper {
         }
         return preset
     }
-    
+
     static func toModel(_ dto: CDInfrastructurePreset) -> ProviderServer.Preset? {
         guard let id = dto.id,
               let name = dto.name,
@@ -78,7 +78,7 @@ private extension WSProviderPreset {
     var encodedOpenVPNConfiguration: Data? {
         return try? jsonOpenVPNConfiguration?.encoded()
     }
-    
+
     var encodedWireGuardConfiguration: Data? {
         return try? jsonWireGuardConfiguration?.encoded()
     }

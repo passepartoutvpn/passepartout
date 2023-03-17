@@ -36,21 +36,21 @@ extension EndpointView {
         @ObservedObject private var currentProfile: ObservableProfile
 
         @Binding private var builder: OpenVPN.ConfigurationBuilder
-        
+
         @Binding private var customEndpoint: Endpoint?
-        
+
         private var isConfigurationReadonly: Bool {
             currentProfile.value.isProvider
         }
 
         @State private var isFirstAppearance = true
-        
+
         @State private var isAutomatic = false
 
         @State private var selectedSocketType: SocketType = .udp
-        
+
         @State private var selectedPort: UInt16 = 0
-        
+
         // XXX: do not escape mutating 'self', use constant providerManager
         init(currentProfile: ObservableProfile) {
             let providerManager: ProviderManager = .shared
@@ -104,7 +104,7 @@ extension EndpointView {
                 }
             }
         }
-        
+
         var body: some View {
             ScrollViewReader { scrollProxy in
                 List {
@@ -135,7 +135,7 @@ extension EndpointView.OpenVPNView {
             Toggle(L10n.Global.Strings.automatic, isOn: $isAutomatic.themeAnimation())
         }
     }
-    
+
     private var filtersSection: some View {
         Section {
             themeTextPicker(
@@ -162,7 +162,7 @@ extension EndpointView.OpenVPNView {
             Text(L10n.Global.Strings.addresses)
         }
     }
-    
+
     private var advancedSection: some View {
         Section {
             let caption = L10n.Endpoint.Advanced.title
@@ -175,7 +175,7 @@ extension EndpointView.OpenVPNView {
             }
         }
     }
-    
+
     private func button(forEndpoint endpoint: Endpoint?) -> some View {
         Button {
             customEndpoint = endpoint
@@ -265,7 +265,7 @@ extension EndpointView.OpenVPNView {
         }.map(\.proto.port))
         return Array(allPorts).sorted()
     }
-    
+
     private var filteredRemotes: [Endpoint]? {
         builder.remotes?.filter {
             $0.proto.socketType == selectedSocketType && $0.proto.port == selectedPort
