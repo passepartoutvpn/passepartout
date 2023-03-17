@@ -123,6 +123,7 @@ extension OpenVPN.ConfigurationBuilder {
             
             if isDNSEnabled {
                 dnsServers = settings.dnsServers?.filter { !$0.isEmpty }
+                dnsDomain = settings.dnsDomain
                 searchDomains = settings.dnsSearchDomains
             }
         }

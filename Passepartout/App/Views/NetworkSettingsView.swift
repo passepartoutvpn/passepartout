@@ -143,7 +143,8 @@ extension NetworkSettingsView {
         }
         if !settings.isAutomaticDNS && settings.dns.configurationType != .disabled {
             dnsManualServers
-            dnsManualDomains
+            dnsManualDomainRow
+            dnsManualSearchDomains
         }
     }
     
@@ -178,7 +179,12 @@ extension NetworkSettingsView {
         }
     }
     
-    private var dnsManualDomains: some View {
+    private var dnsManualDomainRow: some View {
+        TextField(L10n.Global.Strings.domain, text: $settings.dns.dnsDomain ?? "")
+            .themeValidDomainName(settings.dns.dnsDomain)
+    }
+
+    private var dnsManualSearchDomains: some View {
         Section {
             EditableTextList(
                 elements: $settings.dns.dnsSearchDomains ?? [],
