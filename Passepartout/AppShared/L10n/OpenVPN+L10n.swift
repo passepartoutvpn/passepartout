@@ -85,11 +85,8 @@ extension Optional where Wrapped == OpenVPN.TLSWrap {
     }
 }
 
-extension Optional where Wrapped == OpenVPN.XORMethod {
+extension OpenVPN.XORMethod {
     var localizedDescription: String {
-        guard let self = self else {
-            return L10n.Global.Strings.disabled
-        }
         switch self {
         case .xormask:
             return Unlocalized.OpenVPN.XOR.xormask.rawValue

@@ -141,13 +141,16 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption)
                         .withTrailingText($0.localizedDescription)
                 }
-//                Text(Unlocalized.VPN.xor)
-//                    .withTrailingText(settings.xor.localizedDescription)
-                themeLongContentLink(
-                    Unlocalized.VPN.xor,
-                    content: .constant(settings.xor.localizedLongDescription),
-                    withPreview: settings.xor.localizedDescription
-                )
+                if let xor = settings.xor {
+                    themeLongContentLink(
+                        Unlocalized.VPN.xor,
+                        content: .constant(xor.localizedLongDescription),
+                        withPreview: xor.localizedDescription
+                    )
+                } else {
+                    Text(Unlocalized.VPN.xor)
+                        .withTrailingText(L10n.Global.Strings.disabled)
+                }
             } header: {
                 Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
             }
@@ -168,13 +171,16 @@ extension EndpointAdvancedView.OpenVPNView {
                 values: OpenVPN.Digest.available,
                 description: \.localizedDescription
             )
-//            Text(Unlocalized.VPN.xor)
-//                .withTrailingText(builder.xorMethod.localizedDescription)
-            themeLongContentLink(
-                Unlocalized.VPN.xor,
-                content: .constant(builder.xorMethod.localizedLongDescription),
-                withPreview: builder.xorMethod.localizedDescription
-            )
+            if let xor = builder.xorMethod {
+                themeLongContentLink(
+                    Unlocalized.VPN.xor,
+                    content: .constant(xor.localizedLongDescription),
+                    withPreview: xor.localizedDescription
+                )
+            } else {
+                Text(Unlocalized.VPN.xor)
+                    .withTrailingText(L10n.Global.Strings.disabled)
+            }
         } header: {
             Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
         }
