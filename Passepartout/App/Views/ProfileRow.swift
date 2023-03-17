@@ -29,14 +29,29 @@ import PassepartoutLibrary
 struct ProfileRow: View {
     private let profile: Profile
     
-    @Binding private var interactiveProfile: Profile?
-    
     private let isActiveProfile: Bool
     
-    init(profile: Profile, interactiveProfile: Binding<Profile?>, isActiveProfile: Bool) {
+    @Binding private var modalType: OrganizerView.ModalType?
+
+    private var interactiveProfile: Binding<Profile?> {
+        .init {
+            if case .interactiveAccount(let profile) = modalType {
+                return profile
+            }
+            return nil
+        } set: {
+            if let profile = $0 {
+                modalType = .interactiveAccount(profile: profile)
+            } else {
+                modalType = nil
+            }
+        }
+    }
+
+    init(profile: Profile, isActiveProfile: Bool, modalType: Binding<OrganizerView.ModalType?>) {
         self.profile = profile
-        _interactiveProfile = interactiveProfile
         self.isActiveProfile = isActiveProfile
+        _modalType = modalType
     }
     
     var body: some View {
@@ -54,7 +69,7 @@ struct ProfileRow: View {
             Spacer()
             VPNToggle(
                 profile: profile,
-                interactiveProfile: $interactiveProfile,
+                interactiveProfile: interactiveProfile,
                 rateLimit: Constants.RateLimit.vpnToggle
             ).labelsHidden()
         }.padding([.top, .bottom], 10)

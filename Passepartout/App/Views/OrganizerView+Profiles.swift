@@ -30,12 +30,13 @@ extension OrganizerView {
     struct ProfilesList: View {
         @ObservedObject private var profileManager: ProfileManager
         
-        @State private var interactiveProfile: Profile?
+        @Binding private var modalType: ModalType?
 
-        init() {
+        init(modalType: Binding<ModalType?>) {
             profileManager = .shared
+            _modalType = modalType
         }
-        
+
         var body: some View {
             debugChanges()
             return Group {
@@ -46,10 +47,6 @@ extension OrganizerView {
             }.onAppear(perform: performMigrationsIfNeeded)
             .onReceive(profileManager.didCreateProfile) {
                 profileManager.currentProfileId = $0.id
-            }.sheet(item: $interactiveProfile) { profile in
-                NavigationView {
-                    InteractiveConnectionView(profile: profile)
-                }.themeGlobal()
             }
         }
         
@@ -98,8 +95,8 @@ extension OrganizerView {
         private func profileLabel(forProfile profile: Profile) -> some View {
             ProfileRow(
                 profile: profile,
-                interactiveProfile: $interactiveProfile,
-                isActiveProfile: profileManager.isActiveProfile(profile.id)
+                isActiveProfile: profileManager.isActiveProfile(profile.id),
+                modalType: $modalType
             )
         }
 
