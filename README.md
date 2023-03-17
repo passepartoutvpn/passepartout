@@ -124,7 +124,7 @@ To eventually test the app, open `Passepartout.xcodeproj` in Xcode and run the `
 
 ## License
 
-Copyright (c) 2022 Davide De Rosa. All rights reserved.
+Copyright (c) 2023 Davide De Rosa. All rights reserved.
 
 This project is licensed under the [GPLv3][license-content].
 
