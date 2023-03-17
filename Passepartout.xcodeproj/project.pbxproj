@@ -1047,6 +1047,7 @@
 				0E41BDA828671339006346B4 /* Embed Launcher */,
 				0E3152B7223F9EF500F61841 /* Embed Plugins */,
 				0EB2B14B2733FB6F007705AB /* Embed Foundation Extensions */,
+				0E1B5F5D29C5082700FE7D18 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1297,6 +1298,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0E1B5F5D29C5082700FE7D18 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		0EADDC7227F0677F0093E303 /* Copy Core Data codegen */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
