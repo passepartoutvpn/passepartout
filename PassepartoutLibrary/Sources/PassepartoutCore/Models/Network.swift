@@ -25,7 +25,6 @@
 
 import Foundation
 import TunnelKitCore
-import NetworkExtension
 
 public enum Network {
 }

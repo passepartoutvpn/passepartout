@@ -1,8 +1,8 @@
 //
-//  WrappedProfile.swift
+//  VPNConfigurationError.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/27/22.
+//  Created by Davide De Rosa on 3/7/22.
 //  Copyright (c) 2022 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,18 +24,6 @@
 //
 
 import Foundation
+import PassepartoutCore
 
-public protocol WrappedProfile {
-    var isLoading: Bool { get }
-    
-    var value: Profile { get }
-}
-
-extension WrappedProfile {
-    public var name: String {
-        guard !isLoading && !value.isPlaceholder else {
-            return ""
-        }
-        return value.header.name
-    }
-}
+public typealias VPNConfigurationError = (profile: Profile, error: Error)

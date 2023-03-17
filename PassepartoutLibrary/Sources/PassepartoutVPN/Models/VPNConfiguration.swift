@@ -28,6 +28,12 @@ import TunnelKitManager
 import NetworkExtension
 import PassepartoutCore
 
+public typealias VPNConfiguration = (neConfiguration: NetworkExtensionConfiguration, neExtra: NetworkExtensionExtra)
+
+protocol VPNConfigurationProviding {
+    func vpnConfiguration(_ parameters: VPNConfigurationParameters) throws -> VPNConfiguration
+}
+
 struct VPNConfigurationParameters {
     let title: String
     
@@ -62,8 +68,4 @@ struct VPNConfigurationParameters {
         self.withNetworkSettings = withNetworkSettings
         onDemandRules = profile.onDemandRules(withCustomRules: withCustomRules)
     }
-}
-
-protocol VPNConfigurationProviding {
-    func vpnConfiguration(_ parameters: VPNConfigurationParameters) throws -> VPNConfiguration
 }

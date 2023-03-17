@@ -26,10 +26,9 @@
 import Foundation
 import TunnelKitCore
 import TunnelKitManager
-import PassepartoutCore
 import PassepartoutUtils
 
-public class ObservableVPNState: WrappedVPNState, ObservableObject {
+public class ObservableVPNState: ObservableObject {
     @Published public internal(set) var isEnabled = false {
         didSet {
             pp_log.debug("VPN enabled -> \(isEnabled)")
