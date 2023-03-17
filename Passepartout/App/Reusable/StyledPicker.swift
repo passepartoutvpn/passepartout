@@ -27,15 +27,15 @@ import SwiftUI
 
 struct StyledPicker<T: Hashable, Label: View, Style: ListStyle>: View {
     let title: String
-    
+
     @Binding var selection: T
-    
+
     let values: [T]
 
     let pickerLabel: (T) -> Label
 
     let selectionLabel: (T) -> Label
-    
+
     let listStyle: () -> Style
 
     @State private var isPresented = false
@@ -49,7 +49,7 @@ struct StyledPicker<T: Hashable, Label: View, Style: ListStyle>: View {
             }
         }
     }
-    
+
     private func pickerView() -> some View {
         List {
             Section {

@@ -28,11 +28,11 @@ import Foundation
 @objc(LightVPNStatus)
 public enum LightVPNStatus: Int {
     case connecting
-    
+
     case connected
-    
+
     case disconnecting
-    
+
     case disconnected
 }
 
@@ -42,19 +42,19 @@ public protocol LightVPNManager {
     var isEnabled: Bool { get }
 
     var vpnStatus: LightVPNStatus { get }
-    
+
     func connect(with profileId: UUID)
-    
+
     func connect(with profileId: UUID, to serverId: String)
-    
+
     func disconnect()
-    
+
     func toggle()
-    
+
     func reconnect()
-    
+
     func addDelegate(_ delegate: LightVPNManagerDelegate, withIdentifier identifier: String)
-    
+
     func removeDelegate(withIdentifier identifier: String)
 }
 

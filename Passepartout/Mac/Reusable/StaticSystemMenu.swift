@@ -28,11 +28,11 @@ import AppKit
 
 struct StaticSystemMenu: SystemMenu {
     let children: [ItemGroup]
-    
+
     init(_ children: [ItemGroup]) {
         self.children = children
     }
-    
+
     var asMenu: NSMenu {
         let menu = NSMenu()
         if !children.isEmpty {

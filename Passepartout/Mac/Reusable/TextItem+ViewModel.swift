@@ -31,25 +31,25 @@ extension TextItem {
         let title: CurrentValueSubject<String, Never>
 
         let state: CurrentValueSubject<State, Never>
-        
+
         private let action: (() -> Void)?
-        
+
         var hasAction: Bool {
             action != nil
         }
-        
+
         private var subscriptions: Set<AnyCancellable> = []
-        
+
         init(_ title: String, state: State = .none, action: (() -> Void)? = nil) {
             self.title = CurrentValueSubject(title)
             self.state = CurrentValueSubject(state)
             self.action = action
         }
-        
+
         @objc func representedAction() {
             action?()
         }
-        
+
         func subscribeTitle(_ block: @escaping (String) -> Void) {
             title
                 .removeDuplicates()

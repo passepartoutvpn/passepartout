@@ -33,9 +33,9 @@ public struct WSProviderLocation: Codable {
     }
 
     public let countryCode: String
-    
+
     public let servers: [WSProviderServer]
-    
+
     public init(countryCode: String, servers: [WSProviderServer]) {
         self.countryCode = countryCode
         self.servers = servers

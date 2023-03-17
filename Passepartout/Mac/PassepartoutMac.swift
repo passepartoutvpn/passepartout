@@ -29,9 +29,9 @@ class PassepartoutMac: NSObject, MacBridge {
     required override init() {
         super.init()
     }
-    
+
     let utils: MacUtils = DefaultMacUtils()
-    
+
     @MainActor
     let menu: MacMenu = DefaultMacMenu()
 }

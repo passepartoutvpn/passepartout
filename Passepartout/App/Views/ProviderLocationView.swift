@@ -30,13 +30,13 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     @ObservedObject var providerManager: ProviderManager
 
     @ObservedObject private var currentProfile: ObservableProfile
-    
+
     var profile: Profile {
         currentProfile.value
     }
 
     private let isEditable: Bool
-    
+
     private var providerName: ProviderName {
         guard let name = currentProfile.value.header.providerName else {
             assertionFailure("Not a provider")
@@ -44,15 +44,15 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         }
         return name
     }
-    
+
     private var vpnProtocol: VPNProtocolType {
         currentProfile.value.currentVPNProtocol
     }
 
     @Binding private var selectedServer: ProviderServer?
-    
+
     @Binding private var favoriteLocationIds: Set<String>?
-    
+
     @AppStorage(AppPreference.isShowingFavorites.key) private var isShowingFavorites = false
 
     private var isShowingEmptyFavorites: Bool {
@@ -61,7 +61,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         }
         return favoriteLocationIds?.isEmpty ?? true
     }
-    
+
     // XXX: do not escape mutating 'self', use constant providerManager
     init(currentProfile: ObservableProfile, isEditable: Bool, isPresented: Binding<Bool>) {
         let providerManager: ProviderManager = .shared
@@ -69,7 +69,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         self.providerManager = providerManager
         self.currentProfile = currentProfile
         self.isEditable = isEditable
-        
+
         _selectedServer = .init {
             guard let serverId = currentProfile.value.providerServerId() else {
                 return nil
@@ -89,7 +89,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             currentProfile.value.setProviderFavoriteLocationIds($0)
         }
     }
-    
+
     var body: some View {
         debugChanges()
         return Group {
@@ -110,7 +110,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             }
         }.navigationTitle(L10n.Provider.Location.title)
     }
-    
+
     private var mainView: some View {
         // FIXME: layout, restore ScrollViewReader, but content inside it is not re-rendered on isShowingFavorites
 //        ScrollViewReader { scrollProxy in
@@ -129,7 +129,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     private var categoriesView: some View {
         ForEach(categories, content: categorySection)
     }
-    
+
     private func categorySection(_ category: ProviderCategory) -> some View {
         Section {
             ForEach(filteredLocations(for: category)) { location in
@@ -146,7 +146,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             !category.name.isEmpty ? Text(category.name) : nil
         }
     }
-    
+
     @ViewBuilder
     private func locationRow(_ location: ProviderLocation) -> some View {
         if let onlyServer = location.onlyServer {
@@ -155,7 +155,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             multipleServersRow(location)
         }
     }
-    
+
     private func multipleServersRow(_ location: ProviderLocation) -> some View {
         NavigationLink(destination: {
             ServerListView(
@@ -180,7 +180,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             )
         }
     }
-    
+
     private var emptyFavoritesSection: some View {
         Section {
         } footer: {
@@ -204,7 +204,7 @@ extension ProviderLocationView {
     private func server(withId serverId: String) -> ProviderServer? {
         providerManager.server(withId: serverId)
     }
-    
+
     private var categories: [ProviderCategory] {
         providerManager.categories(providerName, vpnProtocol: vpnProtocol)
             .filter {
@@ -223,11 +223,11 @@ extension ProviderLocationView {
         }
         return locations.sorted()
     }
-    
+
     private func isFavoriteLocation(_ location: ProviderLocation) -> Bool {
         favoriteLocationIds?.contains(location.id) ?? false
     }
-    
+
     private func toggleFavoriteLocation(_ location: ProviderLocation) {
         if !isFavoriteLocation(location) {
             if favoriteLocationIds == nil {
@@ -248,7 +248,7 @@ extension ProviderLocationView {
         let location: ProviderLocation
 
         let selectedLocationId: String?
-        
+
         var body: some View {
             HStack {
                 themeAssetsCountryImage(location.countryCode).asAssetImage
@@ -269,11 +269,11 @@ extension ProviderLocationView {
 
     struct ServerListView: View {
         @ObservedObject private var providerManager: ProviderManager
-        
+
         private let location: ProviderLocation
 
         @Binding private var selectedServer: ProviderServer?
-        
+
         init(location: ProviderLocation, selectedServer: Binding<ProviderServer?>) {
             providerManager = .shared
             self.location = location

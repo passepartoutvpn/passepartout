@@ -31,7 +31,7 @@ import PassepartoutUtils
 
 struct LocationMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
@@ -48,7 +48,7 @@ struct LocationMapper: DTOMapper, ModelMapper {
 
         return location
     }
-    
+
     static func toModel(_ dto: CDInfrastructureLocation) -> ProviderLocation? {
         guard let infrastructureDTO = dto.category?.infrastructure,
               let providerDTO = infrastructureDTO.provider,
@@ -61,14 +61,14 @@ struct LocationMapper: DTOMapper, ModelMapper {
             Utils.assertCoreDataDecodingFailed(#file, #function, #line)
             return nil
         }
-        
+
 //        var server: ProviderServer?
 //        if dto.servers?.count == 1, let serverDTO = dto.servers?.anyObject() as? CDInfrastructureServer {
 //            server = ServerMapper.toModel(serverDTO)
 //        }
         let servers = (dto.servers?.allObjects as? [CDInfrastructureServer])?
             .compactMap(ServerMapper.toModel)
-        
+
         return ProviderLocation(
             providerMetadata: providerMetadata,
             vpnProtocol: vpnProtocol,

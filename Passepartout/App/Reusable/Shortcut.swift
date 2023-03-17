@@ -28,11 +28,11 @@ import Intents
 
 struct Shortcut: Identifiable, Hashable, Comparable {
     let native: INVoiceShortcut
-    
+
     init(_ native: INVoiceShortcut) {
         self.native = native
     }
-    
+
     var id: UUID {
         native.identifier
     }
@@ -40,7 +40,7 @@ struct Shortcut: Identifiable, Hashable, Comparable {
     static func ==(lhs: Self, rhs: Self) -> Bool {
         lhs.phrase == rhs.phrase
     }
-    
+
     static func <(lhs: Self, rhs: Self) -> Bool {
         lhs.phrase < rhs.phrase
     }

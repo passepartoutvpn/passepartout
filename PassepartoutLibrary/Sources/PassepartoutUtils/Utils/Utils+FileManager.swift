@@ -34,7 +34,7 @@ extension FileManager {
         }
         return directory
     }
-    
+
 //    public func creationDate(of path: String) -> Date? {
 //        guard let attrs = try? attributesOfItem(atPath: path) else {
 //            return nil

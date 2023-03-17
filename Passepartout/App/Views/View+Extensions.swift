@@ -52,7 +52,7 @@ extension View {
             self
         }
     }
-    
+
     func withLeadingLabel(_ text: String, color: Color? = nil, image: String) -> some View {
         HStack {
             Label(text, image: image)
@@ -80,7 +80,7 @@ extension View {
             }
         }
     }
-    
+
     func withTrailingCheckmark(when condition: Bool) -> some View {
         HStack {
             self
@@ -91,7 +91,7 @@ extension View {
             }
         }
     }
-    
+
     func withTrailingProgress(when condition: Bool) -> some View {
         HStack {
             self
@@ -145,7 +145,7 @@ private extension View {
 }
 
 private struct HostingWindowFinder: UIViewRepresentable {
-    var callback: (UIWindow?) -> ()
+    var callback: (UIWindow?) -> Void
 
     func makeUIView(context: Context) -> UIView {
         let view = UIView()

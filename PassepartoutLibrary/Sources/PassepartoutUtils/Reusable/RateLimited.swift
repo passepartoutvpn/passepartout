@@ -27,7 +27,7 @@ import Foundation
 
 public protocol RateLimited: AnyObject {
     associatedtype ActionID: Hashable
-    
+
     var lastActionDate: [ActionID: Date] { get set }
 
     var rateLimitMilliseconds: Int? { get }
@@ -37,7 +37,7 @@ extension RateLimited {
     public func saveLastAction(_ id: ActionID) {
         lastActionDate[id] = Date()
     }
-    
+
     public func isRateLimited(_ id: ActionID) -> Bool {
         guard let lastActionDate = lastActionDate[id] else {
             return false

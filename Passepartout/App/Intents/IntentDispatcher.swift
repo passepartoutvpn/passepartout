@@ -30,19 +30,19 @@ import PassepartoutLibrary
 class IntentDispatcher {
     private struct Groups {
         static let vpn = "VPN"
-        
+
         static let trust = "Trust"
     }
-    
+
     // MARK: Intents
-    
+
     static func intentConnect(header: Profile.Header) -> ConnectVPNIntent {
         let intent = ConnectVPNIntent()
         intent.profileId = header.id.uuidString
         intent.profileName = header.name
         return intent
     }
-    
+
     static func intentMoveTo(header: Profile.Header, providerFullName: String, server: ProviderServer) -> MoveToLocationIntent {
         let intent = MoveToLocationIntent()
         intent.profileId = header.id.uuidString
@@ -51,33 +51,33 @@ class IntentDispatcher {
         intent.serverName = server.localizedLongDescription(withCategory: false)
         return intent
     }
-    
+
     static func intentEnable() -> EnableVPNIntent {
         EnableVPNIntent()
     }
-    
+
     static func intentDisable() -> DisableVPNIntent {
         DisableVPNIntent()
     }
-    
+
     static func intentTrustWiFi() -> TrustCurrentNetworkIntent {
         TrustCurrentNetworkIntent()
     }
-    
+
     static func intentUntrustWiFi() -> UntrustCurrentNetworkIntent {
         UntrustCurrentNetworkIntent()
     }
-    
+
     static func intentTrustCellular() -> TrustCellularNetworkIntent {
         TrustCellularNetworkIntent()
     }
-    
+
     static func intentUntrustCellular() -> UntrustCellularNetworkIntent {
         UntrustCellularNetworkIntent()
     }
 
     // MARK: Donations
-    
+
     static func donateConnection(with profile: Profile, providerManager: ProviderManager) {
         let genericIntent: INIntent
         if let providerName = profile.header.providerName {
@@ -93,24 +93,24 @@ class IntentDispatcher {
         } else {
             genericIntent = intentConnect(header: profile.header)
         }
-        
+
         let interaction = INInteraction(intent: genericIntent, response: nil)
         interaction.groupIdentifier = profile.id.uuidString
         interaction.donateAndLog()
     }
-    
+
     static func donateEnableVPN() {
         let interaction = INInteraction(intent: intentEnable(), response: nil)
         interaction.groupIdentifier = Groups.vpn
         interaction.donateAndLog()
     }
-    
+
     static func donateDisableVPN() {
         let interaction = INInteraction(intent: intentDisable(), response: nil)
         interaction.groupIdentifier = Groups.vpn
         interaction.donateAndLog()
     }
-    
+
     static func donateTrustCurrentNetwork() {
         let interaction = INInteraction(intent: intentTrustWiFi(), response: nil)
         interaction.groupIdentifier = Groups.trust
@@ -122,19 +122,19 @@ class IntentDispatcher {
         interaction.groupIdentifier = Groups.trust
         interaction.donateAndLog()
     }
-    
+
     static func donateTrustCellularNetwork() {
         let interaction = INInteraction(intent: intentTrustCellular(), response: nil)
         interaction.groupIdentifier = Groups.trust
         interaction.donateAndLog()
     }
-    
+
     static func donateUntrustCellularNetwork() {
         let interaction = INInteraction(intent: intentUntrustCellular(), response: nil)
         interaction.groupIdentifier = Groups.trust
         interaction.donateAndLog()
     }
-    
+
     static func forgetProfile(withHeader header: Profile.Header) {
         INInteraction.delete(with: header.id.uuidString) { (error) in
             if let error = error {

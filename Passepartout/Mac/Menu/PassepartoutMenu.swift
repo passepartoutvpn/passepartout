@@ -29,13 +29,13 @@ import AppKit
 @MainActor
 class PassepartoutMenu {
     private let macMenuDelegate: MacMenuDelegate
-    
+
     private let profileManager: LightProfileManager
-    
+
     private let providerManager: LightProviderManager
-    
+
     private let statusButton: StatusButton
-    
+
     init(macMenuDelegate: MacMenuDelegate) {
         self.macMenuDelegate = macMenuDelegate
         profileManager = macMenuDelegate.profileManager
@@ -47,16 +47,16 @@ class PassepartoutMenu {
 
         profileManager.delegate = self
         providerManager.delegate = self
-        
+
     }
-    
+
     func install() {
         statusButton.install(systemMenu: StaticSystemMenu(body))
     }
-    
+
     private var body: [ItemGroup] {
         var children: [ItemGroup] = []
-        
+
         children.append(contentsOf: [
             VisibilityItem(
                 L10n.Global.Strings.show,
@@ -65,7 +65,7 @@ class PassepartoutMenu {
             LaunchOnLoginItem(
                 L10n.Preferences.Items.LaunchesOnLogin.caption,
                 utils: macMenuDelegate.utils
-            ),
+            )
         ] as [ItemGroup])
 
         if profileManager.hasProfiles {
@@ -88,10 +88,10 @@ class PassepartoutMenu {
                     $0 ? L10n.Profile.Items.Vpn.TurnOff.caption : L10n.Profile.Items.Vpn.TurnOn.caption
                 } reconnectTitleBlock: {
                     L10n.Global.Strings.reconnect
-                },
+                }
             ] as [ItemGroup])
         }
-        
+
         children.append(contentsOf: [
             SeparatorItem(),
 //            TextItem(L10n.Menu.All.About.title(Constants.Global.appName)) {
@@ -104,7 +104,7 @@ class PassepartoutMenu {
                 NSApp.terminate(nil)
             }
         ] as [ItemGroup])
-        
+
         return children
     }
 }

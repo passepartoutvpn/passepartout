@@ -27,6 +27,6 @@ import Foundation
 
 public protocol Repository {
     associatedtype Context
-    
+
     init(_ context: Context)
 }

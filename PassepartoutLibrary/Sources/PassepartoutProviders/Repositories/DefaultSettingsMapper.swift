@@ -31,7 +31,7 @@ import PassepartoutUtils
 
 struct DefaultSettingsMapper: DTOMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }

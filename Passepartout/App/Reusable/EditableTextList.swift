@@ -38,21 +38,21 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
         onEditingChanged: (Bool) -> Void,
         onCommit: () -> Void
     )
-    
+
     @Binding var elements: [String]
 
     var allowsDuplicates = true
-    
+
     var mapping: ([IdentifiableString]) -> [IdentifiableString] = { $0 }
-    
+
     var onAdd: ((Binding<String>) -> Void)?
-    
+
     let textField: (FieldCallback) -> Field
 
     let addLabel: () -> ActionLabel
-    
+
     var commitLabel: (() -> ActionLabel)?
-    
+
     @State private var isLoaded = false
 
     @State private var identifiableElements: [IdentifiableString] = []
@@ -60,7 +60,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
     @State private var editedTextStrings: [UUID: String] = [:]
 
     private let addedUUID = UUID()
-    
+
     private var addedText: Binding<String> {
         .init {
             editedTextStrings[addedUUID] ?? ""
@@ -68,7 +68,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
             editedTextStrings[addedUUID] = $0
         }
     }
-    
+
     var body: some View {
         debugChanges()
         return Group {
@@ -87,7 +87,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
             }
         }.onChange(of: elements, perform: remapElements)
     }
-    
+
     private func existingRow(_ element: IdentifiableString) -> some View {
         let editedText = binding(toEditedElement: element)
 
@@ -100,7 +100,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
             replaceElement(at: element.id, with: editedText)
         }))
     }
-    
+
     private var newRow: some View {
         AddingTextField(
             onAdd: {
@@ -144,7 +144,7 @@ extension EditableTextList {
             identifiableElements = newIdentifiableElements
         }
     }
-    
+
     private func addElement() {
         guard allowsDuplicates || !identifiableElements.contains(where: {
             $0.string == addedText.wrappedValue
@@ -155,7 +155,7 @@ extension EditableTextList {
         identifiableElements.append(.init(string: addedText.wrappedValue))
         commit()
     }
-    
+
     private func binding(toEditedElement element: IdentifiableString) -> Binding<String> {
 //        print(">>> <-> \(element)")
         .init {
@@ -184,14 +184,14 @@ extension EditableTextList {
         }
         commit()
     }
-    
+
     private func onDelete(offsets: IndexSet) {
         var mapped = mapping(identifiableElements)
         mapped.remove(atOffsets: offsets)
         identifiableElements = mapped
         commit()
     }
-    
+
     private func onMove(indexSet: IndexSet, to: Int) {
         var mapped = mapping(identifiableElements)
         mapped.move(fromOffsets: indexSet, toOffset: to)

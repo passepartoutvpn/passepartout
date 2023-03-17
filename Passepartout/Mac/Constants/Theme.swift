@@ -52,7 +52,7 @@ extension LightVPNStatus {
         switch self {
         case .connected, .disconnected:
             resourceName = "StatusActive"
-            
+
         case .connecting, .disconnecting:
             resourceName = "StatusPending"
         }
@@ -61,12 +61,12 @@ extension LightVPNStatus {
         }
         return image
     }
-    
+
     var imageAlpha: Double {
         switch self {
         case .disconnected:
             return 0.5
-            
+
         default:
             return 1.0
         }

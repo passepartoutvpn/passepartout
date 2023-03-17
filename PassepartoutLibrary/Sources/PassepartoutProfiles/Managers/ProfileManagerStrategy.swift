@@ -29,11 +29,11 @@ import PassepartoutCore
 
 public protocol ProfileManagerStrategy {
     var allProfiles: [UUID: Profile] { get }
-    
+
     func profiles() -> [Profile]
-    
+
     func profile(withId: UUID) -> Profile?
-    
+
     func saveProfiles(_ profiles: [Profile])
 
     func removeProfiles(withIds ids: [UUID])

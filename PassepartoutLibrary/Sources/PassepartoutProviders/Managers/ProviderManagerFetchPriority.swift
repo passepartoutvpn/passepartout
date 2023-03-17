@@ -27,8 +27,8 @@ import Foundation
 
 public enum ProviderManagerFetchPriority {
     case bundle
-    
+
     case remote
-    
+
     case remoteThenBundle
 }

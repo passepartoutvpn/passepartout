@@ -29,11 +29,11 @@ import Combine
 
 public class FetchedValueHolder<V>: NSObject, ValueHolder, NSFetchedResultsControllerDelegate {
     @Published public var value: V
-    
+
     private let controller: NSFetchedResultsController<NSFetchRequestResult>
-    
+
     private let mapping: ([NSFetchRequestResult]) -> V?
-    
+
     public convenience init(
         context: NSManagedObjectContext,
         request: NSFetchRequest<NSFetchRequestResult>,
@@ -71,7 +71,7 @@ public class FetchedValueHolder<V>: NSObject, ValueHolder, NSFetchedResultsContr
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         mapResults()
     }
-    
+
     private func mapResults() {
         guard let results = controller.fetchedObjects else {
             return

@@ -35,11 +35,11 @@ extension VPNItemGroup {
         private let toggleTitleBlock: (Bool) -> String
 
         private let reconnectTitleBlock: () -> String
-        
+
         private var didUpdateState: [(Bool, LightVPNStatus) -> Void] = []
 
         private var subscriptions: Set<AnyCancellable> = []
-        
+
         init(
             vpnManager: LightVPNManager,
             toggleTitleBlock: @escaping (Bool) -> String,
@@ -48,28 +48,28 @@ extension VPNItemGroup {
             self.vpnManager = vpnManager
             self.toggleTitleBlock = toggleTitleBlock
             self.reconnectTitleBlock = reconnectTitleBlock
-            
+
             vpnManager.addDelegate(self, withIdentifier: "VPNItemGroup")
         }
-        
+
         deinit {
             Task { @MainActor in
                 vpnManager.removeDelegate(withIdentifier: "VPNItemGroup")
             }
         }
-        
+
         var toggleTitle: String {
             toggleTitleBlock(vpnManager.isEnabled)
         }
-        
+
         var reconnectTitle: String {
             reconnectTitleBlock()
         }
-        
+
         @objc func toggleVPN() {
             vpnManager.toggle()
         }
-        
+
         @objc func reconnectVPN() {
             vpnManager.reconnect()
         }

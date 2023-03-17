@@ -29,9 +29,9 @@ import IntentsUI
 
 struct IntentEditView: UIViewControllerRepresentable {
     let shortcut: Shortcut
-    
+
     let delegate: INUIEditVoiceShortcutViewControllerDelegate?
-    
+
     func makeUIViewController(context: UIViewControllerRepresentableContext<IntentEditView>) -> INUIEditVoiceShortcutViewController {
         let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut.native)
         vc.delegate = delegate

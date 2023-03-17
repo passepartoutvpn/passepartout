@@ -31,7 +31,7 @@ extension VisibilityItem {
     @MainActor
     class ViewModel {
         private let transformer: ObservableProcessTransformer
-        
+
         private let utils: LightUtils
 
         init(utils: LightUtils) {

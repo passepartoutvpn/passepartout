@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension CDInfrastructureDefaultSettings {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CDInfrastructureDefaultSettings> {
@@ -23,6 +22,6 @@ extension CDInfrastructureDefaultSettings {
 
 }
 
-extension CDInfrastructureDefaultSettings : Identifiable {
+extension CDInfrastructureDefaultSettings: Identifiable {
 
 }

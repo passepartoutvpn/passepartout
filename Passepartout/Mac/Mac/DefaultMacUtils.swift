@@ -28,9 +28,9 @@ import AppKit
 
 class DefaultMacUtils: MacUtils {
     private(set) lazy var isStartedByLauncher = NSApp.isHidden
-    
+
     private let transformer = ObservableProcessTransformer.shared
-    
+
     func sendAppToBackground() {
         transformer.sendToBackground()
     }

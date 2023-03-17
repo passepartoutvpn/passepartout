@@ -29,9 +29,9 @@ import IntentsUI
 
 struct IntentAddView: UIViewControllerRepresentable {
     let shortcut: INShortcut
-    
+
     let delegate: INUIAddVoiceShortcutViewControllerDelegate?
-    
+
     func makeUIViewController(context: UIViewControllerRepresentableContext<IntentAddView>) -> INUIAddVoiceShortcutViewController {
         let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
         vc.delegate = delegate

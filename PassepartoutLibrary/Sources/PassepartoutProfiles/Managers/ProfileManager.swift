@@ -35,19 +35,19 @@ public final class ProfileManager: ObservableObject {
     public typealias ProfileEx = (profile: Profile, isReady: Bool)
 
     // MARK: Initialization
-    
+
     private let store: KeyValueStore
-    
+
     private let providerManager: ProviderManager
-    
+
     let appGroup: String
-    
+
     let keychainLabel: (String, VPNProtocolType) -> String
-    
+
     let keychain: Keychain
-    
+
     private let strategy: ProfileManagerStrategy
-    
+
     // MARK: State
 
     @Published private var internalActiveProfileId: UUID? {
@@ -80,13 +80,13 @@ public final class ProfileManager: ObservableObject {
     }
 
     public let currentProfile: ObservableProfile
-    
+
     public let didUpdateProfiles = PassthroughSubject<Void, Never>()
 
     public let didUpdateActiveProfile = PassthroughSubject<UUID?, Never>()
 
     public let didCreateProfile = PassthroughSubject<Profile, Never>()
-    
+
     private var cancellables: Set<AnyCancellable> = []
 
     public init(
@@ -116,7 +116,7 @@ extension ProfileManager {
     private var allProfiles: [UUID: Profile] {
         strategy.allProfiles
     }
-    
+
     public var profiles: [Profile] {
         strategy.profiles()
     }
@@ -124,11 +124,11 @@ extension ProfileManager {
     public var headers: [Profile.Header] {
         Array(allProfiles.values.map(\.header))
     }
-    
+
     public func isExistingProfile(withId id: UUID) -> Bool {
         allProfiles[id] != nil
     }
-    
+
     public func isExistingProfile(withName name: String) -> Bool {
         allProfiles.contains {
             $0.value.header.name == name
@@ -200,7 +200,7 @@ extension ProfileManager {
             currentProfile.value = profile
         }
     }
-    
+
     public func removeProfiles(withIds ids: [UUID]) {
         pp_log.info("Deleting profiles with ids \(ids)")
 
@@ -212,13 +212,13 @@ extension ProfileManager {
         pp_log.info("\tDeleting from persistent store...")
         strategy.removeProfiles(withIds: ids)
     }
-    
+
     @available(*, deprecated, message: "only use for testing")
     public func removeAllProfiles() {
         let ids = Array(allProfiles.keys)
         removeProfiles(withIds: ids)
     }
-    
+
     public func duplicateProfile(withId id: UUID, setAsCurrent: Bool) {
         guard let source = liveProfile(withId: id) else {
             return
@@ -233,7 +233,7 @@ extension ProfileManager {
             if #available(iOS 15, *) {
                 internalCurrentProfileId = copy.id
             }
-            
+
             // autosaves copy if non-existing in persistent store
             setCurrentProfile(copy)
         } else {
@@ -313,13 +313,13 @@ extension ProfileManager {
                 self.willUpdateProfiles($0)
             }.store(in: &cancellables)
     }
-    
+
     private func willUpdateProfiles(_ newProfiles: [UUID: Profile]) {
         pp_log.debug("Profiles updated: \(newProfiles.values.map(\.header))")
         defer {
             objectWillChange.send()
         }
-        
+
         // IMPORTANT: invalidate current profile if deleted
         if !currentProfile.value.isPlaceholder && !newProfiles.keys.contains(currentProfile.value.id) {
             pp_log.info("\tCurrent profile deleted, invalidating...")
@@ -336,7 +336,7 @@ extension ProfileManager {
             pp_log.info("\tActive profile was deleted")
             self.activeProfileId = nil
         }
-        
+
         didUpdateProfiles.send()
 
         // IMPORTANT: defer task to avoid recursive saves (is non-main thread an issue?)
@@ -345,7 +345,7 @@ extension ProfileManager {
             fixDuplicateNames(in: newProfiles)
         }
     }
-    
+
     private func fixDuplicateNames(in newProfiles: [UUID: Profile]) {
         var allNames = newProfiles.values.map(\.header.name)
         let distinctNames = Set(allNames)
@@ -403,7 +403,7 @@ extension ProfileManager {
     public func makeProfileReady(_ profile: Profile) async throws {
         try await fetchProfileProviderIfMissing(profile)
     }
-    
+
     private func isProfileProviderAvailable(_ profile: Profile) -> Bool {
         guard let providerName = profile.header.providerName else {
             return true // host
@@ -464,7 +464,7 @@ extension ProfileManager {
 private extension ProfileManager {
     private enum StoreKey: String, KeyStoreDomainLocation {
         case activeProfileId
-        
+
         var domain: String {
             "Passepartout.ProfileManager"
         }

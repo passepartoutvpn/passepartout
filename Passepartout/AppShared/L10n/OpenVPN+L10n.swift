@@ -43,10 +43,10 @@ extension OpenVPN.CompressionFraming {
         switch self {
         case .disabled:
             return L10n.Global.Strings.disabled
-            
+
         case .compLZO:
             return Unlocalized.OpenVPN.compLZO
-            
+
         case .compress, .compressV2:
             return Unlocalized.OpenVPN.compress
         }
@@ -59,10 +59,10 @@ extension OpenVPN.CompressionAlgorithm {
         switch self {
         case .disabled:
             return L10n.Global.Strings.disabled
-            
+
         case .LZO:
             return Unlocalized.OpenVPN.lzo
-            
+
         case .other:
             return V.CompressionAlgorithm.Value.other
         }
@@ -90,26 +90,26 @@ extension OpenVPN.XORMethod {
         switch self {
         case .xormask:
             return Unlocalized.OpenVPN.XOR.xormask.rawValue
-            
+
         case .xorptrpos:
             return Unlocalized.OpenVPN.XOR.xorptrpos.rawValue
-            
+
         case .reverse:
             return Unlocalized.OpenVPN.XOR.reverse.rawValue
-            
+
         case .obfuscate:
             return Unlocalized.OpenVPN.XOR.obfuscate.rawValue
         }
     }
-    
+
     var localizedLongDescription: String {
         switch self {
         case .xormask(let mask):
             return "\(localizedDescription) \(mask.toHex())"
-            
+
         case .obfuscate(let mask):
             return "\(localizedDescription) \(mask.toHex())"
-            
+
         default:
             return localizedDescription
         }
@@ -139,7 +139,7 @@ extension Bool {
         let V = L10n.Global.Strings.self
         return self ? V.enabled : V.disabled
     }
-    
+
     var localizedDescriptionAsRandomizeHostnames: String {
         let V = L10n.Global.Strings.self
         return self ? V.enabled : V.disabled
@@ -151,10 +151,10 @@ extension OpenVPN.PullMask {
         switch self {
         case .routes:
             return L10n.Endpoint.Advanced.Openvpn.Items.Route.caption
-            
+
         case .dns:
             return Unlocalized.Network.dns
-            
+
         case .proxy:
             return L10n.Global.Strings.proxy
         }

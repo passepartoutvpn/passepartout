@@ -36,9 +36,9 @@ protocol VPNConfigurationProviding {
 
 struct VPNConfigurationParameters {
     let title: String
-    
+
     let appGroup: String
-    
+
     let preferences: VPNPreferences
 
     let networkSettings: Profile.NetworkSettings
@@ -46,9 +46,9 @@ struct VPNConfigurationParameters {
     let username: String?
 
     let passwordReference: Data?
-    
+
     let withNetworkSettings: Bool
-    
+
     let onDemandRules: [NEOnDemandRule]
 
     init(

@@ -34,7 +34,7 @@ extension LaunchOnLoginItem {
         let title: String
 
         let utils: LightUtils
-        
+
         var persistentlyLaunchesOnLogin: Bool {
             get {
                 launchesOnLogin
@@ -47,7 +47,7 @@ extension LaunchOnLoginItem {
                 objectWillChange.send()
             }
         }
-        
+
         private var launchesOnLogin: Bool {
             get {
                 utils.launchesOnLogin
@@ -56,18 +56,18 @@ extension LaunchOnLoginItem {
                 utils.launchesOnLogin = newValue
             }
         }
-        
+
         private var subscriptions: Set<AnyCancellable> = []
 
         init(_ title: String, utils: LightUtils) {
             self.title = title
             self.utils = utils
         }
-        
+
         @objc func toggleLaunchesOnLogin() {
             persistentlyLaunchesOnLogin.toggle()
         }
-        
+
         func subscribe(_ block: @escaping (Bool) -> Void) {
             objectWillChange
                 .sink {

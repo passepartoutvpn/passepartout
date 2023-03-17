@@ -28,18 +28,18 @@ import SwiftUI
 
 class DefaultLightUtils: LightUtils {
     private let app: UIApplication
-    
+
     init() {
         app = .shared
     }
-    
+
     @AppStorage(AppPreference.launchesOnLogin.key) var launchesOnLogin = false
 
     func requestScene() {
         guard app.connectedScenes.isEmpty else {
             return
         }
-        app.requestSceneSessionActivation(nil, userActivity: nil, options: nil) { error in
+        app.requestSceneSessionActivation(nil, userActivity: nil, options: nil) { _ in
             //
         }
     }

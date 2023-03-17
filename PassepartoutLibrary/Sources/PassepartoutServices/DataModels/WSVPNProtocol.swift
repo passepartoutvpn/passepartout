@@ -27,6 +27,6 @@ import Foundation
 
 public enum WSVPNProtocol: String, Codable {
     case openVPN = "ovpn"
-    
+
     case wireGuard = "wg"
 }

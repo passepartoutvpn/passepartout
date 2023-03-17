@@ -33,7 +33,7 @@ extension ProviderManager {
         }
         return profile.providerPreset(server)?.localizedDescription
     }
-    
+
     func localizedInfrastructureUpdate(forProfile profile: Profile) -> String? {
         guard let providerName = profile.header.providerName else {
             return nil

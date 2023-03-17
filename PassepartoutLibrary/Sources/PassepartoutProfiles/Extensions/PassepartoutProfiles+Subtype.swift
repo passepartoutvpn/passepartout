@@ -26,7 +26,6 @@
 import Foundation
 import PassepartoutCore
 import PassepartoutProviders
-import PassepartoutCore
 
 extension Profile {
     public var requiresCredentials: Bool {

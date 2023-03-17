@@ -27,6 +27,6 @@ import Foundation
 
 public enum CredentialsPurpose {
     case web
-    
+
     case specific
 }

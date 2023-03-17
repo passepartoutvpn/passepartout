@@ -27,7 +27,7 @@ import Foundation
 
 public enum VPNProtocolType: String, Codable {
     case openVPN = "ovpn"
-    
+
     case wireGuard = "wg"
 }
 
@@ -40,7 +40,7 @@ extension VPNProtocolType: CustomStringConvertible {
         switch self {
         case .openVPN:
             return "OpenVPN"
-    
+
         case .wireGuard:
             return "WireGuard"
         }

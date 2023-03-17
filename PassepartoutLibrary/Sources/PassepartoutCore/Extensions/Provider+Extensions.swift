@@ -31,7 +31,7 @@ extension Profile {
         guard let vpnProtocol = server.presets?.first?.vpnProtocol else {
             fatalError("Server has no presets")
         }
-        
+
         var provider = Provider(providerMetadata.name)
         var settings = Provider.Settings()
         settings.serverId = server.id
@@ -40,7 +40,7 @@ extension Profile {
 
         self.init(name: providerMetadata.fullName, provider: provider)
     }
-    
+
     public var providerName: String? {
         provider?.name
     }
@@ -70,11 +70,11 @@ extension Profile {
     public mutating func setProviderPreset(_ preset: ProviderServer.Preset) {
         provider?.vpnSettings[currentVPNProtocol]?.presetId = preset.id
     }
-    
+
     public func providerFavoriteLocationIds() -> Set<String>? {
         provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds
     }
-    
+
     public mutating func setProviderFavoriteLocationIds(_ ids: Set<String>?) {
         provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds = ids
     }
@@ -86,11 +86,11 @@ extension Profile {
     public mutating func setProviderCustomEndpoint(_ endpoint: Endpoint?) {
         provider?.vpnSettings[currentVPNProtocol]?.customEndpoint = endpoint
     }
-    
+
     public func providerAccount() -> Profile.Account? {
         provider?.vpnSettings[currentVPNProtocol]?.account
     }
-    
+
     public mutating func setProviderAccount(_ account: Profile.Account?) {
         provider?.vpnSettings[currentVPNProtocol]?.account = account
     }

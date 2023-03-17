@@ -47,22 +47,22 @@ extension Profile.OpenVPNSettings: DNSSettingsProviding {
     public var dnsProtocol: DNSProtocol? {
         (configuration.isDNSEnabled ?? true) ? .plain : nil
     }
-    
+
     // dhcp-option DNS
     public var dnsServers: [String]? {
         configuration.dnsServers
     }
-    
+
     // dhcp-option DOMAIN/DOMAIN-SEARCH
     public var dnsSearchDomains: [String]? {
         configuration.searchDomains
     }
-    
+
     // not a dhcp-option
     public var dnsHTTPSURL: URL? {
         nil
     }
-    
+
     // not a dhcp-option
     public var dnsTLSServerName: String? {
         nil
@@ -75,7 +75,7 @@ extension Profile.OpenVPNSettings: ProxySettingsProviding {
     public var proxyServer: Proxy? {
         configuration.httpsProxy ?? configuration.httpProxy
     }
-    
+
     // dhcp-option PROXY_BYPASS
     public var proxyBypassDomains: [String]? {
         configuration.proxyBypassDomains

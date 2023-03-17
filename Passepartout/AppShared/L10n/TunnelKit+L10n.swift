@@ -35,13 +35,13 @@ extension VPNStatus {
         switch self {
         case .connecting:
             return L10n.Tunnelkit.Vpn.connecting
-            
+
         case .connected:
             return L10n.Tunnelkit.Vpn.active
-            
+
         case .disconnecting:
             return L10n.Tunnelkit.Vpn.disconnecting
-            
+
         case .disconnected:
             return L10n.Tunnelkit.Vpn.inactive
         }
@@ -121,37 +121,37 @@ extension Error {
         }
         return localizedDescription
     }
-    
+
     private func ovpnErrorDescription(_ error: OpenVPNProviderError) -> String? {
         let V = L10n.Tunnelkit.Errors.Vpn.self
         switch error {
         case .socketActivity, .timeout:
             return V.timeout
-            
+
         case .dnsFailure:
             return V.dns
-            
+
         case .tlsInitialization, .tlsServerVerification, .tlsHandshake:
             return V.tls
-            
+
         case .authentication:
             return V.auth
-            
+
         case .encryptionInitialization, .encryptionData:
             return V.encryption
 
         case .serverCompression, .lzo:
             return V.compression
-            
+
         case .networkChanged:
             return V.network
-            
+
         case .routing:
             return V.routing
-            
+
         case .gatewayUnattainable:
             return V.gateway
-            
+
         case .serverShutdown:
             return V.shutdown
 
@@ -184,7 +184,7 @@ extension Error {
         pp_log.error("Could not parse configuration URL: \(localizedDescription)")
         return L10n.Tunnelkit.Errors.parsing(localizedDescription)
     }
-    
+
     private func ovpnErrorDescription(_ error: OpenVPN.ConfigurationError) -> String {
         let V = L10n.Tunnelkit.Errors.Openvpn.self
         switch error {
@@ -203,7 +203,7 @@ extension Error {
         case .missingConfiguration(let option):
             pp_log.error("Could not parse configuration URL: missing configuration, \(option)")
             return V.requiredOption(option)
-            
+
         case .unsupportedConfiguration(var option):
             if option.contains("external") {
                 option.append(" (see FAQ)")

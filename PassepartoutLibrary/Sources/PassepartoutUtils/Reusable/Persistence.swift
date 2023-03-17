@@ -29,11 +29,11 @@ import Combine
 
 public class Persistence {
     private let container: NSPersistentContainer
-    
+
     public var context: NSManagedObjectContext {
         container.viewContext
     }
-    
+
     public var coordinator: NSPersistentStoreCoordinator {
         container.persistentStoreCoordinator
     }
@@ -77,7 +77,7 @@ public class Persistence {
             container.viewContext.transactionAuthor = author
         }
     }
-    
+
     public var containerURLs: [URL]? {
         guard let url = container.persistentStoreDescriptions.first?.url else {
             return nil
@@ -88,7 +88,7 @@ public class Persistence {
             url.deletingPathExtension().appendingPathExtension("sqlite-wal")
         ]
     }
-    
+
 //    public func remoteChangesPublisher() -> AnyPublisher<Void, Never> {
 //        NotificationCenter.default.publisher(
 //            for: .NSPersistentStoreRemoteChange,

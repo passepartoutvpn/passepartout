@@ -27,11 +27,11 @@ import Foundation
 
 struct BuildProducts {
     private let productsAtBuild: (Int) -> [LocalProduct]
-    
+
     init(productsAtBuild: @escaping (Int) -> [LocalProduct]) {
         self.productsAtBuild = productsAtBuild
     }
-    
+
     func products(atBuild build: Int) -> [LocalProduct] {
         productsAtBuild(build)
     }

@@ -38,30 +38,30 @@ public struct WSProviderServer: Codable {
         case serverIndex = "num"
 
         case tags
-        
+
         case hostname
 
         case numericAddresses = "addrs"
     }
-    
+
     public let id: String
-    
+
     public let countryCode: String
-    
+
     public var extraCountryCodes: [String]?
 
     public var area: String?
 
     public var serverIndex: Int?
-    
+
     public var tags: [String]?
-    
+
 //    public var geo: (Double, Double)?
-    
+
     public var hostname: String?
-    
+
     public var numericAddresses: Set<UInt32>?
-    
+
     public init(id: String, countryCode: String) {
         self.id = id
         self.countryCode = countryCode

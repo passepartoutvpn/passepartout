@@ -30,11 +30,11 @@ import PassepartoutUtils
 
 struct ProfileMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
-    
+
     func toDTO(_ ws: Profile) throws -> CDProfile {
         let profile = ProfileHeaderMapper(context).toDTO(ws)
         do {
@@ -62,11 +62,11 @@ struct ProfileMapper: DTOMapper, ModelMapper {
 
 struct ProfileHeaderMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
-    
+
     func toDTO(_ ws: Profile) -> CDProfile {
         let profile = CDProfile(context: context)
         profile.uuid = ws.header.id
@@ -75,14 +75,14 @@ struct ProfileHeaderMapper: DTOMapper, ModelMapper {
         profile.lastUpdate = Date()
         return profile
     }
-    
+
     static func toModel(_ dto: CDProfile) -> Profile.Header? {
         guard let uuid = dto.uuid,
               let name = dto.name else {
 
             Utils.assertCoreDataDecodingFailed(#file, #function, #line)
             return nil
-        }        
+        }
         return Profile.Header(
             uuid: uuid,
             name: name,

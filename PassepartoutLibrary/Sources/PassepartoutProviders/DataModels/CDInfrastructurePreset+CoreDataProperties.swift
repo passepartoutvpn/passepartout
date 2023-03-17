@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension CDInfrastructurePreset {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CDInfrastructurePreset> {
@@ -43,6 +42,6 @@ extension CDInfrastructurePreset {
 
 }
 
-extension CDInfrastructurePreset : Identifiable {
+extension CDInfrastructurePreset: Identifiable {
 
 }

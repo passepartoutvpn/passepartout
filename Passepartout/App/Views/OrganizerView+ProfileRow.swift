@@ -29,11 +29,11 @@ import PassepartoutLibrary
 extension OrganizerView {
     struct ProfileRow: View {
         private let profile: Profile
-        
+
         private let isActiveProfile: Bool
-        
+
         @Binding private var modalType: ModalType?
-        
+
         private var interactiveProfile: Binding<Profile?> {
             .init {
                 if case .interactiveAccount(let profile) = modalType {
@@ -48,13 +48,13 @@ extension OrganizerView {
                 }
             }
         }
-        
+
         init(profile: Profile, isActiveProfile: Bool, modalType: Binding<ModalType?>) {
             self.profile = profile
             self.isActiveProfile = isActiveProfile
             _modalType = modalType
         }
-        
+
         var body: some View {
             debugChanges()
             return HStack {
@@ -62,7 +62,7 @@ extension OrganizerView {
                     Text(profile.header.name)
                         .font(.headline)
                         .themeLongTextStyle()
-                    
+
                     VPNStatusText(isActiveProfile: isActiveProfile)
                         .font(.subheadline)
                         .themeSecondaryTextStyle()

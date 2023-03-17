@@ -28,11 +28,11 @@ import PassepartoutLibrary
 
 struct EndpointView: View {
     @ObservedObject private var currentProfile: ObservableProfile
-    
+
     init(currentProfile: ObservableProfile) {
         self.currentProfile = currentProfile
     }
-    
+
     var body: some View {
         switch currentProfile.value.currentVPNProtocol {
         case .openVPN:

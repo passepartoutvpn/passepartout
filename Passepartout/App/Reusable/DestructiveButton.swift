@@ -27,9 +27,9 @@ import SwiftUI
 
 struct DestructiveButton<Label: View>: View {
     let action: () -> Void
-    
+
     let label: () -> Label
-    
+
     var body: some View {
         if #available(iOS 15, *) {
             Button(role: .destructive, action: action, label: label)

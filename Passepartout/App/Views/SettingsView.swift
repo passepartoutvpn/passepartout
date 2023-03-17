@@ -30,9 +30,9 @@ struct SettingsView: View {
     @ObservedObject private var profileManager: ProfileManager
 
     @ObservedObject private var productManager: ProductManager
-    
+
     @Environment(\.presentationMode) private var presentationMode
-    
+
 //    private var isTestBuild: Bool {
 //        Constants.App.isBeta || Constants.InApp.appType == .beta
 //    }
@@ -45,7 +45,7 @@ struct SettingsView: View {
         profileManager = .shared
         productManager = .shared
     }
-    
+
     var body: some View {
         List {
             aboutSection
@@ -54,7 +54,7 @@ struct SettingsView: View {
         }.themeSecondaryView()
         .navigationTitle(L10n.Settings.title)
     }
-    
+
     private var aboutSection: some View {
         Section {
             NavigationLink {

@@ -27,7 +27,7 @@ import SwiftUI
 
 struct LongContentView: View {
     @Binding var content: String
-    
+
     var body: some View {
         TextEditor(text: $content)
             .font(.system(.body, design: .monospaced))
@@ -39,13 +39,13 @@ struct LongContentView: View {
 
 struct LongContentLink<Preview: View>: View {
     private let title: String
-    
+
     @Binding private var content: String
-    
+
     private let preview: String?
 
     private let previewLabel: ((String) -> Preview)?
-    
+
     init(
         _ title: String,
         content: Binding<String>,
@@ -57,7 +57,7 @@ struct LongContentLink<Preview: View>: View {
         self.preview = preview
         self.previewLabel = previewLabel
     }
-    
+
     var body: some View {
         NavigationLink {
             LongContentView(content: $content)

@@ -28,11 +28,11 @@ import Foundation
 extension Profile {
     public struct Header: Codable, Identifiable, Hashable {
         public let uuid: UUID
-        
+
         public var name: String
-        
+
         public let providerName: ProviderName?
-        
+
         public let lastUpdate: Date?
 
         public init(
@@ -46,15 +46,15 @@ extension Profile {
             self.providerName = providerName
             self.lastUpdate = lastUpdate ?? Date()
         }
-        
+
         // MARK: Hashable
-        
+
         public static func ==(lhs: Self, rhs: Self) -> Bool {
             lhs.uuid == rhs.uuid &&
             lhs.name == rhs.name &&
             lhs.providerName == rhs.providerName
         }
-        
+
         public func hash(into hasher: inout Hasher) {
             hasher.combine(uuid)
             hasher.combine(name)
@@ -62,7 +62,7 @@ extension Profile {
         }
 
         // MARK: Identifiable
-        
+
         public var id: UUID {
             uuid
         }

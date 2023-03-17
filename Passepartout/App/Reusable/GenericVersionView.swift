@@ -27,13 +27,13 @@ import SwiftUI
 
 struct GenericVersionView: View {
     let logoName: String
-    
+
     let appName: String
-    
+
     let versionString: String
-    
+
     let extraString: String?
-    
+
     var body: some View {
         ScrollView {
             Image(logoName)

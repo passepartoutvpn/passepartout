@@ -37,7 +37,7 @@ extension Publisher {
         try await withCheckedThrowingContinuation { continuation in
             var cancellable: AnyCancellable?
             var isResumed = false
-            
+
             cancellable = first()
                 .sink { result in
                     switch result {

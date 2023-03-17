@@ -50,7 +50,7 @@ extension VPNProtocolType {
     public var supportsGateway: Bool {
         true
     }
-    
+
     public var supportsDNS: Bool {
         true
     }

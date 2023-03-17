@@ -29,21 +29,21 @@ public struct WSProviderInfrastructure: Codable {
     public struct Defaults: Codable {
         enum CodingKeys: String, CodingKey {
             case usernamePlaceholder = "username"
-            
+
             case countryCode = "country"
         }
-        
+
         public let usernamePlaceholder: String?
 
         public let countryCode: String
     }
-    
+
     public let build: Int
-    
+
     public let name: WSProviderName
-    
+
     public let fullName: String
-    
+
     public let categories: [WSProviderCategory]
 
     public let presets: [WSProviderPreset]

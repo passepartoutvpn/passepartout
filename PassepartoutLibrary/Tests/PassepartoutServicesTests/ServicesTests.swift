@@ -33,7 +33,7 @@ class ServicesTests: XCTestCase {
     let wsLocal = DefaultWebServices.bundledServices(withVersion: "v5")
 
     let wsRemote = DefaultWebServices("v5", URL(string: "https://passepartoutvpn.app/api/")!, timeout: nil)
-    
+
     private var cancellables: Set<AnyCancellable> = []
 
     override func setUp() {

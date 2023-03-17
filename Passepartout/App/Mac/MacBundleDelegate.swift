@@ -27,17 +27,17 @@ import Foundation
 
 class MacBundleDelegate: MacMenuDelegate {
     private weak var bundle: MacBundle?
-    
+
     @MainActor
     var profileManager: LightProfileManager {
         DefaultLightProfileManager()
     }
-    
+
     @MainActor
     var providerManager: LightProviderManager {
         DefaultLightProviderManager()
     }
-    
+
     @MainActor
     var vpnManager: LightVPNManager {
         DefaultLightVPNManager()
@@ -46,7 +46,7 @@ class MacBundleDelegate: MacMenuDelegate {
     var utils: LightUtils {
         DefaultLightUtils()
     }
-    
+
     init(bundle: MacBundle?) {
         self.bundle = bundle
     }

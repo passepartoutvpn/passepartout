@@ -31,7 +31,7 @@ import PassepartoutUtils
 
 struct ServerMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
@@ -62,7 +62,7 @@ struct ServerMapper: DTOMapper, ModelMapper {
 
         return server
     }
-    
+
     static func toModel(_ dto: CDInfrastructureServer) -> ProviderServer? {
         guard let uniqueId = dto.uniqueId,
               let apiId = dto.apiId,
@@ -103,7 +103,7 @@ struct ServerMapper: DTOMapper, ModelMapper {
             presetIds: supportedPresetIds
         )
     }
-    
+
     static func toModelWithPresets(_ dto: CDInfrastructureServer) -> ProviderServer? {
         guard let server = toModel(dto),
               let categoryDTO = dto.category,
@@ -123,7 +123,7 @@ struct ServerMapper: DTOMapper, ModelMapper {
         let presets = presetDTOs
             .sorted()
             .compactMap(PresetMapper.toModel)
-        
+
         return server.withPresets(presets)
     }
 }
@@ -132,7 +132,7 @@ private extension WSProviderServer {
     var encodedExtraCountryCodes: String? {
         extraCountryCodes?.joined(separator: ",")
     }
-    
+
     var encodedTags: String? {
         tags?.joined(separator: ",")
     }
@@ -151,11 +151,11 @@ private extension CDInfrastructureServer {
     var decodedExtraCountryCodes: [String]? {
         extraCountryCodes?.components(separatedBy: ",")
     }
-    
+
     var decodedTags: [String]? {
         tags?.components(separatedBy: ",")
     }
-    
+
     var decodedIPAddresses: [String] {
         ipAddresses?.components(separatedBy: ",") ?? []
     }
