@@ -49,7 +49,6 @@ struct SettingsView: View {
     var body: some View {
         List {
             aboutSection
-            diagnosticsSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.themeSecondaryView()
@@ -73,21 +72,6 @@ struct SettingsView: View {
                 Spacer()
                 Text(versionString)
                 Spacer()
-            }
-        }
-    }
-    
-    private var diagnosticsSection: some View {
-        profileManager.activeProfile.map { profile in
-            Section {
-                NavigationLink {
-                    DiagnosticsView(
-                        vpnProtocol: profile.currentVPNProtocol,
-                        providerName: profile.header.providerName
-                    )
-                } label: {
-                    Text(L10n.Diagnostics.title)
-                }
             }
         }
     }

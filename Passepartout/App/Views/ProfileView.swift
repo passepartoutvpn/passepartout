@@ -101,6 +101,7 @@ struct ProfileView: View {
                     modalType: $modalType
                 )
                 ExtraSection(currentProfile: currentProfile)
+                DiagnosticsSection(currentProfile: currentProfile)
             } else {
                 ProgressView()
             }
@@ -148,6 +149,25 @@ struct ProfileView: View {
                     feature: .trustedNetworks
                 )
             }.themeGlobal()
+        }
+    }
+}
+
+extension ProfileView {
+    struct DiagnosticsSection: View {
+        @ObservedObject var currentProfile: ObservableProfile
+        
+        var body: some View {
+            Section {
+                NavigationLink {
+                    DiagnosticsView(
+                        vpnProtocol: currentProfile.value.currentVPNProtocol,
+                        providerName: currentProfile.value.header.providerName
+                    )
+                } label: {
+                    Text(L10n.Diagnostics.title)
+                }
+            }
         }
     }
 }
