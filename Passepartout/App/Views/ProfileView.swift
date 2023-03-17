@@ -101,6 +101,7 @@ struct ProfileView: View {
                     modalType: $modalType
                 )
                 ExtraSection(currentProfile: currentProfile)
+                DiagnosticsSection(currentProfile: currentProfile)
             } else {
                 ProgressView()
             }
