@@ -152,22 +152,3 @@ struct ProfileView: View {
         }
     }
 }
-
-extension ProfileView {
-    struct DiagnosticsSection: View {
-        @ObservedObject var currentProfile: ObservableProfile
-        
-        var body: some View {
-            Section {
-                NavigationLink {
-                    DiagnosticsView(
-                        vpnProtocol: currentProfile.value.currentVPNProtocol,
-                        providerName: currentProfile.value.header.providerName
-                    )
-                } label: {
-                    Text(L10n.Diagnostics.title)
-                }
-            }
-        }
-    }
-}
