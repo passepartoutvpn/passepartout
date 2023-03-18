@@ -41,16 +41,16 @@ extension Profile {
     public var account: Profile.Account {
         get {
             if isProvider {
-                return providerAccount() ?? .init()
+                return providerAccount ?? .init()
             } else {
-                return hostAccount() ?? .init()
+                return hostAccount ?? .init()
             }
         }
         set {
             if isProvider {
-                setProviderAccount(newValue)
+                providerAccount = newValue
             } else {
-                setHostAccount(newValue)
+                hostAccount = newValue
             }
         }
     }

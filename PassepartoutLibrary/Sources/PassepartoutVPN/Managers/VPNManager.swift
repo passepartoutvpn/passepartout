@@ -206,15 +206,15 @@ extension VPNManager {
         if newProfile.isProvider {
 
             // server changed?
-            if newProfile.providerServerId() != lastProfile.providerServerId() {
-                pp_log.info("Provider server changed: \(newProfile.providerServerId()?.description ?? "nil")")
+            if newProfile.providerServerId != lastProfile.providerServerId {
+                pp_log.info("Provider server changed: \(newProfile.providerServerId?.description ?? "nil")")
                 isHandled = true
                 shouldReconnect = notDisconnected
             }
 
             // endpoint changed?
-            else if newProfile.providerCustomEndpoint() != lastProfile.providerCustomEndpoint() {
-                pp_log.info("Provider endpoint changed: \(newProfile.providerCustomEndpoint()?.description ?? "automatic")")
+            else if newProfile.providerCustomEndpoint != lastProfile.providerCustomEndpoint {
+                pp_log.info("Provider endpoint changed: \(newProfile.providerCustomEndpoint?.description ?? "automatic")")
                 isHandled = true
                 shouldReconnect = notDisconnected
             }

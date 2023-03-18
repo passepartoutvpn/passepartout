@@ -71,7 +71,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         self.isEditable = isEditable
 
         _selectedServer = .init {
-            guard let serverId = currentProfile.value.providerServerId() else {
+            guard let serverId = currentProfile.value.providerServerId else {
                 return nil
             }
             return providerManager.server(withId: serverId)
@@ -84,9 +84,9 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             isPresented.wrappedValue = false
         }
         _favoriteLocationIds = .init {
-            currentProfile.value.providerFavoriteLocationIds()
+            currentProfile.value.providerFavoriteLocationIds
         } set: {
-            currentProfile.value.setProviderFavoriteLocationIds($0)
+            currentProfile.value.providerFavoriteLocationIds = $0
         }
     }
 

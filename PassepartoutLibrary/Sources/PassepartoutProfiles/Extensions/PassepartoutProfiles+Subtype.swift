@@ -39,7 +39,7 @@ extension Profile {
 
 extension Profile {
     public func providerServer(_ providerManager: ProviderManager) -> ProviderServer? {
-        guard let serverId = providerServerId() else {
+        guard let serverId = providerServerId else {
             return nil
         }
         return providerManager.server(withId: serverId)
@@ -68,8 +68,8 @@ extension Profile {
         // apply provider settings (username, custom endpoint)
         let cfg = builder.build()
         var settings = OpenVPNSettings(configuration: cfg)
-        settings.account = providerAccount()
-        settings.customEndpoint = providerCustomEndpoint()
+        settings.account = providerAccount
+        settings.customEndpoint = providerCustomEndpoint
         return settings
     }
 

@@ -77,7 +77,7 @@ class DefaultLightProfileManager: LightProfileManager {
                 $0.header < $1.header
             }.map {
                 let server: ProviderServer?
-                if let serverId = $0.providerServerId() {
+                if let serverId = $0.providerServerId {
                     server = providerManager.server(withId: serverId)
                 } else {
                     server = nil
