@@ -75,9 +75,7 @@ extension ProfileView {
             } header: {
                 currentProviderFullName.map(Text.init)
             } footer: {
-                if !(currentProfile.value.providerRandomizesServer ?? false) {
-                    currentProviderServerDescription.map(Text.init)
-                }
+                currentProviderServerDescription.map(Text.init)
             }
             Section {
                 Toggle(
@@ -121,7 +119,14 @@ extension ProfileView {
         }
 
         private var currentProviderServerDescription: String? {
-            profile.providerServer(providerManager)?.localizedLongDescription(withCategory: true)
+            guard let server = profile.providerServer(providerManager) else {
+                return nil
+            }
+            if currentProfile.value.providerRandomizesServer ?? false {
+                return server.localizedCountry(withCategory: true)
+            } else {
+                return server.localizedLongDescription(withCategory: true)
+            }
         }
 
         private var currentProviderCountryImage: Image? {

@@ -70,6 +70,14 @@ extension ProviderServer {
         countryCode.localizedAsCountryCode
     }
 
+    func localizedCountry(withCategory: Bool) -> String {
+        let desc = localizedCountry
+        if withCategory, !categoryName.isEmpty {
+            return "\(categoryName.uppercased()): \(desc)"
+        }
+        return desc
+    }
+
     var localizedShortDescription: String? {
         var comps = localizedName.map { [$0] } ?? []
         if let serverIndex = serverIndex {
