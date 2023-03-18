@@ -75,7 +75,21 @@ extension ProfileView {
             } header: {
                 currentProviderFullName.map(Text.init)
             } footer: {
-                currentProviderServerDescription.map(Text.init)
+                if !(currentProfile.value.providerRandomizesServer ?? false) {
+                    currentProviderServerDescription.map(Text.init)
+                }
+            }
+            Section {
+                Toggle(
+                    L10n.Profile.Items.RandomizesServer.caption,
+                    isOn: $currentProfile.value.providerRandomizesServer ?? false
+                )
+                Toggle(
+                    L10n.Profile.Items.VpnResolvesHostname.caption,
+                    isOn: $currentProfile.value.networkSettings.resolvesHostname
+                )
+            } footer: {
+                Text(L10n.Profile.Sections.VpnResolvesHostname.footer)
             }
             Section {
                 NavigationLink {

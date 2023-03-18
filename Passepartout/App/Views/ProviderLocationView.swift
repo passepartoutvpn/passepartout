@@ -151,6 +151,8 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     private func locationRow(_ location: ProviderLocation) -> some View {
         if let onlyServer = location.onlyServer {
             singleServerRow(location, onlyServer)
+        } else if profile.providerRandomizesServer ?? false {
+            singleServerRow(location, nil)
         } else {
             multipleServersRow(location)
         }
@@ -170,9 +172,9 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         })
     }
 
-    private func singleServerRow(_ location: ProviderLocation, _ server: ProviderServer) -> some View {
+    private func singleServerRow(_ location: ProviderLocation, _ server: ProviderServer?) -> some View {
         Button {
-            selectedServer = server
+            selectedServer = server ?? location.servers?.randomElement()
         } label: {
             LocationRow(
                 location: location,
