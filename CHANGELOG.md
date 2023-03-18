@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prompt for password interactively. [#3](https://github.com/passepartoutvpn/passepartout-apple/issues/3)
 - Ukranian translations (Dmitry Chirkin). [#243](https://github.com/passepartoutvpn/passepartout-apple/pull/243)
 - Restore DNS "Domain" setting. [#260](https://github.com/passepartoutvpn/passepartout-apple/pull/260)
+- WireGuard: DoH/DoT options. [#264](https://github.com/passepartoutvpn/passepartout-apple/pull/264)
 - OpenVPN: Full implementation of Tunnelblick XOR patch (tmthecoder). [#245](https://github.com/passepartoutvpn/passepartout-apple/pull/245), [tunnelkit#255][https://github.com/passepartoutvpn/tunnelkit/pull/255]
 
 ### Changed
