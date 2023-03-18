@@ -97,6 +97,15 @@ extension Profile {
             provider?.vpnSettings[currentVPNProtocol]?.account = newValue
         }
     }
+
+    public var providerRandomizesServer: Bool? {
+        get {
+            provider?.randomizesServer
+        }
+        set {
+            provider?.randomizesServer = newValue
+        }
+    }
 }
 
 extension Profile.Provider: ProfileSubtype {

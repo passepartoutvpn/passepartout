@@ -47,6 +47,8 @@ extension Profile {
 
         public var vpnSettings: [VPNProtocolType: Settings] = [:]
 
+        public var randomizesServer: Bool?
+
         public init(_ name: ProviderName) {
             self.name = name
         }

@@ -51,8 +51,20 @@ extension Profile {
         }
 
         // infer remotes from preset + server
-        guard let server = providerServer(providerManager) else {
+        guard let selectedServer = providerServer(providerManager) else {
             throw PassepartoutError.missingProviderServer
+        }
+        let server: ProviderServer
+        if providerRandomizesServer ?? false {
+            let location = selectedServer.location(withVPNProtocol: currentVPNProtocol)
+            let servers = providerManager.servers(forLocation: location)
+            guard let randomServerId = servers.randomElement()?.id,
+                  let randomServer = providerManager.server(withId: randomServerId) else {
+                throw PassepartoutError.missingProviderServer
+            }
+            server = randomServer
+        } else {
+            server = selectedServer
         }
         guard let preset = providerPreset(server) else {
             throw PassepartoutError.missingProviderPreset
