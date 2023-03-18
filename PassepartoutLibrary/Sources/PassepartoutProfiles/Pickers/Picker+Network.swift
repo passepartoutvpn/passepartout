@@ -34,7 +34,7 @@ extension Network.DNSSettings {
             return [.plain, .https, .tls, .disabled]
 
         case .wireGuard:
-            return [.plain, .disabled]
+            return [.plain, .https, .tls, .disabled]
         }
     }
 }

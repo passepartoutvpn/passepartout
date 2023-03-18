@@ -104,12 +104,15 @@ extension WireGuard.ConfigurationBuilder {
                 }
                 dnsSearchDomains = allDomains.filter { !$0.isEmpty }
 
+            case .https:
+                dnsHTTPSURL = settings.dnsHTTPSURL
+
+            case .tls:
+                dnsTLSServerName = settings.dnsTLSServerName
+
             case .disabled:
                 dnsServers = []
                 dnsSearchDomains = []
-
-            default:
-                fatalError("Invalid DNS configuration for WireGuard: \(settings.configurationType)")
             }
         }
     }
