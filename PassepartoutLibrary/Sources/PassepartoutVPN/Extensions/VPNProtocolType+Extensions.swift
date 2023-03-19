@@ -29,7 +29,7 @@ import TunnelKitWireGuard
 import PassepartoutCore
 
 extension VPNProtocolType: Comparable {
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.description < rhs.description
     }
 }

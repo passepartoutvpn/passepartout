@@ -96,7 +96,7 @@ public final class ProfileManager: ObservableObject {
         keychainLabel: @escaping (String, VPNProtocolType) -> String,
         strategy: ProfileManagerStrategy
     ) {
-        guard let _ = UserDefaults(suiteName: appGroup) else {
+        guard UserDefaults(suiteName: appGroup) != nil else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
         self.store = store

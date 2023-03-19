@@ -26,17 +26,17 @@
 import Foundation
 
 public protocol DTOMapper {
-    associatedtype WS
+    associatedtype WSEntity
 
-    associatedtype DTO
+    associatedtype DTOEntity
 
-    func toDTO(_ ws: WS) throws -> DTO
+    func toDTO(_ ws: WSEntity) throws -> DTOEntity
 }
 
 public protocol ModelMapper {
-    associatedtype DTO
+    associatedtype DTOEntity
 
     associatedtype Model
 
-    static func toModel(_ dto: DTO) throws -> Model
+    static func toModel(_ dto: DTOEntity) throws -> Model
 }

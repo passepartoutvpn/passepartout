@@ -32,7 +32,7 @@ public struct PassepartoutError: Error, Equatable {
         self.string = string
     }
 
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.string == rhs.string
     }
 }

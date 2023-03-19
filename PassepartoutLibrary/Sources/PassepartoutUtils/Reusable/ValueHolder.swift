@@ -26,7 +26,7 @@
 import Foundation
 
 public protocol ValueHolder {
-    associatedtype T
+    associatedtype ValueType
 
-    var value: T { get }
+    var value: ValueType { get }
 }

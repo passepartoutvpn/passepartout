@@ -26,7 +26,7 @@
 import Foundation
 
 public protocol StrippableContent {
-    associatedtype T
+    associatedtype ContentType
 
-    var stripped: T { get }
+    var stripped: ContentType { get }
 }

@@ -49,7 +49,7 @@ extension Profile {
 
         // MARK: Hashable
 
-        public static func ==(lhs: Self, rhs: Self) -> Bool {
+        public static func == (lhs: Self, rhs: Self) -> Bool {
             lhs.uuid == rhs.uuid &&
             lhs.name == rhs.name &&
             lhs.providerName == rhs.providerName
