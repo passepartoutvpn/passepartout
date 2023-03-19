@@ -1,0 +1,10 @@
+included:
+  - Passepartout
+disabled_rules:
+  - force_cast
+  - identifier_name
+  - line_length
+  - nesting
+  - todo
+file_length:
+  - 500
