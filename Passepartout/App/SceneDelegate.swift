@@ -1,5 +1,5 @@
 //
-//  PassepartoutSceneDelegate.swift
+//  SceneDelegate.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/19/23.
@@ -26,7 +26,7 @@
 import SwiftUI
 import PassepartoutLibrary
 
-class PassepartoutSceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         #if targetEnvironment(macCatalyst)
         MacBundle.shared.utils.sendAppToBackground()
@@ -39,7 +39,7 @@ class PassepartoutSceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
-private extension PassepartoutSceneDelegate {
+private extension SceneDelegate {
     enum ShortcutType: String {
         case enableVPN
 

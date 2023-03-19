@@ -42,8 +42,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     }
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        let sceneConfiguration = UISceneConfiguration(name: "PassepartoutSceneDelegate", sessionRole: connectingSceneSession.role)
-        sceneConfiguration.delegateClass = PassepartoutSceneDelegate.self
+        let sceneConfiguration = UISceneConfiguration(name: "SceneDelegate", sessionRole: connectingSceneSession.role)
+        sceneConfiguration.delegateClass = SceneDelegate.self
         return sceneConfiguration
     }
 }
