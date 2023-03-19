@@ -50,7 +50,7 @@ extension OnDemandView {
                 .sorted { $0.string.lowercased() < $1.string.lowercased() }
         }
 
-        private func ssidRow(callback: EditableTextList.FieldCallback) -> some View {
+        private func ssidRow(callback: EditableTextFieldCallback) -> some View {
             Group {
                 if callback.isNewElement {
                     ssidField(callback: callback)
@@ -62,7 +62,7 @@ extension OnDemandView {
             }
         }
 
-        private func ssidField(callback: EditableTextList.FieldCallback) -> some View {
+        private func ssidField(callback: EditableTextFieldCallback) -> some View {
             TextField(
                 Unlocalized.Network.ssid,
                 text: callback.text,
