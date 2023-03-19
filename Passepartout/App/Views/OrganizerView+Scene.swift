@@ -84,9 +84,6 @@ extension OrganizerView {
             switch phase {
             case .background:
                 persist()
-                #if targetEnvironment(macCatalyst)
-                MacBundle.shared.utils.sendAppToBackground()
-                #endif
 
             default:
                 break

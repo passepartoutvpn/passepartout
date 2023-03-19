@@ -25,6 +25,7 @@
 
 import Foundation
 import UIKit
+import PassepartoutLibrary
 
 class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
     private let mac = MacBundle.shared
@@ -38,5 +39,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         }
         #endif
         return true
+    }
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let sceneConfiguration = UISceneConfiguration(name: "PassepartoutSceneDelegate", sessionRole: connectingSceneSession.role)
+        sceneConfiguration.delegateClass = PassepartoutSceneDelegate.self
+        return sceneConfiguration
     }
 }
