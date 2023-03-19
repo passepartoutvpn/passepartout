@@ -418,14 +418,8 @@ extension View {
     }
 
     func themeSaveButtonLabel() -> some View {
-//        themeCheckmarkImage.asSystemImage
         Text(L10n.Global.Strings.save)
     }
-
-//    func themeDoneButtonLabel() -> some View {
-////        themeCheckmarkImage.asSystemImage
-//        Text(L10n.Global.Strings.ok)
-//    }
 
     func themeTextPicker<T: Hashable>(_ title: String, selection: Binding<T>, values: [T], description: @escaping (T) -> String) -> some View {
         StyledPicker(title: title, selection: selection, values: values) {

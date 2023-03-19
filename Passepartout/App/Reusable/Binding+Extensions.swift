@@ -25,7 +25,7 @@
 
 import SwiftUI
 
-func ??<T>(lhs: Binding<T?>, rhs: T) -> Binding<T> {
+func ?? <T>(lhs: Binding<T?>, rhs: T) -> Binding<T> {
     Binding {
         lhs.wrappedValue ?? rhs
     } set: {
