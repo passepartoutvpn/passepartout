@@ -1,3 +1,16 @@
+### Added
+
+- Prompt for password interactively.
+- Ukranian translations (Dmitry Chirkin).
+- Restore DNS "Domain" setting.
+- OpenVPN: Full implementation of Tunnelblick XOR patch (tmthecoder).
+- WireGuard: DoH/DoT options.
+
+### Changed
+
+- Bump targets to iOS 15 / macOS 12.
+- Move Diagnostics view to Profile bottom.
+
 ### Fixed
 
 - Improve kill switch behavior.
