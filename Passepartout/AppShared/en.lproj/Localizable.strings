@@ -152,6 +152,7 @@
 "profile.items.vpn.turn_off.caption" = "Disable VPN";
 "profile.items.connection_status.caption" = "Status";
 "profile.items.data_count.caption" = "Exchanged data";
+"profile.items.randomizes_server.caption" = "Randomize server";
 "profile.items.provider.refresh.caption" = "Refresh infrastructure";
 "profile.items.category.caption" = "Category";
 "profile.items.only_shows_favorites.caption" = "Only show favorite locations";

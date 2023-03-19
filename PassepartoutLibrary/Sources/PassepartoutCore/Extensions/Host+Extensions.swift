@@ -27,23 +27,24 @@ import Foundation
 import TunnelKitCore
 
 extension Profile {
-    public func hostAccount() -> Profile.Account? {
-        switch currentVPNProtocol {
-        case .openVPN:
-            return host?.ovpnSettings?.account
+    public var hostAccount: Profile.Account? {
+        get {
+            switch currentVPNProtocol {
+            case .openVPN:
+                return host?.ovpnSettings?.account
 
-        case .wireGuard:
-            return nil
+            case .wireGuard:
+                return nil
+            }
         }
-    }
+        set {
+            switch currentVPNProtocol {
+            case .openVPN:
+                host?.ovpnSettings?.account = newValue
 
-    public mutating func setHostAccount(_ account: Profile.Account?) {
-        switch currentVPNProtocol {
-        case .openVPN:
-            host?.ovpnSettings?.account = account
-
-        case .wireGuard:
-            break
+            case .wireGuard:
+                break
+            }
         }
     }
 

@@ -92,13 +92,13 @@ extension EndpointView {
             }
             _customEndpoint = .init {
                 if currentProfile.value.isProvider {
-                    return currentProfile.value.providerCustomEndpoint()
+                    return currentProfile.value.providerCustomEndpoint
                 } else {
                     return currentProfile.value.hostOpenVPNSettings?.customEndpoint
                 }
             } set: {
                 if currentProfile.value.isProvider {
-                    currentProfile.value.setProviderCustomEndpoint($0)
+                    currentProfile.value.providerCustomEndpoint = $0
                 } else {
                     currentProfile.value.hostOpenVPNSettings?.customEndpoint = $0
                 }

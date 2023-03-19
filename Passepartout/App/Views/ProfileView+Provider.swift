@@ -78,6 +78,18 @@ extension ProfileView {
                 currentProviderServerDescription.map(Text.init)
             }
             Section {
+                Toggle(
+                    L10n.Profile.Items.RandomizesServer.caption,
+                    isOn: $currentProfile.value.providerRandomizesServer ?? false
+                )
+                Toggle(
+                    L10n.Profile.Items.VpnResolvesHostname.caption,
+                    isOn: $currentProfile.value.networkSettings.resolvesHostname
+                )
+            } footer: {
+                Text(L10n.Profile.Sections.VpnResolvesHostname.footer)
+            }
+            Section {
                 NavigationLink {
                     ProviderPresetView(currentProfile: currentProfile)
                 } label: {
@@ -107,7 +119,14 @@ extension ProfileView {
         }
 
         private var currentProviderServerDescription: String? {
-            profile.providerServer(providerManager)?.localizedLongDescription(withCategory: true)
+            guard let server = profile.providerServer(providerManager) else {
+                return nil
+            }
+            if currentProfile.value.providerRandomizesServer ?? false {
+                return server.localizedCountry(withCategory: true)
+            } else {
+                return server.localizedLongDescription(withCategory: true)
+            }
         }
 
         private var currentProviderCountryImage: Image? {

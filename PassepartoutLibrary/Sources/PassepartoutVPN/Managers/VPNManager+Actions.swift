@@ -85,7 +85,7 @@ extension VPNManager {
             try await profileManager.makeProfileReady(profile)
         }
 
-        let oldServerId = profile.providerServerId()
+        let oldServerId = profile.providerServerId
         guard let newServer = providerManager.server(withId: newServerId) else {
             pp_log.warning("Server \(newServerId) not found")
             throw PassepartoutError.missingProviderServer

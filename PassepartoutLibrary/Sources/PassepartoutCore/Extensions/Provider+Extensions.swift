@@ -45,7 +45,7 @@ extension Profile {
         provider?.name
     }
 
-    public func providerServerId() -> String? {
+    public var providerServerId: String? {
         provider?.vpnSettings[currentVPNProtocol]?.serverId
     }
 
@@ -71,28 +71,40 @@ extension Profile {
         provider?.vpnSettings[currentVPNProtocol]?.presetId = preset.id
     }
 
-    public func providerFavoriteLocationIds() -> Set<String>? {
-        provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds
+    public var providerFavoriteLocationIds: Set<String>? {
+        get {
+            provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds
+        }
+        set {
+            provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds = newValue
+        }
     }
 
-    public mutating func setProviderFavoriteLocationIds(_ ids: Set<String>?) {
-        provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds = ids
+    public var providerCustomEndpoint: Endpoint? {
+        get {
+            provider?.vpnSettings[currentVPNProtocol]?.customEndpoint
+        }
+        set {
+            provider?.vpnSettings[currentVPNProtocol]?.customEndpoint = newValue
+        }
     }
 
-    public func providerCustomEndpoint() -> Endpoint? {
-        provider?.vpnSettings[currentVPNProtocol]?.customEndpoint
+    public var providerAccount: Profile.Account? {
+        get {
+            provider?.vpnSettings[currentVPNProtocol]?.account
+        }
+        set {
+            provider?.vpnSettings[currentVPNProtocol]?.account = newValue
+        }
     }
 
-    public mutating func setProviderCustomEndpoint(_ endpoint: Endpoint?) {
-        provider?.vpnSettings[currentVPNProtocol]?.customEndpoint = endpoint
-    }
-
-    public func providerAccount() -> Profile.Account? {
-        provider?.vpnSettings[currentVPNProtocol]?.account
-    }
-
-    public mutating func setProviderAccount(_ account: Profile.Account?) {
-        provider?.vpnSettings[currentVPNProtocol]?.account = account
+    public var providerRandomizesServer: Bool? {
+        get {
+            provider?.randomizesServer
+        }
+        set {
+            provider?.randomizesServer = newValue
+        }
     }
 }
 

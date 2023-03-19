@@ -795,6 +795,10 @@ internal enum L10n {
           internal static let caption = L10n.tr("Localizable", "profile.items.provider.refresh.caption", fallback: "Refresh infrastructure")
         }
       }
+      internal enum RandomizesServer {
+        /// Randomize server
+        internal static let caption = L10n.tr("Localizable", "profile.items.randomizes_server.caption", fallback: "Randomize server")
+      }
       internal enum UseProfile {
         /// Use this profile
         internal static let caption = L10n.tr("Localizable", "profile.items.use_profile.caption", fallback: "Use this profile")

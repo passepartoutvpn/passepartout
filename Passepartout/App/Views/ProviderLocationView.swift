@@ -71,7 +71,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         self.isEditable = isEditable
 
         _selectedServer = .init {
-            guard let serverId = currentProfile.value.providerServerId() else {
+            guard let serverId = currentProfile.value.providerServerId else {
                 return nil
             }
             return providerManager.server(withId: serverId)
@@ -84,9 +84,9 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
             isPresented.wrappedValue = false
         }
         _favoriteLocationIds = .init {
-            currentProfile.value.providerFavoriteLocationIds()
+            currentProfile.value.providerFavoriteLocationIds
         } set: {
-            currentProfile.value.setProviderFavoriteLocationIds($0)
+            currentProfile.value.providerFavoriteLocationIds = $0
         }
     }
 
@@ -151,6 +151,8 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     private func locationRow(_ location: ProviderLocation) -> some View {
         if let onlyServer = location.onlyServer {
             singleServerRow(location, onlyServer)
+        } else if profile.providerRandomizesServer ?? false {
+            singleServerRow(location, nil)
         } else {
             multipleServersRow(location)
         }
@@ -170,9 +172,9 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         })
     }
 
-    private func singleServerRow(_ location: ProviderLocation, _ server: ProviderServer) -> some View {
+    private func singleServerRow(_ location: ProviderLocation, _ server: ProviderServer?) -> some View {
         Button {
-            selectedServer = server
+            selectedServer = server ?? location.servers?.randomElement()
         } label: {
             LocationRow(
                 location: location,

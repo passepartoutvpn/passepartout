@@ -45,6 +45,16 @@ extension ProviderServer {
     public var locationId: String {
         "\(providerMetadata.name):\(categoryName):\(countryCode)"
     }
+
+    public func location(withVPNProtocol vpnProtocol: VPNProtocolType) -> ProviderLocation {
+        ProviderLocation(
+            providerMetadata: providerMetadata,
+            vpnProtocol: vpnProtocol,
+            categoryName: categoryName,
+            countryCode: countryCode,
+            servers: nil
+        )
+    }
 }
 
 extension ProviderServer {

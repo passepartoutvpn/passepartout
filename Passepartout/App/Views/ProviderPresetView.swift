@@ -46,7 +46,7 @@ struct ProviderPresetView: View {
 
         server = currentProfile.value.providerServer(providerManager)
         _selectedPreset = .init {
-            guard let serverId = currentProfile.value.providerServerId() else {
+            guard let serverId = currentProfile.value.providerServerId else {
                 return nil
             }
             guard let server = providerManager.server(withId: serverId) else {
