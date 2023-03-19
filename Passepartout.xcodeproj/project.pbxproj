@@ -26,6 +26,7 @@
 		0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0BD27827B2EBE500583AC5 /* ShortcutsView.swift */; };
 		0E0C0729236087A100155AAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0E0C072B236087A100155AAC /* InfoPlist.strings */; };
 		0E0F4C5A29C761850022E884 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F4C5929C761850022E884 /* SceneDelegate.swift */; };
+		0E0F4C5C29C76B790022E884 /* SceneDelegate+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F4C5B29C76B790022E884 /* SceneDelegate+Shortcuts.swift */; };
 		0E12BC8F27F62C8600B2F912 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12BC8E27F62C8500B2F912 /* Validators.swift */; };
 		0E1B5F5C29C506AD00FE7D18 /* ProfileView+Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1B5F5B29C506AC00FE7D18 /* ProfileView+Diagnostics.swift */; };
 		0E1F5628287F0ECB00F8ADD7 /* ProviderProfileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F5627287F0ECB00F8ADD7 /* ProviderProfileItem.swift */; };
@@ -306,6 +307,7 @@
 		0E0C072A236087A100155AAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E0C072C236087C800155AAC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E0F4C5929C761850022E884 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0E0F4C5B29C76B790022E884 /* SceneDelegate+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Shortcuts.swift"; sourceTree = "<group>"; };
 		0E12BC8E27F62C8500B2F912 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		0E1B5F5B29C506AC00FE7D18 /* ProfileView+Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Diagnostics.swift"; sourceTree = "<group>"; };
 		0E1C0A52238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -878,6 +880,7 @@
 				0E3FC6852867A3F9009B851C /* AppDelegate.swift */,
 				0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */,
 				0E0F4C5929C761850022E884 /* SceneDelegate.swift */,
+				0E0F4C5B29C76B790022E884 /* SceneDelegate+Shortcuts.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1423,6 +1426,7 @@
 				0E5349C827C176D100C71BB3 /* EndpointView+WireGuard.swift in Sources */,
 				0EBC076027EC587900208AD9 /* SwiftGen+Strings.swift in Sources */,
 				0E0392772818732D00827C10 /* BuildProducts.swift in Sources */,
+				0E0F4C5C29C76B790022E884 /* SceneDelegate+Shortcuts.swift in Sources */,
 				0E5683B927C2825D00EAF1CD /* DiagnosticsView.swift in Sources */,
 				0E3FC6862867A3F9009B851C /* AppDelegate.swift in Sources */,
 				0E71ACFD27C1321A00F85C4B /* ActivityView.swift in Sources */,

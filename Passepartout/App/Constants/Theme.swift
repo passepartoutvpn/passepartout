@@ -380,6 +380,23 @@ extension View {
     }
 }
 
+// MARK: Shortcuts
+
+extension ShortcutType {
+    var themeImageName: String {
+        switch self {
+        case .enableVPN:
+            return "power"
+
+        case .disableVPN:
+            return "xmark"
+
+        case .reconnectVPN:
+            return "arrow.clockwise"
+        }
+    }
+}
+
 // MARK: Animations
 
 extension View {
