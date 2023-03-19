@@ -192,9 +192,9 @@ extension EditableTextList {
         commit()
     }
 
-    private func onMove(indexSet: IndexSet, to: Int) {
+    private func onMove(indexSet: IndexSet, to offset: Int) {
         var mapped = mapping(identifiableElements)
-        mapped.move(fromOffsets: indexSet, toOffset: to)
+        mapped.move(fromOffsets: indexSet, toOffset: offset)
         identifiableElements = mapped
         commit()
     }

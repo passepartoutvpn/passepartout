@@ -111,7 +111,7 @@ extension OnDemandView.SSIDList {
         } set: { newValue in
             withSSIDs.forEach {
                 guard newValue.contains($0.key) else {
-                    if let _ = withSSIDs[$0.key] {
+                    if withSSIDs[$0.key] != nil {
                         withSSIDs[$0.key] = false
                     } else {
                         withSSIDs.removeValue(forKey: $0.key)

@@ -37,11 +37,11 @@ struct Shortcut: Identifiable, Hashable, Comparable {
         native.identifier
     }
 
-    static func ==(lhs: Self, rhs: Self) -> Bool {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.phrase == rhs.phrase
     }
 
-    static func <(lhs: Self, rhs: Self) -> Bool {
+    static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.phrase < rhs.phrase
     }
 

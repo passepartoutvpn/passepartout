@@ -79,7 +79,7 @@ class PassepartoutMenu {
             ] as [ItemGroup])
         }
 
-        if let _ = profileManager.activeProfileId {
+        if profileManager.activeProfileId != nil {
             children.append(contentsOf: [
                 SeparatorItem(),
                 VPNItemGroup(

@@ -31,11 +31,11 @@ extension ProviderMetadata: Identifiable, Comparable, Hashable {
         name
     }
 
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.name == rhs.name
     }
 
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.fullName.lowercased() < rhs.fullName.lowercased()
     }
 
@@ -45,32 +45,32 @@ extension ProviderMetadata: Identifiable, Comparable, Hashable {
 }
 
 extension ProviderCategory: Comparable {
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.name.lowercased() == rhs.name.lowercased()
     }
 
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.name.lowercased() < rhs.name.lowercased()
     }
 }
 
 extension ProviderLocation: Comparable {
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.countryCode == rhs.countryCode
     }
 
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.localizedCountry < rhs.localizedCountry
     }
 }
 
 extension ProviderServer: Comparable {
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }
 
     // "Default" comes first (nil localizedName)
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         guard lhs.localizedName != rhs.localizedName else {
             guard let li = lhs.serverIndex else {
                 return true
@@ -97,11 +97,11 @@ extension ProviderServer: Comparable {
 }
 
 extension ProviderServer.Preset: Comparable {
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.name == rhs.name
     }
 
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.name < rhs.name
     }
 }

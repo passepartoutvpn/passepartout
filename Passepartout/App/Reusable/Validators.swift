@@ -39,7 +39,7 @@ struct Validators {
     }
 
     static func notNil(_ string: String?) throws {
-        guard let _ = string else {
+        guard string != nil else {
             throw ValidationError.notSet
         }
     }
@@ -73,7 +73,7 @@ struct Validators {
     }
 
     static func url(_ string: String) throws {
-        guard let _ = URL(string: string) else {
+        guard URL(string: string) != nil else {
             throw ValidationError.url
         }
     }

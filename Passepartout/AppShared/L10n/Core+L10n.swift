@@ -75,13 +75,13 @@ extension ObservableVPNState {
 }
 
 extension Profile: Comparable {
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.header < rhs.header
     }
 }
 
 extension Profile.Header: Comparable {
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.name.lowercased() < rhs.name.lowercased()
     }
 }

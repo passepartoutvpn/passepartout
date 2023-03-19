@@ -143,7 +143,7 @@ struct AddProviderView: View {
     }
 
     private func onErrorMessage(_ message: String?, _ scrollProxy: ScrollViewProxy) {
-        guard let _ = message else {
+        guard message != nil else {
             return
         }
         scrollToErrorMessage(scrollProxy)
