@@ -79,9 +79,9 @@ extension Profile {
 
 extension Profile.Host: ProfileSubtype {
     public var vpnProtocols: [VPNProtocolType] {
-        if let _ = ovpnSettings {
+        if ovpnSettings != nil {
             return [.openVPN]
-        } else if let _ = wgSettings {
+        } else if wgSettings != nil {
             return [.wireGuard]
         } else {
             assertionFailure("No VPN settings found")

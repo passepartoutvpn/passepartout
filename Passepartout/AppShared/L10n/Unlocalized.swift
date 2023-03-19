@@ -147,48 +147,44 @@ enum Unlocalized {
     }
 
     enum Credits {
-        typealias License = (String, String, URL)
-
-        typealias Notice = (String, String)
-
         static let author = "Davide De Rosa"
 
-        static let licenses: [License] = [(
+        static let licenses: [GenericCreditsView.License] = [.init(
             "Kvitto",
             "BSD",
             URL(string: "https://raw.githubusercontent.com/Cocoanetics/Kvitto/develop/LICENSE")!
-        ), (
+        ), .init(
             "lzo",
             "GPLv2",
             URL(string: "https://www.gnu.org/licenses/gpl-2.0.txt")!
-        ), (
+        ), .init(
             "OpenSSL",
             "OpenSSL",
             URL(string: "https://raw.githubusercontent.com/openssl/openssl/master/LICENSE.txt")!
-        ), (
+        ), .init(
             "PIATunnel",
             "MIT",
             URL(string: "https://raw.githubusercontent.com/pia-foss/tunnel-apple/master/LICENSE")!
-        ), (
+        ), .init(
             "SwiftGen",
             "MIT",
             URL(string: "https://raw.githubusercontent.com/SwiftGen/SwiftGen/master/LICENCE")!
-        ), (
+        ), .init(
             "SwiftyBeaver",
             "MIT",
             URL(string: "https://raw.githubusercontent.com/SwiftyBeaver/SwiftyBeaver/master/LICENSE")!
         )]
 
-        static let notices: [Notice] = [(
+        static let notices: [GenericCreditsView.Notice] = [.init(
             "Circle Icons",
             "The logo is taken from the awesome Circle Icons set by Nick Roach."
-        ), (
+        ), .init(
             "Country flags",
             "The country flags are taken from: https://github.com/lipis/flag-icon-css/"
-        ), (
+        ), .init(
             "OpenVPN",
             "© Copyright 2022 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc."
-        ), (
+        ), .init(
             "WireGuard",
             "© Copyright 2015-2022 Jason A. Donenfeld. All Rights Reserved. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld."
         )]

@@ -180,7 +180,7 @@ private extension CDInfrastructureServer {
 }
 
 extension CDInfrastructurePreset: Comparable {
-    public static func <(lhs: CDInfrastructurePreset, rhs: CDInfrastructurePreset) -> Bool {
+    public static func < (lhs: CDInfrastructurePreset, rhs: CDInfrastructurePreset) -> Bool {
         guard let lname = lhs.name, let rname = rhs.name else {
             fatalError("CDPreset has no name?")
         }

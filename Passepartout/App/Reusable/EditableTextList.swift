@@ -31,14 +31,17 @@ struct IdentifiableString: Identifiable, Equatable {
     var string: String
 }
 
-struct EditableTextList<Field: View, ActionLabel: View>: View {
-    typealias FieldCallback = (
-        isNewElement: Bool,
-        text: Binding<String>,
-        onEditingChanged: (Bool) -> Void,
-        onCommit: () -> Void
-    )
+struct EditableTextFieldCallback {
+    let isNewElement: Bool
 
+    let text: Binding<String>
+
+    let onEditingChanged: (Bool) -> Void
+
+    let onCommit: () -> Void
+}
+
+struct EditableTextList<Field: View, ActionLabel: View>: View {
     @Binding var elements: [String]
 
     var allowsDuplicates = true
@@ -47,7 +50,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
 
     var onAdd: ((Binding<String>) -> Void)?
 
-    let textField: (FieldCallback) -> Field
+    let textField: (EditableTextFieldCallback) -> Field
 
     let addLabel: () -> ActionLabel
 
@@ -91,12 +94,12 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
     private func existingRow(_ element: IdentifiableString) -> some View {
         let editedText = binding(toEditedElement: element)
 
-        return textField((false, editedText, {
+        return textField(.init(isNewElement: false, text: editedText, onEditingChanged: {
             if $0 {
                 editedTextStrings.removeValue(forKey: element.id)
 //                print(">>> editing: '\(text.wrappedValue.string)' (\(text.wrappedValue.id))")
             }
-        }, {
+        }, onCommit: {
             replaceElement(at: element.id, with: editedText)
         }))
     }
@@ -109,7 +112,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
             },
             onCommit: addElement,
             textField: {
-                textField((true, addedText, { _ in }, $0))
+                textField(.init(isNewElement: true, text: addedText, onEditingChanged: { _ in }, onCommit: $0))
             },
             addLabel: addLabel,
             commitLabel: commitLabel

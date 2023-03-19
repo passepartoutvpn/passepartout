@@ -69,10 +69,10 @@ struct ReportIssueView: View {
             let logContent = logURL.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)
             let attachment = DebugLog(content: logContent).decoratedData()
 
-            attachments.append((
-                attachment,
-                Unlocalized.Issues.MIME.debugLog,
-                Unlocalized.Issues.Filenames.debugLog
+            attachments.append(.init(
+                data: attachment,
+                mimeType: Unlocalized.Issues.MIME.debugLog,
+                fileName: Unlocalized.Issues.Filenames.debugLog
             ))
         }
         self.attachments = attachments

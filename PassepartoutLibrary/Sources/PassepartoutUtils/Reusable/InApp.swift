@@ -122,7 +122,7 @@ public class InApp<PID: Hashable & RawRepresentable>: NSObject,
     }
 
     public func request(_ request: SKRequest, didFailWithError error: Error) {
-        if let _ = request as? SKProductsRequest {
+        if request as? SKProductsRequest != nil {
             DispatchQueue.main.async {
                 self.productFailureObserver?(error)
             }

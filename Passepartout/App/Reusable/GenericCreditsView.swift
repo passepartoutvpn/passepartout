@@ -26,9 +26,30 @@
 import SwiftUI
 
 struct GenericCreditsView: View {
-    typealias License = (String, String, URL)
+    struct License {
+        let name: String
 
-    typealias Notice = (String, String)
+        let licenseName: String
+
+        let licenseURL: URL
+
+        init(_ name: String, _ licenseName: String, _ licenseURL: URL) {
+            self.name = name
+            self.licenseName = licenseName
+            self.licenseURL = licenseURL
+        }
+    }
+
+    struct Notice {
+        let name: String
+
+        let noticeString: String
+
+        init(_ name: String, _ noticeString: String) {
+            self.name = name
+            self.noticeString = noticeString
+        }
+    }
 
     var licensesHeader: String? = "Licenses"
 
@@ -60,13 +81,13 @@ struct GenericCreditsView: View {
 
     private var sortedLicenses: [License] {
         licenses.sorted {
-            $0.0.lowercased() < $1.0.lowercased()
+            $0.name.lowercased() < $1.name.lowercased()
         }
     }
 
     private var sortedNotices: [Notice] {
         notices.sorted {
-            $0.0.lowercased() < $1.0.lowercased()
+            $0.name.lowercased() < $1.name.lowercased()
         }
     }
 
@@ -80,17 +101,17 @@ struct GenericCreditsView: View {
         Section(
             header: licensesHeader.map(Text.init)
         ) {
-            ForEach(sortedLicenses, id: \.0) { license in
+            ForEach(sortedLicenses, id: \.name) { license in
                 NavigationLink {
                     LicenseView(
-                        url: license.2,
-                        content: $contentForLicense[license.0]
-                    ).navigationTitle(license.0)
+                        url: license.licenseURL,
+                        content: $contentForLicense[license.name]
+                    ).navigationTitle(license.name)
                 } label: {
                     HStack {
-                        Text(license.0)
+                        Text(license.name)
                         Spacer()
-                        Text(license.1)
+                        Text(license.licenseName)
                     }
                 }
             }
@@ -101,8 +122,8 @@ struct GenericCreditsView: View {
         Section(
             header: noticesHeader.map(Text.init)
         ) {
-            ForEach(sortedNotices, id: \.0) { notice in
-                NavigationLink(notice.0, destination: noticeView(notice))
+            ForEach(sortedNotices, id: \.name) { notice in
+                NavigationLink(notice.name, destination: noticeView(notice))
             }
         }
     }
@@ -124,12 +145,12 @@ struct GenericCreditsView: View {
         }
     }
 
-    private func noticeView(_ content: (String, String)) -> some View {
+    private func noticeView(_ content: Notice) -> some View {
         VStack {
-            Text(content.1)
+            Text(content.noticeString)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding()
-        }.navigationTitle(content.0)
+        }.navigationTitle(content.name)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
