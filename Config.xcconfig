@@ -35,5 +35,6 @@ CFG_APPSTORE_ID = 1433648537
 CFG_COPYRIGHT = Copyright © 2023 Davide De Rosa. All rights reserved.
 
 PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin:/usr/local/go/bin
+CUSTOM_SCRIPT_PATH = $(PATH)
 
 #include? "Secret.xcconfig"
