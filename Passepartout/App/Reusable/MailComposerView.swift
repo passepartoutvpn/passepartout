@@ -39,7 +39,13 @@ struct MailComposerView: UIViewControllerRepresentable {
         }
     }
 
-    typealias Attachment = (data: Data, mimeType: String, fileName: String)
+    struct Attachment {
+        let data: Data
+
+        let mimeType: String
+
+        let fileName: String
+    }
 
     static func canSendMail() -> Bool {
         MFMailComposeViewController.canSendMail()
