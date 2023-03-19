@@ -31,8 +31,52 @@ class PassepartoutSceneDelegate: UIResponder, UIWindowSceneDelegate {
         #if targetEnvironment(macCatalyst)
         MacBundle.shared.utils.sendAppToBackground()
         #endif
+        rebuildShortcutItems()
     }
 
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        handleShortcutItem(shortcutItem)
+    }
+}
+
+extension PassepartoutSceneDelegate {
+    func rebuildShortcutItems() {
+        let items: [UIApplicationShortcutItem]
+        if VPNManager.shared.currentState.isEnabled {
+            let toggleItem = UIApplicationShortcutItem(
+                type: "disable",
+                localizedTitle: L10n.Shortcuts.Add.Items.DisableVpn.caption
+            )
+            let reconnectItem = UIApplicationShortcutItem(
+                type: "reconnect",
+                localizedTitle: L10n.Global.Strings.reconnect
+            )
+            items = [toggleItem, reconnectItem]
+        } else if ProfileManager.shared.hasActiveProfile {
+            let toggleItem = UIApplicationShortcutItem(
+                type: "enable",
+                localizedTitle: L10n.Shortcuts.Add.Items.EnableVpn.caption
+            )
+            items = [toggleItem]
+        } else {
+            items = []
+        }
+        UIApplication.shared.shortcutItems = items
+    }
+
+    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) {
+        switch shortcutItem.type {
+        case "enable":
+            break
+
+        case "disable":
+            break
+
+        case "reconnect":
+            break
+
+        default:
+            break
+        }
     }
 }
