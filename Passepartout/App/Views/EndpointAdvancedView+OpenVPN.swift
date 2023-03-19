@@ -320,40 +320,89 @@ extension EndpointAdvancedView.OpenVPNView {
     }
 }
 
-extension OpenVPN.Configuration {
-    var communicationSettings: (cipher: OpenVPN.Cipher?, digest: OpenVPN.Digest?, xor: OpenVPN.XORMethod?)? {
+private extension OpenVPN.Configuration {
+    struct CommunicationOptions {
+        let cipher: OpenVPN.Cipher?
+
+        let digest: OpenVPN.Digest?
+
+        let xor: OpenVPN.XORMethod?
+    }
+
+    struct CompressionOptions {
+        let framing: OpenVPN.CompressionFraming?
+
+        let algorithm: OpenVPN.CompressionAlgorithm?
+    }
+
+    struct DNSOptions {
+        let servers: [String]
+
+        let domains: [String]
+    }
+
+    struct ProxyOptions {
+        let proxy: Proxy?
+
+        let pac: URL?
+
+        let bypass: [String]
+    }
+
+    struct OtherOptions {
+        let keepAlive: TimeInterval?
+
+        let reneg: TimeInterval?
+
+        let randomizeEndpoint: Bool?
+
+        let randomizeHostnames: Bool?
+    }
+
+    var communicationSettings: CommunicationOptions? {
         guard cipher != nil || digest != nil || xorMethod != nil else {
             return nil
         }
-        return (cipher, digest, xorMethod)
+        return .init(cipher: cipher, digest: digest, xor: xorMethod)
     }
 
-    var compressionSettings: (framing: OpenVPN.CompressionFraming?, algorithm: OpenVPN.CompressionAlgorithm?)? {
+    var compressionSettings: CompressionOptions? {
         guard compressionFraming != nil || compressionAlgorithm != nil else {
             return nil
         }
-        return (compressionFraming, compressionAlgorithm)
+        return .init(framing: compressionFraming, algorithm: compressionAlgorithm)
     }
 
-    var dnsSettings: (servers: [String], domains: [String])? {
+    var dnsSettings: DNSOptions? {
         guard !(dnsServers?.isEmpty ?? true) || !(searchDomains?.isEmpty ?? true) else {
             return nil
         }
-        return (dnsServers ?? [], searchDomains ?? [])
+        return .init(servers: dnsServers ?? [], domains: searchDomains ?? [])
     }
 
-    var proxySettings: (proxy: Proxy?, pac: URL?, bypass: [String])? {
-        guard httpsProxy != nil || httpProxy != nil || proxyAutoConfigurationURL != nil || !(proxyBypassDomains?.isEmpty ?? true) else {
+    var proxySettings: ProxyOptions? {
+        guard httpsProxy != nil || httpProxy != nil ||
+                proxyAutoConfigurationURL != nil || !(proxyBypassDomains?.isEmpty ?? true) else {
             return nil
         }
-        return (httpsProxy ?? httpProxy, proxyAutoConfigurationURL, proxyBypassDomains ?? [])
+        return .init(
+            proxy: httpsProxy ?? httpProxy,
+            pac: proxyAutoConfigurationURL,
+            bypass: proxyBypassDomains ?? []
+        )
     }
 
-    var otherSettings: (keepAlive: TimeInterval?, reneg: TimeInterval?, randomizeEndpoint: Bool?, randomizeHostnames: Bool?)? {
-        guard keepAliveInterval != nil || renegotiatesAfter != nil || randomizeEndpoint != nil || randomizeHostnames != nil else {
+    var otherSettings: OtherOptions? {
+        guard keepAliveInterval != nil || renegotiatesAfter != nil ||
+                randomizeEndpoint != nil || randomizeHostnames != nil else {
             return nil
         }
-        return (keepAliveInterval, renegotiatesAfter, randomizeEndpoint, randomizeHostnames)
+        return .init(
+            keepAlive: keepAliveInterval,
+            reneg: renegotiatesAfter,
+            randomizeEndpoint: randomizeEndpoint,
+            randomizeHostnames: randomizeHostnames
+        )
     }
 }
 

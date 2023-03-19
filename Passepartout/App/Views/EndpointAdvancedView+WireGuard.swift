@@ -89,11 +89,17 @@ extension EndpointAdvancedView.WireGuardView {
     }
 }
 
-extension WireGuard.Configuration {
-    var dnsSettings: (servers: [String], domains: [String])? {
+private extension WireGuard.Configuration {
+    struct DNSOptions {
+        let servers: [String]
+
+        let domains: [String]
+    }
+
+    var dnsSettings: DNSOptions? {
         guard !dnsServers.isEmpty || !dnsSearchDomains.isEmpty else {
             return nil
         }
-        return (dnsServers, dnsSearchDomains)
+        return .init(servers: dnsServers, domains: dnsSearchDomains)
     }
 }
