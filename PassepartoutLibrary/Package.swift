@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "PassepartoutLibrary",
     platforms: [
-        .iOS(.v14), .macOS(.v11)
+        .iOS(.v15), .macOS(.v12)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -24,7 +24,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
 //        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", from: "5.0.0"),
-        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("e0c0cc137fbceea6970d226445afa79a7903881c")),
+        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("7ce254be0293ba7e1eeda07a3701804de59f7490")),
 //        .package(name: "TunnelKit", path: "../../tunnelkit"),
         .package(url: "https://github.com/zoul/generic-json-swift", from: "2.0.0"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "1.9.0")
@@ -47,12 +47,18 @@ let package = Package(
             name: "PassepartoutProfiles",
             dependencies: [
                 "PassepartoutProviders"
+            ],
+            resources: [
+                .process("DataModels/Profiles.xcdatamodeld")
             ]),
         .target(
             name: "PassepartoutProviders",
             dependencies: [
                 "PassepartoutCore",
                 "PassepartoutServices"
+            ],
+            resources: [
+                .process("DataModels/Providers.xcdatamodeld")
             ]),
         .target(
             name: "PassepartoutCore",

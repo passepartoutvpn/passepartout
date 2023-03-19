@@ -46,11 +46,11 @@ extension Profile.WireGuardSettings: DNSSettingsProviding {
     }
 
     public var dnsHTTPSURL: URL? {
-        nil
+        configuration.dnsHTTPSURL
     }
 
     public var dnsTLSServerName: String? {
-        nil
+        configuration.dnsTLSServerName
     }
 }
 
