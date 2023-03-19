@@ -67,13 +67,19 @@ extension PassepartoutSceneDelegate {
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) {
         switch shortcutItem.type {
         case "enable":
-            break
+            Task {
+                try await VPNManager.shared.connectWithActiveProfile(toServer: nil)
+            }
 
         case "disable":
-            break
+            Task {
+                await VPNManager.shared.disable()
+            }
 
         case "reconnect":
-            break
+            Task {
+                await VPNManager.shared.reconnect()
+            }
 
         default:
             break
