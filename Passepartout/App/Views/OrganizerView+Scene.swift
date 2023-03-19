@@ -53,7 +53,6 @@ extension OrganizerView {
             Text("Scene")
                 .hidden()
                 .onAppear(perform: onAppear)
-                .onChange(of: scenePhase, perform: onScenePhase)
         }
 
         private func onAppear() {
@@ -78,20 +77,6 @@ extension OrganizerView {
             if themeIdiom != .phone && !themeIsiPadPortrait, let activeProfileId = profileManager.activeProfileId {
                 profileManager.currentProfileId = activeProfileId
             }
-        }
-
-        private func onScenePhase(_ phase: ScenePhase) {
-            switch phase {
-            case .background:
-                persist()
-
-            default:
-                break
-            }
-        }
-
-        private func persist() {
-            profileManager.persist()
         }
     }
 }

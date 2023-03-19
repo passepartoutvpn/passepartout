@@ -28,6 +28,7 @@ import PassepartoutLibrary
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
+        ProfileManager.shared.persist()
         #if targetEnvironment(macCatalyst)
         MacBundle.shared.utils.sendAppToBackground()
         #endif
