@@ -13,6 +13,10 @@ if ! git -C $API_PATH pull origin master; then
 fi
 git add $API_PATH
 
+# update bundle
+bundle update
+git add Gemfile.lock
+
 # set build number
 BASE_BUILD_FILE=".beta-base"
 BUILD_FILE=".beta-build"
