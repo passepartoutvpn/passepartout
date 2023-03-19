@@ -39,22 +39,30 @@ class PassepartoutSceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
-extension PassepartoutSceneDelegate {
+private extension PassepartoutSceneDelegate {
+    enum ShortcutType: String {
+        case enableVPN
+
+        case disableVPN
+
+        case reconnectVPN
+    }
+
     func rebuildShortcutItems() {
         let items: [UIApplicationShortcutItem]
         if VPNManager.shared.currentState.isEnabled {
             let toggleItem = UIApplicationShortcutItem(
-                type: "disable",
+                type: ShortcutType.disableVPN.rawValue,
                 localizedTitle: L10n.Shortcuts.Add.Items.DisableVpn.caption
             )
             let reconnectItem = UIApplicationShortcutItem(
-                type: "reconnect",
+                type: ShortcutType.reconnectVPN.rawValue,
                 localizedTitle: L10n.Global.Strings.reconnect
             )
             items = [toggleItem, reconnectItem]
         } else if ProfileManager.shared.hasActiveProfile {
             let toggleItem = UIApplicationShortcutItem(
-                type: "enable",
+                type: ShortcutType.enableVPN.rawValue,
                 localizedTitle: L10n.Shortcuts.Add.Items.EnableVpn.caption
             )
             items = [toggleItem]
@@ -66,17 +74,17 @@ extension PassepartoutSceneDelegate {
 
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) {
         switch shortcutItem.type {
-        case "enable":
+        case ShortcutType.enableVPN.rawValue:
             Task {
                 try await VPNManager.shared.connectWithActiveProfile(toServer: nil)
             }
 
-        case "disable":
+        case ShortcutType.disableVPN.rawValue:
             Task {
                 await VPNManager.shared.disable()
             }
 
-        case "reconnect":
+        case ShortcutType.reconnectVPN.rawValue:
             Task {
                 await VPNManager.shared.reconnect()
             }
