@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- 3D Touch items. [#267](https://github.com/passepartoutvpn/passepartout-apple/pull/267)
 - Prompt for password interactively. [#3](https://github.com/passepartoutvpn/passepartout-apple/issues/3)
 - Ukranian translations (Dmitry Chirkin). [#243](https://github.com/passepartoutvpn/passepartout-apple/pull/243)
 - Restore DNS "Domain" setting. [#260](https://github.com/passepartoutvpn/passepartout-apple/pull/260)

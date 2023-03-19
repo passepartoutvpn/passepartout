@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  SceneDelegate.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/25/22.
+//  Created by Davide De Rosa on 3/19/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,27 +23,19 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import UIKit
+import SwiftUI
 import PassepartoutLibrary
 
-class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
-    private let mac = MacBundle.shared
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        ProfileManager.shared.persist()
         #if targetEnvironment(macCatalyst)
-        mac.configure()
-        mac.menu.install()
-        if mac.utils.isStartedByLauncher {
-            mac.utils.sendAppToBackground()
-        }
+        MacBundle.shared.utils.sendAppToBackground()
         #endif
-        return true
+        rebuildShortcutItems()
     }
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        let sceneConfiguration = UISceneConfiguration(name: "SceneDelegate", sessionRole: connectingSceneSession.role)
-        sceneConfiguration.delegateClass = SceneDelegate.self
-        return sceneConfiguration
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        handleShortcutItem(shortcutItem)
     }
 }
