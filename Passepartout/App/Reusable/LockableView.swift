@@ -37,11 +37,9 @@ struct LockableView<Content: View, LockedContent: View>: View {
 
     @Environment(\.scenePhase) private var scenePhase
 
-    #if targetEnvironment(macCatalyst)
+    @State private var didAppear = false
+
     @State private var isLocked = false
-    #else
-    @State private var isLocked = true
-    #endif
 
     var body: some View {
         Group {
@@ -59,6 +57,12 @@ struct LockableView<Content: View, LockedContent: View>: View {
             #if targetEnvironment(macCatalyst)
             break
             #else
+            if !didAppear {
+                didAppear = true
+                if locksInBackground {
+                    isLocked = true
+                }
+            }
             unlockIfNeeded()
             #endif
 
