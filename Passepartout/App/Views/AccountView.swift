@@ -58,14 +58,15 @@ struct AccountView: View {
 
     var body: some View {
         List {
-            Section {
-                // FIXME: l10n
-                themeTextPicker(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
-                    .persistent,
-                    .interactive
-//                    .totp // TODO: interactive, support OTP-based authentication
-                ], description: \.localizedDescription)
-            }
+            // TODO: interactive, re-enable after fixing
+//            Section {
+//                // TODO: interactive, l10n
+//                themeTextPicker(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
+//                    .persistent,
+//                    .interactive
+////                    .totp // TODO: interactive, support OTP-based authentication
+//                ], description: \.localizedDescription)
+//            }
             Section {
                 TextField(usernamePlaceholder ?? L10n.Account.Items.Username.placeholder, text: $liveAccount.username)
                     .textContentType(.username)
