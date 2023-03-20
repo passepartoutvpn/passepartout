@@ -40,9 +40,10 @@ struct LockableView<Content: View, LockedContent: View>: View {
     @State private var isLocked = true
 
     var body: some View {
-        ZStack {
-            content()
-            if isLocked {
+        Group {
+            if !isLocked {
+                content()
+            } else {
                 lockedContent()
             }
         }.onChange(of: scenePhase, perform: onScenePhase)
