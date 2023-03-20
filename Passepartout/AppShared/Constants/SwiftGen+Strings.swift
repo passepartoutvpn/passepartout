@@ -898,8 +898,8 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "settings.items.donate.caption", fallback: "Make a donation")
       }
       internal enum LocksInBackground {
-        /// Lock app in background
-        internal static let caption = L10n.tr("Localizable", "settings.items.locks_in_background.caption", fallback: "Lock app in background")
+        /// Lock app access
+        internal static let caption = L10n.tr("Localizable", "settings.items.locks_in_background.caption", fallback: "Lock app access")
       }
     }
   }
