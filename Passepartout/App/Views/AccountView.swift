@@ -58,8 +58,9 @@ struct AccountView: View {
 
     var body: some View {
         List {
+            // TODO: interactive, re-enable after fixing
 //            Section {
-//                // FIXME: l10n
+//                // TODO: interactive, l10n
 //                themeTextPicker(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
 //                    .persistent,
 //                    .interactive
