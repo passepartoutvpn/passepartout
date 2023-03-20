@@ -54,9 +54,6 @@ struct LockableView<Content: View, LockedContent: View>: View {
     private func onScenePhase(_ scenePhase: ScenePhase) {
         switch scenePhase {
         case .active:
-            #if targetEnvironment(macCatalyst)
-            break
-            #else
             if !didAppear {
                 didAppear = true
                 if locksInBackground {
@@ -64,14 +61,9 @@ struct LockableView<Content: View, LockedContent: View>: View {
                 }
             }
             unlockIfNeeded()
-            #endif
 
         case .inactive:
-            #if targetEnvironment(macCatalyst)
-            break
-            #else
             lockIfNeeded()
-            #endif
 
         default:
             break
