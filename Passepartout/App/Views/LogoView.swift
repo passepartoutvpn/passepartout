@@ -1,8 +1,8 @@
 //
-//  AppPreference.swift
+//  LogoView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/15/22.
+//  Created by Davide De Rosa on 3/20/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,19 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PassepartoutLibrary
+import SwiftUI
 
-enum AppPreference: String, KeyStoreDomainLocation {
-    case launchesOnLogin
-
-    case isShowingFavorites
-
-    case didHandleSubreddit
-
-    case locksInBackground
-
-    var domain: String {
-        "Passepartout.App"
+struct LogoView: View {
+    var body: some View {
+        ZStack {
+            themePrimaryBackground
+            Image(themeAssetsLogoImage)
+        }.ignoresSafeArea()
     }
 }

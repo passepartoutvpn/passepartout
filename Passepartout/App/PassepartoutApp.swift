@@ -24,24 +24,31 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 import PassepartoutLibrary
 
 @main
 struct PassepartoutApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
+    @AppStorage(AppPreference.locksInBackground.rawValue) private var locksInBackground = false
+
     @SceneBuilder var body: some Scene {
         WindowGroup {
-            MainView()
-                .withoutTitleBar()
-                .onIntentActivity(IntentDispatcher.connectVPN)
-                .onIntentActivity(IntentDispatcher.disableVPN)
-                .onIntentActivity(IntentDispatcher.enableVPN)
-                .onIntentActivity(IntentDispatcher.moveToLocation)
-                .onIntentActivity(IntentDispatcher.trustCellularNetwork)
-                .onIntentActivity(IntentDispatcher.trustCurrentNetwork)
-                .onIntentActivity(IntentDispatcher.untrustCellularNetwork)
-                .onIntentActivity(IntentDispatcher.untrustCurrentNetwork)
+            LockableView(
+                reason: L10n.Global.Messages.unlockApp,
+                locksInBackground: $locksInBackground,
+                content: MainView.init,
+                lockedContent: LogoView.init
+            ).withoutTitleBar()
+            .onIntentActivity(IntentDispatcher.connectVPN)
+            .onIntentActivity(IntentDispatcher.disableVPN)
+            .onIntentActivity(IntentDispatcher.enableVPN)
+            .onIntentActivity(IntentDispatcher.moveToLocation)
+            .onIntentActivity(IntentDispatcher.trustCellularNetwork)
+            .onIntentActivity(IntentDispatcher.trustCurrentNetwork)
+            .onIntentActivity(IntentDispatcher.untrustCellularNetwork)
+            .onIntentActivity(IntentDispatcher.untrustCurrentNetwork)
         }
     }
 }

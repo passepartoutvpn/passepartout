@@ -446,6 +446,8 @@ internal enum L10n {
       internal static let emailNotConfigured = L10n.tr("Localizable", "global.messages.email_not_configured", fallback: "No e-mail account is configured.")
       /// Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS
       internal static let share = L10n.tr("Localizable", "global.messages.share", fallback: "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS")
+      /// Passepartout is locked
+      internal static let unlockApp = L10n.tr("Localizable", "global.messages.unlock_app", fallback: "Passepartout is locked")
     }
     internal enum Placeholders {
       /// My profile
@@ -894,6 +896,10 @@ internal enum L10n {
       internal enum Donate {
         /// Make a donation
         internal static let caption = L10n.tr("Localizable", "settings.items.donate.caption", fallback: "Make a donation")
+      }
+      internal enum LocksInBackground {
+        /// Lock app in background
+        internal static let caption = L10n.tr("Localizable", "settings.items.locks_in_background.caption", fallback: "Lock app in background")
       }
     }
   }
