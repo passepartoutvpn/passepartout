@@ -88,7 +88,7 @@ struct LockableView<Content: View, LockedContent: View>: View {
             isLocked = false
             return
         }
-        Task {
+        Task { @MainActor in
             do {
                 let isAuthorized = try await context.evaluatePolicy(policy, localizedReason: reason)
                 isLocked = !isAuthorized
