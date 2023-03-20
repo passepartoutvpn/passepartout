@@ -438,6 +438,17 @@ extension View {
         Text(L10n.Global.Strings.save)
     }
 
+    func themeSecureField(_ placeholder: String, text: Binding<String>, contentType: UITextContentType = .password) -> some View {
+        RevealingSecureField(placeholder, text: text) {
+            themeConceilImage.asSystemImage
+                .themeAccentForegroundStyle()
+        } revealImage: {
+            themeRevealImage.asSystemImage
+                .themeAccentForegroundStyle()
+        }.textContentType(contentType)
+        .themeRawTextStyle()
+    }
+
     func themeTextPicker<T: Hashable>(_ title: String, selection: Binding<T>, values: [T], description: @escaping (T) -> String) -> some View {
         StyledPicker(title: title, selection: selection, values: values) {
             Text(description($0))

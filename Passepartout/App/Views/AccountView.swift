@@ -59,6 +59,7 @@ struct AccountView: View {
     var body: some View {
         List {
             Section {
+                // FIXME: l10n
                 themeTextPicker(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
                     .persistent,
                     .interactive
@@ -77,27 +78,13 @@ struct AccountView: View {
                     if liveAccount.authenticationMethod == .interactive {
                         EmptyView()
                     } else {
-                        RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password) {
-                            themeConceilImage.asSystemImage
-                                .themeAccentForegroundStyle()
-                        } revealImage: {
-                            themeRevealImage.asSystemImage
-                                .themeAccentForegroundStyle()
-                        }.textContentType(.password)
-                            .themeRawTextStyle()
+                        themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password)
                             .withLeadingText(L10n.Account.Items.Password.caption)
                     }
 
                 // TODO: interactive, scan QR code
                 case .totp:
-                    RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password) {
-                        themeConceilImage.asSystemImage
-                            .themeAccentForegroundStyle()
-                    } revealImage: {
-                        themeRevealImage.asSystemImage
-                            .themeAccentForegroundStyle()
-                    }.textContentType(.oneTimeCode)
-                        .themeRawTextStyle()
+                    themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password, contentType: .oneTimeCode)
                         .withLeadingText(L10n.Account.Items.Seed.caption)
                 }
             } footer: {

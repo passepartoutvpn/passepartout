@@ -50,15 +50,8 @@ struct InteractiveConnectionView: View {
                     .withLeadingText(L10n.Account.Items.Username.caption)
                     .disabled(true)
 
-                RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $password) {
-                    themeConceilImage.asSystemImage
-                        .themeAccentForegroundStyle()
-                } revealImage: {
-                    themeRevealImage.asSystemImage
-                        .themeAccentForegroundStyle()
-                }.textContentType(.password)
-                .themeRawTextStyle()
-                .withLeadingText(L10n.Account.Items.Password.caption)
+                themeSecureField(L10n.Account.Items.Password.placeholder, text: $password)
+                    .withLeadingText(L10n.Account.Items.Password.caption)
             } header: {
                 Text(L10n.Account.title)
             }

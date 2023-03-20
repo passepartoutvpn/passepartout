@@ -33,11 +33,7 @@ struct SettingsView: View {
 
     @Environment(\.presentationMode) private var presentationMode
 
-//    private var isTestBuild: Bool {
-//        Constants.App.isBeta || Constants.InApp.appType == .beta
-//    }
-//    
-//    private let appName = Unlocalized.appName
+    @AppStorage(AppPreference.locksInBackground.rawValue) private var locksInBackground = false
 
     private let versionString = Constants.Global.appVersionString
 
@@ -48,11 +44,18 @@ struct SettingsView: View {
 
     var body: some View {
         List {
+            preferencesSection
             aboutSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.themeSecondaryView()
         .navigationTitle(L10n.Settings.title)
+    }
+
+    private var preferencesSection: some View {
+        Section {
+            Toggle(L10n.Settings.Items.LocksInBackground.caption, isOn: $locksInBackground)
+        }
     }
 
     private var aboutSection: some View {
