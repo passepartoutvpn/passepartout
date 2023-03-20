@@ -82,13 +82,15 @@ struct LockableView<Content: View, LockedContent: View>: View {
             return
         }
         let context = LAContext()
+        let policy: LAPolicy = .deviceOwnerAuthentication
         var error: NSError?
-        guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
+        guard context.canEvaluatePolicy(policy, error: &error) else {
+            isLocked = false
             return
         }
         Task {
             do {
-                let isAuthorized = try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)
+                let isAuthorized = try await context.evaluatePolicy(policy, localizedReason: reason)
                 isLocked = !isAuthorized
             } catch {
             }

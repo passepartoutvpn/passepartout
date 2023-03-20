@@ -24,7 +24,6 @@
 //
 
 import SwiftUI
-import LocalAuthentication
 import PassepartoutLibrary
 
 @main
