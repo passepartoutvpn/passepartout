@@ -49,17 +49,17 @@ struct LockableView<Content: View, LockedContent: View>: View {
                 lockedContent()
             }
         }.onChange(of: scenePhase, perform: onScenePhase)
+        .onAppear {
+            if !didAppear && locksInBackground {
+                didAppear = true
+                isLocked = true
+            }
+        }
     }
 
     private func onScenePhase(_ scenePhase: ScenePhase) {
         switch scenePhase {
         case .active:
-            if !didAppear {
-                didAppear = true
-                if locksInBackground {
-                    isLocked = true
-                }
-            }
             unlockIfNeeded()
 
         case .inactive:
@@ -78,6 +78,10 @@ struct LockableView<Content: View, LockedContent: View>: View {
     }
 
     func unlockIfNeeded() {
+        guard locksInBackground else {
+            isLocked = false
+            return
+        }
         guard isLocked else {
             return
         }
