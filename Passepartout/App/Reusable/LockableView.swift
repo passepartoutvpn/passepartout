@@ -49,29 +49,21 @@ struct LockableView<Content: View, LockedContent: View>: View {
                 lockedContent()
             }
         }.onChange(of: scenePhase, perform: onScenePhase)
+        .onAppear {
+            if !didAppear && locksInBackground {
+                didAppear = true
+                isLocked = true
+            }
+        }
     }
 
     private func onScenePhase(_ scenePhase: ScenePhase) {
         switch scenePhase {
         case .active:
-            #if targetEnvironment(macCatalyst)
-            break
-            #else
-            if !didAppear {
-                didAppear = true
-                if locksInBackground {
-                    isLocked = true
-                }
-            }
             unlockIfNeeded()
-            #endif
 
         case .inactive:
-            #if targetEnvironment(macCatalyst)
-            break
-            #else
             lockIfNeeded()
-            #endif
 
         default:
             break
@@ -86,17 +78,23 @@ struct LockableView<Content: View, LockedContent: View>: View {
     }
 
     func unlockIfNeeded() {
+        guard locksInBackground else {
+            isLocked = false
+            return
+        }
         guard isLocked else {
             return
         }
         let context = LAContext()
+        let policy: LAPolicy = .deviceOwnerAuthentication
         var error: NSError?
-        guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
+        guard context.canEvaluatePolicy(policy, error: &error) else {
+            isLocked = false
             return
         }
-        Task {
+        Task { @MainActor in
             do {
-                let isAuthorized = try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)
+                let isAuthorized = try await context.evaluatePolicy(policy, localizedReason: reason)
                 isLocked = !isAuthorized
             } catch {
             }

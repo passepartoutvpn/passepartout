@@ -44,7 +44,9 @@ struct SettingsView: View {
 
     var body: some View {
         List {
+            #if !targetEnvironment(macCatalyst)
             preferencesSection
+            #endif
             aboutSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)

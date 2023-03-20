@@ -24,7 +24,6 @@
 //
 
 import SwiftUI
-import LocalAuthentication
 import PassepartoutLibrary
 
 @main
@@ -35,21 +34,30 @@ struct PassepartoutApp: App {
 
     @SceneBuilder var body: some Scene {
         WindowGroup {
-            LockableView(
-                reason: L10n.Global.Messages.unlockApp,
-                locksInBackground: $locksInBackground,
-                content: MainView.init,
-                lockedContent: LogoView.init
-            ).withoutTitleBar()
-            .onIntentActivity(IntentDispatcher.connectVPN)
-            .onIntentActivity(IntentDispatcher.disableVPN)
-            .onIntentActivity(IntentDispatcher.enableVPN)
-            .onIntentActivity(IntentDispatcher.moveToLocation)
-            .onIntentActivity(IntentDispatcher.trustCellularNetwork)
-            .onIntentActivity(IntentDispatcher.trustCurrentNetwork)
-            .onIntentActivity(IntentDispatcher.untrustCellularNetwork)
-            .onIntentActivity(IntentDispatcher.untrustCurrentNetwork)
+            mainView
+                .withoutTitleBar()
+                .onIntentActivity(IntentDispatcher.connectVPN)
+                .onIntentActivity(IntentDispatcher.disableVPN)
+                .onIntentActivity(IntentDispatcher.enableVPN)
+                .onIntentActivity(IntentDispatcher.moveToLocation)
+                .onIntentActivity(IntentDispatcher.trustCellularNetwork)
+                .onIntentActivity(IntentDispatcher.trustCurrentNetwork)
+                .onIntentActivity(IntentDispatcher.untrustCellularNetwork)
+                .onIntentActivity(IntentDispatcher.untrustCurrentNetwork)
         }
+    }
+
+    private var mainView: some View {
+        #if targetEnvironment(macCatalyst)
+        MainView()
+        #else
+        LockableView(
+            reason: L10n.Global.Messages.unlockApp,
+            locksInBackground: $locksInBackground,
+            content: MainView.init,
+            lockedContent: LogoView.init
+        )
+        #endif
     }
 }
 

@@ -46,6 +46,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>dummy</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>$(CFG_COPYRIGHT)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
