@@ -2,7 +2,6 @@
 
 - Option to lock app when entering background (iOS).
 - 3D Touch items (iOS).
-- Prompt for password interactively.
 - Ukranian translations (Dmitry Chirkin).
 - Restore DNS "Domain" setting.
 - OpenVPN: Full implementation of Tunnelblick XOR patch (tmthecoder).
