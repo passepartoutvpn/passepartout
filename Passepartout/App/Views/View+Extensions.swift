@@ -106,9 +106,7 @@ extension View {
 
 extension View {
     func debugChanges() {
-        if #available(iOS 15, *),
-           SwiftyBeaver.destinations.first?.minLevel == .verbose {
-
+        if SwiftyBeaver.destinations.first?.minLevel == .verbose {
             Self._printChanges()
         }
     }

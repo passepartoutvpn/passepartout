@@ -230,9 +230,7 @@ extension ProfileManager {
         if setAsCurrent {
 
             // iOS 14 goes crazy when changing binding of a presented NavigationLink
-            if #available(iOS 15, *) {
-                internalCurrentProfileId = copy.id
-            }
+            internalCurrentProfileId = copy.id
 
             // autosaves copy if non-existing in persistent store
             setCurrentProfile(copy)

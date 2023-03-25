@@ -99,14 +99,12 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
                 EmptyView()
             }
         }.toolbar {
-            if #available(iOS 15, *) {
-                Button {
-                    withAnimation {
-                        isShowingFavorites.toggle()
-                    }
-                } label: {
-                    themeFavoritesImage(isShowingFavorites).asSystemImage
+            Button {
+                withAnimation {
+                    isShowingFavorites.toggle()
                 }
+            } label: {
+                themeFavoritesImage(isShowingFavorites).asSystemImage
             }
         }.navigationTitle(L10n.Provider.Location.title)
     }
@@ -133,7 +131,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
     private func categorySection(_ category: ProviderCategory) -> some View {
         Section {
             ForEach(filteredLocations(for: category)) { location in
-                if isEditable, #available(iOS 15, *) {
+                if isEditable {
                     locationRow(location)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             favoriteActions(location)

@@ -45,10 +45,7 @@ extension View {
         #if targetEnvironment(macCatalyst)
         false
         #else
-        guard #available(iOS 15, *) else {
-            return false
-        }
-        return UIDevice.current.userInterfaceIdiom == .pad
+        UIDevice.current.userInterfaceIdiom == .pad
         #endif
     }
 }
@@ -106,11 +103,7 @@ extension View {
 
     @ViewBuilder
     private func themeTint() -> some View {
-        if #available(iOS 15, *) {
-            tint(.accentColor)
-        } else {
-            self
-        }
+        tint(.accentColor)
     }
 
     private func themeListStyleValue() -> some ListStyle {
@@ -118,11 +111,7 @@ extension View {
     }
 
     private func themeToggleStyleValue() -> some ToggleStyle {
-        if #available(iOS 15, *) {
-            return .switch
-        } else {
-            return SwitchToggleStyle(tint: .accentColor)
-        }
+        .switch
     }
 }
 
