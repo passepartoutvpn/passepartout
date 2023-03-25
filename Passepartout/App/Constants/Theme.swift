@@ -57,6 +57,9 @@ extension View {
 extension View {
     func themeGlobal() -> some View {
         themeNavigationViewStyle()
+            #if !targetEnvironment(macCatalyst)
+            .themeLockScreen()
+            #endif
             .themeTint()
             .listStyle(themeListStyleValue())
             .toggleStyle(themeToggleStyleValue())
@@ -487,6 +490,18 @@ extension View {
         } else {
             EmptyView()
         }
+    }
+
+    func themeLockScreen() -> some View {
+        @AppStorage(AppPreference.locksInBackground.rawValue) var locksInBackground = false
+        return LockableView(
+            reason: L10n.Global.Messages.unlockApp,
+            locksInBackground: $locksInBackground,
+            content: {
+                self
+            },
+            lockedContent: LogoView.init
+        )
     }
 }
 
