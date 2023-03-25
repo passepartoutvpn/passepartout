@@ -30,11 +30,9 @@ import PassepartoutLibrary
 struct PassepartoutApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
-    @AppStorage(AppPreference.locksInBackground.rawValue) private var locksInBackground = false
-
     @SceneBuilder var body: some Scene {
         WindowGroup {
-            mainView
+            MainView()
                 .withoutTitleBar()
                 .onIntentActivity(IntentDispatcher.connectVPN)
                 .onIntentActivity(IntentDispatcher.disableVPN)
@@ -45,19 +43,6 @@ struct PassepartoutApp: App {
                 .onIntentActivity(IntentDispatcher.untrustCellularNetwork)
                 .onIntentActivity(IntentDispatcher.untrustCurrentNetwork)
         }
-    }
-
-    private var mainView: some View {
-        #if targetEnvironment(macCatalyst)
-        MainView()
-        #else
-        LockableView(
-            reason: L10n.Global.Messages.unlockApp,
-            locksInBackground: $locksInBackground,
-            content: MainView.init,
-            lockedContent: LogoView.init
-        )
-        #endif
     }
 }
 

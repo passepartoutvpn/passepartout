@@ -25,6 +25,7 @@
 
 import SwiftUI
 import PassepartoutLibrary
+import LocalAuthentication
 
 extension View {
     var themeIdiom: UIUserInterfaceIdiom {
@@ -57,6 +58,9 @@ extension View {
 extension View {
     func themeGlobal() -> some View {
         themeNavigationViewStyle()
+            #if !targetEnvironment(macCatalyst)
+            .themeLockScreen()
+            #endif
             .themeTint()
             .listStyle(themeListStyleValue())
             .toggleStyle(themeToggleStyleValue())
@@ -486,6 +490,42 @@ extension View {
             }
         } else {
             EmptyView()
+        }
+    }
+}
+
+// MARK: Lock screen
+
+extension View {
+    func themeLockScreen() -> some View {
+        @AppStorage(AppPreference.locksInBackground.rawValue) var locksInBackground = false
+        return LockableView(
+            locksInBackground: $locksInBackground,
+            content: {
+                self
+            },
+            lockedContent: LogoView.init,
+            unlockBlock: Self.themeUnlockScreenBlock
+        )
+    }
+
+    private static func themeUnlockScreenBlock(isLocked: Binding<Bool>) {
+        let context = LAContext()
+        let policy: LAPolicy = .deviceOwnerAuthentication
+        var error: NSError?
+        guard context.canEvaluatePolicy(policy, error: &error) else {
+            isLocked.wrappedValue = false
+            return
+        }
+        Task { @MainActor in
+            do {
+                let isAuthorized = try await context.evaluatePolicy(
+                    policy,
+                    localizedReason: L10n.Global.Messages.unlockApp
+                )
+                isLocked.wrappedValue = !isAuthorized
+            } catch {
+            }
         }
     }
 }

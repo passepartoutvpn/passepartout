@@ -24,37 +24,35 @@
 //
 
 import SwiftUI
-import LocalAuthentication
 
 struct LockableView<Content: View, LockedContent: View>: View {
-    let reason: String
-
     @Binding var locksInBackground: Bool
 
     let content: () -> Content
 
     let lockedContent: () -> LockedContent
 
+    let unlockBlock: (Binding<Bool>) -> Void
+
     @Environment(\.scenePhase) private var scenePhase
 
-    @State private var didAppear = false
+    @ObservedObject private var lock: Lock = .shared
 
-    @State private var isLocked = false
+    private var isLocked: Binding<Bool> {
+        .init {
+            Lock.shared.isActive
+        } set: {
+            Lock.shared.isActive = $0
+        }
+    }
 
     var body: some View {
-        Group {
-            if !isLocked {
-                content()
-            } else {
+        ZStack {
+            content()
+            if isLocked.wrappedValue {
                 lockedContent()
             }
         }.onChange(of: scenePhase, perform: onScenePhase)
-        .onAppear {
-            if !didAppear && locksInBackground {
-                didAppear = true
-                isLocked = true
-            }
-        }
     }
 
     private func onScenePhase(_ scenePhase: ScenePhase) {
@@ -74,30 +72,26 @@ struct LockableView<Content: View, LockedContent: View>: View {
         guard locksInBackground else {
             return
         }
-        isLocked = true
+        isLocked.wrappedValue = true
     }
 
     func unlockIfNeeded() {
         guard locksInBackground else {
-            isLocked = false
+            isLocked.wrappedValue = false
             return
         }
-        guard isLocked else {
+        guard isLocked.wrappedValue else {
             return
         }
-        let context = LAContext()
-        let policy: LAPolicy = .deviceOwnerAuthentication
-        var error: NSError?
-        guard context.canEvaluatePolicy(policy, error: &error) else {
-            isLocked = false
-            return
-        }
-        Task { @MainActor in
-            do {
-                let isAuthorized = try await context.evaluatePolicy(policy, localizedReason: reason)
-                isLocked = !isAuthorized
-            } catch {
-            }
-        }
+        unlockBlock(isLocked)
+    }
+}
+
+private class Lock: ObservableObject {
+    static let shared = Lock()
+
+    @Published var isActive = true
+
+    private init() {
     }
 }
