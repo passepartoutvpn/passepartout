@@ -24,16 +24,15 @@
 //
 
 import SwiftUI
-import LocalAuthentication
 
 struct LockableView<Content: View, LockedContent: View>: View {
-    let reason: String
-
     @Binding var locksInBackground: Bool
 
     let content: () -> Content
 
     let lockedContent: () -> LockedContent
+
+    let unlockBlock: (Binding<Bool>) -> Void
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -84,20 +83,7 @@ struct LockableView<Content: View, LockedContent: View>: View {
         guard isLocked.wrappedValue else {
             return
         }
-        let context = LAContext()
-        let policy: LAPolicy = .deviceOwnerAuthentication
-        var error: NSError?
-        guard context.canEvaluatePolicy(policy, error: &error) else {
-            isLocked.wrappedValue = false
-            return
-        }
-        Task { @MainActor in
-            do {
-                let isAuthorized = try await context.evaluatePolicy(policy, localizedReason: reason)
-                isLocked.wrappedValue = !isAuthorized
-            } catch {
-            }
-        }
+        unlockBlock(isLocked)
     }
 }
 
