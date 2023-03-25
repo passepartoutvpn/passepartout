@@ -31,10 +31,6 @@ struct DestructiveButton<Label: View>: View {
     let label: () -> Label
 
     var body: some View {
-        if #available(iOS 15, *) {
-            Button(role: .destructive, action: action, label: label)
-        } else {
-            Button(action: action, label: label)
-        }
+        Button(role: .destructive, action: action, label: label)
     }
 }
