@@ -60,7 +60,7 @@ struct LockableView<Content: View, LockedContent: View>: View {
         case .active:
             unlockIfNeeded()
 
-        case .inactive:
+        case .background:
             lockIfNeeded()
 
         default:
