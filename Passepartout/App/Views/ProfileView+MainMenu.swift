@@ -93,9 +93,7 @@ extension ProfileView {
 
         private var mainView: some View {
             Menu {
-                if isActiveProfileNotDisconnected {
-                    ReconnectButton()
-                }
+                ReconnectButton()
                 ShortcutsButton(
                     modalType: $modalType
                 )
@@ -113,10 +111,6 @@ extension ProfileView {
             } label: {
                 themeSettingsMenuImage.asSystemImage
             }
-        }
-
-        private var isActiveProfileNotDisconnected: Bool {
-            profileManager.isActiveProfile(header.id) && currentVPNState.vpnStatus != .disconnected
         }
 
         private var uninstallVPNButton: some View {

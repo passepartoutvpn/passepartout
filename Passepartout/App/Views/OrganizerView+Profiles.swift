@@ -148,17 +148,9 @@ extension OrganizerView {
         }
 
         var body: some View {
-
-            // XXX: iOS bug, before 16, context menu is not redrawn on VPN state change
-            if #available(iOS 16, *), isActiveProfileNotDisconnected {
-                reconnectButton
-            }
+            reconnectButton
             duplicateButton
             deleteButton
-        }
-
-        private var isActiveProfileNotDisconnected: Bool {
-            profileManager.isActiveProfile(header.id) && currentVPNState.vpnStatus != .disconnected
         }
 
         private var reconnectButton: some View {
