@@ -88,6 +88,7 @@ extension ProfileView {
                 )
             } footer: {
                 Text(L10n.Profile.Sections.VpnResolvesHostname.footer)
+                    .xxxThemeTruncation()
             }
             Section {
                 NavigationLink {
