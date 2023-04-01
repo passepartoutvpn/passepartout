@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bump targets to iOS 15 / macOS 12.
+- Always show "Reconnect" button. [#277](https://github.com/passepartoutvpn/passepartout-apple/pull/277)
 - Move Diagnostics view to Profile bottom. [#261](https://github.com/passepartoutvpn/passepartout-apple/pull/261)
 
 ### Fixed
