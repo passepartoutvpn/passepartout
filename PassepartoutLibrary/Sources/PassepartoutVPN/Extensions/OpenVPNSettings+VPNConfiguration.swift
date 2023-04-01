@@ -58,7 +58,9 @@ extension Profile.OpenVPNSettings: VPNConfigurationProviding {
         )
         cfg.username = parameters.username
         cfg.shouldDebug = true
-        cfg.debugLogPath = parameters.preferences.tunnelLogPath
+        if let filename = parameters.preferences.tunnelLogPath {
+            cfg.debugLogPath = vpnPath(with: filename)
+        }
         cfg.debugLogFormat = parameters.preferences.tunnelLogFormat
         cfg.masksPrivateData = parameters.preferences.masksPrivateData
 
