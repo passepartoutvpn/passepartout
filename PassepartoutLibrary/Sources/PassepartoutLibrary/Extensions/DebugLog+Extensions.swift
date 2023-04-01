@@ -38,7 +38,11 @@ extension DebugLog {
         #if os(iOS)
         let device: UIDevice = .current
         osVersion = "\(device.systemName) \(device.systemVersion)"
+        #if targetEnvironment(macCatalyst)
+        deviceType = "\(device.model) (Catalyst)"
+        #else
         deviceType = "\(device.model) (\(device.userInterfaceIdiom.debugDescription))"
+        #endif
         #else
         let os = ProcessInfo().operatingSystemVersion
         osVersion = "macOS \(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
