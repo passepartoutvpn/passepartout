@@ -63,3 +63,11 @@ extension VPNProtocolType {
         true
     }
 }
+
+extension VPNProtocolProviding {
+    func vpnPath(with path: String) -> String {
+        var components = path.split(separator: "/").map(String.init)
+        components.insert(vpnProtocol.description, at: components.count - 1)
+        return components.joined(separator: "/")
+    }
+}

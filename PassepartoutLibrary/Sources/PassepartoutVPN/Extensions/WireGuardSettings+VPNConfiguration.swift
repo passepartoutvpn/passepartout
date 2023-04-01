@@ -48,7 +48,9 @@ extension Profile.WireGuardSettings: VPNConfigurationProviding {
             configuration: customConfiguration
         )
         cfg.shouldDebug = true
-        cfg.debugLogPath = parameters.preferences.tunnelLogPath
+        if let filename = parameters.preferences.tunnelLogPath {
+            cfg.debugLogPath = vpnPath(with: filename)
+        }
         cfg.debugLogFormat = parameters.preferences.tunnelLogFormat
 
         var extra = NetworkExtensionExtra()
