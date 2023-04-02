@@ -1,8 +1,8 @@
 <p style="text-align: center; padding: 0em 1em"><img src="res/logo.svg" width="300" height="300" /></p>
 
-![iOS 14+](https://img.shields.io/badge/iOS-14+-green.svg)
-![macOS 11+](https://img.shields.io/badge/macOS-11+-green.svg)
-[![TunnelKit 5.0](https://img.shields.io/badge/TunnelKit-5.0-d69c68.svg)][dep-tunnelkit]
+![iOS 15+](https://img.shields.io/badge/iOS-15+-green.svg)
+![macOS 12+](https://img.shields.io/badge/macOS-12+-green.svg)
+[![TunnelKit 6.0](https://img.shields.io/badge/TunnelKit-6.0-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
 
 [![Unit Tests](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml)
@@ -87,7 +87,7 @@ Passepartout can import .ovpn (OpenVPN) and .conf/.wg (WireGuard) configuration 
 
 ### Requirements
 
-- iOS 14+ / macOS 11+
+- iOS 15+ / macOS 12+
 - Xcode 13+ (SwiftPM 5.3)
 - Git (preinstalled with Xcode Command Line Tools)
 - Ruby (preinstalled with macOS)
