@@ -179,13 +179,15 @@ extension Error {
 extension Error {
     var localizedVPNParsingDescription: String? {
         if let ovpnError = self as? OpenVPN.ConfigurationError {
-            return ovpnErrorDescription(ovpnError)
+            return ovpnConfigurationErrorDescription(ovpnError)
+        } else if let wgError = self as? WireGuard.ConfigurationError {
+            return wgConfigurationErrorDescription(wgError)
         }
         pp_log.error("Could not parse configuration URL: \(localizedDescription)")
         return L10n.Tunnelkit.Errors.parsing(localizedDescription)
     }
 
-    private func ovpnErrorDescription(_ error: OpenVPN.ConfigurationError) -> String {
+    private func ovpnConfigurationErrorDescription(_ error: OpenVPN.ConfigurationError) -> String {
         let V = L10n.Tunnelkit.Errors.Openvpn.self
         switch error {
         case .encryptionPassphrase:
@@ -211,5 +213,9 @@ extension Error {
             pp_log.error("Could not parse configuration URL: unsupported configuration, \(option)")
             return V.unsupportedOption(option)
         }
+    }
+
+    private func wgConfigurationErrorDescription(_ error: WireGuard.ConfigurationError) -> String {
+        error.localizedDescription
     }
 }

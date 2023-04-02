@@ -37,7 +37,7 @@ extension ProfileManager {
             do {
                 let wg = try WireGuard.Configuration(wgQuickConfig: contents)
                 return Profile(header, configuration: wg)
-            } catch {
+            } catch WireGuard.ConfigurationError.invalidLine {
                 throw ovpnError
             }
         }

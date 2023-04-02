@@ -24,7 +24,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
 //        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", from: "5.0.0"),
-        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("7ce254be0293ba7e1eeda07a3701804de59f7490")),
+        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("8f066a9e4821f041693c8262ba01ef49ab0084ae")),
 //        .package(name: "TunnelKit", path: "../../tunnelkit"),
         .package(url: "https://github.com/zoul/generic-json-swift", from: "2.0.0"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "1.9.0")
