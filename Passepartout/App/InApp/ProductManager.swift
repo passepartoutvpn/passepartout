@@ -205,11 +205,7 @@ class ProductManager: NSObject, ObservableObject {
                 return true
             }
         }
-        if isMac {
-            return isFullVersion()
-        } else {
-            return isFullVersion() || purchasedFeatures.contains(feature)
-        }
+        return isFullVersion() || purchasedFeatures.contains(feature)
     }
 
     func isEligible(forProvider providerName: ProviderName) -> Bool {
