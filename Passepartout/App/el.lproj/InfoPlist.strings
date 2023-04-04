@@ -23,4 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"NSLocationWhenInUseUsageDescription" = "Το όνομα του τρέχοντος Wi-Fi";
+"NSLocationWhenInUseUsageDescription" = "Πρόσβαση στο όνομα του τρέχοντος Wi-Fi";
+
+"NSFaceIDUsageDescription" = "Ξεκλείδωμα εφαρμογής με Face ID";

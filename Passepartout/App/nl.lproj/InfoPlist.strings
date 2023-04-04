@@ -23,4 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"NSLocationWhenInUseUsageDescription" = "Toegangsnaam van de huidige Wi-Fi verbinding.";
+"NSLocationWhenInUseUsageDescription" = "Toegangsnaam van huidig Wi-Fi-netwerk";
+
+"NSFaceIDUsageDescription" = "Ontgrendel app met gezichtsherkenning";

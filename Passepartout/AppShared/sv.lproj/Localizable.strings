@@ -50,7 +50,8 @@
 "global.strings.connect" = "Anslut";
 "global.strings.disconnect" = "Koppla från";
 "global.strings.download" = "Ladda ner";
-
+"global.strings.authentication" = "Autentisering";
+"global.messages.unlock_app" = "Passepartout är låst";
 "global.messages.email_not_configured" = "Inget e-postkonto är konfigurerat.";
 "global.messages.share" = "Passepartout är en användarvänlig öppen källkod OpenVPN / WireGuard klient för iOS och macOS";
 
@@ -152,6 +153,7 @@
 "profile.items.vpn.turn_off.caption" = "Inaktivera VPN";
 "profile.items.connection_status.caption" = "Status";
 "profile.items.data_count.caption" = "Utbyttad data";
+"profile.items.randomizes_server.caption" = "Välj server slumpmässigt";
 "profile.items.provider.refresh.caption" = "Uppdatera infrastruktur";
 "profile.items.category.caption" = "Kategori";
 "profile.items.only_shows_favorites.caption" = "Visa endast favoritplatser";
@@ -179,10 +181,13 @@
 "account.title" = "Konto";
 "account.sections.credentials.header" = "Referenser";
 "account.sections.registration.footer" = "Hämta ett konto på %@ webbplatsen.";
+"account.items.authentication_method.persistent" = "Persistent";
+"account.items.authentication_method.interactive" = "Interaktiv";
 "account.items.username.caption" = "Användarnamn";
 "account.items.username.placeholder" = "användarnamn";
 "account.items.password.caption" = "Lösenord";
 "account.items.password.placeholder" = "hemlighet";
+"account.items.seed.caption" = "Sådd";
 "account.items.open_guide.caption" = "Visa dina uppgifter";
 "account.items.signup.caption" = "Registrera med %@";
 
@@ -316,6 +321,7 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Inställningar";
+"settings.items.locks_in_background.caption" = "Åtkomst till låst app";
 "settings.items.donate.caption" = "Gör en donation";
 
 /* MARK: AboutView */

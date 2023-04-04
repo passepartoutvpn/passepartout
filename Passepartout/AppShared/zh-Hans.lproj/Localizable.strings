@@ -50,7 +50,8 @@
 "global.strings.connect" = "连接";
 "global.strings.disconnect" = "断开连接";
 "global.strings.download" = "下载";
-
+"global.strings.authentication" = "身份验证";
+"global.messages.unlock_app" = "Passepartout已被锁定";
 "global.messages.email_not_configured" = "未配置e-mail账户。";
 "global.messages.share" = "Passepartout是适用于iOS和macOS操作系统的OpenVPN/WireGuard开源客户端，易于使用";
 
@@ -152,6 +153,7 @@
 "profile.items.vpn.turn_off.caption" = "禁用VPN";
 "profile.items.connection_status.caption" = "状态";
 "profile.items.data_count.caption" = "已交换数据量";
+"profile.items.randomizes_server.caption" = "随机服务器";
 "profile.items.provider.refresh.caption" = "刷新基础设置";
 "profile.items.category.caption" = "类别";
 "profile.items.only_shows_favorites.caption" = "仅显示收藏的地点";
@@ -179,10 +181,13 @@
 "account.title" = "账户";
 "account.sections.credentials.header" = "认证方式";
 "account.sections.registration.footer" = "在%@网站上获取一个账户";
+"account.items.authentication_method.persistent" = "持续";
+"account.items.authentication_method.interactive" = "互动";
 "account.items.username.caption" = "用户名";
 "account.items.username.placeholder" = "username";
 "account.items.password.caption" = "密码";
 "account.items.password.placeholder" = "secret";
+"account.items.seed.caption" = "种子";
 "account.items.open_guide.caption" = "查看你的认证信息";
 "account.items.signup.caption" = "以%@注册";
 
@@ -316,6 +321,7 @@
 /* MARK: SettingsView */
 
 "settings.title" = "设置";
+"settings.items.locks_in_background.caption" = "锁定应用访问权限";
 "settings.items.donate.caption" = "提供捐助";
 
 /* MARK: AboutView */

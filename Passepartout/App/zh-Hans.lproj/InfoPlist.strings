@@ -23,4 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"NSLocationWhenInUseUsageDescription" = "当前Wi-Fi的名称";
+"NSLocationWhenInUseUsageDescription" = "当前Wi-Fi的访问名称";
+
+"NSFaceIDUsageDescription" = "用面容ID解锁应用";
