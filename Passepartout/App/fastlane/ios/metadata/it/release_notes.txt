@@ -17,4 +17,5 @@
 
 - Improve kill switch behavior.
 - Retain original filename as imported profile name.
+- In-app purchases other than full version were not recognized (macOS).
 
