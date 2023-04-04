@@ -23,4 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"NSLocationWhenInUseUsageDescription" = "Имя доступа подключённой Wi-Fi сети";
+"NSLocationWhenInUseUsageDescription" = "Доступ к имени подключенной сети Wi-Fi";
+
+"NSFaceIDUsageDescription" = "Разблокировать приложение по Face ID";

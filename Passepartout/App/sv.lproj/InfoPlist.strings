@@ -23,4 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-"NSLocationWhenInUseUsageDescription" = "Ta fram namn av nuvarande Wi-Fi";
+"NSLocationWhenInUseUsageDescription" = "Åtkomstnamn för aktuellt Wi-Fi";
+
+"NSFaceIDUsageDescription" = "Lås upp appen med Face ID";

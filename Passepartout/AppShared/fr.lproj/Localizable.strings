@@ -50,7 +50,8 @@
 "global.strings.connect" = "Connecter";
 "global.strings.disconnect" = "Déconnecter";
 "global.strings.download" = "Télécharger";
-
+"global.strings.authentication" = "Authentification";
+"global.messages.unlock_app" = "Passepartout verrouillé";
 "global.messages.email_not_configured" = "Aucun compte courriel n'est configuré.";
 "global.messages.share" = "Passepartout est un client OpenVPN / WireGuard simple d'utilisation et open source pour iOS et macOS";
 
@@ -152,6 +153,7 @@
 "profile.items.vpn.turn_off.caption" = "Désactiver VPN";
 "profile.items.connection_status.caption" = "Statut";
 "profile.items.data_count.caption" = "Échanger les données";
+"profile.items.randomizes_server.caption" = "Rendre aléatoire le serveur";
 "profile.items.provider.refresh.caption" = "Rafraîchir l'infrastructure";
 "profile.items.category.caption" = "Catégorie";
 "profile.items.only_shows_favorites.caption" = "Afficher uniquement les emplacements favoris";
@@ -179,10 +181,13 @@
 "account.title" = "Compte";
 "account.sections.credentials.header" = "Indetifiants";
 "account.sections.registration.footer" = "Allez créer un compte sur le site %@.";
+"account.items.authentication_method.persistent" = "Persistent";
+"account.items.authentication_method.interactive" = "Interactif";
 "account.items.username.caption" = "Nom d'utilisateur";
 "account.items.username.placeholder" = "nom d'utilisateur";
 "account.items.password.caption" = "Mot de passe";
 "account.items.password.placeholder" = "secret";
+"account.items.seed.caption" = "Source";
 "account.items.open_guide.caption" = "Voir vos identifiants";
 "account.items.signup.caption" = "S'inscrire avec %@";
 
@@ -316,6 +321,7 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Réglages";
+"settings.items.locks_in_background.caption" = "Verrouiller l'accès à l'application";
 "settings.items.donate.caption" = "Faire un don";
 
 /* MARK: AboutView */

@@ -462,6 +462,8 @@ internal enum L10n {
       internal static let addresses = L10n.tr("Localizable", "global.strings.addresses", fallback: "Addresses")
       /// Advanced
       internal static let advanced = L10n.tr("Localizable", "global.strings.advanced", fallback: "Advanced")
+      /// Authentication
+      internal static let authentication = L10n.tr("Localizable", "global.strings.authentication", fallback: "Authentication")
       /// Automatic
       internal static let automatic = L10n.tr("Localizable", "global.strings.automatic", fallback: "Automatic")
       /// Bytes

@@ -61,7 +61,7 @@ struct AccountView: View {
             // TODO: interactive, re-enable after fixing
 //            Section {
 //                // TODO: interactive, l10n
-//                themeTextPicker(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
+//                themeTextPicker(L10n.Global.Strings.authentication, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
 //                    .persistent,
 //                    .interactive
 ////                    .totp // TODO: interactive, support OTP-based authentication

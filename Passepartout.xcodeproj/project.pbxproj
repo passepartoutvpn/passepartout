@@ -507,6 +507,9 @@
 		0EF2212E27E66F60001D0BD7 /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 		0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProviderViewModel.swift; sourceTree = "<group>"; };
 		0EF8C5A728213C510053CE89 /* OrganizerView+Profiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Profiles.swift"; sourceTree = "<group>"; };
+		A373484D29DC4F4500D1613C /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A373484E29DC504000D1613C /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A373484F29DC52CA00D1613C /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Intents.strings; sourceTree = "<group>"; };
 		A38D607628AFCFD20005C271 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A3A7CC452878DC8300172D7D /* ProviderServerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderServerItem.swift; sourceTree = "<group>"; };
 		A3A7CC472878DC9F00172D7D /* ProviderServerItem+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProviderServerItem+ViewModel.swift"; sourceTree = "<group>"; };
@@ -1234,6 +1237,7 @@
 				pt,
 				"zh-Hans",
 				pl,
+				uk,
 			);
 			mainGroup = 0E57F62F20C83FC5008323CF;
 			packageReferences = (
@@ -1621,6 +1625,7 @@
 				0EBE2FD72360F89600F0D5AB /* es */,
 				0EBE2FD82360F89600F0D5AB /* sv */,
 				0E1C0A52238FFF97009FC087 /* pl */,
+				A373484D29DC4F4500D1613C /* uk */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1640,6 +1645,7 @@
 				0E9E5AEC27B44CF1008C95DA /* fr */,
 				0E9E5AED27B44CF1008C95DA /* nl */,
 				0E9E5AEE27B44CF1008C95DA /* pt */,
+				A373484E29DC504000D1613C /* uk */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1660,6 +1666,7 @@
 				0EA5912A2733DDFC0096F796 /* ru */,
 				0EA5912C2733DDFC0096F796 /* es */,
 				0EA5912E2733DDFD0096F796 /* sv */,
+				A373484F29DC52CA00D1613C /* uk */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";

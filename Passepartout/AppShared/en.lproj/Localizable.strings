@@ -50,7 +50,7 @@
 "global.strings.connect" = "Connect";
 "global.strings.disconnect" = "Disconnect";
 "global.strings.download" = "Download";
-
+"global.strings.authentication" = "Authentication";
 "global.messages.unlock_app" = "Passepartout is locked";
 "global.messages.email_not_configured" = "No e-mail account is configured.";
 "global.messages.share" = "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";
