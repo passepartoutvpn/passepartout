@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CryptoKit
 import Foundation
 import PassepartoutCore
-import CryptoKit
 
 // primary keys within infrastructure (pinned: vpnProtocol)
 

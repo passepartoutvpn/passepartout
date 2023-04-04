@@ -23,11 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
+import Kvitto
 import PassepartoutLibrary
 import StoreKit
-import Kvitto
-import Combine
 
 enum ProductError: Error {
     case uneligible

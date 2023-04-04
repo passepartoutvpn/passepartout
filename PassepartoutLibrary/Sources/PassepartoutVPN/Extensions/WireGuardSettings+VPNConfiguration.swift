@@ -24,10 +24,10 @@
 //
 
 import Foundation
-import TunnelKitManager
-import TunnelKitWireGuard
 import PassepartoutCore
 import PassepartoutUtils
+import TunnelKitManager
+import TunnelKitWireGuard
 
 extension Profile.WireGuardSettings: VPNConfigurationProviding {
     func vpnConfiguration(_ parameters: VPNConfigurationParameters) throws -> VPNConfiguration {

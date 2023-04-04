@@ -24,9 +24,9 @@
 //
 
 import Foundation
+import PassepartoutCore
 import TunnelKitCore
 import TunnelKitOpenVPN
-import PassepartoutCore
 
 extension Profile.OpenVPNSettings: GatewaySettingsProviding {
 

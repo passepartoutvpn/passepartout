@@ -23,14 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Combine
+import Foundation
 import NetworkExtension
+import PassepartoutCore
+import PassepartoutUtils
 import TunnelKitCore
 import TunnelKitManager
 import TunnelKitOpenVPNCore
-import PassepartoutCore
-import PassepartoutUtils
 
 public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where VPNType.Configuration == NetworkExtensionConfiguration, VPNType.Extra == NetworkExtensionExtra {
     private struct AtomicState: Equatable {

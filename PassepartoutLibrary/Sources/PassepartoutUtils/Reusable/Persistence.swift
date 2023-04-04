@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import CoreData
 import Combine
+import CoreData
+import Foundation
 
 public class Persistence {
     private let container: NSPersistentContainer

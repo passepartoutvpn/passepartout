@@ -73,7 +73,7 @@ struct AboutView: View {
     private var supportSection: some View {
         Section {
             Button(L10n.About.Items.JoinCommunity.caption) {
-                URL.openURL(redditURL)
+                URL.open(redditURL)
             }
             Button(L10n.About.Items.ShareTwitter.caption, action: shareOnTwitter)
             Button(L10n.About.Items.WriteReview.caption, action: submitReview)
@@ -85,16 +85,16 @@ struct AboutView: View {
     private var webSection: some View {
         Section {
             Button(L10n.About.Items.Website.caption) {
-                URL.openURL(homeURL)
+                URL.open(homeURL)
             }
             Button(Unlocalized.About.faq) {
-                URL.openURL(faqURL)
+                URL.open(faqURL)
             }
             Button(L10n.About.Items.Disclaimer.caption) {
-                URL.openURL(disclaimerURL)
+                URL.open(disclaimerURL)
             }
             Button(L10n.About.Items.PrivacyPolicy.caption) {
-                URL.openURL(privacyURL)
+                URL.open(privacyURL)
             }
         } header: {
             Text(L10n.About.Sections.Web.header)
@@ -104,10 +104,10 @@ struct AboutView: View {
     private var githubSection: some View {
         Section {
             Button(Unlocalized.About.readme) {
-                URL.openURL(readmeURL)
+                URL.open(readmeURL)
             }
             Button(Unlocalized.About.changelog) {
-                URL.openURL(changelogURL)
+                URL.open(changelogURL)
             }
         } header: {
             Text(Unlocalized.About.github)
@@ -118,11 +118,11 @@ struct AboutView: View {
 extension AboutView {
     private func shareOnTwitter() {
         let url = Unlocalized.Social.twitterIntent(withMessage: shareMessage)
-        URL.openURL(url)
+        URL.open(url)
     }
 
     private func submitReview() {
         let reviewURL = Reviewer.urlForReview(withAppId: Constants.App.appStoreId)
-        URL.openURL(reviewURL)
+        URL.open(reviewURL)
     }
 }

@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import XCTest
 @testable import PassepartoutVPN
+import XCTest
 
 class VPNTests: XCTestCase {
     override func setUp() {

@@ -25,11 +25,11 @@
 
 import Foundation
 import GenericJSON
-import TunnelKitCore
-import TunnelKitOpenVPNCore
-import TunnelKitManager
 import PassepartoutCore
 import PassepartoutUtils
+import TunnelKitCore
+import TunnelKitManager
+import TunnelKitOpenVPNCore
 
 private typealias Map = [String: Any]
 

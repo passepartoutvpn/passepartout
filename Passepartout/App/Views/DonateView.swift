@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
-import StoreKit
 import PassepartoutLibrary
+import StoreKit
+import SwiftUI
 
 struct DonateView: View {
     enum AlertType: Identifiable {

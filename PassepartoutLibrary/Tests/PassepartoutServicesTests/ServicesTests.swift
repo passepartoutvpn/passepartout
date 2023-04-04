@@ -23,11 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import XCTest
 import Combine
 @testable import PassepartoutServices
 import PassepartoutUtils
 import SwiftyBeaver
+import XCTest
 
 class ServicesTests: XCTestCase {
     let wsLocal = DefaultWebServices.bundledServices(withVersion: "v5")

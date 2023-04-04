@@ -23,12 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import CoreData
+import Foundation
+import GenericJSON
 import PassepartoutCore
 import PassepartoutServices
 import PassepartoutUtils
-import GenericJSON
 
 struct PresetMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext

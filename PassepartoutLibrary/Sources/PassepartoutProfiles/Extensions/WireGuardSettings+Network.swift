@@ -24,9 +24,9 @@
 //
 
 import Foundation
+import PassepartoutCore
 import TunnelKitCore
 import TunnelKitWireGuard
-import PassepartoutCore
 
 extension Profile.WireGuardSettings: DNSSettingsProviding {
     public var dnsProtocol: DNSProtocol? {

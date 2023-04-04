@@ -24,9 +24,9 @@
 //
 
 import Foundation
+import PassepartoutUtils
 import TunnelKitCore
 import TunnelKitManager
-import PassepartoutUtils
 
 public class ObservableVPNState: ObservableObject {
     @Published public internal(set) var isEnabled = false {

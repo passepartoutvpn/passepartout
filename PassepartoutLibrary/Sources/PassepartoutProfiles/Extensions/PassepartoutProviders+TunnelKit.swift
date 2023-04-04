@@ -23,12 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Combine
-import TunnelKitOpenVPN
-import TunnelKitWireGuard
+import Foundation
 import PassepartoutCore
 import PassepartoutUtils
+import TunnelKitOpenVPN
+import TunnelKitWireGuard
 
 extension ProviderServer.Preset {
     public var openVPNConfiguration: OpenVPN.Configuration? {

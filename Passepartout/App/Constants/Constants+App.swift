@@ -24,8 +24,8 @@
 //
 
 import Foundation
-import UniformTypeIdentifiers
 import SwiftyBeaver
+import UniformTypeIdentifiers
 
 extension Constants {
     enum App {

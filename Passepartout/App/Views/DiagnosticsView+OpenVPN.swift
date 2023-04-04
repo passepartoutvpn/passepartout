@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import PassepartoutLibrary
+import SwiftUI
 import TunnelKitOpenVPN
 
 extension DiagnosticsView {
@@ -178,7 +178,7 @@ extension DiagnosticsView.OpenVPNView {
         guard let url = URL.mailto(to: V.recipient, subject: V.subject, body: body) else {
             return
         }
-        guard URL.openURL(url) else {
+        guard URL.open(url) else {
             alertType = .emailNotConfigured
             return
         }

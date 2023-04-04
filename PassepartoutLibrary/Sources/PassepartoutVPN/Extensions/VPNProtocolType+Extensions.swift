@@ -24,9 +24,9 @@
 //
 
 import Foundation
+import PassepartoutCore
 import TunnelKitOpenVPN
 import TunnelKitWireGuard
-import PassepartoutCore
 
 extension VPNProtocolType: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {

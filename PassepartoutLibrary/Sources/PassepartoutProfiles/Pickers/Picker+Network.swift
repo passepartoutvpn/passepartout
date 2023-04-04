@@ -24,8 +24,8 @@
 //
 
 import Foundation
-import TunnelKitCore
 import PassepartoutCore
+import TunnelKitCore
 
 extension Network.DNSSettings {
     public static func availableConfigurationTypes(forVPNProtocol vpnProtocol: VPNProtocolType) -> [ConfigurationType] {

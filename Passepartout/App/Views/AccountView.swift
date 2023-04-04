@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import PassepartoutLibrary
+import SwiftUI
 
 struct AccountView: View {
     @ObservedObject private var providerManager: ProviderManager
@@ -116,7 +116,7 @@ struct AccountView: View {
     }
 
     private func openGuidanceURL(_ url: URL) {
-        URL.openURL(url)
+        URL.open(url)
     }
 }
 

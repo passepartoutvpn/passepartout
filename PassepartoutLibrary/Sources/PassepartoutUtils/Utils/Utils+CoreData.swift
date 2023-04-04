@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Utils {
     public static func randomizeFetchResults<T>(_ request: NSFetchRequest<T>, in context: NSManagedObjectContext) throws {

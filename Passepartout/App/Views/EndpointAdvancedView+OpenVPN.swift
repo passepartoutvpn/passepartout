@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import PassepartoutLibrary
 import SwiftUI
 import TunnelKitOpenVPN
-import PassepartoutLibrary
 
 extension EndpointAdvancedView {
     struct OpenVPNView: View {

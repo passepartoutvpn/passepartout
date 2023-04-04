@@ -24,9 +24,9 @@
 //
 
 import Foundation
-import TunnelKitManager
 import PassepartoutCore
 import PassepartoutUtils
+import TunnelKitManager
 
 extension ProfileManager {
     public func savePassword(forProfile profile: Profile, newPassword: String? = nil) {

@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 public protocol GenericWebServicesError: Error {
     static func httpStatus(_ status: Int) -> Self

@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
 import PassepartoutLibrary
-import Combine
 
 class DefaultLightVPNManager: LightVPNManager {
     private let vpnManager = VPNManager.shared

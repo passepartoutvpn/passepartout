@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import Intents
 import PassepartoutLibrary
+import SwiftUI
 
 struct ShortcutsView: View {
     enum ModalType: Identifiable {

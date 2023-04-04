@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
-import PassepartoutLibrary
 import LocalAuthentication
+import PassepartoutLibrary
+import SwiftUI
 
 extension View {
     var themeIdiom: UIUserInterfaceIdiom {

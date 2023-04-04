@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import MessageUI
 import PassepartoutLibrary
+import SwiftUI
 
 struct ReportIssueView: View {
     @Binding private var isPresented: Bool

@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Combine
+import Foundation
 import PassepartoutCore
 import PassepartoutProfiles
 import PassepartoutProviders

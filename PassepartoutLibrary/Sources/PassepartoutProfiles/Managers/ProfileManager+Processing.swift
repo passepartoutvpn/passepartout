@@ -24,9 +24,9 @@
 //
 
 import Foundation
+import PassepartoutCore
 import TunnelKitOpenVPN
 import TunnelKitWireGuard
-import PassepartoutCore
 
 extension ProfileManager {
     public func profile(withHeader header: Profile.Header, fromContents contents: String, originalURL: URL?, passphrase: String?) throws -> Profile {

@@ -23,11 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CoreData
 import Foundation
 import PassepartoutCore
 import PassepartoutServices
 import PassepartoutUtils
-import CoreData
 
 struct CategoryMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext

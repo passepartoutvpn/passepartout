@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 // https://medium.com/geekculture/from-combine-to-async-await-c08bf1d15b77
 

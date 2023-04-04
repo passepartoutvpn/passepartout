@@ -23,10 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import XCTest
 import PassepartoutCore
 @testable import PassepartoutProfiles
 import SwiftyBeaver
+import XCTest
 
 class ProfilesTests: XCTestCase {
     override func setUp() {

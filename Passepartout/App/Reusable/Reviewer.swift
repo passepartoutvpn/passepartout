@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import StoreKit
+import UIKit
 
 public class Reviewer: ObservableObject {
     private struct Keys {

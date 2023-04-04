@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import PassepartoutLibrary
+import SwiftUI
 
 struct NetworkSettingsView: View {
     @ObservedObject private var currentProfile: ObservableProfile

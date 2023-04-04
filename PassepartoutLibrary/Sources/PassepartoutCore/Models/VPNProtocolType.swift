@@ -25,7 +25,7 @@
 
 import Foundation
 
-public enum VPNProtocolType: String, Codable {
+public enum VPNProtocolType: String, CaseIterable, Codable {
     case openVPN = "ovpn"
 
     case wireGuard = "wg"

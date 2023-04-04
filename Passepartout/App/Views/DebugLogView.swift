@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import Combine
 import PassepartoutLibrary
+import SwiftUI
 
 struct DebugLogView: View {
     private let title: String

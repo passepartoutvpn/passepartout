@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import TunnelKit
 
 extension Profile {
     public struct NetworkSettings: Codable, Equatable {

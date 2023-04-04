@@ -23,14 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import XCTest
-import CoreData
 import Combine
+import CoreData
 import PassepartoutCore
 @testable import PassepartoutProviders
 import PassepartoutServices
 import PassepartoutUtils
 import SwiftyBeaver
+import XCTest
 
 class ProvidersTests: XCTestCase {
     private static let persistence: Persistence = {

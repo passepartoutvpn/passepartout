@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import PassepartoutLibrary
+import SwiftUI
 
 struct OrganizerView: View {
     enum ModalType: Identifiable {
@@ -151,7 +151,7 @@ extension OrganizerView {
                 message: Text(L10n.Organizer.Alerts.Reddit.message),
                 primaryButton: .default(Text(L10n.Organizer.Alerts.Reddit.Buttons.subscribe)) {
                     didHandleSubreddit = true
-                    URL.openURL(redditURL)
+                    URL.open(redditURL)
                 },
                 secondaryButton: .cancel(Text(L10n.Global.Alerts.Buttons.never)) {
                     didHandleSubreddit = true

@@ -24,9 +24,9 @@
 //
 
 import Foundation
-import TunnelKitManager
 import NetworkExtension
 import PassepartoutCore
+import TunnelKitManager
 
 public typealias VPNConfiguration = (neConfiguration: NetworkExtensionConfiguration, neExtra: NetworkExtensionExtra)
 

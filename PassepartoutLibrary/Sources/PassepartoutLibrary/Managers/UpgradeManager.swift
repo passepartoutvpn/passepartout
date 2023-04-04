@@ -23,11 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import CoreData
-import SwiftyBeaver
+import Foundation
 import PassepartoutCore
 import PassepartoutUtils
+import SwiftyBeaver
 
 @MainActor
 public final class UpgradeManager: ObservableObject {

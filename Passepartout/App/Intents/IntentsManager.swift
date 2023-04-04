@@ -23,10 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
 import Intents
 import IntentsUI
-import Combine
 import PassepartoutLibrary
 
 @MainActor

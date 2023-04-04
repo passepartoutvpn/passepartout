@@ -37,7 +37,7 @@ extension URL {
     }
 
     @discardableResult
-    public static func openURL(_ url: URL) -> Bool {
+    public static func open(_ url: URL) -> Bool {
         #if os(iOS)
         guard UIApplication.shared.canOpenURL(url) else {
             return false

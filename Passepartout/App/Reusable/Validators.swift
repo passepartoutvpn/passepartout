@@ -61,13 +61,12 @@ struct Validators {
         var sin = sockaddr_in()
         var sin6 = sockaddr_in6()
 
-        if string.withCString({ cstring in inet_pton(AF_INET6, cstring, &sin6.sin6_addr) }) == 1 {
-            return
+        guard string.withCString({ cstring in inet_pton(AF_INET6, cstring, &sin6.sin6_addr) }) == 1 else {
+            throw ValidationError.ipAddress
         }
         if string.withCString({ cstring in inet_pton(AF_INET, cstring, &sin.sin_addr) }) == 1 {
-            return
+            throw ValidationError.ipAddress
         }
-        throw ValidationError.ipAddress
     }
 
     static func domainName(_ string: String) throws {

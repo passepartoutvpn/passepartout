@@ -24,10 +24,10 @@
 //
 
 import Foundation
-import TunnelKitManager
-import TunnelKitOpenVPN
 import PassepartoutCore
 import PassepartoutUtils
+import TunnelKitManager
+import TunnelKitOpenVPN
 
 extension Profile.OpenVPNSettings: VPNConfigurationProviding {
     func vpnConfiguration(_ parameters: VPNConfigurationParameters) throws -> VPNConfiguration {

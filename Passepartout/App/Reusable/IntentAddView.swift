@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import Intents
 import IntentsUI
+import SwiftUI
 
 struct IntentAddView: UIViewControllerRepresentable {
     let shortcut: INShortcut

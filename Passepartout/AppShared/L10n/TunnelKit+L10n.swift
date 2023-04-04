@@ -24,11 +24,11 @@
 //
 
 import Foundation
+import NetworkExtension
+import PassepartoutLibrary
 import TunnelKitManager
 import TunnelKitOpenVPN
 import TunnelKitWireGuard
-import NetworkExtension
-import PassepartoutLibrary
 
 extension VPNStatus {
     var localizedDescription: String {

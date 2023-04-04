@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import XCTest
 @testable import PassepartoutLibrary
+import XCTest
 
 class LibraryTests: XCTestCase {
     override func setUp() {

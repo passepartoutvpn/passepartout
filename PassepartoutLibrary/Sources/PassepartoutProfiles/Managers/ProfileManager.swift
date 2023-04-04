@@ -23,12 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Combine
-import TunnelKitManager
+import Foundation
 import PassepartoutCore
-import PassepartoutUtils
 import PassepartoutProviders
+import PassepartoutUtils
+import TunnelKitManager
 
 @MainActor
 public final class ProfileManager: ObservableObject {

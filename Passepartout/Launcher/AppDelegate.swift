@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import AppKit
+import Foundation
 
 class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     private let appURL = Constants.Launcher.appURL

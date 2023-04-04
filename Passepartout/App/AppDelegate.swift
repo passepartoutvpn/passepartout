@@ -24,8 +24,8 @@
 //
 
 import Foundation
-import UIKit
 import PassepartoutLibrary
+import UIKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
     private let mac = MacBundle.shared
