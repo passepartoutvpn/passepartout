@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Option to lock app when entering background (iOS). [#270](https://github.com/passepartoutvpn/passepartout-apple/pull/270), [#271](https://github.com/passepartoutvpn/passepartout-apple/pull/271), [#273](https://github.com/passepartoutvpn/passepartout-apple/pull/273), [#275](https://github.com/passepartoutvpn/passepartout-apple/pull/275)
+- Option to lock app when entering background (iOS). [#270](https://github.com/passepartoutvpn/passepartout-apple/pull/270), [#271](https://github.com/passepartoutvpn/passepartout-apple/pull/271), [#273](https://github.com/passepartoutvpn/passepartout-apple/pull/273), [#275](https://github.com/passepartoutvpn/passepartout-apple/pull/275), [#282](https://github.com/passepartoutvpn/passepartout-apple/pull/282)
 - 3D Touch items (iOS). [#267](https://github.com/passepartoutvpn/passepartout-apple/pull/267)
 - Ukranian translations (Dmitry Chirkin). [#243](https://github.com/passepartoutvpn/passepartout-apple/pull/243)
 - Restore DNS "Domain" setting. [#260](https://github.com/passepartoutvpn/passepartout-apple/pull/260)
