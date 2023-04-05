@@ -32,24 +32,36 @@ struct LockableView<Content: View, LockedContent: View>: View {
 
     let lockedContent: () -> LockedContent
 
-    let unlockBlock: (Binding<Bool>) -> Void
+    let unlockBlock: () async -> Bool
 
     @Environment(\.scenePhase) private var scenePhase
 
     @ObservedObject private var lock: Lock = .shared
 
-    private var isLocked: Binding<Bool> {
-        .init {
-            Lock.shared.isActive
+    @Binding private var state: Lock.State
+
+    init(
+        locksInBackground: Binding<Bool>,
+        content: @escaping () -> Content,
+        lockedContent: @escaping () -> LockedContent,
+        unlockBlock: @escaping () async -> Bool
+    ) {
+        _locksInBackground = locksInBackground
+        self.content = content
+        self.lockedContent = lockedContent
+        self.unlockBlock = unlockBlock
+
+        _state = .init {
+            Lock.shared.state
         } set: {
-            Lock.shared.isActive = $0
+            Lock.shared.state = $0
         }
     }
 
     var body: some View {
         ZStack {
             content()
-            if isLocked.wrappedValue {
+            if locksInBackground && state != .none {
                 lockedContent()
             }
         }.onChange(of: scenePhase, perform: onScenePhase)
@@ -59,6 +71,11 @@ struct LockableView<Content: View, LockedContent: View>: View {
         switch scenePhase {
         case .active:
             unlockIfNeeded()
+
+        case .inactive:
+            if state == .none {
+                state = .covered
+            }
 
         case .background:
             lockIfNeeded()
@@ -72,25 +89,44 @@ struct LockableView<Content: View, LockedContent: View>: View {
         guard locksInBackground else {
             return
         }
-        isLocked.wrappedValue = true
+        state = .locked
     }
 
     func unlockIfNeeded() {
         guard locksInBackground else {
-            isLocked.wrappedValue = false
+            state = .none
             return
         }
-        guard isLocked.wrappedValue else {
-            return
+        switch state {
+        case .none:
+            break
+
+        case .covered:
+            state = .none
+
+        case .locked:
+            Task { @MainActor in
+                guard await unlockBlock() else {
+                    return
+                }
+                state = .none
+            }
         }
-        unlockBlock(isLocked)
     }
 }
 
 private class Lock: ObservableObject {
+    enum State {
+        case none
+
+        case covered
+
+        case locked
+    }
+
     static let shared = Lock()
 
-    @Published var isActive = true
+    @Published var state: State = .locked
 
     private init() {
     }

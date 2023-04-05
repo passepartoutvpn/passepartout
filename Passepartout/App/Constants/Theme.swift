@@ -498,23 +498,21 @@ extension View {
         )
     }
 
-    private static func themeUnlockScreenBlock(isLocked: Binding<Bool>) {
+    private static func themeUnlockScreenBlock() async -> Bool {
         let context = LAContext()
         let policy: LAPolicy = .deviceOwnerAuthentication
         var error: NSError?
         guard context.canEvaluatePolicy(policy, error: &error) else {
-            isLocked.wrappedValue = false
-            return
+            return true
         }
-        Task { @MainActor in
-            do {
-                let isAuthorized = try await context.evaluatePolicy(
-                    policy,
-                    localizedReason: L10n.Global.Messages.unlockApp
-                )
-                isLocked.wrappedValue = !isAuthorized
-            } catch {
-            }
+        do {
+            let isAuthorized = try await context.evaluatePolicy(
+                policy,
+                localizedReason: L10n.Global.Messages.unlockApp
+            )
+            return isAuthorized
+        } catch {
+            return false
         }
     }
 }
