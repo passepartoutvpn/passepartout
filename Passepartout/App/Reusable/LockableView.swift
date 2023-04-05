@@ -32,7 +32,7 @@ struct LockableView<Content: View, LockedContent: View>: View {
 
     let lockedContent: () -> LockedContent
 
-    let unlockBlock: (Binding<Bool>) -> Void
+    let unlockBlock: () async -> Bool
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -83,7 +83,12 @@ struct LockableView<Content: View, LockedContent: View>: View {
         guard isLocked.wrappedValue else {
             return
         }
-        unlockBlock(isLocked)
+        Task { @MainActor in
+            guard await unlockBlock() else {
+                return
+            }
+            isLocked.wrappedValue = false
+        }
     }
 }
 
