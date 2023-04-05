@@ -1,7 +1,7 @@
 ### Added
 
-- Option to lock app when entering background (iOS).
-- 3D Touch items (iOS).
+- Option to lock app when entering background.
+- 3D Touch items.
 - Ukranian translations (Dmitry Chirkin).
 - Restore DNS "Domain" setting.
 - OpenVPN: Full implementation of Tunnelblick XOR patch (tmthecoder).
@@ -9,7 +9,7 @@
 
 ### Changed
 
-- Bump targets to iOS 15 / macOS 12.
+- Bump target to iOS 15.
 - Always show "Reconnect" button.
 - Move Diagnostics view to Profile bottom.
 
@@ -17,5 +17,4 @@
 
 - Improve kill switch behavior.
 - Retain original filename as imported profile name.
-- In-app purchases other than full version were not recognized (macOS).
 

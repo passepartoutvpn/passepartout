@@ -1,0 +1,19 @@
+### Added
+
+- Ukranian translations (Dmitry Chirkin).
+- Restore DNS "Domain" setting.
+- OpenVPN: Full implementation of Tunnelblick XOR patch (tmthecoder).
+- WireGuard: DoH/DoT options.
+
+### Changed
+
+- Bump target to macOS 12.
+- Always show "Reconnect" button.
+- Move Diagnostics view to Profile bottom.
+
+### Fixed
+
+- Improve kill switch behavior.
+- Retain original filename as imported profile name.
+- In-app purchases other than full version were not recognized.
+
