@@ -94,8 +94,23 @@ extension WireGuard.ConfigurationBuilder {
             break
 
         case .manual:
+            let isDNSEnabled = settings.configurationType != .disabled
+
             switch settings.configurationType {
             case .plain:
+                break
+
+            case .https:
+                dnsHTTPSURL = settings.dnsHTTPSURL
+
+            case .tls:
+                dnsTLSServerName = settings.dnsTLSServerName
+
+            case .disabled:
+                break
+            }
+
+            if isDNSEnabled {
                 dnsServers = settings.dnsServers ?? []
                 var allDomains: [String] = []
                 if let domain = settings.dnsDomain {
@@ -105,14 +120,7 @@ extension WireGuard.ConfigurationBuilder {
                     allDomains.append(contentsOf: searchDomains)
                 }
                 dnsSearchDomains = allDomains.filter { !$0.isEmpty }
-
-            case .https:
-                dnsHTTPSURL = settings.dnsHTTPSURL
-
-            case .tls:
-                dnsTLSServerName = settings.dnsTLSServerName
-
-            case .disabled:
+            } else {
                 dnsServers = []
                 dnsSearchDomains = []
             }
