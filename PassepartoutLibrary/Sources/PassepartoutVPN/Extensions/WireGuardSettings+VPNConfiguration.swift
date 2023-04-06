@@ -94,9 +94,10 @@ extension WireGuard.ConfigurationBuilder {
             break
 
         case .manual:
+            dnsServers = settings.dnsServers ?? []
+
             switch settings.configurationType {
             case .plain:
-                dnsServers = settings.dnsServers ?? []
                 var allDomains: [String] = []
                 if let domain = settings.dnsDomain {
                     allDomains.insert(domain, at: 0)
