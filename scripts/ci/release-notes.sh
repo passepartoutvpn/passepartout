@@ -10,4 +10,4 @@ echo "# App Store"
 echo
 grep -E "$VERSION \(" CHANGELOG.md | cut -f 2- -d " "
 echo
-ci/latest-changelog.sh ios stripped
+ci/latest-changelog.sh ios
