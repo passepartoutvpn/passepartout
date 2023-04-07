@@ -1,7 +1,6 @@
 #!/bin/bash
 . .env.$1
 
-CHANGELOG="CHANGELOG.md"
 RELEASES=(`grep -n "^## " $CHANGELOG | sed -E "s/^([0-9]+).*$/\1/g"`)
 UNRELEASED=${RELEASES[0]}
 LATEST=${RELEASES[1]}
