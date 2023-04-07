@@ -10,4 +10,4 @@ echo "# App Store"
 echo
 grep -E "$VERSION \(" CHANGELOG.md | cut -f 2- -d " "
 echo
-cat $APP_ROOT/fastlane/ios/metadata/en-US/release_notes.txt
+ci/latest-changelog.sh ios stripped
