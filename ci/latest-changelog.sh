@@ -10,4 +10,11 @@ if [ ! $LATEST ]; then
     cat $CHANGELOG | tail -n $((LATEST - UNRELEASED - 1))
     exit
 fi
-cat $CHANGELOG | head -n $((LATEST - 1)) | tail -n $((LATEST - UNRELEASED - 2))
+
+if [ "$2" = "stripped" ]; then
+    SED_STRIPPED="sed -E 's/^(.*)\. \[.*$/\1./'"
+else
+    SED_STRIPPED="cat"
+fi
+
+cat $CHANGELOG | head -n $((LATEST - 1)) | tail -n $((LATEST - UNRELEASED - 2)) | eval $SED_STRIPPED
