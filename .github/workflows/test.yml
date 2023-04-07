@@ -5,6 +5,7 @@ on:
     types: [ opened, synchronize ]
     paths-ignore:
       - '.beta-*'
+      - '.env.*'
       - '**/*.md'
       - '**/*.sh'
       - '**/*.yml'
