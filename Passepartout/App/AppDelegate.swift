@@ -27,7 +27,7 @@ import Foundation
 import UIKit
 import PassepartoutLibrary
 
-class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
+class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
     private let mac = MacBundle.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
@@ -45,5 +45,15 @@ class AppDelegate: NSObject, UIApplicationDelegate, ObservableObject {
         let sceneConfiguration = UISceneConfiguration(name: "SceneDelegate", sessionRole: connectingSceneSession.role)
         sceneConfiguration.delegateClass = SceneDelegate.self
         return sceneConfiguration
+    }
+
+    override func buildMenu(with builder: UIMenuBuilder) {
+        super.buildMenu(with: builder)
+        builder.remove(menu: .file)
+        builder.remove(menu: .services)
+        builder.remove(menu: .format)
+        builder.remove(menu: .toolbar)
+        builder.remove(menu: .view)
+        builder.remove(menu: .help)
     }
 }
