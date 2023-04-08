@@ -58,6 +58,11 @@ class PassepartoutMenu {
         var children: [ItemGroup] = []
 
         children.append(contentsOf: [
+            TextItem(Constants.Global.appVersionString),
+            SeparatorItem()
+        ] as [ItemGroup])
+
+        children.append(contentsOf: [
             VisibilityItem(
                 L10n.Global.Strings.show,
                 utils: macMenuDelegate.utils
