@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,9 +29,9 @@ class PassepartoutMac: NSObject, MacBridge {
     required override init() {
         super.init()
     }
-    
+
     let utils: MacUtils = DefaultMacUtils()
-    
+
     @MainActor
     let menu: MacMenu = DefaultMacMenu()
 }

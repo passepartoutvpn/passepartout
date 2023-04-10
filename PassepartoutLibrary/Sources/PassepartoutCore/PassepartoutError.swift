@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/12/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,12 +27,12 @@ import Foundation
 
 public struct PassepartoutError: Error, Equatable {
     private let string: String
-    
+
     public init(_ string: String) {
         self.string = string
     }
-    
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.string == rhs.string
     }
 }

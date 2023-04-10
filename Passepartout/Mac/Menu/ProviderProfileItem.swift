@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/13/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,14 +28,14 @@ import AppKit
 
 struct ProviderProfileItem: Item {
     private let viewModel: ViewModel
-    
+
     private let vpnManager: LightVPNManager
-    
+
     init(_ profile: LightProfile, providerManager: LightProviderManager, vpnManager: LightVPNManager) {
         viewModel = ViewModel(profile, providerManager: providerManager, vpnManager: vpnManager)
         self.vpnManager = vpnManager
     }
-    
+
     func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
         let item = NSMenuItem(
             title: viewModel.profile.name,
@@ -47,7 +47,7 @@ struct ProviderProfileItem: Item {
         item.submenu = submenu()
         return item
     }
-    
+
     private func submenu() -> NSMenu {
         let menu = NSMenu()
         menu.autoenablesItems = false
@@ -60,7 +60,7 @@ struct ProviderProfileItem: Item {
             menu.addItem(downloadItem.asMenuItem(withParent: menu))
             return menu
         }
-        
+
         let toggleItem = NSMenuItem()
         toggleItem.target = viewModel
         toggleItem.representedObject = viewModel
@@ -101,7 +101,7 @@ struct ProviderProfileItem: Item {
 
         return menu
     }
-    
+
     private func categoryItem(with category: LightProviderCategory, parent: NSMenu) -> NSMenuItem {
         let title = !category.name.isEmpty ? category.name.capitalized : L10n.Global.Strings.default
         let item = NSMenuItem(
@@ -121,7 +121,7 @@ struct ProviderProfileItem: Item {
 
         return item
     }
-    
+
     private func locationItem(with location: LightProviderLocation, parent: NSMenu) -> NSMenuItem {
         ProviderLocationItem(viewModel.profile, location, vpnManager: vpnManager)
             .asMenuItem(withParent: parent)

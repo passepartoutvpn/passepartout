@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -32,6 +32,8 @@ enum AppPreference: String, KeyStoreDomainLocation {
     case isShowingFavorites
 
     case didHandleSubreddit
+
+    case locksInBackground
 
     var domain: String {
         "Passepartout.App"

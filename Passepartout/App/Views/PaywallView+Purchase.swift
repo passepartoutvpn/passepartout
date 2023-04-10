@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/12/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -37,7 +37,7 @@ extension PaywallView {
             var id: Int {
                 switch self {
                 case .purchaseFailed: return 1
-                    
+
                 case .restoreFailed: return 2
                 }
             }
@@ -48,19 +48,19 @@ extension PaywallView {
 
             case restoring
         }
-        
+
         private typealias RowModel = (product: SKProduct, extra: String?)
-        
+
         @Environment(\.scenePhase) private var scenePhase
 
         @ObservedObject private var productManager: ProductManager
 
         @Binding private var isPresented: Bool
-        
+
         private let feature: LocalProduct?
-        
+
         @State private var alertType: AlertType?
-        
+
         @State private var purchaseState: PurchaseState?
 
         init(isPresented: Binding<Bool>, feature: LocalProduct? = nil) {
@@ -68,7 +68,7 @@ extension PaywallView {
             _isPresented = isPresented
             self.feature = feature
         }
-        
+
         var body: some View {
             List {
                 productsSection
@@ -85,7 +85,7 @@ extension PaywallView {
                 }
             }.themeAnimation(on: productManager.isRefreshingProducts)
         }
-        
+
         private func presentedAlert(_ alertType: AlertType) -> Alert {
             switch alertType {
             case .purchaseFailed(let product, let error):
@@ -96,7 +96,7 @@ extension PaywallView {
                         purchaseState = nil
                     }
                 )
-                
+
             case .restoreFailed(let error):
                 return Alert(
                     title: Text(L10n.Paywall.Items.Restore.title),
@@ -107,7 +107,7 @@ extension PaywallView {
                 )
             }
         }
-        
+
         private var productsSection: some View {
             Section {
                 if !productManager.isRefreshingProducts {
@@ -134,7 +134,7 @@ extension PaywallView {
                 purchaseState: purchaseState
             )
         }
-        
+
         private var restoreRow: some View {
             PurchaseRow(
                 title: L10n.Paywall.Items.Restore.title,
@@ -156,7 +156,7 @@ extension PaywallView.PurchaseView {
                 switch result {
                 case .done:
                     isPresented = false
-                    
+
                 case .cancelled:
                     break
                 }
@@ -168,7 +168,7 @@ extension PaywallView.PurchaseView {
             }
         }
     }
-    
+
     private func restorePurchases() {
         purchaseState = .restoring
 
@@ -191,7 +191,7 @@ extension PaywallView.PurchaseView {
         }
         return productManager.product(withIdentifier: feature)
     }
-    
+
     private var skPlatformVersion: SKProduct? {
         #if targetEnvironment(macCatalyst)
         productManager.product(withIdentifier: .fullVersion_macOS)
@@ -258,13 +258,13 @@ private struct PurchaseRow: View {
     var product: SKProduct?
 
     let title: String
-    
+
     let extra: String?
-    
+
     let action: () -> Void
-    
+
     let purchaseState: PaywallView.PurchaseView.PurchaseState?
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             actionButton
@@ -276,7 +276,7 @@ private struct PurchaseRow: View {
             }
         }.padding([.top, .bottom])
     }
-    
+
     @ViewBuilder
     private var actionButton: some View {
         if let product = product {
@@ -285,7 +285,7 @@ private struct PurchaseRow: View {
             restoreButton
         }
     }
-    
+
     private func purchaseButton(_ product: SKProduct) -> some View {
         HStack {
             Button(title, action: action)
@@ -300,7 +300,7 @@ private struct PurchaseRow: View {
             }
         }
     }
-    
+
     private var restoreButton: some View {
         HStack {
             Button(title, action: action)

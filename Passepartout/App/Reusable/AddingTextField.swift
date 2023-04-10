@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/26/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -33,9 +33,9 @@ struct AddingTextField<Field: View, ActionLabel: View>: View {
     let textField: (@escaping () -> Void) -> Field
 
     let addLabel: () -> ActionLabel
-    
+
     var commitLabel: (() -> ActionLabel)?
-    
+
     @State private var isAdding = false
 
     var body: some View {
@@ -51,14 +51,14 @@ struct AddingTextField<Field: View, ActionLabel: View>: View {
             }
         }
     }
-    
+
     private func doAdd() {
         withAnimation {
             onAdd?()
             isAdding = true
         }
     }
-    
+
     private func doCommit() {
         withAnimation {
             onCommit?()

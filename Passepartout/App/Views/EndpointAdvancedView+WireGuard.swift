@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/8/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -78,7 +78,7 @@ extension EndpointAdvancedView.WireGuardView {
             }
         }
     }
-    
+
     private var mtuSection: some View {
         builder.mtu.map { mtu in
             Section {
@@ -89,11 +89,17 @@ extension EndpointAdvancedView.WireGuardView {
     }
 }
 
-extension WireGuard.Configuration {
-    var dnsSettings: (servers: [String], domains: [String])? {
+private extension WireGuard.Configuration {
+    struct DNSOptions {
+        let servers: [String]
+
+        let domains: [String]
+    }
+
+    var dnsSettings: DNSOptions? {
         guard !dnsServers.isEmpty || !dnsSearchDomains.isEmpty else {
             return nil
         }
-        return (dnsServers, dnsSearchDomains)
+        return .init(servers: dnsServers, domains: dnsSearchDomains)
     }
 }

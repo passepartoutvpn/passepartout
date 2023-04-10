@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/8/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,11 +29,11 @@ import Combine
 
 public class FetchedValueHolder<V>: NSObject, ValueHolder, NSFetchedResultsControllerDelegate {
     @Published public var value: V
-    
+
     private let controller: NSFetchedResultsController<NSFetchRequestResult>
-    
+
     private let mapping: ([NSFetchRequestResult]) -> V?
-    
+
     public convenience init(
         context: NSManagedObjectContext,
         request: NSFetchRequest<NSFetchRequestResult>,
@@ -71,7 +71,7 @@ public class FetchedValueHolder<V>: NSObject, ValueHolder, NSFetchedResultsContr
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         mapResults()
     }
-    
+
     private func mapResults() {
         guard let results = controller.fetchedObjects else {
             return

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/20/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,7 +28,7 @@ import PassepartoutLibrary
 
 struct DiagnosticsView: View {
     let vpnProtocol: VPNProtocolType
-    
+
     let providerName: ProviderName?
 
     var body: some View {
@@ -38,7 +38,7 @@ struct DiagnosticsView: View {
                 DiagnosticsView.OpenVPNView(
                     providerName: providerName
                 )
-                
+
             case .wireGuard:
                 DiagnosticsView.WireGuardView(
                     providerName: providerName
@@ -51,9 +51,9 @@ struct DiagnosticsView: View {
 extension DiagnosticsView {
     struct DebugLogSection: View {
         let appLogURL: URL?
-        
+
         let tunnelLogURL: URL?
-        
+
         private let refreshInterval = Constants.Log.refreshInterval
 
         var body: some View {
@@ -68,7 +68,7 @@ extension DiagnosticsView {
                 refreshInterval: nil
             )
         }
-        
+
         private var tunnelLink: some View {
             navigationLink(
                 withTitle: Unlocalized.VPN.vpn,

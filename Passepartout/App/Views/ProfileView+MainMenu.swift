@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/6/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,36 +30,36 @@ extension ProfileView {
     struct MainMenu: View {
         enum ActionSheetType: Int, Identifiable {
             case uninstallVPN
-            
+
             case deleteProfile
-            
+
             var id: Int {
                 rawValue
             }
         }
-        
+
         @ObservedObject private var profileManager: ProfileManager
-        
+
         @ObservedObject private var vpnManager: VPNManager
-        
+
         @ObservedObject private var currentVPNState: ObservableVPNState
-        
+
         @ObservedObject private var currentProfile: ObservableProfile
-        
+
         private var header: Profile.Header {
             currentProfile.value.header
         }
-        
+
         @Binding private var modalType: ModalType?
-        
+
         @State private var actionSheetType: ActionSheetType?
-        
+
         private let uninstallVPNTitle = L10n.Global.Strings.uninstall
-        
+
         private let deleteProfileTitle = L10n.Global.Strings.delete
-        
+
         private let cancelTitle = L10n.Global.Strings.cancel
-        
+
         init(currentProfile: ObservableProfile, modalType: Binding<ModalType?>) {
             profileManager = .shared
             vpnManager = .shared
@@ -79,7 +79,7 @@ extension ProfileView {
                             primaryButton: .destructive(Text(uninstallVPNTitle), action: uninstallVPN),
                             secondaryButton: .cancel(Text(cancelTitle))
                         )
-                        
+
                     case .deleteProfile:
                         return Alert(
                             title: Text(deleteProfileTitle),
@@ -93,9 +93,7 @@ extension ProfileView {
 
         private var mainView: some View {
             Menu {
-                if isActiveProfileNotDisconnected {
-                    ReconnectButton()
-                }
+                ReconnectButton()
                 ShortcutsButton(
                     modalType: $modalType
                 )
@@ -114,10 +112,6 @@ extension ProfileView {
                 themeSettingsMenuImage.asSystemImage
             }
         }
-        
-        private var isActiveProfileNotDisconnected: Bool {
-            profileManager.isActiveProfile(header.id) && currentVPNState.vpnStatus != .disconnected
-        }
 
         private var uninstallVPNButton: some View {
             Button {
@@ -126,7 +120,7 @@ extension ProfileView {
                 Label(uninstallVPNTitle, systemImage: themeUninstallImage)
             }
         }
-        
+
         private var deleteProfileButton: some View {
             DestructiveButton {
                 actionSheetType = .deleteProfile
@@ -152,11 +146,11 @@ extension ProfileView {
 extension ProfileView {
     struct ReconnectButton: View {
         @ObservedObject private var vpnManager: VPNManager
-        
+
         init() {
             vpnManager = .shared
         }
-        
+
         var body: some View {
             Button {
                 Task { @MainActor in
@@ -167,12 +161,12 @@ extension ProfileView {
             }
         }
     }
-    
+
     struct ShortcutsButton: View {
         @ObservedObject private var productManager: ProductManager
-        
+
         @Binding private var modalType: ModalType?
-        
+
         init(modalType: Binding<ModalType?>) {
             productManager = .shared
             _modalType = modalType
@@ -181,7 +175,7 @@ extension ProfileView {
         private var isEligibleForSiri: Bool {
             productManager.isEligible(forFeature: .siriShortcuts)
         }
-        
+
         var body: some View {
             Button {
                 presentShortcutsOrPaywall()
@@ -200,14 +194,14 @@ extension ProfileView {
             }
         }
     }
-    
+
     struct RenameButton: View {
         @Binding private var modalType: ModalType?
-        
+
         init(modalType: Binding<ModalType?>) {
             _modalType = modalType
         }
-        
+
         var body: some View {
             Button {
                 modalType = .rename
@@ -219,17 +213,17 @@ extension ProfileView {
 
     struct DuplicateButton: View {
         @ObservedObject private var profileManager: ProfileManager
-        
+
         private let header: Profile.Header
-        
+
         private let setAsCurrent: Bool
-        
+
         init(header: Profile.Header, setAsCurrent: Bool) {
             profileManager = .shared
             self.header = header
             self.setAsCurrent = setAsCurrent
         }
-        
+
         var body: some View {
             Button {
                 duplicateProfile(withId: header.id)

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/4/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,11 +30,11 @@ import PassepartoutLibrary
 @MainActor
 class CoreContext {
     let store: KeyValueStore
-    
+
     private let profilesPersistence: Persistence
-    
+
     private let providersPersistence: Persistence
-    
+
     var urlsForProfiles: [URL]? {
         profilesPersistence.containerURLs
     }
@@ -44,18 +44,18 @@ class CoreContext {
     }
 
     let upgradeManager: UpgradeManager
-    
+
     let providerManager: ProviderManager
-    
+
     let profileManager: ProfileManager
-    
+
     let vpnManager: VPNManager
-    
+
     private var cancellables: Set<AnyCancellable> = []
-    
+
     init(store: KeyValueStore) {
         self.store = store
-        
+
         let persistenceManager = PersistenceManager(store: store)
         profilesPersistence = persistenceManager.profilesPersistence(
             withName: Constants.Persistence.profilesContainerName
@@ -106,12 +106,12 @@ class CoreContext {
             providerManager: providerManager,
             strategy: strategy
         )
-        
+
         // post
-        
+
         configureObjects()
     }
-    
+
     private func configureObjects() {
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.tunnelLogPath = Constants.Log.Tunnel.path
@@ -119,5 +119,10 @@ class CoreContext {
 
         profileManager.observeUpdates()
         vpnManager.observeUpdates()
+
+        CoreConfiguration.masksPrivateData = vpnManager.masksPrivateData
+        vpnManager.didUpdatePreferences.sink {
+            CoreConfiguration.masksPrivateData = $0.masksPrivateData
+        }.store(in: &cancellables)
     }
 }

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/8/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -32,11 +32,11 @@ extension EndpointAdvancedView {
         @Binding var builder: OpenVPN.ConfigurationBuilder
 
         let isReadonly: Bool
-        
+
         let isServerPushed: Bool
-        
+
         private let fallbackConfiguration = OpenVPN.ConfigurationBuilder(withFallbacks: true).build()
-        
+
         var body: some View {
             List {
                 let cfg = builder.build()
@@ -104,7 +104,7 @@ extension EndpointAdvancedView.OpenVPNView {
             Text(Unlocalized.Network.ipv4)
         }
     }
-    
+
     private var ipv6Section: some View {
         Section {
             if let settings = builder.ipv6 {
@@ -141,16 +141,22 @@ extension EndpointAdvancedView.OpenVPNView {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption)
                         .withTrailingText($0.localizedDescription)
                 }
-                settings.xor.map {
+                if let xor = settings.xor {
+                    themeLongContentLink(
+                        Unlocalized.VPN.xor,
+                        content: .constant(xor.localizedLongDescription),
+                        withPreview: xor.localizedDescription
+                    )
+                } else {
                     Text(Unlocalized.VPN.xor)
-                        .withTrailingText($0.localizedDescriptionAsXOR)
+                        .withTrailingText(L10n.Global.Strings.disabled)
                 }
             } header: {
                 Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
             }
         }
     }
-    
+
     private var communicationEditableSection: some View {
         Section {
             themeTextPicker(
@@ -165,15 +171,21 @@ extension EndpointAdvancedView.OpenVPNView {
                 values: OpenVPN.Digest.available,
                 description: \.localizedDescription
             )
-            builder.xorMask.map {
+            if let xor = builder.xorMethod {
+                themeLongContentLink(
+                    Unlocalized.VPN.xor,
+                    content: .constant(xor.localizedLongDescription),
+                    withPreview: xor.localizedDescription
+                )
+            } else {
                 Text(Unlocalized.VPN.xor)
-                    .withTrailingText($0.localizedDescriptionAsXOR)
+                    .withTrailingText(L10n.Global.Strings.disabled)
             }
         } header: {
             Text(L10n.Endpoint.Advanced.Openvpn.Sections.Communication.header)
         }
     }
-    
+
     private func compressionSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.compressionSettings.map { settings in
             Section {
@@ -190,7 +202,7 @@ extension EndpointAdvancedView.OpenVPNView {
             }
         }
     }
-    
+
     private var compressionEditableSection: some View {
         Section {
             themeTextPicker(
@@ -308,40 +320,89 @@ extension EndpointAdvancedView.OpenVPNView {
     }
 }
 
-extension OpenVPN.Configuration {
-    var communicationSettings: (cipher: OpenVPN.Cipher?, digest: OpenVPN.Digest?, xor: UInt8?)? {
-        guard cipher != nil || digest != nil || xorMask != nil else {
-            return nil
-        }
-        return (cipher, digest, xorMask)
+private extension OpenVPN.Configuration {
+    struct CommunicationOptions {
+        let cipher: OpenVPN.Cipher?
+
+        let digest: OpenVPN.Digest?
+
+        let xor: OpenVPN.XORMethod?
     }
 
-    var compressionSettings: (framing: OpenVPN.CompressionFraming?, algorithm: OpenVPN.CompressionAlgorithm?)? {
+    struct CompressionOptions {
+        let framing: OpenVPN.CompressionFraming?
+
+        let algorithm: OpenVPN.CompressionAlgorithm?
+    }
+
+    struct DNSOptions {
+        let servers: [String]
+
+        let domains: [String]
+    }
+
+    struct ProxyOptions {
+        let proxy: Proxy?
+
+        let pac: URL?
+
+        let bypass: [String]
+    }
+
+    struct OtherOptions {
+        let keepAlive: TimeInterval?
+
+        let reneg: TimeInterval?
+
+        let randomizeEndpoint: Bool?
+
+        let randomizeHostnames: Bool?
+    }
+
+    var communicationSettings: CommunicationOptions? {
+        guard cipher != nil || digest != nil || xorMethod != nil else {
+            return nil
+        }
+        return .init(cipher: cipher, digest: digest, xor: xorMethod)
+    }
+
+    var compressionSettings: CompressionOptions? {
         guard compressionFraming != nil || compressionAlgorithm != nil else {
             return nil
         }
-        return (compressionFraming, compressionAlgorithm)
+        return .init(framing: compressionFraming, algorithm: compressionAlgorithm)
     }
-    
-    var dnsSettings: (servers: [String], domains: [String])? {
+
+    var dnsSettings: DNSOptions? {
         guard !(dnsServers?.isEmpty ?? true) || !(searchDomains?.isEmpty ?? true) else {
             return nil
         }
-        return (dnsServers ?? [], searchDomains ?? [])
+        return .init(servers: dnsServers ?? [], domains: searchDomains ?? [])
     }
-    
-    var proxySettings: (proxy: Proxy?, pac: URL?, bypass: [String])? {
-        guard httpsProxy != nil || httpProxy != nil || proxyAutoConfigurationURL != nil || !(proxyBypassDomains?.isEmpty ?? true) else {
+
+    var proxySettings: ProxyOptions? {
+        guard httpsProxy != nil || httpProxy != nil ||
+                proxyAutoConfigurationURL != nil || !(proxyBypassDomains?.isEmpty ?? true) else {
             return nil
         }
-        return (httpsProxy ?? httpProxy, proxyAutoConfigurationURL, proxyBypassDomains ?? [])
+        return .init(
+            proxy: httpsProxy ?? httpProxy,
+            pac: proxyAutoConfigurationURL,
+            bypass: proxyBypassDomains ?? []
+        )
     }
-    
-    var otherSettings: (keepAlive: TimeInterval?, reneg: TimeInterval?, randomizeEndpoint: Bool?, randomizeHostnames: Bool?)? {
-        guard keepAliveInterval != nil || renegotiatesAfter != nil || randomizeEndpoint != nil || randomizeHostnames != nil else {
+
+    var otherSettings: OtherOptions? {
+        guard keepAliveInterval != nil || renegotiatesAfter != nil ||
+                randomizeEndpoint != nil || randomizeHostnames != nil else {
             return nil
         }
-        return (keepAliveInterval, renegotiatesAfter, randomizeEndpoint, randomizeHostnames)
+        return .init(
+            keepAlive: keepAliveInterval,
+            reneg: renegotiatesAfter,
+            randomizeEndpoint: randomizeEndpoint,
+            randomizeHostnames: randomizeHostnames
+        )
     }
 }
 
@@ -349,15 +410,15 @@ private extension EndpointAdvancedView.OpenVPNView {
     var fallbackCipher: OpenVPN.Cipher {
         fallbackConfiguration.cipher!
     }
-    
+
     var fallbackDigest: OpenVPN.Digest {
         fallbackConfiguration.digest!
     }
-    
+
     var fallbackCompressionFraming: OpenVPN.CompressionFraming {
         fallbackConfiguration.compressionFraming!
     }
-    
+
     var fallbackCompressionAlgorithm: OpenVPN.CompressionAlgorithm {
         fallbackConfiguration.compressionAlgorithm!
     }

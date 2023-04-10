@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/13/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,20 +28,20 @@ import Intents
 
 struct Shortcut: Identifiable, Hashable, Comparable {
     let native: INVoiceShortcut
-    
+
     init(_ native: INVoiceShortcut) {
         self.native = native
     }
-    
+
     var id: UUID {
         native.identifier
     }
 
-    static func ==(lhs: Self, rhs: Self) -> Bool {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.phrase == rhs.phrase
     }
-    
-    static func <(lhs: Self, rhs: Self) -> Bool {
+
+    static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.phrase < rhs.phrase
     }
 

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/17/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,21 +27,21 @@ import Foundation
 
 public class KeyedCache<K: Hashable, V> {
     private let query: String
-    
+
     private var store: [K: V] = [:]
 
     public var isEmpty: Bool {
         store.isEmpty
     }
-    
+
     public var storeValues: [V] {
         Array(store.values)
     }
-    
+
     public init(_ query: String) {
         self.query = query
     }
-    
+
     public func set(_ store: [K: V]) {
         self.store = store
     }
@@ -61,7 +61,7 @@ public class KeyedCache<K: Hashable, V> {
         pp_log.debug("Cache MISS [\(query)]")
         return value
     }
-    
+
     public func forget(where condition: (K) -> Bool) {
         let removedKeys = store.keys.filter(condition)
         removedKeys.forEach {
@@ -72,7 +72,7 @@ public class KeyedCache<K: Hashable, V> {
     public func forget(_ key: K) {
         store.removeValue(forKey: key)
     }
-    
+
     public func clear() {
         store.removeAll()
     }

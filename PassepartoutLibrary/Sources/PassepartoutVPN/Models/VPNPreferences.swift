@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/6/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -25,11 +25,11 @@
 
 import Foundation
 
-protocol VPNPreferences {
+public protocol VPNPreferences {
     var tunnelLogPath: String? { get }
-    
+
     var tunnelLogFormat: String? { get }
-    
+
     var masksPrivateData: Bool { get }
 }
 
@@ -37,6 +37,6 @@ struct DefaultVPNPreferences: VPNPreferences {
     let tunnelLogPath: String?
 
     let tunnelLogFormat: String?
-    
+
     let masksPrivateData: Bool
 }

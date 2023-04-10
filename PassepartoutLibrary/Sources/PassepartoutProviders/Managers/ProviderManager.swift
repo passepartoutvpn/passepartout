@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/13/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,13 +31,13 @@ import PassepartoutUtils
 
 public final class ProviderManager: ObservableObject, RateLimited {
     private let appBuild: Int
-    
+
     private let bundleServices: WebServices
-    
+
     private let webServices: WebServices
-    
+
     private let persistence: Persistence
-    
+
     private let providerRepository: ProviderRepository
 
     private let infrastructureRepository: InfrastructureRepository
@@ -57,29 +57,29 @@ public final class ProviderManager: ObservableObject, RateLimited {
 
         _ = allProviders()
     }
-    
+
     // MARK: Queries
 
     public func allProviders() -> [ProviderMetadata] {
         providerRepository.allProviders()
     }
-    
+
     public func provider(withName name: ProviderName) -> ProviderMetadata? {
         providerRepository.provider(withName: name)
     }
-    
+
     public func isAvailable(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> Bool {
         infrastructureRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol) != nil
     }
-    
+
     public func defaultUsername(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> String? {
         infrastructureRepository.defaultUsername(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
-    
+
     public func lastUpdate(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> Date? {
         infrastructureRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol)
     }
-    
+
     public func categories(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> [ProviderCategory] {
         serverRepository.categories(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
@@ -95,7 +95,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
     public func anyDefaultServer(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> ProviderServer? {
         serverRepository.anyDefaultServer(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
-    
+
     public func server(withId id: String) -> ProviderServer? {
         serverRepository.server(withId: id)
     }
@@ -108,7 +108,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
-        
+
         let publisher = priority.publisher(remote: {
             self.webServices.providersIndex()
         }, bundle: {
@@ -124,7 +124,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
                 self.didUpdateProviders.send()
             }.eraseToAnyPublisher()
     }
-    
+
     public func fetchProviderPublisher(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, priority: ProviderManagerFetchPriority) -> AnyPublisher<Void, Error> {
         guard !isRateLimited(providerName) else {
             return Just(())
@@ -158,7 +158,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
                 }
-                
+
                 guard self.appBuild >= infrastructure.build else {
                     pp_log.error("Infrastructure requires app build >= \(infrastructure.build) (app is \(self.appBuild))")
                     return Fail(error: ProviderManagerError.outdatedBuild(self.appBuild, infrastructure.build))
@@ -181,7 +181,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
                     .eraseToAnyPublisher()
             }.eraseToAnyPublisher()
     }
-    
+
     public func reset() {
         persistence.truncate()
 
@@ -189,17 +189,17 @@ public final class ProviderManager: ObservableObject, RateLimited {
     }
 
     // MARK: RateLimited
-    
+
     private let indexActionName = ""
-    
+
     public var lastActionDate: [String: Date] = [:]
-    
+
     public var rateLimitMilliseconds: Int?
 }
 
 private enum ProviderManagerError: LocalizedError {
     case outdatedBuild(Int, Int)
-    
+
     var errorDescription: String? {
         switch self {
         case .outdatedBuild(let current, let min):
@@ -216,10 +216,10 @@ private extension ProviderManagerFetchPriority {
         switch self {
         case .bundle:
             return bundle()
-            
+
         case .remote:
             return remote()
-            
+
         case .remoteThenBundle:
             return remote()
                 .catch { error -> AnyPublisher<T, Error> in
@@ -242,7 +242,7 @@ private extension VPNProtocolType {
         switch self {
         case .openVPN:
             return .openVPN
-            
+
         case .wireGuard:
             return .wireGuard
         }

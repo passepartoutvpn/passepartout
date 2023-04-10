@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/26/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -34,7 +34,7 @@ extension Network.DNSSettings {
             return [.plain, .https, .tls, .disabled]
 
         case .wireGuard:
-            return [.plain, .disabled]
+            return [.plain, .https, .tls, .disabled]
         }
     }
 }

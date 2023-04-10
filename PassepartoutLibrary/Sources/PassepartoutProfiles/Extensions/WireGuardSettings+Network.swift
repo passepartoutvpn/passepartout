@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -32,21 +32,25 @@ extension Profile.WireGuardSettings: DNSSettingsProviding {
     public var dnsProtocol: DNSProtocol? {
         .plain
     }
-    
+
     public var dnsServers: [String]? {
         configuration.dnsServers
     }
-    
+
+    public var dnsDomain: String? {
+        nil
+    }
+
     public var dnsSearchDomains: [String]? {
         configuration.dnsSearchDomains
     }
-    
+
     public var dnsHTTPSURL: URL? {
-        nil
+        configuration.dnsHTTPSURL
     }
-    
+
     public var dnsTLSServerName: String? {
-        nil
+        configuration.dnsTLSServerName
     }
 }
 

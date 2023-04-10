@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/6/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,10 +27,11 @@ import Foundation
 import PassepartoutLibrary
 import StoreKit
 import Kvitto
+import Combine
 
 enum ProductError: Error {
     case uneligible
-    
+
     case beta
 }
 
@@ -39,46 +40,56 @@ class ProductManager: NSObject, ObservableObject {
         case freemium = 0
 
         case beta = 1
-        
+
         case fullVersion = 2
     }
-    
+
     let appType: AppType
-    
+
     let buildProducts: BuildProducts
-    
+
+    let didRefundProducts = PassthroughSubject<Void, Never>()
+
     @Published private(set) var isRefreshingProducts = false
 
     @Published private(set) var products: [SKProduct]
 
     //
-    
+
     private let inApp: InApp<LocalProduct>
-    
+
     private var purchasedAppBuild: Int?
-    
+
     private var purchasedFeatures: Set<LocalProduct>
-    
+
     private var purchaseDates: [LocalProduct: Date]
-    
-    private var cancelledPurchases: Set<LocalProduct>
-    
-    private var cancelledPurchasesSnapshot: Set<LocalProduct>
-    
+
+    private var cancelledPurchases: Set<LocalProduct>? {
+        willSet {
+            guard cancelledPurchases != nil else {
+                return
+            }
+            guard let newCancelledPurchases = newValue, newCancelledPurchases != cancelledPurchases else {
+                pp_log.debug("No purchase was refunded")
+                return
+            }
+            detectRefunds(newCancelledPurchases)
+        }
+    }
+
     private var refreshRequest: SKReceiptRefreshRequest?
-    
+
     init(appType: AppType, buildProducts: BuildProducts) {
         self.appType = appType
         self.buildProducts = buildProducts
-    
+
         products = []
         inApp = InApp()
         purchasedAppBuild = nil
         purchasedFeatures = []
         purchaseDates = [:]
-        cancelledPurchases = []
-        cancelledPurchasesSnapshot = []
-        
+        cancelledPurchases = nil
+
         super.init()
 
         reloadReceipt()
@@ -86,15 +97,15 @@ class ProductManager: NSObject, ObservableObject {
 
         refreshProducts()
     }
-    
+
     deinit {
         SKPaymentQueue.default().remove(self)
     }
-    
+
     func canMakePayments() -> Bool {
         SKPaymentQueue.canMakePayments()
     }
-    
+
     func refreshProducts() {
         let ids = LocalProduct.all
         guard !ids.isEmpty else {
@@ -119,7 +130,7 @@ class ProductManager: NSObject, ObservableObject {
     func product(withIdentifier identifier: LocalProduct) -> SKProduct? {
         inApp.product(withIdentifier: identifier)
     }
-    
+
     func featureProducts(including: [LocalProduct]) -> [SKProduct] {
         inApp.products.filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
@@ -134,7 +145,7 @@ class ProductManager: NSObject, ObservableObject {
             return true
         }
     }
-    
+
     func featureProducts(excluding: [LocalProduct]) -> [SKProduct] {
         inApp.products.filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
@@ -149,7 +160,7 @@ class ProductManager: NSObject, ObservableObject {
             return true
         }
     }
-    
+
     func purchase(_ product: SKProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
         inApp.purchase(product: product) { result in
             if case .success = result {
@@ -160,7 +171,7 @@ class ProductManager: NSObject, ObservableObject {
             }
         }
     }
-    
+
     func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
         inApp.restorePurchases { (finished, _, error) in
             guard finished else {
@@ -173,7 +184,7 @@ class ProductManager: NSObject, ObservableObject {
     }
 
     // MARK: In-app eligibility
-    
+
     private func isCurrentPlatformVersion() -> Bool {
         purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
@@ -194,11 +205,7 @@ class ProductManager: NSObject, ObservableObject {
                 return true
             }
         }
-        if isMac {
-            return isFullVersion()
-        } else {
-            return isFullVersion() || purchasedFeatures.contains(feature)
-        }
+        return isFullVersion() || purchasedFeatures.contains(feature)
     }
 
     func isEligible(forProvider providerName: ProviderName) -> Bool {
@@ -211,15 +218,11 @@ class ProductManager: NSObject, ObservableObject {
     func isEligibleForFeedback() -> Bool {
         appType == .beta || !purchasedFeatures.isEmpty
     }
-    
+
     func hasPurchased(_ product: LocalProduct) -> Bool {
         purchasedFeatures.contains(product)
     }
 
-    func isCancelledPurchase(_ product: LocalProduct) -> Bool {
-        cancelledPurchases.contains(product)
-    }
-    
     func purchaseDate(forProduct product: LocalProduct) -> Date? {
         purchaseDates[product]
     }
@@ -238,7 +241,7 @@ class ProductManager: NSObject, ObservableObject {
             purchasedAppBuild = buildNumber
         }
         purchasedFeatures.removeAll()
-        cancelledPurchases.removeAll()
+        var newCancelledPurchases: Set<LocalProduct> = []
 
         if let buildNumber = purchasedAppBuild {
             pp_log.debug("Original purchased build: \(buildNumber)")
@@ -250,7 +253,7 @@ class ProductManager: NSObject, ObservableObject {
         }
         if let iapReceipts = receipt.inAppPurchaseReceipts {
             purchaseDates.removeAll()
-            
+
             pp_log.debug("In-app receipts:")
             iapReceipts.forEach {
                 guard let pid = $0.productIdentifier, let product = LocalProduct(rawValue: pid) else {
@@ -258,7 +261,7 @@ class ProductManager: NSObject, ObservableObject {
                 }
                 if let cancellationDate = $0.cancellationDate {
                     pp_log.debug("\t\(pid) [cancelled on: \(cancellationDate)]")
-                    cancelledPurchases.insert(product)
+                    newCancelledPurchases.insert(product)
                     return
                 }
                 if let purchaseDate = $0.originalPurchaseDate {
@@ -272,6 +275,7 @@ class ProductManager: NSObject, ObservableObject {
         if andNotify {
             objectWillChange.send()
         }
+        cancelledPurchases = newCancelledPurchases
     }
 }
 
@@ -284,31 +288,27 @@ extension ProductManager: SKPaymentTransactionObserver {
 }
 
 extension ProductManager {
-    func snapshotRefunds() {
-        cancelledPurchasesSnapshot = cancelledPurchases
-    }
-    
-    func hasNewRefunds() -> Bool {
-        reloadReceipt(andNotify: false)
-        guard cancelledPurchases != cancelledPurchasesSnapshot else {
-            pp_log.debug("No purchase was refunded")
-            return false
-        }
-        
+    private func detectRefunds(_ refunds: Set<LocalProduct>) {
         let isEligibleForFullVersion = isFullVersion()
         let hasCancelledFullVersion: Bool
         let hasCancelledTrustedNetworks: Bool
-        
+
         if isMac {
-            hasCancelledFullVersion = !isEligibleForFullVersion && (isCancelledPurchase(.fullVersion) || isCancelledPurchase(.fullVersion_macOS))
+            hasCancelledFullVersion = !isEligibleForFullVersion && (
+                refunds.contains(.fullVersion) || refunds.contains(.fullVersion_macOS)
+            )
             hasCancelledTrustedNetworks = false
         } else {
-            hasCancelledFullVersion = !isEligibleForFullVersion && (isCancelledPurchase(.fullVersion) || isCancelledPurchase(.fullVersion_iOS))
-            hasCancelledTrustedNetworks = !isEligibleForFullVersion && isCancelledPurchase(.trustedNetworks)
+            hasCancelledFullVersion = !isEligibleForFullVersion && (
+                refunds.contains(.fullVersion) || refunds.contains(.fullVersion_iOS)
+            )
+            hasCancelledTrustedNetworks = !isEligibleForFullVersion && refunds.contains(.trustedNetworks)
         }
-        
+
         // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
-        return hasCancelledFullVersion || hasCancelledTrustedNetworks
+        if hasCancelledFullVersion || hasCancelledTrustedNetworks {
+            didRefundProducts.send()
+        }
     }
 }
 

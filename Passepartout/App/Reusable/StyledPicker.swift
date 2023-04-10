@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,15 +27,15 @@ import SwiftUI
 
 struct StyledPicker<T: Hashable, Label: View, Style: ListStyle>: View {
     let title: String
-    
+
     @Binding var selection: T
-    
+
     let values: [T]
 
     let pickerLabel: (T) -> Label
 
     let selectionLabel: (T) -> Label
-    
+
     let listStyle: () -> Style
 
     @State private var isPresented = false
@@ -49,7 +49,7 @@ struct StyledPicker<T: Hashable, Label: View, Style: ListStyle>: View {
             }
         }
     }
-    
+
     private func pickerView() -> some View {
         List {
             Section {

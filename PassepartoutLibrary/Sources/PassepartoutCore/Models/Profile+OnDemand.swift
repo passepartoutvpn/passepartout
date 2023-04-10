@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/17/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,28 +29,28 @@ extension Profile {
     public struct OnDemand: Codable, Equatable {
         public enum Policy: String, Codable {
             case any
-            
+
             case including
-            
+
             case excluding // "trusted networks"
         }
-        
+
         public enum OtherNetwork: String, Codable {
             case mobile
 
             case ethernet
         }
-        
+
         // hardcode this to keep "Trusted networks" semantics
         public var isEnabled = true
 
         // hardcode this to keep "Trusted networks" semantics
         public var policy: Policy = .excluding
-        
+
         public var withSSIDs: [String: Bool] = [:]
 
         public var withOtherNetworks: Set<OtherNetwork> = []
-        
+
         public var disconnectsIfNotMatching = true
 
         public init() {

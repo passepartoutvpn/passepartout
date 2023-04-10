@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/24/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -37,9 +37,9 @@ extension WSProviderName {
     public static let pia = "pia"
 
     public static let protonvpn = "protonvpn"
-    
+
     public static let surfshark = "surfshark"
-    
+
     public static let torguard = "torguard"
 
     public static let tunnelbear = "tunnelbear"

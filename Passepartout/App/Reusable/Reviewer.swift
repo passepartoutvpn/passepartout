@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/9/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,14 +29,14 @@ import StoreKit
 public class Reviewer: ObservableObject {
     private struct Keys {
         static let eventCount = "Reviewer.EventCount"
-    
+
         static let lastVersion = "Reviewer.LastVersion"
     }
-    
+
     private let defaults: UserDefaults
-    
+
     public var eventCountBeforeRating: Int = .max
-    
+
     public init() {
         defaults = .standard
     }
@@ -66,7 +66,7 @@ public class Reviewer: ObservableObject {
         count += eventCount
         defaults.set(count, forKey: Keys.eventCount)
         print("Reviewer: Event reported for version \(currentVersion) (count: \(count), prompt: \(eventCountBeforeRating))")
-        
+
         guard count >= eventCountBeforeRating else {
             return false
         }
@@ -74,11 +74,11 @@ public class Reviewer: ObservableObject {
 
         defaults.removeObject(forKey: Keys.eventCount)
         defaults.set(currentVersion, forKey: Keys.lastVersion)
-        
+
         requestReview()
         return true
     }
-    
+
     // may or may not appear
     private func requestReview() {
         guard let scene = UIApplication.shared.windows.first(where: { $0.windowScene != nil })?.windowScene else {

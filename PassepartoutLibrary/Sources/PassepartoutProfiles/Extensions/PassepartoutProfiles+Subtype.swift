@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/20/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -26,7 +26,6 @@
 import Foundation
 import PassepartoutCore
 import PassepartoutProviders
-import PassepartoutCore
 
 extension Profile {
     public var requiresCredentials: Bool {
@@ -40,7 +39,7 @@ extension Profile {
 
 extension Profile {
     public func providerServer(_ providerManager: ProviderManager) -> ProviderServer? {
-        guard let serverId = providerServerId() else {
+        guard let serverId = providerServerId else {
             return nil
         }
         return providerManager.server(withId: serverId)
@@ -52,8 +51,20 @@ extension Profile {
         }
 
         // infer remotes from preset + server
-        guard let server = providerServer(providerManager) else {
+        guard let selectedServer = providerServer(providerManager) else {
             throw PassepartoutError.missingProviderServer
+        }
+        let server: ProviderServer
+        if providerRandomizesServer ?? false {
+            let location = selectedServer.location(withVPNProtocol: currentVPNProtocol)
+            let servers = providerManager.servers(forLocation: location)
+            guard let randomServerId = servers.randomElement()?.id,
+                  let randomServer = providerManager.server(withId: randomServerId) else {
+                throw PassepartoutError.missingProviderServer
+            }
+            server = randomServer
+        } else {
+            server = selectedServer
         }
         guard let preset = providerPreset(server) else {
             throw PassepartoutError.missingProviderPreset
@@ -69,8 +80,8 @@ extension Profile {
         // apply provider settings (username, custom endpoint)
         let cfg = builder.build()
         var settings = OpenVPNSettings(configuration: cfg)
-        settings.account = providerAccount()
-        settings.customEndpoint = providerCustomEndpoint()
+        settings.account = providerAccount
+        settings.customEndpoint = providerCustomEndpoint
         return settings
     }
 

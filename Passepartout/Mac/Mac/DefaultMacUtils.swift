@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,9 +28,9 @@ import AppKit
 
 class DefaultMacUtils: MacUtils {
     private(set) lazy var isStartedByLauncher = NSApp.isHidden
-    
+
     private let transformer = ObservableProcessTransformer.shared
-    
+
     func sendAppToBackground() {
         transformer.sendToBackground()
     }

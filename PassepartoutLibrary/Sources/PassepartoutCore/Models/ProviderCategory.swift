@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,11 +27,11 @@ import Foundation
 
 public struct ProviderCategory {
     public let providerMetadata: ProviderMetadata
-    
+
     public let vpnProtocol: VPNProtocolType
-    
+
     public let name: String
-    
+
     public let locations: [ProviderLocation]
 
     public init(

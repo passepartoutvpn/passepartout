@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -38,7 +38,11 @@ extension DebugLog {
         #if os(iOS)
         let device: UIDevice = .current
         osVersion = "\(device.systemName) \(device.systemVersion)"
+        #if targetEnvironment(macCatalyst)
+        deviceType = "\(device.model) (Catalyst)"
+        #else
         deviceType = "\(device.model) (\(device.userInterfaceIdiom.debugDescription))"
+        #endif
         #else
         let os = ProcessInfo().operatingSystemVersion
         osVersion = "macOS \(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
@@ -58,7 +62,7 @@ extension DebugLog {
         fullText += content
         return fullText
     }
-    
+
     public func decoratedData(_ appName: String, _ appVersion: String) -> Data {
         guard let data = decoratedString(appName, appVersion).data(using: .utf8) else {
             assertionFailure("Could not encode log metadata to UTF8?")
@@ -74,13 +78,13 @@ private extension UIUserInterfaceIdiom {
         switch self {
         case .phone:
             return "Phone"
-            
+
         case .pad:
             return "Pad"
-            
+
         case .mac:
             return "Mac"
-            
+
         default:
             return "Other"
         }

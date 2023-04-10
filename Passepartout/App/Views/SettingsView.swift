@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,14 +30,10 @@ struct SettingsView: View {
     @ObservedObject private var profileManager: ProfileManager
 
     @ObservedObject private var productManager: ProductManager
-    
+
     @Environment(\.presentationMode) private var presentationMode
-    
-//    private var isTestBuild: Bool {
-//        Constants.App.isBeta || Constants.InApp.appType == .beta
-//    }
-//    
-//    private let appName = Unlocalized.appName
+
+    @AppStorage(AppPreference.locksInBackground.rawValue) private var locksInBackground = false
 
     private let versionString = Constants.Global.appVersionString
 
@@ -45,17 +41,25 @@ struct SettingsView: View {
         profileManager = .shared
         productManager = .shared
     }
-    
+
     var body: some View {
         List {
+            #if !targetEnvironment(macCatalyst)
+            preferencesSection
+            #endif
             aboutSection
-            diagnosticsSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
         }.themeSecondaryView()
         .navigationTitle(L10n.Settings.title)
     }
-    
+
+    private var preferencesSection: some View {
+        Section {
+            Toggle(L10n.Settings.Items.LocksInBackground.caption, isOn: $locksInBackground)
+        }
+    }
+
     private var aboutSection: some View {
         Section {
             NavigationLink {
@@ -73,21 +77,6 @@ struct SettingsView: View {
                 Spacer()
                 Text(versionString)
                 Spacer()
-            }
-        }
-    }
-    
-    private var diagnosticsSection: some View {
-        profileManager.activeProfile.map { profile in
-            Section {
-                NavigationLink {
-                    DiagnosticsView(
-                        vpnProtocol: profile.currentVPNProtocol,
-                        providerName: profile.header.providerName
-                    )
-                } label: {
-                    Text(L10n.Diagnostics.title)
-                }
             }
         }
     }

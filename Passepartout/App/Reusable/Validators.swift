@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/31/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,18 +28,18 @@ import Foundation
 struct Validators {
     enum ValidationError: Error {
         case notSet
-        
+
         case empty
-        
+
         case ipAddress
-        
+
         case domainName
-        
+
         case url
     }
 
     static func notNil(_ string: String?) throws {
-        guard let _ = string else {
+        guard string != nil else {
             throw ValidationError.notSet
         }
     }
@@ -71,9 +71,9 @@ struct Validators {
             throw ValidationError.domainName
         }
     }
-    
+
     static func url(_ string: String) throws {
-        guard let _ = URL(string: string) else {
+        guard URL(string: string) != nil else {
             throw ValidationError.url
         }
     }

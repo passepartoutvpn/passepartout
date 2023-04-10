@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,19 +31,19 @@ import TunnelKitWireGuard
 extension AddHostView {
     struct ViewModel: Equatable {
         private var isNamePreset = false
-        
+
         var profileName = ""
-        
+
         private(set) var requiresPassphrase = false
-        
+
         var encryptionPassphrase = ""
 
         var processedProfile: Profile = .placeholder
-        
+
         private(set) var errorMessage: String?
-        
+
         var isAskingOverwrite = false
-        
+
         mutating func presetName(withURL url: URL) {
             guard !isNamePreset else {
                 return
@@ -96,7 +96,7 @@ extension AddHostView {
                 setMessage(forParsingError: error)
             }
         }
-        
+
         @MainActor
         mutating func addProcessedProfile(to profileManager: ProfileManager) -> Bool {
             guard !processedProfile.isPlaceholder else {
@@ -107,7 +107,7 @@ extension AddHostView {
             profileManager.saveProfile(processedProfile, isActive: nil)
             return true
         }
-        
+
         private mutating func setMessage(forParsingError error: Error) {
             errorMessage = error.localizedVPNParsingDescription
         }

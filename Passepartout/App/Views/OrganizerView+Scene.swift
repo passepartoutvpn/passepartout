@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/2/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,34 +31,30 @@ extension OrganizerView {
         @Environment(\.scenePhase) private var scenePhase
 
         @ObservedObject private var profileManager: ProfileManager
-        
+
         @ObservedObject private var vpnManager: VPNManager
-        
-        @ObservedObject private var productManager: ProductManager
-        
+
         @Binding private var alertType: AlertType?
-        
+
         @Binding private var didHandleSubreddit: Bool
-        
+
         @State private var isFirstLaunch = true
 
         init(alertType: Binding<AlertType?>, didHandleSubreddit: Binding<Bool>) {
             profileManager = .shared
             vpnManager = .shared
-            productManager = .shared
             _alertType = alertType
             _didHandleSubreddit = didHandleSubreddit
         }
-        
+
         var body: some View {
 
             // dummy text, EmptyView() does not trigger on*() handlers
             Text("Scene")
                 .hidden()
                 .onAppear(perform: onAppear)
-                .onChange(of: scenePhase, perform: onScenePhase)
         }
-        
+
         private func onAppear() {
             guard didHandleSubreddit else {
                 alertType = .subscribeReddit
@@ -81,33 +77,6 @@ extension OrganizerView {
             if themeIdiom != .phone && !themeIsiPadPortrait, let activeProfileId = profileManager.activeProfileId {
                 profileManager.currentProfileId = activeProfileId
             }
-        }
-
-        private func onScenePhase(_ phase: ScenePhase) {
-            switch phase {
-            case .inactive:
-                productManager.snapshotRefunds()
-
-            case .active:
-                if productManager.hasNewRefunds() {
-                    Task { @MainActor in
-                        await vpnManager.uninstall()
-                    }
-                }
-
-            case .background:
-                persist()
-                #if targetEnvironment(macCatalyst)
-                MacBundle.shared.utils.sendAppToBackground()
-                #endif
-
-            default:
-                break
-            }
-        }
-        
-        private func persist() {
-            profileManager.persist()
         }
     }
 }

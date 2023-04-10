@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/16/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -35,7 +35,7 @@ extension URL {
     public var filename: String {
         deletingPathExtension().lastPathComponent
     }
-    
+
     @discardableResult
     public static func openURL(_ url: URL) -> Bool {
         #if os(iOS)

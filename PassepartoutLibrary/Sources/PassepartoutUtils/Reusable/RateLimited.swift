@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/6/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,7 +27,7 @@ import Foundation
 
 public protocol RateLimited: AnyObject {
     associatedtype ActionID: Hashable
-    
+
     var lastActionDate: [ActionID: Date] { get set }
 
     var rateLimitMilliseconds: Int? { get }
@@ -37,7 +37,7 @@ extension RateLimited {
     public func saveLastAction(_ id: ActionID) {
         lastActionDate[id] = Date()
     }
-    
+
     public func isRateLimited(_ id: ActionID) -> Bool {
         guard let lastActionDate = lastActionDate[id] else {
             return false

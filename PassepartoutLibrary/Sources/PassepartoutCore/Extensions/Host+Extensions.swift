@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,23 +27,24 @@ import Foundation
 import TunnelKitCore
 
 extension Profile {
-    public func hostAccount() -> Profile.Account? {
-        switch currentVPNProtocol {
-        case .openVPN:
-            return host?.ovpnSettings?.account
-            
-        case .wireGuard:
-            return nil
-        }
-    }
+    public var hostAccount: Profile.Account? {
+        get {
+            switch currentVPNProtocol {
+            case .openVPN:
+                return host?.ovpnSettings?.account
 
-    public mutating func setHostAccount(_ account: Profile.Account?) {
-        switch currentVPNProtocol {
-        case .openVPN:
-            host?.ovpnSettings?.account = account
-            
-        case .wireGuard:
-            break
+            case .wireGuard:
+                return nil
+            }
+        }
+        set {
+            switch currentVPNProtocol {
+            case .openVPN:
+                host?.ovpnSettings?.account = newValue
+
+            case .wireGuard:
+                break
+            }
         }
     }
 
@@ -78,9 +79,9 @@ extension Profile {
 
 extension Profile.Host: ProfileSubtype {
     public var vpnProtocols: [VPNProtocolType] {
-        if let _ = ovpnSettings {
+        if ovpnSettings != nil {
             return [.openVPN]
-        } else if let _ = wgSettings {
+        } else if wgSettings != nil {
             return [.wireGuard]
         } else {
             assertionFailure("No VPN settings found")

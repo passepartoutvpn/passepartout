@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/11/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,7 +31,7 @@ extension DiagnosticsView {
     struct OpenVPNView: View {
         enum AlertType: Int, Identifiable {
             case emailNotConfigured
-            
+
             var id: Int {
                 return rawValue
             }
@@ -40,23 +40,23 @@ extension DiagnosticsView {
         @ObservedObject private var providerManager: ProviderManager
 
         @ObservedObject private var vpnManager: VPNManager
-        
+
         @ObservedObject private var currentVPNState: ObservableVPNState
 
         @ObservedObject private var productManager: ProductManager
 
         private let providerName: ProviderName?
-        
+
         private var isEligibleForFeedback: Bool {
             productManager.isEligibleForFeedback()
         }
-        
+
         @State private var isReportingIssue = false
 
         @State private var alertType: AlertType?
-        
+
         private let vpnProtocol: VPNProtocolType = .openVPN
-        
+
         init(providerName: ProviderName?) {
             providerManager = .shared
             vpnManager = .shared
@@ -103,7 +103,7 @@ extension DiagnosticsView {
                 }.disabled(cfg == nil)
             }
         }
-        
+
         private var debugLogSection: some View {
             Section {
                 DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
@@ -114,7 +114,7 @@ extension DiagnosticsView {
                 Text(L10n.Diagnostics.Sections.DebugLog.footer)
             }
         }
-        
+
         private var issueReporterSection: some View {
             Section {
                 Button(L10n.Diagnostics.Items.ReportIssue.caption, action: presentReportIssue)

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/12/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -34,7 +34,7 @@ extension FileManager {
         }
         return directory
     }
-    
+
 //    public func creationDate(of path: String) -> Date? {
 //        guard let attrs = try? attributesOfItem(atPath: path) else {
 //            return nil

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,11 +29,11 @@ import Combine
 
 public class Persistence {
     private let container: NSPersistentContainer
-    
+
     public var context: NSManagedObjectContext {
         container.viewContext
     }
-    
+
     public var coordinator: NSPersistentStoreCoordinator {
         container.persistentStoreCoordinator
     }
@@ -77,7 +77,7 @@ public class Persistence {
             container.viewContext.transactionAuthor = author
         }
     }
-    
+
     public var containerURLs: [URL]? {
         guard let url = container.persistentStoreDescriptions.first?.url else {
             return nil
@@ -88,7 +88,7 @@ public class Persistence {
             url.deletingPathExtension().appendingPathExtension("sqlite-wal")
         ]
     }
-    
+
 //    public func remoteChangesPublisher() -> AnyPublisher<Void, Never> {
 //        NotificationCenter.default.publisher(
 //            for: .NSPersistentStoreRemoteChange,

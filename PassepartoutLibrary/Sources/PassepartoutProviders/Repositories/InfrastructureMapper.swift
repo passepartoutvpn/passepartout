@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,11 +31,11 @@ import PassepartoutUtils
 
 struct InfrastructureMapper: DTOMapper {
     private let context: NSManagedObjectContext
-    
+
     private let providerName: ProviderName
-    
+
     private let vpnProtocol: VPNProtocolType
-    
+
     init(_ context: NSManagedObjectContext, _ providerName: ProviderName, _ vpnProtocol: VPNProtocolType) {
         self.context = context
         self.providerName = providerName
@@ -45,7 +45,7 @@ struct InfrastructureMapper: DTOMapper {
     func toDTO(_ ws: WSProviderInfrastructure) -> CDInfrastructure {
         let infrastructure = CDInfrastructure(context: context)
         infrastructure.vpnProtocol = vpnProtocol.rawValue
-        
+
         let defaults = DefaultSettingsMapper(context).toDTO(ws.defaults)
         infrastructure.defaults = defaults
         defaults.infrastructure = infrastructure
@@ -54,7 +54,7 @@ struct InfrastructureMapper: DTOMapper {
 
         let categories = ws.categories.compactMap(CategoryMapper(context, vpnProtocol).toDTO)
         infrastructure.addToCategories(Set(categories) as NSSet)
-        
+
         var categoryByName: [String: CDInfrastructureCategory] = [:]
         categories.forEach { category in
             category.infrastructure = infrastructure
@@ -85,7 +85,7 @@ struct InfrastructureMapper: DTOMapper {
                 }
             }
         }
-        
+
         // do this at the very end, when all entities have their parent chain set
         categories.forEach {
             $0.servers?.forEach {
@@ -106,7 +106,7 @@ struct InfrastructureMapper: DTOMapper {
                 server.uniqueId = uniqueId
             }
         }
-        
+
         return infrastructure
     }
 }

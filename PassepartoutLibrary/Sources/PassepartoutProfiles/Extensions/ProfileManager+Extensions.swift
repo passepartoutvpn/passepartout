@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/22/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,7 +28,7 @@ import PassepartoutCore
 
 extension ProfileManager {
     public var hasProfiles: Bool {
-        !headers.isEmpty
+        !profiles.isEmpty
     }
 
     public var activeProfile: Profile? {
@@ -64,7 +64,7 @@ extension ProfileManager {
     public func isCurrentProfileActive() -> Bool {
         currentProfile.value.id == activeProfileId
     }
-    
+
     public func isCurrentProfile(_ id: UUID) -> Bool {
         id == currentProfile.value.id
     }

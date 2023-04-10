@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,11 +28,11 @@ import Foundation
 @objc(LightVPNStatus)
 public enum LightVPNStatus: Int {
     case connecting
-    
+
     case connected
-    
+
     case disconnecting
-    
+
     case disconnected
 }
 
@@ -42,19 +42,19 @@ public protocol LightVPNManager {
     var isEnabled: Bool { get }
 
     var vpnStatus: LightVPNStatus { get }
-    
+
     func connect(with profileId: UUID)
-    
+
     func connect(with profileId: UUID, to serverId: String)
-    
+
     func disconnect()
-    
+
     func toggle()
-    
+
     func reconnect()
-    
+
     func addDelegate(_ delegate: LightVPNManagerDelegate, withIdentifier identifier: String)
-    
+
     func removeDelegate(withIdentifier identifier: String)
 }
 

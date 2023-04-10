@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/31/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,28 +31,31 @@ struct IdentifiableString: Identifiable, Equatable {
     var string: String
 }
 
+struct EditableTextFieldCallback {
+    let isNewElement: Bool
+
+    let text: Binding<String>
+
+    let onEditingChanged: (Bool) -> Void
+
+    let onCommit: () -> Void
+}
+
 struct EditableTextList<Field: View, ActionLabel: View>: View {
-    typealias FieldCallback = (
-        isNewElement: Bool,
-        text: Binding<String>,
-        onEditingChanged: (Bool) -> Void,
-        onCommit: () -> Void
-    )
-    
     @Binding var elements: [String]
 
     var allowsDuplicates = true
-    
+
     var mapping: ([IdentifiableString]) -> [IdentifiableString] = { $0 }
-    
+
     var onAdd: ((Binding<String>) -> Void)?
-    
-    let textField: (FieldCallback) -> Field
+
+    let textField: (EditableTextFieldCallback) -> Field
 
     let addLabel: () -> ActionLabel
-    
+
     var commitLabel: (() -> ActionLabel)?
-    
+
     @State private var isLoaded = false
 
     @State private var identifiableElements: [IdentifiableString] = []
@@ -60,7 +63,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
     @State private var editedTextStrings: [UUID: String] = [:]
 
     private let addedUUID = UUID()
-    
+
     private var addedText: Binding<String> {
         .init {
             editedTextStrings[addedUUID] ?? ""
@@ -68,7 +71,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
             editedTextStrings[addedUUID] = $0
         }
     }
-    
+
     var body: some View {
         debugChanges()
         return Group {
@@ -87,20 +90,20 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
             }
         }.onChange(of: elements, perform: remapElements)
     }
-    
+
     private func existingRow(_ element: IdentifiableString) -> some View {
         let editedText = binding(toEditedElement: element)
 
-        return textField((false, editedText, {
+        return textField(.init(isNewElement: false, text: editedText, onEditingChanged: {
             if $0 {
                 editedTextStrings.removeValue(forKey: element.id)
 //                print(">>> editing: '\(text.wrappedValue.string)' (\(text.wrappedValue.id))")
             }
-        }, {
+        }, onCommit: {
             replaceElement(at: element.id, with: editedText)
         }))
     }
-    
+
     private var newRow: some View {
         AddingTextField(
             onAdd: {
@@ -109,7 +112,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
             },
             onCommit: addElement,
             textField: {
-                textField((true, addedText, { _ in }, $0))
+                textField(.init(isNewElement: true, text: addedText, onEditingChanged: { _ in }, onCommit: $0))
             },
             addLabel: addLabel,
             commitLabel: commitLabel
@@ -144,7 +147,7 @@ extension EditableTextList {
             identifiableElements = newIdentifiableElements
         }
     }
-    
+
     private func addElement() {
         guard allowsDuplicates || !identifiableElements.contains(where: {
             $0.string == addedText.wrappedValue
@@ -155,7 +158,7 @@ extension EditableTextList {
         identifiableElements.append(.init(string: addedText.wrappedValue))
         commit()
     }
-    
+
     private func binding(toEditedElement element: IdentifiableString) -> Binding<String> {
 //        print(">>> <-> \(element)")
         .init {
@@ -184,17 +187,17 @@ extension EditableTextList {
         }
         commit()
     }
-    
+
     private func onDelete(offsets: IndexSet) {
         var mapped = mapping(identifiableElements)
         mapped.remove(atOffsets: offsets)
         identifiableElements = mapped
         commit()
     }
-    
-    private func onMove(indexSet: IndexSet, to: Int) {
+
+    private func onMove(indexSet: IndexSet, to offset: Int) {
         var mapped = mapping(identifiableElements)
-        mapped.move(fromOffsets: indexSet, toOffset: to)
+        mapped.move(fromOffsets: indexSet, toOffset: offset)
         identifiableElements = mapped
         commit()
     }

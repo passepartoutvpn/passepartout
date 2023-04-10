@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,8 +28,8 @@ import SwiftUI
 struct CreditsView: View {
     var body: some View {
         GenericCreditsView(
-            licensesHeader: nil,//L10n.Credits.Sections.Licenses.header,
-            noticesHeader: nil,//L10n.Credits.Sections.Notices.header,
+            licensesHeader: nil,// L10n.Credits.Sections.Licenses.header,
+            noticesHeader: nil,// L10n.Credits.Sections.Notices.header,
             translationsHeader: L10n.Global.Strings.translations,
             licenses: Unlocalized.Credits.licenses,
             notices: Unlocalized.Credits.notices,

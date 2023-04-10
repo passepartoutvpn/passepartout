@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -38,7 +38,7 @@ extension EndpointView {
         @Binding private var builder: WireGuard.ConfigurationBuilder
 
 //        var customPeer: Binding<Endpoint?>? = nil
-        
+
         // XXX: do not escape mutating 'self', use constant providerManager
         init(currentProfile: ObservableProfile, isReadonly: Bool) {
             let providerManager: ProviderManager = .shared

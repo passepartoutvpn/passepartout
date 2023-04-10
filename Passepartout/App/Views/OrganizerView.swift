@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/6/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,11 +27,22 @@ import SwiftUI
 import PassepartoutLibrary
 
 struct OrganizerView: View {
+    enum ModalType: Identifiable {
+        case interactiveAccount(profile: Profile)
+
+        // XXX: alert ids
+        var id: Int {
+            switch self {
+            case .interactiveAccount: return 1
+            }
+        }
+    }
+
     enum AlertType: Identifiable {
         case subscribeReddit
-        
+
         case error(String, String)
-        
+
         // XXX: alert ids
         var id: Int {
             switch self {
@@ -44,21 +55,23 @@ struct OrganizerView: View {
 
     @State private var addProfileModalType: AddProfileMenu.ModalType?
 
+    @State private var modalType: ModalType?
+
     @State private var alertType: AlertType?
 
     @State private var isHostFileImporterPresented = false
 
     @AppStorage(AppPreference.didHandleSubreddit.key) private var didHandleSubreddit = false
-    
+
     private let hostFileTypes = Constants.URLs.filetypes
-    
+
     private let redditURL = Constants.URLs.subreddit
-    
+
     var body: some View {
         debugChanges()
         return ZStack {
             hiddenSceneView
-            ProfilesList()
+            ProfilesList(modalType: $modalType)
         }.toolbar {
             ToolbarItem(placement: .primaryAction) {
                 AddProfileMenu(
@@ -71,7 +84,8 @@ struct OrganizerView: View {
                     SettingsButton()
                 }
             }
-        }.alert(item: $alertType, content: presentedAlert)
+        }.sheet(item: $modalType, content: presentedModal)
+        .alert(item: $alertType, content: presentedAlert)
         .fileImporter(
             isPresented: $isHostFileImporterPresented,
             allowedContentTypes: hostFileTypes,
@@ -79,13 +93,13 @@ struct OrganizerView: View {
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
         .themePrimaryView()
-        
+
         // VPN configuration error publisher (no need to observe VPNManager)
         .onReceive(VPNManager.shared.configurationError) {
             alertType = .error($0.profile.header.name, $0.error.localizedAppDescription)
         }
     }
-    
+
     private var hiddenSceneView: some View {
         SceneView(
             alertType: $alertType,
@@ -114,9 +128,19 @@ extension OrganizerView {
             )
         }
     }
-    
+
     private func onOpenURL(_ url: URL) {
         addProfileModalType = .addHost(url, false)
+    }
+
+    @ViewBuilder
+    private func presentedModal(_ modalType: ModalType) -> some View {
+        switch modalType {
+        case .interactiveAccount(let profile):
+            NavigationView {
+                InteractiveConnectionView(profile: profile)
+            }.themeGlobal()
+        }
     }
 
     private func presentedAlert(_ alertType: AlertType) -> Alert {

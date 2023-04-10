@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/25/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -37,7 +37,7 @@ extension Publisher {
         try await withCheckedThrowingContinuation { continuation in
             var cancellable: AnyCancellable?
             var isResumed = false
-            
+
             cancellable = first()
                 .sink { result in
                     switch result {

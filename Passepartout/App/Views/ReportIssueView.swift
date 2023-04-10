@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/24/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,15 +29,15 @@ import PassepartoutLibrary
 
 struct ReportIssueView: View {
     @Binding private var isPresented: Bool
-    
+
     private let toRecipients: [String]
-    
+
     private let subject: String
-    
+
     private let messageBody: String
-    
+
     private let attachments: [MailComposerView.Attachment]
-    
+
     init(
         isPresented: Binding<Bool>,
         vpnProtocol: VPNProtocolType,
@@ -46,7 +46,7 @@ struct ReportIssueView: View {
         lastUpdate: Date? = nil
     ) {
         _isPresented = isPresented
-        
+
         toRecipients = [Unlocalized.Issues.recipient]
         subject = Unlocalized.Issues.subject
 
@@ -69,15 +69,15 @@ struct ReportIssueView: View {
             let logContent = logURL.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)
             let attachment = DebugLog(content: logContent).decoratedData()
 
-            attachments.append((
-                attachment,
-                Unlocalized.Issues.MIME.debugLog,
-                Unlocalized.Issues.Filenames.debugLog
+            attachments.append(.init(
+                data: attachment,
+                mimeType: Unlocalized.Issues.MIME.debugLog,
+                fileName: Unlocalized.Issues.Filenames.debugLog
             ))
         }
         self.attachments = attachments
     }
-    
+
     var body: some View {
         MailComposerView(
             isPresented: $isPresented,

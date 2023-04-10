@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/13/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,11 +30,11 @@ import PassepartoutLibrary
 extension ShortcutsView {
     struct AddView: View {
         @ObservedObject private var providerManager: ProviderManager
-        
+
         @StateObject private var pendingProfile = ObservableProfile()
 
         private let target: Profile
-        
+
         @Binding private var pendingShortcut: INShortcut?
 
         @State private var isPresentingProviderLocation = false
@@ -44,7 +44,7 @@ extension ShortcutsView {
             self.target = target
             _pendingShortcut = pendingShortcut
         }
-        
+
         var body: some View {
             ZStack {
                 hiddenProviderLocationLink
@@ -82,7 +82,7 @@ extension ShortcutsView {
                 }
             }
         }
-        
+
         private var hiddenProviderLocationLink: some View {
             NavigationLink("", isActive: $isPresentingProviderLocation) {
                 ProviderLocationView(
@@ -106,7 +106,7 @@ extension ShortcutsView.AddView {
             }
         }
     }
-    
+
     private func addConnect(_ header: Profile.Header) {
         pendingShortcut = INShortcut(intent: IntentDispatcher.intentConnect(
             header: header

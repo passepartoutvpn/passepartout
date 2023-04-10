@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/18/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,17 +30,28 @@ extension ProfileView {
     struct VPNSection: View {
         @ObservedObject private var profileManager: ProfileManager
 
-        private let profileId: UUID
-        
-        private var isActiveProfile: Bool {
-            profileManager.isActiveProfile(profileId)
+        private let profile: Profile
+
+        @Binding private var modalType: ModalType?
+
+        private var interactiveProfile: Binding<Profile?> {
+            .init {
+                modalType == .interactiveAccount ? profile : nil
+            } set: {
+                modalType = $0 != nil ? .interactiveAccount : nil
+            }
         }
 
-        init(profileId: UUID) {
-            profileManager = .shared
-            self.profileId = profileId
+        private var isActiveProfile: Bool {
+            profileManager.isActiveProfile(profile.id)
         }
-        
+
+        init(profile: Profile, modalType: Binding<ModalType?>) {
+            profileManager = .shared
+            self.profile = profile
+            _modalType = modalType
+        }
+
         var body: some View {
             Section {
                 toggleView
@@ -52,11 +63,15 @@ extension ProfileView {
                     .xxxThemeTruncation()
             }
         }
-        
+
         private var toggleView: some View {
-            VPNToggle(profileId: profileId, rateLimit: Constants.RateLimit.vpnToggle)
+            VPNToggle(
+                profile: profile,
+                interactiveProfile: interactiveProfile,
+                rateLimit: Constants.RateLimit.vpnToggle
+            )
         }
-        
+
         private var statusView: some View {
             HStack {
                 Text(L10n.Profile.Items.ConnectionStatus.caption)

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,11 +31,11 @@ import PassepartoutUtils
 
 class ServerRepository: Repository {
     private let context: NSManagedObjectContext
-    
+
     required init(_ context: NSManagedObjectContext) {
         self.context = context
     }
-    
+
     func categories(forProviderWithName name: ProviderName, vpnProtocol: VPNProtocolType) -> [ProviderCategory] {
         let request = CDInfrastructureCategory.fetchRequest()
         request.predicate = NSPredicate(

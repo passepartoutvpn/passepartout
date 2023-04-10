@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/9/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -25,8 +25,6 @@
 
 import Foundation
 import Combine
-import TunnelKitCore
-import TunnelKitManager
 import PassepartoutCore
 import PassepartoutProfiles
 import PassepartoutProviders
@@ -36,25 +34,27 @@ import PassepartoutUtils
 public final class VPNManager: ObservableObject {
 
     // MARK: Initialization
-    
+
     let appGroup: String
-    
+
     private let store: KeyValueStore
-    
+
     let profileManager: ProfileManager
-    
+
     let providerManager: ProviderManager
 
     private let strategy: VPNManagerStrategy
-    
+
     public var isNetworkSettingsSupported: () -> Bool
-    
+
     public var isOnDemandRulesSupported: () -> Bool
 
     // MARK: State
-    
+
     public let currentState: ObservableVPNState
-    
+
+    public let didUpdatePreferences = PassthroughSubject<VPNPreferences, Never>()
+
     public private(set) var lastError: Error? {
         get {
             currentState.lastError
@@ -63,15 +63,15 @@ public final class VPNManager: ObservableObject {
             currentState.lastError = newValue
         }
     }
-    
+
     public let configurationError = PassthroughSubject<VPNConfigurationError, Never>()
-    
+
     // MARK: Internals
-    
+
     private var lastProfile: Profile = .placeholder
-    
+
     private var cancellables: Set<AnyCancellable> = []
-    
+
     public init(
         appGroup: String,
         store: KeyValueStore,
@@ -88,8 +88,6 @@ public final class VPNManager: ObservableObject {
         isOnDemandRulesSupported = { true }
 
         currentState = ObservableVPNState()
-
-        CoreConfiguration.masksPrivateData = masksPrivateData
     }
 
     func reinstate(_ configuration: VPNConfiguration) async {
@@ -97,19 +95,19 @@ public final class VPNManager: ObservableObject {
         clearLastError()
         await strategy.reinstate(configuration: configuration)
     }
-    
+
     func reconnect(_ configuration: VPNConfiguration) async {
         pp_log.info("Reconnecting VPN (with new configuration)")
         clearLastError()
         await strategy.connect(configuration: configuration)
     }
-    
+
     public func reconnect() async {
         pp_log.info("Reconnecting VPN")
         clearLastError()
         await strategy.reconnect()
     }
-    
+
     public func disable() async {
         pp_log.info("Disabling VPN")
         clearLastError()
@@ -129,7 +127,7 @@ public final class VPNManager: ObservableObject {
     public func debugLogURL(forProtocol vpnProtocol: VPNProtocolType) -> URL? {
         strategy.debugLogURL(forProtocol: vpnProtocol)
     }
-    
+
     private func clearLastError() {
         guard currentState.lastError != nil else {
             return
@@ -145,7 +143,7 @@ extension VPNManager {
         observeStrategy()
         observeProfileManager()
     }
-    
+
     private func observeStrategy() {
         strategy.observe(into: currentState)
     }
@@ -169,7 +167,7 @@ extension VPNManager {
                 }
             }.store(in: &cancellables)
     }
-    
+
     private func willUpdateActiveId(_ newId: UUID?) async {
         guard let newId = newId else {
             pp_log.info("No active profile, disconnecting VPN...")
@@ -178,7 +176,7 @@ extension VPNManager {
         }
         pp_log.debug("Active profile: \(newId)")
     }
-    
+
     private func willUpdateCurrentProfile(_ newProfile: Profile) async {
         defer {
             lastProfile = newProfile
@@ -199,7 +197,7 @@ extension VPNManager {
         }
 
         pp_log.debug("Active profile updated: \(newProfile.header.name)")
-        
+
         var isHandled = false
         var shouldReconnect = false
         let notDisconnected = (currentState.vpnStatus != .disconnected)
@@ -208,20 +206,20 @@ extension VPNManager {
         if newProfile.isProvider {
 
             // server changed?
-            if newProfile.providerServerId() != lastProfile.providerServerId() {
-                pp_log.info("Provider server changed: \(newProfile.providerServerId()?.description ?? "nil")")
+            if newProfile.providerServerId != lastProfile.providerServerId {
+                pp_log.info("Provider server changed: \(newProfile.providerServerId?.description ?? "nil")")
                 isHandled = true
                 shouldReconnect = notDisconnected
             }
-            
+
             // endpoint changed?
-            else if newProfile.providerCustomEndpoint() != lastProfile.providerCustomEndpoint() {
-                pp_log.info("Provider endpoint changed: \(newProfile.providerCustomEndpoint()?.description ?? "automatic")")
+            else if newProfile.providerCustomEndpoint != lastProfile.providerCustomEndpoint {
+                pp_log.info("Provider endpoint changed: \(newProfile.providerCustomEndpoint?.description ?? "automatic")")
                 isHandled = true
                 shouldReconnect = notDisconnected
             }
         } else {
-            
+
             // endpoint changed?
             if newProfile.hostCustomEndpoint != lastProfile.hostCustomEndpoint {
                 pp_log.info("Host endpoint changed: \(newProfile.hostCustomEndpoint?.description ?? "automatic")")
@@ -261,6 +259,7 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.tunnelLogPath)
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
 
@@ -270,17 +269,17 @@ extension VPNManager {
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.tunnelLogFormat)
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
-    
+
     public var masksPrivateData: Bool {
         get {
             store.value(forLocation: StoreKey.masksPrivateData) ?? true
         }
         set {
             store.setValue(newValue, forLocation: StoreKey.masksPrivateData)
-
-            CoreConfiguration.masksPrivateData = masksPrivateData
+            didUpdatePreferences.send(vpnPreferences)
         }
     }
 }
@@ -288,11 +287,11 @@ extension VPNManager {
 private extension VPNManager {
     private enum StoreKey: String, KeyStoreDomainLocation {
         case tunnelLogPath
-        
+
         case tunnelLogFormat
-        
+
         case masksPrivateData
-        
+
         var domain: String {
             "Passepartout.VPNManager"
         }

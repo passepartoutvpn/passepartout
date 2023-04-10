@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/12/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,14 +28,14 @@ import PassepartoutCore
 import PassepartoutUtils
 
 extension VPNManager {
-    private var vpnPreferences: VPNPreferences {
+    var vpnPreferences: VPNPreferences {
         DefaultVPNPreferences(
             tunnelLogPath: tunnelLogPath,
             tunnelLogFormat: tunnelLogFormat,
             masksPrivateData: masksPrivateData
         )
     }
-    
+
     func vpnConfigurationWithCurrentProfile() -> VPNConfiguration? {
         do {
             guard profileManager.isCurrentProfileActive() else {
@@ -55,19 +55,19 @@ extension VPNManager {
                     throw PassepartoutError.missingAccount
                 }
             }
-            
+
             // specific provider customizations
             var newPassword: String?
             if let providerName = profile.providerName {
                 switch providerName {
                 case .mullvad:
                     newPassword = "m"
-                    
+
                 default:
                     break
                 }
             }
-            
+
             // IMPORTANT: must commit password to keychain (tunnel needs a password reference)
             profileManager.savePassword(forProfile: profile, newPassword: newPassword)
 

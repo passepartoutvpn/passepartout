@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/20/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,7 +27,7 @@ import Foundation
 
 public enum VPNProtocolType: String, Codable {
     case openVPN = "ovpn"
-    
+
     case wireGuard = "wg"
 }
 
@@ -40,7 +40,7 @@ extension VPNProtocolType: CustomStringConvertible {
         switch self {
         case .openVPN:
             return "OpenVPN"
-    
+
         case .wireGuard:
             return "WireGuard"
         }

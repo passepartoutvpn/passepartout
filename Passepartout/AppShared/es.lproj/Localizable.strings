@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/13/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 /* MARK: Global */
 
 "global.strings.cancel" = "Cancelar";
@@ -50,7 +50,8 @@
 "global.strings.connect" = "Conectar";
 "global.strings.disconnect" = "Desconectar";
 "global.strings.download" = "Descargar";
-
+"global.strings.authentication" = "Autenticación";
+"global.messages.unlock_app" = "Passepartout está bloqueada";
 "global.messages.email_not_configured" = "Ningún e-mail configurado.";
 "global.messages.share" = "Passepartout es un cliente OpenVPN / WireGuard intuitivo, de código abierto para iOS y macOS";
 
@@ -152,6 +153,7 @@
 "profile.items.vpn.turn_off.caption" = "Deshabilitar VPN";
 "profile.items.connection_status.caption" = "Estado";
 "profile.items.data_count.caption" = "Datos intercambiados";
+"profile.items.randomizes_server.caption" = "Servidor aleatorio";
 "profile.items.provider.refresh.caption" = "Refrescar infraestructura";
 "profile.items.category.caption" = "Categoría";
 "profile.items.only_shows_favorites.caption" = "Mostrar solo ubicaciones favoritas";
@@ -179,10 +181,13 @@
 "account.title" = "Cuenta";
 "account.sections.credentials.header" = "Credenciales";
 "account.sections.registration.footer" = "Obten una cuenta en la web de %@.";
+"account.items.authentication_method.persistent" = "Persistente";
+"account.items.authentication_method.interactive" = "Interactivo";
 "account.items.username.caption" = "Usuario";
 "account.items.username.placeholder" = "usuario";
 "account.items.password.caption" = "Contraseña";
 "account.items.password.placeholder" = "secreto";
+"account.items.seed.caption" = "Semilla";
 "account.items.open_guide.caption" = "Mira tus credenciales";
 "account.items.signup.caption" = "Registrarse con %@";
 
@@ -316,6 +321,7 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Ajustes";
+"settings.items.locks_in_background.caption" = "Bloquear acceso a la aplicación";
 "settings.items.donate.caption" = "Hacer una donación";
 
 /* MARK: AboutView */

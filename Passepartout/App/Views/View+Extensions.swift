@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/18/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -52,7 +52,7 @@ extension View {
             self
         }
     }
-    
+
     func withLeadingLabel(_ text: String, color: Color? = nil, image: String) -> some View {
         HStack {
             Label(text, image: image)
@@ -80,7 +80,7 @@ extension View {
             }
         }
     }
-    
+
     func withTrailingCheckmark(when condition: Bool) -> some View {
         HStack {
             self
@@ -91,7 +91,7 @@ extension View {
             }
         }
     }
-    
+
     func withTrailingProgress(when condition: Bool) -> some View {
         HStack {
             self
@@ -106,9 +106,7 @@ extension View {
 
 extension View {
     func debugChanges() {
-        if #available(iOS 15, *),
-           SwiftyBeaver.destinations.first?.minLevel == .verbose {
-
+        if SwiftyBeaver.destinations.first?.minLevel == .verbose {
             Self._printChanges()
         }
     }
@@ -145,7 +143,7 @@ private extension View {
 }
 
 private struct HostingWindowFinder: UIViewRepresentable {
-    var callback: (UIWindow?) -> ()
+    var callback: (UIWindow?) -> Void
 
     func makeUIView(context: Context) -> UIView {
         let view = UIView()

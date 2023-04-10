@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,13 +29,13 @@ import AppKit
 @MainActor
 class PassepartoutMenu {
     private let macMenuDelegate: MacMenuDelegate
-    
+
     private let profileManager: LightProfileManager
-    
+
     private let providerManager: LightProviderManager
-    
+
     private let statusButton: StatusButton
-    
+
     init(macMenuDelegate: MacMenuDelegate) {
         self.macMenuDelegate = macMenuDelegate
         profileManager = macMenuDelegate.profileManager
@@ -47,16 +47,21 @@ class PassepartoutMenu {
 
         profileManager.delegate = self
         providerManager.delegate = self
-        
+
     }
-    
+
     func install() {
         statusButton.install(systemMenu: StaticSystemMenu(body))
     }
-    
+
     private var body: [ItemGroup] {
         var children: [ItemGroup] = []
-        
+
+        children.append(contentsOf: [
+            TextItem(Constants.Global.appVersionString),
+            SeparatorItem()
+        ] as [ItemGroup])
+
         children.append(contentsOf: [
             VisibilityItem(
                 L10n.Global.Strings.show,
@@ -65,7 +70,7 @@ class PassepartoutMenu {
             LaunchOnLoginItem(
                 L10n.Preferences.Items.LaunchesOnLogin.caption,
                 utils: macMenuDelegate.utils
-            ),
+            )
         ] as [ItemGroup])
 
         if profileManager.hasProfiles {
@@ -79,7 +84,7 @@ class PassepartoutMenu {
             ] as [ItemGroup])
         }
 
-        if let _ = profileManager.activeProfileId {
+        if profileManager.activeProfileId != nil {
             children.append(contentsOf: [
                 SeparatorItem(),
                 VPNItemGroup(
@@ -88,10 +93,10 @@ class PassepartoutMenu {
                     $0 ? L10n.Profile.Items.Vpn.TurnOff.caption : L10n.Profile.Items.Vpn.TurnOn.caption
                 } reconnectTitleBlock: {
                     L10n.Global.Strings.reconnect
-                },
+                }
             ] as [ItemGroup])
         }
-        
+
         children.append(contentsOf: [
             SeparatorItem(),
 //            TextItem(L10n.Menu.All.About.title(Constants.Global.appName)) {
@@ -104,7 +109,7 @@ class PassepartoutMenu {
                 NSApp.terminate(nil)
             }
         ] as [ItemGroup])
-        
+
         return children
     }
 }

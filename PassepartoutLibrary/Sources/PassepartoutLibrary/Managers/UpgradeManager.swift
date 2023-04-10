@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/8/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,22 +31,22 @@ import PassepartoutUtils
 
 @MainActor
 public final class UpgradeManager: ObservableObject {
-    
+
     // MARK: Initialization
-    
+
     private let store: KeyValueStore
-    
+
     // MARK: State
-    
+
     @Published public private(set) var isDoingMigrations = true
 
     public init(store: KeyValueStore) {
         self.store = store
     }
-    
+
     public func doMigrations(_ profileManager: ProfileManager) {
         doMigrateStore(store)
-        
+
 //        profileManager.removeAllProfiles()
         guard didMigrateToV2 else {
             isDoingMigrations = true

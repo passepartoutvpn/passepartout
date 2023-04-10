@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/24/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -36,7 +36,7 @@ extension Utils {
 //        assertionFailure(message ?? "Cannot decode entity required fields - \(file):\(function):\(line)")
         pp_log.warning(message ?? "Cannot decode entity required fields - \(file):\(function):\(line)")
     }
-    
+
     public static func logFetchError(_ file: String, _ function: String, _ line: Int, _ error: Error) {
         pp_log.error("Unable to fetch: \(error) - \(file):\(function):\(line)")
     }

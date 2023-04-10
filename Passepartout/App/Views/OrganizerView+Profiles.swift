@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,10 +30,13 @@ extension OrganizerView {
     struct ProfilesList: View {
         @ObservedObject private var profileManager: ProfileManager
 
-        init() {
+        @Binding private var modalType: ModalType?
+
+        init(modalType: Binding<ModalType?>) {
             profileManager = .shared
+            _modalType = modalType
         }
-        
+
         var body: some View {
             debugChanges()
             return Group {
@@ -46,7 +49,7 @@ extension OrganizerView {
                 profileManager.currentProfileId = $0.id
             }
         }
-        
+
         private var mainView: some View {
             List {
                 if profileManager.hasProfiles {
@@ -66,9 +69,9 @@ extension OrganizerView {
                 }
             }.themeAnimation(on: profileManager.headers)
         }
-        
+
         private var profilesView: some View {
-            ForEach(sortedHeaders, content: profileRow(forHeader:))
+            ForEach(sortedProfiles, content: profileRow(forProfile:))
                 .onDelete(perform: removeProfiles)
         }
 
@@ -79,25 +82,26 @@ extension OrganizerView {
             }
         }
 
-        private func profileRow(forHeader header: Profile.Header) -> some View {
-            NavigationLink(tag: header.id, selection: $profileManager.currentProfileId) {
+        private func profileRow(forProfile profile: Profile) -> some View {
+            NavigationLink(tag: profile.id, selection: $profileManager.currentProfileId) {
                 ProfileView()
             } label: {
-                profileLabel(forHeader: header)
+                profileLabel(forProfile: profile)
             }.contextMenu {
-                ProfileContextMenu(header: header)
+                ProfileContextMenu(header: profile.header)
             }
         }
-        
-        private func profileLabel(forHeader header: Profile.Header) -> some View {
+
+        private func profileLabel(forProfile profile: Profile) -> some View {
             ProfileRow(
-                header: header,
-                isActiveProfile: profileManager.isActiveProfile(header.id)
+                profile: profile,
+                isActiveProfile: profileManager.isActiveProfile(profile.id),
+                modalType: $modalType
             )
         }
 
-        private var sortedHeaders: [Profile.Header] {
-            profileManager.headers
+        private var sortedProfiles: [Profile] {
+            profileManager.profiles
                 .sorted()
 //                .sorted {
 //                    if profileManager.isActiveProfile($0.id) {
@@ -111,7 +115,7 @@ extension OrganizerView {
         }
 
         private func removeProfiles(at offsets: IndexSet) {
-            let currentHeaders = sortedHeaders
+            let currentHeaders = sortedProfiles
             var toDelete: [UUID] = []
             offsets.forEach {
                 toDelete.append(currentHeaders[$0].id)
@@ -120,7 +124,7 @@ extension OrganizerView {
                 profileManager.removeProfiles(withIds: toDelete)
             }
         }
-        
+
         private func performMigrationsIfNeeded() {
             Task { @MainActor in
                 UpgradeManager.shared.doMigrations(profileManager)
@@ -136,25 +140,19 @@ extension OrganizerView {
         @ObservedObject private var currentVPNState: ObservableVPNState
 
         let header: Profile.Header
-        
+
         init(header: Profile.Header) {
             profileManager = .shared
             currentVPNState = .shared
             self.header = header
         }
-        
+
         var body: some View {
-            if #available(iOS 16, *), isActiveProfileNotDisconnected {
-                reconnectButton
-            }
+            reconnectButton
             duplicateButton
             deleteButton
         }
-        
-        private var isActiveProfileNotDisconnected: Bool {
-            profileManager.isActiveProfile(header.id) && currentVPNState.vpnStatus != .disconnected
-        }
-        
+
         private var reconnectButton: some View {
             ProfileView.ReconnectButton()
         }

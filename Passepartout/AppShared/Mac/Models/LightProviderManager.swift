@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/7/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -39,20 +39,20 @@ public protocol LightProviderLocation {
     var id: String { get }
 
     var countryCode: String { get }
-    
+
     var servers: [LightProviderServer] { get }
 }
 
 @objc(LightProviderServer)
 public protocol LightProviderServer {
     var description: String { get }
-    
+
     var longDescription: String { get }
-    
+
     var categoryName: String { get }
 
     var locationId: String { get }
-    
+
     var serverId: String { get }
 }
 
@@ -60,7 +60,7 @@ public protocol LightProviderServer {
 @objc
 public protocol LightProviderManager {
     var delegate: LightProviderManagerDelegate? { get set }
-    
+
     func categories(_ name: String, vpnProtocol: String) -> [LightProviderCategory]
 
     func downloadIfNeeded(_ name: String, vpnProtocol: String)

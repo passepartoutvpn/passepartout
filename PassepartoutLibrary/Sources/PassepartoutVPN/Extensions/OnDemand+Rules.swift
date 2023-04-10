@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -42,8 +42,17 @@ extension NEOnDemandRuleInterfaceType {
     }
 }
 
-extension Profile.OnDemand {
-    func rules(withCustomRules: Bool) -> [NEOnDemandRule] {
+extension Profile {
+    func onDemandRules(withCustomRules: Bool) -> [NEOnDemandRule] {
+        onDemand.rules(isInteractive: account.authenticationMethod == .interactive, withCustomRules: withCustomRules)
+    }
+}
+
+private extension Profile.OnDemand {
+    func rules(isInteractive: Bool, withCustomRules: Bool) -> [NEOnDemandRule] {
+        guard isEnabled && !isInteractive else {
+            return []
+        }
 
         // TODO: on-demand, drop hardcoding when "trusted networks" -> "on-demand"
 //        isEnabled = true
@@ -81,7 +90,7 @@ extension Profile.OnDemand {
         rules.append(connection)
         return rules
     }
-    
+
     private var policyRule: NEOnDemandRule {
         disconnectsIfNotMatching ? NEOnDemandRuleDisconnect() : NEOnDemandRuleIgnore()
     }

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/12/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,17 +28,17 @@ import AppKit
 
 struct ProviderLocationItem: Item {
     private let profile: LightProfile
-    
+
     private let location: LightProviderLocation
-    
+
     private let vpnManager: LightVPNManager
-    
+
     init(_ profile: LightProfile, _ location: LightProviderLocation, vpnManager: LightVPNManager) {
         self.profile = profile
         self.location = location
         self.vpnManager = vpnManager
     }
-    
+
     func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
         let viewModel = ViewModel(profile, location, vpnManager: vpnManager)
         let item = NSMenuItem(

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/30/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -49,9 +49,9 @@ extension VPNManager {
     }
 
     @discardableResult
-    public func connect(with profileId: UUID) async throws -> Profile {
+    public func connect(with profileId: UUID, newPassword: String? = nil) async throws -> Profile {
         let result = try profileManager.liveProfileEx(withId: profileId)
-        let profile = result.profile
+        var profile = result.profile
         guard !profileManager.isActiveProfile(profileId) ||
               currentState.vpnStatus != .connected else {
 
@@ -63,13 +63,16 @@ extension VPNManager {
         }
 
         pp_log.info("Connecting to: \(profile.logDescription)")
+        if let newPassword {
+            profile.account.password = newPassword
+        }
         let cfg = try vpnConfiguration(withProfile: profile)
 
         profileManager.activateProfile(profile)
         await reconnect(cfg)
         return profile
     }
-    
+
     @discardableResult
     public func connect(with profileId: UUID, toServer newServerId: String) async throws -> Profile {
         let result = try profileManager.liveProfileEx(withId: profileId)
@@ -82,7 +85,7 @@ extension VPNManager {
             try await profileManager.makeProfileReady(profile)
         }
 
-        let oldServerId = profile.providerServerId()
+        let oldServerId = profile.providerServerId
         guard let newServer = providerManager.server(withId: newServerId) else {
             pp_log.warning("Server \(newServerId) not found")
             throw PassepartoutError.missingProviderServer
@@ -107,7 +110,7 @@ extension VPNManager {
         await reconnect(cfg)
         return profile
     }
-    
+
     public func modifyActiveProfile(_ block: (inout Profile) -> Void) async throws {
         guard var profile = profileManager.activeProfile else {
             pp_log.warning("Nothing to modify, no active profile")

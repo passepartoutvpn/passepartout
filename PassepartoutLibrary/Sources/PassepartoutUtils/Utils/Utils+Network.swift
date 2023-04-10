@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/26/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -55,7 +55,7 @@ extension Utils {
         return isFound
     }
     #endif
-    
+
     public static func hasEthernet() -> Bool {
         #if targetEnvironment(macCatalyst) || os(macOS)
         true
@@ -108,7 +108,7 @@ extension Utils {
     }
 }
 
-//extension Utils {
+// extension Utils {
 //    public static func checkConnectivityURL(_ url: URL, timeout: TimeInterval, completionHandler: @escaping (Bool) -> Void) {
 //        let session = URLSession(configuration: .ephemeral)
 //        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeout)
@@ -128,4 +128,4 @@ extension Utils {
 //            }
 //        }.resume()
 //    }
-//}
+// }

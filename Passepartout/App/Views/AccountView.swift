@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/11/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,21 +28,19 @@ import PassepartoutLibrary
 
 struct AccountView: View {
     @ObservedObject private var providerManager: ProviderManager
-    
+
     private let providerName: ProviderName?
-    
+
     private let vpnProtocol: VPNProtocolType
-    
+
     @Binding private var account: Profile.Account
-    
+
     private let saveAnyway: Bool
-    
+
     private let onSave: (() -> Void)?
 
     @State private var liveAccount = Profile.Account()
-    
-    @State private var isPasswordRevealed = false
-    
+
     init(
         providerName: ProviderName?,
         vpnProtocol: VPNProtocolType,
@@ -57,9 +55,18 @@ struct AccountView: View {
         self.saveAnyway = saveAnyway
         self.onSave = onSave
     }
-    
+
     var body: some View {
         List {
+            // TODO: interactive, re-enable after fixing
+//            Section {
+//                // TODO: interactive, l10n
+//                themeTextPicker(L10n.Global.Strings.authentication, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
+//                    .persistent,
+//                    .interactive
+////                    .totp // TODO: interactive, support OTP-based authentication
+//                ], description: \.localizedDescription)
+//            }
             Section {
                 TextField(usernamePlaceholder ?? L10n.Account.Items.Username.placeholder, text: $liveAccount.username)
                     .textContentType(.username)
@@ -67,15 +74,20 @@ struct AccountView: View {
                     .themeRawTextStyle()
                     .withLeadingText(L10n.Account.Items.Username.caption)
 
-                RevealingSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password) {
-                    themeConceilImage.asSystemImage
-                        .themeAccentForegroundStyle()
-                } revealImage: {
-                    themeRevealImage.asSystemImage
-                        .themeAccentForegroundStyle()
-                }.textContentType(.password)
-                .themeRawTextStyle()
-                .withLeadingText(L10n.Account.Items.Password.caption)
+                switch liveAccount.authenticationMethod {
+                case nil, .persistent, .interactive:
+                    if liveAccount.authenticationMethod == .interactive {
+                        EmptyView()
+                    } else {
+                        themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password)
+                            .withLeadingText(L10n.Account.Items.Password.caption)
+                    }
+
+                // TODO: interactive, scan QR code
+                case .totp:
+                    themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password, contentType: .oneTimeCode)
+                        .withLeadingText(L10n.Account.Items.Seed.caption)
+                }
             } footer: {
                 metadata?.localizedGuidanceString.map {
                     Text($0)
@@ -102,7 +114,7 @@ struct AccountView: View {
             )
         }
     }
-    
+
     private func openGuidanceURL(_ url: URL) {
         URL.openURL(url)
     }
@@ -123,5 +135,20 @@ extension AccountView {
             return nil
         }
         return providerManager.provider(withName: name)
+    }
+}
+
+private extension Profile.Account.AuthenticationMethod {
+    var localizedDescription: String {
+        switch self {
+        case .persistent:
+            return L10n.Account.Items.AuthenticationMethod.persistent
+
+        case .interactive:
+            return L10n.Account.Items.AuthenticationMethod.interactive
+
+        case .totp:
+            return Unlocalized.Other.totp
+        }
     }
 }

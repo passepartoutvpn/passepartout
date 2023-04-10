@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/11/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -33,11 +33,11 @@ public protocol ProfileSubtype {
 
 public struct Profile: Identifiable, Codable, Equatable {
     public var header: Header
-    
+
     public var currentVPNProtocol: VPNProtocolType
 
     public var networkSettings = Profile.NetworkSettings()
-    
+
     public var onDemand = Profile.OnDemand()
 
     var host: Host?
@@ -57,7 +57,7 @@ public struct Profile: Identifiable, Codable, Equatable {
         )
         currentVPNProtocol = .openVPN
     }
-    
+
     init(_ id: UUID = UUID(), name: String, configuration: OpenVPN.Configuration) {
         let header = Header(
             uuid: id,
@@ -109,7 +109,7 @@ public struct Profile: Identifiable, Codable, Equatable {
     }
 
     // MARK: Identifiable
-    
+
     public var id: UUID {
         header.id
     }
@@ -120,18 +120,12 @@ extension Profile {
         UUID(uuidString: "00000000-0000-0000-0000-000000000000")!,
         name: ""
     )
-    
+
     public static func isPlaceholder(_ id: UUID) -> Bool {
         id == placeholder.id
     }
-    
+
     public var isPlaceholder: Bool {
         header.id == Self.placeholder.id
-    }
-}
-
-extension Profile.Header {
-    public var isPlaceholder: Bool {
-        id == Profile.placeholder.id
     }
 }

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,7 +29,7 @@ import TunnelKitWireGuard
 import PassepartoutCore
 
 extension VPNProtocolType: Comparable {
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.description < rhs.description
     }
 }
@@ -50,7 +50,7 @@ extension VPNProtocolType {
     public var supportsGateway: Bool {
         true
     }
-    
+
     public var supportsDNS: Bool {
         true
     }
@@ -61,5 +61,13 @@ extension VPNProtocolType {
 
     public var supportsMTU: Bool {
         true
+    }
+}
+
+extension VPNProtocolProviding {
+    func vpnPath(with path: String) -> String {
+        var components = path.split(separator: "/").map(String.init)
+        components.insert(vpnProtocol.description, at: components.count - 1)
+        return components.joined(separator: "/")
     }
 }

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/26/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,11 +27,11 @@ import Foundation
 
 struct BuildProducts {
     private let productsAtBuild: (Int) -> [LocalProduct]
-    
+
     init(productsAtBuild: @escaping (Int) -> [LocalProduct]) {
         self.productsAtBuild = productsAtBuild
     }
-    
+
     func products(atBuild build: Int) -> [LocalProduct] {
         productsAtBuild(build)
     }

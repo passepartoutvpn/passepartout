@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/6/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,14 +28,16 @@ import PassepartoutLibrary
 
 struct ProfileView: View {
     enum ModalType: Int, Identifiable {
+        case interactiveAccount
+
         case shortcuts
-        
+
         case rename
-        
+
         case paywallShortcuts
 
         case paywallNetworkSettings
-        
+
         case paywallTrustedNetworks
 
         var id: Int {
@@ -44,17 +46,17 @@ struct ProfileView: View {
     }
 
     @ObservedObject private var currentProfile: ObservableProfile
-    
+
     private var isLoading: Bool {
         currentProfile.isLoading
     }
-    
+
     private var isExisting: Bool {
         !currentProfile.value.isPlaceholder
     }
 
     @State private var modalType: ModalType?
-    
+
     init() {
         currentProfile = ProfileManager.shared.currentProfile
     }
@@ -81,40 +83,49 @@ struct ProfileView: View {
         .navigationTitle(title)
         .themeSecondaryView()
     }
-    
+
     private var title: String {
         currentProfile.name
     }
-    
+
     private var mainView: some View {
         List {
             if !isLoading {
-                VPNSection(profileId: currentProfile.value.id)
+                VPNSection(
+                    profile: currentProfile.value,
+                    modalType: $modalType
+                )
                 ProviderSection(currentProfile: currentProfile)
                 ConfigurationSection(
                     currentProfile: currentProfile,
                     modalType: $modalType
                 )
                 ExtraSection(currentProfile: currentProfile)
+                DiagnosticsSection(currentProfile: currentProfile)
             } else {
                 ProgressView()
             }
         }.themeAnimation(on: isLoading)
     }
-    
+
     @ViewBuilder
     private func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
+        case .interactiveAccount:
+            NavigationView {
+                InteractiveConnectionView(profile: currentProfile.value)
+            }.themeGlobal()
+
         case .shortcuts:
             NavigationView {
                 ShortcutsView(target: currentProfile.value)
             }.themeGlobal()
-            
+
         case .rename:
             NavigationView {
                 RenameView(currentProfile: currentProfile)
             }.themeGlobal()
-            
+
         case .paywallShortcuts:
             NavigationView {
                 PaywallView(

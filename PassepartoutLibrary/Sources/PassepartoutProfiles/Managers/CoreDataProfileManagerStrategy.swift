@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/9/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,21 +31,21 @@ import PassepartoutUtils
 public class CoreDataProfileManagerStrategy: ProfileManagerStrategy {
     private let profileRepository: ProfileRepository
 
-    private let fetchedHeaders: FetchedValueHolder<[UUID: Profile.Header]>
+    private let fetchedProfiles: FetchedValueHolder<[UUID: Profile]>
 
     public init(persistence: Persistence) {
         profileRepository = ProfileRepository(persistence.context)
-        fetchedHeaders = profileRepository.fetchedHeaders()
+        fetchedProfiles = profileRepository.fetchedProfiles()
     }
-    
-    public var allHeaders: [UUID: Profile.Header] {
-        fetchedHeaders.value
+
+    public var allProfiles: [UUID: Profile] {
+        fetchedProfiles.value
     }
-    
+
     public func profiles() -> [Profile] {
         profileRepository.profiles()
     }
-    
+
     public func profile(withId id: UUID) -> Profile? {
         profileRepository.profile(withId: id)
     }
@@ -57,13 +57,13 @@ public class CoreDataProfileManagerStrategy: ProfileManagerStrategy {
             pp_log.error("Unable to save profile: \(error)")
         }
     }
-    
+
     public func removeProfiles(withIds ids: [UUID]) {
         profileRepository.removeProfiles(withIds: ids)
     }
 
-    public func willUpdateProfiles() -> AnyPublisher<[UUID : Profile.Header], Never> {
-        fetchedHeaders.$value
+    public func willUpdateProfiles() -> AnyPublisher<[UUID: Profile], Never> {
+        fetchedProfiles.$value
             .eraseToAnyPublisher()
     }
 }

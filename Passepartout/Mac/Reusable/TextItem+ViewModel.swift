@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/2/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,25 +31,25 @@ extension TextItem {
         let title: CurrentValueSubject<String, Never>
 
         let state: CurrentValueSubject<State, Never>
-        
+
         private let action: (() -> Void)?
-        
+
         var hasAction: Bool {
             action != nil
         }
-        
+
         private var subscriptions: Set<AnyCancellable> = []
-        
+
         init(_ title: String, state: State = .none, action: (() -> Void)? = nil) {
             self.title = CurrentValueSubject(title)
             self.state = CurrentValueSubject(state)
             self.action = action
         }
-        
+
         @objc func representedAction() {
             action?()
         }
-        
+
         func subscribeTitle(_ block: @escaping (String) -> Void) {
             title
                 .removeDuplicates()

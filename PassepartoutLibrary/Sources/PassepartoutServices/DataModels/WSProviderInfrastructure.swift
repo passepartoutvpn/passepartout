@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/11/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,21 +29,21 @@ public struct WSProviderInfrastructure: Codable {
     public struct Defaults: Codable {
         enum CodingKeys: String, CodingKey {
             case usernamePlaceholder = "username"
-            
+
             case countryCode = "country"
         }
-        
+
         public let usernamePlaceholder: String?
 
         public let countryCode: String
     }
-    
+
     public let build: Int
-    
+
     public let name: WSProviderName
-    
+
     public let fullName: String
-    
+
     public let categories: [WSProviderCategory]
 
     public let presets: [WSProviderPreset]

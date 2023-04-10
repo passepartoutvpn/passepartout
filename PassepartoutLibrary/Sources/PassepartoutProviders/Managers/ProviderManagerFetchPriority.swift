@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/22/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,8 +27,8 @@ import Foundation
 
 public enum ProviderManagerFetchPriority {
     case bundle
-    
+
     case remote
-    
+
     case remoteThenBundle
 }

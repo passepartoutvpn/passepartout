@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/25/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -44,6 +44,16 @@ extension ProviderLocation: Identifiable {
 extension ProviderServer {
     public var locationId: String {
         "\(providerMetadata.name):\(categoryName):\(countryCode)"
+    }
+
+    public func location(withVPNProtocol vpnProtocol: VPNProtocolType) -> ProviderLocation {
+        ProviderLocation(
+            providerMetadata: providerMetadata,
+            vpnProtocol: vpnProtocol,
+            categoryName: categoryName,
+            countryCode: countryCode,
+            servers: nil
+        )
     }
 }
 

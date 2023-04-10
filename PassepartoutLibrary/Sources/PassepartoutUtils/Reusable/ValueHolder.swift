@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/8/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -26,7 +26,7 @@
 import Foundation
 
 public protocol ValueHolder {
-    associatedtype T
+    associatedtype ValueType
 
-    var value: T { get }
+    var value: ValueType { get }
 }

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/13/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -37,20 +37,20 @@ extension Profile {
             return host?.vpnProtocols ?? []
         }
     }
-    
+
     public var account: Profile.Account {
         get {
             if isProvider {
-                return providerAccount() ?? .init()
+                return providerAccount ?? .init()
             } else {
-                return hostAccount() ?? .init()
+                return hostAccount ?? .init()
             }
         }
         set {
             if isProvider {
-                setProviderAccount(newValue)
+                providerAccount = newValue
             } else {
-                setHostAccount(newValue)
+                hostAccount = newValue
             }
         }
     }

@@ -54,6 +54,12 @@ internal enum L10n {
     /// MARK: ProfileView -> AccountView
     internal static let title = L10n.tr("Localizable", "account.title", fallback: "Account")
     internal enum Items {
+      internal enum AuthenticationMethod {
+        /// Interactive
+        internal static let interactive = L10n.tr("Localizable", "account.items.authentication_method.interactive", fallback: "Interactive")
+        /// Persistent
+        internal static let persistent = L10n.tr("Localizable", "account.items.authentication_method.persistent", fallback: "Persistent")
+      }
       internal enum OpenGuide {
         /// See your credentials
         internal static let caption = L10n.tr("Localizable", "account.items.open_guide.caption", fallback: "See your credentials")
@@ -63,6 +69,10 @@ internal enum L10n {
         internal static let caption = L10n.tr("Localizable", "account.items.password.caption", fallback: "Password")
         /// secret
         internal static let placeholder = L10n.tr("Localizable", "account.items.password.placeholder", fallback: "secret")
+      }
+      internal enum Seed {
+        /// Seed
+        internal static let caption = L10n.tr("Localizable", "account.items.seed.caption", fallback: "Seed")
       }
       internal enum Signup {
         /// Register with %@
@@ -436,6 +446,8 @@ internal enum L10n {
       internal static let emailNotConfigured = L10n.tr("Localizable", "global.messages.email_not_configured", fallback: "No e-mail account is configured.")
       /// Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS
       internal static let share = L10n.tr("Localizable", "global.messages.share", fallback: "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS")
+      /// Passepartout is locked
+      internal static let unlockApp = L10n.tr("Localizable", "global.messages.unlock_app", fallback: "Passepartout is locked")
     }
     internal enum Placeholders {
       /// My profile
@@ -450,6 +462,8 @@ internal enum L10n {
       internal static let addresses = L10n.tr("Localizable", "global.strings.addresses", fallback: "Addresses")
       /// Advanced
       internal static let advanced = L10n.tr("Localizable", "global.strings.advanced", fallback: "Advanced")
+      /// Authentication
+      internal static let authentication = L10n.tr("Localizable", "global.strings.authentication", fallback: "Authentication")
       /// Automatic
       internal static let automatic = L10n.tr("Localizable", "global.strings.automatic", fallback: "Automatic")
       /// Bytes
@@ -785,6 +799,10 @@ internal enum L10n {
           internal static let caption = L10n.tr("Localizable", "profile.items.provider.refresh.caption", fallback: "Refresh infrastructure")
         }
       }
+      internal enum RandomizesServer {
+        /// Randomize server
+        internal static let caption = L10n.tr("Localizable", "profile.items.randomizes_server.caption", fallback: "Randomize server")
+      }
       internal enum UseProfile {
         /// Use this profile
         internal static let caption = L10n.tr("Localizable", "profile.items.use_profile.caption", fallback: "Use this profile")
@@ -880,6 +898,10 @@ internal enum L10n {
       internal enum Donate {
         /// Make a donation
         internal static let caption = L10n.tr("Localizable", "settings.items.donate.caption", fallback: "Make a donation")
+      }
+      internal enum LocksInBackground {
+        /// Lock app access
+        internal static let caption = L10n.tr("Localizable", "settings.items.locks_in_background.caption", fallback: "Lock app access")
       }
     }
   }

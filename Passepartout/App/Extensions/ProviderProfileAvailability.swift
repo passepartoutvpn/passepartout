@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,7 +28,7 @@ import PassepartoutLibrary
 
 protocol ProviderProfileAvailability {
     var profile: Profile { get }
-    
+
     var providerManager: ProviderManager { get }
 }
 

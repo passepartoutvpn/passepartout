@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,11 +29,11 @@ import SwiftyBeaver
 @MainActor
 public class LogManager {
     public let logFile: URL?
-    
+
     public var logLevel: SwiftyBeaver.Level = .info
-    
+
     public var logFormat: String?
-    
+
     public init(logFile: URL?) {
         self.logFile = logFile
     }
@@ -46,7 +46,7 @@ public class LogManager {
             console.format = logFormat
         }
         SwiftyBeaver.addDestination(console)
-        
+
         if let fileURL = logFile {
             let file = FileDestination()
             file.minLevel = logLevel

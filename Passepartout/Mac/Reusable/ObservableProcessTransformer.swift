@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,23 +30,23 @@ class ObservableProcessTransformer: ObservableObject {
     static let shared = ObservableProcessTransformer()
 
     private let transformer = ProcessTransformer()
-    
+
     private var subscriptions: Set<AnyCancellable> = []
-    
+
     private init() {
     }
 
     var isForeground: Bool {
         transformer.isForeground
     }
-    
+
     func toggleForeground() {
         guard transformer.toggleForeground() else {
             return
         }
         objectWillChange.send()
     }
-    
+
     func bringToForeground() {
         guard transformer.bringToForeground() else {
             return

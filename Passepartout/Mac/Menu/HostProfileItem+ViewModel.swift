@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -32,30 +32,30 @@ extension HostProfileItem {
         let profile: LightProfile
 
         private let vpnManager: LightVPNManager
-        
+
         private var didUpdate: ((LightVPNStatus) -> Void)?
 
         init(_ profile: LightProfile, vpnManager: LightVPNManager) {
             self.profile = profile
             self.vpnManager = vpnManager
-            
+
             vpnManager.addDelegate(self, withIdentifier: profile.id.uuidString)
         }
-        
+
         deinit {
             Task { @MainActor in
                 vpnManager.removeDelegate(withIdentifier: profile.id.uuidString)
             }
         }
-        
+
         @objc func connectTo() {
             vpnManager.connect(with: profile.id)
         }
-        
+
         @objc func disconnect() {
             vpnManager.disconnect()
         }
-        
+
         func subscribe(_ block: @escaping (LightVPNStatus) -> Void) {
             didUpdate = block
         }

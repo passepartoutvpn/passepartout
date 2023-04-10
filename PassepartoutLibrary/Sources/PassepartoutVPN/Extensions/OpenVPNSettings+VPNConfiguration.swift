@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -57,16 +57,18 @@ extension Profile.OpenVPNSettings: VPNConfigurationProviding {
             configuration: customConfiguration
         )
         cfg.username = parameters.username
-        cfg.killSwitch = true
         cfg.shouldDebug = true
-        cfg.debugLogPath = parameters.preferences.tunnelLogPath
+        if let filename = parameters.preferences.tunnelLogPath {
+            cfg.debugLogPath = vpnPath(with: filename)
+        }
         cfg.debugLogFormat = parameters.preferences.tunnelLogFormat
         cfg.masksPrivateData = parameters.preferences.masksPrivateData
-        
+
         var extra = NetworkExtensionExtra()
         extra.passwordReference = parameters.passwordReference
         extra.onDemandRules = parameters.onDemandRules
         extra.disconnectsOnSleep = !parameters.networkSettings.keepsAliveOnSleep
+        extra.killSwitch = true
 
         pp_log.verbose("Configuration:")
         pp_log.verbose(cfg)
@@ -81,7 +83,7 @@ extension OpenVPN.ConfigurationBuilder {
         switch settings.choice {
         case .automatic:
             break
-        
+
         case .manual:
             appendNoPullMask(.routes)
             var policies: [OpenVPN.RoutingPolicy] = []
@@ -120,9 +122,10 @@ extension OpenVPN.ConfigurationBuilder {
             case .disabled:
                 break
             }
-            
+
             if isDNSEnabled {
                 dnsServers = settings.dnsServers?.filter { !$0.isEmpty }
+                dnsDomain = settings.dnsDomain
                 searchDomains = settings.dnsSearchDomains
             }
         }
@@ -143,19 +146,19 @@ extension OpenVPN.ConfigurationBuilder {
                 httpsProxy = settings.proxyServer
                 proxyBypassDomains = settings.proxyBypassDomains?.filter { !$0.isEmpty }
                 proxyAutoConfigurationURL = nil
-                
+
             case .pac:
                 httpProxy = nil
                 httpsProxy = nil
                 proxyBypassDomains = nil
                 proxyAutoConfigurationURL = settings.proxyAutoConfigurationURL
-                
+
             case .disabled:
                 break
             }
         }
     }
-    
+
     mutating func applyMTU(from settings: Network.MTUSettings) {
         switch settings.choice {
         case .automatic:
@@ -165,7 +168,7 @@ extension OpenVPN.ConfigurationBuilder {
             mtu = settings.mtuBytes
         }
     }
-    
+
     private mutating func appendNoPullMask(_ mask: OpenVPN.PullMask) {
         if noPullMask == nil {
             noPullMask = []

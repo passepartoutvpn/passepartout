@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/30/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,11 +31,11 @@ class UtilsTests: XCTestCase {
     override func setUp() {
         pp_log.addDestination(ConsoleDestination())
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
+
     func testLanguageLocalization() {
         let languages = ["en", "it", "de", "pt-BR", "ru"]
         let english = Locale(identifier: "en")
@@ -50,7 +50,7 @@ class UtilsTests: XCTestCase {
         // Inglese, Italiano, Portoghese, Russo, Tedesco
         XCTAssertEqual(languagesIT, ["en", "it", "pt-BR", "ru", "de"])
     }
-    
+
     func testTrailing() {
         let file = Bundle.module.url(forResource: "Debug", withExtension: "log")!
 
@@ -63,7 +63,7 @@ class UtilsTests: XCTestCase {
 
         pp_log.debug(file.trailingLines(bytes: 1000))
     }
-    
+
     private func privateSortedLanguages(_ languages: [String], with locale: Locale) -> [String] {
         languages.sorted {
             locale.localizedString(forLanguageCode: $0)! < locale.localizedString(forLanguageCode: $1)!

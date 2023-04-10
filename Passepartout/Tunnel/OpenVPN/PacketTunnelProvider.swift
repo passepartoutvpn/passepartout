@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/17/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,7 +27,7 @@ import Foundation
 import OpenVPNAppExtension
 
 class PacketTunnelProvider: OpenVPNTunnelProvider {
-    override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+    override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         appVersion = "\(Constants.Global.appName) \(Constants.Global.appVersionString)"
         dnsTimeout = Constants.OpenVPNTunnel.dnsTimeout
         logSeparator = Constants.OpenVPNTunnel.sessionMarker

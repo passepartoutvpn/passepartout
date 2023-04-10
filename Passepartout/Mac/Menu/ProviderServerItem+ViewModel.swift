@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/8/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,21 +30,21 @@ extension ProviderServerItem {
     @MainActor
     class ViewModel {
         private let profile: LightProfile
-        
+
         let server: LightProviderServer
-        
+
         private let vpnManager: LightVPNManager
-        
+
         init(_ profile: LightProfile, _ server: LightProviderServer, vpnManager: LightVPNManager) {
             self.profile = profile
             self.server = server
             self.vpnManager = vpnManager
         }
-        
+
         var isActiveServer: Bool {
             server.serverId == profile.providerServer?.serverId
         }
-        
+
         @objc func connectTo() {
             vpnManager.connect(with: profile.id, to: server.serverId)
         }

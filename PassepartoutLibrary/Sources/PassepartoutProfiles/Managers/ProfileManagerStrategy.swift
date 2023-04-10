@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/9/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,17 +28,17 @@ import Combine
 import PassepartoutCore
 
 public protocol ProfileManagerStrategy {
-    var allHeaders: [UUID: Profile.Header] { get }
-    
+    var allProfiles: [UUID: Profile] { get }
+
     func profiles() -> [Profile]
-    
+
     func profile(withId: UUID) -> Profile?
-    
+
     func saveProfiles(_ profiles: [Profile])
 
     func removeProfiles(withIds ids: [UUID])
 
-    func willUpdateProfiles() -> AnyPublisher<[UUID: Profile.Header], Never>
+    func willUpdateProfiles() -> AnyPublisher<[UUID: Profile], Never>
 }
 
 extension ProfileManagerStrategy {

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/17/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,7 +31,7 @@ extension Profile {
         public var vpnProtocol: VPNProtocolType {
             .wireGuard
         }
-        
+
         public var configuration: WireGuard.Configuration
 
         public init(configuration: WireGuard.Configuration) {

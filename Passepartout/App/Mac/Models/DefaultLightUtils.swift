@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/16/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,18 +28,18 @@ import SwiftUI
 
 class DefaultLightUtils: LightUtils {
     private let app: UIApplication
-    
+
     init() {
         app = .shared
     }
-    
+
     @AppStorage(AppPreference.launchesOnLogin.key) var launchesOnLogin = false
 
     func requestScene() {
         guard app.connectedScenes.isEmpty else {
             return
         }
-        app.requestSceneSessionActivation(nil, userActivity: nil, options: nil) { error in
+        app.requestSceneSessionActivation(nil, userActivity: nil, options: nil) { _ in
             //
         }
     }

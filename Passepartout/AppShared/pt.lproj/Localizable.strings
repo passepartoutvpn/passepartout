@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/13/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 /* MARK: Global */
 
 "global.strings.cancel" = "Cancelar";
@@ -50,7 +50,8 @@
 "global.strings.connect" = "Ligar";
 "global.strings.disconnect" = "Desligar";
 "global.strings.download" = "Transferir";
-
+"global.strings.authentication" = "Autenticação";
+"global.messages.unlock_app" = "O Passepartout está bloqueado";
 "global.messages.email_not_configured" = "Nenhuma conta de email configurada.";
 "global.messages.share" = "Passepartout é um cliente OpenVPN / WireGuard fácil e open-source para iOS e macOS";
 
@@ -152,6 +153,7 @@
 "profile.items.vpn.turn_off.caption" = "Desativar VPN";
 "profile.items.connection_status.caption" = "Status";
 "profile.items.data_count.caption" = "Dados transferidos";
+"profile.items.randomizes_server.caption" = "Servidor aleatório";
 "profile.items.provider.refresh.caption" = "Atualizar infraestrutura";
 "profile.items.category.caption" = "Categoria";
 "profile.items.only_shows_favorites.caption" = "Mostrar apenas os locais preferidos";
@@ -179,10 +181,13 @@
 "account.title" = "Conta";
 "account.sections.credentials.header" = "Credenciais";
 "account.sections.registration.footer" = "Registrar em %@ website.";
+"account.items.authentication_method.persistent" = "Persistente";
+"account.items.authentication_method.interactive" = "Interativo";
 "account.items.username.caption" = "Usuário";
 "account.items.username.placeholder" = "usuário";
 "account.items.password.caption" = "Senha";
 "account.items.password.placeholder" = "senha secreta";
+"account.items.seed.caption" = "Seed";
 "account.items.open_guide.caption" = "Ver sua credenciais";
 "account.items.signup.caption" = "Registrar com %@";
 
@@ -316,6 +321,7 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Ajustes";
+"settings.items.locks_in_background.caption" = "Bloquear acesso à aplicação";
 "settings.items.donate.caption" = "Fazer doação";
 
 /* MARK: AboutView */

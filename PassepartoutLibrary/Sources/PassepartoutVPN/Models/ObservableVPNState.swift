@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/27/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -26,10 +26,9 @@
 import Foundation
 import TunnelKitCore
 import TunnelKitManager
-import PassepartoutCore
 import PassepartoutUtils
 
-public class ObservableVPNState: WrappedVPNState, ObservableObject {
+public class ObservableVPNState: ObservableObject {
     @Published public internal(set) var isEnabled = false {
         didSet {
             pp_log.debug("VPN enabled -> \(isEnabled)")
@@ -50,7 +49,7 @@ public class ObservableVPNState: WrappedVPNState, ObservableObject {
             pp_log.debug("Last error: \(lastError)")
         }
     }
-    
+
     @Published public internal(set) var dataCount: DataCount? {
         didSet {
             guard let dataCount = dataCount else {

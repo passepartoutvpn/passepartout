@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/13/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,9 +29,9 @@ import IntentsUI
 
 struct IntentEditView: UIViewControllerRepresentable {
     let shortcut: Shortcut
-    
+
     let delegate: INUIEditVoiceShortcutViewControllerDelegate?
-    
+
     func makeUIViewController(context: UIViewControllerRepresentableContext<IntentEditView>) -> INUIEditVoiceShortcutViewController {
         let vc = INUIEditVoiceShortcutViewController(voiceShortcut: shortcut.native)
         vc.delegate = delegate

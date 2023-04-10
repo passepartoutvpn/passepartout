@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/13/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 /* MARK: Global */
 
 "global.strings.cancel" = "Afbreken";
@@ -50,7 +50,8 @@
 "global.strings.connect" = "Verbinding maken";
 "global.strings.disconnect" = "Verbinding verbreken";
 "global.strings.download" = "Downloaden";
-
+"global.strings.authentication" = "Authenticatie";
+"global.messages.unlock_app" = "Hoofdsleutel is vergrendeld";
 "global.messages.email_not_configured" = "Er is geen email adres geconfigureerd.";
 "global.messages.share" = "Passepartout is een gebruiksvriendelijke open source OpenVPN / WireGuard client voor iOS en macOS";
 
@@ -152,6 +153,7 @@
 "profile.items.vpn.turn_off.caption" = "VPN deactiveren";
 "profile.items.connection_status.caption" = "Status";
 "profile.items.data_count.caption" = "Gegegevens uitgewisseld";
+"profile.items.randomizes_server.caption" = "Willekeurige server";
 "profile.items.provider.refresh.caption" = "Vernieuw de infrastructuur";
 "profile.items.category.caption" = "Categorie";
 "profile.items.only_shows_favorites.caption" = "Alleen favoriete locaties weergeven";
@@ -179,10 +181,13 @@
 "account.title" = "Account";
 "account.sections.credentials.header" = "Inloggegevens";
 "account.sections.registration.footer" = "Registreer voor een %@ account op de website.";
+"account.items.authentication_method.persistent" = "Aanhoudend";
+"account.items.authentication_method.interactive" = "Interactief";
 "account.items.username.caption" = "Gebruikersnaam";
 "account.items.username.placeholder" = "gebruikersnaam";
 "account.items.password.caption" = "Wachtwoord";
 "account.items.password.placeholder" = "geheim";
+"account.items.seed.caption" = "Seed";
 "account.items.open_guide.caption" = "Bekijk de inloggegevens";
 "account.items.signup.caption" = "Registreer bij %@";
 
@@ -316,6 +321,7 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Instellingen";
+"settings.items.locks_in_background.caption" = "Toegang app vergrendelen";
 "settings.items.donate.caption" = "Doneer een gift";
 
 /* MARK: AboutView */

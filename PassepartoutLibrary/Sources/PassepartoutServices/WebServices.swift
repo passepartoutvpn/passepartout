@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/14/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,23 +29,23 @@ import PassepartoutUtils
 
 public enum WebError: GenericWebServicesError, LocalizedError {
     case http(Int)
-    
+
     case emptyResponse
-    
+
     case unknown
 
     public static func httpStatus(_ status: Int) -> WebError {
         .http(status)
     }
-    
+
     public var errorDescription: String? {
         switch self {
         case .http(let status):
             return "HTTP \(status)"
-            
+
         case .emptyResponse:
             return "Empty response"
-            
+
         default:
             return nil
         }

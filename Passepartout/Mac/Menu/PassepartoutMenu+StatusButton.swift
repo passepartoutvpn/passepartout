@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/5/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,7 +31,7 @@ extension PassepartoutMenu {
     @MainActor
     class StatusButton {
         private lazy var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        
+
         private lazy var statusButton: NSStatusBarButton = {
             guard let statusButton = statusItem.button else {
                 fatalError("Missing status item button?")
@@ -46,17 +46,17 @@ extension PassepartoutMenu {
         init(profileManager: LightProfileManager, vpnManager: LightVPNManager) {
             self.profileManager = profileManager
             self.vpnManager = vpnManager
-            
+
             vpnManager.addDelegate(self, withIdentifier: "PassepartoutMenu")
             setStatus(vpnManager.vpnStatus)
         }
-        
+
         deinit {
             Task { @MainActor in
                 vpnManager.removeDelegate(withIdentifier: "PassepartoutMenu")
             }
         }
-        
+
         func install(systemMenu: SystemMenu) {
             statusItem.menu = systemMenu.asMenu
         }

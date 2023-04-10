@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,11 +28,11 @@ import AppKit
 
 struct StaticSystemMenu: SystemMenu {
     let children: [ItemGroup]
-    
+
     init(_ children: [ItemGroup]) {
         self.children = children
     }
-    
+
     var asMenu: NSMenu {
         let menu = NSMenu()
         if !children.isEmpty {

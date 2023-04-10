@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/26/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -38,25 +38,15 @@ extension OpenVPN.Digest {
     }
 }
 
-extension UInt8 {
-    var localizedDescriptionAsXOR: String {
-        let V = L10n.Global.Strings.self
-        guard self != 0 else {
-            return V.disabled
-        }
-        return String(format: "0x%02x", UInt8(self))
-    }
-}
-
 extension OpenVPN.CompressionFraming {
     var localizedDescription: String {
         switch self {
         case .disabled:
             return L10n.Global.Strings.disabled
-            
+
         case .compLZO:
             return Unlocalized.OpenVPN.compLZO
-            
+
         case .compress, .compressV2:
             return Unlocalized.OpenVPN.compress
         }
@@ -69,10 +59,10 @@ extension OpenVPN.CompressionAlgorithm {
         switch self {
         case .disabled:
             return L10n.Global.Strings.disabled
-            
+
         case .LZO:
             return Unlocalized.OpenVPN.lzo
-            
+
         case .other:
             return V.CompressionAlgorithm.Value.other
         }
@@ -81,17 +71,47 @@ extension OpenVPN.CompressionAlgorithm {
 
 extension Optional where Wrapped == OpenVPN.TLSWrap {
     var localizedDescription: String {
-        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
-        if let strategy = self?.strategy {
-            switch strategy {
-            case .auth:
-                return V.TlsWrapping.Value.auth
-
-            case .crypt:
-                return V.TlsWrapping.Value.crypt
-            }
-        } else {
+        guard let strategy = self?.strategy else {
             return L10n.Global.Strings.disabled
+        }
+        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
+        switch strategy {
+        case .auth:
+            return V.TlsWrapping.Value.auth
+
+        case .crypt:
+            return V.TlsWrapping.Value.crypt
+        }
+    }
+}
+
+extension OpenVPN.XORMethod {
+    var localizedDescription: String {
+        switch self {
+        case .xormask:
+            return Unlocalized.OpenVPN.XOR.xormask.rawValue
+
+        case .xorptrpos:
+            return Unlocalized.OpenVPN.XOR.xorptrpos.rawValue
+
+        case .reverse:
+            return Unlocalized.OpenVPN.XOR.reverse.rawValue
+
+        case .obfuscate:
+            return Unlocalized.OpenVPN.XOR.obfuscate.rawValue
+        }
+    }
+
+    var localizedLongDescription: String {
+        switch self {
+        case .xormask(let mask):
+            return "\(localizedDescription) \(mask.toHex())"
+
+        case .obfuscate(let mask):
+            return "\(localizedDescription) \(mask.toHex())"
+
+        default:
+            return localizedDescription
         }
     }
 }
@@ -119,7 +139,7 @@ extension Bool {
         let V = L10n.Global.Strings.self
         return self ? V.enabled : V.disabled
     }
-    
+
     var localizedDescriptionAsRandomizeHostnames: String {
         let V = L10n.Global.Strings.self
         return self ? V.enabled : V.disabled
@@ -131,10 +151,10 @@ extension OpenVPN.PullMask {
         switch self {
         case .routes:
             return L10n.Endpoint.Advanced.Openvpn.Items.Route.caption
-            
+
         case .dns:
             return Unlocalized.Network.dns
-            
+
         case .proxy:
             return L10n.Global.Strings.proxy
         }

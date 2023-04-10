@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,14 +28,14 @@ import AppKit
 
 struct VisibilityItem: Item {
     private let title: String
-    
+
     private let viewModel: ViewModel
 
     init(_ title: String, utils: LightUtils) {
         self.title = title
         viewModel = ViewModel(utils: utils)
     }
-    
+
     func asMenuItem(withParent parent: NSMenu) -> NSMenuItem {
         let item = NSMenuItem(
             title: title,

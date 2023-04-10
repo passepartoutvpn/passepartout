@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/10/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,26 +28,26 @@ import PassepartoutLibrary
 
 struct AddProviderView: View {
     @ObservedObject private var providerManager: ProviderManager
-    
+
     @ObservedObject private var productManager: ProductManager
-    
+
     private let bindings: AddProfileView.Bindings
-    
+
     @StateObject private var viewModel = ViewModel()
-    
+
     init(bindings: AddProfileView.Bindings) {
         providerManager = .shared
         productManager = .shared
         self.bindings = bindings
     }
-    
+
     private var providers: [ProviderMetadata] {
         providerManager.allProviders()
             .filter {
                 $0.supportedVPNProtocols.contains(viewModel.selectedVPNProtocol)
             }.sorted()
     }
-    
+
     private var availableVPNProtocols: [VPNProtocolType] {
         var protos: Set<VPNProtocolType> = []
         providers.forEach {
@@ -57,7 +57,7 @@ struct AddProviderView: View {
         }
         return protos.sorted()
     }
-    
+
     var body: some View {
         ZStack {
             ForEach(providers, id: \.navigationId, content: hiddenProviderLink)
@@ -82,7 +82,7 @@ struct AddProviderView: View {
         }.navigationTitle(L10n.AddProfile.Shared.title)
         .themeSecondaryView()
     }
-    
+
     private var mainSection: some View {
         Section {
             let protos = availableVPNProtocols
@@ -99,7 +99,7 @@ struct AddProviderView: View {
             Text(L10n.AddProfile.Provider.Sections.Vpn.footer)
         }
     }
-    
+
     private var providersSection: some View {
         Section {
             ForEach(providers, content: providerRow)
@@ -107,7 +107,7 @@ struct AddProviderView: View {
             themeErrorMessage(viewModel.errorMessage)
         }.disabled(viewModel.isFetchingAnyProvider)
     }
-    
+
     private func providerRow(_ metadata: ProviderMetadata) -> some View {
         Button {
             presentOrPurchaseProvider(metadata)
@@ -115,7 +115,7 @@ struct AddProviderView: View {
             Label(metadata.fullName, image: themeAssetsProviderImage(metadata.name))
         }.withTrailingProgress(when: viewModel.isFetchingProvider(metadata.name))
     }
-    
+
     private func hiddenProviderLink(_ metadata: ProviderMetadata) -> some View {
         NavigationLink("", tag: metadata, selection: $viewModel.selectedProvider) {
             NameView(
@@ -132,18 +132,18 @@ struct AddProviderView: View {
         }.withTrailingProgress(when: viewModel.isUpdatingIndex)
         .disabled(viewModel.isUpdatingIndex)
     }
-    
+
     // eligibility: select or purchase provider
     private func presentOrPurchaseProvider(_ metadata: ProviderMetadata) {
-        if productManager.isEligible(forProvider: metadata.name) {
-            viewModel.selectProvider(metadata, providerManager)
-        } else {
+        guard productManager.isEligible(forProvider: metadata.name) else {
             viewModel.presentPaywall()
+            return
         }
+        viewModel.selectProvider(metadata, providerManager)
     }
 
     private func onErrorMessage(_ message: String?, _ scrollProxy: ScrollViewProxy) {
-        guard let _ = message else {
+        guard message != nil else {
             return
         }
         scrollToErrorMessage(scrollProxy)

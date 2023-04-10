@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/12/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,9 +27,9 @@ import SwiftUI
 
 struct PaywallView: View {
     @ObservedObject private var productManager: ProductManager
-    
+
     @Binding private var isPresented: Bool
-    
+
     private let feature: LocalProduct?
 
     init<MT>(modalType: Binding<MT?>, feature: LocalProduct? = nil) {

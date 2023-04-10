@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -33,7 +33,7 @@ extension ProviderManager {
         }
         return profile.providerPreset(server)?.localizedDescription
     }
-    
+
     func localizedInfrastructureUpdate(forProfile profile: Profile) -> String? {
         guard let providerName = profile.header.providerName else {
             return nil
@@ -70,6 +70,14 @@ extension ProviderServer {
         countryCode.localizedAsCountryCode
     }
 
+    func localizedCountry(withCategory: Bool) -> String {
+        let desc = localizedCountry
+        if withCategory, !categoryName.isEmpty {
+            return "\(categoryName.uppercased()): \(desc)"
+        }
+        return desc
+    }
+
     var localizedShortDescription: String? {
         var comps = localizedName.map { [$0] } ?? []
         if let serverIndex = serverIndex {
@@ -93,16 +101,16 @@ extension ProviderServer {
         localizedShortDescription ?? "\(L10n.Global.Strings.default) [\(apiId)]"
     }
 
-    var localizedLongDescription: String {
+    func localizedLongDescription(withCategory: Bool) -> String {
         var comps: [String] = [localizedCountry]
         localizedShortDescription.map {
             comps.append($0)
         }
         let desc = comps.joined(separator: ", ")
-        guard !categoryName.isEmpty else {
-            return desc
+        if withCategory, !categoryName.isEmpty {
+            return "\(categoryName.uppercased()): \(desc)"
         }
-        return "\(categoryName.uppercased()): \(desc)"
+        return desc
     }
 }
 

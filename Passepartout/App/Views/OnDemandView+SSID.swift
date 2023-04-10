@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/23/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,9 +29,9 @@ import PassepartoutLibrary
 extension OnDemandView {
     struct SSIDList: View {
         @Binding var withSSIDs: [String: Bool]
-        
+
         @StateObject private var reader = SSIDReader()
-        
+
         var body: some View {
             EditableTextList(elements: allSSIDs, allowsDuplicates: false, mapping: mapElements) { text in
                 requestSSID(text)
@@ -43,14 +43,14 @@ extension OnDemandView {
                 Text(L10n.Global.Strings.add)
             }
         }
- 
+
         private func mapElements(elements: [IdentifiableString]) -> [IdentifiableString] {
             elements
                 .filter { !$0.string.isEmpty }
                 .sorted { $0.string.lowercased() < $1.string.lowercased() }
         }
-        
-        private func ssidRow(callback: EditableTextList.FieldCallback) -> some View {
+
+        private func ssidRow(callback: EditableTextFieldCallback) -> some View {
             Group {
                 if callback.isNewElement {
                     ssidField(callback: callback)
@@ -61,8 +61,8 @@ extension OnDemandView {
                 }
             }
         }
-        
-        private func ssidField(callback: EditableTextList.FieldCallback) -> some View {
+
+        private func ssidField(callback: EditableTextFieldCallback) -> some View {
             TextField(
                 Unlocalized.Network.ssid,
                 text: callback.text,
@@ -102,7 +102,7 @@ extension OnDemandView.SSIDList {
 //            print(">>> withSSIDs (allSSIDs): \(withSSIDs)")
         }
     }
-    
+
     private var onSSIDs: Binding<Set<String>> {
         .init {
             Set(withSSIDs.filter {
@@ -111,7 +111,7 @@ extension OnDemandView.SSIDList {
         } set: { newValue in
             withSSIDs.forEach {
                 guard newValue.contains($0.key) else {
-                    if let _ = withSSIDs[$0.key] {
+                    if withSSIDs[$0.key] != nil {
                         withSSIDs[$0.key] = false
                     } else {
                         withSSIDs.removeValue(forKey: $0.key)
@@ -128,7 +128,7 @@ extension OnDemandView.SSIDList {
 //            print(">>> withSSIDs (onSSIDs): \(withSSIDs)")
         }
     }
-    
+
     private func isSSIDOn(_ ssid: String) -> Binding<Bool> {
         .init {
             withSSIDs[ssid] ?? false

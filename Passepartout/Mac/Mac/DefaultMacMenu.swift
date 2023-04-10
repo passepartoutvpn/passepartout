@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,14 +27,14 @@ import Foundation
 
 class DefaultMacMenu: MacMenu {
     weak var delegate: MacMenuDelegate?
-    
+
     private lazy var menu: PassepartoutMenu = {
         guard let delegate = delegate else {
             fatalError("Must set MacMenu.delegate")
         }
         return PassepartoutMenu(macMenuDelegate: delegate)
     }()
-    
+
     func install() {
         menu.install()
     }

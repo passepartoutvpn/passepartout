@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,23 +30,25 @@ extension Profile {
     public struct Provider: Codable, Equatable {
         public struct Settings: Codable, Equatable {
             public var account: Profile.Account?
-            
+
             public var serverId: String?
 
             public var presetId: String?
 
             public var favoriteLocationIds: Set<String>?
-            
+
             public var customEndpoint: Endpoint?
-            
+
             public init() {
             }
         }
-        
+
         public let name: ProviderName
-        
+
         public var vpnSettings: [VPNProtocolType: Settings] = [:]
-        
+
+        public var randomizesServer: Bool?
+
         public init(_ name: ProviderName) {
             self.name = name
         }

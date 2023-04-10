@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -37,7 +37,7 @@ extension ProfileManager {
             do {
                 let wg = try WireGuard.Configuration(wgQuickConfig: contents)
                 return Profile(header, configuration: wg)
-            } catch {
+            } catch WireGuard.ConfigurationError.invalidLine {
                 throw ovpnError
             }
         }

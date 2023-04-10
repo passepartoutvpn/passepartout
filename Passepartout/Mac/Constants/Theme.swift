@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/9/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -52,7 +52,7 @@ extension LightVPNStatus {
         switch self {
         case .connected, .disconnected:
             resourceName = "StatusActive"
-            
+
         case .connecting, .disconnecting:
             resourceName = "StatusPending"
         }
@@ -61,12 +61,12 @@ extension LightVPNStatus {
         }
         return image
     }
-    
+
     var imageAlpha: Double {
         switch self {
         case .disconnected:
             return 0.5
-            
+
         default:
             return 1.0
         }

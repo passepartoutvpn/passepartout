@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -47,22 +47,27 @@ extension Profile.OpenVPNSettings: DNSSettingsProviding {
     public var dnsProtocol: DNSProtocol? {
         (configuration.isDNSEnabled ?? true) ? .plain : nil
     }
-    
+
     // dhcp-option DNS
     public var dnsServers: [String]? {
         configuration.dnsServers
     }
-    
-    // dhcp-option DOMAIN/DOMAIN-SEARCH
+
+    // dhcp-option DOMAIN
+    public var dnsDomain: String? {
+        configuration.dnsDomain
+    }
+
+    // dhcp-option DOMAIN-SEARCH
     public var dnsSearchDomains: [String]? {
         configuration.searchDomains
     }
-    
+
     // not a dhcp-option
     public var dnsHTTPSURL: URL? {
         nil
     }
-    
+
     // not a dhcp-option
     public var dnsTLSServerName: String? {
         nil
@@ -75,7 +80,7 @@ extension Profile.OpenVPNSettings: ProxySettingsProviding {
     public var proxyServer: Proxy? {
         configuration.httpsProxy ?? configuration.httpProxy
     }
-    
+
     // dhcp-option PROXY_BYPASS
     public var proxyBypassDomains: [String]? {
         configuration.proxyBypassDomains

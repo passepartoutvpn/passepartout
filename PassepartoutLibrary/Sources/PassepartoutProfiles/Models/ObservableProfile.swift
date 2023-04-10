@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/20/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,12 +27,21 @@ import Foundation
 import PassepartoutCore
 import PassepartoutUtils
 
-public class ObservableProfile: WrappedProfile, ValueHolder, ObservableObject {
+public class ObservableProfile: ValueHolder, ObservableObject {
     @Published public internal(set) var isLoading = false
-    
+
     @Published public var value: Profile
-    
+
     public init() {
         value = .placeholder
+    }
+}
+
+extension ObservableProfile {
+    public var name: String {
+        guard !isLoading && !value.isPlaceholder else {
+            return ""
+        }
+        return value.header.name
     }
 }

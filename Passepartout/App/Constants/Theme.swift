@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/24/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -25,12 +25,13 @@
 
 import SwiftUI
 import PassepartoutLibrary
+import LocalAuthentication
 
 extension View {
     var themeIdiom: UIUserInterfaceIdiom {
         UIDevice.current.userInterfaceIdiom
     }
-    
+
     var themeIsiPadPortrait: Bool {
         #if targetEnvironment(macCatalyst)
         false
@@ -39,15 +40,12 @@ extension View {
         return device.userInterfaceIdiom == .pad && device.orientation.isPortrait
         #endif
     }
-    
+
     var themeIsiPadMultitasking: Bool {
         #if targetEnvironment(macCatalyst)
         false
         #else
-        guard #available(iOS 15, *) else {
-            return false
-        }
-        return UIDevice.current.userInterfaceIdiom == .pad
+        UIDevice.current.userInterfaceIdiom == .pad
         #endif
     }
 }
@@ -57,6 +55,9 @@ extension View {
 extension View {
     func themeGlobal() -> some View {
         themeNavigationViewStyle()
+            #if !targetEnvironment(macCatalyst)
+            .themeLockScreen()
+            #endif
             .themeTint()
             .listStyle(themeListStyleValue())
             .toggleStyle(themeToggleStyleValue())
@@ -102,11 +103,7 @@ extension View {
 
     @ViewBuilder
     private func themeTint() -> some View {
-        if #available(iOS 15, *) {
-            tint(.accentColor)
-        } else {
-            self
-        }
+        tint(.accentColor)
     }
 
     private func themeListStyleValue() -> some ListStyle {
@@ -114,11 +111,7 @@ extension View {
     }
 
     private func themeToggleStyleValue() -> some ToggleStyle {
-        if #available(iOS 15, *) {
-            return .switch
-        } else {
-            return SwitchToggleStyle(tint: .accentColor)
-        }
+        .switch
     }
 }
 
@@ -128,15 +121,15 @@ extension View {
     fileprivate var themePrimaryBackgroundColor: Color {
         Color(Asset.Assets.primaryColor.color)
     }
-    
+
     fileprivate var themeSecondaryColor: Color {
         .secondary
     }
-    
+
     fileprivate var themeLightTextColor: Color {
         Color(Asset.Assets.lightTextColor.color)
     }
-    
+
     fileprivate var themeErrorColor: Color {
         .red
     }
@@ -160,11 +153,11 @@ extension View {
     var themeAssetsLogoImage: String {
         "Logo"
     }
-    
+
     var themeCheckmarkImage: String {
         "checkmark"
     }
-    
+
     var themeShareImage: String {
         "square.and.arrow.up"
     }
@@ -172,11 +165,11 @@ extension View {
     var themeCopyImage: String {
         "doc.on.doc"
     }
-    
+
     var themeCloseImage: String {
         "xmark"
     }
-    
+
     var themeConceilImage: String {
         "eye.slash"
     }
@@ -186,11 +179,11 @@ extension View {
     }
 
     // MARK: Organizer
-    
+
     func themeAssetsProviderImage(_ providerName: ProviderName) -> String {
         "providers/\(providerName)"
     }
-    
+
     func themeAssetsCountryImage(_ countryCode: String) -> String {
         "flags/\(countryCode.lowercased())"
     }
@@ -198,15 +191,15 @@ extension View {
     var themeProviderImage: String {
         "externaldrive.connected.to.line.below"
     }
-    
+
     var themeHostFilesImage: String {
         "folder"
     }
-    
+
     var themeHostTextImage: String {
         "text.justify"
     }
-    
+
     var themeSettingsImage: String {
         "gearshape"
     }
@@ -222,11 +215,11 @@ extension View {
     var themeWriteReviewImage: String {
         "star"
     }
-    
+
     var themeAddMenuImage: String {
         "plus"
     }
-    
+
     var themeProfileActiveImage: String {
         "checkmark.circle"
     }
@@ -257,19 +250,19 @@ extension View {
         "highlighter"
 //        "character.cursor.ibeam"
     }
-    
+
     var themeDuplicateImage: String {
         "doc.on.doc"
     }
-    
+
     var themeUninstallImage: String {
         "arrow.uturn.down"
     }
-    
+
     var themeDeleteImage: String {
         "trash"
     }
-    
+
     var themeVPNProtocolImage: String {
         "bolt"
 //        "waveform.path.ecg"
@@ -277,36 +270,36 @@ extension View {
 //        "pc"
 //        "captions.bubble.fill"
     }
-    
+
     var themeEndpointImage: String {
         "link"
     }
-    
+
     var themeAccountImage: String {
         "person"
     }
-    
+
     var themeProviderLocationImage: String {
         "location"
     }
-    
+
     var themeProviderPresetImage: String {
         "slider.horizontal.3"
     }
-    
+
     var themeNetworkSettingsImage: String {
 //        "network"
         "globe"
     }
-    
+
     var themeOnDemandImage: String {
         "wifi"
     }
-    
+
     var themeDiagnosticsImage: String {
         "bandage.fill"
     }
-    
+
     var themeFAQImage: String {
         "questionmark.diamond"
     }
@@ -345,11 +338,11 @@ extension View {
     func themeSecondaryTextStyle() -> some View {
         foregroundColor(themeSecondaryColor)
     }
-    
+
     func themeLightTextStyle() -> some View {
         foregroundColor(themeLightTextColor)
     }
-    
+
     @available(iOS 15, *)
     func themePrimaryTintStyle() -> some View {
         tint(themePrimaryBackgroundColor)
@@ -363,7 +356,7 @@ extension View {
         lineLimit(1)
             .truncationMode(.middle)
     }
-    
+
     func themeRawTextStyle() -> some View {
         disableAutocorrection(true)
             .autocapitalization(.none)
@@ -380,8 +373,25 @@ extension View {
     }
 }
 
+// MARK: Shortcuts
+
+extension ShortcutType {
+    var themeImageName: String {
+        switch self {
+        case .enableVPN:
+            return "power"
+
+        case .disableVPN:
+            return "xmark"
+
+        case .reconnectVPN:
+            return "arrow.clockwise"
+        }
+    }
+}
+
 // MARK: Animations
-    
+
 extension View {
     func themeAnimation<V: Equatable>(on value: V) -> some View {
         animation(.default, value: value)
@@ -416,16 +426,21 @@ extension View {
             }
         }
     }
-    
+
     func themeSaveButtonLabel() -> some View {
-//        themeCheckmarkImage.asSystemImage
         Text(L10n.Global.Strings.save)
     }
 
-//    func themeDoneButtonLabel() -> some View {
-////        themeCheckmarkImage.asSystemImage
-//        Text(L10n.Global.Strings.ok)
-//    }
+    func themeSecureField(_ placeholder: String, text: Binding<String>, contentType: UITextContentType = .password) -> some View {
+        RevealingSecureField(placeholder, text: text) {
+            themeConceilImage.asSystemImage
+                .themeAccentForegroundStyle()
+        } revealImage: {
+            themeRevealImage.asSystemImage
+                .themeAccentForegroundStyle()
+        }.textContentType(contentType)
+        .themeRawTextStyle()
+    }
 
     func themeTextPicker<T: Hashable>(_ title: String, selection: Binding<T>, values: [T], description: @escaping (T) -> String) -> some View {
         StyledPicker(title: title, selection: selection, values: values) {
@@ -451,7 +466,7 @@ extension View {
                 .foregroundColor(themeSecondaryColor)
         }
     }
-    
+
     @ViewBuilder
     func themeErrorMessage(_ message: String?) -> some View {
         if let message = message {
@@ -468,6 +483,40 @@ extension View {
     }
 }
 
+// MARK: Lock screen
+
+extension View {
+    func themeLockScreen() -> some View {
+        @AppStorage(AppPreference.locksInBackground.rawValue) var locksInBackground = false
+        return LockableView(
+            locksInBackground: $locksInBackground,
+            content: {
+                self
+            },
+            lockedContent: LogoView.init,
+            unlockBlock: Self.themeUnlockScreenBlock
+        )
+    }
+
+    private static func themeUnlockScreenBlock() async -> Bool {
+        let context = LAContext()
+        let policy: LAPolicy = .deviceOwnerAuthentication
+        var error: NSError?
+        guard context.canEvaluatePolicy(policy, error: &error) else {
+            return true
+        }
+        do {
+            let isAuthorized = try await context.evaluatePolicy(
+                policy,
+                localizedReason: L10n.Global.Messages.unlockApp
+            )
+            return isAuthorized
+        } catch {
+            return false
+        }
+    }
+}
+
 // MARK: Validation
 
 extension View {
@@ -480,13 +529,13 @@ extension View {
             .keyboardType(.asciiCapable)
             .themeRawTextStyle()
     }
-    
+
     func themeValidIPAddress(_ ipAddress: String?) -> some View {
         themeValidating(ipAddress, validator: Validators.ipAddress)
             .keyboardType(.numbersAndPunctuation)
             .themeRawTextStyle()
     }
-    
+
     func themeValidSocketPort() -> some View {
         keyboardType(.numberPad)
     }

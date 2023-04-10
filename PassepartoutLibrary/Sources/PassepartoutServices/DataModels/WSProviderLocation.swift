@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/6/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -33,9 +33,9 @@ public struct WSProviderLocation: Codable {
     }
 
     public let countryCode: String
-    
+
     public let servers: [WSProviderServer]
-    
+
     public init(countryCode: String, servers: [WSProviderServer]) {
         self.countryCode = countryCode
         self.servers = servers

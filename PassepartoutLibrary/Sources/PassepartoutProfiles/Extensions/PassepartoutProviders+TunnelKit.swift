@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/26/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -46,7 +46,7 @@ extension ProviderServer.Preset {
             return nil
         }
     }
-    
+
     public var openVPNEndpoints: [EndpointProtocol] {
         guard vpnProtocol == .openVPN else {
             return []
@@ -65,7 +65,7 @@ extension ProviderServer.Preset {
         }
         return endpoints
     }
-    
+
     public var wireGuardConfiguration: WireGuard.Configuration? {
         guard vpnProtocol == .wireGuard else {
             return nil

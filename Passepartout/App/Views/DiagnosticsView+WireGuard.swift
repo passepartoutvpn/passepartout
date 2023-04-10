@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/11/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,9 +30,9 @@ import TunnelKitWireGuard
 extension DiagnosticsView {
     struct WireGuardView: View {
         @ObservedObject private var vpnManager: VPNManager
-        
+
         private let providerName: ProviderName?
-        
+
         init(providerName: ProviderName?) {
             vpnManager = .shared
             self.providerName = providerName

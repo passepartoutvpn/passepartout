@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/25/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,14 +27,10 @@ import SwiftUI
 
 struct DestructiveButton<Label: View>: View {
     let action: () -> Void
-    
+
     let label: () -> Label
-    
+
     var body: some View {
-        if #available(iOS 15, *) {
-            Button(role: .destructive, action: action, label: label)
-        } else {
-            Button(action: action, label: label)
-        }
+        Button(role: .destructive, action: action, label: label)
     }
 }

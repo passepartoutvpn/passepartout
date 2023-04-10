@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/23/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -36,7 +36,7 @@ struct OnDemandView: View {
     }
 
     @State private var onDemand = Profile.OnDemand()
-    
+
     init(currentProfile: ObservableProfile) {
         productManager = .shared
         self.currentProfile = currentProfile
@@ -72,7 +72,7 @@ extension OnDemandView {
             Toggle(L10n.Global.Strings.enabled, isOn: $onDemand.isEnabled.themeAnimation())
         }
     }
-    
+
     @ViewBuilder
     private var mainView: some View {
         if Utils.hasCellularData() {
@@ -118,7 +118,7 @@ extension OnDemandView {
         IntentDispatcher.donateTrustCellularNetwork()
         IntentDispatcher.donateUntrustCellularNetwork()
     }
-    
+
     // eligibility: donate intents if eligible for Siri
     private func donateNetworkIntents(_: [String: Bool]) {
         guard isEligibleForSiri else {

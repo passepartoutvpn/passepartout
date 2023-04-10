@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,7 +30,7 @@ extension Constants {
         static var bundle: Bundle {
             Bundle(for: PassepartoutMac.self)
         }
-        
+
         static let appLauncherId: String = bundleConfig("launcher_id", in: bundle)
     }
 }

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -41,7 +41,7 @@ extension KeyStoreDomainLocation {
 
 public protocol KeyValueStore {
     func setValue<L: KeyStoreLocation, V>(_ value: V?, forLocation location: L)
-    
+
     func value<L: KeyStoreLocation, V>(forLocation location: L) -> V?
 
     func removeValue<L: KeyStoreLocation>(forLocation location: L)

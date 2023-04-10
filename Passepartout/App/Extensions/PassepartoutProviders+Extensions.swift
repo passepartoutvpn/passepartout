@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/4/21.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,46 +31,46 @@ extension ProviderMetadata: Identifiable, Comparable, Hashable {
         name
     }
 
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.name == rhs.name
     }
 
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.fullName.lowercased() < rhs.fullName.lowercased()
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(name)
     }
 }
 
 extension ProviderCategory: Comparable {
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.name.lowercased() == rhs.name.lowercased()
     }
 
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.name.lowercased() < rhs.name.lowercased()
     }
 }
 
 extension ProviderLocation: Comparable {
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.countryCode == rhs.countryCode
     }
 
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.localizedCountry < rhs.localizedCountry
     }
 }
 
 extension ProviderServer: Comparable {
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }
-    
+
     // "Default" comes first (nil localizedName)
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         guard lhs.localizedName != rhs.localizedName else {
             guard let li = lhs.serverIndex else {
                 return true
@@ -97,11 +97,11 @@ extension ProviderServer: Comparable {
 }
 
 extension ProviderServer.Preset: Comparable {
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.name == rhs.name
     }
 
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.name < rhs.name
     }
 }
@@ -113,7 +113,7 @@ extension ProviderMetadata {
         }
         return URL(string: string)
     }
-    
+
     var referralURL: URL? {
         guard let string = Constants.URLs.referrals[name] else {
             return nil

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/8/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -95,7 +95,7 @@ extension Keychain {
         switch SecItemCopyMatching(query as CFDictionary, &list) {
         case errSecSuccess:
             break
-            
+
         default:
             return
         }
@@ -105,7 +105,7 @@ extension Keychain {
         }
         pp_log.debug("Keychain items: \(list)")
     }
-    
+
     func removeAllPasswords(matching id: UUID, context: String) {
         _ = SecItemDelete(allPasswordsQuery(id, context) as CFDictionary)
     }

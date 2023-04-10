@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,7 +31,7 @@ import PassepartoutUtils
 
 struct ProviderMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
@@ -49,7 +49,7 @@ struct ProviderMapper: DTOMapper, ModelMapper {
             infra.provider = provider
             provider.addToInfrastructures(infra)
         }
-        
+
         return provider
     }
 
@@ -60,7 +60,7 @@ struct ProviderMapper: DTOMapper, ModelMapper {
             Utils.assertCoreDataDecodingFailed(#file, #function, #line)
             return nil
         }
-        
+
         var protos: [VPNProtocolType] = []
         if let infraDTOs = dto.infrastructures?.allObjects as? [CDInfrastructure] {
             protos = infraDTOs

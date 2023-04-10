@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/27/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,22 +29,12 @@ import PassepartoutLibrary
 extension ProfileView {
     struct ExtraSection: View {
         @ObservedObject private var currentProfile: ObservableProfile
-        
+
         init(currentProfile: ObservableProfile) {
             self.currentProfile = currentProfile
         }
-        
+
         var body: some View {
-            if currentProfile.value.isProvider {
-                Section {
-                    Toggle(
-                        L10n.Profile.Items.VpnResolvesHostname.caption,
-                        isOn: $currentProfile.value.networkSettings.resolvesHostname
-                    )
-                } footer: {
-                    Text(L10n.Profile.Sections.VpnResolvesHostname.footer)
-                }
-            }
             Section {
                 Toggle(
                     L10n.Profile.Items.VpnSurvivesSleep.caption,

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -26,17 +26,17 @@
 import Foundation
 
 public protocol DTOMapper {
-    associatedtype WS
+    associatedtype WSEntity
 
-    associatedtype DTO
-    
-    func toDTO(_ ws: WS) throws -> DTO
+    associatedtype DTOEntity
+
+    func toDTO(_ ws: WSEntity) throws -> DTOEntity
 }
 
 public protocol ModelMapper {
-    associatedtype DTO
+    associatedtype DTOEntity
 
     associatedtype Model
 
-    static func toModel(_ dto: DTO) throws -> Model
+    static func toModel(_ dto: DTOEntity) throws -> Model
 }

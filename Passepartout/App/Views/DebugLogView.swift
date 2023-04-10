@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,23 +29,23 @@ import PassepartoutLibrary
 
 struct DebugLogView: View {
     private let title: String
-    
+
     private let url: URL
-    
+
     private let timer: AnyPublisher<Date, Never>
-    
+
     @State private var logLines: [String] = []
-    
+
     @State private var isSharing = false
-    
+
     private let maxBytes = UInt64(Constants.Log.maxBytes)
 
     private let appName = Constants.Global.appName
 
     private let appVersion = Constants.Global.appVersionString
-    
+
     private let shareFilename = Unlocalized.Issues.Filenames.debugLog
-    
+
     init(title: String, url: URL, refreshInterval: TimeInterval?) {
         self.title = title
         self.url = url
@@ -58,7 +58,7 @@ struct DebugLogView: View {
                 .eraseToAnyPublisher()
         }
     }
-    
+
     var body: some View {
         ScrollViewReader { scrollProxy in
             ScrollView(showsIndicators: true) {
@@ -96,22 +96,22 @@ struct DebugLogView: View {
                 Text(logLines[$0])
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-        }//.padding()
+        }// .padding()
         // TODO: layout, a slight padding would be nice, but it glitches on first touch
     }
-    
+
     private func refreshLog(scrollingToLatestWith scrollProxy: ScrollViewProxy?) {
         logLines = url.trailingLines(bytes: maxBytes)
         if let scrollProxy = scrollProxy {
             scrollToLatestUpdate(scrollProxy)
         }
     }
-    
+
     private func refreshLog(_: Date) {
         refreshLog(scrollingToLatestWith: nil)
     }
 }
-    
+
 extension DebugLogView {
     private func shareDebugLog() {
         guard !logLines.isEmpty else {
@@ -120,7 +120,7 @@ extension DebugLogView {
         }
         isSharing = true
     }
-    
+
     private func sharingActivityView() -> some View {
         ActivityView(activityItems: sharingItems)
     }

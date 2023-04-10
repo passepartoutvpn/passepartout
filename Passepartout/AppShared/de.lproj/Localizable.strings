@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/13/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 /* MARK: Global */
 
 "global.strings.cancel" = "Abbrechen";
@@ -50,7 +50,8 @@
 "global.strings.connect" = "Verbinden";
 "global.strings.disconnect" = "Trennen";
 "global.strings.download" = "Herunterladen";
-
+"global.strings.authentication" = "Authentifizierung";
+"global.messages.unlock_app" = "Passepartout ist gesperrt";
 "global.messages.email_not_configured" = "Es wurde kein Email-Account konfiguriert.";
 "global.messages.share" = "Passepartout ist ein Benutzerfreundlicher, Open Source OpenVPN / WireGuard client für iOS und macOS";
 
@@ -152,6 +153,7 @@
 "profile.items.vpn.turn_off.caption" = "Deaktiviere VPN";
 "profile.items.connection_status.caption" = "Status";
 "profile.items.data_count.caption" = "Ausgetauschte Datenmenge";
+"profile.items.randomizes_server.caption" = "Server zufällig wählen";
 "profile.items.provider.refresh.caption" = "Infrastruktur neu laden";
 "profile.items.category.caption" = "Kategorie";
 "profile.items.only_shows_favorites.caption" = "Nur favorisierte Standorte anzeigen";
@@ -179,10 +181,13 @@
 "account.title" = "Account";
 "account.sections.credentials.header" = "Zugangsdaten";
 "account.sections.registration.footer" = "Beantrage einen Account auf der %@ Webseite.";
+"account.items.authentication_method.persistent" = "Persistent";
+"account.items.authentication_method.interactive" = "Interaktiv";
 "account.items.username.caption" = "Benutzername";
 "account.items.username.placeholder" = "Benutzername";
 "account.items.password.caption" = "Passwort";
 "account.items.password.placeholder" = "Geheim";
+"account.items.seed.caption" = "Seed";
 "account.items.open_guide.caption" = "Siehe deine Zugangsdaten";
 "account.items.signup.caption" = "Registrieren bei %@";
 
@@ -316,6 +321,7 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Einstellungen";
+"settings.items.locks_in_background.caption" = "App-Zugriff sperren";
 "settings.items.donate.caption" = "Spenden";
 
 /* MARK: AboutView */

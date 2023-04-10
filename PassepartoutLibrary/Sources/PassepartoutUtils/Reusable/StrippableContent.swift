@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/6/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -26,7 +26,7 @@
 import Foundation
 
 public protocol StrippableContent {
-    associatedtype T
+    associatedtype ContentType
 
-    var stripped: T { get }
+    var stripped: ContentType { get }
 }

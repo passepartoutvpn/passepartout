@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/24/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,22 +29,22 @@ import CoreLocation
 @MainActor
 public class SSIDReader: NSObject, ObservableObject {
     private let manager = CLLocationManager()
-    
+
     private var continuation: CheckedContinuation<String, Error>?
-    
+
     private func currentSSID() async -> String {
         await Utils.currentWifiSSID() ?? ""
     }
-    
+
     public func requestCurrentSSID() async throws -> String {
         switch manager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse, .denied:
             return await currentSSID()
-            
+
         default:
             return try await withCheckedThrowingContinuation { continuation in
                 self.continuation = continuation
-                
+
                 manager.delegate = self
                 manager.requestWhenInUseAuthorization()
             }
@@ -66,7 +66,7 @@ extension SSIDReader: CLLocationManagerDelegate {
             continuation = nil
         }
     }
-    
+
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         continuation?.resume(throwing: error)
         continuation = nil

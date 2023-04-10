@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -47,14 +47,16 @@ extension Profile.WireGuardSettings: VPNConfigurationProviding {
             appGroup: parameters.appGroup,
             configuration: customConfiguration
         )
-        cfg.killSwitch = true
         cfg.shouldDebug = true
-        cfg.debugLogPath = parameters.preferences.tunnelLogPath
+        if let filename = parameters.preferences.tunnelLogPath {
+            cfg.debugLogPath = vpnPath(with: filename)
+        }
         cfg.debugLogFormat = parameters.preferences.tunnelLogFormat
 
         var extra = NetworkExtensionExtra()
         extra.onDemandRules = parameters.onDemandRules
         extra.disconnectsOnSleep = !parameters.networkSettings.keepsAliveOnSleep
+        extra.killSwitch = true
 
         pp_log.verbose("Configuration:")
         pp_log.verbose(cfg)
@@ -69,7 +71,7 @@ extension WireGuard.ConfigurationBuilder {
         switch settings.choice {
         case .automatic:
             break
-        
+
         case .manual:
             for i in 0..<peersCount {
                 if settings.isDefaultIPv4 {
@@ -92,17 +94,35 @@ extension WireGuard.ConfigurationBuilder {
             break
 
         case .manual:
+            let isDNSEnabled = settings.configurationType != .disabled
+
             switch settings.configurationType {
             case .plain:
-                dnsServers = settings.dnsServers ?? []
-                dnsSearchDomains = settings.dnsSearchDomains?.filter { !$0.isEmpty } ?? []
+                break
+
+            case .https:
+                dnsHTTPSURL = settings.dnsHTTPSURL
+
+            case .tls:
+                dnsTLSServerName = settings.dnsTLSServerName
 
             case .disabled:
+                break
+            }
+
+            if isDNSEnabled {
+                dnsServers = settings.dnsServers ?? []
+                var allDomains: [String] = []
+                if let domain = settings.dnsDomain {
+                    allDomains.insert(domain, at: 0)
+                }
+                if let searchDomains = settings.dnsSearchDomains {
+                    allDomains.append(contentsOf: searchDomains)
+                }
+                dnsSearchDomains = allDomains.filter { !$0.isEmpty }
+            } else {
                 dnsServers = []
                 dnsSearchDomains = []
-
-            default:
-                fatalError("Invalid DNS configuration for WireGuard: \(settings.configurationType)")
             }
         }
     }

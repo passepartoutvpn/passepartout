@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,17 +29,17 @@ import PassepartoutLibrary
 extension AddProviderView {
     struct NameView: View {
         @ObservedObject private var profileManager: ProfileManager
-        
+
         @Binding private var profile: Profile
-        
+
         private let providerMetadata: ProviderMetadata
-        
+
         private let bindings: AddProfileView.Bindings
 
         @State private var viewModel = ViewModel()
-        
+
         @State private var isEnteringCredentials = false
-        
+
         init(
             profile: Binding<Profile>,
             providerMetadata: ProviderMetadata,
@@ -80,7 +80,7 @@ extension AddProviderView {
             }.alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
             .navigationTitle(providerMetadata.fullName)
         }
-        
+
         private var hiddenAccountLink: some View {
             NavigationLink("", isActive: $isEnteringCredentials) {
                 AddProfileView.AccountWrapperView(

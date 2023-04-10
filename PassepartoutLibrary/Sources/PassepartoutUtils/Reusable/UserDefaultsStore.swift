@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,7 +27,7 @@ import Foundation
 
 public struct UserDefaultsStore: KeyValueStore {
     private let defaults: UserDefaults
-    
+
     public init(defaults: UserDefaults) {
         self.defaults = defaults
     }
@@ -39,11 +39,11 @@ public struct UserDefaultsStore: KeyValueStore {
         }
         defaults.setValue(value, forKey: location.key)
     }
-    
+
     public func value<L: KeyStoreLocation, V>(forLocation location: L) -> V? {
         defaults.value(forKey: location.key) as? V
     }
-    
+
     public func removeValue<L: KeyStoreLocation>(forLocation location: L) {
         defaults.removeObject(forKey: location.key)
     }

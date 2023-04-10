@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/8/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,35 +30,35 @@ import PassepartoutLibrary
 struct ShortcutsView: View {
     enum ModalType: Identifiable {
         case edit(shortcut: Shortcut)
-        
+
         case add(shortcut: INShortcut)
-        
+
         // XXX: alert ids
         var id: Int {
             switch self {
             case .edit: return 1
-                
+
             case .add: return 2
             }
         }
     }
 
     @StateObject private var intentsManager = IntentsManager()
-    
+
     @Environment(\.presentationMode) private var presentationMode
-    
+
     private let target: Profile
 
     @State private var modalType: ModalType?
-    
+
     @State private var isNavigationPresented = false
-    
+
     @State private var pendingShortcut: INShortcut?
-    
+
     init(target: Profile) {
         self.target = target
     }
-    
+
     var body: some View {
         List {
             if !intentsManager.shortcuts.isEmpty {
@@ -69,16 +69,16 @@ struct ShortcutsView: View {
             themeCloseItem(presentationMode: presentationMode)
         }.sheet(item: $modalType, content: presentedModal)
         .themeAnimation(on: intentsManager.isReloadingShortcuts)
-        
+
         // IntentsUI
         .onReceive(intentsManager.shouldDismissIntentView) { _ in
             modalType = nil
         }
-        
+
         .navigationTitle(Unlocalized.Other.siri)
         .themeSecondaryView()
     }
-    
+
     private var shortcutsSection: some View {
         Section {
             ForEach(relevantShortcuts, content: rowView)
@@ -86,13 +86,13 @@ struct ShortcutsView: View {
             Text(L10n.Shortcuts.Edit.Sections.All.header)
         }
     }
-    
+
     private var relevantShortcuts: [Shortcut] {
         intentsManager.shortcuts.values.filter {
             $0.isRelevant(to: target)
         }.sorted()
     }
-    
+
     private var addSection: some View {
         Section {
             NavigationLink(isActive: $isNavigationPresented) {
@@ -116,7 +116,7 @@ struct ShortcutsView: View {
                 shortcut: shortcut,
                 delegate: intentsManager
             )
-            
+
         case .add(let shortcut):
             IntentAddView(
                 shortcut: shortcut,
@@ -124,7 +124,7 @@ struct ShortcutsView: View {
             )
         }
     }
-    
+
     private func rowView(forShortcut vs: Shortcut) -> some View {
         Button {
             presentEditShortcut(vs)
@@ -143,7 +143,7 @@ struct ShortcutsView: View {
             presentAddShortcut(pendingShortcut)
         }
     }
-    
+
     private func presentEditShortcut(_ shortcut: Shortcut) {
         modalType = .edit(shortcut: shortcut)
     }

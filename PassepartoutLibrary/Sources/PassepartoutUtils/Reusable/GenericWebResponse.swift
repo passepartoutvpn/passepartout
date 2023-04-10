@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/20/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,16 +27,16 @@ import Foundation
 
 public struct GenericWebResponse<T> {
     public let value: T?
-    
+
     public let lastModifiedString: String?
-    
+
     public var lastModified: Date? {
         guard let string = lastModifiedString else {
             return nil
         }
         return GenericWebParser.lastModifiedDate(string: string)
     }
-    
+
     public let isCached: Bool
 
     public static func empty() -> GenericWebResponse {

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/24/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,18 +29,18 @@ public struct WSProvidersIndex: Codable {
     public struct Metadata: Codable, CustomStringConvertible {
         enum CodingKeys: String, CodingKey {
             case name
-            
+
             case fullName
-            
+
             case supportedVPNProtocols = "vpn"
         }
-        
+
         public let name: WSProviderName
-        
+
         public let fullName: String
-        
+
         public let supportedVPNProtocols: [WSVPNProtocol]
-        
+
         public init(name: WSProviderName, fullName: String, supportedVPNProtocols: [WSVPNProtocol]) {
             self.name = name
             self.fullName = fullName
@@ -55,7 +55,7 @@ public struct WSProvidersIndex: Codable {
     }
 
     public let metadata: [Metadata]
-    
+
     public init(metadata: [Metadata]) {
         self.metadata = metadata
     }

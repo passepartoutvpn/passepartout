@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -27,11 +27,11 @@ import Foundation
 
 class MacBundle {
     static let shared = MacBundle()
-    
+
     private var bridge: MacBridge!
-    
+
     private lazy var bridgeDelegate = MacBundleDelegate(bundle: self)
-    
+
     @MainActor
     func configure() {
         guard let bundleURL = Bundle.main.builtInPlugInsURL?.appendingPathComponent(Constants.Plugins.macBridgeName) else {
@@ -46,11 +46,11 @@ class MacBundle {
         bridge = bridgeClass.init()
         bridge.menu.delegate = bridgeDelegate
     }
-    
+
     var utils: MacUtils {
         bridge.utils
     }
-    
+
     var menu: MacMenu {
         bridge.menu
     }

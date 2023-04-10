@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/20/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,14 +28,14 @@ import PassepartoutLibrary
 
 struct VPNStatusText: View {
     @ObservedObject private var currentVPNState: ObservableVPNState
-    
+
     let isActiveProfile: Bool
-    
+
     init(isActiveProfile: Bool) {
         currentVPNState = .shared
         self.isActiveProfile = isActiveProfile
     }
-    
+
     var body: some View {
         Text(statusText)
     }

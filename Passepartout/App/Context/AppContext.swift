@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/17/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,20 +30,20 @@ import PassepartoutLibrary
 @MainActor
 class AppContext {
     let logManager: LogManager
-    
+
     let productManager: ProductManager
-    
+
     private let reviewer: Reviewer
-    
+
     private var cancellables: Set<AnyCancellable> = []
-    
+
     init(coreContext: CoreContext) {
         logManager = LogManager(logFile: Constants.Log.App.url)
         logManager.logLevel = Constants.Log.level
         logManager.logFormat = Constants.Log.App.format
         logManager.configureLogging()
         pp_log.info("Logging to: \(logManager.logFile!)")
-        
+
         productManager = ProductManager(
             appType: Constants.InApp.appType,
             buildProducts: Constants.InApp.buildProducts
@@ -51,12 +51,12 @@ class AppContext {
 
         reviewer = Reviewer()
         reviewer.eventCountBeforeRating = Constants.Rating.eventCount
-        
+
         // post
-        
+
         configureObjects(coreContext: coreContext)
     }
-    
+
     private func configureObjects(coreContext: CoreContext) {
         coreContext.vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
@@ -70,9 +70,18 @@ class AppContext {
                     pp_log.info("VPN successful connection, report to Reviewer")
                     self.reviewer.reportEvent()
                 }
-        }.store(in: &cancellables)
+            }.store(in: &cancellables)
+
+        productManager.didRefundProducts
+            .receive(on: DispatchQueue.main)
+            .sink {
+                Task {
+                    pp_log.info("Refunds detected, uninstalling VPN profile")
+                    await coreContext.vpnManager.uninstall()
+                }
+            }.store(in: &cancellables)
     }
-    
+
     // eligibility: ignore network settings if ineligible
     private func isEligibleForNetworkSettings() -> Bool {
         guard productManager.isEligible(forFeature: .networkSettings) else {
@@ -81,7 +90,7 @@ class AppContext {
         }
         return true
     }
-    
+
     // eligibility: reset on-demand rules if no trusted networks
     private func isEligibleForOnDemandRules() -> Bool {
         guard productManager.isEligible(forFeature: .trustedNetworks) else {

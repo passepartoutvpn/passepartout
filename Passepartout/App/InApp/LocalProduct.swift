@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/11/19.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -33,13 +33,13 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
     private static let bundle = "com.algoritmico.\(bundleSubdomain).Passepartout"
 
     private static let donationsBundle = "\(bundle).donations"
-    
+
     private static let featuresBundle = "\(bundle).features"
-    
+
     static let providersBundle = "\(bundle).providers"
-    
+
     // MARK: Donations
-    
+
     static let tinyDonation = LocalProduct(donationDescription: "Tiny")
 
     static let smallDonation = LocalProduct(donationDescription: "Small")
@@ -51,7 +51,7 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
     static let hugeDonation = LocalProduct(donationDescription: "Huge")
 
     static let maxiDonation = LocalProduct(donationDescription: "Maxi")
-    
+
     static let allDonations: [LocalProduct] = [
         .tinyDonation,
         .smallDonation,
@@ -66,9 +66,9 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
     }
 
     // MARK: Features
-    
+
     static let allProviders = LocalProduct(featureId: "all_providers")
-    
+
     static let networkSettings = LocalProduct(featureId: "network_settings")
 
     static let trustedNetworks = LocalProduct(featureId: "trusted_networks")
@@ -76,7 +76,7 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
     static let siriShortcuts = LocalProduct(featureId: "siri")
 
     static let fullVersion_iOS = LocalProduct(featureId: "full_version")
-    
+
     static let fullVersion_macOS = LocalProduct(featureId: "full_mac_version")
 
     static let fullVersion = LocalProduct(featureId: "full_multi_version")
@@ -100,7 +100,7 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
     static var all: [LocalProduct] {
         allDonations + allFeatures// + allProviders
     }
-    
+
     var isDonation: Bool {
         rawValue.hasPrefix(LocalProduct.donationsBundle)
     }
@@ -112,11 +112,11 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
     var isProvider: Bool {
         rawValue.hasPrefix(LocalProduct.providersBundle)
     }
-    
+
     // MARK: RawRepresentable
-    
+
     let rawValue: String
-    
+
     init?(rawValue: String) {
         self.rawValue = rawValue
     }
@@ -140,22 +140,22 @@ private extension ProviderName {
         switch self {
         case .mullvad:
             return "Mullvad"
-            
+
         case .nordvpn:
             return "NordVPN"
-            
+
         case .pia:
             return "PIA"
-            
+
         case .protonvpn:
             return "ProtonVPN"
-            
+
         case .tunnelbear:
             return "TunnelBear"
-            
+
         case .vyprvpn:
             return "VyprVPN"
-            
+
         case .windscribe:
             return "Windscribe"
 

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,14 +31,14 @@ import CoreData
 
 struct CategoryMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     private let vpnProtocol: VPNProtocolType
-    
+
     init(_ context: NSManagedObjectContext, _ vpnProtocol: VPNProtocolType) {
         self.context = context
         self.vpnProtocol = vpnProtocol
     }
-    
+
     func toDTO(_ ws: WSProviderCategory) -> CDInfrastructureCategory {
         let category = CDInfrastructureCategory(context: context)
         let locations = ws.locations.compactMap(LocationMapper(context).toDTO)
@@ -54,7 +54,7 @@ struct CategoryMapper: DTOMapper, ModelMapper {
 
         return category
     }
-    
+
     static func toModel(_ dto: CDInfrastructureCategory) -> ProviderCategory? {
         guard let infrastructureDTO = dto.infrastructure,
               let providerDTO = infrastructureDTO.provider,

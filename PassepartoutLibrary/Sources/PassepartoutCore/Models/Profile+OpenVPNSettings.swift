@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/16/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,9 +31,9 @@ extension Profile {
         public var vpnProtocol: VPNProtocolType {
             .openVPN
         }
-        
+
         public var configuration: OpenVPN.Configuration
-        
+
         public var account: Profile.Account?
 
         public var customEndpoint: Endpoint?

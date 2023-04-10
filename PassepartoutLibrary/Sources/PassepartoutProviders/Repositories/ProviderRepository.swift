@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/15/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,11 +31,11 @@ import PassepartoutUtils
 
 class ProviderRepository: Repository {
     private let context: NSManagedObjectContext
-    
+
     required init(_ context: NSManagedObjectContext) {
         self.context = context
     }
-    
+
     func allProviders() -> [ProviderMetadata] {
         let request = CDProvider.fetchRequest()
         request.sortDescriptors = [
@@ -129,7 +129,7 @@ class ProviderRepository: Repository {
             throw error
         }
     }
-    
+
     private func reassignInfrastructures(from oldProvider: CDProvider, to newProvider: CDProvider) {
         oldProvider.infrastructures?.forEach {
             guard let infra = $0 as? CDInfrastructure else {

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/12/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -35,13 +35,13 @@ extension VPNStatus {
         switch self {
         case .connecting:
             return L10n.Tunnelkit.Vpn.connecting
-            
+
         case .connected:
             return L10n.Tunnelkit.Vpn.active
-            
+
         case .disconnecting:
             return L10n.Tunnelkit.Vpn.disconnecting
-            
+
         case .disconnected:
             return L10n.Tunnelkit.Vpn.inactive
         }
@@ -121,37 +121,37 @@ extension Error {
         }
         return localizedDescription
     }
-    
+
     private func ovpnErrorDescription(_ error: OpenVPNProviderError) -> String? {
         let V = L10n.Tunnelkit.Errors.Vpn.self
         switch error {
         case .socketActivity, .timeout:
             return V.timeout
-            
+
         case .dnsFailure:
             return V.dns
-            
+
         case .tlsInitialization, .tlsServerVerification, .tlsHandshake:
             return V.tls
-            
+
         case .authentication:
             return V.auth
-            
+
         case .encryptionInitialization, .encryptionData:
             return V.encryption
 
         case .serverCompression, .lzo:
             return V.compression
-            
+
         case .networkChanged:
             return V.network
-            
+
         case .routing:
             return V.routing
-            
+
         case .gatewayUnattainable:
             return V.gateway
-            
+
         case .serverShutdown:
             return V.shutdown
 
@@ -179,13 +179,15 @@ extension Error {
 extension Error {
     var localizedVPNParsingDescription: String? {
         if let ovpnError = self as? OpenVPN.ConfigurationError {
-            return ovpnErrorDescription(ovpnError)
+            return ovpnConfigurationErrorDescription(ovpnError)
+        } else if let wgError = self as? WireGuard.ConfigurationError {
+            return wgConfigurationErrorDescription(wgError)
         }
         pp_log.error("Could not parse configuration URL: \(localizedDescription)")
         return L10n.Tunnelkit.Errors.parsing(localizedDescription)
     }
-    
-    private func ovpnErrorDescription(_ error: OpenVPN.ConfigurationError) -> String {
+
+    private func ovpnConfigurationErrorDescription(_ error: OpenVPN.ConfigurationError) -> String {
         let V = L10n.Tunnelkit.Errors.Openvpn.self
         switch error {
         case .encryptionPassphrase:
@@ -203,7 +205,7 @@ extension Error {
         case .missingConfiguration(let option):
             pp_log.error("Could not parse configuration URL: missing configuration, \(option)")
             return V.requiredOption(option)
-            
+
         case .unsupportedConfiguration(var option):
             if option.contains("external") {
                 option.append(" (see FAQ)")
@@ -211,5 +213,9 @@ extension Error {
             pp_log.error("Could not parse configuration URL: unsupported configuration, \(option)")
             return V.unsupportedOption(option)
         }
+    }
+
+    private func wgConfigurationErrorDescription(_ error: WireGuard.ConfigurationError) -> String {
+        error.localizedDescription
     }
 }

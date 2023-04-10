@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/15/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -44,7 +44,7 @@ extension Constants {
             Bundle.main.isTestFlight
         }()
     }
-    
+
     enum Plugins {
         static let macBridgeName = "PassepartoutMac.bundle"
     }
@@ -92,9 +92,9 @@ extension Constants {
         static let disableVPN = "DisableVPNIntent"
 
         static let connectVPN = "ConnectVPNIntent"
-        
+
         static let moveToLocation = "MoveToLocationIntent"
-        
+
         static let trustCellularNetwork = "TrustCellularNetworkIntent"
 
         static let trustCurrentNetwork = "TrustCurrentNetworkIntent"
@@ -109,7 +109,7 @@ extension Constants {
     enum Domain {
         static let name = "passepartoutvpn.app"
     }
-    
+
     enum Services {
         static let version = "v5"
 
@@ -120,38 +120,38 @@ extension Constants {
             "https://www.facebook.com",
             "https://www.instagram.com"
         ]
-        
+
         static let connectivityURL = URL(string: connectivityStrings.randomElement()!)!
-        
+
         static let connectivityTimeout: TimeInterval = 10.0
     }
-    
+
     enum Persistence {
         static let profilesContainerName = "Profiles"
 
         static let providersContainerName = "Providers"
     }
-    
+
     // milliseconds
     enum RateLimit {
         static let providerManager = 10000
-        
+
         static let vpnToggle = 500
     }
-    
+
     enum Log {
         enum App {
             static let url = containerURL(filename: "App.log")
 
             static let format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
         }
-        
+
         enum Tunnel {
             static let path = containerPath(filename: "Tunnel.log")
 
             static let format = "$DHH:mm:ss$d - $M"
         }
-        
+
         private static let parentPath = "Library/Caches"
 
         static let level: SwiftyBeaver.Level = {
@@ -160,9 +160,9 @@ extension Constants {
             }
             return .init(rawValue: levelNum) ?? .info
         }()
-        
+
         static let maxBytes = 100000
-        
+
         static let refreshInterval: TimeInterval = 5.0
 
         private static func containerURL(filename: String) -> URL {
@@ -175,30 +175,30 @@ extension Constants {
             "\(parentPath)/\(filename)"
         }
     }
-    
+
     enum URLs {
         static let readme = Repos.apple.appendingPathComponent("blob/master/README.md")
-        
+
         static let changelog = Repos.apple.appendingPathComponent("blob/master/CHANGELOG.md")
-        
+
         static let filetypes: [UTType] = [.item]
 
         static let website = URL(string: "https://\(Domain.name)")!
-        
+
         static let faq = website.appendingPathComponent("faq")
 
         static let disclaimer = website.appendingPathComponent("disclaimer")
 
         static let privacyPolicy = website.appendingPathComponent("privacy")
-        
+
         static let donate = website.appendingPathComponent("donate")
-        
+
         static let subreddit = URL(string: "https://www.reddit.com/r/passepartout")!
-        
+
         static let twitch = URL(string: "twitch://stream/keeshux")!
-        
+
         static let twitchFallback = URL(string: "https://twitch.tv/keeshux")!
-        
+
         static let githubSponsors = URL(string: "https://www.github.com/sponsors/passepartoutvpn")!
     }
 
@@ -206,31 +206,31 @@ extension Constants {
         private static let githubRoot = URL(string: "https://github.com/passepartoutvpn/")!
 
         private static let githubRawRoot = URL(string: "https://\(Domain.name)/")!
-        
+
         private static func github(repo: String) -> URL {
             githubRoot.appendingPathComponent(repo)
         }
-        
+
         private static func githubRaw(repo: String) -> URL {
             githubRawRoot.appendingPathComponent(repo)
         }
-        
+
         static let apple = github(repo: "passepartout-apple")
-        
+
         static let api = githubRaw(repo: "api")
     }
 
     // milliseconds
     enum Delays {
         static let scrolling = 100
-        
+
 //        @available(*, deprecated, message: "file importer stops showing again after closing with swipe down")
         static let xxxPresentFileImporter = 200
 
 //        @available(*, deprecated, message: "edited shortcut is outdated in delegate")
         static let xxxReloadEditedShortcut = 200
     }
-    
+
     enum Rating {
         #if targetEnvironment(macCatalyst)
         static let eventCount = 10

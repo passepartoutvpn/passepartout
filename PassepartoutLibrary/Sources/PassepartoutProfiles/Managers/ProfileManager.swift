@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/25/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -35,19 +35,19 @@ public final class ProfileManager: ObservableObject {
     public typealias ProfileEx = (profile: Profile, isReady: Bool)
 
     // MARK: Initialization
-    
+
     private let store: KeyValueStore
-    
+
     private let providerManager: ProviderManager
-    
+
     let appGroup: String
-    
+
     let keychainLabel: (String, VPNProtocolType) -> String
-    
+
     let keychain: Keychain
-    
+
     private let strategy: ProfileManagerStrategy
-    
+
     // MARK: State
 
     @Published private var internalActiveProfileId: UUID? {
@@ -80,13 +80,13 @@ public final class ProfileManager: ObservableObject {
     }
 
     public let currentProfile: ObservableProfile
-    
+
     public let didUpdateProfiles = PassthroughSubject<Void, Never>()
 
     public let didUpdateActiveProfile = PassthroughSubject<UUID?, Never>()
 
     public let didCreateProfile = PassthroughSubject<Profile, Never>()
-    
+
     private var cancellables: Set<AnyCancellable> = []
 
     public init(
@@ -96,7 +96,7 @@ public final class ProfileManager: ObservableObject {
         keychainLabel: @escaping (String, VPNProtocolType) -> String,
         strategy: ProfileManagerStrategy
     ) {
-        guard let _ = UserDefaults(suiteName: appGroup) else {
+        guard UserDefaults(suiteName: appGroup) != nil else {
             fatalError("No entitlements for group '\(appGroup)'")
         }
         self.store = store
@@ -113,25 +113,25 @@ public final class ProfileManager: ObservableObject {
 // MARK: Index
 
 extension ProfileManager {
-    private var allHeaders: [UUID: Profile.Header] {
-        strategy.allHeaders
+    private var allProfiles: [UUID: Profile] {
+        strategy.allProfiles
     }
-    
-    public var headers: [Profile.Header] {
-        Array(allHeaders.values)
-    }
-    
+
     public var profiles: [Profile] {
         strategy.profiles()
     }
-    
-    public func isExistingProfile(withId id: UUID) -> Bool {
-        allHeaders[id] != nil
+
+    public var headers: [Profile.Header] {
+        Array(allProfiles.values.map(\.header))
     }
-    
+
+    public func isExistingProfile(withId id: UUID) -> Bool {
+        allProfiles[id] != nil
+    }
+
     public func isExistingProfile(withName name: String) -> Bool {
-        allHeaders.contains {
-            $0.value.name == name
+        allProfiles.contains {
+            $0.value.header.name == name
         }
     }
 }
@@ -189,7 +189,7 @@ extension ProfileManager {
                 pp_log.info("\tDeactivating profile...")
                 activeProfileId = nil
             }
-        } else if allHeaders.isEmpty {
+        } else if allProfiles.isEmpty {
             pp_log.info("\tActivating first profile...")
             activeProfileId = profile.id
         }
@@ -200,7 +200,7 @@ extension ProfileManager {
             currentProfile.value = profile
         }
     }
-    
+
     public func removeProfiles(withIds ids: [UUID]) {
         pp_log.info("Deleting profiles with ids \(ids)")
 
@@ -212,13 +212,13 @@ extension ProfileManager {
         pp_log.info("\tDeleting from persistent store...")
         strategy.removeProfiles(withIds: ids)
     }
-    
+
     @available(*, deprecated, message: "only use for testing")
     public func removeAllProfiles() {
-        let ids = Array(allHeaders.keys)
+        let ids = Array(allProfiles.keys)
         removeProfiles(withIds: ids)
     }
-    
+
     public func duplicateProfile(withId id: UUID, setAsCurrent: Bool) {
         guard let source = liveProfile(withId: id) else {
             return
@@ -230,10 +230,8 @@ extension ProfileManager {
         if setAsCurrent {
 
             // iOS 14 goes crazy when changing binding of a presented NavigationLink
-            if #available(iOS 15, *) {
-                internalCurrentProfileId = copy.id
-            }
-            
+            internalCurrentProfileId = copy.id
+
             // autosaves copy if non-existing in persistent store
             setCurrentProfile(copy)
         } else {
@@ -313,15 +311,15 @@ extension ProfileManager {
                 self.willUpdateProfiles($0)
             }.store(in: &cancellables)
     }
-    
-    private func willUpdateProfiles(_ newHeaders: [UUID: Profile.Header]) {
-        pp_log.debug("Profiles updated: \(newHeaders)")
+
+    private func willUpdateProfiles(_ newProfiles: [UUID: Profile]) {
+        pp_log.debug("Profiles updated: \(newProfiles.values.map(\.header))")
         defer {
             objectWillChange.send()
         }
-        
+
         // IMPORTANT: invalidate current profile if deleted
-        if !currentProfile.value.isPlaceholder && !newHeaders.keys.contains(currentProfile.value.id) {
+        if !currentProfile.value.isPlaceholder && !newProfiles.keys.contains(currentProfile.value.id) {
             pp_log.info("\tCurrent profile deleted, invalidating...")
             currentProfile.value = .placeholder
         }
@@ -332,22 +330,22 @@ extension ProfileManager {
             currentProfile.value = newProfile
         }
 
-        if let activeProfileId = activeProfileId, !newHeaders.keys.contains(activeProfileId) {
+        if let activeProfileId = activeProfileId, !newProfiles.keys.contains(activeProfileId) {
             pp_log.info("\tActive profile was deleted")
             self.activeProfileId = nil
         }
-        
+
         didUpdateProfiles.send()
 
         // IMPORTANT: defer task to avoid recursive saves (is non-main thread an issue?)
         // FIXME: Core Data, not sure about this workaround
         Task {
-            fixDuplicateNames(in: newHeaders)
+            fixDuplicateNames(in: newProfiles)
         }
     }
-    
-    private func fixDuplicateNames(in newHeaders: [UUID: Profile.Header]) {
-        var allNames = newHeaders.values.map(\.name)
+
+    private func fixDuplicateNames(in newProfiles: [UUID: Profile]) {
+        var allNames = newProfiles.values.map(\.header.name)
         let distinctNames = Set(allNames)
         distinctNames.forEach {
             guard let i = allNames.firstIndex(of: $0) else {
@@ -364,9 +362,11 @@ extension ProfileManager {
 
         var renamedProfiles: [Profile] = []
         duplicates.forEach { name in
-            let headers = newHeaders.values.filter {
-                $0.name == name
-            }
+            let headers = newProfiles.values
+                .map(\.header)
+                .filter {
+                    $0.name == name
+                }
             guard headers.count > 1 else {
                 assertionFailure("Name '\(name)' marked as duplicate but headers.count not > 1")
                 return
@@ -401,7 +401,7 @@ extension ProfileManager {
     public func makeProfileReady(_ profile: Profile) async throws {
         try await fetchProfileProviderIfMissing(profile)
     }
-    
+
     private func isProfileProviderAvailable(_ profile: Profile) -> Bool {
         guard let providerName = profile.header.providerName else {
             return true // host
@@ -462,7 +462,7 @@ extension ProfileManager {
 private extension ProfileManager {
     private enum StoreKey: String, KeyStoreDomainLocation {
         case activeProfileId
-        
+
         var domain: String {
             "Passepartout.ProfileManager"
         }

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/16/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,6 +28,6 @@ import Foundation
 @objc
 public protocol LightUtils {
     var launchesOnLogin: Bool { get set }
-    
+
     func requestScene()
 }

@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/26/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -41,16 +41,16 @@ extension PassepartoutError {
         switch self {
         case .missingProfile:
             return V.missingProfile
-            
+
         case .missingAccount:
             return V.missingAccount
-            
+
         case .missingProviderServer:
             return V.missingProviderServer
-            
+
         case .missingProviderPreset:
             return V.missingProviderPreset
-            
+
         default:
             return nil
         }
@@ -74,8 +74,14 @@ extension ObservableVPNState {
     }
 }
 
+extension Profile: Comparable {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.header < rhs.header
+    }
+}
+
 extension Profile.Header: Comparable {
-    public static func <(lhs: Self, rhs: Self) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.name.lowercased() < rhs.name.lowercased()
     }
 }
@@ -97,7 +103,7 @@ extension Network.Choice {
         switch self {
         case .automatic:
             return L10n.Global.Strings.automatic
-            
+
         case .manual:
             return L10n.Global.Strings.manual
         }
@@ -109,7 +115,7 @@ extension Network.DNSSettings.ConfigurationType {
         switch self {
         case .plain:
             return Unlocalized.DNS.plain
-            
+
         case .https:
             return Unlocalized.Network.https
 
@@ -127,10 +133,10 @@ extension Network.ProxySettings.ConfigurationType {
         switch self {
         case .manual:
             return L10n.Global.Strings.manual
-            
+
         case .pac:
             return Unlocalized.Network.proxyAutoConfiguration
-            
+
         case .disabled:
             return L10n.Global.Strings.disabled
         }

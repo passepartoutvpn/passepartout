@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -32,7 +32,7 @@ import GenericJSON
 
 struct PresetMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
@@ -51,7 +51,7 @@ struct PresetMapper: DTOMapper, ModelMapper {
         }
         return preset
     }
-    
+
     static func toModel(_ dto: CDInfrastructurePreset) -> ProviderServer.Preset? {
         guard let id = dto.id,
               let name = dto.name,
@@ -78,7 +78,7 @@ private extension WSProviderPreset {
     var encodedOpenVPNConfiguration: Data? {
         return try? jsonOpenVPNConfiguration?.encoded()
     }
-    
+
     var encodedWireGuardConfiguration: Data? {
         return try? jsonWireGuardConfiguration?.encoded()
     }

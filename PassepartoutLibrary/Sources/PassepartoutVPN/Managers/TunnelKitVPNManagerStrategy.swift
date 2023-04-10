@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/4/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -35,39 +35,39 @@ import PassepartoutUtils
 public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where VPNType.Configuration == NetworkExtensionConfiguration, VPNType.Extra == NetworkExtensionExtra {
     private struct AtomicState: Equatable {
         let isEnabled: Bool
-        
+
         let vpnStatus: VPNStatus
-        
+
         init(isEnabled: Bool = false, vpnStatus: VPNStatus = .disconnected) {
             self.isEnabled = isEnabled
             self.vpnStatus = vpnStatus
         }
     }
-    
+
     private let reconnectionSeconds = 2
 
     private let appGroup: String
-    
+
     private let tunnelBundleIdentifier: (VPNProtocolType) -> String
-    
+
     private let defaults: UserDefaults
 
     private let vpn: VPNType
-    
+
     private let dataCountInterval: TimeInterval
-    
+
     // MARK: State
-    
+
     private var currentState: ObservableVPNState?
 
     private let vpnState = CurrentValueSubject<AtomicState, Never>(.init())
 
     private var dataCountTimer: AnyCancellable?
-    
+
     private var cancellables: Set<AnyCancellable> = []
 
     // MARK: Protocol specific
-    
+
     private var currentBundleIdentifier: String?
 
     public init(
@@ -105,9 +105,9 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
             .sink(receiveValue: perform)
             .store(in: &cancellables)
     }
-    
+
     // MARK: Strategy
-    
+
     public func observe(into state: ObservableVPNState) {
         currentState = state
 
@@ -120,7 +120,7 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
                 self.currentState?.vpnStatus = $0.vpnStatus
             }.store(in: &cancellables)
     }
-    
+
     public func reinstate(configuration: VPNConfiguration) async {
         guard let vpnType = configuration.neConfiguration as? VPNProtocolProviding else {
             fatalError("Configuration must implement VPNProtocolProviding")
@@ -140,7 +140,7 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
             pp_log.error("Unable to install: \(error)")
         }
     }
-    
+
     public func connect(configuration: VPNConfiguration) async {
         guard let vpnType = configuration.neConfiguration as? VPNProtocolProviding else {
             fatalError("Configuration must implement VPNProtocolProviding")
@@ -161,17 +161,17 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
             pp_log.error("Unable to connect: \(error)")
         }
     }
-    
+
     public func reconnect() async {
         try? await vpn.reconnect(
             after: .seconds(reconnectionSeconds)
         )
     }
-    
+
     public func disconnect() async {
         await vpn.disconnect()
     }
-    
+
     public func removeConfigurations() async {
         await vpn.uninstall()
 
@@ -181,7 +181,7 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
             vpnStatus: vpnState.value.vpnStatus
         ))
     }
-    
+
     // MARK: Notifications
 
     private func onVPNReinstall(_ notification: Notification) {
@@ -229,7 +229,7 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
         ))
         currentState?.lastError = error
     }
-    
+
     private func onVPNFail(_ notification: Notification) {
         vpnState.send(AtomicState(
             isEnabled: notification.vpnIsEnabled,
@@ -258,12 +258,12 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
                 return
             }
             currentState?.dataCount = currentDataCount
-        
+
         default:
             currentState?.dataCount = nil
         }
     }
-    
+
     private func startCountingData() {
         guard dataCountTimer == nil else {
             return
@@ -283,12 +283,12 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
     }
 
     // MARK: Pulled
-    
+
     public func serverConfiguration(forProtocol vpnProtocol: VPNProtocolType) -> Any? {
         switch vpnProtocol {
         case .openVPN:
             return defaults.openVPNServerConfiguration
-        
+
         default:
             return nil
         }
@@ -298,7 +298,7 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
         switch vpnProtocol {
         case .openVPN:
             return defaults.openVPNURLForDebugLog(appGroup: appGroup)
-            
+
         default:
             return defaults.wireGuardURLForDebugLog(appGroup: appGroup)
         }
@@ -310,10 +310,10 @@ public class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where
         switch bundleIdentifier {
         case tunnelBundleIdentifier(.openVPN):
             return defaults.openVPNLastError
-            
+
         case tunnelBundleIdentifier(.wireGuard):
             return defaults.wireGuardLastError
-            
+
         default:
             return nil
         }

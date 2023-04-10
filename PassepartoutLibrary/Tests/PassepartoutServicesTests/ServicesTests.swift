@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/11/18.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -33,7 +33,7 @@ class ServicesTests: XCTestCase {
     let wsLocal = DefaultWebServices.bundledServices(withVersion: "v5")
 
     let wsRemote = DefaultWebServices("v5", URL(string: "https://passepartoutvpn.app/api/")!, timeout: nil)
-    
+
     private var cancellables: Set<AnyCancellable> = []
 
     override func setUp() {

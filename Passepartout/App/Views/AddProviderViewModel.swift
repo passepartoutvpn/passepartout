@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/19/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -30,7 +30,7 @@ extension AddProviderView {
     class ViewModel: ObservableObject {
         enum PendingOperation {
             case index
-            
+
             case provider(ProviderName)
         }
 
@@ -54,19 +54,19 @@ extension AddProviderView {
             }
             return false
         }
-        
+
         @Published var selectedVPNProtocol: VPNProtocolType = .openVPN
 
         @Published var selectedProvider: ProviderMetadata?
-        
+
         @Published var pendingProfile: Profile = .placeholder
-        
+
         @Published private(set) var pendingOperation: PendingOperation?
 
         @Published var isPaywallPresented = false
-        
+
         @Published private(set) var errorMessage: String?
-        
+
         func selectProvider(_ metadata: ProviderMetadata, _ providerManager: ProviderManager) {
             errorMessage = nil
             guard let server = providerManager.anyDefaultServer(
@@ -109,7 +109,7 @@ extension AddProviderView {
             pendingProfile = Profile(metadata, server: server)
             selectedProvider = metadata
         }
-        
+
         func updateIndex(_ providerManager: ProviderManager) {
             errorMessage = nil
             pendingOperation = .index
@@ -136,11 +136,11 @@ extension AddProviderView.NameView {
         private var isNamePreset = false
 
         var profileName = ""
-        
+
         var isAskingOverwrite = false
-        
+
         private(set) var errorMessage: String?
-        
+
         mutating func presetName(withMetadata metadata: ProviderMetadata) {
             guard !isNamePreset else {
                 return
@@ -173,7 +173,7 @@ extension AddProviderView.NameView {
             profileManager.saveProfile(finalProfile, isActive: nil)
             return finalProfile
         }
-        
+
         private mutating func setMessage(forError error: Error) {
             errorMessage = error.localizedDescription
         }

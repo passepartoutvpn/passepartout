@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -28,7 +28,7 @@ import AppKit
 
 struct LaunchOnLoginItem: Item {
     private let viewModel: ViewModel
-    
+
     init(_ title: String, utils: LightUtils) {
         viewModel = ViewModel(title, utils: utils)
     }
@@ -48,7 +48,7 @@ struct LaunchOnLoginItem: Item {
         }
         return item
     }
-    
+
     private var state: NSControl.StateValue {
         viewModel.persistentlyLaunchesOnLogin ? .on : .off
     }

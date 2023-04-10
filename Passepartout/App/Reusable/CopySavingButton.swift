@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/6/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,17 +29,17 @@ struct CopySavingButton<T: Equatable, Label: View>: View {
     @Binding var original: T
 
     @Binding var copy: T
-    
+
     var mapping: (T) -> T
-    
+
     let label: () -> Label
 
     var saveAnyway = false
 
     var onSave: (() -> Void)?
-    
+
     @State private var isLoaded = false
-    
+
     var body: some View {
         Button(action: saveToOriginal, label: label)
             .disabled(!canSave)

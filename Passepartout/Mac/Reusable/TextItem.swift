@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/28/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,18 +29,18 @@ import AppKit
 struct TextItem: Item {
     enum State {
         case none
-        
+
         case checked
-        
+
         case unchecked
     }
-    
+
     private let viewModel: ViewModel
-    
+
     private let key: String?
-    
+
     let children: [Item]
-    
+
     init(_ title: String, state: State = .none, key: String? = nil, _ children: [Item] = [], action: (() -> Void)? = nil) {
         self.init(ViewModel(title, state: state, action: action), key: key, children)
     }
@@ -62,7 +62,7 @@ struct TextItem: Item {
         }
         item.state = state
         item.representedObject = viewModel
-        
+
         if !children.isEmpty {
             let submenu = NSMenu()
             children.forEach {
@@ -80,12 +80,12 @@ struct TextItem: Item {
 
         return item
     }
-    
+
     private var state: NSControl.StateValue {
         switch viewModel.state.value {
         case .none, .unchecked:
             return .off
-            
+
         case .checked:
             return .on
         }

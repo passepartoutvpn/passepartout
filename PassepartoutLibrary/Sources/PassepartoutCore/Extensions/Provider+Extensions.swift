@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,7 +31,7 @@ extension Profile {
         guard let vpnProtocol = server.presets?.first?.vpnProtocol else {
             fatalError("Server has no presets")
         }
-        
+
         var provider = Provider(providerMetadata.name)
         var settings = Provider.Settings()
         settings.serverId = server.id
@@ -40,12 +40,12 @@ extension Profile {
 
         self.init(name: providerMetadata.fullName, provider: provider)
     }
-    
+
     public var providerName: String? {
         provider?.name
     }
 
-    public func providerServerId() -> String? {
+    public var providerServerId: String? {
         provider?.vpnSettings[currentVPNProtocol]?.serverId
     }
 
@@ -70,29 +70,41 @@ extension Profile {
     public mutating func setProviderPreset(_ preset: ProviderServer.Preset) {
         provider?.vpnSettings[currentVPNProtocol]?.presetId = preset.id
     }
-    
-    public func providerFavoriteLocationIds() -> Set<String>? {
-        provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds
-    }
-    
-    public mutating func setProviderFavoriteLocationIds(_ ids: Set<String>?) {
-        provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds = ids
+
+    public var providerFavoriteLocationIds: Set<String>? {
+        get {
+            provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds
+        }
+        set {
+            provider?.vpnSettings[currentVPNProtocol]?.favoriteLocationIds = newValue
+        }
     }
 
-    public func providerCustomEndpoint() -> Endpoint? {
-        provider?.vpnSettings[currentVPNProtocol]?.customEndpoint
+    public var providerCustomEndpoint: Endpoint? {
+        get {
+            provider?.vpnSettings[currentVPNProtocol]?.customEndpoint
+        }
+        set {
+            provider?.vpnSettings[currentVPNProtocol]?.customEndpoint = newValue
+        }
     }
 
-    public mutating func setProviderCustomEndpoint(_ endpoint: Endpoint?) {
-        provider?.vpnSettings[currentVPNProtocol]?.customEndpoint = endpoint
+    public var providerAccount: Profile.Account? {
+        get {
+            provider?.vpnSettings[currentVPNProtocol]?.account
+        }
+        set {
+            provider?.vpnSettings[currentVPNProtocol]?.account = newValue
+        }
     }
-    
-    public func providerAccount() -> Profile.Account? {
-        provider?.vpnSettings[currentVPNProtocol]?.account
-    }
-    
-    public mutating func setProviderAccount(_ account: Profile.Account?) {
-        provider?.vpnSettings[currentVPNProtocol]?.account = account
+
+    public var providerRandomizesServer: Bool? {
+        get {
+            provider?.randomizesServer
+        }
+        set {
+            provider?.randomizesServer = newValue
+        }
     }
 }
 

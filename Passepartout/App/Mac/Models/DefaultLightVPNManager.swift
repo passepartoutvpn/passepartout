@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/3/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -29,17 +29,17 @@ import Combine
 
 class DefaultLightVPNManager: LightVPNManager {
     private let vpnManager = VPNManager.shared
-    
+
     private var subscriptions: Set<AnyCancellable> = []
-    
+
     var isEnabled: Bool {
         vpnManager.currentState.isEnabled
     }
-    
+
     var vpnStatus: LightVPNStatus {
         vpnManager.currentState.vpnStatus.asLightVPNStatus
     }
-    
+
     private var delegates: [String: LightVPNManagerDelegate] = [:]
 
     init() {
@@ -63,7 +63,7 @@ class DefaultLightVPNManager: LightVPNManager {
                 )
             }.store(in: &subscriptions)
     }
-    
+
     func connect(with profileId: UUID) {
         Task {
             try? await vpnManager.connect(with: profileId)
@@ -75,7 +75,7 @@ class DefaultLightVPNManager: LightVPNManager {
             try? await vpnManager.connect(with: profileId, toServer: serverId)
         }
     }
-    
+
     func disconnect() {
         Task {
             await vpnManager.disable()
@@ -97,11 +97,11 @@ class DefaultLightVPNManager: LightVPNManager {
             await vpnManager.reconnect()
         }
     }
-    
+
     func addDelegate(_ delegate: LightVPNManagerDelegate, withIdentifier identifier: String) {
         delegates[identifier] = delegate
     }
-    
+
     func removeDelegate(withIdentifier identifier: String) {
         delegates.removeValue(forKey: identifier)
     }
@@ -120,13 +120,13 @@ private extension VPNStatus {
         switch self {
         case .connected:
             return .connected
-            
+
         case .connecting:
             return .connecting
-            
+
         case .disconnected:
             return .disconnected
-            
+
         case .disconnecting:
             return .disconnecting
         }

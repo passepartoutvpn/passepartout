@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/14/22.
-//  Copyright (c) 2022 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -31,7 +31,7 @@ import PassepartoutUtils
 
 struct ServerMapper: DTOMapper, ModelMapper {
     private let context: NSManagedObjectContext
-    
+
     init(_ context: NSManagedObjectContext) {
         self.context = context
     }
@@ -62,7 +62,7 @@ struct ServerMapper: DTOMapper, ModelMapper {
 
         return server
     }
-    
+
     static func toModel(_ dto: CDInfrastructureServer) -> ProviderServer? {
         guard let uniqueId = dto.uniqueId,
               let apiId = dto.apiId,
@@ -103,7 +103,7 @@ struct ServerMapper: DTOMapper, ModelMapper {
             presetIds: supportedPresetIds
         )
     }
-    
+
     static func toModelWithPresets(_ dto: CDInfrastructureServer) -> ProviderServer? {
         guard let server = toModel(dto),
               let categoryDTO = dto.category,
@@ -123,7 +123,7 @@ struct ServerMapper: DTOMapper, ModelMapper {
         let presets = presetDTOs
             .sorted()
             .compactMap(PresetMapper.toModel)
-        
+
         return server.withPresets(presets)
     }
 }
@@ -132,7 +132,7 @@ private extension WSProviderServer {
     var encodedExtraCountryCodes: String? {
         extraCountryCodes?.joined(separator: ",")
     }
-    
+
     var encodedTags: String? {
         tags?.joined(separator: ",")
     }
@@ -151,11 +151,11 @@ private extension CDInfrastructureServer {
     var decodedExtraCountryCodes: [String]? {
         extraCountryCodes?.components(separatedBy: ",")
     }
-    
+
     var decodedTags: [String]? {
         tags?.components(separatedBy: ",")
     }
-    
+
     var decodedIPAddresses: [String] {
         ipAddresses?.components(separatedBy: ",") ?? []
     }
@@ -180,7 +180,7 @@ private extension CDInfrastructureServer {
 }
 
 extension CDInfrastructurePreset: Comparable {
-    public static func <(lhs: CDInfrastructurePreset, rhs: CDInfrastructurePreset) -> Bool {
+    public static func < (lhs: CDInfrastructurePreset, rhs: CDInfrastructurePreset) -> Bool {
         guard let lname = lhs.name, let rname = rhs.name else {
             fatalError("CDPreset has no name?")
         }
