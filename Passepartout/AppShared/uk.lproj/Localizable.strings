@@ -11,7 +11,7 @@
 /* MARK: Global */
 "global.strings.ok" = "Ок";
 "global.strings.save" = "Зберегти";
-"global.strings.rename" = "Перейменувати";
+"global.strings.rename" = "Змінити";
 "global.strings.duplicate" = "Дублювати";
 "global.strings.add" = "Додати";
 "global.strings.delete" = "Видалити";
@@ -43,7 +43,7 @@
 "global.strings.private_key" = "Закритий ключ";
 "global.strings.public_key" = "Відкритий ключ";
 "global.strings.endpoint" = "Кінцева точка";
-"global.strings.keepalive" = "Підтримуємо";
+"global.strings.keepalive" = "Підтримувати підключеним";
 "global.strings.advanced" = "Додадкові";
 "global.strings.translations" = "Переклади";
 "global.strings.show" = "Показати";
@@ -71,7 +71,7 @@
 "menu.all.share.title" = "Поділитися";
 "menu.all.about.title" = "Про %@";
 
-"menu.contextual.add_profile.from_files" = "З файлів";
+"menu.contextual.add_profile.from_files" = "З файлу";
 "menu.contextual.add_profile.from_text" = "З тексту";
 "menu.contextual.add_profile.imported" = "Додати %@";
 "menu.contextual.support.write_review" = "Відгук";
@@ -207,8 +207,8 @@
 "endpoint.wireguard.items.preshared_key.caption" = "Спільний ключ";
 "endpoint.wireguard.items.allowed_ip.caption" = "Дозволений IP";
 
-"endpoint.advanced.title" = "Технічна інформація";
-"endpoint.advanced.openvpn.sections.pull.header" = "Витягти з сервера";
+"endpoint.advanced.title" = "Додаткові параметри";
+"endpoint.advanced.openvpn.sections.pull.header" = "Брати з сервера";
 "endpoint.advanced.openvpn.sections.communication.header" = "Зв'язок";
 "endpoint.advanced.openvpn.sections.reset.footer" = "Якщо після зміни параметрів зв’язку у вас виникло порушення з’єднання, натисніть, щоб повернутися до початковоі конфігурації.";
 "endpoint.advanced.openvpn.sections.compression.header" = "Компресія";
@@ -229,8 +229,8 @@
 "endpoint.advanced.openvpn.items.tls_wrapping.caption" = "Упаковуємо";
 "endpoint.advanced.openvpn.items.tls_wrapping.value.auth" = "Автентифікація";
 "endpoint.advanced.openvpn.items.tls_wrapping.value.crypt" = "Шифрування";
-"endpoint.advanced.openvpn.items.eku.caption" = "Розширена перевірка";
-"endpoint.advanced.openvpn.items.keep_alive.value.seconds" = "%d секунд";
+"endpoint.advanced.openvpn.items.eku.caption" = "Додаткова перевірка";
+"endpoint.advanced.openvpn.items.keep_alive.value.seconds" = "кожні %d секунд";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.caption" = "Переукладення";
 "endpoint.advanced.openvpn.items.renegotiation_seconds.value.after" = "після %@";
 "endpoint.advanced.openvpn.items.random_endpoint.caption" = "Випадкова кінцева точка";
@@ -254,7 +254,7 @@
 "on_demand.items.add_ssid.caption" = "Додати Wi-Fi";
 "on_demand.items.active.caption" = "Довірені";
 "on_demand.items.mobile.caption" = "Мобільна мережа";
-"on_demand.items.ethernet.caption" = "Довірені проводные подключения";
+"on_demand.items.ethernet.caption" = "Довірені ethernet підключення";
 "on_demand.items.ethernet.description" = "Увімкніть, щоб додати до довірених дротових підключень.";
 "on_demand.items.policy.caption" = "Дов. мережа вимикає VPN";
 
@@ -286,7 +286,7 @@
 "shortcuts.add.sections.cellular.header" = "Мобільна мережа";
 "shortcuts.add.items.connect.caption" = "Підключитися до";
 "shortcuts.add.items.enable_vpn.caption" = "Увімкнути VPN";
-"shortcuts.add.items.disable_vpn.caption" = "Вімкнути VPN";
+"shortcuts.add.items.disable_vpn.caption" = "Відключити VPN";
 "shortcuts.add.items.trust_current_wifi.caption" = "Довіряти поточному Wi-Fi";
 "shortcuts.add.items.untrust_current_wifi.caption" = "Не довіряти поточному Wi-Fi";
 "shortcuts.add.items.trust_cellular.caption" = "Довіряти мобільній мережі";
