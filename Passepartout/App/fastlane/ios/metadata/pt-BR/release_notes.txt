@@ -1,20 +1,9 @@
 ### Added
 
-- Option to lock app when entering background.
-- 3D Touch items.
-- Ukranian translations (Dmitry Chirkin).
-- Restore DNS "Domain" setting.
-- OpenVPN: Full implementation of Tunnelblick XOR patch (tmthecoder).
-- WireGuard: DoH/DoT options.
-
-### Changed
-
-- Bump target to iOS 15.
-- Always show "Reconnect" button.
-- Move Diagnostics view to Profile bottom.
+- Show app version in Mac menu (macOS).
 
 ### Fixed
 
-- Improve kill switch behavior.
-- Retain original filename as imported profile name.
+- Roll back broken kill switch flag.
+- Remove nonsense Mac menus (macOS).
 
