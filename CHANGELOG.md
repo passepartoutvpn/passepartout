@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Roll back broken kill switch flag. [#294](https://github.com/passepartoutvpn/passepartout-apple/pull/294)
 - Remove nonsense Mac menus (macOS). [#285](https://github.com/passepartoutvpn/passepartout-apple/pull/285)
 
 ## 2.1.0 (2023-04-07)
