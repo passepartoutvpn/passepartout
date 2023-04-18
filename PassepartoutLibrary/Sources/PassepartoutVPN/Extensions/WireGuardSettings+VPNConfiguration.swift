@@ -56,7 +56,6 @@ extension Profile.WireGuardSettings: VPNConfigurationProviding {
         var extra = NetworkExtensionExtra()
         extra.onDemandRules = parameters.onDemandRules
         extra.disconnectsOnSleep = !parameters.networkSettings.keepsAliveOnSleep
-        extra.killSwitch = true
 
         pp_log.verbose("Configuration:")
         pp_log.verbose(cfg)
