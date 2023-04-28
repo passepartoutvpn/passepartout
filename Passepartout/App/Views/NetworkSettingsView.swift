@@ -261,7 +261,7 @@ extension NetworkSettingsView {
                     text: $0.text,
                     onEditingChanged: $0.onEditingChanged,
                     onCommit: $0.onCommit
-                ).themeValidDomainName($0.text.wrappedValue)
+                ).themeValidWildcardDomainName($0.text.wrappedValue)
             } addLabel: {
                 Text(L10n.NetworkSettings.Items.AddProxyBypass.caption)
                 } commitLabel: {

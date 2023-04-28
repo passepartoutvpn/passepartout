@@ -546,6 +546,12 @@ extension View {
             .themeRawTextStyle()
     }
 
+    func themeValidWildcardDomainName(_ domainName: String?) -> some View {
+        themeValidating(domainName, validator: Validators.wildcardDomainName)
+            .keyboardType(.asciiCapable)
+            .themeRawTextStyle()
+    }
+
     func themeValidDNSOverTLSServerName(_ string: String?) -> some View {
         themeValidating(string, validator: Validators.dnsOverTLSServerName)
             .keyboardType(.asciiCapable)
