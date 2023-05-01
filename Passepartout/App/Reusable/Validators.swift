@@ -35,8 +35,14 @@ struct Validators {
 
         case domainName
 
+        case wildcardDomainName
+
         case url
     }
+
+    private static let rxDomainName = NSRegularExpression("^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,}$")
+
+    private static let rxWildcardDomainName = NSRegularExpression("^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.|\\*\\.)+([A-Za-z]{2,}|\\*)$")
 
     static func notNil(_ string: String?) throws {
         guard string != nil else {
@@ -64,11 +70,15 @@ struct Validators {
         throw ValidationError.ipAddress
     }
 
-    private static let rxDomainName = NSRegularExpression("^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}$")
-
     static func domainName(_ string: String) throws {
         guard rxDomainName.numberOfMatches(in: string, options: [], range: .init(location: 0, length: string.count)) > 0 else {
             throw ValidationError.domainName
+        }
+    }
+
+    static func wildcardDomainName(_ string: String) throws {
+        guard rxWildcardDomainName.numberOfMatches(in: string, options: [], range: .init(location: 0, length: string.count)) > 0 else {
+            throw ValidationError.wildcardDomainName
         }
     }
 
