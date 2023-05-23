@@ -154,7 +154,7 @@ extension DiagnosticsView.OpenVPNView {
     }
 
     private var appLogURL: URL? {
-        LogManager.shared.logFile
+        Passepartout.shared.logger.logFile
     }
 
     private var tunnelLogURL: URL? {

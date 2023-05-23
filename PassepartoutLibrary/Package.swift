@@ -32,58 +32,64 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
+
+        // MARK: Implementations
+
         .target(
             name: "PassepartoutLibrary",
             dependencies: [
-                "PassepartoutVPN"
+                "PassepartoutVPNImpl",
+                "PassepartoutProvidersImpl"
             ]),
+        .target(
+            name: "PassepartoutVPNImpl",
+            dependencies: [
+                "PassepartoutVPN",
+                "SwiftyBeaver",
+                .product(name: "TunnelKitLZO", package: "TunnelKit")
+            ],
+            resources: [
+                .process("Data/Profiles.xcdatamodeld")
+            ]),
+        .target(
+            name: "PassepartoutProvidersImpl",
+            dependencies: [
+                "PassepartoutProviders",
+                "PassepartoutServices"
+            ],
+            resources: [
+                .copy("API"),
+                .process("Data/Providers.xcdatamodeld")
+            ]),
+
+        // MARK: Interfaces
+
         .target(
             name: "PassepartoutVPN",
             dependencies: [
-                "PassepartoutProfiles",
-                .product(name: "TunnelKitLZO", package: "TunnelKit")
-            ]),
-        .target(
-            name: "PassepartoutProfiles",
-            dependencies: [
-                "PassepartoutProviders"
-            ],
-            resources: [
-                .process("DataModels/Profiles.xcdatamodeld")
+                "PassepartoutProviders",
+                .product(name: "TunnelKit", package: "TunnelKit"),
+                .product(name: "TunnelKitOpenVPN", package: "TunnelKit"), // FIXME: arch, drop this
+                .product(name: "TunnelKitWireGuard", package: "TunnelKit"), // FIXME: arch, drop this
             ]),
         .target(
             name: "PassepartoutProviders",
             dependencies: [
-                "PassepartoutCore",
                 "PassepartoutServices"
-            ],
-            resources: [
-                .process("DataModels/Providers.xcdatamodeld")
+            ]),
+        .target(
+            name: "PassepartoutServices",
+            dependencies: [
+                "PassepartoutCore"
             ]),
         .target(
             name: "PassepartoutCore",
             dependencies: [
-                .product(name: "TunnelKit", package: "TunnelKit"),
-                .product(name: "TunnelKitOpenVPN", package: "TunnelKit"),
-                .product(name: "TunnelKitWireGuard", package: "TunnelKit"),
-                .product(name: "GenericJSON", package: "generic-json-swift")
+                .product(name: "GenericJSON", package: "generic-json-swift") // FIXME: arch, drop this
             ]),
-        //
-        .target(
-            name: "PassepartoutServices",
-            dependencies: [
-                "PassepartoutUtils"
-            ],
-            resources: [
-                .copy("API")
-            ]),
-        .target(
-            name: "PassepartoutUtils",
-            dependencies: [
-                .product(name: "GenericJSON", package: "generic-json-swift"),
-                "SwiftyBeaver"
-            ]),
-        //
+
+        // MARK: App extensions
+
         .target(
             name: "OpenVPNAppExtension",
             dependencies: [
@@ -95,27 +101,18 @@ let package = Package(
             dependencies: [
                 .product(name: "TunnelKitWireGuardAppExtension", package: "TunnelKit")
             ]),
-        .testTarget(
-            name: "PassepartoutLibraryTests",
-            dependencies: ["PassepartoutLibrary"]),
+
+        // MARK: Tests
+
         .testTarget(
             name: "PassepartoutVPNTests",
-            dependencies: ["PassepartoutVPN"]),
-        .testTarget(
-            name: "PassepartoutProfilesTests",
-            dependencies: ["PassepartoutProfiles"]),
+            dependencies: ["PassepartoutVPNImpl"]),
         .testTarget(
             name: "PassepartoutProvidersTests",
-            dependencies: ["PassepartoutProviders"]),
+            dependencies: ["PassepartoutProvidersImpl"]),
         .testTarget(
             name: "PassepartoutCoreTests",
-            dependencies: ["PassepartoutCore"]),
-        .testTarget(
-            name: "PassepartoutServicesTests",
-            dependencies: ["PassepartoutServices"]),
-        .testTarget(
-            name: "PassepartoutUtilsTests",
-            dependencies: ["PassepartoutUtils"],
+            dependencies: ["PassepartoutCore"],
             resources: [
                 .process("Resources")
             ])

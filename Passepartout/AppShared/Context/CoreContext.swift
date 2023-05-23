@@ -26,14 +26,16 @@
 import Combine
 import Foundation
 import PassepartoutLibrary
+import TunnelKitCore
+import TunnelKitManager
 
 @MainActor
 class CoreContext {
     let store: KeyValueStore
 
-    private let profilesPersistence: Persistence
+    private let profilesPersistence: CoreDataPersistentStore
 
-    private let providersPersistence: Persistence
+    private let providersPersistence: CoreDataPersistentStore
 
     var urlsForProfiles: [URL]? {
         profilesPersistence.containerURLs
@@ -64,29 +66,32 @@ class CoreContext {
             withName: Constants.Persistence.providersContainerName
         )
 
-        upgradeManager = UpgradeManager(store: store)
+        upgradeManager = UpgradeManager(
+            store: store,
+            strategy: DefaultUpgradeStrategy()
+        )
 
         providerManager = ProviderManager(
             appBuild: Constants.Global.appBuildNumber,
-            bundleServices: DefaultWebServices.bundledServices(
+            bundleServices: APIWebServices.bundledServices(
                 withVersion: Constants.Services.version
             ),
-            webServices: DefaultWebServices(
+            webServices: APIWebServices(
                 Constants.Services.version,
                 Constants.Repos.api,
                 timeout: Constants.Services.connectivityTimeout
             ),
-            persistence: providersPersistence
+            webServicesRepository: PassepartoutPersistence.webServicesRepository(providersPersistence),
+            providersFacadeRepository: PassepartoutPersistence.providersFacadeRepository(providersPersistence)
         )
 
         profileManager = ProfileManager(
             store: store,
             providerManager: providerManager,
-            appGroup: Constants.App.appGroupId,
-            keychainLabel: Unlocalized.Keychain.passwordLabel,
-            strategy: CoreDataProfileManagerStrategy(
-                persistence: profilesPersistence
-            )
+            profileRepository: PassepartoutPersistence.profileRepository(profilesPersistence),
+            keychain: KeychainSecretRepository(appGroup: Constants.App.appGroupId),
+            keychainEntry: Unlocalized.Keychain.passwordEntry,
+            keychainLabel: Unlocalized.Keychain.passwordLabel
         )
 
         #if targetEnvironment(simulator)
@@ -100,7 +105,6 @@ class CoreContext {
             vpn: vpn
         )
         vpnManager = VPNManager(
-            appGroup: Constants.App.appGroupId,
             store: store,
             profileManager: profileManager,
             providerManager: providerManager,

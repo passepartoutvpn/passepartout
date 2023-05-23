@@ -56,8 +56,12 @@ enum Unlocalized {
     }
 
     enum Keychain {
-        static func passwordLabel(_ profileName: String, vpnProtocol: VPNProtocolType) -> String {
-            "\(Constants.Global.appName): \(profileName) (\(vpnProtocol.description))"
+        static func passwordEntry(_ profile: Profile) -> String {
+            "\(profile.id.uuidString):\(profile.currentVPNProtocol.keychainEntry):\(profile.account.username)"
+        }
+
+        static func passwordLabel(_ profile: Profile) -> String {
+            "\(Constants.Global.appName): \(profile.header.name) (\(profile.currentVPNProtocol.keychainEntry))"
         }
     }
 
@@ -250,5 +254,17 @@ enum Unlocalized {
         static let siri = "Siri"
 
         static let totp = "TOTP"
+    }
+}
+
+private extension VPNProtocolType {
+    var keychainEntry: String {
+        switch self {
+        case .openVPN:
+            return "OpenVPN"
+
+        case .wireGuard:
+            return "WireGuard"
+        }
     }
 }

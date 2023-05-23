@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutLibrary
 
 extension CoreContext {
-    static let shared = CoreContext(store: UserDefaultsStore(defaults: .standard))
+    static let shared = CoreContext(store: UserDefaultsStore(defaults: .standard, key: \.key))
 }
 
 extension UpgradeManager {

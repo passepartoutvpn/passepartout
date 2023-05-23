@@ -26,6 +26,7 @@
 import Combine
 import Foundation
 import PassepartoutLibrary
+import TunnelKitManager
 
 class DefaultLightVPNManager: LightVPNManager {
     private let vpnManager = VPNManager.shared

@@ -27,33 +27,40 @@ import Combine
 import Foundation
 import PassepartoutCore
 import PassepartoutServices
-import PassepartoutUtils
 
 public final class ProviderManager: ObservableObject, RateLimited {
+    public enum FetchPriority {
+        case bundle
+
+        case remote
+
+        case remoteThenBundle
+    }
+
     private let appBuild: Int
 
     private let bundleServices: WebServices
 
     private let webServices: WebServices
 
-    private let persistence: Persistence
+    private let webServicesRepository: WebServicesRepository
 
-    private let providerRepository: ProviderRepository
-
-    private let infrastructureRepository: InfrastructureRepository
-
-    private let serverRepository: ServerRepository
+    private let providersFacadeRepository: ProvidersFacadeRepository
 
     public let didUpdateProviders = PassthroughSubject<Void, Never>()
 
-    public init(appBuild: Int, bundleServices: WebServices, webServices: WebServices, persistence: Persistence) {
+    public init(
+        appBuild: Int,
+        bundleServices: WebServices,
+        webServices: WebServices,
+        webServicesRepository: WebServicesRepository,
+        providersFacadeRepository: ProvidersFacadeRepository
+    ) {
         self.appBuild = appBuild
         self.bundleServices = bundleServices
         self.webServices = webServices
-        self.persistence = persistence
-        providerRepository = ProviderRepository(persistence.context)
-        infrastructureRepository = InfrastructureRepository(persistence.context)
-        serverRepository = ServerRepository(persistence.context)
+        self.webServicesRepository = webServicesRepository
+        self.providersFacadeRepository = providersFacadeRepository
 
         _ = allProviders()
     }
@@ -61,48 +68,48 @@ public final class ProviderManager: ObservableObject, RateLimited {
     // MARK: Queries
 
     public func allProviders() -> [ProviderMetadata] {
-        providerRepository.allProviders()
+        providersFacadeRepository.allProviders()
     }
 
     public func provider(withName name: ProviderName) -> ProviderMetadata? {
-        providerRepository.provider(withName: name)
+        providersFacadeRepository.provider(withName: name)
     }
 
     public func isAvailable(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> Bool {
-        infrastructureRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol) != nil
+        providersFacadeRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol) != nil
     }
 
     public func defaultUsername(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> String? {
-        infrastructureRepository.defaultUsername(forProviderWithName: name, vpnProtocol: vpnProtocol)
+        providersFacadeRepository.defaultUsername(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
 
     public func lastUpdate(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> Date? {
-        infrastructureRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol)
+        providersFacadeRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol)
     }
 
     public func categories(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> [ProviderCategory] {
-        serverRepository.categories(forProviderWithName: name, vpnProtocol: vpnProtocol)
+        providersFacadeRepository.categories(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
 
     public func servers(forLocation location: ProviderLocation) -> [ProviderServer] {
-        serverRepository.servers(forLocation: location)
+        providersFacadeRepository.servers(forLocation: location)
     }
 
     public func server(_ name: ProviderName, vpnProtocol: VPNProtocolType, apiId: String) -> ProviderServer? {
-        serverRepository.server(forProviderWithName: name, vpnProtocol: vpnProtocol, apiId: apiId)
+        providersFacadeRepository.server(forProviderWithName: name, vpnProtocol: vpnProtocol, apiId: apiId)
     }
 
     public func anyDefaultServer(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> ProviderServer? {
-        serverRepository.anyDefaultServer(forProviderWithName: name, vpnProtocol: vpnProtocol)
+        providersFacadeRepository.anyDefaultServer(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
 
     public func server(withId id: String) -> ProviderServer? {
-        serverRepository.server(withId: id)
+        providersFacadeRepository.server(withId: id)
     }
 
     // MARK: Modification
 
-    public func fetchProvidersIndexPublisher(priority: ProviderManagerFetchPriority) -> AnyPublisher<Void, Error> {
+    public func fetchProvidersIndexPublisher(priority: FetchPriority) -> AnyPublisher<Void, Error> {
         guard !isRateLimited(indexActionName) else {
             return Just(())
                 .setFailureType(to: Error.self)
@@ -119,13 +126,13 @@ public final class ProviderManager: ObservableObject, RateLimited {
             .receive(on: DispatchQueue.main)
             .tryMap { index in
                 self.saveLastAction(self.indexActionName)
-                try self.providerRepository.mergeIndex(index)
+                try self.webServicesRepository.mergeIndex(index)
 
                 self.didUpdateProviders.send()
             }.eraseToAnyPublisher()
     }
 
-    public func fetchProviderPublisher(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, priority: ProviderManagerFetchPriority) -> AnyPublisher<Void, Error> {
+    public func fetchProviderPublisher(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, priority: FetchPriority) -> AnyPublisher<Void, Error> {
         guard !isRateLimited(providerName) else {
             return Just(())
                 .setFailureType(to: Error.self)
@@ -133,7 +140,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
         }
 
         let publisher = priority.publisher(remote: {
-            let ifModifiedSince = self.infrastructureRepository.lastInfrastructureUpdate(withName: providerName, vpnProtocol: vpnProtocol)
+            let ifModifiedSince = self.providersFacadeRepository.lastInfrastructureUpdate(withName: providerName, vpnProtocol: vpnProtocol)
             return self.webServices.providerNetwork(
                 with: providerName.asWSProviderName,
                 vpnProtocol: vpnProtocol.asWSVPNProtocol,
@@ -166,7 +173,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
                 }
 
                 do {
-                    try self.infrastructureRepository.saveInfrastructure(
+                    try self.webServicesRepository.saveInfrastructure(
                         infrastructure,
                         vpnProtocol: vpnProtocol,
                         lastUpdate: pub.lastModified ?? Date()
@@ -182,12 +189,6 @@ public final class ProviderManager: ObservableObject, RateLimited {
             }.eraseToAnyPublisher()
     }
 
-    public func reset() {
-        persistence.truncate()
-
-        didUpdateProviders.send()
-    }
-
     // MARK: RateLimited
 
     private let indexActionName = ""
@@ -196,6 +197,8 @@ public final class ProviderManager: ObservableObject, RateLimited {
 
     public var rateLimitMilliseconds: Int?
 }
+
+// MARK: Private extensions
 
 private enum ProviderManagerError: LocalizedError {
     case outdatedBuild(Int, Int)
@@ -208,7 +211,7 @@ private enum ProviderManagerError: LocalizedError {
     }
 }
 
-private extension ProviderManagerFetchPriority {
+private extension ProviderManager.FetchPriority {
     func publisher<T>(
         remote: @escaping () -> AnyPublisher<T, Error>,
         bundle: @escaping () -> AnyPublisher<T, Error>

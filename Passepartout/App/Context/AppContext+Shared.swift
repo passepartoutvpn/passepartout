@@ -33,7 +33,3 @@ extension AppContext {
 extension ProductManager {
     static let shared = AppContext.shared.productManager
 }
-
-extension LogManager {
-    static let shared = AppContext.shared.logManager
-}

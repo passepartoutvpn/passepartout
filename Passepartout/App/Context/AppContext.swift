@@ -29,8 +29,6 @@ import PassepartoutLibrary
 
 @MainActor
 class AppContext {
-    let logManager: LogManager
-
     let productManager: ProductManager
 
     private let reviewer: Reviewer
@@ -38,11 +36,13 @@ class AppContext {
     private var cancellables: Set<AnyCancellable> = []
 
     init(coreContext: CoreContext) {
-        logManager = LogManager(logFile: Constants.Log.App.url)
-        logManager.logLevel = Constants.Log.level
-        logManager.logFormat = Constants.Log.App.format
-        logManager.configureLogging()
-        pp_log.info("Logging to: \(logManager.logFile!)")
+        let logger = SwiftyBeaverLogger(
+            logFile: Constants.Log.App.url,
+            logLevel: Constants.Log.level,
+            logFormat: Constants.Log.App.format
+        )
+        Passepartout.shared.logger = logger
+        pp_log.info("Logging to: \(logger.logFile!)")
 
         productManager = ProductManager(
             appType: Constants.InApp.appType,
