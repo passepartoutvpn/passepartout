@@ -25,50 +25,71 @@
 
 import Foundation
 
-public enum LoggerLevel {
-    case error
+public enum LoggerLevel: Int {
+    case verbose
 
-    case warning
+    case debug
 
     case info
 
-    case debug
+    case warning
+
+    case error
 }
 
 public protocol Logger {
     var logFile: URL? { get }
 
-    func error(_ message: Any)
+    var logLevel: LoggerLevel { get }
 
-    func warning(_ message: Any)
-
-    func info(_ message: Any)
+    func verbose(_ message: Any)
 
     func debug(_ message: Any)
 
-    func verbose(_ message: Any)
+    func info(_ message: Any)
+
+    func warning(_ message: Any)
+
+    func error(_ message: Any)
 }
 
 final class DefaultLogger: Logger {
     let logFile: URL? = nil
 
-    func error(_ message: Any) {
-        logMessage(message)
-    }
+    var logLevel: LoggerLevel = .debug
 
-    func warning(_ message: Any) {
-        logMessage(message)
-    }
-
-    func info(_ message: Any) {
+    func verbose(_ message: Any) {
+        guard logLevel.rawValue >= LoggerLevel.verbose.rawValue else {
+            return
+        }
         logMessage(message)
     }
 
     func debug(_ message: Any) {
+        guard logLevel.rawValue >= LoggerLevel.debug.rawValue else {
+            return
+        }
         logMessage(message)
     }
 
-    func verbose(_ message: Any) {
+    func info(_ message: Any) {
+        guard logLevel.rawValue >= LoggerLevel.info.rawValue else {
+            return
+        }
+        logMessage(message)
+    }
+
+    func warning(_ message: Any) {
+        guard logLevel.rawValue >= LoggerLevel.warning.rawValue else {
+            return
+        }
+        logMessage(message)
+    }
+
+    func error(_ message: Any) {
+        guard logLevel.rawValue >= LoggerLevel.error.rawValue else {
+            return
+        }
         logMessage(message)
     }
 

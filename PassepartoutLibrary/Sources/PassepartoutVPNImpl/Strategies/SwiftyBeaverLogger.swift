@@ -30,11 +30,14 @@ import SwiftyBeaver
 public final class SwiftyBeaverLogger: Logger {
     public let logFile: URL?
 
-    public init(logFile: URL?, logLevel: SwiftyBeaver.Level = .info, logFormat: String? = nil) {
+    public let logLevel: LoggerLevel
+
+    public init(logFile: URL?, logLevel: LoggerLevel = .info, logFormat: String? = nil) {
         self.logFile = logFile
+        self.logLevel = logLevel
 
         let console = ConsoleDestination()
-        console.minLevel = logLevel
+        console.minLevel = logLevel.toSwiftyBeaver
 //        console.useNSLog = true
         if let logFormat {
             console.format = logFormat
@@ -43,7 +46,7 @@ public final class SwiftyBeaverLogger: Logger {
 
         if let logFile {
             let file = FileDestination()
-            file.minLevel = logLevel
+            file.minLevel = logLevel.toSwiftyBeaver
             file.logFileURL = logFile
             if let logFormat {
                 file.format = logFormat
@@ -53,23 +56,35 @@ public final class SwiftyBeaverLogger: Logger {
         }
     }
 
-    public func error(_ message: Any) {
-        SwiftyBeaver.error(message)
-    }
-
-    public func warning(_ message: Any) {
-        SwiftyBeaver.warning(message)
-    }
-
-    public func info(_ message: Any) {
-        SwiftyBeaver.info(message)
+    public func verbose(_ message: Any) {
+        SwiftyBeaver.verbose(message)
     }
 
     public func debug(_ message: Any) {
         SwiftyBeaver.debug(message)
     }
 
-    public func verbose(_ message: Any) {
-        SwiftyBeaver.verbose(message)
+    public func info(_ message: Any) {
+        SwiftyBeaver.info(message)
+    }
+
+    public func warning(_ message: Any) {
+        SwiftyBeaver.warning(message)
+    }
+
+    public func error(_ message: Any) {
+        SwiftyBeaver.error(message)
+    }
+}
+
+private extension LoggerLevel {
+    var toSwiftyBeaver: SwiftyBeaver.Level {
+        switch self {
+        case .verbose: return .verbose
+        case .debug: return .debug
+        case .info: return .info
+        case .warning: return .warning
+        case .error: return .error
+        }
     }
 }

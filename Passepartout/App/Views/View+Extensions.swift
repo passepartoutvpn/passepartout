@@ -25,7 +25,6 @@
 
 import PassepartoutLibrary
 import SwiftUI
-import SwiftyBeaver
 
 extension View {
     func withoutTitleBar() -> some View {
@@ -106,7 +105,7 @@ extension View {
 
 extension View {
     func debugChanges() {
-        if SwiftyBeaver.destinations.first?.minLevel == .verbose {
+        if Passepartout.shared.logger.logLevel == .verbose {
             Self._printChanges()
         }
     }
