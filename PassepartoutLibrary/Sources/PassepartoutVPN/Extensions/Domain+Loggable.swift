@@ -1,5 +1,5 @@
 //
-//  Domain+Logging.swift
+//  Domain+Loggable.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
@@ -24,9 +24,16 @@
 //
 
 import Foundation
+import PassepartoutCore
 
-extension ProviderServer {
+extension Profile.Header: Loggable {
     public var logDescription: String {
-        "{'\(categoryName)', \(countryCode), '\(apiId)', \(id)}"
+        "{\(id), '\(name)'}"
+    }
+}
+
+extension Profile: Loggable {
+    public var logDescription: String {
+        header.logDescription
     }
 }

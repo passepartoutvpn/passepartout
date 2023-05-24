@@ -67,6 +67,10 @@ extension Logger {
     }
 }
 
+public protocol Loggable {
+    var logDescription: String { get }
+}
+
 final class DefaultLogger: Logger {
     let logFile: URL? = nil
 
