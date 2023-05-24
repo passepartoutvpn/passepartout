@@ -30,7 +30,7 @@ import IntentsUI
 import PassepartoutLibrary
 
 @MainActor
-class IntentsManager: NSObject, ObservableObject {
+final class IntentsManager: NSObject, ObservableObject {
     @Published private(set) var isReloadingShortcuts = false
 
     @Published private(set) var shortcuts: [UUID: Shortcut] = [:]

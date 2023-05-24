@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutLibrary
 
 @MainActor
-class AppContext {
+final class AppContext {
     let productManager: ProductManager
 
     private let reviewer: Reviewer

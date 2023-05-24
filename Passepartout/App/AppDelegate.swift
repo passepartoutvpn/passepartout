@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutLibrary
 import UIKit
 
-class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
+final class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
     private let mac = MacBundle.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {

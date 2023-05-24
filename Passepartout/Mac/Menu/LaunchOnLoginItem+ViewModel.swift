@@ -30,7 +30,7 @@ import ServiceManagement
 extension LaunchOnLoginItem {
 
     @MainActor
-    class ViewModel: ObservableObject {
+    final class ViewModel: ObservableObject {
         let title: String
 
         let utils: LightUtils

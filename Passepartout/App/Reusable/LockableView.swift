@@ -115,7 +115,7 @@ struct LockableView<Content: View, LockedContent: View>: View {
     }
 }
 
-private class Lock: ObservableObject {
+private final class Lock: ObservableObject {
     enum State {
         case none
 

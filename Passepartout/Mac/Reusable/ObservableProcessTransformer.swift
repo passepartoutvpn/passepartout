@@ -26,7 +26,7 @@
 import Combine
 import Foundation
 
-class ObservableProcessTransformer: ObservableObject {
+final class ObservableProcessTransformer: ObservableObject {
     static let shared = ObservableProcessTransformer()
 
     private let transformer = ProcessTransformer()

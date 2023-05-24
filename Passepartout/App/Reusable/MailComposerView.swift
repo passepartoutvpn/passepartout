@@ -27,7 +27,7 @@ import MessageUI
 import SwiftUI
 
 struct MailComposerView: UIViewControllerRepresentable {
-    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+    final class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
         @Binding private var isPresented: Bool
 
         init(_ view: MailComposerView) {

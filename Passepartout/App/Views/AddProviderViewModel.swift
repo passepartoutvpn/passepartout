@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutLibrary
 
 extension AddProviderView {
-    class ViewModel: ObservableObject {
+    final class ViewModel: ObservableObject {
         enum PendingOperation {
             case index
 

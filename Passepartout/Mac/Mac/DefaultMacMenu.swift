@@ -25,7 +25,7 @@
 
 import Foundation
 
-class DefaultMacMenu: MacMenu {
+final class DefaultMacMenu: MacMenu {
     weak var delegate: MacMenuDelegate?
 
     private lazy var menu: PassepartoutMenu = {

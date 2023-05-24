@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutLibrary
 import TunnelKitManager
 
-class DefaultLightVPNManager: LightVPNManager {
+final class DefaultLightVPNManager: LightVPNManager {
     private let vpnManager = VPNManager.shared
 
     private var subscriptions: Set<AnyCancellable> = []

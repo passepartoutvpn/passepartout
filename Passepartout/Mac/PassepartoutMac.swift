@@ -25,7 +25,7 @@
 
 import Foundation
 
-class PassepartoutMac: NSObject, MacBridge {
+final class PassepartoutMac: NSObject, MacBridge {
     required override init() {
         super.init()
     }

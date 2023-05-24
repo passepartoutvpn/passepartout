@@ -26,7 +26,7 @@
 import PassepartoutLibrary
 import SwiftUI
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         ProfileManager.shared.persist()
         #if targetEnvironment(macCatalyst)

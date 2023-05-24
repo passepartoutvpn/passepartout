@@ -26,7 +26,7 @@
 import Foundation
 import OpenVPNAppExtension
 
-class PacketTunnelProvider: OpenVPNTunnelProvider {
+final class PacketTunnelProvider: OpenVPNTunnelProvider {
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         appVersion = "\(Constants.Global.appName) \(Constants.Global.appVersionString)"
         dnsTimeout = Constants.OpenVPNTunnel.dnsTimeout

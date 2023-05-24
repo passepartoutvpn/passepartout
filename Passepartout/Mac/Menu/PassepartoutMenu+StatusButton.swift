@@ -29,7 +29,7 @@ import Foundation
 extension PassepartoutMenu {
 
     @MainActor
-    class StatusButton {
+    final class StatusButton {
         private lazy var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         private lazy var statusButton: NSStatusBarButton = {

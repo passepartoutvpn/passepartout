@@ -26,5 +26,5 @@
 import Foundation
 import WireGuardAppExtension
 
-class PacketTunnelProvider: WireGuardTunnelProvider {
+final class PacketTunnelProvider: WireGuardTunnelProvider {
 }

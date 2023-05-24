@@ -27,7 +27,7 @@ import AppKit
 import Foundation
 
 @MainActor
-class PassepartoutMenu {
+final class PassepartoutMenu {
     private let macMenuDelegate: MacMenuDelegate
 
     private let profileManager: LightProfileManager

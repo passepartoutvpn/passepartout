@@ -30,7 +30,7 @@ import TunnelKitCore
 import TunnelKitManager
 
 @MainActor
-class CoreContext {
+final class CoreContext {
     let store: KeyValueStore
 
     private let profilesPersistence: CoreDataPersistentStore

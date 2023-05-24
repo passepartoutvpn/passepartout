@@ -26,7 +26,7 @@
 import StoreKit
 import UIKit
 
-public class Reviewer: ObservableObject {
+public final class Reviewer: ObservableObject {
     private struct Keys {
         static let eventCount = "Reviewer.EventCount"
 

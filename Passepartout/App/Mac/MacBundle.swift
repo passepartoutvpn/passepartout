@@ -25,7 +25,7 @@
 
 import Foundation
 
-class MacBundle {
+final class MacBundle {
     static let shared = MacBundle()
 
     private var bridge: MacBridge!
@@ -41,7 +41,7 @@ class MacBundle {
             fatalError("Unable to build Mac bundle")
         }
         guard let bridgeClass = bundle.principalClass as? MacBridge.Type else {
-            fatalError("Unable to find principal class in Mac bundle")
+            fatalError("Unable to find principal final class in Mac bundle")
         }
         bridge = bridgeClass.init()
         bridge.menu.delegate = bridgeDelegate

@@ -26,7 +26,7 @@
 import AppKit
 import Foundation
 
-class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
+final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     private let appURL = Constants.Launcher.appURL
 
     private var isAppRunning: Bool {
