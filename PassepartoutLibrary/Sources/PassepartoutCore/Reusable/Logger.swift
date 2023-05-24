@@ -40,7 +40,7 @@ public enum LoggerLevel: Int {
 public protocol Logger {
     var logFile: URL? { get }
 
-    var logLevel: LoggerLevel { get }
+    var logLevel: LoggerLevel { get set }
 
     func verbose(_ message: Any)
 

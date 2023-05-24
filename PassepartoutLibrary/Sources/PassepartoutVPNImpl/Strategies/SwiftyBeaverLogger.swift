@@ -30,7 +30,13 @@ import SwiftyBeaver
 public final class SwiftyBeaverLogger: Logger {
     public let logFile: URL?
 
-    public let logLevel: LoggerLevel
+    public var logLevel: LoggerLevel {
+        didSet {
+            SwiftyBeaver.destinations.forEach {
+                $0.minLevel = logLevel.toSwiftyBeaver
+            }
+        }
+    }
 
     public init(logFile: URL?, logLevel: LoggerLevel = .info, logFormat: String? = nil) {
         self.logFile = logFile
