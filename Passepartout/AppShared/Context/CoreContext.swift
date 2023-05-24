@@ -90,7 +90,7 @@ class CoreContext {
                 timeout: Constants.Services.connectivityTimeout
             ),
             webServicesRepository: PassepartoutPersistence.webServicesRepository(providersPersistence),
-            providersFacadeRepository: PassepartoutPersistence.providersFacadeRepository(providersPersistence)
+            localProvidersRepository: PassepartoutPersistence.localProvidersRepository(providersPersistence)
         )
 
         profileManager = ProfileManager(

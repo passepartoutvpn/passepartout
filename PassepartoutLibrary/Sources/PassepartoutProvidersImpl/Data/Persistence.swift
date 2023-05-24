@@ -52,7 +52,7 @@ extension PassepartoutPersistence {
         CDWebServicesRepository(store.context)
     }
 
-    public static func providersFacadeRepository(_ store: CoreDataPersistentStore) -> ProvidersFacadeRepository {
-        CDProvidersFacadeRepository(store.context)
+    public static func localProvidersRepository(_ store: CoreDataPersistentStore) -> LocalProvidersRepository {
+        CDLocalProvidersRepository(store.context)
     }
 }

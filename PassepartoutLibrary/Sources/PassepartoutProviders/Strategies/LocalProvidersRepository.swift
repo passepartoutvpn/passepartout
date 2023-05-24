@@ -1,5 +1,5 @@
 //
-//  ProvidersFacadeRepository.swift
+//  LocalProvidersRepository.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/24/23.
@@ -25,4 +25,4 @@
 
 import Foundation
 
-public typealias ProvidersFacadeRepository = ProviderRepository & InfrastructureRepository & ServerRepository
+public typealias LocalProvidersRepository = ProviderRepository & InfrastructureRepository & ServerRepository

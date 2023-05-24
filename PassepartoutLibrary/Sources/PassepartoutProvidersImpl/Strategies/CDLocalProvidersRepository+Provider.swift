@@ -1,5 +1,5 @@
 //
-//  CDProvidersFacadeRepository+Provider.swift
+//  CDLocalProvidersRepository+Provider.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/15/22.
@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutCore
 import PassepartoutProviders
 
-extension CDProvidersFacadeRepository: ProviderRepository {
+extension CDLocalProvidersRepository: ProviderRepository {
     func allProviders() -> [ProviderMetadata] {
         let request = CDProvider.fetchRequest()
         request.sortDescriptors = [

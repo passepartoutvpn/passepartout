@@ -45,7 +45,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
 
     private let webServicesRepository: WebServicesRepository
 
-    private let providersFacadeRepository: ProvidersFacadeRepository
+    private let localProvidersRepository: LocalProvidersRepository
 
     public let didUpdateProviders = PassthroughSubject<Void, Never>()
 
@@ -54,13 +54,13 @@ public final class ProviderManager: ObservableObject, RateLimited {
         bundleServices: WebServices,
         webServices: WebServices,
         webServicesRepository: WebServicesRepository,
-        providersFacadeRepository: ProvidersFacadeRepository
+        localProvidersRepository: LocalProvidersRepository
     ) {
         self.appBuild = appBuild
         self.bundleServices = bundleServices
         self.webServices = webServices
         self.webServicesRepository = webServicesRepository
-        self.providersFacadeRepository = providersFacadeRepository
+        self.localProvidersRepository = localProvidersRepository
 
         _ = allProviders()
     }
@@ -68,43 +68,43 @@ public final class ProviderManager: ObservableObject, RateLimited {
     // MARK: Queries
 
     public func allProviders() -> [ProviderMetadata] {
-        providersFacadeRepository.allProviders()
+        localProvidersRepository.allProviders()
     }
 
     public func provider(withName name: ProviderName) -> ProviderMetadata? {
-        providersFacadeRepository.provider(withName: name)
+        localProvidersRepository.provider(withName: name)
     }
 
     public func isAvailable(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> Bool {
-        providersFacadeRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol) != nil
+        localProvidersRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol) != nil
     }
 
     public func defaultUsername(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> String? {
-        providersFacadeRepository.defaultUsername(forProviderWithName: name, vpnProtocol: vpnProtocol)
+        localProvidersRepository.defaultUsername(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
 
     public func lastUpdate(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> Date? {
-        providersFacadeRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol)
+        localProvidersRepository.lastInfrastructureUpdate(withName: name, vpnProtocol: vpnProtocol)
     }
 
     public func categories(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> [ProviderCategory] {
-        providersFacadeRepository.categories(forProviderWithName: name, vpnProtocol: vpnProtocol)
+        localProvidersRepository.categories(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
 
     public func servers(forLocation location: ProviderLocation) -> [ProviderServer] {
-        providersFacadeRepository.servers(forLocation: location)
+        localProvidersRepository.servers(forLocation: location)
     }
 
     public func server(_ name: ProviderName, vpnProtocol: VPNProtocolType, apiId: String) -> ProviderServer? {
-        providersFacadeRepository.server(forProviderWithName: name, vpnProtocol: vpnProtocol, apiId: apiId)
+        localProvidersRepository.server(forProviderWithName: name, vpnProtocol: vpnProtocol, apiId: apiId)
     }
 
     public func anyDefaultServer(_ name: ProviderName, vpnProtocol: VPNProtocolType) -> ProviderServer? {
-        providersFacadeRepository.anyDefaultServer(forProviderWithName: name, vpnProtocol: vpnProtocol)
+        localProvidersRepository.anyDefaultServer(forProviderWithName: name, vpnProtocol: vpnProtocol)
     }
 
     public func server(withId id: String) -> ProviderServer? {
-        providersFacadeRepository.server(withId: id)
+        localProvidersRepository.server(withId: id)
     }
 
     // MARK: Modification
@@ -140,7 +140,7 @@ public final class ProviderManager: ObservableObject, RateLimited {
         }
 
         let publisher = priority.publisher(remote: {
-            let ifModifiedSince = self.providersFacadeRepository.lastInfrastructureUpdate(withName: providerName, vpnProtocol: vpnProtocol)
+            let ifModifiedSince = self.localProvidersRepository.lastInfrastructureUpdate(withName: providerName, vpnProtocol: vpnProtocol)
             return self.webServices.providerNetwork(
                 with: providerName.asWSProviderName,
                 vpnProtocol: vpnProtocol.asWSVPNProtocol,

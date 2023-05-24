@@ -1,5 +1,5 @@
 //
-//  CDProvidersFacadeRepository+Server.swift
+//  CDLocalProvidersRepository+Server.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/15/22.
@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutCore
 import PassepartoutProviders
 
-extension CDProvidersFacadeRepository: ServerRepository {
+extension CDLocalProvidersRepository: ServerRepository {
     func categories(forProviderWithName name: ProviderName, vpnProtocol: VPNProtocolType) -> [ProviderCategory] {
         let request = CDInfrastructureCategory.fetchRequest()
         request.predicate = NSPredicate(

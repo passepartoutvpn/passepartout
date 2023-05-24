@@ -1,5 +1,5 @@
 //
-//  CDProvidersFacadeRepository.swift
+//  CDLocalProvidersRepository.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/24/23.
@@ -26,7 +26,7 @@
 import CoreData
 import Foundation
 
-final class CDProvidersFacadeRepository {
+final class CDLocalProvidersRepository {
     let context: NSManagedObjectContext
 
     init(_ context: NSManagedObjectContext) {

@@ -46,7 +46,7 @@ final class ProvidersTests: XCTestCase {
             bundleServices: APIWebServices.bundledServices(withVersion: "v5"),
             webServices: APIWebServices("v5", URL(string: "https://passepartoutvpn.app/api/")!, timeout: nil),
             webServicesRepository: PassepartoutPersistence.webServicesRepository(persistence),
-            providersFacadeRepository: PassepartoutPersistence.providersFacadeRepository(persistence)
+            localProvidersRepository: PassepartoutPersistence.localProvidersRepository(persistence)
         )
 //        persistence.truncate()
     }
