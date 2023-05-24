@@ -26,7 +26,7 @@
 import AppKit
 import Foundation
 
-class DefaultMacUtils: MacUtils {
+final class DefaultMacUtils: MacUtils {
     private(set) lazy var isStartedByLauncher = NSApp.isHidden
 
     private let transformer = ObservableProcessTransformer.shared

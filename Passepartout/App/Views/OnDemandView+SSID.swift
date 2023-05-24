@@ -30,7 +30,8 @@ extension OnDemandView {
     struct SSIDList: View {
         @Binding var withSSIDs: [String: Bool]
 
-        @StateObject private var reader = SSIDReader()
+        // FIXME: arch, this is a candidate for DI
+        @StateObject private var reader = Wifi(observer: CoreLocationWifiObserver())
 
         var body: some View {
             EditableTextList(elements: allSSIDs, allowsDuplicates: false, mapping: mapElements) { text in
@@ -73,7 +74,7 @@ extension OnDemandView {
 
         private func requestSSID(_ text: Binding<String>) {
             Task { @MainActor in
-                let ssid = try await reader.requestCurrentSSID()
+                let ssid = try await reader.currentSSID()
                 if !withSSIDs.keys.contains(ssid) {
                     text.wrappedValue = ssid
                 }

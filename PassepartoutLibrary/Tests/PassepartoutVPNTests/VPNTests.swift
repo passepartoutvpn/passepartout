@@ -26,7 +26,7 @@
 @testable import PassepartoutVPN
 import XCTest
 
-class VPNTests: XCTestCase {
+final class VPNTests: XCTestCase {
     override func setUp() {
     }
 

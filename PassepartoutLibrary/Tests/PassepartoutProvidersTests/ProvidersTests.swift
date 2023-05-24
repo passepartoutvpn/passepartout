@@ -26,36 +26,36 @@
 import Combine
 import CoreData
 import PassepartoutCore
-@testable import PassepartoutProviders
-import PassepartoutServices
-import PassepartoutUtils
-import SwiftyBeaver
+import PassepartoutProviders
+@testable import PassepartoutProvidersImpl
 import XCTest
 
-class ProvidersTests: XCTestCase {
-    private static let persistence: Persistence = {
-        let model = NSManagedObjectModel.mergedModel(from: [.module])!
-        return Persistence(withLocalName: "ProvidersTests", model: model, author: nil)
-    }()
+final class ProvidersTests: XCTestCase {
+    private var persistence: CoreDataPersistentStore!
 
     private var manager: ProviderManager!
 
     private var cancellables: Set<AnyCancellable> = []
 
     override func setUp() {
-        pp_log.addDestination(ConsoleDestination())
+        let model = NSManagedObjectModel.mergedModel(from: [.module])!
+        persistence = CoreDataPersistentStore(withName: "ProvidersTests", model: model, cloudKit: false, author: nil)
 
-        manager = ProviderManager(
+        let remoteStrategy = APIRemoteProvidersStrategy(
             appBuild: 10000,
-            bundleServices: DefaultWebServices.bundledServices(withVersion: "v5"),
-            webServices: DefaultWebServices("v5", URL(string: "https://passepartoutvpn.app/api/")!, timeout: nil),
-            persistence: ProvidersTests.persistence
+            bundleServices: APIWebServices.bundledServices(withVersion: "v5"),
+            remoteServices: APIWebServices("v5", URL(string: "https://passepartoutvpn.app/api/")!, timeout: nil),
+            webServicesRepository: PassepartoutPersistence.webServicesRepository(persistence)
         )
-//        manager.reset()
+        manager = ProviderManager(
+            localProvidersRepository: PassepartoutPersistence.localProvidersRepository(persistence),
+            remoteProvidersStrategy: remoteStrategy
+        )
+//        persistence.truncate()
     }
 
     override func tearDown() {
-//        manager.reset()
+//        persistence.truncate()
     }
 
     func testFetchLocalIndex() throws {

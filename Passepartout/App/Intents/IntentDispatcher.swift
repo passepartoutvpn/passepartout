@@ -27,7 +27,7 @@ import Foundation
 import Intents
 import PassepartoutLibrary
 
-class IntentDispatcher {
+final class IntentDispatcher {
     private struct Groups {
         static let vpn = "VPN"
 

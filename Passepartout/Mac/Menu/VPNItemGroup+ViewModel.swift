@@ -29,7 +29,7 @@ import Foundation
 extension VPNItemGroup {
 
     @MainActor
-    class ViewModel {
+    final class ViewModel {
         private let vpnManager: LightVPNManager
 
         private let toggleTitleBlock: (Bool) -> String

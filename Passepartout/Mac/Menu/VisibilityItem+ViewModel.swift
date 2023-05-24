@@ -29,7 +29,7 @@ import Foundation
 extension VisibilityItem {
 
     @MainActor
-    class ViewModel {
+    final class ViewModel {
         private let transformer: ObservableProcessTransformer
 
         private let utils: LightUtils

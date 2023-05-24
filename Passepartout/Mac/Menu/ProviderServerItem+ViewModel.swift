@@ -28,7 +28,7 @@ import Foundation
 extension ProviderServerItem {
 
     @MainActor
-    class ViewModel {
+    final class ViewModel {
         private let profile: LightProfile
 
         let server: LightProviderServer

@@ -25,7 +25,7 @@
 
 import Foundation
 
-class MacBundleDelegate: MacMenuDelegate {
+final class MacBundleDelegate: MacMenuDelegate {
     private weak var bundle: MacBundle?
 
     @MainActor

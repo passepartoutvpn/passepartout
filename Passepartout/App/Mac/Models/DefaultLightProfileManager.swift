@@ -27,7 +27,7 @@ import Combine
 import Foundation
 import PassepartoutLibrary
 
-class DefaultLightProfile: LightProfile {
+final class DefaultLightProfile: LightProfile {
     let id: UUID
 
     let name: String
@@ -50,7 +50,7 @@ class DefaultLightProfile: LightProfile {
     }
 }
 
-class DefaultLightProfileManager: LightProfileManager {
+final class DefaultLightProfileManager: LightProfileManager {
     private let profileManager = ProfileManager.shared
 
     private let providerManager = ProviderManager.shared

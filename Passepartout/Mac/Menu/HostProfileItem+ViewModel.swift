@@ -28,7 +28,7 @@ import Foundation
 extension HostProfileItem {
 
     @MainActor
-    class ViewModel {
+    final class ViewModel {
         let profile: LightProfile
 
         private let vpnManager: LightVPNManager

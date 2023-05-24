@@ -27,7 +27,7 @@ import Combine
 import Foundation
 
 extension TextItem {
-    class ViewModel {
+    final class ViewModel {
         let title: CurrentValueSubject<String, Never>
 
         let state: CurrentValueSubject<State, Never>

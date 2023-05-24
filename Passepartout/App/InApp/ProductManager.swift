@@ -35,7 +35,7 @@ enum ProductError: Error {
     case beta
 }
 
-class ProductManager: NSObject, ObservableObject {
+final class ProductManager: NSObject, ObservableObject {
     enum AppType: Int {
         case freemium = 0
 

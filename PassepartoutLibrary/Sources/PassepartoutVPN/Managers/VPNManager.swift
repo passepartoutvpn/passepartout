@@ -26,16 +26,12 @@
 import Combine
 import Foundation
 import PassepartoutCore
-import PassepartoutProfiles
 import PassepartoutProviders
-import PassepartoutUtils
 
 @MainActor
 public final class VPNManager: ObservableObject {
 
     // MARK: Initialization
-
-    let appGroup: String
 
     private let store: KeyValueStore
 
@@ -73,13 +69,11 @@ public final class VPNManager: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
 
     public init(
-        appGroup: String,
         store: KeyValueStore,
         profileManager: ProfileManager,
         providerManager: ProviderManager,
         strategy: VPNManagerStrategy
     ) {
-        self.appGroup = appGroup
         self.store = store
         self.profileManager = profileManager
         self.providerManager = providerManager
@@ -145,7 +139,7 @@ extension VPNManager {
     }
 
     private func observeStrategy() {
-        strategy.observe(into: currentState)
+        strategy.observe(into: MutableObservableVPNState(currentState))
     }
 
     private func observeProfileManager() {
@@ -250,6 +244,64 @@ extension VPNManager {
     }
 }
 
+// MARK: Configuration
+
+extension VPNManager {
+    func vpnConfigurationWithCurrentProfile() -> VPNConfiguration? {
+        do {
+            guard profileManager.isCurrentProfileActive() else {
+                pp_log.info("Skipping VPN configuration, current profile is not active")
+                return nil
+            }
+            return try vpnConfiguration(withProfile: profileManager.currentProfile.value)
+        } catch {
+            return nil
+        }
+    }
+
+    func vpnConfiguration(withProfile profile: Profile) throws -> VPNConfiguration {
+        do {
+            if profile.requiresCredentials {
+                guard !profile.account.isEmpty else {
+                    throw PassepartoutError.missingAccount
+                }
+            }
+
+            // specific provider customizations
+            var newPassword: String?
+            if let providerName = profile.providerName {
+                switch providerName {
+                case .mullvad:
+                    newPassword = "m"
+
+                default:
+                    break
+                }
+            }
+
+            // IMPORTANT: must commit password to keychain (tunnel needs a password reference)
+            profileManager.savePassword(forProfile: profile, newPassword: newPassword)
+
+            let parameters = VPNConfigurationParameters(
+                profile,
+                preferences: vpnPreferences,
+                passwordReference: profileManager.passwordReference(forProfile: profile),
+                withNetworkSettings: isNetworkSettingsSupported(),
+                withCustomRules: isOnDemandRulesSupported()
+            )
+
+            return try strategy.vpnConfiguration(parameters, providerManager: providerManager)
+        } catch {
+            pp_log.error("Unable to build VPNConfiguration: \(error)")
+
+            // UI is certainly interested in configuration errors
+            configurationError.send((profile, error))
+
+            throw error
+        }
+    }
+}
+
 // MARK: KeyValueStore
 
 extension VPNManager {
@@ -281,6 +333,14 @@ extension VPNManager {
             store.setValue(newValue, forLocation: StoreKey.masksPrivateData)
             didUpdatePreferences.send(vpnPreferences)
         }
+    }
+
+    private var vpnPreferences: VPNPreferences {
+        .init(
+            tunnelLogPath: tunnelLogPath,
+            tunnelLogFormat: tunnelLogFormat,
+            masksPrivateData: masksPrivateData
+        )
     }
 }
 

@@ -27,7 +27,7 @@ import Combine
 import Foundation
 import PassepartoutLibrary
 
-class DefaultLightProviderCategory: LightProviderCategory {
+final class DefaultLightProviderCategory: LightProviderCategory {
     let name: String
 
     var locations: [LightProviderLocation]
@@ -40,7 +40,7 @@ class DefaultLightProviderCategory: LightProviderCategory {
     }
 }
 
-class DefaultLightProviderLocation: LightProviderLocation {
+final class DefaultLightProviderLocation: LightProviderLocation {
     let description: String
 
     let id: String
@@ -59,7 +59,7 @@ class DefaultLightProviderLocation: LightProviderLocation {
     }
 }
 
-class DefaultLightProviderServer: LightProviderServer {
+final class DefaultLightProviderServer: LightProviderServer {
     let description: String
 
     let longDescription: String
@@ -79,7 +79,7 @@ class DefaultLightProviderServer: LightProviderServer {
     }
 }
 
-class DefaultLightProviderManager: LightProviderManager {
+final class DefaultLightProviderManager: LightProviderManager {
     private let providerManager = ProviderManager.shared
 
     private var subscriptions: Set<AnyCancellable> = []

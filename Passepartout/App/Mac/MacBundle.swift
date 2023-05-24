@@ -25,7 +25,7 @@
 
 import Foundation
 
-class MacBundle {
+final class MacBundle {
     static let shared = MacBundle()
 
     private var bridge: MacBridge!

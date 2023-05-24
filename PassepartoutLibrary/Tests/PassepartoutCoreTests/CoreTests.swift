@@ -26,11 +26,44 @@
 @testable import PassepartoutCore
 import XCTest
 
-class CoreTests: XCTestCase {
+final class CoreTests: XCTestCase {
     override func setUp() {
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    func testLanguageLocalization() {
+        let languages = ["en", "it", "de", "pt-BR", "ru"]
+        let english = Locale(identifier: "en")
+        let italian = Locale(identifier: "it")
+
+        let languagesEN = privateSortedLanguages(languages, with: english)
+        let languagesIT = privateSortedLanguages(languages, with: italian)
+
+        // English, German, Italian, Portuguese, Russian
+        XCTAssertEqual(languagesEN, ["en", "de", "it", "pt-BR", "ru"])
+
+        // Inglese, Italiano, Portoghese, Russo, Tedesco
+        XCTAssertEqual(languagesIT, ["en", "it", "pt-BR", "ru", "de"])
+    }
+
+    func testTrailing() {
+        let file = Bundle.module.url(forResource: "Debug", withExtension: "log")!
+
+        for len in [10, 100, 1000] {
+            let last = file.trailingContent(bytes: UInt64(len))
+            XCTAssertEqual(last.count, len)
+            pp_log.debug(last)
+        }
+        XCTAssertNotEqual(file.trailingContent(bytes: 100000).count, 100000)
+
+        pp_log.debug(file.trailingLines(bytes: 1000))
+    }
+
+    private func privateSortedLanguages(_ languages: [String], with locale: Locale) -> [String] {
+        languages.sorted {
+            locale.localizedString(forLanguageCode: $0)! < locale.localizedString(forLanguageCode: $1)!
+        }
     }
 }

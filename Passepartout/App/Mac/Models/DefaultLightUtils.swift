@@ -26,7 +26,7 @@
 import Foundation
 import SwiftUI
 
-class DefaultLightUtils: LightUtils {
+final class DefaultLightUtils: LightUtils {
     private let app: UIApplication
 
     init() {

@@ -28,7 +28,7 @@ import Foundation
 extension ProviderProfileItem {
 
     @MainActor
-    class ViewModel {
+    final class ViewModel {
         let profile: LightProfile
 
         private let providerManager: LightProviderManager

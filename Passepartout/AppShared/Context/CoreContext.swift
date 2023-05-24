@@ -26,14 +26,16 @@
 import Combine
 import Foundation
 import PassepartoutLibrary
+import TunnelKitCore
+import TunnelKitManager
 
 @MainActor
-class CoreContext {
+final class CoreContext {
     let store: KeyValueStore
 
-    private let profilesPersistence: Persistence
+    private let profilesPersistence: CoreDataPersistentStore
 
-    private let providersPersistence: Persistence
+    private let providersPersistence: CoreDataPersistentStore
 
     var urlsForProfiles: [URL]? {
         profilesPersistence.containerURLs
@@ -56,6 +58,14 @@ class CoreContext {
     init(store: KeyValueStore) {
         self.store = store
 
+        let logger = SwiftyBeaverLogger(
+            logFile: Constants.Log.App.url,
+            logLevel: Constants.Log.level,
+            logFormat: Constants.Log.App.format
+        )
+        Passepartout.shared.logger = logger
+        pp_log.info("Logging to: \(logger.logFile!)")
+
         let persistenceManager = PersistenceManager(store: store)
         profilesPersistence = persistenceManager.profilesPersistence(
             withName: Constants.Persistence.profilesContainerName
@@ -64,29 +74,35 @@ class CoreContext {
             withName: Constants.Persistence.providersContainerName
         )
 
-        upgradeManager = UpgradeManager(store: store)
+        upgradeManager = UpgradeManager(
+            store: store,
+            strategy: DefaultUpgradeStrategy()
+        )
 
-        providerManager = ProviderManager(
+        let remoteProvidersStrategy = APIRemoteProvidersStrategy(
             appBuild: Constants.Global.appBuildNumber,
-            bundleServices: DefaultWebServices.bundledServices(
+            bundleServices: APIWebServices.bundledServices(
                 withVersion: Constants.Services.version
             ),
-            webServices: DefaultWebServices(
+            remoteServices: APIWebServices(
                 Constants.Services.version,
                 Constants.Repos.api,
                 timeout: Constants.Services.connectivityTimeout
             ),
-            persistence: providersPersistence
+            webServicesRepository: PassepartoutPersistence.webServicesRepository(providersPersistence)
+        )
+        providerManager = ProviderManager(
+            localProvidersRepository: PassepartoutPersistence.localProvidersRepository(providersPersistence),
+            remoteProvidersStrategy: remoteProvidersStrategy
         )
 
         profileManager = ProfileManager(
             store: store,
             providerManager: providerManager,
-            appGroup: Constants.App.appGroupId,
-            keychainLabel: Unlocalized.Keychain.passwordLabel,
-            strategy: CoreDataProfileManagerStrategy(
-                persistence: profilesPersistence
-            )
+            profileRepository: PassepartoutPersistence.profileRepository(profilesPersistence),
+            keychain: KeychainSecretRepository(appGroup: Constants.App.appGroupId),
+            keychainEntry: Unlocalized.Keychain.passwordEntry,
+            keychainLabel: Unlocalized.Keychain.passwordLabel
         )
 
         #if targetEnvironment(simulator)
@@ -94,17 +110,16 @@ class CoreContext {
         #else
         let vpn = NetworkExtensionVPN()
         #endif
-        let strategy = TunnelKitVPNManagerStrategy(
+        let vpnManagerStrategy = TunnelKitVPNManagerStrategy(
             appGroup: Constants.App.appGroupId,
             tunnelBundleIdentifier: Constants.App.tunnelBundleId,
             vpn: vpn
         )
         vpnManager = VPNManager(
-            appGroup: Constants.App.appGroupId,
             store: store,
             profileManager: profileManager,
             providerManager: providerManager,
-            strategy: strategy
+            strategy: vpnManagerStrategy
         )
 
         // post
