@@ -31,16 +31,16 @@ import PassepartoutProviders
 import XCTest
 
 final class ProvidersTests: XCTestCase {
-    private let persistence: CoreDataPersistentStore = {
-        let model = NSManagedObjectModel.mergedModel(from: [.module])!
-        return CoreDataPersistentStore(withName: "ProvidersTests", model: model, cloudKit: false, author: nil)
-    }()
+    private var persistence: CoreDataPersistentStore!
 
     private var manager: ProviderManager!
 
     private var cancellables: Set<AnyCancellable> = []
 
     override func setUp() {
+        let model = NSManagedObjectModel.mergedModel(from: [.module])!
+        persistence = CoreDataPersistentStore(withName: "ProvidersTests", model: model, cloudKit: false, author: nil)
+
         manager = ProviderManager(
             appBuild: 10000,
             bundleServices: APIWebServices.bundledServices(withVersion: "v5"),
@@ -52,7 +52,7 @@ final class ProvidersTests: XCTestCase {
     }
 
     override func tearDown() {
-        persistence.truncate()
+//        persistence.truncate()
     }
 
     func testFetchLocalIndex() throws {
