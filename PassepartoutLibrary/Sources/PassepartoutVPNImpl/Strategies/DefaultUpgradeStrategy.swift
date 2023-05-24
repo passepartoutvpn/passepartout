@@ -244,7 +244,7 @@ extension DefaultUpgradeStrategy {
         let eps = rawEps.compactMap(EndpointProtocol.init(rawValue:))
         var remotes: [String] = []
         eps.forEach {
-            remotes.append("\(hostname):\($0)")
+            remotes.append([hostname, $0.description].joined(separator: ":"))
         }
         ovpn["remotes"] = remotes
         ovpn["authUserPass"] = authUserPass.contains(oldUUIDString)
@@ -292,9 +292,13 @@ extension DefaultUpgradeStrategy {
             settings.serverId = ProviderServer.id(withName: name, vpnProtocol: .openVPN, apiId: apiId)
         }
         settings.presetId = providerMap["presetId"] as? String
-        settings.favoriteLocationIds = Set((providerMap["favoriteGroupIds"] as? [String])?.compactMap {
-            "\(name):\($0.replacingOccurrences(of: "/", with: ":"))"
-        } ?? [])
+        let favoriteGroupIds = providerMap["favoriteGroupIds"] as? [String] ?? []
+        settings.favoriteLocationIds = Set(favoriteGroupIds.compactMap {
+            [
+                name,
+                $0.replacingOccurrences(of: "/", with: ":")
+            ].joined(separator: ":")
+        })
         settings.account = account
         provider.vpnSettings[.openVPN] = settings
 
@@ -309,7 +313,7 @@ extension DefaultUpgradeStrategy {
 
     private func migratedV1Password(forProfileId profileId: String, profileType: String, username: String) -> String {
         let keychain = Keychain(group: appGroup)
-        let passwordContext = "\(Bundle.main.bundleIdentifier!).\(profileType).\(profileId)"
+        let passwordContext = [Bundle.main.bundleIdentifier!, profileType, profileId].joined(separator: ".")
         do {
             return try keychain.password(for: username, context: passwordContext)
         } catch {

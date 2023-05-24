@@ -41,10 +41,10 @@ public final class APIWebServices: WebServices {
         private var pathName: String {
             switch self {
             case .providersIndex:
-                return "\(Group.providers.rawValue)/index"
+                return [Group.providers.rawValue, "index"].joined(separator: "/")
 
             case .providerNetwork(let providerName, let vpnProtocol):
-                return "\(Group.providers.rawValue)/\(providerName)/\(vpnProtocol.filename)"
+                return [Group.providers.rawValue, providerName, vpnProtocol.filename].joined(separator: "/")
             }
         }
 
@@ -55,7 +55,7 @@ public final class APIWebServices: WebServices {
         // MARK: GenericWebEndpoint
 
         var path: String {
-            "\(pathName).\(fileType)"
+            [pathName, fileType].joined(separator: ".")
         }
     }
 

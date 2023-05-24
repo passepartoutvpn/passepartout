@@ -172,7 +172,7 @@ extension Constants {
         }
 
         private static func containerPath(filename: String) -> String {
-            "\(parentPath)/\(filename)"
+            [parentPath, filename].joined(separator: "/")
         }
     }
 

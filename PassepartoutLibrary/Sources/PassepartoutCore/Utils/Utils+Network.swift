@@ -93,7 +93,9 @@ extension Utils {
             remainder %= base
             base >>= 8
         }
-        return groups.map { "\($0)" }.joined(separator: ".")
+        return groups
+            .map { $0.description }
+            .joined(separator: ".")
     }
 
     public static func ipv4(fromString string: String) -> UInt32? {
