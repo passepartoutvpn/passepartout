@@ -26,7 +26,7 @@
 import CoreLocation
 import Foundation
 
-public final class CoreLocationWifiObserver: NSObject, ObservableObject, WifiObserver {
+public final class CoreLocationWifiObserver: NSObject, WifiObserver {
     private let locationManager = CLLocationManager()
 
     private var continuation: CheckedContinuation<String, Error>?
@@ -34,7 +34,7 @@ public final class CoreLocationWifiObserver: NSObject, ObservableObject, WifiObs
     public func currentSSID() async throws -> String {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse, .denied:
-            return await unauthorizedCurrentSSID()
+            return await currentSSIDWithoutAuthorization()
 
         default:
             return try await withCheckedThrowingContinuation { continuation in
@@ -46,7 +46,7 @@ public final class CoreLocationWifiObserver: NSObject, ObservableObject, WifiObs
         }
     }
 
-    private func unauthorizedCurrentSSID() async -> String {
+    private func currentSSIDWithoutAuthorization() async -> String {
         await Utils.currentWifiSSID() ?? ""
     }
 }
@@ -56,7 +56,7 @@ extension CoreLocationWifiObserver: CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways, .denied:
             Task {
-                continuation?.resume(returning: await unauthorizedCurrentSSID())
+                continuation?.resume(returning: await currentSSIDWithoutAuthorization())
                 continuation = nil
             }
 

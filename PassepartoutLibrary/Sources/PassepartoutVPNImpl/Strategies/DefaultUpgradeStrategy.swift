@@ -78,14 +78,17 @@ extension DefaultUpgradeStrategy {
         }
     }
 
-    public func doMigrateStore(_ store: KeyValueStore) -> Bool? {
-        guard let legacyDidMigrateToV2: Bool = store.value(forLocation: LegacyStoreKey.didMigrateToV2) else {
-            return nil
+    public func doMigrateStore(_ store: KeyValueStore, didMigrate: inout Bool) {
+        if !didMigrate {
+            guard let legacyDidMigrateToV2: Bool = store.value(forLocation: LegacyStoreKey.didMigrateToV2) else {
+                return
+            }
+            didMigrate = legacyDidMigrateToV2
         }
+
         LegacyStoreKey.allCases.forEach {
             store.removeValue(forLocation: $0)
         }
-        return legacyDidMigrateToV2
     }
 }
 

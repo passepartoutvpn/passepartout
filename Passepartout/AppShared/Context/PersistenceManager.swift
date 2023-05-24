@@ -27,10 +27,10 @@ import CoreData
 import Foundation
 import PassepartoutLibrary
 
-public final class PersistenceManager {
+final class PersistenceManager {
     private let store: KeyValueStore
 
-    public init(store: KeyValueStore) {
+    init(store: KeyValueStore) {
         self.store = store
 
         // set once
@@ -39,11 +39,11 @@ public final class PersistenceManager {
         }
     }
 
-    public func profilesPersistence(withName containerName: String) -> CoreDataPersistentStore {
+    func profilesPersistence(withName containerName: String) -> CoreDataPersistentStore {
         PassepartoutPersistence.profilesStore(withName: containerName, cloudKit: true, author: persistenceAuthor)
     }
 
-    public func providersPersistence(withName containerName: String) -> CoreDataPersistentStore {
+    func providersPersistence(withName containerName: String) -> CoreDataPersistentStore {
         PassepartoutPersistence.providersStore(withName: containerName, cloudKit: false, author: persistenceAuthor)
     }
 }
@@ -51,7 +51,7 @@ public final class PersistenceManager {
 // MARK: KeyValueStore
 
 extension PersistenceManager {
-    public private(set) var persistenceAuthor: String? {
+    private(set) var persistenceAuthor: String? {
         get {
             store.value(forLocation: StoreKey.persistenceAuthor)
         }

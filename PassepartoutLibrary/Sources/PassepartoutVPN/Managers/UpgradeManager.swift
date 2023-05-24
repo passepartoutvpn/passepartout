@@ -48,12 +48,7 @@ public final class UpgradeManager: ObservableObject {
     }
 
     public func doMigrations(_ profileManager: ProfileManager) {
-        if !didMigrateToV2 {
-            guard let legacyDidMigrateToV2 = strategy.doMigrateStore(store) else {
-                return
-            }
-            didMigrateToV2 = legacyDidMigrateToV2
-        }
+        strategy.doMigrateStore(store, didMigrate: &didMigrateToV2)
 
 //        profileManager.removeAllProfiles() // testing only
         guard didMigrateToV2 else {

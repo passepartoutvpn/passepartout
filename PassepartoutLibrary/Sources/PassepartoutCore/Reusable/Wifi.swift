@@ -26,14 +26,14 @@
 import Foundation
 
 @MainActor
-public final class Wifi {
+public final class Wifi: ObservableObject {
     private let observer: WifiObserver
 
-    init(observer: WifiObserver) {
+    public init(observer: WifiObserver) {
         self.observer = observer
     }
 
-    func currentSSID() async throws -> String {
+    public func currentSSID() async throws -> String {
         try await observer.currentSSID()
     }
 }

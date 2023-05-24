@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutCore
 
 public protocol UpgradeStrategy {
-    func doMigrateStore(_ store: KeyValueStore) -> Bool?
+    func doMigrateStore(_ store: KeyValueStore, didMigrate: inout Bool)
 
     func migratedProfilesToV2() -> [Profile]
 }

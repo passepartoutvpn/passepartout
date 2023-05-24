@@ -30,7 +30,8 @@ extension OnDemandView {
     struct SSIDList: View {
         @Binding var withSSIDs: [String: Bool]
 
-        @StateObject private var reader = CoreLocationWifiObserver()
+        // FIXME: arch, this is a candidate for DI
+        @StateObject private var reader = Wifi(observer: CoreLocationWifiObserver())
 
         var body: some View {
             EditableTextList(elements: allSSIDs, allowsDuplicates: false, mapping: mapElements) { text in
