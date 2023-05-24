@@ -58,6 +58,14 @@ class CoreContext {
     init(store: KeyValueStore) {
         self.store = store
 
+        let logger = SwiftyBeaverLogger(
+            logFile: Constants.Log.App.url,
+            logLevel: Constants.Log.level,
+            logFormat: Constants.Log.App.format
+        )
+        Passepartout.shared.logger = logger
+        pp_log.info("Logging to: \(logger.logFile!)")
+
         let persistenceManager = PersistenceManager(store: store)
         profilesPersistence = persistenceManager.profilesPersistence(
             withName: Constants.Persistence.profilesContainerName
