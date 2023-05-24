@@ -79,18 +79,21 @@ class CoreContext {
             strategy: DefaultUpgradeStrategy()
         )
 
-        providerManager = ProviderManager(
+        let remoteProvidersStrategy = APIRemoteProvidersStrategy(
             appBuild: Constants.Global.appBuildNumber,
             bundleServices: APIWebServices.bundledServices(
                 withVersion: Constants.Services.version
             ),
-            webServices: APIWebServices(
+            remoteServices: APIWebServices(
                 Constants.Services.version,
                 Constants.Repos.api,
                 timeout: Constants.Services.connectivityTimeout
             ),
-            webServicesRepository: PassepartoutPersistence.webServicesRepository(providersPersistence),
-            localProvidersRepository: PassepartoutPersistence.localProvidersRepository(providersPersistence)
+            webServicesRepository: PassepartoutPersistence.webServicesRepository(providersPersistence)
+        )
+        providerManager = ProviderManager(
+            localProvidersRepository: PassepartoutPersistence.localProvidersRepository(providersPersistence),
+            remoteProvidersStrategy: remoteProvidersStrategy
         )
 
         profileManager = ProfileManager(

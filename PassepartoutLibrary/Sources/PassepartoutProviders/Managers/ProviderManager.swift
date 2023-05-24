@@ -26,41 +26,20 @@
 import Combine
 import Foundation
 import PassepartoutCore
-import PassepartoutServices
 
 public final class ProviderManager: ObservableObject, RateLimited {
-    public enum FetchPriority {
-        case bundle
-
-        case remote
-
-        case remoteThenBundle
-    }
-
-    private let appBuild: Int
-
-    private let bundleServices: WebServices
-
-    private let webServices: WebServices
-
-    private let webServicesRepository: WebServicesRepository
-
     private let localProvidersRepository: LocalProvidersRepository
+
+    private let remoteProvidersStrategy: RemoteProvidersStrategy
 
     public let didUpdateProviders = PassthroughSubject<Void, Never>()
 
     public init(
-        appBuild: Int,
-        bundleServices: WebServices,
-        webServices: WebServices,
-        webServicesRepository: WebServicesRepository,
-        localProvidersRepository: LocalProvidersRepository
+        localProvidersRepository: LocalProvidersRepository,
+        remoteProvidersStrategy: RemoteProvidersStrategy
     ) {
-        self.appBuild = appBuild
-        self.bundleServices = bundleServices
-        self.webServices = webServices
-        self.webServicesRepository = webServicesRepository
         self.localProvidersRepository = localProvidersRepository
+        self.remoteProvidersStrategy = remoteProvidersStrategy
 
         _ = allProviders()
     }
@@ -109,83 +88,41 @@ public final class ProviderManager: ObservableObject, RateLimited {
 
     // MARK: Modification
 
-    public func fetchProvidersIndexPublisher(priority: FetchPriority) -> AnyPublisher<Void, Error> {
+    public func fetchProvidersIndexPublisher(priority: RemoteProvidersPriority) -> AnyPublisher<Void, Error> {
         guard !isRateLimited(indexActionName) else {
             return Just(())
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
 
-        let publisher = priority.publisher(remote: {
-            self.webServices.providersIndex()
-        }, bundle: {
-            self.bundleServices.providersIndex()
-        })
-
-        return publisher
-            .receive(on: DispatchQueue.main)
-            .tryMap { index in
-                self.saveLastAction(self.indexActionName)
-                try self.webServicesRepository.mergeIndex(index)
-
+        let savePublisher = remoteProvidersStrategy.saveIndex(priority: priority) {
+            self.saveLastAction(self.indexActionName)
+        }
+        return savePublisher
+            .map {
                 self.didUpdateProviders.send()
             }.eraseToAnyPublisher()
     }
 
-    public func fetchProviderPublisher(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, priority: FetchPriority) -> AnyPublisher<Void, Error> {
+    public func fetchProviderPublisher(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, priority: RemoteProvidersPriority) -> AnyPublisher<Void, Error> {
         guard !isRateLimited(providerName) else {
             return Just(())
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
 
-        let publisher = priority.publisher(remote: {
-            let ifModifiedSince = self.localProvidersRepository.lastInfrastructureUpdate(withName: providerName, vpnProtocol: vpnProtocol)
-            return self.webServices.providerNetwork(
-                with: providerName.asWSProviderName,
-                vpnProtocol: vpnProtocol.asWSVPNProtocol,
-                ifModifiedSince: ifModifiedSince
-            )
-        }, bundle: {
-            self.bundleServices.providerNetwork(
-                with: providerName.asWSProviderName,
-                vpnProtocol: vpnProtocol.asWSVPNProtocol,
-                ifModifiedSince: nil
-            )
-        })
-
-        return publisher
-            .receive(on: DispatchQueue.main)
-            .flatMap { pub -> AnyPublisher<Void, Error> in
-                self.saveLastAction(providerName)
-
-                // ignores empty responses (e.g. HTTP 304)
-                guard let infrastructure = pub.value else {
-                    return Just(())
-                        .setFailureType(to: Error.self)
-                        .eraseToAnyPublisher()
-                }
-
-                guard self.appBuild >= infrastructure.build else {
-                    pp_log.error("Infrastructure requires app build >= \(infrastructure.build) (app is \(self.appBuild))")
-                    return Fail(error: ProviderManagerError.outdatedBuild(self.appBuild, infrastructure.build))
-                        .eraseToAnyPublisher()
-                }
-
-                do {
-                    try self.webServicesRepository.saveInfrastructure(
-                        infrastructure,
-                        vpnProtocol: vpnProtocol,
-                        lastUpdate: pub.lastModified ?? Date()
-                    )
-
-                    self.didUpdateProviders.send()
-                } catch {
-                    pp_log.error("Unable to persist \(providerName) infrastructure (\(vpnProtocol)): \(error)")
-                }
-                return Just(())
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
+        let lastUpdate = localProvidersRepository.lastInfrastructureUpdate(withName: providerName, vpnProtocol: vpnProtocol)
+        let savePublisher = remoteProvidersStrategy.saveProvider(
+            withName: providerName,
+            vpnProtocol: vpnProtocol,
+            lastUpdate: lastUpdate,
+            priority: priority
+        ) {
+            self.saveLastAction(providerName)
+        }
+        return savePublisher
+            .map {
+                self.didUpdateProviders.send()
             }.eraseToAnyPublisher()
     }
 
@@ -196,58 +133,4 @@ public final class ProviderManager: ObservableObject, RateLimited {
     public var lastActionDate: [String: Date] = [:]
 
     public var rateLimitMilliseconds: Int?
-}
-
-// MARK: Private extensions
-
-private enum ProviderManagerError: LocalizedError {
-    case outdatedBuild(Int, Int)
-
-    var errorDescription: String? {
-        switch self {
-        case .outdatedBuild(let current, let min):
-            return "Build is outdated (found \(current), required \(min))"
-        }
-    }
-}
-
-private extension ProviderManager.FetchPriority {
-    func publisher<T>(
-        remote: @escaping () -> AnyPublisher<T, Error>,
-        bundle: @escaping () -> AnyPublisher<T, Error>
-    ) -> AnyPublisher<T, Error> {
-        switch self {
-        case .bundle:
-            return bundle()
-
-        case .remote:
-            return remote()
-
-        case .remoteThenBundle:
-            return remote()
-                .catch { error -> AnyPublisher<T, Error> in
-                    pp_log.warning("Unable to fetch remotely: \(error)")
-                    pp_log.warning("Falling back to bundle")
-                    return bundle()
-                }.eraseToAnyPublisher()
-        }
-    }
-}
-
-private extension ProviderName {
-    var asWSProviderName: WSProviderName {
-        self
-    }
-}
-
-private extension VPNProtocolType {
-    var asWSVPNProtocol: WSVPNProtocol {
-        switch self {
-        case .openVPN:
-            return .openVPN
-
-        case .wireGuard:
-            return .wireGuard
-        }
-    }
 }

@@ -75,7 +75,7 @@ let package = Package(
         .target(
             name: "PassepartoutProviders",
             dependencies: [
-                "PassepartoutServices"
+                "PassepartoutCore"
             ]),
         .target(
             name: "PassepartoutServices",
