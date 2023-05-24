@@ -110,7 +110,7 @@ class CoreContext {
         #else
         let vpn = NetworkExtensionVPN()
         #endif
-        let strategy = TunnelKitVPNManagerStrategy(
+        let vpnManagerStrategy = TunnelKitVPNManagerStrategy(
             appGroup: Constants.App.appGroupId,
             tunnelBundleIdentifier: Constants.App.tunnelBundleId,
             vpn: vpn
@@ -119,7 +119,7 @@ class CoreContext {
             store: store,
             profileManager: profileManager,
             providerManager: providerManager,
-            strategy: strategy
+            strategy: vpnManagerStrategy
         )
 
         // post
