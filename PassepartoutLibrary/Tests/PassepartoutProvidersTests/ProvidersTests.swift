@@ -31,7 +31,7 @@ import PassepartoutProviders
 import XCTest
 
 final class ProvidersTests: XCTestCase {
-    private var persistence: CoreDataPersistentStore!
+    private var persistence: ProvidersPersistence!
 
     private var manager: ProviderManager!
 
@@ -39,16 +39,16 @@ final class ProvidersTests: XCTestCase {
 
     override func setUp() {
         let model = NSManagedObjectModel.mergedModel(from: [.module])!
-        persistence = CoreDataPersistentStore(withName: "ProvidersTests", model: model, cloudKit: false, author: nil)
+        persistence = ProvidersPersistence(withName: "ProvidersTests", cloudKit: false, author: nil)
 
         let remoteStrategy = APIRemoteProvidersStrategy(
             appBuild: 10000,
             bundleServices: APIWebServices.bundledServices(withVersion: "v5"),
             remoteServices: APIWebServices("v5", URL(string: "https://passepartoutvpn.app/api/")!, timeout: nil),
-            webServicesRepository: PassepartoutPersistence.webServicesRepository(persistence)
+            webServicesRepository: persistence.webServicesRepository()
         )
         manager = ProviderManager(
-            localProvidersRepository: PassepartoutPersistence.localProvidersRepository(persistence),
+            localProvidersRepository: persistence.localProvidersRepository(),
             remoteProvidersStrategy: remoteStrategy
         )
 //        persistence.truncate()

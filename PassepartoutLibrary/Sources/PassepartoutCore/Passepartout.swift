@@ -35,9 +35,6 @@ public class Passepartout {
     public var logger: Logger = DefaultLogger()
 }
 
-public enum PassepartoutPersistence {
-}
-
 public struct PassepartoutError: Error, Equatable {
     private let string: String
 

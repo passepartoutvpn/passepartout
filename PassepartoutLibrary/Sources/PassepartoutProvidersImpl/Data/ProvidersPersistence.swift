@@ -1,5 +1,5 @@
 //
-//  Persistence.swift
+//  ProvidersPersistence.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
@@ -29,30 +29,34 @@ import PassepartoutCore
 import PassepartoutProviders
 import PassepartoutServices
 
-extension PassepartoutPersistence {
-    private static let providersDataModel: NSManagedObjectModel = {
+public final class ProvidersPersistence {
+    private static let dataModel: NSManagedObjectModel = {
         guard let model = NSManagedObjectModel.mergedModel(from: [.module]) else {
             fatalError("Could not load PassepartoutProviders model")
         }
         return model
     }()
 
-    public static func providersStore(withName containerName: String, cloudKit: Bool, author: String?) -> CoreDataPersistentStore {
-        .init(
+    private let store: CoreDataPersistentStore
+
+    public var containerURLs: [URL]? {
+        store.containerURLs
+    }
+
+    public init(withName containerName: String, cloudKit: Bool, author: String?) {
+        store = .init(
             withName: containerName,
-            model: providersDataModel,
+            model: Self.dataModel,
             cloudKit: cloudKit,
             author: author
         )
     }
-}
 
-extension PassepartoutPersistence {
-    public static func webServicesRepository(_ store: CoreDataPersistentStore) -> WebServicesRepository {
+    public func webServicesRepository() -> WebServicesRepository {
         CDWebServicesRepository(store.context)
     }
 
-    public static func localProvidersRepository(_ store: CoreDataPersistentStore) -> LocalProvidersRepository {
+    public func localProvidersRepository() -> LocalProvidersRepository {
         CDLocalProvidersRepository(store.context)
     }
 }

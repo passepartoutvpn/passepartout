@@ -39,12 +39,12 @@ final class PersistenceManager {
         }
     }
 
-    func profilesPersistence(withName containerName: String) -> CoreDataPersistentStore {
-        PassepartoutPersistence.profilesStore(withName: containerName, cloudKit: true, author: persistenceAuthor)
+    func vpnPersistence(withName containerName: String) -> VPNPersistence {
+        VPNPersistence(withName: containerName, cloudKit: true, author: persistenceAuthor)
     }
 
-    func providersPersistence(withName containerName: String) -> CoreDataPersistentStore {
-        PassepartoutPersistence.providersStore(withName: containerName, cloudKit: false, author: persistenceAuthor)
+    func providersPersistence(withName containerName: String) -> ProvidersPersistence {
+        ProvidersPersistence(withName: containerName, cloudKit: false, author: persistenceAuthor)
     }
 }
 
