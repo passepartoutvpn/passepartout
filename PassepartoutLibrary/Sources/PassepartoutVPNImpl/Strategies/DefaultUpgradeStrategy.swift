@@ -95,20 +95,6 @@ extension DefaultUpgradeStrategy {
 // MARK: Migrate to version 2
 
 extension DefaultUpgradeStrategy {
-    fileprivate enum MigrationError: Error {
-        case json
-
-        case missingId
-
-        case missingOpenVPNConfiguration
-
-        case missingHostname
-
-        case missingEndpointProtocols
-
-        case missingProviderName
-    }
-
     private var appGroup: String {
         "group.com.algoritmico.Passepartout"
     }
@@ -378,11 +364,25 @@ extension DefaultUpgradeStrategy {
     }
 }
 
+private enum MigrationError: Error {
+    case json
+
+    case missingId
+
+    case missingOpenVPNConfiguration
+
+    case missingHostname
+
+    case missingEndpointProtocols
+
+    case missingProviderName
+}
+
 private extension URL {
     func asJSON() throws -> Map {
         let data = try Data(contentsOf: self)
         guard let json = try JSONSerialization.jsonObject(with: data) as? Map else {
-            throw DefaultUpgradeStrategy.MigrationError.json
+            throw MigrationError.json
         }
         return json
     }
