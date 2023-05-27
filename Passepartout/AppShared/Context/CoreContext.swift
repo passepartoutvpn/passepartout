@@ -33,16 +33,16 @@ import TunnelKitManager
 final class CoreContext {
     let store: KeyValueStore
 
-    private let profilesPersistence: CoreDataPersistentStore
+    private let providersPersistence: ProvidersPersistence
 
-    private let providersPersistence: CoreDataPersistentStore
-
-    var urlsForProfiles: [URL]? {
-        profilesPersistence.containerURLs
-    }
+    private let vpnPersistence: VPNPersistence
 
     var urlsForProviders: [URL]? {
         providersPersistence.containerURLs
+    }
+
+    var urlsForProfiles: [URL]? {
+        vpnPersistence.containerURLs
     }
 
     let upgradeManager: UpgradeManager
@@ -67,7 +67,7 @@ final class CoreContext {
         pp_log.info("Logging to: \(logger.logFile!)")
 
         let persistenceManager = PersistenceManager(store: store)
-        profilesPersistence = persistenceManager.profilesPersistence(
+        vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
         providersPersistence = persistenceManager.providersPersistence(
@@ -89,17 +89,17 @@ final class CoreContext {
                 Constants.Repos.api,
                 timeout: Constants.Services.connectivityTimeout
             ),
-            webServicesRepository: PassepartoutPersistence.webServicesRepository(providersPersistence)
+            webServicesRepository: providersPersistence.webServicesRepository()
         )
         providerManager = ProviderManager(
-            localProvidersRepository: PassepartoutPersistence.localProvidersRepository(providersPersistence),
+            localProvidersRepository: providersPersistence.localProvidersRepository(),
             remoteProvidersStrategy: remoteProvidersStrategy
         )
 
         profileManager = ProfileManager(
             store: store,
             providerManager: providerManager,
-            profileRepository: PassepartoutPersistence.profileRepository(profilesPersistence),
+            profileRepository: vpnPersistence.profileRepository(),
             keychain: KeychainSecretRepository(appGroup: Constants.App.appGroupId),
             keychainEntry: Unlocalized.Keychain.passwordEntry,
             keychainLabel: Unlocalized.Keychain.passwordLabel

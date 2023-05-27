@@ -1,5 +1,5 @@
 //
-//  Persistence.swift
+//  VPNPersistence.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
@@ -28,25 +28,30 @@ import Foundation
 import PassepartoutCore
 import PassepartoutVPN
 
-extension PassepartoutPersistence {
-    private static let profilesDataModel: NSManagedObjectModel = {
+public final class VPNPersistence {
+    private static let dataModel: NSManagedObjectModel = {
         guard let model = NSManagedObjectModel.mergedModel(from: [.module]) else {
             fatalError("Could not load PassepartoutProfiles model")
         }
         return model
     }()
 
-    public static func profilesStore(withName containerName: String, cloudKit: Bool, author: String?) -> CoreDataPersistentStore {
-        .init(
+    private let store: CoreDataPersistentStore
+
+    public var containerURLs: [URL]? {
+        store.containerURLs
+    }
+
+    public init(withName containerName: String, cloudKit: Bool, author: String?) {
+        store = .init(
             withName: containerName,
-            model: profilesDataModel,
+            model: Self.dataModel,
             cloudKit: cloudKit,
             author: author
         )
     }
-}
-extension PassepartoutPersistence {
-    public static func profileRepository(_ store: CoreDataPersistentStore) -> ProfileRepository {
+
+    public func profileRepository() -> ProfileRepository {
         CDProfileRepository(store.context)
     }
 }
