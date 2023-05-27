@@ -51,8 +51,6 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
         }
     }
 
-    private let reconnectionSeconds = 2
-
     private let appGroup: String
 
     private let tunnelBundleIdentifier: (VPNProtocolType) -> String
@@ -60,6 +58,8 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
     private let defaults: UserDefaults
 
     private let vpn: VPNType
+
+    private let reconnectionInterval: TimeInterval
 
     private let dataCountInterval: TimeInterval
 
@@ -83,6 +83,7 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
         appGroup: String,
         tunnelBundleIdentifier: @escaping (VPNProtocolType) -> String,
         vpn: VPNType,
+        reconnectionInterval: TimeInterval = 2.0,
         dataCountInterval: TimeInterval = 3.0
     ) {
         self.appGroup = appGroup
@@ -92,6 +93,7 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
         }
         self.defaults = defaults
         self.vpn = vpn
+        self.reconnectionInterval = reconnectionInterval
         self.dataCountInterval = dataCountInterval
 
         registerNotification(withName: VPNNotification.didReinstall) {
@@ -173,7 +175,7 @@ extension TunnelKitVPNManagerStrategy {
                 bundleIdentifier,
                 configuration: configuration.neConfiguration,
                 extra: configuration.neExtra,
-                after: .seconds(reconnectionSeconds)
+                after: reconnectionInterval.dispatchTimeInterval
             )
         } catch {
             pp_log.error("Unable to connect: \(error)")
@@ -182,7 +184,7 @@ extension TunnelKitVPNManagerStrategy {
 
     public func reconnect() async {
         try? await vpn.reconnect(
-            after: .seconds(reconnectionSeconds)
+            after: reconnectionInterval.dispatchTimeInterval
         )
     }
 
