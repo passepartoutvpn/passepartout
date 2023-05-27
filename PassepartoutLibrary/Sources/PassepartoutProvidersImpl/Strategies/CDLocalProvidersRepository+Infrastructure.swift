@@ -39,12 +39,12 @@ extension CDLocalProvidersRepository: InfrastructureRepository {
         ]
         do {
             guard let infrastructureDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound(#file, #function, #line)
+                Utils.logFetchNotFound("\(name), \(vpnProtocol)")
                 return nil
             }
             return infrastructureDTO.defaults?.usernamePlaceholder
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return nil
         }
     }
@@ -61,14 +61,14 @@ extension CDLocalProvidersRepository: InfrastructureRepository {
         do {
             let infrastructures = try context.fetch(request)
             guard !infrastructures.isEmpty else {
-                Utils.logFetchNotFound(#file, #function, #line)
+                Utils.logFetchNotFound("\(name), \(vpnProtocol)")
                 return nil
             }
             let recent = infrastructures.first!
             return recent.lastUpdate
         } catch {
             context.rollback()
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return nil
         }
     }

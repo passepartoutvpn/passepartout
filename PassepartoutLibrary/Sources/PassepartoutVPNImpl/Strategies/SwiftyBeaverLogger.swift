@@ -32,8 +32,9 @@ public final class SwiftyBeaverLogger: Logger {
 
     public var logLevel: LoggerLevel {
         didSet {
+            let nativeLevel = logLevel.toSwiftyBeaver
             SwiftyBeaver.destinations.forEach {
-                $0.minLevel = logLevel.toSwiftyBeaver
+                $0.minLevel = nativeLevel
             }
         }
     }
@@ -62,24 +63,8 @@ public final class SwiftyBeaverLogger: Logger {
         }
     }
 
-    public func verbose(_ message: Any) {
-        SwiftyBeaver.verbose(message)
-    }
-
-    public func debug(_ message: Any) {
-        SwiftyBeaver.debug(message)
-    }
-
-    public func info(_ message: Any) {
-        SwiftyBeaver.info(message)
-    }
-
-    public func warning(_ message: Any) {
-        SwiftyBeaver.warning(message)
-    }
-
-    public func error(_ message: Any) {
-        SwiftyBeaver.error(message)
+    public func logMessage(_ level: LoggerLevel, _ message: Any, _ file: String, _ function: String, _ line: Int) {
+        SwiftyBeaver.custom(level: level.toSwiftyBeaver, message: message, file: file, function: function, line: line)
     }
 }
 

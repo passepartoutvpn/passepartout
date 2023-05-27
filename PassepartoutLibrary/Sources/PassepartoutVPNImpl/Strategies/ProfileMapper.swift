@@ -48,7 +48,7 @@ struct ProfileMapper: DTOMapper, ModelMapper {
 
     static func toModel(_ dto: CDProfile) throws -> Profile? {
         guard let json = dto.json else {
-            Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+            Utils.assertCoreDataDecodingFailed()
             return nil
         }
         do {
@@ -80,7 +80,7 @@ struct ProfileHeaderMapper: DTOMapper, ModelMapper {
         guard let uuid = dto.uuid,
               let name = dto.name else {
 
-            Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+            Utils.assertCoreDataDecodingFailed()
             return nil
         }
         return Profile.Header(

@@ -73,14 +73,11 @@ struct ServerMapper: DTOMapper, ModelMapper {
               let providerMetadata = ProviderMapper.toModel(providerDTO),
               let countryCode = dto.countryCode else {
 
-            Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+            Utils.assertCoreDataDecodingFailed()
             return nil
         }
         guard let presetDTOs = categoryDTO.presets?.allObjects as? [CDInfrastructurePreset], !presetDTOs.isEmpty else {
-            Utils.assertCoreDataDecodingFailed(
-                #file, #function, #line,
-                "Category '\(categoryName)' of server \(apiId) has no presets"
-            )
+            Utils.assertCoreDataDecodingFailed("Category '\(categoryName)' of server \(apiId) has no presets")
             return nil
         }
 
@@ -109,14 +106,11 @@ struct ServerMapper: DTOMapper, ModelMapper {
               let categoryDTO = dto.category,
               let categoryName = categoryDTO.name else {
 
-            Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+            Utils.assertCoreDataDecodingFailed()
             return nil
         }
         guard let presetDTOs = dto.category?.presets?.allObjects as? [CDInfrastructurePreset], !presetDTOs.isEmpty else {
-            Utils.assertCoreDataDecodingFailed(
-                #file, #function, #line,
-                "Category '\(categoryName)' has no presets"
-            )
+            Utils.assertCoreDataDecodingFailed("Category '\(categoryName)' has no presets")
             return nil
         }
 

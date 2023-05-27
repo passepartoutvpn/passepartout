@@ -100,7 +100,7 @@ struct InfrastructureMapper: DTOMapper {
                     vpnProtocol: vpnProtocol,
                     apiId: apiId
                 ) else {
-                    Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+                    Utils.assertCoreDataDecodingFailed()
                     return
                 }
                 server.uniqueId = uniqueId

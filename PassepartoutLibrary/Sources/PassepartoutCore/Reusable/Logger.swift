@@ -42,15 +42,33 @@ public protocol Logger {
 
     var logLevel: LoggerLevel { get set }
 
-    func verbose(_ message: Any)
+    func logMessage(_ level: LoggerLevel, _ message: Any, _ file: String, _ function: String, _ line: Int)
+}
 
-    func debug(_ message: Any)
+extension Logger {
+    public func verbose(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.verbose, message, file, function, line)
+    }
 
-    func info(_ message: Any)
+    public func debug(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.debug, message, file, function, line)
+    }
 
-    func warning(_ message: Any)
+    public func info(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.info, message, file, function, line)
+    }
 
-    func error(_ message: Any)
+    public func warning(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.warning, message, file, function, line)
+    }
+
+    public func error(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.error, message, file, function, line)
+    }
+}
+
+public protocol Loggable {
+    var logDescription: String { get }
 }
 
 final class DefaultLogger: Logger {
@@ -58,42 +76,10 @@ final class DefaultLogger: Logger {
 
     var logLevel: LoggerLevel = .debug
 
-    func verbose(_ message: Any) {
-        guard logLevel.rawValue >= LoggerLevel.verbose.rawValue else {
+    func logMessage(_ level: LoggerLevel, _ message: Any, _ file: String, _ function: String, _ line: Int) {
+        guard level.rawValue >= logLevel.rawValue else {
             return
         }
-        logMessage(message)
-    }
-
-    func debug(_ message: Any) {
-        guard logLevel.rawValue >= LoggerLevel.debug.rawValue else {
-            return
-        }
-        logMessage(message)
-    }
-
-    func info(_ message: Any) {
-        guard logLevel.rawValue >= LoggerLevel.info.rawValue else {
-            return
-        }
-        logMessage(message)
-    }
-
-    func warning(_ message: Any) {
-        guard logLevel.rawValue >= LoggerLevel.warning.rawValue else {
-            return
-        }
-        logMessage(message)
-    }
-
-    func error(_ message: Any) {
-        guard logLevel.rawValue >= LoggerLevel.error.rawValue else {
-            return
-        }
-        logMessage(message)
-    }
-
-    private func logMessage(_ message: Any) {
         guard let string = message as? String else {
             return
         }

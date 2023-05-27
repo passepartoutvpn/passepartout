@@ -47,7 +47,7 @@ extension CDLocalProvidersRepository: ServerRepository {
             let categoryDTOs = try context.fetch(request)
             return categoryDTOs.compactMap(CategoryMapper.toModel)
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return []
         }
     }
@@ -73,7 +73,7 @@ extension CDLocalProvidersRepository: ServerRepository {
             // just preset ids, no full ProviderServer.Preset
             return serverDTOs.compactMap(ServerMapper.toModel)
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return []
         }
     }
@@ -94,12 +94,12 @@ extension CDLocalProvidersRepository: ServerRepository {
         ]
         do {
             guard let serverDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound(#file, #function, #line)
+                Utils.logFetchNotFound("\(providerName), \(vpnProtocol), \(apiId)")
                 return nil
             }
             return ServerMapper.toModelWithPresets(serverDTO)
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return nil
         }
     }
@@ -121,12 +121,12 @@ extension CDLocalProvidersRepository: ServerRepository {
         do {
             try Utils.randomizeFetchResults(request, in: context)
             guard let serverDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound(#file, #function, #line)
+                Utils.logFetchNotFound("\(providerName), \(vpnProtocol), \(countryCode)")
                 return nil
             }
             return ServerMapper.toModelWithPresets(serverDTO)
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return nil
         }
     }
@@ -148,12 +148,12 @@ extension CDLocalProvidersRepository: ServerRepository {
         do {
             try Utils.randomizeFetchResults(request, in: context)
             guard let serverDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound(#file, #function, #line)
+                Utils.logFetchNotFound("\(providerName), \(vpnProtocol)")
                 return nil
             }
             return ServerMapper.toModelWithPresets(serverDTO)
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return nil
         }
     }
@@ -171,12 +171,12 @@ extension CDLocalProvidersRepository: ServerRepository {
         ]
         do {
             guard let serverDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound(#file, #function, #line)
+                Utils.logFetchNotFound(id)
                 return nil
             }
             return ServerMapper.toModelWithPresets(serverDTO)
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return nil
         }
     }
