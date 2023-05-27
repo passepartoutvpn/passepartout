@@ -34,6 +34,20 @@ import TunnelKitOpenVPNCore
 
 private typealias Map = [String: Any]
 
+private enum UpgradeError: Error {
+    case json
+
+    case missingId
+
+    case missingOpenVPNConfiguration
+
+    case missingHostname
+
+    case missingEndpointProtocols
+
+    case missingProviderName
+}
+
 public final class DefaultUpgradeStrategy: UpgradeStrategy {
     public init() {
     }
@@ -362,20 +376,6 @@ extension DefaultUpgradeStrategy {
     private func migratedV1Choice(_ map: Map, key: String) -> Network.Choice {
         (map[key] as? String) == "manual" ? .manual : .automatic
     }
-}
-
-private enum UpgradeError: Error {
-    case json
-
-    case missingId
-
-    case missingOpenVPNConfiguration
-
-    case missingHostname
-
-    case missingEndpointProtocols
-
-    case missingProviderName
 }
 
 private extension URL {
