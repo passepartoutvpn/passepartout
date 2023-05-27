@@ -29,14 +29,6 @@ import PassepartoutLibrary
 
 @MainActor
 extension IntentDispatcher {
-    private enum IntentError: Error {
-        case notProvider(UUID)
-
-        case serverNotFound(UUID)
-
-        case activeAndConnected(UUID)
-    }
-
     typealias VPNIntentActivity = IntentActivity<VPNManager>
 
     static let enableVPN = VPNIntentActivity(name: Constants.Activities.enableVPN) { _, vpnManager in
