@@ -36,7 +36,11 @@ extension ProviderServer.Preset {
         guard vpnProtocol == .openVPN else {
             return nil
         }
-        guard let wrapper = try? JSON(vpnConfiguration) else {
+        let wrapper: JSON
+        do {
+            wrapper = try JSON(vpnConfiguration)
+        } catch {
+            pp_log.error("Unable to parse generic vpnConfiguration: \(error)")
             return nil
         }
         guard let json = wrapper["cfg"] else {
@@ -55,7 +59,11 @@ extension ProviderServer.Preset {
         guard vpnProtocol == .openVPN else {
             return []
         }
-        guard let wrapper = try? JSON(vpnConfiguration) else {
+        let wrapper: JSON
+        do {
+            wrapper = try JSON(vpnConfiguration)
+        } catch {
+            pp_log.error("Unable to parse generic vpnConfiguration: \(error)")
             return []
         }
         guard let json = wrapper["endpoints"]?.arrayValue else {

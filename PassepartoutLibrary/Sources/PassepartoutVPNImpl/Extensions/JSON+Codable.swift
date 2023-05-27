@@ -28,6 +28,8 @@ import GenericJSON
 import PassepartoutCore
 
 extension JSON {
+
+    // IMPORTANT: must specialize default init(Any) as it only handles Foundation values
     public init(_ genericMap: GenericMap) throws {
         try self.init(genericMap.map)
     }
