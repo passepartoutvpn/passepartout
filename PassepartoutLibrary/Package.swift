@@ -46,6 +46,7 @@ let package = Package(
             dependencies: [
                 "PassepartoutVPN",
                 "SwiftyBeaver",
+                .product(name: "GenericJSON", package: "generic-json-swift"),
                 .product(name: "TunnelKitLZO", package: "TunnelKit")
             ],
             resources: [
@@ -84,9 +85,7 @@ let package = Package(
             ]),
         .target(
             name: "PassepartoutCore",
-            dependencies: [
-                .product(name: "GenericJSON", package: "generic-json-swift") // FIXME: arch, drop this
-            ]),
+            dependencies: []),
 
         // MARK: App extensions
 

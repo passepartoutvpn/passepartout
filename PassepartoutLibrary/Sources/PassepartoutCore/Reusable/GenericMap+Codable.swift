@@ -1,8 +1,8 @@
 //
-//  JSON+Codable.swift
+//  GenericMap+Codable.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/13/22.
+//  Created by Davide De Rosa on 5/27/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,9 +24,27 @@
 //
 
 import Foundation
-import GenericJSON
 
-extension JSON {
+extension GenericMap: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let data = try container.decode(Data.self)
+        let map = try jsonDecode(data)
+        self.init(map: map)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        let data = try jsonEncode(map)
+        try container.encode(data)
+    }
+}
+
+extension GenericMap {
+    public static func decode(_ data: Data) throws -> GenericMap {
+        .init(map: try jsonDecode(data))
+    }
+
     public func decode<T: Decodable>(_ type: T.Type) throws -> T {
         let data = try JSONEncoder().encode(self)
         return try JSONDecoder().decode(type, from: data)
@@ -35,4 +53,12 @@ extension JSON {
     public func encoded() throws -> Data {
         try JSONEncoder().encode(self)
     }
+}
+
+private func jsonEncode(_ map: [String: Any]) throws -> Data {
+    try JSONSerialization.data(withJSONObject: map)
+}
+
+private func jsonDecode(_ data: Data) throws -> [String: Any] {
+    try JSONSerialization.jsonObject(with: data) as? [String: Any] ?? [:]
 }

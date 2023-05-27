@@ -1,8 +1,8 @@
 //
-//  WSProviderPreset.swift
+//  JSON+Codable.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/30/18.
+//  Created by Davide De Rosa on 3/13/22.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,38 +24,20 @@
 //
 
 import Foundation
+import GenericJSON
 import PassepartoutCore
 
-public struct WSProviderPreset: Codable {
-    enum CodingKeys: String, CodingKey {
-        case id
-
-        case name
-
-        case comment
-
-        case external
-
-        case jsonOpenVPNConfiguration = "ovpn"
-
-        case jsonWireGuardConfiguration = "wg"
+extension JSON {
+    public init(_ genericMap: GenericMap) throws {
+        try self.init(genericMap.map)
     }
 
-    public let id: String
+    public func decode<T: Decodable>(_ type: T.Type) throws -> T {
+        let data = try JSONEncoder().encode(self)
+        return try JSONDecoder().decode(type, from: data)
+    }
 
-    public let name: String
-
-    public let comment: String
-
-    public var external: [String: String]?
-
-    public var jsonOpenVPNConfiguration: GenericMap?
-
-    public var jsonWireGuardConfiguration: GenericMap?
-
-    public init(id: String, name: String, comment: String) {
-        self.id = id
-        self.name = name
-        self.comment = comment
+    public func encoded() throws -> Data {
+        try JSONEncoder().encode(self)
     }
 }

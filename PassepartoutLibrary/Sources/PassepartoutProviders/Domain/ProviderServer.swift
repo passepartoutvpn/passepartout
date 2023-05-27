@@ -24,7 +24,6 @@
 //
 
 import Foundation
-import GenericJSON
 import PassepartoutCore
 
 public struct ProviderServer {
@@ -37,9 +36,9 @@ public struct ProviderServer {
 
         public let vpnProtocol: VPNProtocolType
 
-        public let vpnConfiguration: JSON
+        public let vpnConfiguration: GenericMap
 
-        public init(id: String, name: String, comment: String, vpnProtocol: VPNProtocolType, vpnConfiguration: JSON) {
+        public init(id: String, name: String, comment: String, vpnProtocol: VPNProtocolType, vpnConfiguration: GenericMap) {
             self.id = id
             self.name = name
             self.comment = comment

@@ -25,7 +25,6 @@
 
 import CoreData
 import Foundation
-import GenericJSON
 import PassepartoutCore
 import PassepartoutProviders
 import PassepartoutServices
@@ -76,22 +75,21 @@ struct PresetMapper: DTOMapper, ModelMapper {
 
 private extension WSProviderPreset {
     var encodedOpenVPNConfiguration: Data? {
-        return try? jsonOpenVPNConfiguration?.encoded()
+        try? jsonOpenVPNConfiguration?.encoded()
     }
 
     var encodedWireGuardConfiguration: Data? {
-        return try? jsonWireGuardConfiguration?.encoded()
+        try? jsonWireGuardConfiguration?.encoded()
     }
 }
 
 private extension CDInfrastructurePreset {
-    var decodedConfiguration: JSON? {
+    var decodedConfiguration: GenericMap? {
         guard let configuration = vpnConfiguration else {
             return nil
         }
         do {
-            let raw = try JSONSerialization.jsonObject(with: configuration)
-            return try JSON(raw)
+            return try GenericMap.decode(configuration)
         } catch {
             pp_log.error("Unable to decode vpnConfiguration: \(error)")
             return nil

@@ -1,8 +1,8 @@
 //
-//  WSProviderPreset.swift
+//  GenericMap.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/30/18.
+//  Created by Davide De Rosa on 5/27/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,38 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
 
-public struct WSProviderPreset: Codable {
-    enum CodingKeys: String, CodingKey {
-        case id
-
-        case name
-
-        case comment
-
-        case external
-
-        case jsonOpenVPNConfiguration = "ovpn"
-
-        case jsonWireGuardConfiguration = "wg"
-    }
-
-    public let id: String
-
-    public let name: String
-
-    public let comment: String
-
-    public var external: [String: String]?
-
-    public var jsonOpenVPNConfiguration: GenericMap?
-
-    public var jsonWireGuardConfiguration: GenericMap?
-
-    public init(id: String, name: String, comment: String) {
-        self.id = id
-        self.name = name
-        self.comment = comment
-    }
+public struct GenericMap {
+    public let map: [String: Any]
 }

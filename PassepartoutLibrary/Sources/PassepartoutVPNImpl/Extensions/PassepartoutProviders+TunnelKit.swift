@@ -25,6 +25,7 @@
 
 import Combine
 import Foundation
+import GenericJSON
 import PassepartoutCore
 import PassepartoutProviders
 import TunnelKitOpenVPN
@@ -35,7 +36,10 @@ extension ProviderServer.Preset {
         guard vpnProtocol == .openVPN else {
             return nil
         }
-        guard let json = vpnConfiguration["cfg"] else {
+        guard let wrapper = try? JSON(vpnConfiguration) else {
+            return nil
+        }
+        guard let json = wrapper["cfg"] else {
             pp_log.error("Unable to parse preset OpenVPN configuration: no cfg")
             return nil
         }
@@ -51,7 +55,10 @@ extension ProviderServer.Preset {
         guard vpnProtocol == .openVPN else {
             return []
         }
-        guard let json = vpnConfiguration["endpoints"]?.arrayValue else {
+        guard let wrapper = try? JSON(vpnConfiguration) else {
+            return []
+        }
+        guard let json = wrapper["endpoints"]?.arrayValue else {
             pp_log.error("Unable to parse preset OpenVPN configuration: no endpoints")
             return []
         }
