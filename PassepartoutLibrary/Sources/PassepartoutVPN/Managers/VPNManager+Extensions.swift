@@ -65,10 +65,9 @@ extension VPNManager {
         if let newPassword {
             profile.account.password = newPassword
         }
-        let cfg = try vpnConfiguration(withProfile: profile)
 
         profileManager.activateProfile(profile)
-        await reconnect(cfg)
+        await reconnect(profile)
         return profile
     }
 
@@ -99,14 +98,13 @@ extension VPNManager {
 
         pp_log.info("Connecting to: \(profile.logDescription) @ \(newServer.logDescription)")
         profile.setProviderServer(newServer)
-        let cfg = try vpnConfiguration(withProfile: profile)
 
         profileManager.activateProfile(profile)
         guard !profileManager.isCurrentProfile(profileId) else {
             pp_log.debug("Active profile is current, will reconnect via observation")
             return profile
         }
-        await reconnect(cfg)
+        await reconnect(profile)
         return profile
     }
 
@@ -118,13 +116,12 @@ extension VPNManager {
 
         pp_log.info("Modifying active profile")
         block(&profile)
-        let cfg = try vpnConfiguration(withProfile: profile)
 
         profileManager.activateProfile(profile)
         guard !profileManager.isCurrentProfile(profile.id) else {
             pp_log.debug("Active profile is current, will reinstate via observation")
             return
         }
-        await reinstate(cfg)
+        await reinstate(profile)
     }
 }

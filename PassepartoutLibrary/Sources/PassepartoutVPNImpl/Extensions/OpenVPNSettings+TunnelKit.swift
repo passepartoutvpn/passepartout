@@ -30,7 +30,7 @@ import TunnelKitManager
 import TunnelKitOpenVPN
 
 extension Profile.OpenVPNSettings: TunnelKitConfigurationProviding {
-    func tunnelKitConfiguration(_ appGroup: String, parameters: VPNConfigurationParameters) throws -> VPNConfiguration {
+    func tunnelKitConfiguration(_ appGroup: String, parameters: VPNConfigurationParameters) throws -> TunnelKitVPNConfiguration {
         var customBuilder = configuration.builder()
 
         // tolerate widest range of certificates

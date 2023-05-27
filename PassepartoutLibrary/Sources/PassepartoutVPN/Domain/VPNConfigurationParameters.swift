@@ -25,9 +25,12 @@
 
 import Foundation
 import PassepartoutCore
+import PassepartoutProviders
 
 public struct VPNConfigurationParameters {
     public let profile: Profile
+
+    public let providerManager: ProviderManager
 
     public var title: String {
         profile.header.name
@@ -51,12 +54,14 @@ public struct VPNConfigurationParameters {
 
     init(
         _ profile: Profile,
+        providerManager: ProviderManager,
         preferences: VPNPreferences,
         passwordReference: Data?,
         withNetworkSettings: Bool,
         withCustomRules: Bool
     ) {
         self.profile = profile
+        self.providerManager = providerManager
         self.preferences = preferences
         self.passwordReference = passwordReference
         self.withNetworkSettings = withNetworkSettings
