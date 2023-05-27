@@ -85,7 +85,7 @@ let package = Package(
         .target(
             name: "PassepartoutCore",
             dependencies: [
-                .product(name: "GenericJSON", package: "generic-json-swift") // FIXME: arch, drop this
+                .product(name: "GenericJSON", package: "generic-json-swift")
             ]),
 
         // MARK: App extensions
