@@ -42,28 +42,28 @@ public protocol Logger {
 
     var logLevel: LoggerLevel { get set }
 
-    func logMessage(_ level: LoggerLevel, _ message: Any)
+    func logMessage(_ level: LoggerLevel, _ message: Any, _ file: String, _ function: String, _ line: Int)
 }
 
 extension Logger {
-    public func verbose(_ message: Any) {
-        logMessage(.verbose, message)
+    public func verbose(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.verbose, message, file, function, line)
     }
 
-    public func debug(_ message: Any) {
-        logMessage(.debug, message)
+    public func debug(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.debug, message, file, function, line)
     }
 
-    public func info(_ message: Any) {
-        logMessage(.info, message)
+    public func info(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.info, message, file, function, line)
     }
 
-    public func warning(_ message: Any) {
-        logMessage(.warning, message)
+    public func warning(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.warning, message, file, function, line)
     }
 
-    public func error(_ message: Any) {
-        logMessage(.error, message)
+    public func error(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        logMessage(.error, message, file, function, line)
     }
 }
 
@@ -76,7 +76,7 @@ final class DefaultLogger: Logger {
 
     var logLevel: LoggerLevel = .debug
 
-    func logMessage(_ level: LoggerLevel, _ message: Any) {
+    func logMessage(_ level: LoggerLevel, _ message: Any, _ file: String, _ function: String, _ line: Int) {
         guard level.rawValue >= logLevel.rawValue else {
             return
         }

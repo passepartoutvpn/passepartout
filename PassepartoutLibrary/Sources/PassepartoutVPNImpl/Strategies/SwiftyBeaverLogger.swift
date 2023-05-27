@@ -63,8 +63,8 @@ public final class SwiftyBeaverLogger: Logger {
         }
     }
 
-    public func logMessage(_ level: LoggerLevel, _ message: Any) {
-        SwiftyBeaver.custom(level: level.toSwiftyBeaver, message: message)
+    public func logMessage(_ level: LoggerLevel, _ message: Any, _ file: String, _ function: String, _ line: Int) {
+        SwiftyBeaver.custom(level: level.toSwiftyBeaver, message: message, file: file, function: function, line: line)
     }
 }
 
