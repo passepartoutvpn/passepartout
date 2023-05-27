@@ -46,10 +46,11 @@ extension Utils {
     }
 
     public static func logFetchNotFound(
+        _ query: String,
         _ file: String = #file,
         _ function: String = #function,
         _ line: Int = #line
     ) {
-        pp_log.debug("Not found", file, function, line)
+        pp_log.debug("Entity not found: (\(query))", file, function, line)
     }
 }

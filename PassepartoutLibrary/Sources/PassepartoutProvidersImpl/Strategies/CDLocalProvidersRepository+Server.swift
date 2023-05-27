@@ -94,7 +94,7 @@ extension CDLocalProvidersRepository: ServerRepository {
         ]
         do {
             guard let serverDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound()
+                Utils.logFetchNotFound("\(providerName), \(vpnProtocol), \(apiId)")
                 return nil
             }
             return ServerMapper.toModelWithPresets(serverDTO)
@@ -121,7 +121,7 @@ extension CDLocalProvidersRepository: ServerRepository {
         do {
             try Utils.randomizeFetchResults(request, in: context)
             guard let serverDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound()
+                Utils.logFetchNotFound("\(providerName), \(vpnProtocol), \(countryCode)")
                 return nil
             }
             return ServerMapper.toModelWithPresets(serverDTO)
@@ -148,7 +148,7 @@ extension CDLocalProvidersRepository: ServerRepository {
         do {
             try Utils.randomizeFetchResults(request, in: context)
             guard let serverDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound()
+                Utils.logFetchNotFound("\(providerName), \(vpnProtocol)")
                 return nil
             }
             return ServerMapper.toModelWithPresets(serverDTO)
@@ -171,7 +171,7 @@ extension CDLocalProvidersRepository: ServerRepository {
         ]
         do {
             guard let serverDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound()
+                Utils.logFetchNotFound(id)
                 return nil
             }
             return ServerMapper.toModelWithPresets(serverDTO)

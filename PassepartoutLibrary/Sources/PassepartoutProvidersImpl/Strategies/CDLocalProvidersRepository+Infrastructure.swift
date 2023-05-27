@@ -39,7 +39,7 @@ extension CDLocalProvidersRepository: InfrastructureRepository {
         ]
         do {
             guard let infrastructureDTO = try context.fetch(request).first else {
-                Utils.logFetchNotFound()
+                Utils.logFetchNotFound("\(name), \(vpnProtocol)")
                 return nil
             }
             return infrastructureDTO.defaults?.usernamePlaceholder
@@ -61,7 +61,7 @@ extension CDLocalProvidersRepository: InfrastructureRepository {
         do {
             let infrastructures = try context.fetch(request)
             guard !infrastructures.isEmpty else {
-                Utils.logFetchNotFound()
+                Utils.logFetchNotFound("\(name), \(vpnProtocol)")
                 return nil
             }
             let recent = infrastructures.first!

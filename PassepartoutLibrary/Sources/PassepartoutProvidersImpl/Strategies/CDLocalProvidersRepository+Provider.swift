@@ -62,7 +62,7 @@ extension CDLocalProvidersRepository: ProviderRepository {
         do {
             let providers = try context.fetch(request)
             guard !providers.isEmpty else {
-                Utils.logFetchNotFound()
+                Utils.logFetchNotFound(name)
                 return nil
             }
             let recent = providers.first!
