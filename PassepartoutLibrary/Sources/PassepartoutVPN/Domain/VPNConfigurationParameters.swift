@@ -25,7 +25,6 @@
 
 import Foundation
 import PassepartoutCore
-import TunnelKitManager
 
 public struct VPNConfigurationParameters {
     public let profile: Profile
