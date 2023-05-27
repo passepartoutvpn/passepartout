@@ -249,8 +249,8 @@ extension VPNManager {
         guard isHandled else {
             return
         }
-        guard profileManager.isCurrentProfileActive() else {
-            pp_log.info("Skipping VPN configuration, current profile is not active")
+        guard profileManager.isActiveProfile(newProfile.id) else {
+            pp_log.info("Skipping VPN reaction, current profile is not active")
             return
         }
         if shouldReconnect {
