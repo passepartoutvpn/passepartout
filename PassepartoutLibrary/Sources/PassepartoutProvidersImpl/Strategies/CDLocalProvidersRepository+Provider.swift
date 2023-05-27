@@ -45,7 +45,7 @@ extension CDLocalProvidersRepository: ProviderRepository {
             }
             return providers.compactMap(ProviderMapper.toModel)
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return []
         }
     }
@@ -62,13 +62,13 @@ extension CDLocalProvidersRepository: ProviderRepository {
         do {
             let providers = try context.fetch(request)
             guard !providers.isEmpty else {
-                Utils.logFetchNotFound(#file, #function, #line)
+                Utils.logFetchNotFound()
                 return nil
             }
             let recent = providers.first!
             return ProviderMapper.toModel(recent)
         } catch {
-            Utils.logFetchError(#file, #function, #line, error)
+            Utils.logFetchError(error)
             return nil
         }
     }
