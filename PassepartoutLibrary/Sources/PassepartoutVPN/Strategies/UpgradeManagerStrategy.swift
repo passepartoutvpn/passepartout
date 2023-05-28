@@ -1,5 +1,5 @@
 //
-//  UpgradeStrategy.swift
+//  UpgradeManagerStrategy.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/20/22.
@@ -26,7 +26,7 @@
 import Foundation
 import PassepartoutCore
 
-public protocol UpgradeStrategy {
+public protocol UpgradeManagerStrategy {
     func doMigrateStore(_ store: KeyValueStore, didMigrate: inout Bool)
 
     func migratedProfilesToV2() -> [Profile]

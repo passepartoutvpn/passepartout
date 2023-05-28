@@ -33,7 +33,7 @@ public final class UpgradeManager: ObservableObject {
 
     private let store: KeyValueStore
 
-    private let strategy: UpgradeStrategy
+    private let strategy: UpgradeManagerStrategy
 
     // MARK: State
 
@@ -41,7 +41,7 @@ public final class UpgradeManager: ObservableObject {
 
     public init(
         store: KeyValueStore,
-        strategy: UpgradeStrategy
+        strategy: UpgradeManagerStrategy
     ) {
         self.store = store
         self.strategy = strategy

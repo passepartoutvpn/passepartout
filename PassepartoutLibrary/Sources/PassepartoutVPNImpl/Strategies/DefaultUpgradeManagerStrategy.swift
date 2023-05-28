@@ -1,5 +1,5 @@
 //
-//  DefaultUpgradeStrategy.swift
+//  DefaultUpgradeManagerStrategy.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/20/22.
@@ -48,14 +48,14 @@ private enum UpgradeError: Error {
     case missingProviderName
 }
 
-public final class DefaultUpgradeStrategy: UpgradeStrategy {
+public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
     public init() {
     }
 }
 
 // MARK: Migrate old store
 
-extension DefaultUpgradeStrategy {
+extension DefaultUpgradeManagerStrategy {
     private enum LegacyStoreKey: String, KeyStoreLocation, CaseIterable {
         case activeProfileId
 
@@ -108,7 +108,7 @@ extension DefaultUpgradeStrategy {
 
 // MARK: Migrate to version 2
 
-extension DefaultUpgradeStrategy {
+extension DefaultUpgradeManagerStrategy {
     private var appGroup: String {
         "group.com.algoritmico.Passepartout"
     }
