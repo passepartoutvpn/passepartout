@@ -242,11 +242,9 @@ extension DefaultUpgradeStrategy {
             throw MigrationError.missingEndpointProtocols
         }
         let eps = rawEps.compactMap(EndpointProtocol.init(rawValue:))
-        var remotes: [String] = []
-        eps.forEach {
-            remotes.append([hostname, $0.description].joined(separator: ":"))
+        ovpn["remotes"] = eps.map {
+            [hostname, $0.description].joined(separator: ":")
         }
-        ovpn["remotes"] = remotes
         ovpn["authUserPass"] = authUserPass.contains(oldUUIDString)
         let cfg = try JSON(ovpn).decode(OpenVPN.Configuration.self)
 
