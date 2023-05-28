@@ -38,7 +38,6 @@ final class ProvidersTests: XCTestCase {
     private var cancellables: Set<AnyCancellable> = []
 
     override func setUp() {
-        let model = NSManagedObjectModel.mergedModel(from: [.module])!
         persistence = ProvidersPersistence(withName: "ProvidersTests", cloudKit: false, author: nil)
 
         let remoteStrategy = APIRemoteProvidersStrategy(

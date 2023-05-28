@@ -25,8 +25,6 @@
 
 import Foundation
 import PassepartoutCore
-import TunnelKitOpenVPN
-import TunnelKitWireGuard
 
 public protocol ProfileSubtype {
     var vpnProtocols: [VPNProtocolType] { get }
@@ -59,24 +57,6 @@ public struct Profile: Identifiable, Codable, Equatable {
         currentVPNProtocol = .openVPN
     }
 
-    init(_ id: UUID = UUID(), name: String, configuration: OpenVPN.Configuration) {
-        let header = Header(
-            uuid: id,
-            name: name,
-            providerName: nil
-        )
-        self.init(header, configuration: configuration)
-    }
-
-    init(_ id: UUID = UUID(), name: String, configuration: WireGuard.Configuration) {
-        let header = Header(
-            uuid: id,
-            name: name,
-            providerName: nil
-        )
-        self.init(header, configuration: configuration)
-    }
-
     init(_ id: UUID = UUID(), name: String, provider: Profile.Provider) {
         let header = Header(
             uuid: id,
@@ -84,20 +64,6 @@ public struct Profile: Identifiable, Codable, Equatable {
             providerName: provider.name
         )
         self.init(header, provider: provider)
-    }
-
-    public init(_ header: Header, configuration: OpenVPN.Configuration) {
-        self.header = header
-        currentVPNProtocol = .openVPN
-        host = Host()
-        host?.ovpnSettings = OpenVPNSettings(configuration: configuration)
-    }
-
-    public init(_ header: Header, configuration: WireGuard.Configuration) {
-        self.header = header
-        currentVPNProtocol = .wireGuard
-        host = Host()
-        host?.wgSettings = WireGuardSettings(configuration: configuration)
     }
 
     public init(_ header: Header, provider: Profile.Provider) {

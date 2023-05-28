@@ -84,16 +84,28 @@ public final class VPNManager: ObservableObject {
         currentState = ObservableVPNState()
     }
 
-    func reinstate(_ configuration: VPNConfiguration) async {
+    func reinstate(_ profile: Profile) async {
         pp_log.info("Reinstating VPN")
         clearLastError()
-        await strategy.reinstate(configuration: configuration)
+        do {
+            let parameters = try vpnConfigurationParameters(withProfile: profile)
+            await strategy.reinstate(parameters)
+        } catch {
+            pp_log.error("Unable to build configuration: \(error)")
+            configurationError.send((profile, error))
+        }
     }
 
-    func reconnect(_ configuration: VPNConfiguration) async {
+    func reconnect(_ profile: Profile) async {
         pp_log.info("Reconnecting VPN (with new configuration)")
         clearLastError()
-        await strategy.connect(configuration: configuration)
+        do {
+            let parameters = try vpnConfigurationParameters(withProfile: profile)
+            await strategy.connect(parameters)
+        } catch {
+            pp_log.error("Unable to build configuration: \(error)")
+            configurationError.send((profile, error))
+        }
     }
 
     public func reconnect() async {
@@ -139,7 +151,11 @@ extension VPNManager {
     }
 
     private func observeStrategy() {
-        strategy.observe(into: MutableObservableVPNState(currentState))
+        strategy.observe(into: MutableObservableVPNState(currentState)) { profile, error in
+
+            // UI is certainly interested in configuration errors
+            self.configurationError.send((profile, error))
+        }
     }
 
     private func observeProfileManager() {
@@ -233,72 +249,51 @@ extension VPNManager {
         guard isHandled else {
             return
         }
-        guard let cfg = vpnConfigurationWithCurrentProfile() else {
+        guard profileManager.isActiveProfile(newProfile.id) else {
+            pp_log.info("Skipping VPN reaction, current profile is not active")
             return
         }
         if shouldReconnect {
-            await reconnect(cfg)
+            await reconnect(newProfile)
         } else {
-            await reinstate(cfg)
+            await reinstate(newProfile)
         }
     }
 }
 
 // MARK: Configuration
 
-extension VPNManager {
-    func vpnConfigurationWithCurrentProfile() -> VPNConfiguration? {
-        do {
-            guard profileManager.isCurrentProfileActive() else {
-                pp_log.info("Skipping VPN configuration, current profile is not active")
-                return nil
+private extension VPNManager {
+    func vpnConfigurationParameters(withProfile profile: Profile) throws -> VPNConfigurationParameters {
+        if profile.requiresCredentials {
+            guard !profile.account.isEmpty else {
+                throw PassepartoutError.missingAccount
             }
-            return try vpnConfiguration(withProfile: profileManager.currentProfile.value)
-        } catch {
-            return nil
         }
-    }
 
-    func vpnConfiguration(withProfile profile: Profile) throws -> VPNConfiguration {
-        do {
-            if profile.requiresCredentials {
-                guard !profile.account.isEmpty else {
-                    throw PassepartoutError.missingAccount
-                }
+        // specific provider customizations
+        var newPassword: String?
+        if let providerName = profile.providerName {
+            switch providerName {
+            case .mullvad:
+                newPassword = "m"
+
+            default:
+                break
             }
-
-            // specific provider customizations
-            var newPassword: String?
-            if let providerName = profile.providerName {
-                switch providerName {
-                case .mullvad:
-                    newPassword = "m"
-
-                default:
-                    break
-                }
-            }
-
-            // IMPORTANT: must commit password to keychain (tunnel needs a password reference)
-            profileManager.savePassword(forProfile: profile, newPassword: newPassword)
-
-            let parameters = VPNConfigurationParameters(
-                profile,
-                preferences: vpnPreferences,
-                passwordReference: profileManager.passwordReference(forProfile: profile),
-                withNetworkSettings: isNetworkSettingsSupported(),
-                withCustomRules: isOnDemandRulesSupported()
-            )
-
-            return try strategy.vpnConfiguration(parameters, providerManager: providerManager)
-        } catch {
-            pp_log.error("Unable to build VPNConfiguration: \(error)")
-
-            // UI is certainly interested in configuration errors
-            configurationError.send((profile, error))
-
-            throw error
         }
+
+        // IMPORTANT: must commit password to keychain (tunnel needs a password reference)
+        profileManager.savePassword(forProfile: profile, newPassword: newPassword)
+
+        return VPNConfigurationParameters(
+            profile,
+            providerManager: providerManager,
+            preferences: vpnPreferences,
+            passwordReference: profileManager.passwordReference(forProfile: profile),
+            withNetworkSettings: isNetworkSettingsSupported(),
+            withCustomRules: isOnDemandRulesSupported()
+        )
     }
 }
 

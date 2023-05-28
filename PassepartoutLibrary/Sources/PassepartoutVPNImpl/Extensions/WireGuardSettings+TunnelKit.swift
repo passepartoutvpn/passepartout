@@ -30,7 +30,7 @@ import TunnelKitManager
 import TunnelKitWireGuard
 
 extension Profile.WireGuardSettings: TunnelKitConfigurationProviding {
-    func tunnelKitConfiguration(_ appGroup: String, parameters: VPNConfigurationParameters) throws -> VPNConfiguration {
+    func tunnelKitConfiguration(_ appGroup: String, parameters: VPNConfigurationParameters) throws -> TunnelKitVPNConfiguration {
         var customBuilder = configuration.builder()
 
         // network settings
