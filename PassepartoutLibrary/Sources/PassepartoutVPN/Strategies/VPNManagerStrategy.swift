@@ -29,11 +29,11 @@ import PassepartoutCore
 import PassepartoutProviders
 
 public protocol VPNManagerStrategy {
-    func observe(into state: MutableObservableVPNState)
+    func observe(into state: MutableObservableVPNState, onConfigurationError: @escaping (Profile, Error) -> Void)
 
-    func reinstate(configuration: VPNConfiguration) async
+    func reinstate(_ parameters: VPNConfigurationParameters) async
 
-    func connect(configuration: VPNConfiguration) async
+    func connect(_ parameters: VPNConfigurationParameters) async
 
     func reconnect() async
 
@@ -44,9 +44,4 @@ public protocol VPNManagerStrategy {
     func serverConfiguration(forProtocol vpnProtocol: VPNProtocolType) -> Any?
 
     func debugLogURL(forProtocol vpnProtocol: VPNProtocolType) -> URL?
-
-    func vpnConfiguration(
-        _ parameters: VPNConfigurationParameters,
-        providerManager: ProviderManager
-    ) throws -> VPNConfiguration
 }

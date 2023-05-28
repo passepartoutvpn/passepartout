@@ -60,7 +60,7 @@ struct PresetMapper: DTOMapper, ModelMapper {
               let vpnProtocol = VPNProtocolType(rawValue: vpnProtocolString),
               let vpnConfiguration = dto.decodedConfiguration else {
 
-            Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+            Utils.assertCoreDataDecodingFailed()
             return nil
         }
 

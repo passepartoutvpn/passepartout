@@ -33,8 +33,10 @@ import TunnelKitCore
 import TunnelKitManager
 import TunnelKitOpenVPNCore
 
+typealias TunnelKitVPNConfiguration = (neConfiguration: NetworkExtensionConfiguration, neExtra: NetworkExtensionExtra)
+
 protocol TunnelKitConfigurationProviding {
-    func tunnelKitConfiguration(_ appGroup: String, parameters: VPNConfigurationParameters) throws -> VPNConfiguration
+    func tunnelKitConfiguration(_ appGroup: String, parameters: VPNConfigurationParameters) throws -> TunnelKitVPNConfiguration
 }
 
 public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy where VPNType.Configuration == NetworkExtensionConfiguration, VPNType.Extra == NetworkExtensionExtra {
@@ -49,8 +51,6 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
         }
     }
 
-    private let reconnectionSeconds = 2
-
     private let appGroup: String
 
     private let tunnelBundleIdentifier: (VPNProtocolType) -> String
@@ -59,11 +59,15 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
 
     private let vpn: VPNType
 
+    private let reconnectionInterval: TimeInterval
+
     private let dataCountInterval: TimeInterval
 
     // MARK: State
 
     private var currentState: MutableObservableVPNState?
+
+    private var onConfigurationError: ((Profile, Error) -> Void)?
 
     private let vpnState = CurrentValueSubject<AtomicState, Never>(.init())
 
@@ -79,6 +83,7 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
         appGroup: String,
         tunnelBundleIdentifier: @escaping (VPNProtocolType) -> String,
         vpn: VPNType,
+        reconnectionInterval: TimeInterval = 2.0,
         dataCountInterval: TimeInterval = 3.0
     ) {
         self.appGroup = appGroup
@@ -88,6 +93,7 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
         }
         self.defaults = defaults
         self.vpn = vpn
+        self.reconnectionInterval = reconnectionInterval
         self.dataCountInterval = dataCountInterval
 
         registerNotification(withName: VPNNotification.didReinstall) {
@@ -115,8 +121,9 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
 // MARK: Actions
 
 extension TunnelKitVPNManagerStrategy {
-    public func observe(into state: MutableObservableVPNState) {
+    public func observe(into state: MutableObservableVPNState, onConfigurationError: @escaping (Profile, Error) -> Void) {
         currentState = state
+        self.onConfigurationError = onConfigurationError
 
         // use this to drop redundant NE notifications
         vpnState
@@ -128,7 +135,10 @@ extension TunnelKitVPNManagerStrategy {
             }.store(in: &cancellables)
     }
 
-    public func reinstate(configuration: VPNConfiguration) async {
+    public func reinstate(_ parameters: VPNConfigurationParameters) async {
+        guard let configuration = try? vpnConfiguration(withParameters: parameters) else {
+            return
+        }
         guard let vpnType = configuration.neConfiguration as? VPNProtocolProviding else {
             fatalError("Configuration must implement VPNProtocolProviding")
         }
@@ -148,7 +158,10 @@ extension TunnelKitVPNManagerStrategy {
         }
     }
 
-    public func connect(configuration: VPNConfiguration) async {
+    public func connect(_ parameters: VPNConfigurationParameters) async {
+        guard let configuration = try? vpnConfiguration(withParameters: parameters) else {
+            return
+        }
         guard let vpnType = configuration.neConfiguration as? VPNProtocolProviding else {
             fatalError("Configuration must implement VPNProtocolProviding")
         }
@@ -162,7 +175,7 @@ extension TunnelKitVPNManagerStrategy {
                 bundleIdentifier,
                 configuration: configuration.neConfiguration,
                 extra: configuration.neExtra,
-                after: .seconds(reconnectionSeconds)
+                after: reconnectionInterval.dispatchTimeInterval
             )
         } catch {
             pp_log.error("Unable to connect: \(error)")
@@ -171,7 +184,7 @@ extension TunnelKitVPNManagerStrategy {
 
     public func reconnect() async {
         try? await vpn.reconnect(
-            after: .seconds(reconnectionSeconds)
+            after: reconnectionInterval.dispatchTimeInterval
         )
     }
 
@@ -192,8 +205,8 @@ extension TunnelKitVPNManagerStrategy {
 
 // MARK: Notifications
 
-extension TunnelKitVPNManagerStrategy {
-    private func onVPNReinstall(_ notification: Notification) {
+private extension TunnelKitVPNManagerStrategy {
+    func onVPNReinstall(_ notification: Notification) {
         guard isRelevantNotification(notification) else {
             return
         }
@@ -204,7 +217,7 @@ extension TunnelKitVPNManagerStrategy {
         ))
     }
 
-    private func onVPNStatus(_ notification: Notification) {
+    func onVPNStatus(_ notification: Notification) {
 
         // assume first notified identifier to be the relevant one
         // in order to restore VPN status on app launch
@@ -239,7 +252,7 @@ extension TunnelKitVPNManagerStrategy {
         currentState?.lastError = error
     }
 
-    private func onVPNFail(_ notification: Notification) {
+    func onVPNFail(_ notification: Notification) {
         vpnState.send(AtomicState(
             isEnabled: notification.vpnIsEnabled,
             vpnStatus: vpnState.value.vpnStatus
@@ -247,7 +260,7 @@ extension TunnelKitVPNManagerStrategy {
         currentState?.lastError = notification.vpnError
     }
 
-    private func isRelevantNotification(_ notification: Notification) -> Bool {
+    func isRelevantNotification(_ notification: Notification) -> Bool {
         guard let notificationTunnelIdentifier = notification.vpnBundleIdentifier else {
             return false
         }
@@ -260,7 +273,7 @@ extension TunnelKitVPNManagerStrategy {
 
     // MARK: Data count
 
-    private func onDataCount(_: Date) {
+    func onDataCount(_: Date) {
         switch vpnState.value.vpnStatus {
         case .connected:
             guard let currentDataCount = currentDataCount else {
@@ -273,7 +286,7 @@ extension TunnelKitVPNManagerStrategy {
         }
     }
 
-    private func startCountingData() {
+    func startCountingData() {
         guard dataCountTimer == nil else {
             return
         }
@@ -284,11 +297,50 @@ extension TunnelKitVPNManagerStrategy {
             }
     }
 
-    private func stopCountingData() {
+    func stopCountingData() {
         dataCountTimer?.cancel()
         dataCountTimer = nil
 
         currentState?.dataCount = nil
+    }
+}
+
+// MARK: Configuration
+
+private extension TunnelKitVPNManagerStrategy {
+    func vpnConfiguration(withParameters parameters: VPNConfigurationParameters) throws -> TunnelKitVPNConfiguration {
+        let profile = parameters.profile
+        do {
+            switch profile.currentVPNProtocol {
+            case .openVPN:
+                let settings: Profile.OpenVPNSettings
+                if profile.isProvider {
+                    settings = try profile.providerOpenVPNSettings(withManager: parameters.providerManager)
+                } else {
+                    guard let hostSettings = profile.hostOpenVPNSettings else {
+                        fatalError("Profile currentVPNProtocol is OpenVPN, but host has no OpenVPN settings")
+                    }
+                    settings = hostSettings
+                }
+                return try settings.tunnelKitConfiguration(appGroup, parameters: parameters)
+
+            case .wireGuard:
+                let settings: Profile.WireGuardSettings
+                if profile.isProvider {
+                    settings = try profile.providerWireGuardSettings(withManager: parameters.providerManager)
+                } else {
+                    guard let hostSettings = profile.hostWireGuardSettings else {
+                        fatalError("Profile currentVPNProtocol is WireGuard, but host has no WireGuard settings")
+                    }
+                    settings = hostSettings
+                }
+                return try settings.tunnelKitConfiguration(appGroup, parameters: parameters)
+            }
+        } catch {
+            pp_log.error("Unable to build TunnelKitVPNConfiguration: \(error)")
+            onConfigurationError?(profile, error)
+            throw error
+        }
     }
 }
 
@@ -314,10 +366,12 @@ extension TunnelKitVPNManagerStrategy {
             return defaults.wireGuardURLForDebugLog(appGroup: appGroup)
         }
     }
+}
 
-    // MARK: Callbacks
+// MARK: Callbacks
 
-    private func lastError(withBundleIdentifier bundleIdentifier: String?) -> Error? {
+private extension TunnelKitVPNManagerStrategy {
+    func lastError(withBundleIdentifier bundleIdentifier: String?) -> Error? {
         switch bundleIdentifier {
         case tunnelBundleIdentifier(.openVPN):
             return defaults.openVPNLastError
@@ -330,46 +384,13 @@ extension TunnelKitVPNManagerStrategy {
         }
     }
 
-    private var currentDataCount: DataCount? {
+    var currentDataCount: DataCount? {
         switch currentBundleIdentifier {
         case tunnelBundleIdentifier(.openVPN):
             return defaults.openVPNDataCount
 
         default:
             return nil
-        }
-    }
-}
-
-// MARK: Configuration
-
-extension TunnelKitVPNManagerStrategy {
-    public func vpnConfiguration(_ parameters: VPNConfigurationParameters, providerManager: ProviderManager) throws -> VPNConfiguration {
-        let profile = parameters.profile
-        switch profile.currentVPNProtocol {
-        case .openVPN:
-            let settings: Profile.OpenVPNSettings
-            if profile.isProvider {
-                settings = try profile.providerOpenVPNSettings(withManager: providerManager)
-            } else {
-                guard let hostSettings = profile.hostOpenVPNSettings else {
-                    fatalError("Profile currentVPNProtocol is OpenVPN, but host has no OpenVPN settings")
-                }
-                settings = hostSettings
-            }
-            return try settings.tunnelKitConfiguration(appGroup, parameters: parameters)
-
-        case .wireGuard:
-            let settings: Profile.WireGuardSettings
-            if profile.isProvider {
-                settings = try profile.providerWireGuardSettings(withManager: providerManager)
-            } else {
-                guard let hostSettings = profile.hostWireGuardSettings else {
-                    fatalError("Profile currentVPNProtocol is WireGuard, but host has no WireGuard settings")
-                }
-                settings = hostSettings
-            }
-            return try settings.tunnelKitConfiguration(appGroup, parameters: parameters)
         }
     }
 }

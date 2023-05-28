@@ -52,3 +52,9 @@ extension TimeInterval {
         return str
     }
 }
+
+extension TimeInterval {
+    public var dispatchTimeInterval: DispatchTimeInterval {
+        .nanoseconds(Int(self * Double(NSEC_PER_SEC)))
+    }
+}

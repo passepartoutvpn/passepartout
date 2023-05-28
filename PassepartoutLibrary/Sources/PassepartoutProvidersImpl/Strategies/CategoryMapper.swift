@@ -64,7 +64,7 @@ struct CategoryMapper: DTOMapper, ModelMapper {
               let name = dto.name,
               let locations = dto.locations else {
 
-            Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+            Utils.assertCoreDataDecodingFailed()
             return nil
         }
 

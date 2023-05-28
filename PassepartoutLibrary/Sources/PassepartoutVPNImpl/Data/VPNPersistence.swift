@@ -1,5 +1,5 @@
 //
-//  Domain+Logging.swift
+//  VPNPersistence.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
@@ -23,10 +23,35 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CoreData
 import Foundation
+import PassepartoutCore
+import PassepartoutVPN
 
-extension ProviderServer {
-    public var logDescription: String {
-        "{'\(categoryName)', \(countryCode), '\(apiId)', \(id)}"
+public final class VPNPersistence {
+    private static let dataModel: NSManagedObjectModel = {
+        guard let model = NSManagedObjectModel.mergedModel(from: [.module]) else {
+            fatalError("Could not load PassepartoutProfiles model")
+        }
+        return model
+    }()
+
+    private let store: CoreDataPersistentStore
+
+    public var containerURLs: [URL]? {
+        store.containerURLs
+    }
+
+    public init(withName containerName: String, cloudKit: Bool, author: String?) {
+        store = .init(
+            withName: containerName,
+            model: Self.dataModel,
+            cloudKit: cloudKit,
+            author: author
+        )
+    }
+
+    public func profileRepository() -> ProfileRepository {
+        CDProfileRepository(store.context)
     }
 }

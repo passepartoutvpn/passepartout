@@ -25,23 +25,32 @@
 
 import Foundation
 
-// XXX: these should be aliases like #define to print original caller line
 extension Utils {
     public static func assertCoreDataDecodingFailed(
-        _ file: String,
-        _ function: String,
-        _ line: Int,
-        _ message: String? = nil
+        _ message: String? = nil,
+        _ file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line
     ) {
-//        assertionFailure(message ?? "Cannot decode entity required fields - \(file):\(function):\(line)")
-        pp_log.warning(message ?? "Cannot decode entity required fields - \(file):\(function):\(line)")
+//        assertionFailure(message ?? "Cannot decode entity required fields", file, function, line)
+        pp_log.warning(message ?? "Cannot decode entity required fields", file, function, line)
     }
 
-    public static func logFetchError(_ file: String, _ function: String, _ line: Int, _ error: Error) {
-        pp_log.error("Unable to fetch: \(error) - \(file):\(function):\(line)")
+    public static func logFetchError(
+        _ error: Error,
+        _ file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line
+    ) {
+        pp_log.error("Unable to fetch: \(error)", file, function, line)
     }
 
-    public static func logFetchNotFound(_ file: String, _ function: String, _ line: Int) {
-        pp_log.debug("Not found - \(file):\(function):\(line)")
+    public static func logFetchNotFound(
+        _ query: String,
+        _ file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line
+    ) {
+        pp_log.debug("Entity not found: (\(query))", file, function, line)
     }
 }

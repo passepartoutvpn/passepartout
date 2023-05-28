@@ -39,4 +39,20 @@ extension Profile {
             self.configuration = configuration
         }
     }
+
+    init(_ id: UUID = UUID(), name: String, configuration: WireGuard.Configuration) {
+        let header = Header(
+            uuid: id,
+            name: name,
+            providerName: nil
+        )
+        self.init(header, configuration: configuration)
+    }
+
+    public init(_ header: Header, configuration: WireGuard.Configuration) {
+        self.header = header
+        currentVPNProtocol = .wireGuard
+        host = Host()
+        host?.wgSettings = WireGuardSettings(configuration: configuration)
+    }
 }

@@ -57,7 +57,7 @@ struct ProviderMapper: DTOMapper, ModelMapper {
         guard let name = dto.name,
               let fullName = dto.fullName else {
 
-            Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+            Utils.assertCoreDataDecodingFailed()
             return nil
         }
 

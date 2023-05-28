@@ -58,7 +58,7 @@ struct LocationMapper: DTOMapper, ModelMapper {
               let categoryName = dto.category?.name,
               let countryCode = dto.countryCode else {
 
-            Utils.assertCoreDataDecodingFailed(#file, #function, #line)
+            Utils.assertCoreDataDecodingFailed()
             return nil
         }
 

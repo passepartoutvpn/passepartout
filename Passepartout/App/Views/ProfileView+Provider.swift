@@ -148,7 +148,7 @@ extension ProfileView {
         private func refreshInfrastructure() {
             isRefreshingInfrastructure = true
             Task { @MainActor in
-                try await providerManager.fetchRemoteProviderPublisher(forProfile: profile).async()
+                try? await providerManager.fetchRemoteProviderPublisher(forProfile: profile).async()
                 isRefreshingInfrastructure = false
             }
         }

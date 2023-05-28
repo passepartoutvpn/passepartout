@@ -1,5 +1,5 @@
 //
-//  Persistence.swift
+//  Domain+Loggable.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 4/7/22.
@@ -23,30 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CoreData
 import Foundation
 import PassepartoutCore
-import PassepartoutVPN
 
-extension PassepartoutPersistence {
-    private static let profilesDataModel: NSManagedObjectModel = {
-        guard let model = NSManagedObjectModel.mergedModel(from: [.module]) else {
-            fatalError("Could not load PassepartoutProfiles model")
-        }
-        return model
-    }()
-
-    public static func profilesStore(withName containerName: String, cloudKit: Bool, author: String?) -> CoreDataPersistentStore {
-        .init(
-            withName: containerName,
-            model: profilesDataModel,
-            cloudKit: cloudKit,
-            author: author
-        )
-    }
-}
-extension PassepartoutPersistence {
-    public static func profileRepository(_ store: CoreDataPersistentStore) -> ProfileRepository {
-        CDProfileRepository(store.context)
+extension ProviderServer: Loggable {
+    public var logDescription: String {
+        "{'\(categoryName)', \(countryCode), '\(apiId)', \(id)}"
     }
 }
