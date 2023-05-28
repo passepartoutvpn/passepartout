@@ -28,18 +28,18 @@ import TunnelKitCore
 
 extension Endpoint: Identifiable {
     public var id: String {
-        "\(address):\(proto.port):\(proto.socketType.rawValue)"
+        [address, proto.port.description, proto.socketType.rawValue].joined(separator: ":")
     }
 }
 
 extension IPv4Settings.Route: Identifiable {
     public var id: String {
-        "\(destination):\(mask):\(gateway ?? "*")"
+        [destination, mask, gateway ?? "*"].joined(separator: ":")
     }
 }
 
 extension IPv6Settings.Route: Identifiable {
     public var id: String {
-        "\(destination):\(prefixLength):\(gateway ?? "*")"
+        [destination, prefixLength.description, gateway ?? "*"].joined(separator: ":")
     }
 }

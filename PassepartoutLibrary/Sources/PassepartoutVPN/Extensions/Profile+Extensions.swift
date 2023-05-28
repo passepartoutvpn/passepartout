@@ -84,7 +84,7 @@ extension Profile.Header {
             }
             suffix = leadingUUID.lowercased()
         }
-        let newName = "\(name).\(suffix)"
+        let newName = [name, suffix].joined(separator: ".")
         return renamed(to: newName)
     }
 }

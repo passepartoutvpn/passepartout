@@ -43,6 +43,6 @@ public protocol KeyValueStore {
 
 extension KeyStoreDomainLocation {
     public var key: String {
-        "\(domain).\(rawValue)"
+        [domain, rawValue].joined(separator: ".")
     }
 }
