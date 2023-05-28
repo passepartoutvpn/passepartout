@@ -115,8 +115,11 @@ public final class GenericWebServices<ErrorType: GenericWebServicesError> {
 
     private func url(forEndpoint endpoint: GenericWebEndpoint) -> URL {
         guard let version = version else {
-            return root.appendingPathComponent(endpoint.path)
+            return root
+                .appendingPathComponent(endpoint.path)
         }
-        return root.appendingPathComponent("\(version)/\(endpoint.path)")
+        return root
+            .appendingPathComponent(version)
+            .appendingPathComponent(endpoint.path)
     }
 }

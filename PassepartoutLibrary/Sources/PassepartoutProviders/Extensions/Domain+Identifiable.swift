@@ -31,19 +31,19 @@ import PassepartoutCore
 
 extension ProviderCategory: Identifiable {
     public var id: String {
-        "\(providerMetadata.name):\(name)"
+        [providerMetadata.name, name].joined(separator: ":")
     }
 }
 
 extension ProviderLocation: Identifiable {
     public var id: String {
-        "\(providerMetadata.name):\(categoryName):\(countryCode)"
+        [providerMetadata.name, categoryName, countryCode].joined(separator: ":")
     }
 }
 
 extension ProviderServer: Identifiable {
     public var locationId: String {
-        "\(providerMetadata.name):\(categoryName):\(countryCode)"
+        [providerMetadata.name, categoryName, countryCode].joined(separator: ":")
     }
 
     public func location(withVPNProtocol vpnProtocol: VPNProtocolType) -> ProviderLocation {
@@ -57,7 +57,7 @@ extension ProviderServer: Identifiable {
     }
 
     public static func id(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, apiId: String) -> String? {
-        let idSource = "\(providerName):\(vpnProtocol.rawValue):\(apiId)"
+        let idSource = [providerName, vpnProtocol.rawValue, apiId].joined(separator: ":")
         guard let data = idSource.data(using: .utf8) else {
             return nil
         }

@@ -57,7 +57,11 @@ enum Unlocalized {
 
     enum Keychain {
         static func passwordEntry(_ profile: Profile) -> String {
-            "\(profile.id.uuidString):\(profile.currentVPNProtocol.keychainEntry):\(profile.account.username)"
+            [
+                profile.id.uuidString,
+                profile.currentVPNProtocol.keychainEntry,
+                profile.account.username
+            ].joined(separator: ":")
         }
 
         static func passwordLabel(_ profile: Profile) -> String {
