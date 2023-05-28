@@ -148,7 +148,9 @@ extension OrganizerView {
         }
 
         var body: some View {
-            reconnectButton
+            if profileManager.isActiveProfile(header.id) {
+                reconnectButton
+            }
             duplicateButton
             deleteButton
         }
