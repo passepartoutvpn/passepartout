@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import PassepartoutCore
 import PassepartoutVPN
 import TunnelKitOpenVPN
 import TunnelKitWireGuard
@@ -43,7 +44,9 @@ extension ProfileManager {
                 let wg = try WireGuard.Configuration(wgQuickConfig: contents)
                 return Profile(header, configuration: wg)
             } catch WireGuard.ConfigurationError.invalidLine {
-                throw ovpnError
+                throw Passepartout.ProfileError.importFailure(error: ovpnError)
+            } catch let wgError {
+                throw Passepartout.ProfileError.importFailure(error: wgError)
             }
         }
     }

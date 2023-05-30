@@ -2,7 +2,7 @@
 //  Errors.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/21/22.
+//  Created by Davide De Rosa on 5/30/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,14 +26,24 @@
 import Foundation
 import PassepartoutCore
 
-extension PassepartoutError {
-    public static let missingProfile = Self("missingProfile")
+extension Passepartout {
+    public enum ProfileError: Error {
+        case importFailure(error: Error)
 
-    public static let missingAccount = Self("missingAccount")
+        case notFound(profileId: UUID)
 
-    public static let missingProviderServer = Self("missingProviderServer")
+        case failedToFetchProvider(profileId: UUID, error: Error)
+    }
 
-    public static let missingProviderPreset = Self("missingProviderPreset")
+    public enum VPNError: Error {
+        case badConfiguration(profile: Profile, error: Error)
+
+        case notProvider(profile: Profile)
+
+        case providerServerNotFound(profile: Profile)
+
+        case providerPresetNotFound(profile: Profile)
+
+        case missingAccount(profile: Profile)
+    }
 }
-
-public typealias VPNConfigurationError = (profile: Profile, error: Error)

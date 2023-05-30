@@ -100,7 +100,7 @@ extension OpenVPN.ConfigurationBuilder {
         }
         guard !remotes.isEmpty else {
             pp_log.warning("Excluding hostname but server has no ipAddresses either")
-            throw PassepartoutError.missingProviderServer
+            throw Passepartout.ProviderError.emptyEndpoints(server: server)
         }
 
         self.remotes = remotes

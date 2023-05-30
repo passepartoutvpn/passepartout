@@ -60,7 +60,7 @@ public final class VPNManager: ObservableObject {
         }
     }
 
-    public let configurationError = PassthroughSubject<VPNConfigurationError, Never>()
+    public let configurationError = PassthroughSubject<Passepartout.VPNError, Never>()
 
     // MARK: Internals
 
@@ -92,7 +92,7 @@ public final class VPNManager: ObservableObject {
             await strategy.reinstate(parameters)
         } catch {
             pp_log.error("Unable to build configuration: \(error)")
-            configurationError.send((profile, error))
+            configurationError.send(.badConfiguration(profile: profile, error: error))
         }
     }
 
@@ -104,7 +104,7 @@ public final class VPNManager: ObservableObject {
             await strategy.connect(parameters)
         } catch {
             pp_log.error("Unable to build configuration: \(error)")
-            configurationError.send((profile, error))
+            configurationError.send(.badConfiguration(profile: profile, error: error))
         }
     }
 
@@ -154,7 +154,7 @@ extension VPNManager {
         strategy.observe(into: MutableObservableVPNState(currentState)) { profile, error in
 
             // UI is certainly interested in configuration errors
-            self.configurationError.send((profile, error))
+            self.configurationError.send(.badConfiguration(profile: profile, error: error))
         }
     }
 
@@ -267,7 +267,7 @@ private extension VPNManager {
     func vpnConfigurationParameters(withProfile profile: Profile) throws -> VPNConfigurationParameters {
         if profile.requiresCredentials {
             guard !profile.account.isEmpty else {
-                throw PassepartoutError.missingAccount
+                throw Passepartout.VPNError.missingAccount(profile: profile)
             }
         }
 

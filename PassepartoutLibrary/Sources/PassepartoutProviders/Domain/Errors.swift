@@ -1,8 +1,8 @@
 //
-//  Passepartout.swift
+//  Errors.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/12/18.
+//  Created by Davide De Rosa on 5/30/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,13 +24,16 @@
 //
 
 import Foundation
+import PassepartoutCore
 
-// FIXME: arch, global variables here are not extensible, use dependency injection instead
-public class Passepartout {
-    public static let shared = Passepartout()
+extension Passepartout {
+    public enum ProviderError: Error {
+        case importFailure(error: Error)
 
-    private init() {
+        case serverNotFound(serverId: String)
+
+        case emptyEndpoints(server: ProviderServer)
+
+        case presetNotFound(server: ProviderServer, presetId: String)
     }
-
-    public var logger: Logger = DefaultLogger()
 }
