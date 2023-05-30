@@ -28,7 +28,7 @@ import PassepartoutCore
 
 extension Passepartout {
     public enum ProviderError: Error {
-        case importFailure(error: Error)
+        case fetchFailure(error: Error)
 
         case serverNotFound(serverId: String)
 
