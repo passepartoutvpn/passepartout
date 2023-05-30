@@ -25,6 +25,7 @@
 
 import Foundation
 import PassepartoutCore
+import PassepartoutProviders
 
 extension Passepartout {
     public enum ProfileError: Error {
@@ -45,5 +46,7 @@ extension Passepartout {
         case providerPresetNotFound(profile: Profile)
 
         case missingAccount(profile: Profile)
+
+        case emptyEndpoints(server: ProviderServer)
     }
 }

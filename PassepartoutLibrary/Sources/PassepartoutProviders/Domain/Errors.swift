@@ -32,8 +32,6 @@ extension Passepartout {
 
         case serverNotFound(serverId: String)
 
-        case emptyEndpoints(server: ProviderServer)
-
         case presetNotFound(server: ProviderServer, presetId: String)
     }
 }
