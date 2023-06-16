@@ -67,8 +67,6 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
 
     private var currentState: MutableObservableVPNState?
 
-    private var onConfigurationError: ((Profile, Error) -> Void)?
-
     private let vpnState = CurrentValueSubject<AtomicState, Never>(.init())
 
     private var dataCountTimer: AnyCancellable?
@@ -121,9 +119,8 @@ public final class TunnelKitVPNManagerStrategy<VPNType: VPN>: VPNManagerStrategy
 // MARK: Actions
 
 extension TunnelKitVPNManagerStrategy {
-    public func observe(into state: MutableObservableVPNState, onConfigurationError: @escaping (Profile, Error) -> Void) {
+    public func observe(into state: MutableObservableVPNState) {
         currentState = state
-        self.onConfigurationError = onConfigurationError
 
         // use this to drop redundant NE notifications
         vpnState
@@ -338,7 +335,6 @@ private extension TunnelKitVPNManagerStrategy {
             }
         } catch {
             pp_log.error("Unable to build TunnelKitVPNConfiguration: \(error)")
-            onConfigurationError?(profile, error)
             throw error
         }
     }

@@ -33,6 +33,8 @@ final class AppContext {
 
     private let reviewer: Reviewer
 
+    let errorAlert = PassthroughSubject<(title: String?, error: Error), Never>()
+
     private var cancellables: Set<AnyCancellable> = []
 
     init(coreContext: CoreContext) {

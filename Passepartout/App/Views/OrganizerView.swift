@@ -41,7 +41,7 @@ struct OrganizerView: View {
     enum AlertType: Identifiable {
         case subscribeReddit
 
-        case error(String, String)
+        case error(String?, String)
 
         // XXX: alert ids
         var id: Int {
@@ -95,8 +95,8 @@ struct OrganizerView: View {
         .themePrimaryView()
 
         // VPN configuration error publisher (no need to observe VPNManager)
-        .onReceive(VPNManager.shared.configurationError) {
-            alertType = .error($0.profile.header.name, $0.error.localizedAppDescription)
+        .onReceive(AppContext.shared.errorAlert) {
+            alertType = .error($0.title, $0.error.localizedAppDescription)
         }
     }
 
@@ -160,7 +160,7 @@ extension OrganizerView {
 
         case .error(let title, let errorDescription):
             return Alert(
-                title: Text(title),
+                title: Text(title ?? Unlocalized.appName),
                 message: Text(errorDescription),
                 dismissButton: .cancel(Text(L10n.Global.Strings.ok))
             )

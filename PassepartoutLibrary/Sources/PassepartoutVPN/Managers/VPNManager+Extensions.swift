@@ -67,7 +67,7 @@ extension VPNManager {
         }
 
         profileManager.activateProfile(profile)
-        await reconnect(profile)
+        try await reconnect(profile)
         return profile
     }
 
@@ -104,7 +104,7 @@ extension VPNManager {
             pp_log.debug("Active profile is current, will reconnect via observation")
             return profile
         }
-        await reconnect(profile)
+        try await reconnect(profile)
         return profile
     }
 
@@ -122,6 +122,6 @@ extension VPNManager {
             pp_log.debug("Active profile is current, will reinstate via observation")
             return
         }
-        await reinstate(profile)
+        try await reinstate(profile)
     }
 }
