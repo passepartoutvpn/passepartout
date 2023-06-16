@@ -29,9 +29,5 @@ import PassepartoutCore
 extension Passepartout {
     public enum ProviderError: Error {
         case fetchFailure(error: Error)
-
-        case serverNotFound(serverId: String)
-
-        case presetNotFound(server: ProviderServer, presetId: String)
     }
 }

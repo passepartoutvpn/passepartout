@@ -32,6 +32,4 @@ enum PassepartoutError: Error {
     case provider(error: Passepartout.ProviderError)
 
     case vpn(error: Passepartout.VPNError)
-
-//    case app(error: Error)
 }

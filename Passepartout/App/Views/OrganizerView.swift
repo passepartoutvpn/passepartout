@@ -96,7 +96,7 @@ struct OrganizerView: View {
 
         // VPN configuration error publisher (no need to observe VPNManager)
         .onReceive(AppContext.shared.errorAlert) {
-            alertType = .error($0.title, $0.error.localizedAppDescription)
+            alertType = .error($0.title, $0.error.localizedDescription)
         }
     }
 
