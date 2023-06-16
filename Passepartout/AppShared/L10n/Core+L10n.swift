@@ -32,7 +32,7 @@ extension ObservableVPNState {
             return L10n.Tunnelkit.Vpn.disabled
         }
         if withErrors {
-            if let errorDescription = lastError?.localizedVPNDescription, !errorDescription.isEmpty {
+            if let errorDescription = lastError?.localizedDescription, !errorDescription.isEmpty {
                 return errorDescription
             }
         }
