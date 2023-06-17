@@ -30,10 +30,6 @@ extension OrganizerView {
     struct SceneView: View {
         @Environment(\.scenePhase) private var scenePhase
 
-        @ObservedObject private var profileManager: ProfileManager
-
-        @ObservedObject private var vpnManager: VPNManager
-
         @Binding private var alertType: AlertType?
 
         @Binding private var didHandleSubreddit: Bool
@@ -41,8 +37,6 @@ extension OrganizerView {
         @State private var isFirstLaunch = true
 
         init(alertType: Binding<AlertType?>, didHandleSubreddit: Binding<Bool>) {
-            profileManager = .shared
-            vpnManager = .shared
             _alertType = alertType
             _didHandleSubreddit = didHandleSubreddit
         }
@@ -55,6 +49,7 @@ extension OrganizerView {
                 .onAppear(perform: onAppear)
         }
 
+        @MainActor
         private func onAppear() {
             guard didHandleSubreddit else {
                 alertType = .subscribeReddit
@@ -74,8 +69,8 @@ extension OrganizerView {
                 return
             }
             isFirstLaunch = false
-            if themeIdiom != .phone && !themeIsiPadPortrait, let activeProfileId = profileManager.activeProfileId {
-                profileManager.currentProfileId = activeProfileId
+            if themeIdiom != .phone && !themeIsiPadPortrait, let activeProfileId = ProfileManager.shared.activeProfileId {
+                ProfileManager.shared.currentProfileId = activeProfileId
             }
         }
     }
