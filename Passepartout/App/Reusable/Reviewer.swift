@@ -81,7 +81,7 @@ public final class Reviewer: ObservableObject {
 
     // may or may not appear
     private func requestReview() {
-        guard let scene = UIApplication.shared.windows.first(where: { $0.windowScene != nil })?.windowScene else {
+        guard let scene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }) as? UIWindowScene else {
             return
         }
         SKStoreReviewController.requestReview(in: scene)
