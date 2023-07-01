@@ -15,11 +15,19 @@ private struct ErrorAlert: Identifiable {
 class ErrorHandling: ObservableObject {
     @Published fileprivate var currentAlert: ErrorAlert?
 
-    func handle(_ error: Error, title: String? = nil) {
+    func handle(_ error: Error, title: String? = nil, onDismiss: (() -> Void)? = nil) {
         currentAlert = ErrorAlert(
             title: title,
             message: AppError(error).localizedDescription,
-            dismissAction: nil
+            dismissAction: onDismiss
+        )
+    }
+
+    func handle(title: String, message: String, onDismiss: (() -> Void)? = nil) {
+        currentAlert = ErrorAlert(
+            title: title,
+            message: message,
+            dismissAction: onDismiss
         )
     }
 }

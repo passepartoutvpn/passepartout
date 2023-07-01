@@ -31,10 +31,8 @@ extension ObservableVPNState {
         guard isActiveProfile && isEnabled else {
             return L10n.Tunnelkit.Vpn.disabled
         }
-        if withErrors {
-            if let errorDescription = lastError?.localizedDescription, !errorDescription.isEmpty {
-                return errorDescription
-            }
+        if withErrors, let lastError {
+            return AppError(lastError).localizedDescription
         }
         if dataCountIfAvailable, vpnStatus == .connected, let dataCount = dataCount {
             return dataCount.localizedDescription

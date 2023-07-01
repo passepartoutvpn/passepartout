@@ -31,14 +31,10 @@ struct DonateView: View {
     enum AlertType: Identifiable {
         case thankYou
 
-        case purchaseFailed(Error)
-
         // XXX: alert ids
         var id: Int {
             switch self {
             case .thankYou: return 1
-
-            case .purchaseFailed: return 2
             }
         }
     }
@@ -79,13 +75,6 @@ struct DonateView: View {
             return Alert(
                 title: Text(L10n.Donate.Alerts.Purchase.Success.title),
                 message: Text(L10n.Donate.Alerts.Purchase.Success.message),
-                dismissButton: .cancel(Text(L10n.Global.Strings.ok))
-            )
-
-        case .purchaseFailed(let error):
-            return Alert(
-                title: Text(L10n.Donate.title),
-                message: Text(L10n.Donate.Alerts.Purchase.Failure.message(error.localizedDescription)),
                 dismissButton: .cancel(Text(L10n.Global.Strings.ok))
             )
         }
@@ -140,7 +129,10 @@ extension DonateView {
             }
 
         case .failure(let error):
-            alertType = .purchaseFailed(error)
+            AppContext.shared.errorHandling.handle(
+                title: L10n.Donate.title,
+                message: L10n.Donate.Alerts.Purchase.Failure.message(AppError(error).localizedDescription)
+            )
         }
         pendingDonationIdentifier = nil
     }
