@@ -84,16 +84,10 @@ extension AddHostView {
                     try? FileManager.default.removeItem(at: url)
                 }
             } catch {
-                if case Passepartout.ProfileError.importFailure(let importError) = error {
-                    switch importError {
-                    case OpenVPN.ConfigurationError.encryptionPassphrase,
-                        OpenVPN.ConfigurationError.unableToDecrypt:
-
-                        requiresPassphrase = true
-
-                    default:
-                        requiresPassphrase = false
-                    }
+                if case Passepartout.ProfileError.decryptionFailure = error {
+                    requiresPassphrase = true
+                } else {
+                    requiresPassphrase = false
                 }
                 setMessage(forParsingError: AppError(error))
             }

@@ -42,6 +42,9 @@ extension AppError: LocalizedError {
                 // FIXME: arch, missing translation
                 return error.localizedDescription
 
+            case .decryptionFailure(let error):
+                return error.localizedDescription
+
             case .notFound:
                 return V.missingProfile
 

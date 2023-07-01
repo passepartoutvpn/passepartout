@@ -31,6 +31,8 @@ extension Passepartout {
     public enum ProfileError: Error {
         case importFailure(error: Error)
 
+        case decryptionFailure(error: Error)
+
         case notFound(profileId: UUID)
 
         case failedToFetchProvider(profileId: UUID, error: Error)
