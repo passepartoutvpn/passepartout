@@ -41,14 +41,10 @@ struct OrganizerView: View {
     enum AlertType: Identifiable {
         case subscribeReddit
 
-        case error(String?, String)
-
         // XXX: alert ids
         var id: Int {
             switch self {
             case .subscribeReddit: return 1
-
-            case .error: return 2
             }
         }
     }
@@ -93,11 +89,6 @@ struct OrganizerView: View {
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
         .themePrimaryView()
-
-        // VPN configuration error publisher (no need to observe VPNManager)
-        .onReceive(AppContext.shared.errorAlert) {
-            alertType = .error($0.title, $0.error.localizedDescription)
-        }
     }
 
     private var hiddenSceneView: some View {
@@ -122,10 +113,7 @@ extension OrganizerView {
             }
 
         case .failure(let error):
-            alertType = .error(
-                L10n.Menu.Contextual.AddProfile.fromFiles,
-                error.localizedDescription
-            )
+            AppContext.shared.errorHandling.handle(error, title: L10n.Menu.Contextual.AddProfile.fromFiles)
         }
     }
 
@@ -156,13 +144,6 @@ extension OrganizerView {
                 secondaryButton: .cancel(Text(L10n.Global.Alerts.Buttons.never)) {
                     didHandleSubreddit = true
                 }
-            )
-
-        case .error(let title, let errorDescription):
-            return Alert(
-                title: Text(title ?? Unlocalized.appName),
-                message: Text(errorDescription),
-                dismissButton: .cancel(Text(L10n.Global.Strings.ok))
             )
         }
     }

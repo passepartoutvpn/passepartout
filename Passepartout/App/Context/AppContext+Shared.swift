@@ -33,3 +33,7 @@ extension AppContext {
 extension ProductManager {
     static let shared = AppContext.shared.productManager
 }
+
+extension ErrorHandling {
+    static let shared = AppContext.shared.errorHandling
+}

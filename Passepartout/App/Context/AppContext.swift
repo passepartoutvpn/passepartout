@@ -33,7 +33,7 @@ final class AppContext {
 
     private let reviewer: Reviewer
 
-    let errorAlert = PassthroughSubject<(title: String?, error: Error), Never>()
+    let errorHandling: ErrorHandling
 
     private var cancellables: Set<AnyCancellable> = []
 
@@ -45,6 +45,8 @@ final class AppContext {
 
         reviewer = Reviewer()
         reviewer.eventCountBeforeRating = Constants.Rating.eventCount
+
+        errorHandling = ErrorHandling()
 
         // post
 

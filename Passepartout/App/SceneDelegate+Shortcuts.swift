@@ -59,7 +59,7 @@ extension SceneDelegate {
                 do {
                     try await VPNManager.shared.connectWithActiveProfile(toServer: nil)
                 } catch {
-                    AppContext.shared.errorAlert.send((nil, error))
+                    AppContext.shared.errorHandling.handle(error)
                 }
             }
 
