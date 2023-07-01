@@ -56,9 +56,6 @@ extension PassepartoutError: LocalizedError {
 
         case .vpn(let domainError):
             switch domainError {
-            case .badConfiguration(let profile, let error):
-                return error.localizedDescription
-
             case .notProvider(let profile):
                 // FIXME: arch, missing error
                 return nil

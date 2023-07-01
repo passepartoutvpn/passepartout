@@ -37,8 +37,6 @@ extension Passepartout {
     }
 
     public enum VPNError: Error {
-        case badConfiguration(profile: Profile, error: Error)
-
         case notProvider(profile: Profile)
 
         case providerServerNotFound(profile: Profile)

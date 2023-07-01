@@ -90,7 +90,7 @@ public final class VPNManager: ObservableObject {
             await strategy.reinstate(parameters)
         } catch {
             pp_log.error("Unable to build configuration: \(error)")
-            throw Passepartout.VPNError.badConfiguration(profile: profile, error: error)
+            throw error
         }
     }
 
@@ -102,7 +102,7 @@ public final class VPNManager: ObservableObject {
             await strategy.connect(parameters)
         } catch {
             pp_log.error("Unable to build configuration: \(error)")
-            throw Passepartout.VPNError.badConfiguration(profile: profile, error: error)
+            throw error
         }
     }
 
