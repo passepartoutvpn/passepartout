@@ -185,7 +185,7 @@ extension GenericCreditsView {
                     do {
                         content = try String(contentsOf: url)
                     } catch {
-                        content = PassepartoutError(error).localizedDescription
+                        content = AppError(error).localizedDescription
                     }
                 }
             }

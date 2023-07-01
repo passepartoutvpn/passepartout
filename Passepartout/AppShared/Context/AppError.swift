@@ -1,5 +1,5 @@
 //
-//  PassepartoutError.swift
+//  AppError.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/30/23.
@@ -26,7 +26,7 @@
 import Foundation
 import PassepartoutLibrary
 
-enum PassepartoutError: Error {
+enum AppError: Error {
     case profile(Passepartout.ProfileError)
 
     case provider(Passepartout.ProviderError)

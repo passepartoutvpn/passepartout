@@ -18,7 +18,7 @@ class ErrorHandling: ObservableObject {
     func handle(_ error: Error, title: String? = nil) {
         currentAlert = ErrorAlert(
             title: title,
-            message: PassepartoutError(error).localizedDescription,
+            message: AppError(error).localizedDescription,
             dismissAction: nil
         )
     }

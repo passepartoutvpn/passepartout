@@ -25,7 +25,7 @@
 
 import Foundation
 
-extension PassepartoutError: LocalizedError {
+extension AppError: LocalizedError {
     var errorDescription: String? {
         guard let errorDescriptionImpl, !errorDescriptionImpl.isEmpty else {
             return localizedDescription
