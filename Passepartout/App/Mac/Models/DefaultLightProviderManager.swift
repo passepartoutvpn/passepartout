@@ -110,8 +110,16 @@ final class DefaultLightProviderManager: LightProviderManager {
         guard !providerManager.isAvailable(name, vpnProtocol: vpnProtocolType) else {
             return
         }
-        Task {
-            try await providerManager.fetchProviderPublisher(withName: name, vpnProtocol: vpnProtocolType, priority: .remoteThenBundle).async()
+        Task { @MainActor in
+            do {
+                try await providerManager.fetchProviderPublisher(
+                    withName: name,
+                    vpnProtocol: vpnProtocolType,
+                    priority: .remoteThenBundle
+                ).async()
+            } catch {
+                AppContext.shared.errorHandling.handle(error)
+            }
         }
     }
 }

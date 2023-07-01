@@ -83,7 +83,7 @@ extension AddHostView {
                 if deletingURLOnSuccess {
                     try? FileManager.default.removeItem(at: url)
                 }
-            } catch {
+            } catch Passepartout.ProfileError.importFailure(let error) {
                 switch error {
                 case OpenVPN.ConfigurationError.encryptionPassphrase,
                     OpenVPN.ConfigurationError.unableToDecrypt:
@@ -93,6 +93,9 @@ extension AddHostView {
                 default:
                     requiresPassphrase = false
                 }
+                setMessage(forParsingError: error)
+            } catch {
+                requiresPassphrase = false
                 setMessage(forParsingError: error)
             }
         }

@@ -99,7 +99,7 @@ extension AddProviderView {
                         errorMessage = L10n.AddProfile.Provider.Errors.noDefaultServer
                     }
                 } catch {
-                    errorMessage = error.localizedDescription
+                    errorMessage = PassepartoutError(error).localizedDescription
                 }
                 pendingOperation = nil
             }
@@ -119,7 +119,7 @@ extension AddProviderView {
                         priority: .remoteThenBundle
                     ).async()
                 } catch {
-                    errorMessage = error.localizedDescription
+                    errorMessage = PassepartoutError(error).localizedDescription
                 }
                 pendingOperation = nil
             }
