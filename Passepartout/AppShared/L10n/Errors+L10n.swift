@@ -61,7 +61,7 @@ extension PassepartoutError: LocalizedError {
 
             case .notProvider(let profile):
                 // FIXME: arch, missing error
-                fatalError()
+                return nil
 
             case .providerServerNotFound(let profile):
                 return V.missingProviderServer
@@ -74,8 +74,11 @@ extension PassepartoutError: LocalizedError {
 
             case .emptyEndpoints(let server):
                 // FIXME: arch, missing error
-                fatalError()
+                return nil
             }
+
+        case .generic(let error):
+            return error.localizedDescription
         }
     }
 }

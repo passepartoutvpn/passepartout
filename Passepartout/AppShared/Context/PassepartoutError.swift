@@ -27,9 +27,23 @@ import Foundation
 import PassepartoutLibrary
 
 enum PassepartoutError: Error {
-    case profile(error: Passepartout.ProfileError)
+    case profile(Passepartout.ProfileError)
 
-    case provider(error: Passepartout.ProviderError)
+    case provider(Passepartout.ProviderError)
 
-    case vpn(error: Passepartout.VPNError)
+    case vpn(Passepartout.VPNError)
+
+    case generic(Error)
+
+    init(_ error: Error) {
+        if let profileError = error as? Passepartout.ProfileError {
+            self = .profile(profileError)
+        } else if let providerError = error as? Passepartout.ProviderError {
+            self = .provider(providerError)
+        } else if let vpnError = error as? Passepartout.VPNError {
+            self = .vpn(vpnError)
+        } else {
+            self = .generic(error)
+        }
+    }
 }
