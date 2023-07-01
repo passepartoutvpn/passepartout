@@ -134,6 +134,7 @@ extension IntentDispatcher {
                 }
             } catch {
                 pp_log.error("Unable to modify cellular trust: \(error)")
+                AppContext.shared.errorHandling.handle(error)
             }
         }
     }
@@ -151,6 +152,7 @@ extension IntentDispatcher {
                 }
             } catch {
                 pp_log.error("Unable to modify Wi-Fi trust: \(error)")
+                AppContext.shared.errorHandling.handle(error)
             }
         }
     }
