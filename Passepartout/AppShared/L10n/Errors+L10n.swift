@@ -39,38 +39,41 @@ extension PassepartoutError: LocalizedError {
         case .profile(let domainError):
             switch domainError {
             case .importFailure(let error):
+                // FIXME: arch, missing translation
                 return error.localizedDescription
 
-            case .notFound(let profileId):
+            case .notFound:
                 return V.missingProfile
 
-            case .failedToFetchProvider(let profileId, let error):
+            case .failedToFetchProvider(_, let error):
+                // FIXME: arch, missing translation
                 return error.localizedDescription
             }
 
         case .provider(let domainError):
             switch domainError {
             case .fetchFailure(let error):
+                // FIXME: arch, missing translation
                 return error.localizedDescription
             }
 
         case .vpn(let domainError):
             switch domainError {
             case .notProvider(let profile):
-                // FIXME: arch, missing error
+                // FIXME: arch, missing translation
                 return nil
 
-            case .providerServerNotFound(let profile):
+            case .providerServerNotFound:
                 return V.missingProviderServer
 
-            case .providerPresetNotFound(let profile):
+            case .providerPresetNotFound:
                 return V.missingProviderPreset
 
-            case .missingAccount(let profile):
+            case .missingAccount:
                 return V.missingAccount
 
             case .emptyEndpoints(let server):
-                // FIXME: arch, missing error
+                // FIXME: arch, missing translation
                 return nil
             }
 
