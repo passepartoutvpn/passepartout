@@ -69,8 +69,8 @@ let package = Package(
             dependencies: [
                 "PassepartoutProviders",
                 .product(name: "TunnelKit", package: "TunnelKit"),
-                .product(name: "TunnelKitOpenVPN", package: "TunnelKit"), // FIXME: arch, drop this
-                .product(name: "TunnelKitWireGuard", package: "TunnelKit"), // FIXME: arch, drop this
+                .product(name: "TunnelKitOpenVPN", package: "TunnelKit"),
+                .product(name: "TunnelKitWireGuard", package: "TunnelKit"),
             ]),
         .target(
             name: "PassepartoutProviders",
