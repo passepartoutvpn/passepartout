@@ -588,7 +588,6 @@
 		0E293859285A7489002A6E0E /* Context */ = {
 			isa = PBXGroup;
 			children = (
-				0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */,
 				0E021D9A284E68580077EF5D /* CoreContext.swift */,
 				0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */,
 				0E7A8C092A1D410400780F4B /* PersistenceManager.swift */,
@@ -601,6 +600,7 @@
 			children = (
 				0E021D9B284E68580077EF5D /* AppContext.swift */,
 				0E293856285A73BC002A6E0E /* AppContext+Shared.swift */,
+				0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */,
 				0E293850285A70AC002A6E0E /* AppPreference.swift */,
 			);
 			path = Context;
