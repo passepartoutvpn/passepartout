@@ -100,6 +100,8 @@ struct OrganizerView: View {
 }
 
 extension OrganizerView {
+
+    @MainActor
     private func onHostFileImporterResult(_ result: Result<[URL], Error>) {
         switch result {
         case .success(let urls):
@@ -107,7 +109,7 @@ extension OrganizerView {
                 assertionFailure("Empty URLs from file importer?")
                 return
             }
-            Task { @MainActor in
+            Task {
                 await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
                 addProfileModalType = .addHost(url, false)
             }

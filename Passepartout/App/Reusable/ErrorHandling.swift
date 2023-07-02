@@ -12,6 +12,7 @@ private struct ErrorAlert: Identifiable {
     let dismissAction: (() -> Void)?
 }
 
+@MainActor
 final class ErrorHandler: ObservableObject {
     static let shared = ErrorHandler()
 

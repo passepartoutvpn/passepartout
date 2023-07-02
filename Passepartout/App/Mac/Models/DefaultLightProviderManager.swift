@@ -110,7 +110,7 @@ final class DefaultLightProviderManager: LightProviderManager {
         guard !providerManager.isAvailable(name, vpnProtocol: vpnProtocolType) else {
             return
         }
-        Task { @MainActor in
+        Task {
             do {
                 try await providerManager.fetchProviderPublisher(
                     withName: name,
