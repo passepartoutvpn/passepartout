@@ -175,7 +175,7 @@ extension AddProviderView.NameView {
         }
 
         private mutating func setMessage(forError error: Error) {
-            errorMessage = AppError(error).localizedDescription
+            errorMessage = AppError(error).localizedDescription.withTrailingDot
         }
     }
 }

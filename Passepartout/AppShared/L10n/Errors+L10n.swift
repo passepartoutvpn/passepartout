@@ -30,7 +30,7 @@ extension AppError: LocalizedError {
         guard let errorDescriptionImpl, !errorDescriptionImpl.isEmpty else {
             return localizedDescription
         }
-        return "\(errorDescriptionImpl)."
+        return errorDescriptionImpl
     }
 
     private var errorDescriptionImpl: String? {
@@ -83,5 +83,14 @@ extension AppError: LocalizedError {
         case .generic(let error):
             return error.localizedDescription
         }
+    }
+}
+
+extension String {
+    var withTrailingDot: String {
+        guard !hasSuffix(".") else {
+            return self
+        }
+        return "\(self)."
     }
 }

@@ -105,7 +105,7 @@ extension AddHostView {
         }
 
         private mutating func setMessage(forParsingError error: Error) {
-            errorMessage = AppError(error).localizedDescription
+            errorMessage = AppError(error).localizedDescription.withTrailingDot
         }
     }
 }

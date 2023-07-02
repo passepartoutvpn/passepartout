@@ -18,7 +18,7 @@ class ErrorHandling: ObservableObject {
     func handle(_ error: Error, title: String? = nil, onDismiss: (() -> Void)? = nil) {
         currentAlert = ErrorAlert(
             title: title,
-            message: AppError(error).localizedDescription,
+            message: AppError(error).localizedDescription.withTrailingDot,
             dismissAction: onDismiss
         )
     }
