@@ -39,7 +39,6 @@ extension AppError: LocalizedError {
         case .profile(let domainError):
             switch domainError {
             case .importFailure(let error):
-                // FIXME: arch, missing translation
                 return error.localizedDescription
 
             case .decryptionFailure(let error):

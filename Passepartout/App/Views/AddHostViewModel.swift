@@ -89,7 +89,7 @@ extension AddHostView {
                 } else {
                     requiresPassphrase = false
                 }
-                setMessage(forParsingError: AppError(error))
+                setErrorMessage(for: error)
             }
         }
 
@@ -104,7 +104,7 @@ extension AddHostView {
             return true
         }
 
-        private mutating func setMessage(forParsingError error: Error) {
+        private mutating func setErrorMessage(for error: Error) {
             errorMessage = AppError(error).localizedDescription.withTrailingDot
         }
     }
