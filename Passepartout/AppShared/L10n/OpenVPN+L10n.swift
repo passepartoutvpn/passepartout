@@ -162,7 +162,7 @@ extension OpenVPN.PullMask {
     }
 }
 
-extension OpenVPNProviderError: LocalizedError {
+extension TunnelKitOpenVPNError: LocalizedError {
     public var errorDescription: String? {
         let V = L10n.Tunnelkit.Errors.Vpn.self
         switch self {
@@ -228,6 +228,10 @@ extension OpenVPN.ConfigurationError: LocalizedError {
             }
             pp_log.error("Could not parse configuration URL: unsupported configuration, \(option)")
             return V.unsupportedOption(option)
+
+        case .continuationPushReply:
+            assertionFailure("This is a server-side configuration parsing error")
+            return nil
         }
     }
 }

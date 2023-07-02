@@ -26,7 +26,7 @@
 import Foundation
 import TunnelKitWireGuard
 
-extension WireGuardProviderError: LocalizedError {
+extension TunnelKitWireGuardError: LocalizedError {
     public var errorDescription: String? {
         let V = L10n.Tunnelkit.Errors.Vpn.self
         switch self {
