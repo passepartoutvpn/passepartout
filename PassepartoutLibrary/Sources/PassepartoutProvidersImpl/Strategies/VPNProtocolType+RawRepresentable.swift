@@ -1,8 +1,8 @@
 //
-//  VPNProtocolType.swift
+//  VPNProtocolType+RawRepresentable.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/20/22.
+//  Created by Davide De Rosa on 7/2/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,13 +24,33 @@
 //
 
 import Foundation
+import PassepartoutCore
 
-public enum VPNProtocolType: CaseIterable, Codable {
-    case openVPN
+extension VPNProtocolType: RawRepresentable {
+    private static let openVPNString = "ovpn"
 
-    case wireGuard
-}
+    private static let wireGuardString = "wg"
 
-public protocol VPNProtocolProviding {
-    var vpnProtocol: VPNProtocolType { get }
+    public init?(rawValue: String) {
+        switch rawValue {
+        case Self.openVPNString:
+            self = .openVPN
+
+        case Self.wireGuardString:
+            self = .wireGuard
+
+        default:
+            return nil
+        }
+    }
+
+    public var rawValue: String {
+        switch self {
+        case .openVPN:
+            return Self.openVPNString
+
+        case .wireGuard:
+            return Self.wireGuardString
+        }
+    }
 }

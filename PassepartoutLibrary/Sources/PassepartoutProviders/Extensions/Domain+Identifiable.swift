@@ -57,7 +57,7 @@ extension ProviderServer: Identifiable {
     }
 
     public static func id(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, apiId: String) -> String? {
-        let idSource = [providerName, vpnProtocol.rawValue, apiId].joined(separator: ":")
+        let idSource = [providerName, "\(vpnProtocol)", apiId].joined(separator: ":")
         guard let data = idSource.data(using: .utf8) else {
             return nil
         }
