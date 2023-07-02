@@ -319,7 +319,7 @@ private extension TunnelKitVPNManagerStrategy {
                     }
                     settings = hostSettings
                 }
-                return try settings.tunnelKitConfiguration(appGroup, parameters: parameters)
+                return settings.tunnelKitConfiguration(appGroup, parameters: parameters)
 
             case .wireGuard:
                 let settings: Profile.WireGuardSettings
@@ -331,7 +331,7 @@ private extension TunnelKitVPNManagerStrategy {
                     }
                     settings = hostSettings
                 }
-                return try settings.tunnelKitConfiguration(appGroup, parameters: parameters)
+                return settings.tunnelKitConfiguration(appGroup, parameters: parameters)
             }
         } catch {
             pp_log.error("Unable to build TunnelKitVPNConfiguration: \(error)")
