@@ -18,7 +18,7 @@ class ErrorHandling: ObservableObject {
     func handle(_ error: Error, title: String? = nil, onDismiss: (() -> Void)? = nil) {
         currentAlert = ErrorAlert(
             title: title,
-            message: AppError(error).localizedDescription.withTrailingDot,
+            message: AppError(error).localizedDescription,
             dismissAction: onDismiss
         )
     }
@@ -50,7 +50,7 @@ struct HandleErrorsByShowingAlertViewModifier: ViewModifier {
                     .alert(item: $errorHandling.currentAlert) { currentAlert in
                         Alert(
                             title: Text(currentAlert.title ?? Unlocalized.appName),
-                            message: Text(currentAlert.message),
+                            message: Text(currentAlert.message.withTrailingDot),
                             dismissButton: .cancel(Text(L10n.Global.Strings.ok)) {
                                 currentAlert.dismissAction?()
                             }

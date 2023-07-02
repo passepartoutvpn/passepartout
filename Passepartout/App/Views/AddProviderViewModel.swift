@@ -130,11 +130,11 @@ extension AddProviderView {
         }
 
         private func setErrorMessage(for error: Error) {
-            setErrorMessage(AppError(error).localizedDescription.withTrailingDot)
+            setErrorMessage(AppError(error).localizedDescription)
         }
 
         private func setErrorMessage(_ message: String) {
-            errorMessage = message
+            errorMessage = message.withTrailingDot
         }
     }
 }
