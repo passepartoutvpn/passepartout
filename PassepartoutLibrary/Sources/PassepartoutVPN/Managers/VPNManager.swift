@@ -60,8 +60,6 @@ public final class VPNManager: ObservableObject {
         }
     }
 
-    public let configurationError = PassthroughSubject<VPNConfigurationError, Never>()
-
     // MARK: Internals
 
     private var lastProfile: Profile = .placeholder
@@ -84,7 +82,7 @@ public final class VPNManager: ObservableObject {
         currentState = ObservableVPNState()
     }
 
-    func reinstate(_ profile: Profile) async {
+    func reinstate(_ profile: Profile) async throws {
         pp_log.info("Reinstating VPN")
         clearLastError()
         do {
@@ -92,11 +90,11 @@ public final class VPNManager: ObservableObject {
             await strategy.reinstate(parameters)
         } catch {
             pp_log.error("Unable to build configuration: \(error)")
-            configurationError.send((profile, error))
+            throw error
         }
     }
 
-    func reconnect(_ profile: Profile) async {
+    func reconnect(_ profile: Profile) async throws {
         pp_log.info("Reconnecting VPN (with new configuration)")
         clearLastError()
         do {
@@ -104,7 +102,7 @@ public final class VPNManager: ObservableObject {
             await strategy.connect(parameters)
         } catch {
             pp_log.error("Unable to build configuration: \(error)")
-            configurationError.send((profile, error))
+            throw error
         }
     }
 
@@ -151,11 +149,7 @@ extension VPNManager {
     }
 
     private func observeStrategy() {
-        strategy.observe(into: MutableObservableVPNState(currentState)) { profile, error in
-
-            // UI is certainly interested in configuration errors
-            self.configurationError.send((profile, error))
-        }
+        strategy.observe(into: MutableObservableVPNState(currentState))
     }
 
     private func observeProfileManager() {
@@ -173,7 +167,11 @@ extension VPNManager {
             .removeDuplicates()
             .sink { newProfile in
                 Task {
-                    await self.willUpdateCurrentProfile(newProfile)
+                    do {
+                        try await self.willUpdateCurrentProfile(newProfile)
+                    } catch {
+                        pp_log.error("Unable to apply profile update: \(error)")
+                    }
                 }
             }.store(in: &cancellables)
     }
@@ -187,7 +185,7 @@ extension VPNManager {
         pp_log.debug("Active profile: \(newId)")
     }
 
-    private func willUpdateCurrentProfile(_ newProfile: Profile) async {
+    private func willUpdateCurrentProfile(_ newProfile: Profile) async throws {
         defer {
             lastProfile = newProfile
         }
@@ -254,9 +252,9 @@ extension VPNManager {
             return
         }
         if shouldReconnect {
-            await reconnect(newProfile)
+            try await reconnect(newProfile)
         } else {
-            await reinstate(newProfile)
+            try await reinstate(newProfile)
         }
     }
 }
@@ -267,7 +265,7 @@ private extension VPNManager {
     func vpnConfigurationParameters(withProfile profile: Profile) throws -> VPNConfigurationParameters {
         if profile.requiresCredentials {
             guard !profile.account.isEmpty else {
-                throw PassepartoutError.missingAccount
+                throw Passepartout.VPNError.missingAccount(profile: profile)
             }
         }
 

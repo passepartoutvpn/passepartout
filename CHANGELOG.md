@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Internal error handling. [#310](https://github.com/passepartoutvpn/passepartout-apple/pull/310)
+
 ### Fixed
 
 - Allow wildcards in proxy bypass domains. [#296](https://github.com/passepartoutvpn/passepartout-apple/issues/296)

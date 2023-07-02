@@ -1,5 +1,5 @@
 //
-//  DefaultUpgradeStrategy.swift
+//  DefaultUpgradeManagerStrategy.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/20/22.
@@ -34,14 +34,28 @@ import TunnelKitOpenVPNCore
 
 private typealias Map = [String: Any]
 
-public final class DefaultUpgradeStrategy: UpgradeStrategy {
+private enum UpgradeError: Error {
+    case json
+
+    case missingId
+
+    case missingOpenVPNConfiguration
+
+    case missingHostname
+
+    case missingEndpointProtocols
+
+    case missingProviderName
+}
+
+public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
     public init() {
     }
 }
 
 // MARK: Migrate old store
 
-extension DefaultUpgradeStrategy {
+extension DefaultUpgradeManagerStrategy {
     private enum LegacyStoreKey: String, KeyStoreLocation, CaseIterable {
         case activeProfileId
 
@@ -94,21 +108,7 @@ extension DefaultUpgradeStrategy {
 
 // MARK: Migrate to version 2
 
-extension DefaultUpgradeStrategy {
-    fileprivate enum MigrationError: Error {
-        case json
-
-        case missingId
-
-        case missingOpenVPNConfiguration
-
-        case missingHostname
-
-        case missingEndpointProtocols
-
-        case missingProviderName
-    }
-
+extension DefaultUpgradeManagerStrategy {
     private var appGroup: String {
         "group.com.algoritmico.Passepartout"
     }
@@ -222,7 +222,7 @@ extension DefaultUpgradeStrategy {
     //
     private func migratedV1Profile(_ cs: Map, hostMap: Map, authUserPass: Set<String>) throws -> Profile {
         guard let oldUUIDString = hostMap["id"] as? String else {
-            throw MigrationError.missingId
+            throw UpgradeError.missingId
         }
 
         let name = (cs["hostTitles"] as? Map)?[oldUUIDString] as? String ?? oldUUIDString
@@ -230,16 +230,16 @@ extension DefaultUpgradeStrategy {
 
         // configuration
         guard let params = hostMap["parameters"] as? Map else {
-            throw MigrationError.missingOpenVPNConfiguration
+            throw UpgradeError.missingOpenVPNConfiguration
         }
         guard var ovpn = params["sessionConfiguration"] as? Map else {
-            throw MigrationError.missingOpenVPNConfiguration
+            throw UpgradeError.missingOpenVPNConfiguration
         }
         guard let hostname = ovpn["hostname"] as? String else {
-            throw MigrationError.missingHostname
+            throw UpgradeError.missingHostname
         }
         guard let rawEps = ovpn["endpointProtocols"] as? [String] else {
-            throw MigrationError.missingEndpointProtocols
+            throw UpgradeError.missingEndpointProtocols
         }
         let eps = rawEps.compactMap(EndpointProtocol.init(rawValue:))
         ovpn["remotes"] = eps.map {
@@ -273,7 +273,7 @@ extension DefaultUpgradeStrategy {
     //
     private func migratedV1Profile(_ cs: Map, providerMap: Map) throws -> Profile {
         guard let name = providerMap["name"] as? String else {
-            throw MigrationError.missingProviderName
+            throw UpgradeError.missingProviderName
         }
 
         let header = Profile.Header(name: name, providerName: name)
@@ -384,7 +384,7 @@ private extension URL {
     func asJSON() throws -> Map {
         let data = try Data(contentsOf: self)
         guard let json = try JSONSerialization.jsonObject(with: data) as? Map else {
-            throw DefaultUpgradeStrategy.MigrationError.json
+            throw UpgradeError.json
         }
         return json
     }

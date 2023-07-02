@@ -34,6 +34,7 @@ struct PassepartoutApp: App {
         WindowGroup {
             MainView()
                 .withoutTitleBar()
+                .withErrorHandler()
                 .onIntentActivity(IntentDispatcher.connectVPN)
                 .onIntentActivity(IntentDispatcher.disableVPN)
                 .onIntentActivity(IntentDispatcher.enableVPN)

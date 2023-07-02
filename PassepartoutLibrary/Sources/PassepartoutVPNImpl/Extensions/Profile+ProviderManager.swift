@@ -43,7 +43,7 @@ extension Profile {
 
         // infer remotes from preset + server
         guard let selectedServer = providerServer(providerManager) else {
-            throw PassepartoutError.missingProviderServer
+            throw Passepartout.VPNError.providerServerNotFound(profile: self)
         }
         let server: ProviderServer
         if providerRandomizesServer ?? false {
@@ -51,14 +51,14 @@ extension Profile {
             let servers = providerManager.servers(forLocation: location)
             guard let randomServerId = servers.randomElement()?.id,
                   let randomServer = providerManager.server(withId: randomServerId) else {
-                throw PassepartoutError.missingProviderServer
+                throw Passepartout.VPNError.providerServerNotFound(profile: self)
             }
             server = randomServer
         } else {
             server = selectedServer
         }
         guard let preset = providerPreset(server) else {
-            throw PassepartoutError.missingProviderPreset
+            throw Passepartout.VPNError.providerPresetNotFound(profile: self)
         }
         guard var builder = preset.openVPNConfiguration?.builder() else {
             fatalError("Preset \(preset.id) has no OpenVPN configuration")

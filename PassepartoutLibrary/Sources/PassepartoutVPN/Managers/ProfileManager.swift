@@ -142,7 +142,7 @@ extension ProfileManager {
     public func liveProfileEx(withId id: UUID) throws -> ProfileEx {
         guard let profile = liveProfile(withId: id) else {
             pp_log.error("Profile not found: \(id)")
-            throw PassepartoutError.missingProfile
+            throw Passepartout.ProfileError.notFound(profileId: id)
         }
         pp_log.info("Found profile: \(profile.logDescription)")
         return (profile, isProfileReady(profile))
@@ -483,7 +483,7 @@ extension ProfileManager {
             pp_log.info("Finished!")
         } catch {
             pp_log.error("Unable to import missing provider: \(error)")
-            throw PassepartoutError.missingProfile
+            throw Passepartout.ProfileError.failedToFetchProvider(profileId: profile.id, error: error)
         }
     }
 }

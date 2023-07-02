@@ -56,7 +56,11 @@ extension SceneDelegate {
         switch shortcutItem.type {
         case ShortcutType.enableVPN.rawValue:
             Task {
-                try await VPNManager.shared.connectWithActiveProfile(toServer: nil)
+                do {
+                    try await VPNManager.shared.connectWithActiveProfile(toServer: nil)
+                } catch {
+                    ErrorHandler.shared.handle(error)
+                }
             }
 
         case ShortcutType.disableVPN.rawValue:

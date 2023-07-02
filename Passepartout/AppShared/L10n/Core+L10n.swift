@@ -26,46 +26,13 @@
 import Foundation
 import PassepartoutLibrary
 
-extension Error {
-    var localizedAppDescription: String {
-        if let errorDescription = (self as? PassepartoutError)?.localizedAppDescription, !errorDescription.isEmpty {
-            return "\(errorDescription)."
-        }
-        return localizedDescription
-    }
-}
-
-extension PassepartoutError {
-    var localizedAppDescription: String? {
-        let V = L10n.Global.Errors.self
-        switch self {
-        case .missingProfile:
-            return V.missingProfile
-
-        case .missingAccount:
-            return V.missingAccount
-
-        case .missingProviderServer:
-            return V.missingProviderServer
-
-        case .missingProviderPreset:
-            return V.missingProviderPreset
-
-        default:
-            return nil
-        }
-    }
-}
-
 extension ObservableVPNState {
     func localizedStatusDescription(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool) -> String {
         guard isActiveProfile && isEnabled else {
             return L10n.Tunnelkit.Vpn.disabled
         }
-        if withErrors {
-            if let errorDescription = lastError?.localizedVPNDescription, !errorDescription.isEmpty {
-                return errorDescription
-            }
+        if withErrors, let lastError {
+            return AppError(lastError).localizedDescription
         }
         if dataCountIfAvailable, vpnStatus == .connected, let dataCount = dataCount {
             return dataCount.localizedDescription

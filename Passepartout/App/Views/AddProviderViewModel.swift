@@ -96,10 +96,10 @@ extension AddProviderView {
                     ) {
                         doSelectProvider(metadata, server)
                     } else {
-                        errorMessage = L10n.AddProfile.Provider.Errors.noDefaultServer
+                        setErrorMessage(L10n.AddProfile.Provider.Errors.noDefaultServer)
                     }
                 } catch {
-                    errorMessage = error.localizedDescription
+                    setErrorMessage(for: error)
                 }
                 pendingOperation = nil
             }
@@ -119,7 +119,7 @@ extension AddProviderView {
                         priority: .remoteThenBundle
                     ).async()
                 } catch {
-                    errorMessage = error.localizedDescription
+                    setErrorMessage(for: error)
                 }
                 pendingOperation = nil
             }
@@ -127,6 +127,14 @@ extension AddProviderView {
 
         func presentPaywall() {
             isPaywallPresented = true
+        }
+
+        private func setErrorMessage(for error: Error) {
+            setErrorMessage(AppError(error).localizedDescription)
+        }
+
+        private func setErrorMessage(_ message: String) {
+            errorMessage = message.withTrailingDot
         }
     }
 }
@@ -172,10 +180,6 @@ extension AddProviderView.NameView {
             let finalProfile = profile.renamed(to: profileName)
             profileManager.saveProfile(finalProfile, isActive: nil)
             return finalProfile
-        }
-
-        private mutating func setMessage(forError error: Error) {
-            errorMessage = error.localizedDescription
         }
     }
 }

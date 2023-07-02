@@ -24,6 +24,7 @@
 //
 
 import Foundation
+import PassepartoutLibrary
 import TunnelKitOpenVPN
 
 extension OpenVPN.Cipher {
@@ -157,6 +158,80 @@ extension OpenVPN.PullMask {
 
         case .proxy:
             return L10n.Global.Strings.proxy
+        }
+    }
+}
+
+extension TunnelKitOpenVPNError: LocalizedError {
+    public var errorDescription: String? {
+        let V = L10n.Tunnelkit.Errors.Vpn.self
+        switch self {
+        case .socketActivity, .timeout:
+            return V.timeout
+
+        case .dnsFailure:
+            return V.dns
+
+        case .tlsInitialization, .tlsServerVerification, .tlsHandshake:
+            return V.tls
+
+        case .authentication:
+            return V.auth
+
+        case .encryptionInitialization, .encryptionData:
+            return V.encryption
+
+        case .serverCompression, .lzo:
+            return V.compression
+
+        case .networkChanged:
+            return V.network
+
+        case .routing:
+            return V.routing
+
+        case .gatewayUnattainable:
+            return V.gateway
+
+        case .serverShutdown:
+            return V.shutdown
+
+        default:
+            return nil
+        }
+    }
+}
+
+extension OpenVPN.ConfigurationError: LocalizedError {
+    public var errorDescription: String? {
+        let V = L10n.Tunnelkit.Errors.Openvpn.self
+        switch self {
+        case .encryptionPassphrase:
+            pp_log.error("Could not parse configuration URL: unable to decrypt, passphrase required")
+            return V.passphraseRequired
+
+        case .unableToDecrypt(let error):
+            pp_log.error("Could not parse configuration URL: unable to decrypt, \(error.localizedDescription)")
+            return V.decryption
+
+        case .malformed(let option):
+            pp_log.error("Could not parse configuration URL: malformed option, \(option)")
+            return V.malformed(option)
+
+        case .missingConfiguration(let option):
+            pp_log.error("Could not parse configuration URL: missing configuration, \(option)")
+            return V.requiredOption(option)
+
+        case .unsupportedConfiguration(var option):
+            if option.contains("external") {
+                option.append(" (see FAQ)")
+            }
+            pp_log.error("Could not parse configuration URL: unsupported configuration, \(option)")
+            return V.unsupportedOption(option)
+
+        case .continuationPushReply:
+            assertionFailure("This is a server-side configuration parsing error")
+            return nil
         }
     }
 }

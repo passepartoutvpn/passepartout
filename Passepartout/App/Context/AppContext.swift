@@ -48,8 +48,10 @@ final class AppContext {
 
         configureObjects(coreContext: coreContext)
     }
+}
 
-    private func configureObjects(coreContext: CoreContext) {
+private extension AppContext {
+    func configureObjects(coreContext: CoreContext) {
         coreContext.vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
         }
@@ -75,7 +77,7 @@ final class AppContext {
     }
 
     // eligibility: ignore network settings if ineligible
-    private func isEligibleForNetworkSettings() -> Bool {
+    func isEligibleForNetworkSettings() -> Bool {
         guard productManager.isEligible(forFeature: .networkSettings) else {
             pp_log.warning("Ignore network settings, not eligible")
             return false
@@ -84,7 +86,7 @@ final class AppContext {
     }
 
     // eligibility: reset on-demand rules if no trusted networks
-    private func isEligibleForOnDemandRules() -> Bool {
+    func isEligibleForOnDemandRules() -> Bool {
         guard productManager.isEligible(forFeature: .trustedNetworks) else {
             pp_log.warning("Ignore on-demand rules, not eligible for trusted networks")
             return false

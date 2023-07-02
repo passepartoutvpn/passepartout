@@ -67,7 +67,7 @@ extension VPNManager {
         }
 
         profileManager.activateProfile(profile)
-        await reconnect(profile)
+        try await reconnect(profile)
         return profile
     }
 
@@ -77,7 +77,7 @@ extension VPNManager {
         var profile = result.profile
         guard profile.isProvider else {
             assertionFailure("Profile \(profile.logDescription) is not a provider")
-            throw PassepartoutError.missingProfile
+            throw Passepartout.VPNError.notProvider(profile: profile)
         }
         if !result.isReady {
             try await profileManager.makeProfileReady(profile)
@@ -86,7 +86,7 @@ extension VPNManager {
         let oldServerId = profile.providerServerId
         guard let newServer = providerManager.server(withId: newServerId) else {
             pp_log.warning("Server \(newServerId) not found")
-            throw PassepartoutError.missingProviderServer
+            throw Passepartout.VPNError.providerServerNotFound(profile: profile)
         }
         guard !profileManager.isActiveProfile(profileId) ||
                 currentState.vpnStatus != .connected ||
@@ -104,7 +104,7 @@ extension VPNManager {
             pp_log.debug("Active profile is current, will reconnect via observation")
             return profile
         }
-        await reconnect(profile)
+        try await reconnect(profile)
         return profile
     }
 
@@ -122,6 +122,6 @@ extension VPNManager {
             pp_log.debug("Active profile is current, will reinstate via observation")
             return
         }
-        await reinstate(profile)
+        try await reinstate(profile)
     }
 }

@@ -84,16 +84,12 @@ extension AddHostView {
                     try? FileManager.default.removeItem(at: url)
                 }
             } catch {
-                switch error {
-                case OpenVPN.ConfigurationError.encryptionPassphrase,
-                    OpenVPN.ConfigurationError.unableToDecrypt:
-
+                if case Passepartout.ProfileError.decryptionFailure = error {
                     requiresPassphrase = true
-
-                default:
+                } else {
                     requiresPassphrase = false
                 }
-                setMessage(forParsingError: error)
+                setErrorMessage(for: error)
             }
         }
 
@@ -108,8 +104,12 @@ extension AddHostView {
             return true
         }
 
-        private mutating func setMessage(forParsingError error: Error) {
-            errorMessage = error.localizedVPNParsingDescription
+        private mutating func setErrorMessage(for error: Error) {
+            setErrorMessage(AppError(error).localizedDescription)
+        }
+
+        private mutating func setErrorMessage(_ message: String) {
+            errorMessage = message.withTrailingDot
         }
     }
 }

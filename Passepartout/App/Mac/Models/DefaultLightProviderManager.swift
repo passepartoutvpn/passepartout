@@ -111,7 +111,15 @@ final class DefaultLightProviderManager: LightProviderManager {
             return
         }
         Task {
-            try await providerManager.fetchProviderPublisher(withName: name, vpnProtocol: vpnProtocolType, priority: .remoteThenBundle).async()
+            do {
+                try await providerManager.fetchProviderPublisher(
+                    withName: name,
+                    vpnProtocol: vpnProtocolType,
+                    priority: .remoteThenBundle
+                ).async()
+            } catch {
+                ErrorHandler.shared.handle(error)
+            }
         }
     }
 }

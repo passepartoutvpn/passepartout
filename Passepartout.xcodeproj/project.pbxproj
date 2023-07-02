@@ -30,6 +30,8 @@
 		0E0F4C6429C84B5A0022E884 /* LockableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F4C6329C84B5A0022E884 /* LockableView.swift */; };
 		0E0F4C6629C84CF60022E884 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F4C6529C84CF60022E884 /* LogoView.swift */; };
 		0E12BC8F27F62C8600B2F912 /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E12BC8E27F62C8500B2F912 /* Validators.swift */; };
+		0E1AD5CC2A2682DA002AE6E6 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */; };
+		0E1AD5CE2A268645002AE6E6 /* Errors+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1AD5CD2A268645002AE6E6 /* Errors+L10n.swift */; };
 		0E1B5F5C29C506AD00FE7D18 /* ProfileView+Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1B5F5B29C506AC00FE7D18 /* ProfileView+Diagnostics.swift */; };
 		0E1F5628287F0ECB00F8ADD7 /* ProviderProfileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F5627287F0ECB00F8ADD7 /* ProviderProfileItem.swift */; };
 		0E1F562B287F0EF100F8ADD7 /* ProviderProfileItem+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F5629287F0EEE00F8ADD7 /* ProviderProfileItem+ViewModel.swift */; };
@@ -50,6 +52,7 @@
 		0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */; };
 		0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */; };
 		0E35C09A280E95BB0071FA35 /* ProviderProfileAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E35C099280E95BB0071FA35 /* ProviderProfileAvailability.swift */; };
+		0E3A593C2A50975700B3FE40 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A593B2A50975700B3FE40 /* ErrorHandler.swift */; };
 		0E3B7FCD27E47B3700C66F13 /* AddHostView+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FCC27E47B3700C66F13 /* AddHostView+Name.swift */; };
 		0E3B7FD627E5173A00C66F13 /* ProfileView+VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */; };
 		0E3B7FDA27E51A0200C66F13 /* ProfileView+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */; };
@@ -317,6 +320,8 @@
 		0E0F4C6329C84B5A0022E884 /* LockableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockableView.swift; sourceTree = "<group>"; };
 		0E0F4C6529C84CF60022E884 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		0E12BC8E27F62C8500B2F912 /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
+		0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		0E1AD5CD2A268645002AE6E6 /* Errors+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Errors+L10n.swift"; sourceTree = "<group>"; };
 		0E1B5F5B29C506AC00FE7D18 /* ProfileView+Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Diagnostics.swift"; sourceTree = "<group>"; };
 		0E1C0A52238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E1F5627287F0ECB00F8ADD7 /* ProviderProfileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfileItem.swift; sourceTree = "<group>"; };
@@ -339,6 +344,7 @@
 		0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Scene.swift"; sourceTree = "<group>"; };
 		0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnDemandView+SSID.swift"; sourceTree = "<group>"; };
 		0E35C099280E95BB0071FA35 /* ProviderProfileAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfileAvailability.swift; sourceTree = "<group>"; };
+		0E3A593B2A50975700B3FE40 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		0E3B7FCC27E47B3700C66F13 /* AddHostView+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHostView+Name.swift"; sourceTree = "<group>"; };
 		0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+VPN.swift"; sourceTree = "<group>"; };
 		0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Provider.swift"; sourceTree = "<group>"; };
@@ -594,6 +600,7 @@
 			children = (
 				0E021D9B284E68580077EF5D /* AppContext.swift */,
 				0E293856285A73BC002A6E0E /* AppContext+Shared.swift */,
+				0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */,
 				0E293850285A70AC002A6E0E /* AppPreference.swift */,
 			);
 			path = Context;
@@ -608,6 +615,7 @@
 				0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */,
 				0E7577D62816A3B200081CBE /* DestructiveButton.swift */,
 				0EDE02C127F61C79000FBE3C /* EditableTextList.swift */,
+				0E3A593B2A50975700B3FE40 /* ErrorHandler.swift */,
 				0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */,
 				0E34A2CE27CADA6300C73B67 /* GenericVersionView.swift */,
 				0EF0FAF827DD212C007EB181 /* IntentActivity.swift */,
@@ -629,6 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				0E34A2B527CAA8CC00C73B67 /* Core+L10n.swift */,
+				0E1AD5CD2A268645002AE6E6 /* Errors+L10n.swift */,
 				0E34A2AF27CAA84500C73B67 /* OpenVPN+L10n.swift */,
 				0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */,
 				0E2DE71E27DCD0290067B9E1 /* TunnelKit+L10n.swift */,
@@ -1445,6 +1454,7 @@
 				0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */,
 				0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */,
 				0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */,
+				0E3A593C2A50975700B3FE40 /* ErrorHandler.swift in Sources */,
 				0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */,
 				0E3B7FCD27E47B3700C66F13 /* AddHostView+Name.swift in Sources */,
 				0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */,
@@ -1539,6 +1549,7 @@
 				0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */,
 				0E71ACEB27C1060D00F85C4B /* EndpointView.swift in Sources */,
 				0E293857285A73BC002A6E0E /* AppContext+Shared.swift in Sources */,
+				0E1AD5CC2A2682DA002AE6E6 /* AppError.swift in Sources */,
 				0E53249927D26B51002565C3 /* ProductManager.swift in Sources */,
 				0E9C233027F47032007D5FC7 /* IntentsManager.swift in Sources */,
 				0EB4042C27CA0E8C00378B1A /* Unlocalized.swift in Sources */,
@@ -1556,6 +1567,7 @@
 				0E021D9D284E68580077EF5D /* AppContext.swift in Sources */,
 				0E2DE72527DCDF550067B9E1 /* WireGuard+L10n.swift in Sources */,
 				0E71ACFB27C12E5300F85C4B /* VersionView.swift in Sources */,
+				0E1AD5CE2A268645002AE6E6 /* Errors+L10n.swift in Sources */,
 				0ED1D6DC27DBA41700983466 /* DiagnosticsView+OpenVPN.swift in Sources */,
 				0ED30DCC27EA197D0057D8A3 /* RevealingSecureField.swift in Sources */,
 				0E5349C627C176C200C71BB3 /* EndpointView+OpenVPN.swift in Sources */,

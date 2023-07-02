@@ -1,8 +1,8 @@
 //
-//  SceneDelegate.swift
+//  UpgradeManagerStrategy.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/19/23.
+//  Created by Davide De Rosa on 3/20/22.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,20 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutLibrary
-import SwiftUI
+import Foundation
+import PassepartoutCore
 
-@MainActor
-final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        ProfileManager.shared.persist()
-        #if targetEnvironment(macCatalyst)
-        MacBundle.shared.utils.sendAppToBackground()
-        #endif
-        rebuildShortcutItems()
-    }
+public protocol UpgradeManagerStrategy {
+    func doMigrateStore(_ store: KeyValueStore, didMigrate: inout Bool)
 
-    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        handleShortcutItem(shortcutItem)
-    }
+    func migratedProfilesToV2() -> [Profile]
 }

@@ -34,15 +34,3 @@ public class Passepartout {
 
     public var logger: Logger = DefaultLogger()
 }
-
-public struct PassepartoutError: Error, Equatable {
-    private let string: String
-
-    public init(_ string: String) {
-        self.string = string
-    }
-
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.string == rhs.string
-    }
-}

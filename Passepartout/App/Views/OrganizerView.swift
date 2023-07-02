@@ -41,14 +41,10 @@ struct OrganizerView: View {
     enum AlertType: Identifiable {
         case subscribeReddit
 
-        case error(String, String)
-
         // XXX: alert ids
         var id: Int {
             switch self {
             case .subscribeReddit: return 1
-
-            case .error: return 2
             }
         }
     }
@@ -93,11 +89,6 @@ struct OrganizerView: View {
             onCompletion: onHostFileImporterResult
         ).onOpenURL(perform: onOpenURL)
         .themePrimaryView()
-
-        // VPN configuration error publisher (no need to observe VPNManager)
-        .onReceive(VPNManager.shared.configurationError) {
-            alertType = .error($0.profile.header.name, $0.error.localizedAppDescription)
-        }
     }
 
     private var hiddenSceneView: some View {
@@ -109,6 +100,8 @@ struct OrganizerView: View {
 }
 
 extension OrganizerView {
+
+    @MainActor
     private func onHostFileImporterResult(_ result: Result<[URL], Error>) {
         switch result {
         case .success(let urls):
@@ -116,16 +109,13 @@ extension OrganizerView {
                 assertionFailure("Empty URLs from file importer?")
                 return
             }
-            Task { @MainActor in
+            Task {
                 await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
                 addProfileModalType = .addHost(url, false)
             }
 
         case .failure(let error):
-            alertType = .error(
-                L10n.Menu.Contextual.AddProfile.fromFiles,
-                error.localizedDescription
-            )
+            ErrorHandler.shared.handle(error, title: L10n.Menu.Contextual.AddProfile.fromFiles)
         }
     }
 
@@ -156,13 +146,6 @@ extension OrganizerView {
                 secondaryButton: .cancel(Text(L10n.Global.Alerts.Buttons.never)) {
                     didHandleSubreddit = true
                 }
-            )
-
-        case .error(let title, let errorDescription):
-            return Alert(
-                title: Text(title),
-                message: Text(errorDescription),
-                dismissButton: .cancel(Text(L10n.Global.Strings.ok))
             )
         }
     }

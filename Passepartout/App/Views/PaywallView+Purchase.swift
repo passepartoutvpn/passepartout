@@ -29,20 +29,6 @@ import SwiftUI
 
 extension PaywallView {
     struct PurchaseView: View {
-        private enum AlertType: Identifiable {
-            case purchaseFailed(SKProduct, Error)
-
-            case restoreFailed(Error)
-
-            var id: Int {
-                switch self {
-                case .purchaseFailed: return 1
-
-                case .restoreFailed: return 2
-                }
-            }
-        }
-
         fileprivate enum PurchaseState {
             case purchasing(SKProduct)
 
@@ -59,8 +45,6 @@ extension PaywallView {
 
         private let feature: LocalProduct?
 
-        @State private var alertType: AlertType?
-
         @State private var purchaseState: PurchaseState?
 
         init(isPresented: Binding<Bool>, feature: LocalProduct? = nil) {
@@ -74,7 +58,6 @@ extension PaywallView {
                 productsSection
                     .disabled(purchaseState != nil)
             }.navigationTitle(Unlocalized.appName)
-            .alert(item: $alertType, content: presentedAlert)
 
             // reloading
             .onAppear {
@@ -84,28 +67,6 @@ extension PaywallView {
                     productManager.refreshProducts()
                 }
             }.themeAnimation(on: productManager.isRefreshingProducts)
-        }
-
-        private func presentedAlert(_ alertType: AlertType) -> Alert {
-            switch alertType {
-            case .purchaseFailed(let product, let error):
-                return Alert(
-                    title: Text(product.localizedTitle),
-                    message: Text(error.localizedDescription),
-                    dismissButton: .default(Text(L10n.Global.Strings.ok)) {
-                        purchaseState = nil
-                    }
-                )
-
-            case .restoreFailed(let error):
-                return Alert(
-                    title: Text(L10n.Paywall.Items.Restore.title),
-                    message: Text(error.localizedDescription),
-                    dismissButton: .default(Text(L10n.Global.Strings.ok)) {
-                        purchaseState = nil
-                    }
-                )
-            }
         }
 
         private var productsSection: some View {
@@ -164,7 +125,12 @@ extension PaywallView.PurchaseView {
 
             case .failure(let error):
                 pp_log.error("Unable to purchase: \(error)")
-                alertType = .purchaseFailed(product, error)
+                ErrorHandler.shared.handle(
+                    title: product.localizedTitle,
+                    message: AppError(error).localizedDescription
+                ) {
+                    purchaseState = nil
+                }
             }
         }
     }
@@ -175,7 +141,12 @@ extension PaywallView.PurchaseView {
         productManager.restorePurchases {
             if let error = $0 {
                 pp_log.error("Unable to restore purchases: \(error)")
-                alertType = .restoreFailed(error)
+                ErrorHandler.shared.handle(
+                    title: L10n.Paywall.Items.Restore.title,
+                    message: AppError(error).localizedDescription
+                ) {
+                    purchaseState = nil
+                }
                 return
             }
             isPresented = false

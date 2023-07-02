@@ -30,7 +30,7 @@ import PassepartoutProviders
 import PassepartoutVPN
 
 extension ProviderManager {
-    public func fetchRemoteProviderPublisher(forProfile profile: Profile) -> AnyPublisher<Void, Error> {
+    public func fetchRemoteProviderPublisher(forProfile profile: Profile) -> AnyPublisher<Void, Passepartout.ProviderError> {
         guard let providerName = profile.providerName else {
             fatalError("Not a provider")
         }

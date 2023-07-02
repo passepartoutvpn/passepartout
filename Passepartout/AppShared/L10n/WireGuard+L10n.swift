@@ -24,4 +24,20 @@
 //
 
 import Foundation
-import TunnelKitWireGuardCore
+import TunnelKitWireGuard
+
+extension TunnelKitWireGuardError: LocalizedError {
+    public var errorDescription: String? {
+        let V = L10n.Tunnelkit.Errors.Vpn.self
+        switch self {
+        case .dnsResolutionFailure:
+            return V.dns
+
+        default:
+            return nil
+        }
+    }
+}
+
+extension WireGuard.ConfigurationError: LocalizedError {
+}

@@ -88,10 +88,10 @@ public final class ProviderManager: ObservableObject, RateLimited {
 
     // MARK: Modification
 
-    public func fetchProvidersIndexPublisher(priority: RemoteProvidersPriority) -> AnyPublisher<Void, Error> {
+    public func fetchProvidersIndexPublisher(priority: RemoteProvidersPriority) -> AnyPublisher<Void, Passepartout.ProviderError> {
         guard !isRateLimited(indexActionName) else {
             return Just(())
-                .setFailureType(to: Error.self)
+                .setFailureType(to: Passepartout.ProviderError.self)
                 .eraseToAnyPublisher()
         }
 
@@ -101,13 +101,15 @@ public final class ProviderManager: ObservableObject, RateLimited {
         return savePublisher
             .map {
                 self.didUpdateProviders.send()
+            }.mapError {
+                .fetchFailure(error: $0)
             }.eraseToAnyPublisher()
     }
 
-    public func fetchProviderPublisher(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, priority: RemoteProvidersPriority) -> AnyPublisher<Void, Error> {
+    public func fetchProviderPublisher(withName providerName: ProviderName, vpnProtocol: VPNProtocolType, priority: RemoteProvidersPriority) -> AnyPublisher<Void, Passepartout.ProviderError> {
         guard !isRateLimited(providerName) else {
             return Just(())
-                .setFailureType(to: Error.self)
+                .setFailureType(to: Passepartout.ProviderError.self)
                 .eraseToAnyPublisher()
         }
 
@@ -123,6 +125,8 @@ public final class ProviderManager: ObservableObject, RateLimited {
         return savePublisher
             .map {
                 self.didUpdateProviders.send()
+            }.mapError {
+                .fetchFailure(error: $0)
             }.eraseToAnyPublisher()
     }
 

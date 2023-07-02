@@ -1,8 +1,8 @@
 //
-//  UpgradeStrategy.swift
+//  Errors.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/20/22.
+//  Created by Davide De Rosa on 5/30/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,8 +26,8 @@
 import Foundation
 import PassepartoutCore
 
-public protocol UpgradeStrategy {
-    func doMigrateStore(_ store: KeyValueStore, didMigrate: inout Bool)
-
-    func migratedProfilesToV2() -> [Profile]
+extension Passepartout {
+    public enum ProviderError: Error {
+        case fetchFailure(error: Error)
+    }
 }

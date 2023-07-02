@@ -29,12 +29,6 @@ import Kvitto
 import PassepartoutLibrary
 import StoreKit
 
-enum ProductError: Error {
-    case uneligible
-
-    case beta
-}
-
 final class ProductManager: NSObject, ObservableObject {
     enum AppType: Int {
         case freemium = 0

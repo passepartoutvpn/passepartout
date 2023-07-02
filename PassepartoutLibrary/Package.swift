@@ -23,8 +23,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", from: "6.0.0"),
-//        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("ac362f90ef1c8b64fca113be8521312d85248b48")),
+//        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", from: "6.0.0"),
+        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("729e8973cfbb40330e046439417650e6bf993105")),
 //        .package(name: "TunnelKit", path: "../../tunnelkit"),
         .package(url: "https://github.com/zoul/generic-json-swift", from: "2.0.0"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "1.9.0")
@@ -69,8 +69,8 @@ let package = Package(
             dependencies: [
                 "PassepartoutProviders",
                 .product(name: "TunnelKit", package: "TunnelKit"),
-                .product(name: "TunnelKitOpenVPN", package: "TunnelKit"), // FIXME: arch, drop this
-                .product(name: "TunnelKitWireGuard", package: "TunnelKit"), // FIXME: arch, drop this
+                .product(name: "TunnelKitOpenVPN", package: "TunnelKit"),
+                .product(name: "TunnelKitWireGuard", package: "TunnelKit"),
             ]),
         .target(
             name: "PassepartoutProviders",

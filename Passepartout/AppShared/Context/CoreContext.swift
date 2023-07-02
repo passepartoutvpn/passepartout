@@ -76,7 +76,7 @@ final class CoreContext {
 
         upgradeManager = UpgradeManager(
             store: store,
-            strategy: DefaultUpgradeStrategy()
+            strategy: DefaultUpgradeManagerStrategy()
         )
 
         let remoteProvidersStrategy = APIRemoteProvidersStrategy(
