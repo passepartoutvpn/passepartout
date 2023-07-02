@@ -99,7 +99,7 @@ struct VPNToggle: View {
                 pp_log.warning("Unable to connect to profile \(profile.id): \(error)")
                 canToggle = true
 
-                AppContext.shared.errorHandling.handle(error, title: profile.header.name)
+                ErrorHandler.shared.handle(error, title: profile.header.name)
             }
         }
     }

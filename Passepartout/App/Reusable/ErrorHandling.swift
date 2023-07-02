@@ -12,7 +12,9 @@ private struct ErrorAlert: Identifiable {
     let dismissAction: (() -> Void)?
 }
 
-class ErrorHandling: ObservableObject {
+final class ErrorHandler: ObservableObject {
+    static let shared = ErrorHandler()
+
     @Published fileprivate var currentAlert: ErrorAlert?
 
     func handle(_ error: Error, title: String? = nil, onDismiss: (() -> Void)? = nil) {
@@ -33,21 +35,20 @@ class ErrorHandling: ObservableObject {
 }
 
 struct HandleErrorsByShowingAlertViewModifier: ViewModifier {
-    @ObservedObject private var errorHandling: ErrorHandling
+    @ObservedObject private var errorHandler: ErrorHandler
 
     init() {
-        errorHandling = .shared
+        errorHandler = .shared
     }
 
     func body(content: Content) -> some View {
         content
-            .environmentObject(errorHandling)
             // Applying the alert for error handling using a background element
             // is a workaround, if the alert would be applied directly,
             // other .alert modifiers inside of content would not work anymore
             .background(
                 EmptyView()
-                    .alert(item: $errorHandling.currentAlert) { currentAlert in
+                    .alert(item: $errorHandler.currentAlert) { currentAlert in
                         Alert(
                             title: Text(currentAlert.title ?? Unlocalized.appName),
                             message: Text(currentAlert.message.withTrailingDot),
@@ -61,7 +62,7 @@ struct HandleErrorsByShowingAlertViewModifier: ViewModifier {
 }
 
 extension View {
-    func withErrorHandling() -> some View {
+    func withErrorHandler() -> some View {
         modifier(HandleErrorsByShowingAlertViewModifier())
     }
 }

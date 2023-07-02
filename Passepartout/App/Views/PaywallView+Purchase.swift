@@ -125,7 +125,7 @@ extension PaywallView.PurchaseView {
 
             case .failure(let error):
                 pp_log.error("Unable to purchase: \(error)")
-                AppContext.shared.errorHandling.handle(
+                ErrorHandler.shared.handle(
                     title: product.localizedTitle,
                     message: AppError(error).localizedDescription
                 ) {
@@ -141,7 +141,7 @@ extension PaywallView.PurchaseView {
         productManager.restorePurchases {
             if let error = $0 {
                 pp_log.error("Unable to restore purchases: \(error)")
-                AppContext.shared.errorHandling.handle(
+                ErrorHandler.shared.handle(
                     title: L10n.Paywall.Items.Restore.title,
                     message: AppError(error).localizedDescription
                 ) {

@@ -39,7 +39,7 @@ extension IntentDispatcher {
                 try await vpnManager.connectWithActiveProfile(toServer: nil)
             } catch {
                 pp_log.error("Unable to connect with active profile: \(error)")
-                AppContext.shared.errorHandling.handle(error)
+                ErrorHandler.shared.handle(error)
             }
         }
     }
@@ -71,7 +71,7 @@ extension IntentDispatcher {
                 _ = try await vpnManager.connect(with: profileId)
             } catch {
                 pp_log.error("Unable to connect with profile \(profileId): \(error)")
-                AppContext.shared.errorHandling.handle(error)
+                ErrorHandler.shared.handle(error)
             }
         }
     }
@@ -101,7 +101,7 @@ extension IntentDispatcher {
                 _ = try await vpnManager.connect(with: profileId, toServer: newServerId)
             } catch {
                 pp_log.error("Unable to connect with profile \(profileId): \(error)")
-                AppContext.shared.errorHandling.handle(error)
+                ErrorHandler.shared.handle(error)
             }
         }
     }
@@ -134,7 +134,7 @@ extension IntentDispatcher {
                 }
             } catch {
                 pp_log.error("Unable to modify cellular trust: \(error)")
-                AppContext.shared.errorHandling.handle(error)
+                ErrorHandler.shared.handle(error)
             }
         }
     }
@@ -152,7 +152,7 @@ extension IntentDispatcher {
                 }
             } catch {
                 pp_log.error("Unable to modify Wi-Fi trust: \(error)")
-                AppContext.shared.errorHandling.handle(error)
+                ErrorHandler.shared.handle(error)
             }
         }
     }

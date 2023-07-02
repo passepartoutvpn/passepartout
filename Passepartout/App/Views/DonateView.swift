@@ -129,7 +129,7 @@ extension DonateView {
             }
 
         case .failure(let error):
-            AppContext.shared.errorHandling.handle(
+            ErrorHandler.shared.handle(
                 title: L10n.Donate.title,
                 message: L10n.Donate.Alerts.Purchase.Failure.message(AppError(error).localizedDescription)
             )

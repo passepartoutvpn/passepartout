@@ -118,7 +118,7 @@ final class DefaultLightProviderManager: LightProviderManager {
                     priority: .remoteThenBundle
                 ).async()
             } catch {
-                AppContext.shared.errorHandling.handle(error)
+                ErrorHandler.shared.handle(error)
             }
         }
     }

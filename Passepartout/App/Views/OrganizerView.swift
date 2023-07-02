@@ -113,7 +113,7 @@ extension OrganizerView {
             }
 
         case .failure(let error):
-            AppContext.shared.errorHandling.handle(error, title: L10n.Menu.Contextual.AddProfile.fromFiles)
+            ErrorHandler.shared.handle(error, title: L10n.Menu.Contextual.AddProfile.fromFiles)
         }
     }
 
