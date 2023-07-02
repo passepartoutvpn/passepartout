@@ -26,6 +26,7 @@
 import PassepartoutLibrary
 import SwiftUI
 
+@MainActor
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         ProfileManager.shared.persist()
