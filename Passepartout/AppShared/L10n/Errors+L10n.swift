@@ -48,21 +48,19 @@ extension AppError: LocalizedError {
                 return V.missingProfile
 
             case .failedToFetchProvider(_, let error):
-                // FIXME: arch, missing translation
                 return error.localizedDescription
             }
 
         case .provider(let domainError):
             switch domainError {
             case .fetchFailure(let error):
-                // FIXME: arch, missing translation
                 return error.localizedDescription
             }
 
         case .vpn(let domainError):
             switch domainError {
-            case .notProvider(let profile):
-                // FIXME: arch, missing translation
+            case .notProvider:
+                assertionFailure()
                 return nil
 
             case .providerServerNotFound:
@@ -74,8 +72,8 @@ extension AppError: LocalizedError {
             case .missingAccount:
                 return V.missingAccount
 
-            case .emptyEndpoints(let server):
-                // FIXME: arch, missing translation
+            case .emptyEndpoints:
+                assertionFailure()
                 return nil
             }
 
