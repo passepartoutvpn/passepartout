@@ -25,10 +25,11 @@
 
 import Foundation
 
-public enum VPNProtocolType: CaseIterable, Codable {
-    case openVPN
+// IMPORTANT: do NOT change these raw values, as they affect serialization
+public enum VPNProtocolType: String, CaseIterable, Codable {
+    case openVPN = "ovpn"
 
-    case wireGuard
+    case wireGuard = "wg"
 }
 
 public protocol VPNProtocolProviding {
