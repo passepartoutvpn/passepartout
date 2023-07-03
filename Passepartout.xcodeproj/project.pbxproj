@@ -1197,8 +1197,9 @@
 		0E57F63020C83FC5008323CF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
 					0E41BD96286711C3006346B4 = {
