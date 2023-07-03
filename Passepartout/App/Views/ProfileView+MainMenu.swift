@@ -229,7 +229,7 @@ private extension ProfileView.MainMenu {
     }
 
     var deleteProfileButton: some View {
-        DestructiveButton {
+        Button(role: .destructive) {
             alertType = .deleteProfile
             isAlertPresented = true
         } label: {

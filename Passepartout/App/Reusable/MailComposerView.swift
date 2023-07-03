@@ -27,18 +27,6 @@ import MessageUI
 import SwiftUI
 
 struct MailComposerView: UIViewControllerRepresentable {
-    final class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
-        @Binding private var isPresented: Bool
-
-        init(_ view: MailComposerView) {
-            _isPresented = view._isPresented
-        }
-
-        public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-            isPresented = false
-        }
-    }
-
     struct Attachment {
         let data: Data
 
@@ -78,5 +66,19 @@ struct MailComposerView: UIViewControllerRepresentable {
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
+    }
+}
+
+extension MailComposerView {
+    final class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+        @Binding private var isPresented: Bool
+
+        init(_ view: MailComposerView) {
+            _isPresented = view._isPresented
+        }
+
+        public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            isPresented = false
+        }
     }
 }

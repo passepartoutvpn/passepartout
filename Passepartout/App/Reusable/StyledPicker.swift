@@ -49,8 +49,12 @@ struct StyledPicker<T: Hashable, Label: View, Style: ListStyle>: View {
             }
         }
     }
+}
 
-    private func pickerView() -> some View {
+// MARK: -
+
+private extension StyledPicker {
+    func pickerView() -> some View {
         List {
             Section {
                 ForEach(values, id: \.self) { value in

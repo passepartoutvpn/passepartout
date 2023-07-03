@@ -66,8 +66,31 @@ struct LockableView<Content: View, LockedContent: View>: View {
             }
         }.onChange(of: scenePhase, perform: onScenePhase)
     }
+}
 
-    private func onScenePhase(_ scenePhase: ScenePhase) {
+// MARK: -
+
+private final class Lock: ObservableObject {
+    enum State {
+        case none
+
+        case covered
+
+        case locked
+    }
+
+    static let shared = Lock()
+
+    @Published var state: State = .locked
+
+    private init() {
+    }
+}
+
+// MARK: -
+
+private extension LockableView {
+    func onScenePhase(_ scenePhase: ScenePhase) {
         switch scenePhase {
         case .active:
             unlockIfNeeded()
@@ -112,22 +135,5 @@ struct LockableView<Content: View, LockedContent: View>: View {
                 state = .none
             }
         }
-    }
-}
-
-private final class Lock: ObservableObject {
-    enum State {
-        case none
-
-        case covered
-
-        case locked
-    }
-
-    static let shared = Lock()
-
-    @Published var state: State = .locked
-
-    private init() {
     }
 }
