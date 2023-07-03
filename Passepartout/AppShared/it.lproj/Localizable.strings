@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Se vuoi mostrare gratitudine per il mio lavoro a titolo gratuito, qui trovi varie somme da donare all'istante.\n\nLa donazione ti sarà addebitata solo una volta, e puoi effettuare più donazioni.";
 "donate.items.loading.caption" = "Caricando donazioni";
 "donate.items.purchasing.caption" = "Effettuando donazione";
-"donate.alerts.purchase.success.title" = "Grazie";
 "donate.alerts.purchase.success.message" = "Questo significa molto per me e spero vivamente che tu continui ad usare e promuovere quest'applicazione.";
 "donate.alerts.purchase.failure.message" = "Impossibile effettuare la donazione. %@";
 

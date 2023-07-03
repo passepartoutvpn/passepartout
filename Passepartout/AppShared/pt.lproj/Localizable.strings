@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Se você deseja mostrar gratidão pelo meu trabalho, aqui estão alguns valores do qual você pode contribuir.\n\nVocé só será cobrado uma única vez, ou doar mais vezes caso desejar.";
 "donate.items.loading.caption" = "Carregando doações";
 "donate.items.purchasing.caption" = "Efetuando doação";
-"donate.alerts.purchase.success.title" = "Obrigado";
 "donate.alerts.purchase.success.message" = "Isso significa muito para mim! Espero que você continue usando e promovendo esse aplicativo.";
 "donate.alerts.purchase.failure.message" = "Não foi possível realizar doação. %@";
 

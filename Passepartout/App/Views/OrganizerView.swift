@@ -53,6 +53,8 @@ struct OrganizerView: View {
 
     @State private var modalType: ModalType?
 
+    @State private var isAlertPresented = false
+
     @State private var alertType: AlertType?
 
     @State private var isHostFileImporterPresented = false
@@ -81,8 +83,13 @@ struct OrganizerView: View {
                 }
             }
         }.sheet(item: $modalType, content: presentedModal)
-        .alert(item: $alertType, content: presentedAlert)
-        .fileImporter(
+        .alert(
+            Unlocalized.appName,
+            isPresented: $isAlertPresented,
+            presenting: alertType,
+            actions: alertActions,
+            message: alertMessage
+        ).fileImporter(
             isPresented: $isHostFileImporterPresented,
             allowedContentTypes: hostFileTypes,
             allowsMultipleSelection: false,
@@ -93,6 +100,7 @@ struct OrganizerView: View {
 
     private var hiddenSceneView: some View {
         SceneView(
+            isAlertPresented: $isAlertPresented,
             alertType: $alertType,
             didHandleSubreddit: $didHandleSubreddit
         )
@@ -133,26 +141,27 @@ extension OrganizerView {
         }
     }
 
-    private func presentedAlert(_ alertType: AlertType) -> Alert {
+    private func alertActions(_ alertType: AlertType) -> some View {
         switch alertType {
         case .subscribeReddit:
-            return Alert(
-                title: Text(Unlocalized.Social.reddit),
-                message: Text(L10n.Organizer.Alerts.Reddit.message),
-                primaryButton: .default(Text(L10n.Organizer.Alerts.Reddit.Buttons.subscribe)) {
+            return Group {
+                Button(L10n.Organizer.Alerts.Reddit.Buttons.subscribe) {
                     didHandleSubreddit = true
                     URL.open(redditURL)
-                },
-                secondaryButton: .cancel(Text(L10n.Global.Alerts.Buttons.never)) {
-                    didHandleSubreddit = true
                 }
-            )
+                Button(role: .cancel) {
+                    didHandleSubreddit = true
+                } label: {
+                    Text(L10n.Global.Alerts.Buttons.never)
+                }
+            }
         }
     }
-}
 
-extension OrganizerView {
-    private func presentSubscribeReddit() {
-        alertType = .subscribeReddit
+    private func alertMessage(_ alertType: AlertType) -> some View {
+        switch alertType {
+        case .subscribeReddit:
+            return Text(L10n.Organizer.Alerts.Reddit.message)
+        }
     }
 }

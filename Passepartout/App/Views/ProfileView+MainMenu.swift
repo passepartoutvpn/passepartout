@@ -28,7 +28,7 @@ import SwiftUI
 
 extension ProfileView {
     struct MainMenu: View {
-        enum ActionSheetType: Int, Identifiable {
+        enum AlertType: Int, Identifiable {
             case uninstallVPN
 
             case deleteProfile
@@ -52,13 +52,13 @@ extension ProfileView {
 
         @Binding private var modalType: ModalType?
 
-        @State private var actionSheetType: ActionSheetType?
+        @State private var isAlertPresented = false
+
+        @State private var alertType: AlertType?
 
         private let uninstallVPNTitle = L10n.Global.Strings.uninstall
 
         private let deleteProfileTitle = L10n.Global.Strings.delete
-
-        private let cancelTitle = L10n.Global.Strings.cancel
 
         init(currentProfile: ObservableProfile, modalType: Binding<ModalType?>) {
             profileManager = .shared
@@ -70,25 +70,13 @@ extension ProfileView {
 
         var body: some View {
             mainView
-                .alert(item: $actionSheetType) {
-                    switch $0 {
-                    case .uninstallVPN:
-                        return Alert(
-                            title: Text(uninstallVPNTitle),
-                            message: Text(L10n.Profile.Alerts.UninstallVpn.message),
-                            primaryButton: .destructive(Text(uninstallVPNTitle), action: uninstallVPN),
-                            secondaryButton: .cancel(Text(cancelTitle))
-                        )
-
-                    case .deleteProfile:
-                        return Alert(
-                            title: Text(deleteProfileTitle),
-                            message: Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name)),
-                            primaryButton: .destructive(Text(deleteProfileTitle), action: removeProfile),
-                            secondaryButton: .cancel(Text(cancelTitle))
-                        )
-                    }
-                }
+                .alert(
+                    Text(Unlocalized.appName),
+                    isPresented: $isAlertPresented,
+                    presenting: alertType,
+                    actions: alertActions,
+                    message: alertMessage
+                )
         }
 
         private var mainView: some View {
@@ -113,9 +101,46 @@ extension ProfileView {
             }
         }
 
+        private func alertActions(_ alertType: AlertType) -> some View {
+            switch alertType {
+            case .uninstallVPN:
+                return Group {
+                    Button(role: .destructive, action: uninstallVPN) {
+                        Text(uninstallVPNTitle)
+                    }
+                    Button(role: .cancel) {
+                    } label: {
+                        Text(L10n.Global.Strings.cancel)
+                    }
+                }
+
+            case .deleteProfile:
+                return Group {
+                    Button(role: .destructive, action: removeProfile) {
+                        Text(deleteProfileTitle)
+                    }
+                    Button(role: .cancel) {
+                    } label: {
+                        Text(L10n.Global.Strings.cancel)
+                    }
+                }
+            }
+        }
+
+        private func alertMessage(_ alertType: AlertType) -> some View {
+            switch alertType {
+            case .uninstallVPN:
+                return Text(L10n.Profile.Alerts.UninstallVpn.message)
+
+            case .deleteProfile:
+                return Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name))
+            }
+        }
+
         private var uninstallVPNButton: some View {
             Button {
-                actionSheetType = .uninstallVPN
+                alertType = .uninstallVPN
+                isAlertPresented = true
             } label: {
                 Label(uninstallVPNTitle, systemImage: themeUninstallImage)
             }
@@ -123,7 +148,8 @@ extension ProfileView {
 
         private var deleteProfileButton: some View {
             DestructiveButton {
-                actionSheetType = .deleteProfile
+                alertType = .deleteProfile
+                isAlertPresented = true
             } label: {
                 Label(deleteProfileTitle, systemImage: themeDeleteImage)
             }

@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
 "donate.items.loading.caption" = "Loading donations";
 "donate.items.purchasing.caption" = "Performing donation";
-"donate.alerts.purchase.success.title" = "Thank you";
 "donate.alerts.purchase.success.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
 "donate.alerts.purchase.failure.message" = "Unable to perform the donation. %@";
 

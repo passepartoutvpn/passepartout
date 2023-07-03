@@ -16,6 +16,8 @@ private struct ErrorAlert: Identifiable {
 final class ErrorHandler: ObservableObject {
     static let shared = ErrorHandler()
 
+    @Published fileprivate var isPresented = false
+
     @Published fileprivate var currentAlert: ErrorAlert?
 
     func handle(_ error: Error, title: String? = nil, onDismiss: (() -> Void)? = nil) {
@@ -24,6 +26,7 @@ final class ErrorHandler: ObservableObject {
             message: AppError(error).localizedDescription,
             dismissAction: onDismiss
         )
+        isPresented = true
     }
 
     func handle(title: String, message: String, onDismiss: (() -> Void)? = nil) {
@@ -32,6 +35,7 @@ final class ErrorHandler: ObservableObject {
             message: message,
             dismissAction: onDismiss
         )
+        isPresented = true
     }
 }
 
@@ -49,15 +53,19 @@ struct HandleErrorsByShowingAlertViewModifier: ViewModifier {
             // other .alert modifiers inside of content would not work anymore
             .background(
                 EmptyView()
-                    .alert(item: $errorHandler.currentAlert) { currentAlert in
-                        Alert(
-                            title: Text(currentAlert.title ?? Unlocalized.appName),
-                            message: Text(currentAlert.message.withTrailingDot),
-                            dismissButton: .cancel(Text(L10n.Global.Strings.ok)) {
-                                currentAlert.dismissAction?()
-                            }
-                        )
-                    }
+                    .alert(
+                        errorHandler.currentAlert?.title ?? Unlocalized.appName,
+                        isPresented: $errorHandler.isPresented,
+                        presenting: errorHandler.currentAlert
+                     ) { alert in
+                         Button(role: .cancel) {
+                             alert.dismissAction?()
+                         } label: {
+                             Text(L10n.Global.Strings.ok)
+                         }
+                     } message: { alert in
+                         Text(alert.message.withTrailingDot)
+                     }
             )
     }
 }

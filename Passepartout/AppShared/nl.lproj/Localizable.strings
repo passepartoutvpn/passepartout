@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Als je dankbaarheid wilt tonen voor mijn gratis werk, zijn hier een paar bedragen die je direct kunt doneren.\n\nHet bedrag wordt slechts één keer per donatie in rekening gebracht en u kunt meerdere keren doneren.";
 "donate.items.loading.caption" = "Ophalen donaties";
 "donate.items.purchasing.caption" = "Doneren";
-"donate.alerts.purchase.success.title" = "Hartelijk dank";
 "donate.alerts.purchase.success.message" = "Dit betekent veel voor mij en ik hoop echt dat je deze app blijft gebruiken en promoten.";
 "donate.alerts.purchase.failure.message" = "Donatie mislukt. %@";
 
