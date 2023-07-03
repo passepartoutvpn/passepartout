@@ -292,7 +292,6 @@ private extension ProviderLocationView.ServerListView {
     }
 }
 
-
 // MARK: -
 
 private extension ProviderLocationView {
