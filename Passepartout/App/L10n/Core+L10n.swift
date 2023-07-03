@@ -109,3 +109,18 @@ extension Network.ProxySettings.ConfigurationType {
         }
     }
 }
+
+extension Profile.Account.AuthenticationMethod {
+    var localizedDescription: String {
+        switch self {
+        case .persistent:
+            return L10n.Account.Items.AuthenticationMethod.persistent
+
+        case .interactive:
+            return L10n.Account.Items.AuthenticationMethod.interactive
+
+        case .totp:
+            return Unlocalized.Other.totp
+        }
+    }
+}
