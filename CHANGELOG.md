@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Internal error handling. [#310](https://github.com/passepartoutvpn/passepartout-apple/pull/310)
+
 ### Fixed
 
 - Allow wildcards in proxy bypass domains. [#296](https://github.com/passepartoutvpn/passepartout-apple/issues/296)
-- Fail gracefully when refreshing infrastructure. [#307](https://github.com/passepartoutvpn/passepartout-apple/pull/307)
-- Only show 'Reconnect' on active profile. [#311](https://github.com/passepartoutvpn/passepartout-apple/pull/311)
-- IPv4/6 address validation. [#308](https://github.com/passepartoutvpn/passepartout-apple/pull/308)
-- Domain name validation. [#297](https://github.com/passepartoutvpn/passepartout-apple/pull/297)
 
 ## 2.1.1 (2023-04-19)
 

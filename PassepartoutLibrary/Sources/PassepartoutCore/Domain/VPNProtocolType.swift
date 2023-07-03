@@ -25,10 +25,11 @@
 
 import Foundation
 
-public enum VPNProtocolType: CaseIterable, Codable {
-    case openVPN
+// FIXME: arch, provide a well-defined serialization property rather than .rawValue
+public enum VPNProtocolType: String, CaseIterable, Codable {
+    case openVPN = "ovpn"
 
-    case wireGuard
+    case wireGuard = "wg"
 }
 
 public protocol VPNProtocolProviding {
