@@ -44,8 +44,10 @@ extension EndpointAdvancedView {
     }
 }
 
-extension EndpointAdvancedView.WireGuardView {
-    private var keySection: some View {
+// MARK: -
+
+private extension EndpointAdvancedView.WireGuardView {
+    var keySection: some View {
         Section {
             themeLongContentLink(L10n.Global.Strings.privateKey, content: .constant(builder.privateKey))
             themeLongContentLink(L10n.Global.Strings.publicKey, content: .constant(builder.publicKey))
@@ -54,7 +56,7 @@ extension EndpointAdvancedView.WireGuardView {
         }
     }
 
-    private var addressesSection: some View {
+    var addressesSection: some View {
         Section {
             ForEach(builder.addresses, id: \.self, content: Text.init)
         } header: {
@@ -62,7 +64,7 @@ extension EndpointAdvancedView.WireGuardView {
         }
     }
 
-    private func dnsSection(configuration: WireGuard.Configuration) -> some View {
+    func dnsSection(configuration: WireGuard.Configuration) -> some View {
         configuration.dnsSettings.map { settings in
             Section {
                 ForEach(settings.servers, id: \.self) {
@@ -79,7 +81,7 @@ extension EndpointAdvancedView.WireGuardView {
         }
     }
 
-    private var mtuSection: some View {
+    var mtuSection: some View {
         builder.mtu.map { mtu in
             Section {
                 Text(Unlocalized.Network.mtu)

@@ -97,42 +97,21 @@ struct OrganizerView: View {
         ).onOpenURL(perform: onOpenURL)
         .themePrimaryView()
     }
+}
 
-    private var hiddenSceneView: some View {
+// MARK: -
+
+private extension OrganizerView {
+    var hiddenSceneView: some View {
         SceneView(
             isAlertPresented: $isAlertPresented,
             alertType: $alertType,
             didHandleSubreddit: $didHandleSubreddit
         )
     }
-}
-
-extension OrganizerView {
-
-    @MainActor
-    private func onHostFileImporterResult(_ result: Result<[URL], Error>) {
-        switch result {
-        case .success(let urls):
-            guard let url = urls.first else {
-                assertionFailure("Empty URLs from file importer?")
-                return
-            }
-            Task {
-                await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
-                addProfileModalType = .addHost(url, false)
-            }
-
-        case .failure(let error):
-            ErrorHandler.shared.handle(error, title: L10n.Menu.Contextual.AddProfile.fromFiles)
-        }
-    }
-
-    private func onOpenURL(_ url: URL) {
-        addProfileModalType = .addHost(url, false)
-    }
 
     @ViewBuilder
-    private func presentedModal(_ modalType: ModalType) -> some View {
+    func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
         case .interactiveAccount(let profile):
             NavigationView {
@@ -141,7 +120,7 @@ extension OrganizerView {
         }
     }
 
-    private func alertActions(_ alertType: AlertType) -> some View {
+    func alertActions(_ alertType: AlertType) -> some View {
         switch alertType {
         case .subscribeReddit:
             return Group {
@@ -158,10 +137,37 @@ extension OrganizerView {
         }
     }
 
-    private func alertMessage(_ alertType: AlertType) -> some View {
+    func alertMessage(_ alertType: AlertType) -> some View {
         switch alertType {
         case .subscribeReddit:
             return Text(L10n.Organizer.Alerts.Reddit.message)
         }
+    }
+}
+
+// MARK: -
+
+private extension OrganizerView {
+
+    @MainActor
+    func onHostFileImporterResult(_ result: Result<[URL], Error>) {
+        switch result {
+        case .success(let urls):
+            guard let url = urls.first else {
+                assertionFailure("Empty URLs from file importer?")
+                return
+            }
+            Task {
+                await Task.maybeWait(forMilliseconds: Constants.Delays.xxxPresentFileImporter)
+                addProfileModalType = .addHost(url, false)
+            }
+
+        case .failure(let error):
+            ErrorHandler.shared.handle(error, title: L10n.Menu.Contextual.AddProfile.fromFiles)
+        }
+    }
+
+    func onOpenURL(_ url: URL) {
+        addProfileModalType = .addHost(url, false)
     }
 }

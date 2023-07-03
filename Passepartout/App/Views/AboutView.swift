@@ -26,8 +26,6 @@
 import SwiftUI
 
 struct AboutView: View {
-//    private let appName = Unlocalized.appName
-
     private let versionString = Constants.Global.appVersionString
 
     private let redditURL = Constants.URLs.subreddit
@@ -52,11 +50,15 @@ struct AboutView: View {
             supportSection
             webSection
             githubSection
-        }.themeSecondaryView()
-        .navigationTitle(L10n.About.title)
+        }.navigationTitle(L10n.About.title)
+        .themeSecondaryView()
     }
+}
 
-    private var infoSection: some View {
+// MARK: -
+
+private extension AboutView {
+    var infoSection: some View {
         Section {
             NavigationLink {
                 VersionView()
@@ -70,7 +72,7 @@ struct AboutView: View {
         }
     }
 
-    private var supportSection: some View {
+    var supportSection: some View {
         Section {
             Button(L10n.About.Items.JoinCommunity.caption) {
                 URL.open(redditURL)
@@ -82,7 +84,7 @@ struct AboutView: View {
         }
     }
 
-    private var webSection: some View {
+    var webSection: some View {
         Section {
             Button(L10n.About.Items.Website.caption) {
                 URL.open(homeURL)
@@ -101,7 +103,7 @@ struct AboutView: View {
         }
     }
 
-    private var githubSection: some View {
+    var githubSection: some View {
         Section {
             Button(Unlocalized.About.readme) {
                 URL.open(readmeURL)
@@ -115,13 +117,15 @@ struct AboutView: View {
     }
 }
 
-extension AboutView {
-    private func shareOnTwitter() {
+// MARK: -
+
+private extension AboutView {
+    func shareOnTwitter() {
         let url = Unlocalized.Social.twitterIntent(withMessage: shareMessage)
         URL.open(url)
     }
 
-    private func submitReview() {
+    func submitReview() {
         let reviewURL = Reviewer.urlForReview(withAppId: Constants.App.appStoreId)
         URL.open(reviewURL)
     }

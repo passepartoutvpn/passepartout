@@ -61,11 +61,11 @@ struct AddProfileMenu: View {
             Button(action: presentHostFileImporter) {
                 Label(L10n.Menu.Contextual.AddProfile.fromFiles, systemImage: themeHostFilesImage)
             }
-//                Button {
-//                    // TODO: add profile from text
-//                } label: {
-//                    Label(L10n.Organizer.Menus.AddProfile.fromText, systemImage: themeHostTextImage)
-//                }
+//            Button {
+//                // TODO: add profile from text
+//            } label: {
+//                Label(L10n.Organizer.Menus.AddProfile.fromText, systemImage: themeHostTextImage)
+//            }
             if let urls = importedURLs, !urls.isEmpty {
                 Divider()
                 ForEach(urls, id: \.absoluteString, content: importedURLRow)
@@ -74,9 +74,14 @@ struct AddProfileMenu: View {
             themeAddMenuImage.asSystemImage
         }.sheet(item: $modalType, content: presentedModal)
     }
+}
+
+// MARK: -
+
+private extension AddProfileMenu {
 
     @ViewBuilder
-    private func presentedModal(_ modalType: ModalType) -> some View {
+    func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
         case .addProvider:
             NavigationView {
@@ -100,7 +105,7 @@ struct AddProfileMenu: View {
         }
     }
 
-    private var isModalPresented: Binding<Bool> {
+    var isModalPresented: Binding<Bool> {
         .init {
             modalType != nil
         } set: {
@@ -110,13 +115,13 @@ struct AddProfileMenu: View {
         }
     }
 
-    private func importedURLRow(_ url: URL) -> some View {
+    func importedURLRow(_ url: URL) -> some View {
         Button(L10n.Menu.Contextual.AddProfile.imported(url.lastPathComponent)) {
             presentAddHost(withURL: url, deletingURLOnSuccess: true)
         }
     }
 
-    private var importedURLs: [URL]? {
+    var importedURLs: [URL]? {
         do {
             let url = FileManager.default.userURL(for: .documentDirectory, appending: nil)
             let list = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
@@ -129,16 +134,18 @@ struct AddProfileMenu: View {
     }
 }
 
-extension AddProfileMenu {
-    private func presentAddProvider() {
+// MARK: -
+
+private extension AddProfileMenu {
+    func presentAddProvider() {
         modalType = .addProvider
     }
 
-    private func presentAddHost(withURL url: URL, deletingURLOnSuccess: Bool) {
+    func presentAddHost(withURL url: URL, deletingURLOnSuccess: Bool) {
         modalType = .addHost(url, deletingURLOnSuccess)
     }
 
-    private func presentHostFileImporter() {
+    func presentHostFileImporter() {
 
         // XXX: iOS bug, hack around crappy bug when dismissing by swiping down
         //

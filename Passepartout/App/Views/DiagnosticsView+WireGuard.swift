@@ -50,12 +50,14 @@ extension DiagnosticsView {
     }
 }
 
-extension DiagnosticsView.WireGuardView {
-    private var appLogURL: URL? {
+// MARK: -
+
+private extension DiagnosticsView.WireGuardView {
+    var appLogURL: URL? {
         Passepartout.shared.logger.logFile
     }
 
-    private var tunnelLogURL: URL? {
+    var tunnelLogURL: URL? {
         vpnManager.debugLogURL(forProtocol: .wireGuard)
     }
 }

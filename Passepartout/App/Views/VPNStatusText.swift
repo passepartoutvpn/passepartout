@@ -39,8 +39,12 @@ struct VPNStatusText: View {
     var body: some View {
         Text(statusText)
     }
+}
 
-    private var statusText: String {
+// MARK: -
+
+private extension VPNStatusText {
+    var statusText: String {
         currentVPNState.localizedStatusDescription(
             isActiveProfile: isActiveProfile,
             withErrors: true,

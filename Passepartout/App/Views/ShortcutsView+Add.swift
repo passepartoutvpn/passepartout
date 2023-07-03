@@ -71,32 +71,34 @@ extension ShortcutsView {
                 }
             }.navigationTitle(L10n.Shortcuts.Add.title)
         }
-
-        private var addConnectView: some View {
-            Button(L10n.Shortcuts.Add.Items.Connect.caption) {
-                if target.isProvider {
-                    pendingProfile.value = target
-                    isPresentingProviderLocation = true
-                } else {
-                    addConnect(target.header)
-                }
-            }
-        }
-
-        private var hiddenProviderLocationLink: some View {
-            NavigationLink("", isActive: $isPresentingProviderLocation) {
-                ProviderLocationView(
-                    currentProfile: pendingProfile,
-                    isEditable: false,
-                    isPresented: isProviderLocationPresented
-                )
-            }
-        }
     }
 }
 
-extension ShortcutsView.AddView {
-    private var isProviderLocationPresented: Binding<Bool> {
+// MARK: -
+
+private extension ShortcutsView.AddView {
+    var addConnectView: some View {
+        Button(L10n.Shortcuts.Add.Items.Connect.caption) {
+            if target.isProvider {
+                pendingProfile.value = target
+                isPresentingProviderLocation = true
+            } else {
+                addConnect(target.header)
+            }
+        }
+    }
+
+    var hiddenProviderLocationLink: some View {
+        NavigationLink("", isActive: $isPresentingProviderLocation) {
+            ProviderLocationView(
+                currentProfile: pendingProfile,
+                isEditable: false,
+                isPresented: isProviderLocationPresented
+            )
+        }
+    }
+
+    var isProviderLocationPresented: Binding<Bool> {
         .init {
             isPresentingProviderLocation
         } set: {
@@ -106,14 +108,18 @@ extension ShortcutsView.AddView {
             }
         }
     }
+}
 
-    private func addConnect(_ header: Profile.Header) {
+// MARK: -
+
+private extension ShortcutsView.AddView {
+    func addConnect(_ header: Profile.Header) {
         pendingShortcut = INShortcut(intent: IntentDispatcher.intentConnect(
             header: header
         ))
     }
 
-    private func addMoveToPendingProfile() {
+    func addMoveToPendingProfile() {
         let header = pendingProfile.value.header
         guard let server = pendingProfile.value.providerServer(providerManager) else {
             return
@@ -125,31 +131,31 @@ extension ShortcutsView.AddView {
         ))
     }
 
-    private func addEnableVPN() {
+    func addEnableVPN() {
         addShortcut(with: IntentDispatcher.intentEnable())
     }
 
-    private func addDisableVPN() {
+    func addDisableVPN() {
         addShortcut(with: IntentDispatcher.intentDisable())
     }
 
-    private func addTrustWiFi() {
+    func addTrustWiFi() {
         addShortcut(with: IntentDispatcher.intentTrustWiFi())
     }
 
-    private func addUntrustWiFi() {
+    func addUntrustWiFi() {
         addShortcut(with: IntentDispatcher.intentUntrustWiFi())
     }
 
-    private func addTrustCellular() {
+    func addTrustCellular() {
         addShortcut(with: IntentDispatcher.intentTrustCellular())
     }
 
-    private func addUntrustCellular() {
+    func addUntrustCellular() {
         addShortcut(with: IntentDispatcher.intentUntrustCellular())
     }
 
-    private func addShortcut(with intent: INIntent) {
+    func addShortcut(with intent: INIntent) {
         guard let shortcut = INShortcut(intent: intent) else {
             fatalError("Unable to create INShortcut, intent '\(intent.description)' not exposed by app?")
         }

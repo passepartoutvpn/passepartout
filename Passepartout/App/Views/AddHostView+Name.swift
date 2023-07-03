@@ -42,10 +42,6 @@ extension AddHostView {
 
         @State private var isEnteringCredentials = false
 
-        private var isComplete: Bool {
-            !viewModel.processedProfile.isPlaceholder
-        }
-
         init(
             url: URL,
             deletingURLOnSuccess: Bool,
@@ -84,123 +80,136 @@ extension AddHostView {
             .navigationTitle(L10n.AddProfile.Shared.title)
             .themeSecondaryView()
         }
+    }
+}
 
-        @ViewBuilder
-        private var mainView: some View {
-            AddProfileView.ProfileNameSection(
-                profileName: $viewModel.profileName,
-                errorMessage: viewModel.errorMessage
-            ) {
-                processProfile(replacingExisting: false)
-            }.onAppear {
-                viewModel.presetName(withURL: url)
-            }.disabled(isComplete)
+// MARK: -
 
-            if !isComplete {
-                if viewModel.requiresPassphrase {
-                    encryptionSection
-                }
-                let headers = profileManager.headers.sorted()
-                if !headers.isEmpty {
-                    AddProfileView.ExistingProfilesSection(
-                        headers: headers,
-                        profileName: $viewModel.profileName
-                    )
-                }
-            } else {
-                completeSection
+private extension AddHostView.NameView {
+
+    @ViewBuilder
+    var mainView: some View {
+        AddProfileView.ProfileNameSection(
+            profileName: $viewModel.profileName,
+            errorMessage: viewModel.errorMessage
+        ) {
+            processProfile(replacingExisting: false)
+        }.onAppear {
+            viewModel.presetName(withURL: url)
+        }.disabled(isComplete)
+
+        if !isComplete {
+            if viewModel.requiresPassphrase {
+                encryptionSection
             }
-        }
-
-        private var encryptionSection: some View {
-            Section {
-                SecureField(L10n.AddProfile.Host.Sections.Encryption.footer, text: $viewModel.encryptionPassphrase) {
-                    processProfile(replacingExisting: false)
-                }
-            } header: {
-                Text(L10n.Global.Strings.encryption)
-            }
-        }
-
-        private var completeSection: some View {
-            Section {
-                Text(Unlocalized.Network.url)
-                    .withTrailingText(url.lastPathComponent)
-                viewModel.processedProfile.vpnProtocols.first.map {
-                    Text(L10n.Global.Strings.protocol)
-                        .withTrailingText($0.description)
-                }
-            } header: {
-                Text(L10n.AddProfile.Shared.title)
-            } footer: {
-                themeErrorMessage(viewModel.errorMessage)
-            }
-        }
-
-        private var hiddenAccountLink: some View {
-            NavigationLink("", isActive: $isEnteringCredentials) {
-                AddProfileView.AccountWrapperView(
-                    profile: $viewModel.processedProfile,
-                    bindings: bindings
+            let headers = profileManager.headers.sorted()
+            if !headers.isEmpty {
+                AddProfileView.ExistingProfilesSection(
+                    headers: headers,
+                    profileName: $viewModel.profileName
                 )
             }
+        } else {
+            completeSection
         }
+    }
 
-        private var nextString: String {
-            if !viewModel.processedProfile.isPlaceholder {
-                return viewModel.processedProfile.requiresCredentials ? L10n.Global.Strings.next : L10n.Global.Strings.save
-            } else {
-                return L10n.Global.Strings.next
+    var encryptionSection: some View {
+        Section {
+            SecureField(L10n.AddProfile.Host.Sections.Encryption.footer, text: $viewModel.encryptionPassphrase) {
+                processProfile(replacingExisting: false)
             }
+        } header: {
+            Text(L10n.Global.Strings.encryption)
         }
+    }
 
-        private func requestResourcePermissions() {
-            _ = url.startAccessingSecurityScopedResource()
-        }
-
-        private func dropResourcePermissions() {
-            url.stopAccessingSecurityScopedResource()
-        }
-
-        @ViewBuilder
-        private func alertOverwriteActions() -> some View {
-            Button(role: .destructive) {
-                processProfile(replacingExisting: true)
-            } label: {
-                Text(L10n.Global.Strings.ok)
+    var completeSection: some View {
+        Section {
+            Text(Unlocalized.Network.url)
+                .withTrailingText(url.lastPathComponent)
+            viewModel.processedProfile.vpnProtocols.first.map {
+                Text(L10n.Global.Strings.protocol)
+                    .withTrailingText($0.description)
             }
-            Button(role: .cancel) {
-            } label: {
-                Text(L10n.Global.Strings.cancel)
-            }
+        } header: {
+            Text(L10n.AddProfile.Shared.title)
+        } footer: {
+            themeErrorMessage(viewModel.errorMessage)
         }
+    }
 
-        private func alertOverwriteMessage() -> some View {
-            Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
-        }
-
-        private func processProfile(replacingExisting: Bool) {
-            viewModel.processURL(
-                url,
-                with: profileManager,
-                replacingExisting: replacingExisting,
-                deletingURLOnSuccess: deletingURLOnSuccess
+    var hiddenAccountLink: some View {
+        NavigationLink("", isActive: $isEnteringCredentials) {
+            AddProfileView.AccountWrapperView(
+                profile: $viewModel.processedProfile,
+                bindings: bindings
             )
         }
+    }
 
-        private func saveProfile() {
-            let result = viewModel.addProcessedProfile(to: profileManager)
-            guard result else {
-                return
-            }
+    var nextString: String {
+        if !viewModel.processedProfile.isPlaceholder {
+            return viewModel.processedProfile.requiresCredentials ? L10n.Global.Strings.next : L10n.Global.Strings.save
+        } else {
+            return L10n.Global.Strings.next
+        }
+    }
 
-            let profile = viewModel.processedProfile
-            if profile.requiresCredentials {
-                isEnteringCredentials = true
-            } else {
-                bindings.isPresented = false
-                profileManager.didCreateProfile.send(profile)
-            }
+    @ViewBuilder
+    func alertOverwriteActions() -> some View {
+        Button(role: .destructive) {
+            processProfile(replacingExisting: true)
+        } label: {
+            Text(L10n.Global.Strings.ok)
+        }
+        Button(role: .cancel) {
+        } label: {
+            Text(L10n.Global.Strings.cancel)
+        }
+    }
+
+    func alertOverwriteMessage() -> some View {
+        Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
+    }
+
+    var isComplete: Bool {
+        !viewModel.processedProfile.isPlaceholder
+    }
+}
+
+// MARK: -
+
+private extension AddHostView.NameView {
+    func requestResourcePermissions() {
+        _ = url.startAccessingSecurityScopedResource()
+    }
+
+    func dropResourcePermissions() {
+        url.stopAccessingSecurityScopedResource()
+    }
+
+    func processProfile(replacingExisting: Bool) {
+        viewModel.processURL(
+            url,
+            with: profileManager,
+            replacingExisting: replacingExisting,
+            deletingURLOnSuccess: deletingURLOnSuccess
+        )
+    }
+
+    func saveProfile() {
+        let result = viewModel.addProcessedProfile(to: profileManager)
+        guard result else {
+            return
+        }
+
+        let profile = viewModel.processedProfile
+        if profile.requiresCredentials {
+            isEnteringCredentials = true
+        } else {
+            bindings.isPresented = false
+            profileManager.didCreateProfile.send(profile)
         }
     }
 }

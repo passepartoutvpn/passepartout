@@ -31,23 +31,7 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
 
     @ObservedObject private var currentProfile: ObservableProfile
 
-    var profile: Profile {
-        currentProfile.value
-    }
-
     private let isEditable: Bool
-
-    private var providerName: ProviderName {
-        guard let name = currentProfile.value.header.providerName else {
-            assertionFailure("Not a provider")
-            return ""
-        }
-        return name
-    }
-
-    private var vpnProtocol: VPNProtocolType {
-        currentProfile.value.currentVPNProtocol
-    }
 
     @Binding private var selectedServer: ProviderServer?
 
@@ -55,11 +39,8 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
 
     @AppStorage(AppPreference.isShowingFavorites.key) private var isShowingFavorites = false
 
-    private var isShowingEmptyFavorites: Bool {
-        guard isShowingFavorites else {
-            return false
-        }
-        return favoriteLocationIds?.isEmpty ?? true
+    var profile: Profile {
+        currentProfile.value
     }
 
     // XXX: do not escape mutating 'self', use constant providerManager
@@ -107,139 +88,6 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
                 themeFavoritesImage(isShowingFavorites).asSystemImage
             }
         }.navigationTitle(L10n.Provider.Location.title)
-    }
-
-    private var mainView: some View {
-        // FIXME: layout, restore ScrollViewReader, but content inside it is not re-rendered on isShowingFavorites
-//        ScrollViewReader { scrollProxy in
-            List {
-                if !isShowingEmptyFavorites {
-                    categoriesView
-                } else {
-                    emptyFavoritesSection
-                }
-//            }.onAppear {
-//                scrollToSelectedLocation(scrollProxy)
-            }
-//        }
-    }
-
-    private var categoriesView: some View {
-        ForEach(categories, content: categorySection)
-    }
-
-    private func categorySection(_ category: ProviderCategory) -> some View {
-        Section {
-            ForEach(filteredLocations(for: category)) { location in
-                if isEditable {
-                    locationRow(location)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            favoriteActions(location)
-                        }
-                } else {
-                    locationRow(location)
-                }
-            }
-        } header: {
-            !category.name.isEmpty ? Text(category.name) : nil
-        }
-    }
-
-    @ViewBuilder
-    private func locationRow(_ location: ProviderLocation) -> some View {
-        if let onlyServer = location.onlyServer {
-            singleServerRow(location, onlyServer)
-        } else if profile.providerRandomizesServer ?? false {
-            singleServerRow(location, nil)
-        } else {
-            multipleServersRow(location)
-        }
-    }
-
-    private func multipleServersRow(_ location: ProviderLocation) -> some View {
-        NavigationLink(destination: {
-            ServerListView(
-                location: location,
-                selectedServer: $selectedServer
-            ).navigationTitle(location.localizedCountry)
-        }, label: {
-            LocationRow(
-                location: location,
-                selectedLocationId: selectedServer?.locationId
-            )
-        })
-    }
-
-    private func singleServerRow(_ location: ProviderLocation, _ server: ProviderServer?) -> some View {
-        Button {
-            selectedServer = server ?? location.servers?.randomElement()
-        } label: {
-            LocationRow(
-                location: location,
-                selectedLocationId: selectedServer?.locationId
-            )
-        }
-    }
-
-    private var emptyFavoritesSection: some View {
-        Section {
-        } footer: {
-            Text(L10n.Provider.Location.Sections.EmptyFavorites.footer)
-        }
-    }
-
-    @available(iOS 15, *)
-    private func favoriteActions(_ location: ProviderLocation) -> some View {
-        Button {
-            withAnimation {
-                toggleFavoriteLocation(location)
-            }
-        } label: {
-            themeFavoriteActionImage(!isFavoriteLocation(location)).asSystemImage
-        }.themePrimaryTintStyle()
-    }
-}
-
-extension ProviderLocationView {
-    private func server(withId serverId: String) -> ProviderServer? {
-        providerManager.server(withId: serverId)
-    }
-
-    private var categories: [ProviderCategory] {
-        providerManager.categories(providerName, vpnProtocol: vpnProtocol)
-            .filter {
-                !filteredLocations(for: $0).isEmpty
-            }.sorted()
-    }
-
-    private func filteredLocations(for category: ProviderCategory) -> [ProviderLocation] {
-        let locations: [ProviderLocation]
-        if isShowingFavorites {
-            locations = category.locations.filter {
-                favoriteLocationIds?.contains($0.id) ?? false
-            }
-        } else {
-            locations = category.locations
-        }
-        return locations.sorted()
-    }
-
-    private func isFavoriteLocation(_ location: ProviderLocation) -> Bool {
-        favoriteLocationIds?.contains(location.id) ?? false
-    }
-
-    private func toggleFavoriteLocation(_ location: ProviderLocation) {
-        if !isFavoriteLocation(location) {
-            if favoriteLocationIds == nil {
-                favoriteLocationIds = [location.id]
-            } else {
-                favoriteLocationIds?.insert(location.id)
-            }
-        } else {
-            favoriteLocationIds?.remove(location.id)
-        }
-        // may trigger view updates?
-//        pp_log.debug("New favorite locations: \(favoriteLocationIds ?? [])")
     }
 }
 
@@ -293,21 +141,184 @@ extension ProviderLocationView {
                 }
             }
         }
-
-        private var servers: [ProviderServer] {
-            providerManager.servers(forLocation: location).sorted()
-        }
     }
 }
 
-extension ProviderLocationView {
-    private func scrollToSelectedLocation(_ proxy: ScrollViewProxy) {
+// MARK: -
+
+private extension ProviderLocationView {
+    var providerName: ProviderName {
+        guard let name = currentProfile.value.header.providerName else {
+            assertionFailure("Not a provider")
+            return ""
+        }
+        return name
+    }
+
+    var vpnProtocol: VPNProtocolType {
+        currentProfile.value.currentVPNProtocol
+    }
+
+    var mainView: some View {
+        // FIXME: layout, restore ScrollViewReader, but content inside it is not re-rendered on isShowingFavorites
+//        ScrollViewReader { scrollProxy in
+        List {
+            if !isShowingEmptyFavorites {
+                categoriesView
+            } else {
+                emptyFavoritesSection
+            }
+//            }.onAppear {
+//                scrollToSelectedLocation(scrollProxy)
+        }
+//        }
+    }
+
+    var categoriesView: some View {
+        ForEach(categories, content: categorySection)
+    }
+
+    func categorySection(_ category: ProviderCategory) -> some View {
+        Section {
+            ForEach(filteredLocations(for: category)) { location in
+                if isEditable {
+                    locationRow(location)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            favoriteActions(location)
+                        }
+                } else {
+                    locationRow(location)
+                }
+            }
+        } header: {
+            !category.name.isEmpty ? Text(category.name) : nil
+        }
+    }
+
+    @ViewBuilder
+    func locationRow(_ location: ProviderLocation) -> some View {
+        if let onlyServer = location.onlyServer {
+            singleServerRow(location, onlyServer)
+        } else if profile.providerRandomizesServer ?? false {
+            singleServerRow(location, nil)
+        } else {
+            multipleServersRow(location)
+        }
+    }
+
+    func multipleServersRow(_ location: ProviderLocation) -> some View {
+        NavigationLink(destination: {
+            ServerListView(
+                location: location,
+                selectedServer: $selectedServer
+            ).navigationTitle(location.localizedCountry)
+        }, label: {
+            LocationRow(
+                location: location,
+                selectedLocationId: selectedServer?.locationId
+            )
+        })
+    }
+
+    func singleServerRow(_ location: ProviderLocation, _ server: ProviderServer?) -> some View {
+        Button {
+            selectedServer = server ?? location.servers?.randomElement()
+        } label: {
+            LocationRow(
+                location: location,
+                selectedLocationId: selectedServer?.locationId
+            )
+        }
+    }
+
+    @available(iOS 15, *)
+    func favoriteActions(_ location: ProviderLocation) -> some View {
+        Button {
+            withAnimation {
+                toggleFavoriteLocation(location)
+            }
+        } label: {
+            themeFavoriteActionImage(!isFavoriteLocation(location)).asSystemImage
+        }.themePrimaryTintStyle()
+    }
+
+    var emptyFavoritesSection: some View {
+        Section {
+        } footer: {
+            Text(L10n.Provider.Location.Sections.EmptyFavorites.footer)
+        }
+    }
+
+    var isShowingEmptyFavorites: Bool {
+        guard isShowingFavorites else {
+            return false
+        }
+        return favoriteLocationIds?.isEmpty ?? true
+    }
+}
+
+private extension ProviderLocationView {
+    func server(withId serverId: String) -> ProviderServer? {
+        providerManager.server(withId: serverId)
+    }
+
+    var categories: [ProviderCategory] {
+        providerManager.categories(providerName, vpnProtocol: vpnProtocol)
+            .filter {
+                !filteredLocations(for: $0).isEmpty
+            }.sorted()
+    }
+
+    func filteredLocations(for category: ProviderCategory) -> [ProviderLocation] {
+        let locations: [ProviderLocation]
+        if isShowingFavorites {
+            locations = category.locations.filter {
+                favoriteLocationIds?.contains($0.id) ?? false
+            }
+        } else {
+            locations = category.locations
+        }
+        return locations.sorted()
+    }
+
+    func isFavoriteLocation(_ location: ProviderLocation) -> Bool {
+        favoriteLocationIds?.contains(location.id) ?? false
+    }
+}
+
+private extension ProviderLocationView.ServerListView {
+    var servers: [ProviderServer] {
+        providerManager.servers(forLocation: location).sorted()
+    }
+}
+
+
+// MARK: -
+
+private extension ProviderLocationView {
+    func toggleFavoriteLocation(_ location: ProviderLocation) {
+        if !isFavoriteLocation(location) {
+            if favoriteLocationIds == nil {
+                favoriteLocationIds = [location.id]
+            } else {
+                favoriteLocationIds?.insert(location.id)
+            }
+        } else {
+            favoriteLocationIds?.remove(location.id)
+        }
+        // may trigger view updates?
+//        pp_log.debug("New favorite locations: \(favoriteLocationIds ?? [])")
+    }
+}
+
+private extension ProviderLocationView {
+    func scrollToSelectedLocation(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(selectedServer?.locationId)
     }
 }
 
-extension ProviderLocationView.ServerListView {
-    private func scrollToSelectedServer(_ proxy: ScrollViewProxy) {
+private extension ProviderLocationView.ServerListView {
+    func scrollToSelectedServer(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(selectedServer?.id)
     }
 }

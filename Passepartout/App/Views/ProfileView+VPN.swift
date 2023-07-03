@@ -34,18 +34,6 @@ extension ProfileView {
 
         @Binding private var modalType: ModalType?
 
-        private var interactiveProfile: Binding<Profile?> {
-            .init {
-                modalType == .interactiveAccount ? profile : nil
-            } set: {
-                modalType = $0 != nil ? .interactiveAccount : nil
-            }
-        }
-
-        private var isActiveProfile: Bool {
-            profileManager.isActiveProfile(profile.id)
-        }
-
         init(profile: Profile, modalType: Binding<ModalType?>) {
             profileManager = .shared
             self.profile = profile
@@ -63,22 +51,38 @@ extension ProfileView {
                     .xxxThemeTruncation()
             }
         }
+    }
+}
 
-        private var toggleView: some View {
-            VPNToggle(
-                profile: profile,
-                interactiveProfile: interactiveProfile,
-                rateLimit: Constants.RateLimit.vpnToggle
-            )
+// MARK: -
+
+private extension ProfileView.VPNSection {
+    var interactiveProfile: Binding<Profile?> {
+        .init {
+            modalType == .interactiveAccount ? profile : nil
+        } set: {
+            modalType = $0 != nil ? .interactiveAccount : nil
         }
+    }
 
-        private var statusView: some View {
-            HStack {
-                Text(L10n.Profile.Items.ConnectionStatus.caption)
-                Spacer()
-                VPNStatusText(isActiveProfile: isActiveProfile)
-                    .themeSecondaryTextStyle()
-            }
+    var isActiveProfile: Bool {
+        profileManager.isActiveProfile(profile.id)
+    }
+
+    var toggleView: some View {
+        VPNToggle(
+            profile: profile,
+            interactiveProfile: interactiveProfile,
+            rateLimit: Constants.RateLimit.vpnToggle
+        )
+    }
+
+    var statusView: some View {
+        HStack {
+            Text(L10n.Profile.Items.ConnectionStatus.caption)
+            Spacer()
+            VPNStatusText(isActiveProfile: isActiveProfile)
+                .themeSecondaryTextStyle()
         }
     }
 }

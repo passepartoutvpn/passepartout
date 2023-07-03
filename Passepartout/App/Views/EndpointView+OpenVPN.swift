@@ -39,10 +39,6 @@ extension EndpointView {
 
         @Binding private var customEndpoint: Endpoint?
 
-        private var isConfigurationReadonly: Bool {
-            currentProfile.value.isProvider
-        }
-
         @State private var isFirstAppearance = true
 
         @State private var isAutomatic = false
@@ -129,14 +125,16 @@ extension EndpointView {
     }
 }
 
-extension EndpointView.OpenVPNView {
-    private var mainSection: some View {
+// MARK: -
+
+private extension EndpointView.OpenVPNView {
+    var mainSection: some View {
         Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $isAutomatic.themeAnimation())
         }
     }
 
-    private var filtersSection: some View {
+    var filtersSection: some View {
         Section {
             themeTextPicker(
                 L10n.Global.Strings.protocol,
@@ -153,7 +151,7 @@ extension EndpointView.OpenVPNView {
         }
     }
 
-    private var addressesSection: some View {
+    var addressesSection: some View {
         Section {
             filteredRemotes.map {
                 ForEach($0, content: button(forEndpoint:))
@@ -163,7 +161,7 @@ extension EndpointView.OpenVPNView {
         }
     }
 
-    private var advancedSection: some View {
+    var advancedSection: some View {
         Section {
             let caption = L10n.Endpoint.Advanced.title
             NavigationLink(caption) {
@@ -176,7 +174,7 @@ extension EndpointView.OpenVPNView {
         }
     }
 
-    private func button(forEndpoint endpoint: Endpoint?) -> some View {
+    func button(forEndpoint endpoint: Endpoint?) -> some View {
         Button {
             customEndpoint = endpoint
             presentationMode.wrappedValue.dismiss()
@@ -185,56 +183,12 @@ extension EndpointView.OpenVPNView {
         }.withTrailingCheckmark(when: customEndpoint == endpoint)
     }
 
-    private func text(forEndpoint endpoint: Endpoint?) -> some View {
+    func text(forEndpoint endpoint: Endpoint?) -> some View {
         Text(endpoint?.address ?? L10n.Global.Strings.automatic)
             .themeLongTextStyle()
     }
-}
 
-extension EndpointView.OpenVPNView {
-    private func onToggleAutomatic(_ value: Bool) {
-        if value {
-            guard customEndpoint != nil else {
-                return
-            }
-            customEndpoint = nil
-        }
-    }
-
-    private func preselectFilters(once: Bool) {
-        guard !once || isFirstAppearance else {
-            return
-        }
-        isFirstAppearance = false
-
-        if let customEndpoint = customEndpoint {
-            isAutomatic = false
-            selectedSocketType = customEndpoint.proto.socketType
-            selectedPort = customEndpoint.proto.port
-        } else {
-            isAutomatic = true
-            guard let socketType = availableSocketTypes.first else {
-                assertionFailure("No socket types, empty remotes?")
-                return
-            }
-            selectedSocketType = socketType
-            preselectPort(forSocketType: socketType)
-        }
-    }
-
-    private func preselectPort(forSocketType socketType: SocketType) {
-        let supported = allPorts(forSocketType: socketType)
-        guard !supported.contains(selectedPort) else {
-            return
-        }
-        guard let port = supported.first else {
-            assertionFailure("No ports, empty remotes?")
-            return
-        }
-        selectedPort = port
-    }
-
-    private var availableSocketTypes: [SocketType] {
+    var availableSocketTypes: [SocketType] {
         guard let remotes = builder.remotes else {
             return []
         }
@@ -256,7 +210,7 @@ extension EndpointView.OpenVPNView {
         return availableTypes
     }
 
-    private func allPorts(forSocketType socketType: SocketType) -> [UInt16] {
+    func allPorts(forSocketType socketType: SocketType) -> [UInt16] {
         guard let remotes = builder.remotes else {
             return []
         }
@@ -266,15 +220,63 @@ extension EndpointView.OpenVPNView {
         return Array(allPorts).sorted()
     }
 
-    private var filteredRemotes: [Endpoint]? {
+    var filteredRemotes: [Endpoint]? {
         builder.remotes?.filter {
             $0.proto.socketType == selectedSocketType && $0.proto.port == selectedPort
         }
     }
+
+    var isConfigurationReadonly: Bool {
+        currentProfile.value.isProvider
+    }
 }
 
-extension EndpointView.OpenVPNView {
-    private func scrollToCustomEndpoint(_ proxy: ScrollViewProxy) {
+// MARK: -
+
+private extension EndpointView.OpenVPNView {
+    func onToggleAutomatic(_ value: Bool) {
+        if value {
+            guard customEndpoint != nil else {
+                return
+            }
+            customEndpoint = nil
+        }
+    }
+
+    func preselectFilters(once: Bool) {
+        guard !once || isFirstAppearance else {
+            return
+        }
+        isFirstAppearance = false
+
+        if let customEndpoint = customEndpoint {
+            isAutomatic = false
+            selectedSocketType = customEndpoint.proto.socketType
+            selectedPort = customEndpoint.proto.port
+        } else {
+            isAutomatic = true
+            guard let socketType = availableSocketTypes.first else {
+                assertionFailure("No socket types, empty remotes?")
+                return
+            }
+            selectedSocketType = socketType
+            preselectPort(forSocketType: socketType)
+        }
+    }
+
+    func preselectPort(forSocketType socketType: SocketType) {
+        let supported = allPorts(forSocketType: socketType)
+        guard !supported.contains(selectedPort) else {
+            return
+        }
+        guard let port = supported.first else {
+            assertionFailure("No ports, empty remotes?")
+            return
+        }
+        selectedPort = port
+    }
+
+    func scrollToCustomEndpoint(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(customEndpoint?.id)
     }
 }

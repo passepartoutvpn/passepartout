@@ -84,50 +84,58 @@ extension AddProviderView {
                 message: alertOverwriteMessage
             ).navigationTitle(providerMetadata.fullName)
         }
+    }
+}
 
-        private var hiddenAccountLink: some View {
-            NavigationLink("", isActive: $isEnteringCredentials) {
-                AddProfileView.AccountWrapperView(
-                    profile: $profile,
-                    bindings: bindings
-                )
-            }
-        }
+// MARK: -
 
-        @ViewBuilder
-        private func alertOverwriteActions() -> some View {
-            Button(role: .destructive) {
-                saveProfile(replacingExisting: true)
-            } label: {
-                Text(L10n.Global.Strings.ok)
-            }
-            Button(role: .cancel) {
-            } label: {
-                Text(L10n.Global.Strings.cancel)
-            }
-        }
-
-        private func alertOverwriteMessage() -> some View {
-            Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
-        }
-
-        private func saveProfile(replacingExisting: Bool) {
-            let addedProfile = viewModel.addProfile(
-                profile,
-                to: profileManager,
-                replacingExisting: replacingExisting
+private extension AddProviderView.NameView {
+    var hiddenAccountLink: some View {
+        NavigationLink("", isActive: $isEnteringCredentials) {
+            AddProfileView.AccountWrapperView(
+                profile: $profile,
+                bindings: bindings
             )
-            guard let addedProfile = addedProfile else {
-                return
-            }
-            profile = addedProfile
+        }
+    }
 
-            if profile.requiresCredentials {
-                isEnteringCredentials = true
-            } else {
-                bindings.isPresented = false
-                profileManager.didCreateProfile.send(profile)
-            }
+    @ViewBuilder
+    func alertOverwriteActions() -> some View {
+        Button(role: .destructive) {
+            saveProfile(replacingExisting: true)
+        } label: {
+            Text(L10n.Global.Strings.ok)
+        }
+        Button(role: .cancel) {
+        } label: {
+            Text(L10n.Global.Strings.cancel)
+        }
+    }
+
+    func alertOverwriteMessage() -> some View {
+        Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
+    }
+}
+
+// MARK: -
+
+private extension AddProviderView.NameView {
+    func saveProfile(replacingExisting: Bool) {
+        let addedProfile = viewModel.addProfile(
+            profile,
+            to: profileManager,
+            replacingExisting: replacingExisting
+        )
+        guard let addedProfile = addedProfile else {
+            return
+        }
+        profile = addedProfile
+
+        if profile.requiresCredentials {
+            isEnteringCredentials = true
+        } else {
+            bindings.isPresented = false
+            profileManager.didCreateProfile.send(profile)
         }
     }
 }

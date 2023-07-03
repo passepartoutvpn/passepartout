@@ -46,10 +46,6 @@ extension ProfileView {
 
         @ObservedObject private var currentProfile: ObservableProfile
 
-        private var header: Profile.Header {
-            currentProfile.value.header
-        }
-
         @Binding private var modalType: ModalType?
 
         @State private var isAlertPresented = false
@@ -77,94 +73,6 @@ extension ProfileView {
                     actions: alertActions,
                     message: alertMessage
                 )
-        }
-
-        private var mainView: some View {
-            Menu {
-                ReconnectButton()
-                ShortcutsButton(
-                    modalType: $modalType
-                )
-                Divider()
-                RenameButton(
-                    modalType: $modalType
-                )
-                DuplicateButton(
-                    header: header,
-                    setAsCurrent: true
-                )
-                uninstallVPNButton
-                Divider()
-                deleteProfileButton
-            } label: {
-                themeSettingsMenuImage.asSystemImage
-            }
-        }
-
-        private func alertActions(_ alertType: AlertType) -> some View {
-            switch alertType {
-            case .uninstallVPN:
-                return Group {
-                    Button(role: .destructive, action: uninstallVPN) {
-                        Text(uninstallVPNTitle)
-                    }
-                    Button(role: .cancel) {
-                    } label: {
-                        Text(L10n.Global.Strings.cancel)
-                    }
-                }
-
-            case .deleteProfile:
-                return Group {
-                    Button(role: .destructive, action: removeProfile) {
-                        Text(deleteProfileTitle)
-                    }
-                    Button(role: .cancel) {
-                    } label: {
-                        Text(L10n.Global.Strings.cancel)
-                    }
-                }
-            }
-        }
-
-        private func alertMessage(_ alertType: AlertType) -> some View {
-            switch alertType {
-            case .uninstallVPN:
-                return Text(L10n.Profile.Alerts.UninstallVpn.message)
-
-            case .deleteProfile:
-                return Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name))
-            }
-        }
-
-        private var uninstallVPNButton: some View {
-            Button {
-                alertType = .uninstallVPN
-                isAlertPresented = true
-            } label: {
-                Label(uninstallVPNTitle, systemImage: themeUninstallImage)
-            }
-        }
-
-        private var deleteProfileButton: some View {
-            DestructiveButton {
-                alertType = .deleteProfile
-                isAlertPresented = true
-            } label: {
-                Label(deleteProfileTitle, systemImage: themeDeleteImage)
-            }
-        }
-
-        private func uninstallVPN() {
-            Task { @MainActor in
-                await vpnManager.uninstall()
-            }
-        }
-
-        private func removeProfile() {
-            withAnimation {
-                profileManager.removeProfiles(withIds: [header.id])
-            }
         }
     }
 }
@@ -198,25 +106,11 @@ extension ProfileView {
             _modalType = modalType
         }
 
-        private var isEligibleForSiri: Bool {
-            productManager.isEligible(forFeature: .siriShortcuts)
-        }
-
         var body: some View {
             Button {
                 presentShortcutsOrPaywall()
             } label: {
                 Label(Unlocalized.Other.siri, systemImage: themeShortcutsImage)
-            }
-        }
-
-        private func presentShortcutsOrPaywall() {
-
-            // eligibility: enter Siri shortcuts or present paywall
-            if isEligibleForSiri {
-                modalType = .shortcuts
-            } else {
-                modalType = .paywallShortcuts
             }
         }
     }
@@ -257,9 +151,129 @@ extension ProfileView {
                 Label(L10n.Global.Strings.duplicate, systemImage: themeDuplicateImage)
             }
         }
+    }
+}
 
-        private func duplicateProfile(withId id: UUID) {
-            profileManager.duplicateProfile(withId: id, setAsCurrent: setAsCurrent)
+// MARK: -
+
+private extension ProfileView.MainMenu {
+    var header: Profile.Header {
+        currentProfile.value.header
+    }
+
+    var mainView: some View {
+        Menu {
+            ProfileView.ReconnectButton()
+            ProfileView.ShortcutsButton(
+                modalType: $modalType
+            )
+            Divider()
+            ProfileView.RenameButton(
+                modalType: $modalType
+            )
+            ProfileView.DuplicateButton(
+                header: header,
+                setAsCurrent: true
+            )
+            uninstallVPNButton
+            Divider()
+            deleteProfileButton
+        } label: {
+            themeSettingsMenuImage.asSystemImage
         }
+    }
+
+    func alertActions(_ alertType: AlertType) -> some View {
+        switch alertType {
+        case .uninstallVPN:
+            return Group {
+                Button(role: .destructive, action: uninstallVPN) {
+                    Text(uninstallVPNTitle)
+                }
+                Button(role: .cancel) {
+                } label: {
+                    Text(L10n.Global.Strings.cancel)
+                }
+            }
+
+        case .deleteProfile:
+            return Group {
+                Button(role: .destructive, action: removeProfile) {
+                    Text(deleteProfileTitle)
+                }
+                Button(role: .cancel) {
+                } label: {
+                    Text(L10n.Global.Strings.cancel)
+                }
+            }
+        }
+    }
+
+    func alertMessage(_ alertType: AlertType) -> some View {
+        switch alertType {
+        case .uninstallVPN:
+            return Text(L10n.Profile.Alerts.UninstallVpn.message)
+
+        case .deleteProfile:
+            return Text(L10n.Organizer.Alerts.RemoveProfile.message(header.name))
+        }
+    }
+
+    var uninstallVPNButton: some View {
+        Button {
+            alertType = .uninstallVPN
+            isAlertPresented = true
+        } label: {
+            Label(uninstallVPNTitle, systemImage: themeUninstallImage)
+        }
+    }
+
+    var deleteProfileButton: some View {
+        DestructiveButton {
+            alertType = .deleteProfile
+            isAlertPresented = true
+        } label: {
+            Label(deleteProfileTitle, systemImage: themeDeleteImage)
+        }
+    }
+}
+
+private extension ProfileView.ShortcutsButton {
+    var isEligibleForSiri: Bool {
+        productManager.isEligible(forFeature: .siriShortcuts)
+    }
+}
+
+// MARK: -
+
+private extension ProfileView.MainMenu {
+    func uninstallVPN() {
+        Task { @MainActor in
+            await vpnManager.uninstall()
+        }
+    }
+
+    func removeProfile() {
+        withAnimation {
+            profileManager.removeProfiles(withIds: [header.id])
+        }
+    }
+}
+
+private extension ProfileView.ShortcutsButton {
+    func presentShortcutsOrPaywall() {
+
+        // eligibility: enter Siri shortcuts or present paywall
+        if isEligibleForSiri {
+            modalType = .shortcuts
+        } else {
+            modalType = .paywallShortcuts
+        }
+    }
+}
+
+private extension ProfileView.DuplicateButton {
+    func duplicateProfile(withId id: UUID) {
+        profileManager.duplicateProfile(withId: id, setAsCurrent: setAsCurrent)
     }
 }

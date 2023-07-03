@@ -31,10 +31,6 @@ struct OnDemandView: View {
 
     @ObservedObject private var currentProfile: ObservableProfile
 
-    private var isEligibleForSiri: Bool {
-        productManager.isEligible(forFeature: .siriShortcuts)
-    }
-
     @State private var onDemand = Profile.OnDemand()
 
     init(currentProfile: ObservableProfile) {
@@ -66,21 +62,23 @@ struct OnDemandView: View {
     }
 }
 
-extension OnDemandView {
-    private var enabledView: some View {
+// MARK: -
+
+private extension OnDemandView {
+    var enabledView: some View {
         Section {
             Toggle(L10n.Global.Strings.enabled, isOn: $onDemand.isEnabled.themeAnimation())
         }
     }
 
     @ViewBuilder
-    private var mainView: some View {
+    var mainView: some View {
         if Utils.hasCellularData() {
             Section {
                 Toggle(L10n.OnDemand.Items.Mobile.caption, isOn: $onDemand.withMobileNetwork)
             } header: {
                 // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-//                Text(L10n.Profile.Sections.Trusted.header)
+                //                Text(L10n.Profile.Sections.Trusted.header)
             }
             Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
@@ -90,7 +88,7 @@ extension OnDemandView {
                 Toggle(L10n.OnDemand.Items.Ethernet.caption, isOn: $onDemand.withEthernetNetwork)
             } header: {
                 // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-//                Text(L10n.Profile.Sections.Trusted.header)
+                //                Text(L10n.Profile.Sections.Trusted.header)
             }
             Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
@@ -100,7 +98,7 @@ extension OnDemandView {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
             } header: {
                 // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-//                Text(L10n.Profile.Sections.Trusted.header)
+                //                Text(L10n.Profile.Sections.Trusted.header)
             }
         }
         Section {
@@ -110,8 +108,17 @@ extension OnDemandView {
         }
     }
 
+    var isEligibleForSiri: Bool {
+        productManager.isEligible(forFeature: .siriShortcuts)
+    }
+}
+
+// MARK: -
+
+private extension OnDemandView {
+
     // eligibility: donate intents if eligible for Siri
-    private func donateMobileIntent(_ isEnabled: Bool) {
+    func donateMobileIntent(_ isEnabled: Bool) {
         guard isEligibleForSiri else {
             return
         }
@@ -120,7 +127,7 @@ extension OnDemandView {
     }
 
     // eligibility: donate intents if eligible for Siri
-    private func donateNetworkIntents(_: [String: Bool]) {
+    func donateNetworkIntents(_: [String: Bool]) {
         guard isEligibleForSiri else {
             return
         }

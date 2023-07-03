@@ -76,8 +76,12 @@ struct DonateView: View {
             }
         }.themeAnimation(on: productManager.isRefreshingProducts)
     }
+}
 
-    private func alertActions(_ alertType: AlertType) -> some View {
+// MARK: -
+
+private extension DonateView {
+    func alertActions(_ alertType: AlertType) -> some View {
         switch alertType {
         case .thankYou:
             return Button(role: .cancel) {
@@ -87,14 +91,14 @@ struct DonateView: View {
         }
     }
 
-    private func alertMessage(_ alertType: AlertType) -> some View {
+    func alertMessage(_ alertType: AlertType) -> some View {
         switch alertType {
         case .thankYou:
             return Text(L10n.Donate.Alerts.Purchase.Success.message)
         }
     }
 
-    private var productsSection: some View {
+    var productsSection: some View {
         Section {
             if !productManager.isRefreshingProducts {
                 ForEach(productManager.donations, id: \.productIdentifier, content: productRow)
@@ -109,7 +113,7 @@ struct DonateView: View {
     }
 
     @ViewBuilder
-    private func productRow(_ product: SKProduct) -> some View {
+    func productRow(_ product: SKProduct) -> some View {
         HStack {
             Button(product.localizedTitle) {
                 purchaseProduct(product)
@@ -127,13 +131,27 @@ struct DonateView: View {
     }
 }
 
-extension DonateView {
-    private func purchaseProduct(_ product: SKProduct) {
+private extension ProductManager {
+    var donations: [SKProduct] {
+        products.filter { product in
+            LocalProduct.allDonations.contains {
+                $0.matchesStoreKitProduct(product)
+            }
+        }.sorted {
+            $0.price.decimalValue < $1.price.decimalValue
+        }
+    }
+}
+
+// MARK: -
+
+private extension DonateView {
+    func purchaseProduct(_ product: SKProduct) {
         pendingDonationIdentifier = product.productIdentifier
         productManager.purchase(product, completionHandler: handlePurchaseResult)
     }
 
-    private func handlePurchaseResult(_ result: Result<InAppPurchaseResult, Error>) {
+    func handlePurchaseResult(_ result: Result<InAppPurchaseResult, Error>) {
         switch result {
         case .success(let value):
             if case .done = value {
@@ -150,17 +168,5 @@ extension DonateView {
             )
         }
         pendingDonationIdentifier = nil
-    }
-}
-
-private extension ProductManager {
-    var donations: [SKProduct] {
-        products.filter { product in
-            LocalProduct.allDonations.contains {
-                $0.matchesStoreKitProduct(product)
-            }
-        }.sorted {
-            $0.price.decimalValue < $1.price.decimalValue
-        }
     }
 }

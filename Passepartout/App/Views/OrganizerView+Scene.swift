@@ -51,31 +51,36 @@ extension OrganizerView {
                 .hidden()
                 .onAppear(perform: onAppear)
         }
+    }
+}
 
-        @MainActor
-        private func onAppear() {
-            guard didHandleSubreddit else {
-                alertType = .subscribeReddit
-                isAlertPresented = true
-                return
-            }
+// MARK: -
 
-            //
-            // FIXME: iPad portrait/compact, loading current profile adds ProfileView() twice
-            //
-            // - from MainView
-            // - from NavigationLink destination in OrganizerView
-            //
-            // can notice becase "Back" needs to be tapped twice to show sidebar
-            // workaround: set active profile but do not load as current (prevents NavigationLink activation)
-            //
-            guard isFirstLaunch else {
-                return
-            }
-            isFirstLaunch = false
-            if themeIdiom != .phone && !themeIsiPadPortrait, let activeProfileId = ProfileManager.shared.activeProfileId {
-                ProfileManager.shared.currentProfileId = activeProfileId
-            }
+private extension OrganizerView.SceneView {
+
+    @MainActor
+    func onAppear() {
+        guard didHandleSubreddit else {
+            alertType = .subscribeReddit
+            isAlertPresented = true
+            return
+        }
+
+        //
+        // FIXME: iPad portrait/compact, loading current profile adds ProfileView() twice
+        //
+        // - from MainView
+        // - from NavigationLink destination in OrganizerView
+        //
+        // can notice becase "Back" needs to be tapped twice to show sidebar
+        // workaround: set active profile but do not load as current (prevents NavigationLink activation)
+        //
+        guard isFirstLaunch else {
+            return
+        }
+        isFirstLaunch = false
+        if themeIdiom != .phone && !themeIsiPadPortrait, let activeProfileId = ProfileManager.shared.activeProfileId {
+            ProfileManager.shared.currentProfileId = activeProfileId
         }
     }
 }

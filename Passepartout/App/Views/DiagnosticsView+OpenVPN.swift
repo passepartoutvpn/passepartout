@@ -47,10 +47,6 @@ extension DiagnosticsView {
 
         private let providerName: ProviderName?
 
-        private var isEligibleForFeedback: Bool {
-            productManager.isEligibleForFeedback()
-        }
-
         @State private var isReportingIssue = false
 
         @State private var isAlertPresented = false
@@ -85,75 +81,77 @@ extension DiagnosticsView {
                 message: alertMessage
             )
         }
-
-        private func alertActions(_ alertType: AlertType) -> some View {
-            Button(role: .cancel) {
-            } label: {
-                Text(L10n.Global.Strings.ok)
-            }
-        }
-
-        private func alertMessage(_ alertType: AlertType) -> some View {
-            switch alertType {
-            case .emailNotConfigured:
-                return Text(L10n.Global.Messages.emailNotConfigured)
-            }
-        }
-
-        private var serverConfigurationSection: some View {
-            Section {
-                let cfg = currentServerConfiguration
-                NavigationLink(L10n.Diagnostics.Items.ServerConfiguration.caption) {
-                    cfg.map {
-                        EndpointAdvancedView.OpenVPNView(
-                            builder: .constant($0),
-                            isReadonly: true,
-                            isServerPushed: true
-                        ).navigationTitle(L10n.Diagnostics.Items.ServerConfiguration.caption)
-                    }
-                }.disabled(cfg == nil)
-            }
-        }
-
-        private var debugLogSection: some View {
-            Section {
-                DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
-                Toggle(L10n.Diagnostics.Items.MasksPrivateData.caption, isOn: $vpnManager.masksPrivateData)
-            } header: {
-                Text(L10n.DebugLog.title)
-            } footer: {
-                Text(L10n.Diagnostics.Sections.DebugLog.footer)
-            }
-        }
-
-        private var issueReporterSection: some View {
-            Section {
-                Button(L10n.Diagnostics.Items.ReportIssue.caption, action: presentReportIssue)
-            }
-        }
-
-        private func reportIssueView() -> some View {
-            let logURL = vpnManager.debugLogURL(forProtocol: vpnProtocol)
-            var metadata: ProviderMetadata?
-            var lastUpdate: Date?
-            if let name = providerName {
-                metadata = providerManager.provider(withName: name)
-                lastUpdate = providerManager.lastUpdate(name, vpnProtocol: vpnProtocol)
-            }
-
-            return ReportIssueView(
-                isPresented: $isReportingIssue,
-                vpnProtocol: vpnProtocol,
-                logURL: logURL,
-                providerMetadata: metadata,
-                lastUpdate: lastUpdate
-            )
-        }
     }
 }
 
-extension DiagnosticsView.OpenVPNView {
-    private var currentServerConfiguration: OpenVPN.ConfigurationBuilder? {
+// MARK: -
+
+private extension DiagnosticsView.OpenVPNView {
+    func alertActions(_ alertType: AlertType) -> some View {
+        Button(role: .cancel) {
+        } label: {
+            Text(L10n.Global.Strings.ok)
+        }
+    }
+
+    func alertMessage(_ alertType: AlertType) -> some View {
+        switch alertType {
+        case .emailNotConfigured:
+            return Text(L10n.Global.Messages.emailNotConfigured)
+        }
+    }
+
+    var serverConfigurationSection: some View {
+        Section {
+            let cfg = currentServerConfiguration
+            NavigationLink(L10n.Diagnostics.Items.ServerConfiguration.caption) {
+                cfg.map {
+                    EndpointAdvancedView.OpenVPNView(
+                        builder: .constant($0),
+                        isReadonly: true,
+                        isServerPushed: true
+                    ).navigationTitle(L10n.Diagnostics.Items.ServerConfiguration.caption)
+                }
+            }.disabled(cfg == nil)
+        }
+    }
+
+    var debugLogSection: some View {
+        Section {
+            DiagnosticsView.DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
+            Toggle(L10n.Diagnostics.Items.MasksPrivateData.caption, isOn: $vpnManager.masksPrivateData)
+        } header: {
+            Text(L10n.DebugLog.title)
+        } footer: {
+            Text(L10n.Diagnostics.Sections.DebugLog.footer)
+        }
+    }
+
+    var issueReporterSection: some View {
+        Section {
+            Button(L10n.Diagnostics.Items.ReportIssue.caption, action: presentReportIssue)
+        }
+    }
+
+    func reportIssueView() -> some View {
+        let logURL = vpnManager.debugLogURL(forProtocol: vpnProtocol)
+        var metadata: ProviderMetadata?
+        var lastUpdate: Date?
+        if let name = providerName {
+            metadata = providerManager.provider(withName: name)
+            lastUpdate = providerManager.lastUpdate(name, vpnProtocol: vpnProtocol)
+        }
+
+        return ReportIssueView(
+            isPresented: $isReportingIssue,
+            vpnProtocol: vpnProtocol,
+            logURL: logURL,
+            providerMetadata: metadata,
+            lastUpdate: lastUpdate
+        )
+    }
+
+    var currentServerConfiguration: OpenVPN.ConfigurationBuilder? {
         guard currentVPNState.vpnStatus == .connected else {
             return nil
         }
@@ -164,17 +162,23 @@ extension DiagnosticsView.OpenVPNView {
         return cfg.builder(withFallbacks: false)
     }
 
-    private var appLogURL: URL? {
+    var appLogURL: URL? {
         Passepartout.shared.logger.logFile
     }
 
-    private var tunnelLogURL: URL? {
+    var tunnelLogURL: URL? {
         vpnManager.debugLogURL(forProtocol: vpnProtocol)
+    }
+
+    var isEligibleForFeedback: Bool {
+        productManager.isEligibleForFeedback()
     }
 }
 
-extension DiagnosticsView.OpenVPNView {
-    private func presentReportIssue() {
+// MARK: -
+
+private extension DiagnosticsView.OpenVPNView {
+    func presentReportIssue() {
         guard MailComposerView.canSendMail() else {
             openReportIssueMailTo()
             return
@@ -182,7 +186,7 @@ extension DiagnosticsView.OpenVPNView {
         isReportingIssue = true
     }
 
-    private func openReportIssueMailTo() {
+    func openReportIssueMailTo() {
         let V = Unlocalized.Issues.self
         let body = V.body(V.template, DebugLog(content: "--").decoratedString())
 

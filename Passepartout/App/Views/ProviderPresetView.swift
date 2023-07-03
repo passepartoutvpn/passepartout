@@ -67,8 +67,12 @@ struct ProviderPresetView: View {
             ForEach(availablePresets, id: \.id, content: presetSection)
         }.navigationTitle(L10n.Provider.Preset.title)
     }
+}
 
-    private func presetSection(_ preset: ProviderServer.Preset) -> some View {
+// MARK: -
+
+private extension ProviderPresetView {
+    func presetSection(_ preset: ProviderServer.Preset) -> some View {
         Section {
             Button {
                 selectedPreset = preset
@@ -92,13 +96,13 @@ struct ProviderPresetView: View {
         }
     }
 
-    private func presetSelectionRow(_ preset: ProviderServer.Preset) -> some View {
+    func presetSelectionRow(_ preset: ProviderServer.Preset) -> some View {
         Text(preset.comment)
             .withTrailingCheckmark(when: preset.id == selectedPreset?.id)
     }
 
     // some providers (e.g. NordVPN) have specific presets based on selected server
-    private var availablePresets: [ProviderServer.Preset] {
+    var availablePresets: [ProviderServer.Preset] {
         server?.presets?.sorted() ?? []
     }
 }

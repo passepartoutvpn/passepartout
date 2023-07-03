@@ -60,33 +60,37 @@ extension DiagnosticsView {
             appLink
             tunnelLink
         }
+    }
+}
 
-        private var appLink: some View {
-            navigationLink(
-                withTitle: L10n.Diagnostics.Items.AppLog.title,
-                url: appLogURL,
-                refreshInterval: nil
-            )
-        }
+// MARK: -
 
-        private var tunnelLink: some View {
-            navigationLink(
-                withTitle: Unlocalized.VPN.vpn,
-                url: tunnelLogURL,
-                refreshInterval: refreshInterval
-            )
-        }
+private extension DiagnosticsView.DebugLogSection {
+    var appLink: some View {
+        navigationLink(
+            withTitle: L10n.Diagnostics.Items.AppLog.title,
+            url: appLogURL,
+            refreshInterval: nil
+        )
+    }
 
-        private func navigationLink(withTitle title: String, url: URL?, refreshInterval: TimeInterval?) -> some View {
-            NavigationLink(title) {
-                url.map {
-                    DebugLogView(
-                        title: title,
-                        url: $0,
-                        refreshInterval: refreshInterval
-                    )
-                }
-            }.disabled(url == nil)
-        }
+    var tunnelLink: some View {
+        navigationLink(
+            withTitle: Unlocalized.VPN.vpn,
+            url: tunnelLogURL,
+            refreshInterval: refreshInterval
+        )
+    }
+
+    func navigationLink(withTitle title: String, url: URL?, refreshInterval: TimeInterval?) -> some View {
+        NavigationLink(title) {
+            url.map {
+                DebugLogView(
+                    title: title,
+                    url: $0,
+                    refreshInterval: refreshInterval
+                )
+            }
+        }.disabled(url == nil)
     }
 }

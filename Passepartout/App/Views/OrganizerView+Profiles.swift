@@ -49,87 +49,6 @@ extension OrganizerView {
                 profileManager.currentProfileId = $0.id
             }
         }
-
-        private var mainView: some View {
-            List {
-                if profileManager.hasProfiles {
-
-                    // FIXME: iPad multitasking, navigation binding does not clear on pop
-                    // - if listStyle is different than .sidebar
-                    // - if listStyle is .sidebar but List has no Section
-                    if themeIsiPadMultitasking {
-                        Section {
-                            profilesView
-                        } header: {
-                            Text(L10n.Global.Strings.profiles)
-                        }
-                    } else {
-                        profilesView
-                    }
-                }
-            }.themeAnimation(on: profileManager.headers)
-        }
-
-        private var profilesView: some View {
-            ForEach(sortedProfiles, content: profileRow(forProfile:))
-                .onDelete(perform: removeProfiles)
-        }
-
-        private var emptyView: some View {
-            VStack {
-                Text(L10n.Organizer.Empty.noProfiles)
-                    .themeInformativeTextStyle()
-            }
-        }
-
-        private func profileRow(forProfile profile: Profile) -> some View {
-            NavigationLink(tag: profile.id, selection: $profileManager.currentProfileId) {
-                ProfileView()
-            } label: {
-                profileLabel(forProfile: profile)
-            }.contextMenu {
-                ProfileContextMenu(header: profile.header)
-            }
-        }
-
-        private func profileLabel(forProfile profile: Profile) -> some View {
-            ProfileRow(
-                profile: profile,
-                isActiveProfile: profileManager.isActiveProfile(profile.id),
-                modalType: $modalType
-            )
-        }
-
-        private var sortedProfiles: [Profile] {
-            profileManager.profiles
-                .sorted()
-//                .sorted {
-//                    if profileManager.isActiveProfile($0.id) {
-//                        return true
-//                    } else if profileManager.isActiveProfile($1.id) {
-//                        return false
-//                    } else {
-//                        return $0 < $1
-//                    }
-//                }
-        }
-
-        private func removeProfiles(at offsets: IndexSet) {
-            let currentHeaders = sortedProfiles
-            var toDelete: [UUID] = []
-            offsets.forEach {
-                toDelete.append(currentHeaders[$0].id)
-            }
-            withAnimation {
-                profileManager.removeProfiles(withIds: toDelete)
-            }
-        }
-
-        private func performMigrationsIfNeeded() {
-            Task { @MainActor in
-                UpgradeManager.shared.doMigrations(profileManager)
-            }
-        }
     }
 }
 
@@ -154,26 +73,117 @@ extension OrganizerView {
             duplicateButton
             deleteButton
         }
+    }
+}
 
-        private var reconnectButton: some View {
-            ProfileView.ReconnectButton()
-        }
+// MARK: -
 
-        private var duplicateButton: some View {
-            ProfileView.DuplicateButton(
-                header: header,
-                setAsCurrent: false
-            )
-        }
+private extension OrganizerView.ProfilesList {
+    var mainView: some View {
+        List {
+            if profileManager.hasProfiles {
 
-        private var deleteButton: some View {
-            DestructiveButton {
-                withAnimation {
-                    profileManager.removeProfiles(withIds: [header.id])
+                // FIXME: iPad multitasking, navigation binding does not clear on pop
+                // - if listStyle is different than .sidebar
+                // - if listStyle is .sidebar but List has no Section
+                if themeIsiPadMultitasking {
+                    Section {
+                        profilesView
+                    } header: {
+                        Text(L10n.Global.Strings.profiles)
+                    }
+                } else {
+                    profilesView
                 }
-            } label: {
-                Label(L10n.Global.Strings.delete, systemImage: themeDeleteImage)
             }
+        }.themeAnimation(on: profileManager.headers)
+    }
+
+    var profilesView: some View {
+        ForEach(sortedProfiles, content: profileRow(forProfile:))
+            .onDelete(perform: removeProfiles)
+    }
+
+    var emptyView: some View {
+        VStack {
+            Text(L10n.Organizer.Empty.noProfiles)
+                .themeInformativeTextStyle()
+        }
+    }
+
+    func profileRow(forProfile profile: Profile) -> some View {
+        NavigationLink(tag: profile.id, selection: $profileManager.currentProfileId) {
+            ProfileView()
+        } label: {
+            profileLabel(forProfile: profile)
+        }.contextMenu {
+            OrganizerView.ProfileContextMenu(header: profile.header)
+        }
+    }
+
+    func profileLabel(forProfile profile: Profile) -> some View {
+        OrganizerView.ProfileRow(
+            profile: profile,
+            isActiveProfile: profileManager.isActiveProfile(profile.id),
+            modalType: $modalType
+        )
+    }
+
+    var sortedProfiles: [Profile] {
+        profileManager.profiles
+            .sorted()
+//            .sorted {
+//                if profileManager.isActiveProfile($0.id) {
+//                    return true
+//                } else if profileManager.isActiveProfile($1.id) {
+//                    return false
+//                } else {
+//                    return $0 < $1
+//                }
+//            }
+    }
+}
+
+private extension OrganizerView.ProfileContextMenu {
+    var reconnectButton: some View {
+        ProfileView.ReconnectButton()
+    }
+
+    var duplicateButton: some View {
+        ProfileView.DuplicateButton(
+            header: header,
+            setAsCurrent: false
+        )
+    }
+
+    var deleteButton: some View {
+        DestructiveButton {
+            withAnimation {
+                profileManager.removeProfiles(withIds: [header.id])
+            }
+        } label: {
+            Label(L10n.Global.Strings.delete, systemImage: themeDeleteImage)
+        }
+    }
+}
+
+// MARK: -
+
+private extension OrganizerView.ProfilesList {
+    func removeProfiles(at offsets: IndexSet) {
+        let currentHeaders = sortedProfiles
+        var toDelete: [UUID] = []
+        offsets.forEach {
+            toDelete.append(currentHeaders[$0].id)
+        }
+        withAnimation {
+            profileManager.removeProfiles(withIds: toDelete)
+        }
+    }
+
+    func performMigrationsIfNeeded() {
+        Task { @MainActor in
+            UpgradeManager.shared.doMigrations(profileManager)
         }
     }
 }

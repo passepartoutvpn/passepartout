@@ -58,7 +58,7 @@ struct AccountView: View {
 
     var body: some View {
         List {
-            // TODO: interactive, re-enable after fixing
+// TODO: interactive, re-enable after fixing
 //            Section {
 //                // TODO: interactive, l10n
 //                themeTextPicker(L10n.Global.Strings.authentication, selection: $liveAccount.authenticationMethod ?? .persistent, values: [
@@ -83,7 +83,7 @@ struct AccountView: View {
                             .withLeadingText(L10n.Account.Items.Password.caption)
                     }
 
-                // TODO: interactive, scan QR code
+                    // TODO: interactive, scan QR code
                 case .totp:
                     themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password, contentType: .oneTimeCode)
                         .withLeadingText(L10n.Account.Items.Seed.caption)
@@ -102,8 +102,7 @@ struct AccountView: View {
                     }
                 }
             }
-        }.navigationTitle(L10n.Account.title)
-        .toolbar {
+        }.toolbar {
             CopySavingButton(
                 original: $account,
                 copy: $liveAccount,
@@ -112,25 +111,21 @@ struct AccountView: View {
                 saveAnyway: saveAnyway,
                 onSave: onSave
             )
-        }
-    }
-
-    private func openGuidanceURL(_ url: URL) {
-        URL.open(url)
+        }.navigationTitle(L10n.Account.title)
     }
 }
 
-// MARK: Provider
+// MARK: -
 
-extension AccountView {
-    private var usernamePlaceholder: String? {
+private extension AccountView {
+    var usernamePlaceholder: String? {
         guard let name = providerName else {
             return nil
         }
         return providerManager.defaultUsername(name, vpnProtocol: vpnProtocol)
     }
 
-    private var metadata: ProviderMetadata? {
+    var metadata: ProviderMetadata? {
         guard let name = providerName else {
             return nil
         }
@@ -150,5 +145,13 @@ private extension Profile.Account.AuthenticationMethod {
         case .totp:
             return Unlocalized.Other.totp
         }
+    }
+}
+
+// MARK: -
+
+private extension AccountView {
+    func openGuidanceURL(_ url: URL) {
+        URL.open(url)
     }
 }

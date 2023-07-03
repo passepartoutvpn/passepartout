@@ -44,47 +44,40 @@ extension OnDemandView {
                 Text(L10n.Global.Strings.add)
             }
         }
+    }
+}
 
-        private func mapElements(elements: [IdentifiableString]) -> [IdentifiableString] {
-            elements
-                .filter { !$0.string.isEmpty }
-                .sorted { $0.string.lowercased() < $1.string.lowercased() }
-        }
+// MARK: -
 
-        private func ssidRow(callback: EditableTextFieldCallback) -> some View {
-            Group {
-                if callback.isNewElement {
+private extension OnDemandView.SSIDList {
+    func mapElements(elements: [IdentifiableString]) -> [IdentifiableString] {
+        elements
+            .filter { !$0.string.isEmpty }
+            .sorted { $0.string.lowercased() < $1.string.lowercased() }
+    }
+
+    func ssidRow(callback: EditableTextFieldCallback) -> some View {
+        Group {
+            if callback.isNewElement {
+                ssidField(callback: callback)
+            } else {
+                Toggle(isOn: isSSIDOn(callback.text.wrappedValue)) {
                     ssidField(callback: callback)
-                } else {
-                    Toggle(isOn: isSSIDOn(callback.text.wrappedValue)) {
-                        ssidField(callback: callback)
-                    }
-                }
-            }
-        }
-
-        private func ssidField(callback: EditableTextFieldCallback) -> some View {
-            TextField(
-                Unlocalized.Network.ssid,
-                text: callback.text,
-                onEditingChanged: callback.onEditingChanged,
-                onCommit: callback.onCommit
-            ).themeValidSSID(callback.text.wrappedValue)
-        }
-
-        private func requestSSID(_ text: Binding<String>) {
-            Task { @MainActor in
-                let ssid = try await reader.currentSSID()
-                if !withSSIDs.keys.contains(ssid) {
-                    text.wrappedValue = ssid
                 }
             }
         }
     }
-}
 
-extension OnDemandView.SSIDList {
-    private var allSSIDs: Binding<[String]> {
+    func ssidField(callback: EditableTextFieldCallback) -> some View {
+        TextField(
+            Unlocalized.Network.ssid,
+            text: callback.text,
+            onEditingChanged: callback.onEditingChanged,
+            onCommit: callback.onCommit
+        ).themeValidSSID(callback.text.wrappedValue)
+    }
+
+    var allSSIDs: Binding<[String]> {
         .init {
             Array(withSSIDs.keys)
         } set: { newValue in
@@ -104,7 +97,7 @@ extension OnDemandView.SSIDList {
         }
     }
 
-    private var onSSIDs: Binding<Set<String>> {
+    var onSSIDs: Binding<Set<String>> {
         .init {
             Set(withSSIDs.filter {
                 $0.value
@@ -130,11 +123,24 @@ extension OnDemandView.SSIDList {
         }
     }
 
-    private func isSSIDOn(_ ssid: String) -> Binding<Bool> {
+    func isSSIDOn(_ ssid: String) -> Binding<Bool> {
         .init {
             withSSIDs[ssid] ?? false
         } set: {
             withSSIDs[ssid] = $0
+        }
+    }
+}
+
+// MARK: -
+
+private extension OnDemandView.SSIDList {
+    func requestSSID(_ text: Binding<String>) {
+        Task { @MainActor in
+            let ssid = try await reader.currentSSID()
+            if !withSSIDs.keys.contains(ssid) {
+                text.wrappedValue = ssid
+            }
         }
     }
 }
