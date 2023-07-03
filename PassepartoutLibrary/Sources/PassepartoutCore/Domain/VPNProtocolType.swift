@@ -25,7 +25,7 @@
 
 import Foundation
 
-// FIXME: arch, provide a well-defined serialization property rather than .rawValue
+// IMPORTANT: do NOT change these raw values, as they affect serialization
 public enum VPNProtocolType: String, CaseIterable, Codable {
     case openVPN = "ovpn"
 
