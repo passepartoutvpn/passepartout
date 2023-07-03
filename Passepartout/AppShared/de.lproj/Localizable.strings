@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Wenn du dich erkenntlich zeigen möchtest für meine Arbeit, gibt es hier ein paar Beträge die du direkt spenden kannst.\n\nDu bezahlst pro Spende nur einmal und kannst mehrmals spenden wenn du möchtest.";
 "donate.items.loading.caption" = "Lade Spenden";
 "donate.items.purchasing.caption" = "Führe Spende durch";
-"donate.alerts.purchase.success.title" = "Danke";
 "donate.alerts.purchase.success.message" = "Das bedeutet mir viel und ich hoffe wirklich dass du die App weiterhin benutzt und unterstützt.";
 "donate.alerts.purchase.failure.message" = "Konnte Spende nicht durchführen. %@";
 

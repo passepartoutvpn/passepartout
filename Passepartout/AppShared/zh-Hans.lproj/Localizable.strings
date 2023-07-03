@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "如果你想对我免费的工作表示感谢，这里是一些你可以捐助的数额。\n\n每次捐助只需要付款一次，你可以捐助多次。";
 "donate.items.loading.caption" = "加载捐助中";
 "donate.items.purchasing.caption" = "展示捐助页面中";
-"donate.alerts.purchase.success.title" = "感谢";
 "donate.alerts.purchase.success.message" = "这对于我意味着很多，希望你保持使用并使它更好。";
 "donate.alerts.purchase.failure.message" = "无法展现捐助内容。%@";
 

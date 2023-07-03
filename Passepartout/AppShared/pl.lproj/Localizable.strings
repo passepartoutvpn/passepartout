@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Jeśli chcesz docenić moją pracę, poniżej znajdziesz kilka kwot do wyboru dotacji.\n\nTwoje konto zostanie obciążone tylko raz na jedną dotację, możesz wysłać dotację kilka razy.";
 "donate.items.loading.caption" = "Ładowanie dotacji";
 "donate.items.purchasing.caption" = "Wykonywanie dotacji";
-"donate.alerts.purchase.success.title" = "Dziękuję";
 "donate.alerts.purchase.success.message" = "To dla mnie dużo znaczy, mam nadzięję że będziesz używać aplikacji i przyczynisz się do jej rozpowrzechnienia.";
 "donate.alerts.purchase.failure.message" = "Nie można dokonać dotacji. %@";
 

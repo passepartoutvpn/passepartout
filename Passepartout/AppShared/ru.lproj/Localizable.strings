@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Если Вы хотите поблагодарить мою бесплатную работу, здесь есть несколько сумм, которые Вы можете пожертвовать прямо сейчас.\n\nСумма будет списана только один раз, а Вы можете пожертвовать несколько раз.";
 "donate.items.loading.caption" = "Загружаем пожертвования";
 "donate.items.purchasing.caption" = "Исполняется";
-"donate.alerts.purchase.success.title" = "Спасибо";
 "donate.alerts.purchase.success.message" = "Это значит многое для меня, и, я надеюсь, Вы продолжить использовать и рассказывать об этом приложении.";
 "donate.alerts.purchase.failure.message" = "Не получается совершить пожертвование. %@";
 

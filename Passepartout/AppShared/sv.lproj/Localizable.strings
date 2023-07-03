@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Om du vill visa tacksamhet för mitt fria arbete, här är några belopp du kan donera direkt. \n\nDu betalas endast en gång per donation, och du kan donera flera gånger. ";
 "donate.items.loading.caption" = "Laddar donationer";
 "donate.items.purchasing.caption" = "Performing donation";
-"donate.alerts.purchase.success.title" = "Tack";
 "donate.alerts.purchase.success.message" = "Detta betyder mycket för mig och jag hoppas verkligen att du fortsätter att använda och marknadsföra denna app.";
 "donate.alerts.purchase.failure.message" = "Kan inte göra donationen. %@";
 

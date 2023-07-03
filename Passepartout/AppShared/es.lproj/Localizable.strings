@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Si te gusta mi trabajo, aquí puedes colaborar con una donación.\n\nSólo se te cobrará una vez por donación, y puedes donar las veces que quieras.";
 "donate.items.loading.caption" = "Cargando donaciones";
 "donate.items.purchasing.caption" = "Efectuando donación";
-"donate.alerts.purchase.success.title" = "Muchas gracias";
 "donate.alerts.purchase.success.message" = "Ésto significa mucho para mí y espero sinceramente que sigas usando y promoviendo esta aplicación.";
 "donate.alerts.purchase.failure.message" = "Imposible completar la donación, por favor vuelve a intentarlo. %@";
 

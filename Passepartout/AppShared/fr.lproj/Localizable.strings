@@ -314,7 +314,6 @@
 "donate.sections.one_time.footer" = "Si vous voulez manifester votre gratitude envers mon travail bénévole, voici certains montants pour faire un don instantanément.\n\n Vous n'allez être chargé qu'une seule fois par don et vous pouvez faire un don plus d'une fois.";
 "donate.items.loading.caption" = "Chargement des dons";
 "donate.items.purchasing.caption" = "Don en cours";
-"donate.alerts.purchase.success.title" = "Merci";
 "donate.alerts.purchase.success.message" = "Ceci signifie beaucoup pour moi et j'espère sincèrement que vous continuerez d'utiliser et de promouvoir cette app.";
 "donate.alerts.purchase.failure.message" = "Impossible de faire le don. %@";
 
