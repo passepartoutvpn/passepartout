@@ -47,14 +47,6 @@ struct ProfileView: View {
 
     @ObservedObject private var currentProfile: ObservableProfile
 
-    private var isLoading: Bool {
-        currentProfile.isLoading
-    }
-
-    private var isExisting: Bool {
-        !currentProfile.value.isPlaceholder
-    }
-
     @State private var modalType: ModalType?
 
     init() {
@@ -83,12 +75,24 @@ struct ProfileView: View {
         .navigationTitle(title)
         .themeSecondaryView()
     }
+}
 
-    private var title: String {
+// MARK: -
+
+private extension ProfileView {
+    var isLoading: Bool {
+        currentProfile.isLoading
+    }
+
+    var isExisting: Bool {
+        !currentProfile.value.isPlaceholder
+    }
+
+    var title: String {
         currentProfile.name
     }
 
-    private var mainView: some View {
+    var mainView: some View {
         List {
             if !isLoading {
                 VPNSection(
@@ -109,7 +113,7 @@ struct ProfileView: View {
     }
 
     @ViewBuilder
-    private func presentedModal(_ modalType: ModalType) -> some View {
+    func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
         case .interactiveAccount:
             NavigationView {

@@ -53,14 +53,18 @@ struct SettingsView: View {
         }.themeSecondaryView()
         .navigationTitle(L10n.Settings.title)
     }
+}
 
-    private var preferencesSection: some View {
+// MARK: -
+
+private extension SettingsView {
+    var preferencesSection: some View {
         Section {
             Toggle(L10n.Settings.Items.LocksInBackground.caption, isOn: $locksInBackground)
         }
     }
 
-    private var aboutSection: some View {
+    var aboutSection: some View {
         Section {
             NavigationLink {
                 AboutView()

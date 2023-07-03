@@ -29,10 +29,6 @@ import SwiftUI
 struct NetworkSettingsView: View {
     @ObservedObject private var currentProfile: ObservableProfile
 
-    private var vpnProtocol: VPNProtocolType {
-        currentProfile.value.currentVPNProtocol
-    }
-
     @State private var settings = Profile.NetworkSettings()
 
     init(currentProfile: ObservableProfile) {
@@ -64,36 +60,14 @@ struct NetworkSettingsView: View {
             )
         }
     }
-
-//    EditButton()
-//        .disabled(!isAnythingManual)
-
-    private var isAnythingManual: Bool {
-//        if settings.gateway.choice == .manual {
-//            return true
-//        }
-        if settings.dns.choice == .manual {
-            return true
-        }
-        if settings.proxy.choice == .manual {
-            return true
-        }
-//        if settings.mtu.choice == .manual {
-//            return true
-//        }
-        return false
-    }
-
-    private func mapNotEmpty(elements: [IdentifiableString]) -> [IdentifiableString] {
-        elements
-            .filter { !$0.string.isEmpty }
-    }
 }
+
+// MARK: -
 
 // MARK: Gateway
 
-extension NetworkSettingsView {
-    private var gatewayView: some View {
+private extension NetworkSettingsView {
+    var gatewayView: some View {
         Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticGateway.themeAnimation())
 
@@ -109,10 +83,10 @@ extension NetworkSettingsView {
 
 // MARK: DNS
 
-extension NetworkSettingsView {
+private extension NetworkSettingsView {
 
     @ViewBuilder
-    private var dnsView: some View {
+    var dnsView: some View {
         Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticDNS.themeAnimation())
 
@@ -148,17 +122,17 @@ extension NetworkSettingsView {
         }
     }
 
-    private var dnsManualHTTPSRow: some View {
+    var dnsManualHTTPSRow: some View {
         TextField(Unlocalized.Placeholders.dohURL, text: $settings.dns.dnsHTTPSURL.toString())
             .themeValidURL(settings.dns.dnsHTTPSURL?.absoluteString)
     }
 
-    private var dnsManualTLSRow: some View {
+    var dnsManualTLSRow: some View {
         TextField(Unlocalized.Placeholders.dotServerName, text: $settings.dns.dnsTLSServerName ?? "")
             .themeValidDNSOverTLSServerName(settings.dns.dnsTLSServerName)
     }
 
-    private var dnsManualServers: some View {
+    var dnsManualServers: some View {
         Section {
             EditableTextList(
                 elements: $settings.dns.dnsServers ?? [],
@@ -179,12 +153,12 @@ extension NetworkSettingsView {
         }
     }
 
-    private var dnsManualDomainRow: some View {
+    var dnsManualDomainRow: some View {
         TextField(L10n.Global.Strings.domain, text: $settings.dns.dnsDomain ?? "")
             .themeValidDomainName(settings.dns.dnsDomain)
     }
 
-    private var dnsManualSearchDomains: some View {
+    var dnsManualSearchDomains: some View {
         Section {
             EditableTextList(
                 elements: $settings.dns.dnsSearchDomains ?? [],
@@ -208,10 +182,10 @@ extension NetworkSettingsView {
 
 // MARK: Proxy
 
-extension NetworkSettingsView {
+private extension NetworkSettingsView {
 
     @ViewBuilder
-    private var proxyView: some View {
+    var proxyView: some View {
         Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticProxy.themeAnimation())
 
@@ -249,7 +223,7 @@ extension NetworkSettingsView {
         }
     }
 
-    private var proxyManualBypassDomains: some View {
+    var proxyManualBypassDomains: some View {
         Section {
             EditableTextList(
                 elements: $settings.proxy.proxyBypassDomains ?? [],
@@ -273,8 +247,8 @@ extension NetworkSettingsView {
 
 // MARK: MTU
 
-extension NetworkSettingsView {
-    private var mtuView: some View {
+private extension NetworkSettingsView {
+    var mtuView: some View {
         Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $settings.isAutomaticMTU.themeAnimation())
 
@@ -289,5 +263,37 @@ extension NetworkSettingsView {
         } header: {
             Text(Unlocalized.Network.mtu)
         }
+    }
+}
+
+// MARK: Global
+
+private extension NetworkSettingsView {
+    var vpnProtocol: VPNProtocolType {
+        currentProfile.value.currentVPNProtocol
+    }
+
+//    EditButton()
+//        .disabled(!isAnythingManual)
+
+    var isAnythingManual: Bool {
+//        if settings.gateway.choice == .manual {
+//            return true
+//        }
+        if settings.dns.choice == .manual {
+            return true
+        }
+        if settings.proxy.choice == .manual {
+            return true
+        }
+//        if settings.mtu.choice == .manual {
+//            return true
+//        }
+        return false
+    }
+
+    func mapNotEmpty(elements: [IdentifiableString]) -> [IdentifiableString] {
+        elements
+            .filter { !$0.string.isEmpty }
     }
 }

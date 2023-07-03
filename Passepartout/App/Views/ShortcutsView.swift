@@ -78,8 +78,12 @@ struct ShortcutsView: View {
         .navigationTitle(Unlocalized.Other.siri)
         .themeSecondaryView()
     }
+}
 
-    private var shortcutsSection: some View {
+// MARK: -
+
+private extension ShortcutsView {
+    var shortcutsSection: some View {
         Section {
             ForEach(relevantShortcuts, content: rowView)
         } header: {
@@ -87,13 +91,13 @@ struct ShortcutsView: View {
         }
     }
 
-    private var relevantShortcuts: [Shortcut] {
+    var relevantShortcuts: [Shortcut] {
         intentsManager.shortcuts.values.filter {
             $0.isRelevant(to: target)
         }.sorted()
     }
 
-    private var addSection: some View {
+    var addSection: some View {
         Section {
             NavigationLink(isActive: $isNavigationPresented) {
                 AddView(
@@ -109,7 +113,7 @@ struct ShortcutsView: View {
     }
 
     @ViewBuilder
-    private func presentedModal(_ modalType: ModalType) -> some View {
+    func presentedModal(_ modalType: ModalType) -> some View {
         switch modalType {
         case .edit(let shortcut):
             IntentEditView(
@@ -125,7 +129,7 @@ struct ShortcutsView: View {
         }
     }
 
-    private func rowView(forShortcut vs: Shortcut) -> some View {
+    func rowView(forShortcut vs: Shortcut) -> some View {
         Button {
             presentEditShortcut(vs)
         } label: {
@@ -133,7 +137,7 @@ struct ShortcutsView: View {
         }
     }
 
-    private var delegatingPendingShortcut: Binding<INShortcut?> {
+    var delegatingPendingShortcut: Binding<INShortcut?> {
         .init {
             pendingShortcut
         } set: {
@@ -142,15 +146,6 @@ struct ShortcutsView: View {
             }
             presentAddShortcut(pendingShortcut)
         }
-    }
-
-    private func presentEditShortcut(_ shortcut: Shortcut) {
-        modalType = .edit(shortcut: shortcut)
-    }
-
-    private func presentAddShortcut(_ shortcut: INShortcut) {
-        isNavigationPresented = false
-        modalType = .add(shortcut: shortcut)
     }
 }
 
@@ -166,5 +161,18 @@ private extension Shortcut {
             return moveToIntent.profileId == profile.id.uuidString
         }
         return true
+    }
+}
+
+// MARK: -
+
+private extension ShortcutsView {
+    func presentEditShortcut(_ shortcut: Shortcut) {
+        modalType = .edit(shortcut: shortcut)
+    }
+
+    func presentAddShortcut(_ shortcut: INShortcut) {
+        isNavigationPresented = false
+        modalType = .add(shortcut: shortcut)
     }
 }

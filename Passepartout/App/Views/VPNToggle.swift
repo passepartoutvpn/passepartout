@@ -41,34 +41,6 @@ struct VPNToggle: View {
 
     private let rateLimit: Int
 
-    private var isEnabled: Binding<Bool> {
-        .init {
-            isActiveProfile && currentVPNState.isEnabled && !shouldPromptForAccount
-        } set: { newValue in
-            guard !shouldPromptForAccount else {
-                interactiveProfile = profile
-                return
-            }
-            guard newValue else {
-                disableVPN()
-                return
-            }
-            enableVPN()
-        }
-    }
-
-    private var isActiveProfile: Bool {
-        profileManager.isActiveProfile(profile.id)
-    }
-
-    private var shouldPromptForAccount: Bool {
-        profile.account.authenticationMethod == .interactive && (currentVPNState.vpnStatus == .disconnecting || currentVPNState.vpnStatus == .disconnected)
-    }
-
-    private var isEligibleForSiri: Bool {
-        productManager.isEligible(forFeature: .siriShortcuts)
-    }
-
     @State private var canToggle = true
 
     init(profile: Profile, interactiveProfile: Binding<Profile?>, rateLimit: Int) {
@@ -86,8 +58,44 @@ struct VPNToggle: View {
             .disabled(!canToggle)
             .themeAnimation(on: currentVPNState.isEnabled)
     }
+}
 
-    private func enableVPN() {
+// MARK: -
+
+private extension VPNToggle {
+    var isEnabled: Binding<Bool> {
+        .init {
+            isActiveProfile && currentVPNState.isEnabled && !shouldPromptForAccount
+        } set: { newValue in
+            guard !shouldPromptForAccount else {
+                interactiveProfile = profile
+                return
+            }
+            guard newValue else {
+                disableVPN()
+                return
+            }
+            enableVPN()
+        }
+    }
+
+    var isActiveProfile: Bool {
+        profileManager.isActiveProfile(profile.id)
+    }
+
+    var shouldPromptForAccount: Bool {
+        profile.account.authenticationMethod == .interactive && (currentVPNState.vpnStatus == .disconnecting || currentVPNState.vpnStatus == .disconnected)
+    }
+
+    var isEligibleForSiri: Bool {
+        productManager.isEligible(forFeature: .siriShortcuts)
+    }
+}
+
+// MARK: -
+
+private extension VPNToggle {
+    func enableVPN() {
         Task { @MainActor in
             canToggle = false
             await Task.maybeWait(forMilliseconds: rateLimit)
@@ -104,7 +112,7 @@ struct VPNToggle: View {
         }
     }
 
-    private func disableVPN() {
+    func disableVPN() {
         Task { @MainActor in
             canToggle = false
             await vpnManager.disable()
@@ -112,7 +120,7 @@ struct VPNToggle: View {
         }
     }
 
-    private func donateIntents(withProfile profile: Profile) {
+    func donateIntents(withProfile profile: Profile) {
 
         // eligibility: donate intents if eligible for Siri
         guard isEligibleForSiri else {

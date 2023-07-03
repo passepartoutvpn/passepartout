@@ -41,23 +41,6 @@ struct AddProviderView: View {
         self.bindings = bindings
     }
 
-    private var providers: [ProviderMetadata] {
-        providerManager.allProviders()
-            .filter {
-                $0.supportedVPNProtocols.contains(viewModel.selectedVPNProtocol)
-            }.sorted()
-    }
-
-    private var availableVPNProtocols: [VPNProtocolType] {
-        var protos: Set<VPNProtocolType> = []
-        providers.forEach {
-            $0.supportedVPNProtocols.forEach {
-                protos.insert($0)
-            }
-        }
-        return protos.sorted()
-    }
-
     var body: some View {
         ZStack {
             ForEach(providers, id: \.navigationId, content: hiddenProviderLink)
@@ -80,10 +63,14 @@ struct AddProviderView: View {
                 PaywallView(isPresented: $viewModel.isPaywallPresented)
             }.themeGlobal()
         }.navigationTitle(L10n.AddProfile.Shared.title)
-        .themeSecondaryView()
+            .themeSecondaryView()
     }
+}
 
-    private var mainSection: some View {
+// MARK: -
+
+private extension AddProviderView {
+    var mainSection: some View {
         Section {
             let protos = availableVPNProtocols
             if !protos.isEmpty {
@@ -100,7 +87,7 @@ struct AddProviderView: View {
         }
     }
 
-    private var providersSection: some View {
+    var providersSection: some View {
         Section {
             ForEach(providers, content: providerRow)
         } footer: {
@@ -108,7 +95,7 @@ struct AddProviderView: View {
         }.disabled(viewModel.isFetchingAnyProvider)
     }
 
-    private func providerRow(_ metadata: ProviderMetadata) -> some View {
+    func providerRow(_ metadata: ProviderMetadata) -> some View {
         Button {
             presentOrPurchaseProvider(metadata)
         } label: {
@@ -116,7 +103,7 @@ struct AddProviderView: View {
         }.withTrailingProgress(when: viewModel.isFetchingProvider(metadata.name))
     }
 
-    private func hiddenProviderLink(_ metadata: ProviderMetadata) -> some View {
+    func hiddenProviderLink(_ metadata: ProviderMetadata) -> some View {
         NavigationLink("", tag: metadata, selection: $viewModel.selectedProvider) {
             NameView(
                 profile: $viewModel.pendingProfile,
@@ -126,15 +113,43 @@ struct AddProviderView: View {
         }
     }
 
-    private var updateListButton: some View {
+    var updateListButton: some View {
         Button(L10n.AddProfile.Provider.Items.updateList) {
             viewModel.updateIndex(providerManager)
         }.withTrailingProgress(when: viewModel.isUpdatingIndex)
-        .disabled(viewModel.isUpdatingIndex)
+            .disabled(viewModel.isUpdatingIndex)
     }
 
+    var providers: [ProviderMetadata] {
+        providerManager.allProviders()
+            .filter {
+                $0.supportedVPNProtocols.contains(viewModel.selectedVPNProtocol)
+            }.sorted()
+    }
+
+    var availableVPNProtocols: [VPNProtocolType] {
+        var protos: Set<VPNProtocolType> = []
+        providers.forEach {
+            $0.supportedVPNProtocols.forEach {
+                protos.insert($0)
+            }
+        }
+        return protos.sorted()
+    }
+}
+
+private extension ProviderMetadata {
+    var navigationId: String {
+        "navigation.\(name)"
+    }
+}
+
+// MARK: -
+
+private extension AddProviderView {
+
     // eligibility: select or purchase provider
-    private func presentOrPurchaseProvider(_ metadata: ProviderMetadata) {
+    func presentOrPurchaseProvider(_ metadata: ProviderMetadata) {
         guard productManager.isEligible(forProvider: metadata.name) else {
             viewModel.presentPaywall()
             return
@@ -142,22 +157,14 @@ struct AddProviderView: View {
         viewModel.selectProvider(metadata, providerManager)
     }
 
-    private func onErrorMessage(_ message: String?, _ scrollProxy: ScrollViewProxy) {
+    func onErrorMessage(_ message: String?, _ scrollProxy: ScrollViewProxy) {
         guard message != nil else {
             return
         }
         scrollToErrorMessage(scrollProxy)
     }
-}
 
-extension AddProviderView {
-    private func scrollToErrorMessage(_ proxy: ScrollViewProxy) {
+    func scrollToErrorMessage(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(providers.last?.id, animated: true)
-    }
-}
-
-private extension ProviderMetadata {
-    var navigationId: String {
-        "navigation.\(name)"
     }
 }

@@ -35,8 +35,6 @@ extension PaywallView {
             case restoring
         }
 
-        private typealias RowModel = (product: SKProduct, extra: String?)
-
         @Environment(\.scenePhase) private var scenePhase
 
         @ObservedObject private var productManager: ProductManager
@@ -68,47 +66,186 @@ extension PaywallView {
                 }
             }.themeAnimation(on: productManager.isRefreshingProducts)
         }
+    }
+}
 
-        private var productsSection: some View {
-            Section {
-                if !productManager.isRefreshingProducts {
-                    ForEach(productRowModels, id: \.product.productIdentifier, content: productRow)
-                } else {
-                    ProgressView()
+private struct PurchaseRow: View {
+    var product: SKProduct?
+
+    let title: String
+
+    let extra: String?
+
+    let action: () -> Void
+
+    let purchaseState: PaywallView.PurchaseView.PurchaseState?
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            actionButton
+                .padding(.bottom, 5)
+
+            extra.map {
+                Text($0)
+                    .frame(maxHeight: .infinity)
+            }
+        }.padding([.top, .bottom])
+    }
+}
+
+private typealias RowModel = (product: SKProduct, extra: String?)
+
+// MARK: -
+
+private extension PaywallView.PurchaseView {
+    var productsSection: some View {
+        Section {
+            if !productManager.isRefreshingProducts {
+                ForEach(productRowModels, id: \.product.productIdentifier, content: productRow)
+            } else {
+                ProgressView()
+            }
+            restoreRow
+        } header: {
+            Text(L10n.Paywall.title)
+        } footer: {
+            Text(L10n.Paywall.Sections.Products.footer)
+        }
+    }
+
+    func productRow(_ model: RowModel) -> some View {
+        PurchaseRow(
+            product: model.product,
+            title: model.product.localizedTitle,
+            extra: model.extra,
+            action: {
+                purchaseProduct(model.product)
+            },
+            purchaseState: purchaseState
+        )
+    }
+
+    var restoreRow: some View {
+        PurchaseRow(
+            title: L10n.Paywall.Items.Restore.title,
+            extra: L10n.Paywall.Items.Restore.description,
+            action: restorePurchases,
+            purchaseState: purchaseState
+        )
+    }
+}
+
+private extension PaywallView.PurchaseView {
+    var skFeature: SKProduct? {
+        guard let feature = feature else {
+            return nil
+        }
+        return productManager.product(withIdentifier: feature)
+    }
+
+    var skPlatformVersion: SKProduct? {
+        #if targetEnvironment(macCatalyst)
+        productManager.product(withIdentifier: .fullVersion_macOS)
+        #else
+        productManager.product(withIdentifier: .fullVersion_iOS)
+        #endif
+    }
+
+    // hide full version if already bought the other platform version
+    var skFullVersion: SKProduct? {
+        #if targetEnvironment(macCatalyst)
+        guard !productManager.hasPurchased(.fullVersion_iOS) else {
+            return nil
+        }
+        #else
+        guard !productManager.hasPurchased(.fullVersion_macOS) else {
+            return nil
+        }
+        #endif
+        return productManager.product(withIdentifier: .fullVersion)
+    }
+
+    var platformVersionExtra: [String] {
+        productManager.featureProducts(excluding: [
+            .fullVersion,
+            .fullVersion_iOS,
+            .fullVersion_macOS
+        ]).map {
+            $0.localizedTitle
+        }.sorted {
+            $0.lowercased() < $1.lowercased()
+        }
+    }
+
+    var fullVersionExtra: [String] {
+        productManager.featureProducts(including: [
+            .fullVersion_iOS,
+            .fullVersion_macOS
+        ]).map {
+            $0.localizedTitle
+        }.sorted {
+            $0.lowercased() < $1.lowercased()
+        }
+    }
+
+    var productRowModels: [RowModel] {
+        var models: [RowModel] = []
+        skPlatformVersion.map {
+            let extra = platformVersionExtra.joined(separator: "\n")
+            models.append(($0, extra))
+        }
+        skFullVersion.map {
+            let extra = fullVersionExtra.joined(separator: "\n")
+            models.append(($0, extra))
+        }
+        skFeature.map {
+            models.append(($0, nil))
+        }
+        return models
+    }
+}
+
+private extension PurchaseRow {
+
+    @ViewBuilder
+    var actionButton: some View {
+        if let product = product {
+            purchaseButton(product)
+        } else {
+            restoreButton
+        }
+    }
+
+    func purchaseButton(_ product: SKProduct) -> some View {
+        HStack {
+            Button(title, action: action)
+            Spacer()
+            if case .purchasing(let pending) = purchaseState, pending.productIdentifier == product.productIdentifier {
+                ProgressView()
+            } else {
+                product.localizedPrice.map {
+                    Text($0)
+                        .themeSecondaryTextStyle()
                 }
-                restoreRow
-            } header: {
-                Text(L10n.Paywall.title)
-            } footer: {
-                Text(L10n.Paywall.Sections.Products.footer)
             }
         }
+    }
 
-        private func productRow(_ model: RowModel) -> some View {
-            PurchaseRow(
-                product: model.product,
-                title: model.product.localizedTitle,
-                extra: model.extra,
-                action: {
-                    purchaseProduct(model.product)
-                },
-                purchaseState: purchaseState
-            )
-        }
-
-        private var restoreRow: some View {
-            PurchaseRow(
-                title: L10n.Paywall.Items.Restore.title,
-                extra: L10n.Paywall.Items.Restore.description,
-                action: restorePurchases,
-                purchaseState: purchaseState
-            )
+    var restoreButton: some View {
+        HStack {
+            Button(title, action: action)
+            Spacer()
+            if case .restoring = purchaseState {
+                ProgressView()
+            }
         }
     }
 }
 
-extension PaywallView.PurchaseView {
-    private func purchaseProduct(_ product: SKProduct) {
+// MARK: -
+
+private extension PaywallView.PurchaseView {
+    func purchaseProduct(_ product: SKProduct) {
         purchaseState = .purchasing(product)
 
         productManager.purchase(product) {
@@ -135,7 +272,7 @@ extension PaywallView.PurchaseView {
         }
     }
 
-    private func restorePurchases() {
+    func restorePurchases() {
         purchaseState = .restoring
 
         productManager.restorePurchases {
@@ -151,134 +288,6 @@ extension PaywallView.PurchaseView {
             }
             isPresented = false
             purchaseState = nil
-        }
-    }
-}
-
-extension PaywallView.PurchaseView {
-    private var skFeature: SKProduct? {
-        guard let feature = feature else {
-            return nil
-        }
-        return productManager.product(withIdentifier: feature)
-    }
-
-    private var skPlatformVersion: SKProduct? {
-        #if targetEnvironment(macCatalyst)
-        productManager.product(withIdentifier: .fullVersion_macOS)
-        #else
-        productManager.product(withIdentifier: .fullVersion_iOS)
-        #endif
-    }
-
-    // hide full version if already bought the other platform version
-    private var skFullVersion: SKProduct? {
-        #if targetEnvironment(macCatalyst)
-        guard !productManager.hasPurchased(.fullVersion_iOS) else {
-            return nil
-        }
-        #else
-        guard !productManager.hasPurchased(.fullVersion_macOS) else {
-            return nil
-        }
-        #endif
-        return productManager.product(withIdentifier: .fullVersion)
-    }
-
-    private var platformVersionExtra: [String] {
-        productManager.featureProducts(excluding: [
-            .fullVersion,
-            .fullVersion_iOS,
-            .fullVersion_macOS
-        ]).map {
-            $0.localizedTitle
-        }.sorted {
-            $0.lowercased() < $1.lowercased()
-        }
-    }
-
-    private var fullVersionExtra: [String] {
-        productManager.featureProducts(including: [
-            .fullVersion_iOS,
-            .fullVersion_macOS
-        ]).map {
-            $0.localizedTitle
-        }.sorted {
-            $0.lowercased() < $1.lowercased()
-        }
-    }
-
-    private var productRowModels: [RowModel] {
-        var models: [RowModel] = []
-        skPlatformVersion.map {
-            let extra = platformVersionExtra.joined(separator: "\n")
-            models.append(($0, extra))
-        }
-        skFullVersion.map {
-            let extra = fullVersionExtra.joined(separator: "\n")
-            models.append(($0, extra))
-        }
-        skFeature.map {
-            models.append(($0, nil))
-        }
-        return models
-    }
-}
-
-private struct PurchaseRow: View {
-    var product: SKProduct?
-
-    let title: String
-
-    let extra: String?
-
-    let action: () -> Void
-
-    let purchaseState: PaywallView.PurchaseView.PurchaseState?
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            actionButton
-                .padding(.bottom, 5)
-
-            extra.map {
-                Text($0)
-                    .frame(maxHeight: .infinity)
-            }
-        }.padding([.top, .bottom])
-    }
-
-    @ViewBuilder
-    private var actionButton: some View {
-        if let product = product {
-            purchaseButton(product)
-        } else {
-            restoreButton
-        }
-    }
-
-    private func purchaseButton(_ product: SKProduct) -> some View {
-        HStack {
-            Button(title, action: action)
-            Spacer()
-            if case .purchasing(let pending) = purchaseState, pending.productIdentifier == product.productIdentifier {
-                ProgressView()
-            } else {
-                product.localizedPrice.map {
-                    Text($0)
-                        .themeSecondaryTextStyle()
-                }
-            }
-        }
-    }
-
-    private var restoreButton: some View {
-        HStack {
-            Button(title, action: action)
-            Spacer()
-            if case .restoring = purchaseState {
-                ProgressView()
-            }
         }
     }
 }

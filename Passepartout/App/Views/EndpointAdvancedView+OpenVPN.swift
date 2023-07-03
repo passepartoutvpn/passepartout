@@ -67,8 +67,10 @@ extension EndpointAdvancedView {
     }
 }
 
-extension EndpointAdvancedView.OpenVPNView {
-    private func pullSection(configuration: OpenVPN.Configuration) -> some View {
+// MARK: -
+
+private extension EndpointAdvancedView.OpenVPNView {
+    func pullSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.pullMask.map { mask in
             Section {
                 ForEach(mask, id: \.self) {
@@ -80,7 +82,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private var ipv4Section: some View {
+    var ipv4Section: some View {
         Section {
             if let settings = builder.ipv4 {
                 themeLongContentLinkDefault(
@@ -105,7 +107,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private var ipv6Section: some View {
+    var ipv6Section: some View {
         Section {
             if let settings = builder.ipv6 {
                 themeLongContentLinkDefault(
@@ -130,7 +132,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private func communicationSection(configuration: OpenVPN.Configuration) -> some View {
+    func communicationSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.communicationSettings.map { settings in
             Section {
                 settings.cipher.map {
@@ -157,7 +159,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private var communicationEditableSection: some View {
+    var communicationEditableSection: some View {
         Section {
             themeTextPicker(
                 L10n.Endpoint.Advanced.Openvpn.Items.Cipher.caption,
@@ -186,7 +188,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private func compressionSection(configuration: OpenVPN.Configuration) -> some View {
+    func compressionSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.compressionSettings.map { settings in
             Section {
                 settings.framing.map {
@@ -203,7 +205,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private var compressionEditableSection: some View {
+    var compressionEditableSection: some View {
         Section {
             themeTextPicker(
                 L10n.Endpoint.Advanced.Openvpn.Items.CompressionFraming.caption,
@@ -222,7 +224,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private func dnsSection(configuration: OpenVPN.Configuration) -> some View {
+    func dnsSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.dnsSettings.map { settings in
             Section {
                 ForEach(settings.servers, id: \.self) {
@@ -239,7 +241,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private func proxySection(configuration: OpenVPN.Configuration) -> some View {
+    func proxySection(configuration: OpenVPN.Configuration) -> some View {
         configuration.proxySettings.map { settings in
             Section {
                 settings.proxy.map {
@@ -260,7 +262,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private var tlsSection: some View {
+    var tlsSection: some View {
         Section {
             builder.ca.map { ca in
                 themeLongContentLink(
@@ -294,7 +296,7 @@ extension EndpointAdvancedView.OpenVPNView {
         }
     }
 
-    private func otherSection(configuration: OpenVPN.Configuration) -> some View {
+    func otherSection(configuration: OpenVPN.Configuration) -> some View {
         configuration.otherSettings.map { settings in
             Section {
                 settings.keepAlive.map {

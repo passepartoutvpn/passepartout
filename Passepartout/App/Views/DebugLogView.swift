@@ -89,8 +89,12 @@ struct DebugLogView: View {
         .navigationTitle(title)
         .themeDebugLogStyle()
     }
+}
 
-    private var contentView: some View {
+// MARK: -
+
+private extension DebugLogView {
+    var contentView: some View {
         LazyVStack {
             ForEach(logLines.indices, id: \.self) {
                 Text(logLines[$0])
@@ -100,32 +104,11 @@ struct DebugLogView: View {
         // TODO: layout, a slight padding would be nice, but it glitches on first touch
     }
 
-    private func refreshLog(scrollingToLatestWith scrollProxy: ScrollViewProxy?) {
-        logLines = url.trailingLines(bytes: maxBytes)
-        if let scrollProxy = scrollProxy {
-            scrollToLatestUpdate(scrollProxy)
-        }
-    }
-
-    private func refreshLog(_: Date) {
-        refreshLog(scrollingToLatestWith: nil)
-    }
-}
-
-extension DebugLogView {
-    private func shareDebugLog() {
-        guard !logLines.isEmpty else {
-            assertionFailure("Log is empty, why could it share?")
-            return
-        }
-        isSharing = true
-    }
-
-    private func sharingActivityView() -> some View {
+    func sharingActivityView() -> some View {
         ActivityView(activityItems: sharingItems)
     }
 
-    private var sharingItems: [Any] {
+    var sharingItems: [Any] {
         let raw = logLines.joined(separator: "\n")
         let data = DebugLog(content: raw)
             .decoratedData(appName, appVersion)
@@ -143,8 +126,29 @@ extension DebugLogView {
     }
 }
 
-extension DebugLogView {
-    private func copyDebugLog() {
+// MARK: -
+
+private extension DebugLogView {
+    func refreshLog(_: Date) {
+        refreshLog(scrollingToLatestWith: nil)
+    }
+
+    func refreshLog(scrollingToLatestWith scrollProxy: ScrollViewProxy?) {
+        logLines = url.trailingLines(bytes: maxBytes)
+        if let scrollProxy = scrollProxy {
+            scrollToLatestUpdate(scrollProxy)
+        }
+    }
+
+    func shareDebugLog() {
+        guard !logLines.isEmpty else {
+            assertionFailure("Log is empty, why could it share?")
+            return
+        }
+        isSharing = true
+    }
+
+    func copyDebugLog() {
         guard !logLines.isEmpty else {
             assertionFailure("Log is empty, why could it copy?")
             return
@@ -155,10 +159,8 @@ extension DebugLogView {
 
         Utils.copyToPasteboard(content)
     }
-}
 
-extension DebugLogView {
-    private func scrollToLatestUpdate(_ proxy: ScrollViewProxy) {
+    func scrollToLatestUpdate(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(logLines.count - 1, anchor: .bottomLeading)
     }
 }

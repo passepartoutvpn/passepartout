@@ -66,51 +66,60 @@ extension ProfileView {
                 message: alertOverwriteMessage
             )
         }
+    }
+}
 
-        @ViewBuilder
-        private func alertOverwriteActions() -> some View {
-            Button(role: .destructive) {
-                commitRenaming(force: true)
-            } label: {
-                Text(L10n.Global.Strings.ok)
-            }
-            Button(role: .cancel) {
-            } label: {
-                Text(L10n.Global.Strings.cancel)
-            }
+// MARK: -
+
+private extension ProfileView.RenameView {
+
+    @ViewBuilder
+    func alertOverwriteActions() -> some View {
+        Button(role: .destructive) {
+            commitRenaming(force: true)
+        } label: {
+            Text(L10n.Global.Strings.ok)
         }
-
-        private func alertOverwriteMessage() -> some View {
-            Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
+        Button(role: .cancel) {
+        } label: {
+            Text(L10n.Global.Strings.cancel)
         }
+    }
 
-        private func loadCurrentName() {
-            newName = currentProfile.value.header.name
+    func alertOverwriteMessage() -> some View {
+        Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
+    }
+}
+
+// MARK: -
+
+private extension ProfileView.RenameView {
+    func loadCurrentName() {
+        newName = currentProfile.value.header.name
+    }
+
+    func commitRenaming() {
+        commitRenaming(force: false)
+    }
+
+    func commitRenaming(force: Bool) {
+        let name = newName.stripped
+
+        guard !name.isEmpty else {
+            return
         }
-
-        private func commitRenaming() {
-            commitRenaming(force: false)
-        }
-
-        private func commitRenaming(force: Bool) {
-            let name = newName.stripped
-
-            guard !name.isEmpty else {
-                return
-            }
-            guard name != currentProfile.value.header.name else {
-                presentationMode.wrappedValue.dismiss()
-                return
-            }
-            guard force || !profileManager.isExistingProfile(withName: name) else {
-                isOverwritingExistingProfile = true
-                return
-            }
-
-            let renamed = currentProfile.value.renamed(to: name)
-            profileManager.saveProfile(renamed, isActive: nil)
-
+        guard name != currentProfile.value.header.name else {
             presentationMode.wrappedValue.dismiss()
+            return
         }
+        guard force || !profileManager.isExistingProfile(withName: name) else {
+            isOverwritingExistingProfile = true
+            return
+        }
+
+        let renamed = currentProfile.value.renamed(to: name)
+        profileManager.saveProfile(renamed, isActive: nil)
+
+        presentationMode.wrappedValue.dismiss()
     }
 }

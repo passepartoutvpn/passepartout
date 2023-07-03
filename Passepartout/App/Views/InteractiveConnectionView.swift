@@ -64,8 +64,12 @@ struct InteractiveConnectionView: View {
             }
         }.navigationTitle(profile.header.name)
     }
+}
 
-    private func saveAccount() {
+// MARK: -
+
+private extension InteractiveConnectionView {
+    func saveAccount() {
         Task {
             try? await vpnManager.connect(with: profile.id, newPassword: password)
         }

@@ -34,21 +34,6 @@ extension OrganizerView {
 
         @Binding private var modalType: ModalType?
 
-        private var interactiveProfile: Binding<Profile?> {
-            .init {
-                if case .interactiveAccount(let profile) = modalType {
-                    return profile
-                }
-                return nil
-            } set: {
-                if let profile = $0 {
-                    modalType = .interactiveAccount(profile: profile)
-                } else {
-                    modalType = nil
-                }
-            }
-        }
-
         init(profile: Profile, isActiveProfile: Bool, modalType: Binding<ModalType?>) {
             self.profile = profile
             self.isActiveProfile = isActiveProfile
@@ -74,6 +59,25 @@ extension OrganizerView {
                     rateLimit: Constants.RateLimit.vpnToggle
                 ).labelsHidden()
             }.padding([.top, .bottom], 10)
+        }
+    }
+}
+
+// MARK: -
+
+private extension OrganizerView.ProfileRow {
+    var interactiveProfile: Binding<Profile?> {
+        .init {
+            if case .interactiveAccount(let profile) = modalType {
+                return profile
+            }
+            return nil
+        } set: {
+            if let profile = $0 {
+                modalType = .interactiveAccount(profile: profile)
+            } else {
+                modalType = nil
+            }
         }
     }
 }

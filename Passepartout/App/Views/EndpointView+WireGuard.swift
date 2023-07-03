@@ -88,8 +88,10 @@ extension EndpointView {
     }
 }
 
-extension EndpointView.WireGuardView {
-    private var peersSections: some View {
+// MARK: -
+
+private extension EndpointView.WireGuardView {
+    var peersSections: some View {
 
         // TODO: WireGuard, make peers editable
 //        if !isReadonly {
@@ -103,7 +105,7 @@ extension EndpointView.WireGuardView {
 //        }
     }
 
-    private func section(forPeerAt peerIndex: Int) -> some View {
+    func section(forPeerAt peerIndex: Int) -> some View {
         Section {
             themeLongContentLink(
                 L10n.Global.Strings.publicKey,
@@ -132,7 +134,7 @@ extension EndpointView.WireGuardView {
         }
     }
 
-    private var advancedSection: some View {
+    var advancedSection: some View {
         Section {
             let caption = L10n.Endpoint.Advanced.title
             NavigationLink(caption) {
