@@ -64,14 +64,6 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
 
     private let addedUUID = UUID()
 
-    private var addedText: Binding<String> {
-        .init {
-            editedTextStrings[addedUUID] ?? ""
-        } set: {
-            editedTextStrings[addedUUID] = $0
-        }
-    }
-
     var body: some View {
         debugChanges()
         return Group {
@@ -90,8 +82,20 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
             }
         }.onChange(of: elements, perform: remapElements)
     }
+}
 
-    private func existingRow(_ element: IdentifiableString) -> some View {
+// MARK: -
+
+private extension EditableTextList {
+    var addedText: Binding<String> {
+        .init {
+            editedTextStrings[addedUUID] ?? ""
+        } set: {
+            editedTextStrings[addedUUID] = $0
+        }
+    }
+
+    func existingRow(_ element: IdentifiableString) -> some View {
         let editedText = binding(toEditedElement: element)
 
         return textField(.init(isNewElement: false, text: editedText, onEditingChanged: {
@@ -104,7 +108,7 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
         }))
     }
 
-    private var newRow: some View {
+    var newRow: some View {
         AddingTextField(
             onAdd: {
                 addedText.wrappedValue = ""
@@ -120,10 +124,8 @@ struct EditableTextList<Field: View, ActionLabel: View>: View {
     }
 }
 
-// MARK: View model
-
-extension EditableTextList {
-    private func remapElements(_ newElements: [String]) {
+private extension EditableTextList {
+    func remapElements(_ newElements: [String]) {
         var oldIdentifiableElements = identifiableElements
         var newIdentifiableElements: [IdentifiableString] = []
 
@@ -148,7 +150,20 @@ extension EditableTextList {
         }
     }
 
-    private func addElement() {
+    func binding(toEditedElement element: IdentifiableString) -> Binding<String> {
+//        print(">>> <-> \(element)")
+        .init {
+            editedTextStrings[element.id] ?? element.string
+        } set: {
+            editedTextStrings[element.id] = $0
+        }
+    }
+}
+
+// MARK: -
+
+private extension EditableTextList {
+    func addElement() {
         guard allowsDuplicates || !identifiableElements.contains(where: {
             $0.string == addedText.wrappedValue
         }) else {
@@ -159,16 +174,7 @@ extension EditableTextList {
         commit()
     }
 
-    private func binding(toEditedElement element: IdentifiableString) -> Binding<String> {
-//        print(">>> <-> \(element)")
-        .init {
-            editedTextStrings[element.id] ?? element.string
-        } set: {
-            editedTextStrings[element.id] = $0
-        }
-    }
-
-    private func replaceElement(at id: UUID, with editedText: Binding<String>) {
+    func replaceElement(at id: UUID, with editedText: Binding<String>) {
 //        print(">>> \(identifiableElements[id].string) -> \(editedText.wrappedValue)")
         guard let i = identifiableElements.firstIndex(where: {
             $0.id == id
@@ -188,21 +194,21 @@ extension EditableTextList {
         commit()
     }
 
-    private func onDelete(offsets: IndexSet) {
+    func onDelete(offsets: IndexSet) {
         var mapped = mapping(identifiableElements)
         mapped.remove(atOffsets: offsets)
         identifiableElements = mapped
         commit()
     }
 
-    private func onMove(indexSet: IndexSet, to offset: Int) {
+    func onMove(indexSet: IndexSet, to offset: Int) {
         var mapped = mapping(identifiableElements)
         mapped.move(fromOffsets: indexSet, toOffset: offset)
         identifiableElements = mapped
         commit()
     }
 
-    private func commit() {
+    func commit() {
 //        print(">>> identifiableElements = \(identifiableElements.map { "\($0.string) (\($0.id))" })")
         elements = identifiableElements.map(\.string)
     }

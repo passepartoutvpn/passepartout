@@ -157,7 +157,7 @@ private extension OrganizerView.ProfileContextMenu {
     }
 
     var deleteButton: some View {
-        DestructiveButton {
+        Button(role: .destructive) {
             withAnimation {
                 profileManager.removeProfiles(withIds: [header.id])
             }

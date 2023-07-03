@@ -104,7 +104,6 @@
 		0E71ACF927C12E4800F85C4B /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACF827C12E4800F85C4B /* CreditsView.swift */; };
 		0E71ACFB27C12E5300F85C4B /* VersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACFA27C12E5300F85C4B /* VersionView.swift */; };
 		0E71ACFD27C1321A00F85C4B /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACFC27C1321A00F85C4B /* ActivityView.swift */; };
-		0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7577D62816A3B200081CBE /* DestructiveButton.swift */; };
 		0E7577DF2817E22C00081CBE /* VPNToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7577DE2817E22C00081CBE /* VPNToggle.swift */; };
 		0E7A8C0A2A1D410500780F4B /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A8C092A1D410400780F4B /* PersistenceManager.swift */; };
 		0E7A8C0C2A1D4A6100780F4B /* PassepartoutLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7A8C0B2A1D4A6100780F4B /* PassepartoutLibrary */; };
@@ -398,7 +397,6 @@
 		0E71ACF827C12E4800F85C4B /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		0E71ACFA27C12E5300F85C4B /* VersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionView.swift; sourceTree = "<group>"; };
 		0E71ACFC27C1321A00F85C4B /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		0E7577D62816A3B200081CBE /* DestructiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveButton.swift; sourceTree = "<group>"; };
 		0E7577DE2817E22C00081CBE /* VPNToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNToggle.swift; sourceTree = "<group>"; };
 		0E7A8C072A1D40BA00780F4B /* Picker+OpenVPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Picker+OpenVPN.swift"; sourceTree = "<group>"; };
 		0E7A8C082A1D40BA00780F4B /* Picker+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Picker+Network.swift"; sourceTree = "<group>"; };
@@ -613,7 +611,6 @@
 				0EB4042D27CA136200378B1A /* AddingTextField.swift */,
 				0EB3412F27C7761A00483410 /* Binding+Extensions.swift */,
 				0E9ED48027FD9BAE003B2316 /* CopySavingButton.swift */,
-				0E7577D62816A3B200081CBE /* DestructiveButton.swift */,
 				0EDE02C127F61C79000FBE3C /* EditableTextList.swift */,
 				0E3A593B2A50975700B3FE40 /* ErrorHandler.swift */,
 				0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */,
@@ -1458,7 +1455,6 @@
 				0E3A593C2A50975700B3FE40 /* ErrorHandler.swift in Sources */,
 				0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */,
 				0E3B7FCD27E47B3700C66F13 /* AddHostView+Name.swift in Sources */,
-				0E7577D72816A3B200081CBE /* DestructiveButton.swift in Sources */,
 				0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */,
 				0EB90CC129C25BBD00E64628 /* InteractiveConnectionView.swift in Sources */,
 				0E35C09A280E95BB0071FA35 /* ProviderProfileAvailability.swift in Sources */,

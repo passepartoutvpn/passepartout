@@ -51,12 +51,20 @@ struct CopySavingButton<T: Equatable, Label: View>: View {
                 }
             }
     }
+}
 
-    private var canSave: Bool {
+// MARK: -
+
+private extension CopySavingButton {
+    var canSave: Bool {
         isLoaded && (saveAnyway || copy != original)
     }
+}
 
-    private func loadFromOriginal(once: Bool) {
+// MARK: -
+
+private extension CopySavingButton {
+    func loadFromOriginal(once: Bool) {
         guard !once || !isLoaded else {
             return
         }
@@ -64,7 +72,7 @@ struct CopySavingButton<T: Equatable, Label: View>: View {
         isLoaded = true
     }
 
-    private func saveToOriginal() {
+    func saveToOriginal() {
         if copy != original {
             original = copy
         }

@@ -51,15 +51,19 @@ struct AddingTextField<Field: View, ActionLabel: View>: View {
             }
         }
     }
+}
 
-    private func doAdd() {
+// MARK: -
+
+private extension AddingTextField {
+    func doAdd() {
         withAnimation {
             onAdd?()
             isAdding = true
         }
     }
 
-    private func doCommit() {
+    func doCommit() {
         withAnimation {
             onCommit?()
             isAdding = false

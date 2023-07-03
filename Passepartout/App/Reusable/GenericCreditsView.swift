@@ -26,31 +26,6 @@
 import SwiftUI
 
 struct GenericCreditsView: View {
-    struct License {
-        let name: String
-
-        let licenseName: String
-
-        let licenseURL: URL
-
-        init(_ name: String, _ licenseName: String, _ licenseURL: URL) {
-            self.name = name
-            self.licenseName = licenseName
-            self.licenseURL = licenseURL
-        }
-    }
-
-    struct Notice {
-        let name: String
-
-        let noticeString: String
-
-        init(_ name: String, _ noticeString: String) {
-            self.name = name
-            self.noticeString = noticeString
-        }
-    }
-
     var licensesHeader: String? = "Licenses"
 
     var noticesHeader: String? = "Notices"
@@ -78,26 +53,80 @@ struct GenericCreditsView: View {
             }
         }
     }
+}
 
-    private var sortedLicenses: [License] {
+extension GenericCreditsView {
+    struct License {
+        let name: String
+
+        let licenseName: String
+
+        let licenseURL: URL
+
+        init(_ name: String, _ licenseName: String, _ licenseURL: URL) {
+            self.name = name
+            self.licenseName = licenseName
+            self.licenseURL = licenseURL
+        }
+    }
+
+    struct Notice {
+        let name: String
+
+        let noticeString: String
+
+        init(_ name: String, _ noticeString: String) {
+            self.name = name
+            self.noticeString = noticeString
+        }
+    }
+}
+
+private extension GenericCreditsView {
+    struct LicenseView: View {
+        let url: URL
+
+        @Binding var content: String?
+
+        var body: some View {
+            ZStack {
+                content.map { unwrapped in
+                    ScrollView {
+                        Text(unwrapped)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            .padding()
+                    }
+                }
+                if content == nil {
+                    ProgressView()
+                }
+            }.onAppear(perform: loadURL)
+        }
+    }
+}
+
+// MARK: -
+
+private extension GenericCreditsView {
+    var sortedLicenses: [License] {
         licenses.sorted {
             $0.name.lowercased() < $1.name.lowercased()
         }
     }
 
-    private var sortedNotices: [Notice] {
+    var sortedNotices: [Notice] {
         notices.sorted {
             $0.name.lowercased() < $1.name.lowercased()
         }
     }
 
-    private var sortedLanguages: [String] {
+    var sortedLanguages: [String] {
         translations.keys.sorted {
             $0.localizedAsCountryCode < $1.localizedAsCountryCode
         }
     }
 
-    private var licensesSection: some View {
+    var licensesSection: some View {
         Section(
             header: licensesHeader.map(Text.init)
         ) {
@@ -118,7 +147,7 @@ struct GenericCreditsView: View {
         }
     }
 
-    private var noticesSection: some View {
+    var noticesSection: some View {
         Section(
             header: noticesHeader.map(Text.init)
         ) {
@@ -128,7 +157,7 @@ struct GenericCreditsView: View {
         }
     }
 
-    private var translationsSection: some View {
+    var translationsSection: some View {
         Section(
             header: translationsHeader.map(Text.init)
         ) {
@@ -145,7 +174,7 @@ struct GenericCreditsView: View {
         }
     }
 
-    private func noticeView(_ content: Notice) -> some View {
+    func noticeView(_ content: Notice) -> some View {
         VStack {
             Text(content.noticeString)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -155,46 +184,27 @@ struct GenericCreditsView: View {
     }
 }
 
-extension GenericCreditsView {
-    struct LicenseView: View {
-        let url: URL
-
-        @Binding var content: String?
-
-        var body: some View {
-            ZStack {
-                content.map { unwrapped in
-                    ScrollView {
-                        Text(unwrapped)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                            .padding()
-                    }
-                }
-                if content == nil {
-                    ProgressView()
-                }
-            }.onAppear(perform: loadURL)
-        }
-
-        private func loadURL() {
-            guard content == nil else {
-                return
-            }
-            Task { @MainActor in
-                withAnimation {
-                    do {
-                        content = try String(contentsOf: url)
-                    } catch {
-                        content = AppError(error).localizedDescription
-                    }
-                }
-            }
-        }
-    }
-}
-
 private extension String {
     var localizedAsCountryCode: String {
         Locale.current.localizedString(forLanguageCode: self)?.capitalized ?? self
+    }
+}
+
+// MARK: -
+
+private extension GenericCreditsView.LicenseView {
+    func loadURL() {
+        guard content == nil else {
+            return
+        }
+        Task { @MainActor in
+            withAnimation {
+                do {
+                    content = try String(contentsOf: url)
+                } catch {
+                    content = AppError(error).localizedDescription
+                }
+            }
+        }
     }
 }
