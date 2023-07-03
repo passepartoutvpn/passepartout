@@ -59,18 +59,29 @@ extension ProfileView {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: commitRenaming, label: themeSaveButtonLabel)
                 }
-            }.alert(isPresented: $isOverwritingExistingProfile, content: alertOverwriteExistingProfile)
+            }.alert(
+                L10n.Profile.Alerts.Rename.title,
+                isPresented: $isOverwritingExistingProfile,
+                actions: alertOverwriteActions,
+                message: alertOverwriteMessage
+            )
         }
 
-        private func alertOverwriteExistingProfile() -> Alert {
-            Alert(
-                title: Text(L10n.Profile.Alerts.Rename.title),
-                message: Text(L10n.AddProfile.Shared.Alerts.Overwrite.message),
-                primaryButton: .destructive(Text(L10n.Global.Strings.ok)) {
-                    commitRenaming(force: true)
-                },
-                secondaryButton: .cancel(Text(L10n.Global.Strings.cancel))
-            )
+        @ViewBuilder
+        private func alertOverwriteActions() -> some View {
+            Button(role: .destructive) {
+                commitRenaming(force: true)
+            } label: {
+                Text(L10n.Global.Strings.ok)
+            }
+            Button(role: .cancel) {
+            } label: {
+                Text(L10n.Global.Strings.cancel)
+            }
+        }
+
+        private func alertOverwriteMessage() -> some View {
+            Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
         }
 
         private func loadCurrentName() {

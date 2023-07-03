@@ -77,8 +77,12 @@ extension AddProviderView {
                 } label: {
                     themeSaveButtonLabel()
                 }
-            }.alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
-            .navigationTitle(providerMetadata.fullName)
+            }.alert(
+                L10n.AddProfile.Shared.title,
+                isPresented: $viewModel.isAskingOverwrite,
+                actions: alertOverwriteActions,
+                message: alertOverwriteMessage
+            ).navigationTitle(providerMetadata.fullName)
         }
 
         private var hiddenAccountLink: some View {
@@ -90,15 +94,21 @@ extension AddProviderView {
             }
         }
 
-        private func alertOverwriteExistingProfile() -> Alert {
-            return Alert(
-                title: Text(L10n.AddProfile.Shared.title),
-                message: Text(L10n.AddProfile.Shared.Alerts.Overwrite.message),
-                primaryButton: .destructive(Text(L10n.Global.Strings.ok)) {
-                    saveProfile(replacingExisting: true)
-                },
-                secondaryButton: .cancel(Text(L10n.Global.Strings.cancel))
-            )
+        @ViewBuilder
+        private func alertOverwriteActions() -> some View {
+            Button(role: .destructive) {
+                saveProfile(replacingExisting: true)
+            } label: {
+                Text(L10n.Global.Strings.ok)
+            }
+            Button(role: .cancel) {
+            } label: {
+                Text(L10n.Global.Strings.cancel)
+            }
+        }
+
+        private func alertOverwriteMessage() -> some View {
+            Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
         }
 
         private func saveProfile(replacingExisting: Bool) {

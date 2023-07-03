@@ -53,6 +53,8 @@ extension DiagnosticsView {
 
         @State private var isReportingIssue = false
 
+        @State private var isAlertPresented = false
+
         @State private var alertType: AlertType?
 
         private let vpnProtocol: VPNProtocolType = .openVPN
@@ -75,17 +77,26 @@ extension DiagnosticsView {
                     issueReporterSection
                 }
             }.sheet(isPresented: $isReportingIssue, content: reportIssueView)
-            .alert(item: $alertType, content: presentedAlert)
+            .alert(
+                L10n.ReportIssue.Alert.title,
+                isPresented: $isAlertPresented,
+                presenting: alertType,
+                actions: alertActions,
+                message: alertMessage
+            )
         }
 
-        private func presentedAlert(_ alertType: AlertType) -> Alert {
+        private func alertActions(_ alertType: AlertType) -> some View {
+            Button(role: .cancel) {
+            } label: {
+                Text(L10n.Global.Strings.ok)
+            }
+        }
+
+        private func alertMessage(_ alertType: AlertType) -> some View {
             switch alertType {
             case .emailNotConfigured:
-                return Alert(
-                    title: Text(L10n.ReportIssue.Alert.title),
-                    message: Text(L10n.Global.Messages.emailNotConfigured),
-                    dismissButton: .cancel(Text(L10n.Global.Strings.ok))
-                )
+                return Text(L10n.Global.Messages.emailNotConfigured)
             }
         }
 
@@ -180,6 +191,7 @@ extension DiagnosticsView.OpenVPNView {
         }
         guard URL.open(url) else {
             alertType = .emailNotConfigured
+            isAlertPresented = true
             return
         }
     }

@@ -43,6 +43,8 @@ struct DonateView: View {
 
     @ObservedObject private var productManager: ProductManager
 
+    @State private var isAlertPresented = false
+
     @State private var alertType: AlertType?
 
     @State private var pendingDonationIdentifier: String?
@@ -57,7 +59,13 @@ struct DonateView: View {
                 .disabled(pendingDonationIdentifier != nil)
         }.themeSecondaryView()
         .navigationTitle(L10n.Donate.title)
-        .alert(item: $alertType, content: presentedAlert)
+        .alert(
+            L10n.Donate.title,
+            isPresented: $isAlertPresented,
+            presenting: alertType,
+            actions: alertActions,
+            message: alertMessage
+        )
 
         // reloading
         .onAppear {
@@ -69,14 +77,20 @@ struct DonateView: View {
         }.themeAnimation(on: productManager.isRefreshingProducts)
     }
 
-    private func presentedAlert(_ alertType: AlertType) -> Alert {
+    private func alertActions(_ alertType: AlertType) -> some View {
         switch alertType {
         case .thankYou:
-            return Alert(
-                title: Text(L10n.Donate.Alerts.Purchase.Success.title),
-                message: Text(L10n.Donate.Alerts.Purchase.Success.message),
-                dismissButton: .cancel(Text(L10n.Global.Strings.ok))
-            )
+            return Button(role: .cancel) {
+            } label: {
+                Text(L10n.Global.Strings.ok)
+            }
+        }
+    }
+
+    private func alertMessage(_ alertType: AlertType) -> some View {
+        switch alertType {
+        case .thankYou:
+            return Text(L10n.Donate.Alerts.Purchase.Success.message)
         }
     }
 
@@ -124,6 +138,7 @@ extension DonateView {
         case .success(let value):
             if case .done = value {
                 alertType = .thankYou
+                isAlertPresented = true
             } else {
                 // cancelled
             }

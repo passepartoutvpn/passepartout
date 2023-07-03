@@ -30,13 +30,16 @@ extension OrganizerView {
     struct SceneView: View {
         @Environment(\.scenePhase) private var scenePhase
 
+        @Binding private var isAlertPresented: Bool
+
         @Binding private var alertType: AlertType?
 
         @Binding private var didHandleSubreddit: Bool
 
         @State private var isFirstLaunch = true
 
-        init(alertType: Binding<AlertType?>, didHandleSubreddit: Binding<Bool>) {
+        init(isAlertPresented: Binding<Bool>, alertType: Binding<AlertType?>, didHandleSubreddit: Binding<Bool>) {
+            _isAlertPresented = isAlertPresented
             _alertType = alertType
             _didHandleSubreddit = didHandleSubreddit
         }
@@ -53,6 +56,7 @@ extension OrganizerView {
         private func onAppear() {
             guard didHandleSubreddit else {
                 alertType = .subscribeReddit
+                isAlertPresented = true
                 return
             }
 

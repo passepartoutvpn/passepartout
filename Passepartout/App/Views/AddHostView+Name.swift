@@ -74,8 +74,12 @@ extension AddHostView {
                         }
                     }
                 }
-            }.alert(isPresented: $viewModel.isAskingOverwrite, content: alertOverwriteExistingProfile)
-            .onAppear(perform: requestResourcePermissions)
+            }.alert(
+                L10n.AddProfile.Shared.title,
+                isPresented: $viewModel.isAskingOverwrite,
+                actions: alertOverwriteActions,
+                message: alertOverwriteMessage
+            ).onAppear(perform: requestResourcePermissions)
             .onDisappear(perform: dropResourcePermissions)
             .navigationTitle(L10n.AddProfile.Shared.title)
             .themeSecondaryView()
@@ -158,15 +162,21 @@ extension AddHostView {
             url.stopAccessingSecurityScopedResource()
         }
 
-        private func alertOverwriteExistingProfile() -> Alert {
-            Alert(
-                title: Text(L10n.AddProfile.Shared.title),
-                message: Text(L10n.AddProfile.Shared.Alerts.Overwrite.message),
-                primaryButton: .destructive(Text(L10n.Global.Strings.ok)) {
-                    processProfile(replacingExisting: true)
-                },
-                secondaryButton: .cancel(Text(L10n.Global.Strings.cancel))
-            )
+        @ViewBuilder
+        private func alertOverwriteActions() -> some View {
+            Button(role: .destructive) {
+                processProfile(replacingExisting: true)
+            } label: {
+                Text(L10n.Global.Strings.ok)
+            }
+            Button(role: .cancel) {
+            } label: {
+                Text(L10n.Global.Strings.cancel)
+            }
+        }
+
+        private func alertOverwriteMessage() -> some View {
+            Text(L10n.AddProfile.Shared.Alerts.Overwrite.message)
         }
 
         private func processProfile(replacingExisting: Bool) {
