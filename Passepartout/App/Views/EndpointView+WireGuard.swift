@@ -125,9 +125,9 @@ private extension EndpointView.WireGuardView {
                 Text(L10n.Endpoint.Wireguard.Items.AllowedIp.caption)
                     .withTrailingText($0)
             }
-            builder.keepAlive(ofPeer: peerIndex).map {
+            builder.localizedDescription(optionalStyle: .keepAlive(peerIndex: peerIndex)).map {
                 Text(L10n.Global.Strings.keepalive)
-                    .withTrailingText(TimeInterval($0).localizedDescriptionAsKeepAlive)
+                    .withTrailingText($0)
             }
         } header: {
             Text(L10n.Endpoint.Wireguard.Items.Peer.caption)

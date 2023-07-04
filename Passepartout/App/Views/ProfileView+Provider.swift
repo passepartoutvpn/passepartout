@@ -130,9 +130,9 @@ private extension ProfileView.ProviderSection {
             return nil
         }
         if currentProfile.value.providerRandomizesServer ?? false {
-            return server.localizedCountry(withCategory: true)
+            return server.localizedDescription(style: .countryWithCategory(withCategory: true))
         } else {
-            return server.localizedLongDescription(withCategory: true)
+            return server.localizedDescription(style: .longWithCategory(withCategory: true))
         }
     }
 
@@ -144,11 +144,11 @@ private extension ProfileView.ProviderSection {
     }
 
     var currentProviderPreset: String? {
-        providerManager.localizedPreset(forProfile: profile)
+        providerManager.localizedDescription(optionalStyle: .preset(profile: profile))
     }
 
     var lastInfrastructureUpdate: String? {
-        providerManager.localizedInfrastructureUpdate(forProfile: profile)
+        providerManager.localizedDescription(optionalStyle: .infrastructureUpdate(profile: profile))
     }
 }
 

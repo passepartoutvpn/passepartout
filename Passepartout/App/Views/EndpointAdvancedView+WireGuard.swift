@@ -85,7 +85,7 @@ private extension EndpointAdvancedView.WireGuardView {
         builder.mtu.map { mtu in
             Section {
                 Text(Unlocalized.Network.mtu)
-                    .withTrailingText(Int(mtu).localizedDescriptionAsMTU)
+                    .withTrailingText(Int(mtu).localizedDescription(style: .mtu))
             }
         }
     }

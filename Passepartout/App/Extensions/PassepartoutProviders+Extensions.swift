@@ -60,7 +60,7 @@ extension ProviderLocation: Comparable {
     }
 
     public static func < (lhs: Self, rhs: Self) -> Bool {
-        lhs.localizedCountry < rhs.localizedCountry
+        lhs.localizedDescription(style: .country) < rhs.localizedDescription(style: .country)
     }
 }
 

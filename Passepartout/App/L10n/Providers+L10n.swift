@@ -26,15 +26,31 @@
 import Foundation
 import PassepartoutLibrary
 
-extension ProviderManager {
-    func localizedPreset(forProfile profile: Profile) -> String? {
+extension ProviderManager: StyledOptionalLocalizableEntity {
+    public enum OptionalStyle {
+        case preset(profile: Profile)
+
+        case infrastructureUpdate(profile: Profile)
+    }
+
+    public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
+        switch optionalStyle {
+        case .preset(let profile):
+            return localizedPreset(forProfile: profile)
+
+        case .infrastructureUpdate(let profile):
+            return localizedInfrastructureUpdate(forProfile: profile)
+        }
+    }
+
+    private func localizedPreset(forProfile profile: Profile) -> String? {
         guard let server = profile.providerServer(self) else {
             return nil
         }
         return profile.providerPreset(server)?.localizedDescription
     }
 
-    func localizedInfrastructureUpdate(forProfile profile: Profile) -> String? {
+    private func localizedInfrastructureUpdate(forProfile profile: Profile) -> String? {
         guard let providerName = profile.header.providerName else {
             return nil
         }
@@ -42,8 +58,19 @@ extension ProviderManager {
     }
 }
 
-extension ProviderMetadata {
-    var localizedGuidanceString: String? {
+extension ProviderMetadata: StyledOptionalLocalizableEntity {
+    public enum OptionalStyle {
+        case guidance
+    }
+
+    public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
+        switch optionalStyle {
+        case .guidance:
+            return localizedGuidanceString
+        }
+    }
+
+    private var localizedGuidanceString: String? {
         let prefix = "account.sections.guidance.footer.infrastructure"
         let key = "\(prefix).\(name)"
         var format = NSLocalizedString(key, bundle: .main, comment: "")
@@ -59,18 +86,55 @@ extension ProviderMetadata {
     }
 }
 
-extension ProviderLocation {
-    var localizedCountry: String {
+extension ProviderLocation: StyledLocalizableEntity {
+    public enum Style {
+        case country
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .country:
+            return localizedCountry
+        }
+    }
+
+    private var localizedCountry: String {
         countryCode.localizedAsCountryCode
     }
 }
 
-extension ProviderServer {
-    var localizedCountry: String {
+extension ProviderServer: StyledLocalizableEntity {
+    public enum Style {
+        case country
+
+        case countryWithCategory(withCategory: Bool)
+
+        case shortWithDefault
+
+        case longWithCategory(withCategory: Bool)
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .country:
+            return localizedCountry
+
+        case .countryWithCategory(let withCategory):
+            return localizedCountry(withCategory: withCategory)
+
+        case .shortWithDefault:
+            return localizedShortDescriptionWithDefault
+
+        case .longWithCategory(let withCategory):
+            return localizedLongDescription(withCategory: withCategory)
+        }
+    }
+
+    private var localizedCountry: String {
         countryCode.localizedAsCountryCode
     }
 
-    func localizedCountry(withCategory: Bool) -> String {
+    private func localizedCountry(withCategory: Bool) -> String {
         let desc = localizedCountry
         if withCategory, !categoryName.isEmpty {
             return "\(categoryName.uppercased()): \(desc)"
@@ -78,7 +142,36 @@ extension ProviderServer {
         return desc
     }
 
-    var localizedShortDescription: String? {
+    private var localizedShortDescriptionWithDefault: String {
+        localizedShortDescription ?? "\(L10n.Global.Strings.default) [\(apiId)]"
+    }
+
+    private func localizedLongDescription(withCategory: Bool) -> String {
+        var comps: [String] = [localizedCountry]
+        localizedShortDescription.map {
+            comps.append($0)
+        }
+        let desc = comps.joined(separator: ", ")
+        if withCategory, !categoryName.isEmpty {
+            return "\(categoryName.uppercased()): \(desc)"
+        }
+        return desc
+    }
+}
+
+extension ProviderServer: StyledOptionalLocalizableEntity {
+    public enum OptionalStyle {
+        case short
+    }
+
+    public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
+        switch optionalStyle {
+        case .short:
+            return localizedShortDescription
+        }
+    }
+
+    private var localizedShortDescription: String? {
         var comps = localizedName.map { [$0] } ?? []
         if let serverIndex = serverIndex {
             comps.append("#\(serverIndex)")
@@ -96,26 +189,10 @@ extension ProviderServer {
         }
         return str
     }
-
-    var localizedShortDescriptionWithDefault: String {
-        localizedShortDescription ?? "\(L10n.Global.Strings.default) [\(apiId)]"
-    }
-
-    func localizedLongDescription(withCategory: Bool) -> String {
-        var comps: [String] = [localizedCountry]
-        localizedShortDescription.map {
-            comps.append($0)
-        }
-        let desc = comps.joined(separator: ", ")
-        if withCategory, !categoryName.isEmpty {
-            return "\(categoryName.uppercased()): \(desc)"
-        }
-        return desc
-    }
 }
 
-extension ProviderServer.Preset {
-    var localizedDescription: String {
+extension ProviderServer.Preset: LocalizableEntity {
+    public var localizedDescription: String {
         name
     }
 }

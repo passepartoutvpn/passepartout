@@ -30,8 +30,8 @@ import TunnelKitManager
 import TunnelKitOpenVPN
 import TunnelKitWireGuard
 
-extension VPNStatus {
-    var localizedDescription: String {
+extension VPNStatus: LocalizableEntity {
+    public var localizedDescription: String {
         switch self {
         case .connecting:
             return L10n.Tunnelkit.Vpn.connecting
@@ -48,62 +48,74 @@ extension VPNStatus {
     }
 }
 
-extension DataCount {
-    var localizedDescription: String {
+extension DataCount: LocalizableEntity {
+    public var localizedDescription: String {
         let down = received.descriptionAsDataUnit
         let up = sent.descriptionAsDataUnit
         return "↓\(down) ↑\(up)"
     }
 }
 
-extension Int {
-    var localizedDescriptionAsMTU: String {
-        guard self != 0 else {
-            return L10n.Global.Strings.default
-        }
-        return description
-    }
-}
+extension IPv4Settings: StyledLocalizableEntity {
+    public enum Style {
+        case address
 
-extension TimeInterval {
-    var localizedDescriptionAsKeepAlive: String {
-        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
-        if self > 0 {
-            return V.KeepAlive.Value.seconds(Int(self))
-        } else {
-            return L10n.Global.Strings.disabled
+        case defaultGateway
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .address:
+            return localizedAddress
+
+        case .defaultGateway:
+            return localizedDefaultGateway
         }
     }
-}
 
-extension IPv4Settings {
-    var localizedAddress: String {
+    private var localizedAddress: String {
         "\(address)/\(addressMask)"
     }
 
-    var localizedDefaultGateway: String {
+    private var localizedDefaultGateway: String {
         defaultGateway
     }
 }
 
-extension IPv6Settings {
-    var localizedAddress: String {
+extension IPv6Settings: StyledLocalizableEntity {
+    public enum Style {
+        case address
+
+        case defaultGateway
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .address:
+            return localizedAddress
+
+        case .defaultGateway:
+            return localizedDefaultGateway
+        }
+    }
+
+    private var localizedAddress: String {
         "\(address)/\(addressPrefixLength)"
     }
 
-    var localizedDefaultGateway: String {
+    private var localizedDefaultGateway: String {
         defaultGateway
     }
 }
 
-extension IPv4Settings.Route {
-    var localizedDescription: String {
+extension IPv4Settings.Route: LocalizableEntity {
+    public var localizedDescription: String {
         "\(destination)/\(mask) -> \(gateway ?? "*")"
     }
 }
 
-extension IPv6Settings.Route {
-    var localizedDescription: String {
+extension IPv6Settings.Route: LocalizableEntity {
+    public var localizedDescription: String {
         "\(destination)/\(prefixLength) -> \(gateway ?? "*")"
     }
 }

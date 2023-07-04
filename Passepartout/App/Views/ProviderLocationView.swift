@@ -101,13 +101,13 @@ extension ProviderLocationView {
             HStack {
                 themeAssetsCountryImage(location.countryCode).asAssetImage
                 VStack {
-                    if let singleServer = location.onlyServer, singleServer.localizedShortDescription != nil {
-                        Text(location.localizedCountry)
+                    if let singleServer = location.onlyServer, singleServer.localizedDescription(optionalStyle: .short) != nil {
+                        Text(location.localizedDescription(style: .country))
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        Text(singleServer.localizedShortDescription ?? "")
+                        Text(singleServer.localizedDescription(optionalStyle: .short) ?? "")
                             .frame(maxWidth: .infinity, alignment: .leading)
                     } else {
-                        Text(location.localizedCountry)
+                        Text(location.localizedDescription(style: .country))
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     }
                 }.withTrailingCheckmark(when: location.id == selectedLocationId)
@@ -132,7 +132,7 @@ extension ProviderLocationView {
             ScrollViewReader { scrollProxy in
                 List {
                     ForEach(servers) { server in
-                        Button(server.localizedShortDescriptionWithDefault) {
+                        Button(server.localizedDescription(style: .shortWithDefault)) {
                             selectedServer = server
                         }.withTrailingCheckmark(when: server.id == selectedServer?.id)
                     }
@@ -211,7 +211,7 @@ private extension ProviderLocationView {
             ServerListView(
                 location: location,
                 selectedServer: $selectedServer
-            ).navigationTitle(location.localizedCountry)
+            ).navigationTitle(location.localizedDescription(style: .country))
         }, label: {
             LocationRow(
                 location: location,

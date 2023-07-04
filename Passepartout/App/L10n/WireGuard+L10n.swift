@@ -24,7 +24,35 @@
 //
 
 import Foundation
+import PassepartoutLibrary
 import TunnelKitWireGuard
+
+extension WireGuard.ConfigurationBuilder: StyledOptionalLocalizableEntity {
+    public enum OptionalStyle {
+        case keepAlive(peerIndex: Int)
+    }
+
+    public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
+        switch optionalStyle {
+        case .keepAlive(let peerIndex):
+            return keepAlive(ofPeer: peerIndex)?.localizedDescriptionAsKeepAlive
+        }
+    }
+}
+
+private extension UInt16 {
+    var localizedDescriptionAsKeepAlive: String {
+        // FIXME: l10n, move from OpenVPN to shared
+        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
+        if self > 0 {
+            return V.KeepAlive.Value.seconds(Int(self))
+        } else {
+            return L10n.Global.Strings.disabled
+        }
+    }
+}
+
+// MARK: - Errors
 
 extension TunnelKitWireGuardError: LocalizedError {
     public var errorDescription: String? {

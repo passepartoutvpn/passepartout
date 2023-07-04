@@ -89,7 +89,7 @@ struct AccountView: View {
                         .withLeadingText(L10n.Account.Items.Seed.caption)
                 }
             } footer: {
-                metadata?.localizedGuidanceString.map {
+                metadata?.localizedDescription(optionalStyle: .guidance).map {
                     Text($0)
                 }
             }

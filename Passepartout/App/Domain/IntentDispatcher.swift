@@ -48,7 +48,7 @@ final class IntentDispatcher {
         intent.profileId = header.id.uuidString
         intent.providerFullName = providerFullName
         intent.serverId = server.id
-        intent.serverName = server.localizedLongDescription(withCategory: false)
+        intent.serverName = server.localizedDescription(style: .longWithCategory(withCategory: false))
         return intent
     }
 
