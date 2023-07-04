@@ -408,12 +408,11 @@ private extension OpenVPN.Configuration {
                 randomizeEndpoint != nil || randomizeHostnames != nil else {
             return nil
         }
-        let builder = builder()
         return .init(
-            keepAlive: builder.localizedDescription(optionalStyle: .keepAlive),
-            reneg: builder.localizedDescription(optionalStyle: .renegotiatesAfter),
-            randomizeEndpoint: builder.localizedDescription(optionalStyle: .randomizeEndpoint),
-            randomizeHostnames: builder.localizedDescription(optionalStyle: .randomizeHostnames)
+            keepAlive: localizedDescription(optionalStyle: .keepAlive),
+            reneg: localizedDescription(optionalStyle: .renegotiatesAfter),
+            randomizeEndpoint: localizedDescription(optionalStyle: .randomizeEndpoint),
+            randomizeHostnames: localizedDescription(optionalStyle: .randomizeHostnames)
         )
     }
 }

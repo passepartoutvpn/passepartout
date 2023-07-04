@@ -150,7 +150,7 @@ extension OpenVPN.ConfigurationBuilder: StyledLocalizableEntity {
     }
 }
 
-extension OpenVPN.ConfigurationBuilder: StyledOptionalLocalizableEntity {
+extension OpenVPN.Configuration: StyledOptionalLocalizableEntity {
     public enum OptionalStyle {
         case keepAlive
 
