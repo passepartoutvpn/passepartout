@@ -101,10 +101,12 @@ extension ProviderLocationView {
             HStack {
                 themeAssetsCountryImage(location.countryCode).asAssetImage
                 VStack {
-                    if let singleServer = location.onlyServer, singleServer.localizedDescription(optionalStyle: .short) != nil {
+                    if let singleServer = location.onlyServer,
+                       let shortServerDescription = singleServer.localizedDescription(optionalStyle: .short) {
+
                         Text(location.localizedDescription(style: .country))
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        Text(singleServer.localizedDescription(optionalStyle: .short) ?? "")
+                        Text(shortServerDescription)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     } else {
                         Text(location.localizedDescription(style: .country))
