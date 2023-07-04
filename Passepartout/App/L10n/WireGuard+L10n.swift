@@ -35,13 +35,13 @@ extension WireGuard.ConfigurationBuilder: StyledOptionalLocalizableEntity {
     public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
         switch optionalStyle {
         case .keepAlive(let peerIndex):
-            return keepAlive(ofPeer: peerIndex)?.localizedDescriptionAsKeepAlive
+            return keepAlive(ofPeer: peerIndex)?.keepAliveDescription
         }
     }
 }
 
 private extension UInt16 {
-    var localizedDescriptionAsKeepAlive: String {
+    var keepAliveDescription: String {
         // FIXME: l10n, move from OpenVPN to shared
         let V = L10n.Endpoint.Advanced.Openvpn.Items.self
         if self > 0 {

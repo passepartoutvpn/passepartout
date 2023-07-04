@@ -36,21 +36,21 @@ extension ProviderManager: StyledOptionalLocalizableEntity {
     public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
         switch optionalStyle {
         case .preset(let profile):
-            return localizedPreset(forProfile: profile)
+            return presetDescription(forProfile: profile)
 
         case .infrastructureUpdate(let profile):
-            return localizedInfrastructureUpdate(forProfile: profile)
+            return infrastructureUpdateDescription(forProfile: profile)
         }
     }
 
-    private func localizedPreset(forProfile profile: Profile) -> String? {
+    private func presetDescription(forProfile profile: Profile) -> String? {
         guard let server = profile.providerServer(self) else {
             return nil
         }
         return profile.providerPreset(server)?.localizedDescription
     }
 
-    private func localizedInfrastructureUpdate(forProfile profile: Profile) -> String? {
+    private func infrastructureUpdateDescription(forProfile profile: Profile) -> String? {
         guard let providerName = profile.header.providerName else {
             return nil
         }
@@ -66,11 +66,11 @@ extension ProviderMetadata: StyledOptionalLocalizableEntity {
     public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
         switch optionalStyle {
         case .guidance:
-            return localizedGuidanceString
+            return guidanceString
         }
     }
 
-    private var localizedGuidanceString: String? {
+    private var guidanceString: String? {
         let prefix = "account.sections.guidance.footer.infrastructure"
         let key = "\(prefix).\(name)"
         var format = NSLocalizedString(key, bundle: .main, comment: "")
@@ -94,11 +94,11 @@ extension ProviderLocation: StyledLocalizableEntity {
     public func localizedDescription(style: Style) -> String {
         switch style {
         case .country:
-            return localizedCountry
+            return countryDescription
         }
     }
 
-    private var localizedCountry: String {
+    private var countryDescription: String {
         countryCode.localizedAsCountryCode
     }
 }
@@ -117,38 +117,38 @@ extension ProviderServer: StyledLocalizableEntity {
     public func localizedDescription(style: Style) -> String {
         switch style {
         case .country:
-            return localizedCountry
+            return countryDescription
 
         case .countryWithCategory(let withCategory):
-            return localizedCountry(withCategory: withCategory)
+            return countryDescription(withCategory: withCategory)
 
         case .shortWithDefault:
-            return localizedShortDescriptionWithDefault
+            return shortDescriptionWithDefault
 
         case .longWithCategory(let withCategory):
-            return localizedLongDescription(withCategory: withCategory)
+            return longDescription(withCategory: withCategory)
         }
     }
 
-    private var localizedCountry: String {
+    private var countryDescription: String {
         countryCode.localizedAsCountryCode
     }
 
-    private func localizedCountry(withCategory: Bool) -> String {
-        let desc = localizedCountry
+    private func countryDescription(withCategory: Bool) -> String {
+        let desc = countryDescription
         if withCategory, !categoryName.isEmpty {
             return "\(categoryName.uppercased()): \(desc)"
         }
         return desc
     }
 
-    private var localizedShortDescriptionWithDefault: String {
-        localizedShortDescription ?? "\(L10n.Global.Strings.default) [\(apiId)]"
+    private var shortDescriptionWithDefault: String {
+        shortDescription ?? "\(L10n.Global.Strings.default) [\(apiId)]"
     }
 
-    private func localizedLongDescription(withCategory: Bool) -> String {
-        var comps: [String] = [localizedCountry]
-        localizedShortDescription.map {
+    private func longDescription(withCategory: Bool) -> String {
+        var comps: [String] = [countryDescription]
+        shortDescription.map {
             comps.append($0)
         }
         let desc = comps.joined(separator: ", ")
@@ -167,11 +167,11 @@ extension ProviderServer: StyledOptionalLocalizableEntity {
     public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
         switch optionalStyle {
         case .short:
-            return localizedShortDescription
+            return shortDescription
         }
     }
 
-    private var localizedShortDescription: String? {
+    private var shortDescription: String? {
         var comps = localizedName.map { [$0] } ?? []
         if let serverIndex = serverIndex {
             comps.append("#\(serverIndex)")

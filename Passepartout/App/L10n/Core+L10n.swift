@@ -34,11 +34,11 @@ extension ObservableVPNState: StyledLocalizableEntity {
     public func localizedDescription(style: Style) -> String {
         switch style {
         case .status(let isActiveProfile, let withErrors, let dataCountIfAvailable):
-            return localizedStatusDescription(isActiveProfile: isActiveProfile, withErrors: withErrors, dataCountIfAvailable: dataCountIfAvailable)
+            return statusDescription(isActiveProfile: isActiveProfile, withErrors: withErrors, dataCountIfAvailable: dataCountIfAvailable)
         }
     }
 
-    private func localizedStatusDescription(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool) -> String {
+    private func statusDescription(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool) -> String {
         guard isActiveProfile && isEnabled else {
             return L10n.Tunnelkit.Vpn.disabled
         }
@@ -144,11 +144,11 @@ extension Int: StyledLocalizableEntity {
     public func localizedDescription(style: Style) -> String {
         switch style {
         case .mtu:
-            return localizedDescriptionAsMTU
+            return mtuDescription
         }
     }
 
-    private var localizedDescriptionAsMTU: String {
+    private var mtuDescription: String {
         guard self != 0 else {
             return L10n.Global.Strings.default
         }

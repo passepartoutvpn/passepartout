@@ -80,14 +80,14 @@ extension OpenVPN.XORMethod: StyledLocalizableEntity {
     public func localizedDescription(style: Style) -> String {
         switch style {
         case .short:
-            return localizedShortDescription
+            return shortDescription
 
         case .long:
-            return localizedLongDescription
+            return longDescription
         }
     }
 
-    private var localizedShortDescription: String {
+    private var shortDescription: String {
         switch self {
         case .xormask:
             return Unlocalized.OpenVPN.XOR.xormask.rawValue
@@ -103,16 +103,16 @@ extension OpenVPN.XORMethod: StyledLocalizableEntity {
         }
     }
 
-    private var localizedLongDescription: String {
+    private var longDescription: String {
         switch self {
         case .xormask(let mask):
-            return "\(localizedShortDescription) \(mask.toHex())"
+            return "\(shortDescription) \(mask.toHex())"
 
         case .obfuscate(let mask):
-            return "\(localizedShortDescription) \(mask.toHex())"
+            return "\(shortDescription) \(mask.toHex())"
 
         default:
-            return localizedShortDescription
+            return shortDescription
         }
     }
 }
@@ -142,10 +142,10 @@ extension OpenVPN.ConfigurationBuilder: StyledLocalizableEntity {
     public func localizedDescription(style: Style) -> String {
         switch style {
         case .tlsWrap:
-            return tlsWrap.localizedDescription
+            return tlsWrap.tlsWrapDescription
 
         case .eku:
-            return checksEKU.localizedDescriptionAsEKU
+            return checksEKU.ekuDescription
         }
     }
 }
@@ -164,22 +164,22 @@ extension OpenVPN.ConfigurationBuilder: StyledOptionalLocalizableEntity {
     public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
         switch optionalStyle {
         case .keepAlive:
-            return keepAliveInterval?.localizedDescriptionAsKeepAlive
+            return keepAliveInterval?.keepAliveDescription
 
         case .renegotiatesAfter:
-            return renegotiatesAfter?.localizedDescriptionAsRenegotiatesAfter
+            return renegotiatesAfter?.renegotiatesAfterDescription
 
         case .randomizeEndpoint:
-            return randomizeEndpoint?.localizedDescriptionAsRandomizeEndpoint
+            return randomizeEndpoint?.randomizeEndpointDescription
 
         case .randomizeHostnames:
-            return randomizeHostnames?.localizedDescriptionAsRandomizeHostnames
+            return randomizeHostnames?.randomizeHostnamesDescription
         }
     }
 }
 
 private extension Optional where Wrapped == OpenVPN.TLSWrap {
-    var localizedDescription: String {
+    var tlsWrapDescription: String {
         guard let strategy = self?.strategy else {
             return L10n.Global.Strings.disabled
         }
@@ -195,7 +195,7 @@ private extension Optional where Wrapped == OpenVPN.TLSWrap {
 }
 
 private extension TimeInterval {
-    var localizedDescriptionAsKeepAlive: String {
+    var keepAliveDescription: String {
         let V = L10n.Endpoint.Advanced.Openvpn.Items.self
         if self > 0 {
             return V.KeepAlive.Value.seconds(Int(self))
@@ -206,14 +206,14 @@ private extension TimeInterval {
 }
 
 private extension Optional where Wrapped == Bool {
-    var localizedDescriptionAsEKU: String {
+    var ekuDescription: String {
         let V = L10n.Global.Strings.self
         return (self ?? false) ? V.enabled : V.disabled
     }
 }
 
 private extension TimeInterval {
-    var localizedDescriptionAsRenegotiatesAfter: String {
+    var renegotiatesAfterDescription: String {
         let V = L10n.Endpoint.Advanced.Openvpn.Items.self
         if self > 0 {
             return V.RenegotiationSeconds.Value.after(TimeInterval(self).localizedDescription)
@@ -224,12 +224,12 @@ private extension TimeInterval {
 }
 
 private extension Bool {
-    var localizedDescriptionAsRandomizeEndpoint: String {
+    var randomizeEndpointDescription: String {
         let V = L10n.Global.Strings.self
         return self ? V.enabled : V.disabled
     }
 
-    var localizedDescriptionAsRandomizeHostnames: String {
+    var randomizeHostnamesDescription: String {
         let V = L10n.Global.Strings.self
         return self ? V.enabled : V.disabled
     }

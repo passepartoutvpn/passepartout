@@ -66,18 +66,18 @@ extension IPv4Settings: StyledLocalizableEntity {
     public func localizedDescription(style: Style) -> String {
         switch style {
         case .address:
-            return localizedAddress
+            return addressDescription
 
         case .defaultGateway:
-            return localizedDefaultGateway
+            return defaultGatewayDescription
         }
     }
 
-    private var localizedAddress: String {
+    private var addressDescription: String {
         "\(address)/\(addressMask)"
     }
 
-    private var localizedDefaultGateway: String {
+    private var defaultGatewayDescription: String {
         defaultGateway
     }
 }
@@ -92,18 +92,18 @@ extension IPv6Settings: StyledLocalizableEntity {
     public func localizedDescription(style: Style) -> String {
         switch style {
         case .address:
-            return localizedAddress
+            return addressDescription
 
         case .defaultGateway:
-            return localizedDefaultGateway
+            return defaultGatewayDescription
         }
     }
 
-    private var localizedAddress: String {
+    private var addressDescription: String {
         "\(address)/\(addressPrefixLength)"
     }
 
-    private var localizedDefaultGateway: String {
+    private var defaultGatewayDescription: String {
         defaultGateway
     }
 }
