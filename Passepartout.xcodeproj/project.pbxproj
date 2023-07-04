@@ -37,7 +37,6 @@
 		0E1F562B287F0EF100F8ADD7 /* ProviderProfileItem+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F5629287F0EEE00F8ADD7 /* ProviderProfileItem+ViewModel.swift */; };
 		0E293851285A70AC002A6E0E /* AppPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E293850285A70AC002A6E0E /* AppPreference.swift */; };
 		0E293857285A73BC002A6E0E /* AppContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E293856285A73BC002A6E0E /* AppContext+Shared.swift */; };
-		0E29385C285A8B30002A6E0E /* CoreContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */; };
 		0E2A8D4927ADF87F00207D04 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */; };
 		0E2A8D4F27B04BBA00207D04 /* OrganizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */; };
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
@@ -328,7 +327,6 @@
 		0E23B4A12298559800304C30 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0E293850285A70AC002A6E0E /* AppPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreference.swift; sourceTree = "<group>"; };
 		0E293856285A73BC002A6E0E /* AppContext+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppContext+Shared.swift"; sourceTree = "<group>"; };
-		0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreContext+Shared.swift"; sourceTree = "<group>"; };
 		0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassepartoutApp.swift; sourceTree = "<group>"; };
 		0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerView.swift; sourceTree = "<group>"; };
 		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -589,7 +587,6 @@
 				0E021D9B284E68580077EF5D /* AppContext.swift */,
 				0E293856285A73BC002A6E0E /* AppContext+Shared.swift */,
 				0E021D9A284E68580077EF5D /* CoreContext.swift */,
-				0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */,
 			);
 			path = Context;
 			sourceTree = "<group>";
@@ -1430,7 +1427,6 @@
 				0EA591162733DDDA0096F796 /* Intents.intentdefinition in Sources */,
 				0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */,
 				0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */,
-				0E29385C285A8B30002A6E0E /* CoreContext+Shared.swift in Sources */,
 				0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */,
 				0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift in Sources */,
 				0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */,
