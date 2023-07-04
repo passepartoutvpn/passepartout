@@ -126,8 +126,10 @@ final class CoreContext {
 
         configureObjects()
     }
+}
 
-    private func configureObjects() {
+private extension CoreContext {
+    func configureObjects() {
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.tunnelLogPath = Constants.Log.Tunnel.path
         vpnManager.tunnelLogFormat = Constants.Log.Tunnel.format

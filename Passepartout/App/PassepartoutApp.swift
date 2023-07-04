@@ -47,8 +47,8 @@ struct PassepartoutApp: App {
     }
 }
 
-extension View {
-    fileprivate func onIntentActivity(_ activity: IntentActivity<VPNManager>) -> some View {
+private extension View {
+    func onIntentActivity(_ activity: IntentActivity<VPNManager>) -> some View {
         onContinueUserActivity(activity.name) { userActivity in
 
             // eligibility: ignore Siri shortcuts if not purchased
