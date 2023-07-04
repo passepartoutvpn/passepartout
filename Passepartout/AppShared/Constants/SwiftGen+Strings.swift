@@ -258,8 +258,6 @@ internal enum L10n {
         internal enum Success {
           /// This means a lot to me and I really hope you keep using and promoting this app.
           internal static let message = L10n.tr("Localizable", "donate.alerts.purchase.success.message", fallback: "This means a lot to me and I really hope you keep using and promoting this app.")
-          /// Thank you
-          internal static let title = L10n.tr("Localizable", "donate.alerts.purchase.success.title", fallback: "Thank you")
         }
       }
     }

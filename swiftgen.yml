@@ -1,6 +1,6 @@
 strings:
   inputs:
-    - Passepartout/AppShared/en.lproj/Localizable.strings
+    - Passepartout/App/en.lproj/Localizable.strings
   outputs:
     - templateName: structured-swift4
       output: Passepartout/AppShared/Constants/SwiftGen+Strings.swift

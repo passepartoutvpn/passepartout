@@ -583,16 +583,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E293859285A7489002A6E0E /* Context */ = {
-			isa = PBXGroup;
-			children = (
-				0E021D9A284E68580077EF5D /* CoreContext.swift */,
-				0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */,
-				0E7A8C092A1D410400780F4B /* PersistenceManager.swift */,
-			);
-			path = Context;
-			sourceTree = "<group>";
-		};
 		0E29385A285A749E002A6E0E /* Context */ = {
 			isa = PBXGroup;
 			children = (
@@ -600,6 +590,9 @@
 				0E293856285A73BC002A6E0E /* AppContext+Shared.swift */,
 				0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */,
 				0E293850285A70AC002A6E0E /* AppPreference.swift */,
+				0E021D9A284E68580077EF5D /* CoreContext.swift */,
+				0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */,
+				0E7A8C092A1D410400780F4B /* PersistenceManager.swift */,
 			);
 			path = Context;
 			sourceTree = "<group>";
@@ -898,6 +891,7 @@
 				0E49F6C927DB398100385834 /* Extensions */,
 				0E92781227E7CD530057BB81 /* InApp */,
 				0EA591112733DD4E0096F796 /* Intents */,
+				0E34A2B827CAA8EA00C73B67 /* L10n */,
 				0E5467F12867A52B00F74D1C /* Mac */,
 				0E7A8C062A1D40BA00780F4B /* Pickers */,
 				0E2C171C27CB6307007E8488 /* Reusable */,
@@ -907,10 +901,11 @@
 				0E6059C927FCC5DE003F4063 /* Providers.xcassets */,
 				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
 				0EDE8DE220C86A13004C739C /* App.entitlements */,
-				0EDDEC7C28D0DC130017802E /* LaunchScreen.storyboard */,
 				0E09E35C2834172800BE1BAE /* Credits.rtf */,
 				0E57F64720C83FC7008323CF /* Info.plist */,
 				0E0C072B236087A100155AAC /* InfoPlist.strings */,
+				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
+				0EDDEC7C28D0DC130017802E /* LaunchScreen.storyboard */,
 				0E3FC6852867A3F9009B851C /* AppDelegate.swift */,
 				0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */,
 				0E0F4C5929C761850022E884 /* SceneDelegate.swift */,
@@ -942,10 +937,7 @@
 			isa = PBXGroup;
 			children = (
 				0ECB78D3285F4F9600B0E460 /* Constants */,
-				0E293859285A7489002A6E0E /* Context */,
-				0E34A2B827CAA8EA00C73B67 /* L10n */,
 				0E5467F52867A55F00F74D1C /* Mac */,
-				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
 			);
 			path = AppShared;
 			sourceTree = "<group>";
