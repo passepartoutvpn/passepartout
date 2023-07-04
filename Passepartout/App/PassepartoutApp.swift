@@ -47,17 +47,17 @@ struct PassepartoutApp: App {
     }
 }
 
-extension View {
-    fileprivate func onIntentActivity(_ activity: IntentActivity<VPNManager>) -> some View {
+private extension View {
+    func onIntentActivity(_ activity: IntentActivity<VPNManager>) -> some View {
         onContinueUserActivity(activity.name) { userActivity in
 
             // eligibility: ignore Siri shortcuts if not purchased
-            guard AppContext.shared.productManager.isEligible(forFeature: .siriShortcuts) else {
+            guard ProductManager.shared.isEligible(forFeature: .siriShortcuts) else {
                 pp_log.warning("Ignore activity handler, not eligible for Siri shortcuts")
                 return
             }
             pp_log.info("Handling activity: \(activity.name)")
-            activity.handler(userActivity, CoreContext.shared.vpnManager)
+            activity.handler(userActivity, .shared)
         }
     }
 }

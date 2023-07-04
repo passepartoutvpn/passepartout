@@ -29,6 +29,8 @@ import PassepartoutLibrary
 
 @MainActor
 final class AppContext {
+    private let coreContext: CoreContext
+
     let productManager: ProductManager
 
     private let reviewer: Reviewer
@@ -36,6 +38,8 @@ final class AppContext {
     private var cancellables: Set<AnyCancellable> = []
 
     init(coreContext: CoreContext) {
+        self.coreContext = coreContext
+
         productManager = ProductManager(
             appType: Constants.InApp.appType,
             buildProducts: Constants.InApp.buildProducts
@@ -46,12 +50,28 @@ final class AppContext {
 
         // post
 
-        configureObjects(coreContext: coreContext)
+        configureObjects()
+    }
+
+    var upgradeManager: UpgradeManager {
+        coreContext.upgradeManager
+    }
+
+    var providerManager: ProviderManager {
+        coreContext.providerManager
+    }
+
+    var profileManager: ProfileManager {
+        coreContext.profileManager
+    }
+
+    var vpnManager: VPNManager {
+        coreContext.vpnManager
     }
 }
 
 private extension AppContext {
-    func configureObjects(coreContext: CoreContext) {
+    func configureObjects() {
         coreContext.vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
         }
@@ -71,7 +91,7 @@ private extension AppContext {
             .sink {
                 Task {
                     pp_log.info("Refunds detected, uninstalling VPN profile")
-                    await coreContext.vpnManager.uninstall()
+                    await self.coreContext.vpnManager.uninstall()
                 }
             }.store(in: &cancellables)
     }

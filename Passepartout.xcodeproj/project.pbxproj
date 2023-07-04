@@ -37,7 +37,6 @@
 		0E1F562B287F0EF100F8ADD7 /* ProviderProfileItem+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F5629287F0EEE00F8ADD7 /* ProviderProfileItem+ViewModel.swift */; };
 		0E293851285A70AC002A6E0E /* AppPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E293850285A70AC002A6E0E /* AppPreference.swift */; };
 		0E293857285A73BC002A6E0E /* AppContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E293856285A73BC002A6E0E /* AppContext+Shared.swift */; };
-		0E29385C285A8B30002A6E0E /* CoreContext+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */; };
 		0E2A8D4927ADF87F00207D04 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */; };
 		0E2A8D4F27B04BBA00207D04 /* OrganizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */; };
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
@@ -328,7 +327,6 @@
 		0E23B4A12298559800304C30 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0E293850285A70AC002A6E0E /* AppPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreference.swift; sourceTree = "<group>"; };
 		0E293856285A73BC002A6E0E /* AppContext+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppContext+Shared.swift"; sourceTree = "<group>"; };
-		0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreContext+Shared.swift"; sourceTree = "<group>"; };
 		0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassepartoutApp.swift; sourceTree = "<group>"; };
 		0E2A8D4E27B04BB900207D04 /* OrganizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerView.swift; sourceTree = "<group>"; };
 		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -583,23 +581,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E293859285A7489002A6E0E /* Context */ = {
-			isa = PBXGroup;
-			children = (
-				0E021D9A284E68580077EF5D /* CoreContext.swift */,
-				0E29385B285A8B30002A6E0E /* CoreContext+Shared.swift */,
-				0E7A8C092A1D410400780F4B /* PersistenceManager.swift */,
-			);
-			path = Context;
-			sourceTree = "<group>";
-		};
 		0E29385A285A749E002A6E0E /* Context */ = {
 			isa = PBXGroup;
 			children = (
 				0E021D9B284E68580077EF5D /* AppContext.swift */,
 				0E293856285A73BC002A6E0E /* AppContext+Shared.swift */,
-				0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */,
-				0E293850285A70AC002A6E0E /* AppPreference.swift */,
+				0E021D9A284E68580077EF5D /* CoreContext.swift */,
 			);
 			path = Context;
 			sourceTree = "<group>";
@@ -706,6 +693,32 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0E3A593F2A54ACC900B3FE40 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0E9C232F27F47032007D5FC7 /* IntentsManager.swift */,
+				0E7A8C092A1D410400780F4B /* PersistenceManager.swift */,
+				0E53249627D26B51002565C3 /* ProductManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		0E3A59402A54AD4300B3FE40 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */,
+				0E293850285A70AC002A6E0E /* AppPreference.swift */,
+				0E0392762818732D00827C10 /* BuildProducts.swift */,
+				0EA591142733DDDA0096F796 /* Intents.intentdefinition */,
+				0EA591122733DD4E0096F796 /* IntentDispatcher.swift */,
+				0E9C233227F47E95007D5FC7 /* IntentDispatcher+Activities.swift */,
+				0EB17EA327D2263700D473B5 /* LocalProduct.swift */,
+				0E7A8C072A1D40BA00780F4B /* Picker+OpenVPN.swift */,
+				0E7A8C082A1D40BA00780F4B /* Picker+Network.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 		0E41BD98286711C3006346B4 /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,7 +746,7 @@
 		0E5467F12867A52B00F74D1C /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				0E96D2FA2871D93B005EFBCF /* Models */,
+				0E96D2FA2871D93B005EFBCF /* Managers */,
 				0E5467F92867AA0A00F74D1C /* MacBundleDelegate.swift */,
 				0E5467F22867A54600F74D1C /* MacBundle.swift */,
 			);
@@ -743,7 +756,7 @@
 		0E5467F52867A55F00F74D1C /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				0E96D2F72871D868005EFBCF /* Models */,
+				0E96D2F72871D868005EFBCF /* Managers */,
 				0E5467F62867A57000F74D1C /* MacBridge.swift */,
 				0E5468052867AEC500F74D1C /* MacMenu.swift */,
 				0E5467FF2867AC9900F74D1C /* MacUtils.swift */,
@@ -777,7 +790,7 @@
 			path = Mac;
 			sourceTree = "<group>";
 		};
-		0E54680C286B675F00F74D1C /* Menu */ = {
+		0E54680C286B675F00F74D1C /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				0E96D2EB2871A0AD005EFBCF /* HostProfileItem.swift */,
@@ -798,7 +811,7 @@
 				0E96D2DF28718E44005EFBCF /* VPNItemGroup.swift */,
 				0E96D2E128718E78005EFBCF /* VPNItemGroup+ViewModel.swift */,
 			);
-			path = Menu;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		0E57F62F20C83FC5008323CF = {
@@ -827,26 +840,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0E7A8C062A1D40BA00780F4B /* Pickers */ = {
-			isa = PBXGroup;
-			children = (
-				0E7A8C072A1D40BA00780F4B /* Picker+OpenVPN.swift */,
-				0E7A8C082A1D40BA00780F4B /* Picker+Network.swift */,
-			);
-			path = Pickers;
-			sourceTree = "<group>";
-		};
-		0E92781227E7CD530057BB81 /* InApp */ = {
-			isa = PBXGroup;
-			children = (
-				0E0392762818732D00827C10 /* BuildProducts.swift */,
-				0EB17EA327D2263700D473B5 /* LocalProduct.swift */,
-				0E53249627D26B51002565C3 /* ProductManager.swift */,
-			);
-			path = InApp;
-			sourceTree = "<group>";
-		};
-		0E96D2F72871D868005EFBCF /* Models */ = {
+		0E96D2F72871D868005EFBCF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				0E96D2F82871D874005EFBCF /* LightProfileManager.swift */,
@@ -854,10 +848,10 @@
 				0E04F0052883462E00BFCE1C /* LightUtils.swift */,
 				0E96D30128720067005EFBCF /* LightVPNManager.swift */,
 			);
-			path = Models;
+			path = Managers;
 			sourceTree = "<group>";
 		};
-		0E96D2FA2871D93B005EFBCF /* Models */ = {
+		0E96D2FA2871D93B005EFBCF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				0E96D2FB2871D94E005EFBCF /* DefaultLightProfileManager.swift */,
@@ -865,7 +859,7 @@
 				0E04F0082883466500BFCE1C /* DefaultLightUtils.swift */,
 				0E96D3042872010A005EFBCF /* DefaultLightVPNManager.swift */,
 			);
-			path = Models;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		0E96D3122872185E005EFBCF /* Constants */ = {
@@ -895,11 +889,11 @@
 			children = (
 				0ECB78D4285F505D00B0E460 /* Constants */,
 				0E29385A285A749E002A6E0E /* Context */,
+				0E3A59402A54AD4300B3FE40 /* Domain */,
 				0E49F6C927DB398100385834 /* Extensions */,
-				0E92781227E7CD530057BB81 /* InApp */,
-				0EA591112733DD4E0096F796 /* Intents */,
+				0E3A593F2A54ACC900B3FE40 /* Managers */,
+				0E34A2B827CAA8EA00C73B67 /* L10n */,
 				0E5467F12867A52B00F74D1C /* Mac */,
-				0E7A8C062A1D40BA00780F4B /* Pickers */,
 				0E2C171C27CB6307007E8488 /* Reusable */,
 				0E35C0AE280EF8A80071FA35 /* Views */,
 				0E6059CA27FCC5DE003F4063 /* Assets.xcassets */,
@@ -907,27 +901,17 @@
 				0E6059C927FCC5DE003F4063 /* Providers.xcassets */,
 				0E2AC24422EC3AC10037B4B0 /* Settings.bundle */,
 				0EDE8DE220C86A13004C739C /* App.entitlements */,
-				0EDDEC7C28D0DC130017802E /* LaunchScreen.storyboard */,
 				0E09E35C2834172800BE1BAE /* Credits.rtf */,
 				0E57F64720C83FC7008323CF /* Info.plist */,
 				0E0C072B236087A100155AAC /* InfoPlist.strings */,
+				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
+				0EDDEC7C28D0DC130017802E /* LaunchScreen.storyboard */,
 				0E3FC6852867A3F9009B851C /* AppDelegate.swift */,
 				0E2A8D4727ADF87F00207D04 /* PassepartoutApp.swift */,
 				0E0F4C5929C761850022E884 /* SceneDelegate.swift */,
 				0E0F4C5B29C76B790022E884 /* SceneDelegate+Shortcuts.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		0EA591112733DD4E0096F796 /* Intents */ = {
-			isa = PBXGroup;
-			children = (
-				0EA591142733DDDA0096F796 /* Intents.intentdefinition */,
-				0EA591122733DD4E0096F796 /* IntentDispatcher.swift */,
-				0E9C233227F47E95007D5FC7 /* IntentDispatcher+Activities.swift */,
-				0E9C232F27F47032007D5FC7 /* IntentsManager.swift */,
-			);
-			path = Intents;
 			sourceTree = "<group>";
 		};
 		0EB13BAD290E825E003CB654 /* PassepartoutTests */ = {
@@ -942,10 +926,7 @@
 			isa = PBXGroup;
 			children = (
 				0ECB78D3285F4F9600B0E460 /* Constants */,
-				0E293859285A7489002A6E0E /* Context */,
-				0E34A2B827CAA8EA00C73B67 /* L10n */,
 				0E5467F52867A55F00F74D1C /* Mac */,
-				0E9E5AE227B44CF1008C95DA /* Localizable.strings */,
 			);
 			path = AppShared;
 			sourceTree = "<group>";
@@ -974,8 +955,8 @@
 			children = (
 				0E96D3122872185E005EFBCF /* Constants */,
 				0E5468022867AD2100F74D1C /* Mac */,
-				0E54680C286B675F00F74D1C /* Menu */,
 				0E5467FB2867AC4900F74D1C /* Reusable */,
+				0E54680C286B675F00F74D1C /* Views */,
 				0E96D30628720AA1005EFBCF /* Assets.xcassets */,
 				0EA1D84628805EAE00F3CA48 /* Flags.xcassets */,
 				0ECB78E1285F53ED00B0E460 /* Info.plist */,
@@ -1446,7 +1427,6 @@
 				0EA591162733DDDA0096F796 /* Intents.intentdefinition in Sources */,
 				0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */,
 				0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */,
-				0E29385C285A8B30002A6E0E /* CoreContext+Shared.swift in Sources */,
 				0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */,
 				0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift in Sources */,
 				0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */,
