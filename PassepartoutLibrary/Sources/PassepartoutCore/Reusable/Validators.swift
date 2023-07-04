@@ -25,8 +25,8 @@
 
 import Foundation
 
-struct Validators {
-    enum ValidationError: Error {
+public struct Validators {
+    public enum ValidationError: Error {
         case notSet
 
         case empty
@@ -44,20 +44,20 @@ struct Validators {
 
     private static let rxWildcardDomainName = NSRegularExpression("^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.|\\*\\.)+([A-Za-z]{2,}|\\*)$")
 
-    static func notNil(_ string: String?) throws {
+    public static func notNil(_ string: String?) throws {
         guard string != nil else {
             throw ValidationError.notSet
         }
     }
 
-    static func notEmpty(_ string: String) throws {
+    public static func notEmpty(_ string: String) throws {
         let valid = string.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !valid.isEmpty else {
             throw ValidationError.empty
         }
     }
 
-    static func ipAddress(_ string: String) throws {
+    public static func ipAddress(_ string: String) throws {
         var sin = sockaddr_in()
         var sin6 = sockaddr_in6()
 
@@ -68,25 +68,25 @@ struct Validators {
         }
     }
 
-    static func domainName(_ string: String) throws {
+    public static func domainName(_ string: String) throws {
         guard rxDomainName.numberOfMatches(in: string, options: [], range: .init(location: 0, length: string.count)) > 0 else {
             throw ValidationError.domainName
         }
     }
 
-    static func wildcardDomainName(_ string: String) throws {
+    public static func wildcardDomainName(_ string: String) throws {
         guard rxWildcardDomainName.numberOfMatches(in: string, options: [], range: .init(location: 0, length: string.count)) > 0 else {
             throw ValidationError.wildcardDomainName
         }
     }
 
-    static func url(_ string: String) throws {
+    public static func url(_ string: String) throws {
         guard URL(string: string) != nil else {
             throw ValidationError.url
         }
     }
 
-    static func dnsOverTLSServerName(_ string: String) throws {
+    public static func dnsOverTLSServerName(_ string: String) throws {
         do {
             try domainName(string)
         } catch {
