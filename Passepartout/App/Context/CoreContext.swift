@@ -31,20 +31,6 @@ import TunnelKitManager
 
 @MainActor
 final class CoreContext {
-    let store: KeyValueStore
-
-    private let providersPersistence: ProvidersPersistence
-
-    private let vpnPersistence: VPNPersistence
-
-    var urlsForProviders: [URL]? {
-        providersPersistence.containerURLs
-    }
-
-    var urlsForProfiles: [URL]? {
-        vpnPersistence.containerURLs
-    }
-
     let upgradeManager: UpgradeManager
 
     let providerManager: ProviderManager
@@ -56,8 +42,6 @@ final class CoreContext {
     private var cancellables: Set<AnyCancellable> = []
 
     init(store: KeyValueStore) {
-        self.store = store
-
         let logger = SwiftyBeaverLogger(
             logFile: Constants.Log.App.url,
             logLevel: Constants.Log.level,
@@ -67,10 +51,10 @@ final class CoreContext {
         pp_log.info("Logging to: \(logger.logFile!)")
 
         let persistenceManager = PersistenceManager(store: store)
-        vpnPersistence = persistenceManager.vpnPersistence(
+        let vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
-        providersPersistence = persistenceManager.providersPersistence(
+        let providersPersistence = persistenceManager.providersPersistence(
             withName: Constants.Persistence.providersContainerName
         )
 
