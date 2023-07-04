@@ -726,7 +726,7 @@
 		0E5467F12867A52B00F74D1C /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				0E96D2FA2871D93B005EFBCF /* Models */,
+				0E96D2FA2871D93B005EFBCF /* Managers */,
 				0E5467F92867AA0A00F74D1C /* MacBundleDelegate.swift */,
 				0E5467F22867A54600F74D1C /* MacBundle.swift */,
 			);
@@ -736,7 +736,7 @@
 		0E5467F52867A55F00F74D1C /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				0E96D2F72871D868005EFBCF /* Models */,
+				0E96D2F72871D868005EFBCF /* Managers */,
 				0E5467F62867A57000F74D1C /* MacBridge.swift */,
 				0E5468052867AEC500F74D1C /* MacMenu.swift */,
 				0E5467FF2867AC9900F74D1C /* MacUtils.swift */,
@@ -839,7 +839,7 @@
 			path = InApp;
 			sourceTree = "<group>";
 		};
-		0E96D2F72871D868005EFBCF /* Models */ = {
+		0E96D2F72871D868005EFBCF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				0E96D2F82871D874005EFBCF /* LightProfileManager.swift */,
@@ -847,10 +847,10 @@
 				0E04F0052883462E00BFCE1C /* LightUtils.swift */,
 				0E96D30128720067005EFBCF /* LightVPNManager.swift */,
 			);
-			path = Models;
+			path = Managers;
 			sourceTree = "<group>";
 		};
-		0E96D2FA2871D93B005EFBCF /* Models */ = {
+		0E96D2FA2871D93B005EFBCF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				0E96D2FB2871D94E005EFBCF /* DefaultLightProfileManager.swift */,
@@ -858,7 +858,7 @@
 				0E04F0082883466500BFCE1C /* DefaultLightUtils.swift */,
 				0E96D3042872010A005EFBCF /* DefaultLightVPNManager.swift */,
 			);
-			path = Models;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		0E96D3122872185E005EFBCF /* Constants */ = {
