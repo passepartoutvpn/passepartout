@@ -120,11 +120,6 @@ jobs:
       - name: Publish on TestFlight (macOS)
         run: |
           bundle exec fastlane --env mac,beta run pilot
-      - name: Tag beta
-        run: |
-          git config user.name "Passepartout Beta"
-          git config user.email "beta@passepartoutvpn.app"
-          git tag -a "v$PILOT_APP_VERSION-b$PILOT_BUILD_NUMBER" -m "Public Beta" && git push --tags
   submit_for_app_review:
     name: Submit to App Review
     runs-on: ubuntu-latest
