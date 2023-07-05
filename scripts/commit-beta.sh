@@ -6,7 +6,7 @@ if [[ $CURRENT_BRANCH != "master" ]]; then
 fi
 
 # pull latest API
-API_PATH="PassepartoutLibrary/Sources/PassepartoutServices/API"
+API_PATH="API"
 if ! git -C $API_PATH pull origin master; then
     echo "Could not pull API"
     exit 1
@@ -35,10 +35,17 @@ git add $BASE_BUILD_FILE $BUILD_FILE
 git add Passepartout.xcodeproj
 git add *.plist
 
+# set release date
+VERSION=`ci/version-number.sh ios`
+DATE=`date "+%Y-%m-%d"`
+CHANGELOG_GLOB="CHANGELOG.md"
+
+# either set new or replace existing
+sed -i'' -E "s/^.*$VERSION.*$/## $VERSION ($DATE)/" $CHANGELOG_GLOB
+sed -i'' -E "s/^.*Unreleased.*$/## $VERSION ($DATE)/" $CHANGELOG_GLOB
+
 # add release notes
 git add CHANGELOG.md
 git add Passepartout/App/fastlane/*/metadata/*/release_notes.txt
 
-git commit -m "Attempt beta release"
-#VERSION=`ci/version-number.sh ios`
-#git tag "v$VERSION-b$BUILD"
+git commit -m "Attempt release"
