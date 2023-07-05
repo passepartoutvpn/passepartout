@@ -178,5 +178,6 @@ jobs:
         with:
           tag_name: "v${{ env.TAG_NAME }}"
           body_path: ${{ env.RELEASE_NOTES }}
+          draft: true
           files: |
             ${{ env.RELEASE_NOTES }}
