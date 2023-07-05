@@ -89,7 +89,7 @@ struct AccountView: View {
                         .withLeadingText(L10n.Account.Items.Seed.caption)
                 }
             } footer: {
-                metadata?.localizedGuidanceString.map {
+                metadata?.localizedDescription(optionalStyle: .guidance).map {
                     Text($0)
                 }
             }
@@ -130,21 +130,6 @@ private extension AccountView {
             return nil
         }
         return providerManager.provider(withName: name)
-    }
-}
-
-private extension Profile.Account.AuthenticationMethod {
-    var localizedDescription: String {
-        switch self {
-        case .persistent:
-            return L10n.Account.Items.AuthenticationMethod.persistent
-
-        case .interactive:
-            return L10n.Account.Items.AuthenticationMethod.interactive
-
-        case .totp:
-            return Unlocalized.Other.totp
-        }
     }
 }
 

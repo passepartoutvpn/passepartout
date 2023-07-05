@@ -50,7 +50,7 @@ final class DefaultLightProviderLocation: LightProviderLocation {
     let servers: [LightProviderServer]
 
     init(_ location: ProviderLocation) {
-        description = location.localizedCountry
+        description = location.localizedDescription(style: .country)
         id = location.id
         countryCode = location.countryCode
         servers = location.servers?
@@ -71,8 +71,8 @@ final class DefaultLightProviderServer: LightProviderServer {
     let serverId: String
 
     init(_ server: ProviderServer) {
-        description = server.localizedShortDescriptionWithDefault
-        longDescription = server.localizedLongDescription(withCategory: false)
+        description = server.localizedDescription(style: .shortWithDefault)
+        longDescription = server.localizedDescription(style: .longWithCategory(withCategory: false))
         categoryName = server.categoryName
         locationId = server.locationId
         serverId = server.id

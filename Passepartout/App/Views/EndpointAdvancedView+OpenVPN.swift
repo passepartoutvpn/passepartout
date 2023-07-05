@@ -87,11 +87,11 @@ private extension EndpointAdvancedView.OpenVPNView {
             if let settings = builder.ipv4 {
                 themeLongContentLinkDefault(
                     L10n.Global.Strings.address,
-                    content: .constant(settings.localizedAddress)
+                    content: .constant(settings.localizedDescription(style: .address))
                 )
                 themeLongContentLinkDefault(
                     L10n.NetworkSettings.Gateway.title,
-                    content: .constant(settings.localizedDefaultGateway)
+                    content: .constant(settings.localizedDescription(style: .defaultGateway))
                 )
             }
             builder.routes4.map { routes in
@@ -112,11 +112,11 @@ private extension EndpointAdvancedView.OpenVPNView {
             if let settings = builder.ipv6 {
                 themeLongContentLinkDefault(
                     L10n.Global.Strings.address,
-                    content: .constant(settings.localizedAddress)
+                    content: .constant(settings.localizedDescription(style: .address))
                 )
                 themeLongContentLinkDefault(
                     L10n.NetworkSettings.Gateway.title,
-                    content: .constant(settings.localizedDefaultGateway)
+                    content: .constant(settings.localizedDescription(style: .defaultGateway))
                 )
             }
             builder.routes6.map { routes in
@@ -137,17 +137,17 @@ private extension EndpointAdvancedView.OpenVPNView {
             Section {
                 settings.cipher.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.Cipher.caption)
-                        .withTrailingText($0.localizedDescription)
+                        .withTrailingText($0)
                 }
                 settings.digest.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.Digest.caption)
-                        .withTrailingText($0.localizedDescription)
+                        .withTrailingText($0)
                 }
                 if let xor = settings.xor {
                     themeLongContentLink(
                         Unlocalized.VPN.xor,
-                        content: .constant(xor.localizedLongDescription),
-                        withPreview: xor.localizedDescription
+                        content: .constant(xor.longDescription),
+                        withPreview: xor.shortDescription
                     )
                 } else {
                     Text(Unlocalized.VPN.xor)
@@ -176,8 +176,8 @@ private extension EndpointAdvancedView.OpenVPNView {
             if let xor = builder.xorMethod {
                 themeLongContentLink(
                     Unlocalized.VPN.xor,
-                    content: .constant(xor.localizedLongDescription),
-                    withPreview: xor.localizedDescription
+                    content: .constant(xor.localizedDescription(style: .long)),
+                    withPreview: xor.localizedDescription(style: .short)
                 )
             } else {
                 Text(Unlocalized.VPN.xor)
@@ -193,11 +193,11 @@ private extension EndpointAdvancedView.OpenVPNView {
             Section {
                 settings.framing.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.CompressionFraming.caption)
-                        .withTrailingText($0.localizedDescription)
+                        .withTrailingText($0)
                 }
                 settings.algorithm.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.CompressionAlgorithm.caption)
-                        .withTrailingText($0.localizedDescription)
+                        .withTrailingText($0)
                 }
             } header: {
                 Text(L10n.Endpoint.Advanced.Openvpn.Sections.Compression.header)
@@ -246,11 +246,11 @@ private extension EndpointAdvancedView.OpenVPNView {
             Section {
                 settings.proxy.map {
                     Text(L10n.Global.Strings.address)
-                        .withTrailingText($0.rawValue, copyOnTap: true)
+                        .withTrailingText($0, copyOnTap: true)
                 }
                 settings.pac.map {
                     Text(Unlocalized.Network.proxyAutoConfiguration)
-                        .withTrailingText($0.absoluteString, copyOnTap: true)
+                        .withTrailingText($0, copyOnTap: true)
                 }
                 ForEach(settings.bypass, id: \.self) {
                     Text(L10n.NetworkSettings.Items.ProxyBypass.caption)
@@ -286,11 +286,11 @@ private extension EndpointAdvancedView.OpenVPNView {
                 themeLongContentLink(
                     L10n.Endpoint.Advanced.Openvpn.Items.TlsWrapping.caption,
                     content: .constant(wrap.key.hexString),
-                    withPreview: builder.tlsWrap.localizedDescription
+                    withPreview: builder.localizedDescription(style: .tlsWrap)
                 )
             }
             Text(L10n.Endpoint.Advanced.Openvpn.Items.Eku.caption)
-                .withTrailingText(builder.checksEKU.localizedDescriptionAsEKU)
+                .withTrailingText(builder.localizedDescription(style: .eku))
         } header: {
             Text(Unlocalized.Network.tls)
         }
@@ -301,19 +301,19 @@ private extension EndpointAdvancedView.OpenVPNView {
             Section {
                 settings.keepAlive.map {
                     Text(L10n.Global.Strings.keepalive)
-                        .withTrailingText($0.localizedDescriptionAsKeepAlive)
+                        .withTrailingText($0)
                 }
                 settings.reneg.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.RenegotiationSeconds.caption)
-                        .withTrailingText($0.localizedDescriptionAsRenegotiatesAfter)
+                        .withTrailingText($0)
                 }
                 settings.randomizeEndpoint.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.RandomEndpoint.caption)
-                        .withTrailingText($0.localizedDescriptionAsRandomizeEndpoint)
+                        .withTrailingText($0)
                 }
                 settings.randomizeHostnames.map {
                     Text(L10n.Endpoint.Advanced.Openvpn.Items.RandomHostname.caption)
-                        .withTrailingText($0.localizedDescriptionAsRandomizeHostnames)
+                        .withTrailingText($0)
                 }
             } header: {
                 Text(L10n.Endpoint.Advanced.Openvpn.Sections.Other.header)
@@ -324,17 +324,17 @@ private extension EndpointAdvancedView.OpenVPNView {
 
 private extension OpenVPN.Configuration {
     struct CommunicationOptions {
-        let cipher: OpenVPN.Cipher?
+        let cipher: String?
 
-        let digest: OpenVPN.Digest?
+        let digest: String?
 
-        let xor: OpenVPN.XORMethod?
+        let xor: (shortDescription: String, longDescription: String)?
     }
 
     struct CompressionOptions {
-        let framing: OpenVPN.CompressionFraming?
+        let framing: String?
 
-        let algorithm: OpenVPN.CompressionAlgorithm?
+        let algorithm: String?
     }
 
     struct DNSOptions {
@@ -344,35 +344,44 @@ private extension OpenVPN.Configuration {
     }
 
     struct ProxyOptions {
-        let proxy: Proxy?
+        let proxy: String?
 
-        let pac: URL?
+        let pac: String?
 
         let bypass: [String]
     }
 
     struct OtherOptions {
-        let keepAlive: TimeInterval?
+        let keepAlive: String?
 
-        let reneg: TimeInterval?
+        let reneg: String?
 
-        let randomizeEndpoint: Bool?
+        let randomizeEndpoint: String?
 
-        let randomizeHostnames: Bool?
+        let randomizeHostnames: String?
     }
 
     var communicationSettings: CommunicationOptions? {
         guard cipher != nil || digest != nil || xorMethod != nil else {
             return nil
         }
-        return .init(cipher: cipher, digest: digest, xor: xorMethod)
+        return .init(
+            cipher: cipher?.localizedDescription,
+            digest: digest?.localizedDescription,
+            xor: xorMethod.map {
+                ($0.localizedDescription(style: .short), $0.localizedDescription(style: .long))
+            }
+        )
     }
 
     var compressionSettings: CompressionOptions? {
         guard compressionFraming != nil || compressionAlgorithm != nil else {
             return nil
         }
-        return .init(framing: compressionFraming, algorithm: compressionAlgorithm)
+        return .init(
+            framing: compressionFraming?.localizedDescription,
+            algorithm: compressionAlgorithm?.localizedDescription
+        )
     }
 
     var dnsSettings: DNSOptions? {
@@ -388,8 +397,8 @@ private extension OpenVPN.Configuration {
             return nil
         }
         return .init(
-            proxy: httpsProxy ?? httpProxy,
-            pac: proxyAutoConfigurationURL,
+            proxy: (httpsProxy ?? httpProxy)?.rawValue,
+            pac: proxyAutoConfigurationURL?.absoluteString,
             bypass: proxyBypassDomains ?? []
         )
     }
@@ -400,10 +409,10 @@ private extension OpenVPN.Configuration {
             return nil
         }
         return .init(
-            keepAlive: keepAliveInterval,
-            reneg: renegotiatesAfter,
-            randomizeEndpoint: randomizeEndpoint,
-            randomizeHostnames: randomizeHostnames
+            keepAlive: localizedDescription(optionalStyle: .keepAlive),
+            reneg: localizedDescription(optionalStyle: .renegotiatesAfter),
+            randomizeEndpoint: localizedDescription(optionalStyle: .randomizeEndpoint),
+            randomizeHostnames: localizedDescription(optionalStyle: .randomizeHostnames)
         )
     }
 }

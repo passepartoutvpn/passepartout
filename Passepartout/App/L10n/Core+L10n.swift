@@ -26,8 +26,19 @@
 import Foundation
 import PassepartoutLibrary
 
-extension ObservableVPNState {
-    func localizedStatusDescription(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool) -> String {
+extension ObservableVPNState: StyledLocalizableEntity {
+    public enum Style {
+        case status(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool)
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .status(let isActiveProfile, let withErrors, let dataCountIfAvailable):
+            return statusDescription(isActiveProfile: isActiveProfile, withErrors: withErrors, dataCountIfAvailable: dataCountIfAvailable)
+        }
+    }
+
+    private func statusDescription(isActiveProfile: Bool, withErrors: Bool, dataCountIfAvailable: Bool) -> String {
         guard isActiveProfile && isEnabled else {
             return L10n.Tunnelkit.Vpn.disabled
         }
@@ -65,8 +76,8 @@ extension Profile.WireGuardSettings {
     }
 }
 
-extension Network.Choice {
-    var localizedDescription: String {
+extension Network.Choice: LocalizableEntity {
+    public var localizedDescription: String {
         switch self {
         case .automatic:
             return L10n.Global.Strings.automatic
@@ -77,8 +88,8 @@ extension Network.Choice {
     }
 }
 
-extension Network.DNSSettings.ConfigurationType {
-    var localizedDescription: String {
+extension Network.DNSSettings.ConfigurationType: LocalizableEntity {
+    public var localizedDescription: String {
         switch self {
         case .plain:
             return Unlocalized.DNS.plain
@@ -95,8 +106,8 @@ extension Network.DNSSettings.ConfigurationType {
     }
 }
 
-extension Network.ProxySettings.ConfigurationType {
-    var localizedDescription: String {
+extension Network.ProxySettings.ConfigurationType: LocalizableEntity {
+    public var localizedDescription: String {
         switch self {
         case .manual:
             return L10n.Global.Strings.manual
@@ -107,5 +118,40 @@ extension Network.ProxySettings.ConfigurationType {
         case .disabled:
             return L10n.Global.Strings.disabled
         }
+    }
+}
+
+extension Profile.Account.AuthenticationMethod: LocalizableEntity {
+    public var localizedDescription: String {
+        switch self {
+        case .persistent:
+            return L10n.Account.Items.AuthenticationMethod.persistent
+
+        case .interactive:
+            return L10n.Account.Items.AuthenticationMethod.interactive
+
+        case .totp:
+            return Unlocalized.Other.totp
+        }
+    }
+}
+
+extension Int: StyledLocalizableEntity {
+    public enum Style {
+        case mtu
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .mtu:
+            return mtuDescription
+        }
+    }
+
+    private var mtuDescription: String {
+        guard self != 0 else {
+            return L10n.Global.Strings.default
+        }
+        return description
     }
 }

@@ -1,8 +1,8 @@
 //
-//  VPNStatusText.swift
+//  LocalizableEntity.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 5/20/22.
+//  Created by Davide De Rosa on 7/4/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,32 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutLibrary
-import SwiftUI
+import Foundation
 
-struct VPNStatusText: View {
-    @ObservedObject private var currentVPNState: ObservableVPNState
-
-    let isActiveProfile: Bool
-
-    init(isActiveProfile: Bool) {
-        currentVPNState = .shared
-        self.isActiveProfile = isActiveProfile
-    }
-
-    var body: some View {
-        Text(statusText)
-    }
+public protocol LocalizableEntity {
+    var localizedDescription: String { get }
 }
 
-// MARK: -
+public protocol StyledLocalizableEntity {
+    associatedtype Style
 
-private extension VPNStatusText {
-    var statusText: String {
-        currentVPNState.localizedDescription(style: .status(
-            isActiveProfile: isActiveProfile,
-            withErrors: true,
-            dataCountIfAvailable: true
-        ))
-    }
+    func localizedDescription(style: Style) -> String
+}
+
+public protocol StyledOptionalLocalizableEntity {
+    associatedtype OptionalStyle
+
+    func localizedDescription(optionalStyle: OptionalStyle) -> String?
 }

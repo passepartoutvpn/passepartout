@@ -257,7 +257,7 @@ private extension NetworkSettingsView {
                     L10n.Global.Strings.bytes,
                     selection: $settings.mtu.mtuBytes,
                     values: Network.MTUSettings.availableBytes,
-                    description: \.localizedDescriptionAsMTU
+                    description: { $0.localizedDescription(style: .mtu) }
                 )
             }
         } header: {

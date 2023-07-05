@@ -27,20 +27,20 @@ import Foundation
 import PassepartoutLibrary
 import TunnelKitOpenVPN
 
-extension OpenVPN.Cipher {
-    var localizedDescription: String {
+extension OpenVPN.Cipher: LocalizableEntity {
+    public var localizedDescription: String {
         description
     }
 }
 
-extension OpenVPN.Digest {
-    var localizedDescription: String {
+extension OpenVPN.Digest: LocalizableEntity {
+    public var localizedDescription: String {
         description
     }
 }
 
-extension OpenVPN.CompressionFraming {
-    var localizedDescription: String {
+extension OpenVPN.CompressionFraming: LocalizableEntity {
+    public var localizedDescription: String {
         switch self {
         case .disabled:
             return L10n.Global.Strings.disabled
@@ -54,8 +54,8 @@ extension OpenVPN.CompressionFraming {
     }
 }
 
-extension OpenVPN.CompressionAlgorithm {
-    var localizedDescription: String {
+extension OpenVPN.CompressionAlgorithm: LocalizableEntity {
+    public var localizedDescription: String {
         let V = L10n.Endpoint.Advanced.Openvpn.Items.self
         switch self {
         case .disabled:
@@ -70,24 +70,24 @@ extension OpenVPN.CompressionAlgorithm {
     }
 }
 
-extension Optional where Wrapped == OpenVPN.TLSWrap {
-    var localizedDescription: String {
-        guard let strategy = self?.strategy else {
-            return L10n.Global.Strings.disabled
-        }
-        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
-        switch strategy {
-        case .auth:
-            return V.TlsWrapping.Value.auth
+extension OpenVPN.XORMethod: StyledLocalizableEntity {
+    public enum Style {
+        case short
 
-        case .crypt:
-            return V.TlsWrapping.Value.crypt
+        case long
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .short:
+            return shortDescription
+
+        case .long:
+            return longDescription
         }
     }
-}
 
-extension OpenVPN.XORMethod {
-    var localizedDescription: String {
+    private var shortDescription: String {
         switch self {
         case .xormask:
             return Unlocalized.OpenVPN.XOR.xormask.rawValue
@@ -103,52 +103,22 @@ extension OpenVPN.XORMethod {
         }
     }
 
-    var localizedLongDescription: String {
+    private var longDescription: String {
         switch self {
         case .xormask(let mask):
-            return "\(localizedDescription) \(mask.toHex())"
+            return "\(shortDescription) \(mask.toHex())"
 
         case .obfuscate(let mask):
-            return "\(localizedDescription) \(mask.toHex())"
+            return "\(shortDescription) \(mask.toHex())"
 
         default:
-            return localizedDescription
+            return shortDescription
         }
     }
 }
 
-extension Optional where Wrapped == Bool {
-    var localizedDescriptionAsEKU: String {
-        let V = L10n.Global.Strings.self
-        return (self ?? false) ? V.enabled : V.disabled
-    }
-}
-
-extension TimeInterval {
-    var localizedDescriptionAsRenegotiatesAfter: String {
-        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
-        if self > 0 {
-            return V.RenegotiationSeconds.Value.after(TimeInterval(self).localizedDescription)
-        } else {
-            return L10n.Global.Strings.disabled
-        }
-    }
-}
-
-extension Bool {
-    var localizedDescriptionAsRandomizeEndpoint: String {
-        let V = L10n.Global.Strings.self
-        return self ? V.enabled : V.disabled
-    }
-
-    var localizedDescriptionAsRandomizeHostnames: String {
-        let V = L10n.Global.Strings.self
-        return self ? V.enabled : V.disabled
-    }
-}
-
-extension OpenVPN.PullMask {
-    var localizedDescription: String {
+extension OpenVPN.PullMask: LocalizableEntity {
+    public var localizedDescription: String {
         switch self {
         case .routes:
             return L10n.Endpoint.Advanced.Openvpn.Items.Route.caption
@@ -161,6 +131,111 @@ extension OpenVPN.PullMask {
         }
     }
 }
+
+extension OpenVPN.ConfigurationBuilder: StyledLocalizableEntity {
+    public enum Style {
+        case tlsWrap
+
+        case eku
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .tlsWrap:
+            return tlsWrap.tlsWrapDescription
+
+        case .eku:
+            return checksEKU.ekuDescription
+        }
+    }
+}
+
+extension OpenVPN.Configuration: StyledOptionalLocalizableEntity {
+    public enum OptionalStyle {
+        case keepAlive
+
+        case renegotiatesAfter
+
+        case randomizeEndpoint
+
+        case randomizeHostnames
+    }
+
+    public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
+        switch optionalStyle {
+        case .keepAlive:
+            return keepAliveInterval?.keepAliveDescription
+
+        case .renegotiatesAfter:
+            return renegotiatesAfter?.renegotiatesAfterDescription
+
+        case .randomizeEndpoint:
+            return randomizeEndpoint?.randomizeEndpointDescription
+
+        case .randomizeHostnames:
+            return randomizeHostnames?.randomizeHostnamesDescription
+        }
+    }
+}
+
+private extension Optional where Wrapped == OpenVPN.TLSWrap {
+    var tlsWrapDescription: String {
+        guard let strategy = self?.strategy else {
+            return L10n.Global.Strings.disabled
+        }
+        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
+        switch strategy {
+        case .auth:
+            return V.TlsWrapping.Value.auth
+
+        case .crypt:
+            return V.TlsWrapping.Value.crypt
+        }
+    }
+}
+
+private extension TimeInterval {
+    var keepAliveDescription: String {
+        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
+        if self > 0 {
+            return V.KeepAlive.Value.seconds(Int(self))
+        } else {
+            return L10n.Global.Strings.disabled
+        }
+    }
+}
+
+private extension Optional where Wrapped == Bool {
+    var ekuDescription: String {
+        let V = L10n.Global.Strings.self
+        return (self ?? false) ? V.enabled : V.disabled
+    }
+}
+
+private extension TimeInterval {
+    var renegotiatesAfterDescription: String {
+        let V = L10n.Endpoint.Advanced.Openvpn.Items.self
+        if self > 0 {
+            return V.RenegotiationSeconds.Value.after(TimeInterval(self).localizedDescription)
+        } else {
+            return L10n.Global.Strings.disabled
+        }
+    }
+}
+
+private extension Bool {
+    var randomizeEndpointDescription: String {
+        let V = L10n.Global.Strings.self
+        return self ? V.enabled : V.disabled
+    }
+
+    var randomizeHostnamesDescription: String {
+        let V = L10n.Global.Strings.self
+        return self ? V.enabled : V.disabled
+    }
+}
+
+// MARK: - Errors
 
 extension TunnelKitOpenVPNError: LocalizedError {
     public var errorDescription: String? {
