@@ -1,9 +1,8 @@
-### Added
-
-- Show app version in Mac menu (macOS).
-
 ### Fixed
 
-- Roll back broken kill switch flag.
-- Remove nonsense Mac menus (macOS).
+- Allow wildcards in proxy bypass domains.
+- Fail gracefully when refreshing infrastructure.
+- Only show 'Reconnect' on active profile.
+- IPv4/6 address validation.
+- Domain name validation.
 

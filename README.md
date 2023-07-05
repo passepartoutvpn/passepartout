@@ -2,7 +2,7 @@
 
 ![iOS 15+](https://img.shields.io/badge/iOS-15+-green.svg)
 ![macOS 12+](https://img.shields.io/badge/macOS-12+-green.svg)
-[![TunnelKit 6.0](https://img.shields.io/badge/TunnelKit-6.0-d69c68.svg)][dep-tunnelkit]
+[![TunnelKit 6.1](https://img.shields.io/badge/TunnelKit-6.1-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
 
 [![Unit Tests](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml)
