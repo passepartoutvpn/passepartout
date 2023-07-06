@@ -87,7 +87,7 @@ public final class VPNManager: ObservableObject {
         clearLastError()
         do {
             let parameters = try vpnConfigurationParameters(withProfile: profile)
-            await strategy.reinstate(parameters)
+            try await strategy.reinstate(parameters)
         } catch {
             pp_log.error("Unable to build configuration: \(error)")
             throw error
@@ -99,7 +99,7 @@ public final class VPNManager: ObservableObject {
         clearLastError()
         do {
             let parameters = try vpnConfigurationParameters(withProfile: profile)
-            await strategy.connect(parameters)
+            try await strategy.connect(parameters)
         } catch {
             pp_log.error("Unable to build configuration: \(error)")
             throw error

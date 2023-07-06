@@ -31,9 +31,9 @@ import PassepartoutProviders
 public protocol VPNManagerStrategy {
     func observe(into state: MutableObservableVPNState)
 
-    func reinstate(_ parameters: VPNConfigurationParameters) async
+    func reinstate(_ parameters: VPNConfigurationParameters) async throws
 
-    func connect(_ parameters: VPNConfigurationParameters) async
+    func connect(_ parameters: VPNConfigurationParameters) async throws
 
     func reconnect() async
 
