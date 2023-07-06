@@ -62,6 +62,7 @@ extension View {
             .listStyle(themeListStyleValue())
             .toggleStyle(themeToggleStyleValue())
             .menuStyle(.borderlessButton)
+            .withErrorHandler()
     }
 
     func themePrimaryView() -> some View {
