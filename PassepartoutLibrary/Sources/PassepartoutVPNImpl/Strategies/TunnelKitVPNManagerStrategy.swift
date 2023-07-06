@@ -132,10 +132,8 @@ extension TunnelKitVPNManagerStrategy {
             }.store(in: &cancellables)
     }
 
-    public func reinstate(_ parameters: VPNConfigurationParameters) async {
-        guard let configuration = try? vpnConfiguration(withParameters: parameters) else {
-            return
-        }
+    public func reinstate(_ parameters: VPNConfigurationParameters) async throws {
+        let configuration = try vpnConfiguration(withParameters: parameters)
         guard let vpnType = configuration.neConfiguration as? VPNProtocolProviding else {
             fatalError("Configuration must implement VPNProtocolProviding")
         }
@@ -155,10 +153,8 @@ extension TunnelKitVPNManagerStrategy {
         }
     }
 
-    public func connect(_ parameters: VPNConfigurationParameters) async {
-        guard let configuration = try? vpnConfiguration(withParameters: parameters) else {
-            return
-        }
+    public func connect(_ parameters: VPNConfigurationParameters) async throws {
+        let configuration = try vpnConfiguration(withParameters: parameters)
         guard let vpnType = configuration.neConfiguration as? VPNProtocolProviding else {
             fatalError("Configuration must implement VPNProtocolProviding")
         }
