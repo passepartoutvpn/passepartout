@@ -344,7 +344,6 @@ extension View {
         foregroundColor(themeLightTextColor)
     }
 
-    @available(iOS 15, *)
     func themePrimaryTintStyle() -> some View {
         tint(themePrimaryBackgroundColor)
     }

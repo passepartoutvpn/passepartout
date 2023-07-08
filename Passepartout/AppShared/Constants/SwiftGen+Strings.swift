@@ -403,6 +403,10 @@ internal enum L10n {
         }
       }
     }
+    internal enum Errors {
+      /// MARK: ProfileView -> EndpointView
+      internal static let endpointRequired = L10n.tr("Localizable", "endpoint.errors.endpoint_required", fallback: "Please select an endpoint")
+    }
     internal enum Wireguard {
       internal enum Items {
         internal enum AllowedIp {
@@ -410,7 +414,7 @@ internal enum L10n {
           internal static let caption = L10n.tr("Localizable", "endpoint.wireguard.items.allowed_ip.caption", fallback: "Allowed IP")
         }
         internal enum Peer {
-          /// MARK: ProfileView -> EndpointView
+          /// Peer
           internal static let caption = L10n.tr("Localizable", "endpoint.wireguard.items.peer.caption", fallback: "Peer")
         }
         internal enum PresharedKey {

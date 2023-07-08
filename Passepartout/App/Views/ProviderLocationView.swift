@@ -216,7 +216,6 @@ private extension ProviderLocationView {
         }
     }
 
-    @available(iOS 15, *)
     func favoriteActions(_ location: ProviderLocation) -> some View {
         Button {
             withAnimation {

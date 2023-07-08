@@ -1,5 +1,5 @@
 //
-//  TunnelKit+Identifiable.swift
+//  TunnelKit+Extensions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/12/22.
@@ -29,6 +29,43 @@ import TunnelKitCore
 extension Endpoint: Identifiable {
     public var id: String {
         [address, proto.port.description, proto.socketType.rawValue].joined(separator: ":")
+    }
+}
+
+extension Endpoint: Comparable {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        guard lhs.address != rhs.address else {
+            return lhs.proto < rhs.proto
+        }
+        guard lhs.isHostname == rhs.isHostname else {
+            return lhs.isHostname
+        }
+        return lhs.address < rhs.address
+    }
+}
+
+extension Endpoint: Hashable {
+}
+
+extension EndpointProtocol: Comparable {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        guard lhs.socketType != rhs.socketType else {
+            return lhs.port < rhs.port
+        }
+        return lhs.socketType.orderValue < rhs.socketType.orderValue
+    }
+}
+
+private extension SocketType {
+    var orderValue: Int {
+        switch self {
+        case .udp: return 1
+        case .udp4: return 2
+        case .udp6: return 3
+        case .tcp: return 4
+        case .tcp4: return 5
+        case .tcp6: return 6
+        }
     }
 }
 
