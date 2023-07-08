@@ -43,7 +43,6 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         currentProfile.value
     }
 
-    // XXX: do not escape mutating 'self', use constant providerManager
     init(currentProfile: ObservableProfile, isEditable: Bool, isPresented: Binding<Bool>) {
         let providerManager: ProviderManager = .shared
 
@@ -51,24 +50,8 @@ struct ProviderLocationView: View, ProviderProfileAvailability {
         self.currentProfile = currentProfile
         self.isEditable = isEditable
 
-        _selectedServer = .init {
-            guard let serverId = currentProfile.value.providerServerId else {
-                return nil
-            }
-            return providerManager.server(withId: serverId)
-        } set: {
-            // user never selects a nil server
-            guard let server = $0 else {
-                return
-            }
-            currentProfile.value.setProviderServer(server)
-            isPresented.wrappedValue = false
-        }
-        _favoriteLocationIds = .init {
-            currentProfile.value.providerFavoriteLocationIds
-        } set: {
-            currentProfile.value.providerFavoriteLocationIds = $0
-        }
+        _selectedServer = currentProfile.selectedServerBinding(providerManager: providerManager, isPresented: isPresented)
+        _favoriteLocationIds = currentProfile.providerFavoriteLocationIdsBinding
     }
 
     var body: some View {
@@ -321,5 +304,33 @@ private extension ProviderLocationView {
 private extension ProviderLocationView.ServerListView {
     func scrollToSelectedServer(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(selectedServer?.id)
+    }
+}
+
+// MARK: - Bindings
+
+private extension ObservableProfile {
+    func selectedServerBinding(providerManager: ProviderManager, isPresented: Binding<Bool>) -> Binding<ProviderServer?> {
+        .init {
+            guard let serverId = self.value.providerServerId else {
+                return nil
+            }
+            return providerManager.server(withId: serverId)
+        } set: {
+            // user never selects a nil server
+            guard let server = $0 else {
+                return
+            }
+            self.value.setProviderServer(server)
+            isPresented.wrappedValue = false
+        }
+    }
+
+    var providerFavoriteLocationIdsBinding: Binding<Set<String>?> {
+        .init {
+            self.value.providerFavoriteLocationIds
+        } set: {
+            self.value.providerFavoriteLocationIds = $0
+        }
     }
 }
