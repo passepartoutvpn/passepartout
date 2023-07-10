@@ -209,8 +209,8 @@ GEM
       xcpretty (~> 0.2, >= 0.0.7)
 
 PLATFORMS
-  ruby
   arm64-darwin-22
+  ruby
 
 DEPENDENCIES
   dotenv
