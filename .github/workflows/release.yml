@@ -168,7 +168,7 @@ jobs:
           git_push_gpgsign: false
       - name: Tag release
         run: |
-          scripts/ci/commit-release.sh $TAG_NAME
+          scripts/ci/tag-release.sh $TAG_NAME
           git push --tags
       - name: Assemble notes
         run: |
