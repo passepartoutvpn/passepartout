@@ -37,7 +37,6 @@ struct ProviderPresetView: View {
 
     @Binding private var selectedPreset: ProviderServer.Preset?
 
-    // XXX: do not escape mutating 'self', use constant providerManager
     init(currentProfile: ObservableProfile) {
         let providerManager: ProviderManager = .shared
 
@@ -45,21 +44,7 @@ struct ProviderPresetView: View {
         self.currentProfile = currentProfile
 
         server = currentProfile.value.providerServer(providerManager)
-        _selectedPreset = .init {
-            guard let serverId = currentProfile.value.providerServerId else {
-                return nil
-            }
-            guard let server = providerManager.server(withId: serverId) else {
-                return nil
-            }
-            return currentProfile.value.providerPreset(server)
-        } set: {
-            // user never selects a nil preset
-            guard let preset = $0 else {
-                return
-            }
-            currentProfile.value.setProviderPreset(preset)
-        }
+        _selectedPreset = currentProfile.selectedPresetBinding(providerManager: providerManager)
     }
 
     var body: some View {
@@ -104,5 +89,27 @@ private extension ProviderPresetView {
     // some providers (e.g. NordVPN) have specific presets based on selected server
     var availablePresets: [ProviderServer.Preset] {
         server?.presets?.sorted() ?? []
+    }
+}
+
+// MARK: - Bindings
+
+private extension ObservableProfile {
+    func selectedPresetBinding(providerManager: ProviderManager) -> Binding<ProviderServer.Preset?> {
+        .init {
+            guard let serverId = self.value.providerServerId else {
+                return nil
+            }
+            guard let server = providerManager.server(withId: serverId) else {
+                return nil
+            }
+            return self.value.providerPreset(server)
+        } set: {
+            // user never selects a nil preset
+            guard let preset = $0 else {
+                return
+            }
+            self.value.setProviderPreset(preset)
+        }
     }
 }

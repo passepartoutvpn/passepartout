@@ -39,7 +39,6 @@ extension EndpointView {
 
 //        var customPeer: Binding<Endpoint?>? = nil
 
-        // XXX: do not escape mutating 'self', use constant providerManager
         init(currentProfile: ObservableProfile, isReadonly: Bool) {
             let providerManager: ProviderManager = .shared
 
@@ -47,36 +46,7 @@ extension EndpointView {
             self.currentProfile = currentProfile
             self.isReadonly = isReadonly
 
-            _builder = .init {
-                if currentProfile.value.isProvider {
-                    guard let server = currentProfile.value.providerServer(providerManager) else {
-                        assertionFailure("Server not found")
-                        return .init()
-                    }
-                    guard let preset = currentProfile.value.providerPreset(server) else {
-                        assertionFailure("Preset not found")
-                        return .init()
-                    }
-                    guard let cfg = preset.wireGuardConfiguration else {
-                        assertionFailure("Preset \(preset.id) (\(preset.name)) has no WireGuard configuration")
-                        return .init()
-                    }
-                    return cfg.builder()
-                } else if let cfg = currentProfile.value.hostWireGuardSettings?.configuration {
-                    let builder = cfg.builder()
-//                    pp_log.debug("Loading WireGuard configuration: \(builder)")
-                    return builder
-                }
-                // fall back gracefully
-                return .init()
-            } set: {
-                if currentProfile.value.isProvider {
-                    // readonly
-                } else {
-                    pp_log.debug("Saving WireGuard configuration: \($0)")
-                    currentProfile.value.hostWireGuardSettings?.configuration = $0.build()
-                }
-            }
+            _builder = currentProfile.builderBinding(providerManager: providerManager)
         }
 
         var body: some View {
@@ -142,6 +112,43 @@ private extension EndpointView.WireGuardView {
                     builder: $builder,
                     isReadonly: isReadonly
                 ).navigationTitle(caption)
+            }
+        }
+    }
+}
+
+// MARK: - Bindings
+
+private extension ObservableProfile {
+    func builderBinding(providerManager: ProviderManager) -> Binding<WireGuard.ConfigurationBuilder> {
+        .init {
+            if self.value.isProvider {
+                guard let server = self.value.providerServer(providerManager) else {
+                    assertionFailure("Server not found")
+                    return .init()
+                }
+                guard let preset = self.value.providerPreset(server) else {
+                    assertionFailure("Preset not found")
+                    return .init()
+                }
+                guard let cfg = preset.wireGuardConfiguration else {
+                    assertionFailure("Preset \(preset.id) (\(preset.name)) has no WireGuard configuration")
+                    return .init()
+                }
+                return cfg.builder()
+            } else if let cfg = self.value.hostWireGuardSettings?.configuration {
+                let builder = cfg.builder()
+//                pp_log.debug("Loading WireGuard configuration: \(builder)")
+                return builder
+            }
+            // fall back gracefully
+            return .init()
+        } set: {
+            if self.value.isProvider {
+                // readonly
+            } else {
+                pp_log.debug("Saving WireGuard configuration: \($0)")
+                self.value.hostWireGuardSettings?.configuration = $0.build()
             }
         }
     }

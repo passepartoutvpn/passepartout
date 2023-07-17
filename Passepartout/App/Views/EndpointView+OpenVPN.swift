@@ -47,58 +47,14 @@ extension EndpointView {
 
         @State private var selectedPort: UInt16 = 0
 
-        // XXX: do not escape mutating 'self', use constant providerManager
         init(currentProfile: ObservableProfile) {
             let providerManager: ProviderManager = .shared
 
             self.providerManager = providerManager
             self.currentProfile = currentProfile
 
-            _builder = .init {
-                if currentProfile.value.isProvider {
-                    guard let server = currentProfile.value.providerServer(providerManager) else {
-                        assertionFailure("Server not found")
-                        return .init()
-                    }
-                    guard let preset = currentProfile.value.providerPreset(server) else {
-                        assertionFailure("Preset not found")
-                        return .init()
-                    }
-                    guard let cfg = preset.openVPNConfiguration else {
-                        assertionFailure("Preset \(preset.id) (\(preset.name)) has no OpenVPN configuration")
-                        return .init()
-                    }
-                    var builder = cfg.builder(withFallbacks: true)
-                    try? builder.setRemotes(from: preset, with: server, excludingHostname: false)
-                    return builder
-                } else if let cfg = currentProfile.value.hostOpenVPNSettings?.configuration {
-                    let builder = cfg.builder(withFallbacks: true)
-//                    pp_log.debug("Loading OpenVPN configuration: \(builder)")
-                    return builder
-                }
-                // fall back gracefully
-                return .init()
-            } set: {
-                if currentProfile.value.isProvider {
-                    // readonly
-                } else {
-                    pp_log.debug("Saving OpenVPN configuration: \($0)")
-                    currentProfile.value.hostOpenVPNSettings?.configuration = $0.build()
-                }
-            }
-            _customEndpoint = .init {
-                if currentProfile.value.isProvider {
-                    return currentProfile.value.providerCustomEndpoint
-                } else {
-                    return currentProfile.value.hostOpenVPNSettings?.customEndpoint
-                }
-            } set: {
-                if currentProfile.value.isProvider {
-                    currentProfile.value.providerCustomEndpoint = $0
-                } else {
-                    currentProfile.value.hostOpenVPNSettings?.customEndpoint = $0
-                }
-            }
+            _builder = currentProfile.builderBinding(providerManager: providerManager)
+            _customEndpoint = currentProfile.customEndpointBinding
         }
 
         var body: some View {
@@ -278,5 +234,60 @@ private extension EndpointView.OpenVPNView {
 
     func scrollToCustomEndpoint(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(customEndpoint?.id)
+    }
+}
+
+// MARK: - Bindings
+
+private extension ObservableProfile {
+    func builderBinding(providerManager: ProviderManager) -> Binding<OpenVPN.ConfigurationBuilder> {
+        .init {
+            if self.value.isProvider {
+                guard let server = self.value.providerServer(providerManager) else {
+                    assertionFailure("Server not found")
+                    return .init()
+                }
+                guard let preset = self.value.providerPreset(server) else {
+                    assertionFailure("Preset not found")
+                    return .init()
+                }
+                guard let cfg = preset.openVPNConfiguration else {
+                    assertionFailure("Preset \(preset.id) (\(preset.name)) has no OpenVPN configuration")
+                    return .init()
+                }
+                var builder = cfg.builder(withFallbacks: true)
+                try? builder.setRemotes(from: preset, with: server, excludingHostname: false)
+                return builder
+            } else if let cfg = self.value.hostOpenVPNSettings?.configuration {
+                let builder = cfg.builder(withFallbacks: true)
+//                pp_log.debug("Loading OpenVPN configuration: \(builder)")
+                return builder
+            }
+            // fall back gracefully
+            return .init()
+        } set: {
+            if self.value.isProvider {
+                // readonly
+            } else {
+                pp_log.debug("Saving OpenVPN configuration: \($0)")
+                self.value.hostOpenVPNSettings?.configuration = $0.build()
+            }
+        }
+    }
+
+    var customEndpointBinding: Binding<Endpoint?> {
+        .init {
+            if self.value.isProvider {
+                return self.value.providerCustomEndpoint
+            } else {
+                return self.value.hostOpenVPNSettings?.customEndpoint
+            }
+        } set: {
+            if self.value.isProvider {
+                self.value.providerCustomEndpoint = $0
+            } else {
+                self.value.hostOpenVPNSettings?.customEndpoint = $0
+            }
+        }
     }
 }
