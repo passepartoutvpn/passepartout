@@ -10,7 +10,7 @@
 
 # [Passepartout][about-website]
 
-Passepartout is a user-friendly [OpenVPN®][openvpn] and [WireGuard®][wireguard] client for iOS and macOS.
+Passepartout is a user-friendly [OpenVPN®][openvpn] and [WireGuard®][wireguard] client for iOS and macOS. The OpenVPN stack also implements the [Tunnelblick XOR patch][openvpn-xor-patch].
  
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20a%20user-friendly%2C%20open-source%20VPN%20client%20for%20%23iOS%20and%20%23macOS)
@@ -193,6 +193,7 @@ Twitter: [@keeshux][about-twitter]
 Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 
 [openvpn]: https://openvpn.net/index.php/open-source/overview.html
+[openvpn-xor-patch]: https://tunnelblick.net/cOpenvpn_xorpatch.html
 [wireguard]: https://www.wireguard.com/
 
 [app-api]: https://github.com/passepartoutvpn/passepartout-api

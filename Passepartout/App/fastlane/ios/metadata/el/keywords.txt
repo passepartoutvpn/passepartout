@@ -1,1 +1,1 @@
-wireguard,openvpn,mullvad,protonvpn,nordvpn,pia,windscribe,expressvpn,tunnelbear,δωρεάν,ανώνυμο
+wireguard,openvpn,xor,patch,mullvad,protonvpn,nordvpn,pia,windscribe,expressvpn,δωρεάν,ανώνυμο
