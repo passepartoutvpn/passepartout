@@ -38,6 +38,8 @@ extension ProfileView {
 
         @State private var isOverwritingExistingProfile = false
 
+        @FocusState private var isNameFocused
+
         init(currentProfile: ObservableProfile) {
             profileManager = .shared
             self.currentProfile = currentProfile
@@ -48,6 +50,7 @@ extension ProfileView {
                 Section {
                     TextField(L10n.Global.Placeholders.profileName, text: $newName, onCommit: commitRenaming)
                         .themeValidProfileName()
+                        .focused($isNameFocused)
                         .onAppear(perform: loadCurrentName)
                 } header: {
                     Text(L10n.Profile.Alerts.Rename.title)
@@ -96,6 +99,7 @@ private extension ProfileView.RenameView {
 private extension ProfileView.RenameView {
     func loadCurrentName() {
         newName = currentProfile.value.header.name
+        isNameFocused = true
     }
 
     func commitRenaming() {

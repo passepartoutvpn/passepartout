@@ -34,6 +34,8 @@ enum AddProfileView {
     struct ProfileNameSection: View {
         @Binding var profileName: String
 
+        @FocusState private var isNameFocused
+
         let errorMessage: String?
 
         let onCommit: () -> Void
@@ -41,11 +43,14 @@ enum AddProfileView {
         var body: some View {
             Section {
                 TextField(L10n.Global.Placeholders.profileName, text: $profileName, onCommit: onCommit)
+                    .focused($isNameFocused)
                     .themeValidProfileName()
             } header: {
                 Text(L10n.Global.Strings.name)
             } footer: {
                 themeErrorMessage(errorMessage)
+            }.onAppear {
+                isNameFocused = true
             }
         }
     }

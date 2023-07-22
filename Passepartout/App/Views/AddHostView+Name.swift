@@ -42,6 +42,8 @@ extension AddHostView {
 
         @State private var isEnteringCredentials = false
 
+        @FocusState private var isPassphraseFocused
+
         init(
             url: URL,
             deletingURLOnSuccess: Bool,
@@ -118,6 +120,11 @@ private extension AddHostView.NameView {
         Section {
             SecureField(L10n.AddProfile.Host.Sections.Encryption.footer, text: $viewModel.encryptionPassphrase) {
                 processProfile(replacingExisting: false)
+            }.focused($isPassphraseFocused)
+            .onChange(of: viewModel.requiresPassphrase) {
+                if $0 {
+                    isPassphraseFocused = true
+                }
             }
         } header: {
             Text(L10n.Global.Strings.encryption)

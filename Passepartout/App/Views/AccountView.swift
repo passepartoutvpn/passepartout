@@ -41,6 +41,8 @@ struct AccountView: View {
 
     @State private var liveAccount = Profile.Account()
 
+    @FocusState private var isUsernameFocused
+
     init(
         providerName: ProviderName?,
         vpnProtocol: VPNProtocolType,
@@ -71,6 +73,7 @@ struct AccountView: View {
                 TextField(usernamePlaceholder ?? L10n.Account.Items.Username.placeholder, text: $liveAccount.username)
                     .textContentType(.username)
                     .keyboardType(.emailAddress)
+                    .focused($isUsernameFocused)
                     .themeRawTextStyle()
                     .withLeadingText(L10n.Account.Items.Username.caption)
 
@@ -111,6 +114,8 @@ struct AccountView: View {
                 saveAnyway: saveAnyway,
                 onSave: onSave
             )
+        }.onAppear {
+            isUsernameFocused = true
         }.navigationTitle(L10n.Account.title)
     }
 }
