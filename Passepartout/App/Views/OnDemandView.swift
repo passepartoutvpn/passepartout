@@ -41,11 +41,10 @@ struct OnDemandView: View {
     var body: some View {
         debugChanges()
         return List {
-            // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-//            enabledView
-//            if onDemand.isEnabled {
+            enabledView
+            if onDemand.isEnabled && onDemand.policy != .any {
                 mainView
-//            }
+            }
         }.navigationTitle(L10n.OnDemand.title)
         .toolbar {
             CopySavingButton(
@@ -68,17 +67,47 @@ private extension OnDemandView {
     var enabledView: some View {
         Section {
             Toggle(L10n.Global.Strings.enabled, isOn: $onDemand.isEnabled.themeAnimation())
+            if onDemand.isEnabled {
+                themeTextPicker(
+                    // FIXME: l10n, on-demand
+                    L10n.Global.Strings.policy,
+                    selection: $onDemand.policy,
+                    values: [.any, .including, .excluding],
+                    description: \.localizedDescription
+                )
+            }
+        } footer: {
+            Text(policyFooterDescription)
         }
+    }
+
+    // FIXME: l10n, on-demand
+    var policyFooterDescription: String {
+        let suffix: String
+        switch onDemand.policy {
+        case .any:
+            suffix = L10n.OnDemand.Sections.Policy.Footer.any
+
+        case .including, .excluding:
+            let arg: String
+            if onDemand.policy == .including {
+                arg = L10n.OnDemand.Sections.Policy.Footer.including
+            } else {
+                arg = L10n.OnDemand.Sections.Policy.Footer.excluding
+            }
+            suffix = L10n.OnDemand.Sections.Policy.Footer.matching(arg)
+        }
+        return L10n.OnDemand.Sections.Policy.footer(suffix)
     }
 
     @ViewBuilder
     var mainView: some View {
+        // FIXME: l10n, on-demand
         if Utils.hasCellularData() {
             Section {
                 Toggle(L10n.OnDemand.Items.Mobile.caption, isOn: $onDemand.withMobileNetwork)
             } header: {
-                // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-                //                Text(L10n.Profile.Sections.Trusted.header)
+                Text(L10n.Global.Strings.networks)
             }
             Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
@@ -87,8 +116,7 @@ private extension OnDemandView {
             Section {
                 Toggle(L10n.OnDemand.Items.Ethernet.caption, isOn: $onDemand.withEthernetNetwork)
             } header: {
-                // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-                //                Text(L10n.Profile.Sections.Trusted.header)
+                Text(L10n.Global.Strings.networks)
             }
             Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
@@ -97,14 +125,8 @@ private extension OnDemandView {
             Section {
                 SSIDList(withSSIDs: $onDemand.withSSIDs)
             } header: {
-                // TODO: on-demand, restore when "trusted networks" -> "on-demand"
-                //                Text(L10n.Profile.Sections.Trusted.header)
+                Text(L10n.Global.Strings.networks)
             }
-        }
-        Section {
-            Toggle(L10n.OnDemand.Items.Policy.caption, isOn: $onDemand.disconnectsIfNotMatching)
-        } footer: {
-            Text(L10n.OnDemand.Sections.Policy.footer)
         }
     }
 

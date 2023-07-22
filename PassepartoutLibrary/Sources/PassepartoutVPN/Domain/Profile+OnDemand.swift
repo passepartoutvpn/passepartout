@@ -41,17 +41,13 @@ extension Profile {
             case ethernet
         }
 
-        // hardcode this to keep "Trusted networks" semantics
         public var isEnabled = true
 
-        // hardcode this to keep "Trusted networks" semantics
         public var policy: Policy = .excluding
 
         public var withSSIDs: [String: Bool] = [:]
 
         public var withOtherNetworks: Set<OtherNetwork> = []
-
-        public var disconnectsIfNotMatching = true
 
         public init() {
         }
