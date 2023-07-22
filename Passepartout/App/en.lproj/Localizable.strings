@@ -203,6 +203,8 @@
 
 /* MARK: ProfileView -> EndpointView */
 
+"endpoint.errors.endpoint_required" = "Please select an endpoint";
+
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Preshared key";
 "endpoint.wireguard.items.allowed_ip.caption" = "Allowed IP";

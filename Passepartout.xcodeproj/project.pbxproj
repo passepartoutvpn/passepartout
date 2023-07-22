@@ -41,7 +41,7 @@
 		0E2AC24522EC3AC10037B4B0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E2AC24422EC3AC10037B4B0 /* Settings.bundle */; };
 		0E2C171B27CB5A3B007E8488 /* GenericCreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */; };
 		0E2C172B27CB63F9007E8488 /* Reviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C172A27CB63F9007E8488 /* Reviewer.swift */; };
-		0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift */; };
+		0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Extensions.swift */; };
 		0E2DE71F27DCD0290067B9E1 /* TunnelKit+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DE71E27DCD0290067B9E1 /* TunnelKit+L10n.swift */; };
 		0E2DE72527DCDF550067B9E1 /* WireGuard+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DE72427DCDF550067B9E1 /* WireGuard+L10n.swift */; };
 		0E34A2B627CAA8CC00C73B67 /* Core+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34A2B527CAA8CC00C73B67 /* Core+L10n.swift */; };
@@ -330,7 +330,7 @@
 		0E2AC24422EC3AC10037B4B0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0E2C171A27CB5A3A007E8488 /* GenericCreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCreditsView.swift; sourceTree = "<group>"; };
 		0E2C172A27CB63F9007E8488 /* Reviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reviewer.swift; sourceTree = "<group>"; };
-		0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKit+Identifiable.swift"; sourceTree = "<group>"; };
+		0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKit+Extensions.swift"; sourceTree = "<group>"; };
 		0E2DE71E27DCD0290067B9E1 /* TunnelKit+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TunnelKit+L10n.swift"; sourceTree = "<group>"; };
 		0E2DE72427DCDF550067B9E1 /* WireGuard+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WireGuard+L10n.swift"; sourceTree = "<group>"; };
 		0E34A2AF27CAA84500C73B67 /* OpenVPN+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenVPN+L10n.swift"; sourceTree = "<group>"; };
@@ -734,7 +734,7 @@
 				0EBC075C27EC529000208AD9 /* DebugLog+Constants.swift */,
 				0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */,
 				0E35C099280E95BB0071FA35 /* ProviderProfileAvailability.swift */,
-				0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift */,
+				0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Extensions.swift */,
 				0EE8B7E227FF340F00B68621 /* VPNProtocolType+FileExtensions.swift */,
 			);
 			path = Extensions;
@@ -1425,7 +1425,7 @@
 				0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */,
 				0E0BD27927B2EBE500583AC5 /* ShortcutsView.swift in Sources */,
 				0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */,
-				0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Identifiable.swift in Sources */,
+				0E2DE71C27DCCFE80067B9E1 /* TunnelKit+Extensions.swift in Sources */,
 				0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */,
 				0EF2213127E674BD001D0BD7 /* AddProviderViewModel.swift in Sources */,
 				0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */,
