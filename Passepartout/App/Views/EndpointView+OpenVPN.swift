@@ -62,9 +62,8 @@ extension EndpointView {
                         isExpanded[customEndpoint.address] = true
                     }
                     scrollToCustomEndpoint(scrollProxy)
-                }
-            }.onChange(of: isAutomatic, perform: onToggleAutomatic)
-            .navigationTitle(L10n.Global.Strings.endpoint)
+                }.onChange(of: isAutomatic, perform: onToggleAutomatic)
+            }.navigationTitle(L10n.Global.Strings.endpoint)
         }
     }
 }
@@ -171,11 +170,15 @@ private struct EndpointsByAddress: Identifiable {
 
 private extension EndpointView.OpenVPNView {
     func onToggleAutomatic(_ value: Bool) {
-        if value {
-            guard currentProfile.value.customEndpoint != nil else {
-                return
-            }
+        guard value else {
+            return
+        }
+        guard currentProfile.value.customEndpoint != nil else {
+            return
+        }
+        withAnimation {
             currentProfile.value.customEndpoint = nil
+            isExpanded.removeAll()
         }
     }
 
