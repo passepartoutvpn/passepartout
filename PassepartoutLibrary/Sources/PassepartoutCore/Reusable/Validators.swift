@@ -33,6 +33,8 @@ public struct Validators {
 
         case ipAddress
 
+        case socketPort
+
         case domainName
 
         case wildcardDomainName
@@ -65,6 +67,13 @@ public struct Validators {
                 string.withCString({ cstring in inet_pton(AF_INET, cstring, &sin.sin_addr) }) == 1 else {
 
             throw ValidationError.ipAddress
+        }
+    }
+
+    public static func socketPort(_ string: String) throws {
+        guard let num = Int(string),
+              (Int(UInt16.min)...Int(UInt16.max)).contains(num) else {
+            throw ValidationError.socketPort
         }
     }
 

@@ -202,6 +202,7 @@
 		A3A7CC4A28790BD900172D7D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A7CC4928790BD900172D7D /* Theme.swift */; };
 		A3A7CC56287D56E800172D7D /* ProviderLocationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A7CC55287D56E800172D7D /* ProviderLocationItem.swift */; };
 		A3A7CC58287D576400172D7D /* ProviderLocationItem+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A7CC57287D576400172D7D /* ProviderLocationItem+ViewModel.swift */; };
+		A3D5B04C2A6C6CF2008016D5 /* EndpointView+Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D5B04B2A6C6CF2008016D5 /* EndpointView+Add.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -523,6 +524,7 @@
 		A3A7CC4928790BD900172D7D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		A3A7CC55287D56E800172D7D /* ProviderLocationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderLocationItem.swift; sourceTree = "<group>"; };
 		A3A7CC57287D576400172D7D /* ProviderLocationItem+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProviderLocationItem+ViewModel.swift"; sourceTree = "<group>"; };
+		A3D5B04B2A6C6CF2008016D5 /* EndpointView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndpointView+Add.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -651,6 +653,7 @@
 				0E49F6BA27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift */,
 				0E49F6BC27D7639000385834 /* EndpointAdvancedView+WireGuard.swift */,
 				0E71ACEA27C1060D00F85C4B /* EndpointView.swift */,
+				A3D5B04B2A6C6CF2008016D5 /* EndpointView+Add.swift */,
 				0E5349C527C176C200C71BB3 /* EndpointView+OpenVPN.swift */,
 				0E5349C727C176D100C71BB3 /* EndpointView+WireGuard.swift */,
 				0EB90CC029C25BBD00E64628 /* InteractiveConnectionView.swift */,
@@ -1458,6 +1461,7 @@
 				0EBC075D27EC529000208AD9 /* DebugLog+Constants.swift in Sources */,
 				0E3CD47F280DA14B007075C0 /* AddProfileMenu.swift in Sources */,
 				0EB17EAA27D226C900D473B5 /* Constants+App.swift in Sources */,
+				A3D5B04C2A6C6CF2008016D5 /* EndpointView+Add.swift in Sources */,
 				0E3B7FD627E5173A00C66F13 /* ProfileView+VPN.swift in Sources */,
 				0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */,
 				0E5468002867AC9A00F74D1C /* MacUtils.swift in Sources */,

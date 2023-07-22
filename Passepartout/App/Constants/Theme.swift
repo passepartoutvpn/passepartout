@@ -348,6 +348,10 @@ extension View {
         tint(themePrimaryBackgroundColor)
     }
 
+    func themeDestructiveTintStyle() -> some View {
+        tint(themeErrorColor)
+    }
+
     func themeTextButtonStyle() -> some View {
         accentColor(.primary)
     }
@@ -536,8 +540,9 @@ extension View {
             .themeRawTextStyle()
     }
 
-    func themeValidSocketPort() -> some View {
-        keyboardType(.numberPad)
+    func themeValidSocketPort(_ port: String?) -> some View {
+        themeValidating(port, validator: Validators.socketPort)
+            .keyboardType(.numberPad)
     }
 
     func themeValidDomainName(_ domainName: String?) -> some View {
