@@ -102,29 +102,25 @@ private extension OnDemandView {
 
     @ViewBuilder
     var mainView: some View {
-        // FIXME: l10n, on-demand
         if Utils.hasCellularData() {
             Section {
                 Toggle(L10n.OnDemand.Items.Mobile.caption, isOn: $onDemand.withMobileNetwork)
             } header: {
+                // FIXME: l10n, on-demand
                 Text(L10n.Global.Strings.networks)
-            }
-            Section {
-                SSIDList(withSSIDs: $onDemand.withSSIDs)
             }
         } else if Utils.hasEthernet() {
             Section {
                 Toggle(L10n.OnDemand.Items.Ethernet.caption, isOn: $onDemand.withEthernetNetwork)
             } header: {
+                // FIXME: l10n, on-demand
                 Text(L10n.Global.Strings.networks)
             }
-            Section {
-                SSIDList(withSSIDs: $onDemand.withSSIDs)
-            }
-        } else {
-            Section {
-                SSIDList(withSSIDs: $onDemand.withSSIDs)
-            } header: {
+        }
+        Section {
+            SSIDList(withSSIDs: $onDemand.withSSIDs)
+        } header: {
+            if !Utils.hasCellularData() && !Utils.hasEthernet() {
                 Text(L10n.Global.Strings.networks)
             }
         }
