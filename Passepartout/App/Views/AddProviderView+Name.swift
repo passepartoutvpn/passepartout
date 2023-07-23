@@ -40,6 +40,8 @@ extension AddProviderView {
 
         @State private var isEnteringCredentials = false
 
+        @FocusState private var focusedField: AddProfileView.Field?
+
         init(
             profile: Binding<Profile>,
             providerMetadata: ProviderMetadata,
@@ -57,6 +59,7 @@ extension AddProviderView {
                 List {
                     AddProfileView.ProfileNameSection(
                         profileName: $viewModel.profileName,
+                        focusedField: $focusedField,
                         errorMessage: viewModel.errorMessage
                     ) {
                         saveProfile(replacingExisting: false)

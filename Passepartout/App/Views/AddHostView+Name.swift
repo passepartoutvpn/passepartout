@@ -42,7 +42,7 @@ extension AddHostView {
 
         @State private var isEnteringCredentials = false
 
-        @FocusState private var isPassphraseFocused
+        @FocusState private var focusedField: AddProfileView.Field?
 
         init(
             url: URL,
@@ -77,7 +77,11 @@ extension AddHostView {
                 isPresented: $viewModel.isAskingOverwrite,
                 actions: alertOverwriteActions,
                 message: alertOverwriteMessage
-            ).onAppear(perform: requestResourcePermissions)
+            ).onChange(of: viewModel.requiresPassphrase) {
+                if $0 {
+                    focusedField = .passphrase
+                }
+            }.onAppear(perform: requestResourcePermissions)
             .onDisappear(perform: dropResourcePermissions)
             .navigationTitle(L10n.AddProfile.Shared.title)
             .themeSecondaryView()
@@ -93,6 +97,7 @@ private extension AddHostView.NameView {
     var mainView: some View {
         AddProfileView.ProfileNameSection(
             profileName: $viewModel.profileName,
+            focusedField: $focusedField,
             errorMessage: viewModel.errorMessage
         ) {
             processProfile(replacingExisting: false)
@@ -120,12 +125,7 @@ private extension AddHostView.NameView {
         Section {
             SecureField(L10n.AddProfile.Host.Sections.Encryption.footer, text: $viewModel.encryptionPassphrase) {
                 processProfile(replacingExisting: false)
-            }.focused($isPassphraseFocused)
-            .onChange(of: viewModel.requiresPassphrase) {
-                if $0 {
-                    isPassphraseFocused = true
-                }
-            }
+            }.focused($focusedField, equals: .passphrase)
         } header: {
             Text(L10n.Global.Strings.encryption)
         }
