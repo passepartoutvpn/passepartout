@@ -64,15 +64,53 @@ extension Profile.Header: Comparable {
     }
 }
 
-extension Profile.OpenVPNSettings {
-    var endpointDescription: String? {
+extension Profile.OpenVPNSettings: StyledOptionalLocalizableEntity {
+    public enum OptionalStyle {
+        case endpoint
+    }
+
+    public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
+        switch optionalStyle {
+        case .endpoint:
+            return endpointDescription
+        }
+    }
+
+    private var endpointDescription: String? {
         customEndpoint?.address ?? configuration.remotes?.first?.address
     }
 }
 
-extension Profile.WireGuardSettings {
-    var endpointDescription: String? {
+extension Profile.WireGuardSettings: StyledOptionalLocalizableEntity {
+    public enum OptionalStyle {
+        case endpoint
+    }
+
+    public func localizedDescription(optionalStyle: OptionalStyle) -> String? {
+        switch optionalStyle {
+        case .endpoint:
+            return endpointDescription
+        }
+    }
+
+    private var endpointDescription: String? {
         configuration.tunnelConfiguration.peers.first?.endpoint?.stringRepresentation
+    }
+}
+
+extension Profile.OnDemand.Policy: LocalizableEntity {
+    public var localizedDescription: String {
+        // FIXME: l10n, on-demand
+        switch self {
+        case .any:
+            return L10n.OnDemand.Policy.any
+
+        case .including:
+            return L10n.OnDemand.Policy.including
+
+        case .excluding:
+            return L10n.OnDemand.Policy.excluding
+        }
     }
 }
 

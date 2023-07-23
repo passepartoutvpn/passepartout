@@ -31,7 +31,7 @@ import PassepartoutVPN
 extension NEOnDemandRuleInterfaceType {
     static var compatibleEthernet: NEOnDemandRuleInterfaceType? {
         #if targetEnvironment(macCatalyst)
-        // FIXME: Catalyst, missing enum case, try hardcoding
+        // XXX: Catalyst, missing enum case, try hardcoding
         // https://developer.apple.com/documentation/networkextension/neondemandruleinterfacetype/ethernet
         NEOnDemandRuleInterfaceType(rawValue: 1)
         #elseif os(macOS)
@@ -54,24 +54,17 @@ private extension Profile.OnDemand {
             return []
         }
 
-        // TODO: on-demand, drop hardcoding when "trusted networks" -> "on-demand"
-//        isEnabled = true
-//        policy = .excluding
-        assert(policy == .excluding)
-
         var rules: [NEOnDemandRule] = []
-        if withCustomRules {
-            #if os(iOS)
+
+        // apply exceptions (unless .any)
+        if withCustomRules && policy != .any {
+#if os(iOS)
             if Utils.hasCellularData() && withMobileNetwork {
-                let rule = policyRule
-                rule.interfaceTypeMatch = .cellular
-                rules.append(rule)
+                rules.append(cellularRule())
             }
-            #endif
+#endif
             if Utils.hasEthernet() && withEthernetNetwork {
-                if let compatibleEthernet = NEOnDemandRuleInterfaceType.compatibleEthernet {
-                    let rule = policyRule
-                    rule.interfaceTypeMatch = compatibleEthernet
+                if let rule = ethernetRule() {
                     rules.append(rule)
                 } else {
                     pp_log.warning("Unable to add rule for NEOnDemandRuleInterfaceType.ethernet (not compatible)")
@@ -79,19 +72,58 @@ private extension Profile.OnDemand {
             }
             let SSIDs = Array(withSSIDs.filter { $1 }.keys)
             if !SSIDs.isEmpty {
-                let rule = policyRule
-                rule.interfaceTypeMatch = .wiFi
-                rule.ssidMatch = SSIDs
-                rules.append(rule)
+                rules.append(wifiRule(SSIDs: SSIDs))
             }
         }
-        let connection = NEOnDemandRuleConnect()
-        connection.interfaceTypeMatch = .any
-        rules.append(connection)
+
+        // IMPORTANT: append fallback rule last
+        rules.append(globalRule())
+
         return rules
     }
+}
 
-    var policyRule: NEOnDemandRule {
-        disconnectsIfNotMatching ? NEOnDemandRuleDisconnect() : NEOnDemandRuleIgnore()
+private extension Profile.OnDemand {
+    func globalRule() -> NEOnDemandRule {
+        let rule: NEOnDemandRule
+        switch policy {
+        case .any, .excluding:
+            rule = NEOnDemandRuleConnect()
+
+        case .including:
+            rule = NEOnDemandRuleDisconnect()
+        }
+        rule.interfaceTypeMatch = .any
+        return rule
+    }
+
+    func networkRule(matchingInterface interfaceType: NEOnDemandRuleInterfaceType) -> NEOnDemandRule {
+        let rule: NEOnDemandRule
+        switch policy {
+        case .any, .excluding:
+            rule = NEOnDemandRuleDisconnect()
+
+        case .including:
+            rule = NEOnDemandRuleConnect()
+        }
+        rule.interfaceTypeMatch = interfaceType
+        return rule
+    }
+
+    func cellularRule() -> NEOnDemandRule {
+        networkRule(matchingInterface: .cellular)
+    }
+
+    func ethernetRule() -> NEOnDemandRule? {
+        guard let compatibleEthernet = NEOnDemandRuleInterfaceType.compatibleEthernet else {
+            return nil
+        }
+        return networkRule(matchingInterface: compatibleEthernet)
+    }
+
+    func wifiRule(SSIDs: [String]) -> NEOnDemandRule {
+        let rule = networkRule(matchingInterface: .wiFi)
+        rule.ssidMatch = SSIDs
+        return rule
     }
 }

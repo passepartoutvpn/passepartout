@@ -51,6 +51,9 @@
 "global.strings.disconnect" = "Disconnect";
 "global.strings.download" = "Download";
 "global.strings.authentication" = "Authentication";
+"global.strings.policy" = "Policy";
+"global.strings.networks" = "Networks";
+"global.strings.edit" = "Edit";
 "global.messages.unlock_app" = "Passepartout is locked";
 "global.messages.email_not_configured" = "No e-mail account is configured.";
 "global.messages.share" = "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";
@@ -251,14 +254,20 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Trusted networks";
-"on_demand.sections.policy.footer" = "When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.";
+"on_demand.title" = "On-demand";
+"on_demand.sections.policy.footer" = "Activate the VPN %@.";
+"on_demand.sections.policy.footer.any" = "in any network";
+"on_demand.sections.policy.footer.matching" = "%@ the networks below";
+"on_demand.sections.policy.footer.including" = "only in";
+"on_demand.sections.policy.footer.excluding" = "except in";
 "on_demand.items.add_ssid.caption" = "Add Wi-Fi";
-"on_demand.items.active.caption" = "Trust";
 "on_demand.items.mobile.caption" = "Cellular network";
-"on_demand.items.ethernet.caption" = "Trust wired connections";
-"on_demand.items.ethernet.description" = "Check to trust any wired cable connection.";
-"on_demand.items.policy.caption" = "Trust disables VPN";
+"on_demand.items.ethernet.caption" = "Wired connections";
+"on_demand.items.ethernet.description" = "Check to match any wired cable connection.";
+
+"on_demand.policy.any" = "All networks";
+"on_demand.policy.including" = "Include";
+"on_demand.policy.excluding" = "Exclude";
 
 /* MARK: ProfileView -> DiagnosticsView */
 

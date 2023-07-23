@@ -41,6 +41,10 @@ extension EndpointView {
 
         @State private var isExpanded: [String: Bool] = [:]
 
+        @State private var isAdding = false
+
+        @State private var editedEndpoint: Endpoint?
+
         init(currentProfile: ObservableProfile) {
             let providerManager: ProviderManager = .shared
 
@@ -54,7 +58,11 @@ extension EndpointView {
             ScrollViewReader { scrollProxy in
                 List {
                     mainSection
-                    endpointsSections
+                    if isConfigurationReadonly {
+                        groupedEndpointsSections
+                    } else {
+                        endpointsSection
+                    }
                     advancedSection
                 }.onAppear {
                     isAutomatic = (currentProfile.value.customEndpoint == nil)
@@ -63,6 +71,11 @@ extension EndpointView {
                     }
                     scrollToCustomEndpoint(scrollProxy)
                 }.onChange(of: isAutomatic, perform: onToggleAutomatic)
+                .toolbar {
+                    if !isConfigurationReadonly {
+                        addButton
+                    }
+                }
             }.navigationTitle(L10n.Global.Strings.endpoint)
         }
     }
@@ -71,42 +84,17 @@ extension EndpointView {
 // MARK: -
 
 private extension EndpointView.OpenVPNView {
+    var isConfigurationReadonly: Bool {
+        currentProfile.value.isProvider
+    }
+
     var mainSection: some View {
         Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $isAutomatic.themeAnimation())
         } footer: {
-            // FIXME: l10n
+            // FIXME: l10n, endpoint
             themeErrorMessage(isManualEndpointRequired ? L10n.Endpoint.Errors.endpointRequired : nil)
         }
-    }
-
-    var endpointsSections: some View {
-        ForEach(endpointsByAddress, content: endpointsGroup(forSection:))
-            .disabled(isAutomatic)
-    }
-
-    // TODO: OpenVPN, make endpoints editable
-    func endpointsGroup(forSection section: EndpointsByAddress) -> some View {
-        Section {
-            DisclosureGroup(isExpanded: isExpandedBinding(address: section.address)) {
-                ForEach(section.endpoints) {
-                    row(forEndpoint: $0)
-                }
-            } label: {
-                Text(L10n.Global.Strings.address)
-                    .withTrailingText(section.address)
-            }
-        }
-    }
-
-    func row(forEndpoint endpoint: Endpoint) -> some View {
-        Button {
-            withAnimation {
-                currentProfile.value.customEndpoint = endpoint
-            }
-        } label: {
-            Text(endpoint.proto.rawValue)
-        }.withTrailingCheckmark(when: currentProfile.value.customEndpoint == endpoint)
     }
 
     var advancedSection: some View {
@@ -122,47 +110,14 @@ private extension EndpointView.OpenVPNView {
         }
     }
 
-    var endpointsByAddress: [EndpointsByAddress] {
-        guard let remotes = builder.remotes, !remotes.isEmpty else {
-            return []
-        }
-        var uniqueAddresses: [String] = []
-        remotes.forEach {
-            guard !uniqueAddresses.contains($0.address) else {
-                return
-            }
-            uniqueAddresses.append($0.address)
-        }
-        return uniqueAddresses.map {
-            EndpointsByAddress(address: $0, remotes: remotes)
-        }
-    }
-
     var isManualEndpointRequired: Bool {
         !isAutomatic && currentProfile.value.customEndpoint == nil
     }
-
-    var isConfigurationReadonly: Bool {
-        currentProfile.value.isProvider
-    }
 }
 
-private struct EndpointsByAddress: Identifiable {
-    let address: String
-
-    let endpoints: [Endpoint]
-
-    init(address: String, remotes: [Endpoint]?) {
-        self.address = address
-        endpoints = remotes?.filter {
-            $0.address == address
-        }.sorted() ?? []
-    }
-
-    // MARK: Identifiable
-
-    var id: String {
-        address
+private extension Endpoint {
+    var linearDescription: String {
+        "\(address) → \(proto.rawValue)"
     }
 }
 
@@ -184,6 +139,180 @@ private extension EndpointView.OpenVPNView {
 
     func scrollToCustomEndpoint(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(currentProfile.value.customEndpoint?.id)
+    }
+}
+
+// MARK: - Editable: linear
+
+private extension EndpointView.OpenVPNView {
+    var endpointsSection: some View {
+        Section {
+            ForEach(builder.remotes ?? []) { endpoint in
+                fullRowForEndpoint(endpoint)
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        actions(forEndpoint: endpoint)
+                    }
+            }.onMove(perform: moveEndpoints)
+                .disabled(isAutomatic)
+        }
+    }
+
+    func fullRowForEndpoint(_ endpoint: Endpoint) -> some View {
+        Button {
+            withAnimation {
+                currentProfile.value.customEndpoint = endpoint
+            }
+        } label: {
+            Text(endpoint.linearDescription)
+        }.sheet(item: $editedEndpoint) { endpoint in
+            NavigationView {
+                EndpointView.AddView(L10n.Global.Strings.edit, endpoint: endpoint, onSave: commitEndpoint)
+            }.themeGlobal()
+        }.withTrailingCheckmark(when: currentProfile.value.customEndpoint == endpoint)
+    }
+
+    @ViewBuilder
+    func actions(forEndpoint endpoint: Endpoint) -> some View {
+        if !isConfigurationReadonly {
+            if (builder.remotes?.count ?? 0) > 1 {
+                removeButton(forEndpoint: endpoint)
+            }
+            editButton(forEndpoint: endpoint)
+        }
+    }
+
+    var addButton: some View {
+        Button {
+            isAdding = true
+        } label: {
+            themeAddMenuImage.asSystemImage
+        }.sheet(isPresented: $isAdding) {
+            NavigationView {
+                EndpointView.AddView(L10n.Global.Strings.add, onSave: commitEndpoint)
+            }.themeGlobal()
+        }
+    }
+
+    func removeButton(forEndpoint endpoint: Endpoint) -> some View {
+        Button(role: .destructive) {
+            deleteEndpoint(endpoint)
+        } label: {
+            Text(L10n.Global.Strings.delete)
+        }.themeDestructiveTintStyle()
+    }
+
+    func editButton(forEndpoint endpoint: Endpoint) -> some View {
+        Button {
+            editedEndpoint = endpoint
+        } label: {
+            Text(L10n.Global.Strings.edit)
+        }.themePrimaryTintStyle()
+    }
+}
+
+private extension EndpointView.OpenVPNView {
+    func commitEndpoint(_ newEndpoint: Endpoint, editedEndpoint: Endpoint?) {
+        withAnimation {
+
+            // replace existing
+            if let editedEndpoint,
+               let editedIndex = builder.remotes?.firstIndex(where: { $0 == editedEndpoint }) {
+
+                builder.remotes?[editedIndex] = newEndpoint
+                if currentProfile.value.customEndpoint == editedEndpoint {
+                    currentProfile.value.customEndpoint = newEndpoint
+                }
+            }
+            // add new
+            else {
+                if builder.remotes != nil {
+                    builder.remotes?.append(newEndpoint)
+                } else {
+                    assertionFailure("Nil remotes, how did we get here?")
+                    builder.remotes = [newEndpoint]
+                }
+            }
+        }
+    }
+
+    func moveEndpoints(fromOffsets: IndexSet, toOffset: Int) {
+        builder.remotes?.move(fromOffsets: fromOffsets, toOffset: toOffset)
+    }
+
+    func deleteEndpoint(_ endpoint: Endpoint) {
+        withAnimation {
+            builder.remotes?.removeAll {
+                $0 == endpoint
+            }
+            if currentProfile.value.customEndpoint == endpoint {
+                currentProfile.value.customEndpoint = nil
+            }
+        }
+    }
+}
+
+// MARK: - Non-editable: group by address
+
+private extension EndpointView.OpenVPNView {
+    var groupedEndpointsSections: some View {
+        ForEach(endpointsByAddress, content: endpointsGroup(forSection:))
+            .disabled(isAutomatic)
+    }
+
+    func endpointsGroup(forSection section: EndpointsByAddress) -> some View {
+        Section {
+            DisclosureGroup(isExpanded: isExpandedBinding(address: section.address)) {
+                ForEach(section.endpoints, content: groupedRowForEndpoint)
+            } label: {
+                Text(L10n.Global.Strings.address)
+                    .withTrailingText(section.address)
+            }
+        }
+    }
+
+    func groupedRowForEndpoint(_ endpoint: Endpoint) -> some View {
+        Button {
+            withAnimation {
+                currentProfile.value.customEndpoint = endpoint
+            }
+        } label: {
+            Text(endpoint.proto.rawValue)
+        }.withTrailingCheckmark(when: currentProfile.value.customEndpoint == endpoint)
+    }
+
+    var endpointsByAddress: [EndpointsByAddress] {
+        guard let remotes = builder.remotes, !remotes.isEmpty else {
+            return []
+        }
+        var uniqueAddresses: [String] = []
+        remotes.forEach {
+            guard !uniqueAddresses.contains($0.address) else {
+                return
+            }
+            uniqueAddresses.append($0.address)
+        }
+        return uniqueAddresses.map {
+            EndpointsByAddress(address: $0, remotes: remotes)
+        }
+    }
+}
+
+private struct EndpointsByAddress: Identifiable {
+    let address: String
+
+    let endpoints: [Endpoint]
+
+    init(address: String, remotes: [Endpoint]?) {
+        self.address = address
+        endpoints = remotes?.filter {
+            $0.address == address
+        }.sorted() ?? []
+    }
+
+    // MARK: Identifiable
+
+    var id: String {
+        address
     }
 }
 

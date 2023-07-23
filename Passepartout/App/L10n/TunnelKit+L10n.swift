@@ -110,12 +110,12 @@ extension IPv6Settings: StyledLocalizableEntity {
 
 extension IPv4Settings.Route: LocalizableEntity {
     public var localizedDescription: String {
-        "\(destination)/\(mask) -> \(gateway ?? "*")"
+        "\(destination)/\(mask) → \(gateway ?? "*")"
     }
 }
 
 extension IPv6Settings.Route: LocalizableEntity {
     public var localizedDescription: String {
-        "\(destination)/\(prefixLength) -> \(gateway ?? "*")"
+        "\(destination)/\(prefixLength) → \(gateway ?? "*")"
     }
 }

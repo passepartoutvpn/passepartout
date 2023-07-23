@@ -492,6 +492,8 @@ internal enum L10n {
       internal static let download = L10n.tr("Localizable", "global.strings.download", fallback: "Download")
       /// Duplicate
       internal static let duplicate = L10n.tr("Localizable", "global.strings.duplicate", fallback: "Duplicate")
+      /// Edit
+      internal static let edit = L10n.tr("Localizable", "global.strings.edit", fallback: "Edit")
       /// Enabled
       internal static let enabled = L10n.tr("Localizable", "global.strings.enabled", fallback: "Enabled")
       /// Encryption
@@ -506,12 +508,16 @@ internal enum L10n {
       internal static let manual = L10n.tr("Localizable", "global.strings.manual", fallback: "Manual")
       /// Name
       internal static let name = L10n.tr("Localizable", "global.strings.name", fallback: "Name")
+      /// Networks
+      internal static let networks = L10n.tr("Localizable", "global.strings.networks", fallback: "Networks")
       /// Next
       internal static let next = L10n.tr("Localizable", "global.strings.next", fallback: "Next")
       /// None
       internal static let `none` = L10n.tr("Localizable", "global.strings.none", fallback: "None")
       /// MARK: Global
       internal static let ok = L10n.tr("Localizable", "global.strings.ok", fallback: "OK")
+      /// Policy
+      internal static let policy = L10n.tr("Localizable", "global.strings.policy", fallback: "Policy")
       /// Port
       internal static let port = L10n.tr("Localizable", "global.strings.port", fallback: "Port")
       /// Private key
@@ -640,35 +646,49 @@ internal enum L10n {
   }
   internal enum OnDemand {
     /// MARK: ProfileView -> OnDemandView
-    internal static let title = L10n.tr("Localizable", "on_demand.title", fallback: "Trusted networks")
+    internal static let title = L10n.tr("Localizable", "on_demand.title", fallback: "On-demand")
     internal enum Items {
-      internal enum Active {
-        /// Trust
-        internal static let caption = L10n.tr("Localizable", "on_demand.items.active.caption", fallback: "Trust")
-      }
       internal enum AddSsid {
         /// Add Wi-Fi
         internal static let caption = L10n.tr("Localizable", "on_demand.items.add_ssid.caption", fallback: "Add Wi-Fi")
       }
       internal enum Ethernet {
-        /// Trust wired connections
-        internal static let caption = L10n.tr("Localizable", "on_demand.items.ethernet.caption", fallback: "Trust wired connections")
-        /// Check to trust any wired cable connection.
-        internal static let description = L10n.tr("Localizable", "on_demand.items.ethernet.description", fallback: "Check to trust any wired cable connection.")
+        /// Wired connections
+        internal static let caption = L10n.tr("Localizable", "on_demand.items.ethernet.caption", fallback: "Wired connections")
+        /// Check to match any wired cable connection.
+        internal static let description = L10n.tr("Localizable", "on_demand.items.ethernet.description", fallback: "Check to match any wired cable connection.")
       }
       internal enum Mobile {
         /// Cellular network
         internal static let caption = L10n.tr("Localizable", "on_demand.items.mobile.caption", fallback: "Cellular network")
       }
-      internal enum Policy {
-        /// Trust disables VPN
-        internal static let caption = L10n.tr("Localizable", "on_demand.items.policy.caption", fallback: "Trust disables VPN")
-      }
+    }
+    internal enum Policy {
+      /// All networks
+      internal static let any = L10n.tr("Localizable", "on_demand.policy.any", fallback: "All networks")
+      /// Exclude
+      internal static let excluding = L10n.tr("Localizable", "on_demand.policy.excluding", fallback: "Exclude")
+      /// Include
+      internal static let including = L10n.tr("Localizable", "on_demand.policy.including", fallback: "Include")
     }
     internal enum Sections {
       internal enum Policy {
-        /// When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.
-        internal static let footer = L10n.tr("Localizable", "on_demand.sections.policy.footer", fallback: "When entering a trusted network, the VPN is normally shut down and kept disconnected. Disable this option to not enforce such behavior.")
+        /// Activate the VPN %@.
+        internal static func footer(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "on_demand.sections.policy.footer", String(describing: p1), fallback: "Activate the VPN %@.")
+        }
+        internal enum Footer {
+          /// in any network
+          internal static let any = L10n.tr("Localizable", "on_demand.sections.policy.footer.any", fallback: "in any network")
+          /// except in
+          internal static let excluding = L10n.tr("Localizable", "on_demand.sections.policy.footer.excluding", fallback: "except in")
+          /// only in
+          internal static let including = L10n.tr("Localizable", "on_demand.sections.policy.footer.including", fallback: "only in")
+          /// %@ the networks below
+          internal static func matching(_ p1: Any) -> String {
+            return L10n.tr("Localizable", "on_demand.sections.policy.footer.matching", String(describing: p1), fallback: "%@ the networks below")
+          }
+        }
       }
     }
   }
