@@ -166,9 +166,7 @@ private extension EndpointView.OpenVPNView {
             Text(endpoint.linearDescription)
         }.sheet(item: $editedEndpoint) { endpoint in
             NavigationView {
-                // TODO: endpoint, edit existing
-                // FIXME: l10n, endpoint
-                EndpointView.AddView("Edit endpoint", endpoint: endpoint, onSave: commitEndpoint)
+                EndpointView.AddView(L10n.Global.Strings.edit, endpoint: endpoint, onSave: commitEndpoint)
             }.themeGlobal()
         }.withTrailingCheckmark(when: currentProfile.value.customEndpoint == endpoint)
     }
@@ -190,9 +188,7 @@ private extension EndpointView.OpenVPNView {
             themeAddMenuImage.asSystemImage
         }.sheet(isPresented: $isAdding) {
             NavigationView {
-                // TODO: endpoint, save new
-                // FIXME: l10n, endpoint
-                EndpointView.AddView("Add endpoint", onSave: commitEndpoint)
+                EndpointView.AddView(L10n.Global.Strings.add, onSave: commitEndpoint)
             }.themeGlobal()
         }
     }
