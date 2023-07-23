@@ -1,8 +1,9 @@
-### Fixed
+### Added
 
-- Allow wildcards in proxy bypass domains.
-- Fail gracefully when refreshing infrastructure.
-- Only show 'Reconnect' on active profile.
-- IPv4/6 address validation.
-- Domain name validation.
+- OpenVPN: Allow editing of endpoints.
+
+### Changed
+
+- OpenVPN: Endpoint UX.
+- Convert trusted networks to on-demand activation.
 
