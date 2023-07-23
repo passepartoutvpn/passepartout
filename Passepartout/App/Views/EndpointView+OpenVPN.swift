@@ -264,8 +264,7 @@ private extension EndpointView.OpenVPNView {
             DisclosureGroup(isExpanded: isExpandedBinding(address: section.address)) {
                 ForEach(section.endpoints, content: groupedRowForEndpoint)
             } label: {
-                Text(L10n.Global.Strings.address)
-                    .withTrailingText(section.address)
+                Text(section.address)
             }
         }
     }
