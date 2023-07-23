@@ -676,15 +676,15 @@ internal enum L10n {
           return L10n.tr("Localizable", "on_demand.sections.policy.footer", String(describing: p1), fallback: "Activate the VPN %@.")
         }
         internal enum Footer {
-          /// on any network
-          internal static let any = L10n.tr("Localizable", "on_demand.sections.policy.footer.any", fallback: "on any network")
-          /// except
-          internal static let excluding = L10n.tr("Localizable", "on_demand.sections.policy.footer.excluding", fallback: "except")
-          /// only
-          internal static let including = L10n.tr("Localizable", "on_demand.sections.policy.footer.including", fallback: "only")
-          /// %@ when connected to the networks below
+          /// in any network
+          internal static let any = L10n.tr("Localizable", "on_demand.sections.policy.footer.any", fallback: "in any network")
+          /// except in
+          internal static let excluding = L10n.tr("Localizable", "on_demand.sections.policy.footer.excluding", fallback: "except in")
+          /// only in
+          internal static let including = L10n.tr("Localizable", "on_demand.sections.policy.footer.including", fallback: "only in")
+          /// %@ the networks below
           internal static func matching(_ p1: Any) -> String {
-            return L10n.tr("Localizable", "on_demand.sections.policy.footer.matching", String(describing: p1), fallback: "%@ when connected to the networks below")
+            return L10n.tr("Localizable", "on_demand.sections.policy.footer.matching", String(describing: p1), fallback: "%@ the networks below")
           }
         }
       }

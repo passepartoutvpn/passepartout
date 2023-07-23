@@ -255,10 +255,10 @@
 
 "on_demand.title" = "On-demand";
 "on_demand.sections.policy.footer" = "Activate the VPN %@.";
-"on_demand.sections.policy.footer.any" = "on any network";
-"on_demand.sections.policy.footer.matching" = "%@ when connected to the networks below";
-"on_demand.sections.policy.footer.including" = "only";
-"on_demand.sections.policy.footer.excluding" = "except";
+"on_demand.sections.policy.footer.any" = "in any network";
+"on_demand.sections.policy.footer.matching" = "%@ the networks below";
+"on_demand.sections.policy.footer.including" = "only in";
+"on_demand.sections.policy.footer.excluding" = "except in";
 "on_demand.items.add_ssid.caption" = "Add Wi-Fi";
 "on_demand.items.mobile.caption" = "Cellular network";
 "on_demand.items.ethernet.caption" = "Wired connections";
