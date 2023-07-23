@@ -27,6 +27,14 @@ import PassepartoutLibrary
 import SwiftUI
 
 struct AccountView: View {
+    enum Field {
+        case username
+
+        case password
+
+        case seed
+    }
+
     @ObservedObject private var providerManager: ProviderManager
 
     private let providerName: ProviderName?
@@ -40,6 +48,8 @@ struct AccountView: View {
     private let onSave: (() -> Void)?
 
     @State private var liveAccount = Profile.Account()
+
+    @FocusState private var focusedField: Field?
 
     init(
         providerName: ProviderName?,
@@ -71,6 +81,7 @@ struct AccountView: View {
                 TextField(usernamePlaceholder ?? L10n.Account.Items.Username.placeholder, text: $liveAccount.username)
                     .textContentType(.username)
                     .keyboardType(.emailAddress)
+                    .focused($focusedField, equals: .username)
                     .themeRawTextStyle()
                     .withLeadingText(L10n.Account.Items.Username.caption)
 
@@ -80,12 +91,14 @@ struct AccountView: View {
                         EmptyView()
                     } else {
                         themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password)
+                            .focused($focusedField, equals: .password)
                             .withLeadingText(L10n.Account.Items.Password.caption)
                     }
 
-                    // TODO: interactive, scan QR code
                 case .totp:
+                    // TODO: interactive, scan QR code
                     themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password, contentType: .oneTimeCode)
+                        .focused($focusedField, equals: .seed)
                         .withLeadingText(L10n.Account.Items.Seed.caption)
                 }
             } footer: {
@@ -111,6 +124,8 @@ struct AccountView: View {
                 saveAnyway: saveAnyway,
                 onSave: onSave
             )
+        }.onAppear {
+            focusedField = .username
         }.navigationTitle(L10n.Account.title)
     }
 }

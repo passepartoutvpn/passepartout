@@ -27,12 +27,20 @@ import PassepartoutLibrary
 import SwiftUI
 
 enum AddProfileView {
+    enum Field {
+        case name
+
+        case passphrase
+    }
+
     struct Bindings {
         @Binding var isPresented: Bool
     }
 
     struct ProfileNameSection: View {
         @Binding var profileName: String
+
+        @FocusState.Binding var focusedField: Field?
 
         let errorMessage: String?
 
@@ -41,11 +49,14 @@ enum AddProfileView {
         var body: some View {
             Section {
                 TextField(L10n.Global.Placeholders.profileName, text: $profileName, onCommit: onCommit)
+                    .focused($focusedField, equals: .name)
                     .themeValidProfileName()
             } header: {
                 Text(L10n.Global.Strings.name)
             } footer: {
                 themeErrorMessage(errorMessage)
+            }.onAppear {
+                focusedField = .name
             }
         }
     }
