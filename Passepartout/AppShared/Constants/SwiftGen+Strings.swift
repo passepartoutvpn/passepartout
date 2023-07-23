@@ -492,6 +492,8 @@ internal enum L10n {
       internal static let download = L10n.tr("Localizable", "global.strings.download", fallback: "Download")
       /// Duplicate
       internal static let duplicate = L10n.tr("Localizable", "global.strings.duplicate", fallback: "Duplicate")
+      /// Edit
+      internal static let edit = L10n.tr("Localizable", "global.strings.edit", fallback: "Edit")
       /// Enabled
       internal static let enabled = L10n.tr("Localizable", "global.strings.enabled", fallback: "Enabled")
       /// Encryption

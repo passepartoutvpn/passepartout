@@ -204,7 +204,7 @@ private extension NetworkSettingsView {
                         .withLeadingText(L10n.Global.Strings.address)
 
                     TextField(Unlocalized.Placeholders.port, text: $settings.proxy.proxyPort.toString())
-                        .themeValidSocketPort()
+                        .themeValidSocketPort(settings.proxy.proxyPort?.description)
                         .withLeadingText(L10n.Global.Strings.port)
 
                 case .pac:
