@@ -27,6 +27,14 @@ import PassepartoutLibrary
 import SwiftUI
 
 struct AccountView: View {
+    enum Field {
+        case username
+
+        case password
+
+        case seed
+    }
+
     @ObservedObject private var providerManager: ProviderManager
 
     private let providerName: ProviderName?
@@ -41,7 +49,7 @@ struct AccountView: View {
 
     @State private var liveAccount = Profile.Account()
 
-    @FocusState private var isUsernameFocused
+    @FocusState private var focusedField: Field?
 
     init(
         providerName: ProviderName?,
@@ -73,7 +81,7 @@ struct AccountView: View {
                 TextField(usernamePlaceholder ?? L10n.Account.Items.Username.placeholder, text: $liveAccount.username)
                     .textContentType(.username)
                     .keyboardType(.emailAddress)
-                    .focused($isUsernameFocused)
+                    .focused($focusedField, equals: .username)
                     .themeRawTextStyle()
                     .withLeadingText(L10n.Account.Items.Username.caption)
 
@@ -83,12 +91,14 @@ struct AccountView: View {
                         EmptyView()
                     } else {
                         themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password)
+                            .focused($focusedField, equals: .password)
                             .withLeadingText(L10n.Account.Items.Password.caption)
                     }
 
-                    // TODO: interactive, scan QR code
                 case .totp:
+                    // TODO: interactive, scan QR code
                     themeSecureField(L10n.Account.Items.Password.placeholder, text: $liveAccount.password, contentType: .oneTimeCode)
+                        .focused($focusedField, equals: .seed)
                         .withLeadingText(L10n.Account.Items.Seed.caption)
                 }
             } footer: {
@@ -115,7 +125,7 @@ struct AccountView: View {
                 onSave: onSave
             )
         }.onAppear {
-            isUsernameFocused = true
+            focusedField = .username
         }.navigationTitle(L10n.Account.title)
     }
 }

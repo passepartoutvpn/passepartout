@@ -28,6 +28,10 @@ import SwiftUI
 
 extension ProfileView {
     struct RenameView: View {
+        enum Field {
+            case name
+        }
+
         @Environment(\.presentationMode) private var presentationMode
 
         @ObservedObject private var profileManager: ProfileManager
@@ -38,7 +42,7 @@ extension ProfileView {
 
         @State private var isOverwritingExistingProfile = false
 
-        @FocusState private var isNameFocused
+        @FocusState private var focusedField: Field?
 
         init(currentProfile: ObservableProfile) {
             profileManager = .shared
@@ -50,7 +54,7 @@ extension ProfileView {
                 Section {
                     TextField(L10n.Global.Placeholders.profileName, text: $newName, onCommit: commitRenaming)
                         .themeValidProfileName()
-                        .focused($isNameFocused)
+                        .focused($focusedField, equals: .name)
                         .onAppear(perform: loadCurrentName)
                 } header: {
                     Text(L10n.Profile.Alerts.Rename.title)
@@ -99,7 +103,7 @@ private extension ProfileView.RenameView {
 private extension ProfileView.RenameView {
     func loadCurrentName() {
         newName = currentProfile.value.header.name
-        isNameFocused = true
+        focusedField = .name
     }
 
     func commitRenaming() {
