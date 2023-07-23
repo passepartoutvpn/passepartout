@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- OpenVPN: Allow editing of endpoints. [#335](https://github.com/passepartoutvpn/passepartout-apple/pull/335)
+
 ### Changed
 
 - OpenVPN: Endpoint UX. [#332](https://github.com/passepartoutvpn/passepartout-apple/pull/332)
