@@ -115,12 +115,6 @@ private extension EndpointView.OpenVPNView {
     }
 }
 
-private extension Endpoint {
-    var linearDescription: String {
-        "\(address) → \(proto.rawValue)"
-    }
-}
-
 // MARK: -
 
 private extension EndpointView.OpenVPNView {
@@ -148,7 +142,7 @@ private extension EndpointView.OpenVPNView {
     var endpointsSection: some View {
         Section {
             ForEach(builder.remotes ?? []) { endpoint in
-                fullRowForEndpoint(endpoint)
+                rowForEndpoint(endpoint)
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                         actions(forEndpoint: endpoint)
                     }
@@ -157,18 +151,27 @@ private extension EndpointView.OpenVPNView {
         }
     }
 
-    func fullRowForEndpoint(_ endpoint: Endpoint) -> some View {
+    func rowForEndpoint(_ endpoint: Endpoint) -> some View {
         Button {
             withAnimation {
                 currentProfile.value.customEndpoint = endpoint
             }
         } label: {
-            Text(endpoint.linearDescription)
+            labelForEndpoint(endpoint)
         }.sheet(item: $editedEndpoint) { endpoint in
             NavigationView {
                 EndpointView.AddView(L10n.Global.Strings.edit, endpoint: endpoint, onSave: commitEndpoint)
             }.themeGlobal()
         }.withTrailingCheckmark(when: currentProfile.value.customEndpoint == endpoint)
+    }
+
+    func labelForEndpoint(_ endpoint: Endpoint) -> some View {
+        VStack {
+            Text(endpoint.address)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(endpoint.proto.rawValue)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
     }
 
     @ViewBuilder
@@ -255,29 +258,36 @@ private extension EndpointView.OpenVPNView {
 
 private extension EndpointView.OpenVPNView {
     var groupedEndpointsSections: some View {
-        ForEach(endpointsByAddress, content: endpointsGroup(forSection:))
+        ForEach(endpointsByAddress, content: group(forEndpointsSection:))
             .disabled(isAutomatic)
     }
 
-    func endpointsGroup(forSection section: EndpointsByAddress) -> some View {
+    func group(forEndpointsSection section: EndpointsByAddress) -> some View {
         Section {
             DisclosureGroup(isExpanded: isExpandedBinding(address: section.address)) {
-                ForEach(section.endpoints, content: groupedRowForEndpoint)
+                ForEach(section.endpoints, content: rowForEndpointProtocol)
             } label: {
-                Text(L10n.Global.Strings.address)
-                    .withTrailingText(section.address)
+                labelForEndpointAddress(section.address)
             }
         }
     }
 
-    func groupedRowForEndpoint(_ endpoint: Endpoint) -> some View {
+    func labelForEndpointAddress(_ address: String) -> some View {
+        Text(address)
+    }
+
+    func rowForEndpointProtocol(_ endpoint: Endpoint) -> some View {
         Button {
             withAnimation {
                 currentProfile.value.customEndpoint = endpoint
             }
         } label: {
-            Text(endpoint.proto.rawValue)
+            labelForEndpointProtocol(endpoint.proto)
         }.withTrailingCheckmark(when: currentProfile.value.customEndpoint == endpoint)
+    }
+
+    func labelForEndpointProtocol(_ proto: EndpointProtocol) -> some View {
+        Text(proto.rawValue)
     }
 
     var endpointsByAddress: [EndpointsByAddress] {
