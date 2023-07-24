@@ -222,11 +222,7 @@ final class ProductManager: NSObject, ObservableObject {
     }
 
     func reloadReceipt(andNotify: Bool = true) {
-        guard let url = Bundle.main.appStoreReceiptURL else {
-            pp_log.warning("No App Store receipt found!")
-            return
-        }
-        guard let receipt = Receipt(contentsOfURL: url) else {
+        guard let receipt else {
             pp_log.error("Could not parse App Store receipt!")
             return
         }
@@ -281,8 +277,40 @@ extension ProductManager: SKPaymentTransactionObserver {
     }
 }
 
-extension ProductManager {
-    private func detectRefunds(_ refunds: Set<LocalProduct>) {
+private extension ProductManager {
+    var isMac: Bool {
+        #if targetEnvironment(macCatalyst)
+        true
+        #else
+        false
+        #endif
+    }
+
+    var receipt: Receipt? {
+        guard let url = Bundle.main.appStoreReceiptURL else {
+            pp_log.warning("No App Store receipt found!")
+            return nil
+        }
+        let receipt = Receipt(contentsOfURL: url)
+
+        // in TestFlight, attempt fallback to existing release receipt
+        if Bundle.main.isTestFlight {
+            guard let receipt else {
+                let releaseUrl = url.deletingLastPathComponent().appendingPathComponent("receipt")
+                guard releaseUrl != url else {
+                    assertionFailure("How can release URL be equal to sandbox URL in TestFlight?")
+                    return nil
+                }
+                pp_log.warning("Sandbox receipt not found, falling back to Release receipt")
+                return Receipt(contentsOfURL: releaseUrl)
+            }
+            return receipt
+        }
+
+        return receipt
+    }
+
+    func detectRefunds(_ refunds: Set<LocalProduct>) {
         let isEligibleForFullVersion = isFullVersion()
         let hasCancelledFullVersion: Bool
         let hasCancelledTrustedNetworks: Bool
@@ -303,15 +331,5 @@ extension ProductManager {
         if hasCancelledFullVersion || hasCancelledTrustedNetworks {
             didRefundProducts.send()
         }
-    }
-}
-
-extension ProductManager {
-    private var isMac: Bool {
-        #if targetEnvironment(macCatalyst)
-        true
-        #else
-        false
-        #endif
     }
 }
