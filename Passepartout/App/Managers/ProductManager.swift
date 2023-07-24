@@ -291,7 +291,23 @@ private extension ProductManager {
             pp_log.warning("No App Store receipt found!")
             return nil
         }
-        return Receipt(contentsOfURL: url)
+        let receipt = Receipt(contentsOfURL: url)
+
+        // in TestFlight, attempt fallback to existing release receipt
+        if Bundle.main.isTestFlight {
+            guard let receipt else {
+                let releaseUrl = url.deletingLastPathComponent().appendingPathComponent("receipt")
+                guard releaseUrl != url else {
+                    assertionFailure("How can release URL be equal to sandbox URL in TestFlight?")
+                    return nil
+                }
+                pp_log.warning("Sandbox receipt not found, falling back to Release receipt")
+                return Receipt(contentsOfURL: releaseUrl)
+            }
+            return receipt
+        }
+
+        return receipt
     }
 
     func detectRefunds(_ refunds: Set<LocalProduct>) {
