@@ -222,11 +222,7 @@ final class ProductManager: NSObject, ObservableObject {
     }
 
     func reloadReceipt(andNotify: Bool = true) {
-        guard let url = Bundle.main.appStoreReceiptURL else {
-            pp_log.warning("No App Store receipt found!")
-            return
-        }
-        guard let receipt = Receipt(contentsOfURL: url) else {
+        guard let receipt else {
             pp_log.error("Could not parse App Store receipt!")
             return
         }
@@ -281,8 +277,24 @@ extension ProductManager: SKPaymentTransactionObserver {
     }
 }
 
-extension ProductManager {
-    private func detectRefunds(_ refunds: Set<LocalProduct>) {
+private extension ProductManager {
+    var isMac: Bool {
+        #if targetEnvironment(macCatalyst)
+        true
+        #else
+        false
+        #endif
+    }
+
+    var receipt: Receipt? {
+        guard let url = Bundle.main.appStoreReceiptURL else {
+            pp_log.warning("No App Store receipt found!")
+            return nil
+        }
+        return Receipt(contentsOfURL: url)
+    }
+
+    func detectRefunds(_ refunds: Set<LocalProduct>) {
         let isEligibleForFullVersion = isFullVersion()
         let hasCancelledFullVersion: Bool
         let hasCancelledTrustedNetworks: Bool
@@ -303,15 +315,5 @@ extension ProductManager {
         if hasCancelledFullVersion || hasCancelledTrustedNetworks {
             didRefundProducts.send()
         }
-    }
-}
-
-extension ProductManager {
-    private var isMac: Bool {
-        #if targetEnvironment(macCatalyst)
-        true
-        #else
-        false
-        #endif
     }
 }
