@@ -49,6 +49,8 @@ extension Profile {
 
         public var withOtherNetworks: Set<OtherNetwork> = []
 
+        public var disconnectsIfNotMatching: Bool? = true
+
         public init() {
         }
     }

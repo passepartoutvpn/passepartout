@@ -98,7 +98,12 @@ final class CDProfileRepository: ProfileRepository {
             existing.forEach(context.delete)
 
             try profiles.forEach {
-                _ = try ProfileMapper(context).toDTO($0)
+
+                // FIXME: on-demand, workaround to retain profiles on downgrade (field is required before 2.2.0)
+                var copy = $0
+                copy.onDemand.disconnectsIfNotMatching = true
+
+                _ = try ProfileMapper(context).toDTO(copy)
             }
             try context.save()
         } catch {
