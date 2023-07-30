@@ -6,7 +6,7 @@ if [[ $CURRENT_BRANCH != "master" ]]; then
 fi
 
 # pull latest API
-API_PATH="API"
+API_PATH="PassepartoutLibrary/Sources/PassepartoutProvidersImpl/API"
 if ! git -C $API_PATH pull origin master; then
     echo "Could not pull API"
     exit 1
