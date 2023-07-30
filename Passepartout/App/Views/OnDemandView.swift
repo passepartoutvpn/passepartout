@@ -77,12 +77,15 @@ private extension OnDemandView {
                 )
             }
         } footer: {
-            Text(policyFooterDescription)
+            Text(policyFooterDescription ?? "")
         }
     }
 
     // FIXME: l10n, on-demand
     var policyFooterDescription: String {
+        guard onDemand.isEnabled else {
+            return "" // better animation than removing footer completely
+        }
         let suffix: String
         switch onDemand.policy {
         case .any:
