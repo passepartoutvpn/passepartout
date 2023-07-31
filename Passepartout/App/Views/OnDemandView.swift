@@ -77,7 +77,7 @@ private extension OnDemandView {
                 )
             }
         } footer: {
-            Text(policyFooterDescription ?? "")
+            Text(policyFooterDescription)
         }
     }
 
