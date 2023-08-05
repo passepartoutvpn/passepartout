@@ -113,12 +113,12 @@ public final class ProfileManager: ObservableObject {
 // MARK: Index
 
 extension ProfileManager {
-    private var allProfiles: [UUID: Profile] {
+    public var allProfiles: [UUID: Profile] {
         profileRepository.allProfiles()
     }
 
     public var profiles: [Profile] {
-        profileRepository.profiles()
+        Array(allProfiles.values)
     }
 
     public var headers: [Profile.Header] {
