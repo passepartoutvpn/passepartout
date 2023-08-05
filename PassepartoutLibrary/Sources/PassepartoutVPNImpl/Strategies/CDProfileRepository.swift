@@ -44,45 +44,8 @@ final class CDProfileRepository: ProfileRepository {
         observableProfiles.value
     }
 
-    func profiles() -> [Profile] {
-        let request = CDProfile.fetchRequest()
-        request.sortDescriptors = [
-            .init(keyPath: \CDProfile.lastUpdate, ascending: true)
-        ]
-        do {
-            let results = try context.fetch(request)
-            let map = try results.reduce(into: [UUID: Profile]()) {
-                guard let profile = try ProfileMapper.toModel($1) else {
-                    return
-                }
-                $0[profile.id] = profile
-            }
-            return Array(map.values)
-        } catch {
-            pp_log.error("Unable to fetch profiles: \(error)")
-            return []
-        }
-    }
-
     func profile(withId id: UUID) -> Profile? {
-        let request = CDProfile.fetchRequest()
-        request.predicate = NSPredicate(
-            format: "uuid == %@",
-            id.uuidString
-        )
-        request.sortDescriptors = [
-            .init(keyPath: \CDProfile.lastUpdate, ascending: false)
-        ]
-        do {
-            let results = try context.fetch(request)
-            guard let recent = results.first else {
-                return nil
-            }
-            return try ProfileMapper.toModel(recent)
-        } catch {
-            pp_log.error("Unable to fetch profile: \(error)")
-            return nil
-        }
+        observableProfiles.value[id]
     }
 
     func saveProfiles(_ profiles: [Profile]) throws {

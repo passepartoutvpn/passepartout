@@ -28,7 +28,7 @@ import PassepartoutCore
 
 extension ProfileManager {
     public var hasProfiles: Bool {
-        !profiles.isEmpty
+        !allProfiles.isEmpty
     }
 
     public var activeProfile: Profile? {

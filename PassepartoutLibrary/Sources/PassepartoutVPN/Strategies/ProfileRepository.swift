@@ -30,8 +30,6 @@ import PassepartoutCore
 public protocol ProfileRepository {
     func allProfiles() -> [UUID: Profile]
 
-    func profiles() -> [Profile]
-
     func profile(withId id: UUID) -> Profile?
 
     func saveProfiles(_ profiles: [Profile]) throws
