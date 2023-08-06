@@ -118,7 +118,7 @@ private extension DiagnosticsView.OpenVPNView {
 
     var debugLogSection: some View {
         Section {
-            DiagnosticsView.DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
+            DiagnosticsView.DebugLogGroup(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
             Toggle(L10n.Diagnostics.Items.MasksPrivateData.caption, isOn: $vpnManager.masksPrivateData)
         } header: {
             Text(L10n.DebugLog.title)

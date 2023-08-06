@@ -47,6 +47,7 @@ struct SettingsView: View {
             #if !targetEnvironment(macCatalyst)
             preferencesSection
             #endif
+            DiagnosticsSection(currentProfile: profileManager.currentProfile)
             aboutSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
