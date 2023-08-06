@@ -1,5 +1,5 @@
 //
-//  ProfileView+Diagnostics.swift
+//  DiagnosticsSection.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/17/23.
@@ -26,20 +26,18 @@
 import PassepartoutLibrary
 import SwiftUI
 
-extension ProfileView {
-    struct DiagnosticsSection: View {
-        @ObservedObject var currentProfile: ObservableProfile
+struct DiagnosticsSection: View {
+    @ObservedObject var currentProfile: ObservableProfile
 
-        var body: some View {
-            Section {
-                NavigationLink {
-                    DiagnosticsView(
-                        vpnProtocol: currentProfile.value.currentVPNProtocol,
-                        providerName: currentProfile.value.header.providerName
-                    )
-                } label: {
-                    Text(L10n.Diagnostics.title)
-                }
+    var body: some View {
+        Section {
+            NavigationLink {
+                DiagnosticsView(
+                    vpnProtocol: currentProfile.value.currentVPNProtocol,
+                    providerName: currentProfile.value.header.providerName
+                )
+            } label: {
+                Text(L10n.Diagnostics.title)
             }
         }
     }

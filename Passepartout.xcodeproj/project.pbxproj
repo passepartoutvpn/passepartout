@@ -31,7 +31,7 @@
 		0E0F4C6629C84CF60022E884 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0F4C6529C84CF60022E884 /* LogoView.swift */; };
 		0E1AD5CC2A2682DA002AE6E6 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */; };
 		0E1AD5CE2A268645002AE6E6 /* Errors+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1AD5CD2A268645002AE6E6 /* Errors+L10n.swift */; };
-		0E1B5F5C29C506AD00FE7D18 /* ProfileView+Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1B5F5B29C506AC00FE7D18 /* ProfileView+Diagnostics.swift */; };
+		0E1B5F5C29C506AD00FE7D18 /* DiagnosticsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1B5F5B29C506AC00FE7D18 /* DiagnosticsSection.swift */; };
 		0E1F5628287F0ECB00F8ADD7 /* ProviderProfileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F5627287F0ECB00F8ADD7 /* ProviderProfileItem.swift */; };
 		0E1F562B287F0EF100F8ADD7 /* ProviderProfileItem+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F5629287F0EEE00F8ADD7 /* ProviderProfileItem+ViewModel.swift */; };
 		0E293851285A70AC002A6E0E /* AppPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E293850285A70AC002A6E0E /* AppPreference.swift */; };
@@ -319,7 +319,7 @@
 		0E0F4C6529C84CF60022E884 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		0E1AD5CD2A268645002AE6E6 /* Errors+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Errors+L10n.swift"; sourceTree = "<group>"; };
-		0E1B5F5B29C506AC00FE7D18 /* ProfileView+Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Diagnostics.swift"; sourceTree = "<group>"; };
+		0E1B5F5B29C506AC00FE7D18 /* DiagnosticsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticsSection.swift; sourceTree = "<group>"; };
 		0E1C0A52238FFF97009FC087 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0E1F5627287F0ECB00F8ADD7 /* ProviderProfileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfileItem.swift; sourceTree = "<group>"; };
 		0E1F5629287F0EEE00F8ADD7 /* ProviderProfileItem+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProviderProfileItem+ViewModel.swift"; sourceTree = "<group>"; };
@@ -645,6 +645,7 @@
 				0EF2213027E674BD001D0BD7 /* AddProviderViewModel.swift */,
 				0E71ACF827C12E4800F85C4B /* CreditsView.swift */,
 				0E71ACF627C107C900F85C4B /* DebugLogView.swift */,
+				0E1B5F5B29C506AC00FE7D18 /* DiagnosticsSection.swift */,
 				0E5683B827C2825D00EAF1CD /* DiagnosticsView.swift */,
 				0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */,
 				0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */,
@@ -671,7 +672,6 @@
 				0ED30DD127EA1F650057D8A3 /* PaywallView+Purchase.swift */,
 				0E44689527B051C300A14CE4 /* ProfileView.swift */,
 				0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */,
-				0E1B5F5B29C506AC00FE7D18 /* ProfileView+Diagnostics.swift */,
 				0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */,
 				0E3CD482280DAE92007075C0 /* ProfileView+MainMenu.swift */,
 				0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */,
@@ -1491,7 +1491,7 @@
 				0E2A8D4F27B04BBA00207D04 /* OrganizerView.swift in Sources */,
 				0E49F6BB27D7638300385834 /* EndpointAdvancedView+OpenVPN.swift in Sources */,
 				0E71ACEF27C106B500F85C4B /* ProviderPresetView.swift in Sources */,
-				0E1B5F5C29C506AD00FE7D18 /* ProfileView+Diagnostics.swift in Sources */,
+				0E1B5F5C29C506AD00FE7D18 /* DiagnosticsSection.swift in Sources */,
 				0EF2212F27E66F60001D0BD7 /* AddProfileView.swift in Sources */,
 				0E96D2FC2871D94E005EFBCF /* DefaultLightProfileManager.swift in Sources */,
 				0EF0FAF627DD0211007EB181 /* PaywallView.swift in Sources */,
