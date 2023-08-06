@@ -67,6 +67,8 @@
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<true/>
+		<key>UISceneConfigurations</key>
+		<dict/>
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
