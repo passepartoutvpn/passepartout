@@ -32,10 +32,7 @@ struct DiagnosticsSection: View {
     var body: some View {
         Section {
             NavigationLink {
-                DiagnosticsView(
-                    vpnProtocol: currentProfile.value.currentVPNProtocol,
-                    providerName: currentProfile.value.header.providerName
-                )
+                DiagnosticsView(profile: currentProfile.value)
             } label: {
                 Text(L10n.Diagnostics.title)
             }

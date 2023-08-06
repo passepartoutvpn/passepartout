@@ -41,7 +41,7 @@ extension DiagnosticsView {
         var body: some View {
             List {
                 Section {
-                    DebugLogSection(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
+                    DebugLogGroup(appLogURL: appLogURL, tunnelLogURL: tunnelLogURL)
                 } header: {
                     Text(L10n.DebugLog.title)
                 }

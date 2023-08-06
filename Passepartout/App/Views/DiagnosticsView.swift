@@ -27,29 +27,50 @@ import PassepartoutLibrary
 import SwiftUI
 
 struct DiagnosticsView: View {
-    let vpnProtocol: VPNProtocolType
-
-    let providerName: ProviderName?
+    let profile: Profile
 
     var body: some View {
         Group {
-            switch vpnProtocol {
-            case .openVPN:
-                DiagnosticsView.OpenVPNView(
-                    providerName: providerName
-                )
-
-            case .wireGuard:
-                DiagnosticsView.WireGuardView(
-                    providerName: providerName
-                )
+            if !profile.isPlaceholder {
+                vpnView
+            } else {
+                genericView
             }
         }.navigationTitle(L10n.Diagnostics.title)
     }
 }
 
+private extension DiagnosticsView {
+    var vpnView: some View {
+        Group {
+            switch profile.currentVPNProtocol {
+            case .openVPN:
+                DiagnosticsView.OpenVPNView(
+                    providerName: profile.header.providerName
+                )
+
+            case .wireGuard:
+                DiagnosticsView.WireGuardView(
+                    providerName: profile.header.providerName
+                )
+            }
+        }
+    }
+
+    var genericView: some View {
+        List {
+            Section {
+                DebugLogGroup(
+                    appLogURL: Passepartout.shared.logger.logFile,
+                    tunnelLogURL: nil
+                )
+            }
+        }
+    }
+}
+
 extension DiagnosticsView {
-    struct DebugLogSection: View {
+    struct DebugLogGroup: View {
         let appLogURL: URL?
 
         let tunnelLogURL: URL?
@@ -65,7 +86,7 @@ extension DiagnosticsView {
 
 // MARK: -
 
-private extension DiagnosticsView.DebugLogSection {
+private extension DiagnosticsView.DebugLogGroup {
     var appLink: some View {
         navigationLink(
             withTitle: L10n.Diagnostics.Items.AppLog.title,
