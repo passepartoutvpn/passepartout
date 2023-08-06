@@ -64,6 +64,8 @@ private extension DiagnosticsView {
                     appLogURL: Passepartout.shared.logger.logFile,
                     tunnelLogURL: nil
                 )
+            } header: {
+                Text(L10n.DebugLog.title)
             }
         }
     }
