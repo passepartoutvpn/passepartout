@@ -111,7 +111,7 @@ private extension CDProfileRepository {
             context: context,
             request: request,
             mapping: {
-                $0.reduce(into: [UUID: Profile]()) {
+                $0.reduce(into: [:]) {
                     guard let dto = $1 as? CDProfile else {
                         return
                     }

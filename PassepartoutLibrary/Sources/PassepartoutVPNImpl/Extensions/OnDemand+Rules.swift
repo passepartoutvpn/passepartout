@@ -58,11 +58,9 @@ private extension Profile.OnDemand {
 
         // apply exceptions (unless .any)
         if withCustomRules && policy != .any {
-#if os(iOS)
             if Utils.hasCellularData() && withMobileNetwork {
                 rules.append(cellularRule())
             }
-#endif
             if Utils.hasEthernet() && withEthernetNetwork {
                 if let rule = ethernetRule() {
                     rules.append(rule)

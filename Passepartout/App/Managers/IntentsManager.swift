@@ -50,7 +50,7 @@ final class IntentsManager: NSObject, ObservableObject {
         isReloadingShortcuts = true
         do {
             let vs = try await INVoiceShortcutCenter.shared.allVoiceShortcuts()
-            shortcuts = vs.reduce(into: [UUID: Shortcut]()) {
+            shortcuts = vs.reduce(into: [:]) {
                 $0[$1.identifier] = Shortcut($1)
             }
             isReloadingShortcuts = false
