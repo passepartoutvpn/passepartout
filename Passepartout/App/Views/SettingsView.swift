@@ -33,7 +33,7 @@ struct SettingsView: View {
 
     @Environment(\.presentationMode) private var presentationMode
 
-    @AppStorage(AppPreference.locksInBackground.rawValue) private var locksInBackground = false
+    @AppStorage(AppPreference.locksInBackground.key) private var locksInBackground = false
 
     private let versionString = Constants.Global.appVersionString
 

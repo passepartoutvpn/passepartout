@@ -491,7 +491,7 @@ extension View {
 
 extension View {
     func themeLockScreen() -> some View {
-        @AppStorage(AppPreference.locksInBackground.rawValue) var locksInBackground = false
+        @AppStorage(AppPreference.locksInBackground.key) var locksInBackground = false
         return LockableView(
             locksInBackground: $locksInBackground,
             content: {
