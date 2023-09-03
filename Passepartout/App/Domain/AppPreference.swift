@@ -29,6 +29,8 @@ import PassepartoutLibrary
 enum AppPreference: String, KeyStoreDomainLocation {
     case launchesOnLogin
 
+    case enablesCloudSyncing
+
     case isShowingFavorites
 
     case didHandleSubreddit

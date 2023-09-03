@@ -105,7 +105,9 @@ private extension ProfileView {
                     modalType: $modalType
                 )
                 ExtraSection(currentProfile: currentProfile)
-                DiagnosticsSection(currentProfile: currentProfile)
+                Section {
+                    DiagnosticsRow(currentProfile: currentProfile)
+                }
             } else {
                 ProgressView()
             }

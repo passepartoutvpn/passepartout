@@ -921,6 +921,10 @@ internal enum L10n {
         /// Make a donation
         internal static let caption = L10n.tr("Localizable", "settings.items.donate.caption", fallback: "Make a donation")
       }
+      internal enum EnablesCloudSyncing {
+        /// Sync with iCloud
+        internal static let caption = L10n.tr("Localizable", "settings.items.enables_cloud_syncing.caption", fallback: "Sync with iCloud")
+      }
       internal enum LocksInBackground {
         /// Lock app access
         internal static let caption = L10n.tr("Localizable", "settings.items.locks_in_background.caption", fallback: "Lock app access")
