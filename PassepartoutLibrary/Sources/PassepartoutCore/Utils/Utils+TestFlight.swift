@@ -30,8 +30,8 @@ import Foundation
 
 extension Bundle {
     public var isTestFlight: Bool {
-        #if targetEnvironment(simulator)
-        true
+        #if os(iOS)
+        appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
         #elseif targetEnvironment(macCatalyst) || os(macOS)
         var status = noErr
 
@@ -63,8 +63,6 @@ extension Bundle {
             requirement
         )
         return status == errSecSuccess
-        #elseif os(iOS)
-        appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
         #else
         false
         #endif
