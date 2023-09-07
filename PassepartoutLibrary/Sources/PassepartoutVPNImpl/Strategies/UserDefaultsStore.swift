@@ -41,11 +41,11 @@ public struct UserDefaultsStore: KeyValueStore {
             defaults.removeObject(forKey: key(location))
             return
         }
-        defaults.setValue(value, forKey: key(location))
+        defaults.set(value, forKey: key(location))
     }
 
     public func value<L, V>(forLocation location: L) -> V? where L: KeyStoreLocation {
-        defaults.value(forKey: key(location)) as? V
+        defaults.object(forKey: key(location)) as? V
     }
 
     public func removeValue<L>(forLocation location: L) where L: KeyStoreLocation {
