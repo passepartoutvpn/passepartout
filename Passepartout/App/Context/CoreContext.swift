@@ -31,6 +31,10 @@ import TunnelKitManager
 
 @MainActor
 final class CoreContext {
+    let store: KeyValueStore
+
+    private let persistenceManager: PersistenceManager
+
     let upgradeManager: UpgradeManager
 
     let providerManager: ProviderManager
@@ -42,6 +46,8 @@ final class CoreContext {
     private var cancellables: Set<AnyCancellable> = []
 
     init(store: KeyValueStore) {
+        self.store = store
+
         let logger = SwiftyBeaverLogger(
             logFile: Constants.Log.App.url,
             logLevel: Constants.Log.level,
@@ -50,9 +56,10 @@ final class CoreContext {
         Passepartout.shared.logger = logger
         pp_log.info("Logging to: \(logger.logFile!)")
 
-        let persistenceManager = PersistenceManager(store: store)
+        persistenceManager = PersistenceManager(store: store)
         let vpnPersistence = persistenceManager.vpnPersistence(
-            withName: Constants.Persistence.profilesContainerName
+            withName: Constants.Persistence.profilesContainerName,
+            cloudKit: store.isCloudKitEnabled
         )
         let providersPersistence = persistenceManager.providersPersistence(
             withName: Constants.Persistence.providersContainerName
@@ -125,5 +132,24 @@ private extension CoreContext {
         vpnManager.didUpdatePreferences.sink {
             CoreConfiguration.masksPrivateData = $0.masksPrivateData
         }.store(in: &cancellables)
+    }
+}
+
+// MARK: CloudKit
+
+extension CoreContext {
+    func reloadCloudKitObjects() {
+        let vpnPersistence = persistenceManager.vpnPersistence(
+            withName: Constants.Persistence.profilesContainerName,
+            cloudKit: store.isCloudKitEnabled
+        )
+        profileManager.swapProfileRepository(vpnPersistence.profileRepository())
+    }
+
+    func eraseCloudKitStore() {
+        // TODO: CloudKit, erase remote records
+        // - make a copy
+        // - erase all Core Data records
+        // - reopen copy w/ CloudKit disabled
     }
 }

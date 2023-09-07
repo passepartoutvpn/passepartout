@@ -35,7 +35,13 @@ struct SettingsView: View {
 
     @AppStorage(AppPreference.locksInBackground.key) private var locksInBackground = false
 
-    @AppStorage(AppPreference.enablesCloudSyncing.key) private var enablesCloudSyncing = false
+    private var enablesCloudSyncingBinding: Binding<Bool> {
+        .init {
+            AppContext.shared.enablesCloudSyncing
+        } set: {
+            AppContext.shared.enablesCloudSyncing = $0
+        }
+    }
 
     private let versionString = Constants.Global.appVersionString
 
@@ -63,7 +69,7 @@ private extension SettingsView {
             #if !targetEnvironment(macCatalyst)
             Toggle(L10n.Settings.Items.LocksInBackground.caption, isOn: $locksInBackground)
             #endif
-            Toggle(L10n.Settings.Items.EnablesCloudSyncing.caption, isOn: $enablesCloudSyncing)
+            Toggle(L10n.Settings.Items.EnablesCloudSyncing.caption, isOn: enablesCloudSyncingBinding)
         } header: {
             Text(L10n.Preferences.title)
         }

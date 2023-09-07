@@ -31,6 +31,8 @@ import PassepartoutLibrary
 final class AppContext {
     private let coreContext: CoreContext
 
+    private var lastIsCloudKitEnabled: Bool?
+
     let productManager: ProductManager
 
     private let reviewer: Reviewer
@@ -112,5 +114,24 @@ private extension AppContext {
             return false
         }
         return true
+    }
+}
+
+// MARK: CloudKit
+
+extension AppContext {
+    var enablesCloudSyncing: Bool {
+        get {
+            coreContext.store.value(forLocation: AppPreference.enablesCloudSyncing) ?? false
+        }
+        set {
+            lastIsCloudKitEnabled = coreContext.store.isCloudKitEnabled
+            guard newValue != lastIsCloudKitEnabled else {
+                pp_log.debug("CloudKit state did not change")
+                return
+            }
+            coreContext.store.setValue(newValue, forLocation: AppPreference.enablesCloudSyncing)
+            coreContext.reloadCloudKitObjects()
+        }
     }
 }
