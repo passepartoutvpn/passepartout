@@ -25,9 +25,7 @@
 
 import Foundation
 import GenericJSON
-import PassepartoutCore
-import PassepartoutProviders
-import PassepartoutVPN
+import PassepartoutLibrary
 import TunnelKitCore
 import TunnelKitManager
 import TunnelKitOpenVPNCore

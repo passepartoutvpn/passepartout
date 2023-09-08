@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 @MainActor
 public final class UpgradeManager: ObservableObject {
