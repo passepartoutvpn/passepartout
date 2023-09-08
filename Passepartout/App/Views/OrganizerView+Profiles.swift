@@ -183,7 +183,10 @@ private extension OrganizerView.ProfilesList {
 
     func performMigrationsIfNeeded() {
         Task { @MainActor in
-            UpgradeManager.shared.doMigrations(profileManager)
+            UpgradeManager.shared.doMigrations(
+                toVersion: Constants.Global.appVersionNumber,
+                profileManager: profileManager
+            )
         }
     }
 }
