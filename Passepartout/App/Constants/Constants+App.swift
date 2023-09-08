@@ -224,10 +224,10 @@ extension Constants {
     enum Delays {
         static let scrolling = 100
 
-//        @available(*, deprecated, message: "file importer stops showing again after closing with swipe down")
+//        @available(*, deprecated, message: "File importer stops showing again after closing with swipe down")
         static let xxxPresentFileImporter = 200
 
-//        @available(*, deprecated, message: "edited shortcut is outdated in delegate")
+//        @available(*, deprecated, message: "Edited shortcut is outdated in delegate")
         static let xxxReloadEditedShortcut = 200
     }
 

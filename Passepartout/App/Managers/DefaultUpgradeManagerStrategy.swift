@@ -1,5 +1,5 @@
 //
-//  UpgradeManagerStrategy.swift
+//  DefaultUpgradeManagerStrategy.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/20/22.
@@ -24,10 +24,17 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
-public protocol UpgradeManagerStrategy {
-    func doMigrateStore(_ store: KeyValueStore, didMigrate: inout Bool)
+public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
+    public init() {
+    }
 
-    func migratedProfilesToV2() -> [Profile]
+    public func doMigrateStore(_ store: KeyValueStore, lastVersion: String?) {
+        if let lastVersion {
+            pp_log.debug("Upgrade from \(lastVersion)")
+        } else {
+            pp_log.debug("Fresh install")
+        }
+    }
 }

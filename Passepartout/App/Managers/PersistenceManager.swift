@@ -62,7 +62,7 @@ extension PersistenceManager {
 }
 
 private extension PersistenceManager {
-    private enum StoreKey: String, KeyStoreDomainLocation {
+    enum StoreKey: String, KeyStoreDomainLocation {
         case persistenceAuthor
 
         var domain: String {

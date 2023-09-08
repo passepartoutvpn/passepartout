@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import PassepartoutCore
+import PassepartoutLibrary
 
 @MainActor
 public final class UpgradeManager: ObservableObject {
@@ -48,49 +48,29 @@ public final class UpgradeManager: ObservableObject {
     }
 
     public func doMigrations(_ profileManager: ProfileManager) {
-        strategy.doMigrateStore(store, didMigrate: &didMigrateToV2)
+        strategy.doMigrateStore(store, lastVersion: lastVersion)
+        lastVersion = Constants.Global.appVersionNumber
 
-//        profileManager.removeAllProfiles() // testing only
-        guard didMigrateToV2 else {
-            isDoingMigrations = true
-            let migrated = strategy.migratedProfilesToV2()
-            if !migrated.isEmpty {
-                pp_log.info("Migrating \(migrated.count) profiles")
-                migrated.forEach {
-                    var profile = $0
-                    if profileManager.isExistingProfile(withName: profile.header.name) {
-                        profile = profile.renamedUniquely(withLastUpdate: true)
-                    }
-                    profileManager.saveProfile(profile, isActive: nil)
-                }
-            } else {
-                pp_log.info("Nothing to migrate!")
-            }
-            isDoingMigrations = false
-
-            didMigrateToV2 = true
-            return
-        }
         isDoingMigrations = false
     }
 }
 
 // MARK: KeyValueStore
 
-extension UpgradeManager {
-    public internal(set) var didMigrateToV2: Bool {
+private extension UpgradeManager {
+    var lastVersion: String? {
         get {
-            store.value(forLocation: StoreKey.didMigrateToV2) ?? false
+            store.value(forLocation: StoreKey.lastVersion)
         }
         set {
-            store.setValue(newValue, forLocation: StoreKey.didMigrateToV2)
+            store.setValue(newValue, forLocation: StoreKey.lastVersion)
         }
     }
 }
 
 private extension UpgradeManager {
-    private enum StoreKey: String, KeyStoreDomainLocation {
-        case didMigrateToV2
+    enum StoreKey: String, KeyStoreDomainLocation {
+        case lastVersion
 
         var domain: String {
             "Passepartout.UpgradeManager"

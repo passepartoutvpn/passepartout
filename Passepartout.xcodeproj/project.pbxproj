@@ -50,6 +50,9 @@
 		0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */; };
 		0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */; };
 		0E35C09A280E95BB0071FA35 /* ProviderProfileAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E35C099280E95BB0071FA35 /* ProviderProfileAvailability.swift */; };
+		0E3A3C132AAB7C480003A5F6 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A3C112AAB7C470003A5F6 /* UpgradeManager.swift */; };
+		0E3A3C142AAB7C480003A5F6 /* DefaultUpgradeManagerStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A3C122AAB7C480003A5F6 /* DefaultUpgradeManagerStrategy.swift */; };
+		0E3A3C162AAB8AB80003A5F6 /* UpgradeManagerStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A3C152AAB8AB80003A5F6 /* UpgradeManagerStrategy.swift */; };
 		0E3A593C2A50975700B3FE40 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A593B2A50975700B3FE40 /* ErrorHandler.swift */; };
 		0E3B7FCD27E47B3700C66F13 /* AddHostView+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FCC27E47B3700C66F13 /* AddHostView+Name.swift */; };
 		0E3B7FD627E5173A00C66F13 /* ProfileView+VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */; };
@@ -340,6 +343,9 @@
 		0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Scene.swift"; sourceTree = "<group>"; };
 		0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnDemandView+SSID.swift"; sourceTree = "<group>"; };
 		0E35C099280E95BB0071FA35 /* ProviderProfileAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfileAvailability.swift; sourceTree = "<group>"; };
+		0E3A3C112AAB7C470003A5F6 /* UpgradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeManager.swift; sourceTree = "<group>"; };
+		0E3A3C122AAB7C480003A5F6 /* DefaultUpgradeManagerStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUpgradeManagerStrategy.swift; sourceTree = "<group>"; };
+		0E3A3C152AAB8AB80003A5F6 /* UpgradeManagerStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeManagerStrategy.swift; sourceTree = "<group>"; };
 		0E3A593B2A50975700B3FE40 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		0E3B7FCC27E47B3700C66F13 /* AddHostView+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddHostView+Name.swift"; sourceTree = "<group>"; };
 		0E3B7FD527E5173A00C66F13 /* ProfileView+VPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+VPN.swift"; sourceTree = "<group>"; };
@@ -696,9 +702,12 @@
 		0E3A593F2A54ACC900B3FE40 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				0E3A3C122AAB7C480003A5F6 /* DefaultUpgradeManagerStrategy.swift */,
 				0E9C232F27F47032007D5FC7 /* IntentsManager.swift */,
 				0E7A8C092A1D410400780F4B /* PersistenceManager.swift */,
 				0E53249627D26B51002565C3 /* ProductManager.swift */,
+				0E3A3C112AAB7C470003A5F6 /* UpgradeManager.swift */,
+				0E3A3C152AAB8AB80003A5F6 /* UpgradeManagerStrategy.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1466,6 +1475,7 @@
 				0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */,
 				0E5468002867AC9A00F74D1C /* MacUtils.swift in Sources */,
 				0E0F4C6429C84B5A0022E884 /* LockableView.swift in Sources */,
+				0E3A3C132AAB7C480003A5F6 /* UpgradeManager.swift in Sources */,
 				0E96D3052872010A005EFBCF /* DefaultLightVPNManager.swift in Sources */,
 				0EBE880F281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift in Sources */,
 				0ED30DCF27EA1EF80057D8A3 /* PaywallView+Beta.swift in Sources */,
@@ -1500,6 +1510,7 @@
 				0E5349BE27C16A4500C71BB3 /* StyledPicker.swift in Sources */,
 				0E2C172B27CB63F9007E8488 /* Reviewer.swift in Sources */,
 				0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */,
+				0E3A3C162AAB8AB80003A5F6 /* UpgradeManagerStrategy.swift in Sources */,
 				0E021D9C284E68580077EF5D /* CoreContext.swift in Sources */,
 				0E7A8C0A2A1D410500780F4B /* PersistenceManager.swift in Sources */,
 				A38D607728AFCFD20005C271 /* SettingsView.swift in Sources */,
@@ -1511,6 +1522,7 @@
 				0EBC075527EBC83800208AD9 /* MailComposerView.swift in Sources */,
 				0EF0FAF727DD159C007EB181 /* IntentDispatcher.swift in Sources */,
 				0E0838FD2877334300A34EC0 /* DefaultLightProviderManager.swift in Sources */,
+				0E3A3C142AAB7C480003A5F6 /* DefaultUpgradeManagerStrategy.swift in Sources */,
 				0E0F4C6629C84CF60022E884 /* LogoView.swift in Sources */,
 				0E039279281890B100827C10 /* AddHostView.swift in Sources */,
 				0E5467F72867A57000F74D1C /* MacBridge.swift in Sources */,

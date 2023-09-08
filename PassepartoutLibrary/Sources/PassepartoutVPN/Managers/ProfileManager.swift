@@ -213,7 +213,7 @@ extension ProfileManager {
         profileRepository.removeProfiles(withIds: ids)
     }
 
-    @available(*, deprecated, message: "only use for testing")
+    @available(*, deprecated, message: "Only use for testing")
     public func removeAllProfiles() {
         let ids = Array(allProfiles.keys)
         removeProfiles(withIds: ids)
@@ -517,7 +517,7 @@ extension ProfileManager {
 }
 
 private extension ProfileManager {
-    private enum StoreKey: String, KeyStoreDomainLocation {
+    enum StoreKey: String, KeyStoreDomainLocation {
         case activeProfileId
 
         var domain: String {
