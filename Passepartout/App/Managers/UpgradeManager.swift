@@ -48,29 +48,7 @@ public final class UpgradeManager: ObservableObject {
     }
 
     public func doMigrations(_ profileManager: ProfileManager) {
-        strategy.doMigrateStore(store, didMigrate: &didMigrateToV2)
-
-//        profileManager.removeAllProfiles() // testing only
-        guard didMigrateToV2 else {
-            isDoingMigrations = true
-            let migrated = strategy.migratedProfilesToV2()
-            if !migrated.isEmpty {
-                pp_log.info("Migrating \(migrated.count) profiles")
-                migrated.forEach {
-                    var profile = $0
-                    if profileManager.isExistingProfile(withName: profile.header.name) {
-                        profile = profile.renamedUniquely(withLastUpdate: true)
-                    }
-                    profileManager.saveProfile(profile, isActive: nil)
-                }
-            } else {
-                pp_log.info("Nothing to migrate!")
-            }
-            isDoingMigrations = false
-
-            didMigrateToV2 = true
-            return
-        }
+        strategy.doMigrateStore(store)
         isDoingMigrations = false
     }
 }
@@ -78,19 +56,11 @@ public final class UpgradeManager: ObservableObject {
 // MARK: KeyValueStore
 
 extension UpgradeManager {
-    public internal(set) var didMigrateToV2: Bool {
-        get {
-            store.value(forLocation: StoreKey.didMigrateToV2) ?? false
-        }
-        set {
-            store.setValue(newValue, forLocation: StoreKey.didMigrateToV2)
-        }
-    }
 }
 
 private extension UpgradeManager {
     private enum StoreKey: String, KeyStoreDomainLocation {
-        case didMigrateToV2
+        case didMigrateToV2 // temporarily retain for future migrations
 
         var domain: String {
             "Passepartout.UpgradeManager"
