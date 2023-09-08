@@ -89,8 +89,8 @@ final class DefaultLightProviderManager: LightProviderManager {
     init() {
         providerManager.didUpdateProviders
             .receive(on: DispatchQueue.main)
-            .sink {
-                self.delegate?.didUpdateProviders()
+            .sink { [weak self] in
+                self?.delegate?.didUpdateProviders()
             }.store(in: &subscriptions)
     }
 

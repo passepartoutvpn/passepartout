@@ -62,8 +62,8 @@ final class DefaultLightProfileManager: LightProfileManager {
     init() {
         profileManager.didUpdateProfiles
             .receive(on: DispatchQueue.main)
-            .sink {
-                self.delegate?.didUpdateProfiles()
+            .sink { [weak self] in
+                self?.delegate?.didUpdateProfiles()
             }.store(in: &subscriptions)
     }
 
