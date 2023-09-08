@@ -59,7 +59,7 @@ extension UpgradeManager {
 }
 
 private extension UpgradeManager {
-    private enum StoreKey: String, KeyStoreDomainLocation {
+    enum StoreKey: String, KeyStoreDomainLocation {
         case didMigrateToV2 // temporarily retain for future migrations
 
         var domain: String {

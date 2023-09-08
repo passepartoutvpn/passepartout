@@ -338,7 +338,7 @@ extension VPNManager {
 }
 
 private extension VPNManager {
-    private enum StoreKey: String, KeyStoreDomainLocation {
+    enum StoreKey: String, KeyStoreDomainLocation {
         case tunnelLogPath
 
         case tunnelLogFormat

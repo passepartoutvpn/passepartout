@@ -517,7 +517,7 @@ extension ProfileManager {
 }
 
 private extension ProfileManager {
-    private enum StoreKey: String, KeyStoreDomainLocation {
+    enum StoreKey: String, KeyStoreDomainLocation {
         case activeProfileId
 
         var domain: String {
