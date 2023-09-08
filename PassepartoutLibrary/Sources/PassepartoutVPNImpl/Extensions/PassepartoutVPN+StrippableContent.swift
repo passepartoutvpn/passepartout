@@ -39,7 +39,7 @@ extension Profile.Account: StrippableContent {
 extension Profile.OnDemand: StrippableContent {
     public var stripped: Self {
         var copy = self
-        copy.withSSIDs = copy.withSSIDs.reduce(into: [String: Bool]()) {
+        copy.withSSIDs = copy.withSSIDs.reduce(into: [:]) {
             guard let strippedKey = $1.key.strippedNotEmpty else {
                 return
             }
