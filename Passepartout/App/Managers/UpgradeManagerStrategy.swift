@@ -27,5 +27,5 @@ import Foundation
 import PassepartoutCore
 
 public protocol UpgradeManagerStrategy {
-    func doMigrateStore(_ store: KeyValueStore)
+    func doMigrateStore(_ store: KeyValueStore, lastVersion: String?)
 }

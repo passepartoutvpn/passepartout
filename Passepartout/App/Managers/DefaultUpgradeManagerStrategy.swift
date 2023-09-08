@@ -30,6 +30,6 @@ public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
     public init() {
     }
 
-    public func doMigrateStore(_ store: KeyValueStore) {
+    public func doMigrateStore(_ store: KeyValueStore, lastVersion: String?) {
     }
 }

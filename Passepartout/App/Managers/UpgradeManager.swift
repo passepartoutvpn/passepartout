@@ -48,18 +48,30 @@ public final class UpgradeManager: ObservableObject {
     }
 
     public func doMigrations(_ profileManager: ProfileManager) {
-        strategy.doMigrateStore(store)
+        strategy.doMigrateStore(store, lastVersion: lastVersion)
+        lastVersion = Constants.Global.appVersionNumber
+
         isDoingMigrations = false
     }
 }
 
 // MARK: KeyValueStore
 
-extension UpgradeManager {
+private extension UpgradeManager {
+    var lastVersion: String? {
+        get {
+            store.value(forLocation: StoreKey.lastVersion)
+        }
+        set {
+            store.setValue(newValue, forLocation: StoreKey.lastVersion)
+        }
+    }
 }
 
 private extension UpgradeManager {
     enum StoreKey: String, KeyStoreDomainLocation {
+        case lastVersion
+
         case didMigrateToV2 // temporarily retain for future migrations
 
         var domain: String {
