@@ -30,11 +30,11 @@ public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
     public init() {
     }
 
-    public func doMigrateStore(_ store: KeyValueStore, lastVersion: String?) {
-        if let lastVersion {
-            pp_log.debug("Upgrade from \(lastVersion)")
-        } else {
+    public func doMigrate(store: KeyValueStore, lastVersion: String?) {
+        guard let lastVersion else {
             pp_log.debug("Fresh install")
+            return
         }
+        pp_log.debug("Upgrade from \(lastVersion)")
     }
 }
