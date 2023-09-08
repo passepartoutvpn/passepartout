@@ -47,7 +47,10 @@ final class DefaultLightVPNManager: LightVPNManager {
         vpnManager.currentState.$isEnabled
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink {
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
                 self.didUpdateState(
                     isEnabled: $0,
                     vpnStatus: self.vpnManager.currentState.vpnStatus.asLightVPNStatus
@@ -57,7 +60,10 @@ final class DefaultLightVPNManager: LightVPNManager {
         vpnManager.currentState.$vpnStatus
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink {
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
                 self.didUpdateState(
                     isEnabled: self.vpnManager.currentState.isEnabled,
                     vpnStatus: $0.asLightVPNStatus
