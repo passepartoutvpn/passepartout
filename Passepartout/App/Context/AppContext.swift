@@ -79,19 +79,19 @@ private extension AppContext {
         coreContext.vpnManager.currentState.$vpnStatus
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink {
+            .sink { [weak self] in
                 if $0 == .connected {
                     pp_log.info("VPN successful connection, report to Reviewer")
-                    self.reviewer.reportEvent()
+                    self?.reviewer.reportEvent()
                 }
             }.store(in: &cancellables)
 
         productManager.didRefundProducts
             .receive(on: DispatchQueue.main)
-            .sink {
+            .sink { [weak self] in
                 Task {
                     pp_log.info("Refunds detected, uninstalling VPN profile")
-                    await self.coreContext.vpnManager.uninstall()
+                    await self?.coreContext.vpnManager.uninstall()
                 }
             }.store(in: &cancellables)
     }

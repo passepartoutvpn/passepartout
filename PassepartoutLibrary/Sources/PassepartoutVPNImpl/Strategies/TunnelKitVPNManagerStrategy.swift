@@ -126,9 +126,9 @@ extension TunnelKitVPNManagerStrategy {
         vpnState
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
-            .sink {
-                self.currentState?.isEnabled = $0.isEnabled
-                self.currentState?.vpnStatus = $0.vpnStatus
+            .sink { [weak self] in
+                self?.currentState?.isEnabled = $0.isEnabled
+                self?.currentState?.vpnStatus = $0.vpnStatus
             }.store(in: &cancellables)
     }
 
@@ -285,8 +285,8 @@ private extension TunnelKitVPNManagerStrategy {
         }
         dataCountTimer = Timer.TimerPublisher(interval: dataCountInterval, runLoop: .main, mode: .common)
             .autoconnect()
-            .sink {
-                self.onDataCount($0)
+            .sink { [weak self] in
+                self?.onDataCount($0)
             }
     }
 

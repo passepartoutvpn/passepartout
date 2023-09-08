@@ -156,19 +156,19 @@ extension VPNManager {
         profileManager.didUpdateActiveProfile
             .dropFirst()
             .removeDuplicates()
-            .sink { newId in
+            .sink { [weak self] newId in
                 Task {
-                    await self.willUpdateActiveId(newId)
+                    await self?.willUpdateActiveId(newId)
                 }
             }.store(in: &cancellables)
 
         profileManager.currentProfile.$value
             .dropFirst()
             .removeDuplicates()
-            .sink { newProfile in
+            .sink { [weak self] newProfile in
                 Task {
                     do {
-                        try await self.willUpdateCurrentProfile(newProfile)
+                        try await self?.willUpdateCurrentProfile(newProfile)
                     } catch {
                         pp_log.error("Unable to apply profile update: \(error)")
                     }

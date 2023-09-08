@@ -348,14 +348,14 @@ extension ProfileManager {
 extension ProfileManager {
     public func observeUpdates() {
         $internalActiveProfileId
-            .sink {
-                self.didUpdateActiveProfile.send($0)
+            .sink { [weak self] in
+                self?.didUpdateActiveProfile.send($0)
             }.store(in: &cancellables)
 
         profileRepository.willUpdateProfiles()
             .dropFirst()
-            .sink {
-                self.willUpdateProfiles($0)
+            .sink { [weak self] in
+                self?.willUpdateProfiles($0)
             }.store(in: &cancellables)
     }
 

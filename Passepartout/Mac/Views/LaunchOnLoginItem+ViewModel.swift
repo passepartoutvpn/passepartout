@@ -70,7 +70,10 @@ extension LaunchOnLoginItem {
 
         func subscribe(_ block: @escaping (Bool) -> Void) {
             objectWillChange
-                .sink {
+                .sink { [weak self] in
+                    guard let self else {
+                        return
+                    }
                     block(self.persistentlyLaunchesOnLogin)
                 }.store(in: &subscriptions)
         }
