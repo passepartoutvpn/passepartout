@@ -492,7 +492,11 @@ extension ProfileManager {
 
 extension ProfileManager {
     public func swapProfileRepository(_ newProfileRepository: ProfileRepository) {
-        // TODO: swap ProfileRepository and re-register to async updates
+        cancellables.removeAll()
+
+        objectWillChange.send()
+        profileRepository = newProfileRepository
+        observeUpdates()
     }
 }
 
