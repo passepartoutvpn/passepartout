@@ -133,7 +133,7 @@ extension AppContext {
                 pp_log.debug("CloudKit state did not change")
                 return
             }
-            coreContext.reloadCloudKitObjects()
+            coreContext.reloadCloudKitObjects(isEnabled: isCloudSyncingEnabled)
             lastIsCloudSyncingEnabled = isCloudSyncingEnabled
         }
     }

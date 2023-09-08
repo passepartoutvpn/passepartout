@@ -138,10 +138,10 @@ private extension CoreContext {
 // MARK: CloudKit
 
 extension CoreContext {
-    func reloadCloudKitObjects() {
+    func reloadCloudKitObjects(isEnabled: Bool) {
         let vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName,
-            cloudKit: store.isCloudSyncingEnabled
+            cloudKit: isEnabled
         )
         profileManager.swapProfileRepository(vpnPersistence.profileRepository())
     }
