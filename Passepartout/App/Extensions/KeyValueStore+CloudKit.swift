@@ -27,21 +27,36 @@ import Foundation
 import PassepartoutLibrary
 
 extension KeyValueStore {
-    static var cloudKitToken: Any? {
+
+    // MARK: Support
+
+    private var cloudKitToken: Any? {
         FileManager.default.ubiquityIdentityToken
     }
 
-    static var isCloudKitGloballyEnabled: Bool {
+    var isCloudKitSupported: Bool {
         cloudKitToken != nil
     }
 
-    var isCloudKitEnabled: Bool {
-        guard let token = Self.cloudKitToken else {
+    // MARK: Preference
+
+    var shouldEnableCloudSyncing: Bool {
+        get {
+            value(forLocation: AppPreference.shouldEnableCloudSyncing) ?? false
+        }
+        set {
+            setValue(newValue, forLocation: AppPreference.shouldEnableCloudSyncing)
+        }
+    }
+
+    // MARK: Computed state
+
+    var isCloudSyncingEnabled: Bool {
+        guard isCloudKitSupported else {
             pp_log.debug("CloudKit unavailable")
             return false
         }
-        pp_log.debug("CloudKit available: \(token)")
-        let isEnabled = value(forLocation: AppPreference.enablesCloudSyncing) ?? false
+        let isEnabled = shouldEnableCloudSyncing
         pp_log.debug("CloudKit enabled: \(isEnabled)")
         return isEnabled
     }

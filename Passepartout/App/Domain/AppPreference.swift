@@ -29,7 +29,7 @@ import PassepartoutLibrary
 enum AppPreference: String, KeyStoreDomainLocation {
     case launchesOnLogin
 
-    case enablesCloudSyncing
+    case shouldEnableCloudSyncing
 
     case isShowingFavorites
 

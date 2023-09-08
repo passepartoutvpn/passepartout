@@ -26,7 +26,7 @@
 import Foundation
 import PassepartoutCore
 
-public struct UserDefaultsStore: KeyValueStore {
+public class UserDefaultsStore: KeyValueStore {
     private let defaults: UserDefaults
 
     private let key: (any KeyStoreLocation) -> String

@@ -33,7 +33,7 @@ public protocol KeyStoreDomainLocation: KeyStoreLocation {
     var domain: String { get }
 }
 
-public protocol KeyValueStore {
+public protocol KeyValueStore: AnyObject {
     func setValue<L, V>(_ value: V?, forLocation location: L) where L: KeyStoreLocation
 
     func value<L, V>(forLocation location: L) -> V? where L: KeyStoreLocation

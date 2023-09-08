@@ -59,7 +59,7 @@ final class CoreContext {
         persistenceManager = PersistenceManager(store: store)
         let vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName,
-            cloudKit: store.isCloudKitEnabled
+            cloudKit: store.isCloudSyncingEnabled
         )
         let providersPersistence = persistenceManager.providersPersistence(
             withName: Constants.Persistence.providersContainerName
@@ -141,7 +141,7 @@ extension CoreContext {
     func reloadCloudKitObjects() {
         let vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName,
-            cloudKit: store.isCloudKitEnabled
+            cloudKit: store.isCloudSyncingEnabled
         )
         profileManager.swapProfileRepository(vpnPersistence.profileRepository())
     }
