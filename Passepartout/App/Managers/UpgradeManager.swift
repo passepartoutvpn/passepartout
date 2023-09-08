@@ -72,7 +72,8 @@ private extension UpgradeManager {
     enum StoreKey: String, KeyStoreDomainLocation {
         case lastVersion
 
-        case didMigrateToV2 // temporarily retain for future migrations
+        @available(*, deprecated, message: "Retain temporarily for future migrations")
+        case didMigrateToV2
 
         var domain: String {
             "Passepartout.UpgradeManager"
