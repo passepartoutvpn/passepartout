@@ -577,7 +577,7 @@ extension View {
 // MARK: Hacks
 
 extension View {
-    @available(*, deprecated, message: "mitigates multiline text truncation (1.0 does not work though)")
+    @available(*, deprecated, message: "Mitigates multiline text truncation (1.0 does not work though)")
     func xxxThemeTruncation() -> some View {
         minimumScaleFactor(0.5)
     }

@@ -213,7 +213,7 @@ extension ProfileManager {
         profileRepository.removeProfiles(withIds: ids)
     }
 
-    @available(*, deprecated, message: "only use for testing")
+    @available(*, deprecated, message: "Only use for testing")
     public func removeAllProfiles() {
         let ids = Array(allProfiles.keys)
         removeProfiles(withIds: ids)
