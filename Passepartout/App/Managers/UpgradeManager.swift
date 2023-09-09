@@ -72,8 +72,12 @@ private extension UpgradeManager {
     }
 }
 
-private extension UpgradeManager {
+extension UpgradeManager {
     enum StoreKey: String, KeyStoreDomainLocation {
+
+        @available(*, deprecated, message: "Retain temporarily for migrations")
+        case existingKeyBefore_2_2_0 = "didMigrateToV2"
+
         case lastVersion
 
         var domain: String {
