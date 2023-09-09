@@ -43,7 +43,7 @@ final class AppContext {
         self.coreContext = coreContext
 
         productManager = ProductManager(
-            appType: Constants.InApp.appType,
+            overriddenAppType: Constants.InApp.overriddenAppType,
             buildProducts: Constants.InApp.buildProducts
         )
 

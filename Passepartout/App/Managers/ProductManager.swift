@@ -29,20 +29,39 @@ import Kvitto
 import PassepartoutLibrary
 import StoreKit
 
+@MainActor
 final class ProductManager: NSObject, ObservableObject {
     enum AppType: Int {
+        case undefined = -1
+
         case freemium = 0
 
         case beta = 1
 
         case fullVersion = 2
+
+        var isRestricted: Bool {
+            switch self {
+            case .undefined, .beta:
+                return true
+
+            default:
+                return false
+            }
+        }
     }
 
-    let appType: AppType
+    private let overriddenAppType: AppType?
+
+    private let sandboxChecker: SandboxChecker
+
+    private var subscriptions: Set<AnyCancellable>
 
     let buildProducts: BuildProducts
 
     let didRefundProducts = PassthroughSubject<Void, Never>()
+
+    @Published private(set) var appType: AppType
 
     @Published private(set) var isRefreshingProducts = false
 
@@ -73,9 +92,13 @@ final class ProductManager: NSObject, ObservableObject {
 
     private var refreshRequest: SKReceiptRefreshRequest?
 
-    init(appType: AppType, buildProducts: BuildProducts) {
-        self.appType = appType
+    init(overriddenAppType: AppType?, buildProducts: BuildProducts) {
+        self.overriddenAppType = overriddenAppType
         self.buildProducts = buildProducts
+
+        appType = .undefined
+        sandboxChecker = SandboxChecker(bundle: .main)
+        subscriptions = []
 
         products = []
         inApp = InApp()
@@ -88,8 +111,20 @@ final class ProductManager: NSObject, ObservableObject {
 
         reloadReceipt()
         SKPaymentQueue.default().add(self)
-
         refreshProducts()
+
+        sandboxChecker.$isSandbox
+            .dropFirst() // ignore initial value
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
+                self.appType = overriddenAppType ?? ($0 ? .beta : .freemium)
+                pp_log.info("App type: \(self.appType)")
+                self.reloadReceipt()
+            }.store(in: &subscriptions)
+
+        sandboxChecker.check()
     }
 
     deinit {
@@ -294,7 +329,7 @@ private extension ProductManager {
         let receipt = Receipt(contentsOfURL: url)
 
         // in TestFlight, attempt fallback to existing release receipt
-        if Bundle.main.isTestFlight {
+        if appType == .beta {
             guard let receipt else {
                 let releaseUrl = url.deletingLastPathComponent().appendingPathComponent("receipt")
                 guard releaseUrl != url else {

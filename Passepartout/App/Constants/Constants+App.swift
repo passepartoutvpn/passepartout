@@ -39,10 +39,6 @@ extension Constants {
         static let appStoreId: String = bundleConfig("appstore_id")
 
         static let appGroupId: String = bundleConfig("group_id")
-
-        static let isBeta: Bool = {
-            Bundle.main.isTestFlight
-        }()
     }
 
     enum CloudKit {
@@ -56,7 +52,7 @@ extension Constants {
     }
 
     enum InApp {
-        static var appType: ProductManager.AppType {
+        static var overriddenAppType: ProductManager.AppType? {
             if let envString = ProcessInfo.processInfo.environment["APP_TYPE"],
                let envValue = Int(envString),
                let testAppType = ProductManager.AppType(rawValue: envValue) {
@@ -68,7 +64,7 @@ extension Constants {
 
                 return testAppType
             }
-            return App.isBeta ? .beta : .freemium
+            return nil
         }
 
         #if targetEnvironment(macCatalyst)

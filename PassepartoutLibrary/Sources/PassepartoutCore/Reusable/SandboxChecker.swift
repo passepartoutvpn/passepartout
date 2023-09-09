@@ -1,5 +1,5 @@
 //
-//  Utils+TestFlight.swift
+//  SandboxChecker.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/18/22.
@@ -28,19 +28,35 @@ import Foundation
 // https://stackoverflow.com/a/32238344/784615
 // https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
 
-extension Bundle {
-    public var isTestFlight: Bool {
-        #if targetEnvironment(simulator)
-        true
+@MainActor
+public final class SandboxChecker: ObservableObject {
+    private let bundle: Bundle
+
+    @Published public private(set) var isSandbox = false
+
+    public init(bundle: Bundle) {
+        self.bundle = bundle
+    }
+
+    public func check() {
+        Task {
+            isSandbox = await isSandboxBuild()
+            pp_log.info("Sandbox build: \(isSandbox)")
+        }
+    }
+
+    private func isSandboxBuild() async -> Bool {
+        #if os(iOS)
+        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
         #elseif targetEnvironment(macCatalyst) || os(macOS)
         var status = noErr
 
         var code: SecStaticCode?
-        status = SecStaticCodeCreateWithPath(bundleURL as CFURL, [], &code)
+        status = SecStaticCodeCreateWithPath(bundle.bundleURL as CFURL, [], &code)
         guard status == noErr else {
             return false
         }
-        guard let code = code else {
+        guard let code else {
             return false
         }
 
@@ -53,7 +69,7 @@ extension Bundle {
         guard status == noErr else {
             return false
         }
-        guard let requirement = requirement else {
+        guard let requirement else {
             return false
         }
 
@@ -63,8 +79,6 @@ extension Bundle {
             requirement
         )
         return status == errSecSuccess
-        #elseif os(iOS)
-        appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
         #else
         false
         #endif
