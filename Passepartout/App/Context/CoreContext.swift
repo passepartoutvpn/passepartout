@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CloudKit
 import Combine
 import Foundation
 import PassepartoutLibrary
@@ -34,6 +35,8 @@ final class CoreContext {
     let store: KeyValueStore
 
     private let persistenceManager: PersistenceManager
+
+    private(set) var vpnPersistence: VPNPersistence
 
     let upgradeManager: UpgradeManager
 
@@ -63,7 +66,7 @@ final class CoreContext {
         upgradeManager.migrate(toVersion: Constants.Global.appVersionNumber)
 
         persistenceManager = PersistenceManager(store: store)
-        let vpnPersistence = persistenceManager.vpnPersistence(
+        vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName,
             cloudKit: store.isCloudSyncingEnabled
         )
@@ -140,14 +143,17 @@ private extension CoreContext {
 
 extension CoreContext {
     func reloadCloudKitObjects(isEnabled: Bool) {
-        let vpnPersistence = persistenceManager.vpnPersistence(
+        vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName,
             cloudKit: isEnabled
         )
         profileManager.swapProfileRepository(vpnPersistence.profileRepository())
     }
 
-    func eraseCloudKitStore() {
-        // TODO: iCloud, erase remote records
+    func eraseCloudKitStore() async {
+        await vpnPersistence.eraseCloudKitStore(
+            fromContainerWithId: Constants.CloudKit.containerId,
+            zoneId: .init(zoneName: Constants.CloudKit.coreDataZone)
+        )
     }
 }

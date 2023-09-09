@@ -37,6 +37,8 @@ struct SettingsView: View {
 
     @Binding private var shouldEnableCloudSyncing: Bool
 
+    @State private var isErasingCloudStore = false
+
     private let versionString = Constants.Global.appVersionString
 
     init() {
@@ -52,7 +54,10 @@ struct SettingsView: View {
 
     var body: some View {
         List {
+            #if !targetEnvironment(macCatalyst)
             preferencesSection
+            #endif
+            iCloudSection
             aboutSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
@@ -66,12 +71,31 @@ struct SettingsView: View {
 private extension SettingsView {
     var preferencesSection: some View {
         Section {
-            #if !targetEnvironment(macCatalyst)
             Toggle(L10n.Settings.Items.LocksInBackground.caption, isOn: $locksInBackground)
-            #endif
-            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $shouldEnableCloudSyncing)
         } header: {
             Text(L10n.Preferences.title)
+        }
+    }
+
+    var iCloudSection: some View {
+        Section {
+            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $shouldEnableCloudSyncing.themeAnimation())
+            if !shouldEnableCloudSyncing {
+                Button(L10n.Settings.Items.EraseCloudStore.caption) {
+                    isErasingCloudStore = true
+                    Task {
+                        await AppContext.shared.eraseCloudKitStore()
+                        isErasingCloudStore = false
+                    }
+                }.withTrailingProgress(when: isErasingCloudStore)
+                .disabled(isErasingCloudStore)
+            }
+        } header: {
+            Text(Unlocalized.Other.iCloud)
+        } footer: {
+            if !shouldEnableCloudSyncing {
+                Text(L10n.Settings.Sections.Icloud.footer)
+            }
         }
     }
 

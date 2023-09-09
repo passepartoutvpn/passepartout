@@ -45,6 +45,12 @@ extension Constants {
         }()
     }
 
+    enum CloudKit {
+        static let containerId: String = bundleConfig("cloudkit_id")
+
+        static let coreDataZone = "com.apple.coredata.cloudkit.zone"
+    }
+
     enum Plugins {
         static let macBridgeName = "PassepartoutMac.bundle"
     }

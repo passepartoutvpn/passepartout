@@ -101,6 +101,8 @@
 		<string>$(CFG_APPSTORE_ID)</string>
 		<key>group_id</key>
 		<string>group.$(CFG_GROUP_ID)</string>
+		<key>cloudkit_id</key>
+		<string>iCloud.$(CFG_GROUP_ID)</string>
 	</dict>
 </dict>
 </plist>
