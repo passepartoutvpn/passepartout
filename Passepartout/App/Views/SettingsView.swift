@@ -60,6 +60,7 @@ struct SettingsView: View {
             preferencesSection
             #endif
             iCloudSection
+            diagnosticsSection
             aboutSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
@@ -97,20 +98,24 @@ private extension SettingsView {
         }
     }
 
+    var diagnosticsSection: some View {
+        Section {
+            DiagnosticsRow(currentProfile: profileManager.currentProfile)
+        }
+    }
+
     var aboutSection: some View {
         Section {
-            NavigationLink {
-                AboutView()
-            } label: {
-                Text(L10n.About.title)
-            }
             NavigationLink {
                 DonateView()
             } label: {
                 Text(L10n.Settings.Items.Donate.caption)
             }.disabled(!productManager.canMakePayments())
-
-            DiagnosticsRow(currentProfile: profileManager.currentProfile)
+            NavigationLink {
+                AboutView()
+            } label: {
+                Text(L10n.About.title)
+            }
         } footer: {
             HStack {
                 Spacer()
