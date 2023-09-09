@@ -42,7 +42,7 @@ public final class ProfileManager: ObservableObject {
 
     private let providerManager: ProviderManager
 
-    private let profileRepository: ProfileRepository
+    private var profileRepository: ProfileRepository
 
     private let keychain: SecretRepository
 
@@ -485,6 +485,18 @@ extension ProfileManager {
             pp_log.error("Unable to import missing provider: \(error)")
             throw Passepartout.ProfileError.failedToFetchProvider(profileId: profile.id, error: error)
         }
+    }
+}
+
+// MARK: Repository
+
+extension ProfileManager {
+    public func swapProfileRepository(_ newProfileRepository: ProfileRepository) {
+        cancellables.removeAll()
+
+        objectWillChange.send()
+        profileRepository = newProfileRepository
+        observeUpdates()
     }
 }
 

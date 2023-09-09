@@ -31,6 +31,10 @@ import TunnelKitManager
 
 @MainActor
 final class CoreContext {
+    let store: KeyValueStore
+
+    private let persistenceManager: PersistenceManager
+
     let upgradeManager: UpgradeManager
 
     let providerManager: ProviderManager
@@ -42,6 +46,8 @@ final class CoreContext {
     private var cancellables: Set<AnyCancellable> = []
 
     init(store: KeyValueStore) {
+        self.store = store
+
         let logger = SwiftyBeaverLogger(
             logFile: Constants.Log.App.url,
             logLevel: Constants.Log.level,
@@ -50,17 +56,19 @@ final class CoreContext {
         Passepartout.shared.logger = logger
         pp_log.info("Logging to: \(logger.logFile!)")
 
-        let persistenceManager = PersistenceManager(store: store)
-        let vpnPersistence = persistenceManager.vpnPersistence(
-            withName: Constants.Persistence.profilesContainerName
-        )
-        let providersPersistence = persistenceManager.providersPersistence(
-            withName: Constants.Persistence.providersContainerName
-        )
-
         upgradeManager = UpgradeManager(
             store: store,
             strategy: DefaultUpgradeManagerStrategy()
+        )
+        upgradeManager.migrate(toVersion: Constants.Global.appVersionNumber)
+
+        persistenceManager = PersistenceManager(store: store)
+        let vpnPersistence = persistenceManager.vpnPersistence(
+            withName: Constants.Persistence.profilesContainerName,
+            cloudKit: store.isCloudSyncingEnabled
+        )
+        let providersPersistence = persistenceManager.providersPersistence(
+            withName: Constants.Persistence.providersContainerName
         )
 
         let remoteProvidersStrategy = APIRemoteProvidersStrategy(
@@ -125,5 +133,21 @@ private extension CoreContext {
         vpnManager.didUpdatePreferences.sink {
             CoreConfiguration.masksPrivateData = $0.masksPrivateData
         }.store(in: &cancellables)
+    }
+}
+
+// MARK: CloudKit
+
+extension CoreContext {
+    func reloadCloudKitObjects(isEnabled: Bool) {
+        let vpnPersistence = persistenceManager.vpnPersistence(
+            withName: Constants.Persistence.profilesContainerName,
+            cloudKit: isEnabled
+        )
+        profileManager.swapProfileRepository(vpnPersistence.profileRepository())
+    }
+
+    func eraseCloudKitStore() {
+        // TODO: iCloud, erase remote records
     }
 }

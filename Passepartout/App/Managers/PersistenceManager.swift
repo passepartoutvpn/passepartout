@@ -39,8 +39,8 @@ final class PersistenceManager {
         }
     }
 
-    func vpnPersistence(withName containerName: String) -> VPNPersistence {
-        VPNPersistence(withName: containerName, cloudKit: true, author: persistenceAuthor)
+    func vpnPersistence(withName containerName: String, cloudKit: Bool) -> VPNPersistence {
+        VPNPersistence(withName: containerName, cloudKit: cloudKit, author: persistenceAuthor)
     }
 
     func providersPersistence(withName containerName: String) -> ProvidersPersistence {

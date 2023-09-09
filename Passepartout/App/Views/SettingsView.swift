@@ -35,19 +35,24 @@ struct SettingsView: View {
 
     @AppStorage(AppPreference.locksInBackground.key) private var locksInBackground = false
 
+    @Binding private var shouldEnableCloudSyncing: Bool
+
     private let versionString = Constants.Global.appVersionString
 
     init() {
         profileManager = .shared
         productManager = .shared
+
+        _shouldEnableCloudSyncing = .init {
+            AppContext.shared.shouldEnableCloudSyncing
+        } set: {
+            AppContext.shared.shouldEnableCloudSyncing = $0
+        }
     }
 
     var body: some View {
         List {
-            #if !targetEnvironment(macCatalyst)
             preferencesSection
-            #endif
-            DiagnosticsSection(currentProfile: profileManager.currentProfile)
             aboutSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
@@ -61,7 +66,12 @@ struct SettingsView: View {
 private extension SettingsView {
     var preferencesSection: some View {
         Section {
+            #if !targetEnvironment(macCatalyst)
             Toggle(L10n.Settings.Items.LocksInBackground.caption, isOn: $locksInBackground)
+            #endif
+            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $shouldEnableCloudSyncing)
+        } header: {
+            Text(L10n.Preferences.title)
         }
     }
 
@@ -77,6 +87,8 @@ private extension SettingsView {
             } label: {
                 Text(L10n.Settings.Items.Donate.caption)
             }.disabled(!productManager.canMakePayments())
+
+            DiagnosticsRow(currentProfile: profileManager.currentProfile)
         } footer: {
             HStack {
                 Spacer()

@@ -47,11 +47,14 @@ public final class UpgradeManager: ObservableObject {
         self.strategy = strategy
     }
 
-    public func doMigrations(toVersion currentVersion: String, profileManager: ProfileManager) {
+    public func migrate(toVersion currentVersion: String) {
         if let lastVersion, currentVersion > lastVersion {
-            strategy.doMigrate(store: store, lastVersion: lastVersion)
+            strategy.migrate(store: store, lastVersion: lastVersion)
         }
         lastVersion = currentVersion
+    }
+
+    public func migrateData(profileManager: ProfileManager) {
         isDoingMigrations = false
     }
 }
@@ -69,8 +72,12 @@ private extension UpgradeManager {
     }
 }
 
-private extension UpgradeManager {
+extension UpgradeManager {
     enum StoreKey: String, KeyStoreDomainLocation {
+
+        @available(*, deprecated, message: "Retain temporarily for migrations")
+        case existingKeyBefore_2_2_0 = "didMigrateToV2"
+
         case lastVersion
 
         var domain: String {

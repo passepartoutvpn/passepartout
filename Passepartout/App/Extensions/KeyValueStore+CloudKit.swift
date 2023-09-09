@@ -1,8 +1,8 @@
 //
-//  DefaultUpgradeManagerStrategy.swift
+//  KeyValueStore+CloudKit.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/20/22.
+//  Created by Davide De Rosa on 9/7/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,26 +26,38 @@
 import Foundation
 import PassepartoutLibrary
 
-public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
-    public init() {
+extension KeyValueStore {
+
+    // MARK: Support
+
+    private var cloudKitToken: Any? {
+        FileManager.default.ubiquityIdentityToken
     }
 
-    public func migrate(store: KeyValueStore, lastVersion: String?) {
-
-        // legacy check before lastVersion was even stored
-        let isUpgradeFromBefore_2_2_0: Bool? = store.value(forLocation: UpgradeManager.StoreKey.existingKeyBefore_2_2_0)
-        if isUpgradeFromBefore_2_2_0 != nil {
-            pp_log.debug("Upgrading from < 2.2.0, iCloud syncing defaults to enabled")
-            store.setValue(true, forLocation: AppPreference.shouldEnableCloudSyncing)
-        }
-
-        guard let lastVersion else {
-            pp_log.debug("Fresh install")
-            return
-        }
-        pp_log.debug("Upgrade from \(lastVersion)")
+    var isCloudKitSupported: Bool {
+        cloudKitToken != nil
     }
 
-    public func migrateData() {
+    // MARK: Preference
+
+    var shouldEnableCloudSyncing: Bool {
+        get {
+            value(forLocation: AppPreference.shouldEnableCloudSyncing) ?? false
+        }
+        set {
+            setValue(newValue, forLocation: AppPreference.shouldEnableCloudSyncing)
+        }
+    }
+
+    // MARK: Computed state
+
+    var isCloudSyncingEnabled: Bool {
+        guard isCloudKitSupported else {
+            pp_log.debug("CloudKit unavailable")
+            return false
+        }
+        let isEnabled = shouldEnableCloudSyncing
+        pp_log.debug("CloudKit enabled: \(isEnabled)")
+        return isEnabled
     }
 }

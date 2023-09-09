@@ -332,6 +332,7 @@
 
 "settings.title" = "Settings";
 "settings.items.locks_in_background.caption" = "Lock app access";
+"settings.items.should_enable_cloud_syncing.caption" = "Sync with iCloud";
 "settings.items.donate.caption" = "Make a donation";
 
 /* MARK: AboutView */

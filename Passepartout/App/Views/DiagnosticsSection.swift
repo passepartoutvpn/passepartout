@@ -26,16 +26,14 @@
 import PassepartoutLibrary
 import SwiftUI
 
-struct DiagnosticsSection: View {
+struct DiagnosticsRow: View {
     @ObservedObject var currentProfile: ObservableProfile
 
     var body: some View {
-        Section {
-            NavigationLink {
-                DiagnosticsView(profile: currentProfile.value)
-            } label: {
-                Text(L10n.Diagnostics.title)
-            }
+        NavigationLink {
+            DiagnosticsView(profile: currentProfile.value)
+        } label: {
+            Text(L10n.Diagnostics.title)
         }
     }
 }
