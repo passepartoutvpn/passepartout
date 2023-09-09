@@ -921,6 +921,10 @@ internal enum L10n {
         /// Make a donation
         internal static let caption = L10n.tr("Localizable", "settings.items.donate.caption", fallback: "Make a donation")
       }
+      internal enum EraseCloudStore {
+        /// Erase iCloud store
+        internal static let caption = L10n.tr("Localizable", "settings.items.erase_cloud_store.caption", fallback: "Erase iCloud store")
+      }
       internal enum LocksInBackground {
         /// Lock app access
         internal static let caption = L10n.tr("Localizable", "settings.items.locks_in_background.caption", fallback: "Lock app access")
@@ -928,6 +932,12 @@ internal enum L10n {
       internal enum ShouldEnableCloudSyncing {
         /// Sync with iCloud
         internal static let caption = L10n.tr("Localizable", "settings.items.should_enable_cloud_syncing.caption", fallback: "Sync with iCloud")
+      }
+    }
+    internal enum Sections {
+      internal enum Icloud {
+        /// Disable sync to allow erase. To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
+        internal static let footer = L10n.tr("Localizable", "settings.sections.icloud.footer", fallback: "Disable sync to allow erase. To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
       }
     }
   }

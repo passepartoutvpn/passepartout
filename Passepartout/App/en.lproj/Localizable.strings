@@ -331,8 +331,10 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Settings";
+"settings.sections.icloud.footer" = "Disable sync to allow erase. To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 "settings.items.locks_in_background.caption" = "Lock app access";
 "settings.items.should_enable_cloud_syncing.caption" = "Sync with iCloud";
+"settings.items.erase_cloud_store.caption" = "Erase iCloud store";
 "settings.items.donate.caption" = "Make a donation";
 
 /* MARK: AboutView */

@@ -137,4 +137,8 @@ extension AppContext {
             lastIsCloudSyncingEnabled = isCloudSyncingEnabled
         }
     }
+
+    func eraseCloudKitStore() async {
+        await coreContext.eraseCloudKitStore()
+    }
 }

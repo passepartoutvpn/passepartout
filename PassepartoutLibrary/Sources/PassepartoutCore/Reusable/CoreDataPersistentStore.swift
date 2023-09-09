@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CloudKit
 import Combine
 import CoreData
 import Foundation
@@ -69,7 +70,25 @@ public final class CoreDataPersistentStore {
             container.viewContext.transactionAuthor = author
         }
     }
+}
 
+extension CoreDataPersistentStore {
+    public var context: NSManagedObjectContext {
+        container.viewContext
+    }
+
+    public var backgroundContext: NSManagedObjectContext {
+        container.newBackgroundContext()
+    }
+
+    public var coordinator: NSPersistentStoreCoordinator {
+        container.persistentStoreCoordinator
+    }
+}
+
+// MARK: Development
+
+extension CoreDataPersistentStore {
     public var containerURLs: [URL]? {
         guard let url = container.persistentStoreDescriptions.first?.url else {
             return nil
@@ -102,15 +121,5 @@ public final class CoreDataPersistentStore {
                 pp_log.warning("Could not truncate persistent store: \(error)")
             }
         }
-    }
-}
-
-extension CoreDataPersistentStore {
-    public var context: NSManagedObjectContext {
-        container.viewContext
-    }
-
-    public var coordinator: NSPersistentStoreCoordinator {
-        container.persistentStoreCoordinator
     }
 }

@@ -37,6 +37,8 @@ struct SettingsView: View {
 
     @Binding private var shouldEnableCloudSyncing: Bool
 
+    @State private var isErasingCloudStore = false
+
     private let versionString = Constants.Global.appVersionString
 
     init() {
@@ -45,14 +47,20 @@ struct SettingsView: View {
 
         _shouldEnableCloudSyncing = .init {
             AppContext.shared.shouldEnableCloudSyncing
-        } set: {
-            AppContext.shared.shouldEnableCloudSyncing = $0
+        } set: { isEnabled in
+            withAnimation {
+                AppContext.shared.shouldEnableCloudSyncing = isEnabled
+            }
         }
     }
 
     var body: some View {
         List {
+            #if !targetEnvironment(macCatalyst)
             preferencesSection
+            #endif
+            iCloudSection
+            diagnosticsSection
             aboutSection
         }.toolbar {
             themeCloseItem(presentationMode: presentationMode)
@@ -66,29 +74,48 @@ struct SettingsView: View {
 private extension SettingsView {
     var preferencesSection: some View {
         Section {
-            #if !targetEnvironment(macCatalyst)
             Toggle(L10n.Settings.Items.LocksInBackground.caption, isOn: $locksInBackground)
-            #endif
-            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $shouldEnableCloudSyncing)
         } header: {
             Text(L10n.Preferences.title)
+        }
+    }
+
+    var iCloudSection: some View {
+        Section {
+            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $shouldEnableCloudSyncing)
+            Button(L10n.Settings.Items.EraseCloudStore.caption) {
+                isErasingCloudStore = true
+                Task {
+                    await AppContext.shared.eraseCloudKitStore()
+                    isErasingCloudStore = false
+                }
+            }.withTrailingProgress(when: isErasingCloudStore)
+            .disabled(shouldEnableCloudSyncing || isErasingCloudStore)
+        } header: {
+            Text(Unlocalized.Other.iCloud)
+        } footer: {
+            Text(L10n.Settings.Sections.Icloud.footer)
+        }
+    }
+
+    var diagnosticsSection: some View {
+        Section {
+            DiagnosticsRow(currentProfile: profileManager.currentProfile)
         }
     }
 
     var aboutSection: some View {
         Section {
             NavigationLink {
-                AboutView()
-            } label: {
-                Text(L10n.About.title)
-            }
-            NavigationLink {
                 DonateView()
             } label: {
                 Text(L10n.Settings.Items.Donate.caption)
             }.disabled(!productManager.canMakePayments())
-
-            DiagnosticsRow(currentProfile: profileManager.currentProfile)
+            NavigationLink {
+                AboutView()
+            } label: {
+                Text(L10n.About.title)
+            }
         } footer: {
             HStack {
                 Spacer()

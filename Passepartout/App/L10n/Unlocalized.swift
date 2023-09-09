@@ -257,6 +257,8 @@ enum Unlocalized {
     enum Other {
         static let siri = "Siri"
 
+        static let iCloud = "iCloud"
+
         static let totp = "TOTP"
     }
 }
