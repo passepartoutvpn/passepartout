@@ -37,6 +37,7 @@ public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
         if isUpgradeFromBefore_2_2_0 != nil {
             pp_log.debug("Upgrading from < 2.2.0, iCloud syncing defaults to enabled")
             store.setValue(true, forLocation: AppPreference.shouldEnableCloudSyncing)
+            store.removeValue(forLocation: UpgradeManager.StoreKey.existingKeyBefore_2_2_0)
         }
 
         guard let lastVersion else {
