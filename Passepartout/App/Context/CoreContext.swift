@@ -148,9 +148,6 @@ extension CoreContext {
     }
 
     func eraseCloudKitStore() {
-        // TODO: CloudKit, erase remote records
-        // - make a copy
-        // - erase all Core Data records
-        // - reopen copy w/ CloudKit disabled
+        // TODO: iCloud, erase remote records
     }
 }
