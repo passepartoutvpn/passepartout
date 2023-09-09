@@ -41,8 +41,8 @@ DATE=`date "+%Y-%m-%d"`
 CHANGELOG_GLOB="CHANGELOG.md"
 
 # either set new or replace existing
-sed -i'' -E "s/^.*$VERSION.*$/## $VERSION ($DATE)/" $CHANGELOG_GLOB
-sed -i'' -E "s/^.*Unreleased.*$/## $VERSION ($DATE)/" $CHANGELOG_GLOB
+sed -i '' -E "s/^.*$VERSION.*$/## $VERSION ($DATE)/" $CHANGELOG_GLOB
+sed -i '' -E "s/^.*Unreleased.*$/## $VERSION ($DATE)/" $CHANGELOG_GLOB
 
 # add release notes
 git add CHANGELOG.md
