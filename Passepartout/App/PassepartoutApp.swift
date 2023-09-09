@@ -47,6 +47,8 @@ struct PassepartoutApp: App {
 }
 
 private extension View {
+
+    @MainActor
     func onIntentActivity(_ activity: IntentActivity<VPNManager>) -> some View {
         onContinueUserActivity(activity.name) { userActivity in
 
