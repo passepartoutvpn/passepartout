@@ -110,7 +110,7 @@ final class ProductManager: NSObject, ObservableObject {
         super.init()
 
         sandboxChecker.$isSandbox
-            .dropFirst()
+            .dropFirst() // ignore initial value
             .sink { [weak self] in
                 guard let self else {
                     return
