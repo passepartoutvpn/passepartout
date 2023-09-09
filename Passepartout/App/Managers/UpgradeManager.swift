@@ -47,11 +47,14 @@ public final class UpgradeManager: ObservableObject {
         self.strategy = strategy
     }
 
-    public func doMigrations(toVersion currentVersion: String, profileManager: ProfileManager) {
+    public func migrate(toVersion currentVersion: String) {
         if let lastVersion, currentVersion > lastVersion {
-            strategy.doMigrate(store: store, lastVersion: lastVersion)
+            strategy.migrate(store: store, lastVersion: lastVersion)
         }
         lastVersion = currentVersion
+    }
+
+    public func migrateData(profileManager: ProfileManager) {
         isDoingMigrations = false
     }
 }

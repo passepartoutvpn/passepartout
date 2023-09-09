@@ -56,6 +56,12 @@ final class CoreContext {
         Passepartout.shared.logger = logger
         pp_log.info("Logging to: \(logger.logFile!)")
 
+        upgradeManager = UpgradeManager(
+            store: store,
+            strategy: DefaultUpgradeManagerStrategy()
+        )
+        upgradeManager.migrate(toVersion: Constants.Global.appVersionNumber)
+
         persistenceManager = PersistenceManager(store: store)
         let vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName,
@@ -63,11 +69,6 @@ final class CoreContext {
         )
         let providersPersistence = persistenceManager.providersPersistence(
             withName: Constants.Persistence.providersContainerName
-        )
-
-        upgradeManager = UpgradeManager(
-            store: store,
-            strategy: DefaultUpgradeManagerStrategy()
         )
 
         let remoteProvidersStrategy = APIRemoteProvidersStrategy(
