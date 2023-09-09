@@ -109,14 +109,14 @@ final class ProductManager: NSObject, ObservableObject {
 
         super.init()
 
-        sandboxChecker.$isTestFlight
+        sandboxChecker.$isSandbox
             .dropFirst()
             .sink { [weak self] in
                 guard let self else {
                     return
                 }
                 self.appType = overriddenAppType ?? ($0 ? .beta : .freemium)
-                pp_log.debug("App type: \(self.appType)")
+                pp_log.info("App type: \(self.appType)")
                 self.reloadReceipt()
             }.store(in: &subscriptions)
 
