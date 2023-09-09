@@ -47,8 +47,10 @@ struct SettingsView: View {
 
         _shouldEnableCloudSyncing = .init {
             AppContext.shared.shouldEnableCloudSyncing
-        } set: {
-            AppContext.shared.shouldEnableCloudSyncing = $0
+        } set: { isEnabled in
+            withAnimation {
+                AppContext.shared.shouldEnableCloudSyncing = isEnabled
+            }
         }
     }
 
@@ -79,23 +81,19 @@ private extension SettingsView {
 
     var iCloudSection: some View {
         Section {
-            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $shouldEnableCloudSyncing.themeAnimation())
-            if !shouldEnableCloudSyncing {
-                Button(L10n.Settings.Items.EraseCloudStore.caption) {
-                    isErasingCloudStore = true
-                    Task {
-                        await AppContext.shared.eraseCloudKitStore()
-                        isErasingCloudStore = false
-                    }
-                }.withTrailingProgress(when: isErasingCloudStore)
-                .disabled(isErasingCloudStore)
-            }
+            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $shouldEnableCloudSyncing)
+            Button(L10n.Settings.Items.EraseCloudStore.caption) {
+                isErasingCloudStore = true
+                Task {
+                    await AppContext.shared.eraseCloudKitStore()
+                    isErasingCloudStore = false
+                }
+            }.withTrailingProgress(when: isErasingCloudStore)
+            .disabled(shouldEnableCloudSyncing || isErasingCloudStore)
         } header: {
             Text(Unlocalized.Other.iCloud)
         } footer: {
-            if !shouldEnableCloudSyncing {
-                Text(L10n.Settings.Sections.Icloud.footer)
-            }
+            Text(L10n.Settings.Sections.Icloud.footer)
         }
     }
 
