@@ -936,8 +936,8 @@ internal enum L10n {
     }
     internal enum Sections {
       internal enum Icloud {
-        /// Disable sync to allow erase. To erase the iCloud store securely, do so also on all your synced devices. This will not affect local profiles.
-        internal static let footer = L10n.tr("Localizable", "settings.sections.icloud.footer", fallback: "Disable sync to allow erase. To erase the iCloud store securely, do so also on all your synced devices. This will not affect local profiles.")
+        /// Disable sync to allow erase. To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
+        internal static let footer = L10n.tr("Localizable", "settings.sections.icloud.footer", fallback: "Disable sync to allow erase. To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
       }
     }
   }
