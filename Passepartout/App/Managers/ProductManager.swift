@@ -109,6 +109,10 @@ final class ProductManager: NSObject, ObservableObject {
 
         super.init()
 
+        reloadReceipt()
+        SKPaymentQueue.default().add(self)
+        refreshProducts()
+
         sandboxChecker.$isSandbox
             .dropFirst() // ignore initial value
             .sink { [weak self] in
@@ -121,11 +125,6 @@ final class ProductManager: NSObject, ObservableObject {
             }.store(in: &subscriptions)
 
         sandboxChecker.check()
-
-        reloadReceipt()
-        SKPaymentQueue.default().add(self)
-
-        refreshProducts()
     }
 
     deinit {
