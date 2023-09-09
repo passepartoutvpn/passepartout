@@ -1,5 +1,5 @@
 //
-//  PaywallView+Beta.swift
+//  PaywallView+Restricted.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 3/22/22.
@@ -26,11 +26,12 @@
 import SwiftUI
 
 extension PaywallView {
-    struct BetaView: View {
+    struct RestrictedView: View {
         var body: some View {
-            Text("The requested feature in unavailable in beta.")
-                .navigationTitle("Beta")
+            Text("The requested feature in unavailable in this build.")
+                .multilineTextAlignment(.center)
                 .padding()
+                .navigationTitle("Restricted")
         }
     }
 }

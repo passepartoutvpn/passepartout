@@ -52,7 +52,7 @@ struct PaywallView: View {
     var body: some View {
         Group {
             if productManager.appType.isRestricted {
-                BetaView()
+                RestrictedView()
             } else {
                 PurchaseView(
                     isPresented: $isPresented,
