@@ -259,7 +259,7 @@ extension TunnelKitOpenVPNError: LocalizedError {
         case .serverCompression, .lzo:
             return V.compression
 
-        case .networkChanged:
+        case .networkChanged, .linkError:
             return V.network
 
         case .routing:
@@ -272,7 +272,7 @@ extension TunnelKitOpenVPNError: LocalizedError {
             return V.shutdown
 
         default:
-            return nil
+            return L10n.Global.unknown
         }
     }
 }
@@ -306,7 +306,7 @@ extension OpenVPN.ConfigurationError: LocalizedError {
 
         case .continuationPushReply:
             assertionFailure("This is a server-side configuration parsing error")
-            return nil
+            return L10n.Global.Strings.unknown
         }
     }
 }
