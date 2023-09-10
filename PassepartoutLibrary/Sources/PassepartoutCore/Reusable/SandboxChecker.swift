@@ -37,12 +37,9 @@ public final class SandboxChecker: ObservableObject {
         self.bundle = bundle
     }
 
-    @MainActor
-    public func check() {
-        Task {
-            isBeta = await isBetaBuild()
-            pp_log.info("Beta build: \(isBeta)")
-        }
+    public func check() async {
+        isBeta = await isBetaBuild()
+        pp_log.info("Beta build: \(isBeta)")
     }
 
     // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst

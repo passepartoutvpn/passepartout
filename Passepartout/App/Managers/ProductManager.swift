@@ -115,6 +115,7 @@ final class ProductManager: NSObject, ObservableObject {
 
         sandboxChecker.$isBeta
             .dropFirst() // ignore initial value
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 guard let self else {
                     return
@@ -124,7 +125,9 @@ final class ProductManager: NSObject, ObservableObject {
                 self.reloadReceipt()
             }.store(in: &subscriptions)
 
-        sandboxChecker.check()
+        Task {
+            await sandboxChecker.check()
+        }
     }
 
     deinit {
