@@ -38,8 +38,6 @@ final class CoreContext {
 
     private(set) var vpnPersistence: VPNPersistence
 
-    let upgradeManager: UpgradeManager
-
     let providerManager: ProviderManager
 
     let profileManager: ProfileManager
@@ -50,20 +48,6 @@ final class CoreContext {
 
     init(store: KeyValueStore) {
         self.store = store
-
-        let logger = SwiftyBeaverLogger(
-            logFile: Constants.Log.App.url,
-            logLevel: Constants.Log.level,
-            logFormat: Constants.Log.App.format
-        )
-        Passepartout.shared.logger = logger
-        pp_log.info("Logging to: \(logger.logFile!)")
-
-        upgradeManager = UpgradeManager(
-            store: store,
-            strategy: DefaultUpgradeManagerStrategy()
-        )
-        upgradeManager.migrate(toVersion: Constants.Global.appVersionNumber)
 
         persistenceManager = PersistenceManager(store: store)
         vpnPersistence = persistenceManager.vpnPersistence(

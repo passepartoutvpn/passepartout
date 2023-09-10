@@ -33,14 +33,28 @@ final class AppContext {
 
     private var lastIsCloudSyncingEnabled: Bool?
 
+    let upgradeManager: UpgradeManager
+
     let productManager: ProductManager
 
     private let reviewer: Reviewer
 
     private var cancellables: Set<AnyCancellable> = []
 
-    init(coreContext: CoreContext) {
-        self.coreContext = coreContext
+    init(store: KeyValueStore) {
+        let logger = SwiftyBeaverLogger(
+            logFile: Constants.Log.App.url,
+            logLevel: Constants.Log.level,
+            logFormat: Constants.Log.App.format
+        )
+        Passepartout.shared.logger = logger
+        pp_log.info("Logging to: \(logger.logFile!)")
+
+        upgradeManager = UpgradeManager(
+            store: store,
+            strategy: DefaultUpgradeManagerStrategy()
+        )
+        upgradeManager.migrate(toVersion: Constants.Global.appVersionNumber)
 
         productManager = ProductManager(
             overriddenAppType: Constants.InApp.overriddenAppType,
@@ -50,13 +64,11 @@ final class AppContext {
         reviewer = Reviewer()
         reviewer.eventCountBeforeRating = Constants.Rating.eventCount
 
+        coreContext = CoreContext(store: store)
+
         // post
 
         configureObjects()
-    }
-
-    var upgradeManager: UpgradeManager {
-        coreContext.upgradeManager
     }
 
     var providerManager: ProviderManager {
