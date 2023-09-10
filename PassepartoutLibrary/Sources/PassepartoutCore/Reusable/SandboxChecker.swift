@@ -28,7 +28,6 @@ import Foundation
 // https://stackoverflow.com/a/32238344/784615
 // https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
 
-@MainActor
 public final class SandboxChecker: ObservableObject {
     private let bundle: Bundle
 
@@ -38,6 +37,7 @@ public final class SandboxChecker: ObservableObject {
         self.bundle = bundle
     }
 
+    @MainActor
     public func check() {
         Task {
             isBeta = await isBetaBuild()
