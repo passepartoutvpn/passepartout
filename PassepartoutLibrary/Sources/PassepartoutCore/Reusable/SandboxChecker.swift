@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Combine
 import Foundation
 
 // https://stackoverflow.com/a/32238344/784615
