@@ -32,6 +32,10 @@ import PassepartoutLibrary
 final class PersistenceManager: ObservableObject {
     let store: KeyValueStore
 
+    private let ckContainerId: String
+
+    private let ckCoreDataZone: String
+
     private var vpnPersistence: VPNPersistence?
 
     private var providersPersistence: ProvidersPersistence?
@@ -47,8 +51,10 @@ final class PersistenceManager: ObservableObject {
 
     let didChangePersistence = PassthroughSubject<Void, Never>()
 
-    init(store: KeyValueStore) {
+    init(store: KeyValueStore, ckContainerId: String, ckCoreDataZone: String) {
         self.store = store
+        self.ckContainerId = ckContainerId
+        self.ckCoreDataZone = ckCoreDataZone
         isCloudSyncingEnabled = store.canEnableCloudSyncing
 
         // set once
@@ -78,8 +84,8 @@ extension PersistenceManager {
             isErasingCloudKitStore = true
         }
         await Self.eraseCloudKitStore(
-            fromContainerWithId: Constants.CloudKit.containerId,
-            zoneId: .init(zoneName: Constants.CloudKit.coreDataZone)
+            fromContainerWithId: ckContainerId,
+            zoneId: .init(zoneName: ckCoreDataZone)
         )
         await MainActor.run {
             isErasingCloudKitStore = false
