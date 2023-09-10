@@ -46,9 +46,7 @@ public final class SandboxChecker: ObservableObject {
     }
 
     private func isSandboxBuild() async -> Bool {
-        #if os(iOS)
-        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-        #elseif targetEnvironment(macCatalyst) || os(macOS)
+        #if targetEnvironment(macCatalyst) || os(macOS)
         var status = noErr
 
         var code: SecStaticCode?
@@ -79,6 +77,8 @@ public final class SandboxChecker: ObservableObject {
             requirement
         )
         return status == errSecSuccess
+        #elseif os(iOS)
+        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
         #else
         false
         #endif
