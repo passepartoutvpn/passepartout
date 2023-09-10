@@ -29,28 +29,18 @@ import Foundation
 // https://stackoverflow.com/a/32238344/784615
 // https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
 
-public final class SandboxChecker: ObservableObject {
-    private let bundle: Bundle
-
-    @Published private var isBeta = false
-
-    public var isBetaPublisher: AnyPublisher<Bool, Never> {
-        $isBeta
-            .dropFirst()
-            .eraseToAnyPublisher()
+public final actor SandboxChecker: ObservableObject {
+    public init() {
     }
 
-    public init(bundle: Bundle) {
-        self.bundle = bundle
-    }
-
-    public func check() async {
-        isBeta = await isBetaBuild()
+    public var isBeta: Bool {
+        let isBeta = isBetaBuild()
         pp_log.info("Beta build: \(isBeta)")
+        return isBeta
     }
 
     // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst
-    private func isBetaBuild() async -> Bool {
+    private func isBetaBuild() -> Bool {
         #if targetEnvironment(macCatalyst) || os(macOS)
         isMacTestFlightBuild
         #elseif os(iOS)
@@ -61,22 +51,22 @@ public final class SandboxChecker: ObservableObject {
     }
 }
 
-// MARK: iOS
-
-#if os(iOS)
 private extension SandboxChecker {
+    var bundle: Bundle {
+        .main
+    }
+
+    // MARK: iOS
+
+    #if os(iOS)
     var isiOSSandboxBuild: Bool {
         bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     }
-}
-#endif
+    #endif
 
-// MARK: macOS
+    // MARK: macOS
 
-#if targetEnvironment(macCatalyst) || os(macOS)
-import Security
-
-private extension SandboxChecker {
+    #if targetEnvironment(macCatalyst) || os(macOS)
     var isMacTestFlightBuild: Bool {
         var status = noErr
 
@@ -109,5 +99,5 @@ private extension SandboxChecker {
         )
         return status == errSecSuccess
     }
+    #endif
 }
-#endif
