@@ -108,9 +108,9 @@ final class ProductManager: NSObject, ObservableObject {
 
         Task {
             let isBeta = await SandboxChecker().isBeta
-            self.appType = overriddenAppType ?? (isBeta ? .beta : .freemium)
-            pp_log.info("App type: \(self.appType)")
-            self.reloadReceipt()
+            appType = overriddenAppType ?? (isBeta ? .beta : .freemium)
+            pp_log.info("App type: \(appType)")
+            reloadReceipt()
         }
     }
 
