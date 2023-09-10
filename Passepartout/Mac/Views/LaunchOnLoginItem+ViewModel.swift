@@ -43,8 +43,8 @@ extension LaunchOnLoginItem {
                 guard SMLoginItemSetEnabled(Constants.Mac.appLauncherId as CFString, newValue) else {
                     return
                 }
-                launchesOnLogin = newValue
                 objectWillChange.send()
+                launchesOnLogin = newValue
             }
         }
 
