@@ -32,6 +32,10 @@ import PassepartoutLibrary
 final class PersistenceManager: ObservableObject {
     let store: KeyValueStore
 
+    private var vpnPersistence: VPNPersistence?
+
+    private var providersPersistence: ProvidersPersistence?
+
     private(set) var isCloudSyncingEnabled: Bool {
         didSet {
             pp_log.info("CloudKit enabled: \(isCloudSyncingEnabled)")
@@ -53,12 +57,16 @@ final class PersistenceManager: ObservableObject {
         }
     }
 
-    func vpnPersistence(withName containerName: String) -> VPNPersistence {
-        VPNPersistence(withName: containerName, cloudKit: isCloudSyncingEnabled, author: persistenceAuthor)
+    func loadVPNPersistence(withName containerName: String) -> VPNPersistence {
+        let persistence = VPNPersistence(withName: containerName, cloudKit: isCloudSyncingEnabled, author: persistenceAuthor)
+        vpnPersistence = persistence
+        return persistence
     }
 
-    func providersPersistence(withName containerName: String) -> ProvidersPersistence {
-        ProvidersPersistence(withName: containerName, cloudKit: false, author: persistenceAuthor)
+    func loadProvidersPersistence(withName containerName: String) -> ProvidersPersistence {
+        let persistence = ProvidersPersistence(withName: containerName, cloudKit: false, author: persistenceAuthor)
+        providersPersistence = persistence
+        return persistence
     }
 }
 

@@ -45,10 +45,10 @@ final class CoreContext {
     init(persistenceManager: PersistenceManager) {
         store = persistenceManager.store
 
-        let vpnPersistence = persistenceManager.vpnPersistence(
+        let vpnPersistence = persistenceManager.loadVPNPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
-        let providersPersistence = persistenceManager.providersPersistence(
+        let providersPersistence = persistenceManager.loadProvidersPersistence(
             withName: Constants.Persistence.providersContainerName
         )
 
@@ -127,7 +127,7 @@ private extension CoreContext {
 
 extension CoreContext {
     func reloadCloudKitObjects(persistenceManager: PersistenceManager) {
-        let vpnPersistence = persistenceManager.vpnPersistence(
+        let vpnPersistence = persistenceManager.loadVPNPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
         profileManager.swapProfileRepository(vpnPersistence.profileRepository())
