@@ -37,9 +37,12 @@ public final actor SandboxChecker: ObservableObject {
         pp_log.info("Beta build: \(isBeta)")
         return isBeta
     }
+}
+
+private extension SandboxChecker {
 
     // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst
-    private func isBetaBuild() -> Bool {
+    func isBetaBuild() -> Bool {
         #if targetEnvironment(macCatalyst) || os(macOS)
         isMacTestFlightBuild
         #elseif os(iOS)
@@ -48,24 +51,26 @@ public final actor SandboxChecker: ObservableObject {
         false
         #endif
     }
-}
 
-private extension SandboxChecker {
     var bundle: Bundle {
         .main
     }
+}
 
-    // MARK: iOS
+// MARK: iOS
 
-    #if os(iOS)
+#if os(iOS)
+private extension SandboxChecker {
     var isiOSSandboxBuild: Bool {
         bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     }
-    #endif
+}
+#endif
 
-    // MARK: macOS
+// MARK: macOS
 
-    #if targetEnvironment(macCatalyst) || os(macOS)
+#if targetEnvironment(macCatalyst) || os(macOS)
+private extension SandboxChecker {
     var isMacTestFlightBuild: Bool {
         var status = noErr
 
@@ -98,5 +103,5 @@ private extension SandboxChecker {
         )
         return status == errSecSuccess
     }
-    #endif
 }
+#endif
