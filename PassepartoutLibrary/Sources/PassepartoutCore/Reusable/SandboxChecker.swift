@@ -28,25 +28,52 @@ import Foundation
 // https://stackoverflow.com/a/32238344/784615
 // https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
 
-@MainActor
 public final class SandboxChecker: ObservableObject {
     private let bundle: Bundle
 
-    @Published public private(set) var isSandbox = false
+    @Published public private(set) var isBeta = false
 
     public init(bundle: Bundle) {
         self.bundle = bundle
     }
 
+    @MainActor
     public func check() {
         Task {
-            isSandbox = await isSandboxBuild()
-            pp_log.info("Sandbox build: \(isSandbox)")
+            isBeta = await isBetaBuild()
+            pp_log.info("Beta build: \(isBeta)")
         }
     }
 
-    private func isSandboxBuild() async -> Bool {
+    // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst
+    private func isBetaBuild() async -> Bool {
         #if targetEnvironment(macCatalyst) || os(macOS)
+        isMacTestFlightBuild
+        #elseif os(iOS)
+        isiOSSandboxBuild
+        #else
+        false
+        #endif
+    }
+}
+
+// MARK: iOS
+
+#if os(iOS)
+private extension SandboxChecker {
+    var isiOSSandboxBuild: Bool {
+        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+    }
+}
+#endif
+
+// MARK: macOS
+
+#if targetEnvironment(macCatalyst) || os(macOS)
+import Security
+
+private extension SandboxChecker {
+    var isMacTestFlightBuild: Bool {
         var status = noErr
 
         var code: SecStaticCode?
@@ -77,10 +104,6 @@ public final class SandboxChecker: ObservableObject {
             requirement
         )
         return status == errSecSuccess
-        #elseif os(iOS)
-        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-        #else
-        false
-        #endif
     }
 }
+#endif
