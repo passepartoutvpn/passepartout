@@ -34,8 +34,6 @@ import TunnelKitManager
 final class CoreContext {
     let store: KeyValueStore
 
-    private(set) var vpnPersistence: VPNPersistence
-
     let providerManager: ProviderManager
 
     let profileManager: ProfileManager
@@ -47,7 +45,7 @@ final class CoreContext {
     init(persistenceManager: PersistenceManager) {
         store = persistenceManager.store
 
-        vpnPersistence = persistenceManager.vpnPersistence(
+        let vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
         let providersPersistence = persistenceManager.providersPersistence(
@@ -129,7 +127,7 @@ private extension CoreContext {
 
 extension CoreContext {
     func reloadCloudKitObjects(persistenceManager: PersistenceManager) {
-        vpnPersistence = persistenceManager.vpnPersistence(
+        let vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
         profileManager.swapProfileRepository(vpnPersistence.profileRepository())
