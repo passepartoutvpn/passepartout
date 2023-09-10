@@ -28,6 +28,7 @@ import PassepartoutCore
 import PassepartoutProviders
 import PassepartoutVPN
 
+@MainActor
 extension Profile {
     public func providerServer(_ providerManager: ProviderManager) -> ProviderServer? {
         guard let serverId = providerServerId else {

@@ -25,6 +25,7 @@
 
 import Foundation
 
+@MainActor
 public protocol RateLimited: AnyObject {
     associatedtype ActionID: Hashable
 

@@ -30,6 +30,7 @@ import PassepartoutProviders
 @testable import PassepartoutProvidersImpl
 import XCTest
 
+@MainActor
 final class ProvidersTests: XCTestCase {
     private var persistence: ProvidersPersistence!
 

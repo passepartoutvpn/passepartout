@@ -27,6 +27,7 @@ import Combine
 import Foundation
 import PassepartoutCore
 
+@MainActor
 public final class ProviderManager: ObservableObject, RateLimited {
     private let localProvidersRepository: LocalProvidersRepository
 

@@ -53,8 +53,6 @@ extension ProfileManager {
 }
 
 extension ProviderManager {
-
-    @MainActor
     static let shared = AppContext.shared.providerManager
 }
 

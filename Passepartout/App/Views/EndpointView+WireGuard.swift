@@ -120,6 +120,8 @@ private extension EndpointView.WireGuardView {
 // MARK: - Bindings
 
 private extension ObservableProfile {
+
+    @MainActor
     func builderBinding(providerManager: ProviderManager) -> Binding<WireGuard.ConfigurationBuilder> {
         .init {
             if self.value.isProvider {

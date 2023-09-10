@@ -29,6 +29,7 @@ import CoreData
 import Foundation
 import PassepartoutLibrary
 
+@MainActor
 final class PersistenceManager: ObservableObject {
     let store: KeyValueStore
 
@@ -80,16 +81,12 @@ final class PersistenceManager: ObservableObject {
 
 extension PersistenceManager {
     func eraseCloudKitStore() async {
-        await MainActor.run {
-            isErasingCloudKitStore = true
-        }
+        isErasingCloudKitStore = true
         await Self.eraseCloudKitStore(
             fromContainerWithId: ckContainerId,
             zoneId: .init(zoneName: ckCoreDataZone)
         )
-        await MainActor.run {
-            isErasingCloudKitStore = false
-        }
+        isErasingCloudKitStore = false
     }
 
     // WARNING: this is not running on main actor

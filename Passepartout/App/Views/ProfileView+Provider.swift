@@ -103,7 +103,9 @@ private extension ProfileView.ProviderSection {
                 Label(L10n.Provider.Preset.title, systemImage: themeProviderPresetImage)
                     .withTrailingText(currentProviderPreset)
             }
-            Button(action: refreshInfrastructure) {
+            Button {
+                refreshInfrastructure()
+            } label: {
                 Text(L10n.Profile.Items.Provider.Refresh.caption)
             }.withTrailingProgress(when: isRefreshingInfrastructure)
         } footer: {
