@@ -25,7 +25,7 @@
 
 import Combine
 import Foundation
-import Intents
+@preconcurrency import Intents
 import IntentsUI
 import PassepartoutLibrary
 
