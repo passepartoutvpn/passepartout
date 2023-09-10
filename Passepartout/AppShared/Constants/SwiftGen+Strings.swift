@@ -550,6 +550,8 @@ internal enum L10n {
       internal static let translations = L10n.tr("Localizable", "global.strings.translations", fallback: "Translations")
       /// Uninstall
       internal static let uninstall = L10n.tr("Localizable", "global.strings.uninstall", fallback: "Uninstall")
+      /// Unknown
+      internal static let unknown = L10n.tr("Localizable", "global.strings.unknown", fallback: "Unknown")
     }
   }
   internal enum Menu {
