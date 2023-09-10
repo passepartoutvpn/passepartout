@@ -113,14 +113,13 @@ final class ProductManager: NSObject, ObservableObject {
         SKPaymentQueue.default().add(self)
         refreshProducts()
 
-        sandboxChecker.$isBeta
-            .dropFirst() // ignore initial value
+        sandboxChecker.isBetaPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
+            .sink { [weak self] isBeta in
                 guard let self else {
                     return
                 }
-                self.appType = overriddenAppType ?? ($0 ? .beta : .freemium)
+                self.appType = overriddenAppType ?? (isBeta ? .beta : .freemium)
                 pp_log.info("App type: \(self.appType)")
                 self.reloadReceipt()
             }.store(in: &subscriptions)

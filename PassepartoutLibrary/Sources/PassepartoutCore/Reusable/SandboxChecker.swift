@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
 
 // https://stackoverflow.com/a/32238344/784615
@@ -31,7 +32,13 @@ import Foundation
 public final class SandboxChecker: ObservableObject {
     private let bundle: Bundle
 
-    @Published public private(set) var isBeta = false
+    @Published private var isBeta = false
+
+    public var isBetaPublisher: AnyPublisher<Bool, Never> {
+        $isBeta
+            .dropFirst()
+            .eraseToAnyPublisher()
+    }
 
     public init(bundle: Bundle) {
         self.bundle = bundle
