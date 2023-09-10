@@ -53,10 +53,6 @@ final class ProductManager: NSObject, ObservableObject {
 
     private let overriddenAppType: AppType?
 
-    private let sandboxChecker: SandboxChecker
-
-    private var subscriptions: Set<AnyCancellable>
-
     let buildProducts: BuildProducts
 
     let didRefundProducts = PassthroughSubject<Void, Never>()
@@ -95,10 +91,7 @@ final class ProductManager: NSObject, ObservableObject {
     init(overriddenAppType: AppType?, buildProducts: BuildProducts) {
         self.overriddenAppType = overriddenAppType
         self.buildProducts = buildProducts
-
         appType = .undefined
-        sandboxChecker = SandboxChecker(bundle: .main)
-        subscriptions = []
 
         products = []
         inApp = InApp()
@@ -113,18 +106,12 @@ final class ProductManager: NSObject, ObservableObject {
         SKPaymentQueue.default().add(self)
         refreshProducts()
 
-        sandboxChecker.$isBeta
-            .dropFirst() // ignore initial value
-            .sink { [weak self] in
-                guard let self else {
-                    return
-                }
-                self.appType = overriddenAppType ?? ($0 ? .beta : .freemium)
-                pp_log.info("App type: \(self.appType)")
-                self.reloadReceipt()
-            }.store(in: &subscriptions)
-
-        sandboxChecker.check()
+        Task {
+            let isBeta = await SandboxChecker().isBeta
+            appType = overriddenAppType ?? (isBeta ? .beta : .freemium)
+            pp_log.info("App type: \(appType)")
+            reloadReceipt()
+        }
     }
 
     deinit {
