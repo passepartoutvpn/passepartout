@@ -50,7 +50,6 @@
 		0E34AC7827F840890042F2AB /* OrganizerView+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */; };
 		0E34AC8227F892C40042F2AB /* OnDemandView+SSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */; };
 		0E35C09A280E95BB0071FA35 /* ProviderProfileAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E35C099280E95BB0071FA35 /* ProviderProfileAvailability.swift */; };
-		0E3A3C102AA9AA530003A5F6 /* KeyValueStore+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A3C0F2AA9AA530003A5F6 /* KeyValueStore+CloudKit.swift */; };
 		0E3A3C132AAB7C480003A5F6 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A3C112AAB7C470003A5F6 /* UpgradeManager.swift */; };
 		0E3A3C142AAB7C480003A5F6 /* DefaultUpgradeManagerStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A3C122AAB7C480003A5F6 /* DefaultUpgradeManagerStrategy.swift */; };
 		0E3A3C162AAB8AB80003A5F6 /* UpgradeManagerStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A3C152AAB8AB80003A5F6 /* UpgradeManagerStrategy.swift */; };
@@ -344,7 +343,6 @@
 		0E34AC7727F840890042F2AB /* OrganizerView+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+Scene.swift"; sourceTree = "<group>"; };
 		0E34AC8127F892C40042F2AB /* OnDemandView+SSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnDemandView+SSID.swift"; sourceTree = "<group>"; };
 		0E35C099280E95BB0071FA35 /* ProviderProfileAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfileAvailability.swift; sourceTree = "<group>"; };
-		0E3A3C0F2AA9AA530003A5F6 /* KeyValueStore+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyValueStore+CloudKit.swift"; sourceTree = "<group>"; };
 		0E3A3C112AAB7C470003A5F6 /* UpgradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeManager.swift; sourceTree = "<group>"; };
 		0E3A3C122AAB7C480003A5F6 /* DefaultUpgradeManagerStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUpgradeManagerStrategy.swift; sourceTree = "<group>"; };
 		0E3A3C152AAB8AB80003A5F6 /* UpgradeManagerStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeManagerStrategy.swift; sourceTree = "<group>"; };
@@ -746,7 +744,6 @@
 			isa = PBXGroup;
 			children = (
 				0EBC075C27EC529000208AD9 /* DebugLog+Constants.swift */,
-				0E3A3C0F2AA9AA530003A5F6 /* KeyValueStore+CloudKit.swift */,
 				0EB17EB927D2560300D473B5 /* PassepartoutProviders+Extensions.swift */,
 				0E35C099280E95BB0071FA35 /* ProviderProfileAvailability.swift */,
 				0E2DE71B27DCCFE80067B9E1 /* TunnelKit+Extensions.swift */,
@@ -1545,7 +1542,6 @@
 				0E53249927D26B51002565C3 /* ProductManager.swift in Sources */,
 				0E9C233027F47032007D5FC7 /* IntentsManager.swift in Sources */,
 				0EB4042C27CA0E8C00378B1A /* Unlocalized.swift in Sources */,
-				0E3A3C102AA9AA530003A5F6 /* KeyValueStore+CloudKit.swift in Sources */,
 				0EB4042E27CA136300378B1A /* AddingTextField.swift in Sources */,
 				0EE8B7E327FF340F00B68621 /* VPNProtocolType+FileExtensions.swift in Sources */,
 				0EF2212B27E667EA001D0BD7 /* AddProviderView+Name.swift in Sources */,

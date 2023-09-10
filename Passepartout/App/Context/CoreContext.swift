@@ -49,7 +49,7 @@ final class CoreContext {
 
         vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName,
-            cloudKit: store.isCloudSyncingEnabled
+            cloudKit: persistenceManager.isCloudSyncingEnabled
         )
         let providersPersistence = persistenceManager.providersPersistence(
             withName: Constants.Persistence.providersContainerName
@@ -100,12 +100,12 @@ final class CoreContext {
 
         // post
 
-        configureObjects()
+        configureObjects(persistenceManager: persistenceManager)
     }
 }
 
 private extension CoreContext {
-    func configureObjects() {
+    func configureObjects(persistenceManager: PersistenceManager) {
         providerManager.rateLimitMilliseconds = Constants.RateLimit.providerManager
         vpnManager.tunnelLogPath = Constants.Log.Tunnel.path
         vpnManager.tunnelLogFormat = Constants.Log.Tunnel.format
@@ -114,28 +114,26 @@ private extension CoreContext {
         vpnManager.observeUpdates()
 
         CoreConfiguration.masksPrivateData = vpnManager.masksPrivateData
-        vpnManager.didUpdatePreferences.sink {
-            CoreConfiguration.masksPrivateData = $0.masksPrivateData
-        }.store(in: &cancellables)
+        vpnManager.didUpdatePreferences
+            .sink {
+                CoreConfiguration.masksPrivateData = $0.masksPrivateData
+            }.store(in: &cancellables)
+
+        persistenceManager.didChangePersistence
+            .sink { [weak self] in
+                self?.reloadCloudKitObjects(persistenceManager: persistenceManager)
+            }.store(in: &cancellables)
     }
 }
 
 // MARK: CloudKit
 
 extension CoreContext {
-    func reloadCloudKitObjects(isEnabled: Bool) {
-        // FIXME: context, observe PersistenceManager
-//        vpnPersistence = persistenceManager.vpnPersistence(
-//            withName: Constants.Persistence.profilesContainerName,
-//            cloudKit: isEnabled
-//        )
-//        profileManager.swapProfileRepository(vpnPersistence.profileRepository())
-    }
-
-    func eraseCloudKitStore() async {
-        await vpnPersistence.eraseCloudKitStore(
-            fromContainerWithId: Constants.CloudKit.containerId,
-            zoneId: .init(zoneName: Constants.CloudKit.coreDataZone)
+    func reloadCloudKitObjects(persistenceManager: PersistenceManager) {
+        vpnPersistence = persistenceManager.vpnPersistence(
+            withName: Constants.Persistence.profilesContainerName,
+            cloudKit: persistenceManager.isCloudSyncingEnabled
         )
+        profileManager.swapProfileRepository(vpnPersistence.profileRepository())
     }
 }

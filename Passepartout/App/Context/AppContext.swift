@@ -31,8 +31,6 @@ import PassepartoutLibrary
 final class AppContext {
     private let coreContext: CoreContext
 
-    private var lastIsCloudSyncingEnabled: Bool?
-
     let upgradeManager: UpgradeManager
 
     let productManager: ProductManager
@@ -130,31 +128,5 @@ private extension AppContext {
             return false
         }
         return true
-    }
-}
-
-// MARK: CloudKit
-
-extension AppContext {
-    var shouldEnableCloudSyncing: Bool {
-        get {
-            coreContext.store.shouldEnableCloudSyncing
-        }
-        set {
-            coreContext.store.shouldEnableCloudSyncing = newValue
-
-            // iCloud may be externally disabled from the device settings
-            let isCloudSyncingEnabled = coreContext.store.isCloudSyncingEnabled
-            guard isCloudSyncingEnabled != lastIsCloudSyncingEnabled else {
-                pp_log.debug("CloudKit state did not change")
-                return
-            }
-            coreContext.reloadCloudKitObjects(isEnabled: isCloudSyncingEnabled)
-            lastIsCloudSyncingEnabled = isCloudSyncingEnabled
-        }
-    }
-
-    func eraseCloudKitStore() async {
-        await coreContext.eraseCloudKitStore()
     }
 }
