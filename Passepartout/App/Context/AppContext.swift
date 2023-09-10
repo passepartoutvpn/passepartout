@@ -37,6 +37,8 @@ final class AppContext {
 
     let productManager: ProductManager
 
+    let persistenceManager: PersistenceManager
+
     private let reviewer: Reviewer
 
     private var cancellables: Set<AnyCancellable> = []
@@ -61,10 +63,12 @@ final class AppContext {
             buildProducts: Constants.InApp.buildProducts
         )
 
+        persistenceManager = PersistenceManager(store: store)
+
         reviewer = Reviewer()
         reviewer.eventCountBeforeRating = Constants.Rating.eventCount
 
-        coreContext = CoreContext(store: store)
+        coreContext = CoreContext(persistenceManager: persistenceManager)
 
         // post
 

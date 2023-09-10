@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutLibrary
 
 final class PersistenceManager {
-    private let store: KeyValueStore
+    let store: KeyValueStore
 
     init(store: KeyValueStore) {
         self.store = store

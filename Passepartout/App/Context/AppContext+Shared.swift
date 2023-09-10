@@ -28,6 +28,8 @@ import PassepartoutLibrary
 
 // safer alternative to @EnvironmentObject
 
+// MARK: App
+
 extension AppContext {
     static let shared = AppContext(store: UserDefaultsStore(defaults: .standard, key: \.key))
 }
@@ -39,6 +41,12 @@ extension UpgradeManager {
 extension ProductManager {
     static let shared = AppContext.shared.productManager
 }
+
+extension PersistenceManager {
+    static let shared = AppContext.shared.persistenceManager
+}
+
+// MARK: App -> Core
 
 extension ProfileManager {
     static let shared = AppContext.shared.profileManager

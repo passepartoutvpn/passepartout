@@ -34,8 +34,6 @@ import TunnelKitManager
 final class CoreContext {
     let store: KeyValueStore
 
-    private let persistenceManager: PersistenceManager
-
     private(set) var vpnPersistence: VPNPersistence
 
     let providerManager: ProviderManager
@@ -46,10 +44,9 @@ final class CoreContext {
 
     private var cancellables: Set<AnyCancellable> = []
 
-    init(store: KeyValueStore) {
-        self.store = store
+    init(persistenceManager: PersistenceManager) {
+        store = persistenceManager.store
 
-        persistenceManager = PersistenceManager(store: store)
         vpnPersistence = persistenceManager.vpnPersistence(
             withName: Constants.Persistence.profilesContainerName,
             cloudKit: store.isCloudSyncingEnabled
@@ -127,11 +124,12 @@ private extension CoreContext {
 
 extension CoreContext {
     func reloadCloudKitObjects(isEnabled: Bool) {
-        vpnPersistence = persistenceManager.vpnPersistence(
-            withName: Constants.Persistence.profilesContainerName,
-            cloudKit: isEnabled
-        )
-        profileManager.swapProfileRepository(vpnPersistence.profileRepository())
+        // FIXME: context, observe PersistenceManager
+//        vpnPersistence = persistenceManager.vpnPersistence(
+//            withName: Constants.Persistence.profilesContainerName,
+//            cloudKit: isEnabled
+//        )
+//        profileManager.swapProfileRepository(vpnPersistence.profileRepository())
     }
 
     func eraseCloudKitStore() async {
