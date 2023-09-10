@@ -45,6 +45,7 @@ public final class SandboxChecker: ObservableObject {
         }
     }
 
+    // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst
     private func isBetaBuild() async -> Bool {
         #if targetEnvironment(macCatalyst) || os(macOS)
         isMacTestFlightBuild
