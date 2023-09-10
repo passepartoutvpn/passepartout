@@ -31,27 +31,18 @@ struct SettingsView: View {
 
     @ObservedObject private var productManager: ProductManager
 
+    @ObservedObject private var persistenceManager: PersistenceManager
+
     @Environment(\.presentationMode) private var presentationMode
 
     @AppStorage(AppPreference.locksInBackground.key) private var locksInBackground = false
-
-    @Binding private var shouldEnableCloudSyncing: Bool
-
-    @State private var isErasingCloudStore = false
 
     private let versionString = Constants.Global.appVersionString
 
     init() {
         profileManager = .shared
         productManager = .shared
-
-        _shouldEnableCloudSyncing = .init {
-            AppContext.shared.shouldEnableCloudSyncing
-        } set: { isEnabled in
-            withAnimation {
-                AppContext.shared.shouldEnableCloudSyncing = isEnabled
-            }
-        }
+        persistenceManager = .shared
     }
 
     var body: some View {
@@ -82,15 +73,13 @@ private extension SettingsView {
 
     var iCloudSection: some View {
         Section {
-            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $shouldEnableCloudSyncing)
+            Toggle(L10n.Settings.Items.ShouldEnableCloudSyncing.caption, isOn: $persistenceManager.shouldEnableCloudSyncing.themeAnimation())
             Button(L10n.Settings.Items.EraseCloudStore.caption) {
-                isErasingCloudStore = true
                 Task {
-                    await AppContext.shared.eraseCloudKitStore()
-                    isErasingCloudStore = false
+                    await persistenceManager.eraseCloudKitStore()
                 }
-            }.withTrailingProgress(when: isErasingCloudStore)
-            .disabled(shouldEnableCloudSyncing || isErasingCloudStore)
+            }.withTrailingProgress(when: persistenceManager.isErasingCloudKitStore)
+            .disabled(persistenceManager.shouldEnableCloudSyncing || persistenceManager.isErasingCloudKitStore)
         } header: {
             Text(Unlocalized.Other.iCloud)
         } footer: {

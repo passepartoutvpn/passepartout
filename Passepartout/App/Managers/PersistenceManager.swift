@@ -23,15 +23,29 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CloudKit
+import Combine
 import CoreData
 import Foundation
 import PassepartoutLibrary
 
-final class PersistenceManager {
-    private let store: KeyValueStore
+final class PersistenceManager: ObservableObject {
+    let store: KeyValueStore
+
+    private(set) var isCloudSyncingEnabled: Bool {
+        didSet {
+            pp_log.info("CloudKit enabled: \(isCloudSyncingEnabled)")
+            didChangePersistence.send()
+        }
+    }
+
+    @Published private(set) var isErasingCloudKitStore = false
+
+    let didChangePersistence = PassthroughSubject<Void, Never>()
 
     init(store: KeyValueStore) {
         self.store = store
+        isCloudSyncingEnabled = store.canEnableCloudSyncing
 
         // set once
         if persistenceAuthor == nil {
@@ -39,8 +53,8 @@ final class PersistenceManager {
         }
     }
 
-    func vpnPersistence(withName containerName: String, cloudKit: Bool) -> VPNPersistence {
-        VPNPersistence(withName: containerName, cloudKit: cloudKit, author: persistenceAuthor)
+    func vpnPersistence(withName containerName: String) -> VPNPersistence {
+        VPNPersistence(withName: containerName, cloudKit: isCloudSyncingEnabled, author: persistenceAuthor)
     }
 
     func providersPersistence(withName containerName: String) -> ProvidersPersistence {
@@ -48,7 +62,58 @@ final class PersistenceManager {
     }
 }
 
+// MARK: CloudKit
+
+extension PersistenceManager {
+    func eraseCloudKitStore() async {
+        await MainActor.run {
+            isErasingCloudKitStore = true
+        }
+        await Self.eraseCloudKitStore(
+            fromContainerWithId: Constants.CloudKit.containerId,
+            zoneId: .init(zoneName: Constants.CloudKit.coreDataZone)
+        )
+        await MainActor.run {
+            isErasingCloudKitStore = false
+        }
+    }
+
+    // WARNING: this is not running on main actor
+    private static func eraseCloudKitStore(fromContainerWithId containerId: String, zoneId: CKRecordZone.ID) async {
+        do {
+            let container = CKContainer(identifier: containerId)
+            let db = container.privateCloudDatabase
+            try await db.deleteRecordZone(withID: zoneId)
+        } catch {
+            pp_log.error("Unable to erase CloudKit store: \(error)")
+        }
+    }
+}
+
 // MARK: KeyValueStore
+
+private extension KeyValueStore {
+    private var cloudKitToken: Any? {
+        FileManager.default.ubiquityIdentityToken
+    }
+
+    private var isCloudKitSupported: Bool {
+        cloudKitToken != nil
+    }
+
+    var canEnableCloudSyncing: Bool {
+        isCloudKitSupported && shouldEnableCloudSyncing
+    }
+
+    var shouldEnableCloudSyncing: Bool {
+        get {
+            value(forLocation: PersistenceManager.StoreKey.shouldEnableCloudSyncing) ?? false
+        }
+        set {
+            setValue(newValue, forLocation: PersistenceManager.StoreKey.shouldEnableCloudSyncing)
+        }
+    }
+}
 
 extension PersistenceManager {
     private(set) var persistenceAuthor: String? {
@@ -59,11 +124,33 @@ extension PersistenceManager {
             store.setValue(newValue, forLocation: StoreKey.persistenceAuthor)
         }
     }
+
+    var shouldEnableCloudSyncing: Bool {
+        get {
+            store.shouldEnableCloudSyncing
+        }
+        set {
+            objectWillChange.send()
+            store.shouldEnableCloudSyncing = newValue
+
+            // iCloud may be externally disabled from the device settings
+            let newIsCloudSyncingEnabled = store.canEnableCloudSyncing
+            guard newIsCloudSyncingEnabled != isCloudSyncingEnabled else {
+                pp_log.debug("CloudKit state did not change")
+                return
+            }
+            isCloudSyncingEnabled = newIsCloudSyncingEnabled
+        }
+    }
 }
 
-private extension PersistenceManager {
+// TODO: iCloud, restore private after dropping migration from 2.2.0
+// private extension PersistenceManager {
+extension PersistenceManager {
     enum StoreKey: String, KeyStoreDomainLocation {
         case persistenceAuthor
+
+        case shouldEnableCloudSyncing
 
         var domain: String {
             "Passepartout.PersistenceManager"

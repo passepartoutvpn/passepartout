@@ -31,32 +31,46 @@ import PassepartoutLibrary
 final class AppContext {
     private let coreContext: CoreContext
 
-    private var lastIsCloudSyncingEnabled: Bool?
+    let upgradeManager: UpgradeManager
 
     let productManager: ProductManager
+
+    let persistenceManager: PersistenceManager
 
     private let reviewer: Reviewer
 
     private var cancellables: Set<AnyCancellable> = []
 
-    init(coreContext: CoreContext) {
-        self.coreContext = coreContext
+    init(store: KeyValueStore) {
+        let logger = SwiftyBeaverLogger(
+            logFile: Constants.Log.App.url,
+            logLevel: Constants.Log.level,
+            logFormat: Constants.Log.App.format
+        )
+        Passepartout.shared.logger = logger
+        pp_log.info("Logging to: \(logger.logFile!)")
+
+        upgradeManager = UpgradeManager(
+            store: store,
+            strategy: DefaultUpgradeManagerStrategy()
+        )
+        upgradeManager.migrate(toVersion: Constants.Global.appVersionNumber)
 
         productManager = ProductManager(
             overriddenAppType: Constants.InApp.overriddenAppType,
             buildProducts: Constants.InApp.buildProducts
         )
 
+        persistenceManager = PersistenceManager(store: store)
+
         reviewer = Reviewer()
         reviewer.eventCountBeforeRating = Constants.Rating.eventCount
+
+        coreContext = CoreContext(persistenceManager: persistenceManager)
 
         // post
 
         configureObjects()
-    }
-
-    var upgradeManager: UpgradeManager {
-        coreContext.upgradeManager
     }
 
     var providerManager: ProviderManager {
@@ -114,31 +128,5 @@ private extension AppContext {
             return false
         }
         return true
-    }
-}
-
-// MARK: CloudKit
-
-extension AppContext {
-    var shouldEnableCloudSyncing: Bool {
-        get {
-            coreContext.store.shouldEnableCloudSyncing
-        }
-        set {
-            coreContext.store.shouldEnableCloudSyncing = newValue
-
-            // iCloud may be externally disabled from the device settings
-            let isCloudSyncingEnabled = coreContext.store.isCloudSyncingEnabled
-            guard isCloudSyncingEnabled != lastIsCloudSyncingEnabled else {
-                pp_log.debug("CloudKit state did not change")
-                return
-            }
-            coreContext.reloadCloudKitObjects(isEnabled: isCloudSyncingEnabled)
-            lastIsCloudSyncingEnabled = isCloudSyncingEnabled
-        }
-    }
-
-    func eraseCloudKitStore() async {
-        await coreContext.eraseCloudKitStore()
     }
 }
