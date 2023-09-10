@@ -33,7 +33,7 @@ public final actor SandboxChecker: ObservableObject {
     }
 
     public var isBeta: Bool {
-        let isBeta = isBetaBuild()
+        let isBeta = verifyBetaBuild()
         pp_log.info("Beta build: \(isBeta)")
         return isBeta
     }
@@ -44,7 +44,7 @@ public final actor SandboxChecker: ObservableObject {
 private extension SandboxChecker {
 
     // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst
-    func isBetaBuild() -> Bool {
+    func verifyBetaBuild() -> Bool {
         #if targetEnvironment(macCatalyst) || os(macOS)
         isMacTestFlightBuild
         #elseif os(iOS)
