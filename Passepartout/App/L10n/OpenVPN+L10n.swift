@@ -272,7 +272,7 @@ extension TunnelKitOpenVPNError: LocalizedError {
             return V.shutdown
 
         default:
-            return L10n.Global.unknown
+            return L10n.Global.Strings.unknown
         }
     }
 }

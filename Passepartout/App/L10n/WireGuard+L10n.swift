@@ -62,7 +62,7 @@ extension TunnelKitWireGuardError: LocalizedError {
             return V.dns
 
         default:
-            return L10n.Global.unknown
+            return L10n.Global.Strings.unknown
         }
     }
 }
