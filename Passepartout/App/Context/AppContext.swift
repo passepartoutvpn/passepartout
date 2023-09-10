@@ -61,7 +61,11 @@ final class AppContext {
             buildProducts: Constants.InApp.buildProducts
         )
 
-        persistenceManager = PersistenceManager(store: store)
+        persistenceManager = PersistenceManager(
+            store: store,
+            ckContainerId: Constants.CloudKit.containerId,
+            ckCoreDataZone: Constants.CloudKit.coreDataZone
+        )
 
         reviewer = Reviewer()
         reviewer.eventCountBeforeRating = Constants.Rating.eventCount

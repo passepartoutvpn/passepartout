@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CloudKit
 import Combine
 import Foundation
 import PassepartoutLibrary
@@ -45,10 +44,10 @@ final class CoreContext {
     init(persistenceManager: PersistenceManager) {
         store = persistenceManager.store
 
-        let vpnPersistence = persistenceManager.vpnPersistence(
+        let vpnPersistence = persistenceManager.loadVPNPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
-        let providersPersistence = persistenceManager.providersPersistence(
+        let providersPersistence = persistenceManager.loadProvidersPersistence(
             withName: Constants.Persistence.providersContainerName
         )
 
@@ -118,16 +117,12 @@ private extension CoreContext {
 
         persistenceManager.didChangePersistence
             .sink { [weak self] in
-                self?.reloadCloudKitObjects(persistenceManager: persistenceManager)
+                self?.reloadPersistenceObjects(persistenceManager: persistenceManager)
             }.store(in: &cancellables)
     }
-}
 
-// MARK: CloudKit
-
-extension CoreContext {
-    func reloadCloudKitObjects(persistenceManager: PersistenceManager) {
-        let vpnPersistence = persistenceManager.vpnPersistence(
+    func reloadPersistenceObjects(persistenceManager: PersistenceManager) {
+        let vpnPersistence = persistenceManager.loadVPNPersistence(
             withName: Constants.Persistence.profilesContainerName
         )
         profileManager.swapProfileRepository(vpnPersistence.profileRepository())

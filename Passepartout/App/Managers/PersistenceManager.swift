@@ -32,6 +32,14 @@ import PassepartoutLibrary
 final class PersistenceManager: ObservableObject {
     let store: KeyValueStore
 
+    private let ckContainerId: String
+
+    private let ckCoreDataZone: String
+
+    private var vpnPersistence: VPNPersistence?
+
+    private var providersPersistence: ProvidersPersistence?
+
     private(set) var isCloudSyncingEnabled: Bool {
         didSet {
             pp_log.info("CloudKit enabled: \(isCloudSyncingEnabled)")
@@ -43,8 +51,10 @@ final class PersistenceManager: ObservableObject {
 
     let didChangePersistence = PassthroughSubject<Void, Never>()
 
-    init(store: KeyValueStore) {
+    init(store: KeyValueStore, ckContainerId: String, ckCoreDataZone: String) {
         self.store = store
+        self.ckContainerId = ckContainerId
+        self.ckCoreDataZone = ckCoreDataZone
         isCloudSyncingEnabled = store.canEnableCloudSyncing
 
         // set once
@@ -53,12 +63,16 @@ final class PersistenceManager: ObservableObject {
         }
     }
 
-    func vpnPersistence(withName containerName: String) -> VPNPersistence {
-        VPNPersistence(withName: containerName, cloudKit: isCloudSyncingEnabled, author: persistenceAuthor)
+    func loadVPNPersistence(withName containerName: String) -> VPNPersistence {
+        let persistence = VPNPersistence(withName: containerName, cloudKit: isCloudSyncingEnabled, author: persistenceAuthor)
+        vpnPersistence = persistence
+        return persistence
     }
 
-    func providersPersistence(withName containerName: String) -> ProvidersPersistence {
-        ProvidersPersistence(withName: containerName, cloudKit: false, author: persistenceAuthor)
+    func loadProvidersPersistence(withName containerName: String) -> ProvidersPersistence {
+        let persistence = ProvidersPersistence(withName: containerName, cloudKit: false, author: persistenceAuthor)
+        providersPersistence = persistence
+        return persistence
     }
 }
 
@@ -70,8 +84,8 @@ extension PersistenceManager {
             isErasingCloudKitStore = true
         }
         await Self.eraseCloudKitStore(
-            fromContainerWithId: Constants.CloudKit.containerId,
-            zoneId: .init(zoneName: Constants.CloudKit.coreDataZone)
+            fromContainerWithId: ckContainerId,
+            zoneId: .init(zoneName: ckCoreDataZone)
         )
         await MainActor.run {
             isErasingCloudKitStore = false
