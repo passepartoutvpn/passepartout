@@ -39,6 +39,8 @@ public final actor SandboxChecker: ObservableObject {
     }
 }
 
+// MARK: Shared
+
 private extension SandboxChecker {
 
     // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst
