@@ -32,7 +32,7 @@ import Foundation
 public final class SandboxChecker: ObservableObject {
     private let bundle: Bundle
 
-    @Published public private(set) var isSandbox = false
+    @Published public private(set) var isBeta = false
 
     public init(bundle: Bundle) {
         self.bundle = bundle
@@ -40,13 +40,28 @@ public final class SandboxChecker: ObservableObject {
 
     public func check() {
         Task {
-            isSandbox = await isSandboxBuild()
-            pp_log.info("Sandbox build: \(isSandbox)")
+            isBeta = await isBetaBuild()
+            pp_log.info("Beta build: \(isBeta)")
         }
     }
 
-    private func isSandboxBuild() async -> Bool {
+    private func isBetaBuild() async -> Bool {
         #if targetEnvironment(macCatalyst) || os(macOS)
+        isMacTestFlightBuild
+        #elseif os(iOS)
+        isiOSSandboxBuild
+        #else
+        false
+        #endif
+    }
+}
+
+private extension SandboxChecker {
+    var isiOSSandboxBuild: Bool {
+        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+    }
+
+    var isMacTestFlightBuild: Bool {
         var status = noErr
 
         var code: SecStaticCode?
@@ -77,10 +92,5 @@ public final class SandboxChecker: ObservableObject {
             requirement
         )
         return status == errSecSuccess
-        #elseif os(iOS)
-        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-        #else
-        false
-        #endif
     }
 }

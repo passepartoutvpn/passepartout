@@ -113,7 +113,7 @@ final class ProductManager: NSObject, ObservableObject {
         SKPaymentQueue.default().add(self)
         refreshProducts()
 
-        sandboxChecker.$isSandbox
+        sandboxChecker.$isBeta
             .dropFirst() // ignore initial value
             .sink { [weak self] in
                 guard let self else {
