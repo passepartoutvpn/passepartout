@@ -56,11 +56,22 @@ public final class SandboxChecker: ObservableObject {
     }
 }
 
+// MARK: iOS
+
+#if os(iOS)
 private extension SandboxChecker {
     var isiOSSandboxBuild: Bool {
         bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     }
+}
+#endif
 
+// MARK: macOS
+
+#if targetEnvironment(macCatalyst) || os(macOS)
+import Security
+
+private extension SandboxChecker {
     var isMacTestFlightBuild: Bool {
         var status = noErr
 
@@ -94,3 +105,4 @@ private extension SandboxChecker {
         return status == errSecSuccess
     }
 }
+#endif
