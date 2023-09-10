@@ -1898,6 +1898,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout catalyst";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = targeted;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1924,6 +1925,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout catalyst";
 				SUPPORTS_MACCATALYST = YES;
+				SWIFT_STRICT_CONCURRENCY = targeted;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
