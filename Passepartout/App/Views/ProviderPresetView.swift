@@ -95,6 +95,8 @@ private extension ProviderPresetView {
 // MARK: - Bindings
 
 private extension ObservableProfile {
+
+    @MainActor
     func selectedPresetBinding(providerManager: ProviderManager) -> Binding<ProviderServer.Preset?> {
         .init {
             guard let serverId = self.value.providerServerId else {

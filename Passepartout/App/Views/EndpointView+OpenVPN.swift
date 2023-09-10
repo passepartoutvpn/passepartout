@@ -329,6 +329,8 @@ private struct EndpointsByAddress: Identifiable {
 // MARK: - Bindings
 
 private extension ObservableProfile {
+
+    @MainActor
     func builderBinding(providerManager: ProviderManager) -> Binding<OpenVPN.ConfigurationBuilder> {
         .init {
             if self.value.isProvider {

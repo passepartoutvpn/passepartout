@@ -26,6 +26,7 @@
 import Foundation
 import PassepartoutLibrary
 
+@MainActor
 protocol ProviderProfileAvailability {
     var profile: Profile { get }
 

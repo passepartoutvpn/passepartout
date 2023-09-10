@@ -309,6 +309,8 @@ private extension ProviderLocationView.ServerListView {
 // MARK: - Bindings
 
 private extension ObservableProfile {
+
+    @MainActor
     func selectedServerBinding(providerManager: ProviderManager, isPresented: Binding<Bool>) -> Binding<ProviderServer?> {
         .init {
             guard let serverId = self.value.providerServerId else {

@@ -133,7 +133,7 @@ extension TunnelKitVPNManagerStrategy {
     }
 
     public func reinstate(_ parameters: VPNConfigurationParameters) async throws {
-        let configuration = try vpnConfiguration(withParameters: parameters)
+        let configuration = try await vpnConfiguration(withParameters: parameters)
         guard let vpnType = configuration.neConfiguration as? VPNProtocolProviding else {
             fatalError("Configuration must implement VPNProtocolProviding")
         }
@@ -154,7 +154,7 @@ extension TunnelKitVPNManagerStrategy {
     }
 
     public func connect(_ parameters: VPNConfigurationParameters) async throws {
-        let configuration = try vpnConfiguration(withParameters: parameters)
+        let configuration = try await vpnConfiguration(withParameters: parameters)
         guard let vpnType = configuration.neConfiguration as? VPNProtocolProviding else {
             fatalError("Configuration must implement VPNProtocolProviding")
         }
@@ -301,6 +301,8 @@ private extension TunnelKitVPNManagerStrategy {
 // MARK: Configuration
 
 private extension TunnelKitVPNManagerStrategy {
+
+    @MainActor
     func vpnConfiguration(withParameters parameters: VPNConfigurationParameters) throws -> TunnelKitVPNConfiguration {
         let profile = parameters.profile
         do {
