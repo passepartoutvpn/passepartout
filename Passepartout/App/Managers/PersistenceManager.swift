@@ -53,8 +53,8 @@ final class PersistenceManager: ObservableObject {
         }
     }
 
-    func vpnPersistence(withName containerName: String, cloudKit: Bool) -> VPNPersistence {
-        VPNPersistence(withName: containerName, cloudKit: cloudKit, author: persistenceAuthor)
+    func vpnPersistence(withName containerName: String) -> VPNPersistence {
+        VPNPersistence(withName: containerName, cloudKit: isCloudSyncingEnabled, author: persistenceAuthor)
     }
 
     func providersPersistence(withName containerName: String) -> ProvidersPersistence {
