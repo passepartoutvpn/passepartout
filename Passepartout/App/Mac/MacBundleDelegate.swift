@@ -43,6 +43,7 @@ final class MacBundleDelegate: MacMenuDelegate {
         DefaultLightVPNManager()
     }
 
+    @MainActor
     var utils: LightUtils {
         DefaultLightUtils()
     }
