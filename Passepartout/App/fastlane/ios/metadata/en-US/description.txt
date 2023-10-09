@@ -1,6 +1,6 @@
 Passepartout is a smart VPN client perfectly integrated with Apple platforms. Passepartout is the only app you need for both well-known VPN providers and your personal VPN servers.
 
-With Trusted Networks, Passepartout unlocks the very best of using a VPN.
+With On Demand rules, Passepartout unlocks the very best of using a VPN.
 
 Passepartout does not engage any unrequested background activity other than the VPN tunnel, thus being also friendlier to firewalls.
 
@@ -28,7 +28,7 @@ EASY TO USE
 - Incredible ease of use, with native look & feel.
 - Handle your profiles in one single place.
 - Import .ovpn / .conf configuration files.
-- Use Trusted Networks to fine-grain your connectivity.
+- Use on demand rules to fine-grain your connectivity.
 - Fine-tune encryption without tweaking any configuration file.
 - Override network settings in a snap (default gateway, DNS, proxy, MTU).
 
