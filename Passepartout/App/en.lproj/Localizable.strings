@@ -258,13 +258,11 @@
 "on_demand.title" = "On demand";
 "on_demand.sections.policy.footer" = "Activate the VPN %@.";
 "on_demand.sections.policy.footer.any" = "in any network";
-"on_demand.sections.policy.footer.matching" = "%@ the networks below";
-"on_demand.sections.policy.footer.including" = "only in";
-"on_demand.sections.policy.footer.excluding" = "except in";
+"on_demand.sections.policy.footer.including" = "only in the networks below";
+"on_demand.sections.policy.footer.excluding" = "except in the networks below";
 "on_demand.items.add_ssid.caption" = "Add Wi-Fi";
 "on_demand.items.mobile.caption" = "Cellular network";
 "on_demand.items.ethernet.caption" = "Wired connections";
-"on_demand.items.ethernet.description" = "Check to match any wired cable connection.";
 
 "on_demand.policy.any" = "All networks";
 "on_demand.policy.including" = "Include";

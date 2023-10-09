@@ -92,13 +92,11 @@ private extension OnDemandView {
             suffix = L10n.OnDemand.Sections.Policy.Footer.any
 
         case .including, .excluding:
-            let arg: String
             if onDemand.policy == .including {
-                arg = L10n.OnDemand.Sections.Policy.Footer.including
+                suffix = L10n.OnDemand.Sections.Policy.Footer.including
             } else {
-                arg = L10n.OnDemand.Sections.Policy.Footer.excluding
+                suffix = L10n.OnDemand.Sections.Policy.Footer.excluding
             }
-            suffix = L10n.OnDemand.Sections.Policy.Footer.matching(arg)
         }
         return L10n.OnDemand.Sections.Policy.footer(suffix)
     }

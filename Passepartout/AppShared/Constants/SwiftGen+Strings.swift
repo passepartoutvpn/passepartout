@@ -657,8 +657,6 @@ internal enum L10n {
       internal enum Ethernet {
         /// Wired connections
         internal static let caption = L10n.tr("Localizable", "on_demand.items.ethernet.caption", fallback: "Wired connections")
-        /// Check to match any wired cable connection.
-        internal static let description = L10n.tr("Localizable", "on_demand.items.ethernet.description", fallback: "Check to match any wired cable connection.")
       }
       internal enum Mobile {
         /// Cellular network
@@ -682,14 +680,10 @@ internal enum L10n {
         internal enum Footer {
           /// in any network
           internal static let any = L10n.tr("Localizable", "on_demand.sections.policy.footer.any", fallback: "in any network")
-          /// except in
-          internal static let excluding = L10n.tr("Localizable", "on_demand.sections.policy.footer.excluding", fallback: "except in")
-          /// only in
-          internal static let including = L10n.tr("Localizable", "on_demand.sections.policy.footer.including", fallback: "only in")
-          /// %@ the networks below
-          internal static func matching(_ p1: Any) -> String {
-            return L10n.tr("Localizable", "on_demand.sections.policy.footer.matching", String(describing: p1), fallback: "%@ the networks below")
-          }
+          /// except in the networks below
+          internal static let excluding = L10n.tr("Localizable", "on_demand.sections.policy.footer.excluding", fallback: "except in the networks below")
+          /// only in the networks below
+          internal static let including = L10n.tr("Localizable", "on_demand.sections.policy.footer.including", fallback: "only in the networks below")
         }
       }
     }
