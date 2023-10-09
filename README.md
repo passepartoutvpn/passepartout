@@ -29,7 +29,7 @@ With its native look & feel, Passepartout focuses on ease of use. It does so by 
 
 Not to mention iCloud support, which makes your VPN profiles available on all your devices without any additional effort!
 
-### On-demand
+### On demand
 
 Define rules for Wi-Fi, cellular (iOS) or wired (macOS) networks to fine-grain how you automate your VPN connectivity.
 

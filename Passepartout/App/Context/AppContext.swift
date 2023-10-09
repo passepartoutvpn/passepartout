@@ -125,10 +125,10 @@ private extension AppContext {
         return true
     }
 
-    // eligibility: reset on-demand rules if no trusted networks
+    // eligibility: reset on demand rules if no trusted networks
     func isEligibleForOnDemandRules() -> Bool {
         guard productManager.isEligible(forFeature: .trustedNetworks) else {
-            pp_log.warning("Ignore on-demand rules, not eligible for trusted networks")
+            pp_log.warning("Ignore on demand rules, not eligible for trusted networks")
             return false
         }
         return true

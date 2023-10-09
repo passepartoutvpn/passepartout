@@ -648,7 +648,7 @@ internal enum L10n {
   }
   internal enum OnDemand {
     /// MARK: ProfileView -> OnDemandView
-    internal static let title = L10n.tr("Localizable", "on_demand.title", fallback: "On-demand")
+    internal static let title = L10n.tr("Localizable", "on_demand.title", fallback: "On demand")
     internal enum Items {
       internal enum AddSsid {
         /// Add Wi-Fi

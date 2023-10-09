@@ -255,7 +255,7 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "On-demand";
+"on_demand.title" = "On demand";
 "on_demand.sections.policy.footer" = "Activate the VPN %@.";
 "on_demand.sections.policy.footer.any" = "in any network";
 "on_demand.sections.policy.footer.matching" = "%@ the networks below";
