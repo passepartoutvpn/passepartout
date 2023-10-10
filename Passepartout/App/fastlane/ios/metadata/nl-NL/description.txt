@@ -1,7 +1,5 @@
 Passepartout is een slimme VPN-client die perfect is geïntegreerd in Apple-platformen. Passepartout is de enige app die je nodig hebt voor zowel bekende VPN-providers als je eigen VPN-servers.
 
-Met Trusted Networks haal je met Passepartout het meest uit het gebruik van een VPN.
-
 Passepartout neemt geen andere ongevraagde achtergrondactiviteit op dan de VPN-tunnel en is hierdoor ook vriendelijker voor firewalls.
 
 Passepartout is open source: https://github.com/passepartoutvpn
@@ -28,7 +26,7 @@ GEBRUIKSVRIENDELIJK
 - Ongelooflijk gebruiksgemak, met native look & feel.
 - Beheer je profielen op één plek.
 - Importeer .ovpn / .conf-configuratiebestanden.
-- Gebruik Trusted Networks om je connectiviteit nauwkeurig af te stellen.
+- Gebruik on-demand regels om uw connectiviteit te verfijnen.
 - Verfijn de codering zonder configuratiebestanden te hoeven aanpassen.
 - Overschrijf netwerkinstellingen in een flits (standaard poortadres, DNS, proxy, MTU).
 

@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Polityka";
+"global.strings.networks" = "Sieci";
+"global.strings.edit" = "Edytuj";
+"global.strings.unknown" = "Nieznane";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Wybierz punkt końcowy";
+
+"on_demand.sections.policy.footer.any" = "w dowolnej sieci";
+"on_demand.sections.policy.footer.including" = "tylko w poniższych sieciach";
+"on_demand.sections.policy.footer.excluding" = "z wyjątkiem poniższych sieci";
+"on_demand.policy.any" = "Wszystkie sieci";
+"on_demand.policy.including" = "Uwzględnij";
+"on_demand.policy.excluding" = "Wyklucz";
+
+"settings.sections.icloud.footer" = "Wyłącz synchronizację, aby umożliwić wymazywanie. Aby bezpiecznie wymazać magazyn iCloud, należy to zrobić na wszystkich zsynchronizowanych urządzeniach. Nie będzie to miało wpływu na profile lokalne.";
+"settings.items.should_enable_cloud_syncing.caption" = "Synchronizacja z iCloud";
+"settings.items.erase_cloud_store.caption" = "Wymaż pamięć iCloud";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Anuluj";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Użyj loginu do %@ z generatora konfiguracji OpenVPN dostępnego na stronie.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Wcześniej udostępniony klucz";
 "endpoint.wireguard.items.allowed_ip.caption" = "IP z zezwoleniem";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Zaufane sieci";
-"on_demand.sections.policy.footer" = "Kiedy urządzenie łączy się z zaufaną siecią, VPN jest wyłączane. Wyłącz tę opcję żeby nie wymuszać takiego zachowania.";
+"on_demand.title" = "Na żądanie";
+"on_demand.sections.policy.footer" = "Aktywuj VPN %@.";
 "on_demand.items.add_ssid.caption" = "Dodaj Wi-Fi";
 "on_demand.items.active.caption" = "Ufaj";
 "on_demand.items.mobile.caption" = "Sieć komórkowa";
-"on_demand.items.ethernet.caption" = "Ufaj połączeniom przewodowym";
-"on_demand.items.ethernet.description" = "Zaznacz, aby traktować każde przewodowe połączenie kablowe jako zaufane.";
-"on_demand.items.policy.caption" = "Wyłącz VPN dla zaufanych sieci";
+"on_demand.items.ethernet.caption" = "Połączenia przewodowe";
 
+"on_demand.items.policy.caption" = "Wyłącz VPN dla zaufanych sieci";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnostyka";

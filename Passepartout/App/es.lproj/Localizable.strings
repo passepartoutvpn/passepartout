@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Política";
+"global.strings.networks" = "Redes";
+"global.strings.edit" = "Modificar";
+"global.strings.unknown" = "Desconocido";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Seleccionar un extremo";
+
+"on_demand.sections.policy.footer.any" = "en cualquier red";
+"on_demand.sections.policy.footer.including" = "sólo en las redes abajo";
+"on_demand.sections.policy.footer.excluding" = "excepto en las redes abajo";
+"on_demand.policy.any" = "Todas las redes";
+"on_demand.policy.including" = "Incluir";
+"on_demand.policy.excluding" = "Excluir";
+
+"settings.sections.icloud.footer" = "Deshabilitar la sincronización para esta operación. Para borrar el store iCloud, repetir en todos los dispositivos sincronizados. Esto no afectará los perfiles locales.";
+"settings.items.should_enable_cloud_syncing.caption" = "Sincronizar con iCloud";
+"settings.items.erase_cloud_store.caption" = "Borrar store iCloud";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Cancelar";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Encuentra tus credenciales %@ en el \"OpenVPN Config Generator\" en la web.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Clave previamente compartida";
 "endpoint.wireguard.items.allowed_ip.caption" = "IP permitida";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Redes de confianza";
-"on_demand.sections.policy.footer" = "Entrando en una red de confianza, normalmente el VPN es cerrado y mantenido desconectado. Deshabilitar esta opción para no forzar este modo.";
+"on_demand.title" = "On demand";
+"on_demand.sections.policy.footer" = "Activar la VPN %@.";
 "on_demand.items.add_ssid.caption" = "Añadir Wi-Fi";
 "on_demand.items.active.caption" = "Confianza";
 "on_demand.items.mobile.caption" = "Red móvil";
-"on_demand.items.ethernet.caption" = "Confiar en conexiones cableadas";
-"on_demand.items.ethernet.description" = "Activa esta opción para confiar en cualquier conexión cableada.";
-"on_demand.items.policy.caption" = "Red de confianza deshabilita el VPN";
+"on_demand.items.ethernet.caption" = "Conexiones cableadas";
 
+"on_demand.items.policy.caption" = "Red de confianza deshabilita el VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnósticos";

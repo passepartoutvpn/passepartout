@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Make iCloud an opt-in preference. [#227](https://github.com/passepartoutvpn/passepartout-apple/issues/227)
 - OpenVPN: Endpoint UX. [#332](https://github.com/passepartoutvpn/passepartout-apple/pull/332)
-- Convert trusted networks to on-demand activation. [#119](https://github.com/passepartoutvpn/passepartout-apple/issues/119)
+- Convert trusted networks to on demand activation. [#119](https://github.com/passepartoutvpn/passepartout-apple/issues/119)
 
 ## 2.1.2 (2023-07-06)
 

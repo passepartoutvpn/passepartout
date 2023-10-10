@@ -238,7 +238,7 @@ extension VPNManager {
 
         if !isHandled {
             if newProfile.onDemand != lastProfile.onDemand {
-                pp_log.info("On-demand settings changed")
+                pp_log.info("On demand settings changed")
                 isHandled = true
                 shouldReconnect = false
             }

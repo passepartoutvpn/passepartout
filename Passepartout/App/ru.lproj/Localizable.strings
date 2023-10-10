@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Политика";
+"global.strings.networks" = "Сети";
+"global.strings.edit" = "Редактировать";
+"global.strings.unknown" = "Неизвестно";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Выберите конечную точку";
+
+"on_demand.sections.policy.footer.any" = "в любой сети";
+"on_demand.sections.policy.footer.including" = "только в сетях ниже";
+"on_demand.sections.policy.footer.excluding" = "кроме сетей ниже";
+"on_demand.policy.any" = "Все сети";
+"on_demand.policy.including" = "Включить";
+"on_demand.policy.excluding" = "Исключить";
+
+"settings.sections.icloud.footer" = "Отключите синхронизацию, чтобы разрешить удаление. Чтобы безопасно очистить хранилище iCloud, сделайте это на всех синхронизированных устройствах. Это не повлияет на локальные профили.";
+"settings.items.should_enable_cloud_syncing.caption" = "Синхронизировать с iCloud";
+"settings.items.erase_cloud_store.caption" = "Очистить iCloud";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Отменить";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Найдите Ваши данные для входа %@ в OpenVPN Config Generator на веб-сайте.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Узел";
 "endpoint.wireguard.items.preshared_key.caption" = "Общий ключ";
 "endpoint.wireguard.items.allowed_ip.caption" = "Допустимый IP";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Доверенные сети";
-"on_demand.sections.policy.footer" = "При подключении к доверенным сетям VPN обычно выключается, и остаётся отключенным. Отключите эту опцию чтобы оставлять VPN подключенным.";
+"on_demand.title" = "По требованию";
+"on_demand.sections.policy.footer" = "Активировать VPN %@.";
 "on_demand.items.add_ssid.caption" = "Добавить Wi-Fi";
 "on_demand.items.active.caption" = "Доверенные";
 "on_demand.items.mobile.caption" = "Мобильная сеть";
-"on_demand.items.ethernet.caption" = "Доверенные проводные подключения";
-"on_demand.items.ethernet.description" = "Включите, чтобы добавить в доверенные проводное подключение.";
-"on_demand.items.policy.caption" = "Дов. сеть отключает VPN";
+"on_demand.items.ethernet.caption" = "Проводные подключения";
 
+"on_demand.items.policy.caption" = "Дов. сеть отключает VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Диагностика";

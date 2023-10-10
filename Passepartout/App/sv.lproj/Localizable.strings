@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Policy";
+"global.strings.networks" = "Nätverk";
+"global.strings.edit" = "Redigera";
+"global.strings.unknown" = "Okänt";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Välj en ändpunkt";
+
+"on_demand.sections.policy.footer.any" = "i alla nätverk";
+"on_demand.sections.policy.footer.including" = "enbart i nedanstående nätverk";
+"on_demand.sections.policy.footer.excluding" = "utom i nedanstående nätverk";
+"on_demand.policy.any" = "Alla nätverk";
+"on_demand.policy.including" = "Inkludera";
+"on_demand.policy.excluding" = "Uteslut";
+
+"settings.sections.icloud.footer" = "Inaktivera synkronisering för att göra det möjligt att radera. För att radera iCloud-lagring på ett säkert sätt behöver du göra det på alla dina synkroniserade enheter. Detta påverkar inte lokala profiler.";
+"settings.items.should_enable_cloud_syncing.caption" = "Synkronisera med iCloud";
+"settings.items.erase_cloud_store.caption" = "Radera iCloud-lagring";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Avbryt";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Hitta din %@ credentials i OpenVPN Config Generator på webbplatsen.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Tidigare delad nyckel";
 "endpoint.wireguard.items.allowed_ip.caption" = "Tillåtet IP";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Tillförlitliga nätverk";
-"on_demand.sections.policy.footer" = "När du advänder ett betrott nätverk, VPN:et stängs normalt och hålls bortkopplat. Avaktivera detta alternativet för att inte genomdriva sådant beteende.";
+"on_demand.title" = "På begäran";
+"on_demand.sections.policy.footer" = "Aktivera VPN %@.";
 "on_demand.items.add_ssid.caption" = "Lägg till Wi-Fi";
 "on_demand.items.active.caption" = "Betrodda";
 "on_demand.items.mobile.caption" = "Mobilt nätverk";
-"on_demand.items.ethernet.caption" = "Lita på kabelanslutna uppkopplingar";
-"on_demand.items.ethernet.description" = "Markera för att lita på alla kabelanslutna uppkopplingar.";
-"on_demand.items.policy.caption" = "Förtroende inaktiverar VPN";
+"on_demand.items.ethernet.caption" = "Kabelanslutna uppkopplingar";
 
+"on_demand.items.policy.caption" = "Förtroende inaktiverar VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnostics";

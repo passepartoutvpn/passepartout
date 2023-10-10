@@ -69,7 +69,6 @@ private extension OnDemandView {
             Toggle(L10n.Global.Strings.enabled, isOn: $onDemand.isEnabled.themeAnimation())
             if onDemand.isEnabled {
                 themeTextPicker(
-                    // FIXME: l10n, on-demand
                     L10n.Global.Strings.policy,
                     selection: $onDemand.policy,
                     values: [.any, .including, .excluding],
@@ -81,7 +80,6 @@ private extension OnDemandView {
         }
     }
 
-    // FIXME: l10n, on-demand
     var policyFooterDescription: String {
         guard onDemand.isEnabled else {
             return "" // better animation than removing footer completely
@@ -92,13 +90,11 @@ private extension OnDemandView {
             suffix = L10n.OnDemand.Sections.Policy.Footer.any
 
         case .including, .excluding:
-            let arg: String
             if onDemand.policy == .including {
-                arg = L10n.OnDemand.Sections.Policy.Footer.including
+                suffix = L10n.OnDemand.Sections.Policy.Footer.including
             } else {
-                arg = L10n.OnDemand.Sections.Policy.Footer.excluding
+                suffix = L10n.OnDemand.Sections.Policy.Footer.excluding
             }
-            suffix = L10n.OnDemand.Sections.Policy.Footer.matching(arg)
         }
         return L10n.OnDemand.Sections.Policy.footer(suffix)
     }
@@ -109,14 +105,12 @@ private extension OnDemandView {
             Section {
                 Toggle(L10n.OnDemand.Items.Mobile.caption, isOn: $onDemand.withMobileNetwork)
             } header: {
-                // FIXME: l10n, on-demand
                 Text(L10n.Global.Strings.networks)
             }
         } else if Utils.hasEthernet() {
             Section {
                 Toggle(L10n.OnDemand.Items.Ethernet.caption, isOn: $onDemand.withEthernetNetwork)
             } header: {
-                // FIXME: l10n, on-demand
                 Text(L10n.Global.Strings.networks)
             }
         }

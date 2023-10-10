@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Politique";
+"global.strings.networks" = "Réseaux";
+"global.strings.edit" = "Modifier";
+"global.strings.unknown" = "Inconnu";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Veuillez sélectionner un point terminal";
+
+"on_demand.sections.policy.footer.any" = "sur n'importe quel réseau";
+"on_demand.sections.policy.footer.including" = "sur les réseaux ci-dessous uniquement";
+"on_demand.sections.policy.footer.excluding" = "sauf sur les réseaux ci-dessous";
+"on_demand.policy.any" = "Tous les réseaux";
+"on_demand.policy.including" = "Inclure";
+"on_demand.policy.excluding" = "Exclure";
+
+"settings.sections.icloud.footer" = "Désactiver la synchronisation pour effacer. Pour effacer la boutique iCloud en toute sécurité, faites de même sur tous vos appareils synchronisés. Ceci n'affectera pas les profils locaux.";
+"settings.items.should_enable_cloud_syncing.caption" = "Synchroniser avec iCloud";
+"settings.items.erase_cloud_store.caption" = "Effacer la boutique iCloud";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Annuler";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Trouver votre identifiant %@ dans la section web Générateur de configuration OpenVPN.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Clé pré-partagée";
 "endpoint.wireguard.items.allowed_ip.caption" = "IP autorisée";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Réseaux de confiance";
-"on_demand.sections.policy.footer" = "Lors d'une connection à un réseau de confiance, le VPN est normalement fermé. Désactivez cette option pour ne pas autoriser ce comportement.";
+"on_demand.title" = "Sur demande";
+"on_demand.sections.policy.footer" = "Activez le VPN %@.";
 "on_demand.items.add_ssid.caption" = "Ajouter Wi-Fi";
 "on_demand.items.active.caption" = "Fiables";
 "on_demand.items.mobile.caption" = "Réseau cellulaire";
-"on_demand.items.ethernet.caption" = "Faire confiance aux connexions filaires";
-"on_demand.items.ethernet.description" = "Cochez pour faire confiance à toutes les connexions filaires.";
-"on_demand.items.policy.caption" = "La confiance désactive le VPN";
+"on_demand.items.ethernet.caption" = "Connexions filaires";
 
+"on_demand.items.policy.caption" = "La confiance désactive le VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnostiques";

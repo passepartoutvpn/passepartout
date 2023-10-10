@@ -62,7 +62,7 @@ final class CDProfileRepository: ProfileRepository {
 
             try profiles.forEach {
 
-                // FIXME: on-demand, workaround to retain profiles on downgrade (field is required before 2.2.0)
+                // FIXME: on demand, workaround to retain profiles on downgrade (field is required before 2.2.0)
                 var copy = $0
                 copy.onDemand.disconnectsIfNotMatching = true
 

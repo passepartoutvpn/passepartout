@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Beleid";
+"global.strings.networks" = "Netwerken";
+"global.strings.edit" = "Bewerken";
+"global.strings.unknown" = "Onbekend";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Selecteer een eindpunt";
+
+"on_demand.sections.policy.footer.any" = "in welk netwerk dan ook";
+"on_demand.sections.policy.footer.including" = "alleen in de netwerken hieronder";
+"on_demand.sections.policy.footer.excluding" = "niet in de netwerken hieronder";
+"on_demand.policy.any" = "Alle netwerken";
+"on_demand.policy.including" = "Bevat wel";
+"on_demand.policy.excluding" = "Bevat niet";
+
+"settings.sections.icloud.footer" = "Synchroniseren uitschakelen om wissen toe te staan. Om de iCloud-opslag veilig te wissen, moet u dit doen op alle gesynchroniseerde apparaten. Dit heeft geen invloed op lokale profielen.";
+"settings.items.should_enable_cloud_syncing.caption" = "Met iCloud synchroniseren";
+"settings.items.erase_cloud_store.caption" = "iCloud-opslag wissen";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Afbreken";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Vind de inloggegevens van %@ in de OpenVPN Config Generator op de website.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Vooraf gedeelde sleutel";
 "endpoint.wireguard.items.allowed_ip.caption" = "Toegestane IP";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Vertrouwde netwerken";
-"on_demand.sections.policy.footer" = "Bij het invoeren van een vertrouwd netwerk wordt de VPN uitgeschakeld en niet verbonden gehouden. Schakel deze optie uit om dergelijk gedrag niet af te dwingen.";
+"on_demand.title" = "On-demand";
+"on_demand.sections.policy.footer" = "Activeer de VPN %@.";
 "on_demand.items.add_ssid.caption" = "Wi-Fi toevoegen";
 "on_demand.items.active.caption" = "Vertrouwen";
 "on_demand.items.mobile.caption" = "Mobiel netwerk";
-"on_demand.items.ethernet.caption" = "Bekabelde verbindingen vertrouwen";
-"on_demand.items.ethernet.description" = "Vink aan om alle bekabelde verbindingen te vertrouwen.";
-"on_demand.items.policy.caption" = "Trust disables VPN";
+"on_demand.items.ethernet.caption" = "Bekabelde verbindingen";
 
+"on_demand.items.policy.caption" = "Trust disables VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnose";

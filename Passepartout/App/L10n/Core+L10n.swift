@@ -100,7 +100,6 @@ extension Profile.WireGuardSettings: StyledOptionalLocalizableEntity {
 
 extension Profile.OnDemand.Policy: LocalizableEntity {
     public var localizedDescription: String {
-        // FIXME: l10n, on-demand
         switch self {
         case .any:
             return L10n.OnDemand.Policy.any
