@@ -92,7 +92,6 @@ private extension EndpointView.OpenVPNView {
         Section {
             Toggle(L10n.Global.Strings.automatic, isOn: $isAutomatic.themeAnimation())
         } footer: {
-            // FIXME: l10n, endpoint
             themeErrorMessage(isManualEndpointRequired ? L10n.Endpoint.Errors.endpointRequired : nil)
         }
     }

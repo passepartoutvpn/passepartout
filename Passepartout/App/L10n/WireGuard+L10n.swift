@@ -42,7 +42,7 @@ extension WireGuard.ConfigurationBuilder: StyledOptionalLocalizableEntity {
 
 private extension UInt16 {
     var keepAliveDescription: String {
-        // FIXME: l10n, move from OpenVPN to shared
+        // TODO: l10n, move from OpenVPN to shared
         let V = L10n.Endpoint.Advanced.Openvpn.Items.self
         if self > 0 {
             return V.KeepAlive.Value.seconds(Int(self))
