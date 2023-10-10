@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Policy";
+"global.strings.networks" = "Reti";
+"global.strings.edit" = "Modifica";
+"global.strings.unknown" = "Sconosciuto";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Seleziona un endpoint";
+
+"on_demand.sections.policy.footer.any" = "in qualsiasi rete";
+"on_demand.sections.policy.footer.including" = "solo nelle reti in basso";
+"on_demand.sections.policy.footer.excluding" = "eccetto nelle reti in basso";
+"on_demand.policy.any" = "Tutte le reti";
+"on_demand.policy.including" = "Includi";
+"on_demand.policy.excluding" = "Escludi";
+
+"settings.sections.icloud.footer" = "Disabilita la sincronizzazione per permettere la cancellazione. Per cancellare in modo sicuro lo store iCloud, ripeti l'operazione su tutti i tuoi device sincronizzati. I profili locali non saranno modificati.";
+"settings.items.should_enable_cloud_syncing.caption" = "Sincronizza con iCloud";
+"settings.items.erase_cloud_store.caption" = "Cancella store iCloud";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Annulla";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Trova le tue credenziali nell'OpenVPN Config Generator sul sito di %@.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Chiave condivisa";
 "endpoint.wireguard.items.allowed_ip.caption" = "IP ammesso";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Reti sicure";
-"on_demand.sections.policy.footer" = "Entrando in una rete sicura, normalmente la VPN viene spenta e mantenuta disconnessa. Disabilita quest'opzione per non imporre questo comportamento.";
+"on_demand.title" = "On demand";
+"on_demand.sections.policy.footer" = "Attiva la VPN %@.";
 "on_demand.items.add_ssid.caption" = "Aggiungi Wi-Fi";
 "on_demand.items.active.caption" = "Sicura";
 "on_demand.items.mobile.caption" = "Rete cellulare";
-"on_demand.items.ethernet.caption" = "Connessioni cablate sicure";
-"on_demand.items.ethernet.description" = "Seleziona per considerare sicura qualsiasi rete cablata.";
-"on_demand.items.policy.caption" = "Spegni VPN in rete sicura";
+"on_demand.items.ethernet.caption" = "Connessioni cablate";
 
+"on_demand.items.policy.caption" = "Spegni VPN in rete sicura";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnostica";

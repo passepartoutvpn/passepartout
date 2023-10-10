@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Política";
+"global.strings.networks" = "Redes";
+"global.strings.edit" = "Editar";
+"global.strings.unknown" = "Desconhecido";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Por favor, escolha um ponto final";
+
+"on_demand.sections.policy.footer.any" = "em qualquer rede";
+"on_demand.sections.policy.footer.including" = "apenas nas redes abaixo";
+"on_demand.sections.policy.footer.excluding" = "exceto nas redes abaixo";
+"on_demand.policy.any" = "Todas as redes";
+"on_demand.policy.including" = "Incluir";
+"on_demand.policy.excluding" = "Excluir";
+
+"settings.sections.icloud.footer" = "Desative a sincronizar para permitir apagar. Para apagar a loja iCloud de forma segura, faça-o em todos os seus dispositivos sincronizados. Isto não irá afetar os perfis locais";
+"settings.items.should_enable_cloud_syncing.caption" = "Sincronizar com iCloud";
+"settings.items.erase_cloud_store.caption" = "Apagar loja da iCloud";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Cancelar";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Encontre %@ credenciais no gerador de configuração OpenVPN do site.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Ponto";
 "endpoint.wireguard.items.preshared_key.caption" = "Chave pré-partilhada";
 "endpoint.wireguard.items.allowed_ip.caption" = "IP Permitido";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Redes seguras";
-"on_demand.sections.policy.footer" = "Ao entrar em uma rede segura, a VPN é normalmente é desconectada e mantido inativa. Desative essa opção para não forçar esse comportamento.";
+"on_demand.title" = "A pedido";
+"on_demand.sections.policy.footer" = "Ativar a VPN %@.";
 "on_demand.items.add_ssid.caption" = "Adicionar Wi-Fi";
 "on_demand.items.active.caption" = "Confiar";
 "on_demand.items.mobile.caption" = "Rede celular";
-"on_demand.items.ethernet.caption" = "Confiar em ligações com fios";
-"on_demand.items.ethernet.description" = "Assinale para confiar em qualquer ligação com cabo.";
-"on_demand.items.policy.caption" = "Trust disables VPN";
+"on_demand.items.ethernet.caption" = "Ligações com fios";
 
+"on_demand.items.policy.caption" = "Trust disables VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnóstico";

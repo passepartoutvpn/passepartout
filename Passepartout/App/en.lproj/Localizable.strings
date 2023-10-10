@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Policy";
+"global.strings.networks" = "Networks";
+"global.strings.edit" = "Edit";
+"global.strings.unknown" = "Unknown";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Please select an endpoint";
+
+"on_demand.sections.policy.footer.any" = "in any network";
+"on_demand.sections.policy.footer.including" = "only in the networks below";
+"on_demand.sections.policy.footer.excluding" = "except in the networks below";
+"on_demand.policy.any" = "All networks";
+"on_demand.policy.including" = "Include";
+"on_demand.policy.excluding" = "Exclude";
+
+"settings.sections.icloud.footer" = "Disable sync to allow erase. To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
+"settings.items.should_enable_cloud_syncing.caption" = "Sync with iCloud";
+"settings.items.erase_cloud_store.caption" = "Erase iCloud store";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Cancel";
@@ -51,10 +70,6 @@
 "global.strings.disconnect" = "Disconnect";
 "global.strings.download" = "Download";
 "global.strings.authentication" = "Authentication";
-"global.strings.policy" = "Policy";
-"global.strings.networks" = "Networks";
-"global.strings.edit" = "Edit";
-"global.strings.unknown" = "Unknown";
 "global.messages.unlock_app" = "Passepartout is locked";
 "global.messages.email_not_configured" = "No e-mail account is configured.";
 "global.messages.share" = "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";
@@ -206,9 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Find your %@ credentials in the OpenVPN Config Generator on the website.";
 
 /* MARK: ProfileView -> EndpointView */
-
-"endpoint.errors.endpoint_required" = "Please select an endpoint";
-
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Preshared key";
 "endpoint.wireguard.items.allowed_ip.caption" = "Allowed IP";
@@ -257,17 +269,12 @@
 
 "on_demand.title" = "On demand";
 "on_demand.sections.policy.footer" = "Activate the VPN %@.";
-"on_demand.sections.policy.footer.any" = "in any network";
-"on_demand.sections.policy.footer.including" = "only in the networks below";
-"on_demand.sections.policy.footer.excluding" = "except in the networks below";
 "on_demand.items.add_ssid.caption" = "Add Wi-Fi";
+"on_demand.items.active.caption" = "Trust";
 "on_demand.items.mobile.caption" = "Cellular network";
 "on_demand.items.ethernet.caption" = "Wired connections";
 
-"on_demand.policy.any" = "All networks";
-"on_demand.policy.including" = "Include";
-"on_demand.policy.excluding" = "Exclude";
-
+"on_demand.items.policy.caption" = "Trust disables VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnostics";
@@ -330,10 +337,7 @@
 /* MARK: SettingsView */
 
 "settings.title" = "Settings";
-"settings.sections.icloud.footer" = "Disable sync to allow erase. To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 "settings.items.locks_in_background.caption" = "Lock app access";
-"settings.items.should_enable_cloud_syncing.caption" = "Sync with iCloud";
-"settings.items.erase_cloud_store.caption" = "Erase iCloud store";
 "settings.items.donate.caption" = "Make a donation";
 
 /* MARK: AboutView */

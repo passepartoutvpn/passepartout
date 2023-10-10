@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "政策";
+"global.strings.networks" = "网络";
+"global.strings.edit" = "编辑";
+"global.strings.unknown" = "未知";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "请选择一个终端";
+
+"on_demand.sections.policy.footer.any" = "在任何网络中";
+"on_demand.sections.policy.footer.including" = "仅在以下网络中";
+"on_demand.sections.policy.footer.excluding" = "以下网络除外";
+"on_demand.policy.any" = "全部网络";
+"on_demand.policy.including" = "包括";
+"on_demand.policy.excluding" = "排除";
+
+"settings.sections.icloud.footer" = "禁用同步以允许移除。若要安全地移除iCloud存储，请在所有同步设备上执行此操作。这不会影响本地配置文件。";
+"settings.items.should_enable_cloud_syncing.caption" = "与iCloud同步";
+"settings.items.erase_cloud_store.caption" = "移除iCloud储存";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "取消";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "在网站上的OpenVPN配置生成器中找到你的%@认证信息。 ";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "同级";
 "endpoint.wireguard.items.preshared_key.caption" = "预共用密码";
 "endpoint.wireguard.items.allowed_ip.caption" = "允许的IP";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "可信网络";
-"on_demand.sections.policy.footer" = "当进入可信网络后，VPN将会断开并保持断开状态。禁用此选项可关闭此功能。";
+"on_demand.title" = "随需";
+"on_demand.sections.policy.footer" = "激活VPN %@。";
 "on_demand.items.add_ssid.caption" = "新增Wi-Fi";
 "on_demand.items.active.caption" = "信任";
 "on_demand.items.mobile.caption" = "蜂窝网络";
-"on_demand.items.ethernet.caption" = "信任有线连接";
-"on_demand.items.ethernet.description" = "选中以信任所有有线连接。";
-"on_demand.items.policy.caption" = "信任网络中禁用VPN";
+"on_demand.items.ethernet.caption" = "有线连接";
 
+"on_demand.items.policy.caption" = "信任网络中禁用VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "分析数据";

@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Richtlinie";
+"global.strings.networks" = "Netzwerke";
+"global.strings.edit" = "Bearbeiten";
+"global.strings.unknown" = "Unbekannt";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Bitte einen Endpunkt";
+
+"on_demand.sections.policy.footer.any" = "in einem beliebigen Netzwerk auswählen";
+"on_demand.sections.policy.footer.including" = "innerhalb der unten stehenden Netzwerke auswählen";
+"on_demand.sections.policy.footer.excluding" = "außerhalb der unten stehenden Netzwerke auswählen";
+"on_demand.policy.any" = "Alle Netzwerke";
+"on_demand.policy.including" = "Einschließlich";
+"on_demand.policy.excluding" = "Ausschließlich";
+
+"settings.sections.icloud.footer" = "Deaktiviere zum Löschen die Synchronisierung. Tue dies auf allen synchronisierten Geräten, um den iCloud-Store sicher zu löschen. Lokale Profile sind davon nicht betroffen.";
+"settings.items.should_enable_cloud_syncing.caption" = "Mit iCloud synchronisieren";
+"settings.items.erase_cloud_store.caption" = "iCloud-Store löschen";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Abbrechen";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Deine Zugangsdaten für %@ findest du im OpenVPN Config Generator auf der Webseite.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Peer";
 "endpoint.wireguard.items.preshared_key.caption" = "Vorinstallierter Key";
 "endpoint.wireguard.items.allowed_ip.caption" = "Zulässige IP";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Vertrauenswürdige Netzwerke";
-"on_demand.sections.policy.footer" = "Wenn ein vertrauenswürdiges Netzwerk verbunden wird, wird normalerweise die VPN-Verbindung beendet und bleibt deaktiviert. Deaktiviere diese Option um dieses Verhalten zu unterbinden.";
+"on_demand.title" = "On-demand";
+"on_demand.sections.policy.footer" = "VPN %@ aktivieren.";
 "on_demand.items.add_ssid.caption" = "WLAN hinzufügen";
 "on_demand.items.active.caption" = "Vertrauen";
 "on_demand.items.mobile.caption" = "Mobilfunknetz";
-"on_demand.items.ethernet.caption" = "Kabelverbindungen vertrauen";
-"on_demand.items.ethernet.description" = "Hier ein Häkchen setzen, um jeder Kabelverbindung zu vertrauen.";
-"on_demand.items.policy.caption" = "Vertrauen deaktiviert VPN";
+"on_demand.items.ethernet.caption" = "Kabelverbindungen";
 
+"on_demand.items.policy.caption" = "Vertrauen deaktiviert VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Diagnose";

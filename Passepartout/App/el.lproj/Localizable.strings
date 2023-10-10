@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Πολιτική";
+"global.strings.networks" = "Δίκτυα";
+"global.strings.edit" = "Επεξεργασία";
+"global.strings.unknown" = "Άγνωστο";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Επιλέξτε ένα καταληκτικό σημείο";
+
+"on_demand.sections.policy.footer.any" = "σε οποιοδήποτε δίκτυο";
+"on_demand.sections.policy.footer.including" = "μόνο στα παρακάτω δίκτυα";
+"on_demand.sections.policy.footer.excluding" = "εκτός από τα παρακάτω δίκτυα";
+"on_demand.policy.any" = "Όλα τα δίκτυα";
+"on_demand.policy.including" = "Συμπερίληψη";
+"on_demand.policy.excluding" = "Αποκλεισμός";
+
+"settings.sections.icloud.footer" = "Απενεργοποιήστε τον συγχρονισμό για να επιτραπεί η διαγραφή. Για να διαγράψετε το κατάστημα iCloud με ασφάλεια, κάντε το σε όλες τις συγχρονισμένες συσκευές σας. Αυτό δεν θα επηρεάσει τα τοπικά προφίλ.";
+"settings.items.should_enable_cloud_syncing.caption" = "Συγχρονισμός με iCloud";
+"settings.items.erase_cloud_store.caption" = "Διαγραφή καταστήματος iCloud";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Ακύρωση";
@@ -202,7 +221,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Βρείτε τα διαπιστευτήριά σας %@ στο OpenVPN Config Generator στον ιστότοπο.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Ομότιμο";
 "endpoint.wireguard.items.preshared_key.caption" = "Κλειδί προδιαμοιρασμού";
 "endpoint.wireguard.items.allowed_ip.caption" = "Επιτρεπόμενη IP";
@@ -249,15 +267,14 @@
 
 /* MARK: ProfileView -> OnDemandView */
 
-"on_demand.title" = "Αξιόπιστα δίκτυα";
-"on_demand.sections.policy.footer" = "Κατά την είσοδο σε ένα αξιόπιστο δίκτυο, το VPN απενεργοποιείται κανονικά και διατηρείται αποσυνδεδεμένο. Απενεργοποιήστε αυτήν την επιλογή για να μην έχετε μια τέτοια συμπεριφορά.";
+"on_demand.title" = "Κατά παραγγελία";
+"on_demand.sections.policy.footer" = "Ενεργοποιήστε το VPN %@.";
 "on_demand.items.add_ssid.caption" = "Προσθέστε Wi-Fi";
 "on_demand.items.active.caption" = "Εμπιστευθείτε";
 "on_demand.items.mobile.caption" = "Δίκτυο Κινητής";
-"on_demand.items.ethernet.caption" = "Εμπιστευθείτε τις ενσύρματες συνδέσεις";
-"on_demand.items.ethernet.description" = "Επιλέξτε για να εμπιστευθείτε οποιαδήποτε ενσύρματη σύνδεση καλωδίου.";
-"on_demand.items.policy.caption" = "Τα αξιόπιστα δίκτυα απενεργοποιούν το VPN";
+"on_demand.items.ethernet.caption" = "Ενσύρματες συνδέσεις";
 
+"on_demand.items.policy.caption" = "Τα αξιόπιστα δίκτυα απενεργοποιούν το VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Διαγνωστικά";
