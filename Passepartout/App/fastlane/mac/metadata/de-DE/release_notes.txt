@@ -6,5 +6,5 @@
 
 - Make iCloud an opt-in preference.
 - OpenVPN: Endpoint UX.
-- Convert trusted networks to on-demand activation.
+- Convert trusted networks to on demand activation.
 
