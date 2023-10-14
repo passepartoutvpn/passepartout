@@ -1891,7 +1891,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
@@ -1919,7 +1918,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(CFG_APP_ID)";
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.algoritmico.ios.Passepartout";
