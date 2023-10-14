@@ -1,10 +1,4 @@
-### Added
+### Fixed
 
-- OpenVPN: Allow editing of endpoints.
-
-### Changed
-
-- Make iCloud an opt-in preference.
-- OpenVPN: Endpoint UX.
-- Convert trusted networks to on demand activation.
+- Persisted profile is overwritten with its former value.
 
