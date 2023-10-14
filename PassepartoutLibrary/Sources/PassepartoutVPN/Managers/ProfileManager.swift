@@ -371,8 +371,7 @@ extension ProfileManager {
             currentProfile.value = .placeholder
         }
 
-        let newProfile = profileRepository.profile(withId: currentProfile.value.id)
-        if let newProfile = newProfile, newProfile != currentProfile.value {
+        if let newProfile = newProfiles[currentProfile.value.id], newProfile != currentProfile.value {
             pp_log.info("Current profile remotely updated")
             currentProfile.value = newProfile
         }
