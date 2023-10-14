@@ -237,7 +237,7 @@ extension Constants {
         #if targetEnvironment(macCatalyst)
         static let eventCount = 10
         #else
-        static let eventCount = 3
+        static let eventCount = 20
         #endif
     }
 }
