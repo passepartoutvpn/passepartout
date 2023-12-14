@@ -1,8 +1,8 @@
 //
-//  PacketTunnelProvider.swift
+//  Constants+Tunnel.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 3/15/22.
+//  Created by Davide De Rosa on 12/14/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,11 +24,9 @@
 //
 
 import Foundation
-import WireGuardAppExtension
 
-final class PacketTunnelProvider: WireGuardTunnelProvider {
-    override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        dataCountInterval = Constants.WireGuardTunnel.dataCountInterval
-        super.startTunnel(options: options, completionHandler: completionHandler)
+extension Constants {
+    enum WireGuardTunnel {
+        static let dataCountInterval = 5000
     }
 }
