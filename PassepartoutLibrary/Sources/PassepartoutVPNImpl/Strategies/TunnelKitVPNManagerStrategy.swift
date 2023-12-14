@@ -383,6 +383,9 @@ private extension TunnelKitVPNManagerStrategy {
         case tunnelBundleIdentifier(.openVPN):
             return defaults.openVPNDataCount
 
+        case tunnelBundleIdentifier(.wireGuard):
+            return defaults.wireGuardDataCount
+
         default:
             return nil
         }

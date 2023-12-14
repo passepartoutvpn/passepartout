@@ -167,6 +167,7 @@
 		0EBE880F281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE880E281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift */; };
 		0ECB78E9285F5DE300B0E460 /* PassepartoutMac.bundle in Embed Plugins */ = {isa = PBXBuildFile; fileRef = 0ECB78DA285F52F700B0E460 /* PassepartoutMac.bundle */; platformFilter = maccatalyst; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0ECF71EE27B6A99300CDB528 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF71ED27B6A99300CDB528 /* AccountView.swift */; };
+		0ED1A5FD2B2B98CC00A0EA90 /* Constants+Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1A5FC2B2B98CC00A0EA90 /* Constants+Tunnel.swift */; };
 		0ED1D6DC27DBA41700983466 /* DiagnosticsView+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */; };
 		0ED1D6DE27DBA42100983466 /* DiagnosticsView+WireGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */; };
 		0ED2B33927D3C49800FD8EA9 /* OpenVPNAppExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED2B33827D3C49800FD8EA9 /* OpenVPNAppExtension */; };
@@ -490,6 +491,7 @@
 		0ECB78E1285F53ED00B0E460 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0ECB78EA2861D1F300B0E460 /* PassepartoutLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PassepartoutLibrary; sourceTree = "<group>"; };
 		0ECF71ED27B6A99300CDB528 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		0ED1A5FC2B2B98CC00A0EA90 /* Constants+Tunnel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants+Tunnel.swift"; sourceTree = "<group>"; };
 		0ED1D6DB27DBA41700983466 /* DiagnosticsView+OpenVPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiagnosticsView+OpenVPN.swift"; sourceTree = "<group>"; };
 		0ED1D6DD27DBA42100983466 /* DiagnosticsView+WireGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiagnosticsView+WireGuard.swift"; sourceTree = "<group>"; };
 		0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutWireGuardTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -987,6 +989,7 @@
 		0ED2B33D27D3C53400FD8EA9 /* WireGuard */ = {
 			isa = PBXGroup;
 			children = (
+				0ED1A5FC2B2B98CC00A0EA90 /* Constants+Tunnel.swift */,
 				0ED2B35A27D3C94F00FD8EA9 /* PacketTunnelProvider.swift */,
 			);
 			path = WireGuard;
@@ -1577,6 +1580,7 @@
 			files = (
 				0ED2B35B27D3C94F00FD8EA9 /* PacketTunnelProvider.swift in Sources */,
 				0ED30DDD27EA35230057D8A3 /* Constants.swift in Sources */,
+				0ED1A5FD2B2B98CC00A0EA90 /* Constants+Tunnel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
