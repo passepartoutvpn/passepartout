@@ -192,12 +192,13 @@ private extension String {
 
 // MARK: -
 
+@MainActor
 private extension GenericCreditsView.LicenseView {
     func loadURL() {
         guard content == nil else {
             return
         }
-        Task { @MainActor in
+        Task {
             withAnimation {
                 do {
                     content = try String(contentsOf: url)
