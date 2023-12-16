@@ -45,6 +45,8 @@ public final class VPNManager: ObservableObject {
 
     public var isOnDemandRulesSupported: () -> Bool
 
+    public var userData: (Profile) -> [String: Any]?
+
     // MARK: State
 
     public let currentState: ObservableVPNState
@@ -78,6 +80,7 @@ public final class VPNManager: ObservableObject {
         self.strategy = strategy
         isNetworkSettingsSupported = { false }
         isOnDemandRulesSupported = { false }
+        userData = { _ in nil }
 
         currentState = ObservableVPNState()
     }
@@ -290,7 +293,8 @@ private extension VPNManager {
             preferences: vpnPreferences,
             passwordReference: profileManager.passwordReference(forProfile: profile),
             withNetworkSettings: isNetworkSettingsSupported(),
-            withCustomRules: isOnDemandRulesSupported()
+            withCustomRules: isOnDemandRulesSupported(),
+            userData: userData(profile)
         )
     }
 }

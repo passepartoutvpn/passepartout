@@ -72,7 +72,7 @@
 "global.strings.authentication" = "Аутентификация";
 "global.messages.unlock_app" = "Passepartout заблокирован";
 "global.messages.email_not_configured" = "E-mail аккаунт не создан.";
-"global.messages.share" = "Passepartout — это удобный в использовании клиент OpenVPN / WireGuard для iOS и macOS с открытым исходным кодом";
+"global.messages.share" = "Passepartout — это удобный в использовании клиент OpenVPN / WireGuard для iOS и macOS с открытым исходным кодом"; // FIXME: l10n, Apple platforms
 
 "global.alerts.buttons.remind" = "Напомнить позже";
 "global.alerts.buttons.never" = "Больше не спрашивать";
@@ -83,6 +83,7 @@
 "global.errors.missing_account" = "Отсутствует учетная запись";
 "global.errors.missing_provider_server" = "Отсутствует местоположение";
 "global.errors.missing_provider_preset" = "Отсутствует пресет";
+"global.errors.tunnel_expired" = "Срок действия соединения истек";
 
 /* MARK: Menus */
 
@@ -132,6 +133,7 @@
 /* MARK: OrganizerView */
 
 "organizer.sections.active" = "Используется";
+"organizer.sections.tv.profiles_list.header.p1" = "Откройте Passepartout на своем устройстве iOS или macOS и включите Apple TV в профиле, чтобы он появился здесь.";
 /* MARK: OrganizerView */
 "organizer.empty.no_profiles" = "Нет профилей";
 
@@ -163,6 +165,9 @@
 "profile.sections.vpn.footer" = "Соединение будет установлено при необходимости.";
 "profile.sections.status.header" = "Соединение";
 "profile.sections.provider_infrastructure.footer" = "Последнее обновление %@.";
+"profile.sections.tv.footer.encryption" = "Профили зашифрованы и доступны на вашем Apple TV через iCloud.";
+"profile.sections.tv.footer.restricted.p1" = "Тем не менее, срок действия соединения истечет через %d мин.";
+"profile.sections.tv.footer.restricted.p2" = "Совершите покупку, чтобы снять ограничение.";
 "profile.sections.vpn_survives_sleep.footer" = "Отключите для уменьшения расхода заряда аккумулятора, может привести к временным замедлениям в связи с повторным подключением после \"пробуждения\".";
 "profile.sections.vpn_resolves_hostname.footer" = "Предпочтительно в большинстве сетей и необходимо в некоторых IPv6 сетях. Отключите если  DNS заблокирован, или для увеличения скорости в случае медленных ответов DNS.";
 "profile.sections.feedback.header" = "Отзыв";
@@ -178,6 +183,8 @@
 "profile.items.only_shows_favorites.caption" = "Показывать только места из избранного";
 "profile.items.vpn_survives_sleep.caption" = "Оставлять включенным во время сна";
 "profile.items.vpn_resolves_hostname.caption" = "Разрешить имя хоста сервера";
+"profile.items.tv_sharing.caption.limited" = "Ограничено до %d мин.";
+"profile.items.expires_at.caption" = "Срок действия";
 
 "profile.alerts.rename.title" = "Переименовать профиль";
 "profile.alerts.reconnect_vpn.message" = "Хотите заново подключиться к VPN?";
@@ -323,6 +330,7 @@
 "paywall.items.full_version.extra_description" = "Все провайдеры (включая добавленных в будущем)\n%@";
 "paywall.items.restore.title" = "Восстановить покупки";
 "paywall.items.restore.description" = "Если Вы купили это приложение или совершили встроенные покупки в прошлом, вы можете восстановить ваши покупки, и этот баннер больше не появится.";
+"paywall.alerts.purchase.appletv.success.message" = "Спасибо! Ограничение по времени будет снято, как только iCloud обновит данные. Перезапустите соединение через несколько секунд в приложении TV.";
 
 /* MARK: DonateView */
 

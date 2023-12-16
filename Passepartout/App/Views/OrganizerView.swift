@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import PassepartoutLibrary
 import SwiftUI
 
@@ -89,12 +90,14 @@ struct OrganizerView: View {
             presenting: alertType,
             actions: alertActions,
             message: alertMessage
-        ).fileImporter(
+        )
+        .fileImporter(
             isPresented: $isHostFileImporterPresented,
             allowedContentTypes: hostFileTypes,
             allowsMultipleSelection: false,
             onCompletion: onHostFileImporterResult
-        ).onOpenURL(perform: onOpenURL)
+        )
+        .onOpenURL(perform: onOpenURL)
         .themePrimaryView()
     }
 }
@@ -171,3 +174,4 @@ private extension OrganizerView {
         addProfileModalType = .addHost(url, false)
     }
 }
+#endif

@@ -127,7 +127,7 @@
          <EnvironmentVariable
             key = "APP_TYPE"
             value = "2"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "LOG_LEVEL"

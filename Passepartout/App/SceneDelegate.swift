@@ -33,10 +33,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         #if targetEnvironment(macCatalyst)
         MacBundle.shared.utils.sendAppToBackground()
         #endif
+        #if !os(tvOS)
         rebuildShortcutItems()
+        #endif
     }
 
+    #if !os(tvOS)
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         handleShortcutItem(shortcutItem)
     }
+    #endif
 }

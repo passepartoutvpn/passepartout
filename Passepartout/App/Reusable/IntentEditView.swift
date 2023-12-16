@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import Intents
 import IntentsUI
 import SwiftUI
@@ -41,3 +42,4 @@ struct IntentEditView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: INUIEditVoiceShortcutViewController, context: UIViewControllerRepresentableContext<IntentEditView>) {
     }
 }
+#endif

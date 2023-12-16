@@ -73,6 +73,7 @@ private extension ProfileView.VPNSection {
         VPNToggle(
             profile: profile,
             interactiveProfile: interactiveProfile,
+            title: L10n.Global.Strings.enabled,
             rateLimit: Constants.RateLimit.vpnToggle
         )
     }

@@ -48,6 +48,7 @@ public final class ProvidersPersistence {
             withName: containerName,
             model: Self.dataModel,
             cloudKit: cloudKit,
+            cloudKitIdentifier: nil,
             author: author
         )
     }

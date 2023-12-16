@@ -72,7 +72,7 @@
 "global.strings.authentication" = "身份验证";
 "global.messages.unlock_app" = "Passepartout已被锁定";
 "global.messages.email_not_configured" = "未配置e-mail账户。";
-"global.messages.share" = "Passepartout是适用于iOS和macOS操作系统的OpenVPN/WireGuard开源客户端，易于使用";
+"global.messages.share" = "Passepartout是适用于iOS和macOS操作系统的OpenVPN/WireGuard开源客户端，易于使用"; // FIXME: l10n, Apple platforms
 
 "global.alerts.buttons.remind" = "稍后提醒我";
 "global.alerts.buttons.never" = "不要再问";
@@ -83,6 +83,7 @@
 "global.errors.missing_account" = "缺少帐户";
 "global.errors.missing_provider_server" = "缺少位置";
 "global.errors.missing_provider_preset" = "缺少预设";
+"global.errors.tunnel_expired" = "连接已过期";
 
 /* MARK: Menus */
 
@@ -132,6 +133,7 @@
 /* MARK: OrganizerView */
 
 "organizer.sections.active" = "使用中";
+"organizer.sections.tv.profiles_list.header.p1" = "在iOS或macOS设备上打开Passepartout，并启用个人资料下的“Apple TV”，使其显示在此处。";
 /* MARK: OrganizerView */
 "organizer.empty.no_profiles" = "没有配置";
 
@@ -163,6 +165,9 @@
 "profile.sections.vpn.footer" = "必要时连接将会建立。";
 "profile.sections.status.header" = "连接";
 "profile.sections.provider_infrastructure.footer" = "最后在%@时更新";
+"profile.sections.tv.footer.encryption" = "用户资料经过加密，并通过iCloud共享至Apple TV。";
+"profile.sections.tv.footer.restricted.p1" = "不过，连接将在%d分钟后过期。";
+"profile.sections.tv.footer.restricted.p2" = "购买后限制即取消。";
 "profile.sections.vpn_survives_sleep.footer" = "禁用以减少电池消耗，由于存在可能的唤醒时重连消耗。";
 "profile.sections.vpn_resolves_hostname.footer" = "推荐在大部分的网络中打开，并要求在IPv6环境下。当DNS被阻断或相应缓慢时禁用。";
 "profile.sections.feedback.header" = "反馈";
@@ -178,6 +183,8 @@
 "profile.items.only_shows_favorites.caption" = "仅显示收藏的地点";
 "profile.items.vpn_survives_sleep.caption" = "休眠时保持连接";
 "profile.items.vpn_resolves_hostname.caption" = "解析服务器主机名";
+"profile.items.tv_sharing.caption.limited" = "最多%d分钟";
+"profile.items.expires_at.caption" = "过期";
 
 "profile.alerts.rename.title" = "重命名配置";
 "profile.alerts.reconnect_vpn.message" = "要重连VPN吗？";
@@ -323,6 +330,7 @@
 "paywall.items.full_version.extra_description" = "所有的提供商（包括未来添加的）\n%@";
 "paywall.items.restore.title" = "恢复购买";
 "paywall.items.restore.description" = "如果你购买过此应用或其特征， 你可以恢复购买，此页面将不在显示。";
+"paywall.alerts.purchase.appletv.success.message" = "非常感谢！iCloud同步后，时间限制将立即取消。请稍等片刻，然后重新启动Apple TV应用程序的连接。";
 
 /* MARK: DonateView */
 

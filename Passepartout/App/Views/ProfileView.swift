@@ -30,7 +30,9 @@ struct ProfileView: View {
     enum ModalType: Int, Identifiable {
         case interactiveAccount
 
+        #if !os(tvOS)
         case shortcuts
+        #endif
 
         case rename
 
@@ -39,6 +41,8 @@ struct ProfileView: View {
         case paywallNetworkSettings
 
         case paywallTrustedNetworks
+
+        case paywallAppleTV
 
         var id: Int {
             rawValue
@@ -104,6 +108,10 @@ private extension ProfileView {
                     currentProfile: currentProfile,
                     modalType: $modalType
                 )
+                TVSection(
+                    currentProfile: currentProfile,
+                    modalType: $modalType
+                )
                 ExtraSection(currentProfile: currentProfile)
                 Section {
                     DiagnosticsRow(currentProfile: currentProfile)
@@ -122,10 +130,12 @@ private extension ProfileView {
                 InteractiveConnectionView(profile: currentProfile.value)
             }.themeGlobal()
 
+        #if !os(tvOS)
         case .shortcuts:
             NavigationView {
                 ShortcutsView(target: currentProfile.value)
             }.themeGlobal()
+        #endif
 
         case .rename:
             NavigationView {
@@ -153,6 +163,14 @@ private extension ProfileView {
                 PaywallView(
                     modalType: $modalType,
                     feature: .trustedNetworks
+                )
+            }.themeGlobal()
+
+        case .paywallAppleTV:
+            NavigationView {
+                PaywallView(
+                    modalType: $modalType,
+                    feature: .appleTV
                 )
             }.themeGlobal()
         }

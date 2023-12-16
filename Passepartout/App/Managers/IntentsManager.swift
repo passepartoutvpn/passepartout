@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import Combine
 import Foundation
 @preconcurrency import Intents
@@ -106,3 +107,4 @@ extension IntentsManager: INUIEditVoiceShortcutViewControllerDelegate {
         shouldDismissIntentView.send()
     }
 }
+#endif

@@ -75,6 +75,10 @@ public struct LocalProduct: RawRepresentable, Hashable, Sendable {
 
     public static let siriShortcuts = LocalProduct(featureId: "siri")
 
+    public static let appleTV = LocalProduct(featureId: "appletv")
+
+    // MARK: Full version
+
     public static let fullVersion_iOS = LocalProduct(featureId: "full_version")
 
     public static let fullVersion_macOS = LocalProduct(featureId: "full_mac_version")
@@ -86,6 +90,7 @@ public struct LocalProduct: RawRepresentable, Hashable, Sendable {
         .networkSettings,
         .trustedNetworks,
         .siriShortcuts,
+        .appleTV,
         .fullVersion_iOS,
         .fullVersion_macOS,
         .fullVersion
@@ -98,7 +103,7 @@ public struct LocalProduct: RawRepresentable, Hashable, Sendable {
     // MARK: All
 
     static var all: [LocalProduct] {
-        allDonations + allFeatures// + allProviders
+        allDonations + allFeatures
     }
 
     public var isDonation: Bool {
@@ -113,7 +118,7 @@ public struct LocalProduct: RawRepresentable, Hashable, Sendable {
         rawValue.hasPrefix(LocalProduct.providersBundle)
     }
 
-    public var isPlatformVersion: Bool {
+    public var isLegacyPlatformVersion: Bool {
         switch self {
         case .fullVersion_iOS, .fullVersion_macOS:
             return true

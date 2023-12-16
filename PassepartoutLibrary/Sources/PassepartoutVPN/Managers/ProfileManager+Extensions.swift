@@ -47,7 +47,7 @@ extension ProfileManager {
     }
 
     public func activateProfile(_ profile: Profile) {
-        saveProfile(profile, isActive: true, updateIfCurrent: true)
+        activateProfile(profile, isActive: true)
     }
 
     public func saveProfile(_ profile: Profile, isActive: Bool?) {
@@ -65,6 +65,6 @@ extension ProfileManager {
     }
 
     public func activateCurrentProfile() {
-        saveProfile(currentProfile.value, isActive: true, updateIfCurrent: false)
+        activateProfile(currentProfile.value)
     }
 }

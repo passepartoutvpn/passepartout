@@ -414,7 +414,7 @@ internal enum L10n {
           internal static let caption = L10n.tr("Localizable", "endpoint.wireguard.items.allowed_ip.caption", fallback: "Allowed IP")
         }
         internal enum Peer {
-          /// Peer
+          /// MARK: ProfileView -> EndpointView
           internal static let caption = L10n.tr("Localizable", "endpoint.wireguard.items.peer.caption", fallback: "Peer")
         }
         internal enum PresharedKey {
@@ -442,6 +442,8 @@ internal enum L10n {
       internal static let missingProviderPreset = L10n.tr("Localizable", "global.errors.missing_provider_preset", fallback: "Missing preset")
       /// Missing location
       internal static let missingProviderServer = L10n.tr("Localizable", "global.errors.missing_provider_server", fallback: "Missing location")
+      /// Connection expired
+      internal static let tunnelExpired = L10n.tr("Localizable", "global.errors.tunnel_expired", fallback: "Connection expired")
     }
     internal enum Messages {
       /// No e-mail account is configured.
@@ -650,6 +652,10 @@ internal enum L10n {
     /// MARK: ProfileView -> OnDemandView
     internal static let title = L10n.tr("Localizable", "on_demand.title", fallback: "On demand")
     internal enum Items {
+      internal enum Active {
+        /// Trust
+        internal static let caption = L10n.tr("Localizable", "on_demand.items.active.caption", fallback: "Trust")
+      }
       internal enum AddSsid {
         /// Add Wi-Fi
         internal static let caption = L10n.tr("Localizable", "on_demand.items.add_ssid.caption", fallback: "Add Wi-Fi")
@@ -661,6 +667,10 @@ internal enum L10n {
       internal enum Mobile {
         /// Cellular network
         internal static let caption = L10n.tr("Localizable", "on_demand.items.mobile.caption", fallback: "Cellular network")
+      }
+      internal enum Policy {
+        /// Trust disables VPN
+        internal static let caption = L10n.tr("Localizable", "on_demand.items.policy.caption", fallback: "Trust disables VPN")
       }
     }
     internal enum Policy {
@@ -714,11 +724,29 @@ internal enum L10n {
     internal enum Sections {
       /// MARK: OrganizerView
       internal static let active = L10n.tr("Localizable", "organizer.sections.active", fallback: "In use")
+      internal enum Tv {
+        internal enum ProfilesList {
+          internal enum Header {
+            /// Open Passepartout on your iOS or macOS device and enable the "Apple TV" toggle of a profile to make it appear here.
+            internal static let p1 = L10n.tr("Localizable", "organizer.sections.tv.profiles_list.header.p1", fallback: "Open Passepartout on your iOS or macOS device and enable the \"Apple TV\" toggle of a profile to make it appear here.")
+          }
+        }
+      }
     }
   }
   internal enum Paywall {
     /// MARK: PaywallView
     internal static let title = L10n.tr("Localizable", "paywall.title", fallback: "Purchase")
+    internal enum Alerts {
+      internal enum Purchase {
+        internal enum Appletv {
+          internal enum Success {
+            /// Thank you! The time limit will be dropped as soon as iCloud catches up. Wait a few moments, then restart the connection on the TV app.
+            internal static let message = L10n.tr("Localizable", "paywall.alerts.purchase.appletv.success.message", fallback: "Thank you! The time limit will be dropped as soon as iCloud catches up. Wait a few moments, then restart the connection on the TV app.")
+          }
+        }
+      }
+    }
     internal enum Items {
       internal enum FullVersion {
         /// All providers (including future ones)
@@ -807,6 +835,10 @@ internal enum L10n {
         /// Exchanged data
         internal static let caption = L10n.tr("Localizable", "profile.items.data_count.caption", fallback: "Exchanged data")
       }
+      internal enum ExpiresAt {
+        /// Expiration
+        internal static let caption = L10n.tr("Localizable", "profile.items.expires_at.caption", fallback: "Expiration")
+      }
       internal enum OnlyShowsFavorites {
         /// Only show favorite locations
         internal static let caption = L10n.tr("Localizable", "profile.items.only_shows_favorites.caption", fallback: "Only show favorite locations")
@@ -820,6 +852,14 @@ internal enum L10n {
       internal enum RandomizesServer {
         /// Randomize server
         internal static let caption = L10n.tr("Localizable", "profile.items.randomizes_server.caption", fallback: "Randomize server")
+      }
+      internal enum TvSharing {
+        internal enum Caption {
+          /// Limited to %d minutes
+          internal static func limited(_ p1: Int) -> String {
+            return L10n.tr("Localizable", "profile.items.tv_sharing.caption.limited", p1, fallback: "Limited to %d minutes")
+          }
+        }
       }
       internal enum UseProfile {
         /// Use this profile
@@ -862,6 +902,20 @@ internal enum L10n {
       internal enum Status {
         /// Connection
         internal static let header = L10n.tr("Localizable", "profile.sections.status.header", fallback: "Connection")
+      }
+      internal enum Tv {
+        internal enum Footer {
+          /// Profiles are encrypted and made available to your Apple TV via iCloud.
+          internal static let encryption = L10n.tr("Localizable", "profile.sections.tv.footer.encryption", fallback: "Profiles are encrypted and made available to your Apple TV via iCloud.")
+          internal enum Restricted {
+            /// However, the connection will expire after %d minutes.
+            internal static func p1(_ p1: Int) -> String {
+              return L10n.tr("Localizable", "profile.sections.tv.footer.restricted.p1", p1, fallback: "However, the connection will expire after %d minutes.")
+            }
+            /// Purchase to drop the restriction.
+            internal static let p2 = L10n.tr("Localizable", "profile.sections.tv.footer.restricted.p2", fallback: "Purchase to drop the restriction.")
+          }
+        }
       }
       internal enum Vpn {
         /// The connection will be established whenever necessary.

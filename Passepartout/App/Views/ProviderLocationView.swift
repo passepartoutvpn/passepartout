@@ -168,9 +168,11 @@ private extension ProviderLocationView {
             ForEach(filteredLocations(for: category)) { location in
                 if isEditable {
                     locationRow(location)
+                        #if !os(tvOS)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             favoriteActions(location)
                         }
+                        #endif
                 } else {
                     locationRow(location)
                 }

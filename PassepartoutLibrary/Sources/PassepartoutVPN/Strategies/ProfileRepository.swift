@@ -38,3 +38,9 @@ public protocol ProfileRepository {
 
     func willUpdateProfiles() -> AnyPublisher<[UUID: Profile], Never>
 }
+
+extension ProfileRepository {
+    public func hasProfile(withId id: UUID) -> Bool {
+        profile(withId: id) != nil
+    }
+}

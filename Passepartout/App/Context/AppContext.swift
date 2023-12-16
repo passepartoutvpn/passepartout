@@ -66,6 +66,7 @@ final class AppContext {
         persistenceManager = PersistenceManager(
             store: store,
             ckContainerId: Constants.CloudKit.containerId,
+            ckSharedContainerId: Constants.CloudKit.sharedContainerId,
             ckCoreDataZone: Constants.CloudKit.coreDataZone
         )
 
@@ -94,11 +95,22 @@ final class AppContext {
 
 private extension AppContext {
     func configureObjects() {
+        coreContext.profileManager.willSaveSharedProfile = { [unowned self] in
+            willSaveSharedProfile(withNewProfile: $0, existingProfile: $1)
+        }
+
         coreContext.vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
         }
         coreContext.vpnManager.isNetworkSettingsSupported = {
             self.isEligibleForNetworkSettings()
+        }
+
+        coreContext.vpnManager.userData = {
+            if let expirationDate = $0.connectionExpirationDate {
+                return [Constants.Tunnel.expirationTimeIntervalKey: expirationDate.timeIntervalSinceReferenceDate]
+            }
+            return nil
         }
 
         coreContext.vpnManager.currentState.$vpnStatus
@@ -137,5 +149,42 @@ private extension AppContext {
             return false
         }
         return true
+    }
+
+    // eligibility: expire restricted TV profiles after N minutes
+    func willSaveSharedProfile(withNewProfile newProfile: Profile, existingProfile: Profile?) -> Profile {
+        if let existingProfile {
+            assert(newProfile.id == existingProfile.id)
+        }
+
+        guard productManager.isEligible(forFeature: .appleTV) else {
+            var restricted = newProfile
+            let remainingMinutes: Int
+            let expirationDate: Date
+
+            // retain current expiration period if any
+            if let currentExpirationDate = existingProfile?.connectionExpirationDate {
+                remainingMinutes = Int(currentExpirationDate.timeIntervalSinceNow / 60.0)
+                expirationDate = currentExpirationDate
+            }
+            // otherwise, expire in N minutes from now
+            else {
+                remainingMinutes = Constants.InApp.tvLimitedMinutes
+                expirationDate = Date()
+                    .addingTimeInterval(TimeInterval(remainingMinutes) * 60.0)
+
+                restricted.connectionExpirationDate = expirationDate
+            }
+
+            if remainingMinutes > 0 {
+                pp_log.warning("\(newProfile.logDescription): TV connection expires in \(remainingMinutes) minutes (at \(expirationDate))")
+            } else {
+                pp_log.warning("\(newProfile.logDescription): TV connection expired at \(expirationDate)")
+            }
+
+            return restricted
+        }
+
+        return newProfile
     }
 }

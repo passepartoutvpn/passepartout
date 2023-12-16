@@ -56,6 +56,7 @@ extension Profile.WireGuardSettings: TunnelKitConfigurationProviding {
         var extra = NetworkExtensionExtra()
         extra.onDemandRules = parameters.onDemandRules
         extra.disconnectsOnSleep = !parameters.networkSettings.keepsAliveOnSleep
+        extra.userData = parameters.userData
 
         pp_log.verbose("Configuration:")
         pp_log.verbose(cfg)

@@ -72,7 +72,7 @@
 "global.strings.authentication" = "Autenticação";
 "global.messages.unlock_app" = "O Passepartout está bloqueado";
 "global.messages.email_not_configured" = "Nenhuma conta de email configurada.";
-"global.messages.share" = "Passepartout é um cliente OpenVPN / WireGuard fácil e open-source para iOS e macOS";
+"global.messages.share" = "Passepartout é um cliente OpenVPN / WireGuard fácil e open-source para iOS e macOS"; // FIXME: l10n, Apple platforms
 
 "global.alerts.buttons.remind" = "Lembrar-me depois";
 "global.alerts.buttons.never" = "Não perguntar novamente";
@@ -83,6 +83,7 @@
 "global.errors.missing_account" = "Conta em falta";
 "global.errors.missing_provider_server" = "Localização em falta";
 "global.errors.missing_provider_preset" = "Pré-definição em falta";
+"global.errors.tunnel_expired" = "A ligação expirou";
 
 /* MARK: Menus */
 
@@ -132,6 +133,7 @@
 /* MARK: OrganizerView */
 
 "organizer.sections.active" = "Ativo";
+"organizer.sections.tv.profiles_list.header.p1" = "Abra o Passepartout no seu dispositivo iOS ou macOS e ative o botão \"Apple TV\" de um perfil para o fazer aparecer aqui.";
 /* MARK: OrganizerView */
 "organizer.empty.no_profiles" = "Sem perfis";
 
@@ -163,6 +165,9 @@
 "profile.sections.vpn.footer" = "A conexão será estabelecida assim que necessária.";
 "profile.sections.status.header" = "Conexão";
 "profile.sections.provider_infrastructure.footer" = "Última atualização em %@.";
+"profile.sections.tv.footer.encryption" = "Os perfis estão encriptados e estão disponíveis para a sua Apple TV através da iCloud.";
+"profile.sections.tv.footer.restricted.p1" = "Todavia, a ligação vai perder a validade depois de %d minutos.";
+"profile.sections.tv.footer.restricted.p2" = "Compre para largar a restrição.";
 "profile.sections.vpn_survives_sleep.footer" = "Desative para melhorar o consumo de bateria, o que poderá ocasionar queda de performance quando o restabelecimento de conexão for realizado.";
 "profile.sections.vpn_resolves_hostname.footer" = "Recomendado para maioria das redes e requirido em algumas redes IPv6. Desative se o DNS estiver bloqueado, ou para acelerar o DNS quando o mesmo está devagar.";
 "profile.sections.feedback.header" = "Feedback";
@@ -178,6 +183,8 @@
 "profile.items.only_shows_favorites.caption" = "Mostrar apenas os locais preferidos";
 "profile.items.vpn_survives_sleep.caption" = "Manter ativo em modo descanço";
 "profile.items.vpn_resolves_hostname.caption" = "Resolver hostname do servidor";
+"profile.items.tv_sharing.caption.limited" = "Limitado a %d minutos";
+"profile.items.expires_at.caption" = "Validade";
 
 "profile.alerts.rename.title" = "Renomear perfil";
 "profile.alerts.reconnect_vpn.message" = "Deseja reconectar à VPN?";
@@ -323,6 +330,7 @@
 "paywall.items.full_version.extra_description" = "Todos os provedores (incluindo os futuros)\n%@";
 "paywall.items.restore.title" = "Restaurar compras";
 "paywall.items.restore.description" = "Se você comprou este aplicativo ou recurso no passado, pode restaurar suas compras e essa tela não será exibida novamente.";
+"paywall.alerts.purchase.appletv.success.message" = "Obrigado! O limite de tempo irá desaparecer assim que a iCloud seja atualizada. Espere um momento e depois reinicie a ligação na aplicação da TV.";
 
 /* MARK: DonateView */
 

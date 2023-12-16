@@ -24,7 +24,7 @@
 //
 
 import Foundation
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import NetworkExtension
 #else
 import CoreWLAN
@@ -77,8 +77,10 @@ extension Utils {
                 continuation.resume(with: .success(network.ssid))
             }
         }
-        #else
+        #elseif os(macOS)
         CWWiFiClient.shared().interface()?.ssid()
+        #else
+        nil
         #endif
     }
 }

@@ -70,6 +70,7 @@ final class CDProfileRepository: ProfileRepository {
             }
             try context.save()
         } catch {
+            pp_log.error("Unable to save profiles: \(error)")
             context.rollback()
             throw error
         }

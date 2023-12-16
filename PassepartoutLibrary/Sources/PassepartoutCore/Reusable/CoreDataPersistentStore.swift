@@ -31,23 +31,30 @@ import Foundation
 public final class CoreDataPersistentStore {
     private let container: NSPersistentContainer
 
-    public convenience init(withName containerName: String, model: NSManagedObjectModel, cloudKit: Bool, author: String?) {
+    public convenience init(withName containerName: String, model: NSManagedObjectModel, cloudKit: Bool, cloudKitIdentifier: String?, author: String?) {
         let container: NSPersistentContainer
         if cloudKit {
             container = NSPersistentCloudKitContainer(name: containerName, managedObjectModel: model)
+            pp_log.debug("Setting up CloudKit container: \(containerName)")
         } else {
             container = NSPersistentContainer(name: containerName, managedObjectModel: model)
+            pp_log.debug("Setting up local container: \(containerName)")
         }
-        self.init(withContainer: container, author: author)
+        self.init(withContainer: container, cloudKitIdentifier: cloudKitIdentifier, author: author)
     }
 
-    private init(withContainer container: NSPersistentContainer, author: String?) {
+    private init(withContainer container: NSPersistentContainer, cloudKitIdentifier: String?, author: String?) {
         self.container = container
 
         guard let desc = container.persistentStoreDescriptions.first else {
             fatalError("Could not read persistent store description")
         }
         pp_log.debug("Container description: \(desc)")
+
+        // optional container identifier for CloudKit, first in entitlements otherwise
+        if let cloudKitIdentifier {
+            desc.cloudKitContainerOptions = .init(containerIdentifier: cloudKitIdentifier)
+        }
 
         // set this even for local container, to avoid readonly mode in case
         // container was formerly created with CloudKit option

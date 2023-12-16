@@ -44,6 +44,8 @@ extension PaywallView {
 
         @State private var purchaseState: PurchaseState?
 
+        @State private var didPurchaseAppleTV = false
+
         init(isPresented: Binding<Bool>, feature: LocalProduct? = nil) {
             productManager = .shared
             _isPresented = isPresented
@@ -52,12 +54,22 @@ extension PaywallView {
 
         var body: some View {
             List {
-                featuresSection
+                skFullVersion.map {
+                    fullFeaturesSection(withHeader: $0.localizedTitle)
+                }
                 purchaseSection
                     .disabled(purchaseState != nil)
                 restoreSection
                     .disabled(purchaseState != nil)
-            }.navigationTitle(Unlocalized.appName)
+            }
+            .navigationTitle(Unlocalized.appName)
+            .alert(Unlocalized.Other.appleTV, isPresented: $didPurchaseAppleTV) {
+                Button(L10n.Global.Strings.ok) {
+                    isPresented = false
+                }
+            } message: {
+                Text(L10n.Paywall.Alerts.Purchase.Appletv.Success.message)
+            }
 
             // reloading
             .task {
@@ -121,9 +133,9 @@ private struct PurchaseRow: View {
 // MARK: -
 
 private extension PaywallView.PurchaseView {
-    var featuresSection: some View {
+    func fullFeaturesSection(withHeader header: String) -> some View {
         Section {
-            ForEach(features) { feature in
+            ForEach(fullFeatures) { feature in
                 VStack(alignment: .leading) {
                     Text(feature.title)
                         .themeCellTitleStyle()
@@ -134,6 +146,8 @@ private extension PaywallView.PurchaseView {
                     }
                 }
             }
+        } header: {
+            Text(header)
         }
     }
 
@@ -183,6 +197,9 @@ private extension PaywallView.PurchaseView {
 
     // hide full version if already bought the other platform version
     var skFullVersion: InAppProduct? {
+        guard !productManager.isFullVersion() else {
+            return nil
+        }
         #if targetEnvironment(macCatalyst)
         guard !productManager.hasPurchased(.fullVersion_iOS) else {
             return nil
@@ -195,17 +212,25 @@ private extension PaywallView.PurchaseView {
         return productManager.product(withIdentifier: .fullVersion)
     }
 
-    var features: [FeatureModel] {
+    var skAppleTV: InAppProduct? {
+        guard feature == .appleTV else {
+            return nil
+        }
+        return productManager.product(withIdentifier: .appleTV)
+    }
+
+    var fullFeatures: [FeatureModel] {
         productManager.featureProducts(excluding: {
-            $0 == .fullVersion || $0.isPlatformVersion
+            $0 == .fullVersion || $0 == .appleTV || $0.isLegacyPlatformVersion
         })
         .map {
             FeatureModel(product: $0)
         }
+        .sorted()
     }
 
     var productRowModels: [InAppProduct] {
-        [skFullVersion]
+        [skFullVersion, skAppleTV]
             .compactMap { $0 }
     }
 }
@@ -249,16 +274,25 @@ private extension PurchaseRow {
 
 // MARK: -
 
+// IMPORTANT: resync shared profiles after purchasing Apple TV feature (drop time limit)
+
 private extension PaywallView.PurchaseView {
     func purchaseProduct(_ product: InAppProduct) {
         purchaseState = .purchasing(product)
 
         Task {
             do {
+                let wasEligibleForAppleTV = productManager.isEligible(forFeature: .appleTV)
                 let result = try await productManager.purchase(product)
+
                 switch result {
                 case .done:
-                    isPresented = false
+                    if !wasEligibleForAppleTV && productManager.isEligible(forFeature: .appleTV) {
+                        ProfileManager.shared.refreshSharedProfiles()
+                        didPurchaseAppleTV = true
+                    } else {
+                        isPresented = false
+                    }
 
                 case .cancelled:
                     break
@@ -281,8 +315,16 @@ private extension PaywallView.PurchaseView {
 
         Task {
             do {
+                let wasEligibleForAppleTV = productManager.isEligible(forFeature: .appleTV)
                 try await productManager.restorePurchases()
-                isPresented = false
+
+                if !wasEligibleForAppleTV && productManager.isEligible(forFeature: .appleTV) {
+                    ProfileManager.shared.refreshSharedProfiles()
+                    didPurchaseAppleTV = true
+                } else {
+                    isPresented = false
+                }
+
                 purchaseState = nil
             } catch {
                 pp_log.error("Unable to restore purchases: \(error)")

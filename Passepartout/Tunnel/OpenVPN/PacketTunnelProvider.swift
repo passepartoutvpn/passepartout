@@ -24,14 +24,18 @@
 //
 
 import Foundation
+import NetworkExtension
 import OpenVPNAppExtension
 
 final class PacketTunnelProvider: OpenVPNTunnelProvider {
-    override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+    override func startTunnel(options: [String: NSObject]? = nil) async throws {
+        try tryStartGivenExpirationDate(withTimeIntervalKey: Constants.Tunnel.expirationTimeIntervalKey)
+
         appVersion = "\(Constants.Global.appName) \(Constants.Global.appVersionString)"
         dnsTimeout = Constants.OpenVPNTunnel.dnsTimeout
         logSeparator = Constants.OpenVPNTunnel.sessionMarker
         dataCountInterval = Constants.OpenVPNTunnel.dataCountInterval
-        super.startTunnel(options: options, completionHandler: completionHandler)
+
+        try await super.startTunnel(options: options)
     }
 }

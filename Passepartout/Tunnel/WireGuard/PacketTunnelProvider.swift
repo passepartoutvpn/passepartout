@@ -27,8 +27,11 @@ import Foundation
 import WireGuardAppExtension
 
 final class PacketTunnelProvider: WireGuardTunnelProvider {
-    override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+    override func startTunnel(options: [String: NSObject]? = nil) async throws {
+        try tryStartGivenExpirationDate(withTimeIntervalKey: Constants.Tunnel.expirationTimeIntervalKey)
+
         dataCountInterval = Constants.WireGuardTunnel.dataCountInterval
-        super.startTunnel(options: options, completionHandler: completionHandler)
+
+        try await super.startTunnel(options: options)
     }
 }

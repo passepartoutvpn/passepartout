@@ -137,8 +137,10 @@ private extension OnDemandView {
         guard isEligibleForSiri else {
             return
         }
+        #if !os(tvOS)
         IntentDispatcher.donateTrustCellularNetwork()
         IntentDispatcher.donateUntrustCellularNetwork()
+        #endif
     }
 
     // eligibility: donate intents if eligible for Siri
@@ -146,7 +148,9 @@ private extension OnDemandView {
         guard isEligibleForSiri else {
             return
         }
+        #if !os(tvOS)
         IntentDispatcher.donateTrustCurrentNetwork()
         IntentDispatcher.donateUntrustCurrentNetwork()
+        #endif
     }
 }

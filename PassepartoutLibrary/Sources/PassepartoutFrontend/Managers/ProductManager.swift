@@ -195,10 +195,10 @@ extension ProductManager {
                 return true
             }
         }
-        if feature.isPlatformVersion {
-            return isActivePurchase(feature)
+        if isIncludedInFullVersion(feature) {
+            return isFullVersion() || isActivePurchase(feature)
         }
-        return isFullVersion() || isActivePurchase(feature)
+        return isActivePurchase(feature)
     }
 
     public func isEligible(forProvider providerName: ProviderName) -> Bool {
@@ -209,7 +209,7 @@ extension ProductManager {
     }
 
     public func isEligibleForFeedback() -> Bool {
-        appType == .beta || !purchasedFeatures.isEmpty
+        appType == .beta || isPayingUser()
     }
 }
 
@@ -226,7 +226,11 @@ extension ProductManager {
         isActivePurchase(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
 
-    func isFullVersion() -> Bool {
+    func isIncludedInFullVersion(_ feature: LocalProduct) -> Bool {
+        !feature.isLegacyPlatformVersion && feature != .appleTV
+    }
+
+    public func isFullVersion() -> Bool {
         if appType == .fullVersion {
             return true
         }
@@ -234,6 +238,10 @@ extension ProductManager {
             return true
         }
         return isActivePurchase(.fullVersion)
+    }
+
+    public func isPayingUser() -> Bool {
+        !purchasedFeatures.subtracting(cancelledPurchases ?? []).isEmpty
     }
 }
 
@@ -299,6 +307,7 @@ private extension ProductManager {
         #endif
     }
 
+    // FIXME: in-app, this is incomplete
     func detectRefunds(_ refunds: Set<LocalProduct>) {
         let isEligibleForFullVersion = isFullVersion()
         let hasCancelledFullVersion: Bool

@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,9 @@ import PackageDescription
 let package = Package(
     name: "PassepartoutLibrary",
     platforms: [
-        .iOS(.v15), .macOS(.v12)
+        .iOS(.v15),
+        .macOS(.v12),
+        .tvOS(.v17)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -31,8 +33,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-//        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", from: "6.1.1"),
-        .package(name: "TunnelKit", url: "https://github.com/passepartoutvpn/tunnelkit", .revision("bda84bf569792fbb702d0173de3c9c58768f9153")),
+//        .package(url: "https://github.com/passepartoutvpn/tunnelkit", from: "6.3.0"),
+        .package(url: "https://github.com/passepartoutvpn/tunnelkit", revision: "708c785e615f5715ce08386c772c92fb45730a3a"),
 //        .package(name: "TunnelKit", path: "../../tunnelkit"),
         .package(url: "https://github.com/zoul/generic-json-swift", from: "2.0.0"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "1.9.0")

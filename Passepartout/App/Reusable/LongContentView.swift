@@ -29,9 +29,15 @@ struct LongContentView: View {
     @Binding var content: String
 
     var body: some View {
+        #if !os(tvOS)
         TextEditor(text: $content)
             .font(.system(.body, design: .monospaced))
 //            .padding()
+        #else
+        Text(content)
+            .font(.system(.body, design: .monospaced))
+//            .padding()
+        #endif
 
         // TODO: layout, add padding an inset, let content extend beyond safe areas
     }

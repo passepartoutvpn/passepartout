@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import Intents
 import PassepartoutLibrary
 import SwiftUI
@@ -162,3 +163,4 @@ private extension ShortcutsView.AddView {
         pendingShortcut = shortcut
     }
 }
+#endif

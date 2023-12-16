@@ -96,6 +96,7 @@ extension ProfileView {
         }
     }
 
+    #if !os(tvOS)
     struct ShortcutsButton: View {
         @ObservedObject private var productManager: ProductManager
 
@@ -114,6 +115,7 @@ extension ProfileView {
             }
         }
     }
+    #endif
 
     struct RenameButton: View {
         @Binding private var modalType: ModalType?
@@ -164,9 +166,11 @@ private extension ProfileView.MainMenu {
     var mainView: some View {
         Menu {
             ProfileView.ReconnectButton()
+            #if !os(tvOS)
             ProfileView.ShortcutsButton(
                 modalType: $modalType
             )
+            #endif
             Divider()
             ProfileView.RenameButton(
                 modalType: $modalType
@@ -238,11 +242,13 @@ private extension ProfileView.MainMenu {
     }
 }
 
+#if !os(tvOS)
 private extension ProfileView.ShortcutsButton {
     var isEligibleForSiri: Bool {
         productManager.isEligible(forFeature: .siriShortcuts)
     }
 }
+#endif
 
 // MARK: -
 
@@ -260,6 +266,7 @@ private extension ProfileView.MainMenu {
     }
 }
 
+#if !os(tvOS)
 private extension ProfileView.ShortcutsButton {
     func presentShortcutsOrPaywall() {
 
@@ -271,6 +278,7 @@ private extension ProfileView.ShortcutsButton {
         }
     }
 }
+#endif
 
 private extension ProfileView.DuplicateButton {
     func duplicateProfile(withId id: UUID) {

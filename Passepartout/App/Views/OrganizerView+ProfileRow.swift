@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import PassepartoutLibrary
 import SwiftUI
 
@@ -56,6 +57,7 @@ extension OrganizerView {
                 VPNToggle(
                     profile: profile,
                     interactiveProfile: interactiveProfile,
+                    title: L10n.Global.Strings.enabled,
                     rateLimit: Constants.RateLimit.vpnToggle
                 ).labelsHidden()
             }.padding([.top, .bottom], 10)
@@ -81,3 +83,4 @@ private extension OrganizerView.ProfileRow {
         }
     }
 }
+#endif

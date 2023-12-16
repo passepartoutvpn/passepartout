@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import MessageUI
 import SwiftUI
 
@@ -82,3 +83,4 @@ extension MailComposerView {
         }
     }
 }
+#endif

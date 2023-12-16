@@ -23,7 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import LocalAuthentication
+#endif
 import PassepartoutLibrary
 import SwiftUI
 
@@ -33,19 +35,27 @@ extension View {
     }
 
     var themeIsiPadPortrait: Bool {
+        #if !os(tvOS)
         #if targetEnvironment(macCatalyst)
         false
         #else
         let device: UIDevice = .current
         return device.userInterfaceIdiom == .pad && device.orientation.isPortrait
         #endif
+        #else
+        false
+        #endif
     }
 
     var themeIsiPadMultitasking: Bool {
+        #if !os(tvOS)
         #if targetEnvironment(macCatalyst)
         false
         #else
         UIDevice.current.userInterfaceIdiom == .pad
+        #endif
+        #else
+        false
         #endif
     }
 }
@@ -55,6 +65,7 @@ extension View {
 extension View {
     func themeGlobal() -> some View {
         themeNavigationViewStyle()
+            #if !os(tvOS)
             #if !targetEnvironment(macCatalyst)
             .themeLockScreen()
             #endif
@@ -62,22 +73,39 @@ extension View {
             .listStyle(themeListStyleValue())
             .toggleStyle(themeToggleStyleValue())
             .menuStyle(.borderlessButton)
+            #endif
             .withErrorHandler()
     }
+
+    #if os(tvOS)
+    func themeTV() -> some View {
+        GeometryReader { geo in
+            self
+                .padding(.horizontal, 0.25 * geo.size.width)
+                .scrollClipDisabled()
+        }
+    }
+    #endif
 
     func themePrimaryView() -> some View {
         #if targetEnvironment(macCatalyst)
         navigationBarTitleDisplayMode(.inline)
             .themeSidebarListStyle()
-        #else
+        #elseif !os(tvOS)
         navigationBarTitleDisplayMode(.large)
             .navigationTitle(Unlocalized.appName)
             .themeSidebarListStyle()
+        #else
+        self
         #endif
     }
 
     func themeSecondaryView() -> some View {
+        #if !os(tvOS)
         navigationBarTitleDisplayMode(.inline)
+        #else
+        self
+        #endif
     }
 
     @ViewBuilder
@@ -93,6 +121,7 @@ extension View {
 
     @ViewBuilder
     private func themeSidebarListStyle() -> some View {
+        #if !os(tvOS)
         switch themeIdiom {
         case .phone:
             listStyle(.insetGrouped)
@@ -100,6 +129,9 @@ extension View {
         default:
             listStyle(.sidebar)
         }
+        #else
+        self
+        #endif
     }
 
     @ViewBuilder
@@ -108,11 +140,19 @@ extension View {
     }
 
     private func themeListStyleValue() -> some ListStyle {
+        #if !os(tvOS)
         .insetGrouped
+        #else
+        PlainListStyle()
+        #endif
     }
 
     private func themeToggleStyleValue() -> some ToggleStyle {
+        #if !os(tvOS)
         .switch
+        #else
+        DefaultToggleStyle()
+        #endif
     }
 }
 
@@ -177,6 +217,10 @@ extension View {
 
     var themeRevealImage: String {
         "eye"
+    }
+
+    var themeAppleTVImage: String {
+        "tv"
     }
 
     // MARK: Organizer
@@ -387,6 +431,7 @@ extension View {
 
 // MARK: Shortcuts
 
+#if !os(tvOS)
 extension ShortcutType {
     var themeImageName: String {
         switch self {
@@ -401,6 +446,7 @@ extension ShortcutType {
         }
     }
 }
+#endif
 
 // MARK: Animations
 
@@ -497,6 +543,7 @@ extension View {
 
 // MARK: Lock screen
 
+#if !os(tvOS)
 extension View {
     func themeLockScreen() -> some View {
         @AppStorage(AppPreference.locksInBackground.key) var locksInBackground = false
@@ -528,6 +575,7 @@ extension View {
         }
     }
 }
+#endif
 
 // MARK: Validation
 

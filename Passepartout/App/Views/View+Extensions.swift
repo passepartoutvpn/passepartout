@@ -71,9 +71,11 @@ extension View {
                 .truncationMode(truncationMode)
             if copyOnTap {
                 trailing
+                    #if !os(tvOS)
                     .onTapGesture {
                         text.map(Utils.copyToPasteboard)
                     }
+                    #endif
             } else {
                 trailing
             }

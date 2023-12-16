@@ -72,7 +72,7 @@
 "global.strings.authentication" = "Authenticatie";
 "global.messages.unlock_app" = "Hoofdsleutel is vergrendeld";
 "global.messages.email_not_configured" = "Er is geen email adres geconfigureerd.";
-"global.messages.share" = "Passepartout is een gebruiksvriendelijke open source OpenVPN / WireGuard client voor iOS en macOS";
+"global.messages.share" = "Passepartout is een gebruiksvriendelijke open source OpenVPN / WireGuard client voor iOS en macOS"; // FIXME: l10n, Apple platforms
 
 "global.alerts.buttons.remind" = "Herinner me later";
 "global.alerts.buttons.never" = "Vraag dit niet meer";
@@ -83,6 +83,7 @@
 "global.errors.missing_account" = "Ontbrekend account";
 "global.errors.missing_provider_server" = "Ontbrekende locatie";
 "global.errors.missing_provider_preset" = "Ontbrekende voorkeur";
+"global.errors.tunnel_expired" = "Verbinding verlopen";
 
 /* MARK: Menus */
 
@@ -132,6 +133,7 @@
 /* MARK: OrganizerView */
 
 "organizer.sections.active" = "In gebruik";
+"organizer.sections.tv.profiles_list.header.p1" = "Open Passepartout op je iOS- of macOS-apparaat en activeer de 'Apple TV'-schakelaar van een profiel om dit hier weer te geven.";
 /* MARK: OrganizerView */
 "organizer.empty.no_profiles" = "Geen profielen";
 
@@ -163,6 +165,9 @@
 "profile.sections.vpn.footer" = "De verbinding zal worden gestart wanneer nodig.";
 "profile.sections.status.header" = "Verbinding";
 "profile.sections.provider_infrastructure.footer" = "Laatste update was op %@.";
+"profile.sections.tv.footer.encryption" = "Profielen zijn gecodeerd en via iCloud beschikbaar voor je Apple TV.";
+"profile.sections.tv.footer.restricted.p1" = "Maar de verbinding verloopt na %d minuten.";
+"profile.sections.tv.footer.restricted.p2" = "Doe een aankoop om de beperking op te heffen.";
 "profile.sections.vpn_survives_sleep.footer" = "Uitschakelen om het batterijverbruik te verbeteren, ten koste van incidentele vertragingen als gevolg van het opnieuw opstarten na wake-up.";
 "profile.sections.vpn_resolves_hostname.footer" = "Voorkeur om dit aan te zetten voor de meeste netwerken en vereist in sommige IPv6-netwerken. Uitschakelen waar DNS wordt geblokkeerd, of om de onderhandelingen te versnellen wanneer DNS traag reageert.";
 "profile.sections.feedback.header" = "Terugkoppeling";
@@ -178,6 +183,8 @@
 "profile.items.only_shows_favorites.caption" = "Alleen favoriete locaties weergeven";
 "profile.items.vpn_survives_sleep.caption" = "Actief tijdens slaapstand";
 "profile.items.vpn_resolves_hostname.caption" = "Haal de naam van de host op";
+"profile.items.tv_sharing.caption.limited" = "Beperkt tot %d minuten";
+"profile.items.expires_at.caption" = "Verlooptijd";
 
 "profile.alerts.rename.title" = "Profiel hernoemen";
 "profile.alerts.reconnect_vpn.message" = "Opnieuw verbinding maken met de VPN?";
@@ -323,6 +330,7 @@
 "paywall.items.full_version.extra_description" = "Alle providers (inclusief toekomstige)\n%@";
 "paywall.items.restore.title" = "Herstel Aankopen";
 "paywall.items.restore.description" = "Als u deze app of functie in het verleden heeft gekocht, kunt u uw aankopen herstellen en wordt dit scherm niet meer getoond.";
+"paywall.alerts.purchase.appletv.success.message" = "Bedankt! De tijdsbeperking wordt opgeheven zodra iCloud dit ziet. Wacht even en herstart dan de verbinding op de tv-app.";
 
 /* MARK: DonateView */
 

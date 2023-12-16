@@ -32,7 +32,9 @@ struct DiagnosticsView: View {
     var body: some View {
         Group {
             if !profile.isPlaceholder {
+                #if !os(tvOS)
                 vpnView
+                #endif
             } else {
                 genericView
             }
@@ -41,6 +43,8 @@ struct DiagnosticsView: View {
 }
 
 private extension DiagnosticsView {
+
+    #if !os(tvOS)
     var vpnView: some View {
         Group {
             switch profile.currentVPNProtocol {
@@ -56,6 +60,7 @@ private extension DiagnosticsView {
             }
         }
     }
+    #endif
 
     var genericView: some View {
         List {

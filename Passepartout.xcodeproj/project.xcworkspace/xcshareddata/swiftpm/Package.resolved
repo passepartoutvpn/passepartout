@@ -1,70 +1,67 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "DTFoundation",
-        "repositoryURL": "https://github.com/Cocoanetics/DTFoundation.git",
-        "state": {
-          "branch": null,
-          "revision": "76062513434421cb6c8a1ae1d4f8368a7ebc2da3",
-          "version": "1.7.18"
-        }
-      },
-      {
-        "package": "GenericJSON",
-        "repositoryURL": "https://github.com/zoul/generic-json-swift",
-        "state": {
-          "branch": null,
-          "revision": "0a06575f4038b504e78ac330913d920f1630f510",
-          "version": "2.0.2"
-        }
-      },
-      {
-        "package": "Kvitto",
-        "repositoryURL": "https://github.com/Cocoanetics/Kvitto",
-        "state": {
-          "branch": null,
-          "revision": "88888674d772ddcf19671159ed0022cb0bc37be2",
-          "version": "1.0.6"
-        }
-      },
-      {
-        "package": "openssl-apple",
-        "repositoryURL": "https://github.com/passepartoutvpn/openssl-apple",
-        "state": {
-          "branch": null,
-          "revision": "026702febcaebcbf9ea68f2fa66b017eba998cdf",
-          "version": "3.2.105"
-        }
-      },
-      {
-        "package": "SwiftyBeaver",
-        "repositoryURL": "https://github.com/SwiftyBeaver/SwiftyBeaver",
-        "state": {
-          "branch": null,
-          "revision": "12b5acf96d98f91d50de447369bd18df74600f1a",
-          "version": "1.9.6"
-        }
-      },
-      {
-        "package": "TunnelKit",
-        "repositoryURL": "https://github.com/passepartoutvpn/tunnelkit",
-        "state": {
-          "branch": null,
-          "revision": "bda84bf569792fbb702d0173de3c9c58768f9153",
-          "version": null
-        }
-      },
-      {
-        "package": "WireGuardKit",
-        "repositoryURL": "https://github.com/passepartoutvpn/wireguard-apple",
-        "state": {
-          "branch": null,
-          "revision": "73d9152fa0cb661db0348a1ac11dbbf998422a50",
-          "version": "1.0.17"
-        }
+  "pins" : [
+    {
+      "identity" : "dtfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Cocoanetics/DTFoundation.git",
+      "state" : {
+        "revision" : "76062513434421cb6c8a1ae1d4f8368a7ebc2da3",
+        "version" : "1.7.18"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "generic-json-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zoul/generic-json-swift",
+      "state" : {
+        "revision" : "0a06575f4038b504e78ac330913d920f1630f510",
+        "version" : "2.0.2"
+      }
+    },
+    {
+      "identity" : "kvitto",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Cocoanetics/Kvitto",
+      "state" : {
+        "revision" : "88888674d772ddcf19671159ed0022cb0bc37be2",
+        "version" : "1.0.6"
+      }
+    },
+    {
+      "identity" : "openssl-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/passepartoutvpn/openssl-apple",
+      "state" : {
+        "revision" : "026702febcaebcbf9ea68f2fa66b017eba998cdf",
+        "version" : "3.2.105"
+      }
+    },
+    {
+      "identity" : "swiftybeaver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftyBeaver/SwiftyBeaver",
+      "state" : {
+        "revision" : "12b5acf96d98f91d50de447369bd18df74600f1a",
+        "version" : "1.9.6"
+      }
+    },
+    {
+      "identity" : "tunnelkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/passepartoutvpn/tunnelkit",
+      "state" : {
+        "revision" : "708c785e615f5715ce08386c772c92fb45730a3a"
+      }
+    },
+    {
+      "identity" : "wireguard-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/passepartoutvpn/wireguard-apple",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "b79f0f150356d8200a64922ecf041dd020140aa0"
+      }
+    }
+  ],
+  "version" : 2
 }

@@ -72,7 +72,7 @@
 "global.strings.authentication" = "Authentication";
 "global.messages.unlock_app" = "Passepartout is locked";
 "global.messages.email_not_configured" = "No e-mail account is configured.";
-"global.messages.share" = "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS";
+"global.messages.share" = "Passepartout is a user-friendly, open source OpenVPN / WireGuard client for iOS and macOS"; // FIXME: l10n, Apple platforms
 
 "global.alerts.buttons.remind" = "Remind me later";
 "global.alerts.buttons.never" = "Don't ask again";
@@ -83,6 +83,7 @@
 "global.errors.missing_account" = "Missing account";
 "global.errors.missing_provider_server" = "Missing location";
 "global.errors.missing_provider_preset" = "Missing preset";
+"global.errors.tunnel_expired" = "Connection expired";
 
 /* MARK: Menus */
 
@@ -132,6 +133,7 @@
 /* MARK: OrganizerView */
 
 "organizer.sections.active" = "In use";
+"organizer.sections.tv.profiles_list.header.p1" = "Open Passepartout on your iOS or macOS device and enable the \"Apple TV\" toggle of a profile to make it appear here.";
 /* MARK: OrganizerView */
 "organizer.empty.no_profiles" = "No profiles";
 
@@ -163,6 +165,9 @@
 "profile.sections.vpn.footer" = "The connection will be established whenever necessary.";
 "profile.sections.status.header" = "Connection";
 "profile.sections.provider_infrastructure.footer" = "Last updated on %@.";
+"profile.sections.tv.footer.encryption" = "Profiles are encrypted and made available to your Apple TV via iCloud.";
+"profile.sections.tv.footer.restricted.p1" = "However, the connection will expire after %d minutes.";
+"profile.sections.tv.footer.restricted.p2" = "Purchase to drop the restriction.";
 "profile.sections.vpn_survives_sleep.footer" = "Disable to improve battery usage, at the expense of occasional slowdowns due to wake-up reconnections.";
 "profile.sections.vpn_resolves_hostname.footer" = "Preferred in most networks and required in some IPv6 networks. Disable where DNS is blocked, or to speed up negotiation when DNS is slow to respond.";
 "profile.sections.feedback.header" = "Feedback";
@@ -178,6 +183,8 @@
 "profile.items.only_shows_favorites.caption" = "Only show favorite locations";
 "profile.items.vpn_survives_sleep.caption" = "Keep alive on sleep";
 "profile.items.vpn_resolves_hostname.caption" = "Resolve provider hostname";
+"profile.items.tv_sharing.caption.limited" = "Limited to %d minutes";
+"profile.items.expires_at.caption" = "Expiration";
 
 "profile.alerts.rename.title" = "Rename profile";
 "profile.alerts.reconnect_vpn.message" = "Do you want to reconnect to the VPN?";
@@ -323,6 +330,7 @@
 "paywall.items.full_version.extra_description" = "All providers (including future ones)\n%@";
 "paywall.items.restore.title" = "Restore purchases";
 "paywall.items.restore.description" = "If you bought this app or feature in the past, you can restore your purchases and this screen won't show again.";
+"paywall.alerts.purchase.appletv.success.message" = "Thank you! The time limit will be dropped as soon as iCloud catches up. Wait a few moments, then restart the connection on the TV app.";
 
 /* MARK: DonateView */
 

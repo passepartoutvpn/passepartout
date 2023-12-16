@@ -45,4 +45,8 @@ enum Constants {
 
         static let appVersionString = "\(appVersionNumber) (\(appBuildNumber))"
     }
+
+    enum Tunnel {
+        static let expirationTimeIntervalKey = "ExpirationTimeInterval"
+    }
 }

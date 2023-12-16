@@ -75,17 +75,21 @@ public final class Reviewer: ObservableObject {
         defaults.removeObject(forKey: Keys.eventCount)
         defaults.set(currentVersion, forKey: Keys.lastVersion)
 
+        #if !os(tvOS)
         requestReview()
+        #endif
         return true
     }
 
     // may or may not appear
+    #if !os(tvOS)
     private func requestReview() {
         guard let scene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }) as? UIWindowScene else {
             return
         }
         SKStoreReviewController.requestReview(in: scene)
     }
+    #endif
 
     public static func urlForReview(withAppId appId: String) -> URL {
         URL(string: "https://apps.apple.com/app/id\(appId)?action=write-review")!

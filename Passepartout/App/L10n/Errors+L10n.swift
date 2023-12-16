@@ -77,6 +77,12 @@ extension AppError: LocalizedError {
                 return nil
             }
 
+        case .tunnel(let tunnelError):
+            switch tunnelError {
+            case .expired:
+                return V.tunnelExpired
+            }
+
         case .generic(let error):
             return error.localizedDescription
         }

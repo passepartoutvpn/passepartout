@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import MessageUI
 import PassepartoutLibrary
 import SwiftUI
@@ -88,3 +89,4 @@ struct ReportIssueView: View {
         )
     }
 }
+#endif

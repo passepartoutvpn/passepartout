@@ -35,9 +35,13 @@ final class PersistenceManager: ObservableObject {
 
     private let ckContainerId: String
 
+    private let ckSharedContainerId: String
+
     private let ckCoreDataZone: String
 
     private var vpnPersistence: VPNPersistence?
+
+    private var sharedVPNPersistence: VPNPersistence?
 
     private var providersPersistence: ProvidersPersistence?
 
@@ -52,9 +56,13 @@ final class PersistenceManager: ObservableObject {
 
     let didChangePersistence = PassthroughSubject<Void, Never>()
 
-    init(store: KeyValueStore, ckContainerId: String, ckCoreDataZone: String) {
+    init(store: KeyValueStore,
+         ckContainerId: String,
+         ckSharedContainerId: String,
+         ckCoreDataZone: String) {
         self.store = store
         self.ckContainerId = ckContainerId
+        self.ckSharedContainerId = ckSharedContainerId
         self.ckCoreDataZone = ckCoreDataZone
         isCloudSyncingEnabled = store.canEnableCloudSyncing
 
@@ -65,8 +73,20 @@ final class PersistenceManager: ObservableObject {
     }
 
     func loadVPNPersistence(withName containerName: String) -> VPNPersistence {
-        let persistence = VPNPersistence(withName: containerName, cloudKit: isCloudSyncingEnabled, author: persistenceAuthor)
+        let persistence = VPNPersistence(withName: containerName,
+                                         cloudKit: isCloudSyncingEnabled,
+                                         cloudKitIdentifier: nil,
+                                         author: persistenceAuthor)
         vpnPersistence = persistence
+        return persistence
+    }
+
+    func loadSharedVPNPersistence(withName containerName: String) -> VPNPersistence {
+        let persistence = VPNPersistence(withName: containerName,
+                                         cloudKit: true,
+                                         cloudKitIdentifier: ckSharedContainerId,
+                                         author: persistenceAuthor)
+        sharedVPNPersistence = persistence
         return persistence
     }
 
@@ -84,6 +104,10 @@ extension PersistenceManager {
         isErasingCloudKitStore = true
         await Self.eraseCloudKitStore(
             fromContainerWithId: ckContainerId,
+            zoneId: .init(zoneName: ckCoreDataZone)
+        )
+        await Self.eraseCloudKitStore(
+            fromContainerWithId: ckSharedContainerId,
             zoneId: .init(zoneName: ckCoreDataZone)
         )
         isErasingCloudKitStore = false
@@ -109,7 +133,11 @@ private extension KeyValueStore {
     }
 
     private var isCloudKitSupported: Bool {
+        #if !os(tvOS)
         cloudKitToken != nil
+        #else
+        true
+        #endif
     }
 
     var canEnableCloudSyncing: Bool {

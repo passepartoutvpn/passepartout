@@ -42,11 +42,15 @@ public final class VPNPersistence {
         store.containerURLs
     }
 
-    public init(withName containerName: String, cloudKit: Bool, author: String?) {
+    public init(withName containerName: String,
+                cloudKit: Bool,
+                cloudKitIdentifier: String?,
+                author: String?) {
         store = .init(
             withName: containerName,
             model: Self.dataModel,
             cloudKit: cloudKit,
+            cloudKitIdentifier: cloudKitIdentifier,
             author: author
         )
     }

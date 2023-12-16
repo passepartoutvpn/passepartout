@@ -44,8 +44,13 @@ final class CoreContext {
     init(persistenceManager: PersistenceManager) {
         store = persistenceManager.store
 
+        #if !os(tvOS)
         let vpnPersistence = persistenceManager.loadVPNPersistence(
             withName: Constants.Persistence.profilesContainerName
+        )
+        #endif
+        let sharedVPNPersistence = persistenceManager.loadSharedVPNPersistence(
+            withName: Constants.Persistence.sharedProfilesContainerName
         )
         let providersPersistence = persistenceManager.loadProvidersPersistence(
             withName: Constants.Persistence.providersContainerName
@@ -68,10 +73,20 @@ final class CoreContext {
             remoteProvidersStrategy: remoteProvidersStrategy
         )
 
+        let tvProfileRepository = sharedVPNPersistence.profileRepository()
+        #if !os(tvOS)
+        let profileRepository = vpnPersistence.profileRepository()
+        let sharedProfileRepository = tvProfileRepository
+        #else
+        let profileRepository = tvProfileRepository
+        let sharedProfileRepository: ProfileRepository? = nil
+        #endif
+
         profileManager = ProfileManager(
             store: store,
             providerManager: providerManager,
-            profileRepository: vpnPersistence.profileRepository(),
+            profileRepository: profileRepository,
+            sharedProfileRepository: sharedProfileRepository,
             keychain: KeychainSecretRepository(appGroup: Constants.App.appGroupId),
             keychainEntry: Unlocalized.Keychain.passwordEntry,
             keychainLabel: Unlocalized.Keychain.passwordLabel

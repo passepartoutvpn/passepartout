@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import PassepartoutLibrary
 import SwiftUI
 import TunnelKitCore
@@ -111,3 +112,4 @@ private extension EndpointView.AddView {
         presentationMode.wrappedValue.dismiss()
     }
 }
+#endif

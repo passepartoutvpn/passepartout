@@ -24,7 +24,7 @@
 //
 
 import Foundation
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #else
 import AppKit
@@ -35,7 +35,7 @@ extension DebugLog {
         let osVersion: String
         let deviceType: String?
 
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
         let device: UIDevice = .current
         osVersion = "\(device.systemName) \(device.systemVersion)"
         #if targetEnvironment(macCatalyst)

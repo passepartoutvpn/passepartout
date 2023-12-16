@@ -44,11 +44,15 @@ public final class ProfileManager: ObservableObject {
 
     private var profileRepository: ProfileRepository
 
+    private var sharedProfileRepository: ProfileRepository?
+
     private let keychain: SecretRepository
 
     private let keychainEntry: (Profile) -> String
 
     private let keychainLabel: (Profile) -> String
+
+    public var willSaveSharedProfile: (_ newProfile: Profile, _ existingProfile: Profile?) -> Profile
 
     // MARK: State
 
@@ -89,12 +93,19 @@ public final class ProfileManager: ObservableObject {
 
     public let didCreateProfile = PassthroughSubject<Profile, Never>()
 
+    @Published private var sharedProfileIds: Set<UUID> {
+        didSet {
+            refreshSharedProfiles()
+        }
+    }
+
     private var cancellables: Set<AnyCancellable> = []
 
     public init(
         store: KeyValueStore,
         providerManager: ProviderManager,
         profileRepository: ProfileRepository,
+        sharedProfileRepository: ProfileRepository? = nil,
         keychain: SecretRepository,
         keychainEntry: @escaping KeychainEntry,
         keychainLabel: @escaping KeychainLabel
@@ -102,11 +113,20 @@ public final class ProfileManager: ObservableObject {
         self.store = store
         self.providerManager = providerManager
         self.profileRepository = profileRepository
+        self.sharedProfileRepository = sharedProfileRepository
         self.keychain = keychain
         self.keychainEntry = keychainEntry
         self.keychainLabel = keychainLabel
+        willSaveSharedProfile = { newProfile, _ in
+            newProfile
+        }
 
         currentProfile = ObservableProfile()
+        if let sharedProfileRepository {
+            sharedProfileIds = Set(sharedProfileRepository.allProfiles().keys)
+        } else {
+            sharedProfileIds = []
+        }
     }
 }
 
@@ -172,6 +192,21 @@ extension ProfileManager {
         return profile
     }
 
+    public func activateProfile(_ profile: Profile, isActive: Bool) {
+        guard !profile.isPlaceholder else {
+            assertionFailure("Placeholder")
+            return
+        }
+
+        if isActive {
+            pp_log.info("\tActivating profile...")
+            activeProfileId = profile.id
+        } else if activeProfileId == profile.id {
+            pp_log.info("\tDeactivating profile...")
+            activeProfileId = nil
+        }
+    }
+
     public func saveProfile(_ profile: Profile, isActive: Bool?, updateIfCurrent: Bool = true) {
         guard !profile.isPlaceholder else {
             assertionFailure("Placeholder")
@@ -179,16 +214,10 @@ extension ProfileManager {
         }
 
         pp_log.info("Writing profile \(profile.logDescription) to persistent store")
-        profileRepository.saveProfilesAndLog([profile])
+        saveProfilesAndLog([profile])
 
-        if let isActive = isActive {
-            if isActive {
-                pp_log.info("\tActivating profile...")
-                activeProfileId = profile.id
-            } else if activeProfileId == profile.id {
-                pp_log.info("\tDeactivating profile...")
-                activeProfileId = nil
-            }
+        if let isActive {
+            activateProfile(profile, isActive: isActive)
         } else if allProfiles.isEmpty {
             pp_log.info("\tActivating first profile...")
             activeProfileId = profile.id
@@ -235,7 +264,7 @@ extension ProfileManager {
             // autosaves copy if non-existing in persistent store
             setCurrentProfile(copy)
         } else {
-            profileRepository.saveProfilesAndLog([copy])
+            saveProfilesAndLog([copy])
         }
     }
 
@@ -328,7 +357,7 @@ extension ProfileManager {
         }
         defer {
             if !profilesToSave.isEmpty {
-                profileRepository.saveProfilesAndLog(profilesToSave)
+                saveProfilesAndLog(profilesToSave)
             }
         }
 
@@ -350,13 +379,39 @@ extension ProfileManager {
         $internalActiveProfileId
             .sink { [weak self] in
                 self?.didUpdateActiveProfile.send($0)
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
 
         profileRepository.willUpdateProfiles()
             .dropFirst()
             .sink { [weak self] in
                 self?.willUpdateProfiles($0)
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
+
+        if let sharedProfileRepository {
+
+            // persist changes to shared profiles immediately
+            currentProfile.$value
+                .dropFirst()
+                .removeDuplicates()
+                .filter { [unowned self] in
+                    sharedProfileIds.contains($0.id)
+                }
+                .map { [unowned self] in
+                    let existingProfile = sharedProfileRepository.profile(withId: $0.id)
+                    return willSaveSharedProfile($0, existingProfile)
+                }
+                .sink { newSharedProfile in
+                    do {
+                        try sharedProfileRepository.saveProfiles([newSharedProfile])
+                        pp_log.info("Current profile persisted (shared): \(newSharedProfile.logDescription)")
+                    } catch {
+                        pp_log.error("Unable to persist current profile (shared): \(error)")
+                    }
+                }
+                .store(in: &cancellables)
+        }
     }
 
     private func willUpdateProfiles(_ newProfiles: [UUID: Profile]) {
@@ -431,18 +486,76 @@ extension ProfileManager {
             }
         }
         if !renamedProfiles.isEmpty {
-            profileRepository.saveProfilesAndLog(renamedProfiles)
+            saveProfilesAndLog(renamedProfiles)
             pp_log.debug("Duplicates successfully renamed!")
         }
     }
 }
 
-private extension ProfileRepository {
-    func saveProfilesAndLog(_ profiles: [Profile]) {
+// MARK: Persistence
+
+extension ProfileManager {
+    private func saveProfilesAndLog(_ profiles: [Profile]) {
         do {
-            try saveProfiles(profiles)
+            try profileRepository.saveProfiles(profiles.map {
+                var copy = $0
+                copy.connectionExpirationDate = nil
+                return copy
+            })
         } catch {
             pp_log.error("Unable to save profile(s): \(error)")
+        }
+    }
+
+    public func isSharing(profile: Profile) -> Bool {
+        sharedProfileIds.contains(profile.id)
+    }
+
+    public func setSharing(_ isShared: Bool, profile: Profile) {
+        if isShared {
+            pp_log.debug("Adding shared profile: \(profile.id)")
+            sharedProfileIds.insert(profile.id)
+        } else {
+            pp_log.debug("Removing shared profile: \(profile.id))")
+            sharedProfileIds.remove(profile.id)
+        }
+    }
+}
+
+extension ProfileManager {
+    public func refreshSharedProfiles() {
+        guard let sharedProfileRepository else {
+            return
+        }
+
+        var toAdd: [Profile] = []
+        var toRemove: [UUID] = []
+        profiles.forEach {
+            if sharedProfileIds.contains($0.id) {
+                toAdd.append($0)
+            } else {
+                toRemove.append($0.id)
+            }
+        }
+
+        let existingProfiles = sharedProfileRepository
+            .allProfiles()
+            .filter {
+                sharedProfileIds.contains($0.key)
+            }
+
+        pp_log.debug("Refreshing shared profiles")
+        pp_log.debug("\tAdding: \(toAdd.map(\.logDescription))")
+        pp_log.debug("\tExisting: \(existingProfiles.keys)")
+        pp_log.debug("\tRemoving: \(toRemove)")
+
+        sharedProfileRepository.removeProfiles(withIds: toRemove)
+        do {
+            try sharedProfileRepository.saveProfiles(toAdd.map {
+                willSaveSharedProfile($0, existingProfiles[$0.id])
+            })
+        } catch {
+            pp_log.error("Unable to save shared profiles: \(error)")
         }
     }
 }

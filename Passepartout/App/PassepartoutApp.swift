@@ -33,6 +33,7 @@ struct PassepartoutApp: App {
     @SceneBuilder var body: some Scene {
         WindowGroup {
             MainView()
+                #if !os(tvOS)
                 .withoutTitleBar()
                 .onIntentActivity(IntentDispatcher.connectVPN)
                 .onIntentActivity(IntentDispatcher.disableVPN)
@@ -42,6 +43,7 @@ struct PassepartoutApp: App {
                 .onIntentActivity(IntentDispatcher.trustCurrentNetwork)
                 .onIntentActivity(IntentDispatcher.untrustCellularNetwork)
                 .onIntentActivity(IntentDispatcher.untrustCurrentNetwork)
+                #endif
         }
     }
 }

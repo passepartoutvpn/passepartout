@@ -24,23 +24,25 @@
 //
 
 import Foundation
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #else
 import AppKit
 #endif
 
 extension Utils {
+    #if !os(tvOS)
     public static func copyToPasteboard(_ string: String) {
         #if os(iOS)
         let pb = UIPasteboard.general
         pb.string = string
-        #else
+        #elseif os(macOS)
         let pb = NSPasteboard.general
         pb.clearContents()
         pb.setString(string, forType: .string)
         #endif
     }
+    #endif
 }
 
 extension String: StrippableContent {

@@ -180,7 +180,9 @@ private extension GenericCreditsView {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding()
         }.navigationTitle(content.name)
+        #if !os(tvOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

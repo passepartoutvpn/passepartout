@@ -39,6 +39,8 @@ public struct Profile: Identifiable, Codable, Equatable {
 
     public var onDemand = Profile.OnDemand()
 
+    public var connectionExpirationDate: Date?
+
     var host: Host?
 
     var provider: Provider?
@@ -94,5 +96,14 @@ extension Profile {
 
     public var isPlaceholder: Bool {
         header.id == Self.placeholder.id
+    }
+}
+
+extension Profile {
+    public var isExpired: Bool {
+        guard let connectionExpirationDate else {
+            return false
+        }
+        return Date().distance(to: connectionExpirationDate) <= .zero
     }
 }

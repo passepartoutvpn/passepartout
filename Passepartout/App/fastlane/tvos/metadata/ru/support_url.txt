@@ -1,0 +1,1 @@
+../../../ios/metadata/ru/support_url.txt

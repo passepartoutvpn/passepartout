@@ -67,6 +67,7 @@ struct DebugLogView: View {
                 refreshLog(scrollingToLatestWith: scrollProxy)
             }
         }
+        #if !os(tvOS)
         #if targetEnvironment(macCatalyst)
         .toolbar {
             Button(action: copyDebugLog) {
@@ -82,7 +83,9 @@ struct DebugLogView: View {
             } else {
                 ProgressView()
             }
-        }.sheet(isPresented: $isSharing, content: sharingActivityView)
+        }
+        .sheet(isPresented: $isSharing, content: sharingActivityView)
+        #endif
         #endif
         .edgesIgnoringSafeArea([.leading, .trailing])
         .onReceive(timer, perform: refreshLog)
@@ -104,9 +107,11 @@ private extension DebugLogView {
         // TODO: layout, a slight padding would be nice, but it glitches on first touch
     }
 
+    #if !os(tvOS)
     func sharingActivityView() -> some View {
         ActivityView(activityItems: sharingItems)
     }
+    #endif
 
     var sharingItems: [Any] {
         let raw = logLines.joined(separator: "\n")
@@ -140,6 +145,7 @@ private extension DebugLogView {
         }
     }
 
+    #if !os(tvOS)
     func shareDebugLog() {
         guard !logLines.isEmpty else {
             assertionFailure("Log is empty, why could it share?")
@@ -159,6 +165,7 @@ private extension DebugLogView {
 
         Utils.copyToPasteboard(content)
     }
+    #endif
 
     func scrollToLatestUpdate(_ proxy: ScrollViewProxy) {
         proxy.maybeScrollTo(logLines.count - 1, anchor: .bottomLeading)

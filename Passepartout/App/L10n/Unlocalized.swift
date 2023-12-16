@@ -259,6 +259,8 @@ enum Unlocalized {
 
         static let iCloud = "iCloud"
 
+        static let appleTV = "Apple TV"
+
         static let totp = "TOTP"
     }
 }

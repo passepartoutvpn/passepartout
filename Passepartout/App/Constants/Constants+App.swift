@@ -44,6 +44,8 @@ extension Constants {
     enum CloudKit {
         static let containerId: String = bundleConfig("cloudkit_id")
 
+        static let sharedContainerId: String = bundleConfig("cloudkit_shared_id")
+
         static let coreDataZone = "com.apple.coredata.cloudkit.zone"
     }
 
@@ -84,6 +86,8 @@ extension Constants {
             return []
         }
         #endif
+
+        static let tvLimitedMinutes = 10
     }
 }
 
@@ -130,6 +134,8 @@ extension Constants {
 
     enum Persistence {
         static let profilesContainerName = "Profiles"
+
+        static let sharedProfilesContainerName = "SharedProfiles"
 
         static let providersContainerName = "Providers"
     }

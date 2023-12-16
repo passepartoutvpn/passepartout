@@ -33,6 +33,8 @@ enum AppError: Error {
 
     case vpn(Passepartout.VPNError)
 
+    case tunnel(TunnelError)
+
     case generic(Error)
 
     init(_ error: Error) {

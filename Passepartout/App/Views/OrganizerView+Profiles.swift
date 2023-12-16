@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import PassepartoutLibrary
 import SwiftUI
 
@@ -187,3 +188,4 @@ private extension OrganizerView.ProfilesList {
         }
     }
 }
+#endif

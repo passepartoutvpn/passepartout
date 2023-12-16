@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- App for tvOS. [#315](https://github.com/passepartoutvpn/passepartout-apple/issues/315)
 - WireGuard: Show data count. [#312](https://github.com/passepartoutvpn/passepartout-apple/issues/312)
 
 ### Changed

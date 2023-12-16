@@ -24,7 +24,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(CFG_APP_ID)</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -80,7 +80,7 @@
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
+		<string>arm64</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -99,10 +99,12 @@
 	<dict>
 		<key>appstore_id</key>
 		<string>$(CFG_APPSTORE_ID)</string>
-		<key>group_id</key>
-		<string>group.$(CFG_GROUP_ID)</string>
 		<key>cloudkit_id</key>
 		<string>iCloud.$(CFG_GROUP_ID)</string>
+		<key>cloudkit_shared_id</key>
+		<string>iCloud.$(CFG_GROUP_ID).Shared</string>
+		<key>group_id</key>
+		<string>group.$(CFG_GROUP_ID)</string>
 	</dict>
 </dict>
 </plist>

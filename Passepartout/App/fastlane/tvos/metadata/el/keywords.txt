@@ -1,0 +1,1 @@
+../../../ios/metadata/el/keywords.txt

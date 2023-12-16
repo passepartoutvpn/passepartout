@@ -1,0 +1,1 @@
+../../../ios/metadata/en-US/apple_tv_privacy_policy.txt

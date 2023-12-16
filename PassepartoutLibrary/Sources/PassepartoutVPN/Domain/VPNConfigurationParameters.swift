@@ -52,13 +52,16 @@ public struct VPNConfigurationParameters {
 
     public let withCustomRules: Bool
 
+    public let userData: [String: Any]?
+
     init(
         _ profile: Profile,
         providerManager: ProviderManager,
         preferences: VPNPreferences,
         passwordReference: Data?,
         withNetworkSettings: Bool,
-        withCustomRules: Bool
+        withCustomRules: Bool,
+        userData: [String: Any]?
     ) {
         self.profile = profile
         self.providerManager = providerManager
@@ -66,5 +69,6 @@ public struct VPNConfigurationParameters {
         self.passwordReference = passwordReference
         self.withNetworkSettings = withNetworkSettings
         self.withCustomRules = withCustomRules
+        self.userData = userData
     }
 }

@@ -25,7 +25,7 @@
 
 import Foundation
 import StoreKit
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #else
 import AppKit
@@ -38,7 +38,7 @@ extension URL {
 
     @discardableResult
     public static func open(_ url: URL) -> Bool {
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
         guard UIApplication.shared.canOpenURL(url) else {
             return false
         }

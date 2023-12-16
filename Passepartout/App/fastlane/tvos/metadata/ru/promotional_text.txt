@@ -1,0 +1,1 @@
+../../../ios/metadata/ru/promotional_text.txt

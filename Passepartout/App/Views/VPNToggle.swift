@@ -39,22 +39,25 @@ struct VPNToggle: View {
 
     @Binding private var interactiveProfile: Profile?
 
+    private let title: String
+
     private let rateLimit: Int
 
     @State private var canToggle = true
 
-    init(profile: Profile, interactiveProfile: Binding<Profile?>, rateLimit: Int) {
+    init(profile: Profile, interactiveProfile: Binding<Profile?>, title: String, rateLimit: Int) {
         profileManager = .shared
         vpnManager = .shared
         currentVPNState = .shared
         productManager = .shared
         self.profile = profile
         _interactiveProfile = interactiveProfile
+        self.title = title
         self.rateLimit = rateLimit
     }
 
     var body: some View {
-        Toggle(L10n.Global.Strings.enabled, isOn: isEnabled)
+        Toggle(title, isOn: isEnabled)
             .disabled(!canToggle)
             .themeAnimation(on: currentVPNState.isEnabled)
     }
@@ -129,11 +132,13 @@ private extension VPNToggle {
 
         pp_log.debug("Donating connection intents...")
 
+        #if !os(tvOS)
         IntentDispatcher.donateEnableVPN()
         IntentDispatcher.donateDisableVPN()
         IntentDispatcher.donateConnection(
             with: profile,
             providerManager: ProviderManager.shared
         )
+        #endif
     }
 }

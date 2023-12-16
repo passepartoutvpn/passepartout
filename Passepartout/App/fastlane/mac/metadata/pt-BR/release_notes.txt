@@ -1,4 +1,9 @@
-### Fixed
+### Added
 
-- Persisted profile is overwritten with its former value.
+- WireGuard: Show data count.
+
+### Changed
+
+- Upgrade OpenSSL to 3.2.0.
+- Encrypt profiles stored to iCloud.
 

@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
 import SwiftUI
 
 struct MainView: View {
@@ -33,3 +34,4 @@ struct MainView: View {
         }.themeGlobal()
     }
 }
+#endif

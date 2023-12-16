@@ -72,7 +72,7 @@
 "global.strings.authentication" = "Αυθεντικοποίηση";
 "global.messages.unlock_app" = "Το πασπαρτού είναι κλειδωμένο";
 "global.messages.email_not_configured" = "Δεν έχει ρυθμιστεί λογαριασμός ηλεκτρονικού ταχυδρομείου.";
-"global.messages.share" = "Το Passepartout είναι φιλικό προς το χρήστη, ανοιχτού κώδικα OpenVPN / WireGuard πρόγραμμα για iOS και macOS";
+"global.messages.share" = "Το Passepartout είναι φιλικό προς το χρήστη, ανοιχτού κώδικα OpenVPN / WireGuard πρόγραμμα για iOS και macOS"; // FIXME: l10n, Apple platforms
 
 "global.alerts.buttons.remind" = "Υπενθύμιση Αργότερα";
 "global.alerts.buttons.never" = "Μη με ρωτήσεις ξανά";
@@ -83,6 +83,7 @@
 "global.errors.missing_account" = "Λείπει λογαριασμός";
 "global.errors.missing_provider_server" = "Λείπει η τοποθεσία";
 "global.errors.missing_provider_preset" = "Λείπει προεπιλογή";
+"global.errors.tunnel_expired" = "H σύνδεση έληξε";
 
 /* MARK: Menus */
 
@@ -132,6 +133,7 @@
 /* MARK: OrganizerView */
 
 "organizer.sections.active" = "Σε χρήση";
+"organizer.sections.tv.profiles_list.header.p1" = "Ανοίξτε το Passepartout στη συσκευή σας iOS ή macOS και ενεργοποιήστε την εναλλαγή \"Apple TV\" ενός προφίλ για να εμφανιστεί εδώ.";
 /* MARK: OrganizerView */
 "organizer.empty.no_profiles" = "Δεν υπάρχουν προφίλ";
 
@@ -163,6 +165,9 @@
 "profile.sections.vpn.footer" = "Η σύνδεση θα πραγματοποιηθεί όποτε είναι απαραίτητο.";
 "profile.sections.status.header" = "Σύνδεση";
 "profile.sections.provider_infrastructure.footer" = "Τελευταία ενημέρωση στις %@.";
+"profile.sections.tv.footer.encryption" = "Τα προφίλ κρυπτογραφούνται και διατίθενται στο Apple TV σας μέσω iCloud.";
+"profile.sections.tv.footer.restricted.p1" = "Ωστόσο, η σύνδεση θα λήξει μετά από %d λεπτά.";
+"profile.sections.tv.footer.restricted.p2" = "Αγορά για την κατάργηση του περιορισμού.";
 "profile.sections.vpn_survives_sleep.footer" = "Απενεργοποιήστε για να βελτιώσετε τη χρήση της μπαταρίας, εις βάρος των περιστασιακών επιβραδύνσεων που οφείλονται σε επανασύνδεση αφύπνισης.";
 "profile.sections.vpn_resolves_hostname.footer" = "Προτιμάται στα περισσότερα δίκτυα και απαιτείται σε ορισμένα δίκτυα IPv6. Απενεργοποιήστε το εκεί που μπλοκάρεται το DNS ή για να επιταχύνετε τη επικοινωνία όταν το DNS είναι αργό για να ανταποκριθεί.";
 "profile.sections.feedback.header" = "Ανατροφοδότηση";
@@ -178,6 +183,8 @@
 "profile.items.only_shows_favorites.caption" = "Προβολή αγαπημένων τοποθεσιών μόνο";
 "profile.items.vpn_survives_sleep.caption" = "Κρατήστε ζωντανό στον ύπνο";
 "profile.items.vpn_resolves_hostname.caption" = "Επίλυση του ονόματος σέρβερ διακομιστή";
+"profile.items.tv_sharing.caption.limited" = "Περιορίστηκε σε %d λεπτά";
+"profile.items.expires_at.caption" = "Λήξη";
 
 "profile.alerts.rename.title" = "Μετονομασία προφίλ";
 "profile.alerts.reconnect_vpn.message" = "Θέλετε να συνδεθείτε ξανά με το VPN;";
@@ -323,6 +330,7 @@
 "paywall.items.full_version.extra_description" = "Όλοι οι πάροχοι (περιλαμβάνονται και οι μελλοντικοί)\n%@";
 "paywall.items.restore.title" = "Επαναφορά Αγορών";
 "paywall.items.restore.description" = "Εαν αγοράσατε την εφαρμογή στο παρελθόν, μπορείτε να κάνετε επαναφορά αγορών και αυτή η οθόνη δε θα εμφανιστεί ξανά.";
+"paywall.alerts.purchase.appletv.success.message" = "Σας ευχαριστούμε! Το χρονικό όριο θα αφαιρεθεί μόλις ενημερωθεί το iCloud. Περιμένετε μερικά λεπτά και μετά επανεκκινήστε τη σύνδεση στην εφαρμογή TV.";
 
 /* MARK: DonateView */
 

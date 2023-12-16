@@ -53,11 +53,13 @@ extension ProfileView {
                     Label(L10n.Global.Strings.protocol, systemImage: themeVPNProtocolImage)
                         .withTrailingText(currentProfile.value.currentVPNProtocol.description)
                 }
+                #if !os(tvOS)
                 NavigationLink {
                     EndpointView(currentProfile: currentProfile)
                 } label: {
                     Label(L10n.Global.Strings.endpoint, systemImage: themeEndpointImage)
                 }
+                #endif
                 if currentProfile.value.requiresCredentials {
                     NavigationLink {
                         AccountView(
