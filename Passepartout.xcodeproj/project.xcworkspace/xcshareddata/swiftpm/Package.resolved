@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/zoul/generic-json-swift",
         "state": {
           "branch": null,
-          "revision": "a137894b2a217abe489cdf1ea287e6f7819b1051",
-          "version": "2.0.1"
+          "revision": "0a06575f4038b504e78ac330913d920f1630f510",
+          "version": "2.0.2"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/passepartoutvpn/openssl-apple",
         "state": {
           "branch": null,
-          "revision": "c15562540646602300df94540765fbe27b6d5474",
-          "version": "3.2.0"
+          "revision": "026702febcaebcbf9ea68f2fa66b017eba998cdf",
+          "version": "3.2.105"
         }
       },
       {
