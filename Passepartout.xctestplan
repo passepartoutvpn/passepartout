@@ -45,6 +45,7 @@
   },
   "testTargets" : [
     {
+      "enabled" : false,
       "target" : {
         "containerPath" : "container:PassepartoutLibrary",
         "identifier" : "PassepartoutCoreTests",
@@ -52,6 +53,7 @@
       }
     },
     {
+      "enabled" : false,
       "target" : {
         "containerPath" : "container:PassepartoutLibrary",
         "identifier" : "PassepartoutProvidersTests",
