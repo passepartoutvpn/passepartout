@@ -17,6 +17,7 @@ extension CDProfile {
     }
 
     @NSManaged var json: Data?
+    @NSManaged var encryptedJSON: Data?
     @NSManaged var name: String?
     @NSManaged var providerName: String?
     @NSManaged var uuid: UUID?

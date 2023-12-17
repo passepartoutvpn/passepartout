@@ -38,7 +38,7 @@ struct ProfileMapper: DTOMapper, ModelMapper {
     func toDTO(_ ws: Profile) throws -> CDProfile {
         let profile = ProfileHeaderMapper(context).toDTO(ws)
         do {
-            profile.json = try JSONEncoder().encode(ws)
+            profile.encryptedJSON = try JSONEncoder().encode(ws)
         } catch {
             assertionFailure("Unable to encode profile: \(error)")
             throw error
@@ -47,7 +47,7 @@ struct ProfileMapper: DTOMapper, ModelMapper {
     }
 
     static func toModel(_ dto: CDProfile) throws -> Profile? {
-        guard let json = dto.json else {
+        guard let json = dto.encryptedJSON ?? dto.json else {
             Utils.assertCoreDataDecodingFailed()
             return nil
         }

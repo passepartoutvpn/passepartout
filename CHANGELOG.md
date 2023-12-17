@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Upgrade OpenSSL to 3.2.0. [tunnelkit#336](https://github.com/passepartoutvpn/tunnelkit/issues/336)
+### Added
+
 - WireGuard: Show data count. [#312](https://github.com/passepartoutvpn/passepartout-apple/issues/312)
+
+### Changed
+
+- Upgrade OpenSSL to 3.2.0. [tunnelkit#336](https://github.com/passepartoutvpn/tunnelkit/issues/336)
+- Encrypt profiles stored to iCloud. [#436](https://github.com/passepartoutvpn/passepartout-apple/pull/436)
 
 ## 2.2.1 (2023-10-14)
 
