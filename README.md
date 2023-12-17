@@ -2,7 +2,7 @@
 
 ![iOS 15+](https://img.shields.io/badge/iOS-15+-green.svg)
 ![macOS 12+](https://img.shields.io/badge/macOS-12+-green.svg)
-[![TunnelKit 6.1](https://img.shields.io/badge/TunnelKit-6.1-d69c68.svg)][dep-tunnelkit]
+[![TunnelKit 6.2](https://img.shields.io/badge/TunnelKit-6.2-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
 
 [![Unit Tests](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml)
@@ -10,7 +10,7 @@
 
 # [Passepartout][about-website]
 
-Passepartout is a user-friendly [OpenVPN®][openvpn] and [WireGuard®][wireguard] client for iOS and macOS. The OpenVPN stack also implements the [Tunnelblick XOR patch][openvpn-xor-patch].
+Passepartout is a user-friendly [OpenVPN®][openvpn] and [WireGuard®][wireguard] client for Apple platforms. The OpenVPN stack also implements the [Tunnelblick XOR patch][openvpn-xor-patch].
  
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20a%20user-friendly%2C%20open-source%20VPN%20client%20for%20%23iOS%20and%20%23macOS)
@@ -146,11 +146,11 @@ The country flags are taken from: <https://github.com/lipis/flag-icon-css/>
 
 ### OpenVPN
 
-© Copyright 2022 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc.
+© Copyright 2023 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc.
 
 ### WireGuard
 
-© Copyright 2015-2022 Jason A. Donenfeld. All Rights Reserved. "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
+© Copyright 2015-2023 Jason A. Donenfeld. All Rights Reserved. "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
 
 ### OpenSSL
 
