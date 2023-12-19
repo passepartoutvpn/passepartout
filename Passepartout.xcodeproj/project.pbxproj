@@ -61,6 +61,9 @@
 		0E3CD483280DAE92007075C0 /* ProfileView+MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CD482280DAE92007075C0 /* ProfileView+MainMenu.swift */; };
 		0E3EDF272B32523800AFE707 /* ReceiptReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3EDF252B32523800AFE707 /* ReceiptReader.swift */; };
 		0E3EDF282B32523800AFE707 /* AppType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3EDF262B32523800AFE707 /* AppType.swift */; };
+		0E3EDF2D2B3252C800AFE707 /* MockReceiptReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3EDF2A2B3252C800AFE707 /* MockReceiptReader.swift */; };
+		0E3EDF2E2B3252C800AFE707 /* MockInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3EDF2B2B3252C800AFE707 /* MockInApp.swift */; };
+		0E3EDF2F2B3252C800AFE707 /* ProductManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3EDF2C2B3252C800AFE707 /* ProductManagerTests.swift */; };
 		0E3FC6862867A3F9009B851C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3FC6852867A3F9009B851C /* AppDelegate.swift */; };
 		0E41BD9A286711C3006346B4 /* PassepartoutLauncherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E41BD99286711C3006346B4 /* PassepartoutLauncherApp.swift */; };
 		0E41BDA72867128A006346B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E41BDA62867128A006346B4 /* AppDelegate.swift */; };
@@ -113,7 +116,6 @@
 		0E7A8C0F2A1D54DE00780F4B /* Picker+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A8C072A1D40BA00780F4B /* Picker+OpenVPN.swift */; };
 		0E7A8C102A1D54DE00780F4B /* Picker+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A8C082A1D40BA00780F4B /* Picker+Network.swift */; };
 		0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */; };
-		0E90F45B2B3219F60089D505 /* PassepartoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90F44A2B3218820089D505 /* PassepartoutTests.swift */; };
 		0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */; };
 		0E92D7C927F1042A0033CB7B /* ProfileView+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */; };
 		0E96D2DE28704C3B005EFBCF /* TextItem+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96D2DD28704C3B005EFBCF /* TextItem+ViewModel.swift */; };
@@ -357,6 +359,9 @@
 		0E3CD482280DAE92007075C0 /* ProfileView+MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+MainMenu.swift"; sourceTree = "<group>"; };
 		0E3EDF252B32523800AFE707 /* ReceiptReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptReader.swift; sourceTree = "<group>"; };
 		0E3EDF262B32523800AFE707 /* AppType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppType.swift; sourceTree = "<group>"; };
+		0E3EDF2A2B3252C800AFE707 /* MockReceiptReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockReceiptReader.swift; sourceTree = "<group>"; };
+		0E3EDF2B2B3252C800AFE707 /* MockInApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockInApp.swift; sourceTree = "<group>"; };
+		0E3EDF2C2B3252C800AFE707 /* ProductManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductManagerTests.swift; sourceTree = "<group>"; };
 		0E3FC6842867A3BA009B851C /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		0E3FC6852867A3F9009B851C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E41BD97286711C3006346B4 /* PassepartoutLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -410,7 +415,6 @@
 		0E7A8C082A1D40BA00780F4B /* Picker+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Picker+Network.swift"; sourceTree = "<group>"; };
 		0E7A8C092A1D410400780F4B /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHostViewModel.swift; sourceTree = "<group>"; };
-		0E90F44A2B3218820089D505 /* PassepartoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutTests.swift; sourceTree = "<group>"; };
 		0E90F4522B3219E20089D505 /* PassepartoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassepartoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Configuration.swift"; sourceTree = "<group>"; };
 		0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Extra.swift"; sourceTree = "<group>"; };
@@ -737,6 +741,15 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		0E3EDF292B3252C800AFE707 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0E3EDF2B2B3252C800AFE707 /* MockInApp.swift */,
+				0E3EDF2A2B3252C800AFE707 /* MockReceiptReader.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		0E41BD98286711C3006346B4 /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -861,7 +874,8 @@
 		0E90F4532B3219E20089D505 /* PassepartoutTests */ = {
 			isa = PBXGroup;
 			children = (
-				0E90F44A2B3218820089D505 /* PassepartoutTests.swift */,
+				0E3EDF292B3252C800AFE707 /* Utils */,
+				0E3EDF2C2B3252C800AFE707 /* ProductManagerTests.swift */,
 			);
 			path = PassepartoutTests;
 			sourceTree = "<group>";
@@ -1219,6 +1233,7 @@
 					};
 					0E90F4512B3219E20089D505 = {
 						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
 						TestTargetID = 0E57F63720C83FC5008323CF;
 					};
 					0ECB78D9285F52F700B0E460 = {
@@ -1577,7 +1592,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E90F45B2B3219F60089D505 /* PassepartoutTests.swift in Sources */,
+				0E3EDF2E2B3252C800AFE707 /* MockInApp.swift in Sources */,
+				0E3EDF2D2B3252C800AFE707 /* MockReceiptReader.swift in Sources */,
+				0E3EDF2F2B3252C800AFE707 /* ProductManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1962,6 +1979,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Passepartout";

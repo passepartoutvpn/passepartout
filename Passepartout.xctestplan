@@ -9,7 +9,6 @@
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : false,
     "commandLineArgumentEntries" : [
       {
         "argument" : "-com.apple.CoreData.SQLDebug 0"
