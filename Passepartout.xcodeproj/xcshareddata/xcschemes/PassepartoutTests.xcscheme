@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0EB13BAB290E825E003CB654"
-               BuildableName = "PassepartoutTests.app"
+               BlueprintIdentifier = "0E90F4512B3219E20089D505"
+               BuildableName = "PassepartoutTests.xctest"
                BlueprintName = "PassepartoutTests"
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
@@ -84,8 +84,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0EB13BAB290E825E003CB654"
-            BuildableName = "PassepartoutTests.app"
+            BlueprintIdentifier = "0E90F4512B3219E20089D505"
+            BuildableName = "PassepartoutTests.xctest"
             BlueprintName = "PassepartoutTests"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>
@@ -101,8 +101,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0EB13BAB290E825E003CB654"
-            BuildableName = "PassepartoutTests.app"
+            BlueprintIdentifier = "0E90F4512B3219E20089D505"
+            BuildableName = "PassepartoutTests.xctest"
             BlueprintName = "PassepartoutTests"
             ReferencedContainer = "container:Passepartout.xcodeproj">
          </BuildableReference>

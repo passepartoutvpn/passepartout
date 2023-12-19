@@ -110,10 +110,10 @@
 		0E7577DF2817E22C00081CBE /* VPNToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7577DE2817E22C00081CBE /* VPNToggle.swift */; };
 		0E7A8C0A2A1D410500780F4B /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A8C092A1D410400780F4B /* PersistenceManager.swift */; };
 		0E7A8C0C2A1D4A6100780F4B /* PassepartoutLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7A8C0B2A1D4A6100780F4B /* PassepartoutLibrary */; };
-		0E7A8C0E2A1D4A6E00780F4B /* PassepartoutLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7A8C0D2A1D4A6E00780F4B /* PassepartoutLibrary */; };
 		0E7A8C0F2A1D54DE00780F4B /* Picker+OpenVPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A8C072A1D40BA00780F4B /* Picker+OpenVPN.swift */; };
 		0E7A8C102A1D54DE00780F4B /* Picker+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7A8C082A1D40BA00780F4B /* Picker+Network.swift */; };
 		0E90DFE627BACC1500EF5078 /* AddHostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */; };
+		0E90F45B2B3219F60089D505 /* PassepartoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90F44A2B3218820089D505 /* PassepartoutTests.swift */; };
 		0E92D7C627F103300033CB7B /* ProfileView+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */; };
 		0E92D7C927F1042A0033CB7B /* ProfileView+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */; };
 		0E96D2DE28704C3B005EFBCF /* TextItem+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96D2DD28704C3B005EFBCF /* TextItem+ViewModel.swift */; };
@@ -148,7 +148,6 @@
 		0EA1D84728805EAE00F3CA48 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EA1D84628805EAE00F3CA48 /* Flags.xcassets */; };
 		0EA591162733DDDA0096F796 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0EA591142733DDDA0096F796 /* Intents.intentdefinition */; };
 		0EA9030B287045F70087BC73 /* SystemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9030A287045F70087BC73 /* SystemMenu.swift */; };
-		0EB13BC0290E8C8D003CB654 /* PassepartoutTestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB13BBF290E8C8D003CB654 /* PassepartoutTestsApp.swift */; };
 		0EB17EA727D226B400D473B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0EB17EA927D226C900D473B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA127D2263700D473B5 /* Constants.swift */; };
 		0EB17EAA27D226C900D473B5 /* Constants+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB17EA527D2263700D473B5 /* Constants+App.swift */; };
@@ -220,12 +219,12 @@
 			remoteGlobalIDString = 0E41BD96286711C3006346B4;
 			remoteInfo = PassepartoutLauncher;
 		};
-		0EB13BBB290E82F1003CB654 /* PBXContainerItemProxy */ = {
+		0E90F4562B3219E20089D505 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0E57F63020C83FC5008323CF /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0ECF71F327B6D9CD00CDB528;
-			remoteInfo = WireGuardGo;
+			remoteGlobalIDString = 0E57F63720C83FC5008323CF;
+			remoteInfo = Passepartout;
 		};
 		0EB2B1492733FB6F007705AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -411,6 +410,8 @@
 		0E7A8C082A1D40BA00780F4B /* Picker+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Picker+Network.swift"; sourceTree = "<group>"; };
 		0E7A8C092A1D410400780F4B /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		0E90DFE527BACC1500EF5078 /* AddHostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHostViewModel.swift; sourceTree = "<group>"; };
+		0E90F44A2B3218820089D505 /* PassepartoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutTests.swift; sourceTree = "<group>"; };
+		0E90F4522B3219E20089D505 /* PassepartoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassepartoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E92D7C527F103300033CB7B /* ProfileView+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Configuration.swift"; sourceTree = "<group>"; };
 		0E92D7C827F1042A0033CB7B /* ProfileView+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Extra.swift"; sourceTree = "<group>"; };
 		0E96D2DD28704C3B005EFBCF /* TextItem+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextItem+ViewModel.swift"; sourceTree = "<group>"; };
@@ -465,8 +466,6 @@
 		0EA5912C2733DDFC0096F796 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Intents.strings; sourceTree = "<group>"; };
 		0EA5912E2733DDFD0096F796 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Intents.strings; sourceTree = "<group>"; };
 		0EA9030A287045F70087BC73 /* SystemMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMenu.swift; sourceTree = "<group>"; };
-		0EB13BAC290E825E003CB654 /* PassepartoutTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0EB13BBF290E8C8D003CB654 /* PassepartoutTestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutTestsApp.swift; sourceTree = "<group>"; };
 		0EB17EA127D2263700D473B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0EB17EA327D2263700D473B5 /* LocalProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalProduct.swift; sourceTree = "<group>"; };
 		0EB17EA527D2263700D473B5 /* Constants+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+App.swift"; sourceTree = "<group>"; };
@@ -559,11 +558,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0EB13BA9290E825E003CB654 /* Frameworks */ = {
+		0E90F44F2B3219E20089D505 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7A8C0E2A1D4A6E00780F4B /* PassepartoutLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,7 +839,7 @@
 				0E23B4A12298559800304C30 /* Config.xcconfig */,
 				0E0480372A1A4AE000462F2F /* Passepartout.xctestplan */,
 				0E9AA982259F7674003FAFF1 /* Passepartout */,
-				0EB13BAD290E825E003CB654 /* PassepartoutTests */,
+				0E90F4532B3219E20089D505 /* PassepartoutTests */,
 				0E57F63920C83FC5008323CF /* Products */,
 				374B9F085E1148C37CF9117A /* Frameworks */,
 			);
@@ -855,9 +853,17 @@
 				0ED2B34A27D3C77800FD8EA9 /* PassepartoutWireGuardTunnel.appex */,
 				0E41BD97286711C3006346B4 /* PassepartoutLauncher.app */,
 				0ECB78DA285F52F700B0E460 /* PassepartoutMac.bundle */,
-				0EB13BAC290E825E003CB654 /* PassepartoutTests.app */,
+				0E90F4522B3219E20089D505 /* PassepartoutTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		0E90F4532B3219E20089D505 /* PassepartoutTests */ = {
+			isa = PBXGroup;
+			children = (
+				0E90F44A2B3218820089D505 /* PassepartoutTests.swift */,
+			);
+			path = PassepartoutTests;
 			sourceTree = "<group>";
 		};
 		0E96D2F72871D868005EFBCF /* Managers */ = {
@@ -932,14 +938,6 @@
 				0E0F4C5B29C76B790022E884 /* SceneDelegate+Shortcuts.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		0EB13BAD290E825E003CB654 /* PassepartoutTests */ = {
-			isa = PBXGroup;
-			children = (
-				0EB13BBF290E8C8D003CB654 /* PassepartoutTestsApp.swift */,
-			);
-			path = PassepartoutTests;
 			sourceTree = "<group>";
 		};
 		0ECB78D1285F4F4000B0E460 /* AppShared */ = {
@@ -1109,26 +1107,23 @@
 			productReference = 0E57F63820C83FC5008323CF /* Passepartout.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0EB13BAB290E825E003CB654 /* PassepartoutTests */ = {
+		0E90F4512B3219E20089D505 /* PassepartoutTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0EB13BBA290E8260003CB654 /* Build configuration list for PBXNativeTarget "PassepartoutTests" */;
+			buildConfigurationList = 0E90F4582B3219E20089D505 /* Build configuration list for PBXNativeTarget "PassepartoutTests" */;
 			buildPhases = (
-				0EB13BA8290E825E003CB654 /* Sources */,
-				0EB13BA9290E825E003CB654 /* Frameworks */,
-				0EB13BAA290E825E003CB654 /* Resources */,
+				0E90F44E2B3219E20089D505 /* Sources */,
+				0E90F44F2B3219E20089D505 /* Frameworks */,
+				0E90F4502B3219E20089D505 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0EB13BBC290E82F1003CB654 /* PBXTargetDependency */,
+				0E90F4572B3219E20089D505 /* PBXTargetDependency */,
 			);
 			name = PassepartoutTests;
-			packageProductDependencies = (
-				0E7A8C0D2A1D4A6E00780F4B /* PassepartoutLibrary */,
-			);
 			productName = PassepartoutTests;
-			productReference = 0EB13BAC290E825E003CB654 /* PassepartoutTests.app */;
-			productType = "com.apple.product-type.application";
+			productReference = 0E90F4522B3219E20089D505 /* PassepartoutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0ECB78D9285F52F700B0E460 /* PassepartoutMac */ = {
 			isa = PBXNativeTarget;
@@ -1197,7 +1192,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
@@ -1222,9 +1217,9 @@
 							};
 						};
 					};
-					0EB13BAB290E825E003CB654 = {
-						CreatedOnToolsVersion = 14.0.1;
-						LastSwiftMigration = 1400;
+					0E90F4512B3219E20089D505 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 0E57F63720C83FC5008323CF;
 					};
 					0ECB78D9285F52F700B0E460 = {
 						CreatedOnToolsVersion = 13.4;
@@ -1278,7 +1273,7 @@
 				0E57F63720C83FC5008323CF /* Passepartout */,
 				0ECB78D9285F52F700B0E460 /* PassepartoutMac */,
 				0E41BD96286711C3006346B4 /* PassepartoutLauncher */,
-				0EB13BAB290E825E003CB654 /* PassepartoutTests */,
+				0E90F4512B3219E20089D505 /* PassepartoutTests */,
 				0EDE8DBE20C86910004C739C /* OpenVPNTunnel */,
 				0ECF71F327B6D9CD00CDB528 /* WireGuardGo */,
 				0ED2B33E27D3C77800FD8EA9 /* WireGuardTunnel */,
@@ -1309,7 +1304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0EB13BAA290E825E003CB654 /* Resources */ = {
+		0E90F4502B3219E20089D505 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1578,11 +1573,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0EB13BA8290E825E003CB654 /* Sources */ = {
+		0E90F44E2B3219E20089D505 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EB13BC0290E8C8D003CB654 /* PassepartoutTestsApp.swift in Sources */,
+				0E90F45B2B3219F60089D505 /* PassepartoutTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1615,10 +1610,10 @@
 			target = 0E41BD96286711C3006346B4 /* PassepartoutLauncher */;
 			targetProxy = 0E41BDAA286713F6006346B4 /* PBXContainerItemProxy */;
 		};
-		0EB13BBC290E82F1003CB654 /* PBXTargetDependency */ = {
+		0E90F4572B3219E20089D505 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0ECF71F327B6D9CD00CDB528 /* WireGuardGo */;
-			targetProxy = 0EB13BBB290E82F1003CB654 /* PBXContainerItemProxy */;
+			target = 0E57F63720C83FC5008323CF /* Passepartout */;
+			targetProxy = 0E90F4562B3219E20089D505 /* PBXContainerItemProxy */;
 		};
 		0EB2B14A2733FB6F007705AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1944,27 +1939,20 @@
 			};
 			name = Release;
 		};
-		0EB13BB8290E8260003CB654 /* Debug */ = {
+		0E90F4592B3219E20089D505 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
@@ -1972,34 +1960,28 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Passepartout";
 			};
 			name = Debug;
 		};
-		0EB13BB9290E8260003CB654 /* Release */ = {
+		0E90F45A2B3219E20089D505 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
@@ -2007,9 +1989,10 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Passepartout";
 			};
 			name = Release;
 		};
@@ -2229,11 +2212,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0EB13BBA290E8260003CB654 /* Build configuration list for PBXNativeTarget "PassepartoutTests" */ = {
+		0E90F4582B3219E20089D505 /* Build configuration list for PBXNativeTarget "PassepartoutTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0EB13BB8290E8260003CB654 /* Debug */,
-				0EB13BB9290E8260003CB654 /* Release */,
+				0E90F4592B3219E20089D505 /* Debug */,
+				0E90F45A2B3219E20089D505 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2294,10 +2277,6 @@
 			productName = Kvitto;
 		};
 		0E7A8C0B2A1D4A6100780F4B /* PassepartoutLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PassepartoutLibrary;
-		};
-		0E7A8C0D2A1D4A6E00780F4B /* PassepartoutLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PassepartoutLibrary;
 		};

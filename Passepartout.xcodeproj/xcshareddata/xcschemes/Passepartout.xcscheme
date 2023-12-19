@@ -84,48 +84,6 @@
             default = "YES">
          </TestPlanReference>
       </TestPlans>
-      <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PassepartoutCoreTests"
-               BuildableName = "PassepartoutCoreTests"
-               BlueprintName = "PassepartoutCoreTests"
-               ReferencedContainer = "container:PassepartoutLibrary">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PassepartoutProvidersTests"
-               BuildableName = "PassepartoutProvidersTests"
-               BlueprintName = "PassepartoutProvidersTests"
-               ReferencedContainer = "container:PassepartoutLibrary">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PassepartoutServicesTests"
-               BuildableName = "PassepartoutServicesTests"
-               BlueprintName = "PassepartoutServicesTests"
-               ReferencedContainer = "container:PassepartoutLibrary">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PassepartoutVPNTests"
-               BuildableName = "PassepartoutVPNTests"
-               BlueprintName = "PassepartoutVPNTests"
-               ReferencedContainer = "container:PassepartoutLibrary">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

@@ -67,6 +67,13 @@
         "identifier" : "PassepartoutVPNTests",
         "name" : "PassepartoutVPNTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Passepartout.xcodeproj",
+        "identifier" : "0E90F4512B3219E20089D505",
+        "name" : "PassepartoutTests"
+      }
     }
   ],
   "version" : 1
