@@ -37,7 +37,7 @@ public final class StoreKitInApp<PID>: InAppProtocol where PID: Hashable & RawRe
         impl = StoreKitInAppImpl()
     }
 
-    public func canMakePurchases() -> Bool {
+    public nonisolated func canMakePurchases() -> Bool {
         SKPaymentQueue.canMakePayments()
     }
 
@@ -76,18 +76,18 @@ public final class StoreKitInApp<PID>: InAppProtocol where PID: Hashable & RawRe
         }
     }
 
-    public func products() -> [InAppProduct] {
+    public nonisolated func products() -> [InAppProduct] {
         impl.products.map(\.asInAppProduct)
     }
 
-    public func product(withIdentifier productIdentifier: PID) -> InAppProduct? {
+    public nonisolated func product(withIdentifier productIdentifier: PID) -> InAppProduct? {
         guard let skProduct = impl.product(withIdentifier: productIdentifier) else {
             return nil
         }
         return skProduct.asInAppProduct
     }
 
-    public func setTransactionsObserver(_ block: @escaping () -> Void) {
+    public nonisolated func setTransactionsObserver(_ block: @escaping () -> Void) {
         impl.onTransactionsUpdated = block
     }
 }

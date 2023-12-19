@@ -28,6 +28,12 @@ import Foundation
 import Kvitto
 import PassepartoutLibrary
 
+protocol LocalInApp: InAppProtocol where ProductIdentifier == LocalProduct {
+}
+
+extension StoreKitInApp: LocalInApp where ProductIdentifier == LocalProduct {
+}
+
 @MainActor
 final class ProductManager: NSObject, ObservableObject {
     enum AppType: Int {
@@ -64,7 +70,8 @@ final class ProductManager: NSObject, ObservableObject {
 
     //
 
-    private let inApp: StoreKitInApp<LocalProduct>
+    @MainActor
+    private let inApp: any LocalInApp
 
     private var purchasedAppBuild: Int?
 
@@ -85,13 +92,13 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    init(overriddenAppType: AppType?, buildProducts: BuildProducts) {
+    init(inApp: any LocalInApp, overriddenAppType: AppType?, buildProducts: BuildProducts) {
         self.overriddenAppType = overriddenAppType
         self.buildProducts = buildProducts
         appType = .undefined
 
         products = []
-        inApp = StoreKitInApp()
+        self.inApp = inApp
         purchasedAppBuild = nil
         purchasedFeatures = []
         purchaseDates = [:]

@@ -25,7 +25,7 @@
 
 import Foundation
 
-public enum InAppPurchaseResult {
+public enum InAppPurchaseResult: Sendable {
     case done
 
     case cancelled
@@ -50,7 +50,7 @@ public struct InAppProduct: Sendable {
 public protocol InAppProtocol {
     associatedtype ProductIdentifier: Hashable
 
-    func canMakePurchases() async -> Bool
+    func canMakePurchases() -> Bool
 
     func requestProducts(withIdentifiers identifiers: [ProductIdentifier]) async throws -> [ProductIdentifier: InAppProduct]
 
@@ -58,9 +58,9 @@ public protocol InAppProtocol {
 
     func restorePurchases() async throws
 
-    func products() async -> [InAppProduct]
+    func products() -> [InAppProduct]
 
-    func product(withIdentifier productIdentifier: ProductIdentifier) async -> InAppProduct?
+    func product(withIdentifier productIdentifier: ProductIdentifier) -> InAppProduct?
 
-    func setTransactionsObserver(_ block: @escaping () -> Void) async
+    func setTransactionsObserver(_ block: @escaping () -> Void)
 }

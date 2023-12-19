@@ -57,6 +57,7 @@ final class AppContext {
         upgradeManager.migrate(toVersion: Constants.Global.appVersionNumber)
 
         productManager = ProductManager(
+            inApp: StoreKitInApp<LocalProduct>(),
             overriddenAppType: Constants.InApp.overriddenAppType,
             buildProducts: Constants.InApp.buildProducts
         )
