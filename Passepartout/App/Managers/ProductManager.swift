@@ -27,7 +27,6 @@ import Combine
 import Foundation
 import Kvitto
 import PassepartoutLibrary
-import StoreKit
 
 @MainActor
 final class ProductManager: NSObject, ObservableObject {
@@ -100,8 +99,10 @@ final class ProductManager: NSObject, ObservableObject {
 
         super.init()
 
+        inApp.setTransactionsObserver { [weak self] in
+            self?.reloadReceipt()
+        }
         reloadReceipt()
-        SKPaymentQueue.default().add(self)
         refreshProducts()
 
         Task {
@@ -112,12 +113,8 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    deinit {
-        SKPaymentQueue.default().remove(self)
-    }
-
     func canMakePayments() -> Bool {
-        SKPaymentQueue.canMakePayments()
+        inApp.canMakePurchases()
     }
 
     func refreshProducts() {
@@ -294,14 +291,6 @@ final class ProductManager: NSObject, ObservableObject {
             objectWillChange.send()
         }
         cancelledPurchases = newCancelledPurchases
-    }
-}
-
-extension ProductManager: SKPaymentTransactionObserver {
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        DispatchQueue.main.async { [weak self] in
-            self?.reloadReceipt()
-        }
     }
 }
 

@@ -37,6 +37,10 @@ public final class StoreKitInApp<PID>: InAppProtocol where PID: Hashable & RawRe
         impl = StoreKitInAppImpl()
     }
 
+    public func canMakePurchases() -> Bool {
+        SKPaymentQueue.canMakePayments()
+    }
+
     public func requestProducts(withIdentifiers identifiers: [PID]) async throws -> [PID: InAppProduct] {
         try await withCheckedThrowingContinuation { continuation in
             impl.requestProducts(withIdentifiers: identifiers) { products in
@@ -82,6 +86,10 @@ public final class StoreKitInApp<PID>: InAppProtocol where PID: Hashable & RawRe
         }
         return skProduct.asInAppProduct
     }
+
+    public func setTransactionsObserver(_ block: @escaping () -> Void) {
+        impl.onTransactionsUpdated = block
+    }
 }
 
 private final class StoreKitInAppImpl<PID: Hashable & RawRepresentable>: NSObject,
@@ -109,6 +117,8 @@ private final class StoreKitInAppImpl<PID: Hashable & RawRepresentable>: NSObjec
     private var transactionObservers: [String: TransactionObserver]
 
     private var restoreObservers: [RestoreObserver]
+
+    var onTransactionsUpdated: (() -> Void)?
 
     override init() {
         productsMap = [:]
@@ -195,7 +205,11 @@ private final class StoreKitInAppImpl<PID: Hashable & RawRepresentable>: NSObjec
     // MARK: SKPaymentTransactionObserver
 
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {
+                return
+            }
+
             let currentRestoreObservers = self.restoreObservers
 
             for tx in transactions {
@@ -235,6 +249,8 @@ private final class StoreKitInAppImpl<PID: Hashable & RawRepresentable>: NSObjec
                     break
                 }
             }
+
+            self.onTransactionsUpdated?()
         }
     }
 

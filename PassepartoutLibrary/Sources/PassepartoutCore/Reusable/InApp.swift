@@ -50,6 +50,8 @@ public struct InAppProduct: Sendable {
 public protocol InAppProtocol {
     associatedtype ProductIdentifier: Hashable
 
+    func canMakePurchases() async -> Bool
+
     func requestProducts(withIdentifiers identifiers: [ProductIdentifier]) async throws -> [ProductIdentifier: InAppProduct]
 
     func purchase(productWithIdentifier productIdentifier: ProductIdentifier) async throws -> InAppPurchaseResult
@@ -59,4 +61,6 @@ public protocol InAppProtocol {
     func products() async -> [InAppProduct]
 
     func product(withIdentifier productIdentifier: ProductIdentifier) async -> InAppProduct?
+
+    func setTransactionsObserver(_ block: @escaping () -> Void) async
 }
