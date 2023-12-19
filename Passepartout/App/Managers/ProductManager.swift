@@ -61,11 +61,11 @@ final class ProductManager: NSObject, ObservableObject {
 
     @Published private(set) var isRefreshingProducts = false
 
-    @Published private(set) var products: [SKProduct]
+    @Published private(set) var products: [InAppProduct]
 
     //
 
-    private let inApp: InApp<LocalProduct>
+    private let inApp: StoreKitInApp<LocalProduct>
 
     private var purchasedAppBuild: Int?
 
@@ -92,7 +92,7 @@ final class ProductManager: NSObject, ObservableObject {
         appType = .undefined
 
         products = []
-        inApp = InApp()
+        inApp = StoreKitInApp()
         purchasedAppBuild = nil
         purchasedFeatures = []
         purchaseDates = [:]
@@ -130,23 +130,26 @@ final class ProductManager: NSObject, ObservableObject {
             return
         }
         isRefreshingProducts = true
-        inApp.requestProducts(withIdentifiers: ids, completionHandler: { _ in
-            pp_log.debug("In-app products: \(self.inApp.products.map { $0.productIdentifier })")
+        Task {
+            do {
+                let productsMap = try await inApp.requestProducts(withIdentifiers: ids)
+                pp_log.debug("In-app products: \(productsMap.keys.map(\.rawValue))")
 
-            self.products = self.inApp.products
-            self.isRefreshingProducts = false
-        }, failureHandler: {
-            pp_log.warning("Unable to list products: \($0)")
-            self.isRefreshingProducts = false
-        })
+                products = Array(productsMap.values)
+                isRefreshingProducts = false
+            } catch {
+                pp_log.warning("Unable to list products: \(error)")
+                isRefreshingProducts = false
+            }
+        }
     }
 
-    func product(withIdentifier identifier: LocalProduct) -> SKProduct? {
+    func product(withIdentifier identifier: LocalProduct) -> InAppProduct? {
         inApp.product(withIdentifier: identifier)
     }
 
-    func featureProducts(including: [LocalProduct]) -> [SKProduct] {
-        inApp.products.filter {
+    func featureProducts(including: [LocalProduct]) -> [InAppProduct] {
+        inApp.products().filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
@@ -160,8 +163,8 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func featureProducts(excluding: [LocalProduct]) -> [SKProduct] {
-        inApp.products.filter {
+    func featureProducts(excluding: [LocalProduct]) -> [InAppProduct] {
+        inApp.products().filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
@@ -176,22 +179,27 @@ final class ProductManager: NSObject, ObservableObject {
     }
 
     func purchase(_ product: SKProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
-        inApp.purchase(product: product) { result in
-            if case .success = result {
-                self.reloadReceipt()
-            }
-            DispatchQueue.main.async {
-                completionHandler(result)
+        guard let pid = LocalProduct(rawValue: product.productIdentifier) else {
+            pp_log.warning("Unrecognized product: \(product)")
+            return
+        }
+        Task {
+            do {
+                let result = try await inApp.purchase(productWithIdentifier: pid)
+                reloadReceipt()
+                completionHandler(.success(result))
+            } catch {
+                completionHandler(.failure(error))
             }
         }
     }
 
     func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
-        inApp.restorePurchases { (finished, _, error) in
-            guard finished else {
-                return
-            }
-            DispatchQueue.main.async {
+        Task {
+            do {
+                try await inApp.restorePurchases()
+                completionHandler(nil)
+            } catch {
                 completionHandler(error)
             }
         }

@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutLibrary
 import StoreKit
 
-struct LocalProduct: RawRepresentable, Equatable, Hashable {
+struct LocalProduct: RawRepresentable, Hashable, Sendable {
     private static let bundleSubdomain = "ios"
 
     private static let bundle = "com.algoritmico.\(bundleSubdomain).Passepartout"
