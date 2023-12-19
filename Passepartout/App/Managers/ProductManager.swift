@@ -86,8 +86,6 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    private var refreshRequest: SKReceiptRefreshRequest?
-
     init(overriddenAppType: AppType?, buildProducts: BuildProducts) {
         self.overriddenAppType = overriddenAppType
         self.buildProducts = buildProducts
