@@ -59,6 +59,8 @@
 		0E3B7FDA27E51A0200C66F13 /* ProfileView+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */; };
 		0E3CD47F280DA14B007075C0 /* AddProfileMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CD47E280DA14B007075C0 /* AddProfileMenu.swift */; };
 		0E3CD483280DAE92007075C0 /* ProfileView+MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CD482280DAE92007075C0 /* ProfileView+MainMenu.swift */; };
+		0E3EDF272B32523800AFE707 /* ReceiptReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3EDF252B32523800AFE707 /* ReceiptReader.swift */; };
+		0E3EDF282B32523800AFE707 /* AppType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3EDF262B32523800AFE707 /* AppType.swift */; };
 		0E3FC6862867A3F9009B851C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3FC6852867A3F9009B851C /* AppDelegate.swift */; };
 		0E41BD9A286711C3006346B4 /* PassepartoutLauncherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E41BD99286711C3006346B4 /* PassepartoutLauncherApp.swift */; };
 		0E41BDA72867128A006346B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E41BDA62867128A006346B4 /* AppDelegate.swift */; };
@@ -165,6 +167,7 @@
 		0EBC075D27EC529000208AD9 /* DebugLog+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075C27EC529000208AD9 /* DebugLog+Constants.swift */; };
 		0EBC076027EC587900208AD9 /* SwiftGen+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC075F27EC587900208AD9 /* SwiftGen+Strings.swift */; };
 		0EBE880F281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBE880E281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift */; };
+		0EC3E0492B32CB6C00633F31 /* StoreKitReceiptReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC3E0482B32CB6C00633F31 /* StoreKitReceiptReader.swift */; };
 		0ECB78E9285F5DE300B0E460 /* PassepartoutMac.bundle in Embed Plugins */ = {isa = PBXBuildFile; fileRef = 0ECB78DA285F52F700B0E460 /* PassepartoutMac.bundle */; platformFilter = maccatalyst; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0ECF71EE27B6A99300CDB528 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF71ED27B6A99300CDB528 /* AccountView.swift */; };
 		0ED1A5FD2B2B98CC00A0EA90 /* Constants+Tunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED1A5FC2B2B98CC00A0EA90 /* Constants+Tunnel.swift */; };
@@ -353,6 +356,8 @@
 		0E3B7FD927E51A0200C66F13 /* ProfileView+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+Provider.swift"; sourceTree = "<group>"; };
 		0E3CD47E280DA14B007075C0 /* AddProfileMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileMenu.swift; sourceTree = "<group>"; };
 		0E3CD482280DAE92007075C0 /* ProfileView+MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileView+MainMenu.swift"; sourceTree = "<group>"; };
+		0E3EDF252B32523800AFE707 /* ReceiptReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptReader.swift; sourceTree = "<group>"; };
+		0E3EDF262B32523800AFE707 /* AppType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppType.swift; sourceTree = "<group>"; };
 		0E3FC6842867A3BA009B851C /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		0E3FC6852867A3F9009B851C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E41BD97286711C3006346B4 /* PassepartoutLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -487,6 +492,7 @@
 		0EBE2FD72360F89600F0D5AB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE2FD82360F89600F0D5AB /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBE880E281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrganizerView+ProfileRow.swift"; sourceTree = "<group>"; };
+		0EC3E0482B32CB6C00633F31 /* StoreKitReceiptReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitReceiptReader.swift; sourceTree = "<group>"; };
 		0ECB78DA285F52F700B0E460 /* PassepartoutMac.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassepartoutMac.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ECB78E1285F53ED00B0E460 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0ECB78EA2861D1F300B0E460 /* PassepartoutLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PassepartoutLibrary; sourceTree = "<group>"; };
@@ -719,13 +725,16 @@
 			children = (
 				0E1AD5CB2A2682DA002AE6E6 /* AppError.swift */,
 				0E293850285A70AC002A6E0E /* AppPreference.swift */,
+				0E3EDF262B32523800AFE707 /* AppType.swift */,
 				0E0392762818732D00827C10 /* BuildProducts.swift */,
-				0EA591142733DDDA0096F796 /* Intents.intentdefinition */,
 				0EA591122733DD4E0096F796 /* IntentDispatcher.swift */,
 				0E9C233227F47E95007D5FC7 /* IntentDispatcher+Activities.swift */,
+				0EA591142733DDDA0096F796 /* Intents.intentdefinition */,
 				0EB17EA327D2263700D473B5 /* LocalProduct.swift */,
-				0E7A8C072A1D40BA00780F4B /* Picker+OpenVPN.swift */,
 				0E7A8C082A1D40BA00780F4B /* Picker+Network.swift */,
+				0E7A8C072A1D40BA00780F4B /* Picker+OpenVPN.swift */,
+				0E3EDF252B32523800AFE707 /* ReceiptReader.swift */,
+				0EC3E0482B32CB6C00633F31 /* StoreKitReceiptReader.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1449,6 +1458,7 @@
 				0E3B7FCD27E47B3700C66F13 /* AddHostView+Name.swift in Sources */,
 				0EF2212D27E66EB5001D0BD7 /* AddProviderView.swift in Sources */,
 				0EB90CC129C25BBD00E64628 /* InteractiveConnectionView.swift in Sources */,
+				0E3EDF272B32523800AFE707 /* ReceiptReader.swift in Sources */,
 				0E35C09A280E95BB0071FA35 /* ProviderProfileAvailability.swift in Sources */,
 				0E04F0092883466500BFCE1C /* DefaultLightUtils.swift in Sources */,
 				0E5349C827C176D100C71BB3 /* EndpointView+WireGuard.swift in Sources */,
@@ -1478,6 +1488,7 @@
 				0ED89C1E27DE3F8D008B36D6 /* IntentAddView.swift in Sources */,
 				0E5468002867AC9A00F74D1C /* MacUtils.swift in Sources */,
 				0E0F4C6429C84B5A0022E884 /* LockableView.swift in Sources */,
+				0E3EDF282B32523800AFE707 /* AppType.swift in Sources */,
 				0E3A3C132AAB7C480003A5F6 /* UpgradeManager.swift in Sources */,
 				0E96D3052872010A005EFBCF /* DefaultLightVPNManager.swift in Sources */,
 				0EBE880F281B18DE0090D9E6 /* OrganizerView+ProfileRow.swift in Sources */,
@@ -1538,6 +1549,7 @@
 				0E34A2B927CAA96A00C73B67 /* OpenVPN+L10n.swift in Sources */,
 				0EF8C5A828213C510053CE89 /* OrganizerView+Profiles.swift in Sources */,
 				0E3CD483280DAE92007075C0 /* ProfileView+MainMenu.swift in Sources */,
+				0EC3E0492B32CB6C00633F31 /* StoreKitReceiptReader.swift in Sources */,
 				0EB17EAE27D226CF00D473B5 /* LocalProduct.swift in Sources */,
 				0E71ACEB27C1060D00F85C4B /* EndpointView.swift in Sources */,
 				0E293857285A73BC002A6E0E /* AppContext+Shared.swift in Sources */,

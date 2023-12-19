@@ -58,6 +58,7 @@ final class AppContext {
 
         productManager = ProductManager(
             inApp: StoreKitInApp<LocalProduct>(),
+            receiptReader: StoreKitReceiptReader(),
             overriddenAppType: Constants.InApp.overriddenAppType,
             buildProducts: Constants.InApp.buildProducts
         )

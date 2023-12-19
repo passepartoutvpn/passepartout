@@ -64,3 +64,28 @@ public protocol InAppProtocol {
 
     func setTransactionsObserver(_ block: @escaping () -> Void)
 }
+
+public struct InAppReceipt: Sendable {
+    public struct PurchaseReceipt: Sendable {
+        public let productIdentifier: String?
+
+        public let cancellationDate: Date?
+
+        public let originalPurchaseDate: Date?
+
+        public init(productIdentifier: String?, cancellationDate: Date?, originalPurchaseDate: Date?) {
+            self.productIdentifier = productIdentifier
+            self.cancellationDate = cancellationDate
+            self.originalPurchaseDate = originalPurchaseDate
+        }
+    }
+
+    public let originalBuildNumber: Int?
+
+    public let purchaseReceipts: [PurchaseReceipt]?
+
+    public init(originalBuildNumber: Int?, purchaseReceipts: [PurchaseReceipt]?) {
+        self.originalBuildNumber = originalBuildNumber
+        self.purchaseReceipts = purchaseReceipts
+    }
+}

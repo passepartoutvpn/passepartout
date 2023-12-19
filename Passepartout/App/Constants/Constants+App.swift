@@ -52,15 +52,15 @@ extension Constants {
     }
 
     enum InApp {
-        static var overriddenAppType: ProductManager.AppType? {
+        static var overriddenAppType: AppType? {
             if let envString = ProcessInfo.processInfo.environment["APP_TYPE"],
                let envValue = Int(envString),
-               let testAppType = ProductManager.AppType(rawValue: envValue) {
+               let testAppType = AppType(rawValue: envValue) {
 
                 return testAppType
             }
             if let infoValue: Int = bundleConfig("app_type"),
-               let testAppType = ProductManager.AppType(rawValue: infoValue) {
+               let testAppType = AppType(rawValue: infoValue) {
 
                 return testAppType
             }

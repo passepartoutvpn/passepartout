@@ -25,7 +25,6 @@
 
 import Combine
 import Foundation
-import Kvitto
 import PassepartoutLibrary
 
 protocol LocalInApp: InAppProtocol where ProductIdentifier == LocalProduct {
@@ -36,25 +35,9 @@ extension StoreKitInApp: LocalInApp where ProductIdentifier == LocalProduct {
 
 @MainActor
 final class ProductManager: NSObject, ObservableObject {
-    enum AppType: Int {
-        case undefined = -1
+    private let inApp: any LocalInApp
 
-        case freemium = 0
-
-        case beta = 1
-
-        case fullVersion = 2
-
-        var isRestricted: Bool {
-            switch self {
-            case .undefined, .beta:
-                return true
-
-            default:
-                return false
-            }
-        }
-    }
+    private let receiptReader: ReceiptReader
 
     private let overriddenAppType: AppType?
 
@@ -69,9 +52,6 @@ final class ProductManager: NSObject, ObservableObject {
     @Published private(set) var products: [InAppProduct]
 
     //
-
-    @MainActor
-    private let inApp: any LocalInApp
 
     private var purchasedAppBuild: Int?
 
@@ -92,8 +72,12 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    init(inApp: any LocalInApp, overriddenAppType: AppType?, buildProducts: BuildProducts) {
+    init(inApp: any LocalInApp,
+         receiptReader: ReceiptReader,
+         overriddenAppType: AppType? = nil,
+         buildProducts: BuildProducts) {
         self.overriddenAppType = overriddenAppType
+        self.receiptReader = receiptReader
         self.buildProducts = buildProducts
         appType = .undefined
 
@@ -208,9 +192,12 @@ final class ProductManager: NSObject, ObservableObject {
             }
         }
     }
+}
 
-    // MARK: In-app eligibility
 
+// MARK: In-app eligibility
+
+extension ProductManager {
     private func isCurrentPlatformVersion() -> Bool {
         purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
@@ -252,15 +239,17 @@ final class ProductManager: NSObject, ObservableObject {
     func purchaseDate(forProduct product: LocalProduct) -> Date? {
         purchaseDates[product]
     }
+}
 
+extension ProductManager {
     func reloadReceipt(andNotify: Bool = true) {
-        guard let receipt else {
+        guard let receipt = receiptReader.receipt(for: appType) else {
             pp_log.error("Could not parse App Store receipt!")
             return
         }
 
-        if let originalAppVersion = receipt.originalAppVersion, let buildNumber = Int(originalAppVersion) {
-            purchasedAppBuild = buildNumber
+        if let originalBuildNumber = receipt.originalBuildNumber {
+            purchasedAppBuild = originalBuildNumber
         }
         purchasedFeatures.removeAll()
         var newCancelledPurchases: Set<LocalProduct> = []
@@ -273,7 +262,7 @@ final class ProductManager: NSObject, ObservableObject {
                 purchasedFeatures.insert($0)
             }
         }
-        if let iapReceipts = receipt.inAppPurchaseReceipts {
+        if let iapReceipts = receipt.purchaseReceipts {
             purchaseDates.removeAll()
 
             pp_log.debug("In-app receipts:")
@@ -308,30 +297,6 @@ private extension ProductManager {
         #else
         false
         #endif
-    }
-
-    var receipt: Receipt? {
-        guard let url = Bundle.main.appStoreReceiptURL else {
-            pp_log.warning("No App Store receipt found!")
-            return nil
-        }
-        let receipt = Receipt(contentsOfURL: url)
-
-        // in TestFlight, attempt fallback to existing release receipt
-        if appType == .beta {
-            guard let receipt else {
-                let releaseUrl = url.deletingLastPathComponent().appendingPathComponent("receipt")
-                guard releaseUrl != url else {
-                    assertionFailure("How can release URL be equal to sandbox URL in TestFlight?")
-                    return nil
-                }
-                pp_log.warning("Sandbox receipt not found, falling back to Release receipt")
-                return Receipt(contentsOfURL: releaseUrl)
-            }
-            return receipt
-        }
-
-        return receipt
     }
 
     func detectRefunds(_ refunds: Set<LocalProduct>) {
