@@ -178,7 +178,7 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func purchase(_ product: SKProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
+    func purchase(_ product: InAppProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
         guard let pid = LocalProduct(rawValue: product.productIdentifier) else {
             pp_log.warning("Unrecognized product: \(product)")
             return

@@ -25,7 +25,6 @@
 
 import Foundation
 import PassepartoutLibrary
-import StoreKit
 
 struct LocalProduct: RawRepresentable, Hashable, Sendable {
     private static let bundleSubdomain = "ios"
@@ -123,8 +122,8 @@ struct LocalProduct: RawRepresentable, Hashable, Sendable {
 }
 
 extension LocalProduct {
-    func matchesStoreKitProduct(_ skProduct: SKProduct) -> Bool {
-        skProduct.productIdentifier == rawValue
+    func matchesInAppProduct(_ iaProduct: InAppProduct) -> Bool {
+        iaProduct.productIdentifier == rawValue
     }
 }
 

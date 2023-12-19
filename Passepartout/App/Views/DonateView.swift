@@ -24,7 +24,6 @@
 //
 
 import PassepartoutLibrary
-import StoreKit
 import SwiftUI
 
 struct DonateView: View {
@@ -113,7 +112,7 @@ private extension DonateView {
     }
 
     @ViewBuilder
-    func productRow(_ product: SKProduct) -> some View {
+    func productRow(_ product: InAppProduct) -> some View {
         HStack {
             Button(product.localizedTitle) {
                 purchaseProduct(product)
@@ -132,10 +131,10 @@ private extension DonateView {
 }
 
 private extension ProductManager {
-    var donations: [SKProduct] {
+    var donations: [InAppProduct] {
         products.filter { product in
             LocalProduct.allDonations.contains {
-                $0.matchesStoreKitProduct(product)
+                $0.matchesInAppProduct(product)
             }
         }.sorted {
             $0.price.decimalValue < $1.price.decimalValue
@@ -146,7 +145,7 @@ private extension ProductManager {
 // MARK: -
 
 private extension DonateView {
-    func purchaseProduct(_ product: SKProduct) {
+    func purchaseProduct(_ product: InAppProduct) {
         pendingDonationIdentifier = product.productIdentifier
         productManager.purchase(product, completionHandler: handlePurchaseResult)
     }
