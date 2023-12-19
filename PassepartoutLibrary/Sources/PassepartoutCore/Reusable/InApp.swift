@@ -36,6 +36,32 @@ public enum InAppError: Error {
     case unknown
 }
 
+public struct InAppProduct {
+    public let productIdentifier: String
+
+    public let localizedTitle: String
+
+    public let localizedDescription: String
+
+    public let price: NSDecimalNumber
+
+    public let localizedPrice: String?
+}
+
+public protocol InAppProtocol {
+    associatedtype ProductIdentifier: Hashable
+
+    func requestProducts(withIdentifiers identifiers: [ProductIdentifier]) async throws -> [ProductIdentifier: InAppProduct]
+
+    func purchase(productWithIdentifier productIdentifier: ProductIdentifier) async throws -> InAppPurchaseResult
+
+    func purchase(product: InAppProduct) async throws -> InAppPurchaseResult
+
+    func restorePurchases() async throws -> [InAppProduct]
+
+    func product(withIdentifier productIdentifier: ProductIdentifier) -> InAppProduct?
+}
+
 public final class InApp<PID: Hashable & RawRepresentable>: NSObject,
         SKProductsRequestDelegate, SKPaymentTransactionObserver
         where PID.RawValue == String {
