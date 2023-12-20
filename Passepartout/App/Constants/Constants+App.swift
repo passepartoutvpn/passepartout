@@ -228,9 +228,6 @@ extension Constants {
 
 //        @available(*, deprecated, message: "File importer stops showing again after closing with swipe down")
         static let xxxPresentFileImporter = 200
-
-//        @available(*, deprecated, message: "Edited shortcut is outdated in delegate")
-        static let xxxReloadEditedShortcut = 200
     }
 
     enum Rating {
