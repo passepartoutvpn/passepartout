@@ -14,8 +14,13 @@ let package = Package(
             name: "PassepartoutLibrary",
             targets: ["PassepartoutLibrary"]),
         .library(
-            name: "PassepartoutFrontendLibrary",
-            targets: ["PassepartoutFrontend"]),
+            name: "PassepartoutInterfaces",
+            targets: [
+                "PassepartoutCore",
+                "PassepartoutFrontend",
+                "PassepartoutProviders",
+                "PassepartoutServices"
+            ]),
         .library(
             name: "OpenVPNAppExtension",
             targets: ["OpenVPNAppExtension"]),
@@ -41,7 +46,6 @@ let package = Package(
         .target(
             name: "PassepartoutLibrary",
             dependencies: [
-                "PassepartoutFrontend",
                 "PassepartoutVPNImpl",
                 "PassepartoutProvidersImpl"
             ]),
@@ -69,18 +73,17 @@ let package = Package(
         // MARK: Interfaces
 
         .target(
-            name: "PassepartoutFrontend",
-            dependencies: [
-                "PassepartoutCore",
-                "PassepartoutProviders"
-            ]),
-        .target(
             name: "PassepartoutVPN",
             dependencies: [
                 "PassepartoutProviders",
                 .product(name: "TunnelKit", package: "TunnelKit"),
                 .product(name: "TunnelKitOpenVPN", package: "TunnelKit"),
                 .product(name: "TunnelKitWireGuard", package: "TunnelKit"),
+            ]),
+        .target(
+            name: "PassepartoutFrontend",
+            dependencies: [
+                "PassepartoutProviders"
             ]),
         .target(
             name: "PassepartoutProviders",
