@@ -4,4 +4,4 @@ device "iPhone 15 Pro Max"
 
 # https://github.com/fastlane/fastlane/issues/20012
 result_bundle true
-output_directory File.join(Dir.pwd, "fastlane/test_output")
+output_directory File.join(Dir.pwd, ENV["SCAN_OUTPUT_DIRECTORY"])
