@@ -35,4 +35,5 @@ jobs:
           go-version: "^1.17"
       - name: Run tests
         run: |
-          bundle exec fastlane scan
+          cd PassepartoutLibrary
+          swift test
