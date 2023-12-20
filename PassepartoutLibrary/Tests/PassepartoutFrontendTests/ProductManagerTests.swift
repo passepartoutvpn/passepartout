@@ -24,8 +24,7 @@
 //
 
 import Foundation
-@testable import Passepartout
-@testable import PassepartoutLibrary
+@testable import PassepartoutFrontend
 import XCTest
 
 @MainActor

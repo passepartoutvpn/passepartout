@@ -1,2 +1,3 @@
-scheme "Passepartout"
+package_path "PassepartoutLibrary"
+scheme "PassepartoutFrontendLibrary"
 device "iPhone 15 Pro Max"

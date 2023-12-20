@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutLibrary
 
 @MainActor
-public final class UpgradeManager: ObservableObject {
+final class UpgradeManager: ObservableObject {
 
     // MARK: Initialization
 
@@ -37,9 +37,9 @@ public final class UpgradeManager: ObservableObject {
 
     // MARK: State
 
-    @Published public private(set) var isDoingMigrations = true
+    @Published private(set) var isDoingMigrations = true
 
-    public init(
+    init(
         store: KeyValueStore,
         strategy: UpgradeManagerStrategy
     ) {
@@ -47,14 +47,14 @@ public final class UpgradeManager: ObservableObject {
         self.strategy = strategy
     }
 
-    public func migrate(toVersion currentVersion: String) {
+    func migrate(toVersion currentVersion: String) {
         if let lastVersion, currentVersion > lastVersion {
             strategy.migrate(store: store, lastVersion: lastVersion)
         }
         lastVersion = currentVersion
     }
 
-    public func migrateData(profileManager: ProfileManager) {
+    func migrateData(profileManager: ProfileManager) {
         isDoingMigrations = false
     }
 }

@@ -14,6 +14,9 @@ let package = Package(
             name: "PassepartoutLibrary",
             targets: ["PassepartoutLibrary"]),
         .library(
+            name: "PassepartoutFrontendLibrary",
+            targets: ["PassepartoutFrontend"]),
+        .library(
             name: "OpenVPNAppExtension",
             targets: ["OpenVPNAppExtension"]),
         .library(
@@ -38,6 +41,7 @@ let package = Package(
         .target(
             name: "PassepartoutLibrary",
             dependencies: [
+                "PassepartoutFrontend",
                 "PassepartoutVPNImpl",
                 "PassepartoutProvidersImpl"
             ]),
@@ -64,6 +68,12 @@ let package = Package(
 
         // MARK: Interfaces
 
+        .target(
+            name: "PassepartoutFrontend",
+            dependencies: [
+                "PassepartoutCore",
+                "PassepartoutProviders"
+            ]),
         .target(
             name: "PassepartoutVPN",
             dependencies: [
@@ -105,16 +115,19 @@ let package = Package(
         // MARK: Tests
 
         .testTarget(
-            name: "PassepartoutVPNTests",
-            dependencies: ["PassepartoutVPNImpl"]),
-        .testTarget(
-            name: "PassepartoutProvidersTests",
-            dependencies: ["PassepartoutProvidersImpl"]),
-        .testTarget(
             name: "PassepartoutCoreTests",
             dependencies: ["PassepartoutCore"],
             resources: [
                 .process("Resources")
-            ])
+            ]),
+        .testTarget(
+            name: "PassepartoutFrontendTests",
+            dependencies: ["PassepartoutFrontend"]),
+        .testTarget(
+            name: "PassepartoutProvidersTests",
+            dependencies: ["PassepartoutProviders"]),
+        .testTarget(
+            name: "PassepartoutServicesTests",
+            dependencies: ["PassepartoutServices"])
     ]
 )

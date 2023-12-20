@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "2A4B150B-39A2-417B-98FD-1C5C74C26E3E",
+      "id" : "AFF83596-0342-44D5-9376-16D7459A98C4",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -13,6 +13,7 @@
   },
   "testTargets" : [
     {
+      "enabled" : false,
       "target" : {
         "containerPath" : "container:",
         "identifier" : "PassepartoutCoreTests",
@@ -22,22 +23,24 @@
     {
       "target" : {
         "containerPath" : "container:",
+        "identifier" : "PassepartoutFrontendTests",
+        "name" : "PassepartoutFrontendTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:",
         "identifier" : "PassepartoutProvidersTests",
         "name" : "PassepartoutProvidersTests"
       }
     },
     {
+      "enabled" : false,
       "target" : {
         "containerPath" : "container:",
         "identifier" : "PassepartoutServicesTests",
         "name" : "PassepartoutServicesTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "PassepartoutVPNTests",
-        "name" : "PassepartoutVPNTests"
       }
     }
   ],

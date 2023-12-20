@@ -24,8 +24,8 @@
 //
 
 import Foundation
-@testable import Passepartout
 @testable import PassepartoutCore
+@testable import PassepartoutFrontend
 
 final class MockInApp: LocalInApp {
     var allProducts: [LocalProduct: InAppProduct]

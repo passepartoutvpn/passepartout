@@ -1,8 +1,8 @@
 //
-//  BuildProducts.swift
+//  AppType.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/26/22.
+//  Created by Davide De Rosa on 12/19/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,18 +25,22 @@
 
 import Foundation
 
-struct BuildProducts {
-    private let productsAtBuild: (Int) -> [LocalProduct]
+public enum AppType: Int {
+    case undefined = -1
 
-    init(productsAtBuild: @escaping (Int) -> [LocalProduct]) {
-        self.productsAtBuild = productsAtBuild
-    }
+    case freemium = 0
 
-    func products(atBuild build: Int) -> [LocalProduct] {
-        productsAtBuild(build)
-    }
+    case beta = 1
 
-    func hasProduct(_ product: LocalProduct, atBuild build: Int) -> Bool {
-        productsAtBuild(build).contains(product)
+    case fullVersion = 2
+
+    public var isRestricted: Bool {
+        switch self {
+        case .undefined, .beta:
+            return true
+
+        default:
+            return false
+        }
     }
 }

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PassepartoutLibrary"
-               BuildableName = "PassepartoutLibrary"
-               BlueprintName = "PassepartoutLibrary"
+               BlueprintIdentifier = "PassepartoutFrontendLibrary"
+               BuildableName = "PassepartoutFrontendLibrary"
+               BlueprintName = "PassepartoutFrontendLibrary"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,8 +26,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:PassepartoutFrontendLibrary.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -49,9 +54,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "PassepartoutLibrary"
-            BuildableName = "PassepartoutLibrary"
-            BlueprintName = "PassepartoutLibrary"
+            BlueprintIdentifier = "PassepartoutFrontendLibrary"
+            BuildableName = "PassepartoutFrontendLibrary"
+            BlueprintName = "PassepartoutFrontendLibrary"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

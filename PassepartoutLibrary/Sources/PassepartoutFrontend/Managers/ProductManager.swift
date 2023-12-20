@@ -25,31 +25,32 @@
 
 import Combine
 import Foundation
-import PassepartoutLibrary
+import PassepartoutCore
+import PassepartoutProviders
 
-protocol LocalInApp: InAppProtocol where ProductIdentifier == LocalProduct {
+public protocol LocalInApp: InAppProtocol where ProductIdentifier == LocalProduct {
 }
 
 extension StoreKitInApp: LocalInApp where ProductIdentifier == LocalProduct {
 }
 
 @MainActor
-final class ProductManager: NSObject, ObservableObject {
+public final class ProductManager: NSObject, ObservableObject {
     private let inApp: any LocalInApp
 
     private let receiptReader: ReceiptReader
 
     private let overriddenAppType: AppType?
 
-    let buildProducts: BuildProducts
+    public let buildProducts: BuildProducts
 
-    let didRefundProducts = PassthroughSubject<Void, Never>()
+    public let didRefundProducts = PassthroughSubject<Void, Never>()
 
-    @Published private(set) var appType: AppType
+    @Published public private(set) var appType: AppType
 
-    @Published private(set) var isRefreshingProducts = false
+    @Published public private(set) var isRefreshingProducts = false
 
-    @Published private(set) var products: [InAppProduct]
+    @Published public private(set) var products: [InAppProduct]
 
     //
 
@@ -72,10 +73,10 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    init(inApp: any LocalInApp,
-         receiptReader: ReceiptReader,
-         overriddenAppType: AppType? = nil,
-         buildProducts: BuildProducts) {
+    public init(inApp: any LocalInApp,
+                receiptReader: ReceiptReader,
+                overriddenAppType: AppType? = nil,
+                buildProducts: BuildProducts) {
         self.overriddenAppType = overriddenAppType
         self.receiptReader = receiptReader
         self.buildProducts = buildProducts
@@ -104,11 +105,11 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func canMakePayments() -> Bool {
+    public func canMakePayments() -> Bool {
         inApp.canMakePurchases()
     }
 
-    func refreshProducts() {
+    public func refreshProducts() {
         let ids = LocalProduct.all
         guard !ids.isEmpty else {
             return
@@ -132,11 +133,11 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func product(withIdentifier identifier: LocalProduct) -> InAppProduct? {
+    public func product(withIdentifier identifier: LocalProduct) -> InAppProduct? {
         inApp.product(withIdentifier: identifier)
     }
 
-    func featureProducts(including: [LocalProduct]) -> [InAppProduct] {
+    public func featureProducts(including: [LocalProduct]) -> [InAppProduct] {
         inApp.products().filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
@@ -151,7 +152,7 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func featureProducts(excluding: [LocalProduct]) -> [InAppProduct] {
+    public func featureProducts(excluding: [LocalProduct]) -> [InAppProduct] {
         inApp.products().filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
@@ -166,7 +167,7 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func purchase(_ product: InAppProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
+    public func purchase(_ product: InAppProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
         guard let pid = LocalProduct(rawValue: product.productIdentifier) else {
             pp_log.warning("Unrecognized product: \(product)")
             return
@@ -182,7 +183,7 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
+    public func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
         Task {
             do {
                 try await inApp.restorePurchases()
@@ -197,11 +198,11 @@ final class ProductManager: NSObject, ObservableObject {
 // MARK: In-app eligibility
 
 extension ProductManager {
-    func isCurrentPlatformVersion() -> Bool {
+    public func isCurrentPlatformVersion() -> Bool {
         purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
 
-    func isFullVersion() -> Bool {
+    public func isFullVersion() -> Bool {
         if appType == .fullVersion {
             return true
         }
@@ -211,7 +212,7 @@ extension ProductManager {
         return purchasedFeatures.contains(.fullVersion)
     }
 
-    func isEligible(forFeature feature: LocalProduct) -> Bool {
+    public func isEligible(forFeature feature: LocalProduct) -> Bool {
         if let purchasedAppBuild = purchasedAppBuild {
             if feature == .networkSettings && buildProducts.hasProduct(.networkSettings, atBuild: purchasedAppBuild) {
                 return true
@@ -223,28 +224,28 @@ extension ProductManager {
         return isFullVersion() || purchasedFeatures.contains(feature)
     }
 
-    func isEligible(forProvider providerName: ProviderName) -> Bool {
+    public func isEligible(forProvider providerName: ProviderName) -> Bool {
         guard providerName != .oeck else {
             return true
         }
         return isEligible(forFeature: providerName.product)
     }
 
-    func isEligibleForFeedback() -> Bool {
+    public func isEligibleForFeedback() -> Bool {
         appType == .beta || !purchasedFeatures.isEmpty
     }
 
-    func hasPurchased(_ product: LocalProduct) -> Bool {
+    public func hasPurchased(_ product: LocalProduct) -> Bool {
         purchasedFeatures.contains(product)
     }
 
-    func purchaseDate(forProduct product: LocalProduct) -> Date? {
+    public func purchaseDate(forProduct product: LocalProduct) -> Date? {
         purchaseDates[product]
     }
 }
 
 extension ProductManager {
-    func reloadReceipt(andNotify: Bool = true) {
+    public func reloadReceipt(andNotify: Bool = true) {
         guard let receipt = receiptReader.receipt(for: appType) else {
             pp_log.error("Could not parse App Store receipt!")
             return

@@ -1,8 +1,8 @@
 //
-//  VPNTests.swift
+//  ReceiptReader.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/29/22.
+//  Created by Davide De Rosa on 12/19/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,14 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@testable import PassepartoutVPN
-import XCTest
+import Foundation
+import PassepartoutCore
 
-final class VPNTests: XCTestCase {
-    override func setUp() {
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
- }
+public protocol ReceiptReader {
+    func receipt(for appType: AppType) -> InAppReceipt?
+}

@@ -1,8 +1,8 @@
 //
-//  ProfilesTests.swift
+//  MockReceiptReader.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/7/22.
+//  Created by Davide De Rosa on 12/19/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,26 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@testable import PassepartoutVPN
-import XCTest
+import Foundation
+import PassepartoutCore
+@testable import PassepartoutFrontend
 
-final class ProfilesTests: XCTestCase {
-    override func setUp() {
+final class MockReceiptReader: ReceiptReader {
+    var receipt: InAppReceipt?
+
+    init(receipt: InAppReceipt? = nil) {
+        self.receipt = receipt
     }
 
-    override func tearDown() {
+    func setReceipt(withBuild build: Int, products: [LocalProduct], cancelledProducts: Set<LocalProduct> = []) {
+        receipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: products.map {
+            .init(productIdentifier: $0.rawValue,
+                  cancellationDate: cancelledProducts.contains($0) ? Date() : nil,
+                  originalPurchaseDate: nil)
+        })
+    }
+
+    func receipt(for appType: AppType) -> InAppReceipt? {
+        receipt
     }
 }
