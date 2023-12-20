@@ -28,20 +28,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PassepartoutFrontendLibrary"
-               BuildableName = "PassepartoutFrontendLibrary"
-               BlueprintName = "PassepartoutFrontendLibrary"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "PassepartoutLibrary"
                BuildableName = "PassepartoutLibrary"
                BlueprintName = "PassepartoutLibrary"
