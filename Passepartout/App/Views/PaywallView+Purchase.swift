@@ -24,13 +24,12 @@
 //
 
 import PassepartoutLibrary
-import StoreKit
 import SwiftUI
 
 extension PaywallView {
     struct PurchaseView: View {
         fileprivate enum PurchaseState {
-            case purchasing(SKProduct)
+            case purchasing(InAppProduct)
 
             case restoring
         }
@@ -70,7 +69,7 @@ extension PaywallView {
 }
 
 private struct PurchaseRow: View {
-    var product: SKProduct?
+    var product: InAppProduct?
 
     let title: String
 
@@ -93,7 +92,7 @@ private struct PurchaseRow: View {
     }
 }
 
-private typealias RowModel = (product: SKProduct, extra: String?)
+private typealias RowModel = (product: InAppProduct, extra: String?)
 
 // MARK: -
 
@@ -136,14 +135,14 @@ private extension PaywallView.PurchaseView {
 }
 
 private extension PaywallView.PurchaseView {
-    var skFeature: SKProduct? {
+    var skFeature: InAppProduct? {
         guard let feature = feature else {
             return nil
         }
         return productManager.product(withIdentifier: feature)
     }
 
-    var skPlatformVersion: SKProduct? {
+    var skPlatformVersion: InAppProduct? {
         #if targetEnvironment(macCatalyst)
         productManager.product(withIdentifier: .fullVersion_macOS)
         #else
@@ -152,7 +151,7 @@ private extension PaywallView.PurchaseView {
     }
 
     // hide full version if already bought the other platform version
-    var skFullVersion: SKProduct? {
+    var skFullVersion: InAppProduct? {
         #if targetEnvironment(macCatalyst)
         guard !productManager.hasPurchased(.fullVersion_iOS) else {
             return nil
@@ -209,14 +208,14 @@ private extension PurchaseRow {
 
     @ViewBuilder
     var actionButton: some View {
-        if let product = product {
+        if let product {
             purchaseButton(product)
         } else {
             restoreButton
         }
     }
 
-    func purchaseButton(_ product: SKProduct) -> some View {
+    func purchaseButton(_ product: InAppProduct) -> some View {
         HStack {
             Button(title, action: action)
             Spacer()
@@ -245,7 +244,7 @@ private extension PurchaseRow {
 // MARK: -
 
 private extension PaywallView.PurchaseView {
-    func purchaseProduct(_ product: SKProduct) {
+    func purchaseProduct(_ product: InAppProduct) {
         purchaseState = .purchasing(product)
 
         productManager.purchase(product) {

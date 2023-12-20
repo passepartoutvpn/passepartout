@@ -24,6 +24,7 @@
 //
 
 import SwiftUI
+import PassepartoutLibrary
 
 struct PaywallView: View {
     @ObservedObject private var productManager: ProductManager

@@ -1,8 +1,8 @@
 //
-//  PassepartoutTestsApp.swift
+//  ReceiptReader.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/30/22.
+//  Created by Davide De Rosa on 12/19/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
+import Foundation
+import PassepartoutCore
 
-@main
-struct PassepartoutTestsApp: App {
-    var body: some Scene {
-        WindowGroup {
-            EmptyView()
-        }
-    }
+public protocol ReceiptReader {
+    func receipt(for appType: AppType) -> InAppReceipt?
 }

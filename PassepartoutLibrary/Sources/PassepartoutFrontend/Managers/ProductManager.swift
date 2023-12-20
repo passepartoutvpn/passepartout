@@ -25,47 +25,34 @@
 
 import Combine
 import Foundation
-import Kvitto
-import PassepartoutLibrary
-import StoreKit
+import PassepartoutCore
+import PassepartoutProviders
+
+public protocol LocalInApp: InAppProtocol where ProductIdentifier == LocalProduct {
+}
+
+extension StoreKitInApp: LocalInApp where ProductIdentifier == LocalProduct {
+}
 
 @MainActor
-final class ProductManager: NSObject, ObservableObject {
-    enum AppType: Int {
-        case undefined = -1
+public final class ProductManager: NSObject, ObservableObject {
+    private let inApp: any LocalInApp
 
-        case freemium = 0
-
-        case beta = 1
-
-        case fullVersion = 2
-
-        var isRestricted: Bool {
-            switch self {
-            case .undefined, .beta:
-                return true
-
-            default:
-                return false
-            }
-        }
-    }
+    private let receiptReader: ReceiptReader
 
     private let overriddenAppType: AppType?
 
-    let buildProducts: BuildProducts
+    public let buildProducts: BuildProducts
 
-    let didRefundProducts = PassthroughSubject<Void, Never>()
+    public let didRefundProducts = PassthroughSubject<Void, Never>()
 
-    @Published private(set) var appType: AppType
+    @Published public private(set) var appType: AppType
 
-    @Published private(set) var isRefreshingProducts = false
+    @Published public private(set) var isRefreshingProducts = false
 
-    @Published private(set) var products: [SKProduct]
+    @Published public private(set) var products: [InAppProduct]
 
     //
-
-    private let inApp: InApp<LocalProduct>
 
     private var purchasedAppBuild: Int?
 
@@ -86,15 +73,17 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    private var refreshRequest: SKReceiptRefreshRequest?
-
-    init(overriddenAppType: AppType?, buildProducts: BuildProducts) {
+    public init(inApp: any LocalInApp,
+                receiptReader: ReceiptReader,
+                overriddenAppType: AppType? = nil,
+                buildProducts: BuildProducts) {
         self.overriddenAppType = overriddenAppType
+        self.receiptReader = receiptReader
         self.buildProducts = buildProducts
         appType = .undefined
 
         products = []
-        inApp = InApp()
+        self.inApp = inApp
         purchasedAppBuild = nil
         purchasedFeatures = []
         purchaseDates = [:]
@@ -102,8 +91,10 @@ final class ProductManager: NSObject, ObservableObject {
 
         super.init()
 
+        inApp.setTransactionsObserver { [weak self] in
+            self?.reloadReceipt()
+        }
         reloadReceipt()
-        SKPaymentQueue.default().add(self)
         refreshProducts()
 
         Task {
@@ -114,15 +105,11 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    deinit {
-        SKPaymentQueue.default().remove(self)
+    public func canMakePayments() -> Bool {
+        inApp.canMakePurchases()
     }
 
-    func canMakePayments() -> Bool {
-        SKPaymentQueue.canMakePayments()
-    }
-
-    func refreshProducts() {
+    public func refreshProducts() {
         let ids = LocalProduct.all
         guard !ids.isEmpty else {
             return
@@ -132,23 +119,26 @@ final class ProductManager: NSObject, ObservableObject {
             return
         }
         isRefreshingProducts = true
-        inApp.requestProducts(withIdentifiers: ids, completionHandler: { _ in
-            pp_log.debug("In-app products: \(self.inApp.products.map { $0.productIdentifier })")
+        Task {
+            do {
+                let productsMap = try await inApp.requestProducts(withIdentifiers: ids)
+                pp_log.debug("In-app products: \(productsMap.keys.map(\.rawValue))")
 
-            self.products = self.inApp.products
-            self.isRefreshingProducts = false
-        }, failureHandler: {
-            pp_log.warning("Unable to list products: \($0)")
-            self.isRefreshingProducts = false
-        })
+                products = Array(productsMap.values)
+                isRefreshingProducts = false
+            } catch {
+                pp_log.warning("Unable to list products: \(error)")
+                isRefreshingProducts = false
+            }
+        }
     }
 
-    func product(withIdentifier identifier: LocalProduct) -> SKProduct? {
+    public func product(withIdentifier identifier: LocalProduct) -> InAppProduct? {
         inApp.product(withIdentifier: identifier)
     }
 
-    func featureProducts(including: [LocalProduct]) -> [SKProduct] {
-        inApp.products.filter {
+    public func featureProducts(including: [LocalProduct]) -> [InAppProduct] {
+        inApp.products().filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
@@ -162,8 +152,8 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func featureProducts(excluding: [LocalProduct]) -> [SKProduct] {
-        inApp.products.filter {
+    public func featureProducts(excluding: [LocalProduct]) -> [InAppProduct] {
+        inApp.products().filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
@@ -177,35 +167,42 @@ final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    func purchase(_ product: SKProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
-        inApp.purchase(product: product) { result in
-            if case .success = result {
-                self.reloadReceipt()
-            }
-            DispatchQueue.main.async {
-                completionHandler(result)
+    public func purchase(_ product: InAppProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
+        guard let pid = LocalProduct(rawValue: product.productIdentifier) else {
+            pp_log.warning("Unrecognized product: \(product)")
+            return
+        }
+        Task {
+            do {
+                let result = try await inApp.purchase(productWithIdentifier: pid)
+                reloadReceipt()
+                completionHandler(.success(result))
+            } catch {
+                completionHandler(.failure(error))
             }
         }
     }
 
-    func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
-        inApp.restorePurchases { (finished, _, error) in
-            guard finished else {
-                return
-            }
-            DispatchQueue.main.async {
+    public func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
+        Task {
+            do {
+                try await inApp.restorePurchases()
+                completionHandler(nil)
+            } catch {
                 completionHandler(error)
             }
         }
     }
+}
 
-    // MARK: In-app eligibility
+// MARK: In-app eligibility
 
-    private func isCurrentPlatformVersion() -> Bool {
+extension ProductManager {
+    public func isCurrentPlatformVersion() -> Bool {
         purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
 
-    private func isFullVersion() -> Bool {
+    public func isFullVersion() -> Bool {
         if appType == .fullVersion {
             return true
         }
@@ -215,42 +212,47 @@ final class ProductManager: NSObject, ObservableObject {
         return purchasedFeatures.contains(.fullVersion)
     }
 
-    func isEligible(forFeature feature: LocalProduct) -> Bool {
+    public func isEligible(forFeature feature: LocalProduct) -> Bool {
         if let purchasedAppBuild = purchasedAppBuild {
             if feature == .networkSettings && buildProducts.hasProduct(.networkSettings, atBuild: purchasedAppBuild) {
                 return true
             }
         }
+        if feature.isPlatformVersion {
+            return purchasedFeatures.contains(feature)
+        }
         return isFullVersion() || purchasedFeatures.contains(feature)
     }
 
-    func isEligible(forProvider providerName: ProviderName) -> Bool {
+    public func isEligible(forProvider providerName: ProviderName) -> Bool {
         guard providerName != .oeck else {
             return true
         }
         return isEligible(forFeature: providerName.product)
     }
 
-    func isEligibleForFeedback() -> Bool {
+    public func isEligibleForFeedback() -> Bool {
         appType == .beta || !purchasedFeatures.isEmpty
     }
 
-    func hasPurchased(_ product: LocalProduct) -> Bool {
+    public func hasPurchased(_ product: LocalProduct) -> Bool {
         purchasedFeatures.contains(product)
     }
 
-    func purchaseDate(forProduct product: LocalProduct) -> Date? {
+    public func purchaseDate(forProduct product: LocalProduct) -> Date? {
         purchaseDates[product]
     }
+}
 
-    func reloadReceipt(andNotify: Bool = true) {
-        guard let receipt else {
+extension ProductManager {
+    public func reloadReceipt(andNotify: Bool = true) {
+        guard let receipt = receiptReader.receipt(for: appType) else {
             pp_log.error("Could not parse App Store receipt!")
             return
         }
 
-        if let originalAppVersion = receipt.originalAppVersion, let buildNumber = Int(originalAppVersion) {
-            purchasedAppBuild = buildNumber
+        if let originalBuildNumber = receipt.originalBuildNumber {
+            purchasedAppBuild = originalBuildNumber
         }
         purchasedFeatures.removeAll()
         var newCancelledPurchases: Set<LocalProduct> = []
@@ -263,7 +265,7 @@ final class ProductManager: NSObject, ObservableObject {
                 purchasedFeatures.insert($0)
             }
         }
-        if let iapReceipts = receipt.inAppPurchaseReceipts {
+        if let iapReceipts = receipt.purchaseReceipts {
             purchaseDates.removeAll()
 
             pp_log.debug("In-app receipts:")
@@ -291,14 +293,6 @@ final class ProductManager: NSObject, ObservableObject {
     }
 }
 
-extension ProductManager: SKPaymentTransactionObserver {
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        DispatchQueue.main.async { [weak self] in
-            self?.reloadReceipt()
-        }
-    }
-}
-
 private extension ProductManager {
     var isMac: Bool {
         #if targetEnvironment(macCatalyst)
@@ -306,30 +300,6 @@ private extension ProductManager {
         #else
         false
         #endif
-    }
-
-    var receipt: Receipt? {
-        guard let url = Bundle.main.appStoreReceiptURL else {
-            pp_log.warning("No App Store receipt found!")
-            return nil
-        }
-        let receipt = Receipt(contentsOfURL: url)
-
-        // in TestFlight, attempt fallback to existing release receipt
-        if appType == .beta {
-            guard let receipt else {
-                let releaseUrl = url.deletingLastPathComponent().appendingPathComponent("receipt")
-                guard releaseUrl != url else {
-                    assertionFailure("How can release URL be equal to sandbox URL in TestFlight?")
-                    return nil
-                }
-                pp_log.warning("Sandbox receipt not found, falling back to Release receipt")
-                return Receipt(contentsOfURL: releaseUrl)
-            }
-            return receipt
-        }
-
-        return receipt
     }
 
     func detectRefunds(_ refunds: Set<LocalProduct>) {

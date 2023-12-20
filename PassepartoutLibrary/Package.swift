@@ -14,6 +14,14 @@ let package = Package(
             name: "PassepartoutLibrary",
             targets: ["PassepartoutLibrary"]),
         .library(
+            name: "PassepartoutInterfaces",
+            targets: [
+                "PassepartoutCore",
+                "PassepartoutFrontend",
+                "PassepartoutProviders",
+                "PassepartoutServices"
+            ]),
+        .library(
             name: "OpenVPNAppExtension",
             targets: ["OpenVPNAppExtension"]),
         .library(
@@ -73,6 +81,11 @@ let package = Package(
                 .product(name: "TunnelKitWireGuard", package: "TunnelKit"),
             ]),
         .target(
+            name: "PassepartoutFrontend",
+            dependencies: [
+                "PassepartoutProviders"
+            ]),
+        .target(
             name: "PassepartoutProviders",
             dependencies: [
                 "PassepartoutCore"
@@ -105,16 +118,19 @@ let package = Package(
         // MARK: Tests
 
         .testTarget(
-            name: "PassepartoutVPNTests",
-            dependencies: ["PassepartoutVPNImpl"]),
-        .testTarget(
-            name: "PassepartoutProvidersTests",
-            dependencies: ["PassepartoutProvidersImpl"]),
-        .testTarget(
             name: "PassepartoutCoreTests",
             dependencies: ["PassepartoutCore"],
             resources: [
                 .process("Resources")
-            ])
+            ]),
+        .testTarget(
+            name: "PassepartoutFrontendTests",
+            dependencies: ["PassepartoutFrontend"]),
+        .testTarget(
+            name: "PassepartoutProvidersTests",
+            dependencies: ["PassepartoutProviders"]),
+        .testTarget(
+            name: "PassepartoutServicesTests",
+            dependencies: ["PassepartoutServices"])
     ]
 )

@@ -1,8 +1,8 @@
 //
-//  VPNTests.swift
+//  AppType.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/29/22.
+//  Created by Davide De Rosa on 12/19/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,14 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@testable import PassepartoutVPN
-import XCTest
+import Foundation
 
-final class VPNTests: XCTestCase {
-    override func setUp() {
-    }
+public enum AppType: Int {
+    case undefined = -1
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    case freemium = 0
+
+    case beta = 1
+
+    case fullVersion = 2
+
+    public var isRestricted: Bool {
+        switch self {
+        case .undefined, .beta:
+            return true
+
+        default:
+            return false
+        }
     }
- }
+}

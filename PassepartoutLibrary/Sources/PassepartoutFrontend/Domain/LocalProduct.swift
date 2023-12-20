@@ -24,10 +24,10 @@
 //
 
 import Foundation
-import PassepartoutLibrary
-import StoreKit
+import PassepartoutCore
+import PassepartoutProviders
 
-struct LocalProduct: RawRepresentable, Equatable, Hashable {
+public struct LocalProduct: RawRepresentable, Hashable, Sendable {
     private static let bundleSubdomain = "ios"
 
     private static let bundle = "com.algoritmico.\(bundleSubdomain).Passepartout"
@@ -40,19 +40,19 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
 
     // MARK: Donations
 
-    static let tinyDonation = LocalProduct(donationDescription: "Tiny")
+    public static let tinyDonation = LocalProduct(donationDescription: "Tiny")
 
-    static let smallDonation = LocalProduct(donationDescription: "Small")
+    public static let smallDonation = LocalProduct(donationDescription: "Small")
 
-    static let mediumDonation = LocalProduct(donationDescription: "Medium")
+    public static let mediumDonation = LocalProduct(donationDescription: "Medium")
 
-    static let bigDonation = LocalProduct(donationDescription: "Big")
+    public static let bigDonation = LocalProduct(donationDescription: "Big")
 
-    static let hugeDonation = LocalProduct(donationDescription: "Huge")
+    public static let hugeDonation = LocalProduct(donationDescription: "Huge")
 
-    static let maxiDonation = LocalProduct(donationDescription: "Maxi")
+    public static let maxiDonation = LocalProduct(donationDescription: "Maxi")
 
-    static let allDonations: [LocalProduct] = [
+    public static let allDonations: [LocalProduct] = [
         .tinyDonation,
         .smallDonation,
         .mediumDonation,
@@ -67,19 +67,19 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
 
     // MARK: Features
 
-    static let allProviders = LocalProduct(featureId: "all_providers")
+    public static let allProviders = LocalProduct(featureId: "all_providers")
 
-    static let networkSettings = LocalProduct(featureId: "network_settings")
+    public static let networkSettings = LocalProduct(featureId: "network_settings")
 
-    static let trustedNetworks = LocalProduct(featureId: "trusted_networks")
+    public static let trustedNetworks = LocalProduct(featureId: "trusted_networks")
 
-    static let siriShortcuts = LocalProduct(featureId: "siri")
+    public static let siriShortcuts = LocalProduct(featureId: "siri")
 
-    static let fullVersion_iOS = LocalProduct(featureId: "full_version")
+    public static let fullVersion_iOS = LocalProduct(featureId: "full_version")
 
-    static let fullVersion_macOS = LocalProduct(featureId: "full_mac_version")
+    public static let fullVersion_macOS = LocalProduct(featureId: "full_mac_version")
 
-    static let fullVersion = LocalProduct(featureId: "full_multi_version")
+    public static let fullVersion = LocalProduct(featureId: "full_multi_version")
 
     static let allFeatures: [LocalProduct] = [
         .allProviders,
@@ -101,35 +101,45 @@ struct LocalProduct: RawRepresentable, Equatable, Hashable {
         allDonations + allFeatures// + allProviders
     }
 
-    var isDonation: Bool {
+    public var isDonation: Bool {
         rawValue.hasPrefix(LocalProduct.donationsBundle)
     }
 
-    var isFeature: Bool {
+    public var isFeature: Bool {
         rawValue.hasPrefix(LocalProduct.featuresBundle)
     }
 
-    var isProvider: Bool {
+    public var isProvider: Bool {
         rawValue.hasPrefix(LocalProduct.providersBundle)
+    }
+
+    public var isPlatformVersion: Bool {
+        switch self {
+        case .fullVersion_iOS, .fullVersion_macOS:
+            return true
+
+        default:
+            return false
+        }
     }
 
     // MARK: RawRepresentable
 
-    let rawValue: String
+    public let rawValue: String
 
-    init?(rawValue: String) {
+    public init?(rawValue: String) {
         self.rawValue = rawValue
     }
 }
 
 extension LocalProduct {
-    func matchesStoreKitProduct(_ skProduct: SKProduct) -> Bool {
-        skProduct.productIdentifier == rawValue
+    public func matchesInAppProduct(_ iaProduct: InAppProduct) -> Bool {
+        iaProduct.productIdentifier == rawValue
     }
 }
 
 extension ProviderName {
-    var product: LocalProduct {
+    public var product: LocalProduct {
         .init(rawValue: "\(LocalProduct.providersBundle).\(inApp)")!
     }
 }

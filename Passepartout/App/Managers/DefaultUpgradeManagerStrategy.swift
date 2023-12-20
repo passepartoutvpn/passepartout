@@ -26,11 +26,11 @@
 import Foundation
 import PassepartoutLibrary
 
-public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
-    public init() {
+final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
+    init() {
     }
 
-    public func migrate(store: KeyValueStore, lastVersion: String?) {
+    func migrate(store: KeyValueStore, lastVersion: String?) {
 
         // legacy check before lastVersion was even stored
         let isUpgradeFromBefore_2_2_0: Bool? = store.value(forLocation: UpgradeManager.StoreKey.existingKeyBefore_2_2_0)
@@ -47,6 +47,6 @@ public final class DefaultUpgradeManagerStrategy: UpgradeManagerStrategy {
         pp_log.debug("Upgrade from \(lastVersion)")
     }
 
-    public func migrateData() {
+    func migrateData() {
     }
 }

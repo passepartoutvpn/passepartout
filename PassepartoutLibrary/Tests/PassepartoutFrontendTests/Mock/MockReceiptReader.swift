@@ -1,8 +1,8 @@
 //
-//  BuildProducts.swift
+//  MockReceiptReader.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/26/22.
+//  Created by Davide De Rosa on 12/19/23.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,19 +24,25 @@
 //
 
 import Foundation
+import PassepartoutCore
+@testable import PassepartoutFrontend
 
-struct BuildProducts {
-    private let productsAtBuild: (Int) -> [LocalProduct]
+final class MockReceiptReader: ReceiptReader {
+    var receipt: InAppReceipt?
 
-    init(productsAtBuild: @escaping (Int) -> [LocalProduct]) {
-        self.productsAtBuild = productsAtBuild
+    init(receipt: InAppReceipt? = nil) {
+        self.receipt = receipt
     }
 
-    func products(atBuild build: Int) -> [LocalProduct] {
-        productsAtBuild(build)
+    func setReceipt(withBuild build: Int, products: [LocalProduct], cancelledProducts: Set<LocalProduct> = []) {
+        receipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: products.map {
+            .init(productIdentifier: $0.rawValue,
+                  cancellationDate: cancelledProducts.contains($0) ? Date() : nil,
+                  originalPurchaseDate: nil)
+        })
     }
 
-    func hasProduct(_ product: LocalProduct, atBuild build: Int) -> Bool {
-        productsAtBuild(build).contains(product)
+    func receipt(for appType: AppType) -> InAppReceipt? {
+        receipt
     }
 }

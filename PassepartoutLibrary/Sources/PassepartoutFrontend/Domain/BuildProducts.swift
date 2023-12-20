@@ -1,8 +1,8 @@
 //
-//  ProfilesTests.swift
+//  BuildProducts.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 4/7/22.
+//  Created by Davide De Rosa on 4/26/22.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,20 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@testable import PassepartoutVPN
-import XCTest
+import Foundation
 
-final class ProfilesTests: XCTestCase {
-    override func setUp() {
+public struct BuildProducts {
+    private let productsAtBuild: (Int) -> [LocalProduct]
+
+    public init(productsAtBuild: @escaping (Int) -> [LocalProduct]) {
+        self.productsAtBuild = productsAtBuild
     }
 
-    override func tearDown() {
+    public func products(atBuild build: Int) -> [LocalProduct] {
+        productsAtBuild(build)
+    }
+
+    public func hasProduct(_ product: LocalProduct, atBuild build: Int) -> Bool {
+        productsAtBuild(build).contains(product)
     }
 }
