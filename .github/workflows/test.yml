@@ -35,4 +35,4 @@ jobs:
           go-version: "^1.17"
       - name: Run tests
         run: |
-          bundle exec fastlane --env beta,ios scan
+          bundle exec fastlane scan
