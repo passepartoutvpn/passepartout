@@ -32,9 +32,11 @@ import XCTest
 final class ProductManagerTests: XCTestCase {
     private let inApp = MockInApp()
 
+    private let noBuildProducts = BuildProducts { _ in [] }
+
     func test_givenBuildProducts_whenOlder_thenFullVersion() {
         let reader = MockReceiptReader()
-        reader.customReceipt = InAppReceipt(originalBuildNumber: 500, purchaseReceipts: nil)
+        reader.setReceipt(withBuild: 500, products: [])
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: BuildProducts { build in
             if build <= 1000 {
                 return [.fullVersion]
@@ -46,7 +48,7 @@ final class ProductManagerTests: XCTestCase {
 
     func test_givenBuildProducts_whenNewer_thenFreeVersion() {
         let reader = MockReceiptReader()
-        reader.customReceipt = InAppReceipt(originalBuildNumber: 1500, purchaseReceipts: nil)
+        reader.setReceipt(withBuild: 1500, products: [])
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: BuildProducts { build in
             if build <= 1000 {
                 return [.fullVersion]
@@ -58,12 +60,10 @@ final class ProductManagerTests: XCTestCase {
 
     func test_givenPurchase_whenReload_thenCredited() {
         let reader = MockReceiptReader()
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: BuildProducts { _ in [] })
+        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
         XCTAssertFalse(sut.isEligible(forFeature: .fullVersion))
 
-        reader.customReceipt = InAppReceipt(originalBuildNumber: 1500, purchaseReceipts: [
-            .init(productIdentifier: LocalProduct.fullVersion.rawValue, cancellationDate: nil, originalPurchaseDate: nil)
-        ])
+        reader.setReceipt(withBuild: 1500, products: [.fullVersion])
         XCTAssertFalse(sut.isEligible(forFeature: .fullVersion))
 
         sut.reloadReceipt()
@@ -72,15 +72,11 @@ final class ProductManagerTests: XCTestCase {
 
     func test_givenPurchase_whenCancelled_thenRevoke() {
         let reader = MockReceiptReader()
-        reader.customReceipt = InAppReceipt(originalBuildNumber: 1500, purchaseReceipts: [
-            .init(productIdentifier: LocalProduct.fullVersion.rawValue, cancellationDate: nil, originalPurchaseDate: nil)
-        ])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: BuildProducts { _ in [] })
+        reader.setReceipt(withBuild: 1500, products: [.fullVersion])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
         XCTAssertTrue(sut.isEligible(forFeature: .fullVersion))
 
-        reader.customReceipt = InAppReceipt(originalBuildNumber: 1500, purchaseReceipts: [
-            .init(productIdentifier: LocalProduct.fullVersion.rawValue, cancellationDate: Date(), originalPurchaseDate: nil)
-        ])
+        reader.setReceipt(withBuild: 1500, products: [.fullVersion], cancelledProducts: [.fullVersion])
         XCTAssertTrue(sut.isEligible(forFeature: .fullVersion))
 
         sut.reloadReceipt()

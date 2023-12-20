@@ -194,7 +194,6 @@ final class ProductManager: NSObject, ObservableObject {
     }
 }
 
-
 // MARK: In-app eligibility
 
 extension ProductManager {

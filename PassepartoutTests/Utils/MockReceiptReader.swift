@@ -28,9 +28,21 @@ import Foundation
 import PassepartoutLibrary
 
 final class MockReceiptReader: ReceiptReader {
-    var customReceipt: InAppReceipt?
+    var receipt: InAppReceipt?
+
+    init(receipt: InAppReceipt? = nil) {
+        self.receipt = receipt
+    }
+
+    func setReceipt(withBuild build: Int, products: [LocalProduct], cancelledProducts: Set<LocalProduct> = []) {
+        receipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: products.map {
+            .init(productIdentifier: $0.rawValue,
+                  cancellationDate: cancelledProducts.contains($0) ? Date() : nil,
+                  originalPurchaseDate: nil)
+        })
+    }
 
     func receipt(for appType: AppType) -> InAppReceipt? {
-        customReceipt
+        receipt
     }
 }
