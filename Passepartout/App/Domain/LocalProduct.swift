@@ -112,6 +112,16 @@ struct LocalProduct: RawRepresentable, Hashable, Sendable {
         rawValue.hasPrefix(LocalProduct.providersBundle)
     }
 
+    var isPlatformVersion: Bool {
+        switch self {
+        case .fullVersion_iOS, .fullVersion_macOS:
+            return true
+
+        default:
+            return false
+        }
+    }
+
     // MARK: RawRepresentable
 
     let rawValue: String

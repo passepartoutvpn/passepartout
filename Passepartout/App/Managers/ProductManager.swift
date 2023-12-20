@@ -197,11 +197,11 @@ final class ProductManager: NSObject, ObservableObject {
 // MARK: In-app eligibility
 
 extension ProductManager {
-    private func isCurrentPlatformVersion() -> Bool {
+    func isCurrentPlatformVersion() -> Bool {
         purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
 
-    private func isFullVersion() -> Bool {
+    func isFullVersion() -> Bool {
         if appType == .fullVersion {
             return true
         }
@@ -216,6 +216,9 @@ extension ProductManager {
             if feature == .networkSettings && buildProducts.hasProduct(.networkSettings, atBuild: purchasedAppBuild) {
                 return true
             }
+        }
+        if feature.isPlatformVersion {
+            return purchasedFeatures.contains(feature)
         }
         return isFullVersion() || purchasedFeatures.contains(feature)
     }
