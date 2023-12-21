@@ -46,8 +46,9 @@ let package = Package(
         .target(
             name: "PassepartoutLibrary",
             dependencies: [
+                "PassepartoutFrontend",
                 "PassepartoutVPNImpl",
-                "PassepartoutProvidersImpl"
+                "PassepartoutProvidersImpl",
             ]),
         .target(
             name: "PassepartoutVPNImpl",
