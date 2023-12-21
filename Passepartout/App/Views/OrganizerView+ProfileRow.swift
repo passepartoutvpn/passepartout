@@ -45,11 +45,11 @@ extension OrganizerView {
             return HStack {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(profile.header.name)
-                        .font(.headline)
+                        .themeCellTitleStyle()
                         .themeLongTextStyle()
 
                     VPNStatusText(isActiveProfile: isActiveProfile)
-                        .font(.subheadline)
+                        .themeCellSubtitleStyle()
                         .themeSecondaryTextStyle()
                 }
                 Spacer()

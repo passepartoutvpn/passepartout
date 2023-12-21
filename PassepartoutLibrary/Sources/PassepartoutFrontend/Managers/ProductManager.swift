@@ -132,12 +132,12 @@ public final class ProductManager: NSObject, ObservableObject {
         inApp.product(withIdentifier: identifier)
     }
 
-    public func featureProducts(including: [LocalProduct]) -> [InAppProduct] {
+    public func featureProducts(including: (LocalProduct) -> Bool) -> [InAppProduct] {
         inApp.products().filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
-            guard including.contains(p) else {
+            guard including(p) else {
                 return false
             }
             guard p.isFeature else {
@@ -147,12 +147,12 @@ public final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    public func featureProducts(excluding: [LocalProduct]) -> [InAppProduct] {
+    public func featureProducts(excluding: (LocalProduct) -> Bool) -> [InAppProduct] {
         inApp.products().filter {
             guard let p = LocalProduct(rawValue: $0.productIdentifier) else {
                 return false
             }
-            guard !excluding.contains(p) else {
+            guard !excluding(p) else {
                 return false
             }
             guard p.isFeature else {

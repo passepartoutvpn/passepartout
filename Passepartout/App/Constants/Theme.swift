@@ -372,6 +372,14 @@ extension View {
             .foregroundColor(themeSecondaryColor)
     }
 
+    func themeCellTitleStyle() -> some View {
+        font(.headline)
+    }
+
+    func themeCellSubtitleStyle() -> some View {
+        font(.subheadline)
+    }
+
     func themeDebugLogStyle() -> some View {
         font(.system(size: 13, weight: .medium, design: .monospaced))
     }
