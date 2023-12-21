@@ -178,7 +178,7 @@ public final class ProductManager: NSObject, ObservableObject {
     }
 
     public func hasPurchased(_ product: LocalProduct) -> Bool {
-        purchasedFeatures.contains(product)
+        isActivePurchase(product)
     }
 
     public func purchaseDate(forProduct product: LocalProduct) -> Date? {
@@ -196,9 +196,9 @@ extension ProductManager {
             }
         }
         if feature.isPlatformVersion {
-            return purchasedFeatures.contains(feature)
+            return isActivePurchase(feature)
         }
-        return isFullVersion() || purchasedFeatures.contains(feature)
+        return isFullVersion() || isActivePurchase(feature)
     }
 
     public func isEligible(forProvider providerName: ProviderName) -> Bool {
@@ -214,8 +214,16 @@ extension ProductManager {
 }
 
 extension ProductManager {
+    func isActivePurchase(_ feature: LocalProduct) -> Bool {
+        purchasedFeatures.contains(feature) && cancelledPurchases?.contains(feature) == false
+    }
+
+    func isActivePurchase(where predicate: (LocalProduct) -> Bool) -> Bool {
+        purchasedFeatures.contains(where: predicate) && cancelledPurchases?.contains(where: predicate) == false
+    }
+
     func isCurrentPlatformVersion() -> Bool {
-        purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
+        isActivePurchase(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
 
     func isFullVersion() -> Bool {
@@ -225,7 +233,7 @@ extension ProductManager {
         if isCurrentPlatformVersion() {
             return true
         }
-        return purchasedFeatures.contains(.fullVersion)
+        return isActivePurchase(.fullVersion)
     }
 }
 

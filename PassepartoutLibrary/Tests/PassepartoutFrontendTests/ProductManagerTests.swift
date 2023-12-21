@@ -120,6 +120,7 @@ final class ProductManagerTests: XCTestCase {
         reader.setReceipt(withBuild: 1500, products: [.fullVersion])
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
 
+        XCTAssertTrue(sut.isFullVersion())
         XCTAssertTrue(LocalProduct
             .allFeatures
             .filter { !$0.isPlatformVersion }
@@ -132,6 +133,7 @@ final class ProductManagerTests: XCTestCase {
         reader.setReceipt(withBuild: 1500, products: [])
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
 
+        XCTAssertFalse(sut.isFullVersion())
         XCTAssertFalse(LocalProduct
             .allFeatures
             .allSatisfy(sut.isEligible(forFeature:))
