@@ -28,12 +28,6 @@ import Foundation
 import PassepartoutCore
 import PassepartoutProviders
 
-public protocol LocalInApp: InAppProtocol where ProductIdentifier == LocalProduct {
-}
-
-extension StoreKitInApp: LocalInApp where ProductIdentifier == LocalProduct {
-}
-
 @MainActor
 public final class ProductManager: NSObject, ObservableObject {
     private let inApp: any LocalInApp
