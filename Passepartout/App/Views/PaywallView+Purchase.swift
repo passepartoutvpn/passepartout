@@ -57,13 +57,17 @@ extension PaywallView {
             }.navigationTitle(Unlocalized.appName)
 
             // reloading
-            .onAppear {
-                productManager.refreshProducts()
-            }.onChange(of: scenePhase) { newValue in
+            .task {
+                await productManager.refreshProducts()
+            }
+            .onChange(of: scenePhase) { newValue in
                 if newValue == .active {
-                    productManager.refreshProducts()
+                    Task {
+                        await productManager.refreshProducts()
+                    }
                 }
-            }.themeAnimation(on: productManager.isRefreshingProducts)
+            }
+            .themeAnimation(on: productManager.isRefreshingProducts)
         }
     }
 }
@@ -247,9 +251,9 @@ private extension PaywallView.PurchaseView {
     func purchaseProduct(_ product: InAppProduct) {
         purchaseState = .purchasing(product)
 
-        productManager.purchase(product) {
-            switch $0 {
-            case .success(let result):
+        Task {
+            do {
+                let result = try await productManager.purchase(product)
                 switch result {
                 case .done:
                     isPresented = false
@@ -258,8 +262,7 @@ private extension PaywallView.PurchaseView {
                     break
                 }
                 purchaseState = nil
-
-            case .failure(let error):
+            } catch {
                 pp_log.error("Unable to purchase: \(error)")
                 ErrorHandler.shared.handle(
                     title: product.localizedTitle,
@@ -274,8 +277,12 @@ private extension PaywallView.PurchaseView {
     func restorePurchases() {
         purchaseState = .restoring
 
-        productManager.restorePurchases {
-            if let error = $0 {
+        Task {
+            do {
+                try await productManager.restorePurchases()
+                isPresented = false
+                purchaseState = nil
+            } catch {
                 pp_log.error("Unable to restore purchases: \(error)")
                 ErrorHandler.shared.handle(
                     title: L10n.Paywall.Items.Restore.title,
@@ -283,10 +290,7 @@ private extension PaywallView.PurchaseView {
                 ) {
                     purchaseState = nil
                 }
-                return
             }
-            isPresented = false
-            purchaseState = nil
         }
     }
 }
