@@ -67,13 +67,17 @@ struct DonateView: View {
         )
 
         // reloading
-        .onAppear {
-            productManager.refreshProducts()
-        }.onChange(of: scenePhase) { newValue in
+        .task {
+            await productManager.refreshProducts()
+        }
+        .onChange(of: scenePhase) { newValue in
             if newValue == .active {
-                productManager.refreshProducts()
+                Task {
+                    await productManager.refreshProducts()
+                }
             }
-        }.themeAnimation(on: productManager.isRefreshingProducts)
+        }
+        .themeAnimation(on: productManager.isRefreshingProducts)
     }
 }
 
@@ -147,25 +151,32 @@ private extension ProductManager {
 private extension DonateView {
     func purchaseProduct(_ product: InAppProduct) {
         pendingDonationIdentifier = product.productIdentifier
-        productManager.purchase(product, completionHandler: handlePurchaseResult)
+        Task {
+            do {
+                let result = try await productManager.purchase(product)
+                handlePurchaseResult(result)
+            } catch {
+                handlePurchaseError(error)
+            }
+        }
     }
 
-    func handlePurchaseResult(_ result: Result<InAppPurchaseResult, Error>) {
-        switch result {
-        case .success(let value):
-            if case .done = value {
-                alertType = .thankYou
-                isAlertPresented = true
-            } else {
-                // cancelled
-            }
-
-        case .failure(let error):
-            ErrorHandler.shared.handle(
-                title: L10n.Donate.title,
-                message: L10n.Donate.Alerts.Purchase.Failure.message(AppError(error).localizedDescription)
-            )
+    func handlePurchaseResult(_ result: InAppPurchaseResult) {
+        if case .done = result {
+            alertType = .thankYou
+            isAlertPresented = true
+        } else {
+            // cancelled
         }
         pendingDonationIdentifier = nil
     }
+
+    func handlePurchaseError(_ error: Error) {
+        ErrorHandler.shared.handle(
+            title: L10n.Donate.title,
+            message: L10n.Donate.Alerts.Purchase.Failure.message(AppError(error).localizedDescription)
+        )
+        pendingDonationIdentifier = nil
+    }
+
 }

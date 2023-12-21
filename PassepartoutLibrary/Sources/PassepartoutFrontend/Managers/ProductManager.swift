@@ -95,9 +95,10 @@ public final class ProductManager: NSObject, ObservableObject {
             self?.reloadReceipt()
         }
         reloadReceipt()
-        refreshProducts()
 
         Task {
+            await refreshProducts()
+
             let isBeta = await SandboxChecker().isBeta
             appType = overriddenAppType ?? (isBeta ? .beta : .freemium)
             pp_log.info("App type: \(appType)")
@@ -109,7 +110,7 @@ public final class ProductManager: NSObject, ObservableObject {
         inApp.canMakePurchases()
     }
 
-    public func refreshProducts() {
+    public func refreshProducts() async {
         let ids = LocalProduct.all
         guard !ids.isEmpty else {
             return
@@ -119,17 +120,15 @@ public final class ProductManager: NSObject, ObservableObject {
             return
         }
         isRefreshingProducts = true
-        Task {
-            do {
-                let productsMap = try await inApp.requestProducts(withIdentifiers: ids)
-                pp_log.debug("In-app products: \(productsMap.keys.map(\.rawValue))")
+        do {
+            let productsMap = try await inApp.requestProducts(withIdentifiers: ids)
+            pp_log.debug("In-app products: \(productsMap.keys.map(\.rawValue))")
 
-                products = Array(productsMap.values)
-                isRefreshingProducts = false
-            } catch {
-                pp_log.warning("Unable to list products: \(error)")
-                isRefreshingProducts = false
-            }
+            products = Array(productsMap.values)
+            isRefreshingProducts = false
+        } catch {
+            pp_log.warning("Unable to list products: \(error)")
+            isRefreshingProducts = false
         }
     }
 
@@ -167,31 +166,19 @@ public final class ProductManager: NSObject, ObservableObject {
         }
     }
 
-    public func purchase(_ product: InAppProduct, completionHandler: @escaping (Result<InAppPurchaseResult, Error>) -> Void) {
+    public func purchase(_ product: InAppProduct) async throws -> InAppPurchaseResult {
         guard let pid = LocalProduct(rawValue: product.productIdentifier) else {
+            assertionFailure("Unrecognized product: \(product)")
             pp_log.warning("Unrecognized product: \(product)")
-            return
+            return .cancelled
         }
-        Task {
-            do {
-                let result = try await inApp.purchase(productWithIdentifier: pid)
-                reloadReceipt()
-                completionHandler(.success(result))
-            } catch {
-                completionHandler(.failure(error))
-            }
-        }
+        let result = try await inApp.purchase(productWithIdentifier: pid)
+        reloadReceipt()
+        return result
     }
 
-    public func restorePurchases(completionHandler: @escaping (Error?) -> Void) {
-        Task {
-            do {
-                try await inApp.restorePurchases()
-                completionHandler(nil)
-            } catch {
-                completionHandler(error)
-            }
-        }
+    public func restorePurchases() async throws {
+        try await inApp.restorePurchases()
     }
 }
 

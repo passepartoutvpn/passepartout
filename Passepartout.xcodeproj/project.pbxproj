@@ -492,6 +492,7 @@
 		0ED89C1627DE0E05008B36D6 /* IntentEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentEditView.swift; sourceTree = "<group>"; };
 		0ED89C1B27DE3ABC008B36D6 /* ShortcutsView+Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortcutsView+Add.swift"; sourceTree = "<group>"; };
 		0ED89C1D27DE3F8D008B36D6 /* IntentAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentAddView.swift; sourceTree = "<group>"; };
+		0EDCEF692B337BEB0023A7FF /* PassepartoutLibrary.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PassepartoutLibrary.xctestplan; sourceTree = "<group>"; };
 		0EDDEC7C28D0DC130017802E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EDE02C127F61C79000FBE3C /* EditableTextList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextList.swift; sourceTree = "<group>"; };
 		0EDE8DBF20C86910004C739C /* PassepartoutOpenVPNTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutOpenVPNTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -804,6 +805,7 @@
 			children = (
 				0EE315DB2733104700F5D461 /* Packages */,
 				0E23B4A12298559800304C30 /* Config.xcconfig */,
+				0EDCEF692B337BEB0023A7FF /* PassepartoutLibrary.xctestplan */,
 				0E9AA982259F7674003FAFF1 /* Passepartout */,
 				0E57F63920C83FC5008323CF /* Products */,
 				374B9F085E1148C37CF9117A /* Frameworks */,
@@ -1131,7 +1133,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = "Davide De Rosa";
 				TargetAttributes = {
 					0E41BD96286711C3006346B4 = {
