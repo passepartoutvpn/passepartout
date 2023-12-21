@@ -28,12 +28,6 @@ import Foundation
 import PassepartoutCore
 import PassepartoutProviders
 
-public protocol LocalInApp: InAppProtocol where ProductIdentifier == LocalProduct {
-}
-
-extension StoreKitInApp: LocalInApp where ProductIdentifier == LocalProduct {
-}
-
 @MainActor
 public final class ProductManager: NSObject, ObservableObject {
     private let inApp: any LocalInApp
@@ -105,6 +99,8 @@ public final class ProductManager: NSObject, ObservableObject {
             reloadReceipt()
         }
     }
+
+    // MARK: Main interface
 
     public func canMakePayments() -> Bool {
         inApp.canMakePurchases()
@@ -180,25 +176,19 @@ public final class ProductManager: NSObject, ObservableObject {
     public func restorePurchases() async throws {
         try await inApp.restorePurchases()
     }
+
+    public func hasPurchased(_ product: LocalProduct) -> Bool {
+        isActivePurchase(product)
+    }
+
+    public func purchaseDate(forProduct product: LocalProduct) -> Date? {
+        purchaseDates[product]
+    }
 }
 
 // MARK: In-app eligibility
 
 extension ProductManager {
-    public func isCurrentPlatformVersion() -> Bool {
-        purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
-    }
-
-    public func isFullVersion() -> Bool {
-        if appType == .fullVersion {
-            return true
-        }
-        if isCurrentPlatformVersion() {
-            return true
-        }
-        return purchasedFeatures.contains(.fullVersion)
-    }
-
     public func isEligible(forFeature feature: LocalProduct) -> Bool {
         if let purchasedAppBuild = purchasedAppBuild {
             if feature == .networkSettings && buildProducts.hasProduct(.networkSettings, atBuild: purchasedAppBuild) {
@@ -206,9 +196,9 @@ extension ProductManager {
             }
         }
         if feature.isPlatformVersion {
-            return purchasedFeatures.contains(feature)
+            return isActivePurchase(feature)
         }
-        return isFullVersion() || purchasedFeatures.contains(feature)
+        return isFullVersion() || isActivePurchase(feature)
     }
 
     public func isEligible(forProvider providerName: ProviderName) -> Bool {
@@ -221,15 +211,33 @@ extension ProductManager {
     public func isEligibleForFeedback() -> Bool {
         appType == .beta || !purchasedFeatures.isEmpty
     }
+}
 
-    public func hasPurchased(_ product: LocalProduct) -> Bool {
-        purchasedFeatures.contains(product)
+extension ProductManager {
+    func isActivePurchase(_ feature: LocalProduct) -> Bool {
+        purchasedFeatures.contains(feature) && cancelledPurchases?.contains(feature) == false
     }
 
-    public func purchaseDate(forProduct product: LocalProduct) -> Date? {
-        purchaseDates[product]
+    func isActivePurchase(where predicate: (LocalProduct) -> Bool) -> Bool {
+        purchasedFeatures.contains(where: predicate) && cancelledPurchases?.contains(where: predicate) == false
+    }
+
+    func isCurrentPlatformVersion() -> Bool {
+        isActivePurchase(isMac ? .fullVersion_macOS : .fullVersion_iOS)
+    }
+
+    func isFullVersion() -> Bool {
+        if appType == .fullVersion {
+            return true
+        }
+        if isCurrentPlatformVersion() {
+            return true
+        }
+        return isActivePurchase(.fullVersion)
     }
 }
+
+// MARK: Receipt
 
 extension ProductManager {
     public func reloadReceipt(andNotify: Bool = true) {
@@ -279,6 +287,8 @@ extension ProductManager {
         cancelledPurchases = newCancelledPurchases
     }
 }
+
+// MARK: Helpers
 
 private extension ProductManager {
     var isMac: Bool {
