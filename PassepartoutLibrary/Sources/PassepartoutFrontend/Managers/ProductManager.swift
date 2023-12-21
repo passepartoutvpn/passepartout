@@ -106,6 +106,8 @@ public final class ProductManager: NSObject, ObservableObject {
         }
     }
 
+    // MARK: Main interface
+
     public func canMakePayments() -> Bool {
         inApp.canMakePurchases()
     }
@@ -180,25 +182,19 @@ public final class ProductManager: NSObject, ObservableObject {
     public func restorePurchases() async throws {
         try await inApp.restorePurchases()
     }
+
+    public func hasPurchased(_ product: LocalProduct) -> Bool {
+        purchasedFeatures.contains(product)
+    }
+
+    public func purchaseDate(forProduct product: LocalProduct) -> Date? {
+        purchaseDates[product]
+    }
 }
 
 // MARK: In-app eligibility
 
 extension ProductManager {
-    public func isCurrentPlatformVersion() -> Bool {
-        purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
-    }
-
-    public func isFullVersion() -> Bool {
-        if appType == .fullVersion {
-            return true
-        }
-        if isCurrentPlatformVersion() {
-            return true
-        }
-        return purchasedFeatures.contains(.fullVersion)
-    }
-
     public func isEligible(forFeature feature: LocalProduct) -> Bool {
         if let purchasedAppBuild = purchasedAppBuild {
             if feature == .networkSettings && buildProducts.hasProduct(.networkSettings, atBuild: purchasedAppBuild) {
@@ -221,15 +217,25 @@ extension ProductManager {
     public func isEligibleForFeedback() -> Bool {
         appType == .beta || !purchasedFeatures.isEmpty
     }
+}
 
-    public func hasPurchased(_ product: LocalProduct) -> Bool {
-        purchasedFeatures.contains(product)
+extension ProductManager {
+    func isCurrentPlatformVersion() -> Bool {
+        purchasedFeatures.contains(isMac ? .fullVersion_macOS : .fullVersion_iOS)
     }
 
-    public func purchaseDate(forProduct product: LocalProduct) -> Date? {
-        purchaseDates[product]
+    func isFullVersion() -> Bool {
+        if appType == .fullVersion {
+            return true
+        }
+        if isCurrentPlatformVersion() {
+            return true
+        }
+        return purchasedFeatures.contains(.fullVersion)
     }
 }
+
+// MARK: Receipt
 
 extension ProductManager {
     public func reloadReceipt(andNotify: Bool = true) {
@@ -279,6 +285,8 @@ extension ProductManager {
         cancelledPurchases = newCancelledPurchases
     }
 }
+
+// MARK: Helpers
 
 private extension ProductManager {
     var isMac: Bool {
