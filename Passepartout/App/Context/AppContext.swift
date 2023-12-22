@@ -97,6 +97,9 @@ private extension AppContext {
         coreContext.vpnManager.isOnDemandRulesSupported = {
             self.isEligibleForOnDemandRules()
         }
+        coreContext.vpnManager.isNetworkSettingsSupported = {
+            self.isEligibleForNetworkSettings()
+        }
 
         coreContext.vpnManager.currentState.$vpnStatus
             .removeDuplicates()
