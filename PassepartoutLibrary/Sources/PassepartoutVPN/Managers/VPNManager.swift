@@ -76,8 +76,8 @@ public final class VPNManager: ObservableObject {
         self.profileManager = profileManager
         self.providerManager = providerManager
         self.strategy = strategy
-        isNetworkSettingsSupported = { true }
-        isOnDemandRulesSupported = { true }
+        isNetworkSettingsSupported = { false }
+        isOnDemandRulesSupported = { false }
 
         currentState = ObservableVPNState()
     }
