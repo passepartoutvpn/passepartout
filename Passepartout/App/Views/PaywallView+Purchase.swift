@@ -166,14 +166,6 @@ private extension PaywallView.PurchaseView {
         return productManager.product(withIdentifier: .fullVersion)
     }
 
-    var skPlatformVersion: InAppProduct? {
-        #if targetEnvironment(macCatalyst)
-        productManager.product(withIdentifier: .fullVersion_macOS)
-        #else
-        productManager.product(withIdentifier: .fullVersion_iOS)
-        #endif
-    }
-
     var features: [InAppProduct] {
         productManager.featureProducts(excluding: {
             $0 == .fullVersion || $0.isPlatformVersion
@@ -184,7 +176,7 @@ private extension PaywallView.PurchaseView {
     }
 
     var productRowModels: [InAppProduct] {
-        [skFullVersion, skPlatformVersion]
+        [skFullVersion]
             .compactMap { $0 }
     }
 }
