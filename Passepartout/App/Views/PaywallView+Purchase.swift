@@ -75,6 +75,35 @@ extension PaywallView {
     }
 }
 
+private struct FeatureModel: Identifiable, Comparable {
+    let productIdentifier: String
+
+    let title: String
+
+    let subtitle: String?
+
+    init(localProduct: LocalProduct, title: String) {
+        productIdentifier = localProduct.rawValue
+        self.title = title
+        subtitle = nil
+    }
+
+    init(product: InAppProduct) {
+        productIdentifier = product.productIdentifier
+        title = product.localizedTitle
+        let description = product.localizedDescription
+        subtitle = description != title ? description : nil
+    }
+
+    var id: String {
+        productIdentifier
+    }
+
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.title.lowercased() < rhs.title.lowercased()
+    }
+}
+
 private struct PurchaseRow: View {
     var product: InAppProduct?
 
@@ -94,12 +123,12 @@ private struct PurchaseRow: View {
 private extension PaywallView.PurchaseView {
     var featuresSection: some View {
         Section {
-            ForEach(features, id: \.productIdentifier) { product in
+            ForEach(features) { feature in
                 VStack(alignment: .leading) {
-                    Text(product.localizedTitle)
+                    Text(feature.title)
                         .themeCellTitleStyle()
-                    if product.localizedDescription != product.localizedTitle {
-                        Text(product.localizedDescription)
+                    feature.subtitle.map {
+                        Text($0)
                             .themeCellSubtitleStyle()
                             .themeSecondaryTextStyle()
                     }
@@ -166,12 +195,12 @@ private extension PaywallView.PurchaseView {
         return productManager.product(withIdentifier: .fullVersion)
     }
 
-    var features: [InAppProduct] {
+    var features: [FeatureModel] {
         productManager.featureProducts(excluding: {
             $0 == .fullVersion || $0.isPlatformVersion
         })
-        .sorted {
-            $0.localizedTitle.lowercased() < $1.localizedTitle.lowercased()
+        .map {
+            FeatureModel(product: $0)
         }
     }
 
