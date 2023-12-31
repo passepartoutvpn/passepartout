@@ -26,9 +26,13 @@ echo $BUILD >$BUILD_FILE
 
 # set release notes
 if [[ $1 != "keep-metadata" ]]; then
-    ci/update-release-notes.sh ios && ci/update-release-notes.sh mac
+    ci/update-release-notes.sh ios &&
+        ci/update-release-notes.sh mac &&
+        ci/update-release-notes.sh tvos
 fi
-ci/copy-release-notes.sh ios && ci/copy-release-notes.sh mac
+ci/copy-release-notes.sh ios &&
+    ci/copy-release-notes.sh mac &&
+    ci/copy-release-notes.sh tvos
 
 # add build number
 git add $BASE_BUILD_FILE $BUILD_FILE

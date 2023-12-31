@@ -1,5 +1,6 @@
 ### Added
 
+- App for tvOS.
 - WireGuard: Show data count.
 
 ### Changed
