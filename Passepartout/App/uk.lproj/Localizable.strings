@@ -4,6 +4,25 @@
 //
 //  Created by Davide De Rosa on 6/13/18.
 //  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+"global.strings.policy" = "Політики";
+"global.strings.networks" = "Мережі";
+"global.strings.edit" = "Редагувати";
+"global.strings.unknown" = "Невідомо";
+/* MARK: ProfileView -> EndpointView */
+
+"endpoint.errors.endpoint_required" = "Будь ласка, оберіть точку підключення";
+
+"on_demand.sections.policy.footer.any" = "в будь якій мережі";
+"on_demand.sections.policy.footer.including" = "тільки в наступних мережах";
+"on_demand.sections.policy.footer.excluding" = "виключаючі наступні мережі";
+"on_demand.policy.any" = "Усі мережі";
+"on_demand.policy.including" = "Включити";
+"on_demand.policy.excluding" = "Виключити";
+
+"settings.sections.icloud.footer" = "Виключіть синхронизацію щоб видалити. Для того шоб видалити дані з iCloud безпечно, зробіть це на усіх ваших пристроях. Це не вплине на локальні профілі.";
+"settings.items.should_enable_cloud_syncing.caption" = "Синхронізація з iCloud";
+"settings.items.erase_cloud_store.caption" = "Видалити збереженне в iCloud";
+
 /* MARK: Global */
 
 "global.strings.cancel" = "Скасувати";
@@ -64,6 +83,7 @@
 "global.errors.missing_account" = "Відсутній обліковий запис";
 "global.errors.missing_provider_server" = "Відсутнє розташування";
 "global.errors.missing_provider_preset" = "Відсутній пресет";
+"global.errors.tunnel_expired" = "Час на підключення закінчився";
 
 /* MARK: Menus */
 
@@ -113,6 +133,7 @@
 /* MARK: OrganizerView */
 
 "organizer.sections.active" = "Використовується";
+"organizer.sections.tv.profiles_list.header.p1" = "Відкрийте Passepartout на вашому iOS чи macOS пристрої та включіть перемикач \"Apple TV\" в профілі щоб він тут з'явився";
 /* MARK: OrganizerView */
 "organizer.empty.no_profiles" = "Немає профілів";
 
@@ -144,6 +165,9 @@
 "profile.sections.vpn.footer" = "З'єднання буде встановлено за потреби";
 "profile.sections.status.header" = "З'єднання";
 "profile.sections.provider_infrastructure.footer" = "Останнє оновлення %@.";
+"profile.sections.tv.footer.encryption" = "Профілі зашифровано та доступні на вашому Apple TV через iCloud.";
+"profile.sections.tv.footer.restricted.p1" = "Однак з’єднання розірветься через %d хвилин.";
+"profile.sections.tv.footer.restricted.p2" = "Придбайте щоб зняти обмеження.";
 "profile.sections.vpn_survives_sleep.footer" = "Вимкніть, щоб покращити використання акумулятора, може привести до тимчасових затримок у зв’язку з повторним підключенням після \"пробудження\".";
 "profile.sections.vpn_resolves_hostname.footer" = "Бажано в більшості мереж і обов’язково потрібне в деяких мережах IPv6. Вимкніть там, де DNS заблоковано, або для прискорення з'єднання, коли DNS повільно відповідає";
 "profile.sections.feedback.header" = "Відгук";
@@ -159,6 +183,8 @@
 "profile.items.only_shows_favorites.caption" = "Показувати лише обрані місця";
 "profile.items.vpn_survives_sleep.caption" = "Залишати включеним під час сну";
 "profile.items.vpn_resolves_hostname.caption" = "Розпізнати ім’я хоста провайдера";
+"profile.items.tv_sharing.caption.limited" = "Обмежено %d хвилинами";
+"profile.items.expires_at.caption" = "Термін дії";
 
 "profile.alerts.rename.title" = "Змінити назву профілю";
 "profile.alerts.reconnect_vpn.message" = "Бажаєте заново підключитися до VPN?";
@@ -202,7 +228,6 @@
 "account.sections.guidance.footer.infrastructure.windscribe" = "Знайдіть ваші дані для входу %@ у OpenVPN Config Generator на веб-сайті.";
 
 /* MARK: ProfileView -> EndpointView */
-
 "endpoint.wireguard.items.peer.caption" = "Вузол";
 "endpoint.wireguard.items.preshared_key.caption" = "Спільний ключ";
 "endpoint.wireguard.items.allowed_ip.caption" = "Дозволений IP";
@@ -255,9 +280,8 @@
 "on_demand.items.active.caption" = "Довірені";
 "on_demand.items.mobile.caption" = "Мобільна мережа";
 "on_demand.items.ethernet.caption" = "Довірені ethernet підключення";
-"on_demand.items.ethernet.description" = "Увімкніть, щоб додати до довірених дротових підключень.";
-"on_demand.items.policy.caption" = "Дов. мережа вимикає VPN";
 
+"on_demand.items.policy.caption" = "Дов. мережа вимикає VPN";
 /* MARK: ProfileView -> DiagnosticsView */
 
 "diagnostics.title" = "Диагностика";
@@ -306,6 +330,7 @@
 "paywall.items.full_version.extra_description" = "Всі провайдери (в тому числі майбутні)\n%@";
 "paywall.items.restore.title" = "Відновити покупки";
 "paywall.items.restore.description" = "Якщо ви придбали цю програму чи функцію раніше, ви можете відновити покупки, і цей екран більше не відображатиметься";
+"paywall.alerts.purchase.appletv.success.message" = "Дякую! Ліміти по часу буде прибрано, щойно синхронізується iCloud. Зачекайте кілька секунд, а потім перезапустіть з’єднання в програмі на AppleTV.";
 
 /* MARK: DonateView */
 
