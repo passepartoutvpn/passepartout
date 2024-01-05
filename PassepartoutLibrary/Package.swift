@@ -33,8 +33,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-//        .package(url: "https://github.com/passepartoutvpn/tunnelkit", from: "6.3.0"),
-        .package(url: "https://github.com/passepartoutvpn/tunnelkit", revision: "708c785e615f5715ce08386c772c92fb45730a3a"),
+//        .package(url: "https://github.com/passepartoutvpn/tunnelkit", from: "6.3.2"),
+        .package(url: "https://github.com/passepartoutvpn/tunnelkit", revision: "f2c0fb079e2a318a4717d5fb8daa8f149174dadd"),
 //        .package(name: "TunnelKit", path: "../../tunnelkit"),
         .package(url: "https://github.com/zoul/generic-json-swift", from: "2.0.0"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "1.9.0")
