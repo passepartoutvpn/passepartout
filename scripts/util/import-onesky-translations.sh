@@ -1,6 +1,8 @@
 #!/bin/bash
 SRC="$1"
 DST="$2"
-for LANG in "de" "el" "en" "es" "fr" "it" "nl" "pl" "pt" "ru" "sv" "zh-Hans"; do
+LANG_FOLDERS=`cd $DST && ls -d *.lproj`
+for FOLDER in $LANG_FOLDERS; do
+    LANG="${FOLDER%.lproj}"
     cp $SRC/$LANG/* $DST/$LANG.lproj
 done

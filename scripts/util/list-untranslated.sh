@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR="Passepartout/AppShared"
+DIR="Passepartout/App"
 FILENAME="Localizable.strings"
 
 LANG_BASE="en"
