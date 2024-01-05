@@ -1,10 +1,4 @@
-### Added
+### Fixed
 
-- App for tvOS.
-- WireGuard: Show data count.
-
-### Changed
-
-- Upgrade OpenSSL to 3.2.0.
-- Encrypt profiles stored to iCloud.
+- OpenVPN: Regressions from the upgrade to OpenSSL 3.
 
