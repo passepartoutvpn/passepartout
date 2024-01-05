@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        name: ["iOS", "macOS"]
+        name: ["iOS", "macOS", "tvOS"]
         include:
           - name: "iOS"
             platform: "ios"
