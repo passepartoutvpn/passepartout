@@ -50,7 +50,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/tunnelkit",
       "state" : {
-        "revision" : "708c785e615f5715ce08386c772c92fb45730a3a"
+        "revision" : "f2c0fb079e2a318a4717d5fb8daa8f149174dadd"
       }
     },
     {
@@ -58,7 +58,6 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/wireguard-apple",
       "state" : {
-        "branch" : "develop",
         "revision" : "b79f0f150356d8200a64922ecf041dd020140aa0"
       }
     }

@@ -259,7 +259,7 @@ extension TunnelKitOpenVPNError: LocalizedError {
         case .serverCompression, .lzo:
             return V.compression
 
-        case .networkChanged, .linkError:
+        case .networkChanged:
             return V.network
 
         case .routing:
