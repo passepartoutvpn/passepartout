@@ -27,6 +27,8 @@ jobs:
             use_version: true
           - name: "macOS"
             platform: "mac"
+          - name: "tvOS"
+            platform: "tvos"
     env:
       PLATFORM: ${{ matrix.platform }}
       MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
