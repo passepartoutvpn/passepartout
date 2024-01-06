@@ -85,10 +85,10 @@ jobs:
           PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ secrets.PILOT_NOTIFY_EXTERNAL_TESTERS }}
           CHANGELOG_PREFACE: ${{ secrets.CHANGELOG_PREFACE }}
         run: |
-          if [ $PLATFORM == "ios" ]; then
-            export PILOT_IPA="$GYM_OUTPUT_DIRECTORY/Passepartout.ipa"
-          else
+          if [ $PLATFORM == "mac" ]; then
             export PILOT_PKG="$GYM_OUTPUT_DIRECTORY/Passepartout.pkg"
+          else
+            export PILOT_IPA="$GYM_OUTPUT_DIRECTORY/Passepartout.ipa"
           fi
           export PILOT_CHANGELOG=`ci/build-changelog.sh $PLATFORM`
           bundle exec fastlane --env $PLATFORM,beta run pilot
