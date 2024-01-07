@@ -98,6 +98,7 @@ private extension DiagnosticsView.DebugLogGroup {
         navigationLink(
             withTitle: L10n.Diagnostics.Items.AppLog.title,
             url: appLogURL,
+            filename: Unlocalized.Issues.Filenames.appLog,
             refreshInterval: nil
         )
     }
@@ -106,19 +107,22 @@ private extension DiagnosticsView.DebugLogGroup {
         navigationLink(
             withTitle: Unlocalized.VPN.vpn,
             url: tunnelLogURL,
+            filename: Unlocalized.Issues.Filenames.tunnelLog,
             refreshInterval: refreshInterval
         )
     }
 
-    func navigationLink(withTitle title: String, url: URL?, refreshInterval: TimeInterval?) -> some View {
+    func navigationLink(withTitle title: String, url: URL?, filename: String, refreshInterval: TimeInterval?) -> some View {
         NavigationLink(title) {
             url.map {
                 DebugLogView(
                     title: title,
                     url: $0,
+                    filename: filename,
                     refreshInterval: refreshInterval
                 )
             }
-        }.disabled(url == nil)
+        }
+        .disabled(url == nil)
     }
 }

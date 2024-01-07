@@ -37,30 +37,20 @@ struct ReportIssueView: View {
 
     private let messageBody: String
 
-    private let attachments: [MailComposerView.Attachment]
+    private let logs: [MailComposerView.Attachment]
 
     init(
         isPresented: Binding<Bool>,
         vpnProtocol: VPNProtocolType,
         messageBody: String,
-        logURLs: [URL]
+        logs: [MailComposerView.Attachment]
     ) {
         _isPresented = isPresented
 
         toRecipients = [Unlocalized.Issues.recipient]
         subject = Unlocalized.Issues.subject
         self.messageBody = messageBody
-
-        attachments = logURLs.map {
-            let logContent = $0.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)
-            let attachment = DebugLog(content: logContent).decoratedData()
-
-            return MailComposerView.Attachment(
-                data: attachment,
-                mimeType: Unlocalized.Issues.MIME.debugLog,
-                fileName: Unlocalized.Issues.Filenames.debugLog
-            )
-        }
+        self.logs = logs
     }
 
     var body: some View {
@@ -69,7 +59,7 @@ struct ReportIssueView: View {
             toRecipients: toRecipients,
             subject: subject,
             messageBody: messageBody,
-            attachments: attachments
+            attachments: logs
         )
     }
 }

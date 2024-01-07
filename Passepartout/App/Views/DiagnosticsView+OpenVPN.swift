@@ -139,7 +139,7 @@ private extension DiagnosticsView.OpenVPNView {
             isPresented: $isReportingIssue,
             vpnProtocol: vpnProtocol,
             messageBody: messageBody,
-            logURLs: [appLogURL, tunnelLogURL].compactMap { $0 }
+            logs: logs
         )
     }
 
@@ -166,6 +166,26 @@ private extension DiagnosticsView.OpenVPNView {
             lastUpdate: lastUpdate,
             purchasedProductIdentifiers: productManager.purchasedProductIdentifiers
         )
+    }
+
+    var logs: [MailComposerView.Attachment] {
+        var pairs: [(url: URL, filename: String)] = []
+        if let appLogURL {
+            pairs.append((appLogURL, Unlocalized.Issues.Filenames.appLog))
+        }
+        if let tunnelLogURL {
+            pairs.append((tunnelLogURL, Unlocalized.Issues.Filenames.tunnelLog))
+        }
+        return pairs.map {
+            let logContent = $0.url.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)
+            let attachment = DebugLog(content: logContent).decoratedData()
+
+            return MailComposerView.Attachment(
+                data: attachment,
+                mimeType: Unlocalized.Issues.Filenames.mime,
+                fileName: $0.filename
+            )
+        }
     }
 
     var appLogURL: URL? {

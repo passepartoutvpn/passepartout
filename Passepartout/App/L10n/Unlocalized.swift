@@ -79,19 +79,21 @@ enum Unlocalized {
         static let maxLogBytes = UInt64(20000)
 
         enum Filenames {
-            static var debugLog: String {
+            static let mime = "text/plain"
+
+            static var appLog: String {
                 let fmt = DateFormatter()
                 fmt.dateFormat = "yyyyMMdd-HHmmss"
                 let iso = fmt.string(from: Date())
-                return "debug-\(iso).txt"
+                return "app-\(iso).txt"
             }
-        }
 
-        enum MIME {
-            static let debugLog = "text/plain"
-
-//            static let configuration = "application/x-openvpn-profile"
-            static let configuration = "text/plain"
+            static var tunnelLog: String {
+                let fmt = DateFormatter()
+                fmt.dateFormat = "yyyyMMdd-HHmmss"
+                let iso = fmt.string(from: Date())
+                return "tunnel-\(iso).txt"
+            }
         }
 
         private static func rawBody(_ description: String, _ metadata: String) -> String {
