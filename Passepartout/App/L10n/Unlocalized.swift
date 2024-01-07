@@ -113,9 +113,10 @@ enum Unlocalized {
             content.append("\n--\n")
             content.append(DebugLog.decoratedMetadataString())
             if let providerMetadata {
-                content.append("Provider: \(providerMetadata.fullName)")
                 if let lastUpdate {
-                    content.append("Last updated: \(lastUpdate)")
+                    content.append("Provider: \(providerMetadata.fullName) (last updated: \(lastUpdate))")
+                } else {
+                    content.append("Provider: \(providerMetadata.fullName)")
                 }
             }
             if let purchasedProductIdentifiers {
