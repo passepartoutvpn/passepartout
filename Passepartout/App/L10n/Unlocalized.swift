@@ -74,7 +74,7 @@ enum Unlocalized {
 
         static let subject = "\(appName) - Report issue"
 
-        static let bodySentinel = "description of the issue:"
+        static let bodySentinel = "<replace this with a description of the issue>"
 
         static let maxLogBytes = UInt64(20000)
 
@@ -85,11 +85,6 @@ enum Unlocalized {
                 let iso = fmt.string(from: Date())
                 return "debug-\(iso).txt"
             }
-
-            static let configuration = "profile.ovpn"
-//            static let configuration = "profile.ovpn.txt"
-
-            static let template = "description of the issue: "
         }
 
         enum MIME {
