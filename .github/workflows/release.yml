@@ -122,6 +122,9 @@ jobs:
       - name: Publish on TestFlight (macOS)
         run: |
           bundle exec fastlane --env mac,beta run pilot
+      - name: Publish on TestFlight (tvOS)
+        run: |
+          bundle exec fastlane --env tvos,beta run pilot
   submit_for_app_review:
     name: Submit to App Review
     runs-on: ubuntu-latest
@@ -146,6 +149,9 @@ jobs:
       - name: Submit for App Review (macOS)
         run: |
           bundle exec fastlane --env mac deliver_review add_id_info_uses_idfa:false
+      - name: Submit for App Review (tvOS)
+        run: |
+          bundle exec fastlane --env tvos deliver_review add_id_info_uses_idfa:false
   publish_to_app_store:
     name: Publish to App Store
     runs-on: ubuntu-latest
