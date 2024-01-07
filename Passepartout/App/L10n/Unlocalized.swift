@@ -111,7 +111,7 @@ enum Unlocalized {
             var content: [String] = ["Hi,\n"]
             content.append(bodySentinel)
             content.append("\n--\n")
-            content.append(DebugLog(content: "").decoratedString())
+            content.append(DebugLog.decoratedMetadataString())
             if let providerMetadata {
                 content.append("Provider: \(providerMetadata.fullName)")
                 if let lastUpdate {

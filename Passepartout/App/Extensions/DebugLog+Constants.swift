@@ -27,6 +27,14 @@ import Foundation
 import PassepartoutLibrary
 
 extension DebugLog {
+    static func decoratedMetadataString() -> String {
+        decoratedMetadataString(Constants.Global.appName, Constants.Global.appVersionString)
+    }
+
+    static func decoratedMetadataData() -> Data {
+        decoratedMetadataData(Constants.Global.appName, Constants.Global.appVersionString)
+    }
+
     func decoratedString() -> String {
         decoratedString(Constants.Global.appName, Constants.Global.appVersionString)
     }
