@@ -147,7 +147,8 @@ private extension DiagnosticsView.OpenVPNView {
             vpnProtocol: vpnProtocol,
             logURLs: [appLogURL, tunnelLogURL].compactMap { $0 },
             providerMetadata: metadata,
-            lastUpdate: lastUpdate
+            lastUpdate: lastUpdate,
+            purchasedProductIdentifiers: productManager.purchasedProductIdentifiers
         )
     }
 

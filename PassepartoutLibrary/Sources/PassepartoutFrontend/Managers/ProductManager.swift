@@ -48,6 +48,10 @@ public final class ProductManager: NSObject, ObservableObject {
 
     //
 
+    public var purchasedProductIdentifiers: Set<String> {
+        Set(purchasedFeatures.map(\.rawValue))
+    }
+
     private var purchasedAppBuild: Int?
 
     private var purchasedFeatures: Set<LocalProduct>

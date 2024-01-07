@@ -44,7 +44,8 @@ struct ReportIssueView: View {
         vpnProtocol: VPNProtocolType,
         logURLs: [URL],
         providerMetadata: ProviderMetadata? = nil,
-        lastUpdate: Date? = nil
+        lastUpdate: Date? = nil,
+        purchasedProductIdentifiers: Set<String>? = nil
     ) {
         _isPresented = isPresented
 
@@ -55,11 +56,15 @@ struct ReportIssueView: View {
         var bodyMetadata = "--\n\n"
         bodyMetadata += DebugLog(content: "").decoratedString()
 
-        if let metadata = providerMetadata {
-            bodyMetadata += "Provider: \(metadata.fullName)\n"
-            if let lastUpdate = lastUpdate {
+        if let providerMetadata {
+            bodyMetadata += "Provider: \(providerMetadata.fullName)\n"
+            if let lastUpdate {
                 bodyMetadata += "Last updated: \(lastUpdate)\n"
             }
+            bodyMetadata += "\n"
+        }
+        if let purchasedProductIdentifiers {
+            bodyMetadata += "Purchased: \(purchasedProductIdentifiers)\n"
             bodyMetadata += "\n"
         }
         bodyMetadata += "--"
