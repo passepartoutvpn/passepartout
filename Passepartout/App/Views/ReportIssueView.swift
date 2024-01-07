@@ -42,7 +42,7 @@ struct ReportIssueView: View {
     init(
         isPresented: Binding<Bool>,
         vpnProtocol: VPNProtocolType,
-        logURL: URL?,
+        logURLs: [URL],
         providerMetadata: ProviderMetadata? = nil,
         lastUpdate: Date? = nil
     ) {
@@ -65,18 +65,16 @@ struct ReportIssueView: View {
         bodyMetadata += "--"
         messageBody = Unlocalized.Issues.body(bodyContent, bodyMetadata)
 
-        var attachments: [MailComposerView.Attachment] = []
-        if let logURL = logURL {
-            let logContent = logURL.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)
+        attachments = logURLs.map {
+            let logContent = $0.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)
             let attachment = DebugLog(content: logContent).decoratedData()
 
-            attachments.append(.init(
+            return MailComposerView.Attachment(
                 data: attachment,
                 mimeType: Unlocalized.Issues.MIME.debugLog,
                 fileName: Unlocalized.Issues.Filenames.debugLog
-            ))
+            )
         }
-        self.attachments = attachments
     }
 
     var body: some View {

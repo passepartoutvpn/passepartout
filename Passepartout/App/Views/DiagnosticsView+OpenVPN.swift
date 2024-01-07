@@ -135,7 +135,6 @@ private extension DiagnosticsView.OpenVPNView {
     }
 
     func reportIssueView() -> some View {
-        let logURL = vpnManager.debugLogURL(forProtocol: vpnProtocol)
         var metadata: ProviderMetadata?
         var lastUpdate: Date?
         if let name = providerName {
@@ -146,7 +145,7 @@ private extension DiagnosticsView.OpenVPNView {
         return ReportIssueView(
             isPresented: $isReportingIssue,
             vpnProtocol: vpnProtocol,
-            logURL: logURL,
+            logURLs: [appLogURL, tunnelLogURL].compactMap { $0 },
             providerMetadata: metadata,
             lastUpdate: lastUpdate
         )
