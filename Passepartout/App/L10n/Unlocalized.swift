@@ -74,33 +74,54 @@ enum Unlocalized {
 
         static let subject = "\(appName) - Report issue"
 
-        static func body(_ description: String, _ metadata: String) -> String {
-            "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards"
-        }
-
-        static let template = "description of the issue: "
+        static let bodySentinel = "<replace this with a description of the issue>"
 
         static let maxLogBytes = UInt64(20000)
 
         enum Filenames {
-            static var debugLog: String {
+            static let mime = "text/plain"
+
+            static var appLog: String {
                 let fmt = DateFormatter()
                 fmt.dateFormat = "yyyyMMdd-HHmmss"
                 let iso = fmt.string(from: Date())
-                return "debug-\(iso).txt"
+                return "app-\(iso).txt"
             }
 
-            static let configuration = "profile.ovpn"
-//            static let configuration = "profile.ovpn.txt"
-
-            static let template = "description of the issue: "
+            static var tunnelLog: String {
+                let fmt = DateFormatter()
+                fmt.dateFormat = "yyyyMMdd-HHmmss"
+                let iso = fmt.string(from: Date())
+                return "tunnel-\(iso).txt"
+            }
         }
 
-        enum MIME {
-            static let debugLog = "text/plain"
+        private static func rawBody(_ description: String, _ metadata: String) -> String {
+            "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards"
+        }
 
-//            static let configuration = "application/x-openvpn-profile"
-            static let configuration = "text/plain"
+        static func body(
+            providerMetadata: ProviderMetadata?,
+            lastUpdate: Date?,
+            purchasedProductIdentifiers: Set<String>?
+        ) -> String {
+            var content: [String] = ["Hi,\n"]
+            content.append(bodySentinel)
+            content.append("\n--\n")
+            content.append(DebugLog.decoratedMetadataString())
+            if let providerMetadata {
+                if let lastUpdate {
+                    content.append("Provider: \(providerMetadata.fullName) (last updated: \(lastUpdate))")
+                } else {
+                    content.append("Provider: \(providerMetadata.fullName)")
+                }
+            }
+            if let purchasedProductIdentifiers {
+                content.append("Purchased: \(purchasedProductIdentifiers)")
+            }
+            content.append("\n--\n")
+            content.append("Regards")
+            return content.joined(separator: "\n")
         }
     }
 

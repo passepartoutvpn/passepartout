@@ -31,23 +31,23 @@ import AppKit
 #endif
 
 extension DebugLog {
-    public func decoratedString(_ appName: String, _ appVersion: String) -> String {
+    public static func decoratedMetadataString(_ appName: String, _ appVersion: String) -> String {
         let osVersion: String
         let deviceType: String?
 
-        #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS)
         let device: UIDevice = .current
         osVersion = "\(device.systemName) \(device.systemVersion)"
-        #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
         deviceType = "\(device.model) (Catalyst)"
-        #else
+#else
         deviceType = "\(device.model) (\(device.userInterfaceIdiom.debugDescription))"
-        #endif
-        #else
+#endif
+#else
         let os = ProcessInfo().operatingSystemVersion
         osVersion = "macOS \(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
         deviceType = nil
-        #endif
+#endif
 
         var metadata = [
             "App: \(appName) \(appVersion)",
@@ -57,10 +57,20 @@ extension DebugLog {
             metadata.append("Device: \(deviceType)")
         }
 
-        var fullText = metadata.joined(separator: "\n")
-        fullText += "\n\n"
-        fullText += content
-        return fullText
+        return metadata.joined(separator: "\n")
+    }
+
+    public func decoratedString(_ appName: String, _ appVersion: String) -> String {
+        [Self.decoratedMetadataString(appName, appVersion), content]
+            .joined(separator: "\n\n")
+    }
+
+    public static func decoratedMetadataData(_ appName: String, _ appVersion: String) -> Data {
+        guard let data = decoratedMetadataString(appName, appVersion).data(using: .utf8) else {
+            assertionFailure("Could not encode log metadata to UTF8?")
+            return Data()
+        }
+        return data
     }
 
     public func decoratedData(_ appName: String, _ appVersion: String) -> Data {

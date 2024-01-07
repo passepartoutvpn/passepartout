@@ -135,20 +135,11 @@ private extension DiagnosticsView.OpenVPNView {
     }
 
     func reportIssueView() -> some View {
-        let logURL = vpnManager.debugLogURL(forProtocol: vpnProtocol)
-        var metadata: ProviderMetadata?
-        var lastUpdate: Date?
-        if let name = providerName {
-            metadata = providerManager.provider(withName: name)
-            lastUpdate = providerManager.lastUpdate(name, vpnProtocol: vpnProtocol)
-        }
-
-        return ReportIssueView(
+        ReportIssueView(
             isPresented: $isReportingIssue,
             vpnProtocol: vpnProtocol,
-            logURL: logURL,
-            providerMetadata: metadata,
-            lastUpdate: lastUpdate
+            messageBody: messageBody,
+            logs: logs
         )
     }
 
@@ -161,6 +152,40 @@ private extension DiagnosticsView.OpenVPNView {
         }
         // "withFallbacks: false" for view to hide nil options
         return cfg.builder(withFallbacks: false)
+    }
+
+    var messageBody: String {
+        var providerMetadata: ProviderMetadata?
+        var lastUpdate: Date?
+        if let name = providerName {
+            providerMetadata = providerManager.provider(withName: name)
+            lastUpdate = providerManager.lastUpdate(name, vpnProtocol: vpnProtocol)
+        }
+        return Unlocalized.Issues.body(
+            providerMetadata: providerMetadata,
+            lastUpdate: lastUpdate,
+            purchasedProductIdentifiers: productManager.purchasedProductIdentifiers
+        )
+    }
+
+    var logs: [MailComposerView.Attachment] {
+        var pairs: [(url: URL, filename: String)] = []
+        if let appLogURL {
+            pairs.append((appLogURL, Unlocalized.Issues.Filenames.appLog))
+        }
+        if let tunnelLogURL {
+            pairs.append((tunnelLogURL, Unlocalized.Issues.Filenames.tunnelLog))
+        }
+        return pairs.map {
+            let logContent = $0.url.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)
+            let attachment = DebugLog(content: logContent).decoratedData()
+
+            return MailComposerView.Attachment(
+                data: attachment,
+                mimeType: Unlocalized.Issues.Filenames.mime,
+                fileName: $0.filename
+            )
+        }
     }
 
     var appLogURL: URL? {
@@ -189,9 +214,7 @@ private extension DiagnosticsView.OpenVPNView {
 
     func openReportIssueMailTo() {
         let V = Unlocalized.Issues.self
-        let body = V.body(V.template, DebugLog(content: "--").decoratedString())
-
-        guard let url = URL.mailto(to: V.recipient, subject: V.subject, body: body) else {
+        guard let url = URL.mailto(to: V.recipient, subject: V.subject, body: messageBody) else {
             return
         }
         guard URL.open(url) else {

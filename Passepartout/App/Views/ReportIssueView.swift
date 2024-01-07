@@ -37,46 +37,20 @@ struct ReportIssueView: View {
 
     private let messageBody: String
 
-    private let attachments: [MailComposerView.Attachment]
+    private let logs: [MailComposerView.Attachment]
 
     init(
         isPresented: Binding<Bool>,
         vpnProtocol: VPNProtocolType,
-        logURL: URL?,
-        providerMetadata: ProviderMetadata? = nil,
-        lastUpdate: Date? = nil
+        messageBody: String,
+        logs: [MailComposerView.Attachment]
     ) {
         _isPresented = isPresented
 
         toRecipients = [Unlocalized.Issues.recipient]
         subject = Unlocalized.Issues.subject
-
-        let bodyContent = Unlocalized.Issues.template
-        var bodyMetadata = "--\n\n"
-        bodyMetadata += DebugLog(content: "").decoratedString()
-
-        if let metadata = providerMetadata {
-            bodyMetadata += "Provider: \(metadata.fullName)\n"
-            if let lastUpdate = lastUpdate {
-                bodyMetadata += "Last updated: \(lastUpdate)\n"
-            }
-            bodyMetadata += "\n"
-        }
-        bodyMetadata += "--"
-        messageBody = Unlocalized.Issues.body(bodyContent, bodyMetadata)
-
-        var attachments: [MailComposerView.Attachment] = []
-        if let logURL = logURL {
-            let logContent = logURL.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)
-            let attachment = DebugLog(content: logContent).decoratedData()
-
-            attachments.append(.init(
-                data: attachment,
-                mimeType: Unlocalized.Issues.MIME.debugLog,
-                fileName: Unlocalized.Issues.Filenames.debugLog
-            ))
-        }
-        self.attachments = attachments
+        self.messageBody = messageBody
+        self.logs = logs
     }
 
     var body: some View {
@@ -85,7 +59,7 @@ struct ReportIssueView: View {
             toRecipients: toRecipients,
             subject: subject,
             messageBody: messageBody,
-            attachments: attachments
+            attachments: logs
         )
     }
 }

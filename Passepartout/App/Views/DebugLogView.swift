@@ -32,6 +32,8 @@ struct DebugLogView: View {
 
     private let url: URL
 
+    private let shareFilename: String
+
     private let timer: AnyPublisher<Date, Never>
 
     @State private var logLines: [String] = []
@@ -44,12 +46,11 @@ struct DebugLogView: View {
 
     private let appVersion = Constants.Global.appVersionString
 
-    private let shareFilename = Unlocalized.Issues.Filenames.debugLog
-
-    init(title: String, url: URL, refreshInterval: TimeInterval?) {
+    init(title: String, url: URL, filename: String, refreshInterval: TimeInterval?) {
         self.title = title
         self.url = url
-        if let refreshInterval = refreshInterval {
+        shareFilename = filename
+        if let refreshInterval {
             timer = Timer.TimerPublisher(interval: refreshInterval, runLoop: .main, mode: .common)
                 .autoconnect()
                 .eraseToAnyPublisher()
