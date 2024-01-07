@@ -42,33 +42,14 @@ struct ReportIssueView: View {
     init(
         isPresented: Binding<Bool>,
         vpnProtocol: VPNProtocolType,
-        logURLs: [URL],
-        providerMetadata: ProviderMetadata? = nil,
-        lastUpdate: Date? = nil,
-        purchasedProductIdentifiers: Set<String>? = nil
+        messageBody: String,
+        logURLs: [URL]
     ) {
         _isPresented = isPresented
 
         toRecipients = [Unlocalized.Issues.recipient]
         subject = Unlocalized.Issues.subject
-
-        let bodyContent = Unlocalized.Issues.template
-        var bodyMetadata = "--\n\n"
-        bodyMetadata += DebugLog(content: "").decoratedString()
-
-        if let providerMetadata {
-            bodyMetadata += "Provider: \(providerMetadata.fullName)\n"
-            if let lastUpdate {
-                bodyMetadata += "Last updated: \(lastUpdate)\n"
-            }
-            bodyMetadata += "\n"
-        }
-        if let purchasedProductIdentifiers {
-            bodyMetadata += "Purchased: \(purchasedProductIdentifiers)\n"
-            bodyMetadata += "\n"
-        }
-        bodyMetadata += "--"
-        messageBody = Unlocalized.Issues.body(bodyContent, bodyMetadata)
+        self.messageBody = messageBody
 
         attachments = logURLs.map {
             let logContent = $0.trailingContent(bytes: Unlocalized.Issues.maxLogBytes)

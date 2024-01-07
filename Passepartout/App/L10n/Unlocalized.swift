@@ -74,11 +74,7 @@ enum Unlocalized {
 
         static let subject = "\(appName) - Report issue"
 
-        static func body(_ description: String, _ metadata: String) -> String {
-            "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards"
-        }
-
-        static let template = "description of the issue: "
+        static let bodySentinel = "description of the issue:"
 
         static let maxLogBytes = UInt64(20000)
 
@@ -101,6 +97,33 @@ enum Unlocalized {
 
 //            static let configuration = "application/x-openvpn-profile"
             static let configuration = "text/plain"
+        }
+
+        private static func rawBody(_ description: String, _ metadata: String) -> String {
+            "Hi,\n\n\(description)\n\n\(metadata)\n\nRegards"
+        }
+
+        static func body(
+            providerMetadata: ProviderMetadata?,
+            lastUpdate: Date?,
+            purchasedProductIdentifiers: Set<String>?
+        ) -> String {
+            var content: [String] = ["Hi,\n"]
+            content.append(bodySentinel)
+            content.append("\n--\n")
+            content.append(DebugLog(content: "").decoratedString())
+            if let providerMetadata {
+                content.append("Provider: \(providerMetadata.fullName)")
+                if let lastUpdate {
+                    content.append("Last updated: \(lastUpdate)")
+                }
+            }
+            if let purchasedProductIdentifiers {
+                content.append("Purchased: \(purchasedProductIdentifiers)")
+            }
+            content.append("\n--\n")
+            content.append("Regards")
+            return content.joined(separator: "\n")
         }
     }
 
