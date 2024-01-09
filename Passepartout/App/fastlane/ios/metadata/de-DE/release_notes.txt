@@ -1,4 +1,4 @@
 ### Fixed
 
-- OpenVPN: Regressions from the upgrade to OpenSSL 3.
+- Regression in purchase elegibility predicate.
 
