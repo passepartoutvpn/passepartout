@@ -219,11 +219,11 @@ extension ProductManager {
 
 extension ProductManager {
     func isActivePurchase(_ feature: LocalProduct) -> Bool {
-        purchasedFeatures.contains(feature) && cancelledPurchases?.contains(feature) == false
+        purchasedFeatures.contains(feature) && cancelledPurchases?.contains(feature) != true
     }
 
     func isActivePurchase(where predicate: (LocalProduct) -> Bool) -> Bool {
-        purchasedFeatures.contains(where: predicate) && cancelledPurchases?.contains(where: predicate) == false
+        purchasedFeatures.contains(where: predicate) && cancelledPurchases?.contains(where: predicate) != true
     }
 
     func isCurrentPlatformVersion() -> Bool {
