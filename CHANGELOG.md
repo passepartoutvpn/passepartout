@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 2.3.2 (2024-01-10)
+## 2.3.2 (2024-01-11)
 
 ### Fixed
 
@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Purchase is not credited if any refund was issued in the past. [#461](https://github.com/passepartoutvpn/passepartout-apple/issues/461)
 - On-demand not applying to wired connections. [#463](https://github.com/passepartoutvpn/passepartout-apple/pull/463)
 
-## 2.3.2 (2024-01-10)
+## 2.3.2 (2024-01-11)
 
 ### Fixed
 
