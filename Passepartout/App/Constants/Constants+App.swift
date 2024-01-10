@@ -163,10 +163,11 @@ extension Constants {
         private static let parentPath = "Library/Caches"
 
         static let level: LoggerLevel = {
-            guard let levelString = ProcessInfo.processInfo.environment["LOG_LEVEL"], let levelNum = Int(levelString) else {
-                return .info
+            guard let levelString = ProcessInfo.processInfo.environment["LOG_LEVEL"],
+                  let levelNum = Int(levelString) else {
+                return .debug
             }
-            return .init(rawValue: levelNum) ?? .info
+            return .init(rawValue: levelNum) ?? .debug
         }()
 
         static let maxBytes = 100000

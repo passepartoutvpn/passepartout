@@ -122,15 +122,6 @@ private extension AppContext {
                     self?.reviewer.reportEvent()
                 }
             }.store(in: &cancellables)
-
-        productManager.didRefundProducts
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                Task {
-                    pp_log.info("Refunds detected, uninstalling VPN profile")
-                    await self?.coreContext.vpnManager.uninstall()
-                }
-            }.store(in: &cancellables)
     }
 
     // eligibility: ignore network settings if ineligible

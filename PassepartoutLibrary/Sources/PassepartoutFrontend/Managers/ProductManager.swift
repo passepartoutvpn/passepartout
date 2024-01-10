@@ -38,8 +38,6 @@ public final class ProductManager: NSObject, ObservableObject {
 
     public let buildProducts: BuildProducts
 
-    public let didRefundProducts = PassthroughSubject<Void, Never>()
-
     @Published public private(set) var appType: AppType
 
     @Published public private(set) var isRefreshingProducts = false
@@ -58,19 +56,6 @@ public final class ProductManager: NSObject, ObservableObject {
 
     private var purchaseDates: [LocalProduct: Date]
 
-    private var cancelledPurchases: Set<LocalProduct>? {
-        willSet {
-            guard cancelledPurchases != nil else {
-                return
-            }
-            guard let newCancelledPurchases = newValue, newCancelledPurchases != cancelledPurchases else {
-                pp_log.debug("No purchase was refunded")
-                return
-            }
-            detectRefunds(newCancelledPurchases)
-        }
-    }
-
     public init(inApp: any LocalInApp,
                 receiptReader: ReceiptReader,
                 overriddenAppType: AppType? = nil,
@@ -85,7 +70,6 @@ public final class ProductManager: NSObject, ObservableObject {
         purchasedAppBuild = nil
         purchasedFeatures = []
         purchaseDates = [:]
-        cancelledPurchases = nil
 
         super.init()
 
@@ -194,15 +178,24 @@ public final class ProductManager: NSObject, ObservableObject {
 
 extension ProductManager {
     public func isEligible(forFeature feature: LocalProduct) -> Bool {
-        if let purchasedAppBuild = purchasedAppBuild {
+        if let purchasedAppBuild {
             if feature == .networkSettings && buildProducts.hasProduct(.networkSettings, atBuild: purchasedAppBuild) {
                 return true
             }
         }
+        pp_log.verbose("Eligibility: purchasedFeatures = \(purchasedFeatures)")
+        pp_log.verbose("Eligibility: purchaseDates = \(purchaseDates)")
+        pp_log.verbose("Eligibility: isIncludedInFullVersion(\(feature)) = \(isIncludedInFullVersion(feature))")
         if isIncludedInFullVersion(feature) {
-            return isFullVersion() || isActivePurchase(feature)
+            let isFullVersion = isFullVersion()
+            let isActive = isActivePurchase(feature)
+            pp_log.verbose("Eligibility: isFullVersion() = \(isFullVersion)")
+            pp_log.verbose("Eligibility: isActivePurchase(\(feature)) = \(isActive)")
+            return isFullVersion || isActive
         }
-        return isActivePurchase(feature)
+        let isActive = isActivePurchase(feature)
+        pp_log.verbose("Eligibility: isActivePurchase(\(feature)) = \(isActive)")
+        return isActive
     }
 
     public func isEligible(forProvider providerName: ProviderName) -> Bool {
@@ -219,11 +212,11 @@ extension ProductManager {
 
 extension ProductManager {
     func isActivePurchase(_ feature: LocalProduct) -> Bool {
-        purchasedFeatures.contains(feature) && cancelledPurchases?.contains(feature) != true
+        purchasedFeatures.contains(feature)
     }
 
     func isActivePurchase(where predicate: (LocalProduct) -> Bool) -> Bool {
-        purchasedFeatures.contains(where: predicate) && cancelledPurchases?.contains(where: predicate) != true
+        purchasedFeatures.contains(where: predicate)
     }
 
     func isCurrentPlatformVersion() -> Bool {
@@ -236,16 +229,19 @@ extension ProductManager {
 
     public func isFullVersion() -> Bool {
         if appType == .fullVersion {
+            pp_log.verbose("Eligibility: appType = .fullVersion")
             return true
         }
+        pp_log.verbose("Eligibility: isCurrentPlatformVersion() = \(isCurrentPlatformVersion())")
         if isCurrentPlatformVersion() {
             return true
         }
+        pp_log.verbose("Eligibility: isActivePurchase(.fullVersion) = \(isActivePurchase(.fullVersion))")
         return isActivePurchase(.fullVersion)
     }
 
     public func isPayingUser() -> Bool {
-        !purchasedFeatures.subtracting(cancelledPurchases ?? []).isEmpty
+        !purchasedFeatures.isEmpty
     }
 }
 
@@ -262,7 +258,6 @@ extension ProductManager {
             purchasedAppBuild = originalBuildNumber
         }
         purchasedFeatures.removeAll()
-        var newCancelledPurchases: Set<LocalProduct> = []
 
         if let buildNumber = purchasedAppBuild {
             pp_log.debug("Original purchased build: \(buildNumber)")
@@ -282,7 +277,6 @@ extension ProductManager {
                 }
                 if let cancellationDate = $0.cancellationDate {
                     pp_log.debug("\t\(pid) [cancelled on: \(cancellationDate)]")
-                    newCancelledPurchases.insert(product)
                     return
                 }
                 if let purchaseDate = $0.originalPurchaseDate {
@@ -296,7 +290,6 @@ extension ProductManager {
         if andNotify {
             objectWillChange.send()
         }
-        cancelledPurchases = newCancelledPurchases
     }
 }
 
@@ -309,29 +302,5 @@ private extension ProductManager {
         #else
         false
         #endif
-    }
-
-    // FIXME: in-app, this is incomplete
-    func detectRefunds(_ refunds: Set<LocalProduct>) {
-        let isEligibleForFullVersion = isFullVersion()
-        let hasCancelledFullVersion: Bool
-        let hasCancelledTrustedNetworks: Bool
-
-        if isMac {
-            hasCancelledFullVersion = !isEligibleForFullVersion && (
-                refunds.contains(.fullVersion) || refunds.contains(.fullVersion_macOS)
-            )
-            hasCancelledTrustedNetworks = false
-        } else {
-            hasCancelledFullVersion = !isEligibleForFullVersion && (
-                refunds.contains(.fullVersion) || refunds.contains(.fullVersion_iOS)
-            )
-            hasCancelledTrustedNetworks = !isEligibleForFullVersion && refunds.contains(.trustedNetworks)
-        }
-
-        // review features and potentially revert them if they were used (Siri is handled in AppDelegate)
-        if hasCancelledFullVersion || hasCancelledTrustedNetworks {
-            didRefundProducts.send()
-        }
     }
 }
