@@ -183,7 +183,7 @@
 "profile.items.only_shows_favorites.caption" = "Afficher uniquement les emplacements favoris";
 "profile.items.vpn_survives_sleep.caption" = "Garder actif lors de la veille";
 "profile.items.vpn_resolves_hostname.caption" = "Résoudre le nom d'hôte du serveur";
-"profile.items.tv_sharing.caption.limited" = "Limité à %d minutes.";
+"profile.items.tv_sharing.caption.limited" = "Limité à %d minutes";
 "profile.items.expires_at.caption" = "Expiration";
 
 "profile.alerts.rename.title" = "Renommer le profile";

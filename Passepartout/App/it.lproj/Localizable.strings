@@ -183,7 +183,7 @@
 "profile.items.only_shows_favorites.caption" = "Mostra solo le posizioni preferite";
 "profile.items.vpn_survives_sleep.caption" = "Mantieni attivo in sleep";
 "profile.items.vpn_resolves_hostname.caption" = "Risolvi hostname del server";
-"profile.items.tv_sharing.caption.limited" = "Limitato a %d minuti.";
+"profile.items.tv_sharing.caption.limited" = "Limitato a %d minuti";
 "profile.items.expires_at.caption" = "Scadenza";
 
 "profile.alerts.rename.title" = "Rinomina profilo";

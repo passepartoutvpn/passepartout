@@ -183,7 +183,7 @@
 "profile.items.only_shows_favorites.caption" = "Показывать только места из избранного";
 "profile.items.vpn_survives_sleep.caption" = "Оставлять включенным во время сна";
 "profile.items.vpn_resolves_hostname.caption" = "Разрешить имя хоста сервера";
-"profile.items.tv_sharing.caption.limited" = "Ограничено до %d мин.";
+"profile.items.tv_sharing.caption.limited" = "Ограничено до %d мин";
 "profile.items.expires_at.caption" = "Срок действия";
 
 "profile.alerts.rename.title" = "Переименовать профиль";
