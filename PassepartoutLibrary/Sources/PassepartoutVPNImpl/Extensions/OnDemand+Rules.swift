@@ -63,7 +63,7 @@ private extension Profile.OnDemand {
                 rules.append(cellularRule())
             }
             #endif
-            #if os(macOS)
+            #if targetEnvironment(macCatalyst) || os(macOS)
             if Utils.hasEthernet() && withEthernetNetwork {
                 if let rule = ethernetRule() {
                     rules.append(rule)
@@ -80,6 +80,11 @@ private extension Profile.OnDemand {
 
         // IMPORTANT: append fallback rule last
         rules.append(globalRule())
+
+        pp_log.debug("On-demand rules:")
+        rules.forEach {
+            pp_log.debug("\($0)")
+        }
 
         return rules
     }
@@ -118,7 +123,7 @@ private extension Profile.OnDemand {
     }
     #endif
 
-    #if os(macOS)
+    #if targetEnvironment(macCatalyst) || os(macOS)
     func ethernetRule() -> NEOnDemandRule? {
         guard let compatibleEthernet = NEOnDemandRuleInterfaceType.compatibleEthernet else {
             return nil
