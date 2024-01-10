@@ -81,6 +81,11 @@ private extension Profile.OnDemand {
         // IMPORTANT: append fallback rule last
         rules.append(globalRule())
 
+        pp_log.debug("On-demand rules:")
+        rules.forEach {
+            pp_log.debug("\($0)")
+        }
+
         return rules
     }
 }
