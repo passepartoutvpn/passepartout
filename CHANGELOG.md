@@ -13,12 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Purchase is not credited if any refund was issued in the past. [#461](https://github.com/passepartoutvpn/passepartout-apple/issues/461)
 - On-demand not applying to wired connections. [#463](https://github.com/passepartoutvpn/passepartout-apple/pull/463)
 
-## 2.3.2 (2024-01-11)
-
-### Fixed
-
-- Regression in purchase elegibility predicate. [#460](https://github.com/passepartoutvpn/passepartout-apple/pull/460)
-
 ## 2.3.1 (2024-01-06)
 
 ### Fixed
