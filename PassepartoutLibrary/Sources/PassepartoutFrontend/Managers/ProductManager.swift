@@ -302,6 +302,9 @@ extension ProductManager {
 
     public func purchasableProducts(withFeature feature: LocalProduct?) -> [LocalProduct] {
         var products: [LocalProduct] = {
+            if hasPurchased(.fullVersion) {
+                return []
+            }
 #if targetEnvironment(macCatalyst)
             if hasPurchased(.fullVersion_macOS) {
                 return []
