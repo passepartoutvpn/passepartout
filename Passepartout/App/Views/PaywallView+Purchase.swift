@@ -194,13 +194,22 @@ private extension PaywallView.PurchaseView {
 }
 
 private extension PaywallView.PurchaseView {
-
-    // no purchase -> full version or platform version
-    // purchased platform -> may only purchase other platform
-
     var skFullVersion: InAppProduct? {
         productManager.product(withIdentifier: .fullVersion)
     }
+
+    var fullFeatures: [FeatureModel] {
+        productManager.featureProducts(excluding: {
+            $0 == .fullVersion || $0 == .appleTV || $0.isLegacyPlatformVersion
+        })
+        .map {
+            FeatureModel(product: $0)
+        }
+        .sorted()
+    }
+
+    // no purchase -> full version or platform version
+    // purchased platform -> may only purchase other platform
 
     var purchasableProducts: [LocalProduct] {
         var products: [LocalProduct] = {
@@ -226,16 +235,6 @@ private extension PaywallView.PurchaseView {
             products.append(.appleTV)
         }
         return products
-    }
-
-    var fullFeatures: [FeatureModel] {
-        productManager.featureProducts(excluding: {
-            $0 == .fullVersion || $0 == .appleTV || $0.isLegacyPlatformVersion
-        })
-        .map {
-            FeatureModel(product: $0)
-        }
-        .sorted()
     }
 
     var productRowModels: [InAppProduct] {
