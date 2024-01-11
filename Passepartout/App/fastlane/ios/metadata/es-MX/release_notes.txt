@@ -1,6 +1,4 @@
 ### Fixed
 
-- "Restore purchases" not working.
-- Purchase is not credited if any refund was issued in the past.
-- On-demand not applying to wired connections.
+- Platform purchasers cannot upgrade to full version.
 
