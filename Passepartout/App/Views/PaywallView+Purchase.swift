@@ -195,28 +195,37 @@ private extension PaywallView.PurchaseView {
 
 private extension PaywallView.PurchaseView {
 
-    // hide full version if already bought the other platform version
+    // no purchase -> full version or platform version
+    // purchased platform -> may only purchase other platform
+
     var skFullVersion: InAppProduct? {
-        guard !productManager.isFullVersion() else {
-            return nil
-        }
-        #if targetEnvironment(macCatalyst)
-        guard !productManager.hasPurchased(.fullVersion_iOS) else {
-            return nil
-        }
-        #else
-        guard !productManager.hasPurchased(.fullVersion_macOS) else {
-            return nil
-        }
-        #endif
-        return productManager.product(withIdentifier: .fullVersion)
+        productManager.product(withIdentifier: .fullVersion)
     }
 
-    var skAppleTV: InAppProduct? {
-        guard feature == .appleTV else {
-            return nil
+    var purchasableProducts: [LocalProduct] {
+        var products: [LocalProduct] = {
+#if targetEnvironment(macCatalyst)
+            if productManager.hasPurchased(.fullVersion_macOS) {
+                return []
+            }
+            if productManager.hasPurchased(.fullVersion_iOS) {
+                return [.fullVersion_macOS]
+            }
+            return [.fullVersion, .fullVersion_macOS]
+#else
+            if productManager.hasPurchased(.fullVersion_iOS) {
+                return []
+            }
+            if productManager.hasPurchased(.fullVersion_macOS) {
+                return [.fullVersion_iOS]
+            }
+            return [.fullVersion, .fullVersion_iOS]
+#endif
+        }()
+        if feature == .appleTV {
+            products.append(.appleTV)
         }
-        return productManager.product(withIdentifier: .appleTV)
+        return products
     }
 
     var fullFeatures: [FeatureModel] {
@@ -230,8 +239,8 @@ private extension PaywallView.PurchaseView {
     }
 
     var productRowModels: [InAppProduct] {
-        [skFullVersion, skAppleTV]
-            .compactMap { $0 }
+        purchasableProducts
+            .compactMap { productManager.product(withIdentifier: $0) }
     }
 }
 
