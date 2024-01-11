@@ -208,37 +208,9 @@ private extension PaywallView.PurchaseView {
         .sorted()
     }
 
-    // no purchase -> full version or platform version
-    // purchased platform -> may only purchase other platform
-
-    var purchasableProducts: [LocalProduct] {
-        var products: [LocalProduct] = {
-#if targetEnvironment(macCatalyst)
-            if productManager.hasPurchased(.fullVersion_macOS) {
-                return []
-            }
-            if productManager.hasPurchased(.fullVersion_iOS) {
-                return [.fullVersion_macOS]
-            }
-            return [.fullVersion, .fullVersion_macOS]
-#else
-            if productManager.hasPurchased(.fullVersion_iOS) {
-                return []
-            }
-            if productManager.hasPurchased(.fullVersion_macOS) {
-                return [.fullVersion_iOS]
-            }
-            return [.fullVersion, .fullVersion_iOS]
-#endif
-        }()
-        if feature == .appleTV {
-            products.append(.appleTV)
-        }
-        return products
-    }
-
     var productRowModels: [InAppProduct] {
-        purchasableProducts
+        productManager
+            .purchasableProducts(withFeature: feature)
             .compactMap { productManager.product(withIdentifier: $0) }
     }
 }
