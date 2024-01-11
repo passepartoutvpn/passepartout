@@ -293,6 +293,44 @@ extension ProductManager {
     }
 }
 
+// MARK: Purchasable products
+
+extension ProductManager {
+
+    // no purchase -> full version or platform version
+    // purchased platform -> may only purchase other platform
+
+    public func purchasableProducts(withFeature feature: LocalProduct?) -> [LocalProduct] {
+        var products: [LocalProduct] = {
+            if hasPurchased(.fullVersion) {
+                return []
+            }
+#if targetEnvironment(macCatalyst)
+            if hasPurchased(.fullVersion_macOS) {
+                return []
+            }
+            if hasPurchased(.fullVersion_iOS) {
+                return [.fullVersion_macOS]
+            }
+            return [.fullVersion, .fullVersion_macOS]
+#else
+            if hasPurchased(.fullVersion_iOS) {
+                return []
+            }
+            if hasPurchased(.fullVersion_macOS) {
+                return [.fullVersion_iOS]
+            }
+            return [.fullVersion, .fullVersion_iOS]
+#endif
+        }()
+        if feature == .appleTV && !hasPurchased(.appleTV) {
+            products.append(.appleTV)
+        }
+        return products
+    }
+
+}
+
 // MARK: Helpers
 
 private extension ProductManager {

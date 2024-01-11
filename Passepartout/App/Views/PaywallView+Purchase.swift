@@ -194,29 +194,8 @@ private extension PaywallView.PurchaseView {
 }
 
 private extension PaywallView.PurchaseView {
-
-    // hide full version if already bought the other platform version
     var skFullVersion: InAppProduct? {
-        guard !productManager.isFullVersion() else {
-            return nil
-        }
-        #if targetEnvironment(macCatalyst)
-        guard !productManager.hasPurchased(.fullVersion_iOS) else {
-            return nil
-        }
-        #else
-        guard !productManager.hasPurchased(.fullVersion_macOS) else {
-            return nil
-        }
-        #endif
-        return productManager.product(withIdentifier: .fullVersion)
-    }
-
-    var skAppleTV: InAppProduct? {
-        guard feature == .appleTV else {
-            return nil
-        }
-        return productManager.product(withIdentifier: .appleTV)
+        productManager.product(withIdentifier: .fullVersion)
     }
 
     var fullFeatures: [FeatureModel] {
@@ -230,8 +209,9 @@ private extension PaywallView.PurchaseView {
     }
 
     var productRowModels: [InAppProduct] {
-        [skFullVersion, skAppleTV]
-            .compactMap { $0 }
+        productManager
+            .purchasableProducts(withFeature: feature)
+            .compactMap { productManager.product(withIdentifier: $0) }
     }
 }
 
