@@ -31,9 +31,9 @@ struct PaywallView: View {
 
     @Binding private var isPresented: Bool
 
-    private let feature: LocalProduct?
+    private let feature: LocalProduct
 
-    init<MT>(modalType: Binding<MT?>, feature: LocalProduct? = nil) {
+    init<MT>(modalType: Binding<MT?>, feature: LocalProduct) {
         let isPresented = Binding<Bool> {
             modalType.wrappedValue != nil
         } set: {
@@ -44,7 +44,7 @@ struct PaywallView: View {
         self.init(isPresented: isPresented, feature: feature)
     }
 
-    init(isPresented: Binding<Bool>, feature: LocalProduct? = nil) {
+    init(isPresented: Binding<Bool>, feature: LocalProduct) {
         productManager = .shared
         _isPresented = isPresented
         self.feature = feature
