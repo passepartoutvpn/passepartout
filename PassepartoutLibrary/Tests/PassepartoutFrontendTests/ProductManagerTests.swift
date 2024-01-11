@@ -223,7 +223,7 @@ final class ProductManagerTests: XCTestCase {
         reader.setReceipt(withBuild: 1500, products: [])
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
 
-        XCTAssertTrue(sut.purchasableProducts(withFeature: .appleTV).contains(.appleTV))
+        XCTAssertEqual(sut.purchasableProducts(withFeature: .appleTV), [.appleTV])
     }
 
     func test_givenAppleTV_whenDidPurchase_thenCannotPurchase() {
@@ -231,6 +231,6 @@ final class ProductManagerTests: XCTestCase {
         reader.setReceipt(withBuild: 1500, products: [.appleTV])
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
 
-        XCTAssertFalse(sut.purchasableProducts(withFeature: .appleTV).contains(.appleTV))
+        XCTAssertEqual(sut.purchasableProducts(withFeature: .appleTV), [])
     }
 }

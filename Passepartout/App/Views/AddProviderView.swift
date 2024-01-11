@@ -60,7 +60,7 @@ struct AddProviderView: View {
             themeCloseItem(isPresented: bindings.$isPresented)
         }.sheet(isPresented: $viewModel.isPaywallPresented) {
             NavigationView {
-                PaywallView(isPresented: $viewModel.isPaywallPresented)
+                PaywallView(isPresented: $viewModel.isPaywallPresented, feature: .allProviders)
             }.themeGlobal()
         }.navigationTitle(L10n.AddProfile.Shared.title)
             .themeSecondaryView()

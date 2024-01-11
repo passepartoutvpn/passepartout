@@ -54,8 +54,10 @@ extension PaywallView {
 
         var body: some View {
             List {
-                skFullVersion.map {
-                    fullFeaturesSection(withHeader: $0.localizedTitle)
+                if feature != .appleTV {
+                    skFullVersion.map {
+                        fullFeaturesSection(withHeader: $0.localizedTitle)
+                    }
                 }
                 purchaseSection
                     .disabled(purchaseState != nil)
