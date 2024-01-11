@@ -178,7 +178,7 @@ final class ProductManagerTests: XCTestCase {
 #if targetEnvironment(macCatalyst)
         XCTAssertEqual(sut.purchasableProducts(withFeature: nil), [.fullVersion, .fullVersion_macOS])
 #else
-        XCTAssertEqual(sut.purchasableProducts(withFeature: nil) [.fullVersion, .fullVersion_iOS])
+        XCTAssertEqual(sut.purchasableProducts(withFeature: nil), [.fullVersion, .fullVersion_iOS])
 #endif
     }
 
