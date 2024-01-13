@@ -68,10 +68,10 @@ extension KeychainSecretRepository {
             return
         }
         guard let list = list else {
-            pp_log.debug("Keychain items: none")
+            pp_log.verbose("Keychain items: none")
             return
         }
-        pp_log.debug("Keychain items: \(list)")
+        pp_log.verbose("Keychain items: \(list)")
     }
 
     public func removeAllPasswords(matching id: UUID) {
