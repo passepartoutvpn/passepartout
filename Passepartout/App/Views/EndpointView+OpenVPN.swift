@@ -360,7 +360,7 @@ private extension ObservableProfile {
             if self.value.isProvider {
                 // readonly
             } else {
-                pp_log.debug("Saving OpenVPN configuration: \($0)")
+                pp_log.verbose("Saving OpenVPN configuration: \($0)")
                 self.value.hostOpenVPNSettings?.configuration = $0.build()
             }
         }
