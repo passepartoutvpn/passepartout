@@ -150,7 +150,7 @@ private extension ObservableProfile {
             if self.value.isProvider {
                 // readonly
             } else {
-                pp_log.debug("Saving WireGuard configuration: \($0)")
+                pp_log.verbose("Saving WireGuard configuration: \($0)")
                 self.value.hostWireGuardSettings?.configuration = $0.build()
             }
         }
