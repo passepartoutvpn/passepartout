@@ -1,4 +1,4 @@
 ### Fixed
 
-- Platform purchasers cannot upgrade to full version.
+- Unintended sensitive data in issue reports.
 
