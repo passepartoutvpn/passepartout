@@ -8,14 +8,13 @@ labels: "refactoring"
 
 - [ ] README
 - [ ] Project Config
-- [ ] File haders
+- [ ] File headers
 - [ ] fastlane metadata
 
 ## TunnelKit
 
 - [ ] README
-- [ ] LICENSE
-- [ ] File haders
+- [ ] File headers
 
 ## Website
 

@@ -50,7 +50,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/tunnelkit",
       "state" : {
-        "revision" : "f2c0fb079e2a318a4717d5fb8daa8f149174dadd"
+        "revision" : "6ab1759e048867fbca9bd5d33f2dc7eb1fa79ca6"
       }
     },
     {

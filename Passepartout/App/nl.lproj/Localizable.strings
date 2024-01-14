@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/13/18.
-//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 "global.strings.policy" = "Beleid";
 "global.strings.networks" = "Netwerken";
 "global.strings.edit" = "Bewerken";

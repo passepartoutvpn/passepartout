@@ -3,7 +3,7 @@
 //  Passepartout
 //
 //  Created by Davide De Rosa on 5/24/19.
-//  Copyright (c) 2023 Davide De Rosa. All rights reserved.
+//  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
 //
@@ -32,7 +32,7 @@ CFG_MAC_ID = com.algoritmico.ios.PassepartoutMac
 CFG_LAUNCHER_ID = com.algoritmico.ios.PassepartoutLauncher
 CFG_GROUP_ID = com.algoritmico.Passepartout
 CFG_APPSTORE_ID = 1433648537
-CFG_COPYRIGHT = Copyright © 2023 Davide De Rosa. All rights reserved.
+CFG_COPYRIGHT = Copyright © 2024 Davide De Rosa. All rights reserved.
 
 PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin:/usr/local/go/bin
 CUSTOM_SCRIPT_PATH = $(PATH)
