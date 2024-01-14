@@ -1,3 +1,9 @@
+---
+name: Issue
+about: Report a problem with the app.
+labels: "bug"
+---
+
 # Summary
 
 ### Steps to reproduce
