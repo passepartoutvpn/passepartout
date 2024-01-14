@@ -49,9 +49,6 @@ extension Profile {
 
         public var withOtherNetworks: Set<OtherNetwork> = []
 
-        @available(*, deprecated, message: "Drop field after releasing as optional to the App Store")
-        public var disconnectsIfNotMatching: Bool? = true
-
         public init() {
         }
     }
