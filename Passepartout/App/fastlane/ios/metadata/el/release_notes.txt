@@ -1,4 +1,4 @@
 ### Fixed
 
-- Unintended sensitive data in issue reports.
+- Minor stuff.
 
