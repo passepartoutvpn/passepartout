@@ -149,7 +149,7 @@ private extension AppContext {
         }
 
         guard productManager.isEligible(forFeature: .appleTV) else {
-            var restricted: Profile
+            var restricted = newProfile
             let remainingMinutes: Int
             let expirationDate: Date
 
@@ -158,7 +158,7 @@ private extension AppContext {
                 remainingMinutes = Int(currentExpirationDate.timeIntervalSinceNow / 60.0)
                 expirationDate = currentExpirationDate
 
-                restricted = existingProfile
+                restricted.connectionExpirationDate = currentExpirationDate
             }
             // otherwise, expire in N minutes from now
             else {
@@ -166,7 +166,6 @@ private extension AppContext {
                 expirationDate = Date()
                     .addingTimeInterval(TimeInterval(remainingMinutes) * 60.0)
 
-                restricted = newProfile
                 restricted.connectionExpirationDate = expirationDate
             }
 
