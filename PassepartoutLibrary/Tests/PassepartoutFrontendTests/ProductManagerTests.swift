@@ -232,4 +232,40 @@ final class ProductManagerTests: XCTestCase {
 
         XCTAssertEqual(sut.purchasableProducts(withFeature: .appleTV), [])
     }
+
+    // MARK: App type
+
+    func test_givenBetaApp_thenIsNotEligibleForAnyFeature() {
+        let reader = MockReceiptReader()
+        let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .beta)
+
+        XCTAssertTrue(LocalProduct
+            .allFeatures
+            .allSatisfy { !sut.isEligible(forFeature: $0) }
+        )
+    }
+
+    func test_givenFullApp_thenIsEligibleForEveryFeatureExceptAppleTV() {
+        let reader = MockReceiptReader()
+        let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .fullVersion)
+
+        LocalProduct.allFeatures.forEach {
+            guard !$0.isLegacyPlatformVersion, $0 != .appleTV else {
+                return
+            }
+            XCTAssertTrue(sut.isEligible(forFeature: $0), "\($0)")
+        }
+    }
+
+    func test_givenFullPlusTVApp_thenIsEligibleForEveryFeature() {
+        let reader = MockReceiptReader()
+        let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .fullVersionPlusTV)
+
+        LocalProduct.allFeatures.forEach {
+            guard !$0.isLegacyPlatformVersion else {
+                return
+            }
+            XCTAssertTrue(sut.isEligible(forFeature: $0), "\($0)")
+        }
+    }
 }
