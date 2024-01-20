@@ -138,9 +138,9 @@ final class ProductManagerTests: XCTestCase {
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
 
         XCTAssertFalse(sut.isFullVersion())
-        XCTAssertFalse(LocalProduct
+        XCTAssertTrue(LocalProduct
             .allFeatures
-            .allSatisfy(sut.isEligible(forFeature:))
+            .allSatisfy { !sut.isEligible(forFeature: $0) }
         )
     }
 
