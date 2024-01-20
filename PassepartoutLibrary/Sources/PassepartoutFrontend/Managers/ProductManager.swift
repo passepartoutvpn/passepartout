@@ -59,10 +59,10 @@ public final class ProductManager: NSObject, ObservableObject {
     public init(inApp: any LocalInApp,
                 receiptReader: ReceiptReader,
                 overriddenAppType: AppType? = nil,
-                buildProducts: BuildProducts) {
+                buildProducts: BuildProducts? = nil) {
         self.overriddenAppType = overriddenAppType
         self.receiptReader = receiptReader
-        self.buildProducts = buildProducts
+        self.buildProducts = buildProducts ?? BuildProducts { _ in [] }
         appType = .undefined
 
         products = []
