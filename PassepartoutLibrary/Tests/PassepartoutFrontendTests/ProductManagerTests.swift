@@ -123,13 +123,15 @@ final class ProductManagerTests: XCTestCase {
         let sut = ProductManager(inApp: inApp, receiptReader: reader)
 
         XCTAssertTrue(sut.isFullVersion())
-        LocalProduct.allFeatures.forEach {
-            guard $0 != .appleTV && !$0.isLegacyPlatformVersion else {
-                XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
-                return
+        LocalProduct
+            .allFeatures
+            .forEach {
+                guard $0 != .appleTV && !$0.isLegacyPlatformVersion else {
+                    XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
+                    return
+                }
+                XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
             }
-            XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
-        }
     }
 
     func test_givenFullVersion_thenIsNotEligibleForAppleTV() {
@@ -251,25 +253,29 @@ final class ProductManagerTests: XCTestCase {
         let reader = MockReceiptReader()
         let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .fullVersion)
 
-        LocalProduct.allFeatures.forEach {
-            guard !$0.isLegacyPlatformVersion, $0 != .appleTV else {
-                XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
-                return
+        LocalProduct
+            .allFeatures
+            .forEach {
+                guard !$0.isLegacyPlatformVersion, $0 != .appleTV else {
+                    XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
+                    return
+                }
+                XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
             }
-            XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
-        }
     }
 
     func test_givenFullPlusTVApp_thenIsEligibleForEveryFeature() {
         let reader = MockReceiptReader()
         let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .fullVersionPlusTV)
 
-        LocalProduct.allFeatures.forEach {
-            guard !$0.isLegacyPlatformVersion else {
-                XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
-                return
+        LocalProduct
+            .allFeatures
+            .forEach {
+                guard !$0.isLegacyPlatformVersion else {
+                    XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
+                    return
+                }
+                XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
             }
-            XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
-        }
     }
 }
