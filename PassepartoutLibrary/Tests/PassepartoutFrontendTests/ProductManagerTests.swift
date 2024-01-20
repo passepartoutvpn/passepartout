@@ -125,10 +125,10 @@ final class ProductManagerTests: XCTestCase {
         XCTAssertTrue(sut.isFullVersion())
         LocalProduct.allFeatures.forEach {
             guard $0 != .appleTV && !$0.isLegacyPlatformVersion else {
-                XCTAssertFalse(sut.isEligible(forFeature: $0))
+                XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
                 return
             }
-            XCTAssertTrue(sut.isEligible(forFeature: $0))
+            XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
         }
     }
 
@@ -253,10 +253,10 @@ final class ProductManagerTests: XCTestCase {
 
         LocalProduct.allFeatures.forEach {
             guard !$0.isLegacyPlatformVersion, $0 != .appleTV else {
-                XCTAssertFalse(sut.isEligible(forFeature: $0), "\($0)")
+                XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
                 return
             }
-            XCTAssertTrue(sut.isEligible(forFeature: $0), "\($0)")
+            XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
         }
     }
 
@@ -266,10 +266,10 @@ final class ProductManagerTests: XCTestCase {
 
         LocalProduct.allFeatures.forEach {
             guard !$0.isLegacyPlatformVersion else {
-                XCTAssertFalse(sut.isEligible(forFeature: $0), "\($0)")
+                XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
                 return
             }
-            XCTAssertTrue(sut.isEligible(forFeature: $0), "\($0)")
+            XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
         }
     }
 }
