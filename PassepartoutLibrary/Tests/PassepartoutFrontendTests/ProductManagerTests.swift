@@ -249,7 +249,7 @@ final class ProductManagerTests: XCTestCase {
         )
     }
 
-    func test_givenFullApp_thenIsEligibleForEveryFeatureExceptAppleTV() {
+    func test_givenFullApp_thenIsEligibleForAnyFeatureExceptAppleTV() {
         let reader = MockReceiptReader()
         let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .fullVersion)
 
@@ -264,7 +264,7 @@ final class ProductManagerTests: XCTestCase {
             }
     }
 
-    func test_givenFullPlusTVApp_thenIsEligibleForEveryFeature() {
+    func test_givenFullPlusTVApp_thenIsEligibleForAnyFeature() {
         let reader = MockReceiptReader()
         let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .fullVersionPlusTV)
 
