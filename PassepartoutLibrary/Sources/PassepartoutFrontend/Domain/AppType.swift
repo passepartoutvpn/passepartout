@@ -34,6 +34,8 @@ public enum AppType: Int {
 
     case fullVersion = 2
 
+    case fullVersionPlusTV = 3
+
     public var isRestricted: Bool {
         switch self {
         case .undefined, .beta:

@@ -224,11 +224,17 @@ extension ProductManager {
     }
 
     func isIncludedInFullVersion(_ feature: LocalProduct) -> Bool {
-        !feature.isLegacyPlatformVersion && feature != .appleTV
+        switch appType {
+        case .fullVersionPlusTV:
+            return !feature.isLegacyPlatformVersion
+
+        default:
+            return !feature.isLegacyPlatformVersion && feature != .appleTV
+        }
     }
 
     public func isFullVersion() -> Bool {
-        if appType == .fullVersion {
+        if appType == .fullVersion || appType == .fullVersionPlusTV {
             pp_log.verbose("Eligibility: appType = .fullVersion")
             return true
         }
