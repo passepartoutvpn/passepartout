@@ -31,15 +31,19 @@ import XCTest
 final class ProductManagerTests: XCTestCase {
     private let inApp = MockInApp()
 
-    private let noBuildProducts = BuildProducts { _ in [] }
+    private let olderBuildNumber = 500
+
+    private let defaultBuildNumber = 1000
+
+    private let newerBuildNumber = 1500
 
     // MARK: Build products
 
     func test_givenBuildProducts_whenOlder_thenFullVersion() {
         let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 500, products: [])
+        reader.setReceipt(withBuild: olderBuildNumber, products: [])
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: BuildProducts { build in
-            if build <= 1000 {
+            if build <= self.defaultBuildNumber {
                 return [.fullVersion]
             }
             return []
@@ -49,9 +53,9 @@ final class ProductManagerTests: XCTestCase {
 
     func test_givenBuildProducts_whenNewer_thenFreeVersion() {
         let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [])
+        reader.setReceipt(withBuild: newerBuildNumber, products: [])
         let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: BuildProducts { build in
-            if build <= 1000 {
+            if build <= self.defaultBuildNumber {
                 return [.fullVersion]
             }
             return []
@@ -61,35 +65,22 @@ final class ProductManagerTests: XCTestCase {
 
     // MARK: Eligibility
 
-    func test_givenPurchase_whenReload_thenCredited() {
+    func test_givenPurchasedFeature_whenReloadReceipt_thenIsEligible() {
         let reader = MockReceiptReader()
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
         XCTAssertFalse(sut.isEligible(forFeature: .fullVersion))
 
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion])
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion])
         XCTAssertFalse(sut.isEligible(forFeature: .fullVersion))
 
         sut.reloadReceipt()
         XCTAssertTrue(sut.isEligible(forFeature: .fullVersion))
     }
 
-    func test_givenPurchase_whenCancelled_thenRevoke() {
+    func test_givenPurchasedFeatures_thenIsOnlyEligibleForFeatures() {
         let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
-        XCTAssertTrue(sut.isEligible(forFeature: .fullVersion))
-
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion], cancelledProducts: [.fullVersion])
-        XCTAssertTrue(sut.isEligible(forFeature: .fullVersion))
-
-        sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(forFeature: .fullVersion))
-    }
-
-    func test_givenFeature_thenIsOnlyEligibleForFeature() {
-        let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [.siriShortcuts, .networkSettings])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.siriShortcuts, .networkSettings])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
 
         XCTAssertTrue(sut.isEligible(forFeature: .siriShortcuts))
         XCTAssertTrue(sut.isEligible(forFeature: .networkSettings))
@@ -98,17 +89,78 @@ final class ProductManagerTests: XCTestCase {
         XCTAssertFalse(sut.isFullVersion())
     }
 
+    func test_givenPurchasedAndCancelledFeature_thenIsNotEligible() {
+        let reader = MockReceiptReader()
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion], cancelledProducts: [.fullVersion])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
+
+        XCTAssertFalse(sut.isEligible(forFeature: .fullVersion))
+    }
+
+    func test_givenFreeVersion_thenIsNotEligibleForAnyFeature() {
+        let reader = MockReceiptReader()
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
+
+        XCTAssertFalse(sut.isFullVersion())
+        XCTAssertTrue(LocalProduct
+            .allFeatures
+            .allSatisfy { !sut.isEligible(forFeature: $0) }
+        )
+    }
+
+    func test_givenFreeVersion_thenIsNotEligibleForAppleTV() {
+        let reader = MockReceiptReader()
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
+
+        XCTAssertFalse(sut.isEligible(forFeature: .appleTV))
+    }
+
+    func test_givenFullVersion_thenIsEligibleForAnyFeatureExceptAppleTV() {
+        let reader = MockReceiptReader()
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
+
+        XCTAssertTrue(sut.isFullVersion())
+        LocalProduct
+            .allFeatures
+            .forEach {
+                guard $0 != .appleTV && !$0.isLegacyPlatformVersion else {
+                    XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
+                    return
+                }
+                XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
+            }
+    }
+
+    func test_givenFullVersion_thenIsNotEligibleForAppleTV() {
+        let reader = MockReceiptReader()
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
+
+        XCTAssertFalse(sut.isEligible(forFeature: .appleTV))
+    }
+
+    func test_givenAppleTV_thenIsEligibleForAppleTV() {
+        let reader = MockReceiptReader()
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.appleTV])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
+
+        XCTAssertTrue(sut.isEligible(forFeature: .appleTV))
+    }
+
     func test_givenPlatformVersion_thenIsFullVersionForPlatform() {
         let reader = MockReceiptReader()
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
 
 #if targetEnvironment(macCatalyst)
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion_macOS, .networkSettings])
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion_macOS, .networkSettings])
         sut.reloadReceipt()
         XCTAssertFalse(sut.isEligible(forFeature: .fullVersion_iOS))
         XCTAssertTrue(sut.isEligible(forFeature: .fullVersion_macOS))
 #else
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion_iOS, .networkSettings])
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion_iOS, .networkSettings])
         sut.reloadReceipt()
         XCTAssertTrue(sut.isEligible(forFeature: .fullVersion_iOS))
         XCTAssertFalse(sut.isEligible(forFeature: .fullVersion_macOS))
@@ -119,61 +171,12 @@ final class ProductManagerTests: XCTestCase {
         XCTAssertTrue(sut.isEligible(forFeature: .fullVersion))
     }
 
-    func test_givenFullVersion_thenIsEligibleForAnyFeatureExceptAppleTV() {
-        let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
-
-        XCTAssertTrue(sut.isFullVersion())
-        XCTAssertTrue(LocalProduct
-            .allFeatures
-            .filter { $0 != .appleTV && !$0.isLegacyPlatformVersion }
-            .allSatisfy(sut.isEligible(forFeature:))
-        )
-    }
-
-    func test_givenFreeVersion_thenIsNotEligibleForAnyFeature() {
-        let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
-
-        XCTAssertFalse(sut.isFullVersion())
-        XCTAssertFalse(LocalProduct
-            .allFeatures
-            .allSatisfy(sut.isEligible(forFeature:))
-        )
-    }
-
-    func test_givenFreeVersion_thenIsNotEligibleForAppleTV() {
-        let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
-
-        XCTAssertFalse(sut.isEligible(forFeature: .appleTV))
-    }
-
-    func test_givenFullVersion_thenIsNotEligibleForAppleTV() {
-        let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
-
-        XCTAssertFalse(sut.isEligible(forFeature: .appleTV))
-    }
-
-    func test_givenAppleTV_thenIsEligibleForAppleTV() {
-        let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [.appleTV])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
-
-        XCTAssertTrue(sut.isEligible(forFeature: .appleTV))
-    }
-
     // MARK: Purchasable
 
     func test_givenNoPurchase_thenCanBuyFullAndPlatformVersion() {
         let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
 
 #if targetEnvironment(macCatalyst)
         XCTAssertEqual(sut.purchasableProducts(withFeature: nil), [.fullVersion, .fullVersion_macOS])
@@ -184,9 +187,9 @@ final class ProductManagerTests: XCTestCase {
 
     func test_givenFullVersion_thenCannotPurchase() {
         let reader = MockReceiptReader()
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
 
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
         XCTAssertEqual(sut.purchasableProducts(withFeature: nil), [])
     }
 
@@ -194,12 +197,12 @@ final class ProductManagerTests: XCTestCase {
         let reader = MockReceiptReader()
 
 #if targetEnvironment(macCatalyst)
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion_macOS])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion_macOS])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
         XCTAssertEqual(sut.purchasableProducts(withFeature: nil), [])
 #else
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion_iOS])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion_iOS])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
         XCTAssertEqual(sut.purchasableProducts(withFeature: nil), [])
 #endif
     }
@@ -208,29 +211,71 @@ final class ProductManagerTests: XCTestCase {
         let reader = MockReceiptReader()
 
 #if targetEnvironment(macCatalyst)
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion_iOS])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion_iOS])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
         XCTAssertEqual(sut.purchasableProducts(withFeature: nil), [.fullVersion_macOS])
 #else
-        reader.setReceipt(withBuild: 1500, products: [.fullVersion_macOS])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.fullVersion_macOS])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
         XCTAssertEqual(sut.purchasableProducts(withFeature: nil), [.fullVersion_iOS])
 #endif
     }
 
     func test_givenAppleTV_whenDidNotPurchase_thenCanPurchase() {
         let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
 
         XCTAssertEqual(sut.purchasableProducts(withFeature: .appleTV), [.appleTV])
     }
 
     func test_givenAppleTV_whenDidPurchase_thenCannotPurchase() {
         let reader = MockReceiptReader()
-        reader.setReceipt(withBuild: 1500, products: [.appleTV])
-        let sut = ProductManager(inApp: inApp, receiptReader: reader, buildProducts: noBuildProducts)
+        reader.setReceipt(withBuild: defaultBuildNumber, products: [.appleTV])
+        let sut = ProductManager(inApp: inApp, receiptReader: reader)
 
         XCTAssertEqual(sut.purchasableProducts(withFeature: .appleTV), [])
+    }
+
+    // MARK: App type
+
+    func test_givenBetaApp_thenIsNotEligibleForAnyFeature() {
+        let reader = MockReceiptReader()
+        let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .beta)
+
+        XCTAssertTrue(LocalProduct
+            .allFeatures
+            .allSatisfy { !sut.isEligible(forFeature: $0) }
+        )
+    }
+
+    func test_givenFullApp_thenIsEligibleForAnyFeatureExceptAppleTV() {
+        let reader = MockReceiptReader()
+        let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .fullVersion)
+
+        LocalProduct
+            .allFeatures
+            .forEach {
+                guard !$0.isLegacyPlatformVersion, $0 != .appleTV else {
+                    XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
+                    return
+                }
+                XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
+            }
+    }
+
+    func test_givenFullPlusTVApp_thenIsEligibleForAnyFeature() {
+        let reader = MockReceiptReader()
+        let sut = ProductManager(inApp: inApp, receiptReader: reader, overriddenAppType: .fullVersionPlusTV)
+
+        LocalProduct
+            .allFeatures
+            .forEach {
+                guard !$0.isLegacyPlatformVersion else {
+                    XCTAssertFalse(sut.isEligible(forFeature: $0), $0.rawValue)
+                    return
+                }
+                XCTAssertTrue(sut.isEligible(forFeature: $0), $0.rawValue)
+            }
     }
 }

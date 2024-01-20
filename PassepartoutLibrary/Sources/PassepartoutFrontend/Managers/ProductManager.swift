@@ -59,11 +59,11 @@ public final class ProductManager: NSObject, ObservableObject {
     public init(inApp: any LocalInApp,
                 receiptReader: ReceiptReader,
                 overriddenAppType: AppType? = nil,
-                buildProducts: BuildProducts) {
+                buildProducts: BuildProducts? = nil) {
         self.overriddenAppType = overriddenAppType
         self.receiptReader = receiptReader
-        self.buildProducts = buildProducts
-        appType = .undefined
+        self.buildProducts = buildProducts ?? BuildProducts { _ in [] }
+        appType = overriddenAppType ?? .undefined
 
         products = []
         self.inApp = inApp
@@ -224,11 +224,17 @@ extension ProductManager {
     }
 
     func isIncludedInFullVersion(_ feature: LocalProduct) -> Bool {
-        !feature.isLegacyPlatformVersion && feature != .appleTV
+        switch appType {
+        case .fullVersionPlusTV:
+            return !feature.isLegacyPlatformVersion
+
+        default:
+            return !feature.isLegacyPlatformVersion && feature != .appleTV
+        }
     }
 
     public func isFullVersion() -> Bool {
-        if appType == .fullVersion {
+        if appType == .fullVersion || appType == .fullVersionPlusTV {
             pp_log.verbose("Eligibility: appType = .fullVersion")
             return true
         }
