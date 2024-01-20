@@ -63,7 +63,7 @@ public final class ProductManager: NSObject, ObservableObject {
         self.overriddenAppType = overriddenAppType
         self.receiptReader = receiptReader
         self.buildProducts = buildProducts ?? BuildProducts { _ in [] }
-        appType = .undefined
+        appType = overriddenAppType ?? .undefined
 
         products = []
         self.inApp = inApp
