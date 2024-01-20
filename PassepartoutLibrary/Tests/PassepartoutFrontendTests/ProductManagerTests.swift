@@ -123,11 +123,13 @@ final class ProductManagerTests: XCTestCase {
         let sut = ProductManager(inApp: inApp, receiptReader: reader)
 
         XCTAssertTrue(sut.isFullVersion())
-        XCTAssertTrue(LocalProduct
-            .allFeatures
-            .filter { $0 != .appleTV && !$0.isLegacyPlatformVersion }
-            .allSatisfy(sut.isEligible(forFeature:))
-        )
+        LocalProduct.allFeatures.forEach {
+            guard $0 != .appleTV && !$0.isLegacyPlatformVersion else {
+                XCTAssertFalse(sut.isEligible(forFeature: $0))
+                return
+            }
+            XCTAssertTrue(sut.isEligible(forFeature: $0))
+        }
     }
 
     func test_givenFullVersion_thenIsNotEligibleForAppleTV() {
@@ -251,6 +253,7 @@ final class ProductManagerTests: XCTestCase {
 
         LocalProduct.allFeatures.forEach {
             guard !$0.isLegacyPlatformVersion, $0 != .appleTV else {
+                XCTAssertFalse(sut.isEligible(forFeature: $0), "\($0)")
                 return
             }
             XCTAssertTrue(sut.isEligible(forFeature: $0), "\($0)")
@@ -263,6 +266,7 @@ final class ProductManagerTests: XCTestCase {
 
         LocalProduct.allFeatures.forEach {
             guard !$0.isLegacyPlatformVersion else {
+                XCTAssertFalse(sut.isEligible(forFeature: $0), "\($0)")
                 return
             }
             XCTAssertTrue(sut.isEligible(forFeature: $0), "\($0)")
