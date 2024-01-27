@@ -134,9 +134,12 @@ extension View {
         #endif
     }
 
-    @ViewBuilder
-    private func themeTint() -> some View {
+    func themeTint() -> some View {
         tint(.accentColor)
+    }
+
+    func themeListSelectionColor() -> some View {
+        tint(Color.gray.opacity(0.6))
     }
 
     private func themeListStyleValue() -> some ListStyle {
