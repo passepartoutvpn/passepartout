@@ -163,7 +163,7 @@ extension View {
 
 extension View {
     fileprivate var themePrimaryBackgroundColor: Color {
-        Color(Asset.Assets.primaryColor.color)
+        Color(.primary)
     }
 
     fileprivate var themeSecondaryColor: Color {
@@ -171,7 +171,7 @@ extension View {
     }
 
     fileprivate var themeLightTextColor: Color {
-        Color(Asset.Assets.lightTextColor.color)
+        Color(.lightText)
     }
 
     fileprivate var themeErrorColor: Color {

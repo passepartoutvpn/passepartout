@@ -96,7 +96,6 @@
 		0E6059CB27FCC5DE003F4063 /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059C827FCC5DD003F4063 /* Flags.xcassets */; };
 		0E6059CC27FCC5DE003F4063 /* Providers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059C927FCC5DE003F4063 /* Providers.xcassets */; };
 		0E6059CD27FCC5DE003F4063 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6059CA27FCC5DE003F4063 /* Assets.xcassets */; };
-		0E6059CF27FCC618003F4063 /* SwiftGen+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */; };
 		0E70589B28377DC40075D1D2 /* VPNStatusText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E70589A28377DC30075D1D2 /* VPNStatusText.swift */; };
 		0E71ACDD27C0295C00F85C4B /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */; };
 		0E71ACE327C0F2E400F85C4B /* Providers+L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */; };
@@ -398,7 +397,6 @@
 		0E6059C827FCC5DD003F4063 /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
 		0E6059C927FCC5DE003F4063 /* Providers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Providers.xcassets; sourceTree = "<group>"; };
 		0E6059CA27FCC5DE003F4063 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftGen+Assets.swift"; sourceTree = "<group>"; };
 		0E70589A28377DC30075D1D2 /* VPNStatusText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNStatusText.swift; sourceTree = "<group>"; };
 		0E71ACDC27C0295B00F85C4B /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		0E71ACE227C0F2E300F85C4B /* Providers+L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Providers+L10n.swift"; sourceTree = "<group>"; };
@@ -949,7 +947,6 @@
 			children = (
 				0EB17EA527D2263700D473B5 /* Constants+App.swift */,
 				0ED7D62E2867328A009F2F8F /* Constants+Library.swift */,
-				0E6059CE27FCC618003F4063 /* SwiftGen+Assets.swift */,
 				0EB34BCB27C6F41D00B126DA /* Theme.swift */,
 			);
 			path = Constants;
@@ -1515,7 +1512,6 @@
 				0E34A2B627CAA8CC00C73B67 /* Core+L10n.swift in Sources */,
 				0E7577DF2817E22C00081CBE /* VPNToggle.swift in Sources */,
 				0E5467F32867A54600F74D1C /* MacBundle.swift in Sources */,
-				0E6059CF27FCC618003F4063 /* SwiftGen+Assets.swift in Sources */,
 				0E2A8D4927ADF87F00207D04 /* PassepartoutApp.swift in Sources */,
 				0EBC075527EBC83800208AD9 /* MailComposerView.swift in Sources */,
 				0EF0FAF727DD159C007EB181 /* IntentDispatcher.swift in Sources */,

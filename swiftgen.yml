@@ -6,12 +6,3 @@ strings:
       output: Passepartout/AppShared/Constants/SwiftGen+Strings.swift
       params:
         bundle: Bundle.main
-
-xcassets:
-  inputs:
-    - Passepartout/App/Assets.xcassets
-    - Passepartout/App/Flags.xcassets
-    - Passepartout/App/Providers.xcassets
-  outputs:
-    - templateName: swift4
-      output: Passepartout/App/Constants/SwiftGen+Assets.swift
