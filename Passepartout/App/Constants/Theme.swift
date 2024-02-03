@@ -138,8 +138,9 @@ extension View {
         tint(.accentColor)
     }
 
-    func themeListSelectionColor() -> some View {
-        tint(Color.gray.opacity(0.6))
+    func themeListSelectionColor(isSelected: Bool) -> some View {
+        let background = isSelected ? Color.gray.opacity(0.6) : .clear
+        return listRowBackground(background.themeRounded())
     }
 
     private func themeListStyleValue() -> some ListStyle {
@@ -163,7 +164,7 @@ extension View {
 
 extension View {
     fileprivate var themePrimaryBackgroundColor: Color {
-        Color(Asset.Assets.primaryColor.color)
+        Color(.primary)
     }
 
     fileprivate var themeSecondaryColor: Color {
@@ -171,7 +172,7 @@ extension View {
     }
 
     fileprivate var themeLightTextColor: Color {
-        Color(Asset.Assets.lightTextColor.color)
+        Color(.lightText)
     }
 
     fileprivate var themeErrorColor: Color {
@@ -429,6 +430,10 @@ extension View {
 
     func themeDebugLogStyle() -> some View {
         font(.system(size: 13, weight: .medium, design: .monospaced))
+    }
+
+    func themeRounded() -> some View {
+        clipShape(.rect(cornerRadius: 10.0))
     }
 }
 
