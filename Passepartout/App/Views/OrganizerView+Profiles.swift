@@ -99,7 +99,6 @@ private extension OrganizerView.ProfilesList {
             }
         }
         .themeAnimation(on: profileManager.headers)
-        .themeListSelectionColor()
     }
 
     var profilesView: some View {
@@ -123,6 +122,7 @@ private extension OrganizerView.ProfilesList {
         .contextMenu {
             OrganizerView.ProfileContextMenu(header: profile.header)
         }
+        .themeListSelectionColor(isSelected: profileManager.isCurrentProfile(profile.id))
     }
 
     func profileLabel(forProfile profile: Profile) -> some View {

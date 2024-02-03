@@ -60,8 +60,7 @@ struct VPNToggle: View {
         Toggle(title, isOn: isEnabled)
             .disabled(!canToggle)
             .themeAnimation(on: currentVPNState.isEnabled)
-            // .tint(.accent) // XXX: #458, this does not work
-            .tint(Color(.accent))
+            .tint(.accentColor)
     }
 }
 
