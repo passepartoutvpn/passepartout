@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Restricted profile not updated. [#481](https://github.com/passepartoutvpn/passepartout-apple/pull/481)
-- Selection and switch have the same color in organizer. [#458](https://github.com/passepartoutvpn/passepartout-apple/issues/458)
+- Selection and switch have the same color in organizer. [#458](https://github.com/passepartoutvpn/passepartout-apple/issues/458), [#486](https://github.com/passepartoutvpn/passepartout-apple/pull/486), [#490](https://github.com/passepartoutvpn/passepartout-apple/pull/490)
 
 ## 2.3.5 (2024-01-19)
 
