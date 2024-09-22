@@ -13,6 +13,8 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+setup_ci if ENV["CI"]
+
 ## Project metadata
 
 desc "Get build number (*nix)"

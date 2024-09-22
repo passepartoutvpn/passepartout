@@ -35,8 +35,6 @@ jobs:
       MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
       MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
       MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
-      MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
-      MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
       GYM_OUTPUT_DIRECTORY: "dist/${{ matrix.platform }}"
     steps:
       - uses: actions/checkout@v3
@@ -59,11 +57,6 @@ jobs:
           BUILD=`ci/build-number.sh $PLATFORM`
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "build=$BUILD" >> $GITHUB_OUTPUT
-      - name: Create keychain
-        uses: ./.github/actions/create-keychain
-        with:
-          name: ${{ env.MATCH_KEYCHAIN_NAME }}
-          password: ${{ env.MATCH_KEYCHAIN_PASSWORD }}
       - name: Preinstall certificates (SSH)
         run: |
           scripts/ci/recognize-match-hostname.sh
