@@ -1,5 +1,5 @@
 #!/bin/bash
-. .env.$1
+. fastlane/.env.$1
 
 RELEASE_NOTES="release_notes"
 RX='^[a-z]{2}(\-[A-z]+)?$'

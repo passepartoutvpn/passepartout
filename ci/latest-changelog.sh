@@ -1,5 +1,5 @@
 #!/bin/bash
-. .env.$1
+. fastlane/.env.$1
 
 RELEASES=(`grep -n "^## " $CHANGELOG | sed -E "s/^([0-9]+).*$/\1/g"`)
 UNRELEASED=${RELEASES[0]}

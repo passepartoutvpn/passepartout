@@ -1,5 +1,5 @@
 #!/bin/bash
-. .env.$1
+. fastlane/.env.$1
 
 RELEASE_NOTES="$DELIVER_METADATA_PATH/en-US/release_notes.txt"
 

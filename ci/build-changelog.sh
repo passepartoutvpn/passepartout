@@ -1,6 +1,6 @@
 #!/bin/bash
-. .env
-. .env.$1
+. fastlane/.env
+. fastlane/.env.$1
 
 RELEASE_NOTES="$DELIVER_METADATA_PATH/en-US/release_notes.txt"
 if [[ -n $CHANGELOG_PREFACE ]]; then
