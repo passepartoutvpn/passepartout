@@ -48,7 +48,7 @@ jobs:
           go-version: "^1.17"
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: "15.1"
+          xcode-version: "latest-stable"
       - name: Store app version
         id: app_version
         if: ${{ matrix.use_version }}
