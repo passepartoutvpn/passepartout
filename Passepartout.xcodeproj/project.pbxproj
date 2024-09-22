@@ -1895,6 +1895,7 @@
 				PRODUCT_NAME = Passepartout;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match Development com.algoritmico.ios.Passepartout tvos";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.algoritmico.ios.Passepartout";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout catalyst";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -2090,7 +2091,7 @@
 				PRODUCT_NAME = PassepartoutOpenVPNTunnel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "match Development com.algoritmico.ios.Passepartout.OpenVPNTunnel tvos";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.algoritmico.ios.Passepartout.OpenVPNTunnel tvos";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.algoritmico.ios.Passepartout.OpenVPNTunnel";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "match Development com.algoritmico.ios.Passepartout.OpenVPNTunnel catalyst";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
