@@ -42,6 +42,7 @@ struct OrganizerView: View {
         List {
             ActiveProfileView(profileManager: profileManager)
             aboutSection
+            deleteSection
         }
         .navigationTitle(Unlocalized.appName)
         .themeTV()
@@ -61,6 +62,19 @@ private extension OrganizerView {
                 .withTrailingText(Constants.Global.appVersionString)
         } header: {
             Text(L10n.About.title)
+        }
+    }
+
+    var deleteSection: some View {
+        Section {
+            Button(L10n.Global.Strings.delete, role: .destructive) {
+                profileManager.activeProfileId.map {  profileId in
+                    withAnimation {
+                        profileManager.removeProfiles(withIds: [profileId])
+                    }
+                }
+            }
+            .disabled(!profileManager.hasActiveProfile)
         }
     }
 }
