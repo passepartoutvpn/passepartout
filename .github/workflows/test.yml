@@ -24,6 +24,11 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Access private repositories
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          git config --global url.https://$ACCESS_TOKEN@github.com/.insteadOf git@github.com:
       - name: Run tests
         run: |
           cd Passepartout/Library
