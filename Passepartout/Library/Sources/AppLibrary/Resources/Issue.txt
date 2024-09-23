@@ -1,0 +1,15 @@
+Hi,
+
+// enter a description of the issue
+
+--
+
+App: $appLine
+OS: $osLine
+Device: $deviceLine
+Provider: $providerName (last updated: $providerLastUpdate)
+Purchased: $purchasedProducts
+
+--
+
+Regards

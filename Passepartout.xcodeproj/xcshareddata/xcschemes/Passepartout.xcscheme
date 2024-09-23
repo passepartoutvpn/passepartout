@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1510"
+   LastUpgradeVersion = "1540"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,51 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E57F63720C83FC5008323CF"
+               BlueprintIdentifier = "0E06D18E2B87629100176E1D"
                BuildableName = "Passepartout.app"
                BlueprintName = "Passepartout"
-               ReferencedContainer = "container:Passepartout.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0EDE8DBE20C86910004C739C"
-               BuildableName = "PassepartoutOpenVPNTunnel.appex"
-               BlueprintName = "OpenVPNTunnel"
-               ReferencedContainer = "container:Passepartout.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0ECF71F327B6D9CD00CDB528"
-               BuildableName = "WireGuardGo"
-               BlueprintName = "WireGuardGo"
-               ReferencedContainer = "container:Passepartout.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0ED2B33E27D3C77800FD8EA9"
-               BuildableName = "PassepartoutWireGuardTunnel.appex"
-               BlueprintName = "WireGuardTunnel"
                ReferencedContainer = "container:Passepartout.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -70,21 +28,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E57F63720C83FC5008323CF"
-            BuildableName = "Passepartout.app"
-            BlueprintName = "Passepartout"
-            ReferencedContainer = "container:Passepartout.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "it"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -95,7 +43,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E57F63720C83FC5008323CF"
+            BlueprintIdentifier = "0E06D18E2B87629100176E1D"
             BuildableName = "Passepartout.app"
             BlueprintName = "Passepartout"
             ReferencedContainer = "container:Passepartout.xcodeproj">
@@ -103,35 +51,33 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-com.apple.CoreData.SQLDebug 0"
-            isEnabled = "YES">
+            argument = "-com.apple.CoreData.SQLDebug 1"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-com.apple.CoreData.Logging.stderr 0 "
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.CloudKitDebug 0"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.ConcurrencyDebug 0"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.MigrationDebug 0"
+            argument = " -com.apple.CoreData.ConcurrencyDebug 1"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "APP_TYPE"
-            value = "0"
+            key = "SQLITE_ENABLE_THREAD_ASSERTIONS"
+            value = "1"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "LOG_LEVEL"
-            value = "0"
+            key = "SQLITE_ENABLE_FILE_ASSERTIONS"
+            value = "1"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "SQLITE_AUTO_TRACE"
+            value = "1"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "CUSTOM_USER_LEVEL"
+            value = "2"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
@@ -146,7 +92,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E57F63720C83FC5008323CF"
+            BlueprintIdentifier = "0E06D18E2B87629100176E1D"
             BuildableName = "Passepartout.app"
             BlueprintName = "Passepartout"
             ReferencedContainer = "container:Passepartout.xcodeproj">

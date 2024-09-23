@@ -1,7 +1,9 @@
 included:
-  - Passepartout
-  - PassepartoutLibrary/Sources
-  - PassepartoutLibrary/Tests
+  - Passepartout/App
+  - Passepartout/Library/Sources
+  - Passepartout/Library/Tests
+  - Passepartout/Shared
+  - Passepartout/Tunnel
 analyzer_rules:
   - unused_declaration
   - unused_import
@@ -14,5 +16,6 @@ disabled_rules:
   - function_body_length
   - identifier_name
   - line_length
+  - inclusive_language
   - nesting
   - todo

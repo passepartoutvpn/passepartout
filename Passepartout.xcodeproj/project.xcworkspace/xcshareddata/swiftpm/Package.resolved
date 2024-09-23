@@ -1,12 +1,21 @@
 {
   "pins" : [
     {
-      "identity" : "generic-json-swift",
+      "identity" : "dtfoundation",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zoul/generic-json-swift",
+      "location" : "https://github.com/Cocoanetics/DTFoundation.git",
       "state" : {
-        "revision" : "0a06575f4038b504e78ac330913d920f1630f510",
-        "version" : "2.0.2"
+        "revision" : "76062513434421cb6c8a1ae1d4f8368a7ebc2da3",
+        "version" : "1.7.18"
+      }
+    },
+    {
+      "identity" : "kvitto",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Cocoanetics/Kvitto",
+      "state" : {
+        "revision" : "88888674d772ddcf19671159ed0022cb0bc37be2",
+        "version" : "1.0.6"
       }
     },
     {
@@ -14,25 +23,44 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/openssl-apple",
       "state" : {
-        "revision" : "026702febcaebcbf9ea68f2fa66b017eba998cdf",
-        "version" : "3.2.105"
+        "revision" : "0edc07c7a0e4ec2ca0f448dd68314241ccc925b3",
+        "version" : "3.2.107"
       }
     },
     {
-      "identity" : "swiftybeaver",
+      "identity" : "passepartoutkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftyBeaver/SwiftyBeaver",
+      "location" : "git@github.com:passepartoutvpn/passepartoutkit",
       "state" : {
-        "revision" : "12b5acf96d98f91d50de447369bd18df74600f1a",
-        "version" : "1.9.6"
+        "revision" : "2c32459d6a669e8feed0e6ea2d1250ef72364aa3",
+        "version" : "0.7.0"
       }
     },
     {
-      "identity" : "tunnelkit",
+      "identity" : "passepartoutkit-openvpn-openssl",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/passepartoutvpn/tunnelkit",
+      "location" : "git@github.com:passepartoutvpn/passepartoutkit-openvpn-openssl",
       "state" : {
-        "revision" : "6ab1759e048867fbca9bd5d33f2dc7eb1fa79ca6"
+        "revision" : "a3092a6ee0a63f666aa47ef3f0f50c324a64598d",
+        "version" : "0.6.0"
+      }
+    },
+    {
+      "identity" : "passepartoutkit-wireguard-go",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:passepartoutvpn/passepartoutkit-wireguard-go",
+      "state" : {
+        "revision" : "2cbd6023300d2dcc3f6f68de4812cf390421ec35",
+        "version" : "0.6.2"
+      }
+    },
+    {
+      "identity" : "wg-go-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/passepartoutvpn/wg-go-apple",
+      "state" : {
+        "revision" : "860e82efaf261da37483a5f51555be83e5a79ad3",
+        "version" : "0.0.20240714"
       }
     },
     {
@@ -40,7 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/wireguard-apple",
       "state" : {
-        "revision" : "b79f0f150356d8200a64922ecf041dd020140aa0"
+        "revision" : "a896f784bc5ed94f29d97e376be5cfa08d4a5d44",
+        "version" : "1.1.1"
       }
     }
   ],

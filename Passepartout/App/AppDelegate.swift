@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/25/22.
+//  Created by Davide De Rosa on 9/18/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,37 +23,31 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PassepartoutLibrary
+#if os(iOS)
+
 import UIKit
 
-final class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
-    private let mac = MacBundle.shared
+final class AppDelegate: NSObject, UIApplicationDelegate {
+}
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        #if targetEnvironment(macCatalyst)
-        mac.configure()
-        mac.menu.install()
-        if mac.utils.isStartedByLauncher {
-            mac.utils.sendAppToBackground()
-        }
-        #endif
-        return true
+#else
+
+import AppKit
+import CommonLibrary
+import PassepartoutKit
+
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSWindow.allowsAutomaticWindowTabbing = false
+
+        // XXX: hack to only retain "Edit" menu
+        NSApp.mainMenu?.items = NSApp.mainMenu?.items.filter {
+            [BundleConfiguration.main.displayName, "Edit"].contains($0.title)
+        } ?? []
     }
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        let sceneConfiguration = UISceneConfiguration(name: "SceneDelegate", sessionRole: connectingSceneSession.role)
-        sceneConfiguration.delegateClass = SceneDelegate.self
-        return sceneConfiguration
-    }
-
-    override func buildMenu(with builder: UIMenuBuilder) {
-        super.buildMenu(with: builder)
-        builder.remove(menu: .file)
-        builder.remove(menu: .services)
-        builder.remove(menu: .format)
-        builder.remove(menu: .toolbar)
-        builder.remove(menu: .view)
-        builder.remove(menu: .help)
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        true
     }
 }
+#endif

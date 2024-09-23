@@ -1,1 +1,0 @@
-../../ios/metadata/primary_category.txt

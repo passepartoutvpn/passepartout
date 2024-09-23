@@ -1,5 +1,0 @@
-### Fixed
-
-- Restricted profile not updated.
-- Selection and switch have the same color in organizer.
-

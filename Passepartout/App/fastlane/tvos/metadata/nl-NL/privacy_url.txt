@@ -1,1 +1,0 @@
-../../../ios/metadata/nl-NL/privacy_url.txt

@@ -1,1 +1,0 @@
-../../../ios/metadata/sv/name.txt

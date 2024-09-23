@@ -2,7 +2,7 @@
 //  PassepartoutApp.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/28/21.
+//  Created by Davide De Rosa on 2/22/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,44 +23,48 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutLibrary
+import AppLibrary
+import CommonLibrary
+import PassepartoutKit
 import SwiftUI
 
 @main
 struct PassepartoutApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
-    @SceneBuilder var body: some Scene {
+#if os(iOS)
+    @UIApplicationDelegateAdaptor
+    private var appDelegate: AppDelegate
+#else
+    @NSApplicationDelegateAdaptor
+    private var appDelegate: AppDelegate
+#endif
+
+    private let context: AppContext = .shared
+//    private let context: AppContext = .mock(withRegistry: .shared)
+
+    @StateObject
+    private var theme = Theme()
+
+    var body: some Scene {
         WindowGroup {
-            MainView()
-                #if !os(tvOS)
-                .withoutTitleBar()
-                .onIntentActivity(IntentDispatcher.connectVPN)
-                .onIntentActivity(IntentDispatcher.disableVPN)
-                .onIntentActivity(IntentDispatcher.enableVPN)
-                .onIntentActivity(IntentDispatcher.moveToLocation)
-                .onIntentActivity(IntentDispatcher.trustCellularNetwork)
-                .onIntentActivity(IntentDispatcher.trustCurrentNetwork)
-                .onIntentActivity(IntentDispatcher.untrustCellularNetwork)
-                .onIntentActivity(IntentDispatcher.untrustCurrentNetwork)
-                #endif
-        }
-    }
-}
-
-private extension View {
-
-    @MainActor
-    func onIntentActivity(_ activity: IntentActivity<VPNManager>) -> some View {
-        onContinueUserActivity(activity.name) { userActivity in
-
-            // eligibility: ignore Siri shortcuts if not purchased
-            guard ProductManager.shared.isEligible(forFeature: .siriShortcuts) else {
-                pp_log.warning("Ignore activity handler, not eligible for Siri shortcuts")
-                return
+            AppCoordinator(
+                profileManager: context.profileManager,
+                tunnel: context.tunnel,
+                registry: context.registry
+            )
+            .onLoad {
+                CommonLibrary.configureLogging(
+                    to: Constants.shared.urlForAppLog,
+                    parameters: Constants.shared.log
+                )
+                AppLibrary.configure(with: context)
             }
-            pp_log.info("Handling activity: \(activity.name)")
-            activity.handler(userActivity, .shared)
+            .environmentObject(theme)
+            .environmentObject(context.iapManager)
+            .environmentObject(context.connectionObserver)
         }
+#if os(macOS)
+        .defaultSize(width: 600.0, height: 400.0)
+#endif
     }
 }

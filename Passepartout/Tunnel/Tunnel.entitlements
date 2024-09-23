@@ -10,7 +10,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.algoritmico.Passepartout</string>
+		<string>$(CFG_GROUP_ID)</string>
 	</array>
 	<key>com.apple.security.network.client</key>
 	<true/>
@@ -18,7 +18,7 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)group.com.algoritmico.Passepartout</string>
+		<string>$(AppIdentifierPrefix)$(CFG_GROUP_ID)</string>
 	</array>
 </dict>
 </plist>

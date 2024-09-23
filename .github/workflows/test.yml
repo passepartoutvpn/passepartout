@@ -4,36 +4,35 @@ on:
   pull_request:
     types: [ opened, synchronize ]
     paths-ignore:
-      - '.beta-*'
       - '.env.*'
       - '**/*.md'
       - '**/*.sh'
       - '**/*.yml'
-      - 'Passepartout/App/fastlane/**'
+      - 'fastlane/**'
 
 concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   run_tests:
     name: Run tests
-    runs-on: macos-13
+    runs-on: macos-14
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: "15.1"
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - uses: actions/setup-go@v4
+      - uses: maxim-lobanov/setup-xcode@v1
         with:
-          go-version: "^1.17"
+          xcode-version: 15.4
+      - name: Access private repositories
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          git config --global url.https://$ACCESS_TOKEN@github.com/.insteadOf git@github.com:
       - name: Run tests
         run: |
-          cd PassepartoutLibrary
+          cd Passepartout/Library
           swift test
