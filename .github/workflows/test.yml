@@ -1,0 +1,30 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+    paths-ignore:
+      - '.env.*'
+      - '**/*.md'
+      - '**/*.sh'
+      - '**/*.yml'
+      - 'fastlane/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run_tests:
+    name: Run tests
+    runs-on: macos-14
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run tests
+        run: |
+          cd Passepartout/Library
+          swift test
