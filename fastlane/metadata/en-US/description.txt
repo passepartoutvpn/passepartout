@@ -1,0 +1,37 @@
+Passepartout is a smart VPN client perfectly integrated with Apple platforms. Passepartout is the only app you need for both well-known VPN providers and your personal VPN servers.
+
+Passepartout does not engage any unrequested background activity other than the VPN tunnel, thus being also friendlier to firewalls.
+
+Passepartout is open source: https://github.com/passepartoutvpn
+
+USE WITH MULTIPLE PROVIDERS
+
+Passepartout offers presets for major VPN providers:
+
+- Hide.me
+- IVPN
+- Mullvad
+- NordVPN
+- Oeck
+- PIA
+- ProtonVPN
+- SurfShark
+- TorGuard
+- TunnelBear
+- VyprVPN
+- Windscribe
+
+EASY TO USE
+
+- Incredible ease of use, with native look & feel.
+- Handle your profiles in one single place.
+- Import .ovpn / .conf configuration files.
+- Use on demand rules to fine-grain your connectivity.
+- Fine-tune encryption without tweaking any configuration file.
+- Override network settings in a snap (default gateway, DNS, proxy, MTU).
+
+PRIVACY FRIENDLY
+
+- Full transparency on what servers you're connecting to.
+- Pick pre-resolved endpoints when DNS is problematic.
+- No web services, ads or any undesired bloat besides the VPN itself.

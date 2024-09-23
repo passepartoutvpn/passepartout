@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - "stable"
+    tags:
+      - "builds/*"
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
+  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+
+jobs:
+  build_upload:
+    name: Upload to ASC
+    runs-on: macos-14
+    strategy:
+      fail-fast: true
+      matrix:
+        #name: ["iOS", "macOS", "tvOS"]
+        name: ["iOS", "macOS"]
+        include:
+          - name: "iOS"
+            platform: "ios"
+          - name: "macOS"
+            platform: "macos"
+          #- name: "tvOS"
+          #  platform: "tvos"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Access private repositories
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          git config --global url.https://$ACCESS_TOKEN@github.com/.insteadOf git@github.com:
+      - name: Upload ${{ matrix.name }} app
+        id: upload_app
+        timeout-minutes: 15
+        env:
+          MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+          MATCH_GIT_PRIVATE_KEY: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
+          PILOT_BETA_APP_FEEDBACK: ${{ secrets.PILOT_BETA_APP_FEEDBACK }}
+          PILOT_BETA_APP_REVIEW_INFO: ${{ secrets.PILOT_BETA_APP_REVIEW_INFO }}
+          PILOT_GROUPS: ${{ vars.PILOT_GROUPS }}
+        run: |
+          ci/recognize-match-hostname.sh
+          bundle exec fastlane --env ${{ matrix.platform }} beta

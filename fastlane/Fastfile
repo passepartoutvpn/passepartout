@@ -1,0 +1,69 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+fastlane_require "dotenv"
+Dotenv.load ".env.secret"
+
+setup_ci if ENV["CI"]
+logname = "CHANGELOG.txt"
+
+desc "Bump version"
+lane :bump do |options|
+    increment_build_number
+    version = options[:version]
+    unless version.nil? || version.empty?
+        increment_version_number_in_xcodeproj(version_number: version)
+    end
+    log = changelog_from_git_commits(
+        pretty: "* %h %s",
+        date_format: "short"
+    )
+    File.open("../#{logname}", "w") { |file|
+        file.write(log)
+    }
+    commit_version_bump(
+        message: "Bump version",
+        include: [logname]
+    )
+    #add_git_tag(
+    #    includes_lane: false,
+    #    sign: true
+    #)
+end
+
+desc "Push a new beta build to TestFlight"
+lane :beta do
+    log = File.read("../#{logname}")
+    match(type: "appstore")
+    gym(
+        clean: true,
+        build_path: "build",
+        derived_data_path: "build/derived_data"
+    )
+    pilot(
+        changelog: log,
+        distribute_external: true,
+        notify_external_testers: false
+    )
+end
+
+desc "Distribute to Public Beta"
+lane :public_beta do
+    pilot(
+        distribute_only: true,
+        distribute_external: true,
+        notify_external_testers: true
+    )
+end

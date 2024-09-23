@@ -1,0 +1,3 @@
+Passepartout is a bare VPN client and, as such, does not store nor forward any personal data. Therefore, you should get in touch with your VPN service provider to learn about its data retention policy.
+
+Passepartout may access GitHub repositories on request. Please refer to GitHub privacy statement for any information about data retention when accessing their website.

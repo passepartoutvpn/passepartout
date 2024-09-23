@@ -1,0 +1,223 @@
+// MARK: Global
+
+"global.account" = "Account";
+"global.address" = "Address";
+"global.addresses" = "Addresses";
+"global.any" = "Any";
+"global.cancel" = "Cancel";
+"global.certificate" = "Certificate";
+"global.compression" = "Compression";
+"global.connect" = "Connect";
+"global.connection" = "Connection";
+"global.default" = "Default";
+"global.destination" = "Destination";
+"global.disable" = "Disable";
+"global.disabled" = "Disabled";
+"global.disconnect" = "Disconnect";
+"global.domain" = "Domain";
+"global.done" = "Done";
+"global.duplicate" = "Duplicate";
+"global.edit" = "Edit";
+"global.empty" = "Empty";
+"global.enable" = "Enable";
+"global.enabled" = "Enabled";
+"global.endpoint" = "Endpoint";
+"global.folder" = "Folder";
+"global.gateway" = "Gateway";
+"global.general" = "General";
+"global.hostname" = "Hostname";
+"global.interface" = "Interface";
+"global.keep_alive" = "Keep-alive";
+"global.key" = "Key";
+"global.method" = "Method";
+"global.modules" = "Modules";
+"global.n_seconds" = "%d seconds";
+"global.name" = "Name";
+"global.networks" = "Networks";
+"global.no_content" = "No content";
+"global.no_selection" = "No selection";
+"global.none" = "None";
+"global.ok" = "OK";
+"global.on_demand" = "On demand";
+"global.other" = "Other";
+"global.password" = "Password";
+"global.port" = "Port";
+"global.private_key" = "Private key";
+"global.protocol" = "Protocol";
+"global.public_key" = "Public key";
+"global.remove" = "Delete";
+"global.restart" = "Restart";
+"global.route" = "Route";
+"global.routes" = "Routes";
+"global.save" = "Save";
+"global.server" = "Server";
+"global.servers" = "Servers";
+"global.status" = "Status";
+"global.storage" = "Storage";
+"global.subnet" = "Subnet";
+"global.uninstall" = "Uninstall";
+"global.unknown" = "Unknown";
+"global.username" = "Username";
+"global.version" = "Version";
+
+// MARK: - Entities
+
+"entities.dns.servers" = "Servers";
+"entities.dns.search_domains" = "Search domains";
+
+"entities.dns_protocol.cleartext" = "Cleartext";
+"entities.dns_protocol.https" = "Over HTTPS";
+"entities.dns_protocol.tls" = "Over TLS";
+
+"entities.http_proxy.bypass_domains" = "Bypass domains";
+
+"entities.on_demand.policy.any" = "All networks";
+"entities.on_demand.policy.excluding" = "Excluding";
+"entities.on_demand.policy.including" = "Including";
+
+"entities.openvpn.compression_algorithm.other" = "Unsupported";
+"entities.openvpn.otp_method.none" = "None";
+"entities.openvpn.otp_method.append" = "Append";
+"entities.openvpn.otp_method.encode" = "Encode";
+
+"entities.profile.name.new" = "New profile";
+
+"entities.tunnel_status.inactive" = "Inactive";
+"entities.tunnel_status.activating" = "Activating";
+"entities.tunnel_status.active" = "Active";
+"entities.tunnel_status.deactivating" = "Deactivating";
+
+"entities.connection_status.disconnected" = "Disconnected";
+"entities.connection_status.connecting" = "Connecting";
+"entities.connection_status.connected" = "Connected";
+"entities.connection_status.disconnecting" = "Disconnecting";
+
+// MARK: - Entity placeholders
+
+"placeholders.profile.name" = "My profile";
+"placeholders.on_demand.ssid" = "My SSID";
+"placeholders.username" = "username";
+"placeholders.secret" = "secret";
+
+// MARK: - Views
+
+"views.profiles.rows.not_installed" = "Select a profile";
+"views.profiles.rows.modules" = "%d modules";
+"views.profiles.folders.active_profile" = "Installed profile";
+"views.profiles.folders.default" = "My profiles";
+"views.profiles.folders.add_profile" = "Add profile";
+"views.profiles.folders.no_profiles" = "No profiles";
+"views.profiles.toolbar.new_profile" = "New profile";
+"views.profiles.toolbar.import_profile" = "Import profile";
+"views.profiles.alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
+"views.profiles.alerts.import.passphrase.ok" = "Decrypt";
+"views.profiles.errors.tunnel" = "Unable to execute tunnel operation.";
+"views.profiles.errors.duplicate" = "Unable to duplicate profile '%@'.";
+"views.profiles.errors.import" = "Unable to import profiles.";
+
+"views.profile.rows.add_module" = "Add module";
+"views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
+
+"views.advanced.title" = "Advanced";
+"views.advanced.sections.resources" = "Resources";
+
+"views.advanced.links.title" = "Links";
+"views.advanced.links.sections.support" = "Support";
+"views.advanced.links.sections.web" = "Web";
+"views.advanced.links.rows.join_community" = "Join community";
+"views.advanced.links.rows.write_review" = "Write a review";
+"views.advanced.links.rows.home_page" = "Home page";
+"views.advanced.links.rows.disclaimer" = "Disclaimer";
+"views.advanced.links.rows.privacy_policy" = "Privacy policy";
+
+"views.advanced.credits.title" = "Credits";
+"views.advanced.credits.licenses" = "Licenses";
+"views.advanced.credits.notices" = "Notices";
+"views.advanced.credits.translations" = "Translations";
+
+"views.donate.title" = "Make a donation";
+
+"views.diagnostics.title" = "Diagnostics";
+"views.diagnostics.sections.live" = "Live log";
+"views.diagnostics.sections.tunnel" = "Tunnel logs";
+"views.diagnostics.rows.app" = "App";
+"views.diagnostics.rows.tunnel" = "Tunnel";
+"views.diagnostics.rows.include_private_data" = "Include private data";
+"views.diagnostics.rows.remove_tunnel_logs" = "Delete all logs";
+
+"views.diagnostics.openvpn.rows.server_configuration" = "Server configuration";
+
+"views.diagnostics.report_issue.title" = "Report issue";
+"views.diagnostics.alerts.report_issue.email" = "The device is not configured to send e-mails.";
+
+// MARK: - Module views
+
+"modules.dns.servers.add" = "Add address";
+"modules.dns.search_domains.add" = "Add domain";
+"modules.http_proxy.bypass_domains.add" = "Add bypass domain";
+
+"modules.ip.routes.include" = "Include route";
+"modules.ip.routes.exclude" = "Exclude route";
+"modules.ip.routes.included" = "Included routes";
+"modules.ip.routes.excluded" = "Excluded routes";
+"modules.ip.routes.add_family" = "Add %@";
+
+"modules.on_demand.policy" = "Policy";
+"modules.on_demand.policy.footer" = "Activate the VPN %@.";
+"modules.on_demand.policy.footer.any" = "in any network";
+"modules.on_demand.policy.footer.including" = "only in the networks below";
+"modules.on_demand.policy.footer.excluding" = "except in the networks below";
+"modules.on_demand.mobile" = "Mobile";
+"modules.on_demand.ethernet" = "Ethernet";
+"modules.on_demand.ssid.add" = "Add SSID";
+
+"modules.openvpn.pull" = "Pull";
+"modules.openvpn.redirect_gateway" = "Redirect gateway";
+"modules.openvpn.credentials" = "Credentials";
+"modules.openvpn.remotes" = "Remotes";
+"modules.openvpn.communication" = "Communication";
+"modules.openvpn.cipher" = "Cipher";
+"modules.openvpn.digest" = "Digest";
+"modules.openvpn.compression" = "Compression";
+"modules.openvpn.compression_framing" = "Framing";
+"modules.openvpn.compression_algorithm" = "Algorithm";
+"modules.openvpn.tls_wrap" = "Wrapping";
+"modules.openvpn.eku" = "Extended verification";
+"modules.openvpn.renegotiation" = "Renegotiation";
+"modules.openvpn.randomize_endpoint" = "Randomize endpoint";
+"modules.openvpn.randomize_hostname" = "Randomize hostname";
+"modules.openvpn.credentials.interactive" = "Interactive";
+"modules.openvpn.credentials.interactive.footer" = "On-demand will be disabled.";
+"modules.openvpn.credentials.otp_method.approach.append" = "The OTP will be appended to the password.";
+"modules.openvpn.credentials.otp_method.approach.encode" = "The OTP will be encoded in Base64 with the password.";
+
+"modules.wireguard.interface" = "Interface";
+"modules.wireguard.peer" = "Peer #%d";
+"modules.wireguard.preshared_key" = "Pre-shared key";
+"modules.wireguard.allowed_ips" = "Allowed IPs";
+
+// MARK: - Alerts
+
+"alerts.iap.restricted.title" = "Restricted";
+"alerts.iap.restricted.message" = "The requested feature is unavailable in this build.";
+
+// MARK: - Errors
+
+"errors.app.empty_profile_name" = "Profile name is empty.";
+"errors.app.malformed_module" = "Module %@ is malformed. %@";
+"errors.app.multiple_connection_modules" = "Only one connection module can be active at a time.";
+"errors.app.ip_module_requires_connection" = "IP module can only be enabled together with a connection.";
+"errors.app.default" = "Unable to complete operation.";
+"errors.app.passepartout.invalid_fields" = "Invalid fields (%@).";
+"errors.app.passepartout.parsing" = "Unable to parse file.";
+"errors.app.passepartout.default" = "Unable to complete operation (code=%@).";
+
+"errors.tunnel.auth" = "Auth failed";
+"errors.tunnel.compression" = "Compression unsupported";
+"errors.tunnel.dns" = "DNS failed";
+"errors.tunnel.encryption" = "Encryption failed";
+"errors.tunnel.routing" = "Missing routing";
+"errors.tunnel.shutdown" = "Server shutdown";
+"errors.tunnel.timeout" = "Timeout";
+"errors.tunnel.tls" = "TLS failed";
+"errors.tunnel.generic" = "Failed";

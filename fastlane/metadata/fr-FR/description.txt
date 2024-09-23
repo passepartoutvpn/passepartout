@@ -1,0 +1,37 @@
+Passepartout est un client VPN parfaitement intégré avec les plateformes Apple. Passepartout est le seul app dont vous aurez besoin, autant pour les fournisseurs connu VPN, que pour vos serveurs VPN privés.
+
+Passepartout n'engage pas de requêtes non requises en arrière-plan, autre que le tunnel VPN, ce qui le rend plus accessible avec les coupe-feu.
+
+Passepartout est open source: https://github.com/passepartoutvpn
+
+UTILISEZ AVEC PLUSIEURS FOURNISSEURS
+
+Passepartout offre des réglages pré-conçu avec des fournisseurs VPN majeurs :
+
+- Hide.me
+- IVPN
+- Mullvad
+- NordVPN
+- Oeck
+- PIA
+- ProtonVPN
+- SurfShark
+- TorGuard
+- TunnelBear
+- VyprVPN
+- Windscribe
+
+FACILE D'UTILISATION
+
+- Utilisation très simple, look natif iOS.
+- Gérez vos profils en un seul endroit.
+- Importez les fichiers de configuration .ovpn / .conf.
+- Utilisez les règles sur demande pour parfaire votre connexion.
+- Affinez l'encryption sans modifier les fichiers de configuration.
+- Outrepassez les paramètres réseaux en un clin d'oeil (passerelle par défaut, DNS, proxy, MTU).
+
+VIE PRIVÉE
+
+- Transparence completes aux serveurs connectés.
+- Choisissez des parametères pré-résolu lorsque le DNS est problématique.
+- Aucun service web, pub où information non désirée, que le VPN.

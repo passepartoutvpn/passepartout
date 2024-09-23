@@ -1,0 +1,34 @@
+{
+    "identifiers": {
+    },
+    "websites": {
+        "home": "https://passepartoutvpn.app",
+        "subreddit": "https://www.reddit.com/r/passepartout/",
+        "githubSponsors": "https://www.github.com/sponsors/passepartoutvpn"
+    },
+    "emails": {
+        "domain": "passepartoutvpn.app",
+        "recipients": {
+            "issues": "issues",
+            "beta": "beta"
+        }
+    },
+    "formats": {
+        "timestamp": "yyyy-MM-dd HH:mm:ss"
+    },
+    "connection": {
+        "refreshInterval": 3.0
+    },
+    "log": {
+        "appPath": "app.log",
+        "tunnelPath": "tunnel.log",
+        "sinceLast": 86400,
+        "maxLevel": 3,
+        "maxNumberOfLines": 10000,
+        "maxAge": 604800,
+        "formatter": {
+            "timestamp": "HH:mm:ss",
+            "message": "%@ - %@"
+        }
+    }
+}
