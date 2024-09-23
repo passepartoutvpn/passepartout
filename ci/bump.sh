@@ -1,5 +1,5 @@
 #!/bin/sh
 if [ ! -z $1 ]; then
-    VERSION="version:$1"
+    BUILD="build:$1"
 fi
-bundle exec fastlane bump "$VERSION"
+bundle exec fastlane bump $BUILD

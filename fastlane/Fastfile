@@ -21,8 +21,9 @@ logname = "CHANGELOG.txt"
 
 desc "Bump version"
 lane :bump do |options|
-    increment_build_number
     version = options[:version]
+    build = options[:build]
+    increment_build_number(build_number: build)
     unless version.nil? || version.empty?
         increment_version_number_in_xcodeproj(version_number: version)
     end
@@ -37,10 +38,10 @@ lane :bump do |options|
         message: "Bump version",
         include: [logname]
     )
-    #add_git_tag(
-    #    includes_lane: false,
-    #    sign: true
-    #)
+    add_git_tag(
+        includes_lane: false,
+        sign: true
+    )
 end
 
 desc "Push a new beta build to TestFlight"
