@@ -55,8 +55,8 @@ Hi,
 App: Passepartout 1.2.3
 OS: \(issue.osLine)
 Device: \(issue.deviceLine ?? "unknown")
-Purchased: ["\(AppProduct.Features.appleTV.rawValue)"]
 Provider: none (last updated: unknown)
+Purchased: ["\(AppProduct.Features.appleTV.rawValue)"]
 
 --
 

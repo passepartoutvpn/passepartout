@@ -1,12 +1,57 @@
 {
   "pins" : [
     {
+      "identity" : "dtfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Cocoanetics/DTFoundation.git",
+      "state" : {
+        "revision" : "a61be65dd7d5b2cde3acabd13bf320b71f2907a5",
+        "version" : "1.7.19"
+      }
+    },
+    {
+      "identity" : "kvitto",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Cocoanetics/Kvitto",
+      "state" : {
+        "revision" : "88888674d772ddcf19671159ed0022cb0bc37be2",
+        "version" : "1.0.6"
+      }
+    },
+    {
       "identity" : "openssl-apple",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/passepartoutvpn/openssl-apple",
       "state" : {
         "revision" : "0edc07c7a0e4ec2ca0f448dd68314241ccc925b3",
         "version" : "3.2.107"
+      }
+    },
+    {
+      "identity" : "passepartoutkit",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:passepartoutvpn/passepartoutkit",
+      "state" : {
+        "revision" : "2c32459d6a669e8feed0e6ea2d1250ef72364aa3",
+        "version" : "0.7.0"
+      }
+    },
+    {
+      "identity" : "passepartoutkit-openvpn-openssl",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:passepartoutvpn/passepartoutkit-openvpn-openssl",
+      "state" : {
+        "revision" : "a3092a6ee0a63f666aa47ef3f0f50c324a64598d",
+        "version" : "0.6.0"
+      }
+    },
+    {
+      "identity" : "passepartoutkit-wireguard-go",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:passepartoutvpn/passepartoutkit-wireguard-go",
+      "state" : {
+        "revision" : "2cbd6023300d2dcc3f6f68de4812cf390421ec35",
+        "version" : "0.6.2"
       }
     },
     {

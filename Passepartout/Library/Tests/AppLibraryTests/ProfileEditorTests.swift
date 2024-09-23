@@ -127,7 +127,7 @@ extension ProfileEditorTests {
 
         sut.saveModule(ip, activating: false)
         XCTAssertTrue(sut.modules[1] is IPModule.Builder)
-        XCTAssertEqual(sut.activeModulesIds, [dns.id])
+        XCTAssertEqual(sut.activeModulesIds, [dns.id, ip.id])
     }
 
     func test_givenModules_whenSaveExisting_thenReplacesExisting() throws {
@@ -137,7 +137,7 @@ extension ProfileEditorTests {
 
         dns.protocolType = .tls
         sut.saveModule(dns, activating: false)
-        XCTAssertEqual(sut.activeModulesIds, [dns.id])
+        XCTAssertEqual(sut.activeModulesIds, [dns.id, ip.id])
 
         let newDNS = try XCTUnwrap(sut.modules[0] as? DNSModule.Builder)
         XCTAssertEqual(newDNS.protocolType, dns.protocolType)
@@ -159,31 +159,32 @@ extension ProfileEditorTests {
         let sut = ProfileEditor(modules: [dns, proxy])
 
         XCTAssertEqual(sut.activeModulesIds, [dns.id, proxy.id])
-        try sut.toggleModule(withId: dns.id)
+        sut.toggleModule(withId: dns.id)
         XCTAssertEqual(sut.activeModulesIds, [proxy.id])
-        try sut.toggleModule(withId: dns.id)
+        sut.toggleModule(withId: dns.id)
         XCTAssertEqual(sut.activeModulesIds, [dns.id, proxy.id])
-        try sut.toggleModule(withId: dns.id)
-        try sut.toggleModule(withId: proxy.id)
+        sut.toggleModule(withId: dns.id)
+        sut.toggleModule(withId: proxy.id)
         XCTAssertEqual(sut.activeModulesIds, [])
     }
 
-    func test_givenModules_whenToggleConnection_thenExcludesOtherOne() throws {
+    func test_givenModules_whenMultipleConnections_thenFailsToBuild() throws {
         let ovpn = OpenVPNModule.Builder()
         let wg = WireGuardModule.Builder(configurationBuilder: .default)
         let sut = ProfileEditor(modules: [ovpn, wg])
 
-        XCTAssertEqual(sut.activeModulesIds, [ovpn.id])
+        XCTAssertEqual(sut.activeModulesIds, [ovpn.id, wg.id])
         try sut.toggleModule(withId: wg.id)
-        XCTAssertEqual(sut.activeModulesIds, [wg.id])
+        XCTAssertEqual(sut.activeModulesIds, [ovpn.id])
+        XCTAssertThrowsError(try sut.build())
     }
 
-    func test_givenModulesWithoutConnection_whenToggleIP_thenFailsToToggle() throws {
+    func test_givenModulesWithoutConnection_whenActiveIP_thenFailsToBuild() throws {
         let ip = IPModule.Builder()
         let sut = ProfileEditor(modules: [ip])
 
-        XCTAssertEqual(sut.activeModulesIds, [])
-        XCTAssertThrowsError(try sut.toggleModule(withId: ip.id))
+        XCTAssertEqual(sut.activeModulesIds, [ip.id])
+        XCTAssertThrowsError(try sut.build())
     }
 
     // MARK: Building
