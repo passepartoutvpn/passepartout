@@ -46,7 +46,9 @@ end
 
 desc "Push a new beta build to TestFlight"
 lane :beta do
+    prelog = File.read("../#{logname}.testflight")
     log = File.read("../#{logname}")
+    changelog = prelog + "\n\n" + log
     match(type: "appstore")
     gym(
         clean: true,
@@ -54,7 +56,7 @@ lane :beta do
         derived_data_path: "build/derived_data"
     )
     pilot(
-        changelog: log,
+        changelog: changelog,
         distribute_external: true,
         notify_external_testers: false
     )
