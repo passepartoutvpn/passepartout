@@ -24,6 +24,9 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
       - name: Access private repositories
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
