@@ -29,6 +29,6 @@ import XCTest
 
 final class ProfileManagerTests: XCTestCase {
     func test_given_when_then() async {
-        let sut = await ProfileManager(profiles: [])
+//        let sut = await ProfileManager(profiles: [])
     }
 }

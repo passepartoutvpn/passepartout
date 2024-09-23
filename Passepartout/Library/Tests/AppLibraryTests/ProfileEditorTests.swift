@@ -174,7 +174,7 @@ extension ProfileEditorTests {
         let sut = ProfileEditor(modules: [ovpn, wg])
 
         XCTAssertEqual(sut.activeModulesIds, [ovpn.id, wg.id])
-        try sut.toggleModule(withId: wg.id)
+        sut.toggleModule(withId: wg.id)
         XCTAssertEqual(sut.activeModulesIds, [ovpn.id])
         XCTAssertThrowsError(try sut.build())
     }
