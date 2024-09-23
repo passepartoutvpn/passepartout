@@ -1,13 +1,12 @@
 <p style="text-align: center; padding: 0em 1em"><img src="res/logo.svg" width="300" height="300" /></p>
 
-![iOS 15+](https://img.shields.io/badge/iOS-15+-green.svg)
-![macOS 12+](https://img.shields.io/badge/macOS-12+-green.svg)
+![iOS 16+](https://img.shields.io/badge/iOS-16+-green.svg)
+![macOS 13+](https://img.shields.io/badge/macOS-13+-green.svg)
 ![tvOS 17+](https://img.shields.io/badge/tvOS-17+-green.svg)
-[![TunnelKit 6.3](https://img.shields.io/badge/TunnelKit-6.3-d69c68.svg)][dep-tunnelkit]
 [![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
 
-[![Unit Tests](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/test.yml)
-[![Release](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/release.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout-apple/actions/workflows/release.yml)
+[![Unit Tests](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml)
+[![Release](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml)
 
 # [Passepartout][about-website]
 
