@@ -10,7 +10,7 @@
 **/fastlane/*/metadata/trade_representative_contact_information
 build/
 dist/
-iap/
+/iap
 templates/
 vendor/
 Preview.html
