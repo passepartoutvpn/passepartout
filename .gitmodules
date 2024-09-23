@@ -1,3 +1,0 @@
-[submodule "PassepartoutLibrary/Sources/PassepartoutServices/API"]
-	path = PassepartoutLibrary/Sources/PassepartoutProvidersImpl/API
-	url = https://github.com/passepartoutvpn/api
