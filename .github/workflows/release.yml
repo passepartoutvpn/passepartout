@@ -54,7 +54,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Fetch build metadata
+        run: |
+          echo "PILOT_APP_VERSION=`ci/version-number.sh`" >> $GITHUB_ENV
+          echo "PILOT_BUILD_NUMBER=`ci/build-number.sh`" >> $GITHUB_ENV
       - name: Publish on TestFlight
+        env:
+          PILOT_GROUPS: ${{ vars.PILOT_GROUPS }}
+          PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ vars.PILOT_NOTIFY_EXTERNAL_TESTERS }}
         run: |
           #PLATFORMS=("iOS" "macOS" "tvOS")
           PLATFORMS=("iOS" "macOS")
