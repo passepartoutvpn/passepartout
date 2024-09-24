@@ -10,6 +10,7 @@ env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
   FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+  XCODEPROJ: "Passepartout.xcodeproj/project.pbxproj"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -48,13 +49,19 @@ jobs:
     needs: build_upload
     environment:
       name: public_beta
-      url: "https://testflight.apple.com/join/K71mtLjZ"
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Fetch build metadata
+        run: |
+          echo "PILOT_APP_VERSION=`ci/version-number.sh $XCODEPROJ`" >> $GITHUB_ENV
+          echo "PILOT_BUILD_NUMBER=`ci/build-number.sh $XCODEPROJ`" >> $GITHUB_ENV
       - name: Publish on TestFlight
+        env:
+          PILOT_GROUPS: ${{ vars.PILOT_GROUPS }}
+          PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ vars.PILOT_NOTIFY_EXTERNAL_TESTERS }}
         run: |
           #PLATFORMS=("iOS" "macOS" "tvOS")
           PLATFORMS=("iOS" "macOS")

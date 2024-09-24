@@ -46,9 +46,9 @@ end
 
 desc "Push a new beta build to TestFlight"
 lane :beta do
-    prelog = File.read("../#{logname}.testflight")
+    preface = ENV["TESTFLIGHT_PREFACE"]
     log = File.read("../#{logname}")
-    changelog = prelog + "\n\n" + log
+    changelog = preface + "\n\n" + log
     match(type: "appstore")
     gym(
         clean: true,
@@ -64,11 +64,7 @@ end
 
 desc "Distribute to Public Beta"
 lane :public_beta do
-    version = get_version_number
-    build = get_build_number
     pilot(
-        app_version: version,
-        build_number: build,
         distribute_only: true,
         distribute_external: true,
         notify_external_testers: true
