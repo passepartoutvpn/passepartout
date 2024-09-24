@@ -26,6 +26,8 @@ jobs:
         platform: ["iOS", "macOS"]
     steps:
       - uses: passepartoutvpn/action-access-private-repositories@master
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
