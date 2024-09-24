@@ -22,26 +22,13 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        #name: ["iOS", "macOS", "tvOS"]
-        name: ["iOS", "macOS"]
-        include:
-          - name: "iOS"
-            platform: "ios"
-          - name: "macOS"
-            platform: "macos"
-          #- name: "tvOS"
-          #  platform: "tvos"
+        #platform: ["iOS", "macOS", "tvOS"]
+        platform: ["iOS", "macOS"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
-          bundler-cache: true
-      - name: Access private repositories
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: |
-          git config --global url.https://$ACCESS_TOKEN@github.com/.insteadOf git@github.com:
-      - name: Upload ${{ matrix.name }} app
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Upload ${{ matrix.platform }} app
         id: upload_app
         timeout-minutes: 15
         env:
@@ -55,3 +42,22 @@ jobs:
         run: |
           ci/recognize-match-hostname.sh
           bundle exec fastlane --env ${{ matrix.platform }} beta
+  distribute_public_beta:
+    name: Distribute Public Beta
+    runs-on: ubuntu-latest
+    needs: build_upload
+    environment:
+      name: public_beta
+      url: "https://testflight.apple.com/join/K71mtLjZ"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Publish on TestFlight
+        run: |
+          #PLATFORMS=("iOS" "macOS" "tvOS")
+          PLATFORMS=("iOS" "macOS")
+          for PLATFORM in ${PLATFORMS[@]}; do
+            bundle exec fastlane --env $PLATFORM public_beta
+          done

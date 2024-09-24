@@ -38,13 +38,15 @@ final class IssueTests: XCTestCase {
 #endif
     }
 
-    func test_givenAppLine_whenCreateIssue_thenCollectsAppOSAndDevice() {
-        let issue = Issue(appLine: "Passepartout 1.2.3", purchasedProducts: [])
-        XCTAssertEqual(issue.appLine, "Passepartout 1.2.3")
+    func test_givenAppLine_whenCreateIssue_thenCollectsAppLine() {
+        let appLine = "Passepartout 1.2.3"
+        let issue = Issue(appLine: appLine, purchasedProducts: [])
+        XCTAssertEqual(issue.appLine, appLine)
     }
 
     func test_givenAppLineAndProducts_whenCreateIssue_thenMatchesTemplate() {
-        let issue = Issue(appLine: "Passepartout 1.2.3", purchasedProducts: [.Features.appleTV])
+        let appLine = "Passepartout 1.2.3"
+        let issue = Issue(appLine: appLine, purchasedProducts: [.Features.appleTV])
         let expected = """
 Hi,
 
@@ -52,7 +54,7 @@ Hi,
 
 --
 
-App: Passepartout 1.2.3
+App: \(issue.appLine ?? "unknown")
 OS: \(issue.osLine)
 Device: \(issue.deviceLine ?? "unknown")
 Provider: none (last updated: unknown)
