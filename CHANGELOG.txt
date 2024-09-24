@@ -1,2 +1,2 @@
-* a0b37676 Update and split bump scripts
-* 6cc86e86 Import v3 code (#597)
+* a665670c Add job for public beta deployment (#600)
+* ccc0cd7c Prepend to TestFlight CHANGELOG
