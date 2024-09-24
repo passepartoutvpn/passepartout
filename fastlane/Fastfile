@@ -46,9 +46,9 @@ end
 
 desc "Push a new beta build to TestFlight"
 lane :beta do
-    prelog = File.read("../#{logname}.testflight")
+    preface = ENV["TESTFLIGHT_PREFACE"]
     log = File.read("../#{logname}")
-    changelog = prelog + "\n\n" + log
+    changelog = preface + "\n\n" + log
     match(type: "appstore")
     gym(
         clean: true,
