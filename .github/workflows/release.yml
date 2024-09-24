@@ -25,13 +25,9 @@ jobs:
         #platform: ["iOS", "macOS", "tvOS"]
         platform: ["iOS", "macOS"]
     steps:
-      - uses: passepartoutvpn/action-access-private-repositories@master
+      - uses: passepartoutvpn/action-prepare-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
       - name: Upload ${{ matrix.platform }} app
         id: upload_app
         timeout-minutes: 15

@@ -20,16 +20,9 @@ jobs:
     runs-on: macos-14
     timeout-minutes: 15
     steps:
-      - uses: passepartoutvpn/action-access-private-repositories@master
+      - uses: passepartoutvpn/action-prepare-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: 15.4
       - name: Run tests
         run: |
           cd Passepartout/Library
