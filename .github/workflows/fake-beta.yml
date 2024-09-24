@@ -19,9 +19,6 @@ jobs:
   distribute_public_beta:
     name: Distribute Public Beta
     runs-on: ubuntu-latest
-    environment:
-      name: public_beta
-      url: "https://testflight.apple.com/join/K71mtLjZ"
     steps:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
