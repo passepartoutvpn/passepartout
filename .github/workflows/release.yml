@@ -25,7 +25,7 @@ jobs:
         #platform: ["iOS", "macOS", "tvOS"]
         platform: ["iOS", "macOS"]
     steps:
-      - uses: passepartoutvpn/action-prepare-build@master
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
       - name: Upload ${{ matrix.platform }} app
