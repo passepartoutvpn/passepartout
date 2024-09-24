@@ -20,9 +20,10 @@ jobs:
     name: Distribute Public Beta
     runs-on: ubuntu-latest
     steps:
-      - uses: passepartoutvpn/action-prepare-xcode-build@master
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
         with:
-          access_token: ${{ secrets.ACCESS_TOKEN }}
+          bundler-cache: true
       - name: Publish on TestFlight
         run: |
           #PLATFORMS=("iOS" "macOS" "tvOS")
