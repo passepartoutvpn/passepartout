@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - "feature/public-beta-job"
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+  FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
+  FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  distribute_public_beta:
+    name: Distribute Public Beta
+    runs-on: ubuntu-latest
+    environment:
+      name: public_beta
+      url: "https://testflight.apple.com/join/K71mtLjZ"
+    steps:
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Publish on TestFlight
+        run: |
+          #PLATFORMS=("iOS" "macOS" "tvOS")
+          PLATFORMS=("iOS" "macOS")
+          for PLATFORM in ${PLATFORMS[@]}; do
+            echo "bundle exec fastlane --env $PLATFORM public_beta"
+          done
