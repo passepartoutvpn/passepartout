@@ -10,6 +10,7 @@ env:
   APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
   FASTLANE_USERNAME: ${{ secrets.FASTLANE_USERNAME }}
   FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+  TESTFLIGHT_PREFACE: ${{ vars.TESTFLIGHT_PREFACE }}
   XCODEPROJ: "Passepartout.xcodeproj/project.pbxproj"
 
 concurrency:

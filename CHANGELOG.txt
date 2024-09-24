@@ -1,2 +1,1 @@
-* a665670c Add job for public beta deployment (#600)
-* ccc0cd7c Prepend to TestFlight CHANGELOG
+* bce26946 Fix lookup of pilot metadata (#601)
