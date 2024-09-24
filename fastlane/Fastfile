@@ -64,7 +64,11 @@ end
 
 desc "Distribute to Public Beta"
 lane :public_beta do
+    version = get_version_number
+    build = get_build_number
     pilot(
+        app_version: version,
+        build_number: build,
         distribute_only: true,
         distribute_external: true,
         notify_external_testers: true
