@@ -20,7 +20,7 @@ jobs:
     runs-on: macos-14
     timeout-minutes: 15
     steps:
-      - uses: passepartoutvpn/action-access-private-repositories
+      - uses: passepartoutvpn/action-access-private-repositories@master
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
