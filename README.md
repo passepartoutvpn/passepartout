@@ -13,7 +13,7 @@
 Passepartout is your go-to app for VPN and privacy. [OpenVPN®][openvpn] and [WireGuard®][wireguard] client for Apple platforms, the OpenVPN stack also implements the [Tunnelblick XOR patch][openvpn-xor-patch].
 
 [![Join Reddit](https://img.shields.io/badge/discuss-Reddit-orange.svg)][about-reddit]
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fpassepartoutvpn.app%2F&via=keeshux&text=Passepartout%20is%20a%20user-friendly%2C%20open-source%20VPN%20client%20for%20%23iOS%20and%20%23macOS)
+[![Join TestFlight](https://img.shields.io/badge/beta-Testflight-blue.svg)][about-testflight]
 
 ## Overview
 
@@ -161,7 +161,7 @@ This product includes software developed by the OpenSSL Project for use in the O
 A _huge_ credit goes to:
 
 - My tiny group of 3 private beta testers
-- The 3600+ public testers using the beta on a daily basis
+- The 9000+ public testers using the beta on a daily basis
 - The continued support and feedback from the [Passepartout community on Reddit][about-reddit]
 - The overall patience of users affected by my bugs that actively collaborate in resolving them
 - All those who contributed to the amazingly high rating on the App Store
@@ -225,3 +225,4 @@ Website: [passepartoutvpn.app][about-website] ([FAQ][about-faq])
 [about-website]: https://passepartoutvpn.app
 [about-faq]: https://passepartoutvpn.app/faq/
 [about-reddit]: https://www.reddit.com/r/passepartout
+[about-testflight]: https://testflight.apple.com/join/K71mtLjZ
