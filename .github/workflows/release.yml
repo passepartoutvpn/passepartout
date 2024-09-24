@@ -22,15 +22,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        #name: ["iOS", "macOS", "tvOS"]
-        name: ["iOS", "macOS"]
-        include:
-          - name: "iOS"
-            platform: "ios"
-          - name: "macOS"
-            platform: "macos"
-          #- name: "tvOS"
-          #  platform: "tvos"
+        #platform: ["iOS", "macOS", "tvOS"]
+        platform: ["iOS", "macOS"]
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -41,7 +34,7 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           git config --global url.https://$ACCESS_TOKEN@github.com/.insteadOf git@github.com:
-      - name: Upload ${{ matrix.name }} app
+      - name: Upload ${{ matrix.platform }} app
         id: upload_app
         timeout-minutes: 15
         env:
