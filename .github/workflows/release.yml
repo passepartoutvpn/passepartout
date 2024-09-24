@@ -25,15 +25,11 @@ jobs:
         #platform: ["iOS", "macOS", "tvOS"]
         platform: ["iOS", "macOS"]
     steps:
+      - uses: passepartoutvpn/action-access-private-repositories
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Access private repositories
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: |
-          git config --global url.https://$ACCESS_TOKEN@github.com/.insteadOf git@github.com:
       - name: Upload ${{ matrix.platform }} app
         id: upload_app
         timeout-minutes: 15

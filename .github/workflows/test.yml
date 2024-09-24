@@ -20,6 +20,7 @@ jobs:
     runs-on: macos-14
     timeout-minutes: 15
     steps:
+      - uses: passepartoutvpn/action-access-private-repositories
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
@@ -27,11 +28,6 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: 15.4
-      - name: Access private repositories
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: |
-          git config --global url.https://$ACCESS_TOKEN@github.com/.insteadOf git@github.com:
       - name: Run tests
         run: |
           cd Passepartout/Library
