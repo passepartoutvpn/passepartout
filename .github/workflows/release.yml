@@ -56,7 +56,7 @@ jobs:
           bundler-cache: true
       - name: Fetch build metadata
         run: |
-          XCODEPROJ="Passepartout/Passepartout.xcodeproj/project.pbxproj"
+          XCODEPROJ="Passepartout.xcodeproj/project.pbxproj"
           echo "PILOT_APP_VERSION=`ci/version-number.sh $XCODEPROJ`" >> $GITHUB_ENV
           echo "PILOT_BUILD_NUMBER=`ci/build-number.sh $XCODEPROJ`" >> $GITHUB_ENV
       - name: Publish on TestFlight
