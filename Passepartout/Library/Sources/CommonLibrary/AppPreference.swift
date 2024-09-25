@@ -26,9 +26,11 @@
 import Foundation
 
 public enum AppPreference: String {
-    case profilesLayout
+    case locksInBackground
 
     case logsPrivateData
+
+    case profilesLayout
 
     public var key: String {
         "App.\(rawValue)"

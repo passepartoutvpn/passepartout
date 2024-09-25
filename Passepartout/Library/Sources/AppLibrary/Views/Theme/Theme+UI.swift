@@ -23,6 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
+import LocalAuthentication
 import SwiftUI
 import UtilsLibrary
 
@@ -195,6 +197,41 @@ struct ThemeHoverListRowModifier: ViewModifier {
         content
             .frame(maxHeight: .infinity)
             .listRowInsets(.init())
+    }
+}
+
+struct ThemeLockScreenModifier: ViewModifier {
+
+    @AppStorage(AppPreference.locksInBackground.key)
+    private var locksInBackground = false
+
+    func body(content: Content) -> some View {
+        LockableView(
+            locksInBackground: $locksInBackground,
+            content: {
+                content
+            },
+            lockedContent: LogoView.init,
+            unlockBlock: Self.unlockScreenBlock
+        )
+    }
+
+    private static func unlockScreenBlock() async -> Bool {
+        let context = LAContext()
+        let policy: LAPolicy = .deviceOwnerAuthentication
+        var error: NSError?
+        guard context.canEvaluatePolicy(policy, error: &error) else {
+            return true
+        }
+        do {
+            let isAuthorized = try await context.evaluatePolicy(
+                policy,
+                localizedReason: Strings.Views.Lockable.message
+            )
+            return isAuthorized
+        } catch {
+            return false
+        }
     }
 }
 

@@ -475,6 +475,10 @@ internal enum Strings {
       /// Make a donation
       internal static let title = Strings.tr("Localizable", "views.donate.title", fallback: "Make a donation")
     }
+    internal enum Lockable {
+      /// Passepartout is locked
+      internal static let message = Strings.tr("Localizable", "views.lockable.message", fallback: "Passepartout is locked")
+    }
     internal enum Profile {
       internal enum ModuleList {
         internal enum Section {
