@@ -2,7 +2,7 @@
 //  Shared.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 8/11/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,17 +25,31 @@
 
 import Foundation
 import PassepartoutKit
+import PassepartoutWireGuardGo
+import UtilsLibrary
 
 extension LoggerDestination {
-    static let common = Self(category: "common")
+    public static let app = Self(category: "app")
 }
 
-extension UserDefaults {
-    public static let group: UserDefaults = {
-        let appGroup = BundleConfiguration.main.string(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
-        }
-        return defaults
-    }()
+extension WireGuard.Configuration.Builder {
+    public static var `default`: Self {
+        .init(keyGenerator: StandardWireGuardKeyGenerator())
+    }
+}
+
+extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
+    public static var `default`: CoreDataPersistentStoreLogger {
+        DefaultCoreDataPersistentStoreLogger()
+    }
+}
+
+public struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
+    public func debug(_ msg: String) {
+        pp_log(.app, .info, msg)
+    }
+
+    public func warning(_ msg: String) {
+        pp_log(.app, .error, msg)
+    }
 }

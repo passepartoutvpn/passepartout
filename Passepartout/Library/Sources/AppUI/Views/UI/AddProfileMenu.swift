@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  AddProfileMenu.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 9/3/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,19 +23,33 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import AppLibrary
 import PassepartoutKit
+import SwiftUI
 
-extension LoggerDestination {
-    static let common = Self(category: "common")
-}
+struct AddProfileMenu: View {
+    let profileManager: ProfileManager
 
-extension UserDefaults {
-    public static let group: UserDefaults = {
-        let appGroup = BundleConfiguration.main.string(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
+    @Binding
+    var isImporting: Bool
+
+    let onNewProfile: (Profile) -> Void
+
+    var body: some View {
+        Menu {
+            Button {
+                let profile = profileManager.new(withName: Strings.Entities.Profile.Name.new)
+                onNewProfile(profile)
+            } label: {
+                ThemeImageLabel(Strings.Views.Profiles.Toolbar.newProfile, .profileEdit)
+            }
+            Button {
+                isImporting = true
+            } label: {
+                ThemeImageLabel(Strings.Views.Profiles.Toolbar.importProfile, .profileImport)
+            }
+        } label: {
+            ThemeImage(.add)
         }
-        return defaults
-    }()
+    }
 }

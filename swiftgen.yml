@@ -1,9 +1,9 @@
 strings:
   inputs:
-    - Passepartout/Library/Sources/AppLibrary/Resources/en.lproj/Localizable.strings
+    - Passepartout/Library/Sources/AppUI/Resources/en.lproj/Localizable.strings
   outputs:
     - templateName: structured-swift4
-      output: Passepartout/Library/Sources/AppLibrary/L10n/SwiftGen+Strings.swift
+      output: Passepartout/Library/Sources/AppUI/L10n/SwiftGen+Strings.swift
       params:
         bundle: Bundle.main
         enumName: Strings

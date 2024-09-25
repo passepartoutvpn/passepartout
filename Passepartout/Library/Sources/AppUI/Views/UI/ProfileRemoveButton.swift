@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  ProfileRemoveButton.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 9/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,19 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import AppLibrary
 import PassepartoutKit
+import SwiftUI
 
-extension LoggerDestination {
-    static let common = Self(category: "common")
-}
+struct ProfileRemoveButton<Label>: View where Label: View {
+    let profileManager: ProfileManager
 
-extension UserDefaults {
-    public static let group: UserDefaults = {
-        let appGroup = BundleConfiguration.main.string(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
+    let header: ProfileHeader
+
+    let label: () -> Label
+
+    var body: some View {
+        Button(role: .destructive) {
+            Task {
+                await profileManager.remove(withId: header.id)
+            }
+        } label: {
+            label()
         }
-        return defaults
-    }()
+    }
 }

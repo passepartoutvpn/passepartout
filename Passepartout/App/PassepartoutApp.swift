@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
+import AppUI
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
@@ -57,7 +57,7 @@ struct PassepartoutApp: App {
                     to: Constants.shared.urlForAppLog,
                     parameters: Constants.shared.log
                 )
-                AppLibrary.configure(with: context)
+                AppUI.configure(with: context)
             }
             .themeLockScreen()
             .environmentObject(theme)

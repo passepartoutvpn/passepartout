@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  AppUI.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 7/31/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,16 +26,29 @@
 import Foundation
 import PassepartoutKit
 
-extension LoggerDestination {
-    static let common = Self(category: "common")
+public struct AppUI {
+    private init() {
+    }
+
+    public static func configure(with context: AppContext) {
+        assertMissingModuleImplementations()
+        Task {
+            await context.iapManager.reloadReceipt()
+            try await context.tunnel.prepare()
+        }
+    }
 }
 
-extension UserDefaults {
-    public static let group: UserDefaults = {
-        let appGroup = BundleConfiguration.main.string(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
+private extension AppUI {
+    static func assertMissingModuleImplementations() {
+        ModuleType.allCases.forEach { moduleType in
+            let module = moduleType.newModule()
+            guard module as? ModuleTypeProviding != nil else {
+                fatalError("\(moduleType): does not implement ModuleTypeProviding")
+            }
+            guard module as? any ModuleViewProviding != nil else {
+                fatalError("\(moduleType): does not implement ModuleViewProviding")
+            }
         }
-        return defaults
-    }()
+    }
 }
