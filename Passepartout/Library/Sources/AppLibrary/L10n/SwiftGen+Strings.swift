@@ -245,6 +245,8 @@ internal enum Strings {
     internal static let server = Strings.tr("Localizable", "global.server", fallback: "Server")
     /// Servers
     internal static let servers = Strings.tr("Localizable", "global.servers", fallback: "Servers")
+    /// Settings
+    internal static let settings = Strings.tr("Localizable", "global.settings", fallback: "Settings")
     /// Status
     internal static let status = Strings.tr("Localizable", "global.status", fallback: "Status")
     /// Storage
@@ -396,6 +398,8 @@ internal enum Strings {
   }
   internal enum Views {
     internal enum Advanced {
+      /// Lock app access
+      internal static let lockInBackground = Strings.tr("Localizable", "views.advanced.lock_in_background", fallback: "Lock app access")
       /// Advanced
       internal static let title = Strings.tr("Localizable", "views.advanced.title", fallback: "Advanced")
       internal enum Credits {

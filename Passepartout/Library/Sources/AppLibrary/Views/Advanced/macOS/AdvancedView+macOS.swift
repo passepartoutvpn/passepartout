@@ -30,11 +30,18 @@ import SwiftUI
 extension AdvancedView {
     var listView: some View {
         List(selection: $navigationRoute) {
-            // TODO: donations
-//            donateLink
-            linksLink
-            creditsLink
-            diagnosticsLink
+            Section {
+                lockInBackgroundToggle
+            } header: {
+                Text(Strings.Global.settings)
+            }
+            Section {
+                // TODO: donations
+//                donateLink
+                linksLink
+                creditsLink
+                diagnosticsLink
+            }
         }
         .safeAreaInset(edge: .bottom) {
             Text(identifiers.versionString)
