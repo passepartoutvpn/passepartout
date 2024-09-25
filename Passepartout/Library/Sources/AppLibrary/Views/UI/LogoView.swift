@@ -1,8 +1,8 @@
 //
-//  AppPreference.swift
+//  LogoView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 3/20/23.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,16 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-public enum AppPreference: String {
-    case locksInBackground
+struct LogoView: View {
 
-    case logsPrivateData
+    @EnvironmentObject
+    private var theme: Theme
 
-    case profilesLayout
-
-    public var key: String {
-        "App.\(rawValue)"
+    var body: some View {
+        ZStack {
+            theme.primaryColor
+                .ignoresSafeArea()
+            Image(theme.logoImage)
+        }
+        .ignoresSafeArea()
     }
+}
+
+#Preview {
+    LogoView()
+        .environmentObject(Theme())
 }

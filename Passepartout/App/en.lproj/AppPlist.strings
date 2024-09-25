@@ -1,0 +1,3 @@
+"NSLocationWhenInUseUsageDescription" = "Access name of current Wi-Fi";
+
+"NSFaceIDUsageDescription" = "Unlock app with Face ID";

@@ -52,6 +52,7 @@
 "global.save" = "Save";
 "global.server" = "Server";
 "global.servers" = "Servers";
+"global.settings" = "Settings";
 "global.status" = "Status";
 "global.storage" = "Storage";
 "global.subnet" = "Subnet";
@@ -120,6 +121,7 @@
 
 "views.advanced.title" = "Advanced";
 "views.advanced.sections.resources" = "Resources";
+"views.advanced.lock_in_background" = "Lock app access";
 
 "views.advanced.links.title" = "Links";
 "views.advanced.links.sections.support" = "Support";
@@ -149,6 +151,8 @@
 
 "views.diagnostics.report_issue.title" = "Report issue";
 "views.diagnostics.alerts.report_issue.email" = "The device is not configured to send e-mails.";
+
+"views.lockable.message" = "Passepartout is locked";
 
 // MARK: - Module views
 

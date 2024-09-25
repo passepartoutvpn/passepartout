@@ -31,6 +31,11 @@ extension AdvancedView {
     var listView: some View {
         List {
             Section {
+                lockInBackgroundToggle
+            } header: {
+                Text(Strings.Global.settings)
+            }
+            Section {
                 // TODO: donations
 //                donateLink
                 linksLink
