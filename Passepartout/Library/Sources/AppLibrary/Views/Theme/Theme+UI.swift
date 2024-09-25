@@ -64,6 +64,7 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
                 modal()
                     .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
                     .interactiveDismissDisabled(!isInteractive)
+                    .themeLockScreen()
             }
     }
 
@@ -92,6 +93,7 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
                 modal($0)
                     .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
                     .interactiveDismissDisabled(!isInteractive)
+                    .themeLockScreen()
             }
     }
 

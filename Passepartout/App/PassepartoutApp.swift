@@ -59,6 +59,7 @@ struct PassepartoutApp: App {
                 )
                 AppLibrary.configure(with: context)
             }
+            .themeLockScreen()
             .environmentObject(theme)
             .environmentObject(context.iapManager)
             .environmentObject(context.connectionObserver)

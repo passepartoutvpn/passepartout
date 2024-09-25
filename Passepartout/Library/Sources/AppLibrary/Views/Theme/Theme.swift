@@ -211,6 +211,10 @@ extension View {
     public func themeHoverListRow() -> some View {
         modifier(ThemeHoverListRowModifier())
     }
+
+    public func themeLockScreen() -> some View {
+        modifier(ThemeLockScreenModifier())
+    }
 }
 
 // MARK: - Views
