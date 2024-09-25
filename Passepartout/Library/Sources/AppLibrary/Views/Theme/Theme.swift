@@ -60,6 +60,8 @@ public final class Theme: ObservableObject {
 
     var emptyMessageColor: Color = .secondary
 
+    var primaryColor = Color(red: 0.318, green: 0.365, blue: 0.443)
+
     var activeColor = Color(red: .zero, green: Double(0xAA) / 255.0, blue: .zero)
 
     var inactiveColor: Color = .gray
@@ -71,6 +73,8 @@ public final class Theme: ObservableObject {
     private var animation: Animation = .spring
 
     var animationCategories: Set<ThemeAnimationCategory> = Set(ThemeAnimationCategory.allCases)
+
+    var logoImage = "Logo"
 
     var systemImage: (ImageName) -> String = {
         switch $0 {
