@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>EXAppExtensionAttributes</key>
-	<dict>
-		<key>EXExtensionPointIdentifier</key>
-		<string>com.apple.appintents-extension</string>
-	</dict>
 	<key>AppConfig</key>
 	<dict>
 		<key>appId</key>
@@ -21,6 +16,11 @@
 		<string>$(CFG_TEAM_ID)</string>
 		<key>tunnelId</key>
 		<string>$(CFG_TUNNEL_ID)</string>
+	</dict>
+	<key>EXAppExtensionAttributes</key>
+	<dict>
+		<key>EXExtensionPointIdentifier</key>
+		<string>com.apple.appintents-extension</string>
 	</dict>
 </dict>
 </plist>
