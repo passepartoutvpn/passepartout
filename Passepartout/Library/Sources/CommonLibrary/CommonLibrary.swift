@@ -31,7 +31,7 @@ public struct CommonLibrary {
     }
 
     public static func configureLogging(to url: URL, parameters: Constants.Log) {
-        pp_log(.app, .debug, "Log to: \(url)")
+        pp_log(.common, .debug, "Log to: \(url)")
 
         PassepartoutConfiguration.shared.setLocalLogger(options: .init(
             url: url,

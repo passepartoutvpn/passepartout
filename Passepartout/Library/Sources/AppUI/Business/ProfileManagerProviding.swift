@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  ProfileManagerProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 9/3/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,19 +23,26 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import Foundation
 import PassepartoutKit
 
-extension LoggerDestination {
-    static let common = Self(category: "common")
+protocol ProfileManagerProviding {
+    var profileManager: ProfileManager { get }
 }
 
-extension UserDefaults {
-    public static let group: UserDefaults = {
-        let appGroup = BundleConfiguration.main.string(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
+@MainActor
+extension ProfileManagerProviding {
+    func removeProfiles(at offsets: IndexSet) {
+        let idsToRemove = profileManager.headers
+            .enumerated()
+            .filter {
+                offsets.contains($0.offset)
+            }
+            .map(\.element.id)
+
+        Task {
+            await profileManager.remove(withIds: idsToRemove)
         }
-        return defaults
-    }()
+    }
 }

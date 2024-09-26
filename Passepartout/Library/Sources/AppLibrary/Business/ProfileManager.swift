@@ -48,7 +48,7 @@ public final class ProfileManager: ObservableObject {
     private var subscriptions: Set<AnyCancellable>
 
     // for testing/previews
-    init(profiles: [Profile]) {
+    public init(profiles: [Profile]) {
         didSave = PassthroughSubject()
         self.profiles = profiles.sorted {
             $0.name.lowercased() < $1.name.lowercased()

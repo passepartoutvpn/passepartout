@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  AppContextTests.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 9/12/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,19 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@testable import AppUI
 import Foundation
-import PassepartoutKit
+import XCTest
 
-extension LoggerDestination {
-    static let common = Self(category: "common")
-}
-
-extension UserDefaults {
-    public static let group: UserDefaults = {
-        let appGroup = BundleConfiguration.main.string(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
-        }
-        return defaults
-    }()
+final class AppContextTests: XCTestCase {
+    func test_given_when_then() async {
+    }
 }

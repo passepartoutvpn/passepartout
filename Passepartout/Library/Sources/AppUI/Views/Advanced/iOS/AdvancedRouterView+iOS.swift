@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  AdvancedRouterView+iOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 8/26/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,19 +23,31 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PassepartoutKit
+#if os(iOS)
 
-extension LoggerDestination {
-    static let common = Self(category: "common")
-}
+import CommonLibrary
+import SwiftUI
 
-extension UserDefaults {
-    public static let group: UserDefaults = {
-        let appGroup = BundleConfiguration.main.string(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
+extension AdvancedRouterView {
+    var body: some View {
+        NavigationStack {
+            AdvancedView(
+                identifiers: Constants.shared.identifiers,
+                navigationRoute: $navigationRoute
+            )
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        ThemeImage(.close)
+                    }
+                }
+            }
+            .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+            .themeNavigationDetail()
         }
-        return defaults
-    }()
+    }
 }
+
+#endif

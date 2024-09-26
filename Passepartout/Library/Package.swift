@@ -15,23 +15,23 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "AppLibrary",
+            targets: ["AppLibrary"]
+        ),
+        .library(
+            name: "AppUI",
             targets: [
-                "AppLibrary",
-                "AppDataProfiles"
+                "AppDataProfiles",
+                "AppUI"
             ]
         ),
         .library(
             name: "TunnelLibrary",
-            targets: ["TunnelLibrary"]
-        ),
-        .library(
-            name: "UtilsLibrary",
-            targets: ["UtilsLibrary"]
+            targets: ["CommonLibrary"]
         )
     ],
     dependencies: [
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", from: "0.7.0"),
-//        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", revision: "d4f25ecfbcd00dbb6f08de18eda6e0cefbcc379d"),
+//        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", from: "0.7.0"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", revision: "2d7e0210d8754664ce45528d50c1a1e6a36ad27c"),
 //        .package(path: "../../../passepartoutkit"),
         .package(url: "git@github.com:passepartoutvpn/passepartoutkit-openvpn-openssl", from: "0.6.0"),
 //        .package(path: "../../../passepartoutkit-openvpn-openssl"),
@@ -64,8 +64,13 @@ let package = Package(
             dependencies: [
                 "AppData",
                 "CommonLibrary",
-                "Kvitto"
-            ],
+                "Kvitto",
+                "UtilsLibrary"
+            ]
+        ),
+        .target(
+            name: "AppUI",
+            dependencies: ["AppLibrary"],
             resources: [
                 .process("Resources")
             ]
@@ -75,16 +80,11 @@ let package = Package(
             dependencies: [
                 .product(name: "PassepartoutKit", package: "passepartoutkit"),
                 .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-openvpn-openssl"),
-                .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-wireguard-go"),
-                "UtilsLibrary",
+                .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-wireguard-go")
             ],
             resources: [
                 .process("Resources")
             ]
-        ),
-        .target(
-            name: "TunnelLibrary",
-            dependencies: ["CommonLibrary"]
         ),
         .target(
             name: "UtilsLibrary"
@@ -92,6 +92,10 @@ let package = Package(
         .testTarget(
             name: "AppLibraryTests",
             dependencies: ["AppLibrary"]
+        ),
+        .testTarget(
+            name: "AppUITests",
+            dependencies: ["AppUI"]
         )
     ]
 )

@@ -12,14 +12,15 @@
 		0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */; };
 		0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */; };
 		0EB08B982CA46F4900A02591 /* AppPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EB08B962CA46F4900A02591 /* AppPlist.strings */; };
-		0EBE80DA2BF55C0E00E36A20 /* AppLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EBE80D92BF55C0E00E36A20 /* AppLibrary */; };
 		0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */; };
 		0EC066D12C7DC47600D88A94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */; platformFilter = ios; };
 		0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
 		0EC332D22B8A1808000B9C2F /* PassepartoutTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0EC797422B9378E000C093B7 /* Shared+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797402B9378E000C093B7 /* Shared+App.swift */; };
+		0EC797422B9378E000C093B7 /* Shared+AppUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797402B9378E000C093B7 /* Shared+AppUI.swift */; };
 		0EC797432B9378E000C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
 		0EC797442B93790600C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
+		0EC9C0232CA5BD0B00C52954 /* AppUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0EC9C0222CA5BD0B00C52954 /* AppUI */; };
+		0EC9C0282CA5C04500C52954 /* Shared+AppLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +62,9 @@
 		0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		0EC797402B9378E000C093B7 /* Shared+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shared+App.swift"; sourceTree = "<group>"; };
+		0EC797402B9378E000C093B7 /* Shared+AppUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shared+AppUI.swift"; sourceTree = "<group>"; };
 		0EC797412B9378E000C093B7 /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+AppLibrary.swift"; sourceTree = "<group>"; };
 		0ED1EFDA2C33059600CBD9BD /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EBE80DA2BF55C0E00E36A20 /* AppLibrary in Frameworks */,
+				0EC9C0232CA5BD0B00C52954 /* AppUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				0EC797412B9378E000C093B7 /* Shared.swift */,
-				0EC797402B9378E000C093B7 /* Shared+App.swift */,
+				0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */,
+				0EC797402B9378E000C093B7 /* Shared+AppUI.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -179,7 +182,7 @@
 			);
 			name = Passepartout;
 			packageProductDependencies = (
-				0EBE80D92BF55C0E00E36A20 /* AppLibrary */,
+				0EC9C0222CA5BD0B00C52954 /* AppUI */,
 			);
 			productName = PassepartoutKit;
 			productReference = 0E06D18F2B87629100176E1D /* Passepartout.app */;
@@ -213,7 +216,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					0E06D18E2B87629100176E1D = {
@@ -290,8 +293,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */,
+				0EC9C0282CA5C04500C52954 /* Shared+AppLibrary.swift in Sources */,
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
-				0EC797422B9378E000C093B7 /* Shared+App.swift in Sources */,
+				0EC797422B9378E000C093B7 /* Shared+AppUI.swift in Sources */,
 				0EC797432B9378E000C093B7 /* Shared.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,7 +503,7 @@
 				INFOPLIST_FILE = Passepartout/App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Davide De Rosa. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = dummy;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -541,7 +545,7 @@
 				INFOPLIST_FILE = Passepartout/App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Davide De Rosa. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = dummy;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -576,6 +580,9 @@
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				CURRENT_PROJECT_VERSION = 3633;
 				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../../Frameworks",
@@ -603,6 +610,9 @@
 				CODE_SIGN_ENTITLEMENTS = Passepartout/Tunnel/Tunnel.entitlements;
 				CURRENT_PROJECT_VERSION = 3633;
 				INFOPLIST_FILE = Passepartout/Tunnel/Tunnel.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../../../../Frameworks";
 				MARKETING_VERSION = 3.0.0;
@@ -662,13 +672,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
 		};
-		0EBE80D92BF55C0E00E36A20 /* AppLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AppLibrary;
-		};
 		0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
+		};
+		0EC9C0222CA5BD0B00C52954 /* AppUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
