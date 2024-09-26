@@ -36,6 +36,7 @@ CFG_GROUP_ID[sdk=iphoneos*] = $(CFG_RAW_GROUP_ID)
 CFG_GROUP_ID[sdk=iphonesimulator*] = $(CFG_RAW_GROUP_ID)
 CFG_GROUP_ID[sdk=macosx*] = $(CFG_TEAM_ID).$(CFG_RAW_GROUP_ID)
 CFG_IAP_BUNDLE_PREFIX = com.algoritmico.ios.Passepartout
+CFG_INTENTS_ID = $(CFG_APP_ID).Intents
 CFG_PROFILES_CONTAINER_NAME = Profiles-v3
 CFG_RAW_GROUP_ID = group.com.algoritmico.Passepartout
 CFG_TEAM_ID = DTDYD63ZX9

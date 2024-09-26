@@ -25,6 +25,13 @@ let package = Package(
             ]
         ),
         .library(
+            name: "IntentsLibrary",
+            targets: [
+                "AppDataProfiles",
+                "AppLibrary"
+            ]
+        ),
+        .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
         )
