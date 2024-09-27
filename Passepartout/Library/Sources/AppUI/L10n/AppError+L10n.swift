@@ -71,7 +71,7 @@ extension PassepartoutError: LocalizedError {
             return Strings.Errors.App.Passepartout.invalidFields(fieldsDescription)
 
         case .parsing:
-            return Strings.Errors.App.Passepartout.parsing
+            return reason?.localizedDescription ?? Strings.Errors.App.Passepartout.parsing
 
         case .unhandled:
             return reason?.localizedDescription
