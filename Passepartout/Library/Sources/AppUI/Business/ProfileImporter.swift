@@ -60,7 +60,8 @@ final class ProfileImporter: ObservableObject {
                 )
             } catch {
                 if let error = error as? PassepartoutError,
-                   error.code == .OpenVPN.passphraseRequired {
+                   let reason = error.reason as? PassepartoutError,
+                   reason.code == .OpenVPN.passphraseRequired {
                     withPassphrase.append(url)
                     continue
                 }
