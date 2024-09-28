@@ -47,8 +47,11 @@ struct ProfileImporterModifier: ViewModifier {
                 isPresented: $isPresented,
                 allowedContentTypes: [.item],
                 allowsMultipleSelection: true,
-                onCompletion: onCompletion
+                onCompletion: handleResult
             )
+            .onOpenURL { url in
+                handleResult(.success([url]))
+            }
             .alert(
                 Strings.Views.Profiles.Toolbar.importProfile,
                 isPresented: $importer.isPresentingPassphrase,
@@ -85,7 +88,7 @@ private extension ProfileImporterModifier {
         Text(Strings.Views.Profiles.Alerts.Import.Passphrase.message(url.lastPathComponent))
     }
 
-    func onCompletion(_ result: Result<[URL], Error>) {
+    func handleResult(_ result: Result<[URL], Error>) {
         Task.detached {
             do {
                 let urls = try result.get()
