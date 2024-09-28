@@ -129,7 +129,7 @@ private extension AppInlineCoordinator {
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
         case .about:
-            AdvancedRouterView(tunnel: tunnel)
+            AboutRouterView(tunnel: tunnel)
 
         default:
             EmptyView()

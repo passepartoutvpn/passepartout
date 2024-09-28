@@ -120,7 +120,7 @@ extension AppModalCoordinator {
             }
 
         case .about:
-            AdvancedRouterView(tunnel: tunnel)
+            AboutRouterView(tunnel: tunnel)
 
         default:
             EmptyView()

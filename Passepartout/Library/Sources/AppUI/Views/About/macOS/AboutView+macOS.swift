@@ -1,8 +1,8 @@
 //
-//  AdvancedRouterView+macOS.swift
+//  AboutView+macOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/26/24.
+//  Created by Davide De Rosa on 8/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,33 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
-
-import CommonLibrary
 import SwiftUI
 
-extension AdvancedRouterView {
-    var body: some View {
-        NavigationSplitView {
-            AdvancedView(
-                identifiers: Constants.shared.identifiers,
-                navigationRoute: $navigationRoute
-            )
-        } detail: {
-            NavigationStack {
-                pushDestination(for: navigationRoute)
-                    .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
-            }
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button(Strings.Global.ok) {
-                        dismiss()
-                    }
-                }
+#if os(macOS)
+
+extension AboutView {
+    var listView: some View {
+        List(selection: $navigationRoute) {
+            Section {
+                // TODO: donations
+//                donateLink
+                linksLink
+                creditsLink
+                diagnosticsLink
             }
         }
-        .onLoad {
-            navigationRoute = .links
+        .safeAreaInset(edge: .bottom) {
+            Text(identifiers.versionString)
+                .padding(.bottom)
         }
     }
 }

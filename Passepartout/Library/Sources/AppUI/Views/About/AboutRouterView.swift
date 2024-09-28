@@ -1,5 +1,5 @@
 //
-//  AdvancedRouterView.swift
+//  AboutRouterView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/22/24.
@@ -28,7 +28,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct AdvancedRouterView: View {
+struct AboutRouterView: View {
 
     @Environment(\.dismiss)
     var dismiss
@@ -43,7 +43,7 @@ struct AdvancedRouterView: View {
     }
 }
 
-extension AdvancedRouterView {
+extension AboutRouterView {
     enum NavigationRoute: Hashable {
         case donate
 
@@ -94,7 +94,7 @@ extension AdvancedRouterView {
 }
 
 #Preview {
-    AdvancedRouterView(
+    AboutRouterView(
         tunnel: .mock
     )
     .environmentObject(Theme())

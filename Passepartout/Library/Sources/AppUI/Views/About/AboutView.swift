@@ -1,5 +1,5 @@
 //
-//  AdvancedView.swift
+//  AboutView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/23/24.
@@ -28,11 +28,11 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct AdvancedView: View {
+struct AboutView: View {
     let identifiers: Constants.Identifiers
 
     @Binding
-    var navigationRoute: AdvancedRouterView.NavigationRoute?
+    var navigationRoute: AboutRouterView.NavigationRoute?
 
     var body: some View {
         listView
@@ -40,7 +40,7 @@ struct AdvancedView: View {
     }
 }
 
-extension AdvancedView {
+extension AboutView {
     var donateLink: some View {
         navLink(Strings.Views.Donate.title, to: .donate)
     }
@@ -58,14 +58,14 @@ extension AdvancedView {
     }
 }
 
-private extension AdvancedView {
-    func navLink(_ title: String, to route: AdvancedRouterView.NavigationRoute) -> some View {
+private extension AboutView {
+    func navLink(_ title: String, to route: AboutRouterView.NavigationRoute) -> some View {
         NavigationLink(title, value: route)
     }
 }
 
 #Preview {
-    AdvancedView(
+    AboutView(
         identifiers: Constants.shared.identifiers,
         navigationRoute: .constant(nil)
     )

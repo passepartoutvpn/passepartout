@@ -161,7 +161,7 @@ private extension DiagnosticsView {
         }
     }
 
-    func navLink(_ title: String, to value: AdvancedRouterView.NavigationRoute) -> some View {
+    func navLink(_ title: String, to value: AboutRouterView.NavigationRoute) -> some View {
         NavigationLink(title, value: value)
     }
 }

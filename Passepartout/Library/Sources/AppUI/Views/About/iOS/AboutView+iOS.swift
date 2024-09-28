@@ -1,5 +1,5 @@
 //
-//  AdvancedView+macOS.swift
+//  AboutView+iOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/27/24.
@@ -23,24 +23,26 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if os(iOS)
+
 import SwiftUI
 
-#if os(macOS)
-
-extension AdvancedView {
+extension AboutView {
     var listView: some View {
-        List(selection: $navigationRoute) {
+        List {
             Section {
                 // TODO: donations
 //                donateLink
                 linksLink
                 creditsLink
-                diagnosticsLink
+            } header: {
+                Text(Strings.Views.Advanced.Sections.resources)
             }
-        }
-        .safeAreaInset(edge: .bottom) {
-            Text(identifiers.versionString)
-                .padding(.bottom)
+            Section {
+                diagnosticsLink
+                Text(Strings.Global.version)
+                    .withTrailingText(identifiers.versionString)
+            }
         }
     }
 }
