@@ -53,6 +53,8 @@ struct PassepartoutApp: App {
 #else
         Window(appName, id: appName, content: content)
             .defaultSize(width: 600.0, height: 400.0)
+
+        Settings(content: SettingsView.init)
 #endif
     }
 }

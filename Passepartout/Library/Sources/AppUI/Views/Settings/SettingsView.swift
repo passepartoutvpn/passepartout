@@ -1,5 +1,5 @@
 //
-//  AppSettingsView.swift
+//  SettingsView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/28/24.
@@ -26,10 +26,13 @@
 import CommonLibrary
 import SwiftUI
 
-public struct AppSettingsView: View {
+public struct SettingsView: View {
 
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
+
+    public init() {
+    }
 
     public var body: some View {
         Section {
@@ -40,7 +43,7 @@ public struct AppSettingsView: View {
     }
 }
 
-private extension AppSettingsView {
+private extension SettingsView {
     var lockInBackgroundToggle: some View {
         Toggle(Strings.Views.Advanced.lockInBackground, isOn: $locksInBackground)
     }
