@@ -42,11 +42,13 @@ struct PassepartoutApp: App {
     private let context: AppContext = .shared
 //    private let context: AppContext = .mock(withRegistry: .shared)
 
+    private let appName = Constants.shared.identifiers.displayName
+
     @StateObject
     private var theme = Theme()
 
     var body: some Scene {
-        WindowGroup {
+        Window(appName, id: appName) {
             AppCoordinator(
                 profileManager: context.profileManager,
                 tunnel: context.tunnel,

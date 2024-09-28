@@ -32,8 +32,7 @@
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.text</string>
-				<string>public.zip-archive</string>
+				<string>public.item</string>
 			</array>
 		</dict>
 		<dict>
