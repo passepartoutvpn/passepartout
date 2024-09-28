@@ -541,16 +541,14 @@ internal enum Strings {
     }
     internal enum Settings {
       internal enum Rows {
+        /// Confirm quit
+        internal static let confirmQuit = Strings.tr("Localizable", "views.settings.rows.confirm_quit", fallback: "Confirm quit")
         /// Lock in background
         internal static let lockInBackground = Strings.tr("Localizable", "views.settings.rows.lock_in_background", fallback: "Lock in background")
         internal enum LockInBackground {
           /// Passepartout is locked
           internal static let message = Strings.tr("Localizable", "views.settings.rows.lock_in_background.message", fallback: "Passepartout is locked")
         }
-      }
-      internal enum Sections {
-        /// Lock
-        internal static let lock = Strings.tr("Localizable", "views.settings.sections.lock", fallback: "Lock")
       }
     }
   }

@@ -26,6 +26,8 @@
 import Foundation
 
 public enum AppPreference: String {
+    case confirmsQuit
+
     case locksInBackground
 
     case logsPrivateData
