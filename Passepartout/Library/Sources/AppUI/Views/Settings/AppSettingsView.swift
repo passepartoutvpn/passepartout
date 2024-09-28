@@ -1,8 +1,8 @@
 //
-//  AdvancedView+iOS.swift
+//  AppSettingsView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 9/28/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,28 +23,25 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
-
+import CommonLibrary
 import SwiftUI
 
-extension AdvancedView {
-    var listView: some View {
-        List {
-            Section {
-                // TODO: donations
-//                donateLink
-                linksLink
-                creditsLink
-            } header: {
-                Text(Strings.Views.Advanced.Sections.resources)
-            }
-            Section {
-                diagnosticsLink
-                Text(Strings.Global.version)
-                    .withTrailingText(identifiers.versionString)
-            }
+public struct AppSettingsView: View {
+
+    @AppStorage(AppPreference.locksInBackground.key)
+    private var locksInBackground = false
+
+    public var body: some View {
+        Section {
+            lockInBackgroundToggle
+        } header: {
+            Text(Strings.Global.settings)
         }
     }
 }
 
-#endif
+private extension AppSettingsView {
+    var lockInBackgroundToggle: some View {
+        Toggle(Strings.Views.Advanced.lockInBackground, isOn: $locksInBackground)
+    }
+}

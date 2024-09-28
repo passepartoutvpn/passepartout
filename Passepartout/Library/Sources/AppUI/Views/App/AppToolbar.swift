@@ -43,7 +43,7 @@ struct AppToolbar: ToolbarContent {
     @Binding
     var isImporting: Bool
 
-    let onSettings: () -> Void
+    let onAdvanced: () -> Void
 
     let onNewProfile: (Profile) -> Void
 
@@ -76,7 +76,7 @@ private extension AppToolbar {
     }
 
     var settingsButton: some View {
-        Button(action: onSettings) {
+        Button(action: onAdvanced) {
             ThemeImage(.advanced)
         }
     }
@@ -94,7 +94,7 @@ private extension AppToolbar {
                     profileManager: .mock,
                     layout: .constant(.list),
                     isImporting: .constant(false),
-                    onSettings: {},
+                    onAdvanced: {},
                     onNewProfile: { _ in}
                 )
             }

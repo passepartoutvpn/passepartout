@@ -31,11 +31,6 @@ extension AdvancedView {
     var listView: some View {
         List(selection: $navigationRoute) {
             Section {
-                lockInBackgroundToggle
-            } header: {
-                Text(Strings.Global.settings)
-            }
-            Section {
                 // TODO: donations
 //                donateLink
                 linksLink

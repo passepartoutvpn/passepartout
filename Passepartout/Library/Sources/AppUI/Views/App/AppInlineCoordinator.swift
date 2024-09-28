@@ -69,12 +69,12 @@ private extension AppInlineCoordinator {
     }
 
     enum ModalRoute: String, Identifiable {
-        case settings
+        case advanced
 
         var id: [String] {
             switch self {
-            case .settings:
-                return ["settings"]
+            case .advanced:
+                return ["advanced"]
             }
         }
     }
@@ -100,8 +100,8 @@ private extension AppInlineCoordinator {
             profileManager: profileManager,
             layout: $layout,
             isImporting: $isImporting,
-            onSettings: {
-                modalRoute = .settings
+            onAdvanced: {
+                modalRoute = .advanced
             },
             onNewProfile: enterDetail
         )
@@ -126,7 +126,7 @@ private extension AppInlineCoordinator {
     @ViewBuilder
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
-        case .settings:
+        case .advanced:
             AdvancedRouterView(tunnel: tunnel)
 
         default:

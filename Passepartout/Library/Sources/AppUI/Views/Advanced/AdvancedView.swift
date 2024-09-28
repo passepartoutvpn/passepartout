@@ -29,10 +29,6 @@ import SwiftUI
 import UtilsLibrary
 
 struct AdvancedView: View {
-
-    @AppStorage(AppPreference.locksInBackground.key)
-    private var locksInBackground = false
-
     let identifiers: Constants.Identifiers
 
     @Binding
@@ -45,10 +41,6 @@ struct AdvancedView: View {
 }
 
 extension AdvancedView {
-    var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Advanced.lockInBackground, isOn: $locksInBackground)
-    }
-
     var donateLink: some View {
         navLink(Strings.Views.Donate.title, to: .donate)
     }

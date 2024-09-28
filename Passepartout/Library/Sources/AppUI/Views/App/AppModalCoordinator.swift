@@ -65,15 +65,15 @@ extension AppModalCoordinator {
     enum ModalRoute: Identifiable {
         case editProfile
 
-        case settings
+        case advanced
 
         var id: [String] {
             switch self {
             case .editProfile:
                 return ["editProfile"]
 
-            case .settings:
-                return ["settings"]
+            case .advanced:
+                return ["advanced"]
             }
         }
     }
@@ -99,8 +99,8 @@ extension AppModalCoordinator {
             profileManager: profileManager,
             layout: $layout,
             isImporting: $isImporting,
-            onSettings: {
-                modalRoute = .settings
+            onAdvanced: {
+                modalRoute = .advanced
             },
             onNewProfile: enterDetail
         )
@@ -120,7 +120,7 @@ extension AppModalCoordinator {
                 modalRoute = nil
             }
 
-        case .settings:
+        case .advanced:
             AdvancedRouterView(tunnel: tunnel)
 
         default:
