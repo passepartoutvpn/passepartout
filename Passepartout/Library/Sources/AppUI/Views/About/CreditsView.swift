@@ -30,15 +30,15 @@ struct CreditsView: View {
     var body: some View {
         GenericCreditsView(
             credits: Self.credits,
-            licensesHeader: Strings.Views.Advanced.Credits.licenses,
-            noticesHeader: Strings.Views.Advanced.Credits.notices,
-            translationsHeader: Strings.Views.Advanced.Credits.translations,
+            licensesHeader: Strings.Views.About.Credits.licenses,
+            noticesHeader: Strings.Views.About.Credits.notices,
+            translationsHeader: Strings.Views.About.Credits.translations,
             errorDescription: {
                 AppError($0)
                     .localizedDescription
             }
         )
-        .navigationTitle(Strings.Views.Advanced.Credits.title)
+        .navigationTitle(Strings.Views.About.Credits.title)
         .themeForm()
     }
 }

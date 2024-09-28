@@ -36,7 +36,7 @@ extension AboutView {
                 linksLink
                 creditsLink
             } header: {
-                Text(Strings.Views.Advanced.Sections.resources)
+                Text(Strings.Views.About.Sections.resources)
             }
             Section {
                 diagnosticsLink

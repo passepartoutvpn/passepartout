@@ -53,6 +53,6 @@ public struct SettingsView: View {
 
 private extension SettingsView {
     var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Advanced.lockInBackground, isOn: $locksInBackground)
+        Toggle(Strings.Views.About.lockInBackground, isOn: $locksInBackground)
     }
 }

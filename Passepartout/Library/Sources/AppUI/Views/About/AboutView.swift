@@ -36,7 +36,7 @@ struct AboutView: View {
 
     var body: some View {
         listView
-            .navigationTitle(Strings.Views.Advanced.title)
+            .navigationTitle(Strings.Views.About.title)
     }
 }
 
@@ -50,11 +50,11 @@ extension AboutView {
     }
 
     var linksLink: some View {
-        navLink(Strings.Views.Advanced.Links.title, to: .links)
+        navLink(Strings.Views.About.Links.title, to: .links)
     }
 
     var creditsLink: some View {
-        navLink(Strings.Views.Advanced.Credits.title, to: .credits)
+        navLink(Strings.Views.About.Credits.title, to: .credits)
     }
 }
 
