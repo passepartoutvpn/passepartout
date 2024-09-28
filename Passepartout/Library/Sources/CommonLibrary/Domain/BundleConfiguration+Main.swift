@@ -44,16 +44,20 @@ extension BundleConfiguration {
     }
 
     // WARNING: nil from package itself, e.g. in previews
-    public static let main: BundleConfiguration? = {
+    private static let failableMain: BundleConfiguration? = {
         BundleConfiguration(.main, key: Constants.shared.bundle)
     }()
+
+    private static var main: BundleConfiguration {
+        guard let failableMain else {
+            fatalError("Missing main bundle")
+        }
+        return failableMain
+    }
 
     public static var mainDisplayName: String {
         if isPreview {
             return "preview-display-name"
-        }
-        guard let main else {
-            fatalError("Missing main bundle")
         }
         return main.displayName
     }
@@ -62,18 +66,12 @@ extension BundleConfiguration {
         if isPreview {
             return "preview-1.2.3"
         }
-        guard let main else {
-            fatalError("Missing main bundle")
-        }
         return main.versionString
     }
 
     public static func mainString(for key: BundleKey) -> String {
         if isPreview {
             return "preview-key(\(key.rawValue))"
-        }
-        guard let main else {
-            fatalError("Missing main bundle")
         }
         guard let value: String = main.value(forKey: key.rawValue) else {
             fatalError("Missing main bundle key: \(key.rawValue)")
@@ -82,7 +80,10 @@ extension BundleConfiguration {
     }
 
     public static func mainIntegerIfPresent(for key: BundleKey) -> Int? {
-        main?.value(forKey: key.rawValue)
+        if isPreview {
+            return nil
+        }
+        return main.value(forKey: key.rawValue)
     }
 }
 
