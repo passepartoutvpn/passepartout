@@ -45,6 +45,7 @@ public struct SettingsView: View {
                 Text(Strings.Views.Settings.Sections.lock)
             }
         }
+        .themeForm()
         .navigationTitle(Strings.Global.settings)
 #if os(iOS)
         .themeNavigationDetail()

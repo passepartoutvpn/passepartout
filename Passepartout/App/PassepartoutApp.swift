@@ -56,7 +56,6 @@ struct PassepartoutApp: App {
 
         Settings {
             SettingsView()
-                .scenePadding()
                 .frame(minWidth: 300, minHeight: 100)
         }
 #endif
