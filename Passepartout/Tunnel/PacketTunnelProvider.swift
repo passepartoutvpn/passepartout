@@ -30,13 +30,9 @@ import PassepartoutKit
 final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var fwd: NEPTPForwarder?
 
-    private var logURL: URL {
-        Constants.shared.urlForTunnelLog(groupId: BundleConfiguration.mainString(for: .groupId))
-    }
-
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
         CommonLibrary.configureLogging(
-            to: logURL,
+            to: BundleConfiguration.urlForTunnelLog,
             parameters: Constants.shared.log
         )
         fwd = try await NEPTPForwarder(
