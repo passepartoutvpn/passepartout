@@ -102,6 +102,40 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
     }
 }
 
+struct ThemeNavigationStackModifier: ViewModifier {
+
+    @Environment(\.dismiss)
+    private var dismiss
+
+    let condition: Bool
+
+    let closable: Bool
+
+    @Binding
+    var path: NavigationPath
+
+    func body(content: Content) -> some View {
+        if condition {
+            NavigationStack(path: $path) {
+                content
+                    .toolbar {
+                        if closable {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button {
+                                    dismiss()
+                                } label: {
+                                    ThemeImage(.close)
+                                }
+                            }
+                        }
+                    }
+            }
+        } else {
+            content
+        }
+    }
+}
+
 struct ThemePlainButtonModifier: ViewModifier {
     let action: () -> Void
 }

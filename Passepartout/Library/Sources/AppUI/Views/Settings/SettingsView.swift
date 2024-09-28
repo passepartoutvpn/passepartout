@@ -31,15 +31,23 @@ public struct SettingsView: View {
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
 
+    @State
+    private var path = NavigationPath()
+
     public init() {
     }
 
     public var body: some View {
-        Section {
-            lockInBackgroundToggle
-        } header: {
-            Text(Strings.Global.settings)
+        Form {
+            Section {
+                lockInBackgroundToggle
+            }
         }
+        .navigationTitle(Strings.Global.settings)
+#if os(iOS)
+        .themeNavigationDetail()
+        .themeNavigationStack(if: true, closable: true, path: $path)
+#endif
     }
 }
 

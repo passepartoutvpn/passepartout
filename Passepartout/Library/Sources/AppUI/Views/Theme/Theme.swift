@@ -160,15 +160,8 @@ extension View {
         ))
     }
 
-    @ViewBuilder
-    public func themeNavigationStack(if condition: Bool, path: Binding<NavigationPath>) -> some View {
-        if condition {
-            NavigationStack(path: path) {
-                self
-            }
-        } else {
-            self
-        }
+    public func themeNavigationStack(if condition: Bool, closable: Bool = false, path: Binding<NavigationPath>) -> some View {
+        modifier(ThemeNavigationStackModifier(condition: condition, closable: closable, path: path))
     }
 
     public func themePlainButton(action: @escaping () -> Void) -> some View {

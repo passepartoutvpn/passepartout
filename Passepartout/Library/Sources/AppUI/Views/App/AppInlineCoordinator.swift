@@ -128,6 +128,9 @@ private extension AppInlineCoordinator {
     @ViewBuilder
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
+        case .settings:
+            SettingsView()
+
         case .about:
             AboutRouterView(tunnel: tunnel)
 

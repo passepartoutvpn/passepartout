@@ -119,6 +119,9 @@ extension AppModalCoordinator {
                 modalRoute = nil
             }
 
+        case .settings:
+            SettingsView()
+
         case .about:
             AboutRouterView(tunnel: tunnel)
 
