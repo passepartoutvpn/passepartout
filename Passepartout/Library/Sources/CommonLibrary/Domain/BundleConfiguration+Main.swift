@@ -28,8 +28,6 @@ import PassepartoutKit
 
 extension BundleConfiguration {
     public enum BundleKey: String {
-        case appId
-
         case appStoreId
 
         case customUserLevel
@@ -41,8 +39,6 @@ extension BundleConfiguration {
         case keychainGroupId
 
         case profilesContainerName
-
-        case teamId
 
         case tunnelId
     }
