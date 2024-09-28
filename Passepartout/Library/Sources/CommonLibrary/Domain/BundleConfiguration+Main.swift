@@ -53,24 +53,45 @@ extension BundleConfiguration {
     }()
 
     public static var mainDisplayName: String {
-        main?.displayName ?? "missing-display-name"
+        if isPreview {
+            return "preview-display-name"
+        }
+        guard let main else {
+            fatalError("Missing main bundle")
+        }
+        return main.displayName
     }
 
     public static var mainVersionString: String {
-        main?.versionString ?? "missing-version-string"
+        if isPreview {
+            return "preview-version-string"
+        }
+        guard let main else {
+            fatalError("Missing main bundle")
+        }
+        return main.versionString
     }
 
-    public static func mainString(for key: BundleKey, fallback: String? = nil) -> String {
+    public static func mainString(for key: BundleKey) -> String {
+        if isPreview {
+            return "preview-bundle-key(\(key.rawValue))"
+        }
         guard let main else {
-            return fallback ?? "missing-main-bundle"
+            fatalError("Missing main bundle")
         }
         guard let value: String = main.value(forKey: key.rawValue) else {
-            return fallback ?? "missing-bundle-key(\(key.rawValue))"
+            fatalError("Missing main bundle key: \(key.rawValue)")
         }
         return value
     }
 
     public static func mainIntegerIfPresent(for key: BundleKey) -> Int? {
         main?.value(forKey: key.rawValue)
+    }
+}
+
+private extension BundleConfiguration {
+    static var isPreview: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     }
 }
