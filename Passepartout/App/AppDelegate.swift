@@ -33,8 +33,54 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 #else
 
 import AppKit
+import AppUI
+import CommonLibrary
+import SwiftUI
 
-final class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+
+    @AppStorage(AppPreference.confirmsQuit.key)
+    private var confirmsQuit = true
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSApp.windows[0].delegate = self
+    }
+
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        false
+    }
+
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        if confirmsQuit {
+            return quitConfirmationAlert()
+        }
+        return .terminateNow
+    }
+}
+
+@MainActor
+private extension AppDelegate {
+    func quitConfirmationAlert() -> NSApplication.TerminateReply {
+        let alert = NSAlert()
+        alert.alertStyle = .warning
+        alert.messageText = Strings.Alerts.ConfirmQuit.title
+        alert.informativeText = Strings.Alerts.ConfirmQuit.message
+        alert.addButton(withTitle: Strings.Global.ok)
+        alert.addButton(withTitle: Strings.Global.cancel)
+        alert.addButton(withTitle: Strings.Global.doNotAskAgain)
+
+        switch alert.runModal() {
+        case .alertSecondButtonReturn:
+            return .terminateCancel
+
+        case .alertThirdButtonReturn:
+            confirmsQuit = false
+
+        default:
+            break
+        }
+        return .terminateNow
+    }
 }
 
 #endif

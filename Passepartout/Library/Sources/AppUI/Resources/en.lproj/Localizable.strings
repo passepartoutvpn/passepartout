@@ -17,6 +17,7 @@
 "global.disconnect" = "Disconnect";
 "global.domain" = "Domain";
 "global.done" = "Done";
+"global.do_not_ask_again" = "Don't ask again";
 "global.duplicate" = "Duplicate";
 "global.edit" = "Edit";
 "global.empty" = "Empty";
@@ -206,6 +207,9 @@
 
 "alerts.iap.restricted.title" = "Restricted";
 "alerts.iap.restricted.message" = "The requested feature is unavailable in this build.";
+
+"alerts.confirm_quit.title" = "Quit";
+"alerts.confirm_quit.message" = "The VPN, if enabled, will still run in the background. Do you want to quit?";
 
 // MARK: - Errors
 
