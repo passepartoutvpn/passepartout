@@ -45,8 +45,6 @@ public struct SettingsView: View {
 #if os(iOS)
         .themeNavigationDetail()
         .themeNavigationStack(if: true, closable: true, path: $path)
-#else
-        .scenePadding()
 #endif
     }
 }
