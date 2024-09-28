@@ -43,18 +43,6 @@ extension BundleConfiguration {
         case tunnelId
     }
 
-    // WARNING: nil from package itself, e.g. in previews
-    private static let failableMain: BundleConfiguration? = {
-        BundleConfiguration(.main, key: Constants.shared.bundle)
-    }()
-
-    private static var main: BundleConfiguration {
-        guard let failableMain else {
-            fatalError("Missing main bundle")
-        }
-        return failableMain
-    }
-
     public static var mainDisplayName: String {
         if isPreview {
             return "preview-display-name"
@@ -88,6 +76,19 @@ extension BundleConfiguration {
 }
 
 private extension BundleConfiguration {
+
+    // WARNING: nil from package itself, e.g. in previews
+    static let failableMain: BundleConfiguration? = {
+        BundleConfiguration(.main, key: Constants.shared.bundle)
+    }()
+
+    static var main: BundleConfiguration {
+        guard let failableMain else {
+            fatalError("Missing main bundle")
+        }
+        return failableMain
+    }
+
     static var isPreview: Bool {
 #if targetEnvironment(simulator)
         ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
