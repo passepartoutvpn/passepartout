@@ -59,7 +59,7 @@ private extension AppDelegate {
     func quitConfirmationAlert() -> NSApplication.TerminateReply {
         let alert = NSAlert()
         alert.alertStyle = .warning
-        alert.messageText = Strings.Alerts.ConfirmQuit.title
+        alert.messageText = Strings.Alerts.ConfirmQuit.title(Constants.shared.identifiers.displayName)
         alert.informativeText = Strings.Alerts.ConfirmQuit.message
         alert.addButton(withTitle: Strings.Global.ok)
         alert.addButton(withTitle: Strings.Global.cancel)

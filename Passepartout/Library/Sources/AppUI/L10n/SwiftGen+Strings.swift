@@ -14,8 +14,10 @@ public enum Strings {
     public enum ConfirmQuit {
       /// The VPN, if enabled, will still run in the background. Do you want to quit?
       public static let message = Strings.tr("Localizable", "alerts.confirm_quit.message", fallback: "The VPN, if enabled, will still run in the background. Do you want to quit?")
-      /// Quit
-      public static let title = Strings.tr("Localizable", "alerts.confirm_quit.title", fallback: "Quit")
+      /// Quit %@
+      public static func title(_ p1: Any) -> String {
+        return Strings.tr("Localizable", "alerts.confirm_quit.title", String(describing: p1), fallback: "Quit %@")
+      }
     }
     public enum Iap {
       public enum Restricted {
