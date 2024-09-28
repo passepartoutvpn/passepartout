@@ -33,21 +33,8 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 #else
 
 import AppKit
-import CommonLibrary
-import PassepartoutKit
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        NSWindow.allowsAutomaticWindowTabbing = false
-
-        // XXX: hack to only retain "Edit" menu
-        NSApp.mainMenu?.items = NSApp.mainMenu?.items.filter {
-            [BundleConfiguration.main.displayName, "Edit"].contains($0.title)
-        } ?? []
-    }
-
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        true
-    }
 }
+
 #endif
