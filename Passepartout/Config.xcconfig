@@ -30,10 +30,14 @@ CFG_APP_ID = com.algoritmico.ios.Passepartout
 CFG_APP_STORE_ID = 1433648537
 CFG_COPYRIGHT = Copyright © 2024 Davide De Rosa. All rights reserved.
 CFG_DISPLAY_NAME = Passepartout
-CFG_GROUP_ID = group.$(CFG_RAW_GROUP_ID)
+CFG_GROUP_ID[sdk=appletvos*] = $(CFG_RAW_GROUP_ID)
+CFG_GROUP_ID[sdk=appletvsimulator*] = $(CFG_RAW_GROUP_ID)
+CFG_GROUP_ID[sdk=iphoneos*] = $(CFG_RAW_GROUP_ID)
+CFG_GROUP_ID[sdk=iphonesimulator*] = $(CFG_RAW_GROUP_ID)
+CFG_GROUP_ID[sdk=macosx*] = $(CFG_TEAM_ID).$(CFG_RAW_GROUP_ID)
 CFG_IAP_BUNDLE_PREFIX = com.algoritmico.ios.Passepartout
 CFG_PROFILES_CONTAINER_NAME = Profiles-v3
-CFG_RAW_GROUP_ID = com.algoritmico.Passepartout
+CFG_RAW_GROUP_ID = group.com.algoritmico.Passepartout
 CFG_TEAM_ID = DTDYD63ZX9
 CFG_TUNNEL_ID = $(CFG_APP_ID).Tunnel
 
