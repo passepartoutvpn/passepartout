@@ -64,7 +64,7 @@ extension Registry {
 extension TunnelEnvironment where Self == AppGroupEnvironment {
     static var shared: Self {
         AppGroupEnvironment(
-            appGroup: BundleConfiguration.main.string(for: .groupId),
+            appGroup: BundleConfiguration.mainString(for: .groupId),
             prefix: "PassepartoutKit."
         )
     }
@@ -84,9 +84,9 @@ extension NEProtocolDecoder where Self == KeychainNEProtocolCoder {
 
 private var sharedProtocolCoder: KeychainNEProtocolCoder {
     KeychainNEProtocolCoder(
-        tunnelBundleIdentifier: BundleConfiguration.main.string(for: .tunnelId),
+        tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
         registry: .shared,
         coder: CodableProfileCoder(),
-        keychain: AppleKeychain(group: BundleConfiguration.main.string(for: .keychainGroupId))
+        keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
     )
 }

@@ -29,7 +29,6 @@ import SwiftUI
 import UtilsLibrary
 
 struct AboutView: View {
-    let identifiers: Constants.Identifiers
 
     @Binding
     var navigationRoute: AboutRouterView.NavigationRoute?
@@ -66,7 +65,6 @@ private extension AboutView {
 
 #Preview {
     AboutView(
-        identifiers: Constants.shared.identifiers,
         navigationRoute: .constant(nil)
     )
 }

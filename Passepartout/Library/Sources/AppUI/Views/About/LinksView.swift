@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import PassepartoutKit
 import SwiftUI
 
 struct LinksView: View {
@@ -42,10 +43,14 @@ private extension LinksView {
         .shared
     }
 
+    var appStoreId: String {
+        BundleConfiguration.mainString(for: .appStoreId)
+    }
+
     var supportSection: some View {
         Section {
             Link(Strings.Views.About.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
-            Link(Strings.Views.About.Links.Rows.writeReview, destination: constants.urlForReview)
+            Link(Strings.Views.About.Links.Rows.writeReview, destination: constants.urlForReview(appStoreId: appStoreId))
         } header: {
             Text(Strings.Views.About.Links.Sections.support)
         }

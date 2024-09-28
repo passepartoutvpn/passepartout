@@ -48,25 +48,29 @@ extension BundleConfiguration {
     }
 
     // WARNING: nil from package itself, e.g. in previews
-    static let failableMain: BundleConfiguration? = {
-        BundleConfiguration(.main, key: "AppConfig")
+    public static let main: BundleConfiguration? = {
+        BundleConfiguration(.main, key: Constants.shared.bundle)
     }()
 
-    public static let main: BundleConfiguration = {
-        guard let failableMain else {
-            fatalError("Unable to build BundleConfiguration")
+    public static var mainDisplayName: String {
+        main?.displayName ?? "missing-display-name"
+    }
+
+    public static var mainVersionString: String {
+        main?.versionString ?? "missing-version-string"
+    }
+
+    public static func mainString(for key: BundleKey, fallback: String? = nil) -> String {
+        guard let main else {
+            return fallback ?? "missing-main-bundle"
         }
-        return failableMain
-    }()
-
-    public func string(for key: BundleKey) -> String {
-        guard let value: String = value(forKey: key.rawValue) else {
-            fatalError("Key '\(key)' not found in bundle")
+        guard let value: String = main.value(forKey: key.rawValue) else {
+            return fallback ?? "missing-bundle-key(\(key.rawValue))"
         }
         return value
     }
 
-    public func integerIfPresent(for key: BundleKey) -> Int? {
-        value(forKey: key.rawValue)
+    public static func mainIntegerIfPresent(for key: BundleKey) -> Int? {
+        main?.value(forKey: key.rawValue)
     }
 }

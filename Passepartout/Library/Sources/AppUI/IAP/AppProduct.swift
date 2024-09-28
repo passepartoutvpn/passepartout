@@ -43,7 +43,7 @@ public struct AppProduct: RawRepresentable, Hashable, Sendable {
 extension AppProduct: InAppIdentifierProviding {
     public var inAppIdentifier: String {
         [
-            BundleConfiguration.main.string(for: .iapBundlePrefix),
+            BundleConfiguration.mainString(for: .iapBundlePrefix),
             rawValue
         ].joined(separator: ".")
     }

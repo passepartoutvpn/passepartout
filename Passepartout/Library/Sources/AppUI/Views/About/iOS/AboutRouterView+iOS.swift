@@ -32,7 +32,6 @@ extension AboutRouterView {
     var body: some View {
         NavigationStack {
             AboutView(
-                identifiers: Constants.shared.identifiers,
                 navigationRoute: $navigationRoute
             )
             .toolbar {
