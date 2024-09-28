@@ -48,26 +48,32 @@ struct PassepartoutApp: App {
     private var theme = Theme()
 
     var body: some Scene {
-        Window(appName, id: appName) {
-            AppCoordinator(
-                profileManager: context.profileManager,
-                tunnel: context.tunnel,
-                registry: context.registry
-            )
-            .onLoad {
-                CommonLibrary.configureLogging(
-                    to: Constants.shared.urlForAppLog,
-                    parameters: Constants.shared.log
-                )
-                AppUI.configure(with: context)
-            }
-            .themeLockScreen()
-            .environmentObject(theme)
-            .environmentObject(context.iapManager)
-            .environmentObject(context.connectionObserver)
-        }
-#if os(macOS)
-        .defaultSize(width: 600.0, height: 400.0)
+#if os(iOS)
+        WindowGroup(content: content)
+#else
+        Window(appName, id: appName, content: content)
+            .defaultSize(width: 600.0, height: 400.0)
 #endif
+    }
+}
+
+private extension PassepartoutApp {
+    func content() -> some View {
+        AppCoordinator(
+            profileManager: context.profileManager,
+            tunnel: context.tunnel,
+            registry: context.registry
+        )
+        .onLoad {
+            CommonLibrary.configureLogging(
+                to: Constants.shared.urlForAppLog,
+                parameters: Constants.shared.log
+            )
+            AppUI.configure(with: context)
+        }
+        .themeLockScreen()
+        .environmentObject(theme)
+        .environmentObject(context.iapManager)
+        .environmentObject(context.connectionObserver)
     }
 }
