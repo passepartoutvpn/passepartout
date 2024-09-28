@@ -32,10 +32,6 @@ public struct AppUI {
 
     public static func configure(with context: AppContext) {
         assertMissingModuleImplementations()
-        Task {
-            await context.iapManager.reloadReceipt()
-            try await context.tunnel.prepare()
-        }
     }
 }
 

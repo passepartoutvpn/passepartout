@@ -230,10 +230,16 @@ extension ProfileEditorTests {
 
         let exp = expectation(description: "Save")
         manager
-            .didSave
+            .didChange
             .sink {
-                XCTAssertEqual($0, profile)
-                exp.fulfill()
+                switch $0 {
+                case .save(let savedProfile):
+                    XCTAssertEqual(savedProfile, profile)
+                    exp.fulfill()
+
+                default:
+                    break
+                }
             }
             .store(in: &subscriptions)
 

@@ -32,28 +32,14 @@ protocol ProfileProcessor {
 }
 
 extension Tunnel {
-    func reinstate(_ profile: Profile, processor: ProfileProcessor) async throws {
-        try await install(profile, processor: processor)
+    func install(_ profile: Profile, processor: ProfileProcessor) async throws {
+        let newProfile = try processor.processedProfile(profile)
+        try await install(newProfile, connect: false, title: \.name)
     }
 
     func connect(with profile: Profile, processor: ProfileProcessor) async throws {
-        try await install(profile, processor: processor)
-        guard !Task.isCancelled else {
-            return
-        }
-        try await connect()
-    }
-
-    func reconnect(with profile: Profile, processor: ProfileProcessor) async throws {
-        try await disconnect()
-        guard !Task.isCancelled else {
-            return
-        }
-        try await install(profile, processor: processor)
-        guard !Task.isCancelled else {
-            return
-        }
-        try await connect()
+        let newProfile = try processor.processedProfile(profile)
+        try await install(newProfile, connect: true, title: \.name)
     }
 
     func currentLog(parameters: Constants.Log) async -> [String] {
@@ -68,12 +54,5 @@ extension Tunnel {
         default:
             return []
         }
-    }
-}
-
-private extension Tunnel {
-    func install(_ profile: Profile, processor: ProfileProcessor) async throws {
-        let newProfile = try processor.processedProfile(profile)
-        try await install(profile: newProfile, title: \.name)
     }
 }

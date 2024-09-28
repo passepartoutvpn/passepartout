@@ -57,11 +57,17 @@ extension ProfileImporterTests {
 
         let exp = expectation(description: "Save")
         profileManager
-            .didSave
-            .sink { profile in
-                XCTAssertEqual(profile.modules.count, 1)
-                XCTAssertTrue(profile.modules.first is SomeModule)
-                exp.fulfill()
+            .didChange
+            .sink {
+                switch $0 {
+                case .save(let profile):
+                    XCTAssertEqual(profile.modules.count, 1)
+                    XCTAssertTrue(profile.modules.first is SomeModule)
+                    exp.fulfill()
+
+                default:
+                    break
+                }
             }
             .store(in: &subscriptions)
 
@@ -82,11 +88,17 @@ extension ProfileImporterTests {
 
         let exp = expectation(description: "Save")
         profileManager
-            .didSave
-            .sink { profile in
-                XCTAssertEqual(profile.modules.count, 1)
-                XCTAssertTrue(profile.modules.first is SomeModule)
-                exp.fulfill()
+            .didChange
+            .sink {
+                switch $0 {
+                case .save(let profile):
+                    XCTAssertEqual(profile.modules.count, 1)
+                    XCTAssertTrue(profile.modules.first is SomeModule)
+                    exp.fulfill()
+
+                default:
+                    break
+                }
             }
             .store(in: &subscriptions)
 

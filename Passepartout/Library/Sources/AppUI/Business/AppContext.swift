@@ -60,61 +60,80 @@ public final class AppContext: ObservableObject {
         self.profileManager = profileManager
         self.tunnel = tunnel
         self.tunnelEnvironment = tunnelEnvironment
-        self.registry = registry
-        self.constants = constants
-        subscriptions = []
-
         connectionObserver = ConnectionObserver(
             tunnel: tunnel,
             environment: tunnelEnvironment,
             interval: constants.connection.refreshInterval
         )
+        self.registry = registry
+        self.constants = constants
+        subscriptions = []
 
-        observeObjects()
+        profileManager.beforeSave = { [weak self] in
+            try await self?.installSavedProfile($0)
+        }
+        profileManager.afterRemove = { [weak self] in
+            self?.uninstallRemovedProfiles(withIds: $0)
+        }
+
+        Task {
+            try await tunnel.prepare()
+            await iapManager.reloadReceipt()
+            connectionObserver.observeObjects()
+            profileManager.observeObjects()
+            observeObjects()
+        }
     }
 }
+
+// MARK: - Observation
 
 private extension AppContext {
     func observeObjects() {
         profileManager
-            .didSave
-            .sink { [weak self] profile in
-                guard let self else {
-                    return
-                }
-                guard profile.id == tunnel.installedProfile?.id else {
-                    return
-                }
-                Task {
-                    if profile.isInteractive {
-                        try await self.tunnel.disconnect()
-                        return
-                    }
-                    if self.tunnel.status == .active {
-                        try await self.tunnel.reconnect(with: profile, processor: self.iapManager)
-                    } else {
-                        try await self.tunnel.reinstate(profile, processor: self.iapManager)
-                    }
-                }
-            }
-            .store(in: &subscriptions)
+            .didChange
+            .sink { [weak self] event in
+                switch event {
+                case .save(let profile):
+                    self?.syncTunnelIfCurrentProfile(profile)
 
-        profileManager
-            .didUpdate
-            .sink { [weak self] _ in
-                guard let self else {
-                    return
-                }
-                guard let installedProfile = tunnel.installedProfile else {
-                    return
-                }
-                guard profileManager.exists(withId: installedProfile.id) else {
-                    Task {
-                        try await self.tunnel.disconnect()
-                    }
-                    return
+                default:
+                    break
                 }
             }
             .store(in: &subscriptions)
+    }
+}
+
+private extension AppContext {
+    func installSavedProfile(_ profile: Profile) async throws {
+        try await tunnel.install(profile, processor: iapManager)
+    }
+
+    func uninstallRemovedProfiles(withIds profileIds: [Profile.ID]) {
+        Task {
+            for id in profileIds {
+                do {
+                    try await tunnel.uninstall(profileId: id)
+                } catch {
+                    pp_log(.app, .error, "Unable to uninstall profile \(id): \(error)")
+                }
+            }
+        }
+    }
+
+    func syncTunnelIfCurrentProfile(_ profile: Profile) {
+        guard profile.id == tunnel.currentProfile?.id else {
+            return
+        }
+        Task {
+            if profile.isInteractive {
+                try await tunnel.disconnect()
+                return
+            }
+            if tunnel.status == .active {
+                try await tunnel.connect(with: profile, processor: iapManager)
+            }
+        }
     }
 }

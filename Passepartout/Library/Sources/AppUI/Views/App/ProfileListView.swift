@@ -76,7 +76,7 @@ private extension ProfileListView {
         InstalledProfileView(
             layout: .list,
             profileManager: profileManager,
-            profile: installedProfile,
+            profile: currentProfile,
             tunnel: tunnel,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
@@ -86,7 +86,7 @@ private extension ProfileListView {
             )
         )
         .contextMenu {
-            installedProfile.map {
+            currentProfile.map {
                 ProfileContextMenu(
                     profileManager: profileManager,
                     tunnel: tunnel,

@@ -28,14 +28,6 @@
       }
     },
     {
-      "identity" : "passepartoutkit",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:passepartoutvpn/passepartoutkit",
-      "state" : {
-        "revision" : "ed3f54281b672af0f1127f00033579a36a9afed5"
-      }
-    },
-    {
       "identity" : "passepartoutkit-openvpn-openssl",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:passepartoutvpn/passepartoutkit-openvpn-openssl",

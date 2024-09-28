@@ -65,13 +65,9 @@ public final class ConnectionObserver: ObservableObject {
         self.environment = environment
         self.interval = interval
         subscriptions = []
-
-        observeObjects()
     }
-}
 
-private extension ConnectionObserver {
-    func observeObjects() {
+    public func observeObjects() {
         tunnel
             .$status
             .receive(on: DispatchQueue.main)

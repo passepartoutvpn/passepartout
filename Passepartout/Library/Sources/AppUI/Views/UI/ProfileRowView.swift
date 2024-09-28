@@ -71,7 +71,7 @@ struct ProfileRowView: View, TunnelContextProviding {
 private extension ProfileRowView {
     var markerView: some View {
         ThemeImage(header.id == nextProfileId ? .pending : statusImage)
-            .opacity(header.id == nextProfileId || header.id == tunnel.installedProfile?.id ? 1.0 : 0.0)
+            .opacity(header.id == nextProfileId || header.id == tunnel.currentProfile?.id ? 1.0 : 0.0)
             .frame(width: 24.0)
     }
 

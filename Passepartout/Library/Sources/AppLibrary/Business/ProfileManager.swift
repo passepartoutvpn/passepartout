@@ -27,17 +27,26 @@ import AppData
 import Combine
 import Foundation
 import PassepartoutKit
+import UtilsLibrary
 
 @MainActor
 public final class ProfileManager: ObservableObject {
-    public let didSave: PassthroughSubject<Profile, Never>
+    public enum Event {
+        case save(Profile)
 
-    public var didUpdate: AnyPublisher<[Profile], Never> {
-        $profiles.eraseToAnyPublisher()
+        case remove([Profile.ID])
+
+        case update([Profile])
     }
 
+    public var beforeSave: ((Profile) async throws -> Void)?
+
+    public var afterRemove: (([Profile.ID]) async -> Void)?
+
+    public let didChange: PassthroughSubject<Event, Never>
+
     @Published
-    var profiles: [Profile]
+    private var profiles: [Profile]
 
     private var allProfileIds: Set<Profile.ID>
 
@@ -49,7 +58,7 @@ public final class ProfileManager: ObservableObject {
 
     // for testing/previews
     public init(profiles: [Profile]) {
-        didSave = PassthroughSubject()
+        didChange = PassthroughSubject()
         self.profiles = profiles.sorted {
             $0.name.lowercased() < $1.name.lowercased()
         }
@@ -57,21 +66,21 @@ public final class ProfileManager: ObservableObject {
         repository = MockProfileRepository(profiles: profiles)
         searchSubject = CurrentValueSubject("")
         subscriptions = []
-
-        observeObjects(searchDebounce: 0)
     }
 
-    public init(repository: any ProfileRepository, searchDebounce: Int = 200) {
-        didSave = PassthroughSubject()
+    public init(repository: any ProfileRepository) {
+        didChange = PassthroughSubject()
         profiles = []
         allProfileIds = []
         self.repository = repository
         searchSubject = CurrentValueSubject("")
         subscriptions = []
-
-        observeObjects(searchDebounce: searchDebounce)
     }
+}
 
+// MARK: - CRUD
+
+extension ProfileManager {
     public var hasProfiles: Bool {
         !profiles.isEmpty
     }
@@ -98,8 +107,9 @@ public final class ProfileManager: ObservableObject {
 
     public func save(_ profile: Profile) async throws {
         do {
+            try await beforeSave?(profile)
             try await repository.saveEntities([profile])
-            didSave.send(profile)
+            didChange.send(.save(profile))
         } catch {
             pp_log(.app, .fault, "Unable to save profile \(profile.id): \(error)")
             throw error
@@ -114,6 +124,8 @@ public final class ProfileManager: ObservableObject {
         do {
             allProfileIds.subtract(profileIds)
             try await repository.removeEntities(withIds: profileIds)
+            await afterRemove?(profileIds)
+            didChange.send(.remove(profileIds))
         } catch {
             pp_log(.app, .fault, "Unable to remove profiles \(profileIds): \(error)")
         }
@@ -123,6 +135,8 @@ public final class ProfileManager: ObservableObject {
         allProfileIds.contains(profileId)
     }
 }
+
+// MARK: - Shortcuts
 
 extension ProfileManager {
     public func new(withName name: String) -> Profile {
@@ -149,35 +163,6 @@ extension ProfileManager {
 }
 
 private extension ProfileManager {
-    func observeObjects(searchDebounce: Int) {
-        repository
-            .entitiesPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                guard let self else {
-                    return
-                }
-                self.profiles = $0.entities
-                if !$0.isFiltering {
-                    allProfileIds = Set($0.entities.map(\.id))
-                }
-            }
-            .store(in: &subscriptions)
-
-        searchSubject
-            .debounce(for: .milliseconds(searchDebounce), scheduler: DispatchQueue.main)
-            .sink { [weak self] search in
-                Task {
-                    guard !search.isEmpty else {
-                        try await self?.repository.resetFilter()
-                        return
-                    }
-                    try await self?.repository.filter(byName: search)
-                }
-            }
-            .store(in: &subscriptions)
-    }
-
     func firstUniqueName(from name: String) -> String {
         let allNames = profiles.map(\.name)
         var newName = name
@@ -188,6 +173,55 @@ private extension ProfileManager {
             }
             newName = [name, index.description].joined(separator: ".")
             index += 1
+        }
+    }
+}
+
+// MARK: - Observation
+
+extension ProfileManager {
+    public func observeObjects(searchDebounce: Int = 200) {
+        repository
+            .entitiesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.notifyUpdatedEntities($0)
+            }
+            .store(in: &subscriptions)
+
+        searchSubject
+            .debounce(for: .milliseconds(searchDebounce), scheduler: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.performSearch($0)
+            }
+            .store(in: &subscriptions)
+    }
+}
+
+private extension ProfileManager {
+    func notifyUpdatedEntities(_ result: EntitiesResult<Profile>) {
+        let oldProfiles = profiles.reduce(into: [:]) {
+            $0[$1.id] = $1
+        }
+        let newProfiles = result.entities
+        let updatedProfiles = newProfiles.filter {
+            $0 != oldProfiles[$0.id] // includes new profiles
+        }
+
+        if !result.isFiltering {
+            allProfileIds = Set(newProfiles.map(\.id))
+        }
+        profiles = newProfiles
+        didChange.send(.update(updatedProfiles))
+    }
+
+    func performSearch(_ search: String) {
+        Task {
+            guard !search.isEmpty else {
+                try await repository.resetFilter()
+                return
+            }
+            try await repository.filter(byName: search)
         }
     }
 }
