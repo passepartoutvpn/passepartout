@@ -37,17 +37,13 @@ import AppUI
 import CommonLibrary
 import SwiftUI
 
-final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @AppStorage(AppPreference.confirmsQuit.key)
     private var confirmsQuit = true
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSApp.windows[0].delegate = self
-    }
-
-    func windowShouldClose(_ sender: NSWindow) -> Bool {
-        false
+        NSApp.windows[0].styleMask.remove(.closable)
     }
 
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
