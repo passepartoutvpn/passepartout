@@ -28,6 +28,9 @@ import SwiftUI
 
 public struct SettingsView: View {
 
+    @AppStorage(AppPreference.confirmsQuit.key)
+    private var confirmsQuit = true
+
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
 
@@ -40,9 +43,12 @@ public struct SettingsView: View {
     public var body: some View {
         Form {
             Section {
+#if os(macOS)
+                confirmsQuitToggle
+#endif
+#if os(iOS)
                 lockInBackgroundToggle
-            } header: {
-                Text(Strings.Views.Settings.Sections.lock)
+#endif
             }
         }
         .themeForm()
@@ -55,6 +61,10 @@ public struct SettingsView: View {
 }
 
 private extension SettingsView {
+    var confirmsQuitToggle: some View {
+        Toggle(Strings.Views.Settings.Rows.confirmQuit, isOn: $confirmsQuit)
+    }
+
     var lockInBackgroundToggle: some View {
         Toggle(Strings.Views.Settings.Rows.lockInBackground, isOn: $locksInBackground)
     }

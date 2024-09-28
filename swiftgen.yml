@@ -7,3 +7,4 @@ strings:
       params:
         bundle: Bundle.main
         enumName: Strings
+        publicAccess: true
