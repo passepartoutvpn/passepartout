@@ -1,5 +1,6 @@
 // MARK: Global
 
+"global.about" = "About";
 "global.account" = "Account";
 "global.address" = "Address";
 "global.addresses" = "Addresses";

@@ -62,19 +62,15 @@ struct AppModalCoordinator: View {
 // MARK: - Destinations
 
 extension AppModalCoordinator {
-    enum ModalRoute: Identifiable {
+    enum ModalRoute: String, Identifiable {
         case editProfile
 
-        case advanced
+        case settings
 
-        var id: [String] {
-            switch self {
-            case .editProfile:
-                return ["editProfile"]
+        case about
 
-            case .advanced:
-                return ["advanced"]
-            }
+        var id: String {
+            rawValue
         }
     }
 
@@ -99,8 +95,11 @@ extension AppModalCoordinator {
             profileManager: profileManager,
             layout: $layout,
             isImporting: $isImporting,
-            onAdvanced: {
-                modalRoute = .advanced
+            onSettings: {
+                modalRoute = .settings
+            },
+            onAbout: {
+                modalRoute = .about
             },
             onNewProfile: enterDetail
         )
@@ -120,7 +119,7 @@ extension AppModalCoordinator {
                 modalRoute = nil
             }
 
-        case .advanced:
+        case .about:
             AdvancedRouterView(tunnel: tunnel)
 
         default:

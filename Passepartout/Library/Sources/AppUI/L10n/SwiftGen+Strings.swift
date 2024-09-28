@@ -139,6 +139,8 @@ internal enum Strings {
     }
   }
   internal enum Global {
+    /// About
+    internal static let about = Strings.tr("Localizable", "global.about", fallback: "About")
     /// Account
     internal static let account = Strings.tr("Localizable", "global.account", fallback: "Account")
     /// Address

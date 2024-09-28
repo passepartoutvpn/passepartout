@@ -79,7 +79,6 @@ public final class Theme: ObservableObject {
     var systemImage: (ImageName) -> String = {
         switch $0 {
         case .add: return "plus"
-        case .advanced: return "gearshape"
         case .close: return "xmark"
         case .contextDuplicate: return "plus.square.on.square"
         case .contextRemove: return "trash"
@@ -98,6 +97,7 @@ public final class Theme: ObservableObject {
         case .profilesGrid: return "square.grid.2x2"
         case .profilesList: return "rectangle.grid.1x2"
         case .remove: return "minus"
+        case .settings: return "gearshape"
         case .share: return "square.and.arrow.up"
         case .show: return "eye"
         case .sleeping: return "powersleep"
