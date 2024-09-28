@@ -64,7 +64,7 @@ extension BundleConfiguration {
 
     public static var mainVersionString: String {
         if isPreview {
-            return "preview-version-string"
+            return "preview-1.2.3"
         }
         guard let main else {
             fatalError("Missing main bundle")
@@ -74,7 +74,7 @@ extension BundleConfiguration {
 
     public static func mainString(for key: BundleKey) -> String {
         if isPreview {
-            return "preview-bundle-key(\(key.rawValue))"
+            return "preview-key(\(key.rawValue))"
         }
         guard let main else {
             fatalError("Missing main bundle")
