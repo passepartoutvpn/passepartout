@@ -73,6 +73,22 @@ extension BundleConfiguration {
         }
         return main.value(forKey: key.rawValue)
     }
+
+    public static var urlForReview: URL {
+        let appStoreId = mainString(for: .appStoreId)
+        guard let url = URL(string: "https://apps.apple.com/app/id\(appStoreId)?action=write-review") else {
+            fatalError("Unable to build urlForReview")
+        }
+        return url
+    }
+
+    public static var urlForAppLog: URL {
+        cachesURL.appending(path: Constants.shared.log.appPath)
+    }
+
+    public static var urlForTunnelLog: URL {
+        cachesURL.appending(path: Constants.shared.log.tunnelPath)
+    }
 }
 
 private extension BundleConfiguration {
@@ -87,5 +103,13 @@ private extension BundleConfiguration {
 
     static var isPreview: Bool {
         ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
+
+    static var cachesURL: URL {
+        let groupId = mainString(for: .groupId)
+        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
+            fatalError("Unable to access App Group container")
+        }
+        return url.appending(components: "Library", "Caches")
     }
 }

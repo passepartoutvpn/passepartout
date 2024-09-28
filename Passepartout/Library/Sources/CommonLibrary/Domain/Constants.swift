@@ -140,29 +140,3 @@ public struct Constants: Decodable, Sendable {
 
     public let log: Log
 }
-
-extension Constants {
-    public func urlForReview(appStoreId: String) -> URL {
-        guard let url = URL(string: "https://apps.apple.com/app/id\(appStoreId)?action=write-review") else {
-            fatalError("Unable to build Constants.urlForReview")
-        }
-        return url
-    }
-
-    public func urlForAppLog(groupId: String) -> URL {
-        cachesURL(groupId: groupId)
-            .appending(path: log.appPath)
-    }
-
-    public func urlForTunnelLog(groupId: String) -> URL {
-        cachesURL(groupId: groupId)
-            .appending(path: log.tunnelPath)
-    }
-
-    private func cachesURL(groupId: String) -> URL {
-        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
-            fatalError("Unable to access App Group container")
-        }
-        return url.appending(components: "Library", "Caches")
-    }
-}

@@ -28,10 +28,6 @@ import Foundation
 import PassepartoutKit
 
 extension Issue {
-    private static var tunnelLogURL: URL {
-        Constants.shared.urlForTunnelLog(groupId: BundleConfiguration.mainString(for: .groupId))
-    }
-
     static func with(versionString: String, purchasedProducts: Set<AppProduct>, tunnel: Tunnel) async -> Self {
         let appLog = CommonLibrary.currentLog(parameters: Constants.shared.log)
             .joined(separator: "\n")
@@ -46,7 +42,7 @@ extension Issue {
                 .data(using: .utf8)
         }
         // latest persisted tunnel log
-        else if let latestTunnelEntry = CommonLibrary.availableLogs(at: tunnelLogURL)
+        else if let latestTunnelEntry = CommonLibrary.availableLogs(at: BundleConfiguration.urlForTunnelLog)
             .max(by: { $0.key < $1.key }) {
 
             tunnelLog = try? Data(contentsOf: latestTunnelEntry.value)

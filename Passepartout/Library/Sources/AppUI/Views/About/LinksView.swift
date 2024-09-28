@@ -50,7 +50,7 @@ private extension LinksView {
     var supportSection: some View {
         Section {
             Link(Strings.Views.About.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
-            Link(Strings.Views.About.Links.Rows.writeReview, destination: constants.urlForReview(appStoreId: appStoreId))
+            Link(Strings.Views.About.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
         } header: {
             Text(Strings.Views.About.Links.Sections.support)
         }

@@ -63,10 +63,6 @@ struct PassepartoutApp: App {
 }
 
 private extension PassepartoutApp {
-    var appLogURL: URL {
-        Constants.shared.urlForAppLog(groupId: BundleConfiguration.mainString(for: .groupId))
-    }
-
     func content() -> some View {
         AppCoordinator(
             profileManager: context.profileManager,
@@ -75,7 +71,7 @@ private extension PassepartoutApp {
         )
         .onLoad {
             CommonLibrary.configureLogging(
-                to: appLogURL,
+                to: BundleConfiguration.urlForAppLog,
                 parameters: Constants.shared.log
             )
             AppUI.configure(with: context)

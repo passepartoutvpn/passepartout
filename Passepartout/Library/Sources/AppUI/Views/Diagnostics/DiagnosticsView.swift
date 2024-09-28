@@ -51,9 +51,7 @@ struct DiagnosticsView: View {
     private var logsPrivateData = false
 
     var availableTunnelLogs: () -> [LogEntry] = {
-        let tunnelLogURL = Constants.shared.urlForTunnelLog(groupId: BundleConfiguration.mainString(for: .groupId))
-
-        return CommonLibrary.availableLogs(at: tunnelLogURL)
+        CommonLibrary.availableLogs(at: BundleConfiguration.urlForTunnelLog)
             .sorted {
                 $0.key > $1.key
             }
