@@ -400,8 +400,6 @@ internal enum Strings {
   }
   internal enum Views {
     internal enum About {
-      /// Lock app access
-      internal static let lockInBackground = Strings.tr("Localizable", "views.about.lock_in_background", fallback: "Lock app access")
       /// About
       internal static let title = Strings.tr("Localizable", "views.about.title", fallback: "About")
       internal enum Credits {
@@ -481,10 +479,6 @@ internal enum Strings {
       /// Make a donation
       internal static let title = Strings.tr("Localizable", "views.donate.title", fallback: "Make a donation")
     }
-    internal enum Lockable {
-      /// Passepartout is locked
-      internal static let message = Strings.tr("Localizable", "views.lockable.message", fallback: "Passepartout is locked")
-    }
     internal enum Profile {
       internal enum ModuleList {
         internal enum Section {
@@ -543,6 +537,14 @@ internal enum Strings {
         internal static let importProfile = Strings.tr("Localizable", "views.profiles.toolbar.import_profile", fallback: "Import profile")
         /// New profile
         internal static let newProfile = Strings.tr("Localizable", "views.profiles.toolbar.new_profile", fallback: "New profile")
+      }
+    }
+    internal enum Settings {
+      /// Lock app access
+      internal static let lockInBackground = Strings.tr("Localizable", "views.settings.lock_in_background", fallback: "Lock app access")
+      internal enum LockInBackground {
+        /// Passepartout is locked
+        internal static let message = Strings.tr("Localizable", "views.settings.lock_in_background.message", fallback: "Passepartout is locked")
       }
     }
   }

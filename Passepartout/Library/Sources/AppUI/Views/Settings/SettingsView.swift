@@ -39,20 +39,20 @@ public struct SettingsView: View {
 
     public var body: some View {
         Form {
-            Section {
-                lockInBackgroundToggle
-            }
+            lockInBackgroundToggle
         }
         .navigationTitle(Strings.Global.settings)
 #if os(iOS)
         .themeNavigationDetail()
         .themeNavigationStack(if: true, closable: true, path: $path)
+#else
+        .scenePadding()
 #endif
     }
 }
 
 private extension SettingsView {
     var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.About.lockInBackground, isOn: $locksInBackground)
+        Toggle(Strings.Views.Settings.lockInBackground, isOn: $locksInBackground)
     }
 }

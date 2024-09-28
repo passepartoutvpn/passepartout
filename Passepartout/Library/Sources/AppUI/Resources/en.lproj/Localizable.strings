@@ -120,9 +120,11 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 
+"views.settings.lock_in_background" = "Lock app access";
+"views.settings.lock_in_background.message" = "Passepartout is locked";
+
 "views.about.title" = "About";
 "views.about.sections.resources" = "Resources";
-"views.about.lock_in_background" = "Lock app access";
 
 "views.about.links.title" = "Links";
 "views.about.links.sections.support" = "Support";
@@ -152,8 +154,6 @@
 
 "views.diagnostics.report_issue.title" = "Report issue";
 "views.diagnostics.alerts.report_issue.email" = "The device is not configured to send e-mails.";
-
-"views.lockable.message" = "Passepartout is locked";
 
 // MARK: - Module views
 
