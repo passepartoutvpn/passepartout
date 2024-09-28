@@ -77,16 +77,12 @@ extension BundleConfiguration {
 
 private extension BundleConfiguration {
 
-    // WARNING: nil from package itself, e.g. in previews
-    static let failableMain: BundleConfiguration? = {
-        BundleConfiguration(.main, key: Constants.shared.bundle)
-    }()
-
+    // WARNING: fails from package itself, e.g. in previews
     static var main: BundleConfiguration {
-        guard let failableMain else {
+        guard let bundle = BundleConfiguration(.main, key: Constants.shared.bundle) else {
             fatalError("Missing main bundle")
         }
-        return failableMain
+        return bundle
     }
 
     static var isPreview: Bool {
