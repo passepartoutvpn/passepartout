@@ -32,7 +32,7 @@ struct LinksView: View {
             supportSection
             webSection
         }
-        .navigationTitle(Strings.Views.Advanced.Links.title)
+        .navigationTitle(Strings.Views.About.Links.title)
         .themeForm()
     }
 }
@@ -44,21 +44,21 @@ private extension LinksView {
 
     var supportSection: some View {
         Section {
-            Link(Strings.Views.Advanced.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
-            Link(Strings.Views.Advanced.Links.Rows.writeReview, destination: constants.urlForReview)
+            Link(Strings.Views.About.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
+            Link(Strings.Views.About.Links.Rows.writeReview, destination: constants.urlForReview)
         } header: {
-            Text(Strings.Views.Advanced.Links.Sections.support)
+            Text(Strings.Views.About.Links.Sections.support)
         }
     }
 
     var webSection: some View {
         Section {
-            Link(Strings.Views.Advanced.Links.Rows.homePage, destination: constants.websites.home)
+            Link(Strings.Views.About.Links.Rows.homePage, destination: constants.websites.home)
             Link(Strings.Unlocalized.faq, destination: constants.websites.faq)
-            Link(Strings.Views.Advanced.Links.Rows.disclaimer, destination: constants.websites.disclaimer)
-            Link(Strings.Views.Advanced.Links.Rows.privacyPolicy, destination: constants.websites.privacyPolicy)
+            Link(Strings.Views.About.Links.Rows.disclaimer, destination: constants.websites.disclaimer)
+            Link(Strings.Views.About.Links.Rows.privacyPolicy, destination: constants.websites.privacyPolicy)
         } header: {
-            Text(Strings.Views.Advanced.Links.Sections.web)
+            Text(Strings.Views.About.Links.Sections.web)
         }
     }
 }

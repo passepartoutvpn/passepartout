@@ -1,5 +1,6 @@
 // MARK: Global
 
+"global.about" = "About";
 "global.account" = "Account";
 "global.address" = "Address";
 "global.addresses" = "Addresses";
@@ -119,23 +120,26 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 
-"views.advanced.title" = "Advanced";
-"views.advanced.sections.resources" = "Resources";
-"views.advanced.lock_in_background" = "Lock app access";
+"views.settings.sections.lock" = "Lock";
+"views.settings.rows.lock_in_background" = "Lock in background";
+"views.settings.rows.lock_in_background.message" = "Passepartout is locked";
 
-"views.advanced.links.title" = "Links";
-"views.advanced.links.sections.support" = "Support";
-"views.advanced.links.sections.web" = "Web";
-"views.advanced.links.rows.join_community" = "Join community";
-"views.advanced.links.rows.write_review" = "Write a review";
-"views.advanced.links.rows.home_page" = "Home page";
-"views.advanced.links.rows.disclaimer" = "Disclaimer";
-"views.advanced.links.rows.privacy_policy" = "Privacy policy";
+"views.about.title" = "About";
+"views.about.sections.resources" = "Resources";
 
-"views.advanced.credits.title" = "Credits";
-"views.advanced.credits.licenses" = "Licenses";
-"views.advanced.credits.notices" = "Notices";
-"views.advanced.credits.translations" = "Translations";
+"views.about.links.title" = "Links";
+"views.about.links.sections.support" = "Support";
+"views.about.links.sections.web" = "Web";
+"views.about.links.rows.join_community" = "Join community";
+"views.about.links.rows.write_review" = "Write a review";
+"views.about.links.rows.home_page" = "Home page";
+"views.about.links.rows.disclaimer" = "Disclaimer";
+"views.about.links.rows.privacy_policy" = "Privacy policy";
+
+"views.about.credits.title" = "Credits";
+"views.about.credits.licenses" = "Licenses";
+"views.about.credits.notices" = "Notices";
+"views.about.credits.translations" = "Translations";
 
 "views.donate.title" = "Make a donation";
 
@@ -151,8 +155,6 @@
 
 "views.diagnostics.report_issue.title" = "Report issue";
 "views.diagnostics.alerts.report_issue.email" = "The device is not configured to send e-mails.";
-
-"views.lockable.message" = "Passepartout is locked";
 
 // MARK: - Module views
 

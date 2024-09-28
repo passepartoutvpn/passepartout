@@ -45,18 +45,20 @@ struct AppToolbar: ToolbarContent {
 
     let onSettings: () -> Void
 
+    let onAbout: () -> Void
+
     let onNewProfile: (Profile) -> Void
 
     var body: some ToolbarContent {
         if hsClass == .regular && vsClass == .regular {
             ToolbarItemGroup {
                 addProfileMenu
-                settingsButton
+                aboutButton
                 layoutPicker
             }
         } else {
             ToolbarItem(placement: .navigation) {
-                settingsButton
+                moreMenu
             }
             ToolbarItemGroup(placement: .primaryAction) {
                 addProfileMenu
@@ -75,9 +77,24 @@ private extension AppToolbar {
         )
     }
 
+    var moreMenu: some View {
+        Menu {
+            settingsButton
+            aboutButton
+        } label: {
+            ThemeImage(.moreDetails)
+        }
+    }
+
     var settingsButton: some View {
         Button(action: onSettings) {
-            ThemeImage(.advanced)
+            ThemeImageLabel(Strings.Global.settings, .settings)
+        }
+    }
+
+    var aboutButton: some View {
+        Button(action: onAbout) {
+            ThemeImageLabel(Strings.Global.about, .info)
         }
     }
 
@@ -95,6 +112,7 @@ private extension AppToolbar {
                     layout: .constant(.list),
                     isImporting: .constant(false),
                     onSettings: {},
+                    onAbout: {},
                     onNewProfile: { _ in}
                 )
             }

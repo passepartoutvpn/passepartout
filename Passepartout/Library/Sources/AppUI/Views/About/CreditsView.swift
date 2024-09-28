@@ -1,5 +1,5 @@
 //
-//  AdvancedView+macOS.swift
+//  CreditsView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/27/24.
@@ -24,30 +24,25 @@
 //
 
 import SwiftUI
+import UtilsLibrary
 
-#if os(macOS)
-
-extension AdvancedView {
-    var listView: some View {
-        List(selection: $navigationRoute) {
-            Section {
-                lockInBackgroundToggle
-            } header: {
-                Text(Strings.Global.settings)
+struct CreditsView: View {
+    var body: some View {
+        GenericCreditsView(
+            credits: Self.credits,
+            licensesHeader: Strings.Views.About.Credits.licenses,
+            noticesHeader: Strings.Views.About.Credits.notices,
+            translationsHeader: Strings.Views.About.Credits.translations,
+            errorDescription: {
+                AppError($0)
+                    .localizedDescription
             }
-            Section {
-                // TODO: donations
-//                donateLink
-                linksLink
-                creditsLink
-                diagnosticsLink
-            }
-        }
-        .safeAreaInset(edge: .bottom) {
-            Text(identifiers.versionString)
-                .padding(.bottom)
-        }
+        )
+        .navigationTitle(Strings.Views.About.Credits.title)
+        .themeForm()
     }
 }
 
-#endif
+private extension CreditsView {
+    static let credits = Bundle.module.unsafeDecode(Credits.self, filename: "Credits")
+}

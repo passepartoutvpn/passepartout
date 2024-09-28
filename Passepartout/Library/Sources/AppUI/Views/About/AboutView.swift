@@ -1,5 +1,5 @@
 //
-//  AdvancedView.swift
+//  AboutView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/23/24.
@@ -28,27 +28,19 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct AdvancedView: View {
-
-    @AppStorage(AppPreference.locksInBackground.key)
-    private var locksInBackground = false
-
+struct AboutView: View {
     let identifiers: Constants.Identifiers
 
     @Binding
-    var navigationRoute: AdvancedRouterView.NavigationRoute?
+    var navigationRoute: AboutRouterView.NavigationRoute?
 
     var body: some View {
         listView
-            .navigationTitle(Strings.Views.Advanced.title)
+            .navigationTitle(Strings.Views.About.title)
     }
 }
 
-extension AdvancedView {
-    var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Advanced.lockInBackground, isOn: $locksInBackground)
-    }
-
+extension AboutView {
     var donateLink: some View {
         navLink(Strings.Views.Donate.title, to: .donate)
     }
@@ -58,22 +50,22 @@ extension AdvancedView {
     }
 
     var linksLink: some View {
-        navLink(Strings.Views.Advanced.Links.title, to: .links)
+        navLink(Strings.Views.About.Links.title, to: .links)
     }
 
     var creditsLink: some View {
-        navLink(Strings.Views.Advanced.Credits.title, to: .credits)
+        navLink(Strings.Views.About.Credits.title, to: .credits)
     }
 }
 
-private extension AdvancedView {
-    func navLink(_ title: String, to route: AdvancedRouterView.NavigationRoute) -> some View {
+private extension AboutView {
+    func navLink(_ title: String, to route: AboutRouterView.NavigationRoute) -> some View {
         NavigationLink(title, value: route)
     }
 }
 
 #Preview {
-    AdvancedView(
+    AboutView(
         identifiers: Constants.shared.identifiers,
         navigationRoute: .constant(nil)
     )

@@ -1,5 +1,5 @@
 //
-//  AdvancedRouterView+iOS.swift
+//  AboutRouterView+iOS.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/26/24.
@@ -28,10 +28,10 @@
 import CommonLibrary
 import SwiftUI
 
-extension AdvancedRouterView {
+extension AboutRouterView {
     var body: some View {
         NavigationStack {
-            AdvancedView(
+            AboutView(
                 identifiers: Constants.shared.identifiers,
                 navigationRoute: $navigationRoute
             )

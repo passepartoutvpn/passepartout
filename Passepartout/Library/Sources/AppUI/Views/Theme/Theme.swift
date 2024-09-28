@@ -79,7 +79,6 @@ public final class Theme: ObservableObject {
     var systemImage: (ImageName) -> String = {
         switch $0 {
         case .add: return "plus"
-        case .advanced: return "gearshape"
         case .close: return "xmark"
         case .contextDuplicate: return "plus.square.on.square"
         case .contextRemove: return "trash"
@@ -98,6 +97,7 @@ public final class Theme: ObservableObject {
         case .profilesGrid: return "square.grid.2x2"
         case .profilesList: return "rectangle.grid.1x2"
         case .remove: return "minus"
+        case .settings: return "gearshape"
         case .share: return "square.and.arrow.up"
         case .show: return "eye"
         case .sleeping: return "powersleep"
@@ -160,15 +160,8 @@ extension View {
         ))
     }
 
-    @ViewBuilder
-    public func themeNavigationStack(if condition: Bool, path: Binding<NavigationPath>) -> some View {
-        if condition {
-            NavigationStack(path: path) {
-                self
-            }
-        } else {
-            self
-        }
+    public func themeNavigationStack(if condition: Bool, closable: Bool = false, path: Binding<NavigationPath>) -> some View {
+        modifier(ThemeNavigationStackModifier(condition: condition, closable: closable, path: path))
     }
 
     public func themePlainButton(action: @escaping () -> Void) -> some View {

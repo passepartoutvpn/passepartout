@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  AboutView+iOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 8/27/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,16 +25,26 @@
 
 #if os(iOS)
 
-import UIKit
+import SwiftUI
 
-final class AppDelegate: NSObject, UIApplicationDelegate {
-}
-
-#else
-
-import AppKit
-
-final class AppDelegate: NSObject, NSApplicationDelegate {
+extension AboutView {
+    var listView: some View {
+        List {
+            Section {
+                // TODO: donations
+//                donateLink
+                linksLink
+                creditsLink
+            } header: {
+                Text(Strings.Views.About.Sections.resources)
+            }
+            Section {
+                diagnosticsLink
+                Text(Strings.Global.version)
+                    .withTrailingText(identifiers.versionString)
+            }
+        }
+    }
 }
 
 #endif

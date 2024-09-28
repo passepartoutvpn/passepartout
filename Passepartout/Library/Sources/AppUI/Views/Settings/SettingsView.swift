@@ -1,8 +1,8 @@
 //
-//  CreditsView.swift
+//  SettingsView.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 9/28/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,26 +23,39 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import SwiftUI
-import UtilsLibrary
 
-struct CreditsView: View {
-    var body: some View {
-        GenericCreditsView(
-            credits: Self.credits,
-            licensesHeader: Strings.Views.Advanced.Credits.licenses,
-            noticesHeader: Strings.Views.Advanced.Credits.notices,
-            translationsHeader: Strings.Views.Advanced.Credits.translations,
-            errorDescription: {
-                AppError($0)
-                    .localizedDescription
+public struct SettingsView: View {
+
+    @AppStorage(AppPreference.locksInBackground.key)
+    private var locksInBackground = false
+
+    @State
+    private var path = NavigationPath()
+
+    public init() {
+    }
+
+    public var body: some View {
+        Form {
+            Section {
+                lockInBackgroundToggle
+            } header: {
+                Text(Strings.Views.Settings.Sections.lock)
             }
-        )
-        .navigationTitle(Strings.Views.Advanced.Credits.title)
+        }
         .themeForm()
+        .navigationTitle(Strings.Global.settings)
+#if os(iOS)
+        .themeNavigationDetail()
+        .themeNavigationStack(if: true, closable: true, path: $path)
+#endif
     }
 }
 
-private extension CreditsView {
-    static let credits = Bundle.module.unsafeDecode(Credits.self, filename: "Credits")
+private extension SettingsView {
+    var lockInBackgroundToggle: some View {
+        Toggle(Strings.Views.Settings.Rows.lockInBackground, isOn: $locksInBackground)
+    }
 }

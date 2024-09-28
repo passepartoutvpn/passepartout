@@ -28,7 +28,6 @@ import Foundation
 extension Theme {
     public enum ImageName {
         case add
-        case advanced
         case close
         case contextDuplicate
         case contextRemove
@@ -47,6 +46,7 @@ extension Theme {
         case profilesGrid
         case profilesList
         case remove
+        case settings
         case share
         case show
         case sleeping

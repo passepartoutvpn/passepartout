@@ -139,6 +139,8 @@ internal enum Strings {
     }
   }
   internal enum Global {
+    /// About
+    internal static let about = Strings.tr("Localizable", "global.about", fallback: "About")
     /// Account
     internal static let account = Strings.tr("Localizable", "global.account", fallback: "Account")
     /// Address
@@ -397,46 +399,44 @@ internal enum Strings {
     }
   }
   internal enum Views {
-    internal enum Advanced {
-      /// Lock app access
-      internal static let lockInBackground = Strings.tr("Localizable", "views.advanced.lock_in_background", fallback: "Lock app access")
-      /// Advanced
-      internal static let title = Strings.tr("Localizable", "views.advanced.title", fallback: "Advanced")
+    internal enum About {
+      /// About
+      internal static let title = Strings.tr("Localizable", "views.about.title", fallback: "About")
       internal enum Credits {
         /// Licenses
-        internal static let licenses = Strings.tr("Localizable", "views.advanced.credits.licenses", fallback: "Licenses")
+        internal static let licenses = Strings.tr("Localizable", "views.about.credits.licenses", fallback: "Licenses")
         /// Notices
-        internal static let notices = Strings.tr("Localizable", "views.advanced.credits.notices", fallback: "Notices")
+        internal static let notices = Strings.tr("Localizable", "views.about.credits.notices", fallback: "Notices")
         /// Credits
-        internal static let title = Strings.tr("Localizable", "views.advanced.credits.title", fallback: "Credits")
+        internal static let title = Strings.tr("Localizable", "views.about.credits.title", fallback: "Credits")
         /// Translations
-        internal static let translations = Strings.tr("Localizable", "views.advanced.credits.translations", fallback: "Translations")
+        internal static let translations = Strings.tr("Localizable", "views.about.credits.translations", fallback: "Translations")
       }
       internal enum Links {
         /// Links
-        internal static let title = Strings.tr("Localizable", "views.advanced.links.title", fallback: "Links")
+        internal static let title = Strings.tr("Localizable", "views.about.links.title", fallback: "Links")
         internal enum Rows {
           /// Disclaimer
-          internal static let disclaimer = Strings.tr("Localizable", "views.advanced.links.rows.disclaimer", fallback: "Disclaimer")
+          internal static let disclaimer = Strings.tr("Localizable", "views.about.links.rows.disclaimer", fallback: "Disclaimer")
           /// Home page
-          internal static let homePage = Strings.tr("Localizable", "views.advanced.links.rows.home_page", fallback: "Home page")
+          internal static let homePage = Strings.tr("Localizable", "views.about.links.rows.home_page", fallback: "Home page")
           /// Join community
-          internal static let joinCommunity = Strings.tr("Localizable", "views.advanced.links.rows.join_community", fallback: "Join community")
+          internal static let joinCommunity = Strings.tr("Localizable", "views.about.links.rows.join_community", fallback: "Join community")
           /// Privacy policy
-          internal static let privacyPolicy = Strings.tr("Localizable", "views.advanced.links.rows.privacy_policy", fallback: "Privacy policy")
+          internal static let privacyPolicy = Strings.tr("Localizable", "views.about.links.rows.privacy_policy", fallback: "Privacy policy")
           /// Write a review
-          internal static let writeReview = Strings.tr("Localizable", "views.advanced.links.rows.write_review", fallback: "Write a review")
+          internal static let writeReview = Strings.tr("Localizable", "views.about.links.rows.write_review", fallback: "Write a review")
         }
         internal enum Sections {
           /// Support
-          internal static let support = Strings.tr("Localizable", "views.advanced.links.sections.support", fallback: "Support")
+          internal static let support = Strings.tr("Localizable", "views.about.links.sections.support", fallback: "Support")
           /// Web
-          internal static let web = Strings.tr("Localizable", "views.advanced.links.sections.web", fallback: "Web")
+          internal static let web = Strings.tr("Localizable", "views.about.links.sections.web", fallback: "Web")
         }
       }
       internal enum Sections {
         /// Resources
-        internal static let resources = Strings.tr("Localizable", "views.advanced.sections.resources", fallback: "Resources")
+        internal static let resources = Strings.tr("Localizable", "views.about.sections.resources", fallback: "Resources")
       }
     }
     internal enum Diagnostics {
@@ -478,10 +478,6 @@ internal enum Strings {
     internal enum Donate {
       /// Make a donation
       internal static let title = Strings.tr("Localizable", "views.donate.title", fallback: "Make a donation")
-    }
-    internal enum Lockable {
-      /// Passepartout is locked
-      internal static let message = Strings.tr("Localizable", "views.lockable.message", fallback: "Passepartout is locked")
     }
     internal enum Profile {
       internal enum ModuleList {
@@ -541,6 +537,20 @@ internal enum Strings {
         internal static let importProfile = Strings.tr("Localizable", "views.profiles.toolbar.import_profile", fallback: "Import profile")
         /// New profile
         internal static let newProfile = Strings.tr("Localizable", "views.profiles.toolbar.new_profile", fallback: "New profile")
+      }
+    }
+    internal enum Settings {
+      internal enum Rows {
+        /// Lock in background
+        internal static let lockInBackground = Strings.tr("Localizable", "views.settings.rows.lock_in_background", fallback: "Lock in background")
+        internal enum LockInBackground {
+          /// Passepartout is locked
+          internal static let message = Strings.tr("Localizable", "views.settings.rows.lock_in_background.message", fallback: "Passepartout is locked")
+        }
+      }
+      internal enum Sections {
+        /// Lock
+        internal static let lock = Strings.tr("Localizable", "views.settings.sections.lock", fallback: "Lock")
       }
     }
   }
