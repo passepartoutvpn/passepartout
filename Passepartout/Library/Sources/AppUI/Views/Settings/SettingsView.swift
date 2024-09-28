@@ -39,7 +39,11 @@ public struct SettingsView: View {
 
     public var body: some View {
         Form {
-            lockInBackgroundToggle
+            Section {
+                lockInBackgroundToggle
+            } header: {
+                Text(Strings.Views.Settings.Sections.lock)
+            }
         }
         .navigationTitle(Strings.Global.settings)
 #if os(iOS)
@@ -51,6 +55,6 @@ public struct SettingsView: View {
 
 private extension SettingsView {
     var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Settings.lockInBackground, isOn: $locksInBackground)
+        Toggle(Strings.Views.Settings.Rows.lockInBackground, isOn: $locksInBackground)
     }
 }

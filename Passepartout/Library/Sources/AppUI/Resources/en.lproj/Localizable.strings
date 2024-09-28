@@ -120,8 +120,9 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 
-"views.settings.lock_in_background" = "Lock app access";
-"views.settings.lock_in_background.message" = "Passepartout is locked";
+"views.settings.sections.lock" = "Lock";
+"views.settings.rows.lock_in_background" = "Lock in background";
+"views.settings.rows.lock_in_background.message" = "Passepartout is locked";
 
 "views.about.title" = "About";
 "views.about.sections.resources" = "Resources";
