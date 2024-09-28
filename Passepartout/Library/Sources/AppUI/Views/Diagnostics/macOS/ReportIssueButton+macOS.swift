@@ -25,6 +25,7 @@
 
 #if os(macOS)
 
+import PassepartoutKit
 import SwiftUI
 
 extension ReportIssueButton: View {
@@ -35,7 +36,11 @@ extension ReportIssueButton: View {
                 return
             }
             Task {
-                let issue = await Issue.fromBundle(.main, purchasedProducts: purchasedProducts, tunnel: tunnel)
+                let issue = await Issue.with(
+                    versionString: BundleConfiguration.mainVersionString,
+                    purchasedProducts: purchasedProducts,
+                    tunnel: tunnel
+                )
                 service.recipients = [issue.to]
                 service.subject = issue.subject
                 service.perform(withItems: issue.items)

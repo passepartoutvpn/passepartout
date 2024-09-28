@@ -42,7 +42,7 @@ struct PassepartoutApp: App {
     private let context: AppContext = .shared
 //    private let context: AppContext = .mock(withRegistry: .shared)
 
-    private let appName = Constants.shared.identifiers.displayName
+    private let appName = BundleConfiguration.mainDisplayName
 
     @StateObject
     private var theme = Theme()
@@ -71,7 +71,7 @@ private extension PassepartoutApp {
         )
         .onLoad {
             CommonLibrary.configureLogging(
-                to: Constants.shared.urlForAppLog,
+                to: BundleConfiguration.urlForAppLog,
                 parameters: Constants.shared.log
             )
             AppUI.configure(with: context)

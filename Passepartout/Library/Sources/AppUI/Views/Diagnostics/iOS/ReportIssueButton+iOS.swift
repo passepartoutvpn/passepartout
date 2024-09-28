@@ -25,6 +25,7 @@
 
 #if os(iOS)
 
+import PassepartoutKit
 import SwiftUI
 import UIKit
 import UtilsLibrary
@@ -38,7 +39,11 @@ extension ReportIssueButton: View {
                     defer {
                         isPending = false
                     }
-                    let issue = await Issue.fromBundle(.main, purchasedProducts: purchasedProducts, tunnel: tunnel)
+                    let issue = await Issue.with(
+                        versionString: BundleConfiguration.mainVersionString,
+                        purchasedProducts: purchasedProducts,
+                        tunnel: tunnel
+                    )
                     guard MailComposerView.canSendMail() else {
                         openMailTo(with: issue)
                         return

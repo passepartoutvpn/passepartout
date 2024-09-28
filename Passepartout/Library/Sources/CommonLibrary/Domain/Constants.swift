@@ -31,36 +31,6 @@ extension Constants {
 }
 
 public struct Constants: Decodable, Sendable {
-    private static var bundleConfiguration: BundleConfiguration? {
-        .failableMain
-    }
-
-    public struct Identifiers: Decodable, Sendable {
-        public var appId: String {
-            bundleConfiguration?.string(for: .appId) ?? "1234567890"
-        }
-
-        public var appStoreId: String {
-            bundleConfiguration?.string(for: .appStoreId) ?? "11223344"
-        }
-
-        public var groupId: String {
-            bundleConfiguration?.string(for: .groupId) ?? "fake-group-id"
-        }
-
-        public var iapBundlePrefix: String {
-            bundleConfiguration?.string(for: .iapBundlePrefix) ?? "fake-iap-prefix"
-        }
-
-        public var displayName: String {
-            bundleConfiguration?.displayName ?? "DisplayName"
-        }
-
-        public var versionString: String {
-            bundleConfiguration?.versionString ?? "1.0.0 (1000)"
-        }
-    }
-
     public struct Websites: Decodable, Sendable {
         public let home: URL
 
@@ -158,7 +128,7 @@ public struct Constants: Decodable, Sendable {
         public let maxAge: TimeInterval?
     }
 
-    public let identifiers: Identifiers
+    public let bundle: String
 
     public let websites: Websites
 
@@ -169,25 +139,4 @@ public struct Constants: Decodable, Sendable {
     public let connection: Connection
 
     public let log: Log
-}
-
-extension Constants {
-    public var urlForReview: URL {
-        URL(string: "https://apps.apple.com/app/id\(identifiers.appStoreId)?action=write-review")!
-    }
-
-    public var urlForAppLog: URL {
-        cachesURL.appending(path: log.appPath)
-    }
-
-    public var urlForTunnelLog: URL {
-        cachesURL.appending(path: log.tunnelPath)
-    }
-
-    private var cachesURL: URL {
-        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: identifiers.groupId) else {
-            fatalError("Unable to access App Group container")
-        }
-        return url.appending(components: "Library", "Caches")
-    }
 }

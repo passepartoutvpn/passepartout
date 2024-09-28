@@ -23,9 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
-
 #if os(macOS)
+
+import PassepartoutKit
+import SwiftUI
 
 extension AboutView {
     var listView: some View {
@@ -39,7 +40,7 @@ extension AboutView {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            Text(identifiers.versionString)
+            Text(BundleConfiguration.mainVersionString)
                 .padding(.bottom)
         }
     }

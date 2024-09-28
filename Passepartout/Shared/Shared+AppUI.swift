@@ -53,7 +53,7 @@ extension IAPManager {
 
             return testAppType
         }
-        if let infoValue = BundleConfiguration.main.integerIfPresent(for: .customUserLevel),
+        if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .customUserLevel),
            let testAppType = AppUserLevel(rawValue: infoValue) {
 
             return testAppType

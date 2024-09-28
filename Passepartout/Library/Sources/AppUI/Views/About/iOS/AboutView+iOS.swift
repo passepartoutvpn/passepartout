@@ -25,6 +25,7 @@
 
 #if os(iOS)
 
+import PassepartoutKit
 import SwiftUI
 
 extension AboutView {
@@ -41,7 +42,7 @@ extension AboutView {
             Section {
                 diagnosticsLink
                 Text(Strings.Global.version)
-                    .withTrailingText(identifiers.versionString)
+                    .withTrailingText(BundleConfiguration.mainVersionString)
             }
         }
     }

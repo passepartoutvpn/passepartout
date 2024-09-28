@@ -28,8 +28,6 @@ import PassepartoutKit
 
 extension BundleConfiguration {
     public enum BundleKey: String {
-        case appId
-
         case appStoreId
 
         case customUserLevel
@@ -42,31 +40,76 @@ extension BundleConfiguration {
 
         case profilesContainerName
 
-        case teamId
-
         case tunnelId
     }
 
-    // WARNING: nil from package itself, e.g. in previews
-    static let failableMain: BundleConfiguration? = {
-        BundleConfiguration(.main, key: "AppConfig")
-    }()
-
-    public static let main: BundleConfiguration = {
-        guard let failableMain else {
-            fatalError("Unable to build BundleConfiguration")
+    public static var mainDisplayName: String {
+        if isPreview {
+            return "preview-display-name"
         }
-        return failableMain
-    }()
+        return main.displayName
+    }
 
-    public func string(for key: BundleKey) -> String {
-        guard let value: String = value(forKey: key.rawValue) else {
-            fatalError("Key '\(key)' not found in bundle")
+    public static var mainVersionString: String {
+        if isPreview {
+            return "preview-1.2.3"
+        }
+        return main.versionString
+    }
+
+    public static func mainString(for key: BundleKey) -> String {
+        if isPreview {
+            return "preview-key(\(key.rawValue))"
+        }
+        guard let value: String = main.value(forKey: key.rawValue) else {
+            fatalError("Missing main bundle key: \(key.rawValue)")
         }
         return value
     }
 
-    public func integerIfPresent(for key: BundleKey) -> Int? {
-        value(forKey: key.rawValue)
+    public static func mainIntegerIfPresent(for key: BundleKey) -> Int? {
+        if isPreview {
+            return nil
+        }
+        return main.value(forKey: key.rawValue)
+    }
+
+    public static var urlForReview: URL {
+        let appStoreId = mainString(for: .appStoreId)
+        guard let url = URL(string: "https://apps.apple.com/app/id\(appStoreId)?action=write-review") else {
+            fatalError("Unable to build urlForReview")
+        }
+        return url
+    }
+
+    public static var urlForAppLog: URL {
+        cachesURL.appending(path: Constants.shared.log.appPath)
+    }
+
+    public static var urlForTunnelLog: URL {
+        cachesURL.appending(path: Constants.shared.log.tunnelPath)
+    }
+}
+
+private extension BundleConfiguration {
+
+    // WARNING: fails from package itself, e.g. in previews
+    static var main: BundleConfiguration {
+        guard let bundle = BundleConfiguration(.main, key: Constants.shared.bundle) else {
+            fatalError("Missing main bundle")
+        }
+        return bundle
+    }
+
+    static var isPreview: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
+
+    static var cachesURL: URL {
+        let groupId = mainString(for: .groupId)
+        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
+            fatalError("Unable to access App Group container")
+        }
+        return url.appending(components: "Library", "Caches")
     }
 }

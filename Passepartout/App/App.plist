@@ -4,8 +4,6 @@
 <dict>
 	<key>AppConfig</key>
 	<dict>
-		<key>appId</key>
-		<string>$(CFG_APP_ID)</string>
 		<key>appStoreId</key>
 		<string>$(CFG_APP_STORE_ID)</string>
 		<key>groupId</key>
@@ -16,8 +14,6 @@
 		<string>$(CFG_TEAM_ID).$(CFG_GROUP_ID)</string>
 		<key>profilesContainerName</key>
 		<string>$(CFG_PROFILES_CONTAINER_NAME)</string>
-		<key>teamId</key>
-		<string>$(CFG_TEAM_ID)</string>
 		<key>tunnelId</key>
 		<string>$(CFG_TUNNEL_ID)</string>
 	</dict>

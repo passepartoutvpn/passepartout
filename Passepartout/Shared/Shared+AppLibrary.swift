@@ -37,7 +37,7 @@ extension ProfileManager {
 
         let store = CoreDataPersistentStore(
             logger: .default,
-            containerName: BundleConfiguration.main.string(for: .profilesContainerName),
+            containerName: BundleConfiguration.mainString(for: .profilesContainerName),
             model: model,
             cloudKit: false,
             cloudKitIdentifier: nil,
@@ -70,7 +70,7 @@ extension Tunnel {
 extension Tunnel {
     static let shared = Tunnel(
         strategy: NETunnelStrategy(
-            bundleIdentifier: BundleConfiguration.main.string(for: .tunnelId),
+            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             encoder: .shared
         )
     )

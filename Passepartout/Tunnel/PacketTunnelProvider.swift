@@ -32,7 +32,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
         CommonLibrary.configureLogging(
-            to: Constants.shared.urlForTunnelLog,
+            to: BundleConfiguration.urlForTunnelLog,
             parameters: Constants.shared.log
         )
         fwd = try await NEPTPForwarder(

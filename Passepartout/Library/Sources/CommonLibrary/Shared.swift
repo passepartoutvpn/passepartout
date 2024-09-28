@@ -32,7 +32,7 @@ extension LoggerDestination {
 
 extension UserDefaults {
     public static let group: UserDefaults = {
-        let appGroup = BundleConfiguration.main.string(for: .groupId)
+        let appGroup = BundleConfiguration.mainString(for: .groupId)
         guard let defaults = UserDefaults(suiteName: appGroup) else {
             fatalError("No access to App Group: \(appGroup)")
         }

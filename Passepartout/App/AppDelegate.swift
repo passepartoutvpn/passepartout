@@ -35,6 +35,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 import AppKit
 import AppUI
 import CommonLibrary
+import PassepartoutKit
 import SwiftUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -59,7 +60,7 @@ private extension AppDelegate {
     func quitConfirmationAlert() -> NSApplication.TerminateReply {
         let alert = NSAlert()
         alert.alertStyle = .warning
-        alert.messageText = Strings.Alerts.ConfirmQuit.title(Constants.shared.identifiers.displayName)
+        alert.messageText = Strings.Alerts.ConfirmQuit.title(BundleConfiguration.mainDisplayName)
         alert.informativeText = Strings.Alerts.ConfirmQuit.message
         alert.addButton(withTitle: Strings.Global.ok)
         alert.addButton(withTitle: Strings.Global.cancel)
