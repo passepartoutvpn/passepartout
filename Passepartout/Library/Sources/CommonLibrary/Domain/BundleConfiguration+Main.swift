@@ -86,10 +86,6 @@ private extension BundleConfiguration {
     }
 
     static var isPreview: Bool {
-#if targetEnvironment(simulator)
         ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-#else
-        false
-#endif
     }
 }
