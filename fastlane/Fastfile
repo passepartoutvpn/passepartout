@@ -31,9 +31,11 @@ lane :bump do |options|
         pretty: "* %h %s",
         date_format: "short"
     )
-    File.open("../#{logname}", "w") { |file|
+    path = "../#{logname}"
+    File.open(path, "w") { |file|
         file.write(log)
     }
+    system("vim", path)
     commit_version_bump(
         message: "Bump version",
         include: [logname]
