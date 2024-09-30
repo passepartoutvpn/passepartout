@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "fastlane", ">= 2.2.0", :github => "keeshux/fastlane", :branch => "bugfix/build-multiplatform-for-ipa-pkg"
+gem "fastlane", :github => "keeshux/fastlane", :ref => "2f464bc16fbebf4dbac52ed7362993434af3f022"
 gem "dotenv"
 
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
