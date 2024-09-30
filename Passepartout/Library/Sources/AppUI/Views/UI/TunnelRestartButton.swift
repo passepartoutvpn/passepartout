@@ -55,7 +55,7 @@ struct TunnelRestartButton<Label>: View where Label: View {
             pendingTask?.cancel()
             pendingTask = Task {
                 do {
-                    try await tunnel.reconnect(with: profile, processor: iapManager)
+                    try await tunnel.connect(with: profile, processor: iapManager)
                 } catch {
                     errorHandler.handle(
                         error,

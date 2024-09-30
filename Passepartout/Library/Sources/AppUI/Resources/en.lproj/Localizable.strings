@@ -58,7 +58,6 @@
 "global.status" = "Status";
 "global.storage" = "Storage";
 "global.subnet" = "Subnet";
-"global.uninstall" = "Uninstall";
 "global.unknown" = "Unknown";
 "global.username" = "Username";
 "global.version" = "Version";

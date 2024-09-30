@@ -52,9 +52,6 @@ struct ProfileContextMenu: View {
         profileEditButton
         profileDuplicateButton
         Divider()
-        if isInstalledProfile {
-            tunnelUninstallButton
-        }
         profileRemoveButton
     }
 }
@@ -83,12 +80,6 @@ private extension ProfileContextMenu {
             errorHandler: errorHandler
         ) {
             ThemeImageLabel(Strings.Global.restart, .tunnelRestart)
-        }
-    }
-
-    var tunnelUninstallButton: some View {
-        TunnelUninstallButton(tunnel: tunnel) {
-            ThemeImageLabel(Strings.Global.uninstall, .tunnelUninstall)
         }
     }
 

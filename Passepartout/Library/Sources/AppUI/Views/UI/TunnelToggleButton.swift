@@ -77,7 +77,7 @@ struct TunnelToggleButton<Label>: View, TunnelContextProviding, ThemeProviding w
 
 private extension TunnelToggleButton {
     var isInstalled: Bool {
-        profile?.id == tunnel.installedProfile?.id
+        profile?.id == tunnel.currentProfile?.id
     }
 
     var canConnect: Bool {
@@ -127,7 +127,7 @@ private extension TunnelToggleButton {
                     try await tunnel.disconnect()
                 }
             } else {
-                try await tunnel.reconnect(with: profile, processor: iapManager)
+                try await tunnel.connect(with: profile, processor: iapManager)
             }
         } catch {
             errorHandler.handle(

@@ -265,8 +265,6 @@ public enum Strings {
     public static let storage = Strings.tr("Localizable", "global.storage", fallback: "Storage")
     /// Subnet
     public static let subnet = Strings.tr("Localizable", "global.subnet", fallback: "Subnet")
-    /// Uninstall
-    public static let uninstall = Strings.tr("Localizable", "global.uninstall", fallback: "Uninstall")
     /// Unknown
     public static let unknown = Strings.tr("Localizable", "global.unknown", fallback: "Unknown")
     /// Username

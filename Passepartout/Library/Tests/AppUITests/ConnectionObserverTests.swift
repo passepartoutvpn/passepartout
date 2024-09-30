@@ -37,10 +37,10 @@ extension ConnectionObserverTests {
         let env = InMemoryEnvironment()
         let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
         let sut = ConnectionObserver(tunnel: tunnel, environment: env, interval: 0.1)
+        sut.observeObjects()
 
         let profile = try Profile.Builder().tryBuild()
-        try await tunnel.install(profile: profile, title: \.name)
-        try await tunnel.connect()
+        try await tunnel.install(profile, connect: true, title: \.name)
         env.setEnvironmentValue(.crypto, forKey: TunnelEnvironmentKeys.lastErrorCode)
 
         try await tunnel.disconnect()
@@ -52,15 +52,16 @@ extension ConnectionObserverTests {
         let env = InMemoryEnvironment()
         let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
         let sut = ConnectionObserver(tunnel: tunnel, environment: env, interval: 0.1)
+        sut.observeObjects()
 
         let profile = try Profile.Builder().tryBuild()
-        try await tunnel.install(profile: profile, title: \.name)
+        try await tunnel.install(profile, connect: false, title: \.name)
 
         let dataCount = DataCount(500, 700)
         env.setEnvironmentValue(dataCount, forKey: TunnelEnvironmentKeys.dataCount)
         XCTAssertEqual(sut.dataCount, nil)
 
-        try await tunnel.connect()
+        try await tunnel.install(profile, connect: true, title: \.name)
         try await Task.sleep(for: .milliseconds(200))
         XCTAssertEqual(sut.dataCount, dataCount)
     }

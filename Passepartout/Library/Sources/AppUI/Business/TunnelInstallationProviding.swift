@@ -36,25 +36,25 @@ protocol TunnelInstallationProviding {
 struct TunnelInstallation {
     let header: ProfileHeader
 
-    let isEnabled: Bool
+    let onDemand: Bool
 }
 
 @MainActor
 extension TunnelInstallationProviding {
     var installation: TunnelInstallation? {
-        guard let installedProfile = tunnel.installedProfile else {
+        guard let currentProfile = tunnel.currentProfile else {
             return nil
         }
         guard let header = profileManager.headers.first(where: {
-            $0.id == installedProfile.id
+            $0.id == currentProfile.id
         }) else {
             return nil
         }
-        return TunnelInstallation(header: header, isEnabled: installedProfile.isEnabled)
+        return TunnelInstallation(header: header, onDemand: currentProfile.onDemand)
     }
 
-    var installedProfile: Profile? {
-        guard let id = tunnel.installedProfile?.id else {
+    var currentProfile: Profile? {
+        guard let id = tunnel.currentProfile?.id else {
             return nil
         }
         return profileManager.profile(withId: id)

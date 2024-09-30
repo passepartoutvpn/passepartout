@@ -85,7 +85,7 @@ private extension ProfileGridView {
         InstalledProfileView(
             layout: .grid,
             profileManager: profileManager,
-            profile: installedProfile,
+            profile: currentProfile,
             tunnel: tunnel,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
@@ -95,7 +95,7 @@ private extension ProfileGridView {
             )
         )
         .contextMenu {
-            installedProfile.map {
+            currentProfile.map {
                 ProfileContextMenu(
                     profileManager: profileManager,
                     tunnel: tunnel,
@@ -121,7 +121,7 @@ private extension ProfileGridView {
             withMarker: true,
             onEdit: onEdit
         )
-        .themeGridCell(isSelected: header.id == nextProfileId ?? tunnel.installedProfile?.id)
+        .themeGridCell(isSelected: header.id == nextProfileId ?? tunnel.currentProfile?.id)
         .contextMenu {
             ProfileContextMenu(
                 profileManager: profileManager,
