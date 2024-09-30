@@ -31,7 +31,7 @@ let package = Package(
     ],
     dependencies: [
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", from: "0.7.0"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", revision: "1277fe7386441dd303673aa867ef9a05fe2aa9f5"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", revision: "357955508f5390ebcaba68ac7cbcea60969a3985"),
 //        .package(path: "../../../passepartoutkit"),
         .package(url: "git@github.com:passepartoutvpn/passepartoutkit-openvpn-openssl", from: "0.6.0"),
 //        .package(path: "../../../passepartoutkit-openvpn-openssl"),
