@@ -32,6 +32,8 @@
 			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Extensions</string>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ovpn</string>
