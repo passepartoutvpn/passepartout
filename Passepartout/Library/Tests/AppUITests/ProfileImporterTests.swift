@@ -61,8 +61,9 @@ extension ProfileImporterTests {
             .sink {
                 switch $0 {
                 case .save(let profile):
-                    XCTAssertEqual(profile.modules.count, 1)
+                    XCTAssertEqual(profile.modules.count, 2)
                     XCTAssertTrue(profile.modules.first is SomeModule)
+                    XCTAssertTrue(profile.modules.last is OnDemandModule)
                     exp.fulfill()
 
                 default:
@@ -92,8 +93,9 @@ extension ProfileImporterTests {
             .sink {
                 switch $0 {
                 case .save(let profile):
-                    XCTAssertEqual(profile.modules.count, 1)
+                    XCTAssertEqual(profile.modules.count, 2)
                     XCTAssertTrue(profile.modules.first is SomeModule)
+                    XCTAssertTrue(profile.modules.last is OnDemandModule)
                     exp.fulfill()
 
                 default:

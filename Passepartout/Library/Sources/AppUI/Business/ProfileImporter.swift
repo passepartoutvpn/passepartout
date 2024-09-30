@@ -125,11 +125,14 @@ private extension ProfileImporter {
         }
 
         let module = try registry.module(fromURL: url, object: passphrase)
+        var onDemandModuleBuilder = OnDemandModule.Builder()
+        onDemandModuleBuilder.isEnabled = false
+        let onDemandModule = onDemandModuleBuilder.tryBuild()
 
         var builder = Profile.Builder()
         builder.name = url.lastPathComponent
-        builder.modules = [module]
-        builder.activeModulesIds = [module.id]
+        builder.modules = [module, onDemandModule]
+        builder.activeModulesIds = Set(builder.modules.map(\.id))
         let profile = try builder.tryBuild()
 
         try await profileManager.save(profile)
