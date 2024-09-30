@@ -503,6 +503,7 @@
 				INFOPLIST_FILE = Passepartout/App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = dummy;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -546,6 +547,7 @@
 				INFOPLIST_FILE = Passepartout/App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(TARGET_NAME)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "$(CFG_COPYRIGHT)";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = dummy;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
