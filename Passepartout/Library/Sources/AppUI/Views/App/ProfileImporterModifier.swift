@@ -49,8 +49,8 @@ struct ProfileImporterModifier: ViewModifier {
                 allowsMultipleSelection: true,
                 onCompletion: handleResult
             )
-            .onOpenURL { url in
-                handleResult(.success([url]))
+            .onReceive(ImporterPipe.shared) {
+                handleResult(.success($0))
             }
             .alert(
                 Strings.Views.Profiles.Toolbar.importProfile,

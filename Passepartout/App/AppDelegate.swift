@@ -25,9 +25,14 @@
 
 #if os(iOS)
 
+import AppUI
 import UIKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        ImporterPipe.shared.send([url])
+        return true
+    }
 }
 
 #else
@@ -52,6 +57,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             return quitConfirmationAlert()
         }
         return .terminateNow
+    }
+
+    func application(_ application: NSApplication, open urls: [URL]) {
+        ImporterPipe.shared.send(urls)
     }
 }
 
