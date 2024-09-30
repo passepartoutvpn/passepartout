@@ -34,7 +34,7 @@ extension EditableModule where Self: ModuleViewProviding {
             moduleView(with: ProfileEditor(modules: [self]))
                 .navigationTitle(title)
         }
-        .environmentObject(Theme())
+        .withMockEnvironment()
     }
 
     @MainActor
@@ -42,6 +42,15 @@ extension EditableModule where Self: ModuleViewProviding {
         NavigationStack {
             content(ProfileEditor(modules: [self]), self)
         }
-        .environmentObject(Theme())
+        .withMockEnvironment()
+    }
+}
+
+@MainActor
+private extension View {
+    func withMockEnvironment() -> some View {
+        environmentObject(Theme())
+            .environmentObject(IAPManager.mock)
+            .environmentObject(ConnectionObserver.mock)
     }
 }
