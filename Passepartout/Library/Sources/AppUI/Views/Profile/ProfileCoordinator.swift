@@ -104,7 +104,7 @@ private extension ProfileCoordinator {
     func onNewModule(_ moduleType: ModuleType) {
         switch moduleType {
         case .onDemand:
-            paywallReason = iapManager.paywallReason(forFeature: .onDemand)
+            break
 
         default:
             paywallReason = iapManager.paywallReason(forFeature: .networkSettings)

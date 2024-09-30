@@ -47,6 +47,7 @@
 "global.private_key" = "Private key";
 "global.protocol" = "Protocol";
 "global.public_key" = "Public key";
+"global.purchase" = "Purchase";
 "global.remove" = "Delete";
 "global.restart" = "Restart";
 "global.route" = "Route";
@@ -168,6 +169,7 @@
 "modules.ip.routes.excluded" = "Excluded routes";
 "modules.ip.routes.add_family" = "Add %@";
 
+"modules.on_demand.purchase" = "Add on-demand rules";
 "modules.on_demand.policy" = "Policy";
 "modules.on_demand.policy.footer" = "Activate the VPN %@.";
 "modules.on_demand.policy.footer.any" = "in any network";

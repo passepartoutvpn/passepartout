@@ -30,11 +30,16 @@ extension IAPManager: ProfileProcessor {
     func processedProfile(_ profile: Profile) throws -> Profile {
         var builder = profile.builder()
 
-        // suppress on-demand module if not eligible
+        // suppress on-demand rules if not eligible
         if !isEligible(for: .onDemand) {
-            pp_log(.app, .notice, "Disable on-demand rules, not eligible")
-            builder.modules.removeAll {
-                $0 is OnDemandModule
+            pp_log(.app, .notice, "Suppress on-demand rules, not eligible")
+
+            if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
+                let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {
+
+                var onDemandBuilder = onDemandModule.builder()
+                onDemandBuilder.policy = .any
+                builder.modules[onDemandModuleIndex] = onDemandBuilder.tryBuild()
             }
         }
 
