@@ -410,6 +410,12 @@ public enum Strings {
       public static let name = Strings.tr("Localizable", "placeholders.profile.name", fallback: "My profile")
     }
   }
+  public enum Ui {
+    public enum ConnectionStatus {
+      ///  (on-demand)
+      public static let onDemandSuffix = Strings.tr("Localizable", "ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
+    }
+  }
   public enum Views {
     public enum About {
       /// About
