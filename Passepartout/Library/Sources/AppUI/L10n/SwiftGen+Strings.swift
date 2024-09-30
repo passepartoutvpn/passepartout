@@ -243,6 +243,8 @@ public enum Strings {
     public static let `protocol` = Strings.tr("Localizable", "global.protocol", fallback: "Protocol")
     /// Public key
     public static let publicKey = Strings.tr("Localizable", "global.public_key", fallback: "Public key")
+    /// Purchase
+    public static let purchase = Strings.tr("Localizable", "global.purchase", fallback: "Purchase")
     /// Delete
     public static let remove = Strings.tr("Localizable", "global.remove", fallback: "Delete")
     /// Restart
@@ -312,6 +314,8 @@ public enum Strings {
       public static let mobile = Strings.tr("Localizable", "modules.on_demand.mobile", fallback: "Mobile")
       /// Policy
       public static let policy = Strings.tr("Localizable", "modules.on_demand.policy", fallback: "Policy")
+      /// Add on-demand rules
+      public static let purchase = Strings.tr("Localizable", "modules.on_demand.purchase", fallback: "Add on-demand rules")
       public enum Policy {
         /// Activate the VPN %@.
         public static func footer(_ p1: Any) -> String {

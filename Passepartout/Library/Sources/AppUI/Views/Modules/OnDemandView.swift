@@ -38,6 +38,9 @@ private struct OnDemandView: View {
     @EnvironmentObject
     private var theme: Theme
 
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     @ObservedObject
     private var editor: ProfileEditor
 
@@ -45,6 +48,9 @@ private struct OnDemandView: View {
 
     @Binding
     private var draft: OnDemandModule.Builder
+
+    @State
+    private var paywallReason: PaywallReason?
 
     init(
         editor: ProfileEditor,
@@ -59,15 +65,10 @@ private struct OnDemandView: View {
     var body: some View {
         Group {
             enabledSection
-            if draft.isEnabled {
-                policySection
-                if draft.policy != .any {
-                    networkSection
-                    wifiSection
-                }
-            }
+            restrictedSection
         }
         .asModuleView(with: editor, draft: draft)
+        .modifier(PaywallModifier(reason: $paywallReason))
     }
 }
 
@@ -81,6 +82,28 @@ private extension OnDemandView {
     var enabledSection: some View {
         Section {
             Toggle(Strings.Global.enabled, isOn: $draft.isEnabled)
+        }
+    }
+
+    @ViewBuilder
+    var restrictedSection: some View {
+        switch iapManager.paywallReason(forFeature: .onDemand) {
+        case .purchase(let feature):
+            Button(Strings.Modules.OnDemand.purchase) {
+                paywallReason = .purchase(feature)
+            }
+
+        case .restricted:
+            EmptyView()
+
+        default:
+            if draft.isEnabled {
+                policySection
+                if draft.policy != .any {
+                    networkSection
+                    wifiSection
+                }
+            }
         }
     }
 
