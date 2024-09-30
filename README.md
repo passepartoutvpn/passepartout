@@ -5,8 +5,8 @@
 ![tvOS 17+](https://img.shields.io/badge/tvOS-17+-green.svg)
 [![License GPLv3](https://img.shields.io/badge/License-GPLv3-lightgray.svg)](LICENSE)
 
-[![Unit Tests](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml)
-[![Release](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml/badge.svg)](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml)
+[![Unit Tests](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/test.yml)
+[![Release](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml/badge.svg?branch=)](https://github.com/passepartoutvpn/passepartout/actions/workflows/release.yml)
 
 # [Passepartout][about-website]
 
