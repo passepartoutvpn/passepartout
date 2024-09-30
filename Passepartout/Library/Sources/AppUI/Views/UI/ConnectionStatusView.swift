@@ -58,9 +58,46 @@ private extension ConnectionStatusView {
                 return "↓\(down) ↑\(up)"
             }
 
+        case .inactive:
+            var desc = status.localizedDescription
+            if tunnel.currentProfile?.onDemand ?? false {
+                desc += Strings.Ui.ConnectionStatus.onDemandSuffix
+            }
+            return desc
+
         default:
             break
         }
         return status.localizedDescription
     }
+}
+
+#Preview("Connected") {
+    ConnectionStatusView(tunnel: .mock)
+        .task {
+            try? await Tunnel.mock.connect(with: .mock, processor: IAPManager.mock)
+        }
+        .frame(width: 100, height: 100)
+        .environmentObject(Theme())
+        .environmentObject(ConnectionObserver.mock)
+}
+
+#Preview("On-Demand") {
+    var builder = Profile.Builder()
+    var onDemand = OnDemandModule.Builder()
+    onDemand.isEnabled = true
+    builder.modules = [onDemand.tryBuild()]
+    let profile: Profile
+    do {
+        profile = try builder.tryBuild()
+    } catch {
+        fatalError()
+    }
+    return ConnectionStatusView(tunnel: .mock)
+        .task {
+            try? await Tunnel.mock.connect(with: profile, processor: IAPManager.mock)
+        }
+        .frame(width: 100, height: 100)
+        .environmentObject(Theme())
+        .environmentObject(ConnectionObserver.mock)
 }

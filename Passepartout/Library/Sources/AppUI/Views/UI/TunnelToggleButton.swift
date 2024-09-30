@@ -81,7 +81,7 @@ private extension TunnelToggleButton {
     }
 
     var canConnect: Bool {
-        !isInstalled || tunnel.status == .inactive
+        !isInstalled || (tunnel.status == .inactive && tunnel.currentProfile?.onDemand != true)
     }
 
     var color: Color {
