@@ -23,22 +23,26 @@ desc "Bump version"
 lane :bump do |options|
     version = options[:version]
     build = options[:build]
+    to_commit = []
     increment_build_number(build_number: build)
     unless version.nil? || version.empty?
         increment_version_number_in_xcodeproj(version_number: version)
     end
-    log = changelog_from_git_commits(
-        pretty: "* %h %s",
-        date_format: "short"
-    )
-    path = "../#{logname}"
-    File.open(path, "w") { |file|
-        file.write(log)
-    }
-    system("vim", path)
+    unless options[:only]
+        log = changelog_from_git_commits(
+            pretty: "* %h %s",
+            date_format: "short"
+        )
+        path = "../#{logname}"
+        File.open(path, "w") { |file|
+            file.write(log)
+        }
+        system("vim", path)
+        to_commit.append(logname)
+    end
     commit_version_bump(
         message: "Bump version",
-        include: [logname]
+        include: to_commit
     )
     add_git_tag(
         includes_lane: false,
