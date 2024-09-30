@@ -1,3 +1,4 @@
+* 4b1f6e547 Fix some on-demand behavior (#646)
 * 0e4dd086 Import profiles with on-demand disabled (#641)
 * aead8662 Open app with multiple files (#640)
 * 4877c2bd Restrict paywall to on-demand rules (#639)
