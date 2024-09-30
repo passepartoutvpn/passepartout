@@ -23,7 +23,6 @@ desc "Bump version"
 lane :bump do |options|
     version = options[:version]
     build = options[:build]
-    to_commit = []
     increment_build_number(build_number: build)
     unless version.nil? || version.empty?
         increment_version_number_in_xcodeproj(version_number: version)
@@ -38,11 +37,10 @@ lane :bump do |options|
             file.write(log)
         }
         system("vim", path)
-        to_commit.append(logname)
     end
     commit_version_bump(
         message: "Bump version",
-        include: to_commit
+        include: [logname]
     )
     add_git_tag(
         includes_lane: false,
