@@ -39,17 +39,15 @@ extension ProfileManager {
             logger: .default,
             containerName: BundleConfiguration.mainString(for: .profilesContainerName),
             model: model,
-            cloudKit: false,
             cloudKitIdentifier: nil,
             author: nil
         )
-
-        let repository = AppData.cdProfileRepository(
+        let repository = AppData.cdProfileRepositoryV3(
             registry: .shared,
             coder: CodableProfileCoder(),
             context: store.context
         ) { error in
-            pp_log(.app, .error, "Unable to decode result: \(error)")
+            pp_log(.app, .error, "Unable to decode local result: \(error)")
             return .ignore
         }
 

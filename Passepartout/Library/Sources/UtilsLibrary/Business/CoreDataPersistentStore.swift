@@ -43,12 +43,11 @@ public final class CoreDataPersistentStore {
         logger: CoreDataPersistentStoreLogger,
         containerName: String,
         model: NSManagedObjectModel,
-        cloudKit: Bool,
         cloudKitIdentifier: String?,
         author: String?
     ) {
         let container: NSPersistentContainer
-        if cloudKit {
+        if cloudKitIdentifier != nil {
             container = NSPersistentCloudKitContainer(name: containerName, managedObjectModel: model)
             logger.debug("Set up CloudKit container: \(containerName)")
         } else {
@@ -98,7 +97,7 @@ public final class CoreDataPersistentStore {
         container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         container.viewContext.automaticallyMergesChangesFromParent = true
 
-        if let author = author {
+        if let author {
             logger.debug("Setting transaction author: \(author)")
             container.viewContext.transactionAuthor = author
         }

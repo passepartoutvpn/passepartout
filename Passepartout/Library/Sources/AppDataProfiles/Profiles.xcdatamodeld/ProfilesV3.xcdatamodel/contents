@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23G93" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="CDProfile" representedClassName="CDProfile" elementID="CDProfile" versionHashModifier="1" syncable="YES">
+    <entity name="CDProfileV3" representedClassName="CDProfileV3" elementID="CDProfile" versionHashModifier="1" syncable="YES">
         <attribute name="encoded" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>

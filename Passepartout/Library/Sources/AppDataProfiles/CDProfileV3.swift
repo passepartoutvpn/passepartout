@@ -1,5 +1,5 @@
 //
-//  CDProfile.swift
+//  CDProfileV3.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/11/24.
@@ -26,8 +26,8 @@
 import CoreData
 import Foundation
 
-@objc(CDProfile)
-final class CDProfile: NSManagedObject {
+@objc(CDProfileV3)
+final class CDProfileV3: NSManagedObject {
     @NSManaged var uuid: UUID?
     @NSManaged var name: String?
     @NSManaged var encoded: String?

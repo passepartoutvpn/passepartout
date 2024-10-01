@@ -21,14 +21,8 @@ let package = Package(
             name: "AppUI",
             targets: [
                 "AppDataProfiles",
-                "AppUI"
-            ]
-        ),
-        .library(
-            name: "IntentsLibrary",
-            targets: [
-                "AppDataProfiles",
-                "AppLibrary"
+                "AppUI",
+                "LegacyV2"
             ]
         ),
         .library(
@@ -91,6 +85,15 @@ let package = Package(
             ],
             resources: [
                 .process("Resources")
+            ]
+        ),
+        .target(
+            name: "LegacyV2",
+            dependencies: [
+                .product(name: "PassepartoutKit", package: "passepartoutkit")
+            ],
+            resources: [
+                .process("Profiles.xcdatamodeld")
             ]
         ),
         .target(
