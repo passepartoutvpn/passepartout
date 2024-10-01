@@ -16,7 +16,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E6F76122CA4894900A95436"
+               BlueprintIdentifier = "0EDE56EF2CABE42E0082D21C"
                BuildableName = "PassepartoutIntents.appex"
                BlueprintName = "PassepartoutIntents"
                ReferencedContainer = "container:Passepartout.xcodeproj">

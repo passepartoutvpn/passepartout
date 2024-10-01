@@ -23,7 +23,6 @@
 		0EC9C0282CA5C04500C52954 /* Shared+AppLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */; };
 		0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EDE56E62CABE40D0082D21C /* Intents.plist */; };
 		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0EDE56FF2CABE4450082D21C /* CustomIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E42CABE40D0082D21C /* CustomIntent.swift */; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +87,6 @@
 		0EC797412B9378E000C093B7 /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+AppLibrary.swift"; sourceTree = "<group>"; };
 		0ED1EFDA2C33059600CBD9BD /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
-		0EDE56E42CABE40D0082D21C /* CustomIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomIntent.swift; sourceTree = "<group>"; };
 		0EDE56E52CABE40D0082D21C /* Intents.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Intents.entitlements; sourceTree = "<group>"; };
 		0EDE56E62CABE40D0082D21C /* Intents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Intents.plist; sourceTree = "<group>"; };
 		0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentsExtension.swift; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 		0EDE56E82CABE40D0082D21C /* Intents */ = {
 			isa = PBXGroup;
 			children = (
-				0EDE56E42CABE40D0082D21C /* CustomIntent.swift */,
 				0EDE56E52CABE40D0082D21C /* Intents.entitlements */,
 				0EDE56E62CABE40D0082D21C /* Intents.plist */,
 				0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */,
@@ -391,7 +388,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EDE56FF2CABE4450082D21C /* CustomIntent.swift in Sources */,
 				0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
