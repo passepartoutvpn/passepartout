@@ -32,7 +32,7 @@ extension AboutView {
     var listView: some View {
         List {
             Section {
-                // TODO: donations
+                // TODO: #585, donations
 //                donateLink
                 linksLink
                 creditsLink

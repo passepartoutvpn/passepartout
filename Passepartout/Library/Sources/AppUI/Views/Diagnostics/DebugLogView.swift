@@ -29,18 +29,22 @@ import SwiftUI
 import UtilsLibrary
 
 extension DebugLogView {
+
+    // TODO: #656, make non-static
     static func withApp(parameters: Constants.Log) -> DebugLogView {
         DebugLogView {
             CommonLibrary.currentLog(parameters: parameters)
         }
     }
 
+    // TODO: #656, make non-static
     static func withTunnel(_ tunnel: Tunnel, parameters: Constants.Log) -> DebugLogView {
         DebugLogView {
             await tunnel.currentLog(parameters: parameters)
         }
     }
 
+    // TODO: #656, make non-static
     static func withURL(_ url: URL) -> DebugLogView {
         DebugLogView {
             do {
@@ -99,7 +103,7 @@ private extension DebugLogView {
         .disabled(currentLines.isEmpty)
     }
 
-    // TODO: share as temporary URL (could enable email)
+    // TODO: #658, share as temporary URL (could enable email)
 //    var shareButton: some View {
 //        ShareLink(item: content)
 //    }

@@ -25,7 +25,7 @@
 
 import SwiftUI
 
-// TODO: donations
+// TODO: #585, donations
 
 struct DonateView: View {
     var body: some View {

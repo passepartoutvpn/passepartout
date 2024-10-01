@@ -123,7 +123,7 @@ private extension InstalledProfileView {
             ThemeImage(.tunnelToggle)
                 .scaleEffect(1.5, anchor: .trailing)
         }
-        // TODO: #584 menu, necessary to avoid cell selection
+        // TODO: #584, necessary to avoid cell selection
         .buttonStyle(.plain)
         .opacity(installedOpacity)
     }

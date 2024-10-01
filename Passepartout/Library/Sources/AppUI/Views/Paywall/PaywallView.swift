@@ -35,11 +35,11 @@ struct PaywallView: View {
 
     let feature: AppFeature
 
-    // TODO: #424, implement payments
+    // TODO: #585, implement payments
     var body: some View {
         Text(String(describing: feature))
             .toolbar(content: toolbarContent)
-            .navigationTitle("Purchase")
+            .navigationTitle(Strings.Global.purchase)
     }
 }
 

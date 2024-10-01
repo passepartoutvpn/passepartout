@@ -28,6 +28,8 @@ import Foundation
 import PassepartoutKit
 
 extension Issue {
+
+    // TODO: #656, make non-static
     static func with(versionString: String, purchasedProducts: Set<AppProduct>, tunnel: Tunnel) async -> Self {
         let appLog = CommonLibrary.currentLog(parameters: Constants.shared.log)
             .joined(separator: "\n")

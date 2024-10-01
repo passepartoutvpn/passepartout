@@ -81,7 +81,7 @@ struct Issue: Identifiable {
             .replacingOccurrences(of: "$appLine", with: appLine ?? "unknown")
             .replacingOccurrences(of: "$osLine", with: osLine)
             .replacingOccurrences(of: "$deviceLine", with: deviceLine ?? "unknown")
-        // TODO: replace with provider later
+            // TODO: #614, replace with provider later
             .replacingOccurrences(of: "$providerName", with: "none")
             .replacingOccurrences(of: "$providerLastUpdate", with: "unknown")
             .replacingOccurrences(of: "$purchasedProducts", with: purchasedProducts.map(\.rawValue).description)

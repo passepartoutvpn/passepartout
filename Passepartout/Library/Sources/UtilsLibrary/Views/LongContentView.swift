@@ -41,7 +41,7 @@ public struct LongContentView: View {
                     Image(systemName: copySystemImage ?? "doc.on.doc")
                 }
             }
-        // TODO: layout, add padding an inset, let content extend beyond safe areas
+        // TODO: #659, add padding as inset, let content extend beyond safe areas
     }
 }
 

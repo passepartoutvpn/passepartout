@@ -321,7 +321,7 @@ private extension OpenVPNView {
 
 private extension OpenVPNView {
     func importConfiguration(from url: URL) {
-        // TODO: import draft from external URL
+        // TODO: #657, import draft from external URL
     }
 }
 

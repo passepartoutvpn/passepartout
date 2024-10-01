@@ -26,6 +26,7 @@
 import Foundation
 import PassepartoutKit
 
+// TODO: #656, make non-static
 extension BundleConfiguration {
     public enum BundleKey: String {
         case appStoreId
