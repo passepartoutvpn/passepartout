@@ -30,6 +30,7 @@ struct StorageSection: View {
     let uuid: UUID
 
     var body: some View {
+#if DEBUG
         debugChanges()
         return Section {
             ThemeCopiableText(
@@ -39,6 +40,9 @@ struct StorageSection: View {
         } header: {
             Text(Strings.Global.storage)
         }
+#else
+        EmptyView()
+#endif
     }
 }
 
