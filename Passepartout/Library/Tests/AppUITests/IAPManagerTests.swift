@@ -183,8 +183,8 @@ extension IAPManagerTests {
 #endif
     }
 
-//    // MARK: Purchasable
-//
+    // MARK: Purchasable
+
 //    func test_givenNoPurchase_thenCanBuyFullAndPlatformVersion() {
 //        let reader = MockReceiptReader()
 //        reader.setReceipt(withBuild: defaultBuildNumber, products: [])

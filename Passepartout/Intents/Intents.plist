@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfig</key>
+	<dict>
+		<key>appId</key>
+		<string>$(CFG_APP_ID)</string>
+		<key>groupId</key>
+		<string>$(CFG_GROUP_ID)</string>
+		<key>keychainGroupId</key>
+		<string>$(CFG_TEAM_ID).$(CFG_GROUP_ID)</string>
+		<key>profilesContainerName</key>
+		<string>$(CFG_PROFILES_CONTAINER_NAME)</string>
+		<key>teamId</key>
+		<string>$(CFG_TEAM_ID)</string>
+		<key>tunnelId</key>
+		<string>$(CFG_TUNNEL_ID)</string>
+	</dict>
+	<key>EXAppExtensionAttributes</key>
+	<dict>
+		<key>EXExtensionPointIdentifier</key>
+		<string>com.apple.appintents-extension</string>
+	</dict>
+</dict>
+</plist>
