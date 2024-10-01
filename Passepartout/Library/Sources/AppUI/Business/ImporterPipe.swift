@@ -27,5 +27,7 @@ import Combine
 import Foundation
 
 public enum ImporterPipe {
+
+    @MainActor
     public static let shared = PassthroughSubject<[URL], Never>()
 }
