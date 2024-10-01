@@ -24,7 +24,6 @@
 //
 
 import AppIntents
-import AppLibrary
 
 struct CustomIntent: AppIntent {
     static var title: LocalizedStringResource {
