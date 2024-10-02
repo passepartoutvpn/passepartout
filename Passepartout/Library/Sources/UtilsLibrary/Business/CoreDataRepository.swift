@@ -31,10 +31,19 @@ public protocol CoreDataUniqueEntity: NSManagedObject, UniqueEntity {
     // Core Data entity must have a unique "uuid" field
 }
 
+public enum CoreDataResultAction {
+    case ignore
+
+    case discard
+
+    case halt
+}
+
 public actor CoreDataRepository<CD, T>: NSObject,
                                         Repository,
                                         NSFetchedResultsControllerDelegate where CD: CoreDataUniqueEntity,
                                                                                  T: UniqueEntity {
+
     private let entityName: String
 
     private let context: NSManagedObjectContext
@@ -43,7 +52,7 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
     private let toMapper: (T, NSManagedObjectContext) throws -> CD
 
-    private let onResultError: ((Error) -> Bool)? // true = keep going
+    private let onResultError: ((Error) -> CoreDataResultAction)?
 
     private let entitiesSubject: CurrentValueSubject<EntitiesResult<T>, Never>
 
@@ -55,7 +64,7 @@ public actor CoreDataRepository<CD, T>: NSObject,
         beforeFetch: ((NSFetchRequest<CD>) -> Void)? = nil,
         fromMapper: @escaping (CD) throws -> T?,
         toMapper: @escaping (T, NSManagedObjectContext) throws -> CD,
-        onResultError: ((Error) -> Bool)? = nil
+        onResultError: ((Error) -> CoreDataResultAction)? = nil
     ) {
         guard let entityName = CD.entity().name else {
             fatalError("Unable to find entity name for \(CD.self)")
@@ -193,16 +202,22 @@ private extension CoreDataRepository {
                         do {
                             return try self?.fromMapper($0)
                         } catch {
-                            if let onResultError = self?.onResultError {
+                            switch self?.onResultError?(error) {
+                            case .discard:
+                                self?.context.delete($0)
 
-                                // on false, discard results
-                                guard onResultError(error) else {
-                                    throw ResultError.mapping(error)
-                                }
+                            case .halt:
+                                throw ResultError.mapping(error)
+
+                            default:
+                                break
                             }
                             return nil
                         }
                     }
+
+                    try self?.context.save()
+
                     let result = EntitiesResult(entities, isFiltering: controller.fetchRequest.predicate != nil)
                     self?.entitiesSubject.send(result)
                 } catch {
