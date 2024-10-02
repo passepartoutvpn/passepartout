@@ -1,8 +1,8 @@
 //
-//  EditableModule+Previews.swift
+//  View+Mock.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/19/24.
+//  Created by Davide De Rosa on 10/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,25 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
 import SwiftUI
 
-extension EditableModule where Self: ModuleViewProviding {
-
-    @MainActor
-    func preview(title: String = "") -> some View {
-        NavigationStack {
-            moduleView(with: ProfileEditor(modules: [self]))
-                .navigationTitle(title)
-        }
-        .withMockEnvironment()
-    }
-
-    @MainActor
-    func preview<C: View>(with content: (ProfileEditor, Self) -> C) -> some View {
-        NavigationStack {
-            content(ProfileEditor(modules: [self]), self)
-        }
-        .withMockEnvironment()
+@MainActor
+extension View {
+    func withMockEnvironment() -> some View {
+        environmentObject(Theme())
+            .environmentObject(IAPManager.mock)
+            .environmentObject(ConnectionObserver.mock)
     }
 }

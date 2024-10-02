@@ -148,6 +148,5 @@ private extension ProfileGridView {
         onEdit: { _ in }
     )
     .themeWindow(width: 600, height: 300)
-    .environmentObject(Theme())
-    .environmentObject(ConnectionObserver.mock)
+    .withMockEnvironment()
 }

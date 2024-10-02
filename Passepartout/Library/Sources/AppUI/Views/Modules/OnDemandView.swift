@@ -65,7 +65,7 @@ private struct OnDemandView: View {
     var body: some View {
         Group {
             enabledSection
-            restrictedSection
+            restrictedArea
         }
         .asModuleView(with: editor, draft: draft)
         .modifier(PaywallModifier(reason: $paywallReason))
@@ -86,11 +86,11 @@ private extension OnDemandView {
     }
 
     @ViewBuilder
-    var restrictedSection: some View {
+    var restrictedArea: some View {
         switch iapManager.paywallReason(forFeature: .onDemand) {
-        case .purchase(let feature):
+        case .purchase(let appFeature):
             Button(Strings.Modules.OnDemand.purchase) {
-                paywallReason = .purchase(feature)
+                paywallReason = .purchase(appFeature)
             }
 
         case .restricted:

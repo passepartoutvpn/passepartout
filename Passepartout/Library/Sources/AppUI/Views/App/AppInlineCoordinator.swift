@@ -161,6 +161,5 @@ private extension AppInlineCoordinator {
         tunnel: .mock,
         registry: Registry()
     )
-    .environmentObject(Theme())
-    .environmentObject(ConnectionObserver.mock)
+    .withMockEnvironment()
 }

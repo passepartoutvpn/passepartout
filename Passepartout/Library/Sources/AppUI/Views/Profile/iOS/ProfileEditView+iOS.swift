@@ -170,7 +170,7 @@ private extension ProfileEditView {
             path: .constant(NavigationPath())
         )
     }
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }
 
 #endif

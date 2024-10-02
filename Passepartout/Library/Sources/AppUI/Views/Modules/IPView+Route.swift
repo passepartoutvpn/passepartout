@@ -136,5 +136,5 @@ private extension IPView.RouteView {
     }
 
     return Preview()
-        .environmentObject(Theme())
+        .withMockEnvironment()
 }

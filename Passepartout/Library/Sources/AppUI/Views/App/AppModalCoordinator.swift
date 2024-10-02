@@ -149,6 +149,5 @@ extension AppModalCoordinator {
         tunnel: .mock,
         registry: Registry()
     )
-    .environmentObject(Theme())
-    .environmentObject(ConnectionObserver.mock)
+    .withMockEnvironment()
 }

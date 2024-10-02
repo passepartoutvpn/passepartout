@@ -382,6 +382,10 @@ public enum Strings {
           }
         }
       }
+      public enum Purchase {
+        /// Log in interactively
+        public static let interactive = Strings.tr("Localizable", "modules.openvpn.purchase.interactive", fallback: "Log in interactively")
+      }
     }
     public enum Wireguard {
       /// Allowed IPs

@@ -56,5 +56,5 @@ struct NameSection: View {
         )
     }
     .themeForm()
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }

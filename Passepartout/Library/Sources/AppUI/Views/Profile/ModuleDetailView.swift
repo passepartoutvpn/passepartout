@@ -64,5 +64,5 @@ private extension ModuleDetailView {
         moduleId: Profile.mock.modules.first?.id,
         moduleViewFactory: DefaultModuleViewFactory()
     )
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }

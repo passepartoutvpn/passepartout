@@ -145,5 +145,5 @@ private extension ProfileCoordinator {
         path: .constant(NavigationPath()),
         onDismiss: {}
     )
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }

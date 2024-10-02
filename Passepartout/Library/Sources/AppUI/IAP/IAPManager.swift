@@ -35,6 +35,8 @@ public final class IAPManager: ObservableObject {
 
     private let receiptReader: any AppReceiptReader
 
+    private let unrestrictedFeatures: Set<AppFeature>
+
     private let productsAtBuild: BuildProducts<AppProduct>?
 
     private(set) var userLevel: AppUserLevel
@@ -48,10 +50,12 @@ public final class IAPManager: ObservableObject {
     public init(
         customUserLevel: AppUserLevel? = nil,
         receiptReader: any AppReceiptReader,
+        unrestrictedFeatures: Set<AppFeature> = [],
         productsAtBuild: BuildProducts<AppProduct>? = nil
     ) {
         self.customUserLevel = customUserLevel
         self.receiptReader = receiptReader
+        self.unrestrictedFeatures = unrestrictedFeatures
         self.productsAtBuild = productsAtBuild
         userLevel = .undefined
         purchasedProducts = []
@@ -104,6 +108,10 @@ public final class IAPManager: ObservableObject {
             pp_log(.app, .error, "Could not parse App Store receipt!")
 
             eligibleFeatures = Set(userLevel.features)
+        }
+
+        unrestrictedFeatures.forEach {
+            eligibleFeatures.insert($0)
         }
 
         pp_log(.app, .notice, "Purchased products: \(purchasedProducts.map(\.rawValue))")

@@ -137,6 +137,5 @@ private extension ProfileListView {
         errorHandler: .default(),
         onEdit: { _ in }
     )
-    .environmentObject(Theme())
-    .environmentObject(ConnectionObserver.mock)
+    .withMockEnvironment()
 }

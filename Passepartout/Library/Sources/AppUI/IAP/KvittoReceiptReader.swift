@@ -47,7 +47,7 @@ public final class KvittoReceiptReader: AppReceiptReader {
                 guard let receipt else {
                     let releaseUrl = url.deletingLastPathComponent().appendingPathComponent("receipt")
                     guard releaseUrl != url else {
-#if !targetEnvironment(simulator)
+#if !os(macOS) && !targetEnvironment(simulator)
                         assertionFailure("How can release URL be equal to sandbox URL in TestFlight?")
 #endif
                         return nil

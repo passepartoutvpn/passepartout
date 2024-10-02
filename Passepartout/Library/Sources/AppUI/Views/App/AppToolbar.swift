@@ -118,5 +118,5 @@ private extension AppToolbar {
             }
             .frame(width: 600, height: 400)
     }
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }

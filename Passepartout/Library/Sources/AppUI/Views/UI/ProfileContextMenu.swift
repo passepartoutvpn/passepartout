@@ -125,5 +125,5 @@ private extension ProfileContextMenu {
             )
         }
     }
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }

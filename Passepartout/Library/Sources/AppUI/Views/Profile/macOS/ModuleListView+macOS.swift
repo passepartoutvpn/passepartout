@@ -141,7 +141,7 @@ private extension ModuleListView {
         selectedModuleId: .constant(nil),
         malformedModuleIds: .constant([])
     )
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }
 
 #endif

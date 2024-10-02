@@ -179,6 +179,7 @@
 "modules.on_demand.ethernet" = "Ethernet";
 "modules.on_demand.ssid.add" = "Add SSID";
 
+"modules.openvpn.purchase.interactive" = "Log in interactively";
 "modules.openvpn.pull" = "Pull";
 "modules.openvpn.redirect_gateway" = "Redirect gateway";
 "modules.openvpn.credentials" = "Credentials";

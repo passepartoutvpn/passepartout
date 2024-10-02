@@ -42,5 +42,5 @@ struct LogoView: View {
 
 #Preview {
     LogoView()
-        .environmentObject(Theme())
+        .withMockEnvironment()
 }

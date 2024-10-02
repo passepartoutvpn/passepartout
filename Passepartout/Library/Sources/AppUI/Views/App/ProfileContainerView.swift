@@ -153,7 +153,6 @@ private struct PreviewView: View {
                 onEdit: { _ in }
             )
         }
-        .environmentObject(Theme())
-        .environmentObject(ConnectionObserver.mock)
+        .withMockEnvironment()
     }
 }
