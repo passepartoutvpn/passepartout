@@ -57,7 +57,7 @@ extension AppData {
             cdProfile.lastUpdate = Date()
             return cdProfile
         } onResultError: {
-            onResultError?($0) ?? .discard
+            onResultError?($0) ?? .ignore
         }
 
         return repository

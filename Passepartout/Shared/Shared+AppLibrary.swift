@@ -50,7 +50,7 @@ extension ProfileManager {
             context: store.context
         ) { error in
             pp_log(.app, .error, "Unable to decode result: \(error)")
-            return .discard
+            return .ignore
         }
 
         return ProfileManager(repository: repository)
