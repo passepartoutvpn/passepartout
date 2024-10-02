@@ -94,7 +94,7 @@ private extension OpenVPNView.CredentialsView {
             }
 
         case .restricted:
-            // FIXME: restore EmptyView() on release!
+            // FIXME: #662, restore EmptyView() on release!
 //            EmptyView()
             if !isAuthenticating {
                 interactiveSection
