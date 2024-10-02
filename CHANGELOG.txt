@@ -1,1 +1,2 @@
-* 635708695 Retain last used profile beyond disconnection
+* 3ab80cd07 Fix incorrect VPN status in some cases (#661)
+* 087f177bd Omit storage section in release
