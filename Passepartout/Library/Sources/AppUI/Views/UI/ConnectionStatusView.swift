@@ -78,8 +78,7 @@ private extension ConnectionStatusView {
             try? await Tunnel.mock.connect(with: .mock, processor: IAPManager.mock)
         }
         .frame(width: 100, height: 100)
-        .environmentObject(Theme())
-        .environmentObject(ConnectionObserver.mock)
+        .withMockEnvironment()
 }
 
 #Preview("On-Demand") {
@@ -98,6 +97,5 @@ private extension ConnectionStatusView {
             try? await Tunnel.mock.connect(with: profile, processor: IAPManager.mock)
         }
         .frame(width: 100, height: 100)
-        .environmentObject(Theme())
-        .environmentObject(ConnectionObserver.mock)
+        .withMockEnvironment()
 }

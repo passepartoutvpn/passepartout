@@ -97,5 +97,5 @@ extension AboutRouterView {
     AboutRouterView(
         tunnel: .mock
     )
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }

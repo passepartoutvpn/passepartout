@@ -52,7 +52,7 @@ struct ProfileGeneralView: View {
     ProfileGeneralView(
         profileEditor: ProfileEditor()
     )
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }
 
 #endif

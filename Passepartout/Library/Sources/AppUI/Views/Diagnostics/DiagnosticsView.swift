@@ -198,7 +198,5 @@ private extension DiagnosticsView {
             .init(date: Date().addingTimeInterval(-600), url: URL(string: "http://three.com")!)
         ]
     }
-    .environmentObject(Theme())
-    .environmentObject(ConnectionObserver.mock)
-    .environmentObject(IAPManager.mock)
+    .withMockEnvironment()
 }

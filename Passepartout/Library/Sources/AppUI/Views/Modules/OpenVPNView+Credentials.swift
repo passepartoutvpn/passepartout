@@ -137,6 +137,6 @@ private extension OpenVPNView.CredentialsView {
             isInteractive: $isInteractive,
             credentials: $credentials
         )
-        .environmentObject(Theme())
+        .withMockEnvironment()
     }
 }

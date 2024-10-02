@@ -121,7 +121,7 @@ private extension ProfileSplitView {
         profileEditor: ProfileEditor(profile: .newProfile()),
         moduleViewFactory: DefaultModuleViewFactory()
     )
-    .environmentObject(Theme())
+    .withMockEnvironment()
 }
 
 #endif

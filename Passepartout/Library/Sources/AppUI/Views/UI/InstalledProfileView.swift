@@ -195,8 +195,7 @@ private struct CardModifier: ViewModifier {
         }
     }
     .themeForm()
-    .environmentObject(Theme())
-    .environmentObject(ConnectionObserver.mock)
+    .withMockEnvironment()
 }
 
 #Preview("Grid") {
@@ -209,8 +208,7 @@ private struct CardModifier: ViewModifier {
         }
         .padding()
     }
-    .environmentObject(Theme())
-    .environmentObject(ConnectionObserver.mock)
+    .withMockEnvironment()
 }
 
 private struct HeaderView: View {
