@@ -71,7 +71,8 @@ extension Tunnel {
     static let shared = Tunnel(
         strategy: NETunnelStrategy(
             bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            encoder: .shared
+            encoder: .shared,
+            environment: .shared
         )
     )
 }
