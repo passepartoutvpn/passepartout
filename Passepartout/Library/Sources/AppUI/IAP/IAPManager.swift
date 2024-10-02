@@ -35,6 +35,8 @@ public final class IAPManager: ObservableObject {
 
     private let receiptReader: any AppReceiptReader
 
+    private let unrestrictedFeatures: Set<AppFeature>
+
     private let productsAtBuild: BuildProducts<AppProduct>?
 
     private(set) var userLevel: AppUserLevel
@@ -48,10 +50,12 @@ public final class IAPManager: ObservableObject {
     public init(
         customUserLevel: AppUserLevel? = nil,
         receiptReader: any AppReceiptReader,
+        unrestrictedFeatures: Set<AppFeature> = [],
         productsAtBuild: BuildProducts<AppProduct>? = nil
     ) {
         self.customUserLevel = customUserLevel
         self.receiptReader = receiptReader
+        self.unrestrictedFeatures = unrestrictedFeatures
         self.productsAtBuild = productsAtBuild
         userLevel = .undefined
         purchasedProducts = []
@@ -162,7 +166,10 @@ extension IAPManager {
         if isEligible(for: feature) {
             return nil
         }
-        return isRestricted ? .restricted : .purchase(feature)
+        if isRestricted {
+            return unrestrictedFeatures.contains(feature) ? nil : .restricted
+        }
+        return .purchase(feature)
     }
 
     public func isPayingUser() -> Bool {
