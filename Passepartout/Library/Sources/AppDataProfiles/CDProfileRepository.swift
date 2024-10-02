@@ -35,7 +35,7 @@ extension AppData {
         registry: Registry,
         coder: ProfileCoder,
         context: NSManagedObjectContext,
-        onResultError: ((Error) -> Bool)?
+        onResultError: ((Error) -> CoreDataResultAction)?
     ) -> any ProfileRepository {
         let repository = CoreDataRepository<CDProfile, Profile>(context: context) {
             $0.sortDescriptors = [
@@ -57,7 +57,7 @@ extension AppData {
             cdProfile.lastUpdate = Date()
             return cdProfile
         } onResultError: {
-            onResultError?($0) ?? true
+            onResultError?($0) ?? .discard
         }
 
         return repository
