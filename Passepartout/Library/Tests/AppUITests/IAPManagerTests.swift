@@ -267,6 +267,20 @@ extension IAPManagerTests {
         XCTAssertFalse(sut.isEligible(for: AppFeature.allCases))
     }
 
+    func test_givenBetaApp_thenIsEligibleForUnrestrictedFeature() async {
+        let reader = MockReceiptReader()
+        let sut = IAPManager(customUserLevel: .beta, receiptReader: reader, unrestrictedFeatures: [.onDemand])
+
+        await sut.reloadReceipt()
+        AppFeature.allCases.forEach {
+            if $0 == .onDemand {
+                XCTAssertTrue(sut.isEligible(for: $0))
+            } else {
+                XCTAssertFalse(sut.isEligible(for: $0))
+            }
+        }
+    }
+
     func test_givenFullApp_thenIsFullVersion() async {
         let reader = MockReceiptReader()
         let sut = IAPManager(customUserLevel: .fullVersion, receiptReader: reader)
