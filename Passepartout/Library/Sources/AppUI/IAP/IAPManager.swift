@@ -110,6 +110,10 @@ public final class IAPManager: ObservableObject {
             eligibleFeatures = Set(userLevel.features)
         }
 
+        unrestrictedFeatures.forEach {
+            eligibleFeatures.insert($0)
+        }
+
         pp_log(.app, .notice, "Purchased products: \(purchasedProducts.map(\.rawValue))")
         pp_log(.app, .notice, "Eligible features: \(eligibleFeatures)")
         objectWillChange.send()
@@ -166,10 +170,7 @@ extension IAPManager {
         if isEligible(for: feature) {
             return nil
         }
-        if isRestricted {
-            return unrestrictedFeatures.contains(feature) ? nil : .restricted
-        }
-        return .purchase(feature)
+        return isRestricted ? .restricted : .purchase(feature)
     }
 
     public func isPayingUser() -> Bool {
