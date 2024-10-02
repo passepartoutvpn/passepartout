@@ -29,6 +29,9 @@ import SwiftUI
 extension OpenVPNView {
     struct CredentialsView: View {
 
+        @EnvironmentObject
+        private var iapManager: IAPManager
+
         @Binding
         var isInteractive: Bool
 
@@ -43,11 +46,12 @@ extension OpenVPNView {
         @State
         private var otp = ""
 
+        @State
+        private var paywallReason: PaywallReason?
+
         var body: some View {
             Form {
-                if !isAuthenticating {
-                    interactiveSection
-                }
+                restrictedArea
                 inputSection
             }
             .themeAnimation(on: isInteractive, category: .modules)
@@ -58,7 +62,7 @@ extension OpenVPNView {
                 builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
             }
             .onChange(of: builder) {
-                if isAuthenticating {
+                if isEligibleForInteractiveLogin, isAuthenticating {
                     credentials = $0.buildForAuthentication(otp: otp)
                 } else {
                     credentials = $0.build()
@@ -67,13 +71,40 @@ extension OpenVPNView {
             .onChange(of: otp) {
                 credentials = builder.buildForAuthentication(otp: $0)
             }
+            .modifier(PaywallModifier(reason: $paywallReason))
         }
     }
 }
 
 private extension OpenVPNView.CredentialsView {
+    var isEligibleForInteractiveLogin: Bool {
+        iapManager.isEligible(for: .interactiveLogin)
+    }
+
     var otpMethods: [OpenVPN.Credentials.OTPMethod] {
         [.none, .append, .encode]
+    }
+
+    @ViewBuilder
+    var restrictedArea: some View {
+        switch iapManager.paywallReason(forFeature: .interactiveLogin) {
+        case .purchase(let appFeature):
+            Button(Strings.Modules.Openvpn.Purchase.interactive) {
+                paywallReason = .purchase(appFeature)
+            }
+
+        case .restricted:
+            // FIXME: restore EmptyView() on release!
+//            EmptyView()
+            if !isAuthenticating {
+                interactiveSection
+            }
+
+        default:
+            if !isAuthenticating {
+                interactiveSection
+            }
+        }
     }
 
     var interactiveSection: some View {
@@ -108,7 +139,7 @@ private extension OpenVPNView.CredentialsView {
             ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
                 .textContentType(.password)
 
-            if isAuthenticating && builder.otpMethod != .none {
+            if isEligibleForInteractiveLogin, isAuthenticating && builder.otpMethod != .none {
                 ThemeSecureField(title: Strings.Unlocalized.otp, text: $otp, placeholder: Strings.Placeholders.secret)
                     .textContentType(.oneTimeCode)
             }

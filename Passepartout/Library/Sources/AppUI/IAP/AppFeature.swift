@@ -28,6 +28,8 @@ import Foundation
 public enum AppFeature: String, CaseIterable {
     case appleTV
 
+    case interactiveLogin
+
     case networkSettings
 
     case onDemand
@@ -37,6 +39,7 @@ public enum AppFeature: String, CaseIterable {
     case siri
 
     public static let allCases: [AppFeature] = [
+        .interactiveLogin,
         .networkSettings,
         .onDemand,
         .providers,
