@@ -43,8 +43,6 @@ extension IAPManager {
     static let shared = IAPManager(
         customUserLevel: customUserLevel,
         receiptReader: KvittoReceiptReader(),
-        // FIXME: #662, omit unrestrictedFeatures on release!
-        unrestrictedFeatures: [.interactiveLogin],
         productsAtBuild: productsAtBuild
     )
 
