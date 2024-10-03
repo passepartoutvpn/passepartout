@@ -38,7 +38,7 @@ public struct SettingsView: View {
 
     public var body: some View {
         Form {
-            SettingsSection(profileManager: profileManager)
+            SettingsSectionGroup(profileManager: profileManager)
         }
         .themeForm()
         .navigationTitle(Strings.Global.settings)

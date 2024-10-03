@@ -1,5 +1,5 @@
 //
-//  SettingsSection.swift
+//  SettingsSectionGroup.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/3/24.
@@ -29,7 +29,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct SettingsSection: View {
+struct SettingsSectionGroup: View {
     let profileManager: ProfileManager
 
     @AppStorage(AppPreference.confirmsQuit.key)
@@ -61,7 +61,7 @@ struct SettingsSection: View {
     }
 }
 
-private extension SettingsSection {
+private extension SettingsSectionGroup {
     var confirmsQuitToggle: some View {
         Toggle(Strings.Views.Settings.Rows.confirmQuit, isOn: $confirmsQuit)
     }
