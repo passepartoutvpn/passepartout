@@ -15,10 +15,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "AppLibrary",
-            targets: [
-                "AppLibrary",
-                "LegacyV2"
-            ]
+            targets: ["AppLibrary"]
         ),
         .library(
             name: "AppUI",
@@ -68,6 +65,7 @@ let package = Package(
                 "AppData",
                 "CommonLibrary",
                 "Kvitto",
+                "LegacyV2",
                 "UtilsLibrary"
             ]
         ),
