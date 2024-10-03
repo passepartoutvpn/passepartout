@@ -36,7 +36,7 @@ public final class ProfileManager: ObservableObject {
 
         case remove([Profile.ID])
 
-        case update([Profile])
+//        case remoteUpdate([Profile])
     }
 
     public var beforeSave: ((Profile) async throws -> Void)?
@@ -228,7 +228,7 @@ extension ProfileManager {
             .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.notifyUpdatedEntities($0)
+                self?.notifyLocalEntities($0)
             }
             .store(in: &subscriptions)
 
@@ -250,25 +250,32 @@ extension ProfileManager {
 }
 
 private extension ProfileManager {
-    func notifyUpdatedEntities(_ result: EntitiesResult<Profile>) {
-        let oldProfiles = profiles.reduce(into: [:]) {
+    func notifyLocalEntities(_ result: EntitiesResult<Profile>) {
+        allProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
-        let newProfiles = result.entities
-        let updatedProfiles = newProfiles.filter {
-            $0 != oldProfiles[$0.id] // includes new profiles
-        }
-
-        allProfiles = newProfiles.reduce(into: [:]) {
-            $0[$1.id] = $1
-        }
-        didChange.send(.update(updatedProfiles))
     }
 
     func notifyRemoteEntities(_ result: EntitiesResult<Profile>) {
         allRemoteProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
+
+        // pull remote updates into local profiles
+        var newAllProfiles = allProfiles
+        allRemoteProfiles.forEach {
+            newAllProfiles[$0.key] = $0.value
+        }
+        allProfiles = newAllProfiles
+
+//        let oldProfiles = profiles.reduce(into: [:]) {
+//            $0[$1.id] = $1
+//        }
+//        let newProfiles = result.entities
+//        let updatedProfiles = newProfiles.filter {
+//            $0 != oldProfiles[$0.id] // includes new profiles
+//        }
+//        didChange.send(.remoteUpdate(updatedProfiles))
     }
 
     func performSearch(_ search: String) {
