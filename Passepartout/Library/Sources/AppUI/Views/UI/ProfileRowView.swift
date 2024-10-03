@@ -38,7 +38,8 @@ struct ProfileRowView: View, TunnelContextProviding {
 
     let style: ProfileCardView.Style
 
-    let profileManager: ProfileManager
+    @ObservedObject
+    var profileManager: ProfileManager
 
     @ObservedObject
     var tunnel: Tunnel
@@ -63,12 +64,19 @@ struct ProfileRowView: View, TunnelContextProviding {
             }
             cardView
             Spacer()
+            if isShared {
+                sharingView
+            }
             ProfileInfoButton(header: header, onEdit: onEdit)
         }
     }
 }
 
 private extension ProfileRowView {
+    var isShared: Bool {
+        profileManager.isRemotelyShared(profileWithId: header.id)
+    }
+
     var markerView: some View {
         ThemeImage(header.id == nextProfileId ? .pending : statusImage)
             .opacity(header.id == nextProfileId || header.id == tunnel.currentProfile?.id ? 1.0 : 0.0)
@@ -85,12 +93,16 @@ private extension ProfileRowView {
         ) { _ in
             ProfileCardView(
                 style: style,
-                header: header,
-                profileManager: profileManager
+                header: header
             )
             .frame(maxWidth: .infinity)
             .contentShape(.rect)
         }
+    }
+
+    var sharingView: some View {
+        ThemeImage(.cloud)
+            .foregroundStyle(.secondary)
     }
 
     var statusImage: Theme.ImageName {

@@ -38,43 +38,24 @@ struct ProfileCardView: View {
 
     let header: ProfileHeader
 
-    @ObservedObject
-    var profileManager: ProfileManager
-
     var body: some View {
         switch style {
         case .compact:
-            HStack {
-                Text(header.name)
-                    .themeTruncating()
-                if isShared {
-                    ThemeImage(.cloud)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            Text(header.name)
+                .themeTruncating()
+                .frame(maxWidth: .infinity, alignment: .leading)
 
         case .full:
             VStack(alignment: .leading) {
-                HStack {
-                    Text(header.name)
-                        .font(.headline)
-                        .themeTruncating()
-                    if isShared {
-                        ThemeImage(.cloud)
-                    }
-                }
+                Text(header.name)
+                    .font(.headline)
+                    .themeTruncating()
                 Text(Strings.Views.Profiles.Rows.modules(header.modules.count))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-    }
-}
-
-private extension ProfileCardView {
-    var isShared: Bool {
-        profileManager.isRemotelyShared(profileWithId: header.id)
     }
 }
 
@@ -85,15 +66,13 @@ private extension ProfileCardView {
         Section {
             ProfileCardView(
                 style: .compact,
-                header: Profile.mock.header(),
-                profileManager: .mock
+                header: Profile.mock.header()
             )
         }
         Section {
             ProfileCardView(
                 style: .full,
-                header: Profile.mock.header(),
-                profileManager: .mock
+                header: Profile.mock.header()
             )
         }
     }
