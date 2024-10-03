@@ -1,5 +1,5 @@
 //
-//  CDProfileRepository.swift
+//  CDProfileRepositoryV3.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/11/24.
@@ -30,14 +30,15 @@ import PassepartoutKit
 import UtilsLibrary
 
 extension AppData {
+
     // TODO: #656, make non-static
-    public static func cdProfileRepository(
+    public static func cdProfileRepositoryV3(
         registry: Registry,
         coder: ProfileCoder,
         context: NSManagedObjectContext,
         onResultError: ((Error) -> CoreDataResultAction)?
     ) -> any ProfileRepository {
-        let repository = CoreDataRepository<CDProfile, Profile>(context: context) {
+        let repository = CoreDataRepository<CDProfileV3, Profile>(context: context) {
             $0.sortDescriptors = [
                 .init(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare)),
                 .init(key: "lastUpdate", ascending: true)
@@ -50,7 +51,7 @@ extension AppData {
         } toMapper: {
             let encoded = try registry.encodedProfile($0, with: coder)
 
-            let cdProfile = CDProfile(context: $1)
+            let cdProfile = CDProfileV3(context: $1)
             cdProfile.uuid = $0.id
             cdProfile.name = $0.name
             cdProfile.encoded = encoded
@@ -64,7 +65,7 @@ extension AppData {
     }
 }
 
-extension CDProfile: CoreDataUniqueEntity {
+extension CDProfileV3: CoreDataUniqueEntity {
 }
 
 extension CoreDataRepository: ProfileRepository where T == Profile {

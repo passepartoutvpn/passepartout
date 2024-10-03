@@ -37,6 +37,9 @@ final class ProfileEditor: ObservableObject {
     var name: String
 
     @Published
+    var isShared: Bool
+
+    @Published
     private(set) var modules: [any EditableModule]
 
     @Published
@@ -58,6 +61,7 @@ final class ProfileEditor: ObservableObject {
         activeModulesIds = Set(modules.map(\.id))
         moduleNames = [:]
         removedModules = [:]
+        isShared = false
     }
 
     init(profile: Profile) {
@@ -67,15 +71,17 @@ final class ProfileEditor: ObservableObject {
         activeModulesIds = profile.activeModulesIds
         moduleNames = profile.moduleNames
         removedModules = [:]
+        isShared = false
     }
 
-    func editProfile(_ profile: Profile) {
+    func editProfile(_ profile: Profile, isShared: Bool) {
         id = profile.id
         name = profile.name
         modules = profile.modulesBuilders
         activeModulesIds = profile.activeModulesIds
         moduleNames = profile.moduleNames
         removedModules = [:]
+        self.isShared = isShared
     }
 }
 
@@ -267,6 +273,7 @@ extension ProfileEditor {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile)
+            try await profileManager.setRemotelyShared(isShared, profileWithId: newProfile.id)
         } catch {
             pp_log(.app, .fault, "Unable to save edited profile: \(error)")
             throw error

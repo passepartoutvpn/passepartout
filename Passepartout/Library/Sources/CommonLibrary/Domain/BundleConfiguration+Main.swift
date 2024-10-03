@@ -31,6 +31,8 @@ extension BundleConfiguration {
     public enum BundleKey: String {
         case appStoreId
 
+        case cloudKitId
+
         case customUserLevel
 
         case groupId
@@ -41,7 +43,15 @@ extension BundleConfiguration {
 
         case profilesContainerName
 
+        case remoteProfilesContainerName
+
         case tunnelId
+
+        // legacy v2
+
+        case legacyV2CloudKitId
+
+        case legacyV2ProfilesContainerName
     }
 
     public static var mainDisplayName: String {

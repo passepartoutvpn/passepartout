@@ -39,21 +39,35 @@ extension ProfileManager {
             logger: .default,
             containerName: BundleConfiguration.mainString(for: .profilesContainerName),
             model: model,
-            cloudKit: false,
             cloudKitIdentifier: nil,
             author: nil
         )
-
-        let repository = AppData.cdProfileRepository(
+        let repository = AppData.cdProfileRepositoryV3(
             registry: .shared,
             coder: CodableProfileCoder(),
             context: store.context
         ) { error in
-            pp_log(.app, .error, "Unable to decode result: \(error)")
+            pp_log(.app, .error, "Unable to decode local result: \(error)")
             return .ignore
         }
 
-        return ProfileManager(repository: repository)
+        let remoteStore = CoreDataPersistentStore(
+            logger: .default,
+            containerName: BundleConfiguration.mainString(for: .remoteProfilesContainerName),
+            model: model,
+            cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
+            author: nil
+        )
+        let remoteRepository = AppData.cdProfileRepositoryV3(
+            registry: .shared,
+            coder: CodableProfileCoder(),
+            context: remoteStore.context
+        ) { error in
+            pp_log(.app, .error, "Unable to decode remote result: \(error)")
+            return .ignore
+        }
+
+        return ProfileManager(repository: repository, remoteRepository: remoteRepository)
     }()
 }
 

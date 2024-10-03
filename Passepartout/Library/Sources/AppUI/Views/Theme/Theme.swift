@@ -80,6 +80,7 @@ public final class Theme: ObservableObject {
         switch $0 {
         case .add: return "plus"
         case .close: return "xmark"
+        case .cloud: return "cloud"
         case .contextDuplicate: return "plus.square.on.square"
         case .contextRemove: return "trash"
         case .copy: return "doc.on.doc"

@@ -83,9 +83,13 @@ private extension ProfileRowView {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler
         ) { _ in
-            ProfileCardView(style: style, header: header)
-                .frame(maxWidth: .infinity)
-                .contentShape(.rect)
+            ProfileCardView(
+                style: style,
+                header: header,
+                isShared: profileManager.isRemotelyShared(profileWithId: header.id)
+            )
+            .frame(maxWidth: .infinity)
+            .contentShape(.rect)
         }
     }
 

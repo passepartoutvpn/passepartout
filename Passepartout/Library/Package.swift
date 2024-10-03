@@ -25,13 +25,6 @@ let package = Package(
             ]
         ),
         .library(
-            name: "IntentsLibrary",
-            targets: [
-                "AppDataProfiles",
-                "AppLibrary"
-            ]
-        ),
-        .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
         )
@@ -72,6 +65,7 @@ let package = Package(
                 "AppData",
                 "CommonLibrary",
                 "Kvitto",
+                "LegacyV2",
                 "UtilsLibrary"
             ]
         ),
@@ -91,6 +85,15 @@ let package = Package(
             ],
             resources: [
                 .process("Resources")
+            ]
+        ),
+        .target(
+            name: "LegacyV2",
+            dependencies: [
+                .product(name: "PassepartoutKit", package: "passepartoutkit")
+            ],
+            resources: [
+                .process("Profiles.xcdatamodeld")
             ]
         ),
         .target(

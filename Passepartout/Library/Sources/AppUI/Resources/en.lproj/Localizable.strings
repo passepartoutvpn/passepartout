@@ -159,6 +159,10 @@
 
 // MARK: - Module views
 
+"modules.general.sections.storage.footer" = "Profiles are stored to iCloud encrypted.";
+"modules.general.storage.shared" = "Share on iCloud";
+"modules.general.storage.shared.purchase" = "Share on iCloud";
+
 "modules.dns.servers.add" = "Add address";
 "modules.dns.search_domains.add" = "Add domain";
 "modules.http_proxy.bypass_domains.add" = "Add bypass domain";

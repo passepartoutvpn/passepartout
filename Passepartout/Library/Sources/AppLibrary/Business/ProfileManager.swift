@@ -35,22 +35,28 @@ public final class ProfileManager: ObservableObject {
         case save(Profile)
 
         case remove([Profile.ID])
-
-        case update([Profile])
     }
 
     public var beforeSave: ((Profile) async throws -> Void)?
 
     public var afterRemove: (([Profile.ID]) async -> Void)?
 
-    public let didChange: PassthroughSubject<Event, Never>
+    private let repository: any ProfileRepository
+
+    private let remoteRepository: (any ProfileRepository)?
 
     @Published
     private var profiles: [Profile]
 
-    private var allProfileIds: Set<Profile.ID>
+    private var allProfiles: [Profile.ID: Profile] {
+        didSet {
+            reloadFilteredProfiles()
+        }
+    }
 
-    private let repository: any ProfileRepository
+    private var allRemoteProfiles: [Profile.ID: Profile]
+
+    public let didChange: PassthroughSubject<Event, Never>
 
     private let searchSubject: CurrentValueSubject<String, Never>
 
@@ -58,21 +64,27 @@ public final class ProfileManager: ObservableObject {
 
     // for testing/previews
     public init(profiles: [Profile]) {
-        didChange = PassthroughSubject()
-        self.profiles = profiles.sorted {
-            $0.name.lowercased() < $1.name.lowercased()
-        }
-        allProfileIds = []
         repository = MockProfileRepository(profiles: profiles)
+        remoteRepository = nil
+        self.profiles = []
+        allProfiles = profiles.reduce(into: [:]) {
+            $0[$1.id] = $1
+        }
+        allRemoteProfiles = [:]
+
+        didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
         subscriptions = []
     }
 
-    public init(repository: any ProfileRepository) {
-        didChange = PassthroughSubject()
-        profiles = []
-        allProfileIds = []
+    public init(repository: any ProfileRepository, remoteRepository: (any ProfileRepository)?) {
         self.repository = repository
+        self.remoteRepository = remoteRepository
+        profiles = []
+        allProfiles = [:]
+        allRemoteProfiles = [:]
+
+        didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
         subscriptions = []
     }
@@ -109,6 +121,7 @@ extension ProfileManager {
         do {
             try await beforeSave?(profile)
             try await repository.saveEntities([profile])
+            allProfiles[profile.id] = profile
             didChange.send(.save(profile))
         } catch {
             pp_log(.app, .fault, "Unable to save profile \(profile.id): \(error)")
@@ -122,9 +135,13 @@ extension ProfileManager {
 
     public func remove(withIds profileIds: [Profile.ID]) async {
         do {
-            allProfileIds.subtract(profileIds)
+            var newAllProfiles = allProfiles
             try await repository.removeEntities(withIds: profileIds)
+            profileIds.forEach {
+                newAllProfiles.removeValue(forKey: $0)
+            }
             await afterRemove?(profileIds)
+            allProfiles = newAllProfiles
             didChange.send(.remove(profileIds))
         } catch {
             pp_log(.app, .fault, "Unable to remove profiles \(profileIds): \(error)")
@@ -132,7 +149,30 @@ extension ProfileManager {
     }
 
     public func exists(withId profileId: Profile.ID) -> Bool {
-        allProfileIds.contains(profileId)
+        allProfiles.keys.contains(profileId)
+    }
+}
+
+// MARK: - Remote
+
+extension ProfileManager {
+    public func isRemotelyShared(profileWithId profileId: Profile.ID) -> Bool {
+        allRemoteProfiles.keys.contains(profileId)
+    }
+
+    public func setRemotelyShared(_ shared: Bool, profileWithId profileId: Profile.ID) async throws {
+        guard let remoteRepository else {
+            pp_log(.app, .error, "Unable to share remotely when no remoteRepository is set")
+            return
+        }
+        guard let profile = allProfiles[profileId] else {
+            return
+        }
+        if shared {
+            try await remoteRepository.saveEntities([profile])
+        } else {
+            try await remoteRepository.removeEntities(withIds: [profileId])
+        }
     }
 }
 
@@ -183,9 +223,18 @@ extension ProfileManager {
     public func observeObjects(searchDebounce: Int = 200) {
         repository
             .entitiesPublisher
+            .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.notifyUpdatedEntities($0)
+                self?.notifyLocalEntities($0)
+            }
+            .store(in: &subscriptions)
+
+        remoteRepository?
+            .entitiesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.notifyRemoteEntities($0)
             }
             .store(in: &subscriptions)
 
@@ -199,29 +248,45 @@ extension ProfileManager {
 }
 
 private extension ProfileManager {
-    func notifyUpdatedEntities(_ result: EntitiesResult<Profile>) {
-        let oldProfiles = profiles.reduce(into: [:]) {
+    func notifyLocalEntities(_ result: EntitiesResult<Profile>) {
+        allProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
-        let newProfiles = result.entities
-        let updatedProfiles = newProfiles.filter {
-            $0 != oldProfiles[$0.id] // includes new profiles
+    }
+
+    func notifyRemoteEntities(_ result: EntitiesResult<Profile>) {
+        allRemoteProfiles = result.entities.reduce(into: [:]) {
+            $0[$1.id] = $1
         }
 
-        if !result.isFiltering {
-            allProfileIds = Set(newProfiles.map(\.id))
+        // pull remote updates into local profiles (best-effort)
+        for remoteProfile in allRemoteProfiles.values {
+            Task.detached { [weak self] in
+                do {
+                    pp_log(.app, .notice, "Import remote profile \(remoteProfile.id)...")
+                    try await self?.save(remoteProfile)
+                } catch {
+                    pp_log(.app, .error, "Unable to import remote profile: \(error)")
+                }
+            }
         }
-        profiles = newProfiles
-        didChange.send(.update(updatedProfiles))
     }
 
     func performSearch(_ search: String) {
-        Task {
-            guard !search.isEmpty else {
-                try await repository.resetFilter()
-                return
+        reloadFilteredProfiles(with: search)
+    }
+
+    func reloadFilteredProfiles(with search: String? = nil) {
+        profiles = allProfiles
+            .values
+            .filter {
+                if let search, !search.isEmpty {
+                    return $0.name.lowercased().contains(search.lowercased())
+                }
+                return true
             }
-            try await repository.filter(byName: search)
-        }
+            .sorted {
+                $0.name.lowercased() < $1.name.lowercased()
+            }
     }
 }

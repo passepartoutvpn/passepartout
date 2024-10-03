@@ -27,29 +27,58 @@ import Foundation
 import SwiftUI
 
 struct StorageSection: View {
-    let uuid: UUID
+
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
+    @ObservedObject
+    var profileEditor: ProfileEditor
+
+    @State
+    private var paywallReason: PaywallReason?
 
     var body: some View {
-#if DEBUG
         debugChanges()
-        return Section {
+        return Group {
+            sharingToggle
+#if DEBUG
             ThemeCopiableText(
                 title: Strings.Unlocalized.uuid,
-                value: uuid.uuidString
+                value: profileEditor.id.uuidString
             )
-        } header: {
-            Text(Strings.Global.storage)
-        }
-#else
-        EmptyView()
 #endif
+        }
+        .themeSection(
+            header: Strings.Global.storage,
+            footer: Strings.Modules.General.Sections.Storage.footer
+        )
+        .modifier(PaywallModifier(reason: $paywallReason))
+    }
+}
+
+private extension StorageSection {
+
+    @ViewBuilder
+    var sharingToggle: some View {
+        switch iapManager.paywallReason(forFeature: .sharing) {
+        case .purchase(let appFeature):
+            Button(Strings.Modules.General.Storage.Shared.purchase) {
+                paywallReason = .purchase(appFeature)
+            }
+
+        case .restricted:
+            EmptyView()
+
+        default:
+            Toggle(Strings.Modules.General.Storage.shared, isOn: $profileEditor.isShared)
+        }
     }
 }
 
 #Preview {
     Form {
         StorageSection(
-            uuid: ProfileEditor().id
+            profileEditor: ProfileEditor()
         )
     }
     .themeForm()

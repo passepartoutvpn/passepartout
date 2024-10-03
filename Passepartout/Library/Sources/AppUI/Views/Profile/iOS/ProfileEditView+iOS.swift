@@ -64,7 +64,7 @@ struct ProfileEditView: View, Routable {
                 Text(Strings.Views.Profile.ModuleList.Section.footer)
             }
             StorageSection(
-                uuid: profileEditor.id
+                profileEditor: profileEditor
             )
         }
         .toolbar(content: toolbarContent)

@@ -39,7 +39,7 @@ struct ProfileGeneralView: View {
                 placeholder: Strings.Placeholders.Profile.name
             )
             StorageSection(
-                uuid: profileEditor.id
+                profileEditor: profileEditor
             )
         }
         .themeForm()

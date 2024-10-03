@@ -29,6 +29,7 @@ extension Theme {
     public enum ImageName {
         case add
         case close
+        case cloud
         case contextDuplicate
         case contextRemove
         case copy
