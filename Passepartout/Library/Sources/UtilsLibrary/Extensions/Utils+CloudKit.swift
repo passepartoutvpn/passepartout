@@ -1,5 +1,5 @@
 //
-//  SettingsSection.swift
+//  Empty.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/3/24.
@@ -23,39 +23,15 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import SwiftUI
+import CloudKit
+import Foundation
 
-struct SettingsSection: View {
+extension Utils {
+    private static let cloudKitZone = CKRecordZone.ID(zoneName: "com.apple.coredata.cloudkit.zone")
 
-    @AppStorage(AppPreference.confirmsQuit.key)
-    private var confirmsQuit = true
-
-    @AppStorage(AppPreference.locksInBackground.key)
-    private var locksInBackground = false
-
-    var header: String?
-
-    var body: some View {
-        Section {
-#if os(macOS)
-            confirmsQuitToggle
-#endif
-#if os(iOS)
-            lockInBackgroundToggle
-#endif
-        } header: {
-            header.map(Text.init)
-        }
-    }
-}
-
-private extension SettingsSection {
-    var confirmsQuitToggle: some View {
-        Toggle(Strings.Views.Settings.Rows.confirmQuit, isOn: $confirmsQuit)
-    }
-
-    var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Settings.Rows.lockInBackground, isOn: $locksInBackground)
+    public static func eraseCloudKitStore(fromContainerWithId containerId: String) async throws {
+        let container = CKContainer(identifier: containerId)
+        let db = container.privateCloudDatabase
+        try await db.deleteRecordZone(withID: Self.cloudKitZone)
     }
 }

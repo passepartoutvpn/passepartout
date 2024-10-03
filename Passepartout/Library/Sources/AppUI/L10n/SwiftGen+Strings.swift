@@ -428,6 +428,12 @@ public enum Strings {
       public static let name = Strings.tr("Localizable", "placeholders.profile.name", fallback: "My profile")
     }
   }
+  public enum Theme {
+    public enum Confirmation {
+      /// Are you sure?
+      public static let message = Strings.tr("Localizable", "theme.confirmation.message", fallback: "Are you sure?")
+    }
+  }
   public enum Ui {
     public enum ConnectionStatus {
       ///  (on-demand)
@@ -579,11 +585,19 @@ public enum Strings {
       public enum Rows {
         /// Confirm quit
         public static let confirmQuit = Strings.tr("Localizable", "views.settings.rows.confirm_quit", fallback: "Confirm quit")
+        /// Erase iCloud store
+        public static let eraseIcloud = Strings.tr("Localizable", "views.settings.rows.erase_icloud", fallback: "Erase iCloud store")
         /// Lock in background
         public static let lockInBackground = Strings.tr("Localizable", "views.settings.rows.lock_in_background", fallback: "Lock in background")
         public enum LockInBackground {
           /// Passepartout is locked
           public static let message = Strings.tr("Localizable", "views.settings.rows.lock_in_background.message", fallback: "Passepartout is locked")
+        }
+      }
+      public enum Sections {
+        public enum Icloud {
+          /// To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
+          public static let footer = Strings.tr("Localizable", "views.settings.sections.icloud.footer", fallback: "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
         }
       }
     }

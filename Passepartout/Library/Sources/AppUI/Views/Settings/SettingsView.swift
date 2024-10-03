@@ -23,19 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import SwiftUI
 
 public struct SettingsView: View {
+    let profileManager: ProfileManager
 
     @State
     private var path = NavigationPath()
 
-    public init() {
+    public init(profileManager: ProfileManager) {
+        self.profileManager = profileManager
     }
 
     public var body: some View {
         Form {
-            SettingsSection()
+            SettingsSectionGroup(profileManager: profileManager)
         }
         .themeForm()
         .navigationTitle(Strings.Global.settings)

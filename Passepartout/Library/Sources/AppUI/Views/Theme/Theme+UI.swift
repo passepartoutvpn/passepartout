@@ -102,6 +102,26 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
     }
 }
 
+struct ThemeConfirmationModifier: ViewModifier {
+
+    @Binding
+    var isPresented: Bool
+
+    let title: String
+
+    let action: () -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .confirmationDialog(title, isPresented: $isPresented) {
+                Button(Strings.Global.ok, action: action)
+                Text(Strings.Global.cancel)
+            } message: {
+                Text(Strings.Theme.Confirmation.message)
+            }
+    }
+}
+
 struct ThemeNavigationStackModifier: ViewModifier {
 
     @Environment(\.dismiss)

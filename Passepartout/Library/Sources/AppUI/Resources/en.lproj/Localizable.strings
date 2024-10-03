@@ -102,6 +102,10 @@
 "placeholders.username" = "username";
 "placeholders.secret" = "secret";
 
+// MARK: - Theme
+
+"theme.confirmation.message" = "Are you sure?";
+
 // MARK: - Views
 
 "views.profiles.rows.not_installed" = "Select a profile";
@@ -121,9 +125,11 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 
+"views.settings.sections.icloud.footer" = "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 "views.settings.rows.confirm_quit" = "Confirm quit";
 "views.settings.rows.lock_in_background" = "Lock in background";
 "views.settings.rows.lock_in_background.message" = "Passepartout is locked";
+"views.settings.rows.erase_icloud" = "Erase iCloud store";
 
 "views.about.title" = "About";
 "views.about.sections.resources" = "Resources";

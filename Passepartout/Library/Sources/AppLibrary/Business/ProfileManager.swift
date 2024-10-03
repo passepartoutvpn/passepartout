@@ -174,6 +174,10 @@ extension ProfileManager {
             try await remoteRepository.removeEntities(withIds: [profileId])
         }
     }
+
+    public func eraseRemoteProfiles() async throws {
+        try await remoteRepository?.removeEntities(withIds: Array(allRemoteProfiles.keys))
+    }
 }
 
 // MARK: - Shortcuts
@@ -258,6 +262,7 @@ private extension ProfileManager {
         allRemoteProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
+        objectWillChange.send()
 
         // pull remote updates into local profiles (best-effort)
         let profilesToImport = allRemoteProfiles.values

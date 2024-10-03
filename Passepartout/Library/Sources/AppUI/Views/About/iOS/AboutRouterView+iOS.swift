@@ -32,6 +32,7 @@ extension AboutRouterView {
     var body: some View {
         NavigationStack {
             AboutView(
+                profileManager: profileManager,
                 navigationRoute: $navigationRoute
             )
             .toolbar {

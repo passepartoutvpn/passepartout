@@ -55,8 +55,8 @@ struct PassepartoutApp: App {
             .defaultSize(width: 600.0, height: 400.0)
 
         Settings {
-            SettingsView()
-                .frame(minWidth: 300, minHeight: 100)
+            SettingsView(profileManager: context.profileManager)
+                .frame(minWidth: 300, minHeight: 200)
         }
 #endif
     }
