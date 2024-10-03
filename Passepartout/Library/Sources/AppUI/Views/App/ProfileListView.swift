@@ -102,7 +102,7 @@ private extension ProfileListView {
 
     func profileView(for header: ProfileHeader) -> some View {
         ProfileRowView(
-            style: .compact,
+            style: .full,
             profileManager: profileManager,
             tunnel: tunnel,
             header: header,
