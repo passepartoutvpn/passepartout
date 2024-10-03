@@ -43,14 +43,18 @@ public final class ProfileManager: ObservableObject {
 
     public var afterRemove: (([Profile.ID]) async -> Void)?
 
-    public let didChange: PassthroughSubject<Event, Never>
+    private let repository: any ProfileRepository
 
     @Published
     private var profiles: [Profile]
 
-    private var allProfileIds: Set<Profile.ID>
+    private var allProfiles: [Profile.ID: Profile] {
+        didSet {
+            reloadFilteredProfiles()
+        }
+    }
 
-    private let repository: any ProfileRepository
+    public let didChange: PassthroughSubject<Event, Never>
 
     private let searchSubject: CurrentValueSubject<String, Never>
 
@@ -58,21 +62,23 @@ public final class ProfileManager: ObservableObject {
 
     // for testing/previews
     public init(profiles: [Profile]) {
-        didChange = PassthroughSubject()
-        self.profiles = profiles.sorted {
-            $0.name.lowercased() < $1.name.lowercased()
-        }
-        allProfileIds = []
         repository = MockProfileRepository(profiles: profiles)
+        self.profiles = []
+        allProfiles = profiles.reduce(into: [:]) {
+            $0[$1.id] = $1
+        }
+
+        didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
         subscriptions = []
     }
 
     public init(repository: any ProfileRepository) {
-        didChange = PassthroughSubject()
-        profiles = []
-        allProfileIds = []
         self.repository = repository
+        profiles = []
+        allProfiles = [:]
+
+        didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
         subscriptions = []
     }
@@ -109,6 +115,7 @@ extension ProfileManager {
         do {
             try await beforeSave?(profile)
             try await repository.saveEntities([profile])
+            allProfiles[profile.id] = profile
             didChange.send(.save(profile))
         } catch {
             pp_log(.app, .fault, "Unable to save profile \(profile.id): \(error)")
@@ -122,9 +129,13 @@ extension ProfileManager {
 
     public func remove(withIds profileIds: [Profile.ID]) async {
         do {
-            allProfileIds.subtract(profileIds)
+            var newAllProfiles = allProfiles
             try await repository.removeEntities(withIds: profileIds)
+            profileIds.forEach {
+                newAllProfiles.removeValue(forKey: $0)
+            }
             await afterRemove?(profileIds)
+            allProfiles = newAllProfiles
             didChange.send(.remove(profileIds))
         } catch {
             pp_log(.app, .fault, "Unable to remove profiles \(profileIds): \(error)")
@@ -132,7 +143,7 @@ extension ProfileManager {
     }
 
     public func exists(withId profileId: Profile.ID) -> Bool {
-        allProfileIds.contains(profileId)
+        allProfiles.keys.contains(profileId)
     }
 }
 
@@ -183,6 +194,7 @@ extension ProfileManager {
     public func observeObjects(searchDebounce: Int = 200) {
         repository
             .entitiesPublisher
+            .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.notifyUpdatedEntities($0)
@@ -208,20 +220,27 @@ private extension ProfileManager {
             $0 != oldProfiles[$0.id] // includes new profiles
         }
 
-        if !result.isFiltering {
-            allProfileIds = Set(newProfiles.map(\.id))
+        allProfiles = newProfiles.reduce(into: [:]) {
+            $0[$1.id] = $1
         }
-        profiles = newProfiles
         didChange.send(.update(updatedProfiles))
     }
 
     func performSearch(_ search: String) {
-        Task {
-            guard !search.isEmpty else {
-                try await repository.resetFilter()
-                return
+        reloadFilteredProfiles(with: search)
+    }
+
+    func reloadFilteredProfiles(with search: String? = nil) {
+        profiles = allProfiles
+            .values
+            .sorted {
+                $0.name.lowercased() < $1.name.lowercased()
             }
-            try await repository.filter(byName: search)
-        }
+            .filter {
+                if let search, !search.isEmpty {
+                    return $0.name.lowercased().contains(search.lowercased())
+                }
+                return true
+            }
     }
 }
