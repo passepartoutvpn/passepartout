@@ -27,17 +27,22 @@ import Foundation
 import SwiftUI
 
 struct StorageSection: View {
+
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     let uuid: UUID
 
     @Binding
     var isShared: Bool
 
+    @State
+    private var paywallReason: PaywallReason?
+
     var body: some View {
         debugChanges()
         return Section {
-            Section {
-                Toggle(Strings.Modules.General.Storage.shared, isOn: $isShared)
-            }
+            sharingToggle
 #if DEBUG
             ThemeCopiableText(
                 title: Strings.Unlocalized.uuid,
@@ -46,6 +51,26 @@ struct StorageSection: View {
 #endif
         } header: {
             Text(Strings.Global.storage)
+        }
+        .modifier(PaywallModifier(reason: $paywallReason))
+    }
+}
+
+private extension StorageSection {
+
+    @ViewBuilder
+    var sharingToggle: some View {
+        switch iapManager.paywallReason(forFeature: .sharing) {
+        case .purchase(let appFeature):
+            Button(Strings.Modules.General.Purchase.shared) {
+                paywallReason = .purchase(appFeature)
+            }
+
+        case .restricted:
+            EmptyView()
+
+        default:
+            Toggle(Strings.Modules.General.Storage.shared, isOn: $isShared)
         }
     }
 }

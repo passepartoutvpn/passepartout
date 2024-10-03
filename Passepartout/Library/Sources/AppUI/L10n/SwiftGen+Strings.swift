@@ -286,6 +286,10 @@ public enum Strings {
       }
     }
     public enum General {
+      public enum Purchase {
+        /// Share on iCloud
+        public static let shared = Strings.tr("Localizable", "modules.general.purchase.shared", fallback: "Share on iCloud")
+      }
       public enum Storage {
         /// Share on iCloud
         public static let shared = Strings.tr("Localizable", "modules.general.storage.shared", fallback: "Share on iCloud")

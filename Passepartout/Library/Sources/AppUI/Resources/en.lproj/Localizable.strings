@@ -159,6 +159,7 @@
 
 // MARK: - Module views
 
+"modules.general.purchase.shared" = "Share on iCloud";
 "modules.general.storage.shared" = "Share on iCloud";
 
 "modules.dns.servers.add" = "Add address";
