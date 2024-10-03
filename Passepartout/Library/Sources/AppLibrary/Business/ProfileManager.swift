@@ -260,8 +260,9 @@ private extension ProfileManager {
         }
 
         // pull remote updates into local profiles (best-effort)
-        for remoteProfile in allRemoteProfiles.values {
-            Task.detached { [weak self] in
+        let profilesToImport = allRemoteProfiles.values
+        Task.detached { [weak self] in
+            for remoteProfile in profilesToImport {
                 do {
                     pp_log(.app, .notice, "Import remote profile \(remoteProfile.id)...")
                     try await self?.save(remoteProfile)
