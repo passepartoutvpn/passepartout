@@ -39,7 +39,7 @@ struct StorageSection: View {
 
     var body: some View {
         debugChanges()
-        return Section {
+        return Group {
             sharingToggle
 #if DEBUG
             ThemeCopiableText(
@@ -47,9 +47,11 @@ struct StorageSection: View {
                 value: profileEditor.id.uuidString
             )
 #endif
-        } header: {
-            Text(Strings.Global.storage)
         }
+        .themeSection(
+            header: Strings.Global.storage,
+            footer: Strings.Modules.General.Sections.Storage.footer
+        )
         .modifier(PaywallModifier(reason: $paywallReason))
     }
 }
@@ -60,7 +62,7 @@ private extension StorageSection {
     var sharingToggle: some View {
         switch iapManager.paywallReason(forFeature: .sharing) {
         case .purchase(let appFeature):
-            Button(Strings.Modules.General.Purchase.shared) {
+            Button(Strings.Modules.General.Storage.Shared.purchase) {
                 paywallReason = .purchase(appFeature)
             }
 
