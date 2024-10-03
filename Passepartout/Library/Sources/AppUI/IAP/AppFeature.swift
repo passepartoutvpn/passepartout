@@ -47,7 +47,6 @@ public enum AppFeature: String {
     public static let fullVersionFeaturesV2: [AppFeature] = [
         .dns,
         .httpProxy,
-        .interactiveLogin,
         .onDemand,
         .providers,
         .routing,

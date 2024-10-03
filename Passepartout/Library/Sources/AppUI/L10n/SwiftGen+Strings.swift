@@ -286,18 +286,18 @@ public enum Strings {
       }
     }
     public enum General {
+      public enum Rows {
+        /// Share on iCloud
+        public static let icloudSharing = Strings.tr("Localizable", "modules.general.rows.icloud_sharing", fallback: "Share on iCloud")
+        public enum IcloudSharing {
+          /// Share on iCloud
+          public static let purchase = Strings.tr("Localizable", "modules.general.rows.icloud_sharing.purchase", fallback: "Share on iCloud")
+        }
+      }
       public enum Sections {
         public enum Storage {
           /// Profiles are stored to iCloud encrypted.
           public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.footer", fallback: "Profiles are stored to iCloud encrypted.")
-        }
-      }
-      public enum Storage {
-        /// Share on iCloud
-        public static let shared = Strings.tr("Localizable", "modules.general.storage.shared", fallback: "Share on iCloud")
-        public enum Shared {
-          /// Share on iCloud
-          public static let purchase = Strings.tr("Localizable", "modules.general.storage.shared.purchase", fallback: "Share on iCloud")
         }
       }
     }

@@ -62,7 +62,7 @@ private extension StorageSection {
     var sharingToggle: some View {
         switch iapManager.paywallReason(forFeature: .sharing) {
         case .purchase(let appFeature):
-            Button(Strings.Modules.General.Storage.Shared.purchase) {
+            Button(Strings.Modules.General.Rows.IcloudSharing.purchase) {
                 paywallReason = .purchase(appFeature)
             }
 
@@ -70,7 +70,7 @@ private extension StorageSection {
             EmptyView()
 
         default:
-            Toggle(Strings.Modules.General.Storage.shared, isOn: $profileEditor.isShared)
+            Toggle(Strings.Modules.General.Rows.icloudSharing, isOn: $profileEditor.isShared)
         }
     }
 }
