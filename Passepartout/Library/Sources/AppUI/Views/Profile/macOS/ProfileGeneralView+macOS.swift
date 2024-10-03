@@ -39,7 +39,7 @@ struct ProfileGeneralView: View {
                 placeholder: Strings.Placeholders.Profile.name
             )
             EmptyView()
-                .themeSectionWithFooter(Strings.Views.Profile.ModuleList.Section.footer)
+                .themeSection(footer: Strings.Views.Profile.ModuleList.Section.footer)
             StorageSection(
                 uuid: profileEditor.id
             )

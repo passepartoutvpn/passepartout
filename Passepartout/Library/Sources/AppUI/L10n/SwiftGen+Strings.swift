@@ -372,6 +372,8 @@ public enum Strings {
         public enum Interactive {
           /// On-demand will be disabled.
           public static let footer = Strings.tr("Localizable", "modules.openvpn.credentials.interactive.footer", fallback: "On-demand will be disabled.")
+          /// Log in interactively
+          public static let purchase = Strings.tr("Localizable", "modules.openvpn.credentials.interactive.purchase", fallback: "Log in interactively")
         }
         public enum OtpMethod {
           public enum Approach {
@@ -381,10 +383,6 @@ public enum Strings {
             public static let encode = Strings.tr("Localizable", "modules.openvpn.credentials.otp_method.approach.encode", fallback: "The OTP will be encoded in Base64 with the password.")
           }
         }
-      }
-      public enum Purchase {
-        /// Log in interactively
-        public static let interactive = Strings.tr("Localizable", "modules.openvpn.purchase.interactive", fallback: "Log in interactively")
       }
     }
     public enum Wireguard {

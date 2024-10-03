@@ -189,8 +189,8 @@ extension View {
         modifier(ThemeAnimationModifier(value: value, category: category))
     }
 
-    public func themeSectionWithFooter(_ footer: String?) -> some View {
-        modifier(ThemeSectionWithFooterModifier(footer: footer))
+    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
+        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
     }
 
     public func themeGridHeader(title: String?) -> some View {

@@ -70,7 +70,7 @@ extension ThemeManualInputModifier {
     }
 }
 
-extension ThemeSectionWithFooterModifier {
+extension ThemeSectionWithHeaderFooterModifier {
 
     @ViewBuilder
     func body(content: Content) -> some View {
@@ -82,6 +82,8 @@ extension ThemeSectionWithFooterModifier {
                     .font(.callout)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
+        } header: {
+            header.map(Text.init)
         }
     }
 }
