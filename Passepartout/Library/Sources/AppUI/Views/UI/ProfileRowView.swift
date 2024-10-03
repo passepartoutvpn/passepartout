@@ -86,7 +86,7 @@ private extension ProfileRowView {
             ProfileCardView(
                 style: style,
                 header: header,
-                isShared: profileManager.isRemotelyShared(profileWithId: header.id)
+                profileManager: profileManager
             )
             .frame(maxWidth: .infinity)
             .contentShape(.rect)

@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -37,7 +38,8 @@ struct ProfileCardView: View {
 
     let header: ProfileHeader
 
-    let isShared: Bool
+    @ObservedObject
+    var profileManager: ProfileManager
 
     var body: some View {
         switch style {
@@ -70,6 +72,12 @@ struct ProfileCardView: View {
     }
 }
 
+private extension ProfileCardView {
+    var isShared: Bool {
+        profileManager.isRemotelyShared(profileWithId: header.id)
+    }
+}
+
 // MARK: - Previews
 
 #Preview {
@@ -78,14 +86,14 @@ struct ProfileCardView: View {
             ProfileCardView(
                 style: .compact,
                 header: Profile.mock.header(),
-                isShared: true
+                profileManager: .mock
             )
         }
         Section {
             ProfileCardView(
                 style: .full,
                 header: Profile.mock.header(),
-                isShared: true
+                profileManager: .mock
             )
         }
     }

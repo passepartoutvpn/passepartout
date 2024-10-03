@@ -258,6 +258,7 @@ private extension ProfileManager {
         allRemoteProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
+        objectWillChange.send()
 
         // pull remote updates into local profiles (best-effort)
         let profilesToImport = allRemoteProfiles.values
