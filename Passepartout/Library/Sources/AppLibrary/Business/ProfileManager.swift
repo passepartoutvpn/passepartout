@@ -265,6 +265,7 @@ private extension ProfileManager {
         for remoteProfile in allRemoteProfiles.values {
             Task.detached { [weak self] in
                 do {
+                    pp_log(.app, .notice, "Import remote profile \(remoteProfile.id)...")
                     try await self?.save(remoteProfile)
                 } catch {
                     pp_log(.app, .error, "Unable to import remote profile: \(error)")
