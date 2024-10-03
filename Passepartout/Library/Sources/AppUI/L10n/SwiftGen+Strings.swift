@@ -239,6 +239,8 @@ public enum Strings {
     public static let port = Strings.tr("Localizable", "global.port", fallback: "Port")
     /// Private key
     public static let privateKey = Strings.tr("Localizable", "global.private_key", fallback: "Private key")
+    /// Profile
+    public static let profile = Strings.tr("Localizable", "global.profile", fallback: "Profile")
     /// Protocol
     public static let `protocol` = Strings.tr("Localizable", "global.protocol", fallback: "Protocol")
     /// Public key

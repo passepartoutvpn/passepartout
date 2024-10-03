@@ -68,7 +68,7 @@ struct ProfileEditView: View, Routable {
             )
         }
         .toolbar(content: toolbarContent)
-        .navigationTitle(profileEditor.name)
+        .navigationTitle(Strings.Global.profile)
         .navigationBarBackButtonHidden(true)
         .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
     }

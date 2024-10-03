@@ -45,6 +45,7 @@
 "global.password" = "Password";
 "global.port" = "Port";
 "global.private_key" = "Private key";
+"global.profile" = "Profile";
 "global.protocol" = "Protocol";
 "global.public_key" = "Public key";
 "global.purchase" = "Purchase";
