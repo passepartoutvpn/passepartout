@@ -59,6 +59,7 @@ struct ModuleListView: View, Routable {
             } header: {
                 if !profileEditor.modules.isEmpty {
                     Text(Strings.Global.modules)
+                        .themeTip(Strings.Views.Profile.ModuleList.Section.footer, edge: .bottom)
                 }
             }
         }

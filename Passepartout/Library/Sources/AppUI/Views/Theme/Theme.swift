@@ -101,6 +101,7 @@ public final class Theme: ObservableObject {
         case .share: return "square.and.arrow.up"
         case .show: return "eye"
         case .sleeping: return "powersleep"
+        case .tip: return "questionmark.circle"
         case .tunnelDisable: return "arrow.down"
         case .tunnelEnable: return "arrow.up"
         case .tunnelRestart: return "arrow.clockwise"
@@ -207,6 +208,10 @@ extension View {
 
     public func themeLockScreen() -> some View {
         modifier(ThemeLockScreenModifier())
+    }
+
+    public func themeTip(_ text: String, edge: Edge) -> some View {
+        modifier(ThemeTipModifier(text: text, edge: edge))
     }
 }
 

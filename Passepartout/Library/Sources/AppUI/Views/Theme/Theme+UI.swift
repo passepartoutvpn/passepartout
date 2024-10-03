@@ -273,6 +273,37 @@ struct ThemeLockScreenModifier: ViewModifier {
     }
 }
 
+struct ThemeTipModifier: ViewModifier {
+    let text: String
+
+    let edge: Edge
+
+    @State
+    private var isPresenting = false
+
+    func body(content: Content) -> some View {
+        HStack {
+            content
+            Button {
+                isPresenting = true
+            } label: {
+                ThemeImage(.tip)
+            }
+            .buttonStyle(.borderless)
+        }
+        .popover(isPresented: $isPresenting, arrowEdge: edge) {
+            VStack {
+                Text(text)
+                    .foregroundStyle(.primary)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.leading)
+                    .frame(width: 150.0)
+            }
+            .padding(12)
+        }
+    }
+}
+
 // MARK: - Views
 
 public enum ThemeAnimationCategory: CaseIterable {
