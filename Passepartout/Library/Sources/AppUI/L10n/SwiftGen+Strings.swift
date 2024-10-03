@@ -291,8 +291,8 @@ public enum Strings {
     }
     public enum General {
       public enum Rows {
-        /// Share on iCloud
-        public static let icloudSharing = Strings.tr("Localizable", "modules.general.rows.icloud_sharing", fallback: "Share on iCloud")
+        /// Shared on iCloud
+        public static let icloudSharing = Strings.tr("Localizable", "modules.general.rows.icloud_sharing", fallback: "Shared on iCloud")
         public enum IcloudSharing {
           /// Share on iCloud
           public static let purchase = Strings.tr("Localizable", "modules.general.rows.icloud_sharing.purchase", fallback: "Share on iCloud")

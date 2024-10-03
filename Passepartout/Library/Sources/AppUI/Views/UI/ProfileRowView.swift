@@ -103,6 +103,7 @@ private extension ProfileRowView {
     var sharingView: some View {
         ThemeImage(.cloud)
             .foregroundStyle(.secondary)
+            .help(Strings.Modules.General.Rows.icloudSharing)
     }
 
     var statusImage: Theme.ImageName {
