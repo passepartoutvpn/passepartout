@@ -96,11 +96,10 @@ private extension DNSView {
     }
 
     var domainSection: some View {
-        Section {
+        Group {
             ThemeTextField(Strings.Global.domain, text: $draft.domainName ?? "", placeholder: Strings.Unlocalized.Placeholders.hostname)
-        } header: {
-            Text(Strings.Global.domain)
         }
+        .themeSection(header: Strings.Global.domain)
     }
 
     var serversSection: some View {

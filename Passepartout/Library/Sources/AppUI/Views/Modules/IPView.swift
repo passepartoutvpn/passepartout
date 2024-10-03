@@ -137,7 +137,7 @@ private extension IPView {
     }
 
     var interfaceSection: some View {
-        Section {
+        Group {
             ThemeTextField(
                 Strings.Unlocalized.mtu,
                 text: Binding {
@@ -147,9 +147,8 @@ private extension IPView {
                 },
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
-        } header: {
-            Text(Strings.Global.interface)
         }
+        .themeSection(header: Strings.Global.interface)
     }
 }
 

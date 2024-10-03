@@ -48,23 +48,21 @@ private extension LinksView {
     }
 
     var supportSection: some View {
-        Section {
+        Group {
             Link(Strings.Views.About.Links.Rows.joinCommunity, destination: constants.websites.subreddit)
             Link(Strings.Views.About.Links.Rows.writeReview, destination: BundleConfiguration.urlForReview)
-        } header: {
-            Text(Strings.Views.About.Links.Sections.support)
         }
+        .themeSection(header: Strings.Views.About.Links.Sections.support)
     }
 
     var webSection: some View {
-        Section {
+        Group {
             Link(Strings.Views.About.Links.Rows.homePage, destination: constants.websites.home)
             Link(Strings.Unlocalized.faq, destination: constants.websites.faq)
             Link(Strings.Views.About.Links.Rows.disclaimer, destination: constants.websites.disclaimer)
             Link(Strings.Views.About.Links.Rows.privacyPolicy, destination: constants.websites.privacyPolicy)
-        } header: {
-            Text(Strings.Views.About.Links.Sections.web)
         }
+        .themeSection(header: Strings.Views.About.Links.Sections.web)
     }
 }
 

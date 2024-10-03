@@ -52,17 +52,17 @@ struct ProfileEditView: View, Routable {
                 name: $profileEditor.name,
                 placeholder: Strings.Placeholders.Profile.name
             )
-            Section {
+            Group {
                 ForEach(profileEditor.modules, id: \.id, content: moduleRow)
                     .onMove(perform: moveModules)
                     .onDelete(perform: removeModules)
 
                 addModuleButton
-            } header: {
-                Text(Strings.Global.modules)
-            } footer: {
-                Text(Strings.Views.Profile.ModuleList.Section.footer)
             }
+            .themeSection(
+                header: Strings.Global.modules,
+                footer: Strings.Views.Profile.ModuleList.Section.footer
+            )
             StorageSection(
                 profileEditor: profileEditor
             )

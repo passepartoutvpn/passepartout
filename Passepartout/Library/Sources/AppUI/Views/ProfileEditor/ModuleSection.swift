@@ -79,11 +79,10 @@ extension Collection {
 extension View {
     func moduleSection(for rows: [ModuleRow]?, header: String) -> some View {
         rows.map { rows in
-            Section {
+            Group {
                 ForEach(rows, id: \.self, content: moduleRowView)
-            } header: {
-                Text(header)
             }
+            .themeSection(header: header)
         }
     }
 }

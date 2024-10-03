@@ -64,29 +64,26 @@ private struct HTTPProxyView: View {
 
 private extension HTTPProxyView {
     var httpSection: some View {
-        Section {
+        Group {
             ThemeTextField(Strings.Global.address, text: $draft.address, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
             ThemeTextField(Strings.Global.port, text: $draft.port.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
-        } header: {
-            Text(Strings.Unlocalized.http)
         }
+        .themeSection(header: Strings.Unlocalized.http)
     }
 
     var httpsSection: some View {
-        Section {
+        Group {
             ThemeTextField(Strings.Global.address, text: $draft.secureAddress, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
             ThemeTextField(Strings.Global.port, text: $draft.securePort.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
-        } header: {
-            Text(Strings.Unlocalized.https)
         }
+        .themeSection(header: Strings.Unlocalized.https)
     }
 
     var pacSection: some View {
-        Section {
+        Group {
             ThemeTextField(Strings.Unlocalized.url, text: $draft.pacURLString, placeholder: Strings.Unlocalized.Placeholders.pacURL)
-        } header: {
-            Text(Strings.Unlocalized.pac)
         }
+        .themeSection(header: Strings.Unlocalized.pac)
     }
 
     @ViewBuilder

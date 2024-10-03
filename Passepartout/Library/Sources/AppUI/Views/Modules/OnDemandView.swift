@@ -136,15 +136,14 @@ private extension OnDemandView {
     }
 
     var networkSection: some View {
-        Section {
+        Group {
             if Utils.hasCellularData() {
                 Toggle(Strings.Modules.OnDemand.mobile, isOn: $draft.withMobileNetwork)
             } else if Utils.hasEthernet() {
                 Toggle(Strings.Modules.OnDemand.ethernet, isOn: $draft.withEthernetNetwork)
             }
-        } header: {
-            Text(Strings.Global.networks)
         }
+        .themeSection(header: Strings.Global.networks)
     }
 
     var wifiSection: some View {

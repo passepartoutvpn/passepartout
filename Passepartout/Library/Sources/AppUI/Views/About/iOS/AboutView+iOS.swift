@@ -32,14 +32,13 @@ extension AboutView {
     var listView: some View {
         List {
             SettingsSectionGroup(profileManager: profileManager)
-            Section {
+            Group {
                 // TODO: #585, donations
 //                donateLink
                 linksLink
                 creditsLink
-            } header: {
-                Text(Strings.Views.About.Sections.resources)
             }
+            .themeSection(header: Strings.Views.About.Sections.resources)
             Section {
                 diagnosticsLink
                 Text(Strings.Global.version)

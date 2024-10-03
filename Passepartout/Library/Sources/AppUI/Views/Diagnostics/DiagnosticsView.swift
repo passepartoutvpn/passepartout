@@ -98,7 +98,7 @@ struct DiagnosticsView: View {
 
 private extension DiagnosticsView {
     var liveLogSection: some View {
-        Section {
+        Group {
             navLink(Strings.Views.Diagnostics.Rows.app, to: .appDebugLog(title: Strings.Views.Diagnostics.Rows.app))
             navLink(Strings.Views.Diagnostics.Rows.tunnel, to: .tunnelDebugLog(title: Strings.Views.Diagnostics.Rows.tunnel, url: nil))
 
@@ -107,13 +107,12 @@ private extension DiagnosticsView {
                     PassepartoutConfiguration.shared.logsAddresses = $0
                     PassepartoutConfiguration.shared.logsModules = $0
                 }
-        } header: {
-            Text(Strings.Views.Diagnostics.Sections.live)
         }
+        .themeSection(header: Strings.Views.Diagnostics.Sections.live)
     }
 
     var tunnelLogsSection: some View {
-        Section {
+        Group {
             Button(Strings.Views.Diagnostics.Rows.removeTunnelLogs) {
                 withAnimation(theme.animation(for: .diagnostics), removeTunnelLogs)
             }
@@ -121,23 +120,21 @@ private extension DiagnosticsView {
 
             ForEach(tunnelLogs, id: \.date, content: logView)
                 .onDelete(perform: removeTunnelLogs)
-        } header: {
-            Text(Strings.Views.Diagnostics.Sections.tunnel)
         }
+        .themeSection(header: Strings.Views.Diagnostics.Sections.tunnel)
         .themeAnimation(on: tunnelLogs, category: .diagnostics)
     }
 
     var openVPNSection: some View {
         connectionObserver.value(forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration)
             .map { cfg in
-                Section {
+                Group {
                     NavigationLink(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration) {
                         OpenVPNView(serverConfiguration: cfg)
                             .navigationTitle(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration)
                     }
-                } header: {
-                    Text(Strings.Unlocalized.openVPN)
                 }
+                .themeSection(header: Strings.Unlocalized.openVPN)
             }
     }
 

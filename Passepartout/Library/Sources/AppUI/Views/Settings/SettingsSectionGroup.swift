@@ -46,16 +46,15 @@ struct SettingsSectionGroup: View {
     private var isErasingiCloud = false
 
     var body: some View {
-        Section {
+        Group {
 #if os(macOS)
             confirmsQuitToggle
 #endif
 #if os(iOS)
             lockInBackgroundToggle
 #endif
-        } header: {
-            Text(Strings.Global.general)
         }
+        .themeSection(header: Strings.Global.general)
         Group {
             eraseCloudKitButton
         }

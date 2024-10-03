@@ -55,12 +55,11 @@ struct ProfileListView: View, ProfileManagerProviding, TunnelInstallationProvidi
                 if !isSearching {
                     headerView(scrollProxy: scrollProxy)
                 }
-                Section {
+                Group {
                     ForEach(allHeaders, content: profileView)
                         .onDelete(perform: removeProfiles)
-                } header: {
-                    Text(Strings.Views.Profiles.Folders.default)
                 }
+                .themeSection(header: Strings.Views.Profiles.Folders.default)
             }
             .themeForm()
         }

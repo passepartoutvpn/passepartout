@@ -34,13 +34,12 @@ struct NameSection: View {
 
     var body: some View {
         debugChanges()
-        return Section {
+        return Group {
             ThemeTextField(Strings.Global.name, text: $name, placeholder: placeholder)
                 .labelsHidden()
                 .themeManualInput()
-        } header: {
-            Text(Strings.Global.name)
         }
+        .themeSection(header: Strings.Global.name)
     }
 }
 
