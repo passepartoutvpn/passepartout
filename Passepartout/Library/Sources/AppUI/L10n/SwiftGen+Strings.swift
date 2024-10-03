@@ -285,6 +285,12 @@ public enum Strings {
         public static let add = Strings.tr("Localizable", "modules.dns.servers.add", fallback: "Add address")
       }
     }
+    public enum General {
+      public enum Storage {
+        /// Share on iCloud
+        public static let shared = Strings.tr("Localizable", "modules.general.storage.shared", fallback: "Share on iCloud")
+      }
+    }
     public enum HttpProxy {
       public enum BypassDomains {
         /// Add bypass domain

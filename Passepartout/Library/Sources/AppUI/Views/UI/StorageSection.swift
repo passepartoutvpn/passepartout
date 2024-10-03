@@ -29,27 +29,32 @@ import SwiftUI
 struct StorageSection: View {
     let uuid: UUID
 
+    @Binding
+    var isShared: Bool
+
     var body: some View {
-#if DEBUG
         debugChanges()
         return Section {
+            Section {
+                Toggle(Strings.Modules.General.Storage.shared, isOn: $isShared)
+            }
+#if DEBUG
             ThemeCopiableText(
                 title: Strings.Unlocalized.uuid,
                 value: uuid.uuidString
             )
+#endif
         } header: {
             Text(Strings.Global.storage)
         }
-#else
-        EmptyView()
-#endif
     }
 }
 
 #Preview {
     Form {
         StorageSection(
-            uuid: ProfileEditor().id
+            uuid: ProfileEditor().id,
+            isShared: .constant(false)
         )
     }
     .themeForm()

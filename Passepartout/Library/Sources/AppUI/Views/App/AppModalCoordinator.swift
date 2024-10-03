@@ -132,7 +132,7 @@ extension AppModalCoordinator {
 
     func enterDetail(of profile: Profile) {
         profilePath = NavigationPath()
-        profileEditor.editProfile(profile)
+        profileEditor.editProfile(profile, isShared: profileManager.isRemotelyShared(profileWithId: profile.id))
         modalRoute = .editProfile
     }
 }

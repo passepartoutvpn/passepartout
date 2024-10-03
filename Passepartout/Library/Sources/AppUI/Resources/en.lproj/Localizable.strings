@@ -159,6 +159,8 @@
 
 // MARK: - Module views
 
+"modules.general.storage.shared" = "Share on iCloud";
+
 "modules.dns.servers.add" = "Add address";
 "modules.dns.search_domains.add" = "Add domain";
 "modules.http_proxy.bypass_domains.add" = "Add bypass domain";

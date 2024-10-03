@@ -47,6 +47,9 @@ final class ProfileEditor: ObservableObject {
 
     private(set) var removedModules: [UUID: any EditableModule]
 
+    @Published
+    var isShared: Bool
+
     convenience init() {
         self.init(modules: [])
     }
@@ -58,6 +61,7 @@ final class ProfileEditor: ObservableObject {
         activeModulesIds = Set(modules.map(\.id))
         moduleNames = [:]
         removedModules = [:]
+        isShared = false
     }
 
     init(profile: Profile) {
@@ -67,15 +71,17 @@ final class ProfileEditor: ObservableObject {
         activeModulesIds = profile.activeModulesIds
         moduleNames = profile.moduleNames
         removedModules = [:]
+        isShared = false
     }
 
-    func editProfile(_ profile: Profile) {
+    func editProfile(_ profile: Profile, isShared: Bool) {
         id = profile.id
         name = profile.name
         modules = profile.modulesBuilders
         activeModulesIds = profile.activeModulesIds
         moduleNames = profile.moduleNames
         removedModules = [:]
+        self.isShared = isShared
     }
 }
 
