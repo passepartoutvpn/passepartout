@@ -29,10 +29,10 @@ extension AppUserLevel: AppFeatureProviding {
     var features: [AppFeature] {
         switch self {
         case .fullVersion:
-            return AppFeature.allCases
+            return AppFeature.fullVersionFeaturesV2
 
         case .fullVersionPlusTV:
-            var list = AppFeature.allCases
+            var list = AppFeature.fullVersionFeaturesV2
             list.append(.appleTV)
             return list
 

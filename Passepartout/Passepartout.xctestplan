@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "880EB747-73AE-45F8-B6D3-95D06B161AB1",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Passepartout\/Library",
+        "identifier" : "AppLibraryTests",
+        "name" : "AppLibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Passepartout\/Library",
+        "identifier" : "AppUITests",
+        "name" : "AppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
