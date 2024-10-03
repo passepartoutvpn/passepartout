@@ -31,10 +31,8 @@ struct StorageSection: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
-    let uuid: UUID
-
-    @Binding
-    var isShared: Bool
+    @ObservedObject
+    var profileEditor: ProfileEditor
 
     @State
     private var paywallReason: PaywallReason?
@@ -46,7 +44,7 @@ struct StorageSection: View {
 #if DEBUG
             ThemeCopiableText(
                 title: Strings.Unlocalized.uuid,
-                value: uuid.uuidString
+                value: profileEditor.id.uuidString
             )
 #endif
         } header: {
@@ -70,7 +68,7 @@ private extension StorageSection {
             EmptyView()
 
         default:
-            Toggle(Strings.Modules.General.Storage.shared, isOn: $isShared)
+            Toggle(Strings.Modules.General.Storage.shared, isOn: $profileEditor.isShared)
         }
     }
 }
@@ -78,8 +76,7 @@ private extension StorageSection {
 #Preview {
     Form {
         StorageSection(
-            uuid: ProfileEditor().id,
-            isShared: .constant(false)
+            profileEditor: ProfileEditor()
         )
     }
     .themeForm()
