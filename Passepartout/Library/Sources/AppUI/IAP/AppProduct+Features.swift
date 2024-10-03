@@ -81,7 +81,7 @@ extension AppProduct: AppFeatureProviding {
             return [.appleTV]
 
         case .Features.networkSettings:
-            return [.networkSettings]
+            return [.dns, .httpProxy, .routing]
 
         case .Features.siriShortcuts:
             return [.siri]
@@ -90,18 +90,18 @@ extension AppProduct: AppFeatureProviding {
             return [.onDemand]
 
         case .Full.allPlatforms:
-            return AppFeature.allCases
+            return AppFeature.fullVersionFeaturesV2
 
         case .Full.iOS:
 #if os(iOS)
-            return AppFeature.allCases
+            return AppFeature.fullVersionFeaturesV2
 #else
             return []
 #endif
 
         case .Full.macOS:
 #if os(macOS)
-            return AppFeature.allCases
+            return AppFeature.fullVersionFeaturesV2
 #else
             return []
 #endif

@@ -25,24 +25,33 @@
 
 import Foundation
 
-public enum AppFeature: String, CaseIterable {
+public enum AppFeature: String {
     case appleTV
 
-    case interactiveLogin
+    case dns
 
-    case networkSettings
+    case httpProxy
+
+    case interactiveLogin
 
     case onDemand
 
     case providers
 
+    case routing
+
+    case sharing
+
     case siri
 
-    public static let allCases: [AppFeature] = [
+    public static let fullVersionFeaturesV2: [AppFeature] = [
+        .dns,
+        .httpProxy,
         .interactiveLogin,
-        .networkSettings,
         .onDemand,
         .providers,
+        .routing,
+        .sharing,
         .siri
     ]
 }

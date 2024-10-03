@@ -103,11 +103,17 @@ private extension ProfileCoordinator {
 private extension ProfileCoordinator {
     func onNewModule(_ moduleType: ModuleType) {
         switch moduleType {
-        case .onDemand:
-            break
+        case .dns:
+            paywallReason = iapManager.paywallReason(forFeature: .dns)
 
-        default:
-            paywallReason = iapManager.paywallReason(forFeature: .networkSettings)
+        case .httpProxy:
+            paywallReason = iapManager.paywallReason(forFeature: .httpProxy)
+
+        case .ip:
+            paywallReason = iapManager.paywallReason(forFeature: .routing)
+
+        case .onDemand, .openVPN, .wireGuard:
+            break
         }
         guard paywallReason == nil else {
             return
