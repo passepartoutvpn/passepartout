@@ -71,6 +71,7 @@
 /* Begin PBXFileReference section */
 		0E06D18F2B87629100176E1D /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0E7D0EAD2CAEA47700A2F28D /* Passepartout.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Passepartout.xctestplan; sourceTree = "<group>"; };
 		0E7E3D5B2B9345FD002BBDB4 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassepartoutApp.swift; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8D852F2C328CA1005493DE /* Config.xcconfig */,
+				0E7D0EAD2CAEA47700A2F28D /* Passepartout.xctestplan */,
 				0E7E3D5A2B9345FD002BBDB4 /* App */,
 				0EDE56E82CABE40D0082D21C /* Intents */,
 				0E7E3D612B9345FD002BBDB4 /* Shared */,
