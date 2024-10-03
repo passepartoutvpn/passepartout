@@ -33,14 +33,12 @@ struct AboutRouterView: View {
     @Environment(\.dismiss)
     var dismiss
 
+    let profileManager: ProfileManager
+
     let tunnel: Tunnel
 
     @State
     var navigationRoute: NavigationRoute?
-
-    init(tunnel: Tunnel) {
-        self.tunnel = tunnel
-    }
 }
 
 extension AboutRouterView {
@@ -95,6 +93,7 @@ extension AboutRouterView {
 
 #Preview {
     AboutRouterView(
+        profileManager: .mock,
         tunnel: .mock
     )
     .withMockEnvironment()

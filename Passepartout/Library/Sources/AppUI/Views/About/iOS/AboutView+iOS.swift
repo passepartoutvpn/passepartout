@@ -31,7 +31,7 @@ import SwiftUI
 extension AboutView {
     var listView: some View {
         List {
-            SettingsSectionGroup()
+            SettingsSectionGroup(profileManager: profileManager)
             Section {
                 // TODO: #585, donations
 //                donateLink
