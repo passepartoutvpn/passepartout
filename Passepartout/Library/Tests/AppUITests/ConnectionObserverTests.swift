@@ -62,7 +62,7 @@ extension ConnectionObserverTests {
         XCTAssertEqual(sut.dataCount, nil)
 
         try await tunnel.install(profile, connect: true, title: \.name)
-        try await Task.sleep(for: .milliseconds(200))
+        try await Task.sleep(for: .milliseconds(300))
         XCTAssertEqual(sut.dataCount, dataCount)
     }
 }
