@@ -38,8 +38,6 @@ struct ProfileGeneralView: View {
                 name: $profileEditor.name,
                 placeholder: Strings.Placeholders.Profile.name
             )
-            EmptyView()
-                .themeSection(footer: Strings.Views.Profile.ModuleList.Section.footer)
             StorageSection(
                 uuid: profileEditor.id
             )
