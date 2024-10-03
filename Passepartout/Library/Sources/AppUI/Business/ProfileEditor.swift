@@ -37,6 +37,9 @@ final class ProfileEditor: ObservableObject {
     var name: String
 
     @Published
+    var isShared: Bool
+
+    @Published
     private(set) var modules: [any EditableModule]
 
     @Published
@@ -46,9 +49,6 @@ final class ProfileEditor: ObservableObject {
     private var moduleNames: [UUID: String]
 
     private(set) var removedModules: [UUID: any EditableModule]
-
-    @Published
-    var isShared: Bool
 
     convenience init() {
         self.init(modules: [])
