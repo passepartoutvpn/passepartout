@@ -129,7 +129,7 @@ private extension AppInlineCoordinator {
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
         case .settings:
-            SettingsView()
+            SettingsView(profileManager: profileManager)
 
         case .about:
             AboutRouterView(tunnel: tunnel)

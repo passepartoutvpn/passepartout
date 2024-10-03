@@ -23,10 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import CommonLibrary
+import PassepartoutKit
 import SwiftUI
+import UtilsLibrary
 
 struct SettingsSection: View {
+    let profileManager: ProfileManager
 
     @AppStorage(AppPreference.confirmsQuit.key)
     private var confirmsQuit = true
@@ -35,6 +39,9 @@ struct SettingsSection: View {
     private var locksInBackground = false
 
     var header: String?
+
+    @State
+    private var isErasingiCloud = false
 
     var body: some View {
         Section {
@@ -47,6 +54,10 @@ struct SettingsSection: View {
         } header: {
             header.map(Text.init)
         }
+        Group {
+            eraseCloudKitButton
+        }
+        .themeSection(footer: Strings.Views.Settings.Sections.Icloud.footer)
     }
 }
 
@@ -57,5 +68,25 @@ private extension SettingsSection {
 
     var lockInBackgroundToggle: some View {
         Toggle(Strings.Views.Settings.Rows.lockInBackground, isOn: $locksInBackground)
+    }
+
+    var eraseCloudKitButton: some View {
+        Button(Strings.Views.Settings.Rows.eraseIcloud, role: .destructive) {
+            isErasingiCloud = true
+            Task {
+                do {
+                    pp_log(.app, .info, "Erase CloudKit profiles...")
+                    try await profileManager.eraseRemoteProfiles()
+
+                    let containerId = BundleConfiguration.mainString(for: .cloudKitId)
+                    pp_log(.app, .info, "Erase CloudKit store with identifier \(containerId)...")
+                    try await Utils.eraseCloudKitStore(fromContainerWithId: containerId)
+                } catch {
+                    pp_log(.app, .error, "Unable to erase CloudKit store: \(error)")
+                }
+                isErasingiCloud = false
+            }
+        }
+        .disabled(isErasingiCloud)
     }
 }

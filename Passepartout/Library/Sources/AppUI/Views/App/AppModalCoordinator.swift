@@ -120,7 +120,7 @@ extension AppModalCoordinator {
             }
 
         case .settings:
-            SettingsView()
+            SettingsView(profileManager: profileManager)
 
         case .about:
             AboutRouterView(tunnel: tunnel)

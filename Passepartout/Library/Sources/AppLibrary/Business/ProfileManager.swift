@@ -174,6 +174,10 @@ extension ProfileManager {
             try await remoteRepository.removeEntities(withIds: [profileId])
         }
     }
+
+    public func eraseRemoteProfiles() async throws {
+        try await remoteRepository?.removeEntities(withIds: Array(allRemoteProfiles.keys))
+    }
 }
 
 // MARK: - Shortcuts
