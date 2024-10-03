@@ -44,7 +44,7 @@ extension IAPManager {
         customUserLevel: customUserLevel,
         receiptReader: KvittoReceiptReader(),
         // FIXME: #662, omit unrestrictedFeatures on release!
-        unrestrictedFeatures: [.interactiveLogin],
+        unrestrictedFeatures: [.interactiveLogin, .sharing],
         productsAtBuild: productsAtBuild
     )
 

@@ -23,16 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import SwiftUI
 
 public struct SettingsView: View {
-
-    @AppStorage(AppPreference.confirmsQuit.key)
-    private var confirmsQuit = true
-
-    @AppStorage(AppPreference.locksInBackground.key)
-    private var locksInBackground = false
 
     @State
     private var path = NavigationPath()
@@ -42,14 +35,7 @@ public struct SettingsView: View {
 
     public var body: some View {
         Form {
-            Section {
-#if os(macOS)
-                confirmsQuitToggle
-#endif
-#if os(iOS)
-                lockInBackgroundToggle
-#endif
-            }
+            SettingsSection()
         }
         .themeForm()
         .navigationTitle(Strings.Global.settings)
@@ -57,15 +43,5 @@ public struct SettingsView: View {
         .themeNavigationDetail()
         .themeNavigationStack(if: true, closable: true, path: $path)
 #endif
-    }
-}
-
-private extension SettingsView {
-    var confirmsQuitToggle: some View {
-        Toggle(Strings.Views.Settings.Rows.confirmQuit, isOn: $confirmsQuit)
-    }
-
-    var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Settings.Rows.lockInBackground, isOn: $locksInBackground)
     }
 }
