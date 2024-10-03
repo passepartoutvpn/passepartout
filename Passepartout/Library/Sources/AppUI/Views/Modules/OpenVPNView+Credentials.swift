@@ -89,7 +89,7 @@ private extension OpenVPNView.CredentialsView {
     var restrictedArea: some View {
         switch iapManager.paywallReason(forFeature: .interactiveLogin) {
         case .purchase(let appFeature):
-            Button(Strings.Modules.Openvpn.Purchase.interactive) {
+            Button(Strings.Modules.Openvpn.Credentials.Interactive.purchase) {
                 paywallReason = .purchase(appFeature)
             }
 
@@ -115,7 +115,7 @@ private extension OpenVPNView.CredentialsView {
                 }
             }
         }
-        .themeSectionWithFooter(interactiveFooter)
+        .themeSection(footer: interactiveFooter)
     }
 
     var interactiveFooter: String? {
@@ -140,7 +140,7 @@ private extension OpenVPNView.CredentialsView {
                     .textContentType(.oneTimeCode)
             }
         }
-        .themeSectionWithFooter(inputFooter)
+        .themeSection(footer: inputFooter)
     }
 
     var inputFooter: String? {

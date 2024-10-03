@@ -182,7 +182,6 @@
 "modules.on_demand.ethernet" = "Ethernet";
 "modules.on_demand.ssid.add" = "Add SSID";
 
-"modules.openvpn.purchase.interactive" = "Log in interactively";
 "modules.openvpn.pull" = "Pull";
 "modules.openvpn.redirect_gateway" = "Redirect gateway";
 "modules.openvpn.credentials" = "Credentials";
@@ -199,6 +198,7 @@
 "modules.openvpn.randomize_endpoint" = "Randomize endpoint";
 "modules.openvpn.randomize_hostname" = "Randomize hostname";
 "modules.openvpn.credentials.interactive" = "Interactive";
+"modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 "modules.openvpn.credentials.interactive.footer" = "On-demand will be disabled.";
 "modules.openvpn.credentials.otp_method.approach.append" = "The OTP will be appended to the password.";
 "modules.openvpn.credentials.otp_method.approach.encode" = "The OTP will be encoded in Base64 with the password.";

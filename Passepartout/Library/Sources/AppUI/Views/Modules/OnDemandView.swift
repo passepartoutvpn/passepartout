@@ -113,7 +113,7 @@ private extension OnDemandView {
                 Text($0.localizedDescription)
             }
         }
-        .themeSectionWithFooter(policyFooterDescription)
+        .themeSection(footer: policyFooterDescription)
     }
 
     var policyFooterDescription: String {

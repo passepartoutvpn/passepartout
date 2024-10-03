@@ -68,10 +68,12 @@ extension ThemeManualInputModifier {
     }
 }
 
-extension ThemeSectionWithFooterModifier {
+extension ThemeSectionWithHeaderFooterModifier {
     func body(content: Content) -> some View {
         Section {
             content
+        } header: {
+            header.map(Text.init)
         } footer: {
             footer.map(Text.init)
         }

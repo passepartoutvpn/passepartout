@@ -187,7 +187,9 @@ struct ThemeAnimationModifier<T>: ViewModifier where T: Equatable {
     }
 }
 
-struct ThemeSectionWithFooterModifier: ViewModifier {
+struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
+    let header: String?
+
     let footer: String?
 }
 
