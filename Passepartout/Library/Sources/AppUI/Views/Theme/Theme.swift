@@ -162,6 +162,10 @@ extension View {
         ))
     }
 
+    public func themeConfirmation(isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
+        modifier(ThemeConfirmationModifier(isPresented: isPresented, action: action))
+    }
+
     public func themeNavigationStack(if condition: Bool, closable: Bool = false, path: Binding<NavigationPath>) -> some View {
         modifier(ThemeNavigationStackModifier(condition: condition, closable: closable, path: path))
     }

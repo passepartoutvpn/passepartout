@@ -428,6 +428,12 @@ public enum Strings {
       public static let name = Strings.tr("Localizable", "placeholders.profile.name", fallback: "My profile")
     }
   }
+  public enum Theme {
+    public enum Confirmation {
+      /// Are you sure?
+      public static let message = Strings.tr("Localizable", "theme.confirmation.message", fallback: "Are you sure?")
+    }
+  }
   public enum Ui {
     public enum ConnectionStatus {
       ///  (on-demand)

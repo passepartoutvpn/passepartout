@@ -40,6 +40,9 @@ struct SettingsSectionGroup: View {
     let profileManager: ProfileManager
 
     @State
+    private var isConfirmingEraseiCloud = false
+
+    @State
     private var isErasingiCloud = false
 
     var body: some View {
@@ -74,6 +77,9 @@ private extension SettingsSectionGroup {
 
     var eraseCloudKitButton: some View {
         Button(Strings.Views.Settings.Rows.eraseIcloud, role: .destructive) {
+            isConfirmingEraseiCloud = true
+        }
+        .themeConfirmation(isPresented: $isConfirmingEraseiCloud) {
             isErasingiCloud = true
             Task {
                 do {

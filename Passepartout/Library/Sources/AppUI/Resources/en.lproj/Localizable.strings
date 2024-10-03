@@ -102,6 +102,10 @@
 "placeholders.username" = "username";
 "placeholders.secret" = "secret";
 
+// MARK: - Theme
+
+"theme.confirmation.message" = "Are you sure?";
+
 // MARK: - Views
 
 "views.profiles.rows.not_installed" = "Select a profile";
