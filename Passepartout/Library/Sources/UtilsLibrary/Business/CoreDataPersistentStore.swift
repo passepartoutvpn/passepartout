@@ -47,9 +47,9 @@ public final class CoreDataPersistentStore {
         author: String?
     ) {
         let container: NSPersistentContainer
-        if cloudKitIdentifier != nil {
+        if let cloudKitIdentifier {
             container = NSPersistentCloudKitContainer(name: containerName, managedObjectModel: model)
-            logger.debug("Set up CloudKit container: \(containerName)")
+            logger.debug("Set up CloudKit container (\(cloudKitIdentifier)): \(containerName)")
         } else {
             container = NSPersistentContainer(name: containerName, managedObjectModel: model)
             logger.debug("Set up local container: \(containerName)")
