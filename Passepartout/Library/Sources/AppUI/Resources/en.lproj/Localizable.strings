@@ -52,6 +52,7 @@
 "global.restart" = "Restart";
 "global.route" = "Route";
 "global.routes" = "Routes";
+"global.routing" = "Routing";
 "global.save" = "Save";
 "global.server" = "Server";
 "global.servers" = "Servers";

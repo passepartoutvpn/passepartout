@@ -68,6 +68,7 @@ extension IPView {
                     Button(Strings.Global.ok, action: parseAndSubmit)
                 }
             }
+            .themeNavigationDetail()
         }
     }
 }

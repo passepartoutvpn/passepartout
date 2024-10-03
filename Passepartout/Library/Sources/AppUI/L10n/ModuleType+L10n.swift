@@ -42,7 +42,7 @@ extension ModuleType: LocalizableEntity {
             return Strings.Unlocalized.httpProxy
 
         case .ip:
-            return Strings.Unlocalized.ip
+            return Strings.Global.routing
 
         case .onDemand:
             return Strings.Global.onDemand

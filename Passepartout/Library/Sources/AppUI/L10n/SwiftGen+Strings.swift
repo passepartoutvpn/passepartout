@@ -253,6 +253,8 @@ public enum Strings {
     public static let route = Strings.tr("Localizable", "global.route", fallback: "Route")
     /// Routes
     public static let routes = Strings.tr("Localizable", "global.routes", fallback: "Routes")
+    /// Routing
+    public static let routing = Strings.tr("Localizable", "global.routing", fallback: "Routing")
     /// Save
     public static let save = Strings.tr("Localizable", "global.save", fallback: "Save")
     /// Server
