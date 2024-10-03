@@ -50,6 +50,7 @@ extension Theme {
         case share
         case show
         case sleeping
+        case tip
         case tunnelDisable
         case tunnelEnable
         case tunnelRestart
