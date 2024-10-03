@@ -135,12 +135,21 @@ extension ProfileManager {
 
     public func remove(withIds profileIds: [Profile.ID]) async {
         do {
+            // remove local profiles
             var newAllProfiles = allProfiles
             try await repository.removeEntities(withIds: profileIds)
             profileIds.forEach {
                 newAllProfiles.removeValue(forKey: $0)
             }
             await afterRemove?(profileIds)
+
+            // remove remote counterpart too
+            try? await remoteRepository?.removeEntities(withIds: profileIds)
+            profileIds.forEach {
+                allRemoteProfiles.removeValue(forKey: $0)
+            }
+
+            // publish update
             allProfiles = newAllProfiles
             didChange.send(.remove(profileIds))
         } catch {
