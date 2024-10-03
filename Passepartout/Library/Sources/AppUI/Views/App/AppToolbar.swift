@@ -58,7 +58,7 @@ struct AppToolbar: ToolbarContent {
             }
         } else {
             ToolbarItem(placement: .navigation) {
-                moreMenu
+                moreButton
             }
             ToolbarItemGroup(placement: .primaryAction) {
                 addProfileMenu
@@ -77,12 +77,9 @@ private extension AppToolbar {
         )
     }
 
-    var moreMenu: some View {
-        Menu {
-            settingsButton
-            aboutButton
-        } label: {
-            ThemeImage(.moreDetails)
+    var moreButton: some View {
+        Button(action: onAbout) {
+            ThemeImageLabel(Strings.Global.about, .moreDetails)
         }
     }
 
