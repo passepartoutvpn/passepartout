@@ -45,6 +45,8 @@ public final class ProfileManager: ObservableObject {
 
     private let repository: any ProfileRepository
 
+    private let remoteRepository: (any ProfileRepository)?
+
     @Published
     private var profiles: [Profile]
 
@@ -63,6 +65,7 @@ public final class ProfileManager: ObservableObject {
     // for testing/previews
     public init(profiles: [Profile]) {
         repository = MockProfileRepository(profiles: profiles)
+        remoteRepository = nil
         self.profiles = []
         allProfiles = profiles.reduce(into: [:]) {
             $0[$1.id] = $1
@@ -73,8 +76,9 @@ public final class ProfileManager: ObservableObject {
         subscriptions = []
     }
 
-    public init(repository: any ProfileRepository) {
+    public init(repository: any ProfileRepository, remoteRepository: (any ProfileRepository)?) {
         self.repository = repository
+        self.remoteRepository = remoteRepository
         profiles = []
         allProfiles = [:]
 
