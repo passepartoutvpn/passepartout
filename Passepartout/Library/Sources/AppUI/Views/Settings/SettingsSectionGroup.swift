@@ -30,7 +30,6 @@ import SwiftUI
 import UtilsLibrary
 
 struct SettingsSectionGroup: View {
-    let profileManager: ProfileManager
 
     @AppStorage(AppPreference.confirmsQuit.key)
     private var confirmsQuit = true
@@ -38,7 +37,7 @@ struct SettingsSectionGroup: View {
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
 
-    var header: String?
+    let profileManager: ProfileManager
 
     @State
     private var isErasingiCloud = false
@@ -52,12 +51,15 @@ struct SettingsSectionGroup: View {
             lockInBackgroundToggle
 #endif
         } header: {
-            header.map(Text.init)
+            Text(Strings.Global.general)
         }
         Group {
             eraseCloudKitButton
         }
-        .themeSection(footer: Strings.Views.Settings.Sections.Icloud.footer)
+        .themeSection(
+            header: Strings.Unlocalized.iCloud,
+            footer: Strings.Views.Settings.Sections.Icloud.footer
+        )
     }
 }
 

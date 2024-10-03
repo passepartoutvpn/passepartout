@@ -108,6 +108,8 @@ extension Strings {
 
         static let httpProxy = "HTTP Proxy"
 
+        static let iCloud = "iCloud"
+
         static let ip = "IP"
 
         static let ipv4 = "IPv4"
