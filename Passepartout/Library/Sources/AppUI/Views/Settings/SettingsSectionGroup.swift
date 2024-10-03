@@ -79,7 +79,10 @@ private extension SettingsSectionGroup {
         Button(Strings.Views.Settings.Rows.eraseIcloud, role: .destructive) {
             isConfirmingEraseiCloud = true
         }
-        .themeConfirmation(isPresented: $isConfirmingEraseiCloud) {
+        .themeConfirmation(
+            isPresented: $isConfirmingEraseiCloud,
+            title: Strings.Views.Settings.Rows.eraseIcloud
+        ) {
             isErasingiCloud = true
             Task {
                 do {

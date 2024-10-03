@@ -107,13 +107,17 @@ struct ThemeConfirmationModifier: ViewModifier {
     @Binding
     var isPresented: Bool
 
+    let title: String
+
     let action: () -> Void
 
     func body(content: Content) -> some View {
         content
-            .confirmationDialog(Strings.Theme.Confirmation.message, isPresented: $isPresented) {
+            .confirmationDialog(title, isPresented: $isPresented) {
                 Button(Strings.Global.ok, action: action)
                 Text(Strings.Global.cancel)
+            } message: {
+                Text(Strings.Theme.Confirmation.message)
             }
     }
 }
