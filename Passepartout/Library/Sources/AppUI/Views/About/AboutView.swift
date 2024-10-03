@@ -35,7 +35,6 @@ struct AboutView: View {
 
     var body: some View {
         listView
-            .navigationTitle(Strings.Views.About.title)
     }
 }
 

@@ -43,6 +43,7 @@ extension AboutView {
             Text(BundleConfiguration.mainVersionString)
                 .padding(.bottom)
         }
+        .navigationTitle(Strings.Views.About.title)
     }
 }
 
