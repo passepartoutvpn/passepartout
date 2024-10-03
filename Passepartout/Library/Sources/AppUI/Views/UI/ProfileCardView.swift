@@ -37,18 +37,30 @@ struct ProfileCardView: View {
 
     let header: ProfileHeader
 
+    let isShared: Bool
+
     var body: some View {
         switch style {
         case .compact:
-            Text(header.name)
-                .themeTruncating()
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                Text(header.name)
+                    .themeTruncating()
+                if isShared {
+                    ThemeImage(.cloud)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
         case .full:
             VStack(alignment: .leading) {
-                Text(header.name)
-                    .font(.headline)
-                    .themeTruncating()
+                HStack {
+                    Text(header.name)
+                        .font(.headline)
+                        .themeTruncating()
+                    if isShared {
+                        ThemeImage(.cloud)
+                    }
+                }
                 Text(Strings.Views.Profiles.Rows.modules(header.modules.count))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
@@ -63,10 +75,19 @@ struct ProfileCardView: View {
 #Preview {
     List {
         Section {
-            ProfileCardView(style: .compact, header: Profile.mock.header())
+            ProfileCardView(
+                style: .compact,
+                header: Profile.mock.header(),
+                isShared: true
+            )
         }
         Section {
-            ProfileCardView(style: .full, header: Profile.mock.header())
+            ProfileCardView(
+                style: .full,
+                header: Profile.mock.header(),
+                isShared: true
+            )
         }
     }
+    .withMockEnvironment()
 }
