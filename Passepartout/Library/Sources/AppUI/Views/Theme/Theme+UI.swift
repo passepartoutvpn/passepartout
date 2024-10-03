@@ -290,16 +290,17 @@ struct ThemeTipModifier: ViewModifier {
                 ThemeImage(.tip)
             }
             .buttonStyle(.borderless)
-        }
-        .popover(isPresented: $isPresenting, arrowEdge: edge) {
-            VStack {
-                Text(text)
-                    .foregroundStyle(.primary)
-                    .lineLimit(nil)
-                    .multilineTextAlignment(.leading)
-                    .frame(width: 150.0)
+            .popover(isPresented: $isPresenting, arrowEdge: edge) {
+                VStack {
+                    Text(text)
+                        .font(.body)
+                        .foregroundStyle(.primary)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+                        .frame(width: 150.0)
+                }
+                .padding(12)
             }
-            .padding(12)
         }
     }
 }
