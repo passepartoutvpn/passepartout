@@ -233,14 +233,14 @@ private extension ProfileManager {
     func reloadFilteredProfiles(with search: String? = nil) {
         profiles = allProfiles
             .values
-            .sorted {
-                $0.name.lowercased() < $1.name.lowercased()
-            }
             .filter {
                 if let search, !search.isEmpty {
                     return $0.name.lowercased().contains(search.lowercased())
                 }
                 return true
+            }
+            .sorted {
+                $0.name.lowercased() < $1.name.lowercased()
             }
     }
 }
