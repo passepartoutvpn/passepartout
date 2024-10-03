@@ -15,14 +15,16 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "AppLibrary",
-            targets: ["AppLibrary"]
+            targets: [
+                "AppLibrary",
+                "LegacyV2"
+            ]
         ),
         .library(
             name: "AppUI",
             targets: [
                 "AppDataProfiles",
-                "AppUI",
-                "LegacyV2"
+                "AppUI"
             ]
         ),
         .library(
