@@ -262,10 +262,10 @@ private extension ProfileManager {
         }
 
         // pull remote updates into local profiles (best-effort)
-        Task {
-            for remoteProfile in allRemoteProfiles.values {
+        for remoteProfile in allRemoteProfiles.values {
+            Task.detached { [weak self] in
                 do {
-                    try await save(remoteProfile)
+                    try await self?.save(remoteProfile)
                 } catch {
                     pp_log(.app, .error, "Unable to import remote profile: \(error)")
                 }
