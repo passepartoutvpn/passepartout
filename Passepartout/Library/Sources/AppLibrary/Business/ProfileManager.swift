@@ -35,8 +35,6 @@ public final class ProfileManager: ObservableObject {
         case save(Profile)
 
         case remove([Profile.ID])
-
-//        case remoteUpdate([Profile])
     }
 
     public var beforeSave: ((Profile) async throws -> Void)?
