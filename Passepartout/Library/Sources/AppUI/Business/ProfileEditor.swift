@@ -273,6 +273,7 @@ extension ProfileEditor {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile)
+            try await profileManager.setRemotelyShared(isShared, profileWithId: newProfile.id)
         } catch {
             pp_log(.app, .fault, "Unable to save edited profile: \(error)")
             throw error

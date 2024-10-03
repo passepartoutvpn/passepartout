@@ -56,6 +56,8 @@ public final class ProfileManager: ObservableObject {
         }
     }
 
+    private var allRemoteProfiles: [Profile.ID: Profile]
+
     public let didChange: PassthroughSubject<Event, Never>
 
     private let searchSubject: CurrentValueSubject<String, Never>
@@ -70,6 +72,7 @@ public final class ProfileManager: ObservableObject {
         allProfiles = profiles.reduce(into: [:]) {
             $0[$1.id] = $1
         }
+        allRemoteProfiles = [:]
 
         didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
@@ -81,6 +84,7 @@ public final class ProfileManager: ObservableObject {
         self.remoteRepository = remoteRepository
         profiles = []
         allProfiles = [:]
+        allRemoteProfiles = [:]
 
         didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
@@ -151,6 +155,29 @@ extension ProfileManager {
     }
 }
 
+// MARK: - Remote
+
+extension ProfileManager {
+    public func isRemotelyShared(profileWithId profileId: Profile.ID) -> Bool {
+        allRemoteProfiles.keys.contains(profileId)
+    }
+
+    public func setRemotelyShared(_ shared: Bool, profileWithId profileId: Profile.ID) async throws {
+        guard let remoteRepository else {
+            pp_log(.app, .error, "Unable to share remotely when no remoteRepository is set")
+            return
+        }
+        guard let profile = allProfiles[profileId] else {
+            return
+        }
+        if shared {
+            try await remoteRepository.saveEntities([profile])
+        } else {
+            try await remoteRepository.removeEntities(withIds: [profileId])
+        }
+    }
+}
+
 // MARK: - Shortcuts
 
 extension ProfileManager {
@@ -205,6 +232,14 @@ extension ProfileManager {
             }
             .store(in: &subscriptions)
 
+        remoteRepository?
+            .entitiesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.notifyRemoteEntities($0)
+            }
+            .store(in: &subscriptions)
+
         searchSubject
             .debounce(for: .milliseconds(searchDebounce), scheduler: DispatchQueue.main)
             .sink { [weak self] in
@@ -228,6 +263,12 @@ private extension ProfileManager {
             $0[$1.id] = $1
         }
         didChange.send(.update(updatedProfiles))
+    }
+
+    func notifyRemoteEntities(_ result: EntitiesResult<Profile>) {
+        allRemoteProfiles = result.entities.reduce(into: [:]) {
+            $0[$1.id] = $1
+        }
     }
 
     func performSearch(_ search: String) {
