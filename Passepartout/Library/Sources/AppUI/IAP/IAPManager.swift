@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 import UtilsLibrary
 
-// TODO: #424, reload receipt + objectWillChange on purchase/transactions
+// FIXME: #424, reload receipt + objectWillChange on purchase/transactions
 
 @MainActor
 public final class IAPManager: ObservableObject {

@@ -35,7 +35,7 @@ struct PaywallView: View {
 
     let feature: AppFeature
 
-    // TODO: #585, implement payments
+    // FIXME: #585, implement payments
     var body: some View {
         Text(String(describing: feature))
             .toolbar(content: toolbarContent)

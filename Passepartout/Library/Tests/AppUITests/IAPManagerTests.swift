@@ -188,7 +188,7 @@ extension IAPManagerTests {
 
     // MARK: Purchasable
 
-    // TODO: #570, test app library
+    // FIXME: #570, test app library
 
     // MARK: App level
 
