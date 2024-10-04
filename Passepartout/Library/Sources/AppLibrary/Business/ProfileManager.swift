@@ -50,7 +50,7 @@ public final class ProfileManager: ObservableObject {
 
     private var allProfiles: [Profile.ID: Profile] {
         didSet {
-            reloadFilteredProfiles()
+            reloadFilteredProfiles(with: searchSubject.value)
         }
     }
 
@@ -302,11 +302,11 @@ private extension ProfileManager {
         reloadFilteredProfiles(with: search)
     }
 
-    func reloadFilteredProfiles(with search: String? = nil) {
+    func reloadFilteredProfiles(with search: String) {
         profiles = allProfiles
             .values
             .filter {
-                if let search, !search.isEmpty {
+                if !search.isEmpty {
                     return $0.name.lowercased().contains(search.lowercased())
                 }
                 return true
