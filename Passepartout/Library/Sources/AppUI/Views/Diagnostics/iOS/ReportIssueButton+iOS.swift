@@ -60,6 +60,8 @@ extension ReportIssueButton: View {
 }
 
 private extension ReportIssueButton {
+
+    @MainActor
     func sendEmail() {
         Task {
             isPending = true

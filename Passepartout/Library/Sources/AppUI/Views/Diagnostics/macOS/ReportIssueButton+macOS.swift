@@ -37,15 +37,17 @@ extension ReportIssueButton: View {
 }
 
 private extension ReportIssueButton {
+
+    @MainActor
     func sendEmail() {
         Task {
-            guard let service = NSSharingService(named: .composeEmail) else {
-                isUnableToEmail = true
-                return
-            }
             isPending = true
             defer {
                 isPending = false
+            }
+            guard let service = NSSharingService(named: .composeEmail) else {
+                isUnableToEmail = true
+                return
             }
             let issue = await Issue.withMetadata(.init(
                 configuration: .shared,
