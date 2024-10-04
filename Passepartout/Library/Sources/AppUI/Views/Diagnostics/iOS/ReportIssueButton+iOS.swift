@@ -81,6 +81,17 @@ private extension ReportIssueButton {
             issueBeingReported = issue
         }
     }
+
+    func openMailTo(with issue: Issue) {
+        guard let url = URL.mailto(to: issue.to, subject: issue.subject, body: issue.body) else {
+            return
+        }
+        guard UIApplication.shared.canOpenURL(url) else {
+            isUnableToEmail = true
+            return
+        }
+        UIApplication.shared.open(url)
+    }
 }
 
 private extension Issue {
@@ -94,19 +105,6 @@ private extension Issue {
             list.append(.init(data: tunnelLog, mimeType: mimeType, fileName: Strings.Unlocalized.Issues.tunnelLogFilename))
         }
         return list
-    }
-}
-
-private extension ReportIssueButton {
-    func openMailTo(with issue: Issue) {
-        guard let url = URL.mailto(to: issue.to, subject: issue.subject, body: issue.body) else {
-            return
-        }
-        guard UIApplication.shared.canOpenURL(url) else {
-            isUnableToEmail = true
-            return
-        }
-        UIApplication.shared.open(url)
     }
 }
 
