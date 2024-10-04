@@ -37,14 +37,14 @@ extension ReportIssueButton: View {
                 return
             }
             Task {
-                let issue = await Issue.with(
-                    PassepartoutConfiguration.shared,
+                let issue = await Issue.with(.init(
+                    configuration: .shared,
                     versionString: BundleConfiguration.mainVersionString,
                     purchasedProducts: purchasedProducts,
                     tunnel: tunnel,
                     urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
                     parameters: Constants.shared.log
-                )
+                ))
                 service.recipients = [issue.to]
                 service.subject = issue.subject
                 service.perform(withItems: issue.items)
