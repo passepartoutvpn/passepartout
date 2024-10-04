@@ -40,11 +40,11 @@ private extension AppUI {
     static func assertMissingModuleImplementations() {
         ModuleType.allCases.forEach { moduleType in
             let module = moduleType.newModule()
-            guard module as? ModuleTypeProviding != nil else {
-                fatalError("\(moduleType): does not implement ModuleTypeProviding")
+            guard module is ModuleTypeProviding else {
+                fatalError("\(moduleType): is not ModuleTypeProviding")
             }
-            guard module as? any ModuleViewProviding != nil else {
-                fatalError("\(moduleType): does not implement ModuleViewProviding")
+            guard module is any ModuleViewProviding else {
+                fatalError("\(moduleType): is not ModuleViewProviding")
             }
         }
     }
