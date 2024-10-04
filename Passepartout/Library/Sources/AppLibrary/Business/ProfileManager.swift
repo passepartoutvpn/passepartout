@@ -117,7 +117,13 @@ extension ProfileManager {
         }
     }
 
-    public func save(_ profile: Profile) async throws {
+    public func save(_ profile: Profile, onlyIfModified: Bool = false) async throws {
+        if onlyIfModified, let existingProfile = allProfiles[profile.id] {
+            guard profile != existingProfile else {
+                pp_log(.app, .info, "Profile \(profile.id) not modified, not saving")
+                return
+            }
+        }
         do {
             try await beforeSave?(profile)
             try await repository.saveEntities([profile])
@@ -290,7 +296,7 @@ private extension ProfileManager {
             for remoteProfile in profilesToImport {
                 do {
                     pp_log(.app, .notice, "Import remote profile \(remoteProfile.id)...")
-                    try await self?.save(remoteProfile)
+                    try await self?.save(remoteProfile, onlyIfModified: true)
                 } catch {
                     pp_log(.app, .error, "Unable to import remote profile: \(error)")
                 }
