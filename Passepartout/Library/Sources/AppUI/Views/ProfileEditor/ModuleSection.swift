@@ -45,7 +45,7 @@ enum ModuleRow: Hashable {
 
     case textList(caption: String, values: [String])
 
-    case copiableText(caption: String? = nil, value: String)
+    case copiableText(caption: String? = nil, value: String, multiline: Bool = true)
 
     case longContent(caption: String, value: String)
 
@@ -112,8 +112,8 @@ private extension View {
                     .withTrailingText(Strings.Global.empty)
             }
 
-        case .copiableText(let caption, let value):
-            ThemeCopiableText(title: caption, value: value)
+        case .copiableText(let caption, let value, let multiline):
+            ThemeCopiableText(title: caption, value: value, isMultiLine: multiline)
 
         case .longContent(let title, let content):
             LongContentLink(title, content: .constant(content)) {

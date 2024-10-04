@@ -130,7 +130,7 @@ private extension IPView {
 
     func row(forRoute route: Route, removeAction: @escaping () -> Void) -> some View {
         ThemeRemovableItemRow(isEditing: true) {
-            ThemeCopiableText(value: route.localizedDescription, isMultiLine: true)
+            ThemeCopiableText(value: route.localizedDescription)
         } removeAction: {
             removeAction()
         }

@@ -386,7 +386,7 @@ struct ThemeCopiableText: View {
 
     let value: String
 
-    var isMultiLine = false
+    var isMultiLine = true
 
     var body: some View {
         HStack {
