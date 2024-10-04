@@ -178,6 +178,15 @@ extension View {
         modifier(ThemeManualInputModifier())
     }
 
+    @ViewBuilder
+    public func themeMultiLine(_ isMultiLine: Bool) -> some View {
+        if isMultiLine {
+            multilineTextAlignment(.leading)
+        } else {
+            themeTruncating()
+        }
+    }
+
     public func themeTruncating(_ mode: Text.TruncationMode = .middle) -> some View {
         lineLimit(1)
             .truncationMode(mode)

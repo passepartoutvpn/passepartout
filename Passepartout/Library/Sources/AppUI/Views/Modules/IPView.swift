@@ -130,7 +130,7 @@ private extension IPView {
 
     func row(forRoute route: Route, removeAction: @escaping () -> Void) -> some View {
         ThemeRemovableItemRow(isEditing: true) {
-            ThemeCopiableText(value: route.localizedDescription)
+            ThemeCopiableText(value: route.localizedDescription, isMultiLine: true)
         } removeAction: {
             removeAction()
         }
@@ -226,8 +226,8 @@ private extension IPView {
         ])
     module.ipv6 = IPSettings(subnet: nil)
         .including(routes: [
-            .init(defaultWithGateway: .ip("::4", .v6)),
-            .init(.init(rawValue: "::1/24"), nil)
+            .init(defaultWithGateway: .ip("fe80::1032:2a6b:fec:f49e", .v6)),
+            .init(.init(rawValue: "fe80:1032:2a6b:fec::/24"), .init(rawValue: "fe80:1032:2a6b:fec::1"))
         ])
     return module.preview()
 }

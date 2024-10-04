@@ -386,6 +386,8 @@ struct ThemeCopiableText: View {
 
     let value: String
 
+    var isMultiLine = false
+
     var body: some View {
         HStack {
             if let title {
@@ -394,7 +396,7 @@ struct ThemeCopiableText: View {
             }
             Text(value)
                 .foregroundStyle(title == nil ? theme.titleColor : theme.valueColor)
-                .themeTruncating()
+                .themeMultiLine(isMultiLine)
             if title == nil {
                 Spacer()
             }
