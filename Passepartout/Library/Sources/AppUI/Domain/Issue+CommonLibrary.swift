@@ -1,5 +1,5 @@
 //
-//  CommonLibrary+Issue.swift
+//  Issue+CommonLibrary.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/18/24.
@@ -27,15 +27,16 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-// FIXME: #656, hidden dependencies
-//
-// BundleConfiguration
-// CommonLibrary
-// Constants.shared
-
-extension CommonLibrary {
-    static func newIssue(versionString: String, purchasedProducts: Set<AppProduct>, tunnel: Tunnel) async -> Issue {
-        let appLog = currentLog(parameters: Constants.shared.log)
+extension Issue {
+    static func with(
+        _ configuration: PassepartoutConfiguration,
+        versionString: String,
+        purchasedProducts: Set<AppProduct>,
+        tunnel: Tunnel,
+        urlForTunnelLog: URL,
+        parameters: Constants.Log
+    ) async -> Issue {
+        let appLog = configuration.currentLog(parameters: parameters)
             .joined(separator: "\n")
             .data(using: .utf8)
 
@@ -43,12 +44,12 @@ extension CommonLibrary {
 
         // live tunnel log
         if await tunnel.status != .inactive {
-            tunnelLog = await tunnel.currentLog(parameters: Constants.shared.log)
+            tunnelLog = await tunnel.currentLog(parameters: parameters)
                 .joined(separator: "\n")
                 .data(using: .utf8)
         }
         // latest persisted tunnel log
-        else if let latestTunnelEntry = availableLogs(at: BundleConfiguration.urlForTunnelLog)
+        else if let latestTunnelEntry = configuration.availableLogs(at: urlForTunnelLog)
             .max(by: { $0.key < $1.key }) {
 
             tunnelLog = try? Data(contentsOf: latestTunnelEntry.value)

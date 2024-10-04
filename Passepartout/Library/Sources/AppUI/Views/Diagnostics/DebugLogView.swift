@@ -31,7 +31,7 @@ import UtilsLibrary
 extension DebugLogView {
     static func withApp(parameters: Constants.Log) -> DebugLogView {
         DebugLogView {
-            CommonLibrary.currentLog(parameters: parameters)
+            PassepartoutConfiguration.shared.currentLog(parameters: parameters)
         }
     }
 

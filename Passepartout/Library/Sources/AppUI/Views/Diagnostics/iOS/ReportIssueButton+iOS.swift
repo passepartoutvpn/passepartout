@@ -40,10 +40,13 @@ extension ReportIssueButton: View {
                     defer {
                         isPending = false
                     }
-                    let issue = await CommonLibrary.newIssue(
+                    let issue = await Issue.with(
+                        PassepartoutConfiguration.shared,
                         versionString: BundleConfiguration.mainVersionString,
                         purchasedProducts: purchasedProducts,
-                        tunnel: tunnel
+                        tunnel: tunnel,
+                        urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
+                        parameters: Constants.shared.log
                     )
                     guard MailComposerView.canSendMail() else {
                         openMailTo(with: issue)

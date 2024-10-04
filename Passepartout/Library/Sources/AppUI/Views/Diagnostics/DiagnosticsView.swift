@@ -51,7 +51,7 @@ struct DiagnosticsView: View {
     private var logsPrivateData = false
 
     var availableTunnelLogs: () -> [LogEntry] = {
-        CommonLibrary.availableLogs(at: BundleConfiguration.urlForTunnelLog)
+        PassepartoutConfiguration.shared.availableLogs(at: BundleConfiguration.urlForTunnelLog)
             .sorted {
                 $0.key > $1.key
             }
