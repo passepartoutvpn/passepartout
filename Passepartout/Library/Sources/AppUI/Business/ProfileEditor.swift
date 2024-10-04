@@ -272,7 +272,7 @@ extension ProfileEditor {
     func save(to profileManager: ProfileManager) async throws {
         do {
             let newProfile = try build()
-            try await profileManager.save(newProfile, shared: isShared)
+            try await profileManager.save(newProfile, isShared: isShared)
         } catch {
             pp_log(.app, .fault, "Unable to save edited profile: \(error)")
             throw error

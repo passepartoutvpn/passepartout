@@ -117,7 +117,7 @@ extension ProfileManager {
         }
     }
 
-    public func save(_ profile: Profile, shared: Bool? = nil) async throws {
+    public func save(_ profile: Profile, isShared: Bool? = nil) async throws {
         pp_log(.app, .notice, "Save profile \(profile.id)...")
         do {
             if let existingProfile = allProfiles[profile.id], profile != existingProfile {
@@ -134,8 +134,8 @@ extension ProfileManager {
             throw error
         }
         do {
-            if let shared, let remoteRepository {
-                if shared {
+            if let isShared, let remoteRepository {
+                if isShared {
                     pp_log(.app, .notice, "Enable remote sharing of profile \(profile.id)...")
                     try await remoteRepository.saveEntities([profile])
                 } else {
