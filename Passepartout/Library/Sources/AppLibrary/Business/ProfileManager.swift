@@ -316,6 +316,7 @@ private extension ProfileManager {
     }
 
     func performSearch(_ search: String) {
+        pp_log(.app, .notice, "Filter profiles with '\(search)'")
         reloadFilteredProfiles(with: search)
     }
 
