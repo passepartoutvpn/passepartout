@@ -21,12 +21,6 @@ logname = "CHANGELOG.txt"
 
 desc "Bump version"
 lane :bump do |options|
-    version = options[:version]
-    build = options[:build]
-    increment_build_number(build_number: build)
-    unless version.nil? || version.empty?
-        increment_version_number_in_xcodeproj(version_number: version)
-    end
     unless options[:only]
         log = changelog_from_git_commits(
             pretty: "* %h %s",
@@ -36,7 +30,13 @@ lane :bump do |options|
         File.open(path, "w") { |file|
             file.write(log)
         }
-        system("vim", path)
+        system("vim", path) or UI.user_error!("CHANGELOG editor cancelled")
+    end
+    version = options[:version]
+    build = options[:build]
+    increment_build_number(build_number: build)
+    unless version.nil? || version.empty?
+        increment_version_number_in_xcodeproj(version_number: version)
     end
     commit_version_bump(
         message: "Bump version",
