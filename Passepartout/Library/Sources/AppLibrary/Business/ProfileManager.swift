@@ -129,7 +129,11 @@ extension ProfileManager {
             } else {
                 pp_log(.app, .notice, "Profile \(profile.id) not modified, not saving")
             }
-
+        } catch {
+            pp_log(.app, .fault, "Unable to save profile \(profile.id): \(error)")
+            throw error
+        }
+        do {
             if let shared, let remoteRepository {
                 if shared {
                     pp_log(.app, .notice, "Enable remote sharing of profile \(profile.id)...")
@@ -140,7 +144,7 @@ extension ProfileManager {
                 }
             }
         } catch {
-            pp_log(.app, .fault, "Unable to save profile \(profile.id): \(error)")
+            pp_log(.app, .fault, "Unable to save/remove remote profile \(profile.id): \(error)")
             throw error
         }
     }
