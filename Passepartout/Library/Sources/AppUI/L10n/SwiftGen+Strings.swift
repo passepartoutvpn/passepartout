@@ -229,8 +229,8 @@ public enum Strings {
     public static let `none` = Strings.tr("Localizable", "global.none", fallback: "None")
     /// OK
     public static let ok = Strings.tr("Localizable", "global.ok", fallback: "OK")
-    /// On demand
-    public static let onDemand = Strings.tr("Localizable", "global.on_demand", fallback: "On demand")
+    /// On-demand
+    public static let onDemand = Strings.tr("Localizable", "global.on_demand", fallback: "On-demand")
     /// Other
     public static let other = Strings.tr("Localizable", "global.other", fallback: "Other")
     /// Password
