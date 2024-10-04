@@ -117,7 +117,7 @@ extension ProfileManager {
         }
     }
 
-    public func save(_ profile: Profile, onlyIfModified: Bool = false) async throws {
+    public func save(_ profile: Profile, shared: Bool? = nil, onlyIfModified: Bool = false) async throws {
         pp_log(.app, .notice, "Save profile \(profile.id)...")
         if onlyIfModified, let existingProfile = allProfiles[profile.id] {
             guard profile != existingProfile else {
@@ -128,6 +128,17 @@ extension ProfileManager {
         do {
             try await beforeSave?(profile)
             try await repository.saveEntities([profile])
+
+            if let shared, let remoteRepository {
+                if shared {
+                    pp_log(.app, .notice, "Enable remote sharing of profile \(profile.id)...")
+                    try await remoteRepository.saveEntities([profile])
+                } else {
+                    pp_log(.app, .notice, "Disable remote sharing of profile \(profile.id)...")
+                    try await remoteRepository.removeEntities(withIds: [profile.id])
+                }
+            }
+
             allProfiles[profile.id] = profile
             didChange.send(.save(profile))
         } catch {
@@ -175,24 +186,6 @@ extension ProfileManager {
 extension ProfileManager {
     public func isRemotelyShared(profileWithId profileId: Profile.ID) -> Bool {
         allRemoteProfiles.keys.contains(profileId)
-    }
-
-    public func setRemotelyShared(_ shared: Bool, profileWithId profileId: Profile.ID) async throws {
-        guard let remoteRepository else {
-            pp_log(.app, .error, "Unable to share remotely when no remoteRepository is set")
-            return
-        }
-        guard let profile = allProfiles[profileId] else {
-            pp_log(.app, .error, "Unable to share remotely non-existent profile \(profileId)")
-            return
-        }
-        if shared {
-            pp_log(.app, .notice, "Enable remote sharing of profile \(profileId)...")
-            try await remoteRepository.saveEntities([profile])
-        } else {
-            pp_log(.app, .notice, "Disable remote sharing of profile \(profileId)...")
-            try await remoteRepository.removeEntities(withIds: [profileId])
-        }
     }
 
     public func eraseRemotelySharedProfiles() async throws {
