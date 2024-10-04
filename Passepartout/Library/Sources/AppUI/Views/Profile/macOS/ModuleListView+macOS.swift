@@ -59,7 +59,6 @@ struct ModuleListView: View, Routable {
             } header: {
                 if !profileEditor.modules.isEmpty {
                     Text(Strings.Global.modules)
-                        .themeTip(Strings.Views.Profile.ModuleList.Section.footer, edge: .bottom)
                 }
             }
         }
@@ -88,6 +87,8 @@ private extension ModuleListView {
             ThemeImage(.remove)
         }
         .disabled(!canRemoveSelectedModule)
+        EmptyView()
+            .themeTip(Strings.Views.Profile.ModuleList.Section.footer, edge: .bottom)
     }
 
     var addModuleMenu: some View {

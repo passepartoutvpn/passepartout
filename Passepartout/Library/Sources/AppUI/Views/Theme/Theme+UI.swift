@@ -309,6 +309,7 @@ struct ThemeTipModifier: ViewModifier {
             } label: {
                 ThemeImage(.tip)
             }
+            .imageScale(.large)
             .buttonStyle(.borderless)
             .popover(isPresented: $isPresenting, arrowEdge: edge) {
                 VStack {
