@@ -31,30 +31,34 @@ import SwiftUI
 
 extension ReportIssueButton: View {
     var body: some View {
-        Button(title) {
+        Button(title, action: sendEmail)
+            .disabled(isPending)
+    }
+}
+
+private extension ReportIssueButton {
+    func sendEmail() {
+        Task {
             guard let service = NSSharingService(named: .composeEmail) else {
                 isUnableToEmail = true
                 return
             }
-            Task {
-                isPending = true
-                defer {
-                    isPending = false
-                }
-                let issue = await Issue.withMetadata(.init(
-                    configuration: .shared,
-                    versionString: BundleConfiguration.mainVersionString,
-                    purchasedProducts: purchasedProducts,
-                    tunnel: tunnel,
-                    urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
-                    parameters: Constants.shared.log
-                ))
-                service.recipients = [issue.to]
-                service.subject = issue.subject
-                service.perform(withItems: issue.items)
+            isPending = true
+            defer {
+                isPending = false
             }
+            let issue = await Issue.withMetadata(.init(
+                configuration: .shared,
+                versionString: BundleConfiguration.mainVersionString,
+                purchasedProducts: purchasedProducts,
+                tunnel: tunnel,
+                urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
+                parameters: Constants.shared.log
+            ))
+            service.recipients = [issue.to]
+            service.subject = issue.subject
+            service.perform(withItems: issue.items)
         }
-        .disabled(isPending)
     }
 }
 

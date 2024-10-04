@@ -34,27 +34,7 @@ import UtilsLibrary
 extension ReportIssueButton: View {
     var body: some View {
         HStack {
-            Button(title) {
-                Task {
-                    isPending = true
-                    defer {
-                        isPending = false
-                    }
-                    let issue = await Issue.withMetadata(.init(
-                        configuration: .shared,
-                        versionString: BundleConfiguration.mainVersionString,
-                        purchasedProducts: purchasedProducts,
-                        tunnel: tunnel,
-                        urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
-                        parameters: Constants.shared.log
-                    ))
-                    guard MailComposerView.canSendMail() else {
-                        openMailTo(with: issue)
-                        return
-                    }
-                    issueBeingReported = issue
-                }
-            }
+            Button(title, action: sendEmail)
             if isPending {
                 Spacer()
                 ProgressView()
@@ -75,6 +55,30 @@ extension ReportIssueButton: View {
                 messageBody: $0.body,
                 attachments: $0.attachments
             )
+        }
+    }
+}
+
+private extension ReportIssueButton {
+    func sendEmail() {
+        Task {
+            isPending = true
+            defer {
+                isPending = false
+            }
+            let issue = await Issue.withMetadata(.init(
+                configuration: .shared,
+                versionString: BundleConfiguration.mainVersionString,
+                purchasedProducts: purchasedProducts,
+                tunnel: tunnel,
+                urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
+                parameters: Constants.shared.log
+            ))
+            guard MailComposerView.canSendMail() else {
+                openMailTo(with: issue)
+                return
+            }
+            issueBeingReported = issue
         }
     }
 }
