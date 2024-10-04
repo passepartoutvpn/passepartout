@@ -1,5 +1,5 @@
 //
-//  Issue+CommonLibrary.swift
+//  Issue+Metadata.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/18/24.
