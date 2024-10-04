@@ -1,5 +1,5 @@
 {
-    "bundle": "AppConfig",
+    "bundleKey": "AppConfig",
     "websites": {
         "home": "https://passepartoutvpn.app",
         "subreddit": "https://www.reddit.com/r/passepartout/",

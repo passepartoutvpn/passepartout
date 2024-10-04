@@ -106,7 +106,7 @@ private extension BundleConfiguration {
 
     // WARNING: fails from package itself, e.g. in previews
     static var main: BundleConfiguration {
-        guard let bundle = BundleConfiguration(.main, key: Constants.shared.bundle) else {
+        guard let bundle = BundleConfiguration(.main, key: Constants.shared.bundleKey) else {
             fatalError("Missing main bundle")
         }
         return bundle

@@ -128,7 +128,7 @@ public struct Constants: Decodable, Sendable {
         public let maxAge: TimeInterval?
     }
 
-    public let bundle: String
+    public let bundleKey: String
 
     public let websites: Websites
 
