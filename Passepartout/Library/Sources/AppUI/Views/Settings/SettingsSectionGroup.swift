@@ -86,7 +86,7 @@ private extension SettingsSectionGroup {
             Task {
                 do {
                     pp_log(.app, .info, "Erase CloudKit profiles...")
-                    try await profileManager.eraseRemoteProfiles()
+                    try await profileManager.eraseRemotelySharedProfiles()
 
                     let containerId = BundleConfiguration.mainString(for: .cloudKitId)
                     pp_log(.app, .info, "Erase CloudKit store with identifier \(containerId)...")

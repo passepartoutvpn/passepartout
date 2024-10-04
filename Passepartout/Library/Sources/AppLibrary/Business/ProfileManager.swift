@@ -118,6 +118,7 @@ extension ProfileManager {
     }
 
     public func save(_ profile: Profile, onlyIfModified: Bool = false) async throws {
+        pp_log(.app, .notice, "Save profile \(profile.id)...")
         if onlyIfModified, let existingProfile = allProfiles[profile.id] {
             guard profile != existingProfile else {
                 pp_log(.app, .notice, "Profile \(profile.id) not modified, not saving")
@@ -140,6 +141,7 @@ extension ProfileManager {
     }
 
     public func remove(withIds profileIds: [Profile.ID]) async {
+        pp_log(.app, .notice, "Remove profiles \(profileIds)...")
         do {
             // remove local profiles
             var newAllProfiles = allProfiles
@@ -181,16 +183,20 @@ extension ProfileManager {
             return
         }
         guard let profile = allProfiles[profileId] else {
+            pp_log(.app, .error, "Unable to share remotely non-existent profile \(profileId)")
             return
         }
         if shared {
+            pp_log(.app, .notice, "Enable remote sharing of profile \(profileId)...")
             try await remoteRepository.saveEntities([profile])
         } else {
+            pp_log(.app, .notice, "Disable remote sharing of profile \(profileId)...")
             try await remoteRepository.removeEntities(withIds: [profileId])
         }
     }
 
-    public func eraseRemoteProfiles() async throws {
+    public func eraseRemotelySharedProfiles() async throws {
+        pp_log(.app, .notice, "Erase remotely shared profiles...")
         try await remoteRepository?.removeEntities(withIds: Array(allRemoteProfiles.keys))
     }
 }
@@ -215,6 +221,7 @@ extension ProfileManager {
 
         var builder = profile.builder(withNewId: true)
         builder.name = firstUniqueName(from: profile.name)
+        pp_log(.app, .notice, "Duplicate profile [\(profileId), \(profile.name)] -> [\(builder.id), \(builder.name)]...")
         let copy = try builder.tryBuild()
 
         try await save(copy)
@@ -277,12 +284,14 @@ extension ProfileManager {
 
 private extension ProfileManager {
     func reloadLocalProfiles(_ result: EntitiesResult<Profile>) {
+        pp_log(.app, .info, "Reload local profiles: \(result.entities.map(\.id))")
         allProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
     }
 
     func reloadRemoteProfiles(_ result: EntitiesResult<Profile>) {
+        pp_log(.app, .info, "Reload remote profiles: \(result.entities.map(\.id))")
         allRemoteProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
@@ -292,6 +301,8 @@ private extension ProfileManager {
     // pull remote updates into local profiles (best-effort)
     func importRemoteProfiles(_ result: EntitiesResult<Profile>) {
         let profilesToImport = result.entities
+        pp_log(.app, .info, "Try to import remote profiles: \(result.entities.map(\.id))")
+
         Task.detached { [weak self] in
             for remoteProfile in profilesToImport {
                 do {
