@@ -239,7 +239,7 @@ extension ProfileManager {
             .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.notifyLocalEntities($0)
+                self?.reloadLocalProfiles($0)
             }
             .store(in: &subscriptions)
 
@@ -247,7 +247,16 @@ extension ProfileManager {
             .entitiesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.notifyRemoteEntities($0)
+                self?.reloadRemoteProfiles($0)
+            }
+            .store(in: &subscriptions)
+
+        remoteRepository?
+            .entitiesPublisher
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.importRemoteProfiles($0)
             }
             .store(in: &subscriptions)
 
@@ -261,26 +270,22 @@ extension ProfileManager {
 }
 
 private extension ProfileManager {
-    func notifyLocalEntities(_ result: EntitiesResult<Profile>) {
+    func reloadLocalProfiles(_ result: EntitiesResult<Profile>) {
         allProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
     }
 
-    func notifyRemoteEntities(_ result: EntitiesResult<Profile>) {
-        let isInitial = allRemoteProfiles.isEmpty
+    func reloadRemoteProfiles(_ result: EntitiesResult<Profile>) {
         allRemoteProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
         objectWillChange.send()
+    }
 
-        // do not import on initial load
-        guard !isInitial else {
-            return
-        }
-
-        // pull remote updates into local profiles (best-effort)
-        let profilesToImport = allRemoteProfiles.values
+    // pull remote updates into local profiles (best-effort)
+    func importRemoteProfiles(_ result: EntitiesResult<Profile>) {
+        let profilesToImport = result.entities
         Task.detached { [weak self] in
             for remoteProfile in profilesToImport {
                 do {
