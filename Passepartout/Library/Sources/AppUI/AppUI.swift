@@ -26,11 +26,7 @@
 import Foundation
 import PassepartoutKit
 
-// TODO: #656, make non-static
-public struct AppUI {
-    private init() {
-    }
-
+public enum AppUI {
     public static func configure(with context: AppContext) {
         assertMissingModuleImplementations()
     }
