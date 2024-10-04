@@ -1,2 +1,3 @@
+* eea548656 Fix crash on "Report issue"
 * 149176610 Per-profile iCloud syncing (#668)
 * 63b0199a3 Merge Settings into About on iOS (#670)
