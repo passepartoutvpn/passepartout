@@ -1,5 +1,5 @@
 //
-//  Issue+App.swift
+//  CommonLibrary+Issue.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/18/24.
@@ -27,11 +27,15 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-extension Issue {
+// FIXME: #656, hidden dependencies
+//
+// BundleConfiguration
+// CommonLibrary
+// Constants.shared
 
-    // TODO: #656, make non-static
-    static func with(versionString: String, purchasedProducts: Set<AppProduct>, tunnel: Tunnel) async -> Self {
-        let appLog = CommonLibrary.currentLog(parameters: Constants.shared.log)
+extension CommonLibrary {
+    static func newIssue(versionString: String, purchasedProducts: Set<AppProduct>, tunnel: Tunnel) async -> Issue {
+        let appLog = currentLog(parameters: Constants.shared.log)
             .joined(separator: "\n")
             .data(using: .utf8)
 
@@ -44,7 +48,7 @@ extension Issue {
                 .data(using: .utf8)
         }
         // latest persisted tunnel log
-        else if let latestTunnelEntry = CommonLibrary.availableLogs(at: BundleConfiguration.urlForTunnelLog)
+        else if let latestTunnelEntry = availableLogs(at: BundleConfiguration.urlForTunnelLog)
             .max(by: { $0.key < $1.key }) {
 
             tunnelLog = try? Data(contentsOf: latestTunnelEntry.value)
@@ -61,7 +65,9 @@ extension Issue {
             tunnelLog: tunnelLog
         )
     }
+}
 
+extension Issue {
     var to: String {
         Constants.shared.emails.issues
     }

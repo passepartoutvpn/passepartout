@@ -25,6 +25,7 @@
 
 #if os(iOS)
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 import UIKit
@@ -39,7 +40,7 @@ extension ReportIssueButton: View {
                     defer {
                         isPending = false
                     }
-                    let issue = await Issue.with(
+                    let issue = await CommonLibrary.newIssue(
                         versionString: BundleConfiguration.mainVersionString,
                         purchasedProducts: purchasedProducts,
                         tunnel: tunnel

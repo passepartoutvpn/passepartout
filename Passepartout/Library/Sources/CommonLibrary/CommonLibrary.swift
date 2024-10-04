@@ -26,7 +26,11 @@
 import Foundation
 import PassepartoutKit
 
-// TODO: #656, make non-static
+// FIXME: #656, hidden dependencies
+//
+// PassepartoutConfiguration.shared
+// UserDefaults.group
+
 public struct CommonLibrary {
     private init() {
     }

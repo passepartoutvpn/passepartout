@@ -29,22 +29,18 @@ import SwiftUI
 import UtilsLibrary
 
 extension DebugLogView {
-
-    // TODO: #656, make non-static
     static func withApp(parameters: Constants.Log) -> DebugLogView {
         DebugLogView {
             CommonLibrary.currentLog(parameters: parameters)
         }
     }
 
-    // TODO: #656, make non-static
     static func withTunnel(_ tunnel: Tunnel, parameters: Constants.Log) -> DebugLogView {
         DebugLogView {
             await tunnel.currentLog(parameters: parameters)
         }
     }
 
-    // TODO: #656, make non-static
     static func withURL(_ url: URL) -> DebugLogView {
         DebugLogView {
             do {

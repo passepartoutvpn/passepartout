@@ -25,6 +25,7 @@
 
 #if os(macOS)
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -36,7 +37,7 @@ extension ReportIssueButton: View {
                 return
             }
             Task {
-                let issue = await Issue.with(
+                let issue = await CommonLibrary.newIssue(
                     versionString: BundleConfiguration.mainVersionString,
                     purchasedProducts: purchasedProducts,
                     tunnel: tunnel

@@ -26,7 +26,10 @@
 import Foundation
 import PassepartoutKit
 
-// TODO: #656, make non-static
+// FIXME: #656, hidden depedencies
+//
+// Constants.shared
+
 extension BundleConfiguration {
     public enum BundleKey: String {
         case appStoreId
