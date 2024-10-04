@@ -117,17 +117,18 @@ extension ProfileManager {
         }
     }
 
-    public func save(_ profile: Profile, shared: Bool? = nil, onlyIfModified: Bool = false) async throws {
+    public func save(_ profile: Profile, shared: Bool? = nil) async throws {
         pp_log(.app, .notice, "Save profile \(profile.id)...")
-        if onlyIfModified, let existingProfile = allProfiles[profile.id] {
-            guard profile != existingProfile else {
-                pp_log(.app, .notice, "Profile \(profile.id) not modified, not saving")
-                return
-            }
-        }
         do {
-            try await beforeSave?(profile)
-            try await repository.saveEntities([profile])
+            if let existingProfile = allProfiles[profile.id], profile != existingProfile {
+               try await beforeSave?(profile)
+               try await repository.saveEntities([profile])
+
+                allProfiles[profile.id] = profile
+                didChange.send(.save(profile))
+            } else {
+                pp_log(.app, .notice, "Profile \(profile.id) not modified, not saving")
+            }
 
             if let shared, let remoteRepository {
                 if shared {
@@ -138,9 +139,6 @@ extension ProfileManager {
                     try await remoteRepository.removeEntities(withIds: [profile.id])
                 }
             }
-
-            allProfiles[profile.id] = profile
-            didChange.send(.save(profile))
         } catch {
             pp_log(.app, .fault, "Unable to save profile \(profile.id): \(error)")
             throw error
@@ -300,7 +298,7 @@ private extension ProfileManager {
             for remoteProfile in profilesToImport {
                 do {
                     pp_log(.app, .notice, "Import remote profile \(remoteProfile.id)...")
-                    try await self?.save(remoteProfile, onlyIfModified: true)
+                    try await self?.save(remoteProfile)
                 } catch {
                     pp_log(.app, .error, "Unable to import remote profile: \(error)")
                 }
