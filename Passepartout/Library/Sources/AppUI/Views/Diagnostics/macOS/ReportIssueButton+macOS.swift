@@ -37,6 +37,10 @@ extension ReportIssueButton: View {
                 return
             }
             Task {
+                isPending = true
+                defer {
+                    isPending = false
+                }
                 let issue = await Issue.withMetadata(.init(
                     configuration: .shared,
                     versionString: BundleConfiguration.mainVersionString,
@@ -50,6 +54,7 @@ extension ReportIssueButton: View {
                 service.perform(withItems: issue.items)
             }
         }
+        .disabled(isPending)
     }
 }
 
