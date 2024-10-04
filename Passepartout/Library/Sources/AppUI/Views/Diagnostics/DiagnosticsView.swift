@@ -47,7 +47,7 @@ struct DiagnosticsView: View {
     @EnvironmentObject
     var iapManager: IAPManager
 
-    @AppStorage(AppPreference.logsPrivateData.key, store: .group)
+    @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
     private var logsPrivateData = false
 
     var availableTunnelLogs: () -> [LogEntry] = {

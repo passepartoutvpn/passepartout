@@ -41,7 +41,7 @@ public struct CommonLibrary {
             mapper: parameters.formatter.formattedLine
         ))
 
-        if UserDefaults.group.bool(forKey: AppPreference.logsPrivateData.key) {
+        if UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key) {
             PassepartoutConfiguration.shared.logsAddresses = true
             PassepartoutConfiguration.shared.logsModules = true
         }
