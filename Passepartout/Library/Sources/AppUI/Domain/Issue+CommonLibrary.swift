@@ -42,7 +42,7 @@ extension Issue {
         let parameters: Constants.Log
     }
 
-    static func with(_ metadata: Metadata) async -> Issue {
+    static func withMetadata(_ metadata: Metadata) async -> Issue {
         let appLog = metadata.configuration.currentLog(parameters: metadata.parameters)
             .joined(separator: "\n")
             .data(using: .utf8)

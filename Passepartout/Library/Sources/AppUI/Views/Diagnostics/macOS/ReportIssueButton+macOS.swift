@@ -37,7 +37,7 @@ extension ReportIssueButton: View {
                 return
             }
             Task {
-                let issue = await Issue.with(.init(
+                let issue = await Issue.withMetadata(.init(
                     configuration: .shared,
                     versionString: BundleConfiguration.mainVersionString,
                     purchasedProducts: purchasedProducts,
