@@ -587,8 +587,8 @@ public enum Strings {
     }
     public enum Settings {
       public enum Rows {
-        /// Confirm quit
-        public static let confirmQuit = Strings.tr("Localizable", "views.settings.rows.confirm_quit", fallback: "Confirm quit")
+        /// Ask before quit
+        public static let confirmQuit = Strings.tr("Localizable", "views.settings.rows.confirm_quit", fallback: "Ask before quit")
         /// Erase iCloud store
         public static let eraseIcloud = Strings.tr("Localizable", "views.settings.rows.erase_icloud", fallback: "Erase iCloud store")
         /// Lock in background
