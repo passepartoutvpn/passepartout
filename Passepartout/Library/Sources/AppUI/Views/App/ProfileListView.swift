@@ -30,6 +30,12 @@ import UtilsLibrary
 
 struct ProfileListView: View, ProfileManagerProviding, TunnelInstallationProviding {
 
+    @Environment(\.horizontalSizeClass)
+    private var hsClass
+
+    @Environment(\.verticalSizeClass)
+    private var vsClass
+
     @Environment(\.isSearching)
     private var isSearching
 
@@ -101,7 +107,7 @@ private extension ProfileListView {
 
     func profileView(for header: ProfileHeader) -> some View {
         ProfileRowView(
-            style: .full,
+            style: cardStyle,
             profileManager: profileManager,
             tunnel: tunnel,
             header: header,
@@ -123,6 +129,16 @@ private extension ProfileListView {
             )
         }
         .id(header.id)
+    }
+}
+
+private extension ProfileListView {
+    var cardStyle: ProfileCardView.Style {
+        if hsClass == .compact || vsClass == .compact {
+            return .compact
+        } else {
+            return .full
+        }
     }
 }
 
