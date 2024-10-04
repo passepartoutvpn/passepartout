@@ -120,7 +120,8 @@ extension ProfileManager {
     public func save(_ profile: Profile, isShared: Bool? = nil) async throws {
         pp_log(.app, .notice, "Save profile \(profile.id)...")
         do {
-            if let existingProfile = allProfiles[profile.id], profile != existingProfile {
+            let existingProfile = allProfiles[profile.id]
+            if existingProfile == nil || profile != existingProfile {
                try await beforeSave?(profile)
                try await repository.saveEntities([profile])
 
