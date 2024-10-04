@@ -26,9 +26,7 @@
 import Foundation
 import PassepartoutKit
 
-// FIXME: #656, hidden depedencies
-//
-// Constants.shared
+// WARNING: beware of Constants.shared dependency
 
 extension BundleConfiguration {
     public enum BundleKey: String {
@@ -95,14 +93,6 @@ extension BundleConfiguration {
         }
         return url
     }
-
-    public static var urlForAppLog: URL {
-        cachesURL.appending(path: Constants.shared.log.appPath)
-    }
-
-    public static var urlForTunnelLog: URL {
-        cachesURL.appending(path: Constants.shared.log.tunnelPath)
-    }
 }
 
 private extension BundleConfiguration {
@@ -117,13 +107,5 @@ private extension BundleConfiguration {
 
     static var isPreview: Bool {
         ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-    }
-
-    static var cachesURL: URL {
-        let groupId = mainString(for: .groupId)
-        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
-            fatalError("Unable to access App Group container")
-        }
-        return url.appending(components: "Library", "Caches")
     }
 }
