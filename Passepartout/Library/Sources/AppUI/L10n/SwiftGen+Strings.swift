@@ -618,3 +618,4 @@ extension Strings {
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
+// swiftlint:enable all
