@@ -219,7 +219,7 @@ private extension GenericCreditsView.LicenseView {
             do {
                 let session = URLSession(configuration: .ephemeral)
                 let response = try await session.data(from: url)
-                let string = String(decoding: response.0, as: UTF8.self)
+                let string = String(data: response.0, encoding: .utf8)
                 withAnimation {
                     content = string
                 }
