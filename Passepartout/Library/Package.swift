@@ -30,13 +30,15 @@ let package = Package(
         )
     ],
     dependencies: [
-//        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", from: "0.7.0"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit", revision: "2e61214462dcf6ad9e211d8fdbd611c6755845c4"),
-//        .package(path: "../../../passepartoutkit"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-openvpn-openssl", from: "0.6.0"),
-//        .package(path: "../../../passepartoutkit-openvpn-openssl"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-wireguard-go", from: "0.6.2"),
-//        .package(path: "../../../passepartoutkit-wireguard-go"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", from: "0.8.0"),
+//        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "2e61214462dcf6ad9e211d8fdbd611c6755845c4"),
+//        .package(path: "../../../passepartoutkit-source"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", from: "0.8.0"),
+//        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", revision: "031863a1cd683962a7dfe68e20b91fa820a1ecce"),
+//        .package(path: "../../../passepartoutkit-source-openvpn-openssl"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go", from: "0.8.0"),
+//            .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go", revision: "ea39fa396e98cfd2b9a235f0a801aaf03a37e30a"),
+//        .package(path: "../../../passepartoutkit-source-wireguard-go"),
         .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0")
     ],
     targets: [
@@ -45,7 +47,7 @@ let package = Package(
         .target(
             name: "AppData",
             dependencies: [
-                .product(name: "PassepartoutKit", package: "passepartoutkit")
+                .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ]
         ),
         .target(
@@ -53,7 +55,7 @@ let package = Package(
             dependencies: [
                 "AppData",
                 "UtilsLibrary",
-                .product(name: "PassepartoutKit", package: "passepartoutkit")
+                .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
@@ -79,9 +81,9 @@ let package = Package(
         .target(
             name: "CommonLibrary",
             dependencies: [
-                .product(name: "PassepartoutKit", package: "passepartoutkit"),
-                .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-openvpn-openssl"),
-                .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-wireguard-go")
+                .product(name: "PassepartoutKit", package: "passepartoutkit-source"),
+                .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-source-openvpn-openssl"),
+                .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")
             ],
             resources: [
                 .process("Resources")
@@ -90,7 +92,7 @@ let package = Package(
         .target(
             name: "LegacyV2",
             dependencies: [
-                .product(name: "PassepartoutKit", package: "passepartoutkit")
+                .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
