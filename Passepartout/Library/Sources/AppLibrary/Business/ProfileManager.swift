@@ -268,10 +268,16 @@ private extension ProfileManager {
     }
 
     func notifyRemoteEntities(_ result: EntitiesResult<Profile>) {
+        let isInitial = allRemoteProfiles.isEmpty
         allRemoteProfiles = result.entities.reduce(into: [:]) {
             $0[$1.id] = $1
         }
         objectWillChange.send()
+
+        // do not import on initial load
+        guard !isInitial else {
+            return
+        }
 
         // pull remote updates into local profiles (best-effort)
         let profilesToImport = allRemoteProfiles.values
