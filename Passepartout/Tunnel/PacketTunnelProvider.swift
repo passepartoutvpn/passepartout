@@ -31,9 +31,10 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     private var fwd: NEPTPForwarder?
 
     override func startTunnel(options: [String: NSObject]? = nil) async throws {
-        CommonLibrary.configureLogging(
+        PassepartoutConfiguration.shared.configureLogging(
             to: BundleConfiguration.urlForTunnelLog,
-            parameters: Constants.shared.log
+            parameters: Constants.shared.log,
+            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
         fwd = try await NEPTPForwarder(
             provider: self,
@@ -44,7 +45,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         do {
             try await fwd?.startTunnel(options: options)
         } catch {
-            CommonLibrary.flushLog()
+            PassepartoutConfiguration.shared.flushLog()
             throw error
         }
     }
@@ -52,11 +53,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     override func stopTunnel(with reason: NEProviderStopReason) async {
         await fwd?.stopTunnel(with: reason)
         fwd = nil
-        CommonLibrary.flushLog()
+        PassepartoutConfiguration.shared.flushLog()
     }
 
     override func cancelTunnelWithError(_ error: (any Error)?) {
-        CommonLibrary.flushLog()
+        PassepartoutConfiguration.shared.flushLog()
         super.cancelTunnelWithError(error)
     }
 

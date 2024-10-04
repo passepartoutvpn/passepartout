@@ -1,8 +1,8 @@
 //
-//  CommonLibrary.swift
+//  PassepartoutConfiguration+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/31/24.
+//  Created by Davide De Rosa on 10/4/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,24 +26,20 @@
 import Foundation
 import PassepartoutKit
 
-// TODO: #656, make non-static
-public struct CommonLibrary {
-    private init() {
-    }
-
-    public static func configureLogging(to url: URL, parameters: Constants.Log) {
+extension PassepartoutConfiguration {
+    public func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
         pp_log(.common, .debug, "Log to: \(url)")
 
-        PassepartoutConfiguration.shared.setLocalLogger(options: .init(
+        setLocalLogger(options: .init(
             url: url,
             maxNumberOfLines: parameters.maxNumberOfLines,
             maxLevel: parameters.maxLevel,
             mapper: parameters.formatter.formattedLine
         ))
 
-        if UserDefaults.group.bool(forKey: AppPreference.logsPrivateData.key) {
-            PassepartoutConfiguration.shared.logsAddresses = true
-            PassepartoutConfiguration.shared.logsModules = true
+        if logsPrivateData {
+            logsAddresses = true
+            logsModules = true
         }
 
         if let maxAge = parameters.maxAge {
@@ -51,15 +47,15 @@ public struct CommonLibrary {
         }
     }
 
-    public static func currentLog(parameters: Constants.Log) -> [String] {
-        PassepartoutConfiguration.shared.currentLogLines(
+    public func currentLog(parameters: Constants.Log) -> [String] {
+        currentLogLines(
             sinceLast: parameters.sinceLast,
             maxLevel: parameters.maxLevel
         )
         .map(parameters.formatter.formattedLine)
     }
 
-    public static func availableLogs(at url: URL) -> [Date: URL] {
+    public func availableLogs(at url: URL) -> [Date: URL] {
         let parent = url.deletingLastPathComponent()
         let prefix = url.lastPathComponent
         do {
@@ -81,13 +77,13 @@ public struct CommonLibrary {
         }
     }
 
-    public static func flushLog() {
-        try? PassepartoutConfiguration.shared.saveLog()
+    public func flushLog() {
+        try? saveLog()
     }
 }
 
-private extension CommonLibrary {
-    static func purgeLogs(at url: URL, beyond maxAge: TimeInterval) {
+private extension PassepartoutConfiguration {
+    func purgeLogs(at url: URL, beyond maxAge: TimeInterval) {
         let logs = availableLogs(at: url)
         let minDate = Date().addingTimeInterval(-maxAge)
         logs.forEach { date, url in

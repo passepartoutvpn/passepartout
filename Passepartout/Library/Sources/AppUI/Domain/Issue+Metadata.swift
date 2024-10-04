@@ -1,5 +1,5 @@
 //
-//  Issue+App.swift
+//  Issue+Metadata.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/18/24.
@@ -28,23 +28,35 @@ import Foundation
 import PassepartoutKit
 
 extension Issue {
+    struct Metadata {
+        let configuration: PassepartoutConfiguration
 
-    // TODO: #656, make non-static
-    static func with(versionString: String, purchasedProducts: Set<AppProduct>, tunnel: Tunnel) async -> Self {
-        let appLog = CommonLibrary.currentLog(parameters: Constants.shared.log)
+        let versionString: String
+
+        let purchasedProducts: Set<AppProduct>
+
+        let tunnel: Tunnel
+
+        let urlForTunnelLog: URL
+
+        let parameters: Constants.Log
+    }
+
+    static func withMetadata(_ metadata: Metadata) async -> Issue {
+        let appLog = metadata.configuration.currentLog(parameters: metadata.parameters)
             .joined(separator: "\n")
             .data(using: .utf8)
 
         let tunnelLog: Data?
 
         // live tunnel log
-        if await tunnel.status != .inactive {
-            tunnelLog = await tunnel.currentLog(parameters: Constants.shared.log)
+        if await metadata.tunnel.status != .inactive {
+            tunnelLog = await metadata.tunnel.currentLog(parameters: metadata.parameters)
                 .joined(separator: "\n")
                 .data(using: .utf8)
         }
         // latest persisted tunnel log
-        else if let latestTunnelEntry = CommonLibrary.availableLogs(at: BundleConfiguration.urlForTunnelLog)
+        else if let latestTunnelEntry = metadata.configuration.availableLogs(at: metadata.urlForTunnelLog)
             .max(by: { $0.key < $1.key }) {
 
             tunnelLog = try? Data(contentsOf: latestTunnelEntry.value)
@@ -55,13 +67,15 @@ extension Issue {
         }
 
         return Issue(
-            appLine: "\(Strings.Unlocalized.appName) \(versionString)",
-            purchasedProducts: purchasedProducts,
+            appLine: "\(Strings.Unlocalized.appName) \(metadata.versionString)",
+            purchasedProducts: metadata.purchasedProducts,
             appLog: appLog,
             tunnelLog: tunnelLog
         )
     }
+}
 
+extension Issue {
     var to: String {
         Constants.shared.emails.issues
     }

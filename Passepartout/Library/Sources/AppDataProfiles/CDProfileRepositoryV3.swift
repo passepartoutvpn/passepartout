@@ -30,8 +30,6 @@ import PassepartoutKit
 import UtilsLibrary
 
 extension AppData {
-
-    // TODO: #656, make non-static
     public static func cdProfileRepositoryV3(
         registry: Registry,
         coder: ProfileCoder,

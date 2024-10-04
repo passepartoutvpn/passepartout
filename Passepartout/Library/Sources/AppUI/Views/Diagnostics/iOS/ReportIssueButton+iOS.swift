@@ -25,6 +25,7 @@
 
 #if os(iOS)
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 import UIKit
@@ -33,24 +34,7 @@ import UtilsLibrary
 extension ReportIssueButton: View {
     var body: some View {
         HStack {
-            Button(title) {
-                Task {
-                    isPending = true
-                    defer {
-                        isPending = false
-                    }
-                    let issue = await Issue.with(
-                        versionString: BundleConfiguration.mainVersionString,
-                        purchasedProducts: purchasedProducts,
-                        tunnel: tunnel
-                    )
-                    guard MailComposerView.canSendMail() else {
-                        openMailTo(with: issue)
-                        return
-                    }
-                    issueBeingReported = issue
-                }
-            }
+            Button(title, action: sendEmail)
             if isPending {
                 Spacer()
                 ProgressView()
@@ -75,6 +59,41 @@ extension ReportIssueButton: View {
     }
 }
 
+private extension ReportIssueButton {
+    func sendEmail() {
+        Task {
+            isPending = true
+            defer {
+                isPending = false
+            }
+            let issue = await Issue.withMetadata(.init(
+                configuration: .shared,
+                versionString: BundleConfiguration.mainVersionString,
+                purchasedProducts: purchasedProducts,
+                tunnel: tunnel,
+                urlForTunnelLog: BundleConfiguration.urlForTunnelLog,
+                parameters: Constants.shared.log
+            ))
+            guard MailComposerView.canSendMail() else {
+                openMailTo(with: issue)
+                return
+            }
+            issueBeingReported = issue
+        }
+    }
+
+    func openMailTo(with issue: Issue) {
+        guard let url = URL.mailto(to: issue.to, subject: issue.subject, body: issue.body) else {
+            return
+        }
+        guard UIApplication.shared.canOpenURL(url) else {
+            isUnableToEmail = true
+            return
+        }
+        UIApplication.shared.open(url)
+    }
+}
+
 private extension Issue {
     var attachments: [MailComposerView.Attachment] {
         var list: [MailComposerView.Attachment] = []
@@ -86,19 +105,6 @@ private extension Issue {
             list.append(.init(data: tunnelLog, mimeType: mimeType, fileName: Strings.Unlocalized.Issues.tunnelLogFilename))
         }
         return list
-    }
-}
-
-private extension ReportIssueButton {
-    func openMailTo(with issue: Issue) {
-        guard let url = URL.mailto(to: issue.to, subject: issue.subject, body: issue.body) else {
-            return
-        }
-        guard UIApplication.shared.canOpenURL(url) else {
-            isUnableToEmail = true
-            return
-        }
-        UIApplication.shared.open(url)
     }
 }
 

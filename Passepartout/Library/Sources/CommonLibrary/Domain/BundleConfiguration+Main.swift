@@ -26,7 +26,8 @@
 import Foundation
 import PassepartoutKit
 
-// TODO: #656, make non-static
+// WARNING: beware of Constants.shared dependency
+
 extension BundleConfiguration {
     public enum BundleKey: String {
         case appStoreId
@@ -92,21 +93,13 @@ extension BundleConfiguration {
         }
         return url
     }
-
-    public static var urlForAppLog: URL {
-        cachesURL.appending(path: Constants.shared.log.appPath)
-    }
-
-    public static var urlForTunnelLog: URL {
-        cachesURL.appending(path: Constants.shared.log.tunnelPath)
-    }
 }
 
 private extension BundleConfiguration {
 
     // WARNING: fails from package itself, e.g. in previews
     static var main: BundleConfiguration {
-        guard let bundle = BundleConfiguration(.main, key: Constants.shared.bundle) else {
+        guard let bundle = BundleConfiguration(.main, key: Constants.shared.bundleKey) else {
             fatalError("Missing main bundle")
         }
         return bundle
@@ -114,13 +107,5 @@ private extension BundleConfiguration {
 
     static var isPreview: Bool {
         ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-    }
-
-    static var cachesURL: URL {
-        let groupId = mainString(for: .groupId)
-        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
-            fatalError("Unable to access App Group container")
-        }
-        return url.appending(components: "Library", "Caches")
     }
 }

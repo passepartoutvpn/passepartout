@@ -70,9 +70,10 @@ private extension PassepartoutApp {
             registry: context.registry
         )
         .onLoad {
-            CommonLibrary.configureLogging(
+            PassepartoutConfiguration.shared.configureLogging(
                 to: BundleConfiguration.urlForAppLog,
-                parameters: Constants.shared.log
+                parameters: Constants.shared.log,
+                logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
             )
             AppUI.configure(with: context)
         }

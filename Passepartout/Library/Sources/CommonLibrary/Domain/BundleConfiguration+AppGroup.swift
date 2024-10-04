@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  BundleConfiguration+AppGroup.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 10/4/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,16 +26,24 @@
 import Foundation
 import PassepartoutKit
 
-extension LoggerDestination {
-    static let common = Self(category: "common")
+// WARNING: beware of Constants.shared dependency
+
+extension BundleConfiguration {
+    public static var urlForAppLog: URL {
+        cachesURL.appending(path: Constants.shared.log.appPath)
+    }
+
+    public static var urlForTunnelLog: URL {
+        cachesURL.appending(path: Constants.shared.log.tunnelPath)
+    }
 }
 
-extension UserDefaults {
-    public static let appGroup: UserDefaults = {
-        let appGroup = BundleConfiguration.mainString(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
+private extension BundleConfiguration {
+    static var cachesURL: URL {
+        let groupId = mainString(for: .groupId)
+        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
+            fatalError("Unable to access App Group container")
         }
-        return defaults
-    }()
+        return url.appending(components: "Library", "Caches")
+    }
 }
