@@ -120,7 +120,7 @@ extension ProfileManager {
     public func save(_ profile: Profile, onlyIfModified: Bool = false) async throws {
         if onlyIfModified, let existingProfile = allProfiles[profile.id] {
             guard profile != existingProfile else {
-                pp_log(.app, .info, "Profile \(profile.id) not modified, not saving")
+                pp_log(.app, .notice, "Profile \(profile.id) not modified, not saving")
                 return
             }
         }
