@@ -138,10 +138,10 @@ extension ProfileManager {
             // remove local profiles
             var newAllProfiles = allProfiles
             try await repository.removeEntities(withIds: profileIds)
+            await afterRemove?(profileIds)
             profileIds.forEach {
                 newAllProfiles.removeValue(forKey: $0)
             }
-            await afterRemove?(profileIds)
 
             // remove remote counterpart too
             try? await remoteRepository?.removeEntities(withIds: profileIds)
