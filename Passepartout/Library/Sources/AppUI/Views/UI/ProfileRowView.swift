@@ -59,15 +59,20 @@ struct ProfileRowView: View, TunnelContextProviding {
 
     var body: some View {
         HStack {
-            if withMarker {
-                markerView
+            Group {
+                if withMarker {
+                    markerView
+                }
+                cardView
             }
-            cardView
             Spacer()
-            if isShared {
-                sharingView
+            HStack(spacing: 10.0) {
+                if isShared {
+                    sharingView
+                }
+                ProfileInfoButton(header: header, onEdit: onEdit)
             }
-            ProfileInfoButton(header: header, onEdit: onEdit)
+            .imageScale(.large)
         }
     }
 }
