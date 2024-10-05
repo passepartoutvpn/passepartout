@@ -72,11 +72,11 @@ struct OpenVPNView: View {
 
     var body: some View {
         Group {
+            moduleSection(for: accountRows, header: Strings.Global.account)
+            moduleSection(for: remotesRows, header: Strings.Modules.Openvpn.remotes)
             if !isServerPushed {
                 moduleSection(for: pullRows, header: Strings.Modules.Openvpn.pull)
             }
-            moduleSection(for: accountRows, header: Strings.Global.account)
-            moduleSection(for: remotesRows, header: Strings.Modules.Openvpn.remotes)
             moduleSection(for: redirectRows, header: Strings.Modules.Openvpn.redirectGateway)
             moduleSection(
                 for: ipRows(for: configuration.ipv4, routes: configuration.routes4),
@@ -335,7 +335,8 @@ private extension OpenVPNView {
     builder.remotes = [
         .init(rawValue: "2.2.2.2:UDP:2222")!,
         .init(rawValue: "6.6.6.6:UDP:6666")!,
-        .init(rawValue: "12.12.12.12:TCP:21212")!
+        .init(rawValue: "12.12.12.12:TCP:21212")!,
+        .init(rawValue: "12:12:12:12:20:20:20:20:TCP6:21212")!
     ]
     builder.ipv4 = IPSettings(subnet: try! .init("5.5.5.5", 24))
         .including(routes: [
