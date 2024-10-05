@@ -29,11 +29,11 @@ import PassepartoutKit
 enum AppError {
     case emptyProfileName
 
-    case malformedModule(any EditableModule, error: Error)
+    case malformedModule(any ModuleBuilder, error: Error)
 
-    case multipleConnectionModules([any EditableModule])
+    case multipleConnectionModules([any ModuleBuilder])
 
-    case ipModuleRequiresConnection(any EditableModule)
+    case ipModuleRequiresConnection(any ModuleBuilder)
 
     case permissionDenied
 

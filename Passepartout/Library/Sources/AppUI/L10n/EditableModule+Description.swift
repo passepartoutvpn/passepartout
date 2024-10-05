@@ -1,5 +1,5 @@
 //
-//  EditableModule+Description.swift
+//  ModuleBuilder+Description.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/6/24.
@@ -26,7 +26,7 @@
 import Foundation
 import PassepartoutKit
 
-extension EditableModule {
+extension ModuleBuilder {
 
     @MainActor
     func description(inEditor editor: ProfileEditor) -> String {
@@ -34,7 +34,7 @@ extension EditableModule {
     }
 }
 
-extension EditableModule {
+extension ModuleBuilder {
     var typeDescription: String {
         guard let providing = self as? ModuleTypeProviding else {
             return String(describing: self)

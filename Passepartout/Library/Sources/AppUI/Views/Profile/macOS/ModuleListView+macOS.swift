@@ -69,7 +69,7 @@ struct ModuleListView: View, Routable {
 }
 
 private extension ModuleListView {
-    func moduleRow(for module: any EditableModule) -> some View {
+    func moduleRow(for module: any ModuleBuilder) -> some View {
         HStack {
             Text(module.description(inEditor: profileEditor))
                 .themeError(malformedModuleIds.contains(module.id))

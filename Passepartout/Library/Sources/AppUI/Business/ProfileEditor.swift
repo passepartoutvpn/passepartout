@@ -31,61 +31,82 @@ import PassepartoutKit
 
 @MainActor
 final class ProfileEditor: ObservableObject {
-    private(set) var id: Profile.ID
 
     @Published
-    var name: String
+    private var editable: EditableProfile
+
+    var id: Profile.ID {
+        editable.id
+    }
+
+    var name: String {
+        get {
+            editable.name
+        }
+        set {
+            editable.name = newValue
+        }
+    }
+
+    private(set) var modules: [any ModuleBuilder] {
+        get {
+            editable.modules
+        }
+        set {
+            editable.modules = newValue
+        }
+    }
+
+    private(set) var activeModulesIds: Set<UUID> {
+        get {
+            editable.activeModulesIds
+        }
+        set {
+            editable.activeModulesIds = newValue
+        }
+    }
+
+    private var modulesMetadata: [UUID: ModuleMetadata]? {
+        get {
+            editable.modulesMetadata
+        }
+        set {
+            editable.modulesMetadata = newValue
+        }
+    }
 
     @Published
     var isShared: Bool
 
-    @Published
-    private(set) var modules: [any EditableModule]
-
-    @Published
-    private(set) var activeModulesIds: Set<UUID>
-
-    @Published
-    private var moduleNames: [UUID: String]
-
-    private(set) var removedModules: [UUID: any EditableModule]
+    private(set) var removedModules: [UUID: any ModuleBuilder]
 
     convenience init() {
         self.init(modules: [])
     }
 
-    init(modules: [any EditableModule]) {
-        id = UUID()
-        name = ""
-        self.modules = modules
-        activeModulesIds = Set(modules.map(\.id))
-        moduleNames = [:]
-        removedModules = [:]
+    init(modules: [any ModuleBuilder]) {
+        editable = EditableProfile(
+            modules: modules,
+            activeModulesIds: Set(modules.map(\.id))
+        )
         isShared = false
+        removedModules = [:]
     }
 
     init(profile: Profile) {
-        id = profile.id
-        name = profile.name
-        modules = profile.modulesBuilders
-        activeModulesIds = profile.activeModulesIds
-        moduleNames = profile.moduleNames
-        removedModules = [:]
+        editable = profile.editableProfile
         isShared = false
+        removedModules = [:]
     }
 
     func editProfile(_ profile: Profile, isShared: Bool) {
-        id = profile.id
-        name = profile.name
-        modules = profile.modulesBuilders
-        activeModulesIds = profile.activeModulesIds
-        moduleNames = profile.moduleNames
-        removedModules = [:]
+        editable = profile.editableProfile
         self.isShared = isShared
+        removedModules = [:]
     }
 }
 
-// MARK: - CRUD
+// MARK: - Editing
 
 extension ProfileEditor {
     var moduleTypes: [ModuleType] {
@@ -111,28 +132,6 @@ extension ProfileEditor {
             }
     }
 
-    func displayName(forModuleWithId moduleId: UUID) -> String? {
-        guard let name = moduleNames[moduleId] else {
-            return nil
-        }
-        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        return !trimmedName.isEmpty ? trimmedName : nil
-    }
-
-    func name(forModuleWithId moduleId: UUID) -> String? {
-        moduleNames[moduleId]
-    }
-
-    func setName(_ name: String, forModuleWithId moduleId: UUID) {
-        moduleNames[moduleId] = name
-    }
-
-    func module(withId moduleId: UUID) -> (any EditableModule)? {
-        modules.first {
-            $0.id == moduleId
-        } ?? removedModules[moduleId]
-    }
-
     func moveModules(from offsets: IndexSet, to newOffset: Int) {
         modules.move(fromOffsets: offsets, toOffset: newOffset)
     }
@@ -154,7 +153,7 @@ extension ProfileEditor {
         modules.remove(at: index)
     }
 
-    func saveModule(_ module: any EditableModule, activating: Bool) {
+    func saveModule(_ module: any ModuleBuilder, activating: Bool) {
         if let index = modules.firstIndex(where: { $0.id == module.id }) {
             modules[index] = module
         } else {
@@ -166,27 +165,33 @@ extension ProfileEditor {
     }
 }
 
-// MARK: - Active modules
+// MARK: - Facade
 
 extension ProfileEditor {
-    func isActiveModule(withId moduleId: UUID) -> Bool {
-        activeModulesIds.contains(moduleId) && !removedModules.keys.contains(moduleId)
+    func module(withId moduleId: UUID) -> (any ModuleBuilder)? {
+        editable.modules.first {
+            $0.id == moduleId
+        } ?? removedModules[moduleId]
     }
 
-    var activeConnectionModule: (any EditableModule)? {
-        modules.first {
+    func isActiveModule(withId moduleId: UUID) -> Bool {
+        editable.isActiveModule(withId: moduleId)
+    }
+
+    var activeConnectionModule: (any ModuleBuilder)? {
+        editable.modules.first {
             isActiveModule(withId: $0.id) && $0.buildsConnectionModule
         }
     }
 
-    var activeModules: [any EditableModule] {
-        modules.filter {
-            activeModulesIds.contains($0.id)
+    var activeModules: [any ModuleBuilder] {
+        editable.modules.filter {
+            editable.activeModulesIds.contains($0.id)
         }
     }
 
-    func activateModule(_ module: any EditableModule) {
-        activeModulesIds.insert(module.id)
+    func activateModule(_ module: any ModuleBuilder) {
+        editable.activeModulesIds.insert(module.id)
     }
 
     func toggleModule(withId moduleId: UUID) {
@@ -198,6 +203,59 @@ extension ProfileEditor {
         } else {
             activateModule(existingModule)
         }
+    }
+
+    func displayName(forModuleWithId moduleId: UUID) -> String? {
+        editable.displayName(forModuleWithId: moduleId)
+    }
+
+    func name(forModuleWithId moduleId: UUID) -> String? {
+        editable.name(forModuleWithId: moduleId)
+    }
+
+    func setName(_ name: String, forModuleWithId moduleId: UUID) {
+        editable.setName(name, forModuleWithId: moduleId)
+    }
+}
+
+// MARK: - Building
+
+extension ProfileEditor {
+    func build() throws -> Profile {
+        try checkConstraints()
+
+        var builder = Profile.Builder(id: editable.id)
+        builder.modules = try editable.modules.compactMap {
+            do {
+                return try $0.tryBuild()
+            } catch {
+                throw AppError.malformedModule($0, error: error)
+            }
+        }
+        let trimmedName = name.trimmingCharacters(in: .whitespaces)
+        guard !trimmedName.isEmpty else {
+            throw AppError.emptyProfileName
+        }
+        builder.name = trimmedName
+        builder.modulesMetadata = modulesMetadata?.reduce(into: [:]) {
+            var metadata = $1.value
+            guard let name = metadata.name else {
+                return
+            }
+            let trimmedName = name.trimmingCharacters(in: .whitespaces)
+            guard !trimmedName.isEmpty else {
+                return
+            }
+            metadata.name = trimmedName
+            $0[$1.key] = metadata
+        }
+        let profile = try builder.tryBuild()
+
+        // update local view
+        editable.modules = profile.modulesBuilders
+        removedModules.removeAll()
+
+        return profile
     }
 }
 
@@ -213,55 +271,6 @@ private extension ProfileEditor {
         }
         guard connectionModules.count <= 1 else {
             throw AppError.multipleConnectionModules(connectionModules)
-        }
-    }
-}
-
-// MARK: - Building
-
-extension ProfileEditor {
-    func build() throws -> Profile {
-        try checkConstraints()
-
-        var builder = Profile.Builder(id: id)
-        let trimmedName = name.trimmingCharacters(in: .whitespaces)
-        guard !trimmedName.isEmpty else {
-            throw AppError.emptyProfileName
-        }
-        builder.name = trimmedName
-        builder.modules = try modules.compactMap {
-            do {
-                return try $0.tryBuild()
-            } catch {
-                throw AppError.malformedModule($0, error: error)
-            }
-        }
-        builder.activeModulesIds = activeModulesIds
-        builder.moduleNames = moduleNames.reduce(into: [:]) {
-            let trimmedName = $1.value.trimmingCharacters(in: .whitespaces)
-            guard !trimmedName.isEmpty else {
-                return
-            }
-            $0[$1.key] = trimmedName
-        }
-        let profile = try builder.tryBuild()
-
-        // update local view
-        modules = profile.modulesBuilders
-        removedModules.removeAll()
-
-        return profile
-    }
-}
-
-private extension Profile {
-    var modulesBuilders: [any EditableModule] {
-        modules.compactMap {
-            guard let buildableModule = $0 as? any BuildableType else {
-                return nil
-            }
-            let builder = buildableModule.builder() as any BuilderType
-            return builder as? any EditableModule
         }
     }
 }
