@@ -1,3 +1,2 @@
-* eea548656 Fix crash on "Report issue"
+* d14f22d4a Use gear icon for iOS About (#684)
 * 149176610 Per-profile iCloud syncing (#668)
-* 63b0199a3 Merge Settings into About on iOS (#670)
