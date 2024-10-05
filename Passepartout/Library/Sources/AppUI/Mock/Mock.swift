@@ -41,7 +41,11 @@ extension AppContext {
             iapManager: IAPManager(
                 customUserLevel: nil,
                 receiptReader: MockReceiptReader(),
-                unrestrictedFeatures: [.sharing],
+                unrestrictedFeatures: [
+                    .interactiveLogin,
+                    .onDemand,
+                    .sharing
+                ],
                 productsAtBuild: { _ in
                     []
                 }

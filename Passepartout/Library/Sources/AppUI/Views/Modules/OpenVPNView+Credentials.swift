@@ -157,7 +157,7 @@ private extension OpenVPNView.CredentialsView {
     var credentials: OpenVPN.Credentials?
 
     @State
-    var isInteractive = false
+    var isInteractive = true
 
     return NavigationStack {
         OpenVPNView.CredentialsView(
