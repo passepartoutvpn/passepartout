@@ -110,7 +110,7 @@ final class ProfileEditor: ObservableObject {
 
 extension ProfileEditor {
     var moduleTypes: [ModuleType] {
-        modules
+        editableProfile.modules
             .compactMap {
                 $0 as? ModuleTypeProviding
             }
@@ -133,31 +133,31 @@ extension ProfileEditor {
     }
 
     func moveModules(from offsets: IndexSet, to newOffset: Int) {
-        modules.move(fromOffsets: offsets, toOffset: newOffset)
+        editableProfile.modules.move(fromOffsets: offsets, toOffset: newOffset)
     }
 
     func removeModules(at offsets: IndexSet) {
         offsets.forEach {
-            let module = modules[$0]
+            let module = editableProfile.modules[$0]
             removedModules[module.id] = module
-            modules.remove(at: $0)
+            editableProfile.modules.remove(at: $0)
         }
     }
 
     func removeModule(withId moduleId: UUID) {
-        guard let index = modules.firstIndex(where: { $0.id == moduleId }) else {
+        guard let index = editableProfile.modules.firstIndex(where: { $0.id == moduleId }) else {
             return
         }
-        let module = modules[index]
+        let module = editableProfile.modules[index]
         removedModules[module.id] = module
-        modules.remove(at: index)
+        editableProfile.modules.remove(at: index)
     }
 
     func saveModule(_ module: any ModuleBuilder, activating: Bool) {
-        if let index = modules.firstIndex(where: { $0.id == module.id }) {
-            modules[index] = module
+        if let index = editableProfile.modules.firstIndex(where: { $0.id == module.id }) {
+            editableProfile.modules[index] = module
         } else {
-            modules.append(module)
+            editableProfile.modules.append(module)
         }
         if activating {
             activateModule(module)
@@ -193,7 +193,7 @@ extension ProfileEditor {
             return
         }
         if isActiveModule(withId: moduleId) {
-            activeModulesIds.remove(moduleId)
+            editableProfile.activeModulesIds.remove(moduleId)
         } else {
             activateModule(existingModule)
         }
