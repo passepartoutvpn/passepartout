@@ -25,7 +25,7 @@
 
 import Foundation
 
-public enum ProfilesLayout: String, RawRepresentable, CaseIterable, Codable {
+enum ProfilesLayout: String, RawRepresentable, CaseIterable, Codable {
     case list
 
     case grid
