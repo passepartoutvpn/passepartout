@@ -1,8 +1,8 @@
 //
-//  TunnelInstallationProviding.swift
+//  ProfileProcessor.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/3/24.
+//  Created by Davide De Rosa on 10/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,34 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
 import Foundation
 import PassepartoutKit
 
-protocol TunnelInstallationProviding {
-    var profileManager: ProfileManager { get }
-
-    var tunnel: Tunnel { get }
-}
-
-@MainActor
-extension TunnelInstallationProviding {
-    var installation: TunnelInstallation? {
-        guard let currentProfile = tunnel.currentProfile else {
-            return nil
-        }
-        guard let header = profileManager.headers.first(where: {
-            $0.id == currentProfile.id
-        }) else {
-            return nil
-        }
-        return TunnelInstallation(header: header, onDemand: currentProfile.onDemand)
-    }
-
-    var currentProfile: Profile? {
-        guard let id = tunnel.currentProfile?.id else {
-            return nil
-        }
-        return profileManager.profile(withId: id)
-    }
+protocol ProfileProcessor {
+    func processedProfile(_ profile: Profile) throws -> Profile
 }

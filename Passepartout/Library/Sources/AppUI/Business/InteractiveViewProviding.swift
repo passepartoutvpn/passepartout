@@ -1,8 +1,8 @@
 //
-//  ModuleViewProviding.swift
+//  InteractiveViewProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/24/24.
+//  Created by Davide De Rosa on 10/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,9 +25,9 @@
 
 import SwiftUI
 
-protocol ModuleViewProviding {
-    associatedtype Content: View
+protocol InteractiveViewProviding {
+    associatedtype InteractiveContent: View
 
     @MainActor
-    func moduleView(with editor: ProfileEditor) -> Content
+    func interactiveView(with editor: ProfileEditor) -> InteractiveContent
 }
