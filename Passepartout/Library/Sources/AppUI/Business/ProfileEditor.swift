@@ -35,46 +35,6 @@ final class ProfileEditor: ObservableObject {
     @Published
     private var editableProfile: EditableProfile
 
-    var id: Profile.ID {
-        editableProfile.id
-    }
-
-    var name: String {
-        get {
-            editableProfile.name
-        }
-        set {
-            editableProfile.name = newValue
-        }
-    }
-
-    private(set) var modules: [any ModuleBuilder] {
-        get {
-            editableProfile.modules
-        }
-        set {
-            editableProfile.modules = newValue
-        }
-    }
-
-    private(set) var activeModulesIds: Set<UUID> {
-        get {
-            editableProfile.activeModulesIds
-        }
-        set {
-            editableProfile.activeModulesIds = newValue
-        }
-    }
-
-    private var modulesMetadata: [UUID: ModuleMetadata]? {
-        get {
-            editableProfile.modulesMetadata
-        }
-        set {
-            editableProfile.modulesMetadata = newValue
-        }
-    }
-
     @Published
     var isShared: Bool
 
@@ -106,7 +66,7 @@ final class ProfileEditor: ObservableObject {
     }
 }
 
-// MARK: - Editing
+// MARK: - Types
 
 extension ProfileEditor {
     var moduleTypes: [ModuleType] {
@@ -130,6 +90,64 @@ extension ProfileEditor {
             .sorted {
                 $0.localizedDescription < $1.localizedDescription
             }
+    }
+}
+
+// MARK: - Metadata
+
+extension ProfileEditor {
+    var id: Profile.ID {
+        editableProfile.id
+    }
+
+    var name: String {
+        get {
+            editableProfile.name
+        }
+        set {
+            editableProfile.name = newValue
+        }
+    }
+
+    func displayName(forModuleWithId moduleId: UUID) -> String? {
+        editableProfile.displayName(forModuleWithId: moduleId)
+    }
+
+    func name(forModuleWithId moduleId: UUID) -> String? {
+        editableProfile.name(forModuleWithId: moduleId)
+    }
+
+    func setName(_ name: String, forModuleWithId moduleId: UUID) {
+        editableProfile.setName(name, forModuleWithId: moduleId)
+    }
+}
+
+// MARK: - Modules
+
+extension ProfileEditor {
+    var modules: [any ModuleBuilder] {
+        editableProfile.modules
+    }
+
+    func module(withId moduleId: UUID) -> (any ModuleBuilder)? {
+        editableProfile.modules.first {
+            $0.id == moduleId
+        } ?? removedModules[moduleId]
+    }
+
+    func isActiveModule(withId moduleId: UUID) -> Bool {
+        editableProfile.isActiveModule(withId: moduleId)
+    }
+
+    func toggleModule(withId moduleId: UUID) {
+        guard let existingModule = module(withId: moduleId) else {
+            return
+        }
+        if isActiveModule(withId: moduleId) {
+            editableProfile.activeModulesIds.remove(moduleId)
+        } else {
+            activateModule(existingModule)
+        }
     }
 
     func moveModules(from offsets: IndexSet, to newOffset: Int) {
@@ -165,50 +183,9 @@ extension ProfileEditor {
     }
 }
 
-// MARK: - Facade
-
-extension ProfileEditor {
-    func module(withId moduleId: UUID) -> (any ModuleBuilder)? {
-        editableProfile.modules.first {
-            $0.id == moduleId
-        } ?? removedModules[moduleId]
-    }
-
-    func isActiveModule(withId moduleId: UUID) -> Bool {
-        editableProfile.isActiveModule(withId: moduleId)
-    }
-
-    var activeModules: [any ModuleBuilder] {
-        editableProfile.modules.filter {
-            editableProfile.activeModulesIds.contains($0.id)
-        }
-    }
-
+private extension ProfileEditor {
     func activateModule(_ module: any ModuleBuilder) {
         editableProfile.activeModulesIds.insert(module.id)
-    }
-
-    func toggleModule(withId moduleId: UUID) {
-        guard let existingModule = module(withId: moduleId) else {
-            return
-        }
-        if isActiveModule(withId: moduleId) {
-            editableProfile.activeModulesIds.remove(moduleId)
-        } else {
-            activateModule(existingModule)
-        }
-    }
-
-    func displayName(forModuleWithId moduleId: UUID) -> String? {
-        editableProfile.displayName(forModuleWithId: moduleId)
-    }
-
-    func name(forModuleWithId moduleId: UUID) -> String? {
-        editableProfile.name(forModuleWithId: moduleId)
-    }
-
-    func setName(_ name: String, forModuleWithId moduleId: UUID) {
-        editableProfile.setName(name, forModuleWithId: moduleId)
     }
 }
 
@@ -238,5 +215,13 @@ extension ProfileEditor {
             pp_log(.app, .fault, "Unable to save edited profile: \(error)")
             throw error
         }
+    }
+}
+
+// MARK: - Testing
+
+extension ProfileEditor {
+    var activeModulesIds: Set<UUID> {
+        editableProfile.activeModulesIds
     }
 }
