@@ -33,45 +33,45 @@ import PassepartoutKit
 final class ProfileEditor: ObservableObject {
 
     @Published
-    private var editable: EditableProfile
+    private var editableProfile: EditableProfile
 
     var id: Profile.ID {
-        editable.id
+        editableProfile.id
     }
 
     var name: String {
         get {
-            editable.name
+            editableProfile.name
         }
         set {
-            editable.name = newValue
+            editableProfile.name = newValue
         }
     }
 
     private(set) var modules: [any ModuleBuilder] {
         get {
-            editable.modules
+            editableProfile.modules
         }
         set {
-            editable.modules = newValue
+            editableProfile.modules = newValue
         }
     }
 
     private(set) var activeModulesIds: Set<UUID> {
         get {
-            editable.activeModulesIds
+            editableProfile.activeModulesIds
         }
         set {
-            editable.activeModulesIds = newValue
+            editableProfile.activeModulesIds = newValue
         }
     }
 
     private var modulesMetadata: [UUID: ModuleMetadata]? {
         get {
-            editable.modulesMetadata
+            editableProfile.modulesMetadata
         }
         set {
-            editable.modulesMetadata = newValue
+            editableProfile.modulesMetadata = newValue
         }
     }
 
@@ -85,7 +85,7 @@ final class ProfileEditor: ObservableObject {
     }
 
     init(modules: [any ModuleBuilder]) {
-        editable = EditableProfile(
+        editableProfile = EditableProfile(
             modules: modules,
             activeModulesIds: Set(modules.map(\.id))
         )
@@ -94,13 +94,13 @@ final class ProfileEditor: ObservableObject {
     }
 
     init(profile: Profile) {
-        editable = profile.editableProfile
+        editableProfile = profile.editable()
         isShared = false
         removedModules = [:]
     }
 
     func editProfile(_ profile: Profile, isShared: Bool) {
-        editable = profile.editableProfile
+        editableProfile = profile.editable()
         self.isShared = isShared
         removedModules = [:]
     }
@@ -169,29 +169,23 @@ extension ProfileEditor {
 
 extension ProfileEditor {
     func module(withId moduleId: UUID) -> (any ModuleBuilder)? {
-        editable.modules.first {
+        editableProfile.modules.first {
             $0.id == moduleId
         } ?? removedModules[moduleId]
     }
 
     func isActiveModule(withId moduleId: UUID) -> Bool {
-        editable.isActiveModule(withId: moduleId)
-    }
-
-    var activeConnectionModule: (any ModuleBuilder)? {
-        editable.modules.first {
-            isActiveModule(withId: $0.id) && $0.buildsConnectionModule
-        }
+        editableProfile.isActiveModule(withId: moduleId)
     }
 
     var activeModules: [any ModuleBuilder] {
-        editable.modules.filter {
-            editable.activeModulesIds.contains($0.id)
+        editableProfile.modules.filter {
+            editableProfile.activeModulesIds.contains($0.id)
         }
     }
 
     func activateModule(_ module: any ModuleBuilder) {
-        editable.activeModulesIds.insert(module.id)
+        editableProfile.activeModulesIds.insert(module.id)
     }
 
     func toggleModule(withId moduleId: UUID) {
@@ -206,15 +200,15 @@ extension ProfileEditor {
     }
 
     func displayName(forModuleWithId moduleId: UUID) -> String? {
-        editable.displayName(forModuleWithId: moduleId)
+        editableProfile.displayName(forModuleWithId: moduleId)
     }
 
     func name(forModuleWithId moduleId: UUID) -> String? {
-        editable.name(forModuleWithId: moduleId)
+        editableProfile.name(forModuleWithId: moduleId)
     }
 
     func setName(_ name: String, forModuleWithId moduleId: UUID) {
-        editable.setName(name, forModuleWithId: moduleId)
+        editableProfile.setName(name, forModuleWithId: moduleId)
     }
 }
 
@@ -222,56 +216,14 @@ extension ProfileEditor {
 
 extension ProfileEditor {
     func build() throws -> Profile {
-        try checkConstraints()
-
-        var builder = Profile.Builder(id: editable.id)
-        builder.modules = try editable.modules.compactMap {
-            do {
-                return try $0.tryBuild()
-            } catch {
-                throw AppError.malformedModule($0, error: error)
-            }
-        }
-        let trimmedName = name.trimmingCharacters(in: .whitespaces)
-        guard !trimmedName.isEmpty else {
-            throw AppError.emptyProfileName
-        }
-        builder.name = trimmedName
-        builder.modulesMetadata = modulesMetadata?.reduce(into: [:]) {
-            var metadata = $1.value
-            guard let name = metadata.name else {
-                return
-            }
-            let trimmedName = name.trimmingCharacters(in: .whitespaces)
-            guard !trimmedName.isEmpty else {
-                return
-            }
-            metadata.name = trimmedName
-            $0[$1.key] = metadata
-        }
+        let builder = try editableProfile.builder()
         let profile = try builder.tryBuild()
 
         // update local view
-        editable.modules = profile.modulesBuilders
+        editableProfile.modules = profile.modulesBuilders
         removedModules.removeAll()
 
         return profile
-    }
-}
-
-private extension ProfileEditor {
-    func checkConstraints() throws {
-        if activeConnectionModule == nil,
-           let ipModule = modules.first(where: { activeModulesIds.contains($0.id) && $0 is IPModule.Builder }) {
-            throw AppError.ipModuleRequiresConnection(ipModule)
-        }
-
-        let connectionModules = modules.filter {
-            activeModulesIds.contains($0.id) && $0.buildsConnectionModule
-        }
-        guard connectionModules.count <= 1 else {
-            throw AppError.multipleConnectionModules(connectionModules)
-        }
     }
 }
 

@@ -37,13 +37,40 @@ struct EditableProfile: MutableProfileType {
 
     var modulesMetadata: [UUID: ModuleMetadata]?
 
-    func builder() -> Profile.Builder {
-        fatalError()
+    func builder() throws -> Profile.Builder {
+        try checkConstraints()
+
+        var builder = Profile.Builder(id: id)
+        builder.modules = try modules.compactMap {
+            do {
+                return try $0.tryBuild()
+            } catch {
+                throw AppError.malformedModule($0, error: error)
+            }
+        }
+        let trimmedName = name.trimmingCharacters(in: .whitespaces)
+        guard !trimmedName.isEmpty else {
+            throw AppError.emptyProfileName
+        }
+        builder.name = trimmedName
+        builder.modulesMetadata = modulesMetadata?.reduce(into: [:]) {
+            var metadata = $1.value
+            guard let name = metadata.name else {
+                return
+            }
+            let trimmedName = name.trimmingCharacters(in: .whitespaces)
+            guard !trimmedName.isEmpty else {
+                return
+            }
+            metadata.name = trimmedName
+            $0[$1.key] = metadata
+        }
+        return builder
     }
 }
 
 extension Profile {
-    var editableProfile: EditableProfile {
+    func editable() -> EditableProfile {
         EditableProfile(
             id: id,
             name: name,
@@ -52,9 +79,7 @@ extension Profile {
             modulesMetadata: modulesMetadata
         )
     }
-}
 
-extension Profile {
     var modulesBuilders: [any ModuleBuilder] {
         modules.compactMap {
             guard let buildableModule = $0 as? any BuildableType else {
@@ -62,6 +87,28 @@ extension Profile {
             }
             let builder = buildableModule.builder() as any BuilderType
             return builder as? any ModuleBuilder
+        }
+    }
+}
+
+private extension EditableProfile {
+    var activeConnectionModule: (any ModuleBuilder)? {
+        modules.first {
+            isActiveModule(withId: $0.id) && $0.buildsConnectionModule
+        }
+    }
+
+    func checkConstraints() throws {
+        if activeConnectionModule == nil,
+           let ipModule = modules.first(where: { activeModulesIds.contains($0.id) && $0 is IPModule.Builder }) {
+            throw AppError.ipModuleRequiresConnection(ipModule)
+        }
+
+        let connectionModules = modules.filter {
+            activeModulesIds.contains($0.id) && $0.buildsConnectionModule
+        }
+        guard connectionModules.count <= 1 else {
+            throw AppError.multipleConnectionModules(connectionModules)
         }
     }
 }
