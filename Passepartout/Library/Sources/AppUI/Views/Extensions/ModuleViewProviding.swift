@@ -31,10 +31,3 @@ protocol ModuleViewProviding {
     @MainActor
     func moduleView(with editor: ProfileEditor) -> Content
 }
-
-protocol InteractiveViewProviding {
-    associatedtype InteractiveContent: View
-
-    @MainActor
-    func interactiveView(with editor: ProfileEditor) -> InteractiveContent
-}

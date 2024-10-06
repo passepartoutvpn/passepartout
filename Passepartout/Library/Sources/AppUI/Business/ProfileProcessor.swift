@@ -1,8 +1,8 @@
 //
-//  ProfilesLayout.swift
+//  ProfileProcessor.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/5/24.
+//  Created by Davide De Rosa on 10/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,9 +24,8 @@
 //
 
 import Foundation
+import PassepartoutKit
 
-public enum ProfilesLayout: String, RawRepresentable, CaseIterable, Codable {
-    case list
-
-    case grid
+protocol ProfileProcessor {
+    func processedProfile(_ profile: Profile) throws -> Profile
 }

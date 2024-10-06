@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileListView: View, ProfileManagerProviding, TunnelInstallationProviding {
+struct ProfileListView: View, TunnelInstallationProviding {
 
     @Environment(\.horizontalSizeClass)
     private var hsClass
@@ -63,7 +63,11 @@ struct ProfileListView: View, ProfileManagerProviding, TunnelInstallationProvidi
                 }
                 Group {
                     ForEach(allHeaders, content: profileView)
-                        .onDelete(perform: removeProfiles)
+                        .onDelete { offsets in
+                            Task {
+                                await profileManager.removeProfiles(at: offsets)
+                            }
+                        }
                 }
                 .themeSection(header: Strings.Views.Profiles.Folders.default)
             }

@@ -27,10 +27,7 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-protocol ProfileProcessor {
-    func processedProfile(_ profile: Profile) throws -> Profile
-}
-
+@MainActor
 extension Tunnel {
     func install(_ profile: Profile, processor: ProfileProcessor) async throws {
         let newProfile = try processor.processedProfile(profile)

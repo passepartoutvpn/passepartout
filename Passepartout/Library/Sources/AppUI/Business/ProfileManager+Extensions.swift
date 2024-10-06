@@ -1,5 +1,5 @@
 //
-//  TunnelInstallationProviding.swift
+//  ProfileManager+Extensions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/3/24.
@@ -27,36 +27,16 @@ import AppLibrary
 import Foundation
 import PassepartoutKit
 
-protocol TunnelInstallationProviding {
-    var profileManager: ProfileManager { get }
-
-    var tunnel: Tunnel { get }
-}
-
-struct TunnelInstallation {
-    let header: ProfileHeader
-
-    let onDemand: Bool
-}
-
 @MainActor
-extension TunnelInstallationProviding {
-    var installation: TunnelInstallation? {
-        guard let currentProfile = tunnel.currentProfile else {
-            return nil
-        }
-        guard let header = profileManager.headers.first(where: {
-            $0.id == currentProfile.id
-        }) else {
-            return nil
-        }
-        return TunnelInstallation(header: header, onDemand: currentProfile.onDemand)
-    }
+extension ProfileManager {
+    func removeProfiles(at offsets: IndexSet) async {
+        let idsToRemove = headers
+            .enumerated()
+            .filter {
+                offsets.contains($0.offset)
+            }
+            .map(\.element.id)
 
-    var currentProfile: Profile? {
-        guard let id = tunnel.currentProfile?.id else {
-            return nil
-        }
-        return profileManager.profile(withId: id)
+        await remove(withIds: idsToRemove)
     }
 }
