@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileGridView: View, ProfileManagerProviding, TunnelInstallationProviding {
+struct ProfileGridView: View, TunnelInstallationProviding {
 
     @Environment(\.isSearching)
     private var isSearching
@@ -61,7 +61,11 @@ struct ProfileGridView: View, ProfileManagerProviding, TunnelInstallationProvidi
                     }
                     LazyVGrid(columns: columns) {
                         ForEach(allHeaders, content: profileView)
-                            .onDelete(perform: removeProfiles)
+                            .onDelete { offsets in
+                                Task {
+                                    await profileManager.removeProfiles(at: offsets)
+                                }
+                            }
                     }
                     .themeGridHeader(title: Strings.Views.Profiles.Folders.default)
                 }

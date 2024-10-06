@@ -1,5 +1,5 @@
 //
-//  ProfileManagerProviding.swift
+//  ProfileManager+Extensions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/3/24.
@@ -27,22 +27,16 @@ import AppLibrary
 import Foundation
 import PassepartoutKit
 
-protocol ProfileManagerProviding {
-    var profileManager: ProfileManager { get }
-}
-
 @MainActor
-extension ProfileManagerProviding {
-    func removeProfiles(at offsets: IndexSet) {
-        let idsToRemove = profileManager.headers
+extension ProfileManager {
+    func removeProfiles(at offsets: IndexSet) async {
+        let idsToRemove = headers
             .enumerated()
             .filter {
                 offsets.contains($0.offset)
             }
             .map(\.element.id)
 
-        Task {
-            await profileManager.remove(withIds: idsToRemove)
-        }
+        await remove(withIds: idsToRemove)
     }
 }
