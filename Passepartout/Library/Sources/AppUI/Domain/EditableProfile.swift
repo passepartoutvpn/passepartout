@@ -48,11 +48,14 @@ struct EditableProfile: MutableProfileType {
                 throw AppError.malformedModule($0, error: error)
             }
         }
+        builder.activeModulesIds = activeModulesIds
+
         let trimmedName = name.trimmingCharacters(in: .whitespaces)
         guard !trimmedName.isEmpty else {
             throw AppError.emptyProfileName
         }
         builder.name = trimmedName
+
         builder.modulesMetadata = modulesMetadata?.reduce(into: [:]) {
             var metadata = $1.value
             guard let name = metadata.name else {
@@ -65,6 +68,7 @@ struct EditableProfile: MutableProfileType {
             metadata.name = trimmedName
             $0[$1.key] = metadata
         }
+
         return builder
     }
 }
