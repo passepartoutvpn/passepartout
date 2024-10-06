@@ -34,7 +34,7 @@ extension OpenVPNModule.Builder: ModuleViewProviding {
 
 extension OpenVPNModule.Builder: InteractiveViewProviding {
     func interactiveView(with editor: ProfileEditor) -> some View {
-        let draft: Binding<OpenVPNModule.Builder> = editor.binding(forModule: self)
+        let draft = editor.binding(forModule: self)
 
         return OpenVPNView.CredentialsView(
             isInteractive: draft.isInteractive,
