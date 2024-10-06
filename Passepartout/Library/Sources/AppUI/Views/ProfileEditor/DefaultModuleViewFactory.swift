@@ -56,7 +56,7 @@ private extension ProfileEditor {
 extension View {
 
     @MainActor
-    func asModuleView<T>(with editor: ProfileEditor, draft: T, withName: Bool = true) -> some View where T: EditableModule, T: Equatable {
+    func asModuleView<T>(with editor: ProfileEditor, draft: T, withName: Bool = true) -> some View where T: ModuleBuilder, T: Equatable {
         Form {
             if withName {
                 NameSection(

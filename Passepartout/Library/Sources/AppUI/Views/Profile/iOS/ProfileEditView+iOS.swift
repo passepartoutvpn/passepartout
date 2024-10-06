@@ -95,7 +95,7 @@ private extension ProfileEditView {
         }
     }
 
-    func moduleRow(for module: any EditableModule) -> some View {
+    func moduleRow(for module: any ModuleBuilder) -> some View {
         EditorModuleToggle(profileEditor: profileEditor, module: module) {
             Button {
                 push(.moduleDetail(moduleId: module.id))

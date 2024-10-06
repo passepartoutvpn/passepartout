@@ -1,5 +1,5 @@
 //
-//  EditableModule+Previews.swift
+//  ModuleBuilder+Previews.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/19/24.
@@ -26,7 +26,7 @@
 import PassepartoutKit
 import SwiftUI
 
-extension EditableModule where Self: ModuleViewProviding {
+extension ModuleBuilder where Self: ModuleViewProviding {
 
     @MainActor
     func preview(title: String = "") -> some View {

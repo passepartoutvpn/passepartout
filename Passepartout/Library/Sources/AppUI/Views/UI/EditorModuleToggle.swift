@@ -31,7 +31,7 @@ struct EditorModuleToggle<Label>: View where Label: View {
     @ObservedObject
     var profileEditor: ProfileEditor
 
-    let module: any EditableModule
+    let module: any ModuleBuilder
 
     let label: () -> Label
 
