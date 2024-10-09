@@ -31,18 +31,18 @@
         "message": "© Copyright 2015-2024 Jason A. Donenfeld. All Rights Reserved. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld."
     }],
     "translations": {
-        "de": "Christian Lederer, Theodor Tietze",
-        "el": "Konstantinos Koukoulakis",
-        "en-US": "Davide De Rosa",
-        "es": "Davide De Rosa, Elena Vivó",
-        "fr-FR": "Julien Laniel",
-        "it": "Davide De Rosa",
-        "nl": "Norbert de Vreede",
-        "pl": "Piotr Książek",
-        "pt-BR": "Helder Santana",
-        "ru": "Alexander Korobynikov",
-        "sv": "Henry Gross-Hellsen",
-        "uk": "Dmitry Chirkin",
-        "zh-Hans": "OnlyThen"
+        "de": ["Christian Lederer", "Theodor Tietze"],
+        "el": ["Konstantinos Koukoulakis"],
+        "en-US": ["Davide De Rosa"],
+        "es": ["Davide De Rosa", "Elena Vivó"],
+        "fr-FR": ["Julien Laniel"],
+        "it": ["Davide De Rosa"],
+        "nl": ["Norbert de Vreede"],
+        "pl": ["Piotr Książek"],
+        "pt-BR": ["Helder Santana"],
+        "ru": ["Alexander Korobynikov"],
+        "sv": ["Henry Gross-Hellsen"],
+        "uk": ["Dmitry Chirkin"],
+        "zh-Hans": ["OnlyThen"]
     }
 }
