@@ -181,7 +181,7 @@ private extension GenericCreditsView {
                     Text(code.localizedAsCountryCode)
                     Spacer()
                     credits.translations[code].map { authors in
-                        VStack {
+                        VStack(spacing: 4) {
                             ForEach(authors, id: \.self) {
                                 Text($0)
                                     .frame(maxWidth: .infinity, alignment: .trailing)
