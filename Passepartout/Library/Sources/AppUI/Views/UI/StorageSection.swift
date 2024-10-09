@@ -41,12 +41,14 @@ struct StorageSection: View {
         debugChanges()
         return Group {
             sharingToggle
-#if DEBUG
             ThemeCopiableText(
                 title: Strings.Unlocalized.uuid,
-                value: profileEditor.id.uuidString
+                value: profileEditor.id.flatString.localizedDescription(style: .quartets),
+                valueView: {
+                    Text($0)
+                        .monospaced()
+                }
             )
-#endif
         }
         .themeSection(
             header: Strings.Global.storage,

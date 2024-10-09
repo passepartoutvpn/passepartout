@@ -377,7 +377,7 @@ struct ThemeImageLabel: View {
     }
 }
 
-struct ThemeCopiableText: View {
+struct ThemeCopiableText<ValueView>: View where ValueView: View {
 
     @EnvironmentObject
     private var theme: Theme
@@ -388,13 +388,15 @@ struct ThemeCopiableText: View {
 
     var isMultiLine = true
 
+    let valueView: (String) -> ValueView
+
     var body: some View {
         HStack {
             if let title {
                 Text(title)
                 Spacer()
             }
-            Text(value)
+            valueView(value)
                 .foregroundStyle(title == nil ? theme.titleColor : theme.valueColor)
                 .themeMultiLine(isMultiLine)
             if title == nil {
