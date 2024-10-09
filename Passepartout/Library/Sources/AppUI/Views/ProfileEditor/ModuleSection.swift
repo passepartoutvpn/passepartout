@@ -113,7 +113,9 @@ private extension View {
             }
 
         case .copiableText(let caption, let value, let multiline):
-            ThemeCopiableText(title: caption, value: value, isMultiLine: multiline)
+            ThemeCopiableText(title: caption, value: value, isMultiLine: multiline) {
+                Text($0)
+            }
 
         case .longContent(let title, let content):
             LongContentLink(title, content: .constant(content)) {

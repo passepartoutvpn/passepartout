@@ -44,7 +44,10 @@ struct StorageSection: View {
 #if DEBUG
             ThemeCopiableText(
                 title: Strings.Unlocalized.uuid,
-                value: profileEditor.id.uuidString
+                value: profileEditor.id.uuidString,
+                valueView: {
+                    Text($0)
+                }
             )
 #endif
         }
