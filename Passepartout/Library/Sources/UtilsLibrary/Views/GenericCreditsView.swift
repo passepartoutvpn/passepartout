@@ -46,7 +46,7 @@ public struct Credits: Decodable {
 
     public let notices: [Notice]
 
-    public let translations: [String: String]
+    public let translations: [String: [String]]
 }
 
 public struct GenericCreditsView: View {
@@ -180,9 +180,13 @@ private extension GenericCreditsView {
                 HStack {
                     Text(code.localizedAsCountryCode)
                     Spacer()
-                    credits.translations[code].map { author in
-                        Text(author)
-                            .padding()
+                    credits.translations[code].map { authors in
+                        VStack(spacing: 4) {
+                            ForEach(authors, id: \.self) {
+                                Text($0)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                            }
+                        }
                     }
                 }
             }
