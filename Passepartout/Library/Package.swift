@@ -19,10 +19,7 @@ let package = Package(
         ),
         .library(
             name: "AppUI",
-            targets: [
-                "AppDataProfiles",
-                "AppUI"
-            ]
+            targets: ["AppUI"]
         ),
         .library(
             name: "TunnelLibrary",
@@ -72,7 +69,11 @@ let package = Package(
         ),
         .target(
             name: "AppUI",
-            dependencies: ["AppLibrary"],
+            dependencies: [
+                "AppDataProfiles",
+                "AppLibrary",
+                "UtilsLibrary"
+            ],
             resources: [
                 .process("Resources")
             ]
@@ -91,6 +92,7 @@ let package = Package(
         .target(
             name: "LegacyV2",
             dependencies: [
+                "UtilsLibrary",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
