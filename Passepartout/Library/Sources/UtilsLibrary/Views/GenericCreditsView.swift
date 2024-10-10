@@ -137,7 +137,7 @@ private extension GenericCreditsView {
 
     var sortedLanguages: [String] {
         credits.translations.keys.sorted {
-            $0.localizedAsCountryCode < $1.localizedAsCountryCode
+            ($0.localizedAsLanguageCode ?? $0) < ($1.localizedAsLanguageCode ?? $1)
         }
     }
 
@@ -178,7 +178,7 @@ private extension GenericCreditsView {
         Section {
             ForEach(sortedLanguages, id: \.self) { code in
                 HStack {
-                    Text(code.localizedAsCountryCode)
+                    Text(code.localizedAsLanguageCode ?? code)
                     Spacer()
                     credits.translations[code].map { authors in
                         VStack(spacing: 4) {
@@ -202,12 +202,6 @@ private extension GenericCreditsView {
                 .padding()
         }
         .navigationTitle(content.name)
-    }
-}
-
-private extension String {
-    var localizedAsCountryCode: String {
-        Locale.current.localizedString(forLanguageCode: self)?.capitalized ?? self
     }
 }
 

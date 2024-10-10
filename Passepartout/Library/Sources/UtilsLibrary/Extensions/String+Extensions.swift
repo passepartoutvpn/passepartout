@@ -1,8 +1,8 @@
 //
-//  ProfileGeneralView.swift
+//  String+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/25/24.
+//  Created by Davide De Rosa on 10/8/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,34 +23,26 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
+import Foundation
 
-import SwiftUI
-
-struct ProfileGeneralView: View {
-
-    @ObservedObject
-    var profileEditor: ProfileEditor
-
-    var body: some View {
-        Form {
-            NameSection(
-                name: $profileEditor.profile.name,
-                placeholder: Strings.Placeholders.Profile.name
-            )
-            StorageSection(
-                profileEditor: profileEditor
-            )
-        }
-        .themeForm()
+extension String {
+    public var nilIfEmpty: String? {
+        !isEmpty ? self : nil
     }
 }
 
-#Preview {
-    ProfileGeneralView(
-        profileEditor: ProfileEditor()
-    )
-    .withMockEnvironment()
-}
+extension String {
+    public var localizedAsRegionCode: String? {
+        Locale
+            .current
+            .localizedString(forRegionCode: self)?
+            .capitalized
+    }
 
-#endif
+    public var localizedAsLanguageCode: String? {
+        Locale
+            .current
+            .localizedString(forLanguageCode: self)?
+            .capitalized
+    }
+}

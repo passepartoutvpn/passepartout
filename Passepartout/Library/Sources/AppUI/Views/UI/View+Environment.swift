@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import SwiftUI
 
 @MainActor
@@ -31,6 +32,9 @@ extension View {
         environmentObject(theme)
             .environmentObject(context.iapManager)
             .environmentObject(context.connectionObserver)
+            .environmentObject(context.providerFactory.providerManager)
+            .environmentObject(context.providerFactory.vpnProviderManager)
+            .environmentObject(context.profileProcessor)
     }
 
     public func withMockEnvironment() -> some View {

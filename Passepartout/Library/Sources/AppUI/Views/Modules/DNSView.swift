@@ -30,7 +30,7 @@ import UtilsLibrary
 
 extension DNSModule.Builder: ModuleViewProviding {
     func moduleView(with editor: ProfileEditor) -> some View {
-        DNSView(editor: editor, original: self)
+        DNSView(editor: editor, module: self)
     }
 }
 
@@ -45,9 +45,9 @@ private struct DNSView: View {
     @Binding
     private var draft: DNSModule.Builder
 
-    init(editor: ProfileEditor, original: DNSModule.Builder) {
+    init(editor: ProfileEditor, module: DNSModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: original)
+        _draft = editor.binding(forModule: module)
     }
 
     var body: some View {
@@ -62,7 +62,7 @@ private struct DNSView: View {
             .labelsHidden()
         }
         .themeManualInput()
-        .asModuleView(with: editor, draft: draft)
+        .moduleView(editor: editor, draft: draft)
     }
 }
 

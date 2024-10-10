@@ -30,7 +30,7 @@ import SwiftUI
 extension Theme {
     public convenience init() {
         self.init(dummy: ())
-        animationCategories = [.profiles, .modules, .diagnostics]
+        animationCategories = [.diagnostics, .modules, .profiles, .providers]
     }
 }
 

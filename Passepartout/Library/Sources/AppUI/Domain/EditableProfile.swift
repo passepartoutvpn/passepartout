@@ -58,14 +58,10 @@ struct EditableProfile: MutableProfileType {
 
         builder.modulesMetadata = modulesMetadata?.reduce(into: [:]) {
             var metadata = $1.value
-            guard let name = metadata.name else {
-                return
+            if var trimmedName = metadata.name {
+                trimmedName = trimmedName.trimmingCharacters(in: .whitespaces)
+                metadata.name = !trimmedName.isEmpty ? trimmedName : nil
             }
-            let trimmedName = name.trimmingCharacters(in: .whitespaces)
-            guard !trimmedName.isEmpty else {
-                return
-            }
-            metadata.name = trimmedName
             $0[$1.key] = metadata
         }
 

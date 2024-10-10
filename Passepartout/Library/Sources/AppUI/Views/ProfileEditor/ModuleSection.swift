@@ -70,12 +70,6 @@ struct HashableRoute: Hashable {
     }
 }
 
-extension Collection {
-    var nilIfEmpty: [Element]? {
-        !isEmpty ? Array(self) : nil
-    }
-}
-
 extension View {
     func moduleSection(for rows: [ModuleRow]?, header: String) -> some View {
         rows.map { rows in

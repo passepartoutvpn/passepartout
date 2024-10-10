@@ -43,7 +43,7 @@ struct StorageSection: View {
             sharingToggle
             ThemeCopiableText(
                 title: Strings.Unlocalized.uuid,
-                value: profileEditor.id.flatString.localizedDescription(style: .quartets),
+                value: profileEditor.profile.id.flatString.localizedDescription(style: .quartets),
                 valueView: {
                     Text($0)
                         .monospaced()

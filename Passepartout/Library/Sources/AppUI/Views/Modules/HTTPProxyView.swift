@@ -29,7 +29,7 @@ import UtilsLibrary
 
 extension HTTPProxyModule.Builder: ModuleViewProviding {
     func moduleView(with editor: ProfileEditor) -> some View {
-        HTTPProxyView(editor: editor, original: self)
+        HTTPProxyView(editor: editor, module: self)
     }
 }
 
@@ -44,9 +44,9 @@ private struct HTTPProxyView: View {
     @Binding
     private var draft: HTTPProxyModule.Builder
 
-    init(editor: ProfileEditor, original: HTTPProxyModule.Builder) {
+    init(editor: ProfileEditor, module: HTTPProxyModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: original)
+        _draft = editor.binding(forModule: module)
     }
 
     var body: some View {
@@ -58,7 +58,7 @@ private struct HTTPProxyView: View {
         }
         .labelsHidden()
         .themeManualInput()
-        .asModuleView(with: editor, draft: draft)
+        .moduleView(editor: editor, draft: draft)
     }
 }
 

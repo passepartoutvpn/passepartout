@@ -1,8 +1,8 @@
 //
-//  Array+Extensions.swift
+//  VPNProviderServerView+macOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/18/24.
+//  Created by Davide De Rosa on 10/9/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,10 +23,30 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#if os(macOS)
 
-extension Array where Element == String {
-    public var isLastEmpty: Bool {
-        last?.trimmingCharacters(in: .whitespaces) == ""
+import SwiftUI
+
+// FIXME: #703, providers UI
+
+extension VPNProviderServerView {
+    var serversView: some View {
+        Table(sortedServers, sortOrder: $sortOrder) {
+            TableColumn("Region", value: \.sortableRegion)
+                .width(max: 200.0)
+
+            TableColumn("Address", value: \.sortableAddresses)
+
+            TableColumn("", value: \.serverId) { server in
+                Button {
+                    selectServer(server)
+                } label: {
+                    Text("Select")
+                }
+            }
+            .width(min: 100.0, max: 100.0)
+        }
     }
 }
+
+#endif

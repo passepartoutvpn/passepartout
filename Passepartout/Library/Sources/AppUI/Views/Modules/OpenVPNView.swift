@@ -28,7 +28,7 @@ import SwiftUI
 
 extension OpenVPNModule.Builder: ModuleViewProviding {
     func moduleView(with editor: ProfileEditor) -> some View {
-        OpenVPNView(editor: editor, original: self)
+        OpenVPNView(editor: editor, module: self)
     }
 }
 
@@ -45,9 +45,6 @@ extension OpenVPNModule.Builder: InteractiveViewProviding {
 }
 
 struct OpenVPNView: View {
-    private enum Subroute: Hashable {
-        case credentials
-    }
 
     @ObservedObject
     private var editor: ProfileEditor
@@ -57,71 +54,151 @@ struct OpenVPNView: View {
     @Binding
     private var draft: OpenVPNModule.Builder
 
+    @Binding
+    private var providerId: ProviderID?
+
+    @Binding
+    private var providerEntity: VPNEntity<OpenVPN.Configuration>?
+
     init(serverConfiguration: OpenVPN.Configuration) {
         let module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
-        editor = ProfileEditor(modules: [module])
+        let editor = ProfileEditor(modules: [module])
+
+        self.editor = editor
         _draft = .constant(module)
+        _providerId = .constant(nil)
+        _providerEntity = .constant(nil)
         isServerPushed = true
     }
 
-    init(editor: ProfileEditor, original: OpenVPNModule.Builder) {
+    init(editor: ProfileEditor, module: OpenVPNModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: original)
+        _draft = editor.binding(forModule: module)
+        _providerId = editor.binding(forProviderOf: module.id)
+        _providerEntity = editor.binding(forProviderEntityOf: module.id)
         isServerPushed = false
     }
 
     var body: some View {
-        Group {
-            moduleSection(for: accountRows, header: Strings.Global.account)
-            moduleSection(for: remotesRows, header: Strings.Modules.Openvpn.remotes)
-            if !isServerPushed {
-                moduleSection(for: pullRows, header: Strings.Modules.Openvpn.pull)
-            }
-            moduleSection(for: redirectRows, header: Strings.Modules.Openvpn.redirectGateway)
-            moduleSection(
-                for: ipRows(for: configuration.ipv4, routes: configuration.routes4),
-                header: Strings.Unlocalized.ipv4
-            )
-            moduleSection(
-                for: ipRows(for: configuration.ipv6, routes: configuration.routes6),
-                header: Strings.Unlocalized.ipv6
-            )
-            moduleSection(for: dnsRows, header: Strings.Unlocalized.dns)
-            moduleSection(for: proxyRows, header: Strings.Unlocalized.proxy)
-            moduleSection(for: communicationRows, header: Strings.Modules.Openvpn.communication)
-            moduleSection(for: compressionRows, header: Strings.Modules.Openvpn.compression)
-            if !isServerPushed {
-                moduleSection(for: tlsRows, header: Strings.Unlocalized.tls)
-            }
-            moduleSection(for: otherRows, header: Strings.Global.other)
-        }
-        .asModuleView(with: editor, draft: draft, withName: !isServerPushed)
-        .navigationDestination(for: Subroute.self) { route in
-            switch route {
-            case .credentials:
-                CredentialsView(
-                    isInteractive: $draft.isInteractive,
-                    credentials: $draft.credentials
-                )
-            }
-        }
+        debugChanges()
+        return contentView
+            .modifier(providerModifier)
+            .moduleView(editor: editor, draft: draft, withName: !isServerPushed)
+            .navigationDestination(for: Subroute.self, destination: destination)
+            .themeAnimation(on: providerId, category: .modules)
     }
 }
+
+// MARK: - Content
 
 private extension OpenVPNView {
     var configuration: OpenVPN.Configuration.Builder {
         draft.configurationBuilder
     }
 
-    var pullRows: [ModuleRow]? {
-        configuration.pullMask?.map {
-            .text(caption: $0.localizedDescription, value: nil)
-        }
-        .nilIfEmpty
+    var providerModifier: some ViewModifier {
+        ProviderPanelModifier(
+            providerId: $providerId,
+            selectedEntity: $providerEntity,
+            providerContent: providerContentView
+        )
     }
 
+    @ViewBuilder
+    var contentView: some View {
+        credentialsView
+        if providerId == nil {
+            manualView
+        }
+    }
+
+    @ViewBuilder
+    func providerContentView(providerId: ProviderID, entity: VPNEntity<OpenVPN.Configuration>?) -> some View {
+        NavigationLink(value: Subroute.providerServer(id: providerId)) {
+            HStack {
+                Text("Server")
+                if let entity {
+                    Spacer()
+                    Text(entity.server.hostname ?? entity.server.serverId)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        credentialsView
+    }
+
+    var credentialsView: some View {
+        moduleSection(for: accountRows, header: Strings.Global.account)
+    }
+
+    @ViewBuilder
+    var manualView: some View {
+        moduleSection(for: remotesRows, header: Strings.Modules.Openvpn.remotes)
+        if !isServerPushed {
+            moduleSection(for: pullRows, header: Strings.Modules.Openvpn.pull)
+        }
+        moduleSection(for: redirectRows, header: Strings.Modules.Openvpn.redirectGateway)
+        moduleSection(
+            for: ipRows(for: configuration.ipv4, routes: configuration.routes4),
+            header: Strings.Unlocalized.ipv4
+        )
+        moduleSection(
+            for: ipRows(for: configuration.ipv6, routes: configuration.routes6),
+            header: Strings.Unlocalized.ipv6
+        )
+        moduleSection(for: dnsRows, header: Strings.Unlocalized.dns)
+        moduleSection(for: proxyRows, header: Strings.Unlocalized.proxy)
+        moduleSection(for: communicationRows, header: Strings.Modules.Openvpn.communication)
+        moduleSection(for: compressionRows, header: Strings.Modules.Openvpn.compression)
+        if !isServerPushed {
+            moduleSection(for: tlsRows, header: Strings.Unlocalized.tls)
+        }
+        moduleSection(for: otherRows, header: Strings.Global.other)
+    }
+}
+
+private extension OpenVPNView {
+    func onSelect(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
+        providerEntity = VPNEntity(server: server, preset: preset)
+    }
+
+    func importConfiguration(from url: URL) {
+        // TODO: #657, import draft from external URL
+    }
+}
+
+// MARK: - Destinations
+
+private extension OpenVPNView {
+    enum Subroute: Hashable {
+        case providerServer(id: ProviderID)
+
+        case credentials
+    }
+
+    @ViewBuilder
+    func destination(for route: Subroute) -> some View {
+        switch route {
+        case .providerServer(let id):
+            VPNProviderServerView<OpenVPN.Configuration>(
+                providerId: id,
+                onSelect: onSelect
+            )
+
+        case .credentials:
+            CredentialsView(
+                isInteractive: $draft.isInteractive,
+                credentials: $draft.credentials
+            )
+        }
+    }
+}
+
+// MARK: - Subviews
+
+private extension OpenVPNView {
     var accountRows: [ModuleRow]? {
-        guard configuration.authUserPass == true else {
+        guard configuration.authUserPass == true || providerId != nil else {
             return nil
         }
         return [.push(caption: Strings.Modules.Openvpn.credentials, route: HashableRoute(Subroute.credentials))]
@@ -132,6 +209,13 @@ private extension OpenVPNView {
             .copiableText(
                 value: "\($0.address.rawValue) → \($0.proto.socketType.rawValue):\($0.proto.port)"
             )
+        }
+        .nilIfEmpty
+    }
+
+    var pullRows: [ModuleRow]? {
+        configuration.pullMask?.map {
+            .text(caption: $0.localizedDescription, value: nil)
         }
         .nilIfEmpty
     }
@@ -316,12 +400,6 @@ private extension OpenVPNView {
             rows.append(.text(caption: Strings.Modules.Openvpn.randomizeHostname, value: $0))
         }
         return rows.nilIfEmpty
-    }
-}
-
-private extension OpenVPNView {
-    func importConfiguration(from url: URL) {
-        // TODO: #657, import draft from external URL
     }
 }
 

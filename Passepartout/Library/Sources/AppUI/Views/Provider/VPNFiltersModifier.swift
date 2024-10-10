@@ -1,8 +1,8 @@
 //
-//  IAPManager+ProfileProcessor.swift
+//  VPNFiltersModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/10/24.
+//  Created by Davide De Rosa on 10/9/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,26 +23,27 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import PassepartoutKit
+import SwiftUI
 
-extension IAPManager: ProfileProcessor {
-    func processedProfile(_ profile: Profile) throws -> Profile {
-        var builder = profile.builder()
+struct VPNFiltersModifier<Configuration>: ViewModifier where Configuration: Decodable {
 
-        // suppress on-demand rules if not eligible
-        if !isEligible(for: .onDemand) {
-            pp_log(.app, .notice, "Suppress on-demand rules, not eligible")
+    @ObservedObject
+    var manager: VPNProviderManager
 
-            if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
-                let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {
+    let providerId: ProviderID
 
-                var onDemandBuilder = onDemandModule.builder()
-                onDemandBuilder.policy = .any
-                builder.modules[onDemandModuleIndex] = onDemandBuilder.tryBuild()
+    let onRefresh: () async -> Void
+
+    @State
+    var isFiltersPresented = false
+
+    func body(content: Content) -> some View {
+        contentView(with: content)
+            .onChange(of: manager.filters) { _ in
+                Task {
+                    await manager.applyFilters()
+                }
             }
-        }
-
-        return try builder.tryBuild()
     }
 }

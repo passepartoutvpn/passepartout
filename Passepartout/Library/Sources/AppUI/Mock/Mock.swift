@@ -29,8 +29,6 @@ import Foundation
 import PassepartoutKit
 import UtilsLibrary
 
-// MARK: AppContext
-
 extension AppContext {
     public static let mock: AppContext = .mock(withRegistry: Registry())
 
@@ -56,9 +54,16 @@ extension AppContext {
                     }
                 return ProfileManager(profiles: profiles)
             }(),
+            profileProcessor: ProfileProcessor {
+                try $0.withProviderModules()
+            },
             tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: env)),
             tunnelEnvironment: env,
             registry: registry,
+            providerFactory: ProviderFactory(
+                providerManager: ProviderManager(repository: InMemoryProviderRepository()),
+                vpnProviderManager: VPNProviderManager(repository: InMemoryVPNProviderRepository())
+            ),
             constants: .shared
         )
     }
@@ -73,6 +78,18 @@ extension IAPManager {
 extension ProfileManager {
     public static var mock: ProfileManager {
         AppContext.mock.profileManager
+    }
+}
+
+extension ProviderFactory {
+    public static var mock: ProviderFactory {
+        AppContext.mock.providerFactory
+    }
+}
+
+extension ProfileProcessor {
+    public static var mock: ProfileProcessor {
+        AppContext.mock.profileProcessor
     }
 }
 

@@ -64,7 +64,7 @@ struct ModuleListView: View, Routable {
         }
         .onDeleteCommand(perform: removeSelectedModule)
         .toolbar(content: toolbarContent)
-        .navigationTitle(profileEditor.name)
+        .navigationTitle(profileEditor.profile.name)
     }
 }
 

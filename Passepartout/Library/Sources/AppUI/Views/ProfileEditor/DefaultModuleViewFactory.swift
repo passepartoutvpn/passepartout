@@ -52,22 +52,3 @@ private extension ProfileEditor {
         return (provider, module.typeDescription)
     }
 }
-
-extension View {
-
-    @MainActor
-    func asModuleView<T>(with editor: ProfileEditor, draft: T, withName: Bool = true) -> some View where T: ModuleBuilder, T: Equatable {
-        Form {
-            if withName {
-                NameSection(
-                    name: editor.binding(forNameOf: draft.id),
-                    placeholder: draft.typeDescription
-                )
-            }
-            self
-        }
-        .themeForm()
-        .themeManualInput()
-        .themeAnimation(on: draft, category: .modules)
-    }
-}

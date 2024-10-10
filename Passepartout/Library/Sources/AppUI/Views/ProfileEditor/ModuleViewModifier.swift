@@ -1,8 +1,8 @@
 //
-//  ProfileGeneralView.swift
+//  ModuleViewModifier.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/25/24.
+//  Created by Davide De Rosa on 10/9/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,34 +23,36 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
-
+import PassepartoutKit
 import SwiftUI
 
-struct ProfileGeneralView: View {
+struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
 
     @ObservedObject
-    var profileEditor: ProfileEditor
+    var editor: ProfileEditor
 
-    var body: some View {
+    let draft: T
+
+    let withName: Bool
+
+    func body(content: Content) -> some View {
         Form {
-            NameSection(
-                name: $profileEditor.profile.name,
-                placeholder: Strings.Placeholders.Profile.name
-            )
-            StorageSection(
-                profileEditor: profileEditor
-            )
+            if withName {
+                NameSection(
+                    name: editor.binding(forNameOf: draft.id),
+                    placeholder: draft.typeDescription
+                )
+            }
+            content
         }
         .themeForm()
+        .themeManualInput()
+        .themeAnimation(on: draft, category: .modules)
     }
 }
 
-#Preview {
-    ProfileGeneralView(
-        profileEditor: ProfileEditor()
-    )
-    .withMockEnvironment()
+extension View {
+    func moduleView<T>(editor: ProfileEditor, draft: T, withName: Bool = true) -> some View where T: ModuleBuilder & Equatable {
+        modifier(ModuleViewModifier(editor: editor, draft: draft, withName: withName))
+    }
 }
-
-#endif

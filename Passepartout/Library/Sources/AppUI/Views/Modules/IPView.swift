@@ -29,7 +29,7 @@ import UtilsLibrary
 
 extension IPModule.Builder: ModuleViewProviding {
     func moduleView(with editor: ProfileEditor) -> some View {
-        IPView(editor: editor, original: self)
+        IPView(editor: editor, module: self)
     }
 }
 
@@ -44,9 +44,9 @@ struct IPView: View {
     @State
     private var routePresentation: RoutePresentation?
 
-    init(editor: ProfileEditor, original: IPModule.Builder) {
+    init(editor: ProfileEditor, module: IPModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: original)
+        _draft = editor.binding(forModule: module)
     }
 
     var body: some View {
@@ -55,7 +55,7 @@ struct IPView: View {
             ipSections(for: .v6)
             interfaceSection
         }
-        .asModuleView(with: editor, draft: draft)
+        .moduleView(editor: editor, draft: draft)
         .themeModal(item: $routePresentation, content: routeModal)
     }
 }

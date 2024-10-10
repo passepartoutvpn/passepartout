@@ -43,6 +43,9 @@ struct TunnelToggleButton<Label>: View, TunnelContextProviding, ThemeProviding w
     @EnvironmentObject
     private var iapManager: IAPManager
 
+    @EnvironmentObject
+    private var profileProcessor: ProfileProcessor
+
     var style: Style = .plain
 
     @ObservedObject
@@ -127,12 +130,12 @@ private extension TunnelToggleButton {
         do {
             if isInstalled {
                 if canConnect {
-                    try await tunnel.connect(with: profile, processor: iapManager)
+                    try await tunnel.connect(with: profile, processor: profileProcessor)
                 } else {
                     try await tunnel.disconnect()
                 }
             } else {
-                try await tunnel.connect(with: profile, processor: iapManager)
+                try await tunnel.connect(with: profile, processor: profileProcessor)
             }
         } catch {
             errorHandler.handle(

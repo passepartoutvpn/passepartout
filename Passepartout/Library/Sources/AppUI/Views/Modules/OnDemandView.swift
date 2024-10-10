@@ -29,7 +29,7 @@ import UtilsLibrary
 
 extension OnDemandModule.Builder: ModuleViewProviding {
     func moduleView(with editor: ProfileEditor) -> some View {
-        OnDemandView(editor: editor, original: self)
+        OnDemandView(editor: editor, module: self)
     }
 }
 
@@ -54,12 +54,12 @@ private struct OnDemandView: View {
 
     init(
         editor: ProfileEditor,
-        original: OnDemandModule.Builder,
+        module: OnDemandModule.Builder,
         observer: WifiObserver? = nil
     ) {
         self.editor = editor
         wifi = Wifi(observer: observer ?? CoreLocationWifiObserver())
-        _draft = editor.binding(forModule: original)
+        _draft = editor.binding(forModule: module)
     }
 
     var body: some View {
@@ -67,7 +67,7 @@ private struct OnDemandView: View {
             enabledSection
             restrictedArea
         }
-        .asModuleView(with: editor, draft: draft)
+        .moduleView(editor: editor, draft: draft)
         .modifier(PaywallModifier(reason: $paywallReason))
     }
 }
@@ -257,7 +257,7 @@ private extension OnDemandView {
     return module.preview {
         OnDemandView(
             editor: $0,
-            original: $1,
+            module: $1,
             observer: MockWifi()
         )
     }
