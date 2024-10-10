@@ -26,7 +26,6 @@
 import Combine
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
 @MainActor
 public final class ProfileManager: ObservableObject {
@@ -117,7 +116,7 @@ extension ProfileManager {
         do {
             let existingProfile = allProfiles[profile.id]
             if existingProfile == nil || profile != existingProfile {
-               try await repository.saveEntities([profile])
+               try await repository.saveProfile(profile)
 
                 allProfiles[profile.id] = profile
                 didChange.send(.save(profile))
@@ -132,10 +131,10 @@ extension ProfileManager {
             if let isShared, let remoteRepository {
                 if isShared {
                     pp_log(.app, .notice, "Enable remote sharing of profile \(profile.id)...")
-                    try await remoteRepository.saveEntities([profile])
+                    try await remoteRepository.saveProfile(profile)
                 } else {
                     pp_log(.app, .notice, "Disable remote sharing of profile \(profile.id)...")
-                    try await remoteRepository.removeEntities(withIds: [profile.id])
+                    try await remoteRepository.removeProfiles(withIds: [profile.id])
                 }
             }
         } catch {
@@ -153,13 +152,13 @@ extension ProfileManager {
         do {
             // remove local profiles
             var newAllProfiles = allProfiles
-            try await repository.removeEntities(withIds: profileIds)
+            try await repository.removeProfiles(withIds: profileIds)
             profileIds.forEach {
                 newAllProfiles.removeValue(forKey: $0)
             }
 
             // remove remote counterpart too
-            try? await remoteRepository?.removeEntities(withIds: profileIds)
+            try? await remoteRepository?.removeProfiles(withIds: profileIds)
             profileIds.forEach {
                 allRemoteProfiles.removeValue(forKey: $0)
             }
@@ -186,7 +185,7 @@ extension ProfileManager {
 
     public func eraseRemotelySharedProfiles() async throws {
         pp_log(.app, .notice, "Erase remotely shared profiles...")
-        try await remoteRepository?.removeEntities(withIds: Array(allRemoteProfiles.keys))
+        try await remoteRepository?.removeProfiles(withIds: Array(allRemoteProfiles.keys))
     }
 }
 
@@ -237,7 +236,7 @@ private extension ProfileManager {
 extension ProfileManager {
     public func observeObjects(searchDebounce: Int = 200) {
         repository
-            .entitiesPublisher
+            .profilesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reloadLocalProfiles($0)
@@ -245,7 +244,7 @@ extension ProfileManager {
             .store(in: &subscriptions)
 
         remoteRepository?
-            .entitiesPublisher
+            .profilesPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reloadRemoteProfiles($0)
@@ -253,7 +252,7 @@ extension ProfileManager {
             .store(in: &subscriptions)
 
         remoteRepository?
-            .entitiesPublisher
+            .profilesPublisher
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
@@ -271,25 +270,25 @@ extension ProfileManager {
 }
 
 private extension ProfileManager {
-    func reloadLocalProfiles(_ result: EntitiesResult<Profile>) {
-        pp_log(.app, .info, "Reload local profiles: \(result.entities.map(\.id))")
-        allProfiles = result.entities.reduce(into: [:]) {
+    func reloadLocalProfiles(_ result: [Profile]) {
+        pp_log(.app, .info, "Reload local profiles: \(result.map(\.id))")
+        allProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
     }
 
-    func reloadRemoteProfiles(_ result: EntitiesResult<Profile>) {
-        pp_log(.app, .info, "Reload remote profiles: \(result.entities.map(\.id))")
-        allRemoteProfiles = result.entities.reduce(into: [:]) {
+    func reloadRemoteProfiles(_ result: [Profile]) {
+        pp_log(.app, .info, "Reload remote profiles: \(result.map(\.id))")
+        allRemoteProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
         objectWillChange.send()
     }
 
     // pull remote updates into local profiles (best-effort)
-    func importRemoteProfiles(_ result: EntitiesResult<Profile>) {
-        let profilesToImport = result.entities
-        pp_log(.app, .info, "Try to import remote profiles: \(result.entities.map(\.id))")
+    func importRemoteProfiles(_ result: [Profile]) {
+        let profilesToImport = result
+        pp_log(.app, .info, "Try to import remote profiles: \(result.map(\.id))")
 
         Task.detached { [weak self] in
             for remoteProfile in profilesToImport {

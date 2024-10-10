@@ -78,8 +78,6 @@ private extension PassepartoutApp {
             AppUI.configure(with: context)
         }
         .themeLockScreen()
-        .environmentObject(theme)
-        .environmentObject(context.iapManager)
-        .environmentObject(context.connectionObserver)
+        .withEnvironment(from: context, theme: theme)
     }
 }

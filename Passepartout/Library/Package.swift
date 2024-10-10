@@ -19,10 +19,7 @@ let package = Package(
         ),
         .library(
             name: "AppUI",
-            targets: [
-                "AppDataProfiles",
-                "AppUI"
-            ]
+            targets: ["AppUI"]
         ),
         .library(
             name: "TunnelLibrary",
@@ -46,17 +43,14 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "AppData",
-            dependencies: [
-                "AppLibrary",
-                .product(name: "PassepartoutKit", package: "passepartoutkit-source")
-            ]
+            dependencies: []
         ),
         .target(
             name: "AppDataProfiles",
             dependencies: [
                 "AppData",
-                "UtilsLibrary",
-                .product(name: "PassepartoutKit", package: "passepartoutkit-source")
+                "AppLibrary",
+                "UtilsLibrary"
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
@@ -64,16 +58,17 @@ let package = Package(
         ),
         .target(
             name: "AppLibrary",
-            dependencies: [
-                "CommonLibrary",
-                "Kvitto",
-                "LegacyV2",
-                "UtilsLibrary"
-            ]
+            dependencies: ["CommonLibrary"]
         ),
         .target(
             name: "AppUI",
-            dependencies: ["AppLibrary"],
+            dependencies: [
+                "AppDataProfiles",
+                "AppLibrary",
+                "Kvitto",
+                "LegacyV2",
+                "UtilsLibrary"
+            ],
             resources: [
                 .process("Resources")
             ]
@@ -92,6 +87,7 @@ let package = Package(
         .target(
             name: "LegacyV2",
             dependencies: [
+                "UtilsLibrary",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [

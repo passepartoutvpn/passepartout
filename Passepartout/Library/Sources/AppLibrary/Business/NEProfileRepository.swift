@@ -24,9 +24,9 @@
 //
 
 import Combine
+import CommonLibrary
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
 public final class NEProfileRepository: ProfileRepository {
     private let repository: NETunnelManagerRepository
@@ -57,31 +57,17 @@ public final class NEProfileRepository: ProfileRepository {
         }
     }
 
-    public var entitiesPublisher: AnyPublisher<EntitiesResult<Profile>, Never> {
-        profilesSubject
-            .map {
-                EntitiesResult($0, isFiltering: false)
-            }
-            .eraseToAnyPublisher()
+    public var profilesPublisher: AnyPublisher<[Profile], Never> {
+        profilesSubject.eraseToAnyPublisher()
     }
 
-    public func filter(byFormat format: String, arguments: [Any]?) async throws {
-        assertionFailure("Unused by ProfileManager")
+    public func saveProfile(_ profile: Profile) async throws {
+        try await repository.save(profile, connect: false, title: \.name)
     }
 
-    public func resetFilter() async throws {
-        assertionFailure("Unused by ProfileManager")
-    }
-
-    public func saveEntities(_ entities: [Profile]) async throws {
-        for profile in entities {
-            try await repository.save(profile, connect: false, title: \.name)
-        }
-    }
-
-    public func removeEntities(withIds ids: [UUID]) async throws {
-        for profileId in ids {
-            try await repository.remove(profileId: profileId)
+    public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
+        for id in profileIds {
+            try await repository.remove(profileId: id)
         }
     }
 }

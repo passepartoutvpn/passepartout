@@ -27,9 +27,13 @@ import SwiftUI
 
 @MainActor
 extension View {
-    func withMockEnvironment() -> some View {
-        environmentObject(Theme())
-            .environmentObject(IAPManager.mock)
-            .environmentObject(ConnectionObserver.mock)
+    public func withEnvironment(from context: AppContext, theme: Theme) -> some View {
+        environmentObject(theme)
+            .environmentObject(context.iapManager)
+            .environmentObject(context.connectionObserver)
+    }
+
+    public func withMockEnvironment() -> some View {
+        withEnvironment(from: .mock, theme: Theme())
     }
 }

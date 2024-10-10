@@ -1,8 +1,8 @@
 //
-//  Shared+AppLibrary.swift
+//  Shared+App.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/26/24.
+//  Created by Davide De Rosa on 2/24/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,11 +26,23 @@
 import AppData
 import AppDataProfiles
 import AppLibrary
-import CommonLibrary
-import CoreData
+import AppUI
 import Foundation
 import PassepartoutKit
 import UtilsLibrary
+
+extension AppContext {
+    static let shared = AppContext(
+        iapManager: .shared,
+        profileManager: .shared,
+        tunnel: .shared,
+        tunnelEnvironment: .shared,
+        registry: .shared,
+        constants: .shared
+    )
+}
+
+// MARK: -
 
 extension ProfileManager {
     static let shared: ProfileManager = {
@@ -39,7 +51,7 @@ extension ProfileManager {
         let remoteStore = CoreDataPersistentStore(
             logger: .default,
             containerName: BundleConfiguration.mainString(for: .remoteProfilesContainerName),
-            model: coreDataModel,
+            model: AppData.cdProfilesModel,
             cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
             author: nil
         )
@@ -57,9 +69,52 @@ extension ProfileManager {
     }()
 }
 
-private var coreDataModel: NSManagedObjectModel {
-    AppData.cdProfilesModel
+// MARK: -
+
+extension IAPManager {
+    static let shared = IAPManager(
+        customUserLevel: customUserLevel,
+        receiptReader: KvittoReceiptReader(),
+        // FIXME: #662, omit unrestrictedFeatures on release!
+        unrestrictedFeatures: [.interactiveLogin, .sharing],
+        productsAtBuild: productsAtBuild
+    )
+
+    private static var customUserLevel: AppUserLevel? {
+        if let envString = ProcessInfo.processInfo.environment["CUSTOM_USER_LEVEL"],
+           let envValue = Int(envString),
+           let testAppType = AppUserLevel(rawValue: envValue) {
+
+            return testAppType
+        }
+        if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .customUserLevel),
+           let testAppType = AppUserLevel(rawValue: infoValue) {
+
+            return testAppType
+        }
+        return nil
+    }
+
+    private static let productsAtBuild: BuildProducts<AppProduct> = {
+#if os(iOS)
+        if $0 <= 2016 {
+            return [.Full.iOS]
+        } else if $0 <= 3000 {
+            return [.Features.networkSettings]
+        }
+        return []
+#elseif os(macOS)
+        if $0 <= 3000 {
+            return [.Features.networkSettings]
+        }
+        return []
+#else
+        return []
+#endif
+    }
 }
+
+// MARK: -
 
 #if targetEnvironment(simulator)
 
@@ -109,3 +164,21 @@ private var neRepository: NETunnelManagerRepository {
 }
 
 #endif
+
+// MARK: -
+
+extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
+    static var `default`: CoreDataPersistentStoreLogger {
+        DefaultCoreDataPersistentStoreLogger()
+    }
+}
+
+private struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
+    func debug(_ msg: String) {
+        pp_log(.app, .info, msg)
+    }
+
+    func warning(_ msg: String) {
+        pp_log(.app, .error, msg)
+    }
+}

@@ -26,63 +26,36 @@
 import Combine
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
 public final class InMemoryProfileRepository: ProfileRepository {
     private var profiles: [Profile] {
         didSet {
-            profilesSubject.send(EntitiesResult(profiles, isFiltering: false))
+            profilesSubject.send(profiles)
         }
     }
 
-    private let profilesSubject: CurrentValueSubject<EntitiesResult<Profile>, Never>
+    private let profilesSubject: CurrentValueSubject<[Profile], Never>
 
     public init(profiles: [Profile] = []) {
         self.profiles = profiles
-        profilesSubject = CurrentValueSubject(EntitiesResult(profiles, isFiltering: false))
+        profilesSubject = CurrentValueSubject(profiles)
     }
 
-    public var entitiesPublisher: AnyPublisher<EntitiesResult<Profile>, Never> {
-        profilesSubject
-            .map {
-                EntitiesResult($0.entities.sorted {
-                    $0.name < $1.name
-                }, isFiltering: $0.isFiltering)
-            }
-            .eraseToAnyPublisher()
+    public var profilesPublisher: AnyPublisher<[Profile], Never> {
+        profilesSubject.eraseToAnyPublisher()
     }
 
-    public func filter(byFormat format: String, arguments: [Any]?) {
-        print("Filter by format '\(format)' with \(arguments ?? [])")
-        guard let nameSearch = arguments?.first as? String, !nameSearch.isEmpty else {
-            profilesSubject.send(EntitiesResult(profiles, isFiltering: false))
-            return
-        }
-        let match = nameSearch.lowercased()
-        let filtered = profiles.filter {
-            $0.name.lowercased().contains(match)
-        }
-        profilesSubject.send(EntitiesResult(filtered, isFiltering: true))
-    }
-
-    public func resetFilter() {
-        print("Reset filter")
-        profilesSubject.send(EntitiesResult(profiles, isFiltering: false))
-    }
-
-    public func saveEntities(_ entities: [Profile]) {
-        print("Save entities: \(entities.map(\.id))")
-        entities.forEach { profile in
-            if let index = profiles.firstIndex(where: { $0.id == profile.id }) {
-                profiles[index] = profile
-            } else {
-                profiles.append(profile)
-            }
+    public func saveProfile(_ profile: Profile) async throws {
+        print("Save profile: \(profile.id))")
+        if let index = profiles.firstIndex(where: { $0.id == profile.id }) {
+            profiles[index] = profile
+        } else {
+            profiles.append(profile)
         }
     }
 
-    public func removeEntities(withIds ids: [UUID]) {
-        print("Remove entities: \(ids)")
+    public func removeProfiles(withIds ids: [Profile.ID]) async throws {
+        print("Remove profiles: \(ids)")
         profiles = profiles.filter {
             !ids.contains($0.id)
         }
