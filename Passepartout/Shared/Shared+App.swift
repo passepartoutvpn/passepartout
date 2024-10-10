@@ -27,6 +27,7 @@ import AppData
 import AppDataProfiles
 import AppLibrary
 import AppUI
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 import UtilsLibrary
@@ -35,9 +36,11 @@ extension AppContext {
     static let shared = AppContext(
         iapManager: .shared,
         profileManager: .shared,
+        profileProcessor: .shared,
         tunnel: .shared,
         tunnelEnvironment: .shared,
         registry: .shared,
+        providerFactory: .shared,
         constants: .shared
     )
 }
@@ -114,6 +117,34 @@ extension IAPManager {
     }
 }
 
+extension ProfileProcessor {
+    static let shared = ProfileProcessor { profile in
+        var builder = profile.builder()
+
+        // suppress on-demand rules if not eligible
+        if !IAPManager.shared.isEligible(for: .onDemand) {
+            pp_log(.app, .notice, "Suppress on-demand rules, not eligible")
+
+            if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
+                let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {
+
+                var onDemandBuilder = onDemandModule.builder()
+                onDemandBuilder.policy = .any
+                builder.modules[onDemandModuleIndex] = onDemandBuilder.tryBuild()
+            }
+        }
+
+        let processed = try builder.tryBuild()
+        do {
+            return try processed.withProviderModules()
+        } catch {
+            // FIXME: #703, alert unable to build provider server
+            pp_log(.app, .error, "Unable to inject provider modules: \(error)")
+            return processed
+        }
+    }
+}
+
 // MARK: -
 
 #if targetEnvironment(simulator)
@@ -164,6 +195,16 @@ private var neRepository: NETunnelManagerRepository {
 }
 
 #endif
+
+// MARK: -
+
+// FIXME: #705, store providers to Core Data
+extension ProviderFactory {
+    static let shared = ProviderFactory(
+        providerManager: ProviderManager(repository: InMemoryProviderRepository()),
+        vpnProviderManager: VPNProviderManager(repository: InMemoryVPNProviderRepository())
+    )
+}
 
 // MARK: -
 

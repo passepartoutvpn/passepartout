@@ -329,13 +329,15 @@ struct ThemeTipModifier: ViewModifier {
 // MARK: - Views
 
 public enum ThemeAnimationCategory: CaseIterable {
+    case diagnostics
+
+    case modules
+
     case profiles
 
     case profilesLayout
 
-    case modules
-
-    case diagnostics
+    case providers
 }
 
 struct ThemeImage: View {

@@ -1,8 +1,8 @@
 //
-//  ProfileGeneralView.swift
+//  VPNFiltersModifier+iOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/25/24.
+//  Created by Davide De Rosa on 10/9/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,34 +23,33 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
+#if os(iOS)
 
 import SwiftUI
 
-struct ProfileGeneralView: View {
+// FIXME: #703, providers UI
 
-    @ObservedObject
-    var profileEditor: ProfileEditor
-
-    var body: some View {
-        Form {
-            NameSection(
-                name: $profileEditor.profile.name,
-                placeholder: Strings.Placeholders.Profile.name
-            )
-            StorageSection(
-                profileEditor: profileEditor
-            )
+extension VPNFiltersModifier {
+    func contentView(with content: Content) -> some View {
+        List {
+            content
         }
-        .themeForm()
+        .toolbar {
+            Button {
+                isFiltersPresented = true
+            } label: {
+                Image(systemName: "line.3.horizontal.decrease")
+            }
+        }
+        .themeModal(isPresented: $isFiltersPresented) {
+            NavigationStack {
+                VPNFiltersView<Configuration>(manager: manager, providerId: providerId, onRefresh: onRefresh)
+                    .navigationTitle("Filters")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .presentationDetents([.medium])
+        }
     }
-}
-
-#Preview {
-    ProfileGeneralView(
-        profileEditor: ProfileEditor()
-    )
-    .withMockEnvironment()
 }
 
 #endif

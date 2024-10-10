@@ -75,7 +75,7 @@ private extension ConnectionStatusView {
 #Preview("Connected") {
     ConnectionStatusView(tunnel: .mock)
         .task {
-            try? await Tunnel.mock.connect(with: .mock, processor: IAPManager.mock)
+            try? await Tunnel.mock.connect(with: .mock, processor: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()
@@ -94,7 +94,7 @@ private extension ConnectionStatusView {
     }
     return ConnectionStatusView(tunnel: .mock)
         .task {
-            try? await Tunnel.mock.connect(with: profile, processor: IAPManager.mock)
+            try? await Tunnel.mock.connect(with: profile, processor: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()

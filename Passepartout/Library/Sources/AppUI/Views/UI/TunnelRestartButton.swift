@@ -30,7 +30,7 @@ import UtilsLibrary
 struct TunnelRestartButton<Label>: View where Label: View {
 
     @EnvironmentObject
-    private var iapManager: IAPManager
+    private var profileProcessor: ProfileProcessor
 
     @ObservedObject
     var tunnel: Tunnel
@@ -55,7 +55,7 @@ struct TunnelRestartButton<Label>: View where Label: View {
             pendingTask?.cancel()
             pendingTask = Task {
                 do {
-                    try await tunnel.connect(with: profile, processor: iapManager)
+                    try await tunnel.connect(with: profile, processor: profileProcessor)
                 } catch {
                     errorHandler.handle(
                         error,

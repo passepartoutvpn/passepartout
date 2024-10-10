@@ -29,11 +29,14 @@ import SwiftUI
 
 extension WireGuardModule.Builder: ModuleViewProviding {
     func moduleView(with editor: ProfileEditor) -> some View {
-        WireGuardView(editor: editor, original: self)
+        WireGuardView(editor: editor, module: self)
     }
 }
 
 private struct WireGuardView: View {
+    private enum Subroute: Hashable {
+        case providerServer(id: ProviderID)
+    }
 
     @ObservedObject
     private var editor: ProfileEditor
@@ -41,28 +44,64 @@ private struct WireGuardView: View {
     @Binding
     private var draft: WireGuardModule.Builder
 
-    init(editor: ProfileEditor, original: WireGuardModule.Builder) {
+//    @Binding
+//    private var providerId: ProviderID?
+//
+//    @State
+//    private var providerServer: VPNServer?
+
+    init(editor: ProfileEditor, module: WireGuardModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: original)
+        _draft = editor.binding(forModule: module)
+//        _providerId = editor.binding(forProviderOf: module.id)
     }
 
     var body: some View {
-        Group {
-            moduleSection(for: interfaceRows, header: Strings.Modules.Wireguard.interface)
-            moduleSection(for: dnsRows, header: Strings.Unlocalized.dns)
-            ForEach(Array(zip(configuration.peers.indices, configuration.peers)), id: \.1.publicKey) { index, peer in
-                moduleSection(for: peersRows(for: peer), header: Strings.Modules.Wireguard.peer(index + 1))
-            }
-        }
-        .asModuleView(with: editor, draft: draft)
+        contentView
+//            .modifier(providerModifier)
+            .moduleView(editor: editor, draft: draft)
+//            .navigationDestination(for: Subroute.self) {
+//                switch $0 {
+//                case .providerServer(let id):
+//                    VPNProviderServerView<WireGuard.Configuration>(providerId: id) {
+//                        providerServer = $1
+//                    }
+//                }
+//            }
     }
 }
+
+// MARK: - Content
 
 private extension WireGuardView {
     var configuration: WireGuard.Configuration.Builder {
         draft.configurationBuilder
     }
 
+    @ViewBuilder
+    var contentView: some View {
+        moduleSection(for: interfaceRows, header: Strings.Modules.Wireguard.interface)
+        moduleSection(for: dnsRows, header: Strings.Unlocalized.dns)
+        ForEach(Array(zip(configuration.peers.indices, configuration.peers)), id: \.1.publicKey) { index, peer in
+            moduleSection(for: peersRows(for: peer), header: Strings.Modules.Wireguard.peer(index + 1))
+        }
+    }
+
+//    var providerModifier: some ViewModifier {
+//        ProviderPanelModifier(
+//            providerId: $providerId,
+//            selectedServer: $providerServer,
+//            configurationType: WireGuard.Configuration.self,
+//            serverRoute: {
+//                Subroute.providerServer(id: $0)
+//            }
+//        )
+//    }
+}
+
+// MARK: - Subviews
+
+private extension WireGuardView {
     var interfaceRows: [ModuleRow]? {
         var rows: [ModuleRow] = []
         rows.append(.longContent(caption: Strings.Global.privateKey, value: configuration.interface.privateKey))

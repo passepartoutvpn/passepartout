@@ -111,7 +111,7 @@ private extension IPView.RouteView {
                 Button("Add route") {
                     isPresented = true
                 }
-                .sheet(isPresented: $isPresented) {
+                .themeModal(isPresented: $isPresented) {
                     NavigationStack {
                         IPView.RouteView(family: .v4) {
                             route = $0

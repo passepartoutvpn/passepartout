@@ -49,7 +49,7 @@ struct ProfileEditView: View, Routable {
         debugChanges()
         return List {
             NameSection(
-                name: $profileEditor.name,
+                name: $profileEditor.profile.name,
                 placeholder: Strings.Placeholders.Profile.name
             )
             Group {

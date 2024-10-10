@@ -76,6 +76,7 @@ let package = Package(
         .target(
             name: "CommonLibrary",
             dependencies: [
+                .product(name: "PassepartoutAPIBundle", package: "passepartoutkit-source"),
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source"),
                 .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-source-openvpn-openssl"),
                 .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")

@@ -30,7 +30,7 @@ extension ModuleBuilder {
 
     @MainActor
     func description(inEditor editor: ProfileEditor) -> String {
-        editor.displayName(forModuleWithId: id) ?? typeDescription
+        editor.profile.displayName(forModuleWithId: id) ?? typeDescription
     }
 }
 

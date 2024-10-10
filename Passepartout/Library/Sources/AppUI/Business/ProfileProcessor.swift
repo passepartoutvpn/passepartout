@@ -26,6 +26,11 @@
 import Foundation
 import PassepartoutKit
 
-protocol ProfileProcessor {
-    func processedProfile(_ profile: Profile) throws -> Profile
+@MainActor
+public final class ProfileProcessor: ObservableObject {
+    public let process: (Profile) throws -> Profile
+
+    public init(process: @escaping (Profile) throws -> Profile) {
+        self.process = process
+    }
 }

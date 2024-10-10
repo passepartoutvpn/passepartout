@@ -36,6 +36,8 @@ public final class AppContext: ObservableObject {
 
     public let profileManager: ProfileManager
 
+    public let profileProcessor: ProfileProcessor
+
     public let tunnel: Tunnel
 
     public let tunnelEnvironment: TunnelEnvironment
@@ -44,6 +46,8 @@ public final class AppContext: ObservableObject {
 
     public let registry: Registry
 
+    public let providerFactory: ProviderFactory
+
     private let constants: Constants
 
     private var subscriptions: Set<AnyCancellable>
@@ -51,13 +55,16 @@ public final class AppContext: ObservableObject {
     public init(
         iapManager: IAPManager,
         profileManager: ProfileManager,
+        profileProcessor: ProfileProcessor,
         tunnel: Tunnel,
         tunnelEnvironment: TunnelEnvironment,
         registry: Registry,
+        providerFactory: ProviderFactory,
         constants: Constants
     ) {
         self.iapManager = iapManager
         self.profileManager = profileManager
+        self.profileProcessor = profileProcessor
         self.tunnel = tunnel
         self.tunnelEnvironment = tunnelEnvironment
         connectionObserver = ConnectionObserver(
@@ -66,6 +73,7 @@ public final class AppContext: ObservableObject {
             interval: constants.connection.refreshInterval
         )
         self.registry = registry
+        self.providerFactory = providerFactory
         self.constants = constants
         subscriptions = []
 
@@ -100,7 +108,7 @@ private extension AppContext {
 
 private extension AppContext {
     func installSavedProfile(_ profile: Profile) async throws {
-        try await tunnel.install(profile, processor: iapManager)
+        try await tunnel.install(profile, processor: profileProcessor)
     }
 
     func uninstallRemovedProfiles(withIds profileIds: [Profile.ID]) {
@@ -125,7 +133,7 @@ private extension AppContext {
                 return
             }
             if tunnel.status == .active {
-                try await tunnel.connect(with: profile, processor: iapManager)
+                try await tunnel.connect(with: profile, processor: profileProcessor)
             }
         }
     }

@@ -32,7 +32,7 @@ extension Theme {
         self.init(dummy: Void())
         rootModalSize = CGSize(width: 700, height: 400)
         secondaryModalSize = CGSize(width: 500.0, height: 200.0)
-        animationCategories = [.profiles, .diagnostics]
+        animationCategories = [.diagnostics, .profiles, .providers]
     }
 }
 

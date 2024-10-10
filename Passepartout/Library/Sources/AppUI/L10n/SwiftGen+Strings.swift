@@ -243,6 +243,8 @@ public enum Strings {
     public static let profile = Strings.tr("Localizable", "global.profile", fallback: "Profile")
     /// Protocol
     public static let `protocol` = Strings.tr("Localizable", "global.protocol", fallback: "Protocol")
+    /// Provider
+    public static let provider = Strings.tr("Localizable", "global.provider", fallback: "Provider")
     /// Public key
     public static let publicKey = Strings.tr("Localizable", "global.public_key", fallback: "Public key")
     /// Purchase
@@ -583,6 +585,12 @@ public enum Strings {
         public static let importProfile = Strings.tr("Localizable", "views.profiles.toolbar.import_profile", fallback: "Import profile")
         /// New profile
         public static let newProfile = Strings.tr("Localizable", "views.profiles.toolbar.new_profile", fallback: "New profile")
+      }
+    }
+    public enum Provider {
+      public enum Vpn {
+        /// Refresh infrastructure
+        public static let refreshInfrastructure = Strings.tr("Localizable", "views.provider.vpn.refresh_infrastructure", fallback: "Refresh infrastructure")
       }
     }
     public enum Settings {

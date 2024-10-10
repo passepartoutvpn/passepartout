@@ -93,36 +93,18 @@ extension ProfileEditor {
     }
 }
 
-// MARK: - Metadata
+// MARK: - Editing
 
 extension ProfileEditor {
-    var id: Profile.ID {
-        editableProfile.id
-    }
-
-    var name: String {
+    var profile: EditableProfile {
         get {
-            editableProfile.name
+            editableProfile
         }
         set {
-            editableProfile.name = newValue
+            editableProfile = newValue
         }
     }
-
-    func displayName(forModuleWithId moduleId: UUID) -> String? {
-        editableProfile.displayName(forModuleWithId: moduleId)
-    }
-
-    func name(forModuleWithId moduleId: UUID) -> String? {
-        editableProfile.name(forModuleWithId: moduleId)
-    }
-
-    func setName(_ name: String, forModuleWithId moduleId: UUID) {
-        editableProfile.setName(name, forModuleWithId: moduleId)
-    }
 }
-
-// MARK: - Modules
 
 extension ProfileEditor {
     var modules: [any ModuleBuilder] {

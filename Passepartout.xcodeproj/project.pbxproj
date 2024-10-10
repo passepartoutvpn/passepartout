@@ -168,9 +168,9 @@
 				0E7E3D5B2B9345FD002BBDB4 /* App.entitlements */,
 				0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */,
 				0EB08B962CA46F4900A02591 /* AppPlist.strings */,
+				0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */,
 				0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */,
 				0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */,
-				0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */,
 			);
 			path = App;
 			sourceTree = "<group>";

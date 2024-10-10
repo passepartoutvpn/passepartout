@@ -29,9 +29,25 @@ import SwiftUI
 extension ProfileEditor {
     func binding(forNameOf moduleId: UUID) -> Binding<String> {
         Binding { [weak self] in
-            self?.name(forModuleWithId: moduleId) ?? ""
+            self?.profile.name(forModuleWithId: moduleId) ?? ""
         } set: { [weak self] in
-            self?.setName($0, forModuleWithId: moduleId)
+            self?.profile.setName($0, forModuleWithId: moduleId)
+        }
+    }
+
+    func binding(forProviderOf moduleId: UUID) -> Binding<ProviderID?> {
+        Binding { [weak self] in
+            self?.profile.providerId(forModuleWithId: moduleId)
+        } set: { [weak self] in
+            self?.profile.setProviderId($0, forModuleWithId: moduleId)
+        }
+    }
+
+    func binding<E>(forProviderEntityOf moduleId: UUID) -> Binding<E?> where E: ProviderEntity & Codable {
+        Binding { [weak self] in
+            try? self?.profile.providerEntity(E.self, forModuleWithId: moduleId)
+        } set: { [weak self] in
+            try? self?.profile.setProviderEntity($0, forModuleWithId: moduleId)
         }
     }
 

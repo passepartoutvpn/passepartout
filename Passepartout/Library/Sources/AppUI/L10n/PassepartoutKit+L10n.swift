@@ -144,6 +144,31 @@ extension OnDemandModule.Policy: LocalizableEntity {
     }
 }
 
+extension VPNServer {
+    public var sortableRegion: String {
+        [countryCodes.first?.localizedAsRegionCode, area]
+            .compactMap { $0 }
+            .joined(separator: " - ")
+    }
+
+    public var sortableAddresses: String {
+        if let hostname {
+            return hostname
+        }
+        if let ipAddresses {
+            return ipAddresses
+                .compactMap {
+                    guard let address = Address(data: $0) else {
+                        return nil
+                    }
+                    return address.description
+                }
+                .joined(separator: ", ")
+        }
+        return ""
+    }
+}
+
 extension OpenVPN.Credentials.OTPMethod: StyledLocalizableEntity {
     public enum Style {
         case entity

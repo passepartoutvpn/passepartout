@@ -1,8 +1,8 @@
 //
-//  ProfileGeneralView.swift
+//  ProviderFactory.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 6/25/24.
+//  Created by Davide De Rosa on 10/8/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,34 +23,17 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(macOS)
+import Foundation
+import PassepartoutKit
 
-import SwiftUI
+@MainActor
+public final class ProviderFactory: ObservableObject {
+    public let providerManager: ProviderManager
 
-struct ProfileGeneralView: View {
+    public let vpnProviderManager: VPNProviderManager
 
-    @ObservedObject
-    var profileEditor: ProfileEditor
-
-    var body: some View {
-        Form {
-            NameSection(
-                name: $profileEditor.profile.name,
-                placeholder: Strings.Placeholders.Profile.name
-            )
-            StorageSection(
-                profileEditor: profileEditor
-            )
-        }
-        .themeForm()
+    public init(providerManager: ProviderManager, vpnProviderManager: VPNProviderManager) {
+        self.providerManager = providerManager
+        self.vpnProviderManager = vpnProviderManager
     }
 }
-
-#Preview {
-    ProfileGeneralView(
-        profileEditor: ProfileEditor()
-    )
-    .withMockEnvironment()
-}
-
-#endif

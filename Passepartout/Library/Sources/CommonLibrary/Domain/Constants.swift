@@ -38,6 +38,10 @@ public struct Constants: Decodable, Sendable {
     public struct Websites: Decodable, Sendable {
         public let home: URL
 
+        public var api: URL {
+            home.appendingPathComponent("api/")
+        }
+
         public var faq: URL {
             home.appendingPathComponent("faq/")
         }
