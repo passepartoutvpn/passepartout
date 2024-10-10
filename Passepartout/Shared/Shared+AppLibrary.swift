@@ -31,6 +31,8 @@ import Foundation
 import PassepartoutKit
 import UtilsLibrary
 
+// FIXME: ###, move to +AppUI those depending on Core Data
+
 extension ProfileManager {
     static let shared: ProfileManager = {
         let repository = localProfileRepository

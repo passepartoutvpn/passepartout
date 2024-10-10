@@ -31,12 +31,18 @@ extension LoggerDestination {
     public static let app = Self(category: "app")
 }
 
-// FIXME: move to Environment
+extension WireGuard.Configuration.Builder {
+    public static var `default`: Self {
+        .init(keyGenerator: StandardWireGuardKeyGenerator())
+    }
+}
+
+// FIXME: ###, move to Environment
 extension Constants {
     public static let shared = Bundle.module.unsafeDecode(Constants.self, filename: "Constants")
 }
 
-// FIXME: move to Environment
+// FIXME: ###, move to Environment
 extension UserDefaults {
     public static let appGroup: UserDefaults = {
         let appGroup = BundleConfiguration.mainString(for: .groupId)
@@ -47,11 +53,5 @@ extension UserDefaults {
     }()
 }
 
-// FIXME: move to Environment
+// FIXME: ###, move to Environment
 // BundleConfiguration.shared
-
-extension WireGuard.Configuration.Builder {
-    public static var `default`: Self {
-        .init(keyGenerator: StandardWireGuardKeyGenerator())
-    }
-}
