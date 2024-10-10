@@ -45,7 +45,8 @@ extension ProfileManager {
         let remoteRepository = AppData.cdProfileRepositoryV3(
             registry: .shared,
             coder: CodableProfileCoder(),
-            context: remoteStore.context
+            context: remoteStore.context,
+            observingResults: true
         ) { error in
             pp_log(.app, .error, "Unable to decode remote result: \(error)")
             return .ignore
@@ -78,7 +79,8 @@ private var localProfileRepository: any ProfileRepository {
     return AppData.cdProfileRepositoryV3(
         registry: .shared,
         coder: CodableProfileCoder(),
-        context: store.context
+        context: store.context,
+        observingResults: false
     ) { error in
         pp_log(.app, .error, "Unable to decode local result: \(error)")
         return .ignore

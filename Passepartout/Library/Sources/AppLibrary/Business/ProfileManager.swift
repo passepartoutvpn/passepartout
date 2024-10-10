@@ -239,7 +239,6 @@ extension ProfileManager {
     public func observeObjects(searchDebounce: Int = 200) {
         repository
             .entitiesPublisher
-            .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reloadLocalProfiles($0)

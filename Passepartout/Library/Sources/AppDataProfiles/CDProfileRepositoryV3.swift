@@ -34,9 +34,13 @@ extension AppData {
         registry: Registry,
         coder: ProfileCoder,
         context: NSManagedObjectContext,
+        observingResults: Bool,
         onResultError: ((Error) -> CoreDataResultAction)?
     ) -> any ProfileRepository {
-        let repository = CoreDataRepository<CDProfileV3, Profile>(context: context) {
+        let repository = CoreDataRepository<CDProfileV3, Profile>(
+            context: context,
+            observingResults: observingResults
+        ) {
             $0.sortDescriptors = [
                 .init(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare)),
                 .init(key: "lastUpdate", ascending: true)

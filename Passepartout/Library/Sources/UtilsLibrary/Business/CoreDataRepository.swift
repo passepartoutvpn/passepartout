@@ -48,6 +48,8 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
     private let context: NSManagedObjectContext
 
+    private let observingResults: Bool
+
     private let fromMapper: (CD) throws -> T?
 
     private let toMapper: (T, NSManagedObjectContext) throws -> CD
@@ -61,6 +63,7 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
     public init(
         context: NSManagedObjectContext,
+        observingResults: Bool,
         beforeFetch: ((NSFetchRequest<CD>) -> Void)? = nil,
         fromMapper: @escaping (CD) throws -> T?,
         toMapper: @escaping (T, NSManagedObjectContext) throws -> CD,
@@ -72,6 +75,7 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
         self.entityName = entityName
         self.context = context
+        self.observingResults = observingResults
         self.fromMapper = fromMapper
         self.toMapper = toMapper
         self.onResultError = onResultError
@@ -161,6 +165,9 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
     // XXX: triggers on entity insert/update/delete and reloads/remaps ALL into entitiesSubject
     public nonisolated func controllerDidChangeContent(_ controller: NSFetchedResultsController<any NSFetchRequestResult>) {
+        guard observingResults else {
+            return
+        }
         guard let cdController = controller as? NSFetchedResultsController<CD> else {
             fatalError("Unable to upcast results to \(CD.self)")
         }
