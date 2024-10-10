@@ -8,8 +8,6 @@
 		<string>$(CFG_APP_ID)</string>
 		<key>groupId</key>
 		<string>$(CFG_GROUP_ID)</string>
-		<key>keychainGroupId</key>
-		<string>$(CFG_KEYCHAIN_GROUP_ID)</string>
 		<key>teamId</key>
 		<string>$(CFG_TEAM_ID)</string>
 		<key>tunnelId</key>
