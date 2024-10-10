@@ -28,17 +28,17 @@ import PassepartoutKit
 import UtilsLibrary
 
 extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
-    public static var `default`: CoreDataPersistentStoreLogger {
+    static var `default`: CoreDataPersistentStoreLogger {
         DefaultCoreDataPersistentStoreLogger()
     }
 }
 
-public struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
-    public func debug(_ msg: String) {
+struct DefaultCoreDataPersistentStoreLogger: CoreDataPersistentStoreLogger {
+    func debug(_ msg: String) {
         pp_log(.app, .info, msg)
     }
 
-    public func warning(_ msg: String) {
+    func warning(_ msg: String) {
         pp_log(.app, .error, msg)
     }
 }
