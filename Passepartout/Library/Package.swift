@@ -31,7 +31,7 @@ let package = Package(
     ],
     dependencies: [
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", from: "0.8.0"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "7efa18eb75b7a102781be3c62cd31a08607f03c8"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "90267688fa16be83e7f75f26d5eb5b3094b309ec"),
 //        .package(path: "../../../passepartoutkit-source"),
         .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", from: "0.8.0"),
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", revision: "031863a1cd683962a7dfe68e20b91fa820a1ecce"),
@@ -47,6 +47,7 @@ let package = Package(
         .target(
             name: "AppData",
             dependencies: [
+                "AppLibrary",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ]
         ),
@@ -64,7 +65,6 @@ let package = Package(
         .target(
             name: "AppLibrary",
             dependencies: [
-                "AppData",
                 "CommonLibrary",
                 "Kvitto",
                 "LegacyV2",

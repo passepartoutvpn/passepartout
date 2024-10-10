@@ -69,13 +69,6 @@ public final class AppContext: ObservableObject {
         self.constants = constants
         subscriptions = []
 
-        profileManager.beforeSave = { [weak self] in
-            try await self?.installSavedProfile($0)
-        }
-        profileManager.afterRemove = { [weak self] in
-            self?.uninstallRemovedProfiles(withIds: $0)
-        }
-
         Task {
             try await tunnel.prepare()
             await iapManager.reloadReceipt()

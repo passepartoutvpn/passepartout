@@ -23,7 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
 import Combine
 import Foundation
 import PassepartoutKit
@@ -36,10 +35,6 @@ public final class ProfileManager: ObservableObject {
 
         case remove([Profile.ID])
     }
-
-    public var beforeSave: ((Profile) async throws -> Void)?
-
-    public var afterRemove: (([Profile.ID]) async -> Void)?
 
     private let repository: any ProfileRepository
 
@@ -64,7 +59,7 @@ public final class ProfileManager: ObservableObject {
 
     // for testing/previews
     public init(profiles: [Profile]) {
-        repository = MockProfileRepository(profiles: profiles)
+        repository = InMemoryProfileRepository(profiles: profiles)
         remoteRepository = nil
         self.profiles = []
         allProfiles = profiles.reduce(into: [:]) {
@@ -122,7 +117,6 @@ extension ProfileManager {
         do {
             let existingProfile = allProfiles[profile.id]
             if existingProfile == nil || profile != existingProfile {
-               try await beforeSave?(profile)
                try await repository.saveEntities([profile])
 
                 allProfiles[profile.id] = profile
@@ -160,7 +154,6 @@ extension ProfileManager {
             // remove local profiles
             var newAllProfiles = allProfiles
             try await repository.removeEntities(withIds: profileIds)
-            await afterRemove?(profileIds)
             profileIds.forEach {
                 newAllProfiles.removeValue(forKey: $0)
             }
@@ -245,7 +238,6 @@ extension ProfileManager {
     public func observeObjects(searchDebounce: Int = 200) {
         repository
             .entitiesPublisher
-            .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reloadLocalProfiles($0)

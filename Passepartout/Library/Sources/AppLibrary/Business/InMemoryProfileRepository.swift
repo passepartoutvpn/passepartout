@@ -1,5 +1,5 @@
 //
-//  MockProfileRepository.swift
+//  InMemoryProfileRepository.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 8/11/24.
@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutKit
 import UtilsLibrary
 
-public final class MockProfileRepository: ProfileRepository {
+public final class InMemoryProfileRepository: ProfileRepository {
     private var profiles: [Profile] {
         didSet {
             profilesSubject.send(EntitiesResult(profiles, isFiltering: false))

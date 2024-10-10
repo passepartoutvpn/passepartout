@@ -27,41 +27,27 @@ import AppData
 import AppDataProfiles
 import AppLibrary
 import CommonLibrary
+import CoreData
 import Foundation
 import PassepartoutKit
 import UtilsLibrary
 
 extension ProfileManager {
     static let shared: ProfileManager = {
-        let model = AppData.cdProfilesModel
-
-        let store = CoreDataPersistentStore(
-            logger: .default,
-            containerName: BundleConfiguration.mainString(for: .profilesContainerName),
-            model: model,
-            cloudKitIdentifier: nil,
-            author: nil
-        )
-        let repository = AppData.cdProfileRepositoryV3(
-            registry: .shared,
-            coder: CodableProfileCoder(),
-            context: store.context
-        ) { error in
-            pp_log(.app, .error, "Unable to decode local result: \(error)")
-            return .ignore
-        }
+        let repository = localProfileRepository
 
         let remoteStore = CoreDataPersistentStore(
             logger: .default,
             containerName: BundleConfiguration.mainString(for: .remoteProfilesContainerName),
-            model: model,
+            model: coreDataModel,
             cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
             author: nil
         )
         let remoteRepository = AppData.cdProfileRepositoryV3(
             registry: .shared,
             coder: CodableProfileCoder(),
-            context: remoteStore.context
+            context: remoteStore.context,
+            observingResults: true
         ) { error in
             pp_log(.app, .error, "Unable to decode remote result: \(error)")
             return .ignore
@@ -69,6 +55,10 @@ extension ProfileManager {
 
         return ProfileManager(repository: repository, remoteRepository: remoteRepository)
     }()
+}
+
+private var coreDataModel: NSManagedObjectModel {
+    AppData.cdProfilesModel
 }
 
 #if targetEnvironment(simulator)
@@ -79,15 +69,42 @@ extension Tunnel {
     )
 }
 
+private var localProfileRepository: any ProfileRepository {
+    let store = CoreDataPersistentStore(
+        logger: .default,
+        containerName: BundleConfiguration.mainString(for: .profilesContainerName),
+        model: coreDataModel,
+        cloudKitIdentifier: nil,
+        author: nil
+    )
+    return AppData.cdProfileRepositoryV3(
+        registry: .shared,
+        coder: CodableProfileCoder(),
+        context: store.context,
+        observingResults: false
+    ) { error in
+        pp_log(.app, .error, "Unable to decode local result: \(error)")
+        return .ignore
+    }
+}
+
 #else
 
 extension Tunnel {
     static let shared = Tunnel(
-        strategy: NETunnelStrategy(
-            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            encoder: .shared,
-            environment: .shared
-        )
+        strategy: NETunnelStrategy(repository: neRepository)
+    )
+}
+
+private var localProfileRepository: any ProfileRepository {
+    NEProfileRepository(repository: neRepository)
+}
+
+private var neRepository: NETunnelManagerRepository {
+    NETunnelManagerRepository(
+        bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+        coder: Registry.sharedProtocolCoder,
+        environment: .shared
     )
 }
 

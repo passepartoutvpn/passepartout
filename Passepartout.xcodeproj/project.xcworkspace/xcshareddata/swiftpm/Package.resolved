@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "generic-json-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zoul/generic-json-swift",
+      "state" : {
+        "revision" : "0a06575f4038b504e78ac330913d920f1630f510",
+        "version" : "2.0.2"
+      }
+    },
+    {
       "identity" : "kvitto",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Cocoanetics/Kvitto",
@@ -32,7 +41,7 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:passepartoutvpn/passepartoutkit-source",
       "state" : {
-        "revision" : "7efa18eb75b7a102781be3c62cd31a08607f03c8"
+        "revision" : "90267688fa16be83e7f75f26d5eb5b3094b309ec"
       }
     },
     {
