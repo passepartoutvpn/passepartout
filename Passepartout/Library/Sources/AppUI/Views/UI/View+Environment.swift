@@ -1,5 +1,5 @@
 //
-//  View+Mock.swift
+//  View+Environment.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/2/24.
