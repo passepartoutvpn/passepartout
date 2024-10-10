@@ -23,21 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
-extension Profile: UniqueEntity {
-    public var uuid: UUID? {
-        id
-    }
-}
+public protocol ProfileRepository {
+    var profilesPublisher: AnyPublisher<[Profile], Never> { get }
 
-public protocol ProfileRepository: Repository where Entity == Profile {
-}
+    func saveProfile(_ profile: Profile) async throws
 
-extension ProfileRepository {
-    public func filter(byName name: String) async throws {
-        try await filter(byFormat: "name CONTAINS[cd] %@", arguments: [name])
-    }
+    func removeProfiles(withIds profileIds: [Profile.ID]) async throws
 }

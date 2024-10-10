@@ -25,6 +25,7 @@
 
 import AppData
 import AppLibrary
+import Combine
 import CoreData
 import Foundation
 import PassepartoutKit
@@ -68,8 +69,29 @@ extension AppData {
     }
 }
 
+// MARK: - Specialization
+
 extension CDProfileV3: CoreDataUniqueEntity {
 }
 
+extension Profile: UniqueEntity {
+    public var uuid: UUID? {
+        id
+    }
+}
+
 extension CoreDataRepository: ProfileRepository where T == Profile {
+    public nonisolated var profilesPublisher: AnyPublisher<[Profile], Never> {
+        entitiesPublisher
+            .map(\.entities)
+            .eraseToAnyPublisher()
+    }
+
+    public func saveProfile(_ profile: Profile) async throws {
+        try await saveEntities([profile])
+    }
+
+    public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
+        try await removeEntities(withIds: profileIds)
+    }
 }
