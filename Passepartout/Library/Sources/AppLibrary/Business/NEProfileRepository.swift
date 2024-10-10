@@ -34,14 +34,13 @@ public final class NEProfileRepository: ProfileRepository {
 
     private let profilesSubject: CurrentValueSubject<[Profile], Never>
 
-    private var subscriptions: Set<AnyCancellable>
+    private var subscription: AnyCancellable?
 
     public init(repository: NETunnelManagerRepository) {
         self.repository = repository
         profilesSubject = CurrentValueSubject([])
-        subscriptions = []
 
-        repository
+        subscription = repository
             .managersPublisher
             .sink { [weak self] allManagers in
                 let profiles = allManagers.values.compactMap {
@@ -49,7 +48,6 @@ public final class NEProfileRepository: ProfileRepository {
                 }
                 self?.profilesSubject.send(profiles)
             }
-            .store(in: &subscriptions)
 
         Task {
             do {
