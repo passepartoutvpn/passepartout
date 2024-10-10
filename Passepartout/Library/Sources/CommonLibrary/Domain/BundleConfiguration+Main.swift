@@ -42,17 +42,11 @@ extension BundleConfiguration {
 
         case keychainGroupId
 
-        case profilesContainerName
-
-        case remoteProfilesContainerName
-
         case tunnelId
 
         // legacy v2
 
         case legacyV2CloudKitId
-
-        case legacyV2ProfilesContainerName
     }
 
     public static var mainDisplayName: String {

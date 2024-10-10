@@ -38,13 +38,11 @@ CFG_GROUP_ID[sdk=iphonesimulator*] = $(CFG_RAW_GROUP_ID)
 CFG_GROUP_ID[sdk=macosx*] = $(CFG_TEAM_ID).$(CFG_RAW_GROUP_ID)
 CFG_IAP_BUNDLE_PREFIX = com.algoritmico.ios.Passepartout
 CFG_INTENTS_ID = $(CFG_APP_ID).Intents
-CFG_PROFILES_CONTAINER_NAME = Profiles-v3
 CFG_RAW_GROUP_ID = group.com.algoritmico.Passepartout
 CFG_TEAM_ID = DTDYD63ZX9
 CFG_TUNNEL_ID = $(CFG_APP_ID).Tunnel
 
 CFG_LEGACY_V2_CLOUDKIT_ID = iCloud.com.algoritmico.Passepartout
-CFG_LEGACY_V2_PROFILES_CONTAINER_NAME = Profiles
 
 PATH = $(PATH):/opt/homebrew/bin:/usr/local/bin:/usr/local/go/bin
 CUSTOM_SCRIPT_PATH = $(PATH)

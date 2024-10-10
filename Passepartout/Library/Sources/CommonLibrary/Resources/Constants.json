@@ -1,5 +1,10 @@
 {
     "bundleKey": "AppConfig",
+    "containers": {
+        "local": "Profiles-v3",
+        "remote": "Profiles-v3.remote",
+        "legacyV2": "Profiles"
+    },
     "websites": {
         "home": "https://passepartoutvpn.app",
         "subreddit": "https://www.reddit.com/r/passepartout/",
@@ -17,6 +22,9 @@
     },
     "connection": {
         "refreshInterval": 3.0
+    },
+    "api": {
+        "timeoutInterval": 5.0
     },
     "log": {
         "appPath": "app.log",

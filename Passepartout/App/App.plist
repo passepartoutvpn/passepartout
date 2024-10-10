@@ -14,16 +14,10 @@
 		<string>$(CFG_IAP_BUNDLE_PREFIX)</string>
 		<key>keychainGroupId</key>
 		<string>$(CFG_TEAM_ID).$(CFG_GROUP_ID)</string>
-		<key>profilesContainerName</key>
-		<string>$(CFG_PROFILES_CONTAINER_NAME)</string>
-		<key>remoteProfilesContainerName</key>
-		<string>$(CFG_PROFILES_CONTAINER_NAME).remote</string>
 		<key>tunnelId</key>
 		<string>$(CFG_TUNNEL_ID)</string>
 		<key>legacyV2CloudKitId</key>
 		<string>$(CFG_LEGACY_V2_CLOUDKIT_ID)</string>
-		<key>legacyV2ProfilesContainerName</key>
-		<string>$(CFG_LEGACY_V2_PROFILES_CONTAINER_NAME)</string>
 	</dict>
 	<key>CFBundleDocumentTypes</key>
 	<array>

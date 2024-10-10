@@ -50,7 +50,7 @@ extension ProfileManager {
 
         let remoteStore = CoreDataPersistentStore(
             logger: .default,
-            containerName: BundleConfiguration.mainString(for: .remoteProfilesContainerName),
+            containerName: Constants.shared.containers.remote,
             model: AppData.cdProfilesModel,
             cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
             author: nil
@@ -127,8 +127,8 @@ extension Tunnel {
 private var localProfileRepository: any ProfileRepository {
     let store = CoreDataPersistentStore(
         logger: .default,
-        containerName: BundleConfiguration.mainString(for: .profilesContainerName),
-        model: coreDataModel,
+        containerName: Constants.shared.containers.local,
+        model: AppData.cdProfilesModel,
         cloudKitIdentifier: nil,
         author: nil
     )

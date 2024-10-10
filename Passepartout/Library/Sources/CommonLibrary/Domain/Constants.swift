@@ -27,6 +27,14 @@ import Foundation
 import PassepartoutKit
 
 public struct Constants: Decodable, Sendable {
+    public struct Containers: Decodable, Sendable {
+        public let local: String
+
+        public let remote: String
+
+        public let legacyV2: String
+    }
+
     public struct Websites: Decodable, Sendable {
         public let home: URL
 
@@ -83,6 +91,10 @@ public struct Constants: Decodable, Sendable {
         public let refreshInterval: TimeInterval
     }
 
+    public struct API: Decodable, Sendable {
+        public let timeoutInterval: TimeInterval
+    }
+
     public struct Log: Decodable, Sendable {
         public struct Formatter: Decodable, Sendable {
             enum CodingKeys: CodingKey {
@@ -126,6 +138,8 @@ public struct Constants: Decodable, Sendable {
 
     public let bundleKey: String
 
+    public let containers: Containers
+
     public let websites: Websites
 
     public let emails: Emails
@@ -133,6 +147,8 @@ public struct Constants: Decodable, Sendable {
     public let formats: Formats
 
     public let connection: Connection
+
+    public let api: API
 
     public let log: Log
 }
