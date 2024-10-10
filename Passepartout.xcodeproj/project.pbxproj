@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E1D5D642CB804F00049354A /* Shared+UtilsLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D5D632CB804F00049354A /* Shared+UtilsLibrary.swift */; };
+		0E1D5D652CB805040049354A /* Shared+UtilsLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D5D632CB804F00049354A /* Shared+UtilsLibrary.swift */; };
 		0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */; };
 		0E7E3D692B9345FD002BBDB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */; };
 		0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */; };
@@ -70,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		0E06D18F2B87629100176E1D /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E1D5D632CB804F00049354A /* Shared+UtilsLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+UtilsLibrary.swift"; sourceTree = "<group>"; };
 		0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E7D0EAD2CAEA47700A2F28D /* Passepartout.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Passepartout.xctestplan; sourceTree = "<group>"; };
 		0E7E3D5B2B9345FD002BBDB4 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 				0EC797412B9378E000C093B7 /* Shared.swift */,
 				0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */,
 				0EC797402B9378E000C093B7 /* Shared+AppUI.swift */,
+				0E1D5D632CB804F00049354A /* Shared+UtilsLibrary.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -369,6 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E1D5D642CB804F00049354A /* Shared+UtilsLibrary.swift in Sources */,
 				0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */,
 				0EC9C0282CA5C04500C52954 /* Shared+AppLibrary.swift in Sources */,
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
@@ -381,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E1D5D652CB805040049354A /* Shared+UtilsLibrary.swift in Sources */,
 				0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */,
 				0EC797442B93790600C093B7 /* Shared.swift in Sources */,
 			);

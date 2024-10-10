@@ -1,8 +1,8 @@
 //
-//  Shared.swift
+//  Shared+UtilsLibrary.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 10/10/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,20 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
-import PassepartoutWireGuardGo
 import UtilsLibrary
-
-extension LoggerDestination {
-    public static let app = Self(category: "app")
-}
-
-extension WireGuard.Configuration.Builder {
-    public static var `default`: Self {
-        .init(keyGenerator: StandardWireGuardKeyGenerator())
-    }
-}
 
 extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
     public static var `default`: CoreDataPersistentStoreLogger {

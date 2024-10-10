@@ -24,6 +24,7 @@
 //
 
 import Combine
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 import UtilsLibrary

@@ -28,7 +28,7 @@ import PassepartoutKit
 
 extension PassepartoutConfiguration {
     public func configureLogging(to url: URL, parameters: Constants.Log, logsPrivateData: Bool) {
-        pp_log(.common, .debug, "Log to: \(url)")
+        pp_log(.app, .debug, "Log to: \(url)")
 
         setLocalLogger(options: .init(
             url: url,
