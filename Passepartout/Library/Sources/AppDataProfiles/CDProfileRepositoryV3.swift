@@ -24,6 +24,7 @@
 //
 
 import AppData
+import AppLibrary
 import CoreData
 import Foundation
 import PassepartoutKit

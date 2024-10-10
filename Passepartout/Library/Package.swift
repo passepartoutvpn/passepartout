@@ -47,6 +47,7 @@ let package = Package(
         .target(
             name: "AppData",
             dependencies: [
+                "AppLibrary",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ]
         ),
@@ -64,7 +65,6 @@ let package = Package(
         .target(
             name: "AppLibrary",
             dependencies: [
-                "AppData",
                 "CommonLibrary",
                 "Kvitto",
                 "LegacyV2",
