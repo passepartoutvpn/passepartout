@@ -64,7 +64,7 @@ public final class ProfileManager: ObservableObject {
 
     // for testing/previews
     public init(profiles: [Profile]) {
-        repository = MockProfileRepository(profiles: profiles)
+        repository = InMemoryProfileRepository(profiles: profiles)
         remoteRepository = nil
         self.profiles = []
         allProfiles = profiles.reduce(into: [:]) {
