@@ -43,17 +43,14 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "AppData",
-            dependencies: [
-                "AppLibrary",
-                .product(name: "PassepartoutKit", package: "passepartoutkit-source")
-            ]
+            dependencies: []
         ),
         .target(
             name: "AppDataProfiles",
             dependencies: [
                 "AppData",
-                "UtilsLibrary",
-                .product(name: "PassepartoutKit", package: "passepartoutkit-source")
+                "AppLibrary",
+                "UtilsLibrary"
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
