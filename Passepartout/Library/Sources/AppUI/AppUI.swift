@@ -29,6 +29,7 @@ import PassepartoutKit
 public enum AppUI {
     public static func configure(with context: AppContext) {
         assertMissingModuleImplementations()
+        migrateStaleKeychainEntries()
     }
 }
 
@@ -43,5 +44,25 @@ private extension AppUI {
                 fatalError("\(moduleType): is not ModuleViewProviding")
             }
         }
+    }
+
+    static func migrateStaleKeychainEntries() {
+//        let teamId = BundleConfiguration.mainString(for: .teamId)
+//        let keychainGroupId = BundleConfiguration.mainString(for: .keychainGroupId)
+//        let badKeychainGroupId = "\(teamId).\(keychainGroupId)"
+//        let keychain = AppleKeychain(group: keychainGroupId)
+//        let badKeychain = AppleKeychain(group: badKeychainGroupId)
+//        do {
+//            let badEntries = try? badKeychain.entries(context: "", userDefined: nil)
+//            let entries = try? keychain.entries(context: "", userDefined: nil)
+//
+//            print(">>> \(badEntries?.count)")
+//            print(">>> \(entries?.count)")
+//        } catch {
+//            print(">>> \(error)")
+//        }
+    }
+
+    static func cleanUpOrphanedKeychainEntries() {
     }
 }
