@@ -46,7 +46,12 @@ public final class NEProfileRepository: ProfileRepository {
             .managersPublisher
             .sink { [weak self] allManagers in
                 let profiles = allManagers.values.compactMap {
-                    try? repository.profile(from: $0)
+                    do {
+                        return try repository.profile(from: $0)
+                    } catch {
+                        pp_log(.app, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
+                        return nil
+                    }
                 }
                 self?.profilesSubject.send(profiles)
             }
