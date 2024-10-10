@@ -84,7 +84,7 @@ extension Tunnel {
 extension NETunnelManagerRepository {
     static let shared = NETunnelManagerRepository(
         bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-        encoder: .shared,
+        coder: Registry.sharedProtocolCoder,
         environment: .shared
     )
 }

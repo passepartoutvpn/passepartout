@@ -38,7 +38,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
         )
         fwd = try await NEPTPForwarder(
             provider: self,
-            decoder: .shared,
+            decoder: Registry.sharedProtocolCoder,
             registry: .shared,
             environment: .shared
         )

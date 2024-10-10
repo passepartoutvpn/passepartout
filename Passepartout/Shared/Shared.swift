@@ -59,6 +59,15 @@ extension Registry {
             )
         ]
     )
+
+    static var sharedProtocolCoder: KeychainNEProtocolCoder {
+        KeychainNEProtocolCoder(
+            tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+            registry: .shared,
+            coder: CodableProfileCoder(),
+            keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
+        )
+    }
 }
 
 extension TunnelEnvironment where Self == AppGroupEnvironment {
@@ -68,25 +77,4 @@ extension TunnelEnvironment where Self == AppGroupEnvironment {
             prefix: "PassepartoutKit."
         )
     }
-}
-
-extension NEProtocolEncoder where Self == KeychainNEProtocolCoder {
-    static var shared: Self {
-        sharedProtocolCoder
-    }
-}
-
-extension NEProtocolDecoder where Self == KeychainNEProtocolCoder {
-    static var shared: Self {
-        sharedProtocolCoder
-    }
-}
-
-private var sharedProtocolCoder: KeychainNEProtocolCoder {
-    KeychainNEProtocolCoder(
-        tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-        registry: .shared,
-        coder: CodableProfileCoder(),
-        keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
-    )
 }
