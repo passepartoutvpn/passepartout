@@ -58,17 +58,15 @@ let package = Package(
         ),
         .target(
             name: "AppLibrary",
-            dependencies: [
-                "CommonLibrary",
-                "Kvitto",
-                "LegacyV2"
-            ]
+            dependencies: ["CommonLibrary"]
         ),
         .target(
             name: "AppUI",
             dependencies: [
                 "AppDataProfiles",
                 "AppLibrary",
+                "Kvitto",
+                "LegacyV2",
                 "UtilsLibrary"
             ],
             resources: [
