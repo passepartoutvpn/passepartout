@@ -1,5 +1,5 @@
 //
-//  Strings+Extensions.swift
+//  String+Extensions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/8/24.
