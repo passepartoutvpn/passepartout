@@ -37,10 +37,6 @@ public final class ProfileManager: ObservableObject {
         case remove([Profile.ID])
     }
 
-    public var beforeSave: ((Profile) async throws -> Void)?
-
-    public var afterRemove: (([Profile.ID]) async -> Void)?
-
     private let repository: any ProfileRepository
 
     private let remoteRepository: (any ProfileRepository)?
@@ -122,7 +118,6 @@ extension ProfileManager {
         do {
             let existingProfile = allProfiles[profile.id]
             if existingProfile == nil || profile != existingProfile {
-               try await beforeSave?(profile)
                try await repository.saveEntities([profile])
 
                 allProfiles[profile.id] = profile
@@ -160,7 +155,6 @@ extension ProfileManager {
             // remove local profiles
             var newAllProfiles = allProfiles
             try await repository.removeEntities(withIds: profileIds)
-            await afterRemove?(profileIds)
             profileIds.forEach {
                 newAllProfiles.removeValue(forKey: $0)
             }
