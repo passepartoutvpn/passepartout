@@ -70,6 +70,8 @@ extension Registry {
     }
 }
 
+// MARK: -
+
 extension TunnelEnvironment where Self == AppGroupEnvironment {
     static var shared: Self {
         AppGroupEnvironment(

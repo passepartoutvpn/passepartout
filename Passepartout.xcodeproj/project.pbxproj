@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E1D5D642CB804F00049354A /* Shared+UtilsLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1D5D632CB804F00049354A /* Shared+UtilsLibrary.swift */; };
 		0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */; };
 		0E7E3D692B9345FD002BBDB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */; };
 		0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */; };
@@ -17,11 +16,10 @@
 		0EC066D12C7DC47600D88A94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */; platformFilter = ios; };
 		0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
 		0EC332D22B8A1808000B9C2F /* PassepartoutTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0EC797422B9378E000C093B7 /* Shared+AppUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797402B9378E000C093B7 /* Shared+AppUI.swift */; };
+		0EC797422B9378E000C093B7 /* Shared+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797402B9378E000C093B7 /* Shared+App.swift */; };
 		0EC797432B9378E000C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
 		0EC797442B93790600C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
 		0EC9C0232CA5BD0B00C52954 /* AppUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0EC9C0222CA5BD0B00C52954 /* AppUI */; };
-		0EC9C0282CA5C04500C52954 /* Shared+AppLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */; };
 		0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EDE56E62CABE40D0082D21C /* Intents.plist */; };
 		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
@@ -71,7 +69,6 @@
 
 /* Begin PBXFileReference section */
 		0E06D18F2B87629100176E1D /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E1D5D632CB804F00049354A /* Shared+UtilsLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+UtilsLibrary.swift"; sourceTree = "<group>"; };
 		0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E7D0EAD2CAEA47700A2F28D /* Passepartout.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Passepartout.xctestplan; sourceTree = "<group>"; };
 		0E7E3D5B2B9345FD002BBDB4 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -86,9 +83,8 @@
 		0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PassepartoutTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		0EC797402B9378E000C093B7 /* Shared+AppUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shared+AppUI.swift"; sourceTree = "<group>"; };
+		0EC797402B9378E000C093B7 /* Shared+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shared+App.swift"; sourceTree = "<group>"; };
 		0EC797412B9378E000C093B7 /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
-		0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+AppLibrary.swift"; sourceTree = "<group>"; };
 		0ED1EFDA2C33059600CBD9BD /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		0EDE56E52CABE40D0082D21C /* Intents.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Intents.entitlements; sourceTree = "<group>"; };
 		0EDE56E62CABE40D0082D21C /* Intents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Intents.plist; sourceTree = "<group>"; };
@@ -183,9 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				0EC797412B9378E000C093B7 /* Shared.swift */,
-				0EC9C0272CA5C04500C52954 /* Shared+AppLibrary.swift */,
-				0EC797402B9378E000C093B7 /* Shared+AppUI.swift */,
-				0E1D5D632CB804F00049354A /* Shared+UtilsLibrary.swift */,
+				0EC797402B9378E000C093B7 /* Shared+App.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -372,11 +366,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E1D5D642CB804F00049354A /* Shared+UtilsLibrary.swift in Sources */,
 				0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */,
-				0EC9C0282CA5C04500C52954 /* Shared+AppLibrary.swift in Sources */,
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
-				0EC797422B9378E000C093B7 /* Shared+AppUI.swift in Sources */,
+				0EC797422B9378E000C093B7 /* Shared+App.swift in Sources */,
 				0EC797432B9378E000C093B7 /* Shared.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
