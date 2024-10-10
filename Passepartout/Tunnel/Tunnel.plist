@@ -7,7 +7,7 @@
 		<key>groupId</key>
 		<string>$(CFG_GROUP_ID)</string>
 		<key>keychainGroupId</key>
-		<string>$(CFG_TEAM_ID).$(CFG_GROUP_ID)</string>
+		<string>$(CFG_KEYCHAIN_GROUP_ID)</string>
 		<key>tunnelId</key>
 		<string>$(CFG_TUNNEL_ID)</string>
 	</dict>

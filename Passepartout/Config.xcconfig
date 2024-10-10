@@ -36,6 +36,7 @@ CFG_GROUP_ID[sdk=appletvsimulator*] = $(CFG_RAW_GROUP_ID)
 CFG_GROUP_ID[sdk=iphoneos*] = $(CFG_RAW_GROUP_ID)
 CFG_GROUP_ID[sdk=iphonesimulator*] = $(CFG_RAW_GROUP_ID)
 CFG_GROUP_ID[sdk=macosx*] = $(CFG_TEAM_ID).$(CFG_RAW_GROUP_ID)
+CFG_KEYCHAIN_GROUP_ID = $(CFG_TEAM_ID).$(CFG_RAW_GROUP_ID)
 CFG_IAP_BUNDLE_PREFIX = com.algoritmico.ios.Passepartout
 CFG_INTENTS_ID = $(CFG_APP_ID).Intents
 CFG_RAW_GROUP_ID = group.com.algoritmico.Passepartout
