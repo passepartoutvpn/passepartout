@@ -118,7 +118,9 @@ extension IAPManager {
 }
 
 extension ProfileProcessor {
-    static let shared = ProfileProcessor { profile in
+    static let shared = ProfileProcessor {
+        sharedProfileTitle($0)
+    } processed: { profile in
         var builder = profile.builder()
 
         // suppress on-demand rules if not eligible
@@ -155,7 +157,7 @@ extension Tunnel {
     )
 }
 
-private var localProfileRepository: any ProfileRepository {
+private var localProfileRepository: ProfileRepository {
     let store = CoreDataPersistentStore(
         logger: .default,
         containerName: Constants.shared.containers.local,
@@ -182,8 +184,10 @@ extension Tunnel {
     )
 }
 
-private var localProfileRepository: any ProfileRepository {
-    NEProfileRepository(repository: neRepository)
+private var localProfileRepository: ProfileRepository {
+    NEProfileRepository(repository: neRepository) {
+        sharedProfileTitle($0)
+    }
 }
 
 private var neRepository: NETunnelManagerRepository {
@@ -207,6 +211,10 @@ extension ProviderFactory {
 }
 
 // MARK: -
+
+private let sharedProfileTitle: (Profile) -> String = {
+    "Passepartout: \($0.name)"
+}
 
 extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
     static var `default`: CoreDataPersistentStoreLogger {
