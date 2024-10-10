@@ -48,3 +48,7 @@ extension UserDefaults {
         return defaults
     }()
 }
+
+extension Constants {
+    public static let shared = Bundle.module.unsafeDecode(Constants.self, filename: "Constants")
+}

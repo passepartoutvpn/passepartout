@@ -26,10 +26,6 @@
 import Foundation
 import PassepartoutKit
 
-extension Constants {
-    public static let shared = Bundle.module.unsafeDecode(Constants.self, filename: "Constants")
-}
-
 public struct Constants: Decodable, Sendable {
     public struct Websites: Decodable, Sendable {
         public let home: URL
