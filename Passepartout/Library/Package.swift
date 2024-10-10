@@ -67,8 +67,7 @@ let package = Package(
             dependencies: [
                 "CommonLibrary",
                 "Kvitto",
-                "LegacyV2",
-                "UtilsLibrary"
+                "LegacyV2"
             ]
         ),
         .target(

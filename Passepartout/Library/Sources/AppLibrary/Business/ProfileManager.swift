@@ -26,7 +26,6 @@
 import Combine
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
 @MainActor
 public final class ProfileManager: ObservableObject {
