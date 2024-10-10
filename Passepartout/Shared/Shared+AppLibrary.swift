@@ -27,6 +27,7 @@ import AppData
 import AppDataProfiles
 import AppLibrary
 import CommonLibrary
+import CoreData
 import Foundation
 import PassepartoutKit
 import UtilsLibrary
