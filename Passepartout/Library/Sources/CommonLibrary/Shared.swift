@@ -43,6 +43,9 @@ extension Constants {
 }
 
 // FIXME: #716, move to Environment
+// BundleConfiguration.shared
+
+// FIXME: #716, move to Environment
 extension UserDefaults {
     public static let appGroup: UserDefaults = {
         let appGroup = BundleConfiguration.mainString(for: .groupId)
@@ -52,6 +55,3 @@ extension UserDefaults {
         return defaults
     }()
 }
-
-// FIXME: #716, move to Environment
-// BundleConfiguration.shared
