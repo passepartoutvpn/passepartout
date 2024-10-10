@@ -44,7 +44,7 @@ extension ProfileEditorTests {
             DNSModule.Builder(),
             IPModule.Builder()
         ])
-        XCTAssertTrue(sut.name.isEmpty)
+        XCTAssertTrue(sut.profile.name.isEmpty)
         XCTAssertTrue(sut.modules[0] is DNSModule.Builder)
         XCTAssertTrue(sut.modules[1] is IPModule.Builder)
     }
@@ -60,7 +60,7 @@ extension ProfileEditorTests {
         ).tryBuild()
 
         let sut = ProfileEditor(profile: profile)
-        XCTAssertEqual(sut.name, name)
+        XCTAssertEqual(sut.profile.name, name)
         XCTAssertTrue(sut.modules[0] is DNSModule.Builder)
         XCTAssertTrue(sut.modules[1] is IPModule.Builder)
         XCTAssertEqual(sut.activeModulesIds, [dns.id])
@@ -193,7 +193,7 @@ extension ProfileEditorTests {
     func test_givenProfile_whenBuild_thenSucceeds() throws {
         let wg = WireGuardModule.Builder(configurationBuilder: .default)
         let sut = ProfileEditor(modules: [wg])
-        sut.name = "hello"
+        sut.profile.name = "hello"
 
         let profile = try sut.build()
         XCTAssertEqual(profile.name, "hello")
