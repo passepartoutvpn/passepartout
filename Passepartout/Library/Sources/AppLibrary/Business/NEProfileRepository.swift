@@ -50,6 +50,14 @@ public final class NEProfileRepository: ProfileRepository {
                 self?.profilesSubject.send(profiles)
             }
             .store(in: &subscriptions)
+
+        Task {
+            do {
+                try await repository.load()
+            } catch {
+                pp_log(.app, .fault, "Unable to load NE profiles: \(error)")
+            }
+        }
     }
 
     public var entitiesPublisher: AnyPublisher<EntitiesResult<Profile>, Never> {
