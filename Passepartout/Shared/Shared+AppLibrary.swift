@@ -83,11 +83,14 @@ extension Tunnel {
 
 extension Tunnel {
     static let shared = Tunnel(
-        strategy: NETunnelStrategy(
-            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            encoder: .shared,
-            environment: .shared
-        )
+        strategy: {
+            let repository = NETunnelManagerRepository(
+                bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+                encoder: .shared,
+                environment: .shared
+            )
+            return NETunnelStrategy(repository: repository)
+        }()
     )
 }
 
