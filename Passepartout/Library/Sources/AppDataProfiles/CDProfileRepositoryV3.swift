@@ -38,7 +38,7 @@ extension AppData {
         context: NSManagedObjectContext,
         observingResults: Bool,
         onResultError: ((Error) -> CoreDataResultAction)?
-    ) -> any ProfileRepository {
+    ) -> ProfileRepository {
         let repository = CoreDataRepository<CDProfileV3, Profile>(
             context: context,
             observingResults: observingResults
