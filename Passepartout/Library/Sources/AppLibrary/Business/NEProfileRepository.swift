@@ -69,11 +69,11 @@ public final class NEProfileRepository: ProfileRepository {
     }
 
     public func filter(byFormat format: String, arguments: [Any]?) async throws {
-        // FIXME: #345, filtering
+        assertionFailure("Unused by ProfileManager")
     }
 
     public func resetFilter() async throws {
-        // FIXME: #345, filtering
+        assertionFailure("Unused by ProfileManager")
     }
 
     public func saveEntities(_ entities: [Profile]) async throws {
