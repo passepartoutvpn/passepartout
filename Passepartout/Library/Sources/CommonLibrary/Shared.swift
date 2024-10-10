@@ -37,15 +37,15 @@ extension WireGuard.Configuration.Builder {
     }
 }
 
-// FIXME: #716, move to Environment
+// TODO: #716, move to Environment
 extension Constants {
     public static let shared = Bundle.module.unsafeDecode(Constants.self, filename: "Constants")
 }
 
-// FIXME: #716, move to Environment
+// TODO: #716, move to Environment?
 // BundleConfiguration.shared
 
-// FIXME: #716, move to Environment
+// TODO: #716, move to Environment
 extension UserDefaults {
     public static let appGroup: UserDefaults = {
         let appGroup = BundleConfiguration.mainString(for: .groupId)
