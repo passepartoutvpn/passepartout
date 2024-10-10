@@ -30,13 +30,13 @@ import PassepartoutKit
 @MainActor
 extension Tunnel {
     func install(_ profile: Profile, processor: ProfileProcessor) async throws {
-        let newProfile = try processor.process(profile)
-        try await install(newProfile, connect: false, title: \.name)
+        let newProfile = try processor.processed(profile)
+        try await install(newProfile, connect: false, title: processor.title)
     }
 
     func connect(with profile: Profile, processor: ProfileProcessor) async throws {
-        let newProfile = try processor.process(profile)
-        try await install(newProfile, connect: true, title: \.name)
+        let newProfile = try processor.processed(profile)
+        try await install(newProfile, connect: true, title: processor.title)
     }
 
     func currentLog(parameters: Constants.Log) async -> [String] {

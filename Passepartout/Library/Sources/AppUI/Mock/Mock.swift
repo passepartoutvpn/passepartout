@@ -55,6 +55,8 @@ extension AppContext {
                 return ProfileManager(profiles: profiles)
             }(),
             profileProcessor: ProfileProcessor {
+                "Passepartout.Mock: \($0.name)"
+            } processed: {
                 try $0.withProviderModules()
             },
             tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: env)),

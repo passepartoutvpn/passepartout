@@ -28,9 +28,15 @@ import PassepartoutKit
 
 @MainActor
 public final class ProfileProcessor: ObservableObject {
-    public let process: (Profile) throws -> Profile
+    public let title: (Profile) -> String
 
-    public init(process: @escaping (Profile) throws -> Profile) {
-        self.process = process
+    public let processed: (Profile) throws -> Profile
+
+    public init(
+        title: @escaping (Profile) -> String,
+        processed: @escaping (Profile) throws -> Profile
+    ) {
+        self.title = title
+        self.processed = processed
     }
 }

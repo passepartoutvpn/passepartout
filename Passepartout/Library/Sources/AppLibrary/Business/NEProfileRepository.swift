@@ -31,12 +31,15 @@ import PassepartoutKit
 public final class NEProfileRepository: ProfileRepository {
     private let repository: NETunnelManagerRepository
 
+    private let title: (Profile) -> String
+
     private let profilesSubject: CurrentValueSubject<[Profile], Never>
 
     private var subscription: AnyCancellable?
 
-    public init(repository: NETunnelManagerRepository) {
+    public init(repository: NETunnelManagerRepository, title: @escaping (Profile) -> String) {
         self.repository = repository
+        self.title = title
         profilesSubject = CurrentValueSubject([])
 
         subscription = repository
@@ -62,7 +65,7 @@ public final class NEProfileRepository: ProfileRepository {
     }
 
     public func saveProfile(_ profile: Profile) async throws {
-        try await repository.save(profile, connect: false, title: \.name)
+        try await repository.save(profile, connect: false, title: title)
     }
 
     public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
