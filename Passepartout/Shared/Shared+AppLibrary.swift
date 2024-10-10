@@ -27,7 +27,6 @@ import AppData
 import AppDataProfiles
 import AppLibrary
 import CommonLibrary
-import CoreData
 import Foundation
 import PassepartoutKit
 import UtilsLibrary
@@ -39,7 +38,7 @@ extension ProfileManager {
         let remoteStore = CoreDataPersistentStore(
             logger: .default,
             containerName: BundleConfiguration.mainString(for: .remoteProfilesContainerName),
-            model: coreDataModel,
+            model: AppData.cdProfilesModel,
             cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
             author: nil
         )
@@ -72,7 +71,7 @@ private var localProfileRepository: any ProfileRepository {
     let store = CoreDataPersistentStore(
         logger: .default,
         containerName: BundleConfiguration.mainString(for: .profilesContainerName),
-        model: coreDataModel,
+        model: AppData.cdProfilesModel,
         cloudKitIdentifier: nil,
         author: nil
     )
