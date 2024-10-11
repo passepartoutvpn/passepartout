@@ -24,12 +24,13 @@
 //
 
 import Foundation
+import NetworkExtension
 import PassepartoutKit
 
 public enum AppUI {
     public static func configure(with context: AppContext) {
         assertMissingModuleImplementations()
-        migrateStaleKeychainEntries()
+        migrateBadKeychainEntries()
     }
 }
 
@@ -46,21 +47,38 @@ private extension AppUI {
         }
     }
 
-    static func migrateStaleKeychainEntries() {
-//        let teamId = BundleConfiguration.mainString(for: .teamId)
-//        let keychainGroupId = BundleConfiguration.mainString(for: .keychainGroupId)
-//        let badKeychainGroupId = "\(teamId).\(keychainGroupId)"
-//        let keychain = AppleKeychain(group: keychainGroupId)
-//        let badKeychain = AppleKeychain(group: badKeychainGroupId)
-//        do {
-//            let badEntries = try? badKeychain.entries(context: "", userDefined: nil)
-//            let entries = try? keychain.entries(context: "", userDefined: nil)
-//
-//            print(">>> \(badEntries?.count)")
-//            print(">>> \(entries?.count)")
-//        } catch {
-//            print(">>> \(error)")
-//        }
+    static func migrateBadKeychainEntries() {
+        Task {
+            let teamId = "DTDYD63ZX9"
+            let keychainGroupId = BundleConfiguration.mainString(for: .keychainGroupId)
+            let keychain = AppleKeychain(group: keychainGroupId)
+            let badKeychainGroupId = "\(teamId).\(keychainGroupId)"
+            let badKeychain = AppleKeychain(group: badKeychainGroupId)
+
+            let managers = try await NETunnelProviderManager.loadAllFromPreferences()
+            for m in managers {
+                guard let badReference = m.protocolConfiguration?.passwordReference else {
+                    return
+                }
+                guard let profileIdString = (m.protocolConfiguration as? NETunnelProviderProtocol)?.providerConfiguration?["CustomProviderKey.profileId"] as? String,
+                      let profileId = UUID(rawValue: profileIdString) else {
+                    return
+                }
+                do {
+                    let newLabel = "Passepartout: \(m.localizedDescription ?? "")"
+                    let badPassword = try badKeychain.password(forReference: badReference)
+                    let newReference = try keychain.set(password: badPassword, for: profileIdString, context: "", label: newLabel)
+
+                    m.protocolConfiguration?.passwordReference = newReference
+                    try await m.saveToPreferences()
+                    badKeychain.removePassword(forReference: badReference)
+
+                    pp_log(.app, .info, "Migrated bad keychain item for \(profileId)")
+                } catch {
+                    pp_log(.app, .error, "Unable to migrate bad keychain item for \(profileId): \(error)")
+                }
+            }
+        }
     }
 
     static func cleanUpOrphanedKeychainEntries() {
