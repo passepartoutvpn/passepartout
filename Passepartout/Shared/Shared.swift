@@ -60,12 +60,16 @@ extension Registry {
         ]
     )
 
+    static var sharedKeychain: Keychain & Sendable {
+        AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
+    }
+
     static var sharedProtocolCoder: KeychainNEProtocolCoder {
         KeychainNEProtocolCoder(
             tunnelBundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             registry: .shared,
             coder: CodableProfileCoder(),
-            keychain: AppleKeychain(group: BundleConfiguration.mainString(for: .keychainGroupId))
+            keychain: sharedKeychain
         )
     }
 }

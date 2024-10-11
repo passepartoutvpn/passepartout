@@ -26,6 +26,7 @@
 import Combine
 import CommonLibrary
 import Foundation
+import NetworkExtension
 import PassepartoutKit
 
 public final class NEProfileRepository: ProfileRepository {
@@ -37,7 +38,7 @@ public final class NEProfileRepository: ProfileRepository {
 
     private var subscription: AnyCancellable?
 
-    public init(repository: NETunnelManagerRepository, title: @escaping (Profile) -> String) {
+    public init(repository: NETunnelManagerRepository, keychain: Keychain, title: @escaping (Profile) -> String) {
         self.repository = repository
         self.title = title
         profilesSubject = CurrentValueSubject([])
@@ -45,15 +46,25 @@ public final class NEProfileRepository: ProfileRepository {
         subscription = repository
             .managersPublisher
             .sink { [weak self] allManagers in
+                var toRemove: [NETunnelProviderManager] = []
                 let profiles = allManagers.values.compactMap {
                     do {
                         return try repository.profile(from: $0)
                     } catch {
+                        pp_log(.app, .error, "Unable to decode profile, will delete NE manager '\($0.localizedDescription ?? "")': \(error)")
+                        toRemove.append($0)
                         pp_log(.app, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
                         return nil
                     }
                 }
                 self?.profilesSubject.send(profiles)
+
+                let toRemoveConstant = toRemove
+                Task {
+                    for manager in toRemoveConstant {
+                        try? await repository.remove(manager: manager, keychain: keychain)
+                    }
+                }
             }
 
         Task {
