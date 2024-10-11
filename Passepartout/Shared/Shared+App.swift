@@ -185,10 +185,7 @@ extension Tunnel {
 }
 
 private var localProfileRepository: ProfileRepository {
-    NEProfileRepository(
-        repository: neRepository,
-        keychain: Registry.sharedKeychain
-    ) {
+    NEProfileRepository(repository: neRepository) {
         sharedProfileTitle($0)
     }
 }
