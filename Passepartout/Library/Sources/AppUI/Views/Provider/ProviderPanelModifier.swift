@@ -34,6 +34,8 @@ struct ProviderPanelModifier<Entity, ProviderContent>: ViewModifier where Entity
 
     var apis: [APIMapper] = API.shared
 
+    let isRequired: Bool
+
     @Binding
     var providerId: ProviderID?
 
@@ -64,12 +66,22 @@ private extension ProviderPanelModifier {
         }
     }
 
+    var selectedProviderId: Binding<ProviderID?> {
+        Binding {
+            providerId ?? supportedProviders.first?.id
+        } set: {
+            self.providerId = $0
+        }
+    }
+
     var providerPicker: some View {
         let hasProviders = !supportedProviders.isEmpty
-        return Picker(Strings.Global.provider, selection: $providerId) {
+        return Picker(Strings.Global.provider, selection: selectedProviderId) {
             if hasProviders {
-                Text(Strings.Global.none)
-                    .tag(nil as ProviderID?)
+                if !isRequired {
+                    Text(Strings.Global.none)
+                        .tag(nil as ProviderID?)
+                }
                 ForEach(supportedProviders, id: \.id) {
                     Text($0.description)
                         .tag($0.id as ProviderID?)
@@ -118,9 +130,10 @@ private extension ProviderID {
         EmptyView()
             .modifier(ProviderPanelModifier(
                 apis: [API.bundled],
+                isRequired: false,
                 providerId: $providerId,
                 selectedEntity: $vpnEntity,
-                providerContent: { id, entity in
+                providerContent: { _, entity in
                     HStack {
                         Text("Server")
                         Spacer()

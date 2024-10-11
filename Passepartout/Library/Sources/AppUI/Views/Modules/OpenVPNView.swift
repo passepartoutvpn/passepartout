@@ -98,6 +98,7 @@ private extension OpenVPNView {
 
     var providerModifier: some ViewModifier {
         ProviderPanelModifier(
+            isRequired: draft.configurationBuilder == nil,
             providerId: $providerId,
             selectedEntity: $providerEntity,
             providerContent: providerContentView
