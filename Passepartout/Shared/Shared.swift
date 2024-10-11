@@ -37,8 +37,11 @@ extension Registry {
                 dns: CFDNSResolver(),
                 importer: StandardOpenVPNParser(decrypter: OSSLTLSBox()),
                 sessionBlock: { _, module in
-                    try OpenVPNSession(
-                        configuration: module.configuration,
+                    guard let configuration = module.configuration else {
+                        fatalError("Creating session without OpenVPN configuration?")
+                    }
+                    return try OpenVPNSession(
+                        configuration: configuration,
                         credentials: module.credentials,
                         prng: SecureRandom(),
                         tlsFactory: {

@@ -117,8 +117,8 @@ extension Profile {
         do {
             var ovpn = OpenVPNModule.Builder()
             ovpn.configurationBuilder = OpenVPN.Configuration.Builder(withFallbacks: true)
-            ovpn.configurationBuilder.ca = .init(pem: "some CA")
-            ovpn.configurationBuilder.remotes = [
+            ovpn.configurationBuilder?.ca = .init(pem: "some CA")
+            ovpn.configurationBuilder?.remotes = [
                 try .init("1.2.3.4", .init(.udp, 80))
             ]
             profile.modules.append(try ovpn.tryBuild())
