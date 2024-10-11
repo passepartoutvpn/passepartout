@@ -24,11 +24,13 @@
 //
 
 import Foundation
+import NetworkExtension
 import PassepartoutKit
 
 public enum AppUI {
     public static func configure(with context: AppContext) {
         assertMissingModuleImplementations()
+        cleanUpOrphanedKeychainEntries()
     }
 }
 
@@ -43,5 +45,8 @@ private extension AppUI {
                 fatalError("\(moduleType): is not ModuleViewProviding")
             }
         }
+    }
+
+    static func cleanUpOrphanedKeychainEntries() {
     }
 }

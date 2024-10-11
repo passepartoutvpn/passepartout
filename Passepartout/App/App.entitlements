@@ -37,7 +37,8 @@
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)$(CFG_GROUP_ID)</string>
+		<string>$(CFG_KEYCHAIN_GROUP_ID)</string>
+		<string>$(AppIdentifierPrefix)$(CFG_KEYCHAIN_GROUP_ID)</string>
 	</array>
 </dict>
 </plist>
