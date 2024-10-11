@@ -14,6 +14,7 @@
 # update_fastlane
 
 fastlane_require "dotenv"
+fastlane_require "fileutils"
 Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
@@ -27,10 +28,16 @@ lane :bump do |options|
             date_format: "short"
         )
         path = "../#{logname}"
-        File.open(path, "w") { |file|
+        path_tmp = "#{path}.tmp"
+        File.open(path_tmp, "w") { |file|
             file.write(log)
         }
-        system("vim", path) or UI.user_error!("CHANGELOG editor cancelled")
+        if system("vim", path_tmp)
+            FileUtils.mv(path_tmp, path)
+        else
+            File.delete(path_tmp)
+            UI.user_error!("CHANGELOG editor cancelled")
+        end
     end
     version = options[:version]
     build = options[:build]
