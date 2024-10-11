@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import PassepartoutKit
 import PassepartoutWireGuardGo
 import SwiftUI
@@ -75,7 +76,7 @@ private struct WireGuardView: View {
 
 private extension WireGuardView {
     var configuration: WireGuard.Configuration.Builder {
-        draft.configurationBuilder
+        draft.configurationBuilder ?? .default
     }
 
     @ViewBuilder

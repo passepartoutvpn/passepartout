@@ -41,7 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:passepartoutvpn/passepartoutkit-source",
       "state" : {
-        "revision" : "bec0635fe047e09c8b6c894d103ab8dd741b8340"
+        "revision" : "126392d2614c9d0ffe2aa2d96f6c5509221b8481",
+        "version" : "0.9.0"
       }
     },
     {
@@ -58,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go",
       "state" : {
-        "revision" : "ea39fa396e98cfd2b9a235f0a801aaf03a37e30a",
-        "version" : "0.8.0"
+        "revision" : "4f766400057b3c8a3ceb7cfce4950393e292858e",
+        "version" : "0.9.0"
       }
     },
     {

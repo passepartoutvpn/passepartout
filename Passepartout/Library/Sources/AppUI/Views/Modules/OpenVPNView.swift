@@ -93,11 +93,12 @@ struct OpenVPNView: View {
 
 private extension OpenVPNView {
     var configuration: OpenVPN.Configuration.Builder {
-        draft.configurationBuilder
+        draft.configurationBuilder ?? .init(withFallbacks: true)
     }
 
     var providerModifier: some ViewModifier {
         ProviderPanelModifier(
+            isRequired: draft.configurationBuilder == nil,
             providerId: $providerId,
             selectedEntity: $providerEntity,
             providerContent: providerContentView

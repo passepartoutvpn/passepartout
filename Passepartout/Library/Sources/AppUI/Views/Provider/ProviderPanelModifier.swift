@@ -34,6 +34,8 @@ struct ProviderPanelModifier<Entity, ProviderContent>: ViewModifier where Entity
 
     var apis: [APIMapper] = API.shared
 
+    let isRequired: Bool
+
     @Binding
     var providerId: ProviderID?
 
@@ -51,7 +53,7 @@ struct ProviderPanelModifier<Entity, ProviderContent>: ViewModifier where Entity
 
         if let providerId {
             providerContent(providerId, selectedEntity)
-        } else {
+        } else if !isRequired {
             content
         }
     }
@@ -64,17 +66,15 @@ private extension ProviderPanelModifier {
         }
     }
 
-    var providersPlusEmpty: [ProviderMetadata] {
-        [ProviderMetadata("", description: Strings.Global.none)] + supportedProviders
-    }
-
     var providerPicker: some View {
         let hasProviders = !supportedProviders.isEmpty
         return Picker(Strings.Global.provider, selection: $providerId) {
             if hasProviders {
-                ForEach(providersPlusEmpty, id: \.id) {
+                Text(Strings.Global.none)
+                    .tag(nil as ProviderID?)
+                ForEach(supportedProviders, id: \.id) {
                     Text($0.description)
-                        .tag($0.id.nilIfEmpty)
+                        .tag($0.id as ProviderID?)
                 }
             } else {
                 Text(" ") // enforce constant picker height on iOS
@@ -120,9 +120,10 @@ private extension ProviderID {
         EmptyView()
             .modifier(ProviderPanelModifier(
                 apis: [API.bundled],
+                isRequired: false,
                 providerId: $providerId,
                 selectedEntity: $vpnEntity,
-                providerContent: { id, entity in
+                providerContent: { _, entity in
                     HStack {
                         Text("Server")
                         Spacer()
