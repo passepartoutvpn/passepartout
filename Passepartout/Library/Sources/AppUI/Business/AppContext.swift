@@ -70,7 +70,7 @@ public final class AppContext: ObservableObject {
         connectionObserver = ConnectionObserver(
             tunnel: tunnel,
             environment: tunnelEnvironment,
-            interval: constants.connection.refreshInterval
+            interval: constants.tunnel.refreshInterval
         )
         self.registry = registry
         self.providerFactory = providerFactory

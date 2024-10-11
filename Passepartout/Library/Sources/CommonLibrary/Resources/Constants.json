@@ -20,7 +20,8 @@
     "formats": {
         "timestamp": "yyyy-MM-dd HH:mm:ss"
     },
-    "connection": {
+    "tunnel": {
+        "profileTitleFormat": "Passepartout: %@",
         "refreshInterval": 3.0
     },
     "api": {

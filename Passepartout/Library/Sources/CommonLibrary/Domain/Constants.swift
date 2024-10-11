@@ -91,7 +91,9 @@ public struct Constants: Decodable, Sendable {
         public let timestamp: String
     }
 
-    public struct Connection: Decodable, Sendable {
+    public struct Tunnel: Decodable, Sendable {
+        public let profileTitleFormat: String
+
         public let refreshInterval: TimeInterval
     }
 
@@ -150,7 +152,7 @@ public struct Constants: Decodable, Sendable {
 
     public let formats: Formats
 
-    public let connection: Connection
+    public let tunnel: Tunnel
 
     public let api: API
 

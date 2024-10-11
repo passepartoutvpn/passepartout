@@ -218,7 +218,7 @@ extension ProviderFactory {
 
 private extension ProfileManager {
     static let sharedTitle: (Profile) -> String = {
-        "Passepartout: \($0.name)"
+        String(format: Constants.shared.tunnel.profileTitleFormat, $0.name)
     }
 }
 
