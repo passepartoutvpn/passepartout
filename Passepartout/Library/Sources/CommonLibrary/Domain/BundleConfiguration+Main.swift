@@ -42,8 +42,6 @@ extension BundleConfiguration {
 
         case keychainGroupId
 
-        case teamId
-
         case tunnelId
 
         // legacy v2
