@@ -64,17 +64,15 @@ private extension ProviderPanelModifier {
         }
     }
 
-    var providersPlusEmpty: [ProviderMetadata] {
-        [ProviderMetadata("", description: Strings.Global.none)] + supportedProviders
-    }
-
     var providerPicker: some View {
         let hasProviders = !supportedProviders.isEmpty
         return Picker(Strings.Global.provider, selection: $providerId) {
             if hasProviders {
-                ForEach(providersPlusEmpty, id: \.id) {
+                Text(Strings.Global.none)
+                    .tag(nil as ProviderID?)
+                ForEach(supportedProviders, id: \.id) {
                     Text($0.description)
-                        .tag($0.id.nilIfEmpty)
+                        .tag($0.id as ProviderID?)
                 }
             } else {
                 Text(" ") // enforce constant picker height on iOS
