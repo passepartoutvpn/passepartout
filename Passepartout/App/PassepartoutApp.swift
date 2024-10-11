@@ -47,23 +47,25 @@ struct PassepartoutApp: App {
     @StateObject
     private var theme = Theme()
 
-    var body: some Scene {
 #if os(iOS)
-        WindowGroup(content: content)
+    var body: some Scene {
+        WindowGroup(content: contentView)
+    }
 #else
-        Window(appName, id: appName, content: content)
+    var body: some Scene {
+        Window(appName, id: appName, content: contentView)
             .defaultSize(width: 600.0, height: 400.0)
 
         Settings {
             SettingsView(profileManager: context.profileManager)
                 .frame(minWidth: 300, minHeight: 200)
         }
-#endif
     }
+#endif
 }
 
 private extension PassepartoutApp {
-    func content() -> some View {
+    func contentView() -> some View {
         AppCoordinator(
             profileManager: context.profileManager,
             tunnel: context.tunnel,
