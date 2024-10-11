@@ -53,7 +53,7 @@ struct ProviderPanelModifier<Entity, ProviderContent>: ViewModifier where Entity
 
         if let providerId {
             providerContent(providerId, selectedEntity)
-        } else {
+        } else if !isRequired {
             content
         }
     }
@@ -66,22 +66,12 @@ private extension ProviderPanelModifier {
         }
     }
 
-    var selectedProviderId: Binding<ProviderID?> {
-        Binding {
-            providerId ?? supportedProviders.first?.id
-        } set: {
-            self.providerId = $0
-        }
-    }
-
     var providerPicker: some View {
         let hasProviders = !supportedProviders.isEmpty
-        return Picker(Strings.Global.provider, selection: selectedProviderId) {
+        return Picker(Strings.Global.provider, selection: $providerId) {
             if hasProviders {
-                if !isRequired {
-                    Text(Strings.Global.none)
-                        .tag(nil as ProviderID?)
-                }
+                Text(Strings.Global.none)
+                    .tag(nil as ProviderID?)
                 ForEach(supportedProviders, id: \.id) {
                     Text($0.description)
                         .tag($0.id as ProviderID?)
