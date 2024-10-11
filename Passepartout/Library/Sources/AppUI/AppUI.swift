@@ -49,7 +49,7 @@ private extension AppUI {
 
     static func migrateBadKeychainEntries() {
         Task {
-            let teamId = "DTDYD63ZX9"
+            let teamId = BundleConfiguration.mainString(for: .teamId)
             let keychainGroupId = BundleConfiguration.mainString(for: .keychainGroupId)
             let keychain = AppleKeychain(group: keychainGroupId)
             let badKeychainGroupId = "\(teamId).\(keychainGroupId)"
