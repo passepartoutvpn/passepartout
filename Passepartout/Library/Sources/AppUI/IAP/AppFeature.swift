@@ -60,7 +60,3 @@ extension AppFeature: Identifiable {
         rawValue
     }
 }
-
-protocol AppFeatureProviding {
-    var features: [AppFeature] { get }
-}

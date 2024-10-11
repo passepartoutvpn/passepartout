@@ -1,8 +1,8 @@
 //
-//  AppUserLevel+Features.swift
+//  AppFeatureProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/10/24.
+//  Created by Davide De Rosa on 10/11/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,6 +25,10 @@
 
 import Foundation
 
+protocol AppFeatureProviding {
+    var features: [AppFeature] { get }
+}
+
 extension AppUserLevel: AppFeatureProviding {
     var features: [AppFeature] {
         switch self {
@@ -35,6 +39,47 @@ extension AppUserLevel: AppFeatureProviding {
             var list = AppFeature.fullVersionFeaturesV2
             list.append(.appleTV)
             return list
+
+        default:
+            return []
+        }
+    }
+}
+
+extension AppProduct: AppFeatureProviding {
+    var features: [AppFeature] {
+        switch self {
+        case .Features.allProviders:
+            return [.providers]
+
+        case .Features.appleTV:
+            return [.appleTV]
+
+        case .Features.networkSettings:
+            return [.dns, .httpProxy, .routing]
+
+        case .Features.siriShortcuts:
+            return [.siri]
+
+        case .Features.trustedNetworks:
+            return [.onDemand]
+
+        case .Full.allPlatforms:
+            return AppFeature.fullVersionFeaturesV2
+
+        case .Full.iOS:
+#if os(iOS)
+            return AppFeature.fullVersionFeaturesV2
+#else
+            return []
+#endif
+
+        case .Full.macOS:
+#if os(macOS)
+            return AppFeature.fullVersionFeaturesV2
+#else
+            return []
+#endif
 
         default:
             return []
