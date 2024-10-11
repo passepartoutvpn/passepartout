@@ -39,6 +39,9 @@ struct PassepartoutApp: App {
     private var appDelegate: AppDelegate
 #endif
 
+    @Environment(\.scenePhase)
+    private var scenePhase
+
     private let context: AppContext = .shared
 //    private let context: AppContext = .mock(withRegistry: .shared)
 
@@ -78,6 +81,21 @@ private extension PassepartoutApp {
                 logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
             )
             AppUI.configure(with: context)
+        }
+        .onChange(of: scenePhase) {
+            switch $0 {
+            case .active:
+                Task {
+                    do {
+                        try await context.tunnel.prepare(purge: true)
+                    } catch {
+                        pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
+                    }
+                }
+
+            default:
+                break
+            }
         }
         .themeLockScreen()
         .withEnvironment(from: context, theme: theme)
