@@ -106,22 +106,6 @@ private extension AppContext {
 }
 
 private extension AppContext {
-    func installSavedProfile(_ profile: Profile) async throws {
-        try await tunnel.install(profile, processor: profileProcessor)
-    }
-
-    func uninstallRemovedProfiles(withIds profileIds: [Profile.ID]) {
-        Task {
-            for id in profileIds {
-                do {
-                    try await tunnel.uninstall(profileId: id)
-                } catch {
-                    pp_log(.app, .error, "Unable to uninstall profile \(id): \(error)")
-                }
-            }
-        }
-    }
-
     func syncTunnelIfCurrentProfile(_ profile: Profile) {
         guard profile.id == tunnel.currentProfile?.id else {
             return
