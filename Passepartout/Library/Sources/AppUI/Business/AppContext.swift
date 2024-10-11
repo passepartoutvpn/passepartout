@@ -78,7 +78,11 @@ public final class AppContext: ObservableObject {
         subscriptions = []
 
         Task {
-            try await tunnel.prepare()
+            do {
+                try await tunnel.prepare(purge: true)
+            } catch {
+                pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
+            }
             await iapManager.reloadReceipt()
             connectionObserver.observeObjects()
             profileManager.observeObjects()
