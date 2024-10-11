@@ -119,7 +119,7 @@ extension IAPManager {
 
 extension ProfileProcessor {
     static let shared = ProfileProcessor {
-        sharedProfileTitle($0)
+        ProfileManager.sharedTitle($0)
     } processed: { profile in
         var builder = profile.builder()
 
@@ -157,45 +157,49 @@ extension Tunnel {
     )
 }
 
-private var localProfileRepository: ProfileRepository {
-    let store = CoreDataPersistentStore(
-        logger: .default,
-        containerName: Constants.shared.containers.local,
-        model: AppData.cdProfilesModel,
-        cloudKitIdentifier: nil,
-        author: nil
-    )
-    return AppData.cdProfileRepositoryV3(
-        registry: .shared,
-        coder: CodableProfileCoder(),
-        context: store.context,
-        observingResults: false
-    ) { error in
-        pp_log(.app, .error, "Unable to decode local result: \(error)")
-        return .ignore
-    }
+private extension ProfileManager {
+    static let localProfileRepository: ProfileRepository = {
+        let store = CoreDataPersistentStore(
+            logger: .default,
+            containerName: Constants.shared.containers.local,
+            model: AppData.cdProfilesModel,
+            cloudKitIdentifier: nil,
+            author: nil
+        )
+        return AppData.cdProfileRepositoryV3(
+            registry: .shared,
+            coder: CodableProfileCoder(),
+            context: store.context,
+            observingResults: false
+        ) { error in
+            pp_log(.app, .error, "Unable to decode local result: \(error)")
+            return .ignore
+        }
+    }()
 }
 
 #else
 
 extension Tunnel {
     static let shared = Tunnel(
-        strategy: NETunnelStrategy(repository: neRepository)
+        strategy: NETunnelStrategy(repository: ProfileManager.neRepository)
     )
 }
 
-private var localProfileRepository: ProfileRepository {
-    NEProfileRepository(repository: neRepository) {
-        sharedProfileTitle($0)
-    }
-}
+private extension ProfileManager {
+    static let localProfileRepository: ProfileRepository = {
+        NEProfileRepository(repository: neRepository) {
+            ProfileManager.sharedTitle($0)
+        }
+    }()
 
-private var neRepository: NETunnelManagerRepository {
-    NETunnelManagerRepository(
-        bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-        coder: Registry.sharedProtocolCoder,
-        environment: .shared
-    )
+    static let neRepository: NETunnelManagerRepository = {
+        NETunnelManagerRepository(
+            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+            coder: Registry.sharedProtocolCoder,
+            environment: .shared
+        )
+    }()
 }
 
 #endif
@@ -212,8 +216,10 @@ extension ProviderFactory {
 
 // MARK: -
 
-private let sharedProfileTitle: (Profile) -> String = {
-    "Passepartout: \($0.name)"
+private extension ProfileManager {
+    static let sharedTitle: (Profile) -> String = {
+        "Passepartout: \($0.name)"
+    }
 }
 
 extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
