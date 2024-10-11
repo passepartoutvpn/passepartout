@@ -379,18 +379,18 @@ struct ThemeImageLabel: View {
     }
 }
 
-struct ThemeCopiableText<ValueView>: View where ValueView: View {
+struct ThemeCopiableText<Value, ValueView>: View where Value: CustomStringConvertible, ValueView: View {
 
     @EnvironmentObject
     private var theme: Theme
 
     var title: String?
 
-    let value: String
+    let value: Value
 
     var isMultiLine = true
 
-    let valueView: (String) -> ValueView
+    let valueView: (Value) -> ValueView
 
     var body: some View {
         HStack {
@@ -405,7 +405,7 @@ struct ThemeCopiableText<ValueView>: View where ValueView: View {
                 Spacer()
             }
             Button {
-                copyToPasteboard(value)
+                copyToPasteboard(value.description)
             } label: {
                 ThemeImage(.copy)
             }
