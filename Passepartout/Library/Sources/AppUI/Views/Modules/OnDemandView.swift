@@ -193,7 +193,6 @@ private extension OnDemandView {
                 }
                 draft.withSSIDs[$0] = false
             }
-//            print(">>> withSSIDs (allSSIDs): \(withSSIDs)")
         }
     }
 
@@ -219,7 +218,6 @@ private extension OnDemandView {
                 }
                 draft.withSSIDs[$0] = true
             }
-//            print(">>> withSSIDs (onSSIDs): \(withSSIDs)")
         }
     }
 
