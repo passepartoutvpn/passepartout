@@ -78,7 +78,6 @@ public final class AppContext: ObservableObject {
         subscriptions = []
 
         Task {
-            try await tunnel.prepare()
             await iapManager.reloadReceipt()
             connectionObserver.observeObjects()
             profileManager.observeObjects()

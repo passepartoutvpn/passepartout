@@ -55,18 +55,15 @@ public final class NEProfileRepository: ProfileRepository {
                 }
                 self?.profilesSubject.send(profiles)
             }
-
-        Task {
-            do {
-                try await repository.load()
-            } catch {
-                pp_log(.app, .fault, "Unable to load NE profiles: \(error)")
-            }
-        }
     }
 
     public var profilesPublisher: AnyPublisher<[Profile], Never> {
         profilesSubject.eraseToAnyPublisher()
+    }
+
+    // unused in app, rely on Tunnel.prepare()
+    public func loadProfiles(purge: Bool) async throws {
+        try await repository.load(purge: purge)
     }
 
     public func saveProfile(_ profile: Profile) async throws {
