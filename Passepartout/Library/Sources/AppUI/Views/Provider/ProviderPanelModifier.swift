@@ -105,9 +105,6 @@ private extension ProviderPanelModifier {
     func refreshIndex() async {
         do {
             try await providerManager.fetchIndex(from: apis)
-            if providerId == nil {
-                providerId = supportedProviders.first?.id
-            }
         } catch {
             pp_log(.app, .error, "Unable to fetch index: \(error)")
         }
