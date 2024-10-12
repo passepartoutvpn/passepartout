@@ -27,13 +27,13 @@ let package = Package(
         )
     ],
     dependencies: [
-//        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", from: "0.9.0"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "0bfd4578b71a905584cdd5c9c39ab3087521af78"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", from: "0.9.1"),
+//        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "0bfd4578b71a905584cdd5c9c39ab3087521af78"),
 //        .package(path: "../../../passepartoutkit-source"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", from: "0.8.0"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", from: "0.9.1"),
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", revision: "031863a1cd683962a7dfe68e20b91fa820a1ecce"),
 //        .package(path: "../../../passepartoutkit-source-openvpn-openssl"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go", from: "0.9.0"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go", from: "0.9.1"),
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go", revision: "ea39fa396e98cfd2b9a235f0a801aaf03a37e30a"),
 //        .package(path: "../../../passepartoutkit-source-wireguard-go"),
         .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0")
