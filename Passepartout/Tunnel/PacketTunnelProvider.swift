@@ -36,15 +36,16 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
-        fwd = try await NEPTPForwarder(
-            provider: self,
-            decoder: Registry.sharedProtocolCoder,
-            registry: .shared,
-            environment: .shared
-        )
         do {
+            fwd = try await NEPTPForwarder(
+                provider: self,
+                decoder: Registry.sharedProtocolCoder,
+                registry: .shared,
+                environment: .shared
+            )
             try await fwd?.startTunnel(options: options)
         } catch {
+            pp_log(.app, .fault, "Unable to start tunnel: \(error)")
             PassepartoutConfiguration.shared.flushLog()
             throw error
         }
