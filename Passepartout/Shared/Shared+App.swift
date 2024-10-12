@@ -136,13 +136,14 @@ extension ProfileProcessor {
             }
         }
 
-        let processed = try builder.tryBuild()
+        let profile = try builder.tryBuild()
         do {
-            return try processed.withProviderModules()
+            _ = try profile.withProviderModules()
+            return profile
         } catch {
             // FIXME: #703, alert unable to build provider server
             pp_log(.app, .error, "Unable to inject provider modules: \(error)")
-            return processed
+            throw error
         }
     }
 }
