@@ -164,7 +164,8 @@ private extension OpenVPNView {
             withId: providerId,
             initialParameters: .init(sorting: [
                 .localizedCountry,
-                .area
+                .area,
+                .hostname
             ])
         )
     }
