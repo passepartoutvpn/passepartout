@@ -40,7 +40,7 @@ extension AppContext {
         tunnel: .shared,
         tunnelEnvironment: .shared,
         registry: .shared,
-        providerFactory: .shared,
+        providerManager: .shared,
         constants: .shared
     )
 }
@@ -208,10 +208,10 @@ private extension ProfileManager {
 // MARK: -
 
 // FIXME: #705, store providers to Core Data
-extension ProviderFactory {
-    static let shared = ProviderFactory(
-        providerManager: ProviderManager(repository: InMemoryProviderRepository()),
-        vpnProviderManager: VPNProviderManager(repository: InMemoryVPNProviderRepository())
+extension ProviderManager {
+    static let shared = ProviderManager(
+        repository: InMemoryProviderRepository(),
+        vpnRepository: InMemoryVPNProviderRepository()
     )
 }
 

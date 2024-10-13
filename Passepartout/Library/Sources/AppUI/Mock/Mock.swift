@@ -62,9 +62,9 @@ extension AppContext {
             tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: env)),
             tunnelEnvironment: env,
             registry: registry,
-            providerFactory: ProviderFactory(
-                providerManager: ProviderManager(repository: InMemoryProviderRepository()),
-                vpnProviderManager: VPNProviderManager(repository: InMemoryVPNProviderRepository())
+            providerManager: ProviderManager(
+                repository: InMemoryProviderRepository(),
+                vpnRepository: InMemoryVPNProviderRepository()
             ),
             constants: .shared
         )
@@ -83,12 +83,6 @@ extension ProfileManager {
     }
 }
 
-extension ProviderFactory {
-    public static var mock: ProviderFactory {
-        AppContext.mock.providerFactory
-    }
-}
-
 extension ProfileProcessor {
     public static var mock: ProfileProcessor {
         AppContext.mock.profileProcessor
@@ -104,6 +98,12 @@ extension Tunnel {
 extension ConnectionObserver {
     public static var mock: ConnectionObserver {
         AppContext.mock.connectionObserver
+    }
+}
+
+extension ProviderManager {
+    public static var mock: ProviderManager {
+        AppContext.mock.providerManager
     }
 }
 

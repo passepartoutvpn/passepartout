@@ -145,13 +145,13 @@ extension OnDemandModule.Policy: LocalizableEntity {
 }
 
 extension VPNServer {
-    public var sortableRegion: String {
-        [countryCodes.first?.localizedAsRegionCode, area]
+    public var region: String {
+        [provider.countryCodes.first?.localizedAsRegionCode, provider.area]
             .compactMap { $0 }
             .joined(separator: " - ")
     }
 
-    public var sortableAddresses: String {
+    public var address: String {
         if let hostname {
             return hostname
         }

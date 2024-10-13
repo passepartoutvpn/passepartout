@@ -29,66 +29,24 @@ import SwiftUI
 
 struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Hashable & Codable {
 
-    @EnvironmentObject
-    private var providerManager: ProviderManager
-
-    @EnvironmentObject
-    private var vpnProviderManager: VPNProviderManager
-
     @Environment(\.dismiss)
     private var dismiss
 
-    var apis: [APIMapper] = API.shared
-
-    let providerId: ProviderID
+    @ObservedObject
+    var manager: VPNProviderManager
 
     let onSelect: (_ server: VPNServer, _ preset: VPNPreset<Configuration>) -> Void
 
-    @State
-    private var isLoading = true
-
-    @State
-    var sortOrder = [
-        KeyPathComparator(\VPNServer.sortableRegion)
-    ]
-
-    @State
-    var sortedServers: [VPNServer] = []
-
-    // FIXME: #703, flickers on appear
     var body: some View {
         serversView
-            .modifier(VPNFiltersModifier<Configuration>(
-                manager: vpnProviderManager,
-                providerId: providerId,
-                onRefresh: {
-                    await refreshInfrastructure(for: providerId)
-                }
-            ))
-            .themeAnimation(on: isLoading, category: .providers)
-            .navigationTitle(providerMetadata?.description ?? Strings.Global.servers)
-            .task {
-                await loadInfrastructure(for: providerId)
-            }
-            .onReceive(vpnProviderManager.$filteredServers, perform: onFilteredServers)
-    }
-}
-
-private extension VPNProviderServerView {
-    var providerMetadata: ProviderMetadata? {
-        providerManager.metadata(withId: providerId)
+            .modifier(VPNFiltersModifier<Configuration>(manager: manager))
+            .navigationTitle(Strings.Global.servers)
     }
 }
 
 // MARK: - Actions
 
 extension VPNProviderServerView {
-    func onFilteredServers(_ servers: [String: VPNServer]) {
-        sortedServers = servers
-            .values
-            .sorted(using: sortOrder)
-    }
-
     func selectServer(_ server: VPNServer) {
         guard let preset = compatiblePreset(with: server) else {
             // FIXME: #703, alert select a preset
@@ -101,7 +59,7 @@ extension VPNProviderServerView {
 
 private extension VPNProviderServerView {
     func compatiblePreset(with server: VPNServer) -> VPNPreset<Configuration>? {
-        vpnProviderManager
+        manager
             .presets(ofType: Configuration.self)
             .first {
                 if let supportedIds = server.provider.supportedPresetIds {
@@ -110,38 +68,13 @@ private extension VPNProviderServerView {
                 return true
             }
     }
-
-    func loadInfrastructure(for providerId: ProviderID) async {
-        await vpnProviderManager.setProvider(providerId)
-        if await vpnProviderManager.lastUpdated() == nil {
-            await refreshInfrastructure(for: providerId)
-        }
-        isLoading = false
-    }
-
-    // FIXME: #704, rate-limit fetch
-    func refreshInfrastructure(for providerId: ProviderID) async {
-        do {
-            isLoading = true
-            try await vpnProviderManager.fetchInfrastructure(
-                from: apis,
-                for: providerId,
-                ofType: Configuration.self
-            )
-            isLoading = false
-        } catch {
-            // FIXME: #703, alert unable to refresh infrastructure
-            pp_log(.app, .error, "Unable to refresh infrastructure: \(error)")
-            isLoading = false
-        }
-    }
 }
 
 // MARK: - Preview
 
 #Preview {
     NavigationStack {
-        VPNProviderServerView<OpenVPN.Configuration>(apis: [API.bundled], providerId: .protonvpn) { _, _ in
+        VPNProviderServerView<OpenVPN.Configuration>(manager: VPNProviderManager()) { _, _ in
         }
     }
     .withMockEnvironment()

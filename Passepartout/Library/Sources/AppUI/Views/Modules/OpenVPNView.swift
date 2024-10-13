@@ -60,6 +60,9 @@ struct OpenVPNView: View {
     @Binding
     private var providerEntity: VPNEntity<OpenVPN.Configuration>?
 
+    @StateObject
+    private var vpnProviderManager = VPNProviderManager()
+
     init(serverConfiguration: OpenVPN.Configuration) {
         let module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         let editor = ProfileEditor(modules: [module])
@@ -99,41 +102,35 @@ private extension OpenVPNView {
     var providerModifier: some ViewModifier {
         ProviderPanelModifier(
             isRequired: draft.configurationBuilder == nil,
+            entityType: VPNEntity<OpenVPN.Configuration>.self,
             providerId: $providerId,
-            selectedEntity: $providerEntity,
-            providerContent: providerContentView
+            providerContent: providerContentView,
+            onSelectProvider: onSelectProvider
         )
     }
 
     @ViewBuilder
-    var contentView: some View {
-        credentialsView
-        if providerId == nil {
-            manualView
-        }
+    func providerContentView(providerId: ProviderID) -> some View {
+        providerServerRow
+        moduleGroup(for: accountRows)
     }
 
-    @ViewBuilder
-    func providerContentView(providerId: ProviderID, entity: VPNEntity<OpenVPN.Configuration>?) -> some View {
-        NavigationLink(value: Subroute.providerServer(id: providerId)) {
+    var providerServerRow: some View {
+        NavigationLink(value: Subroute.providerServer) {
             HStack {
-                Text("Server")
-                if let entity {
+                Text(Strings.Global.server)
+                if let providerEntity {
                     Spacer()
-                    Text(entity.server.hostname ?? entity.server.serverId)
+                    Text(providerEntity.server.hostname ?? providerEntity.server.serverId)
                         .foregroundStyle(.secondary)
                 }
             }
         }
-        credentialsView
-    }
-
-    var credentialsView: some View {
-        moduleSection(for: accountRows, header: Strings.Global.account)
     }
 
     @ViewBuilder
-    var manualView: some View {
+    var contentView: some View {
+        moduleSection(for: accountRows, header: Strings.Global.account)
         moduleSection(for: remotesRows, header: Strings.Modules.Openvpn.remotes)
         if !isServerPushed {
             moduleSection(for: pullRows, header: Strings.Modules.Openvpn.pull)
@@ -159,6 +156,20 @@ private extension OpenVPNView {
 }
 
 private extension OpenVPNView {
+    func onSelectProvider(manager: ProviderManager) {
+        guard let providerId else {
+            return
+        }
+        vpnProviderManager.view = manager.vpnView(
+            withId: providerId,
+            initialParameters: .init(sorting: [
+                .localizedCountry,
+                .area,
+                .hostname
+            ])
+        )
+    }
+
     func onSelect(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
         providerEntity = VPNEntity(server: server, preset: preset)
     }
@@ -172,7 +183,7 @@ private extension OpenVPNView {
 
 private extension OpenVPNView {
     enum Subroute: Hashable {
-        case providerServer(id: ProviderID)
+        case providerServer
 
         case credentials
     }
@@ -180,9 +191,9 @@ private extension OpenVPNView {
     @ViewBuilder
     func destination(for route: Subroute) -> some View {
         switch route {
-        case .providerServer(let id):
+        case .providerServer:
             VPNProviderServerView<OpenVPN.Configuration>(
-                providerId: id,
+                manager: vpnProviderManager,
                 onSelect: onSelect
             )
 

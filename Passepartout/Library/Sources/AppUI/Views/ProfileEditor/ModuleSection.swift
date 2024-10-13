@@ -71,12 +71,18 @@ struct HashableRoute: Hashable {
 }
 
 extension View {
-    func moduleSection(for rows: [ModuleRow]?, header: String) -> some View {
+    func moduleGroup(for rows: [ModuleRow]?) -> some View {
         rows.map { rows in
             Group {
                 ForEach(rows, id: \.self, content: moduleRowView)
             }
-            .themeSection(header: header)
+        }
+    }
+
+    func moduleSection(for rows: [ModuleRow]?, header: String) -> some View {
+        rows.map { rows in
+            moduleGroup(for: rows)
+                .themeSection(header: header)
         }
     }
 }

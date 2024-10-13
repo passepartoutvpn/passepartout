@@ -30,7 +30,7 @@ import SwiftUI
 extension VPNFiltersModifier {
     func contentView(with content: Content) -> some View {
         VStack {
-            VPNFiltersView<Configuration>(manager: manager, providerId: providerId, onRefresh: onRefresh)
+            VPNFiltersView<Configuration>(manager: manager)
                 .padding()
             content
         }

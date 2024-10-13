@@ -46,7 +46,7 @@ public final class AppContext: ObservableObject {
 
     public let registry: Registry
 
-    public let providerFactory: ProviderFactory
+    public let providerManager: ProviderManager
 
     private let constants: Constants
 
@@ -59,7 +59,7 @@ public final class AppContext: ObservableObject {
         tunnel: Tunnel,
         tunnelEnvironment: TunnelEnvironment,
         registry: Registry,
-        providerFactory: ProviderFactory,
+        providerManager: ProviderManager,
         constants: Constants
     ) {
         self.iapManager = iapManager
@@ -73,7 +73,7 @@ public final class AppContext: ObservableObject {
             interval: constants.tunnel.refreshInterval
         )
         self.registry = registry
-        self.providerFactory = providerFactory
+        self.providerManager = providerManager
         self.constants = constants
         subscriptions = []
 

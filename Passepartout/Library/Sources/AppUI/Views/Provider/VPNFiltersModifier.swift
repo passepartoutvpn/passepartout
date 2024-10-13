@@ -31,16 +31,12 @@ struct VPNFiltersModifier<Configuration>: ViewModifier where Configuration: Deco
     @ObservedObject
     var manager: VPNProviderManager
 
-    let providerId: ProviderID
-
-    let onRefresh: () async -> Void
-
     @State
     var isFiltersPresented = false
 
     func body(content: Content) -> some View {
         contentView(with: content)
-            .onChange(of: manager.filters) { _ in
+            .onChange(of: manager.parameters.filters) { _ in
                 Task {
                     await manager.applyFilters()
                 }
