@@ -26,6 +26,9 @@
 import AppLibrary
 import PassepartoutKit
 import SwiftUI
+import UtilsLibrary
+
+// FIXME: #703, providers UI, reorg subviews
 
 struct ProviderPanelModifier<Entity, ProviderContent>: ViewModifier where Entity: ProviderEntity, Entity.Configuration: ProviderConfigurationIdentifiable & Codable, ProviderContent: View {
 
@@ -36,25 +39,31 @@ struct ProviderPanelModifier<Entity, ProviderContent>: ViewModifier where Entity
 
     let isRequired: Bool
 
+    let entityType: Entity.Type
+
     @Binding
     var providerId: ProviderID?
 
-    @Binding
-    var selectedEntity: Entity?
-
     @ViewBuilder
-    let providerContent: (ProviderID, Entity?) -> ProviderContent
+    let providerContent: (ProviderID) -> ProviderContent
+
+    let onSelectProvider: (ProviderManager) -> Void
 
     func body(content: Content) -> some View {
-        providerPicker
-            .task {
-                await refreshIndex()
-            }
+        debugChanges()
+        return Group {
+            providerPicker
+                .onLoad(perform: loadCurrentProvider)
 
-        if let providerId {
-            providerContent(providerId, selectedEntity)
-        } else if !isRequired {
-            content
+            if let providerId {
+                providerContent(providerId)
+                    .asSectionWithTrailingContent {
+                        refreshButton
+                    }
+                    .disabled(providerManager.isLoading)
+            } else if !isRequired {
+                content
+            }
         }
     }
 }
@@ -70,33 +79,91 @@ private extension ProviderPanelModifier {
         let hasProviders = !supportedProviders.isEmpty
         return Picker(Strings.Global.provider, selection: $providerId) {
             if hasProviders {
-                Text(Strings.Global.none)
+                // FIXME: #703, providers UI
+                Text("Select a provider")
                     .tag(nil as ProviderID?)
                 ForEach(supportedProviders, id: \.id) {
                     Text($0.description)
                         .tag($0.id as ProviderID?)
                 }
             } else {
-                Text(" ") // enforce constant picker height on iOS
+                // enforce constant picker height on iOS
+                Text(providerManager.isLoading ? "..." : "Unavailable")
                     .tag(providerId) // tag always exists
             }
         }
-        .onChange(of: providerId) { _ in
-            selectedEntity = nil
+        .onChange(of: providerId) { newId in
+            Task {
+                if let newId {
+                    await refreshInfrastructure(for: newId)
+                }
+                onSelectProvider(providerManager)
+            }
         }
         .disabled(!hasProviders)
+    }
+
+    var refreshButton: some View {
+        Button {
+            guard let providerId else {
+                return
+            }
+            Task {
+                await refreshInfrastructure(for: providerId)
+            }
+        } label: {
+            HStack {
+                Text(Strings.Views.Provider.Vpn.refreshInfrastructure)
+#if os(iOS)
+                if let providerId, providerManager.pendingServices.contains(.provider(providerId)) {
+                    Spacer()
+                    ProgressView()
+                }
+#endif
+            }
+        }
+        .disabled(providerManager.isLoading || providerId == nil)
     }
 }
 
 private extension ProviderPanelModifier {
+    func loadCurrentProvider() {
+       Task {
+           if let providerId {
+               async let index = await refreshIndex()
+               async let provider = await refreshInfrastructure(for: providerId)
+               _ = await (index, provider)
+               onSelectProvider(providerManager)
+           } else {
+               await refreshIndex()
+           }
+       }
+    }
 
-    // FIXME: #707, fetch bundled providers on launch
-    // FIXME: #704, rate-limit fetch
-    func refreshIndex() async {
+    @discardableResult
+    func refreshIndex() async -> Bool {
         do {
             try await providerManager.fetchIndex(from: apis)
+            return true
         } catch {
             pp_log(.app, .error, "Unable to fetch index: \(error)")
+            return false
+        }
+    }
+
+    @discardableResult
+    func refreshInfrastructure(for providerId: ProviderID) async -> Bool {
+        do {
+            try await providerManager.fetchVPNInfrastructure(
+                from: apis,
+                for: providerId,
+                ofType: Entity.Configuration.self
+            )
+            return true
+        } catch {
+            // FIXME: #703, alert unable to refresh infrastructure
+            pp_log(.app, .error, "Unable to refresh infrastructure: \(error)")
+            return false
         }
     }
 }
@@ -110,26 +177,17 @@ private extension ProviderID {
 // MARK: - Preview
 
 #Preview {
-    @State
-    var providerId: ProviderID? = .hideme
-
-    @State
-    var vpnEntity: VPNEntity<OpenVPN.Configuration>?
-
-    return List {
+    List {
         EmptyView()
             .modifier(ProviderPanelModifier(
                 apis: [API.bundled],
                 isRequired: false,
-                providerId: $providerId,
-                selectedEntity: $vpnEntity,
-                providerContent: { _, entity in
-                    HStack {
-                        Text("Server")
-                        Spacer()
-                        Text(entity?.server.serverId ?? "None")
-                    }
-                }
+                entityType: VPNEntity<OpenVPN.Configuration>.self,
+                providerId: .constant(.hideme),
+                providerContent: { _ in
+                    Text("Server")
+                },
+                onSelectProvider: { _ in }
             ))
     }
     .withMockEnvironment()

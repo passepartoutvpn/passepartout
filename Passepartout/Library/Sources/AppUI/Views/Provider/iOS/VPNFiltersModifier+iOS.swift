@@ -43,7 +43,7 @@ extension VPNFiltersModifier {
         }
         .themeModal(isPresented: $isFiltersPresented) {
             NavigationStack {
-                VPNFiltersView<Configuration>(manager: manager, providerId: providerId, onRefresh: onRefresh)
+                VPNFiltersView<Configuration>(manager: manager)
                     .navigationTitle("Filters")
                     .navigationBarTitleDisplayMode(.inline)
             }

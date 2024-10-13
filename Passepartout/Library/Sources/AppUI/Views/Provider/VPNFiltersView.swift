@@ -34,10 +34,6 @@ struct VPNFiltersView<Configuration>: View where Configuration: Decodable {
     @ObservedObject
     var manager: VPNProviderManager
 
-    let providerId: ProviderID
-
-    let onRefresh: () async -> Void
-
     @State
     private var isRefreshing = false
 
@@ -54,22 +50,16 @@ struct VPNFiltersView<Configuration>: View where Configuration: Decodable {
                 HStack {
                     Spacer()
                     clearFiltersButton
-                    refreshButton
                 }
 #endif
             }
-#if os(iOS)
-            Section {
-                refreshButton
-            }
-#endif
         }
     }
 }
 
 private extension VPNFiltersView {
     var categoryPicker: some View {
-        Picker("Category", selection: $manager.filters.categoryName) {
+        Picker("Category", selection: $manager.parameters.filters.categoryName) {
             Text("Any")
                 .tag(nil as String?)
             ForEach(categories, id: \.self) {
@@ -80,7 +70,7 @@ private extension VPNFiltersView {
     }
 
     var countryPicker: some View {
-        Picker("Country", selection: $manager.filters.countryCode) {
+        Picker("Country", selection: $manager.parameters.filters.countryCode) {
             Text("Any")
                 .tag(nil as String?)
             ForEach(countries, id: \.code) {
@@ -92,8 +82,8 @@ private extension VPNFiltersView {
 
     @ViewBuilder
     var presetPicker: some View {
-        if manager.anyPresets.count > 1 {
-            Picker("Preset", selection: $manager.filters.presetId) {
+        if manager.allPresets.count > 1 {
+            Picker("Preset", selection: $manager.parameters.filters.presetId) {
                 Text("Any")
                     .tag(nil as String?)
                 ForEach(presets, id: \.presetId) {
@@ -110,27 +100,6 @@ private extension VPNFiltersView {
                 await manager.resetFilters()
             }
         }
-    }
-
-    var refreshButton: some View {
-        Button {
-            Task {
-                isRefreshing = true
-                await onRefresh()
-                isRefreshing = false
-            }
-        } label: {
-            HStack {
-                Text(Strings.Views.Provider.Vpn.refreshInfrastructure)
-#if os(iOS)
-                if isRefreshing {
-                    Spacer()
-                    ProgressView()
-                }
-#endif
-            }
-        }
-        .disabled(isRefreshing)
     }
 }
 
@@ -149,7 +118,7 @@ private extension VPNFiltersView {
         let allCodes = manager
             .allServers
             .values
-            .flatMap(\.countryCodes)
+            .flatMap(\.provider.countryCodes)
 
         return Set(allCodes)
             .map {
@@ -171,10 +140,6 @@ private extension VPNFiltersView {
 
 #Preview {
     NavigationStack {
-        VPNFiltersView<String>(
-            manager: ProviderFactory.mock.vpnProviderManager,
-            providerId: .hideme,
-            onRefresh: {}
-        )
+        VPNFiltersView<String>(manager: VPNProviderManager())
     }
 }

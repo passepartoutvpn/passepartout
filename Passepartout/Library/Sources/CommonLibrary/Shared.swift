@@ -63,7 +63,7 @@ extension API {
 #if DEBUG
         [API.bundled]
 #else
-        [API.remoteThenBundled]
+        API.remoteThenBundled
 #endif
     }
 

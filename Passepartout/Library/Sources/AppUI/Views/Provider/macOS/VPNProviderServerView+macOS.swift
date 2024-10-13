@@ -30,14 +30,18 @@ import SwiftUI
 // FIXME: #703, providers UI
 
 extension VPNProviderServerView {
+
+    @ViewBuilder
     var serversView: some View {
-        Table(sortedServers, sortOrder: $sortOrder) {
-            TableColumn("Region", value: \.sortableRegion)
-                .width(max: 200.0)
+        Table(manager.filteredServers) {
+            TableColumn("Region") { server in
+                Text(server.region)
+            }
+            .width(max: 200.0)
 
-            TableColumn("Address", value: \.sortableAddresses)
+            TableColumn("Address", value: \.address)
 
-            TableColumn("", value: \.serverId) { server in
+            TableColumn("") { server in
                 Button {
                     selectServer(server)
                 } label: {

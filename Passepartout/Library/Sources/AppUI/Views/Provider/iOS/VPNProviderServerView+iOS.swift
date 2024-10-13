@@ -30,12 +30,12 @@ import SwiftUI
 // FIXME: #703, providers UI
 
 extension VPNProviderServerView {
+
+    @ViewBuilder
     var serversView: some View {
-        sortedServers.nilIfEmpty.map { servers in
-            ForEach(sortedServers) { server in
-                Button("\(server.hostname ?? server.id) \(server.countryCodes)") {
-                    selectServer(server)
-                }
+        ForEach(manager.filteredServers) { server in
+            Button("\(server.hostname ?? server.id) \(server.provider.countryCodes)") {
+                selectServer(server)
             }
         }
     }
