@@ -96,9 +96,7 @@ private extension VPNFiltersView {
 
     var clearFiltersButton: some View {
         Button("Clear filters", role: .destructive) {
-            Task {
-                await manager.resetFilters()
-            }
+            manager.resetFilters()
         }
     }
 }

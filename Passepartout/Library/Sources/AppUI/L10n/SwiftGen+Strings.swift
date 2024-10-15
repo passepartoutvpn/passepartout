@@ -209,6 +209,8 @@ public enum Strings {
     public static let keepAlive = Strings.tr("Localizable", "global.keep_alive", fallback: "Keep-alive")
     /// Key
     public static let key = Strings.tr("Localizable", "global.key", fallback: "Key")
+    /// Loading
+    public static let loading = Strings.tr("Localizable", "global.loading", fallback: "Loading")
     /// Method
     public static let method = Strings.tr("Localizable", "global.method", fallback: "Method")
     /// Modules
@@ -588,9 +590,19 @@ public enum Strings {
       }
     }
     public enum Provider {
-      public enum Vpn {
-        /// Refresh infrastructure
-        public static let refreshInfrastructure = Strings.tr("Localizable", "views.provider.vpn.refresh_infrastructure", fallback: "Refresh infrastructure")
+      /// Last updated on %@
+      public static func lastUpdated(_ p1: Any) -> String {
+        return Strings.tr("Localizable", "views.provider.last_updated", String(describing: p1), fallback: "Last updated on %@")
+      }
+      /// No provider
+      public static let noProvider = Strings.tr("Localizable", "views.provider.no_provider", fallback: "No provider")
+      /// Refresh infrastructure
+      public static let refreshInfrastructure = Strings.tr("Localizable", "views.provider.refresh_infrastructure", fallback: "Refresh infrastructure")
+      /// Select a provider
+      public static let selectProvider = Strings.tr("Localizable", "views.provider.select_provider", fallback: "Select a provider")
+      public enum LastUpdated {
+        /// Loading...
+        public static let loading = Strings.tr("Localizable", "views.provider.last_updated.loading", fallback: "Loading...")
       }
     }
     public enum Settings {
