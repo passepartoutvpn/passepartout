@@ -31,24 +31,22 @@ import SwiftUI
 
 extension VPNFiltersModifier {
     func contentView(with content: Content) -> some View {
-        List {
-            content
-        }
-        .toolbar {
-            Button {
-                isFiltersPresented = true
-            } label: {
-                Image(systemName: "line.3.horizontal.decrease")
+        content
+            .toolbar {
+                Button {
+                    isFiltersPresented = true
+                } label: {
+                    Image(systemName: "line.3.horizontal.decrease")
+                }
+                .themeModal(isPresented: $isFiltersPresented) {
+                    NavigationStack {
+                        VPNFiltersView<Configuration>(manager: manager)
+                            .navigationTitle("Filters")
+                            .navigationBarTitleDisplayMode(.inline)
+                    }
+                    .presentationDetents([.medium])
+                }
             }
-        }
-        .themeModal(isPresented: $isFiltersPresented) {
-            NavigationStack {
-                VPNFiltersView<Configuration>(manager: manager)
-                    .navigationTitle("Filters")
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .presentationDetents([.medium])
-        }
     }
 }
 

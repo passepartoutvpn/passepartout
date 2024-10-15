@@ -38,7 +38,7 @@ struct VPNFiltersModifier<Configuration>: ViewModifier where Configuration: Deco
         contentView(with: content)
             .onChange(of: manager.parameters.filters) { _ in
                 Task {
-                    await manager.applyFilters()
+                    manager.applyFilters()
                 }
             }
     }
