@@ -33,7 +33,6 @@ final class InteractiveManager: ObservableObject {
     @Published
     var isPresented = false
 
-    @Published
     private(set) var editor = ProfileEditor()
 
     private var onComplete: CompletionBlock?

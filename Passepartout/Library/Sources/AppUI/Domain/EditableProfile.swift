@@ -98,6 +98,7 @@ private extension EditableProfile {
         }
     }
 
+    // FIXME: ###, move to library
     func checkConstraints() throws {
         if activeConnectionModule == nil,
            let ipModule = modules.first(where: { activeModulesIds.contains($0.id) && $0 is IPModule.Builder }) {

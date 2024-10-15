@@ -254,7 +254,6 @@ extension ProfileManager {
         remoteRepository?
             .profilesPublisher
             .dropFirst()
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.importRemoteProfiles($0)
             }
