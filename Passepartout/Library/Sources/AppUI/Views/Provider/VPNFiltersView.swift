@@ -34,9 +34,6 @@ struct VPNFiltersView<Configuration>: View where Configuration: Decodable {
     @ObservedObject
     var manager: VPNProviderManager
 
-    @State
-    private var isRefreshing = false
-
     var body: some View {
         Form {
             Section {
@@ -96,7 +93,9 @@ private extension VPNFiltersView {
 
     var clearFiltersButton: some View {
         Button("Clear filters", role: .destructive) {
-            manager.resetFilters()
+            Task {
+                manager.resetFilters()
+            }
         }
     }
 }

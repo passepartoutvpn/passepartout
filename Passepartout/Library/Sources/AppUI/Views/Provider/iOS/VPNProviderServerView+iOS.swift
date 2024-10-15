@@ -33,9 +33,11 @@ extension VPNProviderServerView {
 
     @ViewBuilder
     var serversView: some View {
-        ForEach(manager.filteredServers) { server in
-            Button("\(server.hostname ?? server.id) \(server.provider.countryCodes)") {
-                selectServer(server)
+        List {
+            ForEach(manager.filteredServers, id: \.id) { server in
+                Button("\(server.hostname ?? server.id) \(server.provider.countryCodes)") {
+                    selectServer(server)
+                }
             }
         }
     }

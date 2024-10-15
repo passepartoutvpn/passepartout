@@ -84,18 +84,22 @@ private extension VPNProviderContentModifier {
         guard let providerId else {
             return
         }
+        let initialEntity = isInitial ? selectedEntity : nil
         if !isInitial {
             selectedEntity = nil
         }
-        vpnProviderManager.view = manager.vpnView(
+        let view = manager.vpnView(
             for: providerId,
             configurationType: OpenVPN.Configuration.self,
-            initialParameters: .init(sorting: [
-                .localizedCountry,
-                .area,
-                .hostname
-            ])
+            initialParameters: .init(
+                sorting: [
+                    .localizedCountry,
+                    .area,
+                    .hostname
+                ]
+            )
         )
+        vpnProviderManager.setView(view, filteringWith: initialEntity?.server.provider)
     }
 
     func onSelectServer(server: VPNServer, preset: VPNPreset<Configuration>) {
