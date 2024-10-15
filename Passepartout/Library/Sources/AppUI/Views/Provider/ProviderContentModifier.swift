@@ -87,7 +87,7 @@ private extension ProviderContentModifier {
                 }
             }
         }
-        .themeSection(footer: lastUpdatedString ?? " ") // retain footer height
+        .themeSection(footer: lastUpdatedString)
     }
 #else
     var providerView: some View {
