@@ -72,7 +72,7 @@ struct OpenVPNView: View {
     var body: some View {
         manualView
             .modifier(providerModifier)
-            .themeAnimation(on: editor.profile.modulesMetadata, category: .modules)
+            .themeAnimation(on: draft, category: .modules)
             .moduleView(editor: editor, draft: draft, withName: !isServerPushed)
             .navigationDestination(for: Subroute.self, destination: destination)
     }
