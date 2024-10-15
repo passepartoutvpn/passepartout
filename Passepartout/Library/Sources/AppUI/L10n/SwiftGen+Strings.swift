@@ -594,8 +594,8 @@ public enum Strings {
       public static func lastUpdated(_ p1: Any) -> String {
         return Strings.tr("Localizable", "views.provider.last_updated", String(describing: p1), fallback: "Last updated on %@")
       }
-      /// No provider
-      public static let noProvider = Strings.tr("Localizable", "views.provider.no_provider", fallback: "No provider")
+      /// None
+      public static let noProvider = Strings.tr("Localizable", "views.provider.no_provider", fallback: "None")
       /// Refresh infrastructure
       public static let refreshInfrastructure = Strings.tr("Localizable", "views.provider.refresh_infrastructure", fallback: "Refresh infrastructure")
       /// Select a provider

@@ -58,7 +58,7 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
             }
             .disabled(providerManager.isLoading)
 
-        if !isRequired {
+        if providerId == nil && !isRequired {
             content
         }
     }

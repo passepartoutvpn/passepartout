@@ -129,7 +129,7 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 
-"views.provider.no_provider" = "No provider";
+"views.provider.no_provider" = "None";
 "views.provider.select_provider" = "Select a provider";
 "views.provider.refresh_infrastructure" = "Refresh infrastructure";
 "views.provider.last_updated" = "Last updated on %@";
