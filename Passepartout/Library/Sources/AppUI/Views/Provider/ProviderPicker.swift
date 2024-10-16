@@ -26,6 +26,8 @@
 import PassepartoutKit
 import SwiftUI
 
+// FIXME: ###, providers UI, iPadOS (Simulator?) picker .navigationLink selection is blue (vs gray) and disclosed options are white
+
 struct ProviderPicker: View {
     let providers: [ProviderMetadata]
 

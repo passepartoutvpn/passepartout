@@ -27,6 +27,8 @@
 
 import SwiftUI
 
+// FIXME: ###, providers UI, iPadOS show filters in popover
+
 extension VPNFiltersModifier {
     func contentView(with content: Content) -> some View {
         content
