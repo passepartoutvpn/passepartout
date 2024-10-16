@@ -261,6 +261,8 @@ public enum Strings {
     public static let publicKey = Strings.tr("Localizable", "global.public_key", fallback: "Public key")
     /// Purchase
     public static let purchase = Strings.tr("Localizable", "global.purchase", fallback: "Purchase")
+    /// Region
+    public static let region = Strings.tr("Localizable", "global.region", fallback: "Region")
     /// Delete
     public static let remove = Strings.tr("Localizable", "global.remove", fallback: "Delete")
     /// Restart
@@ -606,6 +608,8 @@ public enum Strings {
       public static let noProvider = Strings.tr("Localizable", "views.provider.no_provider", fallback: "None")
       /// Select a provider
       public static let selectProvider = Strings.tr("Localizable", "views.provider.select_provider", fallback: "Select a provider")
+      /// Select
+      public static let selectServer = Strings.tr("Localizable", "views.provider.select_server", fallback: "Select")
       public enum Vpn {
         /// Last updated on %@
         public static func lastUpdated(_ p1: Any) -> String {
