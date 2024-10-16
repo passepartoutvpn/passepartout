@@ -38,12 +38,6 @@ extension AppError: LocalizedError {
         case .malformedModule(let module, let error):
             return V.malformedModule(module.typeDescription, error.localizedDescription)
 
-        case .ipModuleRequiresConnection:
-            return V.ipModuleRequiresConnection
-
-        case .multipleConnectionModules:
-            return V.multipleConnectionModules
-
         case .permissionDenied:
             return V.default
 
@@ -58,6 +52,15 @@ extension AppError: LocalizedError {
 extension PassepartoutError: LocalizedError {
     public var errorDescription: String? {
         switch code {
+        case .connectionModuleRequired:
+            return Strings.Errors.App.Passepartout.connectionModuleRequired
+
+        case .corruptProviderModule:
+            return Strings.Errors.App.Passepartout.corruptProviderModule(reason?.localizedDescription ?? "")
+
+        case .incompatibleModules:
+            return Strings.Errors.App.Passepartout.incompatibleModules
+
         case .invalidFields:
             guard let fields = userInfo as? [String: String?] else {
                 return nil
@@ -72,9 +75,6 @@ extension PassepartoutError: LocalizedError {
 
         case .parsing:
             return reason?.localizedDescription ?? Strings.Errors.App.Passepartout.parsing
-
-        case .corruptProviderModule:
-            return Strings.Errors.App.Passepartout.corruptProviderModule(reason?.localizedDescription ?? "")
 
         case .unhandled:
             return reason?.localizedDescription

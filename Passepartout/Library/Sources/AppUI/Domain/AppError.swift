@@ -31,10 +31,6 @@ enum AppError {
 
     case malformedModule(any ModuleBuilder, error: Error)
 
-    case multipleConnectionModules([any ModuleBuilder])
-
-    case ipModuleRequiresConnection(any ModuleBuilder)
-
     case permissionDenied
 
     case generic(PassepartoutError)

@@ -38,8 +38,6 @@ struct EditableProfile: MutableProfileType {
     var modulesMetadata: [UUID: ModuleMetadata]?
 
     func builder() throws -> Profile.Builder {
-        try checkConstraints()
-
         var builder = Profile.Builder(id: id)
         builder.modules = try modules.compactMap {
             do {
@@ -95,21 +93,6 @@ private extension EditableProfile {
     var activeConnectionModule: (any ModuleBuilder)? {
         modules.first {
             isActiveModule(withId: $0.id) && $0.buildsConnectionModule
-        }
-    }
-
-    // FIXME: ###, move to library
-    func checkConstraints() throws {
-        if activeConnectionModule == nil,
-           let ipModule = modules.first(where: { activeModulesIds.contains($0.id) && $0 is IPModule.Builder }) {
-            throw AppError.ipModuleRequiresConnection(ipModule)
-        }
-
-        let connectionModules = modules.filter {
-            activeModulesIds.contains($0.id) && $0.buildsConnectionModule
-        }
-        guard connectionModules.count <= 1 else {
-            throw AppError.multipleConnectionModules(connectionModules)
         }
     }
 }
