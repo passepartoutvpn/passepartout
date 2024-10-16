@@ -143,7 +143,10 @@ private extension AppInlineCoordinator {
     }
 
     func enterDetail(of profile: Profile) {
-        profileEditor.editProfile(profile, isShared: profileManager.isRemotelyShared(profileWithId: profile.id))
+        profileEditor.editProfile(
+            profile,
+            isShared: profileManager.isRemotelyShared(profileWithId: profile.id)
+        )
         push(.editProfile)
     }
 
