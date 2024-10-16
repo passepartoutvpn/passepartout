@@ -49,7 +49,8 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 extension VPNProviderServerView {
     func selectServer(_ server: VPNServer) {
         guard let preset = compatiblePreset(with: server) else {
-            // FIXME: #703, alert select a preset
+            pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.provider.supportedPresetIds ?? [])")
+            assertionFailure("No compatible presets for server \(server.serverId) (manager=\(manager.providerId), configuration=\(Configuration.providerConfigurationIdentifier), supported=\(server.provider.supportedPresetIds ?? []))")
             return
         }
         onSelect(server, preset)
