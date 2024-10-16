@@ -41,15 +41,29 @@ struct ProfileSaveButton: View {
                     try await action()
                     errorModuleIds = []
                 } catch {
-                    switch error as? AppError {
+                    switch AppError(error) {
                     case .malformedModule(let module, _):
                         errorModuleIds = [module.id]
 
-                    case .multipleConnectionModules(let modules):
-                        errorModuleIds = modules.map(\.id)
+                    case .generic(let ppError):
+                        switch ppError.code {
+                        case .connectionModuleRequired:
+                            guard let module = ppError.userInfo as? Module else {
+                                errorModuleIds = []
+                                return
+                            }
+                            errorModuleIds = [module.id]
 
-                    case .ipModuleRequiresConnection(let module):
-                        errorModuleIds = [module.id]
+                        case .incompatibleModules:
+                            guard let modules = ppError.userInfo as? [Module] else {
+                                errorModuleIds = []
+                                return
+                            }
+                            errorModuleIds = modules.map(\.id)
+
+                        default:
+                            errorModuleIds = []
+                        }
 
                     default:
                         errorModuleIds = []

@@ -104,15 +104,13 @@ public enum Strings {
       public static let `default` = Strings.tr("Localizable", "errors.app.default", fallback: "Unable to complete operation.")
       /// Profile name is empty.
       public static let emptyProfileName = Strings.tr("Localizable", "errors.app.empty_profile_name", fallback: "Profile name is empty.")
-      /// IP module can only be enabled together with a connection.
-      public static let ipModuleRequiresConnection = Strings.tr("Localizable", "errors.app.ip_module_requires_connection", fallback: "IP module can only be enabled together with a connection.")
       /// Module %@ is malformed. %@
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
       }
-      /// Only one connection module can be active at a time.
-      public static let multipleConnectionModules = Strings.tr("Localizable", "errors.app.multiple_connection_modules", fallback: "Only one connection module can be active at a time.")
       public enum Passepartout {
+        /// Routing module can only be enabled together with a connection.
+        public static let connectionModuleRequired = Strings.tr("Localizable", "errors.app.passepartout.connection_module_required", fallback: "Routing module can only be enabled together with a connection.")
         /// Unable to connect to provider server (reason=%@).
         public static func corruptProviderModule(_ p1: Any) -> String {
           return Strings.tr("Localizable", "errors.app.passepartout.corrupt_provider_module", String(describing: p1), fallback: "Unable to connect to provider server (reason=%@).")
@@ -121,6 +119,8 @@ public enum Strings {
         public static func `default`(_ p1: Any) -> String {
           return Strings.tr("Localizable", "errors.app.passepartout.default", String(describing: p1), fallback: "Unable to complete operation (code=%@).")
         }
+        /// Some active modules are incompatible, try to only activate one of them.
+        public static let incompatibleModules = Strings.tr("Localizable", "errors.app.passepartout.incompatible_modules", fallback: "Some active modules are incompatible, try to only activate one of them.")
         /// Invalid fields (%@).
         public static func invalidFields(_ p1: Any) -> String {
           return Strings.tr("Localizable", "errors.app.passepartout.invalid_fields", String(describing: p1), fallback: "Invalid fields (%@).")
