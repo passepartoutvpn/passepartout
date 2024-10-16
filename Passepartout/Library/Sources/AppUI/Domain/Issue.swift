@@ -81,7 +81,7 @@ struct Issue: Identifiable {
             .replacingOccurrences(of: "$appLine", with: appLine ?? "unknown")
             .replacingOccurrences(of: "$osLine", with: osLine)
             .replacingOccurrences(of: "$deviceLine", with: deviceLine ?? "unknown")
-            // FIXME: #703, report provider in issue
+            // FIXME: #710, report provider in issue
             .replacingOccurrences(of: "$providerName", with: "none")
             .replacingOccurrences(of: "$providerLastUpdate", with: "unknown")
             .replacingOccurrences(of: "$purchasedProducts", with: purchasedProducts.map(\.rawValue).description)

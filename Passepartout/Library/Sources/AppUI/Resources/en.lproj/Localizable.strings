@@ -246,6 +246,7 @@
 "errors.app.default" = "Unable to complete operation.";
 "errors.app.passepartout.invalid_fields" = "Invalid fields (%@).";
 "errors.app.passepartout.parsing" = "Unable to parse file.";
+"errors.app.passepartout.corrupt_provider_module" = "Unable to connect to provider server (reason=%@).";
 "errors.app.passepartout.default" = "Unable to complete operation (code=%@).";
 
 "errors.tunnel.auth" = "Auth failed";

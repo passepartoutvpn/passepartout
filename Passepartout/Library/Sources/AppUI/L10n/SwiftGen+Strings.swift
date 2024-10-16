@@ -113,6 +113,10 @@ public enum Strings {
       /// Only one connection module can be active at a time.
       public static let multipleConnectionModules = Strings.tr("Localizable", "errors.app.multiple_connection_modules", fallback: "Only one connection module can be active at a time.")
       public enum Passepartout {
+        /// Unable to connect to provider server (reason=%@).
+        public static func corruptProviderModule(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "errors.app.passepartout.corrupt_provider_module", String(describing: p1), fallback: "Unable to connect to provider server (reason=%@).")
+        }
         /// Unable to complete operation (code=%@).
         public static func `default`(_ p1: Any) -> String {
           return Strings.tr("Localizable", "errors.app.passepartout.default", String(describing: p1), fallback: "Unable to complete operation (code=%@).")
