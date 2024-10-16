@@ -27,8 +27,6 @@ import AppLibrary
 import PassepartoutKit
 import SwiftUI
 
-// FIXME: #703, providers UI
-
 struct VPNFiltersView<Configuration>: View where Configuration: Decodable {
 
     @ObservedObject
@@ -56,8 +54,8 @@ struct VPNFiltersView<Configuration>: View where Configuration: Decodable {
 
 private extension VPNFiltersView {
     var categoryPicker: some View {
-        Picker("Category", selection: $manager.parameters.filters.categoryName) {
-            Text("Any")
+        Picker(Strings.Global.category, selection: $manager.parameters.filters.categoryName) {
+            Text(Strings.Global.any)
                 .tag(nil as String?)
             ForEach(categories, id: \.self) {
                 Text($0.capitalized)
@@ -67,8 +65,8 @@ private extension VPNFiltersView {
     }
 
     var countryPicker: some View {
-        Picker("Country", selection: $manager.parameters.filters.countryCode) {
-            Text("Any")
+        Picker(Strings.Global.country, selection: $manager.parameters.filters.countryCode) {
+            Text(Strings.Global.any)
                 .tag(nil as String?)
             ForEach(countries, id: \.code) {
                 Text($0.description)
@@ -80,8 +78,8 @@ private extension VPNFiltersView {
     @ViewBuilder
     var presetPicker: some View {
         if manager.allPresets.count > 1 {
-            Picker("Preset", selection: $manager.parameters.filters.presetId) {
-                Text("Any")
+            Picker(Strings.Views.Provider.Vpn.preset, selection: $manager.parameters.filters.presetId) {
+                Text(Strings.Global.any)
                     .tag(nil as String?)
                 ForEach(presets, id: \.presetId) {
                     Text($0.description)
@@ -92,7 +90,7 @@ private extension VPNFiltersView {
     }
 
     var clearFiltersButton: some View {
-        Button("Clear filters", role: .destructive) {
+        Button(Strings.Views.Provider.clearFilters, role: .destructive) {
             Task {
                 manager.resetFilters()
             }

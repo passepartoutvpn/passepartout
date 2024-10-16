@@ -78,7 +78,7 @@ private extension ProviderContentModifier {
                 providerRows
                 refreshButton {
                     HStack {
-                        Text(Strings.Views.Provider.refreshInfrastructure)
+                        Text(Strings.Views.Provider.Vpn.refreshInfrastructure)
                         if providerManager.isLoading {
                             Spacer()
                             ProgressView()
@@ -141,9 +141,9 @@ private extension ProviderContentModifier {
 
     var lastUpdatedString: String? {
         guard let lastUpdated else {
-            return providerManager.isLoading ? Strings.Views.Provider.LastUpdated.loading : nil
+            return providerManager.isLoading ? Strings.Views.Provider.Vpn.LastUpdated.loading : nil
         }
-        return Strings.Views.Provider.lastUpdated(lastUpdated.timestamp)
+        return Strings.Views.Provider.Vpn.lastUpdated(lastUpdated.timestamp)
     }
 }
 
