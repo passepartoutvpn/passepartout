@@ -102,7 +102,7 @@ private extension ProviderContentModifier {
                     }
                     Spacer()
                     refreshButton {
-                        Text(Strings.Views.Provider.refreshInfrastructure)
+                        Text(Strings.Views.Provider.Vpn.refreshInfrastructure)
                     }
                 }
             }
