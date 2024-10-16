@@ -55,7 +55,7 @@ struct AppModalCoordinator: View {
             contentView
                 .toolbar(content: toolbarContent)
         }
-        .themeModal(item: $modalRoute, isRoot: true, content: modalDestination)
+        .themeModal(item: $modalRoute, isRoot: true, isInteractive: false, content: modalDestination)
     }
 }
 
