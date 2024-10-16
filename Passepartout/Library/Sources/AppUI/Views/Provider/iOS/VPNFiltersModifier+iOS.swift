@@ -27,24 +27,24 @@
 
 import SwiftUI
 
-// FIXME: #703, providers UI
-
 extension VPNFiltersModifier {
     func contentView(with content: Content) -> some View {
         content
             .toolbar {
-                Button {
-                    isFiltersPresented = true
-                } label: {
-                    Image(systemName: "line.3.horizontal.decrease")
-                }
-                .themeModal(isPresented: $isFiltersPresented) {
-                    NavigationStack {
-                        VPNFiltersView<Configuration>(manager: manager)
-                            .navigationTitle("Filters")
-                            .navigationBarTitleDisplayMode(.inline)
+                ToolbarItem(placement: .bottomBar) {
+                    Button {
+                        isFiltersPresented = true
+                    } label: {
+                        ThemeImage(.filters)
                     }
-                    .presentationDetents([.medium])
+                    .themeModal(isPresented: $isFiltersPresented) {
+                        NavigationStack {
+                            VPNFiltersView<Configuration>(manager: manager)
+                                .navigationTitle(Strings.Global.filters)
+                                .navigationBarTitleDisplayMode(.inline)
+                        }
+                        .presentationDetents([.medium])
+                    }
                 }
             }
     }

@@ -87,6 +87,7 @@ public final class Theme: ObservableObject {
         case .disclose: return "chevron.down"
         case .editableSectionEdit: return "arrow.up.arrow.down"
         case .editableSectionRemove: return "trash"
+        case .filters: return "line.3.horizontal.decrease"
         case .footerAdd: return "plus.circle"
         case .hide: return "eye.slash"
         case .info: return "info.circle"

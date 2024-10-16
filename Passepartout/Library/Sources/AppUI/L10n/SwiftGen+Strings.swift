@@ -203,6 +203,8 @@ public enum Strings {
     public static let enabled = Strings.tr("Localizable", "global.enabled", fallback: "Enabled")
     /// Endpoint
     public static let endpoint = Strings.tr("Localizable", "global.endpoint", fallback: "Endpoint")
+    /// Filters
+    public static let filters = Strings.tr("Localizable", "global.filters", fallback: "Filters")
     /// Folder
     public static let folder = Strings.tr("Localizable", "global.folder", fallback: "Folder")
     /// Gateway

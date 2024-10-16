@@ -26,6 +26,7 @@
 "global.enable" = "Enable";
 "global.enabled" = "Enabled";
 "global.endpoint" = "Endpoint";
+"global.filters" = "Filters";
 "global.folder" = "Folder";
 "global.gateway" = "Gateway";
 "global.general" = "General";
