@@ -141,7 +141,6 @@ extension ProfileProcessor {
             _ = try profile.withProviderModules()
             return profile
         } catch {
-            // FIXME: #703, alert unable to build provider server
             pp_log(.app, .error, "Unable to inject provider modules: \(error)")
             throw error
         }

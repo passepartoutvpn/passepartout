@@ -27,25 +27,25 @@
 
 import SwiftUI
 
-// FIXME: #703, providers UI
+// FIXME: ###, providers UI, macOS country flags
 
 extension VPNProviderServerView {
 
     @ViewBuilder
     var serversView: some View {
         Table(manager.filteredServers) {
-            TableColumn("Region") { server in
+            TableColumn(Strings.Global.region) { server in
                 Text(server.region)
             }
             .width(max: 200.0)
 
-            TableColumn("Address", value: \.address)
+            TableColumn(Strings.Global.address, value: \.address)
 
             TableColumn("") { server in
                 Button {
                     selectServer(server)
                 } label: {
-                    Text("Select")
+                    Text(Strings.Views.Provider.selectServer)
                 }
             }
             .width(min: 100.0, max: 100.0)

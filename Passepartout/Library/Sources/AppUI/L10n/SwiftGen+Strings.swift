@@ -113,6 +113,10 @@ public enum Strings {
       /// Only one connection module can be active at a time.
       public static let multipleConnectionModules = Strings.tr("Localizable", "errors.app.multiple_connection_modules", fallback: "Only one connection module can be active at a time.")
       public enum Passepartout {
+        /// Unable to connect to provider server (reason=%@).
+        public static func corruptProviderModule(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "errors.app.passepartout.corrupt_provider_module", String(describing: p1), fallback: "Unable to connect to provider server (reason=%@).")
+        }
         /// Unable to complete operation (code=%@).
         public static func `default`(_ p1: Any) -> String {
           return Strings.tr("Localizable", "errors.app.passepartout.default", String(describing: p1), fallback: "Unable to complete operation (code=%@).")
@@ -159,6 +163,8 @@ public enum Strings {
     public static let any = Strings.tr("Localizable", "global.any", fallback: "Any")
     /// Cancel
     public static let cancel = Strings.tr("Localizable", "global.cancel", fallback: "Cancel")
+    /// Category
+    public static let category = Strings.tr("Localizable", "global.category", fallback: "Category")
     /// Certificate
     public static let certificate = Strings.tr("Localizable", "global.certificate", fallback: "Certificate")
     /// Compression
@@ -167,6 +173,8 @@ public enum Strings {
     public static let connect = Strings.tr("Localizable", "global.connect", fallback: "Connect")
     /// Connection
     public static let connection = Strings.tr("Localizable", "global.connection", fallback: "Connection")
+    /// Country
+    public static let country = Strings.tr("Localizable", "global.country", fallback: "Country")
     /// Default
     public static let `default` = Strings.tr("Localizable", "global.default", fallback: "Default")
     /// Destination
@@ -195,6 +203,8 @@ public enum Strings {
     public static let enabled = Strings.tr("Localizable", "global.enabled", fallback: "Enabled")
     /// Endpoint
     public static let endpoint = Strings.tr("Localizable", "global.endpoint", fallback: "Endpoint")
+    /// Filters
+    public static let filters = Strings.tr("Localizable", "global.filters", fallback: "Filters")
     /// Folder
     public static let folder = Strings.tr("Localizable", "global.folder", fallback: "Folder")
     /// Gateway
@@ -251,6 +261,8 @@ public enum Strings {
     public static let publicKey = Strings.tr("Localizable", "global.public_key", fallback: "Public key")
     /// Purchase
     public static let purchase = Strings.tr("Localizable", "global.purchase", fallback: "Purchase")
+    /// Region
+    public static let region = Strings.tr("Localizable", "global.region", fallback: "Region")
     /// Delete
     public static let remove = Strings.tr("Localizable", "global.remove", fallback: "Delete")
     /// Restart
@@ -590,19 +602,27 @@ public enum Strings {
       }
     }
     public enum Provider {
-      /// Last updated on %@
-      public static func lastUpdated(_ p1: Any) -> String {
-        return Strings.tr("Localizable", "views.provider.last_updated", String(describing: p1), fallback: "Last updated on %@")
-      }
+      /// Clear filters
+      public static let clearFilters = Strings.tr("Localizable", "views.provider.clear_filters", fallback: "Clear filters")
       /// None
       public static let noProvider = Strings.tr("Localizable", "views.provider.no_provider", fallback: "None")
-      /// Refresh infrastructure
-      public static let refreshInfrastructure = Strings.tr("Localizable", "views.provider.refresh_infrastructure", fallback: "Refresh infrastructure")
       /// Select a provider
       public static let selectProvider = Strings.tr("Localizable", "views.provider.select_provider", fallback: "Select a provider")
-      public enum LastUpdated {
-        /// Loading...
-        public static let loading = Strings.tr("Localizable", "views.provider.last_updated.loading", fallback: "Loading...")
+      /// Select
+      public static let selectServer = Strings.tr("Localizable", "views.provider.select_server", fallback: "Select")
+      public enum Vpn {
+        /// Last updated on %@
+        public static func lastUpdated(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "views.provider.vpn.last_updated", String(describing: p1), fallback: "Last updated on %@")
+        }
+        /// Preset
+        public static let preset = Strings.tr("Localizable", "views.provider.vpn.preset", fallback: "Preset")
+        /// Refresh infrastructure
+        public static let refreshInfrastructure = Strings.tr("Localizable", "views.provider.vpn.refresh_infrastructure", fallback: "Refresh infrastructure")
+        public enum LastUpdated {
+          /// Loading...
+          public static let loading = Strings.tr("Localizable", "views.provider.vpn.last_updated.loading", fallback: "Loading...")
+        }
       }
     }
     public enum Settings {

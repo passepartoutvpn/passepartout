@@ -73,6 +73,9 @@ extension PassepartoutError: LocalizedError {
         case .parsing:
             return reason?.localizedDescription ?? Strings.Errors.App.Passepartout.parsing
 
+        case .corruptProviderModule:
+            return Strings.Errors.App.Passepartout.corruptProviderModule(reason?.localizedDescription ?? "")
+
         case .unhandled:
             return reason?.localizedDescription
 
