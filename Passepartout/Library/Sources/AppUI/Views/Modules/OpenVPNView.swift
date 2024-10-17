@@ -96,14 +96,21 @@ private extension OpenVPNView {
 
     var providerModifier: some ViewModifier {
         VPNProviderContentModifier(
-            providerId: editor.binding(forProviderOf: draft.id),
-            selectedEntity: editor.binding(forProviderEntityOf: draft.id),
-            configurationType: OpenVPN.Configuration.self,
+            providerId: providerId,
+            selectedEntity: providerEntity,
             isRequired: draft.configurationBuilder == nil,
             providerRows: {
                 moduleGroup(for: providerAccountRows)
             }
         )
+    }
+
+    var providerId: Binding<ProviderID?> {
+        editor.binding(forProviderOf: draft.id)
+    }
+
+    var providerEntity: Binding<VPNEntity<OpenVPN.Configuration>?> {
+        editor.binding(forProviderEntityOf: draft.id)
     }
 
     var providerAccountRows: [ModuleRow]? {
