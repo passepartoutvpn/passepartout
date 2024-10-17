@@ -28,13 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-extension DNSModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        DNSView(editor: editor, module: self)
-    }
-}
-
-private struct DNSView: View {
+struct DNSView: View {
 
     @EnvironmentObject
     private var theme: Theme

@@ -27,12 +27,6 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-extension IPModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        IPView(editor: editor, module: self)
-    }
-}
-
 struct IPView: View {
 
     @ObservedObject
