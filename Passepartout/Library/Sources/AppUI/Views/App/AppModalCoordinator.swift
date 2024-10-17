@@ -81,12 +81,14 @@ extension AppModalCoordinator {
             tunnel: tunnel,
             registry: registry,
             isImporting: $isImporting,
-            onEdit: {
-                guard let profile = profileManager.profile(withId: $0.id) else {
-                    return
+            flow: .init(
+                onEditProfile: {
+                    guard let profile = profileManager.profile(withId: $0.id) else {
+                        return
+                    }
+                    enterDetail(of: profile)
                 }
-                enterDetail(of: profile)
-            }
+            )
         )
     }
 

@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileGridView: View, TunnelInstallationProviding {
+struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 
     @Environment(\.isSearching)
     private var isSearching
@@ -43,7 +43,7 @@ struct ProfileGridView: View, TunnelInstallationProviding {
 
     let errorHandler: ErrorHandler
 
-    let onEdit: (ProfileHeader) -> Void
+    var flow: ProfileContainerView.Flow?
 
     @State
     private var nextProfileId: Profile.ID?
@@ -94,9 +94,7 @@ private extension ProfileGridView {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
-            flow: .init(
-                onEditProfile: onEdit
-            )
+            flow: flow
         )
         .contextMenu {
             currentProfile.map {
@@ -107,7 +105,9 @@ private extension ProfileGridView {
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     isInstalledProfile: true,
-                    onEdit: onEdit
+                    onEdit: {
+                        flow?.onEditProfile($0)
+                    }
                 )
             }
         }
@@ -123,7 +123,9 @@ private extension ProfileGridView {
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
             withMarker: true,
-            onEdit: onEdit
+            onEdit: {
+                flow?.onEditProfile($0)
+            }
         )
         .themeGridCell(isSelected: header.id == nextProfileId ?? tunnel.currentProfile?.id)
         .contextMenu {
@@ -134,7 +136,9 @@ private extension ProfileGridView {
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 isInstalledProfile: false,
-                onEdit: onEdit
+                onEdit: {
+                    flow?.onEditProfile($0)
+                }
             )
         }
         .id(header.id)
@@ -148,8 +152,7 @@ private extension ProfileGridView {
         profileManager: .mock,
         tunnel: .mock,
         interactiveManager: InteractiveManager(),
-        errorHandler: .default(),
-        onEdit: { _ in }
+        errorHandler: .default()
     )
     .themeWindow(width: 600, height: 300)
     .withMockEnvironment()

@@ -33,10 +33,6 @@ struct InstalledProfileView: View, Routable {
     @EnvironmentObject
     var theme: Theme
 
-    struct Flow {
-        let onEditProfile: (ProfileHeader) -> Void
-    }
-
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
@@ -52,7 +48,7 @@ struct InstalledProfileView: View, Routable {
     @Binding
     var nextProfileId: Profile.ID?
 
-    var flow: Flow?
+    var flow: ProfileContainerView.Flow?
 
     var body: some View {
         debugChanges()

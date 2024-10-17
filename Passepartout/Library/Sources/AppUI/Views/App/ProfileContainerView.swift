@@ -28,7 +28,11 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileContainerView: View, TunnelInstallationProviding {
+struct ProfileContainerView: View, Routable, TunnelInstallationProviding {
+    struct Flow {
+        let onEditProfile: (ProfileHeader) -> Void
+    }
+
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
@@ -40,7 +44,7 @@ struct ProfileContainerView: View, TunnelInstallationProviding {
     @Binding
     var isImporting: Bool
 
-    let onEdit: (ProfileHeader) -> Void
+    var flow: Flow?
 
     @StateObject
     private var interactiveManager = InteractiveManager()
@@ -77,7 +81,7 @@ private extension ProfileContainerView {
                 tunnel: tunnel,
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
-                onEdit: onEdit
+                flow: flow
             )
 
         case .grid:
@@ -86,7 +90,7 @@ private extension ProfileContainerView {
                 tunnel: tunnel,
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
-                onEdit: onEdit
+                flow: flow
             )
         }
     }
@@ -149,8 +153,7 @@ private struct PreviewView: View {
                 profileManager: .mock,
                 tunnel: .mock,
                 registry: Registry(),
-                isImporting: .constant(false),
-                onEdit: { _ in }
+                isImporting: .constant(false)
             )
         }
         .withMockEnvironment()
