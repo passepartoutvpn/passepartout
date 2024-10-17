@@ -86,17 +86,11 @@ private extension InstalledProfileView {
     }
 
     var actionableNameView: some View {
-        Menu(content: menuContent) {
-            HStack(alignment: .firstTextBaseline) {
-                nameView
-                ThemeImage(.disclose)
-            }
-            .contentShape(.rect)
+        ThemeDisclosableMenu {
+            nameView
+        } menu: {
+            menuContent
         }
-        .foregroundStyle(.primary)
-#if os(macOS)
-        .buttonStyle(.plain)
-#endif
     }
 
     var nameView: some View {
@@ -129,7 +123,7 @@ private extension InstalledProfileView {
         .opacity(installedOpacity)
     }
 
-    func menuContent() -> some View {
+    var menuContent: some View {
         ProfileContextMenu(
             profileManager: profileManager,
             tunnel: tunnel,

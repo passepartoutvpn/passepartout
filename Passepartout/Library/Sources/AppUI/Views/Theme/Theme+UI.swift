@@ -400,6 +400,29 @@ struct ThemeImageLabel: View {
     }
 }
 
+struct ThemeDisclosableMenu<NameContent, MenuContent>: View where NameContent: View, MenuContent: View {
+
+    @ViewBuilder
+    let name: NameContent
+
+    @ViewBuilder
+    let menu: () -> MenuContent
+
+    var body: some View {
+        Menu(content: menu) {
+            HStack(alignment: .firstTextBaseline) {
+                name
+                ThemeImage(.disclose)
+            }
+            .contentShape(.rect)
+        }
+        .foregroundStyle(.primary)
+#if os(macOS)
+        .buttonStyle(.plain)
+#endif
+    }
+}
+
 struct ThemeCopiableText<Value, ValueView>: View where Value: CustomStringConvertible, ValueView: View {
 
     @EnvironmentObject
