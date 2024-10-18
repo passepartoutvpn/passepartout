@@ -146,7 +146,7 @@ extension OnDemandModule.Policy: LocalizableEntity {
 
 extension VPNServer {
     public var region: String {
-        [provider.countryCodes.first?.localizedAsRegionCode, provider.area]
+        [provider.countryCode.localizedAsRegionCode, provider.area]
             .compactMap { $0 }
             .joined(separator: " - ")
     }

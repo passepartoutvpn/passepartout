@@ -28,7 +28,10 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
+@MainActor
 struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier where Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
+
+    var apis: [APIMapper] = API.shared
 
     @Binding
     var providerId: ProviderID?
@@ -43,12 +46,11 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
     @ViewBuilder
     let providerRows: ProviderRows
 
-    @StateObject
-    private var vpnProviderManager = VPNProviderManager()
-
     func body(content: Content) -> some View {
-        content
+        debugChanges()
+        return content
             .modifier(ProviderContentModifier(
+                apis: apis,
                 providerId: $providerId,
                 entityType: VPNEntity<Configuration>.self,
                 isRequired: isRequired,
@@ -64,10 +66,15 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
 private extension VPNProviderContentModifier {
     var providerServerRow: some View {
         NavigationLink {
-            VPNProviderServerView<Configuration>(
-                manager: vpnProviderManager,
-                onSelect: onSelectServer
-            )
+            providerId.map {
+                VPNProviderServerView<Configuration>(
+                    apis: apis,
+                    providerId: $0,
+                    configurationType: Configuration.self,
+                    selectedEntity: selectedEntity,
+                    onSelect: onSelectServer
+                )
+            }
         } label: {
             HStack {
                 Text(Strings.Global.server)
@@ -79,27 +86,13 @@ private extension VPNProviderContentModifier {
             }
         }
     }
+}
 
+private extension VPNProviderContentModifier {
     func onSelectProvider(manager: ProviderManager, providerId: ProviderID?, isInitial: Bool) {
-        guard let providerId else {
-            return
-        }
-        let initialEntity = isInitial ? selectedEntity : nil
         if !isInitial {
             selectedEntity = nil
         }
-        let view = manager.vpnView(
-            for: providerId,
-            configurationType: OpenVPN.Configuration.self,
-            initialParameters: .init(
-                sorting: [
-                    .localizedCountry,
-                    .area,
-                    .hostname
-                ]
-            )
-        )
-        vpnProviderManager.setView(view, filteringWith: initialEntity?.server.provider)
     }
 
     func onSelectServer(server: VPNServer, preset: VPNPreset<Configuration>) {

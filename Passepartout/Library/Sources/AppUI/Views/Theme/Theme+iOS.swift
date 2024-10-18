@@ -31,6 +31,7 @@ extension Theme {
     public convenience init() {
         self.init(dummy: ())
         animationCategories = [.diagnostics, .modules, .profiles, .providers]
+        popoverSize = .init(width: 400.0, height: 400.0)
     }
 }
 

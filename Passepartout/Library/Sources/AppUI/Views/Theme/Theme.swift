@@ -40,6 +40,8 @@ public final class Theme: ObservableObject {
 
     var secondaryModalSize: CGSize?
 
+    var popoverSize: CGSize?
+
     var relevantWeight: Font.Weight = .semibold
 
     var titleColor: Color = .primary
@@ -160,6 +162,16 @@ extension View {
             isRoot: isRoot,
             isInteractive: isInteractive,
             modal: content
+        ))
+    }
+
+    public func themePopover<Content>(
+        isPresented: Binding<Bool>,
+        content: @escaping () -> Content
+    ) -> some View where Content: View {
+        modifier(ThemeBooleanPopoverModifier(
+            isPresented: isPresented,
+            popover: content
         ))
     }
 

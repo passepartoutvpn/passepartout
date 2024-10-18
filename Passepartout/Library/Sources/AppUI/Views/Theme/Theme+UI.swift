@@ -102,6 +102,27 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
     }
 }
 
+struct ThemeBooleanPopoverModifier<Popover>: ViewModifier where Popover: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
+    @Binding
+    var isPresented: Bool
+
+    @ViewBuilder
+    let popover: Popover
+
+    func body(content: Content) -> some View {
+        content
+            .popover(isPresented: $isPresented) {
+                popover
+                    .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
+                    .themeLockScreen()
+            }
+    }
+}
+
 struct ThemeConfirmationModifier: ViewModifier {
 
     @Binding

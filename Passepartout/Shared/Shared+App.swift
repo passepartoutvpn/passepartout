@@ -209,8 +209,7 @@ private extension ProfileManager {
 // FIXME: #705, store providers to Core Data
 extension ProviderManager {
     static let shared = ProviderManager(
-        repository: InMemoryProviderRepository(),
-        vpnRepository: InMemoryVPNProviderRepository()
+        repository: InMemoryProviderRepository()
     )
 }
 
