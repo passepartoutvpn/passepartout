@@ -25,14 +25,33 @@
 
 #if os(macOS)
 
+import PassepartoutKit
 import SwiftUI
 
 // FIXME: ###, providers UI, macOS country flags
 
 extension VPNProviderServerView {
+    struct Subview: View {
 
-    @ViewBuilder
-    var serversView: some View {
+        @ObservedObject
+        var manager: VPNProviderManager<Configuration>
+
+        @Binding
+        var filters: VPNFilters
+
+        let onSelect: (VPNServer) -> Void
+
+        var body: some View {
+            VStack {
+                filtersView
+                tableView
+            }
+        }
+    }
+}
+
+private extension VPNProviderServerView.Subview {
+    var tableView: some View {
         Table(manager.filteredServers) {
             TableColumn(Strings.Global.region) { server in
                 Text(server.region)
@@ -43,13 +62,22 @@ extension VPNProviderServerView {
 
             TableColumn("") { server in
                 Button {
-                    selectServer(server)
+                    onSelect(server)
                 } label: {
                     Text(Strings.Views.Provider.selectServer)
                 }
             }
             .width(min: 100.0, max: 100.0)
         }
+        .disabled(manager.isFiltering)
+    }
+
+    var filtersView: some View {
+        VPNFiltersView(
+            manager: manager,
+            filters: $filters
+        )
+        .padding()
     }
 }
 

@@ -27,95 +27,36 @@ import AppLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct VPNFiltersView<Configuration>: View where Configuration: Decodable {
+struct VPNFiltersView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Decodable {
 
     @ObservedObject
-    var manager: VPNProviderManager
+    var manager: VPNProviderManager<Configuration>
+
+    @Binding
+    var filters: VPNFilters
 
     var body: some View {
-        Form {
-            Section {
-                categoryPicker
-                countryPicker
-                presetPicker
-#if os(iOS)
-                clearFiltersButton
-                    .frame(maxWidth: .infinity, alignment: .center)
-#else
-                HStack {
-                    Spacer()
-                    clearFiltersButton
-                }
-#endif
-            }
-        }
-    }
-}
-
-private extension VPNFiltersView {
-    var categoryPicker: some View {
-        Picker(Strings.Global.category, selection: $manager.parameters.filters.categoryName) {
-            Text(Strings.Global.any)
-                .tag(nil as String?)
-            ForEach(categories, id: \.self) {
-                Text($0.capitalized)
-                    .tag($0 as String?)
-            }
-        }
-    }
-
-    var countryPicker: some View {
-        Picker(Strings.Global.country, selection: $manager.parameters.filters.countryCode) {
-            Text(Strings.Global.any)
-                .tag(nil as String?)
-            ForEach(countries, id: \.code) {
-                Text($0.description)
-                    .tag($0.code as String?)
-            }
-        }
-    }
-
-    @ViewBuilder
-    var presetPicker: some View {
-        if manager.allPresets.count > 1 {
-            Picker(Strings.Views.Provider.Vpn.preset, selection: $manager.parameters.filters.presetId) {
-                Text(Strings.Global.any)
-                    .tag(nil as String?)
-                ForEach(presets, id: \.presetId) {
-                    Text($0.description)
-                        .tag($0.presetId as String?)
-                }
-            }
-        }
-    }
-
-    var clearFiltersButton: some View {
-        Button(Strings.Views.Provider.clearFilters, role: .destructive) {
-            Task {
-                manager.resetFilters()
-            }
-        }
+        debugChanges()
+        return Subview(
+            filters: $filters,
+            categories: categories,
+            countries: countries,
+            presets: presets
+        )
+        .onChange(of: filters, perform: manager.applyFilters)
     }
 }
 
 private extension VPNFiltersView {
     var categories: [String] {
-        let allCategories = manager
-            .allServers
-            .values
-            .map(\.provider.categoryName)
-
-        return Set(allCategories)
+        manager
+            .allCategoryNames
             .sorted()
     }
 
     var countries: [(code: String, description: String)] {
-        let allCodes = manager
-            .allServers
-            .values
-            .flatMap(\.provider.countryCodes)
-
-        return Set(allCodes)
+        manager
+            .allCountryCodes
             .map {
                 (code: $0, description: $0.localizedAsRegionCode ?? $0)
             }
@@ -126,15 +67,95 @@ private extension VPNFiltersView {
 
     var presets: [VPNPreset<Configuration>] {
         manager
-            .presets(ofType: Configuration.self)
+            .presets
             .sorted {
                 $0.description < $1.description
             }
     }
 }
 
+// MARK: -
+
+private extension VPNFiltersView {
+    struct Subview: View {
+
+        @Binding
+        var filters: VPNFilters
+
+        let categories: [String]
+
+        let countries: [(code: String, description: String)]
+
+        let presets: [VPNPreset<Configuration>]
+
+        var body: some View {
+            debugChanges()
+            return Form {
+                Section {
+                    categoryPicker
+                    countryPicker
+                    presetPicker
+#if os(iOS)
+                    clearFiltersButton
+                        .frame(maxWidth: .infinity, alignment: .center)
+#else
+                    HStack {
+                        Spacer()
+                        clearFiltersButton
+                    }
+#endif
+                }
+            }
+        }
+    }
+}
+
+private extension VPNFiltersView.Subview {
+    var categoryPicker: some View {
+        Picker(Strings.Global.category, selection: $filters.categoryName) {
+            Text(Strings.Global.any)
+                .tag(nil as String?)
+            ForEach(categories, id: \.self) {
+                Text($0.capitalized)
+                    .tag($0 as String?)
+            }
+        }
+    }
+
+    var countryPicker: some View {
+        Picker(Strings.Global.country, selection: $filters.countryCode) {
+            Text(Strings.Global.any)
+                .tag(nil as String?)
+            ForEach(countries, id: \.code) {
+                Text($0.description)
+                    .tag($0.code as String?)
+            }
+        }
+    }
+
+    var presetPicker: some View {
+        Picker(Strings.Views.Provider.Vpn.preset, selection: $filters.presetId) {
+            Text(Strings.Global.any)
+                .tag(nil as String?)
+            ForEach(presets, id: \.presetId) {
+                Text($0.description)
+                    .tag($0.presetId as String?)
+            }
+        }
+    }
+
+    var clearFiltersButton: some View {
+        Button(Strings.Views.Provider.clearFilters, role: .destructive) {
+            filters = VPNFilters()
+        }
+    }
+}
+
 #Preview {
     NavigationStack {
-        VPNFiltersView<String>(manager: VPNProviderManager())
+        VPNFiltersView<OpenVPN.Configuration>(
+            manager: VPNProviderManager(),
+            filters: .constant(VPNFilters())
+        )
     }
 }

@@ -25,21 +25,71 @@
 
 #if os(iOS)
 
+import PassepartoutKit
 import SwiftUI
 
-// FIXME: ###, providers UI, iOS server rows + country flags
-
 extension VPNProviderServerView {
+    struct Subview: View {
 
-    @ViewBuilder
-    var serversView: some View {
+        @ObservedObject
+        var manager: VPNProviderManager<Configuration>
+
+        @Binding
+        var filters: VPNFilters
+
+        let onSelect: (VPNServer) -> Void
+
+        @State
+        private var isFiltersPresented = false
+
+        var body: some View {
+            listView
+                .disabled(manager.isFiltering)
+                .toolbar {
+                    filtersItem
+                }
+        }
+    }
+}
+
+private extension VPNProviderServerView.Subview {
+    var listView: some View {
         List {
-            ForEach(manager.filteredServers, id: \.id) { server in
-                Button("\(server.hostname ?? server.id) \(server.provider.countryCodes)") {
-                    selectServer(server)
+            // FIXME: ###, providers UI, iOS server rows + country flags
+            if manager.isFiltering {
+                ProgressView()
+            } else {
+                ForEach(manager.filteredServers, id: \.id) { server in
+                    Button("\(server.hostname ?? server.id) \(server.provider.countryCode)") {
+                        onSelect(server)
+                    }
                 }
             }
         }
+        .themeAnimation(on: manager.isFiltering, category: .providers)
+    }
+
+    var filtersItem: some ToolbarContent {
+        ToolbarItem {
+            Button {
+                isFiltersPresented = true
+            } label: {
+                ThemeImage(.filters)
+            }
+            .themePopover(isPresented: $isFiltersPresented, content: filtersView)
+        }
+    }
+
+    func filtersView() -> some View {
+        NavigationStack {
+            VPNFiltersView(
+                manager: manager,
+                filters: $filters
+            )
+            .navigationTitle(Strings.Global.filters)
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .presentationDetents([.medium])
     }
 }
 

@@ -31,7 +31,7 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
     @EnvironmentObject
     private var providerManager: ProviderManager
 
-    var apis: [APIMapper] = API.shared
+    let apis: [APIMapper]
 
     @Binding
     var providerId: ProviderID?

@@ -26,27 +26,85 @@
 import AppLibrary
 import PassepartoutKit
 import SwiftUI
+import UtilsLibrary
 
 struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
+
+    @EnvironmentObject
+    private var providerManager: ProviderManager
 
     @Environment(\.dismiss)
     private var dismiss
 
-    @ObservedObject
-    var manager: VPNProviderManager
+    let apis: [APIMapper]
+
+    let providerId: ProviderID
+
+    let configurationType: Configuration.Type
+
+    var selectedEntity: VPNEntity<Configuration>?
 
     let onSelect: (_ server: VPNServer, _ preset: VPNPreset<Configuration>) -> Void
 
+    @StateObject
+    private var manager = VPNProviderManager<Configuration>(sorting: [
+        .localizedCountry,
+        .area,
+        .hostname
+    ])
+
+    @State
+    private var filters = VPNFilters()
+
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
+
     var body: some View {
-        serversView
-            .modifier(VPNFiltersModifier<Configuration>(manager: manager))
-            .navigationTitle(Strings.Global.servers)
+        debugChanges()
+        return Subview(
+            manager: manager,
+            filters: $filters,
+            onSelect: selectServer
+        )
+        .withErrorHandler(errorHandler)
+        .navigationTitle(Strings.Global.servers)
+        .onLoad {
+            Task {
+                do {
+                    manager.repository = try await providerManager.vpnRepository(
+                        from: apis,
+                        for: providerId,
+                        configurationType: Configuration.self
+                    )
+                    if let selectedEntity {
+                        filters = VPNFilters(with: selectedEntity.server.provider)
+                    } else {
+                        filters = VPNFilters()
+                    }
+                    manager.applyFilters(filters)
+                } catch {
+                    pp_log(.app, .error, "Unable to load VPN repository: \(error)")
+                    errorHandler.handle(error, title: Strings.Global.servers)
+                }
+            }
+        }
     }
 }
 
 // MARK: - Actions
 
 extension VPNProviderServerView {
+    func compatiblePreset(with server: VPNServer) -> VPNPreset<Configuration>? {
+        manager
+            .presets
+            .first {
+                if let supportedIds = server.provider.supportedPresetIds {
+                    return supportedIds.contains($0.presetId)
+                }
+                return true
+            }
+    }
+
     func selectServer(_ server: VPNServer) {
         guard let preset = compatiblePreset(with: server) else {
             pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.provider.supportedPresetIds ?? [])")
@@ -58,24 +116,16 @@ extension VPNProviderServerView {
     }
 }
 
-private extension VPNProviderServerView {
-    func compatiblePreset(with server: VPNServer) -> VPNPreset<Configuration>? {
-        manager
-            .presets(ofType: Configuration.self)
-            .first {
-                if let supportedIds = server.provider.supportedPresetIds {
-                    return supportedIds.contains($0.presetId)
-                }
-                return true
-            }
-    }
-}
-
 // MARK: - Preview
 
 #Preview {
+
     NavigationStack {
-        VPNProviderServerView<OpenVPN.Configuration>(manager: VPNProviderManager()) { _, _ in
+        VPNProviderServerView<OpenVPN.Configuration>(
+            apis: [API.bundled],
+            providerId: .protonvpn,
+            configurationType: OpenVPN.Configuration.self
+        ) { _, _ in
         }
     }
     .withMockEnvironment()

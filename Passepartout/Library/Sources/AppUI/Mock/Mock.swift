@@ -63,8 +63,7 @@ extension AppContext {
             tunnelEnvironment: env,
             registry: registry,
             providerManager: ProviderManager(
-                repository: InMemoryProviderRepository(),
-                vpnRepository: InMemoryVPNProviderRepository()
+                repository: InMemoryProviderRepository()
             ),
             constants: .shared
         )
