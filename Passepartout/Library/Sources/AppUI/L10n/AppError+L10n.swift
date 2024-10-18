@@ -56,6 +56,9 @@ extension PassepartoutError: LocalizedError {
             return Strings.Errors.App.Passepartout.connectionModuleRequired
 
         case .corruptProviderModule:
+            if let ppReason = reason as? PassepartoutError, ppReason.code == .notFound {
+                return Strings.Errors.App.missingProviderEntity
+            }
             return Strings.Errors.App.Passepartout.corruptProviderModule(reason?.localizedDescription ?? "")
 
         case .incompatibleModules:
