@@ -70,8 +70,7 @@ struct OpenVPNView: View {
     }
 
     var body: some View {
-        manualView
-            .modifier(providerModifier)
+        contentView
             .themeAnimation(on: draft, category: .modules)
             .moduleView(editor: editor, draft: draft, withName: !isServerPushed)
             .navigationDestination(for: Subroute.self, destination: destination)
@@ -83,6 +82,16 @@ struct OpenVPNView: View {
 private extension OpenVPNView {
     var configuration: OpenVPN.Configuration.Builder {
         draft.configurationBuilder ?? .init(withFallbacks: true)
+    }
+
+    @ViewBuilder
+    var contentView: some View {
+        if isServerPushed {
+            manualView
+        } else {
+            manualView
+                .modifier(providerModifier)
+        }
     }
 
     var providerModifier: some ViewModifier {
