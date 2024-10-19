@@ -26,6 +26,7 @@
 import Combine
 import CommonLibrary
 import Foundation
+import NetworkExtension
 import PassepartoutKit
 
 public final class NEProfileRepository: ProfileRepository {
@@ -35,26 +36,29 @@ public final class NEProfileRepository: ProfileRepository {
 
     private let profilesSubject: CurrentValueSubject<[Profile], Never>
 
-    private var subscription: AnyCancellable?
+    private var subscriptions: Set<AnyCancellable>
 
     public init(repository: NETunnelManagerRepository, title: @escaping (Profile) -> String) {
         self.repository = repository
         self.title = title
         profilesSubject = CurrentValueSubject([])
+        subscriptions = []
 
-        subscription = repository
+        repository
             .managersPublisher
-            .sink { [weak self] allManagers in
-                let profiles = allManagers.values.compactMap {
-                    do {
-                        return try repository.profile(from: $0)
-                    } catch {
-                        pp_log(.app, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
-                        return nil
-                    }
-                }
-                self?.profilesSubject.send(profiles)
+            .first()
+            .sink { [weak self] in
+                self?.onLoadedManagers($0)
             }
+            .store(in: &subscriptions)
+
+        repository
+            .managersPublisher
+            .dropFirst()
+            .sink { [weak self] in
+                self?.onUpdatedManagers($0)
+            }
+            .store(in: &subscriptions)
     }
 
     public var profilesPublisher: AnyPublisher<[Profile], Never> {
@@ -68,11 +72,43 @@ public final class NEProfileRepository: ProfileRepository {
 
     public func saveProfile(_ profile: Profile) async throws {
         try await repository.save(profile, connect: false, title: title)
+        if let index = profilesSubject.value.firstIndex(where: { $0.id == profile.id }) {
+            profilesSubject.value[index] = profile
+        } else {
+            profilesSubject.value.append(profile)
+        }
     }
 
     public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
         for id in profileIds {
             try await repository.remove(profileId: id)
         }
+        profilesSubject.value.removeAll {
+            profileIds.contains($0.id)
+        }
+    }
+}
+
+private extension NEProfileRepository {
+    func onLoadedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
+        let profiles = managers.values.compactMap {
+            do {
+                return try repository.profile(from: $0)
+            } catch {
+                pp_log(.app, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
+                return nil
+            }
+        }
+        profilesSubject.send(profiles)
+    }
+
+    func onUpdatedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
+        let profiles = profilesSubject
+            .value
+            .filter {
+                managers.keys.contains($0.id)
+            }
+
+        profilesSubject.send(profiles)
     }
 }
