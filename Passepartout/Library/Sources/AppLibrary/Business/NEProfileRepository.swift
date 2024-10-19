@@ -80,11 +80,15 @@ public final class NEProfileRepository: ProfileRepository {
     }
 
     public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
+        var removedIds: Set<Profile.ID> = []
+        defer {
+            profilesSubject.value.removeAll {
+                removedIds.contains($0.id)
+            }
+        }
         for id in profileIds {
             try await repository.remove(profileId: id)
-        }
-        profilesSubject.value.removeAll {
-            profileIds.contains($0.id)
+            removedIds.insert(id)
         }
     }
 }
