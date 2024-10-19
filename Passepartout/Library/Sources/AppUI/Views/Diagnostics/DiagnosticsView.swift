@@ -50,14 +50,16 @@ struct DiagnosticsView: View {
     @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
     private var logsPrivateData = false
 
-    var availableTunnelLogs: () -> [LogEntry] = {
-        PassepartoutConfiguration.shared.availableLogs(at: BundleConfiguration.urlForTunnelLog)
-            .sorted {
-                $0.key > $1.key
-            }
-            .map {
-                LogEntry(date: $0, url: $1)
-            }
+    var availableTunnelLogs: () async -> [LogEntry] = {
+        await Task.detached {
+            PassepartoutConfiguration.shared.availableLogs(at: BundleConfiguration.urlForTunnelLog)
+                .sorted {
+                    $0.key > $1.key
+                }
+                .map {
+                    LogEntry(date: $0, url: $1)
+                }
+        }.value
     }
 
     @State
@@ -81,8 +83,8 @@ struct DiagnosticsView: View {
                 reportIssueSection
             }
         }
-        .onLoad {
-            tunnelLogs = availableTunnelLogs()
+        .task {
+            tunnelLogs = await availableTunnelLogs()
         }
         .themeForm()
         .navigationTitle(Strings.Views.Diagnostics.title)
