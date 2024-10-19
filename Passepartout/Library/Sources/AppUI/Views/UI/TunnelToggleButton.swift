@@ -105,7 +105,9 @@ private extension TunnelToggleButton {
             guard let profile else {
                 return
             }
-            nextProfileId = profile.id
+            if !isInstalled {
+                nextProfileId = profile.id
+            }
             defer {
                 if nextProfileId == profile.id {
                     nextProfileId = nil
