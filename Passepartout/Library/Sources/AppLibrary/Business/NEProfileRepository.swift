@@ -113,6 +113,14 @@ private extension NEProfileRepository {
                 managers.keys.contains($0.id)
             }
 
+        let removedProfiles = profilesSubject
+            .value
+            .filter {
+                !managers.keys.contains($0.id)
+            }
+
+        pp_log(.app, .info, "Sync profiles removed externally: \(removedProfiles)")
+
         profilesSubject.send(profiles)
     }
 }
