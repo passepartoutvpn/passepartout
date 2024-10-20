@@ -71,7 +71,7 @@ public final class NEProfileRepository: ProfileRepository {
     }
 
     public func saveProfile(_ profile: Profile) async throws {
-        try await repository.save(profile, connect: false, title: title)
+        try await repository.save(profile, forConnecting: false, title: title)
         if let index = profilesSubject.value.firstIndex(where: { $0.id == profile.id }) {
             profilesSubject.value[index] = profile
         } else {
