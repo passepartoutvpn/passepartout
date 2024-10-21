@@ -62,9 +62,6 @@ struct TunnelToggleButton<Label>: View, TunnelContextProviding, ThemeProviding w
 
     let label: (Bool) -> Label
 
-    @State
-    private var pendingTask: Task<Void, Error>?
-
     var body: some View {
         Button(action: tryPerform) {
             label(canConnect)
@@ -100,8 +97,7 @@ private extension TunnelToggleButton {
 
 private extension TunnelToggleButton {
     func tryPerform() {
-        pendingTask?.cancel()
-        pendingTask = Task {
+        Task {
             guard let profile else {
                 return
             }
