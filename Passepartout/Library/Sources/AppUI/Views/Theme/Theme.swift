@@ -240,11 +240,38 @@ extension View {
     public func themeTip(_ text: String, edge: Edge) -> some View {
         modifier(ThemeTipModifier(text: text, edge: edge))
     }
+}
 
-    public func themeCountryFlag(_ countryCode: String) -> some View {
-        Image("flags/\(countryCode.lowercased())")
-            .resizable()
-            .frame(width: 20, height: 15)
+struct ThemeCountryFlag: View {
+    let code: String?
+
+    var placeholderTip: String?
+
+    var countryTip: ((String) -> String?)?
+
+    var body: some View {
+        Group {
+            if let code {
+                let image = Image("flags/\(code.lowercased())")
+                    .resizable()
+
+                if let tip = countryTip?(code) {
+                    image
+                        .help(tip)
+                } else {
+                    image
+                }
+            } else {
+                let image = Image(systemName: "globe")
+                if let placeholderTip {
+                    image
+                        .help(placeholderTip)
+                } else {
+                    image
+                }
+            }
+        }
+        .frame(width: 20, height: 15)
     }
 }
 

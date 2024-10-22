@@ -53,7 +53,7 @@ private extension VPNProviderServerView.Subview {
         Table(manager.filteredServers) {
             TableColumn(Strings.Global.region) { server in
                 HStack {
-                    themeCountryFlag(server.provider.countryCode)
+                    ThemeCountryFlag(code: server.provider.countryCode)
                     Text(server.region)
                 }
             }
