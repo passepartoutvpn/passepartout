@@ -98,8 +98,11 @@ private extension InstalledProfileView {
     }
 
     var statusView: some View {
-        ConnectionStatusView(tunnel: tunnel)
-            .opacity(installedOpacity)
+        HStack {
+            providerSelectorButton
+            ConnectionStatusView(tunnel: tunnel)
+                .opacity(installedOpacity)
+        }
     }
 
     var toggleButton: some View {
@@ -129,6 +132,37 @@ private extension InstalledProfileView {
             isInstalledProfile: true,
             onEdit: {
                 flow?.onEditProfile($0)
+            }
+        )
+    }
+
+    var providerSelectorButton: some View {
+        profile?
+            .firstProviderModuleWithMetadata
+            .map { module, provider in
+                Button {
+                    // FIXME: #711, provider home selector
+                } label: {
+                    providerSelectorLabel(with: provider)
+                }
+                .buttonStyle(.plain)
+            }
+    }
+
+    func providerSelectorLabel(with provider: ModuleMetadata.Provider) -> some View {
+        ProviderCountryFlag(provider: provider)
+    }
+}
+
+private struct ProviderCountryFlag: View {
+    let provider: ModuleMetadata.Provider
+
+    var body: some View {
+        ThemeCountryFlag(
+            code: provider.entity?.countryCode,
+            placeholderTip: Strings.Errors.App.missingProviderEntity,
+            countryTip: {
+                $0.localizedAsRegionCode
             }
         )
     }

@@ -31,6 +31,8 @@ import UtilsLibrary
 struct ProfileContainerView: View, Routable, TunnelInstallationProviding {
     struct Flow {
         let onEditProfile: (ProfileHeader) -> Void
+
+        let onEditProviderEntity: (Module, ModuleMetadata.Provider) -> Void
     }
 
     let layout: ProfilesLayout
