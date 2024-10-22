@@ -41,9 +41,6 @@ struct TunnelRestartButton<Label>: View where Label: View {
 
     let label: () -> Label
 
-    @State
-    private var pendingTask: Task<Void, Error>?
-
     var body: some View {
         Button {
             guard let profile else {
@@ -52,10 +49,11 @@ struct TunnelRestartButton<Label>: View where Label: View {
             guard tunnel.status == .active else {
                 return
             }
-            pendingTask?.cancel()
-            pendingTask = Task {
+            Task {
                 do {
                     try await tunnel.connect(with: profile, processor: profileProcessor)
+                } catch is CancellationError {
+                    //
                 } catch {
                     errorHandler.handle(
                         error,
