@@ -83,9 +83,9 @@ private extension InstalledProfileView {
 
     var actionableNameView: some View {
         ThemeDisclosableMenu {
-            nameView
-        } menu: {
             menuContent
+        } label: {
+            nameView
         }
     }
 
