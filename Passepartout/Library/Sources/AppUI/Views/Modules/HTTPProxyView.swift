@@ -27,13 +27,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-extension HTTPProxyModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        HTTPProxyView(editor: editor, module: self)
-    }
-}
-
-private struct HTTPProxyView: View {
+struct HTTPProxyView: View {
 
     @EnvironmentObject
     private var theme: Theme

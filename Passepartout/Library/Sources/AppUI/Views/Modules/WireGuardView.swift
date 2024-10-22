@@ -28,13 +28,7 @@ import PassepartoutKit
 import PassepartoutWireGuardGo
 import SwiftUI
 
-extension WireGuardModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        WireGuardView(editor: editor, module: self)
-    }
-}
-
-private struct WireGuardView: View {
+struct WireGuardView: View {
     private enum Subroute: Hashable {
         case providerServer(id: ProviderID)
     }

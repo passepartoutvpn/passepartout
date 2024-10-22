@@ -1,8 +1,8 @@
 //
-//  AppData+Profiles.swift
+//  WireGuardModule+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 7/31/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,17 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppData
-import CoreData
-import Foundation
+import PassepartoutKit
+import SwiftUI
 
-extension AppData {
-
-    @MainActor
-    public static let cdProfilesModel: NSManagedObjectModel = {
-        guard let model: NSManagedObjectModel = .mergedModel(from: [.module]) else {
-            fatalError("Unable to build Core Data model (Profiles v3)")
-        }
-        return model
-    }()
+extension WireGuardModule.Builder: ModuleViewProviding {
+    func moduleView(with editor: ProfileEditor) -> some View {
+        WireGuardView(editor: editor, module: self)
+    }
 }

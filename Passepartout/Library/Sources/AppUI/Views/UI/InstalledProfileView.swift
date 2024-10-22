@@ -33,10 +33,6 @@ struct InstalledProfileView: View, Routable {
     @EnvironmentObject
     var theme: Theme
 
-    struct Flow {
-        let onEditProfile: (ProfileHeader) -> Void
-    }
-
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
@@ -52,7 +48,7 @@ struct InstalledProfileView: View, Routable {
     @Binding
     var nextProfileId: Profile.ID?
 
-    var flow: Flow?
+    var flow: ProfileContainerView.Flow?
 
     var body: some View {
         debugChanges()
@@ -86,21 +82,16 @@ private extension InstalledProfileView {
     }
 
     var actionableNameView: some View {
-        Menu(content: menuContent) {
-            HStack(alignment: .firstTextBaseline) {
-                nameView
-                ThemeImage(.disclose)
-            }
-            .contentShape(.rect)
+        ThemeDisclosableMenu {
+            nameView
+        } menu: {
+            menuContent
         }
-        .foregroundStyle(.primary)
-#if os(macOS)
-        .buttonStyle(.plain)
-#endif
     }
 
     var nameView: some View {
         Text(profile?.name ?? Strings.Views.Profiles.Rows.notInstalled)
+            .fixedSize()
             .font(.title2)
             .fontWeight(theme.relevantWeight)
             .themeTruncating(.tail)
@@ -128,7 +119,7 @@ private extension InstalledProfileView {
         .opacity(installedOpacity)
     }
 
-    func menuContent() -> some View {
+    var menuContent: some View {
         ProfileContextMenu(
             profileManager: profileManager,
             tunnel: tunnel,

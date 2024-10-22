@@ -108,6 +108,8 @@ public enum Strings {
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
       }
+      /// No provider server selected.
+      public static let missingProviderEntity = Strings.tr("Localizable", "errors.app.missing_provider_entity", fallback: "No provider server selected.")
       public enum Passepartout {
         /// Routing module can only be enabled together with a connection.
         public static let connectionModuleRequired = Strings.tr("Localizable", "errors.app.passepartout.connection_module_required", fallback: "Routing module can only be enabled together with a connection.")

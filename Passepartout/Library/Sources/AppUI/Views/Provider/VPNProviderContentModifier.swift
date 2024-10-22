@@ -39,8 +39,6 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
     @Binding
     var selectedEntity: VPNEntity<Configuration>?
 
-    let configurationType: Configuration.Type
-
     let isRequired: Bool
 
     @ViewBuilder
@@ -107,8 +105,7 @@ private extension VPNProviderContentModifier {
         EmptyView()
             .modifier(VPNProviderContentModifier(
                 providerId: .constant(.hideme),
-                selectedEntity: .constant(nil),
-                configurationType: OpenVPN.Configuration.self,
+                selectedEntity: .constant(nil as VPNEntity<OpenVPN.Configuration>?),
                 isRequired: false,
                 providerRows: {
                     Text("Other")

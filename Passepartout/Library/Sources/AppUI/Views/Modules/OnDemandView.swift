@@ -27,13 +27,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-extension OnDemandModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        OnDemandView(editor: editor, module: self)
-    }
-}
-
-private struct OnDemandView: View {
+struct OnDemandView: View {
 
     @EnvironmentObject
     private var theme: Theme

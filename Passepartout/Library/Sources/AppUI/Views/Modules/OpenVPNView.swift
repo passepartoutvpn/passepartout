@@ -26,24 +26,6 @@
 import PassepartoutKit
 import SwiftUI
 
-extension OpenVPNModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        OpenVPNView(editor: editor, module: self)
-    }
-}
-
-extension OpenVPNModule.Builder: InteractiveViewProviding {
-    func interactiveView(with editor: ProfileEditor) -> some View {
-        let draft = editor.binding(forModule: self)
-
-        return OpenVPNView.CredentialsView(
-            isInteractive: draft.isInteractive,
-            credentials: draft.credentials,
-            isAuthenticating: true
-        )
-    }
-}
-
 struct OpenVPNView: View {
 
     @ObservedObject
@@ -96,14 +78,21 @@ private extension OpenVPNView {
 
     var providerModifier: some ViewModifier {
         VPNProviderContentModifier(
-            providerId: editor.binding(forProviderOf: draft.id),
-            selectedEntity: editor.binding(forProviderEntityOf: draft.id),
-            configurationType: OpenVPN.Configuration.self,
+            providerId: providerId,
+            selectedEntity: providerEntity,
             isRequired: draft.configurationBuilder == nil,
             providerRows: {
                 moduleGroup(for: providerAccountRows)
             }
         )
+    }
+
+    var providerId: Binding<ProviderID?> {
+        editor.binding(forProviderOf: draft.id)
+    }
+
+    var providerEntity: Binding<VPNEntity<OpenVPN.Configuration>?> {
+        editor.binding(forProviderEntityOf: draft.id)
     }
 
     var providerAccountRows: [ModuleRow]? {

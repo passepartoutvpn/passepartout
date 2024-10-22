@@ -81,12 +81,14 @@ extension AppModalCoordinator {
             tunnel: tunnel,
             registry: registry,
             isImporting: $isImporting,
-            onEdit: {
-                guard let profile = profileManager.profile(withId: $0.id) else {
-                    return
+            flow: .init(
+                onEditProfile: {
+                    guard let profile = profileManager.profile(withId: $0.id) else {
+                        return
+                    }
+                    enterDetail(of: profile)
                 }
-                enterDetail(of: profile)
-            }
+            )
         )
     }
 
@@ -135,7 +137,10 @@ extension AppModalCoordinator {
 
     func enterDetail(of profile: Profile) {
         profilePath = NavigationPath()
-        profileEditor.editProfile(profile, isShared: profileManager.isRemotelyShared(profileWithId: profile.id))
+        profileEditor.editProfile(
+            profile,
+            isShared: profileManager.isRemotelyShared(profileWithId: profile.id)
+        )
         modalRoute = .editProfile
     }
 }
