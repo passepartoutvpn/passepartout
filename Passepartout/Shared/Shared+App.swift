@@ -182,19 +182,19 @@ private extension ProfileManager {
 
 extension Tunnel {
     static let shared = Tunnel(
-        strategy: NETunnelStrategy(repository: ProfileManager.neRepository)
+        strategy: ProfileManager.neStrategy
     )
 }
 
 private extension ProfileManager {
     static let localProfileRepository: ProfileRepository = {
-        NEProfileRepository(repository: neRepository) {
+        NEProfileRepository(repository: neStrategy) {
             ProfileManager.sharedTitle($0)
         }
     }()
 
-    static let neRepository: NETunnelManagerRepository = {
-        NETunnelManagerRepository(
+    static let neStrategy: NETunnelStrategy = {
+        NETunnelStrategy(
             bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
             coder: Registry.sharedProtocolCoder,
             environment: .shared
