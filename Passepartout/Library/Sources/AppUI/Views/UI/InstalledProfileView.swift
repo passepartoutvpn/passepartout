@@ -141,7 +141,7 @@ private extension InstalledProfileView {
             .firstProviderModuleWithMetadata
             .map { module, provider in
                 Button {
-                    // FIXME: #711, provider home selector
+                    flow?.onEditProviderEntity(module, provider)
                 } label: {
                     providerSelectorLabel(with: provider)
                 }

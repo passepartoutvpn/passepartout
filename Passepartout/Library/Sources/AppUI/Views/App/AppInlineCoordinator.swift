@@ -68,13 +68,19 @@ private extension AppInlineCoordinator {
         case editProfile
     }
 
-    enum ModalRoute: String, Identifiable {
+    enum ModalRoute: Identifiable {
+        case editProviderEntity(Module, ModuleMetadata.Provider)
+
         case settings
 
         case about
 
-        var id: String {
-            rawValue
+        var id: Int {
+            switch self {
+            case .editProviderEntity: return 1
+            case .settings: return 2
+            case .about: return 3
+            }
         }
     }
 
@@ -91,6 +97,9 @@ private extension AppInlineCoordinator {
                         return
                     }
                     enterDetail(of: profile)
+                },
+                onEditProviderEntity: {
+                    modalRoute = .editProviderEntity($0, $1)
                 }
             )
         )
@@ -130,6 +139,10 @@ private extension AppInlineCoordinator {
     @ViewBuilder
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
+        case .editProviderEntity(let module, let moduleProvider):
+            // FIXME: #711, provider home selector
+            EmptyView()
+
         case .settings:
             SettingsView(profileManager: profileManager)
 
