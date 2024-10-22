@@ -52,6 +52,8 @@ struct TunnelRestartButton<Label>: View where Label: View {
             Task {
                 do {
                     try await tunnel.connect(with: profile, processor: profileProcessor)
+                } catch is CancellationError {
+                    //
                 } catch {
                     errorHandler.handle(
                         error,

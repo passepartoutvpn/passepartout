@@ -135,6 +135,8 @@ private extension TunnelToggleButton {
             } else {
                 try await tunnel.connect(with: profile, processor: profileProcessor)
             }
+        } catch is CancellationError {
+            //
         } catch {
             errorHandler.handle(
                 error,
