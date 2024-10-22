@@ -240,6 +240,12 @@ extension View {
     public func themeTip(_ text: String, edge: Edge) -> some View {
         modifier(ThemeTipModifier(text: text, edge: edge))
     }
+
+    public func themeCountryFlag(_ countryCode: String) -> some View {
+        Image("flags/\(countryCode.lowercased())")
+            .resizable()
+            .frame(width: 20, height: 15)
+    }
 }
 
 // MARK: - Views
