@@ -115,9 +115,6 @@ private extension AppContext {
                 try await tunnel.disconnect()
                 return
             }
-            if tunnel.status == .active {
-                try await tunnel.connect(with: profile, processor: profileProcessor)
-            }
         }
     }
 }
