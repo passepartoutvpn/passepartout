@@ -81,6 +81,43 @@ public final class AppContext: ObservableObject {
             await iapManager.reloadReceipt()
             connectionObserver.observeObjects()
             profileManager.observeObjects()
+            observeObjects()
+        }
+    }
+}
+
+// MARK: - Observation
+
+private extension AppContext {
+    func observeObjects() {
+        profileManager
+            .didChange
+            .sink { [weak self] event in
+                switch event {
+                case .save(let profile):
+                    self?.syncTunnelIfCurrentProfile(profile)
+
+                default:
+                    break
+                }
+            }
+            .store(in: &subscriptions)
+    }
+}
+
+private extension AppContext {
+    func syncTunnelIfCurrentProfile(_ profile: Profile) {
+        guard profile.id == tunnel.currentProfile?.id else {
+            return
+        }
+        Task {
+            if profile.isInteractive {
+                try await tunnel.disconnect()
+                return
+            }
+            if tunnel.status == .active {
+                try await tunnel.connect(with: profile, processor: profileProcessor)
+            }
         }
     }
 }
