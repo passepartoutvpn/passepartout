@@ -248,7 +248,7 @@
 
 "errors.app.empty_profile_name" = "Profile name is empty.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
-"errors.app.missing_provider_entity" = "No provider server selected.";
+"errors.app.provider.missing_entity" = "No provider server selected.";
 "errors.app.default" = "Unable to complete operation.";
 "errors.app.passepartout.connection_module_required" = "Routing module can only be enabled together with a connection.";
 "errors.app.passepartout.corrupt_provider_module" = "Unable to connect to provider server (reason=%@).";

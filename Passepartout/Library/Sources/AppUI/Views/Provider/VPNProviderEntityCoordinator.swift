@@ -71,12 +71,13 @@ struct VPNProviderEntityCoordinator<Configuration>: View where Configuration: Pr
 private extension VPNProviderEntityCoordinator {
     func onSelect(server: VPNServer, preset: VPNPreset<Configuration>) {
         Task {
-            let entity = VPNEntity(server: server, preset: preset)
             do {
+                let entity = VPNEntity(server: server, preset: preset)
                 try await onSelect(entity)
                 dismiss()
             } catch {
-                errorHandler.handle(error)
+                pp_log(.app, .fault, "Unable to select server \(server.serverId): \(error)")
+                errorHandler.handle(error, title: Strings.Global.servers)
             }
         }
     }
