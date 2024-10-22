@@ -131,9 +131,13 @@ extension AppModalCoordinator {
                 modalRoute = nil
             }
 
-        case .editProviderEntity(let module, let moduleProvider):
-            // FIXME: #711, provider home selector
-            EmptyView()
+        case .editProviderEntity(let module, let provider):
+            ProviderConnectingSelectorView(
+                profileManager: profileManager,
+                tunnel: tunnel,
+                module: module,
+                provider: provider
+            )
 
         case .settings:
             SettingsView(profileManager: profileManager)

@@ -25,6 +25,7 @@
 
 import PassepartoutKit
 import SwiftUI
+import UtilsLibrary
 
 struct VPNProviderEntityCoordinator<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
 
@@ -35,7 +36,10 @@ struct VPNProviderEntityCoordinator<Configuration>: View where Configuration: Pr
 
     let selectedEntity: VPNEntity<Configuration>?
 
-    let onSelect: (VPNEntity<Configuration>) -> Void
+    let onSelect: (VPNEntity<Configuration>) async throws -> Void
+
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
         NavigationStack {
@@ -44,11 +48,7 @@ struct VPNProviderEntityCoordinator<Configuration>: View where Configuration: Pr
                 providerId: providerId,
                 configurationType: Configuration.self,
                 selectedEntity: selectedEntity,
-                onSelect: { server, preset in
-                    let entity = VPNEntity(server: server, preset: preset)
-                    onSelect(entity)
-                    dismiss()
-                }
+                onSelect: onSelect
             )
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -62,6 +62,21 @@ struct VPNProviderEntityCoordinator<Configuration>: View where Configuration: Pr
 #endif
                     }
                 }
+            }
+            .withErrorHandler(errorHandler)
+        }
+    }
+}
+
+private extension VPNProviderEntityCoordinator {
+    func onSelect(server: VPNServer, preset: VPNPreset<Configuration>) {
+        Task {
+            let entity = VPNEntity(server: server, preset: preset)
+            do {
+                try await onSelect(entity)
+                dismiss()
+            } catch {
+                errorHandler.handle(error)
             }
         }
     }

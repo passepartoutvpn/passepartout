@@ -32,6 +32,6 @@ protocol ProviderEntityViewProviding {
     @MainActor
     func providerEntityView(
         with provider: ModuleMetadata.Provider,
-        onSelect: @escaping (any ProviderEntity & Encodable) -> Void
+        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
     ) -> EntityContent
 }
