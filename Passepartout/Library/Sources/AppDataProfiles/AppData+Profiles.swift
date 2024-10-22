@@ -28,6 +28,8 @@ import CoreData
 import Foundation
 
 extension AppData {
+
+    @MainActor
     public static let cdProfilesModel: NSManagedObjectModel = {
         guard let model: NSManagedObjectModel = .mergedModel(from: [.module]) else {
             fatalError("Unable to build Core Data model (Profiles v3)")
