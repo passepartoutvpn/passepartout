@@ -43,10 +43,11 @@ struct ProviderConnectingSelectorView: View {
     let provider: ModuleMetadata.Provider
 
     var body: some View {
-        (module as? any ProviderEntityViewProviding)
-            .map {
-                AnyView($0.providerEntityView(with: provider, onSelect: onSelect))
-            }
+        if let viewProvider = module as? any ProviderEntityViewProviding {
+            AnyView(viewProvider.providerEntityView(with: provider, onSelect: onSelect))
+        } else {
+            fatalError("Module got too far without being ProviderEntityViewProviding: \(module)")
+        }
     }
 }
 
