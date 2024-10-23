@@ -81,6 +81,7 @@ private extension OpenVPNView {
             providerId: providerId,
             selectedEntity: providerEntity,
             isRequired: draft.configurationBuilder == nil,
+            entityDestination: Subroute.providerServer,
             providerRows: {
                 moduleGroup(for: providerAccountRows)
             }
@@ -101,6 +102,10 @@ private extension OpenVPNView {
 }
 
 private extension OpenVPNView {
+    func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
+        providerEntity.wrappedValue = VPNEntity(server: server, preset: preset)
+    }
+
     func importConfiguration(from url: URL) {
         // TODO: #657, import draft from external URL
     }
@@ -110,12 +115,23 @@ private extension OpenVPNView {
 
 private extension OpenVPNView {
     enum Subroute: Hashable {
+        case providerServer
+
         case credentials
     }
 
     @ViewBuilder
     func destination(for route: Subroute) -> some View {
         switch route {
+        case .providerServer:
+            providerId.wrappedValue.map {
+                VPNProviderServerView(
+                    providerId: $0,
+                    configurationType: OpenVPN.Configuration.self,
+                    onSelect: onSelectServer
+                )
+            }
+
         case .credentials:
             CredentialsView(
                 isInteractive: $draft.isInteractive,

@@ -36,7 +36,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
     @Environment(\.dismiss)
     private var dismiss
 
-    let apis: [APIMapper]
+    var apis: [APIMapper] = API.shared
 
     let providerId: ProviderID
 
