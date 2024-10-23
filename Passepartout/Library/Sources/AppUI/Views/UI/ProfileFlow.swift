@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 
 struct ProfileFlow {
-    let onEdit: (ProfileHeader) -> Void
+    let onEditProfile: (ProfileHeader) -> Void
 
-    let onEditProviderEntity: (Module, ModuleMetadata.Provider) -> Void
+    let onEditProviderEntity: (Profile) -> Void
 }

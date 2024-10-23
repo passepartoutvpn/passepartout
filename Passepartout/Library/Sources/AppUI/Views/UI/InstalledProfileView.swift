@@ -137,9 +137,9 @@ private extension InstalledProfileView {
     var providerSelectorButton: some View {
         profile?
             .firstProviderModuleWithMetadata
-            .map { module, provider in
+            .map { _, provider in
                 Button {
-                    flow?.onEditProviderEntity(module, provider)
+                    flow?.onEditProviderEntity(profile!)
                 } label: {
                     providerSelectorLabel(with: provider)
                 }

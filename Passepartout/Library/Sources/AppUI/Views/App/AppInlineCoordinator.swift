@@ -69,7 +69,7 @@ private extension AppInlineCoordinator {
     }
 
     enum ModalRoute: Identifiable {
-        case editProviderEntity(Module, ModuleMetadata.Provider)
+        case editProviderEntity(Profile, Module, ModuleMetadata.Provider)
 
         case settings
 
@@ -92,14 +92,17 @@ private extension AppInlineCoordinator {
             registry: registry,
             isImporting: $isImporting,
             flow: .init(
-                onEdit: {
+                onEditProfile: {
                     guard let profile = profileManager.profile(withId: $0.id) else {
                         return
                     }
                     enterDetail(of: profile)
                 },
                 onEditProviderEntity: {
-                    modalRoute = .editProviderEntity($0, $1)
+                    guard let pair = $0.firstProviderModuleWithMetadata else {
+                        return
+                    }
+                    modalRoute = .editProviderEntity($0, pair.0, pair.1)
                 }
             )
         )
@@ -139,10 +142,10 @@ private extension AppInlineCoordinator {
     @ViewBuilder
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
-        case .editProviderEntity(let module, let provider):
-            ProviderConnectingSelectorView(
+        case .editProviderEntity(let profile, let module, let provider):
+            ProviderSelectorView(
                 profileManager: profileManager,
-                tunnel: tunnel,
+                profile: profile,
                 module: module,
                 provider: provider
             )

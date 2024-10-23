@@ -85,7 +85,7 @@ private extension ProfileContextMenu {
 
     var profileEditButton: some View {
         Button {
-            flow?.onEdit(header)
+            flow?.onEditProfile(header)
         } label: {
             ThemeImageLabel(Strings.Global.edit, .profileEdit)
         }

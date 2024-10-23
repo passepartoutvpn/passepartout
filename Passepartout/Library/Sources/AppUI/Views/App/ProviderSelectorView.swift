@@ -1,5 +1,5 @@
 //
-//  ProviderConnectingSelectorView.swift
+//  ProviderSelectorView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/22/24.
@@ -27,16 +27,12 @@ import AppLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct ProviderConnectingSelectorView: View {
-
-    @EnvironmentObject
-    private var profileProcessor: ProfileProcessor
+struct ProviderSelectorView: View {
 
     @ObservedObject
     var profileManager: ProfileManager
 
-    @ObservedObject
-    var tunnel: Tunnel
+    let profile: Profile
 
     let module: Module
 
@@ -51,22 +47,11 @@ struct ProviderConnectingSelectorView: View {
     }
 }
 
-private extension ProviderConnectingSelectorView {
+private extension ProviderSelectorView {
     func onSelect(_ entity: any ProviderEntity & Encodable) async throws {
-        guard let profileId = tunnel.currentProfile?.id,
-              let profile = profileManager.profile(withId: profileId) else {
-            return
-        }
         var builder = profile.builder()
         try builder.setProviderEntity(entity, forModuleWithId: module.id)
         let newProfile = try builder.tryBuild()
         try await profileManager.save(newProfile)
-        Task {
-            do {
-                try await tunnel.connect(with: newProfile, processor: profileProcessor)
-            } catch {
-                pp_log(.app, .error, "Unable to connect to server: \(error)")
-            }
-        }
     }
 }

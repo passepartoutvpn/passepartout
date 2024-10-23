@@ -65,7 +65,7 @@ extension AppModalCoordinator {
     enum ModalRoute: Identifiable {
         case editProfile
 
-        case editProviderEntity(Module, ModuleMetadata.Provider)
+        case editProviderEntity(Profile, Module, ModuleMetadata.Provider)
 
         case settings
 
@@ -89,14 +89,17 @@ extension AppModalCoordinator {
             registry: registry,
             isImporting: $isImporting,
             flow: .init(
-                onEdit: {
+                onEditProfile: {
                     guard let profile = profileManager.profile(withId: $0.id) else {
                         return
                     }
                     enterDetail(of: profile)
                 },
                 onEditProviderEntity: {
-                    modalRoute = .editProviderEntity($0, $1)
+                    guard let pair = $0.firstProviderModuleWithMetadata else {
+                        return
+                    }
+                    modalRoute = .editProviderEntity($0, pair.0, pair.1)
                 }
             )
         )
@@ -131,10 +134,10 @@ extension AppModalCoordinator {
                 modalRoute = nil
             }
 
-        case .editProviderEntity(let module, let provider):
-            ProviderConnectingSelectorView(
+        case .editProviderEntity(let profile, let module, let provider):
+            ProviderSelectorView(
                 profileManager: profileManager,
-                tunnel: tunnel,
+                profile: profile,
                 module: module,
                 provider: provider
             )

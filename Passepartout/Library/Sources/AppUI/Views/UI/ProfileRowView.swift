@@ -71,7 +71,7 @@ struct ProfileRowView: View, Routable, TunnelContextProviding {
                     sharingView
                 }
                 ProfileInfoButton(header: header) {
-                    flow?.onEdit($0)
+                    flow?.onEditProfile($0)
                 }
             }
             .imageScale(.large)
