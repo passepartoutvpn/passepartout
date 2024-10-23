@@ -82,7 +82,8 @@ extension ProfileEditor {
             .allCases
             .filter {
                 // TODO: #657, hide manual OpenVPN/WireGuard until editable
-                $0 != .openVPN && $0 != .wireGuard
+//                $0 != .openVPN && $0 != .wireGuard
+                $0 != .wireGuard
             }
             .filter {
                 !moduleTypes.contains($0)

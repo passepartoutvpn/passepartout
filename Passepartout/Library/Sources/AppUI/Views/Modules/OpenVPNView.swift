@@ -69,7 +69,7 @@ private extension OpenVPNView {
 
     @ViewBuilder
     var contentView: some View {
-        if isServerPushed {
+        if isServerPushed || draft.wrappedValue.configurationBuilder != nil {
             manualView
         } else {
             manualView
@@ -81,7 +81,7 @@ private extension OpenVPNView {
         VPNProviderContentModifier(
             providerId: providerId,
             selectedEntity: providerEntity,
-            isRequired: draft.wrappedValue.configurationBuilder == nil,
+            isRequired: true,
             entityDestination: Subroute.providerServer,
             providerRows: {
                 moduleGroup(for: providerAccountRows)
