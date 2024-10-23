@@ -78,8 +78,10 @@ extension ProfileEditorTests {
         XCTAssertFalse(moduleTypes.contains(.ip))
         XCTAssertTrue(moduleTypes.contains(.onDemand))
 
+        // provider only
+        XCTAssertTrue(moduleTypes.contains(.openVPN))
+
         // until editable
-        XCTAssertFalse(moduleTypes.contains(.openVPN))
         XCTAssertFalse(moduleTypes.contains(.wireGuard))
     }
 

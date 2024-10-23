@@ -115,7 +115,6 @@ private extension AppContext {
                 try await tunnel.disconnect()
                 return
             }
-            // FIXME: #379, reconnect in some scenarios, e.g. changing provider server
         }
     }
 }
