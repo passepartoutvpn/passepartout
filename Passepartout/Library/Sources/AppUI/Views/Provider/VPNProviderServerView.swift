@@ -41,6 +41,8 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 
     let selectedEntity: VPNEntity<Configuration>?
 
+    let filtersWithSelection: Bool
+
     let onSelect: (_ server: VPNServer, _ preset: VPNPreset<Configuration>) -> Void
 
     @StateObject
@@ -74,7 +76,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
                         for: providerId,
                         configurationType: Configuration.self
                     )
-                    if let selectedEntity {
+                    if let selectedEntity, filtersWithSelection {
                         filters = VPNFilters(with: selectedEntity.server.provider)
                     } else {
                         filters = VPNFilters()
@@ -122,6 +124,7 @@ extension VPNProviderServerView {
             providerId: .protonvpn,
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,
+            filtersWithSelection: false,
             onSelect: { _, _ in }
         )
     }

@@ -131,6 +131,7 @@ private extension OpenVPNView {
                     providerId: $0,
                     configurationType: OpenVPN.Configuration.self,
                     selectedEntity: providerEntity.wrappedValue,
+                    filtersWithSelection: true,
                     onSelect: onSelectServer
                 )
             }

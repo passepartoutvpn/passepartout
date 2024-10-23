@@ -99,6 +99,7 @@ private extension VPNProviderServerView.Subview {
             providerId: .tunnelbear,
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,
+            filtersWithSelection: false,
             onSelect: { _, _ in }
         )
     }

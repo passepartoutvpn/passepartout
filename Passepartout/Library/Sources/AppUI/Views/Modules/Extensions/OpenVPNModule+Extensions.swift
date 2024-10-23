@@ -49,8 +49,15 @@ extension OpenVPNModule: ProviderEntityViewProviding {
         with provider: ModuleMetadata.Provider,
         onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
     ) -> some View {
-        VPNProviderServerCoordinator<OpenVPN.Configuration>(
+        let selectedEntity: VPNEntity<OpenVPN.Configuration>? = try? provider
+            .entity
+            .map {
+                try providerEntity(from: $0)
+            }
+
+        return VPNProviderServerCoordinator(
             providerId: provider.id,
+            selectedEntity: selectedEntity,
             onSelect: onSelect
         )
     }

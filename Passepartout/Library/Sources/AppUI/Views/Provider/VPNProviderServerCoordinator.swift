@@ -34,6 +34,8 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
 
     let providerId: ProviderID
 
+    let selectedEntity: VPNEntity<Configuration>?
+
     let onSelect: (VPNEntity<Configuration>) async throws -> Void
 
     @StateObject
@@ -44,7 +46,8 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
             VPNProviderServerView(
                 providerId: providerId,
                 configurationType: Configuration.self,
-                selectedEntity: nil,
+                selectedEntity: selectedEntity,
+                filtersWithSelection: false,
                 onSelect: onSelect
             )
             .toolbar {
