@@ -1,5 +1,5 @@
 //
-//  ProviderSelectorView.swift
+//  ProviderEntitySelector.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/22/24.
@@ -27,7 +27,7 @@ import AppLibrary
 import PassepartoutKit
 import SwiftUI
 
-struct ProviderSelectorView: View {
+struct ProviderEntitySelector: View {
 
     @EnvironmentObject
     private var profileProcessor: ProfileProcessor
@@ -53,7 +53,7 @@ struct ProviderSelectorView: View {
     }
 }
 
-private extension ProviderSelectorView {
+private extension ProviderEntitySelector {
     func onSelect(_ entity: any ProviderEntity & Encodable) async throws {
         pp_log(.app, .info, "Select new provider entity: \(entity)")
 

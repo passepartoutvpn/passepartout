@@ -143,7 +143,7 @@ private extension AppInlineCoordinator {
     func modalDestination(for item: ModalRoute?) -> some View {
         switch item {
         case .editProviderEntity(let profile, let module, let provider):
-            ProviderSelectorView(
+            ProviderEntitySelector(
                 profileManager: profileManager,
                 tunnel: tunnel,
                 profile: profile,

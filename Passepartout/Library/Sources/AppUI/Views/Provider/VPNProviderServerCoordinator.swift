@@ -1,5 +1,5 @@
 //
-//  VPNProviderEntityCoordinator.swift
+//  VPNProviderServerCoordinator.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/16/24.
@@ -27,14 +27,12 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct VPNProviderEntityCoordinator<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
+struct VPNProviderServerCoordinator<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
 
     @Environment(\.dismiss)
     private var dismiss
 
     let providerId: ProviderID
-
-    let selectedEntity: VPNEntity<Configuration>?
 
     let onSelect: (VPNEntity<Configuration>) async throws -> Void
 
@@ -44,10 +42,9 @@ struct VPNProviderEntityCoordinator<Configuration>: View where Configuration: Pr
     var body: some View {
         NavigationStack {
             VPNProviderServerView(
-                apis: API.shared,
                 providerId: providerId,
                 configurationType: Configuration.self,
-                selectedEntity: selectedEntity,
+                selectedEntity: nil,
                 onSelect: onSelect
             )
             .toolbar {
@@ -68,7 +65,7 @@ struct VPNProviderEntityCoordinator<Configuration>: View where Configuration: Pr
     }
 }
 
-private extension VPNProviderEntityCoordinator {
+private extension VPNProviderServerCoordinator {
     func onSelect(server: VPNServer, preset: VPNPreset<Configuration>) {
         Task {
             do {
@@ -76,7 +73,7 @@ private extension VPNProviderEntityCoordinator {
                 try await onSelect(entity)
                 dismiss()
             } catch {
-                pp_log(.app, .fault, "Unable to select server \(server.serverId): \(error)")
+                pp_log(.app, .fault, "Unable to select server \(server.serverId) for provider \(server.provider.id): \(error)")
                 errorHandler.handle(error, title: Strings.Global.servers)
             }
         }

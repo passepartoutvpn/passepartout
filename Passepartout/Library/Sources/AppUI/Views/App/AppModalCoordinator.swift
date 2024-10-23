@@ -135,7 +135,7 @@ extension AppModalCoordinator {
             }
 
         case .editProviderEntity(let profile, let module, let provider):
-            ProviderSelectorView(
+            ProviderEntitySelector(
                 profileManager: profileManager,
                 tunnel: tunnel,
                 profile: profile,
