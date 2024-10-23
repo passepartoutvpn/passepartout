@@ -464,8 +464,8 @@ public enum Strings {
       public static let onDemandSuffix = Strings.tr("Localizable", "ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
     }
     public enum ProfileContext {
-      /// Move to...
-      public static let moveTo = Strings.tr("Localizable", "ui.profile_context.move_to", fallback: "Move to...")
+      /// Connect to...
+      public static let connectTo = Strings.tr("Localizable", "ui.profile_context.connect_to", fallback: "Connect to...")
     }
   }
   public enum Views {

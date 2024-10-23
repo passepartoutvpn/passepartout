@@ -45,7 +45,7 @@ struct ProfileContextMenu: View, Routable {
 
     var body: some View {
         tunnelToggleButton
-        providerEntityButton
+        providerConnectToButton
         if isInstalledProfile {
             tunnelRestartButton
         }
@@ -78,11 +78,11 @@ private extension ProfileContextMenu {
         }
     }
 
-    var providerEntityButton: some View {
+    var providerConnectToButton: some View {
         profile?
             .firstProviderModule
             .map { _ in
-                Button(Strings.Ui.ProfileContext.moveTo) {
+                Button(Strings.Ui.ProfileContext.connectTo) {
                     flow?.onEditProviderEntity(profile!)
                 }
             }

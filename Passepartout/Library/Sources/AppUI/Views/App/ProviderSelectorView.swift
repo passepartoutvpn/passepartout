@@ -29,8 +29,14 @@ import SwiftUI
 
 struct ProviderSelectorView: View {
 
+    @EnvironmentObject
+    private var profileProcessor: ProfileProcessor
+
     @ObservedObject
     var profileManager: ProfileManager
+
+    @ObservedObject
+    var tunnel: Tunnel
 
     let profile: Profile
 
@@ -49,9 +55,19 @@ struct ProviderSelectorView: View {
 
 private extension ProviderSelectorView {
     func onSelect(_ entity: any ProviderEntity & Encodable) async throws {
+        pp_log(.app, .info, "Select new provider entity: \(entity)")
+
         var builder = profile.builder()
         try builder.setProviderEntity(entity, forModuleWithId: module.id)
         let newProfile = try builder.tryBuild()
         try await profileManager.save(newProfile)
+
+        Task {
+            do {
+                try await tunnel.connect(with: newProfile, processor: profileProcessor)
+            } catch {
+                pp_log(.app, .error, "Unable to connect with new provider entity: \(error)")
+            }
+        }
     }
 }

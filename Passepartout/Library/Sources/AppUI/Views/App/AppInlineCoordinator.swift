@@ -145,6 +145,7 @@ private extension AppInlineCoordinator {
         case .editProviderEntity(let profile, let module, let provider):
             ProviderSelectorView(
                 profileManager: profileManager,
+                tunnel: tunnel,
                 profile: profile,
                 module: module,
                 provider: provider
