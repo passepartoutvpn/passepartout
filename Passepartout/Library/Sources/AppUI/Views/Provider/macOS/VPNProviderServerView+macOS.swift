@@ -52,7 +52,13 @@ extension VPNProviderServerView {
 
 private extension VPNProviderServerView.Subview {
     var tableView: some View {
-        Table(manager.filteredServers, selection: .constant(selectedServer?.id)) {
+        Table(manager.filteredServers) {
+            TableColumn("") { server in
+                ThemeImage(.marked)
+                    .opacity(server.id == selectedServer?.id ? 1.0 : 0.0)
+            }
+            .width(max: 20.0)
+
             TableColumn(Strings.Global.region) { server in
                 HStack {
                     ThemeCountryFlag(code: server.provider.countryCode)
