@@ -33,9 +33,6 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
     @EnvironmentObject
     private var providerManager: ProviderManager
 
-    @Environment(\.dismiss)
-    private var dismiss
-
     var apis: [APIMapper] = API.shared
 
     let providerId: ProviderID
@@ -112,14 +109,12 @@ extension VPNProviderServerView {
             return
         }
         onSelect(server, preset)
-        dismiss()
     }
 }
 
 // MARK: - Preview
 
 #Preview {
-
     NavigationStack {
         VPNProviderServerView<OpenVPN.Configuration>(
             apis: [API.bundled],

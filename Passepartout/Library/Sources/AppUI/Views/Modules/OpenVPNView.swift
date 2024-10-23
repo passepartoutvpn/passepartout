@@ -28,6 +28,9 @@ import SwiftUI
 
 struct OpenVPNView: View, ModuleDraftEditing {
 
+    @Environment(\.navigationPath)
+    private var path
+
     @ObservedObject
     var editor: ProfileEditor
 
@@ -102,6 +105,7 @@ private extension OpenVPNView {
 private extension OpenVPNView {
     func onSelectServer(server: VPNServer, preset: VPNPreset<OpenVPN.Configuration>) {
         providerEntity.wrappedValue = VPNEntity(server: server, preset: preset)
+        path.wrappedValue.removeLast()
     }
 
     func importConfiguration(from url: URL) {
