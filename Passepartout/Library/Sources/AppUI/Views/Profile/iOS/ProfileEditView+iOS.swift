@@ -71,7 +71,6 @@ struct ProfileEditView: View, Routable {
         .navigationTitle(Strings.Global.profile)
         .navigationBarBackButtonHidden(true)
         .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
-        .environment(\.navigationPath, $path)
     }
 }
 
@@ -155,6 +154,7 @@ private extension ProfileEditView {
                 moduleId: moduleId,
                 moduleViewFactory: moduleViewFactory
             )
+            .environment(\.navigationPath, $path)
         }
     }
 
