@@ -57,7 +57,7 @@ private extension VPNProviderServerView.Subview {
                 ThemeImage(.marked)
                     .opacity(server.id == selectedServer?.id ? 1.0 : 0.0)
             }
-            .width(max: 20.0)
+            .width(10.0)
 
             TableColumn(Strings.Global.region) { server in
                 HStack {
@@ -65,7 +65,6 @@ private extension VPNProviderServerView.Subview {
                     Text(server.region)
                 }
             }
-            .width(max: 200.0)
 
             TableColumn(Strings.Global.address, value: \.address)
 
@@ -76,7 +75,6 @@ private extension VPNProviderServerView.Subview {
                     Text(Strings.Views.Provider.selectServer)
                 }
             }
-            .width(min: 100.0, max: 100.0)
         }
         .disabled(manager.isFiltering)
     }
@@ -99,6 +97,7 @@ private extension VPNProviderServerView.Subview {
             providerId: .tunnelbear,
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,
+            filtersWithSelection: false,
             onSelect: { _, _ in }
         )
     }
