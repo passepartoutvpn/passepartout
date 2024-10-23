@@ -34,6 +34,8 @@ extension VPNProviderServerView {
         @ObservedObject
         var manager: VPNProviderManager<Configuration>
 
+        let selectedServer: VPNServer?
+
         @Binding
         var filters: VPNFilters
 
@@ -85,7 +87,7 @@ private extension VPNProviderServerView.Subview {
         countryServers(for: code)
             .map { servers in
                 DisclosureGroup {
-                    ForEach(servers, id: \.serverId, content: serverView)
+                    ForEach(servers, id: \.id, content: serverView)
                 } label: {
                     HStack {
                         ThemeCountryFlag(code: code)
@@ -99,7 +101,12 @@ private extension VPNProviderServerView.Subview {
         Button {
             onSelect(server)
         } label: {
-            Text(server.hostname ?? server.id)
+            HStack {
+                Text(server.hostname ?? server.serverId)
+                Spacer()
+                ThemeImage(.marked)
+                    .opacity(server.id == selectedServer?.id ? 1.0 : 0.0)
+            }
         }
     }
 
