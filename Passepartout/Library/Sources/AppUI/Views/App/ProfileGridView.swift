@@ -107,6 +107,9 @@ private extension ProfileGridView {
                     isInstalledProfile: true,
                     onEdit: {
                         flow?.onEditProfile($0)
+                    },
+                    onEditProviderEntity: {
+                        flow?.onEditProviderEntity($0, $1)
                     }
                 )
             }
@@ -125,6 +128,9 @@ private extension ProfileGridView {
             withMarker: true,
             onEdit: {
                 flow?.onEditProfile($0)
+            },
+            onEditProviderEntity: {
+                flow?.onEditProviderEntity($0, $1)
             }
         )
         .themeGridCell(isSelected: header.id == nextProfileId ?? tunnel.currentProfile?.id)
@@ -138,6 +144,9 @@ private extension ProfileGridView {
                 isInstalledProfile: false,
                 onEdit: {
                     flow?.onEditProfile($0)
+                },
+                onEditProviderEntity: {
+                    flow?.onEditProviderEntity($0, $1)
                 }
             )
         }

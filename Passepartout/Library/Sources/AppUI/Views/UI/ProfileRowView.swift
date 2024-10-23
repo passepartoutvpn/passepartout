@@ -57,6 +57,8 @@ struct ProfileRowView: View, TunnelContextProviding {
 
     let onEdit: (ProfileHeader) -> Void
 
+    let onEditProviderEntity: (Module, ModuleMetadata.Provider) -> Void
+
     var body: some View {
         HStack {
             Group {

@@ -103,6 +103,9 @@ private extension ProfileListView {
                     isInstalledProfile: true,
                     onEdit: {
                         flow?.onEditProfile($0)
+                    },
+                    onEditProviderEntity: {
+                        flow?.onEditProviderEntity($0, $1)
                     }
                 )
             }
@@ -121,6 +124,9 @@ private extension ProfileListView {
             withMarker: true,
             onEdit: {
                 flow?.onEditProfile($0)
+            },
+            onEditProviderEntity: {
+                flow?.onEditProviderEntity($0, $1)
             }
         )
         .contextMenu {
@@ -133,6 +139,9 @@ private extension ProfileListView {
                 isInstalledProfile: false,
                 onEdit: {
                     flow?.onEditProfile($0)
+                },
+                onEditProviderEntity: {
+                    flow?.onEditProviderEntity($0, $1)
                 }
             )
         }

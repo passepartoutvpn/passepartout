@@ -43,6 +43,8 @@ struct ProfileContextMenu: View {
 
     let onEdit: (ProfileHeader) -> Void
 
+    let onEditProviderEntity: (Module, ModuleMetadata.Provider) -> Void
+
     var body: some View {
         tunnelToggleButton
         if isInstalledProfile {
@@ -121,7 +123,8 @@ private extension ProfileContextMenu {
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
                 isInstalledProfile: true,
-                onEdit: { _ in }
+                onEdit: { _ in },
+                onEditProviderEntity: { _, _ in }
             )
         }
     }

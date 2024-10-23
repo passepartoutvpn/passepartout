@@ -132,6 +132,9 @@ private extension InstalledProfileView {
             isInstalledProfile: true,
             onEdit: {
                 flow?.onEditProfile($0)
+            },
+            onEditProviderEntity: {
+                flow?.onEditProviderEntity($0, $1)
             }
         )
     }
@@ -263,9 +266,10 @@ private struct ContentView: View {
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
                 nextProfileId: .constant(nil),
-                withMarker: true
-            ) { _ in
-            }
+                withMarker: true,
+                onEdit: { _ in },
+                onEditProviderEntity: { _, _ in }
+            )
         }
     }
 }
