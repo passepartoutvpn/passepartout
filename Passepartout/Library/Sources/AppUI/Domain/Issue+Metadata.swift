@@ -29,6 +29,8 @@ import PassepartoutKit
 
 extension Issue {
     struct Metadata {
+        let profile: Profile?
+
         let configuration: PassepartoutConfiguration
 
         let versionString: String
@@ -70,7 +72,8 @@ extension Issue {
             appLine: "\(Strings.Unlocalized.appName) \(metadata.versionString)",
             purchasedProducts: metadata.purchasedProducts,
             appLog: appLog,
-            tunnelLog: tunnelLog
+            tunnelLog: tunnelLog,
+            providerId: metadata.profile?.firstProviderModuleWithMetadata?.1.id
         )
     }
 }

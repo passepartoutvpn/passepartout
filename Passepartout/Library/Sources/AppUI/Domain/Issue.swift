@@ -26,11 +26,13 @@
 #if os(iOS)
 import CommonLibrary
 import Foundation
+import PassepartoutKit
 import UIKit
 #else
 import AppKit
 import CommonLibrary
 import Foundation
+import PassepartoutKit
 #endif
 
 struct Issue: Identifiable {
@@ -48,7 +50,15 @@ struct Issue: Identifiable {
 
     let deviceLine: String?
 
-    init(appLine: String?, purchasedProducts: Set<AppProduct>, appLog: Data? = nil, tunnelLog: Data? = nil) {
+    let providerName: String?
+
+    init(
+        appLine: String?,
+        purchasedProducts: Set<AppProduct>,
+        appLog: Data? = nil,
+        tunnelLog: Data? = nil,
+        providerId: ProviderID?
+    ) {
         id = UUID()
         self.appLine = appLine
         self.purchasedProducts = purchasedProducts
@@ -74,6 +84,8 @@ struct Issue: Identifiable {
 
         osLine = "\(osName) \(osVersion)"
         deviceLine = deviceType
+
+        providerName = providerId?.rawValue
     }
 
     var body: String {
@@ -81,8 +93,7 @@ struct Issue: Identifiable {
             .replacingOccurrences(of: "$appLine", with: appLine ?? "unknown")
             .replacingOccurrences(of: "$osLine", with: osLine)
             .replacingOccurrences(of: "$deviceLine", with: deviceLine ?? "unknown")
-            // FIXME: #710, report provider in issue
-            .replacingOccurrences(of: "$providerName", with: "none")
+            .replacingOccurrences(of: "$providerName", with: providerName ?? "none")
             .replacingOccurrences(of: "$providerLastUpdate", with: "unknown")
             .replacingOccurrences(of: "$purchasedProducts", with: purchasedProducts.map(\.rawValue).description)
     }

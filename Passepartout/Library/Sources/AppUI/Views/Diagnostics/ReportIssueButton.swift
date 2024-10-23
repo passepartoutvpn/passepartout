@@ -23,10 +23,15 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import PassepartoutKit
 import SwiftUI
 
 struct ReportIssueButton {
+
+    @EnvironmentObject
+    private var profileManager: ProfileManager
+
     let tunnel: Tunnel
 
     let title: String
@@ -41,4 +46,11 @@ struct ReportIssueButton {
 
     @State
     var issueBeingReported: Issue?
+
+    var installedProfile: Profile? {
+        guard let id = tunnel.currentProfile?.id else {
+            return nil
+        }
+        return profileManager.profile(withId: id)
+    }
 }

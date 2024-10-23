@@ -69,6 +69,7 @@ private extension ReportIssueButton {
                 isPending = false
             }
             let issue = await Issue.withMetadata(.init(
+                profile: installedProfile,
                 configuration: .shared,
                 versionString: BundleConfiguration.mainVersionString,
                 purchasedProducts: purchasedProducts,

@@ -45,7 +45,7 @@ struct DiagnosticsView: View {
     private var connectionObserver: ConnectionObserver
 
     @EnvironmentObject
-    var iapManager: IAPManager
+    private var iapManager: IAPManager
 
     @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
     private var logsPrivateData = false
