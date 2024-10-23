@@ -34,6 +34,8 @@ extension VPNProviderServerView {
         @ObservedObject
         var manager: VPNProviderManager<Configuration>
 
+        let selectedServer: VPNServer?
+
         @Binding
         var filters: VPNFilters
 
@@ -50,7 +52,7 @@ extension VPNProviderServerView {
 
 private extension VPNProviderServerView.Subview {
     var tableView: some View {
-        Table(manager.filteredServers) {
+        Table(manager.filteredServers, selection: .constant(selectedServer?.id)) {
             TableColumn(Strings.Global.region) { server in
                 HStack {
                     ThemeCountryFlag(code: server.provider.countryCode)

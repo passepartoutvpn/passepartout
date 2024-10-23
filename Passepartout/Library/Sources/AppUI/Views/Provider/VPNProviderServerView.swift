@@ -60,6 +60,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
         debugChanges()
         return Subview(
             manager: manager,
+            selectedServer: selectedEntity?.server,
             filters: $filters,
             onSelect: selectServer
         )
