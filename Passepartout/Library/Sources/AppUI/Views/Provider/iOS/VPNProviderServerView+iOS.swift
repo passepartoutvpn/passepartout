@@ -55,18 +55,52 @@ extension VPNProviderServerView {
 private extension VPNProviderServerView.Subview {
     var listView: some View {
         List {
-            // FIXME: #746, providers UI, iOS server rows + country flags
             if manager.isFiltering {
                 ProgressView()
             } else {
-                ForEach(manager.filteredServers, id: \.id) { server in
-                    Button("\(server.hostname ?? server.id) \(server.provider.countryCode)") {
-                        onSelect(server)
-                    }
-                }
+                ForEach(countryCodes, id: \.self, content: countryView)
             }
         }
         .themeAnimation(on: manager.isFiltering, category: .providers)
+    }
+
+    var countryCodes: [String] {
+        manager
+            .allCountryCodes
+            .sorted {
+                $0.localizedAsRegionCode! < $1.localizedAsRegionCode!
+            }
+    }
+
+    func countryServers(for code: String) -> [VPNServer]? {
+        manager
+            .filteredServers
+            .filter {
+                $0.provider.countryCode == code
+            }
+            .nilIfEmpty
+    }
+
+    func countryView(for code: String) -> some View {
+        countryServers(for: code)
+            .map { servers in
+                DisclosureGroup {
+                    ForEach(servers, id: \.serverId, content: serverView)
+                } label: {
+                    HStack {
+                        ThemeCountryFlag(code: code)
+                        Text(code.localizedAsRegionCode!)
+                    }
+                }
+            }
+    }
+
+    func serverView(for server: VPNServer) -> some View {
+        Button {
+            onSelect(server)
+        } label: {
+            Text(server.hostname ?? server.id)
+        }
     }
 
     var filtersItem: some ToolbarContent {
@@ -91,6 +125,21 @@ private extension VPNProviderServerView.Subview {
         }
         .presentationDetents([.medium])
     }
+}
+
+// MARK: - Preview
+
+#Preview {
+    NavigationStack {
+        VPNProviderServerView(
+            apis: [API.bundled],
+            providerId: .tunnelbear,
+            configurationType: OpenVPN.Configuration.self,
+            selectedEntity: nil,
+            onSelect: { _, _ in }
+        )
+    }
+    .withMockEnvironment()
 }
 
 #endif

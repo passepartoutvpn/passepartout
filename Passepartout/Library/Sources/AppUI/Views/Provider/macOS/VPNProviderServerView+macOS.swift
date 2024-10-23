@@ -82,4 +82,19 @@ private extension VPNProviderServerView.Subview {
     }
 }
 
+// MARK: - Preview
+
+#Preview {
+    NavigationStack {
+        VPNProviderServerView(
+            apis: [API.bundled],
+            providerId: .tunnelbear,
+            configurationType: OpenVPN.Configuration.self,
+            selectedEntity: nil,
+            onSelect: { _, _ in }
+        )
+    }
+    .withMockEnvironment()
+}
+
 #endif

@@ -39,7 +39,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 
     let configurationType: Configuration.Type
 
-    var selectedEntity: VPNEntity<Configuration>?
+    let selectedEntity: VPNEntity<Configuration>?
 
     let onSelect: (_ server: VPNServer, _ preset: VPNPreset<Configuration>) -> Void
 
@@ -119,9 +119,10 @@ extension VPNProviderServerView {
         VPNProviderServerView(
             apis: [API.bundled],
             providerId: .protonvpn,
-            configurationType: OpenVPN.Configuration.self
-        ) { _, _ in
-        }
+            configurationType: OpenVPN.Configuration.self,
+            selectedEntity: nil,
+            onSelect: { _, _ in }
+        )
     }
     .withMockEnvironment()
 }
