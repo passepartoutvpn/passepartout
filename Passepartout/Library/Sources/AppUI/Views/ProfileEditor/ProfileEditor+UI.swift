@@ -51,7 +51,7 @@ extension ProfileEditor {
         }
     }
 
-    func binding<T>(forModule module: T) -> Binding<T> where T: ModuleBuilder {
+    subscript<T>(module: T) -> Binding<T> where T: ModuleBuilder {
         Binding { [weak self] in
             guard let foundModule = self?.module(withId: module.id) else {
                 fatalError("Module not found in editor: \(module.id)")

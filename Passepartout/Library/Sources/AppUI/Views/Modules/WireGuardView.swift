@@ -47,7 +47,7 @@ struct WireGuardView: View {
 
     init(editor: ProfileEditor, module: WireGuardModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: module)
+        _draft = editor[module]
 //        _providerId = editor.binding(forProviderOf: module.id)
     }
 

@@ -41,7 +41,7 @@ struct DNSView: View {
 
     init(editor: ProfileEditor, module: DNSModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: module)
+        _draft = editor[module]
     }
 
     var body: some View {

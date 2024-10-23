@@ -40,7 +40,7 @@ struct HTTPProxyView: View {
 
     init(editor: ProfileEditor, module: HTTPProxyModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: module)
+        _draft = editor[module]
     }
 
     var body: some View {
