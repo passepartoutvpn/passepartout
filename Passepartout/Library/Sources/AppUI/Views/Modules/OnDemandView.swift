@@ -35,9 +35,6 @@ struct OnDemandView: View, ModuleDraftEditing {
     @EnvironmentObject
     private var iapManager: IAPManager
 
-    @Environment(\.navigationPath)
-    private var path
-
     @ObservedObject
     var editor: ProfileEditor
 
