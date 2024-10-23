@@ -92,6 +92,7 @@ private extension VPNProviderContentModifier {
         List {
             EmptyView()
                 .modifier(VPNProviderContentModifier(
+                    apis: [API.bundled],
                     providerId: .constant(.hideme),
                     selectedEntity: .constant(nil as VPNEntity<OpenVPN.Configuration>?),
                     isRequired: false,
