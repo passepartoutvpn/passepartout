@@ -61,6 +61,12 @@ private extension ProviderConnectingSelectorView {
         try builder.setProviderEntity(entity, forModuleWithId: module.id)
         let newProfile = try builder.tryBuild()
         try await profileManager.save(newProfile)
-        try await tunnel.connect(with: newProfile, processor: profileProcessor)
+        Task {
+            do {
+                try await tunnel.connect(with: newProfile, processor: profileProcessor)
+            } catch {
+                pp_log(.app, .error, "Unable to connect to server: \(error)")
+            }
+        }
     }
 }
