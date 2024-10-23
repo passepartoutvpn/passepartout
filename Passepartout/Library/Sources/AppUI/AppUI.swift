@@ -30,6 +30,9 @@ import PassepartoutKit
 public enum AppUI {
     public static func configure(with context: AppContext) {
         assertMissingModuleImplementations()
+        Task {
+            try? await context.providerManager.fetchIndex(from: API.shared)
+        }
     }
 }
 
