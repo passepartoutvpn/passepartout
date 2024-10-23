@@ -112,11 +112,13 @@ private extension InstalledProfileView {
             profile: profile,
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
-            errorHandler: errorHandler
-        ) { _ in
-            ThemeImage(.tunnelToggle)
-                .scaleEffect(1.5, anchor: .trailing)
-        }
+            errorHandler: errorHandler,
+            onProviderEntityRequired: flow?.onEditProviderEntity,
+            label: { _ in
+                ThemeImage(.tunnelToggle)
+                    .scaleEffect(1.5, anchor: .trailing)
+            }
+        )
         // TODO: #584, necessary to avoid cell selection
         .buttonStyle(.plain)
         .opacity(installedOpacity)

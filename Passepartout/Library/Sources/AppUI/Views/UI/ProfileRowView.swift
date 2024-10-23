@@ -96,15 +96,17 @@ private extension ProfileRowView {
             profile: profileManager.profile(withId: header.id),
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
-            errorHandler: errorHandler
-        ) { _ in
-            ProfileCardView(
-                style: style,
-                header: header
-            )
-            .frame(maxWidth: .infinity)
-            .contentShape(.rect)
-        }
+            errorHandler: errorHandler,
+            onProviderEntityRequired: flow?.onEditProviderEntity,
+            label: { _ in
+                ProfileCardView(
+                    style: style,
+                    header: header
+                )
+                .frame(maxWidth: .infinity)
+                .contentShape(.rect)
+            }
+        )
     }
 
     var sharingView: some View {

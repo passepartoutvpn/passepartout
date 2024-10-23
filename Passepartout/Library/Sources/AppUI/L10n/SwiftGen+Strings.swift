@@ -130,8 +130,6 @@ public enum Strings {
       }
       public enum Provider {
         /// No provider server selected.
-        public static let couldNotConnect = Strings.tr("Localizable", "errors.app.provider.could_not_connect", fallback: "No provider server selected.")
-        /// No provider server selected.
         public static let missingEntity = Strings.tr("Localizable", "errors.app.provider.missing_entity", fallback: "No provider server selected.")
       }
     }
