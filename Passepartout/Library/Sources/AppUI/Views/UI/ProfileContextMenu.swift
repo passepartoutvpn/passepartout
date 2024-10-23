@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileContextMenu: View {
+struct ProfileContextMenu: View, Routable {
     let profileManager: ProfileManager
 
     let tunnel: Tunnel
@@ -41,10 +41,11 @@ struct ProfileContextMenu: View {
 
     let isInstalledProfile: Bool
 
-    let onEdit: (ProfileHeader) -> Void
+    var flow: ProfileFlow?
 
     var body: some View {
         tunnelToggleButton
+        providerEntityButton
         if isInstalledProfile {
             tunnelRestartButton
         }
@@ -58,10 +59,14 @@ struct ProfileContextMenu: View {
 
 @MainActor
 private extension ProfileContextMenu {
+    var profile: Profile? {
+        profileManager.profile(withId: header.id)
+    }
+
     var tunnelToggleButton: some View {
         TunnelToggleButton(
             tunnel: tunnel,
-            profile: profileManager.profile(withId: header.id),
+            profile: profile,
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler
@@ -73,10 +78,20 @@ private extension ProfileContextMenu {
         }
     }
 
+    var providerEntityButton: some View {
+        profile?
+            .firstProviderModule
+            .map { _ in
+                Button(Strings.Ui.ProfileContext.moveTo) {
+                    flow?.onEditProviderEntity(profile!)
+                }
+            }
+    }
+
     var tunnelRestartButton: some View {
         TunnelRestartButton(
             tunnel: tunnel,
-            profile: profileManager.profile(withId: header.id),
+            profile: profile,
             errorHandler: errorHandler
         ) {
             ThemeImageLabel(Strings.Global.restart, .tunnelRestart)
@@ -85,7 +100,7 @@ private extension ProfileContextMenu {
 
     var profileEditButton: some View {
         Button {
-            onEdit(header)
+            flow?.onEditProfile(header)
         } label: {
             ThemeImageLabel(Strings.Global.edit, .profileEdit)
         }
@@ -120,8 +135,7 @@ private extension ProfileContextMenu {
                 header: Profile.mock.header(),
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
-                isInstalledProfile: true,
-                onEdit: { _ in }
+                isInstalledProfile: true
             )
         }
     }

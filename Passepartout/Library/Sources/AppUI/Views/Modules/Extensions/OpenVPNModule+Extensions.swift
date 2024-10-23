@@ -43,3 +43,22 @@ extension OpenVPNModule.Builder: InteractiveViewProviding {
         )
     }
 }
+
+extension OpenVPNModule: ProviderEntityViewProviding {
+    func providerEntityView(
+        with provider: ModuleMetadata.Provider,
+        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
+    ) -> some View {
+        let selectedEntity: VPNEntity<OpenVPN.Configuration>? = try? provider
+            .entity
+            .map {
+                try providerEntity(from: $0.data)
+            }
+
+        return VPNProviderEntityCoordinator(
+            providerId: provider.id,
+            selectedEntity: selectedEntity,
+            onSelect: onSelect
+        )
+    }
+}

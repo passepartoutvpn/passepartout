@@ -28,8 +28,6 @@
 import PassepartoutKit
 import SwiftUI
 
-// FIXME: #746, providers UI, macOS country flags
-
 extension VPNProviderServerView {
     struct Subview: View {
 
@@ -54,7 +52,10 @@ private extension VPNProviderServerView.Subview {
     var tableView: some View {
         Table(manager.filteredServers) {
             TableColumn(Strings.Global.region) { server in
-                Text(server.region)
+                HStack {
+                    ThemeCountryFlag(code: server.provider.countryCode)
+                    Text(server.region)
+                }
             }
             .width(max: 200.0)
 

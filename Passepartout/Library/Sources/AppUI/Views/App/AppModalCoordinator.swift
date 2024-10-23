@@ -62,15 +62,22 @@ struct AppModalCoordinator: View {
 // MARK: - Destinations
 
 extension AppModalCoordinator {
-    enum ModalRoute: String, Identifiable {
+    enum ModalRoute: Identifiable {
         case editProfile
+
+        case editProviderEntity(Profile, Module, ModuleMetadata.Provider)
 
         case settings
 
         case about
 
-        var id: String {
-            rawValue
+        var id: Int {
+            switch self {
+            case .editProfile: return 1
+            case .editProviderEntity: return 2
+            case .settings: return 3
+            case .about: return 4
+            }
         }
     }
 
@@ -87,6 +94,12 @@ extension AppModalCoordinator {
                         return
                     }
                     enterDetail(of: profile)
+                },
+                onEditProviderEntity: {
+                    guard let pair = $0.firstProviderModuleWithMetadata else {
+                        return
+                    }
+                    modalRoute = .editProviderEntity($0, pair.0, pair.1)
                 }
             )
         )
@@ -120,6 +133,14 @@ extension AppModalCoordinator {
             ) {
                 modalRoute = nil
             }
+
+        case .editProviderEntity(let profile, let module, let provider):
+            ProviderSelectorView(
+                profileManager: profileManager,
+                profile: profile,
+                module: module,
+                provider: provider
+            )
 
         case .settings:
             SettingsView(profileManager: profileManager)

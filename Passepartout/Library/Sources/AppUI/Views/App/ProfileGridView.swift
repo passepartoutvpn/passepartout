@@ -105,9 +105,7 @@ private extension ProfileGridView {
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     isInstalledProfile: true,
-                    onEdit: {
-                        flow?.onEditProfile($0)
-                    }
+                    flow: flow
                 )
             }
         }
@@ -123,9 +121,7 @@ private extension ProfileGridView {
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
             withMarker: true,
-            onEdit: {
-                flow?.onEditProfile($0)
-            }
+            flow: flow
         )
         .themeGridCell(isSelected: header.id == nextProfileId ?? tunnel.currentProfile?.id)
         .contextMenu {
@@ -136,9 +132,7 @@ private extension ProfileGridView {
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 isInstalledProfile: false,
-                onEdit: {
-                    flow?.onEditProfile($0)
-                }
+                flow: flow
             )
         }
         .id(header.id)

@@ -116,7 +116,7 @@ extension VPNProviderServerView {
 
 #Preview {
     NavigationStack {
-        VPNProviderServerView<OpenVPN.Configuration>(
+        VPNProviderServerView(
             apis: [API.bundled],
             providerId: .protonvpn,
             configurationType: OpenVPN.Configuration.self

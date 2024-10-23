@@ -400,18 +400,18 @@ struct ThemeImageLabel: View {
     }
 }
 
-struct ThemeDisclosableMenu<NameContent, MenuContent>: View where NameContent: View, MenuContent: View {
+struct ThemeDisclosableMenu<Content, Label>: View where Content: View, Label: View {
 
     @ViewBuilder
-    let name: NameContent
+    let content: () -> Content
 
     @ViewBuilder
-    let menu: () -> MenuContent
+    let label: Label
 
     var body: some View {
-        Menu(content: menu) {
+        Menu(content: content) {
             HStack(alignment: .firstTextBaseline) {
-                name
+                label
                 ThemeImage(.disclose)
             }
             .contentShape(.rect)

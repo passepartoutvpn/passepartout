@@ -60,6 +60,8 @@ struct TunnelToggleButton<Label>: View, TunnelContextProviding, ThemeProviding w
 
     let errorHandler: ErrorHandler
 
+    var onProviderEntityRequired: ((Profile) -> Void)?
+
     let label: (Bool) -> Label
 
     var body: some View {
@@ -138,6 +140,10 @@ private extension TunnelToggleButton {
         } catch is CancellationError {
             //
         } catch {
+            if (error as? PassepartoutError)?.code == .missingProviderEntity {
+                onProviderEntityRequired?(profile)
+                return
+            }
             errorHandler.handle(
                 error,
                 title: Strings.Global.connection,

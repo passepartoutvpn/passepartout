@@ -108,8 +108,6 @@ public enum Strings {
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
       }
-      /// No provider server selected.
-      public static let missingProviderEntity = Strings.tr("Localizable", "errors.app.missing_provider_entity", fallback: "No provider server selected.")
       public enum Passepartout {
         /// Routing module can only be enabled together with a connection.
         public static let connectionModuleRequired = Strings.tr("Localizable", "errors.app.passepartout.connection_module_required", fallback: "Routing module can only be enabled together with a connection.")
@@ -129,6 +127,10 @@ public enum Strings {
         }
         /// Unable to parse file.
         public static let parsing = Strings.tr("Localizable", "errors.app.passepartout.parsing", fallback: "Unable to parse file.")
+      }
+      public enum Provider {
+        /// No provider server selected.
+        public static let missingEntity = Strings.tr("Localizable", "errors.app.provider.missing_entity", fallback: "No provider server selected.")
       }
     }
     public enum Tunnel {
@@ -460,6 +462,10 @@ public enum Strings {
     public enum ConnectionStatus {
       ///  (on-demand)
       public static let onDemandSuffix = Strings.tr("Localizable", "ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
+    }
+    public enum ProfileContext {
+      /// Move to...
+      public static let moveTo = Strings.tr("Localizable", "ui.profile_context.move_to", fallback: "Move to...")
     }
   }
   public enum Views {

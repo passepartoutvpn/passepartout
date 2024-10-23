@@ -83,9 +83,9 @@ private extension InstalledProfileView {
 
     var actionableNameView: some View {
         ThemeDisclosableMenu {
-            nameView
-        } menu: {
             menuContent
+        } label: {
+            nameView
         }
     }
 
@@ -98,8 +98,11 @@ private extension InstalledProfileView {
     }
 
     var statusView: some View {
-        ConnectionStatusView(tunnel: tunnel)
-            .opacity(installedOpacity)
+        HStack {
+            providerSelectorButton
+            ConnectionStatusView(tunnel: tunnel)
+                .opacity(installedOpacity)
+        }
     }
 
     var toggleButton: some View {
@@ -109,11 +112,13 @@ private extension InstalledProfileView {
             profile: profile,
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
-            errorHandler: errorHandler
-        ) { _ in
-            ThemeImage(.tunnelToggle)
-                .scaleEffect(1.5, anchor: .trailing)
-        }
+            errorHandler: errorHandler,
+            onProviderEntityRequired: flow?.onEditProviderEntity,
+            label: { _ in
+                ThemeImage(.tunnelToggle)
+                    .scaleEffect(1.5, anchor: .trailing)
+            }
+        )
         // TODO: #584, necessary to avoid cell selection
         .buttonStyle(.plain)
         .opacity(installedOpacity)
@@ -127,8 +132,37 @@ private extension InstalledProfileView {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             isInstalledProfile: true,
-            onEdit: {
-                flow?.onEditProfile($0)
+            flow: flow
+        )
+    }
+
+    var providerSelectorButton: some View {
+        profile?
+            .firstProviderModuleWithMetadata
+            .map { _, provider in
+                Button {
+                    flow?.onEditProviderEntity(profile!)
+                } label: {
+                    providerSelectorLabel(with: provider)
+                }
+                .buttonStyle(.plain)
+            }
+    }
+
+    func providerSelectorLabel(with provider: ModuleMetadata.Provider) -> some View {
+        ProviderCountryFlag(provider: provider)
+    }
+}
+
+private struct ProviderCountryFlag: View {
+    let provider: ModuleMetadata.Provider
+
+    var body: some View {
+        ThemeCountryFlag(
+            code: provider.entity?.countryCode,
+            placeholderTip: Strings.Errors.App.Provider.missingEntity,
+            countryTip: {
+                $0.localizedAsRegionCode
             }
         )
     }
@@ -230,8 +264,7 @@ private struct ContentView: View {
                 errorHandler: .default(),
                 nextProfileId: .constant(nil),
                 withMarker: true
-            ) { _ in
-            }
+            )
         }
     }
 }
