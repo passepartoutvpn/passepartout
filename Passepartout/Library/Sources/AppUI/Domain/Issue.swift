@@ -57,7 +57,7 @@ struct Issue: Identifiable {
         purchasedProducts: Set<AppProduct>,
         appLog: Data? = nil,
         tunnelLog: Data? = nil,
-        providerId: ProviderID?
+        providerId: ProviderID? = nil
     ) {
         id = UUID()
         self.appLine = appLine
