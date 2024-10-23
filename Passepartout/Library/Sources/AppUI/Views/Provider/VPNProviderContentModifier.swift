@@ -28,8 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-@MainActor
-struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier where Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
+struct VPNProviderContentModifier<Configuration, Destination, ProviderRows>: ViewModifier where Configuration: ProviderConfigurationIdentifiable & Codable, Destination: Hashable, ProviderRows: View {
 
     var apis: [APIMapper] = API.shared
 
@@ -40,6 +39,8 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
     var selectedEntity: VPNEntity<Configuration>?
 
     let isRequired: Bool
+
+    let entityDestination: Destination
 
     @ViewBuilder
     let providerRows: ProviderRows
@@ -53,7 +54,7 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
                 entityType: VPNEntity<Configuration>.self,
                 isRequired: isRequired,
                 providerRows: {
-                    providerServerRow
+                    providerEntityRow
                     providerRows
                 },
                 onSelectProvider: onSelectProvider
@@ -62,18 +63,8 @@ struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier whe
 }
 
 private extension VPNProviderContentModifier {
-    var providerServerRow: some View {
-        NavigationLink {
-            providerId.map {
-                VPNProviderServerView<Configuration>(
-                    apis: apis,
-                    providerId: $0,
-                    configurationType: Configuration.self,
-                    selectedEntity: selectedEntity,
-                    onSelect: onSelectServer
-                )
-            }
-        } label: {
+    var providerEntityRow: some View {
+        NavigationLink(value: entityDestination) {
             HStack {
                 Text(Strings.Global.server)
                 if let selectedEntity {
@@ -92,25 +83,29 @@ private extension VPNProviderContentModifier {
             selectedEntity = nil
         }
     }
-
-    func onSelectServer(server: VPNServer, preset: VPNPreset<Configuration>) {
-        selectedEntity = VPNEntity(server: server, preset: preset)
-    }
 }
 
 // MARK: - Preview
 
 #Preview {
-    List {
-        EmptyView()
-            .modifier(VPNProviderContentModifier(
-                providerId: .constant(.hideme),
-                selectedEntity: .constant(nil as VPNEntity<OpenVPN.Configuration>?),
-                isRequired: false,
-                providerRows: {
-                    Text("Other")
-                }
-            ))
+    NavigationStack {
+        List {
+            EmptyView()
+                .modifier(VPNProviderContentModifier(
+                    apis: [API.bundled],
+                    providerId: .constant(.hideme),
+                    selectedEntity: .constant(nil as VPNEntity<OpenVPN.Configuration>?),
+                    isRequired: false,
+                    entityDestination: "Destination",
+                    providerRows: {
+                        Text("Other")
+                    }
+                ))
+        }
+        .navigationTitle("Preview")
+        .navigationDestination(for: String.self) {
+            Text($0)
+        }
     }
     .withMockEnvironment()
 }

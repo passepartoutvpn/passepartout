@@ -37,6 +37,9 @@ struct ProfileSplitView: View, Routable {
     var flow: ProfileCoordinator.Flow?
 
     @State
+    private var detailPath = NavigationPath()
+
+    @State
     private var selectedModuleId: UUID? = ModuleListView.generalModuleId
 
     @State
@@ -52,7 +55,7 @@ struct ProfileSplitView: View, Routable {
                 flow: flow
             )
         } detail: {
-            NavigationStack {
+            NavigationStack(path: $detailPath) {
                 switch selectedModuleId {
                 case ModuleListView.generalModuleId:
                     detailView(for: .general)
@@ -62,6 +65,7 @@ struct ProfileSplitView: View, Routable {
                 }
             }
             .toolbar(content: toolbarContent)
+            .environment(\.navigationPath, $detailPath)
         }
     }
 }

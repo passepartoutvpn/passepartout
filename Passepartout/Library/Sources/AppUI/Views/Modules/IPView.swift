@@ -27,21 +27,15 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct IPView: View {
+struct IPView: View, ModuleDraftEditing {
 
     @ObservedObject
-    private var editor: ProfileEditor
+    var editor: ProfileEditor
 
-    @Binding
-    private var draft: IPModule.Builder
+    let module: IPModule.Builder
 
     @State
     private var routePresentation: RoutePresentation?
-
-    init(editor: ProfileEditor, module: IPModule.Builder) {
-        self.editor = editor
-        _draft = editor.binding(forModule: module)
-    }
 
     var body: some View {
         Group {
@@ -49,7 +43,7 @@ struct IPView: View {
             ipSections(for: .v6)
             interfaceSection
         }
-        .moduleView(editor: editor, draft: draft)
+        .moduleView(editor: editor, draft: draft.wrappedValue)
         .themeModal(item: $routePresentation, content: routeModal)
     }
 }
@@ -137,9 +131,9 @@ private extension IPView {
             ThemeTextField(
                 Strings.Unlocalized.mtu,
                 text: Binding {
-                    draft.mtu?.description ?? ""
+                    draft.wrappedValue.mtu?.description ?? ""
                 } set: {
-                    draft.mtu = Int($0)
+                    draft.wrappedValue.mtu = Int($0)
                 },
                 placeholder: Strings.Unlocalized.Placeholders.mtu
             )
@@ -153,16 +147,16 @@ private extension IPView {
         switch family {
         case .v4:
             return Binding {
-                draft.ipv4 ?? IPSettings(subnet: nil)
+                draft.wrappedValue.ipv4 ?? IPSettings(subnet: nil)
             } set: {
-                draft.ipv4 = $0
+                draft.wrappedValue.ipv4 = $0
             }
 
         case .v6:
             return Binding {
-                draft.ipv6 ?? IPSettings(subnet: nil)
+                draft.wrappedValue.ipv6 ?? IPSettings(subnet: nil)
             } set: {
-                draft.ipv6 = $0
+                draft.wrappedValue.ipv6 = $0
             }
         }
     }
@@ -180,31 +174,31 @@ private extension IPView {
                 case .included(let family):
                     switch family {
                     case .v4:
-                        if draft.ipv4 == nil {
-                            draft.ipv4 = IPSettings(subnet: nil)
+                        if draft.wrappedValue.ipv4 == nil {
+                            draft.wrappedValue.ipv4 = IPSettings(subnet: nil)
                         }
-                        draft.ipv4?.include(route)
+                        draft.wrappedValue.ipv4?.include(route)
 
                     case .v6:
-                        if draft.ipv6 == nil {
-                            draft.ipv6 = IPSettings(subnet: nil)
+                        if draft.wrappedValue.ipv6 == nil {
+                            draft.wrappedValue.ipv6 = IPSettings(subnet: nil)
                         }
-                        draft.ipv6?.include(route)
+                        draft.wrappedValue.ipv6?.include(route)
                     }
 
                 case .excluded(let family):
                     switch family {
                     case .v4:
-                        if draft.ipv4 == nil {
-                            draft.ipv4 = IPSettings(subnet: nil)
+                        if draft.wrappedValue.ipv4 == nil {
+                            draft.wrappedValue.ipv4 = IPSettings(subnet: nil)
                         }
-                        draft.ipv4?.exclude(route)
+                        draft.wrappedValue.ipv4?.exclude(route)
 
                     case .v6:
-                        if draft.ipv6 == nil {
-                            draft.ipv6 = IPSettings(subnet: nil)
+                        if draft.wrappedValue.ipv6 == nil {
+                            draft.wrappedValue.ipv6 = IPSettings(subnet: nil)
                         }
-                        draft.ipv6?.exclude(route)
+                        draft.wrappedValue.ipv6?.exclude(route)
                     }
                 }
             }

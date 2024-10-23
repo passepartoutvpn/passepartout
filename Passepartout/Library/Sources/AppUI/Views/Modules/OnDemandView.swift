@@ -27,7 +27,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct OnDemandView: View {
+struct OnDemandView: View, ModuleDraftEditing {
 
     @EnvironmentObject
     private var theme: Theme
@@ -36,12 +36,11 @@ struct OnDemandView: View {
     private var iapManager: IAPManager
 
     @ObservedObject
-    private var editor: ProfileEditor
+    var editor: ProfileEditor
+
+    let module: OnDemandModule.Builder
 
     private let wifi: Wifi
-
-    @Binding
-    private var draft: OnDemandModule.Builder
 
     @State
     private var paywallReason: PaywallReason?
@@ -52,8 +51,8 @@ struct OnDemandView: View {
         observer: WifiObserver? = nil
     ) {
         self.editor = editor
+        self.module = module
         wifi = Wifi(observer: observer ?? CoreLocationWifiObserver())
-        _draft = editor.binding(forModule: module)
     }
 
     var body: some View {
@@ -61,7 +60,7 @@ struct OnDemandView: View {
             enabledSection
             restrictedArea
         }
-        .moduleView(editor: editor, draft: draft)
+        .moduleView(editor: editor, draft: draft.wrappedValue)
         .modifier(PaywallModifier(reason: $paywallReason))
     }
 }
@@ -75,7 +74,7 @@ private extension OnDemandView {
 
     var enabledSection: some View {
         Section {
-            Toggle(Strings.Global.enabled, isOn: $draft.isEnabled)
+            Toggle(Strings.Global.enabled, isOn: draft.isEnabled)
         }
     }
 
@@ -91,9 +90,9 @@ private extension OnDemandView {
             EmptyView()
 
         default:
-            if draft.isEnabled {
+            if draft.wrappedValue.isEnabled {
                 policySection
-                if draft.policy != .any {
+                if draft.wrappedValue.policy != .any {
                     networkSection
                     wifiSection
                 }
@@ -102,7 +101,7 @@ private extension OnDemandView {
     }
 
     var policySection: some View {
-        Picker(Strings.Modules.OnDemand.policy, selection: $draft.policy) {
+        Picker(Strings.Modules.OnDemand.policy, selection: draft.policy) {
             ForEach(Self.allPolicies, id: \.self) {
                 Text($0.localizedDescription)
             }
@@ -111,16 +110,16 @@ private extension OnDemandView {
     }
 
     var policyFooterDescription: String {
-        guard draft.isEnabled else {
+        guard draft.wrappedValue.isEnabled else {
             return "" // better animation than removing footer completely
         }
         let suffix: String
-        switch draft.policy {
+        switch draft.wrappedValue.policy {
         case .any:
             suffix = Strings.Modules.OnDemand.Policy.Footer.any
 
         case .including, .excluding:
-            if draft.policy == .including {
+            if draft.wrappedValue.policy == .including {
                 suffix = Strings.Modules.OnDemand.Policy.Footer.including
             } else {
                 suffix = Strings.Modules.OnDemand.Policy.Footer.excluding
@@ -132,9 +131,9 @@ private extension OnDemandView {
     var networkSection: some View {
         Group {
             if Utils.hasCellularData() {
-                Toggle(Strings.Modules.OnDemand.mobile, isOn: $draft.withMobileNetwork)
+                Toggle(Strings.Modules.OnDemand.mobile, isOn: draft.withMobileNetwork)
             } else if Utils.hasEthernet() {
-                Toggle(Strings.Modules.OnDemand.ethernet, isOn: $draft.withEthernetNetwork)
+                Toggle(Strings.Modules.OnDemand.ethernet, isOn: draft.withEthernetNetwork)
             }
         }
         .themeSection(header: Strings.Global.networks)
@@ -173,53 +172,53 @@ private extension OnDemandView {
 private extension OnDemandView {
     var allSSIDs: Binding<[String]> {
         .init {
-            Array(draft.withSSIDs.keys)
+            Array(draft.wrappedValue.withSSIDs.keys)
         } set: { newValue in
-            draft.withSSIDs.forEach {
+            draft.wrappedValue.withSSIDs.forEach {
                 guard newValue.contains($0.key) else {
-                    draft.withSSIDs.removeValue(forKey: $0.key)
+                    draft.wrappedValue.withSSIDs.removeValue(forKey: $0.key)
                     return
                 }
             }
             newValue.forEach {
-                guard draft.withSSIDs[$0] == nil else {
+                guard draft.wrappedValue.withSSIDs[$0] == nil else {
                     return
                 }
-                draft.withSSIDs[$0] = false
+                draft.wrappedValue.withSSIDs[$0] = false
             }
         }
     }
 
     var onSSIDs: Binding<Set<String>> {
         .init {
-            Set(draft.withSSIDs.filter {
+            Set(draft.wrappedValue.withSSIDs.filter {
                 $0.value
             }.map(\.key))
         } set: { newValue in
-            draft.withSSIDs.forEach {
+            draft.wrappedValue.withSSIDs.forEach {
                 guard newValue.contains($0.key) else {
-                    if draft.withSSIDs[$0.key] != nil {
-                        draft.withSSIDs[$0.key] = false
+                    if draft.wrappedValue.withSSIDs[$0.key] != nil {
+                        draft.wrappedValue.withSSIDs[$0.key] = false
                     } else {
-                        draft.withSSIDs.removeValue(forKey: $0.key)
+                        draft.wrappedValue.withSSIDs.removeValue(forKey: $0.key)
                     }
                     return
                 }
             }
             newValue.forEach {
-                guard !(draft.withSSIDs[$0] ?? false) else {
+                guard !(draft.wrappedValue.withSSIDs[$0] ?? false) else {
                     return
                 }
-                draft.withSSIDs[$0] = true
+                draft.wrappedValue.withSSIDs[$0] = true
             }
         }
     }
 
     func isSSIDOn(_ ssid: String) -> Binding<Bool> {
         .init {
-            draft.withSSIDs[ssid] ?? false
+            draft.wrappedValue.withSSIDs[ssid] ?? false
         } set: {
-            draft.withSSIDs[ssid] = $0
+            draft.wrappedValue.withSSIDs[ssid] = $0
         }
     }
 }
@@ -228,7 +227,7 @@ private extension OnDemandView {
     func requestSSID(_ text: Binding<String>) {
         Task { @MainActor in
             let ssid = try await wifi.currentSSID()
-            if !draft.withSSIDs.keys.contains(ssid) {
+            if !draft.wrappedValue.withSSIDs.keys.contains(ssid) {
                 text.wrappedValue = ssid
             }
         }

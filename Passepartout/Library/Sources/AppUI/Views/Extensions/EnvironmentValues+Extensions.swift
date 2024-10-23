@@ -1,8 +1,8 @@
 //
-//  OpenVPNModule+Extensions.swift
+//  EnvironmentValues+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/17/24.
+//  Created by Davide De Rosa on 10/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,19 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
 import SwiftUI
 
-extension OpenVPNModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        OpenVPNView(editor: editor, module: self)
+extension EnvironmentValues {
+    var navigationPath: Binding<NavigationPath> {
+        get {
+            self[NavigationPathKey.self]
+        }
+        set {
+            self[NavigationPathKey.self] = newValue
+        }
     }
 }
 
-extension OpenVPNModule.Builder: InteractiveViewProviding {
-    func interactiveView(with editor: ProfileEditor) -> some View {
-        let draft = editor[self]
-
-        return OpenVPNView.CredentialsView(
-            isInteractive: draft.isInteractive,
-            credentials: draft.credentials,
-            isAuthenticating: true
-        )
-    }
+private struct NavigationPathKey: EnvironmentKey {
+    static let defaultValue: Binding<NavigationPath> = .constant(NavigationPath())
 }

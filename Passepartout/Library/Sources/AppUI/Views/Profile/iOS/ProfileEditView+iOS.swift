@@ -71,6 +71,7 @@ struct ProfileEditView: View, Routable {
         .navigationTitle(Strings.Global.profile)
         .navigationBarBackButtonHidden(true)
         .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+        .environment(\.navigationPath, $path)
     }
 }
 

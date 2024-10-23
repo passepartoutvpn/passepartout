@@ -1,8 +1,8 @@
 //
-//  OpenVPNModule+Extensions.swift
+//  ModuleDraftEditing.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/17/24.
+//  Created by Davide De Rosa on 10/23/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,20 +26,18 @@
 import PassepartoutKit
 import SwiftUI
 
-extension OpenVPNModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        OpenVPNView(editor: editor, module: self)
-    }
+protocol ModuleDraftEditing {
+    associatedtype Draft: ModuleBuilder
+
+    var editor: ProfileEditor { get }
+
+    var module: Draft { get }
 }
 
-extension OpenVPNModule.Builder: InteractiveViewProviding {
-    func interactiveView(with editor: ProfileEditor) -> some View {
-        let draft = editor[self]
+extension ModuleDraftEditing {
 
-        return OpenVPNView.CredentialsView(
-            isInteractive: draft.isInteractive,
-            credentials: draft.credentials,
-            isAuthenticating: true
-        )
+    @MainActor
+    var draft: Binding<Draft> {
+        editor[module]
     }
 }

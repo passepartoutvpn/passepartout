@@ -28,21 +28,15 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct DNSView: View {
+struct DNSView: View, ModuleDraftEditing {
 
     @EnvironmentObject
     private var theme: Theme
 
     @ObservedObject
-    private var editor: ProfileEditor
+    var editor: ProfileEditor
 
-    @Binding
-    private var draft: DNSModule.Builder
-
-    init(editor: ProfileEditor, module: DNSModule.Builder) {
-        self.editor = editor
-        _draft = editor.binding(forModule: module)
-    }
+    let module: DNSModule.Builder
 
     var body: some View {
         debugChanges()
@@ -56,7 +50,7 @@ struct DNSView: View {
             .labelsHidden()
         }
         .themeManualInput()
-        .moduleView(editor: editor, draft: draft)
+        .moduleView(editor: editor, draft: draft.wrappedValue)
     }
 }
 
@@ -69,21 +63,21 @@ private extension DNSView {
 
     var protocolSection: some View {
         Section {
-            Picker(Strings.Global.protocol, selection: $draft.protocolType) {
+            Picker(Strings.Global.protocol, selection: draft.protocolType) {
                 ForEach(Self.allProtocols, id: \.self) {
                     Text($0.localizedDescription)
                 }
             }
-            switch draft.protocolType {
+            switch draft.wrappedValue.protocolType {
             case .cleartext:
                 EmptyView()
 
             case .https:
-                ThemeTextField(Strings.Unlocalized.url, text: $draft.dohURL, placeholder: Strings.Unlocalized.Placeholders.dohURL)
+                ThemeTextField(Strings.Unlocalized.url, text: draft.dohURL, placeholder: Strings.Unlocalized.Placeholders.dohURL)
                     .labelsHidden()
 
             case .tls:
-                ThemeTextField(Strings.Global.hostname, text: $draft.dotHostname, placeholder: Strings.Unlocalized.Placeholders.dotHostname)
+                ThemeTextField(Strings.Global.hostname, text: draft.dotHostname, placeholder: Strings.Unlocalized.Placeholders.dotHostname)
                     .labelsHidden()
             }
         }
@@ -91,7 +85,7 @@ private extension DNSView {
 
     var domainSection: some View {
         Group {
-            ThemeTextField(Strings.Global.domain, text: $draft.domainName ?? "", placeholder: Strings.Unlocalized.Placeholders.hostname)
+            ThemeTextField(Strings.Global.domain, text: draft.domainName ?? "", placeholder: Strings.Unlocalized.Placeholders.hostname)
         }
         .themeSection(header: Strings.Global.domain)
     }
@@ -100,7 +94,7 @@ private extension DNSView {
         theme.listSection(
             Strings.Entities.Dns.servers,
             addTitle: Strings.Modules.Dns.Servers.add,
-            originalItems: $draft.servers,
+            originalItems: draft.servers,
             itemLabel: {
                 if $0 {
                     Text($1.wrappedValue)
@@ -115,7 +109,7 @@ private extension DNSView {
         theme.listSection(
             Strings.Entities.Dns.searchDomains,
             addTitle: Strings.Modules.Dns.SearchDomains.add,
-            originalItems: $draft.searchDomains ?? [],
+            originalItems: draft.searchDomains ?? [],
             itemLabel: {
                 if $0 {
                     Text($1.wrappedValue)
