@@ -45,6 +45,7 @@ struct ProfileContextMenu: View, Routable {
 
     var body: some View {
         tunnelToggleButton
+        providerEntityButton
         if isInstalledProfile {
             tunnelRestartButton
         }
@@ -58,10 +59,14 @@ struct ProfileContextMenu: View, Routable {
 
 @MainActor
 private extension ProfileContextMenu {
+    var profile: Profile? {
+        profileManager.profile(withId: header.id)
+    }
+
     var tunnelToggleButton: some View {
         TunnelToggleButton(
             tunnel: tunnel,
-            profile: profileManager.profile(withId: header.id),
+            profile: profile,
             nextProfileId: .constant(nil),
             interactiveManager: interactiveManager,
             errorHandler: errorHandler
@@ -73,10 +78,20 @@ private extension ProfileContextMenu {
         }
     }
 
+    var providerEntityButton: some View {
+        profile?
+            .firstProviderModule
+            .map { _ in
+                Button(Strings.Ui.ProfileContext.moveTo) {
+                    flow?.onEditProviderEntity(profile!)
+                }
+            }
+    }
+
     var tunnelRestartButton: some View {
         TunnelRestartButton(
             tunnel: tunnel,
-            profile: profileManager.profile(withId: header.id),
+            profile: profile,
             errorHandler: errorHandler
         ) {
             ThemeImageLabel(Strings.Global.restart, .tunnelRestart)

@@ -463,6 +463,10 @@ public enum Strings {
       ///  (on-demand)
       public static let onDemandSuffix = Strings.tr("Localizable", "ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
     }
+    public enum ProfileContext {
+      /// Move to...
+      public static let moveTo = Strings.tr("Localizable", "ui.profile_context.move_to", fallback: "Move to...")
+    }
   }
   public enum Views {
     public enum About {
