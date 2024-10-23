@@ -150,13 +150,9 @@ private extension ProviderContentModifier {
 private extension ProviderContentModifier {
     func loadCurrentProvider() {
        Task {
+           await refreshIndex()
            if let providerId {
-               async let index = await refreshIndex()
-               async let provider = await refreshInfrastructure(for: providerId)
-               _ = await (index, provider)
                onSelectProvider(providerManager, providerId, true)
-           } else {
-               await refreshIndex()
            }
        }
     }
