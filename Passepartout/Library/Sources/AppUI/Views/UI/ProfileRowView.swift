@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileRowView: View, TunnelContextProviding {
+struct ProfileRowView: View, Routable, TunnelContextProviding {
 
     @EnvironmentObject
     private var theme: Theme
@@ -55,9 +55,7 @@ struct ProfileRowView: View, TunnelContextProviding {
 
     let withMarker: Bool
 
-    let onEdit: (ProfileHeader) -> Void
-
-    let onEditProviderEntity: (Module, ModuleMetadata.Provider) -> Void
+    var flow: ProfileFlow?
 
     var body: some View {
         HStack {
@@ -72,7 +70,9 @@ struct ProfileRowView: View, TunnelContextProviding {
                 if isShared {
                     sharingView
                 }
-                ProfileInfoButton(header: header, onEdit: onEdit)
+                ProfileInfoButton(header: header) {
+                    flow?.onEdit($0)
+                }
             }
             .imageScale(.large)
         }

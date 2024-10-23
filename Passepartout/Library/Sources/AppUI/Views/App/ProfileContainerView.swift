@@ -29,12 +29,6 @@ import SwiftUI
 import UtilsLibrary
 
 struct ProfileContainerView: View, Routable, TunnelInstallationProviding {
-    struct Flow {
-        let onEditProfile: (ProfileHeader) -> Void
-
-        let onEditProviderEntity: (Module, ModuleMetadata.Provider) -> Void
-    }
-
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
@@ -46,7 +40,7 @@ struct ProfileContainerView: View, Routable, TunnelInstallationProviding {
     @Binding
     var isImporting: Bool
 
-    var flow: Flow?
+    var flow: ProfileFlow?
 
     @StateObject
     private var interactiveManager = InteractiveManager()

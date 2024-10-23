@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileContextMenu: View {
+struct ProfileContextMenu: View, Routable {
     let profileManager: ProfileManager
 
     let tunnel: Tunnel
@@ -41,9 +41,7 @@ struct ProfileContextMenu: View {
 
     let isInstalledProfile: Bool
 
-    let onEdit: (ProfileHeader) -> Void
-
-    let onEditProviderEntity: (Module, ModuleMetadata.Provider) -> Void
+    var flow: ProfileFlow?
 
     var body: some View {
         tunnelToggleButton
@@ -87,7 +85,7 @@ private extension ProfileContextMenu {
 
     var profileEditButton: some View {
         Button {
-            onEdit(header)
+            flow?.onEdit(header)
         } label: {
             ThemeImageLabel(Strings.Global.edit, .profileEdit)
         }
@@ -122,9 +120,7 @@ private extension ProfileContextMenu {
                 header: Profile.mock.header(),
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
-                isInstalledProfile: true,
-                onEdit: { _ in },
-                onEditProviderEntity: { _, _ in }
+                isInstalledProfile: true
             )
         }
     }

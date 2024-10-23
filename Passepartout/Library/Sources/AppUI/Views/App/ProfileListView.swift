@@ -101,12 +101,7 @@ private extension ProfileListView {
                     interactiveManager: interactiveManager,
                     errorHandler: errorHandler,
                     isInstalledProfile: true,
-                    onEdit: {
-                        flow?.onEditProfile($0)
-                    },
-                    onEditProviderEntity: {
-                        flow?.onEditProviderEntity($0, $1)
-                    }
+                    flow: flow
                 )
             }
         }
@@ -122,12 +117,7 @@ private extension ProfileListView {
             errorHandler: errorHandler,
             nextProfileId: $nextProfileId,
             withMarker: true,
-            onEdit: {
-                flow?.onEditProfile($0)
-            },
-            onEditProviderEntity: {
-                flow?.onEditProviderEntity($0, $1)
-            }
+            flow: flow
         )
         .contextMenu {
             ProfileContextMenu(
@@ -137,12 +127,7 @@ private extension ProfileListView {
                 interactiveManager: interactiveManager,
                 errorHandler: errorHandler,
                 isInstalledProfile: false,
-                onEdit: {
-                    flow?.onEditProfile($0)
-                },
-                onEditProviderEntity: {
-                    flow?.onEditProviderEntity($0, $1)
-                }
+                flow: flow
             )
         }
         .id(header.id)

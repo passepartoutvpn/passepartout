@@ -130,12 +130,7 @@ private extension InstalledProfileView {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
             isInstalledProfile: true,
-            onEdit: {
-                flow?.onEditProfile($0)
-            },
-            onEditProviderEntity: {
-                flow?.onEditProviderEntity($0, $1)
-            }
+            flow: flow
         )
     }
 
@@ -266,9 +261,7 @@ private struct ContentView: View {
                 interactiveManager: InteractiveManager(),
                 errorHandler: .default(),
                 nextProfileId: .constant(nil),
-                withMarker: true,
-                onEdit: { _ in },
-                onEditProviderEntity: { _, _ in }
+                withMarker: true
             )
         }
     }

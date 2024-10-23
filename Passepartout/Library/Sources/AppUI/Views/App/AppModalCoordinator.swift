@@ -89,7 +89,7 @@ extension AppModalCoordinator {
             registry: registry,
             isImporting: $isImporting,
             flow: .init(
-                onEditProfile: {
+                onEdit: {
                     guard let profile = profileManager.profile(withId: $0.id) else {
                         return
                     }
