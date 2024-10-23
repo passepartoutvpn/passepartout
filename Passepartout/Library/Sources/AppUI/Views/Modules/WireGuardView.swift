@@ -28,41 +28,16 @@ import PassepartoutKit
 import PassepartoutWireGuardGo
 import SwiftUI
 
-struct WireGuardView: View {
-    private enum Subroute: Hashable {
-        case providerServer(id: ProviderID)
-    }
+struct WireGuardView: View, ModuleDraftEditing {
 
     @ObservedObject
-    private var editor: ProfileEditor
+    var editor: ProfileEditor
 
-    @Binding
-    private var draft: WireGuardModule.Builder
-
-//    @Binding
-//    private var providerId: ProviderID?
-//
-//    @State
-//    private var providerServer: VPNServer?
-
-    init(editor: ProfileEditor, module: WireGuardModule.Builder) {
-        self.editor = editor
-        _draft = editor[module]
-//        _providerId = editor.binding(forProviderOf: module.id)
-    }
+    let module: WireGuardModule.Builder
 
     var body: some View {
         contentView
-//            .modifier(providerModifier)
-            .moduleView(editor: editor, draft: draft)
-//            .navigationDestination(for: Subroute.self) {
-//                switch $0 {
-//                case .providerServer(let id):
-//                    VPNProviderServerView<WireGuard.Configuration>(providerId: id) {
-//                        providerServer = $1
-//                    }
-//                }
-//            }
+            .moduleView(editor: editor, draft: draft.wrappedValue)
     }
 }
 
@@ -70,7 +45,7 @@ struct WireGuardView: View {
 
 private extension WireGuardView {
     var configuration: WireGuard.Configuration.Builder {
-        draft.configurationBuilder ?? .default
+        draft.wrappedValue.configurationBuilder ?? .default
     }
 
     @ViewBuilder
@@ -81,17 +56,6 @@ private extension WireGuardView {
             moduleSection(for: peersRows(for: peer), header: Strings.Modules.Wireguard.peer(index + 1))
         }
     }
-
-//    var providerModifier: some ViewModifier {
-//        ProviderPanelModifier(
-//            providerId: $providerId,
-//            selectedServer: $providerServer,
-//            configurationType: WireGuard.Configuration.self,
-//            serverRoute: {
-//                Subroute.providerServer(id: $0)
-//            }
-//        )
-//    }
 }
 
 // MARK: - Subviews

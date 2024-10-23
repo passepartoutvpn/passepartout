@@ -26,35 +26,33 @@
 import PassepartoutKit
 import SwiftUI
 
-struct OpenVPNView: View {
+struct OpenVPNView: View, ModuleDraftEditing {
 
     @ObservedObject
-    private var editor: ProfileEditor
+    var editor: ProfileEditor
+
+    let module: OpenVPNModule.Builder
 
     private let isServerPushed: Bool
-
-    @Binding
-    private var draft: OpenVPNModule.Builder
 
     init(serverConfiguration: OpenVPN.Configuration) {
         let module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         let editor = ProfileEditor(modules: [module])
 
         self.editor = editor
-        _draft = .constant(module)
+        self.module = module
         isServerPushed = true
     }
 
     init(editor: ProfileEditor, module: OpenVPNModule.Builder) {
         self.editor = editor
-        _draft = editor.binding(forModule: module)
+        self.module = module
         isServerPushed = false
     }
 
     var body: some View {
         contentView
-            .themeAnimation(on: draft, category: .modules)
-            .moduleView(editor: editor, draft: draft, withName: !isServerPushed)
+            .moduleView(editor: editor, draft: draft.wrappedValue, withName: !isServerPushed)
             .navigationDestination(for: Subroute.self, destination: destination)
     }
 }
@@ -63,7 +61,7 @@ struct OpenVPNView: View {
 
 private extension OpenVPNView {
     var configuration: OpenVPN.Configuration.Builder {
-        draft.configurationBuilder ?? .init(withFallbacks: true)
+        draft.wrappedValue.configurationBuilder ?? .init(withFallbacks: true)
     }
 
     @ViewBuilder
@@ -80,7 +78,7 @@ private extension OpenVPNView {
         VPNProviderContentModifier(
             providerId: providerId,
             selectedEntity: providerEntity,
-            isRequired: draft.configurationBuilder == nil,
+            isRequired: draft.wrappedValue.configurationBuilder == nil,
             entityDestination: Subroute.providerServer,
             providerRows: {
                 moduleGroup(for: providerAccountRows)
@@ -89,11 +87,11 @@ private extension OpenVPNView {
     }
 
     var providerId: Binding<ProviderID?> {
-        editor.binding(forProviderOf: draft.id)
+        editor.binding(forProviderOf: module.id)
     }
 
     var providerEntity: Binding<VPNEntity<OpenVPN.Configuration>?> {
-        editor.binding(forProviderEntityOf: draft.id)
+        editor.binding(forProviderEntityOf: module.id)
     }
 
     var providerAccountRows: [ModuleRow]? {
@@ -134,8 +132,8 @@ private extension OpenVPNView {
 
         case .credentials:
             CredentialsView(
-                isInteractive: $draft.isInteractive,
-                credentials: $draft.credentials
+                isInteractive: draft.isInteractive,
+                credentials: draft.credentials
             )
         }
     }

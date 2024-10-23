@@ -27,21 +27,15 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct HTTPProxyView: View {
+struct HTTPProxyView: View, ModuleDraftEditing {
 
     @EnvironmentObject
     private var theme: Theme
 
     @ObservedObject
-    private var editor: ProfileEditor
+    var editor: ProfileEditor
 
-    @Binding
-    private var draft: HTTPProxyModule.Builder
-
-    init(editor: ProfileEditor, module: HTTPProxyModule.Builder) {
-        self.editor = editor
-        _draft = editor[module]
-    }
+    let module: HTTPProxyModule.Builder
 
     var body: some View {
         Group {
@@ -52,30 +46,30 @@ struct HTTPProxyView: View {
         }
         .labelsHidden()
         .themeManualInput()
-        .moduleView(editor: editor, draft: draft)
+        .moduleView(editor: editor, draft: draft.wrappedValue)
     }
 }
 
 private extension HTTPProxyView {
     var httpSection: some View {
         Group {
-            ThemeTextField(Strings.Global.address, text: $draft.address, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
-            ThemeTextField(Strings.Global.port, text: $draft.port.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
+            ThemeTextField(Strings.Global.address, text: draft.address, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
+            ThemeTextField(Strings.Global.port, text: draft.port.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
         }
         .themeSection(header: Strings.Unlocalized.http)
     }
 
     var httpsSection: some View {
         Group {
-            ThemeTextField(Strings.Global.address, text: $draft.secureAddress, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
-            ThemeTextField(Strings.Global.port, text: $draft.securePort.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
+            ThemeTextField(Strings.Global.address, text: draft.secureAddress, placeholder: Strings.Unlocalized.Placeholders.proxyIPv4Address)
+            ThemeTextField(Strings.Global.port, text: draft.securePort.toString(omittingZero: true), placeholder: Strings.Unlocalized.Placeholders.proxyPort)
         }
         .themeSection(header: Strings.Unlocalized.https)
     }
 
     var pacSection: some View {
         Group {
-            ThemeTextField(Strings.Unlocalized.url, text: $draft.pacURLString, placeholder: Strings.Unlocalized.Placeholders.pacURL)
+            ThemeTextField(Strings.Unlocalized.url, text: draft.pacURLString, placeholder: Strings.Unlocalized.Placeholders.pacURL)
         }
         .themeSection(header: Strings.Unlocalized.pac)
     }
@@ -85,7 +79,7 @@ private extension HTTPProxyView {
         theme.listSection(
             Strings.Entities.HttpProxy.bypassDomains,
             addTitle: Strings.Modules.HttpProxy.BypassDomains.add,
-            originalItems: $draft.bypassDomains,
+            originalItems: draft.bypassDomains,
             itemLabel: {
                 if $0 {
                     Text($1.wrappedValue)
