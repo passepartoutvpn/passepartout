@@ -23,11 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
 extension WireGuardModule.Builder: ModuleViewProviding {
     func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
         WireGuardView(editor: editor, module: self, impl: impl as? WireGuardModule.Implementation)
+    }
+}
+
+extension WireGuardModule: ProviderEntityViewProviding {
+    func providerEntityView(
+        with provider: SerializedProvider,
+        errorHandler: ErrorHandler,
+        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
+    ) -> some View {
+        vpnProviderEntityView(with: provider, errorHandler: errorHandler, onSelect: onSelect)
     }
 }

@@ -33,11 +33,7 @@ extension ModuleType {
             return OpenVPNModule.Builder()
 
         case .wireGuard:
-            let impl = registry.implementation(for: WireGuardModule.moduleHandler.id)
-            guard let wireGuard = impl as? WireGuardModule.Implementation else {
-                fatalError("Missing WireGuardModule implementation from Registry?")
-            }
-            return WireGuardModule.Builder(configurationBuilder: .init(keyGenerator: wireGuard.keyGenerator))
+            return WireGuardModule.Builder()
 
         case .dns:
             return DNSModule.Builder()
