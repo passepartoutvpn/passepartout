@@ -73,8 +73,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
                 do {
                     manager.repository = try await providerManager.vpnRepository(
                         from: apis,
-                        for: providerId,
-                        configurationType: Configuration.self
+                        for: providerId
                     )
                     if let selectedEntity, filtersWithSelection {
                         filters = VPNFilters(with: selectedEntity.server.provider)

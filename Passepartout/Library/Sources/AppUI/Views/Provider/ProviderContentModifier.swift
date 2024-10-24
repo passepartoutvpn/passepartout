@@ -133,10 +133,7 @@ private extension ProviderContentModifier {
         guard let providerId else {
             return nil
         }
-        return providerManager.lastUpdated(
-            for: providerId,
-            configurationType: Entity.Configuration.self
-        )
+        return providerManager.lastUpdated(for: providerId)
     }
 
     var lastUpdatedString: String? {
@@ -171,11 +168,7 @@ private extension ProviderContentModifier {
     @discardableResult
     func refreshInfrastructure(for providerId: ProviderID) async -> Bool {
         do {
-            try await providerManager.fetchVPNInfrastructure(
-                from: apis,
-                for: providerId,
-                ofType: Entity.Configuration.self
-            )
+            try await providerManager.fetchVPNInfrastructure(from: apis, for: providerId)
             return true
         } catch {
             pp_log(.app, .error, "Unable to refresh infrastructure: \(error)")
