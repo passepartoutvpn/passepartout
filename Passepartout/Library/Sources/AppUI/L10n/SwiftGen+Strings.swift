@@ -472,6 +472,8 @@ public enum Strings {
       public static let loading = Strings.tr("Localizable", "providers.last_updated.loading", fallback: "Loading...")
     }
     public enum Vpn {
+      /// No servers
+      public static let noServers = Strings.tr("Localizable", "providers.vpn.no_servers", fallback: "No servers")
       /// Preset
       public static let preset = Strings.tr("Localizable", "providers.vpn.preset", fallback: "Preset")
       public enum Category {

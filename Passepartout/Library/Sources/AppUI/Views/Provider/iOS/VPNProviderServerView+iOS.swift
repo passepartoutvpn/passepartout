@@ -59,15 +59,20 @@ extension VPNProviderServerView {
 
 private extension VPNProviderServerView.Subview {
     var listView: some View {
-        List {
+        ZStack {
             if manager.isFiltering {
                 ProgressView()
-            } else {
-                Section {
-                    ForEach(countryCodes, id: \.self, content: countryView)
-                } header: {
-                    Text(filters.categoryName ?? Strings.Providers.Vpn.Category.any)
+            } else if !manager.filteredServers.isEmpty {
+                List {
+                    Section {
+                        ForEach(countryCodes, id: \.self, content: countryView)
+                    } header: {
+                        Text(filters.categoryName ?? Strings.Providers.Vpn.Category.any)
+                    }
                 }
+            } else {
+                Text(Strings.Providers.Vpn.noServers)
+                    .themeEmptyMessage()
             }
         }
         .themeAnimation(on: manager.isFiltering, category: .providers)

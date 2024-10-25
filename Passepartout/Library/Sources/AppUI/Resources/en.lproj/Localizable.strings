@@ -234,6 +234,7 @@
 "providers.last_updated.loading" = "Loading...";
 "providers.vpn.category.any" = "All categories";
 "providers.vpn.preset" = "Preset";
+"providers.vpn.no_servers" = "No servers";
 
 // MARK: - Components
 
