@@ -43,6 +43,8 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 
     let filtersWithSelection: Bool
 
+    let selectTitle: String
+
     let onSelect: (_ server: VPNServer, _ preset: VPNPreset<Configuration>) -> Void
 
     @StateObject
@@ -64,6 +66,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
             manager: manager,
             selectedServer: selectedEntity?.server,
             filters: $filters,
+            selectTitle: selectTitle,
             onSelect: selectServer
         )
         .withErrorHandler(errorHandler)
@@ -125,6 +128,7 @@ extension VPNProviderServerView {
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,
             filtersWithSelection: false,
+            selectTitle: "Select",
             onSelect: { _, _ in }
         )
     }

@@ -39,6 +39,8 @@ extension VPNProviderServerView {
         @Binding
         var filters: VPNFilters
 
+        let selectTitle: String
+
         let onSelect: (VPNServer) -> Void
 
         var body: some View {
@@ -72,7 +74,7 @@ private extension VPNProviderServerView.Subview {
                 Button {
                     onSelect(server)
                 } label: {
-                    Text(Strings.Providers.selectEntity)
+                    Text(selectTitle)
                 }
             }
         }
@@ -98,6 +100,7 @@ private extension VPNProviderServerView.Subview {
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,
             filtersWithSelection: false,
+            selectTitle: "Select",
             onSelect: { _, _ in }
         )
     }
