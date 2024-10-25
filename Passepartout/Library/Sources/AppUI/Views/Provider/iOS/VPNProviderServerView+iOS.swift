@@ -126,7 +126,17 @@ private extension VPNProviderServerView.Subview {
             HStack {
                 ThemeImage(.marked)
                     .opacity(server.id == selectedServer?.id ? 1.0 : 0.0)
-                Text(server.serverId)
+                VStack(alignment: .leading) {
+                    if let area = server.provider.area {
+                        Text(area)
+                            .font(.headline)
+                        Text(server.provider.serverId)
+                            .font(.subheadline)
+                    } else {
+                        Text(server.provider.serverId)
+                            .font(.headline)
+                    }
+                }
                 Spacer()
                 FavoriteToggle(value: server.serverId, selection: $favorites)
             }
