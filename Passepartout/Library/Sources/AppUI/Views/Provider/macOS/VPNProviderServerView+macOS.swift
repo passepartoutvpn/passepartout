@@ -39,6 +39,11 @@ extension VPNProviderServerView {
         @Binding
         var filters: VPNFilters
 
+        @Binding
+        var onlyShowsFavorites: Bool
+
+        let favorites: Set<String>?
+
         let selectTitle: String
 
         let onSelect: (VPNServer) -> Void
@@ -84,7 +89,9 @@ private extension VPNProviderServerView.Subview {
     var filtersView: some View {
         VPNFiltersView(
             manager: manager,
-            filters: $filters
+            filters: $filters,
+            onlyShowsFavorites: $onlyShowsFavorites,
+            favorites: favorites
         )
         .padding()
     }

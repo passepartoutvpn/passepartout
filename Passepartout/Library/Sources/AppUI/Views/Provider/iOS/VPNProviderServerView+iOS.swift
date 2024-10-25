@@ -39,6 +39,11 @@ extension VPNProviderServerView {
         @Binding
         var filters: VPNFilters
 
+        @Binding
+        var onlyShowsFavorites: Bool
+
+        let favorites: Set<String>?
+
         // unused
         let selectTitle: String
 
@@ -137,7 +142,9 @@ private extension VPNProviderServerView.Subview {
         NavigationStack {
             VPNFiltersView(
                 manager: manager,
-                filters: $filters
+                filters: $filters,
+                onlyShowsFavorites: $onlyShowsFavorites,
+                favorites: favorites
             )
             .navigationTitle(Strings.Global.filters)
             .navigationBarTitleDisplayMode(.inline)

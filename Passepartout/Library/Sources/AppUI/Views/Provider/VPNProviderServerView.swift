@@ -24,6 +24,7 @@
 //
 
 import AppLibrary
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
@@ -32,6 +33,9 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 
     @EnvironmentObject
     private var providerManager: ProviderManager
+
+    @AppStorage(AppPreference.moduleFavoriteServers.key)
+    var allFavorites = ModuleFavoriteServers()
 
     var apis: [APIMapper] = API.shared
 
@@ -59,6 +63,9 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
     @State
     private var filters = VPNFilters()
 
+    @State
+    private var onlyShowsFavorites = false
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
@@ -68,6 +75,8 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
             manager: manager,
             selectedServer: selectedEntity?.server,
             filters: $filters,
+            onlyShowsFavorites: $onlyShowsFavorites,
+            favorites: allFavorites.servers(forModuleWithID: moduleId),
             selectTitle: selectTitle,
             onSelect: selectServer
         )
@@ -108,6 +117,10 @@ extension VPNProviderServerView {
                 }
                 return true
             }
+    }
+
+    func isFavoriteServer(_ server: VPNServer) -> Bool {
+        filters.serverIds?.contains(server.serverId) ?? false
     }
 
     func selectServer(_ server: VPNServer) {
