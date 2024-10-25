@@ -51,6 +51,7 @@ struct VPNFiltersView<Configuration>: View where Configuration: ProviderConfigur
             presets: presets,
             favorites: favorites
         )
+        .disabled(manager.isFiltering)
         .onChange(of: filters, perform: manager.applyFilters)
         .onChange(of: onlyShowsFavorites) {
             filters.serverIds = $0 ? favorites : nil
