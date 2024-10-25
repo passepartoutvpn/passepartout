@@ -49,6 +49,9 @@ extension VPNProviderServerView {
 
         let onSelect: (VPNServer) -> Void
 
+        @State
+        private var hoveringServerId: String?
+
         var body: some View {
             VStack {
                 filtersView
@@ -75,6 +78,15 @@ private extension VPNProviderServerView.Subview {
             }
 
             TableColumn(Strings.Global.address, value: \.address)
+
+            TableColumn("") { server in
+                FavoriteToggle(value: server.serverId, selection: $favorites)
+                    .opacity(favorites.contains(server.serverId) || server.serverId == hoveringServerId ? 1.0 : 0.0)
+                    .onHover {
+                        hoveringServerId = $0 ? server.serverId : nil
+                    }
+            }
+            .width(20.0)
 
             TableColumn("") { server in
                 Button {

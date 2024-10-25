@@ -120,10 +120,11 @@ private extension VPNProviderServerView.Subview {
             onSelect(server)
         } label: {
             HStack {
-                Text(server.hostname ?? server.serverId)
-                Spacer()
                 ThemeImage(.marked)
                     .opacity(server.id == selectedServer?.id ? 1.0 : 0.0)
+                Text(server.serverId)
+                Spacer()
+                FavoriteToggle(value: server.serverId, selection: $favorites)
             }
         }
     }
