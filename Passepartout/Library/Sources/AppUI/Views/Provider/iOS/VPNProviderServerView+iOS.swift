@@ -88,7 +88,11 @@ private extension VPNProviderServerView.Subview {
         manager
             .allCountryCodes
             .sorted {
-                $0.localizedAsRegionCode! < $1.localizedAsRegionCode!
+                guard let region1 = $0.localizedAsRegionCode,
+                      let region2 = $1.localizedAsRegionCode else {
+                    return $0 < $1
+                }
+                return region1 < region2
             }
     }
 
@@ -109,7 +113,7 @@ private extension VPNProviderServerView.Subview {
                 } label: {
                     HStack {
                         ThemeCountryFlag(code: code)
-                        Text(code.localizedAsRegionCode!)
+                        Text(code.localizedAsRegionCode ?? code)
                     }
                 }
             }
