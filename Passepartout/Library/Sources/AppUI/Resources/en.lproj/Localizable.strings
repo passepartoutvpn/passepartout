@@ -229,10 +229,10 @@
 "providers.select_provider" = "Select a provider";
 "providers.select_entity" = "Select";
 "providers.clear_filters" = "Clear filters";
+"providers.refresh_infrastructure" = "Refresh infrastructure";
+"providers.last_updated" = "Last updated on %@";
+"providers.last_updated.loading" = "Loading...";
 "providers.vpn.category.any" = "All categories";
-"providers.vpn.refresh_infrastructure" = "Refresh infrastructure";
-"providers.vpn.last_updated" = "Last updated on %@";
-"providers.vpn.last_updated.loading" = "Loading...";
 "providers.vpn.preset" = "Preset";
 
 // MARK: - Components

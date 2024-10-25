@@ -455,28 +455,28 @@ public enum Strings {
   public enum Providers {
     /// Clear filters
     public static let clearFilters = Strings.tr("Localizable", "providers.clear_filters", fallback: "Clear filters")
+    /// Last updated on %@
+    public static func lastUpdated(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "providers.last_updated", String(describing: p1), fallback: "Last updated on %@")
+    }
     /// None
     public static let noProvider = Strings.tr("Localizable", "providers.no_provider", fallback: "None")
+    /// Refresh infrastructure
+    public static let refreshInfrastructure = Strings.tr("Localizable", "providers.refresh_infrastructure", fallback: "Refresh infrastructure")
     /// Select
     public static let selectEntity = Strings.tr("Localizable", "providers.select_entity", fallback: "Select")
     /// Select a provider
     public static let selectProvider = Strings.tr("Localizable", "providers.select_provider", fallback: "Select a provider")
+    public enum LastUpdated {
+      /// Loading...
+      public static let loading = Strings.tr("Localizable", "providers.last_updated.loading", fallback: "Loading...")
+    }
     public enum Vpn {
-      /// Last updated on %@
-      public static func lastUpdated(_ p1: Any) -> String {
-        return Strings.tr("Localizable", "providers.vpn.last_updated", String(describing: p1), fallback: "Last updated on %@")
-      }
       /// Preset
       public static let preset = Strings.tr("Localizable", "providers.vpn.preset", fallback: "Preset")
-      /// Refresh infrastructure
-      public static let refreshInfrastructure = Strings.tr("Localizable", "providers.vpn.refresh_infrastructure", fallback: "Refresh infrastructure")
       public enum Category {
         /// All categories
         public static let any = Strings.tr("Localizable", "providers.vpn.category.any", fallback: "All categories")
-      }
-      public enum LastUpdated {
-        /// Loading...
-        public static let loading = Strings.tr("Localizable", "providers.vpn.last_updated.loading", fallback: "Loading...")
       }
     }
   }
