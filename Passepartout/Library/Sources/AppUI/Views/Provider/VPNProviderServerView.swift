@@ -76,7 +76,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
             selectedServer: selectedEntity?.server,
             filters: $filters,
             onlyShowsFavorites: $onlyShowsFavorites,
-            favorites: allFavorites.servers(forModuleWithID: moduleId),
+            favorites: favoritesBinding,
             selectTitle: selectTitle,
             onSelect: selectServer
         )
@@ -119,8 +119,12 @@ extension VPNProviderServerView {
             }
     }
 
-    func isFavoriteServer(_ server: VPNServer) -> Bool {
-        filters.serverIds?.contains(server.serverId) ?? false
+    var favoritesBinding: Binding<Set<String>> {
+        Binding {
+            allFavorites.servers(forModuleWithID: moduleId)
+        } set: {
+            allFavorites.setServers($0, forModuleWithID: moduleId)
+        }
     }
 
     func selectServer(_ server: VPNServer) {

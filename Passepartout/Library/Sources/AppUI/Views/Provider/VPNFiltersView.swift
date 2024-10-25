@@ -39,7 +39,7 @@ struct VPNFiltersView<Configuration>: View where Configuration: ProviderConfigur
     @Binding
     var onlyShowsFavorites: Bool
 
-    let favorites: Set<String>?
+    let favorites: Set<String>
 
     var body: some View {
         debugChanges()
@@ -53,7 +53,7 @@ struct VPNFiltersView<Configuration>: View where Configuration: ProviderConfigur
         )
         .onChange(of: filters, perform: manager.applyFilters)
         .onChange(of: onlyShowsFavorites) {
-            filters.serverIds = $0 ? (favorites ?? []) : nil
+            filters.serverIds = $0 ? favorites : nil
             manager.applyFilters(filters)
         }
     }
@@ -163,11 +163,12 @@ private extension VPNFiltersView.Subview {
     }
 
     var favoritesToggle: some View {
-        Toggle("Favorites", isOn: $onlyShowsFavorites)
+        Toggle(Strings.Providers.onlyFavorites, isOn: $onlyShowsFavorites)
     }
 
     var clearFiltersButton: some View {
         Button(Strings.Providers.clearFilters, role: .destructive) {
+            onlyShowsFavorites = false
             filters = VPNFilters()
         }
     }
@@ -179,7 +180,7 @@ private extension VPNFiltersView.Subview {
             manager: VPNProviderManager(),
             filters: .constant(VPNFilters()),
             onlyShowsFavorites: .constant(false),
-            favorites: nil
+            favorites: []
         )
     }
 }

@@ -42,7 +42,8 @@ extension VPNProviderServerView {
         @Binding
         var onlyShowsFavorites: Bool
 
-        let favorites: Set<String>?
+        @Binding
+        var favorites: Set<String>
 
         // unused
         let selectTitle: String

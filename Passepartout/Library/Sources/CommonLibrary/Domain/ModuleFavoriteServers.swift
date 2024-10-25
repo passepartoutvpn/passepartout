@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
 public struct ModuleFavoriteServers {
     private var map: [UUID: Set<String>]
@@ -32,8 +32,12 @@ public struct ModuleFavoriteServers {
         map = [:]
     }
 
-    public func servers(forModuleWithID moduleId: UUID) -> Set<String>? {
-        map[moduleId]
+    public func servers(forModuleWithID moduleId: UUID) -> Set<String> {
+        map[moduleId] ?? []
+    }
+
+    public mutating func setServers(_ servers: Set<String>, forModuleWithID moduleId: UUID) {
+        map[moduleId] = servers
     }
 }
 
