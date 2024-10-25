@@ -452,6 +452,36 @@ public enum Strings {
       public static let name = Strings.tr("Localizable", "placeholders.profile.name", fallback: "My profile")
     }
   }
+  public enum Providers {
+    /// Clear filters
+    public static let clearFilters = Strings.tr("Localizable", "providers.clear_filters", fallback: "Clear filters")
+    /// Last updated on %@
+    public static func lastUpdated(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "providers.last_updated", String(describing: p1), fallback: "Last updated on %@")
+    }
+    /// None
+    public static let noProvider = Strings.tr("Localizable", "providers.no_provider", fallback: "None")
+    /// Refresh infrastructure
+    public static let refreshInfrastructure = Strings.tr("Localizable", "providers.refresh_infrastructure", fallback: "Refresh infrastructure")
+    /// Select
+    public static let selectEntity = Strings.tr("Localizable", "providers.select_entity", fallback: "Select")
+    /// Select a provider
+    public static let selectProvider = Strings.tr("Localizable", "providers.select_provider", fallback: "Select a provider")
+    public enum LastUpdated {
+      /// Loading...
+      public static let loading = Strings.tr("Localizable", "providers.last_updated.loading", fallback: "Loading...")
+    }
+    public enum Vpn {
+      /// No servers
+      public static let noServers = Strings.tr("Localizable", "providers.vpn.no_servers", fallback: "No servers")
+      /// Preset
+      public static let preset = Strings.tr("Localizable", "providers.vpn.preset", fallback: "Preset")
+      public enum Category {
+        /// All categories
+        public static let any = Strings.tr("Localizable", "providers.vpn.category.any", fallback: "All categories")
+      }
+    }
+  }
   public enum Theme {
     public enum Confirmation {
       /// Are you sure?
@@ -607,30 +637,6 @@ public enum Strings {
         public static let importProfile = Strings.tr("Localizable", "views.profiles.toolbar.import_profile", fallback: "Import profile")
         /// New profile
         public static let newProfile = Strings.tr("Localizable", "views.profiles.toolbar.new_profile", fallback: "New profile")
-      }
-    }
-    public enum Provider {
-      /// Clear filters
-      public static let clearFilters = Strings.tr("Localizable", "views.provider.clear_filters", fallback: "Clear filters")
-      /// None
-      public static let noProvider = Strings.tr("Localizable", "views.provider.no_provider", fallback: "None")
-      /// Select a provider
-      public static let selectProvider = Strings.tr("Localizable", "views.provider.select_provider", fallback: "Select a provider")
-      /// Select
-      public static let selectServer = Strings.tr("Localizable", "views.provider.select_server", fallback: "Select")
-      public enum Vpn {
-        /// Last updated on %@
-        public static func lastUpdated(_ p1: Any) -> String {
-          return Strings.tr("Localizable", "views.provider.vpn.last_updated", String(describing: p1), fallback: "Last updated on %@")
-        }
-        /// Preset
-        public static let preset = Strings.tr("Localizable", "views.provider.vpn.preset", fallback: "Preset")
-        /// Refresh infrastructure
-        public static let refreshInfrastructure = Strings.tr("Localizable", "views.provider.vpn.refresh_infrastructure", fallback: "Refresh infrastructure")
-        public enum LastUpdated {
-          /// Loading...
-          public static let loading = Strings.tr("Localizable", "views.provider.vpn.last_updated.loading", fallback: "Loading...")
-        }
       }
     }
     public enum Settings {

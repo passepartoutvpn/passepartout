@@ -133,15 +133,6 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 
-"views.provider.no_provider" = "None";
-"views.provider.select_provider" = "Select a provider";
-"views.provider.clear_filters" = "Clear filters";
-"views.provider.select_server" = "Select";
-"views.provider.vpn.refresh_infrastructure" = "Refresh infrastructure";
-"views.provider.vpn.last_updated" = "Last updated on %@";
-"views.provider.vpn.last_updated.loading" = "Loading...";
-"views.provider.vpn.preset" = "Preset";
-
 "views.settings.sections.icloud.footer" = "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 "views.settings.rows.confirm_quit" = "Ask before quit";
 "views.settings.rows.lock_in_background" = "Lock in background";
@@ -231,6 +222,19 @@
 "modules.wireguard.peer" = "Peer #%d";
 "modules.wireguard.preshared_key" = "Pre-shared key";
 "modules.wireguard.allowed_ips" = "Allowed IPs";
+
+// MARK: - Providers
+
+"providers.no_provider" = "None";
+"providers.select_provider" = "Select a provider";
+"providers.select_entity" = "Select";
+"providers.clear_filters" = "Clear filters";
+"providers.refresh_infrastructure" = "Refresh infrastructure";
+"providers.last_updated" = "Last updated on %@";
+"providers.last_updated.loading" = "Loading...";
+"providers.vpn.category.any" = "All categories";
+"providers.vpn.preset" = "Preset";
+"providers.vpn.no_servers" = "No servers";
 
 // MARK: - Components
 

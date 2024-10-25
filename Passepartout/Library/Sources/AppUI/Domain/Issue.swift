@@ -52,12 +52,14 @@ struct Issue: Identifiable {
 
     let providerName: String?
 
+    let providerLastUpdate: Date?
+
     init(
         appLine: String?,
         purchasedProducts: Set<AppProduct>,
         appLog: Data? = nil,
         tunnelLog: Data? = nil,
-        providerId: ProviderID? = nil
+        provider: (ProviderID, Date?)? = nil
     ) {
         id = UUID()
         self.appLine = appLine
@@ -85,7 +87,8 @@ struct Issue: Identifiable {
         osLine = "\(osName) \(osVersion)"
         deviceLine = deviceType
 
-        providerName = providerId?.rawValue
+        providerName = provider?.0.rawValue
+        providerLastUpdate = provider?.1
     }
 
     var body: String {
@@ -94,7 +97,7 @@ struct Issue: Identifiable {
             .replacingOccurrences(of: "$osLine", with: osLine)
             .replacingOccurrences(of: "$deviceLine", with: deviceLine ?? "unknown")
             .replacingOccurrences(of: "$providerName", with: providerName ?? "none")
-            .replacingOccurrences(of: "$providerLastUpdate", with: "unknown")
+            .replacingOccurrences(of: "$providerLastUpdate", with: providerLastUpdate?.timestamp ?? "unknown")
             .replacingOccurrences(of: "$purchasedProducts", with: purchasedProducts.map(\.rawValue).description)
     }
 }

@@ -39,6 +39,9 @@ extension VPNProviderServerView {
         @Binding
         var filters: VPNFilters
 
+        // unused
+        let selectTitle: String
+
         let onSelect: (VPNServer) -> Void
 
         @State
@@ -56,11 +59,20 @@ extension VPNProviderServerView {
 
 private extension VPNProviderServerView.Subview {
     var listView: some View {
-        List {
+        ZStack {
             if manager.isFiltering {
                 ProgressView()
+            } else if !manager.filteredServers.isEmpty {
+                List {
+                    Section {
+                        ForEach(countryCodes, id: \.self, content: countryView)
+                    } header: {
+                        Text(filters.categoryName ?? Strings.Providers.Vpn.Category.any)
+                    }
+                }
             } else {
-                ForEach(countryCodes, id: \.self, content: countryView)
+                Text(Strings.Providers.Vpn.noServers)
+                    .themeEmptyMessage()
             }
         }
         .themeAnimation(on: manager.isFiltering, category: .providers)
@@ -144,6 +156,7 @@ private extension VPNProviderServerView.Subview {
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,
             filtersWithSelection: false,
+            selectTitle: "Select",
             onSelect: { _, _ in }
         )
     }

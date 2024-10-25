@@ -134,7 +134,7 @@ private extension VPNFiltersView.Subview {
     }
 
     var presetPicker: some View {
-        Picker(Strings.Views.Provider.Vpn.preset, selection: $filters.presetId) {
+        Picker(Strings.Providers.Vpn.preset, selection: $filters.presetId) {
             Text(Strings.Global.any)
                 .tag(nil as String?)
             ForEach(presets, id: \.presetId) {
@@ -145,7 +145,7 @@ private extension VPNFiltersView.Subview {
     }
 
     var clearFiltersButton: some View {
-        Button(Strings.Views.Provider.clearFilters, role: .destructive) {
+        Button(Strings.Providers.clearFilters, role: .destructive) {
             filters = VPNFilters()
         }
     }
