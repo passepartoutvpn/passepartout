@@ -68,6 +68,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
         )
         .withErrorHandler(errorHandler)
         .navigationTitle(Strings.Global.servers)
+        .themeNavigationDetail()
         .onLoad {
             Task {
                 do {
