@@ -52,10 +52,24 @@ struct VPNFiltersView<Configuration>: View where Configuration: ProviderConfigur
             favorites: favorites
         )
         .disabled(manager.isFiltering)
-        .onChange(of: filters, perform: manager.applyFilters)
+        .onChange(of: filters) { filters in
+            Task {
+                await manager.applyFilters(filters)
+            }
+        }
+        .onChange(of: favorites) {
+            if onlyShowsFavorites {
+                filters.serverIds = $0
+                Task {
+                    await manager.applyFilters(filters)
+                }
+            }
+        }
         .onChange(of: onlyShowsFavorites) {
             filters.serverIds = $0 ? favorites : nil
-            manager.applyFilters(filters)
+            Task {
+                await manager.applyFilters(filters)
+            }
         }
     }
 }

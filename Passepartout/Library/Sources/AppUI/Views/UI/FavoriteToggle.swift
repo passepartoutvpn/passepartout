@@ -26,7 +26,6 @@
 import SwiftUI
 
 struct FavoriteToggle<ID>: View where ID: Hashable {
-
     let value: ID
 
     @Binding

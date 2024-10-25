@@ -95,7 +95,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
                     } else {
                         filters = VPNFilters()
                     }
-                    manager.applyFilters(filters)
+                    await manager.applyFilters(filters)
                 } catch {
                     pp_log(.app, .error, "Unable to load VPN repository: \(error)")
                     errorHandler.handle(error, title: Strings.Global.servers)
