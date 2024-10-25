@@ -103,7 +103,7 @@ private extension VPNFiltersView {
 
         let presets: [VPNPreset<Configuration>]
 
-        let favorites: Set<String>?
+        let favorites: Set<String>
 
         var body: some View {
             debugChanges()
