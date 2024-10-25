@@ -48,6 +48,7 @@ extension ProviderEntityViewProviding where Self: ProviderCompatibleModule, Enti
             } as? VPNEntity<EntityType.Configuration>
 
         return VPNProviderServerCoordinator(
+            moduleId: id,
             providerId: provider.id,
             selectedEntity: selectedEntity,
             onSelect: onSelect

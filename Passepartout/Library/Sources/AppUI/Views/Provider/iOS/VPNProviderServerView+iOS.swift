@@ -152,6 +152,7 @@ private extension VPNProviderServerView.Subview {
     NavigationStack {
         VPNProviderServerView(
             apis: [API.bundled],
+            moduleId: UUID(),
             providerId: .tunnelbear,
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,

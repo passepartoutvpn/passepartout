@@ -128,6 +128,7 @@ private extension OpenVPNView {
         case .providerServer:
             providerId.wrappedValue.map {
                 VPNProviderServerView(
+                    moduleId: module.id,
                     providerId: $0,
                     configurationType: OpenVPN.Configuration.self,
                     selectedEntity: providerEntity.wrappedValue,

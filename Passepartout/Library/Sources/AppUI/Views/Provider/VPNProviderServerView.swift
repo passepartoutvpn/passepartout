@@ -35,6 +35,8 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 
     var apis: [APIMapper] = API.shared
 
+    let moduleId: UUID
+
     let providerId: ProviderID
 
     let configurationType: Configuration.Type
@@ -124,6 +126,7 @@ extension VPNProviderServerView {
     NavigationStack {
         VPNProviderServerView(
             apis: [API.bundled],
+            moduleId: UUID(),
             providerId: .protonvpn,
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,
