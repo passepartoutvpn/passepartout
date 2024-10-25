@@ -627,6 +627,10 @@ public enum Strings {
         public static let preset = Strings.tr("Localizable", "views.provider.vpn.preset", fallback: "Preset")
         /// Refresh infrastructure
         public static let refreshInfrastructure = Strings.tr("Localizable", "views.provider.vpn.refresh_infrastructure", fallback: "Refresh infrastructure")
+        public enum Category {
+          /// All categories
+          public static let any = Strings.tr("Localizable", "views.provider.vpn.category.any", fallback: "All categories")
+        }
         public enum LastUpdated {
           /// Loading...
           public static let loading = Strings.tr("Localizable", "views.provider.vpn.last_updated.loading", fallback: "Loading...")

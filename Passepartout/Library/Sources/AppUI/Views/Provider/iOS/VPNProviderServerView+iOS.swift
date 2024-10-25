@@ -60,7 +60,11 @@ private extension VPNProviderServerView.Subview {
             if manager.isFiltering {
                 ProgressView()
             } else {
-                ForEach(countryCodes, id: \.self, content: countryView)
+                Section {
+                    ForEach(countryCodes, id: \.self, content: countryView)
+                } header: {
+                    Text(filters.categoryName ?? Strings.Views.Provider.Vpn.Category.any)
+                }
             }
         }
         .themeAnimation(on: manager.isFiltering, category: .providers)
