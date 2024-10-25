@@ -32,6 +32,9 @@ struct ReportIssueButton {
     @EnvironmentObject
     private var profileManager: ProfileManager
 
+    @EnvironmentObject
+    private var providerManager: ProviderManager
+
     let tunnel: Tunnel
 
     let title: String
@@ -52,5 +55,13 @@ struct ReportIssueButton {
             return nil
         }
         return profileManager.profile(withId: id)
+    }
+
+    var currentProvider: (ProviderID, Date?)? {
+        guard let id = installedProfile?.firstProviderModuleWithMetadata?.1.id else {
+            return nil
+        }
+        let lastUpdate = providerManager.lastUpdated(for: id)
+        return (id, lastUpdate)
     }
 }

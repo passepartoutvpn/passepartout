@@ -31,6 +31,8 @@ extension Issue {
     struct Metadata {
         let profile: Profile?
 
+        let provider: (ProviderID, Date?)?
+
         let configuration: PassepartoutConfiguration
 
         let versionString: String
@@ -73,7 +75,7 @@ extension Issue {
             purchasedProducts: metadata.purchasedProducts,
             appLog: appLog,
             tunnelLog: tunnelLog,
-            providerId: metadata.profile?.firstProviderModuleWithMetadata?.1.id
+            provider: metadata.provider
         )
     }
 }

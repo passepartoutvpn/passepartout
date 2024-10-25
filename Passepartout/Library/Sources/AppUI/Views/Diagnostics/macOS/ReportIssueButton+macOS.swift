@@ -51,6 +51,7 @@ private extension ReportIssueButton {
             }
             let issue = await Issue.withMetadata(.init(
                 profile: installedProfile,
+                provider: currentProvider,
                 configuration: .shared,
                 versionString: BundleConfiguration.mainVersionString,
                 purchasedProducts: purchasedProducts,
