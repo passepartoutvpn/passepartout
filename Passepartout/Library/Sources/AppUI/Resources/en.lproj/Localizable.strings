@@ -225,15 +225,15 @@
 
 // MARK: - Providers
 
-"views.provider.no_provider" = "None";
-"views.provider.select_provider" = "Select a provider";
-"views.provider.clear_filters" = "Clear filters";
-"views.provider.select_server" = "Select";
-"views.provider.vpn.category.any" = "All categories";
-"views.provider.vpn.refresh_infrastructure" = "Refresh infrastructure";
-"views.provider.vpn.last_updated" = "Last updated on %@";
-"views.provider.vpn.last_updated.loading" = "Loading...";
-"views.provider.vpn.preset" = "Preset";
+"providers.no_provider" = "None";
+"providers.select_provider" = "Select a provider";
+"providers.select_entity" = "Select";
+"providers.clear_filters" = "Clear filters";
+"providers.vpn.category.any" = "All categories";
+"providers.vpn.refresh_infrastructure" = "Refresh infrastructure";
+"providers.vpn.last_updated" = "Last updated on %@";
+"providers.vpn.last_updated.loading" = "Loading...";
+"providers.vpn.preset" = "Preset";
 
 // MARK: - Components
 

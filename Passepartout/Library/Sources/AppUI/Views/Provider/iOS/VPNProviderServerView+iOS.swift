@@ -63,7 +63,7 @@ private extension VPNProviderServerView.Subview {
                 Section {
                     ForEach(countryCodes, id: \.self, content: countryView)
                 } header: {
-                    Text(filters.categoryName ?? Strings.Views.Provider.Vpn.Category.any)
+                    Text(filters.categoryName ?? Strings.Providers.Vpn.Category.any)
                 }
             }
         }

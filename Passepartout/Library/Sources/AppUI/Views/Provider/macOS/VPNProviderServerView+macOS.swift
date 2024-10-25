@@ -72,7 +72,7 @@ private extension VPNProviderServerView.Subview {
                 Button {
                     onSelect(server)
                 } label: {
-                    Text(Strings.Views.Provider.selectServer)
+                    Text(Strings.Providers.selectEntity)
                 }
             }
         }
