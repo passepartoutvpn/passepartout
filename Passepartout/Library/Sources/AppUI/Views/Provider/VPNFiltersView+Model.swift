@@ -60,7 +60,7 @@ extension VPNFiltersView {
         func load<C>(
             with vpnManager: VPNProviderManager<C>,
             initialFilters: VPNFilters?
-        ) {
+        ) where C: ProviderConfigurationIdentifiable {
             categories = vpnManager
                 .allCategoryNames
                 .sorted()
@@ -77,6 +77,9 @@ extension VPNFiltersView {
             presets = vpnManager
                 .allPresets
                 .values
+                .filter {
+                    $0.configurationIdentifier == C.providerConfigurationIdentifier
+                }
                 .sorted {
                     $0.description < $1.description
                 }
