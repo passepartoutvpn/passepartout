@@ -49,8 +49,6 @@ extension AppContext {
 
 extension ProfileManager {
     static let shared: ProfileManager = {
-        let repository = localProfileRepository
-
         let remoteStore = CoreDataPersistentStore(
             logger: .default,
             containerName: Constants.shared.containers.remote,
@@ -68,7 +66,11 @@ extension ProfileManager {
             return .ignore
         }
 
-        return ProfileManager(repository: repository, remoteRepository: remoteRepository)
+        return ProfileManager(
+            repository: mainProfileRepository,
+            backupRepository: backupProfileRepository,
+            remoteRepository: remoteRepository
+        )
     }()
 }
 
@@ -158,7 +160,51 @@ extension Tunnel {
 }
 
 private extension ProfileManager {
-    static let localProfileRepository: ProfileRepository = {
+    static var mainProfileRepository: ProfileRepository {
+        coreDataProfileRepository
+    }
+
+    static var backupProfileRepository: ProfileRepository? {
+        nil
+    }
+}
+
+#else
+
+extension Tunnel {
+    static let shared = Tunnel(
+        strategy: ProfileManager.neStrategy
+    )
+}
+
+private extension ProfileManager {
+    static var mainProfileRepository: ProfileRepository {
+        neProfileRepository
+    }
+
+    static var backupProfileRepository: ProfileRepository? {
+        coreDataProfileRepository
+    }
+}
+
+#endif
+
+private extension ProfileManager {
+    static let neProfileRepository: ProfileRepository = {
+        NEProfileRepository(repository: neStrategy) {
+            ProfileManager.sharedTitle($0)
+        }
+    }()
+
+    static let neStrategy: NETunnelStrategy = {
+        NETunnelStrategy(
+            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
+            coder: Registry.sharedProtocolCoder,
+            environment: .shared
+        )
+    }()
+
+    static let coreDataProfileRepository: ProfileRepository = {
         let store = CoreDataPersistentStore(
             logger: .default,
             containerName: Constants.shared.containers.local,
@@ -177,32 +223,6 @@ private extension ProfileManager {
         }
     }()
 }
-
-#else
-
-extension Tunnel {
-    static let shared = Tunnel(
-        strategy: ProfileManager.neStrategy
-    )
-}
-
-private extension ProfileManager {
-    static let localProfileRepository: ProfileRepository = {
-        NEProfileRepository(repository: neStrategy) {
-            ProfileManager.sharedTitle($0)
-        }
-    }()
-
-    static let neStrategy: NETunnelStrategy = {
-        NETunnelStrategy(
-            bundleIdentifier: BundleConfiguration.mainString(for: .tunnelId),
-            coder: Registry.sharedProtocolCoder,
-            environment: .shared
-        )
-    }()
-}
-
-#endif
 
 // MARK: -
 
