@@ -111,9 +111,17 @@ private extension AppContext {
             return
         }
         Task {
+            guard [.active, .activating].contains(tunnel.status) else {
+                return
+            }
             if profile.isInteractive {
                 try await tunnel.disconnect()
                 return
+            }
+            do {
+                try await tunnel.connect(with: profile, processor: profileProcessor)
+            } catch {
+                try await tunnel.disconnect()
             }
         }
     }
