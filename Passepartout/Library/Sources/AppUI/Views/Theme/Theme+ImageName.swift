@@ -62,3 +62,45 @@ extension Theme {
         case tunnelUninstall
     }
 }
+
+extension Theme.ImageName {
+    static var defaultSystemName: (Self) -> String {
+        {
+            switch $0 {
+            case .add: return "plus"
+            case .close: return "xmark"
+            case .cloud: return "icloud"
+            case .contextDuplicate: return "plus.square.on.square"
+            case .contextRemove: return "trash"
+            case .copy: return "doc.on.doc"
+            case .disclose: return "chevron.down"
+            case .editableSectionEdit: return "arrow.up.arrow.down"
+            case .editableSectionRemove: return "trash"
+            case .favoriteOff: return "star"
+            case .favoriteOn: return "star.fill"
+            case .filters: return "line.3.horizontal.decrease"
+            case .footerAdd: return "plus.circle"
+            case .hide: return "eye.slash"
+            case .info: return "info.circle"
+            case .marked: return "checkmark"
+            case .moreDetails: return "ellipsis.circle"
+            case .pending: return "clock"
+            case .profileEdit: return "square.and.pencil"
+            case .profileImport: return "square.and.arrow.down"
+            case .profilesGrid: return "square.grid.2x2"
+            case .profilesList: return "rectangle.grid.1x2"
+            case .remove: return "minus"
+            case .settings: return "gearshape"
+            case .share: return "square.and.arrow.up"
+            case .show: return "eye"
+            case .sleeping: return "powersleep"
+            case .tip: return "questionmark.circle"
+            case .tunnelDisable: return "arrow.down"
+            case .tunnelEnable: return "arrow.up"
+            case .tunnelRestart: return "arrow.clockwise"
+            case .tunnelToggle: return "power"
+            case .tunnelUninstall: return "arrow.uturn.down"
+            }
+        }
+    }
+}

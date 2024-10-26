@@ -387,7 +387,7 @@ struct ThemeImage: View {
     }
 
     var body: some View {
-        Image(systemName: theme.systemImage(name))
+        Image(systemName: theme.systemImageName(name))
     }
 }
 
