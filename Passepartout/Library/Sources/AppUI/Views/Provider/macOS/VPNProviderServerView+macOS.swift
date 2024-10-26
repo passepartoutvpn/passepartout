@@ -79,13 +79,13 @@ extension VPNProviderServerView {
 
                 TableColumn(Strings.Global.address, value: \.address)
 
-                TableColumn("") { server in
+                TableColumn("􀋂") { server in
                     FavoriteToggle(
                         value: server.serverId,
                         selection: $favoritesManager.serverIds
                     )
                 }
-                .width(20.0)
+                .width(15.0)
 
                 TableColumn("") { server in
                     Button {

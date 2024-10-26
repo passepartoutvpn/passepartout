@@ -40,12 +40,13 @@ struct VPNFiltersView: View {
                 categoryPicker
                 countryPicker
                 presetPicker
-                favoritesToggle
 #if os(iOS)
+                favoritesToggle
                 clearFiltersButton
                     .frame(maxWidth: .infinity, alignment: .center)
 #else
                 HStack {
+                    favoritesToggle
                     Spacer()
                     clearFiltersButton
                 }
