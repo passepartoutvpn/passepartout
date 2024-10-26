@@ -107,6 +107,12 @@ struct ThemeBooleanPopoverModifier<Popover>: ViewModifier where Popover: View {
     @EnvironmentObject
     private var theme: Theme
 
+    @Environment(\.horizontalSizeClass)
+    private var hsClass
+
+    @Environment(\.verticalSizeClass)
+    private var vsClass
+
     @Binding
     var isPresented: Bool
 
@@ -114,12 +120,20 @@ struct ThemeBooleanPopoverModifier<Popover>: ViewModifier where Popover: View {
     let popover: Popover
 
     func body(content: Content) -> some View {
-        content
-            .popover(isPresented: $isPresented) {
-                popover
-                    .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
-                    .themeLockScreen()
-            }
+        if hsClass == .regular && vsClass == .regular {
+            content
+                .popover(isPresented: $isPresented) {
+                    popover
+                        .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
+                        .themeLockScreen()
+                }
+        } else {
+            content
+                .sheet(isPresented: $isPresented) {
+                    popover
+                        .themeLockScreen()
+                }
+        }
     }
 }
 

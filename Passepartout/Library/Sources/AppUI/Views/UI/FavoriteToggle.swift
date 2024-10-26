@@ -31,6 +31,9 @@ struct FavoriteToggle<ID>: View where ID: Hashable {
     @Binding
     var selection: Set<ID>
 
+    @State
+    private var hover: ID?
+
     var body: some View {
         Button {
             if selection.contains(value) {
@@ -40,6 +43,20 @@ struct FavoriteToggle<ID>: View where ID: Hashable {
             }
         } label: {
             ThemeImage(selection.contains(value) ? .favoriteOn : .favoriteOff)
+                .opacity(opacity)
         }
+        .onHover {
+            hover = $0 ? value : nil
+        }
+    }
+}
+
+private extension FavoriteToggle {
+    var opacity: Double {
+#if os(iOS)
+        1.0
+#else
+        selection.contains(value) || value == hover ? 1.0 : 0.0
+#endif
     }
 }
