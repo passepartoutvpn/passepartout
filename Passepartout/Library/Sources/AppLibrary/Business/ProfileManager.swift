@@ -37,6 +37,8 @@ public final class ProfileManager: ObservableObject {
 
     private let repository: any ProfileRepository
 
+    private let backupRepository: (any ProfileRepository)?
+
     private let remoteRepository: (any ProfileRepository)?
 
     @Published
@@ -59,6 +61,7 @@ public final class ProfileManager: ObservableObject {
     // for testing/previews
     public init(profiles: [Profile]) {
         repository = InMemoryProfileRepository(profiles: profiles)
+        backupRepository = nil
         remoteRepository = nil
         self.profiles = []
         allProfiles = profiles.reduce(into: [:]) {
@@ -71,8 +74,13 @@ public final class ProfileManager: ObservableObject {
         subscriptions = []
     }
 
-    public init(repository: any ProfileRepository, remoteRepository: (any ProfileRepository)?) {
+    public init(
+        repository: any ProfileRepository,
+        backupRepository: (any ProfileRepository)? = nil,
+        remoteRepository: (any ProfileRepository)?
+    ) {
         self.repository = repository
+        self.backupRepository = backupRepository
         self.remoteRepository = remoteRepository
         profiles = []
         allProfiles = [:]
@@ -116,7 +124,13 @@ extension ProfileManager {
         do {
             let existingProfile = allProfiles[profile.id]
             if existingProfile == nil || profile != existingProfile {
-               try await repository.saveProfile(profile)
+                try await repository.saveProfile(profile)
+
+                if let backupRepository {
+                    Task.detached {
+                        try? await backupRepository.saveProfile(profile)
+                    }
+                }
 
                 allProfiles[profile.id] = profile
                 didChange.send(.save(profile))
