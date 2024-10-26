@@ -34,7 +34,7 @@ final class ProviderFavoritesManager: ObservableObject {
 
     var moduleId: UUID {
         didSet {
-            guard let rawValue = defaults.string(forKey: AppPreference.moduleFavoriteServers.key) else {
+            guard let rawValue = defaults.string(forKey: AppPreference.providerFavoriteServers.key) else {
                 allFavorites = ProviderFavoriteServers()
                 return
             }
@@ -59,6 +59,6 @@ final class ProviderFavoritesManager: ObservableObject {
     }
 
     func save() {
-        defaults.set(allFavorites.rawValue, forKey: AppPreference.moduleFavoriteServers.key)
+        defaults.set(allFavorites.rawValue, forKey: AppPreference.providerFavoriteServers.key)
     }
 }

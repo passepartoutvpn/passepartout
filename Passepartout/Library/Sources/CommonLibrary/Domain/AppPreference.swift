@@ -32,9 +32,9 @@ public enum AppPreference: String {
 
     case logsPrivateData
 
-    case moduleFavoriteServers
-
     case profilesLayout
+
+    case providerFavoriteServers
 
     public var key: String {
         "App.\(rawValue)"
