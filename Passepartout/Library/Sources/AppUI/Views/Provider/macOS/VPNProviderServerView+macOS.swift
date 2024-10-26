@@ -29,21 +29,30 @@ import PassepartoutKit
 import SwiftUI
 
 extension VPNProviderServerView {
-    struct Subview: View {
+    var contentView: some View {
+        VStack {
+            filtersView
+                .padding()
+            serversView
+        }
+    }
+}
+
+// MARK: - Subviews
+
+extension VPNProviderServerView {
+    struct ServersSubview: View {
+        let servers: [VPNServer]
+
+        let selectedServerId: String?
+
+        let isFiltering: Bool
 
         @ObservedObject
-        var manager: VPNProviderManager<Configuration>
+        var filtersViewModel: VPNFiltersView.Model
 
-        let selectedServer: VPNServer?
-
-        @Binding
-        var filters: VPNFilters
-
-        @Binding
-        var onlyShowsFavorites: Bool
-
-        @Binding
-        var favorites: Set<String>
+        @ObservedObject
+        var favoritesManager: ProviderFavoritesManager
 
         let selectTitle: String
 
@@ -53,60 +62,40 @@ extension VPNProviderServerView {
         private var hoveringServerId: String?
 
         var body: some View {
-            VStack {
-                filtersView
-                tableView
-            }
-        }
-    }
-}
-
-private extension VPNProviderServerView.Subview {
-    var tableView: some View {
-        Table(manager.filteredServers) {
-            TableColumn("") { server in
-                ThemeImage(.marked)
-                    .opacity(server.id == selectedServer?.id ? 1.0 : 0.0)
-            }
-            .width(10.0)
-
-            TableColumn(Strings.Global.region) { server in
-                HStack {
-                    ThemeCountryFlag(code: server.provider.countryCode)
-                    Text(server.region)
+            debugChanges()
+            return Table(servers) {
+                TableColumn("") { server in
+                    ThemeImage(.marked)
+                        .opacity(server.id == selectedServerId ? 1.0 : 0.0)
                 }
-            }
+                .width(10.0)
 
-            TableColumn(Strings.Global.address, value: \.address)
-
-            TableColumn("") { server in
-                FavoriteToggle(value: server.serverId, selection: $favorites)
-                    .opacity(favorites.contains(server.serverId) || server.serverId == hoveringServerId ? 1.0 : 0.0)
-                    .onHover {
-                        hoveringServerId = $0 ? server.serverId : nil
+                TableColumn(Strings.Global.region) { server in
+                    HStack {
+                        ThemeCountryFlag(code: server.provider.countryCode)
+                        Text(server.region)
                     }
-            }
-            .width(20.0)
+                }
 
-            TableColumn("") { server in
-                Button {
-                    onSelect(server)
-                } label: {
-                    Text(selectTitle)
+                TableColumn(Strings.Global.address, value: \.address)
+
+                TableColumn("") { server in
+                    FavoriteToggle(
+                        value: server.serverId,
+                        selection: $favoritesManager.serverIds
+                    )
+                }
+                .width(20.0)
+
+                TableColumn("") { server in
+                    Button {
+                        onSelect(server)
+                    } label: {
+                        Text(selectTitle)
+                    }
                 }
             }
         }
-        .disabled(manager.isFiltering)
-    }
-
-    var filtersView: some View {
-        VPNFiltersView(
-            manager: manager,
-            filters: $filters,
-            onlyShowsFavorites: $onlyShowsFavorites,
-            favorites: favorites
-        )
-        .padding()
     }
 }
 

@@ -24,131 +24,49 @@
 //
 
 import AppLibrary
-import CommonLibrary
+import Combine
 import PassepartoutKit
 import SwiftUI
 
-struct VPNFiltersView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Decodable {
+struct VPNFiltersView: View {
 
     @ObservedObject
-    var manager: VPNProviderManager<Configuration>
-
-    @Binding
-    var filters: VPNFilters
-
-    @Binding
-    var onlyShowsFavorites: Bool
-
-    let favorites: Set<String>
+    var model: Model
 
     var body: some View {
         debugChanges()
-        return Subview(
-            filters: $filters,
-            onlyShowsFavorites: $onlyShowsFavorites,
-            categories: categories,
-            countries: countries,
-            presets: presets,
-            favorites: favorites
-        )
-        .disabled(manager.isFiltering)
-        .onChange(of: filters) { filters in
-            Task {
-                await manager.applyFilters(filters)
-            }
-        }
-        .onChange(of: favorites) {
-            if onlyShowsFavorites {
-                filters.serverIds = $0
-                Task {
-                    await manager.applyFilters(filters)
-                }
-            }
-        }
-        .onChange(of: onlyShowsFavorites) {
-            filters.serverIds = $0 ? favorites : nil
-            Task {
-                await manager.applyFilters(filters)
-            }
-        }
-    }
-}
-
-private extension VPNFiltersView {
-    var categories: [String] {
-        manager
-            .allCategoryNames
-            .sorted()
-    }
-
-    var countries: [(code: String, description: String)] {
-        manager
-            .allCountryCodes
-            .map {
-                (code: $0, description: $0.localizedAsRegionCode ?? $0)
-            }
-            .sorted {
-                $0.description < $1.description
-            }
-    }
-
-    var presets: [VPNPreset<Configuration>] {
-        manager
-            .presets
-            .sorted {
-                $0.description < $1.description
-            }
-    }
-}
-
-// MARK: -
-
-private extension VPNFiltersView {
-    struct Subview: View {
-
-        @Binding
-        var filters: VPNFilters
-
-        @Binding
-        var onlyShowsFavorites: Bool
-
-        let categories: [String]
-
-        let countries: [(code: String, description: String)]
-
-        let presets: [VPNPreset<Configuration>]
-
-        let favorites: Set<String>
-
-        var body: some View {
-            debugChanges()
-            return Form {
-                Section {
-                    categoryPicker
-                    countryPicker
-                    presetPicker
-                    favoritesToggle
+        return Form {
+            Section {
+                categoryPicker
+                countryPicker
+                presetPicker
+                favoritesToggle
 #if os(iOS)
-                    clearFiltersButton
-                        .frame(maxWidth: .infinity, alignment: .center)
+                clearFiltersButton
+                    .frame(maxWidth: .infinity, alignment: .center)
 #else
-                    HStack {
-                        Spacer()
-                        clearFiltersButton
-                    }
-#endif
+                HStack {
+                    Spacer()
+                    clearFiltersButton
                 }
+#endif
             }
+        }
+        .onChange(of: model.filters) {
+            model.filtersDidChange.send($0)
+        }
+        .onChange(of: model.onlyShowsFavorites) {
+            model.onlyShowsFavoritesDidChange.send($0)
         }
     }
 }
 
-private extension VPNFiltersView.Subview {
+private extension VPNFiltersView {
     var categoryPicker: some View {
-        Picker(Strings.Global.category, selection: $filters.categoryName) {
+        Picker(Strings.Global.category, selection: $model.filters.categoryName) {
             Text(Strings.Global.any)
                 .tag(nil as String?)
-            ForEach(categories, id: \.self) {
+            ForEach(model.categories, id: \.self) {
                 Text($0.capitalized)
                     .tag($0 as String?)
             }
@@ -156,10 +74,10 @@ private extension VPNFiltersView.Subview {
     }
 
     var countryPicker: some View {
-        Picker(Strings.Global.country, selection: $filters.countryCode) {
+        Picker(Strings.Global.country, selection: $model.filters.countryCode) {
             Text(Strings.Global.any)
                 .tag(nil as String?)
-            ForEach(countries, id: \.code) {
+            ForEach(model.countries, id: \.code) {
                 Text($0.description)
                     .tag($0.code as String?)
             }
@@ -167,10 +85,10 @@ private extension VPNFiltersView.Subview {
     }
 
     var presetPicker: some View {
-        Picker(Strings.Providers.Vpn.preset, selection: $filters.presetId) {
+        Picker(Strings.Providers.Vpn.preset, selection: $model.filters.presetId) {
             Text(Strings.Global.any)
                 .tag(nil as String?)
-            ForEach(presets, id: \.presetId) {
+            ForEach(model.presets, id: \.presetId) {
                 Text($0.description)
                     .tag($0.presetId as String?)
             }
@@ -178,24 +96,19 @@ private extension VPNFiltersView.Subview {
     }
 
     var favoritesToggle: some View {
-        Toggle(Strings.Providers.onlyFavorites, isOn: $onlyShowsFavorites)
+        Toggle(Strings.Providers.onlyFavorites, isOn: $model.onlyShowsFavorites)
     }
 
     var clearFiltersButton: some View {
         Button(Strings.Providers.clearFilters, role: .destructive) {
-            onlyShowsFavorites = false
-            filters = VPNFilters()
+            model.filters = VPNFilters()
+            model.onlyShowsFavorites = false
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        VPNFiltersView<OpenVPN.Configuration>(
-            manager: VPNProviderManager(),
-            filters: .constant(VPNFilters()),
-            onlyShowsFavorites: .constant(false),
-            favorites: []
-        )
+        VPNFiltersView(model: .init())
     }
 }

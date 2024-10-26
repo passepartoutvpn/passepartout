@@ -1,5 +1,5 @@
 //
-//  ModuleFavoriteServers.swift
+//  ProviderFavoriteServers.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/25/24.
@@ -25,7 +25,7 @@
 
 import SwiftUI
 
-public struct ModuleFavoriteServers {
+public struct ProviderFavoriteServers {
     private var map: [UUID: Set<String>]
 
     public init() {
@@ -41,7 +41,7 @@ public struct ModuleFavoriteServers {
     }
 }
 
-extension ModuleFavoriteServers: RawRepresentable {
+extension ProviderFavoriteServers: RawRepresentable {
     public var rawValue: String {
         (try? JSONEncoder().encode(map))?.base64EncodedString() ?? ""
     }
