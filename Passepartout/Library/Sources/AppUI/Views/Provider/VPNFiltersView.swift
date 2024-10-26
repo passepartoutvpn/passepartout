@@ -24,6 +24,7 @@
 //
 
 import AppLibrary
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -35,15 +36,41 @@ struct VPNFiltersView<Configuration>: View where Configuration: ProviderConfigur
     @Binding
     var filters: VPNFilters
 
+    @Binding
+    var onlyShowsFavorites: Bool
+
+    let favorites: Set<String>
+
     var body: some View {
         debugChanges()
         return Subview(
             filters: $filters,
+            onlyShowsFavorites: $onlyShowsFavorites,
             categories: categories,
             countries: countries,
-            presets: presets
+            presets: presets,
+            favorites: favorites
         )
-        .onChange(of: filters, perform: manager.applyFilters)
+        .disabled(manager.isFiltering)
+        .onChange(of: filters) { filters in
+            Task {
+                await manager.applyFilters(filters)
+            }
+        }
+        .onChange(of: favorites) {
+            if onlyShowsFavorites {
+                filters.serverIds = $0
+                Task {
+                    await manager.applyFilters(filters)
+                }
+            }
+        }
+        .onChange(of: onlyShowsFavorites) {
+            filters.serverIds = $0 ? favorites : nil
+            Task {
+                await manager.applyFilters(filters)
+            }
+        }
     }
 }
 
@@ -82,11 +109,16 @@ private extension VPNFiltersView {
         @Binding
         var filters: VPNFilters
 
+        @Binding
+        var onlyShowsFavorites: Bool
+
         let categories: [String]
 
         let countries: [(code: String, description: String)]
 
         let presets: [VPNPreset<Configuration>]
+
+        let favorites: Set<String>
 
         var body: some View {
             debugChanges()
@@ -95,6 +127,7 @@ private extension VPNFiltersView {
                     categoryPicker
                     countryPicker
                     presetPicker
+                    favoritesToggle
 #if os(iOS)
                     clearFiltersButton
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -144,8 +177,13 @@ private extension VPNFiltersView.Subview {
         }
     }
 
+    var favoritesToggle: some View {
+        Toggle(Strings.Providers.onlyFavorites, isOn: $onlyShowsFavorites)
+    }
+
     var clearFiltersButton: some View {
         Button(Strings.Providers.clearFilters, role: .destructive) {
+            onlyShowsFavorites = false
             filters = VPNFilters()
         }
     }
@@ -155,7 +193,9 @@ private extension VPNFiltersView.Subview {
     NavigationStack {
         VPNFiltersView<OpenVPN.Configuration>(
             manager: VPNProviderManager(),
-            filters: .constant(VPNFilters())
+            filters: .constant(VPNFilters()),
+            onlyShowsFavorites: .constant(false),
+            favorites: []
         )
     }
 }

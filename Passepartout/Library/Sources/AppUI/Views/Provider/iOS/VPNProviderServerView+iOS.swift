@@ -39,6 +39,12 @@ extension VPNProviderServerView {
         @Binding
         var filters: VPNFilters
 
+        @Binding
+        var onlyShowsFavorites: Bool
+
+        @Binding
+        var favorites: Set<String>
+
         // unused
         let selectTitle: String
 
@@ -82,7 +88,11 @@ private extension VPNProviderServerView.Subview {
         manager
             .allCountryCodes
             .sorted {
-                $0.localizedAsRegionCode! < $1.localizedAsRegionCode!
+                guard let region1 = $0.localizedAsRegionCode,
+                      let region2 = $1.localizedAsRegionCode else {
+                    return $0 < $1
+                }
+                return region1 < region2
             }
     }
 
@@ -103,7 +113,7 @@ private extension VPNProviderServerView.Subview {
                 } label: {
                     HStack {
                         ThemeCountryFlag(code: code)
-                        Text(code.localizedAsRegionCode!)
+                        Text(code.localizedAsRegionCode ?? code)
                     }
                 }
             }
@@ -114,10 +124,21 @@ private extension VPNProviderServerView.Subview {
             onSelect(server)
         } label: {
             HStack {
-                Text(server.hostname ?? server.serverId)
-                Spacer()
                 ThemeImage(.marked)
                     .opacity(server.id == selectedServer?.id ? 1.0 : 0.0)
+                VStack(alignment: .leading) {
+                    if let area = server.provider.area {
+                        Text(area)
+                            .font(.headline)
+                        Text(server.provider.serverId)
+                            .font(.subheadline)
+                    } else {
+                        Text(server.provider.serverId)
+                            .font(.headline)
+                    }
+                }
+                Spacer()
+                FavoriteToggle(value: server.serverId, selection: $favorites)
             }
         }
     }
@@ -137,7 +158,9 @@ private extension VPNProviderServerView.Subview {
         NavigationStack {
             VPNFiltersView(
                 manager: manager,
-                filters: $filters
+                filters: $filters,
+                onlyShowsFavorites: $onlyShowsFavorites,
+                favorites: favorites
             )
             .navigationTitle(Strings.Global.filters)
             .navigationBarTitleDisplayMode(.inline)
@@ -152,6 +175,7 @@ private extension VPNProviderServerView.Subview {
     NavigationStack {
         VPNProviderServerView(
             apis: [API.bundled],
+            moduleId: UUID(),
             providerId: .tunnelbear,
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,

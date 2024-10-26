@@ -1,8 +1,8 @@
 //
-//  AppPreference.swift
+//  ThemeFavoriteToggle.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 10/25/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,20 +23,23 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-public enum AppPreference: String {
-    case confirmsQuit
+struct FavoriteToggle<ID>: View where ID: Hashable {
+    let value: ID
 
-    case locksInBackground
+    @Binding
+    var selection: Set<ID>
 
-    case logsPrivateData
-
-    case moduleFavoriteServers
-
-    case profilesLayout
-
-    public var key: String {
-        "App.\(rawValue)"
+    var body: some View {
+        Button {
+            if selection.contains(value) {
+                selection.remove(value)
+            } else {
+                selection.insert(value)
+            }
+        } label: {
+            ThemeImage(selection.contains(value) ? .favoriteOn : .favoriteOff)
+        }
     }
 }

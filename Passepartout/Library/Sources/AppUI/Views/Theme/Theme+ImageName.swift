@@ -36,6 +36,8 @@ extension Theme {
         case disclose
         case editableSectionEdit
         case editableSectionRemove
+        case favoriteOff
+        case favoriteOn
         case filters
         case footerAdd
         case hide

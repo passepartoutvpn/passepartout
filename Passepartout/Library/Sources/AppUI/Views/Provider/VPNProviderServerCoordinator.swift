@@ -32,6 +32,8 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
     @Environment(\.dismiss)
     private var dismiss
 
+    let moduleId: UUID
+
     let providerId: ProviderID
 
     let selectedEntity: VPNEntity<Configuration>?
@@ -44,6 +46,7 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
     var body: some View {
         NavigationStack {
             VPNProviderServerView(
+                moduleId: moduleId,
                 providerId: providerId,
                 configurationType: Configuration.self,
                 selectedEntity: selectedEntity,

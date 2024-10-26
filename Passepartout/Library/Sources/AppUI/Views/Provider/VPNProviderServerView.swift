@@ -24,6 +24,7 @@
 //
 
 import AppLibrary
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
@@ -33,7 +34,12 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
     @EnvironmentObject
     private var providerManager: ProviderManager
 
+    @AppStorage(AppPreference.moduleFavoriteServers.key)
+    var allFavorites = ModuleFavoriteServers()
+
     var apis: [APIMapper] = API.shared
+
+    let moduleId: UUID
 
     let providerId: ProviderID
 
@@ -57,6 +63,9 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
     @State
     private var filters = VPNFilters()
 
+    @State
+    private var onlyShowsFavorites = false
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
@@ -66,6 +75,8 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
             manager: manager,
             selectedServer: selectedEntity?.server,
             filters: $filters,
+            onlyShowsFavorites: $onlyShowsFavorites,
+            favorites: favoritesBinding,
             selectTitle: selectTitle,
             onSelect: selectServer
         )
@@ -84,7 +95,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
                     } else {
                         filters = VPNFilters()
                     }
-                    manager.applyFilters(filters)
+                    await manager.applyFilters(filters)
                 } catch {
                     pp_log(.app, .error, "Unable to load VPN repository: \(error)")
                     errorHandler.handle(error, title: Strings.Global.servers)
@@ -108,6 +119,14 @@ extension VPNProviderServerView {
             }
     }
 
+    var favoritesBinding: Binding<Set<String>> {
+        Binding {
+            allFavorites.servers(forModuleWithID: moduleId)
+        } set: {
+            allFavorites.setServers($0, forModuleWithID: moduleId)
+        }
+    }
+
     func selectServer(_ server: VPNServer) {
         guard let preset = compatiblePreset(with: server) else {
             pp_log(.app, .error, "Unable to find a compatible preset. Supported IDs: \(server.provider.supportedPresetIds ?? [])")
@@ -124,6 +143,7 @@ extension VPNProviderServerView {
     NavigationStack {
         VPNProviderServerView(
             apis: [API.bundled],
+            moduleId: UUID(),
             providerId: .protonvpn,
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,

@@ -1,8 +1,8 @@
 //
-//  AppPreference.swift
+//  ModuleFavoriteServers.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 10/25/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,20 +23,33 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-public enum AppPreference: String {
-    case confirmsQuit
+public struct ModuleFavoriteServers {
+    private var map: [UUID: Set<String>]
 
-    case locksInBackground
+    public init() {
+        map = [:]
+    }
 
-    case logsPrivateData
+    public func servers(forModuleWithID moduleId: UUID) -> Set<String> {
+        map[moduleId] ?? []
+    }
 
-    case moduleFavoriteServers
+    public mutating func setServers(_ servers: Set<String>, forModuleWithID moduleId: UUID) {
+        map[moduleId] = servers
+    }
+}
 
-    case profilesLayout
+extension ModuleFavoriteServers: RawRepresentable {
+    public var rawValue: String {
+        (try? JSONEncoder().encode(map))?.base64EncodedString() ?? ""
+    }
 
-    public var key: String {
-        "App.\(rawValue)"
+    public init?(rawValue: String) {
+        guard let data = Data(base64Encoded: rawValue) else {
+            return nil
+        }
+        map = (try? JSONDecoder().decode([UUID: Set<String>].self, from: data)) ?? [:]
     }
 }

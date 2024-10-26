@@ -461,6 +461,8 @@ public enum Strings {
     }
     /// None
     public static let noProvider = Strings.tr("Localizable", "providers.no_provider", fallback: "None")
+    /// Only favorites
+    public static let onlyFavorites = Strings.tr("Localizable", "providers.only_favorites", fallback: "Only favorites")
     /// Refresh infrastructure
     public static let refreshInfrastructure = Strings.tr("Localizable", "providers.refresh_infrastructure", fallback: "Refresh infrastructure")
     /// Select

@@ -39,9 +39,18 @@ extension VPNProviderServerView {
         @Binding
         var filters: VPNFilters
 
+        @Binding
+        var onlyShowsFavorites: Bool
+
+        @Binding
+        var favorites: Set<String>
+
         let selectTitle: String
 
         let onSelect: (VPNServer) -> Void
+
+        @State
+        private var hoveringServerId: String?
 
         var body: some View {
             VStack {
@@ -71,6 +80,15 @@ private extension VPNProviderServerView.Subview {
             TableColumn(Strings.Global.address, value: \.address)
 
             TableColumn("") { server in
+                FavoriteToggle(value: server.serverId, selection: $favorites)
+                    .opacity(favorites.contains(server.serverId) || server.serverId == hoveringServerId ? 1.0 : 0.0)
+                    .onHover {
+                        hoveringServerId = $0 ? server.serverId : nil
+                    }
+            }
+            .width(20.0)
+
+            TableColumn("") { server in
                 Button {
                     onSelect(server)
                 } label: {
@@ -84,7 +102,9 @@ private extension VPNProviderServerView.Subview {
     var filtersView: some View {
         VPNFiltersView(
             manager: manager,
-            filters: $filters
+            filters: $filters,
+            onlyShowsFavorites: $onlyShowsFavorites,
+            favorites: favorites
         )
         .padding()
     }
@@ -96,6 +116,7 @@ private extension VPNProviderServerView.Subview {
     NavigationStack {
         VPNProviderServerView(
             apis: [API.bundled],
+            moduleId: UUID(),
             providerId: .tunnelbear,
             configurationType: OpenVPN.Configuration.self,
             selectedEntity: nil,

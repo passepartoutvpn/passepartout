@@ -228,6 +228,7 @@
 "providers.no_provider" = "None";
 "providers.select_provider" = "Select a provider";
 "providers.select_entity" = "Select";
+"providers.only_favorites" = "Only favorites";
 "providers.clear_filters" = "Clear filters";
 "providers.refresh_infrastructure" = "Refresh infrastructure";
 "providers.last_updated" = "Last updated on %@";
