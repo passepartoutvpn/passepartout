@@ -21,6 +21,8 @@
 		0EC797432B9378E000C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
 		0EC797442B93790600C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
 		0EC9C0232CA5BD0B00C52954 /* AppUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0EC9C0222CA5BD0B00C52954 /* AppUI */; };
+		0ED61CF82CD0418C008FE259 /* AppDelegate+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED61CF72CD0418C008FE259 /* AppDelegate+macOS.swift */; };
+		0ED61CFA2CD04192008FE259 /* AppDelegate+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED61CF92CD04192008FE259 /* AppDelegate+iOS.swift */; };
 		0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EDE56E62CABE40D0082D21C /* Intents.plist */; };
 		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
@@ -88,6 +90,8 @@
 		0EC797402B9378E000C093B7 /* Shared+App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Shared+App.swift"; sourceTree = "<group>"; };
 		0EC797412B9378E000C093B7 /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		0ED1EFDA2C33059600CBD9BD /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
+		0ED61CF72CD0418C008FE259 /* AppDelegate+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+macOS.swift"; sourceTree = "<group>"; };
+		0ED61CF92CD04192008FE259 /* AppDelegate+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+iOS.swift"; sourceTree = "<group>"; };
 		0EDE56E52CABE40D0082D21C /* Intents.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Intents.entitlements; sourceTree = "<group>"; };
 		0EDE56E62CABE40D0082D21C /* Intents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Intents.plist; sourceTree = "<group>"; };
 		0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentsExtension.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		0E7E3D5A2B9345FD002BBDB4 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0ED61CF52CD0416A008FE259 /* iOS */,
+				0ED61CF62CD04174008FE259 /* macOS */,
 				0ED1EFDA2C33059600CBD9BD /* App.plist */,
 				0E7E3D5B2B9345FD002BBDB4 /* App.entitlements */,
 				0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */,
@@ -195,6 +201,22 @@
 				0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */,
 			);
 			path = Tunnel;
+			sourceTree = "<group>";
+		};
+		0ED61CF52CD0416A008FE259 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				0ED61CF92CD04192008FE259 /* AppDelegate+iOS.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		0ED61CF62CD04174008FE259 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				0ED61CF72CD0418C008FE259 /* AppDelegate+macOS.swift */,
+			);
+			path = macOS;
 			sourceTree = "<group>";
 		};
 		0EDE56E82CABE40D0082D21C /* Intents */ = {
@@ -370,7 +392,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ED61CF82CD0418C008FE259 /* AppDelegate+macOS.swift in Sources */,
 				0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */,
+				0ED61CFA2CD04192008FE259 /* AppDelegate+iOS.swift in Sources */,
 				0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */,
 				0EC797422B9378E000C093B7 /* Shared+App.swift in Sources */,
 				0EC797432B9378E000C093B7 /* Shared.swift in Sources */,
