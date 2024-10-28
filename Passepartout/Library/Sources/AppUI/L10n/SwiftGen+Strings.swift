@@ -27,6 +27,16 @@ public enum Strings {
         public static let title = Strings.tr("Localizable", "alerts.iap.restricted.title", fallback: "Restricted")
       }
     }
+    public enum Import {
+      public enum Passphrase {
+        /// Enter passphrase for '%@'.
+        public static func message(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "alerts.import.passphrase.message", String(describing: p1), fallback: "Enter passphrase for '%@'.")
+        }
+        /// Decrypt
+        public static let ok = Strings.tr("Localizable", "alerts.import.passphrase.ok", fallback: "Decrypt")
+      }
+    }
   }
   public enum Entities {
     public enum ConnectionStatus {
@@ -600,18 +610,6 @@ public enum Strings {
       }
     }
     public enum Profiles {
-      public enum Alerts {
-        public enum Import {
-          public enum Passphrase {
-            /// Enter passphrase for '%@'.
-            public static func message(_ p1: Any) -> String {
-              return Strings.tr("Localizable", "views.profiles.alerts.import.passphrase.message", String(describing: p1), fallback: "Enter passphrase for '%@'.")
-            }
-            /// Decrypt
-            public static let ok = Strings.tr("Localizable", "views.profiles.alerts.import.passphrase.ok", fallback: "Decrypt")
-          }
-        }
-      }
       public enum Errors {
         /// Unable to duplicate profile '%@'.
         public static func duplicate(_ p1: Any) -> String {

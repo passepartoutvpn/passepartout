@@ -124,8 +124,6 @@
 "views.profiles.folders.no_profiles" = "No profiles";
 "views.profiles.toolbar.new_profile" = "New profile";
 "views.profiles.toolbar.import_profile" = "Import profile";
-"views.profiles.alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
-"views.profiles.alerts.import.passphrase.ok" = "Decrypt";
 "views.profiles.errors.tunnel" = "Unable to execute tunnel operation.";
 "views.profiles.errors.duplicate" = "Unable to duplicate profile '%@'.";
 "views.profiles.errors.import" = "Unable to import profiles.";
@@ -248,6 +246,9 @@
 "providers.picker.purchase" = "Add more providers";
 
 // MARK: - Alerts
+
+"alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
+"alerts.import.passphrase.ok" = "Decrypt";
 
 "alerts.iap.restricted.title" = "Restricted";
 "alerts.iap.restricted.message" = "The requested feature is unavailable in this build.";

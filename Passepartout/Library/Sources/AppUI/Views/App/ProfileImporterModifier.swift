@@ -70,7 +70,7 @@ private extension ProfileImporterModifier {
             Strings.Placeholders.secret,
             text: $importer.currentPassphrase
         )
-        Button(Strings.Views.Profiles.Alerts.Import.Passphrase.ok) {
+        Button(Strings.Alerts.Import.Passphrase.ok) {
             Task {
                 try await importer.reImport(
                     url: url,
@@ -85,7 +85,7 @@ private extension ProfileImporterModifier {
     }
 
     func message(for url: URL) -> some View {
-        Text(Strings.Views.Profiles.Alerts.Import.Passphrase.message(url.lastPathComponent))
+        Text(Strings.Alerts.Import.Passphrase.message(url.lastPathComponent))
     }
 
     func handleResult(_ result: Result<[URL], Error>) {
