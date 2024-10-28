@@ -45,28 +45,35 @@ extension VPNFiltersView {
         private(set) var presets: [AnyVPNPreset]
 
         @Published
-        var filters = VPNFilters() {
-            didSet {
-                filtersDidChange.send(filters)
-            }
-        }
+        var filters = VPNFilters()
 
         @Published
-        var onlyShowsFavorites = false {
-            didSet {
-                onlyShowsFavoritesDidChange.send(onlyShowsFavorites)
-            }
-        }
+        var onlyShowsFavorites = false
 
         let filtersDidChange = PassthroughSubject<VPNFilters, Never>()
 
         let onlyShowsFavoritesDidChange = PassthroughSubject<Bool, Never>()
+
+        private var subscriptions: Set<AnyCancellable>
 
         init() {
             options = VPNFilterOptions()
             categories = []
             countries = []
             presets = []
+            subscriptions = []
+
+            $filters
+                .sink { [weak self] in
+                    self?.filtersDidChange.send($0)
+                }
+                .store(in: &subscriptions)
+
+            $onlyShowsFavorites
+                .sink { [weak self] in
+                    self?.onlyShowsFavoritesDidChange.send($0)
+                }
+                .store(in: &subscriptions)
         }
 
         func load(options: VPNFilterOptions, initialFilters: VPNFilters?) {
