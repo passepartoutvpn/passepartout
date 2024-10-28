@@ -91,7 +91,6 @@ private extension InstalledProfileView {
 
     var nameView: some View {
         Text(profile?.name ?? Strings.Views.Profiles.Rows.notInstalled)
-            .fixedSize()
             .font(.title2)
             .fontWeight(theme.relevantWeight)
             .themeTruncating(.tail)
