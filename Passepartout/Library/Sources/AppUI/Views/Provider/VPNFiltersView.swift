@@ -99,7 +99,6 @@ private extension VPNFiltersView {
     var clearFiltersButton: some View {
         Button(Strings.Providers.clearFilters, role: .destructive) {
             model.filters = VPNFilters()
-            model.onlyShowsFavorites = false
         }
     }
 }
