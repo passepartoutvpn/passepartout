@@ -140,9 +140,20 @@ private extension TunnelToggleButton {
         } catch is CancellationError {
             //
         } catch {
-            if (error as? PassepartoutError)?.code == .missingProviderEntity {
+            switch (error as? PassepartoutError)?.code {
+            case .providerRequired:
+                errorHandler.handle(
+                    error,
+                    title: Strings.Global.connection
+                )
+                return
+
+            case .missingProviderEntity:
                 onProviderEntityRequired?(profile)
                 return
+
+            default:
+                break
             }
             errorHandler.handle(
                 error,
