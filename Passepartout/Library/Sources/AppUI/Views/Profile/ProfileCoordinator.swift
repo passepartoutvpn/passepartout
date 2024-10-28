@@ -113,7 +113,7 @@ private extension ProfileCoordinator {
             paywallReason = iapManager.paywallReason(forFeature: .routing)
 
         case .openVPN, .wireGuard:
-            paywallReason = iapManager.paywallReason(forFeature: .providers)
+            break
 
         case .onDemand:
             break

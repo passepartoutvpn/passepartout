@@ -40,6 +40,9 @@ struct VPNProviderContentModifier<Configuration, Destination, ProviderRows>: Vie
 
     let isRequired: Bool
 
+    @Binding
+    var paywallReason: PaywallReason?
+
     let entityDestination: Destination
 
     @ViewBuilder
@@ -53,6 +56,7 @@ struct VPNProviderContentModifier<Configuration, Destination, ProviderRows>: Vie
                 providerId: $providerId,
                 entityType: VPNEntity<Configuration>.self,
                 isRequired: isRequired,
+                paywallReason: $paywallReason,
                 providerRows: {
                     providerEntityRow
                     providerRows
@@ -96,6 +100,7 @@ private extension VPNProviderContentModifier {
                     providerId: .constant(.hideme),
                     selectedEntity: .constant(nil as VPNEntity<OpenVPN.Configuration>?),
                     isRequired: false,
+                    paywallReason: .constant(nil),
                     entityDestination: "Destination",
                     providerRows: {
                         Text("Other")
