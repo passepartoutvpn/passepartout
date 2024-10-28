@@ -31,7 +31,7 @@ extension VPNFiltersView {
 
     @MainActor
     final class Model: ObservableObject {
-        typealias LocalizedCountry = (code: String, description: String)
+        typealias CodeWithDescription = (code: String, description: String)
 
         private var options: VPNFilterOptions
 
@@ -39,7 +39,7 @@ extension VPNFiltersView {
         private(set) var categories: [String]
 
         @Published
-        private(set) var countries: [LocalizedCountry]
+        private(set) var countries: [CodeWithDescription]
 
         @Published
         private(set) var presets: [AnyVPNPreset]
@@ -101,7 +101,7 @@ private extension VPNFiltersView.Model {
 
     func setCountries(withCodes codes: Set<String>) {
         countries = codes
-            .map(\.asLocalizedCountry)
+            .map(\.asCountryCodeWithDescription)
             .sorted {
                 $0.description < $1.description
             }
@@ -116,7 +116,7 @@ private extension VPNFiltersView.Model {
 }
 
 private extension String {
-    var asLocalizedCountry: VPNFiltersView.Model.LocalizedCountry {
+    var asCountryCodeWithDescription: VPNFiltersView.Model.CodeWithDescription {
         (self, localizedAsRegionCode ?? self)
     }
 }
