@@ -77,7 +77,10 @@ extension PassepartoutError: LocalizedError {
             return Strings.Errors.App.Passepartout.invalidFields(fieldsDescription)
 
         case .parsing:
-            return reason?.localizedDescription ?? Strings.Errors.App.Passepartout.parsing
+            let message = userInfo as? String ?? reason?.localizedDescription
+            return [Strings.Errors.App.Passepartout.parsing, message]
+                .compactMap { $0 }
+                .joined(separator: " ")
 
         case .unhandled:
             return reason?.localizedDescription

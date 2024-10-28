@@ -55,6 +55,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
     @State
     private var paywallReason: PaywallReason?
 
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
+
     init(serverConfiguration: OpenVPN.Configuration) {
         let module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         let editor = ProfileEditor(modules: [module])
@@ -80,6 +83,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 onCompletion: importConfiguration
             )
             .modifier(PaywallModifier(reason: $paywallReason))
+            .withErrorHandler(errorHandler)
             .navigationDestination(for: Subroute.self, destination: destination)
     }
 }
@@ -187,6 +191,7 @@ private extension OpenVPNView {
             }
         } catch {
             pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
+            errorHandler.handle((error as? StandardOpenVPNParserError)?.asPassepartoutError ?? error)
         }
     }
 }
