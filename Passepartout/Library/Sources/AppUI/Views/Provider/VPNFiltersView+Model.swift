@@ -45,10 +45,18 @@ extension VPNFiltersView {
         private(set) var presets: [AnyVPNPreset]
 
         @Published
-        var filters = VPNFilters()
+        var filters = VPNFilters() {
+            didSet {
+                filtersDidChange.send(filters)
+            }
+        }
 
         @Published
-        var onlyShowsFavorites = false
+        var onlyShowsFavorites = false {
+            didSet {
+                onlyShowsFavoritesDidChange.send(onlyShowsFavorites)
+            }
+        }
 
         let filtersDidChange = PassthroughSubject<VPNFilters, Never>()
 

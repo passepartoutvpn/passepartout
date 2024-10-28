@@ -104,6 +104,7 @@ extension VPNProviderServerView {
 
         let vpnManager: VPNProviderManager<Configuration>
 
+        // BEWARE: unobserved!
         let filtersViewModel: VPNFiltersView.Model
 
         let apis: [APIMapper]

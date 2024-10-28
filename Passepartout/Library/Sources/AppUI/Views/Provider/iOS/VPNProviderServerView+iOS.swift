@@ -109,14 +109,8 @@ extension VPNProviderServerView {
 
         var body: some View {
             debugChanges()
-            return ZStack {
-                if isFiltering || !servers.isEmpty {
-                    listView
-                } else {
-                    emptyView
-                }
-            }
-            .themeAnimation(on: isFiltering, category: .providers)
+            return listView
+                .themeAnimation(on: isFiltering, category: .providers)
         }
     }
 }
@@ -125,11 +119,18 @@ private extension VPNProviderServerView.ServersSubview {
     var listView: some View {
         List {
             Section {
-                if isFiltering {
-                    ProgressView()
-                        .id(UUID())
+                Toggle(Strings.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
+            }
+            Section {
+                if isFiltering || !servers.isEmpty {
+                    if isFiltering {
+                        ProgressView()
+                            .id(UUID())
+                    } else {
+                        ForEach(countryCodes, id: \.self, content: countryView)
+                    }
                 } else {
-                    ForEach(countryCodes, id: \.self, content: countryView)
+                    emptyView
                 }
             } header: {
                 Text(filtersViewModel.filters.categoryName ?? Strings.Providers.Vpn.Category.any)
@@ -139,7 +140,6 @@ private extension VPNProviderServerView.ServersSubview {
 
     var emptyView: some View {
         Text(Strings.Providers.Vpn.noServers)
-            .themeEmptyMessage()
     }
 }
 
