@@ -52,15 +52,21 @@ struct VPNFiltersView: View {
 #endif
             }
         }
-        .onChange(of: model.filters.categoryName) { _ in
-            model.filters.countryCode = nil
-        }
     }
 }
 
 private extension VPNFiltersView {
+    var categoryNameBinding: Binding<String?> {
+        Binding {
+            model.filters.categoryName
+        } set: {
+            model.filters.categoryName = $0
+            model.filters.countryCode = nil
+        }
+    }
+
     var categoryPicker: some View {
-        Picker(Strings.Global.category, selection: $model.filters.categoryName) {
+        Picker(Strings.Global.category, selection: categoryNameBinding) {
             Text(Strings.Global.any)
                 .tag(nil as String?)
             ForEach(model.categories, id: \.self) {

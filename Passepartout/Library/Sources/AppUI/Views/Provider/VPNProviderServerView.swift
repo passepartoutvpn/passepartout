@@ -81,7 +81,12 @@ extension VPNProviderServerView {
                 guard let selectedEntity, filtersWithSelection else {
                     return nil
                 }
-                return VPNFilters(with: selectedEntity.server.provider)
+                var filters = VPNFilters()
+                filters.categoryName = selectedEntity.server.provider.categoryName
+#if os(macOS)
+                filters.countryCode = selectedEntity.server.provider.countryCode
+#endif
+                return filters
             }(),
             selectTitle: selectTitle,
             onSelect: onSelect,
