@@ -54,11 +54,26 @@ extension VPNFiltersView {
 
         let onlyShowsFavoritesDidChange = PassthroughSubject<Bool, Never>()
 
+        private var subscriptions: Set<AnyCancellable>
+
         init() {
             options = VPNFilterOptions()
             categories = []
             countries = []
             presets = []
+            subscriptions = []
+
+            $filters
+                .sink { [weak self] in
+                    self?.filtersDidChange.send($0)
+                }
+                .store(in: &subscriptions)
+
+            $onlyShowsFavorites
+                .sink { [weak self] in
+                    self?.onlyShowsFavoritesDidChange.send($0)
+                }
+                .store(in: &subscriptions)
         }
 
         func load(options: VPNFilterOptions, initialFilters: VPNFilters?) {

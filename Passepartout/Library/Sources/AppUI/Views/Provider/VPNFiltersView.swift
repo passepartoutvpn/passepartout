@@ -41,7 +41,6 @@ struct VPNFiltersView: View {
                 countryPicker
                 presetPicker
 #if os(iOS)
-                favoritesToggle
                 clearFiltersButton
                     .frame(maxWidth: .infinity, alignment: .center)
 #else
@@ -55,12 +54,6 @@ struct VPNFiltersView: View {
         }
         .onChange(of: model.filters.categoryName) { _ in
             model.filters.countryCode = nil
-        }
-        .onChange(of: model.filters) {
-            model.filtersDidChange.send($0)
-        }
-        .onChange(of: model.onlyShowsFavorites) {
-            model.onlyShowsFavoritesDidChange.send($0)
         }
     }
 }
@@ -106,7 +99,6 @@ private extension VPNFiltersView {
     var clearFiltersButton: some View {
         Button(Strings.Providers.clearFilters, role: .destructive) {
             model.filters = VPNFilters()
-            model.onlyShowsFavorites = false
         }
     }
 }
