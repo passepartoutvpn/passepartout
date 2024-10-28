@@ -32,6 +32,8 @@ public struct Constants: Decodable, Sendable {
 
         public let remote: String
 
+        public let providers: String
+
         public let legacyV2: String
     }
 

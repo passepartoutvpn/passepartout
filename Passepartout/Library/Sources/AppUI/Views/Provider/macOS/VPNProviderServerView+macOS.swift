@@ -74,6 +74,7 @@ extension VPNProviderServerView {
                     HStack {
                         ThemeCountryFlag(code: server.provider.countryCode)
                         Text(server.region)
+                            .help(server.region)
                     }
                 }
 
@@ -92,6 +93,8 @@ extension VPNProviderServerView {
                         onSelect(server)
                     } label: {
                         Text(selectTitle)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
                     }
                 }
             }

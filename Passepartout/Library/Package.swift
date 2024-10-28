@@ -28,7 +28,7 @@ let package = Package(
     ],
     dependencies: [
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", from: "0.9.0"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "79ff98a69c87cc90ef213e00ab02c9d90d63baaf"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "69b2ed730986d684195a39b592155b3384f3d857"),
 //        .package(path: "../../../passepartoutkit-source"),
         .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", from: "0.9.1"),
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", revision: "031863a1cd683962a7dfe68e20b91fa820a1ecce"),
@@ -57,6 +57,17 @@ let package = Package(
             ]
         ),
         .target(
+            name: "AppDataProviders",
+            dependencies: [
+                "AppData",
+                "AppLibrary",
+                "UtilsLibrary"
+            ],
+            resources: [
+                .process("Providers.xcdatamodeld")
+            ]
+        ),
+        .target(
             name: "AppLibrary",
             dependencies: ["CommonLibrary"]
         ),
@@ -64,6 +75,7 @@ let package = Package(
             name: "AppUI",
             dependencies: [
                 "AppDataProfiles",
+                "AppDataProviders",
                 "AppLibrary",
                 "Kvitto",
                 "LegacyV2",

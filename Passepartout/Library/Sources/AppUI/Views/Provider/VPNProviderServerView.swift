@@ -63,7 +63,6 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
     var body: some View {
         debugChanges()
         return contentView
-            .navigationTitle(Strings.Global.servers)
             .themeNavigationDetail()
             .withErrorHandler(errorHandler)
     }
@@ -150,14 +149,12 @@ extension VPNProviderServerView {
             .task {
                 do {
                     favoritesManager.moduleId = moduleId
-                    vpnManager.repository = try await providerManager.vpnRepository(
+                    let repository = try await providerManager.vpnServerRepository(
                         from: apis,
                         for: providerId
                     )
-                    filtersViewModel.load(
-                        with: vpnManager,
-                        initialFilters: initialFilters
-                    )
+                    try await vpnManager.setRepository(repository)
+                    filtersViewModel.load(options: vpnManager.options, initialFilters: initialFilters)
                     await reloadServers(filters: filtersViewModel.filters)
                 } catch {
                     pp_log(.app, .error, "Unable to load VPN repository: \(error)")
@@ -175,11 +172,16 @@ extension VPNProviderServerView {
             .onDisappear {
                 favoritesManager.save()
             }
+            .navigationTitle(title)
         }
     }
 }
 
 private extension VPNProviderServerView.ServersView {
+    var title: String {
+        providerManager.provider(withId: providerId)?.description ?? Strings.Global.servers
+    }
+
     var filteredServers: [VPNServer] {
         if onlyShowsFavorites {
             return servers.filter {
@@ -191,10 +193,15 @@ private extension VPNProviderServerView.ServersView {
 
     func reloadServers(filters: VPNFilters) async {
         isFiltering = true
-        await Task {
-            servers = await vpnManager.filteredServers(with: filters)
-            isFiltering = false
-        }.value
+        do {
+            try await Task {
+                servers = try await vpnManager.filteredServers(with: filters)
+                filtersViewModel.update(with: servers)
+                isFiltering = false
+            }.value
+        } catch {
+            pp_log(.app, .error, "Unable to fetch filtered servers: \(error)")
+        }
     }
 
     func compatiblePreset(with server: VPNServer) -> VPNPreset<Configuration>? {

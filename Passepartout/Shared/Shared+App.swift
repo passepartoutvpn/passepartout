@@ -25,6 +25,7 @@
 
 import AppData
 import AppDataProfiles
+import AppDataProviders
 import AppLibrary
 import AppUI
 import CommonLibrary
@@ -226,11 +227,21 @@ private extension ProfileManager {
 
 // MARK: -
 
-// FIXME: #705, store providers to Core Data
 extension ProviderManager {
-    static let shared = ProviderManager(
-        repository: InMemoryProviderRepository()
-    )
+    static let shared: ProviderManager = {
+        let store = CoreDataPersistentStore(
+            logger: .default,
+            containerName: Constants.shared.containers.providers,
+            model: AppData.cdProvidersModel,
+            cloudKitIdentifier: nil,
+            author: nil
+        )
+        let repository = AppData.cdProviderRepositoryV3(
+            context: store.context,
+            backgroundContext: store.backgroundContext
+        )
+        return ProviderManager(repository: repository)
+    }()
 }
 
 // MARK: -
