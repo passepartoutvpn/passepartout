@@ -133,12 +133,16 @@ public enum Strings {
         public static let incompatibleModules = Strings.tr("Localizable", "errors.app.passepartout.incompatible_modules", fallback: "Some active modules are incompatible, try to only activate one of them.")
         /// Invalid fields.
         public static let invalidFields = Strings.tr("Localizable", "errors.app.passepartout.invalid_fields", fallback: "Invalid fields.")
+        /// No provider server selected.
+        public static let missingProviderEntity = Strings.tr("Localizable", "errors.app.passepartout.missing_provider_entity", fallback: "No provider server selected.")
         /// Unable to parse file.
         public static let parsing = Strings.tr("Localizable", "errors.app.passepartout.parsing", fallback: "Unable to parse file.")
+        /// No provider selected.
+        public static let providerRequired = Strings.tr("Localizable", "errors.app.passepartout.provider_required", fallback: "No provider selected.")
       }
       public enum Provider {
-        /// No provider server selected.
-        public static let missingEntity = Strings.tr("Localizable", "errors.app.provider.missing_entity", fallback: "No provider server selected.")
+        /// No provider selected.
+        public static let `required` = Strings.tr("Localizable", "errors.app.provider.required", fallback: "No provider selected.")
       }
     }
     public enum Tunnel {
