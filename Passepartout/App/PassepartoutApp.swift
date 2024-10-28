@@ -52,7 +52,12 @@ struct PassepartoutApp: App {
 
 #if os(iOS)
     var body: some Scene {
-        WindowGroup(content: contentView)
+        WindowGroup {
+            contentView()
+                .onOpenURL { url in
+                    ImporterPipe.shared.send([url])
+                }
+        }
     }
 #else
     var body: some Scene {
