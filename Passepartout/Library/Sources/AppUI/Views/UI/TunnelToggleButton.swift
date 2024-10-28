@@ -141,15 +141,15 @@ private extension TunnelToggleButton {
             //
         } catch {
             switch (error as? PassepartoutError)?.code {
+            case .missingProviderEntity:
+                onProviderEntityRequired?(profile)
+                return
+
             case .providerRequired:
                 errorHandler.handle(
                     error,
                     title: Strings.Global.connection
                 )
-                return
-
-            case .missingProviderEntity:
-                onProviderEntityRequired?(profile)
                 return
 
             default:
