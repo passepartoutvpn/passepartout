@@ -313,6 +313,8 @@ public enum Strings {
       public enum Rows {
         /// Shared on iCloud
         public static let icloudSharing = Strings.tr("Localizable", "modules.general.rows.icloud_sharing", fallback: "Shared on iCloud")
+        /// Import from file...
+        public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file...")
         public enum IcloudSharing {
           /// Share on iCloud
           public static let purchase = Strings.tr("Localizable", "modules.general.rows.icloud_sharing.purchase", fallback: "Share on iCloud")

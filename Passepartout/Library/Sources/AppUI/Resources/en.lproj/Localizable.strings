@@ -175,6 +175,7 @@
 
 "modules.general.sections.storage.footer" = "Profiles are stored to iCloud encrypted.";
 "modules.general.rows.icloud_sharing" = "Shared on iCloud";
+"modules.general.rows.import_from_file" = "Import from file...";
 
 "modules.dns.servers.add" = "Add address";
 "modules.dns.search_domains.add" = "Add domain";

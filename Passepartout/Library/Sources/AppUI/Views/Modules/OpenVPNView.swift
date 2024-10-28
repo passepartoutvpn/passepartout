@@ -39,6 +39,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
     private let isServerPushed: Bool
 
     @State
+    private var isImporting = false
+
+    @State
     private var paywallReason: PaywallReason?
 
     init(serverConfiguration: OpenVPN.Configuration) {
@@ -59,6 +62,11 @@ struct OpenVPNView: View, ModuleDraftEditing {
     var body: some View {
         contentView
             .moduleView(editor: editor, draft: draft.wrappedValue, withName: !isServerPushed)
+            .fileImporter(
+                isPresented: $isImporting,
+                allowedContentTypes: [.item],
+                onCompletion: importConfiguration
+            )
             .modifier(PaywallModifier(reason: $paywallReason))
             .navigationDestination(for: Subroute.self, destination: destination)
     }
@@ -112,8 +120,20 @@ private extension OpenVPNView {
         path.wrappedValue.removeLast()
     }
 
-    func importConfiguration(from url: URL) {
-        // TODO: #657, import draft from external URL
+    func importConfiguration(from result: Result<URL, Error>) {
+        do {
+            let url = try result.get()
+            guard url.startAccessingSecurityScopedResource() else {
+                throw AppError.permissionDenied
+            }
+            defer {
+                url.stopAccessingSecurityScopedResource()
+            }
+            let parsed = try StandardOpenVPNParser().parsed(fromURL: url)
+            draft.wrappedValue.configurationBuilder = parsed.configuration.builder()
+        } catch {
+            pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
+        }
     }
 }
 
@@ -157,6 +177,19 @@ private extension OpenVPNView {
 
     @ViewBuilder
     var manualView: some View {
+        if providerId.wrappedValue == nil {
+            if draft.configurationBuilder.wrappedValue == nil {
+                Button(Strings.Modules.General.Rows.importFromFile) {
+                    isImporting = true
+                }
+            } else {
+                configurationView
+            }
+        }
+    }
+
+    @ViewBuilder
+    var configurationView: some View {
         moduleSection(for: accountRows, header: Strings.Global.account)
         moduleSection(for: remotesRows, header: Strings.Modules.Openvpn.remotes)
         if !isServerPushed {
