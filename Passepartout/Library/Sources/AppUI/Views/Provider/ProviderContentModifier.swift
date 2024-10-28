@@ -31,6 +31,9 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
     @EnvironmentObject
     private var providerManager: ProviderManager
 
+    @EnvironmentObject
+    private var iapManager: IAPManager
+
     let apis: [APIMapper]
 
     @Binding
@@ -39,6 +42,9 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
     let entityType: Entity.Type
 
     let isRequired: Bool
+
+    @Binding
+    var paywallReason: PaywallReason?
 
     @ViewBuilder
     let providerRows: ProviderRows
@@ -71,9 +77,14 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
 private extension ProviderContentModifier {
 
 #if os(iOS)
+    @ViewBuilder
     var providerView: some View {
         Group {
             providerPicker
+            purchaseButton
+        }
+        .themeSection()
+        Group {
             if providerId != nil {
                 providerRows
                 refreshButton {
@@ -90,9 +101,13 @@ private extension ProviderContentModifier {
         .themeSection(footer: lastUpdatedString)
     }
 #else
+    @ViewBuilder
     var providerView: some View {
-        Group {
+        Section {
             providerPicker
+            purchaseButton
+        }
+        Section {
             if providerId != nil {
                 providerRows
                 HStack {
@@ -119,6 +134,15 @@ private extension ProviderContentModifier {
         )
     }
 
+    @ViewBuilder
+    var purchaseButton: some View {
+        if let reason = iapManager.paywallReason(forFeature: .providers) {
+            Button(Strings.Providers.Picker.purchase) {
+                paywallReason = reason
+            }
+        }
+    }
+
     func refreshButton<Label>(label: () -> Label) -> some View where Label: View {
         Button(action: onRefreshInfrastructure, label: label)
     }
@@ -127,7 +151,7 @@ private extension ProviderContentModifier {
         providerManager
             .providers
             .filter {
-                $0.supports(Entity.Configuration.self)
+                iapManager.isEligible(forProvider: $0.id) && $0.supports(Entity.Configuration.self)
             }
     }
 
@@ -198,6 +222,7 @@ private extension ProviderContentModifier {
                 providerId: .constant(.hideme),
                 entityType: VPNEntity<OpenVPN.Configuration>.self,
                 isRequired: false,
+                paywallReason: .constant(nil),
                 providerRows: {},
                 onSelectProvider: { _, _, _ in }
             ))

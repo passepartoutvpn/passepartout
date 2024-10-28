@@ -473,6 +473,10 @@ public enum Strings {
       /// Loading...
       public static let loading = Strings.tr("Localizable", "providers.last_updated.loading", fallback: "Loading...")
     }
+    public enum Picker {
+      /// Add more providers
+      public static let purchase = Strings.tr("Localizable", "providers.picker.purchase", fallback: "Add more providers")
+    }
     public enum Vpn {
       /// No servers
       public static let noServers = Strings.tr("Localizable", "providers.vpn.no_servers", fallback: "No servers")

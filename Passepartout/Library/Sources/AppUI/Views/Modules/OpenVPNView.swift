@@ -38,6 +38,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     private let isServerPushed: Bool
 
+    @State
+    private var paywallReason: PaywallReason?
+
     init(serverConfiguration: OpenVPN.Configuration) {
         let module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         let editor = ProfileEditor(modules: [module])
@@ -56,6 +59,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
     var body: some View {
         contentView
             .moduleView(editor: editor, draft: draft.wrappedValue, withName: !isServerPushed)
+            .modifier(PaywallModifier(reason: $paywallReason))
             .navigationDestination(for: Subroute.self, destination: destination)
     }
 }
@@ -82,6 +86,7 @@ private extension OpenVPNView {
             providerId: providerId,
             selectedEntity: providerEntity,
             isRequired: true,
+            paywallReason: $paywallReason,
             entityDestination: Subroute.providerServer,
             providerRows: {
                 moduleGroup(for: providerAccountRows)

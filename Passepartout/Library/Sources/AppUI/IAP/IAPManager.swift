@@ -151,12 +151,12 @@ extension IAPManager {
         features.allSatisfy(eligibleFeatures.contains)
     }
 
-//    public func isEligible(forProvider providerName: ProviderName) -> Bool {
-//        guard providerName != .oeck else {
-//            return true
-//        }
-//        return isEligible(forFeature: providerName.product)
-//    }
+    public func isEligible(forProvider providerId: ProviderID) -> Bool {
+        if providerId == .oeck {
+            return true
+        }
+        return isEligible(for: .providers)
+    }
 
     public func isEligibleForFeedback() -> Bool {
 #if os(tvOS)
