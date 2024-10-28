@@ -28,7 +28,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct VPNProviderContentModifier<Configuration, Destination, ProviderRows>: ViewModifier where Configuration: ProviderConfigurationIdentifiable & Codable, Destination: Hashable, ProviderRows: View {
+struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier where Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
 
     var apis: [APIMapper] = API.shared
 
@@ -41,7 +41,7 @@ struct VPNProviderContentModifier<Configuration, Destination, ProviderRows>: Vie
     @Binding
     var paywallReason: PaywallReason?
 
-    let entityDestination: Destination
+    let entityDestination: any Hashable
 
     @ViewBuilder
     let providerRows: ProviderRows
