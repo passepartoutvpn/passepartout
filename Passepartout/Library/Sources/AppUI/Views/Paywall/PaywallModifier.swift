@@ -51,8 +51,10 @@ struct PaywallModifier: ViewModifier {
                     Text(Strings.Alerts.Iap.Restricted.message)
                 }
             )
-            .themeModal(item: $paywallFeature) {
-                PaywallView(isPresented: isPresentingPurchase, feature: $0)
+            .themeModal(item: $paywallFeature) { feature in
+                NavigationStack {
+                    PaywallView(isPresented: isPresentingPurchase, feature: feature)
+                }
             }
             .onChange(of: reason) {
                 switch $0 {

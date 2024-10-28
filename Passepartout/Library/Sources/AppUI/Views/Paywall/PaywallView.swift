@@ -37,9 +37,13 @@ struct PaywallView: View {
 
     // FIXME: #585, implement payments
     var body: some View {
-        Text(String(describing: feature))
-            .toolbar(content: toolbarContent)
-            .navigationTitle(Strings.Global.purchase)
+        VStack {
+            Spacer()
+            Text(String(describing: feature).capitalized)
+            Spacer()
+        }
+        .toolbar(content: toolbarContent)
+        .navigationTitle(Strings.Global.purchase)
     }
 }
 
