@@ -47,6 +47,7 @@ struct OpenVPNView: View, ModuleDraftEditing {
     init(serverConfiguration: OpenVPN.Configuration) {
         let module = OpenVPNModule.Builder(configurationBuilder: serverConfiguration.builder())
         let editor = ProfileEditor(modules: [module])
+        assert(module.configurationBuilder != nil, "isServerPushed must imply module.configurationBuilder != nil")
 
         self.editor = editor
         self.module = module
@@ -75,17 +76,27 @@ struct OpenVPNView: View, ModuleDraftEditing {
 // MARK: - Content
 
 private extension OpenVPNView {
-    var configuration: OpenVPN.Configuration.Builder {
-        draft.wrappedValue.configurationBuilder ?? .init(withFallbacks: true)
-    }
 
     @ViewBuilder
     var contentView: some View {
-        if isServerPushed || draft.wrappedValue.configurationBuilder != nil {
-            manualView
+        if let configuration = draft.wrappedValue.configurationBuilder {
+            ConfigurationView(
+                isServerPushed: isServerPushed,
+                configuration: configuration,
+                credentialsRoute: Subroute.credentials
+            )
         } else {
-            manualView
+            importView
                 .modifier(providerModifier)
+        }
+    }
+
+    @ViewBuilder
+    var importView: some View {
+        if providerId.wrappedValue == nil {
+            Button(Strings.Modules.General.Rows.importFromFile) {
+                isImporting = true
+            }
         }
     }
 
@@ -167,28 +178,6 @@ private extension OpenVPNView {
                 isInteractive: draft.isInteractive,
                 credentials: draft.credentials
             )
-        }
-    }
-}
-
-// MARK: - Manual configuration
-
-private extension OpenVPNView {
-
-    @ViewBuilder
-    var manualView: some View {
-        if providerId.wrappedValue == nil {
-            if let configuration = draft.configurationBuilder.wrappedValue {
-                ConfigurationView(
-                    isServerPushed: isServerPushed,
-                    configuration: configuration,
-                    credentialsRoute: Subroute.credentials
-                )
-            } else {
-                Button(Strings.Modules.General.Rows.importFromFile) {
-                    isImporting = true
-                }
-            }
         }
     }
 }
