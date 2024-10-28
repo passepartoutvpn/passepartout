@@ -58,213 +58,215 @@ extension OpenVPNView {
             }
             moduleSection(for: otherRows, header: Strings.Global.other)
         }
+    }
+}
 
-        var accountRows: [ModuleRow]? {
-            guard configuration.authUserPass == true else {
-                return nil
-            }
-            return [.push(
-                caption: Strings.Modules.Openvpn.credentials,
-                route: HashableRoute(credentialsRoute))
-            ]
+private extension OpenVPNView.ConfigurationView {
+    var accountRows: [ModuleRow]? {
+        guard configuration.authUserPass == true else {
+            return nil
         }
+        return [.push(
+            caption: Strings.Modules.Openvpn.credentials,
+            route: HashableRoute(credentialsRoute))
+        ]
+    }
 
-        var remotesRows: [ModuleRow]? {
-            configuration.remotes?.map {
-                .copiableText(
-                    value: "\($0.address.rawValue) → \($0.proto.socketType.rawValue):\($0.proto.port)"
-                )
+    var remotesRows: [ModuleRow]? {
+        configuration.remotes?.map {
+            .copiableText(
+                value: "\($0.address.rawValue) → \($0.proto.socketType.rawValue):\($0.proto.port)"
+            )
+        }
+        .nilIfEmpty
+    }
+
+    var pullRows: [ModuleRow]? {
+        configuration.pullMask?.map {
+            .text(caption: $0.localizedDescription, value: nil)
+        }
+        .nilIfEmpty
+    }
+
+    func ipRows(for ip: IPSettings?, routes: [Route]?) -> [ModuleRow]? {
+        var rows: [ModuleRow] = []
+        if let ip {
+            ip.localizedDescription(optionalStyle: .address).map {
+                rows.append(.copiableText(caption: Strings.Global.address, value: $0))
+            }
+            ip.localizedDescription(optionalStyle: .defaultGateway).map {
+                rows.append(.copiableText(caption: Strings.Global.gateway, value: $0))
+            }
+
+            ip.includedRoutes
+                .filter { !$0.isDefault }
+                .nilIfEmpty
+                .map {
+                    rows.append(.textList(
+                        caption: Strings.Modules.Ip.Routes.included,
+                        values: $0.map(\.localizedDescription)
+                    ))
+                }
+
+            ip.excludedRoutes
+                .nilIfEmpty
+                .map {
+                    rows.append(.textList(
+                        caption: Strings.Modules.Ip.Routes.excluded,
+                        values: $0.map(\.localizedDescription)
+                    ))
+                }
+        }
+        routes?.forEach {
+            rows.append(.longContent(caption: Strings.Global.route, value: $0.localizedDescription))
+        }
+        return rows.nilIfEmpty
+    }
+
+    var redirectRows: [ModuleRow]? {
+        configuration.routingPolicies?
+            .compactMap {
+                switch $0 {
+                case .IPv4:
+                    return .text(caption: Strings.Unlocalized.ipv4)
+
+                case .IPv6:
+                    return .text(caption: Strings.Unlocalized.ipv6)
+
+                default:
+                    return nil
+                }
             }
             .nilIfEmpty
-        }
+    }
 
-        var pullRows: [ModuleRow]? {
-            configuration.pullMask?.map {
-                .text(caption: $0.localizedDescription, value: nil)
-            }
+    var dnsRows: [ModuleRow]? {
+        var rows: [ModuleRow] = []
+
+        configuration.dnsServers?
             .nilIfEmpty
-        }
-
-        func ipRows(for ip: IPSettings?, routes: [Route]?) -> [ModuleRow]? {
-            var rows: [ModuleRow] = []
-            if let ip {
-                ip.localizedDescription(optionalStyle: .address).map {
-                    rows.append(.copiableText(caption: Strings.Global.address, value: $0))
-                }
-                ip.localizedDescription(optionalStyle: .defaultGateway).map {
-                    rows.append(.copiableText(caption: Strings.Global.gateway, value: $0))
-                }
-
-                ip.includedRoutes
-                    .filter { !$0.isDefault }
-                    .nilIfEmpty
-                    .map {
-                        rows.append(.textList(
-                            caption: Strings.Modules.Ip.Routes.included,
-                            values: $0.map(\.localizedDescription)
-                        ))
-                    }
-
-                ip.excludedRoutes
-                    .nilIfEmpty
-                    .map {
-                        rows.append(.textList(
-                            caption: Strings.Modules.Ip.Routes.excluded,
-                            values: $0.map(\.localizedDescription)
-                        ))
-                    }
-            }
-            routes?.forEach {
-                rows.append(.longContent(caption: Strings.Global.route, value: $0.localizedDescription))
-            }
-            return rows.nilIfEmpty
-        }
-
-        var redirectRows: [ModuleRow]? {
-            configuration.routingPolicies?
-                .compactMap {
-                    switch $0 {
-                    case .IPv4:
-                        return .text(caption: Strings.Unlocalized.ipv4)
-
-                    case .IPv6:
-                        return .text(caption: Strings.Unlocalized.ipv6)
-
-                    default:
-                        return nil
-                    }
-                }
-                .nilIfEmpty
-        }
-
-        var dnsRows: [ModuleRow]? {
-            var rows: [ModuleRow] = []
-
-            configuration.dnsServers?
-                .nilIfEmpty
-                .map {
-                    rows.append(.textList(
-                        caption: Strings.Global.servers,
-                        values: $0
-                    ))
-                }
-
-            configuration.dnsDomain.map {
-                rows.append(.copiableText(
-                    caption: Strings.Global.domain,
-                    value: $0
+            .map {
+                rows.append(.textList(
+                    caption: Strings.Global.servers,
+                    values: $0
                 ))
             }
 
-            configuration.searchDomains?
-                .nilIfEmpty
-                .map {
-                    rows.append(.textList(
-                        caption: Strings.Entities.Dns.searchDomains,
-                        values: $0
-                    ))
-                }
-
-            return rows.nilIfEmpty
+        configuration.dnsDomain.map {
+            rows.append(.copiableText(
+                caption: Strings.Global.domain,
+                value: $0
+            ))
         }
 
-        var proxyRows: [ModuleRow]? {
-            var rows: [ModuleRow] = []
-            configuration.httpProxy.map {
-                rows.append(.copiableText(
-                    caption: Strings.Unlocalized.http,
-                    value: $0.rawValue
+        configuration.searchDomains?
+            .nilIfEmpty
+            .map {
+                rows.append(.textList(
+                    caption: Strings.Entities.Dns.searchDomains,
+                    values: $0
                 ))
             }
-            configuration.httpsProxy.map {
-                rows.append(.copiableText(
-                    caption: Strings.Unlocalized.https,
-                    value: $0.rawValue
+
+        return rows.nilIfEmpty
+    }
+
+    var proxyRows: [ModuleRow]? {
+        var rows: [ModuleRow] = []
+        configuration.httpProxy.map {
+            rows.append(.copiableText(
+                caption: Strings.Unlocalized.http,
+                value: $0.rawValue
+            ))
+        }
+        configuration.httpsProxy.map {
+            rows.append(.copiableText(
+                caption: Strings.Unlocalized.https,
+                value: $0.rawValue
+            ))
+        }
+        configuration.proxyAutoConfigurationURL.map {
+            rows.append(.copiableText(
+                caption: Strings.Unlocalized.pac,
+                value: $0.absoluteString
+            ))
+        }
+        configuration.proxyBypassDomains?
+            .nilIfEmpty
+            .map {
+                rows.append(.textList(
+                    caption: Strings.Entities.HttpProxy.bypassDomains,
+                    values: $0
                 ))
             }
-            configuration.proxyAutoConfigurationURL.map {
-                rows.append(.copiableText(
-                    caption: Strings.Unlocalized.pac,
-                    value: $0.absoluteString
-                ))
-            }
-            configuration.proxyBypassDomains?
-                .nilIfEmpty
-                .map {
-                    rows.append(.textList(
-                        caption: Strings.Entities.HttpProxy.bypassDomains,
-                        values: $0
-                    ))
-                }
-            return rows.nilIfEmpty
-        }
+        return rows.nilIfEmpty
+    }
 
-        var communicationRows: [ModuleRow]? {
-            var rows: [ModuleRow] = []
-            configuration.cipher.map {
-                rows.append(.text(caption: Strings.Modules.Openvpn.cipher, value: $0.localizedDescription))
-            }
-            configuration.digest.map {
-                rows.append(.text(caption: Strings.Modules.Openvpn.digest, value: $0.localizedDescription))
-            }
-            if let xorMethod = configuration.xorMethod {
-                rows.append(.longContentPreview(
-                    caption: Strings.Unlocalized.xor,
-                    value: xorMethod.localizedDescription(style: .long),
-                    preview: xorMethod.localizedDescription(style: .short)
-                ))
-            }
-            return rows.nilIfEmpty
+    var communicationRows: [ModuleRow]? {
+        var rows: [ModuleRow] = []
+        configuration.cipher.map {
+            rows.append(.text(caption: Strings.Modules.Openvpn.cipher, value: $0.localizedDescription))
         }
+        configuration.digest.map {
+            rows.append(.text(caption: Strings.Modules.Openvpn.digest, value: $0.localizedDescription))
+        }
+        if let xorMethod = configuration.xorMethod {
+            rows.append(.longContentPreview(
+                caption: Strings.Unlocalized.xor,
+                value: xorMethod.localizedDescription(style: .long),
+                preview: xorMethod.localizedDescription(style: .short)
+            ))
+        }
+        return rows.nilIfEmpty
+    }
 
-        var compressionRows: [ModuleRow]? {
-            var rows: [ModuleRow] = []
-            configuration.compressionFraming.map {
-                rows.append(.text(caption: Strings.Modules.Openvpn.compressionFraming, value: $0.localizedDescription))
-            }
-            configuration.compressionAlgorithm.map {
-                rows.append(.text(caption: Strings.Modules.Openvpn.compressionAlgorithm, value: $0.localizedDescription))
-            }
-            return rows.nilIfEmpty
+    var compressionRows: [ModuleRow]? {
+        var rows: [ModuleRow] = []
+        configuration.compressionFraming.map {
+            rows.append(.text(caption: Strings.Modules.Openvpn.compressionFraming, value: $0.localizedDescription))
         }
+        configuration.compressionAlgorithm.map {
+            rows.append(.text(caption: Strings.Modules.Openvpn.compressionAlgorithm, value: $0.localizedDescription))
+        }
+        return rows.nilIfEmpty
+    }
 
-        var tlsRows: [ModuleRow]? {
-            var rows: [ModuleRow] = []
-            configuration.ca.map {
-                rows.append(.longContentPreview(caption: Strings.Unlocalized.ca, value: $0.pem, preview: nil))
-            }
-            configuration.clientCertificate.map {
-                rows.append(.longContentPreview(caption: Strings.Global.certificate, value: $0.pem, preview: nil))
-            }
-            configuration.clientKey.map {
-                rows.append(.longContentPreview(caption: Strings.Global.key, value: $0.pem, preview: nil))
-            }
-            configuration.tlsWrap.map {
-                rows.append(.longContentPreview(
-                    caption: Strings.Modules.Openvpn.tlsWrap,
-                    value: $0.key.hexString,
-                    preview: configuration.localizedDescription(style: .tlsWrap)
-                ))
-            }
-            rows.append(.text(caption: Strings.Modules.Openvpn.eku, value: configuration.localizedDescription(style: .eku)))
-            return rows.nilIfEmpty
+    var tlsRows: [ModuleRow]? {
+        var rows: [ModuleRow] = []
+        configuration.ca.map {
+            rows.append(.longContentPreview(caption: Strings.Unlocalized.ca, value: $0.pem, preview: nil))
         }
+        configuration.clientCertificate.map {
+            rows.append(.longContentPreview(caption: Strings.Global.certificate, value: $0.pem, preview: nil))
+        }
+        configuration.clientKey.map {
+            rows.append(.longContentPreview(caption: Strings.Global.key, value: $0.pem, preview: nil))
+        }
+        configuration.tlsWrap.map {
+            rows.append(.longContentPreview(
+                caption: Strings.Modules.Openvpn.tlsWrap,
+                value: $0.key.hexString,
+                preview: configuration.localizedDescription(style: .tlsWrap)
+            ))
+        }
+        rows.append(.text(caption: Strings.Modules.Openvpn.eku, value: configuration.localizedDescription(style: .eku)))
+        return rows.nilIfEmpty
+    }
 
-        var otherRows: [ModuleRow]? {
-            var rows: [ModuleRow] = []
-            configuration.localizedDescription(optionalStyle: .keepAlive).map {
-                rows.append(.text(caption: Strings.Global.keepAlive, value: $0))
-            }
-            configuration.localizedDescription(optionalStyle: .renegotiatesAfter).map {
-                rows.append(.text(caption: Strings.Modules.Openvpn.renegotiation, value: $0))
-            }
-            configuration.localizedDescription(optionalStyle: .randomizeEndpoint).map {
-                rows.append(.text(caption: Strings.Modules.Openvpn.randomizeEndpoint, value: $0))
-            }
-            configuration.localizedDescription(optionalStyle: .randomizeHostnames).map {
-                rows.append(.text(caption: Strings.Modules.Openvpn.randomizeHostname, value: $0))
-            }
-            return rows.nilIfEmpty
+    var otherRows: [ModuleRow]? {
+        var rows: [ModuleRow] = []
+        configuration.localizedDescription(optionalStyle: .keepAlive).map {
+            rows.append(.text(caption: Strings.Global.keepAlive, value: $0))
         }
+        configuration.localizedDescription(optionalStyle: .renegotiatesAfter).map {
+            rows.append(.text(caption: Strings.Modules.Openvpn.renegotiation, value: $0))
+        }
+        configuration.localizedDescription(optionalStyle: .randomizeEndpoint).map {
+            rows.append(.text(caption: Strings.Modules.Openvpn.randomizeEndpoint, value: $0))
+        }
+        configuration.localizedDescription(optionalStyle: .randomizeHostnames).map {
+            rows.append(.text(caption: Strings.Modules.Openvpn.randomizeHostname, value: $0))
+        }
+        return rows.nilIfEmpty
     }
 }
