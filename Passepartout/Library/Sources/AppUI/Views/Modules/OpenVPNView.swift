@@ -23,8 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CPassepartoutOpenVPNOpenSSL
 import PassepartoutKit
 import SwiftUI
+import UtilsLibrary
 
 struct OpenVPNView: View, ModuleDraftEditing {
 
@@ -40,6 +42,15 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     @State
     private var isImporting = false
+
+    @State
+    private var importURL: URL?
+
+    @State
+    private var importPassphrase: String?
+
+    @State
+    private var requiresPassphrase = false
 
     @State
     private var paywallReason: PaywallReason?
@@ -95,8 +106,29 @@ private extension OpenVPNView {
     var importView: some View {
         if providerId.wrappedValue == nil {
             Button(Strings.Modules.General.Rows.importFromFile) {
+                importPassphrase = nil
                 isImporting = true
             }
+            .alert(
+                module.moduleType.localizedDescription,
+                isPresented: $requiresPassphrase,
+                presenting: importURL,
+                actions: { url in
+                    SecureField(
+                        Strings.Placeholders.secret,
+                        text: $importPassphrase ?? ""
+                    )
+                    Button(Strings.Alerts.Import.Passphrase.ok) {
+                        importConfiguration(from: .success(url))
+                    }
+                    Button(Strings.Global.cancel, role: .cancel) {
+                        isImporting = false
+                    }
+                },
+                message: {
+                    Text(Strings.Alerts.Import.Passphrase.message($0.lastPathComponent))
+                }
+            )
         }
     }
 
@@ -140,8 +172,18 @@ private extension OpenVPNView {
             defer {
                 url.stopAccessingSecurityScopedResource()
             }
-            let parsed = try StandardOpenVPNParser().parsed(fromURL: url)
+            importURL = url
+
+            let parsed = try StandardOpenVPNParser(decrypter: OSSLTLSBox())
+                .parsed(fromURL: url, passphrase: importPassphrase)
+
             draft.wrappedValue.configurationBuilder = parsed.configuration.builder()
+        } catch StandardOpenVPNParserError.encryptionPassphrase,
+                StandardOpenVPNParserError.unableToDecrypt {
+            Task {
+                try? await Task.sleep(for: .milliseconds(500))
+                requiresPassphrase = true
+            }
         } catch {
             pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
         }
