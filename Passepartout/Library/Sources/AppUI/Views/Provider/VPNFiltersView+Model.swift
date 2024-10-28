@@ -31,10 +31,17 @@ extension VPNFiltersView {
 
     @MainActor
     final class Model: ObservableObject {
+        typealias LocalizedCountry = (code: String, description: String)
+
+        private var options: VPNFilterOptions
+
+        @Published
         private(set) var categories: [String]
 
-        private(set) var countries: [(code: String, description: String)]
+        @Published
+        private(set) var countries: [LocalizedCountry]
 
+        @Published
         private(set) var presets: [AnyVPNPreset]
 
         @Published
@@ -47,48 +54,69 @@ extension VPNFiltersView {
 
         let onlyShowsFavoritesDidChange = PassthroughSubject<Bool, Never>()
 
-        init(
-            categories: [String] = [],
-            countries: [(code: String, description: String)] = [],
-            presets: [AnyVPNPreset] = []
-        ) {
-            self.categories = categories
-            self.countries = countries
-            self.presets = presets
+        init() {
+            options = VPNFilterOptions()
+            categories = []
+            countries = []
+            presets = []
         }
 
-        func load<C>(
-            with vpnManager: VPNProviderManager<C>,
-            initialFilters: VPNFilters?
-        ) where C: ProviderConfigurationIdentifiable {
-            categories = vpnManager
-                .allCategoryNames
-                .sorted()
-
-            countries = vpnManager
-                .allCountryCodes
-                .map {
-                    (code: $0, description: $0.localizedAsRegionCode ?? $0)
-                }
-                .sorted {
-                    $0.description < $1.description
-                }
-
-            presets = vpnManager
-                .allPresets
-                .values
-                .filter {
-                    $0.configurationIdentifier == C.providerConfigurationIdentifier
-                }
-                .sorted {
-                    $0.description < $1.description
-                }
+        func load(options: VPNFilterOptions, initialFilters: VPNFilters?) {
+            self.options = options
+            setCategories(withNames: options.categoryNames)
+            setCountries(withCodes: options.countryCodes)
+            setPresets(with: options.presets)
 
             if let initialFilters {
                 filters = initialFilters
             }
-
-            objectWillChange.send()
         }
+
+        func update(with servers: [VPNServer]) {
+
+            // only non-empty countries
+            let knownCountryCodes = Set(servers.map(\.provider.countryCode))
+
+            // only presets known in filtered servers
+            var knownPresets = options.presets
+            let allPresetIds = Set(servers.compactMap(\.provider.supportedPresetIds).joined())
+            if !allPresetIds.isEmpty {
+                knownPresets = knownPresets
+                    .filter {
+                        allPresetIds.contains($0.presetId)
+                    }
+            }
+
+            setCountries(withCodes: knownCountryCodes)
+            setPresets(with: knownPresets)
+        }
+    }
+}
+
+private extension VPNFiltersView.Model {
+    func setCategories(withNames categoryNames: Set<String>) {
+        categories = categoryNames
+            .sorted()
+    }
+
+    func setCountries(withCodes codes: Set<String>) {
+        countries = codes
+            .map(\.asLocalizedCountry)
+            .sorted {
+                $0.description < $1.description
+            }
+    }
+
+    func setPresets(with presets: Set<AnyVPNPreset>) {
+        self.presets = presets
+            .sorted {
+                $0.description < $1.description
+            }
+    }
+}
+
+private extension String {
+    var asLocalizedCountry: VPNFiltersView.Model.LocalizedCountry {
+        (self, localizedAsRegionCode ?? self)
     }
 }

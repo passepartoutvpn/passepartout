@@ -1,8 +1,8 @@
 //
-//  CDProfileV3.swift
+//  CDVPNPresetV3.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 10/26/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,10 +26,16 @@
 import CoreData
 import Foundation
 
-@objc(CDProfileV3)
-final class CDProfileV3: NSManagedObject {
-    @NSManaged var uuid: UUID?
-    @NSManaged var name: String?
-    @NSManaged var encoded: String?
-    @NSManaged var lastUpdate: Date?
+@objc(CDVPNPresetV3)
+final class CDVPNPresetV3: NSManagedObject {
+    @nonobjc static func fetchRequest() -> NSFetchRequest<CDVPNPresetV3> {
+        NSFetchRequest<CDVPNPresetV3>(entityName: "CDVPNPresetV3")
+    }
+
+    @NSManaged var presetId: String?
+    @NSManaged var presetDescription: String?
+    @NSManaged var providerId: String?
+    @NSManaged var endpoints: Data?
+    @NSManaged var configurationId: String?
+    @NSManaged var configuration: Data?
 }

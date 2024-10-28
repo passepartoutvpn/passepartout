@@ -53,6 +53,9 @@ struct VPNFiltersView: View {
 #endif
             }
         }
+        .onChange(of: model.filters.categoryName) { _ in
+            model.filters.countryCode = nil
+        }
         .onChange(of: model.filters) {
             model.filtersDidChange.send($0)
         }

@@ -3,6 +3,7 @@
     "containers": {
         "local": "Profiles-v3",
         "remote": "Profiles-v3.remote",
+        "providers": "Providers-v3",
         "legacyV2": "Profiles"
     },
     "websites": {

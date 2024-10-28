@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23H124" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CDProviderV3" representedClassName="CDProviderV3" syncable="YES">
+        <attribute name="fullName" optional="YES" attributeType="String"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="providerId" optional="YES" attributeType="String"/>
+        <attribute name="supportedConfigurationIds" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CDVPNPresetV3" representedClassName="CDVPNPresetV3" syncable="YES">
+        <attribute name="configuration" optional="YES" attributeType="Binary"/>
+        <attribute name="configurationId" optional="YES" attributeType="String"/>
+        <attribute name="endpoints" optional="YES" attributeType="Binary"/>
+        <attribute name="presetDescription" optional="YES" attributeType="String"/>
+        <attribute name="presetId" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CDVPNServerV3" representedClassName="CDVPNServerV3" syncable="YES">
+        <attribute name="area" optional="YES" attributeType="String"/>
+        <attribute name="categoryName" optional="YES" attributeType="String"/>
+        <attribute name="countryCode" optional="YES" attributeType="String"/>
+        <attribute name="hostname" optional="YES" attributeType="String"/>
+        <attribute name="ipAddresses" optional="YES" attributeType="Binary"/>
+        <attribute name="localizedCountry" optional="YES" attributeType="String"/>
+        <attribute name="otherCountryCodes" optional="YES" attributeType="String"/>
+        <attribute name="providerId" optional="YES" attributeType="String"/>
+        <attribute name="serverId" optional="YES" attributeType="String"/>
+        <attribute name="supportedConfigurationIds" optional="YES" attributeType="String"/>
+        <attribute name="supportedPresetIds" optional="YES" attributeType="String"/>
+    </entity>
+</model>

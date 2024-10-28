@@ -4,7 +4,7 @@ import Foundation
 @objc(CDProfile)
 final class CDProfile: NSManagedObject {
     @nonobjc static func fetchRequest() -> NSFetchRequest<CDProfile> {
-        return NSFetchRequest<CDProfile>(entityName: "CDProfile")
+        NSFetchRequest<CDProfile>(entityName: "CDProfile")
     }
 
     @NSManaged var json: Data?
