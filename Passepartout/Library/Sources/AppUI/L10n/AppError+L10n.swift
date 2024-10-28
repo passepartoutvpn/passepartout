@@ -65,19 +65,24 @@ extension PassepartoutError: LocalizedError {
             return Strings.Errors.App.Passepartout.incompatibleModules
 
         case .invalidFields:
-            guard let fields = userInfo as? [String: String?] else {
-                return nil
-            }
-            let fieldsDescription = fields
+            let fields = (userInfo as? [String: String?])
                 .map {
-                    "\($0)=\($1?.description ?? "")"
+                    $0.map {
+                        "\($0)=\($1?.description ?? "")"
+                    }
+                    .joined(separator: ",")
                 }
-                .joined(separator: ",")
 
-            return Strings.Errors.App.Passepartout.invalidFields(fieldsDescription)
+            return [Strings.Errors.App.Passepartout.invalidFields, fields]
+                .compactMap { $0 }
+                .joined(separator: " ")
 
         case .parsing:
-            return reason?.localizedDescription ?? Strings.Errors.App.Passepartout.parsing
+            let message = userInfo as? String ?? reason?.localizedDescription
+
+            return [Strings.Errors.App.Passepartout.parsing, message]
+                .compactMap { $0 }
+                .joined(separator: " ")
 
         case .unhandled:
             return reason?.localizedDescription

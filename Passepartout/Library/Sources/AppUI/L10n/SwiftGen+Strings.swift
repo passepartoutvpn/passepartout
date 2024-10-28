@@ -27,6 +27,16 @@ public enum Strings {
         public static let title = Strings.tr("Localizable", "alerts.iap.restricted.title", fallback: "Restricted")
       }
     }
+    public enum Import {
+      public enum Passphrase {
+        /// Enter passphrase for '%@'.
+        public static func message(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "alerts.import.passphrase.message", String(describing: p1), fallback: "Enter passphrase for '%@'.")
+        }
+        /// Decrypt
+        public static let ok = Strings.tr("Localizable", "alerts.import.passphrase.ok", fallback: "Decrypt")
+      }
+    }
   }
   public enum Entities {
     public enum ConnectionStatus {
@@ -121,10 +131,8 @@ public enum Strings {
         }
         /// Some active modules are incompatible, try to only activate one of them.
         public static let incompatibleModules = Strings.tr("Localizable", "errors.app.passepartout.incompatible_modules", fallback: "Some active modules are incompatible, try to only activate one of them.")
-        /// Invalid fields (%@).
-        public static func invalidFields(_ p1: Any) -> String {
-          return Strings.tr("Localizable", "errors.app.passepartout.invalid_fields", String(describing: p1), fallback: "Invalid fields (%@).")
-        }
+        /// Invalid fields.
+        public static let invalidFields = Strings.tr("Localizable", "errors.app.passepartout.invalid_fields", fallback: "Invalid fields.")
         /// Unable to parse file.
         public static let parsing = Strings.tr("Localizable", "errors.app.passepartout.parsing", fallback: "Unable to parse file.")
       }
@@ -313,6 +321,8 @@ public enum Strings {
       public enum Rows {
         /// Shared on iCloud
         public static let icloudSharing = Strings.tr("Localizable", "modules.general.rows.icloud_sharing", fallback: "Shared on iCloud")
+        /// Import from file...
+        public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file...")
         public enum IcloudSharing {
           /// Share on iCloud
           public static let purchase = Strings.tr("Localizable", "modules.general.rows.icloud_sharing.purchase", fallback: "Share on iCloud")
@@ -598,18 +608,6 @@ public enum Strings {
       }
     }
     public enum Profiles {
-      public enum Alerts {
-        public enum Import {
-          public enum Passphrase {
-            /// Enter passphrase for '%@'.
-            public static func message(_ p1: Any) -> String {
-              return Strings.tr("Localizable", "views.profiles.alerts.import.passphrase.message", String(describing: p1), fallback: "Enter passphrase for '%@'.")
-            }
-            /// Decrypt
-            public static let ok = Strings.tr("Localizable", "views.profiles.alerts.import.passphrase.ok", fallback: "Decrypt")
-          }
-        }
-      }
       public enum Errors {
         /// Unable to duplicate profile '%@'.
         public static func duplicate(_ p1: Any) -> String {

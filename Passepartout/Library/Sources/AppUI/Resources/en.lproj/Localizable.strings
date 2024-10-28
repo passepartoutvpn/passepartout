@@ -124,8 +124,6 @@
 "views.profiles.folders.no_profiles" = "No profiles";
 "views.profiles.toolbar.new_profile" = "New profile";
 "views.profiles.toolbar.import_profile" = "Import profile";
-"views.profiles.alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
-"views.profiles.alerts.import.passphrase.ok" = "Decrypt";
 "views.profiles.errors.tunnel" = "Unable to execute tunnel operation.";
 "views.profiles.errors.duplicate" = "Unable to duplicate profile '%@'.";
 "views.profiles.errors.import" = "Unable to import profiles.";
@@ -175,6 +173,7 @@
 
 "modules.general.sections.storage.footer" = "Profiles are stored to iCloud encrypted.";
 "modules.general.rows.icloud_sharing" = "Shared on iCloud";
+"modules.general.rows.import_from_file" = "Import from file...";
 
 "modules.dns.servers.add" = "Add address";
 "modules.dns.search_domains.add" = "Add domain";
@@ -248,6 +247,9 @@
 
 // MARK: - Alerts
 
+"alerts.import.passphrase.message" = "Enter passphrase for '%@'.";
+"alerts.import.passphrase.ok" = "Decrypt";
+
 "alerts.iap.restricted.title" = "Restricted";
 "alerts.iap.restricted.message" = "The requested feature is unavailable in this build.";
 
@@ -262,7 +264,7 @@
 "errors.app.default" = "Unable to complete operation.";
 "errors.app.passepartout.connection_module_required" = "Routing module can only be enabled together with a connection.";
 "errors.app.passepartout.corrupt_provider_module" = "Unable to connect to provider server (reason=%@).";
-"errors.app.passepartout.invalid_fields" = "Invalid fields (%@).";
+"errors.app.passepartout.invalid_fields" = "Invalid fields.";
 "errors.app.passepartout.incompatible_modules" = "Some active modules are incompatible, try to only activate one of them.";
 "errors.app.passepartout.parsing" = "Unable to parse file.";
 "errors.app.passepartout.default" = "Unable to complete operation (code=%@).";
