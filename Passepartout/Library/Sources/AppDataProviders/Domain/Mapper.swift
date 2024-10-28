@@ -88,7 +88,7 @@ struct DomainMapper {
         )
     }
 
-    func lastUpdated(from entities: [CDProviderV3]) -> [ProviderID: Date] {
+    func lastUpdate(from entities: [CDProviderV3]) -> [ProviderID: Date] {
         entities.reduce(into: [:]) {
             guard let id = $1.providerId,
                   let lastUpdate = $1.lastUpdate else {

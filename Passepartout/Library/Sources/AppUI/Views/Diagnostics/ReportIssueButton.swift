@@ -61,7 +61,7 @@ struct ReportIssueButton {
         guard let id = installedProfile?.firstProviderModuleWithMetadata?.1.id else {
             return nil
         }
-        let lastUpdate = providerManager.lastUpdated(for: id)
+        let lastUpdate = providerManager.lastUpdate(for: id)
         return (id, lastUpdate)
     }
 }

@@ -46,7 +46,7 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
 
     private let providersSubject: CurrentValueSubject<[ProviderMetadata], Never>
 
-    private let lastUpdatedSubject: CurrentValueSubject<[ProviderID: Date], Never>
+    private let lastUpdateSubject: CurrentValueSubject<[ProviderID: Date], Never>
 
     private let providersController: NSFetchedResultsController<CDProviderV3>
 
@@ -54,7 +54,7 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
         self.context = context
         self.backgroundContext = backgroundContext
         providersSubject = CurrentValueSubject([])
-        lastUpdatedSubject = CurrentValueSubject([:])
+        lastUpdateSubject = CurrentValueSubject([:])
 
         let request = CDProviderV3.fetchRequest()
         request.sortDescriptors = [
@@ -83,8 +83,8 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
             .eraseToAnyPublisher()
     }
 
-    nonisolated var lastUpdatedPublisher: AnyPublisher<[ProviderID: Date], Never> {
-        lastUpdatedSubject
+    nonisolated var lastUpdatePublisher: AnyPublisher<[ProviderID: Date], Never> {
+        lastUpdateSubject
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
@@ -131,7 +131,7 @@ actor CDProviderRepositoryV3: NSObject, ProviderRepository {
                 providerRequest.predicate = predicate
                 let providers = try providerRequest.execute()
                 if let provider = providers.first {
-                    provider.lastUpdate = infrastructure.lastUpdated
+                    provider.lastUpdate = infrastructure.lastUpdate
                 }
 
                 // delete all provider entities
@@ -174,6 +174,6 @@ extension CDProviderRepositoryV3: NSFetchedResultsControllerDelegate {
         }
         let mapper = DomainMapper()
         providersSubject.send(entities.compactMap(mapper.provider(from:)))
-        lastUpdatedSubject.send(mapper.lastUpdated(from: entities))
+        lastUpdateSubject.send(mapper.lastUpdate(from: entities))
     }
 }

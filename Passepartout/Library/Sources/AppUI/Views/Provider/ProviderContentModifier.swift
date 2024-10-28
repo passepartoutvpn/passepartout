@@ -124,23 +124,25 @@ private extension ProviderContentModifier {
     }
 
     var supportedProviders: [ProviderMetadata] {
-        providerManager.providers.filter {
-            $0.supports(Entity.Configuration.self)
-        }
+        providerManager
+            .providers
+            .filter {
+                $0.supports(Entity.Configuration.self)
+            }
     }
 
-    var lastUpdated: Date? {
+    var lastUpdate: Date? {
         guard let providerId else {
             return nil
         }
-        return providerManager.lastUpdated(for: providerId)
+        return providerManager.lastUpdate(for: providerId)
     }
 
     var lastUpdatedString: String? {
-        guard let lastUpdated else {
+        guard let lastUpdate else {
             return providerManager.isLoading ? Strings.Providers.LastUpdated.loading : nil
         }
-        return Strings.Providers.lastUpdated(lastUpdated.timestamp)
+        return Strings.Providers.lastUpdated(lastUpdate.timestamp)
     }
 }
 
