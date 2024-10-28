@@ -97,7 +97,7 @@ struct Issue: Identifiable {
             .replacingOccurrences(of: "$osLine", with: osLine)
             .replacingOccurrences(of: "$deviceLine", with: deviceLine ?? "unknown")
             .replacingOccurrences(of: "$providerName", with: providerName ?? "none")
-            .replacingOccurrences(of: "$providerLastUpdate", with: providerLastUpdate?.timestamp ?? "unknown")
+            .replacingOccurrences(of: "$providerLastUpdate", with: providerLastUpdate?.localizedDescription(style: .timestamp) ?? "unknown")
             .replacingOccurrences(of: "$purchasedProducts", with: purchasedProducts.map(\.rawValue).description)
     }
 }

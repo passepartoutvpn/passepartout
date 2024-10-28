@@ -38,21 +38,6 @@ extension View {
             self
         }
     }
-
-    public func withTrailingText(_ text: String?, truncationMode: Text.TruncationMode = .tail) -> some View {
-        LabeledContent {
-            if let text {
-                Spacer()
-                let trailing = Text(text)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .truncationMode(truncationMode)
-                trailing
-            }
-        } label: {
-            self
-        }
-    }
 }
 
 extension ViewModifier {

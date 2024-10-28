@@ -124,11 +124,11 @@ private extension IPView.RouteView {
                     VStack {
                         route.destination.map {
                             Text("Destination")
-                                .withTrailingText($0.rawValue)
+                                .themeTrailingValue($0.rawValue)
                         }
                         route.gateway.map {
                             Text("Gateway")
-                                .withTrailingText($0.rawValue)
+                                .themeTrailingValue($0.rawValue)
                         }
                     }
                 }

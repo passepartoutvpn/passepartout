@@ -94,7 +94,7 @@ private extension View {
         switch row {
         case .text(let caption, let value):
             Text(caption)
-                .withTrailingText(value)
+                .themeTrailingValue(value)
 
         case .textList(let caption, let values):
             if !values.isEmpty {
@@ -109,7 +109,7 @@ private extension View {
                 }
             } else {
                 Text(caption)
-                    .withTrailingText(Strings.Global.empty)
+                    .themeTrailingValue(Strings.Global.empty)
             }
 
         case .copiableText(let caption, let value, let multiline):

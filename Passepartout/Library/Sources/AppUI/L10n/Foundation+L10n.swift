@@ -43,6 +43,26 @@ extension TimeInterval: StyledLocalizableEntity {
     }
 }
 
+extension Date: StyledLocalizableEntity {
+    public enum Style {
+        case timestamp
+    }
+
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .timestamp:
+            return Self.timestampFormatter.string(from: self)
+        }
+    }
+
+    private static let timestampFormatter: DateFormatter = {
+        let fmt = DateFormatter()
+        fmt.dateStyle = .medium
+        fmt.timeStyle = .medium
+        return fmt
+    }()
+}
+
 extension UUID {
     var flatString: String {
         let str = uuidString.replacingOccurrences(of: "-", with: "")

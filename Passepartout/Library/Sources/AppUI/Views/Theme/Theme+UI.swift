@@ -242,6 +242,26 @@ struct ThemeAnimationModifier<T>: ViewModifier where T: Equatable {
     }
 }
 
+struct ThemeTrailingValueModifier: ViewModifier {
+    let value: CustomStringConvertible?
+
+    let truncationMode: Text.TruncationMode
+
+    func body(content: Content) -> some View {
+        LabeledContent {
+            if let value {
+                Spacer()
+                Text(value.description)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .truncationMode(truncationMode)
+            }
+        } label: {
+            content
+        }
+    }
+}
+
 struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
     let header: String?
 

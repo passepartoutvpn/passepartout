@@ -166,7 +166,7 @@ private extension ProviderContentModifier {
         guard let lastUpdate else {
             return providerManager.isLoading ? Strings.Providers.LastUpdated.loading : nil
         }
-        return Strings.Providers.lastUpdated(lastUpdate.timestamp)
+        return Strings.Providers.lastUpdated(lastUpdate.localizedDescription(style: .timestamp))
     }
 }
 

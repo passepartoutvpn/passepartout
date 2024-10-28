@@ -183,6 +183,10 @@ extension View {
         modifier(ThemeAnimationModifier(value: value, category: category))
     }
 
+    public func themeTrailingValue(_ value: CustomStringConvertible?, truncationMode: Text.TruncationMode = .tail) -> some View {
+        modifier(ThemeTrailingValueModifier(value: value, truncationMode: truncationMode))
+    }
+
     public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
         modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
     }

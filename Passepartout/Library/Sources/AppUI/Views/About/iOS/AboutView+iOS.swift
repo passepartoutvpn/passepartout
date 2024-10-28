@@ -42,7 +42,7 @@ extension AboutView {
             Section {
                 diagnosticsLink
                 Text(Strings.Global.version)
-                    .withTrailingText(BundleConfiguration.mainVersionString)
+                    .themeTrailingValue(BundleConfiguration.mainVersionString)
             }
         }
         .navigationTitle(Strings.Global.settings)
