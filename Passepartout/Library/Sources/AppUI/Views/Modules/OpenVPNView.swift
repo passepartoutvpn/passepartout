@@ -191,7 +191,10 @@ private extension OpenVPNView {
             }
         } catch {
             pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
-            errorHandler.handle((error as? StandardOpenVPNParserError)?.asPassepartoutError ?? error)
+            errorHandler.handle(
+                (error as? StandardOpenVPNParserError)?.asPassepartoutError ?? error,
+                title: module.moduleType.localizedDescription
+            )
         }
     }
 }
