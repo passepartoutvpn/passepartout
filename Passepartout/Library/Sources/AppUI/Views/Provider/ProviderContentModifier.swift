@@ -41,8 +41,6 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
 
     let entityType: Entity.Type
 
-    let isRequired: Bool
-
     @Binding
     var paywallReason: PaywallReason?
 
@@ -64,9 +62,7 @@ struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity:
             }
             .disabled(providerManager.isLoading)
 
-        if providerId == nil && !isRequired {
-            content
-        }
+        content
     }
 
     static func == (lhs: Self, rhs: Self) -> Bool {
@@ -129,7 +125,7 @@ private extension ProviderContentModifier {
         ProviderPicker(
             providers: supportedProviders,
             providerId: $providerId,
-            isRequired: isRequired,
+            isRequired: true,
             isLoading: providerManager.isLoading
         )
     }
@@ -221,7 +217,6 @@ private extension ProviderContentModifier {
                 apis: [API.bundled],
                 providerId: .constant(.hideme),
                 entityType: VPNEntity<OpenVPN.Configuration>.self,
-                isRequired: false,
                 paywallReason: .constant(nil),
                 providerRows: {},
                 onSelectProvider: { _, _, _ in }

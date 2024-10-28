@@ -85,7 +85,6 @@ private extension OpenVPNView {
         VPNProviderContentModifier(
             providerId: providerId,
             selectedEntity: providerEntity,
-            isRequired: true,
             paywallReason: $paywallReason,
             entityDestination: Subroute.providerServer,
             providerRows: {
