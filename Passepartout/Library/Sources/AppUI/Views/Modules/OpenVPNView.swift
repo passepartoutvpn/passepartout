@@ -106,7 +106,6 @@ private extension OpenVPNView {
     var importView: some View {
         if providerId.wrappedValue == nil {
             Button(Strings.Modules.General.Rows.importFromFile) {
-                importPassphrase = nil
                 isImporting = true
             }
             .alert(
@@ -181,7 +180,9 @@ private extension OpenVPNView {
         } catch StandardOpenVPNParserError.encryptionPassphrase,
                 StandardOpenVPNParserError.unableToDecrypt {
             Task {
+                // XXX: re-present same alert after artificial delay
                 try? await Task.sleep(for: .milliseconds(500))
+                importPassphrase = nil
                 requiresPassphrase = true
             }
         } catch {
