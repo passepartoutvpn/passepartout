@@ -131,10 +131,8 @@ public enum Strings {
         }
         /// Some active modules are incompatible, try to only activate one of them.
         public static let incompatibleModules = Strings.tr("Localizable", "errors.app.passepartout.incompatible_modules", fallback: "Some active modules are incompatible, try to only activate one of them.")
-        /// Invalid fields (%@).
-        public static func invalidFields(_ p1: Any) -> String {
-          return Strings.tr("Localizable", "errors.app.passepartout.invalid_fields", String(describing: p1), fallback: "Invalid fields (%@).")
-        }
+        /// Invalid fields.
+        public static let invalidFields = Strings.tr("Localizable", "errors.app.passepartout.invalid_fields", fallback: "Invalid fields.")
         /// Unable to parse file.
         public static let parsing = Strings.tr("Localizable", "errors.app.passepartout.parsing", fallback: "Unable to parse file.")
       }
