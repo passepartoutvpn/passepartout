@@ -63,7 +63,7 @@ extension VPNFiltersView {
 
         func load(options: VPNFilterOptions, initialFilters: VPNFilters?) {
             self.options = options
-            setCategories(withNames: options.categoryNames)
+            setCategories(withNames: Set(options.countriesByCategoryName.keys))
             setCountries(withCodes: options.countryCodes)
             setPresets(with: options.presets)
 
@@ -74,8 +74,13 @@ extension VPNFiltersView {
 
         func update(with servers: [VPNServer]) {
 
-            // only non-empty countries
-            let knownCountryCodes = Set(servers.map(\.provider.countryCode))
+            // only countries that have servers in this category
+            let knownCountryCodes: Set<String>
+            if let categoryName = filters.categoryName {
+                knownCountryCodes = options.countriesByCategoryName[categoryName] ?? []
+            } else {
+                knownCountryCodes = options.countryCodes
+            }
 
             // only presets known in filtered servers
             var knownPresets = options.presets
