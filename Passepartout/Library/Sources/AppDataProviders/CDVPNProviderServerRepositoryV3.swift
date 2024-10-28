@@ -52,11 +52,18 @@ final class CDVPNProviderServerRepositoryV3: VPNProviderServerRepository {
                 "countryCode"
             ]
             let serversResults = try serversRequest.execute()
-            let categoryNames = serversResults.compactMap {
-                $0.object(forKey: "categoryName") as? String
-            }
-            let countryCodes = serversResults.compactMap {
-                $0.object(forKey: "countryCode") as? String
+
+            var countriesByCategoryName: [String: Set<String>] = [:]
+            var countryCodes: Set<String> = []
+            serversResults.forEach {
+                guard let categoryName = $0.object(forKey: "categoryName") as? String,
+                      let countryCode = $0.object(forKey: "countryCode") as? String else {
+                    return
+                }
+                var codes: Set<String> = countriesByCategoryName[categoryName] ?? []
+                codes.insert(countryCode)
+                countriesByCategoryName[categoryName] = codes
+                countryCodes.insert(countryCode)
             }
 
             let presetsRequest = CDVPNPresetV3.fetchRequest()
@@ -67,7 +74,7 @@ final class CDVPNProviderServerRepositoryV3: VPNProviderServerRepository {
             let presetsResults = try presetsRequest.execute()
 
             return VPNFilterOptions(
-                categoryNames: Set(categoryNames),
+                countriesByCategoryName: countriesByCategoryName,
                 countryCodes: Set(countryCodes),
                 presets: Set(try presetsResults.compactMap {
                     try mapper.preset(from: $0)
