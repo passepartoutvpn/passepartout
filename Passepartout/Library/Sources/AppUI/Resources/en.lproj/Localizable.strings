@@ -175,7 +175,6 @@
 
 "modules.general.sections.storage.footer" = "Profiles are stored to iCloud encrypted.";
 "modules.general.rows.icloud_sharing" = "Shared on iCloud";
-"modules.general.rows.icloud_sharing.purchase" = "Share on iCloud";
 
 "modules.dns.servers.add" = "Add address";
 "modules.dns.search_domains.add" = "Add domain";
@@ -187,7 +186,6 @@
 "modules.ip.routes.excluded" = "Excluded routes";
 "modules.ip.routes.add_family" = "Add %@";
 
-"modules.on_demand.purchase" = "Add on-demand rules";
 "modules.on_demand.policy" = "Policy";
 "modules.on_demand.policy.footer" = "Activate the VPN %@.";
 "modules.on_demand.policy.footer.any" = "in any network";
@@ -213,7 +211,6 @@
 "modules.openvpn.randomize_endpoint" = "Randomize endpoint";
 "modules.openvpn.randomize_hostname" = "Randomize hostname";
 "modules.openvpn.credentials.interactive" = "Interactive";
-"modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 "modules.openvpn.credentials.interactive.footer" = "On-demand will be disabled.";
 "modules.openvpn.credentials.otp_method.approach.append" = "The OTP will be appended to the password.";
 "modules.openvpn.credentials.otp_method.approach.encode" = "The OTP will be encoded in Base64 with the password.";
@@ -241,6 +238,12 @@
 
 "ui.connection_status.on_demand_suffix" = " (on-demand)";
 "ui.profile_context.connect_to" = "Connect to...";
+
+// MARK: - Paywalls
+
+"modules.general.rows.icloud_sharing.purchase" = "Share on iCloud";
+"modules.on_demand.purchase" = "Add on-demand rules";
+"modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 
 // MARK: - Alerts
 
