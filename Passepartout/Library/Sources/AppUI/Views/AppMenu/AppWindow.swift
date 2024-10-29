@@ -1,8 +1,8 @@
 //
-//  View+Environment.swift
+//  AppWindow.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/2/24.
+//  Created by Davide De Rosa on 10/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,22 +23,42 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
-import SwiftUI
+#if os(macOS)
+
+import AppKit
 
 @MainActor
-extension View {
-    public func withEnvironment(from context: AppContext, theme: Theme) -> some View {
-        environmentObject(theme)
-            .environmentObject(context.connectionObserver)
-            .environmentObject(context.iapManager)
-            .environmentObject(context.profileManager)
-            .environmentObject(context.profileProcessor)
-            .environmentObject(context.providerManager)
-            .environmentObject(context.tunnel)
+public final class AppWindow {
+    public static let shared = AppWindow()
+
+    public var isVisible: Bool {
+        get {
+            NSApp.activationPolicy() == .regular && window.isVisible
+        }
+        set {
+            NSApp.setActivationPolicy(newValue ? .regular : .prohibited)
+            if newValue {
+                NSApp.activate(ignoringOtherApps: true)
+                window.makeKeyAndOrderFront(self)
+            }
+        }
     }
 
-    public func withMockEnvironment() -> some View {
-        withEnvironment(from: .mock, theme: Theme())
+    private init() {
+    }
+
+    public func removeCloseButton() {
+        window.styleMask.remove(.closable)
     }
 }
+
+private extension AppWindow {
+    var window: NSWindow {
+        guard let window = NSApp.windows.first else {
+            fatalError("No Mac window?")
+        }
+        return window
+    }
+}
+
+#endif

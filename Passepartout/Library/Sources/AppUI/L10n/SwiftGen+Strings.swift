@@ -38,6 +38,16 @@ public enum Strings {
       }
     }
   }
+  public enum AppMenu {
+    public enum Items {
+      /// Launch on Login
+      public static let launchOnLogin = Strings.tr("Localizable", "app_menu.items.launch_on_login", fallback: "Launch on Login")
+      /// Quit %@
+      public static func quit(_ p1: Any) -> String {
+        return Strings.tr("Localizable", "app_menu.items.quit", String(describing: p1), fallback: "Quit %@")
+      }
+    }
+  }
   public enum Entities {
     public enum ConnectionStatus {
       /// Connected
@@ -227,6 +237,8 @@ public enum Strings {
     public static let gateway = Strings.tr("Localizable", "global.gateway", fallback: "Gateway")
     /// General
     public static let general = Strings.tr("Localizable", "global.general", fallback: "General")
+    /// Hide
+    public static let hide = Strings.tr("Localizable", "global.hide", fallback: "Hide")
     /// Hostname
     public static let hostname = Strings.tr("Localizable", "global.hostname", fallback: "Hostname")
     /// Interface
@@ -297,6 +309,8 @@ public enum Strings {
     public static let servers = Strings.tr("Localizable", "global.servers", fallback: "Servers")
     /// Settings
     public static let settings = Strings.tr("Localizable", "global.settings", fallback: "Settings")
+    /// Show
+    public static let show = Strings.tr("Localizable", "global.show", fallback: "Show")
     /// Status
     public static let status = Strings.tr("Localizable", "global.status", fallback: "Status")
     /// Storage

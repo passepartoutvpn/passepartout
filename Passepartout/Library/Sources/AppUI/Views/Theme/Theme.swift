@@ -80,6 +80,8 @@ public final class Theme: ObservableObject {
 
     var systemImageName: (ImageName) -> String = Theme.ImageName.defaultSystemName
 
+    var menuImageName: (MenuImageName) -> String = Theme.MenuImageName.defaultImageName
+
     init(dummy: Void) {
     }
 

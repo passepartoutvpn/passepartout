@@ -42,8 +42,9 @@ struct PassepartoutApp: App {
     @Environment(\.scenePhase)
     private var scenePhase
 
-    private let context: AppContext = .shared
-//    private let context: AppContext = .mock(withRegistry: .shared)
+    private var context: AppContext {
+        appDelegate.context
+    }
 
     private let appName = BundleConfiguration.mainDisplayName
 
@@ -62,11 +63,18 @@ struct PassepartoutApp: App {
 #else
     var body: some Scene {
         Window(appName, id: appName, content: contentView)
-            .defaultSize(width: 600.0, height: 400.0)
+            .defaultSize(width: 600, height: 400)
 
         Settings {
             SettingsView(profileManager: context.profileManager)
                 .frame(minWidth: 300, minHeight: 200)
+        }
+        MenuBarExtra {
+            AppMenu()
+                .withEnvironment(from: context, theme: theme)
+        } label: {
+            AppMenuImage(tunnel: context.tunnel)
+                .environmentObject(theme)
         }
     }
 #endif
@@ -79,14 +87,6 @@ private extension PassepartoutApp {
             tunnel: context.tunnel,
             registry: context.registry
         )
-        .onLoad {
-            PassepartoutConfiguration.shared.configureLogging(
-                to: BundleConfiguration.urlForAppLog,
-                parameters: Constants.shared.log,
-                logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
-            )
-            AppUI.configure(with: context)
-        }
         .onChange(of: scenePhase) {
             switch $0 {
             case .active:

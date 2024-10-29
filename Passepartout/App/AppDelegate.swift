@@ -23,4 +23,33 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import AppUI
+import CommonLibrary
+import PassepartoutKit
+import SwiftUI
+
+@MainActor
+final class AppDelegate: NSObject {
+
+    @AppStorage(AppPreference.confirmsQuit.key)
+    var confirmsQuit = true
+
+    let context: AppContext = .shared
+//    let context: AppContext = .mock(withRegistry: .shared)
+
+    func configure() {
+        PassepartoutConfiguration.shared.configureLogging(
+            to: BundleConfiguration.urlForAppLog,
+            parameters: Constants.shared.log,
+            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
+        )
+        AppUI.configure(with: context)
+
+#if os(macOS)
+        // keep this for login item because scenePhase is not triggered
+        Task {
+            try await context.tunnel.prepare(purge: true)
+        }
+#endif
+    }
+}
