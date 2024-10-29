@@ -73,7 +73,7 @@ struct PassepartoutApp: App {
             AppMenu()
                 .withEnvironment(from: context, theme: theme)
         } label: {
-            AppMenuImage(tunnel: context.tunnel)
+            AppMenuImage(connectionObserver: context.connectionObserver)
                 .environmentObject(theme)
         }
     }

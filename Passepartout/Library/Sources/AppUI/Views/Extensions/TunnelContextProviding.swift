@@ -27,15 +27,13 @@ import Foundation
 import PassepartoutKit
 
 protocol TunnelContextProviding {
-    var tunnel: Tunnel { get }
-
     var connectionObserver: ConnectionObserver { get }
 }
 
 @MainActor
 extension TunnelContextProviding {
     var tunnelConnectionStatus: TunnelStatus {
-        var status = tunnel.status
+        var status = connectionObserver.tunnel.status
         if status == .active, let connectionStatus = connectionObserver.connectionStatus {
             if connectionStatus == .connected {
                 status = .active
