@@ -47,6 +47,10 @@ public final class AppWindow {
     private init() {
     }
 
+    public func close() {
+        window.close()
+    }
+
     public func removeCloseButton() {
         window.styleMask.remove(.closable)
     }

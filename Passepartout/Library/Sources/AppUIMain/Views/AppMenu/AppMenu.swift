@@ -67,6 +67,9 @@ private extension AppMenu {
     var dockToggle: some View {
         Button(model.isVisible ? Strings.Global.hide : Strings.Global.show) {
             model.isVisible.toggle()
+            if !model.isVisible {
+                AppWindow.shared.close()
+            }
         }
     }
 
