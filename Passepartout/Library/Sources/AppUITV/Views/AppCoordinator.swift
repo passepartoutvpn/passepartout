@@ -43,6 +43,18 @@ public struct AppCoordinator: View {
     }
 
     public var body: some View {
-        Text("Hello TV!")
+        ProfilesView(profileManager: profileManager)
+    }
+}
+
+struct ProfilesView: View {
+
+    @ObservedObject
+    var profileManager: ProfileManager
+
+    var body: some View {
+        ForEach(profileManager.headers, id: \.id) {
+            Text($0.name)
+        }
     }
 }
