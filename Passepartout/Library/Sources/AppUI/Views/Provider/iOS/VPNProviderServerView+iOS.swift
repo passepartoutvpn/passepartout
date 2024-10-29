@@ -184,8 +184,9 @@ private extension VPNProviderServerView.ServersSubview {
                         Text(area)
                             .font(.headline)
                     }
-                    Text(server.provider.serverId)
+                    Text(server.hostname ?? server.serverId)
                         .font(.subheadline)
+                        .truncationMode(.middle)
                 }
                 Spacer()
                 FavoriteToggle(
