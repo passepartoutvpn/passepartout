@@ -23,6 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 
 public struct LockableView<Content: View, LockedContent: View>: View {
@@ -142,3 +144,5 @@ private extension LockableView {
         }
     }
 }
+
+#endif
