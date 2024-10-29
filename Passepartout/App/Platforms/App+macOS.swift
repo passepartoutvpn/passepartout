@@ -86,11 +86,8 @@ extension PassepartoutApp {
 
     @SceneBuilder
     var body: some Scene {
-        Window(appName, id: appName) {
-            contentView()
-                .themeLockScreen()
-        }
-        .defaultSize(width: 600, height: 400)
+        Window(appName, id: appName, content: contentView)
+            .defaultSize(width: 600, height: 400)
 
         Settings {
             SettingsView(profileManager: context.profileManager)
