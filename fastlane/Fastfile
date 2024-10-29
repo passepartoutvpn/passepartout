@@ -24,7 +24,7 @@ desc "Bump version"
 lane :bump do |options|
     unless options[:only]
         log = changelog_from_git_commits(
-            pretty: "* %h %s",
+            pretty: "* %s",
             date_format: "short"
         )
         path = "../#{logname}"
