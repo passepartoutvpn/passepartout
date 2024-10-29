@@ -1,8 +1,8 @@
 //
-//  TunnelContextProviding.swift
+//  AppWindow.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/5/24.
+//  Created by Davide De Rosa on 10/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,42 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PassepartoutKit
+#if os(macOS)
 
-protocol TunnelContextProviding {
-    var connectionObserver: ConnectionObserver { get }
-}
+import AppKit
 
 @MainActor
-extension TunnelContextProviding {
-    var tunnelConnectionStatus: TunnelStatus {
-        var status = connectionObserver.tunnel.status
-        if status == .active, let connectionStatus = connectionObserver.connectionStatus {
-            if connectionStatus == .connected {
-                status = .active
-            } else {
-                status = .activating
+public final class AppWindow {
+    public static let shared = AppWindow()
+
+    public var isVisible: Bool {
+        get {
+            NSApp.activationPolicy() == .regular && window.isVisible
+        }
+        set {
+            NSApp.setActivationPolicy(newValue ? .regular : .prohibited)
+            if newValue {
+                NSApp.activate(ignoringOtherApps: true)
+                window.makeKeyAndOrderFront(self)
             }
         }
-        return status
+    }
+
+    private init() {
+    }
+
+    public func removeCloseButton() {
+        window.styleMask.remove(.closable)
     }
 }
+
+private extension AppWindow {
+    var window: NSWindow {
+        guard let window = NSApp.windows.first else {
+            fatalError("No Mac window?")
+        }
+        return window
+    }
+}
+
+#endif

@@ -1,8 +1,8 @@
 //
-//  AppDelegate+iOS.swift
+//  AppMenuImage.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/28/24.
+//  Created by Davide De Rosa on 10/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,15 +23,37 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
+#if os(macOS)
 
-import AppUI
-import UIKit
+import PassepartoutKit
+import SwiftUI
 
-extension AppDelegate: UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configure()
-        return true
+public struct AppMenuImage: View, TunnelContextProviding {
+
+    @ObservedObject
+    var connectionObserver: ConnectionObserver
+
+    public init(connectionObserver: ConnectionObserver) {
+        self.connectionObserver = connectionObserver
+    }
+
+    public var body: some View {
+        ThemeMenuImage(tunnelConnectionStatus.imageName)
+    }
+}
+
+private extension TunnelStatus {
+    var imageName: Theme.MenuImageName {
+        switch self {
+        case .active:
+            return .active
+
+        case .inactive:
+            return .inactive
+
+        case .activating, .deactivating:
+            return .pending
+        }
     }
 }
 

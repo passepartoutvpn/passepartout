@@ -30,6 +30,7 @@
 "global.folder" = "Folder";
 "global.gateway" = "Gateway";
 "global.general" = "General";
+"global.hide" = "Hide";
 "global.hostname" = "Hostname";
 "global.interface" = "Interface";
 "global.keep_alive" = "Keep-alive";
@@ -64,6 +65,7 @@
 "global.server" = "Server";
 "global.servers" = "Servers";
 "global.settings" = "Settings";
+"global.show" = "Show";
 "global.status" = "Status";
 "global.storage" = "Storage";
 "global.subnet" = "Subnet";
@@ -232,6 +234,11 @@
 "providers.vpn.category.any" = "All categories";
 "providers.vpn.preset" = "Preset";
 "providers.vpn.no_servers" = "No servers";
+
+// MARK: - App menu
+
+"app_menu.items.launch_on_login" = "Launch on Login";
+"app_menu.items.quit" = "Quit %@";
 
 // MARK: - Components
 

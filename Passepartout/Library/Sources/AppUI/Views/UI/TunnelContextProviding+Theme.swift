@@ -30,7 +30,7 @@ import SwiftUI
 extension TunnelContextProviding where Self: ThemeProviding {
     var tunnelStatusColor: Color {
         if connectionObserver.lastErrorCode != nil {
-            switch tunnel.status {
+            switch connectionObserver.tunnel.status {
             case .inactive:
                 return theme.inactiveColor
 

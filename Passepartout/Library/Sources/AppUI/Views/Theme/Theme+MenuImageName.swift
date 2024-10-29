@@ -1,8 +1,8 @@
 //
-//  AppDelegate+iOS.swift
+//  Theme+MenuImageName.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/28/24.
+//  Created by Davide De Rosa on 10/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,16 +23,24 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
+import SwiftUI
 
-import AppUI
-import UIKit
-
-extension AppDelegate: UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configure()
-        return true
+extension Theme {
+    public enum MenuImageName {
+        case active
+        case inactive
+        case pending
     }
 }
 
-#endif
+extension Theme.MenuImageName {
+    static var defaultImageName: (Self) -> String {
+        {
+            switch $0 {
+            case .active: return "MenuActive"
+            case .inactive: return "MenuInactive"
+            case .pending: return "MenuPending"
+            }
+        }
+    }
+}

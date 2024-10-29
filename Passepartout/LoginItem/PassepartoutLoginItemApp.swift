@@ -1,8 +1,8 @@
 //
-//  AppDelegate+iOS.swift
+//  PassepartoutLoginItemApp.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/28/24.
+//  Created by Davide De Rosa on 10/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,16 +23,15 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
+import SwiftUI
 
-import AppUI
-import UIKit
+@main
+struct PassepartoutLoginItemApp: App {
 
-extension AppDelegate: UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configure()
-        return true
+    @NSApplicationDelegateAdaptor
+    private var appDelegate: AppDelegate
+
+    var body: some Scene {
+        MenuBarExtra("") {}
     }
 }
-
-#endif

@@ -434,6 +434,22 @@ struct ThemeImageLabel: View {
     }
 }
 
+struct ThemeMenuImage: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
+    private let name: Theme.MenuImageName
+
+    init(_ name: Theme.MenuImageName) {
+        self.name = name
+    }
+
+    var body: some View {
+        Image(theme.menuImageName(name))
+    }
+}
+
 struct ThemeDisclosableMenu<Content, Label>: View where Content: View, Label: View {
 
     @ViewBuilder

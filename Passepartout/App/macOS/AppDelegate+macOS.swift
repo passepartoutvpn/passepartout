@@ -27,17 +27,12 @@
 
 import AppKit
 import AppUI
-import CommonLibrary
 import PassepartoutKit
-import SwiftUI
 
-final class AppDelegate: NSObject, NSApplicationDelegate {
-
-    @AppStorage(AppPreference.confirmsQuit.key)
-    private var confirmsQuit = true
-
+extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSApp.windows[0].styleMask.remove(.closable)
+        configureAppWindow()
+        configure()
     }
 
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
@@ -52,8 +47,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
-@MainActor
 private extension AppDelegate {
+    var isStartedFromLoginItem: Bool {
+        NSApp.isHidden
+    }
+
+    func configureAppWindow() {
+        if isStartedFromLoginItem {
+            AppWindow.shared.isVisible = false
+        }
+        AppWindow.shared.removeCloseButton()
+    }
+
     func quitConfirmationAlert() -> NSApplication.TerminateReply {
         let alert = NSAlert()
         alert.alertStyle = .warning
