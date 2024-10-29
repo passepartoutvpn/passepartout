@@ -1,8 +1,8 @@
 //
-//  AppError.swift
+//  ThemeProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 9/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,22 +24,7 @@
 //
 
 import Foundation
-import PassepartoutKit
 
-public enum AppError {
-    case emptyProfileName
-
-    case malformedModule(any ModuleBuilder, error: Error)
-
-    case permissionDenied
-
-    case generic(PassepartoutError)
-
-    public init(_ error: Error) {
-        if let spError = error as? AppError {
-            self = spError
-        } else {
-            self = .generic(PassepartoutError(error))
-        }
-    }
+public protocol ThemeProviding {
+    var theme: Theme { get }
 }

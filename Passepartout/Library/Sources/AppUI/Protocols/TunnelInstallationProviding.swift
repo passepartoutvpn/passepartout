@@ -1,8 +1,8 @@
 //
-//  AppError.swift
+//  TunnelInstallationProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 9/3/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,34 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import Foundation
 import PassepartoutKit
 
-public enum AppError {
-    case emptyProfileName
+public protocol TunnelInstallationProviding {
+    var profileManager: ProfileManager { get }
 
-    case malformedModule(any ModuleBuilder, error: Error)
+    var tunnel: Tunnel { get }
+}
 
-    case permissionDenied
-
-    case generic(PassepartoutError)
-
-    public init(_ error: Error) {
-        if let spError = error as? AppError {
-            self = spError
-        } else {
-            self = .generic(PassepartoutError(error))
+@MainActor
+extension TunnelInstallationProviding {
+    public var installation: TunnelInstallation? {
+        guard let currentProfile = tunnel.currentProfile else {
+            return nil
         }
+        guard let header = profileManager.headers.first(where: {
+            $0.id == currentProfile.id
+        }) else {
+            return nil
+        }
+        return TunnelInstallation(header: header, onDemand: currentProfile.onDemand)
+    }
+
+    public var currentProfile: Profile? {
+        guard let id = tunnel.currentProfile?.id else {
+            return nil
+        }
+        return profileManager.profile(withId: id)
     }
 }

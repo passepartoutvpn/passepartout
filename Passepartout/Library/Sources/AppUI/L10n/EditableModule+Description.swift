@@ -29,13 +29,13 @@ import PassepartoutKit
 extension ModuleBuilder {
 
     @MainActor
-    func description(inEditor editor: ProfileEditor) -> String {
+    public func description(inEditor editor: ProfileEditor) -> String {
         editor.profile.displayName(forModuleWithId: id) ?? typeDescription
     }
 }
 
 extension ModuleBuilder {
-    var typeDescription: String {
+    public var typeDescription: String {
         guard let providing = self as? ModuleTypeProviding else {
             return String(describing: self)
         }

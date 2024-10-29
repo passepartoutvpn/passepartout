@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 import PassepartoutWireGuardGo
 
-enum ModuleType: String, CaseIterable {
+public enum ModuleType: String, CaseIterable {
     case openVPN
 
     case wireGuard
@@ -42,7 +42,7 @@ enum ModuleType: String, CaseIterable {
 }
 
 extension ModuleType: Identifiable {
-    var id: String {
+    public var id: String {
         rawValue
     }
 }

@@ -1,8 +1,8 @@
 //
-//  AppError.swift
+//  TunnelContextProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 9/5/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,20 +26,21 @@
 import Foundation
 import PassepartoutKit
 
-public enum AppError {
-    case emptyProfileName
+public protocol TunnelContextProviding {
+    var connectionObserver: ConnectionObserver { get }
+}
 
-    case malformedModule(any ModuleBuilder, error: Error)
-
-    case permissionDenied
-
-    case generic(PassepartoutError)
-
-    public init(_ error: Error) {
-        if let spError = error as? AppError {
-            self = spError
-        } else {
-            self = .generic(PassepartoutError(error))
+@MainActor
+extension TunnelContextProviding {
+    public var tunnelConnectionStatus: TunnelStatus {
+        var status = connectionObserver.tunnel.status
+        if status == .active, let connectionStatus = connectionObserver.connectionStatus {
+            if connectionStatus == .connected {
+                status = .active
+            } else {
+                status = .activating
+            }
         }
+        return status
     }
 }

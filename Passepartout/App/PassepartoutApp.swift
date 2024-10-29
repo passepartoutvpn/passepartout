@@ -23,7 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppUI
+#if os(iOS) || os(macOS)
+import AppUIMain
+#elseif os(tvOS)
+import AppUITV
+#endif
+
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
@@ -31,56 +36,34 @@ import SwiftUI
 @main
 struct PassepartoutApp: App {
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
+
     @UIApplicationDelegateAdaptor
     private var appDelegate: AppDelegate
-#else
+
+#elseif os(macOS)
+
     @NSApplicationDelegateAdaptor
     private var appDelegate: AppDelegate
+
 #endif
 
     @Environment(\.scenePhase)
     private var scenePhase
 
-    private var context: AppContext {
+    @StateObject
+    var theme = Theme()
+}
+
+extension PassepartoutApp {
+    var appName: String {
+        BundleConfiguration.mainDisplayName
+    }
+
+    var context: AppContext {
         appDelegate.context
     }
 
-    private let appName = BundleConfiguration.mainDisplayName
-
-    @StateObject
-    private var theme = Theme()
-
-#if os(iOS)
-    var body: some Scene {
-        WindowGroup {
-            contentView()
-                .onOpenURL { url in
-                    ImporterPipe.shared.send([url])
-                }
-        }
-    }
-#else
-    var body: some Scene {
-        Window(appName, id: appName, content: contentView)
-            .defaultSize(width: 600, height: 400)
-
-        Settings {
-            SettingsView(profileManager: context.profileManager)
-                .frame(minWidth: 300, minHeight: 200)
-        }
-        MenuBarExtra {
-            AppMenu()
-                .withEnvironment(from: context, theme: theme)
-        } label: {
-            AppMenuImage(connectionObserver: context.connectionObserver)
-                .environmentObject(theme)
-        }
-    }
-#endif
-}
-
-private extension PassepartoutApp {
     func contentView() -> some View {
         AppCoordinator(
             profileManager: context.profileManager,
@@ -103,7 +86,6 @@ private extension PassepartoutApp {
                 break
             }
         }
-        .themeLockScreen()
         .withEnvironment(from: context, theme: theme)
     }
 }

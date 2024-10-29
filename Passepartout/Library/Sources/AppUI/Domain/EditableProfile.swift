@@ -26,18 +26,18 @@
 import Foundation
 import PassepartoutKit
 
-struct EditableProfile: MutableProfileType {
-    var id = UUID()
+public struct EditableProfile: MutableProfileType {
+    public var id = UUID()
 
-    var name: String = ""
+    public var name: String = ""
 
-    var modules: [any ModuleBuilder] = []
+    public var modules: [any ModuleBuilder] = []
 
-    var activeModulesIds: Set<UUID> = []
+    public var activeModulesIds: Set<UUID> = []
 
-    var modulesMetadata: [UUID: ModuleMetadata]?
+    public var modulesMetadata: [UUID: ModuleMetadata]?
 
-    func builder() throws -> Profile.Builder {
+    public func builder() throws -> Profile.Builder {
         var builder = Profile.Builder(id: id)
         builder.modules = try modules.compactMap {
             do {
@@ -68,7 +68,7 @@ struct EditableProfile: MutableProfileType {
 }
 
 extension Profile {
-    func editable() -> EditableProfile {
+    public func editable() -> EditableProfile {
         EditableProfile(
             id: id,
             name: name,
@@ -78,7 +78,7 @@ extension Profile {
         )
     }
 
-    var modulesBuilders: [any ModuleBuilder] {
+    public var modulesBuilders: [any ModuleBuilder] {
         modules.compactMap {
             guard let buildableModule = $0 as? any BuildableType else {
                 return nil

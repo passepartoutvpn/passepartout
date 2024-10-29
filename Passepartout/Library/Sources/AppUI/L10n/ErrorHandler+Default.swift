@@ -28,7 +28,7 @@ import SwiftUI
 import UtilsLibrary
 
 extension ErrorHandler {
-    static func `default`() -> ErrorHandler {
+    public static func `default`() -> ErrorHandler {
         ErrorHandler(
             defaultTitle: Strings.Unlocalized.appName,
             dismissTitle: Strings.Global.ok,

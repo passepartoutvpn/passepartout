@@ -50,7 +50,7 @@ extension AppContext {
             profileManager: {
                 let profiles: [Profile] = (0..<20)
                     .reduce(into: []) { list, _ in
-                        list.append(.newProfile())
+                        list.append(.newMockProfile())
                     }
                 return ProfileManager(profiles: profiles)
             }(),
@@ -109,7 +109,7 @@ extension ProviderManager {
 // MARK: - Profile
 
 extension Profile {
-    static let mock: Profile = {
+    public static let mock: Profile = {
         var profile = Profile.Builder()
         profile.name = "Mock profile"
 
@@ -144,7 +144,7 @@ extension Profile {
         }
     }()
 
-    static func newProfile() -> Profile {
+    public static func newMockProfile() -> Profile {
         do {
             var copy = mock.builder(withNewId: true)
             copy.name = String(copy.id.uuidString.prefix(8))

@@ -1,8 +1,8 @@
 //
-//  AppError.swift
+//  AppMenuImage.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 10/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,38 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#if os(macOS)
+
 import PassepartoutKit
+import SwiftUI
 
-public enum AppError {
-    case emptyProfileName
+public struct AppMenuImage: View, TunnelContextProviding {
 
-    case malformedModule(any ModuleBuilder, error: Error)
+    @ObservedObject
+    public var connectionObserver: ConnectionObserver
 
-    case permissionDenied
+    public init(connectionObserver: ConnectionObserver) {
+        self.connectionObserver = connectionObserver
+    }
 
-    case generic(PassepartoutError)
+    public var body: some View {
+        ThemeMenuImage(tunnelConnectionStatus.imageName)
+    }
+}
 
-    public init(_ error: Error) {
-        if let spError = error as? AppError {
-            self = spError
-        } else {
-            self = .generic(PassepartoutError(error))
+private extension TunnelStatus {
+    var imageName: Theme.MenuImageName {
+        switch self {
+        case .active:
+            return .active
+
+        case .inactive:
+            return .inactive
+
+        case .activating, .deactivating:
+            return .pending
         }
     }
 }
+
+#endif

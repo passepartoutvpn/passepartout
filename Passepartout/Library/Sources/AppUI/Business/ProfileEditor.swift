@@ -30,21 +30,21 @@ import Foundation
 import PassepartoutKit
 
 @MainActor
-final class ProfileEditor: ObservableObject {
+public final class ProfileEditor: ObservableObject {
 
     @Published
     private var editableProfile: EditableProfile
 
     @Published
-    var isShared: Bool
+    public var isShared: Bool
 
     private(set) var removedModules: [UUID: any ModuleBuilder]
 
-    convenience init() {
+    public convenience init() {
         self.init(modules: [])
     }
 
-    init(modules: [any ModuleBuilder]) {
+    public init(modules: [any ModuleBuilder]) {
         editableProfile = EditableProfile(
             modules: modules,
             activeModulesIds: Set(modules.map(\.id))
@@ -53,13 +53,13 @@ final class ProfileEditor: ObservableObject {
         removedModules = [:]
     }
 
-    init(profile: Profile) {
+    public init(profile: Profile) {
         editableProfile = profile.editable()
         isShared = false
         removedModules = [:]
     }
 
-    func editProfile(_ profile: Profile, isShared: Bool) {
+    public func editProfile(_ profile: Profile, isShared: Bool) {
         editableProfile = profile.editable()
         self.isShared = isShared
         removedModules = [:]
@@ -69,7 +69,7 @@ final class ProfileEditor: ObservableObject {
 // MARK: - Types
 
 extension ProfileEditor {
-    var moduleTypes: [ModuleType] {
+    public var moduleTypes: [ModuleType] {
         editableProfile.modules
             .compactMap {
                 $0 as? ModuleTypeProviding
@@ -77,7 +77,7 @@ extension ProfileEditor {
             .map(\.moduleType)
     }
 
-    var availableModuleTypes: [ModuleType] {
+    public var availableModuleTypes: [ModuleType] {
         ModuleType
             .allCases
             .filter {
@@ -97,7 +97,7 @@ extension ProfileEditor {
 // MARK: - Editing
 
 extension ProfileEditor {
-    var profile: EditableProfile {
+    public var profile: EditableProfile {
         get {
             editableProfile
         }
@@ -108,21 +108,21 @@ extension ProfileEditor {
 }
 
 extension ProfileEditor {
-    var modules: [any ModuleBuilder] {
+    public var modules: [any ModuleBuilder] {
         editableProfile.modules
     }
 
-    func module(withId moduleId: UUID) -> (any ModuleBuilder)? {
+    public func module(withId moduleId: UUID) -> (any ModuleBuilder)? {
         editableProfile.modules.first {
             $0.id == moduleId
         } ?? removedModules[moduleId]
     }
 
-    func isActiveModule(withId moduleId: UUID) -> Bool {
+    public func isActiveModule(withId moduleId: UUID) -> Bool {
         editableProfile.isActiveModule(withId: moduleId)
     }
 
-    func toggleModule(withId moduleId: UUID) {
+    public func toggleModule(withId moduleId: UUID) {
         guard let existingModule = module(withId: moduleId) else {
             return
         }
@@ -133,11 +133,11 @@ extension ProfileEditor {
         }
     }
 
-    func moveModules(from offsets: IndexSet, to newOffset: Int) {
+    public func moveModules(from offsets: IndexSet, to newOffset: Int) {
         editableProfile.modules.move(fromOffsets: offsets, toOffset: newOffset)
     }
 
-    func removeModules(at offsets: IndexSet) {
+    public func removeModules(at offsets: IndexSet) {
         offsets.forEach {
             let module = editableProfile.modules[$0]
             removedModules[module.id] = module
@@ -145,7 +145,7 @@ extension ProfileEditor {
         }
     }
 
-    func removeModule(withId moduleId: UUID) {
+    public func removeModule(withId moduleId: UUID) {
         guard let index = editableProfile.modules.firstIndex(where: { $0.id == moduleId }) else {
             return
         }
@@ -154,7 +154,7 @@ extension ProfileEditor {
         editableProfile.modules.remove(at: index)
     }
 
-    func saveModule(_ module: any ModuleBuilder, activating: Bool) {
+    public func saveModule(_ module: any ModuleBuilder, activating: Bool) {
         if let index = editableProfile.modules.firstIndex(where: { $0.id == module.id }) {
             editableProfile.modules[index] = module
         } else {
@@ -175,7 +175,7 @@ private extension ProfileEditor {
 // MARK: - Building
 
 extension ProfileEditor {
-    func build() throws -> Profile {
+    public func build() throws -> Profile {
         let builder = try editableProfile.builder()
         let profile = try builder.tryBuild()
 
@@ -190,7 +190,7 @@ extension ProfileEditor {
 // MARK: - Saving
 
 extension ProfileEditor {
-    func save(to profileManager: ProfileManager) async throws {
+    public func save(to profileManager: ProfileManager) async throws {
         do {
             let newProfile = try build()
             try await profileManager.save(newProfile, isShared: isShared)

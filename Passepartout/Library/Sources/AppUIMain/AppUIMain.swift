@@ -1,8 +1,8 @@
 //
-//  AppUI.swift
+//  AppUIMain.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 7/31/24.
+//  Created by Davide De Rosa on 10/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,28 +23,35 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+@_exported import AppUI
 import Foundation
-import PassepartoutKit
 
-public protocol AppUIConfiguring {
-    static func configure(with context: AppContext)
-}
-
-public enum AppUI {
+public enum AppUIMain: AppUIConfiguring {
     public static func configure(with context: AppContext) {
         assertMissingModuleImplementations()
-        Task {
-            try? await context.providerManager.fetchIndex(from: API.shared)
-        }
+        AppUI.configure(with: context)
     }
 }
 
-extension AppUI {
-    public static func assertMissingModuleImplementations() {
+private extension AppUIMain {
+    static func assertMissingModuleImplementations() {
+        let providerModuleTypes: Set<ModuleType> = [
+            .openVPN
+        ]
         ModuleType.allCases.forEach { moduleType in
             let builder = moduleType.newModule()
-            guard builder is ModuleTypeProviding else {
-                fatalError("\(moduleType): is not ModuleTypeProviding")
+            guard builder is any ModuleViewProviding else {
+                fatalError("\(moduleType): is not ModuleViewProviding")
+            }
+            if providerModuleTypes.contains(moduleType) {
+                do {
+                    let module = try builder.tryBuild()
+                    guard module is any ProviderEntityViewProviding else {
+                        fatalError("\(moduleType): is not ProviderEntityViewProviding")
+                    }
+                } catch {
+                    fatalError("\(moduleType): empty module is not buildable")
+                }
             }
         }
     }

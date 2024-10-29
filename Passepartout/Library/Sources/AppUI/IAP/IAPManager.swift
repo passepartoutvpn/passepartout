@@ -43,7 +43,7 @@ public final class IAPManager: ObservableObject {
 
     private var purchasedAppBuild: Int?
 
-    private(set) var purchasedProducts: Set<AppProduct>
+    public private(set) var purchasedProducts: Set<AppProduct>
 
     private var eligibleFeatures: Set<AppFeature>
 

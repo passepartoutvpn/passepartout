@@ -30,7 +30,7 @@ import PassepartoutKit
 
 @MainActor
 public final class ConnectionObserver: ObservableObject {
-    let tunnel: Tunnel
+    public let tunnel: Tunnel
 
     private let environment: TunnelEnvironment
 

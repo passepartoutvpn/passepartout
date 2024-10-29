@@ -1,8 +1,8 @@
 //
-//  AppError.swift
+//  App+iOS.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 10/28/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import PassepartoutKit
+#if os(iOS)
 
-public enum AppError {
-    case emptyProfileName
+import AppUIMain
+import SwiftUI
 
-    case malformedModule(any ModuleBuilder, error: Error)
+extension AppDelegate: UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        configure()
+        return true
+    }
+}
 
-    case permissionDenied
-
-    case generic(PassepartoutError)
-
-    public init(_ error: Error) {
-        if let spError = error as? AppError {
-            self = spError
-        } else {
-            self = .generic(PassepartoutError(error))
+extension PassepartoutApp {
+    var body: some Scene {
+        WindowGroup {
+            contentView()
+                .onOpenURL { url in
+                    ImporterPipe.shared.send([url])
+                }
+                .themeLockScreen()
         }
     }
 }
+
+#endif

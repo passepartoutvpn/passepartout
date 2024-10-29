@@ -64,7 +64,7 @@ extension Date: StyledLocalizableEntity {
 }
 
 extension UUID {
-    var flatString: String {
+    public var flatString: String {
         let str = uuidString.replacingOccurrences(of: "-", with: "")
         assert(str.count == 32)
         return str

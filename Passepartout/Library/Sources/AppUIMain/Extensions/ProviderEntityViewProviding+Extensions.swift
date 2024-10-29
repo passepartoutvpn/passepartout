@@ -1,8 +1,8 @@
 //
-//  AppError.swift
+//  ProviderEntityViewProviding+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/27/24.
+//  Created by Davide De Rosa on 10/29/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,23 +23,25 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import PassepartoutKit
+import SwiftUI
 
-public enum AppError {
-    case emptyProfileName
+extension ProviderEntityViewProviding where Self: ProviderCompatibleModule, EntityType.Configuration: ProviderConfigurationIdentifiable & Codable {
+    func vpnProviderEntityView(
+        with provider: ModuleMetadata.Provider,
+        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
+    ) -> some View {
+        let selectedEntity = try? provider
+            .entity
+            .map {
+                try providerEntity(from: $0)
+            } as? VPNEntity<EntityType.Configuration>
 
-    case malformedModule(any ModuleBuilder, error: Error)
-
-    case permissionDenied
-
-    case generic(PassepartoutError)
-
-    public init(_ error: Error) {
-        if let spError = error as? AppError {
-            self = spError
-        } else {
-            self = .generic(PassepartoutError(error))
-        }
+        return VPNProviderServerCoordinator(
+            moduleId: id,
+            providerId: provider.id,
+            selectedEntity: selectedEntity,
+            onSelect: onSelect
+        )
     }
 }
