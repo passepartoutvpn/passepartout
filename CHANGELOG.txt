@@ -1,3 +1,5 @@
+* 41de48789 Show in Mac status bar plus Login Item (#773)
+* 92cf1985e Fix iOS app not reacting to open URL (#770)
 * 0ec06c2c6 Import OpenVPN configuration (#765)
 * ee3a40b59 Back up profiles to Core Data (#762)
 * df4e3465f Save provider favorite servers (#758)
