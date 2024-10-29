@@ -23,6 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 
 public struct LongContentView: View {
@@ -89,3 +91,5 @@ public struct LongContentLink<Preview: View>: View {
         }
     }
 }
+
+#endif

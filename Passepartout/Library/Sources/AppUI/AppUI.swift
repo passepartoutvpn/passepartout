@@ -24,8 +24,11 @@
 //
 
 import Foundation
-import NetworkExtension
 import PassepartoutKit
+
+public protocol AppUIConfiguring {
+    static func configure(with context: AppContext)
+}
 
 public enum AppUI {
     public static func configure(with context: AppContext) {
@@ -36,28 +39,12 @@ public enum AppUI {
     }
 }
 
-private extension AppUI {
-    static func assertMissingModuleImplementations() {
-        let providerModuleTypes: Set<ModuleType> = [
-            .openVPN
-        ]
+extension AppUI {
+    public static func assertMissingModuleImplementations() {
         ModuleType.allCases.forEach { moduleType in
             let builder = moduleType.newModule()
             guard builder is ModuleTypeProviding else {
                 fatalError("\(moduleType): is not ModuleTypeProviding")
-            }
-            guard builder is any ModuleViewProviding else {
-                fatalError("\(moduleType): is not ModuleViewProviding")
-            }
-            if providerModuleTypes.contains(moduleType) {
-                do {
-                    let module = try builder.tryBuild()
-                    guard module is any ProviderEntityViewProviding else {
-                        fatalError("\(moduleType): is not ProviderEntityViewProviding")
-                    }
-                } catch {
-                    fatalError("\(moduleType): empty module is not buildable")
-                }
             }
         }
     }

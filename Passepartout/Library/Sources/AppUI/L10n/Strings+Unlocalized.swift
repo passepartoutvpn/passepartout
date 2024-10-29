@@ -27,9 +27,9 @@ import Foundation
 import PassepartoutKit
 
 extension Strings {
-    enum Unlocalized {
-        enum OpenVPN {
-            enum XOR: String {
+    public enum Unlocalized {
+        public enum OpenVPN {
+            public enum XOR: String {
                 case xormask
 
                 case xorptrpos
@@ -39,23 +39,23 @@ extension Strings {
                 case obfuscate
             }
 
-            static let compLZO = "--comp-lzo"
+            public static let compLZO = "--comp-lzo"
 
-            static let compress = "--compress"
+            public static let compress = "--compress"
 
-            static let lzo = "LZO"
+            public static let lzo = "LZO"
         }
 
-        enum Placeholders {
-            static let hostname = "example.com"
+        public enum Placeholders {
+            public static let hostname = "example.com"
 
-            static let dohURL = "https://1.2.3.4/some-query"
+            public static let dohURL = "https://1.2.3.4/some-query"
 
-            static let dotHostname = "dns-hostname.com"
+            public static let dotHostname = "dns-hostname.com"
 
-            static let ipV4DNS = "1.1.1.1"
+            public static let ipV4DNS = "1.1.1.1"
 
-            static func ipDestination(forFamily family: Address.Family) -> String {
+            public static func ipDestination(forFamily family: Address.Family) -> String {
                 switch family {
                 case .v4:
                     return "192.168.15.0/24"
@@ -65,7 +65,7 @@ extension Strings {
                 }
             }
 
-            static func ipGateway(forFamily family: Address.Family) -> String {
+            public static func ipGateway(forFamily family: Address.Family) -> String {
                 switch family {
                 case .v4:
                     return "192.168.15.1"
@@ -75,67 +75,67 @@ extension Strings {
                 }
             }
 
-            static let mtu = "1500"
+            public static let mtu = "1500"
 
-            static let proxyIPv4Address = "192.168.1.1"
+            public static let proxyIPv4Address = "192.168.1.1"
 
-            static let proxyPort = "1080"
+            public static let proxyPort = "1080"
 
-            static let pacURL = "http://proxy.com/pac.url"
+            public static let pacURL = "http://proxy.com/pac.url"
         }
 
-        enum Issues {
-            static let subject = "\(appName) - Report issue"
+        public enum Issues {
+            public static let subject = "\(appName) - Report issue"
 
-            static let attachmentMimeType = "text/plain"
+            public static let attachmentMimeType = "text/plain"
 
-            static let appLogFilename = "app.log"
+            public static let appLogFilename = "app.log"
 
-            static let tunnelLogFilename = "tunnel.log"
+            public static let tunnelLogFilename = "tunnel.log"
         }
 
-        static let appName = "Passepartout"
+        public static let appName = "Passepartout"
 
-        static let ca = "CA"
+        public static let ca = "CA"
 
-        static let dns = "DNS"
+        public static let dns = "DNS"
 
-        static let faq = "FAQ"
+        public static let faq = "FAQ"
 
-        static let http = "HTTP"
+        public static let http = "HTTP"
 
-        static let https = "HTTPS"
+        public static let https = "HTTPS"
 
-        static let httpProxy = "HTTP Proxy"
+        public static let httpProxy = "HTTP Proxy"
 
-        static let iCloud = "iCloud"
+        public static let iCloud = "iCloud"
 
-        static let ip = "IP"
+        public static let ip = "IP"
 
-        static let ipv4 = "IPv4"
+        public static let ipv4 = "IPv4"
 
-        static let ipv6 = "IPv6"
+        public static let ipv6 = "IPv6"
 
-        static let mtu = "MTU"
+        public static let mtu = "MTU"
 
-        static let openVPN = "OpenVPN"
+        public static let openVPN = "OpenVPN"
 
-        static let otp = "OTP"
+        public static let otp = "OTP"
 
-        static let pac = "PAC"
+        public static let pac = "PAC"
 
-        static let proxy = "Proxy"
+        public static let proxy = "Proxy"
 
-        static let tls = "TLS"
+        public static let tls = "TLS"
 
-        static let url = "URL"
+        public static let url = "URL"
 
-        static let uuid = "UUID"
+        public static let uuid = "UUID"
 
-        static let wifi = "Wi-Fi"
+        public static let wifi = "Wi-Fi"
 
-        static let wireGuard = "WireGuard"
+        public static let wireGuard = "WireGuard"
 
-        static let xor = "XOR"
+        public static let xor = "XOR"
     }
 }

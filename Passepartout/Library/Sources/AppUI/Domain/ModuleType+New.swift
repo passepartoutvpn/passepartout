@@ -27,7 +27,7 @@ import Foundation
 import PassepartoutKit
 
 extension ModuleType {
-    func newModule() -> any ModuleBuilder {
+    public func newModule() -> any ModuleBuilder {
         switch self {
         case .openVPN:
             return OpenVPNModule.Builder()

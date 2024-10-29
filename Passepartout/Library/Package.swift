@@ -22,6 +22,14 @@ let package = Package(
             targets: ["AppUI"]
         ),
         .library(
+            name: "AppUIMain",
+            targets: ["AppUIMain"]
+        ),
+        .library(
+            name: "AppUITV",
+            targets: ["AppUITV"]
+        ),
+        .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
         )
@@ -78,12 +86,25 @@ let package = Package(
                 "AppDataProviders",
                 "AppLibrary",
                 "Kvitto",
-                "LegacyV2",
                 "UtilsLibrary"
             ],
             resources: [
                 .process("Resources")
             ]
+        ),
+        .target(
+            name: "AppUIMain",
+            dependencies: [
+                "AppUI",
+                "LegacyV2"
+            ],
+            resources: [
+                .process("Resources")
+            ]
+        ),
+        .target(
+            name: "AppUITV",
+            dependencies: ["AppUI"]
         ),
         .target(
             name: "CommonLibrary",
@@ -113,6 +134,10 @@ let package = Package(
         .testTarget(
             name: "AppLibraryTests",
             dependencies: ["AppLibrary"]
+        ),
+        .testTarget(
+            name: "AppUIMainTests",
+            dependencies: ["AppUIMain"]
         ),
         .testTarget(
             name: "AppUITests",

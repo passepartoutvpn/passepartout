@@ -26,7 +26,7 @@
 import Foundation
 import PassepartoutKit
 
-enum AppError {
+public enum AppError {
     case emptyProfileName
 
     case malformedModule(any ModuleBuilder, error: Error)
@@ -35,7 +35,7 @@ enum AppError {
 
     case generic(PassepartoutError)
 
-    init(_ error: Error) {
+    public init(_ error: Error) {
         if let spError = error as? AppError {
             self = spError
         } else {

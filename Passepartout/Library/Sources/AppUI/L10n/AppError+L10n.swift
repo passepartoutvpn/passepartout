@@ -29,7 +29,7 @@ import PassepartoutKit
 import UtilsLibrary
 
 extension AppError: LocalizedError {
-    var errorDescription: String? {
+    public var errorDescription: String? {
         let V = Strings.Errors.App.self
         switch self {
         case .emptyProfileName:
