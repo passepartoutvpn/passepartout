@@ -136,6 +136,10 @@ let package = Package(
             dependencies: ["AppLibrary"]
         ),
         .testTarget(
+            name: "AppUIMainTests",
+            dependencies: ["AppUIMain"]
+        ),
+        .testTarget(
             name: "AppUITests",
             dependencies: ["AppUI"]
         )

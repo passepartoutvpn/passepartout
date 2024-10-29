@@ -25,6 +25,13 @@
         "identifier" : "AppUITests",
         "name" : "AppUITests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Passepartout\/Library",
+        "identifier" : "AppUIMainTests",
+        "name" : "AppUIMainTests"
+      }
     }
   ],
   "version" : 1

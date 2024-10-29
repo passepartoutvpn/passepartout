@@ -24,7 +24,7 @@
 //
 
 @testable import AppLibrary
-@testable import AppUI
+@testable import AppUIMain
 import Combine
 import Foundation
 import PassepartoutKit
