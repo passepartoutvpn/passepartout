@@ -75,7 +75,7 @@ private extension AppMenu {
     }
 
     var profilesList: some View {
-        ForEach(profileManager.headers, id: \.self, content: profileToggle)
+        ForEach(profileManager.headers, id: \.id, content: profileToggle)
     }
 
     func profileToggle(for header: ProfileHeader) -> some View {
