@@ -55,6 +55,7 @@ public struct AppMenu: View {
         Divider()
         profilesList
         Divider()
+        aboutButton
         quitButton
     }
 }
@@ -103,6 +104,13 @@ private extension AppMenu {
                     pp_log(.app, .error, "Unable to toggle profile \(header.id) from menu: \(error)")
                 }
             }
+        }
+    }
+
+    var aboutButton: some View {
+        Button("\(Strings.Global.about)...") {
+            NSApp.activate(ignoringOtherApps: true)
+            NSApp.orderFrontStandardAboutPanel(self)
         }
     }
 
