@@ -25,6 +25,7 @@
 
 import PassepartoutKit
 import SwiftUI
+import UtilsLibrary
 
 extension OpenVPNView {
     struct CredentialsView: View {
@@ -44,9 +45,6 @@ extension OpenVPNView {
         private var builder = OpenVPN.Credentials.Builder()
 
         @State
-        private var otp = ""
-
-        @State
         private var paywallReason: PaywallReason?
 
         var body: some View {
@@ -60,16 +58,17 @@ extension OpenVPNView {
             .navigationTitle(Strings.Modules.Openvpn.credentials)
             .onLoad {
                 builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
+                builder.otp = nil
             }
             .onChange(of: builder) {
-                if isEligibleForInteractiveLogin, isAuthenticating {
-                    credentials = $0.buildForAuthentication(otp: otp)
+                var copy = $0
+                if isEligibleForInteractiveLogin {
+                    copy.otp = copy.otp?.nilIfEmpty
                 } else {
-                    credentials = $0.build()
+                    copy.otpMethod = .none
+                    copy.otp = nil
                 }
-            }
-            .onChange(of: otp) {
-                credentials = builder.buildForAuthentication(otp: $0)
+                credentials = copy.build()
             }
             .modifier(PaywallModifier(reason: $paywallReason))
         }
@@ -135,9 +134,13 @@ private extension OpenVPNView.CredentialsView {
             ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
                 .textContentType(.password)
 
-            if isEligibleForInteractiveLogin, isAuthenticating && builder.otpMethod != .none {
-                ThemeSecureField(title: Strings.Unlocalized.otp, text: $otp, placeholder: Strings.Placeholders.secret)
-                    .textContentType(.oneTimeCode)
+            if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
+                ThemeSecureField(
+                    title: Strings.Unlocalized.otp,
+                    text: $builder.otp ?? "",
+                    placeholder: Strings.Placeholders.secret
+                )
+                .textContentType(.oneTimeCode)
             }
         }
         .themeSection(footer: inputFooter)
@@ -146,6 +149,7 @@ private extension OpenVPNView.CredentialsView {
     var inputFooter: String? {
         if isAuthenticating {
             return builder.otpMethod.localizedDescription(style: .approachDescription)
+                .nilIfEmpty
         }
         return nil
     }
