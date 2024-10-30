@@ -1,5 +1,6 @@
 #!/bin/bash
 DESTINATION="Passepartout/Library/Sources/CommonLibrary/Resources/API"
+API_VERSION="v5"
 
 mkdir tmp
 cd tmp
@@ -11,4 +12,4 @@ cd ../..
 
 rm -rf $DESTINATION
 mkdir -p $DESTINATION
-cp -rp tmp/api/v5 $DESTINATION
+cp -rp tmp/api/$API_VERSION $DESTINATION
