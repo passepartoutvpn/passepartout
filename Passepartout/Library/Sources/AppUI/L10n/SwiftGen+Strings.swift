@@ -510,8 +510,10 @@ public enum Strings {
   }
   public enum Theme {
     public enum Confirmation {
-      /// Are you sure?
-      public static let message = Strings.tr("Localizable", "theme.confirmation.message", fallback: "Are you sure?")
+      /// Are you sure you want to proceed with this operation?
+      public static let message = Strings.tr("Localizable", "theme.confirmation.message", fallback: "Are you sure you want to proceed with this operation?")
+      /// Confirm
+      public static let ok = Strings.tr("Localizable", "theme.confirmation.ok", fallback: "Confirm")
     }
   }
   public enum Ui {
