@@ -510,10 +510,16 @@ public enum Strings {
   }
   public enum Theme {
     public enum Confirmation {
+      /// Cancel
+      public static let cancel = Strings.tr("Localizable", "theme.confirmation.cancel", fallback: "Cancel")
       /// Are you sure you want to proceed with this operation?
       public static let message = Strings.tr("Localizable", "theme.confirmation.message", fallback: "Are you sure you want to proceed with this operation?")
       /// Confirm
       public static let ok = Strings.tr("Localizable", "theme.confirmation.ok", fallback: "Confirm")
+    }
+    public enum LockScreen {
+      /// Passepartout is locked
+      public static let reason = Strings.tr("Localizable", "theme.lock_screen.reason", fallback: "Passepartout is locked")
     }
   }
   public enum Ui {
@@ -663,10 +669,6 @@ public enum Strings {
         public static let keepsInMenu = Strings.tr("Localizable", "views.settings.rows.keeps_in_menu", fallback: "Keep in menu bar")
         /// Lock in background
         public static let locksInBackground = Strings.tr("Localizable", "views.settings.rows.locks_in_background", fallback: "Lock in background")
-        public enum LocksInBackground {
-          /// Passepartout is locked
-          public static let message = Strings.tr("Localizable", "views.settings.rows.locks_in_background.message", fallback: "Passepartout is locked")
-        }
       }
       public enum Sections {
         public enum Icloud {

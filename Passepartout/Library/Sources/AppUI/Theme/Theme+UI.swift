@@ -156,7 +156,7 @@ struct ThemeConfirmationModifier: ViewModifier {
         content
             .confirmationDialog(title, isPresented: $isPresented, titleVisibility: .visible) {
                 Button(Strings.Theme.Confirmation.ok, role: isDestructive ? .destructive : nil, action: action)
-                Text(Strings.Global.cancel)
+                Text(Strings.Theme.Confirmation.cancel)
             } message: {
                 Text(Strings.Theme.Confirmation.message)
             }
@@ -349,7 +349,7 @@ struct ThemeLockScreenModifier: ViewModifier {
         do {
             let isAuthorized = try await context.evaluatePolicy(
                 policy,
-                localizedReason: Strings.Views.Settings.Rows.LocksInBackground.message
+                localizedReason: Strings.Theme.LockScreen.reason
             )
             return isAuthorized
         } catch {
