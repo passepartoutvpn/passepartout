@@ -26,20 +26,19 @@
 #if os(macOS)
 
 import AppUIMain
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        configureAppWindow()
+        hideIfLoginItem()
         configure()
     }
 
-    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-        if confirmsQuit {
-            return quitConfirmationAlert()
-        }
-        return .terminateNow
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        AppWindow.shared.isVisible = false
+        return !keepsInMenu
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
@@ -48,37 +47,23 @@ extension AppDelegate: NSApplicationDelegate {
 }
 
 private extension AppDelegate {
+    var keepsInMenu: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: AppPreference.keepsInMenu.key)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: AppPreference.keepsInMenu.key)
+        }
+    }
+
     var isStartedFromLoginItem: Bool {
         NSApp.isHidden
     }
 
-    func configureAppWindow() {
+    func hideIfLoginItem() {
         if isStartedFromLoginItem {
             AppWindow.shared.isVisible = false
         }
-        AppWindow.shared.removeCloseButton()
-    }
-
-    func quitConfirmationAlert() -> NSApplication.TerminateReply {
-        let alert = NSAlert()
-        alert.alertStyle = .warning
-        alert.messageText = Strings.Alerts.ConfirmQuit.title(BundleConfiguration.mainDisplayName)
-        alert.informativeText = Strings.Alerts.ConfirmQuit.message
-        alert.addButton(withTitle: Strings.Global.ok)
-        alert.addButton(withTitle: Strings.Global.cancel)
-        alert.addButton(withTitle: Strings.Global.doNotAskAgain)
-
-        switch alert.runModal() {
-        case .alertSecondButtonReturn:
-            return .terminateCancel
-
-        case .alertThirdButtonReturn:
-            confirmsQuit = false
-
-        default:
-            break
-        }
-        return .terminateNow
     }
 }
 

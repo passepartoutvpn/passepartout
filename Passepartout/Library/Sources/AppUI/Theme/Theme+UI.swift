@@ -347,7 +347,7 @@ struct ThemeLockScreenModifier: ViewModifier {
         do {
             let isAuthorized = try await context.evaluatePolicy(
                 policy,
-                localizedReason: Strings.Views.Settings.Rows.LockInBackground.message
+                localizedReason: Strings.Views.Settings.Rows.LocksInBackground.message
             )
             return isAuthorized
         } catch {

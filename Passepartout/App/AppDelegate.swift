@@ -30,10 +30,6 @@ import SwiftUI
 
 @MainActor
 final class AppDelegate: NSObject {
-
-    @AppStorage(AppPreference.confirmsQuit.key)
-    var confirmsQuit = true
-
     let context: AppContext = .shared
 //    let context: AppContext = .mock(withRegistry: .shared)
 

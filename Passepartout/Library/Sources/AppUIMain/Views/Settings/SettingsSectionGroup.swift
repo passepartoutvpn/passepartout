@@ -31,8 +31,8 @@ import UtilsLibrary
 
 struct SettingsSectionGroup: View {
 
-    @AppStorage(AppPreference.confirmsQuit.key)
-    private var confirmsQuit = true
+    @AppStorage(AppPreference.keepsInMenu.key)
+    private var keepsInMenu = false
 
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
@@ -48,7 +48,7 @@ struct SettingsSectionGroup: View {
     var body: some View {
         Group {
 #if os(macOS)
-            confirmsQuitToggle
+            keepsInMenuToggle
 #endif
 #if os(iOS)
             lockInBackgroundToggle
@@ -66,12 +66,12 @@ struct SettingsSectionGroup: View {
 }
 
 private extension SettingsSectionGroup {
-    var confirmsQuitToggle: some View {
-        Toggle(Strings.Views.Settings.Rows.confirmQuit, isOn: $confirmsQuit)
+    var keepsInMenuToggle: some View {
+        Toggle(Strings.Views.Settings.Rows.keepsInMenu, isOn: $keepsInMenu)
     }
 
     var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Settings.Rows.lockInBackground, isOn: $locksInBackground)
+        Toggle(Strings.Views.Settings.Rows.locksInBackground, isOn: $locksInBackground)
     }
 
     var eraseCloudKitButton: some View {

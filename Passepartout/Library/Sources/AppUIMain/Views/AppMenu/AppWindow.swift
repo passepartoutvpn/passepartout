@@ -36,7 +36,7 @@ public final class AppWindow {
             NSApp.activationPolicy() == .regular && window.isVisible
         }
         set {
-            NSApp.setActivationPolicy(newValue ? .regular : .prohibited)
+            NSApp.setActivationPolicy(newValue ? .regular : .accessory)
             if newValue {
                 NSApp.activate(ignoringOtherApps: true)
                 window.makeKeyAndOrderFront(self)
@@ -47,8 +47,8 @@ public final class AppWindow {
     private init() {
     }
 
-    public func removeCloseButton() {
-        window.styleMask.remove(.closable)
+    public func close() {
+        window.close()
     }
 }
 

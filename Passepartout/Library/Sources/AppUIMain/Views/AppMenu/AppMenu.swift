@@ -50,11 +50,12 @@ public struct AppMenu: View {
     public var body: some View {
         versionItem
         Divider()
-        dockToggle
+        showToggle
         loginToggle
         Divider()
         profilesList
         Divider()
+        aboutButton
         quitButton
     }
 }
@@ -64,9 +65,9 @@ private extension AppMenu {
         Text(BundleConfiguration.mainVersionString)
     }
 
-    var dockToggle: some View {
-        Button(model.isVisible ? Strings.Global.hide : Strings.Global.show) {
-            model.isVisible.toggle()
+    var showToggle: some View {
+        Button(Strings.Global.show) {
+            model.isVisible = true
         }
     }
 
@@ -100,6 +101,13 @@ private extension AppMenu {
                     pp_log(.app, .error, "Unable to toggle profile \(header.id) from menu: \(error)")
                 }
             }
+        }
+    }
+
+    var aboutButton: some View {
+        Button("\(Strings.Global.about)...") {
+            NSApp.activate(ignoringOtherApps: true)
+            NSApp.orderFrontStandardAboutPanel(self)
         }
     }
 
