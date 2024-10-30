@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import FlagKit
 #if canImport(LocalAuthentication)
 import LocalAuthentication
 #endif
@@ -462,7 +463,7 @@ public struct ThemeCountryFlag: View {
     public var body: some View {
         Group {
             if let code {
-                let image = Image("flags/\(code.lowercased())")
+                let image = Image(code, bundle: FlagKit.assetBundle)
                     .resizable()
 
                 if let tip = countryTip?(code) {

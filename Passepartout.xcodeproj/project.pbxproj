@@ -13,7 +13,6 @@
 		0E7C3CCD2C9AF44600B72E69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */; };
 		0E7E3D692B9345FD002BBDB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */; };
 		0E7E3D6B2B9345FD002BBDB4 /* PassepartoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */; };
-		0E8944A62CC7DC950051B1EB /* Flags.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E8944A52CC7DC950051B1EB /* Flags.xcassets */; };
 		0E94EE582B93554B00588243 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */; };
 		0EB08B982CA46F4900A02591 /* AppPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EB08B962CA46F4900A02591 /* AppPlist.strings */; };
 		0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */; };
@@ -106,7 +105,6 @@
 		0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassepartoutApp.swift; sourceTree = "<group>"; };
 		0E7E3D662B9345FD002BBDB4 /* Tunnel.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Tunnel.entitlements; sourceTree = "<group>"; };
 		0E7E3D672B9345FD002BBDB4 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
-		0E8944A52CC7DC950051B1EB /* Flags.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Flags.xcassets; sourceTree = "<group>"; };
 		0E8D852F2C328CA1005493DE /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0E94EE5C2B93570600588243 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tunnel.plist; sourceTree = "<group>"; };
 		0EB08B972CA46F4900A02591 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppPlist.strings; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				0E7C3CCC2C9AF44600B72E69 /* AppDelegate.swift */,
 				0EB08B962CA46F4900A02591 /* AppPlist.strings */,
 				0E7E3D5C2B9345FD002BBDB4 /* Assets.xcassets */,
-				0E8944A52CC7DC950051B1EB /* Flags.xcassets */,
 				0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */,
 				0E7E3D5F2B9345FD002BBDB4 /* PassepartoutApp.swift */,
 			);
@@ -407,7 +404,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E8944A62CC7DC950051B1EB /* Flags.xcassets in Resources */,
 				0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */,
 				0E7E3D692B9345FD002BBDB4 /* Assets.xcassets in Resources */,
 				0EB08B982CA46F4900A02591 /* AppPlist.strings in Resources */,

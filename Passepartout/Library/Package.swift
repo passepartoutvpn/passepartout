@@ -44,7 +44,8 @@ let package = Package(
         .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go", from: "0.9.1"),
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-wireguard-go", revision: "ea39fa396e98cfd2b9a235f0a801aaf03a37e30a"),
 //        .package(path: "../../../passepartoutkit-source-wireguard-go"),
-        .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0")
+        .package(url: "https://github.com/Cocoanetics/Kvitto", from: "1.0.0"),
+        .package(url: "https://github.com/madebybowtie/FlagKit", from: "2.3.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -85,6 +86,7 @@ let package = Package(
                 "AppDataProfiles",
                 "AppDataProviders",
                 "AppLibrary",
+                "FlagKit",
                 "Kvitto",
                 "UtilsLibrary"
             ],
