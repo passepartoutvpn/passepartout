@@ -32,8 +32,10 @@ public struct LockableView<Content: View, LockedContent: View>: View {
     @Environment(\.scenePhase)
     private var scenePhase
 
-    @Binding
-    private var locksInBackground: Bool
+    // unobserved here, observed in LockedContentWrapper
+    private let lock: Lock
+
+    private let locksInBackground: Bool
 
     private let content: () -> Content
 
@@ -41,42 +43,38 @@ public struct LockableView<Content: View, LockedContent: View>: View {
 
     private let unlockBlock: () async -> Bool
 
-    @ObservedObject
-    private var lock: Lock = .shared
-
-    @Binding
-    private var state: Lock.State
-
+    @MainActor
     public init(
-        locksInBackground: Binding<Bool>,
+        locksInBackground: Bool,
         content: @escaping () -> Content,
         lockedContent: @escaping () -> LockedContent,
         unlockBlock: @escaping () async -> Bool
     ) {
-        _locksInBackground = locksInBackground
+        lock = .shared
+        self.locksInBackground = locksInBackground
         self.content = content
         self.lockedContent = lockedContent
         self.unlockBlock = unlockBlock
-
-        _state = .init {
-            Lock.shared.state
-        } set: {
-            Lock.shared.state = $0
-        }
     }
 
     public var body: some View {
-        ZStack {
+        debugChanges()
+        return ZStack {
             content()
-            if locksInBackground && state != .none {
-                lockedContent()
+            if locksInBackground {
+                LockedContentWrapperView(
+                    lock: lock,
+                    content: lockedContent
+                )
             }
-        }.onChange(of: scenePhase, perform: onScenePhase)
+        }
+        .onChange(of: scenePhase, perform: onScenePhase)
     }
 }
 
 // MARK: -
 
+@MainActor
 private final class Lock: ObservableObject {
     enum State {
         case none
@@ -88,7 +86,8 @@ private final class Lock: ObservableObject {
 
     static let shared = Lock()
 
-    @Published var state: State = .locked
+    @Published
+    var state: State = .locked
 
     private init() {
     }
@@ -96,6 +95,7 @@ private final class Lock: ObservableObject {
 
 // MARK: -
 
+@MainActor
 private extension LockableView {
     func onScenePhase(_ scenePhase: ScenePhase) {
         switch scenePhase {
@@ -103,8 +103,8 @@ private extension LockableView {
             unlockIfNeeded()
 
         case .inactive:
-            if state == .none {
-                state = .covered
+            if lock.state == .none {
+                lock.state = .covered
             }
 
         case .background:
@@ -119,28 +119,45 @@ private extension LockableView {
         guard locksInBackground else {
             return
         }
-        state = .locked
+        lock.state = .locked
     }
 
     func unlockIfNeeded() {
         guard locksInBackground else {
-            state = .none
+            lock.state = .none
             return
         }
-        switch state {
+        switch lock.state {
         case .none:
             break
 
         case .covered:
-            state = .none
+            lock.state = .none
 
         case .locked:
-            Task { @MainActor in
+            Task {
                 guard await unlockBlock() else {
                     return
                 }
-                state = .none
+                lock.state = .none
             }
+        }
+    }
+}
+
+// MARK: -
+
+private struct LockedContentWrapperView<Content>: View where Content: View {
+
+    @ObservedObject
+    var lock: Lock
+
+    @ViewBuilder
+    let content: Content
+
+    var body: some View {
+        if lock.state != .none {
+            content
         }
     }
 }
