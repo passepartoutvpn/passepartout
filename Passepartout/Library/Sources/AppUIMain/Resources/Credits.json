@@ -2,10 +2,6 @@
     "author": "Davide De Rosa",
     "licenses": [
         {
-            "name": "FlagKit",
-            "licenseName": "MIT",
-            "licenseURL": "https://raw.githubusercontent.com/madebybowtie/FlagKit/master/LICENSE"
-        }, {
             "name": "GenericJSON",
             "licenseName": "MIT",
             "licenseURL": "https://raw.githubusercontent.com/iwill/generic-json-swift/master/LICENSE"
