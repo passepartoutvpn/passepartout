@@ -50,7 +50,7 @@ public struct AppMenu: View {
     public var body: some View {
         versionItem
         Divider()
-        dockToggle
+        showToggle
         loginToggle
         Divider()
         profilesList
@@ -65,12 +65,9 @@ private extension AppMenu {
         Text(BundleConfiguration.mainVersionString)
     }
 
-    var dockToggle: some View {
-        Button(model.isVisible ? Strings.Global.hide : Strings.Global.show) {
-            model.isVisible.toggle()
-            if !model.isVisible {
-                AppWindow.shared.close()
-            }
+    var showToggle: some View {
+        Button(Strings.Global.show) {
+            model.isVisible = true
         }
     }
 

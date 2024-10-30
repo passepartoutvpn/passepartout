@@ -50,10 +50,6 @@ public final class AppWindow {
     public func close() {
         window.close()
     }
-
-    public func removeCloseButton() {
-        window.styleMask.remove(.closable)
-    }
 }
 
 private extension AppWindow {

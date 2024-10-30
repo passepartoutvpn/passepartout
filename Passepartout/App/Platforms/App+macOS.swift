@@ -31,7 +31,7 @@ import SwiftUI
 
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        configureAppWindow()
+        hideIfLoginItem()
         configure()
     }
 
@@ -40,6 +40,11 @@ extension AppDelegate: NSApplicationDelegate {
             return quitConfirmationAlert()
         }
         return .terminateNow
+    }
+
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        AppWindow.shared.isVisible = false
+        return false
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
@@ -52,11 +57,10 @@ private extension AppDelegate {
         NSApp.isHidden
     }
 
-    func configureAppWindow() {
+    func hideIfLoginItem() {
         if isStartedFromLoginItem {
             AppWindow.shared.isVisible = false
         }
-        AppWindow.shared.removeCloseButton()
     }
 
     func quitConfirmationAlert() -> NSApplication.TerminateReply {
