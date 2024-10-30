@@ -114,7 +114,8 @@
 
 // MARK: - Theme
 
-"theme.confirmation.message" = "Are you sure?";
+"theme.confirmation.ok" = "Confirm";
+"theme.confirmation.message" = "Are you sure you want to proceed with this operation?";
 
 // MARK: - Views
 

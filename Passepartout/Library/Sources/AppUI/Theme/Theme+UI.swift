@@ -148,12 +148,14 @@ struct ThemeConfirmationModifier: ViewModifier {
 
     let title: String
 
+    let isDestructive: Bool
+
     let action: () -> Void
 
     func body(content: Content) -> some View {
         content
-            .confirmationDialog(title, isPresented: $isPresented) {
-                Button(Strings.Global.ok, action: action)
+            .confirmationDialog(title, isPresented: $isPresented, titleVisibility: .visible) {
+                Button(Strings.Theme.Confirmation.ok, role: isDestructive ? .destructive : nil, action: action)
                 Text(Strings.Global.cancel)
             } message: {
                 Text(Strings.Theme.Confirmation.message)

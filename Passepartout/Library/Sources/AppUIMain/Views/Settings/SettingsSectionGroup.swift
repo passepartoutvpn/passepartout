@@ -80,7 +80,8 @@ private extension SettingsSectionGroup {
         }
         .themeConfirmation(
             isPresented: $isConfirmingEraseiCloud,
-            title: Strings.Views.Settings.Rows.eraseIcloud
+            title: Strings.Views.Settings.Rows.eraseIcloud,
+            isDestructive: true
         ) {
             isErasingiCloud = true
             Task {
