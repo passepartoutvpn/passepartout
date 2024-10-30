@@ -26,7 +26,7 @@
 import Foundation
 
 public enum AppPreference: String {
-    case confirmsQuit
+    case keepsInMenu
 
     case locksInBackground
 

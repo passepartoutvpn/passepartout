@@ -11,14 +11,6 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum Strings {
   public enum Alerts {
-    public enum ConfirmQuit {
-      /// The VPN, if enabled, will still run in the background. Do you want to quit?
-      public static let message = Strings.tr("Localizable", "alerts.confirm_quit.message", fallback: "The VPN, if enabled, will still run in the background. Do you want to quit?")
-      /// Quit %@
-      public static func title(_ p1: Any) -> String {
-        return Strings.tr("Localizable", "alerts.confirm_quit.title", String(describing: p1), fallback: "Quit %@")
-      }
-    }
     public enum Iap {
       public enum Restricted {
         /// The requested feature is unavailable in this build.
@@ -663,15 +655,15 @@ public enum Strings {
     }
     public enum Settings {
       public enum Rows {
-        /// Ask before quit
-        public static let confirmQuit = Strings.tr("Localizable", "views.settings.rows.confirm_quit", fallback: "Ask before quit")
         /// Erase iCloud store
         public static let eraseIcloud = Strings.tr("Localizable", "views.settings.rows.erase_icloud", fallback: "Erase iCloud store")
+        /// Keep in menu bar
+        public static let keepsInMenu = Strings.tr("Localizable", "views.settings.rows.keeps_in_menu", fallback: "Keep in menu bar")
         /// Lock in background
-        public static let lockInBackground = Strings.tr("Localizable", "views.settings.rows.lock_in_background", fallback: "Lock in background")
-        public enum LockInBackground {
+        public static let locksInBackground = Strings.tr("Localizable", "views.settings.rows.locks_in_background", fallback: "Lock in background")
+        public enum LocksInBackground {
           /// Passepartout is locked
-          public static let message = Strings.tr("Localizable", "views.settings.rows.lock_in_background.message", fallback: "Passepartout is locked")
+          public static let message = Strings.tr("Localizable", "views.settings.rows.locks_in_background.message", fallback: "Passepartout is locked")
         }
       }
       public enum Sections {
