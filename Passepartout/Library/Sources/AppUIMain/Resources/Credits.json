@@ -1,35 +1,44 @@
 {
     "author": "Davide De Rosa",
-    "licenses": [{
-        "name": "Kvitto",
-        "licenseName": "BSD",
-        "licenseURL": "https://raw.githubusercontent.com/Cocoanetics/Kvitto/develop/LICENSE"
-    }, {
-        "name": "lzo",
-        "licenseName": "GPLv2",
-        "licenseURL": "https://www.gnu.org/licenses/gpl-2.0.txt"
-    }, {
-        "name": "OpenSSL",
-        "licenseName": "OpenSSL",
-        "licenseURL": "https://raw.githubusercontent.com/openssl/openssl/master/LICENSE.txt"
-    }, {
-        "name": "SwiftGen",
-        "licenseName": "MIT",
-        "licenseURL": "https://raw.githubusercontent.com/SwiftGen/SwiftGen/master/LICENCE"
-    }],
-    "notices": [{
-        "name": "Circle Icons",
-        "message": "The logo is taken from the awesome Circle Icons set by Nick Roach."
-    }, {
-        "name": "Country flags",
-        "message": "The country flags are taken from: https://github.com/lipis/flag-icon-css/"
-    }, {
-        "name": "OpenVPN",
-        "message": "© Copyright 2024 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc."
-    }, {
-        "name": "WireGuard",
-        "message": "© Copyright 2015-2024 Jason A. Donenfeld. All Rights Reserved. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld."
-    }],
+    "licenses": [
+        {
+            "name": "FlagKit",
+            "licenseName": "MIT",
+            "licenseURL": "https://raw.githubusercontent.com/madebybowtie/FlagKit/master/LICENSE"
+        }, {
+            "name": "GenericJSON",
+            "licenseName": "MIT",
+            "licenseURL": "https://raw.githubusercontent.com/iwill/generic-json-swift/master/LICENSE"
+        }, {
+            "name": "Kvitto",
+            "licenseName": "BSD",
+            "licenseURL": "https://raw.githubusercontent.com/Cocoanetics/Kvitto/develop/LICENSE"
+        }, {
+            "name": "lzo",
+            "licenseName": "GPLv2",
+            "licenseURL": "https://www.gnu.org/licenses/gpl-2.0.txt"
+        }, {
+            "name": "OpenSSL",
+            "licenseName": "OpenSSL",
+            "licenseURL": "https://raw.githubusercontent.com/openssl/openssl/master/LICENSE.txt"
+        }, {
+            "name": "SwiftGen",
+            "licenseName": "MIT",
+            "licenseURL": "https://raw.githubusercontent.com/SwiftGen/SwiftGen/master/LICENCE"
+        }
+    ],
+    "notices": [
+        {
+            "name": "Circle Icons",
+            "message": "The logo is taken from the awesome Circle Icons set by Nick Roach."
+        }, {
+            "name": "OpenVPN",
+            "message": "© Copyright 2024 OpenVPN | OpenVPN is a registered trademark of OpenVPN, Inc."
+        }, {
+            "name": "WireGuard",
+            "message": "© Copyright 2015-2024 Jason A. Donenfeld. All Rights Reserved. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld."
+        }
+    ],
     "translations": {
         "de": ["Christian Lederer", "Theodor Tietze"],
         "el": ["Konstantinos Koukoulakis"],
