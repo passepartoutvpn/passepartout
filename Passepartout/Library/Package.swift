@@ -36,7 +36,7 @@ let package = Package(
     ],
     dependencies: [
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", from: "0.9.0"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "61c0a13efecbd46993a8c8dfed17c599f66c7986"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "7426954e8ec84e6ddf6c8cd415bfa2c5c7064534"),
 //        .package(path: "../../../passepartoutkit-source"),
         .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", from: "0.9.1"),
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", revision: "031863a1cd683962a7dfe68e20b91fa820a1ecce"),
@@ -109,12 +109,12 @@ let package = Package(
         .target(
             name: "CommonLibrary",
             dependencies: [
-                .product(name: "PassepartoutAPIBundle", package: "passepartoutkit-source"),
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source"),
                 .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-source-openvpn-openssl"),
                 .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")
             ],
             resources: [
+                .copy("API"),
                 .process("Resources")
             ]
         ),

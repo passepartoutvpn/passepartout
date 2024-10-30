@@ -18,3 +18,4 @@ default.profraw
 .build
 .bundle
 .env.secret*
+tmp
