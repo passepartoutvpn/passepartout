@@ -42,7 +42,7 @@ extension PassepartoutApp {
                 .onOpenURL { url in
                     ImporterPipe.shared.send([url])
                 }
-                .themeLockScreen()
+                .themeLockScreen(theme)
         }
     }
 }

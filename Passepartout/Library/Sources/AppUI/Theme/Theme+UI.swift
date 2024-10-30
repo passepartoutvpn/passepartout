@@ -68,7 +68,7 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
                 modal()
                     .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
                     .interactiveDismissDisabled(!isInteractive)
-                    .themeLockScreen()
+                    .themeLockScreen(theme)
             }
     }
 
@@ -97,7 +97,7 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
                 modal($0)
                     .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
                     .interactiveDismissDisabled(!isInteractive)
-                    .themeLockScreen()
+                    .themeLockScreen(theme)
             }
     }
 
@@ -129,13 +129,13 @@ struct ThemeBooleanPopoverModifier<Popover>: ViewModifier where Popover: View {
                 .popover(isPresented: $isPresented) {
                     popover
                         .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
-                        .themeLockScreen()
+                        .themeLockScreen(theme)
                 }
         } else {
             content
                 .sheet(isPresented: $isPresented) {
                     popover
-                        .themeLockScreen()
+                        .themeLockScreen(theme)
                 }
         }
     }
@@ -322,6 +322,9 @@ struct ThemeLockScreenModifier: ViewModifier {
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
 
+    @ObservedObject
+    var theme: Theme
+
     func body(content: Content) -> some View {
         LockableView(
             locksInBackground: $locksInBackground,
@@ -331,6 +334,7 @@ struct ThemeLockScreenModifier: ViewModifier {
             lockedContent: LogoView.init,
             unlockBlock: Self.unlockScreenBlock
         )
+        .environmentObject(theme)
     }
 
     private static func unlockScreenBlock() async -> Bool {
