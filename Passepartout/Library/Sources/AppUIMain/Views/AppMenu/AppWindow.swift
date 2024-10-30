@@ -40,15 +40,13 @@ public final class AppWindow {
             if newValue {
                 NSApp.activate(ignoringOtherApps: true)
                 window.makeKeyAndOrderFront(self)
+            } else {
+                window.close()
             }
         }
     }
 
     private init() {
-    }
-
-    public func close() {
-        window.close()
     }
 }
 
