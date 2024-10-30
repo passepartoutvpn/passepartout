@@ -1,14 +1,2 @@
-* Improve macOS window lifecycle (#780)
-* Fix crash on lock screen (#779)
-* Fix duplicated message on import error
-* Show in Mac status bar plus Login Item (#773)
-* Fix iOS app not reacting to open URL (#770)
-* Import OpenVPN configuration (#765)
-* Back up profiles to Core Data (#762)
-* Save provider favorite servers (#758)
-* Prevent iPad dismiss when tapping outside (#737)
-* Purge stale NetworkExtension/keychain data (#728)
-* Add initial support for providers (#723)
-* In-place NetworkExtension profiles (#715)
-* Render multiple translators in Credits (#701)
-* Render profile UUID as quartets (#700)
+* OpenVPN OTP is persisted with the password (#785)
+* Fix lock view flickering on first appearance
