@@ -327,7 +327,7 @@ struct ThemeLockScreenModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         LockableView(
-            locksInBackground: $locksInBackground,
+            locksInBackground: locksInBackground,
             content: {
                 content
             },
