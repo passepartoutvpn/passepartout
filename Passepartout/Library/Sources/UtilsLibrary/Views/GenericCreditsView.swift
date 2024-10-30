@@ -107,6 +107,7 @@ private extension GenericCreditsView {
                     ScrollView {
                         Text(unwrapped)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                            .monospaced()
                             .padding()
                     }
                 }
