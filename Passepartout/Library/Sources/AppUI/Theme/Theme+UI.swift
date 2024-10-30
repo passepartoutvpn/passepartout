@@ -460,28 +460,27 @@ public struct ThemeCountryFlag: View {
     }
 
     public var body: some View {
-        Group {
-            if let code {
-                let image = Text(verbatim: .emoji(forCountryCode: code))
-                    .font(.system(size: 15))
+        textView
+            .font(.body)
+    }
 
-                if let tip = countryTip?(code) {
-                    image
-                        .help(tip)
-                } else {
-                    image
-                }
-            } else {
-                let image = Image(systemName: "globe")
-                if let placeholderTip {
-                    image
-                        .help(placeholderTip)
-                } else {
-                    image
-                }
-            }
+    @ViewBuilder
+    private var textView: some View {
+        if let code {
+            text(withString: .emoji(forCountryCode: code), tip: countryTip?(code))
+        } else {
+            text(withString: "🌐", tip: placeholderTip)
         }
-        .frame(width: 20, height: 15)
+    }
+
+    @ViewBuilder
+    private func text(withString string: String, tip: String?) -> some View {
+        if let tip {
+            Text(verbatim: string)
+                .help(tip)
+        } else {
+            Text(verbatim: string)
+        }
     }
 }
 
