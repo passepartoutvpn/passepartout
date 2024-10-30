@@ -63,7 +63,7 @@ extension OpenVPNView {
             .onChange(of: builder) {
                 var copy = $0
                 if isEligibleForInteractiveLogin {
-                    copy.otp = copy.otp?.nilIfEmpty
+                    copy.otp = copy.otp ?? ""
                 } else {
                     copy.otpMethod = .none
                     copy.otp = nil
