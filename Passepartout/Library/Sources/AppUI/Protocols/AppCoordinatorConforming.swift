@@ -1,8 +1,8 @@
 //
-//  AppCoordinator.swift
+//  AppCoordinatorConforming.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/29/24.
+//  Created by Davide De Rosa on 10/31/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,37 +24,13 @@
 //
 
 import AppLibrary
+import Foundation
 import PassepartoutKit
-import SwiftUI
 
-// FIXME: #788, UI for Apple TV
-
-public struct AppCoordinator: View, AppCoordinatorConforming {
-    private let profileManager: ProfileManager
-
-    private let tunnel: Tunnel
-
-    private let registry: Registry
-
-    public init(profileManager: ProfileManager, tunnel: Tunnel, registry: Registry) {
-        self.profileManager = profileManager
-        self.tunnel = tunnel
-        self.registry = registry
-    }
-
-    public var body: some View {
-        ProfilesView(profileManager: profileManager)
-    }
-}
-
-struct ProfilesView: View {
-
-    @ObservedObject
-    var profileManager: ProfileManager
-
-    var body: some View {
-        ForEach(profileManager.headers, id: \.id) {
-            Text($0.name)
-        }
-    }
+public protocol AppCoordinatorConforming {
+    init(
+        profileManager: ProfileManager,
+        tunnel: Tunnel,
+        registry: Registry
+    )
 }

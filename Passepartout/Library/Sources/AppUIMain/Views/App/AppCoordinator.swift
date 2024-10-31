@@ -28,7 +28,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-public struct AppCoordinator: View {
+public struct AppCoordinator: View, AppCoordinatorConforming {
 
     @AppStorage(AppPreference.profilesLayout.key)
     private var layout: ProfilesLayout = .list
