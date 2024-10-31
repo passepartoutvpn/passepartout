@@ -26,6 +26,7 @@
         "refreshInterval": 3.0
     },
     "api": {
+        "bundlePath": "API",
         "timeoutInterval": 5.0
     },
     "log": {

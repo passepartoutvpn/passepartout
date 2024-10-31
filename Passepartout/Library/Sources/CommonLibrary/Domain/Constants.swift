@@ -100,6 +100,8 @@ public struct Constants: Decodable, Sendable {
     }
 
     public struct API: Decodable, Sendable {
+        public let bundlePath: String
+
         public let timeoutInterval: TimeInterval
     }
 

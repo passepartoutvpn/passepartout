@@ -72,7 +72,7 @@ extension API {
     ]
 
     public static let bundled: APIMapper = {
-        guard let url = Bundle.module.url(forResource: "API", withExtension: nil) else {
+        guard let url = Bundle.module.url(forResource: Constants.shared.api.bundlePath, withExtension: nil) else {
             fatalError("Unable to find bundled API")
         }
         let ws = API.V5.DefaultWebServices(
