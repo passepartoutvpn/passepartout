@@ -26,8 +26,10 @@
 @_exported import AppUI
 import Foundation
 
-public enum AppUITV: AppUIConfiguring {
-    public static func configure(with context: AppContext) {
-        AppUI.configure(with: context)
+public final class AppUITV: AppUIConfiguring {
+    public init() {
+    }
+
+    public func configure() {
     }
 }

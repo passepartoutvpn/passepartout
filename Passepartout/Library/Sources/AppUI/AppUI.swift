@@ -23,24 +23,43 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 
 public protocol AppUIConfiguring {
-    static func configure(with context: AppContext)
+    func configure(with context: AppContext)
 }
 
-public enum AppUI {
-    public static func configure(with context: AppContext) {
-        assertMissingModuleImplementations()
+public final class AppUI: AppUIConfiguring {
+    private let appUIConfiguring: AppUIConfiguring?
+
+    public init(_ appUIConfiguring: AppUIConfiguring?) {
+        self.appUIConfiguring = appUIConfiguring
+    }
+
+    public func configure(with context: AppContext) {
+        PassepartoutConfiguration.shared.configureLogging(
+            to: BundleConfiguration.urlForAppLog,
+            parameters: Constants.shared.log,
+            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
+        )
+
+        assertMissingImplementations()
+        appUIConfiguring?.configure(with: context)
+
         Task {
-            try? await context.providerManager.fetchIndex(from: API.shared)
+            try await context.providerManager.fetchIndex(from: API.shared)
+#if os(macOS)
+            // keep this for login item because scenePhase is not triggered
+            try await context.tunnel.prepare(purge: true)
+#endif
         }
     }
 }
 
-extension AppUI {
-    public static func assertMissingModuleImplementations() {
+private extension AppUI {
+    func assertMissingImplementations() {
         ModuleType.allCases.forEach { moduleType in
             let builder = moduleType.newModule()
             guard builder is ModuleTypeProviding else {

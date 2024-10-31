@@ -26,15 +26,17 @@
 @_exported import AppUI
 import Foundation
 
-public enum AppUIMain: AppUIConfiguring {
-    public static func configure(with context: AppContext) {
-        assertMissingModuleImplementations()
-        AppUI.configure(with: context)
+public final class AppUIMain: AppUIConfiguring {
+    public init() {
+    }
+
+    public func configure(with context: AppContext) {
+        assertMissingImplementations()
     }
 }
 
 private extension AppUIMain {
-    static func assertMissingModuleImplementations() {
+    func assertMissingImplementations() {
         let providerModuleTypes: Set<ModuleType> = [
             .openVPN
         ]
