@@ -37,7 +37,10 @@ extension AppDelegate: UIApplicationDelegate {
 
 extension PassepartoutApp {
     var body: some Scene {
-        WindowGroup(content: contentView)
+        WindowGroup {
+            contentView()
+                .withEnvironment(from: context, theme: theme)
+        }
     }
 }
 
