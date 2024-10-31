@@ -27,14 +27,15 @@ import AppLibrary
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
+import UtilsLibrary
 
-public struct AppCoordinator: View {
+public struct AppCoordinator: View, SizeClassProviding {
 
     @Environment(\.horizontalSizeClass)
-    private var hsClass
+    public var hsClass
 
     @Environment(\.verticalSizeClass)
-    private var vsClass
+    public var vsClass
 
     @AppStorage(AppPreference.profilesLayout.key)
     private var layout: ProfilesLayout = .list
@@ -59,7 +60,7 @@ public struct AppCoordinator: View {
     }
 
     public var body: some View {
-        if hsClass == .regular && vsClass == .regular {
+        if isBigDevice {
             AppModalCoordinator(
                 layout: $layout,
                 profileManager: profileManager,

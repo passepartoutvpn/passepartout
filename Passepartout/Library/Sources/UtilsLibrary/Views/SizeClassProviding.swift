@@ -1,8 +1,8 @@
 //
-//  App+iOS.swift
+//  SizeClassProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/28/24.
+//  Created by Davide De Rosa on 10/31/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,28 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(iOS)
-
-import AppUIMain
 import SwiftUI
 
-extension AppDelegate: UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configure(with: AppUIMain())
-        return true
-    }
+public protocol SizeClassProviding {
+    var hsClass: UserInterfaceSizeClass? { get }
+
+    var vsClass: UserInterfaceSizeClass? { get }
 }
 
-extension PassepartoutApp {
-    var body: some Scene {
-        WindowGroup {
-            contentView()
-                .onOpenURL { url in
-                    ImporterPipe.shared.send([url])
-                }
-                .themeLockScreen(theme)
-        }
+extension SizeClassProviding {
+    public var isBigDevice: Bool {
+        hsClass == .regular && vsClass == .regular
     }
 }
-
-#endif

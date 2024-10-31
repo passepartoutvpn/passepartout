@@ -35,7 +35,7 @@ public struct LongContentView: View {
     public var copySystemImage: String?
 
     public var body: some View {
-        TextEditor(text: $content)
+        contentView
             .toolbar {
                 Button {
                     copyToPasteboard(content)
@@ -43,7 +43,18 @@ public struct LongContentView: View {
                     Image(systemName: copySystemImage ?? "doc.on.doc")
                 }
             }
-        // TODO: #659, add padding as inset, let content extend beyond safe areas
+    }
+
+    @ViewBuilder
+    private var contentView: some View {
+        if #available(iOS 17, macOS 14, *) {
+            TextEditor(text: $content)
+//                .contentMargins(8)
+//                .scrollContentBackground(.hidden)
+                .scrollClipDisabled()
+        } else {
+            TextEditor(text: $content)
+        }
     }
 }
 

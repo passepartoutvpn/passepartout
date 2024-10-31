@@ -33,19 +33,8 @@ final class AppDelegate: NSObject {
     let context: AppContext = .shared
 //    let context: AppContext = .mock(withRegistry: .shared)
 
-    func configure() {
-        PassepartoutConfiguration.shared.configureLogging(
-            to: BundleConfiguration.urlForAppLog,
-            parameters: Constants.shared.log,
-            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
-        )
-        AppUI.configure(with: context)
-
-#if os(macOS)
-        // keep this for login item because scenePhase is not triggered
-        Task {
-            try await context.tunnel.prepare(purge: true)
-        }
-#endif
+    func configure(with appUIConfiguring: AppUIConfiguring) {
+        AppUI(appUIConfiguring)
+            .configure(with: context)
     }
 }

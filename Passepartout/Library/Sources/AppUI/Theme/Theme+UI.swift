@@ -106,16 +106,16 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
     }
 }
 
-struct ThemeBooleanPopoverModifier<Popover>: ViewModifier where Popover: View {
+struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding where Popover: View {
 
     @EnvironmentObject
     private var theme: Theme
 
     @Environment(\.horizontalSizeClass)
-    private var hsClass
+    var hsClass
 
     @Environment(\.verticalSizeClass)
-    private var vsClass
+    var vsClass
 
     @Binding
     var isPresented: Bool
@@ -124,7 +124,7 @@ struct ThemeBooleanPopoverModifier<Popover>: ViewModifier where Popover: View {
     let popover: Popover
 
     func body(content: Content) -> some View {
-        if hsClass == .regular && vsClass == .regular {
+        if isBigDevice {
             content
                 .popover(isPresented: $isPresented) {
                     popover
