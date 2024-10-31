@@ -27,19 +27,21 @@ import Foundation
 import PassepartoutKit
 import SwiftUI
 
-struct ConnectionStatusView: View, TunnelContextProviding, ThemeProviding {
+public struct ConnectionStatusView: View, ConnectionObserverProviding, ThemeProviding {
 
     @EnvironmentObject
-    var theme: Theme
-
-    @EnvironmentObject
-    var connectionObserver: ConnectionObserver
+    public var theme: Theme
 
     @ObservedObject
-    var tunnel: Tunnel
+    public var connectionObserver: ConnectionObserver
 
-    var body: some View {
+    public init(connectionObserver: ConnectionObserver) {
+        self.connectionObserver = connectionObserver
+    }
+
+    public var body: some View {
         Text(statusDescription)
+            .font(.headline)
             .foregroundStyle(tunnelStatusColor)
     }
 }
@@ -49,7 +51,7 @@ private extension ConnectionStatusView {
         if let lastErrorCode = connectionObserver.lastErrorCode {
             return lastErrorCode.localizedDescription
         }
-        let status = tunnelConnectionStatus
+        let status = connectionObserver.tunnelConnectionStatus
         switch status {
         case .active:
             if let dataCount = connectionObserver.dataCount {
@@ -60,7 +62,7 @@ private extension ConnectionStatusView {
 
         case .inactive:
             var desc = status.localizedDescription
-            if tunnel.currentProfile?.onDemand ?? false {
+            if connectionObserver.currentProfile?.onDemand ?? false {
                 desc += Strings.Ui.ConnectionStatus.onDemandSuffix
             }
             return desc
@@ -73,7 +75,7 @@ private extension ConnectionStatusView {
 }
 
 #Preview("Connected") {
-    ConnectionStatusView(tunnel: .mock)
+    ConnectionStatusView(connectionObserver: .mock)
         .task {
             try? await Tunnel.mock.connect(with: .mock, processor: .mock)
         }
@@ -92,7 +94,7 @@ private extension ConnectionStatusView {
     } catch {
         fatalError()
     }
-    return ConnectionStatusView(tunnel: .mock)
+    return ConnectionStatusView(connectionObserver: .mock)
         .task {
             try? await Tunnel.mock.connect(with: profile, processor: .mock)
         }

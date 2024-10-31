@@ -27,18 +27,18 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct TunnelToggleButton<Label>: View, ConnectionObserverProviding, ThemeProviding where Label: View {
-    enum Style {
+public struct TunnelToggleButton<Label>: View, ConnectionObserverProviding, ThemeProviding where Label: View {
+    public enum Style {
         case plain
 
         case color
     }
 
     @EnvironmentObject
-    var theme: Theme
+    public var theme: Theme
 
     @EnvironmentObject
-    var connectionObserver: ConnectionObserver
+    public var connectionObserver: ConnectionObserver
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -46,25 +46,45 @@ struct TunnelToggleButton<Label>: View, ConnectionObserverProviding, ThemeProvid
     @EnvironmentObject
     private var profileProcessor: ProfileProcessor
 
-    var style: Style = .plain
+    private let style: Style
 
     @ObservedObject
-    var tunnel: Tunnel
+    private var tunnel: Tunnel
 
-    let profile: Profile?
+    private let profile: Profile?
 
     @Binding
-    var nextProfileId: Profile.ID?
+    private var nextProfileId: Profile.ID?
 
-    let interactiveManager: InteractiveManager
+    private let interactiveManager: InteractiveManager
 
-    let errorHandler: ErrorHandler
+    private let errorHandler: ErrorHandler
 
-    var onProviderEntityRequired: ((Profile) -> Void)?
+    private let onProviderEntityRequired: ((Profile) -> Void)?
 
-    let label: (Bool) -> Label
+    private let label: (Bool) -> Label
 
-    var body: some View {
+    public init(
+        style: Style = .plain,
+        tunnel: Tunnel,
+        profile: Profile?,
+        nextProfileId: Binding<Profile.ID?>,
+        interactiveManager: InteractiveManager,
+        errorHandler: ErrorHandler,
+        onProviderEntityRequired: ((Profile) -> Void)? = nil,
+        label: @escaping (Bool) -> Label
+    ) {
+        self.style = style
+        self.tunnel = tunnel
+        self.profile = profile
+        _nextProfileId = nextProfileId
+        self.interactiveManager = interactiveManager
+        self.errorHandler = errorHandler
+        self.onProviderEntityRequired = onProviderEntityRequired
+        self.label = label
+    }
+
+    public var body: some View {
         Button(action: tryPerform) {
             label(canConnect)
         }
