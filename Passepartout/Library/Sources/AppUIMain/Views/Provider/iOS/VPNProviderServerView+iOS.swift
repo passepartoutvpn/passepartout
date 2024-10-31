@@ -164,10 +164,7 @@ private extension VPNProviderServerView.ServersSubview {
                 DisclosureGroup {
                     ForEach(servers, id: \.id, content: serverView)
                 } label: {
-                    HStack {
-                        ThemeCountryFlag(code)
-                        Text(code.localizedAsRegionCode ?? code)
-                    }
+                    Text("\(code.asCountryCodeEmoji) \(code.localizedAsRegionCode ?? code)")
                 }
             }
     }

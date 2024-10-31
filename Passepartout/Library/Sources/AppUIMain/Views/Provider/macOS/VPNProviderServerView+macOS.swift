@@ -71,11 +71,8 @@ extension VPNProviderServerView {
                 .width(10.0)
 
                 TableColumn(Strings.Global.region) { server in
-                    HStack {
-                        ThemeCountryFlag(server.provider.countryCode)
-                        Text(server.region)
+                    Text("\(server.provider.countryCode.asCountryCodeEmoji) \(server.region)")
                             .help(server.region)
-                    }
                 }
 
                 TableColumn(Strings.Global.address, value: \.address)

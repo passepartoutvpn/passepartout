@@ -460,14 +460,8 @@ public struct ThemeCountryFlag: View {
     }
 
     public var body: some View {
-        textView
-            .font(.body)
-    }
-
-    @ViewBuilder
-    private var textView: some View {
         if let code {
-            text(withString: .emoji(forCountryCode: code), tip: countryTip?(code))
+            text(withString: code.asCountryCodeEmoji, tip: countryTip?(code))
         } else {
             text(withString: "🌐", tip: placeholderTip)
         }
