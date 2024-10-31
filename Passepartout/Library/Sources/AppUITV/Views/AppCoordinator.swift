@@ -27,7 +27,7 @@ import AppLibrary
 import PassepartoutKit
 import SwiftUI
 
-// FIXME: ###, UI for Apple TV
+// FIXME: #788, UI for Apple TV
 
 public struct AppCoordinator: View {
     private let profileManager: ProfileManager
