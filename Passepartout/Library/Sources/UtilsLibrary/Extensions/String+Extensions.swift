@@ -46,3 +46,19 @@ extension String {
             .capitalized
     }
 }
+
+extension String {
+    public var asCountryCodeEmoji: String {
+        Self.emoji(forCountryCode: self)
+    }
+
+    public static func emoji(forCountryCode countryCode: String) -> String {
+        let points = countryCode
+            .unicodeScalars
+            .compactMap {
+                UnicodeScalar(127397 + $0.value)
+            }
+
+        return String(String.UnicodeScalarView(points))
+    }
+}

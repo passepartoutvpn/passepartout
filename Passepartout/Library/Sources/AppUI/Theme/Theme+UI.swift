@@ -24,7 +24,6 @@
 //
 
 import CommonLibrary
-import FlagKit
 #if canImport(LocalAuthentication)
 import LocalAuthentication
 #endif
@@ -454,35 +453,28 @@ public struct ThemeCountryFlag: View {
 
     private let countryTip: ((String) -> String?)?
 
-    public init(code: String?, placeholderTip: String? = nil, countryTip: ((String) -> String?)? = nil) {
+    public init(_ code: String?, placeholderTip: String? = nil, countryTip: ((String) -> String?)? = nil) {
         self.code = code
         self.placeholderTip = placeholderTip
         self.countryTip = countryTip
     }
 
     public var body: some View {
-        Group {
-            if let code {
-                let image = Image(code, bundle: FlagKit.assetBundle)
-                    .resizable()
-
-                if let tip = countryTip?(code) {
-                    image
-                        .help(tip)
-                } else {
-                    image
-                }
-            } else {
-                let image = Image(systemName: "globe")
-                if let placeholderTip {
-                    image
-                        .help(placeholderTip)
-                } else {
-                    image
-                }
-            }
+        if let code {
+            text(withString: code.asCountryCodeEmoji, tip: countryTip?(code))
+        } else {
+            text(withString: "🌐", tip: placeholderTip)
         }
-        .frame(width: 20, height: 15)
+    }
+
+    @ViewBuilder
+    private func text(withString string: String, tip: String?) -> some View {
+        if let tip {
+            Text(verbatim: string)
+                .help(tip)
+        } else {
+            Text(verbatim: string)
+        }
     }
 }
 

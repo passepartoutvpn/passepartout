@@ -158,7 +158,7 @@ private struct ProviderCountryFlag: View {
 
     var body: some View {
         ThemeCountryFlag(
-            code: provider.entity?.header.countryCode,
+            provider.entity?.header.countryCode,
             placeholderTip: Strings.Errors.App.Passepartout.missingProviderEntity,
             countryTip: {
                 $0.localizedAsRegionCode
