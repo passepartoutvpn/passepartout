@@ -129,10 +129,11 @@ extension AppModalCoordinator {
                 profileEditor: profileEditor,
                 moduleViewFactory: DefaultModuleViewFactory(),
                 modally: true,
-                path: $profilePath
-            ) {
-                modalRoute = nil
-            }
+                path: $profilePath,
+                onDismiss: {
+                    modalRoute = nil
+                }
+            )
 
         case .editProviderEntity(let profile, let module, let provider):
             ProviderEntitySelector(

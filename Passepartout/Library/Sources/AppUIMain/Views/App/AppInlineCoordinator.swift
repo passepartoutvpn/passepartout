@@ -132,10 +132,11 @@ private extension AppInlineCoordinator {
                 profileEditor: profileEditor,
                 moduleViewFactory: DefaultModuleViewFactory(),
                 modally: false,
-                path: $path
-            ) {
-                path.removeLast()
-            }
+                path: $path,
+                onDismiss: {
+                    path.removeLast()
+                }
+            )
         }
     }
 
