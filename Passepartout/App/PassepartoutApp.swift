@@ -86,6 +86,5 @@ extension PassepartoutApp {
                 break
             }
         }
-        .withEnvironment(from: context, theme: theme)
     }
 }

@@ -209,8 +209,8 @@ extension View {
         modifier(ThemeHoverListRowModifier())
     }
 
-    public func themeLockScreen(_ theme: Theme) -> some View {
-        modifier(ThemeLockScreenModifier(theme: theme))
+    public func themeLockScreen() -> some View {
+        modifier(ThemeLockScreenModifier(lockedContent: LogoView.init))
     }
 
     public func themeTip(_ text: String, edge: Edge) -> some View {

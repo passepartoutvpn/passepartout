@@ -42,7 +42,8 @@ extension PassepartoutApp {
                 .onOpenURL { url in
                     ImporterPipe.shared.send([url])
                 }
-                .themeLockScreen(theme)
+                .themeLockScreen()
+                .withEnvironment(from: context, theme: theme)
         }
     }
 }

@@ -73,10 +73,12 @@ extension PassepartoutApp {
     var body: some Scene {
         Window(appName, id: appName, content: contentView)
             .defaultSize(width: 600, height: 400)
+            .withEnvironment(from: context, theme: theme)
 
         Settings {
             SettingsView(profileManager: context.profileManager)
                 .frame(minWidth: 300, minHeight: 200)
+                .withEnvironment(from: context, theme: theme)
         }
         MenuBarExtra {
             AppMenu()

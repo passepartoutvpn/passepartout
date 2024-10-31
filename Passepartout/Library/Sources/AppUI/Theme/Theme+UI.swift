@@ -68,7 +68,7 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
                 modal()
                     .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
                     .interactiveDismissDisabled(!isInteractive)
-                    .themeLockScreen(theme)
+                    .themeLockScreen()
             }
     }
 
@@ -97,7 +97,7 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
                 modal($0)
                     .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
                     .interactiveDismissDisabled(!isInteractive)
-                    .themeLockScreen(theme)
+                    .themeLockScreen()
             }
     }
 
@@ -129,13 +129,13 @@ struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding wh
                 .popover(isPresented: $isPresented) {
                     popover
                         .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
-                        .themeLockScreen(theme)
+                        .themeLockScreen()
                 }
         } else {
             content
                 .sheet(isPresented: $isPresented) {
                     popover
-                        .themeLockScreen(theme)
+                        .themeLockScreen()
                 }
         }
     }
@@ -319,13 +319,16 @@ struct ThemeHoverListRowModifier: ViewModifier {
     }
 }
 
-struct ThemeLockScreenModifier: ViewModifier {
+struct ThemeLockScreenModifier<LockedContent>: ViewModifier where LockedContent: View {
 
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
 
-    @ObservedObject
-    var theme: Theme
+    @EnvironmentObject
+    private var theme: Theme
+
+    @ViewBuilder
+    let lockedContent: () -> LockedContent
 
     func body(content: Content) -> some View {
         LockableView(
@@ -333,10 +336,9 @@ struct ThemeLockScreenModifier: ViewModifier {
             content: {
                 content
             },
-            lockedContent: LogoView.init,
+            lockedContent: lockedContent,
             unlockBlock: Self.unlockScreenBlock
         )
-        .environmentObject(theme)
     }
 
     private static func unlockScreenBlock() async -> Bool {
