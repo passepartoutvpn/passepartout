@@ -125,7 +125,7 @@ extension AppCoordinator {
                     guard let pair = $0.firstProviderModuleWithMetadata else {
                         return
                     }
-                    modalRoute = .editProviderEntity($0, pair.0, pair.1)
+                    present(.editProviderEntity($0, pair.0, pair.1))
                 }
             )
         )
@@ -137,10 +137,10 @@ extension AppCoordinator {
             layout: $layout,
             isImporting: $isImporting,
             onSettings: {
-                modalRoute = .settings
+                present(.settings)
             },
             onAbout: {
-                modalRoute = .about
+                present(.about)
             },
             onNewProfile: enterDetail
         )
@@ -157,7 +157,7 @@ extension AppCoordinator {
                 modally: true,
                 path: $profilePath,
                 onDismiss: {
-                    modalRoute = nil
+                    present(nil)
                 }
             )
 
@@ -190,7 +190,15 @@ extension AppCoordinator {
             profile,
             isShared: profileManager.isRemotelyShared(profileWithId: profile.id)
         )
-        modalRoute = .editProfile
+        present(.editProfile)
+    }
+
+    func present(_ route: ModalRoute?) {
+        // XXX: this is a workaround for #791 on iOS 16
+        Task {
+            try await Task.sleep(for: .milliseconds(50))
+            modalRoute = route
+        }
     }
 }
 
