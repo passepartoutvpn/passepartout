@@ -453,7 +453,7 @@ public struct ThemeCountryFlag: View {
 
     private let countryTip: ((String) -> String?)?
 
-    public init(code: String?, placeholderTip: String? = nil, countryTip: ((String) -> String?)? = nil) {
+    public init(_ code: String?, placeholderTip: String? = nil, countryTip: ((String) -> String?)? = nil) {
         self.code = code
         self.placeholderTip = placeholderTip
         self.countryTip = countryTip
