@@ -66,7 +66,12 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
             contentView
                 .toolbar(content: toolbarContent)
         }
-        .themeModal(item: $modalRoute, isRoot: true, isInteractive: false, content: modalDestination)
+        .themeModal(
+            item: $modalRoute,
+            isRoot: true,
+            isInteractive: modalRoute?.isInteractive ?? true,
+            content: modalDestination
+        )
     }
 }
 
@@ -88,6 +93,16 @@ extension AppCoordinator {
             case .editProviderEntity: return 2
             case .settings: return 3
             case .about: return 4
+            }
+        }
+
+        var isInteractive: Bool {
+            switch self {
+            case .editProfile:
+                return false
+
+            default:
+                return true
             }
         }
     }
