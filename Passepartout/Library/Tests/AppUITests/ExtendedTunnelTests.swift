@@ -39,7 +39,8 @@ extension ExtendedTunnelTests {
         let sut = ExtendedTunnel(tunnel: tunnel, environment: env, interval: 0.1)
         sut.observeObjects()
 
-        let profile = try Profile.Builder().tryBuild()
+        let module = try DNSModule.Builder().tryBuild()
+        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
         try await tunnel.install(profile, connect: true, title: \.name)
         env.setEnvironmentValue(.crypto, forKey: TunnelEnvironmentKeys.lastErrorCode)
 
@@ -54,7 +55,8 @@ extension ExtendedTunnelTests {
         let sut = ExtendedTunnel(tunnel: tunnel, environment: env, interval: 0.1)
         sut.observeObjects()
 
-        let profile = try Profile.Builder().tryBuild()
+        let module = try DNSModule.Builder().tryBuild()
+        let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
         try await tunnel.install(profile, connect: false, title: \.name)
 
         let dataCount = DataCount(500, 700)

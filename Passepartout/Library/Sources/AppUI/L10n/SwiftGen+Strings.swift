@@ -137,6 +137,8 @@ public enum Strings {
         public static let invalidFields = Strings.tr("Localizable", "errors.app.passepartout.invalid_fields", fallback: "Invalid fields.")
         /// No provider server selected.
         public static let missingProviderEntity = Strings.tr("Localizable", "errors.app.passepartout.missing_provider_entity", fallback: "No provider server selected.")
+        /// The profile has no active modules.
+        public static let noActiveModules = Strings.tr("Localizable", "errors.app.passepartout.no_active_modules", fallback: "The profile has no active modules.")
         /// Unable to parse file.
         public static let parsing = Strings.tr("Localizable", "errors.app.passepartout.parsing", fallback: "Unable to parse file.")
         /// No provider selected.
