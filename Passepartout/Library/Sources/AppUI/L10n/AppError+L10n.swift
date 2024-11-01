@@ -74,6 +74,9 @@ extension PassepartoutError: LocalizedError {
                 .compactMap { $0 }
                 .joined(separator: " ")
 
+        case .noActiveModules:
+            return Strings.Errors.App.Passepartout.noActiveModules
+
         case .parsing:
             let message = userInfo as? String ?? reason?.localizedDescription
 
