@@ -1,5 +1,5 @@
 #!/bin/bash
-DESTINATION="Passepartout/Library/Sources/CommonLibrary/Resources/API"
+DESTINATION="Passepartout/Library/Sources/APILibrary/API"
 API_VERSION="v5"
 
 mkdir tmp
