@@ -23,6 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if os(tvOS)
+
 import AppLibrary
 import PassepartoutKit
 import SwiftUI
@@ -84,3 +86,5 @@ private extension ProfileListView {
         .focused($focusedField, equals: .profile(header.id))
     }
 }
+
+#endif
