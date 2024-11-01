@@ -28,6 +28,10 @@ import UtilsLibrary
 
 @MainActor
 public final class Theme: ObservableObject {
+    private var animation: Animation = .spring
+
+    public internal(set) var animationCategories: Set<ThemeAnimationCategory> = Set(ThemeAnimationCategory.allCases)
+
     public internal(set) var rootModalSize: CGSize?
 
     public internal(set) var secondaryModalSize: CGSize?
@@ -63,10 +67,6 @@ public final class Theme: ObservableObject {
     public internal(set) var pendingColor: Color = .orange
 
     public internal(set) var errorColor: Color = .red
-
-    private var animation: Animation = .spring
-
-    public internal(set) var animationCategories: Set<ThemeAnimationCategory> = Set(ThemeAnimationCategory.allCases)
 
     public internal(set) var logoImage = "Logo"
 
