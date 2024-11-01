@@ -19,6 +19,7 @@
 		0EC066D12C7DC47600D88A94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */; platformFilter = ios; };
 		0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
 		0EC332D22B8A1808000B9C2F /* PassepartoutTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0EC4A7132CD597EF00B7CAAD /* AppUIPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 0EC4A7122CD597EF00B7CAAD /* AppUIPlatform */; };
 		0EC797422B9378E000C093B7 /* Shared+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797402B9378E000C093B7 /* Shared+App.swift */; };
 		0EC797432B9378E000C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
 		0EC797442B93790600C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
@@ -27,8 +28,6 @@
 		0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EDE56E62CABE40D0082D21C /* Intents.plist */; };
 		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
-		0EE8D7DD2CD1107E00F6600C /* AppUIMain in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, macos, ); productRef = 0EE8D7DC2CD1107E00F6600C /* AppUIMain */; };
-		0EE8D7DF2CD1108900F6600C /* AppUITV in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, ); productRef = 0EE8D7DE2CD1108900F6600C /* AppUITV */; };
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; };
 /* End PBXBuildFile section */
 
@@ -145,8 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EE8D7DF2CD1108900F6600C /* AppUITV in Frameworks */,
-				0EE8D7DD2CD1107E00F6600C /* AppUIMain in Frameworks */,
+				0EC4A7132CD597EF00B7CAAD /* AppUIPlatform in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,8 +290,7 @@
 			);
 			name = Passepartout;
 			packageProductDependencies = (
-				0EE8D7DC2CD1107E00F6600C /* AppUIMain */,
-				0EE8D7DE2CD1108900F6600C /* AppUITV */,
+				0EC4A7122CD597EF00B7CAAD /* AppUIPlatform */,
 			);
 			productName = PassepartoutKit;
 			productReference = 0E06D18F2B87629100176E1D /* Passepartout.app */;
@@ -998,13 +995,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
 		};
-		0EE8D7DC2CD1107E00F6600C /* AppUIMain */ = {
+		0EC4A7122CD597EF00B7CAAD /* AppUIPlatform */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AppUIMain;
-		};
-		0EE8D7DE2CD1108900F6600C /* AppUITV */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AppUITV;
+			productName = AppUIPlatform;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -22,11 +22,7 @@ let package = Package(
             targets: ["AppUI"]
         ),
         .library(
-            name: "AppUIMain",
-            targets: ["AppUIPlatform"]
-        ),
-        .library(
-            name: "AppUITV",
+            name: "AppUIPlatform",
             targets: ["AppUIPlatform"]
         ),
         .library(
