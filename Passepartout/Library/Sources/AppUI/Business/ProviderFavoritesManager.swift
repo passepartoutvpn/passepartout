@@ -27,12 +27,12 @@ import CommonLibrary
 import Foundation
 
 @MainActor
-final class ProviderFavoritesManager: ObservableObject {
+public final class ProviderFavoritesManager: ObservableObject {
     private let defaults: UserDefaults
 
     private var allFavorites: ProviderFavoriteServers
 
-    var moduleId: UUID {
+    public var moduleId: UUID {
         didSet {
             guard let rawValue = defaults.string(forKey: AppPreference.providerFavoriteServers.key) else {
                 allFavorites = ProviderFavoriteServers()
@@ -42,7 +42,7 @@ final class ProviderFavoritesManager: ObservableObject {
         }
     }
 
-    var serverIds: Set<String> {
+    public var serverIds: Set<String> {
         get {
             allFavorites.servers(forModuleWithID: moduleId)
         }
@@ -52,13 +52,13 @@ final class ProviderFavoritesManager: ObservableObject {
         }
     }
 
-    init(defaults: UserDefaults = .standard) {
+    public init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         allFavorites = ProviderFavoriteServers()
         moduleId = UUID()
     }
 
-    func save() {
+    public func save() {
         defaults.set(allFavorites.rawValue, forKey: AppPreference.providerFavoriteServers.key)
     }
 }

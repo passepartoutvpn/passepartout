@@ -25,16 +25,21 @@
 
 import SwiftUI
 
-struct FavoriteToggle<ID>: View where ID: Hashable {
-    let value: ID
+public struct FavoriteToggle<ID>: View where ID: Hashable {
+    private let value: ID
 
     @Binding
-    var selection: Set<ID>
+    private var selection: Set<ID>
 
     @State
     private var hover: ID?
 
-    var body: some View {
+    public init(value: ID, selection: Binding<Set<ID>>) {
+        self.value = value
+        _selection = selection
+    }
+
+    public var body: some View {
         Button {
             if selection.contains(value) {
                 selection.remove(value)
