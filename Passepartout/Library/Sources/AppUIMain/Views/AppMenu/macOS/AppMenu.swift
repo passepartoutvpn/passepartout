@@ -32,19 +32,22 @@ import SwiftUI
 
 public struct AppMenu: View {
 
-    @EnvironmentObject
+    @ObservedObject
     private var profileManager: ProfileManager
 
-    @EnvironmentObject
+    @ObservedObject
     private var profileProcessor: ProfileProcessor
 
-    @EnvironmentObject
+    @ObservedObject
     private var tunnel: ExtendedTunnel
 
     @StateObject
     private var model = Model()
 
-    public init() {
+    public init(profileManager: ProfileManager, profileProcessor: ProfileProcessor, tunnel: ExtendedTunnel) {
+        self.profileManager = profileManager
+        self.profileProcessor = profileProcessor
+        self.tunnel = tunnel
     }
 
     public var body: some View {

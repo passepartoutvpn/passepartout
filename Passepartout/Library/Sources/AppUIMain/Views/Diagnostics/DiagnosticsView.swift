@@ -42,13 +42,13 @@ struct DiagnosticsView: View {
     private var theme: Theme
 
     @EnvironmentObject
-    private var tunnel: ExtendedTunnel
-
-    @EnvironmentObject
     private var iapManager: IAPManager
 
     @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
     private var logsPrivateData = false
+
+    @ObservedObject
+    var tunnel: ExtendedTunnel
 
     var availableTunnelLogs: () async -> [LogEntry] = {
         await Task.detached {
@@ -190,7 +190,7 @@ private extension DiagnosticsView {
 }
 
 #Preview {
-    DiagnosticsView {
+    DiagnosticsView(tunnel: .mock) {
         [
             .init(date: Date(), url: URL(string: "http://one.com")!),
             .init(date: Date().addingTimeInterval(-60), url: URL(string: "http://two.com")!),

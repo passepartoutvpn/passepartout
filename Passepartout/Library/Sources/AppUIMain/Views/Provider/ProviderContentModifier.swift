@@ -29,10 +29,10 @@ import SwiftUI
 struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntity, Entity.Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
 
     @EnvironmentObject
-    private var providerManager: ProviderManager
+    private var iapManager: IAPManager
 
     @EnvironmentObject
-    private var iapManager: IAPManager
+    private var providerManager: ProviderManager
 
     let apis: [APIMapper]
 

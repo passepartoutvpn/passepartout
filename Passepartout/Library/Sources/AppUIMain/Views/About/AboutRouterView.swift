@@ -63,7 +63,7 @@ extension AboutRouterView {
             DonateView()
 
         case .diagnostics:
-            DiagnosticsView()
+            DiagnosticsView(tunnel: tunnel)
 
         case .appDebugLog(let title):
             DebugLogView.withApp(parameters: Constants.shared.log)

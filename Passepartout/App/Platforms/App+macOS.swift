@@ -83,8 +83,12 @@ extension PassepartoutApp {
                 .withEnvironment(from: context, theme: theme)
         }
         MenuBarExtra {
-            AppMenu()
-                .withEnvironment(from: context, theme: theme)
+            AppMenu(
+                profileManager: context.profileManager,
+                profileProcessor: context.profileProcessor,
+                tunnel: context.tunnel
+            )
+            .withEnvironment(from: context, theme: theme)
         } label: {
             AppMenuImage(tunnel: context.tunnel)
                 .environmentObject(theme)

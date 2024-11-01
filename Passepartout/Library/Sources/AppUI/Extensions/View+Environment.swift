@@ -34,7 +34,6 @@ extension View {
             .environmentObject(context.profileManager)
             .environmentObject(context.profileProcessor)
             .environmentObject(context.providerManager)
-            .environmentObject(context.tunnel)
     }
 
     public func withMockEnvironment() -> some View {
