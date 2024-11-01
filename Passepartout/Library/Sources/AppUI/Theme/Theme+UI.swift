@@ -30,32 +30,7 @@ import LocalAuthentication
 import SwiftUI
 import UtilsLibrary
 
-// MARK: - Modifiers
-
-struct ThemeFormModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .formStyle(.grouped)
-    }
-}
-
-struct ThemeManualInputModifier: ViewModifier {
-}
-
-struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
-    let header: String?
-
-    let footer: String?
-}
-
-#if !os(tvOS)
-
-struct ThemeWindowModifier: ViewModifier {
-    let size: CGSize
-}
-
-struct ThemeNavigationDetailModifier: ViewModifier {
-}
+// MARK: Presentation modifiers
 
 struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 
@@ -115,41 +90,6 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
     }
 }
 
-struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding where Popover: View {
-
-    @EnvironmentObject
-    private var theme: Theme
-
-    @Environment(\.horizontalSizeClass)
-    var hsClass
-
-    @Environment(\.verticalSizeClass)
-    var vsClass
-
-    @Binding
-    var isPresented: Bool
-
-    @ViewBuilder
-    let popover: Popover
-
-    func body(content: Content) -> some View {
-        if isBigDevice {
-            content
-                .popover(isPresented: $isPresented) {
-                    popover
-                        .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
-                        .themeLockScreen()
-                }
-        } else {
-            content
-                .sheet(isPresented: $isPresented) {
-                    popover
-                        .themeLockScreen()
-                }
-        }
-    }
-}
-
 struct ThemeConfirmationModifier: ViewModifier {
 
     @Binding
@@ -204,6 +144,33 @@ struct ThemeNavigationStackModifier: ViewModifier {
             content
         }
     }
+}
+
+// MARK: - Content modifiers
+
+struct ThemeFormModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .formStyle(.grouped)
+    }
+}
+
+struct ThemeManualInputModifier: ViewModifier {
+}
+
+struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
+    let header: String?
+
+    let footer: String?
+}
+
+#if !os(tvOS)
+
+struct ThemeWindowModifier: ViewModifier {
+    let size: CGSize
+}
+
+struct ThemeNavigationDetailModifier: ViewModifier {
 }
 
 struct ThemePlainButtonModifier: ViewModifier {

@@ -85,27 +85,6 @@ public final class Theme: ObservableObject {
 // MARK: - Modifiers
 
 extension View {
-    public func themeForm() -> some View {
-        modifier(ThemeFormModifier())
-    }
-
-    public func themeManualInput() -> some View {
-        modifier(ThemeManualInputModifier())
-    }
-
-    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
-        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
-    }
-
-#if !os(tvOS)
-    public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
-        modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
-    }
-
-    public func themeNavigationDetail() -> some View {
-        modifier(ThemeNavigationDetailModifier())
-    }
-
     public func themeModal<Content>(
         isPresented: Binding<Bool>,
         isRoot: Bool = false,
@@ -134,6 +113,7 @@ extension View {
         ))
     }
 
+#if os(iOS)
     public func themePopover<Content>(
         isPresented: Binding<Bool>,
         content: @escaping () -> Content
@@ -143,6 +123,7 @@ extension View {
             popover: content
         ))
     }
+#endif
 
     public func themeConfirmation(
         isPresented: Binding<Bool>,
@@ -160,6 +141,35 @@ extension View {
 
     public func themeNavigationStack(if condition: Bool, closable: Bool = false, path: Binding<NavigationPath>) -> some View {
         modifier(ThemeNavigationStackModifier(condition: condition, closable: closable, path: path))
+    }
+
+    public func themeForm() -> some View {
+        modifier(ThemeFormModifier())
+    }
+
+    public func themeManualInput() -> some View {
+        modifier(ThemeManualInputModifier())
+    }
+
+    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
+        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
+    }
+
+    public func themeLockScreen() -> some View {
+#if !os(tvOS)
+        modifier(ThemeLockScreenModifier(lockedContent: LogoView.init))
+#else
+        self
+#endif
+    }
+
+#if !os(tvOS)
+    public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
+        modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
+    }
+
+    public func themeNavigationDetail() -> some View {
+        modifier(ThemeNavigationDetailModifier())
     }
 
     public func themePlainButton(action: @escaping () -> Void) -> some View {
@@ -208,10 +218,6 @@ extension View {
         modifier(ThemeHoverListRowModifier())
     }
 
-    public func themeLockScreen() -> some View {
-        modifier(ThemeLockScreenModifier(lockedContent: LogoView.init))
-    }
-
     public func themeTip(_ text: String, edge: Edge) -> some View {
         modifier(ThemeTipModifier(text: text, edge: edge))
     }
@@ -221,6 +227,7 @@ extension View {
 // MARK: - Views
 
 extension Theme {
+
 #if !os(tvOS)
     public func listSection<ItemView: View, T: EditableValue>(
         _ title: String,
@@ -240,4 +247,5 @@ extension Theme {
         )
     }
 #endif
+
 }

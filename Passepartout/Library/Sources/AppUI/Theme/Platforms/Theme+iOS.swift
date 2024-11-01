@@ -50,6 +50,41 @@ extension ThemeNavigationDetailModifier {
     }
 }
 
+struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding where Popover: View {
+
+    @EnvironmentObject
+    private var theme: Theme
+
+    @Environment(\.horizontalSizeClass)
+    var hsClass
+
+    @Environment(\.verticalSizeClass)
+    var vsClass
+
+    @Binding
+    var isPresented: Bool
+
+    @ViewBuilder
+    let popover: Popover
+
+    func body(content: Content) -> some View {
+        if isBigDevice {
+            content
+                .popover(isPresented: $isPresented) {
+                    popover
+                        .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
+                        .themeLockScreen()
+                }
+        } else {
+            content
+                .sheet(isPresented: $isPresented) {
+                    popover
+                        .themeLockScreen()
+                }
+        }
+    }
+}
+
 extension ThemePlainButtonModifier {
     func body(content: Content) -> some View {
         Button(action: action) {
