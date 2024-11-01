@@ -50,7 +50,7 @@ extension AppProduct: InAppIdentifierProviding {
 }
 
 extension AppProduct {
-    static var all: [Self] {
+    public static var all: [Self] {
         Features.all + Full.all + Donations.all
     }
 

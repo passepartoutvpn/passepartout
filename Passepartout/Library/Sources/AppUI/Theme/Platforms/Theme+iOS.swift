@@ -26,6 +26,7 @@
 #if os(iOS)
 
 import SwiftUI
+import UtilsLibrary
 
 extension Theme {
     public convenience init() {

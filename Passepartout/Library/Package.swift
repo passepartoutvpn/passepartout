@@ -77,7 +77,10 @@ let package = Package(
         ),
         .target(
             name: "AppLibrary",
-            dependencies: ["CommonLibrary"]
+            dependencies: [
+                "CommonLibrary",
+                "Kvitto"
+            ]
         ),
         .target(
             name: "AppUI",
@@ -85,7 +88,6 @@ let package = Package(
                 "AppDataProfiles",
                 "AppDataProviders",
                 "AppLibrary",
-                "Kvitto",
                 "UtilsLibrary"
             ],
             resources: [
