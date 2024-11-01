@@ -23,8 +23,6 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if os(tvOS)
-
 import AppLibrary
 import AppUI
 import PassepartoutKit
@@ -160,5 +158,3 @@ private extension ProfileView {
         tunnel: .mock
     )
 }
-
-#endif
