@@ -108,15 +108,13 @@ extension ThemeTappableText {
 
 extension ThemeTextField {
     public var body: some View {
-        commonView
-            .labelsHidden()
+        fieldView
     }
 }
 
 extension ThemeSecureField {
     public var body: some View {
-        commonView
-            .labelsHidden()
+        fieldView
     }
 }
 

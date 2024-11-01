@@ -143,12 +143,12 @@ public struct ThemeCountryFlag: View {
 }
 
 public struct ThemeTextField: View {
-    private let title: String?
+    let title: String?
 
     @Binding
-    private var text: String
+    var text: String
 
-    private let placeholder: String
+    let placeholder: String
 
     public init(_ title: String, text: Binding<String>, placeholder: String) {
         self.title = title
@@ -157,7 +157,7 @@ public struct ThemeTextField: View {
     }
 
     @ViewBuilder
-    var commonView: some View {
+    var labeledView: some View {
         if let title {
             LabeledContent {
                 fieldView
@@ -169,18 +169,18 @@ public struct ThemeTextField: View {
         }
     }
 
-    private var fieldView: some View {
+    var fieldView: some View {
         TextField(title ?? "", text: $text, prompt: Text(placeholder))
     }
 }
 
 public struct ThemeSecureField: View {
-    private let title: String?
+    let title: String?
 
     @Binding
-    private var text: String
+    var text: String
 
-    private let placeholder: String
+    let placeholder: String
 
     public init(title: String?, text: Binding<String>, placeholder: String) {
         self.title = title
@@ -189,7 +189,7 @@ public struct ThemeSecureField: View {
     }
 
     @ViewBuilder
-    var commonView: some View {
+    var labeledView: some View {
         if let title {
             LabeledContent {
                 fieldView
@@ -201,7 +201,7 @@ public struct ThemeSecureField: View {
         }
     }
 
-    private var fieldView: some View {
+    var fieldView: some View {
         RevealingSecureField(title ?? "", text: $text, prompt: Text(placeholder), imageWidth: 30.0) {
            ThemeImage(.hide)
                 .foregroundStyle(Color.accentColor)
