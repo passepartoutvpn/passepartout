@@ -50,18 +50,20 @@ public struct FavoriteToggle<ID>: View where ID: Hashable {
             ThemeImage(selection.contains(value) ? .favoriteOn : .favoriteOff)
                 .opacity(opacity)
         }
+#if os(macOS)
         .onHover {
             hover = $0 ? value : nil
         }
+#endif
     }
 }
 
 private extension FavoriteToggle {
     var opacity: Double {
-#if os(iOS)
-        1.0
-#else
+#if os(macOS)
         selection.contains(value) || value == hover ? 1.0 : 0.0
+#else
+        1.0
 #endif
     }
 }
