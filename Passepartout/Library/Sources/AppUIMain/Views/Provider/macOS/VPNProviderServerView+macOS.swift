@@ -25,6 +25,7 @@
 
 #if os(macOS)
 
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
