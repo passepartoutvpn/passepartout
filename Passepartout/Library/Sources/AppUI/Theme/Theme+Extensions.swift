@@ -1,5 +1,5 @@
 //
-//  ExtendedTunnel+Theme.swift
+//  Theme+Extensions.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/6/24.
