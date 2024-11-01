@@ -37,7 +37,7 @@ extension AppContext {
         return AppContext(
             iapManager: IAPManager(
                 customUserLevel: nil,
-                receiptReader: MockReceiptReader(),
+                receiptReader: MockAppReceiptReader(),
                 unrestrictedFeatures: [
                     .interactiveLogin,
                     .onDemand,

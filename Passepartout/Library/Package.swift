@@ -57,8 +57,7 @@ let package = Package(
             name: "AppDataProfiles",
             dependencies: [
                 "AppData",
-                "AppLibrary",
-                "UtilsLibrary"
+                "AppLibrary"
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
@@ -68,8 +67,7 @@ let package = Package(
             name: "AppDataProviders",
             dependencies: [
                 "AppData",
-                "AppLibrary",
-                "UtilsLibrary"
+                "AppLibrary"
             ],
             resources: [
                 .process("Providers.xcdatamodeld")
@@ -79,7 +77,8 @@ let package = Package(
             name: "AppLibrary",
             dependencies: [
                 "CommonLibrary",
-                "Kvitto"
+                "Kvitto",
+                "UtilsLibrary"
             ]
         ),
         .target(
@@ -87,8 +86,7 @@ let package = Package(
             dependencies: [
                 "AppDataProfiles",
                 "AppDataProviders",
-                "AppLibrary",
-                "UtilsLibrary"
+                "AppLibrary"
             ],
             resources: [
                 .process("Resources")
