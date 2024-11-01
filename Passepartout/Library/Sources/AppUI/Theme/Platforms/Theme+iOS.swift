@@ -47,6 +47,10 @@ extension View {
             popover: content
         ))
     }
+
+    public func themeLockScreen() -> some View {
+        modifier(ThemeLockScreenModifier(lockedContent: LogoView.init))
+    }
 }
 
 // MARK: - Presentation modifiers

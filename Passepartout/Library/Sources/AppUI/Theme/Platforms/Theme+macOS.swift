@@ -36,6 +36,14 @@ extension Theme {
     }
 }
 
+// MARK: - Shortcuts
+
+extension View {
+    public func themeLockScreen() -> some View {
+        self
+    }
+}
+
 // MARK: - Modifiers
 
 extension ThemeWindowModifier {

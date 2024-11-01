@@ -91,14 +91,6 @@ extension View {
         modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
     }
 
-    public func themeLockScreen() -> some View {
-#if !os(tvOS)
-        modifier(ThemeLockScreenModifier(lockedContent: LogoView.init))
-#else
-        self
-#endif
-    }
-
 #if !os(tvOS)
     public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
