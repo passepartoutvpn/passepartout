@@ -22,8 +22,16 @@ let package = Package(
             targets: ["AppUI"]
         ),
         .library(
+            name: "AppUIMain",
+            targets: ["AppUIMain"]
+        ),
+        .library(
             name: "AppUIPlatform",
             targets: ["AppUIPlatform"]
+        ),
+        .library(
+            name: "AppUITV",
+            targets: ["AppUITV"]
         ),
         .library(
             name: "TunnelLibrary",
