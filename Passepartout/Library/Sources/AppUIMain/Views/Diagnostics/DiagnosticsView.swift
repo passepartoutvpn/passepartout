@@ -47,8 +47,7 @@ struct DiagnosticsView: View {
     @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
     private var logsPrivateData = false
 
-    @ObservedObject
-    var tunnel: ExtendedTunnel
+    let tunnel: ExtendedTunnel
 
     var availableTunnelLogs: () async -> [LogEntry] = {
         await Task.detached {
