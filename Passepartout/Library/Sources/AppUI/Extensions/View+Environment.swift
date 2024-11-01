@@ -30,12 +30,9 @@ import SwiftUI
 extension View {
     public func withEnvironment(from context: AppContext, theme: Theme) -> some View {
         environmentObject(theme)
-            .environmentObject(context.connectionObserver)
             .environmentObject(context.iapManager)
-            .environmentObject(context.profileManager)
             .environmentObject(context.profileProcessor)
             .environmentObject(context.providerManager)
-            .environmentObject(context.tunnel)
     }
 
     public func withMockEnvironment() -> some View {

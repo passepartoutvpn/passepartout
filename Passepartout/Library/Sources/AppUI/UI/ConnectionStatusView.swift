@@ -27,32 +27,34 @@ import Foundation
 import PassepartoutKit
 import SwiftUI
 
-struct ConnectionStatusView: View, TunnelContextProviding, ThemeProviding {
+public struct ConnectionStatusView: View, ThemeProviding {
 
     @EnvironmentObject
-    var theme: Theme
-
-    @EnvironmentObject
-    var connectionObserver: ConnectionObserver
+    public var theme: Theme
 
     @ObservedObject
-    var tunnel: Tunnel
+    private var tunnel: ExtendedTunnel
 
-    var body: some View {
+    public init(tunnel: ExtendedTunnel) {
+        self.tunnel = tunnel
+    }
+
+    public var body: some View {
         Text(statusDescription)
-            .foregroundStyle(tunnelStatusColor)
+            .font(.headline)
+            .foregroundStyle(tunnel.statusColor(theme))
     }
 }
 
 private extension ConnectionStatusView {
     var statusDescription: String {
-        if let lastErrorCode = connectionObserver.lastErrorCode {
+        if let lastErrorCode = tunnel.lastErrorCode {
             return lastErrorCode.localizedDescription
         }
-        let status = tunnelConnectionStatus
+        let status = tunnel.connectionStatus
         switch status {
         case .active:
-            if let dataCount = connectionObserver.dataCount {
+            if let dataCount = tunnel.dataCount {
                 let down = dataCount.received.descriptionAsDataUnit
                 let up = dataCount.sent.descriptionAsDataUnit
                 return "↓\(down) ↑\(up)"
@@ -75,7 +77,7 @@ private extension ConnectionStatusView {
 #Preview("Connected") {
     ConnectionStatusView(tunnel: .mock)
         .task {
-            try? await Tunnel.mock.connect(with: .mock, processor: .mock)
+            try? await ExtendedTunnel.mock.connect(with: .mock, processor: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()
@@ -94,7 +96,7 @@ private extension ConnectionStatusView {
     }
     return ConnectionStatusView(tunnel: .mock)
         .task {
-            try? await Tunnel.mock.connect(with: profile, processor: .mock)
+            try? await ExtendedTunnel.mock.connect(with: profile, processor: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()

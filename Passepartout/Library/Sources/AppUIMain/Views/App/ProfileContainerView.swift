@@ -28,12 +28,12 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileContainerView: View, Routable, TunnelInstallationProviding {
+struct ProfileContainerView: View, Routable {
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
 
-    let tunnel: Tunnel
+    let tunnel: ExtendedTunnel
 
     let registry: Registry
 

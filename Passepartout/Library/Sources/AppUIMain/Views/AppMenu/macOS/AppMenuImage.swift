@@ -28,17 +28,17 @@
 import PassepartoutKit
 import SwiftUI
 
-public struct AppMenuImage: View, TunnelContextProviding {
+public struct AppMenuImage: View {
 
     @ObservedObject
-    public var connectionObserver: ConnectionObserver
+    private var tunnel: ExtendedTunnel
 
-    public init(connectionObserver: ConnectionObserver) {
-        self.connectionObserver = connectionObserver
+    public init(tunnel: ExtendedTunnel) {
+        self.tunnel = tunnel
     }
 
     public var body: some View {
-        ThemeMenuImage(tunnelConnectionStatus.imageName)
+        ThemeMenuImage(tunnel.connectionStatus.imageName)
     }
 }
 

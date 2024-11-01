@@ -35,7 +35,7 @@ struct AboutRouterView: View {
 
     let profileManager: ProfileManager
 
-    let tunnel: Tunnel
+    let tunnel: ExtendedTunnel
 
     @State
     var navigationRoute: NavigationRoute?
@@ -63,7 +63,10 @@ extension AboutRouterView {
             DonateView()
 
         case .diagnostics:
-            DiagnosticsView()
+            DiagnosticsView(
+                profileManager: profileManager,
+                tunnel: tunnel
+            )
 
         case .appDebugLog(let title):
             DebugLogView.withApp(parameters: Constants.shared.log)

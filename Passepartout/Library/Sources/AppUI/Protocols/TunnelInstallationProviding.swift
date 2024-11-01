@@ -30,7 +30,7 @@ import PassepartoutKit
 public protocol TunnelInstallationProviding {
     var profileManager: ProfileManager { get }
 
-    var tunnel: Tunnel { get }
+    var tunnel: ExtendedTunnel { get }
 }
 
 @MainActor

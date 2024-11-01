@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
@@ -42,13 +43,14 @@ struct DiagnosticsView: View {
     private var theme: Theme
 
     @EnvironmentObject
-    private var connectionObserver: ConnectionObserver
-
-    @EnvironmentObject
     private var iapManager: IAPManager
 
     @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
     private var logsPrivateData = false
+
+    let profileManager: ProfileManager
+
+    let tunnel: ExtendedTunnel
 
     var availableTunnelLogs: () async -> [LogEntry] = {
         await Task.detached {
@@ -128,7 +130,7 @@ private extension DiagnosticsView {
     }
 
     var openVPNSection: some View {
-        connectionObserver.value(forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration)
+        tunnel.value(forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration)
             .map { cfg in
                 Group {
                     NavigationLink(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration) {
@@ -143,7 +145,8 @@ private extension DiagnosticsView {
     var reportIssueSection: some View {
         Section {
             ReportIssueButton(
-                tunnel: connectionObserver.tunnel,
+                profileManager: profileManager,
+                tunnel: tunnel,
                 title: Strings.Views.Diagnostics.ReportIssue.title,
                 purchasedProducts: iapManager.purchasedProducts,
                 isUnableToEmail: $isPresentingUnableToEmail
@@ -190,7 +193,7 @@ private extension DiagnosticsView {
 }
 
 #Preview {
-    DiagnosticsView {
+    DiagnosticsView(profileManager: .mock, tunnel: .mock) {
         [
             .init(date: Date(), url: URL(string: "http://one.com")!),
             .init(date: Date().addingTimeInterval(-60), url: URL(string: "http://two.com")!),

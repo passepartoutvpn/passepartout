@@ -30,7 +30,7 @@ import PassepartoutKit
 public protocol AppCoordinatorConforming {
     init(
         profileManager: ProfileManager,
-        tunnel: Tunnel,
+        tunnel: ExtendedTunnel,
         registry: Registry
     )
 }

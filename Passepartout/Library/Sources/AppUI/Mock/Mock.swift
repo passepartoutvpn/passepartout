@@ -88,15 +88,9 @@ extension ProfileProcessor {
     }
 }
 
-extension Tunnel {
-    public static var mock: Tunnel {
+extension ExtendedTunnel {
+    public static var mock: ExtendedTunnel {
         AppContext.mock.tunnel
-    }
-}
-
-extension ConnectionObserver {
-    public static var mock: ConnectionObserver {
-        AppContext.mock.connectionObserver
     }
 }
 

@@ -27,23 +27,26 @@ import Foundation
 import PassepartoutKit
 
 @MainActor
-final class InteractiveManager: ObservableObject {
-    typealias CompletionBlock = (Profile) async throws -> Void
+public final class InteractiveManager: ObservableObject {
+    public typealias CompletionBlock = (Profile) async throws -> Void
 
     @Published
-    var isPresented = false
+    public var isPresented = false
 
-    private(set) var editor = ProfileEditor()
+    public private(set) var editor = ProfileEditor()
 
     private var onComplete: CompletionBlock?
 
-    func present(with profile: Profile, onComplete: CompletionBlock?) {
+    public init() {
+    }
+
+    public func present(with profile: Profile, onComplete: CompletionBlock?) {
         editor = ProfileEditor(profile: profile)
         self.onComplete = onComplete
         isPresented = true
     }
 
-    func complete() async throws {
+    public func complete() async throws {
         isPresented = false
         let newProfile = try editor.build()
         try await onComplete?(newProfile)

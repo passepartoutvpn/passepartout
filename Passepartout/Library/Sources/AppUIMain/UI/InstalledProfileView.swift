@@ -31,7 +31,7 @@ import UtilsLibrary
 struct InstalledProfileView: View, Routable {
 
     @EnvironmentObject
-    var theme: Theme
+    private var theme: Theme
 
     let layout: ProfilesLayout
 
@@ -39,7 +39,8 @@ struct InstalledProfileView: View, Routable {
 
     let profile: Profile?
 
-    let tunnel: Tunnel
+    @ObservedObject
+    var tunnel: ExtendedTunnel
 
     let interactiveManager: InteractiveManager
 
