@@ -31,15 +31,16 @@ import UtilsLibrary
 struct InstalledProfileView: View, Routable {
 
     @EnvironmentObject
-    var theme: Theme
+    private var theme: Theme
+
+    @EnvironmentObject
+    private var connectionObserver: ConnectionObserver
 
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
 
     let profile: Profile?
-
-    let tunnel: Tunnel
 
     let interactiveManager: InteractiveManager
 
@@ -99,7 +100,7 @@ private extension InstalledProfileView {
     var statusView: some View {
         HStack {
             providerSelectorButton
-            ConnectionStatusView(tunnel: tunnel)
+            ConnectionStatusView(connectionObserver: connectionObserver)
                 .opacity(installedOpacity)
         }
     }
@@ -107,7 +108,7 @@ private extension InstalledProfileView {
     var toggleButton: some View {
         TunnelToggleButton(
             style: .color,
-            tunnel: tunnel,
+            tunnel: connectionObserver.tunnel,
             profile: profile,
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,

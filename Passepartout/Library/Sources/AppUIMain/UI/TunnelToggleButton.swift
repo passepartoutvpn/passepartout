@@ -27,7 +27,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct TunnelToggleButton<Label>: View, TunnelContextProviding, ThemeProviding where Label: View {
+struct TunnelToggleButton<Label>: View, ConnectionObserverProviding, ThemeProviding where Label: View {
     enum Style {
         case plain
 

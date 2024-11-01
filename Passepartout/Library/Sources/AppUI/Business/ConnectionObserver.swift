@@ -30,7 +30,7 @@ import PassepartoutKit
 
 @MainActor
 public final class ConnectionObserver: ObservableObject {
-    public let tunnel: Tunnel
+    private let tunnel: Tunnel
 
     private let environment: TunnelEnvironment
 
@@ -40,8 +40,28 @@ public final class ConnectionObserver: ObservableObject {
         environment.environmentValue(forKey: key)
     }
 
+    public var currentProfile: TunnelCurrentProfile? {
+        tunnel.currentProfile
+    }
+
+    public var tunnelStatus: TunnelStatus {
+        tunnel.status
+    }
+
     public var connectionStatus: ConnectionStatus? {
         value(forKey: TunnelEnvironmentKeys.connectionStatus)
+    }
+
+    public var tunnelConnectionStatus: TunnelStatus {
+        var status = tunnel.status
+        if status == .active, let connectionStatus {
+            if connectionStatus == .connected {
+                status = .active
+            } else {
+                status = .activating
+            }
+        }
+        return status
     }
 
     @Published

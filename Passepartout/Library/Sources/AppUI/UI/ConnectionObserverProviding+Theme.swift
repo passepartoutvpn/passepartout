@@ -1,8 +1,8 @@
 //
-//  TunnelContextProviding.swift
+//  ConnectionObserverProviding+Theme.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/5/24.
+//  Created by Davide De Rosa on 9/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,24 +23,30 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import PassepartoutKit
-
-public protocol TunnelContextProviding {
-    var connectionObserver: ConnectionObserver { get }
-}
+import SwiftUI
 
 @MainActor
-extension TunnelContextProviding {
-    public var tunnelConnectionStatus: TunnelStatus {
-        var status = connectionObserver.tunnel.status
-        if status == .active, let connectionStatus = connectionObserver.connectionStatus {
-            if connectionStatus == .connected {
-                status = .active
-            } else {
-                status = .activating
+extension ConnectionObserverProviding where Self: ThemeProviding {
+    public var tunnelStatusColor: Color {
+        if connectionObserver.lastErrorCode != nil {
+            switch connectionObserver.tunnelStatus {
+            case .inactive:
+                return theme.inactiveColor
+
+            default:
+                return theme.errorColor
             }
         }
-        return status
+        switch connectionObserver.tunnelConnectionStatus {
+        case .active:
+            return theme.activeColor
+
+        case .activating, .deactivating:
+            return theme.pendingColor
+
+        case .inactive:
+            return theme.inactiveColor
+        }
     }
 }
