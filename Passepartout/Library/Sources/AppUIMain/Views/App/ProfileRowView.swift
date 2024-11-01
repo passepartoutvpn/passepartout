@@ -104,6 +104,7 @@ private extension ProfileRowView {
                 .contentShape(.rect)
             }
         )
+        .foregroundStyle(.primary)
     }
 
     var sharingView: some View {

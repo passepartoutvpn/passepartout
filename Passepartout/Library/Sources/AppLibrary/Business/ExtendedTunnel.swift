@@ -84,6 +84,14 @@ public final class ExtendedTunnel: ObservableObject {
             }
             .store(in: &subscriptions)
 
+        tunnel
+            .$currentProfile
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &subscriptions)
+
         Timer
             .publish(every: interval, on: .main, in: .common)
             .autoconnect()

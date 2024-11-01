@@ -297,6 +297,8 @@ public enum Strings {
     public static let routing = Strings.tr("Localizable", "global.routing", fallback: "Routing")
     /// Save
     public static let save = Strings.tr("Localizable", "global.save", fallback: "Save")
+    /// Select
+    public static let select = Strings.tr("Localizable", "global.select", fallback: "Select")
     /// Server
     public static let server = Strings.tr("Localizable", "global.server", fallback: "Server")
     /// Servers

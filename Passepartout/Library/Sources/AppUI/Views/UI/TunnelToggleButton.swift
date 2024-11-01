@@ -29,11 +29,6 @@ import SwiftUI
 import UtilsLibrary
 
 public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View {
-    public enum Style {
-        case plain
-
-        case color
-    }
 
     @EnvironmentObject
     public var theme: Theme
@@ -43,8 +38,6 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
 
     @EnvironmentObject
     private var profileProcessor: ProfileProcessor
-
-    private let style: Style
 
     @ObservedObject
     private var tunnel: ExtendedTunnel
@@ -63,7 +56,6 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
     private let label: (Bool) -> Label
 
     public init(
-        style: Style = .plain,
         tunnel: ExtendedTunnel,
         profile: Profile?,
         nextProfileId: Binding<Profile.ID?>,
@@ -72,7 +64,6 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
         onProviderEntityRequired: ((Profile) -> Void)? = nil,
         label: @escaping (Bool) -> Label
     ) {
-        self.style = style
         self.tunnel = tunnel
         self.profile = profile
         _nextProfileId = nextProfileId
@@ -86,7 +77,6 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
         Button(action: tryPerform) {
             label(canConnect)
         }
-        .foregroundStyle(color)
 #if os(macOS)
         .buttonStyle(.plain)
         .cursor(.hand)
@@ -102,16 +92,6 @@ private extension TunnelToggleButton {
 
     var canConnect: Bool {
         !isInstalled || (tunnel.status == .inactive && tunnel.currentProfile?.onDemand != true)
-    }
-
-    var color: Color {
-        switch style {
-        case .plain:
-            return .primary
-
-        case .color:
-            return tunnel.statusColor(theme)
-        }
     }
 }
 
