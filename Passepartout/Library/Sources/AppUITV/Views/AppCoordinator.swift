@@ -36,9 +36,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
     private let registry: Registry
 
-    public init(profileManager: ProfileManager, connectionObserver: ExtendedTunnel, registry: Registry) {
+    public init(profileManager: ProfileManager, tunnel: ExtendedTunnel, registry: Registry) {
         self.profileManager = profileManager
-        self.connectionObserver = connectionObserver
+        self.tunnel = tunnel
         self.registry = registry
     }
 
