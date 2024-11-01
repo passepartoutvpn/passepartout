@@ -1,5 +1,5 @@
 //
-//  ConnectionObserverTests.swift
+//  ExtendedTunnelTests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/12/24.
@@ -28,15 +28,15 @@ import Foundation
 import PassepartoutKit
 import XCTest
 
-final class ConnectionObserverTests: XCTestCase {
+final class ExtendedTunnelTests: XCTestCase {
 }
 
 @MainActor
-extension ConnectionObserverTests {
+extension ExtendedTunnelTests {
     func test_givenTunnel_whenDisconnectWithError_thenPublishesLastErrorCode() async throws {
         let env = InMemoryEnvironment()
         let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
-        let sut = ConnectionObserver(tunnel: tunnel, environment: env, interval: 0.1)
+        let sut = ExtendedTunnel(tunnel: tunnel, environment: env, interval: 0.1)
         sut.observeObjects()
 
         let profile = try Profile.Builder().tryBuild()
@@ -51,7 +51,7 @@ extension ConnectionObserverTests {
     func test_givenTunnel_whenConnect_thenPublishesDataCount() async throws {
         let env = InMemoryEnvironment()
         let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
-        let sut = ConnectionObserver(tunnel: tunnel, environment: env, interval: 0.1)
+        let sut = ExtendedTunnel(tunnel: tunnel, environment: env, interval: 0.1)
         sut.observeObjects()
 
         let profile = try Profile.Builder().tryBuild()

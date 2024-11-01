@@ -38,7 +38,7 @@ public final class AppContext: ObservableObject {
 
     public let profileProcessor: ProfileProcessor
 
-    public let tunnel: ConnectionObserver
+    public let tunnel: ExtendedTunnel
 
     public let tunnelEnvironment: TunnelEnvironment
 
@@ -64,7 +64,7 @@ public final class AppContext: ObservableObject {
         self.profileManager = profileManager
         self.profileProcessor = profileProcessor
         self.tunnelEnvironment = tunnelEnvironment
-        self.tunnel = ConnectionObserver(
+        self.tunnel = ExtendedTunnel(
             tunnel: tunnel,
             environment: tunnelEnvironment,
             interval: constants.tunnel.refreshInterval

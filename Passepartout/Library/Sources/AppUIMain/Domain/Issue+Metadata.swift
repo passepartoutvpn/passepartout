@@ -39,7 +39,7 @@ extension Issue {
 
         let purchasedProducts: Set<AppProduct>
 
-        let tunnel: ConnectionObserver
+        let tunnel: ExtendedTunnel
 
         let urlForTunnelLog: URL
 

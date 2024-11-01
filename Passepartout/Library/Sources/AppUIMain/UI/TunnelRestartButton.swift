@@ -33,7 +33,7 @@ struct TunnelRestartButton<Label>: View where Label: View {
     private var profileProcessor: ProfileProcessor
 
     @ObservedObject
-    var tunnel: ConnectionObserver
+    var tunnel: ExtendedTunnel
 
     let profile: Profile?
 

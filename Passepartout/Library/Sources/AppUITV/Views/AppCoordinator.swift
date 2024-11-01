@@ -32,11 +32,11 @@ import SwiftUI
 public struct AppCoordinator: View, AppCoordinatorConforming {
     private let profileManager: ProfileManager
 
-    private let tunnel: ConnectionObserver
+    private let tunnel: ExtendedTunnel
 
     private let registry: Registry
 
-    public init(profileManager: ProfileManager, connectionObserver: ConnectionObserver, registry: Registry) {
+    public init(profileManager: ProfileManager, connectionObserver: ExtendedTunnel, registry: Registry) {
         self.profileManager = profileManager
         self.connectionObserver = connectionObserver
         self.registry = registry

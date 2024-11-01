@@ -1,5 +1,5 @@
 //
-//  ConnectionObserver+Theme.swift
+//  ExtendedTunnel+Theme.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/6/24.
@@ -26,7 +26,7 @@
 import PassepartoutKit
 import SwiftUI
 
-extension ConnectionObserver {
+extension ExtendedTunnel {
 
     @MainActor
     public func statusColor(_ theme: Theme) -> Color {

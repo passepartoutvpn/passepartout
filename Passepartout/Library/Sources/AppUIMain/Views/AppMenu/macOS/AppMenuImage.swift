@@ -31,9 +31,9 @@ import SwiftUI
 public struct AppMenuImage: View {
 
     @ObservedObject
-    private var tunnel: ConnectionObserver
+    private var tunnel: ExtendedTunnel
 
-    public init(tunnel: ConnectionObserver) {
+    public init(tunnel: ExtendedTunnel) {
         self.tunnel = tunnel
     }
 

@@ -39,7 +39,7 @@ struct ProfileRowView: View, Routable {
     var profileManager: ProfileManager
 
     @ObservedObject
-    var tunnel: ConnectionObserver
+    var tunnel: ExtendedTunnel
 
     let header: ProfileHeader
 

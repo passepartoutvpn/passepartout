@@ -39,7 +39,7 @@ public struct AppMenu: View {
     private var profileProcessor: ProfileProcessor
 
     @EnvironmentObject
-    private var tunnel: ConnectionObserver
+    private var tunnel: ExtendedTunnel
 
     @StateObject
     private var model = Model()

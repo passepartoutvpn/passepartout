@@ -40,7 +40,7 @@ struct InstalledProfileView: View, Routable {
     let profile: Profile?
 
     @ObservedObject
-    var tunnel: ConnectionObserver
+    var tunnel: ExtendedTunnel
 
     let interactiveManager: InteractiveManager
 

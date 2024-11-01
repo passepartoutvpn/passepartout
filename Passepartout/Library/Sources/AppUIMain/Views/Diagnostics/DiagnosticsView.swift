@@ -42,7 +42,7 @@ struct DiagnosticsView: View {
     private var theme: Theme
 
     @EnvironmentObject
-    private var tunnel: ConnectionObserver
+    private var tunnel: ExtendedTunnel
 
     @EnvironmentObject
     private var iapManager: IAPManager

@@ -46,7 +46,7 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
     private let style: Style
 
     @ObservedObject
-    private var tunnel: ConnectionObserver
+    private var tunnel: ExtendedTunnel
 
     private let profile: Profile?
 
@@ -63,7 +63,7 @@ public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View 
 
     public init(
         style: Style = .plain,
-        tunnel: ConnectionObserver,
+        tunnel: ExtendedTunnel,
         profile: Profile?,
         nextProfileId: Binding<Profile.ID?>,
         interactiveManager: InteractiveManager,

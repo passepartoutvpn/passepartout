@@ -33,7 +33,7 @@ struct ProfileContainerView: View, Routable {
 
     let profileManager: ProfileManager
 
-    let tunnel: ConnectionObserver
+    let tunnel: ExtendedTunnel
 
     let registry: Registry
 

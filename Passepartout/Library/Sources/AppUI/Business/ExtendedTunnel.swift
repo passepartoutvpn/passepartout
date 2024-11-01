@@ -1,5 +1,5 @@
 //
-//  ConnectionObserver.swift
+//  ExtendedTunnel.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/7/24.
@@ -29,7 +29,7 @@ import Foundation
 import PassepartoutKit
 
 @MainActor
-public final class ConnectionObserver: ObservableObject {
+public final class ExtendedTunnel: ObservableObject {
     private let tunnel: Tunnel
 
     private let environment: TunnelEnvironment
@@ -43,7 +43,7 @@ public final class ConnectionObserver: ObservableObject {
     @Published
     public private(set) var lastErrorCode: PassepartoutError.Code? {
         didSet {
-            pp_log(.app, .info, "ConnectionObserver.lastErrorCode -> \(lastErrorCode?.rawValue ?? "nil")")
+            pp_log(.app, .info, "ExtendedTunnel.lastErrorCode -> \(lastErrorCode?.rawValue ?? "nil")")
         }
     }
 
@@ -100,7 +100,7 @@ public final class ConnectionObserver: ObservableObject {
     }
 }
 
-extension ConnectionObserver {
+extension ExtendedTunnel {
     public var status: TunnelStatus {
         tunnel.status
     }
@@ -122,7 +122,7 @@ extension ConnectionObserver {
     }
 }
 
-extension ConnectionObserver {
+extension ExtendedTunnel {
     public var currentProfile: TunnelCurrentProfile? {
         tunnel.currentProfile
     }

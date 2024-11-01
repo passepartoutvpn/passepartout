@@ -33,9 +33,9 @@ public struct ConnectionStatusView: View, ThemeProviding {
     public var theme: Theme
 
     @ObservedObject
-    private var tunnel: ConnectionObserver
+    private var tunnel: ExtendedTunnel
 
-    public init(tunnel: ConnectionObserver) {
+    public init(tunnel: ExtendedTunnel) {
         self.tunnel = tunnel
     }
 
@@ -77,7 +77,7 @@ private extension ConnectionStatusView {
 #Preview("Connected") {
     ConnectionStatusView(tunnel: .mock)
         .task {
-            try? await ConnectionObserver.mock.connect(with: .mock, processor: .mock)
+            try? await ExtendedTunnel.mock.connect(with: .mock, processor: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()
@@ -96,7 +96,7 @@ private extension ConnectionStatusView {
     }
     return ConnectionStatusView(tunnel: .mock)
         .task {
-            try? await ConnectionObserver.mock.connect(with: profile, processor: .mock)
+            try? await ExtendedTunnel.mock.connect(with: profile, processor: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()

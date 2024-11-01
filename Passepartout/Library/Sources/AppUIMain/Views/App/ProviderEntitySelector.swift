@@ -36,7 +36,7 @@ struct ProviderEntitySelector: View {
     var profileManager: ProfileManager
 
     @ObservedObject
-    var tunnel: ConnectionObserver
+    var tunnel: ExtendedTunnel
 
     let profile: Profile
 

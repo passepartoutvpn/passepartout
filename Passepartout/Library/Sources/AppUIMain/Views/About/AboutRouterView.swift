@@ -35,7 +35,7 @@ struct AboutRouterView: View {
 
     let profileManager: ProfileManager
 
-    let tunnel: ConnectionObserver
+    let tunnel: ExtendedTunnel
 
     @State
     var navigationRoute: NavigationRoute?

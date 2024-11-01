@@ -37,7 +37,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
     var profileManager: ProfileManager
 
     @ObservedObject
-    var tunnel: ConnectionObserver
+    var tunnel: ExtendedTunnel
 
     let interactiveManager: InteractiveManager
 
