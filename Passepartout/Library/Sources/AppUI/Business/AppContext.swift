@@ -38,11 +38,9 @@ public final class AppContext: ObservableObject {
 
     public let profileProcessor: ProfileProcessor
 
-    public let tunnel: Tunnel
+    public let tunnel: ConnectionObserver
 
     public let tunnelEnvironment: TunnelEnvironment
-
-    public let connectionObserver: ConnectionObserver
 
     public let registry: Registry
 
@@ -65,9 +63,8 @@ public final class AppContext: ObservableObject {
         self.iapManager = iapManager
         self.profileManager = profileManager
         self.profileProcessor = profileProcessor
-        self.tunnel = tunnel
         self.tunnelEnvironment = tunnelEnvironment
-        connectionObserver = ConnectionObserver(
+        self.tunnel = ConnectionObserver(
             tunnel: tunnel,
             environment: tunnelEnvironment,
             interval: constants.tunnel.refreshInterval
@@ -79,7 +76,7 @@ public final class AppContext: ObservableObject {
 
         Task {
             await iapManager.reloadReceipt()
-            connectionObserver.observeObjects()
+            self.tunnel.observeObjects()
             profileManager.observeObjects()
             observeObjects()
         }

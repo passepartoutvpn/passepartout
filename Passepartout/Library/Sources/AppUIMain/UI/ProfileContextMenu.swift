@@ -31,7 +31,7 @@ import UtilsLibrary
 struct ProfileContextMenu: View, Routable {
     let profileManager: ProfileManager
 
-    let tunnel: Tunnel
+    let tunnel: ConnectionObserver
 
     let header: ProfileHeader
 

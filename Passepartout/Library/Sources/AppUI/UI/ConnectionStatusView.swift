@@ -27,34 +27,34 @@ import Foundation
 import PassepartoutKit
 import SwiftUI
 
-public struct ConnectionStatusView: View, ConnectionObserverProviding, ThemeProviding {
+public struct ConnectionStatusView: View, ThemeProviding {
 
     @EnvironmentObject
     public var theme: Theme
 
     @ObservedObject
-    public var connectionObserver: ConnectionObserver
+    private var tunnel: ConnectionObserver
 
-    public init(connectionObserver: ConnectionObserver) {
-        self.connectionObserver = connectionObserver
+    public init(tunnel: ConnectionObserver) {
+        self.tunnel = tunnel
     }
 
     public var body: some View {
         Text(statusDescription)
             .font(.headline)
-            .foregroundStyle(tunnelStatusColor)
+            .foregroundStyle(tunnel.statusColor(theme))
     }
 }
 
 private extension ConnectionStatusView {
     var statusDescription: String {
-        if let lastErrorCode = connectionObserver.lastErrorCode {
+        if let lastErrorCode = tunnel.lastErrorCode {
             return lastErrorCode.localizedDescription
         }
-        let status = connectionObserver.tunnelConnectionStatus
+        let status = tunnel.connectionStatus
         switch status {
         case .active:
-            if let dataCount = connectionObserver.dataCount {
+            if let dataCount = tunnel.dataCount {
                 let down = dataCount.received.descriptionAsDataUnit
                 let up = dataCount.sent.descriptionAsDataUnit
                 return "↓\(down) ↑\(up)"
@@ -62,7 +62,7 @@ private extension ConnectionStatusView {
 
         case .inactive:
             var desc = status.localizedDescription
-            if connectionObserver.currentProfile?.onDemand ?? false {
+            if tunnel.currentProfile?.onDemand ?? false {
                 desc += Strings.Ui.ConnectionStatus.onDemandSuffix
             }
             return desc
@@ -75,9 +75,9 @@ private extension ConnectionStatusView {
 }
 
 #Preview("Connected") {
-    ConnectionStatusView(connectionObserver: .mock)
+    ConnectionStatusView(tunnel: .mock)
         .task {
-            try? await Tunnel.mock.connect(with: .mock, processor: .mock)
+            try? await ConnectionObserver.mock.connect(with: .mock, processor: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()
@@ -94,9 +94,9 @@ private extension ConnectionStatusView {
     } catch {
         fatalError()
     }
-    return ConnectionStatusView(connectionObserver: .mock)
+    return ConnectionStatusView(tunnel: .mock)
         .task {
-            try? await Tunnel.mock.connect(with: profile, processor: .mock)
+            try? await ConnectionObserver.mock.connect(with: profile, processor: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()

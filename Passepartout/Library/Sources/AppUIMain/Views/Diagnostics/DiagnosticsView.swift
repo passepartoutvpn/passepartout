@@ -42,7 +42,7 @@ struct DiagnosticsView: View {
     private var theme: Theme
 
     @EnvironmentObject
-    private var connectionObserver: ConnectionObserver
+    private var tunnel: ConnectionObserver
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -128,7 +128,7 @@ private extension DiagnosticsView {
     }
 
     var openVPNSection: some View {
-        connectionObserver.value(forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration)
+        tunnel.value(forKey: TunnelEnvironmentKeys.OpenVPN.serverConfiguration)
             .map { cfg in
                 Group {
                     NavigationLink(Strings.Views.Diagnostics.Openvpn.Rows.serverConfiguration) {
@@ -143,7 +143,7 @@ private extension DiagnosticsView {
     var reportIssueSection: some View {
         Section {
             ReportIssueButton(
-                tunnel: connectionObserver.tunnel,
+                tunnel: tunnel,
                 title: Strings.Views.Diagnostics.ReportIssue.title,
                 purchasedProducts: iapManager.purchasedProducts,
                 isUnableToEmail: $isPresentingUnableToEmail

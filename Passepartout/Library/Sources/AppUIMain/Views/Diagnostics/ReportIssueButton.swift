@@ -35,7 +35,7 @@ struct ReportIssueButton {
     @EnvironmentObject
     private var providerManager: ProviderManager
 
-    let tunnel: Tunnel
+    let tunnel: ConnectionObserver
 
     let title: String
 

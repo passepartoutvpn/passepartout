@@ -1,5 +1,5 @@
 //
-//  ConnectionObserverProviding+Theme.swift
+//  ConnectionObserver+Theme.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/6/24.
@@ -26,11 +26,12 @@
 import PassepartoutKit
 import SwiftUI
 
-@MainActor
-extension ConnectionObserverProviding where Self: ThemeProviding {
-    public var tunnelStatusColor: Color {
-        if connectionObserver.lastErrorCode != nil {
-            switch connectionObserver.tunnelStatus {
+extension ConnectionObserver {
+
+    @MainActor
+    public func statusColor(_ theme: Theme) -> Color {
+        if lastErrorCode != nil {
+            switch status {
             case .inactive:
                 return theme.inactiveColor
 
@@ -38,7 +39,7 @@ extension ConnectionObserverProviding where Self: ThemeProviding {
                 return theme.errorColor
             }
         }
-        switch connectionObserver.tunnelConnectionStatus {
+        switch connectionStatus {
         case .active:
             return theme.activeColor
 

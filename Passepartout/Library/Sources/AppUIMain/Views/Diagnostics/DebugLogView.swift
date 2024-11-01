@@ -35,7 +35,7 @@ extension DebugLogView {
         }
     }
 
-    static func withTunnel(_ tunnel: Tunnel, parameters: Constants.Log) -> DebugLogView {
+    static func withTunnel(_ tunnel: ConnectionObserver, parameters: Constants.Log) -> DebugLogView {
         DebugLogView {
             await tunnel.currentLog(parameters: parameters)
         }

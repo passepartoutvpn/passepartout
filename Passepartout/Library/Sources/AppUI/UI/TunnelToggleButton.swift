@@ -27,7 +27,7 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-public struct TunnelToggleButton<Label>: View, ConnectionObserverProviding, ThemeProviding where Label: View {
+public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View {
     public enum Style {
         case plain
 
@@ -38,9 +38,6 @@ public struct TunnelToggleButton<Label>: View, ConnectionObserverProviding, Them
     public var theme: Theme
 
     @EnvironmentObject
-    public var connectionObserver: ConnectionObserver
-
-    @EnvironmentObject
     private var iapManager: IAPManager
 
     @EnvironmentObject
@@ -49,7 +46,7 @@ public struct TunnelToggleButton<Label>: View, ConnectionObserverProviding, Them
     private let style: Style
 
     @ObservedObject
-    private var tunnel: Tunnel
+    private var tunnel: ConnectionObserver
 
     private let profile: Profile?
 
@@ -66,7 +63,7 @@ public struct TunnelToggleButton<Label>: View, ConnectionObserverProviding, Them
 
     public init(
         style: Style = .plain,
-        tunnel: Tunnel,
+        tunnel: ConnectionObserver,
         profile: Profile?,
         nextProfileId: Binding<Profile.ID?>,
         interactiveManager: InteractiveManager,
@@ -112,7 +109,7 @@ private extension TunnelToggleButton {
             return .primary
 
         case .color:
-            return tunnelStatusColor
+            return tunnel.statusColor(theme)
         }
     }
 }

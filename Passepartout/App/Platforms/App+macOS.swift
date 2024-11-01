@@ -86,7 +86,7 @@ extension PassepartoutApp {
             AppMenu()
                 .withEnvironment(from: context, theme: theme)
         } label: {
-            AppMenuImage(connectionObserver: context.connectionObserver)
+            AppMenuImage(tunnel: context.tunnel)
                 .environmentObject(theme)
         }
     }

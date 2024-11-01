@@ -28,13 +28,10 @@ import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-struct ProfileRowView: View, Routable, TunnelContextProviding {
+struct ProfileRowView: View, Routable {
 
     @EnvironmentObject
     private var theme: Theme
-
-    @EnvironmentObject
-    var connectionObserver: ConnectionObserver
 
     let style: ProfileCardView.Style
 
@@ -42,7 +39,7 @@ struct ProfileRowView: View, Routable, TunnelContextProviding {
     var profileManager: ProfileManager
 
     @ObservedObject
-    var tunnel: Tunnel
+    var tunnel: ConnectionObserver
 
     let header: ProfileHeader
 
@@ -116,7 +113,7 @@ private extension ProfileRowView {
     }
 
     var statusImage: Theme.ImageName {
-        switch tunnelConnectionStatus {
+        switch tunnel.connectionStatus {
         case .active:
             return .marked
 
