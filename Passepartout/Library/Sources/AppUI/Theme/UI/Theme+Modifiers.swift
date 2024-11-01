@@ -1,8 +1,8 @@
 //
-//  Theme+UI.swift
+//  Theme+Modifiers.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/28/24.
+//  Created by Davide De Rosa on 11/1/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -30,23 +30,129 @@ import LocalAuthentication
 import SwiftUI
 import UtilsLibrary
 
-// MARK: - Modifiers
+// MARK: Shortcuts
+
+extension View {
+    public func themeModal<Content>(
+        isPresented: Binding<Bool>,
+        isRoot: Bool = false,
+        isInteractive: Bool = true,
+        content: @escaping () -> Content
+    ) -> some View where Content: View {
+        modifier(ThemeBooleanModalModifier(
+            isPresented: isPresented,
+            isRoot: isRoot,
+            isInteractive: isInteractive,
+            modal: content
+        ))
+    }
+
+    public func themeModal<Content, T>(
+        item: Binding<T?>,
+        isRoot: Bool = false,
+        isInteractive: Bool = true,
+        content: @escaping (T) -> Content
+    ) -> some View where Content: View, T: Identifiable {
+        modifier(ThemeItemModalModifier(
+            item: item,
+            isRoot: isRoot,
+            isInteractive: isInteractive,
+            modal: content
+        ))
+    }
+
+    public func themeConfirmation(
+        isPresented: Binding<Bool>,
+        title: String,
+        isDestructive: Bool = false,
+        action: @escaping () -> Void
+    ) -> some View {
+        modifier(ThemeConfirmationModifier(
+            isPresented: isPresented,
+            title: title,
+            isDestructive: isDestructive,
+            action: action
+        ))
+    }
+
+    public func themeNavigationStack(if condition: Bool, closable: Bool = false, path: Binding<NavigationPath>) -> some View {
+        modifier(ThemeNavigationStackModifier(condition: condition, closable: closable, path: path))
+    }
+
+    public func themeForm() -> some View {
+        modifier(ThemeFormModifier())
+    }
+
+    public func themeManualInput() -> some View {
+        modifier(ThemeManualInputModifier())
+    }
+
+    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
+        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
+    }
 
 #if !os(tvOS)
-
-struct ThemeWindowModifier: ViewModifier {
-    let size: CGSize
-}
-
-struct ThemeNavigationDetailModifier: ViewModifier {
-}
-
-struct ThemeFormModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .formStyle(.grouped)
+    public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
+        modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
     }
+
+    public func themeNavigationDetail() -> some View {
+        modifier(ThemeNavigationDetailModifier())
+    }
+
+    public func themePlainButton(action: @escaping () -> Void) -> some View {
+        modifier(ThemePlainButtonModifier(action: action))
+    }
+
+    @ViewBuilder
+    public func themeMultiLine(_ isMultiLine: Bool) -> some View {
+        if isMultiLine {
+            multilineTextAlignment(.leading)
+        } else {
+            themeTruncating()
+        }
+    }
+
+    public func themeTruncating(_ mode: Text.TruncationMode = .middle) -> some View {
+        lineLimit(1)
+            .truncationMode(mode)
+    }
+
+    public func themeEmptyMessage() -> some View {
+        modifier(ThemeEmptyMessageModifier())
+    }
+
+    public func themeError(_ isError: Bool) -> some View {
+        modifier(ThemeErrorModifier(isError: isError))
+    }
+
+    public func themeAnimation<T>(on value: T, category: ThemeAnimationCategory) -> some View where T: Equatable {
+        modifier(ThemeAnimationModifier(value: value, category: category))
+    }
+
+    public func themeTrailingValue(_ value: CustomStringConvertible?, truncationMode: Text.TruncationMode = .tail) -> some View {
+        modifier(ThemeTrailingValueModifier(value: value, truncationMode: truncationMode))
+    }
+
+    public func themeGridHeader(title: String?) -> some View {
+        modifier(ThemeGridSectionModifier(title: title))
+    }
+
+    public func themeGridCell(isSelected: Bool) -> some View {
+        modifier(ThemeGridCellModifier(isSelected: isSelected))
+    }
+
+    public func themeHoverListRow() -> some View {
+        modifier(ThemeHoverListRowModifier())
+    }
+
+    public func themeTip(_ text: String, edge: Edge) -> some View {
+        modifier(ThemeTipModifier(text: text, edge: edge))
+    }
+#endif
 }
+
+// MARK: - Presentation modifiers
 
 struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 
@@ -106,41 +212,6 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
     }
 }
 
-struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding where Popover: View {
-
-    @EnvironmentObject
-    private var theme: Theme
-
-    @Environment(\.horizontalSizeClass)
-    var hsClass
-
-    @Environment(\.verticalSizeClass)
-    var vsClass
-
-    @Binding
-    var isPresented: Bool
-
-    @ViewBuilder
-    let popover: Popover
-
-    func body(content: Content) -> some View {
-        if isBigDevice {
-            content
-                .popover(isPresented: $isPresented) {
-                    popover
-                        .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
-                        .themeLockScreen()
-                }
-        } else {
-            content
-                .sheet(isPresented: $isPresented) {
-                    popover
-                        .themeLockScreen()
-                }
-        }
-    }
-}
-
 struct ThemeConfirmationModifier: ViewModifier {
 
     @Binding
@@ -197,11 +268,35 @@ struct ThemeNavigationStackModifier: ViewModifier {
     }
 }
 
-struct ThemePlainButtonModifier: ViewModifier {
-    let action: () -> Void
+// MARK: - Content modifiers
+
+struct ThemeFormModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .formStyle(.grouped)
+    }
 }
 
 struct ThemeManualInputModifier: ViewModifier {
+}
+
+struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
+    let header: String?
+
+    let footer: String?
+}
+
+#if !os(tvOS)
+
+struct ThemeWindowModifier: ViewModifier {
+    let size: CGSize
+}
+
+struct ThemeNavigationDetailModifier: ViewModifier {
+}
+
+struct ThemePlainButtonModifier: ViewModifier {
+    let action: () -> Void
 }
 
 struct ThemeEmptyMessageModifier: ViewModifier {
@@ -266,12 +361,6 @@ struct ThemeTrailingValueModifier: ViewModifier {
             content
         }
     }
-}
-
-struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
-    let header: String?
-
-    let footer: String?
 }
 
 struct ThemeGridSectionModifier: ViewModifier {
@@ -390,315 +479,6 @@ struct ThemeTipModifier: ViewModifier {
                 .padding(12)
             }
         }
-    }
-}
-
-#endif
-
-// MARK: - Views
-
-public enum ThemeAnimationCategory: CaseIterable {
-    case diagnostics
-
-    case modules
-
-    case profiles
-
-    case profilesLayout
-
-    case providers
-}
-
-public struct ThemeImage: View {
-
-    @EnvironmentObject
-    private var theme: Theme
-
-    private let name: Theme.ImageName
-
-    public init(_ name: Theme.ImageName) {
-        self.name = name
-    }
-
-    public var body: some View {
-        Image(systemName: theme.systemImageName(name))
-    }
-}
-
-public struct ThemeImageLabel: View {
-
-    @EnvironmentObject
-    private var theme: Theme
-
-    private let title: String
-
-    private let name: Theme.ImageName
-
-    public init(_ title: String, _ name: Theme.ImageName) {
-        self.title = title
-        self.name = name
-    }
-
-    public var body: some View {
-        Label {
-            Text(title)
-        } icon: {
-            ThemeImage(name)
-        }
-    }
-}
-
-public struct ThemeCountryFlag: View {
-    private let code: String?
-
-    private let placeholderTip: String?
-
-    private let countryTip: ((String) -> String?)?
-
-    public init(_ code: String?, placeholderTip: String? = nil, countryTip: ((String) -> String?)? = nil) {
-        self.code = code
-        self.placeholderTip = placeholderTip
-        self.countryTip = countryTip
-    }
-
-    public var body: some View {
-        if let code {
-            text(withString: code.asCountryCodeEmoji, tip: countryTip?(code))
-        } else {
-            text(withString: "🌐", tip: placeholderTip)
-        }
-    }
-
-    @ViewBuilder
-    private func text(withString string: String, tip: String?) -> some View {
-        if let tip {
-            Text(verbatim: string)
-                .help(tip)
-        } else {
-            Text(verbatim: string)
-        }
-    }
-}
-
-#if !os(tvOS)
-
-public struct ThemeMenuImage: View {
-
-    @EnvironmentObject
-    private var theme: Theme
-
-    private let name: Theme.MenuImageName
-
-    public init(_ name: Theme.MenuImageName) {
-        self.name = name
-    }
-
-    public var body: some View {
-        Image(theme.menuImageName(name))
-    }
-}
-
-public struct ThemeDisclosableMenu<Content, Label>: View where Content: View, Label: View {
-
-    @ViewBuilder
-    private let content: () -> Content
-
-    @ViewBuilder
-    private let label: () -> Label
-
-    public init(content: @escaping () -> Content, label: @escaping () -> Label) {
-        self.content = content
-        self.label = label
-    }
-
-    public var body: some View {
-        Menu(content: content) {
-            HStack(alignment: .firstTextBaseline) {
-                label()
-                ThemeImage(.disclose)
-            }
-            .contentShape(.rect)
-        }
-        .foregroundStyle(.primary)
-#if os(macOS)
-        .buttonStyle(.plain)
-#endif
-    }
-}
-
-public struct ThemeCopiableText<Value, ValueView>: View where Value: CustomStringConvertible, ValueView: View {
-
-    @EnvironmentObject
-    private var theme: Theme
-
-    private let title: String?
-
-    private let value: Value
-
-    private let isMultiLine: Bool
-
-    private let valueView: (Value) -> ValueView
-
-    public init(
-        title: String? = nil,
-        value: Value,
-        isMultiLine: Bool = true,
-        valueView: @escaping (Value) -> ValueView
-    ) {
-        self.title = title
-        self.value = value
-        self.isMultiLine = isMultiLine
-        self.valueView = valueView
-    }
-
-    public var body: some View {
-        HStack {
-            if let title {
-                Text(title)
-                Spacer()
-            }
-            valueView(value)
-                .foregroundStyle(title == nil ? theme.titleColor : theme.valueColor)
-                .themeMultiLine(isMultiLine)
-            if title == nil {
-                Spacer()
-            }
-            Button {
-                copyToPasteboard(value.description)
-            } label: {
-                ThemeImage(.copy)
-            }
-            // TODO: #584, necessary to avoid cell selection
-            .buttonStyle(.borderless)
-        }
-    }
-}
-
-public struct ThemeTappableText: View {
-    private let title: String
-
-    private let action: () -> Void
-
-    public init(title: String, action: @escaping () -> Void) {
-        self.title = title
-        self.action = action
-    }
-
-    var commonView: some View {
-        Button(action: action) {
-            Text(title)
-                .themeTruncating()
-        }
-    }
-}
-
-public struct ThemeTextField: View {
-    private let title: String?
-
-    @Binding
-    private var text: String
-
-    private let placeholder: String
-
-    public init(_ title: String, text: Binding<String>, placeholder: String) {
-        self.title = title
-        _text = text
-        self.placeholder = placeholder
-    }
-
-    @ViewBuilder
-    var commonView: some View {
-        if let title {
-            LabeledContent {
-                fieldView
-            } label: {
-                Text(title)
-            }
-        } else {
-            fieldView
-        }
-    }
-
-    private var fieldView: some View {
-        TextField(title ?? "", text: $text, prompt: Text(placeholder))
-    }
-}
-
-public struct ThemeSecureField: View {
-    private let title: String?
-
-    @Binding
-    private var text: String
-
-    private let placeholder: String
-
-    public init(title: String?, text: Binding<String>, placeholder: String) {
-        self.title = title
-        _text = text
-        self.placeholder = placeholder
-    }
-
-    @ViewBuilder
-    var commonView: some View {
-        if let title {
-            LabeledContent {
-                fieldView
-            } label: {
-                Text(title)
-            }
-        } else {
-            fieldView
-        }
-    }
-
-    private var fieldView: some View {
-        RevealingSecureField(title ?? "", text: $text, prompt: Text(placeholder), imageWidth: 30.0) {
-           ThemeImage(.hide)
-                .foregroundStyle(Color.accentColor)
-       } revealImage: {
-           ThemeImage(.show)
-               .foregroundStyle(Color.accentColor)
-       }
-    }
-}
-
-public struct ThemeRemovableItemRow<ItemView>: View where ItemView: View {
-    private let isEditing: Bool
-
-    @ViewBuilder
-    private let itemView: () -> ItemView
-
-    let removeAction: () -> Void
-
-    public init(
-        isEditing: Bool,
-        @ViewBuilder itemView: @escaping () -> ItemView,
-        removeAction: @escaping () -> Void
-    ) {
-        self.isEditing = isEditing
-        self.itemView = itemView
-        self.removeAction = removeAction
-    }
-
-    public var body: some View {
-        RemovableItemRow(
-            isEditing: isEditing,
-            itemView: itemView,
-            removeView: removeView
-        )
-    }
-}
-
-public enum ThemeEditableListSection {
-    public struct RemoveLabel: View {
-        let action: () -> Void
-
-        public init(action: @escaping () -> Void) {
-            self.action = action
-        }
-    }
-
-    public struct EditLabel: View {
     }
 }
 

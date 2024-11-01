@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import CPassepartoutOpenVPNOpenSSL
 import PassepartoutKit
 import SwiftUI
@@ -225,10 +226,12 @@ private extension OpenVPNView {
             }
 
         case .credentials:
-            CredentialsView(
+            OpenVPNCredentialsView(
                 isInteractive: draft.isInteractive,
                 credentials: draft.credentials
             )
+            .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
+            .modifier(PaywallModifier(reason: $paywallReason))
         }
     }
 }

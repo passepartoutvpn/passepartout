@@ -1,8 +1,8 @@
 //
-//  OpenVPNModule+Extensions.swift
+//  ThemeAnimationCategory.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/17/24.
+//  Created by Davide De Rosa on 11/1/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,20 +23,16 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
-import SwiftUI
+import Foundation
 
-extension OpenVPNModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        OpenVPNView(editor: editor, module: self)
-    }
-}
+public enum ThemeAnimationCategory: CaseIterable {
+    case diagnostics
 
-extension OpenVPNModule: ProviderEntityViewProviding {
-    func providerEntityView(
-        with provider: ModuleMetadata.Provider,
-        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
-    ) -> some View {
-        vpnProviderEntityView(with: provider, onSelect: onSelect)
-    }
+    case modules
+
+    case profiles
+
+    case profilesLayout
+
+    case providers
 }

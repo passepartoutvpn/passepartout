@@ -23,59 +23,66 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import PassepartoutKit
 import SwiftUI
 import UtilsLibrary
 
-extension OpenVPNView {
-    struct CredentialsView: View {
+public struct OpenVPNCredentialsView: View {
 
-        @EnvironmentObject
-        private var iapManager: IAPManager
+    @EnvironmentObject
+    private var iapManager: IAPManager
 
-        @Binding
-        var isInteractive: Bool
+    @Binding
+    private var isInteractive: Bool
 
-        @Binding
-        var credentials: OpenVPN.Credentials?
+    @Binding
+    private var credentials: OpenVPN.Credentials?
 
-        var isAuthenticating = false
+    private var isAuthenticating = false
 
-        @State
-        private var builder = OpenVPN.Credentials.Builder()
+    @State
+    private var builder = OpenVPN.Credentials.Builder()
 
-        @State
-        private var paywallReason: PaywallReason?
+    @State
+    private var paywallReason: PaywallReason?
 
-        var body: some View {
-            Form {
-                restrictedArea
-                inputSection
+    public init(
+        isInteractive: Binding<Bool>,
+        credentials: Binding<OpenVPN.Credentials?>,
+        isAuthenticating: Bool = false
+    ) {
+        _isInteractive = isInteractive
+        _credentials = credentials
+        self.isAuthenticating = isAuthenticating
+    }
+
+    public var body: some View {
+        Form {
+            restrictedArea
+            inputSection
+        }
+        .themeManualInput()
+        .themeForm()
+        .navigationTitle(Strings.Modules.Openvpn.credentials)
+        .onLoad {
+            builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
+            builder.otp = nil
+        }
+        .onChange(of: builder) {
+            var copy = $0
+            if isEligibleForInteractiveLogin {
+                copy.otp = copy.otp ?? ""
+            } else {
+                copy.otpMethod = .none
+                copy.otp = nil
             }
-            .themeAnimation(on: isInteractive, category: .modules)
-            .themeManualInput()
-            .themeForm()
-            .navigationTitle(Strings.Modules.Openvpn.credentials)
-            .onLoad {
-                builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
-                builder.otp = nil
-            }
-            .onChange(of: builder) {
-                var copy = $0
-                if isEligibleForInteractiveLogin {
-                    copy.otp = copy.otp ?? ""
-                } else {
-                    copy.otpMethod = .none
-                    copy.otp = nil
-                }
-                credentials = copy.build()
-            }
-            .modifier(PaywallModifier(reason: $paywallReason))
+            credentials = copy.build()
         }
     }
 }
 
-private extension OpenVPNView.CredentialsView {
+private extension OpenVPNCredentialsView {
     var isEligibleForInteractiveLogin: Bool {
         iapManager.isEligible(for: .interactiveLogin)
     }
@@ -164,7 +171,7 @@ private extension OpenVPNView.CredentialsView {
     var isInteractive = true
 
     return NavigationStack {
-        OpenVPNView.CredentialsView(
+        OpenVPNCredentialsView(
             isInteractive: $isInteractive,
             credentials: $credentials
         )

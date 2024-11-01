@@ -1,8 +1,8 @@
 //
-//  ExtendedTunnel+Theme.swift
+//  MockAppReceiptReader.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/6/24.
+//  Created by Davide De Rosa on 12/19/23.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,31 +23,25 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import PassepartoutKit
-import SwiftUI
+import Foundation
+import UtilsLibrary
 
-extension ExtendedTunnel {
+public actor MockAppReceiptReader: AppReceiptReader {
+    private var receipt: InAppReceipt?
 
-    @MainActor
-    public func statusColor(_ theme: Theme) -> Color {
-        if lastErrorCode != nil {
-            switch status {
-            case .inactive:
-                return theme.inactiveColor
+    public init(receipt: InAppReceipt? = nil) {
+        self.receipt = receipt
+    }
 
-            default:
-                return theme.errorColor
-            }
-        }
-        switch connectionStatus {
-        case .active:
-            return theme.activeColor
+    public func setReceipt(withBuild build: Int, products: [AppProduct], cancelledProducts: Set<AppProduct> = []) {
+        receipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: products.map {
+            .init(productIdentifier: $0.rawValue,
+                  cancellationDate: cancelledProducts.contains($0) ? Date() : nil,
+                  originalPurchaseDate: nil)
+        })
+    }
 
-        case .activating, .deactivating:
-            return theme.pendingColor
-
-        case .inactive:
-            return theme.inactiveColor
-        }
+    public func receipt(for userLevel: AppUserLevel) -> InAppReceipt? {
+        receipt
     }
 }

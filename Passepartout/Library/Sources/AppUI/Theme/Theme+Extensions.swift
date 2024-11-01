@@ -1,8 +1,8 @@
 //
-//  InteractiveViewProviding.swift
+//  Theme+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/6/24.
+//  Created by Davide De Rosa on 9/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,11 +23,32 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
+import PassepartoutKit
 import SwiftUI
 
-protocol InteractiveViewProviding {
-    associatedtype InteractiveContent: View
+extension ExtendedTunnel {
 
     @MainActor
-    func interactiveView(with editor: ProfileEditor) -> InteractiveContent
+    public func statusColor(_ theme: Theme) -> Color {
+        if lastErrorCode != nil {
+            switch status {
+            case .inactive:
+                return theme.inactiveColor
+
+            default:
+                return theme.errorColor
+            }
+        }
+        switch connectionStatus {
+        case .active:
+            return theme.activeColor
+
+        case .activating, .deactivating:
+            return theme.pendingColor
+
+        case .inactive:
+            return theme.inactiveColor
+        }
+    }
 }

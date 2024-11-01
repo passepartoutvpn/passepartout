@@ -1,5 +1,5 @@
 //
-//  MockAppReceiptReader.swift
+//  MockAppProductHelper.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 12/19/23.
@@ -26,22 +26,32 @@
 import Foundation
 import UtilsLibrary
 
-actor MockReceiptReader: AppReceiptReader {
-    private var receipt: InAppReceipt?
+public actor MockAppProductHelper: AppProductHelper {
+    public private(set) var products: [AppProduct: InAppProduct]
 
-    init(receipt: InAppReceipt? = nil) {
-        self.receipt = receipt
+    public init() {
+        products = [:]
     }
 
-    func setReceipt(withBuild build: Int, products: [AppProduct], cancelledProducts: Set<AppProduct> = []) {
-        receipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: products.map {
-            .init(productIdentifier: $0.rawValue,
-                  cancellationDate: cancelledProducts.contains($0) ? Date() : nil,
-                  originalPurchaseDate: nil)
-        })
+    public nonisolated var canMakePurchases: Bool {
+        true
     }
 
-    func receipt(for userLevel: AppUserLevel) -> InAppReceipt? {
-        receipt
+    public func fetchProducts() async throws {
+        products = AppProduct.all.reduce(into: [:]) {
+            $0[$1] = InAppProduct(
+                productIdentifier: $1.rawValue,
+                localizedTitle: $1.rawValue,
+                localizedPrice: "10.0",
+                native: $1
+            )
+        }
+    }
+
+    public func purchase(productWithIdentifier productIdentifier: AppProduct) async throws -> InAppPurchaseResult {
+        .done
+    }
+
+    public func restorePurchases() async throws {
     }
 }

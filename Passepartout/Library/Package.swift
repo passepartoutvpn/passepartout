@@ -50,6 +50,13 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
+            name: "APILibrary",
+            dependencies: ["CommonLibrary"],
+            resources: [
+                .copy("API")
+            ]
+        ),
+        .target(
             name: "AppData",
             dependencies: []
         ),
@@ -57,8 +64,7 @@ let package = Package(
             name: "AppDataProfiles",
             dependencies: [
                 "AppData",
-                "AppLibrary",
-                "UtilsLibrary"
+                "AppLibrary"
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
@@ -68,8 +74,7 @@ let package = Package(
             name: "AppDataProviders",
             dependencies: [
                 "AppData",
-                "AppLibrary",
-                "UtilsLibrary"
+                "AppLibrary"
             ],
             resources: [
                 .process("Providers.xcdatamodeld")
@@ -77,16 +82,18 @@ let package = Package(
         ),
         .target(
             name: "AppLibrary",
-            dependencies: ["CommonLibrary"]
+            dependencies: [
+                "APILibrary",
+                "Kvitto",
+                "UtilsLibrary"
+            ]
         ),
         .target(
             name: "AppUI",
             dependencies: [
                 "AppDataProfiles",
                 "AppDataProviders",
-                "AppLibrary",
-                "Kvitto",
-                "UtilsLibrary"
+                "AppLibrary"
             ],
             resources: [
                 .process("Resources")
@@ -114,7 +121,6 @@ let package = Package(
                 .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")
             ],
             resources: [
-                .copy("API"),
                 .process("Resources")
             ]
         ),

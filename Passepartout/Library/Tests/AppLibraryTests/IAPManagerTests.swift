@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@testable import AppUI
+@testable import AppLibrary
 import Foundation
 import XCTest
 
@@ -43,7 +43,7 @@ extension IAPManagerTests {
     // MARK: Build products
 
     func test_givenBuildProducts_whenOlder_thenFullVersion() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: olderBuildNumber, products: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
@@ -56,7 +56,7 @@ extension IAPManagerTests {
     }
 
     func test_givenBuildProducts_whenNewer_thenFreeVersion() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: newerBuildNumber, products: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
@@ -71,7 +71,7 @@ extension IAPManagerTests {
     // MARK: Eligibility
 
     func test_givenPurchasedFeature_whenReloadReceipt_thenIsEligible() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(receiptReader: reader)
 
         XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
@@ -84,7 +84,7 @@ extension IAPManagerTests {
     }
 
     func test_givenPurchasedFeatures_thenIsOnlyEligibleForFeatures() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [
             .Features.siriShortcuts,
             .Features.networkSettings
@@ -102,7 +102,7 @@ extension IAPManagerTests {
     }
 
     func test_givenPurchasedAndCancelledFeature_thenIsNotEligible() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         await reader.setReceipt(
             withBuild: defaultBuildNumber,
             products: [.Full.allPlatforms],
@@ -115,7 +115,7 @@ extension IAPManagerTests {
     }
 
     func test_givenFreeVersion_thenIsNotEligibleForAnyFeature() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [])
         let sut = IAPManager(receiptReader: reader)
 
@@ -127,7 +127,7 @@ extension IAPManagerTests {
     }
 
     func test_givenFreeVersion_thenIsNotEligibleForAppleTV() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [])
         let sut = IAPManager(receiptReader: reader)
 
@@ -136,7 +136,7 @@ extension IAPManagerTests {
     }
 
     func test_givenFullVersion_thenIsEligibleForAnyFeatureExceptAppleTV() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.allPlatforms])
         let sut = IAPManager(receiptReader: reader)
 
@@ -148,7 +148,7 @@ extension IAPManagerTests {
     }
 
     func test_givenAppleTV_thenIsEligibleForAppleTV() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Features.appleTV])
         let sut = IAPManager(receiptReader: reader)
 
@@ -157,7 +157,7 @@ extension IAPManagerTests {
     }
 
     func test_givenPlatformVersion_thenIsFullVersionForPlatform() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(receiptReader: reader)
 
 #if os(macOS)
@@ -172,7 +172,7 @@ extension IAPManagerTests {
     }
 
     func test_givenPlatformVersion_thenIsNotFullVersionForOtherPlatform() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(receiptReader: reader)
 
 #if os(macOS)
@@ -193,7 +193,7 @@ extension IAPManagerTests {
     // MARK: App level
 
     func test_givenBetaApp_thenIsRestricted() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(customUserLevel: .beta, receiptReader: reader)
 
         await sut.reloadReceipt()
@@ -201,7 +201,7 @@ extension IAPManagerTests {
     }
 
     func test_givenBetaApp_thenIsNotEligibleForAnyFeature() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(customUserLevel: .beta, receiptReader: reader)
 
         await sut.reloadReceipt()
@@ -209,7 +209,7 @@ extension IAPManagerTests {
     }
 
     func test_givenBetaApp_thenIsEligibleForUnrestrictedFeature() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(customUserLevel: .beta, receiptReader: reader, unrestrictedFeatures: [.onDemand])
 
         await sut.reloadReceipt()
@@ -223,7 +223,7 @@ extension IAPManagerTests {
     }
 
     func test_givenFullApp_thenIsFullVersion() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(customUserLevel: .fullVersion, receiptReader: reader)
 
         await sut.reloadReceipt()
@@ -231,7 +231,7 @@ extension IAPManagerTests {
     }
 
     func test_givenFullPlusTVApp_thenIsFullVersion() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(customUserLevel: .fullVersionPlusTV, receiptReader: reader)
 
         await sut.reloadReceipt()
@@ -239,7 +239,7 @@ extension IAPManagerTests {
     }
 
     func test_givenFullApp_thenIsEligibleForAnyFeatureExceptAppleTV() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(customUserLevel: .fullVersion, receiptReader: reader)
 
         await sut.reloadReceipt()
@@ -250,7 +250,7 @@ extension IAPManagerTests {
     }
 
     func test_givenFullPlusTVApp_thenIsEligibleForAnyFeature() async {
-        let reader = MockReceiptReader()
+        let reader = MockAppReceiptReader()
         let sut = IAPManager(customUserLevel: .fullVersionPlusTV, receiptReader: reader)
 
         await sut.reloadReceipt()

@@ -1,8 +1,8 @@
 //
-//  MockAppProductHelper.swift
+//  InteractiveViewProviding.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 12/19/23.
+//  Created by Davide De Rosa on 10/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,35 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import UtilsLibrary
+import SwiftUI
 
-actor MockAppProductHelper: AppProductHelper {
-    private(set) var products: [AppProduct: InAppProduct]
+public protocol InteractiveViewProviding {
+    associatedtype InteractiveContent: View
 
-    init() {
-        products = [:]
-    }
-
-    nonisolated var canMakePurchases: Bool {
-        true
-    }
-
-    func fetchProducts() async throws {
-        products = AppProduct.all.reduce(into: [:]) {
-            $0[$1] = InAppProduct(
-                productIdentifier: $1.rawValue,
-                localizedTitle: $1.rawValue,
-                localizedPrice: "10.0",
-                native: $1
-            )
-        }
-    }
-
-    func purchase(productWithIdentifier productIdentifier: AppProduct) async throws -> InAppPurchaseResult {
-        .done
-    }
-
-    func restorePurchases() async throws {
-    }
+    @MainActor
+    func interactiveView(with editor: ProfileEditor) -> InteractiveContent
 }

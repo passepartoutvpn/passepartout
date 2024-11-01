@@ -2,7 +2,7 @@
 //  Shared.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/11/24.
+//  Created by Davide De Rosa on 11/1/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,35 +23,41 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
-import PassepartoutWireGuardGo
 
-extension LoggerDestination {
-    public static let app = Self(category: "app")
-}
-
-extension WireGuard.Configuration.Builder {
-    public static var `default`: Self {
-        .init(keyGenerator: StandardWireGuardKeyGenerator())
+// TODO: #716, move to Environment
+extension API {
+    public static var shared: [APIMapper] {
+#if DEBUG
+        [API.bundled]
+#else
+        API.remoteThenBundled
+#endif
     }
-}
 
-// TODO: #716, move to Environment
-extension Constants {
-    public static let shared = Bundle.module.unsafeDecode(Constants.self, filename: "Constants")
-}
+    private static let remoteThenBundled: [APIMapper] = [
+        Self.remote,
+        Self.bundled
+    ]
 
-// TODO: #716, move to Environment?
-// BundleConfiguration.shared
-
-// TODO: #716, move to Environment
-extension UserDefaults {
-    public static let appGroup: UserDefaults = {
-        let appGroup = BundleConfiguration.mainString(for: .groupId)
-        guard let defaults = UserDefaults(suiteName: appGroup) else {
-            fatalError("No access to App Group: \(appGroup)")
+    public static let bundled: APIMapper = {
+        guard let url = Bundle.module.url(forResource: "API", withExtension: nil) else {
+            fatalError("Unable to find bundled API")
         }
-        return defaults
+        let ws = API.V5.DefaultWebServices(
+            url,
+            timeout: Constants.shared.api.timeoutInterval
+        )
+        return API.V5.Mapper(webServices: ws)
+    }()
+
+    public static let remote: APIMapper = {
+        let ws = API.V5.DefaultWebServices(
+            Constants.shared.websites.api,
+            timeout: Constants.shared.api.timeoutInterval
+        )
+        return API.V5.Mapper(webServices: ws)
     }()
 }

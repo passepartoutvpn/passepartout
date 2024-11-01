@@ -1,5 +1,5 @@
 //
-//  ThemeFavoriteToggle.swift
+//  FavoriteToggle.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/25/24.
@@ -25,16 +25,21 @@
 
 import SwiftUI
 
-struct FavoriteToggle<ID>: View where ID: Hashable {
-    let value: ID
+public struct FavoriteToggle<ID>: View where ID: Hashable {
+    private let value: ID
 
     @Binding
-    var selection: Set<ID>
+    private var selection: Set<ID>
 
     @State
     private var hover: ID?
 
-    var body: some View {
+    public init(value: ID, selection: Binding<Set<ID>>) {
+        self.value = value
+        _selection = selection
+    }
+
+    public var body: some View {
         Button {
             if selection.contains(value) {
                 selection.remove(value)
@@ -45,18 +50,20 @@ struct FavoriteToggle<ID>: View where ID: Hashable {
             ThemeImage(selection.contains(value) ? .favoriteOn : .favoriteOff)
                 .opacity(opacity)
         }
+#if os(macOS)
         .onHover {
             hover = $0 ? value : nil
         }
+#endif
     }
 }
 
 private extension FavoriteToggle {
     var opacity: Double {
-#if os(iOS)
-        1.0
-#else
+#if os(macOS)
         selection.contains(value) || value == hover ? 1.0 : 0.0
+#else
+        1.0
 #endif
     }
 }
