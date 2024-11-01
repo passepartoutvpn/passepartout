@@ -1,5 +1,5 @@
 //
-//  ThemeFavoriteToggle.swift
+//  FavoriteToggle.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/25/24.
