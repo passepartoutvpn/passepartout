@@ -35,20 +35,21 @@ extension Theme {
     }
 }
 
-// MARK: - Modifiers
+// MARK: - Shortcuts
 
-extension ThemeWindowModifier {
-    func body(content: Content) -> some View {
-        content
+extension View {
+    public func themePopover<Content>(
+        isPresented: Binding<Bool>,
+        content: @escaping () -> Content
+    ) -> some View where Content: View {
+        modifier(ThemeBooleanPopoverModifier(
+            isPresented: isPresented,
+            popover: content
+        ))
     }
 }
 
-extension ThemeNavigationDetailModifier {
-    func body(content: Content) -> some View {
-        content
-            .navigationBarTitleDisplayMode(.inline)
-    }
-}
+// MARK: - Presentation modifiers
 
 struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding where Popover: View {
 
@@ -82,6 +83,21 @@ struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding wh
                         .themeLockScreen()
                 }
         }
+    }
+}
+
+// MARK: - Content modifiers
+
+extension ThemeWindowModifier {
+    func body(content: Content) -> some View {
+        content
+    }
+}
+
+extension ThemeNavigationDetailModifier {
+    func body(content: Content) -> some View {
+        content
+            .navigationBarTitleDisplayMode(.inline)
     }
 }
 

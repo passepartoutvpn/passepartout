@@ -61,18 +61,6 @@ extension View {
         ))
     }
 
-#if os(iOS)
-    public func themePopover<Content>(
-        isPresented: Binding<Bool>,
-        content: @escaping () -> Content
-    ) -> some View where Content: View {
-        modifier(ThemeBooleanPopoverModifier(
-            isPresented: isPresented,
-            popover: content
-        ))
-    }
-#endif
-
     public func themeConfirmation(
         isPresented: Binding<Bool>,
         title: String,
