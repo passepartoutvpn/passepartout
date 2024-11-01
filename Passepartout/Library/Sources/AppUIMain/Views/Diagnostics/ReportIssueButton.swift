@@ -30,10 +30,10 @@ import SwiftUI
 struct ReportIssueButton {
 
     @EnvironmentObject
-    private var profileManager: ProfileManager
-
-    @EnvironmentObject
     private var providerManager: ProviderManager
+
+    @ObservedObject
+    var profileManager: ProfileManager
 
     let tunnel: ExtendedTunnel
 

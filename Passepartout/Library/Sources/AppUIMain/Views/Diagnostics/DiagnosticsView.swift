@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppLibrary
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
@@ -46,6 +47,8 @@ struct DiagnosticsView: View {
 
     @AppStorage(AppPreference.logsPrivateData.key, store: .appGroup)
     private var logsPrivateData = false
+
+    let profileManager: ProfileManager
 
     let tunnel: ExtendedTunnel
 
@@ -142,6 +145,7 @@ private extension DiagnosticsView {
     var reportIssueSection: some View {
         Section {
             ReportIssueButton(
+                profileManager: profileManager,
                 tunnel: tunnel,
                 title: Strings.Views.Diagnostics.ReportIssue.title,
                 purchasedProducts: iapManager.purchasedProducts,
@@ -189,7 +193,7 @@ private extension DiagnosticsView {
 }
 
 #Preview {
-    DiagnosticsView(tunnel: .mock) {
+    DiagnosticsView(profileManager: .mock, tunnel: .mock) {
         [
             .init(date: Date(), url: URL(string: "http://one.com")!),
             .init(date: Date().addingTimeInterval(-60), url: URL(string: "http://two.com")!),
