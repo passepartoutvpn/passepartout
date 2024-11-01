@@ -2,7 +2,7 @@
 //  OpenVPNModule+Extensions.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/17/24.
+//  Created by Davide De Rosa on 11/1/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,17 +26,14 @@
 import PassepartoutKit
 import SwiftUI
 
-extension OpenVPNModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        OpenVPNView(editor: editor, module: self)
-    }
-}
+extension OpenVPNModule.Builder: InteractiveViewProviding {
+    public func interactiveView(with editor: ProfileEditor) -> some View {
+        let draft = editor[self]
 
-extension OpenVPNModule: ProviderEntityViewProviding {
-    func providerEntityView(
-        with provider: ModuleMetadata.Provider,
-        onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
-    ) -> some View {
-        vpnProviderEntityView(with: provider, onSelect: onSelect)
+        return OpenVPNCredentialsView(
+            isInteractive: draft.isInteractive,
+            credentials: draft.credentials,
+            isAuthenticating: true
+        )
     }
 }

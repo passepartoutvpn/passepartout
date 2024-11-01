@@ -32,6 +32,22 @@ import UtilsLibrary
 
 // MARK: - Modifiers
 
+struct ThemeFormModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .formStyle(.grouped)
+    }
+}
+
+struct ThemeManualInputModifier: ViewModifier {
+}
+
+struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
+    let header: String?
+
+    let footer: String?
+}
+
 #if !os(tvOS)
 
 struct ThemeWindowModifier: ViewModifier {
@@ -39,13 +55,6 @@ struct ThemeWindowModifier: ViewModifier {
 }
 
 struct ThemeNavigationDetailModifier: ViewModifier {
-}
-
-struct ThemeFormModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .formStyle(.grouped)
-    }
 }
 
 struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
@@ -201,9 +210,6 @@ struct ThemePlainButtonModifier: ViewModifier {
     let action: () -> Void
 }
 
-struct ThemeManualInputModifier: ViewModifier {
-}
-
 struct ThemeEmptyMessageModifier: ViewModifier {
 
     @EnvironmentObject
@@ -266,12 +272,6 @@ struct ThemeTrailingValueModifier: ViewModifier {
             content
         }
     }
-}
-
-struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
-    let header: String?
-
-    let footer: String?
 }
 
 struct ThemeGridSectionModifier: ViewModifier {
@@ -480,6 +480,76 @@ public struct ThemeCountryFlag: View {
     }
 }
 
+public struct ThemeTextField: View {
+    private let title: String?
+
+    @Binding
+    private var text: String
+
+    private let placeholder: String
+
+    public init(_ title: String, text: Binding<String>, placeholder: String) {
+        self.title = title
+        _text = text
+        self.placeholder = placeholder
+    }
+
+    @ViewBuilder
+    var commonView: some View {
+        if let title {
+            LabeledContent {
+                fieldView
+            } label: {
+                Text(title)
+            }
+        } else {
+            fieldView
+        }
+    }
+
+    private var fieldView: some View {
+        TextField(title ?? "", text: $text, prompt: Text(placeholder))
+    }
+}
+
+public struct ThemeSecureField: View {
+    private let title: String?
+
+    @Binding
+    private var text: String
+
+    private let placeholder: String
+
+    public init(title: String?, text: Binding<String>, placeholder: String) {
+        self.title = title
+        _text = text
+        self.placeholder = placeholder
+    }
+
+    @ViewBuilder
+    var commonView: some View {
+        if let title {
+            LabeledContent {
+                fieldView
+            } label: {
+                Text(title)
+            }
+        } else {
+            fieldView
+        }
+    }
+
+    private var fieldView: some View {
+        RevealingSecureField(title ?? "", text: $text, prompt: Text(placeholder), imageWidth: 30.0) {
+           ThemeImage(.hide)
+                .foregroundStyle(Color.accentColor)
+       } revealImage: {
+           ThemeImage(.show)
+               .foregroundStyle(Color.accentColor)
+       }
+    }
+}
+
 #if !os(tvOS)
 
 public struct ThemeMenuImage: View {
@@ -589,76 +659,6 @@ public struct ThemeTappableText: View {
             Text(title)
                 .themeTruncating()
         }
-    }
-}
-
-public struct ThemeTextField: View {
-    private let title: String?
-
-    @Binding
-    private var text: String
-
-    private let placeholder: String
-
-    public init(_ title: String, text: Binding<String>, placeholder: String) {
-        self.title = title
-        _text = text
-        self.placeholder = placeholder
-    }
-
-    @ViewBuilder
-    var commonView: some View {
-        if let title {
-            LabeledContent {
-                fieldView
-            } label: {
-                Text(title)
-            }
-        } else {
-            fieldView
-        }
-    }
-
-    private var fieldView: some View {
-        TextField(title ?? "", text: $text, prompt: Text(placeholder))
-    }
-}
-
-public struct ThemeSecureField: View {
-    private let title: String?
-
-    @Binding
-    private var text: String
-
-    private let placeholder: String
-
-    public init(title: String?, text: Binding<String>, placeholder: String) {
-        self.title = title
-        _text = text
-        self.placeholder = placeholder
-    }
-
-    @ViewBuilder
-    var commonView: some View {
-        if let title {
-            LabeledContent {
-                fieldView
-            } label: {
-                Text(title)
-            }
-        } else {
-            fieldView
-        }
-    }
-
-    private var fieldView: some View {
-        RevealingSecureField(title ?? "", text: $text, prompt: Text(placeholder), imageWidth: 30.0) {
-           ThemeImage(.hide)
-                .foregroundStyle(Color.accentColor)
-       } revealImage: {
-           ThemeImage(.show)
-               .foregroundStyle(Color.accentColor)
-       }
     }
 }
 

@@ -25,7 +25,7 @@
 
 import SwiftUI
 
-protocol InteractiveViewProviding {
+public protocol InteractiveViewProviding {
     associatedtype InteractiveContent: View
 
     @MainActor

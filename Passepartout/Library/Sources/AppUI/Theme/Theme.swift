@@ -82,21 +82,28 @@ public final class Theme: ObservableObject {
     }
 }
 
-#if !os(tvOS)
-
 // MARK: - Modifiers
 
 extension View {
+    public func themeForm() -> some View {
+        modifier(ThemeFormModifier())
+    }
+
+    public func themeManualInput() -> some View {
+        modifier(ThemeManualInputModifier())
+    }
+
+    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
+        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
+    }
+
+#if !os(tvOS)
     public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
     }
 
     public func themeNavigationDetail() -> some View {
         modifier(ThemeNavigationDetailModifier())
-    }
-
-    public func themeForm() -> some View {
-        modifier(ThemeFormModifier())
     }
 
     public func themeModal<Content>(
@@ -159,10 +166,6 @@ extension View {
         modifier(ThemePlainButtonModifier(action: action))
     }
 
-    public func themeManualInput() -> some View {
-        modifier(ThemeManualInputModifier())
-    }
-
     @ViewBuilder
     public func themeMultiLine(_ isMultiLine: Bool) -> some View {
         if isMultiLine {
@@ -193,10 +196,6 @@ extension View {
         modifier(ThemeTrailingValueModifier(value: value, truncationMode: truncationMode))
     }
 
-    public func themeSection(header: String? = nil, footer: String? = nil) -> some View {
-        modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
-    }
-
     public func themeGridHeader(title: String?) -> some View {
         modifier(ThemeGridSectionModifier(title: title))
     }
@@ -216,11 +215,13 @@ extension View {
     public func themeTip(_ text: String, edge: Edge) -> some View {
         modifier(ThemeTipModifier(text: text, edge: edge))
     }
+#endif
 }
 
 // MARK: - Views
 
 extension Theme {
+#if !os(tvOS)
     public func listSection<ItemView: View, T: EditableValue>(
         _ title: String,
         addTitle: String,
@@ -238,6 +239,5 @@ extension Theme {
             editLabel: ThemeEditableListSection.EditLabel.init
         )
     }
-}
-
 #endif
+}

@@ -33,4 +33,40 @@ extension Theme {
     }
 }
 
+// MARK: - Modifiers
+
+extension ThemeManualInputModifier {
+    func body(content: Content) -> some View {
+        content
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
+    }
+}
+
+extension ThemeSectionWithHeaderFooterModifier {
+    func body(content: Content) -> some View {
+        Section {
+            content
+        } header: {
+            header.map(Text.init)
+        } footer: {
+            footer.map(Text.init)
+        }
+    }
+}
+
+// MARK: - Views
+
+extension ThemeTextField {
+    public var body: some View {
+        commonView
+    }
+}
+
+extension ThemeSecureField {
+    public var body: some View {
+        commonView
+    }
+}
+
 #endif

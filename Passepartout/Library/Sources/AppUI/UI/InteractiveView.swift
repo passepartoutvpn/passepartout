@@ -26,14 +26,19 @@
 import PassepartoutKit
 import SwiftUI
 
-struct InteractiveView: View {
+public struct InteractiveView: View {
 
     @ObservedObject
-    var manager: InteractiveManager
+    private var manager: InteractiveManager
 
-    let onError: (Error) -> Void
+    private let onError: (Error) -> Void
 
-    var body: some View {
+    public init(manager: InteractiveManager, onError: @escaping (Error) -> Void) {
+        self.manager = manager
+        self.onError = onError
+    }
+
+    public var body: some View {
         manager
             .editor
             .interactiveProvider
