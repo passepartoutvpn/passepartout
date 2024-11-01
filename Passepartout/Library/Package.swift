@@ -23,11 +23,11 @@ let package = Package(
         ),
         .library(
             name: "AppUIMain",
-            targets: ["AppUIMain"]
+            targets: ["AppUIPlatform"]
         ),
         .library(
             name: "AppUITV",
-            targets: ["AppUITV"]
+            targets: ["AppUIPlatform"]
         ),
         .library(
             name: "TunnelLibrary",
@@ -107,6 +107,13 @@ let package = Package(
             ],
             resources: [
                 .process("Resources")
+            ]
+        ),
+        .target(
+            name: "AppUIPlatform",
+            dependencies: [
+                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
+                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
             ]
         ),
         .target(
