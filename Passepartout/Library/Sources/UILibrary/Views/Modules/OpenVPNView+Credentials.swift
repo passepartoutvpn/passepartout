@@ -29,6 +29,13 @@ import PassepartoutKit
 import SwiftUI
 
 public struct OpenVPNCredentialsView: View {
+    private enum Field: Hashable {
+        case username
+
+        case password
+
+        case otp
+    }
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -46,6 +53,9 @@ public struct OpenVPNCredentialsView: View {
 
     @State
     private var paywallReason: PaywallReason?
+
+    @FocusState
+    private var focusedField: Field?
 
     public init(
         isInteractive: Binding<Bool>,
@@ -66,6 +76,13 @@ public struct OpenVPNCredentialsView: View {
         .onLoad {
             builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
             builder.otp = nil
+            switch builder.otpMethod {
+            case .none:
+                focusedField = .username
+
+            default:
+                focusedField = .otp
+            }
         }
         .onChange(of: builder) {
             var copy = $0
@@ -137,8 +154,11 @@ private extension OpenVPNCredentialsView {
             if !isAuthenticating || builder.otpMethod == .none {
                 ThemeTextField(Strings.Global.username, text: $builder.username, placeholder: Strings.Placeholders.username)
                     .textContentType(.username)
+                    .focused($focusedField, equals: .username)
+
                 ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
                     .textContentType(.password)
+                    .focused($focusedField, equals: .password)
             }
             if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
                 ThemeSecureField(
@@ -147,6 +167,7 @@ private extension OpenVPNCredentialsView {
                     placeholder: Strings.Placeholders.secret
                 )
                 .textContentType(.oneTimeCode)
+                .focused($focusedField, equals: .otp)
             }
         }
         .themeSection(footer: inputFooter)
