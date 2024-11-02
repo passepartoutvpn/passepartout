@@ -24,10 +24,10 @@
 //
 
 import AppLibrary
+import CommonUtils
 import CPassepartoutOpenVPNOpenSSL
 import PassepartoutKit
 import SwiftUI
-import CommonUtils
 
 struct OpenVPNView: View, ModuleDraftEditing {
 

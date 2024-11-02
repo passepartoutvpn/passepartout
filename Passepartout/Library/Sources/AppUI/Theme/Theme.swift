@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import SwiftUI
 import CommonUtils
+import SwiftUI
 
 @MainActor
 public final class Theme: ObservableObject {

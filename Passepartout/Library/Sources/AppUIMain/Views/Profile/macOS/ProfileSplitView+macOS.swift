@@ -25,9 +25,9 @@
 
 #if os(macOS)
 
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import CommonUtils
 
 struct ProfileSplitView: View, Routable {
     let profileEditor: ProfileEditor

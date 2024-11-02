@@ -25,10 +25,10 @@
 
 import AppData
 import Combine
+import CommonUtils
 import CoreData
 import Foundation
 import PassepartoutKit
-import CommonUtils
 
 extension AppData {
     public static func cdProviderRepositoryV3(

@@ -26,10 +26,10 @@
 #if os(iOS)
 
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 import UIKit
-import CommonUtils
 
 extension ReportIssueButton: View {
     var body: some View {

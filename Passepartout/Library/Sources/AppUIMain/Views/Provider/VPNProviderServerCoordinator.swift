@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import CommonUtils
 
 struct VPNProviderServerCoordinator<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
 

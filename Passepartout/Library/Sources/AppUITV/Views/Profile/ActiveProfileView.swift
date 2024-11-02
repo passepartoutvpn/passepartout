@@ -24,9 +24,9 @@
 //
 
 import AppLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import CommonUtils
 
 struct ActiveProfileView: View {
     let profile: Profile?

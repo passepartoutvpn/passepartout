@@ -24,9 +24,9 @@
 //
 
 import AppLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import CommonUtils
 
 public struct TunnelToggleButton<Label>: View, ThemeProviding where Label: View {
 

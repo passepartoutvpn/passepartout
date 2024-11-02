@@ -27,8 +27,8 @@ import CommonLibrary
 #if canImport(LocalAuthentication)
 import LocalAuthentication
 #endif
-import SwiftUI
 import CommonUtils
+import SwiftUI
 
 // MARK: Shortcuts
 

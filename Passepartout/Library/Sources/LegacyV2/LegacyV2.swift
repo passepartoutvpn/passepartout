@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
 import PassepartoutKit
-import CommonUtils
 
 public final class LegacyV2 {
     private let profilesRepository: CDProfileRepositoryV2

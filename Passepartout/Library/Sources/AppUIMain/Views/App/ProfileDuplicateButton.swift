@@ -24,9 +24,9 @@
 //
 
 import AppLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import CommonUtils
 
 struct ProfileDuplicateButton<Label>: View where Label: View {
     let profileManager: ProfileManager

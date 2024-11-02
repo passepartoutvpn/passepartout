@@ -26,9 +26,9 @@
 #if os(iOS)
 
 import AppLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import CommonUtils
 
 struct ProfileEditView: View, Routable {
 
