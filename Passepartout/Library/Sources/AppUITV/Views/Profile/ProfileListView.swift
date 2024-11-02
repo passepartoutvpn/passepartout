@@ -70,6 +70,7 @@ private extension ProfileListView {
                 toggleView(for: header)
             }
         )
+        .focused($focusedField, equals: .profile(header.id))
     }
 
     func toggleView(for header: ProfileHeader) -> some View {
@@ -81,6 +82,5 @@ private extension ProfileListView {
             }
         }
         .font(.headline)
-        .focused($focusedField, equals: .profile(header.id))
     }
 }
