@@ -58,12 +58,11 @@ public struct OpenVPNCredentialsView: View {
     }
 
     public var body: some View {
-        Form {
+        Group {
             restrictedArea
             inputSection
         }
         .themeManualInput()
-        .themeForm()
         .navigationTitle(Strings.Modules.Openvpn.credentials)
         .onLoad {
             builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
