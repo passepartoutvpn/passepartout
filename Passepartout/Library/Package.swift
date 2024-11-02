@@ -18,10 +18,6 @@ let package = Package(
             targets: ["AppLibrary"]
         ),
         .library(
-            name: "AppUI",
-            targets: ["AppUI"]
-        ),
-        .library(
             name: "AppUIMain",
             targets: ["AppUIMain"]
         ),
@@ -36,6 +32,10 @@ let package = Package(
         .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
+        ),
+        .library(
+            name: "UILibrary",
+            targets: ["UILibrary"]
         )
     ],
     dependencies: [
@@ -86,22 +86,10 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppUI",
-            dependencies: [
-                "AppDataProfiles",
-                "AppDataProviders",
-                "AppLibrary",
-                "CommonAPI"
-            ],
-            resources: [
-                .process("Resources")
-            ]
-        ),
-        .target(
             name: "AppUIMain",
             dependencies: [
-                "AppUI",
-                "LegacyV2"
+                "LegacyV2",
+                "UILibrary"
             ],
             resources: [
                 .process("Resources")
@@ -116,7 +104,7 @@ let package = Package(
         ),
         .target(
             name: "AppUITV",
-            dependencies: ["AppUI"]
+            dependencies: ["UILibrary"]
         ),
         .target(
             name: "CommonAPI",
@@ -149,6 +137,18 @@ let package = Package(
                 .process("Profiles.xcdatamodeld")
             ]
         ),
+        .target(
+            name: "UILibrary",
+            dependencies: [
+                "AppDataProfiles",
+                "AppDataProviders",
+                "AppLibrary",
+                "CommonAPI"
+            ],
+            resources: [
+                .process("Resources")
+            ]
+        ),
         .testTarget(
             name: "AppLibraryTests",
             dependencies: ["AppLibrary"]
@@ -158,8 +158,8 @@ let package = Package(
             dependencies: ["AppUIMain"]
         ),
         .testTarget(
-            name: "AppUITests",
-            dependencies: ["AppUI"]
+            name: "UILibraryTests",
+            dependencies: ["UILibrary"]
         )
     ]
 )

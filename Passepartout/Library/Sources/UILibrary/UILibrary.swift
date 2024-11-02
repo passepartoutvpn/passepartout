@@ -1,5 +1,5 @@
 //
-//  AppUI.swift
+//  UILibrary.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 7/31/24.
@@ -28,15 +28,15 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-public protocol AppUIConfiguring {
+public protocol UILibraryConfiguring {
     func configure(with context: AppContext)
 }
 
-public final class AppUI: AppUIConfiguring {
-    private let appUIConfiguring: AppUIConfiguring?
+public final class UILibrary: UILibraryConfiguring {
+    private let uiConfiguring: UILibraryConfiguring?
 
-    public init(_ appUIConfiguring: AppUIConfiguring?) {
-        self.appUIConfiguring = appUIConfiguring
+    public init(_ uiConfiguring: UILibraryConfiguring?) {
+        self.uiConfiguring = uiConfiguring
     }
 
     public func configure(with context: AppContext) {
@@ -47,7 +47,7 @@ public final class AppUI: AppUIConfiguring {
         )
 
         assertMissingImplementations()
-        appUIConfiguring?.configure(with: context)
+        uiConfiguring?.configure(with: context)
 
         Task {
             try await context.providerManager.fetchIndex(from: API.shared)
@@ -59,7 +59,7 @@ public final class AppUI: AppUIConfiguring {
     }
 }
 
-private extension AppUI {
+private extension UILibrary {
     func assertMissingImplementations() {
         ModuleType.allCases.forEach { moduleType in
             let builder = moduleType.newModule()

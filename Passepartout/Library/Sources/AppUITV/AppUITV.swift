@@ -23,10 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@_exported import AppUI
 import Foundation
+@_exported import UILibrary
 
-public final class AppUITV: AppUIConfiguring {
+public final class AppUITV: UILibraryConfiguring {
     public init() {
     }
 

@@ -24,10 +24,10 @@
 //
 
 @testable import AppLibrary
-@testable import AppUI
 import Combine
 import Foundation
 import PassepartoutKit
+@testable import UILibrary
 import XCTest
 
 final class ProfileEditorTests: XCTestCase {

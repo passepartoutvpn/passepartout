@@ -27,11 +27,11 @@ import AppData
 import AppDataProfiles
 import AppDataProviders
 import AppLibrary
-import AppUI
 import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
+import UILibrary
 
 extension AppContext {
     static let shared = AppContext(
