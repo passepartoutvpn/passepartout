@@ -150,6 +150,8 @@ private extension ProfileView {
         }
         .font(.body)
         .onExitCommand {
+            let formerProfileId = interactiveManager.editor.profile.id
+            focusedField = .profile(formerProfileId)
             interactiveManager.isPresented = false
         }
     }
