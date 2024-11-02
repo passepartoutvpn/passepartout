@@ -26,7 +26,7 @@
 import AppLibrary
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct VPNProviderContentModifier<Configuration, ProviderRows>: ViewModifier where Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
 

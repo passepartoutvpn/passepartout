@@ -25,7 +25,7 @@
 
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 extension ErrorHandler {
     public static func `default`() -> ErrorHandler {

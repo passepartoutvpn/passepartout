@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct CreditsView: View {
     var body: some View {

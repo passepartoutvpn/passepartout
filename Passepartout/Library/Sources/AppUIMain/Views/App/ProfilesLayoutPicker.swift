@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct ProfilesLayoutPicker: View {
 

@@ -29,7 +29,7 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 import UIKit
-import UtilsLibrary
+import CommonUtils
 
 extension ReportIssueButton: View {
     var body: some View {

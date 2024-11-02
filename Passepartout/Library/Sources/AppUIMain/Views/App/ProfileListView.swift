@@ -26,7 +26,7 @@
 import AppLibrary
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct ProfileListView: View, Routable, TunnelInstallationProviding {
 

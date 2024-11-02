@@ -27,7 +27,7 @@ import AppLibrary
 import AppUI
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 // FIXME: #788, UI for TV
 

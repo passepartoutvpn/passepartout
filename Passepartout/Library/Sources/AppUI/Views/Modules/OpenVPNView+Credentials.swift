@@ -26,7 +26,7 @@
 import AppLibrary
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 public struct OpenVPNCredentialsView: View {
 

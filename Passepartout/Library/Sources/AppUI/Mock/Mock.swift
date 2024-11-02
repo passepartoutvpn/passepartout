@@ -27,7 +27,7 @@ import AppLibrary
 import Combine
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 extension AppContext {
     public static let mock: AppContext = .mock(withRegistry: Registry())

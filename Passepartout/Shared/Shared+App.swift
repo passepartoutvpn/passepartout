@@ -31,7 +31,7 @@ import AppUI
 import CommonLibrary
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 extension AppContext {
     static let shared = AppContext(

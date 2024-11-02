@@ -27,7 +27,7 @@ import AppLibrary
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 extension DebugLogView {
     static func withApp(parameters: Constants.Log) -> DebugLogView {

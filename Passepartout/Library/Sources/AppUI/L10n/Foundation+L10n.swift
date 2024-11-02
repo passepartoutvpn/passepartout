@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import UtilsLibrary
+import CommonUtils
 
 extension TimeInterval: StyledLocalizableEntity {
     public enum Style {

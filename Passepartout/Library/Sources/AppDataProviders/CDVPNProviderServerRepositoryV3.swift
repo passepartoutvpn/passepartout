@@ -27,7 +27,7 @@ import AppData
 import CoreData
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 final class CDVPNProviderServerRepositoryV3: VPNProviderServerRepository {
     private let context: NSManagedObjectContext

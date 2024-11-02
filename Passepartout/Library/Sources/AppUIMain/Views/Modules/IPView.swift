@@ -25,7 +25,7 @@
 
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct IPView: View, ModuleDraftEditing {
 

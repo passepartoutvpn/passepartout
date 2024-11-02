@@ -28,7 +28,7 @@ import Combine
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
     var apis: [APIMapper] = API.shared

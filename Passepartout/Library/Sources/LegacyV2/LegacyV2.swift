@@ -25,7 +25,7 @@
 
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 public final class LegacyV2 {
     private let profilesRepository: CDProfileRepositoryV2

@@ -27,7 +27,7 @@
 
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct ProfileSplitView: View, Routable {
     let profileEditor: ProfileEditor

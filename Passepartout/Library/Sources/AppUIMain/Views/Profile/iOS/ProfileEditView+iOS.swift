@@ -28,7 +28,7 @@
 import AppLibrary
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct ProfileEditView: View, Routable {
 

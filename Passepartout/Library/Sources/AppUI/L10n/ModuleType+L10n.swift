@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import UtilsLibrary
+import CommonUtils
 
 extension ModuleType: LocalizableEntity {
     public var localizedDescription: String {

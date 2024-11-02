@@ -26,7 +26,7 @@
 import Foundation
 import Kvitto
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 public final class KvittoReceiptReader: AppReceiptReader {
     public init() {

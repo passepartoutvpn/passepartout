@@ -25,7 +25,7 @@
 
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 // FIXME: #424, reload receipt + objectWillChange on purchase/transactions
 

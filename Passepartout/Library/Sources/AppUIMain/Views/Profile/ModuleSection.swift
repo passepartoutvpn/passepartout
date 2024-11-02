@@ -24,7 +24,7 @@
 //
 
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 enum ModuleRow: Hashable {
     enum CopyOnTap: Int, Hashable, Comparable {

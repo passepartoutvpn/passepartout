@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import UtilsLibrary
+import CommonUtils
 
 public protocol AppProductHelper: InAppHelper where ProductIdentifier == AppProduct {
 }

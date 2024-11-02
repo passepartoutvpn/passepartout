@@ -26,7 +26,7 @@
 import CommonLibrary
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 public struct AppProduct: RawRepresentable, Hashable, Sendable {
     public let rawValue: String

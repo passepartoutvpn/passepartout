@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import UtilsLibrary
+import CommonUtils
 
 public actor MockAppProductHelper: AppProductHelper {
     public private(set) var products: [AppProduct: InAppProduct]

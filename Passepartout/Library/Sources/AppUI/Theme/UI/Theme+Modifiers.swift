@@ -28,7 +28,7 @@ import CommonLibrary
 import LocalAuthentication
 #endif
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 // MARK: Shortcuts
 

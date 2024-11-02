@@ -25,7 +25,7 @@
 
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 extension DNSProtocol: LocalizableEntity {
     public var localizedDescription: String {

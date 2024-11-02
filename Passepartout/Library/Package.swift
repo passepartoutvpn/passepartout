@@ -89,7 +89,7 @@ let package = Package(
             dependencies: [
                 "APILibrary",
                 "Kvitto",
-                "UtilsLibrary"
+                "CommonUtils"
             ]
         ),
         .target(
@@ -136,17 +136,17 @@ let package = Package(
             ]
         ),
         .target(
+            name: "CommonUtils"
+        ),
+        .target(
             name: "LegacyV2",
             dependencies: [
-                "UtilsLibrary",
+                "CommonUtils",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
             ]
-        ),
-        .target(
-            name: "UtilsLibrary"
         ),
         .testTarget(
             name: "AppLibraryTests",

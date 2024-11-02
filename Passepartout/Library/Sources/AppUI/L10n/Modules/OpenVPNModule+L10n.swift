@@ -25,7 +25,7 @@
 
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 extension OpenVPN.PullMask: LocalizableEntity {
     public var localizedDescription: String {

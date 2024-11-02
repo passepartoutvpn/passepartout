@@ -26,7 +26,7 @@
 import CommonLibrary
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
+import CommonUtils
 
 extension AppError: LocalizedError {
     public var errorDescription: String? {

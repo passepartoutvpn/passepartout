@@ -27,7 +27,7 @@
 
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct ModuleListView: View, Routable {
     static let generalModuleId = UUID()

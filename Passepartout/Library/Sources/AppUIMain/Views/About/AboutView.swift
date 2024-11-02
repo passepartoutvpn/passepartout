@@ -27,7 +27,7 @@ import AppLibrary
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
+import CommonUtils
 
 struct AboutView: View {
     let profileManager: ProfileManager

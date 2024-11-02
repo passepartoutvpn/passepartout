@@ -24,7 +24,7 @@
 //
 
 import Foundation
-import UtilsLibrary
+import CommonUtils
 
 public actor MockAppReceiptReader: AppReceiptReader {
     private var receipt: InAppReceipt?
