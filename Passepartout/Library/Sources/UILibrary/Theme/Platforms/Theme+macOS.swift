@@ -53,12 +53,6 @@ extension ThemeWindowModifier {
     }
 }
 
-extension ThemeNavigationDetailModifier {
-    func body(content: Content) -> some View {
-        content
-    }
-}
-
 extension ThemePlainButtonModifier {
     func body(content: Content) -> some View {
         Button(action: action) {

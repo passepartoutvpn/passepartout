@@ -91,13 +91,17 @@ extension View {
         modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
     }
 
+    public func themeNavigationDetail() -> some View {
+#if os(iOS)
+        navigationBarTitleDisplayMode(.inline)
+#else
+        self
+#endif
+    }
+
 #if !os(tvOS)
     public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
-    }
-
-    public func themeNavigationDetail() -> some View {
-        modifier(ThemeNavigationDetailModifier())
     }
 
     public func themePlainButton(action: @escaping () -> Void) -> some View {
@@ -290,9 +294,6 @@ struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
 
 struct ThemeWindowModifier: ViewModifier {
     let size: CGSize
-}
-
-struct ThemeNavigationDetailModifier: ViewModifier {
 }
 
 struct ThemePlainButtonModifier: ViewModifier {
