@@ -226,10 +226,14 @@ private extension OpenVPNView {
             }
 
         case .credentials:
-            OpenVPNCredentialsView(
-                isInteractive: draft.isInteractive,
-                credentials: draft.credentials
-            )
+            Form {
+                OpenVPNCredentialsView(
+                    isInteractive: draft.isInteractive,
+                    credentials: draft.credentials
+                )
+            }
+            .navigationTitle(Strings.Modules.Openvpn.credentials)
+            .themeForm()
             .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
         }

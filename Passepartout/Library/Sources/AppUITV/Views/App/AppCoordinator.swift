@@ -48,10 +48,10 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
                     Text(Strings.Global.profile)
                 }
 
-            searchView
-                .tabItem {
-                    ThemeImage(.search)
-                }
+//            searchView
+//                .tabItem {
+//                    ThemeImage(.search)
+//                }
 
             settingsView
                 .tabItem {
@@ -66,12 +66,11 @@ private extension AppCoordinator {
         ProfileView(profileManager: profileManager, tunnel: tunnel)
     }
 
-    // FIXME: #788, UI for TV
-    var searchView: some View {
-        VStack {
-            Text("Search")
-        }
-    }
+//    var searchView: some View {
+//        VStack {
+//            Text("Search")
+//        }
+//    }
 
     // FIXME: #788, UI for TV
     var settingsView: some View {

@@ -80,7 +80,7 @@ private extension ProfileEditView {
 
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
-        ToolbarItem {
+        ToolbarItem(placement: .confirmationAction) {
             ProfileSaveButton(
                 title: Strings.Global.save,
                 errorModuleIds: $malformedModuleIds

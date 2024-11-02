@@ -71,12 +71,21 @@ struct ProfileView: View, TunnelInstallationProviding {
                         .focusSection()
                 }
                 .frame(maxWidth: .infinity)
+                .disabled(interactiveManager.isPresented)
 
                 if isSwitching {
-                    listView
-                        .padding(.horizontal)
-                        .frame(width: geo.size.width * 0.5)
-                        .focusSection()
+                    ZStack {
+                        listView
+                            .padding(.horizontal)
+                            .opacity(interactiveManager.isPresented ? 0.0 : 1.0)
+
+                        if interactiveManager.isPresented {
+                            interactiveView
+                                .padding(.horizontal, 100)
+                        }
+                    }
+//                    .frame(width: geo.size.width * 0.5) // seems redundant
+                    .focusSection()
                 }
             }
         }
@@ -84,21 +93,11 @@ struct ProfileView: View, TunnelInstallationProviding {
         .background(theme.primaryColor.gradient)
         .animation(.default, value: isSwitching)
         .withErrorHandler(errorHandler)
-        .themeModal(isPresented: $interactiveManager.isPresented) {
-            InteractiveView(manager: interactiveManager) {
-                errorHandler.handle(
-                    $0,
-                    title: Strings.Global.connection,
-                    message: Strings.Views.Profiles.Errors.tunnel
-                )
-            }
-        }
-        .onLoad {
-            focusedField = .switchProfile
-        }
+        .defaultFocus($focusedField, .switchProfile)
         .onChange(of: tunnel.status) { _, new in
             if new == .activating {
                 isSwitching = false
+                focusedField = .connect
             }
         }
         .onChange(of: tunnel.currentProfile) { _, new in
@@ -139,6 +138,22 @@ private extension ProfileView {
             interactiveManager: interactiveManager,
             errorHandler: errorHandler
         )
+    }
+
+    var interactiveView: some View {
+        InteractiveCoordinator(style: .inline(withCancel: false), manager: interactiveManager) {
+            errorHandler.handle(
+                $0,
+                title: Strings.Global.connection,
+                message: Strings.Views.Profiles.Errors.tunnel
+            )
+        }
+        .font(.body)
+        .onExitCommand {
+            let formerProfileId = interactiveManager.editor.profile.id
+            focusedField = .profile(formerProfileId)
+            interactiveManager.isPresented = false
+        }
     }
 
     var listView: some View {
