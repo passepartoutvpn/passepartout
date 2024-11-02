@@ -62,6 +62,7 @@
 "global.routes" = "Routes";
 "global.routing" = "Routing";
 "global.save" = "Save";
+"global.select" = "Select";
 "global.server" = "Server";
 "global.servers" = "Servers";
 "global.settings" = "Settings";

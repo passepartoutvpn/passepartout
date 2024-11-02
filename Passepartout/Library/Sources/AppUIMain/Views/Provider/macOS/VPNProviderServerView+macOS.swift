@@ -72,8 +72,8 @@ extension VPNProviderServerView {
                 .width(10.0)
 
                 TableColumn(Strings.Global.region) { server in
-                    Text("\(server.provider.countryCode.asCountryCodeEmoji) \(server.region)")
-                            .help(server.region)
+                    ThemeCountryText(server.provider.countryCode, title: server.region)
+                        .help(server.region)
                 }
 
                 TableColumn(Strings.Global.address, value: \.address)

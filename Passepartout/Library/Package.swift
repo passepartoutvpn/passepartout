@@ -26,6 +26,10 @@ let package = Package(
             targets: ["AppUIMain"]
         ),
         .library(
+            name: "AppUIPlatform",
+            targets: ["AppUIPlatform"]
+        ),
+        .library(
             name: "AppUITV",
             targets: ["AppUITV"]
         ),
@@ -107,6 +111,13 @@ let package = Package(
             ],
             resources: [
                 .process("Resources")
+            ]
+        ),
+        .target(
+            name: "AppUIPlatform",
+            dependencies: [
+                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
+                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
             ]
         ),
         .target(

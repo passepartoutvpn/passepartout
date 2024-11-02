@@ -81,7 +81,7 @@ private extension VPNFiltersView {
             Text(Strings.Global.any)
                 .tag(nil as String?)
             ForEach(model.countries, id: \.code) {
-                Text("\($0.code.asCountryCodeEmoji) \($0.description)")
+                ThemeCountryText($0.code, title: $0.description)
                     .tag($0.code as String?)
             }
         }

@@ -50,6 +50,7 @@ extension Theme {
         case profilesGrid
         case profilesList
         case remove
+        case search
         case settings
         case share
         case show
@@ -90,6 +91,7 @@ extension Theme.ImageName {
             case .profilesGrid: return "square.grid.2x2"
             case .profilesList: return "rectangle.grid.1x2"
             case .remove: return "minus"
+            case .search: return "magnifyingglass"
             case .settings: return "gearshape"
             case .share: return "square.and.arrow.up"
             case .show: return "eye"

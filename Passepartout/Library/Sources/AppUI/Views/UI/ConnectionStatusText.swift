@@ -1,5 +1,5 @@
 //
-//  ConnectionStatusView.swift
+//  ConnectionStatusText.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/4/24.
@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutKit
 import SwiftUI
 
-public struct ConnectionStatusView: View, ThemeProviding {
+public struct ConnectionStatusText: View, ThemeProviding {
 
     @EnvironmentObject
     public var theme: Theme
@@ -42,12 +42,10 @@ public struct ConnectionStatusView: View, ThemeProviding {
 
     public var body: some View {
         Text(statusDescription)
-            .font(.headline)
-            .foregroundStyle(tunnel.statusColor(theme))
     }
 }
 
-private extension ConnectionStatusView {
+private extension ConnectionStatusText {
     var statusDescription: String {
         if let lastErrorCode = tunnel.lastErrorCode {
             return lastErrorCode.localizedDescription
@@ -76,7 +74,7 @@ private extension ConnectionStatusView {
 }
 
 #Preview("Connected") {
-    ConnectionStatusView(tunnel: .mock)
+    ConnectionStatusText(tunnel: .mock)
         .task {
             try? await ExtendedTunnel.mock.connect(with: .mock, processor: .mock)
         }
@@ -95,7 +93,7 @@ private extension ConnectionStatusView {
     } catch {
         fatalError()
     }
-    return ConnectionStatusView(tunnel: .mock)
+    return ConnectionStatusText(tunnel: .mock)
         .task {
             try? await ExtendedTunnel.mock.connect(with: profile, processor: .mock)
         }

@@ -27,8 +27,6 @@ import AppLibrary
 import PassepartoutKit
 import SwiftUI
 
-// FIXME: #788, UI for Apple TV
-
 public struct AppCoordinator: View, AppCoordinatorConforming {
     private let profileManager: ProfileManager
 
@@ -43,18 +41,42 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     }
 
     public var body: some View {
-        ProfilesView(profileManager: profileManager)
+        debugChanges()
+        return TabView {
+            profileView
+                .tabItem {
+                    Text(Strings.Global.profile)
+                }
+
+            searchView
+                .tabItem {
+                    ThemeImage(.search)
+                }
+
+            settingsView
+                .tabItem {
+                    ThemeImage(.settings)
+                }
+        }
     }
 }
 
-struct ProfilesView: View {
+private extension AppCoordinator {
+    var profileView: some View {
+        ProfileView(profileManager: profileManager, tunnel: tunnel)
+    }
 
-    @ObservedObject
-    var profileManager: ProfileManager
+    // FIXME: #788, UI for TV
+    var searchView: some View {
+        VStack {
+            Text("Search")
+        }
+    }
 
-    var body: some View {
-        ForEach(profileManager.headers, id: \.id) {
-            Text($0.name)
+    // FIXME: #788, UI for TV
+    var settingsView: some View {
+        VStack {
+            Text("Settings")
         }
     }
 }

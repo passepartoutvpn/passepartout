@@ -148,13 +148,13 @@ extension ThemeTappableText {
 
 extension ThemeTextField {
     public var body: some View {
-        commonView
+        labeledView
     }
 }
 
 extension ThemeSecureField {
     public var body: some View {
-        commonView
+        labeledView
     }
 }
 

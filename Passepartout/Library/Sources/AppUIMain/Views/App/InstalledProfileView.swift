@@ -100,14 +100,15 @@ private extension InstalledProfileView {
     var statusView: some View {
         HStack {
             providerSelectorButton
-            ConnectionStatusView(tunnel: tunnel)
+            ConnectionStatusText(tunnel: tunnel)
+                .font(.body)
+                .foregroundStyle(tunnel.statusColor(theme))
                 .opacity(installedOpacity)
         }
     }
 
     var toggleButton: some View {
         TunnelToggleButton(
-            style: .color,
             tunnel: tunnel,
             profile: profile,
             nextProfileId: $nextProfileId,
@@ -121,6 +122,7 @@ private extension InstalledProfileView {
         )
         // TODO: #584, necessary to avoid cell selection
         .buttonStyle(.plain)
+        .foregroundStyle(tunnel.statusColor(theme))
         .opacity(installedOpacity)
     }
 
