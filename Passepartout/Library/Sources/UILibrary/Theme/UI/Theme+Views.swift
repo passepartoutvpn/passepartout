@@ -182,7 +182,7 @@ public struct ThemeSecureField: View {
 
     let placeholder: String
 
-    public init(title: String?, text: Binding<String>, placeholder: String) {
+    public init(_ title: String?, text: Binding<String>, placeholder: String) {
         self.title = title
         _text = text
         self.placeholder = placeholder

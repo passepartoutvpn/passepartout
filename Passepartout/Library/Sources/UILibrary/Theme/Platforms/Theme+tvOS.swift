@@ -67,13 +67,13 @@ extension ThemeSectionWithHeaderFooterModifier {
 
 extension ThemeTextField {
     public var body: some View {
-        TextField(placeholder, text: $text)
+        fieldView
     }
 }
 
 extension ThemeSecureField {
     public var body: some View {
-        SecureField(placeholder, text: $text)
+        fieldView
     }
 }
 

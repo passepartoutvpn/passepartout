@@ -138,12 +138,12 @@ private extension OpenVPNCredentialsView {
         Group {
             ThemeTextField(Strings.Global.username, text: $builder.username, placeholder: Strings.Placeholders.username)
                 .textContentType(.username)
-            ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
+            ThemeSecureField(Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
                 .textContentType(.password)
 
             if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
                 ThemeSecureField(
-                    title: Strings.Unlocalized.otp,
+                    Strings.Unlocalized.otp,
                     text: $builder.otp ?? "",
                     placeholder: Strings.Placeholders.secret
                 )
