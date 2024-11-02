@@ -99,6 +99,7 @@ private extension ProfileContainerView {
                 message: Strings.Views.Profiles.Errors.tunnel
             )
         }
+        .presentationDetents([.medium])
     }
 }
 
