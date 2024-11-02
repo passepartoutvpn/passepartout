@@ -139,12 +139,15 @@ private extension ProfileView {
     }
 
     var interactiveView: some View {
-        InteractiveCoordinator(style: .inline, manager: interactiveManager) {
+        InteractiveCoordinator(style: .inline(withCancel: false), manager: interactiveManager) {
             errorHandler.handle(
                 $0,
                 title: Strings.Global.connection,
                 message: Strings.Views.Profiles.Errors.tunnel
             )
+        }
+        .onExitCommand {
+            interactiveManager.isPresented = false
         }
     }
 

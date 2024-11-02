@@ -31,7 +31,7 @@ public struct InteractiveCoordinator: View {
     public enum Style {
         case modal
 
-        case inline
+        case inline(withCancel: Bool)
     }
 
     private let style: Style
@@ -56,10 +56,11 @@ public struct InteractiveCoordinator: View {
                     cancel: cancel
                 ))
 
-        case .inline:
+        case .inline(let withCancel):
             interactiveView
                 .modifier(InlineInteractiveModifier(
                     title: manager.editor.profile.name,
+                    withCancel: withCancel,
                     confirm: confirm,
                     cancel: cancel
                 ))
@@ -111,6 +112,8 @@ private extension InteractiveCoordinator {
     struct InlineInteractiveModifier: ViewModifier {
         let title: String
 
+        let withCancel: Bool
+
         let confirm: () -> Void
 
         let cancel: () -> Void
@@ -135,9 +138,11 @@ private extension InteractiveCoordinator {
                     Text(Strings.Global.connect)
                         .frame(maxWidth: .infinity)
                 }
-                Button(role: .cancel, action: cancel) {
-                    Text(Strings.Global.cancel)
-                        .frame(maxWidth: .infinity)
+                if withCancel {
+                    Button(role: .cancel, action: cancel) {
+                        Text(Strings.Global.cancel)
+                            .frame(maxWidth: .infinity)
+                    }
                 }
             }
             .frame(maxWidth: .infinity)
