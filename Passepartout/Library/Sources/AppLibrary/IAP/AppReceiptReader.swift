@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
-import UtilsLibrary
 
 public protocol AppReceiptReader: InAppReceiptReader where UserLevel == AppUserLevel {
 }

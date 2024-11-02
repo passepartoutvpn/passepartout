@@ -26,21 +26,21 @@ let package = Package(
             targets: ["AppUIMain"]
         ),
         .library(
-            name: "AppUIPlatform",
-            targets: ["AppUIPlatform"]
-        ),
-        .library(
             name: "AppUITV",
             targets: ["AppUITV"]
         ),
         .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
+        ),
+        .library(
+            name: "UILibrary",
+            targets: ["UILibrary"]
         )
     ],
     dependencies: [
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", from: "0.9.0"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "e95c7b54dc11e744d9b40a722fccf752436ac0ef"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "b32b63ab8e09883f965737bb6214dfb81e38283a"),
 //        .package(path: "../../../passepartoutkit-source"),
         .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", from: "0.9.1"),
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", revision: "031863a1cd683962a7dfe68e20b91fa820a1ecce"),
@@ -53,13 +53,6 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "APILibrary",
-            dependencies: ["CommonLibrary"],
-            resources: [
-                .copy("API")
-            ]
-        ),
         .target(
             name: "AppData",
             dependencies: []
@@ -87,42 +80,38 @@ let package = Package(
         .target(
             name: "AppLibrary",
             dependencies: [
-                "APILibrary",
-                "Kvitto",
-                "UtilsLibrary"
+                "CommonLibrary",
+                "CommonUtils",
+                "Kvitto"
             ]
         ),
         .target(
             name: "AppUI",
-            dependencies: [
-                "AppDataProfiles",
-                "AppDataProviders",
-                "AppLibrary"
-            ],
-            resources: [
-                .process("Resources")
-            ]
-        ),
-        .target(
-            name: "AppUIMain",
-            dependencies: [
-                "AppUI",
-                "LegacyV2"
-            ],
-            resources: [
-                .process("Resources")
-            ]
-        ),
-        .target(
-            name: "AppUIPlatform",
             dependencies: [
                 .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
                 .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
             ]
         ),
         .target(
+            name: "AppUIMain",
+            dependencies: [
+                "LegacyV2",
+                "UILibrary"
+            ],
+            resources: [
+                .process("Resources")
+            ]
+        ),
+        .target(
             name: "AppUITV",
-            dependencies: ["AppUI"]
+            dependencies: ["UILibrary"]
+        ),
+        .target(
+            name: "CommonAPI",
+            dependencies: ["CommonLibrary"],
+            resources: [
+                .copy("API")
+            ]
         ),
         .target(
             name: "CommonLibrary",
@@ -136,9 +125,12 @@ let package = Package(
             ]
         ),
         .target(
+            name: "CommonUtils"
+        ),
+        .target(
             name: "LegacyV2",
             dependencies: [
-                "UtilsLibrary",
+                "CommonUtils",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
@@ -146,7 +138,16 @@ let package = Package(
             ]
         ),
         .target(
-            name: "UtilsLibrary"
+            name: "UILibrary",
+            dependencies: [
+                "AppDataProfiles",
+                "AppDataProviders",
+                "AppLibrary",
+                "CommonAPI"
+            ],
+            resources: [
+                .process("Resources")
+            ]
         ),
         .testTarget(
             name: "AppLibraryTests",
@@ -157,8 +158,8 @@ let package = Package(
             dependencies: ["AppUIMain"]
         ),
         .testTarget(
-            name: "AppUITests",
-            dependencies: ["AppUI"]
+            name: "UILibraryTests",
+            dependencies: ["UILibrary"]
         )
     ]
 )

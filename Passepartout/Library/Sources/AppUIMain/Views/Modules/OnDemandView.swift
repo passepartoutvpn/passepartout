@@ -24,9 +24,9 @@
 //
 
 import AppLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 struct OnDemandView: View, ModuleDraftEditing {
 

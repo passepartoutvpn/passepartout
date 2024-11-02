@@ -24,9 +24,9 @@
 //
 
 import AppLibrary
+import CommonUtils
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
 @MainActor
 final class ProfileImporter: ObservableObject {

@@ -24,9 +24,9 @@
 //
 
 import AppLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 struct ProfileContainerView: View, Routable {
     let layout: ProfilesLayout

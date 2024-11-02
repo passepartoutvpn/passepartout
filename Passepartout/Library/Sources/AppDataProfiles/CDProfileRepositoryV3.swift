@@ -26,10 +26,10 @@
 import AppData
 import AppLibrary
 import Combine
+import CommonUtils
 import CoreData
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
 extension AppData {
     public static func cdProfileRepositoryV3(

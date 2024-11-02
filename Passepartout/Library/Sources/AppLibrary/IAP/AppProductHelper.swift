@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
-import UtilsLibrary
 
 public protocol AppProductHelper: InAppHelper where ProductIdentifier == AppProduct {
 }

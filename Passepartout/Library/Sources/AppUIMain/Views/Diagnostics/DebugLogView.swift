@@ -25,9 +25,9 @@
 
 import AppLibrary
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 extension DebugLogView {
     static func withApp(parameters: Constants.Log) -> DebugLogView {
@@ -93,7 +93,7 @@ private extension DebugLogView {
 
     var copyButton: some View {
         Button {
-            copyToPasteboard(content)
+            Utils.copyToPasteboard(content)
         } label: {
             ThemeImage(.copy)
         }

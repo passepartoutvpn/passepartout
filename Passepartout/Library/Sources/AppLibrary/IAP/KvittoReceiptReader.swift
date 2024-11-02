@@ -23,10 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
 import Kvitto
 import PassepartoutKit
-import UtilsLibrary
 
 public final class KvittoReceiptReader: AppReceiptReader {
     public init() {

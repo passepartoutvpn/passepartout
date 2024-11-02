@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
 // FIXME: #424, reload receipt + objectWillChange on purchase/transactions
 

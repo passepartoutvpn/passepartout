@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import SwiftUI
-import UtilsLibrary
 
 enum ModuleRow: Hashable {
     enum CopyOnTap: Int, Hashable, Comparable {
