@@ -1,8 +1,8 @@
 //
-//  ModuleType.swift
+//  ModuleType+Known.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/19/24.
+//  Created by Davide De Rosa on 11/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,32 +25,26 @@
 
 import Foundation
 import PassepartoutKit
-import PassepartoutWireGuardGo
 
-public struct ModuleType: RawRepresentable, Hashable {
-    public let rawValue: String
+extension ModuleType: CaseIterable {
+    public static let allCases: [ModuleType] = [
+        .openVPN,
+        .wireGuard,
+        .dns,
+        .httpProxy,
+        .ip,
+        .onDemand
+    ]
 
-    public init?(rawValue: String) {
-        self.rawValue = rawValue
-    }
+    public static let openVPN = ModuleType(OpenVPNModule.self)
 
-    init(_ moduleType: Module.Type) {
-        self.init(moduleType.moduleHandler)
-    }
+    public static let wireGuard = ModuleType(WireGuardModule.self)
 
-    init(_ moduleHandler: ModuleHandler) {
-        rawValue = moduleHandler.id.name
-    }
-}
+    public static let dns = ModuleType(DNSModule.self)
 
-extension ModuleType: Identifiable {
-    public var id: String {
-        rawValue
-    }
-}
+    public static let httpProxy = ModuleType(HTTPProxyModule.self)
 
-extension ModuleType: Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.rawValue == rhs.rawValue
-    }
+    public static let ip = ModuleType(IPModule.self)
+
+    public static let onDemand = ModuleType(OnDemandModule.self)
 }
