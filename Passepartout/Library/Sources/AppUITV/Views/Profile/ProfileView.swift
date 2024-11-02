@@ -73,14 +73,19 @@ struct ProfileView: View, TunnelInstallationProviding {
                 .frame(maxWidth: .infinity)
                 .disabled(interactiveManager.isPresented)
 
-                if interactiveManager.isPresented {
-                    interactiveView
-                        .padding(.horizontal, 100)
-                } else if isSwitching {
-                    listView
-                        .padding(.horizontal)
-//                        .frame(width: geo.size.width * 0.5) // seems redundant
-                        .focusSection()
+                if isSwitching {
+                    ZStack {
+                        listView
+                            .padding(.horizontal)
+                            .opacity(interactiveManager.isPresented ? 0.0 : 1.0)
+
+                        if interactiveManager.isPresented {
+                            interactiveView
+                                .padding(.horizontal, 100)
+                        }
+                    }
+//                    .frame(width: geo.size.width * 0.5) // seems redundant
+                    .focusSection()
                 }
             }
         }
