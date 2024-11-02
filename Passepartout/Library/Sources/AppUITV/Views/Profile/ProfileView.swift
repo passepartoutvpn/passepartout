@@ -85,7 +85,7 @@ struct ProfileView: View, TunnelInstallationProviding {
         .animation(.default, value: isSwitching)
         .withErrorHandler(errorHandler)
         .themeModal(isPresented: $interactiveManager.isPresented) {
-            InteractiveCoordinator(manager: interactiveManager) {
+            InteractiveCoordinator(style: .modal, manager: interactiveManager) {
                 errorHandler.handle(
                     $0,
                     title: Strings.Global.connection,
