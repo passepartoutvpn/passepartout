@@ -36,7 +36,7 @@ extension AppError: LocalizedError {
             return V.emptyProfileName
 
         case .malformedModule(let module, let error):
-            return V.malformedModule(module.typeDescription, error.localizedDescription)
+            return V.malformedModule(module.moduleType.localizedDescription, error.localizedDescription)
 
         case .permissionDenied:
             return V.default

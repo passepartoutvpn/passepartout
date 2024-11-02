@@ -117,6 +117,9 @@ private extension ProfileCoordinator {
 
         case .onDemand:
             break
+
+        default:
+            fatalError("Unhandled module type: \(moduleType)")
         }
         guard paywallReason == nil else {
             return

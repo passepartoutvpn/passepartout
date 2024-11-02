@@ -71,9 +71,6 @@ public final class ProfileEditor: ObservableObject {
 extension ProfileEditor {
     public var moduleTypes: [ModuleType] {
         editableProfile.modules
-            .compactMap {
-                $0 as? ModuleTypeProviding
-            }
             .map(\.moduleType)
     }
 

@@ -1,8 +1,8 @@
 //
-//  ModuleTypeProviding.swift
+//  ModuleType+Known.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/10/24.
+//  Created by Davide De Rosa on 11/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,6 +26,25 @@
 import Foundation
 import PassepartoutKit
 
-protocol ModuleTypeProviding {
-    var moduleType: ModuleType { get }
+extension ModuleType: CaseIterable {
+    public static let allCases: [ModuleType] = [
+        .openVPN,
+        .wireGuard,
+        .dns,
+        .httpProxy,
+        .ip,
+        .onDemand
+    ]
+
+    public static let openVPN = ModuleType(OpenVPNModule.self)
+
+    public static let wireGuard = ModuleType(WireGuardModule.self)
+
+    public static let dns = ModuleType(DNSModule.self)
+
+    public static let httpProxy = ModuleType(HTTPProxyModule.self)
+
+    public static let ip = ModuleType(IPModule.self)
+
+    public static let onDemand = ModuleType(OnDemandModule.self)
 }

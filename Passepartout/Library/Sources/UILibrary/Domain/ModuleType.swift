@@ -27,22 +27,30 @@ import Foundation
 import PassepartoutKit
 import PassepartoutWireGuardGo
 
-public enum ModuleType: String, CaseIterable {
-    case openVPN
+public struct ModuleType: RawRepresentable, Hashable {
+    public let rawValue: String
 
-    case wireGuard
+    public init?(rawValue: String) {
+        self.rawValue = rawValue
+    }
 
-    case dns
+    init(_ moduleType: Module.Type) {
+        self.init(moduleType.moduleHandler)
+    }
 
-    case httpProxy
-
-    case ip
-
-    case onDemand
+    init(_ moduleHandler: ModuleHandler) {
+        rawValue = moduleHandler.id.name
+    }
 }
 
 extension ModuleType: Identifiable {
     public var id: String {
         rawValue
+    }
+}
+
+extension ModuleType: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.rawValue == rhs.rawValue
     }
 }

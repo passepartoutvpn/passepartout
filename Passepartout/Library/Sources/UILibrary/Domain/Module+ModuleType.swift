@@ -1,8 +1,8 @@
 //
-//  ModuleBuilder+Description.swift
+//  Module+ModuleType.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/6/24.
+//  Created by Davide De Rosa on 11/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,19 +26,14 @@
 import Foundation
 import PassepartoutKit
 
-extension ModuleBuilder {
-
-    @MainActor
-    public func description(inEditor editor: ProfileEditor) -> String {
-        editor.profile.displayName(forModuleWithId: id) ?? typeDescription
+extension Module {
+    public var moduleType: ModuleType {
+        ModuleType(moduleHandler)
     }
 }
 
 extension ModuleBuilder {
-    public var typeDescription: String {
-        guard let providing = self as? ModuleTypeProviding else {
-            return String(describing: self)
-        }
-        return providing.moduleType.localizedDescription
+    public var moduleType: ModuleType {
+        ModuleType(BuiltType.moduleHandler)
     }
 }
