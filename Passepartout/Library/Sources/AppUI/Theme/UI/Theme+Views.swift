@@ -296,7 +296,7 @@ public struct ThemeCopiableText<Value, ValueView>: View where Value: CustomStrin
                 Spacer()
             }
             Button {
-                copyToPasteboard(value.description)
+                Utils.copyToPasteboard(value.description)
             } label: {
                 ThemeImage(.copy)
             }

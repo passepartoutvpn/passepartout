@@ -38,7 +38,7 @@ public struct LongContentView: View {
         contentView
             .toolbar {
                 Button {
-                    copyToPasteboard(content)
+                    Utils.copyToPasteboard(content)
                 } label: {
                     Image(systemName: copySystemImage ?? "doc.on.doc")
                 }

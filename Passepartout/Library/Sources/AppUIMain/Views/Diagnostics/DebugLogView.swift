@@ -93,7 +93,7 @@ private extension DebugLogView {
 
     var copyButton: some View {
         Button {
-            copyToPasteboard(content)
+            Utils.copyToPasteboard(content)
         } label: {
             ThemeImage(.copy)
         }

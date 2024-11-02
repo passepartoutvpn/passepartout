@@ -1,8 +1,8 @@
 //
-//  View+Extensions.swift
+//  Utils+Pasteboard.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 2/18/22.
+//  Created by Davide De Rosa on 11/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -25,25 +25,17 @@
 
 import SwiftUI
 
-extension View {
-    public func debugChanges(condition: Bool = false) {
-        if condition {
-            Self._printChanges()
-        }
-    }
-
-    @ViewBuilder
-    public func `if`(_ condition: Bool) -> some View {
-        if condition {
-            self
-        }
-    }
-}
-
-extension ViewModifier {
-    public func debugChanges(condition: Bool = false) {
-        if condition {
-            Self._printChanges()
-        }
+extension Utils {
+    public static func copyToPasteboard(_ string: String) {
+#if os(iOS)
+        let pb: UIPasteboard = .general
+        pb.string = string
+#elseif os(macOS)
+        let pb: NSPasteboard = .general
+        pb.clearContents()
+        pb.setString(string, forType: .string)
+#else
+        fatalError("Copy unavailable")
+#endif
     }
 }
