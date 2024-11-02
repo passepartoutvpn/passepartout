@@ -63,7 +63,6 @@ public struct OpenVPNCredentialsView: View {
             inputSection
         }
         .themeManualInput()
-        .navigationTitle(Strings.Modules.Openvpn.credentials)
         .onLoad {
             builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
             builder.otp = nil

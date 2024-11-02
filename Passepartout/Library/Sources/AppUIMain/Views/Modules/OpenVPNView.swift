@@ -232,6 +232,7 @@ private extension OpenVPNView {
                     credentials: draft.credentials
                 )
             }
+            .navigationTitle(Strings.Modules.Openvpn.credentials)
             .themeForm()
             .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
             .modifier(PaywallModifier(reason: $paywallReason))
