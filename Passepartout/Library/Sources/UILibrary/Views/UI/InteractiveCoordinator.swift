@@ -82,6 +82,8 @@ private extension InteractiveCoordinator {
                     content
                 }
                 .themeForm()
+                .themeNavigationDetail()
+                .navigationTitle(Strings.Ui.InteractiveCoordinator.title)
                 .toolbar(content: modalToolbar)
             }
         }

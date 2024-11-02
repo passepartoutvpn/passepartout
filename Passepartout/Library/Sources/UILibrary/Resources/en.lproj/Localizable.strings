@@ -246,6 +246,7 @@
 // MARK: - Components
 
 "ui.connection_status.on_demand_suffix" = " (on-demand)";
+"ui.interactive_coordinator.title" = "Interactive";
 "ui.profile_context.connect_to" = "Connect to...";
 
 // MARK: - Paywalls
