@@ -49,6 +49,6 @@ private extension ProfileEditor {
             assertionFailure("\(type(of: module)) does not provide a default view")
             return nil
         }
-        return (provider, module.typeDescription)
+        return (provider, module.moduleType.localizedDescription)
     }
 }

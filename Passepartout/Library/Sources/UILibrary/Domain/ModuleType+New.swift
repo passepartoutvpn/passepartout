@@ -46,6 +46,9 @@ extension ModuleType {
 
         case .onDemand:
             return OnDemandModule.Builder()
+
+        default:
+            fatalError("Unknown module type: \(rawValue)")
         }
     }
 }

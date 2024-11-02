@@ -1,8 +1,8 @@
 //
-//  DescriptiveModule+L10n.swift
+//  ModuleBuilder+Description.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/10/24.
+//  Created by Davide De Rosa on 9/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,38 +26,10 @@
 import Foundation
 import PassepartoutKit
 
-extension OpenVPNModule.Builder: ModuleTypeProviding {
-    var moduleType: ModuleType {
-        .openVPN
-    }
-}
+extension ModuleBuilder {
 
-extension WireGuardModule.Builder: ModuleTypeProviding {
-    var moduleType: ModuleType {
-        .wireGuard
-    }
-}
-
-extension DNSModule.Builder: ModuleTypeProviding {
-    var moduleType: ModuleType {
-        .dns
-    }
-}
-
-extension HTTPProxyModule.Builder: ModuleTypeProviding {
-    var moduleType: ModuleType {
-        .httpProxy
-    }
-}
-
-extension IPModule.Builder: ModuleTypeProviding {
-    var moduleType: ModuleType {
-        .ip
-    }
-}
-
-extension OnDemandModule.Builder: ModuleTypeProviding {
-    var moduleType: ModuleType {
-        .onDemand
+    @MainActor
+    public func description(inEditor editor: ProfileEditor) -> String {
+        editor.profile.displayName(forModuleWithId: id) ?? moduleType.localizedDescription
     }
 }

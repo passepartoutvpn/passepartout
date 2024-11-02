@@ -40,7 +40,7 @@ struct ModuleViewModifier<T>: ViewModifier where T: ModuleBuilder & Equatable {
             if withName {
                 NameSection(
                     name: editor.binding(forNameOf: draft.id),
-                    placeholder: draft.typeDescription
+                    placeholder: draft.moduleType.localizedDescription
                 )
             }
             content

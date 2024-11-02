@@ -1,8 +1,8 @@
 //
-//  ModuleTypeProviding.swift
+//  Module+ModuleType.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 8/10/24.
+//  Created by Davide De Rosa on 11/2/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,6 +26,14 @@
 import Foundation
 import PassepartoutKit
 
-protocol ModuleTypeProviding {
-    var moduleType: ModuleType { get }
+extension Module {
+    public var moduleType: ModuleType {
+        ModuleType(moduleHandler)
+    }
+}
+
+extension ModuleBuilder {
+    public var moduleType: ModuleType {
+        ModuleType(BuiltType.moduleHandler)
+    }
 }

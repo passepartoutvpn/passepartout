@@ -25,6 +25,7 @@
 
 import CommonUtils
 import Foundation
+import PassepartoutKit
 
 extension ModuleType: LocalizableEntity {
     public var localizedDescription: String {
@@ -46,6 +47,10 @@ extension ModuleType: LocalizableEntity {
 
         case .onDemand:
             return Strings.Global.onDemand
+
+        default:
+            assertionFailure("Missing localization for ModuleType: \(rawValue)")
+            return rawValue
         }
     }
 }

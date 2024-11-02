@@ -114,7 +114,7 @@ private extension OpenVPNView {
                 isImporting = true
             }
             .alert(
-                module.typeDescription,
+                module.moduleType.localizedDescription,
                 isPresented: $requiresPassphrase,
                 presenting: importURL,
                 actions: { url in
@@ -194,7 +194,7 @@ private extension OpenVPNView {
             pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
             errorHandler.handle(
                 (error as? StandardOpenVPNParserError)?.asPassepartoutError ?? error,
-                title: module.typeDescription
+                title: module.moduleType.localizedDescription
             )
         }
     }

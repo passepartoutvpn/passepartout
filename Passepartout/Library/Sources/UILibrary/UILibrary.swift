@@ -46,7 +46,6 @@ public final class UILibrary: UILibraryConfiguring {
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
 
-        assertMissingImplementations()
         uiConfiguring?.configure(with: context)
 
         Task {
@@ -55,17 +54,6 @@ public final class UILibrary: UILibraryConfiguring {
             // keep this for login item because scenePhase is not triggered
             try await context.tunnel.prepare(purge: true)
 #endif
-        }
-    }
-}
-
-private extension UILibrary {
-    func assertMissingImplementations() {
-        ModuleType.allCases.forEach { moduleType in
-            let builder = moduleType.newModule()
-            guard builder is ModuleTypeProviding else {
-                fatalError("\(moduleType): is not ModuleTypeProviding")
-            }
         }
     }
 }
