@@ -75,7 +75,6 @@ struct ProfileView: View, TunnelInstallationProviding {
 
                 if interactiveManager.isPresented {
                     interactiveView
-                        .font(.body)
                         .padding(.horizontal, 100)
                 } else if isSwitching {
                     listView
@@ -146,6 +145,7 @@ private extension ProfileView {
                 message: Strings.Views.Profiles.Errors.tunnel
             )
         }
+        .font(.body)
         .onExitCommand {
             interactiveManager.isPresented = false
         }
