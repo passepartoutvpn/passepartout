@@ -52,16 +52,16 @@ public struct InteractiveCoordinator: View {
         case .modal:
             interactiveView
                 .modifier(ModalInteractiveModifier(
-                    confirmButton: confirmButton,
-                    cancelButton: cancelButton
+                    confirm: confirm,
+                    cancel: cancel
                 ))
 
         case .inline:
             interactiveView
                 .modifier(InlineInteractiveModifier(
                     title: manager.editor.profile.name,
-                    confirmButton: confirmButton,
-                    cancelButton: cancelButton
+                    confirm: confirm,
+                    cancel: cancel
                 ))
         }
     }
@@ -70,10 +70,10 @@ public struct InteractiveCoordinator: View {
 // MARK: - Modal
 
 private extension InteractiveCoordinator {
-    struct ModalInteractiveModifier<ConfirmButton, CancelButton>: ViewModifier where ConfirmButton: View, CancelButton: View {
-        let confirmButton: () -> ConfirmButton
+    struct ModalInteractiveModifier: ViewModifier {
+        let confirm: () -> Void
 
-        let cancelButton: () -> CancelButton
+        let cancel: () -> Void
 
         func body(content: Content) -> some View {
             NavigationStack {
@@ -87,8 +87,20 @@ private extension InteractiveCoordinator {
 
         @ToolbarContentBuilder
         func modalToolbar() -> some ToolbarContent {
-            ToolbarItem(placement: .confirmationAction, content: confirmButton)
-            ToolbarItem(placement: .cancellationAction, content: cancelButton)
+            ToolbarItem(placement: .confirmationAction) {
+                Button(action: confirm) {
+                    Text(Strings.Global.connect)
+                }
+            }
+            ToolbarItem(placement: .cancellationAction) {
+                Button(action: cancel) {
+#if os(iOS)
+                    ThemeImage(.close)
+#else
+                    Text(Strings.Global.cancel)
+#endif
+                }
+            }
         }
     }
 }
@@ -96,12 +108,12 @@ private extension InteractiveCoordinator {
 // MARK: - Inline
 
 private extension InteractiveCoordinator {
-    struct InlineInteractiveModifier<ConfirmButton, CancelButton>: ViewModifier where ConfirmButton: View, CancelButton: View {
+    struct InlineInteractiveModifier: ViewModifier {
         let title: String
 
-        let confirmButton: () -> ConfirmButton
+        let confirm: () -> Void
 
-        let cancelButton: () -> CancelButton
+        let cancel: () -> Void
 
         func body(content: Content) -> some View {
             VStack {
@@ -119,8 +131,14 @@ private extension InteractiveCoordinator {
 
         var toolbar: some View {
             VStack {
-                confirmButton()
-                cancelButton()
+                Button(action: confirm) {
+                    Text(Strings.Global.connect)
+                        .frame(maxWidth: .infinity)
+                }
+                Button(role: .cancel, action: cancel) {
+                    Text(Strings.Global.cancel)
+                        .frame(maxWidth: .infinity)
+                }
             }
             .frame(maxWidth: .infinity)
         }
@@ -141,28 +159,18 @@ private extension InteractiveCoordinator {
         AnyView(provider.interactiveView(with: manager.editor))
     }
 
-    func confirmButton() -> some View {
-        Button {
-            Task {
-                do {
-                    try await manager.complete()
-                } catch {
-                    onError(error)
-                }
+    func confirm() {
+        Task {
+            do {
+                try await manager.complete()
+            } catch {
+                onError(error)
             }
-        } label: {
-            Text(Strings.Global.ok)
-                .frame(maxWidth: .infinity)
         }
     }
 
-    func cancelButton() -> some View {
-        Button(role: .cancel) {
-            manager.isPresented = false
-        } label: {
-            Text(Strings.Global.cancel)
-                .frame(maxWidth: .infinity)
-        }
+    func cancel() {
+        manager.isPresented = false
     }
 }
 
