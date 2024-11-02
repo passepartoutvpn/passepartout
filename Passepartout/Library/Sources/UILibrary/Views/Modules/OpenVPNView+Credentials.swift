@@ -135,11 +135,12 @@ private extension OpenVPNCredentialsView {
 
     var inputSection: some View {
         Group {
-            ThemeTextField(Strings.Global.username, text: $builder.username, placeholder: Strings.Placeholders.username)
-                .textContentType(.username)
-            ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
-                .textContentType(.password)
-
+            if !isAuthenticating || builder.otpMethod == .none {
+                ThemeTextField(Strings.Global.username, text: $builder.username, placeholder: Strings.Placeholders.username)
+                    .textContentType(.username)
+                ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
+                    .textContentType(.password)
+            }
             if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
                 ThemeSecureField(
                     title: Strings.Unlocalized.otp,
