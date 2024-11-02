@@ -92,7 +92,7 @@ private extension ProfileContainerView {
     }
 
     func interactiveDestination() -> some View {
-        InteractiveView(manager: interactiveManager) {
+        InteractiveCoordinator(manager: interactiveManager) {
             errorHandler.handle(
                 $0,
                 title: Strings.Global.connection,

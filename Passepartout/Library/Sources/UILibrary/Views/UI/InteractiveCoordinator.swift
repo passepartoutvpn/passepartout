@@ -1,5 +1,5 @@
 //
-//  InteractiveView.swift
+//  InteractiveCoordinator.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 9/8/24.
@@ -26,7 +26,7 @@
 import PassepartoutKit
 import SwiftUI
 
-public struct InteractiveView: View {
+public struct InteractiveCoordinator: View {
 
     @ObservedObject
     private var manager: InteractiveManager
@@ -47,7 +47,7 @@ public struct InteractiveView: View {
 }
 
 @MainActor
-private extension InteractiveView {
+private extension InteractiveCoordinator {
     func stackView(with provider: any InteractiveViewProviding) -> some View {
         NavigationStack {
             AnyView(provider.interactiveView(with: manager.editor))
