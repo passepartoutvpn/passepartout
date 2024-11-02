@@ -31,8 +31,6 @@ import SwiftUI
 struct ActiveProfileView: View {
     let profile: Profile?
 
-    let firstProfileId: Profile.ID?
-
     @ObservedObject
     var tunnel: ExtendedTunnel
 
@@ -95,9 +93,6 @@ private extension ActiveProfileView {
 
     var switchProfileButton: some View {
         Button {
-            if let focus = tunnel.currentProfile?.id ?? firstProfileId {
-                focusedField = .profile(focus)
-            }
             isSwitching.toggle()
         } label: {
             Text(Strings.Global.select)

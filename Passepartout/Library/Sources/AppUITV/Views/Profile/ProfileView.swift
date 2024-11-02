@@ -131,7 +131,6 @@ private extension ProfileView {
     var activeView: some View {
         ActiveProfileView(
             profile: currentProfile,
-            firstProfileId: profileManager.headers.first?.id,
             tunnel: tunnel,
             isSwitching: $isSwitching,
             focusedField: $focusedField,
