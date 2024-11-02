@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E182C6C2CD61CD800051DB2 /* AppUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0E182C6B2CD61CD800051DB2 /* AppUI */; };
 		0E757F132CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */; };
 		0E757F202CD0D22B006E13E1 /* PassepartoutLoginItem.app in Embed Login Item */ = {isa = PBXBuildFile; fileRef = 0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E757F232CD0D2BD006E13E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F212CD0D2B7006E13E1 /* AppDelegate.swift */; };
@@ -19,7 +20,6 @@
 		0EC066D12C7DC47600D88A94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EC066D02C7DC47600D88A94 /* LaunchScreen.storyboard */; platformFilter = ios; };
 		0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */; };
 		0EC332D22B8A1808000B9C2F /* PassepartoutTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0EC4A7132CD597EF00B7CAAD /* AppUIPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 0EC4A7122CD597EF00B7CAAD /* AppUIPlatform */; };
 		0EC797422B9378E000C093B7 /* Shared+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797402B9378E000C093B7 /* Shared+App.swift */; };
 		0EC797432B9378E000C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
 		0EC797442B93790600C093B7 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC797412B9378E000C093B7 /* Shared.swift */; };
@@ -144,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EC4A7132CD597EF00B7CAAD /* AppUIPlatform in Frameworks */,
+				0E182C6C2CD61CD800051DB2 /* AppUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +290,7 @@
 			);
 			name = Passepartout;
 			packageProductDependencies = (
-				0EC4A7122CD597EF00B7CAAD /* AppUIPlatform */,
+				0E182C6B2CD61CD800051DB2 /* AppUI */,
 			);
 			productName = PassepartoutKit;
 			productReference = 0E06D18F2B87629100176E1D /* Passepartout.app */;
@@ -983,6 +983,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E182C6B2CD61CD800051DB2 /* AppUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppUI;
+		};
 		0E6C0A022BF4047100450362 /* AppLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppLibrary;
@@ -994,10 +998,6 @@
 		0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
-		};
-		0EC4A7122CD597EF00B7CAAD /* AppUIPlatform */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AppUIPlatform;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

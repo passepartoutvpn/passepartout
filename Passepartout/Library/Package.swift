@@ -18,12 +18,12 @@ let package = Package(
             targets: ["AppLibrary"]
         ),
         .library(
-            name: "AppUIMain",
-            targets: ["AppUIMain"]
+            name: "AppUI",
+            targets: ["AppUI"]
         ),
         .library(
-            name: "AppUIPlatform",
-            targets: ["AppUIPlatform"]
+            name: "AppUIMain",
+            targets: ["AppUIMain"]
         ),
         .library(
             name: "AppUITV",
@@ -86,6 +86,13 @@ let package = Package(
             ]
         ),
         .target(
+            name: "AppUI",
+            dependencies: [
+                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
+                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
+            ]
+        ),
+        .target(
             name: "AppUIMain",
             dependencies: [
                 "LegacyV2",
@@ -93,13 +100,6 @@ let package = Package(
             ],
             resources: [
                 .process("Resources")
-            ]
-        ),
-        .target(
-            name: "AppUIPlatform",
-            dependencies: [
-                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
-                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
             ]
         ),
         .target(
