@@ -33,8 +33,8 @@ final class AppDelegate: NSObject {
     let context: AppContext = .shared
 //    let context: AppContext = .mock(withRegistry: .shared)
 
-    func configure(with appUIConfiguring: AppUIConfiguring) {
-        AppUI(appUIConfiguring)
+    func configure(with uiConfiguring: UILibraryConfiguring) {
+        UILibrary(uiConfiguring)
             .configure(with: context)
     }
 }
