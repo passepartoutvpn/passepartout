@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@testable import AppLibrary
+import AppLibrary
 @testable import AppUIMain
 import Combine
 import Foundation
