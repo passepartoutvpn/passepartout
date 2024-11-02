@@ -99,6 +99,7 @@ struct ProfileView: View, TunnelInstallationProviding {
         .onChange(of: tunnel.status) { _, new in
             if new == .activating {
                 isSwitching = false
+                focusedField = .connect
             }
         }
         .onChange(of: tunnel.currentProfile) { _, new in
