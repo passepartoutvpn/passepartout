@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
 import Combine
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 @testable import UILibrary
