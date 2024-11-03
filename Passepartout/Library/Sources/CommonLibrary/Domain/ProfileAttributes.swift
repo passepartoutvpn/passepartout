@@ -27,7 +27,6 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-// FIXME: #570, test user info encoding/decoding with JSONSerialization
 public struct ProfileAttributes: Hashable, Codable {
     public var isAvailableForTV: Bool?
 
@@ -52,6 +51,7 @@ public struct ProfileAttributes: Hashable, Codable {
     }
 }
 
+// FIXME: #570, test user info encoding/decoding with JSONSerialization
 extension ProfileAttributes: ProfileUserInfoTransformable {
     public var userInfo: [String: AnyHashable]? {
         do {
