@@ -79,7 +79,7 @@ private extension VPNProviderServerCoordinator {
                 try await onSelect(entity)
             } catch {
                 pp_log(.app, .fault, "Unable to select server \(server.serverId) for provider \(server.provider.id): \(error)")
-                errorHandler.handle(error, title: Strings.Global.servers)
+                errorHandler.handle(error, title: Strings.Providers.selectEntity)
             }
         }
     }
