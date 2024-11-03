@@ -30,14 +30,12 @@ import PassepartoutKit
 public struct ProfileAttributes: Hashable, Codable {
     public var isAvailableForTV: Bool?
 
-    public let lastUpdate: Date?
+    public var lastUpdate: Date?
 
-    public let fingerprint: UUID?
+    public var fingerprint: UUID?
 
     public init(isAvailableForTV: Bool? = false) {
         self.isAvailableForTV = isAvailableForTV
-        lastUpdate = Date()
-        fingerprint = UUID()
     }
 
     public init(
