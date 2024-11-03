@@ -171,6 +171,7 @@
 
 "modules.general.sections.storage.footer" = "Profiles are stored to iCloud encrypted.";
 "modules.general.rows.icloud_sharing" = "Shared on iCloud";
+"modules.general.rows.apple_tv" = "Shared on %@";
 "modules.general.rows.import_from_file" = "Import from file...";
 
 "modules.dns.servers.add" = "Add address";
@@ -251,6 +252,7 @@
 // MARK: - Paywalls
 
 "modules.general.rows.icloud_sharing.purchase" = "Share on iCloud";
+"modules.general.rows.apple_tv.purchase" = "Share on %@";
 "modules.on_demand.purchase" = "Add on-demand rules";
 "modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 "providers.picker.purchase" = "Add more providers";

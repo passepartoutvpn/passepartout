@@ -69,9 +69,23 @@ extension ProfileManager {
         return ProfileManager(
             repository: mainProfileRepository,
             backupRepository: backupProfileRepository,
-            remoteRepository: remoteRepository
+            remoteRepository: remoteRepository,
+            deletingRemotely: deletingRemotely,
+            isIncluded: isProfileIncluded
         )
     }()
+
+#if os(tvOS)
+    private static let deletingRemotely = true
+
+    private static let isProfileIncluded: (Profile) -> Bool = {
+        $0.attributes.isAvailableForTV == true
+    }
+#else
+    private static let deletingRemotely = false
+
+    private static let isProfileIncluded: ((Profile) -> Bool)? = nil
+#endif
 }
 
 // MARK: -

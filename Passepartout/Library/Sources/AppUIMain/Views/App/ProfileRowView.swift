@@ -64,9 +64,7 @@ struct ProfileRowView: View, Routable {
             }
             Spacer()
             HStack(spacing: 10.0) {
-                if isShared {
-                    sharingView
-                }
+                attributesView
                 ProfileInfoButton(header: header) {
                     flow?.onEditProfile($0)
                 }
@@ -76,11 +74,9 @@ struct ProfileRowView: View, Routable {
     }
 }
 
-private extension ProfileRowView {
-    var isShared: Bool {
-        profileManager.isRemotelyShared(profileWithId: header.id)
-    }
+// MARK: - Layout
 
+private extension ProfileRowView {
     var markerView: some View {
         ThemeImage(header.id == nextProfileId ? .pending : statusImage)
             .opacity(header.id == nextProfileId || header.id == tunnel.currentProfile?.id ? 1.0 : 0.0)
@@ -107,12 +103,6 @@ private extension ProfileRowView {
         .foregroundStyle(.primary)
     }
 
-    var sharingView: some View {
-        ThemeImage(.cloud)
-            .foregroundStyle(.secondary)
-            .help(Strings.Modules.General.Rows.icloudSharing)
-    }
-
     var statusImage: Theme.ImageName {
         switch tunnel.connectionStatus {
         case .active:
@@ -124,5 +114,38 @@ private extension ProfileRowView {
         case .inactive:
             return .sleeping
         }
+    }
+}
+
+// MARK: - Attributes
+
+private extension ProfileRowView {
+    var attributesView: some View {
+        Group {
+            if isTV {
+                tvImage
+            } else if isShared {
+                sharedImage
+            }
+        }
+        .foregroundStyle(.secondary)
+    }
+
+    var isShared: Bool {
+        profileManager.isRemotelyShared(profileWithId: header.id)
+    }
+
+    var isTV: Bool {
+        isShared && profileManager.isAvailableForTV(profileWithId: header.id)
+    }
+
+    var sharedImage: some View {
+        ThemeImage(.cloud)
+            .help(Strings.Modules.General.Rows.icloudSharing)
+    }
+
+    var tvImage: some View {
+        ThemeImage(.tv)
+            .help(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV))
     }
 }

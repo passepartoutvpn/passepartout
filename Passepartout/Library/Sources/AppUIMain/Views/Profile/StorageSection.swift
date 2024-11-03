@@ -41,6 +41,7 @@ struct StorageSection: View {
         debugChanges()
         return Group {
             sharingToggle
+            tvToggle
             ThemeCopiableText(
                 title: Strings.Unlocalized.uuid,
                 value: profileEditor.profile.id,
@@ -73,6 +74,23 @@ private extension StorageSection {
 
         default:
             Toggle(Strings.Modules.General.Rows.icloudSharing, isOn: $profileEditor.isShared)
+        }
+    }
+
+    @ViewBuilder
+    var tvToggle: some View {
+        switch iapManager.paywallReason(forFeature: .appleTV) {
+        case .purchase(let appFeature):
+            Button(Strings.Modules.General.Rows.AppleTv.purchase(Strings.Unlocalized.appleTV)) {
+                paywallReason = .purchase(appFeature)
+            }
+
+        case .restricted:
+            EmptyView()
+
+        default:
+            Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
+                .disabled(!profileEditor.isShared)
         }
     }
 }

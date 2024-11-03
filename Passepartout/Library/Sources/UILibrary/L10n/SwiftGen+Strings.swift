@@ -333,10 +333,20 @@ public enum Strings {
     }
     public enum General {
       public enum Rows {
+        /// Shared on %@
+        public static func appleTv(_ p1: Any) -> String {
+          return Strings.tr("Localizable", "modules.general.rows.apple_tv", String(describing: p1), fallback: "Shared on %@")
+        }
         /// Shared on iCloud
         public static let icloudSharing = Strings.tr("Localizable", "modules.general.rows.icloud_sharing", fallback: "Shared on iCloud")
         /// Import from file...
         public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file...")
+        public enum AppleTv {
+          /// Share on %@
+          public static func purchase(_ p1: Any) -> String {
+            return Strings.tr("Localizable", "modules.general.rows.apple_tv.purchase", String(describing: p1), fallback: "Share on %@")
+          }
+        }
         public enum IcloudSharing {
           /// Share on iCloud
           public static let purchase = Strings.tr("Localizable", "modules.general.rows.icloud_sharing.purchase", fallback: "Share on iCloud")

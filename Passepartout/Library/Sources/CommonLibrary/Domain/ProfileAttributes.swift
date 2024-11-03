@@ -28,22 +28,28 @@ import Foundation
 import PassepartoutKit
 
 public struct ProfileAttributes: Hashable, Codable {
+    public var isAvailableForTV: Bool?
+
     public var lastUpdate: Date?
 
     public var fingerprint: UUID?
 
-    public init() {
+    public init(isAvailableForTV: Bool? = false) {
+        self.isAvailableForTV = isAvailableForTV
     }
 
     public init(
+        isAvailableForTV: Bool?,
         lastUpdate: Date?,
         fingerprint: UUID?
     ) {
+        self.isAvailableForTV = isAvailableForTV
         self.lastUpdate = lastUpdate
         self.fingerprint = fingerprint
     }
 }
 
+// FIXME: #570, test user info encoding/decoding with JSONSerialization
 extension ProfileAttributes: ProfileUserInfoTransformable {
     public var userInfo: [String: AnyHashable]? {
         do {
