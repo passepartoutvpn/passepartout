@@ -141,7 +141,7 @@ extension ProfileManager {
         pp_log(.app, .notice, "Save profile \(historifiedProfile.id)...")
         do {
             let existingProfile = allProfiles[historifiedProfile.id]
-            if existingProfile == nil || profile != existingProfile {
+            if existingProfile == nil || historifiedProfile != existingProfile {
                 try await repository.saveProfile(historifiedProfile)
                 if let backupRepository {
                     Task.detached {
