@@ -48,7 +48,7 @@ struct ProfileListView: View {
     var body: some View {
         List {
             Section {
-                ForEach(profileManager.headers, id: \.id, content: toggleButton(for:))
+                ForEach(headers, id: \.id, content: toggleButton(for:))
             } header: {
                 Text(Strings.Views.Profiles.Folders.default)
             }
@@ -59,6 +59,10 @@ struct ProfileListView: View {
 }
 
 private extension ProfileListView {
+    var headers: [ProfileHeader] {
+        profileManager.headers
+    }
+
     func toggleButton(for header: ProfileHeader) -> some View {
         TunnelToggleButton(
             tunnel: tunnel,

@@ -96,6 +96,8 @@ extension Strings {
 
         public static let appName = "Passepartout"
 
+        public static let appleTV = "Apple TV"
+
         public static let ca = "CA"
 
         public static let dns = "DNS"

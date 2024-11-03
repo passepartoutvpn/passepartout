@@ -61,6 +61,7 @@ extension Theme {
         case tunnelRestart
         case tunnelToggle
         case tunnelUninstall
+        case tv
     }
 }
 
@@ -102,6 +103,7 @@ extension Theme.ImageName {
             case .tunnelRestart: return "arrow.clockwise"
             case .tunnelToggle: return "power"
             case .tunnelUninstall: return "arrow.uturn.down"
+            case .tv: return "tv"
             }
         }
     }
