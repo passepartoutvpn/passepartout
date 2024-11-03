@@ -236,7 +236,13 @@ extension ProfileEditorTests {
             .sink {
                 switch $0 {
                 case .save(let savedProfile):
-                    XCTAssertEqual(savedProfile, profile)
+                    do {
+                        let lhs = try savedProfile.withoutUserInfo()
+                        let rhs = try profile.withoutUserInfo()
+                        XCTAssertEqual(lhs, rhs)
+                    } catch {
+                        XCTFail(error.localizedDescription)
+                    }
                     exp.fulfill()
 
                 default:
