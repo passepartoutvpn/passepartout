@@ -27,13 +27,14 @@ import PassepartoutKit
 import SwiftUI
 
 extension OpenVPNModule.Builder: InteractiveViewProviding {
-    public func interactiveView(with editor: ProfileEditor) -> some View {
+    public func interactiveView(with editor: ProfileEditor, onSubmit: @escaping () -> Void) -> some View {
         let draft = editor[self]
 
         return OpenVPNCredentialsView(
             isInteractive: draft.isInteractive,
             credentials: draft.credentials,
-            isAuthenticating: true
+            isAuthenticating: true,
+            onSubmit: onSubmit
         )
     }
 }

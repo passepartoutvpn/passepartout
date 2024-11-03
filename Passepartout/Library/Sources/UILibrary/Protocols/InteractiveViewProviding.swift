@@ -29,5 +29,5 @@ public protocol InteractiveViewProviding {
     associatedtype InteractiveContent: View
 
     @MainActor
-    func interactiveView(with editor: ProfileEditor) -> InteractiveContent
+    func interactiveView(with editor: ProfileEditor, onSubmit: @escaping () -> Void) -> InteractiveContent
 }

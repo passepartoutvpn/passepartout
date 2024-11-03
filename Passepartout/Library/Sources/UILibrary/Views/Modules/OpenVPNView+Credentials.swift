@@ -48,6 +48,8 @@ public struct OpenVPNCredentialsView: View {
 
     private let isAuthenticating: Bool
 
+    private let onSubmit: (() -> Void)?
+
     @State
     private var builder = OpenVPN.Credentials.Builder()
 
@@ -60,11 +62,13 @@ public struct OpenVPNCredentialsView: View {
     public init(
         isInteractive: Binding<Bool>,
         credentials: Binding<OpenVPN.Credentials?>,
-        isAuthenticating: Bool = false
+        isAuthenticating: Bool = false,
+        onSubmit: (() -> Void)? = nil
     ) {
         _isInteractive = isInteractive
         _credentials = credentials
         self.isAuthenticating = isAuthenticating
+        self.onSubmit = onSubmit
     }
 
     public var body: some View {
@@ -182,6 +186,11 @@ private extension OpenVPNCredentialsView {
         ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
             .textContentType(.password)
             .focused($focusedField, equals: .password)
+            .onSubmit {
+                if builder.otpMethod == .none {
+                    onSubmit?()
+                }
+            }
     }
 
     var otpField: some View {
@@ -192,6 +201,11 @@ private extension OpenVPNCredentialsView {
         )
         .textContentType(.oneTimeCode)
         .focused($focusedField, equals: .otp)
+        .onSubmit {
+            if builder.otpMethod != .none {
+                onSubmit?()
+            }
+        }
     }
 }
 
