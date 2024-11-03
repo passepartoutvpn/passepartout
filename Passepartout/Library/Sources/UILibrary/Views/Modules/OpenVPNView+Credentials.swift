@@ -76,12 +76,14 @@ public struct OpenVPNCredentialsView: View {
         .onLoad {
             builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
             builder.otp = nil
-            switch builder.otpMethod {
-            case .none:
-                focusedField = .username
+            if isAuthenticating {
+                switch builder.otpMethod {
+                case .none:
+                    focusedField = .username
 
-            default:
-                focusedField = .otp
+                default:
+                    focusedField = .otp
+                }
             }
         }
         .onChange(of: builder) {
