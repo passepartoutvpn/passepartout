@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
@@ -35,8 +36,9 @@ extension OpenVPNModule.Builder: ModuleViewProviding {
 extension OpenVPNModule: ProviderEntityViewProviding {
     func providerEntityView(
         with provider: ModuleMetadata.Provider,
+        errorHandler: ErrorHandler,
         onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
     ) -> some View {
-        vpnProviderEntityView(with: provider, onSelect: onSelect)
+        vpnProviderEntityView(with: provider, errorHandler: errorHandler, onSelect: onSelect)
     }
 }

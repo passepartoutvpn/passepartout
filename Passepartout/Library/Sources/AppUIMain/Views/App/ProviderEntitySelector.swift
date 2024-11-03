@@ -24,6 +24,7 @@
 //
 
 import AppLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
@@ -44,9 +45,15 @@ struct ProviderEntitySelector: View {
 
     let provider: ModuleMetadata.Provider
 
+    let errorHandler: ErrorHandler
+
     var body: some View {
         if let viewProvider = module as? any ProviderEntityViewProviding {
-            AnyView(viewProvider.providerEntityView(with: provider, onSelect: onSelect))
+            AnyView(viewProvider.providerEntityView(
+                with: provider,
+                errorHandler: errorHandler,
+                onSelect: onSelect
+            ))
         } else {
             fatalError("Module got too far without being ProviderEntityViewProviding: \(module)")
         }

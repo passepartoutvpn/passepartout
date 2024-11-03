@@ -25,6 +25,7 @@
 
 import AppLibrary
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
@@ -50,6 +51,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
 
     @State
     private var profilePath = NavigationPath()
+
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
 
     public init(
         profileManager: ProfileManager,
@@ -114,6 +118,7 @@ extension AppCoordinator {
             tunnel: tunnel,
             registry: registry,
             isImporting: $isImporting,
+            errorHandler: errorHandler,
             flow: .init(
                 onEditProfile: {
                     guard let profile = profileManager.profile(withId: $0.id) else {
@@ -167,7 +172,8 @@ extension AppCoordinator {
                 tunnel: tunnel,
                 profile: profile,
                 module: module,
-                provider: provider
+                provider: provider,
+                errorHandler: errorHandler
             )
 
         case .settings:

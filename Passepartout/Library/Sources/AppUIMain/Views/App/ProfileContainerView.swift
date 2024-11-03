@@ -40,13 +40,13 @@ struct ProfileContainerView: View, Routable {
     @Binding
     var isImporting: Bool
 
+    @ObservedObject
+    var errorHandler: ErrorHandler
+
     var flow: ProfileFlow?
 
     @StateObject
     private var interactiveManager = InteractiveManager()
-
-    @StateObject
-    private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
         debugChanges()
@@ -150,7 +150,8 @@ private struct PreviewView: View {
                 profileManager: .mock,
                 tunnel: .mock,
                 registry: Registry(),
-                isImporting: .constant(false)
+                isImporting: .constant(false),
+                errorHandler: .default()
             )
         }
         .withMockEnvironment()
