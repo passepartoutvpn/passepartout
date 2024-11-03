@@ -27,6 +27,7 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
+// FIXME: #570, test user info encoding/decoding with JSONSerialization
 public struct ProfileAttributes: Hashable, Codable {
     public var isAvailableForTV: Bool?
 
