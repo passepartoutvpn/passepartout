@@ -52,6 +52,7 @@ public struct InteractiveCoordinator: View {
         case .modal:
             interactiveView
                 .modifier(ModalInteractiveModifier(
+                    title: title,
                     confirm: confirm,
                     cancel: cancel
                 ))
@@ -59,7 +60,7 @@ public struct InteractiveCoordinator: View {
         case .inline(let withCancel):
             interactiveView
                 .modifier(InlineInteractiveModifier(
-                    title: manager.editor.profile.name,
+                    title: title,
                     withCancel: withCancel,
                     confirm: confirm,
                     cancel: cancel
@@ -72,6 +73,8 @@ public struct InteractiveCoordinator: View {
 
 private extension InteractiveCoordinator {
     struct ModalInteractiveModifier: ViewModifier {
+        let title: String
+
         let confirm: () -> Void
 
         let cancel: () -> Void
@@ -83,7 +86,7 @@ private extension InteractiveCoordinator {
                 }
                 .themeForm()
                 .themeNavigationDetail()
-                .navigationTitle(Strings.Ui.InteractiveCoordinator.title)
+                .navigationTitle(title)
                 .toolbar(content: modalToolbar)
             }
         }
@@ -164,6 +167,10 @@ private extension InteractiveCoordinator {
 
     func innerView(with provider: any InteractiveViewProviding) -> some View {
         AnyView(provider.interactiveView(with: manager.editor, onSubmit: confirm))
+    }
+
+    var title: String {
+        manager.editor.profile.name
     }
 
     func confirm() {

@@ -531,10 +531,6 @@ public enum Strings {
       ///  (on-demand)
       public static let onDemandSuffix = Strings.tr("Localizable", "ui.connection_status.on_demand_suffix", fallback: " (on-demand)")
     }
-    public enum InteractiveCoordinator {
-      /// Interactive
-      public static let title = Strings.tr("Localizable", "ui.interactive_coordinator.title", fallback: "Interactive")
-    }
     public enum ProfileContext {
       /// Connect to...
       public static let connectTo = Strings.tr("Localizable", "ui.profile_context.connect_to", fallback: "Connect to...")
