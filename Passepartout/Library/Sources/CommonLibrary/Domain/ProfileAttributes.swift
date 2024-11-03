@@ -28,19 +28,24 @@ import Foundation
 import PassepartoutKit
 
 public struct ProfileAttributes: Hashable, Codable {
+    public var isAvailableForTV: Bool?
+
     public let lastUpdate: Date?
 
     public let fingerprint: UUID?
 
-    public init() {
+    public init(isAvailableForTV: Bool? = false) {
+        self.isAvailableForTV = isAvailableForTV
         lastUpdate = Date()
         fingerprint = UUID()
     }
 
     public init(
+        isAvailableForTV: Bool?,
         lastUpdate: Date?,
         fingerprint: UUID?
     ) {
+        self.isAvailableForTV = isAvailableForTV
         self.lastUpdate = lastUpdate
         self.fingerprint = fingerprint
     }

@@ -70,6 +70,7 @@ private extension AppData {
         let profile = try registry.decodedProfile(from: encoded, with: coder)
         var builder = profile.builder()
         builder.attributes = ProfileAttributes(
+            isAvailableForTV: cdEntity.isAvailableForTV?.boolValue ?? false,
             lastUpdate: cdEntity.lastUpdate,
             fingerprint: cdEntity.fingerprint
         )
@@ -91,6 +92,7 @@ private extension AppData {
         cdProfile.encoded = encoded
 
         let attributes = profile.attributes
+        cdProfile.isAvailableForTV = attributes.isAvailableForTV.map(NSNumber.init(value:))
         cdProfile.lastUpdate = attributes.lastUpdate
         cdProfile.fingerprint = attributes.fingerprint
 

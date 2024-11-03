@@ -206,6 +206,10 @@ extension ProfileManager {
         allRemoteProfiles.keys.contains(profileId)
     }
 
+    public func isAvailableForTV(profileWithId profileId: Profile.ID) -> Bool {
+        profile(withId: profileId)?.attributes.isAvailableForTV == true
+    }
+
     public func eraseRemotelySharedProfiles() async throws {
         pp_log(.app, .notice, "Erase remotely shared profiles...")
         try await remoteRepository?.removeProfiles(withIds: Array(allRemoteProfiles.keys))

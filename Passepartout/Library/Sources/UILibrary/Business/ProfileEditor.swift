@@ -101,6 +101,15 @@ extension ProfileEditor {
             editableProfile = newValue
         }
     }
+
+    public var isAvailableForTV: Bool {
+        get {
+            editableProfile.attributes.isAvailableForTV == true
+        }
+        set {
+            editableProfile.attributes.isAvailableForTV = newValue
+        }
+    }
 }
 
 extension ProfileEditor {
