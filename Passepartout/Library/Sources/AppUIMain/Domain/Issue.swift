@@ -25,7 +25,6 @@
 
 #if os(iOS)
 
-import AppLibrary
 import CommonLibrary
 import Foundation
 import PassepartoutKit
@@ -34,7 +33,6 @@ import UIKit
 #else
 
 import AppKit
-import AppLibrary
 import CommonLibrary
 import Foundation
 import PassepartoutKit

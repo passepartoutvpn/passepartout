@@ -23,9 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
 @testable import AppUIMain
 import Combine
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 import XCTest

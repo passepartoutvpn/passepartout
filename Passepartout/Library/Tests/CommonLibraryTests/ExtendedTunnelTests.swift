@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@testable import AppLibrary
+@testable import CommonLibrary
 import Foundation
 import PassepartoutKit
 import XCTest

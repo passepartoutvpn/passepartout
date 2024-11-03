@@ -14,10 +14,6 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "AppLibrary",
-            targets: ["AppLibrary"]
-        ),
-        .library(
             name: "AppUI",
             targets: ["AppUI"]
         ),
@@ -28,6 +24,10 @@ let package = Package(
         .library(
             name: "AppUITV",
             targets: ["AppUITV"]
+        ),
+        .library(
+            name: "CommonLibrary",
+            targets: ["CommonLibrary"]
         ),
         .library(
             name: "TunnelLibrary",
@@ -61,7 +61,7 @@ let package = Package(
             name: "AppDataProfiles",
             dependencies: [
                 "AppData",
-                "AppLibrary"
+                "CommonLibrary"
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
@@ -71,18 +71,10 @@ let package = Package(
             name: "AppDataProviders",
             dependencies: [
                 "AppData",
-                "AppLibrary"
+                "CommonLibrary"
             ],
             resources: [
                 .process("Providers.xcdatamodeld")
-            ]
-        ),
-        .target(
-            name: "AppLibrary",
-            dependencies: [
-                "CommonLibrary",
-                "CommonUtils",
-                "Kvitto"
             ]
         ),
         .target(
@@ -116,6 +108,8 @@ let package = Package(
         .target(
             name: "CommonLibrary",
             dependencies: [
+                "CommonUtils",
+                "Kvitto",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source"),
                 .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-source-openvpn-openssl"),
                 .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")
@@ -142,20 +136,20 @@ let package = Package(
             dependencies: [
                 "AppDataProfiles",
                 "AppDataProviders",
-                "AppLibrary",
-                "CommonAPI"
+                "CommonAPI",
+                "CommonLibrary"
             ],
             resources: [
                 .process("Resources")
             ]
         ),
         .testTarget(
-            name: "AppLibraryTests",
-            dependencies: ["AppLibrary"]
-        ),
-        .testTarget(
             name: "AppUIMainTests",
             dependencies: ["AppUIMain"]
+        ),
+        .testTarget(
+            name: "CommonLibraryTests",
+            dependencies: ["CommonLibrary"]
         ),
         .testTarget(
             name: "UILibraryTests",

@@ -23,7 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
