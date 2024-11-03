@@ -33,8 +33,8 @@ public struct ProfileAttributes: Hashable, Codable {
     public let fingerprint: UUID?
 
     public init() {
-        lastUpdate = nil
-        fingerprint = nil
+        lastUpdate = Date()
+        fingerprint = UUID()
     }
 
     public init(

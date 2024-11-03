@@ -89,8 +89,10 @@ private extension AppData {
         cdProfile.uuid = profile.id
         cdProfile.name = profile.name
         cdProfile.encoded = encoded
-        cdProfile.lastUpdate = Date()
-        cdProfile.fingerprint = UUID()
+
+        let attributes = profile.attributes
+        cdProfile.lastUpdate = attributes.lastUpdate
+        cdProfile.fingerprint = attributes.fingerprint
 
         return cdProfile
     }
