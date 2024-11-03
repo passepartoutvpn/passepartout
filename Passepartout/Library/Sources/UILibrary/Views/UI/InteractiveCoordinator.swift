@@ -163,7 +163,7 @@ private extension InteractiveCoordinator {
     }
 
     func innerView(with provider: any InteractiveViewProviding) -> some View {
-        AnyView(provider.interactiveView(with: manager.editor))
+        AnyView(provider.interactiveView(with: manager.editor, onSubmit: confirm))
     }
 
     func confirm() {
