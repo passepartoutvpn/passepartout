@@ -39,8 +39,7 @@ struct InstalledProfileView: View, Routable {
 
     let profile: Profile?
 
-    @ObservedObject
-    var tunnel: ExtendedTunnel
+    let tunnel: ExtendedTunnel
 
     let interactiveManager: InteractiveManager
 
@@ -100,30 +99,25 @@ private extension InstalledProfileView {
     var statusView: some View {
         HStack {
             providerSelectorButton
-            ConnectionStatusText(tunnel: tunnel)
-                .font(.body)
-                .foregroundStyle(tunnel.statusColor(theme))
-                .opacity(installedOpacity)
+            StatusText(
+                theme: theme,
+                tunnel: tunnel,
+                opacity: installedOpacity
+            )
         }
     }
 
     var toggleButton: some View {
-        TunnelToggleButton(
+        ToggleButton(
+            theme: theme,
             tunnel: tunnel,
             profile: profile,
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            onProviderEntityRequired: flow?.onEditProviderEntity,
-            label: { _ in
-                ThemeImage(.tunnelToggle)
-                    .scaleEffect(1.5, anchor: .trailing)
-            }
+            opacity: installedOpacity,
+            flow: flow
         )
-        // TODO: #584, necessary to avoid cell selection
-        .buttonStyle(.plain)
-        .foregroundStyle(tunnel.statusColor(theme))
-        .opacity(installedOpacity)
     }
 
     var menuContent: some View {
@@ -153,6 +147,69 @@ private extension InstalledProfileView {
 
     func providerSelectorLabel(with provider: ModuleMetadata.Provider) -> some View {
         ProviderCountryFlag(provider: provider)
+    }
+}
+
+// MARK: - Subviews (observing)
+
+private struct StatusText: View {
+
+    @ObservedObject
+    var theme: Theme
+
+    @ObservedObject
+    var tunnel: ExtendedTunnel
+
+    let opacity: Double
+
+    var body: some View {
+        ConnectionStatusText(tunnel: tunnel)
+            .font(.body)
+            .foregroundStyle(tunnel.statusColor(theme))
+            .opacity(opacity)
+    }
+}
+
+private struct ToggleButton: View {
+
+    @ObservedObject
+    var theme: Theme
+
+    @ObservedObject
+    var tunnel: ExtendedTunnel
+
+    let profile: Profile?
+
+    @Binding
+    var nextProfileId: Profile.ID?
+
+    @ObservedObject
+    var interactiveManager: InteractiveManager
+
+    @ObservedObject
+    var errorHandler: ErrorHandler
+
+    let opacity: Double
+
+    let flow: ProfileFlow?
+
+    var body: some View {
+        TunnelToggleButton(
+            tunnel: tunnel,
+            profile: profile,
+            nextProfileId: $nextProfileId,
+            interactiveManager: interactiveManager,
+            errorHandler: errorHandler,
+            onProviderEntityRequired: flow?.onEditProviderEntity,
+            label: { _ in
+                ThemeImage(.tunnelToggle)
+                    .scaleEffect(1.5, anchor: .trailing)
+            }
+        )
+        // TODO: #584, necessary to avoid cell selection
+        .buttonStyle(.plain)
+        .foregroundStyle(tunnel.statusColor(theme))
+        .opacity(opacity)
     }
 }
 
