@@ -274,17 +274,19 @@ extension ProfileManager {
 
         remoteRepository?
             .profilesPublisher
+            .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.reloadRemoteProfiles($0)
+                self?.loadInitialRemoteProfiles($0)
             }
             .store(in: &subscriptions)
 
         remoteRepository?
             .profilesPublisher
             .dropFirst()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.importRemoteProfiles($0)
+                self?.reloadRemoteProfiles($0)
             }
             .store(in: &subscriptions)
 
@@ -304,6 +306,7 @@ private extension ProfileManager {
             $0[$1.id] = $1
         }
 
+        // should never be imported in the first place but you never know
         if let isIncluded {
             let idsToRemove: [Profile.ID] = allProfiles
                 .filter {
@@ -320,40 +323,45 @@ private extension ProfileManager {
         }
     }
 
+    func loadInitialRemoteProfiles(_ result: [Profile]) {
+        pp_log(.app, .info, "Load initial remote profiles: \(result.map(\.id))")
+        allRemoteProfiles = result.reduce(into: [:]) {
+            $0[$1.id] = $1
+        }
+        objectWillChange.send()
+    }
+
     func reloadRemoteProfiles(_ result: [Profile]) {
         pp_log(.app, .info, "Reload remote profiles: \(result.map(\.id))")
         allRemoteProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
-
-        if deletingRemotely {
-            let idsToRemove = Set(allProfiles.keys).subtracting(Set(allRemoteProfiles.keys))
-            if !idsToRemove.isEmpty {
-                pp_log(.app, .info, "Delete local profiles removed remotely: \(idsToRemove)")
-                Task.detached {
-                    try await self.repository.removeProfiles(withIds: Array(idsToRemove))
-                }
-            }
-        }
-
         objectWillChange.send()
-    }
 
-    // pull remote updates into local profiles (best-effort)
-    func importRemoteProfiles(_ result: [Profile]) {
         let profilesToImport = result
-        pp_log(.app, .info, "Try to import remote profiles: \(result.map(\.id))")
-
         let allFingerprints = allProfiles.values.reduce(into: [:]) {
             $0[$1.id] = $1.attributes.fingerprint
         }
+        let remotelyDeletedIds = Set(allProfiles.keys).subtracting(Set(allRemoteProfiles.keys))
+        let deletingRemotely = deletingRemotely
 
         Task.detached { [weak self] in
+            guard let self else {
+                return
+            }
+            var idsToRemove: [Profile.ID] = []
+            if !remotelyDeletedIds.isEmpty {
+                pp_log(.app, .info, "Will \(deletingRemotely ? "delete" : "retain") local profiles not present in remote repository: \(remotelyDeletedIds)")
+
+                if deletingRemotely {
+                    idsToRemove.append(contentsOf: remotelyDeletedIds)
+                }
+            }
             for remoteProfile in profilesToImport {
                 do {
-                    guard self?.isIncluded?(remoteProfile) ?? true else {
-                        pp_log(.app, .info, "Delete non-included remote profile \(remoteProfile.id)")
-                        try? await self?.repository.removeProfiles(withIds: [remoteProfile.id])
+                    guard isIncluded?(remoteProfile) ?? true else {
+                        pp_log(.app, .info, "Will delete non-included remote profile \(remoteProfile.id)")
+                        idsToRemove.append(remoteProfile.id)
                         continue
                     }
                     if let localFingerprint = allFingerprints[remoteProfile.id] {
@@ -363,11 +371,13 @@ private extension ProfileManager {
                         }
                     }
                     pp_log(.app, .notice, "Import remote profile \(remoteProfile.id)...")
-                    try await self?.save(remoteProfile)
+                    try await save(remoteProfile)
                 } catch {
                     pp_log(.app, .error, "Unable to import remote profile: \(error)")
                 }
             }
+            pp_log(.app, .notice, "Finished importing remote profiles, delete profiles: \(idsToRemove)")
+            try? await repository.removeProfiles(withIds: idsToRemove)
         }
     }
 

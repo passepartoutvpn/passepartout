@@ -118,7 +118,9 @@ private extension NEProfileRepository {
                 "\($0.name)(\($0.id)"
             }
 
-        pp_log(.app, .info, "Sync profiles removed externally: \(removedProfilesDescription)")
+        if !removedProfilesDescription.isEmpty {
+            pp_log(.app, .info, "Sync profiles removed externally: \(removedProfilesDescription)")
+        }
 
         profilesSubject.send(profiles)
     }
