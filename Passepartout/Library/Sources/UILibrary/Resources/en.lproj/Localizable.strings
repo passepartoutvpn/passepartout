@@ -252,7 +252,7 @@
 // MARK: - Paywalls
 
 "modules.general.rows.icloud_sharing.purchase" = "Share on iCloud";
-"modules.general.rows.apple_tv.purchase" = "Shared on %@";
+"modules.general.rows.apple_tv.purchase" = "Share on %@";
 "modules.on_demand.purchase" = "Add on-demand rules";
 "modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 "providers.picker.purchase" = "Add more providers";

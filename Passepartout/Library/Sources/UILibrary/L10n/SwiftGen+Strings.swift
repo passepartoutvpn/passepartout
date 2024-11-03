@@ -342,9 +342,9 @@ public enum Strings {
         /// Import from file...
         public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file...")
         public enum AppleTv {
-          /// Shared on %@
+          /// Share on %@
           public static func purchase(_ p1: Any) -> String {
-            return Strings.tr("Localizable", "modules.general.rows.apple_tv.purchase", String(describing: p1), fallback: "Shared on %@")
+            return Strings.tr("Localizable", "modules.general.rows.apple_tv.purchase", String(describing: p1), fallback: "Share on %@")
           }
         }
         public enum IcloudSharing {
