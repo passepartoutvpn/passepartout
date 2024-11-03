@@ -28,13 +28,11 @@ import Foundation
 import PassepartoutKit
 
 public struct ProfileAttributes: Hashable, Codable {
-    public let lastUpdate: Date?
+    public var lastUpdate: Date?
 
-    public let fingerprint: UUID?
+    public var fingerprint: UUID?
 
     public init() {
-        lastUpdate = Date()
-        fingerprint = UUID()
     }
 
     public init(

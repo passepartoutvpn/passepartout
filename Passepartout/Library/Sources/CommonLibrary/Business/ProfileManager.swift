@@ -130,7 +130,14 @@ extension ProfileManager {
         }
     }
 
-    public func save(_ profile: Profile, isShared: Bool? = nil) async throws {
+    public func save(_ preProfile: Profile, isShared: Bool? = nil) async throws {
+
+        // inject attributes
+        var builder = preProfile.builder()
+        builder.attributes.lastUpdate = Date()
+        builder.attributes.fingerprint = UUID()
+        let profile = try builder.tryBuild()
+
         pp_log(.app, .notice, "Save profile \(profile.id)...")
         do {
             let existingProfile = allProfiles[profile.id]
