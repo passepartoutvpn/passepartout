@@ -42,7 +42,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 
     let filtersWithSelection: Bool
 
-    let selectTitle: String
+    var selectTitle = Strings.Providers.selectEntity
 
     let onSelect: (VPNServer, VPNPreset<Configuration>) -> Void
 

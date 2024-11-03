@@ -51,7 +51,6 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
                 configurationType: Configuration.self,
                 selectedEntity: selectedEntity,
                 filtersWithSelection: false,
-                selectTitle: Strings.Global.connect,
                 onSelect: onSelect
             )
             .toolbar {

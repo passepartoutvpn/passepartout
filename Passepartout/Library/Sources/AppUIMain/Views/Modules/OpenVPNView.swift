@@ -220,7 +220,6 @@ private extension OpenVPNView {
                     configurationType: OpenVPN.Configuration.self,
                     selectedEntity: providerEntity.wrappedValue,
                     filtersWithSelection: true,
-                    selectTitle: Strings.Providers.selectEntity,
                     onSelect: onSelectServer
                 )
             }
