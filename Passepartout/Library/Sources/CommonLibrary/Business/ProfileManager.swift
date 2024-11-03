@@ -140,19 +140,14 @@ extension ProfileManager {
 
         pp_log(.app, .notice, "Save profile \(historifiedProfile.id)...")
         do {
-            let existingProfile = allProfiles[historifiedProfile.id]
-            if existingProfile == nil || historifiedProfile != existingProfile {
-                try await repository.saveProfile(historifiedProfile)
-                if let backupRepository {
-                    Task.detached {
-                        try await backupRepository.saveProfile(historifiedProfile)
-                    }
+            try await repository.saveProfile(historifiedProfile)
+            if let backupRepository {
+                Task.detached {
+                    try await backupRepository.saveProfile(historifiedProfile)
                 }
-                allProfiles[historifiedProfile.id] = historifiedProfile
-                didChange.send(.save(historifiedProfile))
-            } else {
-                pp_log(.app, .notice, "Profile \(historifiedProfile.id) not modified, not saving")
             }
+            allProfiles[historifiedProfile.id] = historifiedProfile
+            didChange.send(.save(historifiedProfile))
         } catch {
             pp_log(.app, .fault, "Unable to save profile \(historifiedProfile.id): \(error)")
             throw error
