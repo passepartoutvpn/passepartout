@@ -76,8 +76,8 @@ private extension VPNProviderServerCoordinator {
         Task {
             do {
                 let entity = VPNEntity(server: server, preset: preset)
-                try await onSelect(entity)
                 dismiss()
+                try await onSelect(entity)
             } catch {
                 pp_log(.app, .fault, "Unable to select server \(server.serverId) for provider \(server.provider.id): \(error)")
                 errorHandler.handle(error, title: Strings.Global.servers)
