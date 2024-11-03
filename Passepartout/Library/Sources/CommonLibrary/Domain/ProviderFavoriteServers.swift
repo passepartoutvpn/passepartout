@@ -32,11 +32,11 @@ public struct ProviderFavoriteServers {
         map = [:]
     }
 
-    public func servers(forModuleWithID moduleId: UUID) -> Set<String> {
+    public func servers(forModuleWithId moduleId: UUID) -> Set<String> {
         map[moduleId] ?? []
     }
 
-    public mutating func setServers(_ servers: Set<String>, forModuleWithID moduleId: UUID) {
+    public mutating func setServers(_ servers: Set<String>, forModuleWithId moduleId: UUID) {
         map[moduleId] = servers
     }
 }

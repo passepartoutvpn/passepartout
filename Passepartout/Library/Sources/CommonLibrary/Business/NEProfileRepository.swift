@@ -91,7 +91,9 @@ private extension NEProfileRepository {
     func onLoadedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
         let profiles = managers.values.compactMap {
             do {
-                return try repository.profile(from: $0)
+                let profile = try repository.profile(from: $0)
+                pp_log(.app, .debug, "Attributes for profile \(profile.id): \(profile.attributes)")
+                return profile
             } catch {
                 pp_log(.app, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
                 return nil
@@ -107,7 +109,7 @@ private extension NEProfileRepository {
                 managers.keys.contains($0.id)
             }
 
-        let removedProfilesDesc = profilesSubject
+        let removedProfilesDescription = profilesSubject
             .value
             .filter {
                 !managers.keys.contains($0.id)
@@ -116,7 +118,7 @@ private extension NEProfileRepository {
                 "\($0.name)(\($0.id)"
             }
 
-        pp_log(.app, .info, "Sync profiles removed externally: \(removedProfilesDesc)")
+        pp_log(.app, .info, "Sync profiles removed externally: \(removedProfilesDescription)")
 
         profilesSubject.send(profiles)
     }

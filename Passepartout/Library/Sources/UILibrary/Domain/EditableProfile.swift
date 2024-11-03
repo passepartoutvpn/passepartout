@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 
@@ -36,6 +37,8 @@ public struct EditableProfile: MutableProfileType {
     public var activeModulesIds: Set<UUID> = []
 
     public var modulesMetadata: [UUID: ModuleMetadata]?
+
+    public var userInfo: [String: AnyHashable]?
 
     public func builder() throws -> Profile.Builder {
         var builder = Profile.Builder(id: id)
@@ -63,7 +66,20 @@ public struct EditableProfile: MutableProfileType {
             $0[$1.key] = metadata
         }
 
+        builder.userInfo = userInfo
+
         return builder
+    }
+}
+
+extension EditableProfile {
+    var attributes: ProfileAttributes {
+        get {
+            userInfo() ?? ProfileAttributes()
+        }
+        set {
+            setUserInfo(newValue)
+        }
     }
 }
 
@@ -74,7 +90,8 @@ extension Profile {
             name: name,
             modules: modulesBuilders,
             activeModulesIds: activeModulesIds,
-            modulesMetadata: modulesMetadata
+            modulesMetadata: modulesMetadata,
+            userInfo: userInfo
         )
     }
 
