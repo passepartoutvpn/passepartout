@@ -130,45 +130,45 @@ extension ProfileManager {
         }
     }
 
-    public func save(_ preProfile: Profile, isShared: Bool? = nil) async throws {
+    public func save(_ profile: Profile, isShared: Bool? = nil) async throws {
 
         // inject attributes
-        var builder = preProfile.builder()
+        var builder = profile.builder()
         builder.attributes.lastUpdate = Date()
         builder.attributes.fingerprint = UUID()
-        let profile = try builder.tryBuild()
+        let historifiedProfile = try builder.tryBuild()
 
-        pp_log(.app, .notice, "Save profile \(profile.id)...")
+        pp_log(.app, .notice, "Save profile \(historifiedProfile.id)...")
         do {
-            let existingProfile = allProfiles[profile.id]
+            let existingProfile = allProfiles[historifiedProfile.id]
             if existingProfile == nil || profile != existingProfile {
-                try await repository.saveProfile(profile)
+                try await repository.saveProfile(historifiedProfile)
                 if let backupRepository {
                     Task.detached {
-                        try await backupRepository.saveProfile(profile)
+                        try await backupRepository.saveProfile(historifiedProfile)
                     }
                 }
-                allProfiles[profile.id] = profile
-                didChange.send(.save(profile))
+                allProfiles[historifiedProfile.id] = historifiedProfile
+                didChange.send(.save(historifiedProfile))
             } else {
-                pp_log(.app, .notice, "Profile \(profile.id) not modified, not saving")
+                pp_log(.app, .notice, "Profile \(historifiedProfile.id) not modified, not saving")
             }
         } catch {
-            pp_log(.app, .fault, "Unable to save profile \(profile.id): \(error)")
+            pp_log(.app, .fault, "Unable to save profile \(historifiedProfile.id): \(error)")
             throw error
         }
         do {
             if let isShared, let remoteRepository {
                 if isShared {
-                    pp_log(.app, .notice, "Enable remote sharing of profile \(profile.id)...")
-                    try await remoteRepository.saveProfile(profile)
+                    pp_log(.app, .notice, "Enable remote sharing of profile \(historifiedProfile.id)...")
+                    try await remoteRepository.saveProfile(historifiedProfile)
                 } else {
-                    pp_log(.app, .notice, "Disable remote sharing of profile \(profile.id)...")
-                    try await remoteRepository.removeProfiles(withIds: [profile.id])
+                    pp_log(.app, .notice, "Disable remote sharing of profile \(historifiedProfile.id)...")
+                    try await remoteRepository.removeProfiles(withIds: [historifiedProfile.id])
                 }
             }
         } catch {
-            pp_log(.app, .fault, "Unable to save/remove remote profile \(profile.id): \(error)")
+            pp_log(.app, .fault, "Unable to save/remove remote profile \(historifiedProfile.id): \(error)")
             throw error
         }
     }
