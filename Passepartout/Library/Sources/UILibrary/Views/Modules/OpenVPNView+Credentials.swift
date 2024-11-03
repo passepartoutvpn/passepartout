@@ -46,7 +46,7 @@ public struct OpenVPNCredentialsView: View {
     @Binding
     private var credentials: OpenVPN.Credentials?
 
-    private var isAuthenticating = false
+    private let isAuthenticating: Bool
 
     @State
     private var builder = OpenVPN.Credentials.Builder()
@@ -154,22 +154,11 @@ private extension OpenVPNCredentialsView {
     var inputSection: some View {
         Group {
             if !isAuthenticating || builder.otpMethod == .none {
-                ThemeTextField(Strings.Global.username, text: $builder.username, placeholder: Strings.Placeholders.username)
-                    .textContentType(.username)
-                    .focused($focusedField, equals: .username)
-
-                ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
-                    .textContentType(.password)
-                    .focused($focusedField, equals: .password)
+                usernameField
+                passwordField
             }
             if isEligibleForInteractiveLogin, isAuthenticating, builder.otpMethod != .none {
-                ThemeSecureField(
-                    title: Strings.Unlocalized.otp,
-                    text: $builder.otp ?? "",
-                    placeholder: Strings.Placeholders.secret
-                )
-                .textContentType(.oneTimeCode)
-                .focused($focusedField, equals: .otp)
+                otpField
             }
         }
         .themeSection(footer: inputFooter)
@@ -181,6 +170,28 @@ private extension OpenVPNCredentialsView {
                 .nilIfEmpty
         }
         return nil
+    }
+
+    var usernameField: some View {
+        ThemeTextField(Strings.Global.username, text: $builder.username, placeholder: Strings.Placeholders.username)
+            .textContentType(.username)
+            .focused($focusedField, equals: .username)
+    }
+
+    var passwordField: some View {
+        ThemeSecureField(title: Strings.Global.password, text: $builder.password, placeholder: Strings.Placeholders.secret)
+            .textContentType(.password)
+            .focused($focusedField, equals: .password)
+    }
+
+    var otpField: some View {
+        ThemeSecureField(
+            title: Strings.Unlocalized.otp,
+            text: $builder.otp ?? "",
+            placeholder: Strings.Placeholders.secret
+        )
+        .textContentType(.oneTimeCode)
+        .focused($focusedField, equals: .otp)
     }
 }
 
