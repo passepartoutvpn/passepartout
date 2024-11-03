@@ -23,12 +23,14 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
 extension ProviderEntityViewProviding where Self: ProviderCompatibleModule, EntityType.Configuration: ProviderConfigurationIdentifiable & Codable {
     func vpnProviderEntityView(
         with provider: ModuleMetadata.Provider,
+        errorHandler: ErrorHandler,
         onSelect: @escaping (any ProviderEntity & Encodable) async throws -> Void
     ) -> some View {
         let selectedEntity = try? provider
@@ -40,6 +42,7 @@ extension ProviderEntityViewProviding where Self: ProviderCompatibleModule, Enti
         return VPNProviderServerCoordinator(
             moduleId: id,
             providerId: provider.id,
+            errorHandler: errorHandler,
             selectedEntity: selectedEntity,
             onSelect: onSelect
         )

@@ -36,12 +36,12 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
 
     let providerId: ProviderID
 
+    @ObservedObject
+    var errorHandler: ErrorHandler
+
     let selectedEntity: VPNEntity<Configuration>?
 
     let onSelect: (VPNEntity<Configuration>) async throws -> Void
-
-    @StateObject
-    private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
         NavigationStack {
@@ -67,7 +67,6 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
                     }
                 }
             }
-            .withErrorHandler(errorHandler)
         }
     }
 }
@@ -77,8 +76,8 @@ private extension VPNProviderServerCoordinator {
         Task {
             do {
                 let entity = VPNEntity(server: server, preset: preset)
-                try await onSelect(entity)
                 dismiss()
+                try await onSelect(entity)
             } catch {
                 pp_log(.app, .fault, "Unable to select server \(server.serverId) for provider \(server.provider.id): \(error)")
                 errorHandler.handle(error, title: Strings.Global.servers)
