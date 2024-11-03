@@ -191,10 +191,8 @@ extension AppCoordinator {
 
     func enterDetail(of profile: Profile) {
         profilePath = NavigationPath()
-        profileEditor.editProfile(
-            profile,
-            isShared: profileManager.isRemotelyShared(profileWithId: profile.id)
-        )
+        let isShared = profileManager.isRemotelyShared(profileWithId: profile.id)
+        profileEditor.editProfile(profile, isShared: isShared)
         present(.editProfile)
     }
 

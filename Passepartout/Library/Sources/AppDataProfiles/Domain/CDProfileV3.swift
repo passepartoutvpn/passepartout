@@ -36,4 +36,5 @@ final class CDProfileV3: NSManagedObject {
     @NSManaged var name: String?
     @NSManaged var encoded: String?
     @NSManaged var lastUpdate: Date?
+    @NSManaged var fingerprint: UUID?
 }

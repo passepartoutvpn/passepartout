@@ -43,11 +43,11 @@ public final class ProviderFavoritesManager: ObservableObject {
 
     public var serverIds: Set<String> {
         get {
-            allFavorites.servers(forModuleWithID: moduleId)
+            allFavorites.servers(forModuleWithId: moduleId)
         }
         set {
             objectWillChange.send()
-            allFavorites.setServers(newValue, forModuleWithID: moduleId)
+            allFavorites.setServers(newValue, forModuleWithId: moduleId)
         }
     }
 

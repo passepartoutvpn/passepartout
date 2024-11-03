@@ -45,7 +45,7 @@ public final class InMemoryProfileRepository: ProfileRepository {
         profilesSubject.eraseToAnyPublisher()
     }
 
-    public func saveProfile(_ profile: Profile) async throws {
+    public func saveProfile(_ profile: Profile) {
         pp_log(.app, .info, "Save profile: \(profile.id))")
         if let index = profiles.firstIndex(where: { $0.id == profile.id }) {
             profiles[index] = profile
@@ -54,7 +54,7 @@ public final class InMemoryProfileRepository: ProfileRepository {
         }
     }
 
-    public func removeProfiles(withIds ids: [Profile.ID]) async throws {
+    public func removeProfiles(withIds ids: [Profile.ID]) {
         pp_log(.app, .info, "Remove profiles: \(ids)")
         profiles = profiles.filter {
             !ids.contains($0.id)
