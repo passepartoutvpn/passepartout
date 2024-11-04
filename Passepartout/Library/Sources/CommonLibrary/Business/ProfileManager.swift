@@ -326,7 +326,7 @@ private extension ProfileManager {
                 .map(\.key)
 
             if !idsToRemove.isEmpty {
-                pp_log(.app, .info, "Delete non-included local profile: \(idsToRemove)")
+                pp_log(.app, .info, "Delete non-included local profiles: \(idsToRemove)")
                 Task.detached {
                     try await self.repository.removeProfiles(withIds: idsToRemove)
                 }
