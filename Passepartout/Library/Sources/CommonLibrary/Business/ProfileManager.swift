@@ -274,19 +274,21 @@ extension ProfileManager {
 
         remoteRepository?
             .profilesPublisher
+            .zip(repository.profilesPublisher) // wait for local profiles first
             .first()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.loadInitialRemoteProfiles($0)
+            .sink { [weak self] remote, _ in
+                self?.loadInitialRemoteProfiles(remote)
             }
             .store(in: &subscriptions)
 
         remoteRepository?
             .profilesPublisher
+            .zip(repository.profilesPublisher) // wait for local profiles first
             .dropFirst()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.reloadRemoteProfiles($0)
+            .sink { [weak self] remote, _ in
+                self?.reloadRemoteProfiles(remote)
             }
             .store(in: &subscriptions)
 
