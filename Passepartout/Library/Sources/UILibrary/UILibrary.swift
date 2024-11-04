@@ -45,15 +45,9 @@ public final class UILibrary: UILibraryConfiguring {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
-
-        uiConfiguring?.configure(with: context)
-
         Task {
             try await context.providerManager.fetchIndex(from: API.shared)
-#if os(macOS)
-            // keep this for login item because scenePhase is not triggered
-            try await context.tunnel.prepare(purge: true)
-#endif
         }
+        uiConfiguring?.configure(with: context)
     }
 }

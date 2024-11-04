@@ -47,6 +47,10 @@ public struct ProfileAttributes: Hashable, Codable {
         self.lastUpdate = lastUpdate
         self.fingerprint = fingerprint
     }
+
+    public func isEquivalent(to other: Self) -> Bool {
+        isAvailableForTV == other.isAvailableForTV
+    }
 }
 
 // FIXME: #570, test user info encoding/decoding with JSONSerialization

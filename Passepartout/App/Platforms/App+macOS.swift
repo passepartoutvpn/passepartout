@@ -32,7 +32,7 @@ import SwiftUI
 
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        configure(with: AppUIMain())
+        configure(with: AppUIMain(isStartedFromLoginItem: isStartedFromLoginItem))
         hideIfLoginItem()
     }
 
