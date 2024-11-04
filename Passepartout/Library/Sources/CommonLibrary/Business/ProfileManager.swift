@@ -131,23 +131,38 @@ extension ProfileManager {
     }
 
     public func save(_ profile: Profile, isShared: Bool? = nil) async throws {
+        let wasModified: Bool
+        let existingProfile = allProfiles[profile.id]
+        if let existingProfile {
+            wasModified = profile != existingProfile || !profile.attributes.isEquivalent(to: existingProfile.attributes)
+        } else {
+            wasModified = true
+        }
 
-        // inject attributes
-        var builder = profile.builder()
-        builder.attributes.lastUpdate = Date()
-        builder.attributes.fingerprint = UUID()
-        let historifiedProfile = try builder.tryBuild()
+        let historifiedProfile: Profile
+        if wasModified {
+            var builder = profile.builder()
+            builder.attributes.lastUpdate = Date()
+            builder.attributes.fingerprint = UUID()
+            historifiedProfile = try builder.tryBuild()
+        } else {
+            historifiedProfile = profile
+        }
 
         pp_log(.app, .notice, "Save profile \(historifiedProfile.id)...")
         do {
-            try await repository.saveProfile(historifiedProfile)
-            if let backupRepository {
-                Task.detached {
-                    try await backupRepository.saveProfile(historifiedProfile)
+            if wasModified {
+                try await repository.saveProfile(historifiedProfile)
+                if let backupRepository {
+                    Task.detached {
+                        try await backupRepository.saveProfile(historifiedProfile)
+                    }
                 }
+                allProfiles[historifiedProfile.id] = historifiedProfile
+                didChange.send(.save(historifiedProfile))
+            } else {
+                pp_log(.app, .notice, "Profile \(profile.id) not modified, not saving")
             }
-            allProfiles[historifiedProfile.id] = historifiedProfile
-            didChange.send(.save(historifiedProfile))
         } catch {
             pp_log(.app, .fault, "Unable to save profile \(historifiedProfile.id): \(error)")
             throw error
