@@ -26,7 +26,7 @@
 import Foundation
 import PassepartoutKit
 
-public enum AppError {
+public enum AppError: Error {
     case emptyProfileName
 
     case malformedModule(any ModuleBuilder, error: Error)

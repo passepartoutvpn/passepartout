@@ -98,36 +98,43 @@ extension PassepartoutError: LocalizedError {
 
 // MARK: - Tunnel side
 
-extension PassepartoutError.Code: LocalizableEntity {
-    public var localizedDescription: String {
-        let V = Strings.Errors.Tunnel.self
-        switch self {
-        case .authentication:
-            return V.auth
+extension PassepartoutError.Code: StyledLocalizableEntity {
+    public enum Style {
+        case tunnel
+    }
 
-        case .crypto:
-            return V.encryption
+    public func localizedDescription(style: Style) -> String {
+        switch style {
+        case .tunnel:
+            let V = Strings.Errors.Tunnel.self
+            switch self {
+            case .authentication:
+                return V.auth
 
-        case .dnsFailure:
-            return V.dns
+            case .crypto:
+                return V.encryption
 
-        case .timeout:
-            return V.timeout
+            case .dnsFailure:
+                return V.dns
 
-        case .OpenVPN.compressionMismatch:
-            return V.compression
+            case .timeout:
+                return V.timeout
 
-        case .OpenVPN.noRouting:
-            return V.routing
+            case .OpenVPN.compressionMismatch:
+                return V.compression
 
-        case .OpenVPN.serverShutdown:
-            return V.shutdown
+            case .OpenVPN.noRouting:
+                return V.routing
 
-        case .OpenVPN.tlsFailure:
-            return V.tls
+            case .OpenVPN.serverShutdown:
+                return V.shutdown
 
-        default:
-            return V.generic
+            case .OpenVPN.tlsFailure:
+                return V.tls
+
+            default:
+                return V.generic
+            }
         }
     }
 }
