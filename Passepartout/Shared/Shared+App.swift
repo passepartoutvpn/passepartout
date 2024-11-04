@@ -194,7 +194,7 @@ extension Configuration {
 #else
         static let deletingRemotely = false
 
-        static let isProfileIncluded: (Profile) -> Bool = { _ in
+        static let isProfileIncluded: @Sendable (Profile) -> Bool = { _ in
             true
         }
 #endif
@@ -225,6 +225,8 @@ extension Configuration.ProfileManager {
 #else
 
 extension Configuration {
+
+    @MainActor
     enum ExtendedTunnel {
         static var strategy: TunnelObservableStrategy {
             ProfileManager.neStrategy
