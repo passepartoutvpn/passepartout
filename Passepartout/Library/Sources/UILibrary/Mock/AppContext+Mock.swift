@@ -1,5 +1,5 @@
 //
-//  Mock.swift
+//  AppContext+Mock.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 6/22/24.
@@ -110,54 +110,5 @@ extension ExtendedTunnel {
 extension ProviderManager {
     public static var mock: ProviderManager {
         AppContext.mock.providerManager
-    }
-}
-
-// MARK: - Profile
-
-extension Profile {
-    public static let mock: Profile = {
-        var profile = Profile.Builder()
-        profile.name = "Mock profile"
-
-        do {
-            var ovpn = OpenVPNModule.Builder()
-            ovpn.configurationBuilder = OpenVPN.Configuration.Builder(withFallbacks: true)
-            ovpn.configurationBuilder?.ca = .init(pem: "some CA")
-            ovpn.configurationBuilder?.remotes = [
-                try .init("1.2.3.4", .init(.udp, 80))
-            ]
-            profile.modules.append(try ovpn.tryBuild())
-
-            var dns = DNSModule.Builder()
-            dns.protocolType = .https
-            dns.servers = ["1.1.1.1"]
-            dns.dohURL = "https://1.1.1.1/dns-query"
-            profile.modules.append(try dns.tryBuild())
-
-            var proxy = HTTPProxyModule.Builder()
-            proxy.address = "1.1.1.1"
-            proxy.port = 1080
-            proxy.secureAddress = "2.2.2.2"
-            proxy.securePort = 8080
-            proxy.bypassDomains = ["bypass.com"]
-            profile.modules.append(try proxy.tryBuild())
-
-            profile.activeModulesIds = [ovpn.id, dns.id]
-
-            return try profile.tryBuild()
-        } catch {
-            fatalError("Unable to build: \(error)")
-        }
-    }()
-
-    public static func newMockProfile() -> Profile {
-        do {
-            var copy = mock.builder(withNewId: true)
-            copy.name = String(copy.id.uuidString.prefix(8))
-            return try copy.tryBuild()
-        } catch {
-            fatalError("Unable to build: \(error)")
-        }
     }
 }
