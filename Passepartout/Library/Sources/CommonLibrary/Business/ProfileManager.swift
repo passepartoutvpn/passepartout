@@ -317,7 +317,7 @@ private extension ProfileManager {
             $0[$1.id] = $1
         }
 
-        // should never be imported in the first place but you never know
+        // should not be imported at all, but you never know
         if let isIncluded {
             let idsToRemove: [Profile.ID] = allProfiles
                 .filter {
