@@ -49,8 +49,8 @@ extension AppContext {
             title: {
                 Configuration.ProfileManager.sharedTitle($0)
             },
-            isIncluded: { _, _ in
-                true
+            isIncluded: { _, profile in
+                Configuration.ProfileManager.isProfileIncluded(profile)
             },
             willSave: { _, builder in
                 builder
@@ -194,7 +194,9 @@ extension Configuration {
 #else
         static let deletingRemotely = false
 
-        static let isProfileIncluded: ((Profile) -> Bool)? = nil
+        static let isProfileIncluded: (Profile) -> Bool = { _ in
+            true
+        }
 #endif
     }
 }
