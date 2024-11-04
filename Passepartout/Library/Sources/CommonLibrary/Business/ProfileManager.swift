@@ -281,7 +281,6 @@ extension ProfileManager {
     public func observeObjects(searchDebounce: Int = 200) {
         repository
             .profilesPublisher
-            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reloadLocalProfiles($0)
@@ -291,7 +290,7 @@ extension ProfileManager {
         // observe remote after first local profiles
         let remotePublisher = remoteRepository?
             .profilesPublisher
-            .zip(repository.profilesPublisher.dropFirst())
+            .zip(repository.profilesPublisher)
 
         remotePublisher?
             .first()
