@@ -273,9 +273,12 @@ extension ProfileManager {
             }
             .store(in: &subscriptions)
 
-        remoteRepository?
+        // observe remote after first local profiles
+        let remotePublisher = remoteRepository?
             .profilesPublisher
-            .zip(repository.profilesPublisher.dropFirst()) // wait for local profiles first
+            .zip(repository.profilesPublisher.dropFirst())
+
+        remotePublisher?
             .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] remote, _ in
@@ -283,9 +286,7 @@ extension ProfileManager {
             }
             .store(in: &subscriptions)
 
-        remoteRepository?
-            .profilesPublisher
-            .zip(repository.profilesPublisher.dropFirst()) // wait for local profiles first
+        remotePublisher?
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] remote, _ in
