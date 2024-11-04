@@ -130,7 +130,7 @@ extension ProfileManager {
         }
     }
 
-    public func save(_ profile: Profile, isShared: Bool? = nil) async throws {
+    public func save(_ profile: Profile, force: Bool = false, isShared: Bool? = nil) async throws {
         let wasModified: Bool
         let existingProfile = allProfiles[profile.id]
         if let existingProfile {
@@ -140,7 +140,7 @@ extension ProfileManager {
         }
 
         let historifiedProfile: Profile
-        if wasModified {
+        if force {
             var builder = profile.builder()
             builder.attributes.lastUpdate = Date()
             builder.attributes.fingerprint = UUID()
