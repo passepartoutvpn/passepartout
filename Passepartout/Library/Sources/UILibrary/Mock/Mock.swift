@@ -33,44 +33,61 @@ extension AppContext {
     public static let mock: AppContext = .mock(withRegistry: Registry())
 
     public static func mock(withRegistry registry: Registry) -> AppContext {
-        let env = InMemoryEnvironment()
-        return AppContext(
-            iapManager: IAPManager(
-                customUserLevel: nil,
-                receiptReader: MockAppReceiptReader(),
-                unrestrictedFeatures: [
-                    .interactiveLogin,
-                    .onDemand,
-                    .sharing
-                ],
-                productsAtBuild: { _ in
-                    []
-                }
-            ),
-            profileManager: {
-                let profiles: [Profile] = (0..<20)
-                    .reduce(into: []) { list, _ in
-                        list.append(.newMockProfile())
-                    }
-                return ProfileManager(profiles: profiles)
-            }(),
-            profileProcessor: ProfileProcessor {
+        let iapManager = IAPManager(
+            customUserLevel: nil,
+            receiptReader: MockAppReceiptReader(),
+            unrestrictedFeatures: [
+                .interactiveLogin,
+                .onDemand,
+                .sharing
+            ],
+            productsAtBuild: { _ in
+                []
+            }
+        )
+        let processor = ProfileProcessor(
+            iapManager: iapManager,
+            title: {
                 "Passepartout.Mock: \($0.name)"
-            } willSave: {
-                $0
-            } willConnect: {
-                try $0.withProviderModules()
             },
-            tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: env)),
-            tunnelEnvironment: env,
+            isIncluded: { _, _ in
+                true
+            },
+            willSave: { _, builder in
+                builder
+            },
+            willConnect: { _, profile in
+                try profile.withProviderModules()
+            }
+        )
+        let profileManager = {
+            let profiles: [Profile] = (0..<20)
+                .reduce(into: []) { list, _ in
+                    list.append(.newMockProfile())
+                }
+            return ProfileManager(profiles: profiles)
+        }()
+        let tunnelEnvironment = InMemoryEnvironment()
+        let tunnel = ExtendedTunnel(
+            tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: tunnelEnvironment)),
+            environment: tunnelEnvironment,
+            processor: processor,
+            interval: Constants.shared.tunnel.refreshInterval
+        )
+        let providerManager = ProviderManager(
+            repository: InMemoryProviderRepository()
+        )
+        return AppContext(
+            iapManager: iapManager,
+            profileManager: profileManager,
+            tunnel: tunnel,
             registry: registry,
-            providerManager: ProviderManager(
-                repository: InMemoryProviderRepository()
-            ),
-            constants: .shared
+            providerManager: providerManager
         )
     }
 }
+
+// MARK: - Shortcuts
 
 extension IAPManager {
     public static var mock: IAPManager {

@@ -37,38 +37,24 @@ public final class AppContext: ObservableObject {
 
     public let tunnel: ExtendedTunnel
 
-    public let tunnelEnvironment: TunnelEnvironment
-
     public let registry: Registry
 
     public let providerManager: ProviderManager
-
-    private let constants: Constants
 
     private var subscriptions: Set<AnyCancellable>
 
     public init(
         iapManager: IAPManager,
         profileManager: ProfileManager,
-        profileProcessor: ProfileProcessor,
-        tunnel: Tunnel,
-        tunnelEnvironment: TunnelEnvironment,
+        tunnel: ExtendedTunnel,
         registry: Registry,
-        providerManager: ProviderManager,
-        constants: Constants
+        providerManager: ProviderManager
     ) {
         self.iapManager = iapManager
         self.profileManager = profileManager
-        self.tunnelEnvironment = tunnelEnvironment
-        self.tunnel = ExtendedTunnel(
-            tunnel: tunnel,
-            environment: tunnelEnvironment,
-            processor: profileProcessor,
-            interval: constants.tunnel.refreshInterval
-        )
+        self.tunnel = tunnel
         self.registry = registry
         self.providerManager = providerManager
-        self.constants = constants
         subscriptions = []
 
         Task {
