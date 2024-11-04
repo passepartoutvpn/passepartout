@@ -27,11 +27,21 @@ import Foundation
 @_exported import UILibrary
 
 public final class AppUIMain: UILibraryConfiguring {
-    public init() {
+    private let isStartedFromLoginItem: Bool
+
+    public init(isStartedFromLoginItem: Bool) {
+        self.isStartedFromLoginItem = isStartedFromLoginItem
     }
 
     public func configure(with context: AppContext) {
         assertMissingImplementations()
+
+        // keep this for login item because scenePhase is not triggered
+        if isStartedFromLoginItem {
+            Task {
+                try await context.tunnel.prepare(purge: true)
+            }
+        }
     }
 }
 
