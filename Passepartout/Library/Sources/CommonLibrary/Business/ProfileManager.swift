@@ -387,7 +387,7 @@ private extension ProfileManager {
                     pp_log(.app, .error, "Unable to import remote profile: \(error)")
                 }
             }
-            pp_log(.app, .notice, "Finished importing remote profiles, delete profiles: \(idsToRemove)")
+            pp_log(.app, .notice, "Finished importing remote profiles, delete stale profiles: \(idsToRemove)")
             try? await repository.removeProfiles(withIds: idsToRemove)
         }
     }
