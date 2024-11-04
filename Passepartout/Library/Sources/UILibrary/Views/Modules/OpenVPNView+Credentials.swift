@@ -115,9 +115,9 @@ private extension OpenVPNCredentialsView {
     @ViewBuilder
     var restrictedArea: some View {
         switch iapManager.paywallReason(forFeature: .interactiveLogin) {
-        case .purchase(let appFeature):
+        case .purchase(let feature):
             Button(Strings.Modules.Openvpn.Credentials.Interactive.purchase) {
-                paywallReason = .purchase(appFeature)
+                paywallReason = .purchase(feature)
             }
 
         case .restricted:

@@ -41,7 +41,7 @@ extension AppContext {
             customUserLevel: Configuration.IAPManager.customUserLevel,
             receiptReader: KvittoReceiptReader(),
             // FIXME: #662, omit unrestrictedFeatures on release!
-            unrestrictedFeatures: [.interactiveLogin, .sharing],
+            unrestrictedFeatures: [.interactiveLogin],
             productsAtBuild: Configuration.IAPManager.productsAtBuild
         )
         let processor = ProfileProcessor(

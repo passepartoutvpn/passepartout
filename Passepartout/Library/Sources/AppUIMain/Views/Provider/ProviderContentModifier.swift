@@ -135,9 +135,9 @@ private extension ProviderContentModifier {
     @ViewBuilder
     var purchaseButton: some View {
         switch iapManager.paywallReason(forFeature: .providers) {
-        case .purchase(let appFeature):
+        case .purchase(let feature):
             Button(Strings.Providers.Picker.purchase) {
-                paywallReason = .purchase(appFeature)
+                paywallReason = .purchase(feature)
             }
 
         default:
