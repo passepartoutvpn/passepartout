@@ -116,6 +116,8 @@ public enum Strings {
       public static let `default` = Strings.tr("Localizable", "errors.app.default", fallback: "Unable to complete operation.")
       /// Profile name is empty.
       public static let emptyProfileName = Strings.tr("Localizable", "errors.app.empty_profile_name", fallback: "Profile name is empty.")
+      /// Profile is expired.
+      public static let expiredProfile = Strings.tr("Localizable", "errors.app.expired_profile", fallback: "Profile is expired.")
       /// Module %@ is malformed. %@
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
@@ -158,6 +160,8 @@ public enum Strings {
       public static let dns = Strings.tr("Localizable", "errors.tunnel.dns", fallback: "DNS failed")
       /// Encryption failed
       public static let encryption = Strings.tr("Localizable", "errors.tunnel.encryption", fallback: "Encryption failed")
+      /// Expired
+      public static let expired = Strings.tr("Localizable", "errors.tunnel.expired", fallback: "Expired")
       /// Failed
       public static let generic = Strings.tr("Localizable", "errors.tunnel.generic", fallback: "Failed")
       /// Missing routing

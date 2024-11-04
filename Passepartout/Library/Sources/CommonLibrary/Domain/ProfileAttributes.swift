@@ -30,16 +30,18 @@ import PassepartoutKit
 public struct ProfileAttributes: Hashable, Codable {
     public var isAvailableForTV: Bool?
 
+    public var expirationDate: Date?
+
     public var lastUpdate: Date?
 
     public var fingerprint: UUID?
 
-    public init(isAvailableForTV: Bool? = false) {
-        self.isAvailableForTV = isAvailableForTV
+    public init() {
     }
 
     public init(
         isAvailableForTV: Bool?,
+        expirationDate: Date?,
         lastUpdate: Date?,
         fingerprint: UUID?
     ) {
@@ -50,6 +52,15 @@ public struct ProfileAttributes: Hashable, Codable {
 
     public func isEquivalent(to other: Self) -> Bool {
         isAvailableForTV == other.isAvailableForTV
+    }
+}
+
+extension ProfileAttributes {
+    public var isExpired: Bool {
+        if let expirationDate {
+            return Date().distance(to: expirationDate) <= .zero
+        }
+        return false
     }
 }
 

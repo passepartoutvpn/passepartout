@@ -85,8 +85,10 @@ private extension AppData {
         cdProfile.name = profile.name
         cdProfile.encoded = encoded
 
+        // redundant but convenient
         let attributes = profile.attributes
         cdProfile.isAvailableForTV = attributes.isAvailableForTV.map(NSNumber.init(value:))
+        cdProfile.expirationDate = attributes.expirationDate
         cdProfile.lastUpdate = attributes.lastUpdate
         cdProfile.fingerprint = attributes.fingerprint
 

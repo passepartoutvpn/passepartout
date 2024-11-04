@@ -268,6 +268,7 @@
 // MARK: - Errors
 
 "errors.app.empty_profile_name" = "Profile name is empty.";
+"errors.app.expired_profile" = "Profile is expired.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
 "errors.app.provider.required" = "No provider selected.";
 "errors.app.default" = "Unable to complete operation.";
@@ -285,6 +286,7 @@
 "errors.tunnel.compression" = "Compression unsupported";
 "errors.tunnel.dns" = "DNS failed";
 "errors.tunnel.encryption" = "Encryption failed";
+"errors.tunnel.expired" = "Expired";
 "errors.tunnel.routing" = "Missing routing";
 "errors.tunnel.shutdown" = "Server shutdown";
 "errors.tunnel.timeout" = "Timeout";

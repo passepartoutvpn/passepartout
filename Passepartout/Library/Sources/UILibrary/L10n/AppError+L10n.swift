@@ -52,6 +52,9 @@ extension AppError: LocalizedError {
 extension PassepartoutError: LocalizedError {
     public var errorDescription: String? {
         switch code {
+        case .App.expiredProfile:
+            return Strings.Errors.App.expiredProfile
+
         case .connectionModuleRequired:
             return Strings.Errors.App.Passepartout.connectionModuleRequired
 
@@ -108,6 +111,9 @@ extension PassepartoutError.Code: StyledLocalizableEntity {
         case .tunnel:
             let V = Strings.Errors.Tunnel.self
             switch self {
+            case .App.expiredProfile:
+                return V.expired
+
             case .authentication:
                 return V.auth
 
