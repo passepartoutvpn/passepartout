@@ -33,7 +33,7 @@ public final class ExtendedTunnel: ObservableObject {
 
     private let environment: TunnelEnvironment
 
-    private let processor: ProfileProcessor
+    private let processor: ProfileProcessor?
 
     private let interval: TimeInterval
 
@@ -56,7 +56,7 @@ public final class ExtendedTunnel: ObservableObject {
     public init(
         tunnel: Tunnel,
         environment: TunnelEnvironment,
-        processor: ProfileProcessor,
+        processor: ProfileProcessor? = nil,
         interval: TimeInterval
     ) {
         self.tunnel = tunnel
@@ -143,13 +143,13 @@ extension ExtendedTunnel {
     }
 
     public func install(_ profile: Profile) async throws {
-        let newProfile = try processor.willConnect(profile)
-        try await tunnel.install(newProfile, connect: false, title: processor.title)
+        let newProfile = try processedProfile(profile)
+        try await tunnel.install(newProfile, connect: false, title: processedTitle)
     }
 
     public func connect(with profile: Profile) async throws {
-        let newProfile = try processor.willConnect(profile)
-        try await tunnel.install(newProfile, connect: true, title: processor.title)
+        let newProfile = try processedProfile(profile)
+        try await tunnel.install(newProfile, connect: true, title: processedTitle)
     }
 
     public func disconnect() async throws {
@@ -168,5 +168,21 @@ extension ExtendedTunnel {
         default:
             return []
         }
+    }
+}
+
+private extension ExtendedTunnel {
+    var processedTitle: (Profile) -> String {
+        if let processor {
+            return processor.title
+        }
+        return \.name
+    }
+
+    func processedProfile(_ profile: Profile) throws -> Profile {
+        if let processor {
+            return try processor.willConnect(profile)
+        }
+        return profile
     }
 }
