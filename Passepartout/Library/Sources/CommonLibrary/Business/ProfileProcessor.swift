@@ -30,13 +30,17 @@ import PassepartoutKit
 public final class ProfileProcessor: ObservableObject {
     public let title: (Profile) -> String
 
-    public let processed: (Profile) throws -> Profile
+    public let willSave: (Profile.Builder) throws -> Profile.Builder
+
+    public let willConnect: (Profile) throws -> Profile
 
     public init(
         title: @escaping (Profile) -> String,
-        processed: @escaping (Profile) throws -> Profile
+        willSave: @escaping (Profile.Builder) throws -> Profile.Builder,
+        willConnect: @escaping (Profile) throws -> Profile
     ) {
         self.title = title
-        self.processed = processed
+        self.willSave = willSave
+        self.willConnect = willConnect
     }
 }

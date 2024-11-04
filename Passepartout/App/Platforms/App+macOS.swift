@@ -85,7 +85,6 @@ extension PassepartoutApp {
         MenuBarExtra {
             AppMenu(
                 profileManager: context.profileManager,
-                profileProcessor: context.profileProcessor,
                 tunnel: context.tunnel
             )
             .withEnvironment(from: context, theme: theme)

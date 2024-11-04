@@ -56,7 +56,9 @@ extension AppContext {
             }(),
             profileProcessor: ProfileProcessor {
                 "Passepartout.Mock: \($0.name)"
-            } processed: {
+            } willSave: {
+                $0
+            } willConnect: {
                 try $0.withProviderModules()
             },
             tunnel: Tunnel(strategy: FakeTunnelStrategy(environment: env)),
@@ -79,12 +81,6 @@ extension IAPManager {
 extension ProfileManager {
     public static var mock: ProfileManager {
         AppContext.mock.profileManager
-    }
-}
-
-extension ProfileProcessor {
-    public static var mock: ProfileProcessor {
-        AppContext.mock.profileProcessor
     }
 }
 

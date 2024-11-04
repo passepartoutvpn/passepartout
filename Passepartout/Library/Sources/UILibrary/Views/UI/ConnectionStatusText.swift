@@ -78,7 +78,7 @@ private extension ConnectionStatusText {
 #Preview("Connected") {
     ConnectionStatusText(tunnel: .mock)
         .task {
-            try? await ExtendedTunnel.mock.connect(with: .mock, processor: .mock)
+            try? await ExtendedTunnel.mock.connect(with: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()
@@ -97,7 +97,7 @@ private extension ConnectionStatusText {
     }
     return ConnectionStatusText(tunnel: .mock)
         .task {
-            try? await ExtendedTunnel.mock.connect(with: profile, processor: .mock)
+            try? await ExtendedTunnel.mock.connect(with: profile)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()

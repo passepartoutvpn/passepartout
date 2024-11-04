@@ -136,7 +136,9 @@ extension IAPManager {
 extension ProfileProcessor {
     static let shared = ProfileProcessor {
         ProfileManager.sharedTitle($0)
-    } processed: { profile in
+    } willSave: {
+        $0
+    } willConnect: { profile in
         var builder = profile.builder()
 
         // suppress on-demand rules if not eligible

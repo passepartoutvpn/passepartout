@@ -30,9 +30,6 @@ import SwiftUI
 
 struct TunnelRestartButton<Label>: View where Label: View {
 
-    @EnvironmentObject
-    private var profileProcessor: ProfileProcessor
-
     @ObservedObject
     var tunnel: ExtendedTunnel
 
@@ -52,7 +49,7 @@ struct TunnelRestartButton<Label>: View where Label: View {
             }
             Task {
                 do {
-                    try await tunnel.connect(with: profile, processor: profileProcessor)
+                    try await tunnel.connect(with: profile)
                 } catch is CancellationError {
                     //
                 } catch {

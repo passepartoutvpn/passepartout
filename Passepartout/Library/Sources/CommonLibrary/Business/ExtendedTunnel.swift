@@ -33,6 +33,8 @@ public final class ExtendedTunnel: ObservableObject {
 
     private let environment: TunnelEnvironment
 
+    private let processor: ProfileProcessor
+
     private let interval: TimeInterval
 
     public func value<T>(forKey key: TunnelEnvironmentKey<T>) -> T? where T: Decodable {
@@ -54,10 +56,12 @@ public final class ExtendedTunnel: ObservableObject {
     public init(
         tunnel: Tunnel,
         environment: TunnelEnvironment,
+        processor: ProfileProcessor,
         interval: TimeInterval
     ) {
         self.tunnel = tunnel
         self.environment = environment
+        self.processor = processor
         self.interval = interval
         subscriptions = []
     }
@@ -138,13 +142,13 @@ extension ExtendedTunnel {
         try await tunnel.prepare(purge: purge)
     }
 
-    public func install(_ profile: Profile, processor: ProfileProcessor) async throws {
-        let newProfile = try processor.processed(profile)
+    public func install(_ profile: Profile) async throws {
+        let newProfile = try processor.willConnect(profile)
         try await tunnel.install(newProfile, connect: false, title: processor.title)
     }
 
-    public func connect(with profile: Profile, processor: ProfileProcessor) async throws {
-        let newProfile = try processor.processed(profile)
+    public func connect(with profile: Profile) async throws {
+        let newProfile = try processor.willConnect(profile)
         try await tunnel.install(newProfile, connect: true, title: processor.title)
     }
 

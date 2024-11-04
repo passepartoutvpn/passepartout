@@ -35,8 +35,6 @@ public final class AppContext: ObservableObject {
 
     public let profileManager: ProfileManager
 
-    public let profileProcessor: ProfileProcessor
-
     public let tunnel: ExtendedTunnel
 
     public let tunnelEnvironment: TunnelEnvironment
@@ -61,11 +59,11 @@ public final class AppContext: ObservableObject {
     ) {
         self.iapManager = iapManager
         self.profileManager = profileManager
-        self.profileProcessor = profileProcessor
         self.tunnelEnvironment = tunnelEnvironment
         self.tunnel = ExtendedTunnel(
             tunnel: tunnel,
             environment: tunnelEnvironment,
+            processor: profileProcessor,
             interval: constants.tunnel.refreshInterval
         )
         self.registry = registry
@@ -115,7 +113,7 @@ private extension AppContext {
                 return
             }
             do {
-                try await tunnel.connect(with: profile, processor: profileProcessor)
+                try await tunnel.connect(with: profile)
             } catch {
                 try await tunnel.disconnect()
             }
