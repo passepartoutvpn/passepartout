@@ -33,147 +33,186 @@ import PassepartoutKit
 import UILibrary
 
 extension AppContext {
-    static let shared = AppContext(
-        iapManager: .shared,
-        profileManager: .shared,
-        profileProcessor: .shared,
-        tunnel: .shared,
-        tunnelEnvironment: .shared,
-        registry: .shared,
-        providerManager: .shared,
-        constants: .shared
-    )
-}
+    static let shared: AppContext = {
+        let tunnelEnvironment: TunnelEnvironment = .shared
+        let registry: Registry = .shared
 
-// MARK: -
-
-extension ProfileManager {
-    static let shared: ProfileManager = {
-        let remoteStore = CoreDataPersistentStore(
-            logger: .default,
-            containerName: Constants.shared.containers.remote,
-            model: AppData.cdProfilesModel,
-            cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
-            author: nil
+        let iapManager = IAPManager(
+            customUserLevel: Configuration.IAPManager.customUserLevel,
+            receiptReader: KvittoReceiptReader(),
+            // FIXME: #662, omit unrestrictedFeatures on release!
+            unrestrictedFeatures: [.interactiveLogin, .sharing],
+            productsAtBuild: Configuration.IAPManager.productsAtBuild
         )
-        let remoteRepository = AppData.cdProfileRepositoryV3(
-            registry: .shared,
-            coder: CodableProfileCoder(),
-            context: remoteStore.context,
-            observingResults: true
-        ) { error in
-            pp_log(.app, .error, "Unable to decode remote result: \(error)")
-            return .ignore
-        }
+        let processor = ProfileProcessor(
+            iapManager: iapManager,
+            title: {
+                Configuration.ProfileManager.sharedTitle($0)
+            },
+            isIncluded: { _, profile in
+                Configuration.ProfileManager.isProfileIncluded(profile)
+            },
+            willSave: { _, builder in
+                builder
+            },
+            willConnect: { iap, profile in
+                var builder = profile.builder()
 
-        return ProfileManager(
-            repository: mainProfileRepository,
-            backupRepository: backupProfileRepository,
-            remoteRepository: remoteRepository,
-            deletingRemotely: deletingRemotely,
-            isIncluded: isProfileIncluded
+                // suppress on-demand rules if not eligible
+                if !iap.isEligible(for: .onDemand) {
+                    pp_log(.app, .notice, "Suppress on-demand rules, not eligible")
+
+                    if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
+                       let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {
+
+                        var onDemandBuilder = onDemandModule.builder()
+                        onDemandBuilder.policy = .any
+                        builder.modules[onDemandModuleIndex] = onDemandBuilder.tryBuild()
+                    }
+                }
+
+                // validate provider modules
+                let profile = try builder.tryBuild()
+                do {
+                    _ = try profile.withProviderModules()
+                    return profile
+                } catch {
+                    pp_log(.app, .error, "Unable to inject provider modules: \(error)")
+                    throw error
+                }
+            }
+        )
+        let profileManager: ProfileManager = {
+            let remoteStore = CoreDataPersistentStore(
+                logger: .default,
+                containerName: Constants.shared.containers.remote,
+                model: AppData.cdProfilesModel,
+                cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
+                author: nil
+            )
+            let remoteRepository = AppData.cdProfileRepositoryV3(
+                registry: .shared,
+                coder: CodableProfileCoder(),
+                context: remoteStore.context,
+                observingResults: true
+            ) { error in
+                pp_log(.app, .error, "Unable to decode remote result: \(error)")
+                return .ignore
+            }
+            return ProfileManager(
+                repository: Configuration.ProfileManager.mainProfileRepository,
+                backupRepository: Configuration.ProfileManager.backupProfileRepository,
+                remoteRepository: remoteRepository,
+                deletingRemotely: Configuration.ProfileManager.deletingRemotely,
+                processor: processor
+            )
+        }()
+        let tunnel = ExtendedTunnel(
+            tunnel: Tunnel(strategy: Configuration.ExtendedTunnel.strategy),
+            environment: tunnelEnvironment,
+            processor: processor,
+            interval: Constants.shared.tunnel.refreshInterval
+        )
+        let providerManager: ProviderManager = {
+            let store = CoreDataPersistentStore(
+                logger: .default,
+                containerName: Constants.shared.containers.providers,
+                model: AppData.cdProvidersModel,
+                cloudKitIdentifier: nil,
+                author: nil
+            )
+            let repository = AppData.cdProviderRepositoryV3(
+                context: store.context,
+                backgroundContext: store.backgroundContext
+            )
+            return ProviderManager(repository: repository)
+        }()
+        return AppContext(
+            iapManager: iapManager,
+            profileManager: profileManager,
+            tunnel: tunnel,
+            registry: registry,
+            providerManager: providerManager
         )
     }()
+}
+
+// MARK: - Configuration
+
+private enum Configuration {
+}
+
+extension Configuration {
+    enum IAPManager {
+        static var customUserLevel: AppUserLevel? {
+            if let envString = ProcessInfo.processInfo.environment["CUSTOM_USER_LEVEL"],
+               let envValue = Int(envString),
+               let testAppType = AppUserLevel(rawValue: envValue) {
+
+                return testAppType
+            }
+            if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .customUserLevel),
+               let testAppType = AppUserLevel(rawValue: infoValue) {
+
+                return testAppType
+            }
+            return nil
+        }
+
+        static let productsAtBuild: BuildProducts<AppProduct> = {
+#if os(iOS)
+            if $0 <= 2016 {
+                return [.Full.iOS]
+            } else if $0 <= 3000 {
+                return [.Features.networkSettings]
+            }
+            return []
+#elseif os(macOS)
+            if $0 <= 3000 {
+                return [.Features.networkSettings]
+            }
+            return []
+#else
+            return []
+#endif
+        }
+    }
+}
+
+extension Configuration {
+    enum ProfileManager {
+        static let sharedTitle: @Sendable (Profile) -> String = {
+            String(format: Constants.shared.tunnel.profileTitleFormat, $0.name)
+        }
 
 #if os(tvOS)
-    private static let deletingRemotely = true
+        static let deletingRemotely = true
 
-    private static let isProfileIncluded: (Profile) -> Bool = {
-        $0.attributes.isAvailableForTV == true
-    }
+        static let isProfileIncluded: @Sendable (Profile) -> Bool = {
+            $0.attributes.isAvailableForTV == true
+        }
 #else
-    private static let deletingRemotely = false
+        static let deletingRemotely = false
 
-    private static let isProfileIncluded: ((Profile) -> Bool)? = nil
-#endif
-}
-
-// MARK: -
-
-extension IAPManager {
-    static let shared = IAPManager(
-        customUserLevel: customUserLevel,
-        receiptReader: KvittoReceiptReader(),
-        // FIXME: #662, omit unrestrictedFeatures on release!
-        unrestrictedFeatures: [.interactiveLogin, .sharing],
-        productsAtBuild: productsAtBuild
-    )
-
-    private static var customUserLevel: AppUserLevel? {
-        if let envString = ProcessInfo.processInfo.environment["CUSTOM_USER_LEVEL"],
-           let envValue = Int(envString),
-           let testAppType = AppUserLevel(rawValue: envValue) {
-
-            return testAppType
+        static let isProfileIncluded: (Profile) -> Bool = { _ in
+            true
         }
-        if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .customUserLevel),
-           let testAppType = AppUserLevel(rawValue: infoValue) {
-
-            return testAppType
-        }
-        return nil
-    }
-
-    private static let productsAtBuild: BuildProducts<AppProduct> = {
-#if os(iOS)
-        if $0 <= 2016 {
-            return [.Full.iOS]
-        } else if $0 <= 3000 {
-            return [.Features.networkSettings]
-        }
-        return []
-#elseif os(macOS)
-        if $0 <= 3000 {
-            return [.Features.networkSettings]
-        }
-        return []
-#else
-        return []
 #endif
     }
 }
-
-extension ProfileProcessor {
-    static let shared = ProfileProcessor {
-        ProfileManager.sharedTitle($0)
-    } processed: { profile in
-        var builder = profile.builder()
-
-        // suppress on-demand rules if not eligible
-        if !IAPManager.shared.isEligible(for: .onDemand) {
-            pp_log(.app, .notice, "Suppress on-demand rules, not eligible")
-
-            if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
-                let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {
-
-                var onDemandBuilder = onDemandModule.builder()
-                onDemandBuilder.policy = .any
-                builder.modules[onDemandModuleIndex] = onDemandBuilder.tryBuild()
-            }
-        }
-
-        let profile = try builder.tryBuild()
-        do {
-            _ = try profile.withProviderModules()
-            return profile
-        } catch {
-            pp_log(.app, .error, "Unable to inject provider modules: \(error)")
-            throw error
-        }
-    }
-}
-
-// MARK: -
 
 #if targetEnvironment(simulator)
 
-extension Tunnel {
-    static let shared = Tunnel(
-        strategy: FakeTunnelStrategy(environment: .shared, dataCountInterval: 1000)
-    )
+extension Configuration {
+    enum ExtendedTunnel {
+        static var strategy: TunnelObservableStrategy {
+            FakeTunnelStrategy(environment: .shared, dataCountInterval: 1000)
+        }
+    }
 }
 
-private extension ProfileManager {
+@MainActor
+extension Configuration.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
         coreDataProfileRepository
     }
@@ -185,13 +224,16 @@ private extension ProfileManager {
 
 #else
 
-extension Tunnel {
-    static let shared = Tunnel(
-        strategy: ProfileManager.neStrategy
-    )
+extension Configuration {
+    enum ExtendedTunnel {
+        static var strategy: TunnelObservableStrategy {
+            ProfileManager.neStrategy
+        }
+    }
 }
 
-private extension ProfileManager {
+@MainActor
+extension Configuration.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
         neProfileRepository
     }
@@ -203,10 +245,11 @@ private extension ProfileManager {
 
 #endif
 
-private extension ProfileManager {
+@MainActor
+extension Configuration.ProfileManager {
     static let neProfileRepository: ProfileRepository = {
         NEProfileRepository(repository: neStrategy) {
-            ProfileManager.sharedTitle($0)
+            sharedTitle($0)
         }
     }()
 
@@ -239,31 +282,6 @@ private extension ProfileManager {
 }
 
 // MARK: -
-
-extension ProviderManager {
-    static let shared: ProviderManager = {
-        let store = CoreDataPersistentStore(
-            logger: .default,
-            containerName: Constants.shared.containers.providers,
-            model: AppData.cdProvidersModel,
-            cloudKitIdentifier: nil,
-            author: nil
-        )
-        let repository = AppData.cdProviderRepositoryV3(
-            context: store.context,
-            backgroundContext: store.backgroundContext
-        )
-        return ProviderManager(repository: repository)
-    }()
-}
-
-// MARK: -
-
-private extension ProfileManager {
-    static let sharedTitle: (Profile) -> String = {
-        String(format: Constants.shared.tunnel.profileTitleFormat, $0.name)
-    }
-}
 
 extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
     static var `default`: CoreDataPersistentStoreLogger {

@@ -48,7 +48,7 @@ public struct ConnectionStatusText: View, ThemeProviding {
 private extension ConnectionStatusText {
     var statusDescription: String {
         if let lastErrorCode = tunnel.lastErrorCode {
-            return lastErrorCode.localizedDescription
+            return lastErrorCode.localizedDescription(style: .tunnel)
         }
         let status = tunnel.connectionStatus
         switch status {
@@ -61,8 +61,10 @@ private extension ConnectionStatusText {
 
         case .inactive:
             var desc = status.localizedDescription
-            if tunnel.currentProfile?.onDemand ?? false {
-                desc += Strings.Ui.ConnectionStatus.onDemandSuffix
+            if let profile = tunnel.currentProfile {
+                if profile.onDemand {
+                    desc += Strings.Ui.ConnectionStatus.onDemandSuffix
+                }
             }
             return desc
 
@@ -76,7 +78,7 @@ private extension ConnectionStatusText {
 #Preview("Connected") {
     ConnectionStatusText(tunnel: .mock)
         .task {
-            try? await ExtendedTunnel.mock.connect(with: .mock, processor: .mock)
+            try? await ExtendedTunnel.mock.connect(with: .mock)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()
@@ -95,7 +97,7 @@ private extension ConnectionStatusText {
     }
     return ConnectionStatusText(tunnel: .mock)
         .task {
-            try? await ExtendedTunnel.mock.connect(with: profile, processor: .mock)
+            try? await ExtendedTunnel.mock.connect(with: profile)
         }
         .frame(width: 100, height: 100)
         .withMockEnvironment()

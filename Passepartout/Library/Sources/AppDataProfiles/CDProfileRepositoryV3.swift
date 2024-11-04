@@ -68,13 +68,7 @@ private extension AppData {
             return nil
         }
         let profile = try registry.decodedProfile(from: encoded, with: coder)
-        var builder = profile.builder()
-        builder.attributes = ProfileAttributes(
-            isAvailableForTV: cdEntity.isAvailableForTV?.boolValue ?? false,
-            lastUpdate: cdEntity.lastUpdate,
-            fingerprint: cdEntity.fingerprint
-        )
-        return try builder.tryBuild()
+        return profile
     }
 
     static func toMapper(

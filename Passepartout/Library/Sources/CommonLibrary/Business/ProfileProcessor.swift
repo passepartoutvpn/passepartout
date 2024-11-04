@@ -26,17 +26,40 @@
 import Foundation
 import PassepartoutKit
 
-@MainActor
 public final class ProfileProcessor: ObservableObject {
+    private let iapManager: IAPManager
+
     public let title: (Profile) -> String
 
-    public let processed: (Profile) throws -> Profile
+    private let _isIncluded: (IAPManager, Profile) -> Bool
+
+    private let _willSave: (IAPManager, Profile.Builder) throws -> Profile.Builder
+
+    private let _willConnect: (IAPManager, Profile) throws -> Profile
 
     public init(
+        iapManager: IAPManager,
         title: @escaping (Profile) -> String,
-        processed: @escaping (Profile) throws -> Profile
+        isIncluded: @escaping (IAPManager, Profile) -> Bool,
+        willSave: @escaping (IAPManager, Profile.Builder) throws -> Profile.Builder,
+        willConnect: @escaping (IAPManager, Profile) throws -> Profile
     ) {
+        self.iapManager = iapManager
         self.title = title
-        self.processed = processed
+        _isIncluded = isIncluded
+        _willSave = willSave
+        _willConnect = willConnect
+    }
+
+    public func isIncluded(_ profile: Profile) -> Bool {
+        _isIncluded(iapManager, profile)
+    }
+
+    public func willSave(_ builder: Profile.Builder) throws -> Profile.Builder {
+        try _willSave(iapManager, builder)
+    }
+
+    public func willConnect(_ profile: Profile) throws -> Profile {
+        try _willConnect(iapManager, profile)
     }
 }

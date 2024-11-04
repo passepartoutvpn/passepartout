@@ -30,9 +30,6 @@ import SwiftUI
 
 struct ProviderEntitySelector: View {
 
-    @EnvironmentObject
-    private var profileProcessor: ProfileProcessor
-
     @ObservedObject
     var profileManager: ProfileManager
 

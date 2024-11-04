@@ -36,17 +36,13 @@ public struct AppMenu: View {
     private var profileManager: ProfileManager
 
     @ObservedObject
-    private var profileProcessor: ProfileProcessor
-
-    @ObservedObject
     private var tunnel: ExtendedTunnel
 
     @StateObject
     private var model = Model()
 
-    public init(profileManager: ProfileManager, profileProcessor: ProfileProcessor, tunnel: ExtendedTunnel) {
+    public init(profileManager: ProfileManager, tunnel: ExtendedTunnel) {
         self.profileManager = profileManager
-        self.profileProcessor = profileProcessor
         self.tunnel = tunnel
     }
 
@@ -96,7 +92,7 @@ private extension AppMenu {
                 }
                 do {
                     if isOn {
-                        try await tunnel.connect(with: profile, processor: profileProcessor)
+                        try await tunnel.connect(with: profile)
                     } else {
                         try await tunnel.disconnect()
                     }

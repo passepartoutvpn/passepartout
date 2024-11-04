@@ -35,42 +35,26 @@ public final class AppContext: ObservableObject {
 
     public let profileManager: ProfileManager
 
-    public let profileProcessor: ProfileProcessor
-
     public let tunnel: ExtendedTunnel
-
-    public let tunnelEnvironment: TunnelEnvironment
 
     public let registry: Registry
 
     public let providerManager: ProviderManager
-
-    private let constants: Constants
 
     private var subscriptions: Set<AnyCancellable>
 
     public init(
         iapManager: IAPManager,
         profileManager: ProfileManager,
-        profileProcessor: ProfileProcessor,
-        tunnel: Tunnel,
-        tunnelEnvironment: TunnelEnvironment,
+        tunnel: ExtendedTunnel,
         registry: Registry,
-        providerManager: ProviderManager,
-        constants: Constants
+        providerManager: ProviderManager
     ) {
         self.iapManager = iapManager
         self.profileManager = profileManager
-        self.profileProcessor = profileProcessor
-        self.tunnelEnvironment = tunnelEnvironment
-        self.tunnel = ExtendedTunnel(
-            tunnel: tunnel,
-            environment: tunnelEnvironment,
-            interval: constants.tunnel.refreshInterval
-        )
+        self.tunnel = tunnel
         self.registry = registry
         self.providerManager = providerManager
-        self.constants = constants
         subscriptions = []
 
         Task {
@@ -115,7 +99,7 @@ private extension AppContext {
                 return
             }
             do {
-                try await tunnel.connect(with: profile, processor: profileProcessor)
+                try await tunnel.connect(with: profile)
             } catch {
                 try await tunnel.disconnect()
             }

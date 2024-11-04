@@ -43,7 +43,7 @@ public final class ProfileManager: ObservableObject {
 
     private let deletingRemotely: Bool
 
-    private let isIncluded: ((Profile) -> Bool)?
+    private let processor: ProfileProcessor?
 
     @Published
     private var profiles: [Profile]
@@ -68,7 +68,7 @@ public final class ProfileManager: ObservableObject {
         backupRepository = nil
         remoteRepository = nil
         deletingRemotely = false
-        isIncluded = nil
+        processor = nil
         self.profiles = []
         allProfiles = profiles.reduce(into: [:]) {
             $0[$1.id] = $1
@@ -85,14 +85,14 @@ public final class ProfileManager: ObservableObject {
         backupRepository: (any ProfileRepository)? = nil,
         remoteRepository: (any ProfileRepository)?,
         deletingRemotely: Bool = false,
-        isIncluded: ((Profile) -> Bool)? = nil
+        processor: ProfileProcessor? = nil
     ) {
         precondition(!deletingRemotely || remoteRepository != nil, "deletingRemotely requires a non-nil remoteRepository")
         self.repository = repository
         self.backupRepository = backupRepository
         self.remoteRepository = remoteRepository
         self.deletingRemotely = deletingRemotely
-        self.isIncluded = isIncluded
+        self.processor = processor
         profiles = []
         allProfiles = [:]
         allRemoteProfiles = [:]
@@ -134,6 +134,9 @@ extension ProfileManager {
         let profile: Profile
         if force {
             var builder = originalProfile.builder()
+            if let processor {
+                builder = try processor.willSave(builder)
+            }
             builder.attributes.lastUpdate = Date()
             builder.attributes.fingerprint = UUID()
             profile = try builder.tryBuild()
@@ -319,7 +322,7 @@ private extension ProfileManager {
         }
 
         // should not be imported at all, but you never know
-        if let isIncluded {
+        if let isIncluded = processor?.isIncluded {
             let idsToRemove: [Profile.ID] = allProfiles
                 .filter {
                     !isIncluded($0.value)
@@ -372,7 +375,7 @@ private extension ProfileManager {
             }
             for remoteProfile in profilesToImport {
                 do {
-                    guard isIncluded?(remoteProfile) ?? true else {
+                    guard processor?.isIncluded(remoteProfile) ?? true else {
                         pp_log(.app, .info, "\tWill delete non-included remote profile \(remoteProfile.id)")
                         idsToRemove.append(remoteProfile.id)
                         continue
