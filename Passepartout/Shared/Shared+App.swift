@@ -181,14 +181,14 @@ extension Configuration {
 
 extension Configuration {
     enum ProfileManager {
-        static let sharedTitle: (Profile) -> String = {
+        static let sharedTitle: @Sendable (Profile) -> String = {
             String(format: Constants.shared.tunnel.profileTitleFormat, $0.name)
         }
 
 #if os(tvOS)
         static let deletingRemotely = true
 
-        static let isProfileIncluded: (Profile) -> Bool = {
+        static let isProfileIncluded: @Sendable (Profile) -> Bool = {
             $0.attributes.isAvailableForTV == true
         }
 #else
@@ -211,6 +211,7 @@ extension Configuration {
     }
 }
 
+@MainActor
 extension Configuration.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
         coreDataProfileRepository
@@ -231,6 +232,7 @@ extension Configuration {
     }
 }
 
+@MainActor
 extension Configuration.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
         neProfileRepository
@@ -243,6 +245,7 @@ extension Configuration.ProfileManager {
 
 #endif
 
+@MainActor
 extension Configuration.ProfileManager {
     static let neProfileRepository: ProfileRepository = {
         NEProfileRepository(repository: neStrategy) {

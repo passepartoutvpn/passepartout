@@ -25,4 +25,4 @@
 
 import Foundation
 
-public typealias BuildProducts<ProductType> = (_ at: Int) -> Set<ProductType> where ProductType: Hashable
+public typealias BuildProducts<ProductType> = @Sendable (_ at: Int) -> Set<ProductType> where ProductType: Hashable
