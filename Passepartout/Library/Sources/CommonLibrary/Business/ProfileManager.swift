@@ -360,6 +360,7 @@ private extension ProfileManager {
             guard let self else {
                 return
             }
+            pp_log(.app, .info, "Start importing remote profiles...")
             var idsToRemove: [Profile.ID] = []
             if !remotelyDeletedIds.isEmpty {
                 pp_log(.app, .info, "Will \(deletingRemotely ? "delete" : "retain") local profiles not present in remote repository: \(remotelyDeletedIds)")
