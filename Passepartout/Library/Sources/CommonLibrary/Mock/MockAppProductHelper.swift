@@ -33,8 +33,8 @@ public actor MockAppProductHelper: AppProductHelper {
 
     public nonisolated let receiptReader: MockAppReceiptReader
 
-    // very recent build to skip entitled products
-    public init(build: Int = 10000) {
+    // set .max to skip entitled products
+    public init(build: Int = .max) {
         self.build = build
         products = [:]
         receiptReader = MockAppReceiptReader()
