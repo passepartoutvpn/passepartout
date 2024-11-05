@@ -37,9 +37,13 @@ extension AppContext {
         let tunnelEnvironment: TunnelEnvironment = .shared
         let registry: Registry = .shared
 
+        let inAppHelper = StoreKitHelper(identifiers: AppProduct.all)
+        let receiptReader = KvittoReceiptReader()
+
         let iapManager = IAPManager(
             customUserLevel: Configuration.IAPManager.customUserLevel,
-            receiptReader: KvittoReceiptReader(),
+            inAppHelper: inAppHelper,
+            receiptReader: receiptReader,
             // FIXME: #662, omit unrestrictedFeatures on release!
             unrestrictedFeatures: [.interactiveLogin],
             productsAtBuild: Configuration.IAPManager.productsAtBuild

@@ -33,6 +33,8 @@ import PassepartoutKit
 public final class IAPManager: ObservableObject {
     private let customUserLevel: AppUserLevel?
 
+    private let inAppHelper: any AppProductHelper
+
     private let receiptReader: any AppReceiptReader
 
     private let unrestrictedFeatures: Set<AppFeature>
@@ -49,17 +51,36 @@ public final class IAPManager: ObservableObject {
 
     public init(
         customUserLevel: AppUserLevel? = nil,
+        inAppHelper: any AppProductHelper,
         receiptReader: any AppReceiptReader,
         unrestrictedFeatures: Set<AppFeature> = [],
         productsAtBuild: BuildProducts<AppProduct>? = nil
     ) {
         self.customUserLevel = customUserLevel
+        self.inAppHelper = inAppHelper
         self.receiptReader = receiptReader
         self.unrestrictedFeatures = unrestrictedFeatures
         self.productsAtBuild = productsAtBuild
         userLevel = .undefined
         purchasedProducts = []
         eligibleFeatures = []
+
+        Task {
+            try await inAppHelper.fetchProducts()
+        }
+    }
+
+    public func purchase(_ product: AppProduct) async throws -> InAppPurchaseResult {
+        let result = try await inAppHelper.purchase(productWithIdentifier: product)
+        if result == .done {
+            await reloadReceipt()
+        }
+        return result
+    }
+
+    public func restorePurchases() async throws {
+        try await inAppHelper.restorePurchases()
+        await reloadReceipt()
     }
 
     public func reloadReceipt() async {
