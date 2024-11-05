@@ -35,7 +35,7 @@ public struct PaywallModifier: ViewModifier {
     private var isPresentingRestricted = false
 
     @State
-    private var paywallFeature: AppFeature?
+    private var paywallArguments: PaywallArguments?
 
     public init(reason: Binding<PaywallReason?>) {
         _reason = reason
@@ -56,9 +56,13 @@ public struct PaywallModifier: ViewModifier {
                     Text(Strings.Alerts.Iap.Restricted.message)
                 }
             )
-            .themeModal(item: $paywallFeature) { feature in
+            .themeModal(item: $paywallArguments) { args in
                 NavigationStack {
-                    PaywallView(isPresented: isPresentingPurchase, feature: feature)
+                    PaywallView(
+                        isPresented: isPresentingPurchase,
+                        feature: args.feature,
+                        suggestedProducts: args.products
+                    )
                 }
             }
             .onChange(of: reason) {
@@ -66,8 +70,8 @@ public struct PaywallModifier: ViewModifier {
                 case .restricted:
                     isPresentingRestricted = true
 
-                case .purchase(let feature):
-                    paywallFeature = feature
+                case .purchase(let feature, let products):
+                    paywallArguments = PaywallArguments(feature: feature, products: products)
 
                 default:
                     break
@@ -79,11 +83,21 @@ public struct PaywallModifier: ViewModifier {
 private extension PaywallModifier {
     var isPresentingPurchase: Binding<Bool> {
         Binding {
-            paywallFeature != nil
+            paywallArguments != nil
         } set: {
             if !$0 {
-                paywallFeature = nil
+                paywallArguments = nil
             }
         }
+    }
+}
+
+private struct PaywallArguments: Identifiable {
+    let feature: AppFeature
+
+    let products: Set<AppProduct>
+
+    var id: String {
+        feature.id
     }
 }

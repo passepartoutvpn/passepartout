@@ -104,13 +104,13 @@ private extension ProfileCoordinator {
     func onNewModule(_ moduleType: ModuleType) {
         switch moduleType {
         case .dns:
-            paywallReason = iapManager.paywallReason(forFeature: .dns)
+            paywallReason = iapManager.paywallReason(forFeature: .dns, suggesting: [])
 
         case .httpProxy:
-            paywallReason = iapManager.paywallReason(forFeature: .httpProxy)
+            paywallReason = iapManager.paywallReason(forFeature: .httpProxy, suggesting: [])
 
         case .ip:
-            paywallReason = iapManager.paywallReason(forFeature: .routing)
+            paywallReason = iapManager.paywallReason(forFeature: .routing, suggesting: [])
 
         case .openVPN, .wireGuard:
             break
