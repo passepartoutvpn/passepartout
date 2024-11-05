@@ -27,8 +27,6 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-// FIXME: #424, reload receipt + objectWillChange on purchase/transactions
-
 @MainActor
 public final class IAPManager: ObservableObject {
     private let customUserLevel: AppUserLevel?

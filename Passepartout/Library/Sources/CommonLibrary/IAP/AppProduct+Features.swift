@@ -31,7 +31,7 @@ extension AppProduct {
 
         public static let appleTV = AppProduct(featureId: "appletv")
 
-        // FIXME: #424, add in-app product
+        // FIXME: #585, add in-app product
         public static let interactiveLogin = AppProduct(featureId: "interactive_login")
 
         public static let networkSettings = AppProduct(featureId: "network_settings")
