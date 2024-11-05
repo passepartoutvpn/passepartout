@@ -137,7 +137,7 @@ private extension ProviderContentModifier {
             .modifier(PurchaseButtonModifier(
                 Strings.Providers.Picker.purchase,
                 feature: .providers,
-                showsRestricted: true,
+                showsIfRestricted: true,
                 paywallReason: $paywallReason
             ))
     }

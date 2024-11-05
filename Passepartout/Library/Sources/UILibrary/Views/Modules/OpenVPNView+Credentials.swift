@@ -77,7 +77,7 @@ public struct OpenVPNCredentialsView: View {
                 .modifier(PurchaseButtonModifier(
                     Strings.Modules.Openvpn.Credentials.Interactive.purchase,
                     feature: .interactiveLogin,
-                    showsRestricted: false,
+                    showsIfRestricted: false,
                     paywallReason: $paywallReason
                 ))
 

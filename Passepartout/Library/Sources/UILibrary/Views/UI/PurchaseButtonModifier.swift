@@ -35,7 +35,7 @@ public struct PurchaseButtonModifier: ViewModifier {
 
     private let feature: AppFeature
 
-    private let showsRestricted: Bool
+    private let showsIfRestricted: Bool
 
     @Binding
     private var paywallReason: PaywallReason?
@@ -43,12 +43,12 @@ public struct PurchaseButtonModifier: ViewModifier {
     public init(
         _ title: String,
         feature: AppFeature,
-        showsRestricted: Bool,
+        showsIfRestricted: Bool,
         paywallReason: Binding<PaywallReason?>
     ) {
         self.title = title
         self.feature = feature
-        self.showsRestricted = showsRestricted
+        self.showsIfRestricted = showsIfRestricted
         _paywallReason = paywallReason
     }
 
@@ -58,7 +58,7 @@ public struct PurchaseButtonModifier: ViewModifier {
             purchaseButton
 
         case .restricted:
-            if showsRestricted {
+            if showsIfRestricted {
                 content
             }
 
