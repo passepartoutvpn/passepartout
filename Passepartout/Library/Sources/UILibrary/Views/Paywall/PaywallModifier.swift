@@ -86,6 +86,8 @@ private extension PaywallModifier {
             paywallArguments != nil
         } set: {
             if !$0 {
+                // make sure to reset this to allow paywall to appear again
+                reason = nil
                 paywallArguments = nil
             }
         }
