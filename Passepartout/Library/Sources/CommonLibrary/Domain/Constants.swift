@@ -99,6 +99,11 @@ public struct Constants: Decodable, Sendable {
         public let refreshInterval: TimeInterval
 
         public let tvExpirationMinutes: Int
+
+        public func newTVExpirationDate() -> Date {
+            Date()
+                .addingTimeInterval(Double(tvExpirationMinutes) * 60.0)
+        }
     }
 
     public struct API: Decodable, Sendable {

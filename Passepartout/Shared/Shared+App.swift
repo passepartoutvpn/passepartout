@@ -59,12 +59,12 @@ extension AppContext {
                 // preprocess TV profiles
                 if attributes.isAvailableForTV == true {
 
-                    // if ineligible, set expiration date unless already set
+                    // ineligible, set expiration date unless already set
                     if !iap.isEligible(for: .appleTV),
                        attributes.expirationDate == nil || attributes.isExpired {
-
-                        attributes.expirationDate = Date()
-                            .addingTimeInterval(Double(Constants.shared.tunnel.tvExpirationMinutes) * 60.0)
+                        let expirationDate = Constants.shared.tunnel.newTVExpirationDate()
+                        pp_log(.app, .notice, "Ineligible, apply expiration date: \(expirationDate)")
+                        attributes.expirationDate = expirationDate
                     } else {
                         attributes.expirationDate = nil
                     }
@@ -76,9 +76,9 @@ extension AppContext {
             willConnect: { iap, profile in
                 var builder = profile.builder()
 
-                // suppress on-demand rules if not eligible
+                // ineligible, suppress on-demand rules
                 if !iap.isEligible(for: .onDemand) {
-                    pp_log(.app, .notice, "Suppress on-demand rules, not eligible")
+                    pp_log(.app, .notice, "Ineligible, suppress on-demand rules")
 
                     if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
                        let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {

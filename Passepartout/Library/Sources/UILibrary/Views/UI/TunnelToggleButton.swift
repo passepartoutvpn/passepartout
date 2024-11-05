@@ -107,14 +107,16 @@ private extension TunnelToggleButton {
                 }
             }
             if canConnect && profile.isInteractive {
-                if iapManager.isEligible(for: .interactiveLogin) {
+
+                // ineligible, suppress interactive login
+                if !iapManager.isEligible(for: .interactiveLogin) {
+                    pp_log(.app, .notice, "Ineligible, suppress interactive login")
+                } else {
                     pp_log(.app, .notice, "Present interactive login")
                     interactiveManager.present(with: profile) {
                         await perform(with: $0)
                     }
                     return
-                } else {
-                    pp_log(.app, .notice, "Suppress interactive login, not eligible")
                 }
             }
             await perform(with: profile)
