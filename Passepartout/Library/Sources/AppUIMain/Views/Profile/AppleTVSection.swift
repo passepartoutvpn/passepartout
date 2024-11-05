@@ -59,7 +59,7 @@ private extension AppleTVSection {
             .modifier(PurchaseButtonModifier(
                 Strings.Modules.General.Rows.AppleTv.purchase,
                 feature: .appleTV,
-                suggesting: [.Features.appleTV],
+                suggesting: .Features.appleTV,
                 showsIfRestricted: true,
                 paywallReason: $paywallReason
             ))
@@ -73,7 +73,7 @@ private extension AppleTVSection {
         let purchaseDesc = {
             Strings.Modules.General.Sections.AppleTv.Footer.Purchase._2
         }
-        switch iapManager.paywallReason(forFeature: .appleTV, suggesting: []) {
+        switch iapManager.paywallReason(forFeature: .appleTV, suggesting: nil) {
         case .purchase:
             desc.append(expirationDesc())
             desc.append(purchaseDesc())

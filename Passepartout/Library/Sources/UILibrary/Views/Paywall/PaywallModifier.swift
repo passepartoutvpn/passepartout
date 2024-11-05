@@ -61,7 +61,7 @@ public struct PaywallModifier: ViewModifier {
                     PaywallView(
                         isPresented: isPresentingPurchase,
                         feature: args.feature,
-                        suggestedProducts: args.products
+                        suggestedProduct: args.product
                     )
                 }
             }
@@ -70,8 +70,8 @@ public struct PaywallModifier: ViewModifier {
                 case .restricted:
                     isPresentingRestricted = true
 
-                case .purchase(let feature, let products):
-                    paywallArguments = PaywallArguments(feature: feature, products: products)
+                case .purchase(let feature, let product):
+                    paywallArguments = PaywallArguments(feature: feature, product: product)
 
                 default:
                     break
@@ -97,7 +97,7 @@ private extension PaywallModifier {
 private struct PaywallArguments: Identifiable {
     let feature: AppFeature
 
-    let products: Set<AppProduct>
+    let product: AppProduct?
 
     var id: String {
         feature.id
