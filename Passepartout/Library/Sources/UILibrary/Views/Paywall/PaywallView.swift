@@ -36,6 +36,8 @@ struct PaywallView: View {
 
     let feature: AppFeature
 
+    let suggestedProduct: AppProduct?
+
     // FIXME: #585, implement payments
     var body: some View {
         VStack {
