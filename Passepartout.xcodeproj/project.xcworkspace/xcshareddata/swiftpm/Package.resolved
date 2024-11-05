@@ -12,7 +12,7 @@
     {
       "identity" : "generic-json-swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zoul/generic-json-swift",
+      "location" : "https://github.com/iwill/generic-json-swift",
       "state" : {
         "revision" : "0a06575f4038b504e78ac330913d920f1630f510",
         "version" : "2.0.2"
@@ -41,7 +41,7 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:passepartoutvpn/passepartoutkit-source",
       "state" : {
-        "revision" : "8b4c47f716120fab3f219593cf4ae0e6e2c86677"
+        "revision" : "2b639620b371181fa56594296918b09acf528058"
       }
     },
     {

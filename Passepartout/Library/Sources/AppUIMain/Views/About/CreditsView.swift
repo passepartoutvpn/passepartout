@@ -23,8 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
+import CommonUtils
 import SwiftUI
-import UtilsLibrary
 
 struct CreditsView: View {
     var body: some View {

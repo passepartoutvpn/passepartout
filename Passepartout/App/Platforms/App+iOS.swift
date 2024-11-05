@@ -30,7 +30,7 @@ import SwiftUI
 
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configure()
+        configure(with: AppUIMain(isStartedFromLoginItem: false))
         return true
     }
 }
@@ -42,7 +42,8 @@ extension PassepartoutApp {
                 .onOpenURL { url in
                     ImporterPipe.shared.send([url])
                 }
-                .themeLockScreen(theme)
+                .themeLockScreen()
+                .withEnvironment(from: context, theme: theme)
         }
     }
 }

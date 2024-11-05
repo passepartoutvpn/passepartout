@@ -23,11 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@_exported import AppUI
 import Foundation
+@_exported import UILibrary
 
-public enum AppUITV: AppUIConfiguring {
-    public static func configure(with context: AppContext) {
-        AppUI.configure(with: context)
+public final class AppUITV: UILibraryConfiguring {
+    public init() {
+    }
+
+    public func configure(with context: AppContext) {
     }
 }

@@ -24,12 +24,12 @@
 //
 
 import AppData
-import AppLibrary
 import Combine
+import CommonLibrary
+import CommonUtils
 import CoreData
 import Foundation
 import PassepartoutKit
-import UtilsLibrary
 
 extension AppData {
     public static func cdProfileRepositoryV3(
@@ -48,24 +48,51 @@ extension AppData {
                 .init(key: "lastUpdate", ascending: true)
             ]
         } fromMapper: {
-            guard let encoded = $0.encoded else {
-                return nil
-            }
-            return try registry.decodedProfile(from: encoded, with: coder)
+            try fromMapper($0, registry: registry, coder: coder)
         } toMapper: {
-            let encoded = try registry.encodedProfile($0, with: coder)
-
-            let cdProfile = CDProfileV3(context: $1)
-            cdProfile.uuid = $0.id
-            cdProfile.name = $0.name
-            cdProfile.encoded = encoded
-            cdProfile.lastUpdate = Date()
-            return cdProfile
+            try toMapper($0, $1, $2, registry: registry, coder: coder)
         } onResultError: {
             onResultError?($0) ?? .ignore
         }
-
         return repository
+    }
+}
+
+private extension AppData {
+    static func fromMapper(
+        _ cdEntity: CDProfileV3,
+        registry: Registry,
+        coder: ProfileCoder
+    ) throws -> Profile? {
+        guard let encoded = cdEntity.encoded else {
+            return nil
+        }
+        let profile = try registry.decodedProfile(from: encoded, with: coder)
+        return profile
+    }
+
+    static func toMapper(
+        _ profile: Profile,
+        _ oldCdEntity: CDProfileV3?,
+        _ context: NSManagedObjectContext,
+        registry: Registry,
+        coder: ProfileCoder
+    ) throws -> CDProfileV3 {
+        let encoded = try registry.encodedProfile(profile, with: coder)
+
+        let cdProfile = oldCdEntity ?? CDProfileV3(context: context)
+        cdProfile.uuid = profile.id
+        cdProfile.name = profile.name
+        cdProfile.encoded = encoded
+
+        // redundant but convenient
+        let attributes = profile.attributes
+        cdProfile.isAvailableForTV = attributes.isAvailableForTV.map(NSNumber.init(value:))
+        cdProfile.expirationDate = attributes.expirationDate
+        cdProfile.lastUpdate = attributes.lastUpdate
+        cdProfile.fingerprint = attributes.fingerprint
+
+        return cdProfile
     }
 }
 

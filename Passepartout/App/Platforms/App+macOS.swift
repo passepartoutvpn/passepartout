@@ -32,8 +32,8 @@ import SwiftUI
 
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
+        configure(with: AppUIMain(isStartedFromLoginItem: isStartedFromLoginItem))
         hideIfLoginItem()
-        configure()
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -71,18 +71,25 @@ extension PassepartoutApp {
 
     @SceneBuilder
     var body: some Scene {
-        Window(appName, id: appName, content: contentView)
-            .defaultSize(width: 600, height: 400)
+        Window(appName, id: appName) {
+            contentView()
+                .withEnvironment(from: context, theme: theme)
+        }
+        .defaultSize(width: 600, height: 400)
 
         Settings {
             SettingsView(profileManager: context.profileManager)
                 .frame(minWidth: 300, minHeight: 200)
+                .withEnvironment(from: context, theme: theme)
         }
         MenuBarExtra {
-            AppMenu()
-                .withEnvironment(from: context, theme: theme)
+            AppMenu(
+                profileManager: context.profileManager,
+                tunnel: context.tunnel
+            )
+            .withEnvironment(from: context, theme: theme)
         } label: {
-            AppMenuImage(connectionObserver: context.connectionObserver)
+            AppMenuImage(tunnel: context.tunnel)
                 .environmentObject(theme)
         }
     }

@@ -23,12 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
-import Combine
+import CommonAPI
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 struct VPNProviderServerView<Configuration>: View where Configuration: ProviderConfigurationIdentifiable & Codable {
     var apis: [APIMapper] = API.shared
@@ -43,7 +42,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
 
     let filtersWithSelection: Bool
 
-    let selectTitle: String
+    var selectTitle = Strings.Providers.selectEntity
 
     let onSelect: (VPNServer, VPNPreset<Configuration>) -> Void
 
@@ -167,12 +166,12 @@ extension VPNProviderServerView {
                     errorHandler.handle(error, title: Strings.Global.servers)
                 }
             }
-            .onReceive(filtersViewModel.filtersDidChange) { newValue in
+            .onReceive(filtersViewModel.$filters) { newValue in
                 Task {
                     await reloadServers(filters: newValue)
                 }
             }
-            .onReceive(filtersViewModel.onlyShowsFavoritesDidChange) { newValue in
+            .onReceive(filtersViewModel.$onlyShowsFavorites) { newValue in
                 onlyShowsFavorites = newValue
             }
             .onDisappear {

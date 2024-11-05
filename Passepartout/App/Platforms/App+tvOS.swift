@@ -30,14 +30,17 @@ import SwiftUI
 
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        configure()
+        configure(with: AppUITV())
         return true
     }
 }
 
 extension PassepartoutApp {
     var body: some Scene {
-        WindowGroup(content: contentView)
+        WindowGroup {
+            contentView()
+                .withEnvironment(from: context, theme: theme)
+        }
     }
 }
 

@@ -23,11 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 struct SettingsSectionGroup: View {
 
@@ -57,10 +56,11 @@ struct SettingsSectionGroup: View {
         .themeSection(header: Strings.Global.general)
         Group {
             eraseCloudKitButton
+                .themeRow(footer: iCloudFooter)
         }
         .themeSection(
             header: Strings.Unlocalized.iCloud,
-            footer: Strings.Views.Settings.Sections.Icloud.footer
+            footer: iCloudFooter
         )
     }
 }
@@ -99,5 +99,9 @@ private extension SettingsSectionGroup {
             }
         }
         .disabled(isErasingiCloud)
+    }
+
+    var iCloudFooter: String {
+        Strings.Views.Settings.Sections.Icloud.footer
     }
 }

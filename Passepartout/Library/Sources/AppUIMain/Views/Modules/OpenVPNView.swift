@@ -23,10 +23,11 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
+import CommonUtils
 import CPassepartoutOpenVPNOpenSSL
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 struct OpenVPNView: View, ModuleDraftEditing {
 
@@ -83,8 +84,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 onCompletion: importConfiguration
             )
             .modifier(PaywallModifier(reason: $paywallReason))
-            .withErrorHandler(errorHandler)
             .navigationDestination(for: Subroute.self, destination: destination)
+            .themeAnimation(on: providerId.wrappedValue, category: .modules)
+            .withErrorHandler(errorHandler)
     }
 }
 
@@ -113,7 +115,7 @@ private extension OpenVPNView {
                 isImporting = true
             }
             .alert(
-                module.typeDescription,
+                module.moduleType.localizedDescription,
                 isPresented: $requiresPassphrase,
                 presenting: importURL,
                 actions: { url in
@@ -193,7 +195,7 @@ private extension OpenVPNView {
             pp_log(.app, .error, "Unable to import OpenVPN configuration: \(error)")
             errorHandler.handle(
                 (error as? StandardOpenVPNParserError)?.asPassepartoutError ?? error,
-                title: module.typeDescription
+                title: module.moduleType.localizedDescription
             )
         }
     }
@@ -219,16 +221,20 @@ private extension OpenVPNView {
                     configurationType: OpenVPN.Configuration.self,
                     selectedEntity: providerEntity.wrappedValue,
                     filtersWithSelection: true,
-                    selectTitle: Strings.Providers.selectEntity,
                     onSelect: onSelectServer
                 )
             }
 
         case .credentials:
-            CredentialsView(
-                isInteractive: draft.isInteractive,
-                credentials: draft.credentials
-            )
+            Form {
+                OpenVPNCredentialsView(
+                    isInteractive: draft.isInteractive,
+                    credentials: draft.credentials
+                )
+            }
+            .navigationTitle(Strings.Modules.Openvpn.credentials)
+            .themeForm()
+            .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
         }
     }
 }

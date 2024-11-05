@@ -23,17 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
+import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-struct AppToolbar: ToolbarContent {
+struct AppToolbar: ToolbarContent, SizeClassProviding {
 
     @Environment(\.horizontalSizeClass)
-    private var hsClass
+    var hsClass
 
     @Environment(\.verticalSizeClass)
-    private var vsClass
+    var vsClass
 
     let profileManager: ProfileManager
 
@@ -50,7 +51,7 @@ struct AppToolbar: ToolbarContent {
     let onNewProfile: (Profile) -> Void
 
     var body: some ToolbarContent {
-        if hsClass == .regular && vsClass == .regular {
+        if isBigDevice {
             ToolbarItemGroup {
                 addProfileMenu
                 aboutButton

@@ -24,8 +24,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        #platform: ["iOS", "macOS", "tvOS"]
-        platform: ["iOS", "macOS"]
+        platform: ["iOS", "macOS", "tvOS"]
     steps:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
@@ -64,8 +63,7 @@ jobs:
           PILOT_GROUPS: ${{ vars.PILOT_GROUPS }}
           PILOT_NOTIFY_EXTERNAL_TESTERS: ${{ vars.PILOT_NOTIFY_EXTERNAL_TESTERS }}
         run: |
-          #PLATFORMS=("iOS" "macOS" "tvOS")
-          PLATFORMS=("iOS" "macOS")
+          PLATFORMS=("iOS" "macOS" "tvOS")
           for PLATFORM in ${PLATFORMS[@]}; do
             bundle exec fastlane --env $PLATFORM public_beta
           done

@@ -23,20 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
+import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
 struct ProviderEntitySelector: View {
 
-    @EnvironmentObject
-    private var profileProcessor: ProfileProcessor
-
     @ObservedObject
     var profileManager: ProfileManager
 
     @ObservedObject
-    var tunnel: Tunnel
+    var tunnel: ExtendedTunnel
 
     let profile: Profile
 
@@ -44,9 +42,15 @@ struct ProviderEntitySelector: View {
 
     let provider: ModuleMetadata.Provider
 
+    let errorHandler: ErrorHandler
+
     var body: some View {
         if let viewProvider = module as? any ProviderEntityViewProviding {
-            AnyView(viewProvider.providerEntityView(with: provider, onSelect: onSelect))
+            AnyView(viewProvider.providerEntityView(
+                with: provider,
+                errorHandler: errorHandler,
+                onSelect: onSelect
+            ))
         } else {
             fatalError("Module got too far without being ProviderEntityViewProviding: \(module)")
         }
@@ -58,16 +62,15 @@ private extension ProviderEntitySelector {
         pp_log(.app, .info, "Select new provider entity: \(entity)")
 
         var builder = profile.builder()
-        try builder.setProviderEntity(entity, forModuleWithId: module.id)
-        let newProfile = try builder.tryBuild()
-        try await profileManager.save(newProfile)
+        do {
+            try builder.setProviderEntity(entity, forModuleWithId: module.id)
+            let newProfile = try builder.tryBuild()
+            try await profileManager.save(newProfile)
 
-        Task {
-            do {
-                try await tunnel.connect(with: newProfile, processor: profileProcessor)
-            } catch {
-                pp_log(.app, .error, "Unable to connect with new provider entity: \(error)")
-            }
+            // will reconnect via AppContext observation
+        } catch {
+            pp_log(.app, .error, "Unable to save new provider entity: \(error)")
+            throw error
         }
     }
 }

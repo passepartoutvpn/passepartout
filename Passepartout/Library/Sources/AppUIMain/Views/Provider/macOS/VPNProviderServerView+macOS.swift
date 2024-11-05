@@ -25,6 +25,8 @@
 
 #if os(macOS)
 
+import CommonAPI
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -71,11 +73,8 @@ extension VPNProviderServerView {
                 .width(10.0)
 
                 TableColumn(Strings.Global.region) { server in
-                    HStack {
-                        ThemeCountryFlag(code: server.provider.countryCode)
-                        Text(server.region)
-                            .help(server.region)
-                    }
+                    ThemeCountryText(server.provider.countryCode, title: server.region)
+                        .help(server.region)
                 }
 
                 TableColumn(Strings.Global.address, value: \.address)

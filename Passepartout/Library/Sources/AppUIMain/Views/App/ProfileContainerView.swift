@@ -23,30 +23,30 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
+import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
-struct ProfileContainerView: View, Routable, TunnelInstallationProviding {
+struct ProfileContainerView: View, Routable {
     let layout: ProfilesLayout
 
     let profileManager: ProfileManager
 
-    let tunnel: Tunnel
+    let tunnel: ExtendedTunnel
 
     let registry: Registry
 
     @Binding
     var isImporting: Bool
 
+    @ObservedObject
+    var errorHandler: ErrorHandler
+
     var flow: ProfileFlow?
 
     @StateObject
     private var interactiveManager = InteractiveManager()
-
-    @StateObject
-    private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
         debugChanges()
@@ -92,13 +92,14 @@ private extension ProfileContainerView {
     }
 
     func interactiveDestination() -> some View {
-        InteractiveView(manager: interactiveManager) {
+        InteractiveCoordinator(style: .modal, manager: interactiveManager) {
             errorHandler.handle(
                 $0,
                 title: Strings.Global.connection,
                 message: Strings.Views.Profiles.Errors.tunnel
             )
         }
+        .presentationDetents([.medium])
     }
 }
 
@@ -149,7 +150,8 @@ private struct PreviewView: View {
                 profileManager: .mock,
                 tunnel: .mock,
                 registry: Registry(),
-                isImporting: .constant(false)
+                isImporting: .constant(false),
+                errorHandler: .default()
             )
         }
         .withMockEnvironment()

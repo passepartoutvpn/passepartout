@@ -23,9 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 struct OnDemandView: View, ModuleDraftEditing {
 
@@ -59,6 +60,12 @@ struct OnDemandView: View, ModuleDraftEditing {
         Group {
             enabledSection
             restrictedArea
+                .modifier(PurchaseButtonModifier(
+                    Strings.Modules.OnDemand.purchase,
+                    feature: .onDemand,
+                    showsIfRestricted: false,
+                    paywallReason: $paywallReason
+                ))
         }
         .moduleView(editor: editor, draft: draft.wrappedValue)
         .modifier(PaywallModifier(reason: $paywallReason))
@@ -80,22 +87,11 @@ private extension OnDemandView {
 
     @ViewBuilder
     var restrictedArea: some View {
-        switch iapManager.paywallReason(forFeature: .onDemand) {
-        case .purchase(let appFeature):
-            Button(Strings.Modules.OnDemand.purchase) {
-                paywallReason = .purchase(appFeature)
-            }
-
-        case .restricted:
-            EmptyView()
-
-        default:
-            if draft.wrappedValue.isEnabled {
-                policySection
-                if draft.wrappedValue.policy != .any {
-                    networkSection
-                    wifiSection
-                }
+        if draft.wrappedValue.isEnabled {
+            policySection
+            if draft.wrappedValue.policy != .any {
+                networkSection
+                wifiSection
             }
         }
     }
@@ -107,6 +103,7 @@ private extension OnDemandView {
             }
         }
         .themeSection(footer: policyFooterDescription)
+        .themeRow(footer: policyFooterDescription)
     }
 
     var policyFooterDescription: String {

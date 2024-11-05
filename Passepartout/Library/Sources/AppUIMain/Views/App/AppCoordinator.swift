@@ -23,34 +23,40 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-public struct AppCoordinator: View {
-
-    @Environment(\.horizontalSizeClass)
-    private var hsClass
-
-    @Environment(\.verticalSizeClass)
-    private var vsClass
+public struct AppCoordinator: View, AppCoordinatorConforming {
 
     @AppStorage(AppPreference.profilesLayout.key)
     private var layout: ProfilesLayout = .list
 
     private let profileManager: ProfileManager
 
-    private let tunnel: Tunnel
+    private let tunnel: ExtendedTunnel
 
     private let registry: Registry
 
     @StateObject
     private var profileEditor = ProfileEditor()
 
+    @State
+    private var modalRoute: ModalRoute?
+
+    @State
+    private var isImporting = false
+
+    @State
+    private var profilePath = NavigationPath()
+
+    @StateObject
+    private var errorHandler: ErrorHandler = .default()
+
     public init(
         profileManager: ProfileManager,
-        tunnel: Tunnel,
+        tunnel: ExtendedTunnel,
         registry: Registry
     ) {
         self.profileManager = profileManager
@@ -59,22 +65,151 @@ public struct AppCoordinator: View {
     }
 
     public var body: some View {
-        if hsClass == .regular && vsClass == .regular {
-            AppModalCoordinator(
-                layout: $layout,
-                profileManager: profileManager,
-                profileEditor: profileEditor,
-                tunnel: tunnel,
-                registry: registry
-            )
-        } else {
-            AppInlineCoordinator(
-                layout: $layout,
-                profileManager: profileManager,
-                profileEditor: profileEditor,
-                tunnel: tunnel,
-                registry: registry
-            )
+        NavigationStack {
+            contentView
+                .toolbar(content: toolbarContent)
+        }
+        .themeModal(
+            item: $modalRoute,
+            isRoot: true,
+            isInteractive: modalRoute?.isInteractive ?? true,
+            content: modalDestination
+        )
+    }
+}
+
+// MARK: - Destinations
+
+extension AppCoordinator {
+    enum ModalRoute: Identifiable {
+        case editProfile
+
+        case editProviderEntity(Profile, Module, ModuleMetadata.Provider)
+
+        case settings
+
+        case about
+
+        var id: Int {
+            switch self {
+            case .editProfile: return 1
+            case .editProviderEntity: return 2
+            case .settings: return 3
+            case .about: return 4
+            }
+        }
+
+        var isInteractive: Bool {
+            switch self {
+            case .editProfile:
+                return false
+
+            default:
+                return true
+            }
         }
     }
+
+    var contentView: some View {
+        ProfileContainerView(
+            layout: layout,
+            profileManager: profileManager,
+            tunnel: tunnel,
+            registry: registry,
+            isImporting: $isImporting,
+            errorHandler: errorHandler,
+            flow: .init(
+                onEditProfile: {
+                    guard let profile = profileManager.profile(withId: $0.id) else {
+                        return
+                    }
+                    enterDetail(of: profile)
+                },
+                onEditProviderEntity: {
+                    guard let pair = $0.firstProviderModuleWithMetadata else {
+                        return
+                    }
+                    present(.editProviderEntity($0, pair.0, pair.1))
+                }
+            )
+        )
+    }
+
+    func toolbarContent() -> some ToolbarContent {
+        AppToolbar(
+            profileManager: profileManager,
+            layout: $layout,
+            isImporting: $isImporting,
+            onSettings: {
+                present(.settings)
+            },
+            onAbout: {
+                present(.about)
+            },
+            onNewProfile: enterDetail
+        )
+    }
+
+    @ViewBuilder
+    func modalDestination(for item: ModalRoute?) -> some View {
+        switch item {
+        case .editProfile:
+            ProfileCoordinator(
+                profileManager: profileManager,
+                profileEditor: profileEditor,
+                moduleViewFactory: DefaultModuleViewFactory(),
+                modally: true,
+                path: $profilePath,
+                onDismiss: {
+                    present(nil)
+                }
+            )
+
+        case .editProviderEntity(let profile, let module, let provider):
+            ProviderEntitySelector(
+                profileManager: profileManager,
+                tunnel: tunnel,
+                profile: profile,
+                module: module,
+                provider: provider,
+                errorHandler: errorHandler
+            )
+
+        case .settings:
+            SettingsView(profileManager: profileManager)
+
+        case .about:
+            AboutRouterView(
+                profileManager: profileManager,
+                tunnel: tunnel
+            )
+
+        default:
+            EmptyView()
+        }
+    }
+
+    func enterDetail(of profile: Profile) {
+        profilePath = NavigationPath()
+        let isShared = profileManager.isRemotelyShared(profileWithId: profile.id)
+        profileEditor.editProfile(profile, isShared: isShared)
+        present(.editProfile)
+    }
+
+    func present(_ route: ModalRoute?) {
+        // XXX: this is a workaround for #791 on iOS 16
+        Task {
+            try await Task.sleep(for: .milliseconds(50))
+            modalRoute = route
+        }
+    }
+}
+
+#Preview {
+    AppCoordinator(
+        profileManager: .mock,
+        tunnel: .mock,
+        registry: Registry()
+    )
+    .withMockEnvironment()
 }

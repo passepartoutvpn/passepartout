@@ -15,22 +15,22 @@
     {
       "target" : {
         "containerPath" : "container:Passepartout\/Library",
-        "identifier" : "AppLibraryTests",
-        "name" : "AppLibraryTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Passepartout\/Library",
-        "identifier" : "AppUITests",
-        "name" : "AppUITests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Passepartout\/Library",
         "identifier" : "AppUIMainTests",
         "name" : "AppUIMainTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Passepartout\/Library",
+        "identifier" : "UILibraryTests",
+        "name" : "UILibraryTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Passepartout\/Library",
+        "identifier" : "CommonLibraryTests",
+        "name" : "CommonLibraryTests"
       }
     }
   ],

@@ -24,9 +24,9 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 extension DebugLogView {
     static func withApp(parameters: Constants.Log) -> DebugLogView {
@@ -35,7 +35,7 @@ extension DebugLogView {
         }
     }
 
-    static func withTunnel(_ tunnel: Tunnel, parameters: Constants.Log) -> DebugLogView {
+    static func withTunnel(_ tunnel: ExtendedTunnel, parameters: Constants.Log) -> DebugLogView {
         DebugLogView {
             await tunnel.currentLog(parameters: parameters)
         }
@@ -92,7 +92,7 @@ private extension DebugLogView {
 
     var copyButton: some View {
         Button {
-            copyToPasteboard(content)
+            Utils.copyToPasteboard(content)
         } label: {
             ThemeImage(.copy)
         }

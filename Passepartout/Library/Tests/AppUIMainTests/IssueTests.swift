@@ -24,6 +24,7 @@
 //
 
 @testable import AppUIMain
+import CommonLibrary
 import Foundation
 import XCTest
 

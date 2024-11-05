@@ -25,6 +25,8 @@
 
 #if os(iOS)
 
+import CommonAPI
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -164,10 +166,7 @@ private extension VPNProviderServerView.ServersSubview {
                 DisclosureGroup {
                     ForEach(servers, id: \.id, content: serverView)
                 } label: {
-                    HStack {
-                        ThemeCountryFlag(code: code)
-                        Text(code.localizedAsRegionCode ?? code)
-                    }
+                    ThemeCountryText(code)
                 }
             }
     }

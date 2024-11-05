@@ -32,6 +32,8 @@ public enum AppPreference: String {
 
     case logsPrivateData
 
+    case onlyShowsFavorites
+
     case profilesLayout
 
     case providerFavoriteServers

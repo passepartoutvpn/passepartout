@@ -23,10 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
+import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 struct ProfileListView: View, Routable, TunnelInstallationProviding {
 
@@ -43,7 +43,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
     var profileManager: ProfileManager
 
     @ObservedObject
-    var tunnel: Tunnel
+    var tunnel: ExtendedTunnel
 
     let interactiveManager: InteractiveManager
 

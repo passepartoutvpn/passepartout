@@ -23,8 +23,8 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
 import Combine
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
@@ -81,7 +81,7 @@ private extension VPNFiltersView {
             Text(Strings.Global.any)
                 .tag(nil as String?)
             ForEach(model.countries, id: \.code) {
-                Text($0.description)
+                ThemeCountryText($0.code, title: $0.description)
                     .tag($0.code as String?)
             }
         }

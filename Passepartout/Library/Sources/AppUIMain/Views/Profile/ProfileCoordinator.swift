@@ -23,10 +23,10 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AppLibrary
+import CommonLibrary
+import CommonUtils
 import PassepartoutKit
 import SwiftUI
-import UtilsLibrary
 
 struct ProfileCoordinator: View {
     struct Flow {
@@ -117,6 +117,9 @@ private extension ProfileCoordinator {
 
         case .onDemand:
             break
+
+        default:
+            fatalError("Unhandled module type: \(moduleType)")
         }
         guard paywallReason == nil else {
             return

@@ -23,18 +23,28 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-@_exported import AppUI
 import Foundation
+@_exported import UILibrary
 
-public enum AppUIMain: AppUIConfiguring {
-    public static func configure(with context: AppContext) {
-        assertMissingModuleImplementations()
-        AppUI.configure(with: context)
+public final class AppUIMain: UILibraryConfiguring {
+    private let isStartedFromLoginItem: Bool
+
+    public init(isStartedFromLoginItem: Bool) {
+        self.isStartedFromLoginItem = isStartedFromLoginItem
+    }
+
+    public func configure(with context: AppContext) {
+        assertMissingImplementations()
+
+        // keep this for login item because scenePhase is not triggered
+        if isStartedFromLoginItem {
+            context.onApplicationActive()
+        }
     }
 }
 
 private extension AppUIMain {
-    static func assertMissingModuleImplementations() {
+    func assertMissingImplementations() {
         let providerModuleTypes: Set<ModuleType> = [
             .openVPN
         ]

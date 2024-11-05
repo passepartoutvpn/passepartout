@@ -25,12 +25,16 @@
 
 #if os(macOS)
 
+import CommonLibrary
 import SwiftUI
 
 struct ProfileGeneralView: View {
 
     @ObservedObject
     var profileEditor: ProfileEditor
+
+    @State
+    private var paywallReason: PaywallReason?
 
     var body: some View {
         Form {
@@ -39,9 +43,16 @@ struct ProfileGeneralView: View {
                 placeholder: Strings.Placeholders.Profile.name
             )
             StorageSection(
-                profileEditor: profileEditor
+                profileEditor: profileEditor,
+                paywallReason: $paywallReason
             )
+            AppleTVSection(
+                profileEditor: profileEditor,
+                paywallReason: $paywallReason
+            )
+            UUIDSection(uuid: profileEditor.profile.id)
         }
+        .modifier(PaywallModifier(reason: $paywallReason))
         .themeForm()
     }
 }

@@ -23,16 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonAPI
+import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
 struct ProviderContentModifier<Entity, ProviderRows>: ViewModifier where Entity: ProviderEntity, Entity.Configuration: ProviderConfigurationIdentifiable & Codable, ProviderRows: View {
 
     @EnvironmentObject
-    private var providerManager: ProviderManager
+    private var iapManager: IAPManager
 
     @EnvironmentObject
-    private var iapManager: IAPManager
+    private var providerManager: ProviderManager
 
     let apis: [APIMapper]
 
@@ -130,17 +132,14 @@ private extension ProviderContentModifier {
         )
     }
 
-    @ViewBuilder
     var purchaseButton: some View {
-        switch iapManager.paywallReason(forFeature: .providers) {
-        case .purchase(let appFeature):
-            Button(Strings.Providers.Picker.purchase) {
-                paywallReason = .purchase(appFeature)
-            }
-
-        default:
-            EmptyView()
-        }
+        EmptyView()
+            .modifier(PurchaseButtonModifier(
+                Strings.Providers.Picker.purchase,
+                feature: .providers,
+                showsIfRestricted: true,
+                paywallReason: $paywallReason
+            ))
     }
 
     func refreshButton<Label>(label: () -> Label) -> some View where Label: View {

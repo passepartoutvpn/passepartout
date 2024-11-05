@@ -14,10 +14,6 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "AppLibrary",
-            targets: ["AppLibrary"]
-        ),
-        .library(
             name: "AppUI",
             targets: ["AppUI"]
         ),
@@ -30,13 +26,21 @@ let package = Package(
             targets: ["AppUITV"]
         ),
         .library(
+            name: "CommonLibrary",
+            targets: ["CommonLibrary"]
+        ),
+        .library(
             name: "TunnelLibrary",
             targets: ["CommonLibrary"]
+        ),
+        .library(
+            name: "UILibrary",
+            targets: ["UILibrary"]
         )
     ],
     dependencies: [
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", from: "0.9.0"),
-        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "8b4c47f716120fab3f219593cf4ae0e6e2c86677"),
+        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source", revision: "2b639620b371181fa56594296918b09acf528058"),
 //        .package(path: "../../../passepartoutkit-source"),
         .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", from: "0.9.1"),
 //        .package(url: "git@github.com:passepartoutvpn/passepartoutkit-source-openvpn-openssl", revision: "031863a1cd683962a7dfe68e20b91fa820a1ecce"),
@@ -57,8 +61,7 @@ let package = Package(
             name: "AppDataProfiles",
             dependencies: [
                 "AppData",
-                "AppLibrary",
-                "UtilsLibrary"
+                "CommonLibrary"
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
@@ -68,35 +71,24 @@ let package = Package(
             name: "AppDataProviders",
             dependencies: [
                 "AppData",
-                "AppLibrary",
-                "UtilsLibrary"
+                "CommonLibrary"
             ],
             resources: [
                 .process("Providers.xcdatamodeld")
             ]
         ),
         .target(
-            name: "AppLibrary",
-            dependencies: ["CommonLibrary"]
-        ),
-        .target(
             name: "AppUI",
             dependencies: [
-                "AppDataProfiles",
-                "AppDataProviders",
-                "AppLibrary",
-                "Kvitto",
-                "UtilsLibrary"
-            ],
-            resources: [
-                .process("Resources")
+                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
+                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
             ]
         ),
         .target(
             name: "AppUIMain",
             dependencies: [
-                "AppUI",
-                "LegacyV2"
+                "LegacyV2",
+                "UILibrary"
             ],
             resources: [
                 .process("Resources")
@@ -104,24 +96,35 @@ let package = Package(
         ),
         .target(
             name: "AppUITV",
-            dependencies: ["AppUI"]
+            dependencies: ["UILibrary"]
+        ),
+        .target(
+            name: "CommonAPI",
+            dependencies: ["CommonLibrary"],
+            resources: [
+                .copy("API")
+            ]
         ),
         .target(
             name: "CommonLibrary",
             dependencies: [
+                "CommonUtils",
+                "Kvitto",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source"),
                 .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-source-openvpn-openssl"),
                 .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")
             ],
             resources: [
-                .copy("API"),
                 .process("Resources")
             ]
         ),
         .target(
+            name: "CommonUtils"
+        ),
+        .target(
             name: "LegacyV2",
             dependencies: [
-                "UtilsLibrary",
+                "CommonUtils",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
@@ -129,19 +132,28 @@ let package = Package(
             ]
         ),
         .target(
-            name: "UtilsLibrary"
-        ),
-        .testTarget(
-            name: "AppLibraryTests",
-            dependencies: ["AppLibrary"]
+            name: "UILibrary",
+            dependencies: [
+                "AppDataProfiles",
+                "AppDataProviders",
+                "CommonAPI",
+                "CommonLibrary"
+            ],
+            resources: [
+                .process("Resources")
+            ]
         ),
         .testTarget(
             name: "AppUIMainTests",
             dependencies: ["AppUIMain"]
         ),
         .testTarget(
-            name: "AppUITests",
-            dependencies: ["AppUI"]
+            name: "CommonLibraryTests",
+            dependencies: ["CommonLibrary"]
+        ),
+        .testTarget(
+            name: "UILibraryTests",
+            dependencies: ["UILibrary"]
         )
     ]
 )
