@@ -49,7 +49,7 @@ public actor MockAppProductHelper: AppProductHelper {
             $0[$1] = InAppProduct(
                 productIdentifier: $1.rawValue,
                 localizedTitle: $1.rawValue,
-                localizedPrice: "10.0",
+                localizedPrice: "€10.0",
                 native: $1
             )
         }
