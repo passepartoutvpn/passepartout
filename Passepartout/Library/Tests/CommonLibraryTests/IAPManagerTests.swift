@@ -24,6 +24,7 @@
 //
 
 @testable import CommonLibrary
+import CommonUtils
 import Foundation
 import XCTest
 
@@ -257,5 +258,22 @@ extension IAPManagerTests {
             XCTAssertTrue(sut.isEligible(for: $0))
         }
         XCTAssertTrue(sut.isEligible(for: .appleTV))
+    }
+}
+
+private extension IAPManager {
+    convenience init(
+        customUserLevel: AppUserLevel? = nil,
+        receiptReader: any AppReceiptReader,
+        unrestrictedFeatures: Set<AppFeature> = [],
+        productsAtBuild: BuildProducts<AppProduct>? = nil
+    ) {
+        self.init(
+            customUserLevel: customUserLevel,
+            inAppHelper: MockAppProductHelper(),
+            receiptReader: receiptReader,
+            unrestrictedFeatures: unrestrictedFeatures,
+            productsAtBuild: productsAtBuild
+        )
     }
 }
