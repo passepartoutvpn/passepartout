@@ -103,15 +103,6 @@ extension View {
 #endif
     }
 
-#if !os(tvOS)
-    public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
-        modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
-    }
-
-    public func themePlainButton(action: @escaping () -> Void) -> some View {
-        modifier(ThemePlainButtonModifier(action: action))
-    }
-
     @ViewBuilder
     public func themeMultiLine(_ isMultiLine: Bool) -> some View {
         if isMultiLine {
@@ -136,6 +127,15 @@ extension View {
 
     public func themeAnimation<T>(on value: T, category: ThemeAnimationCategory) -> some View where T: Equatable {
         modifier(ThemeAnimationModifier(value: value, category: category))
+    }
+
+#if !os(tvOS)
+    public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
+        modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
+    }
+
+    public func themePlainButton(action: @escaping () -> Void) -> some View {
+        modifier(ThemePlainButtonModifier(action: action))
     }
 
     public func themeTrailingValue(_ value: CustomStringConvertible?, truncationMode: Text.TruncationMode = .tail) -> some View {
@@ -298,16 +298,6 @@ struct ThemeRowWithFooterModifier: ViewModifier {
     let footer: String?
 }
 
-#if !os(tvOS)
-
-struct ThemeWindowModifier: ViewModifier {
-    let size: CGSize
-}
-
-struct ThemePlainButtonModifier: ViewModifier {
-    let action: () -> Void
-}
-
 struct ThemeEmptyMessageModifier: ViewModifier {
 
     @EnvironmentObject
@@ -350,6 +340,16 @@ struct ThemeAnimationModifier<T>: ViewModifier where T: Equatable {
         content
             .animation(theme.animation(for: category), value: value)
     }
+}
+
+#if !os(tvOS)
+
+struct ThemeWindowModifier: ViewModifier {
+    let size: CGSize
+}
+
+struct ThemePlainButtonModifier: ViewModifier {
+    let action: () -> Void
 }
 
 struct ThemeTrailingValueModifier: ViewModifier {
