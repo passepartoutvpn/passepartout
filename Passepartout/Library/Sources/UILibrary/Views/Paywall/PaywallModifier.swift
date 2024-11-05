@@ -35,7 +35,7 @@ public struct PaywallModifier: ViewModifier {
     private var isPresentingRestricted = false
 
     @State
-    private var paywallFeature: AppFeature?
+    private var paywallArguments: PaywallArguments?
 
     public init(reason: Binding<PaywallReason?>) {
         _reason = reason
@@ -56,9 +56,13 @@ public struct PaywallModifier: ViewModifier {
                     Text(Strings.Alerts.Iap.Restricted.message)
                 }
             )
-            .themeModal(item: $paywallFeature) { feature in
+            .themeModal(item: $paywallArguments) { args in
                 NavigationStack {
-                    PaywallView(isPresented: isPresentingPurchase, feature: feature)
+                    PaywallView(
+                        isPresented: isPresentingPurchase,
+                        feature: args.feature,
+                        suggestedProduct: args.product
+                    )
                 }
             }
             .onChange(of: reason) {
@@ -66,8 +70,8 @@ public struct PaywallModifier: ViewModifier {
                 case .restricted:
                     isPresentingRestricted = true
 
-                case .purchase(let feature):
-                    paywallFeature = feature
+                case .purchase(let feature, let product):
+                    paywallArguments = PaywallArguments(feature: feature, product: product)
 
                 default:
                     break
@@ -79,11 +83,23 @@ public struct PaywallModifier: ViewModifier {
 private extension PaywallModifier {
     var isPresentingPurchase: Binding<Bool> {
         Binding {
-            paywallFeature != nil
+            paywallArguments != nil
         } set: {
             if !$0 {
-                paywallFeature = nil
+                // make sure to reset this to allow paywall to appear again
+                reason = nil
+                paywallArguments = nil
             }
         }
+    }
+}
+
+private struct PaywallArguments: Identifiable {
+    let feature: AppFeature
+
+    let product: AppProduct?
+
+    var id: String {
+        feature.id
     }
 }

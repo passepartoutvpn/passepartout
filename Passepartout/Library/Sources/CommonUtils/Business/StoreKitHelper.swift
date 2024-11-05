@@ -83,12 +83,12 @@ public final class StoreKitHelper<PID>: InAppHelper where PID: RawRepresentable 
         }
     }
 
-    // FIXME: #424, implement purchase
+    // FIXME: #585, implement purchase
     public func purchase(productWithIdentifier productIdentifier: ProductIdentifier) async throws -> InAppPurchaseResult {
         fatalError("purchase")
     }
 
-    // FIXME: #424, implement restore purchases
+    // FIXME: #585, implement restore purchases
     public func restorePurchases() async throws {
         fatalError("restorePurchases")
     }

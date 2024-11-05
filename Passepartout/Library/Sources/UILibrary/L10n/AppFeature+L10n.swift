@@ -1,8 +1,8 @@
 //
-//  PaywallReason.swift
+//  AppFeature+L10n.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/14/24.
+//  Created by Davide De Rosa on 11/5/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,10 +23,36 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
+import CommonUtils
 import Foundation
 
-public enum PaywallReason: Hashable {
-    case restricted
+extension AppFeature: LocalizableEntity {
+    public var localizedDescription: String {
+        switch self {
+        case .appleTV:
+            return Strings.Unlocalized.appleTV
 
-    case purchase(AppFeature, AppProduct?)
+        case .dns:
+            return Strings.Unlocalized.dns
+
+        case .httpProxy:
+            return Strings.Unlocalized.httpProxy
+
+        case .interactiveLogin:
+            return Strings.Features.interactiveLogin
+
+        case .onDemand:
+            return Strings.Global.onDemand
+
+        case .providers:
+            return Strings.Features.providers
+
+        case .routing:
+            return Strings.Global.routing
+
+        case .siri:
+            return Strings.Features.siri
+        }
+    }
 }

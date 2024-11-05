@@ -174,6 +174,14 @@ public enum Strings {
       public static let tls = Strings.tr("Localizable", "errors.tunnel.tls", fallback: "TLS failed")
     }
   }
+  public enum Features {
+    /// Interactive login
+    public static let interactiveLogin = Strings.tr("Localizable", "features.interactive_login", fallback: "Interactive login")
+    /// Providers
+    public static let providers = Strings.tr("Localizable", "features.providers", fallback: "Providers")
+    /// Shortcuts
+    public static let siri = Strings.tr("Localizable", "features.siri", fallback: "Shortcuts")
+  }
   public enum Global {
     /// About
     public static let about = Strings.tr("Localizable", "global.about", fallback: "About")

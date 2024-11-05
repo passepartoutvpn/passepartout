@@ -27,10 +27,17 @@ import CommonUtils
 import Foundation
 
 public actor MockAppProductHelper: AppProductHelper {
+    private let build: Int
+
     public private(set) var products: [AppProduct: InAppProduct]
 
-    public init() {
+    public nonisolated let receiptReader: MockAppReceiptReader
+
+    // set .max to skip entitled products
+    public init(build: Int = .max) {
+        self.build = build
         products = [:]
+        receiptReader = MockAppReceiptReader()
     }
 
     public nonisolated var canMakePurchases: Bool {
@@ -42,14 +49,16 @@ public actor MockAppProductHelper: AppProductHelper {
             $0[$1] = InAppProduct(
                 productIdentifier: $1.rawValue,
                 localizedTitle: $1.rawValue,
-                localizedPrice: "10.0",
+                localizedPrice: "€10.0",
                 native: $1
             )
         }
+        await receiptReader.setReceipt(withBuild: build, products: [])
     }
 
     public func purchase(productWithIdentifier productIdentifier: AppProduct) async throws -> InAppPurchaseResult {
-        .done
+        await receiptReader.addPurchase(with: productIdentifier)
+        return .done
     }
 
     public func restorePurchases() async throws {

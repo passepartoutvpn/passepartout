@@ -31,6 +31,9 @@ extension AppProduct {
 
         public static let appleTV = AppProduct(featureId: "appletv")
 
+        // FIXME: #585, add in-app product
+        public static let interactiveLogin = AppProduct(featureId: "interactive_login")
+
         public static let networkSettings = AppProduct(featureId: "network_settings")
 
         public static let siriShortcuts = AppProduct(featureId: "siri")
@@ -40,6 +43,7 @@ extension AppProduct {
         static let all: [AppProduct] = [
             .Features.allProviders,
             .Features.appleTV,
+            .Features.interactiveLogin,
             .Features.networkSettings,
             .Features.siriShortcuts,
             .Features.trustedNetworks

@@ -252,6 +252,10 @@
 
 // MARK: - Paywalls
 
+"features.interactive_login" = "Interactive login";
+"features.providers" = "Providers";
+"features.siri" = "Shortcuts";
+
 "modules.general.sections.apple_tv.footer.purchase.1" = "TV profiles expire after %d minutes.";
 "modules.general.sections.apple_tv.footer.purchase.2" = "Purchase to drop the restriction.";
 "modules.general.rows.apple_tv.purchase" = "Drop time restriction";

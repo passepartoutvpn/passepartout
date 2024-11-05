@@ -27,11 +27,11 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-// FIXME: #424, reload receipt + objectWillChange on purchase/transactions
-
 @MainActor
 public final class IAPManager: ObservableObject {
     private let customUserLevel: AppUserLevel?
+
+    private let inAppHelper: any AppProductHelper
 
     private let receiptReader: any AppReceiptReader
 
@@ -49,17 +49,56 @@ public final class IAPManager: ObservableObject {
 
     public init(
         customUserLevel: AppUserLevel? = nil,
+        inAppHelper: any AppProductHelper,
         receiptReader: any AppReceiptReader,
         unrestrictedFeatures: Set<AppFeature> = [],
         productsAtBuild: BuildProducts<AppProduct>? = nil
     ) {
         self.customUserLevel = customUserLevel
+        self.inAppHelper = inAppHelper
         self.receiptReader = receiptReader
         self.unrestrictedFeatures = unrestrictedFeatures
         self.productsAtBuild = productsAtBuild
         userLevel = .undefined
         purchasedProducts = []
         eligibleFeatures = []
+
+        Task {
+            do {
+                try await inAppHelper.fetchProducts()
+            } catch {
+                pp_log(.app, .error, "Unable to fetch in-app products: \(error)")
+            }
+        }
+    }
+
+    public func products(for identifiers: Set<AppProduct>) async -> [InAppProduct] {
+        let raw = identifiers.map(\.rawValue)
+        return await inAppHelper.products
+            .values
+            .filter {
+                raw.contains($0.productIdentifier)
+            }
+    }
+
+    public func purchase(_ inAppProduct: InAppProduct) async throws -> InAppPurchaseResult {
+        guard let product = AppProduct(rawValue: inAppProduct.productIdentifier) else {
+            return .notFound
+        }
+        return try await purchase(product)
+    }
+
+    public func purchase(_ product: AppProduct) async throws -> InAppPurchaseResult {
+        let result = try await inAppHelper.purchase(productWithIdentifier: product)
+        if result == .done {
+            await reloadReceipt()
+        }
+        return result
+    }
+
+    public func restorePurchases() async throws {
+        try await inAppHelper.restorePurchases()
+        await reloadReceipt()
     }
 
     public func reloadReceipt() async {
@@ -166,11 +205,11 @@ extension IAPManager {
 #endif
     }
 
-    public func paywallReason(forFeature feature: AppFeature) -> PaywallReason? {
+    public func paywallReason(forFeature feature: AppFeature, suggesting product: AppProduct?) -> PaywallReason? {
         if isEligible(for: feature) {
             return nil
         }
-        return isRestricted ? .restricted : .purchase(feature)
+        return isRestricted ? .restricted : .purchase(feature, product)
     }
 
     public func isPayingUser() -> Bool {

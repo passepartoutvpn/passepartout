@@ -63,6 +63,7 @@ struct OnDemandView: View, ModuleDraftEditing {
                 .modifier(PurchaseButtonModifier(
                     Strings.Modules.OnDemand.purchase,
                     feature: .onDemand,
+                    suggesting: nil,
                     showsIfRestricted: false,
                     paywallReason: $paywallReason
                 ))

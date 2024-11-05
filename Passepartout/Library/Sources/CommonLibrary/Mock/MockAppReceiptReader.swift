@@ -35,13 +35,38 @@ public actor MockAppReceiptReader: AppReceiptReader {
 
     public func setReceipt(withBuild build: Int, products: [AppProduct], cancelledProducts: Set<AppProduct> = []) {
         receipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: products.map {
-            .init(productIdentifier: $0.rawValue,
-                  cancellationDate: cancelledProducts.contains($0) ? Date() : nil,
-                  originalPurchaseDate: nil)
+            .init(
+                productIdentifier: $0.rawValue,
+                cancellationDate: cancelledProducts.contains($0) ? Date() : nil,
+                originalPurchaseDate: nil
+            )
         })
     }
 
     public func receipt(for userLevel: AppUserLevel) -> InAppReceipt? {
         receipt
+    }
+
+    public func addPurchase(with product: AppProduct) {
+        guard let receipt else {
+            fatalError("Call setReceipt() first")
+        }
+        var purchaseReceipts = receipt.purchaseReceipts ?? []
+        purchaseReceipts.append(product.purchaseReceipt)
+        let newReceipt = InAppReceipt(
+            originalBuildNumber: receipt.originalBuildNumber,
+            purchaseReceipts: purchaseReceipts
+        )
+        self.receipt = newReceipt
+    }
+}
+
+private extension AppProduct {
+    var purchaseReceipt: InAppReceipt.PurchaseReceipt {
+        .init(
+            productIdentifier: rawValue,
+            cancellationDate: nil,
+            originalPurchaseDate: nil
+        )
     }
 }
