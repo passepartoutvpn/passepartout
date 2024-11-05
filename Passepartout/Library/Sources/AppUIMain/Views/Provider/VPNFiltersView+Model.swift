@@ -24,6 +24,7 @@
 //
 
 import Combine
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 
@@ -32,6 +33,8 @@ extension VPNFiltersView {
     @MainActor
     final class Model: ObservableObject {
         typealias CodeWithDescription = (code: String, description: String)
+
+        private let defaults: UserDefaults
 
         private var options: VPNFilterOptions
 
@@ -45,22 +48,27 @@ extension VPNFiltersView {
         private(set) var presets: [AnyVPNPreset]
 
         @Published
-        var filters = VPNFilters()
+        var filters: VPNFilters
 
         @Published
-        var onlyShowsFavorites = false
+        var onlyShowsFavorites: Bool
 
-        let filtersDidChange = PassthroughSubject<VPNFilters, Never>()
+        let filtersDidChange: PassthroughSubject<VPNFilters, Never>
 
-        let onlyShowsFavoritesDidChange = PassthroughSubject<Bool, Never>()
+        let onlyShowsFavoritesDidChange: PassthroughSubject<Bool, Never>
 
         private var subscriptions: Set<AnyCancellable>
 
-        init() {
+        init(defaults: UserDefaults = .standard) {
+            self.defaults = defaults
             options = VPNFilterOptions()
             categories = []
             countries = []
             presets = []
+            filters = VPNFilters()
+            onlyShowsFavorites = false
+            filtersDidChange = PassthroughSubject()
+            onlyShowsFavoritesDidChange = PassthroughSubject()
             subscriptions = []
 
             observeObjects()
@@ -136,14 +144,30 @@ private extension VPNFiltersView.Model {
             .store(in: &subscriptions)
 
         $onlyShowsFavorites
+            .dropFirst()
             .sink { [weak self] in
+                self?.defaults.onlyShowsFavorites = $0
                 self?.onlyShowsFavoritesDidChange.send($0)
             }
             .store(in: &subscriptions)
+
+        // send initial value
+        onlyShowsFavorites = defaults.onlyShowsFavorites
     }
 }
 
 // MARK: -
+
+private extension UserDefaults {
+    var onlyShowsFavorites: Bool {
+        get {
+            bool(forKey: AppPreference.onlyShowsFavorites.key)
+        }
+        set {
+            set(newValue, forKey: AppPreference.onlyShowsFavorites.key)
+        }
+    }
+}
 
 private extension String {
     var asCountryCodeWithDescription: VPNFiltersView.Model.CodeWithDescription {
