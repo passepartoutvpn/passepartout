@@ -59,9 +59,19 @@ public final class AppContext: ObservableObject {
 
         Task {
             await iapManager.reloadReceipt()
-            self.tunnel.observeObjects()
             profileManager.observeObjects()
             observeObjects()
+        }
+    }
+
+    public func onApplicationActive() {
+        Task {
+            do {
+                pp_log(.app, .notice, "Prepare tunnel and purge stale data")
+                try await tunnel.prepare(purge: true)
+            } catch {
+                pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
+            }
         }
     }
 }
