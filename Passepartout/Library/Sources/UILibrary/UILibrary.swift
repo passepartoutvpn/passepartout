@@ -28,6 +28,7 @@ import CommonLibrary
 import Foundation
 import PassepartoutKit
 
+@MainActor
 public protocol UILibraryConfiguring {
     func configure(with context: AppContext)
 }

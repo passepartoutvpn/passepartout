@@ -38,9 +38,7 @@ public final class AppUIMain: UILibraryConfiguring {
 
         // keep this for login item because scenePhase is not triggered
         if isStartedFromLoginItem {
-            Task {
-                try await context.tunnel.prepare(purge: true)
-            }
+            context.onApplicationActive()
         }
     }
 }
