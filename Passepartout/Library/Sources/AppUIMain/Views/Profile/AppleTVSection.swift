@@ -59,7 +59,7 @@ private extension AppleTVSection {
             .modifier(PurchaseButtonModifier(
                 Strings.Modules.General.Rows.AppleTv.purchase,
                 feature: .appleTV,
-                products: [.Features.appleTV],
+                suggesting: [.Features.appleTV],
                 showsIfRestricted: true,
                 paywallReason: $paywallReason
             ))

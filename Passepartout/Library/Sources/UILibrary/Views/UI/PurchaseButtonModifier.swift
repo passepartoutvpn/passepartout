@@ -48,7 +48,7 @@ public struct PurchaseButtonModifier: ViewModifier {
         _ title: String,
         label: String? = nil,
         feature: AppFeature,
-        products: Set<AppProduct>,
+        suggesting products: Set<AppProduct>,
         showsIfRestricted: Bool,
         paywallReason: Binding<PaywallReason?>
     ) {
