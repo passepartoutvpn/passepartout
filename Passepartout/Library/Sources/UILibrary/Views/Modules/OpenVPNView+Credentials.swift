@@ -84,6 +84,7 @@ public struct OpenVPNCredentialsView: View {
             inputSection
         }
         .themeManualInput()
+        .modifier(PaywallModifier(reason: $paywallReason))
         .onLoad {
             builder = credentials?.builder() ?? OpenVPN.Credentials.Builder()
             builder.otp = nil

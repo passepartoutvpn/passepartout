@@ -234,7 +234,6 @@ private extension OpenVPNView {
             .navigationTitle(Strings.Modules.Openvpn.credentials)
             .themeForm()
             .themeAnimation(on: draft.wrappedValue.isInteractive, category: .modules)
-            .modifier(PaywallModifier(reason: $paywallReason))
         }
     }
 }
