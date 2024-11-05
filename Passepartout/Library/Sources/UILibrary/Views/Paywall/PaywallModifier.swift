@@ -26,10 +26,10 @@
 import CommonLibrary
 import SwiftUI
 
-struct PaywallModifier: ViewModifier {
+public struct PaywallModifier: ViewModifier {
 
     @Binding
-    var reason: PaywallReason?
+    private var reason: PaywallReason?
 
     @State
     private var isPresentingRestricted = false
@@ -37,7 +37,11 @@ struct PaywallModifier: ViewModifier {
     @State
     private var paywallFeature: AppFeature?
 
-    func body(content: Content) -> some View {
+    public init(reason: Binding<PaywallReason?>) {
+        _reason = reason
+    }
+
+    public func body(content: Content) -> some View {
         content
             .alert(
                 Strings.Alerts.Iap.Restricted.title,
