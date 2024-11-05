@@ -170,8 +170,9 @@
 // MARK: - Module views
 
 "modules.general.sections.storage.footer" = "Profiles are stored to iCloud encrypted.";
+"modules.general.sections.apple_tv.footer" = "Requires iCloud sharing.";
 "modules.general.rows.icloud_sharing" = "Shared on iCloud";
-"modules.general.rows.apple_tv" = "Shared on %@";
+"modules.general.rows.apple_tv" = "%@";
 "modules.general.rows.import_from_file" = "Import from file...";
 
 "modules.dns.servers.add" = "Add address";
@@ -251,8 +252,9 @@
 
 // MARK: - Paywalls
 
-"modules.general.rows.icloud_sharing.purchase" = "Share on iCloud";
-"modules.general.rows.apple_tv.purchase" = "Share on %@";
+"modules.general.sections.apple_tv.footer.purchase.1" = "TV profiles expire after %d minutes.";
+"modules.general.sections.apple_tv.footer.purchase.2" = "Purchase to drop the restriction.";
+"modules.general.rows.apple_tv.purchase" = "Drop time restriction";
 "modules.on_demand.purchase" = "Add on-demand rules";
 "modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 "providers.picker.purchase" = "Add more providers";
@@ -268,6 +270,7 @@
 // MARK: - Errors
 
 "errors.app.empty_profile_name" = "Profile name is empty.";
+"errors.app.expired_profile" = "Profile is expired.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
 "errors.app.provider.required" = "No provider selected.";
 "errors.app.default" = "Unable to complete operation.";
@@ -285,6 +288,7 @@
 "errors.tunnel.compression" = "Compression unsupported";
 "errors.tunnel.dns" = "DNS failed";
 "errors.tunnel.encryption" = "Encryption failed";
+"errors.tunnel.expired" = "Expired";
 "errors.tunnel.routing" = "Missing routing";
 "errors.tunnel.shutdown" = "Server shutdown";
 "errors.tunnel.timeout" = "Timeout";

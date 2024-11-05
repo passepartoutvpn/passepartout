@@ -38,8 +38,7 @@ extension AppContext {
             receiptReader: MockAppReceiptReader(),
             unrestrictedFeatures: [
                 .interactiveLogin,
-                .onDemand,
-                .sharing
+                .onDemand
             ],
             productsAtBuild: { _ in
                 []

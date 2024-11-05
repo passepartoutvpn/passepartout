@@ -34,72 +34,33 @@ struct StorageSection: View {
     @ObservedObject
     var profileEditor: ProfileEditor
 
-    @State
-    private var paywallReason: PaywallReason?
+    @Binding
+    var paywallReason: PaywallReason?
 
     var body: some View {
         debugChanges()
         return Group {
             sharingToggle
-            tvToggle
-            ThemeCopiableText(
-                title: Strings.Unlocalized.uuid,
-                value: profileEditor.profile.id,
-                valueView: {
-                    Text($0.flatString.localizedDescription(style: .quartets))
-                        .monospaced()
-                }
-            )
         }
         .themeSection(
             header: Strings.Global.storage,
             footer: Strings.Modules.General.Sections.Storage.footer
         )
-        .modifier(PaywallModifier(reason: $paywallReason))
     }
 }
 
 private extension StorageSection {
-
-    @ViewBuilder
     var sharingToggle: some View {
-        switch iapManager.paywallReason(forFeature: .sharing) {
-        case .purchase(let appFeature):
-            Button(Strings.Modules.General.Rows.IcloudSharing.purchase) {
-                paywallReason = .purchase(appFeature)
-            }
-
-        case .restricted:
-            EmptyView()
-
-        default:
-            Toggle(Strings.Modules.General.Rows.icloudSharing, isOn: $profileEditor.isShared)
-        }
-    }
-
-    @ViewBuilder
-    var tvToggle: some View {
-        switch iapManager.paywallReason(forFeature: .appleTV) {
-        case .purchase(let appFeature):
-            Button(Strings.Modules.General.Rows.AppleTv.purchase(Strings.Unlocalized.appleTV)) {
-                paywallReason = .purchase(appFeature)
-            }
-
-        case .restricted:
-            EmptyView()
-
-        default:
-            Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
-                .disabled(!profileEditor.isShared)
-        }
+        Toggle(Strings.Modules.General.Rows.icloudSharing, isOn: $profileEditor.isShared)
     }
 }
 
 #Preview {
     Form {
         StorageSection(
-            profileEditor: ProfileEditor()
-        )
+            profileEditor: ProfileEditor(),
+            paywallReason: .constant(nil)
+       )
     }
     .themeForm()
     .withMockEnvironment()

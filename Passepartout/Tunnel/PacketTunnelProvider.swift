@@ -43,6 +43,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 registry: .shared,
                 environment: .shared
             )
+            if let expirationDate = fwd?.profile.attributes.expirationDate {
+                try checkExpirationDate(expirationDate, environment: .shared)
+            }
             try await fwd?.startTunnel(options: options)
         } catch {
             pp_log(.app, .fault, "Unable to start tunnel: \(error)")
@@ -72,5 +75,28 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
     override func sleep() async {
         await fwd?.sleep()
+    }
+}
+
+private extension PacketTunnelProvider {
+    func checkExpirationDate(_ expirationDate: Date, environment: TunnelEnvironment) throws {
+        let error = PassepartoutError(.App.expiredProfile)
+
+        // already expired?
+        let delay = Int(expirationDate.timeIntervalSinceNow)
+        if delay < .zero {
+            pp_log(.app, .error, "Tunnel expired on \(expirationDate)")
+            environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
+            throw error
+        }
+
+        // schedule connection expiration
+        Task { [weak self] in
+            pp_log(.app, .notice, "Schedule tunnel expiration on \(expirationDate) (\(delay) seconds from now)")
+            try? await Task.sleep(for: .seconds(delay))
+            pp_log(.app, .error, "Tunnel expired on \(expirationDate)")
+            environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
+            self?.cancelTunnelWithError(error)
+        }
     }
 }

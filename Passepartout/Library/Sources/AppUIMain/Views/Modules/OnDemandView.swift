@@ -82,9 +82,9 @@ private extension OnDemandView {
     @ViewBuilder
     var restrictedArea: some View {
         switch iapManager.paywallReason(forFeature: .onDemand) {
-        case .purchase(let appFeature):
+        case .purchase(let feature):
             Button(Strings.Modules.OnDemand.purchase) {
-                paywallReason = .purchase(appFeature)
+                paywallReason = .purchase(feature)
             }
 
         case .restricted:

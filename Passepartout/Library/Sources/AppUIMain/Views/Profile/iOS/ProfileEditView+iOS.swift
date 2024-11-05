@@ -45,6 +45,9 @@ struct ProfileEditView: View, Routable {
     @State
     private var malformedModuleIds: [UUID] = []
 
+    @State
+    private var paywallReason: PaywallReason?
+
     var body: some View {
         debugChanges()
         return List {
@@ -52,21 +55,18 @@ struct ProfileEditView: View, Routable {
                 name: $profileEditor.profile.name,
                 placeholder: Strings.Placeholders.Profile.name
             )
-            Group {
-                ForEach(profileEditor.modules, id: \.id, content: moduleRow)
-                    .onMove(perform: moveModules)
-                    .onDelete(perform: removeModules)
-
-                addModuleButton
-            }
-            .themeSection(
-                header: Strings.Global.modules,
-                footer: Strings.Views.Profile.ModuleList.Section.footer
-            )
+            modulesSection
             StorageSection(
-                profileEditor: profileEditor
+                profileEditor: profileEditor,
+                paywallReason: $paywallReason
             )
+            AppleTVSection(
+                profileEditor: profileEditor,
+                paywallReason: $paywallReason
+            )
+            UUIDSection(uuid: profileEditor.profile.id)
         }
+        .modifier(PaywallModifier(reason: $paywallReason))
         .toolbar(content: toolbarContent)
         .navigationTitle(Strings.Global.profile)
         .navigationBarBackButtonHidden(true)
@@ -93,6 +93,20 @@ private extension ProfileEditView {
                 flow?.onCancelEditing()
             }
         }
+    }
+
+    var modulesSection: some View {
+        Group {
+            ForEach(profileEditor.modules, id: \.id, content: moduleRow)
+                .onMove(perform: moveModules)
+                .onDelete(perform: removeModules)
+
+            addModuleButton
+        }
+        .themeSection(
+            header: Strings.Global.modules,
+            footer: Strings.Views.Profile.ModuleList.Section.footer
+        )
     }
 
     func moduleRow(for module: any ModuleBuilder) -> some View {

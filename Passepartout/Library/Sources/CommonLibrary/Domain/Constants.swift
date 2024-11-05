@@ -97,6 +97,8 @@ public struct Constants: Decodable, Sendable {
         public let profileTitleFormat: String
 
         public let refreshInterval: TimeInterval
+
+        public let tvExpirationMinutes: Int
     }
 
     public struct API: Decodable, Sendable {

@@ -1,8 +1,8 @@
 //
-//  AppFeature.swift
+//  UUIDSection.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/10/24.
+//  Created by Davide De Rosa on 11/4/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,37 +23,21 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import SwiftUI
 
-public enum AppFeature: String {
-    case appleTV
+struct UUIDSection: View {
+    let uuid: UUID
 
-    case dns
-
-    case httpProxy
-
-    case interactiveLogin
-
-    case onDemand
-
-    case providers
-
-    case routing
-
-    case siri
-
-    public static let fullVersionFeaturesV2: [AppFeature] = [
-        .dns,
-        .httpProxy,
-        .onDemand,
-        .providers,
-        .routing,
-        .siri
-    ]
-}
-
-extension AppFeature: Identifiable {
-    public var id: String {
-        rawValue
+    var body: some View {
+        Section {
+            ThemeCopiableText(
+                title: Strings.Unlocalized.uuid,
+                value: uuid,
+                valueView: {
+                    Text($0.flatString.localizedDescription(style: .quartets))
+                        .monospaced()
+                }
+            )
+        }
     }
 }

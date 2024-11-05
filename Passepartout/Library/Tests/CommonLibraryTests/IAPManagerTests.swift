@@ -96,7 +96,6 @@ extension IAPManagerTests {
         XCTAssertTrue(sut.isEligible(for: .httpProxy))
         XCTAssertFalse(sut.isEligible(for: .onDemand))
         XCTAssertTrue(sut.isEligible(for: .routing))
-        XCTAssertFalse(sut.isEligible(for: .sharing))
         XCTAssertTrue(sut.isEligible(for: .siri))
         XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
     }

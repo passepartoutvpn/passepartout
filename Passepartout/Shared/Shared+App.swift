@@ -41,7 +41,7 @@ extension AppContext {
             customUserLevel: Configuration.IAPManager.customUserLevel,
             receiptReader: KvittoReceiptReader(),
             // FIXME: #662, omit unrestrictedFeatures on release!
-            unrestrictedFeatures: [.interactiveLogin, .sharing],
+            unrestrictedFeatures: [.interactiveLogin],
             productsAtBuild: Configuration.IAPManager.productsAtBuild
         )
         let processor = ProfileProcessor(
@@ -52,8 +52,26 @@ extension AppContext {
             isIncluded: { _, profile in
                 Configuration.ProfileManager.isProfileIncluded(profile)
             },
-            willSave: { _, builder in
-                builder
+            willSave: { iap, builder in
+                var copy = builder
+                var attributes = copy.attributes
+
+                // preprocess TV profiles
+                if attributes.isAvailableForTV == true {
+
+                    // if ineligible, set expiration date unless already set
+                    if !iap.isEligible(for: .appleTV),
+                       attributes.expirationDate == nil || attributes.isExpired {
+
+                        attributes.expirationDate = Date()
+                            .addingTimeInterval(Double(Constants.shared.tunnel.tvExpirationMinutes) * 60.0)
+                    } else {
+                        attributes.expirationDate = nil
+                    }
+                }
+
+                copy.attributes = attributes
+                return copy
             },
             willConnect: { iap, profile in
                 var builder = profile.builder()
