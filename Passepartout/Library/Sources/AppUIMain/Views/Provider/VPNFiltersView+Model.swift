@@ -53,10 +53,6 @@ extension VPNFiltersView {
         @Published
         var onlyShowsFavorites: Bool
 
-        let filtersDidChange: PassthroughSubject<VPNFilters, Never>
-
-        let onlyShowsFavoritesDidChange: PassthroughSubject<Bool, Never>
-
         private var subscriptions: Set<AnyCancellable>
 
         init(defaults: UserDefaults = .standard) {
@@ -67,8 +63,6 @@ extension VPNFiltersView {
             presets = []
             filters = VPNFilters()
             onlyShowsFavorites = false
-            filtersDidChange = PassthroughSubject()
-            onlyShowsFavoritesDidChange = PassthroughSubject()
             subscriptions = []
 
             observeObjects()
@@ -137,17 +131,10 @@ private extension VPNFiltersView.Model {
 
 private extension VPNFiltersView.Model {
     func observeObjects() {
-        $filters
-            .sink { [weak self] in
-                self?.filtersDidChange.send($0)
-            }
-            .store(in: &subscriptions)
-
         $onlyShowsFavorites
             .dropFirst()
             .sink { [weak self] in
                 self?.defaults.onlyShowsFavorites = $0
-                self?.onlyShowsFavoritesDidChange.send($0)
             }
             .store(in: &subscriptions)
 

@@ -166,12 +166,12 @@ extension VPNProviderServerView {
                     errorHandler.handle(error, title: Strings.Global.servers)
                 }
             }
-            .onReceive(filtersViewModel.filtersDidChange) { newValue in
+            .onReceive(filtersViewModel.$filters) { newValue in
                 Task {
                     await reloadServers(filters: newValue)
                 }
             }
-            .onReceive(filtersViewModel.onlyShowsFavoritesDidChange) { newValue in
+            .onReceive(filtersViewModel.$onlyShowsFavorites) { newValue in
                 onlyShowsFavorites = newValue
             }
             .onDisappear {
