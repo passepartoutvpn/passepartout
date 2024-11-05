@@ -37,7 +37,6 @@ extension ExtendedTunnelTests {
         let env = InMemoryEnvironment()
         let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
         let sut = ExtendedTunnel(tunnel: tunnel, environment: env, interval: 0.1)
-        sut.observeObjects()
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
@@ -53,7 +52,6 @@ extension ExtendedTunnelTests {
         let env = InMemoryEnvironment()
         let tunnel = Tunnel(strategy: FakeTunnelStrategy(environment: env))
         let sut = ExtendedTunnel(tunnel: tunnel, environment: env, interval: 0.1)
-        sut.observeObjects()
 
         let module = try DNSModule.Builder().tryBuild()
         let profile = try Profile.Builder(modules: [module], activatingModules: true).tryBuild()
