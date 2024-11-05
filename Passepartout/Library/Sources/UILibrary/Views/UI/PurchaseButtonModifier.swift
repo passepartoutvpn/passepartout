@@ -33,6 +33,8 @@ public struct PurchaseButtonModifier: ViewModifier {
 
     private let title: String
 
+    private let label: String?
+
     private let feature: AppFeature
 
     private let showsIfRestricted: Bool
@@ -42,11 +44,13 @@ public struct PurchaseButtonModifier: ViewModifier {
 
     public init(
         _ title: String,
+        label: String? = nil,
         feature: AppFeature,
         showsIfRestricted: Bool,
         paywallReason: Binding<PaywallReason?>
     ) {
         self.title = title
+        self.label = label
         self.feature = feature
         self.showsIfRestricted = showsIfRestricted
         _paywallReason = paywallReason
@@ -55,7 +59,7 @@ public struct PurchaseButtonModifier: ViewModifier {
     public func body(content: Content) -> some View {
         switch iapManager.paywallReason(forFeature: feature) {
         case .purchase:
-            purchaseButton
+            purchaseView
 
         case .restricted:
             if showsIfRestricted {
@@ -69,6 +73,16 @@ public struct PurchaseButtonModifier: ViewModifier {
 }
 
 private extension PurchaseButtonModifier {
+    var purchaseView: some View {
+        HStack {
+            if let label {
+                Text(label)
+                Spacer()
+            }
+            purchaseButton
+        }
+    }
+
     var purchaseButton: some View {
         Button(title) {
             paywallReason = .purchase(feature)
