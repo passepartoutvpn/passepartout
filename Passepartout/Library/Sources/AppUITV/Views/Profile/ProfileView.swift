@@ -50,7 +50,7 @@ struct ProfileView: View, TunnelInstallationProviding {
     var tunnel: ExtendedTunnel
 
     @State
-    private var isSwitching = false
+    private var showsSidePanel = false
 
     @FocusState
     private var focusedField: Field?
@@ -73,7 +73,7 @@ struct ProfileView: View, TunnelInstallationProviding {
                 .frame(maxWidth: .infinity)
                 .disabled(interactiveManager.isPresented)
 
-                if isSwitching {
+                if showsSidePanel {
                     ZStack {
                         listView
                             .padding(.horizontal)
@@ -91,12 +91,12 @@ struct ProfileView: View, TunnelInstallationProviding {
         }
         .ignoresSafeArea(edges: .horizontal)
         .background(theme.primaryColor.gradient)
-        .themeAnimation(on: isSwitching, category: .profiles)
+        .themeAnimation(on: showsSidePanel, category: .profiles)
         .withErrorHandler(errorHandler)
         .defaultFocus($focusedField, .switchProfile)
         .onChange(of: tunnel.status) { _, new in
             if new == .activating {
-                isSwitching = false
+                showsSidePanel = false
                 focusedField = .connect
             }
         }
@@ -108,10 +108,10 @@ struct ProfileView: View, TunnelInstallationProviding {
         .onChange(of: focusedField) { _, new in
             switch new {
             case .connect:
-                isSwitching = false
+                showsSidePanel = false
 
             case .switchProfile:
-                isSwitching = true
+                showsSidePanel = true
 
             default:
                 break
@@ -132,7 +132,7 @@ private extension ProfileView {
         ActiveProfileView(
             profile: currentProfile,
             tunnel: tunnel,
-            isSwitching: $isSwitching,
+            isSwitching: $showsSidePanel,
             focusedField: $focusedField,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler
