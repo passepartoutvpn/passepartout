@@ -108,6 +108,7 @@ private extension OnDemandView {
             }
         }
         .themeSection(footer: policyFooterDescription)
+        .themeRow(footer: policyFooterDescription)
     }
 
     var policyFooterDescription: String {

@@ -133,6 +133,7 @@ private extension OpenVPNCredentialsView {
     var interactiveSection: some View {
         Group {
             Toggle(Strings.Modules.Openvpn.Credentials.interactive, isOn: $isInteractive)
+                .themeRow(footer: interactiveFooter)
 
             if isInteractive {
                 Picker(Strings.Unlocalized.otp, selection: $builder.otpMethod) {
