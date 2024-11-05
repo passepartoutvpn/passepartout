@@ -105,6 +105,11 @@ struct ProfileView: View, TunnelInstallationProviding {
                 focusedField = .switchProfile
             }
         }
+        .onChange(of: interactiveManager.isPresented) { _, new in
+            if new {
+                showsSidePanel = true
+            }
+        }
         .onChange(of: focusedField) { _, new in
             switch new {
             case .connect:
