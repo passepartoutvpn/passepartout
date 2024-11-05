@@ -69,10 +69,10 @@ private extension AppleTVSection {
     var footer: String {
         var desc = [Strings.Modules.General.Sections.AppleTv.footer]
         let expirationDesc = {
-            Strings.Modules.General.Sections.AppleTv.Footer.purchase1(Strings.Unlocalized.appleTV, Constants.shared.tunnel.tvExpirationMinutes)
+            Strings.Modules.General.Sections.AppleTv.Footer.Purchase._1( Constants.shared.tunnel.tvExpirationMinutes)
         }
         let purchaseDesc = {
-            Strings.Modules.General.Sections.AppleTv.Footer.purchase2
+            Strings.Modules.General.Sections.AppleTv.Footer.Purchase._2
         }
         switch iapManager.paywallReason(forFeature: .appleTV) {
         case .purchase:

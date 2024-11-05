@@ -355,12 +355,14 @@ public enum Strings {
           /// Requires iCloud sharing.
           public static let footer = Strings.tr("Localizable", "modules.general.sections.apple_tv.footer", fallback: "Requires iCloud sharing.")
           public enum Footer {
-            /// The connection on the %@ will expire after %d minutes.
-            public static func purchase1(_ p1: Any, _ p2: Int) -> String {
-              return Strings.tr("Localizable", "modules.general.sections.apple_tv.footer.purchase1", String(describing: p1), p2, fallback: "The connection on the %@ will expire after %d minutes.")
+            public enum Purchase {
+              /// TV profiles expire after %d minutes.
+              public static func _1(_ p1: Int) -> String {
+                return Strings.tr("Localizable", "modules.general.sections.apple_tv.footer.purchase.1", p1, fallback: "TV profiles expire after %d minutes.")
+              }
+              /// Purchase to drop the restriction.
+              public static let _2 = Strings.tr("Localizable", "modules.general.sections.apple_tv.footer.purchase.2", fallback: "Purchase to drop the restriction.")
             }
-            /// Purchase to drop the restriction.
-            public static let purchase2 = Strings.tr("Localizable", "modules.general.sections.apple_tv.footer.purchase2", fallback: "Purchase to drop the restriction.")
           }
         }
         public enum Storage {

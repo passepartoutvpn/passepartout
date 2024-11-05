@@ -252,8 +252,8 @@
 
 // MARK: - Paywalls
 
-"modules.general.sections.apple_tv.footer.purchase1" = "The connection on the %@ will expire after %d minutes.";
-"modules.general.sections.apple_tv.footer.purchase2" = "Purchase to drop the restriction.";
+"modules.general.sections.apple_tv.footer.purchase.1" = "TV profiles expire after %d minutes.";
+"modules.general.sections.apple_tv.footer.purchase.2" = "Purchase to drop the restriction.";
 "modules.general.rows.apple_tv.purchase" = "Drop time restriction";
 "modules.on_demand.purchase" = "Add on-demand rules";
 "modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
