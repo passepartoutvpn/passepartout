@@ -84,8 +84,9 @@ struct OpenVPNView: View, ModuleDraftEditing {
                 onCompletion: importConfiguration
             )
             .modifier(PaywallModifier(reason: $paywallReason))
-            .withErrorHandler(errorHandler)
             .navigationDestination(for: Subroute.self, destination: destination)
+            .themeAnimation(on: providerId.wrappedValue, category: .modules)
+            .withErrorHandler(errorHandler)
     }
 }
 

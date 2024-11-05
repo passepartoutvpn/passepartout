@@ -91,7 +91,7 @@ struct ProfileView: View, TunnelInstallationProviding {
         }
         .ignoresSafeArea(edges: .horizontal)
         .background(theme.primaryColor.gradient)
-        .animation(.default, value: isSwitching)
+        .themeAnimation(on: isSwitching, category: .profiles)
         .withErrorHandler(errorHandler)
         .defaultFocus($focusedField, .switchProfile)
         .onChange(of: tunnel.status) { _, new in
