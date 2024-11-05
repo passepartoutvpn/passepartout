@@ -74,6 +74,22 @@ public final class IAPManager: ObservableObject {
         }
     }
 
+    public func products(for identifiers: Set<AppProduct>) async -> [InAppProduct] {
+        let raw = identifiers.map(\.rawValue)
+        return await inAppHelper.products
+            .values
+            .filter {
+                raw.contains($0.productIdentifier)
+            }
+    }
+
+    public func purchase(_ inAppProduct: InAppProduct) async throws -> InAppPurchaseResult {
+        guard let product = AppProduct(rawValue: inAppProduct.productIdentifier) else {
+            return .notFound
+        }
+        return try await purchase(product)
+    }
+
     public func purchase(_ product: AppProduct) async throws -> InAppPurchaseResult {
         let result = try await inAppHelper.purchase(productWithIdentifier: product)
         if result == .done {
