@@ -78,14 +78,25 @@ extension ThemeSectionWithHeaderFooterModifier {
     func body(content: Content) -> some View {
         Section {
             content
+        } header: {
+            header.map(Text.init)
+        }
+        // omit footer on macOS, use ThemeRowWithFooterModifier
+    }
+}
+
+extension ThemeRowWithFooterModifier {
+    func body(content: Content) -> some View {
+        VStack {
+            content
+                .frame(maxWidth: .infinity, alignment: .leading)
+
             footer.map {
                 Text($0)
                     .foregroundStyle(.secondary)
-                    .font(.callout)
+                    .font(.caption)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-        } header: {
-            header.map(Text.init)
         }
     }
 }

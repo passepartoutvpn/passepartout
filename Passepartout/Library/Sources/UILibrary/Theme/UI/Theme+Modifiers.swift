@@ -91,6 +91,10 @@ extension View {
         modifier(ThemeSectionWithHeaderFooterModifier(header: header, footer: footer))
     }
 
+    public func themeRow(footer: String? = nil) -> some View {
+        modifier(ThemeRowWithFooterModifier(footer: footer))
+    }
+
     public func themeNavigationDetail() -> some View {
 #if os(iOS)
         navigationBarTitleDisplayMode(.inline)
@@ -287,6 +291,10 @@ struct ThemeManualInputModifier: ViewModifier {
 struct ThemeSectionWithHeaderFooterModifier: ViewModifier {
     let header: String?
 
+    let footer: String?
+}
+
+struct ThemeRowWithFooterModifier: ViewModifier {
     let footer: String?
 }
 

@@ -51,6 +51,7 @@ struct AppleTVSection: View {
 private extension AppleTVSection {
     var availableToggle: some View {
         Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
+            .themeRow(footer: footer)
     }
 
     var purchaseButton: some View {

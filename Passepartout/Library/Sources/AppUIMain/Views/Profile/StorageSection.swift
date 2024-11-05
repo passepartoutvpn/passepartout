@@ -44,7 +44,7 @@ struct StorageSection: View {
         }
         .themeSection(
             header: Strings.Global.storage,
-            footer: Strings.Modules.General.Sections.Storage.footer
+            footer: footer
         )
     }
 }
@@ -52,6 +52,11 @@ struct StorageSection: View {
 private extension StorageSection {
     var sharingToggle: some View {
         Toggle(Strings.Modules.General.Rows.icloudSharing, isOn: $profileEditor.isShared)
+            .themeRow(footer: footer)
+    }
+
+    var footer: String {
+        Strings.Modules.General.Sections.Storage.footer
     }
 }
 
