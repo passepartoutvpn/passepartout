@@ -63,17 +63,7 @@ extension VPNFiltersView {
             presets = []
             subscriptions = []
 
-            $filters
-                .sink { [weak self] in
-                    self?.filtersDidChange.send($0)
-                }
-                .store(in: &subscriptions)
-
-            $onlyShowsFavorites
-                .sink { [weak self] in
-                    self?.onlyShowsFavoritesDidChange.send($0)
-                }
-                .store(in: &subscriptions)
+            observeObjects()
         }
 
         func load(options: VPNFilterOptions, initialFilters: VPNFilters?) {
@@ -134,6 +124,26 @@ private extension VPNFiltersView.Model {
             }
     }
 }
+
+// MARK: - Observation
+
+private extension VPNFiltersView.Model {
+    func observeObjects() {
+        $filters
+            .sink { [weak self] in
+                self?.filtersDidChange.send($0)
+            }
+            .store(in: &subscriptions)
+
+        $onlyShowsFavorites
+            .sink { [weak self] in
+                self?.onlyShowsFavoritesDidChange.send($0)
+            }
+            .store(in: &subscriptions)
+    }
+}
+
+// MARK: -
 
 private extension String {
     var asCountryCodeWithDescription: VPNFiltersView.Model.CodeWithDescription {

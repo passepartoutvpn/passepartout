@@ -64,52 +64,12 @@ public final class ExtendedTunnel: ObservableObject {
         self.processor = processor
         self.interval = interval
         subscriptions = []
-    }
 
-    public func observeObjects() {
-        tunnel
-            .$status
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                guard let self else {
-                    return
-                }
-                switch $0 {
-                case .activating:
-                    lastErrorCode = nil
-
-                default:
-                    lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode)
-                }
-                if $0 != .active {
-                    dataCount = nil
-                }
-            }
-            .store(in: &subscriptions)
-
-        tunnel
-            .$currentProfile
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.objectWillChange.send()
-            }
-            .store(in: &subscriptions)
-
-        Timer
-            .publish(every: interval, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                guard let self else {
-                    return
-                }
-                guard tunnel.status == .active else {
-                    return
-                }
-                dataCount = value(forKey: TunnelEnvironmentKeys.dataCount)
-            }
-            .store(in: &subscriptions)
+        observeObjects()
     }
 }
+
+// MARK: - Public interface
 
 extension ExtendedTunnel {
     public var status: TunnelStatus {
@@ -170,6 +130,56 @@ extension ExtendedTunnel {
         }
     }
 }
+
+// MARK: - Observation
+
+private extension ExtendedTunnel {
+    func observeObjects() {
+        tunnel
+            .$status
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                guard let self else {
+                    return
+                }
+                switch $0 {
+                case .activating:
+                    lastErrorCode = nil
+
+                default:
+                    lastErrorCode = value(forKey: TunnelEnvironmentKeys.lastErrorCode)
+                }
+                if $0 != .active {
+                    dataCount = nil
+                }
+            }
+            .store(in: &subscriptions)
+
+        tunnel
+            .$currentProfile
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &subscriptions)
+
+        Timer
+            .publish(every: interval, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                guard tunnel.status == .active else {
+                    return
+                }
+                dataCount = value(forKey: TunnelEnvironmentKeys.dataCount)
+            }
+            .store(in: &subscriptions)
+    }
+}
+
+// MARK: - Processing
 
 private extension ExtendedTunnel {
     var processedTitle: (Profile) -> String {

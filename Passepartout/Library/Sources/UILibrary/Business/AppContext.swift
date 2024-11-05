@@ -59,7 +59,6 @@ public final class AppContext: ObservableObject {
 
         Task {
             await iapManager.reloadReceipt()
-            self.tunnel.observeObjects()
             profileManager.observeObjects()
             observeObjects()
         }
