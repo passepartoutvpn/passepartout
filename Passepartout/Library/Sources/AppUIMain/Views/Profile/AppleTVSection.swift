@@ -53,17 +53,14 @@ private extension AppleTVSection {
         Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
     }
 
-    @ViewBuilder
     var purchaseButton: some View {
-        switch iapManager.paywallReason(forFeature: .appleTV) {
-        case .purchase(let feature):
-            Button(Strings.Modules.General.Rows.AppleTv.purchase) {
-                paywallReason = .purchase(feature)
-            }
-
-        default:
-            EmptyView()
-        }
+        EmptyView()
+            .modifier(PurchaseButtonModifier(
+                Strings.Modules.General.Rows.AppleTv.purchase,
+                feature: .appleTV,
+                showsRestricted: true,
+                paywallReason: $paywallReason
+            ))
     }
 
     var footer: String {

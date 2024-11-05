@@ -74,6 +74,13 @@ public struct OpenVPNCredentialsView: View {
     public var body: some View {
         Group {
             restrictedArea
+                .modifier(PurchaseButtonModifier(
+                    Strings.Modules.Openvpn.Credentials.Interactive.purchase,
+                    feature: .interactiveLogin,
+                    showsRestricted: false,
+                    paywallReason: $paywallReason
+                ))
+
             inputSection
         }
         .themeManualInput()
@@ -114,19 +121,8 @@ private extension OpenVPNCredentialsView {
 
     @ViewBuilder
     var restrictedArea: some View {
-        switch iapManager.paywallReason(forFeature: .interactiveLogin) {
-        case .purchase(let feature):
-            Button(Strings.Modules.Openvpn.Credentials.Interactive.purchase) {
-                paywallReason = .purchase(feature)
-            }
-
-        case .restricted:
-            EmptyView()
-
-        default:
-            if !isAuthenticating {
-                interactiveSection
-            }
+        if !isAuthenticating {
+            interactiveSection
         }
     }
 

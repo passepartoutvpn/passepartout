@@ -60,6 +60,12 @@ struct OnDemandView: View, ModuleDraftEditing {
         Group {
             enabledSection
             restrictedArea
+                .modifier(PurchaseButtonModifier(
+                    Strings.Modules.OnDemand.purchase,
+                    feature: .onDemand,
+                    showsRestricted: false,
+                    paywallReason: $paywallReason
+                ))
         }
         .moduleView(editor: editor, draft: draft.wrappedValue)
         .modifier(PaywallModifier(reason: $paywallReason))
@@ -81,22 +87,11 @@ private extension OnDemandView {
 
     @ViewBuilder
     var restrictedArea: some View {
-        switch iapManager.paywallReason(forFeature: .onDemand) {
-        case .purchase(let feature):
-            Button(Strings.Modules.OnDemand.purchase) {
-                paywallReason = .purchase(feature)
-            }
-
-        case .restricted:
-            EmptyView()
-
-        default:
-            if draft.wrappedValue.isEnabled {
-                policySection
-                if draft.wrappedValue.policy != .any {
-                    networkSection
-                    wifiSection
-                }
+        if draft.wrappedValue.isEnabled {
+            policySection
+            if draft.wrappedValue.policy != .any {
+                networkSection
+                wifiSection
             }
         }
     }

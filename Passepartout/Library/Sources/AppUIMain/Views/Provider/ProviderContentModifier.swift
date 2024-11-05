@@ -132,17 +132,14 @@ private extension ProviderContentModifier {
         )
     }
 
-    @ViewBuilder
     var purchaseButton: some View {
-        switch iapManager.paywallReason(forFeature: .providers) {
-        case .purchase(let feature):
-            Button(Strings.Providers.Picker.purchase) {
-                paywallReason = .purchase(feature)
-            }
-
-        default:
-            EmptyView()
-        }
+        EmptyView()
+            .modifier(PurchaseButtonModifier(
+                Strings.Providers.Picker.purchase,
+                feature: .providers,
+                showsRestricted: true,
+                paywallReason: $paywallReason
+            ))
     }
 
     func refreshButton<Label>(label: () -> Label) -> some View where Label: View {
