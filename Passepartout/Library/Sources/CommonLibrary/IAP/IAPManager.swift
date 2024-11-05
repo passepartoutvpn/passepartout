@@ -66,7 +66,11 @@ public final class IAPManager: ObservableObject {
         eligibleFeatures = []
 
         Task {
-            try await inAppHelper.fetchProducts()
+            do {
+                try await inAppHelper.fetchProducts()
+            } catch {
+                pp_log(.app, .error, "Unable to fetch in-app products: \(error)")
+            }
         }
     }
 
