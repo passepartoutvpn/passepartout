@@ -31,7 +31,7 @@ public struct AppProduct: RawRepresentable, Hashable, Sendable {
     public let rawValue: String
 
     public init?(rawValue: String) {
-        if let range = rawValue.range(of: Self.featurePrefix) ?? rawValue.range(of: Self.providerPrefix) {
+        if let range = rawValue.range(of: Self.featurePrefix) ?? rawValue.range(of: Self.providerPrefix) ?? rawValue.range(of: Self.donationPrefix) {
             self.rawValue = String(rawValue[range.lowerBound..<rawValue.endIndex])
         } else {
             self.rawValue = rawValue

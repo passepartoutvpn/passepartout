@@ -33,12 +33,10 @@ extension AppUserLevel: AppFeatureProviding {
     var features: [AppFeature] {
         switch self {
         case .fullVersion:
-            return AppFeature.fullVersionFeaturesV2
+            return AppFeature.allButAppleTV
 
         case .fullVersionPlusTV:
-            var list = AppFeature.fullVersionFeaturesV2
-            list.append(.appleTV)
-            return list
+            return AppFeature.allCases
 
         default:
             return []
@@ -65,18 +63,18 @@ extension AppProduct: AppFeatureProviding {
             return [.onDemand]
 
         case .Full.allPlatforms:
-            return AppFeature.fullVersionFeaturesV2
+            return AppFeature.allButAppleTV
 
         case .Full.iOS:
 #if os(iOS)
-            return AppFeature.fullVersionFeaturesV2
+            return AppFeature.allButAppleTV
 #else
             return []
 #endif
 
         case .Full.macOS:
 #if os(macOS)
-            return AppFeature.fullVersionFeaturesV2
+            return AppFeature.allButAppleTV
 #else
             return []
 #endif
