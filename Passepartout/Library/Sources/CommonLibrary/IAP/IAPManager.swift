@@ -72,11 +72,10 @@ public final class IAPManager: ObservableObject {
 
     public func purchasableProducts(for products: [AppProduct]) async -> [InAppProduct] {
         do {
-            return try await inAppHelper.fetchProducts()
-                .filter {
-                    products.contains($0.key)
-                }
-                .map(\.value)
+            let allProducts = try await inAppHelper.fetchProducts()
+            return products.compactMap {
+                allProducts[$0]
+            }
         } catch {
             pp_log(.app, .error, "Unable to fetch in-app products: \(error)")
             return []
