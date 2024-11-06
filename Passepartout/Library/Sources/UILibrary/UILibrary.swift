@@ -30,7 +30,7 @@ import PassepartoutKit
 
 @MainActor
 public protocol UILibraryConfiguring {
-    func configure(with context: AppContext)
+    func configure()
 }
 
 public final class UILibrary: UILibraryConfiguring {
@@ -40,15 +40,12 @@ public final class UILibrary: UILibraryConfiguring {
         self.uiConfiguring = uiConfiguring
     }
 
-    public func configure(with context: AppContext) {
+    public func configure() {
         PassepartoutConfiguration.shared.configureLogging(
             to: BundleConfiguration.urlForAppLog,
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
-        Task {
-            try await context.providerManager.fetchIndex(from: API.shared)
-        }
-        uiConfiguring?.configure(with: context)
+        uiConfiguring?.configure()
     }
 }

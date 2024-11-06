@@ -27,15 +27,11 @@ import Foundation
 @_exported import UILibrary
 
 public final class AppUIMain: UILibraryConfiguring {
-    private let isStartedFromLoginItem: Bool
-
-    public init(isStartedFromLoginItem: Bool) {
-        self.isStartedFromLoginItem = isStartedFromLoginItem
+    public init() {
     }
 
-    public func configure(with context: AppContext) {
+    public func configure() {
         assertMissingImplementations()
-        context.onApplicationActive()
     }
 }
 
