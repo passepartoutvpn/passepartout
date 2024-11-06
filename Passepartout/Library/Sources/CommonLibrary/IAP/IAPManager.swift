@@ -223,7 +223,6 @@ private extension IAPManager {
             do {
                 let products = try await inAppHelper.fetchProducts()
                 pp_log(.app, .info, "Available in-app products: \(products.map(\.key))")
-                await reloadReceipt()
 
                 inAppHelper
                     .didUpdate

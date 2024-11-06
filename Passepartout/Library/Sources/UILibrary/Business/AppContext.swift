@@ -70,6 +70,7 @@ public final class AppContext: ObservableObject {
         Task {
             do {
                 pp_log(.app, .notice, "Application became active")
+                await iapManager.reloadReceipt()
                 pp_log(.app, .notice, "Prepare tunnel and purge stale data...")
                 try await tunnel.prepare(purge: true)
             } catch {
