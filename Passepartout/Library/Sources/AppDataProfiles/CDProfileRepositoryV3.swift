@@ -50,7 +50,7 @@ extension AppData {
         } fromMapper: {
             try fromMapper($0, registry: registry, coder: coder)
         } toMapper: {
-            try toMapper($0, $1, $2, registry: registry, coder: coder)
+            try toMapper($0, $1, registry: registry, coder: coder)
         } onResultError: {
             onResultError?($0) ?? .ignore
         }
@@ -73,14 +73,13 @@ private extension AppData {
 
     static func toMapper(
         _ profile: Profile,
-        _ oldCdEntity: CDProfileV3?,
         _ context: NSManagedObjectContext,
         registry: Registry,
         coder: ProfileCoder
     ) throws -> CDProfileV3 {
         let encoded = try registry.encodedProfile(profile, with: coder)
 
-        let cdProfile = oldCdEntity ?? CDProfileV3(context: context)
+        let cdProfile = CDProfileV3(context: context)
         cdProfile.uuid = profile.id
         cdProfile.name = profile.name
         cdProfile.encoded = encoded

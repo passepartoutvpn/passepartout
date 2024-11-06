@@ -52,7 +52,7 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
     private let fromMapper: (CD) throws -> T?
 
-    private let toMapper: (T, CD?, NSManagedObjectContext) throws -> CD
+    private let toMapper: (T, NSManagedObjectContext) throws -> CD
 
     private let onResultError: ((Error) -> CoreDataResultAction)?
 
@@ -66,7 +66,7 @@ public actor CoreDataRepository<CD, T>: NSObject,
         observingResults: Bool,
         beforeFetch: ((NSFetchRequest<CD>) -> Void)? = nil,
         fromMapper: @escaping (CD) throws -> T?,
-        toMapper: @escaping (T, CD?, NSManagedObjectContext) throws -> CD,
+        toMapper: @escaping (T, NSManagedObjectContext) throws -> CD,
         onResultError: ((Error) -> CoreDataResultAction)? = nil
     ) {
         guard let entityName = CD.entity().name else {
@@ -127,11 +127,9 @@ public actor CoreDataRepository<CD, T>: NSObject,
                     existingIds
                 )
                 let existing = try context.fetch(request)
+                existing.forEach(context.delete)
                 for entity in entities {
-                    let oldCdEntity = existing.first {
-                        $0.uuid == entity.uuid
-                    }
-                    _ = try self.toMapper(entity, oldCdEntity, context)
+                    _ = try self.toMapper(entity, context)
                 }
                 try context.save()
             } catch {
