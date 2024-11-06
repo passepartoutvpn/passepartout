@@ -26,6 +26,7 @@
 #if os(macOS)
 
 import AppUIMain
+import Combine
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
@@ -74,12 +75,15 @@ extension PassepartoutApp {
         Window(appName, id: appName) {
             contentView()
                 .withEnvironment(from: context, theme: theme)
+                .onReceive(didActivateNotificationPublisher) {
+                    context.onApplicationActive()
+                }
         }
         .defaultSize(width: 600, height: 400)
 
         Settings {
             SettingsView(profileManager: context.profileManager)
-                .frame(minWidth: 300, minHeight: 200)
+                .frame(minWidth: 300, minHeight: 300)
                 .withEnvironment(from: context, theme: theme)
         }
         MenuBarExtra {
@@ -92,6 +96,22 @@ extension PassepartoutApp {
             AppMenuImage(tunnel: context.tunnel)
                 .environmentObject(theme)
         }
+    }
+}
+
+private extension PassepartoutApp {
+    var didActivateNotificationPublisher: AnyPublisher<Void, Never> {
+        NSWorkspace.shared.notificationCenter
+            .publisher(for: NSWorkspace.didActivateApplicationNotification)
+            .map {
+                guard let app = $0.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
+                    return false
+                }
+                return app.bundleIdentifier == Bundle.main.bundleIdentifier
+            }
+            .filter { $0 }
+            .map { _ in }
+            .eraseToAnyPublisher()
     }
 }
 

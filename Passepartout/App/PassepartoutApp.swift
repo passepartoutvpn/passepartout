@@ -49,7 +49,7 @@ struct PassepartoutApp: App {
 #endif
 
     @Environment(\.scenePhase)
-    private var scenePhase
+    var scenePhase
 
     @StateObject
     var theme = Theme()
@@ -70,14 +70,5 @@ extension PassepartoutApp {
             tunnel: context.tunnel,
             registry: context.registry
         )
-        .onChange(of: scenePhase) {
-            switch $0 {
-            case .active:
-                context.onApplicationActive()
-
-            default:
-                break
-            }
-        }
     }
 }

@@ -39,6 +39,11 @@ extension PassepartoutApp {
     var body: some Scene {
         WindowGroup {
             contentView()
+                .task(id: scenePhase) {
+                    if scenePhase == .active {
+                        context.onApplicationActive()
+                    }
+                }
                 .onOpenURL { url in
                     ImporterPipe.shared.send([url])
                 }
