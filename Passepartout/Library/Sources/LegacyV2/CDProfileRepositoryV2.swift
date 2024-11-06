@@ -41,7 +41,7 @@ final class CDProfileRepositoryV2 {
         self.context = context
     }
 
-    // FIXME: #586, migrate profiles properly
+    // FIXME: #642, migrate profiles properly
     func migratedProfiles() async throws -> [Profile] {
         try await context.perform { [weak self] in
             guard let self else {

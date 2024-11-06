@@ -32,7 +32,7 @@ extension AboutView {
     var listView: some View {
         List(selection: $navigationRoute) {
             Section {
-                // FIXME: #585, donations
+                // FIXME: #819, donations
 //                donateLink
                 linksLink
                 creditsLink
