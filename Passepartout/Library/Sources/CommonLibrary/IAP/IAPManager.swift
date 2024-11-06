@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import CommonUtils
 import Foundation
 import PassepartoutKit
@@ -33,7 +34,7 @@ public final class IAPManager: ObservableObject {
 
     private let inAppHelper: any AppProductHelper
 
-    private let receiptReader: any AppReceiptReader
+    private let receiptReader: AppReceiptReader
 
     private let unrestrictedFeatures: Set<AppFeature>
 
@@ -47,10 +48,12 @@ public final class IAPManager: ObservableObject {
 
     private var eligibleFeatures: Set<AppFeature>
 
+    private var subscriptions: Set<AnyCancellable>
+
     public init(
         customUserLevel: AppUserLevel? = nil,
         inAppHelper: any AppProductHelper,
-        receiptReader: any AppReceiptReader,
+        receiptReader: AppReceiptReader,
         unrestrictedFeatures: Set<AppFeature> = [],
         productsAtBuild: BuildProducts<AppProduct>? = nil
     ) {
@@ -62,34 +65,26 @@ public final class IAPManager: ObservableObject {
         userLevel = .undefined
         purchasedProducts = []
         eligibleFeatures = []
+        subscriptions = []
 
-        Task {
-            do {
-                try await inAppHelper.fetchProducts()
-            } catch {
-                pp_log(.app, .error, "Unable to fetch in-app products: \(error)")
-            }
+        observeObjects()
+    }
+
+    public func purchasableProducts(for products: [AppProduct]) async -> [InAppProduct] {
+        do {
+            return try await inAppHelper.fetchProducts()
+                .filter {
+                    products.contains($0.key)
+                }
+                .map(\.value)
+        } catch {
+            pp_log(.app, .error, "Unable to fetch in-app products: \(error)")
+            return []
         }
     }
 
-    public func products(for identifiers: Set<AppProduct>) async -> [InAppProduct] {
-        let raw = identifiers.map(\.rawValue)
-        return await inAppHelper.products
-            .values
-            .filter {
-                raw.contains($0.productIdentifier)
-            }
-    }
-
-    public func purchase(_ inAppProduct: InAppProduct) async throws -> InAppPurchaseResult {
-        guard let product = AppProduct(rawValue: inAppProduct.productIdentifier) else {
-            return .notFound
-        }
-        return try await purchase(product)
-    }
-
-    public func purchase(_ product: AppProduct) async throws -> InAppPurchaseResult {
-        let result = try await inAppHelper.purchase(productWithIdentifier: product)
+    public func purchase(_ purchasableProduct: InAppProduct) async throws -> InAppPurchaseResult {
+        let result = try await inAppHelper.purchase(purchasableProduct)
         if result == .done {
             await reloadReceipt()
         }
@@ -102,13 +97,14 @@ public final class IAPManager: ObservableObject {
     }
 
     public func reloadReceipt() async {
-        await fetchLevelIfNeeded()
+        purchasedAppBuild = nil
+        purchasedProducts.removeAll()
+        eligibleFeatures.removeAll()
 
-        if let receipt = await receiptReader.receipt(for: userLevel) {
+        if let receipt = await receiptReader.receipt(at: userLevel) {
             if let originalBuildNumber = receipt.originalBuildNumber {
                 purchasedAppBuild = originalBuildNumber
             }
-            purchasedProducts.removeAll()
 
             if let purchasedAppBuild {
                 pp_log(.app, .info, "Original purchased build: \(purchasedAppBuild)")
@@ -126,6 +122,14 @@ public final class IAPManager: ObservableObject {
                 iapReceipts.forEach {
                     guard let pid = $0.productIdentifier, let product = AppProduct(rawValue: pid) else {
                         return
+                    }
+                    if let expirationDate = $0.expirationDate {
+                        let now = Date()
+                        pp_log(.app, .debug, "\t\(pid) [expiration date: \(expirationDate), now: \(now)]")
+                        if now >= expirationDate {
+                            pp_log(.app, .info, "\t\(pid) [expired on: \(expirationDate)]")
+                            return
+                        }
                     }
                     if let cancellationDate = $0.cancellationDate {
                         pp_log(.app, .info, "\t\(pid) [cancelled on: \(cancellationDate)]")
@@ -145,21 +149,49 @@ public final class IAPManager: ObservableObject {
             }
         } else {
             pp_log(.app, .error, "Could not parse App Store receipt!")
-
-            eligibleFeatures = Set(userLevel.features)
         }
 
+        userLevel.features.forEach {
+            eligibleFeatures.insert($0)
+        }
         unrestrictedFeatures.forEach {
             eligibleFeatures.insert($0)
         }
 
-        pp_log(.app, .notice, "Purchased products: \(purchasedProducts.map(\.rawValue))")
-        pp_log(.app, .notice, "Eligible features: \(eligibleFeatures)")
+        pp_log(.app, .notice, "Reloaded IAP receipt:")
+        pp_log(.app, .notice, "\tPurchased build number: \(purchasedAppBuild?.description ?? "unknown")")
+        pp_log(.app, .notice, "\tPurchased products: \(purchasedProducts.map(\.rawValue))")
+        pp_log(.app, .notice, "\tEligible features: \(eligibleFeatures)")
+
         objectWillChange.send()
     }
 }
 
 private extension IAPManager {
+    func observeObjects() {
+        Task {
+            await fetchLevelIfNeeded()
+            do {
+                let products = try await inAppHelper.fetchProducts()
+                pp_log(.app, .info, "Available in-app products: \(products.map(\.key))")
+
+                inAppHelper
+                    .didUpdate
+                    .receive(on: DispatchQueue.main)
+                    .sink { [weak self] in
+                        Task {
+                            await self?.reloadReceipt()
+                            self?.objectWillChange.send()
+                        }
+                    }
+                    .store(in: &subscriptions)
+
+            } catch {
+                pp_log(.app, .error, "Unable to fetch in-app products: \(error)")
+            }
+        }
+    }
+
     func fetchLevelIfNeeded() async {
         guard userLevel == .undefined else {
             return

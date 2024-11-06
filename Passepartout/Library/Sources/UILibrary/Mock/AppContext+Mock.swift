@@ -34,7 +34,6 @@ extension AppContext {
 
     public static func mock(withRegistry registry: Registry) -> AppContext {
         let iapManager = IAPManager(
-            customUserLevel: nil,
             inAppHelper: MockAppProductHelper(),
             receiptReader: MockAppReceiptReader(),
             unrestrictedFeatures: [

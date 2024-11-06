@@ -26,8 +26,8 @@
 import CommonUtils
 import Foundation
 
-public protocol AppProductHelper: InAppHelper where ProductIdentifier == AppProduct {
+public protocol AppProductHelper: InAppHelper where ProductType == AppProduct {
 }
 
-extension StoreKitHelper: AppProductHelper where ProductIdentifier == AppProduct {
+extension StoreKitHelper: AppProductHelper where ProductType == AppProduct {
 }

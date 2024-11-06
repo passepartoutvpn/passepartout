@@ -34,7 +34,7 @@ extension BundleConfiguration {
 
         case cloudKitId
 
-        case customUserLevel
+        case userLevel
 
         case groupId
 

@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import CommonUtils
 import Foundation
 
@@ -33,18 +34,25 @@ public actor MockAppProductHelper: AppProductHelper {
 
     public nonisolated let receiptReader: MockAppReceiptReader
 
+    private let didUpdateSubject: PassthroughSubject<Void, Never>
+
     // set .max to skip entitled products
     public init(build: Int = .max) {
         self.build = build
         products = [:]
         receiptReader = MockAppReceiptReader()
+        didUpdateSubject = PassthroughSubject()
     }
 
     public nonisolated var canMakePurchases: Bool {
         true
     }
 
-    public func fetchProducts() async throws {
+    public nonisolated var didUpdate: AnyPublisher<Void, Never> {
+        didUpdateSubject.eraseToAnyPublisher()
+    }
+
+    public func fetchProducts() async throws -> [AppProduct: InAppProduct] {
         products = AppProduct.all.reduce(into: [:]) {
             $0[$1] = InAppProduct(
                 productIdentifier: $1.rawValue,
@@ -53,14 +61,18 @@ public actor MockAppProductHelper: AppProductHelper {
                 native: $1
             )
         }
-        await receiptReader.setReceipt(withBuild: build, products: [])
+        await receiptReader.setReceipt(withBuild: build, identifiers: [])
+        didUpdateSubject.send()
+        return products
     }
 
-    public func purchase(productWithIdentifier productIdentifier: AppProduct) async throws -> InAppPurchaseResult {
-        await receiptReader.addPurchase(with: productIdentifier)
+    public func purchase(_ inAppProduct: InAppProduct) async throws -> InAppPurchaseResult {
+        await receiptReader.addPurchase(with: inAppProduct.productIdentifier)
+        didUpdateSubject.send()
         return .done
     }
 
     public func restorePurchases() async throws {
+        didUpdateSubject.send()
     }
 }

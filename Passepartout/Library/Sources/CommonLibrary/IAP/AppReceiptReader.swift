@@ -2,7 +2,7 @@
 //  AppReceiptReader.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/10/24.
+//  Created by Davide De Rosa on 11/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -26,5 +26,6 @@
 import CommonUtils
 import Foundation
 
-public protocol AppReceiptReader: InAppReceiptReader where UserLevel == AppUserLevel {
+public protocol AppReceiptReader {
+    func receipt(at userLevel: AppUserLevel) async -> InAppReceipt?
 }

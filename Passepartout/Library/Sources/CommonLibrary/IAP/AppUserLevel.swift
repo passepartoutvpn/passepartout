@@ -25,7 +25,7 @@
 
 import Foundation
 
-public enum AppUserLevel: Int {
+public enum AppUserLevel: Int, Sendable {
     case undefined = -1
 
     case freemium = 0

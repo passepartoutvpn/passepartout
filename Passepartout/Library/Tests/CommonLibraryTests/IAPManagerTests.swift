@@ -45,7 +45,7 @@ extension IAPManagerTests {
 
     func test_givenBuildProducts_whenOlder_thenFullVersion() async {
         let reader = MockAppReceiptReader()
-        await reader.setReceipt(withBuild: olderBuildNumber, products: [])
+        await reader.setReceipt(withBuild: olderBuildNumber, identifiers: [])
         let sut = IAPManager(receiptReader: reader) { build in
             if build <= self.defaultBuildNumber {
                 return [.Full.allPlatforms]
@@ -53,7 +53,7 @@ extension IAPManagerTests {
             return []
         }
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.allButAppleTV))
     }
 
     func test_givenBuildProducts_whenNewer_thenFreeVersion() async {
@@ -66,7 +66,7 @@ extension IAPManagerTests {
             return []
         }
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
     }
 
     // MARK: Eligibility
@@ -75,13 +75,13 @@ extension IAPManagerTests {
         let reader = MockAppReceiptReader()
         let sut = IAPManager(receiptReader: reader)
 
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
 
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.allPlatforms])
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
 
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.allButAppleTV))
     }
 
     func test_givenPurchasedFeatures_thenIsOnlyEligibleForFeatures() async {
@@ -98,7 +98,7 @@ extension IAPManagerTests {
         XCTAssertFalse(sut.isEligible(for: .onDemand))
         XCTAssertTrue(sut.isEligible(for: .routing))
         XCTAssertTrue(sut.isEligible(for: .siri))
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
     }
 
     func test_givenPurchasedAndCancelledFeature_thenIsNotEligible() async {
@@ -111,7 +111,7 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
     }
 
     func test_givenFreeVersion_thenIsNotEligibleForAnyFeature() async {
@@ -121,7 +121,7 @@ extension IAPManagerTests {
 
         await sut.reloadReceipt()
         XCTAssertFalse(sut.userLevel.isFullVersion)
-        AppFeature.fullVersionFeaturesV2.forEach {
+        AppFeature.allButAppleTV.forEach {
             XCTAssertFalse(sut.isEligible(for: $0))
         }
     }
@@ -141,7 +141,7 @@ extension IAPManagerTests {
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
-        AppFeature.fullVersionFeaturesV2.forEach {
+        AppFeature.allButAppleTV.forEach {
             XCTAssertTrue(sut.isEligible(for: $0))
         }
         XCTAssertFalse(sut.isEligible(for: .appleTV))
@@ -163,11 +163,11 @@ extension IAPManagerTests {
 #if os(macOS)
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.macOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.allButAppleTV))
 #else
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.iOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertTrue(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertTrue(sut.isEligible(for: AppFeature.allButAppleTV))
 #endif
     }
 
@@ -178,11 +178,11 @@ extension IAPManagerTests {
 #if os(macOS)
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.iOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
 #else
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.macOS, .Features.networkSettings])
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
 #endif
     }
 
@@ -205,7 +205,7 @@ extension IAPManagerTests {
         let sut = IAPManager(customUserLevel: .beta, receiptReader: reader)
 
         await sut.reloadReceipt()
-        XCTAssertFalse(sut.isEligible(for: AppFeature.fullVersionFeaturesV2))
+        XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
     }
 
     func test_givenBetaApp_thenIsEligibleForUnrestrictedFeature() async {
@@ -213,7 +213,7 @@ extension IAPManagerTests {
         let sut = IAPManager(customUserLevel: .beta, receiptReader: reader, unrestrictedFeatures: [.onDemand])
 
         await sut.reloadReceipt()
-        AppFeature.fullVersionFeaturesV2.forEach {
+        AppFeature.allButAppleTV.forEach {
             if $0 == .onDemand {
                 XCTAssertTrue(sut.isEligible(for: $0))
             } else {
@@ -243,7 +243,7 @@ extension IAPManagerTests {
         let sut = IAPManager(customUserLevel: .fullVersion, receiptReader: reader)
 
         await sut.reloadReceipt()
-        AppFeature.fullVersionFeaturesV2.forEach {
+        AppFeature.allButAppleTV.forEach {
             XCTAssertTrue(sut.isEligible(for: $0))
         }
         XCTAssertFalse(sut.isEligible(for: .appleTV))
@@ -254,7 +254,7 @@ extension IAPManagerTests {
         let sut = IAPManager(customUserLevel: .fullVersionPlusTV, receiptReader: reader)
 
         await sut.reloadReceipt()
-        AppFeature.fullVersionFeaturesV2.forEach {
+        AppFeature.allButAppleTV.forEach {
             XCTAssertTrue(sut.isEligible(for: $0))
         }
         XCTAssertTrue(sut.isEligible(for: .appleTV))
@@ -264,7 +264,7 @@ extension IAPManagerTests {
 private extension IAPManager {
     convenience init(
         customUserLevel: AppUserLevel? = nil,
-        receiptReader: any AppReceiptReader,
+        receiptReader: AppReceiptReader,
         unrestrictedFeatures: Set<AppFeature> = [],
         productsAtBuild: BuildProducts<AppProduct>? = nil
     ) {
