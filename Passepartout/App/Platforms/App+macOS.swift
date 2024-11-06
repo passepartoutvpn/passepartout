@@ -109,6 +109,7 @@ private extension PassepartoutApp {
                 }
                 return app.bundleIdentifier == Bundle.main.bundleIdentifier
             }
+            .removeDuplicates()
             .filter { $0 }
             .map { _ in }
             .eraseToAnyPublisher()
