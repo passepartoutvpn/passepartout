@@ -254,9 +254,21 @@
 
 // MARK: - Paywalls
 
-"features.interactive_login" = "Interactive login";
-"features.providers" = "Providers";
-"features.siri" = "Shortcuts";
+"paywall.sections.one_time.header" = "One-time purchase";
+"paywall.sections.recurring.header" = "All features";
+"paywall.sections.features.header" = "Subscribe for";
+"paywall.sections.restore.header" = "Restore";
+"paywall.sections.restore.footer" = "If you bought this app or feature in the past, you can restore your purchases.";
+"paywall.rows.restore_purchases" = "Restore purchases";
+"paywall.alerts.pending.message" = "The purchase is pending external confirmation. The feature will be credited upon approval.";
+
+"features.appleTV" = "%@";
+"features.dns" = "%@";
+"features.httpProxy" = "%@";
+"features.interactiveLogin" = "Interactive Login";
+"features.onDemand" = "%@";
+"features.providers" = "All Providers";
+"features.routing" = "%@";
 
 "modules.general.sections.apple_tv.footer.purchase.1" = "TV profiles expire after %d minutes.";
 "modules.general.sections.apple_tv.footer.purchase.2" = "Purchase to drop the restriction.";

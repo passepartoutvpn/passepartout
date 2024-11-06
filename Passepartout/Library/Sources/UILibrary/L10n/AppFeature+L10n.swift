@@ -29,30 +29,28 @@ import Foundation
 
 extension AppFeature: LocalizableEntity {
     public var localizedDescription: String {
+        let V = Strings.Features.self
         switch self {
         case .appleTV:
-            return Strings.Unlocalized.appleTV
+            return V.appleTV(Strings.Unlocalized.appleTV)
 
         case .dns:
-            return Strings.Unlocalized.dns
+            return V.dns(Strings.Unlocalized.dns)
 
         case .httpProxy:
-            return Strings.Unlocalized.httpProxy
+            return V.httpProxy(Strings.Unlocalized.httpProxy)
 
         case .interactiveLogin:
-            return Strings.Features.interactiveLogin
+            return V.interactiveLogin
 
         case .onDemand:
-            return Strings.Global.onDemand
+            return V.onDemand(Strings.Global.onDemand)
 
         case .providers:
-            return Strings.Features.providers
+            return V.providers
 
         case .routing:
-            return Strings.Global.routing
-
-        case .siri:
-            return Strings.Features.siri
+            return V.routing(Strings.Global.routing)
         }
     }
 }

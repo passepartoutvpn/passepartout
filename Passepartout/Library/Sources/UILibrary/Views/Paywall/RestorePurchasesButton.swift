@@ -1,8 +1,8 @@
 //
-//  AppFeature.swift
+//  RestorePurchasesButton.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/10/24.
+//  Created by Davide De Rosa on 11/6/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,30 +23,22 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import CommonLibrary
+import SwiftUI
 
-public enum AppFeature: String, CaseIterable {
-    case appleTV
+public struct RestorePurchasesButton: View {
 
-    case dns
+    @EnvironmentObject
+    private var iapManager: IAPManager
 
-    case httpProxy
-
-    case interactiveLogin
-
-    case onDemand
-
-    case providers
-
-    case routing
-
-    public static let allButAppleTV: [AppFeature] = allCases.filter {
-        $0 != .appleTV
+    public init() {
     }
-}
 
-extension AppFeature: Identifiable {
-    public var id: String {
-        rawValue
+    public var body: some View {
+        Button(Strings.Paywall.Rows.restorePurchases) {
+            Task {
+                try await iapManager.restorePurchases()
+            }
+        }
     }
 }

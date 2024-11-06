@@ -91,6 +91,19 @@ public struct ThemeImageLabel: View {
     }
 }
 
+public struct ThemeCloseLabel: View {
+    public init() {
+    }
+
+    public var body: some View {
+#if os(iOS) || os(tvOS)
+        ThemeImage(.close)
+#else
+        Text(Strings.Global.cancel)
+#endif
+    }
+}
+
 public struct ThemeCountryText: View {
     private let code: String
 

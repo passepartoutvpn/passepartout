@@ -64,6 +64,7 @@ public struct PaywallModifier: ViewModifier {
                         suggestedProduct: args.product
                     )
                 }
+                .frame(idealHeight: 400)
             }
             .onChange(of: reason) {
                 switch $0 {
