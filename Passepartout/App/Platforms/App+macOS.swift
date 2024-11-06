@@ -34,7 +34,6 @@ import SwiftUI
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         configure(with: AppUIMain())
-
         context.onApplicationActive()
         if isStartedFromLoginItem {
             AppWindow.shared.isVisible = false
