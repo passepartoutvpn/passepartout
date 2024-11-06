@@ -130,10 +130,12 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 
-"views.settings.sections.icloud.footer" = "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
-"views.settings.rows.keeps_in_menu" = "Keep in menu bar";
-"views.settings.rows.locks_in_background" = "Lock in background";
-"views.settings.rows.erase_icloud" = "Erase iCloud store";
+"views.settings.keeps_in_menu" = "Keep in menu bar";
+"views.settings.keeps_in_menu.footer" = "Enable this to keep the app in the menu bar after closing it.";
+"views.settings.locks_in_background" = "Lock in background";
+"views.settings.locks_in_background.footer" = "Lock the app with FaceID when sent to the background.";
+"views.settings.erase_icloud" = "Erase iCloud store";
+"views.settings.erase_icloud.footer" = "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.";
 
 "views.about.title" = "About";
 "views.about.sections.resources" = "Resources";

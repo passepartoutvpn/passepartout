@@ -45,41 +45,34 @@ struct SettingsSectionGroup: View {
     private var isErasingiCloud = false
 
     var body: some View {
-        Group {
 #if os(macOS)
-            keepsInMenuToggle
+        keepsInMenuToggle
 #endif
 #if os(iOS)
-            lockInBackgroundToggle
+        lockInBackgroundToggle
 #endif
-        }
-        .themeSection(header: Strings.Global.general)
-
         eraseCloudKitButton
-            .themeSectionWithSingleRow(
-                header: Strings.Unlocalized.iCloud,
-                footer: Strings.Views.Settings.Sections.Icloud.footer,
-                above: true
-            )
     }
 }
 
 private extension SettingsSectionGroup {
     var keepsInMenuToggle: some View {
-        Toggle(Strings.Views.Settings.Rows.keepsInMenu, isOn: $keepsInMenu)
+        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $keepsInMenu)
+            .themeSectionWithSingleRow(footer: Strings.Views.Settings.KeepsInMenu.footer)
     }
 
     var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Settings.Rows.locksInBackground, isOn: $locksInBackground)
+        Toggle(Strings.Views.Settings.locksInBackground, isOn: $locksInBackground)
+            .themeSectionWithSingleRow(footer: Strings.Views.Settings.LocksInBackground.footer)
     }
 
     var eraseCloudKitButton: some View {
-        Button(Strings.Views.Settings.Rows.eraseIcloud, role: .destructive) {
+        Button(Strings.Views.Settings.eraseIcloud, role: .destructive) {
             isConfirmingEraseiCloud = true
         }
         .themeConfirmation(
             isPresented: $isConfirmingEraseiCloud,
-            title: Strings.Views.Settings.Rows.eraseIcloud,
+            title: Strings.Views.Settings.eraseIcloud,
             isDestructive: true
         ) {
             isErasingiCloud = true
@@ -93,6 +86,11 @@ private extension SettingsSectionGroup {
                 isErasingiCloud = false
             }
         }
+        .themeSectionWithSingleRow(
+            header: Strings.Unlocalized.iCloud,
+            footer: Strings.Views.Settings.EraseIcloud.footer,
+            above: true
+        )
         .disabled(isErasingiCloud)
     }
 }

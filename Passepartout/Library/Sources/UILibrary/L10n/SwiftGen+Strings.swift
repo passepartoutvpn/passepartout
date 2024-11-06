@@ -696,19 +696,23 @@ public enum Strings {
       }
     }
     public enum Settings {
-      public enum Rows {
-        /// Erase iCloud store
-        public static let eraseIcloud = Strings.tr("Localizable", "views.settings.rows.erase_icloud", fallback: "Erase iCloud store")
-        /// Keep in menu bar
-        public static let keepsInMenu = Strings.tr("Localizable", "views.settings.rows.keeps_in_menu", fallback: "Keep in menu bar")
-        /// Lock in background
-        public static let locksInBackground = Strings.tr("Localizable", "views.settings.rows.locks_in_background", fallback: "Lock in background")
+      /// Erase iCloud store
+      public static let eraseIcloud = Strings.tr("Localizable", "views.settings.erase_icloud", fallback: "Erase iCloud store")
+      /// Keep in menu bar
+      public static let keepsInMenu = Strings.tr("Localizable", "views.settings.keeps_in_menu", fallback: "Keep in menu bar")
+      /// Lock in background
+      public static let locksInBackground = Strings.tr("Localizable", "views.settings.locks_in_background", fallback: "Lock in background")
+      public enum EraseIcloud {
+        /// To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
+        public static let footer = Strings.tr("Localizable", "views.settings.erase_icloud.footer", fallback: "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
       }
-      public enum Sections {
-        public enum Icloud {
-          /// To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.
-          public static let footer = Strings.tr("Localizable", "views.settings.sections.icloud.footer", fallback: "To erase the iCloud store securely, do so on all your synced devices. This will not affect local profiles.")
-        }
+      public enum KeepsInMenu {
+        /// Enable this to keep the app in the menu bar after closing it.
+        public static let footer = Strings.tr("Localizable", "views.settings.keeps_in_menu.footer", fallback: "Enable this to keep the app in the menu bar after closing it.")
+      }
+      public enum LocksInBackground {
+        /// Lock the app with FaceID when sent to the background.
+        public static let footer = Strings.tr("Localizable", "views.settings.locks_in_background.footer", fallback: "Lock the app with FaceID when sent to the background.")
       }
     }
   }
