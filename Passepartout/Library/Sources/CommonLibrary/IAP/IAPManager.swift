@@ -69,7 +69,11 @@ public final class IAPManager: ObservableObject {
 
         observeObjects()
     }
+}
 
+// MARK: - Actions
+
+extension IAPManager {
     public func purchasableProducts(for products: [AppProduct]) async -> [InAppProduct] {
         do {
             let inAppProducts = try await inAppHelper.fetchProducts()
@@ -166,46 +170,7 @@ public final class IAPManager: ObservableObject {
     }
 }
 
-private extension IAPManager {
-    func observeObjects() {
-        Task {
-            await fetchLevelIfNeeded()
-            do {
-                let products = try await inAppHelper.fetchProducts()
-                pp_log(.app, .info, "Available in-app products: \(products.map(\.key))")
-
-                inAppHelper
-                    .didUpdate
-                    .receive(on: DispatchQueue.main)
-                    .sink { [weak self] in
-                        Task {
-                            await self?.reloadReceipt()
-                        }
-                    }
-                    .store(in: &subscriptions)
-
-            } catch {
-                pp_log(.app, .error, "Unable to fetch in-app products: \(error)")
-            }
-        }
-    }
-
-    func fetchLevelIfNeeded() async {
-        guard userLevel == .undefined else {
-            return
-        }
-        if let customUserLevel {
-            userLevel = customUserLevel
-            pp_log(.app, .info, "App level (custom): \(userLevel)")
-        } else {
-            let isBeta = await SandboxChecker().isBeta
-            userLevel = isBeta ? .beta : .freemium
-            pp_log(.app, .info, "App level: \(userLevel)")
-        }
-    }
-}
-
-// MARK: In-app eligibility
+// MARK: - Eligibility
 
 extension IAPManager {
     public var isRestricted: Bool {
@@ -244,5 +209,46 @@ extension IAPManager {
 
     public func isPayingUser() -> Bool {
         !purchasedProducts.isEmpty
+    }
+}
+
+// MARK: - Observation
+
+private extension IAPManager {
+    func observeObjects() {
+        Task {
+            await fetchLevelIfNeeded()
+            do {
+                let products = try await inAppHelper.fetchProducts()
+                pp_log(.app, .info, "Available in-app products: \(products.map(\.key))")
+
+                inAppHelper
+                    .didUpdate
+                    .receive(on: DispatchQueue.main)
+                    .sink { [weak self] in
+                        Task {
+                            await self?.reloadReceipt()
+                        }
+                    }
+                    .store(in: &subscriptions)
+
+            } catch {
+                pp_log(.app, .error, "Unable to fetch in-app products: \(error)")
+            }
+        }
+    }
+
+    func fetchLevelIfNeeded() async {
+        guard userLevel == .undefined else {
+            return
+        }
+        if let customUserLevel {
+            userLevel = customUserLevel
+            pp_log(.app, .info, "App level (custom): \(userLevel)")
+        } else {
+            let isBeta = await SandboxChecker().isBeta
+            userLevel = isBeta ? .beta : .freemium
+            pp_log(.app, .info, "App level: \(userLevel)")
+        }
     }
 }
