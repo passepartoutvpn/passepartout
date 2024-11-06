@@ -35,11 +35,8 @@ extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         configure(with: AppUIMain())
 
-        // if login item, activate manually then hide (notification not sent)
-        if isStartedFromLoginItem {
-            context.onApplicationActive()
-            AppWindow.shared.isVisible = false
-        }
+        // this will trigger .didActivateApplicationNotification in both cases
+        AppWindow.shared.isVisible = !isStartedFromLoginItem
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
