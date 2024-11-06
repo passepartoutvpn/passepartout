@@ -367,7 +367,7 @@ private extension ProfileManager {
             pp_log(.app, .info, "Start importing remote profiles...")
             var idsToRemove: [Profile.ID] = []
             if !remotelyDeletedIds.isEmpty {
-                pp_log(.app, .info, "\tWill \(deletingRemotely ? "delete" : "retain") local profiles not present in remote repository: \(remotelyDeletedIds)")
+                pp_log(.app, .info, "Will \(deletingRemotely ? "delete" : "retain") local profiles not present in remote repository: \(remotelyDeletedIds)")
 
                 if deletingRemotely {
                     idsToRemove.append(contentsOf: remotelyDeletedIds)
@@ -376,20 +376,20 @@ private extension ProfileManager {
             for remoteProfile in profilesToImport {
                 do {
                     guard processor?.isIncluded(remoteProfile) ?? true else {
-                        pp_log(.app, .info, "\tWill delete non-included remote profile \(remoteProfile.id)")
+                        pp_log(.app, .info, "Will delete non-included remote profile \(remoteProfile.id)")
                         idsToRemove.append(remoteProfile.id)
                         continue
                     }
                     if let localFingerprint = allFingerprints[remoteProfile.id] {
                         guard remoteProfile.attributes.fingerprint != localFingerprint else {
-                            pp_log(.app, .info, "\tSkip re-importing local profile \(remoteProfile.id)")
+                            pp_log(.app, .info, "Skip re-importing local profile \(remoteProfile.id)")
                             continue
                         }
                     }
-                    pp_log(.app, .notice, "\tImport remote profile \(remoteProfile.id)...")
+                    pp_log(.app, .notice, "Import remote profile \(remoteProfile.id)...")
                     try await save(remoteProfile)
                 } catch {
-                    pp_log(.app, .error, "\tUnable to import remote profile: \(error)")
+                    pp_log(.app, .error, "Unable to import remote profile: \(error)")
                 }
             }
             pp_log(.app, .notice, "Finished importing remote profiles, delete stale profiles: \(idsToRemove)")
