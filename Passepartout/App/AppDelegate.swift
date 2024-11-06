@@ -38,7 +38,7 @@ final class AppDelegate: NSObject {
             .configure()
 
         Task {
-            pp_log(.app, .notice, "Fetch provider index...")
+            pp_log(.app, .notice, "Fetch providers index...")
             try await context.providerManager.fetchIndex(from: API.shared)
         }
     }
