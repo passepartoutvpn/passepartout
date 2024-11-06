@@ -39,15 +39,6 @@ public struct AppProduct: RawRepresentable, Hashable, Sendable {
     }
 }
 
-extension AppProduct: InAppIdentifierProviding {
-    public var inAppIdentifier: String {
-        [
-            BundleConfiguration.mainString(for: .iapBundlePrefix),
-            rawValue
-        ].joined(separator: ".")
-    }
-}
-
 extension AppProduct {
     public static var all: [Self] {
         Features.all + Full.all + Donations.all

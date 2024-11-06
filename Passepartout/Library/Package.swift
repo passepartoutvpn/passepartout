@@ -109,7 +109,6 @@ let package = Package(
             name: "CommonLibrary",
             dependencies: [
                 "CommonUtils",
-                "Kvitto",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source"),
                 .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-source-openvpn-openssl"),
                 .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")
@@ -119,7 +118,8 @@ let package = Package(
             ]
         ),
         .target(
-            name: "CommonUtils"
+            name: "CommonUtils",
+            dependencies: ["Kvitto"]
         ),
         .target(
             name: "LegacyV2",
