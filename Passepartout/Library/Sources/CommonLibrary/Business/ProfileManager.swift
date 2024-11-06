@@ -353,18 +353,28 @@ private extension ProfileManager {
         }
         objectWillChange.send()
 
-        let profilesToImport = result
-        let allFingerprints = allProfiles.values.reduce(into: [:]) {
-            $0[$1.id] = $1.attributes.fingerprint
-        }
-        let remotelyDeletedIds = Set(allProfiles.keys).subtracting(Set(allRemoteProfiles.keys))
-        let deletingRemotely = deletingRemotely
-
         Task.detached { [weak self] in
             guard let self else {
                 return
             }
+
             pp_log(.app, .info, "Start importing remote profiles...")
+
+            pp_log(.app, .debug, "Local fingerprints:")
+            let localFingerprints: [Profile.ID: UUID] = await allProfiles.values.reduce(into: [:]) {
+                $0[$1.id] = $1.attributes.fingerprint
+                pp_log(.app, .debug, "\t\($1.id) = \($1.attributes.fingerprint?.description ?? "nil")")
+            }
+            pp_log(.app, .info, "Remote fingerprints:")
+            let remoteFingerprints: [Profile.ID: UUID] = result.reduce(into: [:]) {
+                $0[$1.id] = $1.attributes.fingerprint
+                pp_log(.app, .debug, "\t\($1.id) = \($1.attributes.fingerprint?.description ?? "nil")")
+            }
+
+            let profilesToImport = result
+            let remotelyDeletedIds = await Set(allProfiles.keys).subtracting(Set(allRemoteProfiles.keys))
+            let deletingRemotely = deletingRemotely
+
             var idsToRemove: [Profile.ID] = []
             if !remotelyDeletedIds.isEmpty {
                 pp_log(.app, .info, "Will \(deletingRemotely ? "delete" : "retain") local profiles not present in remote repository: \(remotelyDeletedIds)")
@@ -380,11 +390,9 @@ private extension ProfileManager {
                         idsToRemove.append(remoteProfile.id)
                         continue
                     }
-                    if let localFingerprint = allFingerprints[remoteProfile.id] {
-                        guard remoteProfile.attributes.fingerprint != localFingerprint else {
-                            pp_log(.app, .info, "Skip re-importing local profile \(remoteProfile.id)")
-                            continue
-                        }
+                    guard remoteFingerprints[remoteProfile.id] != localFingerprints[remoteProfile.id] else {
+                        pp_log(.app, .info, "Skip re-importing local profile \(remoteProfile.id)")
+                        continue
                     }
                     pp_log(.app, .notice, "Import remote profile \(remoteProfile.id)...")
                     try await save(remoteProfile)
