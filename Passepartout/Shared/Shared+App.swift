@@ -40,8 +40,8 @@ extension AppContext {
         let iapHelpers = Configuration.IAPManager.helpers
         let iapManager = IAPManager(
             customUserLevel: Configuration.Environment.userLevel,
-            inAppHelper: iapHelpers.0,
-            receiptReader: iapHelpers.1,
+            inAppHelper: iapHelpers.productHelper,
+            receiptReader: iapHelpers.receiptReader,
             // FIXME: #662, omit unrestrictedFeatures on release!
             unrestrictedFeatures: [.interactiveLogin],
             productsAtBuild: Configuration.IAPManager.productsAtBuild
@@ -186,7 +186,7 @@ extension Configuration {
     enum IAPManager {
 
         @MainActor
-        static var helpers: (any AppProductHelper, AppReceiptReader) {
+        static var helpers: (productHelper: any AppProductHelper, receiptReader: AppReceiptReader) {
             guard !Environment.isFakeIAP else {
                 let mockHelper = MockAppProductHelper()
                 return (mockHelper, mockHelper.receiptReader)
