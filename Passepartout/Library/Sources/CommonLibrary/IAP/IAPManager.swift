@@ -104,6 +104,8 @@ extension IAPManager {
         purchasedProducts.removeAll()
         eligibleFeatures.removeAll()
 
+        pp_log(.app, .notice, "Reload IAP receipt...")
+
         if let receipt = await receiptReader.receipt(at: userLevel) {
             if let originalBuildNumber = receipt.originalBuildNumber {
                 purchasedAppBuild = originalBuildNumber
@@ -221,6 +223,7 @@ private extension IAPManager {
             do {
                 let products = try await inAppHelper.fetchProducts()
                 pp_log(.app, .info, "Available in-app products: \(products.map(\.key))")
+                await reloadReceipt()
 
                 inAppHelper
                     .didUpdate
