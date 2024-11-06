@@ -187,25 +187,24 @@ extension Configuration {
 
         @MainActor
         static var helpers: (any AppProductHelper, AppReceiptReader) {
-            if Environment.isFakeIAP {
+            guard !Environment.isFakeIAP else {
                 let mockHelper = MockAppProductHelper()
                 return (mockHelper, mockHelper.receiptReader)
-            } else {
-                let productHelper = StoreKitHelper(
-                    products: AppProduct.all,
-                    inAppIdentifier: {
-                        let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
-                        return "\(prefix).\($0.rawValue)"
-                    }
-                )
-                let receiptReader = FallbackReceiptReader(
-                    reader: StoreKitReceiptReader(),
-                    localReader: {
-                        KvittoReceiptReader(url: $0)
-                    }
-                )
-                return (productHelper, receiptReader)
             }
+            let productHelper = StoreKitHelper(
+                products: AppProduct.all,
+                inAppIdentifier: {
+                    let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
+                    return "\(prefix).\($0.rawValue)"
+                }
+            )
+            let receiptReader = FallbackReceiptReader(
+                reader: StoreKitReceiptReader(),
+                localReader: {
+                    KvittoReceiptReader(url: $0)
+                }
+            )
+            return (productHelper, receiptReader)
         }
 
         static let productsAtBuild: BuildProducts<AppProduct> = {
