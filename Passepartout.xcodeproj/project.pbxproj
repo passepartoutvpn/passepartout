@@ -26,7 +26,7 @@
 		0ED61CF82CD0418C008FE259 /* App+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED61CF72CD0418C008FE259 /* App+macOS.swift */; };
 		0ED61CFA2CD04192008FE259 /* App+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED61CF92CD04192008FE259 /* App+iOS.swift */; };
 		0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EDE56E62CABE40D0082D21C /* Intents.plist */; };
-		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; };
 /* End PBXBuildFile section */
@@ -521,6 +521,10 @@
 		};
 		0EDE56F92CABE42E0082D21C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				macos,
+			);
 			target = 0EDE56EF2CABE42E0082D21C /* PassepartoutIntents */;
 			targetProxy = 0EDE56F82CABE42E0082D21C /* PBXContainerItemProxy */;
 		};
