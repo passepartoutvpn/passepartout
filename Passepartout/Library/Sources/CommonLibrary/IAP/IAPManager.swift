@@ -180,7 +180,6 @@ private extension IAPManager {
                     .sink { [weak self] in
                         Task {
                             await self?.reloadReceipt()
-                            self?.objectWillChange.send()
                         }
                     }
                     .store(in: &subscriptions)
