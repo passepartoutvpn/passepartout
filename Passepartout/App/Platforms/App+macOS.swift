@@ -34,8 +34,12 @@ import SwiftUI
 extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         configure(with: AppUIMain())
-        context.onApplicationActive()
-        hideIfLoginItem()
+
+        // if login item, activate manually then hide (notification not sent)
+        if isStartedFromLoginItem {
+            context.onApplicationActive()
+            AppWindow.shared.isVisible = false
+        }
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -60,12 +64,6 @@ private extension AppDelegate {
 
     var isStartedFromLoginItem: Bool {
         NSApp.isHidden
-    }
-
-    func hideIfLoginItem() {
-        if isStartedFromLoginItem {
-            AppWindow.shared.isVisible = false
-        }
     }
 }
 
