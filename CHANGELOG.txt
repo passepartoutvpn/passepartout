@@ -1,2 +1,24 @@
-* OpenVPN OTP is persisted with the password (#785)
-* Fix lock view flickering on first appearance
+* Improve configuration on app launch/active (#821)
+* Refactor in-app entities for StoreKit/Kvitto integration (#820)
+* Simulate in-app purchases (#818)
+* TV not presenting interactive login on "Connect" (#817)
+* Improve logging on ineligible features
+* Address some issues with animations (#816)
+* Improve footers in macOS form sections (#814)
+* Reuse PurchaseButtonModifier in restricted areas (#815)
+* Persist "Only favorites" toggle (#813)
+* Encapsulate behavior on app active (#812)
+* Implement TV profile expiration (#811)
+* Fix more warnings
+* Refactor AppContext creation and profile processing (#810)
+* Review ProfileManager observation logic (#809)
+* Implement TV profile sharing (#808)
+* Reword "Connect" to "Select" in server selector
+* Use profile name as interactive view title
+* Submit on OpenVPN fields (#805)
+* Late dismissal after changing active provider server (#804)
+* Fix flashing context menu on data count update (#803)
+* Allow interactive credentials with providers (#796)
+* Fix issues with iOS 16 (#792)
+* Render country flags with Emojis (#787)
+* Fall back to empty OTP
