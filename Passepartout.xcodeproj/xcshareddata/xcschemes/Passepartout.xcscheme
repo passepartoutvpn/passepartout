@@ -89,11 +89,19 @@
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "CUSTOM_USER_LEVEL"
+            key = "PP_USER_LEVEL"
             value = "2"
-            isEnabled = "YES">
+            isEnabled = "NO">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PP_FAKE_IAP"
+            value = "1"
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
+      <StoreKitConfigurationFileReference
+         identifier = "../../Passepartout/Passepartout.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

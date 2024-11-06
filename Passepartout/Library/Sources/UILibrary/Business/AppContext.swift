@@ -57,17 +57,16 @@ public final class AppContext: ObservableObject {
         self.providerManager = providerManager
         subscriptions = []
 
-        Task {
-            await iapManager.reloadReceipt()
-            profileManager.observeObjects()
-            observeObjects()
-        }
+        observeObjects()
     }
 
     public func onApplicationActive() {
         Task {
             do {
-                pp_log(.app, .notice, "Prepare tunnel and purge stale data")
+                pp_log(.app, .notice, "Application became active")
+                pp_log(.app, .notice, "Reload IAP receipt...")
+                await iapManager.reloadReceipt()
+                pp_log(.app, .notice, "Prepare tunnel and purge stale data...")
                 try await tunnel.prepare(purge: true)
             } catch {
                 pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
@@ -80,6 +79,8 @@ public final class AppContext: ObservableObject {
 
 private extension AppContext {
     func observeObjects() {
+        profileManager.observeObjects()
+
         profileManager
             .didChange
             .sink { [weak self] event in

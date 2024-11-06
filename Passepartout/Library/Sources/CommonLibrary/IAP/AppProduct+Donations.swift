@@ -49,11 +49,13 @@ extension AppProduct {
         ]
     }
 
+    static let donationPrefix = "donations."
+
     private init(donationId: String) {
-        self.init(rawValue: "donations.\(donationId)")!
+        self.init(rawValue: "\(Self.donationPrefix)\(donationId)")!
     }
 
     var isDonation: Bool {
-        rawValue.hasPrefix("donations")
+        rawValue.hasPrefix(Self.donationPrefix)
     }
 }

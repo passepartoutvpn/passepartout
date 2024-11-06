@@ -37,18 +37,11 @@ extension AppContext {
         let tunnelEnvironment: TunnelEnvironment = .shared
         let registry: Registry = .shared
 
-#if DEBUG
-        let inAppHelper = MockAppProductHelper()
-        let receiptReader = inAppHelper.receiptReader
-#else
-        let inAppHelper = StoreKitHelper(identifiers: AppProduct.all)
-        let receiptReader = KvittoReceiptReader()
-#endif
-
+        let iapHelpers = Configuration.IAPManager.helpers
         let iapManager = IAPManager(
-            customUserLevel: Configuration.IAPManager.customUserLevel,
-            inAppHelper: inAppHelper,
-            receiptReader: receiptReader,
+            customUserLevel: Configuration.Environment.userLevel,
+            inAppHelper: iapHelpers.productHelper,
+            receiptReader: iapHelpers.receiptReader,
             // FIXME: #662, omit unrestrictedFeatures on release!
             unrestrictedFeatures: [.interactiveLogin],
             productsAtBuild: Configuration.IAPManager.productsAtBuild
@@ -167,23 +160,51 @@ extension AppContext {
 // MARK: - Configuration
 
 private enum Configuration {
-}
+    enum Environment {
+        static var isFakeIAP: Bool {
+            ProcessInfo.processInfo.environment["PP_FAKE_IAP"] == "1"
+        }
 
-extension Configuration {
-    enum IAPManager {
-        static var customUserLevel: AppUserLevel? {
-            if let envString = ProcessInfo.processInfo.environment["CUSTOM_USER_LEVEL"],
+        static var userLevel: AppUserLevel? {
+            if let envString = ProcessInfo.processInfo.environment["PP_USER_LEVEL"],
                let envValue = Int(envString),
                let testAppType = AppUserLevel(rawValue: envValue) {
 
                 return testAppType
             }
-            if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .customUserLevel),
+            if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
                let testAppType = AppUserLevel(rawValue: infoValue) {
 
                 return testAppType
             }
             return nil
+        }
+    }
+}
+
+extension Configuration {
+    enum IAPManager {
+
+        @MainActor
+        static var helpers: (productHelper: any AppProductHelper, receiptReader: AppReceiptReader) {
+            guard !Environment.isFakeIAP else {
+                let mockHelper = MockAppProductHelper()
+                return (mockHelper, mockHelper.receiptReader)
+            }
+            let productHelper = StoreKitHelper(
+                products: AppProduct.all,
+                inAppIdentifier: {
+                    let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
+                    return "\(prefix).\($0.rawValue)"
+                }
+            )
+            let receiptReader = FallbackReceiptReader(
+                reader: StoreKitReceiptReader(),
+                localReader: {
+                    KvittoReceiptReader(url: $0)
+                }
+            )
+            return (productHelper, receiptReader)
         }
 
         static let productsAtBuild: BuildProducts<AppProduct> = {

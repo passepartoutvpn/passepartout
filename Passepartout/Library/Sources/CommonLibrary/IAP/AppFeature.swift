@@ -25,7 +25,7 @@
 
 import Foundation
 
-public enum AppFeature: String {
+public enum AppFeature: String, CaseIterable {
     case appleTV
 
     case dns
@@ -42,14 +42,9 @@ public enum AppFeature: String {
 
     case siri
 
-    public static let fullVersionFeaturesV2: [AppFeature] = [
-        .dns,
-        .httpProxy,
-        .onDemand,
-        .providers,
-        .routing,
-        .siri
-    ]
+    public static let allButAppleTV: [AppFeature] = allCases.filter {
+        $0 != .appleTV
+    }
 }
 
 extension AppFeature: Identifiable {

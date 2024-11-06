@@ -33,7 +33,7 @@ extension AboutView {
         List {
             SettingsSectionGroup(profileManager: profileManager)
             Group {
-                // FIXME: #585, donations
+                // FIXME: #819, donations
 //                donateLink
                 linksLink
                 creditsLink

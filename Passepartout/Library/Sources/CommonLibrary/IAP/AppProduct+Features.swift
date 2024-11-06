@@ -31,10 +31,12 @@ extension AppProduct {
 
         public static let appleTV = AppProduct(featureId: "appletv")
 
-        // FIXME: #585, add in-app product
+        // FIXME: #585, add in-app product for interactive login
         public static let interactiveLogin = AppProduct(featureId: "interactive_login")
 
         public static let networkSettings = AppProduct(featureId: "network_settings")
+
+        // FIXME: #585, restore .sharing in-app product and restrictions
 
         public static let siriShortcuts = AppProduct(featureId: "siri")
 

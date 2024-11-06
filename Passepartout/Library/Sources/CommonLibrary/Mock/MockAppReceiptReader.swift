@@ -27,46 +27,50 @@ import CommonUtils
 import Foundation
 
 public actor MockAppReceiptReader: AppReceiptReader {
-    private var receipt: InAppReceipt?
+    private var localReceipt: InAppReceipt?
 
-    public init(receipt: InAppReceipt? = nil) {
-        self.receipt = receipt
+    public init(receipt localReceipt: InAppReceipt? = nil) {
+        self.localReceipt = localReceipt
     }
 
-    public func setReceipt(withBuild build: Int, products: [AppProduct], cancelledProducts: Set<AppProduct> = []) {
-        receipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: products.map {
+    public func setReceipt(withBuild build: Int, products: Set<AppProduct>, cancelledProducts: Set<AppProduct> = []) {
+        setReceipt(
+            withBuild: build,
+            identifiers: Set(products.map(\.rawValue)),
+            cancelledIdentifiers: Set(cancelledProducts.map(\.rawValue))
+        )
+    }
+
+    public func setReceipt(withBuild build: Int, identifiers: Set<String>, cancelledIdentifiers: Set<String> = []) {
+        localReceipt = InAppReceipt(originalBuildNumber: build, purchaseReceipts: identifiers.map {
             .init(
-                productIdentifier: $0.rawValue,
-                cancellationDate: cancelledProducts.contains($0) ? Date() : nil,
+                productIdentifier: $0,
+                expirationDate: nil,
+                cancellationDate: cancelledIdentifiers.contains($0) ? Date() : nil,
                 originalPurchaseDate: nil
             )
         })
     }
 
-    public func receipt(for userLevel: AppUserLevel) -> InAppReceipt? {
-        receipt
+    public func receipt(at userLevel: AppUserLevel) async -> InAppReceipt? {
+        localReceipt
     }
 
-    public func addPurchase(with product: AppProduct) {
-        guard let receipt else {
+    public func addPurchase(with identifier: String) {
+        guard let localReceipt else {
             fatalError("Call setReceipt() first")
         }
-        var purchaseReceipts = receipt.purchaseReceipts ?? []
-        purchaseReceipts.append(product.purchaseReceipt)
-        let newReceipt = InAppReceipt(
-            originalBuildNumber: receipt.originalBuildNumber,
-            purchaseReceipts: purchaseReceipts
-        )
-        self.receipt = newReceipt
-    }
-}
-
-private extension AppProduct {
-    var purchaseReceipt: InAppReceipt.PurchaseReceipt {
-        .init(
-            productIdentifier: rawValue,
+        var purchaseReceipts = localReceipt.purchaseReceipts ?? []
+        purchaseReceipts.append(.init(
+            productIdentifier: identifier,
+            expirationDate: nil,
             cancellationDate: nil,
             originalPurchaseDate: nil
+        ))
+        let newReceipt = InAppReceipt(
+            originalBuildNumber: localReceipt.originalBuildNumber,
+            purchaseReceipts: purchaseReceipts
         )
+        self.localReceipt = newReceipt
     }
 }

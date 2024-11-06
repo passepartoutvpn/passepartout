@@ -23,10 +23,13 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Combine
 import Foundation
 
 public enum InAppPurchaseResult: Sendable {
     case done
+
+    case pending
 
     case notFound
 
@@ -54,20 +57,16 @@ public struct InAppProduct: Sendable {
     }
 }
 
-public protocol InAppIdentifierProviding {
-    var inAppIdentifier: String { get }
-}
-
 public protocol InAppHelper {
-    associatedtype ProductIdentifier: Hashable & InAppIdentifierProviding
+    associatedtype ProductType: Hashable
 
     var canMakePurchases: Bool { get }
 
-    var products: [ProductIdentifier: InAppProduct] { get async }
+    var didUpdate: AnyPublisher<Void, Never> { get }
 
-    func fetchProducts() async throws
+    func fetchProducts() async throws -> [ProductType: InAppProduct]
 
-    func purchase(productWithIdentifier productIdentifier: ProductIdentifier) async throws -> InAppPurchaseResult
+    func purchase(_ inAppProduct: InAppProduct) async throws -> InAppPurchaseResult
 
     func restorePurchases() async throws
 }
@@ -76,12 +75,15 @@ public struct InAppReceipt: Sendable {
     public struct PurchaseReceipt: Sendable {
         public let productIdentifier: String?
 
+        public let expirationDate: Date?
+
         public let cancellationDate: Date?
 
         public let originalPurchaseDate: Date?
 
-        public init(productIdentifier: String?, cancellationDate: Date?, originalPurchaseDate: Date?) {
+        public init(productIdentifier: String?, expirationDate: Date?, cancellationDate: Date?, originalPurchaseDate: Date?) {
             self.productIdentifier = productIdentifier
+            self.expirationDate = expirationDate
             self.cancellationDate = cancellationDate
             self.originalPurchaseDate = originalPurchaseDate
         }
@@ -95,10 +97,12 @@ public struct InAppReceipt: Sendable {
         self.originalBuildNumber = originalBuildNumber
         self.purchaseReceipts = purchaseReceipts
     }
+
+    public func withBuildNumber(_ buildNumber: Int) -> Self {
+        .init(originalBuildNumber: buildNumber, purchaseReceipts: purchaseReceipts)
+    }
 }
 
 public protocol InAppReceiptReader {
-    associatedtype UserLevel
-
-    func receipt(for userLevel: UserLevel) async -> InAppReceipt?
+    func receipt() async -> InAppReceipt?
 }

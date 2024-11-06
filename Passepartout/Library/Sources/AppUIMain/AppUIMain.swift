@@ -35,11 +35,7 @@ public final class AppUIMain: UILibraryConfiguring {
 
     public func configure(with context: AppContext) {
         assertMissingImplementations()
-
-        // keep this for login item because scenePhase is not triggered
-        if isStartedFromLoginItem {
-            context.onApplicationActive()
-        }
+        context.onApplicationActive()
     }
 }
 
