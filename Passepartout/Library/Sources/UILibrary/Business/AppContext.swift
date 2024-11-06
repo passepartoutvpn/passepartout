@@ -41,6 +41,8 @@ public final class AppContext: ObservableObject {
 
     public let providerManager: ProviderManager
 
+    private var isActivating = false
+
     private var subscriptions: Set<AnyCancellable>
 
     public init(
@@ -61,6 +63,10 @@ public final class AppContext: ObservableObject {
     }
 
     public func onApplicationActive() {
+        guard !isActivating else {
+            return
+        }
+        isActivating = true
         Task {
             do {
                 pp_log(.app, .notice, "Application became active")
@@ -69,6 +75,7 @@ public final class AppContext: ObservableObject {
             } catch {
                 pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
             }
+            isActivating = false
         }
     }
 }
