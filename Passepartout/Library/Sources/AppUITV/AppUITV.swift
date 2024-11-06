@@ -30,6 +30,6 @@ public final class AppUITV: UILibraryConfiguring {
     public init() {
     }
 
-    public func configure(with context: AppContext) {
+    public func configure() {
     }
 }

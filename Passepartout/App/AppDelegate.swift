@@ -35,6 +35,11 @@ final class AppDelegate: NSObject {
 
     func configure(with uiConfiguring: UILibraryConfiguring) {
         UILibrary(uiConfiguring)
-            .configure(with: context)
+            .configure()
+
+        Task {
+            pp_log(.app, .notice, "Fetch providers index...")
+            try await context.providerManager.fetchIndex(from: API.shared)
+        }
     }
 }

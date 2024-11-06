@@ -104,6 +104,8 @@ extension IAPManager {
         purchasedProducts.removeAll()
         eligibleFeatures.removeAll()
 
+        pp_log(.app, .notice, "Reload IAP receipt...")
+
         if let receipt = await receiptReader.receipt(at: userLevel) {
             if let originalBuildNumber = receipt.originalBuildNumber {
                 purchasedAppBuild = originalBuildNumber

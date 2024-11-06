@@ -41,6 +41,8 @@ public final class AppContext: ObservableObject {
 
     public let providerManager: ProviderManager
 
+    private var isActivating = false
+
     private var subscriptions: Set<AnyCancellable>
 
     public init(
@@ -61,16 +63,20 @@ public final class AppContext: ObservableObject {
     }
 
     public func onApplicationActive() {
+        guard !isActivating else {
+            return
+        }
+        isActivating = true
         Task {
             do {
                 pp_log(.app, .notice, "Application became active")
-                pp_log(.app, .notice, "Reload IAP receipt...")
                 await iapManager.reloadReceipt()
                 pp_log(.app, .notice, "Prepare tunnel and purge stale data...")
                 try await tunnel.prepare(purge: true)
             } catch {
                 pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
             }
+            isActivating = false
         }
     }
 }
