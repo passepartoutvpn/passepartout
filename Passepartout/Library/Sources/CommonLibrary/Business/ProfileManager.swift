@@ -365,7 +365,7 @@ private extension ProfileManager {
                 $0[$1.id] = $1.attributes.fingerprint
                 pp_log(.app, .debug, "\t\($1.id) = \($1.attributes.fingerprint?.description ?? "nil")")
             }
-            pp_log(.app, .info, "Remote fingerprints:")
+            pp_log(.app, .debug, "Remote fingerprints:")
             let remoteFingerprints: [Profile.ID: UUID] = result.reduce(into: [:]) {
                 $0[$1.id] = $1.attributes.fingerprint
                 pp_log(.app, .debug, "\t\($1.id) = \($1.attributes.fingerprint?.description ?? "nil")")
