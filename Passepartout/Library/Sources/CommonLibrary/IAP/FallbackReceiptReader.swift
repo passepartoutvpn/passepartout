@@ -72,12 +72,6 @@ private extension FallbackReceiptReader {
                 .deletingLastPathComponent()
                 .appendingPathComponent("receipt")
 
-            guard releaseURL != localURL else {
-#if !os(macOS) && !targetEnvironment(simulator)
-                assertionFailure("How can release URL be equal to Sandbox URL in TestFlight?")
-#endif
-                return nil
-            }
             let release = localReader(releaseURL)
             return await release?.receipt()
         }()
