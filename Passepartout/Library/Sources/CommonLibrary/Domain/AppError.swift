@@ -27,6 +27,8 @@ import Foundation
 import PassepartoutKit
 
 public enum AppError: Error {
+    case emptyProducts
+
     case emptyProfileName
 
     case malformedModule(any ModuleBuilder, error: Error)

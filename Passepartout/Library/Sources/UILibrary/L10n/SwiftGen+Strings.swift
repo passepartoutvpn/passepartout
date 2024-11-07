@@ -114,6 +114,8 @@ public enum Strings {
     public enum App {
       /// Unable to complete operation.
       public static let `default` = Strings.tr("Localizable", "errors.app.default", fallback: "Unable to complete operation.")
+      /// Unable to fetch products, please retry later.
+      public static let emptyProducts = Strings.tr("Localizable", "errors.app.empty_products", fallback: "Unable to fetch products, please retry later.")
       /// Profile name is empty.
       public static let emptyProfileName = Strings.tr("Localizable", "errors.app.empty_profile_name", fallback: "Profile name is empty.")
       /// Profile is expired.

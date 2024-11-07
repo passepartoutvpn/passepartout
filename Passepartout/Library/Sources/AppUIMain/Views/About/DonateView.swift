@@ -116,6 +116,9 @@ private extension DonateView {
         }
         do {
             availableProducts = try await iapManager.purchasableProducts(for: AppProduct.Donations.all)
+            guard !availableProducts.isEmpty else {
+                throw AppError.emptyProducts
+            }
         } catch {
             onError(error, dismissing: true)
         }

@@ -32,6 +32,9 @@ extension AppError: LocalizedError {
     public var errorDescription: String? {
         let V = Strings.Errors.App.self
         switch self {
+        case .emptyProducts:
+            return V.emptyProducts
+
         case .emptyProfileName:
             return V.emptyProfileName
 

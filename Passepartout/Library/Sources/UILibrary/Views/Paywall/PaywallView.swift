@@ -183,6 +183,9 @@ private extension PaywallView {
 
         do {
             let availableProducts = try await iapManager.purchasableProducts(for: list)
+            guard !availableProducts.isEmpty else {
+                throw AppError.emptyProducts
+            }
             oneTimeProduct = availableProducts.first {
                 guard let suggestedProduct else {
                     return false
