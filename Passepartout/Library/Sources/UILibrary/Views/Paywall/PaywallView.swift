@@ -60,7 +60,7 @@ struct PaywallView: View {
             if isFetchingProducts {
                 ProgressView()
                     .id(UUID())
-            } else {
+            } else if !recurringProducts.isEmpty {
                 productsView
                 subscriptionFeaturesView
                 restoreView

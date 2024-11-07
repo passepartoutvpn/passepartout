@@ -52,7 +52,7 @@ struct DonateView: View {
             if isFetchingProducts {
                 ProgressView()
                     .id(UUID())
-            } else {
+            } else if !availableProducts.isEmpty {
                 donationsView
             }
         }
