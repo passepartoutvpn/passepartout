@@ -30,7 +30,7 @@ import SwiftUI
 
 extension AboutRouterView {
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             AboutView(
                 profileManager: profileManager,
                 navigationRoute: $navigationRoute

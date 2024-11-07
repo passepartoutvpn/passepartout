@@ -32,10 +32,9 @@ extension AboutView {
     var listView: some View {
         List(selection: $navigationRoute) {
             Section {
-                // FIXME: #830, UI for donations
-//                donateLink
                 linksLink
                 creditsLink
+                donateLink
                 diagnosticsLink
             }
         }

@@ -39,7 +39,7 @@ extension AppProduct {
 
         public static let maxi = AppProduct(donationId: "Maxi")
 
-        static let all: [AppProduct] = [
+        public static let all: [AppProduct] = [
             .Donations.tiny,
             .Donations.small,
             .Donations.medium,

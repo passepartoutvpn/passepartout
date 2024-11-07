@@ -37,6 +37,9 @@ struct AboutRouterView: View {
     let tunnel: ExtendedTunnel
 
     @State
+    var path = NavigationPath()
+
+    @State
     var navigationRoute: NavigationRoute?
 }
 

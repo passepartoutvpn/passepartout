@@ -76,7 +76,7 @@ public final class IAPManager: ObservableObject {
 // MARK: - Actions
 
 extension IAPManager {
-    public func purchasableProducts(for products: [AppProduct]) async -> [InAppProduct] {
+    public func purchasableProducts(for products: [AppProduct]) async throws -> [InAppProduct] {
         do {
             let inAppProducts = try await inAppHelper.fetchProducts()
             return products.compactMap {
@@ -84,7 +84,7 @@ extension IAPManager {
             }
         } catch {
             pp_log(.App.iap, .error, "Unable to fetch in-app products: \(error)")
-            return []
+            throw error
         }
     }
 

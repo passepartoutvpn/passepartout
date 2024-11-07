@@ -1,5 +1,5 @@
 //
-//  PaywallView+Custom.swift
+//  CustomProductView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/7/24.
@@ -28,34 +28,39 @@ import CommonUtils
 import StoreKit
 import SwiftUI
 
-extension PaywallView {
-    struct CustomProductView: View {
-        let style: ProductStyle
+struct CustomProductView: View {
+    let style: PaywallProductViewStyle
 
-        @ObservedObject
-        var iapManager: IAPManager
+    @ObservedObject
+    var iapManager: IAPManager
 
-        let product: InAppProduct
+    let product: InAppProduct
 
-        let onComplete: (String, InAppPurchaseResult) -> Void
+    @Binding
+    var purchasingIdentifier: String?
 
-        let onError: (Error) -> Void
+    let onComplete: (String, InAppPurchaseResult) -> Void
 
-        var body: some View {
-            HStack {
-                Text(verbatim: product.localizedTitle)
-                Spacer()
-                Button(action: purchase) {
-                    Text(verbatim: product.localizedPrice)
-                }
+    let onError: (Error) -> Void
+
+    var body: some View {
+        HStack {
+            Text(verbatim: product.localizedTitle)
+            Spacer()
+            Button(action: purchase) {
+                Text(verbatim: product.localizedPrice)
             }
         }
     }
 }
 
-private extension PaywallView.CustomProductView {
+private extension CustomProductView {
     func purchase() {
+        purchasingIdentifier = product.productIdentifier
         Task {
+            defer {
+                purchasingIdentifier = nil
+            }
             do {
                 let result = try await iapManager.purchase(product)
                 onComplete(product.productIdentifier, result)

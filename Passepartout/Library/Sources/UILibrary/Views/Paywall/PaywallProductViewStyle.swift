@@ -1,8 +1,8 @@
 //
-//  RestorePurchasesButton.swift
+//  PaywallProductViewStyle.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/6/24.
+//  Created by Davide De Rosa on 11/7/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,37 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import CommonUtils
-import SwiftUI
+import Foundation
 
-public struct RestorePurchasesButton: View {
+public enum PaywallProductViewStyle {
+    case oneTime
 
-    @EnvironmentObject
-    private var iapManager: IAPManager
+    case recurring
 
-    @ObservedObject
-    private var errorHandler: ErrorHandler
-
-    public init(errorHandler: ErrorHandler) {
-        self.errorHandler = errorHandler
-    }
-
-    public var body: some View {
-        Button(title) {
-            Task {
-                do {
-                    try await iapManager.restorePurchases()
-                } catch {
-                    errorHandler.handle(error, title: title)
-                }
-            }
-        }
-    }
-}
-
-private extension RestorePurchasesButton {
-    var title: String {
-        Strings.Paywall.Rows.restorePurchases
-    }
+    case donation
 }

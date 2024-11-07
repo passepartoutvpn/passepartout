@@ -29,11 +29,6 @@ import StoreKit
 import SwiftUI
 
 struct PaywallView: View {
-    enum ProductStyle {
-        case oneTime
-
-        case recurring
-    }
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -46,16 +41,19 @@ struct PaywallView: View {
     let suggestedProduct: AppProduct?
 
     @State
-    private var isFetchingProducts = true
-
-    @State
     private var oneTimeProduct: InAppProduct?
 
     @State
     private var recurringProducts: [InAppProduct] = []
 
     @State
-    private var isPendingPresented = false
+    private var isFetchingProducts = true
+
+    @State
+    private var purchasingIdentifier: String?
+
+    @State
+    private var isPurchasePendingConfirmation = false
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -65,17 +63,20 @@ struct PaywallView: View {
             if isFetchingProducts {
                 ProgressView()
                     .id(UUID())
-            } else {
-                productsView
-                subscriptionFeaturesView
-                restoreView
+            } else if !recurringProducts.isEmpty {
+                Group {
+                    productsView
+                    subscriptionFeaturesView
+                    restoreView
+                }
+                .disabled(purchasingIdentifier != nil)
             }
         }
         .themeForm()
         .toolbar(content: toolbarContent)
         .alert(
             Strings.Global.purchase,
-            isPresented: $isPendingPresented,
+            isPresented: $isPurchasePendingConfirmation,
             actions: pendingActions,
             message: pendingMessage
         )
@@ -100,11 +101,25 @@ private extension PaywallView {
     @ViewBuilder
     var productsView: some View {
         oneTimeProduct.map {
-            productView(.oneTime, for: $0)
-                .themeSection(header: Strings.Paywall.Sections.OneTime.header)
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .oneTime,
+                product: $0,
+                purchasingIdentifier: $purchasingIdentifier,
+                onComplete: onComplete,
+                onError: onError
+            )
+            .themeSection(header: Strings.Paywall.Sections.OneTime.header)
         }
         ForEach(recurringProducts, id: \.productIdentifier) {
-            productView(.recurring, for: $0)
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .recurring,
+                product: $0,
+                purchasingIdentifier: $purchasingIdentifier,
+                onComplete: onComplete,
+                onError: onError
+            )
         }
         .themeSection(header: Strings.Paywall.Sections.Recurring.header)
     }
@@ -124,28 +139,8 @@ private extension PaywallView {
     }
 #endif
 
-    @ViewBuilder
-    func productView(_ style: ProductStyle, for product: InAppProduct) -> some View {
-        if #available(iOS 17, macOS 14, *) {
-            StoreKitProductView(
-                style: style,
-                product: product,
-                onComplete: onComplete,
-                onError: onError
-            )
-        } else {
-            CustomProductView(
-                style: style,
-                iapManager: iapManager,
-                product: product,
-                onComplete: onComplete,
-                onError: onError
-            )
-        }
-    }
-
     var restoreView: some View {
-        RestorePurchasesButton()
+        RestorePurchasesButton(errorHandler: errorHandler)
             .themeSectionWithSingleRow(
                 header: Strings.Paywall.Sections.Restore.header,
                 footer: Strings.Paywall.Sections.Restore.footer,
@@ -183,6 +178,9 @@ private extension PaywallView {
 private extension PaywallView {
     func fetchAvailableProducts() async {
         isFetchingProducts = true
+        defer {
+            isFetchingProducts = false
+        }
 
         var list: [AppProduct] = []
         if let suggestedProduct {
@@ -191,18 +189,23 @@ private extension PaywallView {
         list.append(.Full.Recurring.yearly)
         list.append(.Full.Recurring.monthly)
 
-        let availableProducts = await iapManager.purchasableProducts(for: list)
-        oneTimeProduct = availableProducts.first {
-            guard let suggestedProduct else {
-                return false
+        do {
+            let availableProducts = try await iapManager.purchasableProducts(for: list)
+            guard !availableProducts.isEmpty else {
+                throw AppError.emptyProducts
             }
-            return $0.productIdentifier.hasSuffix(suggestedProduct.rawValue)
+            oneTimeProduct = availableProducts.first {
+                guard let suggestedProduct else {
+                    return false
+                }
+                return $0.productIdentifier.hasSuffix(suggestedProduct.rawValue)
+            }
+            recurringProducts = availableProducts.filter {
+                $0.productIdentifier != oneTimeProduct?.productIdentifier
+            }
+        } catch {
+            onError(error, dismissing: true)
         }
-        recurringProducts = availableProducts.filter {
-            $0.productIdentifier != oneTimeProduct?.productIdentifier
-        }
-
-        isFetchingProducts = false
     }
 
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
@@ -211,7 +214,7 @@ private extension PaywallView {
             isPresented = false
 
         case .pending:
-            isPendingPresented = true
+            isPurchasePendingConfirmation = true
 
         case .cancelled:
             break
@@ -222,7 +225,15 @@ private extension PaywallView {
     }
 
     func onError(_ error: Error) {
-        errorHandler.handle(error, title: Strings.Global.purchase)
+        onError(error, dismissing: false)
+    }
+
+    func onError(_ error: Error, dismissing: Bool) {
+        errorHandler.handle(error, title: Strings.Global.purchase) {
+            if dismissing {
+                isPresented = false
+            }
+        }
     }
 }
 

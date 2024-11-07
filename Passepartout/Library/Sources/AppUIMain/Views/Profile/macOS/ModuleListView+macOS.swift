@@ -49,18 +49,15 @@ struct ModuleListView: View, Routable {
                 NavigationLink(Strings.Global.general, value: ProfileSplitView.Detail.general)
                     .tag(Self.generalModuleId)
             }
-            Section {
+            Group {
                 ForEach(profileEditor.modules, id: \.id) { module in
                     NavigationLink(value: ProfileSplitView.Detail.module(id: module.id)) {
                         moduleRow(for: module)
                     }
                 }
                 .onMove(perform: moveModules)
-            } header: {
-                if !profileEditor.modules.isEmpty {
-                    Text(Strings.Global.modules)
-                }
             }
+            .themeSection(header: !profileEditor.modules.isEmpty ? Strings.Global.modules : nil)
         }
         .onDeleteCommand(perform: removeSelectedModule)
         .toolbar(content: toolbarContent)

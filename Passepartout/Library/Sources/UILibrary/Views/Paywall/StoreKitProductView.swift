@@ -1,5 +1,5 @@
 //
-//  PaywallView+StoreKit.swift
+//  StoreKitProductView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/7/24.
@@ -28,27 +28,42 @@ import StoreKit
 import SwiftUI
 
 @available(iOS 17, macOS 14, *)
-extension PaywallView {
-    struct StoreKitProductView: View {
-        let style: ProductStyle
+struct StoreKitProductView: View {
+    let style: PaywallProductViewStyle
 
-        let product: InAppProduct
+    let product: InAppProduct
 
-        let onComplete: (String, InAppPurchaseResult) -> Void
+    @Binding
+    var purchasingIdentifier: String?
 
-        let onError: (Error) -> Void
+    let onComplete: (String, InAppPurchaseResult) -> Void
 
-        var body: some View {
-            ProductView(id: product.productIdentifier)
-                .productViewStyle(.compact)
-                .onInAppPurchaseCompletion { skProduct, result in
-                    do {
-                        let skResult = try result.get()
-                        onComplete(skProduct.id, skResult.toResult)
-                    } catch {
-                        onError(error)
-                    }
+    let onError: (Error) -> Void
+
+    var body: some View {
+        ProductView(id: product.productIdentifier)
+            .productViewStyle(style.toStoreKitStyle)
+            .onInAppPurchaseStart { _ in
+                purchasingIdentifier = product.productIdentifier
+            }
+            .onInAppPurchaseCompletion { skProduct, result in
+                do {
+                    let skResult = try result.get()
+                    onComplete(skProduct.id, skResult.toResult)
+                } catch {
+                    onError(error)
                 }
+                purchasingIdentifier = nil
+            }
+    }
+}
+
+@available(iOS 17, macOS 14, *)
+private extension PaywallProductViewStyle {
+    var toStoreKitStyle: some ProductViewStyle {
+        switch self {
+        case .oneTime, .recurring, .donation:
+            return .compact
         }
     }
 }
