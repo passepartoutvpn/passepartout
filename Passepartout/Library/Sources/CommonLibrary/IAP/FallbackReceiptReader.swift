@@ -46,7 +46,7 @@ public actor FallbackReceiptReader: AppReceiptReader {
 
         pp_log(.app, .info, "Parse receipt for user level \(userLevel)")
 
-        // in TestFlight, rely on release receipt
+        // 1. TestFlight, look for release receipt
         let releaseReceipt: InAppReceipt? = await {
             guard userLevel == .beta, let localURL else {
                 return nil
@@ -70,10 +70,6 @@ public actor FallbackReceiptReader: AppReceiptReader {
             return releaseReceipt
         }
 
-        // primary reader
-        pp_log(.app, .info, "\tNo release receipt, read primary receipt")
-        let receipt = await reader?.receipt()
-
         let localReceiptBlock: () async -> InAppReceipt? = { [weak self] in
             guard let localURL, let local = self?.localReader(localURL) else {
                 return nil
@@ -82,17 +78,17 @@ public actor FallbackReceiptReader: AppReceiptReader {
             return await local.receipt()
         }
 
-        // primary receipt + build from local receipt
-        if let receipt {
+        // 2. primary receipt + build from local receipt
+        pp_log(.app, .info, "\tNo release receipt, read primary receipt")
+        if let receipt = await reader?.receipt() {
             if let build = await localReceiptBlock()?.originalBuildNumber {
                 pp_log(.app, .info, "\tRead build number from local receipt: \(build)")
                 return receipt.withBuildNumber(build)
             }
             return receipt
         }
-        // fall back to local receipt
-        else {
-            return await localReceiptBlock()
-        }
+
+        // 3. fall back to local receipt
+        return await localReceiptBlock()
     }
 }
