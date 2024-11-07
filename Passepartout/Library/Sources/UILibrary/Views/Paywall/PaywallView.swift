@@ -29,11 +29,6 @@ import StoreKit
 import SwiftUI
 
 struct PaywallView: View {
-    enum ProductStyle {
-        case oneTime
-
-        case recurring
-    }
 
     @EnvironmentObject
     private var iapManager: IAPManager
@@ -125,7 +120,7 @@ private extension PaywallView {
 #endif
 
     @ViewBuilder
-    func productView(_ style: ProductStyle, for product: InAppProduct) -> some View {
+    func productView(_ style: ProductViewStyle, for product: InAppProduct) -> some View {
         if #available(iOS 17, macOS 14, *) {
             StoreKitProductView(
                 style: style,

@@ -1,5 +1,5 @@
 //
-//  PaywallView+Custom.swift
+//  StoreKitProductView.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/7/24.
@@ -23,45 +23,48 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
 import CommonUtils
 import StoreKit
 import SwiftUI
 
-extension PaywallView {
-    struct CustomProductView: View {
-        let style: ProductStyle
+@available(iOS 17, macOS 14, *)
+struct StoreKitProductView: View {
+    let style: ProductViewStyle
 
-        @ObservedObject
-        var iapManager: IAPManager
+    let product: InAppProduct
 
-        let product: InAppProduct
+    let onComplete: (String, InAppPurchaseResult) -> Void
 
-        let onComplete: (String, InAppPurchaseResult) -> Void
+    let onError: (Error) -> Void
 
-        let onError: (Error) -> Void
-
-        var body: some View {
-            HStack {
-                Text(verbatim: product.localizedTitle)
-                Spacer()
-                Button(action: purchase) {
-                    Text(verbatim: product.localizedPrice)
+    var body: some View {
+        ProductView(id: product.productIdentifier)
+            .productViewStyle(.compact)
+            .onInAppPurchaseCompletion { skProduct, result in
+                do {
+                    let skResult = try result.get()
+                    onComplete(skProduct.id, skResult.toResult)
+                } catch {
+                    onError(error)
                 }
             }
-        }
     }
 }
 
-private extension PaywallView.CustomProductView {
-    func purchase() {
-        Task {
-            do {
-                let result = try await iapManager.purchase(product)
-                onComplete(product.productIdentifier, result)
-            } catch {
-                onError(error)
-            }
+private extension Product.PurchaseResult {
+    var toResult: InAppPurchaseResult {
+        switch self {
+        case .success:
+            return .done
+
+        case .pending:
+            return .pending
+
+        case .userCancelled:
+            return .cancelled
+
+        default:
+            return .cancelled
         }
     }
 }
