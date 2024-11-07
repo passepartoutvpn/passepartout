@@ -50,7 +50,7 @@ struct PaywallView: View {
     private var isFetchingProducts = true
 
     @State
-    private var isPurchasing = false
+    private var purchasingIdentifier: String?
 
     @State
     private var isPurchasePendingConfirmation = false
@@ -69,7 +69,7 @@ struct PaywallView: View {
                     subscriptionFeaturesView
                     restoreView
                 }
-                .disabled(isPurchasing)
+                .disabled(purchasingIdentifier != nil)
             }
         }
         .themeForm()
@@ -105,7 +105,7 @@ private extension PaywallView {
                 iapManager: iapManager,
                 style: .oneTime,
                 product: $0,
-                isPurchasing: $isPurchasing,
+                purchasingIdentifier: $purchasingIdentifier,
                 onComplete: onComplete,
                 onError: onError
             )
@@ -116,7 +116,7 @@ private extension PaywallView {
                 iapManager: iapManager,
                 style: .recurring,
                 product: $0,
-                isPurchasing: $isPurchasing,
+                purchasingIdentifier: $purchasingIdentifier,
                 onComplete: onComplete,
                 onError: onError
             )

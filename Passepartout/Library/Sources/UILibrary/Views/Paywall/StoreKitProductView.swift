@@ -34,7 +34,7 @@ struct StoreKitProductView: View {
     let product: InAppProduct
 
     @Binding
-    var isPurchasing: Bool
+    var purchasingIdentifier: String?
 
     let onComplete: (String, InAppPurchaseResult) -> Void
 
@@ -44,7 +44,7 @@ struct StoreKitProductView: View {
         ProductView(id: product.productIdentifier)
             .productViewStyle(style.toStoreKitStyle)
             .onInAppPurchaseStart { _ in
-                isPurchasing = true
+                purchasingIdentifier = product.productIdentifier
             }
             .onInAppPurchaseCompletion { skProduct, result in
                 do {
@@ -53,7 +53,7 @@ struct StoreKitProductView: View {
                 } catch {
                     onError(error)
                 }
-                isPurchasing = false
+                purchasingIdentifier = nil
             }
     }
 }

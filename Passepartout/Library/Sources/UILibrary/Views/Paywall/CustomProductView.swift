@@ -37,7 +37,7 @@ struct CustomProductView: View {
     let product: InAppProduct
 
     @Binding
-    var isPurchasing: Bool
+    var purchasingIdentifier: String?
 
     let onComplete: (String, InAppPurchaseResult) -> Void
 
@@ -56,10 +56,10 @@ struct CustomProductView: View {
 
 private extension CustomProductView {
     func purchase() {
-        isPurchasing = true
+        purchasingIdentifier = product.productIdentifier
         Task {
             defer {
-                isPurchasing = false
+                purchasingIdentifier = nil
             }
             do {
                 let result = try await iapManager.purchase(product)

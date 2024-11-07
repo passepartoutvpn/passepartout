@@ -42,7 +42,7 @@ struct DonateView: View {
     private var isFetchingProducts = true
 
     @State
-    private var isPurchasing = false
+    private var purchasingIdentifier: String?
 
     @State
     private var isThankYouPresented = false
@@ -57,7 +57,7 @@ struct DonateView: View {
                     .id(UUID())
             } else if !availableProducts.isEmpty {
                 donationsView
-                    .disabled(isPurchasing)
+                    .disabled(purchasingIdentifier != nil)
             }
         }
         .themeForm()
@@ -92,7 +92,7 @@ private extension DonateView {
                 iapManager: iapManager,
                 style: .donation,
                 product: $0,
-                isPurchasing: $isPurchasing,
+                purchasingIdentifier: $purchasingIdentifier,
                 onComplete: onComplete,
                 onError: onError
             )
