@@ -184,10 +184,6 @@ extension IAPManagerTests {
 #endif
     }
 
-    // MARK: Purchasable
-
-    // FIXME: #570, test app library
-
     // MARK: App level
 
     func test_givenBetaApp_thenIsRestricted() async {
