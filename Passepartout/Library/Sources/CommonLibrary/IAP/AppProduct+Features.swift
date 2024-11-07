@@ -35,8 +35,6 @@ extension AppProduct {
 
         public static let networkSettings = AppProduct(featureId: "network_settings")
 
-        public static let siriShortcuts = AppProduct(featureId: "siri")
-
         public static let trustedNetworks = AppProduct(featureId: "trusted_networks")
 
         static let all: [AppProduct] = [
@@ -44,7 +42,6 @@ extension AppProduct {
             .Features.appleTV,
             .Features.interactiveLogin,
             .Features.networkSettings,
-            .Features.siriShortcuts,
             .Features.trustedNetworks
         ]
     }
@@ -56,10 +53,18 @@ extension AppProduct {
 
         public static let allPlatforms = AppProduct(featureId: "full_multi_version")
 
+        public enum Recurring {
+            public static let monthly = AppProduct(featureId: "full.monthly")
+
+            public static let yearly = AppProduct(featureId: "full.yearly")
+        }
+
         static let all: [AppProduct] = [
             .Full.iOS,
             .Full.macOS,
-            .Full.allPlatforms
+            .Full.allPlatforms,
+            .Full.Recurring.monthly,
+            .Full.Recurring.yearly
         ]
     }
 

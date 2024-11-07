@@ -58,11 +58,7 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
                     Button {
                         dismiss()
                     } label: {
-#if os(iOS)
-                        ThemeImage(.close)
-#else
-                        Text(Strings.Global.cancel)
-#endif
+                        ThemeCloseLabel()
                     }
                 }
             }

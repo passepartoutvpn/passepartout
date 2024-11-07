@@ -87,7 +87,6 @@ extension IAPManagerTests {
     func test_givenPurchasedFeatures_thenIsOnlyEligibleForFeatures() async {
         let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [
-            .Features.siriShortcuts,
             .Features.networkSettings
         ])
         let sut = IAPManager(receiptReader: reader)
@@ -97,7 +96,6 @@ extension IAPManagerTests {
         XCTAssertTrue(sut.isEligible(for: .httpProxy))
         XCTAssertFalse(sut.isEligible(for: .onDemand))
         XCTAssertTrue(sut.isEligible(for: .routing))
-        XCTAssertTrue(sut.isEligible(for: .siri))
         XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
     }
 

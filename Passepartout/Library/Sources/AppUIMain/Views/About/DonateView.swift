@@ -25,7 +25,7 @@
 
 import SwiftUI
 
-// FIXME: #819, UI for donations
+// FIXME: #830, UI for donations
 
 struct DonateView: View {
     var body: some View {

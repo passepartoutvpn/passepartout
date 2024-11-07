@@ -278,7 +278,7 @@ struct ThemeNavigationStackModifier: ViewModifier {
                                 Button {
                                     dismiss()
                                 } label: {
-                                    ThemeImage(.close)
+                                    ThemeCloseLabel()
                                 }
                             }
                         }

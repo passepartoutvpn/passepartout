@@ -100,11 +100,7 @@ private extension InteractiveCoordinator {
             }
             ToolbarItem(placement: .cancellationAction) {
                 Button(action: cancel) {
-#if os(iOS)
-                    ThemeImage(.close)
-#else
-                    Text(Strings.Global.cancel)
-#endif
+                    ThemeCloseLabel()
                 }
             }
         }

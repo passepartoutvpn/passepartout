@@ -47,6 +47,9 @@ extension AppUserLevel: AppFeatureProviding {
 extension AppProduct: AppFeatureProviding {
     var features: [AppFeature] {
         switch self {
+        case .Full.Recurring.monthly, .Full.Recurring.yearly:
+            return AppFeature.allCases
+
         case .Features.allProviders:
             return [.providers]
 
@@ -55,9 +58,6 @@ extension AppProduct: AppFeatureProviding {
 
         case .Features.networkSettings:
             return [.dns, .httpProxy, .routing]
-
-        case .Features.siriShortcuts:
-            return [.siri]
 
         case .Features.trustedNetworks:
             return [.onDemand]

@@ -175,12 +175,30 @@ public enum Strings {
     }
   }
   public enum Features {
-    /// Interactive login
-    public static let interactiveLogin = Strings.tr("Localizable", "features.interactive_login", fallback: "Interactive login")
-    /// Providers
-    public static let providers = Strings.tr("Localizable", "features.providers", fallback: "Providers")
-    /// Shortcuts
-    public static let siri = Strings.tr("Localizable", "features.siri", fallback: "Shortcuts")
+    /// %@
+    public static func appleTV(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "features.appleTV", String(describing: p1), fallback: "%@")
+    }
+    /// %@
+    public static func dns(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "features.dns", String(describing: p1), fallback: "%@")
+    }
+    /// %@
+    public static func httpProxy(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "features.httpProxy", String(describing: p1), fallback: "%@")
+    }
+    /// Interactive Login
+    public static let interactiveLogin = Strings.tr("Localizable", "features.interactiveLogin", fallback: "Interactive Login")
+    /// %@
+    public static func onDemand(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "features.onDemand", String(describing: p1), fallback: "%@")
+    }
+    /// All Providers
+    public static let providers = Strings.tr("Localizable", "features.providers", fallback: "All Providers")
+    /// %@
+    public static func routing(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "features.routing", String(describing: p1), fallback: "%@")
+    }
   }
   public enum Global {
     /// About
@@ -490,6 +508,38 @@ public enum Strings {
       }
       /// Pre-shared key
       public static let presharedKey = Strings.tr("Localizable", "modules.wireguard.preshared_key", fallback: "Pre-shared key")
+    }
+  }
+  public enum Paywall {
+    public enum Alerts {
+      public enum Pending {
+        /// The purchase is pending external confirmation. The feature will be credited upon approval.
+        public static let message = Strings.tr("Localizable", "paywall.alerts.pending.message", fallback: "The purchase is pending external confirmation. The feature will be credited upon approval.")
+      }
+    }
+    public enum Rows {
+      /// Restore purchases
+      public static let restorePurchases = Strings.tr("Localizable", "paywall.rows.restore_purchases", fallback: "Restore purchases")
+    }
+    public enum Sections {
+      public enum Features {
+        /// Subscribe for
+        public static let header = Strings.tr("Localizable", "paywall.sections.features.header", fallback: "Subscribe for")
+      }
+      public enum OneTime {
+        /// One-time purchase
+        public static let header = Strings.tr("Localizable", "paywall.sections.one_time.header", fallback: "One-time purchase")
+      }
+      public enum Recurring {
+        /// All features
+        public static let header = Strings.tr("Localizable", "paywall.sections.recurring.header", fallback: "All features")
+      }
+      public enum Restore {
+        /// If you bought this app or feature in the past, you can restore your purchases.
+        public static let footer = Strings.tr("Localizable", "paywall.sections.restore.footer", fallback: "If you bought this app or feature in the past, you can restore your purchases.")
+        /// Restore
+        public static let header = Strings.tr("Localizable", "paywall.sections.restore.header", fallback: "Restore")
+      }
     }
   }
   public enum Placeholders {
