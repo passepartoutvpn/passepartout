@@ -123,7 +123,7 @@ private extension VPNProviderServerView.ServersSubview {
             Section {
                 Toggle(Strings.Providers.onlyFavorites, isOn: $filtersViewModel.onlyShowsFavorites)
             }
-            Section {
+            Group {
                 if isFiltering || !servers.isEmpty {
                     if isFiltering {
                         ProgressView()
@@ -134,9 +134,10 @@ private extension VPNProviderServerView.ServersSubview {
                 } else {
                     emptyView
                 }
-            } header: {
-                Text(filtersViewModel.filters.categoryName ?? Strings.Providers.Vpn.Category.any)
             }
+            .themeSection(
+                header: filtersViewModel.filters.categoryName ?? Strings.Providers.Vpn.Category.any
+            )
         }
     }
 

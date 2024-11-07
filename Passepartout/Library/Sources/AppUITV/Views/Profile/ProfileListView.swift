@@ -47,11 +47,10 @@ struct ProfileListView: View {
 
     var body: some View {
         List {
-            Section {
+            Group {
                 ForEach(headers, id: \.id, content: toggleButton(for:))
-            } header: {
-                Text(Strings.Views.Profiles.Folders.default)
             }
+            .themeSection(header: Strings.Views.Profiles.Folders.default)
         }
         .listStyle(.grouped)
         .scrollClipDisabled()
