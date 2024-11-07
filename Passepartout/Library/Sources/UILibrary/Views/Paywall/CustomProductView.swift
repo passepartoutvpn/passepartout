@@ -36,6 +36,9 @@ struct CustomProductView: View {
 
     let product: InAppProduct
 
+    @Binding
+    var isPurchasing: Bool
+
     let onComplete: (String, InAppPurchaseResult) -> Void
 
     let onError: (Error) -> Void
@@ -53,7 +56,11 @@ struct CustomProductView: View {
 
 private extension CustomProductView {
     func purchase() {
+        isPurchasing = true
         Task {
+            defer {
+                isPurchasing = false
+            }
             do {
                 let result = try await iapManager.purchase(product)
                 onComplete(product.productIdentifier, result)

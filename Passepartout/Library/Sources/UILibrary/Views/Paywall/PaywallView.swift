@@ -41,16 +41,19 @@ struct PaywallView: View {
     let suggestedProduct: AppProduct?
 
     @State
-    private var isFetchingProducts = true
-
-    @State
     private var oneTimeProduct: InAppProduct?
 
     @State
     private var recurringProducts: [InAppProduct] = []
 
     @State
-    private var isPendingPresented = false
+    private var isFetchingProducts = true
+
+    @State
+    private var isPurchasing = false
+
+    @State
+    private var isPurchasePendingConfirmation = false
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -61,16 +64,19 @@ struct PaywallView: View {
                 ProgressView()
                     .id(UUID())
             } else if !recurringProducts.isEmpty {
-                productsView
-                subscriptionFeaturesView
-                restoreView
+                Group {
+                    productsView
+                    subscriptionFeaturesView
+                    restoreView
+                }
+                .disabled(isPurchasing)
             }
         }
         .themeForm()
         .toolbar(content: toolbarContent)
         .alert(
             Strings.Global.purchase,
-            isPresented: $isPendingPresented,
+            isPresented: $isPurchasePendingConfirmation,
             actions: pendingActions,
             message: pendingMessage
         )
@@ -99,6 +105,7 @@ private extension PaywallView {
                 iapManager: iapManager,
                 style: .oneTime,
                 product: $0,
+                isPurchasing: $isPurchasing,
                 onComplete: onComplete,
                 onError: onError
             )
@@ -109,6 +116,7 @@ private extension PaywallView {
                 iapManager: iapManager,
                 style: .recurring,
                 product: $0,
+                isPurchasing: $isPurchasing,
                 onComplete: onComplete,
                 onError: onError
             )
@@ -206,7 +214,7 @@ private extension PaywallView {
             isPresented = false
 
         case .pending:
-            isPendingPresented = true
+            isPurchasePendingConfirmation = true
 
         case .cancelled:
             break

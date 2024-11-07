@@ -36,6 +36,9 @@ public struct PaywallProductView: View {
 
     private let product: InAppProduct
 
+    @Binding
+    private var isPurchasing: Bool
+
     private let onComplete: (String, InAppPurchaseResult) -> Void
 
     private let onError: (Error) -> Void
@@ -44,12 +47,14 @@ public struct PaywallProductView: View {
         iapManager: IAPManager,
         style: PaywallProductViewStyle,
         product: InAppProduct,
+        isPurchasing: Binding<Bool>,
         onComplete: @escaping (String, InAppPurchaseResult) -> Void,
         onError: @escaping (Error) -> Void
     ) {
         self.iapManager = iapManager
         self.style = style
         self.product = product
+        _isPurchasing = isPurchasing
         self.onComplete = onComplete
         self.onError = onError
     }
@@ -59,6 +64,7 @@ public struct PaywallProductView: View {
             StoreKitProductView(
                 style: style,
                 product: product,
+                isPurchasing: $isPurchasing,
                 onComplete: onComplete,
                 onError: onError
             )
@@ -67,6 +73,7 @@ public struct PaywallProductView: View {
                 style: style,
                 iapManager: iapManager,
                 product: product,
+                isPurchasing: $isPurchasing,
                 onComplete: onComplete,
                 onError: onError
             )

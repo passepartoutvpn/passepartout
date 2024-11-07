@@ -33,6 +33,9 @@ struct StoreKitProductView: View {
 
     let product: InAppProduct
 
+    @Binding
+    var isPurchasing: Bool
+
     let onComplete: (String, InAppPurchaseResult) -> Void
 
     let onError: (Error) -> Void
@@ -40,6 +43,9 @@ struct StoreKitProductView: View {
     var body: some View {
         ProductView(id: product.productIdentifier)
             .productViewStyle(style.toStoreKitStyle)
+            .onInAppPurchaseStart { _ in
+                isPurchasing = true
+            }
             .onInAppPurchaseCompletion { skProduct, result in
                 do {
                     let skResult = try result.get()
@@ -47,6 +53,7 @@ struct StoreKitProductView: View {
                 } catch {
                     onError(error)
                 }
+                isPurchasing = false
             }
     }
 }
