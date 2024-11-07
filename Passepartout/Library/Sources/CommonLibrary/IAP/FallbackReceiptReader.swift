@@ -33,6 +33,8 @@ public actor FallbackReceiptReader: AppReceiptReader {
 
     private let localReader: (URL) -> InAppReceiptReader?
 
+    private var pendingTask: Task<InAppReceipt?, Never>?
+
     public init(
         reader: (InAppReceiptReader & Sendable)?,
         localReader: @escaping @Sendable (URL) -> InAppReceiptReader & Sendable
@@ -42,16 +44,30 @@ public actor FallbackReceiptReader: AppReceiptReader {
     }
 
     public func receipt(at userLevel: AppUserLevel) async -> InAppReceipt? {
+        if let pendingTask {
+            _ = await pendingTask.value
+        }
+        pendingTask = Task {
+            await asyncReceipt(at: userLevel)
+        }
+        let receipt = await pendingTask?.value
+        pendingTask = nil
+        return receipt
+    }
+}
+
+private extension FallbackReceiptReader {
+    func asyncReceipt(at userLevel: AppUserLevel) async -> InAppReceipt? {
         let localURL = Bundle.main.appStoreReceiptURL
 
-        pp_log(.app, .debug, "Parse receipt for user level \(userLevel)")
+        pp_log(.iap, .debug, "\tParse receipt for user level \(userLevel)")
 
         // 1. TestFlight, look for release receipt
         let releaseReceipt: InAppReceipt? = await {
             guard userLevel == .beta, let localURL else {
                 return nil
             }
-            pp_log(.app, .debug, "\tTestFlight, look for release receipt")
+            pp_log(.iap, .debug, "\tTestFlight, look for release receipt")
             let releaseURL = localURL
                 .deletingLastPathComponent()
                 .appendingPathComponent("receipt")
@@ -67,7 +83,7 @@ public actor FallbackReceiptReader: AppReceiptReader {
         }()
 
         if let releaseReceipt {
-            pp_log(.app, .debug, "\tTestFlight, return release receipt")
+            pp_log(.iap, .debug, "\tTestFlight, return release receipt")
             return releaseReceipt
         }
 
@@ -79,18 +95,18 @@ public actor FallbackReceiptReader: AppReceiptReader {
         }
 
         // 2. primary receipt + build from local receipt
-        pp_log(.app, .debug, "\tNo release receipt, read primary receipt")
+        pp_log(.iap, .debug, "\tNo release receipt, read primary receipt")
         if let receipt = await reader?.receipt() {
             if let build = await localReceiptBlock()?.originalBuildNumber {
-                pp_log(.app, .debug, "\tReturn primary receipt with local build: \(build)")
+                pp_log(.iap, .debug, "\tReturn primary receipt with local build: \(build)")
                 return receipt.withBuildNumber(build)
             }
-            pp_log(.app, .debug, "\tReturn primary receipt without local build")
+            pp_log(.iap, .debug, "\tReturn primary receipt without local build")
             return receipt
         }
 
         // 3. fall back to local receipt
-        pp_log(.app, .debug, "\tReturn local receipt")
+        pp_log(.iap, .debug, "\tReturn local receipt")
         return await localReceiptBlock()
     }
 }
