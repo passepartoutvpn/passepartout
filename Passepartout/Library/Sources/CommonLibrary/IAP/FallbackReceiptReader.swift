@@ -44,47 +44,53 @@ public actor FallbackReceiptReader: AppReceiptReader {
     public func receipt(at userLevel: AppUserLevel) async -> InAppReceipt? {
         let localURL = Bundle.main.appStoreReceiptURL
 
-        if let receipt = await reader?.receipt() {
+        pp_log(.app, .debug, "Parse receipt for user level \(userLevel)")
 
-            // fetch build number from local receipt
-            if let localURL,
-               let local = localReader(localURL),
-               let localReceipt = await local.receipt(),
-               let build = localReceipt.originalBuildNumber {
-
-                return receipt.withBuildNumber(build)
+        // 1. TestFlight, look for release receipt
+        let releaseReceipt: InAppReceipt? = await {
+            guard userLevel == .beta, let localURL else {
+                return nil
             }
-            return receipt
-        }
-
-        // fall back to release/sandbox receipt
-        guard let localURL else {
-            return nil
-        }
-
-        // attempt fallback from primary to local receipt
-        pp_log(.app, .error, "Primary receipt not found, falling back to local receipt")
-        if let local = localReader(localURL), let localReceipt = await local.receipt() {
-            return localReceipt
-        }
-
-        // in TestFlight, attempt fallback from sandbox to release receipt
-        if userLevel == .beta {
+            pp_log(.app, .debug, "\tTestFlight, look for release receipt")
             let releaseURL = localURL
                 .deletingLastPathComponent()
                 .appendingPathComponent("receipt")
 
             guard releaseURL != localURL else {
 #if !os(macOS) && !targetEnvironment(simulator)
-                assertionFailure("How can release URL be equal to sandbox URL in TestFlight?")
+                assertionFailure("How can release URL be equal to Sandbox URL in TestFlight?")
 #endif
                 return nil
             }
-            pp_log(.app, .error, "Sandbox receipt not found, falling back to Release receipt")
             let release = localReader(releaseURL)
             return await release?.receipt()
+        }()
+
+        if let releaseReceipt {
+            pp_log(.app, .debug, "\tTestFlight, return release receipt")
+            return releaseReceipt
         }
 
-        return nil
+        let localReceiptBlock: () async -> InAppReceipt? = { [weak self] in
+            guard let localURL, let local = self?.localReader(localURL) else {
+                return nil
+            }
+            return await local.receipt()
+        }
+
+        // 2. primary receipt + build from local receipt
+        pp_log(.app, .debug, "\tNo release receipt, read primary receipt")
+        if let receipt = await reader?.receipt() {
+            if let build = await localReceiptBlock()?.originalBuildNumber {
+                pp_log(.app, .debug, "\tReturn primary receipt with local build: \(build)")
+                return receipt.withBuildNumber(build)
+            }
+            pp_log(.app, .debug, "\tReturn primary receipt without local build")
+            return receipt
+        }
+
+        // 3. fall back to local receipt
+        pp_log(.app, .debug, "\tReturn local receipt")
+        return await localReceiptBlock()
     }
 }
