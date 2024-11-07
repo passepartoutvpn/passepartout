@@ -36,7 +36,7 @@ extension AboutRouterView {
                 navigationRoute: $navigationRoute
             )
         } detail: {
-            NavigationStack {
+            NavigationStack(path: $path) {
                 pushDestination(for: navigationRoute)
                     .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
             }
