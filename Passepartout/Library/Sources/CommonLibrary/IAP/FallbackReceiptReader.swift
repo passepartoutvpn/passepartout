@@ -85,7 +85,7 @@ public actor FallbackReceiptReader: AppReceiptReader {
                 pp_log(.app, .debug, "\tReturn primary receipt with local build: \(build)")
                 return receipt.withBuildNumber(build)
             }
-            pp_log(.app, .debug, "\tReturn primary receipt")
+            pp_log(.app, .debug, "\tReturn primary receipt without local build")
             return receipt
         }
 
