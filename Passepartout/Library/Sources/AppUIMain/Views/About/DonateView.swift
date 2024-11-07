@@ -117,7 +117,7 @@ private extension DonateView {
         do {
             availableProducts = try await iapManager.purchasableProducts(for: AppProduct.Donations.all)
         } catch {
-            onError(error)
+            onError(error, dismissing: true)
         }
     }
 
@@ -138,6 +138,14 @@ private extension DonateView {
     }
 
     func onError(_ error: Error) {
-        errorHandler.handle(error, title: title)
+        onError(error, dismissing: false)
+    }
+
+    func onError(_ error: Error, dismissing: Bool) {
+        errorHandler.handle(error, title: title) {
+            if dismissing {
+                dismiss()
+            }
+        }
     }
 }

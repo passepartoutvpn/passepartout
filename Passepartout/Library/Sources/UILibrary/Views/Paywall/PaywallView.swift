@@ -193,7 +193,7 @@ private extension PaywallView {
                 $0.productIdentifier != oneTimeProduct?.productIdentifier
             }
         } catch {
-            onError(error)
+            onError(error, dismissing: true)
         }
     }
 
@@ -214,7 +214,15 @@ private extension PaywallView {
     }
 
     func onError(_ error: Error) {
-        errorHandler.handle(error, title: Strings.Global.purchase)
+        onError(error, dismissing: false)
+    }
+
+    func onError(_ error: Error, dismissing: Bool) {
+        errorHandler.handle(error, title: Strings.Global.purchase) {
+            if dismissing {
+                isPresented = false
+            }
+        }
     }
 }
 
