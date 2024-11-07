@@ -24,6 +24,7 @@
 //
 
 import CommonLibrary
+import CommonUtils
 import SwiftUI
 
 public struct RestorePurchasesButton: View {
@@ -31,14 +32,28 @@ public struct RestorePurchasesButton: View {
     @EnvironmentObject
     private var iapManager: IAPManager
 
-    public init() {
+    @ObservedObject
+    private var errorHandler: ErrorHandler
+
+    public init(errorHandler: ErrorHandler) {
+        self.errorHandler = errorHandler
     }
 
     public var body: some View {
-        Button(Strings.Paywall.Rows.restorePurchases) {
+        Button(title) {
             Task {
-                try await iapManager.restorePurchases()
+                do {
+                    try await iapManager.restorePurchases()
+                } catch {
+                    errorHandler.handle(error, title: title)
+                }
             }
         }
+    }
+}
+
+private extension RestorePurchasesButton {
+    var title: String {
+        Strings.Paywall.Rows.restorePurchases
     }
 }

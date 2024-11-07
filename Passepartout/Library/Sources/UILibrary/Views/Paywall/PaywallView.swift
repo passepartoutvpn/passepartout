@@ -132,7 +132,7 @@ private extension PaywallView {
 #endif
 
     var restoreView: some View {
-        RestorePurchasesButton()
+        RestorePurchasesButton(errorHandler: errorHandler)
             .themeSectionWithSingleRow(
                 header: Strings.Paywall.Sections.Restore.header,
                 footer: Strings.Paywall.Sections.Restore.footer,
