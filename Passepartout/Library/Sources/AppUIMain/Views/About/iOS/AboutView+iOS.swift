@@ -35,7 +35,9 @@ extension AboutView {
             Group {
                 linksLink
                 creditsLink
-                donateLink
+                if !iapManager.isRestricted {
+                    donateLink
+                }
             }
             .themeSection(header: Strings.Views.About.Sections.resources)
             Section {

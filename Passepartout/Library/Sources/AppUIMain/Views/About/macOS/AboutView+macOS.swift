@@ -34,7 +34,9 @@ extension AboutView {
             Section {
                 linksLink
                 creditsLink
-                donateLink
+                if !iapManager.isRestricted {
+                    donateLink
+                }
                 diagnosticsLink
             }
         }

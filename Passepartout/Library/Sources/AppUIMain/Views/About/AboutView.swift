@@ -29,6 +29,10 @@ import PassepartoutKit
 import SwiftUI
 
 struct AboutView: View {
+
+    @EnvironmentObject
+    var iapManager: IAPManager
+
     let profileManager: ProfileManager
 
     @Binding
