@@ -38,7 +38,7 @@ struct PaywallView: View {
 
     let suggestedProduct: AppProduct?
 
-    // FIXME: #585, implement payments
+    // FIXME: #819, UI for paywall
     var body: some View {
         VStack {
             Spacer()
