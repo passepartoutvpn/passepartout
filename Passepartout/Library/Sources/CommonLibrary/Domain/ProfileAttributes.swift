@@ -52,6 +52,27 @@ public struct ProfileAttributes: Hashable, Codable {
     }
 }
 
+extension ProfileAttributes: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        let descs = [
+            fingerprint.map {
+                "fingerprint: \($0)"
+            },
+            lastUpdate.map {
+                "lastUpdate: \($0)"
+            },
+            isAvailableForTV.map {
+                "isAvailableForTV: \($0)"
+            },
+            expirationDate.map {
+                "expirationDate: \($0)"
+            }
+        ].compactMap { $0 }
+
+        return "{\(descs.joined(separator: ", "))}"
+    }
+}
+
 extension ProfileAttributes {
     public var isExpired: Bool {
         if let expirationDate {
