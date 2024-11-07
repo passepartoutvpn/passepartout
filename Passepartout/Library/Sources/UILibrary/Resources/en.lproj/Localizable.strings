@@ -155,6 +155,8 @@
 "views.about.credits.translations" = "Translations";
 
 "views.donate.title" = "Make a donation";
+"views.donate.sections.main.footer" = "If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
+"views.donate.alerts.thank_you.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
 
 "views.diagnostics.title" = "Diagnostics";
 "views.diagnostics.sections.live" = "Live log";
@@ -252,7 +254,7 @@
 "ui.connection_status.on_demand_suffix" = " (on-demand)";
 "ui.profile_context.connect_to" = "Connect to...";
 
-// MARK: - Paywalls
+// MARK: - Paywall
 
 "paywall.sections.one_time.header" = "One-time purchase";
 "paywall.sections.recurring.header" = "All features";

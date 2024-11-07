@@ -696,6 +696,20 @@ public enum Strings {
     public enum Donate {
       /// Make a donation
       public static let title = Strings.tr("Localizable", "views.donate.title", fallback: "Make a donation")
+      public enum Alerts {
+        public enum ThankYou {
+          /// This means a lot to me and I really hope you keep using and promoting this app.
+          public static let message = Strings.tr("Localizable", "views.donate.alerts.thank_you.message", fallback: "This means a lot to me and I really hope you keep using and promoting this app.")
+        }
+      }
+      public enum Sections {
+        public enum Main {
+          /// If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.
+          /// 
+          /// You will only be charged once per donation, and you can donate multiple times.
+          public static let footer = Strings.tr("Localizable", "views.donate.sections.main.footer", fallback: "If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.")
+        }
+      }
     }
     public enum Profile {
       public enum ModuleList {

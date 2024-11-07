@@ -41,6 +41,9 @@ struct DonateView: View {
     @State
     private var availableProducts: [InAppProduct] = []
 
+    @State
+    private var isThankYouPresented = false
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
@@ -54,13 +57,13 @@ struct DonateView: View {
             }
         }
         .themeForm()
-        .navigationTitle(Strings.Views.Donate.title)
-//        .alert(
-//            Strings.Global.purchase,
-//            isPresented: $isPendingPresented,
-//            actions: pendingActions,
-//            message: pendingMessage
-//        )
+        .navigationTitle(title)
+        .alert(
+            title,
+            isPresented: $isThankYouPresented,
+            actions: thankYouActions,
+            message: thankYouMessage
+        )
         .task {
             await fetchAvailableProducts()
         }
@@ -69,17 +72,35 @@ struct DonateView: View {
 }
 
 private extension DonateView {
+    var title: String {
+        Strings.Views.Donate.title
+    }
+
+    @ViewBuilder
     var donationsView: some View {
-        ForEach(availableProducts, id: \.productIdentifier) {
-            PaywallProductView(
-                iapManager: iapManager,
-                style: .donation,
-                product: $0,
-                onComplete: onComplete,
-                onError: onError
-            )
+        Section {
+            ForEach(availableProducts, id: \.productIdentifier) {
+                PaywallProductView(
+                    iapManager: iapManager,
+                    style: .donation,
+                    product: $0,
+                    onComplete: onComplete,
+                    onError: onError
+                )
+            }
+        } footer: {
+            Text(Strings.Views.Donate.Sections.Main.footer)
         }
-        .themeSection()
+    }
+
+    func thankYouActions() -> some View {
+        Button(Strings.Global.ok) {
+            dismiss()
+        }
+    }
+
+    func thankYouMessage() -> some View {
+        Text(Strings.Views.Donate.Alerts.ThankYou.message)
     }
 }
 
@@ -95,8 +116,7 @@ private extension DonateView {
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
         switch result {
         case .done:
-            // FIXME: #830, thank you for donation
-            dismiss()
+            isThankYouPresented = true
 
         case .pending, .cancelled:
             break
@@ -107,6 +127,6 @@ private extension DonateView {
     }
 
     func onError(_ error: Error) {
-        errorHandler.handle(error, title: Strings.Views.Donate.title)
+        errorHandler.handle(error, title: title)
     }
 }
