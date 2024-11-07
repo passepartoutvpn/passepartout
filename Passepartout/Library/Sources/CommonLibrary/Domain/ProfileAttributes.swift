@@ -28,30 +28,27 @@ import Foundation
 import PassepartoutKit
 
 public struct ProfileAttributes: Hashable, Codable {
-    public var isAvailableForTV: Bool?
-
-    public var expirationDate: Date?
+    public var fingerprint: UUID?
 
     public var lastUpdate: Date?
 
-    public var fingerprint: UUID?
+    public var isAvailableForTV: Bool?
+
+    public var expirationDate: Date?
 
     public init() {
     }
 
     public init(
-        isAvailableForTV: Bool?,
-        expirationDate: Date?,
+        fingerprint: UUID?,
         lastUpdate: Date?,
-        fingerprint: UUID?
+        isAvailableForTV: Bool?,
+        expirationDate: Date?
     ) {
-        self.isAvailableForTV = isAvailableForTV
-        self.lastUpdate = lastUpdate
         self.fingerprint = fingerprint
-    }
-
-    public func isEquivalent(to other: Self) -> Bool {
-        isAvailableForTV == other.isAvailableForTV
+        self.lastUpdate = lastUpdate
+        self.isAvailableForTV = isAvailableForTV
+        self.expirationDate = expirationDate
     }
 }
 
