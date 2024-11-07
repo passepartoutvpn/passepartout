@@ -118,7 +118,10 @@ private extension DonateView {
         case .done:
             isThankYouPresented = true
 
-        case .pending, .cancelled:
+        case .pending:
+            dismiss()
+
+        case .cancelled:
             break
 
         case .notFound:
