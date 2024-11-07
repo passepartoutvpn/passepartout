@@ -28,9 +28,13 @@ import PassepartoutKit
 import PassepartoutWireGuardGo
 
 extension LoggerDestination {
-    public static let app = Self(category: "app")
+    public static let app = LoggerDestination(category: "app")
 
-    public static let iap = Self(category: "iap")
+    public enum App {
+        public static let iap = LoggerDestination(category: "app.iap")
+
+        public static let profiles = LoggerDestination(category: "app.profiles")
+    }
 }
 
 extension WireGuard.Configuration.Builder {
