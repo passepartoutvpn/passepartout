@@ -51,6 +51,7 @@ public actor FallbackReceiptReader: AppReceiptReader {
             guard userLevel == .beta, let localURL else {
                 return nil
             }
+            pp_log(.app, .info, "\tTestFlight, look for release receipt")
             let releaseURL = localURL
                 .deletingLastPathComponent()
                 .appendingPathComponent("receipt")
@@ -61,12 +62,12 @@ public actor FallbackReceiptReader: AppReceiptReader {
 #endif
                 return nil
             }
-            pp_log(.app, .info, "\tTestFlight build, look for release receipt")
             let release = localReader(releaseURL)
             return await release?.receipt()
         }()
 
         if let releaseReceipt {
+            pp_log(.app, .info, "\tTestFlight, return release receipt")
             return releaseReceipt
         }
 
@@ -74,7 +75,6 @@ public actor FallbackReceiptReader: AppReceiptReader {
             guard let localURL, let local = self?.localReader(localURL) else {
                 return nil
             }
-            pp_log(.app, .info, "\tRead local receipt")
             return await local.receipt()
         }
 
@@ -82,13 +82,15 @@ public actor FallbackReceiptReader: AppReceiptReader {
         pp_log(.app, .info, "\tNo release receipt, read primary receipt")
         if let receipt = await reader?.receipt() {
             if let build = await localReceiptBlock()?.originalBuildNumber {
-                pp_log(.app, .info, "\tRead build number from local receipt: \(build)")
+                pp_log(.app, .info, "\tReturn primary receipt with local build: \(build)")
                 return receipt.withBuildNumber(build)
             }
+            pp_log(.app, .info, "\tReturn primary receipt")
             return receipt
         }
 
         // 3. fall back to local receipt
+        pp_log(.app, .info, "\tReturn local receipt")
         return await localReceiptBlock()
     }
 }
