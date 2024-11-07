@@ -29,7 +29,7 @@ import StoreKit
 import SwiftUI
 
 struct CustomProductView: View {
-    let style: ProductViewStyle
+    let style: PaywallProductViewStyle
 
     @ObservedObject
     var iapManager: IAPManager

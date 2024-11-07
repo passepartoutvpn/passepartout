@@ -29,7 +29,7 @@ import SwiftUI
 
 @available(iOS 17, macOS 14, *)
 struct StoreKitProductView: View {
-    let style: ProductViewStyle
+    let style: PaywallProductViewStyle
 
     let product: InAppProduct
 
@@ -39,7 +39,7 @@ struct StoreKitProductView: View {
 
     var body: some View {
         ProductView(id: product.productIdentifier)
-            .productViewStyle(.compact)
+            .productViewStyle(style.toStoreKitStyle)
             .onInAppPurchaseCompletion { skProduct, result in
                 do {
                     let skResult = try result.get()
@@ -48,6 +48,16 @@ struct StoreKitProductView: View {
                     onError(error)
                 }
             }
+    }
+}
+
+@available(iOS 17, macOS 14, *)
+private extension PaywallProductViewStyle {
+    var toStoreKitStyle: some ProductViewStyle {
+        switch self {
+        case .oneTime, .recurring, .donation:
+            return .compact
+        }
     }
 }
 

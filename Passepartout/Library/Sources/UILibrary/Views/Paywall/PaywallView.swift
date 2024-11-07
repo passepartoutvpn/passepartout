@@ -95,11 +95,23 @@ private extension PaywallView {
     @ViewBuilder
     var productsView: some View {
         oneTimeProduct.map {
-            productView(.oneTime, for: $0)
-                .themeSection(header: Strings.Paywall.Sections.OneTime.header)
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .oneTime,
+                product: $0,
+                onComplete: onComplete,
+                onError: onError
+            )
+            .themeSection(header: Strings.Paywall.Sections.OneTime.header)
         }
         ForEach(recurringProducts, id: \.productIdentifier) {
-            productView(.recurring, for: $0)
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .recurring,
+                product: $0,
+                onComplete: onComplete,
+                onError: onError
+            )
         }
         .themeSection(header: Strings.Paywall.Sections.Recurring.header)
     }
@@ -118,26 +130,6 @@ private extension PaywallView {
         }
     }
 #endif
-
-    @ViewBuilder
-    func productView(_ style: ProductViewStyle, for product: InAppProduct) -> some View {
-        if #available(iOS 17, macOS 14, *) {
-            StoreKitProductView(
-                style: style,
-                product: product,
-                onComplete: onComplete,
-                onError: onError
-            )
-        } else {
-            CustomProductView(
-                style: style,
-                iapManager: iapManager,
-                product: product,
-                onComplete: onComplete,
-                onError: onError
-            )
-        }
-    }
 
     var restoreView: some View {
         RestorePurchasesButton()

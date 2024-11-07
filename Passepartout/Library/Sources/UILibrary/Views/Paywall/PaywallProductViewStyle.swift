@@ -1,5 +1,5 @@
 //
-//  ProductViewStyle.swift
+//  PaywallProductViewStyle.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/7/24.
@@ -25,8 +25,10 @@
 
 import Foundation
 
-enum ProductViewStyle {
+public enum PaywallProductViewStyle {
     case oneTime
 
     case recurring
+
+    case donation
 }
