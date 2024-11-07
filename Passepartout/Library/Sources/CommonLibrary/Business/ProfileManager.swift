@@ -226,7 +226,7 @@ extension ProfileManager {
 
     public func eraseRemotelySharedProfiles() async throws {
         pp_log(.App.profiles, .notice, "Erase remotely shared profiles...")
-        try await remoteRepository?.removeProfiles(withIds: Array(allRemoteProfiles.keys))
+        try await remoteRepository?.removeAllProfiles()
     }
 }
 

@@ -33,4 +33,6 @@ public protocol ProfileRepository {
     func saveProfile(_ profile: Profile) async throws
 
     func removeProfiles(withIds profileIds: [Profile.ID]) async throws
+
+    func removeAllProfiles() async throws
 }

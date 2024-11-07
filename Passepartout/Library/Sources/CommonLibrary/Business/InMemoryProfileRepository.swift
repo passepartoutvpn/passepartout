@@ -60,4 +60,9 @@ public final class InMemoryProfileRepository: ProfileRepository {
             !ids.contains($0.id)
         }
     }
+
+    public func removeAllProfiles() async throws {
+        pp_log(.App.profiles, .info, "Remove all profiles")
+        profiles = []
+    }
 }

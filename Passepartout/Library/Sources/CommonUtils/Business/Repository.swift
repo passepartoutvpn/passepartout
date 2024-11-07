@@ -56,5 +56,5 @@ public protocol Repository {
 
     func saveEntities(_ entities: [Entity]) async throws
 
-    func removeEntities(withIds ids: [UUID]) async throws
+    func removeEntities(withIds ids: [UUID]?) async throws
 }

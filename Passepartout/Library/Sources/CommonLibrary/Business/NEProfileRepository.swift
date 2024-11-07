@@ -85,6 +85,10 @@ public final class NEProfileRepository: ProfileRepository {
             removedIds.insert(id)
         }
     }
+
+    public func removeAllProfiles() async throws {
+        try await removeProfiles(withIds: profilesSubject.value.map(\.id))
+    }
 }
 
 private extension NEProfileRepository {
