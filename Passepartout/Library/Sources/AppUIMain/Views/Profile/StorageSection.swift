@@ -39,24 +39,17 @@ struct StorageSection: View {
 
     var body: some View {
         debugChanges()
-        return Group {
-            sharingToggle
-        }
-        .themeSection(
-            header: Strings.Global.storage,
-            footer: footer
-        )
+        return sharingToggle
+            .themeSectionWithSingleRow(
+                header: Strings.Global.storage,
+                footer: Strings.Modules.General.Sections.Storage.footer
+            )
     }
 }
 
 private extension StorageSection {
     var sharingToggle: some View {
         Toggle(Strings.Modules.General.Rows.icloudSharing, isOn: $profileEditor.isShared)
-            .themeRow(footer: footer)
-    }
-
-    var footer: String {
-        Strings.Modules.General.Sections.Storage.footer
     }
 }
 

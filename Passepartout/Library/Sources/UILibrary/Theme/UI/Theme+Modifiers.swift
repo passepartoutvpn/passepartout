@@ -80,7 +80,7 @@ extension View {
     }
 
     public func themeForm() -> some View {
-        modifier(ThemeFormModifier())
+        formStyle(.grouped)
     }
 
     public func themeManualInput() -> some View {
@@ -93,6 +93,20 @@ extension View {
 
     public func themeRow(footer: String? = nil) -> some View {
         modifier(ThemeRowWithFooterModifier(footer: footer))
+    }
+
+    public func themeSectionWithSingleRow(header: String? = nil, footer: String, above: Bool = false) -> some View {
+        Group {
+            if above {
+                EmptyView()
+                    .themeRow(footer: footer)
+
+                self
+            } else {
+                themeRow(footer: footer)
+            }
+        }
+        .themeSection(header: header, footer: footer)
     }
 
     public func themeNavigationDetail() -> some View {
@@ -277,13 +291,6 @@ struct ThemeNavigationStackModifier: ViewModifier {
 }
 
 // MARK: - Content modifiers
-
-struct ThemeFormModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .formStyle(.grouped)
-    }
-}
 
 struct ThemeManualInputModifier: ViewModifier {
 }
