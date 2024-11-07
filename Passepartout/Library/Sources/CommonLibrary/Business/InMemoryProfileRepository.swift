@@ -46,7 +46,7 @@ public final class InMemoryProfileRepository: ProfileRepository {
     }
 
     public func saveProfile(_ profile: Profile) {
-        pp_log(.app, .info, "Save profile: \(profile.id))")
+        pp_log(.App.profiles, .info, "Save profile: \(profile.id))")
         if let index = profiles.firstIndex(where: { $0.id == profile.id }) {
             profiles[index] = profile
         } else {
@@ -55,7 +55,7 @@ public final class InMemoryProfileRepository: ProfileRepository {
     }
 
     public func removeProfiles(withIds ids: [Profile.ID]) {
-        pp_log(.app, .info, "Remove profiles: \(ids)")
+        pp_log(.App.profiles, .info, "Remove profiles: \(ids)")
         profiles = profiles.filter {
             !ids.contains($0.id)
         }

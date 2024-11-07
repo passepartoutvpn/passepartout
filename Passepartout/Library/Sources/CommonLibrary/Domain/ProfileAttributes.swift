@@ -73,7 +73,7 @@ extension ProfileAttributes: ProfileUserInfoTransformable {
             let data = try JSONEncoder().encode(self)
             return try JSONSerialization.jsonObject(with: data) as? [String: AnyHashable] ?? [:]
         } catch {
-            pp_log(.app, .error, "Unable to encode ProfileAttributes to dictionary: \(error)")
+            pp_log(.App.profiles, .error, "Unable to encode ProfileAttributes to dictionary: \(error)")
             return [:]
         }
     }
@@ -83,7 +83,7 @@ extension ProfileAttributes: ProfileUserInfoTransformable {
             let data = try JSONSerialization.data(withJSONObject: userInfo ?? [:])
             self = try JSONDecoder().decode(ProfileAttributes.self, from: data)
         } catch {
-            pp_log(.app, .error, "Unable to decode ProfileAttributes from dictionary: \(error)")
+            pp_log(.App.profiles, .error, "Unable to decode ProfileAttributes from dictionary: \(error)")
             return nil
         }
     }

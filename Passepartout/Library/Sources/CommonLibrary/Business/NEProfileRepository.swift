@@ -92,10 +92,10 @@ private extension NEProfileRepository {
         let profiles = managers.values.compactMap {
             do {
                 let profile = try repository.profile(from: $0)
-                pp_log(.app, .debug, "Attributes for profile \(profile.id): \(profile.attributes)")
+                pp_log(.App.profiles, .debug, "Attributes for profile \(profile.id): \(profile.attributes)")
                 return profile
             } catch {
-                pp_log(.app, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
+                pp_log(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
                 return nil
             }
         }
@@ -119,7 +119,7 @@ private extension NEProfileRepository {
             }
 
         if !removedProfilesDescription.isEmpty {
-            pp_log(.app, .info, "Sync profiles removed externally: \(removedProfilesDescription)")
+            pp_log(.App.profiles, .info, "Sync profiles removed externally: \(removedProfilesDescription)")
         }
 
         profilesSubject.send(profiles)

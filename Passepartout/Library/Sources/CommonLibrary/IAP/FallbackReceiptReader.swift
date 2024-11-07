@@ -60,14 +60,14 @@ private extension FallbackReceiptReader {
     func asyncReceipt(at userLevel: AppUserLevel) async -> InAppReceipt? {
         let localURL = Bundle.main.appStoreReceiptURL
 
-        pp_log(.iap, .debug, "\tParse receipt for user level \(userLevel)")
+        pp_log(.App.iap, .debug, "\tParse receipt for user level \(userLevel)")
 
         // 1. TestFlight, look for release receipt
         let releaseReceipt: InAppReceipt? = await {
             guard userLevel == .beta, let localURL else {
                 return nil
             }
-            pp_log(.iap, .debug, "\tTestFlight, look for release receipt")
+            pp_log(.App.iap, .debug, "\tTestFlight, look for release receipt")
             let releaseURL = localURL
                 .deletingLastPathComponent()
                 .appendingPathComponent("receipt")
@@ -83,7 +83,7 @@ private extension FallbackReceiptReader {
         }()
 
         if let releaseReceipt {
-            pp_log(.iap, .debug, "\tTestFlight, return release receipt")
+            pp_log(.App.iap, .debug, "\tTestFlight, return release receipt")
             return releaseReceipt
         }
 
@@ -95,18 +95,18 @@ private extension FallbackReceiptReader {
         }
 
         // 2. primary receipt + build from local receipt
-        pp_log(.iap, .debug, "\tNo release receipt, read primary receipt")
+        pp_log(.App.iap, .debug, "\tNo release receipt, read primary receipt")
         if let receipt = await reader?.receipt() {
             if let build = await localReceiptBlock()?.originalBuildNumber {
-                pp_log(.iap, .debug, "\tReturn primary receipt with local build: \(build)")
+                pp_log(.App.iap, .debug, "\tReturn primary receipt with local build: \(build)")
                 return receipt.withBuildNumber(build)
             }
-            pp_log(.iap, .debug, "\tReturn primary receipt without local build")
+            pp_log(.App.iap, .debug, "\tReturn primary receipt without local build")
             return receipt
         }
 
         // 3. fall back to local receipt
-        pp_log(.iap, .debug, "\tReturn local receipt")
+        pp_log(.App.iap, .debug, "\tReturn local receipt")
         return await localReceiptBlock()
     }
 }
