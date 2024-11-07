@@ -67,14 +67,19 @@ public final class AppContext: ObservableObject {
             return
         }
         isActivating = true
+        pp_log(.app, .notice, "Application became active")
         Task {
-            do {
-                pp_log(.app, .notice, "Application became active")
-                await iapManager.reloadReceipt()
-                pp_log(.app, .notice, "Prepare tunnel and purge stale data...")
-                try await tunnel.prepare(purge: true)
-            } catch {
-                pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
+            await withTaskGroup(of: Void.self) { group in
+                group.addTask {
+                    do {
+                        try await self.tunnel.prepare(purge: true)
+                    } catch {
+                        pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
+                    }
+                }
+                group.addTask {
+                    await self.iapManager.reloadReceipt()
+                }
             }
             isActivating = false
         }

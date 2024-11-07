@@ -99,20 +99,24 @@ extension ExtendedTunnel {
     }
 
     public func prepare(purge: Bool) async throws {
+        pp_log(.app, .notice, "Prepare tunnel and purge stale data (\(purge))...")
         try await tunnel.prepare(purge: purge)
     }
 
     public func install(_ profile: Profile) async throws {
+        pp_log(.app, .notice, "Install profile \(profile.id)...")
         let newProfile = try processedProfile(profile)
         try await tunnel.install(newProfile, connect: false, title: processedTitle)
     }
 
     public func connect(with profile: Profile) async throws {
+        pp_log(.app, .notice, "Connect to profile \(profile.id)...")
         let newProfile = try processedProfile(profile)
         try await tunnel.install(newProfile, connect: true, title: processedTitle)
     }
 
     public func disconnect() async throws {
+        pp_log(.app, .notice, "Disconnect...")
         try await tunnel.disconnect()
     }
 
