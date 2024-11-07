@@ -88,10 +88,6 @@ private extension SettingsSectionGroup {
                 do {
                     pp_log(.app, .info, "Erase CloudKit profiles...")
                     try await profileManager.eraseRemotelySharedProfiles()
-
-                    let containerId = BundleConfiguration.mainString(for: .cloudKitId)
-                    pp_log(.app, .info, "Erase CloudKit store with identifier \(containerId)...")
-                    try await Utils.eraseCloudKitStore(fromContainerWithId: containerId)
                 } catch {
                     pp_log(.app, .error, "Unable to erase CloudKit store: \(error)")
                 }
