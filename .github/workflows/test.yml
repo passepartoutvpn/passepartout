@@ -18,7 +18,7 @@ jobs:
   run_tests:
     name: Run tests
     runs-on: macos-14
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
