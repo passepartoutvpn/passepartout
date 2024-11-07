@@ -111,8 +111,14 @@ private extension DonateView {
 private extension DonateView {
     func fetchAvailableProducts() async {
         isFetchingProducts = true
-        availableProducts = await iapManager.purchasableProducts(for: AppProduct.Donations.all)
-        isFetchingProducts = false
+        defer {
+            isFetchingProducts = false
+        }
+        do {
+            availableProducts = try await iapManager.purchasableProducts(for: AppProduct.Donations.all)
+        } catch {
+            onError(error)
+        }
     }
 
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {

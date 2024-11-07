@@ -170,6 +170,9 @@ private extension PaywallView {
 private extension PaywallView {
     func fetchAvailableProducts() async {
         isFetchingProducts = true
+        defer {
+            isFetchingProducts = false
+        }
 
         var list: [AppProduct] = []
         if let suggestedProduct {
@@ -178,18 +181,20 @@ private extension PaywallView {
         list.append(.Full.Recurring.yearly)
         list.append(.Full.Recurring.monthly)
 
-        let availableProducts = await iapManager.purchasableProducts(for: list)
-        oneTimeProduct = availableProducts.first {
-            guard let suggestedProduct else {
-                return false
+        do {
+            let availableProducts = try await iapManager.purchasableProducts(for: list)
+            oneTimeProduct = availableProducts.first {
+                guard let suggestedProduct else {
+                    return false
+                }
+                return $0.productIdentifier.hasSuffix(suggestedProduct.rawValue)
             }
-            return $0.productIdentifier.hasSuffix(suggestedProduct.rawValue)
+            recurringProducts = availableProducts.filter {
+                $0.productIdentifier != oneTimeProduct?.productIdentifier
+            }
+        } catch {
+            onError(error)
         }
-        recurringProducts = availableProducts.filter {
-            $0.productIdentifier != oneTimeProduct?.productIdentifier
-        }
-
-        isFetchingProducts = false
     }
 
     func onComplete(_ productIdentifier: String, result: InAppPurchaseResult) {
