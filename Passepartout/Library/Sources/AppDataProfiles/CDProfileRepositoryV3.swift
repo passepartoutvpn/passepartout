@@ -120,4 +120,8 @@ extension CoreDataRepository: ProfileRepository where T == Profile {
     public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
         try await removeEntities(withIds: profileIds)
     }
+
+    public func removeAllProfiles() async throws {
+        try await removeEntities(withIds: nil)
+    }
 }

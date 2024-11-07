@@ -139,16 +139,18 @@ public actor CoreDataRepository<CD, T>: NSObject,
         }
     }
 
-    public func removeEntities(withIds ids: [UUID]) async throws {
+    public func removeEntities(withIds ids: [UUID]?) async throws {
         try await context.perform { [weak self] in
             guard let self else {
                 return
             }
             let request = newFetchRequest()
-            request.predicate = NSPredicate(
-                format: "any uuid in %@",
-                ids
-            )
+            if let ids {
+                request.predicate = NSPredicate(
+                    format: "any uuid in %@",
+                    ids
+                )
+            }
             do {
                 let existing = try context.fetch(request)
                 existing.forEach(context.delete)
