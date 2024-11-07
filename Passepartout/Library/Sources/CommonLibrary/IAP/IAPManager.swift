@@ -159,7 +159,7 @@ extension IAPManager {
 
 private extension IAPManager {
     func asyncReloadReceipt() async {
-        pp_log(.iap, .notice, "Reload in-app receipt...")
+        pp_log(.iap, .notice, "Start reloading in-app receipt...")
 
         purchasedAppBuild = nil
         purchasedProducts.removeAll()
@@ -231,7 +231,7 @@ private extension IAPManager {
             eligibleFeatures.insert($0)
         }
 
-        pp_log(.iap, .notice, "Reloaded in-app receipt:")
+        pp_log(.iap, .notice, "Finished reloading in-app receipt for user level \(userLevel)")
         pp_log(.iap, .notice, "\tPurchased build number: \(purchasedAppBuild?.description ?? "unknown")")
         pp_log(.iap, .notice, "\tPurchased products: \(purchasedProducts.map(\.rawValue))")
         pp_log(.iap, .notice, "\tEligible features: \(eligibleFeatures)")
