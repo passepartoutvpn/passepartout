@@ -54,14 +54,13 @@ struct SettingsSectionGroup: View {
 #endif
         }
         .themeSection(header: Strings.Global.general)
-        Group {
-            eraseCloudKitButton
-                .themeRow(footer: iCloudFooter)
-        }
-        .themeSection(
-            header: Strings.Unlocalized.iCloud,
-            footer: iCloudFooter
-        )
+
+        eraseCloudKitButton
+            .themeSectionWithSingleRow(
+                header: Strings.Unlocalized.iCloud,
+                footer: Strings.Views.Settings.Sections.Icloud.footer,
+                above: true
+            )
     }
 }
 
@@ -95,9 +94,5 @@ private extension SettingsSectionGroup {
             }
         }
         .disabled(isErasingiCloud)
-    }
-
-    var iCloudFooter: String {
-        Strings.Views.Settings.Sections.Icloud.footer
     }
 }

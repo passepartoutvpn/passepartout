@@ -95,6 +95,20 @@ extension View {
         modifier(ThemeRowWithFooterModifier(footer: footer))
     }
 
+    public func themeSectionWithSingleRow(header: String? = nil, footer: String, above: Bool = false) -> some View {
+        Group {
+            if above {
+                EmptyView()
+                    .themeRow(footer: footer)
+
+                self
+            } else {
+                themeRow(footer: footer)
+            }
+        }
+        .themeSection(header: header, footer: footer)
+    }
+
     public func themeNavigationDetail() -> some View {
 #if os(iOS)
         navigationBarTitleDisplayMode(.inline)
