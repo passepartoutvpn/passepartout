@@ -1,3 +1,19 @@
+* Add bump since git ref
+* Finalize paywall UI (#831)
+* Refactor theme section and styles (#829)
+* Fix missing profile attributes initialization (#828)
+* Update FIXMEs
+* Erase shared profiles from iCloud correctly (#827)
+* Always read local receipt in TestFlight (#826)
+* Fine-tune important logging categories (#825)
+* Read receipts in a serial fashion (#824)
+* Bump version
+* Redefine in-app receipt strategy (#823)
+* Change CI timeouts
+* Improve startup time (#822)
+* Bump version
+* Exclude intents extension from tvOS
+* Bump version
 * Improve configuration on app launch/active (#821)
 * Refactor in-app entities for StoreKit/Kvitto integration (#820)
 * Simulate in-app purchases (#818)
@@ -12,13 +28,31 @@
 * Fix more warnings
 * Refactor AppContext creation and profile processing (#810)
 * Review ProfileManager observation logic (#809)
+* Reword selector title
 * Implement TV profile sharing (#808)
+* Fine-tune profile management with additional attributes (#807)
 * Reword "Connect" to "Select" in server selector
+* Fix previous PR
+* Merge AppLibrary into CommonLibrary (#806)
 * Use profile name as interactive view title
 * Submit on OpenVPN fields (#805)
 * Late dismissal after changing active provider server (#804)
 * Fix flashing context menu on data count update (#803)
+* Resolve some focus issues (#802)
+* Fix missing country flags
+* Fix compile error on tvOS
+* Refactor and improve interactive login (#801)
+* Refactor ModuleType to be a single source of truth (#800)
+* Clean up test plan
+* Refactor library targets (#799)
+* Create basic UI for TV app (#798)
+* Refactor AppUI/AppUIMain to accomodate TV (#797)
 * Allow interactive credentials with providers (#796)
+* Revisit overuse of EnvironmentObject (#794)
 * Fix issues with iOS 16 (#792)
+* Fix previout commit on macOS
+* Fix lifecycle of environment objects (#790)
+* Do some refactoring in AppUI targets (#789)
 * Render country flags with Emojis (#787)
+* Improve country flags (#786)
 * Fall back to empty OTP
