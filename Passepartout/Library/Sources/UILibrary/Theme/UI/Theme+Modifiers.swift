@@ -80,7 +80,7 @@ extension View {
     }
 
     public func themeForm() -> some View {
-        modifier(ThemeFormModifier())
+        formStyle(.grouped)
     }
 
     public func themeManualInput() -> some View {
@@ -291,13 +291,6 @@ struct ThemeNavigationStackModifier: ViewModifier {
 }
 
 // MARK: - Content modifiers
-
-struct ThemeFormModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .formStyle(.grouped)
-    }
-}
 
 struct ThemeManualInputModifier: ViewModifier {
 }
