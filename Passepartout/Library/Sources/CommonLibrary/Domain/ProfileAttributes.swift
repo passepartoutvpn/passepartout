@@ -28,30 +28,48 @@ import Foundation
 import PassepartoutKit
 
 public struct ProfileAttributes: Hashable, Codable {
-    public var isAvailableForTV: Bool?
-
-    public var expirationDate: Date?
+    public var fingerprint: UUID?
 
     public var lastUpdate: Date?
 
-    public var fingerprint: UUID?
+    public var isAvailableForTV: Bool?
+
+    public var expirationDate: Date?
 
     public init() {
     }
 
     public init(
-        isAvailableForTV: Bool?,
-        expirationDate: Date?,
+        fingerprint: UUID?,
         lastUpdate: Date?,
-        fingerprint: UUID?
+        isAvailableForTV: Bool?,
+        expirationDate: Date?
     ) {
-        self.isAvailableForTV = isAvailableForTV
-        self.lastUpdate = lastUpdate
         self.fingerprint = fingerprint
+        self.lastUpdate = lastUpdate
+        self.isAvailableForTV = isAvailableForTV
+        self.expirationDate = expirationDate
     }
+}
 
-    public func isEquivalent(to other: Self) -> Bool {
-        isAvailableForTV == other.isAvailableForTV
+extension ProfileAttributes: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        let descs = [
+            fingerprint.map {
+                "fingerprint: \($0)"
+            },
+            lastUpdate.map {
+                "lastUpdate: \($0)"
+            },
+            isAvailableForTV.map {
+                "isAvailableForTV: \($0)"
+            },
+            expirationDate.map {
+                "expirationDate: \($0)"
+            }
+        ].compactMap { $0 }
+
+        return "{\(descs.joined(separator: ", "))}"
     }
 }
 

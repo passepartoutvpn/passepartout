@@ -360,15 +360,15 @@ private extension ProfileManager {
 
             pp_log(.App.profiles, .info, "Start importing remote profiles...")
 
-            pp_log(.App.profiles, .debug, "Local fingerprints:")
-            let localFingerprints: [Profile.ID: UUID] = await allProfiles.values.reduce(into: [:]) {
-                $0[$1.id] = $1.attributes.fingerprint
-                pp_log(.App.profiles, .debug, "\t\($1.id) = \($1.attributes.fingerprint?.description ?? "nil")")
+            pp_log(.App.profiles, .debug, "Local attributes:")
+            let localAttributes: [Profile.ID: ProfileAttributes] = await allProfiles.values.reduce(into: [:]) {
+                $0[$1.id] = $1.attributes
+                pp_log(.App.profiles, .debug, "\t\($1.id) = \($1.attributes)")
             }
-            pp_log(.App.profiles, .debug, "Remote fingerprints:")
-            let remoteFingerprints: [Profile.ID: UUID] = result.reduce(into: [:]) {
-                $0[$1.id] = $1.attributes.fingerprint
-                pp_log(.App.profiles, .debug, "\t\($1.id) = \($1.attributes.fingerprint?.description ?? "nil")")
+            pp_log(.App.profiles, .debug, "Remote attributes:")
+            let remoteAttributes: [Profile.ID: ProfileAttributes] = result.reduce(into: [:]) {
+                $0[$1.id] = $1.attributes
+                pp_log(.App.profiles, .debug, "\t\($1.id) = \($1.attributes)")
             }
 
             let profilesToImport = result
@@ -390,7 +390,7 @@ private extension ProfileManager {
                         idsToRemove.append(remoteProfile.id)
                         continue
                     }
-                    guard remoteFingerprints[remoteProfile.id] != localFingerprints[remoteProfile.id] else {
+                    guard remoteAttributes[remoteProfile.id]?.fingerprint != localAttributes[remoteProfile.id]?.fingerprint else {
                         pp_log(.App.profiles, .info, "Skip re-importing local profile \(remoteProfile.id)")
                         continue
                     }

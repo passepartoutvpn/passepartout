@@ -95,9 +95,7 @@ private extension NEProfileRepository {
     func onLoadedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
         let profiles = managers.values.compactMap {
             do {
-                let profile = try repository.profile(from: $0)
-                pp_log(.App.profiles, .debug, "Attributes for profile \(profile.id): \(profile.attributes)")
-                return profile
+                return try repository.profile(from: $0)
             } catch {
                 pp_log(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
                 return nil
