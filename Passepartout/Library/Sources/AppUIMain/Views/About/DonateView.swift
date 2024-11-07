@@ -78,19 +78,21 @@ private extension DonateView {
 
     @ViewBuilder
     var donationsView: some View {
+#if os(macOS)
         Section {
-            ForEach(availableProducts, id: \.productIdentifier) {
-                PaywallProductView(
-                    iapManager: iapManager,
-                    style: .donation,
-                    product: $0,
-                    onComplete: onComplete,
-                    onError: onError
-                )
-            }
-        } footer: {
             Text(Strings.Views.Donate.Sections.Main.footer)
         }
+#endif
+        ForEach(availableProducts, id: \.productIdentifier) {
+            PaywallProductView(
+                iapManager: iapManager,
+                style: .donation,
+                product: $0,
+                onComplete: onComplete,
+                onError: onError
+            )
+        }
+        .themeSection(footer: Strings.Views.Donate.Sections.Main.footer)
     }
 
     func thankYouActions() -> some View {

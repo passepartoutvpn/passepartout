@@ -155,7 +155,7 @@
 "views.about.credits.translations" = "Translations";
 
 "views.donate.title" = "Make a donation";
-"views.donate.sections.main.footer" = "If you want to display gratitude for my free work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
+"views.donate.sections.main.footer" = "If you want to display gratitude for my work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";
 "views.donate.alerts.thank_you.message" = "This means a lot to me and I really hope you keep using and promoting this app.";
 
 "views.diagnostics.title" = "Diagnostics";
