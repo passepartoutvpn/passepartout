@@ -32,9 +32,9 @@ extension AboutView {
     var listView: some View {
         List(selection: $navigationRoute) {
             Section {
-                donateLink
                 linksLink
                 creditsLink
+                donateLink
                 diagnosticsLink
             }
         }

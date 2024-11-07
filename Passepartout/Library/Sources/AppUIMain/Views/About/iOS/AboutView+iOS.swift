@@ -33,9 +33,9 @@ extension AboutView {
         List {
             SettingsSectionGroup(profileManager: profileManager)
             Group {
-                donateLink
                 linksLink
                 creditsLink
+                donateLink
             }
             .themeSection(header: Strings.Views.About.Sections.resources)
             Section {
