@@ -246,6 +246,7 @@ private extension IAPManager {
     func observeObjects() {
         Task {
             await fetchLevelIfNeeded()
+            await reloadReceipt()
             do {
                 let products = try await inAppHelper.fetchProducts()
                 pp_log(.iap, .info, "Available in-app products: \(products.map(\.key))")
