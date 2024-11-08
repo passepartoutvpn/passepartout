@@ -41,7 +41,7 @@ public final class ProfileManager: ObservableObject {
 
     private let remoteRepository: (any ProfileRepository)?
 
-    private let deletingRemotely: Bool
+    private let mirrorsRemoteRepository: Bool
 
     private let processor: ProfileProcessor?
 
@@ -67,7 +67,7 @@ public final class ProfileManager: ObservableObject {
         repository = InMemoryProfileRepository(profiles: profiles)
         backupRepository = nil
         remoteRepository = nil
-        deletingRemotely = false
+        mirrorsRemoteRepository = false
         processor = nil
         self.profiles = []
         allProfiles = profiles.reduce(into: [:]) {
@@ -84,14 +84,14 @@ public final class ProfileManager: ObservableObject {
         repository: any ProfileRepository,
         backupRepository: (any ProfileRepository)? = nil,
         remoteRepository: (any ProfileRepository)?,
-        deletingRemotely: Bool = false,
+        mirrorsRemoteRepository: Bool = false,
         processor: ProfileProcessor? = nil
     ) {
-        precondition(!deletingRemotely || remoteRepository != nil, "deletingRemotely requires a non-nil remoteRepository")
+        precondition(!mirrorsRemoteRepository || remoteRepository != nil, "mirrorsRemoteRepository requires a non-nil remoteRepository")
         self.repository = repository
         self.backupRepository = backupRepository
         self.remoteRepository = remoteRepository
-        self.deletingRemotely = deletingRemotely
+        self.mirrorsRemoteRepository = mirrorsRemoteRepository
         self.processor = processor
         profiles = []
         allProfiles = [:]
@@ -130,7 +130,7 @@ extension ProfileManager {
         }
     }
 
-    public func save(_ originalProfile: Profile, force: Bool = false, isShared: Bool? = nil) async throws {
+    public func save(_ originalProfile: Profile, force: Bool = false, remotelyShared: Bool? = nil) async throws {
         let profile: Profile
         if force {
             var builder = originalProfile.builder()
@@ -164,8 +164,8 @@ extension ProfileManager {
             throw error
         }
         do {
-            if let isShared, let remoteRepository {
-                if isShared {
+            if let remotelyShared, let remoteRepository {
+                if remotelyShared {
                     pp_log(.App.profiles, .notice, "\tEnable remote sharing of profile \(profile.id)...")
                     try await remoteRepository.saveProfile(profile)
                 } else {
@@ -319,10 +319,10 @@ private extension ProfileManager {
         }
 
         // should not be imported at all, but you never know
-        if let isIncluded = processor?.isIncluded {
+        if let processor {
             let idsToRemove: [Profile.ID] = allProfiles
                 .filter {
-                    !isIncluded($0.value)
+                    !processor.isIncluded($0.value)
                 }
                 .map(\.key)
 
@@ -370,13 +370,13 @@ private extension ProfileManager {
 
             let profilesToImport = result
             let remotelyDeletedIds = await Set(allProfiles.keys).subtracting(Set(allRemoteProfiles.keys))
-            let deletingRemotely = deletingRemotely
+            let mirrorsRemoteRepository = mirrorsRemoteRepository
 
             var idsToRemove: [Profile.ID] = []
             if !remotelyDeletedIds.isEmpty {
-                pp_log(.App.profiles, .info, "Will \(deletingRemotely ? "delete" : "retain") local profiles not present in remote repository: \(remotelyDeletedIds)")
+                pp_log(.App.profiles, .info, "Will \(mirrorsRemoteRepository ? "delete" : "retain") local profiles not present in remote repository: \(remotelyDeletedIds)")
 
-                if deletingRemotely {
+                if mirrorsRemoteRepository {
                     idsToRemove.append(contentsOf: remotelyDeletedIds)
                 }
             }

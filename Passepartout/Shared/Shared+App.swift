@@ -51,8 +51,8 @@ extension AppContext {
             title: {
                 Configuration.ProfileManager.sharedTitle($0)
             },
-            isIncluded: { _, profile in
-                Configuration.ProfileManager.isProfileIncluded(profile)
+            isIncluded: {
+                Configuration.ProfileManager.isIncluded($0, $1)
             },
             willSave: { iap, builder in
                 var copy = builder
@@ -123,7 +123,7 @@ extension AppContext {
                 repository: Configuration.ProfileManager.mainProfileRepository,
                 backupRepository: Configuration.ProfileManager.backupProfileRepository,
                 remoteRepository: remoteRepository,
-                deletingRemotely: Configuration.ProfileManager.deletingRemotely,
+                mirrorsRemoteRepository: Configuration.ProfileManager.mirrorsRemoteRepository,
                 processor: processor
             )
         }()
@@ -234,15 +234,15 @@ extension Configuration {
         }
 
 #if os(tvOS)
-        static let deletingRemotely = true
+        static let mirrorsRemoteRepository = true
 
-        static let isProfileIncluded: @Sendable (Profile) -> Bool = {
-            $0.attributes.isAvailableForTV == true
+        static let isIncluded: @MainActor @Sendable (CommonLibrary.IAPManager, Profile) -> Bool = {
+            $1.attributes.isAvailableForTV == true
         }
 #else
-        static let deletingRemotely = false
+        static let mirrorsRemoteRepository = false
 
-        static let isProfileIncluded: @Sendable (Profile) -> Bool = { _ in
+        static let isIncluded: @MainActor @Sendable (CommonLibrary.IAPManager, Profile) -> Bool = { _, _ in
             true
         }
 #endif
