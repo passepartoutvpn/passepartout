@@ -181,7 +181,7 @@ private extension ProfileEditView {
     NavigationStack {
         ProfileEditView(
             profileEditor: ProfileEditor(profile: .newMockProfile()),
-            moduleViewFactory: DefaultModuleViewFactory(),
+            moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
             path: .constant(NavigationPath())
         )
     }
