@@ -85,7 +85,7 @@ extension ProfileEditor {
                 !moduleTypes.contains($0)
             }
             .sorted {
-                $0.localizedDescription < $1.localizedDescription
+                $0.localizedDescription.lowercased() < $1.localizedDescription.lowercased()
             }
     }
 }

@@ -126,7 +126,7 @@ private extension ProfileEditView {
 
     var addModuleButton: some View {
         let moduleTypes = profileEditor.availableModuleTypes.sorted {
-            $0.localizedDescription < $1.localizedDescription
+            $0.localizedDescription.lowercased() < $1.localizedDescription.lowercased()
         }
         return Menu {
             ForEach(moduleTypes) { selectedType in
