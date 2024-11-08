@@ -271,6 +271,7 @@
 "features.onDemand" = "%@";
 "features.providers" = "All Providers";
 "features.routing" = "%@";
+"features.sharing" = "%@";
 
 "modules.general.sections.apple_tv.footer.purchase.1" = "TV profiles expire after %d minutes.";
 "modules.general.sections.apple_tv.footer.purchase.2" = "Purchase to drop the restriction.";

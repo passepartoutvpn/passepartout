@@ -201,6 +201,10 @@ public enum Strings {
     public static func routing(_ p1: Any) -> String {
       return Strings.tr("Localizable", "features.routing", String(describing: p1), fallback: "%@")
     }
+    /// %@
+    public static func sharing(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "features.sharing", String(describing: p1), fallback: "%@")
+    }
   }
   public enum Global {
     /// About

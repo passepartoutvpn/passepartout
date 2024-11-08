@@ -51,6 +51,9 @@ extension AppFeature: LocalizableEntity {
 
         case .routing:
             return V.routing(Strings.Global.routing)
+
+        case .sharing:
+            return V.sharing(Strings.Unlocalized.iCloud)
         }
     }
 }

@@ -43,7 +43,7 @@ extension AppContext {
             inAppHelper: iapHelpers.productHelper,
             receiptReader: iapHelpers.receiptReader,
             // FIXME: #662, omit unrestrictedFeatures on release!
-            unrestrictedFeatures: [.interactiveLogin],
+            unrestrictedFeatures: [.interactiveLogin, .sharing],
             productsAtBuild: Configuration.IAPManager.productsAtBuild
         )
         let processor = ProfileProcessor(

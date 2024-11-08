@@ -27,42 +27,19 @@ import Foundation
 
 extension AppProduct {
     public enum Features {
-        public static let allProviders = AppProduct(featureId: "all_providers")
-
-        public static let appleTV = AppProduct(featureId: "appletv")
-
-        public static let interactiveLogin = AppProduct(featureId: "interactive_login")
-
-        public static let networkSettings = AppProduct(featureId: "network_settings")
-
-        public static let trustedNetworks = AppProduct(featureId: "trusted_networks")
-
         static let all: [AppProduct] = [
             .Features.allProviders,
             .Features.appleTV,
-            .Features.interactiveLogin,
             .Features.networkSettings,
             .Features.trustedNetworks
         ]
     }
 
     public enum Full {
-        public static let iOS = AppProduct(featureId: "full_version")
-
-        public static let macOS = AppProduct(featureId: "full_mac_version")
-
-        public static let allPlatforms = AppProduct(featureId: "full_multi_version")
-
-        public enum Recurring {
-            public static let monthly = AppProduct(featureId: "full.monthly")
-
-            public static let yearly = AppProduct(featureId: "full.yearly")
-        }
-
         static let all: [AppProduct] = [
+            .Full.allPlatforms,
             .Full.iOS,
             .Full.macOS,
-            .Full.allPlatforms,
             .Full.Recurring.monthly,
             .Full.Recurring.yearly
         ]
@@ -77,4 +54,36 @@ extension AppProduct {
     var isFeature: Bool {
         rawValue.hasPrefix(Self.featurePrefix)
     }
+}
+
+// MARK: - Current
+
+extension AppProduct.Features {
+    public static let appleTV = AppProduct(featureId: "appletv")
+}
+
+extension AppProduct.Full {
+    public enum Recurring {
+        public static let monthly = AppProduct(featureId: "full.monthly")
+
+        public static let yearly = AppProduct(featureId: "full.yearly")
+    }
+}
+
+// MARK: - Discontinued
+
+extension AppProduct.Features {
+    static let allProviders = AppProduct(featureId: "all_providers")
+
+    public static let networkSettings = AppProduct(featureId: "network_settings")
+
+    static let trustedNetworks = AppProduct(featureId: "trusted_networks")
+}
+
+extension AppProduct.Full {
+    static let allPlatforms = AppProduct(featureId: "full_multi_version")
+
+    public static let iOS = AppProduct(featureId: "full_version")
+
+    static let macOS = AppProduct(featureId: "full_mac_version")
 }
