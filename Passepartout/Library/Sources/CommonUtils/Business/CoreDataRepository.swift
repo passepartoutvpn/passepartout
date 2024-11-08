@@ -201,11 +201,11 @@ private extension CoreDataRepository {
     }
 
     nonisolated func sendResults(from controller: NSFetchedResultsController<CD>) {
-        guard let cdEntities = controller.fetchedObjects else {
-            return
-        }
         Task.detached { [weak self] in
             await self?.context.perform { [weak self] in
+                guard let cdEntities = controller.fetchedObjects else {
+                    return
+                }
                 do {
                     let entities = try cdEntities.compactMap {
                         do {
@@ -230,7 +230,7 @@ private extension CoreDataRepository {
                     let result = EntitiesResult(entities, isFiltering: controller.fetchRequest.predicate != nil)
                     self?.entitiesSubject.send(result)
                 } catch {
-                    // ResultError
+                    NSLog("Unable to send Core Data entities: \(error)")
                 }
             }
         }
