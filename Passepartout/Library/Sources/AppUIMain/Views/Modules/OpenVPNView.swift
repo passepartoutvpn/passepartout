@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import CommonUtils
-import CPassepartoutOpenVPNOpenSSL
 import PassepartoutKit
 import SwiftUI
 
@@ -38,6 +37,8 @@ struct OpenVPNView: View, ModuleDraftEditing {
     var editor: ProfileEditor
 
     let module: OpenVPNModule.Builder
+
+    let impl: OpenVPNModule.Implementation?
 
     private let isServerPushed: Bool
 
@@ -66,12 +67,14 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
         self.editor = editor
         self.module = module
+        impl = nil
         isServerPushed = true
     }
 
-    init(editor: ProfileEditor, module: OpenVPNModule.Builder) {
+    init(editor: ProfileEditor, module: OpenVPNModule.Builder, impl: OpenVPNModule.Implementation?) {
         self.editor = editor
         self.module = module
+        self.impl = impl
         isServerPushed = false
     }
 
@@ -179,8 +182,13 @@ private extension OpenVPNView {
             }
             importURL = url
 
-            let parsed = try StandardOpenVPNParser(decrypter: OSSLTLSBox())
-                .parsed(fromURL: url, passphrase: importPassphrase)
+            guard let impl else {
+                fatalError("Requires OpenVPNModule implementation")
+            }
+            guard let parser = impl.importer as? StandardOpenVPNParser else {
+                fatalError("OpenVPNModule importer should be StandardOpenVPNParser")
+            }
+            let parsed = try parser.parsed(fromURL: url, passphrase: importPassphrase)
 
             draft.wrappedValue.configurationBuilder = parsed.configuration.builder()
         } catch StandardOpenVPNParserError.encryptionPassphrase,

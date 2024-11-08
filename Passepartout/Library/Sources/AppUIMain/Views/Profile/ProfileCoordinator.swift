@@ -47,6 +47,8 @@ struct ProfileCoordinator: View {
 
     let profileEditor: ProfileEditor
 
+    let registry: Registry
+
     let moduleViewFactory: any ModuleViewFactory
 
     let modally: Bool
@@ -125,7 +127,7 @@ private extension ProfileCoordinator {
             return
         }
 
-        let module = moduleType.newModule()
+        let module = moduleType.newModule(with: registry)
         withAnimation(theme.animation(for: .modules)) {
             profileEditor.saveModule(module, activating: true)
         }
@@ -152,7 +154,8 @@ private extension ProfileCoordinator {
     ProfileCoordinator(
         profileManager: .mock,
         profileEditor: ProfileEditor(profile: .newMockProfile()),
-        moduleViewFactory: DefaultModuleViewFactory(),
+        registry: Registry(),
+        moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
         modally: false,
         path: .constant(NavigationPath()),
         onDismiss: {}

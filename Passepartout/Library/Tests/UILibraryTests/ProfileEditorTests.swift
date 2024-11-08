@@ -255,3 +255,9 @@ extension ProfileEditorTests {
         await fulfillment(of: [exp])
     }
 }
+
+private extension WireGuard.Configuration.Builder {
+    static var `default`: WireGuard.Configuration.Builder {
+        WireGuard.Configuration.Builder(privateKey: "")
+    }
+}

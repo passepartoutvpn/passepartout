@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import PassepartoutKit
-import PassepartoutWireGuardGo
 import SwiftUI
 
 struct WireGuardView: View, ModuleDraftEditing {
@@ -34,6 +33,8 @@ struct WireGuardView: View, ModuleDraftEditing {
     var editor: ProfileEditor
 
     let module: WireGuardModule.Builder
+
+    let impl: WireGuardModule.Implementation?
 
     var body: some View {
         contentView
@@ -45,7 +46,10 @@ struct WireGuardView: View, ModuleDraftEditing {
 
 private extension WireGuardView {
     var configuration: WireGuard.Configuration.Builder {
-        draft.wrappedValue.configurationBuilder ?? .default
+        guard let impl else {
+            fatalError("Requires WireGuardModule implementation")
+        }
+        return draft.wrappedValue.configurationBuilder ?? .init(keyGenerator: impl.keyGenerator)
     }
 
     @ViewBuilder
@@ -143,7 +147,7 @@ private extension WireGuardView {
 
 // swiftlint: disable force_try
 #Preview {
-    let gen = StandardWireGuardKeyGenerator()
+    let gen = MockGenerator()
 
     var builder = WireGuard.Configuration.Builder(keyGenerator: gen)
     builder.interface.addresses = ["1.1.1.1", "2.2.2.2"]
@@ -166,3 +170,21 @@ private extension WireGuardView {
     return module.preview()
 }
 // swiftlint: enable force_try
+
+private final class MockGenerator: WireGuardKeyGenerator {
+    func newPrivateKey() -> String {
+        "private-key"
+    }
+
+    func privateKey(from string: String) throws -> String {
+        "private-key"
+    }
+
+    func publicKey(from string: String) throws -> String {
+        "public-key"
+    }
+
+    func publicKey(for privateKey: String) throws -> String {
+        "public-key"
+    }
+}

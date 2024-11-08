@@ -28,8 +28,8 @@ import PassepartoutKit
 import SwiftUI
 
 extension OpenVPNModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        OpenVPNView(editor: editor, module: self)
+    func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
+        OpenVPNView(editor: editor, module: self, impl: impl as? OpenVPNModule.Implementation)
     }
 }
 

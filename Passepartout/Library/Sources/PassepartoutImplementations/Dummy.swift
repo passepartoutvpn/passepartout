@@ -1,8 +1,8 @@
 //
-//  UILibrary.swift
+//  Dummy.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 7/31/24.
+//  Created by Davide De Rosa on 11/8/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,29 +23,4 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonAPI
-import CommonLibrary
 import Foundation
-import PassepartoutKit
-
-@MainActor
-public protocol UILibraryConfiguring {
-    func configure(with context: AppContext)
-}
-
-public final class UILibrary: UILibraryConfiguring {
-    private let uiConfiguring: UILibraryConfiguring?
-
-    public init(_ uiConfiguring: UILibraryConfiguring?) {
-        self.uiConfiguring = uiConfiguring
-    }
-
-    public func configure(with context: AppContext) {
-        PassepartoutConfiguration.shared.configureLogging(
-            to: BundleConfiguration.urlForAppLog,
-            parameters: Constants.shared.log,
-            logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
-        )
-        uiConfiguring?.configure(with: context)
-    }
-}

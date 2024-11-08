@@ -55,6 +55,7 @@ extension Registry {
                 }
             ),
             WireGuardModule.Implementation(
+                keyGenerator: StandardWireGuardKeyGenerator(),
                 importer: StandardWireGuardParser(),
                 connectionBlock: { parameters, module in
                     try GoWireGuardConnection(parameters: parameters, module: module)

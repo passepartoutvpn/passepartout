@@ -27,7 +27,7 @@ import PassepartoutKit
 import SwiftUI
 
 extension DNSModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
+    func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
         DNSView(editor: editor, module: self)
     }
 }

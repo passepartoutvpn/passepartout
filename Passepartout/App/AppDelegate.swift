@@ -35,7 +35,7 @@ final class AppDelegate: NSObject {
 
     func configure(with uiConfiguring: UILibraryConfiguring) {
         UILibrary(uiConfiguring)
-            .configure()
+            .configure(with: context)
 
         Task {
             pp_log(.app, .notice, "Fetch providers index...")

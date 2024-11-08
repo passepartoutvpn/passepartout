@@ -25,7 +25,6 @@
 
 import Foundation
 import PassepartoutKit
-import PassepartoutWireGuardGo
 
 extension LoggerDestination {
     public static let app = LoggerDestination(category: "app")
@@ -34,12 +33,6 @@ extension LoggerDestination {
         public static let iap = LoggerDestination(category: "app.iap")
 
         public static let profiles = LoggerDestination(category: "app.profiles")
-    }
-}
-
-extension WireGuard.Configuration.Builder {
-    public static var `default`: Self {
-        .init(keyGenerator: StandardWireGuardKeyGenerator())
     }
 }
 

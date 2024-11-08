@@ -157,7 +157,8 @@ extension AppCoordinator {
             ProfileCoordinator(
                 profileManager: profileManager,
                 profileEditor: profileEditor,
-                moduleViewFactory: DefaultModuleViewFactory(),
+                registry: registry,
+                moduleViewFactory: DefaultModuleViewFactory(registry: registry),
                 modally: true,
                 path: $profilePath,
                 onDismiss: {
