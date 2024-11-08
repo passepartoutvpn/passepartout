@@ -34,6 +34,8 @@ struct WireGuardView: View, ModuleDraftEditing {
 
     let module: WireGuardModule.Builder
 
+    let impl: WireGuardModule.Implementation?
+
     var body: some View {
         contentView
             .moduleView(editor: editor, draft: draft.wrappedValue)
@@ -43,11 +45,11 @@ struct WireGuardView: View, ModuleDraftEditing {
 // MARK: - Content
 
 private extension WireGuardView {
-
-    // FIXME: ###, requires Registry
     var configuration: WireGuard.Configuration.Builder {
-//        draft.wrappedValue.configurationBuilder ?? .init(keyGenerator: .default)
-        draft.wrappedValue.configurationBuilder ?? .init(privateKey: "")
+        guard let impl else {
+            fatalError("Requires WireGuardModule implementation")
+        }
+        return draft.wrappedValue.configurationBuilder ?? .init(keyGenerator: impl.keyGenerator)
     }
 
     @ViewBuilder

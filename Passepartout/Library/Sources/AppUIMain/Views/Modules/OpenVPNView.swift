@@ -38,6 +38,8 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
     let module: OpenVPNModule.Builder
 
+    let impl: OpenVPNModule.Implementation?
+
     private let isServerPushed: Bool
 
     @State
@@ -65,12 +67,14 @@ struct OpenVPNView: View, ModuleDraftEditing {
 
         self.editor = editor
         self.module = module
+        impl = nil
         isServerPushed = true
     }
 
-    init(editor: ProfileEditor, module: OpenVPNModule.Builder) {
+    init(editor: ProfileEditor, module: OpenVPNModule.Builder, impl: OpenVPNModule.Implementation?) {
         self.editor = editor
         self.module = module
+        self.impl = impl
         isServerPushed = false
     }
 
@@ -178,11 +182,15 @@ private extension OpenVPNView {
             }
             importURL = url
 
-            // FIXME: ###, requires Registry
-//            let parsed = try StandardOpenVPNParser(decrypter: OSSLTLSBox())
-//                .parsed(fromURL: url, passphrase: importPassphrase)
-//
-//            draft.wrappedValue.configurationBuilder = parsed.configuration.builder()
+            guard let impl else {
+                fatalError("Requires OpenVPNModule implementation")
+            }
+            guard let parser = impl.importer as? StandardOpenVPNParser else {
+                fatalError("OpenVPNModule importer should be StandardOpenVPNParser")
+            }
+            let parsed = try parser.parsed(fromURL: url, passphrase: importPassphrase)
+
+            draft.wrappedValue.configurationBuilder = parsed.configuration.builder()
         } catch StandardOpenVPNParserError.encryptionPassphrase,
                 StandardOpenVPNParserError.unableToDecrypt {
             Task {

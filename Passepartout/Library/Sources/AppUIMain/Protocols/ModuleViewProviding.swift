@@ -23,11 +23,12 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import PassepartoutKit
 import SwiftUI
 
 protocol ModuleViewProviding {
     associatedtype Content: View
 
     @MainActor
-    func moduleView(with editor: ProfileEditor) -> Content
+    func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> Content
 }

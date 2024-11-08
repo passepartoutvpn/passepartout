@@ -31,7 +31,7 @@ extension ModuleBuilder where Self: ModuleViewProviding {
     @MainActor
     func preview(title: String = "") -> some View {
         NavigationStack {
-            moduleView(with: ProfileEditor(modules: [self]))
+            moduleView(with: ProfileEditor(modules: [self]), impl: nil)
                 .navigationTitle(title)
         }
         .withMockEnvironment()

@@ -38,7 +38,7 @@ final class DefaultModuleViewFactory: ModuleViewFactory {
     func view(with editor: ProfileEditor, moduleId: UUID) -> some View {
         let result = editor.moduleViewProvider(withId: moduleId, registry: registry)
         if let result {
-            AnyView(result.provider.moduleView(with: editor))
+            AnyView(result.provider.moduleView(with: editor, impl: result.impl))
                 .navigationTitle(result.title)
         }
     }

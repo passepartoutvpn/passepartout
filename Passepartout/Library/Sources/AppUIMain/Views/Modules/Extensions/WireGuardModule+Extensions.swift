@@ -27,7 +27,7 @@ import PassepartoutKit
 import SwiftUI
 
 extension WireGuardModule.Builder: ModuleViewProviding {
-    func moduleView(with editor: ProfileEditor) -> some View {
-        WireGuardView(editor: editor, module: self)
+    func moduleView(with editor: ProfileEditor, impl: ModuleImplementation?) -> some View {
+        WireGuardView(editor: editor, module: self, impl: impl as? WireGuardModule.Implementation)
     }
 }
