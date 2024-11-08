@@ -155,7 +155,7 @@ private extension ProfileCoordinator {
         profileManager: .mock,
         profileEditor: ProfileEditor(profile: .newMockProfile()),
         registry: Registry(),
-        moduleViewFactory: DefaultModuleViewFactory(),
+        moduleViewFactory: DefaultModuleViewFactory(registry: Registry()),
         modally: false,
         path: .constant(NavigationPath()),
         onDismiss: {}

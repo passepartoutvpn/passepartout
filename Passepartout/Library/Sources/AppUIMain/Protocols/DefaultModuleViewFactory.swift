@@ -28,10 +28,15 @@ import PassepartoutKit
 import SwiftUI
 
 final class DefaultModuleViewFactory: ModuleViewFactory {
+    private let registry: Registry
+
+    init(registry: Registry) {
+        self.registry = registry
+    }
 
     @ViewBuilder
     func view(with editor: ProfileEditor, moduleId: UUID) -> some View {
-        let result = editor.moduleViewProvider(withId: moduleId)
+        let result = editor.moduleViewProvider(withId: moduleId, registry: registry)
         if let result {
             AnyView(result.provider.moduleView(with: editor))
                 .navigationTitle(result.title)
@@ -40,7 +45,7 @@ final class DefaultModuleViewFactory: ModuleViewFactory {
 }
 
 private extension ProfileEditor {
-    func moduleViewProvider(withId moduleId: UUID) -> (provider: any ModuleViewProviding, title: String)? {
+    func moduleViewProvider(withId moduleId: UUID, registry: Registry) -> ModuleViewProviderResult? {
         guard let module = module(withId: moduleId) else {
 //            assertionFailure("No module with ID \(moduleId)")
             return nil
@@ -49,6 +54,18 @@ private extension ProfileEditor {
             assertionFailure("\(type(of: module)) does not provide a default view")
             return nil
         }
-        return (provider, module.moduleType.localizedDescription)
+        return ModuleViewProviderResult(
+            title: module.moduleType.localizedDescription,
+            provider: provider,
+            impl: registry.implementation(for: module)
+        )
     }
+}
+
+private struct ModuleViewProviderResult {
+    let title: String
+
+    let provider: any ModuleViewProviding
+
+    let impl: ModuleImplementation?
 }

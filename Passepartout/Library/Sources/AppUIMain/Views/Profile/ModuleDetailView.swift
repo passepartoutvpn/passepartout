@@ -62,7 +62,7 @@ private extension ModuleDetailView {
     ModuleDetailView(
         profileEditor: ProfileEditor(profile: .mock),
         moduleId: Profile.mock.modules.first?.id,
-        moduleViewFactory: DefaultModuleViewFactory()
+        moduleViewFactory: DefaultModuleViewFactory(registry: Registry())
     )
     .withMockEnvironment()
 }

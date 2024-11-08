@@ -123,7 +123,7 @@ private extension ProfileSplitView {
 #Preview {
     ProfileSplitView(
         profileEditor: ProfileEditor(profile: .newMockProfile()),
-        moduleViewFactory: DefaultModuleViewFactory()
+        moduleViewFactory: DefaultModuleViewFactory(registry: Registry())
     )
     .withMockEnvironment()
 }
