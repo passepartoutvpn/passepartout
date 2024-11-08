@@ -27,13 +27,17 @@ import Foundation
 import PassepartoutKit
 
 extension ModuleType {
-    public func newModule() -> any ModuleBuilder {
+    public func newModule(with registry: Registry) -> any ModuleBuilder {
         switch self {
         case .openVPN:
             return OpenVPNModule.Builder()
 
         case .wireGuard:
-            return WireGuardModule.Builder(configurationBuilder: .default)
+            let impl = registry.implementation(for: WireGuardModule.moduleHandler.id)
+            guard let wireGuard = impl as? WireGuardModule.Implementation else {
+                fatalError("Missing WireGuardModule implementation from Registry?")
+            }
+            return WireGuardModule.Builder(configurationBuilder: .init(keyGenerator: wireGuard.keyGenerator))
 
         case .dns:
             return DNSModule.Builder()

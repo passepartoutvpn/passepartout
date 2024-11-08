@@ -24,24 +24,25 @@
 //
 
 import Foundation
+import PassepartoutKit
 @_exported import UILibrary
 
 public final class AppUIMain: UILibraryConfiguring {
     public init() {
     }
 
-    public func configure() {
-        assertMissingImplementations()
+    public func configure(with context: AppContext) {
+        assertMissingImplementations(with: context.registry)
     }
 }
 
 private extension AppUIMain {
-    func assertMissingImplementations() {
+    func assertMissingImplementations(with registry: Registry) {
         let providerModuleTypes: Set<ModuleType> = [
             .openVPN
         ]
         ModuleType.allCases.forEach { moduleType in
-            let builder = moduleType.newModule()
+            let builder = moduleType.newModule(with: registry)
             guard builder is any ModuleViewProviding else {
                 fatalError("\(moduleType): is not ModuleViewProviding")
             }

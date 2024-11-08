@@ -25,7 +25,6 @@
 
 import Foundation
 import PassepartoutKit
-import PassepartoutWireGuardGo
 
 public struct ModuleType: RawRepresentable, Hashable {
     public let rawValue: String

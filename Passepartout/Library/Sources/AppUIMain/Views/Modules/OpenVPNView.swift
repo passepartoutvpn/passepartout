@@ -25,7 +25,6 @@
 
 import CommonLibrary
 import CommonUtils
-import CPassepartoutOpenVPNOpenSSL
 import PassepartoutKit
 import SwiftUI
 
@@ -179,10 +178,11 @@ private extension OpenVPNView {
             }
             importURL = url
 
-            let parsed = try StandardOpenVPNParser(decrypter: OSSLTLSBox())
-                .parsed(fromURL: url, passphrase: importPassphrase)
-
-            draft.wrappedValue.configurationBuilder = parsed.configuration.builder()
+            // FIXME: ###, requires Registry
+//            let parsed = try StandardOpenVPNParser(decrypter: OSSLTLSBox())
+//                .parsed(fromURL: url, passphrase: importPassphrase)
+//
+//            draft.wrappedValue.configurationBuilder = parsed.configuration.builder()
         } catch StandardOpenVPNParserError.encryptionPassphrase,
                 StandardOpenVPNParserError.unableToDecrypt {
             Task {
