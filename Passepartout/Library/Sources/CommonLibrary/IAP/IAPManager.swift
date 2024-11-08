@@ -46,7 +46,8 @@ public final class IAPManager: ObservableObject {
 
     public private(set) var purchasedProducts: Set<AppProduct>
 
-    private var eligibleFeatures: Set<AppFeature>
+    @Published
+    public private(set) var eligibleFeatures: Set<AppFeature>
 
     private var pendingReceiptTask: Task<Void, Never>?
 

@@ -35,11 +35,13 @@ public final class ProfileManager: ObservableObject {
         case remove([Profile.ID])
     }
 
-    private let repository: any ProfileRepository
+    private let repository: ProfileRepository
 
-    private let backupRepository: (any ProfileRepository)?
+    private let backupRepository: ProfileRepository?
 
-    private let remoteRepository: (any ProfileRepository)?
+    private let remoteRepositoryBlock: ((Bool) -> ProfileRepository)?
+
+    private var remoteRepository: ProfileRepository?
 
     private let mirrorsRemoteRepository: Bool
 
@@ -54,6 +56,9 @@ public final class ProfileManager: ObservableObject {
         }
     }
 
+    @Published
+    public private(set) var isRemoteImportingEnabled: Bool
+
     private var allRemoteProfiles: [Profile.ID: Profile]
 
     public let didChange: PassthroughSubject<Event, Never>
@@ -62,11 +67,13 @@ public final class ProfileManager: ObservableObject {
 
     private var subscriptions: Set<AnyCancellable>
 
+    private var remoteSubscriptions: Set<AnyCancellable>
+
     // for testing/previews
     public init(profiles: [Profile]) {
         repository = InMemoryProfileRepository(profiles: profiles)
         backupRepository = nil
-        remoteRepository = nil
+        remoteRepositoryBlock = nil
         mirrorsRemoteRepository = false
         processor = nil
         self.profiles = []
@@ -77,20 +84,22 @@ public final class ProfileManager: ObservableObject {
 
         didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
+        isRemoteImportingEnabled = false
         subscriptions = []
+        remoteSubscriptions = []
     }
 
     public init(
-        repository: any ProfileRepository,
-        backupRepository: (any ProfileRepository)? = nil,
-        remoteRepository: (any ProfileRepository)?,
+        repository: ProfileRepository,
+        backupRepository: ProfileRepository? = nil,
+        remoteRepositoryBlock: ((Bool) -> ProfileRepository)?,
         mirrorsRemoteRepository: Bool = false,
         processor: ProfileProcessor? = nil
     ) {
-        precondition(!mirrorsRemoteRepository || remoteRepository != nil, "mirrorsRemoteRepository requires a non-nil remoteRepository")
+        precondition(!mirrorsRemoteRepository || remoteRepositoryBlock != nil, "mirrorsRemoteRepository requires a non-nil remoteRepositoryBlock")
         self.repository = repository
         self.backupRepository = backupRepository
-        self.remoteRepository = remoteRepository
+        self.remoteRepositoryBlock = remoteRepositoryBlock
         self.mirrorsRemoteRepository = mirrorsRemoteRepository
         self.processor = processor
         profiles = []
@@ -99,7 +108,9 @@ public final class ProfileManager: ObservableObject {
 
         didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
+        isRemoteImportingEnabled = false
         subscriptions = []
+        remoteSubscriptions = []
     }
 }
 
@@ -284,6 +295,27 @@ extension ProfileManager {
             }
             .store(in: &subscriptions)
 
+        searchSubject
+            .debounce(for: .milliseconds(searchDebounce), scheduler: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.performSearch($0)
+            }
+            .store(in: &subscriptions)
+    }
+
+    public func enableRemoteImporting(_ isRemoteImportingEnabled: Bool) {
+        guard let remoteRepositoryBlock else {
+            preconditionFailure("Missing remoteRepositoryBlock")
+        }
+
+        guard remoteRepository == nil || isRemoteImportingEnabled != self.isRemoteImportingEnabled else {
+            return
+        }
+        self.isRemoteImportingEnabled = isRemoteImportingEnabled
+
+        remoteSubscriptions.removeAll()
+        remoteRepository = remoteRepositoryBlock(isRemoteImportingEnabled)
+
         remoteRepository?
             .profilesPublisher
             .first()
@@ -291,7 +323,7 @@ extension ProfileManager {
             .sink { [weak self] in
                 self?.loadInitialRemoteProfiles($0)
             }
-            .store(in: &subscriptions)
+            .store(in: &remoteSubscriptions)
 
         remoteRepository?
             .profilesPublisher
@@ -300,14 +332,7 @@ extension ProfileManager {
             .sink { [weak self] in
                 self?.reloadRemoteProfiles($0)
             }
-            .store(in: &subscriptions)
-
-        searchSubject
-            .debounce(for: .milliseconds(searchDebounce), scheduler: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.performSearch($0)
-            }
-            .store(in: &subscriptions)
+            .store(in: &remoteSubscriptions)
     }
 }
 

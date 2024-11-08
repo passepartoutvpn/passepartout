@@ -77,8 +77,11 @@ public final class AppContext: ObservableObject {
                         pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
                     }
                 }
-                group.addTask {
-                    await self.iapManager.reloadReceipt()
+                group.addTask { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    await iapManager.reloadReceipt()
                 }
             }
             isActivating = false
@@ -90,7 +93,8 @@ public final class AppContext: ObservableObject {
 
 private extension AppContext {
     func observeObjects() {
-        profileManager.observeObjects()
+        profileManager
+            .observeObjects()
 
         profileManager
             .didChange
@@ -104,10 +108,26 @@ private extension AppContext {
                 }
             }
             .store(in: &subscriptions)
+
+        iapManager
+            .$eligibleFeatures
+            .sink { [weak self] in
+                self?.syncEligibleFeatures($0)
+            }
+            .store(in: &subscriptions)
     }
 }
 
 private extension AppContext {
+    var isCloudKitEnabled: Bool {
+        FileManager.default.ubiquityIdentityToken != nil
+    }
+
+    func syncEligibleFeatures(_ eligible: Set<AppFeature>) {
+        let canImport = eligible.contains(.sharing)
+        profileManager.enableRemoteImporting(canImport && isCloudKitEnabled)
+    }
+
     func syncTunnelIfCurrentProfile(_ profile: Profile) {
         guard profile.id == tunnel.currentProfile?.id else {
             return

@@ -37,6 +37,8 @@ extension AppContext {
         let tunnelEnvironment: TunnelEnvironment = .shared
         let registry: Registry = .shared
 
+        // MARK: IAPManager + ProfileProcessor
+
         let iapHelpers = Configuration.IAPManager.helpers
         let iapManager = IAPManager(
             customUserLevel: Configuration.Environment.userLevel,
@@ -102,16 +104,19 @@ extension AppContext {
                 }
             }
         )
-        let profileManager: ProfileManager = {
+
+        // MARK: ProfileManager
+
+        let remoteRepositoryBlock: (Bool) -> ProfileRepository = {
             let remoteStore = CoreDataPersistentStore(
                 logger: .default,
                 containerName: Constants.shared.containers.remote,
                 model: AppData.cdProfilesModel,
-                cloudKitIdentifier: BundleConfiguration.mainString(for: .cloudKitId),
+                cloudKitIdentifier: $0 ? BundleConfiguration.mainString(for: .cloudKitId) : nil,
                 author: nil
             )
-            let remoteRepository = AppData.cdProfileRepositoryV3(
-                registry: .shared,
+            return AppData.cdProfileRepositoryV3(
+                registry: registry,
                 coder: CodableProfileCoder(),
                 context: remoteStore.context,
                 observingResults: true
@@ -119,20 +124,28 @@ extension AppContext {
                 pp_log(.app, .error, "Unable to decode remote result: \(error)")
                 return .ignore
             }
+        }
+        let profileManager: ProfileManager = {
             return ProfileManager(
                 repository: Configuration.ProfileManager.mainProfileRepository,
                 backupRepository: Configuration.ProfileManager.backupProfileRepository,
-                remoteRepository: remoteRepository,
+                remoteRepositoryBlock: remoteRepositoryBlock,
                 mirrorsRemoteRepository: Configuration.ProfileManager.mirrorsRemoteRepository,
                 processor: processor
             )
         }()
+
+        // MARK: ExtendedTunnel
+
         let tunnel = ExtendedTunnel(
             tunnel: Tunnel(strategy: Configuration.ExtendedTunnel.strategy),
             environment: tunnelEnvironment,
             processor: processor,
             interval: Constants.shared.tunnel.refreshInterval
         )
+
+        // MARK: ProviderManager
+
         let providerManager: ProviderManager = {
             let store = CoreDataPersistentStore(
                 logger: .default,
@@ -147,6 +160,7 @@ extension AppContext {
             )
             return ProviderManager(repository: repository)
         }()
+
         return AppContext(
             iapManager: iapManager,
             profileManager: profileManager,

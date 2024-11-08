@@ -140,12 +140,12 @@ private extension ProfileRowView {
     }
 
     var sharedImage: some View {
-        ThemeImage(.cloud)
+        ThemeImage(profileManager.isRemoteImportingEnabled ? .cloudOn : .cloudOff)
             .help(Strings.Modules.General.Rows.icloudSharing)
     }
 
     var tvImage: some View {
-        ThemeImage(.tv)
+        ThemeImage(profileManager.isRemoteImportingEnabled ? .tvOn : .tvOff)
             .help(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV))
     }
 }
