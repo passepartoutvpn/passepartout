@@ -272,8 +272,8 @@
 "features.routing" = "%@";
 "features.sharing" = "%@";
 
-"modules.general.sections.storage.footer.purchase.1" = "TV profiles expire after %d minutes.";
-"modules.general.sections.storage.footer.purchase.2" = "Purchase to drop the restriction.";
+"modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
+"modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";
 "modules.general.rows.purchase" = "Share on iCloud";
 "modules.on_demand.purchase" = "Add on-demand rules";
 "modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
@@ -291,7 +291,7 @@
 
 "errors.app.empty_products" = "Unable to fetch products, please retry later.";
 "errors.app.empty_profile_name" = "Profile name is empty.";
-"errors.app.expired_profile" = "Profile is expired.";
+"errors.app.ineligible_profile" = "A purchase is required for this profile to work.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
 "errors.app.provider.required" = "No provider selected.";
 "errors.app.default" = "Unable to complete operation.";
@@ -309,7 +309,7 @@
 "errors.tunnel.compression" = "Compression unsupported";
 "errors.tunnel.dns" = "DNS failed";
 "errors.tunnel.encryption" = "Encryption failed";
-"errors.tunnel.expired" = "Expired";
+"errors.tunnel.ineligible" = "Purchase required";
 "errors.tunnel.routing" = "Missing routing";
 "errors.tunnel.shutdown" = "Server shutdown";
 "errors.tunnel.timeout" = "Timeout";

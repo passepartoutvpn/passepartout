@@ -118,8 +118,8 @@ public enum Strings {
       public static let emptyProducts = Strings.tr("Localizable", "errors.app.empty_products", fallback: "Unable to fetch products, please retry later.")
       /// Profile name is empty.
       public static let emptyProfileName = Strings.tr("Localizable", "errors.app.empty_profile_name", fallback: "Profile name is empty.")
-      /// Profile is expired.
-      public static let expiredProfile = Strings.tr("Localizable", "errors.app.expired_profile", fallback: "Profile is expired.")
+      /// A purchase is required for this profile to work.
+      public static let ineligibleProfile = Strings.tr("Localizable", "errors.app.ineligible_profile", fallback: "A purchase is required for this profile to work.")
       /// Module %@ is malformed. %@
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
@@ -162,10 +162,10 @@ public enum Strings {
       public static let dns = Strings.tr("Localizable", "errors.tunnel.dns", fallback: "DNS failed")
       /// Encryption failed
       public static let encryption = Strings.tr("Localizable", "errors.tunnel.encryption", fallback: "Encryption failed")
-      /// Expired
-      public static let expired = Strings.tr("Localizable", "errors.tunnel.expired", fallback: "Expired")
       /// Failed
       public static let generic = Strings.tr("Localizable", "errors.tunnel.generic", fallback: "Failed")
+      /// Purchase required
+      public static let ineligible = Strings.tr("Localizable", "errors.tunnel.ineligible", fallback: "Purchase required")
       /// Missing routing
       public static let routing = Strings.tr("Localizable", "errors.tunnel.routing", fallback: "Missing routing")
       /// Server shutdown
@@ -390,12 +390,10 @@ public enum Strings {
           }
           public enum Footer {
             public enum Purchase {
-              /// TV profiles expire after %d minutes.
-              public static func _1(_ p1: Int) -> String {
-                return Strings.tr("Localizable", "modules.general.sections.storage.footer.purchase.1", p1, fallback: "TV profiles expire after %d minutes.")
-              }
-              /// Purchase to drop the restriction.
-              public static let _2 = Strings.tr("Localizable", "modules.general.sections.storage.footer.purchase.2", fallback: "Purchase to drop the restriction.")
+              /// TV profiles do not work in beta builds.
+              public static let tvBeta = Strings.tr("Localizable", "modules.general.sections.storage.footer.purchase.tv_beta", fallback: "TV profiles do not work in beta builds.")
+              /// TV profiles do not work without a purchase.
+              public static let tvRelease = Strings.tr("Localizable", "modules.general.sections.storage.footer.purchase.tv_release", fallback: "TV profiles do not work without a purchase.")
             }
           }
         }

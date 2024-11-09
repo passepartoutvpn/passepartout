@@ -59,7 +59,7 @@ private extension StorageSection {
 
     var tvToggle: some View {
         Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
-            .disabled(!iapManager.isEligible(for: .appleTV) || !profileEditor.isShared)
+            .disabled(!iapManager.isEligible(for: .sharing) || !profileEditor.isShared)
     }
 
     var purchaseButton: some View {
@@ -81,19 +81,12 @@ private extension StorageSection {
         var desc = [
             Strings.Modules.General.Sections.Storage.footer(Strings.Unlocalized.iCloud)
         ]
-        let expirationDesc = {
-            Strings.Modules.General.Sections.Storage.Footer.Purchase._1(Constants.shared.tunnel.tvExpirationMinutes)
-        }
-        let purchaseDesc = {
-            Strings.Modules.General.Sections.Storage.Footer.Purchase._2
-        }
-        switch iapManager.paywallReason(forFeature: .sharing, suggesting: nil) {
+        switch iapManager.paywallReason(forFeature: .appleTV, suggesting: nil) {
         case .purchase:
-            desc.append(expirationDesc())
-            desc.append(purchaseDesc())
+            desc.append(Strings.Modules.General.Sections.Storage.Footer.Purchase.tvRelease)
 
         case .restricted:
-            desc.append(expirationDesc())
+            desc.append(Strings.Modules.General.Sections.Storage.Footer.Purchase.tvBeta)
 
         default:
             break

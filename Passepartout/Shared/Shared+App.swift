@@ -56,26 +56,8 @@ extension AppContext {
             isIncluded: {
                 Configuration.ProfileManager.isIncluded($0, $1)
             },
-            willSave: { iap, builder in
-                var copy = builder
-                var attributes = copy.attributes
-
-                // preprocess TV profiles
-                if attributes.isAvailableForTV == true {
-
-                    // ineligible, set expiration date unless already set
-                    if !iap.isEligible(for: .appleTV),
-                       attributes.expirationDate == nil || attributes.isExpired {
-                        let expirationDate = Constants.shared.tunnel.newTVExpirationDate()
-                        pp_log(.app, .notice, "Ineligible, apply expiration date: \(expirationDate)")
-                        attributes.expirationDate = expirationDate
-                    } else {
-                        attributes.expirationDate = nil
-                    }
-                }
-
-                copy.attributes = attributes
-                return copy
+            willSave: {
+                $1
             },
             willConnect: { iap, profile in
                 var builder = profile.builder()
