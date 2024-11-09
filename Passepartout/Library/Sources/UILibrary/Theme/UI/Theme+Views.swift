@@ -225,6 +225,17 @@ public struct ThemeSecureField: View {
     }
 }
 
+public struct ThemeProgressView: View {
+    public init() {
+    }
+
+    public var body: some View {
+        ProgressView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .id(UUID())
+    }
+}
+
 #if !os(tvOS)
 
 public struct ThemeMenuImage: View {

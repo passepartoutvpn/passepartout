@@ -143,6 +143,10 @@ extension View {
         modifier(ThemeAnimationModifier(value: value, category: category))
     }
 
+    public func themeProgress(if isProgressing: Bool) -> some View {
+        modifier(ThemeProgressViewModifier(isProgressing: isProgressing))
+    }
+
 #if !os(tvOS)
     public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
@@ -346,6 +350,20 @@ struct ThemeAnimationModifier<T>: ViewModifier where T: Equatable {
     func body(content: Content) -> some View {
         content
             .animation(theme.animation(for: category), value: value)
+    }
+}
+
+struct ThemeProgressViewModifier: ViewModifier {
+    let isProgressing: Bool
+
+    func body(content: Content) -> some View {
+        ZStack {
+            if isProgressing {
+                ThemeProgressView()
+            }
+            content
+                .opacity(!isProgressing ? 1.0 : 0.0)
+        }
     }
 }
 
