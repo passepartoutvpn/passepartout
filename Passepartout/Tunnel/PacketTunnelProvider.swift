@@ -36,7 +36,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
-        try checkEligibility(environment: .shared)
+        try await checkEligibility(environment: .shared)
         do {
             fwd = try await NEPTPForwarder(
                 provider: self,
@@ -76,11 +76,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     }
 }
 
+@MainActor
 private extension PacketTunnelProvider {
     var isEligible: Bool {
 #if os(tvOS)
-        // FIXME: ###, check .appleTV eligibility
-        false
+        IAPManager.shared.isEligible(for: .appleTV)
 #else
         true
 #endif
