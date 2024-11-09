@@ -113,20 +113,13 @@ private struct ContainerModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         debugChanges()
-        return ZStack {
-            content
-                .opaque(profileManager.hasProfiles)
-
-            if !profileManager.hasProfiles {
-                Text(Strings.Views.Profiles.Folders.noProfiles)
-                    .themeEmptyMessage()
+        return content
+            .themeEmptyContent(if: !profileManager.hasProfiles, message: Strings.Views.Profiles.Folders.noProfiles)
+            .searchable(text: $search)
+            .onChange(of: search) {
+                profileManager.search(byName: $0)
             }
-        }
-        .searchable(text: $search)
-        .onChange(of: search) {
-            profileManager.search(byName: $0)
-        }
-        .themeAnimation(on: profileManager.headers, category: .profiles)
+            .themeAnimation(on: profileManager.headers, category: .profiles)
     }
 }
 
