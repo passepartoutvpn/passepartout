@@ -305,7 +305,8 @@ extension ProfileManager {
 
     public func enableRemoteImporting(_ isRemoteImportingEnabled: Bool) {
         guard let remoteRepositoryBlock else {
-            preconditionFailure("Missing remoteRepositoryBlock")
+//            preconditionFailure("Missing remoteRepositoryBlock")
+            return
         }
 
         guard remoteRepository == nil || isRemoteImportingEnabled != self.isRemoteImportingEnabled else {
