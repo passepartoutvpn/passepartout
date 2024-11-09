@@ -45,7 +45,7 @@ extension AppData {
         ) {
             $0.sortDescriptors = [
                 .init(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare)),
-                .init(key: "lastUpdate", ascending: true)
+                .init(key: "lastUpdate", ascending: false)
             ]
         } fromMapper: {
             try fromMapper($0, registry: registry, coder: coder)

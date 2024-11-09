@@ -382,6 +382,7 @@ private extension ProfileManager {
             }
 
             pp_log(.App.profiles, .info, "Start importing remote profiles...")
+            assert(result.count == Set(result.map(\.id)).count, "Remote repository must not have duplicates")
 
             pp_log(.App.profiles, .debug, "Local attributes:")
             let localAttributes: [Profile.ID: ProfileAttributes] = await allProfiles.values.reduce(into: [:]) {

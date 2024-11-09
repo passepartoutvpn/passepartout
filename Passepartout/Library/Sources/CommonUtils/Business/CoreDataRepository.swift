@@ -206,6 +206,21 @@ private extension CoreDataRepository {
                 guard let cdEntities = controller.fetchedObjects else {
                     return
                 }
+
+                // strip duplicates by sort order (first entry wins)
+                var knownUUIDs = Set<UUID>()
+                cdEntities.forEach {
+                    guard let uuid = $0.uuid else {
+                        return
+                    }
+                    guard !knownUUIDs.contains(uuid) else {
+                        NSLog("Strip duplicate \(String(describing: CD.self)) with UUID \(uuid)")
+                        self?.context.delete($0)
+                        return
+                    }
+                    knownUUIDs.insert(uuid)
+                }
+
                 do {
                     let entities = try cdEntities.compactMap {
                         do {
