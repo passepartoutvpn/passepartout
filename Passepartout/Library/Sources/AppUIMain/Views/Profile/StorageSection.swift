@@ -39,17 +39,80 @@ struct StorageSection: View {
 
     var body: some View {
         debugChanges()
-        return sharingToggle
-            .themeSectionWithSingleRow(
-                header: Strings.Global.storage,
-                footer: Strings.Modules.General.Sections.Storage.footer
-            )
+        return Group {
+            sharingToggle
+            tvToggle
+                .themeRow(footer: footer)
+            purchaseButton
+        }
+        .themeSection(
+            header: header,
+            footer: footer
+        )
     }
 }
 
 private extension StorageSection {
     var sharingToggle: some View {
-        Toggle(Strings.Modules.General.Rows.icloudSharing, isOn: $profileEditor.isShared)
+        Toggle(Strings.Modules.General.Rows.shared, isOn: $profileEditor.isShared)
+            .disabled(!iapManager.isEligible(for: .sharing))
+    }
+
+    var tvToggle: some View {
+        Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
+            .disabled(!iapManager.isEligible(for: .appleTV) || !profileEditor.isShared)
+    }
+
+    @ViewBuilder
+    var purchaseButton: some View {
+        if !iapManager.isEligible(for: .sharing) {
+            purchaseSharingButton
+        } else if !iapManager.isEligible(for: .appleTV) {
+            purchaseTVButton
+        }
+    }
+
+    var purchaseSharingButton: some View {
+        EmptyView()
+            .modifier(PurchaseButtonModifier(
+                Strings.Modules.General.Rows.Shared.purchase,
+                feature: .sharing,
+                suggesting: nil,
+                showsIfRestricted: false,
+                paywallReason: $paywallReason
+            ))
+    }
+
+    var purchaseTVButton: some View {
+        EmptyView()
+            .modifier(PurchaseButtonModifier(
+                Strings.Modules.General.Rows.AppleTv.purchase,
+                feature: .appleTV,
+                suggesting: .Features.appleTV,
+                showsIfRestricted: false,
+                paywallReason: $paywallReason
+            ))
+    }
+
+    var header: String {
+        Strings.Modules.General.Sections.Storage.header(Strings.Unlocalized.iCloud)
+    }
+
+    var footer: String {
+        var desc = [
+            Strings.Modules.General.Sections.Storage.footer(Strings.Unlocalized.iCloud)
+        ]
+        switch iapManager.paywallReason(forFeature: .appleTV, suggesting: nil) {
+        case .purchase:
+            desc.append(Strings.Modules.General.Sections.Storage.Footer.Purchase.tvRelease)
+
+        case .restricted:
+            desc.append(Strings.Modules.General.Sections.Storage.Footer.Purchase.tvBeta)
+
+        default:
+            break
+        }
+        return desc.joined(separator: " ")
     }
 }
 

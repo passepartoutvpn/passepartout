@@ -40,6 +40,8 @@ public enum AppFeature: String, CaseIterable {
 
     case routing
 
+    case sharing
+
     public static let allButAppleTV: [AppFeature] = allCases.filter {
         $0 != .appleTV
     }

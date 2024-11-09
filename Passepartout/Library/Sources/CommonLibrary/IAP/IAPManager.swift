@@ -46,7 +46,8 @@ public final class IAPManager: ObservableObject {
 
     public private(set) var purchasedProducts: Set<AppProduct>
 
-    private var eligibleFeatures: Set<AppFeature>
+    @Published
+    public private(set) var eligibleFeatures: Set<AppFeature>
 
     private var pendingReceiptTask: Task<Void, Never>?
 
@@ -68,8 +69,6 @@ public final class IAPManager: ObservableObject {
         purchasedProducts = []
         eligibleFeatures = []
         subscriptions = []
-
-        observeObjects()
     }
 }
 
@@ -106,6 +105,7 @@ extension IAPManager {
             await pendingReceiptTask.value
         }
         pendingReceiptTask = Task {
+            await fetchLevelIfNeeded()
             await asyncReloadReceipt()
         }
         await pendingReceiptTask?.value
@@ -161,9 +161,9 @@ private extension IAPManager {
     func asyncReloadReceipt() async {
         pp_log(.App.iap, .notice, "Start reloading in-app receipt...")
 
-        purchasedAppBuild = nil
-        purchasedProducts.removeAll()
-        eligibleFeatures.removeAll()
+        var purchasedAppBuild: Int?
+        var purchasedProducts: Set<AppProduct> = []
+        var eligibleFeatures: Set<AppFeature> = []
 
         if let receipt = await receiptReader.receipt(at: userLevel) {
             if let originalBuildNumber = receipt.originalBuildNumber {
@@ -236,17 +236,18 @@ private extension IAPManager {
         pp_log(.App.iap, .notice, "\tPurchased products: \(purchasedProducts.map(\.rawValue))")
         pp_log(.App.iap, .notice, "\tEligible features: \(eligibleFeatures)")
 
-        objectWillChange.send()
+        self.purchasedAppBuild = purchasedAppBuild
+        self.purchasedProducts = purchasedProducts
+        self.eligibleFeatures = eligibleFeatures // @Published -> objectWillChange.send()
     }
 }
 
 // MARK: - Observation
 
-private extension IAPManager {
-    func observeObjects() {
+extension IAPManager {
+    public func observeObjects() {
         Task {
             await fetchLevelIfNeeded()
-            await reloadReceipt()
             do {
                 let products = try await inAppHelper.fetchProducts()
                 pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
@@ -266,7 +267,9 @@ private extension IAPManager {
             }
         }
     }
+}
 
+private extension IAPManager {
     func fetchLevelIfNeeded() async {
         guard userLevel == .undefined else {
             return

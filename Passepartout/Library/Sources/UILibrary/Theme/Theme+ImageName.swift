@@ -29,7 +29,8 @@ extension Theme {
     public enum ImageName {
         case add
         case close
-        case cloud
+        case cloudOff
+        case cloudOn
         case contextDuplicate
         case contextRemove
         case copy
@@ -61,7 +62,8 @@ extension Theme {
         case tunnelRestart
         case tunnelToggle
         case tunnelUninstall
-        case tv
+        case tvOff
+        case tvOn
     }
 }
 
@@ -71,7 +73,8 @@ extension Theme.ImageName {
             switch $0 {
             case .add: return "plus"
             case .close: return "xmark"
-            case .cloud: return "icloud"
+            case .cloudOff: return "icloud.slash"
+            case .cloudOn: return "icloud"
             case .contextDuplicate: return "plus.square.on.square"
             case .contextRemove: return "trash"
             case .copy: return "doc.on.doc"
@@ -103,7 +106,8 @@ extension Theme.ImageName {
             case .tunnelRestart: return "arrow.clockwise"
             case .tunnelToggle: return "power"
             case .tunnelUninstall: return "arrow.uturn.down"
-            case .tv: return "tv"
+            case .tvOff: return "tv.slash"
+            case .tvOn: return "tv"
             }
         }
     }

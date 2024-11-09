@@ -60,10 +60,6 @@ struct ProfileEditView: View, Routable {
                 profileEditor: profileEditor,
                 paywallReason: $paywallReason
             )
-            AppleTVSection(
-                profileEditor: profileEditor,
-                paywallReason: $paywallReason
-            )
             UUIDSection(uuid: profileEditor.profile.id)
         }
         .modifier(PaywallModifier(reason: $paywallReason))
@@ -126,7 +122,7 @@ private extension ProfileEditView {
 
     var addModuleButton: some View {
         let moduleTypes = profileEditor.availableModuleTypes.sorted {
-            $0.localizedDescription < $1.localizedDescription
+            $0.localizedDescription.lowercased() < $1.localizedDescription.lowercased()
         }
         return Menu {
             ForEach(moduleTypes) { selectedType in

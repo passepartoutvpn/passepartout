@@ -23,8 +23,7 @@
     },
     "tunnel": {
         "profileTitleFormat": "Passepartout: %@",
-        "refreshInterval": 3.0,
-        "tvExpirationMinutes": 10
+        "refreshInterval": 3.0
     },
     "api": {
         "timeoutInterval": 5.0

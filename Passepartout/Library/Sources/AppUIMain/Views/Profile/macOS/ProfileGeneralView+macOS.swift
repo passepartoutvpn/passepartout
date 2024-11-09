@@ -46,10 +46,6 @@ struct ProfileGeneralView: View {
                 profileEditor: profileEditor,
                 paywallReason: $paywallReason
             )
-            AppleTVSection(
-                profileEditor: profileEditor,
-                paywallReason: $paywallReason
-            )
             UUIDSection(uuid: profileEditor.profile.id)
         }
         .modifier(PaywallModifier(reason: $paywallReason))

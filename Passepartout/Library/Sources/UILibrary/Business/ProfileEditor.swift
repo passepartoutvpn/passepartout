@@ -85,7 +85,7 @@ extension ProfileEditor {
                 !moduleTypes.contains($0)
             }
             .sorted {
-                $0.localizedDescription < $1.localizedDescription
+                $0.localizedDescription.lowercased() < $1.localizedDescription.lowercased()
             }
     }
 }
@@ -198,7 +198,7 @@ extension ProfileEditor {
     public func save(to profileManager: ProfileManager) async throws {
         do {
             let newProfile = try build()
-            try await profileManager.save(newProfile, force: true, isShared: isShared)
+            try await profileManager.save(newProfile, force: true, remotelyShared: isShared)
         } catch {
             pp_log(.app, .fault, "Unable to save edited profile: \(error)")
             throw error

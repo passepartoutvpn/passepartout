@@ -118,8 +118,8 @@ public enum Strings {
       public static let emptyProducts = Strings.tr("Localizable", "errors.app.empty_products", fallback: "Unable to fetch products, please retry later.")
       /// Profile name is empty.
       public static let emptyProfileName = Strings.tr("Localizable", "errors.app.empty_profile_name", fallback: "Profile name is empty.")
-      /// Profile is expired.
-      public static let expiredProfile = Strings.tr("Localizable", "errors.app.expired_profile", fallback: "Profile is expired.")
+      /// A purchase is required for this profile to work.
+      public static let ineligibleProfile = Strings.tr("Localizable", "errors.app.ineligible_profile", fallback: "A purchase is required for this profile to work.")
       /// Module %@ is malformed. %@
       public static func malformedModule(_ p1: Any, _ p2: Any) -> String {
         return Strings.tr("Localizable", "errors.app.malformed_module", String(describing: p1), String(describing: p2), fallback: "Module %@ is malformed. %@")
@@ -162,10 +162,10 @@ public enum Strings {
       public static let dns = Strings.tr("Localizable", "errors.tunnel.dns", fallback: "DNS failed")
       /// Encryption failed
       public static let encryption = Strings.tr("Localizable", "errors.tunnel.encryption", fallback: "Encryption failed")
-      /// Expired
-      public static let expired = Strings.tr("Localizable", "errors.tunnel.expired", fallback: "Expired")
       /// Failed
       public static let generic = Strings.tr("Localizable", "errors.tunnel.generic", fallback: "Failed")
+      /// Purchase required
+      public static let ineligible = Strings.tr("Localizable", "errors.tunnel.ineligible", fallback: "Purchase required")
       /// Missing routing
       public static let routing = Strings.tr("Localizable", "errors.tunnel.routing", fallback: "Missing routing")
       /// Server shutdown
@@ -200,6 +200,10 @@ public enum Strings {
     /// %@
     public static func routing(_ p1: Any) -> String {
       return Strings.tr("Localizable", "features.routing", String(describing: p1), fallback: "%@")
+    }
+    /// %@
+    public static func sharing(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "features.sharing", String(describing: p1), fallback: "%@")
     }
   }
   public enum Global {
@@ -341,8 +345,6 @@ public enum Strings {
     public static let show = Strings.tr("Localizable", "global.show", fallback: "Show")
     /// Status
     public static let status = Strings.tr("Localizable", "global.status", fallback: "Status")
-    /// Storage
-    public static let storage = Strings.tr("Localizable", "global.storage", fallback: "Storage")
     /// Subnet
     public static let subnet = Strings.tr("Localizable", "global.subnet", fallback: "Subnet")
     /// Unknown
@@ -369,33 +371,37 @@ public enum Strings {
         public static func appleTv(_ p1: Any) -> String {
           return Strings.tr("Localizable", "modules.general.rows.apple_tv", String(describing: p1), fallback: "%@")
         }
-        /// Shared on iCloud
-        public static let icloudSharing = Strings.tr("Localizable", "modules.general.rows.icloud_sharing", fallback: "Shared on iCloud")
         /// Import from file...
         public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file...")
+        /// Enabled
+        public static let shared = Strings.tr("Localizable", "modules.general.rows.shared", fallback: "Enabled")
         public enum AppleTv {
-          /// Drop time restriction
-          public static let purchase = Strings.tr("Localizable", "modules.general.rows.apple_tv.purchase", fallback: "Drop time restriction")
+          /// Drop TV restriction
+          public static let purchase = Strings.tr("Localizable", "modules.general.rows.apple_tv.purchase", fallback: "Drop TV restriction")
+        }
+        public enum Shared {
+          /// Share on iCloud
+          public static let purchase = Strings.tr("Localizable", "modules.general.rows.shared.purchase", fallback: "Share on iCloud")
         }
       }
       public enum Sections {
-        public enum AppleTv {
-          /// Requires iCloud sharing.
-          public static let footer = Strings.tr("Localizable", "modules.general.sections.apple_tv.footer", fallback: "Requires iCloud sharing.")
+        public enum Storage {
+          /// Profiles are stored to %@ encrypted.
+          public static func footer(_ p1: Any) -> String {
+            return Strings.tr("Localizable", "modules.general.sections.storage.footer", String(describing: p1), fallback: "Profiles are stored to %@ encrypted.")
+          }
+          /// %@
+          public static func header(_ p1: Any) -> String {
+            return Strings.tr("Localizable", "modules.general.sections.storage.header", String(describing: p1), fallback: "%@")
+          }
           public enum Footer {
             public enum Purchase {
-              /// TV profiles expire after %d minutes.
-              public static func _1(_ p1: Int) -> String {
-                return Strings.tr("Localizable", "modules.general.sections.apple_tv.footer.purchase.1", p1, fallback: "TV profiles expire after %d minutes.")
-              }
-              /// Purchase to drop the restriction.
-              public static let _2 = Strings.tr("Localizable", "modules.general.sections.apple_tv.footer.purchase.2", fallback: "Purchase to drop the restriction.")
+              /// TV profiles do not work in beta builds.
+              public static let tvBeta = Strings.tr("Localizable", "modules.general.sections.storage.footer.purchase.tv_beta", fallback: "TV profiles do not work in beta builds.")
+              /// TV profiles do not work without a purchase.
+              public static let tvRelease = Strings.tr("Localizable", "modules.general.sections.storage.footer.purchase.tv_release", fallback: "TV profiles do not work without a purchase.")
             }
           }
-        }
-        public enum Storage {
-          /// Profiles are stored to iCloud encrypted.
-          public static let footer = Strings.tr("Localizable", "modules.general.sections.storage.footer", fallback: "Profiles are stored to iCloud encrypted.")
         }
       }
     }

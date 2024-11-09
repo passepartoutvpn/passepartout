@@ -48,6 +48,6 @@ public enum AppError: Error {
 
 extension PassepartoutError.Code {
     public enum App {
-        public static let expiredProfile = PassepartoutError.Code("App.expiredProfile")
+        public static let ineligibleProfile = PassepartoutError.Code("App.ineligibleProfile")
     }
 }

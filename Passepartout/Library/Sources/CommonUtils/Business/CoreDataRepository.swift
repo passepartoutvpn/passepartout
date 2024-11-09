@@ -201,11 +201,26 @@ private extension CoreDataRepository {
     }
 
     nonisolated func sendResults(from controller: NSFetchedResultsController<CD>) {
-        guard let cdEntities = controller.fetchedObjects else {
-            return
-        }
         Task.detached { [weak self] in
             await self?.context.perform { [weak self] in
+                guard let cdEntities = controller.fetchedObjects else {
+                    return
+                }
+
+                // strip duplicates by sort order (first entry wins)
+                var knownUUIDs = Set<UUID>()
+                cdEntities.forEach {
+                    guard let uuid = $0.uuid else {
+                        return
+                    }
+                    guard !knownUUIDs.contains(uuid) else {
+                        NSLog("Strip duplicate \(String(describing: CD.self)) with UUID \(uuid)")
+                        self?.context.delete($0)
+                        return
+                    }
+                    knownUUIDs.insert(uuid)
+                }
+
                 do {
                     let entities = try cdEntities.compactMap {
                         do {
@@ -230,7 +245,7 @@ private extension CoreDataRepository {
                     let result = EntitiesResult(entities, isFiltering: controller.fetchRequest.predicate != nil)
                     self?.entitiesSubject.send(result)
                 } catch {
-                    // ResultError
+                    NSLog("Unable to send Core Data entities: \(error)")
                 }
             }
         }

@@ -47,14 +47,19 @@ extension AppUserLevel: AppFeatureProviding {
 extension AppProduct: AppFeatureProviding {
     var features: [AppFeature] {
         switch self {
+
+        // MARK: Current
+
+        case .Features.appleTV:
+            return [.appleTV, .sharing]
+
         case .Full.Recurring.monthly, .Full.Recurring.yearly:
             return AppFeature.allCases
 
+        // MARK: Discontinued
+
         case .Features.allProviders:
             return [.providers]
-
-        case .Features.appleTV:
-            return [.appleTV]
 
         case .Features.networkSettings:
             return [.dns, .httpProxy, .routing]

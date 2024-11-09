@@ -45,7 +45,7 @@ extension AppData {
         ) {
             $0.sortDescriptors = [
                 .init(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare)),
-                .init(key: "lastUpdate", ascending: true)
+                .init(key: "lastUpdate", ascending: false)
             ]
         } fromMapper: {
             try fromMapper($0, registry: registry, coder: coder)
@@ -87,7 +87,6 @@ private extension AppData {
         // redundant but convenient
         let attributes = profile.attributes
         cdProfile.isAvailableForTV = attributes.isAvailableForTV.map(NSNumber.init(value:))
-        cdProfile.expirationDate = attributes.expirationDate
         cdProfile.lastUpdate = attributes.lastUpdate
         cdProfile.fingerprint = attributes.fingerprint
 

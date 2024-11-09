@@ -94,7 +94,7 @@ private extension PaywallView {
 
     var subscriptionFeatures: [AppFeature] {
         AppFeature.allCases.sorted {
-            $0.localizedDescription < $1.localizedDescription
+            $0.localizedDescription.lowercased() < $1.localizedDescription.lowercased()
         }
     }
 

@@ -78,9 +78,9 @@ extension AppContext {
         )
         return AppContext(
             iapManager: iapManager,
+            registry: registry,
             profileManager: profileManager,
             tunnel: tunnel,
-            registry: registry,
             providerManager: providerManager
         )
     }

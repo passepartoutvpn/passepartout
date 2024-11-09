@@ -33,11 +33,11 @@ import PassepartoutKit
 public final class AppContext: ObservableObject {
     public let iapManager: IAPManager
 
+    public let registry: Registry
+
     public let profileManager: ProfileManager
 
     public let tunnel: ExtendedTunnel
-
-    public let registry: Registry
 
     public let providerManager: ProviderManager
 
@@ -47,15 +47,15 @@ public final class AppContext: ObservableObject {
 
     public init(
         iapManager: IAPManager,
+        registry: Registry,
         profileManager: ProfileManager,
         tunnel: ExtendedTunnel,
-        registry: Registry,
         providerManager: ProviderManager
     ) {
         self.iapManager = iapManager
+        self.registry = registry
         self.profileManager = profileManager
         self.tunnel = tunnel
-        self.registry = registry
         self.providerManager = providerManager
         subscriptions = []
 
@@ -77,8 +77,11 @@ public final class AppContext: ObservableObject {
                         pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
                     }
                 }
-                group.addTask {
-                    await self.iapManager.reloadReceipt()
+                group.addTask { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    await iapManager.reloadReceipt()
                 }
             }
             isActivating = false
@@ -90,7 +93,19 @@ public final class AppContext: ObservableObject {
 
 private extension AppContext {
     func observeObjects() {
-        profileManager.observeObjects()
+        iapManager
+            .observeObjects()
+
+        iapManager
+            .$eligibleFeatures
+            .removeDuplicates()
+            .sink { [weak self] in
+                self?.syncEligibleFeatures($0)
+            }
+            .store(in: &subscriptions)
+
+        profileManager
+            .observeObjects()
 
         profileManager
             .didChange
@@ -108,6 +123,19 @@ private extension AppContext {
 }
 
 private extension AppContext {
+    var isCloudKitEnabled: Bool {
+#if os(tvOS)
+        true
+#else
+        FileManager.default.ubiquityIdentityToken != nil
+#endif
+    }
+
+    func syncEligibleFeatures(_ eligible: Set<AppFeature>) {
+        let canImport = eligible.contains(.sharing)
+        profileManager.enableRemoteImporting(canImport && isCloudKitEnabled)
+    }
+
     func syncTunnelIfCurrentProfile(_ profile: Profile) {
         guard profile.id == tunnel.currentProfile?.id else {
             return

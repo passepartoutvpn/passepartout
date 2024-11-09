@@ -34,21 +34,17 @@ public struct ProfileAttributes: Hashable, Codable {
 
     public var isAvailableForTV: Bool?
 
-    public var expirationDate: Date?
-
     public init() {
     }
 
     public init(
         fingerprint: UUID?,
         lastUpdate: Date?,
-        isAvailableForTV: Bool?,
-        expirationDate: Date?
+        isAvailableForTV: Bool?
     ) {
         self.fingerprint = fingerprint
         self.lastUpdate = lastUpdate
         self.isAvailableForTV = isAvailableForTV
-        self.expirationDate = expirationDate
     }
 }
 
@@ -63,22 +59,10 @@ extension ProfileAttributes: CustomDebugStringConvertible {
             },
             isAvailableForTV.map {
                 "isAvailableForTV: \($0)"
-            },
-            expirationDate.map {
-                "expirationDate: \($0)"
             }
         ].compactMap { $0 }
 
         return "{\(descs.joined(separator: ", "))}"
-    }
-}
-
-extension ProfileAttributes {
-    public var isExpired: Bool {
-        if let expirationDate {
-            return Date().distance(to: expirationDate) <= .zero
-        }
-        return false
     }
 }
 

@@ -68,7 +68,6 @@
 "global.settings" = "Settings";
 "global.show" = "Show";
 "global.status" = "Status";
-"global.storage" = "Storage";
 "global.subnet" = "Subnet";
 "global.unknown" = "Unknown";
 "global.username" = "Username";
@@ -173,9 +172,9 @@
 
 // MARK: - Module views
 
-"modules.general.sections.storage.footer" = "Profiles are stored to iCloud encrypted.";
-"modules.general.sections.apple_tv.footer" = "Requires iCloud sharing.";
-"modules.general.rows.icloud_sharing" = "Shared on iCloud";
+"modules.general.sections.storage.header" = "%@";
+"modules.general.sections.storage.footer" = "Profiles are stored to %@ encrypted.";
+"modules.general.rows.shared" = "Enabled";
 "modules.general.rows.apple_tv" = "%@";
 "modules.general.rows.import_from_file" = "Import from file...";
 
@@ -271,10 +270,12 @@
 "features.onDemand" = "%@";
 "features.providers" = "All Providers";
 "features.routing" = "%@";
+"features.sharing" = "%@";
 
-"modules.general.sections.apple_tv.footer.purchase.1" = "TV profiles expire after %d minutes.";
-"modules.general.sections.apple_tv.footer.purchase.2" = "Purchase to drop the restriction.";
-"modules.general.rows.apple_tv.purchase" = "Drop time restriction";
+"modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
+"modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";
+"modules.general.rows.shared.purchase" = "Share on iCloud";
+"modules.general.rows.apple_tv.purchase" = "Drop TV restriction";
 "modules.on_demand.purchase" = "Add on-demand rules";
 "modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 "providers.picker.purchase" = "Add more providers";
@@ -291,7 +292,7 @@
 
 "errors.app.empty_products" = "Unable to fetch products, please retry later.";
 "errors.app.empty_profile_name" = "Profile name is empty.";
-"errors.app.expired_profile" = "Profile is expired.";
+"errors.app.ineligible_profile" = "A purchase is required for this profile to work.";
 "errors.app.malformed_module" = "Module %@ is malformed. %@";
 "errors.app.provider.required" = "No provider selected.";
 "errors.app.default" = "Unable to complete operation.";
@@ -309,7 +310,7 @@
 "errors.tunnel.compression" = "Compression unsupported";
 "errors.tunnel.dns" = "DNS failed";
 "errors.tunnel.encryption" = "Encryption failed";
-"errors.tunnel.expired" = "Expired";
+"errors.tunnel.ineligible" = "Purchase required";
 "errors.tunnel.routing" = "Missing routing";
 "errors.tunnel.shutdown" = "Server shutdown";
 "errors.tunnel.timeout" = "Timeout";
