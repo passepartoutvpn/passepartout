@@ -78,15 +78,20 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 
 @MainActor
 private extension PacketTunnelProvider {
+    var iapManager: IAPManager {
+        .shared
+    }
+
     var isEligible: Bool {
 #if os(tvOS)
-        IAPManager.shared.isEligible(for: .appleTV)
+        iapManager.isEligible(for: .appleTV)
 #else
         true
 #endif
     }
 
-    func checkEligibility(environment: TunnelEnvironment) throws {
+    func checkEligibility(environment: TunnelEnvironment) async throws {
+        await iapManager.fetchReceipt()
         guard isEligible else {
             let error = PassepartoutError(.App.ineligibleProfile)
             environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)

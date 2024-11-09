@@ -69,8 +69,6 @@ public final class IAPManager: ObservableObject {
         purchasedProducts = []
         eligibleFeatures = []
         subscriptions = []
-
-        observeObjects()
     }
 }
 
@@ -243,8 +241,13 @@ private extension IAPManager {
 
 // MARK: - Observation
 
-private extension IAPManager {
-    func observeObjects() {
+extension IAPManager {
+    public func fetchReceipt() async {
+        await fetchLevelIfNeeded()
+        await reloadReceipt()
+    }
+
+    public func observeObjects() {
         Task {
             await fetchLevelIfNeeded()
             await reloadReceipt()
@@ -267,7 +270,9 @@ private extension IAPManager {
             }
         }
     }
+}
 
+private extension IAPManager {
     func fetchLevelIfNeeded() async {
         guard userLevel == .undefined else {
             return

@@ -94,6 +94,9 @@ public final class AppContext: ObservableObject {
 private extension AppContext {
     func observeObjects() {
         iapManager
+            .observeObjects()
+
+        iapManager
             .$eligibleFeatures
             .removeDuplicates()
             .sink { [weak self] in
