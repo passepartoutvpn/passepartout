@@ -91,7 +91,7 @@ private extension PacketTunnelProvider {
     }
 
     func checkEligibility(environment: TunnelEnvironment) async throws {
-        await iapManager.fetchReceipt()
+        await iapManager.reloadReceipt()
         guard isEligible else {
             let error = PassepartoutError(.App.ineligibleProfile)
             environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)

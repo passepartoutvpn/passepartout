@@ -105,6 +105,7 @@ extension IAPManager {
             await pendingReceiptTask.value
         }
         pendingReceiptTask = Task {
+            await fetchLevelIfNeeded()
             await asyncReloadReceipt()
         }
         await pendingReceiptTask?.value
@@ -244,15 +245,9 @@ private extension IAPManager {
 // MARK: - Observation
 
 extension IAPManager {
-    public func fetchReceipt() async {
-        await fetchLevelIfNeeded()
-        await reloadReceipt()
-    }
-
     public func observeObjects() {
         Task {
             await fetchLevelIfNeeded()
-            await reloadReceipt()
             do {
                 let products = try await inAppHelper.fetchProducts()
                 pp_log(.App.iap, .info, "Available in-app products: \(products.map(\.key))")
