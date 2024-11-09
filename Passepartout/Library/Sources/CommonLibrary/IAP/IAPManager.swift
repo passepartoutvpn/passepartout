@@ -160,7 +160,7 @@ private extension IAPManager {
     func asyncReloadReceipt() async {
         pp_log(.App.iap, .notice, "Start reloading in-app receipt...")
 
-        var purchasedAppBuild: Int? = nil
+        var purchasedAppBuild: Int?
         var purchasedProducts: Set<AppProduct> = []
         var eligibleFeatures: Set<AppFeature> = []
 
