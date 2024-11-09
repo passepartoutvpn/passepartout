@@ -96,6 +96,7 @@ extension IAPManagerTests {
         XCTAssertTrue(sut.isEligible(for: .httpProxy))
         XCTAssertFalse(sut.isEligible(for: .onDemand))
         XCTAssertTrue(sut.isEligible(for: .routing))
+        XCTAssertFalse(sut.isEligible(for: .sharing))
         XCTAssertFalse(sut.isEligible(for: AppFeature.allButAppleTV))
     }
 
