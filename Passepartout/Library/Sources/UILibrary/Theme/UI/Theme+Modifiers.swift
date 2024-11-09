@@ -147,6 +147,10 @@ extension View {
         modifier(ThemeProgressViewModifier(isProgressing: isProgressing))
     }
 
+    public func themeEmptyContent(if isEmpty: Bool, message: String) -> some View {
+        modifier(ThemeEmptyContentModifier(isEmpty: isEmpty, message: message))
+    }
+
 #if !os(tvOS)
     public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
@@ -363,6 +367,25 @@ struct ThemeProgressViewModifier: ViewModifier {
             }
             content
                 .opaque(!isProgressing)
+        }
+    }
+}
+
+struct ThemeEmptyContentModifier: ViewModifier {
+    let isEmpty: Bool
+
+    let message: String
+
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+                .opaque(!isEmpty)
+
+            if isEmpty {
+                Text(message)
+                    .themeEmptyMessage()
+                    .opaque(isEmpty)
+            }
         }
     }
 }
