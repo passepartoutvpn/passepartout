@@ -1,5 +1,5 @@
 //
-//  Shared+App.swift
+//  AppContext+Shared.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 2/24/24.
@@ -105,15 +105,17 @@ extension AppContext {
 
 // MARK: - Configuration
 
-extension Configuration {
+private extension Configuration {
     enum ExtendedTunnel {
     }
 }
 
+// MARK: Simulator
+
 #if targetEnvironment(simulator)
 
 @MainActor
-extension Configuration.ProfileManager {
+private extension Configuration.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
         coreDataProfileRepository
     }
@@ -123,7 +125,7 @@ extension Configuration.ProfileManager {
     }
 }
 
-extension Configuration.ExtendedTunnel {
+private extension Configuration.ExtendedTunnel {
     static var strategy: TunnelObservableStrategy {
         FakeTunnelStrategy(environment: .shared, dataCountInterval: 1000)
     }
@@ -131,8 +133,10 @@ extension Configuration.ExtendedTunnel {
 
 #else
 
+// MARK: Device
+
 @MainActor
-extension Configuration.ProfileManager {
+private extension Configuration.ProfileManager {
     static var mainProfileRepository: ProfileRepository {
         neProfileRepository
     }
@@ -143,7 +147,7 @@ extension Configuration.ProfileManager {
 }
 
 @MainActor
-extension Configuration.ExtendedTunnel {
+private extension Configuration.ExtendedTunnel {
     static var strategy: TunnelObservableStrategy {
         Configuration.ProfileManager.neStrategy
     }
@@ -151,8 +155,10 @@ extension Configuration.ExtendedTunnel {
 
 #endif
 
+// MARK: Common
+
 @MainActor
-extension Configuration.ProfileManager {
+private extension Configuration.ProfileManager {
     static let neProfileRepository: ProfileRepository = {
         NEProfileRepository(repository: neStrategy) {
             sharedTitle($0)
@@ -187,9 +193,9 @@ extension Configuration.ProfileManager {
     }()
 }
 
-// MARK: -
+// MARK: - Logging
 
-extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
+private extension CoreDataPersistentStoreLogger where Self == DefaultCoreDataPersistentStoreLogger {
     static var `default`: CoreDataPersistentStoreLogger {
         DefaultCoreDataPersistentStoreLogger()
     }

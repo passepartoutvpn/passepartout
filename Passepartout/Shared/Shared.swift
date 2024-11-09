@@ -30,6 +30,8 @@ import Foundation
 import PassepartoutKit
 import PassepartoutWireGuardGo
 
+// MARK: Registry
+
 extension Registry {
     static let shared = Registry(
         withKnownHandlers: true,
@@ -76,7 +78,7 @@ extension Registry {
     }
 }
 
-// MARK: -
+// MARK: TunnelEnvironment
 
 extension TunnelEnvironment where Self == AppGroupEnvironment {
     static var shared: Self {
@@ -87,7 +89,7 @@ extension TunnelEnvironment where Self == AppGroupEnvironment {
     }
 }
 
-// MARK: -
+// MARK: IAPManager
 
 extension IAPManager {
     static let shared: IAPManager = {
@@ -155,6 +157,8 @@ enum Configuration {
     }
 }
 
+// MARK: Environment
+
 private extension Configuration.Environment {
     static var isFakeIAP: Bool {
         ProcessInfo.processInfo.environment["PP_FAKE_IAP"] == "1"
@@ -176,6 +180,8 @@ private extension Configuration.Environment {
     }
 }
 
+// MARK: ProfileManager
+
 extension Configuration.ProfileManager {
     static let sharedTitle: @Sendable (Profile) -> String = {
         String(format: Constants.shared.tunnel.profileTitleFormat, $0.name)
@@ -195,6 +201,8 @@ extension Configuration.ProfileManager {
     }
 #endif
 }
+
+// MARK: IAPManager
 
 private extension Configuration.IAPManager {
 
