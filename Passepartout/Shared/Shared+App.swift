@@ -32,60 +32,10 @@ import Foundation
 import PassepartoutKit
 import UILibrary
 
+// shared registry and environment are picked from Shared.swift
+
 extension AppContext {
     static let shared: AppContext = {
-        let tunnelEnvironment: TunnelEnvironment = .shared
-        let registry: Registry = .shared
-
-        // MARK: IAPManager + ProfileProcessor
-
-        let iapHelpers = Configuration.IAPManager.helpers
-        let iapManager = IAPManager(
-            customUserLevel: Configuration.Environment.userLevel,
-            inAppHelper: iapHelpers.productHelper,
-            receiptReader: iapHelpers.receiptReader,
-            // FIXME: #662, omit unrestrictedFeatures on release!
-            unrestrictedFeatures: [.interactiveLogin, .sharing],
-            productsAtBuild: Configuration.IAPManager.productsAtBuild
-        )
-        let processor = ProfileProcessor(
-            iapManager: iapManager,
-            title: {
-                Configuration.ProfileManager.sharedTitle($0)
-            },
-            isIncluded: {
-                Configuration.ProfileManager.isIncluded($0, $1)
-            },
-            willSave: {
-                $1
-            },
-            willConnect: { iap, profile in
-                var builder = profile.builder()
-
-                // ineligible, suppress on-demand rules
-                if !iap.isEligible(for: .onDemand) {
-                    pp_log(.app, .notice, "Ineligible, suppress on-demand rules")
-
-                    if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
-                       let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {
-
-                        var onDemandBuilder = onDemandModule.builder()
-                        onDemandBuilder.policy = .any
-                        builder.modules[onDemandModuleIndex] = onDemandBuilder.tryBuild()
-                    }
-                }
-
-                // validate provider modules
-                let profile = try builder.tryBuild()
-                do {
-                    _ = try profile.withProviderModules()
-                    return profile
-                } catch {
-                    pp_log(.app, .error, "Unable to inject provider modules: \(error)")
-                    throw error
-                }
-            }
-        )
 
         // MARK: ProfileManager
 
@@ -98,7 +48,7 @@ extension AppContext {
                 author: nil
             )
             return AppData.cdProfileRepositoryV3(
-                registry: registry,
+                registry: .shared,
                 coder: CodableProfileCoder(),
                 context: remoteStore.context,
                 observingResults: true
@@ -113,7 +63,7 @@ extension AppContext {
                 backupRepository: Configuration.ProfileManager.backupProfileRepository,
                 remoteRepositoryBlock: remoteRepositoryBlock,
                 mirrorsRemoteRepository: Configuration.ProfileManager.mirrorsRemoteRepository,
-                processor: processor
+                processor: IAPManager.sharedProcessor
             )
         }()
 
@@ -121,8 +71,8 @@ extension AppContext {
 
         let tunnel = ExtendedTunnel(
             tunnel: Tunnel(strategy: Configuration.ExtendedTunnel.strategy),
-            environment: tunnelEnvironment,
-            processor: processor,
+            environment: .shared,
+            processor: IAPManager.sharedProcessor,
             interval: Constants.shared.tunnel.refreshInterval
         )
 
@@ -144,10 +94,10 @@ extension AppContext {
         }()
 
         return AppContext(
-            iapManager: iapManager,
+            iapManager: .shared,
+            registry: .shared,
             profileManager: profileManager,
             tunnel: tunnel,
-            registry: registry,
             providerManager: providerManager
         )
     }()
@@ -155,105 +105,12 @@ extension AppContext {
 
 // MARK: - Configuration
 
-private enum Configuration {
-    enum Environment {
-        static var isFakeIAP: Bool {
-            ProcessInfo.processInfo.environment["PP_FAKE_IAP"] == "1"
-        }
-
-        static var userLevel: AppUserLevel? {
-            if let envString = ProcessInfo.processInfo.environment["PP_USER_LEVEL"],
-               let envValue = Int(envString),
-               let testAppType = AppUserLevel(rawValue: envValue) {
-
-                return testAppType
-            }
-            if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
-               let testAppType = AppUserLevel(rawValue: infoValue) {
-
-                return testAppType
-            }
-            return nil
-        }
-    }
-}
-
 extension Configuration {
-    enum IAPManager {
-
-        @MainActor
-        static var helpers: (productHelper: any AppProductHelper, receiptReader: AppReceiptReader) {
-            guard !Environment.isFakeIAP else {
-                let mockHelper = MockAppProductHelper()
-                return (mockHelper, mockHelper.receiptReader)
-            }
-            let productHelper = StoreKitHelper(
-                products: AppProduct.all,
-                inAppIdentifier: {
-                    let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
-                    return "\(prefix).\($0.rawValue)"
-                }
-            )
-            let receiptReader = FallbackReceiptReader(
-                reader: StoreKitReceiptReader(),
-                localReader: {
-                    KvittoReceiptReader(url: $0)
-                }
-            )
-            return (productHelper, receiptReader)
-        }
-
-        static let productsAtBuild: BuildProducts<AppProduct> = {
-#if os(iOS)
-            if $0 <= 2016 {
-                return [.Full.iOS]
-            } else if $0 <= 3000 {
-                return [.Features.networkSettings]
-            }
-            return []
-#elseif os(macOS)
-            if $0 <= 3000 {
-                return [.Features.networkSettings]
-            }
-            return []
-#else
-            return []
-#endif
-        }
-    }
-}
-
-extension Configuration {
-    enum ProfileManager {
-        static let sharedTitle: @Sendable (Profile) -> String = {
-            String(format: Constants.shared.tunnel.profileTitleFormat, $0.name)
-        }
-
-#if os(tvOS)
-        static let mirrorsRemoteRepository = true
-
-        static let isIncluded: @MainActor @Sendable (CommonLibrary.IAPManager, Profile) -> Bool = {
-            $1.attributes.isAvailableForTV == true
-        }
-#else
-        static let mirrorsRemoteRepository = false
-
-        static let isIncluded: @MainActor @Sendable (CommonLibrary.IAPManager, Profile) -> Bool = { _, _ in
-            true
-        }
-#endif
+    enum ExtendedTunnel {
     }
 }
 
 #if targetEnvironment(simulator)
-
-extension Configuration {
-    enum ExtendedTunnel {
-        static var strategy: TunnelObservableStrategy {
-            FakeTunnelStrategy(environment: .shared, dataCountInterval: 1000)
-        }
-    }
-}
 
 @MainActor
 extension Configuration.ProfileManager {
@@ -266,17 +123,13 @@ extension Configuration.ProfileManager {
     }
 }
 
-#else
-
-extension Configuration {
-
-    @MainActor
-    enum ExtendedTunnel {
-        static var strategy: TunnelObservableStrategy {
-            ProfileManager.neStrategy
-        }
+extension Configuration.ExtendedTunnel {
+    static var strategy: TunnelObservableStrategy {
+        FakeTunnelStrategy(environment: .shared, dataCountInterval: 1000)
     }
 }
+
+#else
 
 @MainActor
 extension Configuration.ProfileManager {
@@ -286,6 +139,13 @@ extension Configuration.ProfileManager {
 
     static var backupProfileRepository: ProfileRepository? {
         coreDataProfileRepository
+    }
+}
+
+@MainActor
+extension Configuration.ExtendedTunnel {
+    static var strategy: TunnelObservableStrategy {
+        Configuration.ProfileManager.neStrategy
     }
 }
 

@@ -33,11 +33,11 @@ import PassepartoutKit
 public final class AppContext: ObservableObject {
     public let iapManager: IAPManager
 
+    public let registry: Registry
+
     public let profileManager: ProfileManager
 
     public let tunnel: ExtendedTunnel
-
-    public let registry: Registry
 
     public let providerManager: ProviderManager
 
@@ -47,15 +47,15 @@ public final class AppContext: ObservableObject {
 
     public init(
         iapManager: IAPManager,
+        registry: Registry,
         profileManager: ProfileManager,
         tunnel: ExtendedTunnel,
-        registry: Registry,
         providerManager: ProviderManager
     ) {
         self.iapManager = iapManager
+        self.registry = registry
         self.profileManager = profileManager
         self.tunnel = tunnel
-        self.registry = registry
         self.providerManager = providerManager
         subscriptions = []
 
@@ -93,6 +93,14 @@ public final class AppContext: ObservableObject {
 
 private extension AppContext {
     func observeObjects() {
+        iapManager
+            .$eligibleFeatures
+            .removeDuplicates()
+            .sink { [weak self] in
+                self?.syncEligibleFeatures($0)
+            }
+            .store(in: &subscriptions)
+
         profileManager
             .observeObjects()
 
@@ -106,14 +114,6 @@ private extension AppContext {
                 default:
                     break
                 }
-            }
-            .store(in: &subscriptions)
-
-        iapManager
-            .$eligibleFeatures
-            .removeDuplicates()
-            .sink { [weak self] in
-                self?.syncEligibleFeatures($0)
             }
             .store(in: &subscriptions)
     }
