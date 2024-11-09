@@ -68,7 +68,6 @@
 "global.settings" = "Settings";
 "global.show" = "Show";
 "global.status" = "Status";
-"global.storage" = "Storage";
 "global.subnet" = "Subnet";
 "global.unknown" = "Unknown";
 "global.username" = "Username";
@@ -173,9 +172,9 @@
 
 // MARK: - Module views
 
-"modules.general.sections.storage.footer" = "Profiles are stored to iCloud encrypted.";
-"modules.general.sections.apple_tv.footer" = "Requires iCloud sharing.";
-"modules.general.rows.icloud_sharing" = "Shared on iCloud";
+"modules.general.sections.storage.header" = "%@";
+"modules.general.sections.storage.footer" = "Profiles are stored to %@ encrypted.";
+"modules.general.rows.shared" = "Enabled";
 "modules.general.rows.apple_tv" = "%@";
 "modules.general.rows.import_from_file" = "Import from file...";
 
@@ -273,9 +272,9 @@
 "features.routing" = "%@";
 "features.sharing" = "%@";
 
-"modules.general.sections.apple_tv.footer.purchase.1" = "TV profiles expire after %d minutes.";
-"modules.general.sections.apple_tv.footer.purchase.2" = "Purchase to drop the restriction.";
-"modules.general.rows.apple_tv.purchase" = "Drop time restriction";
+"modules.general.sections.storage.footer.purchase.1" = "TV profiles expire after %d minutes.";
+"modules.general.sections.storage.footer.purchase.2" = "Purchase to drop the restriction.";
+"modules.general.rows.purchase" = "Share on iCloud";
 "modules.on_demand.purchase" = "Add on-demand rules";
 "modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 "providers.picker.purchase" = "Add more providers";

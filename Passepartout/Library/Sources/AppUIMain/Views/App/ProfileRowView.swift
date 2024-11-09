@@ -141,7 +141,7 @@ private extension ProfileRowView {
 
     var sharedImage: some View {
         ThemeImage(profileManager.isRemoteImportingEnabled ? .cloudOn : .cloudOff)
-            .help(Strings.Modules.General.Rows.icloudSharing)
+            .help(Strings.Modules.General.Rows.shared)
     }
 
     var tvImage: some View {

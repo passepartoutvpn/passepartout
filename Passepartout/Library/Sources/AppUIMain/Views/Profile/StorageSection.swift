@@ -39,17 +39,66 @@ struct StorageSection: View {
 
     var body: some View {
         debugChanges()
-        return sharingToggle
-            .themeSectionWithSingleRow(
-                header: Strings.Global.storage,
-                footer: Strings.Modules.General.Sections.Storage.footer
-            )
+        return Group {
+            sharingToggle
+            tvToggle
+            purchaseButton
+        }
+        .themeSection(
+            header: header,
+            footer: footer
+        )
     }
 }
 
 private extension StorageSection {
     var sharingToggle: some View {
-        Toggle(Strings.Modules.General.Rows.icloudSharing, isOn: $profileEditor.isShared)
+        Toggle(Strings.Modules.General.Rows.shared, isOn: $profileEditor.isShared)
+            .disabled(!iapManager.isEligible(for: .sharing))
+    }
+
+    var tvToggle: some View {
+        Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
+            .disabled(!iapManager.isEligible(for: .appleTV) || !profileEditor.isShared)
+    }
+
+    var purchaseButton: some View {
+        EmptyView()
+            .modifier(PurchaseButtonModifier(
+                Strings.Modules.General.Rows.purchase,
+                feature: .sharing,
+                suggesting: nil,
+                showsIfRestricted: false,
+                paywallReason: $paywallReason
+            ))
+    }
+
+    var header: String {
+        Strings.Modules.General.Sections.Storage.header(Strings.Unlocalized.iCloud)
+    }
+
+    var footer: String {
+        var desc = [
+            Strings.Modules.General.Sections.Storage.footer(Strings.Unlocalized.iCloud)
+        ]
+        let expirationDesc = {
+            Strings.Modules.General.Sections.Storage.Footer.Purchase._1(Constants.shared.tunnel.tvExpirationMinutes)
+        }
+        let purchaseDesc = {
+            Strings.Modules.General.Sections.Storage.Footer.Purchase._2
+        }
+        switch iapManager.paywallReason(forFeature: .sharing, suggesting: nil) {
+        case .purchase:
+            desc.append(expirationDesc())
+            desc.append(purchaseDesc())
+
+        case .restricted:
+            desc.append(expirationDesc())
+
+        default:
+            break
+        }
+        return desc.joined(separator: " ")
     }
 }
 
