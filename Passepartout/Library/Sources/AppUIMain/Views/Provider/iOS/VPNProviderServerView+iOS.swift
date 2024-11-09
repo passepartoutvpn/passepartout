@@ -178,7 +178,7 @@ private extension VPNProviderServerView.ServersSubview {
         } label: {
             HStack {
                 ThemeImage(.marked)
-                    .opacity(server.id == selectedServerId ? 1.0 : 0.0)
+                    .opaque(server.id == selectedServerId)
                 VStack(alignment: .leading) {
                     if let area = server.provider.area {
                         Text(area)

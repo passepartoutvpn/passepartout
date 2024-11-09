@@ -79,7 +79,7 @@ struct ProfileRowView: View, Routable {
 private extension ProfileRowView {
     var markerView: some View {
         ThemeImage(header.id == nextProfileId ? .pending : statusImage)
-            .opacity(header.id == nextProfileId || header.id == tunnel.currentProfile?.id ? 1.0 : 0.0)
+            .opaque(header.id == nextProfileId || header.id == tunnel.currentProfile?.id)
             .frame(width: 24.0)
     }
 

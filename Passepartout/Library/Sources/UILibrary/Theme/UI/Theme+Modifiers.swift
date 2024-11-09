@@ -24,10 +24,10 @@
 //
 
 import CommonLibrary
+import CommonUtils
 #if canImport(LocalAuthentication)
 import LocalAuthentication
 #endif
-import CommonUtils
 import SwiftUI
 
 // MARK: Shortcuts
@@ -362,7 +362,7 @@ struct ThemeProgressViewModifier: ViewModifier {
                 ThemeProgressView()
             }
             content
-                .opacity(!isProgressing ? 1.0 : 0.0)
+                .opaque(!isProgressing)
         }
     }
 }

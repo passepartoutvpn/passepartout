@@ -115,7 +115,7 @@ private struct ContainerModifier: ViewModifier {
         debugChanges()
         return ZStack {
             content
-                .opacity(profileManager.hasProfiles ? 1.0 : 0.0)
+                .opaque(profileManager.hasProfiles)
 
             if !profileManager.hasProfiles {
                 Text(Strings.Views.Profiles.Folders.noProfiles)
