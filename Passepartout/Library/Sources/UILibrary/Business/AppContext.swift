@@ -124,7 +124,11 @@ private extension AppContext {
 
 private extension AppContext {
     var isCloudKitEnabled: Bool {
+#if os(tvOS)
+        true
+#else
         FileManager.default.ubiquityIdentityToken != nil
+#endif
     }
 
     func syncEligibleFeatures(_ eligible: Set<AppFeature>) {
