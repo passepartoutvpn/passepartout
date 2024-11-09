@@ -160,9 +160,9 @@ private extension IAPManager {
     func asyncReloadReceipt() async {
         pp_log(.App.iap, .notice, "Start reloading in-app receipt...")
 
-        purchasedAppBuild = nil
-        purchasedProducts.removeAll()
-        eligibleFeatures.removeAll()
+        var purchasedAppBuild: Int? = nil
+        var purchasedProducts: Set<AppProduct> = []
+        var eligibleFeatures: Set<AppFeature> = []
 
         if let receipt = await receiptReader.receipt(at: userLevel) {
             if let originalBuildNumber = receipt.originalBuildNumber {
@@ -235,7 +235,9 @@ private extension IAPManager {
         pp_log(.App.iap, .notice, "\tPurchased products: \(purchasedProducts.map(\.rawValue))")
         pp_log(.App.iap, .notice, "\tEligible features: \(eligibleFeatures)")
 
-        objectWillChange.send()
+        self.purchasedAppBuild = purchasedAppBuild
+        self.purchasedProducts = purchasedProducts
+        self.eligibleFeatures = eligibleFeatures // @Published -> objectWillChange.send()
     }
 }
 
