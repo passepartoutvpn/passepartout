@@ -274,7 +274,8 @@
 
 "modules.general.sections.storage.footer.purchase.tv_beta" = "TV profiles do not work in beta builds.";
 "modules.general.sections.storage.footer.purchase.tv_release" = "TV profiles do not work without a purchase.";
-"modules.general.rows.purchase" = "Share on iCloud";
+"modules.general.rows.shared.purchase" = "Share on iCloud";
+"modules.general.rows.apple_tv.purchase" = "Drop TV restriction";
 "modules.on_demand.purchase" = "Add on-demand rules";
 "modules.openvpn.credentials.interactive.purchase" = "Log in interactively";
 "providers.picker.purchase" = "Add more providers";

@@ -60,15 +60,35 @@ private extension StorageSection {
 
     var tvToggle: some View {
         Toggle(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV), isOn: $profileEditor.isAvailableForTV)
-            .disabled(!iapManager.isEligible(for: .sharing) || !profileEditor.isShared)
+            .disabled(!iapManager.isEligible(for: .appleTV) || !profileEditor.isShared)
     }
 
+    @ViewBuilder
     var purchaseButton: some View {
+        if !iapManager.isEligible(for: .sharing) {
+            purchaseSharingButton
+        } else if !iapManager.isEligible(for: .appleTV) {
+            purchaseTVButton
+        }
+    }
+
+    var purchaseSharingButton: some View {
         EmptyView()
             .modifier(PurchaseButtonModifier(
-                Strings.Modules.General.Rows.purchase,
+                Strings.Modules.General.Rows.Shared.purchase,
                 feature: .sharing,
                 suggesting: nil,
+                showsIfRestricted: false,
+                paywallReason: $paywallReason
+            ))
+    }
+
+    var purchaseTVButton: some View {
+        EmptyView()
+            .modifier(PurchaseButtonModifier(
+                Strings.Modules.General.Rows.AppleTv.purchase,
+                feature: .appleTV,
+                suggesting: .Features.appleTV,
                 showsIfRestricted: false,
                 paywallReason: $paywallReason
             ))

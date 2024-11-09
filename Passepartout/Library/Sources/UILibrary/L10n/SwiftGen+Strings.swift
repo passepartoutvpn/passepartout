@@ -373,10 +373,16 @@ public enum Strings {
         }
         /// Import from file...
         public static let importFromFile = Strings.tr("Localizable", "modules.general.rows.import_from_file", fallback: "Import from file...")
-        /// Share on iCloud
-        public static let purchase = Strings.tr("Localizable", "modules.general.rows.purchase", fallback: "Share on iCloud")
         /// Enabled
         public static let shared = Strings.tr("Localizable", "modules.general.rows.shared", fallback: "Enabled")
+        public enum AppleTv {
+          /// Drop TV restriction
+          public static let purchase = Strings.tr("Localizable", "modules.general.rows.apple_tv.purchase", fallback: "Drop TV restriction")
+        }
+        public enum Shared {
+          /// Share on iCloud
+          public static let purchase = Strings.tr("Localizable", "modules.general.rows.shared.purchase", fallback: "Share on iCloud")
+        }
       }
       public enum Sections {
         public enum Storage {
