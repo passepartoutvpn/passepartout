@@ -80,6 +80,9 @@ public final class NEProfileRepository: ProfileRepository {
     }
 
     public func removeProfiles(withIds profileIds: [Profile.ID]) async throws {
+        guard !profileIds.isEmpty else {
+            return
+        }
         var removedIds: Set<Profile.ID> = []
         defer {
             profilesSubject.value.removeAll {
