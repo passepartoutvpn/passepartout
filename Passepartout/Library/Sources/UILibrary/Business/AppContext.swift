@@ -41,6 +41,8 @@ public final class AppContext: ObservableObject {
 
     public let providerManager: ProviderManager
 
+    private var didLaunch = false
+
     private var isActivating = false
 
     private var subscriptions: Set<AnyCancellable>
@@ -58,85 +60,82 @@ public final class AppContext: ObservableObject {
         self.tunnel = tunnel
         self.providerManager = providerManager
         subscriptions = []
-
-        observeObjects()
-    }
-
-    public func onApplicationActive() {
-        guard !isActivating else {
-            return
-        }
-        isActivating = true
-        pp_log(.app, .notice, "Application became active")
-        Task {
-            await withTaskGroup(of: Void.self) { group in
-                group.addTask {
-                    do {
-                        try await self.tunnel.prepare(purge: true)
-                    } catch {
-                        pp_log(.app, .fault, "Unable to prepare tunnel: \(error)")
-                    }
-                }
-                group.addTask { [weak self] in
-                    guard let self else {
-                        return
-                    }
-                    await iapManager.reloadReceipt()
-                }
-            }
-            isActivating = false
-        }
     }
 }
 
 // MARK: - Observation
 
+// invoked by AppDelegate
+extension AppContext {
+    public func onApplicationActive() {
+        guard !isActivating else {
+            // prevent concurrent invocations
+            return
+        }
+        isActivating = true
+        if !didLaunch {
+            pp_log(.app, .notice, "Application did launch")
+            didLaunch = true
+            Task {
+                try await onLaunch()
+                isActivating = false
+            }
+        } else {
+            pp_log(.app, .notice, "Application entered foreground")
+            Task {
+                try await onForeground()
+                isActivating = false
+            }
+        }
+    }
+}
+
+// invoked on internal events
 private extension AppContext {
-    func observeObjects() {
-        iapManager
-            .observeObjects()
+    func onLaunch() async throws {
+        try await profileManager.observeLocal()
+
+        iapManager.observeObjects()
+        await iapManager.reloadReceipt()
 
         iapManager
             .$eligibleFeatures
             .removeDuplicates()
             .sink { [weak self] in
-                self?.syncEligibleFeatures($0)
+                self?.onEligibleFeatures($0)
             }
             .store(in: &subscriptions)
-
-        profileManager
-            .observeObjects()
 
         profileManager
             .didChange
             .sink { [weak self] event in
                 switch event {
                 case .save(let profile):
-                    self?.syncTunnelIfCurrentProfile(profile)
+                    self?.onSaveProfile(profile)
 
                 default:
                     break
                 }
             }
             .store(in: &subscriptions)
-    }
-}
 
-private extension AppContext {
-    var isCloudKitEnabled: Bool {
-#if os(tvOS)
-        true
-#else
-        FileManager.default.ubiquityIdentityToken != nil
-#endif
+        pp_log(.app, .notice, "Fetch providers index...")
+        try await providerManager.fetchIndex(from: API.shared)
     }
 
-    func syncEligibleFeatures(_ eligible: Set<AppFeature>) {
-        let canImport = eligible.contains(.sharing)
-        profileManager.enableRemoteImporting(canImport && isCloudKitEnabled)
+    func onForeground() async throws {
+        try await profileManager.observeLocal()
+        await iapManager.reloadReceipt()
     }
 
-    func syncTunnelIfCurrentProfile(_ profile: Profile) {
+    func onEligibleFeatures(_ eligible: Set<AppFeature>) {
+        Task {
+            let canImport = eligible.contains(.sharing)
+            try await profileManager.observeRemote(canImport && isCloudKitEnabled)
+        }
+    }
+
+    func onSaveProfile(_ profile: Profile) {
         guard profile.id == tunnel.currentProfile?.id else {
             return
         }
@@ -154,5 +153,15 @@ private extension AppContext {
                 try await tunnel.disconnect()
             }
         }
+    }
+}
+
+private extension AppContext {
+    var isCloudKitEnabled: Bool {
+#if os(tvOS)
+        true
+#else
+        FileManager.default.ubiquityIdentityToken != nil
+#endif
     }
 }
