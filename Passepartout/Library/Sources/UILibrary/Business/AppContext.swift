@@ -111,6 +111,7 @@ private extension AppContext {
 
         iapManager
             .$eligibleFeatures
+            .removeDuplicates()
             .sink { [weak self] in
                 self?.syncEligibleFeatures($0)
             }
