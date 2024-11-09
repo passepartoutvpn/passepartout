@@ -45,14 +45,6 @@ public final class NEProfileRepository: ProfileRepository {
 
         repository
             .managersPublisher
-            .first()
-            .sink { [weak self] in
-                self?.onLoadedManagers($0)
-            }
-            .store(in: &subscriptions)
-
-        repository
-            .managersPublisher
             .dropFirst()
             .sink { [weak self] in
                 self?.onUpdatedManagers($0)
@@ -62,6 +54,20 @@ public final class NEProfileRepository: ProfileRepository {
 
     public var profilesPublisher: AnyPublisher<[Profile], Never> {
         profilesSubject.eraseToAnyPublisher()
+    }
+
+    public func fetchProfiles() async throws -> [Profile] {
+        let managers = try await repository.fetch()
+        let profiles = managers.compactMap {
+            do {
+                return try repository.profile(from: $0)
+            } catch {
+                pp_log(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
+                return nil
+            }
+        }
+        profilesSubject.send(profiles)
+        return profiles
     }
 
     public func saveProfile(_ profile: Profile) async throws {
@@ -92,18 +98,6 @@ public final class NEProfileRepository: ProfileRepository {
 }
 
 private extension NEProfileRepository {
-    func onLoadedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
-        let profiles = managers.values.compactMap {
-            do {
-                return try repository.profile(from: $0)
-            } catch {
-                pp_log(.App.profiles, .error, "Unable to decode profile from NE manager '\($0.localizedDescription ?? "")': \(error)")
-                return nil
-            }
-        }
-        profilesSubject.send(profiles)
-    }
-
     func onUpdatedManagers(_ managers: [Profile.ID: NETunnelProviderManager]) {
         let profiles = profilesSubject
             .value

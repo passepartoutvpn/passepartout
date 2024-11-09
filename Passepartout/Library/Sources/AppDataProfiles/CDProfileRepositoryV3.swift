@@ -116,6 +116,10 @@ extension CoreDataRepository: ProfileRepository where T == Profile {
             .eraseToAnyPublisher()
     }
 
+    public func fetchProfiles() async throws -> [Profile] {
+        try await fetchAllEntities()
+    }
+
     public func saveProfile(_ profile: Profile) async throws {
         try await saveEntities([profile])
     }
