@@ -27,6 +27,8 @@ import Foundation
 import PassepartoutKit
 
 public enum AppError: Error {
+    case couldNotLaunch(reason: Error)
+
     case emptyProducts
 
     case emptyProfileName

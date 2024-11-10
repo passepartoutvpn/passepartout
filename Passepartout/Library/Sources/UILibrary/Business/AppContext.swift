@@ -41,9 +41,9 @@ public final class AppContext: ObservableObject {
 
     public let providerManager: ProviderManager
 
-    private var didLaunch = false
+    private var launchTask: Task<Void, Error>?
 
-    private var isActivating = false
+    private var pendingTask: Task<Void, Never>?
 
     private var subscriptions: Set<AnyCancellable>
 
@@ -68,24 +68,9 @@ public final class AppContext: ObservableObject {
 // invoked by AppDelegate
 extension AppContext {
     public func onApplicationActive() {
-        guard !isActivating else {
-            // prevent concurrent invocations
-            return
-        }
-        isActivating = true
-        if !didLaunch {
-            pp_log(.app, .notice, "Application did launch")
-            didLaunch = true
-            Task {
-                try await onLaunch()
-                isActivating = false
-            }
-        } else {
-            pp_log(.app, .notice, "Application entered foreground")
-            Task {
-                try await onForeground()
-                isActivating = false
-            }
+        Task {
+            // TODO: ###, should handle AppError.couldNotLaunch (although extremely rare)
+            try await onForeground()
         }
     }
 }
@@ -93,6 +78,9 @@ extension AppContext {
 // invoked on internal events
 private extension AppContext {
     func onLaunch() async throws {
+        pp_log(.app, .notice, "Application did launch")
+
+        pp_log(.App.profiles, .info, "Read and observe local profiles...")
         try await profileManager.observeLocal()
 
         iapManager.observeObjects()
@@ -101,8 +89,10 @@ private extension AppContext {
         iapManager
             .$eligibleFeatures
             .removeDuplicates()
-            .sink { [weak self] in
-                self?.onEligibleFeatures($0)
+            .sink { [weak self] eligible in
+                Task {
+                    try await self?.onEligibleFeatures(eligible)
+                }
             }
             .store(in: &subscriptions)
 
@@ -111,7 +101,9 @@ private extension AppContext {
             .sink { [weak self] event in
                 switch event {
                 case .save(let profile):
-                    self?.onSaveProfile(profile)
+                    Task {
+                        try await self?.onSaveProfile(profile)
+                    }
 
                 default:
                     break
@@ -119,42 +111,115 @@ private extension AppContext {
             }
             .store(in: &subscriptions)
 
-        pp_log(.app, .notice, "Fetch providers index...")
-        try await providerManager.fetchIndex(from: API.shared)
+        do {
+            pp_log(.app, .notice, "Fetch providers index...")
+            try await providerManager.fetchIndex(from: API.shared)
+        } catch {
+            pp_log(.app, .error, "Unable to fetch providers index: \(error)")
+        }
     }
 
     func onForeground() async throws {
-        try await profileManager.observeLocal()
-        await iapManager.reloadReceipt()
-    }
-
-    func onEligibleFeatures(_ eligible: Set<AppFeature>) {
-        Task {
-            let canImport = eligible.contains(.sharing)
-            try await profileManager.observeRemote(canImport && isCloudKitEnabled)
+        let didLaunch = try await waitForTasks()
+        guard !didLaunch else {
+            return // foreground is redundant after launch
         }
+
+        pp_log(.app, .notice, "Application did enter foreground")
+        pendingTask = Task {
+            do {
+                pp_log(.App.profiles, .info, "Refresh local profiles observers...")
+                try await profileManager.observeLocal()
+            } catch {
+                pp_log(.App.profiles, .error, "Unable to re-observe local profiles: \(error)")
+            }
+            await iapManager.reloadReceipt()
+        }
+        await pendingTask?.value
+        pendingTask = nil
     }
 
-    func onSaveProfile(_ profile: Profile) {
+    func onEligibleFeatures(_ features: Set<AppFeature>) async throws {
+        try await waitForTasks()
+
+        pp_log(.app, .notice, "Application did update eligible features")
+        pendingTask = Task {
+            let isEligible = features.contains(.sharing)
+            do {
+                pp_log(.App.profiles, .info, "Refresh remote profiles observers (eligible=\(isEligible), CloudKit=\(isCloudKitEnabled))...")
+                try await profileManager.observeRemote(isEligible && isCloudKitEnabled)
+            } catch {
+                pp_log(.App.profiles, .error, "Unable to re-observe remote profiles: \(error)")
+            }
+        }
+        await pendingTask?.value
+        pendingTask = nil
+    }
+
+    func onSaveProfile(_ profile: Profile) async throws {
+        try await waitForTasks()
+
+        pp_log(.app, .notice, "Application did save profile (\(profile.id))")
         guard profile.id == tunnel.currentProfile?.id else {
+            pp_log(.app, .debug, "Profile \(profile.id) is not current, do nothing")
             return
         }
-        Task {
-            guard [.active, .activating].contains(tunnel.status) else {
-                return
-            }
-            if profile.isInteractive {
-                try await tunnel.disconnect()
-                return
-            }
+        guard [.active, .activating].contains(tunnel.status) else {
+            pp_log(.app, .debug, "Connection is not active (\(tunnel.status)), do nothing")
+            return
+        }
+        pendingTask = Task {
             do {
-                try await tunnel.connect(with: profile)
+                if profile.isInteractive {
+                    pp_log(.app, .info, "Profile \(profile.id) is interactive, disconnect")
+                    try await tunnel.disconnect()
+                    return
+                }
+                do {
+                    pp_log(.app, .info, "Reconnect profile \(profile.id)")
+                    try await tunnel.connect(with: profile)
+                } catch {
+                    pp_log(.app, .error, "Unable to reconnect profile \(profile.id), disconnect: \(error)")
+                    try await tunnel.disconnect()
+                }
             } catch {
-                try await tunnel.disconnect()
+                pp_log(.app, .error, "Unable to reinstate connection on save profile \(profile.id): \(error)")
             }
         }
+        await pendingTask?.value
+        pendingTask = nil
+    }
+
+    @discardableResult
+    func waitForTasks() async throws -> Bool {
+        var didLaunch = false
+
+        // must launch once before anything else
+        if launchTask == nil {
+            launchTask = Task {
+                do {
+                    try await onLaunch()
+                } catch {
+                    launchTask = nil // redo launch
+                    throw AppError.couldNotLaunch(reason: error)
+                }
+            }
+            didLaunch = true
+        }
+
+        // will throw on .couldNotLaunch
+        // next wait will re-attempt launch (launchTask == nil)
+        try await launchTask?.value
+
+        // wait for pending task if any
+        await pendingTask?.value
+        pendingTask = nil
+
+        return didLaunch
     }
 }
+
+// MARK: - Helpers
 
 private extension AppContext {
     var isCloudKitEnabled: Bool {
