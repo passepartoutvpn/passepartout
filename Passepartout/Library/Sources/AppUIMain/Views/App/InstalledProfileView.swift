@@ -62,8 +62,8 @@ struct InstalledProfileView: View, Routable {
 }
 
 private extension InstalledProfileView {
-    var installedOpacity: CGFloat {
-        profile != nil ? 1.0 : 0.0
+    var isOpaque: Bool {
+        profile != nil
     }
 
     var cardView: some View {
@@ -102,7 +102,7 @@ private extension InstalledProfileView {
             StatusText(
                 theme: theme,
                 tunnel: tunnel,
-                opacity: installedOpacity
+                isOpaque: isOpaque
             )
         }
     }
@@ -115,7 +115,7 @@ private extension InstalledProfileView {
             nextProfileId: $nextProfileId,
             interactiveManager: interactiveManager,
             errorHandler: errorHandler,
-            opacity: installedOpacity,
+            isOpaque: isOpaque,
             flow: flow
         )
     }
@@ -160,13 +160,13 @@ private struct StatusText: View {
     @ObservedObject
     var tunnel: ExtendedTunnel
 
-    let opacity: Double
+    let isOpaque: Bool
 
     var body: some View {
         ConnectionStatusText(tunnel: tunnel)
             .font(.body)
             .foregroundStyle(tunnel.statusColor(theme))
-            .opacity(opacity)
+            .opaque(isOpaque)
     }
 }
 
@@ -189,7 +189,7 @@ private struct ToggleButton: View {
     @ObservedObject
     var errorHandler: ErrorHandler
 
-    let opacity: Double
+    let isOpaque: Bool
 
     let flow: ProfileFlow?
 
@@ -209,7 +209,7 @@ private struct ToggleButton: View {
         // TODO: #584, necessary to avoid cell selection
         .buttonStyle(.plain)
         .foregroundStyle(tunnel.statusColor(theme))
-        .opacity(opacity)
+        .opaque(isOpaque)
     }
 }
 

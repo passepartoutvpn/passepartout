@@ -59,37 +59,35 @@ struct PaywallView: View {
     private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
-        Form {
-            if isFetchingProducts {
-                ProgressView()
-                    .id(UUID())
-            } else if !recurringProducts.isEmpty {
-                Group {
-                    productsView
-                    subscriptionFeaturesView
-                    restoreView
-                }
-                .disabled(purchasingIdentifier != nil)
+        paywallView
+            .themeProgress(if: isFetchingProducts)
+            .toolbar(content: toolbarContent)
+            .alert(
+                Strings.Global.purchase,
+                isPresented: $isPurchasePendingConfirmation,
+                actions: pendingActions,
+                message: pendingMessage
+            )
+            .task(id: feature) {
+                await fetchAvailableProducts()
             }
-        }
-        .themeForm()
-        .toolbar(content: toolbarContent)
-        .alert(
-            Strings.Global.purchase,
-            isPresented: $isPurchasePendingConfirmation,
-            actions: pendingActions,
-            message: pendingMessage
-        )
-        .task(id: feature) {
-            await fetchAvailableProducts()
-        }
-        .withErrorHandler(errorHandler)
+            .withErrorHandler(errorHandler)
     }
 }
 
 private extension PaywallView {
     var title: String {
         Strings.Global.purchase
+    }
+
+    var paywallView: some View {
+        Form {
+            productsView
+            subscriptionFeaturesView
+            restoreView
+        }
+        .themeForm()
+        .disabled(purchasingIdentifier != nil)
     }
 
     var subscriptionFeatures: [AppFeature] {

@@ -24,10 +24,10 @@
 //
 
 import CommonLibrary
+import CommonUtils
 #if canImport(LocalAuthentication)
 import LocalAuthentication
 #endif
-import CommonUtils
 import SwiftUI
 
 // MARK: Shortcuts
@@ -141,6 +141,14 @@ extension View {
 
     public func themeAnimation<T>(on value: T, category: ThemeAnimationCategory) -> some View where T: Equatable {
         modifier(ThemeAnimationModifier(value: value, category: category))
+    }
+
+    public func themeProgress(if isProgressing: Bool) -> some View {
+        modifier(ThemeProgressViewModifier(isProgressing: isProgressing))
+    }
+
+    public func themeEmptyContent(if isEmpty: Bool, message: String) -> some View {
+        modifier(ThemeEmptyContentModifier(isEmpty: isEmpty, message: message))
     }
 
 #if !os(tvOS)
@@ -346,6 +354,39 @@ struct ThemeAnimationModifier<T>: ViewModifier where T: Equatable {
     func body(content: Content) -> some View {
         content
             .animation(theme.animation(for: category), value: value)
+    }
+}
+
+struct ThemeProgressViewModifier: ViewModifier {
+    let isProgressing: Bool
+
+    func body(content: Content) -> some View {
+        ZStack {
+            if isProgressing {
+                ThemeProgressView()
+            }
+            content
+                .opaque(!isProgressing)
+        }
+    }
+}
+
+struct ThemeEmptyContentModifier: ViewModifier {
+    let isEmpty: Bool
+
+    let message: String
+
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+                .opaque(!isEmpty)
+
+            if isEmpty {
+                Text(message)
+                    .themeEmptyMessage()
+                    .opaque(isEmpty)
+            }
+        }
     }
 }
 

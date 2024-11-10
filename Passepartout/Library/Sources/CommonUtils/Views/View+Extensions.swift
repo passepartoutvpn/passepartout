@@ -38,6 +38,10 @@ extension View {
             self
         }
     }
+
+    public func opaque(_ condition: Bool) -> some View {
+        opacity(condition ? 1.0 : 0.0)
+    }
 }
 
 extension ViewModifier {

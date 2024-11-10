@@ -68,7 +68,7 @@ extension VPNProviderServerView {
             return Table(servers) {
                 TableColumn("") { server in
                     ThemeImage(.marked)
-                        .opacity(server.id == selectedServerId ? 1.0 : 0.0)
+                        .opaque(server.id == selectedServerId)
                 }
                 .width(10.0)
 

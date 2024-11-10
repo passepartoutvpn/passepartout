@@ -51,27 +51,19 @@ struct DonateView: View {
     private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
-        Form {
-            if isFetchingProducts {
-                ProgressView()
-                    .id(UUID())
-            } else if !availableProducts.isEmpty {
-                donationsView
-                    .disabled(purchasingIdentifier != nil)
+        donationsView
+            .themeProgress(if: isFetchingProducts)
+            .navigationTitle(title)
+            .alert(
+                title,
+                isPresented: $isThankYouPresented,
+                actions: thankYouActions,
+                message: thankYouMessage
+            )
+            .task {
+                await fetchAvailableProducts()
             }
-        }
-        .themeForm()
-        .navigationTitle(title)
-        .alert(
-            title,
-            isPresented: $isThankYouPresented,
-            actions: thankYouActions,
-            message: thankYouMessage
-        )
-        .task {
-            await fetchAvailableProducts()
-        }
-        .withErrorHandler(errorHandler)
+            .withErrorHandler(errorHandler)
     }
 }
 
@@ -80,24 +72,27 @@ private extension DonateView {
         Strings.Views.Donate.title
     }
 
-    @ViewBuilder
     var donationsView: some View {
+        Form {
 #if os(macOS)
-        Section {
-            Text(Strings.Views.Donate.Sections.Main.footer)
-        }
+            Section {
+                Text(Strings.Views.Donate.Sections.Main.footer)
+            }
 #endif
-        ForEach(availableProducts, id: \.productIdentifier) {
-            PaywallProductView(
-                iapManager: iapManager,
-                style: .donation,
-                product: $0,
-                purchasingIdentifier: $purchasingIdentifier,
-                onComplete: onComplete,
-                onError: onError
-            )
+            ForEach(availableProducts, id: \.productIdentifier) {
+                PaywallProductView(
+                    iapManager: iapManager,
+                    style: .donation,
+                    product: $0,
+                    purchasingIdentifier: $purchasingIdentifier,
+                    onComplete: onComplete,
+                    onError: onError
+                )
+            }
+            .themeSection(footer: Strings.Views.Donate.Sections.Main.footer)
         }
-        .themeSection(footer: Strings.Views.Donate.Sections.Main.footer)
+        .themeForm()
+        .disabled(purchasingIdentifier != nil)
     }
 
     func thankYouActions() -> some View {

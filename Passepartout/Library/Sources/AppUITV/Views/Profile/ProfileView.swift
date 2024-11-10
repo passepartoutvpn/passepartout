@@ -77,7 +77,7 @@ struct ProfileView: View, TunnelInstallationProviding {
                     ZStack {
                         listView
                             .padding(.horizontal)
-                            .opacity(interactiveManager.isPresented ? 0.0 : 1.0)
+                            .opaque(!interactiveManager.isPresented)
 
                         if interactiveManager.isPresented {
                             interactiveView
