@@ -63,13 +63,13 @@ struct ProfileAttributesView: View {
             switch $0 {
             case .shared:
                 return (
-                    isRemoteImportingEnabled ? .tvOn : .tvOff,
+                    isRemoteImportingEnabled ? .cloudOn : .cloudOff,
                     Strings.Modules.General.Rows.shared
                 )
 
             case .tv:
                 return (
-                    isRemoteImportingEnabled ? .cloudOn : .cloudOff,
+                    isRemoteImportingEnabled ? .tvOn : .tvOff,
                     Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV)
                 )
             }
