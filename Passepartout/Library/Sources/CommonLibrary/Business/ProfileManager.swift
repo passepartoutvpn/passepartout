@@ -286,9 +286,15 @@ private extension ProfileManager {
 // MARK: - Observation
 
 extension ProfileManager {
-    public func observeObjects(searchDebounce: Int = 200) {
+    public func observeLocal(searchDebounce: Int = 200) async throws {
+        subscriptions.removeAll()
+
+        let initialProfiles = try await repository.fetchProfiles()
+        reloadLocalProfiles(initialProfiles)
+
         repository
             .profilesPublisher
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reloadLocalProfiles($0)
@@ -303,35 +309,29 @@ extension ProfileManager {
             .store(in: &subscriptions)
     }
 
-    public func enableRemoteImporting(_ isRemoteImportingEnabled: Bool) {
+    public func observeRemote(_ isRemoteImportingEnabled: Bool) async throws {
         guard let remoteRepositoryBlock else {
 //            preconditionFailure("Missing remoteRepositoryBlock")
             return
         }
-
         guard remoteRepository == nil || isRemoteImportingEnabled != self.isRemoteImportingEnabled else {
             return
         }
+
         self.isRemoteImportingEnabled = isRemoteImportingEnabled
-
         remoteSubscriptions.removeAll()
-        remoteRepository = remoteRepositoryBlock(isRemoteImportingEnabled)
 
-        remoteRepository?
-            .profilesPublisher
-            .first()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.loadInitialRemoteProfiles($0)
-            }
-            .store(in: &remoteSubscriptions)
+        remoteRepository = remoteRepositoryBlock(isRemoteImportingEnabled)
+        if let initialProfiles = try await remoteRepository?.fetchProfiles() {
+            reloadRemoteProfiles(initialProfiles, importing: false)
+        }
 
         remoteRepository?
             .profilesPublisher
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.reloadRemoteProfiles($0)
+                self?.reloadRemoteProfiles($0, importing: true)
             }
             .store(in: &remoteSubscriptions)
     }
@@ -343,6 +343,7 @@ private extension ProfileManager {
         allProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
+        // objectWillChange implicit from updating profiles in didSet
 
         // should not be imported at all, but you never know
         if let processor {
@@ -361,20 +362,16 @@ private extension ProfileManager {
         }
     }
 
-    func loadInitialRemoteProfiles(_ result: [Profile]) {
-        pp_log(.App.profiles, .info, "Load initial remote profiles: \(result.map(\.id))")
-        allRemoteProfiles = result.reduce(into: [:]) {
-            $0[$1.id] = $1
-        }
-        objectWillChange.send()
-    }
-
-    func reloadRemoteProfiles(_ result: [Profile]) {
+    func reloadRemoteProfiles(_ result: [Profile], importing: Bool) {
         pp_log(.App.profiles, .info, "Reload remote profiles: \(result.map(\.id))")
         allRemoteProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
         objectWillChange.send()
+
+        guard importing else {
+            return
+        }
 
         Task.detached { [weak self] in
             guard let self else {

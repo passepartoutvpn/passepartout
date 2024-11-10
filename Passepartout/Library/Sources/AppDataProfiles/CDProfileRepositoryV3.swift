@@ -41,19 +41,23 @@ extension AppData {
     ) -> ProfileRepository {
         let repository = CoreDataRepository<CDProfileV3, Profile>(
             context: context,
-            observingResults: observingResults
-        ) {
-            $0.sortDescriptors = [
-                .init(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare)),
-                .init(key: "lastUpdate", ascending: false)
-            ]
-        } fromMapper: {
-            try fromMapper($0, registry: registry, coder: coder)
-        } toMapper: {
-            try toMapper($0, $1, registry: registry, coder: coder)
-        } onResultError: {
-            onResultError?($0) ?? .ignore
-        }
+            observingResults: observingResults,
+            beforeFetch: {
+                $0.sortDescriptors = [
+                    .init(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare)),
+                    .init(key: "lastUpdate", ascending: false)
+                ]
+            },
+            fromMapper: {
+                try fromMapper($0, registry: registry, coder: coder)
+            },
+            toMapper: {
+                try toMapper($0, $1, registry: registry, coder: coder)
+            },
+            onResultError: {
+                onResultError?($0) ?? .ignore
+            }
+        )
         return repository
     }
 }
@@ -110,6 +114,10 @@ extension CoreDataRepository: ProfileRepository where T == Profile {
         entitiesPublisher
             .map(\.entities)
             .eraseToAnyPublisher()
+    }
+
+    public func fetchProfiles() async throws -> [Profile] {
+        try await fetchAllEntities()
     }
 
     public func saveProfile(_ profile: Profile) async throws {

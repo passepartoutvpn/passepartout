@@ -45,6 +45,10 @@ public final class InMemoryProfileRepository: ProfileRepository {
         profilesSubject.eraseToAnyPublisher()
     }
 
+    public func fetchProfiles() async throws -> [Profile] {
+        profiles
+    }
+
     public func saveProfile(_ profile: Profile) {
         pp_log(.App.profiles, .info, "Save profile: \(profile.id))")
         if let index = profiles.firstIndex(where: { $0.id == profile.id }) {

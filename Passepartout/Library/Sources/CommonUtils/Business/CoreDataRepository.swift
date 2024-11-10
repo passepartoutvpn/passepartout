@@ -89,16 +89,6 @@ public actor CoreDataRepository<CD, T>: NSObject,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-
-        super.init()
-
-        resultsController.delegate = self
-        do {
-            try resultsController.performFetch()
-            sendResults(from: resultsController)
-        } catch {
-            //
-        }
     }
 
     public nonisolated var entitiesPublisher: AnyPublisher<EntitiesResult<T>, Never> {
@@ -111,6 +101,10 @@ public actor CoreDataRepository<CD, T>: NSObject,
     }
 
     public func resetFilter() async throws {
+        try await filter(byPredicate: nil)
+    }
+
+    public func fetchAllEntities() async throws -> [T] {
         try await filter(byPredicate: nil)
     }
 
@@ -154,7 +148,6 @@ public actor CoreDataRepository<CD, T>: NSObject,
             do {
                 let existing = try context.fetch(request)
                 existing.forEach(context.delete)
-
                 try context.save()
             } catch {
                 context.rollback()
@@ -173,7 +166,9 @@ public actor CoreDataRepository<CD, T>: NSObject,
         guard let cdController = controller as? NSFetchedResultsController<CD> else {
             fatalError("Unable to upcast results to \(CD.self)")
         }
-        sendResults(from: cdController)
+        Task.detached { [weak self] in
+            await self?.sendResults(from: cdController)
+        }
     }
 }
 
@@ -182,7 +177,12 @@ private extension CoreDataRepository {
         case mapping(Error)
     }
 
-    func filter(byPredicate predicate: NSPredicate?) async throws {
+    nonisolated func newFetchRequest() -> NSFetchRequest<CD> {
+        NSFetchRequest(entityName: entityName)
+    }
+
+    @discardableResult
+    func filter(byPredicate predicate: NSPredicate?) async throws -> [T] {
         let request = resultsController.fetchRequest
         request.predicate = predicate
         resultsController = NSFetchedResultsController(
@@ -193,61 +193,73 @@ private extension CoreDataRepository {
         )
         resultsController.delegate = self
         try resultsController.performFetch()
-        sendResults(from: resultsController)
+        return await sendResults(from: resultsController)
     }
 
-    nonisolated func newFetchRequest() -> NSFetchRequest<CD> {
-        NSFetchRequest(entityName: entityName)
+    @discardableResult
+    func sendResults(from controller: NSFetchedResultsController<CD>) async -> [T] {
+        await context.perform {
+            self.unsafeSendResults(from: controller)
+        }
     }
 
-    nonisolated func sendResults(from controller: NSFetchedResultsController<CD>) {
-        Task.detached { [weak self] in
-            await self?.context.perform { [weak self] in
-                guard let cdEntities = controller.fetchedObjects else {
-                    return
-                }
+    @discardableResult
+    func unsafeSendResults(from controller: NSFetchedResultsController<CD>) -> [T] {
+        guard let cdEntities = controller.fetchedObjects else {
+            return []
+        }
 
-                // strip duplicates by sort order (first entry wins)
-                var knownUUIDs = Set<UUID>()
-                cdEntities.forEach {
-                    guard let uuid = $0.uuid else {
-                        return
-                    }
-                    guard !knownUUIDs.contains(uuid) else {
-                        NSLog("Strip duplicate \(String(describing: CD.self)) with UUID \(uuid)")
-                        self?.context.delete($0)
-                        return
-                    }
-                    knownUUIDs.insert(uuid)
-                }
+        var entitiesToDelete: [CD] = []
 
+        // strip duplicates by sort order (first entry wins)
+        var knownUUIDs = Set<UUID>()
+        cdEntities.forEach {
+            guard let uuid = $0.uuid else {
+                return
+            }
+            guard !knownUUIDs.contains(uuid) else {
+                NSLog("Strip duplicate \(String(describing: CD.self)) with UUID \(uuid)")
+                entitiesToDelete.append($0)
+                return
+            }
+            knownUUIDs.insert(uuid)
+        }
+
+        do {
+            let entities = try cdEntities.compactMap {
                 do {
-                    let entities = try cdEntities.compactMap {
-                        do {
-                            return try self?.fromMapper($0)
-                        } catch {
-                            switch self?.onResultError?(error) {
-                            case .discard:
-                                self?.context.delete($0)
-
-                            case .halt:
-                                throw ResultError.mapping(error)
-
-                            default:
-                                break
-                            }
-                            return nil
-                        }
-                    }
-
-                    try self?.context.save()
-
-                    let result = EntitiesResult(entities, isFiltering: controller.fetchRequest.predicate != nil)
-                    self?.entitiesSubject.send(result)
+                    return try fromMapper($0)
                 } catch {
-                    NSLog("Unable to send Core Data entities: \(error)")
+                    switch onResultError?(error) {
+                    case .discard:
+                        entitiesToDelete.append($0)
+
+                    case .halt:
+                        throw ResultError.mapping(error)
+
+                    default:
+                        break
+                    }
+                    return nil
                 }
             }
+
+            if !entitiesToDelete.isEmpty {
+                do {
+                    entitiesToDelete.forEach(context.delete)
+                    try context.save()
+                } catch {
+                    NSLog("Unable to delete Core Data entities: \(error)")
+                    context.rollback()
+                }
+            }
+
+            let result = EntitiesResult(entities, isFiltering: controller.fetchRequest.predicate != nil)
+            entitiesSubject.send(result)
+            return result.entities
+        } catch {
+            NSLog("Unable to send Core Data entities: \(error)")
+            return []
         }
     }
 }
