@@ -205,7 +205,7 @@ private extension CoreDataRepository {
 
     @discardableResult
     func unsafeSendResults(from controller: NSFetchedResultsController<CD>) -> [T] {
-        guard let cdEntities = controller.fetchedObjects else {
+        guard var cdEntities = controller.fetchedObjects else {
             return []
         }
 
@@ -226,6 +226,9 @@ private extension CoreDataRepository {
         }
 
         do {
+            cdEntities.removeAll {
+                entitiesToDelete.contains($0)
+            }
             let entities = try cdEntities.compactMap {
                 do {
                     return try fromMapper($0)
@@ -243,7 +246,6 @@ private extension CoreDataRepository {
                     return nil
                 }
             }
-
             if !entitiesToDelete.isEmpty {
                 do {
                     entitiesToDelete.forEach(context.delete)
