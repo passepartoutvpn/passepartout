@@ -33,7 +33,15 @@ struct ProfileAttributesView: View {
     let isRemoteImportingEnabled: Bool
 
     var body: some View {
-        Group {
+        HStack(alignment: .firstTextBaseline) {
+            Group {
+                ThemeImage(.cloudOn)
+                ThemeImage(.cloudOff)
+                ThemeImage(.tvOn)
+                ThemeImage(.tvOff)
+            }
+            .hidden()
+
             if isTV {
                 tvImage
             } else if isShared {
