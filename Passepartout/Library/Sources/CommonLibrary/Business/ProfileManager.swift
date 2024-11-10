@@ -73,7 +73,9 @@ public final class ProfileManager: ObservableObject {
     public init(profiles: [Profile]) {
         repository = InMemoryProfileRepository(profiles: profiles)
         backupRepository = nil
-        remoteRepositoryBlock = nil
+        remoteRepositoryBlock = { _ in
+            InMemoryProfileRepository()
+        }
         mirrorsRemoteRepository = false
         processor = nil
         self.profiles = []
