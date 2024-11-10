@@ -42,10 +42,12 @@ struct ProfileAttributesView: View {
             }
             .hidden()
 
-            if isTV {
-                tvImage
-            } else if isShared {
-                sharedImage
+            HStack(alignment: .firstTextBaseline) {
+                if isTV {
+                    tvImage
+                } else if isShared {
+                    sharedImage
+                }
             }
         }
         .foregroundStyle(.secondary)
