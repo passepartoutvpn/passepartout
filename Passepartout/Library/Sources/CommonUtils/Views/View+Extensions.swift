@@ -42,6 +42,13 @@ extension View {
     public func opaque(_ condition: Bool) -> some View {
         opacity(condition ? 1.0 : 0.0)
     }
+
+    // https://www.avanderlee.com/swiftui/disable-animations-transactions/
+    public func unanimated() -> some View {
+        transaction {
+            $0.animation = nil
+        }
+    }
 }
 
 extension ViewModifier {

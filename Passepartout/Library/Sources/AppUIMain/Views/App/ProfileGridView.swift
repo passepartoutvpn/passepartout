@@ -58,6 +58,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                     if !isSearching {
                         headerView(scrollProxy: scrollProxy)
                             .padding(.bottom)
+                            .unanimated()
                     }
                     LazyVGrid(columns: columns) {
                         ForEach(allHeaders, content: profileView)

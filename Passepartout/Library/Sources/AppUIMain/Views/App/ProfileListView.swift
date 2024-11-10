@@ -60,6 +60,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
             Form {
                 if !isSearching {
                     headerView(scrollProxy: scrollProxy)
+                        .unanimated()
                 }
                 Group {
                     ForEach(allHeaders, content: profileView)
