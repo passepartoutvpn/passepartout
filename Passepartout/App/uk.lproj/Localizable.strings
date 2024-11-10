@@ -101,7 +101,7 @@
 
 "menu.system.quit.title" = "Вийти з %@";
 
-"menu.system.quit.messages.confirm" = "---";
+"menu.system.quit.messages.confirm" = "VPN продовжить працювати у фоновому режимі. Ви хочете вийти?";
 /* MARK: TunnelKit */
 
 "tunnelkit.vpn.connecting" = "Підключається";
@@ -189,7 +189,7 @@
 "profile.alerts.rename.title" = "Змінити назву профілю";
 "profile.alerts.reconnect_vpn.message" = "Бажаєте заново підключитися до VPN?";
 "profile.alerts.uninstall_vpn.message" = "Ви справді хочете стерти конфігурацію VPN із налаштувань пристрою? Це може виправити деякі VPN помилки, але не змінить налаштування застосунку.";
-"profile.alerts.test_connectivity.title" = "Связь";
+"profile.alerts.test_connectivity.title" = "Зв'язок";
 "profile.alerts.test_connectivity.messages.success" = "Ваш пристрій підключено до Інтернету!";
 "profile.alerts.test_connectivity.messages.failure" = "Ваш пристрій не підключено до інтернету, будь ласка, перевірте налаштування вашого профілю.";
 
@@ -213,7 +213,7 @@
 "account.items.username.placeholder" = "логін";
 "account.items.password.caption" = "Пароль";
 "account.items.password.placeholder" = "пароль";
-"account.items.seed.caption" = "насіння";
+"account.items.seed.caption" = "Seed";
 "account.items.open_guide.caption" = "Перевірте ваші дані";
 "account.items.signup.caption" = "Зарееструйтесь з %@";
 
