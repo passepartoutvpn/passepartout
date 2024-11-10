@@ -32,6 +32,9 @@ protocol AppFeatureProviding {
 extension AppUserLevel: AppFeatureProviding {
     var features: [AppFeature] {
         switch self {
+        case .beta:
+            return [.interactiveLogin, .sharing]
+
         case .fullVersion:
             return AppFeature.allButAppleTV
 
