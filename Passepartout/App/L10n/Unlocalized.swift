@@ -170,7 +170,7 @@ enum Unlocalized {
             "pt-BR": "Helder Santana",
             "ru": "Alexander Korobynikov",
             "sv": "Henry Gross-Hellsen",
-            "ua": "Dmitry Chirkin",
+            "uk": "Dmytro Chyrkin",
             "zh-Hans": "OnlyThen"
         ]
     }
