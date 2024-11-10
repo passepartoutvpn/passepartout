@@ -37,7 +37,7 @@ struct ProfileAttributesView: View {
     let isRemoteImportingEnabled: Bool
 
     var body: some View {
-        if !imageModels.isEmpty {
+        if !attributes.isEmpty {
             ZStack(alignment: .centerFirstTextBaseline) {
                 Group {
                     ThemeImage(.cloudOn)
