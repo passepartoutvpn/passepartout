@@ -36,8 +36,7 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
     @ObservedObject
     var profileManager: ProfileManager
 
-    @ObservedObject
-    var tunnel: ExtendedTunnel
+    let tunnel: ExtendedTunnel
 
     let interactiveManager: InteractiveManager
 
@@ -47,6 +46,9 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
 
     @State
     private var nextProfileId: Profile.ID?
+
+    @State
+    private var currentProfile: TunnelCurrentProfile?
 
     private let columns: [GridItem] = [GridItem(.adaptive(minimum: 300.0))]
 
@@ -72,6 +74,9 @@ struct ProfileGridView: View, Routable, TunnelInstallationProviding {
                 }
                 .padding(.horizontal)
             }
+        }
+        .onReceive(tunnel.currentProfilePublisher) {
+            currentProfile = $0
         }
 #if os(macOS)
         .padding(.top)
@@ -124,7 +129,7 @@ private extension ProfileGridView {
             withMarker: true,
             flow: flow
         )
-        .themeGridCell(isSelected: header.id == nextProfileId ?? tunnel.currentProfile?.id)
+        .themeGridCell(isSelected: header.id == nextProfileId ?? currentProfile?.id)
         .contextMenu {
             ProfileContextMenu(
                 profileManager: profileManager,
