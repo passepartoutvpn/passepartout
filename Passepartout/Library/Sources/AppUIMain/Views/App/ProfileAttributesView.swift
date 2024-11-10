@@ -33,7 +33,7 @@ struct ProfileAttributesView: View {
     let isRemoteImportingEnabled: Bool
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline) {
+        ZStack(alignment: .centerFirstTextBaseline) {
             Group {
                 ThemeImage(.cloudOn)
                 ThemeImage(.cloudOff)
