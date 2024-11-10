@@ -37,11 +37,7 @@ public final class StoreKitHelper<ProductType>: InAppHelper where ProductType: R
 
     private var nativeProducts: [ProductType: InAppProduct]
 
-    private var activeTransactions: Set<Transaction> {
-        didSet {
-            didUpdateSubject.send()
-        }
-    }
+    private var activeTransactions: Set<Transaction>
 
     private let didUpdateSubject: PassthroughSubject<Void, Never>
 
@@ -96,11 +92,13 @@ extension StoreKitHelper {
         }
         switch try await skProduct.purchase() {
         case .success(let verificationResult):
-            if let transaction = try? verificationResult.payloadValue {
-                activeTransactions.insert(transaction)
-                await transaction.finish()
-                return .done
+            guard let transaction = try? verificationResult.payloadValue else {
+                break
             }
+            activeTransactions.insert(transaction)
+            didUpdateSubject.send()
+            await transaction.finish()
+            return .done
 
         case .pending:
             return .pending
@@ -143,5 +141,6 @@ private extension StoreKitHelper {
             }
         }
         self.activeTransactions = activeTransactions
+        didUpdateSubject.send()
     }
 }
