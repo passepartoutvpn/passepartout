@@ -63,7 +63,11 @@ struct ProfileRowView: View, Routable {
             }
             Spacer()
             HStack(spacing: 10.0) {
-                attributesView
+                ProfileAttributesView(
+                    isShared: isShared,
+                    isTV: isTV,
+                    isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
+                )
                 ProfileInfoButton(header: header) {
                     flow?.onEditProfile($0)
                 }
@@ -131,21 +135,6 @@ private extension ProfileRowView {
         )
         .foregroundStyle(.primary)
     }
-}
-
-// MARK: - Attributes
-
-private extension ProfileRowView {
-    var attributesView: some View {
-        Group {
-            if isTV {
-                tvImage
-            } else if isShared {
-                sharedImage
-            }
-        }
-        .foregroundStyle(.secondary)
-    }
 
     var isShared: Bool {
         profileManager.isRemotelyShared(profileWithId: header.id)
@@ -154,14 +143,34 @@ private extension ProfileRowView {
     var isTV: Bool {
         isShared && profileManager.isAvailableForTV(profileWithId: header.id)
     }
+}
 
-    var sharedImage: some View {
-        ThemeImage(profileManager.isRemoteImportingEnabled ? .cloudOn : .cloudOff)
-            .help(Strings.Modules.General.Rows.shared)
-    }
+// MARK: - Previews
 
-    var tvImage: some View {
-        ThemeImage(profileManager.isRemoteImportingEnabled ? .tvOn : .tvOff)
-            .help(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV))
+#Preview {
+    let profile: Profile = .mock
+    let profileManager: ProfileManager = .mock
+
+    return Form {
+        ProfileRowView(
+            style: .compact,
+            profileManager: profileManager,
+            tunnel: .mock,
+            header: profile.header(),
+            interactiveManager: InteractiveManager(),
+            errorHandler: .default(),
+            nextProfileId: .constant(nil),
+            withMarker: true
+        )
     }
+    .task {
+        do {
+            try await profileManager.observeRemote(true)
+            try await profileManager.save(profile, force: true, remotelyShared: true)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    .themeForm()
+    .withMockEnvironment()
 }
