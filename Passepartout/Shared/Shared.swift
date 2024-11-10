@@ -98,8 +98,6 @@ extension IAPManager {
             customUserLevel: Configuration.Environment.userLevel,
             inAppHelper: iapHelpers.productHelper,
             receiptReader: iapHelpers.receiptReader,
-            // FIXME: #662, omit unrestrictedFeatures on release!
-            unrestrictedFeatures: [.interactiveLogin, .sharing],
             productsAtBuild: Configuration.IAPManager.productsAtBuild
         )
     }()
