@@ -1,3 +1,17 @@
+* Use hidden icons for stable alignment (#844)
+* Limit tunnel updates (#843)
+* Disable animations on installed profile view
+* Fix regression about handling of Core Data duplicates (#841)
+*  Rewrite AppContext event handlers (#839)
+* Unrestrict some features in .beta (#840)
+* Add more view modifiers (#838)
+* Revisit in-app eligibility for iCloud sharing (#837)
+* Fix compile error on iOS for previous commit
+* Decouple library from PassepartoutKit implementations (#834)
+* Drop old FIXME
+* Hide donation link in beta
+* Add donations UI and in-app error handling (#833)
+* Bump version
 * Add bump since git ref
 * Finalize paywall UI (#831)
 * Refactor theme section and styles (#829)
