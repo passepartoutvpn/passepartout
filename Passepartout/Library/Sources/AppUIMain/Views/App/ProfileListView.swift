@@ -42,8 +42,7 @@ struct ProfileListView: View, Routable, TunnelInstallationProviding {
     @ObservedObject
     var profileManager: ProfileManager
 
-    @ObservedObject
-    var tunnel: ExtendedTunnel
+    let tunnel: ExtendedTunnel
 
     let interactiveManager: InteractiveManager
 

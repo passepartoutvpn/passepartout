@@ -98,6 +98,12 @@ extension ExtendedTunnel {
         tunnel.currentProfile
     }
 
+    public var currentProfilePublisher: AnyPublisher<TunnelCurrentProfile?, Never> {
+        tunnel
+            .$currentProfile
+            .eraseToAnyPublisher()
+    }
+
     public func install(_ profile: Profile) async throws {
         pp_log(.app, .notice, "Install profile \(profile.id)...")
         let newProfile = try processedProfile(profile)

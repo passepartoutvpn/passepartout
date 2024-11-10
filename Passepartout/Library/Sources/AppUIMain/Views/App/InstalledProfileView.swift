@@ -163,7 +163,8 @@ private struct StatusText: View {
     let isOpaque: Bool
 
     var body: some View {
-        ConnectionStatusText(tunnel: tunnel)
+        debugChanges()
+        return ConnectionStatusText(tunnel: tunnel)
             .font(.body)
             .foregroundStyle(tunnel.statusColor(theme))
             .opaque(isOpaque)

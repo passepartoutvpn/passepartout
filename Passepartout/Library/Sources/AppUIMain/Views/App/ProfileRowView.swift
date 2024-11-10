@@ -38,8 +38,7 @@ struct ProfileRowView: View, Routable {
     @ObservedObject
     var profileManager: ProfileManager
 
-    @ObservedObject
-    var tunnel: ExtendedTunnel
+    let tunnel: ExtendedTunnel
 
     let header: ProfileHeader
 
@@ -74,13 +73,43 @@ struct ProfileRowView: View, Routable {
     }
 }
 
-// MARK: - Layout
+// MARK: - Subviews (observing)
+
+private struct MarkerView: View {
+    let headerId: Profile.ID
+
+    let nextProfileId: Profile.ID?
+
+    @ObservedObject
+    var tunnel: ExtendedTunnel
+
+    var body: some View {
+        ThemeImage(headerId == nextProfileId ? .pending : statusImage)
+            .opaque(headerId == nextProfileId || headerId == tunnel.currentProfile?.id)
+            .frame(width: 24.0)
+    }
+
+    var statusImage: Theme.ImageName {
+        switch tunnel.connectionStatus {
+        case .active:
+            return .marked
+
+        case .activating, .deactivating:
+            return .pending
+
+        case .inactive:
+            return .sleeping
+        }
+    }
+}
 
 private extension ProfileRowView {
     var markerView: some View {
-        ThemeImage(header.id == nextProfileId ? .pending : statusImage)
-            .opaque(header.id == nextProfileId || header.id == tunnel.currentProfile?.id)
-            .frame(width: 24.0)
+        MarkerView(
+            headerId: header.id,
+            nextProfileId: nextProfileId,
+            tunnel: tunnel
+        )
     }
 
     var cardView: some View {
@@ -101,19 +130,6 @@ private extension ProfileRowView {
             }
         )
         .foregroundStyle(.primary)
-    }
-
-    var statusImage: Theme.ImageName {
-        switch tunnel.connectionStatus {
-        case .active:
-            return .marked
-
-        case .activating, .deactivating:
-            return .pending
-
-        case .inactive:
-            return .sleeping
-        }
     }
 }
 
