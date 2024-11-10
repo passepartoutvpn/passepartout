@@ -26,9 +26,13 @@
 import SwiftUI
 
 struct ProfileAttributesView: View {
-    let isShared: Bool
+    enum Attribute {
+        case shared
 
-    let isTV: Bool
+        case tv
+    }
+
+    let attributes: [Attribute]
 
     let isRemoteImportingEnabled: Bool
 
@@ -50,24 +54,25 @@ struct ProfileAttributesView: View {
                     }
                 }
             }
-            .border(.black)
             .foregroundStyle(.secondary)
         }
     }
 
     var imageModels: [(name: Theme.ImageName, help: String)] {
-        if isTV {
-            return [(
-                isRemoteImportingEnabled ? .tvOn : .tvOff,
-                Strings.Modules.General.Rows.shared
-            )]
-        } else if isShared {
-            return [(
-                isRemoteImportingEnabled ? .cloudOn : .cloudOff,
-                Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV)
-            )]
-        } else {
-            return []
+        attributes.map {
+            switch $0 {
+            case .shared:
+                return (
+                    isRemoteImportingEnabled ? .tvOn : .tvOff,
+                    Strings.Modules.General.Rows.shared
+                )
+
+            case .tv:
+                return (
+                    isRemoteImportingEnabled ? .cloudOn : .cloudOff,
+                    Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV)
+                )
+            }
         }
     }
 }
@@ -83,8 +88,7 @@ struct ProfileAttributesView: View {
 
         var body: some View {
             ProfileAttributesView(
-                isShared: true,
-                isTV: true,
+                attributes: [.shared, .tv],
                 isRemoteImportingEnabled: isRemoteImportingEnabled
             )
             .onReceive(timer) { _ in

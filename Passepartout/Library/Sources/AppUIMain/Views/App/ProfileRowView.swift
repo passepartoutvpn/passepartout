@@ -64,8 +64,7 @@ struct ProfileRowView: View, Routable {
             Spacer()
             HStack(spacing: 10.0) {
                 ProfileAttributesView(
-                    isShared: isShared,
-                    isTV: isTV,
+                    attributes: attributes,
                     isRemoteImportingEnabled: profileManager.isRemoteImportingEnabled
                 )
                 ProfileInfoButton(header: header) {
@@ -134,6 +133,15 @@ private extension ProfileRowView {
             }
         )
         .foregroundStyle(.primary)
+    }
+
+    var attributes: [ProfileAttributesView.Attribute] {
+        if isTV {
+            return [.tv]
+        } else if isShared {
+            return [.shared]
+        }
+        return []
     }
 
     var isShared: Bool {
