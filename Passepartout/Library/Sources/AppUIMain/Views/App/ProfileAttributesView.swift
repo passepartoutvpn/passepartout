@@ -33,34 +33,42 @@ struct ProfileAttributesView: View {
     let isRemoteImportingEnabled: Bool
 
     var body: some View {
-        ZStack(alignment: .centerFirstTextBaseline) {
-            Group {
-                ThemeImage(.cloudOn)
-                ThemeImage(.cloudOff)
-                ThemeImage(.tvOn)
-                ThemeImage(.tvOff)
-            }
-            .hidden()
+        if !imageModels.isEmpty {
+            ZStack(alignment: .centerFirstTextBaseline) {
+                Group {
+                    ThemeImage(.cloudOn)
+                    ThemeImage(.cloudOff)
+                    ThemeImage(.tvOn)
+                    ThemeImage(.tvOff)
+                }
+                .hidden()
 
-            HStack(alignment: .firstTextBaseline) {
-                if isTV {
-                    tvImage
-                } else if isShared {
-                    sharedImage
+                HStack(alignment: .firstTextBaseline) {
+                    ForEach(imageModels, id: \.name) {
+                        ThemeImage($0.name)
+                            .help($0.help)
+                    }
                 }
             }
+            .border(.black)
+            .foregroundStyle(.secondary)
         }
-        .foregroundStyle(.secondary)
     }
 
-    var sharedImage: some View {
-        ThemeImage(isRemoteImportingEnabled ? .cloudOn : .cloudOff)
-            .help(Strings.Modules.General.Rows.shared)
-    }
-
-    var tvImage: some View {
-        ThemeImage(isRemoteImportingEnabled ? .tvOn : .tvOff)
-            .help(Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV))
+    var imageModels: [(name: Theme.ImageName, help: String)] {
+        if isTV {
+            return [(
+                isRemoteImportingEnabled ? .tvOn : .tvOff,
+                Strings.Modules.General.Rows.shared
+            )]
+        } else if isShared {
+            return [(
+                isRemoteImportingEnabled ? .cloudOn : .cloudOff,
+                Strings.Modules.General.Rows.appleTv(Strings.Unlocalized.appleTV)
+            )]
+        } else {
+            return []
+        }
     }
 }
 
