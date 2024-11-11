@@ -95,7 +95,7 @@ extension VPNProviderServerView {
     struct ServersSubview: View {
         let servers: [VPNServer]
 
-        let selectedServerId: String?
+        let selectedServer: VPNServer?
 
         let isFiltering: Bool
 
@@ -108,6 +108,9 @@ extension VPNProviderServerView {
         let selectTitle: String
 
         let onSelect: (VPNServer) -> Void
+
+        @State
+        private var expandedCodes: Set<String> = []
 
         var body: some View {
             debugChanges()
@@ -138,6 +141,11 @@ private extension VPNProviderServerView.ServersSubview {
             .themeSection(
                 header: filtersViewModel.filters.categoryName ?? Strings.Providers.Vpn.Category.any
             )
+            .onLoad {
+                if let selectedServer {
+                    expandedCodes.insert(selectedServer.provider.countryCode)
+                }
+            }
         }
     }
 
@@ -153,6 +161,18 @@ private extension VPNProviderServerView.ServersSubview {
             .map(\.code)
     }
 
+    func isExpandedCountry(_ code: String) -> Binding<Bool> {
+        Binding {
+            expandedCodes.contains(code)
+        } set: {
+            if $0 {
+                expandedCodes.insert(code)
+            } else {
+                expandedCodes.remove(code)
+            }
+        }
+    }
+
     func countryServers(for code: String) -> [VPNServer]? {
         servers
             .filter {
@@ -164,7 +184,7 @@ private extension VPNProviderServerView.ServersSubview {
     func countryView(for code: String) -> some View {
         countryServers(for: code)
             .map { servers in
-                DisclosureGroup {
+                DisclosureGroup(isExpanded: isExpandedCountry(code)) {
                     ForEach(servers, id: \.id, content: serverView)
                 } label: {
                     ThemeCountryText(code)
@@ -178,7 +198,7 @@ private extension VPNProviderServerView.ServersSubview {
         } label: {
             HStack {
                 ThemeImage(.marked)
-                    .opaque(server.id == selectedServerId)
+                    .opaque(server.id == selectedServer?.id)
                 VStack(alignment: .leading) {
                     if let area = server.provider.area {
                         Text(area)

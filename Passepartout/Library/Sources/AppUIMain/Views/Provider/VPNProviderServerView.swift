@@ -75,7 +75,7 @@ extension VPNProviderServerView {
             apis: apis,
             moduleId: moduleId,
             providerId: providerId,
-            selectedServerId: selectedEntity?.server.id,
+            selectedServer: selectedEntity?.server,
             initialFilters: {
                 guard let selectedEntity, filtersWithSelection else {
                     return nil
@@ -117,7 +117,7 @@ extension VPNProviderServerView {
 
         let providerId: ProviderID
 
-        let selectedServerId: String?
+        let selectedServer: VPNServer?
 
         let initialFilters: VPNFilters?
 
@@ -144,7 +144,7 @@ extension VPNProviderServerView {
             debugChanges()
             return ServersSubview(
                 servers: filteredServers,
-                selectedServerId: selectedServerId,
+                selectedServer: selectedServer,
                 isFiltering: isFiltering,
                 filtersViewModel: filtersViewModel,
                 favoritesManager: favoritesManager,
