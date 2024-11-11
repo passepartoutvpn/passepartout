@@ -144,10 +144,12 @@ private extension AppContext {
 
         pp_log(.app, .notice, "Application did update eligible features")
         pendingTask = Task {
-            let isEligible = features.contains(.sharing)
+
+            // toggle sync based on .sharing eligibility
+            let isEligibleForSharing = features.contains(.sharing)
             do {
-                pp_log(.App.profiles, .info, "Refresh remote profiles observers (eligible=\(isEligible), CloudKit=\(isCloudKitEnabled))...")
-                try await profileManager.observeRemote(isEligible && isCloudKitEnabled)
+                pp_log(.App.profiles, .info, "Refresh remote profiles observers (eligible=\(isEligibleForSharing), CloudKit=\(isCloudKitEnabled))...")
+                try await profileManager.observeRemote(isEligibleForSharing && isCloudKitEnabled)
             } catch {
                 pp_log(.App.profiles, .error, "Unable to re-observe remote profiles: \(error)")
             }
