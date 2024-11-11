@@ -42,15 +42,14 @@ public enum AppFeature: String, CaseIterable {
 
     case sharing
 
-    public static let fullV2Features: [AppFeature] = {
-        let excluded: [AppFeature] = [
-            .appleTV,
-            .interactiveLogin
-        ]
-        return allCases.filter {
-            !excluded.contains($0)
-        }
-    }()
+    public static let fullV2Features: [AppFeature] = [
+        .dns,
+        .httpProxy,
+        .onDemand,
+        .providers,
+        .routing,
+        .sharing
+    ]
 }
 
 extension AppFeature: Identifiable {
