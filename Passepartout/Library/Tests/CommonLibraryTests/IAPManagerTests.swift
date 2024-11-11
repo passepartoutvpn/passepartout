@@ -134,16 +134,21 @@ extension IAPManagerTests {
         XCTAssertFalse(sut.isEligible(for: .appleTV))
     }
 
-    func test_givenFullVersion_thenIsEligibleForAnyFeatureExceptAppleTV() async {
+    func test_givenFullVersion_thenIsEligibleForAnyFeatureExceptExcluded() async {
         let reader = MockAppReceiptReader()
         await reader.setReceipt(withBuild: defaultBuildNumber, products: [.Full.allPlatforms])
         let sut = IAPManager(receiptReader: reader)
 
         await sut.reloadReceipt()
-        AppFeature.fullV2Features.forEach {
-            XCTAssertTrue(sut.isEligible(for: $0))
+        let excluded: Set<AppFeature> = [.appleTV, .interactiveLogin]
+        AppFeature.allCases.forEach {
+            if AppFeature.fullV2Features.contains($0) {
+                XCTAssertTrue(sut.isEligible(for: $0))
+            } else {
+                XCTAssertTrue(excluded.contains($0))
+                XCTAssertFalse(sut.isEligible(for: $0))
+            }
         }
-        XCTAssertFalse(sut.isEligible(for: .appleTV))
     }
 
     func test_givenAppleTV_thenIsEligibleForAppleTV() async {
@@ -240,15 +245,20 @@ extension IAPManagerTests {
         XCTAssertTrue(sut.userLevel.isFullVersion)
     }
 
-    func test_givenFullApp_thenIsEligibleForAnyFeatureExceptAppleTV() async {
+    func test_givenFullApp_thenIsEligibleForAnyFeatureExceptExcluded() async {
         let reader = MockAppReceiptReader()
         let sut = IAPManager(customUserLevel: .fullVersion, receiptReader: reader)
 
         await sut.reloadReceipt()
-        AppFeature.fullV2Features.forEach {
-            XCTAssertTrue(sut.isEligible(for: $0))
+        let excluded: Set<AppFeature> = [.appleTV, .interactiveLogin]
+        AppFeature.allCases.forEach {
+            if AppFeature.fullV2Features.contains($0) {
+                XCTAssertTrue(sut.isEligible(for: $0))
+            } else {
+                XCTAssertTrue(excluded.contains($0))
+                XCTAssertFalse(sut.isEligible(for: $0))
+            }
         }
-        XCTAssertFalse(sut.isEligible(for: .appleTV))
     }
 
     func test_givenFullPlusTVApp_thenIsEligibleForAnyFeature() async {
