@@ -36,7 +36,7 @@ extension AppUserLevel: AppFeatureProviding {
             return [.interactiveLogin, .sharing]
 
         case .fullVersion:
-            return AppFeature.allButAppleTV
+            return AppFeature.fullV2Features
 
         case .fullVersionPlusTV:
             return AppFeature.allCases
@@ -71,18 +71,18 @@ extension AppProduct: AppFeatureProviding {
             return [.onDemand]
 
         case .Full.allPlatforms:
-            return AppFeature.allButAppleTV
+            return AppFeature.fullV2Features
 
         case .Full.iOS:
 #if os(iOS)
-            return AppFeature.allButAppleTV
+            return AppFeature.fullV2Features
 #else
             return []
 #endif
 
         case .Full.macOS:
 #if os(macOS)
-            return AppFeature.allButAppleTV
+            return AppFeature.fullV2Features
 #else
             return []
 #endif
