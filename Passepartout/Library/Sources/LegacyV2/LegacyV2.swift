@@ -48,7 +48,7 @@ public final class LegacyV2 {
         self.cloudKitIdentifier = cloudKitIdentifier
     }
 
-    public func fetchProfiles() async throws -> [Profile] {
-        try await profilesRepository.migratedProfiles()
-    }
+//    public func fetchProfiles() async throws -> [Profile] {
+//        try await profilesRepository.migratedProfiles()
+//    }
 }
