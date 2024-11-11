@@ -153,31 +153,6 @@ private extension AppContext {
             } catch {
                 pp_log(.App.profiles, .error, "Unable to re-observe remote profiles: \(error)")
             }
-
-            // reset provider selection if ineligible for .providers
-            // otherwise still able to pick provider servers
-            if !features.contains(.providers) {
-                let profiles = profileManager
-                    .headers
-                    .compactMap {
-                        profileManager.profile(withId: $0.id)
-                    }
-
-                for profile in profiles {
-                    guard let module = profile.firstProviderModuleWithMetadata?.0 else {
-                        continue
-                    }
-                    do {
-                        pp_log(.App.profiles, .info, "Reset provider for profile \(profile.id)...")
-                        var builder = profile.builder()
-                        builder.setProviderId(nil, forModuleWithId: module.id)
-                        let profile = try builder.tryBuild()
-                        try await profileManager.save(profile, force: true)
-                    } catch {
-                        pp_log(.App.profiles, .error, "Unable to reset provider for profile \(profile.id): \(error)")
-                    }
-                }
-            }
         }
         await pendingTask?.value
         pendingTask = nil
