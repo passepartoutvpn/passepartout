@@ -350,10 +350,10 @@ extension ProfileManager {
         self.isRemoteImportingEnabled = isRemoteImportingEnabled
         remoteSubscriptions.removeAll()
 
-        remoteRepository = remoteRepositoryBlock(isRemoteImportingEnabled)
-        if let initialProfiles = try await remoteRepository?.fetchProfiles() {
-            reloadRemoteProfiles(initialProfiles, importing: false)
-        }
+        let newRepository = remoteRepositoryBlock(isRemoteImportingEnabled)
+        let initialProfiles = try await newRepository.fetchProfiles()
+        reloadRemoteProfiles(initialProfiles, importing: false)
+        remoteRepository = newRepository
 
         remoteRepository?
             .profilesPublisher
