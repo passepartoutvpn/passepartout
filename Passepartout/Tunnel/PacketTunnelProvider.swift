@@ -36,7 +36,6 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
             parameters: Constants.shared.log,
             logsPrivateData: UserDefaults.appGroup.bool(forKey: AppPreference.logsPrivateData.key)
         )
-        try await checkEligibility(environment: .shared)
         do {
             fwd = try await NEPTPForwarder(
                 provider: self,
@@ -44,6 +43,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
                 registry: .shared,
                 environment: .shared
             )
+            try await checkEligibility(of: fwd!.profile, environment: .shared)
             try await fwd?.startTunnel(options: options)
         } catch {
             pp_log(.app, .fault, "Unable to start tunnel: \(error)")
@@ -76,13 +76,15 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
     }
 }
 
+// MARK: - Eligibility
+
 @MainActor
 private extension PacketTunnelProvider {
     var iapManager: IAPManager {
         .shared
     }
 
-    var isEligible: Bool {
+    var isEligibleForPlatform: Bool {
 #if os(tvOS)
         iapManager.isEligible(for: .appleTV)
 #else
@@ -90,12 +92,22 @@ private extension PacketTunnelProvider {
 #endif
     }
 
-    func checkEligibility(environment: TunnelEnvironment) async throws {
+    func isEligibleForProviders(_ profile: Profile) -> Bool {
+        profile.firstProviderModuleWithMetadata == nil || iapManager.isEligible(for: .providers)
+    }
+
+    func checkEligibility(of profile: Profile, environment: TunnelEnvironment) async throws {
         await iapManager.reloadReceipt()
-        guard isEligible else {
+        guard isEligibleForPlatform else {
             let error = PassepartoutError(.App.ineligibleProfile)
             environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
-            pp_log(.app, .fault, "Profile is ineligible, purchase required")
+            pp_log(.app, .fault, "Profile is ineligible for this platform")
+            throw error
+        }
+        guard isEligibleForProviders(profile) else {
+            let error = PassepartoutError(.App.ineligibleProfile)
+            environment.setEnvironmentValue(error.code, forKey: TunnelEnvironmentKeys.lastErrorCode)
+            pp_log(.app, .fault, "Profile is ineligible for providers")
             throw error
         }
     }
