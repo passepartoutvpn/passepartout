@@ -29,11 +29,19 @@ import PassepartoutKit
 
 @MainActor
 public final class ProfileManager: ObservableObject {
+    private enum Observer: CaseIterable {
+        case local
+
+        case remote
+    }
+
     public enum Event {
         case save(Profile)
 
         case remove([Profile.ID])
     }
+
+    // MARK: Dependencies
 
     private let repository: ProfileRepository
 
@@ -47,6 +55,8 @@ public final class ProfileManager: ObservableObject {
 
     private let processor: ProfileProcessor?
 
+    // MARK: State
+
     @Published
     private var profiles: [Profile]
 
@@ -56,10 +66,19 @@ public final class ProfileManager: ObservableObject {
         }
     }
 
+    private var allRemoteProfiles: [Profile.ID: Profile]
+
     @Published
     public private(set) var isRemoteImportingEnabled: Bool
 
-    private var allRemoteProfiles: [Profile.ID: Profile]
+    public var isReady: Bool {
+        waitingObservers.isEmpty
+    }
+
+    @Published
+    private var waitingObservers: Set<Observer>
+
+    // MARK: Publishers
 
     public let didChange: PassthroughSubject<Event, Never>
 
@@ -78,15 +97,17 @@ public final class ProfileManager: ObservableObject {
         }
         mirrorsRemoteRepository = false
         processor = nil
+
         self.profiles = []
         allProfiles = profiles.reduce(into: [:]) {
             $0[$1.id] = $1
         }
         allRemoteProfiles = [:]
+        isRemoteImportingEnabled = false
+        waitingObservers = []
 
         didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
-        isRemoteImportingEnabled = false
         subscriptions = []
         remoteSubscriptions = []
     }
@@ -104,13 +125,19 @@ public final class ProfileManager: ObservableObject {
         self.remoteRepositoryBlock = remoteRepositoryBlock
         self.mirrorsRemoteRepository = mirrorsRemoteRepository
         self.processor = processor
+
         profiles = []
         allProfiles = [:]
         allRemoteProfiles = [:]
+        isRemoteImportingEnabled = false
+        if remoteRepositoryBlock != nil {
+            waitingObservers = [.local, .remote]
+        } else {
+            waitingObservers = [.local]
+        }
 
         didChange = PassthroughSubject()
         searchSubject = CurrentValueSubject("")
-        isRemoteImportingEnabled = false
         subscriptions = []
         remoteSubscriptions = []
     }
@@ -345,7 +372,9 @@ private extension ProfileManager {
         allProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
-        // objectWillChange implicit from updating profiles in didSet
+        if waitingObservers.contains(.local) {
+            waitingObservers.remove(.local)
+        }
 
         // should not be imported at all, but you never know
         if let processor {
@@ -369,7 +398,9 @@ private extension ProfileManager {
         allRemoteProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
-        objectWillChange.send()
+        if waitingObservers.contains(.remote) {
+            waitingObservers.remove(.remote)
+        }
 
         guard importing else {
             return
