@@ -54,3 +54,9 @@ extension AppProduct {
         }
     }
 }
+
+extension AppProduct: CustomStringConvertible {
+    public var description: String {
+        rawValue
+    }
+}
