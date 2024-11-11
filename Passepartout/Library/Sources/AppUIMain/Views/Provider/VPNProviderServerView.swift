@@ -166,7 +166,7 @@ extension VPNProviderServerView {
                     errorHandler.handle(error, title: Strings.Global.servers)
                 }
             }
-            .onReceive(filtersViewModel.$filters) { newValue in
+            .onReceive(filtersViewModel.$filters.dropFirst()) { newValue in
                 Task {
                     await reloadServers(filters: newValue)
                 }
