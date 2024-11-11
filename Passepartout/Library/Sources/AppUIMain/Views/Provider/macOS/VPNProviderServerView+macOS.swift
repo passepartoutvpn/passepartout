@@ -46,7 +46,7 @@ extension VPNProviderServerView {
     struct ServersSubview: View {
         let servers: [VPNServer]
 
-        let selectedServerId: String?
+        let selectedServer: VPNServer?
 
         let isFiltering: Bool
 
@@ -68,7 +68,7 @@ extension VPNProviderServerView {
             return Table(servers) {
                 TableColumn("") { server in
                     ThemeImage(.marked)
-                        .opaque(server.id == selectedServerId)
+                        .opaque(server.id == selectedServer?.id)
                 }
                 .width(10.0)
 
