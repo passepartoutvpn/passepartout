@@ -120,6 +120,7 @@ private struct ContainerModifier: ViewModifier {
             .onChange(of: search) {
                 profileManager.search(byName: $0)
             }
+            .themeAnimation(on: profileManager.isReady, category: .profiles)
             .themeAnimation(on: profileManager.headers, category: .profiles)
     }
 }
