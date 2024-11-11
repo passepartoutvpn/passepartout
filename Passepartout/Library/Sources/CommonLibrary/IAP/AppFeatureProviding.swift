@@ -35,10 +35,10 @@ extension AppUserLevel: AppFeatureProviding {
         case .beta:
             return [.interactiveLogin, .sharing]
 
-        case .fullVersion:
+        case .fullV2:
             return AppFeature.fullV2Features
 
-        case .fullVersionPlusTV:
+        case .subscriber:
             return AppFeature.allCases
 
         default:

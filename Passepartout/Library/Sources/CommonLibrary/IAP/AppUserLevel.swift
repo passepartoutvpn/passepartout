@@ -32,13 +32,13 @@ public enum AppUserLevel: Int, Sendable {
 
     case beta = 1
 
-    case fullVersion = 2
+    case fullV2 = 2
 
-    case fullVersionPlusTV = 3
+    case subscriber = 3
 
     var isFullVersion: Bool {
         switch self {
-        case .fullVersion, .fullVersionPlusTV:
+        case .fullV2, .subscriber:
             return true
 
         default:
