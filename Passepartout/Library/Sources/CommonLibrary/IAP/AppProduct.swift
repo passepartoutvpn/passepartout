@@ -55,8 +55,8 @@ extension AppProduct {
     }
 }
 
-extension AppProduct: CustomStringConvertible {
-    public var description: String {
+extension AppProduct: CustomDebugStringConvertible {
+    public var debugDescription: String {
         rawValue
     }
 }

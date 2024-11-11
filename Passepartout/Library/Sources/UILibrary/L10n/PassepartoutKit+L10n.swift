@@ -144,6 +144,12 @@ extension OnDemandModule.Policy: LocalizableEntity {
     }
 }
 
+extension ProviderID: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        rawValue
+    }
+}
+
 extension VPNServer {
     public var region: String {
         [provider.countryCode.localizedAsRegionCode, provider.area]

@@ -53,8 +53,8 @@ extension AppFeature: Identifiable {
     }
 }
 
-extension AppFeature: CustomStringConvertible {
-    public var description: String {
+extension AppFeature: CustomDebugStringConvertible {
+    public var debugDescription: String {
         rawValue
     }
 }
