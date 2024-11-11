@@ -52,3 +52,9 @@ extension AppFeature: Identifiable {
         rawValue
     }
 }
+
+extension AppFeature: CustomStringConvertible {
+    public var description: String {
+        rawValue
+    }
+}
