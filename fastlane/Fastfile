@@ -61,6 +61,15 @@ lane :bump do |options|
     )
 end
 
+desc "Run app tests"
+lane :test do
+    scan(
+        clean: true,
+        xcargs: "CODE_SIGNING_ALLOWED=NO",
+        verbose: true
+    )
+end
+
 desc "Push a new beta build to TestFlight"
 lane :beta do
     preface = ENV["TESTFLIGHT_PREFACE"]

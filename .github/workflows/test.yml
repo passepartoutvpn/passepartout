@@ -25,5 +25,6 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
       - name: Run tests
         run: |
-          cd Passepartout/Library
-          swift test
+          #cd Passepartout/Library
+          #swift test
+          bundle exec fastlane test
