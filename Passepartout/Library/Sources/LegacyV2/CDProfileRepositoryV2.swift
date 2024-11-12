@@ -50,19 +50,22 @@ final class CDProfileRepositoryV2 {
             do {
                 let request = CDProfile.fetchRequest()
                 let existing = try context.fetch(request)
-//                existing.forEach {
-//                    guard let json = $0.encryptedJSON,
-//                          let string = String(data: json, encoding: .utf8) else {
-//                        return
-//                    }
-//                    print(">>> \(string)")
-//                }
-                return existing.compactMap {
-                    guard let name = $0.name else {
-                        return nil
+                var decoded: [ProfileV2] = []
+                let decoder = JSONDecoder()
+                existing.forEach {
+                    guard let json = $0.encryptedJSON ?? $0.json,
+                          let string = String(data: json, encoding: .utf8) else {
+                        return
                     }
-                    return try? Profile.Builder(name: name).tryBuild()
+                    print(">>> \(string)")
+                    do {
+                        let profile = try decoder.decode(ProfileV2.self, from: json)
+                        decoded.append(profile)
+                    } catch {
+                        print(">>> failed: \(error)")
+                    }
                 }
+                return decoded
             } catch {
                 throw error
             }

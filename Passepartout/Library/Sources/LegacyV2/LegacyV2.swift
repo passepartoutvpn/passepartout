@@ -30,16 +30,18 @@ import PassepartoutKit
 public final class LegacyV2 {
     private let profilesRepository: CDProfileRepositoryV2
 
-    private let cloudKitIdentifier: String
+    private let cloudKitIdentifier: String?
 
     public init(
+        coreDataLogger: CoreDataPersistentStoreLogger?,
         profilesContainerName: String,
-        cloudKitIdentifier: String,
-        coreDataLogger: CoreDataPersistentStoreLogger
+        baseURL: URL,
+        cloudKitIdentifier: String?
     ) {
         let store = CoreDataPersistentStore(
             logger: coreDataLogger,
             containerName: profilesContainerName,
+            baseURL: baseURL,
             model: CDProfileRepositoryV2.model,
             cloudKitIdentifier: cloudKitIdentifier,
             author: nil
@@ -47,8 +49,22 @@ public final class LegacyV2 {
         profilesRepository = CDProfileRepositoryV2(context: store.context)
         self.cloudKitIdentifier = cloudKitIdentifier
     }
+}
 
-//    public func fetchProfiles() async throws -> [Profile] {
-//        try await profilesRepository.migratedProfiles()
-//    }
+// MARK: - Mapping
+
+extension LegacyV2 {
+
+    // FIXME: #642, migrate profiles properly
+    public func fetchProfiles() async throws -> [Profile] {
+        []
+    }
+}
+
+// MARK: - Legacy profiles
+
+extension LegacyV2 {
+    func fetchProfilesV2() async throws -> [ProfileV2] {
+        try await profilesRepository.profiles()
+    }
 }

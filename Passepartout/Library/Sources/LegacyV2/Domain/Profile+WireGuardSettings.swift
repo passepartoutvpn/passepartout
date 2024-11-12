@@ -25,18 +25,40 @@
 
 import Foundation
 import PassepartoutWireGuard
+import PassepartoutWireGuardGo
 
 extension ProfileV2 {
     struct WireGuardSettings: Codable, Equatable, VPNProtocolProviding {
+        struct WrappedConfiguration: Codable, Equatable {
+            private let configuration: WireGuard.Configuration
+
+            init(configuration: WireGuard.Configuration) {
+                self.configuration = configuration
+            }
+
+            public init(from decoder: Decoder) throws {
+                let container = try decoder.singleValueContainer()
+                let wg = try container.decode(String.self)
+                configuration = try StandardWireGuardParser().configuration(from: wg)
+            }
+
+            public func encode(to encoder: Encoder) throws {
+                let wg = try StandardWireGuardParser().string(from: configuration)
+                var container = encoder.singleValueContainer()
+                try container.encode(wg)
+            }
+        }
+
         var vpnProtocol: VPNProtocolType {
             .wireGuard
         }
 
-        var configuration: WireGuard.Configuration
+        var configuration: WrappedConfiguration
 
         init(configuration: WireGuard.Configuration) {
-            self.configuration = configuration
+            self.configuration = WrappedConfiguration(configuration: configuration)
         }
+
     }
 
     init(_ id: UUID = UUID(), name: String, configuration: WireGuard.Configuration) {

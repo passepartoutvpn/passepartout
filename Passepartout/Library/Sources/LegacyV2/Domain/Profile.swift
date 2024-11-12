@@ -25,10 +25,10 @@
 
 import Foundation
 
-enum VPNProtocolType: Codable {
-    case openVPN
+enum VPNProtocolType: String, RawRepresentable, Codable {
+    case openVPN = "ovpn"
 
-    case wireGuard
+    case wireGuard = "wg"
 }
 
 protocol VPNProtocolProviding {

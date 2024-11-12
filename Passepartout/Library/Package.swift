@@ -133,6 +133,7 @@ let package = Package(
             name: "LegacyV2",
             dependencies: [
                 "CommonUtils",
+                "PassepartoutImplementations",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
@@ -170,7 +171,7 @@ let package = Package(
             name: "LegacyV2Tests",
             dependencies: ["LegacyV2"],
             resources: [
-                .process("Resources")
+                .copy("Resources")
             ]
         ),
         .testTarget(
