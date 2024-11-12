@@ -33,6 +33,10 @@ let package = Package(
             targets: ["CommonLibrary"]
         ),
         .library(
+            name: "LegacyV2",
+            targets: ["LegacyV2"]
+        ),
+        .library(
             name: "TunnelLibrary",
             targets: [
                 "CommonLibrary",
@@ -161,6 +165,13 @@ let package = Package(
         .testTarget(
             name: "CommonLibraryTests",
             dependencies: ["CommonLibrary"]
+        ),
+        .testTarget(
+            name: "LegacyV2Tests",
+            dependencies: ["LegacyV2"],
+            resources: [
+                .process("Resources")
+            ]
         ),
         .testTarget(
             name: "UILibraryTests",
