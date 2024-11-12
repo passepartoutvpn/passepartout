@@ -136,7 +136,43 @@ final class LegacyV2Tests: XCTestCase {
         XCTAssertEqual(openVPN.credentials?.username, "foo")
         XCTAssertEqual(openVPN.credentials?.password, "bar")
     }
-}
+
+    func test_givenStore_whenMigrateVPSOpenVPN_thenIsExpected() async throws {
+        let sut = newStore()
+
+        let id = try XCTUnwrap(UUID(uuidString: "239AD322-7440-4198-990A-D91379916FE2"))
+        let result = try await sut.fetchProfiles(selection: [id])
+        let migrated = result.migrated
+        XCTAssertEqual(migrated.count, 1)
+        XCTAssertTrue(result.failed.isEmpty)
+
+        XCTAssertEqual(migrated.count, 1)
+        let profile = try XCTUnwrap(migrated.first)
+        XCTAssertEqual(profile.id, id)
+        XCTAssertEqual(profile.name, "vps-ta-cert-cbc256-lzo")
+        XCTAssertEqual(profile.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 726164772.28976))
+
+        XCTAssertEqual(profile.modules.count, 2)
+
+        let onDemand = try XCTUnwrap(profile.firstModule(ofType: OnDemandModule.self))
+        XCTAssertTrue(onDemand.isEnabled)
+        XCTAssertEqual(onDemand.policy, .excluding)
+        XCTAssertTrue(onDemand.withSSIDs.isEmpty)
+        XCTAssertTrue(onDemand.withOtherNetworks.isEmpty)
+
+        let openVPN = try XCTUnwrap(profile.firstModule(ofType: OpenVPNModule.self))
+        XCTAssertNil(openVPN.credentials)
+        let cfg = try XCTUnwrap(openVPN.configuration)
+        XCTAssertEqual(cfg.remotes, [
+            try .init("1.2.3.4", .init(.udp, 1198))
+        ])
+        XCTAssertEqual(cfg.authUserPass, false)
+        XCTAssertEqual(cfg.cipher, .aes256cbc)
+        XCTAssertEqual(cfg.digest, .sha256)
+        XCTAssertEqual(cfg.keepAliveInterval, 25.0)
+        XCTAssertEqual(cfg.checksEKU, true)
+        XCTAssertEqual(cfg.tlsWrap?.strategy, .auth)
+    }}
 
 private extension LegacyV2Tests {
     func newStore() -> LegacyV2 {
