@@ -58,7 +58,7 @@ struct MapperV2 {
     }
 }
 
-private extension MapperV2 {
+extension MapperV2 {
     func toOnDemandModule(_ v2: ProfileV2.OnDemand) -> OnDemandModule {
         var builder = OnDemandModule.Builder()
         builder.isEnabled = v2.isEnabled
@@ -83,7 +83,7 @@ private extension MapperV2 {
     }
 }
 
-private extension MapperV2 {
+extension MapperV2 {
     func toOpenVPNModule(_ v2: ProfileV2.OpenVPNSettings) throws -> OpenVPNModule {
         var builder = OpenVPNModule.Builder()
         builder.configurationBuilder = v2.configuration.builder()
@@ -103,7 +103,7 @@ private extension MapperV2 {
     }
 }
 
-private extension MapperV2 {
+extension MapperV2 {
     func toProviderModule(_ v2: ProfileV2.Provider) throws -> OpenVPNModule? {
         assert(v2.vpnSettings.count == 1)
         guard let entry = v2.vpnSettings.first else {
@@ -118,7 +118,7 @@ private extension MapperV2 {
     }
 }
 
-private extension MapperV2 {
+extension MapperV2 {
     func toNetworkModules(_ v2: ProfileV2.NetworkSettings) throws -> [Module] {
         var modules: [Module] = []
         if v2.dns.choice == .manual {
@@ -155,10 +155,10 @@ private extension MapperV2 {
         return try builder.tryBuild()
     }
 
-    func toIPModule(_ v2Gateway: Network.GatewaySettings, v2MTU: Network.MTUSettings) throws -> IPModule {
+    func toIPModule(_ v2Gateway: Network.GatewaySettings?, v2MTU: Network.MTUSettings?) throws -> IPModule {
         var builder = IPModule.Builder()
 
-        if v2Gateway.choice == .manual {
+        if let v2Gateway, v2Gateway.choice == .manual {
             let defaultRoute = Route(defaultWithGateway: nil)
 
             if v2Gateway.isDefaultIPv4 {
@@ -177,7 +177,7 @@ private extension MapperV2 {
                     .excluding(routes: [defaultRoute])
             }
         }
-        if v2MTU.choice == .manual {
+        if let v2MTU, v2MTU.choice == .manual {
             builder.mtu = v2MTU.mtuBytes
         }
 
