@@ -31,7 +31,7 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }}
       - name: Upload ${{ matrix.platform }} app
         id: upload_app
-        timeout-minutes: 20
+        timeout-minutes: 30
         env:
           MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
