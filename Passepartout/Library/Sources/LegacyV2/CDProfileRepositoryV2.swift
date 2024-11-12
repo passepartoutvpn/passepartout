@@ -42,39 +42,78 @@ final class CDProfileRepositoryV2 {
         self.context = context
     }
 
+    func migratableProfiles() async throws -> [MigratableProfile] {
+        try await fetchProfiles(
+            prefetch: {
+                $0.propertiesToFetch = ["id", "name", "lastUpdate"]
+            },
+            map: {
+                $0.compactMap {
+                    guard $0.value.encryptedJSON ?? $0.value.json != nil else {
+                        pp_log(.App.migration, .error, "Unable to migrate profile \($0.key): missing JSON")
+                        return nil
+                    }
+                    return MigratableProfile(
+                        id: $0.key,
+                        name: $0.value.name ?? $0.key.uuidString,
+                        lastUpdate: $0.value.lastUpdate
+                    )
+                }
+            }
+        )
+    }
+
     func profiles() async throws -> [ProfileV2] {
+        let decoder = JSONDecoder()
+        return try await fetchProfiles(
+            map: {
+                $0.compactMap {
+                    guard let json = $0.value.encryptedJSON ?? $0.value.json else {
+                        pp_log(.App.migration, .error, "Unable to migrate profile \($0.key): missing JSON")
+                        return nil
+                    }
+                    do {
+                        return try decoder.decode(ProfileV2.self, from: json)
+                    } catch {
+                        pp_log(.App.migration, .error, "Unable to migrate profile \($0.key): \(error)")
+                        return nil
+                    }
+                }
+            }
+        )
+    }
+}
+
+private extension CDProfileRepositoryV2 {
+    func fetchProfiles<T>(
+        prefetch: ((NSFetchRequest<CDProfile>) -> Void)? = nil,
+        map: @escaping ([UUID: CDProfile]) -> [T]
+    ) async throws -> [T] {
         try await context.perform { [weak self] in
             guard let self else {
                 return []
             }
+
             let request = CDProfile.fetchRequest()
             request.sortDescriptors = [
                 .init(key: "lastUpdate", ascending: false)
             ]
-
+            prefetch?(request)
             let existing = try context.fetch(request)
-            var decoded: [UUID: ProfileV2] = [:]
-            let decoder = JSONDecoder()
+
+            var deduped: [UUID: CDProfile] = [:]
             existing.forEach {
                 guard let uuid = $0.uuid else {
                     return
                 }
-                guard !decoded.keys.contains(uuid) else {
+                guard !deduped.keys.contains(uuid) else {
                     pp_log(.App.migration, .info, "Skip older duplicate of profile \(uuid)")
                     return
                 }
-                guard let json = $0.encryptedJSON ?? $0.json else {
-                    pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': missing JSON")
-                    return
-                }
-                do {
-                    let profile = try decoder.decode(ProfileV2.self, from: json)
-                    decoded[profile.id] = profile
-                } catch {
-                    pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': \(error)")
-                }
+                deduped[uuid] = $0
             }
-            return Array(decoded.values)
+
+            return map(deduped)
         }
     }
 }
