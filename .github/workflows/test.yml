@@ -26,3 +26,14 @@ jobs:
       - run: |
           cd Passepartout/Library
           swift test
+  run_xcode_tests:
+    name: Run Xcode tests
+    runs-on: macos-14
+    continue-on-error: true
+    timeout-minutes: 10
+    steps:
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+      - run: |
+          bundle exec fastlane test
