@@ -27,7 +27,9 @@ import Foundation
 import PassepartoutKit
 
 struct MapperV2 {
-    func toProfileV3(_ v2: ProfileV2) throws -> Profile {
+
+    // FIXME: #642, migrate profiles properly
+    func toProfileV3(_ v2: ProfileV2) -> Profile {
         fatalError()
     }
 }

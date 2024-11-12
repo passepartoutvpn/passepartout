@@ -62,9 +62,16 @@ extension LegacyV2 {
         }
     }
 
-    // FIXME: #642, migrate profiles properly
-    public func fetchProfiles() async throws -> [Profile] {
-        []
+    public func fetchProfiles(selection: Set<UUID>) async throws -> [Profile] {
+        let profilesV2 = try await fetchProfilesV2()
+        let mapper = MapperV2()
+        return profilesV2
+            .filter {
+                selection.contains($0.id)
+            }
+            .map {
+                mapper.toProfileV3($0)
+            }
     }
 }
 
