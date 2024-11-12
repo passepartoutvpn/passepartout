@@ -26,6 +26,7 @@
 import CommonUtils
 import Foundation
 @testable import LegacyV2
+import PassepartoutKit
 import XCTest
 
 final class LegacyV2Tests: XCTestCase {
@@ -71,10 +72,14 @@ final class LegacyV2Tests: XCTestCase {
         let migrated = try await sut.fetchProfiles(selection: [id])
 
         XCTAssertEqual(migrated.count, 1)
-        let protonVPN = try XCTUnwrap(migrated.first)
-        XCTAssertEqual(protonVPN.id, id)
-        XCTAssertEqual(protonVPN.name, "ProtonVPN")
-        XCTAssertEqual(protonVPN.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 724509584.854822))
+        let profile = try XCTUnwrap(migrated.first)
+        XCTAssertEqual(profile.id, id)
+        XCTAssertEqual(profile.name, "ProtonVPN")
+        XCTAssertEqual(profile.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 724509584.854822))
+
+        XCTAssertEqual(profile.modules.count, 2)
+        let onDemand = try XCTUnwrap(profile.firstModule(ofType: OnDemandModule.self))
+        let openVPN = try XCTUnwrap(profile.firstModule(ofType: OpenVPNModule.self))
     }
 }
 

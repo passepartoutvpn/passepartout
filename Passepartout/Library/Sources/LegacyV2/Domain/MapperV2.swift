@@ -39,7 +39,11 @@ struct MapperV2 {
         modules.append(toOnDemandModule(v2.onDemand))
 
         if let provider = v2.provider {
-//            v2.provider
+            if let module = try toProviderModule(provider) {
+                let providerId = ProviderID(rawValue: provider.name)
+                modules.append(module)
+                builder.setProviderId(providerId, forModuleWithId: module.id)
+            }
         } else if let ovpn = v2.host?.ovpnSettings {
             modules.append(try toOpenVPNModule(ovpn))
         } else if let wg = v2.host?.wgSettings {
@@ -82,16 +86,31 @@ private extension MapperV2 {
     func toOpenVPNModule(_ v2: ProfileV2.OpenVPNSettings) throws -> OpenVPNModule {
         var builder = OpenVPNModule.Builder()
         builder.configurationBuilder = v2.configuration.builder()
-        builder.credentials = v2.account.map {
-            OpenVPN.Credentials.Builder(username: $0.username, password: $0.password)
-                .build()
-        }
+        builder.credentials = v2.account.map(toOpenVPNCredentials)
         return try builder.tryBuild()
+    }
+
+    func toOpenVPNCredentials(_ v2: ProfileV2.Account) -> OpenVPN.Credentials {
+        OpenVPN.Credentials.Builder(username: v2.username, password: v2.password)
+            .build()
     }
 
     func toWireGuardModule(_ v2: ProfileV2.WireGuardSettings) throws -> WireGuardModule {
         var builder = WireGuardModule.Builder()
         builder.configurationBuilder = v2.configuration.configuration.builder()
+        return try builder.tryBuild()
+    }
+
+    func toProviderModule(_ v2: ProfileV2.Provider) throws -> OpenVPNModule? {
+        assert(v2.vpnSettings.count == 1)
+        guard let entry = v2.vpnSettings.first else {
+            return nil
+        }
+        assert(entry.key == .openVPN)
+        let settings = entry.value
+
+        var builder = OpenVPNModule.Builder()
+        builder.credentials = settings.account.map(toOpenVPNCredentials)
         return try builder.tryBuild()
     }
 }
