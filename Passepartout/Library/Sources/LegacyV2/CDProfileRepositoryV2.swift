@@ -56,8 +56,7 @@ final class CDProfileRepositoryV2 {
                     guard let uuid = $0.uuid else {
                         return
                     }
-                    guard let json = $0.encryptedJSON ?? $0.json,
-                          let string = String(data: json, encoding: .utf8) else {
+                    guard let json = $0.encryptedJSON ?? $0.json else {
                         pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': missing JSON")
                         return
                     }
