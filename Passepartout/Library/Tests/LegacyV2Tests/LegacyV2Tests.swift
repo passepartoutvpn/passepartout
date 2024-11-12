@@ -29,4 +29,23 @@ import Foundation
 import XCTest
 
 final class LegacyV2Tests: XCTestCase {
+    func test_givenStore_whenFetch_thenReturnsProfilesV2() async throws {
+        guard let baseURL = Bundle.module.url(forResource: "Resources", withExtension: nil) else {
+            fatalError()
+        }
+        let legacy = LegacyV2(
+            coreDataLogger: nil,
+            profilesContainerName: "Profiles",
+            baseURL: baseURL,
+            cloudKitIdentifier: nil
+        )
+        let profilesV2 = try await legacy.fetchProfilesV2()
+        XCTAssertEqual(profilesV2.count, 7)
+        XCTAssertEqual(Set(profilesV2.map(\.header.name)), [
+            "Hide.me",
+            "ProtonVPN",
+            "TorGuard",
+            "Windscribe"
+        ])
+    }
 }
