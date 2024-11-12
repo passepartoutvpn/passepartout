@@ -169,10 +169,7 @@ let package = Package(
         ),
         .testTarget(
             name: "LegacyV2Tests",
-            dependencies: ["LegacyV2"],
-            resources: [
-                .copy("Resources")
-            ]
+            dependencies: ["LegacyV2"]
         ),
         .testTarget(
             name: "UILibraryTests",

@@ -15,16 +15,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  run_tests:
-    name: Run tests
+  run_swift_tests:
+    name: Run SwiftPM tests
     runs-on: macos-14
     timeout-minutes: 10
     steps:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-      - name: Run tests
-        run: |
-          #cd Passepartout/Library
-          #swift test
-          bundle exec fastlane test
+      - run: |
+          cd Passepartout/Library
+          swift test

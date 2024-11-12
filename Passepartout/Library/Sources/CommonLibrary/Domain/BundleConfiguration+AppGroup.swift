@@ -42,7 +42,8 @@ private extension BundleConfiguration {
     static var cachesURL: URL {
         let groupId = mainString(for: .groupId)
         guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
-            fatalError("Unable to access App Group container")
+            pp_log(.app, .error, "Unable to access App Group container")
+            return FileManager.default.temporaryDirectory
         }
         return url.appending(components: "Library", "Caches")
     }

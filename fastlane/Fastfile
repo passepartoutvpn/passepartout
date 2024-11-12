@@ -19,6 +19,8 @@ Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
 logname = "CHANGELOG.txt"
+build_path = "build"
+derived_data_path = "build/derived_data"
 
 desc "Bump version"
 lane :bump do |options|
@@ -61,12 +63,11 @@ lane :bump do |options|
     )
 end
 
-desc "Run app tests"
+desc "Run Xcode tests"
 lane :test do
     scan(
-        clean: true,
         xcargs: "CODE_SIGNING_ALLOWED=NO",
-        verbose: true
+        derived_data_path: derived_data_path
     )
 end
 
@@ -78,8 +79,8 @@ lane :beta do
     match(type: "appstore")
     gym(
         clean: true,
-        build_path: "build",
-        derived_data_path: "build/derived_data"
+        build_path: build_path,
+        derived_data_path: derived_data_path
     )
     pilot(
         changelog: changelog,

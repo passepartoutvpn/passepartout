@@ -29,9 +29,14 @@ jobs:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Run tests
+        id: run_tests
+        timeout-minutes: 15
+        run: |
+          bundle exec fastlane test
       - name: Upload ${{ matrix.platform }} app
         id: upload_app
-        timeout-minutes: 20
+        timeout-minutes: 30
         env:
           MATCH_USERNAME: ${{ secrets.MATCH_USERNAME }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}

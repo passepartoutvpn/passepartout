@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E182C6C2CD61CD800051DB2 /* AppUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0E182C6B2CD61CD800051DB2 /* AppUI */; };
+		0E3FF4BA2CE3AFBC00BFF640 /* Profiles.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */; };
+		0E3FF4BB2CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B92CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift */; };
 		0E757F132CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */; };
 		0E757F202CD0D22B006E13E1 /* PassepartoutLoginItem.app in Embed Login Item */ = {isa = PBXBuildFile; fileRef = 0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E757F232CD0D2BD006E13E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F212CD0D2B7006E13E1 /* AppDelegate.swift */; };
@@ -32,6 +34,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0E3FF4B22CE3AF6F00BFF640 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E06D1872B87629100176E1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E06D18E2B87629100176E1D;
+			remoteInfo = Passepartout;
+		};
 		0E757F242CD0D812006E13E1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0E06D1872B87629100176E1D /* Project object */;
@@ -93,6 +102,9 @@
 
 /* Begin PBXFileReference section */
 		0E06D18F2B87629100176E1D /* Passepartout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passepartout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassepartoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Profiles.sqlite; sourceTree = "<group>"; };
+		0E3FF4B92CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyV2CoreDataTests.swift; sourceTree = "<group>"; };
 		0E5DFDDC2CDB8F9100F2DE70 /* Passepartout.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Passepartout.storekit; sourceTree = "<group>"; };
 		0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassepartoutLoginItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassepartoutLoginItemApp.swift; sourceTree = "<group>"; };
@@ -125,6 +137,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0E3FF4AB2CE3AF6F00BFF640 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E757F0D2CD0CFFC006E13E1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -175,6 +194,7 @@
 				0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */,
 				0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */,
 				0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */,
+				0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,6 +205,23 @@
 				0EC332C92B8A1808000B9C2F /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0E3FF4A92CE3AF4700BFF640 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0E3FF4B82CE3AFBC00BFF640 /* Resources */,
+				0E3FF4B92CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		0E3FF4B82CE3AFBC00BFF640 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		0E757F112CD0CFFC006E13E1 /* LoginItem */ = {
@@ -207,6 +244,7 @@
 				0EDE56E82CABE40D0082D21C /* Intents */,
 				0E757F112CD0CFFC006E13E1 /* LoginItem */,
 				0E7E3D612B9345FD002BBDB4 /* Shared */,
+				0E3FF4A92CE3AF4700BFF640 /* Tests */,
 				0E7E3D652B9345FD002BBDB4 /* Tunnel */,
 				0EBE80DD2BF55C9100E36A20 /* Library */,
 			);
@@ -298,6 +336,24 @@
 			productReference = 0E06D18F2B87629100176E1D /* Passepartout.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0E3FF4AD2CE3AF6F00BFF640 /* PassepartoutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E3FF4B42CE3AF6F00BFF640 /* Build configuration list for PBXNativeTarget "PassepartoutTests" */;
+			buildPhases = (
+				0E3FF4AA2CE3AF6F00BFF640 /* Sources */,
+				0E3FF4AB2CE3AF6F00BFF640 /* Frameworks */,
+				0E3FF4AC2CE3AF6F00BFF640 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E3FF4B32CE3AF6F00BFF640 /* PBXTargetDependency */,
+			);
+			name = PassepartoutTests;
+			productName = PassepartoutTests;
+			productReference = 0E3FF4AE2CE3AF6F00BFF640 /* PassepartoutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0E757F0F2CD0CFFC006E13E1 /* PassepartoutLoginItem */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0E757F1E2CD0CFFD006E13E1 /* Build configuration list for PBXNativeTarget "PassepartoutLoginItem" */;
@@ -366,6 +422,10 @@
 					0E06D18E2B87629100176E1D = {
 						CreatedOnToolsVersion = 15.2;
 					};
+					0E3FF4AD2CE3AF6F00BFF640 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 0E06D18E2B87629100176E1D;
+					};
 					0E757F0F2CD0CFFC006E13E1 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -393,6 +453,7 @@
 				0E06D18E2B87629100176E1D /* Passepartout */,
 				0EDE56EF2CABE42E0082D21C /* PassepartoutIntents */,
 				0E757F0F2CD0CFFC006E13E1 /* PassepartoutLoginItem */,
+				0E3FF4AD2CE3AF6F00BFF640 /* PassepartoutTests */,
 				0EC332C72B8A1808000B9C2F /* PassepartoutTunnel */,
 			);
 		};
@@ -407,6 +468,14 @@
 				0E7E3D692B9345FD002BBDB4 /* Assets.xcassets in Resources */,
 				0EB08B982CA46F4900A02591 /* AppPlist.strings in Resources */,
 				0EC066D12C7DC47600D88A94 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0E3FF4AC2CE3AF6F00BFF640 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3FF4BA2CE3AFBC00BFF640 /* Profiles.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +538,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0E3FF4AA2CE3AF6F00BFF640 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3FF4BB2CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0E757F0C2CD0CFFC006E13E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,6 +575,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0E3FF4B32CE3AF6F00BFF640 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0E06D18E2B87629100176E1D /* Passepartout */;
+			targetProxy = 0E3FF4B22CE3AF6F00BFF640 /* PBXContainerItemProxy */;
+		};
 		0E6C0A032BF4047100450362 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 0E6C0A022BF4047100450362 /* AppLibrary */;
@@ -781,6 +863,30 @@
 			};
 			name = Release;
 		};
+		0E3FF4B52CE3AF6F00BFF640 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Passepartout";
+			};
+			name = Debug;
+		};
+		0E3FF4B62CE3AF6F00BFF640 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Passepartout";
+			};
+			name = Release;
+		};
 		0E757F1C2CD0CFFD006E13E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -955,6 +1061,15 @@
 			buildConfigurations = (
 				0E06D19F2B87629200176E1D /* Debug */,
 				0E06D1A02B87629200176E1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E3FF4B42CE3AF6F00BFF640 /* Build configuration list for PBXNativeTarget "PassepartoutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E3FF4B52CE3AF6F00BFF640 /* Debug */,
+				0E3FF4B62CE3AF6F00BFF640 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
