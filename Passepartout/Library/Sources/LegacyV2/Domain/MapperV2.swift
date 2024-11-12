@@ -27,8 +27,6 @@ import Foundation
 import PassepartoutKit
 
 struct MapperV2 {
-
-    // FIXME: #642, migrate profiles properly
     func toProfileV3(_ v2: ProfileV2) throws -> Profile {
         var builder = Profile.Builder(id: v2.id)
         var modules: [Module] = []
@@ -50,8 +48,9 @@ struct MapperV2 {
             modules.append(try toWireGuardModule(wg))
         }
 
-//        v2.networkSettings
-//        toNetworkModules(v2.networkSettings)
+        try toNetworkModules(v2.networkSettings).forEach {
+            modules.append($0)
+        }
 
         builder.modules = modules
         builder.activeModulesIds = Set(modules.map(\.id))
@@ -82,7 +81,9 @@ private extension MapperV2 {
         })
         return builder.tryBuild()
     }
+}
 
+private extension MapperV2 {
     func toOpenVPNModule(_ v2: ProfileV2.OpenVPNSettings) throws -> OpenVPNModule {
         var builder = OpenVPNModule.Builder()
         builder.configurationBuilder = v2.configuration.builder()
@@ -100,7 +101,9 @@ private extension MapperV2 {
         builder.configurationBuilder = v2.configuration.configuration.builder()
         return try builder.tryBuild()
     }
+}
 
+private extension MapperV2 {
     func toProviderModule(_ v2: ProfileV2.Provider) throws -> OpenVPNModule? {
         assert(v2.vpnSettings.count == 1)
         guard let entry = v2.vpnSettings.first else {
@@ -112,5 +115,72 @@ private extension MapperV2 {
         var builder = OpenVPNModule.Builder()
         builder.credentials = settings.account.map(toOpenVPNCredentials)
         return try builder.tryBuild()
+    }
+}
+
+private extension MapperV2 {
+    func toNetworkModules(_ v2: ProfileV2.NetworkSettings) throws -> [Module] {
+        var modules: [Module] = []
+        if v2.dns.choice == .manual {
+            modules.append(try toDNSModule(v2.dns))
+        }
+        if v2.proxy.choice == .manual {
+            modules.append(try toHTTPProxyModule(v2.proxy))
+        }
+        if v2.gateway.choice == .manual || v2.mtu.choice == .manual {
+            modules.append(try toIPModule(v2.gateway, v2MTU: v2.mtu))
+        }
+        return modules
+    }
+
+    func toDNSModule(_ v2: Network.DNSSettings) throws -> DNSModule {
+        var builder = DNSModule.Builder()
+        builder.protocolType = v2.dnsProtocol ?? .cleartext
+        builder.servers = v2.dnsServers ?? []
+        builder.domainName = v2.dnsDomain
+        builder.searchDomains = v2.dnsSearchDomains
+        builder.dohURL = v2.dnsHTTPSURL?.absoluteString ?? ""
+        builder.dotHostname = v2.dnsTLSServerName ?? ""
+        return try builder.tryBuild()
+    }
+
+    func toHTTPProxyModule(_ v2: Network.ProxySettings) throws -> HTTPProxyModule {
+        var builder = HTTPProxyModule.Builder()
+        builder.address = v2.proxyAddress ?? ""
+        builder.port = v2.proxyPort ?? 0
+        builder.secureAddress = v2.proxyAddress ?? ""
+        builder.securePort = v2.proxyPort ?? 0
+        builder.pacURLString = v2.proxyAutoConfigurationURL?.absoluteString ?? ""
+        builder.bypassDomains = v2.proxyBypassDomains ?? []
+        return try builder.tryBuild()
+    }
+
+    func toIPModule(_ v2Gateway: Network.GatewaySettings, v2MTU: Network.MTUSettings) throws -> IPModule {
+        var builder = IPModule.Builder()
+
+        if v2Gateway.choice == .manual {
+            let defaultRoute = Route(defaultWithGateway: nil)
+
+            if v2Gateway.isDefaultIPv4 {
+                builder.ipv4 = IPSettings(subnet: nil)
+                    .including(routes: [defaultRoute])
+            } else {
+                builder.ipv4 = IPSettings(subnet: nil)
+                    .excluding(routes: [defaultRoute])
+            }
+
+            if v2Gateway.isDefaultIPv6 {
+                builder.ipv6 = IPSettings(subnet: nil)
+                    .including(routes: [defaultRoute])
+            } else {
+                builder.ipv6 = IPSettings(subnet: nil)
+                    .excluding(routes: [defaultRoute])
+            }
+        }
+        if v2MTU.choice == .manual {
+            builder.mtu = v2MTU.mtuBytes
+        }
+
+        return builder.tryBuild()
     }
 }
