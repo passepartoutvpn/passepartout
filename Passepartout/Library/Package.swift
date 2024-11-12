@@ -137,7 +137,7 @@ let package = Package(
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
-                .process("Profiles.xcdatamodeld")
+                .process("ProfilesV2.xcdatamodeld")
             ]
         ),
         .target(
