@@ -47,38 +47,34 @@ final class CDProfileRepositoryV2 {
             guard let self else {
                 return []
             }
-            do {
-                let request = CDProfile.fetchRequest()
-                request.sortDescriptors = [
-                    .init(key: "lastUpdate", ascending: false)
-                ]
+            let request = CDProfile.fetchRequest()
+            request.sortDescriptors = [
+                .init(key: "lastUpdate", ascending: false)
+            ]
 
-                let existing = try context.fetch(request)
-                var decoded: [UUID: ProfileV2] = [:]
-                let decoder = JSONDecoder()
-                existing.forEach {
-                    guard let uuid = $0.uuid else {
-                        return
-                    }
-                    guard !decoded.keys.contains(uuid) else {
-                        pp_log(.App.migration, .info, "Skip older duplicate of profile \(uuid)")
-                        return
-                    }
-                    guard let json = $0.encryptedJSON ?? $0.json else {
-                        pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': missing JSON")
-                        return
-                    }
-                    do {
-                        let profile = try decoder.decode(ProfileV2.self, from: json)
-                        decoded[profile.id] = profile
-                    } catch {
-                        pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': \(error)")
-                    }
+            let existing = try context.fetch(request)
+            var decoded: [UUID: ProfileV2] = [:]
+            let decoder = JSONDecoder()
+            existing.forEach {
+                guard let uuid = $0.uuid else {
+                    return
                 }
-                return Array(decoded.values)
-            } catch {
-                throw error
+                guard !decoded.keys.contains(uuid) else {
+                    pp_log(.App.migration, .info, "Skip older duplicate of profile \(uuid)")
+                    return
+                }
+                guard let json = $0.encryptedJSON ?? $0.json else {
+                    pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': missing JSON")
+                    return
+                }
+                do {
+                    let profile = try decoder.decode(ProfileV2.self, from: json)
+                    decoded[profile.id] = profile
+                } catch {
+                    pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': \(error)")
+                }
             }
+            return Array(decoded.values)
         }
     }
 }
