@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   run_main_tests:
-    name: Run main tests
+    name: Run SwiftPM tests
     runs-on: macos-14
     timeout-minutes: 10
     steps:
@@ -27,7 +27,7 @@ jobs:
           cd Passepartout/Library
           swift test
   run_migration_tests:
-    name: Run migration tests
+    name: Run Xcode tests
     runs-on: macos-14
     continue-on-error: true
     timeout-minutes: 10
