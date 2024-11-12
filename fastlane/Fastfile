@@ -19,6 +19,8 @@ Dotenv.load ".env.secret"
 
 setup_ci if ENV["CI"]
 logname = "CHANGELOG.txt"
+build_path = "build"
+derived_data_path = "build/derived_data"
 
 desc "Bump version"
 lane :bump do |options|
@@ -61,20 +63,23 @@ lane :bump do |options|
     )
 end
 
+desc "Run Xcode tests"
+lane :test do
+    scan(
+        xcargs: "CODE_SIGNING_ALLOWED=NO",
+        derived_data_path: derived_data_path
+    )
+end
+
 desc "Push a new beta build to TestFlight"
 lane :beta do
     preface = ENV["TESTFLIGHT_PREFACE"]
     log = File.read("../#{logname}")
     changelog = preface + log
-    derived_data_path = "build/derived_data"
-    scan(
-        xcargs: "CODE_SIGNING_ALLOWED=NO",
-        derived_data_path: derived_data_path
-    )
     match(type: "appstore")
     gym(
         clean: true,
-        build_path: "build",
+        build_path: build_path,
         derived_data_path: derived_data_path
     )
     pilot(
