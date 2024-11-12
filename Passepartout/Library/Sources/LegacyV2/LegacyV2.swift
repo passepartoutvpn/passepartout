@@ -65,12 +65,12 @@ extension LegacyV2 {
     public func fetchProfiles(selection: Set<UUID>) async throws -> [Profile] {
         let profilesV2 = try await fetchProfilesV2()
         let mapper = MapperV2()
-        return profilesV2
+        return try profilesV2
             .filter {
                 selection.contains($0.id)
             }
             .map {
-                mapper.toProfileV3($0)
+                try mapper.toProfileV3($0)
             }
     }
 }

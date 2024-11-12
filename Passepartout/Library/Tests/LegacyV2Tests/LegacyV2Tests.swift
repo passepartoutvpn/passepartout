@@ -29,7 +29,7 @@ import Foundation
 import XCTest
 
 final class LegacyV2Tests: XCTestCase {
-    func test_givenStore_whenFetch_thenReturnsProfilesV2() async throws {
+    func test_givenStore_whenFetchV2_thenReturnsProfilesV2() async throws {
         let sut = newStore()
 
         let profilesV2 = try await sut.fetchProfilesV2()
@@ -62,6 +62,19 @@ final class LegacyV2Tests: XCTestCase {
         XCTAssertEqual(migratable.count, 7)
         XCTAssertEqual(Set(migratable.map(\.id)), Set(expectedIDs.compactMap(UUID.init(uuidString:))))
         XCTAssertEqual(Set(migratable.map(\.name)), Set(expectedNames))
+    }
+
+    func test_givenStore_whenFetch_thenReturnsProfilesV3() async throws {
+        let sut = newStore()
+
+        let id = try XCTUnwrap(UUID(uuidString: "981E7CBD-7733-4CF3-9A51-2777614ED5D4"))
+        let migrated = try await sut.fetchProfiles(selection: [id])
+
+        XCTAssertEqual(migrated.count, 1)
+        let protonVPN = try XCTUnwrap(migrated.first)
+        XCTAssertEqual(protonVPN.id, id)
+        XCTAssertEqual(protonVPN.name, "ProtonVPN")
+        XCTAssertEqual(protonVPN.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 724509584.854822))
     }
 }
 

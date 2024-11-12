@@ -29,7 +29,10 @@ import PassepartoutKit
 struct MapperV2 {
 
     // FIXME: #642, migrate profiles properly
-    func toProfileV3(_ v2: ProfileV2) -> Profile {
-        fatalError()
+    func toProfileV3(_ v2: ProfileV2) throws -> Profile {
+        var builder = Profile.Builder(id: v2.id)
+        builder.name = v2.header.name
+        builder.attributes.lastUpdate = v2.header.lastUpdate
+        return try builder.tryBuild()
     }
 }
