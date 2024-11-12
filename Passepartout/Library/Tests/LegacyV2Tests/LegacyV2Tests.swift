@@ -34,11 +34,13 @@ final class LegacyV2Tests: XCTestCase {
         let sut = newStore()
 
         let profilesV2 = try await sut.fetchProfilesV2()
-        XCTAssertEqual(profilesV2.count, 4)
+        XCTAssertEqual(profilesV2.count, 6)
         XCTAssertEqual(Set(profilesV2.map(\.header.name)), [
             "Hide.me",
             "ProtonVPN",
             "TorGuard",
+            "vps-ta-cert-cbc256-lzo",
+            "vps-wg",
             "Windscribe"
         ])
     }
@@ -48,19 +50,23 @@ final class LegacyV2Tests: XCTestCase {
 
         let migratable = try await sut.migratableProfiles()
         let expectedIDs = [
+            "069F76BD-1F6B-425C-AD83-62477A8B6558",
+            "239AD322-7440-4198-990A-D91379916FE2",
             "38208B87-0545-4B11-A762-D04ED7CB904F",
-            "981E7CBD-7733-4CF3-9A51-2777614ED5D4",
+            "5D108793-7F62-4B4C-B194-0A7204C02E99",
             "8A568345-85C4-44C1-A9C4-612E8B07ADC5",
-            "5D108793-7F62-4B4C-B194-0A7204C02E99"
+            "981E7CBD-7733-4CF3-9A51-2777614ED5D4"
         ]
         let expectedNames = [
             "Hide.me",
             "ProtonVPN",
             "TorGuard",
+            "vps-ta-cert-cbc256-lzo",
+            "vps-wg",
             "Windscribe"
         ]
 
-        XCTAssertEqual(migratable.count, 4)
+        XCTAssertEqual(migratable.count, 6)
         XCTAssertEqual(Set(migratable.map(\.id)), Set(expectedIDs.compactMap(UUID.init(uuidString:))))
         XCTAssertEqual(Set(migratable.map(\.name)), Set(expectedNames))
     }
