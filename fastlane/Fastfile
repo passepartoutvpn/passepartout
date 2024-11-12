@@ -66,16 +66,17 @@ lane :beta do
     preface = ENV["TESTFLIGHT_PREFACE"]
     log = File.read("../#{logname}")
     changelog = preface + log
+    derived_data_path = "build/derived_data"
     match(type: "appstore")
     gym(
         clean: true,
+        xcargs: "build-for-testing",
         build_path: "build",
-        derived_data_path: "build/derived_data"
+        derived_data_path: derived_data_path
     )
     scan(
         test_without_building: true,
-        derived_data_path: "build/derived_data",
-        verbose: true
+        derived_data_path: derived_data_path
     )
     pilot(
         changelog: changelog,
