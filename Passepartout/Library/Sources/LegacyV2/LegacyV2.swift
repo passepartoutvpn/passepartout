@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
@@ -54,6 +55,12 @@ public final class LegacyV2 {
 // MARK: - Mapping
 
 extension LegacyV2 {
+    public func migratableProfiles() async throws -> [MigratableProfile] {
+        let profilesV2 = try await fetchProfilesV2()
+        return profilesV2.map {
+            MigratableProfile(id: $0.id, name: $0.header.name, lastUpdate: $0.header.lastUpdate)
+        }
+    }
 
     // FIXME: #642, migrate profiles properly
     public func fetchProfiles() async throws -> [Profile] {

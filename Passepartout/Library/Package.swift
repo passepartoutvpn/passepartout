@@ -132,7 +132,7 @@ let package = Package(
         .target(
             name: "LegacyV2",
             dependencies: [
-                "CommonUtils",
+                "CommonLibrary",
                 "PassepartoutImplementations",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],

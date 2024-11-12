@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CoreData
 import Foundation
 import PassepartoutKit
@@ -52,16 +53,19 @@ final class CDProfileRepositoryV2 {
                 var decoded: [ProfileV2] = []
                 let decoder = JSONDecoder()
                 existing.forEach {
-                    guard let json = $0.encryptedJSON ?? $0.json,
-                          let string = String(data: json, encoding: .utf8) else {
+                    guard let uuid = $0.uuid else {
                         return
                     }
-                    print(">>> \(string)")
+                    guard let json = $0.encryptedJSON ?? $0.json,
+                          let string = String(data: json, encoding: .utf8) else {
+                        pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': missing JSON")
+                        return
+                    }
                     do {
                         let profile = try decoder.decode(ProfileV2.self, from: json)
                         decoded.append(profile)
                     } catch {
-                        print(">>> failed: \(error)")
+                        pp_log(.App.migration, .error, "Unable to migrate profile \(uuid) with name '\($0.name ?? "")': \(error)")
                     }
                 }
                 return decoded
