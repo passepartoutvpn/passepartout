@@ -1,5 +1,5 @@
 //
-//  LegacyV2Tests.swift
+//  LegacyV2CoreDataTests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/12/24.
@@ -29,7 +29,7 @@ import Foundation
 import PassepartoutKit
 import XCTest
 
-final class LegacyV2Tests: XCTestCase {
+final class LegacyV2CoreDataTests: XCTestCase {
     func test_givenStore_whenFetchV2_thenReturnsProfilesV2() async throws {
         let sut = newStore()
 
@@ -217,9 +217,9 @@ final class LegacyV2Tests: XCTestCase {
     }
 }
 
-private extension LegacyV2Tests {
+private extension LegacyV2CoreDataTests {
     func newStore() -> LegacyV2 {
-        guard let baseURL = Bundle.module.url(forResource: "Resources", withExtension: nil) else {
+        guard let baseURL = Bundle(for: LegacyV2CoreDataTests.self).resourceURL else {
             fatalError()
         }
         return LegacyV2(

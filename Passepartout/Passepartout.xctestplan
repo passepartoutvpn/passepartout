@@ -39,6 +39,13 @@
         "identifier" : "LegacyV2Tests",
         "name" : "LegacyV2Tests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Passepartout.xcodeproj",
+        "identifier" : "0E3FF4AD2CE3AF6F00BFF640",
+        "name" : "PassepartoutTests"
+      }
     }
   ],
   "version" : 1
