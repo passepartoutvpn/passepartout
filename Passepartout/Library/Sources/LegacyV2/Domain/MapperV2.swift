@@ -31,8 +31,67 @@ struct MapperV2 {
     // FIXME: #642, migrate profiles properly
     func toProfileV3(_ v2: ProfileV2) throws -> Profile {
         var builder = Profile.Builder(id: v2.id)
+        var modules: [Module] = []
+
         builder.name = v2.header.name
         builder.attributes.lastUpdate = v2.header.lastUpdate
+
+        modules.append(toOnDemandModule(v2.onDemand))
+
+        if let provider = v2.provider {
+//            v2.provider
+        } else if let ovpn = v2.host?.ovpnSettings {
+            modules.append(try toOpenVPNModule(ovpn))
+        } else if let wg = v2.host?.wgSettings {
+            modules.append(try toWireGuardModule(wg))
+        }
+
+//        v2.networkSettings
+//        toNetworkModules(v2.networkSettings)
+
+        builder.modules = modules
+        builder.activeModulesIds = Set(modules.map(\.id))
+        return try builder.tryBuild()
+    }
+}
+
+private extension MapperV2 {
+    func toOnDemandModule(_ v2: ProfileV2.OnDemand) -> OnDemandModule {
+        var builder = OnDemandModule.Builder()
+        builder.isEnabled = v2.isEnabled
+        switch v2.policy {
+        case .any:
+            builder.policy = .any
+        case .excluding:
+            builder.policy = .excluding
+        case .including:
+            builder.policy = .including
+        }
+        builder.withSSIDs = v2.withSSIDs
+        builder.withOtherNetworks = Set(v2.withOtherNetworks.map {
+            switch $0 {
+            case .ethernet:
+                return .ethernet
+            case .mobile:
+                return .mobile
+            }
+        })
+        return builder.tryBuild()
+    }
+
+    func toOpenVPNModule(_ v2: ProfileV2.OpenVPNSettings) throws -> OpenVPNModule {
+        var builder = OpenVPNModule.Builder()
+        builder.configurationBuilder = v2.configuration.builder()
+        builder.credentials = v2.account.map {
+            OpenVPN.Credentials.Builder(username: $0.username, password: $0.password)
+                .build()
+        }
+        return try builder.tryBuild()
+    }
+
+    func toWireGuardModule(_ v2: ProfileV2.WireGuardSettings) throws -> WireGuardModule {
+        var builder = WireGuardModule.Builder()
+        builder.configurationBuilder = v2.configuration.configuration.builder()
         return try builder.tryBuild()
     }
 }

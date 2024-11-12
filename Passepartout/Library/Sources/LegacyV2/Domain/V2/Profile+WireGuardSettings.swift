@@ -30,7 +30,7 @@ import PassepartoutWireGuardGo
 extension ProfileV2 {
     struct WireGuardSettings: Codable, Equatable, VPNProtocolProviding {
         struct WrappedConfiguration: Codable, Equatable {
-            private let configuration: WireGuard.Configuration
+            let configuration: WireGuard.Configuration
 
             init(configuration: WireGuard.Configuration) {
                 self.configuration = configuration
