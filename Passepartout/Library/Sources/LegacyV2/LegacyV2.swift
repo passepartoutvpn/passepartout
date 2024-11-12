@@ -62,16 +62,26 @@ extension LegacyV2 {
         }
     }
 
-    public func fetchProfiles(selection: Set<UUID>) async throws -> [Profile] {
+    public func fetchProfiles(selection: Set<UUID>) async throws -> (migrated: [Profile], failed: Set<UUID>) {
         let profilesV2 = try await fetchProfilesV2()
+
+        var migrated: [Profile] = []
+        var failed: Set<UUID> = []
         let mapper = MapperV2()
-        return try profilesV2
-            .filter {
-                selection.contains($0.id)
+
+        profilesV2.forEach {
+            guard selection.contains($0.id) else {
+                return
             }
-            .map {
-                try mapper.toProfileV3($0)
+            do {
+                let mapped = try mapper.toProfileV3($0)
+                migrated.append(mapped)
+            } catch {
+                pp_log(.App.migration, .error, "Unable to migrate profile \($0.id): \(error)")
+                failed.insert($0.id)
             }
+        }
+        return (migrated, failed)
     }
 }
 

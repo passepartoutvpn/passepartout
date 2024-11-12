@@ -69,9 +69,11 @@ final class LegacyV2Tests: XCTestCase {
         let sut = newStore()
 
         let id = try XCTUnwrap(UUID(uuidString: "8A568345-85C4-44C1-A9C4-612E8B07ADC5"))
-        let migrated = try await sut.fetchProfiles(selection: [id])
-
+        let result = try await sut.fetchProfiles(selection: [id])
+        let migrated = result.migrated
         XCTAssertEqual(migrated.count, 1)
+        XCTAssertTrue(result.failed.isEmpty)
+
         let profile = try XCTUnwrap(migrated.first)
         XCTAssertEqual(profile.id, id)
         XCTAssertEqual(profile.name, "Hide.me")
@@ -105,7 +107,10 @@ final class LegacyV2Tests: XCTestCase {
         let sut = newStore()
 
         let id = try XCTUnwrap(UUID(uuidString: "981E7CBD-7733-4CF3-9A51-2777614ED5D4"))
-        let migrated = try await sut.fetchProfiles(selection: [id])
+        let result = try await sut.fetchProfiles(selection: [id])
+        let migrated = result.migrated
+        XCTAssertEqual(migrated.count, 1)
+        XCTAssertTrue(result.failed.isEmpty)
 
         XCTAssertEqual(migrated.count, 1)
         let profile = try XCTUnwrap(migrated.first)
