@@ -36,5 +36,5 @@ final class AppDelegate: NSObject {
     func configure(with uiConfiguring: UILibraryConfiguring) {
         UILibrary(uiConfiguring)
             .configure(with: context)
-        }
+    }
 }
