@@ -73,8 +73,8 @@ lane :beta do
         derived_data_path: "build/derived_data"
     )
     scan(
-        skip_build: true,
-        xcargs: "CODE_SIGNING_ALLOWED=NO",
+        test_without_building: true,
+        derived_data_path: "build/derived_data",
         verbose: true
     )
     pilot(
