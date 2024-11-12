@@ -36,7 +36,7 @@ public final class LegacyV2 {
     public init(
         coreDataLogger: CoreDataPersistentStoreLogger?,
         profilesContainerName: String,
-        baseURL: URL,
+        baseURL: URL? = nil,
         cloudKitIdentifier: String?
     ) {
         let store = CoreDataPersistentStore(
