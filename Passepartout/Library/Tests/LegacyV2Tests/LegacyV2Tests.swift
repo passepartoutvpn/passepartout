@@ -34,7 +34,7 @@ final class LegacyV2Tests: XCTestCase {
         let sut = newStore()
 
         let profilesV2 = try await sut.fetchProfilesV2()
-        XCTAssertEqual(profilesV2.count, 7)
+        XCTAssertEqual(profilesV2.count, 4)
         XCTAssertEqual(Set(profilesV2.map(\.header.name)), [
             "Hide.me",
             "ProtonVPN",
@@ -60,7 +60,7 @@ final class LegacyV2Tests: XCTestCase {
             "Windscribe"
         ]
 
-        XCTAssertEqual(migratable.count, 7)
+        XCTAssertEqual(migratable.count, 4)
         XCTAssertEqual(Set(migratable.map(\.id)), Set(expectedIDs.compactMap(UUID.init(uuidString:))))
         XCTAssertEqual(Set(migratable.map(\.name)), Set(expectedNames))
     }
