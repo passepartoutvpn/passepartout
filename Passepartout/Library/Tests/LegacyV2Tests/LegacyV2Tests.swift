@@ -48,7 +48,7 @@ final class LegacyV2Tests: XCTestCase {
     func test_givenStore_whenFetch_thenReturnsMigratableProfiles() async throws {
         let sut = newStore()
 
-        let migratable = try await sut.migratableProfiles()
+        let migratable = try await sut.fetchMigratableProfiles()
         let expectedIDs = [
             "069F76BD-1F6B-425C-AD83-62477A8B6558",
             "239AD322-7440-4198-990A-D91379916FE2",

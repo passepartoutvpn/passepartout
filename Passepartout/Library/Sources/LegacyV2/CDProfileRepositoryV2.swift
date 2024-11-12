@@ -45,7 +45,7 @@ final class CDProfileRepositoryV2 {
     func migratableProfiles() async throws -> [MigratableProfile] {
         try await fetchProfiles(
             prefetch: {
-                $0.propertiesToFetch = ["id", "name", "lastUpdate"]
+                $0.propertiesToFetch = ["uuid", "name", "lastUpdate"]
             },
             map: {
                 $0.compactMap {

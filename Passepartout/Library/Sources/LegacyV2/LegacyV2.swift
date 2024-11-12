@@ -55,15 +55,12 @@ public final class LegacyV2 {
 // MARK: - Mapping
 
 extension LegacyV2 {
-    public func migratableProfiles() async throws -> [MigratableProfile] {
-        let profilesV2 = try await fetchProfilesV2()
-        return profilesV2.map {
-            MigratableProfile(id: $0.id, name: $0.header.name, lastUpdate: $0.header.lastUpdate)
-        }
+    public func fetchMigratableProfiles() async throws -> [MigratableProfile] {
+        try await profilesRepository.migratableProfiles()
     }
 
     public func fetchProfiles(selection: Set<UUID>) async throws -> (migrated: [Profile], failed: Set<UUID>) {
-        let profilesV2 = try await fetchProfilesV2()
+        let profilesV2 = try await profilesRepository.profiles()
 
         var migrated: [Profile] = []
         var failed: Set<UUID> = []
