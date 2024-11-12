@@ -15,16 +15,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  run_tests:
-    name: Run tests
+  run_main_tests:
+    name: Run main tests
     runs-on: macos-14
     timeout-minutes: 10
     steps:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
         with:
           access_token: ${{ secrets.ACCESS_TOKEN }}
-      - name: Run tests
-        run: |
+      - run: |
           cd Passepartout/Library
           swift test
-          #bundle exec fastlane test
+  run_migration_tests:
+    name: Run migration tests
+    runs-on: macos-14
+    continue-on-error: true
+    timeout-minutes: 10
+    steps:
+      - uses: passepartoutvpn/action-prepare-xcode-build@master
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+      - run: |
+          bundle exec fastlane test
