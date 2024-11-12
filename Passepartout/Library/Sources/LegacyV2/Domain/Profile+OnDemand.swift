@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  Profile+OnDemand.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 2/17/22.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,18 +23,33 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
-import SwiftUI
-import UILibrary
+import Foundation
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = .shared
-//    let context: AppContext = .mock(withRegistry: .shared)
+extension ProfileV2 {
+    struct OnDemand: Codable, Equatable {
+        enum Policy: String, Codable {
+            case any
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+            case including
+
+            case excluding // "trusted networks"
+        }
+
+        enum OtherNetwork: String, Codable {
+            case mobile
+
+            case ethernet
+        }
+
+        var isEnabled = true
+
+        var policy: Policy = .excluding
+
+        var withSSIDs: [String: Bool] = [:]
+
+        var withOtherNetworks: Set<OtherNetwork> = []
+
+        init() {
+        }
     }
 }

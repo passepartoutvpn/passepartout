@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  Profile+NetworkSettings.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 2/15/22.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,18 +23,31 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
-import SwiftUI
-import UILibrary
+import Foundation
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = .shared
-//    let context: AppContext = .mock(withRegistry: .shared)
+extension ProfileV2 {
+    struct NetworkSettings: Codable, Equatable {
+        var gateway: Network.GatewaySettings
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+        var dns: Network.DNSSettings
+
+        var proxy: Network.ProxySettings
+
+        var mtu: Network.MTUSettings
+
+        var resolvesHostname = true
+
+        var keepsAliveOnSleep = true
+
+        init(choice: Network.Choice) {
+            gateway = Network.GatewaySettings(choice: choice)
+            dns = Network.DNSSettings(choice: choice)
+            proxy = Network.ProxySettings(choice: choice)
+            mtu = Network.MTUSettings(choice: choice)
+        }
+
+        init() {
+            self.init(choice: .defaultChoice)
+        }
     }
 }

@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  Profile+Account.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 4/6/22.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,18 +23,36 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
-import SwiftUI
-import UILibrary
+import Foundation
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = .shared
-//    let context: AppContext = .mock(withRegistry: .shared)
+extension ProfileV2 {
+    struct Account: Codable, Equatable {
+        enum AuthenticationMethod: String, Codable {
+            case persistent
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+            case interactive
+
+            case totp
+        }
+
+        var authenticationMethod: AuthenticationMethod?
+
+        var username: String
+
+        var password: String
+
+        var isEmpty: Bool {
+            username.isEmpty && password.isEmpty
+        }
+
+        init() {
+            username = ""
+            password = ""
+        }
+
+        init(_ username: String, _ password: String) {
+            self.username = username
+            self.password = password
+        }
     }
 }

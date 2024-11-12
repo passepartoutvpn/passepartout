@@ -32,6 +32,8 @@ extension LoggerDestination {
     public enum App {
         public static let iap = LoggerDestination(category: "app.iap")
 
+        public static let migration = LoggerDestination(category: "app.migration")
+
         public static let profiles = LoggerDestination(category: "app.profiles")
     }
 }

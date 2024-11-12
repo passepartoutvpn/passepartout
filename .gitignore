@@ -20,3 +20,4 @@ default.profraw
 .env.secret*
 *.storekit
 tmp
+*.sqlite-*

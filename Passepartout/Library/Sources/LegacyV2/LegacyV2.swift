@@ -23,6 +23,7 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import CommonUtils
 import Foundation
 import PassepartoutKit
@@ -30,16 +31,18 @@ import PassepartoutKit
 public final class LegacyV2 {
     private let profilesRepository: CDProfileRepositoryV2
 
-    private let cloudKitIdentifier: String
+    private let cloudKitIdentifier: String?
 
     public init(
+        coreDataLogger: CoreDataPersistentStoreLogger?,
         profilesContainerName: String,
-        cloudKitIdentifier: String,
-        coreDataLogger: CoreDataPersistentStoreLogger
+        baseURL: URL? = nil,
+        cloudKitIdentifier: String?
     ) {
         let store = CoreDataPersistentStore(
             logger: coreDataLogger,
             containerName: profilesContainerName,
+            baseURL: baseURL,
             model: CDProfileRepositoryV2.model,
             cloudKitIdentifier: cloudKitIdentifier,
             author: nil
@@ -47,8 +50,42 @@ public final class LegacyV2 {
         profilesRepository = CDProfileRepositoryV2(context: store.context)
         self.cloudKitIdentifier = cloudKitIdentifier
     }
+}
 
-    public func fetchProfiles() async throws -> [Profile] {
-        try await profilesRepository.migratedProfiles()
+// MARK: - Mapping
+
+extension LegacyV2 {
+    public func fetchMigratableProfiles() async throws -> [MigratableProfile] {
+        try await profilesRepository.migratableProfiles()
+    }
+
+    public func fetchProfiles(selection: Set<UUID>) async throws -> (migrated: [Profile], failed: Set<UUID>) {
+        let profilesV2 = try await profilesRepository.profiles()
+
+        var migrated: [Profile] = []
+        var failed: Set<UUID> = []
+        let mapper = MapperV2()
+
+        profilesV2.forEach {
+            guard selection.contains($0.id) else {
+                return
+            }
+            do {
+                let mapped = try mapper.toProfileV3($0)
+                migrated.append(mapped)
+            } catch {
+                pp_log(.App.migration, .error, "Unable to migrate profile \($0.id): \(error)")
+                failed.insert($0.id)
+            }
+        }
+        return (migrated, failed)
+    }
+}
+
+// MARK: - Legacy profiles
+
+extension LegacyV2 {
+    func fetchProfilesV2() async throws -> [ProfileV2] {
+        try await profilesRepository.profiles()
     }
 }

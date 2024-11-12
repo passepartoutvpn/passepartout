@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  Profile+Provider.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 2/15/22.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,18 +23,36 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
+import Foundation
 import PassepartoutKit
-import SwiftUI
-import UILibrary
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = .shared
-//    let context: AppContext = .mock(withRegistry: .shared)
+typealias ProviderName = String
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
-    }
+extension ProfileV2 {
+    struct Provider: Codable, Equatable {
+        struct Settings: Codable, Equatable {
+            var account: Account?
+
+            var serverId: String?
+
+            var presetId: String?
+
+            var favoriteLocationIds: Set<String>?
+
+            var customEndpoint: Endpoint?
+
+            init() {
+            }
+        }
+
+        let name: ProviderName
+
+        var vpnSettings: [VPNProtocolType: Settings] = [:]
+
+        var randomizesServer: Bool?
+
+        init(_ name: ProviderName) {
+            self.name = name
+        }
+   }
 }

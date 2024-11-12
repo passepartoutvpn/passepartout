@@ -32,6 +32,13 @@
         "identifier" : "CommonLibraryTests",
         "name" : "CommonLibraryTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Passepartout\/Library",
+        "identifier" : "LegacyV2Tests",
+        "name" : "LegacyV2Tests"
+      }
     }
   ],
   "version" : 1

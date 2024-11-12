@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
+//  MigratableProfile.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 9/18/24.
+//  Created by Davide De Rosa on 11/12/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,18 +23,18 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonLibrary
-import PassepartoutKit
-import SwiftUI
-import UILibrary
+import Foundation
 
-@MainActor
-final class AppDelegate: NSObject {
-    let context: AppContext = .shared
-//    let context: AppContext = .mock(withRegistry: .shared)
+public struct MigratableProfile: Sendable {
+    public let id: UUID
 
-    func configure(with uiConfiguring: UILibraryConfiguring) {
-        UILibrary(uiConfiguring)
-            .configure(with: context)
+    public let name: String
+
+    public let lastUpdate: Date?
+
+    public init(id: UUID, name: String, lastUpdate: Date?) {
+        self.id = id
+        self.name = name
+        self.lastUpdate = lastUpdate
     }
 }

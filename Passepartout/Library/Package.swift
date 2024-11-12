@@ -33,6 +33,10 @@ let package = Package(
             targets: ["CommonLibrary"]
         ),
         .library(
+            name: "LegacyV2",
+            targets: ["LegacyV2"]
+        ),
+        .library(
             name: "TunnelLibrary",
             targets: [
                 "CommonLibrary",
@@ -128,7 +132,8 @@ let package = Package(
         .target(
             name: "LegacyV2",
             dependencies: [
-                "CommonUtils",
+                "CommonLibrary",
+                "PassepartoutImplementations",
                 .product(name: "PassepartoutKit", package: "passepartoutkit-source")
             ],
             resources: [
@@ -161,6 +166,13 @@ let package = Package(
         .testTarget(
             name: "CommonLibraryTests",
             dependencies: ["CommonLibrary"]
+        ),
+        .testTarget(
+            name: "LegacyV2Tests",
+            dependencies: ["LegacyV2"],
+            resources: [
+                .copy("Resources")
+            ]
         ),
         .testTarget(
             name: "UILibraryTests",

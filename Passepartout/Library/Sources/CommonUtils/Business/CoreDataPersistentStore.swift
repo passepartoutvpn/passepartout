@@ -35,13 +35,14 @@ public protocol CoreDataPersistentStoreLogger {
 }
 
 public final class CoreDataPersistentStore {
-    private let logger: CoreDataPersistentStoreLogger
+    private let logger: CoreDataPersistentStoreLogger?
 
     private let container: NSPersistentContainer
 
     public convenience init(
-        logger: CoreDataPersistentStoreLogger,
+        logger: CoreDataPersistentStoreLogger? = nil,
         containerName: String,
+        baseURL: URL? = nil,
         model: NSManagedObjectModel,
         cloudKitIdentifier: String?,
         author: String?
@@ -49,10 +50,14 @@ public final class CoreDataPersistentStore {
         let container: NSPersistentContainer
         if let cloudKitIdentifier {
             container = NSPersistentCloudKitContainer(name: containerName, managedObjectModel: model)
-            logger.debug("Set up CloudKit container (\(cloudKitIdentifier)): \(containerName)")
+            logger?.debug("Set up CloudKit container (\(cloudKitIdentifier)): \(containerName)")
         } else {
             container = NSPersistentContainer(name: containerName, managedObjectModel: model)
-            logger.debug("Set up local container: \(containerName)")
+            logger?.debug("Set up local container: \(containerName)")
+        }
+        if let baseURL {
+            let url = baseURL.appending(component: "\(containerName).sqlite")
+            container.persistentStoreDescriptions = [.init(url: url)]
         }
         self.init(
             logger: logger,
@@ -63,7 +68,7 @@ public final class CoreDataPersistentStore {
     }
 
     private init(
-        logger: CoreDataPersistentStoreLogger,
+        logger: CoreDataPersistentStoreLogger?,
         container: NSPersistentContainer,
         cloudKitIdentifier: String?,
         author: String?
@@ -74,7 +79,7 @@ public final class CoreDataPersistentStore {
         guard let desc = container.persistentStoreDescriptions.first else {
             fatalError("Unable to read persistent store description")
         }
-        logger.debug("Container description: \(desc)")
+        logger?.debug("Container description: \(desc)")
 
         // optional container identifier for CloudKit, first in entitlements otherwise
         if let cloudKitIdentifier {
@@ -98,7 +103,7 @@ public final class CoreDataPersistentStore {
         container.viewContext.automaticallyMergesChangesFromParent = true
 
         if let author {
-            logger.debug("Setting transaction author: \(author)")
+            logger?.debug("Setting transaction author: \(author)")
             container.viewContext.transactionAuthor = author
         }
     }
@@ -141,7 +146,7 @@ extension CoreDataPersistentStore {
                     try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: $0, options: nil)
                 }
             } catch {
-                logger.warning("Unable to truncate persistent store: \(error)")
+                logger?.warning("Unable to truncate persistent store: \(error)")
             }
         }
     }
