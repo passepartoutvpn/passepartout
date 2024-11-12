@@ -172,7 +172,50 @@ final class LegacyV2Tests: XCTestCase {
         XCTAssertEqual(cfg.keepAliveInterval, 25.0)
         XCTAssertEqual(cfg.checksEKU, true)
         XCTAssertEqual(cfg.tlsWrap?.strategy, .auth)
-    }}
+    }
+
+    func test_givenStore_whenMigrateVPSWireGuard_thenIsExpected() async throws {
+        let sut = newStore()
+
+        let id = try XCTUnwrap(UUID(uuidString: "069F76BD-1F6B-425C-AD83-62477A8B6558"))
+        let result = try await sut.fetchProfiles(selection: [id])
+        let migrated = result.migrated
+        XCTAssertEqual(migrated.count, 1)
+        XCTAssertTrue(result.failed.isEmpty)
+
+        XCTAssertEqual(migrated.count, 1)
+        let profile = try XCTUnwrap(migrated.first)
+        XCTAssertEqual(profile.id, id)
+        XCTAssertEqual(profile.name, "vps-wg")
+        XCTAssertEqual(profile.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 727398252.46203))
+
+        XCTAssertEqual(profile.modules.count, 2)
+
+        let onDemand = try XCTUnwrap(profile.firstModule(ofType: OnDemandModule.self))
+        XCTAssertFalse(onDemand.isEnabled)
+        XCTAssertEqual(onDemand.policy, .including)
+        XCTAssertTrue(onDemand.withSSIDs.isEmpty)
+        XCTAssertTrue(onDemand.withOtherNetworks.isEmpty)
+
+        let wireGuard = try XCTUnwrap(profile.firstModule(ofType: WireGuardModule.self))
+        let cfg = try XCTUnwrap(wireGuard.configuration)
+        XCTAssertEqual(cfg.interface.privateKey.rawValue, "6L8Cv9zpG8RTDDwvZMhv6OR3kGdd+yATuKnMQWVLT1Q=")
+        XCTAssertEqual(cfg.interface.addresses, [
+            try .init("4.5.6.7", 32)
+        ])
+        XCTAssertEqual(cfg.interface.dns?.servers, [
+            try XCTUnwrap(Address(rawValue: "1.1.1.1"))
+        ])
+        XCTAssertNil(cfg.interface.mtu)
+        XCTAssertEqual(cfg.peers.count, 1)
+        let peer = try XCTUnwrap(cfg.peers.first)
+        XCTAssertEqual(peer.publicKey.rawValue, "JZc2trzk1WZTOUTjag1lcUZ2ePpFQYSpU2d0wqAw6mU=")
+        XCTAssertEqual(peer.endpoint?.rawValue, "8.8.8.8:55555")
+        XCTAssertEqual(peer.allowedIPs, [
+            try .init("0.0.0.0", 0)
+        ])
+    }
+}
 
 private extension LegacyV2Tests {
     func newStore() -> LegacyV2 {
