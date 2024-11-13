@@ -79,7 +79,7 @@ private extension VPNProviderServerView {
                             Button {
                                 isPresented = false
                             } label: {
-                                ThemeImage(.close)
+                                ThemeCloseLabel()
                             }
                         }
                     }
