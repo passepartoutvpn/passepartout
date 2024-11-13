@@ -14,13 +14,6 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "AppUI",
-            targets: [
-                "AppUI",
-                "PassepartoutImplementations"
-            ]
-        ),
-        .library(
             name: "AppUIMain",
             targets: ["AppUIMain"]
         ),
@@ -88,16 +81,10 @@ let package = Package(
             ]
         ),
         .target(
-            name: "AppUI",
-            dependencies: [
-                .target(name: "AppUIMain", condition: .when(platforms: [.iOS, .macOS])),
-                .target(name: "AppUITV", condition: .when(platforms: [.tvOS]))
-            ]
-        ),
-        .target(
             name: "AppUIMain",
             dependencies: [
                 "LegacyV2",
+                "PassepartoutImplementations",
                 "UILibrary"
             ],
             resources: [
@@ -106,7 +93,10 @@ let package = Package(
         ),
         .target(
             name: "AppUITV",
-            dependencies: ["UILibrary"]
+            dependencies: [
+                "PassepartoutImplementations",
+                "UILibrary"
+            ]
         ),
         .target(
             name: "CommonAPI",

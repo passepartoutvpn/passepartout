@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E182C6C2CD61CD800051DB2 /* AppUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0E182C6B2CD61CD800051DB2 /* AppUI */; };
+		0E3E22962CE53510005135DF /* AppUIMain in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, macos, ); productRef = 0E3E22952CE53510005135DF /* AppUIMain */; };
+		0E3E22982CE53510005135DF /* AppUITV in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, ); productRef = 0E3E22972CE53510005135DF /* AppUITV */; };
 		0E3FF4BA2CE3AFBC00BFF640 /* Profiles.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */; };
 		0E3FF4BB2CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B92CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift */; };
 		0E757F132CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */; };
@@ -164,7 +165,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E182C6C2CD61CD800051DB2 /* AppUI in Frameworks */,
+				0E3E22982CE53510005135DF /* AppUITV in Frameworks */,
+				0E3E22962CE53510005135DF /* AppUIMain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +332,8 @@
 			);
 			name = Passepartout;
 			packageProductDependencies = (
-				0E182C6B2CD61CD800051DB2 /* AppUI */,
+				0E3E22952CE53510005135DF /* AppUIMain */,
+				0E3E22972CE53510005135DF /* AppUITV */,
 			);
 			productName = PassepartoutKit;
 			productReference = 0E06D18F2B87629100176E1D /* Passepartout.app */;
@@ -1104,9 +1107,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0E182C6B2CD61CD800051DB2 /* AppUI */ = {
+		0E3E22952CE53510005135DF /* AppUIMain */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AppUI;
+			productName = AppUIMain;
+		};
+		0E3E22972CE53510005135DF /* AppUITV */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppUITV;
 		};
 		0E6C0A022BF4047100450362 /* AppLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
