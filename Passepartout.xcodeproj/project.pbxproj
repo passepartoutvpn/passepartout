@@ -33,6 +33,7 @@
 		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; };
+		0EF5FE4D2CE53B1C00EC2CD4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */,
+				0EF5FE4D2CE53B1C00EC2CD4 /* PassepartoutImplementations in Frameworks */,
 				0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +395,7 @@
 			name = PassepartoutTunnel;
 			packageProductDependencies = (
 				0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */,
+				0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */,
 			);
 			productName = Tunnel;
 			productReference = 0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */;
@@ -1133,6 +1136,10 @@
 		0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
+		};
+		0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PassepartoutImplementations;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
