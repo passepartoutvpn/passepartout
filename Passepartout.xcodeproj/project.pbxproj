@@ -34,6 +34,7 @@
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; };
 		0EF5FE4D2CE53B1C00EC2CD4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */; };
+		0EF5FE4F2CE53BCE00EC2CD4 /* LegacyV2 in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E3E22982CE53510005135DF /* AppUITV in Frameworks */,
+				0EF5FE4F2CE53BCE00EC2CD4 /* LegacyV2 in Frameworks */,
 				0E60512C2CE5393C00F763D4 /* PassepartoutImplementations in Frameworks */,
 				0E3E22962CE53510005135DF /* AppUIMain in Frameworks */,
 			);
@@ -339,6 +341,7 @@
 				0E3E22952CE53510005135DF /* AppUIMain */,
 				0E3E22972CE53510005135DF /* AppUITV */,
 				0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */,
+				0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */,
 			);
 			productName = PassepartoutKit;
 			productReference = 0E06D18F2B87629100176E1D /* Passepartout.app */;
@@ -1140,6 +1143,10 @@
 		0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PassepartoutImplementations;
+		};
+		0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LegacyV2;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
