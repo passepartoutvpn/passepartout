@@ -29,6 +29,7 @@ import AppDataProviders
 import CommonLibrary
 import CommonUtils
 import Foundation
+import LegacyV2
 import PassepartoutKit
 import UILibrary
 
@@ -93,12 +94,22 @@ extension AppContext {
             return ProviderManager(repository: repository)
         }()
 
+        // MARK: LegacyManager
+
+        let legacyStrategy = LegacyV2Strategy(
+            coreDataLogger: .default,
+            profilesContainerName: Constants.shared.containers.legacyV2,
+            cloudKitIdentifier: BundleConfiguration.mainString(for: .legacyV2CloudKitId)
+        )
+        let legacyManager = LegacyManager(strategy: legacyStrategy)
+
         return AppContext(
             iapManager: .shared,
-            registry: .shared,
+            legacyManager: legacyManager,
             profileManager: profileManager,
-            tunnel: tunnel,
-            providerManager: providerManager
+            providerManager: providerManager,
+            registry: .shared,
+            tunnel: tunnel
         )
     }()
 }

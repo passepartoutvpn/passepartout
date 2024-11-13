@@ -33,13 +33,15 @@ import PassepartoutKit
 public final class AppContext: ObservableObject {
     public let iapManager: IAPManager
 
-    public let registry: Registry
+    public let legacyManager: LegacyManager
 
     public let profileManager: ProfileManager
 
-    public let tunnel: ExtendedTunnel
-
     public let providerManager: ProviderManager
+
+    public let registry: Registry
+
+    public let tunnel: ExtendedTunnel
 
     private var launchTask: Task<Void, Error>?
 
@@ -49,16 +51,18 @@ public final class AppContext: ObservableObject {
 
     public init(
         iapManager: IAPManager,
-        registry: Registry,
+        legacyManager: LegacyManager,
         profileManager: ProfileManager,
-        tunnel: ExtendedTunnel,
-        providerManager: ProviderManager
+        providerManager: ProviderManager,
+        registry: Registry,
+        tunnel: ExtendedTunnel
     ) {
         self.iapManager = iapManager
-        self.registry = registry
+        self.legacyManager = legacyManager
         self.profileManager = profileManager
-        self.tunnel = tunnel
         self.providerManager = providerManager
+        self.registry = registry
+        self.tunnel = tunnel
         subscriptions = []
     }
 }
