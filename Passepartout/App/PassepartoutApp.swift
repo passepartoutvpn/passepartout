@@ -64,6 +64,12 @@ extension PassepartoutApp {
         appDelegate.context
     }
 
+#if os(macOS)
+    var settings: MacSettingsModel {
+        appDelegate.settings
+    }
+#endif
+
     func contentView() -> some View {
         AppCoordinator(
             profileManager: context.profileManager,

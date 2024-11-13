@@ -26,16 +26,23 @@
 #if os(macOS)
 
 import AppKit
+import CommonLibrary
 import PassepartoutKit
 import ServiceManagement
 
 @MainActor
-final class MacSettingsModel: ObservableObject {
+public final class MacSettingsModel: ObservableObject {
+    private let defaults: UserDefaults
+
     private let appWindow: AppWindow
 
     private let appService: SMAppService
 
-    var isVisible: Bool {
+    public var isStartedFromLoginItem: Bool {
+        NSApp.isHidden
+    }
+
+    public var isVisible: Bool {
         get {
             appWindow.isVisible
         }
@@ -45,7 +52,7 @@ final class MacSettingsModel: ObservableObject {
         }
     }
 
-    var launchesOnLogin: Bool {
+    public var launchesOnLogin: Bool {
         get {
             appService.status == .enabled
         }
@@ -63,7 +70,18 @@ final class MacSettingsModel: ObservableObject {
         }
     }
 
-    init(appWindow: AppWindow, loginItemId: String) {
+    public var keepsInMenu: Bool {
+        get {
+            defaults.bool(forKey: AppPreference.keepsInMenu.key)
+        }
+        set {
+            defaults.set(newValue, forKey: AppPreference.keepsInMenu.key)
+            objectWillChange.send()
+        }
+    }
+
+    public init(defaults: UserDefaults, appWindow: AppWindow, loginItemId: String) {
+        self.defaults = defaults
         self.appWindow = appWindow
         appService = SMAppService.loginItem(identifier: loginItemId)
     }

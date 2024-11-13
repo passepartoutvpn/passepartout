@@ -35,33 +35,18 @@ extension AppDelegate: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         configure(with: AppUIMain())
         context.onApplicationActive()
-        if isStartedFromLoginItem {
+        if settings.isStartedFromLoginItem {
             AppWindow.shared.isVisible = false
         }
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         AppWindow.shared.isVisible = false
-        return !keepsInMenu
+        return !settings.keepsInMenu
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
         ImporterPipe.shared.send(urls)
-    }
-}
-
-private extension AppDelegate {
-    var keepsInMenu: Bool {
-        get {
-            UserDefaults.standard.bool(forKey: AppPreference.keepsInMenu.key)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: AppPreference.keepsInMenu.key)
-        }
-    }
-
-    var isStartedFromLoginItem: Bool {
-        NSApp.isHidden
     }
 }
 
@@ -82,6 +67,7 @@ extension PassepartoutApp {
             SettingsView(profileManager: context.profileManager)
                 .frame(minWidth: 300, minHeight: 300)
                 .withEnvironment(from: context, theme: theme)
+                .environmentObject(settings)
         }
         MenuBarExtra {
             AppMenu(
@@ -89,6 +75,7 @@ extension PassepartoutApp {
                 tunnel: context.tunnel
             )
             .withEnvironment(from: context, theme: theme)
+            .environmentObject(settings)
         } label: {
             AppMenuImage(tunnel: context.tunnel)
                 .environmentObject(theme)

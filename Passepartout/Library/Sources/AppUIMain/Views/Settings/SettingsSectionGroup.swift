@@ -36,14 +36,8 @@ struct SettingsSectionGroup: View {
     private var locksInBackground = false
 #endif
 #if os(macOS)
-    @AppStorage(AppPreference.keepsInMenu.key)
-    private var keepsInMenu = true
-
-    @StateObject
-    private var macModel = MacSettingsModel(
-        appWindow: .shared,
-        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
-    )
+    @EnvironmentObject
+    private var settings: MacSettingsModel
 #endif
 
     @State
@@ -73,12 +67,12 @@ private extension SettingsSectionGroup {
 #endif
 #if os(macOS)
     var launchesOnLoginToggle: some View {
-        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $macModel.launchesOnLogin)
+        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $settings.launchesOnLogin)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)
     }
 
     var keepsInMenuToggle: some View {
-        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $keepsInMenu)
+        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $settings.keepsInMenu)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.KeepsInMenu.footer)
     }
 #endif

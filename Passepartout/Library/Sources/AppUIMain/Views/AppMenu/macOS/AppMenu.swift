@@ -32,20 +32,14 @@ import SwiftUI
 
 public struct AppMenu: View {
 
-    @AppStorage(AppPreference.keepsInMenu.key)
-    private var keepsInMenu = true
+    @EnvironmentObject
+    private var settings: MacSettingsModel
 
     @ObservedObject
     private var profileManager: ProfileManager
 
     @ObservedObject
     private var tunnel: ExtendedTunnel
-
-    @StateObject
-    private var macModel = MacSettingsModel(
-        appWindow: .shared,
-        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
-    )
 
     public init(profileManager: ProfileManager, tunnel: ExtendedTunnel) {
         self.profileManager = profileManager
@@ -73,16 +67,16 @@ private extension AppMenu {
 
     var showToggle: some View {
         Button(Strings.Global.show) {
-            macModel.isVisible = true
+            settings.isVisible = true
         }
     }
 
     var loginToggle: some View {
-        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $macModel.launchesOnLogin)
+        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $settings.launchesOnLogin)
     }
 
     var keepToggle: some View {
-        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $keepsInMenu)
+        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $settings.keepsInMenu)
     }
 
     var profilesList: some View {

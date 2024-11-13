@@ -23,6 +23,9 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !os(tvOS)
+import AppUIMain
+#endif
 import CommonLibrary
 import PassepartoutKit
 import SwiftUI
@@ -32,6 +35,14 @@ import UILibrary
 final class AppDelegate: NSObject {
     let context: AppContext = .shared
 //    let context: AppContext = .mock(withRegistry: .shared)
+
+#if os(macOS)
+    let settings = MacSettingsModel(
+        defaults: .standard,
+        appWindow: .shared,
+        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
+    )
+#endif
 
     func configure(with uiConfiguring: UILibraryConfiguring) {
         UILibrary(uiConfiguring)
