@@ -43,17 +43,25 @@ struct NameSection: View {
     }
 }
 
+// MARK: - Previews
+
 #Preview {
+    struct ContentView: View {
 
-    @State
-    var name = ""
+        @State
+        private var name = ""
 
-    return Form {
-        NameSection(
-            name: $name,
-            placeholder: "My name"
-        )
+        var body: some View {
+            Form {
+                NameSection(
+                    name: $name,
+                    placeholder: "My name"
+                )
+            }
+            .themeForm()
+        }
     }
-    .themeForm()
-    .withMockEnvironment()
+
+    return ContentView()
+        .withMockEnvironment()
 }

@@ -31,7 +31,7 @@ import PassepartoutKit
 public actor FallbackReceiptReader: AppReceiptReader {
     private let reader: InAppReceiptReader?
 
-    private let localReader: (URL) -> InAppReceiptReader?
+    private nonisolated let localReader: (URL) -> InAppReceiptReader?
 
     private var pendingTask: Task<InAppReceipt?, Never>?
 

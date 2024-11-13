@@ -46,17 +46,17 @@ public actor CoreDataRepository<CD, T>: NSObject,
 
     private let entityName: String
 
-    private let context: NSManagedObjectContext
+    private nonisolated let context: NSManagedObjectContext
 
     private let observingResults: Bool
 
-    private let fromMapper: (CD) throws -> T?
+    private nonisolated let fromMapper: (CD) throws -> T?
 
-    private let toMapper: (T, NSManagedObjectContext) throws -> CD
+    private nonisolated let toMapper: (T, NSManagedObjectContext) throws -> CD
 
-    private let onResultError: ((Error) -> CoreDataResultAction)?
+    private nonisolated let onResultError: ((Error) -> CoreDataResultAction)?
 
-    private let entitiesSubject: CurrentValueSubject<EntitiesResult<T>, Never>
+    private nonisolated let entitiesSubject: CurrentValueSubject<EntitiesResult<T>, Never>
 
     // cannot easily use CD as generic
     private var resultsController: NSFetchedResultsController<CD>

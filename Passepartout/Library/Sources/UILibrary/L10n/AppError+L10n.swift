@@ -55,7 +55,7 @@ extension AppError: LocalizedError {
 
 // MARK: - App side
 
-extension PassepartoutError: LocalizedError {
+extension PassepartoutError: @retroactive LocalizedError {
     public var errorDescription: String? {
         switch code {
         case .App.ineligibleProfile:

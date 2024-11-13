@@ -144,7 +144,7 @@ extension OnDemandModule.Policy: LocalizableEntity {
     }
 }
 
-extension ProviderID: CustomDebugStringConvertible {
+extension ProviderID: @retroactive CustomDebugStringConvertible {
     public var debugDescription: String {
         rawValue
     }
