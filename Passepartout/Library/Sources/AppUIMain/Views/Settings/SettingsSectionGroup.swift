@@ -40,7 +40,10 @@ struct SettingsSectionGroup: View {
     private var keepsInMenu = true
 
     @StateObject
-    private var macModel = MacSettingsModel()
+    private var macModel = MacSettingsModel(
+        appWindow: .shared,
+        loginItemId: BundleConfiguration.mainString(for: .loginItemId)
+    )
 #endif
 
     @State

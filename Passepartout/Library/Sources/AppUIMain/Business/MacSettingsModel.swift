@@ -31,14 +31,16 @@ import ServiceManagement
 
 @MainActor
 final class MacSettingsModel: ObservableObject {
+    private let appWindow: AppWindow
+
     private let appService: SMAppService
 
     var isVisible: Bool {
         get {
-            AppWindow.shared.isVisible
+            appWindow.isVisible
         }
         set {
-            AppWindow.shared.isVisible = newValue
+            appWindow.isVisible = newValue
             objectWillChange.send()
         }
     }
@@ -61,8 +63,8 @@ final class MacSettingsModel: ObservableObject {
         }
     }
 
-    init() {
-        let loginItemId = BundleConfiguration.mainString(for: .loginItemId)
+    init(appWindow: AppWindow, loginItemId: String) {
+        self.appWindow = appWindow
         appService = SMAppService.loginItem(identifier: loginItemId)
     }
 }
