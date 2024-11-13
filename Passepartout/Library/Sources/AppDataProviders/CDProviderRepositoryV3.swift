@@ -40,15 +40,15 @@ extension AppData {
 }
 
 actor CDProviderRepositoryV3: NSObject, ProviderRepository {
-    private let context: NSManagedObjectContext
+    private nonisolated let context: NSManagedObjectContext
 
-    private let backgroundContext: NSManagedObjectContext
+    private nonisolated let backgroundContext: NSManagedObjectContext
 
-    private let providersSubject: CurrentValueSubject<[ProviderMetadata], Never>
+    private nonisolated let providersSubject: CurrentValueSubject<[ProviderMetadata], Never>
 
-    private let lastUpdateSubject: CurrentValueSubject<[ProviderID: Date], Never>
+    private nonisolated let lastUpdateSubject: CurrentValueSubject<[ProviderID: Date], Never>
 
-    private let providersController: NSFetchedResultsController<CDProviderV3>
+    private nonisolated let providersController: NSFetchedResultsController<CDProviderV3>
 
     init(context: NSManagedObjectContext, backgroundContext: NSManagedObjectContext) {
         self.context = context

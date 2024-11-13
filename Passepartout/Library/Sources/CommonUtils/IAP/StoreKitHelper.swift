@@ -39,7 +39,7 @@ public final class StoreKitHelper<ProductType>: InAppHelper where ProductType: R
 
     private var activeTransactions: Set<Transaction>
 
-    private let didUpdateSubject: PassthroughSubject<Void, Never>
+    private nonisolated let didUpdateSubject: PassthroughSubject<Void, Never>
 
     private var observer: Task<Void, Never>?
 

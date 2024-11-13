@@ -34,7 +34,7 @@ public actor MockAppProductHelper: AppProductHelper {
 
     public nonisolated let receiptReader: MockAppReceiptReader
 
-    private let didUpdateSubject: PassthroughSubject<Void, Never>
+    private nonisolated let didUpdateSubject: PassthroughSubject<Void, Never>
 
     // set .max to skip entitled products
     public init(build: Int = .max) {
