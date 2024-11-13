@@ -209,18 +209,24 @@ private extension OpenVPNCredentialsView {
 }
 
 #Preview {
+    struct ContentView: View {
 
-    @State
-    var credentials: OpenVPN.Credentials?
+        @State
+        private var credentials: OpenVPN.Credentials?
 
-    @State
-    var isInteractive = true
+        @State
+        private var isInteractive = true
 
-    return NavigationStack {
-        OpenVPNCredentialsView(
-            isInteractive: $isInteractive,
-            credentials: $credentials
-        )
-        .withMockEnvironment()
+        var body: some View {
+            NavigationStack {
+                OpenVPNCredentialsView(
+                    isInteractive: $isInteractive,
+                    credentials: $credentials
+                )
+            }
+        }
     }
+
+    return ContentView()
+        .withMockEnvironment()
 }

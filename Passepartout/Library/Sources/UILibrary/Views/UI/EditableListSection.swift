@@ -238,26 +238,33 @@ private extension EditableListSection {
 }
 
 #Preview {
-    @State
-    var originalItems = ["One", "Two", "Three"]
+    struct ContentView: View {
 
-    return Form {
-        EditableListSection(
-            "Title",
-            addTitle: "Add item",
-            originalItems: $originalItems
-        ) {
-            if $0 {
-                Text($1.wrappedValue)
-            } else {
-                TextField("", text: $1)
+        @State
+        private var originalItems = ["One", "Two", "Three"]
+
+        var body: some View {
+            Form {
+                EditableListSection(
+                    "Title",
+                    addTitle: "Add item",
+                    originalItems: $originalItems
+                ) {
+                    if $0 {
+                        Text($1.wrappedValue)
+                    } else {
+                        TextField("", text: $1)
+                    }
+                } removeLabel: { action in
+                    Button("Remove", action: action)
+                } editLabel: {
+                    Image(systemName: "arrow.up.arrow.down")
+                }
             }
-        } removeLabel: { action in
-            Button("Remove", action: action)
-        } editLabel: {
-            Image(systemName: "arrow.up.arrow.down")
         }
     }
+
+    return ContentView()
 }
 
 #endif
