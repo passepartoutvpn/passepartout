@@ -1,13 +1,4 @@
-* Erase shared profiles from iCloud correctly (#827)
-* Improve startup time (#822)
-* Improve footers in macOS form sections (#814)
-* Persist "Only favorites" toggle (#813)
-* Implement TV profile sharing (#808)
-* Reword "Connect" to "Select" in server selector
-* Use profile name as interactive view title
-* Submit on OpenVPN fields (#805)
-* Late dismissal after changing active provider server (#804)
-* Create basic UI for TV app (#798)
-* Allow interactive credentials with providers (#796)
-* Fix issues with iOS 16 (#792)
-* Render country flags with Emojis (#787)
+* Import initial remote profiles (#859)
+* Expand selected server country on iOS (#853)
+* Fix double reload of selected provider server (#851)
+* Wait for initial profiles (#847)
