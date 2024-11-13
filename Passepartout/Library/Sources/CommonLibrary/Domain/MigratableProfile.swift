@@ -25,7 +25,7 @@
 
 import Foundation
 
-public struct MigratableProfile: Sendable {
+public struct MigratableProfile: Identifiable, Sendable {
     public let id: UUID
 
     public let name: String
