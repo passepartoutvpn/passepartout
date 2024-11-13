@@ -30,23 +30,13 @@ import SwiftUI
 
 extension AboutRouterView {
     var body: some View {
-        NavigationStack(path: $path) {
-            AboutView(
-                profileManager: profileManager,
-                navigationRoute: $navigationRoute
-            )
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        ThemeImage(.close)
-                    }
-                }
-            }
-            .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
-            .themeNavigationDetail()
-        }
+        AboutView(
+            profileManager: profileManager,
+            navigationRoute: $navigationRoute
+        )
+        .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+        .themeNavigationDetail()
+        .themeNavigationStack(closable: true, path: $path)
     }
 }
 

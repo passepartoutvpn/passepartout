@@ -55,7 +55,7 @@ struct ProfileSplitView: View, Routable {
                 flow: flow
             )
         } detail: {
-            NavigationStack(path: $detailPath) {
+            Group {
                 switch selectedModuleId {
                 case ModuleListView.generalModuleId:
                     detailView(for: .general)
@@ -64,6 +64,7 @@ struct ProfileSplitView: View, Routable {
                     detailView(for: .module(id: selectedModuleId))
                 }
             }
+            .themeNavigationStack(path: $detailPath)
             .toolbar(content: toolbarContent)
             .environment(\.navigationPath, $detailPath)
         }
