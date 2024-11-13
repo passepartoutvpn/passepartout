@@ -352,7 +352,7 @@ extension ProfileManager {
 
         let newRepository = remoteRepositoryBlock(isRemoteImportingEnabled)
         let initialProfiles = try await newRepository.fetchProfiles()
-        reloadRemoteProfiles(initialProfiles, importing: false)
+        reloadRemoteProfiles(initialProfiles)
         remoteRepository = newRepository
 
         remoteRepository?
@@ -360,7 +360,7 @@ extension ProfileManager {
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.reloadRemoteProfiles($0, importing: true)
+                self?.reloadRemoteProfiles($0)
             }
             .store(in: &remoteSubscriptions)
     }
@@ -393,17 +393,13 @@ private extension ProfileManager {
         }
     }
 
-    func reloadRemoteProfiles(_ result: [Profile], importing: Bool) {
+    func reloadRemoteProfiles(_ result: [Profile]) {
         pp_log(.App.profiles, .info, "Reload remote profiles: \(result.map(\.id))")
         allRemoteProfiles = result.reduce(into: [:]) {
             $0[$1.id] = $1
         }
         if waitingObservers.contains(.remote) {
             waitingObservers.remove(.remote)
-        }
-
-        guard importing else {
-            return
         }
 
         Task.detached { [weak self] in
