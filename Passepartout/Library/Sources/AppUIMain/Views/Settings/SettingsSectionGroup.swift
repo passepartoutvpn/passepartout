@@ -34,8 +34,7 @@ struct SettingsSectionGroup: View {
 #if os(iOS)
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
-#endif
-#if os(macOS)
+#else
     @EnvironmentObject
     private var settings: MacSettingsModel
 #endif
@@ -49,8 +48,7 @@ struct SettingsSectionGroup: View {
     var body: some View {
 #if os(iOS)
         lockInBackgroundToggle
-#endif
-#if os(macOS)
+#else
         launchesOnLoginToggle
         keepsInMenuToggle
 #endif
@@ -64,8 +62,7 @@ private extension SettingsSectionGroup {
         Toggle(Strings.Views.Settings.locksInBackground, isOn: $locksInBackground)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.LocksInBackground.footer)
     }
-#endif
-#if os(macOS)
+#else
     var launchesOnLoginToggle: some View {
         Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $settings.launchesOnLogin)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)
