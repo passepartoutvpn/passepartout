@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E182C6C2CD61CD800051DB2 /* AppUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0E182C6B2CD61CD800051DB2 /* AppUI */; };
+		0E3E22962CE53510005135DF /* AppUIMain in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, macos, ); productRef = 0E3E22952CE53510005135DF /* AppUIMain */; };
+		0E3E22982CE53510005135DF /* AppUITV in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, ); productRef = 0E3E22972CE53510005135DF /* AppUITV */; };
 		0E3FF4BA2CE3AFBC00BFF640 /* Profiles.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B72CE3AFBC00BFF640 /* Profiles.sqlite */; };
 		0E3FF4BB2CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3FF4B92CE3AFBC00BFF640 /* LegacyV2CoreDataTests.swift */; };
+		0E60512C2CE5393C00F763D4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */; };
 		0E757F132CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F122CD0CFFC006E13E1 /* PassepartoutLoginItemApp.swift */; };
 		0E757F202CD0D22B006E13E1 /* PassepartoutLoginItem.app in Embed Login Item */ = {isa = PBXBuildFile; fileRef = 0E757F102CD0CFFC006E13E1 /* PassepartoutLoginItem.app */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0E757F232CD0D2BD006E13E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E757F212CD0D2B7006E13E1 /* AppDelegate.swift */; };
@@ -31,6 +33,8 @@
 		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; };
+		0EF5FE4D2CE53B1C00EC2CD4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */; };
+		0EF5FE4F2CE53BCE00EC2CD4 /* LegacyV2 in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EBE80DC2BF55C0E00E36A20 /* TunnelLibrary in Frameworks */,
+				0EF5FE4D2CE53B1C00EC2CD4 /* PassepartoutImplementations in Frameworks */,
 				0EC332CA2B8A1808000B9C2F /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,7 +169,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E182C6C2CD61CD800051DB2 /* AppUI in Frameworks */,
+				0E3E22982CE53510005135DF /* AppUITV in Frameworks */,
+				0EF5FE4F2CE53BCE00EC2CD4 /* LegacyV2 in Frameworks */,
+				0E60512C2CE5393C00F763D4 /* PassepartoutImplementations in Frameworks */,
+				0E3E22962CE53510005135DF /* AppUIMain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +338,10 @@
 			);
 			name = Passepartout;
 			packageProductDependencies = (
-				0E182C6B2CD61CD800051DB2 /* AppUI */,
+				0E3E22952CE53510005135DF /* AppUIMain */,
+				0E3E22972CE53510005135DF /* AppUITV */,
+				0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */,
+				0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */,
 			);
 			productName = PassepartoutKit;
 			productReference = 0E06D18F2B87629100176E1D /* Passepartout.app */;
@@ -387,6 +398,7 @@
 			name = PassepartoutTunnel;
 			packageProductDependencies = (
 				0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */,
+				0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */,
 			);
 			productName = Tunnel;
 			productReference = 0EC332C82B8A1808000B9C2F /* PassepartoutTunnel.appex */;
@@ -417,7 +429,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					0E06D18E2B87629100176E1D = {
 						CreatedOnToolsVersion = 15.2;
@@ -786,7 +798,6 @@
 		0E06D19F2B87629200176E1D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = TV;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -826,7 +837,6 @@
 		0E06D1A02B87629200176E1D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=appletvos*]" = TV;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1104,9 +1114,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0E182C6B2CD61CD800051DB2 /* AppUI */ = {
+		0E3E22952CE53510005135DF /* AppUIMain */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AppUI;
+			productName = AppUIMain;
+		};
+		0E3E22972CE53510005135DF /* AppUITV */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppUITV;
+		};
+		0E60512B2CE5393C00F763D4 /* PassepartoutImplementations */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PassepartoutImplementations;
 		};
 		0E6C0A022BF4047100450362 /* AppLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1119,6 +1137,14 @@
 		0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
+		};
+		0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PassepartoutImplementations;
+		};
+		0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LegacyV2;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
