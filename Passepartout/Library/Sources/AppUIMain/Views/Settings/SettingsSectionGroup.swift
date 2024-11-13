@@ -29,17 +29,15 @@ import PassepartoutKit
 import SwiftUI
 
 struct SettingsSectionGroup: View {
-
-    @AppStorage(AppPreference.keepsInMenu.key)
-    private var keepsInMenu = true
-
-    @AppStorage(AppPreference.locksInBackground.key)
-    private var locksInBackground = false
-
     let profileManager: ProfileManager
 
-    @StateObject
-    private var model = AppMenu.Model()
+#if os(iOS)
+    @AppStorage(AppPreference.locksInBackground.key)
+    private var locksInBackground = false
+#else
+    @EnvironmentObject
+    private var settings: MacSettingsModel
+#endif
 
     @State
     private var isConfirmingEraseiCloud = false
@@ -50,8 +48,7 @@ struct SettingsSectionGroup: View {
     var body: some View {
 #if os(iOS)
         lockInBackgroundToggle
-#endif
-#if os(macOS)
+#else
         launchesOnLoginToggle
         keepsInMenuToggle
 #endif
@@ -60,21 +57,22 @@ struct SettingsSectionGroup: View {
 }
 
 private extension SettingsSectionGroup {
-    var launchesOnLoginToggle: some View {
-        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $model.launchesOnLogin)
-            .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)
-    }
-
-    var keepsInMenuToggle: some View {
-        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $keepsInMenu)
-            .themeSectionWithSingleRow(footer: Strings.Views.Settings.KeepsInMenu.footer)
-    }
-
+#if os(iOS)
     var lockInBackgroundToggle: some View {
         Toggle(Strings.Views.Settings.locksInBackground, isOn: $locksInBackground)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.LocksInBackground.footer)
     }
+#else
+    var launchesOnLoginToggle: some View {
+        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $settings.launchesOnLogin)
+            .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)
+    }
 
+    var keepsInMenuToggle: some View {
+        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $settings.keepsInMenu)
+            .themeSectionWithSingleRow(footer: Strings.Views.Settings.KeepsInMenu.footer)
+    }
+#endif
     var eraseCloudKitButton: some View {
         Button(Strings.Views.Settings.eraseIcloud, role: .destructive) {
             isConfirmingEraseiCloud = true
