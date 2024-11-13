@@ -70,12 +70,12 @@ private extension AppMenu {
 
     var showToggle: some View {
         Button(Strings.Global.show) {
-            model.isVisible = true
+            macModel.isVisible = true
         }
     }
 
     var loginToggle: some View {
-        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $model.launchesOnLogin)
+        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $macModel.launchesOnLogin)
     }
 
     var keepToggle: some View {
