@@ -42,7 +42,7 @@ public struct AppMenu: View {
     private var tunnel: ExtendedTunnel
 
     @StateObject
-    private var model = Model()
+    private var model = MacSettingsModel()
 
     public init(profileManager: ProfileManager, tunnel: ExtendedTunnel) {
         self.profileManager = profileManager

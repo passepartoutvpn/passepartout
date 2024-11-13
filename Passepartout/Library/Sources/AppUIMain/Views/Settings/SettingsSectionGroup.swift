@@ -40,7 +40,7 @@ struct SettingsSectionGroup: View {
     private var keepsInMenu = true
 
     @StateObject
-    private var menuModel = AppMenu.Model()
+    private var macModel = MacSettingsModel()
 #endif
 
     @State
@@ -70,7 +70,7 @@ private extension SettingsSectionGroup {
 #endif
 #if os(macOS)
     var launchesOnLoginToggle: some View {
-        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $menuModel.launchesOnLogin)
+        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $macModel.launchesOnLogin)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)
     }
 
