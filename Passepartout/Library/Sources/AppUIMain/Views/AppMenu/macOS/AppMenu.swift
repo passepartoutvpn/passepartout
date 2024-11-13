@@ -32,6 +32,9 @@ import SwiftUI
 
 public struct AppMenu: View {
 
+    @AppStorage(AppPreference.keepsInMenu.key)
+    private var keepsInMenu = true
+
     @ObservedObject
     private var profileManager: ProfileManager
 
@@ -51,6 +54,7 @@ public struct AppMenu: View {
         Divider()
         showToggle
         loginToggle
+        keepToggle
         Divider()
         profilesList
         Divider()
@@ -71,7 +75,11 @@ private extension AppMenu {
     }
 
     var loginToggle: some View {
-        Toggle(Strings.AppMenu.Items.launchOnLogin, isOn: $model.launchesOnLogin)
+        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $model.launchesOnLogin)
+    }
+
+    var keepToggle: some View {
+        Toggle(Strings.Views.Settings.keepsInMenu, isOn: $keepsInMenu)
     }
 
     var profilesList: some View {

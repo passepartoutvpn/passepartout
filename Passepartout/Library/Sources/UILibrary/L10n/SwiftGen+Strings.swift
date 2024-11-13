@@ -32,8 +32,6 @@ public enum Strings {
   }
   public enum AppMenu {
     public enum Items {
-      /// Launch on Login
-      public static let launchOnLogin = Strings.tr("Localizable", "app_menu.items.launch_on_login", fallback: "Launch on Login")
       /// Quit %@
       public static func quit(_ p1: Any) -> String {
         return Strings.tr("Localizable", "app_menu.items.quit", String(describing: p1), fallback: "Quit %@")
@@ -772,6 +770,8 @@ public enum Strings {
       public static let eraseIcloud = Strings.tr("Localizable", "views.settings.erase_icloud", fallback: "Erase iCloud store")
       /// Keep in menu bar
       public static let keepsInMenu = Strings.tr("Localizable", "views.settings.keeps_in_menu", fallback: "Keep in menu bar")
+      /// Launch on login
+      public static let launchesOnLogin = Strings.tr("Localizable", "views.settings.launches_on_login", fallback: "Launch on login")
       /// Lock in background
       public static let locksInBackground = Strings.tr("Localizable", "views.settings.locks_in_background", fallback: "Lock in background")
       public enum EraseIcloud {
@@ -781,6 +781,10 @@ public enum Strings {
       public enum KeepsInMenu {
         /// Enable this to keep the app in the menu bar after closing it.
         public static let footer = Strings.tr("Localizable", "views.settings.keeps_in_menu.footer", fallback: "Enable this to keep the app in the menu bar after closing it.")
+      }
+      public enum LaunchesOnLogin {
+        /// Open the app in background after login.
+        public static let footer = Strings.tr("Localizable", "views.settings.launches_on_login.footer", fallback: "Open the app in background after login.")
       }
       public enum LocksInBackground {
         /// Lock the app with FaceID when sent to the background.

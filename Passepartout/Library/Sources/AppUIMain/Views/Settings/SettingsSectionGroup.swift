@@ -31,12 +31,15 @@ import SwiftUI
 struct SettingsSectionGroup: View {
 
     @AppStorage(AppPreference.keepsInMenu.key)
-    private var keepsInMenu = false
+    private var keepsInMenu = true
 
     @AppStorage(AppPreference.locksInBackground.key)
     private var locksInBackground = false
 
     let profileManager: ProfileManager
+
+    @StateObject
+    private var model = AppMenu.Model()
 
     @State
     private var isConfirmingEraseiCloud = false
@@ -49,6 +52,7 @@ struct SettingsSectionGroup: View {
         lockInBackgroundToggle
 #endif
 #if os(macOS)
+        launchesOnLoginToggle
         keepsInMenuToggle
 #endif
         eraseCloudKitButton
@@ -56,6 +60,11 @@ struct SettingsSectionGroup: View {
 }
 
 private extension SettingsSectionGroup {
+    var launchesOnLoginToggle: some View {
+        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $model.launchesOnLogin)
+            .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)
+    }
+
     var keepsInMenuToggle: some View {
         Toggle(Strings.Views.Settings.keepsInMenu, isOn: $keepsInMenu)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.KeepsInMenu.footer)
