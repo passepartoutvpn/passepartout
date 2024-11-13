@@ -36,17 +36,16 @@ extension AboutRouterView {
                 navigationRoute: $navigationRoute
             )
         } detail: {
-            NavigationStack(path: $path) {
-                pushDestination(for: navigationRoute)
-                    .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
-            }
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button(Strings.Global.ok) {
-                        dismiss()
+            pushDestination(for: navigationRoute)
+                .navigationDestination(for: NavigationRoute.self, destination: pushDestination)
+                .themeNavigationStack(closable: false, path: $path)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button(Strings.Global.ok) {
+                            dismiss()
+                        }
                     }
                 }
-            }
         }
         .onLoad {
             navigationRoute = .links

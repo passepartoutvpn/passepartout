@@ -20,7 +20,7 @@ concurrency:
 jobs:
   run_tests:
     name: Run tests
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 15
     steps:
       - uses: passepartoutvpn/action-prepare-xcode-build@master
@@ -30,7 +30,7 @@ jobs:
           bundle exec fastlane test
   build_upload:
     name: Upload to ASC
-    runs-on: macos-14
+    runs-on: macos-15
     needs: run_tests
     strategy:
       fail-fast: true

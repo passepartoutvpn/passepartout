@@ -44,7 +44,7 @@ public struct SettingsView: View {
         .navigationTitle(Strings.Global.settings)
 #if os(iOS)
         .themeNavigationDetail()
-        .themeNavigationStack(if: true, closable: true, path: $path)
+        .themeNavigationStack(closable: true, path: $path)
 #endif
     }
 }

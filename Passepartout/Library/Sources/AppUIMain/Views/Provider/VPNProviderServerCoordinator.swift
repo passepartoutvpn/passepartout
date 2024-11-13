@@ -44,25 +44,15 @@ struct VPNProviderServerCoordinator<Configuration>: View where Configuration: Pr
     let onSelect: (VPNEntity<Configuration>) async throws -> Void
 
     var body: some View {
-        NavigationStack {
-            VPNProviderServerView(
-                moduleId: moduleId,
-                providerId: providerId,
-                configurationType: Configuration.self,
-                selectedEntity: selectedEntity,
-                filtersWithSelection: false,
-                onSelect: onSelect
-            )
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        ThemeCloseLabel()
-                    }
-                }
-            }
-        }
+        VPNProviderServerView(
+            moduleId: moduleId,
+            providerId: providerId,
+            configurationType: Configuration.self,
+            selectedEntity: selectedEntity,
+            filtersWithSelection: false,
+            onSelect: onSelect
+        )
+        .themeNavigationStack(closable: true)
     }
 }
 
