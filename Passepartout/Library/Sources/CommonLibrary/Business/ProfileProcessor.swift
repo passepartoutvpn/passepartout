@@ -26,16 +26,16 @@
 import Foundation
 import PassepartoutKit
 
-public final class ProfileProcessor: ObservableObject {
+public final class ProfileProcessor: ObservableObject, Sendable {
     private let iapManager: IAPManager
 
-    public let title: (Profile) -> String
+    public nonisolated let title: (Profile) -> String
 
-    private let _isIncluded: (IAPManager, Profile) -> Bool
+    private nonisolated let _isIncluded: (IAPManager, Profile) -> Bool
 
-    private let _willSave: (IAPManager, Profile.Builder) throws -> Profile.Builder
+    private nonisolated let _willSave: (IAPManager, Profile.Builder) throws -> Profile.Builder
 
-    private let _willConnect: (IAPManager, Profile) throws -> Profile
+    private nonisolated let _willConnect: (IAPManager, Profile) throws -> Profile
 
     public init(
         iapManager: IAPManager,
