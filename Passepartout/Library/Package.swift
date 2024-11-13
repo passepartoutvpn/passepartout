@@ -30,11 +30,12 @@ let package = Package(
             targets: ["LegacyV2"]
         ),
         .library(
+            name: "PassepartoutImplementations",
+            targets: ["PassepartoutImplementations"]
+        ),
+        .library(
             name: "TunnelLibrary",
-            targets: [
-                "CommonLibrary",
-                "PassepartoutImplementations"
-            ]
+            targets: ["CommonLibrary"]
         ),
         .library(
             name: "UILibrary",
@@ -82,21 +83,14 @@ let package = Package(
         ),
         .target(
             name: "AppUIMain",
-            dependencies: [
-                "LegacyV2",
-                "PassepartoutImplementations",
-                "UILibrary"
-            ],
+            dependencies: ["UILibrary"],
             resources: [
                 .process("Resources")
             ]
         ),
         .target(
             name: "AppUITV",
-            dependencies: [
-                "PassepartoutImplementations",
-                "UILibrary"
-            ]
+            dependencies: ["UILibrary"]
         ),
         .target(
             name: "CommonAPI",
@@ -123,8 +117,7 @@ let package = Package(
             name: "LegacyV2",
             dependencies: [
                 "CommonLibrary",
-                "PassepartoutImplementations",
-                .product(name: "PassepartoutKit", package: "passepartoutkit-source")
+                "PassepartoutImplementations"
             ],
             resources: [
                 .process("Profiles.xcdatamodeld")
@@ -133,6 +126,7 @@ let package = Package(
         .target(
             name: "PassepartoutImplementations",
             dependencies: [
+                .product(name: "PassepartoutKit", package: "passepartoutkit-source"),
                 .product(name: "PassepartoutOpenVPNOpenSSL", package: "passepartoutkit-source-openvpn-openssl"),
                 .product(name: "PassepartoutWireGuardGo", package: "passepartoutkit-source-wireguard-go")
             ]
