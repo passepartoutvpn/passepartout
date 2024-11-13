@@ -29,17 +29,19 @@ import PassepartoutKit
 import SwiftUI
 
 struct SettingsSectionGroup: View {
+    let profileManager: ProfileManager
 
+#if os(iOS)
+    @AppStorage(AppPreference.locksInBackground.key)
+    private var locksInBackground = false
+#endif
+#if os(macOS)
     @AppStorage(AppPreference.keepsInMenu.key)
     private var keepsInMenu = true
 
-    @AppStorage(AppPreference.locksInBackground.key)
-    private var locksInBackground = false
-
-    let profileManager: ProfileManager
-
     @StateObject
-    private var model = AppMenu.Model()
+    private var menuModel = AppMenu.Model()
+#endif
 
     @State
     private var isConfirmingEraseiCloud = false
@@ -60,8 +62,15 @@ struct SettingsSectionGroup: View {
 }
 
 private extension SettingsSectionGroup {
+#if os(iOS)
+    var lockInBackgroundToggle: some View {
+        Toggle(Strings.Views.Settings.locksInBackground, isOn: $locksInBackground)
+            .themeSectionWithSingleRow(footer: Strings.Views.Settings.LocksInBackground.footer)
+    }
+#endif
+#if os(macOS)
     var launchesOnLoginToggle: some View {
-        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $model.launchesOnLogin)
+        Toggle(Strings.Views.Settings.launchesOnLogin, isOn: $menuModel.launchesOnLogin)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.LaunchesOnLogin.footer)
     }
 
@@ -69,12 +78,7 @@ private extension SettingsSectionGroup {
         Toggle(Strings.Views.Settings.keepsInMenu, isOn: $keepsInMenu)
             .themeSectionWithSingleRow(footer: Strings.Views.Settings.KeepsInMenu.footer)
     }
-
-    var lockInBackgroundToggle: some View {
-        Toggle(Strings.Views.Settings.locksInBackground, isOn: $locksInBackground)
-            .themeSectionWithSingleRow(footer: Strings.Views.Settings.LocksInBackground.footer)
-    }
-
+#endif
     var eraseCloudKitButton: some View {
         Button(Strings.Views.Settings.eraseIcloud, role: .destructive) {
             isConfirmingEraseiCloud = true
