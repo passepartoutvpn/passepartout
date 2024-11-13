@@ -1,5 +1,5 @@
 //
-//  LegacyV2.swift
+//  LegacyV2Strategy.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/1/24.
@@ -28,7 +28,7 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-public final class LegacyV2 {
+public final class LegacyV2Strategy: LegacyStrategy {
     private let profilesRepository: CDProfileRepositoryV2
 
     private let cloudKitIdentifier: String?
@@ -52,9 +52,9 @@ public final class LegacyV2 {
     }
 }
 
-// MARK: - Mapping
+// MARK: - LegacyStrategy
 
-extension LegacyV2 {
+extension LegacyV2Strategy {
     public func fetchMigratableProfiles() async throws -> [MigratableProfile] {
         try await profilesRepository.migratableProfiles()
     }
@@ -82,9 +82,9 @@ extension LegacyV2 {
     }
 }
 
-// MARK: - Legacy profiles
+// MARK: - Internal
 
-extension LegacyV2 {
+extension LegacyV2Strategy {
     func fetchProfilesV2() async throws -> [ProfileV2] {
         try await profilesRepository.profiles()
     }
