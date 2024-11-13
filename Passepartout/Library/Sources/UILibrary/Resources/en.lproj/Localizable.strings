@@ -129,6 +129,8 @@
 "views.profile.rows.add_module" = "Add module";
 "views.profile.module_list.section.footer" = "Drag modules to rearrange them, as their order determines priority.";
 
+"views.settings.launches_on_login" = "Launch on login";
+"views.settings.launches_on_login.footer" = "Open the app in background after login.";
 "views.settings.keeps_in_menu" = "Keep in menu bar";
 "views.settings.keeps_in_menu.footer" = "Enable this to keep the app in the menu bar after closing it.";
 "views.settings.locks_in_background" = "Lock in background";
@@ -238,7 +240,6 @@
 
 // MARK: - App menu
 
-"app_menu.items.launch_on_login" = "Launch on Login";
 "app_menu.items.quit" = "Quit %@";
 
 // MARK: - Theme
