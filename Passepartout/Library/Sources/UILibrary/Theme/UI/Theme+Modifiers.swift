@@ -75,8 +75,24 @@ extension View {
         ))
     }
 
-    public func themeNavigationStack(if condition: Bool, closable: Bool = false, path: Binding<NavigationPath>) -> some View {
-        modifier(ThemeNavigationStackModifier(condition: condition, closable: closable, path: path))
+    public func themeNavigationStack(
+        closable: Bool = false,
+        path: Binding<NavigationPath> = .constant(NavigationPath())
+    ) -> some View {
+        modifier(ThemeNavigationStackModifier(closable: closable, path: path))
+    }
+
+    @ViewBuilder
+    public func themeNavigationStack(
+        if condition: Bool,
+        closable: Bool = false,
+        path: Binding<NavigationPath> = .constant(NavigationPath())
+    ) -> some View {
+        if condition {
+            modifier(ThemeNavigationStackModifier(closable: closable, path: path))
+        } else {
+            self
+        }
     }
 
     public func themeForm() -> some View {
@@ -269,31 +285,25 @@ struct ThemeNavigationStackModifier: ViewModifier {
     @Environment(\.dismiss)
     private var dismiss
 
-    let condition: Bool
-
     let closable: Bool
 
     @Binding
     var path: NavigationPath
 
     func body(content: Content) -> some View {
-        if condition {
-            NavigationStack(path: $path) {
-                content
-                    .toolbar {
-                        if closable {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button {
-                                    dismiss()
-                                } label: {
-                                    ThemeCloseLabel()
-                                }
+        NavigationStack(path: $path) {
+            content
+                .toolbar {
+                    if closable {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button {
+                                dismiss()
+                            } label: {
+                                ThemeCloseLabel()
                             }
                         }
                     }
-            }
-        } else {
-            content
+                }
         }
     }
 }
