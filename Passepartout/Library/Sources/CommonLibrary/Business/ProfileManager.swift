@@ -440,9 +440,12 @@ private extension ProfileManager {
                         idsToRemove.append(remoteProfile.id)
                         continue
                     }
-                    guard remoteAttributes[remoteProfile.id]?.fingerprint != localAttributes[remoteProfile.id]?.fingerprint else {
-                        pp_log(.App.profiles, .info, "Skip re-importing local profile \(remoteProfile.id)")
-                        continue
+                    if let localFingerprint = localAttributes[remoteProfile.id]?.fingerprint {
+                        guard let remoteFingerprint = remoteAttributes[remoteProfile.id]?.fingerprint,
+                              remoteFingerprint != localFingerprint else {
+                            pp_log(.App.profiles, .info, "Skip re-importing local profile \(remoteProfile.id)")
+                            continue
+                        }
                     }
                     pp_log(.App.profiles, .notice, "Import remote profile \(remoteProfile.id)...")
                     try await save(remoteProfile)
