@@ -89,59 +89,6 @@ extension TunnelEnvironment where Self == AppGroupEnvironment {
     }
 }
 
-// MARK: IAPManager
-
-extension IAPManager {
-    static let shared: IAPManager = {
-        let iapHelpers = Configuration.IAPManager.helpers
-        return IAPManager(
-            customUserLevel: Configuration.Environment.userLevel,
-            inAppHelper: iapHelpers.productHelper,
-            receiptReader: iapHelpers.receiptReader,
-            productsAtBuild: Configuration.IAPManager.productsAtBuild
-        )
-    }()
-
-    static let sharedProcessor = ProfileProcessor(
-        iapManager: shared,
-        title: {
-            Configuration.ProfileManager.sharedTitle($0)
-        },
-        isIncluded: {
-            Configuration.ProfileManager.isIncluded($0, $1)
-        },
-        willSave: {
-            $1
-        },
-        willConnect: { iap, profile in
-            var builder = profile.builder()
-
-            // ineligible, suppress on-demand rules
-            if !iap.isEligible(for: .onDemand) {
-                pp_log(.app, .notice, "Ineligible, suppress on-demand rules")
-
-                if let onDemandModuleIndex = builder.modules.firstIndex(where: { $0 is OnDemandModule }),
-                   let onDemandModule = builder.modules[onDemandModuleIndex] as? OnDemandModule {
-
-                    var onDemandBuilder = onDemandModule.builder()
-                    onDemandBuilder.policy = .any
-                    builder.modules[onDemandModuleIndex] = onDemandBuilder.tryBuild()
-                }
-            }
-
-            // validate provider modules
-            let profile = try builder.tryBuild()
-            do {
-                _ = try profile.withProviderModules()
-                return profile
-            } catch {
-                pp_log(.app, .error, "Unable to inject provider modules: \(error)")
-                throw error
-            }
-        }
-    )
-}
-
 // MARK: - Configuration
 
 enum Configuration {
@@ -155,26 +102,9 @@ enum Configuration {
     }
 }
 
-// MARK: Environment
-
-private extension Configuration.Environment {
+extension Configuration.Environment {
     static var isFakeIAP: Bool {
         ProcessInfo.processInfo.environment["PP_FAKE_IAP"] == "1"
-    }
-
-    static var userLevel: AppUserLevel? {
-        if let envString = ProcessInfo.processInfo.environment["PP_USER_LEVEL"],
-           let envValue = Int(envString),
-           let testAppType = AppUserLevel(rawValue: envValue) {
-
-            return testAppType
-        }
-        if let infoValue = BundleConfiguration.mainIntegerIfPresent(for: .userLevel),
-           let testAppType = AppUserLevel(rawValue: infoValue) {
-
-            return testAppType
-        }
-        return nil
     }
 }
 
@@ -202,29 +132,21 @@ extension Configuration.ProfileManager {
 
 // MARK: IAPManager
 
-private extension Configuration.IAPManager {
+extension Configuration.IAPManager {
 
     @MainActor
-    static var helpers: (productHelper: any AppProductHelper, receiptReader: AppReceiptReader) {
+    static let inAppHelper: any AppProductHelper = {
         guard !Configuration.Environment.isFakeIAP else {
-            let mockHelper = MockAppProductHelper()
-            return (mockHelper, mockHelper.receiptReader)
+            return MockAppProductHelper()
         }
-        let productHelper = StoreKitHelper(
+        return StoreKitHelper(
             products: AppProduct.all,
             inAppIdentifier: {
                 let prefix = BundleConfiguration.mainString(for: .iapBundlePrefix)
                 return "\(prefix).\($0.rawValue)"
             }
         )
-        let receiptReader = FallbackReceiptReader(
-            reader: StoreKitReceiptReader(),
-            localReader: {
-                KvittoReceiptReader(url: $0)
-            }
-        )
-        return (productHelper, receiptReader)
-    }
+    }()
 
     static let productsAtBuild: BuildProducts<AppProduct> = {
 #if os(iOS)
