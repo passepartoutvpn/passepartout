@@ -156,7 +156,7 @@ private extension MigrateView {
 
     func migrate() async {
         guard model.step == .fetched else {
-            fatalError("Must call fetch() and succeed first")
+            fatalError("Must call fetch() and succeed")
         }
         do {
             model.step = .migrating
@@ -171,6 +171,9 @@ private extension MigrateView {
     }
 
     func save(_ profiles: [Profile]) async {
+        guard case .migrated(let profiles) = model.step, !profiles.isEmpty else {
+            fatalError("Must call migrate() and succeed with non-empty profiles")
+        }
         // FIXME: ###, import migrated profiles
     }
 }
