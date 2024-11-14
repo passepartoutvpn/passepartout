@@ -115,6 +115,18 @@ private extension AppContext {
             }
             .store(in: &subscriptions)
 
+        // copy release receipt to tunnel for TestFlight eligibility (once is enough, it won't change)
+        if let appReceiptURL = Bundle.main.appStoreProductionReceiptURL {
+            let tunnelReceiptURL = BundleConfiguration.urlForAppGroupReceipt
+            do {
+                pp_log(.App.iap, .info, "Copy release receipt to tunnel...")
+                try? FileManager.default.removeItem(at: tunnelReceiptURL)
+                try FileManager.default.copyItem(at: appReceiptURL, to: tunnelReceiptURL)
+            } catch {
+                pp_log(.App.iap, .error, "Unable to copy release receipt to tunnel: \(error)")
+            }
+        }
+
         do {
             pp_log(.app, .notice, "Fetch providers index...")
             try await providerManager.fetchIndex(from: API.shared)
@@ -137,6 +149,7 @@ private extension AppContext {
             } catch {
                 pp_log(.App.profiles, .error, "Unable to re-observe local profiles: \(error)")
             }
+
             await iapManager.reloadReceipt()
         }
         await pendingTask?.value

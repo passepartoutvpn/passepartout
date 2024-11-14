@@ -34,6 +34,7 @@
 		0EDE56EA2CABE40D0082D21C /* Intents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EDE56E62CABE40D0082D21C /* Intents.plist */; };
 		0EDE56FA2CABE42E0082D21C /* PassepartoutIntents.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 0EDE56F02CABE42E0082D21C /* PassepartoutIntents.appex */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0EDE57002CABE4B50082D21C /* IntentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE56E72CABE40D0082D21C /* IntentsExtension.swift */; };
+		0EE254912CE67946007A96F2 /* LegacyV2 in Frameworks */ = {isa = PBXBuildFile; productRef = 0EE254902CE67946007A96F2 /* LegacyV2 */; };
 		0EE8D7E12CD112C200F6600C /* App+tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE8D7E02CD112C200F6600C /* App+tvOS.swift */; };
 		0EF5FE4D2CE53B1C00EC2CD4 /* PassepartoutImplementations in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */; };
 		0EF5FE4F2CE53BCE00EC2CD4 /* LegacyV2 in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF5FE4E2CE53BCE00EC2CD4 /* LegacyV2 */; };
@@ -149,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EE254912CE67946007A96F2 /* LegacyV2 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +444,6 @@
 					};
 					0E3FF4AD2CE3AF6F00BFF640 = {
 						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 0E06D18E2B87629100176E1D;
 					};
 					0E757F0F2CD0CFFC006E13E1 = {
 						CreatedOnToolsVersion = 15.4;
@@ -884,26 +885,24 @@
 		0E3FF4B52CE3AF6F00BFF640 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Passepartout";
 			};
 			name = Debug;
 		};
 		0E3FF4B62CE3AF6F00BFF640 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.algoritmico.ios.PassepartoutTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Passepartout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Passepartout";
 			};
 			name = Release;
 		};
@@ -1147,6 +1146,10 @@
 		0EBE80DB2BF55C0E00E36A20 /* TunnelLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TunnelLibrary;
+		};
+		0EE254902CE67946007A96F2 /* LegacyV2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LegacyV2;
 		};
 		0EF5FE4C2CE53B1C00EC2CD4 /* PassepartoutImplementations */ = {
 			isa = XCSwiftPackageProductDependency;
