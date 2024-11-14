@@ -1,4 +1,1 @@
-* Import initial remote profiles (#859)
-* Expand selected server country on iOS (#853)
-* Fix double reload of selected provider server (#851)
-* Wait for initial profiles (#847)
+* Fix "Purchase required" in TestFlight (#870)
