@@ -30,6 +30,7 @@ extension View {
     public func withEnvironment(from context: AppContext, theme: Theme) -> some View {
         environmentObject(theme)
             .environmentObject(context.iapManager)
+            .environmentObject(context.migrationManager)
             .environmentObject(context.providerManager)
     }
 

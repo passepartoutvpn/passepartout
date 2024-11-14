@@ -44,20 +44,20 @@ struct AboutView: View {
 }
 
 extension AboutView {
-    var donateLink: some View {
-        navLink(Strings.Views.Donate.title, to: .donate)
+    var creditsLink: some View {
+        navLink(Strings.Views.About.Credits.title, to: .credits)
     }
 
     var diagnosticsLink: some View {
         navLink(Strings.Views.Diagnostics.title, to: .diagnostics)
     }
 
-    var linksLink: some View {
-        navLink(Strings.Views.About.Links.title, to: .links)
+    var donateLink: some View {
+        navLink(Strings.Views.Donate.title, to: .donate)
     }
 
-    var creditsLink: some View {
-        navLink(Strings.Views.About.Credits.title, to: .credits)
+    var linksLink: some View {
+        navLink(Strings.Views.About.Links.title, to: .links)
     }
 }
 

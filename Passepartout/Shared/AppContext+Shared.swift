@@ -29,6 +29,7 @@ import AppDataProviders
 import CommonLibrary
 import CommonUtils
 import Foundation
+import LegacyV2
 import PassepartoutKit
 import UILibrary
 
@@ -93,12 +94,29 @@ extension AppContext {
             return ProviderManager(repository: repository)
         }()
 
+        // MARK: MigrationManager
+
+        let profileStrategy = ProfileV2MigrationStrategy(
+            coreDataLogger: .default,
+            profilesContainerName: Constants.shared.containers.legacyV2,
+            cloudKitIdentifier: BundleConfiguration.mainString(for: .legacyV2CloudKitId)
+        )
+#if DEBUG
+        let migrationManager = MigrationManager(profileStrategy: profileStrategy, simulation: .init(
+            maxMigrationTime: 3.0,
+            randomFailures: true
+        ))
+#else
+        let migrationManager = MigrationManager(profileStrategy: profileStrategy)
+#endif
+
         return AppContext(
             iapManager: .shared,
-            registry: .shared,
+            migrationManager: migrationManager,
             profileManager: profileManager,
-            tunnel: tunnel,
-            providerManager: providerManager
+            providerManager: providerManager,
+            registry: .shared,
+            tunnel: tunnel
         )
     }()
 }

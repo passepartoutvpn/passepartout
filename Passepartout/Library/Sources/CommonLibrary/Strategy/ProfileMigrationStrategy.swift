@@ -1,8 +1,8 @@
 //
-//  MigratableProfile.swift
+//  ProfileMigrationStrategy.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 11/12/24.
+//  Created by Davide De Rosa on 11/13/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -24,17 +24,10 @@
 //
 
 import Foundation
+import PassepartoutKit
 
-public struct MigratableProfile: Identifiable, Sendable {
-    public let id: UUID
+public protocol ProfileMigrationStrategy {
+    func fetchMigratableProfiles() async throws -> [MigratableProfile]
 
-    public let name: String
-
-    public let lastUpdate: Date?
-
-    public init(id: UUID, name: String, lastUpdate: Date?) {
-        self.id = id
-        self.name = name
-        self.lastUpdate = lastUpdate
-    }
+    func fetchProfile(withId profileId: UUID) async throws -> Profile?
 }

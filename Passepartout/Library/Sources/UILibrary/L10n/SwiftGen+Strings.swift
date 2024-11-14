@@ -275,6 +275,8 @@ public enum Strings {
     public static let keepAlive = Strings.tr("Localizable", "global.keep_alive", fallback: "Keep-alive")
     /// Key
     public static let key = Strings.tr("Localizable", "global.key", fallback: "Key")
+    /// Last update
+    public static let lastUpdate = Strings.tr("Localizable", "global.last_update", fallback: "Last update")
     /// Loading
     public static let loading = Strings.tr("Localizable", "global.loading", fallback: "Loading")
     /// Method
@@ -717,6 +719,10 @@ public enum Strings {
         }
       }
     }
+    public enum Migrate {
+      /// Migrate
+      public static let title = Strings.tr("Localizable", "views.migrate.title", fallback: "Migrate")
+    }
     public enum Profile {
       public enum ModuleList {
         public enum Section {
@@ -761,6 +767,8 @@ public enum Strings {
       public enum Toolbar {
         /// Import profile
         public static let importProfile = Strings.tr("Localizable", "views.profiles.toolbar.import_profile", fallback: "Import profile")
+        /// Migrate profiles
+        public static let migrateProfiles = Strings.tr("Localizable", "views.profiles.toolbar.migrate_profiles", fallback: "Migrate profiles")
         /// New profile
         public static let newProfile = Strings.tr("Localizable", "views.profiles.toolbar.new_profile", fallback: "New profile")
       }

@@ -37,6 +37,7 @@ extension Theme {
         case disclose
         case editableSectionEdit
         case editableSectionRemove
+        case failure
         case favoriteOff
         case favoriteOn
         case filters
@@ -48,8 +49,10 @@ extension Theme {
         case pending
         case profileEdit
         case profileImport
+        case profileMigrate
         case profilesGrid
         case profilesList
+        case progress
         case remove
         case search
         case settings
@@ -81,6 +84,7 @@ extension Theme.ImageName {
             case .disclose: return "chevron.down"
             case .editableSectionEdit: return "arrow.up.arrow.down"
             case .editableSectionRemove: return "trash"
+            case .failure: return "exclamationmark.triangle"
             case .favoriteOff: return "star"
             case .favoriteOn: return "star.fill"
             case .filters: return "line.3.horizontal.decrease"
@@ -92,8 +96,10 @@ extension Theme.ImageName {
             case .pending: return "clock"
             case .profileEdit: return "square.and.pencil"
             case .profileImport: return "square.and.arrow.down"
+            case .profileMigrate: return "arrow.up.square"
             case .profilesGrid: return "square.grid.2x2"
             case .profilesList: return "rectangle.grid.1x2"
+            case .progress: return "clock"
             case .remove: return "minus"
             case .search: return "magnifyingglass"
             case .settings: return "gearshape"

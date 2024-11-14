@@ -45,24 +45,28 @@ struct AboutRouterView: View {
 
 extension AboutRouterView {
     enum NavigationRoute: Hashable {
-        case donate
+        case appDebugLog(title: String)
+
+        case credits
 
         case diagnostics
 
-        case appDebugLog(title: String)
-
-        case tunnelDebugLog(title: String, url: URL?)
+        case donate
 
         case links
 
-        case credits
+        case tunnelDebugLog(title: String, url: URL?)
     }
 
     @ViewBuilder
     func pushDestination(for item: NavigationRoute?) -> some View {
         switch item {
-        case .donate:
-            DonateView()
+        case .appDebugLog(let title):
+            DebugLogView.withApp(parameters: Constants.shared.log)
+                .navigationTitle(title)
+
+        case .credits:
+            CreditsView()
 
         case .diagnostics:
             DiagnosticsView(
@@ -70,9 +74,11 @@ extension AboutRouterView {
                 tunnel: tunnel
             )
 
-        case .appDebugLog(let title):
-            DebugLogView.withApp(parameters: Constants.shared.log)
-                .navigationTitle(title)
+        case .donate:
+            DonateView()
+
+        case .links:
+            LinksView()
 
         case .tunnelDebugLog(let title, let url):
             if let url {
@@ -82,12 +88,6 @@ extension AboutRouterView {
                 DebugLogView.withTunnel(tunnel, parameters: Constants.shared.log)
                     .navigationTitle(title)
             }
-
-        case .links:
-            LinksView()
-
-        case .credits:
-            CreditsView()
 
         default:
             Text(Strings.Global.noSelection)

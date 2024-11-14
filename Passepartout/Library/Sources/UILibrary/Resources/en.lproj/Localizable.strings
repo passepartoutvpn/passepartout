@@ -35,6 +35,7 @@
 "global.interface" = "Interface";
 "global.keep_alive" = "Keep-alive";
 "global.key" = "Key";
+"global.last_update" = "Last update";
 "global.loading" = "Loading";
 "global.method" = "Method";
 "global.modules" = "Modules";
@@ -122,6 +123,7 @@
 "views.profiles.folders.no_profiles" = "No profiles";
 "views.profiles.toolbar.new_profile" = "New profile";
 "views.profiles.toolbar.import_profile" = "Import profile";
+"views.profiles.toolbar.migrate_profiles" = "Migrate profiles";
 "views.profiles.errors.tunnel" = "Unable to execute tunnel operation.";
 "views.profiles.errors.duplicate" = "Unable to duplicate profile '%@'.";
 "views.profiles.errors.import" = "Unable to import profiles.";
@@ -154,6 +156,8 @@
 "views.about.credits.licenses" = "Licenses";
 "views.about.credits.notices" = "Notices";
 "views.about.credits.translations" = "Translations";
+
+"views.migrate.title" = "Migrate";
 
 "views.donate.title" = "Make a donation";
 "views.donate.sections.main.footer" = "If you want to display gratitude for my work, here are a couple amounts you can donate instantly.\n\nYou will only be charged once per donation, and you can donate multiple times.";

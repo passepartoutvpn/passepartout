@@ -1,5 +1,5 @@
 //
-//  LegacyV2.swift
+//  ProfileV2MigrationStrategy.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 10/1/24.
@@ -28,7 +28,7 @@ import CommonUtils
 import Foundation
 import PassepartoutKit
 
-public final class LegacyV2 {
+public final class ProfileV2MigrationStrategy: ProfileMigrationStrategy, Sendable {
     private let profilesRepository: CDProfileRepositoryV2
 
     private let cloudKitIdentifier: String?
@@ -52,40 +52,31 @@ public final class LegacyV2 {
     }
 }
 
-// MARK: - Mapping
+// MARK: - ProfileMigrationStrategy
 
-extension LegacyV2 {
+extension ProfileV2MigrationStrategy {
     public func fetchMigratableProfiles() async throws -> [MigratableProfile] {
         try await profilesRepository.migratableProfiles()
     }
 
-    public func fetchProfiles(selection: Set<UUID>) async throws -> (migrated: [Profile], failed: Set<UUID>) {
-        let profilesV2 = try await profilesRepository.profiles()
-
-        var migrated: [Profile] = []
-        var failed: Set<UUID> = []
+    public func fetchProfile(withId profileId: UUID) async throws -> Profile? {
         let mapper = MapperV2()
-
-        profilesV2.forEach {
-            guard selection.contains($0.id) else {
-                return
+        do {
+            guard let profile = try await profilesRepository.profile(withId: profileId) else {
+                return nil
             }
-            do {
-                let mapped = try mapper.toProfileV3($0)
-                migrated.append(mapped)
-            } catch {
-                pp_log(.App.migration, .error, "Unable to migrate profile \($0.id): \(error)")
-                failed.insert($0.id)
-            }
+            return try mapper.toProfileV3(profile)
+        } catch {
+            pp_log(.App.migration, .error, "Unable to migrate profile \(profileId): \(error)")
+            return nil
         }
-        return (migrated, failed)
     }
 }
 
-// MARK: - Legacy profiles
+// MARK: - Internal
 
-extension LegacyV2 {
+extension ProfileV2MigrationStrategy {
     func fetchProfilesV2() async throws -> [ProfileV2] {
-        try await profilesRepository.profiles()
+        try await profilesRepository.profiles(withIds: nil)
     }
 }
