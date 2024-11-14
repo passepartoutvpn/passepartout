@@ -40,10 +40,16 @@ extension MigrateView {
                 TableColumn(Strings.Global.name, value: \.name)
                 TableColumn(Strings.Global.lastUpdate, value: \.timestamp)
                 TableColumn("") { profile in
-                    StatusView(
-                        isIncluded: isOnBinding(for: profile.id),
-                        status: statuses[profile.id]
-                    )
+                    switch step {
+                    case .initial, .fetching, .fetched:
+                        Toggle("", isOn: isIncludedBinding(for: profile.id))
+                            .labelsHidden()
+
+                    default:
+                        if let status = statuses[profile.id] {
+                            StatusView(status: status)
+                        }
+                    }
                 }
             }
         }
@@ -51,9 +57,9 @@ extension MigrateView {
 }
 
 private extension MigrateView.TableView {
-    func isOnBinding(for profileId: UUID) -> Binding<Bool> {
+    func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
         Binding {
-            statuses[profileId] == .excluded
+            statuses[profileId] != .excluded
         } set: {
             if $0 {
                 statuses.removeValue(forKey: profileId)
@@ -66,22 +72,13 @@ private extension MigrateView.TableView {
 
 private extension MigrateView.TableView {
     struct StatusView: View {
-
-        @Binding
-        var isIncluded: Bool
-
-        let status: MigrationStatus?
+        let status: MigrationStatus
 
         var body: some View {
-            if let status {
-                imageName(forStatus: status)
-                    .map {
-                        ThemeImage($0)
-                    }
-            } else {
-                Toggle("", isOn: $isIncluded)
-                    .labelsHidden()
-            }
+            imageName(forStatus: status)
+                .map {
+                    ThemeImage($0)
+                }
         }
 
         func imageName(forStatus status: MigrationStatus) -> Theme.ImageName? {
