@@ -59,6 +59,9 @@ extension View {
 struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding where Popover: View {
 
     @EnvironmentObject
+    private var context: AppContext
+
+    @EnvironmentObject
     private var theme: Theme
 
     @Environment(\.horizontalSizeClass)
@@ -86,6 +89,7 @@ struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding wh
                 .sheet(isPresented: $isPresented) {
                     popover
                         .themeLockScreen()
+                        .withEnvironment(from: context, theme: theme)
                 }
         }
     }

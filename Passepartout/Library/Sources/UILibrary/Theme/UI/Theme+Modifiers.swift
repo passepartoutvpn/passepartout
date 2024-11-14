@@ -203,6 +203,9 @@ extension View {
 struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 
     @EnvironmentObject
+    private var context: AppContext
+
+    @EnvironmentObject
     private var theme: Theme
 
     @Binding
@@ -221,6 +224,7 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
                     .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
+                    .withEnvironment(from: context, theme: theme)
             }
     }
 
@@ -230,6 +234,9 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 }
 
 struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Identifiable {
+
+    @EnvironmentObject
+    private var context: AppContext
 
     @EnvironmentObject
     private var theme: Theme
@@ -250,6 +257,7 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
                     .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
+                    .withEnvironment(from: context, theme: theme)
             }
     }
 
