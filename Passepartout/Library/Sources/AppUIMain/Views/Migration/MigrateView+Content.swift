@@ -58,6 +58,18 @@ extension MigrateView {
     }
 }
 
+extension Optional where Wrapped == MigrationStatus {
+    var style: some ShapeStyle {
+        self != .excluded ? .primary : .secondary
+    }
+}
+
+extension Dictionary where Key == UUID, Value == MigrationStatus {
+    func style(for profileId: UUID) -> some ShapeStyle {
+        self[profileId].style
+    }
+}
+
 // MARK: - Previews
 
 #Preview("Fetched") {

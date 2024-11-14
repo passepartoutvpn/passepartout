@@ -66,6 +66,19 @@ private extension MigrateView.SectionView {
 
     func row(forProfile profile: MigratableProfile, status: MigrationStatus?) -> some View {
         HStack {
+            CardView(profile: profile)
+            Spacer()
+            StatusView(isIncluded: statuses[profile.id] != .excluded, status: status)
+        }
+        .foregroundStyle(statuses[profile.id].style)
+    }
+}
+
+private extension MigrateView.SectionView {
+    struct CardView: View {
+        let profile: MigratableProfile
+
+        var body: some View {
             VStack(alignment: .leading) {
                 Text(profile.name)
                     .font(.headline)
@@ -75,8 +88,6 @@ private extension MigrateView.SectionView {
                         .font(.subheadline)
                 }
             }
-            Spacer()
-            StatusView(isIncluded: statuses[profile.id] != .excluded, status: status)
         }
     }
 }

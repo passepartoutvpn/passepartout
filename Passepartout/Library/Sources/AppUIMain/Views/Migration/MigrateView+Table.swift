@@ -37,8 +37,14 @@ extension MigrateView {
 
         var body: some View {
             Table(profiles) {
-                TableColumn(Strings.Global.name, value: \.name)
-                TableColumn(Strings.Global.lastUpdate, value: \.timestamp)
+                TableColumn(Strings.Global.name) {
+                    Text($0.name)
+                        .foregroundStyle(statuses.style(for: $0.id))
+                }
+                TableColumn(Strings.Global.lastUpdate) {
+                    Text($0.timestamp)
+                        .foregroundStyle(statuses.style(for: $0.id))
+                }
                 TableColumn("") { profile in
                     switch step {
                     case .initial, .fetching, .fetched:
