@@ -137,7 +137,7 @@ private extension MigrateView {
             dismiss()
 
         default:
-            fatalError("No action allowed at this step \(step)")
+            fatalError("No action allowed at step \(step)")
         }
     }
 
