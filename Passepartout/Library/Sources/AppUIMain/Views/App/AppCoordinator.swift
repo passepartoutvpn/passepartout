@@ -51,6 +51,9 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
     @State
     private var profilePath = NavigationPath()
 
+    @State
+    private var migrationPath = NavigationPath()
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
@@ -86,6 +89,8 @@ extension AppCoordinator {
 
         case editProviderEntity(Profile, Module, ModuleMetadata.Provider)
 
+        case migrateProfiles
+
         case settings
 
         case about
@@ -94,8 +99,9 @@ extension AppCoordinator {
             switch self {
             case .editProfile: return 1
             case .editProviderEntity: return 2
-            case .settings: return 3
-            case .about: return 4
+            case .migrateProfiles: return 3
+            case .settings: return 4
+            case .about: return 5
             }
         }
 
@@ -146,6 +152,9 @@ extension AppCoordinator {
             onAbout: {
                 present(.about)
             },
+            onMigrateProfiles: {
+                present(.migrateProfiles)
+            },
             onNewProfile: enterDetail
         )
     }
@@ -176,6 +185,10 @@ extension AppCoordinator {
                 errorHandler: errorHandler
             )
 
+        case .migrateProfiles:
+            MigrateView(style: migrateViewStyle)
+                .themeNavigationStack(closable: true, path: $migrationPath)
+
         case .settings:
             SettingsView(profileManager: profileManager)
 
@@ -188,6 +201,14 @@ extension AppCoordinator {
         default:
             EmptyView()
         }
+    }
+
+    var migrateViewStyle: MigrateView.Style {
+#if os(iOS)
+        .section
+#else
+        .table
+#endif
     }
 
     func enterDetail(of profile: Profile) {

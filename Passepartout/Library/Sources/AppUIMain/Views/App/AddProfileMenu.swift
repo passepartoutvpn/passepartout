@@ -33,23 +33,42 @@ struct AddProfileMenu: View {
     @Binding
     var isImporting: Bool
 
+    let onMigrateProfiles: () -> Void
+
     let onNewProfile: (Profile) -> Void
 
     var body: some View {
         Menu {
-            Button {
-                let profile = profileManager.new(withName: Strings.Entities.Profile.Name.new)
-                onNewProfile(profile)
-            } label: {
-                ThemeImageLabel(Strings.Views.Profiles.Toolbar.newProfile, .profileEdit)
-            }
-            Button {
-                isImporting = true
-            } label: {
-                ThemeImageLabel(Strings.Views.Profiles.Toolbar.importProfile, .profileImport)
-            }
+            newProfileButton
+            importProfileButton
+            migrateProfilesButton
         } label: {
             ThemeImage(.add)
+        }
+    }
+}
+
+private extension AddProfileMenu {
+    var newProfileButton: some View {
+        Button {
+            let profile = profileManager.new(withName: Strings.Entities.Profile.Name.new)
+            onNewProfile(profile)
+        } label: {
+            ThemeImageLabel(Strings.Views.Profiles.Toolbar.newProfile, .profileEdit)
+        }
+    }
+
+    var importProfileButton: some View {
+        Button {
+            isImporting = true
+        } label: {
+            ThemeImageLabel(Strings.Views.Profiles.Toolbar.importProfile, .profileImport)
+        }
+    }
+
+    var migrateProfilesButton: some View {
+        Button(action: onMigrateProfiles) {
+            ThemeImageLabel(Strings.Views.Profiles.Toolbar.migrateProfiles, .profileMigrate)
         }
     }
 }

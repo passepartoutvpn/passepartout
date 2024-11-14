@@ -48,6 +48,8 @@ struct AppToolbar: ToolbarContent, SizeClassProviding {
 
     let onAbout: () -> Void
 
+    let onMigrateProfiles: () -> Void
+
     let onNewProfile: (Profile) -> Void
 
     var body: some ToolbarContent {
@@ -74,6 +76,7 @@ private extension AppToolbar {
         AddProfileMenu(
             profileManager: profileManager,
             isImporting: $isImporting,
+            onMigrateProfiles: onMigrateProfiles,
             onNewProfile: onNewProfile
         )
     }
@@ -109,7 +112,8 @@ private extension AppToolbar {
                     isImporting: .constant(false),
                     onSettings: {},
                     onAbout: {},
-                    onNewProfile: { _ in}
+                    onMigrateProfiles: {},
+                    onNewProfile: { _ in }
                 )
             }
             .frame(width: 600, height: 400)
