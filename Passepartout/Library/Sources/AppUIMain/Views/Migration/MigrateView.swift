@@ -40,6 +40,9 @@ struct MigrateView: View {
     @EnvironmentObject
     private var migrationManager: MigrationManager
 
+    @Environment(\.dismiss)
+    private var dismiss
+
     let style: Style
 
     @ObservedObject
@@ -129,6 +132,9 @@ private extension MigrateView {
 
         case .migrated(let profiles):
             await save(profiles)
+
+        case .imported:
+            dismiss()
 
         default:
             fatalError("No action allowed at this step \(step)")
