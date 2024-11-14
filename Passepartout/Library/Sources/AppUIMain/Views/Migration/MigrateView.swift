@@ -53,8 +53,9 @@ struct MigrateView: View {
 
     var body: some View {
         Form {
-            Subview(
+            ContentView(
                 style: style,
+                step: model.step,
                 profiles: model.profiles,
                 excluded: $model.excluded,
                 statuses: model.statuses
@@ -80,17 +81,49 @@ private extension MigrateView {
 
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
-            Button("Proceed") {
+            Button(performTitle(at: model.step).title) {
                 Task {
-                    await migrate()
+                    await performAction(at: model.step)
                 }
             }
-            .disabled(model.step != .fetched)
+            .disabled(!performTitle(at: model.step).enabled)
         }
     }
 }
 
 private extension MigrateView {
+    func performTitle(at step: Model.Step) -> (title: String, enabled: Bool) {
+        switch step {
+        case .initial, .fetching:
+            return ("Proceed", false)
+
+        case .fetched:
+            return ("Proceed", true)
+
+        case .migrating:
+            return ("Import", false)
+
+        case .migrated:
+            return ("Import", true)
+
+        case .imported:
+            return ("Done", true)
+        }
+    }
+
+    func performAction(at step: Model.Step) async {
+        switch step {
+        case .fetched:
+            await migrate()
+
+        case .migrated(let profiles):
+            await save(profiles)
+
+        default:
+            fatalError("No action allowed at this step \(step)")
+        }
+    }
+
     func fetch() async {
         guard model.step == .initial else {
             return
@@ -116,116 +149,17 @@ private extension MigrateView {
         }
         do {
             model.step = .migrating
-            let migrated = try await migrationManager.migrateProfiles(model.profiles, selection: model.selection) {
+            let profiles = try await migrationManager.migrateProfiles(model.profiles, selection: model.selection) {
                 model.statuses[$0] = $1
             }
-            print(">>> Migrated: \(migrated.count)")
-            _ = migrated
-            // FIXME: ###, import migrated
+            model.step = .migrated(profiles)
         } catch {
             pp_log(.App.migration, .error, "Unable to migrate profiles: \(error)")
             errorHandler.handle(error, title: title)
         }
     }
-}
 
-// MARK: -
-
-private extension MigrateView {
-    struct Subview: View {
-        let style: Style
-
-        let profiles: [MigratableProfile]
-
-        @Binding
-        var excluded: Set<UUID>
-
-        let statuses: [UUID: MigrationStatus]
-
-        var body: some View {
-            switch style {
-            case .section:
-                MigrateView.SectionView(
-                    profiles: sortedProfiles,
-                    excluded: $excluded,
-                    statuses: statuses
-                )
-
-            case .table:
-                MigrateView.TableView(
-                    profiles: sortedProfiles,
-                    excluded: $excluded,
-                    statuses: statuses
-                )
-            }
-        }
-
-        var sortedProfiles: [MigratableProfile] {
-            profiles.sorted {
-                $0.name.lowercased() < $1.name.lowercased()
-            }
-        }
-    }
-}
-
-// MARK: - Previews
-
-#Preview("Before") {
-    PrivatePreviews.MigratePreview(
-        profiles: PrivatePreviews.profiles,
-        statuses: [:]
-    )
-    .withMockEnvironment()
-}
-
-#Preview("After") {
-    PrivatePreviews.MigratePreview(
-        profiles: PrivatePreviews.profiles,
-        statuses: [
-            PrivatePreviews.profiles[0].id: .excluded,
-            PrivatePreviews.profiles[1].id: .pending,
-            PrivatePreviews.profiles[2].id: .failure,
-            PrivatePreviews.profiles[3].id: .success
-        ]
-    )
-    .withMockEnvironment()
-}
-
-private struct PrivatePreviews {
-    static let oneDay: TimeInterval = 24 * 60 * 60
-
-    static let profiles: [MigratableProfile] = [
-        .init(id: UUID(), name: "1One", lastUpdate: Date().addingTimeInterval(-oneDay)),
-        .init(id: UUID(), name: "2Two", lastUpdate: Date().addingTimeInterval(-3 * oneDay)),
-        .init(id: UUID(), name: "3Three", lastUpdate: Date().addingTimeInterval(-90 * oneDay)),
-        .init(id: UUID(), name: "4Four", lastUpdate: Date().addingTimeInterval(-180 * oneDay))
-    ]
-
-    struct MigratePreview: View {
-        let profiles: [MigratableProfile]
-
-        let statuses: [UUID: MigrationStatus]
-
-        @State
-        private var excluded: Set<UUID> = []
-
-#if os(iOS)
-        private let style: MigrateView.Style = .section
-#else
-        private let style: MigrateView.Style = .table
-#endif
-
-        var body: some View {
-            Form {
-                MigrateView.Subview(
-                    style: style,
-                    profiles: profiles,
-                    excluded: $excluded,
-                    statuses: statuses
-                )
-            }
-            .navigationTitle("Migrate")
-            .themeNavigationStack()
-        }
+    func save(_ profiles: [Profile]) async {
+        // FIXME: ###, import migrated profiles
     }
 }

@@ -28,6 +28,8 @@ import SwiftUI
 
 extension MigrateView {
     struct SectionView: View {
+        let step: Model.Step
+
         let profiles: [MigratableProfile]
 
         @Binding
