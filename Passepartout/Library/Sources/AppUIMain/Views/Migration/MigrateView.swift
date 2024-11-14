@@ -105,7 +105,11 @@ private extension MigrateView {
     func fetch() async {
         do {
             isFetching = true
-            profiles = try await migrationManager.fetchMigratableProfiles()
+            let migratable = try await migrationManager.fetchMigratableProfiles()
+            let knownIDs = Set(profileManager.headers.map(\.id))
+            profiles = migratable.filter {
+                !knownIDs.contains($0.id)
+            }
             isFetching = false
         } catch {
             pp_log(.App.migration, .error, "Unable to fetch migratable profiles: \(error)")
