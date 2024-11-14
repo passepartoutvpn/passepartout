@@ -41,7 +41,8 @@ struct AddProfileMenu: View {
         Menu {
             newProfileButton
             importProfileButton
-            migrateProfilesButton
+            // FIXME: ###, migrations UI
+//            migrateProfilesButton
         } label: {
             ThemeImage(.add)
         }
