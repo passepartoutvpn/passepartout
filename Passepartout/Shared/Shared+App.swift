@@ -32,7 +32,7 @@ extension IAPManager {
     static let sharedForApp = IAPManager(
         customUserLevel: Configuration.Environment.userLevel,
         inAppHelper: Configuration.IAPManager.inAppHelper,
-        receiptReader: Configuration.IAPManager.mainReceiptReader,
+        receiptReader: Configuration.IAPManager.appReceiptReader,
         productsAtBuild: Configuration.IAPManager.productsAtBuild
     )
 
@@ -98,7 +98,7 @@ private extension Configuration.Environment {
 private extension Configuration.IAPManager {
 
     @MainActor
-    static var mainReceiptReader: AppReceiptReader {
+    static var appReceiptReader: AppReceiptReader {
         guard !Configuration.Environment.isFakeIAP else {
             guard let mockHelper = inAppHelper as? MockAppProductHelper else {
                 fatalError("When .isFakeIAP, productHelper is expected to be MockAppProductHelper")
@@ -106,10 +106,19 @@ private extension Configuration.IAPManager {
             return mockHelper.receiptReader
         }
         return FallbackReceiptReader(
-            reader: StoreKitReceiptReader(),
-            localReader: {
+            main: StoreKitReceiptReader(),
+            beta: releaseReceiptURL.map {
                 KvittoReceiptReader(url: $0)
             }
         )
+    }
+
+    static var releaseReceiptURL: URL? {
+        guard let url = Bundle.main.appStoreReceiptURL else {
+            return nil
+        }
+        return url
+            .deletingLastPathComponent()
+            .appendingPathComponent("receipt") // release receipt
     }
 }

@@ -26,25 +26,35 @@
 import CommonLibrary
 import CommonUtils
 import Foundation
+import PassepartoutKit
 
 extension IAPManager {
-    static let sharedForTunnel: IAPManager = {
-        IAPManager(
-            inAppHelper: Configuration.IAPManager.inAppHelper,
-            receiptReader: Configuration.IAPManager.tunnelReceiptReader,
-            productsAtBuild: Configuration.IAPManager.productsAtBuild
-        )
-    }()
+    static let sharedForTunnel = IAPManager(
+        inAppHelper: Configuration.IAPManager.inAppHelper,
+        receiptReader: Configuration.IAPManager.tunnelReceiptReader,
+        productsAtBuild: Configuration.IAPManager.productsAtBuild
+    )
 }
 
 private extension Configuration.IAPManager {
 
     @MainActor
     static var tunnelReceiptReader: AppReceiptReader {
-        // FIXME: #869, fallback release receipt is not available in Tunnel
-        fatalError()
+        FallbackReceiptReader(
+            main: StoreKitReceiptReader(),
+            beta: releaseReceiptURL.map {
+                KvittoReceiptReader(url: $0)
+            }
+        )
     }
 
-//    static var appGroupReceiptURLs: [URL] {
-//    }
+    static var releaseReceiptURL: URL? {
+        let appBundle = Bundle(for: BundleReference.self)
+        guard let url = appBundle.appStoreReceiptURL else {
+            return nil
+        }
+        return url
+            .deletingLastPathComponent()
+            .appendingPathComponent("receipt") // release receipt
+    }
 }
