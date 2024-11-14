@@ -120,7 +120,7 @@ private extension AppContext {
             let tunnelReceiptURL = BundleConfiguration.urlForAppGroupReceipt
             do {
                 pp_log(.App.iap, .info, "Copy release receipt to tunnel...")
-                try FileManager.default.removeItem(at: tunnelReceiptURL)
+                try? FileManager.default.removeItem(at: tunnelReceiptURL)
                 try FileManager.default.copyItem(at: appReceiptURL, to: tunnelReceiptURL)
             } catch {
                 pp_log(.App.iap, .error, "Unable to copy release receipt to tunnel: \(error)")
