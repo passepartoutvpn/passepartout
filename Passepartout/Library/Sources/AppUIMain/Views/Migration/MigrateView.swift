@@ -46,19 +46,7 @@ struct MigrateView: View {
     var profileManager: ProfileManager
 
     @State
-    private var isFetching = true
-
-    @State
-    private var isMigrating = false
-
-    @State
-    private var profiles: [MigratableProfile] = []
-
-    @State
-    private var excluded: Set<UUID> = []
-
-    @State
-    private var statuses: [UUID: MigrationStatus] = [:]
+    private var model = Model()
 
     @StateObject
     private var errorHandler: ErrorHandler = .default()
@@ -67,15 +55,15 @@ struct MigrateView: View {
         Form {
             Subview(
                 style: style,
-                profiles: profiles,
-                excluded: $excluded,
-                statuses: statuses
+                profiles: model.profiles,
+                excluded: $model.excluded,
+                statuses: model.statuses
             )
-            .disabled(isMigrating)
+            .disabled(model.step != .fetched)
         }
         .themeForm()
-        .themeProgress(if: isFetching)
-        .themeEmptyContent(if: !isFetching && profiles.isEmpty, message: "Nothing to migrate")
+        .themeProgress(if: model.step == .fetching)
+        .themeEmptyContent(if: model.step == .fetched && model.profiles.isEmpty, message: "Nothing to migrate")
         .navigationTitle(title)
         .toolbar(content: toolbarContent)
         .task {
@@ -97,33 +85,39 @@ private extension MigrateView {
                     await migrate()
                 }
             }
+            .disabled(model.step != .fetched)
         }
     }
 }
 
 private extension MigrateView {
     func fetch() async {
+        guard model.step == .initial else {
+            return
+        }
         do {
-            isFetching = true
+            model.step = .fetching
             let migratable = try await migrationManager.fetchMigratableProfiles()
             let knownIDs = Set(profileManager.headers.map(\.id))
-            profiles = migratable.filter {
+            model.profiles = migratable.filter {
                 !knownIDs.contains($0.id)
             }
-            isFetching = false
+            model.step = .fetched
         } catch {
             pp_log(.App.migration, .error, "Unable to fetch migratable profiles: \(error)")
             errorHandler.handle(error, title: title)
-            isFetching = false
+            model.step = .initial
         }
     }
 
     func migrate() async {
+        guard model.step == .fetched else {
+            fatalError("Must call fetch() and succeed first")
+        }
         do {
-            isMigrating = true
-            let selection = Set(profiles.map(\.id)).symmetricDifference(excluded)
-            let migrated = try await migrationManager.migrateProfiles(profiles, selection: selection) {
-                statuses[$0] = $1
+            model.step = .migrating
+            let migrated = try await migrationManager.migrateProfiles(model.profiles, selection: model.selection) {
+                model.statuses[$0] = $1
             }
             print(">>> Migrated: \(migrated.count)")
             _ = migrated
