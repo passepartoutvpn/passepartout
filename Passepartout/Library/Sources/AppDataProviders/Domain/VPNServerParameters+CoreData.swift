@@ -49,8 +49,8 @@ extension VPNSortField {
         case .area:
             return NSSortDescriptor(key: "area", ascending: true)
 
-        case .hostname:
-            return NSSortDescriptor(key: "hostname", ascending: true)
+        case .serverId:
+            return NSSortDescriptor(key: "serverId", ascending: true)
         }
     }
 }

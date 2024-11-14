@@ -50,7 +50,7 @@ struct VPNProviderServerView<Configuration>: View where Configuration: ProviderC
     private var vpnManager = VPNProviderManager<Configuration>(sorting: [
         .localizedCountry,
         .area,
-        .hostname
+        .serverId
     ])
 
     @StateObject
