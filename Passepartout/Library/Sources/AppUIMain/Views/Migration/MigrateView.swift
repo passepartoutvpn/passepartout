@@ -84,7 +84,7 @@ private extension MigrateView {
         ToolbarItem(placement: .confirmationAction) {
             Button(itemTitle(at: model.step)) {
                 Task {
-                    await performAction(at: model.step)
+                    await itemPerform(at: model.step)
                 }
             }
             .disabled(!itemEnabled(at: model.step))
@@ -122,7 +122,7 @@ private extension MigrateView {
         }
     }
 
-    func performAction(at step: Model.Step) async {
+    func itemPerform(at step: Model.Step) async {
         switch step {
         case .fetched:
             await migrate()
