@@ -82,33 +82,40 @@ private extension MigrateView {
 
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
-            Button(performTitle(at: model.step).title) {
+            Button(itemTitle(at: model.step)) {
                 Task {
                     await performAction(at: model.step)
                 }
             }
-            .disabled(!performTitle(at: model.step).enabled)
+            .disabled(!itemEnabled(at: model.step))
         }
     }
 }
 
 private extension MigrateView {
-    func performTitle(at step: Model.Step) -> (title: String, enabled: Bool) {
+    func itemTitle(at step: Model.Step) -> String {
         switch step {
-        case .initial, .fetching:
-            return ("Proceed", false)
+        case .initial, .fetching, .fetched:
+            return "Proceed"
 
-        case .fetched:
-            return ("Proceed", true)
-
-        case .migrating:
-            return ("Import", false)
-
-        case .migrated(let profiles):
-            return ("Import", !profiles.isEmpty)
+        case .migrating, .migrated:
+            return "Import"
 
         case .imported:
-            return ("Done", true)
+            return "Done"
+        }
+    }
+
+    func itemEnabled(at step: Model.Step) -> Bool {
+        switch step {
+        case .initial, .fetching, .migrating:
+            return false
+
+        case .migrated(let profiles):
+            return !profiles.isEmpty
+
+        case .fetched, .imported:
+            return true
         }
     }
 
