@@ -54,33 +54,35 @@ extension MigrateView {
                 }
             }
         }
+    }
+}
 
-        func isOnBinding(for profileId: UUID) -> Binding<Bool> {
-            Binding {
-                !excluded.contains(profileId)
-            } set: {
-                if $0 {
-                    excluded.remove(profileId)
-                } else {
-                    excluded.insert(profileId)
-                }
+private extension MigrateView.TableView {
+    func isOnBinding(for profileId: UUID) -> Binding<Bool> {
+        Binding {
+            !excluded.contains(profileId)
+        } set: {
+            if $0 {
+                excluded.remove(profileId)
+            } else {
+                excluded.insert(profileId)
             }
         }
+    }
 
-        func imageName(forStatus status: MigrationStatus) -> Theme.ImageName? {
-            switch status {
-            case .excluded:
-                return nil
+    func imageName(forStatus status: MigrationStatus) -> Theme.ImageName? {
+        switch status {
+        case .excluded:
+            return nil
 
-            case .pending:
-                return .progress
+        case .pending:
+            return .progress
 
-            case .migrated, .imported:
-                return .marked
+        case .migrated, .imported:
+            return .marked
 
-            case .failed:
-                return .failure
-            }
+        case .failed:
+            return .failure
         }
     }
 }

@@ -48,54 +48,56 @@ extension MigrateView {
                 }
             }
         }
+    }
+}
 
-        func button(forProfile profile: MigratableProfile) -> some View {
-            Button {
-                if excluded.contains(profile.id) {
-                    excluded.remove(profile.id)
-                } else {
-                    excluded.insert(profile.id)
-                }
-            } label: {
-                row(forProfile: profile, status: nil)
+private extension MigrateView.SectionView {
+    func button(forProfile profile: MigratableProfile) -> some View {
+        Button {
+            if excluded.contains(profile.id) {
+                excluded.remove(profile.id)
+            } else {
+                excluded.insert(profile.id)
             }
+        } label: {
+            row(forProfile: profile, status: nil)
         }
+    }
 
-        func row(forProfile profile: MigratableProfile, status: MigrationStatus?) -> some View {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(profile.name)
-                        .font(.headline)
+    func row(forProfile profile: MigratableProfile, status: MigrationStatus?) -> some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(profile.name)
+                    .font(.headline)
 
-                    profile.lastUpdate.map {
-                        Text($0.localizedDescription(style: .timestamp))
-                            .font(.subheadline)
-                    }
-                }
-                Spacer()
-                if let status {
-                    icon(forStatus: status)
-                } else if !excluded.contains(profile.id) {
-                    ThemeImage(.marked)
+                profile.lastUpdate.map {
+                    Text($0.localizedDescription(style: .timestamp))
+                        .font(.subheadline)
                 }
             }
-        }
-
-        @ViewBuilder
-        func icon(forStatus status: MigrationStatus) -> some View {
-            switch status {
-            case .excluded:
-                EmptyView()
-
-            case .pending:
-                ProgressView()
-
-            case .migrated, .imported:
+            Spacer()
+            if let status {
+                icon(forStatus: status)
+            } else if !excluded.contains(profile.id) {
                 ThemeImage(.marked)
-
-            case .failed:
-                ThemeImage(.failure)
             }
+        }
+    }
+
+    @ViewBuilder
+    func icon(forStatus status: MigrationStatus) -> some View {
+        switch status {
+        case .excluded:
+            EmptyView()
+
+        case .pending:
+            ProgressView()
+
+        case .migrated, .imported:
+            ThemeImage(.marked)
+
+        case .failed:
+            ThemeImage(.failure)
         }
     }
 }
