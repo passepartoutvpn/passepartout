@@ -50,17 +50,6 @@ extension IAPManager {
         willConnect: { iap, profile in
             var builder = profile.builder()
 
-            // copy app receipt URL to tunnel for beta eligibility
-            if let appReceiptURL = Bundle.main.appStoreReceiptURL {
-                let tunnelReceiptURL = BundleConfiguration.urlForAppGroupReceipt
-                do {
-                    try FileManager.default.removeItem(at: tunnelReceiptURL)
-                    try FileManager.default.copyItem(at: appReceiptURL, to: tunnelReceiptURL)
-                } catch {
-                    pp_log(.App.iap, .error, "Unable to copy receipt URL to tunnel: \(error)")
-                }
-            }
-
             // ineligible, suppress on-demand rules
             if !iap.isEligible(for: .onDemand) {
                 pp_log(.App.iap, .notice, "Ineligible, suppress on-demand rules")
