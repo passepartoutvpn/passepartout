@@ -28,7 +28,7 @@ import Foundation
 import PassepartoutKit
 
 extension MigrateView {
-    struct Model {
+    struct Model: Equatable {
         enum Step: Equatable {
             case initial
 
