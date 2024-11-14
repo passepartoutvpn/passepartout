@@ -74,14 +74,7 @@ extension MigrationManager {
             selection.forEach { profileId in
                 group.addTask {
                     do {
-                        if let simulation = self.simulation {
-                            if let maxMigrationTime = simulation.maxMigrationTime {
-                                try await Task.sleep(for: .seconds(.random(in: 1.0..<maxMigrationTime)))
-                            }
-                            if simulation.randomFailures, Bool.random() {
-                                throw PassepartoutError(.unhandled)
-                            }
-                        }
+                        try await self.simulateBehavior()
                         guard let profile = try await self.profileStrategy.fetchProfile(withId: profileId) else {
                             await onUpdate(profileId, .failed)
                             return nil
@@ -102,6 +95,20 @@ extension MigrationManager {
                 profiles.append(profile)
             }
             return profiles
+        }
+    }
+}
+
+private extension MigrationManager {
+    func simulateBehavior() async throws {
+        guard let simulation else {
+            return
+        }
+        if let maxMigrationTime = simulation.maxMigrationTime {
+            try await Task.sleep(for: .seconds(.random(in: 1.0..<maxMigrationTime)))
+        }
+        if simulation.randomFailures, Bool.random() {
+            throw PassepartoutError(.unhandled)
         }
     }
 }
