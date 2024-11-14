@@ -42,15 +42,10 @@ extension MigrateView {
                 TableColumn(Strings.Global.name, value: \.name)
                 TableColumn(Strings.Global.lastUpdate, value: \.timestamp)
                 TableColumn("") { profile in
-                    if let status = statuses[profile.id] {
-                        imageName(forStatus: status)
-                            .map {
-                                ThemeImage($0)
-                            }
-                    } else {
-                        Toggle("", isOn: isOnBinding(for: profile.id))
-                            .labelsHidden()
-                    }
+                    StatusView(
+                        isIncluded: isOnBinding(for: profile.id),
+                        status: statuses[profile.id]
+                    )
                 }
             }
         }
@@ -69,20 +64,42 @@ private extension MigrateView.TableView {
             }
         }
     }
+}
 
-    func imageName(forStatus status: MigrationStatus) -> Theme.ImageName? {
-        switch status {
-        case .excluded:
-            return nil
+private extension MigrateView.TableView {
+    struct StatusView: View {
 
-        case .pending:
-            return .progress
+        @Binding
+        var isIncluded: Bool
 
-        case .migrated, .imported:
-            return .marked
+        let status: MigrationStatus?
 
-        case .failed:
-            return .failure
+        var body: some View {
+            if let status {
+                imageName(forStatus: status)
+                    .map {
+                        ThemeImage($0)
+                    }
+            } else {
+                Toggle("", isOn: $isIncluded)
+                    .labelsHidden()
+            }
+        }
+
+        func imageName(forStatus status: MigrationStatus) -> Theme.ImageName? {
+            switch status {
+            case .excluded:
+                return nil
+
+            case .pending:
+                return .progress
+
+            case .migrated, .imported:
+                return .marked
+
+            case .failed:
+                return .failure
+            }
         }
     }
 }

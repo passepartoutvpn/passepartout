@@ -76,28 +76,40 @@ private extension MigrateView.SectionView {
                 }
             }
             Spacer()
+            StatusView(isIncluded: !excluded.contains(profile.id), status: status)
+        }
+    }
+}
+
+private extension MigrateView.SectionView {
+    struct StatusView: View {
+        let isIncluded: Bool
+
+        let status: MigrationStatus?
+
+        var body: some View {
             if let status {
                 icon(forStatus: status)
-            } else if !excluded.contains(profile.id) {
+            } else if isIncluded {
                 ThemeImage(.marked)
             }
         }
-    }
 
-    @ViewBuilder
-    func icon(forStatus status: MigrationStatus) -> some View {
-        switch status {
-        case .excluded:
-            EmptyView()
+        @ViewBuilder
+        func icon(forStatus status: MigrationStatus) -> some View {
+            switch status {
+            case .excluded:
+                EmptyView()
 
-        case .pending:
-            ProgressView()
+            case .pending:
+                ProgressView()
 
-        case .migrated, .imported:
-            ThemeImage(.marked)
+            case .migrated, .imported:
+                ThemeImage(.marked)
 
-        case .failed:
-            ThemeImage(.failure)
+            case .failed:
+                ThemeImage(.failure)
+            }
         }
     }
 }
