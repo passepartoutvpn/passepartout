@@ -29,11 +29,14 @@ import PassepartoutKit
 @MainActor
 public final class MigrationManager: ObservableObject {
     public struct Simulation {
+        public let fakeProfiles: Bool
+
         public let maxMigrationTime: Double?
 
         public let randomFailures: Bool
 
-        public init(maxMigrationTime: Double?, randomFailures: Bool) {
+        public init(fakeProfiles: Bool, maxMigrationTime: Double?, randomFailures: Bool) {
+            self.fakeProfiles = fakeProfiles
             self.maxMigrationTime = maxMigrationTime
             self.randomFailures = randomFailures
         }
@@ -52,6 +55,8 @@ public final class MigrationManager: ObservableObject {
         self.simulation = simulation
     }
 }
+
+// MARK: - Public interface
 
 extension MigrationManager {
     public func fetchMigratableProfiles() async throws -> [MigratableProfile] {
@@ -75,7 +80,7 @@ extension MigrationManager {
                 group.addTask {
                     do {
                         try await self.simulateBehavior()
-                        guard let profile = try await self.profileStrategy.fetchProfile(withId: profileId) else {
+                        guard let profile = try await self.simulateMigrateProfile(withId: profileId) else {
                             await onUpdate(profileId, .failed)
                             return nil
                         }
@@ -111,7 +116,7 @@ extension MigrationManager {
                 group.addTask {
                     do {
                         try await self.simulateBehavior()
-                        try await manager.save(profile, force: true)
+                        try await self.simulateSaveProfile(profile, manager: manager)
                         await onUpdate(profile.id, .imported)
                     } catch {
                         await onUpdate(profile.id, .failed)
@@ -121,6 +126,8 @@ extension MigrationManager {
         }
     }
 }
+
+// MARK: - Simulation
 
 private extension MigrationManager {
     func simulateBehavior() async throws {
@@ -133,6 +140,20 @@ private extension MigrationManager {
         if simulation.randomFailures, Bool.random() {
             throw PassepartoutError(.unhandled)
         }
+    }
+
+    func simulateMigrateProfile(withId profileId: UUID) async throws -> Profile? {
+        if simulation?.fakeProfiles ?? false {
+            return try? Profile.Builder().tryBuild()
+        }
+        return try await profileStrategy.fetchProfile(withId: profileId)
+    }
+
+    func simulateSaveProfile(_ profile: Profile, manager: ProfileManager) async throws {
+        if simulation?.fakeProfiles ?? false {
+            return
+        }
+        try await manager.save(profile, force: true)
     }
 }
 
