@@ -64,9 +64,22 @@ extension MigrateView {
 
 private extension MigrateView.ContentView {
     var sortedProfiles: [MigratableProfile] {
-        profiles.sorted {
-            $0.name.lowercased() < $1.name.lowercased()
-        }
+        profiles
+            .filter {
+                switch step {
+                case .migrating:
+                    return !excluded.contains($0.id)
+
+                case .migrated, .imported:
+                    return statuses[$0.id] != .excluded
+
+                default:
+                    return true
+                }
+            }
+            .sorted {
+                $0.name.lowercased() < $1.name.lowercased()
+            }
     }
 }
 
