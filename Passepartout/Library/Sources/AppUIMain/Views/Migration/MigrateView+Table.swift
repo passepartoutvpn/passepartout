@@ -75,25 +75,18 @@ private extension MigrateView.TableView {
         let status: MigrationStatus
 
         var body: some View {
-            imageName(forStatus: status)
-                .map {
-                    ThemeImage($0)
-                }
-        }
-
-        func imageName(forStatus status: MigrationStatus) -> Theme.ImageName? {
             switch status {
             case .excluded:
-                return nil
+                Text("--")
 
             case .pending:
-                return .progress
+                ThemeImage(.progress)
 
             case .migrated, .imported:
-                return .marked
+                ThemeImage(.marked)
 
             case .failed:
-                return .failure
+                ThemeImage(.failure)
             }
         }
     }

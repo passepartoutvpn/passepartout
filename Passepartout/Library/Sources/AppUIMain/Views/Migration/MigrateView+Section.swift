@@ -99,7 +99,7 @@ private extension MigrateView.SectionView {
         func icon(forStatus status: MigrationStatus) -> some View {
             switch status {
             case .excluded:
-                EmptyView()
+                Text("--")
 
             case .pending:
                 ProgressView()
