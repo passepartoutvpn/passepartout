@@ -42,6 +42,9 @@ struct MigrateView: View {
 
     let style: Style
 
+    @ObservedObject
+    var profileManager: ProfileManager
+
     @State
     private var isFetching = true
 
