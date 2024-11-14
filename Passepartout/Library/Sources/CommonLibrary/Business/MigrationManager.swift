@@ -97,6 +97,29 @@ extension MigrationManager {
             return profiles
         }
     }
+
+    public func importProfiles(
+        _ profiles: [Profile],
+        into manager: ProfileManager,
+        onUpdate: @escaping @MainActor (UUID, MigrationStatus) -> Void
+    ) async {
+        profiles.forEach {
+            onUpdate($0.id, .pending)
+        }
+        await withTaskGroup(of: Void.self) { group in
+            profiles.forEach { profile in
+                group.addTask {
+                    do {
+                        try await self.simulateBehavior()
+                        try await manager.save(profile, force: true)
+                        await onUpdate(profile.id, .imported)
+                    } catch {
+                        await onUpdate(profile.id, .failed)
+                    }
+                }
+            }
+        }
+    }
 }
 
 private extension MigrationManager {

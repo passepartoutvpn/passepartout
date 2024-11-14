@@ -180,6 +180,10 @@ private extension MigrateView {
         guard case .migrated(let profiles) = model.step, !profiles.isEmpty else {
             fatalError("Must call migrate() and succeed with non-empty profiles")
         }
-        // FIXME: ###, import migrated profiles
+        model.step = .importing
+        await migrationManager.importProfiles(profiles, into: profileManager) {
+            model.statuses[$0] = $1
+        }
+        model.step = .imported
     }
 }
