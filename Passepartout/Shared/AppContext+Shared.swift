@@ -94,18 +94,25 @@ extension AppContext {
             return ProviderManager(repository: repository)
         }()
 
-        // MARK: LegacyManager
+        // MARK: MigrationManager
 
-        let legacyStrategy = LegacyV2Strategy(
+        let profileStrategy = ProfileV2MigrationStrategy(
             coreDataLogger: .default,
             profilesContainerName: Constants.shared.containers.legacyV2,
             cloudKitIdentifier: BundleConfiguration.mainString(for: .legacyV2CloudKitId)
         )
-        let legacyManager = LegacyManager(strategy: legacyStrategy)
+#if DEBUG
+        let migrationManager = MigrationManager(profileStrategy: profileStrategy, simulation: .init(
+            maxMigrationTime: 3.0,
+            randomFailures: true
+        ))
+#else
+        let migrationManager = MigrationManager(profileStrategy: profileStrategy)
+#endif
 
         return AppContext(
             iapManager: .shared,
-            legacyManager: legacyManager,
+            migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,
             registry: .shared,

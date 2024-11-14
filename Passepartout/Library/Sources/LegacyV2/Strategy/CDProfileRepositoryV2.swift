@@ -24,11 +24,11 @@
 //
 
 import CommonLibrary
-import CoreData
+@preconcurrency import CoreData
 import Foundation
 import PassepartoutKit
 
-final class CDProfileRepositoryV2 {
+final class CDProfileRepositoryV2: Sendable {
     static var model: NSManagedObjectModel {
         guard let model: NSManagedObjectModel = .mergedModel(from: [.module]) else {
             fatalError("Unable to build Core Data model (Profiles v2)")
@@ -63,9 +63,18 @@ final class CDProfileRepositoryV2 {
         )
     }
 
-    func profiles() async throws -> [ProfileV2] {
+    func profile(withId profileId: UUID) async throws -> ProfileV2? {
+        try await profiles(withIds: [profileId]).first
+    }
+
+    func profiles(withIds profileIds: Set<UUID>?) async throws -> [ProfileV2] {
         let decoder = JSONDecoder()
-        return try await fetchProfiles(
+        let profiles: [ProfileV2] = try await fetchProfiles(
+            prefetch: {
+                if let profileIds {
+                    $0.predicate = NSPredicate(format: "any uuid in %@", profileIds)
+                }
+            },
             map: {
                 $0.compactMap {
                     guard let json = $0.value.encryptedJSON ?? $0.value.json else {
@@ -81,10 +90,11 @@ final class CDProfileRepositoryV2 {
                 }
             }
         )
+        return profiles
     }
 }
 
-private extension CDProfileRepositoryV2 {
+extension CDProfileRepositoryV2 {
     func fetchProfiles<T>(
         prefetch: ((NSFetchRequest<CDProfile>) -> Void)? = nil,
         map: @escaping ([UUID: CDProfile]) -> [T]

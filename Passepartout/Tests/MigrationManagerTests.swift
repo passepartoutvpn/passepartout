@@ -1,5 +1,5 @@
 //
-//  LegacyV2CoreDataTests.swift
+//  MigrationManagerTests.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/12/24.
@@ -23,15 +23,19 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import CommonUtils
+import CommonLibrary
 import Foundation
 @testable import LegacyV2
 import PassepartoutKit
 import XCTest
 
-final class LegacyV2CoreDataTests: XCTestCase {
-    func test_givenStore_whenFetchV2_thenReturnsProfilesV2() async throws {
-        let sut = newStore()
+@MainActor
+final class MigrationManagerTests: XCTestCase {
+}
+
+extension MigrationManagerTests {
+    func test_givenStrategy_whenFetchV2_thenReturnsProfilesV2() async throws {
+        let sut = newStrategy()
 
         let profilesV2 = try await sut.fetchProfilesV2()
         XCTAssertEqual(profilesV2.count, 6)
@@ -45,8 +49,8 @@ final class LegacyV2CoreDataTests: XCTestCase {
         ])
     }
 
-    func test_givenStore_whenFetch_thenReturnsMigratableProfiles() async throws {
-        let sut = newStore()
+    func test_givenManager_whenFetch_thenReturnsMigratableProfiles() async throws {
+        let sut = newManager()
 
         let migratable = try await sut.fetchMigratableProfiles()
         let expectedIDs = [
@@ -71,16 +75,13 @@ final class LegacyV2CoreDataTests: XCTestCase {
         XCTAssertEqual(Set(migratable.map(\.name)), Set(expectedNames))
     }
 
-    func test_givenStore_whenMigrateHideMe_thenIsExpected() async throws {
-        let sut = newStore()
+    func test_givenManager_whenMigrateHideMe_thenIsExpected() async throws {
+        let sut = newManager()
 
         let id = try XCTUnwrap(UUID(uuidString: "8A568345-85C4-44C1-A9C4-612E8B07ADC5"))
-        let result = try await sut.fetchProfiles(selection: [id])
-        let migrated = result.migrated
-        XCTAssertEqual(migrated.count, 1)
-        XCTAssertTrue(result.failed.isEmpty)
+        let migrated = try await sut.migrateProfile(withId: id)
+        let profile = try XCTUnwrap(migrated)
 
-        let profile = try XCTUnwrap(migrated.first)
         XCTAssertEqual(profile.id, id)
         XCTAssertEqual(profile.name, "Hide.me")
         XCTAssertEqual(profile.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 673117681.24825))
@@ -109,17 +110,13 @@ final class LegacyV2CoreDataTests: XCTestCase {
         ])
     }
 
-    func test_givenStore_whenMigrateProtonVPN_thenIsExpected() async throws {
-        let sut = newStore()
+    func test_givenManager_whenMigrateProtonVPN_thenIsExpected() async throws {
+        let sut = newManager()
 
         let id = try XCTUnwrap(UUID(uuidString: "981E7CBD-7733-4CF3-9A51-2777614ED5D4"))
-        let result = try await sut.fetchProfiles(selection: [id])
-        let migrated = result.migrated
-        XCTAssertEqual(migrated.count, 1)
-        XCTAssertTrue(result.failed.isEmpty)
+        let migrated = try await sut.migrateProfile(withId: id)
+        let profile = try XCTUnwrap(migrated)
 
-        XCTAssertEqual(migrated.count, 1)
-        let profile = try XCTUnwrap(migrated.first)
         XCTAssertEqual(profile.id, id)
         XCTAssertEqual(profile.name, "ProtonVPN")
         XCTAssertEqual(profile.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 724509584.854822))
@@ -137,17 +134,13 @@ final class LegacyV2CoreDataTests: XCTestCase {
         XCTAssertEqual(openVPN.credentials?.password, "bar")
     }
 
-    func test_givenStore_whenMigrateVPSOpenVPN_thenIsExpected() async throws {
-        let sut = newStore()
+    func test_givenManager_whenMigrateVPSOpenVPN_thenIsExpected() async throws {
+        let sut = newManager()
 
         let id = try XCTUnwrap(UUID(uuidString: "239AD322-7440-4198-990A-D91379916FE2"))
-        let result = try await sut.fetchProfiles(selection: [id])
-        let migrated = result.migrated
-        XCTAssertEqual(migrated.count, 1)
-        XCTAssertTrue(result.failed.isEmpty)
+        let migrated = try await sut.migrateProfile(withId: id)
+        let profile = try XCTUnwrap(migrated)
 
-        XCTAssertEqual(migrated.count, 1)
-        let profile = try XCTUnwrap(migrated.first)
         XCTAssertEqual(profile.id, id)
         XCTAssertEqual(profile.name, "vps-ta-cert-cbc256-lzo")
         XCTAssertEqual(profile.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 726164772.28976))
@@ -174,17 +167,13 @@ final class LegacyV2CoreDataTests: XCTestCase {
         XCTAssertEqual(cfg.tlsWrap?.strategy, .auth)
     }
 
-    func test_givenStore_whenMigrateVPSWireGuard_thenIsExpected() async throws {
-        let sut = newStore()
+    func test_givenManager_whenMigrateVPSWireGuard_thenIsExpected() async throws {
+        let sut = newManager()
 
         let id = try XCTUnwrap(UUID(uuidString: "069F76BD-1F6B-425C-AD83-62477A8B6558"))
-        let result = try await sut.fetchProfiles(selection: [id])
-        let migrated = result.migrated
-        XCTAssertEqual(migrated.count, 1)
-        XCTAssertTrue(result.failed.isEmpty)
+        let migrated = try await sut.migrateProfile(withId: id)
+        let profile = try XCTUnwrap(migrated)
 
-        XCTAssertEqual(migrated.count, 1)
-        let profile = try XCTUnwrap(migrated.first)
         XCTAssertEqual(profile.id, id)
         XCTAssertEqual(profile.name, "vps-wg")
         XCTAssertEqual(profile.attributes.lastUpdate, Date(timeIntervalSinceReferenceDate: 727398252.46203))
@@ -217,16 +206,21 @@ final class LegacyV2CoreDataTests: XCTestCase {
     }
 }
 
-private extension LegacyV2CoreDataTests {
-    func newStore() -> LegacyV2 {
-        guard let baseURL = Bundle(for: LegacyV2CoreDataTests.self).resourceURL else {
+private extension MigrationManagerTests {
+    func newStrategy() -> ProfileV2MigrationStrategy {
+        guard let baseURL = Bundle(for: MigrationManagerTests.self).resourceURL else {
             fatalError()
         }
-        return LegacyV2(
+        return ProfileV2MigrationStrategy(
             coreDataLogger: nil,
             profilesContainerName: "Profiles",
             baseURL: baseURL,
             cloudKitIdentifier: nil
         )
+    }
+
+    func newManager() -> MigrationManager {
+        let strategy = newStrategy()
+        return MigrationManager(profileStrategy: strategy)
     }
 }

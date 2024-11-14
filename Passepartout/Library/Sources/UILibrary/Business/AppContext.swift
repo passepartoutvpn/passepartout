@@ -33,7 +33,7 @@ import PassepartoutKit
 public final class AppContext: ObservableObject {
     public let iapManager: IAPManager
 
-    public let legacyManager: LegacyManager
+    public let migrationManager: MigrationManager
 
     public let profileManager: ProfileManager
 
@@ -51,14 +51,14 @@ public final class AppContext: ObservableObject {
 
     public init(
         iapManager: IAPManager,
-        legacyManager: LegacyManager,
+        migrationManager: MigrationManager,
         profileManager: ProfileManager,
         providerManager: ProviderManager,
         registry: Registry,
         tunnel: ExtendedTunnel
     ) {
         self.iapManager = iapManager
-        self.legacyManager = legacyManager
+        self.migrationManager = migrationManager
         self.profileManager = profileManager
         self.providerManager = providerManager
         self.registry = registry

@@ -76,10 +76,10 @@ extension AppContext {
         let providerManager = ProviderManager(
             repository: InMemoryProviderRepository()
         )
-        let legacyManager = LegacyManager()
+        let migrationManager = MigrationManager()
         return AppContext(
             iapManager: iapManager,
-            legacyManager: legacyManager,
+            migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,
             registry: registry,
