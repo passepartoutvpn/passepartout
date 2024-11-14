@@ -103,8 +103,8 @@ private extension MigrateView {
         case .migrating:
             return ("Import", false)
 
-        case .migrated:
-            return ("Import", true)
+        case .migrated(let profiles):
+            return ("Import", !profiles.isEmpty)
 
         case .imported:
             return ("Done", true)
