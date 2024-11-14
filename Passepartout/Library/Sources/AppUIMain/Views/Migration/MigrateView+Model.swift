@@ -54,21 +54,27 @@ extension MigrateView {
 }
 
 extension MigrateView.Model {
+    var visibleProfiles: [MigratableProfile] {
+        profiles
+            .filter {
+                switch step {
+                case .initial, .fetching, .fetched:
+                    return true
+
+                case .migrating, .migrated, .importing, .imported:
+                    return statuses[$0.id] != .excluded
+                }
+            }
+            .sorted {
+                $0.name.lowercased() < $1.name.lowercased()
+            }
+    }
+
     var selection: Set<UUID> {
         Set(profiles
             .filter {
                 statuses[$0.id] != .excluded
             }
             .map(\.id))
-    }
-
-    var visibleProfiles: [MigratableProfile] {
-        profiles
-            .filter {
-                statuses[$0.id] != .excluded
-            }
-            .sorted {
-                $0.name.lowercased() < $1.name.lowercased()
-            }
     }
 }
