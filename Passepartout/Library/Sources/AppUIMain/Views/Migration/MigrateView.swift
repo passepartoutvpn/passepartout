@@ -111,10 +111,13 @@ private extension MigrateView {
         case .initial, .fetching, .migrating:
             return false
 
+        case .fetched:
+            return !model.profiles.isEmpty
+
         case .migrated(let profiles):
             return !profiles.isEmpty
 
-        case .fetched, .imported:
+        case .imported:
             return true
         }
     }
