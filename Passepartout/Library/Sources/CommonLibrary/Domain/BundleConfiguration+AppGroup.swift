@@ -36,6 +36,10 @@ extension BundleConfiguration {
     public static var urlForTunnelLog: URL {
         cachesURL.appending(path: Constants.shared.log.tunnelPath)
     }
+
+    public static var urlForAppGroupReceipt: URL {
+        cachesURL.appending(path: Constants.shared.tunnel.appGroupReceiptPath)
+    }
 }
 
 private extension BundleConfiguration {

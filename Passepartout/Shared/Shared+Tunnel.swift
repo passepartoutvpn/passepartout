@@ -42,19 +42,11 @@ private extension Configuration.IAPManager {
     static var tunnelReceiptReader: AppReceiptReader {
         FallbackReceiptReader(
             main: StoreKitReceiptReader(),
-            beta: releaseReceiptURL.map {
-                KvittoReceiptReader(url: $0)
-            }
+            beta: KvittoReceiptReader(url: appGroupReceiptURL)
         )
     }
 
-    static var releaseReceiptURL: URL? {
-        let appBundle = Bundle(for: BundleReference.self)
-        guard let url = appBundle.appStoreReceiptURL else {
-            return nil
-        }
-        return url
-            .deletingLastPathComponent()
-            .appendingPathComponent("receipt") // release receipt
+    static var appGroupReceiptURL: URL {
+        BundleConfiguration.urlForAppGroupReceipt // copied by ProfileProcessor
     }
 }

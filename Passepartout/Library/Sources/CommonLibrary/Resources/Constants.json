@@ -23,7 +23,8 @@
     },
     "tunnel": {
         "profileTitleFormat": "Passepartout: %@",
-        "refreshInterval": 3.0
+        "refreshInterval": 3.0,
+        "appGroupReceiptPath": "app-group-receipt"
     },
     "api": {
         "timeoutInterval": 5.0

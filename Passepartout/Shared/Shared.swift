@@ -30,11 +30,6 @@ import Foundation
 import PassepartoutKit
 import PassepartoutWireGuardGo
 
-final class BundleReference {
-    private init() {
-    }
-}
-
 // MARK: Registry
 
 extension Registry {
