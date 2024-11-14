@@ -112,7 +112,7 @@ extension AppContext {
 #endif
 
         return AppContext(
-            iapManager: .shared,
+            iapManager: .sharedForApp,
             migrationManager: migrationManager,
             profileManager: profileManager,
             providerManager: providerManager,

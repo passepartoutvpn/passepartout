@@ -81,7 +81,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider, @unchecked Sendable {
 @MainActor
 private extension PacketTunnelProvider {
     var iapManager: IAPManager {
-        .shared
+        .sharedForTunnel
     }
 
     var isEligibleForPlatform: Bool {

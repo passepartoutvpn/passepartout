@@ -31,6 +31,19 @@ public final class StoreKitReceiptReader: InAppReceiptReader, Sendable {
     }
 
     public func receipt() async -> InAppReceipt? {
+        let originalBuildNumber: Int?
+        do {
+            switch try await AppTransaction.shared {
+            case .verified(let tx):
+                originalBuildNumber = Int(tx.originalAppVersion)
+
+            default:
+                originalBuildNumber = nil
+            }
+        } catch {
+            originalBuildNumber = nil
+        }
+
         var transactions: [Transaction] = []
         for await entitlement in Transaction.currentEntitlements {
             switch entitlement {
@@ -51,6 +64,6 @@ public final class StoreKitReceiptReader: InAppReceiptReader, Sendable {
                 )
             }
 
-        return InAppReceipt(originalBuildNumber: nil, purchaseReceipts: purchaseReceipts)
+        return InAppReceipt(originalBuildNumber: originalBuildNumber, purchaseReceipts: purchaseReceipts)
     }
 }
