@@ -75,10 +75,10 @@ extension MigrateView {
             case .pending:
                 return .progress
 
-            case .success:
+            case .migrated, .imported:
                 return .marked
 
-            case .failure:
+            case .failed:
                 return .failure
             }
         }

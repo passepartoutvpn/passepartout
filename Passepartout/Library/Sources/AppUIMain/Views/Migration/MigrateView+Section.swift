@@ -90,10 +90,10 @@ extension MigrateView {
             case .pending:
                 ProgressView()
 
-            case .success:
+            case .migrated, .imported:
                 ThemeImage(.marked)
 
-            case .failure:
+            case .failed:
                 ThemeImage(.failure)
             }
         }

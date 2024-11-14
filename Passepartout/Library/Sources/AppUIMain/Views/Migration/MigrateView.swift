@@ -101,14 +101,14 @@ private extension MigrateView {
         case .migrating, .migrated:
             return "Import"
 
-        case .imported:
+        case .importing, .imported:
             return "Done"
         }
     }
 
     func itemEnabled(at step: Model.Step) -> Bool {
         switch step {
-        case .initial, .fetching, .migrating:
+        case .initial, .fetching, .migrating, .importing:
             return false
 
         case .fetched:

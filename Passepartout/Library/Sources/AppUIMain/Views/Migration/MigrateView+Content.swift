@@ -101,8 +101,9 @@ private extension MigrateView.ContentView {
         statuses: [
             PrivatePreviews.profiles[0].id: .excluded,
             PrivatePreviews.profiles[1].id: .pending,
-            PrivatePreviews.profiles[2].id: .failure,
-            PrivatePreviews.profiles[3].id: .success
+            PrivatePreviews.profiles[2].id: .migrated,
+            PrivatePreviews.profiles[3].id: .imported,
+            PrivatePreviews.profiles[4].id: .failed
         ]
     )
     .withMockEnvironment()
@@ -112,10 +113,11 @@ private struct PrivatePreviews {
     static let oneDay: TimeInterval = 24 * 60 * 60
 
     static let profiles: [MigratableProfile] = [
-        .init(id: UUID(), name: "1One", lastUpdate: Date().addingTimeInterval(-oneDay)),
-        .init(id: UUID(), name: "2Two", lastUpdate: Date().addingTimeInterval(-3 * oneDay)),
-        .init(id: UUID(), name: "3Three", lastUpdate: Date().addingTimeInterval(-90 * oneDay)),
-        .init(id: UUID(), name: "4Four", lastUpdate: Date().addingTimeInterval(-180 * oneDay))
+        .init(id: UUID(), name: "1 One", lastUpdate: Date().addingTimeInterval(-oneDay)),
+        .init(id: UUID(), name: "2 Two", lastUpdate: Date().addingTimeInterval(-3 * oneDay)),
+        .init(id: UUID(), name: "3 Three", lastUpdate: Date().addingTimeInterval(-90 * oneDay)),
+        .init(id: UUID(), name: "4 Four", lastUpdate: Date().addingTimeInterval(-180 * oneDay)),
+        .init(id: UUID(), name: "5 Five", lastUpdate: Date().addingTimeInterval(-240 * oneDay))
     ]
 
     struct MigratePreview: View {

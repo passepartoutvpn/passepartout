@@ -83,13 +83,13 @@ extension MigrationManager {
                             }
                         }
                         guard let profile = try await self.profileStrategy.fetchProfile(withId: profileId) else {
-                            await onUpdate(profileId, .failure)
+                            await onUpdate(profileId, .failed)
                             return nil
                         }
-                        await onUpdate(profileId, .success)
+                        await onUpdate(profileId, .migrated)
                         return profile
                     } catch {
-                        await onUpdate(profileId, .failure)
+                        await onUpdate(profileId, .failed)
                         return nil
                     }
                 }

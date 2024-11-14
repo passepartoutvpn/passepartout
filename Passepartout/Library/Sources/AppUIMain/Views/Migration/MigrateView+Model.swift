@@ -40,6 +40,8 @@ extension MigrateView {
 
             case migrated([Profile])
 
+            case importing
+
             case imported
         }
 
