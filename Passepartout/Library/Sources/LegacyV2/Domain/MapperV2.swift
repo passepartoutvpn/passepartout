@@ -34,8 +34,6 @@ struct MapperV2 {
         builder.name = v2.header.name
         builder.attributes.lastUpdate = v2.header.lastUpdate
 
-        modules.append(toOnDemandModule(v2.onDemand))
-
         if let provider = v2.provider {
             if let module = try toProviderModule(provider) {
                 let providerId = ProviderID(rawValue: provider.name)
@@ -51,6 +49,8 @@ struct MapperV2 {
         try toNetworkModules(v2.networkSettings).forEach {
             modules.append($0)
         }
+
+        modules.append(toOnDemandModule(v2.onDemand))
 
         builder.modules = modules
         builder.activeModulesIds = Set(modules.map(\.id))
