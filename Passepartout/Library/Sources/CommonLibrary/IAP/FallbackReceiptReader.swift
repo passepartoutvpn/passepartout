@@ -29,18 +29,18 @@ import Kvitto
 import PassepartoutKit
 
 public actor FallbackReceiptReader: AppReceiptReader {
-    private let reader: InAppReceiptReader?
+    private let mainReader: InAppReceiptReader
 
-    private nonisolated let localReader: (URL) -> InAppReceiptReader?
+    private nonisolated let betaReader: InAppReceiptReader?
 
     private var pendingTask: Task<InAppReceipt?, Never>?
 
     public init(
-        reader: (InAppReceiptReader & Sendable)?,
-        localReader: @escaping @Sendable (URL) -> InAppReceiptReader & Sendable
+        main mainReader: InAppReceiptReader & Sendable,
+        beta betaReader: (InAppReceiptReader & Sendable)?
     ) {
-        self.reader = reader
-        self.localReader = localReader
+        self.mainReader = mainReader
+        self.betaReader = betaReader
     }
 
     public func receipt(at userLevel: AppUserLevel) async -> InAppReceipt? {
@@ -58,49 +58,12 @@ public actor FallbackReceiptReader: AppReceiptReader {
 
 private extension FallbackReceiptReader {
     func asyncReceipt(at userLevel: AppUserLevel) async -> InAppReceipt? {
-        let localURL = Bundle.main.appStoreReceiptURL
-
         pp_log(.App.iap, .debug, "\tParse receipt for user level \(userLevel)")
-
-        // 1. TestFlight, look for release receipt
-        let releaseReceipt: InAppReceipt? = await {
-            guard userLevel == .beta, let localURL else {
-                return nil
-            }
-            pp_log(.App.iap, .debug, "\tTestFlight, look for release receipt")
-            let releaseURL = localURL
-                .deletingLastPathComponent()
-                .appendingPathComponent("receipt")
-
-            let release = localReader(releaseURL)
-            return await release?.receipt()
-        }()
-
-        if let releaseReceipt {
-            pp_log(.App.iap, .debug, "\tTestFlight, return release receipt")
-            return releaseReceipt
+        if userLevel == .beta, let betaReader {
+            pp_log(.App.iap, .debug, "\tTestFlight, read beta receipt")
+            return await betaReader.receipt()
         }
-
-        let localReceiptBlock: () async -> InAppReceipt? = { [weak self] in
-            guard let localURL, let local = self?.localReader(localURL) else {
-                return nil
-            }
-            return await local.receipt()
-        }
-
-        // 2. primary receipt + build from local receipt
-        pp_log(.App.iap, .debug, "\tNo release receipt, read primary receipt")
-        if let receipt = await reader?.receipt() {
-            if let build = await localReceiptBlock()?.originalBuildNumber {
-                pp_log(.App.iap, .debug, "\tReturn primary receipt with local build: \(build)")
-                return receipt.withBuildNumber(build)
-            }
-            pp_log(.App.iap, .debug, "\tReturn primary receipt without local build")
-            return receipt
-        }
-
-        // 3. fall back to local receipt
-        pp_log(.App.iap, .debug, "\tReturn local receipt")
-        return await localReceiptBlock()
+        pp_log(.App.iap, .debug, "\tProduction, read main receipt")
+        return await mainReader.receipt()
     }
 }
