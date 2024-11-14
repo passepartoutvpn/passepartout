@@ -59,7 +59,7 @@ struct MigrateView: View {
             ContentView(
                 style: style,
                 step: model.step,
-                profiles: model.profiles,
+                profiles: model.visibleProfiles,
                 excluded: $model.excluded,
                 statuses: model.statuses
             )

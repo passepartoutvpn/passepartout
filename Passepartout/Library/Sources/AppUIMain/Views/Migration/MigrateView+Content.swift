@@ -45,7 +45,7 @@ extension MigrateView {
             case .section:
                 MigrateView.SectionView(
                     step: step,
-                    profiles: sortedProfiles,
+                    profiles: profiles,
                     excluded: $excluded,
                     statuses: statuses
                 )
@@ -53,33 +53,12 @@ extension MigrateView {
             case .table:
                 MigrateView.TableView(
                     step: step,
-                    profiles: sortedProfiles,
+                    profiles: profiles,
                     excluded: $excluded,
                     statuses: statuses
                 )
             }
         }
-    }
-}
-
-private extension MigrateView.ContentView {
-    var sortedProfiles: [MigratableProfile] {
-        profiles
-            .filter {
-                switch step {
-                case .migrating:
-                    return !excluded.contains($0.id)
-
-                case .migrated, .imported:
-                    return statuses[$0.id] != .excluded
-
-                default:
-                    return true
-                }
-            }
-            .sorted {
-                $0.name.lowercased() < $1.name.lowercased()
-            }
     }
 }
 
