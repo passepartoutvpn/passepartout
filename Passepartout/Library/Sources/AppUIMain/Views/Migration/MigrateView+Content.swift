@@ -59,11 +59,13 @@ extension MigrateView {
                 )
             }
         }
+    }
+}
 
-        var sortedProfiles: [MigratableProfile] {
-            profiles.sorted {
-                $0.name.lowercased() < $1.name.lowercased()
-            }
+private extension MigrateView.ContentView {
+    var sortedProfiles: [MigratableProfile] {
+        profiles.sorted {
+            $0.name.lowercased() < $1.name.lowercased()
         }
     }
 }
