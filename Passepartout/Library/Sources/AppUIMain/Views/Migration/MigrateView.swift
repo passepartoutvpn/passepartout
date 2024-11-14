@@ -180,11 +180,7 @@ private extension MigrateView {
             fatalError("Must call migrate() and succeed with non-empty profiles")
         }
         model.step = .importing
-        model.statuses.forEach {
-            if model.statuses[$0.key] == .failed {
-                model.statuses[$0.key] = .excluded
-            }
-        }
+        model.excludeFailed()
         await migrationManager.importProfiles(profiles, into: profileManager) {
             model.statuses[$0] = $1
         }

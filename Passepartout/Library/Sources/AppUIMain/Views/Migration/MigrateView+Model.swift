@@ -50,6 +50,14 @@ extension MigrateView {
         var profiles: [MigratableProfile] = []
 
         var statuses: [UUID: MigrationStatus] = [:]
+
+        mutating func excludeFailed() {
+            statuses.forEach {
+                if statuses[$0.key] == .failed {
+                    statuses[$0.key] = .excluded
+                }
+            }
+        }
     }
 }
 
