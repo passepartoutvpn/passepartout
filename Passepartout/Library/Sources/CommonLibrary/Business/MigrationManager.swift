@@ -144,7 +144,7 @@ private extension MigrationManager {
 
     func simulateMigrateProfile(withId profileId: UUID) async throws -> Profile? {
         if simulation?.fakeProfiles ?? false {
-            return try? Profile.Builder().tryBuild()
+            return try? Profile.Builder(id: profileId).tryBuild()
         }
         return try await profileStrategy.fetchProfile(withId: profileId)
     }
