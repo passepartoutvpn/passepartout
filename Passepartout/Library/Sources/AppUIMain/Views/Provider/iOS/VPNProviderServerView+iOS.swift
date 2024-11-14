@@ -178,6 +178,9 @@ private extension VPNProviderServerView.ServersSubview {
             .filter {
                 $0.provider.countryCode == code
             }
+            .sorted {
+                $0.provider.serverId < $1.provider.serverId
+            }
             .nilIfEmpty
     }
 
