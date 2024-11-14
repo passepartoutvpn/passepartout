@@ -52,7 +52,8 @@ struct ProfileContainerView: View, Routable {
         debugChanges()
         return innerView
             .modifier(ContainerModifier(
-                profileManager: profileManager
+                profileManager: profileManager,
+                flow: flow
             ))
             .modifier(ProfileImporterModifier(
                 profileManager: profileManager,
@@ -108,6 +109,8 @@ private struct ContainerModifier: ViewModifier {
     @ObservedObject
     var profileManager: ProfileManager
 
+    let flow: ProfileContainerView.Flow?
+
     @State
     private var search = ""
 
@@ -117,7 +120,16 @@ private struct ContainerModifier: ViewModifier {
             .themeProgress(
                 if: !profileManager.isReady,
                 isEmpty: !profileManager.hasProfiles,
-                emptyMessage: Strings.Views.Profiles.Folders.noProfiles
+                emptyContent: {
+                    VStack(spacing: 16) {
+                        Text(Strings.Views.Profiles.Folders.noProfiles)
+                            .themeEmptyMessage(fullScreen: false)
+
+                        Button(Strings.Views.Profiles.Folders.NoProfiles.migrate) {
+                            flow?.onMigrateProfiles()
+                        }
+                    }
+                }
             )
             .searchable(text: $search)
             .onChange(of: search) {

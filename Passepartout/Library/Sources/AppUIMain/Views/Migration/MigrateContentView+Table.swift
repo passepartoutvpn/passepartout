@@ -1,5 +1,5 @@
 //
-//  MigrateView+Table.swift
+//  MigrateContentView+Table.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/13/24.
@@ -26,43 +26,69 @@
 import CommonLibrary
 import SwiftUI
 
-extension MigrateView {
+extension MigrateContentView {
     struct TableView: View {
 
         @EnvironmentObject
         private var theme: Theme
 
-        let step: Model.Step
+        let step: MigrateViewStep
 
         let profiles: [MigratableProfile]
 
         @Binding
         var statuses: [UUID: MigrationStatus]
 
+        let onDelete: ([MigratableProfile]) -> Void
+
+        let performButton: () -> PerformButton
+
         var body: some View {
-            Table(profiles) {
-                TableColumn(Strings.Global.name) {
-                    Text($0.name)
-                        .foregroundStyle(statuses.style(for: $0.id))
+            Form {
+                Section {
+                    Text(Strings.Views.Migrate.Sections.Main.header)
                 }
-                TableColumn(Strings.Global.lastUpdate) {
-                    Text($0.timestamp)
-                        .foregroundStyle(statuses.style(for: $0.id))
+                Section {
+                    Table(profiles) {
+                        TableColumn(Strings.Global.name) {
+                            Text($0.name)
+                                .foregroundStyle(statuses.style(for: $0.id))
+                        }
+                        TableColumn(Strings.Global.lastUpdate) {
+                            Text($0.timestamp)
+                                .foregroundStyle(statuses.style(for: $0.id))
+                        }
+                        TableColumn("") {
+                            ControlView(
+                                step: step,
+                                isIncluded: isIncludedBinding(for: $0.id),
+                                status: statuses[$0.id]
+                            )
+                            .environmentObject(theme) // TODO: #873, Table loses environment
+                        }
+                        .width(20)
+                        TableColumn("") { profile in
+                            Button {
+                                onDelete([profile])
+                            } label: {
+                                ThemeImage(.editableSectionRemove)
+                            }
+                            .environmentObject(theme) // TODO: #873, Table loses environment
+                        }
+                        .width(20)
+                    }
                 }
-                TableColumn("") {
-                    ControlView(
-                        step: step,
-                        isIncluded: isIncludedBinding(for: $0.id),
-                        status: statuses[$0.id]
-                    )
-                    .environmentObject(theme) // TODO: #873, Table loses environment
-                }
+                .disabled(!step.canSelect)
+            }
+            .themeForm()
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction, content: performButton)
             }
         }
     }
 }
 
-private extension MigrateView.TableView {
+private extension MigrateContentView.TableView {
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
         Binding {
             statuses[profileId] != .excluded
@@ -76,9 +102,9 @@ private extension MigrateView.TableView {
     }
 }
 
-private extension MigrateView.TableView {
+private extension MigrateContentView.TableView {
     struct ControlView: View {
-        let step: MigrateView.Model.Step
+        let step: MigrateViewStep
 
         @Binding
         var isIncluded: Bool

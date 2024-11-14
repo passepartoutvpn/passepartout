@@ -55,6 +55,8 @@ extension Theme {
         case progress
         case remove
         case search
+        case selectionOff
+        case selectionOn
         case settings
         case share
         case show
@@ -102,6 +104,8 @@ extension Theme.ImageName {
             case .progress: return "clock"
             case .remove: return "minus"
             case .search: return "magnifyingglass"
+            case .selectionOff: return "circle"
+            case .selectionOn: return "checkmark.circle.fill"
             case .settings: return "gearshape"
             case .share: return "square.and.arrow.up"
             case .show: return "eye"

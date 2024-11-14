@@ -27,33 +27,43 @@ import CommonLibrary
 import PassepartoutKit
 import SwiftUI
 
-extension MigrateView {
-    struct ContentView: View {
-        let style: Style
+struct MigrateContentView<PerformButton>: View where PerformButton: View {
+    let style: MigrateView.Style
 
-        let step: Model.Step
+    let step: MigrateViewStep
 
-        let profiles: [MigratableProfile]
+    let profiles: [MigratableProfile]
 
-        @Binding
-        var statuses: [UUID: MigrationStatus]
+    @Binding
+    var statuses: [UUID: MigrationStatus]
 
-        var body: some View {
-            switch style {
-            case .section:
-                MigrateView.SectionView(
-                    step: step,
-                    profiles: profiles,
-                    statuses: $statuses
-                )
+    @Binding
+    var isEditing: Bool
 
-            case .table:
-                MigrateView.TableView(
-                    step: step,
-                    profiles: profiles,
-                    statuses: $statuses
-                )
-            }
+    let onDelete: ([MigratableProfile]) -> Void
+
+    let performButton: () -> PerformButton
+
+    var body: some View {
+        switch style {
+        case .list:
+            ListView(
+                step: step,
+                profiles: profiles,
+                statuses: $statuses,
+                isEditing: $isEditing,
+                onDelete: onDelete,
+                performButton: performButton
+            )
+
+        case .table:
+            TableView(
+                step: step,
+                profiles: profiles,
+                statuses: $statuses,
+                onDelete: onDelete,
+                performButton: performButton
+            )
         }
     }
 }
@@ -74,7 +84,7 @@ extension Dictionary where Key == UUID, Value == MigrationStatus {
 
 #Preview("Fetched") {
     PrivatePreviews.MigratePreview(
-        step: .fetched,
+        step: .fetched(PrivatePreviews.profiles),
         profiles: PrivatePreviews.profiles,
         initialStatuses: [
             PrivatePreviews.profiles[1].id: .excluded,
@@ -99,6 +109,15 @@ extension Dictionary where Key == UUID, Value == MigrationStatus {
     .withMockEnvironment()
 }
 
+#Preview("Empty") {
+    PrivatePreviews.MigratePreview(
+        step: .fetched([]),
+        profiles: [],
+        initialStatuses: [:]
+    )
+    .withMockEnvironment()
+}
+
 private struct PrivatePreviews {
     static let oneDay: TimeInterval = 24 * 60 * 60
 
@@ -111,7 +130,7 @@ private struct PrivatePreviews {
     ]
 
     struct MigratePreview: View {
-        let step: MigrateView.Model.Step
+        let step: MigrateViewStep
 
         let profiles: [MigratableProfile]
 
@@ -120,21 +139,27 @@ private struct PrivatePreviews {
         @State
         private var statuses: [UUID: MigrationStatus] = [:]
 
+        @State
+        private var isEditing = false
+
 #if os(iOS)
-        private let style: MigrateView.Style = .section
+        private let style: MigrateView.Style = .list
 #else
         private let style: MigrateView.Style = .table
 #endif
 
         var body: some View {
-            Form {
-                MigrateView.ContentView(
-                    style: style,
-                    step: step,
-                    profiles: profiles,
-                    statuses: $statuses
-                )
-            }
+            MigrateContentView(
+                style: style,
+                step: step,
+                profiles: profiles,
+                statuses: $statuses,
+                isEditing: $isEditing,
+                onDelete: { _ in },
+                performButton: {
+                    Button("Item") {}
+                }
+            )
             .navigationTitle("Migrate")
             .themeNavigationStack()
             .task {

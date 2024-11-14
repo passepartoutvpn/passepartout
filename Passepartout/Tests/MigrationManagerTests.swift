@@ -79,7 +79,7 @@ extension MigrationManagerTests {
         let sut = newManager()
 
         let id = try XCTUnwrap(UUID(uuidString: "8A568345-85C4-44C1-A9C4-612E8B07ADC5"))
-        let migrated = try await sut.migrateProfile(withId: id)
+        let migrated = try await sut.migratedProfile(withId: id)
         let profile = try XCTUnwrap(migrated)
 
         XCTAssertEqual(profile.id, id)
@@ -114,7 +114,7 @@ extension MigrationManagerTests {
         let sut = newManager()
 
         let id = try XCTUnwrap(UUID(uuidString: "981E7CBD-7733-4CF3-9A51-2777614ED5D4"))
-        let migrated = try await sut.migrateProfile(withId: id)
+        let migrated = try await sut.migratedProfile(withId: id)
         let profile = try XCTUnwrap(migrated)
 
         XCTAssertEqual(profile.id, id)
@@ -138,7 +138,7 @@ extension MigrationManagerTests {
         let sut = newManager()
 
         let id = try XCTUnwrap(UUID(uuidString: "239AD322-7440-4198-990A-D91379916FE2"))
-        let migrated = try await sut.migrateProfile(withId: id)
+        let migrated = try await sut.migratedProfile(withId: id)
         let profile = try XCTUnwrap(migrated)
 
         XCTAssertEqual(profile.id, id)
@@ -171,7 +171,7 @@ extension MigrationManagerTests {
         let sut = newManager()
 
         let id = try XCTUnwrap(UUID(uuidString: "069F76BD-1F6B-425C-AD83-62477A8B6558"))
-        let migrated = try await sut.migrateProfile(withId: id)
+        let migrated = try await sut.migratedProfile(withId: id)
         let profile = try XCTUnwrap(migrated)
 
         XCTAssertEqual(profile.id, id)

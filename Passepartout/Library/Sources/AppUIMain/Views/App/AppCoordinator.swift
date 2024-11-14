@@ -168,6 +168,9 @@ extension AppCoordinator {
                         return
                     }
                     present(.editProviderEntity($0, pair.0, pair.1))
+                },
+                onMigrateProfiles: {
+                    modalRoute = .migrateProfiles
                 }
             )
         )
@@ -240,7 +243,7 @@ extension AppCoordinator {
 
     var migrateViewStyle: MigrateView.Style {
 #if os(iOS)
-        .section
+        .list
 #else
         .table
 #endif

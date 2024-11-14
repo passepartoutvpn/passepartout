@@ -82,12 +82,14 @@ extension View {
     public func themeConfirmation(
         isPresented: Binding<Bool>,
         title: String,
+        message: String? = nil,
         isDestructive: Bool = false,
         action: @escaping () -> Void
     ) -> some View {
         modifier(ThemeConfirmationModifier(
             isPresented: isPresented,
             title: title,
+            message: message,
             isDestructive: isDestructive,
             action: action
         ))
@@ -165,8 +167,8 @@ extension View {
             .truncationMode(mode)
     }
 
-    public func themeEmptyMessage() -> some View {
-        modifier(ThemeEmptyMessageModifier())
+    public func themeEmptyMessage(fullScreen: Bool = true) -> some View {
+        modifier(ThemeEmptyMessageModifier(fullScreen: fullScreen))
     }
 
     public func themeError(_ isError: Bool) -> some View {
@@ -178,11 +180,28 @@ extension View {
     }
 
     public func themeProgress(if isProgressing: Bool) -> some View {
-        modifier(ThemeProgressViewModifier(isProgressing: isProgressing))
+        modifier(ThemeProgressViewModifier(isProgressing: isProgressing) {
+            EmptyView()
+        })
     }
 
-    public func themeProgress(if isProgressing: Bool, isEmpty: Bool, emptyMessage: String) -> some View {
-        modifier(ThemeProgressViewModifier(isProgressing: isProgressing, isEmpty: isEmpty, emptyMessage: emptyMessage))
+    public func themeProgress(
+        if isProgressing: Bool,
+        isEmpty: Bool,
+        emptyMessage: String
+    ) -> some View {
+        modifier(ThemeProgressViewModifier(isProgressing: isProgressing, isEmpty: isEmpty) {
+            Text(emptyMessage)
+                .themeEmptyMessage()
+        })
+    }
+
+    public func themeProgress<EmptyContent>(
+        if isProgressing: Bool,
+        isEmpty: Bool,
+        @ViewBuilder emptyContent: @escaping () -> EmptyContent
+    ) -> some View where EmptyContent: View {
+        modifier(ThemeProgressViewModifier(isProgressing: isProgressing, isEmpty: isEmpty, emptyContent: emptyContent))
     }
 
 #if !os(tvOS)
@@ -319,6 +338,8 @@ struct ThemeConfirmationModifier: ViewModifier {
 
     let title: String
 
+    let message: String?
+
     let isDestructive: Bool
 
     let action: () -> Void
@@ -329,7 +350,7 @@ struct ThemeConfirmationModifier: ViewModifier {
                 Button(Strings.Theme.Confirmation.ok, role: isDestructive ? .destructive : nil, action: action)
                 Text(Strings.Theme.Confirmation.cancel)
             } message: {
-                Text(Strings.Theme.Confirmation.message)
+                Text(message ?? Strings.Theme.Confirmation.message)
             }
     }
 }
@@ -382,13 +403,19 @@ struct ThemeEmptyMessageModifier: ViewModifier {
     @EnvironmentObject
     private var theme: Theme
 
+    let fullScreen: Bool
+
     func body(content: Content) -> some View {
         VStack {
-            Spacer()
+            if fullScreen {
+                Spacer()
+            }
             content
                 .font(theme.emptyMessageFont)
                 .foregroundStyle(theme.emptyMessageColor)
-            Spacer()
+            if fullScreen {
+                Spacer()
+            }
         }
     }
 }
@@ -421,12 +448,12 @@ struct ThemeAnimationModifier<T>: ViewModifier where T: Equatable {
     }
 }
 
-struct ThemeProgressViewModifier: ViewModifier {
+struct ThemeProgressViewModifier<EmptyContent>: ViewModifier where EmptyContent: View {
     let isProgressing: Bool
 
     var isEmpty: Bool?
 
-    var emptyMessage: String?
+    var emptyContent: (() -> EmptyContent)?
 
     func body(content: Content) -> some View {
         ZStack {
@@ -435,9 +462,8 @@ struct ThemeProgressViewModifier: ViewModifier {
 
             if isProgressing {
                 ThemeProgressView()
-            } else if let isEmpty, let emptyMessage, isEmpty {
-                Text(emptyMessage)
-                    .themeEmptyMessage()
+            } else if let isEmpty, let emptyContent, isEmpty {
+                emptyContent()
             }
         }
     }

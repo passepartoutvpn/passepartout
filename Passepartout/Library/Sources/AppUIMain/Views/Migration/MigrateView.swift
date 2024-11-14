@@ -28,11 +28,11 @@ import CommonUtils
 import PassepartoutKit
 import SwiftUI
 
-// FIXME: ###, migrations UI
+// FIXME: #878, show CloudKit progress
 
 struct MigrateView: View {
     enum Style {
-        case section
+        case list
 
         case table
     }
@@ -51,28 +51,43 @@ struct MigrateView: View {
     @State
     private var model = Model()
 
+    @State
+    private var isEditing = false
+
+    @State
+    private var isDeleting = false
+
+    @State
+    private var profilesPendingDeletion: [MigratableProfile]?
+
     @StateObject
     private var errorHandler: ErrorHandler = .default()
 
     var body: some View {
-        Form {
-            ContentView(
-                style: style,
-                step: model.step,
-                profiles: model.visibleProfiles,
-                statuses: $model.statuses
-            )
-            .disabled(model.step != .fetched)
-        }
-        .themeForm()
-        .themeProgress(
-            if: model.step == .fetching,
-            isEmpty: model.profiles.isEmpty,
-            emptyMessage: "Nothing to migrate"
+        debugChanges()
+        return MigrateContentView(
+            style: style,
+            step: model.step,
+            profiles: model.visibleProfiles,
+            statuses: $model.statuses,
+            isEditing: $isEditing,
+            onDelete: onDelete,
+            performButton: performButton
         )
-        .themeAnimation(on: model, category: .profiles)
+        .themeProgress(
+            if: [.initial, .fetching].contains(model.step),
+            isEmpty: model.profiles.isEmpty,
+            emptyMessage: Strings.Views.Migrate.noProfiles
+        )
+        .themeAnimation(on: model.step, category: .profiles)
+        .themeConfirmation(
+            isPresented: $isDeleting,
+            title: Strings.Views.Migrate.Alerts.Delete.title,
+            message: messageForDeletion,
+            isDestructive: true,
+            action: confirmPendingDeletion
+        )
         .navigationTitle(title)
-        .toolbar(content: toolbarContent)
         .task {
             await fetch()
         }
@@ -85,52 +100,35 @@ private extension MigrateView {
         Strings.Views.Migrate.title
     }
 
-    func toolbarContent() -> some ToolbarContent {
-        ToolbarItem(placement: .confirmationAction) {
-            Button(itemTitle(at: model.step)) {
-                Task {
-                    await itemPerform(at: model.step)
-                }
+    var messageForDeletion: String? {
+        profilesPendingDeletion.map {
+            let nameList = $0
+                .map(\.name)
+                .joined(separator: "\n")
+
+            return Strings.Views.Migrate.Alerts.Delete.message(nameList)
+        }
+    }
+
+    func performButton() -> some View {
+        MigrateButton(step: model.step) {
+            Task {
+                await perform(at: model.step)
             }
-            .disabled(!itemEnabled(at: model.step))
         }
     }
 }
 
 private extension MigrateView {
-    func itemTitle(at step: Model.Step) -> String {
-        switch step {
-        case .initial, .fetching, .fetched:
-            return "Proceed"
-
-        case .migrating, .migrated:
-            return "Import"
-
-        case .importing, .imported:
-            return "Done"
-        }
+    func onDelete(_ profiles: [MigratableProfile]) {
+        profilesPendingDeletion = profiles
+        isDeleting = true
     }
 
-    func itemEnabled(at step: Model.Step) -> Bool {
+    func perform(at step: MigrateViewStep) async {
         switch step {
-        case .initial, .fetching, .migrating, .importing:
-            return false
-
-        case .fetched:
-            return !model.profiles.isEmpty
-
-        case .migrated(let profiles):
-            return !profiles.isEmpty
-
-        case .imported:
-            return true
-        }
-    }
-
-    func itemPerform(at step: Model.Step) async {
-        switch step {
-        case .fetched:
-            await migrate()
+        case .fetched(let profiles):
+            await migrate(profiles)
 
         case .migrated(let profiles):
             await save(profiles)
@@ -139,7 +137,7 @@ private extension MigrateView {
             dismiss()
 
         default:
-            fatalError("No action allowed at step \(step)")
+            assertionFailure("No action allowed at step \(step), why is button enabled?")
         }
     }
 
@@ -149,12 +147,13 @@ private extension MigrateView {
         }
         do {
             model.step = .fetching
+            pp_log(.App.migration, .notice, "Fetch migratable profiles...")
             let migratable = try await migrationManager.fetchMigratableProfiles()
             let knownIDs = Set(profileManager.headers.map(\.id))
             model.profiles = migratable.filter {
                 !knownIDs.contains($0.id)
             }
-            model.step = .fetched
+            model.step = .fetched(model.profiles)
         } catch {
             pp_log(.App.migration, .error, "Unable to fetch migratable profiles: \(error)")
             errorHandler.handle(error, title: title)
@@ -162,31 +161,78 @@ private extension MigrateView {
         }
     }
 
-    func migrate() async {
-        guard model.step == .fetched else {
-            fatalError("Must call fetch() and succeed")
+    func migrate(_ allProfiles: [MigratableProfile]) async {
+        guard case .fetched = model.step else {
+            assertionFailure("Must call fetch() and succeed, why is button enabled?")
+            return
         }
+
+        let profiles = allProfiles.filter {
+            model.statuses[$0.id] != .excluded
+        }
+        guard !profiles.isEmpty else {
+            assertionFailure("Nothing to migrate, why is button enabled?")
+            return
+        }
+
+        let previousStep = model.step
+        model.step = .migrating
         do {
-            model.step = .migrating
-            let profiles = try await migrationManager.migrateProfiles(model.profiles, selection: model.selection) {
+            pp_log(.App.migration, .notice, "Migrate \(profiles.count) profiles...")
+            let profiles = try await migrationManager.migratedProfiles(profiles) {
                 model.statuses[$0] = $1
             }
+            model.excludeFailed()
             model.step = .migrated(profiles)
         } catch {
             pp_log(.App.migration, .error, "Unable to migrate profiles: \(error)")
             errorHandler.handle(error, title: title)
+            model.step = previousStep
         }
     }
 
-    func save(_ profiles: [Profile]) async {
-        guard case .migrated(let profiles) = model.step, !profiles.isEmpty else {
-            fatalError("Must call migrate() and succeed with non-empty profiles")
+    func save(_ allProfiles: [Profile]) async {
+        guard case .migrated = model.step else {
+            assertionFailure("Must call migrate() and succeed, why is button enabled?")
+            return
         }
+
+        let profiles = allProfiles.filter {
+            model.statuses[$0.id] != .excluded
+        }
+        guard !profiles.isEmpty else {
+            assertionFailure("Nothing to import, why is button enabled?")
+            return
+        }
+
         model.step = .importing
-        model.excludeFailed()
+        pp_log(.App.migration, .notice, "Import \(profiles.count) migrated profiles...")
         await migrationManager.importProfiles(profiles, into: profileManager) {
             model.statuses[$0] = $1
         }
         model.step = .imported
+    }
+
+    func confirmPendingDeletion() {
+        guard let profilesPendingDeletion else {
+            isEditing = false
+            assertionFailure("No profiles pending deletion?")
+            return
+        }
+        let deletedIds = Set(profilesPendingDeletion.map(\.id))
+        Task {
+            do {
+                try await migrationManager.deleteMigratableProfiles(withIds: deletedIds)
+                withAnimation {
+                    model.profiles.removeAll {
+                        deletedIds.contains($0.id)
+                    }
+                    model.step = .fetched(model.profiles)
+                }
+            } catch {
+                pp_log(.App.migration, .error, "Unable to delete migratable profiles \(deletedIds): \(error)")
+            }
+            isEditing = false
+        }
     }
 }
