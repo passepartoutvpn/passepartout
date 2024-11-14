@@ -33,17 +33,17 @@ extension MigrateView {
         let profiles: [MigratableProfile]
 
         @Binding
-        var excluded: Set<UUID>
-
-        let statuses: [UUID: MigrationStatus]
+        var statuses: [UUID: MigrationStatus]
 
         var body: some View {
             Section {
                 ForEach(profiles, id: \.id) {
-                    if let status = statuses[$0.id] {
-                        row(forProfile: $0, status: status)
-                    } else {
+                    switch step {
+                    case .initial, .fetching, .fetched:
                         button(forProfile: $0)
+
+                    default:
+                        row(forProfile: $0, status: statuses[$0.id])
                     }
                 }
             }
@@ -54,10 +54,10 @@ extension MigrateView {
 private extension MigrateView.SectionView {
     func button(forProfile profile: MigratableProfile) -> some View {
         Button {
-            if excluded.contains(profile.id) {
-                excluded.remove(profile.id)
+            if statuses[profile.id] == .excluded {
+                statuses.removeValue(forKey: profile.id)
             } else {
-                excluded.insert(profile.id)
+                statuses[profile.id] = .excluded
             }
         } label: {
             row(forProfile: profile, status: nil)
@@ -76,7 +76,7 @@ private extension MigrateView.SectionView {
                 }
             }
             Spacer()
-            StatusView(isIncluded: !excluded.contains(profile.id), status: status)
+            StatusView(isIncluded: statuses[profile.id] != .excluded, status: status)
         }
     }
 }

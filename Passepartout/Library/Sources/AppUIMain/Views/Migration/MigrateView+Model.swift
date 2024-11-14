@@ -49,31 +49,23 @@ extension MigrateView {
 
         var profiles: [MigratableProfile] = []
 
-        var excluded: Set<UUID> = []
-
         var statuses: [UUID: MigrationStatus] = [:]
     }
 }
 
 extension MigrateView.Model {
     var selection: Set<UUID> {
-        Set(profiles.map(\.id))
-            .symmetricDifference(excluded)
+        Set(profiles
+            .filter {
+                statuses[$0.id] != .excluded
+            }
+            .map(\.id))
     }
 
     var visibleProfiles: [MigratableProfile] {
         profiles
             .filter {
-                switch step {
-                case .migrating:
-                    return !excluded.contains($0.id)
-
-                case .migrated, .importing, .imported:
-                    return statuses[$0.id] != .excluded
-
-                default:
-                    return true
-                }
+                statuses[$0.id] != .excluded
             }
             .sorted {
                 $0.name.lowercased() < $1.name.lowercased()

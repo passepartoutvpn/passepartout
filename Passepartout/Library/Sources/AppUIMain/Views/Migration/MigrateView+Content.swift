@@ -36,9 +36,7 @@ extension MigrateView {
         let profiles: [MigratableProfile]
 
         @Binding
-        var excluded: Set<UUID>
-
-        let statuses: [UUID: MigrationStatus]
+        var statuses: [UUID: MigrationStatus]
 
         var body: some View {
             switch style {
@@ -46,16 +44,14 @@ extension MigrateView {
                 MigrateView.SectionView(
                     step: step,
                     profiles: profiles,
-                    excluded: $excluded,
-                    statuses: statuses
+                    statuses: $statuses
                 )
 
             case .table:
                 MigrateView.TableView(
                     step: step,
                     profiles: profiles,
-                    excluded: $excluded,
-                    statuses: statuses
+                    statuses: $statuses
                 )
             }
         }
@@ -68,7 +64,10 @@ extension MigrateView {
     PrivatePreviews.MigratePreview(
         step: .fetched,
         profiles: PrivatePreviews.profiles,
-        statuses: [:]
+        initialStatuses: [
+            PrivatePreviews.profiles[1].id: .excluded,
+            PrivatePreviews.profiles[2].id: .excluded
+        ]
     )
     .withMockEnvironment()
 }
@@ -77,7 +76,7 @@ extension MigrateView {
     PrivatePreviews.MigratePreview(
         step: .migrated([]),
         profiles: PrivatePreviews.profiles,
-        statuses: [
+        initialStatuses: [
             PrivatePreviews.profiles[0].id: .excluded,
             PrivatePreviews.profiles[1].id: .pending,
             PrivatePreviews.profiles[2].id: .migrated,
@@ -104,10 +103,10 @@ private struct PrivatePreviews {
 
         let profiles: [MigratableProfile]
 
-        let statuses: [UUID: MigrationStatus]
+        let initialStatuses: [UUID: MigrationStatus]
 
         @State
-        private var excluded: Set<UUID> = []
+        private var statuses: [UUID: MigrationStatus] = [:]
 
 #if os(iOS)
         private let style: MigrateView.Style = .section
@@ -121,12 +120,14 @@ private struct PrivatePreviews {
                     style: style,
                     step: step,
                     profiles: profiles,
-                    excluded: $excluded,
-                    statuses: statuses
+                    statuses: $statuses
                 )
             }
             .navigationTitle("Migrate")
             .themeNavigationStack()
+            .task {
+                statuses = initialStatuses
+            }
         }
     }
 }

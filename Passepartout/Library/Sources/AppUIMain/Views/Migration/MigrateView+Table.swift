@@ -33,9 +33,7 @@ extension MigrateView {
         let profiles: [MigratableProfile]
 
         @Binding
-        var excluded: Set<UUID>
-
-        let statuses: [UUID: MigrationStatus]
+        var statuses: [UUID: MigrationStatus]
 
         var body: some View {
             Table(profiles) {
@@ -55,12 +53,12 @@ extension MigrateView {
 private extension MigrateView.TableView {
     func isOnBinding(for profileId: UUID) -> Binding<Bool> {
         Binding {
-            !excluded.contains(profileId)
+            statuses[profileId] == .excluded
         } set: {
             if $0 {
-                excluded.remove(profileId)
+                statuses.removeValue(forKey: profileId)
             } else {
-                excluded.insert(profileId)
+                statuses[profileId] = .excluded
             }
         }
     }

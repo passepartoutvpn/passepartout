@@ -60,8 +60,7 @@ struct MigrateView: View {
                 style: style,
                 step: model.step,
                 profiles: model.visibleProfiles,
-                excluded: $model.excluded,
-                statuses: model.statuses
+                statuses: $model.statuses
             )
             .disabled(model.step != .fetched)
         }
