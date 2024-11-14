@@ -98,7 +98,7 @@ public struct Constants: Decodable, Sendable {
 
         public let refreshInterval: TimeInterval
 
-        public let appGroupReceiptPath: String
+        public let betaReceiptPath: String
     }
 
     public struct API: Decodable, Sendable {

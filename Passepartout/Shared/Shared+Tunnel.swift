@@ -42,11 +42,11 @@ private extension Configuration.IAPManager {
     static var tunnelReceiptReader: AppReceiptReader {
         FallbackReceiptReader(
             main: StoreKitReceiptReader(),
-            beta: KvittoReceiptReader(url: appGroupReceiptURL)
+            beta: KvittoReceiptReader(url: betaReceiptURL)
         )
     }
 
-    static var appGroupReceiptURL: URL {
-        BundleConfiguration.urlForAppGroupReceipt // copied by ProfileProcessor
+    static var betaReceiptURL: URL {
+        BundleConfiguration.urlForBetaReceipt // copied by AppContext.onLaunch
     }
 }

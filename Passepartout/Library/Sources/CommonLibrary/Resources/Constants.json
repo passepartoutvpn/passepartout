@@ -24,7 +24,7 @@
     "tunnel": {
         "profileTitleFormat": "Passepartout: %@",
         "refreshInterval": 3.0,
-        "appGroupReceiptPath": "app-group-receipt"
+        "betaReceiptPath": "beta-receipt"
     },
     "api": {
         "timeoutInterval": 5.0

@@ -117,7 +117,7 @@ private extension AppContext {
 
         // copy release receipt to tunnel for TestFlight eligibility (once is enough, it won't change)
         if let appReceiptURL = Bundle.main.appStoreProductionReceiptURL {
-            let tunnelReceiptURL = BundleConfiguration.urlForAppGroupReceipt
+            let tunnelReceiptURL = BundleConfiguration.urlForBetaReceipt
             do {
                 pp_log(.App.iap, .info, "Copy release receipt to tunnel...")
                 try? FileManager.default.removeItem(at: tunnelReceiptURL)

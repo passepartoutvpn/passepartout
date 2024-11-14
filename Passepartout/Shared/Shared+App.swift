@@ -107,18 +107,13 @@ private extension Configuration.IAPManager {
         }
         return FallbackReceiptReader(
             main: StoreKitReceiptReader(),
-            beta: releaseReceiptURL.map {
+            beta: betaReceiptURL.map {
                 KvittoReceiptReader(url: $0)
             }
         )
     }
 
-    static var releaseReceiptURL: URL? {
-        guard let url = Bundle.main.appStoreReceiptURL else {
-            return nil
-        }
-        return url
-            .deletingLastPathComponent()
-            .appendingPathComponent("receipt") // release receipt
+    static var betaReceiptURL: URL? {
+        Bundle.main.appStoreProductionReceiptURL
     }
 }
