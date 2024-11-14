@@ -25,12 +25,14 @@
 
 import Foundation
 
-public enum MigrationStatus {
+public enum MigrationStatus: Equatable {
     case excluded
 
     case pending
 
-    case success
+    case migrated
 
-    case failure
+    case imported
+
+    case failed
 }

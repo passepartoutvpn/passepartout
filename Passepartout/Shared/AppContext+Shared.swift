@@ -103,6 +103,7 @@ extension AppContext {
         )
 #if DEBUG
         let migrationManager = MigrationManager(profileStrategy: profileStrategy, simulation: .init(
+            fakeProfiles: true,
             maxMigrationTime: 3.0,
             randomFailures: true
         ))

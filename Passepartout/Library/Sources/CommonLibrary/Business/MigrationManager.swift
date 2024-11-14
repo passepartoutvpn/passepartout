@@ -29,11 +29,14 @@ import PassepartoutKit
 @MainActor
 public final class MigrationManager: ObservableObject {
     public struct Simulation {
+        public let fakeProfiles: Bool
+
         public let maxMigrationTime: Double?
 
         public let randomFailures: Bool
 
-        public init(maxMigrationTime: Double?, randomFailures: Bool) {
+        public init(fakeProfiles: Bool, maxMigrationTime: Double?, randomFailures: Bool) {
+            self.fakeProfiles = fakeProfiles
             self.maxMigrationTime = maxMigrationTime
             self.randomFailures = randomFailures
         }
@@ -52,6 +55,8 @@ public final class MigrationManager: ObservableObject {
         self.simulation = simulation
     }
 }
+
+// MARK: - Public interface
 
 extension MigrationManager {
     public func fetchMigratableProfiles() async throws -> [MigratableProfile] {
@@ -74,22 +79,15 @@ extension MigrationManager {
             selection.forEach { profileId in
                 group.addTask {
                     do {
-                        if let simulation = self.simulation {
-                            if let maxMigrationTime = simulation.maxMigrationTime {
-                                try await Task.sleep(for: .seconds(.random(in: 1.0..<maxMigrationTime)))
-                            }
-                            if simulation.randomFailures, Bool.random() {
-                                throw PassepartoutError(.unhandled)
-                            }
-                        }
-                        guard let profile = try await self.profileStrategy.fetchProfile(withId: profileId) else {
-                            await onUpdate(profileId, .failure)
+                        try await self.simulateBehavior()
+                        guard let profile = try await self.simulateMigrateProfile(withId: profileId) else {
+                            await onUpdate(profileId, .failed)
                             return nil
                         }
-                        await onUpdate(profileId, .success)
+                        await onUpdate(profileId, .migrated)
                         return profile
                     } catch {
-                        await onUpdate(profileId, .failure)
+                        await onUpdate(profileId, .failed)
                         return nil
                     }
                 }
@@ -103,6 +101,59 @@ extension MigrationManager {
             }
             return profiles
         }
+    }
+
+    public func importProfiles(
+        _ profiles: [Profile],
+        into manager: ProfileManager,
+        onUpdate: @escaping @MainActor (UUID, MigrationStatus) -> Void
+    ) async {
+        profiles.forEach {
+            onUpdate($0.id, .pending)
+        }
+        await withTaskGroup(of: Void.self) { group in
+            profiles.forEach { profile in
+                group.addTask {
+                    do {
+                        try await self.simulateBehavior()
+                        try await self.simulateSaveProfile(profile, manager: manager)
+                        await onUpdate(profile.id, .imported)
+                    } catch {
+                        await onUpdate(profile.id, .failed)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Simulation
+
+private extension MigrationManager {
+    func simulateBehavior() async throws {
+        guard let simulation else {
+            return
+        }
+        if let maxMigrationTime = simulation.maxMigrationTime {
+            try await Task.sleep(for: .seconds(.random(in: 1.0..<maxMigrationTime)))
+        }
+        if simulation.randomFailures, Bool.random() {
+            throw PassepartoutError(.unhandled)
+        }
+    }
+
+    func simulateMigrateProfile(withId profileId: UUID) async throws -> Profile? {
+        if simulation?.fakeProfiles ?? false {
+            return try? Profile.Builder(id: profileId).tryBuild()
+        }
+        return try await profileStrategy.fetchProfile(withId: profileId)
+    }
+
+    func simulateSaveProfile(_ profile: Profile, manager: ProfileManager) async throws {
+        if simulation?.fakeProfiles ?? false {
+            return
+        }
+        try await manager.save(profile, force: true)
     }
 }
 

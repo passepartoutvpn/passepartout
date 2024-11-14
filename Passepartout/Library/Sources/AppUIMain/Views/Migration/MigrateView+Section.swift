@@ -28,54 +28,81 @@ import SwiftUI
 
 extension MigrateView {
     struct SectionView: View {
+        let step: Model.Step
+
         let profiles: [MigratableProfile]
 
         @Binding
-        var excluded: Set<UUID>
-
-        let statuses: [UUID: MigrationStatus]
+        var statuses: [UUID: MigrationStatus]
 
         var body: some View {
             Section {
                 ForEach(profiles, id: \.id) {
-                    if let status = statuses[$0.id] {
-                        row(forProfile: $0, status: status)
-                    } else {
+                    switch step {
+                    case .initial, .fetching, .fetched:
                         button(forProfile: $0)
+
+                    default:
+                        row(forProfile: $0, status: statuses[$0.id])
                     }
                 }
             }
         }
+    }
+}
 
-        func button(forProfile profile: MigratableProfile) -> some View {
-            Button {
-                if excluded.contains(profile.id) {
-                    excluded.remove(profile.id)
-                } else {
-                    excluded.insert(profile.id)
+private extension MigrateView.SectionView {
+    func button(forProfile profile: MigratableProfile) -> some View {
+        Button {
+            if statuses[profile.id] == .excluded {
+                statuses.removeValue(forKey: profile.id)
+            } else {
+                statuses[profile.id] = .excluded
+            }
+        } label: {
+            row(forProfile: profile, status: nil)
+        }
+    }
+
+    func row(forProfile profile: MigratableProfile, status: MigrationStatus?) -> some View {
+        HStack {
+            CardView(profile: profile)
+            Spacer()
+            StatusView(isIncluded: statuses[profile.id] != .excluded, status: status)
+        }
+        .foregroundStyle(statuses[profile.id].style)
+    }
+}
+
+private extension MigrateView.SectionView {
+    struct CardView: View {
+        let profile: MigratableProfile
+
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(profile.name)
+                    .font(.headline)
+
+                profile.lastUpdate.map {
+                    Text($0.localizedDescription(style: .timestamp))
+                        .font(.subheadline)
                 }
-            } label: {
-                row(forProfile: profile, status: nil)
             }
         }
+    }
+}
 
-        func row(forProfile profile: MigratableProfile, status: MigrationStatus?) -> some View {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(profile.name)
-                        .font(.headline)
+private extension MigrateView.SectionView {
+    struct StatusView: View {
+        let isIncluded: Bool
 
-                    profile.lastUpdate.map {
-                        Text($0.localizedDescription(style: .timestamp))
-                            .font(.subheadline)
-                    }
-                }
-                Spacer()
-                if let status {
-                    icon(forStatus: status)
-                } else if !excluded.contains(profile.id) {
-                    ThemeImage(.marked)
-                }
+        let status: MigrationStatus?
+
+        var body: some View {
+            if let status {
+                icon(forStatus: status)
+            } else if isIncluded {
+                ThemeImage(.marked)
             }
         }
 
@@ -83,15 +110,15 @@ extension MigrateView {
         func icon(forStatus status: MigrationStatus) -> some View {
             switch status {
             case .excluded:
-                EmptyView()
+                Text("--")
 
             case .pending:
                 ProgressView()
 
-            case .success:
+            case .migrated, .imported:
                 ThemeImage(.marked)
 
-            case .failure:
+            case .failed:
                 ThemeImage(.failure)
             }
         }

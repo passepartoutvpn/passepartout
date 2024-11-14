@@ -28,56 +28,71 @@ import SwiftUI
 
 extension MigrateView {
     struct TableView: View {
+        let step: Model.Step
+
         let profiles: [MigratableProfile]
 
         @Binding
-        var excluded: Set<UUID>
-
-        let statuses: [UUID: MigrationStatus]
+        var statuses: [UUID: MigrationStatus]
 
         var body: some View {
             Table(profiles) {
-                TableColumn(Strings.Global.name, value: \.name)
-                TableColumn(Strings.Global.lastUpdate, value: \.timestamp)
+                TableColumn(Strings.Global.name) {
+                    Text($0.name)
+                        .foregroundStyle(statuses.style(for: $0.id))
+                }
+                TableColumn(Strings.Global.lastUpdate) {
+                    Text($0.timestamp)
+                        .foregroundStyle(statuses.style(for: $0.id))
+                }
                 TableColumn("") { profile in
-                    if let status = statuses[profile.id] {
-                        imageName(forStatus: status)
-                            .map {
-                                ThemeImage($0)
-                            }
-                    } else {
-                        Toggle("", isOn: isOnBinding(for: profile.id))
+                    switch step {
+                    case .initial, .fetching, .fetched:
+                        Toggle("", isOn: isIncludedBinding(for: profile.id))
                             .labelsHidden()
+
+                    default:
+                        if let status = statuses[profile.id] {
+                            StatusView(status: status)
+                        }
                     }
                 }
             }
         }
+    }
+}
 
-        func isOnBinding(for profileId: UUID) -> Binding<Bool> {
-            Binding {
-                !excluded.contains(profileId)
-            } set: {
-                if $0 {
-                    excluded.remove(profileId)
-                } else {
-                    excluded.insert(profileId)
-                }
+private extension MigrateView.TableView {
+    func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
+        Binding {
+            statuses[profileId] != .excluded
+        } set: {
+            if $0 {
+                statuses.removeValue(forKey: profileId)
+            } else {
+                statuses[profileId] = .excluded
             }
         }
+    }
+}
 
-        func imageName(forStatus status: MigrationStatus) -> Theme.ImageName? {
+private extension MigrateView.TableView {
+    struct StatusView: View {
+        let status: MigrationStatus
+
+        var body: some View {
             switch status {
             case .excluded:
-                return nil
+                Text("--")
 
             case .pending:
-                return .progress
+                ThemeImage(.progress)
 
-            case .success:
-                return .marked
+            case .migrated, .imported:
+                ThemeImage(.marked)
 
-            case .failure:
-                return .failure
+            case .failed:
+                ThemeImage(.failure)
             }
         }
     }

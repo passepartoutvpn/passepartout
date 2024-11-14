@@ -186,8 +186,11 @@ extension AppCoordinator {
             )
 
         case .migrateProfiles:
-            MigrateView(style: migrateViewStyle)
-                .themeNavigationStack(closable: true, path: $migrationPath)
+            MigrateView(
+                style: migrateViewStyle,
+                profileManager: profileManager
+            )
+            .themeNavigationStack(closable: true, path: $migrationPath)
 
         case .settings:
             SettingsView(profileManager: profileManager)

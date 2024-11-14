@@ -38,3 +38,9 @@ public struct MigratableProfile: Identifiable, Sendable {
         self.lastUpdate = lastUpdate
     }
 }
+
+extension MigratableProfile: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
+}
