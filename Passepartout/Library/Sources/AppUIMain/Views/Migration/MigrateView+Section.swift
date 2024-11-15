@@ -38,13 +38,12 @@ extension MigrateView {
         var body: some View {
             Section {
                 ForEach(profiles, id: \.id) {
-                    switch step {
-                    case .initial, .fetching, .fetched:
-                        button(forProfile: $0)
-
-                    default:
-                        row(forProfile: $0, status: statuses[$0.id])
-                    }
+                    ControlView(
+                        step: step,
+                        profile: $0,
+                        isIncluded: isIncludedBinding(for: $0.id),
+                        status: statusBinding(for: $0.id)
+                    )
                 }
             }
         }
@@ -52,25 +51,73 @@ extension MigrateView {
 }
 
 private extension MigrateView.SectionView {
-    func button(forProfile profile: MigratableProfile) -> some View {
-        Button {
-            if statuses[profile.id] == .excluded {
-                statuses.removeValue(forKey: profile.id)
+    func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
+        Binding {
+            statuses[profileId] != .excluded
+        } set: {
+            if $0 {
+                statuses.removeValue(forKey: profileId)
             } else {
-                statuses[profile.id] = .excluded
+                statuses[profileId] = .excluded
             }
-        } label: {
-            row(forProfile: profile, status: nil)
         }
     }
 
-    func row(forProfile profile: MigratableProfile, status: MigrationStatus?) -> some View {
-        HStack {
-            CardView(profile: profile)
-            Spacer()
-            StatusView(isIncluded: statuses[profile.id] != .excluded, status: status)
+    func statusBinding(for profileId: UUID) -> Binding<MigrationStatus?> {
+        Binding {
+            statuses[profileId]
+        } set: {
+            if let newValue = $0 {
+                statuses[profileId] = newValue
+            } else {
+                statuses.removeValue(forKey: profileId)
+            }
         }
-        .foregroundStyle(statuses[profile.id].style)
+    }
+}
+
+private extension MigrateView.SectionView {
+    struct ControlView: View {
+        let step: MigrateView.Model.Step
+
+        let profile: MigratableProfile
+
+        @Binding
+        var isIncluded: Bool
+
+        @Binding
+        var status: MigrationStatus?
+
+        var body: some View {
+            switch step {
+            case .initial, .fetching, .fetched:
+                buttonView
+
+            default:
+                rowView
+            }
+        }
+
+        var buttonView: some View {
+            Button {
+                if status == .excluded {
+                    status = nil
+                } else {
+                    status = .excluded
+                }
+            } label: {
+                rowView
+            }
+        }
+
+        var rowView: some View {
+            HStack {
+                CardView(profile: profile)
+                Spacer()
+                StatusView(isIncluded: status != .excluded, status: status)
+            }
+            .foregroundStyle(status.style)
+        }
     }
 }
 
