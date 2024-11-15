@@ -65,8 +65,11 @@ struct MigrateView: View {
             .disabled(model.step != .fetched)
         }
         .themeForm()
-        .themeProgress(if: model.step == .fetching)
-        .themeEmptyContent(if: model.step == .fetched && model.profiles.isEmpty, message: "Nothing to migrate")
+        .themeProgress(
+            if: model.step == .fetching,
+            isEmpty: model.profiles.isEmpty,
+            emptyMessage: "Nothing to migrate"
+        )
         .themeAnimation(on: model, category: .profiles)
         .navigationTitle(title)
         .toolbar(content: toolbarContent)

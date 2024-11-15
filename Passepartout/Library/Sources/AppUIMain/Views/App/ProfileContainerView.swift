@@ -114,8 +114,11 @@ private struct ContainerModifier: ViewModifier {
     func body(content: Content) -> some View {
         debugChanges()
         return content
-            .themeProgress(if: !profileManager.isReady)
-            .themeEmptyContent(if: profileManager.isReady && !profileManager.hasProfiles, message: Strings.Views.Profiles.Folders.noProfiles)
+            .themeProgress(
+                if: !profileManager.isReady,
+                isEmpty: !profileManager.hasProfiles,
+                emptyMessage: Strings.Views.Profiles.Folders.noProfiles
+            )
             .searchable(text: $search)
             .onChange(of: search) {
                 profileManager.search(byName: $0)
