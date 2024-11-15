@@ -30,8 +30,6 @@ import SwiftUI
 extension Theme {
     public convenience init() {
         self.init(dummy: Void())
-        rootModalSize = CGSize(width: 750, height: 500)
-        secondaryModalSize = CGSize(width: 500.0, height: 200.0)
         animationCategories = [.diagnostics, .profiles, .providers]
     }
 }

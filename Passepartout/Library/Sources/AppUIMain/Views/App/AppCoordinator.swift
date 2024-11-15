@@ -74,7 +74,7 @@ public struct AppCoordinator: View, AppCoordinatorConforming {
         }
         .themeModal(
             item: $modalRoute,
-            isRoot: true,
+            size: modalRoute?.size ?? .large,
             isInteractive: modalRoute?.isInteractive ?? true,
             content: modalDestination
         )
@@ -102,6 +102,16 @@ extension AppCoordinator {
             case .migrateProfiles: return 3
             case .settings: return 4
             case .about: return 5
+            }
+        }
+
+        var size: ThemeModalSize {
+            switch self {
+            case .migrateProfiles:
+                return .medium
+
+            default:
+                return .large
             }
         }
 

@@ -32,16 +32,24 @@ import SwiftUI
 
 // MARK: Shortcuts
 
+public enum ThemeModalSize {
+    case small
+
+    case medium
+
+    case large
+}
+
 extension View {
     public func themeModal<Content>(
         isPresented: Binding<Bool>,
-        isRoot: Bool = false,
+        size: ThemeModalSize = .medium,
         isInteractive: Bool = true,
         content: @escaping () -> Content
     ) -> some View where Content: View {
         modifier(ThemeBooleanModalModifier(
             isPresented: isPresented,
-            isRoot: isRoot,
+            size: size,
             isInteractive: isInteractive,
             modal: content
         ))
@@ -49,13 +57,13 @@ extension View {
 
     public func themeModal<Content, T>(
         item: Binding<T?>,
-        isRoot: Bool = false,
+        size: ThemeModalSize = .medium,
         isInteractive: Bool = true,
         content: @escaping (T) -> Content
     ) -> some View where Content: View, T: Identifiable {
         modifier(ThemeItemModalModifier(
             item: item,
-            isRoot: isRoot,
+            size: size,
             isInteractive: isInteractive,
             modal: content
         ))
@@ -200,6 +208,21 @@ extension View {
 
 // MARK: - Presentation modifiers
 
+extension ThemeModalSize {
+    var defaultSize: CGSize {
+        switch self {
+        case .small:
+            return CGSize(width: 300, height: 300)
+
+        case .medium:
+            return CGSize(width: 550, height: 300)
+
+        case .large:
+            return CGSize(width: 800, height: 500)
+        }
+    }
+}
+
 struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 
     @EnvironmentObject
@@ -208,24 +231,21 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
     @Binding
     var isPresented: Bool
 
-    let isRoot: Bool
+    let size: ThemeModalSize
 
     let isInteractive: Bool
 
     let modal: () -> Modal
 
     func body(content: Content) -> some View {
-        content
+        let modalSize = theme.modalSize(size)
+        return content
             .sheet(isPresented: $isPresented) {
                 modal()
-                    .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
+                    .frame(minWidth: modalSize.width, minHeight: modalSize.height)
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
             }
-    }
-
-    private var modalSize: CGSize? {
-        isRoot ? theme.rootModalSize : theme.secondaryModalSize
     }
 }
 
@@ -237,24 +257,21 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
     @Binding
     var item: T?
 
-    let isRoot: Bool
+    let size: ThemeModalSize
 
     let isInteractive: Bool
 
     let modal: (T) -> Modal
 
     func body(content: Content) -> some View {
-        content
+        let modalSize = theme.modalSize(size)
+        return content
             .sheet(item: $item) {
                 modal($0)
-                    .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
+                    .frame(minWidth: modalSize.width, minHeight: modalSize.height)
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
             }
-    }
-
-    private var modalSize: CGSize? {
-        isRoot ? theme.rootModalSize : theme.secondaryModalSize
     }
 }
 

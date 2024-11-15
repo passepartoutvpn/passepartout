@@ -32,12 +32,6 @@ public final class Theme: ObservableObject {
 
     public internal(set) var animationCategories: Set<ThemeAnimationCategory> = Set(ThemeAnimationCategory.allCases)
 
-    public internal(set) var rootModalSize: CGSize?
-
-    public internal(set) var secondaryModalSize: CGSize?
-
-    public internal(set) var popoverSize: CGSize?
-
     public internal(set) var relevantWeight: Font.Weight = .semibold
 
     public internal(set) var titleColor: Color = .primary
@@ -69,6 +63,10 @@ public final class Theme: ObservableObject {
     public internal(set) var errorColor: Color = .red
 
     public internal(set) var logoImage = "Logo"
+
+    public internal(set) var modalSize: (ThemeModalSize) -> CGSize = {
+        $0.defaultSize
+    }
 
     public internal(set) var systemImageName: (ImageName) -> String = Theme.ImageName.defaultSystemName
 
