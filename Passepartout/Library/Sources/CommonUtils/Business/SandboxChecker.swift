@@ -26,8 +26,7 @@
 import Foundation
 import StoreKit
 
-// https://stackoverflow.com/a/32238344/784615
-// https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
+// https://developer.apple.com/forums/thread/694461
 
 public final class SandboxChecker {
     public init() {
