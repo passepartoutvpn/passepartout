@@ -32,7 +32,6 @@ extension Theme {
     public convenience init() {
         self.init(dummy: ())
         animationCategories = [.diagnostics, .modules, .profiles, .providers]
-        popoverSize = .init(width: 400.0, height: 400.0)
     }
 }
 
@@ -41,10 +40,12 @@ extension Theme {
 extension View {
     public func themePopover<Content>(
         isPresented: Binding<Bool>,
+        size: ThemeModalSize = .medium,
         content: @escaping () -> Content
     ) -> some View where Content: View {
         modifier(ThemeBooleanPopoverModifier(
             isPresented: isPresented,
+            size: size,
             popover: content
         ))
     }
@@ -70,15 +71,18 @@ struct ThemeBooleanPopoverModifier<Popover>: ViewModifier, SizeClassProviding wh
     @Binding
     var isPresented: Bool
 
+    let size: ThemeModalSize
+
     @ViewBuilder
     let popover: Popover
 
     func body(content: Content) -> some View {
+        let modalSize = theme.modalSize(size)
         if isBigDevice {
             content
                 .popover(isPresented: $isPresented) {
                     popover
-                        .frame(minWidth: theme.popoverSize?.width, minHeight: theme.popoverSize?.height)
+                        .frame(minWidth: modalSize.width, minHeight: modalSize.height)
                         .themeLockScreen()
                 }
         } else {
