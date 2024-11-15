@@ -55,7 +55,7 @@ extension MigrateView {
                         isIncluded: isIncludedBinding(for: $0.id),
                         status: statuses[$0.id]
                     )
-                    .environmentObject(theme)
+                    .environmentObject(theme) // TODO: #873, Table loses environment
                 }
             }
         }
