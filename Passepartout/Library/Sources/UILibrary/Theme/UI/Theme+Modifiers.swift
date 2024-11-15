@@ -39,7 +39,7 @@ public enum ThemeModalSize {
 
     case large
 
-    case custom(CGSize)
+    case custom(width: CGFloat, height: CGFloat)
 }
 
 extension View {
@@ -230,8 +230,8 @@ extension ThemeModalSize {
         case .large:
             return CGSize(width: 800, height: 500)
 
-        case .custom(let size):
-            return size
+        case .custom(let width, let height):
+            return CGSize(width: width, height: height)
         }
     }
 }

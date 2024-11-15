@@ -58,7 +58,7 @@ private extension VPNProviderServerView {
                     }
                     .themePopover(
                         isPresented: $isPresented,
-                        size: .custom(.init(width: 400, height: 400))
+                        size: .custom(width: 400, height: 400)
                     ) {
                         filtersContent
                             .modifier(FiltersViewModifier(isPresented: $isPresented))

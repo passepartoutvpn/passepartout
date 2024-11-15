@@ -110,7 +110,7 @@ extension AppCoordinator {
         var size: ThemeModalSize {
             switch self {
             case .migrateProfiles:
-                return .custom(.init(width: 700, height: 400))
+                return .custom(width: 700, height: 400)
 
             default:
                 return .large
