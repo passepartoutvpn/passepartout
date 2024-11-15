@@ -35,6 +35,9 @@ extension View {
     }
 
     public func withMockEnvironment() -> some View {
-        withEnvironment(from: .mock, theme: Theme())
+        task {
+            try? await AppContext.mock.profileManager.observeLocal()
+        }
+        .withEnvironment(from: .mock, theme: Theme())
     }
 }
