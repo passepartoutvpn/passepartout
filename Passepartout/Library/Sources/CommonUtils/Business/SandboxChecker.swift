@@ -36,13 +36,10 @@ public final class SandboxChecker {
     public func isBeta() async -> Bool {
 #if !DEBUG
         do {
-            switch try await AppTransaction.shared {
-            case .verified(let tx):
-                return tx.environment == .sandbox
-
-            default:
+            guard case .verified(let tx) = try await AppTransaction.shared else {
                 return false
             }
+            return tx.environment == .sandbox
         } catch {
             return false
         }
