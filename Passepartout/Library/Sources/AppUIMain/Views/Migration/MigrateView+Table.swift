@@ -28,6 +28,10 @@ import SwiftUI
 
 extension MigrateView {
     struct TableView: View {
+
+        @EnvironmentObject
+        private var theme: Theme
+
         let step: Model.Step
 
         let profiles: [MigratableProfile]
