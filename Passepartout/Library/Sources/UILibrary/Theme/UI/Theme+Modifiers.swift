@@ -32,16 +32,30 @@ import SwiftUI
 
 // MARK: Shortcuts
 
+public enum ThemeModalSize {
+    case small
+
+    case medium
+
+    case large
+
+    case custom(width: CGFloat, height: CGFloat)
+}
+
 extension View {
     public func themeModal<Content>(
         isPresented: Binding<Bool>,
-        isRoot: Bool = false,
+        size: ThemeModalSize = .medium,
+        isFixedWidth: Bool = false,
+        isFixedHeight: Bool = false,
         isInteractive: Bool = true,
         content: @escaping () -> Content
     ) -> some View where Content: View {
         modifier(ThemeBooleanModalModifier(
             isPresented: isPresented,
-            isRoot: isRoot,
+            size: size,
+            isFixedWidth: isFixedWidth,
+            isFixedHeight: isFixedHeight,
             isInteractive: isInteractive,
             modal: content
         ))
@@ -49,13 +63,17 @@ extension View {
 
     public func themeModal<Content, T>(
         item: Binding<T?>,
-        isRoot: Bool = false,
+        size: ThemeModalSize = .medium,
+        isFixedWidth: Bool = false,
+        isFixedHeight: Bool = false,
         isInteractive: Bool = true,
         content: @escaping (T) -> Content
     ) -> some View where Content: View, T: Identifiable {
         modifier(ThemeItemModalModifier(
             item: item,
-            isRoot: isRoot,
+            size: size,
+            isFixedWidth: isFixedWidth,
+            isFixedHeight: isFixedHeight,
             isInteractive: isInteractive,
             modal: content
         ))
@@ -200,6 +218,24 @@ extension View {
 
 // MARK: - Presentation modifiers
 
+extension ThemeModalSize {
+    var defaultSize: CGSize {
+        switch self {
+        case .small:
+            return CGSize(width: 300, height: 300)
+
+        case .medium:
+            return CGSize(width: 550, height: 350)
+
+        case .large:
+            return CGSize(width: 800, height: 500)
+
+        case .custom(let width, let height):
+            return CGSize(width: width, height: height)
+        }
+    }
+}
+
 struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 
     @EnvironmentObject
@@ -208,24 +244,33 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
     @Binding
     var isPresented: Bool
 
-    let isRoot: Bool
+    let size: ThemeModalSize
+
+    let isFixedWidth: Bool
+
+    let isFixedHeight: Bool
 
     let isInteractive: Bool
 
     let modal: () -> Modal
 
     func body(content: Content) -> some View {
-        content
+        let modalSize = theme.modalSize(size)
+        _ = modalSize
+        return content
             .sheet(isPresented: $isPresented) {
                 modal()
-                    .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
+#if os(macOS)
+                    .frame(
+                        minWidth: modalSize.width,
+                        maxWidth: isFixedWidth ? modalSize.width : nil,
+                        minHeight: modalSize.height,
+                        maxHeight: isFixedHeight ? modalSize.height : nil
+                    )
+#endif
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
             }
-    }
-
-    private var modalSize: CGSize? {
-        isRoot ? theme.rootModalSize : theme.secondaryModalSize
     }
 }
 
@@ -237,24 +282,33 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
     @Binding
     var item: T?
 
-    let isRoot: Bool
+    let size: ThemeModalSize
+
+    let isFixedWidth: Bool
+
+    let isFixedHeight: Bool
 
     let isInteractive: Bool
 
     let modal: (T) -> Modal
 
     func body(content: Content) -> some View {
-        content
+        let modalSize = theme.modalSize(size)
+        _ = modalSize
+        return content
             .sheet(item: $item) {
                 modal($0)
-                    .frame(minWidth: modalSize?.width, minHeight: modalSize?.height)
+#if os(macOS)
+                    .frame(
+                        minWidth: modalSize.width,
+                        maxWidth: isFixedWidth ? modalSize.width : nil,
+                        minHeight: modalSize.height,
+                        maxHeight: isFixedHeight ? modalSize.height : nil
+                    )
+#endif
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
             }
-    }
-
-    private var modalSize: CGSize? {
-        isRoot ? theme.rootModalSize : theme.secondaryModalSize
     }
 }
 
