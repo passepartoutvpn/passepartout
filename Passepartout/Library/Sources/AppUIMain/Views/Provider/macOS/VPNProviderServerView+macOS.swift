@@ -44,6 +44,10 @@ extension VPNProviderServerView {
 
 extension VPNProviderServerView {
     struct ServersSubview: View {
+
+        @EnvironmentObject
+        private var theme: Theme
+
         let servers: [VPNServer]
 
         let selectedServer: VPNServer?
@@ -69,12 +73,14 @@ extension VPNProviderServerView {
                 TableColumn("") { server in
                     ThemeImage(.marked)
                         .opaque(server.id == selectedServer?.id)
+                        .environmentObject(theme) // TODO: #873, Table loses environment
                 }
                 .width(10.0)
 
                 TableColumn(Strings.Global.region) { server in
                     ThemeCountryText(server.provider.countryCode, title: server.region)
                         .help(server.region)
+                        .environmentObject(theme) // TODO: #873, Table loses environment
                 }
 
                 TableColumn(Strings.Global.address, value: \.address)
@@ -84,6 +90,7 @@ extension VPNProviderServerView {
                         value: server.serverId,
                         selection: $favoritesManager.serverIds
                     )
+                    .environmentObject(theme) // TODO: #873, Table loses environment
                 }
                 .width(15.0)
 

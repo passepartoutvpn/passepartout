@@ -85,11 +85,11 @@ private extension AppDelegate {
 
 // MARK: - Preconcurrency warnings
 
-extension NSWorkspace: @unchecked Sendable {
+extension NSWorkspace: @retroactive @unchecked Sendable {
 }
 
 extension NSRunningApplication: @unchecked Sendable {
 }
 
-extension NSWorkspace.OpenConfiguration: @unchecked Sendable {
+extension NSWorkspace.OpenConfiguration: @retroactive @unchecked Sendable {
 }
