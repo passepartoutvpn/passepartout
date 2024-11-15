@@ -38,18 +38,24 @@ public enum ThemeModalSize {
     case medium
 
     case large
+
+    case custom(CGSize)
 }
 
 extension View {
     public func themeModal<Content>(
         isPresented: Binding<Bool>,
         size: ThemeModalSize = .medium,
+        isFixedWidth: Bool = false,
+        isFixedHeight: Bool = false,
         isInteractive: Bool = true,
         content: @escaping () -> Content
     ) -> some View where Content: View {
         modifier(ThemeBooleanModalModifier(
             isPresented: isPresented,
             size: size,
+            isFixedWidth: isFixedWidth,
+            isFixedHeight: isFixedHeight,
             isInteractive: isInteractive,
             modal: content
         ))
@@ -58,12 +64,16 @@ extension View {
     public func themeModal<Content, T>(
         item: Binding<T?>,
         size: ThemeModalSize = .medium,
+        isFixedWidth: Bool = false,
+        isFixedHeight: Bool = false,
         isInteractive: Bool = true,
         content: @escaping (T) -> Content
     ) -> some View where Content: View, T: Identifiable {
         modifier(ThemeItemModalModifier(
             item: item,
             size: size,
+            isFixedWidth: isFixedWidth,
+            isFixedHeight: isFixedHeight,
             isInteractive: isInteractive,
             modal: content
         ))
@@ -215,10 +225,13 @@ extension ThemeModalSize {
             return CGSize(width: 300, height: 300)
 
         case .medium:
-            return CGSize(width: 550, height: 300)
+            return CGSize(width: 550, height: 350)
 
         case .large:
             return CGSize(width: 800, height: 500)
+
+        case .custom(let size):
+            return size
         }
     }
 }
@@ -233,6 +246,10 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 
     let size: ThemeModalSize
 
+    let isFixedWidth: Bool
+
+    let isFixedHeight: Bool
+
     let isInteractive: Bool
 
     let modal: () -> Modal
@@ -242,7 +259,12 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
         return content
             .sheet(isPresented: $isPresented) {
                 modal()
-                    .frame(minWidth: modalSize.width, minHeight: modalSize.height)
+                    .frame(
+                        minWidth: modalSize.width,
+                        maxWidth: isFixedWidth ? modalSize.width : nil,
+                        minHeight: modalSize.height,
+                        maxHeight: isFixedHeight ? modalSize.height : nil
+                    )
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
             }
@@ -259,6 +281,10 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
 
     let size: ThemeModalSize
 
+    let isFixedWidth: Bool
+
+    let isFixedHeight: Bool
+
     let isInteractive: Bool
 
     let modal: (T) -> Modal
@@ -268,7 +294,12 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
         return content
             .sheet(item: $item) {
                 modal($0)
-                    .frame(minWidth: modalSize.width, minHeight: modalSize.height)
+                    .frame(
+                        minWidth: modalSize.width,
+                        maxWidth: isFixedWidth ? modalSize.width : nil,
+                        minHeight: modalSize.height,
+                        maxHeight: isFixedHeight ? modalSize.height : nil
+                    )
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
             }
