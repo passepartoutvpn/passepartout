@@ -24,84 +24,26 @@
 //
 
 import Foundation
+import StoreKit
 
-// https://stackoverflow.com/a/32238344/784615
-// https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
+// https://developer.apple.com/forums/thread/694461
 
-public actor SandboxChecker {
+public final class SandboxChecker {
     public init() {
     }
 
-    public var isBeta: Bool {
-        verifyBetaBuild()
-    }
-}
-
-// MARK: Shared
-
-private extension SandboxChecker {
-
-    // IMPORTANT: check Mac first because os(iOS) holds true for Catalyst
-    func verifyBetaBuild() -> Bool {
-#if os(macOS) || targetEnvironment(macCatalyst)
-        isMacTestFlightBuild
-#elseif os(iOS)
-        isiOSSandboxBuild
+    public func isBeta() async -> Bool {
+#if !DEBUG
+        do {
+            guard case .verified(let tx) = try await AppTransaction.shared else {
+                return false
+            }
+            return tx.environment == .sandbox
+        } catch {
+            return false
+        }
 #else
         false
 #endif
     }
-
-    var bundle: Bundle {
-        .main
-    }
 }
-
-// MARK: iOS
-
-#if os(iOS)
-private extension SandboxChecker {
-    var isiOSSandboxBuild: Bool {
-        bundle.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-    }
-}
-#endif
-
-// MARK: macOS
-
-#if os(macOS) || targetEnvironment(macCatalyst)
-private extension SandboxChecker {
-    var isMacTestFlightBuild: Bool {
-        var status = noErr
-
-        var code: SecStaticCode?
-        status = SecStaticCodeCreateWithPath(bundle.bundleURL as CFURL, [], &code)
-        guard status == noErr else {
-            return false
-        }
-        guard let code else {
-            return false
-        }
-
-        var requirement: SecRequirement?
-        status = SecRequirementCreateWithString(
-            "anchor apple generic and certificate leaf[field.1.2.840.113635.100.6.1.25.1]" as CFString,
-            [], // default
-            &requirement
-        )
-        guard status == noErr else {
-            return false
-        }
-        guard let requirement else {
-            return false
-        }
-
-        status = SecStaticCodeCheckValidity(
-            code,
-            [], // default
-            requirement
-        )
-        return status == errSecSuccess
-    }
-}
-#endif
