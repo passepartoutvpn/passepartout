@@ -256,15 +256,18 @@ struct ThemeBooleanModalModifier<Modal>: ViewModifier where Modal: View {
 
     func body(content: Content) -> some View {
         let modalSize = theme.modalSize(size)
+        _ = modalSize
         return content
             .sheet(isPresented: $isPresented) {
                 modal()
+#if os(macOS)
                     .frame(
                         minWidth: modalSize.width,
                         maxWidth: isFixedWidth ? modalSize.width : nil,
                         minHeight: modalSize.height,
                         maxHeight: isFixedHeight ? modalSize.height : nil
                     )
+#endif
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
             }
@@ -291,15 +294,18 @@ struct ThemeItemModalModifier<Modal, T>: ViewModifier where Modal: View, T: Iden
 
     func body(content: Content) -> some View {
         let modalSize = theme.modalSize(size)
+        _ = modalSize
         return content
             .sheet(item: $item) {
                 modal($0)
+#if os(macOS)
                     .frame(
                         minWidth: modalSize.width,
                         maxWidth: isFixedWidth ? modalSize.width : nil,
                         minHeight: modalSize.height,
                         maxHeight: isFixedHeight ? modalSize.height : nil
                     )
+#endif
                     .interactiveDismissDisabled(!isInteractive)
                     .themeLockScreen()
             }
