@@ -45,17 +45,13 @@ extension MigrateView {
                     Text($0.timestamp)
                         .foregroundStyle(statuses.style(for: $0.id))
                 }
-                TableColumn("") { profile in
-                    switch step {
-                    case .initial, .fetching, .fetched:
-                        Toggle("", isOn: isIncludedBinding(for: profile.id))
-                            .labelsHidden()
-
-                    default:
-                        if let status = statuses[profile.id] {
-                            StatusView(status: status)
-                        }
-                    }
+                TableColumn("") {
+                    ControlView(
+                        step: step,
+                        isIncluded: isIncludedBinding(for: $0.id),
+                        status: statuses[$0.id]
+                    )
+                    .environmentObject(theme)
                 }
             }
         }
@@ -77,10 +73,27 @@ private extension MigrateView.TableView {
 }
 
 private extension MigrateView.TableView {
-    struct StatusView: View {
-        let status: MigrationStatus
+    struct ControlView: View {
+        let step: MigrateView.Model.Step
+
+        @Binding
+        var isIncluded: Bool
+
+        let status: MigrationStatus?
 
         var body: some View {
+            switch step {
+            case .initial, .fetching, .fetched:
+                Toggle("", isOn: $isIncluded)
+                    .labelsHidden()
+
+            default:
+                statusView
+            }
+        }
+
+        @ViewBuilder
+        var statusView: some View {
             switch status {
             case .excluded:
                 Text("--")
@@ -93,6 +106,9 @@ private extension MigrateView.TableView {
 
             case .failed:
                 ThemeImage(.failure)
+
+            case .none:
+                EmptyView()
             }
         }
     }
