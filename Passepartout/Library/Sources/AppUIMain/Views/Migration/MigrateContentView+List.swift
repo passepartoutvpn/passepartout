@@ -70,8 +70,7 @@ private extension MigrateContentView.ListView {
                 // disable isEditing after confirmation
             }
         }
-        .textCase(.none)
-        .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
+        .themePlainSectionHeader()
     }
 
     var profilesSection: some View {
