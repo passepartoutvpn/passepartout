@@ -47,27 +47,9 @@ extension MigrateContentView {
 
         var body: some View {
             List {
-                Section {
-                    Text(Strings.Views.Migrate.Sections.Main.header)
-                }
-                Section {
-                    ForEach(profiles, id: \.id) {
-                        if isEditing {
-                            EditableRowView(profile: $0, selection: $selection)
-                        } else {
-                            ControlView(
-                                step: step,
-                                profile: $0,
-                                isIncluded: isIncludedBinding(for: $0.id),
-                                status: statusBinding(for: $0.id)
-                            )
-                        }
-                    }
-                } header: {
-                    editButton
-                }
-                .disabled(!step.canSelect)
+                profilesSection
             }
+            .themeNavigationDetail()
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     performButton()
@@ -79,36 +61,40 @@ extension MigrateContentView {
 }
 
 private extension MigrateContentView.ListView {
-    var editButton: some View {
-        HStack {
-            if isEditing {
-                Button(Strings.Global.cancel) {
-                    isEditing = false
-                }
+    var actionsHeader: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(Strings.Views.Migrate.Sections.Main.header)
+            EditProfilesButton(isEditing: $isEditing, selection: $selection) {
+                onDelete(profiles.filter {
+                    selection.contains($0.id)
+                })
+                // disable isEditing after confirmation
             }
-            Spacer()
-            Button(isEditing ? Strings.Global.delete : Strings.Global.edit, role: isEditing ? .destructive : nil) {
-                if isEditing {
-                    if !selection.isEmpty {
-                        onDelete(profiles.filter {
-                            selection.contains($0.id)
-                        })
-                        // disable isEditing after confirmation
-                    } else {
-                        isEditing = false
-                    }
-                } else {
-                    selection = []
-                    isEditing = true
-                }
-            }
-            .disabled(isEditing && selection.isEmpty)
         }
-        .frame(height: 30)
+        .textCase(.none)
+        .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
     }
-}
 
-private extension MigrateContentView.ListView {
+    var profilesSection: some View {
+        Section {
+            ForEach(profiles, id: \.id) {
+                if isEditing {
+                    EditableRowView(profile: $0, selection: $selection)
+                } else {
+                    ControlView(
+                        step: step,
+                        profile: $0,
+                        isIncluded: isIncludedBinding(for: $0.id),
+                        status: statusBinding(for: $0.id)
+                    )
+                }
+            }
+        } header: {
+            actionsHeader
+        }
+        .disabled(!step.canSelect)
+    }
+
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
         Binding {
             statuses[profileId] != .excluded
@@ -130,6 +116,46 @@ private extension MigrateContentView.ListView {
             } else {
                 statuses.removeValue(forKey: profileId)
             }
+        }
+    }
+}
+
+// MARK: - Subviews
+
+private extension MigrateContentView.ListView {
+    struct EditProfilesButton: View {
+
+        @Binding
+        var isEditing: Bool
+
+        @Binding
+        var selection: Set<UUID>
+
+        let onDelete: () -> Void
+
+        var body: some View {
+            HStack {
+                if isEditing {
+                    Button(Strings.Global.cancel) {
+                        isEditing = false
+                    }
+                }
+                Spacer()
+                Button(isEditing ? Strings.Global.delete : Strings.Global.edit, role: isEditing ? .destructive : nil) {
+                    if isEditing {
+                        if !selection.isEmpty {
+                            onDelete()
+                        } else {
+                            isEditing = false
+                        }
+                    } else {
+                        selection = []
+                        isEditing = true
+                    }
+                }
+                .disabled(isEditing && selection.isEmpty)
+            }
+            .frame(height: 30)
         }
     }
 }
