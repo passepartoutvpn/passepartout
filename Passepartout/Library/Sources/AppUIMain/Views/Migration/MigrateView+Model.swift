@@ -63,8 +63,11 @@ extension MigrateView.Model {
 private extension Optional where Wrapped == MigrationStatus {
     var rank: Int {
         switch self {
-        case .excluded, .failed:
-            return .max
+        case .failed:
+            return 1
+
+        case .excluded:
+            return 2
 
         default:
             return .min
