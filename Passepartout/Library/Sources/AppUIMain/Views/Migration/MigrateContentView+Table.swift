@@ -102,6 +102,14 @@ private extension MigrateContentView.TableView {
     }
 }
 
+private extension MigratableProfile {
+    var timestamp: String {
+        lastUpdate?.localizedDescription(style: .timestamp) ?? ""
+    }
+}
+
+// MARK: - Subviews
+
 private extension MigrateContentView.TableView {
     struct ControlView: View {
         let step: MigrateViewStep
@@ -141,11 +149,5 @@ private extension MigrateContentView.TableView {
                 EmptyView()
             }
         }
-    }
-}
-
-private extension MigratableProfile {
-    var timestamp: String {
-        lastUpdate?.localizedDescription(style: .timestamp) ?? ""
     }
 }

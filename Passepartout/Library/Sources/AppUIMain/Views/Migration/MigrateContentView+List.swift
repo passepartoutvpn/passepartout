@@ -64,7 +64,12 @@ extension MigrateContentView {
                         }
                     }
                 } header: {
-                    editButton
+                    EditProfilesButton(isEditing: $isEditing, selection: $selection) {
+                        onDelete(profiles.filter {
+                            selection.contains($0.id)
+                        })
+                        // disable isEditing after confirmation
+                    }
                 }
                 .disabled(!step.canSelect)
             }
@@ -75,36 +80,6 @@ extension MigrateContentView {
                 }
             }
         }
-    }
-}
-
-private extension MigrateContentView.ListView {
-    var editButton: some View {
-        HStack {
-            if isEditing {
-                Button(Strings.Global.cancel) {
-                    isEditing = false
-                }
-            }
-            Spacer()
-            Button(isEditing ? Strings.Global.delete : Strings.Global.edit, role: isEditing ? .destructive : nil) {
-                if isEditing {
-                    if !selection.isEmpty {
-                        onDelete(profiles.filter {
-                            selection.contains($0.id)
-                        })
-                        // disable isEditing after confirmation
-                    } else {
-                        isEditing = false
-                    }
-                } else {
-                    selection = []
-                    isEditing = true
-                }
-            }
-            .disabled(isEditing && selection.isEmpty)
-        }
-        .frame(height: 30)
     }
 }
 
@@ -130,6 +105,46 @@ private extension MigrateContentView.ListView {
             } else {
                 statuses.removeValue(forKey: profileId)
             }
+        }
+    }
+}
+
+// MARK: - Subviews
+
+private extension MigrateContentView.ListView {
+    struct EditProfilesButton: View {
+
+        @Binding
+        var isEditing: Bool
+
+        @Binding
+        var selection: Set<UUID>
+
+        let onDelete: () -> Void
+
+        var body: some View {
+            HStack {
+                if isEditing {
+                    Button(Strings.Global.cancel) {
+                        isEditing = false
+                    }
+                }
+                Spacer()
+                Button(isEditing ? Strings.Global.delete : Strings.Global.edit, role: isEditing ? .destructive : nil) {
+                    if isEditing {
+                        if !selection.isEmpty {
+                            onDelete()
+                        } else {
+                            isEditing = false
+                        }
+                    } else {
+                        selection = []
+                        isEditing = true
+                    }
+                }
+                .disabled(isEditing && selection.isEmpty)
+            }
+            .frame(height: 30)
         }
     }
 }
