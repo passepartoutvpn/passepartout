@@ -111,6 +111,11 @@
             value = "1"
             isEnabled = "NO">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PP_FAKE_MIGRATION"
+            value = "1"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <StoreKitConfigurationFileReference
          identifier = "../../Passepartout/Passepartout.storekit">
