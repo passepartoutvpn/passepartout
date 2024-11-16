@@ -82,7 +82,7 @@ extension MigrationManager {
                             await onUpdate(migratable.id, .failed)
                             return nil
                         }
-                        await onUpdate(migratable.id, .migrated)
+                        await onUpdate(migratable.id, .done)
                         return profile
                     } catch {
                         await onUpdate(migratable.id, .failed)
@@ -115,7 +115,7 @@ extension MigrationManager {
                     do {
                         try await self.simulateBehavior()
                         try await self.simulateSaveProfile(profile, manager: manager)
-                        await onUpdate(profile.id, .imported)
+                        await onUpdate(profile.id, .done)
                     } catch {
                         await onUpdate(profile.id, .failed)
                     }

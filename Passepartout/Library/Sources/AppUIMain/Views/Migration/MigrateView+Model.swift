@@ -46,30 +46,14 @@ extension MigrateView {
 }
 
 extension MigrateView.Model {
-
-    // XXX: filtering out the excluded rows may crash on macOS, because ThemeImage is
-    // momentarily removed from the hierarchy and loses access to the Theme
-    // .environmentObject(). this is certainly a SwiftUI bug
-    //
-    // https://github.com/passepartoutvpn/passepartout/pull/867#issuecomment-2476293204
-    //
     var visibleProfiles: [MigratableProfile] {
         profiles
-//            .filter {
-//                switch step {
-//                case .initial, .fetching, .fetched:
-//                    return true
-//
-//                case .migrating, .migrated, .importing, .imported:
-//                    return statuses[$0.id] != .excluded
-//                }
-//            }
             .sorted {
                 switch step {
                 case .initial, .fetching, .fetched:
                     return $0.name.lowercased() < $1.name.lowercased()
 
-                case .migrating, .migrated, .importing, .imported:
+                case .migrating, .migrated:
                     return (statuses[$0.id].rank, $0.name.lowercased()) < (statuses[$1.id].rank, $1.name.lowercased())
                 }
             }
@@ -78,9 +62,12 @@ extension MigrateView.Model {
 
 private extension Optional where Wrapped == MigrationStatus {
     var rank: Int {
-        if self == .excluded {
+        switch self {
+        case .excluded, .failed:
             return .max
+
+        default:
+            return .min
         }
-        return .min
     }
 }

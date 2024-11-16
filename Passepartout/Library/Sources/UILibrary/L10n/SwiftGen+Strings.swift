@@ -739,8 +739,6 @@ public enum Strings {
       public enum Items {
         /// Discard
         public static let discard = Strings.tr("Localizable", "views.migrate.items.discard", fallback: "Discard")
-        /// Import
-        public static let `import` = Strings.tr("Localizable", "views.migrate.items.import", fallback: "Import")
         /// Proceed
         public static let migrate = Strings.tr("Localizable", "views.migrate.items.migrate", fallback: "Proceed")
       }

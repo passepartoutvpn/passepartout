@@ -79,7 +79,7 @@ struct MigrateView: View {
             isEmpty: model.profiles.isEmpty,
             emptyMessage: Strings.Views.Migrate.noProfiles
         )
-        .themeAnimation(on: model.step, category: .profiles)
+        .themeAnimation(on: model, category: .profiles)
         .themeConfirmation(
             isPresented: $isDeleting,
             title: Strings.Views.Migrate.Items.discard,
@@ -130,10 +130,7 @@ private extension MigrateView {
         case .fetched(let profiles):
             await migrate(profiles)
 
-        case .migrated(let profiles):
-            await save(profiles)
-
-        case .imported:
+        case .migrated:
             dismiss()
 
         default:
@@ -180,37 +177,25 @@ private extension MigrateView {
         do {
             pp_log(.App.migration, .notice, "Migrate \(profiles.count) profiles...")
             let profiles = try await migrationManager.migratedProfiles(profiles) {
+                guard $1 != .done else {
+                    return
+                }
                 model.statuses[$0] = $1
             }
-            model.excludeFailed()
-            model.step = .migrated(profiles)
+            pp_log(.App.migration, .notice, "Mapped \(profiles.count) profiles to the new format, saving...")
+            await migrationManager.importProfiles(profiles, into: profileManager) {
+                model.statuses[$0] = $1
+            }
+            let migrated = profiles.filter {
+                model.statuses[$0.id] == .done
+            }
+            pp_log(.App.migration, .notice, "Migrated \(migrated.count) profiles")
+            model.step = .migrated(migrated)
         } catch {
             pp_log(.App.migration, .error, "Unable to migrate profiles: \(error)")
             errorHandler.handle(error, title: title)
             model.step = previousStep
         }
-    }
-
-    func save(_ allProfiles: [Profile]) async {
-        guard case .migrated = model.step else {
-            assertionFailure("Must call migrate() and succeed, why is button enabled?")
-            return
-        }
-
-        let profiles = allProfiles.filter {
-            model.statuses[$0.id] != .excluded
-        }
-        guard !profiles.isEmpty else {
-            assertionFailure("Nothing to import, why is button enabled?")
-            return
-        }
-
-        model.step = .importing
-        pp_log(.App.migration, .notice, "Import \(profiles.count) migrated profiles...")
-        await migrationManager.importProfiles(profiles, into: profileManager) {
-            model.statuses[$0] = $1
-        }
-        model.step = .imported
     }
 
     func confirmPendingDeletion() {

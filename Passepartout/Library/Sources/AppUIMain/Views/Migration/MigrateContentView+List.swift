@@ -277,7 +277,7 @@ private extension MigrateContentView.ListView {
             case .pending:
                 ProgressView()
 
-            case .migrated, .imported:
+            case .done:
                 ThemeImage(.marked)
 
             case .failed:

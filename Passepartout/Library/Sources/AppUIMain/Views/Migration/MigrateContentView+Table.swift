@@ -147,7 +147,7 @@ private extension MigrateContentView.TableView {
             case .pending:
                 ThemeImage(.progress)
 
-            case .migrated, .imported:
+            case .done:
                 ThemeImage(.marked)
 
             case .failed:
