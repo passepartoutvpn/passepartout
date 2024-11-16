@@ -141,7 +141,7 @@ private extension MigrateContentView.ListView {
                     }
                 }
                 Spacer()
-                Button(isEditing ? Strings.Global.delete : Strings.Global.edit, role: isEditing ? .destructive : nil) {
+                Button(title, role: role) {
                     if isEditing {
                         if !selection.isEmpty {
                             onDelete()
@@ -156,6 +156,14 @@ private extension MigrateContentView.ListView {
                 .disabled(isEditing && selection.isEmpty)
             }
             .frame(height: 30)
+        }
+
+        var title: String {
+            isEditing ? Strings.Views.Migrate.Items.discard : Strings.Global.edit
+        }
+
+        var role: ButtonRole? {
+            isEditing ? .destructive : nil
         }
     }
 }
@@ -269,7 +277,7 @@ private extension MigrateContentView.ListView {
             case .pending:
                 ProgressView()
 
-            case .migrated, .imported:
+            case .done:
                 ThemeImage(.marked)
 
             case .failed:

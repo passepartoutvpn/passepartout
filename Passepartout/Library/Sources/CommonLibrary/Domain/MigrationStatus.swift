@@ -30,9 +30,7 @@ public enum MigrationStatus: Equatable {
 
     case pending
 
-    case migrated
-
-    case imported
+    case done
 
     case failed
 }

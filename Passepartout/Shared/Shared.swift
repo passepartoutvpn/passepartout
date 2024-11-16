@@ -106,6 +106,10 @@ extension Configuration.Environment {
     static var isFakeIAP: Bool {
         ProcessInfo.processInfo.environment["PP_FAKE_IAP"] == "1"
     }
+
+    static var isFakeMigration: Bool {
+        ProcessInfo.processInfo.environment["PP_FAKE_MIGRATION"] == "1"
+    }
 }
 
 // MARK: ProfileManager

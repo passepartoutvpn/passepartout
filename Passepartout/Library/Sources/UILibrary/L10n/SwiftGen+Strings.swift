@@ -734,20 +734,18 @@ public enum Strings {
           public static func message(_ p1: Any) -> String {
             return Strings.tr("Localizable", "views.migrate.alerts.delete.message", String(describing: p1), fallback: "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@")
           }
-          /// Discard
-          public static let title = Strings.tr("Localizable", "views.migrate.alerts.delete.title", fallback: "Discard")
         }
       }
       public enum Items {
-        /// Import
-        public static let `import` = Strings.tr("Localizable", "views.migrate.items.import", fallback: "Import")
+        /// Discard
+        public static let discard = Strings.tr("Localizable", "views.migrate.items.discard", fallback: "Discard")
         /// Proceed
         public static let migrate = Strings.tr("Localizable", "views.migrate.items.migrate", fallback: "Proceed")
       }
       public enum Sections {
         public enum Main {
-          /// Select below the profiles from old versions of Passepartout that you want to import. Profiles will disappear from this list once imported successfully.
-          public static let header = Strings.tr("Localizable", "views.migrate.sections.main.header", fallback: "Select below the profiles from old versions of Passepartout that you want to import. Profiles will disappear from this list once imported successfully.")
+          /// Select below the profiles from old versions of Passepartout that you want to import. They will disappear from this list once imported successfully.
+          public static let header = Strings.tr("Localizable", "views.migrate.sections.main.header", fallback: "Select below the profiles from old versions of Passepartout that you want to import. They will disappear from this list once imported successfully.")
         }
       }
     }

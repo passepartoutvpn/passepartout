@@ -82,7 +82,7 @@ private extension MigrateContentView.TableView {
                     )
                     .environmentObject(theme) // TODO: #873, Table loses environment
                 }
-                .width(20)
+                .width(30)
                 TableColumn("") { profile in
                     Button {
                         onDelete([profile])
@@ -147,7 +147,7 @@ private extension MigrateContentView.TableView {
             case .pending:
                 ThemeImage(.progress)
 
-            case .migrated, .imported:
+            case .done:
                 ThemeImage(.marked)
 
             case .failed:

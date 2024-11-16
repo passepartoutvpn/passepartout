@@ -101,7 +101,17 @@ extension AppContext {
             profilesContainerName: Constants.shared.containers.legacyV2,
             cloudKitIdentifier: BundleConfiguration.mainString(for: .legacyV2CloudKitId)
         )
-        let migrationManager = MigrationManager(profileStrategy: profileStrategy)
+        let migrationSimulation: MigrationManager.Simulation?
+        if Configuration.Environment.isFakeMigration {
+            migrationSimulation = MigrationManager.Simulation(
+                fakeProfiles: true,
+                maxMigrationTime: 3.0,
+                randomFailures: true
+            )
+        } else {
+            migrationSimulation = nil
+        }
+        let migrationManager = MigrationManager(profileStrategy: profileStrategy, simulation: migrationSimulation)
 
         return AppContext(
             iapManager: .sharedForApp,

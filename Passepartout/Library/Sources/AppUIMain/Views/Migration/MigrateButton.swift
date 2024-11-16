@@ -43,25 +43,19 @@ private extension MigrateButton {
             return Strings.Views.Migrate.Items.migrate
 
         case .migrating, .migrated:
-            return Strings.Views.Migrate.Items.import
-
-        case .importing, .imported:
             return Strings.Global.done
         }
     }
 
     var isEnabled: Bool {
         switch step {
-        case .initial, .fetching, .migrating, .importing:
+        case .initial, .fetching, .migrating:
             return false
 
         case .fetched(let profiles):
             return !profiles.isEmpty
 
-        case .migrated(let profiles):
-            return !profiles.isEmpty
-
-        case .imported:
+        case .migrated:
             return true
         }
     }

@@ -38,10 +38,6 @@ enum MigrateViewStep: Equatable {
 
     case migrated([Profile])
 
-    case importing
-
-    case imported
-
     var canSelect: Bool {
         guard case .fetched = self else {
             return false

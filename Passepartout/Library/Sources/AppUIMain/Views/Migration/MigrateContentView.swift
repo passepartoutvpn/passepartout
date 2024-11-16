@@ -70,7 +70,13 @@ struct MigrateContentView<PerformButton>: View where PerformButton: View {
 
 extension Optional where Wrapped == MigrationStatus {
     var style: some ShapeStyle {
-        self != .excluded ? .primary : .secondary
+        switch self {
+        case .excluded, .failed:
+            return .secondary
+
+        default:
+            return .primary
+        }
     }
 }
 
@@ -101,9 +107,8 @@ extension Dictionary where Key == UUID, Value == MigrationStatus {
         initialStatuses: [
             PrivatePreviews.profiles[0].id: .excluded,
             PrivatePreviews.profiles[1].id: .pending,
-            PrivatePreviews.profiles[2].id: .migrated,
-            PrivatePreviews.profiles[3].id: .imported,
-            PrivatePreviews.profiles[4].id: .failed
+            PrivatePreviews.profiles[2].id: .done,
+            PrivatePreviews.profiles[3].id: .failed
         ]
     )
     .withMockEnvironment()
