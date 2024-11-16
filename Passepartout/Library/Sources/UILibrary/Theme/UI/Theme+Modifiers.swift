@@ -204,10 +204,6 @@ extension View {
         modifier(ThemeProgressViewModifier(isProgressing: isProgressing, isEmpty: isEmpty, emptyContent: emptyContent))
     }
 
-    public func themePlainSectionHeader() -> some View {
-        modifier(ThemePlainSectionHeaderModifier())
-    }
-
 #if !os(tvOS)
     public func themeWindow(width: CGFloat, height: CGFloat) -> some View {
         modifier(ThemeWindowModifier(size: .init(width: width, height: height)))
@@ -470,14 +466,6 @@ struct ThemeProgressViewModifier<EmptyContent>: ViewModifier where EmptyContent:
                 emptyContent()
             }
         }
-    }
-}
-
-struct ThemePlainSectionHeaderModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .textCase(.none)
-            .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
     }
 }
 
