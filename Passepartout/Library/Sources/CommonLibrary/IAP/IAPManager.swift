@@ -278,7 +278,8 @@ private extension IAPManager {
             userLevel = customUserLevel
             pp_log(.App.iap, .info, "App level (custom): \(userLevel)")
         } else {
-            let isBeta = await SandboxChecker().isBeta
+            let checker = SandboxChecker()
+            let isBeta = await checker.isBeta()
             guard userLevel == .undefined else {
                 return
             }

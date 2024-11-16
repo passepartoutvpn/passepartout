@@ -28,12 +28,14 @@ import Foundation
 // https://stackoverflow.com/a/32238344/784615
 // https://gist.github.com/lukaskubanek/cbfcab29c0c93e0e9e0a16ab09586996
 
-public actor SandboxChecker {
+public final class SandboxChecker {
     public init() {
     }
 
-    public var isBeta: Bool {
-        verifyBetaBuild()
+    public func isBeta() async -> Bool {
+        await Task.detached {
+            self.verifyBetaBuild()
+        }.value
     }
 }
 
