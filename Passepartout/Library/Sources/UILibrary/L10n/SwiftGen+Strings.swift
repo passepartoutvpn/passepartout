@@ -231,6 +231,8 @@ public enum Strings {
     public static let country = Strings.tr("Localizable", "global.country", fallback: "Country")
     /// Default
     public static let `default` = Strings.tr("Localizable", "global.default", fallback: "Default")
+    /// Delete
+    public static let delete = Strings.tr("Localizable", "global.delete", fallback: "Delete")
     /// Destination
     public static let destination = Strings.tr("Localizable", "global.destination", fallback: "Destination")
     /// Disable
@@ -720,8 +722,34 @@ public enum Strings {
       }
     }
     public enum Migrate {
+      /// Nothing to migrate
+      public static let noProfiles = Strings.tr("Localizable", "views.migrate.no_profiles", fallback: "Nothing to migrate")
       /// Migrate
       public static let title = Strings.tr("Localizable", "views.migrate.title", fallback: "Migrate")
+      public enum Alerts {
+        public enum Delete {
+          /// Do you want to discard these profiles? You will not be able to recover them later.
+          /// 
+          /// %@
+          public static func message(_ p1: Any) -> String {
+            return Strings.tr("Localizable", "views.migrate.alerts.delete.message", String(describing: p1), fallback: "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@")
+          }
+          /// Discard
+          public static let title = Strings.tr("Localizable", "views.migrate.alerts.delete.title", fallback: "Discard")
+        }
+      }
+      public enum Items {
+        /// Import
+        public static let `import` = Strings.tr("Localizable", "views.migrate.items.import", fallback: "Import")
+        /// Proceed
+        public static let migrate = Strings.tr("Localizable", "views.migrate.items.migrate", fallback: "Proceed")
+      }
+      public enum Sections {
+        public enum Main {
+          /// Select below the profiles from old versions of Passepartout that you want to import. Profiles will disappear from this list once imported successfully.
+          public static let header = Strings.tr("Localizable", "views.migrate.sections.main.header", fallback: "Select below the profiles from old versions of Passepartout that you want to import. Profiles will disappear from this list once imported successfully.")
+        }
+      }
     }
     public enum Profile {
       public enum ModuleList {
@@ -755,6 +783,10 @@ public enum Strings {
         public static let `default` = Strings.tr("Localizable", "views.profiles.folders.default", fallback: "My profiles")
         /// No profiles
         public static let noProfiles = Strings.tr("Localizable", "views.profiles.folders.no_profiles", fallback: "No profiles")
+        public enum NoProfiles {
+          /// Migrate old profiles...
+          public static let migrate = Strings.tr("Localizable", "views.profiles.folders.no_profiles.migrate", fallback: "Migrate old profiles...")
+        }
       }
       public enum Rows {
         /// %d modules

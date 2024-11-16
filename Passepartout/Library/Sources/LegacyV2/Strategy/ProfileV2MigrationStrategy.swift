@@ -71,6 +71,10 @@ extension ProfileV2MigrationStrategy {
             return nil
         }
     }
+
+    public func deleteProfiles(withIds profileIds: Set<UUID>) async throws {
+        try await profilesRepository.deleteProfiles(withIds: profileIds)
+    }
 }
 
 // MARK: - Internal

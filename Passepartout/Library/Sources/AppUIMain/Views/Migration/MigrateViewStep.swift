@@ -1,8 +1,8 @@
 //
-//  ProfileFlow.swift
+//  MigrateViewStep.swift
 //  Passepartout
 //
-//  Created by Davide De Rosa on 10/23/24.
+//  Created by Davide De Rosa on 11/16/24.
 //  Copyright (c) 2024 Davide De Rosa. All rights reserved.
 //
 //  https://github.com/passepartoutvpn
@@ -23,13 +23,29 @@
 //  along with Passepartout.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonLibrary
 import Foundation
 import PassepartoutKit
 
-struct ProfileFlow {
-    let onEditProfile: (ProfileHeader) -> Void
+enum MigrateViewStep: Equatable {
+    case initial
 
-    let onEditProviderEntity: (Profile) -> Void
+    case fetching
 
-    let onMigrateProfiles: () -> Void
+    case fetched([MigratableProfile])
+
+    case migrating
+
+    case migrated([Profile])
+
+    case importing
+
+    case imported
+
+    var canSelect: Bool {
+        guard case .fetched = self else {
+            return false
+        }
+        return true
+    }
 }

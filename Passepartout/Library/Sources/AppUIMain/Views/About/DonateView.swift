@@ -152,3 +152,10 @@ private extension DonateView {
         }
     }
 }
+
+// MARK: - Previews
+
+#Preview {
+    DonateView()
+        .withMockEnvironment()
+}

@@ -92,6 +92,19 @@ final class CDProfileRepositoryV2: Sendable {
         )
         return profiles
     }
+
+    func deleteProfiles(withIds profileIds: Set<UUID>) async throws {
+        try await context.perform { [weak self] in
+            guard let self else {
+                return
+            }
+            let request = CDProfile.fetchRequest()
+            request.predicate = NSPredicate(format: "any uuid in %@", profileIds.map(\.uuidString))
+            let existing = try context.fetch(request)
+            existing.forEach(context.delete)
+            try context.save()
+        }
+    }
 }
 
 extension CDProfileRepositoryV2 {

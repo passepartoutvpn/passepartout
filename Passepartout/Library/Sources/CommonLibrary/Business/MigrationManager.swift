@@ -46,11 +46,10 @@ public final class MigrationManager: ObservableObject {
 
     private nonisolated let simulation: Simulation?
 
-    public convenience init(profileStrategy: ProfileMigrationStrategy? = nil) {
-        self.init(profileStrategy: profileStrategy, simulation: nil)
-    }
-
-    public init(profileStrategy: ProfileMigrationStrategy? = nil, simulation: Simulation?) {
+    public init(
+        profileStrategy: ProfileMigrationStrategy? = nil,
+        simulation: Simulation? = nil
+    ) {
         self.profileStrategy = profileStrategy ?? DummyProfileStrategy()
         self.simulation = simulation
     }
@@ -63,31 +62,30 @@ extension MigrationManager {
         try await profileStrategy.fetchMigratableProfiles()
     }
 
-    public func migrateProfile(withId profileId: UUID) async throws -> Profile? {
+    public func migratedProfile(withId profileId: UUID) async throws -> Profile? {
         try await profileStrategy.fetchProfile(withId: profileId)
     }
 
-    public func migrateProfiles(
-        _ profiles: [MigratableProfile],
-        selection: Set<UUID>,
+    public func migratedProfiles(
+        _ migratableProfiles: [MigratableProfile],
         onUpdate: @escaping @MainActor (UUID, MigrationStatus) -> Void
     ) async throws -> [Profile] {
-        profiles.forEach {
-            onUpdate($0.id, selection.contains($0.id) ? .pending : .excluded)
+        migratableProfiles.forEach {
+            onUpdate($0.id, .pending)
         }
         return try await withThrowingTaskGroup(of: Profile?.self, returning: [Profile].self) { group in
-            selection.forEach { profileId in
+            migratableProfiles.forEach { migratable in
                 group.addTask {
                     do {
                         try await self.simulateBehavior()
-                        guard let profile = try await self.simulateMigrateProfile(withId: profileId) else {
-                            await onUpdate(profileId, .failed)
+                        guard let profile = try await self.simulateMigrateProfile(withId: migratable.id) else {
+                            await onUpdate(migratable.id, .failed)
                             return nil
                         }
-                        await onUpdate(profileId, .migrated)
+                        await onUpdate(migratable.id, .migrated)
                         return profile
                     } catch {
-                        await onUpdate(profileId, .failed)
+                        await onUpdate(migratable.id, .failed)
                         return nil
                     }
                 }
@@ -125,6 +123,10 @@ extension MigrationManager {
             }
         }
     }
+
+    public func deleteMigratableProfiles(withIds profileIds: Set<UUID>) async throws {
+        try await simulateDeleteProfiles(withIds: profileIds)
+    }
 }
 
 // MARK: - Simulation
@@ -155,6 +157,13 @@ private extension MigrationManager {
         }
         try await manager.save(profile, force: true)
     }
+
+    func simulateDeleteProfiles(withIds profileIds: Set<UUID>) async throws {
+        if simulation?.fakeProfiles ?? false {
+            return
+        }
+        try await profileStrategy.deleteProfiles(withIds: profileIds)
+    }
 }
 
 // MARK: - Dummy
@@ -169,5 +178,8 @@ private final class DummyProfileStrategy: ProfileMigrationStrategy {
 
     func fetchProfile(withId profileId: UUID) async throws -> Profile? {
         nil
+    }
+
+    func deleteProfiles(withIds profileIds: Set<UUID>) async throws {
     }
 }

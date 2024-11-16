@@ -29,23 +29,7 @@ import PassepartoutKit
 
 extension MigrateView {
     struct Model: Equatable {
-        enum Step: Equatable {
-            case initial
-
-            case fetching
-
-            case fetched
-
-            case migrating
-
-            case migrated([Profile])
-
-            case importing
-
-            case imported
-        }
-
-        var step: Step = .initial
+        var step: MigrateViewStep = .initial
 
         var profiles: [MigratableProfile] = []
 
@@ -81,15 +65,22 @@ extension MigrateView.Model {
 //                }
 //            }
             .sorted {
-                $0.name.lowercased() < $1.name.lowercased()
+                switch step {
+                case .initial, .fetching, .fetched:
+                    return $0.name.lowercased() < $1.name.lowercased()
+
+                case .migrating, .migrated, .importing, .imported:
+                    return (statuses[$0.id].rank, $0.name.lowercased()) < (statuses[$1.id].rank, $1.name.lowercased())
+                }
             }
     }
+}
 
-    var selection: Set<UUID> {
-        Set(profiles
-            .filter {
-                statuses[$0.id] != .excluded
-            }
-            .map(\.id))
+private extension Optional where Wrapped == MigrationStatus {
+    var rank: Int {
+        if self == .excluded {
+            return .max
+        }
+        return .min
     }
 }

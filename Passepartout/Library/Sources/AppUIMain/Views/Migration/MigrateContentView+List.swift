@@ -1,5 +1,5 @@
 //
-//  MigrateView+Section.swift
+//  MigrateContentView+List.swift
 //  Passepartout
 //
 //  Created by Davide De Rosa on 11/13/24.
@@ -26,31 +26,89 @@
 import CommonLibrary
 import SwiftUI
 
-extension MigrateView {
-    struct SectionView: View {
-        let step: Model.Step
+extension MigrateContentView {
+    struct ListView: View {
+        let step: MigrateViewStep
 
         let profiles: [MigratableProfile]
 
         @Binding
         var statuses: [UUID: MigrationStatus]
 
+        @Binding
+        var isEditing: Bool
+
+        let onDelete: ([MigratableProfile]) -> Void
+
+        let performButton: () -> PerformButton
+
+        @State
+        private var selection: Set<UUID> = []
+
         var body: some View {
-            Section {
-                ForEach(profiles, id: \.id) {
-                    ControlView(
-                        step: step,
-                        profile: $0,
-                        isIncluded: isIncludedBinding(for: $0.id),
-                        status: statusBinding(for: $0.id)
-                    )
+            List {
+                Section {
+                    Text(Strings.Views.Migrate.Sections.Main.header)
+                }
+                Section {
+                    ForEach(profiles, id: \.id) {
+                        if isEditing {
+                            EditableRowView(profile: $0, selection: $selection)
+                        } else {
+                            ControlView(
+                                step: step,
+                                profile: $0,
+                                isIncluded: isIncludedBinding(for: $0.id),
+                                status: statusBinding(for: $0.id)
+                            )
+                        }
+                    }
+                } header: {
+                    editButton
+                }
+                .disabled(!step.canSelect)
+            }
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    performButton()
+                        .disabled(isEditing)
                 }
             }
         }
     }
 }
 
-private extension MigrateView.SectionView {
+private extension MigrateContentView.ListView {
+    var editButton: some View {
+        HStack {
+            if isEditing {
+                Button(Strings.Global.cancel) {
+                    isEditing = false
+                }
+            }
+            Spacer()
+            Button(isEditing ? Strings.Global.delete : Strings.Global.edit, role: isEditing ? .destructive : nil) {
+                if isEditing {
+                    if !selection.isEmpty {
+                        onDelete(profiles.filter {
+                            selection.contains($0.id)
+                        })
+                        // disable isEditing after confirmation
+                    } else {
+                        isEditing = false
+                    }
+                } else {
+                    selection = []
+                    isEditing = true
+                }
+            }
+            .disabled(isEditing && selection.isEmpty)
+        }
+        .frame(height: 30)
+    }
+}
+
+private extension MigrateContentView.ListView {
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
         Binding {
             statuses[profileId] != .excluded
@@ -76,9 +134,32 @@ private extension MigrateView.SectionView {
     }
 }
 
-private extension MigrateView.SectionView {
+private extension MigrateContentView.ListView {
+    struct EditableRowView: View {
+        let profile: MigratableProfile
+
+        @Binding
+        var selection: Set<UUID>
+
+        var body: some View {
+            Button {
+                if selection.contains(profile.id) {
+                    selection.remove(profile.id)
+                } else {
+                    selection.insert(profile.id)
+                }
+            } label: {
+                HStack {
+                    CardView(profile: profile)
+                    Spacer()
+                    ThemeImage(selection.contains(profile.id) ? .selectionOn : .selectionOff)
+                }
+            }
+        }
+    }
+
     struct ControlView: View {
-        let step: MigrateView.Model.Step
+        let step: MigrateViewStep
 
         let profile: MigratableProfile
 
@@ -121,7 +202,7 @@ private extension MigrateView.SectionView {
     }
 }
 
-private extension MigrateView.SectionView {
+private extension MigrateContentView.ListView {
     struct CardView: View {
         let profile: MigratableProfile
 
@@ -139,7 +220,7 @@ private extension MigrateView.SectionView {
     }
 }
 
-private extension MigrateView.SectionView {
+private extension MigrateContentView.ListView {
     struct StatusView: View {
         let isIncluded: Bool
 

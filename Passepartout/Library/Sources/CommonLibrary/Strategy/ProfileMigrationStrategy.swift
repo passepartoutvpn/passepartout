@@ -30,4 +30,6 @@ public protocol ProfileMigrationStrategy {
     func fetchMigratableProfiles() async throws -> [MigratableProfile]
 
     func fetchProfile(withId profileId: UUID) async throws -> Profile?
+
+    func deleteProfiles(withIds profileIds: Set<UUID>) async throws
 }
