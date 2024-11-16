@@ -49,6 +49,7 @@ extension MigrateContentView {
             List {
                 profilesSection
             }
+            .themeNavigationDetail()
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     performButton()
@@ -61,7 +62,7 @@ extension MigrateContentView {
 
 private extension MigrateContentView.ListView {
     var actionsHeader: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 16) {
             Text(Strings.Views.Migrate.Sections.Main.header)
             EditProfilesButton(isEditing: $isEditing, selection: $selection) {
                 onDelete(profiles.filter {
