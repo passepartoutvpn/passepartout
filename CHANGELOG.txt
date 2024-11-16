@@ -1,1 +1,2 @@
-* Fix "Purchase required" in TestFlight (#870)
+* Add the option to migrate old profiles (#879)
+* Sort provider servers on iOS
