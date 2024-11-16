@@ -45,40 +45,8 @@ extension MigrateContentView {
 
         var body: some View {
             Form {
-                Section {
-                    Text(Strings.Views.Migrate.Sections.Main.header)
-                }
-                Section {
-                    Table(profiles) {
-                        TableColumn(Strings.Global.name) {
-                            Text($0.name)
-                                .foregroundStyle(statuses.style(for: $0.id))
-                        }
-                        TableColumn(Strings.Global.lastUpdate) {
-                            Text($0.timestamp)
-                                .foregroundStyle(statuses.style(for: $0.id))
-                        }
-                        TableColumn("") {
-                            ControlView(
-                                step: step,
-                                isIncluded: isIncludedBinding(for: $0.id),
-                                status: statuses[$0.id]
-                            )
-                            .environmentObject(theme) // TODO: #873, Table loses environment
-                        }
-                        .width(20)
-                        TableColumn("") { profile in
-                            Button {
-                                onDelete([profile])
-                            } label: {
-                                ThemeImage(.editableSectionRemove)
-                            }
-                            .environmentObject(theme) // TODO: #873, Table loses environment
-                        }
-                        .width(20)
-                    }
-                }
-                .disabled(!step.canSelect)
+                messageSection
+                profilesSection
             }
             .themeForm()
             .toolbar {
@@ -89,6 +57,46 @@ extension MigrateContentView {
 }
 
 private extension MigrateContentView.TableView {
+    var messageSection: some View {
+        Section {
+            Text(Strings.Views.Migrate.Sections.Main.header)
+        }
+    }
+
+    var profilesSection: some View {
+        Section {
+            Table(profiles) {
+                TableColumn(Strings.Global.name) {
+                    Text($0.name)
+                        .foregroundStyle(statuses.style(for: $0.id))
+                }
+                TableColumn(Strings.Global.lastUpdate) {
+                    Text($0.timestamp)
+                        .foregroundStyle(statuses.style(for: $0.id))
+                }
+                TableColumn("") {
+                    ControlView(
+                        step: step,
+                        isIncluded: isIncludedBinding(for: $0.id),
+                        status: statuses[$0.id]
+                    )
+                    .environmentObject(theme) // TODO: #873, Table loses environment
+                }
+                .width(20)
+                TableColumn("") { profile in
+                    Button {
+                        onDelete([profile])
+                    } label: {
+                        ThemeImage(.editableSectionRemove)
+                    }
+                    .environmentObject(theme) // TODO: #873, Table loses environment
+                }
+                .width(20)
+            }
+        }
+        .disabled(!step.canSelect)
+    }
+
     func isIncludedBinding(for profileId: UUID) -> Binding<Bool> {
         Binding {
             statuses[profileId] != .excluded
