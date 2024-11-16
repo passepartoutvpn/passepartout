@@ -47,7 +47,6 @@ extension MigrateContentView {
 
         var body: some View {
             List {
-                messageSection
                 profilesSection
             }
             .toolbar {
@@ -61,10 +60,18 @@ extension MigrateContentView {
 }
 
 private extension MigrateContentView.ListView {
-    var messageSection: some View {
-        Section {
+    var actionsHeader: some View {
+        VStack {
             Text(Strings.Views.Migrate.Sections.Main.header)
+            EditProfilesButton(isEditing: $isEditing, selection: $selection) {
+                onDelete(profiles.filter {
+                    selection.contains($0.id)
+                })
+                // disable isEditing after confirmation
+            }
         }
+        .textCase(.none)
+        .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
     }
 
     var profilesSection: some View {
@@ -82,12 +89,7 @@ private extension MigrateContentView.ListView {
                 }
             }
         } header: {
-            EditProfilesButton(isEditing: $isEditing, selection: $selection) {
-                onDelete(profiles.filter {
-                    selection.contains($0.id)
-                })
-                // disable isEditing after confirmation
-            }
+            actionsHeader
         }
         .disabled(!step.canSelect)
     }
