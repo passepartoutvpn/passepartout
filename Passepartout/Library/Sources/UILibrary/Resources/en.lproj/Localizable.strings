@@ -161,10 +161,10 @@
 
 "views.migrate.title" = "Migrate";
 "views.migrate.no_profiles" = "Nothing to migrate";
+"views.migrate.items.discard" = "Discard";
 "views.migrate.items.migrate" = "Proceed";
 "views.migrate.items.import" = "Import";
-"views.migrate.sections.main.header" = "Select below the profiles from old versions of Passepartout that you want to import. Profiles will disappear from this list once imported successfully.";
-"views.migrate.alerts.delete.title" = "Discard";
+"views.migrate.sections.main.header" = "Select below the profiles from old versions of Passepartout that you want to import. They will disappear from this list once imported successfully.";
 "views.migrate.alerts.delete.message" = "Do you want to discard these profiles? You will not be able to recover them later.\n\n%@";
 
 "views.donate.title" = "Make a donation";

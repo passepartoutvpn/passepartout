@@ -82,7 +82,7 @@ struct MigrateView: View {
         .themeAnimation(on: model.step, category: .profiles)
         .themeConfirmation(
             isPresented: $isDeleting,
-            title: Strings.Views.Migrate.Alerts.Delete.title,
+            title: Strings.Views.Migrate.Items.discard,
             message: messageForDeletion,
             isDestructive: true,
             action: confirmPendingDeletion
